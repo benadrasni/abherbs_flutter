@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/prefs.dart';
-import 'package:abherbs_flutter/filter/color_of_flower.dart';
+import 'package:abherbs_flutter/filter/filter_utils.dart';
 
 void main() async => runApp(App());
 
@@ -17,7 +17,7 @@ class _AppState extends State<App> {
   onChangeLanguage(String language) {
     setState(() {
       _locale = new Future<Locale>(() {
-        return language == null ? null : Locale(language, '');
+        return language.isEmpty ? null : Locale(language, '');
       });
     });
   }
@@ -27,7 +27,7 @@ class _AppState extends State<App> {
     super.initState();
     Prefs.init();
     Prefs.getStringF('pref_language').then((String language) {
-      onChangeLanguage(language);
+        onChangeLanguage(language);
     });
   }
 
@@ -43,15 +43,15 @@ class _AppState extends State<App> {
         future: _locale,
         builder: (BuildContext context, AsyncSnapshot<Locale> snapshot) {
           switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return const CircularProgressIndicator();
-            default:
+            case ConnectionState.done:
               return MaterialApp(
                   locale: snapshot.data,
                   localizationsDelegates: [S.delegate, GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate,],
                   supportedLocales: S.delegate.supportedLocales,
                   localeResolutionCallback: S.delegate.resolution(fallback: new Locale("en", "")),
-                  home: ColorOfFlower(this.onChangeLanguage, new Map<String, String>()));
+                  home: getNextFilter(this.onChangeLanguage, new Map<String, String>()));
+            default:
+              return const CircularProgressIndicator();
           }
         }
     );

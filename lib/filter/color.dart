@@ -1,4 +1,4 @@
-import 'package:abherbs_flutter/constants.dart';
+import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 
@@ -7,57 +7,76 @@ import 'package:flutter/material.dart';
 
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
-class ColorOfFlower extends StatefulWidget {
+class Color extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
-  ColorOfFlower(this.onChangeLanguage, this.filter);
+  Color(this.onChangeLanguage, this.filter);
 
   @override
-  _ColorOfFlowerState createState() => _ColorOfFlowerState();
+  _ColorState createState() => _ColorState();
 }
 
-class _ColorOfFlowerState extends State<ColorOfFlower> {
+class _ColorState extends State<Color> {
   Future<int> _count;
   Map<String, String> _filter;
+
+  _navigate(String value) {
+    var newFilter = new Map<String, String>();
+    newFilter.addAll(_filter);
+    newFilter[filterColor] = value;
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => getNextFilter(widget.onChangeLanguage, newFilter)),
+    );
+  }
 
   @override
   void initState() {
     super.initState();
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
-    _filter.remove(filterColorOfFlower);
-    _count = countsReference.child('___').once().then((DataSnapshot snapshot) {
+    _filter.remove(filterColor);
+
+    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
       return snapshot.value;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(S.of(context).color_of_flower),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(S.of(context).color_of_flower),
       ),
       drawer: AppDrawer(widget.onChangeLanguage),
-      body: new Column(
+      body: ListView(
+        shrinkWrap: true,
+        padding: EdgeInsets.all(5.0),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              new Expanded(
-                child: new Container(
-                  padding: EdgeInsets.only(left: 5.0, right: 5.0, top: 15.0, bottom: 5.0),
+              Expanded(
+                child: FlatButton(
+                  padding: EdgeInsets.only(bottom: 10.0, right:5.0),
                   child: Image(
                     image: AssetImage('res/images/white.webp'),
                   ),
+                  onPressed: () {
+                    _navigate('1');
+                  },
                 ),
                 flex: 1,
               ),
-              new Expanded(
-                child: new Container(
-                  padding: EdgeInsets.only(left: 5.0, right: 5.0, top: 15.0, bottom: 5.0),
+              Expanded(
+                child: FlatButton(
+                  padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
                   child: Image(
                     image: AssetImage('res/images/yellow.webp'),
                   ),
+                  onPressed: () {
+                    _navigate('2');
+                  },
                 ),
                 flex: 1,
               ),
@@ -66,31 +85,40 @@ class _ColorOfFlowerState extends State<ColorOfFlower> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              new Expanded(
-                child: new Container(
-                  padding: EdgeInsets.all(5.0),
+              Expanded(
+                child: FlatButton(
+                  padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
                   child: Image(
                     image: AssetImage('res/images/red.webp'),
                   ),
+                  onPressed: () {
+                    _navigate('3');
+                  },
                 ),
                 flex: 1,
               ),
-              new Expanded(
-                child: new Container(
-                  padding: EdgeInsets.all(5.0),
+              Expanded(
+                child: FlatButton(
+                  padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
                   child: Image(
                     image: AssetImage('res/images/blue.webp'),
                   ),
+                  onPressed: () {
+                    _navigate('4');
+                  },
                 ),
                 flex: 1,
               ),
             ],
           ),
-          new Container(
-            padding: EdgeInsets.all(5.0),
+          FlatButton(
+            padding: EdgeInsets.only(bottom: 50.0),
             child: Image(
               image: AssetImage('res/images/green.webp'),
             ),
+            onPressed: () {
+              _navigate('5');
+            },
           ),
         ],
       ),

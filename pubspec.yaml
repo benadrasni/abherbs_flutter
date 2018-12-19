@@ -52,6 +52,16 @@ flutter:
     - res/images/red.webp
     - res/images/blue.webp
     - res/images/green.webp
+    - res/images/forest.webp
+    - res/images/garden.webp
+    - res/images/meadow.webp
+    - res/images/mountain.webp
+    - res/images/swamp.webp
+    - res/images/tree.webp
+    - res/images/nop_4.webp
+    - res/images/nop_5.webp
+    - res/images/nop_many.webp
+    - res/images/nop_zygomorphic.webp
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
