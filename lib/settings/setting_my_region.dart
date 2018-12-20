@@ -1,29 +1,20 @@
 import 'package:abherbs_flutter/constants.dart';
-import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/prefs.dart';
-import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
-class Distribution extends StatefulWidget {
-  final void Function(String) onChangeLanguage;
-  final Map<String, String> filter;
-  Distribution(this.onChangeLanguage, this.filter);
+class SettingMyRegion extends StatefulWidget {
 
   @override
-  _DistributionState createState() => _DistributionState();
+  _SettingMyRegionState createState() => _SettingMyRegionState();
 }
 
-class _DistributionState extends State<Distribution> {
-  Future<int> _count;
-  Map<String, String> _filter;
+class _SettingMyRegionState extends State<SettingMyRegion> {
   int _region;
-  Future<String> _myRegionF;
-  String _myRegion;
 
   void _openRegion(int region) {
     setState(() {
@@ -31,70 +22,27 @@ class _DistributionState extends State<Distribution> {
     });
   }
 
-  void _navigate(String value) {
-    var newFilter = new Map<String, String>();
-    newFilter.addAll(_filter);
-    newFilter[filterDistribution] = value;
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => getNextFilter(widget.onChangeLanguage, newFilter)),
-    );
-  }
-  void _setMyRegion() {
-    _myRegion = "";
-    _myRegionF = Prefs.getStringF(keyMyRegion);
-    _myRegionF.then((region) {
-      _myRegion = region;
-    });
+  void _setMyRegion(String myRegion) {
+    Prefs.setString(keyMyRegion, myRegion);
+    Navigator.pop(context);
   }
 
   @override
   void initState() {
     super.initState();
-    _filter = new Map<String, String>();
-    _filter.addAll(widget.filter);
-    _filter.remove(filterDistribution);
     _region = 0;
-
-    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
-      return snapshot.value;
-    });
-
-    _setMyRegion();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title: new Text(S.of(context).filter_distibution),
+        title: new Text(S.of(context).my_region),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, _filter),
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.all(5.0),
         children: _getRegions(),
-      ),
-      floatingActionButton: new Container(
-        padding: EdgeInsets.only(bottom: 50.0),
-        height: 120.0,
-        width: 70.0,
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: FutureBuilder<int>(
-              future: _count,
-              builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.waiting:
-                    return const CircularProgressIndicator();
-                  default:
-                    return FloatingActionButton(
-                      onPressed: () {},
-                      child: Text(snapshot.data.toString()),
-                    );
-                }
-              }),
-        ),
       ),
     );
   }
@@ -109,47 +57,6 @@ class _DistributionState extends State<Distribution> {
     );
 
     var regions = <Widget>[];
-    regions.add(FlatButton(
-      padding: EdgeInsets.only(bottom: 5.0),
-      child: Stack(alignment: Alignment.center, children: [
-        Image(
-          image: AssetImage('res/images/wgsrpd_my_region.webp'),
-        ),
-        Text(
-          S.of(context).my_region,
-          style: _firstLevelTextStyle,
-        ),
-        FutureBuilder<String>(
-            future: _myRegionF,
-            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-              var value = "";
-              if (snapshot.connectionState == ConnectionState.done) {
-                value = snapshot.data.isNotEmpty ? getFilterDistributionValue(context, snapshot.data) : "";
-              }
-              return Text(
-                value,
-                style: TextStyle(
-                  fontSize: 15.0,
-                  fontStyle: FontStyle.italic,
-                ),
-              );
-            }),
-      ]),
-      onPressed: () {
-        if (_myRegion.isNotEmpty) {
-          _navigate(_myRegion);
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Settings(widget.onChangeLanguage)),
-          ).then((result) {
-            setState(() {
-              _setMyRegion();
-            });
-          });
-        }
-      },
-    ));
 
     // Europe
     regions.add(FlatButton(
@@ -186,7 +93,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('10');
+                  _setMyRegion('10');
                 },
               ),
               flex: 1,
@@ -205,7 +112,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('11');
+                  _setMyRegion('11');
                 },
               ),
               flex: 1,
@@ -229,7 +136,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('12');
+                  _setMyRegion('12');
                 },
               ),
               flex: 1,
@@ -248,7 +155,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('13');
+                  _setMyRegion('13');
                 },
               ),
               flex: 1,
@@ -276,7 +183,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('14');
+                  _setMyRegion('14');
                 },
               ),
               flex: 2,
@@ -325,7 +232,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('20');
+                  _setMyRegion('20');
                 },
               ),
               flex: 1,
@@ -344,7 +251,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('21');
+                  _setMyRegion('21');
                 },
               ),
               flex: 1,
@@ -368,7 +275,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('22');
+                  _setMyRegion('22');
                 },
               ),
               flex: 1,
@@ -387,7 +294,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('23');
+                  _setMyRegion('23');
                 },
               ),
               flex: 1,
@@ -411,7 +318,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('24');
+                  _setMyRegion('24');
                 },
               ),
               flex: 1,
@@ -430,7 +337,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('25');
+                  _setMyRegion('25');
                 },
               ),
               flex: 1,
@@ -454,7 +361,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('26');
+                  _setMyRegion('26');
                 },
               ),
               flex: 1,
@@ -473,7 +380,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('27');
+                  _setMyRegion('27');
                 },
               ),
               flex: 1,
@@ -497,7 +404,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('28');
+                  _setMyRegion('28');
                 },
               ),
               flex: 1,
@@ -516,7 +423,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('29');
+                  _setMyRegion('29');
                 },
               ),
               flex: 1,
@@ -561,7 +468,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('30');
+                  _setMyRegion('30');
                 },
               ),
               flex: 1,
@@ -580,7 +487,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('31');
+                  _setMyRegion('31');
                 },
               ),
               flex: 1,
@@ -604,7 +511,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('32');
+                  _setMyRegion('32');
                 },
               ),
               flex: 1,
@@ -623,7 +530,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('33');
+                  _setMyRegion('33');
                 },
               ),
               flex: 1,
@@ -647,7 +554,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('34');
+                  _setMyRegion('34');
                 },
               ),
               flex: 1,
@@ -666,7 +573,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('35');
+                  _setMyRegion('35');
                 },
               ),
               flex: 1,
@@ -690,7 +597,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('36');
+                  _setMyRegion('36');
                 },
               ),
               flex: 1,
@@ -709,7 +616,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('37');
+                  _setMyRegion('37');
                 },
               ),
               flex: 1,
@@ -737,7 +644,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('38');
+                  _setMyRegion('38');
                 },
               ),
               flex: 2,
@@ -786,7 +693,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('40');
+                  _setMyRegion('40');
                 },
               ),
               flex: 1,
@@ -805,7 +712,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('41');
+                  _setMyRegion('41');
                 },
               ),
               flex: 1,
@@ -829,7 +736,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('42');
+                  _setMyRegion('42');
                 },
               ),
               flex: 1,
@@ -848,7 +755,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('43');
+                  _setMyRegion('43');
                 },
               ),
               flex: 1,
@@ -893,7 +800,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('50');
+                  _setMyRegion('50');
                 },
               ),
               flex: 1,
@@ -912,7 +819,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('51');
+                  _setMyRegion('51');
                 },
               ),
               flex: 1,
@@ -957,7 +864,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('60');
+                  _setMyRegion('60');
                 },
               ),
               flex: 1,
@@ -976,7 +883,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('61');
+                  _setMyRegion('61');
                 },
               ),
               flex: 1,
@@ -1000,7 +907,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('62');
+                  _setMyRegion('62');
                 },
               ),
               flex: 1,
@@ -1019,7 +926,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('63');
+                  _setMyRegion('63');
                 },
               ),
               flex: 1,
@@ -1064,7 +971,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('70');
+                  _setMyRegion('70');
                 },
               ),
               flex: 1,
@@ -1083,7 +990,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('71');
+                  _setMyRegion('71');
                 },
               ),
               flex: 1,
@@ -1107,7 +1014,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('72');
+                  _setMyRegion('72');
                 },
               ),
               flex: 1,
@@ -1126,7 +1033,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('73');
+                  _setMyRegion('73');
                 },
               ),
               flex: 1,
@@ -1150,7 +1057,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('74');
+                  _setMyRegion('74');
                 },
               ),
               flex: 1,
@@ -1169,7 +1076,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('75');
+                  _setMyRegion('75');
                 },
               ),
               flex: 1,
@@ -1193,7 +1100,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('76');
+                  _setMyRegion('76');
                 },
               ),
               flex: 1,
@@ -1212,7 +1119,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('77');
+                  _setMyRegion('77');
                 },
               ),
               flex: 1,
@@ -1236,7 +1143,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('78');
+                  _setMyRegion('78');
                 },
               ),
               flex: 1,
@@ -1255,7 +1162,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('79');
+                  _setMyRegion('79');
                 },
               ),
               flex: 1,
@@ -1300,7 +1207,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('80');
+                  _setMyRegion('80');
                 },
               ),
               flex: 1,
@@ -1319,7 +1226,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('81');
+                  _setMyRegion('81');
                 },
               ),
               flex: 1,
@@ -1343,7 +1250,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('82');
+                  _setMyRegion('82');
                 },
               ),
               flex: 1,
@@ -1362,7 +1269,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('83');
+                  _setMyRegion('83');
                 },
               ),
               flex: 1,
@@ -1386,7 +1293,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('84');
+                  _setMyRegion('84');
                 },
               ),
               flex: 1,
@@ -1405,7 +1312,7 @@ class _DistributionState extends State<Distribution> {
                   ),
                 ]),
                 onPressed: () {
-                  _navigate('85');
+                  _setMyRegion('85');
                 },
               ),
               flex: 1,
@@ -1428,7 +1335,7 @@ class _DistributionState extends State<Distribution> {
         ),
       ]),
       onPressed: () {
-        _navigate('90');
+        _setMyRegion('90');
       },
     ));
 

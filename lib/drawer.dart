@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/settings.dart';
+import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -29,7 +29,7 @@ class _AppDrawerState extends State<AppDrawer> {
       return ListTile(
         leading: getFilterLeading(context, attribute),
         title: getFilterTitle(context, attribute),
-        subtitle: getFilterSubtitle(context, attribute, _filter[attribute]) ?? Text(""),
+        subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ""),
       );
     }));
     listItems.add(Divider());
@@ -44,10 +44,8 @@ class _AppDrawerState extends State<AppDrawer> {
       },
     ));
     listItems.add(ListTile(
-      title: Text('Feedback'),
+      title: Text(S.of(context).feedback),
       onTap: () {
-        // Update the state of the app
-        // ...
         Navigator.pop(context);
       },
     ));

@@ -96,37 +96,37 @@ getFilterSubtitle(context, filterAttribute, filterValue) {
   }
 }
 
-getFilterColorValue(context, filterValue) {
+String getFilterColorValue(context, filterValue) {
   switch (filterValue) {
     case '1':
-      return Text(S.of(context).color_white);
+      return S.of(context).color_white;
     case '2':
-      return Text(S.of(context).color_yellow);
+      return S.of(context).color_yellow;
     case '3':
-      return Text(S.of(context).color_red);
+      return S.of(context).color_red;
     case '4':
-      return Text(S.of(context).color_blue);
+      return S.of(context).color_blue;
     case '5':
-      return Text(S.of(context).color_green);
+      return S.of(context).color_green;
     default:
       return null;
   }
 }
 
-getFilterHabitatValue(context, filterValue) {
+String getFilterHabitatValue(context, filterValue) {
   switch (filterValue) {
     case '1':
-      return Text(S.of(context).habitat_meadow);
+      return S.of(context).habitat_meadow;
     case '2':
-      return Text(S.of(context).habitat_garden);
+      return S.of(context).habitat_garden;
     case '3':
-      return Text(S.of(context).habitat_wetland);
+      return S.of(context).habitat_wetland;
     case '4':
-      return Text(S.of(context).habitat_forest);
+      return S.of(context).habitat_forest;
     case '5':
-      return Text(S.of(context).habitat_rock);
+      return S.of(context).habitat_rock;
     case '6':
-      return Text(S.of(context).habitat_tree);
+      return S.of(context).habitat_tree;
     default:
       return null;
   }
@@ -135,13 +135,13 @@ getFilterHabitatValue(context, filterValue) {
 getFilterPetalValue(context, filterValue) {
   switch (filterValue) {
     case '1':
-      return Text(S.of(context).petal_4);
+      return S.of(context).petal_4;
     case '2':
-      return Text(S.of(context).petal_5);
+      return S.of(context).petal_5;
     case '3':
-      return Text(S.of(context).petal_many);
+      return S.of(context).petal_many;
     case '4':
-      return Text(S.of(context).petal_zygomorphic);
+      return S.of(context).petal_zygomorphic;
     default:
       return null;
   }
@@ -150,109 +150,109 @@ getFilterPetalValue(context, filterValue) {
 getFilterDistributionValue(context, filterValue) {
   switch (filterValue) {
     case '10':
-      return Text(S.of(context).northern_europe);
+      return S.of(context).northern_europe;
     case '11':
-      return Text(S.of(context).middle_europe);
+      return S.of(context).middle_europe;
     case '12':
-      return Text(S.of(context).southwestern_europe);
+      return S.of(context).southwestern_europe;
     case '13':
-      return Text(S.of(context).southeastern_europe);
+      return S.of(context).southeastern_europe;
     case '14':
-      return Text(S.of(context).eastern_europe);
+      return S.of(context).eastern_europe;
     case '20':
-      return Text(S.of(context).northern_africa);
+      return S.of(context).northern_africa;
     case '21':
-      return Text(S.of(context).macaronesia);
+      return S.of(context).macaronesia;
     case '22':
-      return Text(S.of(context).west_tropical_africa);
+      return S.of(context).west_tropical_africa;
     case '23':
-      return Text(S.of(context).west_central_tropical_africa);
+      return S.of(context).west_central_tropical_africa;
     case '24':
-      return Text(S.of(context).northeast_tropical_africa);
+      return S.of(context).northeast_tropical_africa;
     case '25':
-      return Text(S.of(context).east_tropical_africa);
+      return S.of(context).east_tropical_africa;
     case '26':
-      return Text(S.of(context).south_tropical_africa);
+      return S.of(context).south_tropical_africa;
     case '27':
-      return Text(S.of(context).southern_africa);
+      return S.of(context).southern_africa;
     case '28':
-      return Text(S.of(context).middle_atlantic_ocean);
+      return S.of(context).middle_atlantic_ocean;
     case '29':
-      return Text(S.of(context).western_indian_ocean);
+      return S.of(context).western_indian_ocean;
     case '30':
-      return Text(S.of(context).siberia);
+      return S.of(context).siberia;
     case '31':
-      return Text(S.of(context).russian_far_east);
+      return S.of(context).russian_far_east;
     case '32':
-      return Text(S.of(context).middle_asia);
+      return S.of(context).middle_asia;
     case '33':
-      return Text(S.of(context).caucasus);
+      return S.of(context).caucasus;
     case '34':
-      return Text(S.of(context).western_asia);
+      return S.of(context).western_asia;
     case '35':
-      return Text(S.of(context).arabian_peninsula);
+      return S.of(context).arabian_peninsula;
     case '36':
-      return Text(S.of(context).china);
+      return S.of(context).china;
     case '37':
-      return Text(S.of(context).mongolia);
+      return S.of(context).mongolia;
     case '38':
-      return Text(S.of(context).eastern_asia);
+      return S.of(context).eastern_asia;
     case '40':
-      return Text(S.of(context).indian_subcontinent);
+      return S.of(context).indian_subcontinent;
     case '41':
-      return Text(S.of(context).indochina);
+      return S.of(context).indochina;
     case '42':
-      return Text(S.of(context).malesia);
+      return S.of(context).malesia;
     case '43':
-      return Text(S.of(context).papuasia);
+      return S.of(context).papuasia;
     case '50':
-      return Text(S.of(context).australia);
+      return S.of(context).australia;
     case '51':
-      return Text(S.of(context).new_zealand);
+      return S.of(context).new_zealand;
     case '60':
-      return Text(S.of(context).southwestern_pacific);
+      return S.of(context).southwestern_pacific;
     case '61':
-      return Text(S.of(context).south_central_pacific);
+      return S.of(context).south_central_pacific;
     case '62':
-      return Text(S.of(context).northwestern_pacific);
+      return S.of(context).northwestern_pacific;
     case '63':
-      return Text(S.of(context).north_central_pacific);
+      return S.of(context).north_central_pacific;
     case '70':
-      return Text(S.of(context).subarctic_america);
+      return S.of(context).subarctic_america;
     case '71':
-      return Text(S.of(context).western_canada);
+      return S.of(context).western_canada;
     case '72':
-      return Text(S.of(context).eastern_canada);
+      return S.of(context).eastern_canada;
     case '73':
-      return Text(S.of(context).northwestern_usa);
+      return S.of(context).northwestern_usa;
     case '74':
-      return Text(S.of(context).north_central_usa);
+      return S.of(context).north_central_usa;
     case '75':
-      return Text(S.of(context).northeastern_usa);
+      return S.of(context).northeastern_usa;
     case '76':
-      return Text(S.of(context).southwestern_usa);
+      return S.of(context).southwestern_usa;
     case '77':
-      return Text(S.of(context).south_central_usa);
+      return S.of(context).south_central_usa;
     case '78':
-      return Text(S.of(context).southeastern_usa);
+      return S.of(context).southeastern_usa;
     case '79':
-      return Text(S.of(context).mexico);
+      return S.of(context).mexico;
     case '80':
-      return Text(S.of(context).central_america);
+      return S.of(context).central_america;
     case '81':
-      return Text(S.of(context).caribbean);
+      return S.of(context).caribbean;
     case '82':
-      return Text(S.of(context).northern_south_america);
+      return S.of(context).northern_south_america;
     case '83':
-      return Text(S.of(context).western_south_america);
+      return S.of(context).western_south_america;
     case '84':
-      return Text(S.of(context).brazil);
+      return S.of(context).brazil;
     case '85':
-      return Text(S.of(context).southern_south_america);
+      return S.of(context).southern_south_america;
     case '90':
-      return Text(S.of(context).subantarctic_islands);
+      return S.of(context).subantarctic_islands;
     case '91':
-      return Text(S.of(context).antarctic_continent);
+      return S.of(context).antarctic_continent;
 
     default:
       return null;
