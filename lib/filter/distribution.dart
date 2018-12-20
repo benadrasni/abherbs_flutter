@@ -1,7 +1,9 @@
-import 'package:abherbs_flutter/filter/filter_utils.dart';
+import 'package:abherbs_flutter/constants.dart';
 import 'package:abherbs_flutter/drawer.dart';
+import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-
+import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/settings.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +22,8 @@ class _DistributionState extends State<Distribution> {
   Future<int> _count;
   Map<String, String> _filter;
   int _region;
+  Future<String> _myRegionF;
+  String _myRegion;
 
   void _openRegion(int region) {
     setState(() {
@@ -27,7 +31,7 @@ class _DistributionState extends State<Distribution> {
     });
   }
 
-  _navigate(String value) {
+  void _navigate(String value) {
     var newFilter = new Map<String, String>();
     newFilter.addAll(_filter);
     newFilter[filterDistribution] = value;
@@ -35,6 +39,13 @@ class _DistributionState extends State<Distribution> {
       context,
       MaterialPageRoute(builder: (context) => getNextFilter(widget.onChangeLanguage, newFilter)),
     );
+  }
+  void _setMyRegion() {
+    _myRegion = "";
+    _myRegionF = Prefs.getStringF(keyMyRegion);
+    _myRegionF.then((region) {
+      _myRegion = region;
+    });
   }
 
   @override
@@ -48,6 +59,8 @@ class _DistributionState extends State<Distribution> {
     _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
       return snapshot.value;
     });
+
+    _setMyRegion();
   }
 
   @override
@@ -98,34 +111,58 @@ class _DistributionState extends State<Distribution> {
     var regions = <Widget>[];
     regions.add(FlatButton(
       padding: EdgeInsets.only(bottom: 5.0),
-      child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image(
-              image: AssetImage('res/images/wgsrpd_my_region.webp'),
-            ),
-            Text(S.of(context).my_region,
-              style: _firstLevelTextStyle,
-            ),
-          ]),
+      child: Stack(alignment: Alignment.center, children: [
+        Image(
+          image: AssetImage('res/images/wgsrpd_my_region.webp'),
+        ),
+        Text(
+          S.of(context).my_region,
+          style: _firstLevelTextStyle,
+        ),
+        FutureBuilder<String>(
+            future: _myRegionF,
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              var value = "";
+              if (snapshot.connectionState == ConnectionState.done) {
+                value = snapshot.data.isNotEmpty ? getFilterDistributionValue(context, snapshot.data) : "";
+              }
+              return Text(
+                value,
+                style: TextStyle(
+                  fontSize: 15.0,
+                  fontStyle: FontStyle.italic,
+                ),
+              );
+            }),
+      ]),
       onPressed: () {
-
+        if (_myRegion.isNotEmpty) {
+          _navigate(_myRegion);
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Settings(widget.onChangeLanguage)),
+          ).then((result) {
+            setState(() {
+              _setMyRegion();
+            });
+          });
+        }
       },
     ));
 
     // Europe
     regions.add(FlatButton(
       padding: EdgeInsets.only(bottom: 5.0),
-      child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image(
-              image: AssetImage('res/images/wgsrpd_europe.webp'),
-            ),
-            Text(S.of(context).europe,
-              style: _firstLevelTextStyle,
-            ),
-          ]),
+      child: Stack(alignment: Alignment.center, children: [
+        Image(
+          image: AssetImage('res/images/wgsrpd_europe.webp'),
+        ),
+        Text(
+          S.of(context).europe,
+          style: _firstLevelTextStyle,
+        ),
+      ]),
       onPressed: () {
         _openRegion(1);
       },
@@ -137,18 +174,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_northern_europe.webp'),
-                      ),
-                      Text(S.of(context).northern_europe,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_northern_europe.webp'),
+                  ),
+                  Text(
+                    S.of(context).northern_europe,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('10');
                 },
@@ -158,17 +194,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_middle_europe.webp'),
-                      ),
-                      Text(S.of(context).middle_europe,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_middle_europe.webp'),
+                  ),
+                  Text(
+                    S.of(context).middle_europe,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('11');
                 },
@@ -182,18 +217,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_southwestern_europe.webp'),
-                      ),
-                      Text(S.of(context).southwestern_europe,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_southwestern_europe.webp'),
+                  ),
+                  Text(
+                    S.of(context).southwestern_europe,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('12');
                 },
@@ -203,17 +237,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_southeastern_europe.webp'),
-                      ),
-                      Text(S.of(context).southeastern_europe,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_southeastern_europe.webp'),
+                  ),
+                  Text(
+                    S.of(context).southeastern_europe,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('13');
                 },
@@ -226,24 +259,22 @@ class _DistributionState extends State<Distribution> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
-              child: Container(
-              ),
+              child: Container(),
               flex: 1,
             ),
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_eastern_europe.webp'),
-                      ),
-                      Text(S.of(context).eastern_europe,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_eastern_europe.webp'),
+                  ),
+                  Text(
+                    S.of(context).eastern_europe,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('14');
                 },
@@ -251,8 +282,7 @@ class _DistributionState extends State<Distribution> {
               flex: 2,
             ),
             Expanded(
-              child: Container(
-              ),
+              child: Container(),
               flex: 1,
             ),
           ],
@@ -263,16 +293,15 @@ class _DistributionState extends State<Distribution> {
     // Africa
     regions.add(FlatButton(
       padding: EdgeInsets.only(bottom: 5.0),
-      child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image(
-              image: AssetImage('res/images/wgsrpd_africa.webp'),
-            ),
-            Text(S.of(context).africa,
-              style: _firstLevelTextStyle,
-            ),
-          ]),
+      child: Stack(alignment: Alignment.center, children: [
+        Image(
+          image: AssetImage('res/images/wgsrpd_africa.webp'),
+        ),
+        Text(
+          S.of(context).africa,
+          style: _firstLevelTextStyle,
+        ),
+      ]),
       onPressed: () {
         _openRegion(2);
       },
@@ -284,18 +313,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_northern_africa.webp'),
-                      ),
-                      Text(S.of(context).northern_africa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_northern_africa.webp'),
+                  ),
+                  Text(
+                    S.of(context).northern_africa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('20');
                 },
@@ -305,17 +333,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_macaronesia.webp'),
-                      ),
-                      Text(S.of(context).macaronesia,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_macaronesia.webp'),
+                  ),
+                  Text(
+                    S.of(context).macaronesia,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('21');
                 },
@@ -329,18 +356,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_west_tropical_africa.webp'),
-                      ),
-                      Text(S.of(context).west_tropical_africa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_west_tropical_africa.webp'),
+                  ),
+                  Text(
+                    S.of(context).west_tropical_africa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('22');
                 },
@@ -350,17 +376,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_central_tropical_africa.webp'),
-                      ),
-                      Text(S.of(context).west_central_tropical_africa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_central_tropical_africa.webp'),
+                  ),
+                  Text(
+                    S.of(context).west_central_tropical_africa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('23');
                 },
@@ -374,18 +399,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_northeast_tropical_africa.webp'),
-                      ),
-                      Text(S.of(context).northeast_tropical_africa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_northeast_tropical_africa.webp'),
+                  ),
+                  Text(
+                    S.of(context).northeast_tropical_africa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('24');
                 },
@@ -395,17 +419,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_east_tropical_africa.webp'),
-                      ),
-                      Text(S.of(context).east_tropical_africa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_east_tropical_africa.webp'),
+                  ),
+                  Text(
+                    S.of(context).east_tropical_africa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('25');
                 },
@@ -419,18 +442,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_south_tropical_africa.webp'),
-                      ),
-                      Text(S.of(context).south_tropical_africa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_south_tropical_africa.webp'),
+                  ),
+                  Text(
+                    S.of(context).south_tropical_africa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('26');
                 },
@@ -440,17 +462,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_southern_africa.webp'),
-                      ),
-                      Text(S.of(context).southern_africa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_southern_africa.webp'),
+                  ),
+                  Text(
+                    S.of(context).southern_africa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('27');
                 },
@@ -464,18 +485,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_middle_atlantic_ocean.webp'),
-                      ),
-                      Text(S.of(context).middle_atlantic_ocean,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_middle_atlantic_ocean.webp'),
+                  ),
+                  Text(
+                    S.of(context).middle_atlantic_ocean,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('28');
                 },
@@ -485,17 +505,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_western_indian_ocean.webp'),
-                      ),
-                      Text(S.of(context).western_indian_ocean,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_western_indian_ocean.webp'),
+                  ),
+                  Text(
+                    S.of(context).western_indian_ocean,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('29');
                 },
@@ -510,16 +529,15 @@ class _DistributionState extends State<Distribution> {
     // Asia temperate
     regions.add(FlatButton(
       padding: EdgeInsets.only(bottom: 5.0),
-      child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image(
-              image: AssetImage('res/images/wgsrpd_asia_temperate.webp'),
-            ),
-            Text(S.of(context).asia_temperate,
-              style: _firstLevelTextStyle,
-            ),
-          ]),
+      child: Stack(alignment: Alignment.center, children: [
+        Image(
+          image: AssetImage('res/images/wgsrpd_asia_temperate.webp'),
+        ),
+        Text(
+          S.of(context).asia_temperate,
+          style: _firstLevelTextStyle,
+        ),
+      ]),
       onPressed: () {
         _openRegion(3);
       },
@@ -531,18 +549,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_siberia.webp'),
-                      ),
-                      Text(S.of(context).siberia,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_siberia.webp'),
+                  ),
+                  Text(
+                    S.of(context).siberia,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('30');
                 },
@@ -552,17 +569,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_russian_far_east.webp'),
-                      ),
-                      Text(S.of(context).russian_far_east,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_russian_far_east.webp'),
+                  ),
+                  Text(
+                    S.of(context).russian_far_east,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('31');
                 },
@@ -576,18 +592,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_middle_asia.webp'),
-                      ),
-                      Text(S.of(context).middle_asia,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_middle_asia.webp'),
+                  ),
+                  Text(
+                    S.of(context).middle_asia,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('32');
                 },
@@ -597,17 +612,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_caucasus.webp'),
-                      ),
-                      Text(S.of(context).caucasus,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_caucasus.webp'),
+                  ),
+                  Text(
+                    S.of(context).caucasus,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('33');
                 },
@@ -621,18 +635,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_western_asia.webp'),
-                      ),
-                      Text(S.of(context).western_asia,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_western_asia.webp'),
+                  ),
+                  Text(
+                    S.of(context).western_asia,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('34');
                 },
@@ -642,17 +655,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_arabian_peninsula.webp'),
-                      ),
-                      Text(S.of(context).arabian_peninsula,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_arabian_peninsula.webp'),
+                  ),
+                  Text(
+                    S.of(context).arabian_peninsula,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('35');
                 },
@@ -666,18 +678,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_china.webp'),
-                      ),
-                      Text(S.of(context).china,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_china.webp'),
+                  ),
+                  Text(
+                    S.of(context).china,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('36');
                 },
@@ -687,17 +698,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_mongolia.webp'),
-                      ),
-                      Text(S.of(context).mongolia,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_mongolia.webp'),
+                  ),
+                  Text(
+                    S.of(context).mongolia,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('37');
                 },
@@ -710,24 +720,22 @@ class _DistributionState extends State<Distribution> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
-              child: Container(
-              ),
+              child: Container(),
               flex: 1,
             ),
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_east_asia.webp'),
-                      ),
-                      Text(S.of(context).eastern_asia,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_east_asia.webp'),
+                  ),
+                  Text(
+                    S.of(context).eastern_asia,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('38');
                 },
@@ -735,8 +743,7 @@ class _DistributionState extends State<Distribution> {
               flex: 2,
             ),
             Expanded(
-              child: Container(
-              ),
+              child: Container(),
               flex: 1,
             ),
           ],
@@ -747,16 +754,15 @@ class _DistributionState extends State<Distribution> {
     // Asia tropical
     regions.add(FlatButton(
       padding: EdgeInsets.only(bottom: 5.0),
-      child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image(
-              image: AssetImage('res/images/wgsrpd_asia_tropical.webp'),
-            ),
-            Text(S.of(context).asia_tropical,
-              style: _firstLevelTextStyle,
-            ),
-          ]),
+      child: Stack(alignment: Alignment.center, children: [
+        Image(
+          image: AssetImage('res/images/wgsrpd_asia_tropical.webp'),
+        ),
+        Text(
+          S.of(context).asia_tropical,
+          style: _firstLevelTextStyle,
+        ),
+      ]),
       onPressed: () {
         _openRegion(4);
       },
@@ -768,18 +774,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_indian_subcontinent.webp'),
-                      ),
-                      Text(S.of(context).indian_subcontinent,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_indian_subcontinent.webp'),
+                  ),
+                  Text(
+                    S.of(context).indian_subcontinent,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('40');
                 },
@@ -789,17 +794,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_indochina.webp'),
-                      ),
-                      Text(S.of(context).indochina,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_indochina.webp'),
+                  ),
+                  Text(
+                    S.of(context).indochina,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('41');
                 },
@@ -813,18 +817,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_malesia.webp'),
-                      ),
-                      Text(S.of(context).malesia,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_malesia.webp'),
+                  ),
+                  Text(
+                    S.of(context).malesia,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('42');
                 },
@@ -834,17 +837,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_papuasia.webp'),
-                      ),
-                      Text(S.of(context).papuasia,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_papuasia.webp'),
+                  ),
+                  Text(
+                    S.of(context).papuasia,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('43');
                 },
@@ -859,16 +861,15 @@ class _DistributionState extends State<Distribution> {
     // Australasia
     regions.add(FlatButton(
       padding: EdgeInsets.only(bottom: 5.0),
-      child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image(
-              image: AssetImage('res/images/wgsrpd_australasia.webp'),
-            ),
-            Text(S.of(context).australasia,
-              style: _firstLevelTextStyle,
-            ),
-          ]),
+      child: Stack(alignment: Alignment.center, children: [
+        Image(
+          image: AssetImage('res/images/wgsrpd_australasia.webp'),
+        ),
+        Text(
+          S.of(context).australasia,
+          style: _firstLevelTextStyle,
+        ),
+      ]),
       onPressed: () {
         _openRegion(5);
       },
@@ -880,18 +881,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_australia.webp'),
-                      ),
-                      Text(S.of(context).australia,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_australia.webp'),
+                  ),
+                  Text(
+                    S.of(context).australia,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('50');
                 },
@@ -901,17 +901,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_new_zealand.webp'),
-                      ),
-                      Text(S.of(context).new_zealand,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_new_zealand.webp'),
+                  ),
+                  Text(
+                    S.of(context).new_zealand,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('51');
                 },
@@ -926,16 +925,15 @@ class _DistributionState extends State<Distribution> {
     // Pacific
     regions.add(FlatButton(
       padding: EdgeInsets.only(bottom: 5.0),
-      child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image(
-              image: AssetImage('res/images/wgsrpd_pacific.webp'),
-            ),
-            Text(S.of(context).pacific,
-              style: _firstLevelTextStyle,
-            ),
-          ]),
+      child: Stack(alignment: Alignment.center, children: [
+        Image(
+          image: AssetImage('res/images/wgsrpd_pacific.webp'),
+        ),
+        Text(
+          S.of(context).pacific,
+          style: _firstLevelTextStyle,
+        ),
+      ]),
       onPressed: () {
         _openRegion(6);
       },
@@ -947,18 +945,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_southwestern_pacific.webp'),
-                      ),
-                      Text(S.of(context).southwestern_pacific,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_southwestern_pacific.webp'),
+                  ),
+                  Text(
+                    S.of(context).southwestern_pacific,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('60');
                 },
@@ -968,17 +965,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_south_central_pacific.webp'),
-                      ),
-                      Text(S.of(context).south_central_pacific,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_south_central_pacific.webp'),
+                  ),
+                  Text(
+                    S.of(context).south_central_pacific,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('61');
                 },
@@ -992,18 +988,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_northwestern_pacific.webp'),
-                      ),
-                      Text(S.of(context).northwestern_pacific,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_northwestern_pacific.webp'),
+                  ),
+                  Text(
+                    S.of(context).northwestern_pacific,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('62');
                 },
@@ -1013,17 +1008,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_north_central_pacific.webp'),
-                      ),
-                      Text(S.of(context).north_central_pacific,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_north_central_pacific.webp'),
+                  ),
+                  Text(
+                    S.of(context).north_central_pacific,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('63');
                 },
@@ -1038,16 +1032,15 @@ class _DistributionState extends State<Distribution> {
     // North America
     regions.add(FlatButton(
       padding: EdgeInsets.only(bottom: 5.0),
-      child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image(
-              image: AssetImage('res/images/wgsrpd_northern_america.webp'),
-            ),
-            Text(S.of(context).northern_america,
-              style: _firstLevelTextStyle,
-            ),
-          ]),
+      child: Stack(alignment: Alignment.center, children: [
+        Image(
+          image: AssetImage('res/images/wgsrpd_northern_america.webp'),
+        ),
+        Text(
+          S.of(context).northern_america,
+          style: _firstLevelTextStyle,
+        ),
+      ]),
       onPressed: () {
         _openRegion(7);
       },
@@ -1059,18 +1052,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_subarctic_america.webp'),
-                      ),
-                      Text(S.of(context).subarctic_america,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_subarctic_america.webp'),
+                  ),
+                  Text(
+                    S.of(context).subarctic_america,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('70');
                 },
@@ -1080,17 +1072,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_western_canada.webp'),
-                      ),
-                      Text(S.of(context).western_canada,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_western_canada.webp'),
+                  ),
+                  Text(
+                    S.of(context).western_canada,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('71');
                 },
@@ -1104,18 +1095,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_eastern_canada.webp'),
-                      ),
-                      Text(S.of(context).eastern_canada,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_eastern_canada.webp'),
+                  ),
+                  Text(
+                    S.of(context).eastern_canada,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('72');
                 },
@@ -1125,17 +1115,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_northwestern_united_states.webp'),
-                      ),
-                      Text(S.of(context).northwestern_usa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_northwestern_united_states.webp'),
+                  ),
+                  Text(
+                    S.of(context).northwestern_usa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('73');
                 },
@@ -1149,18 +1138,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_north_central_united_states.webp'),
-                      ),
-                      Text(S.of(context).north_central_usa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_north_central_united_states.webp'),
+                  ),
+                  Text(
+                    S.of(context).north_central_usa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('74');
                 },
@@ -1170,17 +1158,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_northeastern_united_states.webp'),
-                      ),
-                      Text(S.of(context).northeastern_usa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_northeastern_united_states.webp'),
+                  ),
+                  Text(
+                    S.of(context).northeastern_usa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('75');
                 },
@@ -1194,18 +1181,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_southwestern_united_states.webp'),
-                      ),
-                      Text(S.of(context).southwestern_usa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_southwestern_united_states.webp'),
+                  ),
+                  Text(
+                    S.of(context).southwestern_usa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('76');
                 },
@@ -1215,17 +1201,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_south_central_united_states.webp'),
-                      ),
-                      Text(S.of(context).south_central_usa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_south_central_united_states.webp'),
+                  ),
+                  Text(
+                    S.of(context).south_central_usa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('77');
                 },
@@ -1239,18 +1224,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_southeastern_united_states.webp'),
-                      ),
-                      Text(S.of(context).southeastern_usa,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_southeastern_united_states.webp'),
+                  ),
+                  Text(
+                    S.of(context).southeastern_usa,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('78');
                 },
@@ -1260,17 +1244,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_mexico.webp'),
-                      ),
-                      Text(S.of(context).mexico,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_mexico.webp'),
+                  ),
+                  Text(
+                    S.of(context).mexico,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('79');
                 },
@@ -1285,16 +1268,15 @@ class _DistributionState extends State<Distribution> {
     // Pacific
     regions.add(FlatButton(
       padding: EdgeInsets.only(bottom: 5.0),
-      child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image(
-              image: AssetImage('res/images/wgsrpd_southern_america.webp'),
-            ),
-            Text(S.of(context).southern_america,
-              style: _firstLevelTextStyle,
-            ),
-          ]),
+      child: Stack(alignment: Alignment.center, children: [
+        Image(
+          image: AssetImage('res/images/wgsrpd_southern_america.webp'),
+        ),
+        Text(
+          S.of(context).southern_america,
+          style: _firstLevelTextStyle,
+        ),
+      ]),
       onPressed: () {
         _openRegion(8);
       },
@@ -1306,18 +1288,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_central_america.webp'),
-                      ),
-                      Text(S.of(context).central_america,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_central_america.webp'),
+                  ),
+                  Text(
+                    S.of(context).central_america,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('80');
                 },
@@ -1327,17 +1308,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_caribbean.webp'),
-                      ),
-                      Text(S.of(context).caribbean,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_caribbean.webp'),
+                  ),
+                  Text(
+                    S.of(context).caribbean,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('81');
                 },
@@ -1351,18 +1331,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_northern_south_america.webp'),
-                      ),
-                      Text(S.of(context).northern_south_america,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_northern_south_america.webp'),
+                  ),
+                  Text(
+                    S.of(context).northern_south_america,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('82');
                 },
@@ -1372,17 +1351,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_western_south_america.webp'),
-                      ),
-                      Text(S.of(context).western_south_america,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_western_south_america.webp'),
+                  ),
+                  Text(
+                    S.of(context).western_south_america,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('83');
                 },
@@ -1396,18 +1374,17 @@ class _DistributionState extends State<Distribution> {
           children: [
             Expanded(
               child: FlatButton(
-                padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_brazil.webp'),
-                      ),
-                      Text(S.of(context).brazil,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_brazil.webp'),
+                  ),
+                  Text(
+                    S.of(context).brazil,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('84');
                 },
@@ -1417,17 +1394,16 @@ class _DistributionState extends State<Distribution> {
             Expanded(
               child: FlatButton(
                 padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('res/images/wgsrpd_southern_south_america.webp'),
-                      ),
-                      Text(S.of(context).southern_south_america,
-                        style: _secondLevelTextStyle,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/wgsrpd_southern_south_america.webp'),
+                  ),
+                  Text(
+                    S.of(context).southern_south_america,
+                    style: _secondLevelTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
                 onPressed: () {
                   _navigate('85');
                 },
@@ -1442,16 +1418,15 @@ class _DistributionState extends State<Distribution> {
     // Antarctic
     regions.add(FlatButton(
       padding: EdgeInsets.only(bottom: 50.0),
-      child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image(
-              image: AssetImage('res/images/wgsrpd_antarctic.webp'),
-            ),
-            Text(S.of(context).subantarctic_islands,
-              style: _firstLevelTextStyle,
-            ),
-          ]),
+      child: Stack(alignment: Alignment.center, children: [
+        Image(
+          image: AssetImage('res/images/wgsrpd_antarctic.webp'),
+        ),
+        Text(
+          S.of(context).subantarctic_islands,
+          style: _firstLevelTextStyle,
+        ),
+      ]),
       onPressed: () {
         _navigate('90');
       },

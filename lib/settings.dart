@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:abherbs_flutter/constants.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/prefs.dart';
+import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -25,7 +26,7 @@ class _SettingsState extends State<Settings> {
   @override
   void initState() {
     super.initState();
-    _prefLanguage = Prefs.getStringF('pref_language');
+    _prefLanguage = Prefs.getStringF(keyPreferredLanguage);
   }
 
   @override

@@ -64,7 +64,6 @@ flutter:
     - res/images/nop_zygomorphic.webp
     - res/images/wgsrpd_africa.webp
     - res/images/wgsrpd_antarctic.webp
-    - res/images/wgsrpd_antarctic_continent.webp
     - res/images/wgsrpd_arabian_peninsula.webp
     - res/images/wgsrpd_asia_temperate.webp
     - res/images/wgsrpd_asia_tropical.webp
@@ -117,7 +116,6 @@ flutter:
     - res/images/wgsrpd_southwestern_europe.webp
     - res/images/wgsrpd_southwestern_pacific.webp
     - res/images/wgsrpd_southwestern_united_states.webp
-    - res/images/wgsrpd_subantarctic_islands.webp
     - res/images/wgsrpd_subarctic_america.webp
     - res/images/wgsrpd_west_tropical_africa.webp
     - res/images/wgsrpd_western_asia.webp
