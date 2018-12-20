@@ -44,11 +44,16 @@ class _PetalState extends State<Petal> {
 
   @override
   Widget build(BuildContext context) {
+    var _defaultTextStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 25.0,
+    );
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).color_of_flower),
+        title: Text(S.of(context).filter_petal),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage),
+      drawer: AppDrawer(widget.onChangeLanguage, _filter),
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.all(5.0),
@@ -58,10 +63,16 @@ class _PetalState extends State<Petal> {
             children: [
               Expanded(
                 child: FlatButton(
-                  padding: EdgeInsets.only(bottom: 10.0, right:5.0),
-                  child: Image(
-                    image: AssetImage('res/images/nop_4.webp'),
-                  ),
+                  padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    Text(
+                      S.of(context).petal_4,
+                      style: _defaultTextStyle,
+                    ),
+                    Image(
+                      image: AssetImage('res/images/nop_4.webp'),
+                    ),
+                  ]),
                   onPressed: () {
                     _navigate('1');
                   },
@@ -71,9 +82,16 @@ class _PetalState extends State<Petal> {
               Expanded(
                 child: FlatButton(
                   padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                  child: Image(
-                    image: AssetImage('res/images/nop_5.webp'),
-                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    Text(
+                      S.of(context).petal_5,
+                      style: _defaultTextStyle,
+                    ),
+                    Image(
+                      image: AssetImage('res/images/nop_5.webp'),
+                    ),
+                  ]),
                   onPressed: () {
                     _navigate('2');
                   },
@@ -88,9 +106,15 @@ class _PetalState extends State<Petal> {
               Expanded(
                 child: FlatButton(
                   padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
-                  child: Image(
-                    image: AssetImage('res/images/nop_many.webp'),
-                  ),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    Text(
+                      S.of(context).petal_many,
+                      style: _defaultTextStyle,
+                    ),
+                    Image(
+                      image: AssetImage('res/images/nop_many.webp'),
+                    ),
+                  ]),
                   onPressed: () {
                     _navigate('3');
                   },
@@ -100,9 +124,15 @@ class _PetalState extends State<Petal> {
               Expanded(
                 child: FlatButton(
                   padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
-                  child: Image(
-                    image: AssetImage('res/images/nop_zygomorphic.webp'),
-                  ),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    Text(
+                      S.of(context).petal_zygomorphic,
+                      style: _defaultTextStyle,
+                    ),
+                    Image(
+                      image: AssetImage('res/images/nop_zygomorphic.webp'),
+                    ),
+                  ]),
                   onPressed: () {
                     _navigate('4');
                   },

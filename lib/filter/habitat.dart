@@ -1,4 +1,3 @@
-import 'package:abherbs_flutter/constants.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
@@ -45,65 +44,113 @@ class _HabitatState extends State<Habitat> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    var _defaultTextStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 25.0,
+      color: Colors.white,
+    );
+
+    return Scaffold(
       appBar: new AppBar(
-        title: new Text(S.of(context).color_of_flower),
+        title: new Text(S.of(context).filter_habitat),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage),
+      drawer: AppDrawer(widget.onChangeLanguage, _filter),
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.all(5.0),
         children: [
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
-            child: Image(
-              image: AssetImage('res/images/meadow.webp'),
-            ),
+            child: Stack(
+                alignment: Alignment.center,
+                children: [
+              Image(
+                image: AssetImage('res/images/meadow.webp'),
+              ),
+              Text(S.of(context).habitat_meadow,
+                      style: _defaultTextStyle,
+                  ),
+            ]),
             onPressed: () {
               _navigate('1');
             },
           ),
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
-            child: Image(
-              image: AssetImage('res/images/garden.webp'),
-            ),
+            child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image(
+                    image: AssetImage('res/images/garden.webp'),
+                  ),
+                  Text(S.of(context).habitat_garden,
+                    style: _defaultTextStyle,
+                  ),
+                ]),
             onPressed: () {
               _navigate('2');
             },
           ),
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
-            child: Image(
-              image: AssetImage('res/images/swamp.webp'),
-            ),
+            child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image(
+                    image: AssetImage('res/images/swamp.webp'),
+                  ),
+                  Text(S.of(context).habitat_wetland,
+                    style: _defaultTextStyle,
+                  ),
+                ]),
             onPressed: () {
               _navigate('3');
             },
           ),
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
-            child: Image(
-              image: AssetImage('res/images/forest.webp'),
-            ),
+            child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image(
+                    image: AssetImage('res/images/forest.webp'),
+                  ),
+                  Text(S.of(context).habitat_forest,
+                    style: _defaultTextStyle,
+                  ),
+                ]),
             onPressed: () {
               _navigate('4');
             },
           ),
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
-            child: Image(
-              image: AssetImage('res/images/mountain.webp'),
-            ),
+            child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image(
+                    image: AssetImage('res/images/mountain.webp'),
+                  ),
+                  Text(S.of(context).habitat_rock,
+                    style: _defaultTextStyle,
+                  ),
+                ]),
             onPressed: () {
               _navigate('5');
             },
           ),
           FlatButton(
             padding: EdgeInsets.only(bottom: 50.0),
-            child: Image(
-              image: AssetImage('res/images/tree.webp'),
-            ),
+            child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image(
+                    image: AssetImage('res/images/tree.webp'),
+                  ),
+                  Text(S.of(context).habitat_tree,
+                    style: _defaultTextStyle,
+                  ),
+                ]),
             onPressed: () {
               _navigate('6');
             },

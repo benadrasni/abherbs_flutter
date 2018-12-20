@@ -62,6 +62,72 @@ flutter:
     - res/images/nop_5.webp
     - res/images/nop_many.webp
     - res/images/nop_zygomorphic.webp
+    - res/images/wgsrpd_africa.webp
+    - res/images/wgsrpd_antarctic.webp
+    - res/images/wgsrpd_antarctic_continent.webp
+    - res/images/wgsrpd_arabian_peninsula.webp
+    - res/images/wgsrpd_asia_temperate.webp
+    - res/images/wgsrpd_asia_tropical.webp
+    - res/images/wgsrpd_australasia.webp
+    - res/images/wgsrpd_australia.webp
+    - res/images/wgsrpd_brazil.webp
+    - res/images/wgsrpd_caribbean.webp
+    - res/images/wgsrpd_caucasus.webp
+    - res/images/wgsrpd_central_america.webp
+    - res/images/wgsrpd_central_tropical_africa.webp
+    - res/images/wgsrpd_east_asia.webp
+    - res/images/wgsrpd_east_tropical_africa.webp
+    - res/images/wgsrpd_eastern_canada.webp
+    - res/images/wgsrpd_eastern_europe.webp
+    - res/images/wgsrpd_europe.webp
+    - res/images/wgsrpd_china.webp
+    - res/images/wgsrpd_indian_subcontinent.webp
+    - res/images/wgsrpd_indochina.webp
+    - res/images/wgsrpd_macaronesia.webp
+    - res/images/wgsrpd_malesia.webp
+    - res/images/wgsrpd_mexico.webp
+    - res/images/wgsrpd_middle_asia.webp
+    - res/images/wgsrpd_middle_atlantic_ocean.webp
+    - res/images/wgsrpd_middle_europe.webp
+    - res/images/wgsrpd_mongolia.webp
+    - res/images/wgsrpd_my_region.webp
+    - res/images/wgsrpd_new_zealand.webp
+    - res/images/wgsrpd_north_central_pacific.webp
+    - res/images/wgsrpd_north_central_united_states.webp
+    - res/images/wgsrpd_northeast_tropical_africa.webp
+    - res/images/wgsrpd_northeastern_united_states.webp
+    - res/images/wgsrpd_northern_africa.webp
+    - res/images/wgsrpd_northern_america.webp
+    - res/images/wgsrpd_northern_europe.webp
+    - res/images/wgsrpd_northern_south_america.webp
+    - res/images/wgsrpd_northwestern_pacific.webp
+    - res/images/wgsrpd_northwestern_united_states.webp
+    - res/images/wgsrpd_pacific.webp
+    - res/images/wgsrpd_papuasia.webp
+    - res/images/wgsrpd_russian_far_east.webp
+    - res/images/wgsrpd_siberia.webp
+    - res/images/wgsrpd_south_central_pacific.webp
+    - res/images/wgsrpd_south_central_united_states.webp
+    - res/images/wgsrpd_south_tropical_africa.webp
+    - res/images/wgsrpd_southeastern_europe.webp
+    - res/images/wgsrpd_southeastern_united_states.webp
+    - res/images/wgsrpd_southern_africa.webp
+    - res/images/wgsrpd_southern_america.webp
+    - res/images/wgsrpd_southern_south_america.webp
+    - res/images/wgsrpd_southwestern_europe.webp
+    - res/images/wgsrpd_southwestern_pacific.webp
+    - res/images/wgsrpd_southwestern_united_states.webp
+    - res/images/wgsrpd_subantarctic_islands.webp
+    - res/images/wgsrpd_subarctic_america.webp
+    - res/images/wgsrpd_west_tropical_africa.webp
+    - res/images/wgsrpd_western_asia.webp
+    - res/images/wgsrpd_western_canada.webp
+    - res/images/wgsrpd_western_indian_ocean.webp
+    - res/images/wgsrpd_western_south_america.webp
+    - res/images/color.png
+    - res/images/habitat.png
+    - res/images/petal.png
+    - res/images/distribution.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

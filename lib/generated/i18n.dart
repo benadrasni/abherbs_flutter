@@ -19,12 +19,91 @@ class S implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  String get color_of_flower => "colour of flowers";
+  String get africa => "Africa";
+  String get antarctic => "Antarctic";
+  String get antarctic_continent => "Antarctic Continent";
+  String get arabian_peninsula => "Arabian Peninsula";
+  String get asia_temperate => "Asia-Temperate";
+  String get asia_tropical => "Asia-Tropical";
+  String get australasia => "Australasia";
+  String get australia => "Australia";
+  String get brazil => "Brazil";
+  String get caribbean => "Caribbean";
+  String get caucasus => "Caucasus";
+  String get central_america => "Central America";
+  String get china => "China";
+  String get color_blue => "blue, purple";
+  String get color_green => "green, brown, black";
+  String get color_red => "red, pink";
+  String get color_white => "white";
+  String get color_yellow => "yellow";
   String get default_language => "default language";
+  String get east_tropical_africa => "East Tropical Africa";
+  String get eastern_asia => "Eastern Asia";
+  String get eastern_canada => "Eastern Canada";
+  String get eastern_europe => "Eastern Europe";
+  String get europe => "Europe";
   String get feedback => "Feedback";
-  String get habitats => "habitats";
+  String get filter_color => "colour of flowers";
+  String get filter_distibution => "distribution";
+  String get filter_habitat => "habitats";
+  String get filter_petal => "number of petals";
+  String get habitat_forest => "woodlands or forests";
+  String get habitat_garden => "gardens or fields";
+  String get habitat_meadow => "meadows or grasslands";
+  String get habitat_rock => "rocks or mountains";
+  String get habitat_tree => "trees or shrubs";
+  String get habitat_wetland => "moorlands or wetlands";
+  String get indian_subcontinent => "Indian Subcontinent";
+  String get indochina => "Indo-China";
+  String get macaronesia => "Macaronesia";
+  String get malesia => "Malesia";
+  String get mexico => "Mexico";
+  String get middle_asia => "Middle Asia";
+  String get middle_atlantic_ocean => "Middle Atlantic Ocean";
+  String get middle_europe => "Middle Europe";
+  String get mongolia => "Mongolia";
+  String get my_region => "My Region";
+  String get new_zealand => "New Zealand";
+  String get north_central_pacific => "North-Central Pacific";
+  String get north_central_usa => "North-Central U.S.A.";
+  String get northeast_tropical_africa => "Northeast Tropical Africa";
+  String get northeastern_usa => "Northeastern U.S.A.";
+  String get northern_africa => "Northern Africa";
+  String get northern_america => "Northern America";
+  String get northern_europe => "Northern Europe";
+  String get northern_south_america => "Northern South America";
+  String get northwestern_pacific => "Northwestern Pacific";
+  String get northwestern_usa => "Northwestern U.S.A.";
+  String get pacific => "Pacific";
+  String get papuasia => "Papuasia";
+  String get petal_4 => "4 or less";
+  String get petal_5 => "5";
+  String get petal_many => "more than 5";
+  String get petal_zygomorphic => "zygomorphic";
   String get pref_language => "Preferred language";
+  String get russian_far_east => "Russian Far East";
   String get settings => "Settings";
+  String get siberia => "Siberia";
+  String get south_central_pacific => "South-Central Pacific";
+  String get south_central_usa => "South-Central U.S.A.";
+  String get south_tropical_africa => "South Tropical Africa";
+  String get southeastern_europe => "Southeastern Europe";
+  String get southeastern_usa => "Southeastern U.S.A.";
+  String get southern_africa => "Southern Africa";
+  String get southern_america => "Southern America";
+  String get southern_south_america => "Southern South America";
+  String get southwestern_europe => "Southwestern Europe";
+  String get southwestern_pacific => "Southwestern Pacific";
+  String get southwestern_usa => "Southwestern U.S.A.";
+  String get subantarctic_islands => "Subantarctic Islands";
+  String get subarctic_america => "Subarctic America";
+  String get west_central_tropical_africa => "West-Central Tropical Africa";
+  String get west_tropical_africa => "West Tropical Africa";
+  String get western_asia => "Western Asia";
+  String get western_canada => "Western Canada";
+  String get western_indian_ocean => "Western Indian Ocean";
+  String get western_south_america => "Western South America";
 }
 
 class $de extends S {
@@ -34,9 +113,7 @@ class $de extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "Habitat";
-  @override
-  String get color_of_flower => "Blütenfarbe";
+  String get filter_color => "Blütenfarbe";
 }
 
 class $hi extends S {
@@ -46,9 +123,7 @@ class $hi extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "पर्यावास";
-  @override
-  String get color_of_flower => "फूलों का रंग";
+  String get filter_color => "फूलों का रंग";
 }
 
 class $no extends S {
@@ -58,9 +133,7 @@ class $no extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "voksested";
-  @override
-  String get color_of_flower => "farge på blomster";
+  String get filter_color => "farge på blomster";
 }
 
 class $fi extends S {
@@ -70,9 +143,7 @@ class $fi extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "kasvupaikka";
-  @override
-  String get color_of_flower => "kukkien väri";
+  String get filter_color => "kukkien väri";
 }
 
 class $ru extends S {
@@ -82,9 +153,7 @@ class $ru extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "ареалы";
-  @override
-  String get color_of_flower => "окраска цветков";
+  String get filter_color => "окраска цветков";
 }
 
 class $pt extends S {
@@ -94,9 +163,7 @@ class $pt extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "habitat";
-  @override
-  String get color_of_flower => "cor das flores";
+  String get filter_color => "cor das flores";
 }
 
 class $lt extends S {
@@ -106,9 +173,7 @@ class $lt extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "buveinių";
-  @override
-  String get color_of_flower => "spalva gėlės";
+  String get filter_color => "spalva gėlės";
 }
 
 class $hr extends S {
@@ -118,9 +183,7 @@ class $hr extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "staništa";
-  @override
-  String get color_of_flower => "boja cvjetova";
+  String get filter_color => "boja cvjetova";
 }
 
 class $lv extends S {
@@ -130,9 +193,7 @@ class $lv extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "biotopi";
-  @override
-  String get color_of_flower => "krāsu ziedi";
+  String get filter_color => "krāsu ziedi";
 }
 
 class $fr extends S {
@@ -142,9 +203,7 @@ class $fr extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "habitats";
-  @override
-  String get color_of_flower => "couleur des fleurs";
+  String get filter_color => "couleur des fleurs";
 }
 
 class $hu extends S {
@@ -154,9 +213,7 @@ class $hu extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "élettér";
-  @override
-  String get color_of_flower => "a virágok színe";
+  String get filter_color => "a virágok színe";
 }
 
 class $uk extends S {
@@ -166,9 +223,7 @@ class $uk extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "середовище";
-  @override
-  String get color_of_flower => "забарвлення квіток";
+  String get filter_color => "забарвлення квіток";
 }
 
 class $sk extends S {
@@ -182,13 +237,15 @@ class $sk extends S {
   @override
   String get settings => "Nastavenia";
   @override
-  String get habitats => "lokalita";
+  String get filter_petal => "počet lupienkov";
   @override
-  String get color_of_flower => "farba kvetov";
+  String get filter_habitat => "lokalita";
   @override
   String get pref_language => "Preferovaný jazyk";
   @override
   String get default_language => "prednastavený jazyk";
+  @override
+  String get filter_color => "farba kvetov";
 }
 
 class $sl extends S {
@@ -198,9 +255,7 @@ class $sl extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "habitate";
-  @override
-  String get color_of_flower => "barva cvetov";
+  String get filter_color => "barva cvetov";
 }
 
 class $id extends S {
@@ -210,9 +265,7 @@ class $id extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "habitat";
-  @override
-  String get color_of_flower => "warna bunga";
+  String get filter_color => "warna bunga";
 }
 
 class $sr extends S {
@@ -222,9 +275,7 @@ class $sr extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "станишта";
-  @override
-  String get color_of_flower => "боја цвећа";
+  String get filter_color => "боја цвећа";
 }
 
 class $sv extends S {
@@ -234,9 +285,7 @@ class $sv extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "växtplats";
-  @override
-  String get color_of_flower => "färg på blommor";
+  String get filter_color => "färg på blommor";
 }
 
 class $en extends S {
@@ -250,9 +299,7 @@ class $it extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "habitat";
-  @override
-  String get color_of_flower => "colore dei fiori";
+  String get filter_color => "colore dei fiori";
 }
 
 class $es extends S {
@@ -262,9 +309,7 @@ class $es extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "localidad";
-  @override
-  String get color_of_flower => "color de la flor";
+  String get filter_color => "color de la flor";
 }
 
 class $et extends S {
@@ -274,9 +319,7 @@ class $et extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "elupaikade";
-  @override
-  String get color_of_flower => "värvi lilled";
+  String get filter_color => "värvi lilled";
 }
 
 class $cs extends S {
@@ -286,9 +329,7 @@ class $cs extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "ekologie";
-  @override
-  String get color_of_flower => "barva květů";
+  String get filter_color => "barva květů";
 }
 
 class $ar extends S {
@@ -298,9 +339,7 @@ class $ar extends S {
   TextDirection get textDirection => TextDirection.rtl;
 
   @override
-  String get habitats => "موطن";
-  @override
-  String get color_of_flower => "لون الزهور";
+  String get filter_color => "لون الزهور";
 }
 
 class $pa extends S {
@@ -310,9 +349,7 @@ class $pa extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "ਆਵਾਸ";
-  @override
-  String get color_of_flower => "ਫੁੱਲ ਦਾ ਰੰਗ";
+  String get filter_color => "ਫੁੱਲ ਦਾ ਰੰਗ";
 }
 
 class $en_US extends S {
@@ -322,7 +359,7 @@ class $en_US extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get color_of_flower => "color of flowers";
+  String get filter_color => "color of flowers";
 }
 
 class $ja extends S {
@@ -332,9 +369,7 @@ class $ja extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "生息地";
-  @override
-  String get color_of_flower => "花の色";
+  String get filter_color => "花の色";
 }
 
 class $fa extends S {
@@ -344,9 +379,7 @@ class $fa extends S {
   TextDirection get textDirection => TextDirection.rtl;
 
   @override
-  String get habitats => "زیستگاه ها";
-  @override
-  String get color_of_flower => "رنگ گل";
+  String get filter_color => "رنگ گل";
 }
 
 class $pl extends S {
@@ -356,9 +389,7 @@ class $pl extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "Habitat";
-  @override
-  String get color_of_flower => "Kolor kwiatów";
+  String get filter_color => "Kolor kwiatów";
 }
 
 class $da extends S {
@@ -368,9 +399,7 @@ class $da extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "vækststeder";
-  @override
-  String get color_of_flower => "blomsterfarve";
+  String get filter_color => "blomsterfarve";
 }
 
 class $he extends S {
@@ -380,9 +409,7 @@ class $he extends S {
   TextDirection get textDirection => TextDirection.rtl;
 
   @override
-  String get habitats => "בתי גידול";
-  @override
-  String get color_of_flower => "צבע של פרחים";
+  String get filter_color => "צבע של פרחים";
 }
 
 class $ro extends S {
@@ -392,9 +419,7 @@ class $ro extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "habitatul";
-  @override
-  String get color_of_flower => "culoarea florilor";
+  String get filter_color => "culoarea florilor";
 }
 
 class $nl extends S {
@@ -404,9 +429,7 @@ class $nl extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitats => "standplaats";
-  @override
-  String get color_of_flower => "kleur van de bloemen";
+  String get filter_color => "kleur van de bloemen";
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {

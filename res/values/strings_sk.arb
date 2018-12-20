@@ -4,6 +4,8 @@
   "pref_language": "Preferovaný jazyk",
   "default_language": "prednastavený jazyk",
 
-  "color_of_flower": "farba kvetov",
-  "habitats": "lokalita"
+  "filter_color": "farba kvetov",
+  "filter_habitat": "lokalita",
+  "filter_petal": "počet lupienkov",
+  "filter_distribution": "distribúcia"
 }

@@ -46,9 +46,9 @@ class _ColorState extends State<Color> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).color_of_flower),
+        title: Text(S.of(context).filter_color),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage),
+      drawer: AppDrawer(widget.onChangeLanguage, _filter),
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.all(5.0),
