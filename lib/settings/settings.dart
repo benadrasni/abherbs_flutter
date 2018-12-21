@@ -17,13 +17,27 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   Future<String> _prefLanguageF;
+  String _prefLanguage;
   Future<String> _myRegionF;
 
-  void _changePrefLanguage(String language) {
+  void _resetPrefLanguage() {
     setState(() {
-      _prefLanguageF = Prefs.setString(keyPreferredLanguage, language).then((bool success) {
-        widget.onChangeLanguage(language);
-        return language == null ? "" : language;
+      _prefLanguageF = Prefs.setString(keyPreferredLanguage, null).then((bool success) {
+        widget.onChangeLanguage(null);
+        return null;
+      });
+    });
+  }
+
+  void _getPrefLanguage() {
+    setState(() {
+      _prefLanguageF = Prefs.getStringF(keyPreferredLanguage);
+      _prefLanguageF.then((language) {
+        if (language != _prefLanguage) {
+          _prefLanguage = language;
+          widget.onChangeLanguage(_prefLanguage);
+        }
+        return language;
       });
     });
   }
@@ -40,6 +54,9 @@ class _SettingsState extends State<Settings> {
   void initState() {
     super.initState();
     _prefLanguageF = Prefs.getStringF(keyPreferredLanguage);
+    _prefLanguageF.then((language) {
+      _prefLanguage = language;
+    });
     _myRegionF = Prefs.getStringF(keyMyRegion);
   }
 
@@ -74,51 +91,15 @@ class _SettingsState extends State<Settings> {
           trailing: IconButton(
             icon: Icon(Icons.delete),
             onPressed: () {
-              _changePrefLanguage(null);
+              _resetPrefLanguage();
             },
           ),
-//          subtitle: FutureBuilder<String>(
-//              future: _prefLanguageF,
-//              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-//                String langCode = snapshot.data;
-//                if (langCode != null && langCode.isEmpty) {
-//                  langCode = null;
-//                }
-//
-//                switch (snapshot.connectionState) {
-//                  case ConnectionState.waiting:
-//                    return const CircularProgressIndicator();
-//                  default:
-//                    return Row(children: [
-//                      Container(
-//                          child: DropdownButton<String>(
-//                        value: langCode,
-//                        hint: Text(S.of(context).default_language),
-//                        items: languages.keys.map((String value) {
-//                          return DropdownMenuItem<String>(
-//                            value: value,
-//                            child: Text(languages[value]),
-//                          );
-//                        }).toList(),
-//                        onChanged: (newVal) {
-//                          _changePrefLanguage(newVal);
-//                        },
-//                      )),
-//                      IconButton(
-//                        icon: Icon(Icons.delete),
-//                        onPressed: langCode == null ? null : () { _changePrefLanguage(null); },
-//                      ),
-//                    ]);
-//                }
-//              }),
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => SettingPrefLanguage()),
             ).then((result) {
-              setState(() {
-                _prefLanguageF = Prefs.getStringF(keyPreferredLanguage);
-              });
+              _getPrefLanguage();
             });
           },
         ),

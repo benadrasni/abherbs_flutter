@@ -67,7 +67,7 @@ class _DistributionState extends State<Distribution> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title: new Text(S.of(context).filter_distibution),
+        title: new Text(S.of(context).filter_distribution),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, _filter),
       body: ListView(

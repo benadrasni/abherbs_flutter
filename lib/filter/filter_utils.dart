@@ -75,7 +75,7 @@ getFilterTitle(context, filterAttribute) {
     case filterPetal:
       return Text(S.of(context).filter_petal);
     case filterDistribution:
-      return Text(S.of(context).filter_distibution);
+      return Text(S.of(context).filter_distribution);
     default:
       return null;
   }
