@@ -1,13 +1,16 @@
 {
   "settings": "Settings",
   "feedback": "Feedback",
+  "about": "About",
+  "help": "Help",
+
   "pref_language": "Preferred language",
-  "default_language": "default language",
+  "my_region": "My region",
 
   "filter_color": "colour of flowers",
   "filter_habitat": "habitats",
   "filter_petal": "number of petals",
-  "filter_distibution": "distribution",
+  "filter_distribution": "distribution",
 
   "color_white": "white",
   "color_yellow": "yellow",
@@ -27,7 +30,6 @@
   "petal_many": "more than 5",
   "petal_zygomorphic": "zygomorphic",
 
-  "my_region": "My Region",
   "europe": "Europe",
   "africa": "Africa",
   "asia_temperate": "Asia-Temperate",
@@ -36,7 +38,6 @@
   "pacific": "Pacific",
   "northern_america": "Northern America",
   "southern_america": "Southern America",
-  "antarctic": "Antarctic",
   "northern_europe": "Northern Europe",
   "middle_europe": "Middle Europe",
   "southwestern_europe": "Southwestern Europe",
