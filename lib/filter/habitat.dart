@@ -46,7 +46,7 @@ class _HabitatState extends State<Habitat> {
   Widget build(BuildContext context) {
     var _defaultTextStyle = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 25.0,
+      fontSize: 22.0,
       color: Colors.white,
     );
 
@@ -54,7 +54,7 @@ class _HabitatState extends State<Habitat> {
       appBar: new AppBar(
         title: new Text(S.of(context).filter_habitat),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, _filter),
+      drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.all(5.0),
@@ -69,6 +69,7 @@ class _HabitatState extends State<Habitat> {
               ),
               Text(S.of(context).habitat_meadow,
                       style: _defaultTextStyle,
+                textAlign: TextAlign.center,
                   ),
             ]),
             onPressed: () {
@@ -78,15 +79,16 @@ class _HabitatState extends State<Habitat> {
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
             child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('res/images/garden.webp'),
-                  ),
-                  Text(S.of(context).habitat_garden,
-                    style: _defaultTextStyle,
-                  ),
-                ]),
+              alignment: Alignment.center,
+              children: [
+                Image(
+                  image: AssetImage('res/images/garden.webp'),
+                ),
+                Text(S.of(context).habitat_garden,
+                  style: _defaultTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+              ]),
             onPressed: () {
               _navigate('2');
             },
@@ -101,6 +103,7 @@ class _HabitatState extends State<Habitat> {
                   ),
                   Text(S.of(context).habitat_wetland,
                     style: _defaultTextStyle,
+                    textAlign: TextAlign.center,
                   ),
                 ]),
             onPressed: () {
@@ -117,6 +120,7 @@ class _HabitatState extends State<Habitat> {
                   ),
                   Text(S.of(context).habitat_forest,
                     style: _defaultTextStyle,
+                    textAlign: TextAlign.center,
                   ),
                 ]),
             onPressed: () {
@@ -133,6 +137,7 @@ class _HabitatState extends State<Habitat> {
                   ),
                   Text(S.of(context).habitat_rock,
                     style: _defaultTextStyle,
+                    textAlign: TextAlign.center,
                   ),
                 ]),
             onPressed: () {
@@ -149,6 +154,7 @@ class _HabitatState extends State<Habitat> {
                   ),
                   Text(S.of(context).habitat_tree,
                     style: _defaultTextStyle,
+                    textAlign: TextAlign.center,
                   ),
                 ]),
             onPressed: () {

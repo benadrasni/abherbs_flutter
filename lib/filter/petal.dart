@@ -46,14 +46,14 @@ class _PetalState extends State<Petal> {
   Widget build(BuildContext context) {
     var _defaultTextStyle = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 25.0,
+      fontSize: 22.0,
     );
 
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).filter_petal),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, _filter),
+      drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.all(5.0),

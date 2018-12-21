@@ -40,11 +40,14 @@ class _DistributionState extends State<Distribution> {
       MaterialPageRoute(builder: (context) => getNextFilter(widget.onChangeLanguage, newFilter)),
     );
   }
-  void _setMyRegion() {
+
+  void setMyRegion() {
     _myRegion = "";
     _myRegionF = Prefs.getStringF(keyMyRegion);
     _myRegionF.then((region) {
-      _myRegion = region;
+      setState(() {
+        _myRegion = region;
+      });
     });
   }
 
@@ -60,7 +63,7 @@ class _DistributionState extends State<Distribution> {
       return snapshot.value;
     });
 
-    _setMyRegion();
+    setMyRegion();
   }
 
   @override
@@ -69,7 +72,7 @@ class _DistributionState extends State<Distribution> {
       appBar: new AppBar(
         title: new Text(S.of(context).filter_distribution),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, _filter),
+      drawer: AppDrawer(widget.onChangeLanguage, _filter, this.setMyRegion),
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.all(5.0),
@@ -102,7 +105,7 @@ class _DistributionState extends State<Distribution> {
   _getRegions() {
     var _firstLevelTextStyle = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 25.0,
+      fontSize: 22.0,
     );
     var _secondLevelTextStyle = TextStyle(
       fontSize: 20.0,
@@ -115,25 +118,27 @@ class _DistributionState extends State<Distribution> {
         Image(
           image: AssetImage('res/images/wgsrpd_my_region.webp'),
         ),
-        Text(
-          S.of(context).my_region,
-          style: _firstLevelTextStyle,
-        ),
-        FutureBuilder<String>(
-            future: _myRegionF,
-            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-              var value = "";
-              if (snapshot.connectionState == ConnectionState.done) {
-                value = snapshot.data.isNotEmpty ? getFilterDistributionValue(context, snapshot.data) : "";
-              }
-              return Text(
-                value,
-                style: TextStyle(
-                  fontSize: 15.0,
-                  fontStyle: FontStyle.italic,
-                ),
-              );
-            }),
+        Column(children: [
+          Text(
+            S.of(context).my_region,
+            style: _firstLevelTextStyle,
+          ),
+          FutureBuilder<String>(
+              future: _myRegionF,
+              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                var value = "";
+                if (snapshot.connectionState == ConnectionState.done) {
+                  value = snapshot.data.isNotEmpty ? getFilterDistributionValue(context, snapshot.data) : "";
+                }
+                return Text(
+                  value,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontStyle: FontStyle.italic,
+                  ),
+                );
+              }),
+        ])
       ]),
       onPressed: () {
         if (_myRegion.isNotEmpty) {
@@ -143,9 +148,7 @@ class _DistributionState extends State<Distribution> {
             context,
             MaterialPageRoute(builder: (context) => Settings(widget.onChangeLanguage)),
           ).then((result) {
-            setState(() {
-              _setMyRegion();
-            });
+            setMyRegion();
           });
         }
       },

@@ -6,7 +6,8 @@ import 'package:abherbs_flutter/filter/filter_utils.dart';
 class AppDrawer extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
-  AppDrawer(this.onChangeLanguage, this.filter);
+  final void Function() settingsCallback;
+  AppDrawer(this.onChangeLanguage, this.filter, this.settingsCallback);
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
@@ -40,7 +41,9 @@ class _AppDrawerState extends State<AppDrawer> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Settings(widget.onChangeLanguage)),
-        );
+        ).then((result) {
+          widget.settingsCallback();
+        });
       },
     ));
     listItems.add(ListTile(

@@ -48,7 +48,7 @@ class _ColorState extends State<Color> {
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, _filter),
+      drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.all(5.0),
