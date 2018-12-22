@@ -2,6 +2,7 @@ import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
+import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
@@ -9,8 +10,6 @@ const String filterColor = 'filterColor';
 const String filterHabitat = 'filterHabitat';
 const String filterPetal = 'filterPetal';
 const String filterDistribution = 'filterDistribution';
-
-const String firebaseCounts = 'counts_4_v2';
 
 const filterAttributes = [filterColor, filterHabitat, filterPetal, filterDistribution];
 
@@ -31,7 +30,7 @@ getNextFilter(void Function(String) onChangeLanguage, Map<String, String> filter
     case filterDistribution:
       return Distribution(onChangeLanguage, filter);
     default:
-      return null;
+      return PlantList(onChangeLanguage, filter);
   }
 }
 
