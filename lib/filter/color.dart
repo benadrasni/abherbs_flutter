@@ -2,6 +2,7 @@ import 'package:abherbs_flutter/constants.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/plant_list.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,12 @@ class _ColorState extends State<Color> {
     );
   }
 
+  _setCount() {
+    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
+      return snapshot.value;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -37,9 +44,7 @@ class _ColorState extends State<Color> {
     _filter.addAll(widget.filter);
     _filter.remove(filterColor);
 
-    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
-      return snapshot.value;
-    });
+    _setCount();
   }
 
   @override
@@ -58,7 +63,7 @@ class _ColorState extends State<Color> {
             children: [
               Expanded(
                 child: FlatButton(
-                  padding: EdgeInsets.only(bottom: 10.0, right:5.0),
+                  padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
                   child: Image(
                     image: AssetImage('res/images/white.webp'),
                   ),
@@ -122,7 +127,7 @@ class _ColorState extends State<Color> {
           ),
         ],
       ),
-      floatingActionButton: new Container(
+      floatingActionButton: Container(
         padding: EdgeInsets.only(bottom: 50.0),
         height: 120.0,
         width: 70.0,
@@ -135,9 +140,22 @@ class _ColorState extends State<Color> {
                   case ConnectionState.waiting:
                     return const CircularProgressIndicator();
                   default:
-                    return FloatingActionButton(
-                      onPressed: () {},
-                      child: Text(snapshot.data.toString()),
+                    return GestureDetector(
+                      onLongPress: () {
+                        setState(() {
+                          _filter.clear();
+                          _setCount();
+                        });
+                      },
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
+                          );
+                        },
+                        child: Text(snapshot.data.toString()),
+                      ),
                     );
                 }
               }),

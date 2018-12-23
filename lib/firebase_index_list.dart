@@ -29,9 +29,19 @@ class FirebaseIndexList extends ListBase<DataSnapshot>
     assert(keyQuery != null);
 
     keyQuery.once().then((DataSnapshot snapshot) {
-      snapshot.value.keys.forEach((key) {
-        _keys[key] = 1;
-      });
+      if (snapshot.value is List) {
+        int i = 0;
+        snapshot.value.forEach((value) {
+          if (value != null) {
+            _keys[i.toString()] = value;
+            i++;
+          }
+        });
+      } else {
+        snapshot.value.keys.forEach((key) {
+          _keys[key] = 1;
+        });
+      }
 
       listen(query.onChildAdded, _onChildAdded, onError: _onError);
       listen(query.onValue, _onValue, onError: _onError);

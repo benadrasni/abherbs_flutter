@@ -2,6 +2,7 @@ import 'package:abherbs_flutter/constants.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/plant_list.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,12 @@ class _HabitatState extends State<Habitat> {
     );
   }
 
+  _setCount() {
+    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
+      return snapshot.value;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -37,9 +44,7 @@ class _HabitatState extends State<Habitat> {
     _filter.addAll(widget.filter);
     _filter.remove(filterHabitat);
 
-    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
-      return snapshot.value;
-    });
+    _setCount();
   }
 
   @override
@@ -61,16 +66,15 @@ class _HabitatState extends State<Habitat> {
         children: [
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
-            child: Stack(
-                alignment: Alignment.center,
-                children: [
+            child: Stack(alignment: Alignment.center, children: [
               Image(
                 image: AssetImage('res/images/meadow.webp'),
               ),
-              Text(S.of(context).habitat_meadow,
-                      style: _defaultTextStyle,
+              Text(
+                S.of(context).habitat_meadow,
+                style: _defaultTextStyle,
                 textAlign: TextAlign.center,
-                  ),
+              ),
             ]),
             onPressed: () {
               _navigate('1');
@@ -78,85 +82,80 @@ class _HabitatState extends State<Habitat> {
           ),
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Image(
-                  image: AssetImage('res/images/garden.webp'),
-                ),
-                Text(S.of(context).habitat_garden,
-                  style: _defaultTextStyle,
-                  textAlign: TextAlign.center,
-                ),
-              ]),
+            child: Stack(alignment: Alignment.center, children: [
+              Image(
+                image: AssetImage('res/images/garden.webp'),
+              ),
+              Text(
+                S.of(context).habitat_garden,
+                style: _defaultTextStyle,
+                textAlign: TextAlign.center,
+              ),
+            ]),
             onPressed: () {
               _navigate('2');
             },
           ),
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
-            child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('res/images/swamp.webp'),
-                  ),
-                  Text(S.of(context).habitat_wetland,
-                    style: _defaultTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ]),
+            child: Stack(alignment: Alignment.center, children: [
+              Image(
+                image: AssetImage('res/images/swamp.webp'),
+              ),
+              Text(
+                S.of(context).habitat_wetland,
+                style: _defaultTextStyle,
+                textAlign: TextAlign.center,
+              ),
+            ]),
             onPressed: () {
               _navigate('3');
             },
           ),
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
-            child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('res/images/forest.webp'),
-                  ),
-                  Text(S.of(context).habitat_forest,
-                    style: _defaultTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ]),
+            child: Stack(alignment: Alignment.center, children: [
+              Image(
+                image: AssetImage('res/images/forest.webp'),
+              ),
+              Text(
+                S.of(context).habitat_forest,
+                style: _defaultTextStyle,
+                textAlign: TextAlign.center,
+              ),
+            ]),
             onPressed: () {
               _navigate('4');
             },
           ),
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
-            child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('res/images/mountain.webp'),
-                  ),
-                  Text(S.of(context).habitat_rock,
-                    style: _defaultTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ]),
+            child: Stack(alignment: Alignment.center, children: [
+              Image(
+                image: AssetImage('res/images/mountain.webp'),
+              ),
+              Text(
+                S.of(context).habitat_rock,
+                style: _defaultTextStyle,
+                textAlign: TextAlign.center,
+              ),
+            ]),
             onPressed: () {
               _navigate('5');
             },
           ),
           FlatButton(
             padding: EdgeInsets.only(bottom: 50.0),
-            child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('res/images/tree.webp'),
-                  ),
-                  Text(S.of(context).habitat_tree,
-                    style: _defaultTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ]),
+            child: Stack(alignment: Alignment.center, children: [
+              Image(
+                image: AssetImage('res/images/tree.webp'),
+              ),
+              Text(
+                S.of(context).habitat_tree,
+                style: _defaultTextStyle,
+                textAlign: TextAlign.center,
+              ),
+            ]),
             onPressed: () {
               _navigate('6');
             },
@@ -176,9 +175,22 @@ class _HabitatState extends State<Habitat> {
                   case ConnectionState.waiting:
                     return const CircularProgressIndicator();
                   default:
-                    return FloatingActionButton(
-                      onPressed: () {},
-                      child: Text(snapshot.data.toString()),
+                    return GestureDetector(
+                      onLongPress: () {
+                        setState(() {
+                          _filter.clear();
+                          _setCount();
+                        });
+                      },
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
+                          );
+                        },
+                        child: Text(snapshot.data.toString()),
+                      ),
                     );
                 }
               }),

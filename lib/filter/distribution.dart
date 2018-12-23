@@ -3,6 +3,7 @@ import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,12 @@ class _DistributionState extends State<Distribution> {
     );
   }
 
+  _setCount() {
+    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
+      return snapshot.value;
+    });
+  }
+
   void setMyRegion() {
     _myRegion = "";
     _myRegionF = Prefs.getStringF(keyMyRegion);
@@ -59,9 +66,7 @@ class _DistributionState extends State<Distribution> {
     _filter.remove(filterDistribution);
     _region = 0;
 
-    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
-      return snapshot.value;
-    });
+    _setCount();
 
     setMyRegion();
   }
@@ -91,9 +96,22 @@ class _DistributionState extends State<Distribution> {
                   case ConnectionState.waiting:
                     return const CircularProgressIndicator();
                   default:
-                    return FloatingActionButton(
-                      onPressed: () {},
-                      child: Text(snapshot.data.toString()),
+                    return GestureDetector(
+                      onLongPress: () {
+                        setState(() {
+                          _filter.clear();
+                          _setCount();
+                        });
+                      },
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
+                          );
+                        },
+                        child: Text(snapshot.data.toString()),
+                      ),
                     );
                 }
               }),

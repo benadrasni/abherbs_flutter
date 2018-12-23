@@ -6,6 +6,7 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 final listsReference = FirebaseDatabase.instance.reference().child(firebasePlantHeaders);
 final keysReference = FirebaseDatabase.instance.reference().child(firebaseLists);
 final translationsReference = FirebaseDatabase.instance.reference().child(firebaseTranslations);
@@ -21,6 +22,17 @@ class PlantList extends StatefulWidget {
 }
 
 class _PlantListState extends State<PlantList> {
+  Future<int> _count;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _count = countsReference.child(getFilterKey(widget.filter)).once().then((DataSnapshot snapshot) {
+      return snapshot.value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +41,9 @@ class _PlantListState extends State<PlantList> {
         ),
         drawer: AppDrawer(widget.onChangeLanguage, widget.filter, null),
         body: Container(
-          child: new Column(
+          child: Column(
             children: <Widget>[
-              new Flexible(
+              Flexible(
                 child: FirebaseAnimatedIndexList(
                     query: listsReference,
                     keyQuery: keysReference.child(getFilterKey(widget.filter)),
@@ -95,6 +107,28 @@ class _PlantListState extends State<PlantList> {
               ),
             ],
           ),
-        ));
+        ),
+      floatingActionButton: Container(
+        padding: EdgeInsets.only(bottom: 50.0),
+        height: 120.0,
+        width: 70.0,
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: FutureBuilder<int>(
+              future: _count,
+              builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return const CircularProgressIndicator();
+                  default:
+                    return FloatingActionButton(
+                      onPressed: () {},
+                      child: Text(snapshot.data.toString()),
+                    );
+                }
+              }),
+        ),
+      ),
+    );
   }
 }
