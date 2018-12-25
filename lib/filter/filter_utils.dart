@@ -21,38 +21,32 @@ String getFilterKey(Map<String, String> filter) {
 }
 
 MaterialPageRoute getNextFilterRoute(BuildContext context, void Function(String) onChangeLanguage, Map<String, String> filter) {
-  switch (_getNextFilterAttribute(filter)) {
+  var route;
+  String nextFilterAttribute = _getNextFilterAttribute(filter);
+
+  switch (nextFilterAttribute) {
     case filterColor:
-      var route =  MaterialPageRoute(builder: (context) => Color(onChangeLanguage, filter));
-      if (filterRoutes[filterColor] != null) {
-        Navigator.removeRoute(context, filterRoutes[filterColor]);
-      }
-      filterRoutes[filterColor] = route;
-      return route;
+      route =  MaterialPageRoute(builder: (context) => Color(onChangeLanguage, filter));
+      break;
     case filterHabitat:
-      var route =  MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, filter));
-      if (filterRoutes[filterHabitat] != null) {
-        Navigator.removeRoute(context, filterRoutes[filterHabitat]);
-      }
-      filterRoutes[filterHabitat] = route;
-      return route;
+      route =  MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, filter));
+      break;
     case filterPetal:
-      var route =  MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, filter));
-      if (filterRoutes[filterPetal] != null) {
-        Navigator.removeRoute(context, filterRoutes[filterPetal]);
-      }
-      filterRoutes[filterPetal] = route;
-      return route;
+      route =  MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, filter));
+      break;
     case filterDistribution:
-      var route =  MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, filter));
-      if (filterRoutes[filterDistribution] != null) {
-        Navigator.removeRoute(context, filterRoutes[filterDistribution]);
-      }
-      filterRoutes[filterDistribution] = route;
-      return route;
+      route =  MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, filter));
+      break;
     default:
-      return MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, filter));
+      route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, filter));
   }
+  if (nextFilterAttribute != null) {
+    if (filterRoutes[nextFilterAttribute] != null) {
+      Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
+    }
+    filterRoutes[nextFilterAttribute] = route;
+  }
+  return route;
 }
 
 Image getFilterLeading(context, filterAttribute) {
