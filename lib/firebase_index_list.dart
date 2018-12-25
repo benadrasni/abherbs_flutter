@@ -4,10 +4,9 @@
 
 import 'dart:collection';
 
-import 'package:flutter/foundation.dart';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
+import 'package:flutter/foundation.dart';
 
 typedef void ChildCallback(int index, DataSnapshot snapshot);
 typedef void ChildMovedCallback(

@@ -48,6 +48,7 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   assets:
+    - res/images/home.png
     - res/images/placeholder.webp
     - res/images/white.webp
     - res/images/yellow.webp

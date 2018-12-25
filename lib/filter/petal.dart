@@ -25,10 +25,7 @@ class _PetalState extends State<Petal> {
     var newFilter = new Map<String, String>();
     newFilter.addAll(_filter);
     newFilter[filterPetal] = value;
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => getNextFilter(widget.onChangeLanguage, newFilter)),
-    );
+    Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
   }
 
   _setCount() {
@@ -59,9 +56,10 @@ class _PetalState extends State<Petal> {
         title: Text(S.of(context).filter_petal),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
-      body: ListView(
-        shrinkWrap: true,
-        padding: EdgeInsets.all(5.0),
+      body: Column (
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//        shrinkWrap: true,
+//        padding: EdgeInsets.all(5.0),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -144,6 +142,9 @@ class _PetalState extends State<Petal> {
                 flex: 1,
               ),
             ],
+          ),
+          Container(
+            height: 50.0,
           ),
         ],
       ),

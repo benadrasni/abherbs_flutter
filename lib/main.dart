@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/splash.dart';
 import 'package:abherbs_flutter/prefs.dart';
-import 'package:abherbs_flutter/filter/filter_utils.dart';
 
 void main() async => runApp(App());
 
@@ -49,7 +49,8 @@ class _AppState extends State<App> {
                   localizationsDelegates: [S.delegate, GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate,],
                   supportedLocales: S.delegate.supportedLocales,
                   localeResolutionCallback: S.delegate.resolution(fallback: new Locale("en", "")),
-                  home: getNextFilter(this.onChangeLanguage, new Map<String, String>()));
+                  home: Splash(this.onChangeLanguage),
+              );
             default:
               return const CircularProgressIndicator();
           }

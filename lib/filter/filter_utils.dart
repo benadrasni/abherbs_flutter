@@ -12,6 +12,7 @@ const String filterPetal = 'filterPetal';
 const String filterDistribution = 'filterDistribution';
 
 const filterAttributes = [filterColor, filterHabitat, filterPetal, filterDistribution];
+var filterRoutes = <String, MaterialPageRoute<dynamic>>{filterColor: null, filterHabitat: null, filterPetal: null, filterDistribution: null};
 
 String getFilterKey(Map<String, String> filter) {
   return filterAttributes.map((attribute) {
@@ -19,22 +20,42 @@ String getFilterKey(Map<String, String> filter) {
   }).join("_");
 }
 
-getNextFilter(void Function(String) onChangeLanguage, Map<String, String> filter) {
+MaterialPageRoute getNextFilterRoute(BuildContext context, void Function(String) onChangeLanguage, Map<String, String> filter) {
   switch (_getNextFilterAttribute(filter)) {
     case filterColor:
-      return Color(onChangeLanguage, filter);
+      var route =  MaterialPageRoute(builder: (context) => Color(onChangeLanguage, filter));
+      if (filterRoutes[filterColor] != null) {
+        Navigator.removeRoute(context, filterRoutes[filterColor]);
+      }
+      filterRoutes[filterColor] = route;
+      return route;
     case filterHabitat:
-      return Habitat(onChangeLanguage, filter);
+      var route =  MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, filter));
+      if (filterRoutes[filterHabitat] != null) {
+        Navigator.removeRoute(context, filterRoutes[filterHabitat]);
+      }
+      filterRoutes[filterHabitat] = route;
+      return route;
     case filterPetal:
-      return Petal(onChangeLanguage, filter);
+      var route =  MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, filter));
+      if (filterRoutes[filterPetal] != null) {
+        Navigator.removeRoute(context, filterRoutes[filterPetal]);
+      }
+      filterRoutes[filterPetal] = route;
+      return route;
     case filterDistribution:
-      return Distribution(onChangeLanguage, filter);
+      var route =  MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, filter));
+      if (filterRoutes[filterDistribution] != null) {
+        Navigator.removeRoute(context, filterRoutes[filterDistribution]);
+      }
+      filterRoutes[filterDistribution] = route;
+      return route;
     default:
-      return PlantList(onChangeLanguage, filter);
+      return MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, filter));
   }
 }
 
-getFilterLeading(context, filterAttribute) {
+Image getFilterLeading(context, filterAttribute) {
   switch (filterAttribute) {
     case filterColor:
       return Image(
@@ -65,7 +86,7 @@ getFilterLeading(context, filterAttribute) {
   }
 }
 
-getFilterTitle(context, filterAttribute) {
+Text getFilterTitle(context, filterAttribute) {
   switch (filterAttribute) {
     case filterColor:
       return Text(S.of(context).filter_color);
@@ -80,7 +101,7 @@ getFilterTitle(context, filterAttribute) {
   }
 }
 
-getFilterSubtitle(context, filterAttribute, filterValue) {
+String getFilterSubtitle(context, filterAttribute, filterValue) {
   switch (filterAttribute) {
     case filterColor:
       return getFilterColorValue(context, filterValue);

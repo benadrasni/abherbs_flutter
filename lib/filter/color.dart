@@ -25,10 +25,7 @@ class _ColorState extends State<Color> {
     var newFilter = new Map<String, String>();
     newFilter.addAll(_filter);
     newFilter[filterColor] = value;
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => getNextFilter(widget.onChangeLanguage, newFilter)),
-    );
+    Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
   }
 
   _setCount() {
@@ -54,9 +51,10 @@ class _ColorState extends State<Color> {
         title: Text(S.of(context).filter_color),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
-      body: ListView(
-        shrinkWrap: true,
-        padding: EdgeInsets.all(5.0),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //shrinkWrap: true,
+        //padding: EdgeInsets.all(5.0),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -117,13 +115,15 @@ class _ColorState extends State<Color> {
             ],
           ),
           FlatButton(
-            padding: EdgeInsets.only(bottom: 50.0),
             child: Image(
               image: AssetImage('res/images/green.webp'),
             ),
             onPressed: () {
               _navigate('5');
             },
+          ),
+          Container(
+            height: 50.0,
           ),
         ],
       ),

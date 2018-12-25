@@ -25,10 +25,7 @@ class _HabitatState extends State<Habitat> {
     var newFilter = new Map<String, String>();
     newFilter.addAll(_filter);
     newFilter[filterHabitat] = value;
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => getNextFilter(widget.onChangeLanguage, newFilter)),
-    );
+    Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
   }
 
   _setCount() {
@@ -145,7 +142,7 @@ class _HabitatState extends State<Habitat> {
             },
           ),
           FlatButton(
-            padding: EdgeInsets.only(bottom: 50.0),
+            padding: EdgeInsets.only(bottom: 5.0),
             child: Stack(alignment: Alignment.center, children: [
               Image(
                 image: AssetImage('res/images/tree.webp'),
@@ -159,6 +156,9 @@ class _HabitatState extends State<Habitat> {
             onPressed: () {
               _navigate('6');
             },
+          ),
+          Container(
+            height: 50.0,
           ),
         ],
       ),
