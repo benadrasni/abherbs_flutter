@@ -69,6 +69,12 @@ class _DistributionState extends State<Distribution> {
   }
 
   @override
+  void dispose() {
+    filterRoutes[filterDistribution] = null;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
@@ -79,6 +85,15 @@ class _DistributionState extends State<Distribution> {
         shrinkWrap: true,
         padding: EdgeInsets.all(5.0),
         children: _getRegions(),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/color.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_color)),
+          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/habitat.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_habitat)),
+          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/petal.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_petal)),
+        ],
+        fixedColor: Colors.grey,
+        onTap: (index) {},
       ),
       floatingActionButton: new Container(
         padding: EdgeInsets.only(bottom: 50.0),

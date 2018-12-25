@@ -1,3 +1,4 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:abherbs_flutter/constants.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
@@ -20,6 +21,7 @@ class Color extends StatefulWidget {
 class _ColorState extends State<Color> {
   Future<int> _count;
   Map<String, String> _filter;
+  BannerAd _myBanner;
 
   _navigate(String value) {
     var newFilter = new Map<String, String>();
@@ -42,26 +44,58 @@ class _ColorState extends State<Color> {
     _filter.remove(filterColor);
 
     _setCount();
+
+    MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+      keywords: <String>['flutterio', 'beautiful apps'],
+      contentUrl: 'https://flutter.io',
+      childDirected: false,
+      testDevices: <String>[], // Android emulators are considered test devices
+    );
+
+    _myBanner = BannerAd(
+      // Replace the testAdUnitId with an ad unit id from the AdMob dash.
+      // https://developers.google.com/admob/android/test-ads
+      // https://developers.google.com/admob/ios/test-ads
+      adUnitId: BannerAd.testAdUnitId,
+      size: AdSize.banner,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        print("BannerAd event is $event");
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    filterRoutes[filterColor] = null;
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    _myBanner
+    // typically this happens well before the ad is shown
+      ..load()
+      ..show(
+        // Positions the banner ad 60 pixels from the bottom of the screen
+        anchorOffset: 60.0,
+        // Banner Position
+        anchorType: AnchorType.bottom,
+      );
+
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //shrinkWrap: true,
-        //padding: EdgeInsets.all(5.0),
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
                 child: FlatButton(
-                  padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
                   child: Image(
                     image: AssetImage('res/images/white.webp'),
                   ),
@@ -73,7 +107,6 @@ class _ColorState extends State<Color> {
               ),
               Expanded(
                 child: FlatButton(
-                  padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
                   child: Image(
                     image: AssetImage('res/images/yellow.webp'),
                   ),
@@ -90,7 +123,6 @@ class _ColorState extends State<Color> {
             children: [
               Expanded(
                 child: FlatButton(
-                  padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
                   child: Image(
                     image: AssetImage('res/images/red.webp'),
                   ),
@@ -102,7 +134,6 @@ class _ColorState extends State<Color> {
               ),
               Expanded(
                 child: FlatButton(
-                  padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
                   child: Image(
                     image: AssetImage('res/images/blue.webp'),
                   ),
@@ -126,6 +157,15 @@ class _ColorState extends State<Color> {
             height: 50.0,
           ),
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/habitat.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_habitat)),
+          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/petal.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_petal)),
+          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/distribution.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_distribution)),
+        ],
+        fixedColor: Colors.grey,
+        onTap: (index) {},
       ),
       floatingActionButton: Container(
         padding: EdgeInsets.only(bottom: 50.0),

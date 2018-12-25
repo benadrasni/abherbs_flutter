@@ -20,7 +20,7 @@ String getFilterKey(Map<String, String> filter) {
   }).join("_");
 }
 
-MaterialPageRoute getNextFilterRoute(BuildContext context, void Function(String) onChangeLanguage, Map<String, String> filter) {
+MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Function(String) onChangeLanguage, Map<String, String> filter) {
   var route;
   String nextFilterAttribute = _getNextFilterAttribute(filter);
 

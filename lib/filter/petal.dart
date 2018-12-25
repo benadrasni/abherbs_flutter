@@ -45,6 +45,12 @@ class _PetalState extends State<Petal> {
   }
 
   @override
+  void dispose() {
+    filterRoutes[filterPetal] = null;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var _defaultTextStyle = TextStyle(
       fontWeight: FontWeight.bold,
@@ -57,16 +63,13 @@ class _PetalState extends State<Petal> {
       ),
       drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
       body: Column (
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//        shrinkWrap: true,
-//        padding: EdgeInsets.all(5.0),
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
                 child: FlatButton(
-                  padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                  padding: EdgeInsets.all(10.0),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                     Text(
                       S.of(context).petal_4,
@@ -84,7 +87,7 @@ class _PetalState extends State<Petal> {
               ),
               Expanded(
                 child: FlatButton(
-                  padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
+                  padding: EdgeInsets.all(10.0),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                     Text(
                       S.of(context).petal_5,
@@ -107,7 +110,7 @@ class _PetalState extends State<Petal> {
             children: [
               Expanded(
                 child: FlatButton(
-                  padding: EdgeInsets.only(bottom: 10.0, right: 5.0),
+                  padding: EdgeInsets.all(10.0),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                     Text(
                       S.of(context).petal_many,
@@ -125,7 +128,7 @@ class _PetalState extends State<Petal> {
               ),
               Expanded(
                 child: FlatButton(
-                  padding: EdgeInsets.only(bottom: 10.0, left: 5.0),
+                  padding: EdgeInsets.all(10.0),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                     Text(
                       S.of(context).petal_zygomorphic,
@@ -147,6 +150,15 @@ class _PetalState extends State<Petal> {
             height: 50.0,
           ),
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/color.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_color)),
+          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/habitat.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_habitat)),
+          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/distribution.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_distribution)),
+        ],
+        fixedColor: Colors.grey,
+        onTap: (index) {},
       ),
       floatingActionButton: new Container(
         padding: EdgeInsets.only(bottom: 50.0),

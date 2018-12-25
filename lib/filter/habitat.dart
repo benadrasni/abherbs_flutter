@@ -45,6 +45,12 @@ class _HabitatState extends State<Habitat> {
   }
 
   @override
+  void dispose() {
+    filterRoutes[filterHabitat] = null;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var _defaultTextStyle = TextStyle(
       fontWeight: FontWeight.bold,
@@ -60,6 +66,7 @@ class _HabitatState extends State<Habitat> {
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.all(5.0),
+//        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
@@ -161,6 +168,15 @@ class _HabitatState extends State<Habitat> {
             height: 50.0,
           ),
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/color.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_color)),
+          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/petal.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_petal)),
+          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/distribution.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_distribution)),
+        ],
+        fixedColor: Colors.grey,
+        onTap: (index) {},
       ),
       floatingActionButton: new Container(
         padding: EdgeInsets.only(bottom: 50.0),

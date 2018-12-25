@@ -1,8 +1,10 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/splash.dart';
 import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/keys.dart';
 
 void main() async => runApp(App());
 
@@ -25,6 +27,7 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
+    FirebaseAdMob.instance.initialize(appId: adAppId);
     Prefs.init();
     Prefs.getStringF('pref_language').then((String language) {
         onChangeLanguage(language);
