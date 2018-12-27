@@ -37,7 +37,11 @@ class _PlantDetailState extends State<PlantDetail> {
       if (plantTranslation.isTranslated)
         return plantTranslation;
       else
-        return translationsReference.child(widget.myLocale.languageCode + languageGTSuffix).child(widget.plantName).once().then((DataSnapshot snapshot) {
+        return translationsReference
+            .child(widget.myLocale.languageCode + languageGTSuffix)
+            .child(widget.plantName)
+            .once()
+            .then((DataSnapshot snapshot) {
           var plantTranslationGT = PlantTranslation.fromJson(snapshot.value);
           plantTranslationGT.copyFrom(plantTranslation);
           if (plantTranslationGT.label == null) {
@@ -67,21 +71,39 @@ class _PlantDetailState extends State<PlantDetail> {
         padding: EdgeInsets.all(5.0),
         children: [
           Card(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FutureBuilder<PlantTranslation>(
-                    future: _plantTranslationF,
-                    builder: (BuildContext context, AsyncSnapshot<PlantTranslation> snapshot) {
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.waiting:
-                          return const CircularProgressIndicator();
-                        default:
-                          return Text(snapshot.data.label);
-                      }
-                    }),
-              ]
-            )
+            child: Container(
+              padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+              child: FutureBuilder<PlantTranslation>(
+                future: _plantTranslationF,
+                builder: (BuildContext context, AsyncSnapshot<PlantTranslation> snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return const CircularProgressIndicator();
+                    default:
+                      String names = snapshot.data.names == null ? '' : snapshot.data.names.join(', ');
+
+                      return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                        Text(
+                          snapshot.data.label,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22.0,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          names,
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            fontSize: 14.0,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ]);
+                  }
+                },
+              ),
+            ),
           ),
         ],
       ),
