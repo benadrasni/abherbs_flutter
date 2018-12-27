@@ -18,7 +18,7 @@ class Habitat extends StatefulWidget {
 }
 
 class _HabitatState extends State<Habitat> {
-  Future<int> _count;
+  Future<int> _countF;
   Map<String, String> _filter;
 
   _navigate(String value) {
@@ -29,7 +29,7 @@ class _HabitatState extends State<Habitat> {
   }
 
   _setCount() {
-    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
+    _countF = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
       return snapshot.value;
     });
   }
@@ -66,7 +66,6 @@ class _HabitatState extends State<Habitat> {
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.all(5.0),
-//        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           FlatButton(
             padding: EdgeInsets.only(bottom: 5.0),
@@ -185,7 +184,7 @@ class _HabitatState extends State<Habitat> {
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(
-              future: _count,
+              future: _countF,
               builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:

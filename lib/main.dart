@@ -14,11 +14,11 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  Future<Locale> _locale;
+  Future<Locale> _localeF;
 
   onChangeLanguage(String language) {
     setState(() {
-      _locale = new Future<Locale>(() {
+      _localeF = new Future<Locale>(() {
         return language.isEmpty ? null : Locale(language, '');
       });
     });
@@ -43,7 +43,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Locale>(
-        future: _locale,
+        future: _localeF,
         builder: (BuildContext context, AsyncSnapshot<Locale> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:

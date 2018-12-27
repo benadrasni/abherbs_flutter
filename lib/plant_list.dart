@@ -3,6 +3,7 @@ import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/firebase_animated_index_list.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/plant_detail.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -48,23 +49,23 @@ class _PlantListState extends State<PlantList> {
                     query: listsReference,
                     keyQuery: keysReference.child(getFilterKey(widget.filter)),
                     itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
-                      String label = snapshot.value['name'];
+                      String name = snapshot.value['name'];
                       String family = snapshot.value['family'];
 
                       Locale myLocale = Localizations.localeOf(context);
-                      Future<DataSnapshot> labelF = translationsReference.child(myLocale.languageCode).child(label).child('label').once();
+                      Future<DataSnapshot> nameF = translationsReference.child(myLocale.languageCode).child(name).child('label').once();
                       Future<DataSnapshot> familyF = translationsTaxonomyReference.child(myLocale.languageCode).child(family).once();
 
                       return Card(
                         child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
                           ListTile(
                             title: FutureBuilder<DataSnapshot>(
-                                future: labelF,
+                                future: nameF,
                                 builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
-                                  String labelLocal = label;
+                                  String labelLocal = name;
                                   if (snapshot.connectionState == ConnectionState.done) {
                                     if (snapshot.data.value != null) {
-                                      labelLocal = snapshot.data.value + ' / ' + label;
+                                      labelLocal = snapshot.data.value + ' / ' + name;
                                     }
                                   }
                                   return Text(labelLocal);
@@ -97,7 +98,12 @@ class _PlantListState extends State<PlantList> {
                                   placeholder: 'res/images/placeholder.webp',
                                   image: storageEndpoit + storagePhotos + snapshot.value['url'],
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.filter, name)),
+                                  );
+                                },
                               ),
                             ],
                           ),
