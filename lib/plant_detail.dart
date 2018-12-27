@@ -80,8 +80,6 @@ class _PlantDetailState extends State<PlantDetail> {
                     case ConnectionState.waiting:
                       return const CircularProgressIndicator();
                     default:
-                      String names = snapshot.data.names == null ? '' : snapshot.data.names.join(', ');
-
                       return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                         Text(
                           snapshot.data.label,
@@ -92,7 +90,7 @@ class _PlantDetailState extends State<PlantDetail> {
                           textAlign: TextAlign.center,
                         ),
                         Text(
-                          names,
+                          snapshot.data.names == null ? '' : snapshot.data.names.take(3).join(', '),
                           style: TextStyle(
                             fontStyle: FontStyle.italic,
                             fontSize: 14.0,
