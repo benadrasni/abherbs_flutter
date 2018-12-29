@@ -24,6 +24,7 @@ class PlantList extends StatefulWidget {
 
 class _PlantListState extends State<PlantList> {
   Future<int> _count;
+  Map<String, String> translationCache;
 
   @override
   void initState() {
@@ -32,88 +33,112 @@ class _PlantListState extends State<PlantList> {
     _count = countsReference.child(getFilterKey(widget.filter)).once().then((DataSnapshot snapshot) {
       return snapshot.value;
     });
+
+    translationCache = {};
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(S.of(context).filter_color),
-        ),
-        drawer: AppDrawer(widget.onChangeLanguage, widget.filter, null),
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              Flexible(
-                child: FirebaseAnimatedIndexList(
-                    query: listsReference,
-                    keyQuery: keysReference.child(getFilterKey(widget.filter)),
-                    itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
-                      String name = snapshot.value['name'];
-                      String family = snapshot.value['family'];
+      appBar: AppBar(
+        title: Text(S.of(context).filter_color),
+      ),
+      drawer: AppDrawer(widget.onChangeLanguage, widget.filter, null),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Flexible(
+              child: FirebaseAnimatedIndexList(
+                  query: listsReference,
+                  keyQuery: keysReference.child(getFilterKey(widget.filter)),
+                  itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
+                    String name = snapshot.value['name'];
+                    String family = snapshot.value['family'];
 
-                      Locale myLocale = Localizations.localeOf(context);
-                      Future<DataSnapshot> nameF = translationsReference.child(myLocale.languageCode).child(name).child('label').once();
-                      Future<DataSnapshot> familyF = translationsTaxonomyReference.child(myLocale.languageCode).child(family).once();
+                    Locale myLocale = Localizations.localeOf(context);
+                    Future<String> nameF = translationCache.containsKey(name)
+                        ? new Future<String>(() {
+                            return translationCache[name];
+                          })
+                        : translationsReference.child(myLocale.languageCode).child(name).child('label').once().then((DataSnapshot snapshot) {
+                            if (snapshot.value != null) {
+                              translationCache[name] = snapshot.value;
+                              return snapshot.value;
+                            } else {
+                              return null;
+                            }
+                          });
+                    Future<String> familyF = translationCache.containsKey(family)
+                        ? new Future<String>(() {
+                            return translationCache[family];
+                          })
+                        : translationsTaxonomyReference.child(myLocale.languageCode).child(family).once().then((DataSnapshot snapshot) {
+                            if (snapshot.value != null && snapshot.value.length > 0) {
+                              translationCache[family] = snapshot.value[0];
+                              return snapshot.value[0];
+                            } else {
+                              return null;
+                            }
+                          });
 
-                      return Card(
-                        child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                          ListTile(
-                            title: FutureBuilder<DataSnapshot>(
-                                future: nameF,
-                                builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
-                                  String labelLocal = name;
-                                  if (snapshot.connectionState == ConnectionState.done) {
-                                    if (snapshot.data.value != null) {
-                                      labelLocal = snapshot.data.value + ' / ' + name;
-                                    }
+                    return Card(
+                      child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                        ListTile(
+                          title: FutureBuilder<String>(
+                              future: nameF,
+                              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                                String labelLocal = name;
+                                if (snapshot.connectionState == ConnectionState.done) {
+                                  if (snapshot.data != null) {
+                                    labelLocal = snapshot.data + ' / ' + name;
                                   }
-                                  return Text(labelLocal);
-                                }),
-                            subtitle: FutureBuilder<DataSnapshot>(
-                                future: familyF,
-                                builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
-                                  String familyLocal = family;
-                                  if (snapshot.connectionState == ConnectionState.done) {
-                                    if (snapshot.data.value != null && snapshot.data.value.length > 0) {
-                                      familyLocal = snapshot.data.value[0] + ' / ' + family;
-                                    }
+                                }
+                                return Text(labelLocal);
+                              }),
+                          subtitle: FutureBuilder<String>(
+                              future: familyF,
+                              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                                String familyLocal = family;
+                                if (snapshot.connectionState == ConnectionState.done) {
+                                  if (snapshot.data != null) {
+                                    familyLocal = snapshot.data + ' / ' + family;
                                   }
-                                  return Text(familyLocal);
-                                }),
-                            leading: Image.network(
-                              storageEndpoit + storageFamilies + snapshot.value['family'] + defaultExtension,
-                              width: 50.0,
-                              height: 50.0,
-                            ),
+                                }
+                                return Text(familyLocal);
+                              }),
+                          leading: Image.network(
+                            storageEndpoit + storageFamilies + snapshot.value['family'] + defaultExtension,
+                            width: 50.0,
+                            height: 50.0,
                           ),
-                          Stack(
-                            alignment: Alignment.center,
-                            children: <Widget>[
-                              CircularProgressIndicator(),
-                              FlatButton(
-                                padding: EdgeInsets.all(10.0),
-                                child: FadeInImage.assetNetwork(
-                                  fit: BoxFit.scaleDown,
-                                  placeholder: 'res/images/placeholder.webp',
-                                  image: storageEndpoit + storagePhotos + snapshot.value['url'],
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.filter, name)),
-                                  );
-                                },
+                        ),
+                        Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            CircularProgressIndicator(),
+                            FlatButton(
+                              padding: EdgeInsets.all(10.0),
+                              child: FadeInImage.assetNetwork(
+                                fit: BoxFit.scaleDown,
+                                placeholder: 'res/images/placeholder.webp',
+                                image: storageEndpoit + storagePhotos + snapshot.value['url'],
                               ),
-                            ],
-                          ),
-                        ]),
-                      );
-                    }),
-              ),
-            ],
-          ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.filter, name)),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ]),
+                    );
+                  }),
+            ),
+          ],
         ),
+      ),
       floatingActionButton: Container(
         padding: EdgeInsets.only(bottom: 50.0),
         height: 120.0,
