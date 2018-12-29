@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/main.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 final plantsReference = FirebaseDatabase.instance.reference().child(firebasePlants);
@@ -27,6 +28,8 @@ class _PlantDetailState extends State<PlantDetail> {
   @override
   void initState() {
     super.initState();
+
+    Ads.hideBannerAd();
 
     _plantF = plantsReference.child(widget.plantName).once().then((DataSnapshot snapshot) {
       return Plant.fromJson(snapshot.key, snapshot.value);

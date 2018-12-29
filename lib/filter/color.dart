@@ -1,8 +1,8 @@
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:abherbs_flutter/constants.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -21,13 +21,14 @@ class Color extends StatefulWidget {
 class _ColorState extends State<Color> {
   Future<int> _count;
   Map<String, String> _filter;
-  BannerAd _myBanner;
 
   _navigate(String value) {
     var newFilter = new Map<String, String>();
     newFilter.addAll(_filter);
     newFilter[filterColor] = value;
-    Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+    Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter)).then((result) {
+      Ads.showBannerAd(this);
+    });
   }
 
   _setCount() {
@@ -45,24 +46,7 @@ class _ColorState extends State<Color> {
 
     _setCount();
 
-    MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-      keywords: <String>['flutterio', 'beautiful apps'],
-      contentUrl: 'https://flutter.io',
-      childDirected: false,
-      testDevices: <String>[], // Android emulators are considered test devices
-    );
-
-    _myBanner = BannerAd(
-      // Replace the testAdUnitId with an ad unit id from the AdMob dash.
-      // https://developers.google.com/admob/android/test-ads
-      // https://developers.google.com/admob/ios/test-ads
-      adUnitId: BannerAd.testAdUnitId,
-      size: AdSize.banner,
-      targetingInfo: targetingInfo,
-      listener: (MobileAdEvent event) {
-        print("BannerAd event is $event");
-      },
-    );
+    Ads.showBannerAd(this);
   }
 
   @override
@@ -73,16 +57,6 @@ class _ColorState extends State<Color> {
 
   @override
   Widget build(BuildContext context) {
-    _myBanner
-    // typically this happens well before the ad is shown
-      ..load()
-      ..show(
-        // Positions the banner ad 60 pixels from the bottom of the screen
-        anchorOffset: 60.0,
-        // Banner Position
-        anchorType: AnchorType.bottom,
-      );
-
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
@@ -192,7 +166,9 @@ class _ColorState extends State<Color> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
-                          );
+                          ).then((result) {
+                            Ads.showBannerAd(this);
+                          });
                         },
                         child: Text(snapshot.data.toString()),
                       ),

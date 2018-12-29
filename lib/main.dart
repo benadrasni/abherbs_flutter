@@ -6,6 +6,52 @@ import 'package:abherbs_flutter/splash.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/keys.dart';
 
+class Ads {
+  static BannerAd _bannerAd;
+  static bool _isShown = false;
+
+  static void showBannerAd([State state]) {
+    if (state != null && !state.mounted) return;
+    if (_bannerAd == null) setBannerAd();
+    if (!_isShown) {
+      _bannerAd
+        ..load()
+        ..show(anchorOffset: 60.0, anchorType: AnchorType.bottom).then((shown) {
+          _isShown = shown;
+        });
+    }
+  }
+
+  static void hideBannerAd() {
+    if (_bannerAd != null) {
+      _bannerAd.dispose().then((disposed) {
+        _isShown = !disposed;
+      });
+      _bannerAd = null;
+    }
+  }
+
+  static void setBannerAd() {
+    MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+      //keywords: <String>['flutterio', 'beautiful apps'],
+      //contentUrl: 'https://flutter.io',
+      childDirected: false,
+      testDevices: <String>[], // Android emulators are considered test devices
+    );
+    _bannerAd = BannerAd(
+      // Replace the testAdUnitId with an ad unit id from the AdMob dash.
+      // https://developers.google.com/admob/android/test-ads
+      // https://developers.google.com/admob/ios/test-ads
+      adUnitId: BannerAd.testAdUnitId,
+      size: AdSize.banner,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        print("BannerAd event is $event");
+      },
+    );
+  }
+}
+
 void main() async => runApp(App());
 
 class App extends StatefulWidget {
@@ -28,15 +74,17 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
     FirebaseAdMob.instance.initialize(appId: adAppId);
+
     Prefs.init();
     Prefs.getStringF('pref_language').then((String language) {
-        onChangeLanguage(language);
+      onChangeLanguage(language);
     });
   }
 
   @override
   void dispose() {
     Prefs.dispose();
+    Ads.hideBannerAd();
     super.dispose();
   }
 
@@ -48,16 +96,19 @@ class _AppState extends State<App> {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               return MaterialApp(
-                  locale: snapshot.data,
-                  localizationsDelegates: [S.delegate, GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate,],
-                  supportedLocales: S.delegate.supportedLocales,
-                  localeResolutionCallback: S.delegate.resolution(fallback: new Locale("en", "")),
-                  home: Splash(this.onChangeLanguage),
+                locale: snapshot.data,
+                localizationsDelegates: [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                ],
+                supportedLocales: S.delegate.supportedLocales,
+                localeResolutionCallback: S.delegate.resolution(fallback: new Locale("en", "")),
+                home: Splash(this.onChangeLanguage),
               );
             default:
               return const CircularProgressIndicator();
           }
-        }
-    );
+        });
   }
 }

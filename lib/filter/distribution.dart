@@ -2,6 +2,7 @@ import 'package:abherbs_flutter/constants.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
@@ -36,7 +37,9 @@ class _DistributionState extends State<Distribution> {
     var newFilter = new Map<String, String>();
     newFilter.addAll(_filter);
     newFilter[filterDistribution] = value;
-    Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+    Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter)).then((result) {
+      Ads.showBannerAd(this);
+    });
   }
 
   _setCount() {
@@ -66,6 +69,8 @@ class _DistributionState extends State<Distribution> {
     _setCount();
 
     setMyRegion();
+
+    Ads.showBannerAd(this);
   }
 
   @override
@@ -120,7 +125,9 @@ class _DistributionState extends State<Distribution> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
-                          );
+                          ).then((result) {
+                            Ads.showBannerAd(this);
+                          });
                         },
                         child: Text(snapshot.data.toString()),
                       ),
