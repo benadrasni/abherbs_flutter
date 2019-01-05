@@ -6,6 +6,8 @@ const String keyAlwaysMyRegion = "always_my_region";
 const String languageEnglish = "en";
 const String languageGTSuffix = "-GT";
 
+const String webUrl = "https://whatsthatflower.com/";
+
 const String storageEndpoit = "https://storage.googleapis.com/abherbs-resources/";
 const String storageFamilies = "families/";
 const String storagePhotos = "photos/";
