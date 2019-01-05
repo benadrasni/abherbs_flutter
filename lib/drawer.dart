@@ -1,8 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/settings/settings.dart';
-import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/constants.dart';
+import 'package:abherbs_flutter/filter/color.dart';
+import 'package:abherbs_flutter/filter/distribution.dart';
+import 'package:abherbs_flutter/filter/filter_utils.dart';
+import 'package:abherbs_flutter/filter/habitat.dart';
+import 'package:abherbs_flutter/filter/petal.dart';
+import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/main.dart';
+import 'package:abherbs_flutter/settings/settings.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -42,6 +47,31 @@ class _AppDrawerState extends State<AppDrawer> {
         leading: getFilterLeading(context, attribute),
         title: getFilterTitle(context, attribute),
         subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ""),
+        onTap: () {
+          Navigator.pop(context);
+          var route;
+          switch (attribute) {
+            case filterColor:
+              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, _filter));
+              break;
+            case filterHabitat:
+              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, _filter));
+              break;
+            case filterPetal:
+              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, _filter));
+              break;
+            case filterDistribution:
+              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, _filter));
+              break;
+          }
+          if (filterRoutes[attribute] != null) {
+            Navigator.removeRoute(context, filterRoutes[attribute]);
+          }
+          filterRoutes[attribute] = route;
+          Navigator.push(context, route).then((result) {
+            Ads.showBannerAd(this);
+          });
+        },
       );
     }));
     listItems.add(Divider());
