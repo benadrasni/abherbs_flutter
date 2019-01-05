@@ -8,6 +8,9 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:abherbs_flutter/filter/color.dart';
+import 'package:abherbs_flutter/filter/habitat.dart';
+import 'package:abherbs_flutter/filter/petal.dart';
 
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
@@ -98,7 +101,31 @@ class _DistributionState extends State<Distribution> {
           BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/petal.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_petal)),
         ],
         fixedColor: Colors.grey,
-        onTap: (index) {},
+        onTap: (index) {
+          var route;
+          var nextFilterAttribute;
+          switch (index) {
+            case 0:
+              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, _filter));
+              nextFilterAttribute = filterColor;
+              break;
+            case 1:
+              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, _filter));
+              nextFilterAttribute = filterHabitat;
+              break;
+            case 2:
+              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, _filter));
+              nextFilterAttribute = filterPetal;
+              break;
+          }
+          if (filterRoutes[nextFilterAttribute] != null) {
+            Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
+          }
+          filterRoutes[nextFilterAttribute] = route;
+          Navigator.push(context, route).then((result) {
+            Ads.showBannerAd(this);
+          });
+        },
       ),
       floatingActionButton: new Container(
         padding: EdgeInsets.only(bottom: 50.0),

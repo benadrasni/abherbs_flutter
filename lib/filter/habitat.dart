@@ -6,6 +6,9 @@ import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:abherbs_flutter/filter/color.dart';
+import 'package:abherbs_flutter/filter/distribution.dart';
+import 'package:abherbs_flutter/filter/petal.dart';
 
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
@@ -198,7 +201,31 @@ class _HabitatState extends State<Habitat> {
               title: Text(S.of(context).filter_distribution)),
         ],
         fixedColor: Colors.grey,
-        onTap: (index) {},
+        onTap: (index) {
+          var route;
+          var nextFilterAttribute;
+          switch (index) {
+            case 0:
+              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, _filter));
+              nextFilterAttribute = filterColor;
+              break;
+            case 1:
+              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, _filter));
+              nextFilterAttribute = filterPetal;
+              break;
+            case 2:
+              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, _filter));
+              nextFilterAttribute = filterDistribution;
+              break;
+          }
+          if (filterRoutes[nextFilterAttribute] != null) {
+            Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
+          }
+          filterRoutes[nextFilterAttribute] = route;
+          Navigator.push(context, route).then((result) {
+            Ads.showBannerAd(this);
+          });
+        },
       ),
       floatingActionButton: new Container(
         padding: EdgeInsets.only(bottom: 50.0),

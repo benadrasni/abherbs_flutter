@@ -1,6 +1,9 @@
 import 'package:abherbs_flutter/constants.dart';
 import 'package:abherbs_flutter/drawer.dart';
+import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
+import 'package:abherbs_flutter/filter/habitat.dart';
+import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/plant_list.dart';
@@ -134,12 +137,54 @@ class _ColorState extends State<Color> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/habitat.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_habitat)),
-          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/petal.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_petal)),
-          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/distribution.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_distribution)),
+          BottomNavigationBarItem(
+              icon: Image(
+                image: AssetImage('res/images/habitat.png'),
+                width: 25.0,
+                height: 25.0,
+              ),
+              title: Text(S.of(context).filter_habitat)),
+          BottomNavigationBarItem(
+              icon: Image(
+                image: AssetImage('res/images/petal.png'),
+                width: 25.0,
+                height: 25.0,
+              ),
+              title: Text(S.of(context).filter_petal)),
+          BottomNavigationBarItem(
+              icon: Image(
+                image: AssetImage('res/images/distribution.png'),
+                width: 25.0,
+                height: 25.0,
+              ),
+              title: Text(S.of(context).filter_distribution)),
         ],
         fixedColor: Colors.grey,
-        onTap: (index) {},
+        onTap: (index) {
+          var route;
+          var nextFilterAttribute;
+          switch (index) {
+            case 0:
+              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, _filter));
+              nextFilterAttribute = filterHabitat;
+              break;
+            case 1:
+              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, _filter));
+              nextFilterAttribute = filterPetal;
+              break;
+            case 2:
+              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, _filter));
+              nextFilterAttribute = filterDistribution;
+              break;
+          }
+          if (filterRoutes[nextFilterAttribute] != null) {
+            Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
+          }
+          filterRoutes[nextFilterAttribute] = route;
+          Navigator.push(context, route).then((result) {
+            Ads.showBannerAd(this);
+          });
+        },
       ),
       floatingActionButton: Container(
         padding: EdgeInsets.only(bottom: 50.0),
