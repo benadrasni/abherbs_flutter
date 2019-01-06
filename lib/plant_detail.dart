@@ -81,7 +81,7 @@ class _PlantDetailState extends State<PlantDetail> {
                 builder: (BuildContext context, AsyncSnapshot<PlantTranslation> snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.waiting:
-                      return const CircularProgressIndicator();
+                      return Column( mainAxisAlignment: MainAxisAlignment.center, children: [CircularProgressIndicator()]);
                     default:
                       return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                         Text(
