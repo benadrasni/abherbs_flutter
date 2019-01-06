@@ -8,16 +8,16 @@ import 'package:abherbs_flutter/keys.dart';
 
 class Ads {
   static BannerAd _bannerAd;
-  static bool _isShown = false;
+  static bool isShown = false;
 
   static void showBannerAd([State state]) {
     if (state != null && !state.mounted) return;
     if (_bannerAd == null) setBannerAd();
-    if (!_isShown) {
+    if (!isShown) {
       _bannerAd
         ..load()
         ..show(anchorOffset: 60.0, anchorType: AnchorType.bottom).then((shown) {
-          _isShown = shown;
+          isShown = shown;
         });
     }
   }
@@ -25,7 +25,7 @@ class Ads {
   static void hideBannerAd() {
     if (_bannerAd != null) {
       _bannerAd.dispose().then((disposed) {
-        _isShown = !disposed;
+        isShown = !disposed;
       });
       _bannerAd = null;
     }

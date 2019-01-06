@@ -22,6 +22,7 @@ class AppDrawer extends StatefulWidget {
 
 class _AppDrawerState extends State<AppDrawer> {
   Map<String, String> _filter;
+  bool _adsWasShown;
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -36,6 +37,17 @@ class _AppDrawerState extends State<AppDrawer> {
     super.initState();
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
+
+    _adsWasShown = Ads.isShown;
+    Ads.hideBannerAd();
+  }
+
+  @override
+  void dispose() {
+    if (_adsWasShown) {
+      Ads.showBannerAd();
+    }
+    super.dispose();
   }
 
   @override
