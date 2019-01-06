@@ -14,6 +14,8 @@ class PlantTranslation {
   String herbalism;
   String trivia;
 
+  PlantTranslation();
+
   PlantTranslation.fromJson(Map data) {
     label = data['label'];
     names = data['names'];
@@ -67,6 +69,55 @@ class PlantTranslation {
     return this;
   }
 
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> result = {};
+    if (label != null) {
+      result['label'] = label;
+    }
+    if (names != null) {
+      result['names'] = names;
+    }
+    if (sourceUrls != null) {
+      result['sourceUrls'] = sourceUrls;
+    }
+    if (wikipedia != null) {
+      result['wikipedia'] = wikipedia;
+    }
+
+    if (description != null) {
+      result['description'] = description;
+    }
+    if (flower != null) {
+      result['flower'] = flower;
+    }
+    if (inflorescence != null) {
+      result['inflorescence'] = inflorescence;
+    }
+    if (fruit != null) {
+      result['fruit'] = fruit;
+    }
+    if (leaf != null) {
+      result['leaf'] = leaf;
+    }
+    if (stem != null) {
+      result['stem'] = stem;
+    }
+    if (habitat != null) {
+      result['habitat'] = habitat;
+    }
+    if (toxicity != null) {
+      result['toxicity'] = toxicity;
+    }
+    if (herbalism != null) {
+      result['herbalism'] = herbalism;
+    }
+    if (trivia != null) {
+      result['trivia'] = trivia;
+    }
+
+    return result;
+  }
+
   bool isTranslated() {
     return description != null && flower != null && inflorescence != null && fruit != null && leaf != null && stem != null && habitat != null;
   }
@@ -107,46 +158,57 @@ class PlantTranslation {
   }
 
   PlantTranslation fillTranslations(List<String> translations, PlantTranslation plantTranslationOriginal) {
+    PlantTranslation onlyGoogleTranslation = new PlantTranslation();
     if (description == null && plantTranslationOriginal.description != null && translations.length > 0) {
       description = translations.first;
+      onlyGoogleTranslation.description = description;
       translations.removeAt(0);
     }
     if (flower == null && plantTranslationOriginal.flower != null && translations.length > 0) {
       flower = translations.first;
+      onlyGoogleTranslation.flower = flower;
       translations.removeAt(0);
     }
     if (inflorescence == null && plantTranslationOriginal.inflorescence != null && translations.length > 0) {
       inflorescence = translations.first;
+      onlyGoogleTranslation.inflorescence = inflorescence;
       translations.removeAt(0);
     }
     if (fruit == null && plantTranslationOriginal.fruit != null && translations.length > 0) {
       fruit = translations.first;
+      onlyGoogleTranslation.fruit = fruit;
       translations.removeAt(0);
     }
     if (leaf == null && plantTranslationOriginal.leaf != null && translations.length > 0) {
       leaf = translations.first;
+      onlyGoogleTranslation.leaf = leaf;
       translations.removeAt(0);
     }
     if (stem == null && plantTranslationOriginal.stem != null && translations.length > 0) {
       stem = translations.first;
+      onlyGoogleTranslation.stem = stem;
       translations.removeAt(0);
     }
     if (habitat == null && plantTranslationOriginal.habitat != null && translations.length > 0) {
       habitat = translations.first;
+      onlyGoogleTranslation.habitat = habitat;
       translations.removeAt(0);
     }
     if (toxicity == null && plantTranslationOriginal.toxicity != null && translations.length > 0) {
       toxicity = translations.first;
+      onlyGoogleTranslation.toxicity = toxicity;
       translations.removeAt(0);
     }
     if (herbalism == null && plantTranslationOriginal.herbalism != null && translations.length > 0) {
       herbalism = translations.first;
+      onlyGoogleTranslation.herbalism = herbalism;
       translations.removeAt(0);
     }
     if (trivia == null && plantTranslationOriginal.trivia != null && translations.length > 0) {
       trivia = translations.first;
+      onlyGoogleTranslation.trivia = trivia;
       translations.removeAt(0);
     }
-    return this;
+    return onlyGoogleTranslation;
   }
 }

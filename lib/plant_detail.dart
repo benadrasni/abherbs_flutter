@@ -75,7 +75,13 @@ class _PlantDetailState extends State<PlantDetail> {
               return http.get(uri).then((response) {
                 if (response.statusCode == 200) {
                   Translations translations = Translations.fromJson(json.decode(response.body));
-                  return plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
+                  PlantTranslation onlyGoogleTranslation = plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
+                  translationsReference
+                      .child(widget.myLocale.languageCode + languageGTSuffix)
+                      .child(widget.plantName).set(onlyGoogleTranslation.toJson()).catchError((error) {
+                        print(error.toString());
+                  });
+                  return plantTranslation;
                 } else {
                   return plantTranslation.mergeWith(plantTranslationOriginal);
                 }
