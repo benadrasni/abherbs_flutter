@@ -5,7 +5,11 @@ import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/main.dart';
+import 'package:abherbs_flutter/keys.dart';
+import 'package:abherbs_flutter/entity/translations.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 final plantsReference = FirebaseDatabase.instance.reference().child(firebasePlants);
 final translationsReference = FirebaseDatabase.instance.reference().child(firebaseTranslations);
@@ -37,28 +41,49 @@ class _PlantDetailState extends State<PlantDetail> {
 
     _plantTranslationF = translationsReference.child(widget.myLocale.languageCode).child(widget.plantName).once().then((DataSnapshot snapshot) {
       var plantTranslation = PlantTranslation.fromJson(snapshot.value);
-      if (plantTranslation.isTranslated)
+      if (plantTranslation != null && plantTranslation.isTranslated()) {
         return plantTranslation;
-      else
+      } else {
         return translationsReference
             .child(widget.myLocale.languageCode + languageGTSuffix)
             .child(widget.plantName)
             .once()
             .then((DataSnapshot snapshot) {
-          var plantTranslationGT = PlantTranslation.fromJson(snapshot.value);
-          plantTranslationGT.copyFrom(plantTranslation);
+          var plantTranslationGT = PlantTranslation.copy(plantTranslation);
+          if (snapshot.value != null) {
+            plantTranslationGT = PlantTranslation.fromJson(snapshot.value);
+            plantTranslationGT.mergeWith(plantTranslation);
+          }
           if (plantTranslationGT.label == null) {
             plantTranslationGT.label = widget.plantName;
           }
-          if (plantTranslationGT.isTranslated)
+          if (plantTranslationGT.isTranslated()) {
             return plantTranslationGT;
-          else
-            return translationsReference.child(languageEnglish).child(widget.plantName).once().then((DataSnapshot snapshot) {
-              var plantTranslationEn = PlantTranslation.fromJson(snapshot.value);
-
-              return plantTranslationGT;
+          } else {
+            return translationsReference
+                .child(widget.myLocale.languageCode == 'cs' ? languageSlovak : languageEnglish)
+                .child(widget.plantName)
+                .once()
+                .then((DataSnapshot snapshot) {
+              var plantTranslationOriginal = PlantTranslation.fromJson(snapshot.value);
+              var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
+              uri += '&source=' + ('cs' == widget.myLocale.languageCode ? 'sk' : 'en');
+              uri += '&target=' + widget.myLocale.languageCode;
+              for(var text in plantTranslation.getTextsToTranslate(plantTranslationOriginal)) {
+                uri += '&q=' + text;
+              }
+              return http.get(uri).then((response) {
+                if (response.statusCode == 200) {
+                  Translations translations = Translations.fromJson(json.decode(response.body));
+                  return plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
+                } else {
+                  return plantTranslation.mergeWith(plantTranslationOriginal);
+                }
+              });
             });
+          }
         });
+      }
     });
   }
 
@@ -80,9 +105,7 @@ class _PlantDetailState extends State<PlantDetail> {
                 future: _plantTranslationF,
                 builder: (BuildContext context, AsyncSnapshot<PlantTranslation> snapshot) {
                   switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return Column( mainAxisAlignment: MainAxisAlignment.center, children: [CircularProgressIndicator()]);
-                    default:
+                    case ConnectionState.done:
                       return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                         Text(
                           snapshot.data.label,
@@ -101,6 +124,8 @@ class _PlantDetailState extends State<PlantDetail> {
                           textAlign: TextAlign.center,
                         ),
                       ]);
+                    default:
+                      return Column(mainAxisAlignment: MainAxisAlignment.center, children: [CircularProgressIndicator()]);
                   }
                 },
               ),
