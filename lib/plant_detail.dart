@@ -78,9 +78,7 @@ class _PlantDetailState extends State<PlantDetail> {
                   PlantTranslation onlyGoogleTranslation = plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
                   translationsReference
                       .child(widget.myLocale.languageCode + languageGTSuffix)
-                      .child(widget.plantName).set(onlyGoogleTranslation.toJson()).catchError((error) {
-                        print(error.toString());
-                  });
+                      .child(widget.plantName).set(onlyGoogleTranslation.toJson());
                   return plantTranslation;
                 } else {
                   return plantTranslation.mergeWith(plantTranslationOriginal);
