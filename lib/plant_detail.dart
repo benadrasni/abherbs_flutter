@@ -69,7 +69,7 @@ class _PlantDetailState extends State<PlantDetail> {
               var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
               uri += '&source=' + ('cs' == widget.myLocale.languageCode ? 'sk' : 'en');
               uri += '&target=' + widget.myLocale.languageCode;
-              for(var text in plantTranslation.getTextsToTranslate(plantTranslationOriginal)) {
+              for (var text in plantTranslation.getTextsToTranslate(plantTranslationOriginal)) {
                 uri += '&q=' + text;
               }
               return http.get(uri).then((response) {
@@ -78,7 +78,8 @@ class _PlantDetailState extends State<PlantDetail> {
                   PlantTranslation onlyGoogleTranslation = plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
                   translationsReference
                       .child(widget.myLocale.languageCode + languageGTSuffix)
-                      .child(widget.plantName).set(onlyGoogleTranslation.toJson());
+                      .child(widget.plantName)
+                      .set(onlyGoogleTranslation.toJson());
                   return plantTranslation;
                 } else {
                   return plantTranslation.mergeWith(plantTranslationOriginal);
@@ -98,45 +99,225 @@ class _PlantDetailState extends State<PlantDetail> {
         title: Text(widget.plantName),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.filter, null),
-      body: ListView(
-        shrinkWrap: true,
-        padding: EdgeInsets.all(5.0),
-        children: [
-          Card(
-            child: Container(
-              padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-              child: FutureBuilder<PlantTranslation>(
-                future: _plantTranslationF,
-                builder: (BuildContext context, AsyncSnapshot<PlantTranslation> snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.done:
-                      return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                        Text(
-                          snapshot.data.label,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22.0,
+      body: FutureBuilder<PlantTranslation>(
+          future: _plantTranslationF,
+          builder: (BuildContext context, AsyncSnapshot<PlantTranslation> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.done:
+                List<Widget> cards = [];
+                cards.add(Card(
+                  child: Container(
+                    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Text(
+                        snapshot.data.label,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22.0,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        snapshot.data.names == null ? '' : snapshot.data.names.take(3).join(', '),
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: 14.0,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
+                  ),
+                ));
+                cards.add(Card(
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(
+                        snapshot.data.description,
+                      ),
+                    ]),
+                  ),
+                ));
+                cards.add(Card(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      ListTile(
+                        title: Text(S.of(context).filter_color),
+                        leading: Image(
+                          image: AssetImage('res/images/ic_inflorescence_grey_24dp.png'),
+                          width: 24.0,
+                          height: 24.0,
+                        ),
+                      ),
+                      Text(
+                        snapshot.data.inflorescence,
+                      ),
+                    ]),
+                  ),
+                ));
+                cards.add(Card(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      ListTile(
+                        title: Text(S.of(context).filter_color),
+                        leading: Image(
+                          image: AssetImage('res/images/ic_flower_grey_24dp.png'),
+                          width: 24.0,
+                          height: 24.0,
+                        ),
+                      ),
+                      Text(
+                        snapshot.data.flower,
+                      ),
+                    ]),
+                  ),
+                ));
+                cards.add(Card(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      ListTile(
+                        title: Text(S.of(context).filter_color),
+                        leading: Image(
+                          image: AssetImage('res/images/ic_fruit_grey_24dp.png'),
+                          width: 24.0,
+                          height: 24.0,
+                        ),
+                      ),
+                      Text(
+                        snapshot.data.fruit,
+                      ),
+                    ]),
+                  ),
+                ));
+                cards.add(Card(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      ListTile(
+                        title: Text(S.of(context).filter_color),
+                        leading: Image(
+                          image: AssetImage('res/images/ic_leaf_grey_24dp.png'),
+                          width: 24.0,
+                          height: 24.0,
+                        ),
+                      ),
+                      Text(
+                        snapshot.data.leaf,
+                      ),
+                    ]),
+                  ),
+                ));
+                cards.add(Card(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      ListTile(
+                        title: Text(S.of(context).filter_color),
+                        leading: Image(
+                          image: AssetImage('res/images/ic_stem_grey_24dp.png'),
+                          width: 24.0,
+                          height: 24.0,
+                        ),
+                      ),
+                      Text(
+                        snapshot.data.stem,
+                      ),
+                    ]),
+                  ),
+                ));
+                cards.add(Card(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      ListTile(
+                        title: Text(S.of(context).filter_color),
+                        leading: Image(
+                          image: AssetImage('res/images/ic_home_grey_24dp.png'),
+                          width: 24.0,
+                          height: 24.0,
+                        ),
+                      ),
+                      Text(
+                        snapshot.data.habitat,
+                      ),
+                    ]),
+                  ),
+                ));
+
+                // optional attributes
+                if (snapshot.data.toxicity != null) {
+                  cards.add(Card(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        ListTile(
+                          title: Text(S.of(context).filter_color),
+                          leading: Image(
+                            image: AssetImage('res/images/ic_toxicity_grey_24dp.png'),
+                            width: 24.0,
+                            height: 24.0,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                         Text(
-                          snapshot.data.names == null ? '' : snapshot.data.names.take(3).join(', '),
-                          style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            fontSize: 14.0,
-                          ),
-                          textAlign: TextAlign.center,
+                          snapshot.data.toxicity,
                         ),
-                      ]);
-                    default:
-                      return Column(mainAxisAlignment: MainAxisAlignment.center, children: [CircularProgressIndicator()]);
-                  }
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
+                      ]),
+                    ),
+                  ));
+                }
+                if (snapshot.data.herbalism != null) {
+                  cards.add(Card(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        ListTile(
+                          title: Text(S.of(context).filter_color),
+                          leading: Image(
+                            image: AssetImage('res/images/ic_local_pharmacy_grey_24dp.png'),
+                            width: 24.0,
+                            height: 24.0,
+                          ),
+                        ),
+                        Text(
+                          snapshot.data.herbalism,
+                        ),
+                      ]),
+                    ),
+                  ));
+                }
+                if (snapshot.data.trivia != null) {
+                  cards.add(Card(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                        ListTile(
+                          title: Text(S.of(context).filter_color),
+                          leading: Image(
+                            image: AssetImage('res/images/ic_question_mark_grey_24dp.png'),
+                            width: 24.0,
+                            height: 24.0,
+                          ),
+                        ),
+                        Text(
+                          snapshot.data.trivia,
+                        ),
+                      ]),
+                    ),
+                  ));
+                }
+
+                return ListView(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.all(5.0),
+                  children: cards,
+                );
+              default:
+                return Column(mainAxisAlignment: MainAxisAlignment.center, children: [CircularProgressIndicator()]);
+            }
+          }),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.info), title: Text(S.of(context).filter_habitat)),

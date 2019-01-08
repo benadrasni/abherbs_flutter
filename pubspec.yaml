@@ -131,6 +131,15 @@ flutter:
     - res/images/habitat.png
     - res/images/petal.png
     - res/images/distribution.png
+    - res/images/ic_flower_grey_24dp.png
+    - res/images/ic_fruit_grey_24dp.png
+    - res/images/ic_home_grey_24dp.png
+    - res/images/ic_inflorescence_grey_24dp.png
+    - res/images/ic_leaf_grey_24dp.png
+    - res/images/ic_local_pharmacy_grey_24dp.png
+    - res/images/ic_question_mark_grey_24dp.png
+    - res/images/ic_stem_grey_24dp.png
+    - res/images/ic_toxicity_grey_24dp.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
