@@ -89,5 +89,36 @@
   "southern_south_america": "Jih Jižní Ameriky",
   "eastern_canada": "Východní Kanada",
   "subantarctic_islands": "Subantarktické ostrovy",
-  "antarctic_continent": "Antarktický kontinent"
+  "antarctic_continent": "Antarktický kontinent",
+  
+  "plant_height_from": "Výška od",
+  "plant_height_to": "do",
+  "plant_flowering_from": "Kvete od",
+  "plant_flowering_to": "do",
+  "plant_flower": "Květ",
+  "plant_inflorescence": "Květenství",
+  "plant_fruit": "Plod",
+  "plant_leaf": "List",
+  "plant_stem": "Lodyha",
+  "plant_habitat": "Ekologie",
+  "plant_toxicity": "Toxicita",
+  "plant_herbalism": "Bylinářství",
+
+  "taxonomy_superregnum": "doména",
+  "taxonomy_regnum": "říše",
+  "taxonomy_cladus": "(klad)",
+  "taxonomy_ordo": "řád",
+  "taxonomy_familia": "čeleď",
+  "taxonomy_subfamilia": "podčeleď",
+  "taxonomy_tribus": "seskupení",
+  "taxonomy_subtribus": "podseskupení",
+  "taxonomy_genus": "rod",
+  "taxonomy_subgenus": "Subgenus",
+  "taxonomy_sectio": "Sectio",
+  "taxonomy_subsectio": "Subsectio",
+  "taxonomy_serie": "Serie",
+  "taxonomy_subserie": "Subserie",
+  "taxonomy_supersectio": "Supersectio</string
+  "taxonomy_species": "druh",
+  "taxonomy_unknown": "neznámý"
 }
