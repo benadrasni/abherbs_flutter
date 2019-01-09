@@ -141,6 +141,7 @@ flutter:
     - res/images/ic_stem_grey_24dp.png
     - res/images/ic_toxicity_grey_24dp.png
     - res/images/berkeley.png
+    - res/images/botany.png
     - res/images/commons.png
     - res/images/eflora.png
     - res/images/floranordica.png

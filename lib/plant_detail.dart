@@ -14,22 +14,22 @@ import 'dart:convert';
 final plantsReference = FirebaseDatabase.instance.reference().child(firebasePlants);
 final translationsReference = FirebaseDatabase.instance.reference().child(firebaseTranslations);
 
-const String SOURCE_WIKIPEDIA = "wikipedia";
-const String SOURCE_WIKIMEDIA_COMMONS = "commons.wikimedia.org";
-const String SOURCE_WIKIMEDIA_COMMONS_TITLE = "commons";
-const String SOURCE_WIKIMEDIA_SPECIES = "species.wikimedia.org";
-const String SOURCE_WIKIMEDIA_SPECIES_TITLE = "species";
-const String SOURCE_WIKIMEDIA_DATA = "wikidata.org";
-const String SOURCE_WIKIMEDIA_DATA_TITLE = "wikidata";
-const String SOURCE_LUONTOPORTTI = "luontoportti.com";
-const String SOURCE_BOTANY = "botany.cz";
-const String SOURCE_FLORANORDICA = "floranordica.org";
-const String SOURCE_EFLORA = "efloras.org";
-const String SOURCE_BERKELEY = "berkeley.edu";
-const String SOURCE_HORTIPEDIA = "hortipedia.com";
-const String SOURCE_USDA = "plants.usda.gov";
-const String SOURCE_USFS = "forestryimages.org";
-const String SOURCE_TELABOTANICA = "tela-botanica.org";
+const String sourceWikipedia = "wikipedia";
+const String sourceWikimediaCommons = "commons.wikimedia.org";
+const String sourceWikimediaCommonsTitle = "commons";
+const String sourceWikimediaSpecies = "species.wikimedia.org";
+const String sourceWikimediaSpeciesTitle = "species";
+const String sourceWikimediaData = "wikidata.org";
+const String sourceWikimediaDataTitle = "wikidata";
+const String sourceLuontoportii = "luontoportti.com";
+const String sourceBotany = "botany.cz";
+const String sourceFloraNordica = "floranordica.org";
+const String sourceEflora = "efloras.org";
+const String sourceBerkeley = "berkeley.edu";
+const String sourceHortipedia = "hortipedia.com";
+const String sourceUsda = "plants.usda.gov";
+const String sourceUsfs = "forestryimages.org";
+const String sourceTelaBotanica = "tela-botanica.org";
 
 class PlantDetail extends StatefulWidget {
   final Locale myLocale;
@@ -85,48 +85,49 @@ class _PlantDetailState extends State<PlantDetail> {
   }
 
   FlatButton _getSourceButton(String url) {
+    assert(url.contains('//') && url.contains('/'), url.indexOf('//')+2);
     String imageSource = 'res/images/internet.png';
-    String textSource = '';
+    String textSource = url.substring(url.indexOf('//')+2, url.indexOf('/', url.indexOf('//')+2));
 
-    if (url.contains(SOURCE_WIKIPEDIA)) {
+    if (url.contains(sourceWikipedia)) {
       imageSource = 'res/images/wikipedia.png';
-      textSource = SOURCE_WIKIPEDIA;
-    } else if (url.contains(SOURCE_WIKIMEDIA_COMMONS)) {
+      textSource = sourceWikipedia;
+    } else if (url.contains(sourceWikimediaCommons)) {
       imageSource = 'res/images/commons.png';
-      textSource = SOURCE_WIKIMEDIA_COMMONS_TITLE;
-    } else if (url.contains(SOURCE_WIKIMEDIA_DATA)) {
+      textSource = sourceWikimediaCommonsTitle;
+    } else if (url.contains(sourceWikimediaData)) {
       imageSource = 'res/images/wikidata.png';
-      textSource = SOURCE_WIKIMEDIA_DATA_TITLE;
-    }  else if (url.contains(SOURCE_WIKIMEDIA_SPECIES)) {
+      textSource = sourceWikimediaDataTitle;
+    }  else if (url.contains(sourceWikimediaSpecies)) {
       imageSource = 'res/images/species.png';
-      textSource = SOURCE_WIKIMEDIA_SPECIES_TITLE;
-    } else if (url.contains(SOURCE_LUONTOPORTTI)) {
+      textSource = sourceWikimediaSpeciesTitle;
+    } else if (url.contains(sourceLuontoportii)) {
       imageSource = 'res/images/luontoportti.png';
-      textSource = SOURCE_LUONTOPORTTI;
-    } else if (url.contains(SOURCE_BOTANY)) {
+      textSource = sourceLuontoportii;
+    } else if (url.contains(sourceBotany)) {
       imageSource = 'res/images/botany.png';
-      textSource = SOURCE_BOTANY;
-    } else if (url.contains(SOURCE_FLORANORDICA)) {
+      textSource = sourceBotany;
+    } else if (url.contains(sourceFloraNordica)) {
       imageSource = 'res/images/floranordica.png';
-      textSource = SOURCE_FLORANORDICA;
-    } else if (url.contains(SOURCE_EFLORA)) {
+      textSource = sourceFloraNordica;
+    } else if (url.contains(sourceEflora)) {
       imageSource = 'res/images/eflora.png';
-      textSource = SOURCE_EFLORA;
-    } else if (url.contains(SOURCE_BERKELEY)) {
+      textSource = sourceEflora;
+    } else if (url.contains(sourceBerkeley)) {
       imageSource = 'res/images/berkeley.png';
-      textSource = SOURCE_BERKELEY;
-    } else if (url.contains(SOURCE_HORTIPEDIA)) {
+      textSource = sourceBerkeley;
+    } else if (url.contains(sourceHortipedia)) {
       imageSource = 'res/images/hortipedia.png';
-      textSource = SOURCE_HORTIPEDIA;
-    } else if (url.contains(SOURCE_USDA)) {
+      textSource = sourceHortipedia;
+    } else if (url.contains(sourceUsda)) {
       imageSource = 'res/images/usda.png';
-      textSource = SOURCE_USDA;
-    } else if (url.contains(SOURCE_USFS)) {
+      textSource = sourceUsda;
+    } else if (url.contains(sourceUsfs)) {
       imageSource = 'res/images/usfs.png';
-      textSource = SOURCE_USFS;
-    } else if (url.contains(SOURCE_TELABOTANICA)) {
+      textSource = sourceUsfs;
+    } else if (url.contains(sourceTelaBotanica)) {
       imageSource = 'res/images/tela_botanica.png';
-      textSource = SOURCE_TELABOTANICA;
+      textSource = sourceTelaBotanica;
     }
 
     return FlatButton(
@@ -145,6 +146,33 @@ class _PlantDetailState extends State<PlantDetail> {
       onPressed: () {
         launchURL(url);
       },
+    );
+  }
+
+  RichText _getRichText(String text) {
+    var sections = <TextSpan>[];
+    for (String part in text.split('<b>')) {
+      if (part.isNotEmpty) {
+        var subParts = part.split('</b>');
+        if (subParts.length == 1) {
+          sections.add(TextSpan(text: subParts[0]));
+        } else {
+          sections.add(TextSpan(text: subParts[0], style: new TextStyle(fontWeight: FontWeight.bold)));
+          sections.add(TextSpan(text: subParts[1]));
+        }
+      }
+    }
+
+    return RichText(
+      text: TextSpan(
+        // Note: Styles for TextSpans must be explicitly defined.
+        // Child text spans will inherit styles from parent
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.black,
+        ),
+        children: sections,
+      ),
     );
   }
 
@@ -251,9 +279,7 @@ class _PlantDetailState extends State<PlantDetail> {
                   child: Container(
                     padding: EdgeInsets.all(10.0),
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(
-                        snapshot.data.description,
-                      ),
+                        _getRichText(snapshot.data.description),
                     ]),
                   ),
                 ));
@@ -269,9 +295,7 @@ class _PlantDetailState extends State<PlantDetail> {
                           height: 24.0,
                         ),
                       ),
-                      Text(
-                        snapshot.data.inflorescence,
-                      ),
+                      _getRichText(snapshot.data.inflorescence),
                     ]),
                   ),
                 ));
@@ -287,9 +311,7 @@ class _PlantDetailState extends State<PlantDetail> {
                           height: 24.0,
                         ),
                       ),
-                      Text(
-                        snapshot.data.flower,
-                      ),
+                      _getRichText(snapshot.data.flower),
                     ]),
                   ),
                 ));
@@ -305,9 +327,7 @@ class _PlantDetailState extends State<PlantDetail> {
                           height: 24.0,
                         ),
                       ),
-                      Text(
-                        snapshot.data.fruit,
-                      ),
+                      _getRichText(snapshot.data.fruit),
                     ]),
                   ),
                 ));
@@ -323,9 +343,7 @@ class _PlantDetailState extends State<PlantDetail> {
                           height: 24.0,
                         ),
                       ),
-                      Text(
-                        snapshot.data.leaf,
-                      ),
+                      _getRichText(snapshot.data.leaf),
                     ]),
                   ),
                 ));
@@ -341,9 +359,7 @@ class _PlantDetailState extends State<PlantDetail> {
                           height: 24.0,
                         ),
                       ),
-                      Text(
-                        snapshot.data.stem,
-                      ),
+                      _getRichText(snapshot.data.stem),
                     ]),
                   ),
                 ));
@@ -359,9 +375,7 @@ class _PlantDetailState extends State<PlantDetail> {
                           height: 24.0,
                         ),
                       ),
-                      Text(
-                        snapshot.data.habitat,
-                      ),
+                      _getRichText(snapshot.data.habitat),
                     ]),
                   ),
                 ));
@@ -380,9 +394,7 @@ class _PlantDetailState extends State<PlantDetail> {
                             height: 24.0,
                           ),
                         ),
-                        Text(
-                          snapshot.data.toxicity,
-                        ),
+                        _getRichText(snapshot.data.toxicity),
                       ]),
                     ),
                   ));
@@ -400,9 +412,7 @@ class _PlantDetailState extends State<PlantDetail> {
                             height: 24.0,
                           ),
                         ),
-                        Text(
-                          snapshot.data.herbalism,
-                        ),
+                        _getRichText(snapshot.data.herbalism),
                       ]),
                     ),
                   ));
@@ -420,9 +430,7 @@ class _PlantDetailState extends State<PlantDetail> {
                             height: 24.0,
                           ),
                         ),
-                        Text(
-                          snapshot.data.trivia,
-                        ),
+                        _getRichText(snapshot.data.trivia),
                       ]),
                     ),
                   ));
