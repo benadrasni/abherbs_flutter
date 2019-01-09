@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/entity/translations.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/main.dart';
+import 'package:abherbs_flutter/detail/plant_detail_gallery.dart';
 import 'package:abherbs_flutter/detail/plant_detail_info.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -119,6 +120,8 @@ class _PlantDetailState extends State<PlantDetail> {
     switch (_currentIndex) {
       case 0:
         return getInfo(context, widget.myLocale, _plantF, _plantTranslationF);
+      case 1:
+        return getGallery(context, _plantF);
     }
   }
 

@@ -24,6 +24,9 @@ class Plant{
     heightFrom = data['heightFrom'] ?? 0;
     heightTo = data['heightTo'] ?? 0;
     toxicityClass = data['toxicityClass'] ?? 0;
+    illustrationUrl = data['illustrationUrl'];
+    photoUrls = data['photoUrls'];
+    sourceUrls = data['sourceUrls'];
     wikiLinks = data['wikilinks'];
   }
 }

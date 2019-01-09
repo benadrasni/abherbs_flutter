@@ -384,7 +384,7 @@ List<Widget> _getSources(Plant plant, PlantTranslation plantTranslation) {
       var sourceButtons = <Widget>[];
       for (int j = 0; j < 3; j++) {
         if (i + j < sources.length) {
-          sourceButtons.add(_getSourceButton(sources[i + j]));
+          sourceButtons.add(getSourceButton(sources[i + j]));
         }
       }
       rows.add(Row(
@@ -396,7 +396,7 @@ List<Widget> _getSources(Plant plant, PlantTranslation plantTranslation) {
   return rows;
 }
 
-FlatButton _getSourceButton(String url) {
+FlatButton getSourceButton(String url) {
   assert(url.contains('//') && url.contains('/'), url.indexOf('//') + 2);
   String imageSource = 'res/images/internet.png';
   String textSource = url.substring(url.indexOf('//') + 2, url.indexOf('/', url.indexOf('//') + 2));
