@@ -3101,7 +3101,7 @@ class $sk extends S {
   @override
   String get plant_herbalism => "Bylinkárstvo";
   @override
-  String get plant_height_to => "do";
+  String get plant_height_to => "-";
   @override
   String get habitat_wetland => "mokrade a močiare";
   @override
@@ -3137,7 +3137,7 @@ class $sk extends S {
   @override
   String get plant_fruit => "Plody";
   @override
-  String get plant_flowering_to => "do";
+  String get plant_flowering_to => "-";
   @override
   String get taxonomy_familia => "čeľaď";
   @override
@@ -3149,7 +3149,7 @@ class $sk extends S {
   @override
   String get south_central_usa => "Stredojuh USA";
   @override
-  String get plant_flowering_from => "Kvitne od";
+  String get plant_flowering_from => "Kvitne:";
   @override
   String get taxonomy_tribus => "skupina";
   @override
@@ -3177,7 +3177,7 @@ class $sk extends S {
   @override
   String get southeastern_usa => "Juhovýchod USA";
   @override
-  String get plant_height_from => "Výška od";
+  String get plant_height_from => "Výška:";
   @override
   String get petal_many => "viac ako 5";
   @override

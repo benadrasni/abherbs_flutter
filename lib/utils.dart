@@ -7,6 +7,7 @@ const String keyAlwaysMyRegion = "always_my_region";
 const String languageEnglish = "en";
 const String languageSlovak = "sk";
 const String languageGTSuffix = "-GT";
+const String heightUnitOfMeasure = "cm";
 
 const String webUrl = "https://whatsthatflower.com/";
 const String googleTranslateEndpoint = "https://translation.googleapis.com/language/translate/v2";
