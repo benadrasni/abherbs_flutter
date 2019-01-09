@@ -44,7 +44,7 @@ class _PlantListState extends State<PlantList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).filter_color),
+        title: Text(S.of(context).list_info),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.filter, null),
       body: Container(

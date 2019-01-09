@@ -1,5 +1,6 @@
 import 'package:abherbs_flutter/detail/plant_detail_info.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
+import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -71,7 +72,7 @@ Widget getGallery(BuildContext context, Future<Plant> _plantF) {
                 padding: EdgeInsets.all(10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: _getSources(snapshot.data.sourceUrls),
+                  children: _getSources(context, snapshot.data.sourceUrls),
                 ),
               ),
             ));
@@ -87,7 +88,7 @@ Widget getGallery(BuildContext context, Future<Plant> _plantF) {
       });
 }
 
-List<Widget> _getSources(List<dynamic> sourceUrls) {
+List<Widget> _getSources(BuildContext context, List<dynamic> sourceUrls) {
   var rows = <Widget>[];
 
   var sources = [];
@@ -96,7 +97,7 @@ List<Widget> _getSources(List<dynamic> sourceUrls) {
   }
   if (sources != null) {
     rows.add(Text(
-      'Sources',
+      S.of(context).plant_sources,
       style: TextStyle(
         fontSize: 22.0,
       ),

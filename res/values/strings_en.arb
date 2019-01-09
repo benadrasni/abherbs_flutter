@@ -7,9 +7,9 @@
   "pref_language": "Preferred language",
   "my_region": "My region",
 
-  "filter_color": "colour of flowers",
-  "filter_habitat": "habitats",
-  "filter_petal": "number of petals",
+  "filter_color": "colour",
+  "filter_habitat": "habitat",
+  "filter_petal": "petal",
   "filter_distribution": "distribution",
 
   "color_white": "white",
@@ -90,6 +90,13 @@
   "eastern_canada": "Eastern Canada",
   "subantarctic_islands": "Subantarctic Islands",
   "antarctic_continent": "Antarctic Continent",
+
+  "list_info": "Pick one",
+
+  "plant_info": "Info",
+  "plant_gallery": "Gallery",
+  "plant_taxonomy": "Taxonomy",
+  "plant_sources": "Sources",
 
   "plant_height_from": "Height from",
   "plant_height_to": "to",

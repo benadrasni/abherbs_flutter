@@ -43,10 +43,10 @@ class S implements WidgetsLocalizations {
   String get eastern_europe => "Eastern Europe";
   String get europe => "Europe";
   String get feedback => "Feedback";
-  String get filter_color => "colour of flowers";
+  String get filter_color => "colour";
   String get filter_distribution => "distribution";
-  String get filter_habitat => "habitats";
-  String get filter_petal => "number of petals";
+  String get filter_habitat => "habitat";
+  String get filter_petal => "petal";
   String get habitat_forest => "woodlands or forests";
   String get habitat_garden => "gardens or fields";
   String get habitat_meadow => "meadows or grasslands";
@@ -56,6 +56,7 @@ class S implements WidgetsLocalizations {
   String get help => "Help";
   String get indian_subcontinent => "Indian Subcontinent";
   String get indochina => "Indo-China";
+  String get list_info => "Pick one";
   String get macaronesia => "Macaronesia";
   String get malesia => "Malesia";
   String get mexico => "Mexico";
@@ -85,13 +86,17 @@ class S implements WidgetsLocalizations {
   String get plant_flowering_from => "Flowering from";
   String get plant_flowering_to => "to";
   String get plant_fruit => "Fruit";
+  String get plant_gallery => "Gallery";
   String get plant_habitat => "Habitat";
   String get plant_height_from => "Height from";
   String get plant_height_to => "to";
   String get plant_herbalism => "Herbalism";
   String get plant_inflorescence => "Inflorescence";
+  String get plant_info => "Info";
   String get plant_leaf => "Leaf";
+  String get plant_sources => "Sources";
   String get plant_stem => "Stem";
+  String get plant_taxonomy => "Taxonomy";
   String get plant_toxicity => "Toxicity";
   String get plant_trivia => "Trivia";
   String get pref_language => "Preferred language";
@@ -5335,7 +5340,7 @@ class $en_US extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get filter_color => "color of flowers";
+  String get filter_color => "color";
 }
 
 class $ja extends S {

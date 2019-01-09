@@ -222,7 +222,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Future<Plant> _plantF, Fut
                     padding: EdgeInsets.all(10.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: _getSources(plantSnapshot.data, snapshot.data),
+                      children: _getSources(context, plantSnapshot.data, snapshot.data),
                     ),
                   );
                 } else {
@@ -358,7 +358,7 @@ List<Widget> _getDescription(BuildContext context, Locale myLocale, Plant plant,
   return descriptionWidgets;
 }
 
-List<Widget> _getSources(Plant plant, PlantTranslation plantTranslation) {
+List<Widget> _getSources(BuildContext context, Plant plant, PlantTranslation plantTranslation) {
   var rows = <Widget>[];
 
   var sources = [];
@@ -373,7 +373,7 @@ List<Widget> _getSources(Plant plant, PlantTranslation plantTranslation) {
   }
   if (sources != null) {
     rows.add(Text(
-      'Sources',
+      S.of(context).plant_sources,
       style: TextStyle(
         fontSize: 22.0,
       ),
