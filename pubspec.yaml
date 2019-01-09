@@ -140,6 +140,19 @@ flutter:
     - res/images/ic_question_mark_grey_24dp.png
     - res/images/ic_stem_grey_24dp.png
     - res/images/ic_toxicity_grey_24dp.png
+    - res/images/berkeley.png
+    - res/images/commons.png
+    - res/images/eflora.png
+    - res/images/floranordica.png
+    - res/images/hortipedia.png
+    - res/images/internet.png
+    - res/images/luontoportti.png
+    - res/images/species.png
+    - res/images/tela_botanica.png
+    - res/images/usda.png
+    - res/images/usfs.png
+    - res/images/wikidata.png
+    - res/images/wikipedia.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,4 +1,4 @@
-import 'package:abherbs_flutter/constants.dart';
+import 'package:abherbs_flutter/utils.dart';
 import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
@@ -8,7 +8,6 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AppDrawer extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -23,14 +22,6 @@ class AppDrawer extends StatefulWidget {
 class _AppDrawerState extends State<AppDrawer> {
   Map<String, String> _filter;
   bool _adsWasShown;
-
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   @override
   void initState() {
@@ -109,14 +100,14 @@ class _AppDrawerState extends State<AppDrawer> {
       title: Text(S.of(context).help),
       onTap: () {
         Navigator.pop(context);
-        _launchURL(webUrl + 'help?lang=' + myLocale.languageCode);
+        launchURL(webUrl + 'help?lang=' + myLocale.languageCode);
       },
     ));
     listItems.add(ListTile(
       title: Text(S.of(context).about),
       onTap: () {
         Navigator.pop(context);
-        _launchURL(webUrl + 'about?lang=' + myLocale.languageCode);
+        launchURL(webUrl + 'about?lang=' + myLocale.languageCode);
       },
     ));
 

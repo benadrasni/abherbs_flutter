@@ -19,5 +19,6 @@ class Plant{
 
   Plant.fromJson(this.key, Map data) {
     name = data['name'];
+    wikiLinks = data['wikilinks'];
   }
 }
