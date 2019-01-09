@@ -110,15 +110,15 @@
   "taxonomy_ordo": "řád",
   "taxonomy_familia": "čeleď",
   "taxonomy_subfamilia": "podčeleď",
-  "taxonomy_tribus": "seskupení",
-  "taxonomy_subtribus": "podseskupení",
+  "taxonomy_tribus": "skupina",
+  "taxonomy_subtribus": "podskupina",
   "taxonomy_genus": "rod",
-  "taxonomy_subgenus": "Subgenus",
-  "taxonomy_sectio": "Sectio",
-  "taxonomy_subsectio": "Subsectio",
-  "taxonomy_serie": "Serie",
-  "taxonomy_subserie": "Subserie",
-  "taxonomy_supersectio": "Supersectio</string
+  "taxonomy_subgenus": "podrod",
+  "taxonomy_sectio": "sekce",
+  "taxonomy_subsectio": "podsekce",
+  "taxonomy_serie": "série",
+  "taxonomy_subserie": "podsérie",
+  "taxonomy_supersectio": "nadsekce",
   "taxonomy_species": "druh",
   "taxonomy_unknown": "neznámý"
 }

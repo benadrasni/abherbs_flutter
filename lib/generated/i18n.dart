@@ -81,6 +81,19 @@ class S implements WidgetsLocalizations {
   String get petal_5 => "5";
   String get petal_many => "more than 5";
   String get petal_zygomorphic => "zygomorphic";
+  String get plant_flower => "Flower";
+  String get plant_flowering_from => "Flowering from";
+  String get plant_flowering_to => "to";
+  String get plant_fruit => "Fruit";
+  String get plant_habitat => "Habitat";
+  String get plant_height_from => "Height from";
+  String get plant_height_to => "to";
+  String get plant_herbalism => "Herbalism";
+  String get plant_inflorescence => "Inflorescence";
+  String get plant_leaf => "Leaf";
+  String get plant_stem => "Stem";
+  String get plant_toxicity => "Toxicity";
+  String get plant_trivia => "Trivia";
   String get pref_language => "Preferred language";
   String get russian_far_east => "Russian Far East";
   String get settings => "Settings";
@@ -98,6 +111,23 @@ class S implements WidgetsLocalizations {
   String get southwestern_usa => "Southwestern U.S.A.";
   String get subantarctic_islands => "Subantarctic Islands";
   String get subarctic_america => "Subarctic America";
+  String get taxonomy_cladus => "(clade)";
+  String get taxonomy_familia => "Family";
+  String get taxonomy_genus => "Genus";
+  String get taxonomy_ordo => "Order";
+  String get taxonomy_regnum => "Kingdom";
+  String get taxonomy_sectio => "Sectio";
+  String get taxonomy_serie => "Serie";
+  String get taxonomy_species => "Species";
+  String get taxonomy_subfamilia => "Subfamily";
+  String get taxonomy_subgenus => "Subgenus";
+  String get taxonomy_subsectio => "Subsectio";
+  String get taxonomy_subserie => "Subserie";
+  String get taxonomy_subtribus => "Subtribe";
+  String get taxonomy_superregnum => "Domain";
+  String get taxonomy_supersectio => "Supersectio";
+  String get taxonomy_tribus => "Tribe";
+  String get taxonomy_unknown => "unknown";
   String get west_central_tropical_africa => "West-Central Tropical Africa";
   String get west_tropical_africa => "West Tropical Africa";
   String get western_asia => "Western Asia";
@@ -112,8 +142,6 @@ class $de extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "Wiesen oder Grünland";
   @override
   String get central_america => "Zentralamerika";
   @override
@@ -131,33 +159,17 @@ class $de extends S {
   @override
   String get caribbean => "Karibik";
   @override
-  String get habitat_wetland => "Moorlandschaft oder Feuchtgebiete";
-  @override
   String get australasia => "Australasien";
-  @override
-  String get eastern_canada => "Östliches Kanada";
   @override
   String get petal_4 => "höchstens 4";
   @override
   String get east_tropical_africa => "Osttropisches Afrika";
   @override
-  String get habitat_tree => "Bäume oder Sträucher";
-  @override
-  String get settings => "Einstellungen";
-  @override
-  String get color_red => "Rot, Pink";
-  @override
   String get africa => "Afrika";
-  @override
-  String get north_central_pacific => "Nord-Zentrales Pazifik";
   @override
   String get south_tropical_africa => "Südliches tropisches Afrika";
   @override
-  String get southern_africa => "Südafrika";
-  @override
   String get caucasus => "Kaukasus";
-  @override
-  String get color_yellow => "Gelb";
   @override
   String get middle_asia => "Mittelasien";
   @override
@@ -165,13 +177,11 @@ class $de extends S {
   @override
   String get australia => "Australien";
   @override
-  String get subantarctic_islands => "Subantarktische Inseln";
-  @override
-  String get my_region => "Meine Gegend";
+  String get plant_leaf => "Blätter";
   @override
   String get habitat_forest => "Wälder";
   @override
-  String get indian_subcontinent => "Indischer Subkontinent";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malesien";
   @override
@@ -179,79 +189,53 @@ class $de extends S {
   @override
   String get asia_tropical => "Asien-Tropisch";
   @override
-  String get filter_habitat => "Habitat";
-  @override
-  String get northwestern_pacific => "Nordwestlicher Pazifik";
-  @override
   String get northwestern_usa => "Nordwesten U.S.A.";
   @override
   String get northern_south_america => "Nördliches Südamerika";
-  @override
-  String get southwestern_europe => "Südwesteuropa";
   @override
   String get southern_america => "Südamerika";
   @override
   String get middle_atlantic_ocean => "Mittlerer Atlantischer Ozean";
   @override
-  String get antarctic_continent => "Antarktischer Kontinent";
-  @override
-  String get brazil => "Brasilien";
-  @override
-  String get eastern_europe => "Osteuropa";
-  @override
   String get habitat_garden => "Gärten oder Felder";
-  @override
-  String get south_central_usa => "Süd-Zentral U.S.A.";
   @override
   String get russian_far_east => "Russischer Ferner Osten";
   @override
   String get west_central_tropical_africa => "West-Zentrales tropisches Afrika";
   @override
-  String get macaronesia => "Makaronesien";
+  String get plant_toxicity => "Toxizität";
   @override
-  String get arabian_peninsula => "Arabische Halbinsel";
+  String get macaronesia => "Makaronesien";
   @override
   String get asia_temperate => "Asien-gemäßigt";
   @override
-  String get west_tropical_africa => "Westliches tropisches Afrika";
-  @override
-  String get northern_europe => "Nordeuropa";
-  @override
   String get habitat_rock => "Felsen oder Berge";
   @override
-  String get northeast_tropical_africa => "Nordost-tropisches Afrika";
+  String get taxonomy_superregnum => "Domäne";
   @override
-  String get pref_language => "Bevorzugte Sprache";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongolei";
   @override
-  String get new_zealand => "Neuseeland";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "Westliches Südamerika";
   @override
-  String get filter_distribution => "Vorkommen";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "Europa";
   @override
   String get middle_europe => "Mitteleuropa";
   @override
-  String get eastern_asia => "Ostasien";
-  @override
-  String get western_asia => "West-Asien";
-  @override
-  String get subarctic_america => "Subarktistisches Amerika";
-  @override
   String get color_blue => "Blau, Lila";
   @override
-  String get north_central_usa => "Nord-Zentral U.S.A.";
-  @override
   String get southern_south_america => "Südliches Südamerika";
+  @override
+  String get plant_habitat => "Habitat";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "Anzahl der Blütenblätter";
-  @override
-  String get southeastern_usa => "Südöstlich U.S.A.";
   @override
   String get color_white => "Weiß";
   @override
@@ -259,11 +243,13 @@ class $de extends S {
   @override
   String get color_green => "Grün, Braun, Schwarz";
   @override
-  String get petal_many => "mehr als 5";
+  String get taxonomy_ordo => "Ordnung";
   @override
-  String get southeastern_europe => "Südosteuropa";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Pazifik";
+  @override
+  String get taxonomy_regnum => "Reich";
   @override
   String get south_central_pacific => "Süd-Zentrales Pazifik";
   @override
@@ -271,15 +257,119 @@ class $de extends S {
   @override
   String get help => "Hilfe";
   @override
-  String get northern_africa => "Nordafrika";
-  @override
   String get mexico => "Mexiko";
+  @override
+  String get siberia => "Sibirien";
+  @override
+  String get taxonomy_subtribus => "Unterstamm";
+  @override
+  String get habitat_meadow => "Wiesen oder Grünland";
+  @override
+  String get plant_trivia => "Wissenswertes";
+  @override
+  String get taxonomy_cladus => "(ohne Rang)";
+  @override
+  String get plant_herbalism => "Pflanzenheilkunde";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "Moorlandschaft oder Feuchtgebiete";
+  @override
+  String get eastern_canada => "Östliches Kanada";
+  @override
+  String get habitat_tree => "Bäume oder Sträucher";
+  @override
+  String get settings => "Einstellungen";
+  @override
+  String get color_red => "Rot, Pink";
+  @override
+  String get north_central_pacific => "Nord-Zentrales Pazifik";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Südafrika";
+  @override
+  String get color_yellow => "Gelb";
+  @override
+  String get subantarctic_islands => "Subantarktische Inseln";
+  @override
+  String get taxonomy_subfamilia => "Unterfamilie";
+  @override
+  String get my_region => "Meine Gegend";
+  @override
+  String get indian_subcontinent => "Indischer Subkontinent";
+  @override
+  String get plant_flower => "Blüte";
+  @override
+  String get filter_habitat => "Habitat";
+  @override
+  String get northwestern_pacific => "Nordwestlicher Pazifik";
+  @override
+  String get southwestern_europe => "Südwesteuropa";
+  @override
+  String get taxonomy_species => "Art";
+  @override
+  String get plant_fruit => "Früchte";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Familie";
+  @override
+  String get plant_stem => "Stängel";
+  @override
+  String get antarctic_continent => "Antarktischer Kontinent";
+  @override
+  String get brazil => "Brasilien";
+  @override
+  String get eastern_europe => "Osteuropa";
+  @override
+  String get south_central_usa => "Süd-Zentral U.S.A.";
+  @override
+  String get plant_flowering_from => "Blütezeit";
+  @override
+  String get taxonomy_tribus => "Stamm";
+  @override
+  String get arabian_peninsula => "Arabische Halbinsel";
+  @override
+  String get west_tropical_africa => "Westliches tropisches Afrika";
+  @override
+  String get northern_europe => "Nordeuropa";
+  @override
+  String get northeast_tropical_africa => "Nordost-tropisches Afrika";
+  @override
+  String get pref_language => "Bevorzugte Sprache";
+  @override
+  String get new_zealand => "Neuseeland";
+  @override
+  String get filter_distribution => "Vorkommen";
+  @override
+  String get eastern_asia => "Ostasien";
+  @override
+  String get western_asia => "West-Asien";
+  @override
+  String get subarctic_america => "Subarktistisches Amerika";
+  @override
+  String get north_central_usa => "Nord-Zentral U.S.A.";
+  @override
+  String get southeastern_usa => "Südöstlich U.S.A.";
+  @override
+  String get plant_height_from => "Höhe";
+  @override
+  String get petal_many => "mehr als 5";
+  @override
+  String get southeastern_europe => "Südosteuropa";
+  @override
+  String get taxonomy_unknown => "unbekannt";
+  @override
+  String get plant_inflorescence => "Blütenstand";
+  @override
+  String get northern_africa => "Nordafrika";
   @override
   String get china => "China";
   @override
-  String get papuasia => "Papuasien";
+  String get taxonomy_genus => "Gattung";
   @override
-  String get siberia => "Sibirien";
+  String get papuasia => "Papuasien";
 }
 
 class $hi extends S {
@@ -288,8 +378,6 @@ class $hi extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "अनुवाद में सुधार करें";
   @override
   String get central_america => "मध्य अमरीका";
   @override
@@ -307,33 +395,17 @@ class $hi extends S {
   @override
   String get caribbean => "कैरेबियन";
   @override
-  String get habitat_wetland => "मोरलैंड्स या झीलों";
-  @override
   String get australasia => "ऑस्ट्रेलेशिया";
-  @override
-  String get eastern_canada => "पूर्वी कनाडा";
   @override
   String get petal_4 => "४ या उससे कम";
   @override
   String get east_tropical_africa => "पूर्वी उष्णकटिबंधीय अफ्रीका";
   @override
-  String get habitat_tree => "पेड़ों या झाड़ियाँ";
-  @override
-  String get settings => "सेटिंग्स";
-  @override
-  String get color_red => "लाल, गुलाबी";
-  @override
   String get africa => "अफ्रीका";
-  @override
-  String get north_central_pacific => "उत्तर मध्य प्रशांत महासागर";
   @override
   String get south_tropical_africa => "दक्षिण उष्णकटिबंधीय अफ्रीका";
   @override
-  String get southern_africa => "दक्षिणी अफ्रीका";
-  @override
   String get caucasus => "काकेशस";
-  @override
-  String get color_yellow => "पीला";
   @override
   String get middle_asia => "मध्य एशिया";
   @override
@@ -341,13 +413,11 @@ class $hi extends S {
   @override
   String get australia => "ऑस्ट्रेलिया";
   @override
-  String get subantarctic_islands => "Subantarctic द्वीप समूह";
-  @override
-  String get my_region => "मेरा क्षेत्र";
+  String get plant_leaf => "पत्ते";
   @override
   String get habitat_forest => "मदद";
   @override
-  String get indian_subcontinent => "भारतीय उपमहाद्वीप";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malesia";
   @override
@@ -355,79 +425,53 @@ class $hi extends S {
   @override
   String get asia_tropical => "एशिया उष्णकटिबंधीय";
   @override
-  String get filter_habitat => "पर्यावास";
-  @override
-  String get northwestern_pacific => "उत्तर पश्चिमी प्रशांत महासागर";
-  @override
   String get northwestern_usa => "नॉर्थवेस्टर्न यूएसए";
   @override
   String get northern_south_america => "उत्तरी दक्षिण अमेरिका";
-  @override
-  String get southwestern_europe => "दक्षिणपश्चिम यूरोप";
   @override
   String get southern_america => "दक्षिणी अमेरिका";
   @override
   String get middle_atlantic_ocean => "मध्य अटलांटिक महासागर";
   @override
-  String get antarctic_continent => "अंटार्कटिक महाद्वीप";
-  @override
-  String get brazil => "ब्राज़िल";
-  @override
-  String get eastern_europe => "पूर्वी यूरोप";
-  @override
   String get habitat_garden => "पौधे का उदाहरण";
-  @override
-  String get south_central_usa => "दक्षिण मध्य यूएसए";
   @override
   String get russian_far_east => "रूसी सुदूर पूर्व";
   @override
   String get west_central_tropical_africa => "पश्चिम मध्य उष्णकटिबंधीय अफ्रीका";
   @override
-  String get macaronesia => "Macaronesia";
+  String get plant_toxicity => "आविषता";
   @override
-  String get arabian_peninsula => "अरबी द्वीप";
+  String get macaronesia => "Macaronesia";
   @override
   String get asia_temperate => "एशिया टेम्पलेट";
   @override
-  String get west_tropical_africa => "पश्चिम उष्णकटिबंधीय अफ्रीका";
-  @override
-  String get northern_europe => "उत्तरी यूरोप";
-  @override
   String get habitat_rock => "एक चुनें";
   @override
-  String get northeast_tropical_africa => "पूर्वोत्तर उष्णकटिबंधीय अफ्रीका";
+  String get taxonomy_superregnum => "कार्यक्षेत्र";
   @override
-  String get pref_language => "पसंदीदा भाषा";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "मंगोलिया";
   @override
-  String get new_zealand => "न्यूजीलैंड";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "पश्चिमी दक्षिण अमेरिका";
   @override
-  String get filter_distribution => "वितरण";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "यूरोप";
   @override
   String get middle_europe => "मध्य यूरोप";
   @override
-  String get eastern_asia => "पूर्वी एशिया";
-  @override
-  String get western_asia => "पश्चिमी एशिया";
-  @override
-  String get subarctic_america => "सुबाराक्टिक अमेरिका";
-  @override
   String get color_blue => "नीला, बैंगनी";
   @override
-  String get north_central_usa => "उत्तरी मध्य यूएसए";
-  @override
   String get southern_south_america => "दक्षिणी दक्षिण अमेरिका";
+  @override
+  String get plant_habitat => "पर्यावास";
   @override
   String get petal_5 => "५";
   @override
   String get filter_petal => "पंखुड़ियों की संख्या";
-  @override
-  String get southeastern_usa => "दक्षिणपूर्वी यूएसए";
   @override
   String get color_white => "सफेद";
   @override
@@ -435,11 +479,13 @@ class $hi extends S {
   @override
   String get color_green => "हरा, भूरा, काला";
   @override
-  String get petal_many => "५ से अधिक";
+  String get taxonomy_ordo => "क्रम";
   @override
-  String get southeastern_europe => "दक्षिणपूर्वी यूरोप";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "प्रशांत महासागर";
+  @override
+  String get taxonomy_regnum => "राज्य";
   @override
   String get south_central_pacific => "दक्षिण-मध्य प्रशांत महासागर";
   @override
@@ -447,15 +493,119 @@ class $hi extends S {
   @override
   String get help => "मदद";
   @override
-  String get northern_africa => "उत्तरी अफ्रीका";
-  @override
   String get mexico => "मेक्सिको";
+  @override
+  String get siberia => "साइबेरिया";
+  @override
+  String get taxonomy_subtribus => "उपजनजाति";
+  @override
+  String get habitat_meadow => "अनुवाद में सुधार करें";
+  @override
+  String get plant_trivia => "सामान्य ज्ञान";
+  @override
+  String get taxonomy_cladus => "(अश्रेणिकृत)";
+  @override
+  String get plant_herbalism => "जड़ी-बूटी चिकित्सा";
+  @override
+  String get plant_height_to => "तक";
+  @override
+  String get habitat_wetland => "मोरलैंड्स या झीलों";
+  @override
+  String get eastern_canada => "पूर्वी कनाडा";
+  @override
+  String get habitat_tree => "पेड़ों या झाड़ियाँ";
+  @override
+  String get settings => "सेटिंग्स";
+  @override
+  String get color_red => "लाल, गुलाबी";
+  @override
+  String get north_central_pacific => "उत्तर मध्य प्रशांत महासागर";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "दक्षिणी अफ्रीका";
+  @override
+  String get color_yellow => "पीला";
+  @override
+  String get subantarctic_islands => "Subantarctic द्वीप समूह";
+  @override
+  String get taxonomy_subfamilia => "उपपरिवार";
+  @override
+  String get my_region => "मेरा क्षेत्र";
+  @override
+  String get indian_subcontinent => "भारतीय उपमहाद्वीप";
+  @override
+  String get plant_flower => "पुष्प";
+  @override
+  String get filter_habitat => "पर्यावास";
+  @override
+  String get northwestern_pacific => "उत्तर पश्चिमी प्रशांत महासागर";
+  @override
+  String get southwestern_europe => "दक्षिणपश्चिम यूरोप";
+  @override
+  String get taxonomy_species => "प्रजातियां";
+  @override
+  String get plant_fruit => "फल";
+  @override
+  String get plant_flowering_to => "तक";
+  @override
+  String get taxonomy_familia => "परिवार";
+  @override
+  String get plant_stem => "तना";
+  @override
+  String get antarctic_continent => "अंटार्कटिक महाद्वीप";
+  @override
+  String get brazil => "ब्राज़िल";
+  @override
+  String get eastern_europe => "पूर्वी यूरोप";
+  @override
+  String get south_central_usa => "दक्षिण मध्य यूएसए";
+  @override
+  String get plant_flowering_from => "से फूल";
+  @override
+  String get taxonomy_tribus => "जनजाति";
+  @override
+  String get arabian_peninsula => "अरबी द्वीप";
+  @override
+  String get west_tropical_africa => "पश्चिम उष्णकटिबंधीय अफ्रीका";
+  @override
+  String get northern_europe => "उत्तरी यूरोप";
+  @override
+  String get northeast_tropical_africa => "पूर्वोत्तर उष्णकटिबंधीय अफ्रीका";
+  @override
+  String get pref_language => "पसंदीदा भाषा";
+  @override
+  String get new_zealand => "न्यूजीलैंड";
+  @override
+  String get filter_distribution => "वितरण";
+  @override
+  String get eastern_asia => "पूर्वी एशिया";
+  @override
+  String get western_asia => "पश्चिमी एशिया";
+  @override
+  String get subarctic_america => "सुबाराक्टिक अमेरिका";
+  @override
+  String get north_central_usa => "उत्तरी मध्य यूएसए";
+  @override
+  String get southeastern_usa => "दक्षिणपूर्वी यूएसए";
+  @override
+  String get plant_height_from => "ऊँचाई से";
+  @override
+  String get petal_many => "५ से अधिक";
+  @override
+  String get southeastern_europe => "दक्षिणपूर्वी यूरोप";
+  @override
+  String get taxonomy_unknown => "अनजान";
+  @override
+  String get plant_inflorescence => "पुष्पक्रम";
+  @override
+  String get northern_africa => "उत्तरी अफ्रीका";
   @override
   String get china => "चीन";
   @override
-  String get papuasia => "Papuasia";
+  String get taxonomy_genus => "जाति";
   @override
-  String get siberia => "साइबेरिया";
+  String get papuasia => "Papuasia";
 }
 
 class $no extends S {
@@ -464,8 +614,6 @@ class $no extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "enger eller gressletter";
   @override
   String get central_america => "Sentral-Amerika";
   @override
@@ -483,33 +631,17 @@ class $no extends S {
   @override
   String get caribbean => "Caribbean";
   @override
-  String get habitat_wetland => "heiene eller våtmark";
-  @override
   String get australasia => "Australasia";
-  @override
-  String get eastern_canada => "Øst-Canada";
   @override
   String get petal_4 => "4 eller mindre";
   @override
   String get east_tropical_africa => "Øst-tropiske Afrika";
   @override
-  String get habitat_tree => "trær eller busker";
-  @override
-  String get settings => "Innstillinger";
-  @override
-  String get color_red => "rød, rosa";
-  @override
   String get africa => "Afrika";
-  @override
-  String get north_central_pacific => "Nord-Sentral Stillehavet";
   @override
   String get south_tropical_africa => "Sør-tropiske Afrika";
   @override
-  String get southern_africa => "Sør Afrika";
-  @override
   String get caucasus => "Kaukasus";
-  @override
-  String get color_yellow => "gul";
   @override
   String get middle_asia => "Midt-Asia";
   @override
@@ -517,13 +649,11 @@ class $no extends S {
   @override
   String get australia => "Australia";
   @override
-  String get subantarctic_islands => "Subantarctic Islands";
-  @override
-  String get my_region => "Min region";
+  String get plant_leaf => "Blader";
   @override
   String get habitat_forest => "skog";
   @override
-  String get indian_subcontinent => "Indisk subkontinent";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malesia";
   @override
@@ -531,79 +661,53 @@ class $no extends S {
   @override
   String get asia_tropical => "Asia-tropisk";
   @override
-  String get filter_habitat => "voksested";
-  @override
-  String get northwestern_pacific => "Nordvest Stillehavet";
-  @override
   String get northwestern_usa => "Nordvest USA";
   @override
   String get northern_south_america => "Nord Sør-Amerika";
-  @override
-  String get southwestern_europe => "Sørvestlige Europa";
   @override
   String get southern_america => "Sør-Amerika";
   @override
   String get middle_atlantic_ocean => "Midt-Atlanterhavet";
   @override
-  String get antarctic_continent => "Antarktis-kontinentet";
-  @override
-  String get brazil => "Brasil";
-  @override
-  String get eastern_europe => "Øst-Europa";
-  @override
   String get habitat_garden => "hager eller felt";
-  @override
-  String get south_central_usa => "Sør-Sentral USA";
   @override
   String get russian_far_east => "Russisk fjernt øst";
   @override
   String get west_central_tropical_africa => "Vest-Sentral-tropiske Afrika";
   @override
-  String get macaronesia => "Macaronesia";
+  String get plant_toxicity => "Toksisitet";
   @override
-  String get arabian_peninsula => "Den arabiske halvøy";
+  String get macaronesia => "Macaronesia";
   @override
   String get asia_temperate => "Asia-temperert";
   @override
-  String get west_tropical_africa => "Vest-tropiske Afrika";
-  @override
-  String get northern_europe => "Nord-Europa";
-  @override
   String get habitat_rock => "steiner eller fjell";
   @override
-  String get northeast_tropical_africa => "Nordøst-tropiske Afrika";
+  String get taxonomy_superregnum => "Domene";
   @override
-  String get pref_language => "Foretrukket Språk";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongolia";
   @override
-  String get new_zealand => "New Zealand";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "Vest Sør-Amerika";
   @override
-  String get filter_distribution => "fordeling";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "Europa";
   @override
   String get middle_europe => "Midt-Europa";
   @override
-  String get eastern_asia => "Øst-Asia";
-  @override
-  String get western_asia => "Vest-Asia";
-  @override
-  String get subarctic_america => "Subarctic America";
-  @override
   String get color_blue => "blå, lilla";
   @override
-  String get north_central_usa => "Nord-Sentral USA";
-  @override
   String get southern_south_america => "Sør Sør-Amerika";
+  @override
+  String get plant_habitat => "Voksested";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "antall kronblader";
-  @override
-  String get southeastern_usa => "Sørøst USA";
   @override
   String get color_white => "hvit";
   @override
@@ -611,11 +715,13 @@ class $no extends S {
   @override
   String get color_green => "grønn, brun, svart";
   @override
-  String get petal_many => "mer enn 5";
+  String get taxonomy_ordo => "Orden";
   @override
-  String get southeastern_europe => "Sørøst-Europa";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Stillehavet";
+  @override
+  String get taxonomy_regnum => "Rike";
   @override
   String get south_central_pacific => "Sør-Sentral Stillehavet";
   @override
@@ -623,15 +729,119 @@ class $no extends S {
   @override
   String get help => "Hjelp";
   @override
-  String get northern_africa => "Nord-Afrika";
-  @override
   String get mexico => "Mexico";
+  @override
+  String get siberia => "Sibir";
+  @override
+  String get taxonomy_subtribus => "Undertribus";
+  @override
+  String get habitat_meadow => "enger eller gressletter";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get taxonomy_cladus => "(klade)";
+  @override
+  String get plant_herbalism => "Plantelegemiddel";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "heiene eller våtmark";
+  @override
+  String get eastern_canada => "Øst-Canada";
+  @override
+  String get habitat_tree => "trær eller busker";
+  @override
+  String get settings => "Innstillinger";
+  @override
+  String get color_red => "rød, rosa";
+  @override
+  String get north_central_pacific => "Nord-Sentral Stillehavet";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Sør Afrika";
+  @override
+  String get color_yellow => "gul";
+  @override
+  String get subantarctic_islands => "Subantarctic Islands";
+  @override
+  String get taxonomy_subfamilia => "Underfamilier";
+  @override
+  String get my_region => "Min region";
+  @override
+  String get indian_subcontinent => "Indisk subkontinent";
+  @override
+  String get plant_flower => "Blomst";
+  @override
+  String get filter_habitat => "voksested";
+  @override
+  String get northwestern_pacific => "Nordvest Stillehavet";
+  @override
+  String get southwestern_europe => "Sørvestlige Europa";
+  @override
+  String get taxonomy_species => "Art";
+  @override
+  String get plant_fruit => "Frukt";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Familie";
+  @override
+  String get plant_stem => "Stengel";
+  @override
+  String get antarctic_continent => "Antarktis-kontinentet";
+  @override
+  String get brazil => "Brasil";
+  @override
+  String get eastern_europe => "Øst-Europa";
+  @override
+  String get south_central_usa => "Sør-Sentral USA";
+  @override
+  String get plant_flowering_from => "Blomstringstid";
+  @override
+  String get taxonomy_tribus => "Tribus";
+  @override
+  String get arabian_peninsula => "Den arabiske halvøy";
+  @override
+  String get west_tropical_africa => "Vest-tropiske Afrika";
+  @override
+  String get northern_europe => "Nord-Europa";
+  @override
+  String get northeast_tropical_africa => "Nordøst-tropiske Afrika";
+  @override
+  String get pref_language => "Foretrukket Språk";
+  @override
+  String get new_zealand => "New Zealand";
+  @override
+  String get filter_distribution => "fordeling";
+  @override
+  String get eastern_asia => "Øst-Asia";
+  @override
+  String get western_asia => "Vest-Asia";
+  @override
+  String get subarctic_america => "Subarctic America";
+  @override
+  String get north_central_usa => "Nord-Sentral USA";
+  @override
+  String get southeastern_usa => "Sørøst USA";
+  @override
+  String get plant_height_from => "Høyde";
+  @override
+  String get petal_many => "mer enn 5";
+  @override
+  String get southeastern_europe => "Sørøst-Europa";
+  @override
+  String get taxonomy_unknown => "ukjent";
+  @override
+  String get plant_inflorescence => "Blomsterstand";
+  @override
+  String get northern_africa => "Nord-Afrika";
   @override
   String get china => "Kina";
   @override
-  String get papuasia => "Papuasia";
+  String get taxonomy_genus => "Slekt";
   @override
-  String get siberia => "Sibir";
+  String get papuasia => "Papuasia";
 }
 
 class $fi extends S {
@@ -640,8 +850,6 @@ class $fi extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "niityt";
   @override
   String get central_america => "Keski-Amerikka";
   @override
@@ -659,33 +867,17 @@ class $fi extends S {
   @override
   String get caribbean => "Karibian";
   @override
-  String get habitat_wetland => "nummimaista tai kosteikkojen";
-  @override
   String get australasia => "Australiassa";
-  @override
-  String get eastern_canada => "Itä-Kanada";
   @override
   String get petal_4 => "4 tai vähemmän";
   @override
   String get east_tropical_africa => "Itä-trooppinen Afrikka";
   @override
-  String get habitat_tree => "puita tai pensaita";
-  @override
-  String get settings => "Asetukset";
-  @override
-  String get color_red => "punainen, vaaleanpunainen";
-  @override
   String get africa => "Afrikka";
-  @override
-  String get north_central_pacific => "Pohjois Keski-Tyynenmeren";
   @override
   String get south_tropical_africa => "Etelä-trooppinen Afrikka";
   @override
-  String get southern_africa => "Etelä-Afrikka";
-  @override
   String get caucasus => "Kaukasus";
-  @override
-  String get color_yellow => "keltainen";
   @override
   String get middle_asia => "Lähi-Aasia";
   @override
@@ -693,13 +885,11 @@ class $fi extends S {
   @override
   String get australia => "Australia";
   @override
-  String get subantarctic_islands => "Subantarkkinsaaret";
-  @override
-  String get my_region => "Oma alue";
+  String get plant_leaf => "Lehdet";
   @override
   String get habitat_forest => "metsä";
   @override
-  String get indian_subcontinent => "Intian niemimaalla";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malesia";
   @override
@@ -707,79 +897,53 @@ class $fi extends S {
   @override
   String get asia_tropical => "Aasian trooppinen";
   @override
-  String get filter_habitat => "kasvupaikka";
-  @override
-  String get northwestern_pacific => "Luoteis-Tyynenmeren";
-  @override
   String get northwestern_usa => "Luoteis-USA";
   @override
   String get northern_south_america => "Pohjois Etelä-Amerikka";
-  @override
-  String get southwestern_europe => "Lounais-Eurooppa";
   @override
   String get southern_america => "Etelä-Amerikka";
   @override
   String get middle_atlantic_ocean => "Lähi-Atlantin valtameri";
   @override
-  String get antarctic_continent => "Etelämanner";
-  @override
-  String get brazil => "Brasilia";
-  @override
-  String get eastern_europe => "Itä-Eurooppa";
-  @override
   String get habitat_garden => "puutarhoissa tai kenttiä";
-  @override
-  String get south_central_usa => "Etelä-Keski-USA";
   @override
   String get russian_far_east => "Venäjän Kaukoidässä";
   @override
   String get west_central_tropical_africa => "Länsi-Keski-trooppinen Afrikka";
   @override
-  String get macaronesia => "Makaronesia";
+  String get plant_toxicity => "Myrkyllisyys";
   @override
-  String get arabian_peninsula => "Arabian niemimaalla";
+  String get macaronesia => "Makaronesia";
   @override
   String get asia_temperate => "Aasia Lämpötilaa";
   @override
-  String get west_tropical_africa => "Läntinen trooppinen Afrikka";
-  @override
-  String get northern_europe => "Pohjoinen Eurooppa";
-  @override
   String get habitat_rock => "kiviä tai vuoria";
   @override
-  String get northeast_tropical_africa => "Koillis-trooppinen Afrikka";
+  String get taxonomy_superregnum => "Domeeni";
   @override
-  String get pref_language => "Suosittu kieli";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongolia";
   @override
-  String get new_zealand => "Uusi Seelanti";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "Länsi Etelä-Amerikka";
   @override
-  String get filter_distribution => "jakelu";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "Eurooppa";
   @override
   String get middle_europe => "Keski-Eurooppa";
   @override
-  String get eastern_asia => "Itä-Aasiassa";
-  @override
-  String get western_asia => "Länsi-Aasia";
-  @override
-  String get subarctic_america => "Subarktinen Amerikka";
-  @override
   String get color_blue => "sininen, violetti";
   @override
-  String get north_central_usa => "Pohjois-Keski-USA";
-  @override
   String get southern_south_america => "Etelä Etelä-Amerikka";
+  @override
+  String get plant_habitat => "Kasvupaikka";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "määrä terälehdet";
-  @override
-  String get southeastern_usa => "Kaakkois-USA";
   @override
   String get color_white => "valkoinen";
   @override
@@ -787,11 +951,13 @@ class $fi extends S {
   @override
   String get color_green => "vihreä, ruskea, musta";
   @override
-  String get petal_many => "yli 5";
+  String get taxonomy_ordo => "Lahko";
   @override
-  String get southeastern_europe => "Kaakkois-Eurooppa";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Tyyni valtameri";
+  @override
+  String get taxonomy_regnum => "Kunta";
   @override
   String get south_central_pacific => "Etelä Keski-Tyynenmeren";
   @override
@@ -799,15 +965,119 @@ class $fi extends S {
   @override
   String get help => "Ohje";
   @override
-  String get northern_africa => "Pohjois-Afrikka";
-  @override
   String get mexico => "Meksiko";
+  @override
+  String get siberia => "Siperia";
+  @override
+  String get taxonomy_subtribus => "Alatribus";
+  @override
+  String get habitat_meadow => "niityt";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get taxonomy_cladus => "(kladi)";
+  @override
+  String get plant_herbalism => "Herbalismi";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "nummimaista tai kosteikkojen";
+  @override
+  String get eastern_canada => "Itä-Kanada";
+  @override
+  String get habitat_tree => "puita tai pensaita";
+  @override
+  String get settings => "Asetukset";
+  @override
+  String get color_red => "punainen, vaaleanpunainen";
+  @override
+  String get north_central_pacific => "Pohjois Keski-Tyynenmeren";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Etelä-Afrikka";
+  @override
+  String get color_yellow => "keltainen";
+  @override
+  String get subantarctic_islands => "Subantarkkinsaaret";
+  @override
+  String get taxonomy_subfamilia => "Alaheimo";
+  @override
+  String get my_region => "Oma alue";
+  @override
+  String get indian_subcontinent => "Intian niemimaalla";
+  @override
+  String get plant_flower => "Kukka";
+  @override
+  String get filter_habitat => "kasvupaikka";
+  @override
+  String get northwestern_pacific => "Luoteis-Tyynenmeren";
+  @override
+  String get southwestern_europe => "Lounais-Eurooppa";
+  @override
+  String get taxonomy_species => "Laji";
+  @override
+  String get plant_fruit => "Hedelmä";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Heimo";
+  @override
+  String get plant_stem => "Varsi";
+  @override
+  String get antarctic_continent => "Etelämanner";
+  @override
+  String get brazil => "Brasilia";
+  @override
+  String get eastern_europe => "Itä-Eurooppa";
+  @override
+  String get south_central_usa => "Etelä-Keski-USA";
+  @override
+  String get plant_flowering_from => "Kukinta";
+  @override
+  String get taxonomy_tribus => "Tribus";
+  @override
+  String get arabian_peninsula => "Arabian niemimaalla";
+  @override
+  String get west_tropical_africa => "Läntinen trooppinen Afrikka";
+  @override
+  String get northern_europe => "Pohjoinen Eurooppa";
+  @override
+  String get northeast_tropical_africa => "Koillis-trooppinen Afrikka";
+  @override
+  String get pref_language => "Suosittu kieli";
+  @override
+  String get new_zealand => "Uusi Seelanti";
+  @override
+  String get filter_distribution => "jakelu";
+  @override
+  String get eastern_asia => "Itä-Aasiassa";
+  @override
+  String get western_asia => "Länsi-Aasia";
+  @override
+  String get subarctic_america => "Subarktinen Amerikka";
+  @override
+  String get north_central_usa => "Pohjois-Keski-USA";
+  @override
+  String get southeastern_usa => "Kaakkois-USA";
+  @override
+  String get plant_height_from => "Korkeus";
+  @override
+  String get petal_many => "yli 5";
+  @override
+  String get southeastern_europe => "Kaakkois-Eurooppa";
+  @override
+  String get taxonomy_unknown => "tuntematon";
+  @override
+  String get plant_inflorescence => "Kukinto";
+  @override
+  String get northern_africa => "Pohjois-Afrikka";
   @override
   String get china => "Kiina";
   @override
-  String get papuasia => "Papuasia";
+  String get taxonomy_genus => "Suku";
   @override
-  String get siberia => "Siperia";
+  String get papuasia => "Papuasia";
 }
 
 class $ru extends S {
@@ -816,8 +1086,6 @@ class $ru extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "луга или пастбища";
   @override
   String get central_america => "Центральная Америка";
   @override
@@ -835,33 +1103,17 @@ class $ru extends S {
   @override
   String get caribbean => "Карибик";
   @override
-  String get habitat_wetland => "водно-болотные угодья";
-  @override
   String get australasia => "Австралазия";
-  @override
-  String get eastern_canada => "Восточная Канада";
   @override
   String get petal_4 => "4 или менее";
   @override
   String get east_tropical_africa => "Восточная тропическая Африка";
   @override
-  String get habitat_tree => "деревья или кустарники";
-  @override
-  String get settings => "Устройства";
-  @override
-  String get color_red => "красная, розовая";
-  @override
   String get africa => "Африка";
-  @override
-  String get north_central_pacific => "Северо-Центральная часть Тихого океана";
   @override
   String get south_tropical_africa => "Южная тропическая Африка";
   @override
-  String get southern_africa => "Южная Африка";
-  @override
   String get caucasus => "Кавказ";
-  @override
-  String get color_yellow => "жёлтая";
   @override
   String get middle_asia => "Средняя Азия";
   @override
@@ -869,13 +1121,11 @@ class $ru extends S {
   @override
   String get australia => "Австралия";
   @override
-  String get subantarctic_islands => "Субантарктические острова";
-  @override
-  String get my_region => "Мой район";
+  String get plant_leaf => "Листья";
   @override
   String get habitat_forest => "леса";
   @override
-  String get indian_subcontinent => "Индийский субконтинент";
+  String get taxonomy_serie => "Ряд";
   @override
   String get malesia => "Юго-Восточная Азия";
   @override
@@ -883,79 +1133,53 @@ class $ru extends S {
   @override
   String get asia_tropical => "Азия тропическая";
   @override
-  String get filter_habitat => "ареалы";
-  @override
-  String get northwestern_pacific => "Северо-западная часть Тихого океана";
-  @override
   String get northwestern_usa => "Северо-западная часть США";
   @override
   String get northern_south_america => "Север Южной Америки";
-  @override
-  String get southwestern_europe => "Юго-Западная Европа";
   @override
   String get southern_america => "Южная Америка";
   @override
   String get middle_atlantic_ocean => "Средний Атлантический океан";
   @override
-  String get antarctic_continent => "Антарктический континент";
-  @override
-  String get brazil => "Бразилия";
-  @override
-  String get eastern_europe => "Восточная Европа";
-  @override
   String get habitat_garden => "сады или поля";
-  @override
-  String get south_central_usa => "Юго-Центральная часть США";
   @override
   String get russian_far_east => "Российский Дальний Восток";
   @override
   String get west_central_tropical_africa => "Западно-Центральная тропическая Африка";
   @override
-  String get macaronesia => "Макронезии";
+  String get plant_toxicity => "Токсичность";
   @override
-  String get arabian_peninsula => "Аравийский полуостров";
+  String get macaronesia => "Макронезии";
   @override
   String get asia_temperate => "Азия умерная";
   @override
-  String get west_tropical_africa => "Западная тропическая Африка";
-  @override
-  String get northern_europe => "Северная Европа";
-  @override
   String get habitat_rock => "скалы или горы";
   @override
-  String get northeast_tropical_africa => "Северо-Восточная тропическая Африка";
+  String get taxonomy_superregnum => "Домен";
   @override
-  String get pref_language => "Предпочтительный язык";
+  String get taxonomy_sectio => "Секция";
   @override
   String get mongolia => "Монголия";
   @override
-  String get new_zealand => "Новая Зеландия";
+  String get taxonomy_subserie => "Подряд";
   @override
   String get western_south_america => "Западная Южная Америка";
   @override
-  String get filter_distribution => "распределение";
+  String get taxonomy_subgenus => "Подрод";
   @override
   String get europe => "Европа";
   @override
   String get middle_europe => "Средняя Европа";
   @override
-  String get eastern_asia => "Восточная Азия";
-  @override
-  String get western_asia => "Западная Азия";
-  @override
-  String get subarctic_america => "Субарктическая Америка";
-  @override
   String get color_blue => "синая, фиолетовая";
   @override
-  String get north_central_usa => "Северо-Центральная часть США";
-  @override
   String get southern_south_america => "Южная Южная Америка";
+  @override
+  String get plant_habitat => "Ареал";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "число лепестков";
-  @override
-  String get southeastern_usa => "Юго-Восточная часть США";
   @override
   String get color_white => "белая";
   @override
@@ -963,11 +1187,13 @@ class $ru extends S {
   @override
   String get color_green => "зелёная, коричневая, чёрная";
   @override
-  String get petal_many => "более 5";
+  String get taxonomy_ordo => "Порядок";
   @override
-  String get southeastern_europe => "Юго-Восточная Европа";
+  String get taxonomy_supersectio => "Надсекция";
   @override
   String get pacific => "Тихий океан";
+  @override
+  String get taxonomy_regnum => "Царство";
   @override
   String get south_central_pacific => "Юго-Центральная часть Тихого океана";
   @override
@@ -975,15 +1201,119 @@ class $ru extends S {
   @override
   String get help => "Cправка";
   @override
-  String get northern_africa => "Северная Африка";
-  @override
   String get mexico => "Мексика";
+  @override
+  String get siberia => "Сибирь";
+  @override
+  String get taxonomy_subtribus => "Подтриба";
+  @override
+  String get habitat_meadow => "луга или пастбища";
+  @override
+  String get plant_trivia => "Пустяки";
+  @override
+  String get taxonomy_cladus => "(клада)";
+  @override
+  String get plant_herbalism => "Травничество";
+  @override
+  String get plant_height_to => "до";
+  @override
+  String get habitat_wetland => "водно-болотные угодья";
+  @override
+  String get eastern_canada => "Восточная Канада";
+  @override
+  String get habitat_tree => "деревья или кустарники";
+  @override
+  String get settings => "Устройства";
+  @override
+  String get color_red => "красная, розовая";
+  @override
+  String get north_central_pacific => "Северо-Центральная часть Тихого океана";
+  @override
+  String get taxonomy_subsectio => "Подсекция";
+  @override
+  String get southern_africa => "Южная Африка";
+  @override
+  String get color_yellow => "жёлтая";
+  @override
+  String get subantarctic_islands => "Субантарктические острова";
+  @override
+  String get taxonomy_subfamilia => "Подсемейство";
+  @override
+  String get my_region => "Мой район";
+  @override
+  String get indian_subcontinent => "Индийский субконтинент";
+  @override
+  String get plant_flower => "Цветы";
+  @override
+  String get filter_habitat => "ареалы";
+  @override
+  String get northwestern_pacific => "Северо-западная часть Тихого океана";
+  @override
+  String get southwestern_europe => "Юго-Западная Европа";
+  @override
+  String get taxonomy_species => "Вид";
+  @override
+  String get plant_fruit => "Плоды";
+  @override
+  String get plant_flowering_to => "по";
+  @override
+  String get taxonomy_familia => "Семейство";
+  @override
+  String get plant_stem => "Стебель";
+  @override
+  String get antarctic_continent => "Антарктический континент";
+  @override
+  String get brazil => "Бразилия";
+  @override
+  String get eastern_europe => "Восточная Европа";
+  @override
+  String get south_central_usa => "Юго-Центральная часть США";
+  @override
+  String get plant_flowering_from => "Цветет с";
+  @override
+  String get taxonomy_tribus => "Триба";
+  @override
+  String get arabian_peninsula => "Аравийский полуостров";
+  @override
+  String get west_tropical_africa => "Западная тропическая Африка";
+  @override
+  String get northern_europe => "Северная Европа";
+  @override
+  String get northeast_tropical_africa => "Северо-Восточная тропическая Африка";
+  @override
+  String get pref_language => "Предпочтительный язык";
+  @override
+  String get new_zealand => "Новая Зеландия";
+  @override
+  String get filter_distribution => "распределение";
+  @override
+  String get eastern_asia => "Восточная Азия";
+  @override
+  String get western_asia => "Западная Азия";
+  @override
+  String get subarctic_america => "Субарктическая Америка";
+  @override
+  String get north_central_usa => "Северо-Центральная часть США";
+  @override
+  String get southeastern_usa => "Юго-Восточная часть США";
+  @override
+  String get plant_height_from => "Высота от";
+  @override
+  String get petal_many => "более 5";
+  @override
+  String get southeastern_europe => "Юго-Восточная Европа";
+  @override
+  String get taxonomy_unknown => "неизвестный";
+  @override
+  String get plant_inflorescence => "Соцветие";
+  @override
+  String get northern_africa => "Северная Африка";
   @override
   String get china => "Китай";
   @override
-  String get papuasia => "Papuasia";
+  String get taxonomy_genus => "Род";
   @override
-  String get siberia => "Сибирь";
+  String get papuasia => "Papuasia";
 }
 
 class $pt extends S {
@@ -992,8 +1322,6 @@ class $pt extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "prados e pastagens";
   @override
   String get central_america => "América Central";
   @override
@@ -1011,33 +1339,17 @@ class $pt extends S {
   @override
   String get caribbean => "Caraíbas";
   @override
-  String get habitat_wetland => "pântanos e zonas húmidas";
-  @override
   String get australasia => "Australásia";
-  @override
-  String get eastern_canada => "Canadá Oriental";
   @override
   String get petal_4 => "4 ou menos";
   @override
   String get east_tropical_africa => "África Tropical Oriental";
   @override
-  String get habitat_tree => "árvores e arbustos";
-  @override
-  String get settings => "Configurações";
-  @override
-  String get color_red => "vermelha, cor-de-rosa";
-  @override
   String get africa => "África";
-  @override
-  String get north_central_pacific => "Pacífico Norte-Central";
   @override
   String get south_tropical_africa => "África tropical do sul";
   @override
-  String get southern_africa => "África do Sul";
-  @override
   String get caucasus => "Cáucaso";
-  @override
-  String get color_yellow => "amarela";
   @override
   String get middle_asia => "Ásia média";
   @override
@@ -1045,13 +1357,11 @@ class $pt extends S {
   @override
   String get australia => "Austrália";
   @override
-  String get subantarctic_islands => "Ilhas Subantárticas";
-  @override
-  String get my_region => "Minha região";
+  String get plant_leaf => "Folhas";
   @override
   String get habitat_forest => "florestas";
   @override
-  String get indian_subcontinent => "Subcontinente indiano";
+  String get taxonomy_serie => "série";
   @override
   String get malesia => "Malésia";
   @override
@@ -1059,79 +1369,53 @@ class $pt extends S {
   @override
   String get asia_tropical => "Ásia-Tropical";
   @override
-  String get filter_habitat => "habitat";
-  @override
-  String get northwestern_pacific => "Noroeste do Pacífico";
-  @override
   String get northwestern_usa => "Noroeste dos EUA";
   @override
   String get northern_south_america => "Norte da América do Sul";
-  @override
-  String get southwestern_europe => "Europa do Sudoeste";
   @override
   String get southern_america => "América do Sul";
   @override
   String get middle_atlantic_ocean => "Oceano Atlântico Médio";
   @override
-  String get antarctic_continent => "Continente Antártico";
-  @override
-  String get brazil => "Brasil";
-  @override
-  String get eastern_europe => "Europa Oriental";
-  @override
   String get habitat_garden => "jardins e campos";
-  @override
-  String get south_central_usa => "EUA Centro-Sul";
   @override
   String get russian_far_east => "Extremo Oriente Russo";
   @override
   String get west_central_tropical_africa => "África Tropical Centro-Ocidental";
   @override
-  String get macaronesia => "Macaronésia";
+  String get plant_toxicity => "Toxicidade";
   @override
-  String get arabian_peninsula => "Península Arábica";
+  String get macaronesia => "Macaronésia";
   @override
   String get asia_temperate => "Ásia-Temperado";
   @override
-  String get west_tropical_africa => "África Tropical Ocidental";
-  @override
-  String get northern_europe => "Norte da Europa";
-  @override
   String get habitat_rock => "rochas e montanhas";
   @override
-  String get northeast_tropical_africa => "Nordeste da África Tropical";
+  String get taxonomy_superregnum => "domínio";
   @override
-  String get pref_language => "Língua preferida";
+  String get taxonomy_sectio => "seção";
   @override
   String get mongolia => "Mongólia";
   @override
-  String get new_zealand => "Nova Zelândia";
+  String get taxonomy_subserie => "subsérie";
   @override
   String get western_south_america => "Oeste da América do Sul";
   @override
-  String get filter_distribution => "distribution";
+  String get taxonomy_subgenus => "subgênero";
   @override
   String get europe => "Europa";
   @override
   String get middle_europe => "Europa Central";
   @override
-  String get eastern_asia => "Ásia Oriental";
-  @override
-  String get western_asia => "Ásia Ocidental";
-  @override
-  String get subarctic_america => "América Subarctic";
-  @override
   String get color_blue => "azul, violeta";
   @override
-  String get north_central_usa => "EUA do centro-norte";
-  @override
   String get southern_south_america => "Sul da América do Sul";
+  @override
+  String get plant_habitat => "Habitat";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "número de pétalas";
-  @override
-  String get southeastern_usa => "Sudeste dos EUA";
   @override
   String get color_white => "branca";
   @override
@@ -1139,11 +1423,13 @@ class $pt extends S {
   @override
   String get color_green => "verde, castanha, preta";
   @override
-  String get petal_many => "mais que 5";
+  String get taxonomy_ordo => "ordem";
   @override
-  String get southeastern_europe => "Sudeste da Europa";
+  String get taxonomy_supersectio => "superseção";
   @override
   String get pacific => "Pacífico";
+  @override
+  String get taxonomy_regnum => "reino";
   @override
   String get south_central_pacific => "Pacífico Sul-Central";
   @override
@@ -1151,15 +1437,119 @@ class $pt extends S {
   @override
   String get help => "Ajuda";
   @override
-  String get northern_africa => "Norte da África";
-  @override
   String get mexico => "México";
+  @override
+  String get siberia => "Sibéria";
+  @override
+  String get taxonomy_subtribus => "subtribo";
+  @override
+  String get habitat_meadow => "prados e pastagens";
+  @override
+  String get plant_trivia => "Curiosidades";
+  @override
+  String get taxonomy_cladus => "(clado)";
+  @override
+  String get plant_herbalism => "Fitoterapia";
+  @override
+  String get plant_height_to => "a";
+  @override
+  String get habitat_wetland => "pântanos e zonas húmidas";
+  @override
+  String get eastern_canada => "Canadá Oriental";
+  @override
+  String get habitat_tree => "árvores e arbustos";
+  @override
+  String get settings => "Configurações";
+  @override
+  String get color_red => "vermelha, cor-de-rosa";
+  @override
+  String get north_central_pacific => "Pacífico Norte-Central";
+  @override
+  String get taxonomy_subsectio => "subseção";
+  @override
+  String get southern_africa => "África do Sul";
+  @override
+  String get color_yellow => "amarela";
+  @override
+  String get subantarctic_islands => "Ilhas Subantárticas";
+  @override
+  String get taxonomy_subfamilia => "subfamília";
+  @override
+  String get my_region => "Minha região";
+  @override
+  String get indian_subcontinent => "Subcontinente indiano";
+  @override
+  String get plant_flower => "Flores";
+  @override
+  String get filter_habitat => "habitat";
+  @override
+  String get northwestern_pacific => "Noroeste do Pacífico";
+  @override
+  String get southwestern_europe => "Europa do Sudoeste";
+  @override
+  String get taxonomy_species => "espécie";
+  @override
+  String get plant_fruit => "Frutos";
+  @override
+  String get plant_flowering_to => "a";
+  @override
+  String get taxonomy_familia => "família";
+  @override
+  String get plant_stem => "Caule";
+  @override
+  String get antarctic_continent => "Continente Antártico";
+  @override
+  String get brazil => "Brasil";
+  @override
+  String get eastern_europe => "Europa Oriental";
+  @override
+  String get south_central_usa => "EUA Centro-Sul";
+  @override
+  String get plant_flowering_from => "Floresce de";
+  @override
+  String get taxonomy_tribus => "tribo";
+  @override
+  String get arabian_peninsula => "Península Arábica";
+  @override
+  String get west_tropical_africa => "África Tropical Ocidental";
+  @override
+  String get northern_europe => "Norte da Europa";
+  @override
+  String get northeast_tropical_africa => "Nordeste da África Tropical";
+  @override
+  String get pref_language => "Língua preferida";
+  @override
+  String get new_zealand => "Nova Zelândia";
+  @override
+  String get filter_distribution => "distribution";
+  @override
+  String get eastern_asia => "Ásia Oriental";
+  @override
+  String get western_asia => "Ásia Ocidental";
+  @override
+  String get subarctic_america => "América Subarctic";
+  @override
+  String get north_central_usa => "EUA do centro-norte";
+  @override
+  String get southeastern_usa => "Sudeste dos EUA";
+  @override
+  String get plant_height_from => "altura de";
+  @override
+  String get petal_many => "mais que 5";
+  @override
+  String get southeastern_europe => "Sudeste da Europa";
+  @override
+  String get taxonomy_unknown => "desconhecido";
+  @override
+  String get plant_inflorescence => "Inflorescência";
+  @override
+  String get northern_africa => "Norte da África";
   @override
   String get china => "China";
   @override
-  String get papuasia => "Papuásia";
+  String get taxonomy_genus => "género";
   @override
-  String get siberia => "Sibéria";
+  String get papuasia => "Papuásia";
 }
 
 class $lt extends S {
@@ -1168,8 +1558,6 @@ class $lt extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "pievas ar pievos";
   @override
   String get central_america => "Centrinė Amerika";
   @override
@@ -1187,33 +1575,17 @@ class $lt extends S {
   @override
   String get caribbean => "Karibai";
   @override
-  String get habitat_wetland => "šlapžemės";
-  @override
   String get australasia => "Australasija";
-  @override
-  String get eastern_canada => "Rytų Kanadoje";
   @override
   String get petal_4 => "4 arba mažiau";
   @override
   String get east_tropical_africa => "Rytų tropinė Afrika";
   @override
-  String get habitat_tree => "medžiai ar krūmai";
-  @override
-  String get settings => "Nustatymai";
-  @override
-  String get color_red => "raudona, rožinė";
-  @override
   String get africa => "Afrika";
-  @override
-  String get north_central_pacific => "Ramiojo vandenyno šiaurės ir centrinė dalis";
   @override
   String get south_tropical_africa => "Pietų tropinė Afrika";
   @override
-  String get southern_africa => "Pietų Afrika";
-  @override
   String get caucasus => "Kaukazas";
-  @override
-  String get color_yellow => "geltonas";
   @override
   String get middle_asia => "Vidurinė Azija";
   @override
@@ -1221,13 +1593,11 @@ class $lt extends S {
   @override
   String get australia => "Australija";
   @override
-  String get subantarctic_islands => "Subartkartinės salos";
-  @override
-  String get my_region => "Mano regionas";
+  String get plant_leaf => "Lapai";
   @override
   String get habitat_forest => "miškai";
   @override
-  String get indian_subcontinent => "Indijos subkontinentas";
+  String get taxonomy_serie => "Serija";
   @override
   String get malesia => "Malaizija";
   @override
@@ -1235,79 +1605,53 @@ class $lt extends S {
   @override
   String get asia_tropical => "Azijos tropinis";
   @override
-  String get filter_habitat => "buveinių";
-  @override
-  String get northwestern_pacific => "Ramiojo vandenyno šiaurės vakarai";
-  @override
   String get northwestern_usa => "Šiaurės vakarų JAV";
   @override
   String get northern_south_america => "Šiaurės Pietų Amerika";
-  @override
-  String get southwestern_europe => "Pietvakarių Europa";
   @override
   String get southern_america => "Pietų Amerika";
   @override
   String get middle_atlantic_ocean => "Vidurio Atlanto vandenynas";
   @override
-  String get antarctic_continent => "Antarkties žemynas";
-  @override
-  String get brazil => "Brazilija";
-  @override
-  String get eastern_europe => "Rytų Europa";
-  @override
   String get habitat_garden => "sodai ar laukai";
-  @override
-  String get south_central_usa => "Pietu-Centrinė JAV";
   @override
   String get russian_far_east => "Rusijos Tolimuosiuose Rytuose";
   @override
   String get west_central_tropical_africa => "Vakarų-Centrinė tropinė Afrika";
   @override
-  String get macaronesia => "Makaronezija";
+  String get plant_toxicity => "Toksiškumas";
   @override
-  String get arabian_peninsula => "Arabijos pusiasalis";
+  String get macaronesia => "Makaronezija";
   @override
   String get asia_temperate => "Azijos temperatuotas";
   @override
-  String get west_tropical_africa => "Vakarų tropinė Afrika";
-  @override
-  String get northern_europe => "Šiaurės Europa";
-  @override
   String get habitat_rock => "uolienos ar kalnai";
   @override
-  String get northeast_tropical_africa => "Šiaurės rytų tropinė Afrika";
+  String get taxonomy_superregnum => "Domenas";
   @override
-  String get pref_language => "Pageidautina kalba";
+  String get taxonomy_sectio => "Sekcija";
   @override
   String get mongolia => "Mongolija";
   @override
-  String get new_zealand => "Naujoji Zelandija";
+  String get taxonomy_subserie => "Subserija";
   @override
   String get western_south_america => "Vakarų Pietų Amerika";
   @override
-  String get filter_distribution => "platinimas";
+  String get taxonomy_subgenus => "Pogentė";
   @override
   String get europe => "Europa";
   @override
   String get middle_europe => "Vidurio Europa";
   @override
-  String get eastern_asia => "Rytų Azija";
-  @override
-  String get western_asia => "Vakarų Azija";
-  @override
-  String get subarctic_america => "Subartikinė Amerika";
-  @override
   String get color_blue => "mėlyna, violetinė";
   @override
-  String get north_central_usa => "Šiaurės-Centrinė JAV";
-  @override
   String get southern_south_america => "Pietų Pietų Amerika";
+  @override
+  String get plant_habitat => "Buveinė";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "skaičius žiedlapiais";
-  @override
-  String get southeastern_usa => "Pietryčių JAV";
   @override
   String get color_white => "baltas";
   @override
@@ -1315,11 +1659,13 @@ class $lt extends S {
   @override
   String get color_green => "žalia, ruda, juoda";
   @override
-  String get petal_many => "daugiau nei 5";
+  String get taxonomy_ordo => "Eilė";
   @override
-  String get southeastern_europe => "Pietryčių Europa";
+  String get taxonomy_supersectio => "Supersekcija";
   @override
   String get pacific => "Ramusis vandenynas";
+  @override
+  String get taxonomy_regnum => "Karalystė";
   @override
   String get south_central_pacific => "Ramiojo vandenyno pietinė dalis";
   @override
@@ -1327,15 +1673,119 @@ class $lt extends S {
   @override
   String get help => "Padėkite";
   @override
-  String get northern_africa => "Šiaurės Afrika";
-  @override
   String get mexico => "Meksika";
+  @override
+  String get siberia => "Sibiras";
+  @override
+  String get taxonomy_subtribus => "Subtriba";
+  @override
+  String get habitat_meadow => "pievas ar pievos";
+  @override
+  String get plant_trivia => "Obuolys";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "Žolininkystė";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "šlapžemės";
+  @override
+  String get eastern_canada => "Rytų Kanadoje";
+  @override
+  String get habitat_tree => "medžiai ar krūmai";
+  @override
+  String get settings => "Nustatymai";
+  @override
+  String get color_red => "raudona, rožinė";
+  @override
+  String get north_central_pacific => "Ramiojo vandenyno šiaurės ir centrinė dalis";
+  @override
+  String get taxonomy_subsectio => "Subsekcija";
+  @override
+  String get southern_africa => "Pietų Afrika";
+  @override
+  String get color_yellow => "geltonas";
+  @override
+  String get subantarctic_islands => "Subartkartinės salos";
+  @override
+  String get taxonomy_subfamilia => "Pošeimis";
+  @override
+  String get my_region => "Mano regionas";
+  @override
+  String get indian_subcontinent => "Indijos subkontinentas";
+  @override
+  String get plant_flower => "Žiedas";
+  @override
+  String get filter_habitat => "buveinių";
+  @override
+  String get northwestern_pacific => "Ramiojo vandenyno šiaurės vakarai";
+  @override
+  String get southwestern_europe => "Pietvakarių Europa";
+  @override
+  String get taxonomy_species => "Rūšis";
+  @override
+  String get plant_fruit => "Vaisius";
+  @override
+  String get plant_flowering_to => "iki";
+  @override
+  String get taxonomy_familia => "Šeima";
+  @override
+  String get plant_stem => "Stiebas";
+  @override
+  String get antarctic_continent => "Antarkties žemynas";
+  @override
+  String get brazil => "Brazilija";
+  @override
+  String get eastern_europe => "Rytų Europa";
+  @override
+  String get south_central_usa => "Pietu-Centrinė JAV";
+  @override
+  String get plant_flowering_from => "Žydėjimas nuo";
+  @override
+  String get taxonomy_tribus => "Triba";
+  @override
+  String get arabian_peninsula => "Arabijos pusiasalis";
+  @override
+  String get west_tropical_africa => "Vakarų tropinė Afrika";
+  @override
+  String get northern_europe => "Šiaurės Europa";
+  @override
+  String get northeast_tropical_africa => "Šiaurės rytų tropinė Afrika";
+  @override
+  String get pref_language => "Pageidautina kalba";
+  @override
+  String get new_zealand => "Naujoji Zelandija";
+  @override
+  String get filter_distribution => "platinimas";
+  @override
+  String get eastern_asia => "Rytų Azija";
+  @override
+  String get western_asia => "Vakarų Azija";
+  @override
+  String get subarctic_america => "Subartikinė Amerika";
+  @override
+  String get north_central_usa => "Šiaurės-Centrinė JAV";
+  @override
+  String get southeastern_usa => "Pietryčių JAV";
+  @override
+  String get plant_height_from => "Aukštis";
+  @override
+  String get petal_many => "daugiau nei 5";
+  @override
+  String get southeastern_europe => "Pietryčių Europa";
+  @override
+  String get taxonomy_unknown => "nežinomas";
+  @override
+  String get plant_inflorescence => "Žiedynas";
+  @override
+  String get northern_africa => "Šiaurės Afrika";
   @override
   String get china => "Kinija";
   @override
-  String get papuasia => "Papuazija";
+  String get taxonomy_genus => "Gentis";
   @override
-  String get siberia => "Sibiras";
+  String get papuasia => "Papuazija";
 }
 
 class $hr extends S {
@@ -1344,8 +1794,6 @@ class $hr extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "livade ili pašnjaci";
   @override
   String get central_america => "Centralna Amerika";
   @override
@@ -1363,33 +1811,17 @@ class $hr extends S {
   @override
   String get caribbean => "Karibi";
   @override
-  String get habitat_wetland => "močvare";
-  @override
   String get australasia => "Australazija";
-  @override
-  String get eastern_canada => "Istočna Kanada";
   @override
   String get petal_4 => "4 ili manje";
   @override
   String get east_tropical_africa => "Istočna tropska Afrika";
   @override
-  String get habitat_tree => "stabala ili grmova";
-  @override
-  String get settings => "Postavke";
-  @override
-  String get color_red => "crvena, roza";
-  @override
   String get africa => "Afrika";
-  @override
-  String get north_central_pacific => "Sjeverno-središnji Tihi ocean";
   @override
   String get south_tropical_africa => "Južna tropska Afrika";
   @override
-  String get southern_africa => "Južna Afrika";
-  @override
   String get caucasus => "Kavkaz";
-  @override
-  String get color_yellow => "žuta";
   @override
   String get middle_asia => "Srednja Azija";
   @override
@@ -1397,13 +1829,11 @@ class $hr extends S {
   @override
   String get australia => "Australija";
   @override
-  String get subantarctic_islands => "Subantartički otoci";
-  @override
-  String get my_region => "Moja regija";
+  String get plant_leaf => "List";
   @override
   String get habitat_forest => "šume";
   @override
-  String get indian_subcontinent => "Indijski potkontinent";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malezija";
   @override
@@ -1411,79 +1841,53 @@ class $hr extends S {
   @override
   String get asia_tropical => "Azija-tropska";
   @override
-  String get filter_habitat => "staništa";
-  @override
-  String get northwestern_pacific => "Sjeverozapadni Tihi ocean";
-  @override
   String get northwestern_usa => "Sjeverozapadna SAD";
   @override
   String get northern_south_america => "Sjeverna Južna Amerika";
-  @override
-  String get southwestern_europe => "Jugozapadna Europa";
   @override
   String get southern_america => "Južna Amerika";
   @override
   String get middle_atlantic_ocean => "Srednji Atlantski ocean";
   @override
-  String get antarctic_continent => "Antarktički kontinent";
-  @override
-  String get brazil => "Brazil";
-  @override
-  String get eastern_europe => "Istočna Europa";
-  @override
   String get habitat_garden => "vrtovi ili polja";
-  @override
-  String get south_central_usa => "Južno-središnje SAD";
   @override
   String get russian_far_east => "Ruski Daleki Istok";
   @override
   String get west_central_tropical_africa => "Zapadno-središnja tropska Afrika";
   @override
-  String get macaronesia => "Makaronezija";
+  String get plant_toxicity => "Toksičnost";
   @override
-  String get arabian_peninsula => "Arapski poluotok";
+  String get macaronesia => "Makaronezija";
   @override
   String get asia_temperate => "Azija-umjerenih";
   @override
-  String get west_tropical_africa => "Zapadna tropska Afrika";
-  @override
-  String get northern_europe => "Sjeverna Europa";
-  @override
   String get habitat_rock => "stijene ili planine";
   @override
-  String get northeast_tropical_africa => "Sjeveroistočna tropska Afrika";
+  String get taxonomy_superregnum => "Domena";
   @override
-  String get pref_language => "Preferirani jezik";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongolija";
   @override
-  String get new_zealand => "Novi Zeland";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "Zapadna Južna Amerika";
   @override
-  String get filter_distribution => "distribucija";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "Europa";
   @override
   String get middle_europe => "Srednja Europa";
   @override
-  String get eastern_asia => "Istočna Azija";
-  @override
-  String get western_asia => "Zapadna Azija";
-  @override
-  String get subarctic_america => "Subarktička Amerika";
-  @override
   String get color_blue => "plava, ljubičasta";
   @override
-  String get north_central_usa => "Sjeverno središnje SAD";
-  @override
   String get southern_south_america => "Južna Južna Amerika";
+  @override
+  String get plant_habitat => "Staništa";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "broj krunskih listić";
-  @override
-  String get southeastern_usa => "Jugoistočni SAD";
   @override
   String get color_white => "bijela";
   @override
@@ -1491,11 +1895,13 @@ class $hr extends S {
   @override
   String get color_green => "zelena, smeđa, crna";
   @override
-  String get petal_many => "više od 5";
+  String get taxonomy_ordo => "Red";
   @override
-  String get southeastern_europe => "Jugoistočna Europa";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Tihi ocean";
+  @override
+  String get taxonomy_regnum => "Carstvo";
   @override
   String get south_central_pacific => "Južno-središnji Tihi ocean";
   @override
@@ -1503,15 +1909,119 @@ class $hr extends S {
   @override
   String get help => "Pomoć";
   @override
-  String get northern_africa => "Sjeverna Afrika";
-  @override
   String get mexico => "Meksiko";
+  @override
+  String get siberia => "Sibir";
+  @override
+  String get taxonomy_subtribus => "Podtribus";
+  @override
+  String get habitat_meadow => "livade ili pašnjaci";
+  @override
+  String get plant_trivia => "Trivijalnost";
+  @override
+  String get taxonomy_cladus => "(Cladus)";
+  @override
+  String get plant_herbalism => "Travarstvo";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "močvare";
+  @override
+  String get eastern_canada => "Istočna Kanada";
+  @override
+  String get habitat_tree => "stabala ili grmova";
+  @override
+  String get settings => "Postavke";
+  @override
+  String get color_red => "crvena, roza";
+  @override
+  String get north_central_pacific => "Sjeverno-središnji Tihi ocean";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Južna Afrika";
+  @override
+  String get color_yellow => "žuta";
+  @override
+  String get subantarctic_islands => "Subantartički otoci";
+  @override
+  String get taxonomy_subfamilia => "Potporodica";
+  @override
+  String get my_region => "Moja regija";
+  @override
+  String get indian_subcontinent => "Indijski potkontinent";
+  @override
+  String get plant_flower => "Cvijeće";
+  @override
+  String get filter_habitat => "staništa";
+  @override
+  String get northwestern_pacific => "Sjeverozapadni Tihi ocean";
+  @override
+  String get southwestern_europe => "Jugozapadna Europa";
+  @override
+  String get taxonomy_species => "Vrsta";
+  @override
+  String get plant_fruit => "Plod";
+  @override
+  String get plant_flowering_to => "do";
+  @override
+  String get taxonomy_familia => "Porodica";
+  @override
+  String get plant_stem => "Stablo";
+  @override
+  String get antarctic_continent => "Antarktički kontinent";
+  @override
+  String get brazil => "Brazil";
+  @override
+  String get eastern_europe => "Istočna Europa";
+  @override
+  String get south_central_usa => "Južno-središnje SAD";
+  @override
+  String get plant_flowering_from => "Cvatnje od";
+  @override
+  String get taxonomy_tribus => "Tribus";
+  @override
+  String get arabian_peninsula => "Arapski poluotok";
+  @override
+  String get west_tropical_africa => "Zapadna tropska Afrika";
+  @override
+  String get northern_europe => "Sjeverna Europa";
+  @override
+  String get northeast_tropical_africa => "Sjeveroistočna tropska Afrika";
+  @override
+  String get pref_language => "Preferirani jezik";
+  @override
+  String get new_zealand => "Novi Zeland";
+  @override
+  String get filter_distribution => "distribucija";
+  @override
+  String get eastern_asia => "Istočna Azija";
+  @override
+  String get western_asia => "Zapadna Azija";
+  @override
+  String get subarctic_america => "Subarktička Amerika";
+  @override
+  String get north_central_usa => "Sjeverno središnje SAD";
+  @override
+  String get southeastern_usa => "Jugoistočni SAD";
+  @override
+  String get plant_height_from => "Visina";
+  @override
+  String get petal_many => "više od 5";
+  @override
+  String get southeastern_europe => "Jugoistočna Europa";
+  @override
+  String get taxonomy_unknown => "nepoznat";
+  @override
+  String get plant_inflorescence => "Cvat";
+  @override
+  String get northern_africa => "Sjeverna Afrika";
   @override
   String get china => "Kina";
   @override
-  String get papuasia => "Papuazija";
+  String get taxonomy_genus => "Rod";
   @override
-  String get siberia => "Sibir";
+  String get papuasia => "Papuazija";
 }
 
 class $lv extends S {
@@ -1520,8 +2030,6 @@ class $lv extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "pievas ar pievos";
   @override
   String get central_america => "Centrālamerika";
   @override
@@ -1539,33 +2047,17 @@ class $lv extends S {
   @override
   String get caribbean => "Karību jūras reģions";
   @override
-  String get habitat_wetland => "šlapžemės";
-  @override
   String get australasia => "Austrālāzija";
-  @override
-  String get eastern_canada => "Austrumu Kanāda";
   @override
   String get petal_4 => "4 arba mažiau";
   @override
   String get east_tropical_africa => "Austrumu tropu Āfrika";
   @override
-  String get habitat_tree => "medžiai ar krūmai";
-  @override
-  String get settings => "Nustatymai";
-  @override
-  String get color_red => "raudona, rožinė";
-  @override
   String get africa => "Āfrika";
-  @override
-  String get north_central_pacific => "Klusā okeāna ziemeļu daļa";
   @override
   String get south_tropical_africa => "Dienvidu tropu Āfrika";
   @override
-  String get southern_africa => "Dienvidāfrika";
-  @override
   String get caucasus => "Kaukāzs";
-  @override
-  String get color_yellow => "geltonas";
   @override
   String get middle_asia => "Vidusāzija";
   @override
@@ -1573,13 +2065,11 @@ class $lv extends S {
   @override
   String get australia => "Austrālija";
   @override
-  String get subantarctic_islands => "Subantkartiskas salas";
-  @override
-  String get my_region => "Mans reģions";
+  String get plant_leaf => "Lapas";
   @override
   String get habitat_forest => "miškai";
   @override
-  String get indian_subcontinent => "Indijas subkontinents";
+  String get taxonomy_serie => "Sērija";
   @override
   String get malesia => "Malaizija";
   @override
@@ -1587,79 +2077,53 @@ class $lv extends S {
   @override
   String get asia_tropical => "Āzija Tropisks";
   @override
-  String get filter_habitat => "biotopi";
-  @override
-  String get northwestern_pacific => "Klusā okeāna ziemeļrietumu daļa";
-  @override
   String get northwestern_usa => "Ziemeļrietumu ASV";
   @override
   String get northern_south_america => "Ziemeļu Dienvidamerika";
-  @override
-  String get southwestern_europe => "Dienvidrietumu Eiropa";
   @override
   String get southern_america => "Dienvidamerika";
   @override
   String get middle_atlantic_ocean => "Viduvie Atlantijas okeāns";
   @override
-  String get antarctic_continent => "Antarktikas kontinents";
-  @override
-  String get brazil => "Brazīlija";
-  @override
-  String get eastern_europe => "Austrumeiropa";
-  @override
   String get habitat_garden => "sodai ar laukai";
-  @override
-  String get south_central_usa => "Dienvidu ASV";
   @override
   String get russian_far_east => "Krievu Tālajos Austrumos";
   @override
   String get west_central_tropical_africa => "Rietumu centrālā tropu afrika";
   @override
-  String get macaronesia => "Makaronēzija";
+  String get plant_toxicity => "Toksiskums";
   @override
-  String get arabian_peninsula => "Arābijas pussala";
+  String get macaronesia => "Makaronēzija";
   @override
   String get asia_temperate => "Āzija Viduslaiku";
   @override
-  String get west_tropical_africa => "Rietumu tropu Āfrika";
-  @override
-  String get northern_europe => "Ziemeļeiropa";
-  @override
   String get habitat_rock => "uolienos ar kalnai";
   @override
-  String get northeast_tropical_africa => "Ziemeļaustrumu tropu Āfrika";
+  String get taxonomy_superregnum => "Impērija";
   @override
-  String get pref_language => "Pageidautina kalba";
+  String get taxonomy_sectio => "Sekcija";
   @override
   String get mongolia => "Mongolija";
   @override
-  String get new_zealand => "Jaunzēlande";
+  String get taxonomy_subserie => "Apakšsērija";
   @override
   String get western_south_america => "Rietumu Dienvidamerika";
   @override
-  String get filter_distribution => "izplatīšana";
+  String get taxonomy_subgenus => "Apakšģints";
   @override
   String get europe => "Eiropa";
   @override
   String get middle_europe => "Vidēja Eiropa";
   @override
-  String get eastern_asia => "Austrumāzija";
-  @override
-  String get western_asia => "Rietumu Āzija";
-  @override
-  String get subarctic_america => "Subartikā Amerika";
-  @override
   String get color_blue => "mėlyna, violetinė";
   @override
-  String get north_central_usa => "Ziemeļu ASV";
-  @override
   String get southern_south_america => "Dienvidamerika dienvidos";
+  @override
+  String get plant_habitat => "Izplatības areāls";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "skaičius žiedlapiais";
-  @override
-  String get southeastern_usa => "Dienvidaustrumu ASV";
   @override
   String get color_white => "baltas";
   @override
@@ -1667,11 +2131,13 @@ class $lv extends S {
   @override
   String get color_green => "žalia, ruda, juoda";
   @override
-  String get petal_many => "daugiau nei 5";
+  String get taxonomy_ordo => "Rinda";
   @override
-  String get southeastern_europe => "Dienvidaustrumeiropa";
+  String get taxonomy_supersectio => "Virssekcija";
   @override
   String get pacific => "Klusais okeāns";
+  @override
+  String get taxonomy_regnum => "Valsts";
   @override
   String get south_central_pacific => "Klusā okeāna dienvidu daļa";
   @override
@@ -1679,15 +2145,119 @@ class $lv extends S {
   @override
   String get help => "Padėkite";
   @override
-  String get northern_africa => "Ziemeļāfrika";
-  @override
   String get mexico => "Meksika";
+  @override
+  String get siberia => "Sibīrija";
+  @override
+  String get taxonomy_subtribus => "Apakšcilts";
+  @override
+  String get habitat_meadow => "pievas ar pievos";
+  @override
+  String get plant_trivia => "Nieki";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "Herbalism";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "šlapžemės";
+  @override
+  String get eastern_canada => "Austrumu Kanāda";
+  @override
+  String get habitat_tree => "medžiai ar krūmai";
+  @override
+  String get settings => "Nustatymai";
+  @override
+  String get color_red => "raudona, rožinė";
+  @override
+  String get north_central_pacific => "Klusā okeāna ziemeļu daļa";
+  @override
+  String get taxonomy_subsectio => "Apakšsekcija";
+  @override
+  String get southern_africa => "Dienvidāfrika";
+  @override
+  String get color_yellow => "geltonas";
+  @override
+  String get subantarctic_islands => "Subantkartiskas salas";
+  @override
+  String get taxonomy_subfamilia => "Apakšdzimta";
+  @override
+  String get my_region => "Mans reģions";
+  @override
+  String get indian_subcontinent => "Indijas subkontinents";
+  @override
+  String get plant_flower => "Zieds";
+  @override
+  String get filter_habitat => "biotopi";
+  @override
+  String get northwestern_pacific => "Klusā okeāna ziemeļrietumu daļa";
+  @override
+  String get southwestern_europe => "Dienvidrietumu Eiropa";
+  @override
+  String get taxonomy_species => "Suga";
+  @override
+  String get plant_fruit => "Auglis";
+  @override
+  String get plant_flowering_to => "līdz";
+  @override
+  String get taxonomy_familia => "Dzimta";
+  @override
+  String get plant_stem => "Stumbrs";
+  @override
+  String get antarctic_continent => "Antarktikas kontinents";
+  @override
+  String get brazil => "Brazīlija";
+  @override
+  String get eastern_europe => "Austrumeiropa";
+  @override
+  String get south_central_usa => "Dienvidu ASV";
+  @override
+  String get plant_flowering_from => "Ziedēšanas no";
+  @override
+  String get taxonomy_tribus => "Cilts";
+  @override
+  String get arabian_peninsula => "Arābijas pussala";
+  @override
+  String get west_tropical_africa => "Rietumu tropu Āfrika";
+  @override
+  String get northern_europe => "Ziemeļeiropa";
+  @override
+  String get northeast_tropical_africa => "Ziemeļaustrumu tropu Āfrika";
+  @override
+  String get pref_language => "Pageidautina kalba";
+  @override
+  String get new_zealand => "Jaunzēlande";
+  @override
+  String get filter_distribution => "izplatīšana";
+  @override
+  String get eastern_asia => "Austrumāzija";
+  @override
+  String get western_asia => "Rietumu Āzija";
+  @override
+  String get subarctic_america => "Subartikā Amerika";
+  @override
+  String get north_central_usa => "Ziemeļu ASV";
+  @override
+  String get southeastern_usa => "Dienvidaustrumu ASV";
+  @override
+  String get plant_height_from => "Augstums";
+  @override
+  String get petal_many => "daugiau nei 5";
+  @override
+  String get southeastern_europe => "Dienvidaustrumeiropa";
+  @override
+  String get taxonomy_unknown => "nezināms";
+  @override
+  String get plant_inflorescence => "Ziedkopa";
+  @override
+  String get northern_africa => "Ziemeļāfrika";
   @override
   String get china => "Ķīna";
   @override
-  String get papuasia => "Papuāzija";
+  String get taxonomy_genus => "Ģints";
   @override
-  String get siberia => "Sibīrija";
+  String get papuasia => "Papuāzija";
 }
 
 class $fr extends S {
@@ -1696,8 +2266,6 @@ class $fr extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "prés ou prairies";
   @override
   String get central_america => "Amérique centrale";
   @override
@@ -1715,33 +2283,17 @@ class $fr extends S {
   @override
   String get caribbean => "Caraïbes";
   @override
-  String get habitat_wetland => "bruyères ou zones humides";
-  @override
   String get australasia => "Australasie";
-  @override
-  String get eastern_canada => "Est du Canada";
   @override
   String get petal_4 => "4 ou moins";
   @override
   String get east_tropical_africa => "Afrique tropicale de l'Est";
   @override
-  String get habitat_tree => "arbres ou arbustes";
-  @override
-  String get settings => "Paramètres";
-  @override
-  String get color_red => "rouge, rose";
-  @override
   String get africa => "Afrique";
-  @override
-  String get north_central_pacific => "Pacifique Nord-Centre";
   @override
   String get south_tropical_africa => "Afrique tropicale du Sud";
   @override
-  String get southern_africa => "Afrique du sud";
-  @override
   String get caucasus => "Caucase";
-  @override
-  String get color_yellow => "jaune";
   @override
   String get middle_asia => "Asie moyenne";
   @override
@@ -1749,13 +2301,11 @@ class $fr extends S {
   @override
   String get australia => "Australie";
   @override
-  String get subantarctic_islands => "Îles subantarctiques";
-  @override
-  String get my_region => "Ma région";
+  String get plant_leaf => "Feuilles";
   @override
   String get habitat_forest => "bois ou forêts";
   @override
-  String get indian_subcontinent => "Sous-continent indien";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malaisie";
   @override
@@ -1763,79 +2313,53 @@ class $fr extends S {
   @override
   String get asia_tropical => "Asie-tropicale";
   @override
-  String get filter_habitat => "habitats";
-  @override
-  String get northwestern_pacific => "Pacifique Nord-Ouest";
-  @override
   String get northwestern_usa => "Nord-Ouest des États-Unis";
   @override
   String get northern_south_america => "Nord de l'Amérique du Sud";
-  @override
-  String get southwestern_europe => "Europe du sud-ouest";
   @override
   String get southern_america => "Amérique du Sud";
   @override
   String get middle_atlantic_ocean => "Moyen océan Atlantique";
   @override
-  String get antarctic_continent => "Continent de l'Antarctique";
-  @override
-  String get brazil => "Brésil";
-  @override
-  String get eastern_europe => "Europe de l'Est";
-  @override
   String get habitat_garden => "jardins ou champs";
-  @override
-  String get south_central_usa => "Sud-Central des États-Unis";
   @override
   String get russian_far_east => "Extrême-Orient russe";
   @override
   String get west_central_tropical_africa => "Afrique tropicale ouest-centrale";
   @override
-  String get macaronesia => "Macaronésie";
+  String get plant_toxicity => "Toxicité";
   @override
-  String get arabian_peninsula => "Arabie";
+  String get macaronesia => "Macaronésie";
   @override
   String get asia_temperate => "Asie-tempérée";
   @override
-  String get west_tropical_africa => "Afrique tropicale de l'Ouest";
-  @override
-  String get northern_europe => "Europe du Nord";
-  @override
   String get habitat_rock => "roches ou montagnes";
   @override
-  String get northeast_tropical_africa => "Afrique tropicale du nord-est";
+  String get taxonomy_superregnum => "Domaine";
   @override
-  String get pref_language => "Préférence de langue";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongolie";
   @override
-  String get new_zealand => "Nouvelle-Zélande";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "Ouest de l'Amérique du Sud";
   @override
-  String get filter_distribution => "distribution";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "Europe";
   @override
   String get middle_europe => "Moyen-Europe";
   @override
-  String get eastern_asia => "Asie de l'Est";
-  @override
-  String get western_asia => "Asie occidentale";
-  @override
-  String get subarctic_america => "Amérique subarctique";
-  @override
   String get color_blue => "bleu, violet";
   @override
-  String get north_central_usa => "Nord-Central des États-Unis";
-  @override
   String get southern_south_america => "Sud de l'Amérique du Sud";
+  @override
+  String get plant_habitat => "Habitat";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "nombre de pétales";
-  @override
-  String get southeastern_usa => "Sud-est des États-Unis";
   @override
   String get color_white => "blanc";
   @override
@@ -1843,11 +2367,13 @@ class $fr extends S {
   @override
   String get color_green => "vert, brun, noir";
   @override
-  String get petal_many => "plus de 5";
+  String get taxonomy_ordo => "Ordre";
   @override
-  String get southeastern_europe => "Europe du sud-est";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Pacifique";
+  @override
+  String get taxonomy_regnum => "Règne";
   @override
   String get south_central_pacific => "Pacifique sud-central";
   @override
@@ -1855,15 +2381,119 @@ class $fr extends S {
   @override
   String get help => "Aide";
   @override
-  String get northern_africa => "Afrique du Nord";
-  @override
   String get mexico => "Mexique";
+  @override
+  String get siberia => "Sibérie";
+  @override
+  String get taxonomy_subtribus => "Sous-tribu";
+  @override
+  String get habitat_meadow => "prés ou prairies";
+  @override
+  String get plant_trivia => "Bagatelles";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "Herboristerie";
+  @override
+  String get plant_height_to => "et";
+  @override
+  String get habitat_wetland => "bruyères ou zones humides";
+  @override
+  String get eastern_canada => "Est du Canada";
+  @override
+  String get habitat_tree => "arbres ou arbustes";
+  @override
+  String get settings => "Paramètres";
+  @override
+  String get color_red => "rouge, rose";
+  @override
+  String get north_central_pacific => "Pacifique Nord-Centre";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Afrique du sud";
+  @override
+  String get color_yellow => "jaune";
+  @override
+  String get subantarctic_islands => "Îles subantarctiques";
+  @override
+  String get taxonomy_subfamilia => "Sous-famille";
+  @override
+  String get my_region => "Ma région";
+  @override
+  String get indian_subcontinent => "Sous-continent indien";
+  @override
+  String get plant_flower => "Fleurs";
+  @override
+  String get filter_habitat => "habitats";
+  @override
+  String get northwestern_pacific => "Pacifique Nord-Ouest";
+  @override
+  String get southwestern_europe => "Europe du sud-ouest";
+  @override
+  String get taxonomy_species => "Espèce";
+  @override
+  String get plant_fruit => "Fruits";
+  @override
+  String get plant_flowering_to => "à";
+  @override
+  String get taxonomy_familia => "Famille";
+  @override
+  String get plant_stem => "Tige";
+  @override
+  String get antarctic_continent => "Continent de l'Antarctique";
+  @override
+  String get brazil => "Brésil";
+  @override
+  String get eastern_europe => "Europe de l'Est";
+  @override
+  String get south_central_usa => "Sud-Central des États-Unis";
+  @override
+  String get plant_flowering_from => "Floraison de";
+  @override
+  String get taxonomy_tribus => "Tribu";
+  @override
+  String get arabian_peninsula => "Arabie";
+  @override
+  String get west_tropical_africa => "Afrique tropicale de l'Ouest";
+  @override
+  String get northern_europe => "Europe du Nord";
+  @override
+  String get northeast_tropical_africa => "Afrique tropicale du nord-est";
+  @override
+  String get pref_language => "Préférence de langue";
+  @override
+  String get new_zealand => "Nouvelle-Zélande";
+  @override
+  String get filter_distribution => "distribution";
+  @override
+  String get eastern_asia => "Asie de l'Est";
+  @override
+  String get western_asia => "Asie occidentale";
+  @override
+  String get subarctic_america => "Amérique subarctique";
+  @override
+  String get north_central_usa => "Nord-Central des États-Unis";
+  @override
+  String get southeastern_usa => "Sud-est des États-Unis";
+  @override
+  String get plant_height_from => "Hauteur entre";
+  @override
+  String get petal_many => "plus de 5";
+  @override
+  String get southeastern_europe => "Europe du sud-est";
+  @override
+  String get taxonomy_unknown => "inconnu";
+  @override
+  String get plant_inflorescence => "Floraison";
+  @override
+  String get northern_africa => "Afrique du Nord";
   @override
   String get china => "Chine";
   @override
-  String get papuasia => "Papuasie";
+  String get taxonomy_genus => "Genre";
   @override
-  String get siberia => "Sibérie";
+  String get papuasia => "Papuasie";
 }
 
 class $hu extends S {
@@ -1872,8 +2502,6 @@ class $hu extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "rétek vagy legelők";
   @override
   String get central_america => "Közép-Amerika";
   @override
@@ -1891,33 +2519,17 @@ class $hu extends S {
   @override
   String get caribbean => "Karib";
   @override
-  String get habitat_wetland => "mocsarak vagy vizes élőhelyek";
-  @override
   String get australasia => "Ausztrália";
-  @override
-  String get eastern_canada => "Kelet-Kanada";
   @override
   String get petal_4 => "4 vagy kevesebb";
   @override
   String get east_tropical_africa => "Kelet-trópusi Afrika";
   @override
-  String get habitat_tree => "fák vagy cserjék";
-  @override
-  String get settings => "Beállítások";
-  @override
-  String get color_red => "piros, rózsaszín";
-  @override
   String get africa => "Afrika";
-  @override
-  String get north_central_pacific => "Észak-Közép Csendes-óceán";
   @override
   String get south_tropical_africa => "Dél-Trópusi Afrika";
   @override
-  String get southern_africa => "Dél-Afrika";
-  @override
   String get caucasus => "Kaukázus";
-  @override
-  String get color_yellow => "sárga";
   @override
   String get middle_asia => "Közép-Ázsia";
   @override
@@ -1925,13 +2537,11 @@ class $hu extends S {
   @override
   String get australia => "Ausztrália";
   @override
-  String get subantarctic_islands => "Szubantarktikai szigetek";
-  @override
-  String get my_region => "Saját régió";
+  String get plant_leaf => "Levelek";
   @override
   String get habitat_forest => "erdők";
   @override
-  String get indian_subcontinent => "Indiai szubkontinens";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malesia";
   @override
@@ -1939,79 +2549,53 @@ class $hu extends S {
   @override
   String get asia_tropical => "Ázsia trópusi";
   @override
-  String get filter_habitat => "élettér";
-  @override
-  String get northwestern_pacific => "Észak-nyugat Csendes-óceán";
-  @override
   String get northwestern_usa => "Északnyugati USA";
   @override
   String get northern_south_america => "Észak-Dél-Amerika";
-  @override
-  String get southwestern_europe => "Délnyugat Európa";
   @override
   String get southern_america => "Dél-Amerika";
   @override
   String get middle_atlantic_ocean => "Közép-Atlanti-óceán";
   @override
-  String get antarctic_continent => "Antarktiszi kontinens";
-  @override
-  String get brazil => "Brazília";
-  @override
-  String get eastern_europe => "Kelet-Európa";
-  @override
   String get habitat_garden => "kertek vagy mezők";
-  @override
-  String get south_central_usa => "Dél-Közép USA";
   @override
   String get russian_far_east => "Orosz távol-keleten";
   @override
   String get west_central_tropical_africa => "Nyugat-Közép-Trópusi Afrika";
   @override
-  String get macaronesia => "Makaronézia";
+  String get plant_toxicity => "Méregtartalom";
   @override
-  String get arabian_peninsula => "Arab félsziget";
+  String get macaronesia => "Makaronézia";
   @override
   String get asia_temperate => "Ázsia mérsékelt";
   @override
-  String get west_tropical_africa => "Nyugat-trópusi Afrika";
-  @override
-  String get northern_europe => "Észak-Európa";
-  @override
   String get habitat_rock => "sziklák vagy hegyek";
   @override
-  String get northeast_tropical_africa => "Észak-Trópusi Afrika";
+  String get taxonomy_superregnum => "Domén";
   @override
-  String get pref_language => "Kedvenc nyelv";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongólia";
   @override
-  String get new_zealand => "Új Zéland";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "Nyugat-Dél-Amerika";
   @override
-  String get filter_distribution => "terjesztés";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "Európa";
   @override
   String get middle_europe => "Közép-Európa";
   @override
-  String get eastern_asia => "Kelet-Ázsia";
-  @override
-  String get western_asia => "Nyugat-Ázsia";
-  @override
-  String get subarctic_america => "Subarkti-Amerika";
-  @override
   String get color_blue => "kék, lila";
   @override
-  String get north_central_usa => "Észak-Közép USA";
-  @override
   String get southern_south_america => "Dél-Dél-Amerika";
+  @override
+  String get plant_habitat => "Élettér";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "a szirmok száma";
-  @override
-  String get southeastern_usa => "Délkelet USA";
   @override
   String get color_white => "fehér";
   @override
@@ -2019,11 +2603,13 @@ class $hu extends S {
   @override
   String get color_green => "zöld, barna, fekete";
   @override
-  String get petal_many => "több mint 5";
+  String get taxonomy_ordo => "Rend";
   @override
-  String get southeastern_europe => "Délkelet-Európa";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Csendes-óceán";
+  @override
+  String get taxonomy_regnum => "Ország";
   @override
   String get south_central_pacific => "Dél-Közép Csendes-óceán";
   @override
@@ -2031,15 +2617,119 @@ class $hu extends S {
   @override
   String get help => "Súgó";
   @override
-  String get northern_africa => "Észak-Afrika";
-  @override
   String get mexico => "Mexikó";
+  @override
+  String get siberia => "Szibéria";
+  @override
+  String get taxonomy_subtribus => "Alnemzetségcsoport";
+  @override
+  String get habitat_meadow => "rétek vagy legelők";
+  @override
+  String get plant_trivia => "Apróságok";
+  @override
+  String get taxonomy_cladus => "Csoport";
+  @override
+  String get plant_herbalism => "Gyógynövények";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "mocsarak vagy vizes élőhelyek";
+  @override
+  String get eastern_canada => "Kelet-Kanada";
+  @override
+  String get habitat_tree => "fák vagy cserjék";
+  @override
+  String get settings => "Beállítások";
+  @override
+  String get color_red => "piros, rózsaszín";
+  @override
+  String get north_central_pacific => "Észak-Közép Csendes-óceán";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Dél-Afrika";
+  @override
+  String get color_yellow => "sárga";
+  @override
+  String get subantarctic_islands => "Szubantarktikai szigetek";
+  @override
+  String get taxonomy_subfamilia => "Alcsalád";
+  @override
+  String get my_region => "Saját régió";
+  @override
+  String get indian_subcontinent => "Indiai szubkontinens";
+  @override
+  String get plant_flower => "Virágok";
+  @override
+  String get filter_habitat => "élettér";
+  @override
+  String get northwestern_pacific => "Észak-nyugat Csendes-óceán";
+  @override
+  String get southwestern_europe => "Délnyugat Európa";
+  @override
+  String get taxonomy_species => "Faj";
+  @override
+  String get plant_fruit => "Gyümölcsök";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Család";
+  @override
+  String get plant_stem => "Szár";
+  @override
+  String get antarctic_continent => "Antarktiszi kontinens";
+  @override
+  String get brazil => "Brazília";
+  @override
+  String get eastern_europe => "Kelet-Európa";
+  @override
+  String get south_central_usa => "Dél-Közép USA";
+  @override
+  String get plant_flowering_from => "A virágzás időszaka";
+  @override
+  String get taxonomy_tribus => "Nemzetségcsoport";
+  @override
+  String get arabian_peninsula => "Arab félsziget";
+  @override
+  String get west_tropical_africa => "Nyugat-trópusi Afrika";
+  @override
+  String get northern_europe => "Észak-Európa";
+  @override
+  String get northeast_tropical_africa => "Észak-Trópusi Afrika";
+  @override
+  String get pref_language => "Kedvenc nyelv";
+  @override
+  String get new_zealand => "Új Zéland";
+  @override
+  String get filter_distribution => "terjesztés";
+  @override
+  String get eastern_asia => "Kelet-Ázsia";
+  @override
+  String get western_asia => "Nyugat-Ázsia";
+  @override
+  String get subarctic_america => "Subarkti-Amerika";
+  @override
+  String get north_central_usa => "Észak-Közép USA";
+  @override
+  String get southeastern_usa => "Délkelet USA";
+  @override
+  String get plant_height_from => "Magasság";
+  @override
+  String get petal_many => "több mint 5";
+  @override
+  String get southeastern_europe => "Délkelet-Európa";
+  @override
+  String get taxonomy_unknown => "ismeretlen";
+  @override
+  String get plant_inflorescence => "Virágzat";
+  @override
+  String get northern_africa => "Észak-Afrika";
   @override
   String get china => "Kína";
   @override
-  String get papuasia => "Papuasia";
+  String get taxonomy_genus => "Nemzetség";
   @override
-  String get siberia => "Szibéria";
+  String get papuasia => "Papuasia";
 }
 
 class $uk extends S {
@@ -2048,8 +2738,6 @@ class $uk extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "луки або пасовища";
   @override
   String get central_america => "Центральна Америка";
   @override
@@ -2067,33 +2755,17 @@ class $uk extends S {
   @override
   String get caribbean => "Карибський басейн";
   @override
-  String get habitat_wetland => "водно-болотні угіддя";
-  @override
   String get australasia => "Австралазія";
-  @override
-  String get eastern_canada => "Східна Канада";
   @override
   String get petal_4 => "4 або менш";
   @override
   String get east_tropical_africa => "Східна тропічна Африка";
   @override
-  String get habitat_tree => "дерева або чагарники";
-  @override
-  String get settings => "Налаштування";
-  @override
-  String get color_red => "червоний, рожевий";
-  @override
   String get africa => "Африка";
-  @override
-  String get north_central_pacific => "Північно-Центральний Тихий океан";
   @override
   String get south_tropical_africa => "Південна тропічна Африка";
   @override
-  String get southern_africa => "Південна Африка";
-  @override
   String get caucasus => "Кавказ";
-  @override
-  String get color_yellow => "жовтий";
   @override
   String get middle_asia => "Середня Азія";
   @override
@@ -2101,13 +2773,11 @@ class $uk extends S {
   @override
   String get australia => "Австралія";
   @override
-  String get subantarctic_islands => "Субантарктичні острови";
-  @override
-  String get my_region => "Мій регіон";
+  String get plant_leaf => "Листя";
   @override
   String get habitat_forest => "ліси";
   @override
-  String get indian_subcontinent => "Індійський субконтинент";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Малезія";
   @override
@@ -2115,79 +2785,53 @@ class $uk extends S {
   @override
   String get asia_tropical => "Азія-Тропічнаа";
   @override
-  String get filter_habitat => "середовище";
-  @override
-  String get northwestern_pacific => "Північно-західний Тихий океан";
-  @override
   String get northwestern_usa => "Північно-західна США";
   @override
   String get northern_south_america => "Північна Південна Америка";
-  @override
-  String get southwestern_europe => "Південно-Західна Європа";
   @override
   String get southern_america => "Південна Америка";
   @override
   String get middle_atlantic_ocean => "Середній атлантичний океан";
   @override
-  String get antarctic_continent => "Антарктичний континент";
-  @override
-  String get brazil => "Бразилія";
-  @override
-  String get eastern_europe => "Східна Європа";
-  @override
   String get habitat_garden => "сади або поля";
-  @override
-  String get south_central_usa => "Південно-Центральна США";
   @override
   String get russian_far_east => "Російський Далекий Схід";
   @override
   String get west_central_tropical_africa => "Центрально-західна тропічна Африка";
   @override
-  String get macaronesia => "Макаронезія";
+  String get plant_toxicity => "Токсичність";
   @override
-  String get arabian_peninsula => "Аравійський півострів";
+  String get macaronesia => "Макаронезія";
   @override
   String get asia_temperate => "Азія-Темнолітнаа";
   @override
-  String get west_tropical_africa => "Західна тропічна Африка";
-  @override
-  String get northern_europe => "Північна Європа";
-  @override
   String get habitat_rock => "скелі або гори";
   @override
-  String get northeast_tropical_africa => "Північно-східна тропічна Африка";
+  String get taxonomy_superregnum => "Домен";
   @override
-  String get pref_language => "Бажана мова";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Монголія";
   @override
-  String get new_zealand => "Нова Зеландія";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "Західна Південна Америка";
   @override
-  String get filter_distribution => "розповсюдження";
+  String get taxonomy_subgenus => "Підрід";
   @override
   String get europe => "Європа";
   @override
   String get middle_europe => "Середня Європа";
   @override
-  String get eastern_asia => "Східна Азія";
-  @override
-  String get western_asia => "Західна Азія";
-  @override
-  String get subarctic_america => "Субарктична Америка";
-  @override
   String get color_blue => "синій, фіолетовий";
   @override
-  String get north_central_usa => "Північ-Центральна США";
-  @override
   String get southern_south_america => "Південна Південна Америка";
+  @override
+  String get plant_habitat => "Середовище";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "число пелюсток";
-  @override
-  String get southeastern_usa => "Південно-східна США";
   @override
   String get color_white => "білий";
   @override
@@ -2195,11 +2839,13 @@ class $uk extends S {
   @override
   String get color_green => "зелений, коричневий, чорний";
   @override
-  String get petal_many => "більше 5";
+  String get taxonomy_ordo => "Ряд";
   @override
-  String get southeastern_europe => "Південно-Східна Європа";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Тихий океан";
+  @override
+  String get taxonomy_regnum => "Царство";
   @override
   String get south_central_pacific => "Південно-центральний Тихий океан";
   @override
@@ -2207,15 +2853,119 @@ class $uk extends S {
   @override
   String get help => "Довідка";
   @override
-  String get northern_africa => "Північна Африка";
-  @override
   String get mexico => "Мексика";
+  @override
+  String get siberia => "Сибір";
+  @override
+  String get taxonomy_subtribus => "Підтриба";
+  @override
+  String get habitat_meadow => "луки або пасовища";
+  @override
+  String get plant_trivia => "Дрібниці";
+  @override
+  String get taxonomy_cladus => "(клада)";
+  @override
+  String get plant_herbalism => "Травнічество";
+  @override
+  String get plant_height_to => "до";
+  @override
+  String get habitat_wetland => "водно-болотні угіддя";
+  @override
+  String get eastern_canada => "Східна Канада";
+  @override
+  String get habitat_tree => "дерева або чагарники";
+  @override
+  String get settings => "Налаштування";
+  @override
+  String get color_red => "червоний, рожевий";
+  @override
+  String get north_central_pacific => "Північно-Центральний Тихий океан";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Південна Африка";
+  @override
+  String get color_yellow => "жовтий";
+  @override
+  String get subantarctic_islands => "Субантарктичні острови";
+  @override
+  String get taxonomy_subfamilia => "Підродина";
+  @override
+  String get my_region => "Мій регіон";
+  @override
+  String get indian_subcontinent => "Індійський субконтинент";
+  @override
+  String get plant_flower => "Квіти";
+  @override
+  String get filter_habitat => "середовище";
+  @override
+  String get northwestern_pacific => "Північно-західний Тихий океан";
+  @override
+  String get southwestern_europe => "Південно-Західна Європа";
+  @override
+  String get taxonomy_species => "Вид";
+  @override
+  String get plant_fruit => "Плід";
+  @override
+  String get plant_flowering_to => "по";
+  @override
+  String get taxonomy_familia => "Родина";
+  @override
+  String get plant_stem => "Стебло";
+  @override
+  String get antarctic_continent => "Антарктичний континент";
+  @override
+  String get brazil => "Бразилія";
+  @override
+  String get eastern_europe => "Східна Європа";
+  @override
+  String get south_central_usa => "Південно-Центральна США";
+  @override
+  String get plant_flowering_from => "Цвіте з";
+  @override
+  String get taxonomy_tribus => "Триба";
+  @override
+  String get arabian_peninsula => "Аравійський півострів";
+  @override
+  String get west_tropical_africa => "Західна тропічна Африка";
+  @override
+  String get northern_europe => "Північна Європа";
+  @override
+  String get northeast_tropical_africa => "Північно-східна тропічна Африка";
+  @override
+  String get pref_language => "Бажана мова";
+  @override
+  String get new_zealand => "Нова Зеландія";
+  @override
+  String get filter_distribution => "розповсюдження";
+  @override
+  String get eastern_asia => "Східна Азія";
+  @override
+  String get western_asia => "Західна Азія";
+  @override
+  String get subarctic_america => "Субарктична Америка";
+  @override
+  String get north_central_usa => "Північ-Центральна США";
+  @override
+  String get southeastern_usa => "Південно-східна США";
+  @override
+  String get plant_height_from => "Висота від";
+  @override
+  String get petal_many => "більше 5";
+  @override
+  String get southeastern_europe => "Південно-Східна Європа";
+  @override
+  String get taxonomy_unknown => "невідомий";
+  @override
+  String get plant_inflorescence => "Суцвіття";
+  @override
+  String get northern_africa => "Північна Африка";
   @override
   String get china => "Китай";
   @override
-  String get papuasia => "Папуазія";
+  String get taxonomy_genus => "Рід";
   @override
-  String get siberia => "Сибір";
+  String get papuasia => "Папуазія";
 }
 
 class $sk extends S {
@@ -2224,8 +2974,6 @@ class $sk extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "lúky a trávnaté porasty";
   @override
   String get central_america => "Stredná Amerika";
   @override
@@ -2243,33 +2991,17 @@ class $sk extends S {
   @override
   String get caribbean => "Karibik";
   @override
-  String get habitat_wetland => "mokrade a močiare";
-  @override
   String get australasia => "Australázia";
-  @override
-  String get eastern_canada => "Východná Kanada";
   @override
   String get petal_4 => "4 alebo menej";
   @override
   String get east_tropical_africa => "Východná tropická Afrika";
   @override
-  String get habitat_tree => "stromy a kry";
-  @override
-  String get settings => "Nastavenia";
-  @override
-  String get color_red => "červená, ružová";
-  @override
   String get africa => "Afrika";
-  @override
-  String get north_central_pacific => "Stredoseverné Tichomorie";
   @override
   String get south_tropical_africa => "Južná tropická Afrika";
   @override
-  String get southern_africa => "Južná Afrika";
-  @override
   String get caucasus => "Kaukaz";
-  @override
-  String get color_yellow => "žltá";
   @override
   String get middle_asia => "Stredná Ázia";
   @override
@@ -2277,9 +3009,11 @@ class $sk extends S {
   @override
   String get australia => "Austrália";
   @override
+  String get plant_leaf => "Listy";
+  @override
   String get habitat_forest => "lesy";
   @override
-  String get indian_subcontinent => "Indický subkontinent";
+  String get taxonomy_serie => "séria";
   @override
   String get malesia => "Juhovýchodná Ázia";
   @override
@@ -2287,77 +3021,53 @@ class $sk extends S {
   @override
   String get asia_tropical => "Tropická Ázia";
   @override
-  String get filter_habitat => "lokalita";
-  @override
-  String get northwestern_pacific => "Severozápadné Tichomorie";
-  @override
   String get northwestern_usa => "Severovýchod USA";
   @override
   String get northern_south_america => "Sever Južnej Ameriky";
-  @override
-  String get southwestern_europe => "Juhozápadná Európa";
   @override
   String get southern_america => "Južná Amerika";
   @override
   String get middle_atlantic_ocean => "Stredný Atlantik";
   @override
-  String get brazil => "Brazília";
-  @override
-  String get eastern_europe => "Východná Európa";
-  @override
   String get habitat_garden => "polia a záhrady";
-  @override
-  String get south_central_usa => "Stredojuh USA";
   @override
   String get russian_far_east => "Ruský ďaleký východ";
   @override
   String get west_central_tropical_africa => "Stredozápadná tropická Afrika";
   @override
-  String get macaronesia => "Makaronézia";
+  String get plant_toxicity => "Toxicita";
   @override
-  String get arabian_peninsula => "Arabský polostrov";
+  String get macaronesia => "Makaronézia";
   @override
   String get asia_temperate => "Mierne pásno Ázie";
   @override
-  String get west_tropical_africa => "Západná tropická Afrika";
-  @override
-  String get northern_europe => "Severná Európa";
-  @override
   String get habitat_rock => "vrcholky hôr a skaly";
   @override
-  String get northeast_tropical_africa => "Severovýchodná tropická Afrika";
+  String get taxonomy_superregnum => "doména";
   @override
-  String get pref_language => "Preferovaný jazyk";
+  String get taxonomy_sectio => "sekcia";
   @override
   String get mongolia => "Mongólsko";
   @override
-  String get new_zealand => "Nový Zéland";
+  String get taxonomy_subserie => "podséria";
   @override
   String get western_south_america => "Západ Južnej Ameriky";
   @override
-  String get filter_distribution => "distribúcia";
+  String get taxonomy_subgenus => "podrod";
   @override
   String get europe => "Európa";
   @override
   String get middle_europe => "Stredná Európa";
   @override
-  String get eastern_asia => "Východná Ázia";
-  @override
-  String get western_asia => "Juhozápadná Ázia";
-  @override
-  String get subarctic_america => "Subarktická Amerika";
-  @override
   String get color_blue => "modrá, fialová";
   @override
-  String get north_central_usa => "Stredosever USA";
-  @override
   String get southern_south_america => "Juh Južnej Ameriky";
+  @override
+  String get plant_habitat => "Lokalita";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "počet lupienkov";
-  @override
-  String get southeastern_usa => "Juhovýchod USA";
   @override
   String get color_white => "biela";
   @override
@@ -2365,11 +3075,13 @@ class $sk extends S {
   @override
   String get color_green => "zelená, hnedá, čierna";
   @override
-  String get petal_many => "viac ako 5";
+  String get taxonomy_ordo => "trieda";
   @override
-  String get southeastern_europe => "Juhovýchodná Európa";
+  String get taxonomy_supersectio => "nadsekcia";
   @override
   String get pacific => "Tichomorie";
+  @override
+  String get taxonomy_regnum => "ríša";
   @override
   String get south_central_pacific => "Stredojužné Tichomorie";
   @override
@@ -2377,15 +3089,111 @@ class $sk extends S {
   @override
   String get help => "Pomoc";
   @override
-  String get northern_africa => "Severná Afrika";
-  @override
   String get mexico => "Mexiko";
+  @override
+  String get siberia => "Sibír";
+  @override
+  String get taxonomy_subtribus => "podskupina";
+  @override
+  String get habitat_meadow => "lúky a trávnaté porasty";
+  @override
+  String get taxonomy_cladus => "Cladus";
+  @override
+  String get plant_herbalism => "Bylinkárstvo";
+  @override
+  String get plant_height_to => "do";
+  @override
+  String get habitat_wetland => "mokrade a močiare";
+  @override
+  String get eastern_canada => "Východná Kanada";
+  @override
+  String get habitat_tree => "stromy a kry";
+  @override
+  String get settings => "Nastavenia";
+  @override
+  String get color_red => "červená, ružová";
+  @override
+  String get north_central_pacific => "Stredoseverné Tichomorie";
+  @override
+  String get taxonomy_subsectio => "podsekcia";
+  @override
+  String get southern_africa => "Južná Afrika";
+  @override
+  String get color_yellow => "žltá";
+  @override
+  String get taxonomy_subfamilia => "podčeľaď";
+  @override
+  String get indian_subcontinent => "Indický subkontinent";
+  @override
+  String get plant_flower => "Kvety";
+  @override
+  String get filter_habitat => "lokalita";
+  @override
+  String get northwestern_pacific => "Severozápadné Tichomorie";
+  @override
+  String get southwestern_europe => "Juhozápadná Európa";
+  @override
+  String get taxonomy_species => "druh";
+  @override
+  String get plant_fruit => "Plody";
+  @override
+  String get plant_flowering_to => "do";
+  @override
+  String get taxonomy_familia => "čeľaď";
+  @override
+  String get plant_stem => "Stonka";
+  @override
+  String get brazil => "Brazília";
+  @override
+  String get eastern_europe => "Východná Európa";
+  @override
+  String get south_central_usa => "Stredojuh USA";
+  @override
+  String get plant_flowering_from => "Kvitne od";
+  @override
+  String get taxonomy_tribus => "skupina";
+  @override
+  String get arabian_peninsula => "Arabský polostrov";
+  @override
+  String get west_tropical_africa => "Západná tropická Afrika";
+  @override
+  String get northern_europe => "Severná Európa";
+  @override
+  String get northeast_tropical_africa => "Severovýchodná tropická Afrika";
+  @override
+  String get pref_language => "Preferovaný jazyk";
+  @override
+  String get new_zealand => "Nový Zéland";
+  @override
+  String get filter_distribution => "distribúcia";
+  @override
+  String get eastern_asia => "Východná Ázia";
+  @override
+  String get western_asia => "Juhozápadná Ázia";
+  @override
+  String get subarctic_america => "Subarktická Amerika";
+  @override
+  String get north_central_usa => "Stredosever USA";
+  @override
+  String get southeastern_usa => "Juhovýchod USA";
+  @override
+  String get plant_height_from => "Výška od";
+  @override
+  String get petal_many => "viac ako 5";
+  @override
+  String get southeastern_europe => "Juhovýchodná Európa";
+  @override
+  String get taxonomy_unknown => "neznámy";
+  @override
+  String get plant_inflorescence => "Súkvetie";
+  @override
+  String get northern_africa => "Severná Afrika";
   @override
   String get china => "Čína";
   @override
-  String get papuasia => "Papuázia";
+  String get taxonomy_genus => "rod";
   @override
-  String get siberia => "Sibír";
+  String get papuasia => "Papuázia";
 }
 
 class $sl extends S {
@@ -2394,8 +3202,6 @@ class $sl extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "travniki ali pašniki";
   @override
   String get central_america => "Srednja Amerika";
   @override
@@ -2413,33 +3219,17 @@ class $sl extends S {
   @override
   String get caribbean => "Karibi";
   @override
-  String get habitat_wetland => "močvirje ali mokrišča";
-  @override
   String get australasia => "Avstralija";
-  @override
-  String get eastern_canada => "Vzhodna Kanada";
   @override
   String get petal_4 => "4 ali manj";
   @override
   String get east_tropical_africa => "Vzhodna tropska Afrika";
   @override
-  String get habitat_tree => "drevesa ali grmi";
-  @override
-  String get settings => "Nastavitve";
-  @override
-  String get color_red => "rdeča, roza";
-  @override
   String get africa => "Afrika";
-  @override
-  String get north_central_pacific => "Severni osrednji Pacifik";
   @override
   String get south_tropical_africa => "Južna tropska Afrika";
   @override
-  String get southern_africa => "Južna Afrika";
-  @override
   String get caucasus => "Kavkaz";
-  @override
-  String get color_yellow => "rumena";
   @override
   String get middle_asia => "Srednja Azija";
   @override
@@ -2447,13 +3237,11 @@ class $sl extends S {
   @override
   String get australia => "Avstralija";
   @override
-  String get subantarctic_islands => "Podantarktični otoki";
-  @override
-  String get my_region => "Moja regija";
+  String get plant_leaf => "Listi";
   @override
   String get habitat_forest => "gozdovi";
   @override
-  String get indian_subcontinent => "Indijski podcelini";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malezija";
   @override
@@ -2461,79 +3249,53 @@ class $sl extends S {
   @override
   String get asia_tropical => "Azija tropski";
   @override
-  String get filter_habitat => "habitate";
-  @override
-  String get northwestern_pacific => "Severozahodni Pacifik";
-  @override
   String get northwestern_usa => "Severozahodna ZDA";
   @override
   String get northern_south_america => "Severna Južna Amerika";
-  @override
-  String get southwestern_europe => "Jugozahodna Evropa";
   @override
   String get southern_america => "Južna Amerika";
   @override
   String get middle_atlantic_ocean => "Srednji Atlantski ocean";
   @override
-  String get antarctic_continent => "Antarktična celina";
-  @override
-  String get brazil => "Brazilija";
-  @override
-  String get eastern_europe => "Vzhodna Evropa";
-  @override
   String get habitat_garden => "vrtov ali polja";
-  @override
-  String get south_central_usa => "Južna osrednja ZDA";
   @override
   String get russian_far_east => "Ruski daleč vzhod";
   @override
   String get west_central_tropical_africa => "Zahodno-srednja tropska Afrika";
   @override
-  String get macaronesia => "Makaronezija";
+  String get plant_toxicity => "Toksičnost";
   @override
-  String get arabian_peninsula => "Arabski polotok";
+  String get macaronesia => "Makaronezija";
   @override
   String get asia_temperate => "Azija temperaturna";
   @override
-  String get west_tropical_africa => "Zahodna tropska Afrika";
-  @override
-  String get northern_europe => "Severna Evropa";
-  @override
   String get habitat_rock => "skale ali gore";
   @override
-  String get northeast_tropical_africa => "Severovzhodna tropska Afrika";
+  String get taxonomy_superregnum => "Domena";
   @override
-  String get pref_language => "Želeni jezik";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongolija";
   @override
-  String get new_zealand => "Nova Zelandija";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "Zahodna Južna Amerika";
   @override
-  String get filter_distribution => "distribucija";
+  String get taxonomy_subgenus => "Podrod";
   @override
   String get europe => "Evropa";
   @override
   String get middle_europe => "Srednja Evropa";
   @override
-  String get eastern_asia => "Vzhodna Azija";
-  @override
-  String get western_asia => "Zahodna Azija";
-  @override
-  String get subarctic_america => "Subarctic Amerika";
-  @override
   String get color_blue => "modra, vijolična";
   @override
-  String get north_central_usa => "Severna osrednja ZDA";
-  @override
   String get southern_south_america => "Južna Južna Amerika";
+  @override
+  String get plant_habitat => "Habitat";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "število venčnih listov";
-  @override
-  String get southeastern_usa => "Jugovzhodna ZDA";
   @override
   String get color_white => "bela";
   @override
@@ -2541,11 +3303,13 @@ class $sl extends S {
   @override
   String get color_green => "zelena, rjava, črna";
   @override
-  String get petal_many => "več kot 5";
+  String get taxonomy_ordo => "Red";
   @override
-  String get southeastern_europe => "Jugovzhodna Evropa";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Pacifik";
+  @override
+  String get taxonomy_regnum => "Kraljestvo";
   @override
   String get south_central_pacific => "Južni osrednji Pacifik";
   @override
@@ -2553,15 +3317,119 @@ class $sl extends S {
   @override
   String get help => "Pomoč";
   @override
-  String get northern_africa => "Severna Afrika";
-  @override
   String get mexico => "Mehika";
+  @override
+  String get siberia => "Siberia";
+  @override
+  String get taxonomy_subtribus => "Podpleme";
+  @override
+  String get habitat_meadow => "travniki ali pašniki";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get taxonomy_cladus => "(klad)";
+  @override
+  String get plant_herbalism => "Zeliščarstvo";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "močvirje ali mokrišča";
+  @override
+  String get eastern_canada => "Vzhodna Kanada";
+  @override
+  String get habitat_tree => "drevesa ali grmi";
+  @override
+  String get settings => "Nastavitve";
+  @override
+  String get color_red => "rdeča, roza";
+  @override
+  String get north_central_pacific => "Severni osrednji Pacifik";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Južna Afrika";
+  @override
+  String get color_yellow => "rumena";
+  @override
+  String get subantarctic_islands => "Podantarktični otoki";
+  @override
+  String get taxonomy_subfamilia => "Poddružina";
+  @override
+  String get my_region => "Moja regija";
+  @override
+  String get indian_subcontinent => "Indijski podcelini";
+  @override
+  String get plant_flower => "Cvetje";
+  @override
+  String get filter_habitat => "habitate";
+  @override
+  String get northwestern_pacific => "Severozahodni Pacifik";
+  @override
+  String get southwestern_europe => "Jugozahodna Evropa";
+  @override
+  String get taxonomy_species => "Vrsta";
+  @override
+  String get plant_fruit => "Plod";
+  @override
+  String get plant_flowering_to => "do";
+  @override
+  String get taxonomy_familia => "Družina";
+  @override
+  String get plant_stem => "Steblo";
+  @override
+  String get antarctic_continent => "Antarktična celina";
+  @override
+  String get brazil => "Brazilija";
+  @override
+  String get eastern_europe => "Vzhodna Evropa";
+  @override
+  String get south_central_usa => "Južna osrednja ZDA";
+  @override
+  String get plant_flowering_from => "Cvetoče od";
+  @override
+  String get taxonomy_tribus => "Pleme";
+  @override
+  String get arabian_peninsula => "Arabski polotok";
+  @override
+  String get west_tropical_africa => "Zahodna tropska Afrika";
+  @override
+  String get northern_europe => "Severna Evropa";
+  @override
+  String get northeast_tropical_africa => "Severovzhodna tropska Afrika";
+  @override
+  String get pref_language => "Želeni jezik";
+  @override
+  String get new_zealand => "Nova Zelandija";
+  @override
+  String get filter_distribution => "distribucija";
+  @override
+  String get eastern_asia => "Vzhodna Azija";
+  @override
+  String get western_asia => "Zahodna Azija";
+  @override
+  String get subarctic_america => "Subarctic Amerika";
+  @override
+  String get north_central_usa => "Severna osrednja ZDA";
+  @override
+  String get southeastern_usa => "Jugovzhodna ZDA";
+  @override
+  String get plant_height_from => "Višina";
+  @override
+  String get petal_many => "več kot 5";
+  @override
+  String get southeastern_europe => "Jugovzhodna Evropa";
+  @override
+  String get taxonomy_unknown => "neznano";
+  @override
+  String get plant_inflorescence => "Socvetje";
+  @override
+  String get northern_africa => "Severna Afrika";
   @override
   String get china => "Kitajska";
   @override
-  String get papuasia => "Papuazija";
+  String get taxonomy_genus => "Rod";
   @override
-  String get siberia => "Siberia";
+  String get papuasia => "Papuazija";
 }
 
 class $id extends S {
@@ -2570,174 +3438,6 @@ class $id extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "padang rumput";
-  @override
-  String get central_america => "Amerika Tengah";
-  @override
-  String get about => "Tentang";
-  @override
-  String get western_canada => "Kanada Barat";
-  @override
-  String get northern_america => "Amerika Utara";
-  @override
-  String get western_indian_ocean => "Samudra Hindia Barat";
-  @override
-  String get feedback => "Umpan balik / Kontribusi";
-  @override
-  String get southwestern_usa => "Barat daya AS";
-  @override
-  String get caribbean => "Karibia";
-  @override
-  String get habitat_wetland => "lahan basah";
-  @override
-  String get australasia => "Australasia";
-  @override
-  String get eastern_canada => "Kanada Timur";
-  @override
-  String get petal_4 => "4 atau kurang";
-  @override
-  String get east_tropical_africa => "Afrika Timur Tropis";
-  @override
-  String get habitat_tree => "pohon atau semak belukar";
-  @override
-  String get settings => "Pengaturan";
-  @override
-  String get color_red => "merah";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get north_central_pacific => "Pasifik Utara Tengah";
-  @override
-  String get south_tropical_africa => "Afrika Selatan Tropis";
-  @override
-  String get southern_africa => "Afrika Selatan";
-  @override
-  String get caucasus => "Kaukasus";
-  @override
-  String get color_yellow => "kuning";
-  @override
-  String get middle_asia => "Asia Tengah";
-  @override
-  String get indochina => "Indo-Cina";
-  @override
-  String get australia => "Australia";
-  @override
-  String get subantarctic_islands => "Kepulauan Subantartika";
-  @override
-  String get my_region => "Daerah saya";
-  @override
-  String get habitat_forest => "hutan";
-  @override
-  String get indian_subcontinent => "Sub Benua India";
-  @override
-  String get malesia => "Malesia";
-  @override
-  String get southwestern_pacific => "Pasifik Barat Daya";
-  @override
-  String get asia_tropical => "Asia Tropis";
-  @override
-  String get filter_habitat => "habitat";
-  @override
-  String get northwestern_pacific => "Pasifik Barat Laut";
-  @override
-  String get northwestern_usa => "Barat laut AS";
-  @override
-  String get northern_south_america => "Amerika Selatan bagian Utara";
-  @override
-  String get southwestern_europe => "Eropa Barat Daya";
-  @override
-  String get southern_america => "Amerika Selatan";
-  @override
-  String get middle_atlantic_ocean => "Samudera Atlantik Tengah";
-  @override
-  String get antarctic_continent => "Benua Antartika";
-  @override
-  String get brazil => "Brazil";
-  @override
-  String get eastern_europe => "Eropa Timur";
-  @override
-  String get habitat_garden => "kebun atau ladang";
-  @override
-  String get south_central_usa => "Pusat Selatan AS";
-  @override
-  String get russian_far_east => "Timur Jauh Rusia";
-  @override
-  String get west_central_tropical_africa => "Afrika Barat Pusat Tropis";
-  @override
-  String get macaronesia => "Macaronesia";
-  @override
-  String get arabian_peninsula => "Semenanjung Arab";
-  @override
-  String get asia_temperate => "Asia Beriklim";
-  @override
-  String get west_tropical_africa => "Afrika Barat Tropis";
-  @override
-  String get northern_europe => "Eropa Utara";
-  @override
-  String get habitat_rock => "batu atau gunung";
-  @override
-  String get northeast_tropical_africa => "Afrika Timur laut Tropis  ";
-  @override
-  String get pref_language => "Bahasa pilihan";
-  @override
-  String get mongolia => "Mongolia";
-  @override
-  String get new_zealand => "Selandia Baru";
-  @override
-  String get western_south_america => "Amerika Selatan bagian Barat";
-  @override
-  String get filter_distribution => "distribusi";
-  @override
-  String get europe => "Eropa";
-  @override
-  String get middle_europe => "Eropa Tengah";
-  @override
-  String get eastern_asia => "Asia Timur";
-  @override
-  String get western_asia => "Asia Barat";
-  @override
-  String get subarctic_america => "Subarctic America";
-  @override
-  String get color_blue => "biru, ungu";
-  @override
-  String get north_central_usa => "Tengah Utara AS";
-  @override
-  String get southern_south_america => "Amerika Selatan Selatan";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "jumlah kelopak bunga";
-  @override
-  String get southeastern_usa => "Tenggara AS";
-  @override
-  String get color_white => "putih";
-  @override
-  String get northeastern_usa => "Timur laut AS";
-  @override
-  String get color_green => "hijau, coklat, hitam";
-  @override
-  String get petal_many => "Lebih dari 5";
-  @override
-  String get southeastern_europe => "Eropa Tenggara";
-  @override
-  String get pacific => "Samudera Pasifik";
-  @override
-  String get south_central_pacific => "Pasifik Tengah Selatan";
-  @override
-  String get filter_color => "warna bunga";
-  @override
-  String get help => "Membantu";
-  @override
-  String get northern_africa => "Afrika Utara";
-  @override
-  String get mexico => "Meksiko";
-  @override
-  String get china => "Cina";
-  @override
-  String get papuasia => "Papuasia";
-  @override
-  String get siberia => "Siberia";
 }
 
 class $sr extends S {
@@ -2746,8 +3446,6 @@ class $sr extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "ливаде или пашњаци";
   @override
   String get central_america => "Централна Америка";
   @override
@@ -2765,33 +3463,17 @@ class $sr extends S {
   @override
   String get caribbean => "Кариби";
   @override
-  String get habitat_wetland => "мочварама";
-  @override
   String get australasia => "Аустраласиа";
-  @override
-  String get eastern_canada => "Источна Канада";
   @override
   String get petal_4 => "4 или мање";
   @override
   String get east_tropical_africa => "Источна тропска Африка";
   @override
-  String get habitat_tree => "дрвеће или жбуње";
-  @override
-  String get settings => "Подешавања";
-  @override
-  String get color_red => "црвена, розе";
-  @override
   String get africa => "Африка";
-  @override
-  String get north_central_pacific => "Северно-централни Пацифик";
   @override
   String get south_tropical_africa => "Јужна тропска Африка";
   @override
-  String get southern_africa => "Јужна Африка";
-  @override
   String get caucasus => "Кавказ";
-  @override
-  String get color_yellow => "жут";
   @override
   String get middle_asia => "Средња Азија";
   @override
@@ -2799,13 +3481,11 @@ class $sr extends S {
   @override
   String get australia => "Аустралија";
   @override
-  String get subantarctic_islands => "Субантарктични Острва";
-  @override
-  String get my_region => "Мој регион";
+  String get plant_leaf => "Лист";
   @override
   String get habitat_forest => "шуме";
   @override
-  String get indian_subcontinent => "Индијски подконтинент";
+  String get taxonomy_serie => "серија";
   @override
   String get malesia => "Малезија";
   @override
@@ -2813,79 +3493,53 @@ class $sr extends S {
   @override
   String get asia_tropical => "Асиа Тропицал";
   @override
-  String get filter_habitat => "станишта";
-  @override
-  String get northwestern_pacific => "Северозападни Пацифик";
-  @override
   String get northwestern_usa => "Северозапад САД";
   @override
   String get northern_south_america => "Северна Јужна Америка";
-  @override
-  String get southwestern_europe => "Југозападна Европа";
   @override
   String get southern_america => "Јужна Америка";
   @override
   String get middle_atlantic_ocean => "Средњи Атлантски океан";
   @override
-  String get antarctic_continent => "Антарктички континент";
-  @override
-  String get brazil => "Бразил";
-  @override
-  String get eastern_europe => "Источна Европа";
-  @override
   String get habitat_garden => "баште или поља";
-  @override
-  String get south_central_usa => "Јужна централна САД";
   @override
   String get russian_far_east => "Руски Далеки Исток";
   @override
   String get west_central_tropical_africa => "Западна централна тропска Африка";
   @override
-  String get macaronesia => "Макаронезија";
+  String get plant_toxicity => "Токсичност";
   @override
-  String get arabian_peninsula => "Арабијско полуострво";
+  String get macaronesia => "Макаронезија";
   @override
   String get asia_temperate => "Асиа Температе";
   @override
-  String get west_tropical_africa => "Западна тропска Африка";
-  @override
-  String get northern_europe => "Северна Европа";
-  @override
   String get habitat_rock => "стене или планине";
   @override
-  String get northeast_tropical_africa => "Североисточна тропска Африка";
+  String get taxonomy_superregnum => "домен";
   @override
-  String get pref_language => "Језик којем дајете предност";
+  String get taxonomy_sectio => "секција";
   @override
   String get mongolia => "Монголија";
   @override
-  String get new_zealand => "Нови Зеланд";
+  String get taxonomy_subserie => "подсерија";
   @override
   String get western_south_america => "Западна Јужна Америка";
   @override
-  String get filter_distribution => "дистрибуција";
+  String get taxonomy_subgenus => "подрод";
   @override
   String get europe => "Европа";
   @override
   String get middle_europe => "Средња Европа";
   @override
-  String get eastern_asia => "Источна Азија";
-  @override
-  String get western_asia => "Западна Азија";
-  @override
-  String get subarctic_america => "Субарцтиц Америца";
-  @override
   String get color_blue => "плава, љубичаста";
   @override
-  String get north_central_usa => "Северна централна САД";
-  @override
   String get southern_south_america => "Јужна Јужна Америка";
+  @override
+  String get plant_habitat => "Станишта";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "број крунични листићи";
-  @override
-  String get southeastern_usa => "Југоисточна САД";
   @override
   String get color_white => "бео";
   @override
@@ -2893,11 +3547,13 @@ class $sr extends S {
   @override
   String get color_green => "зелена, браон, црна";
   @override
-  String get petal_many => "више од 5";
+  String get taxonomy_ordo => "ред";
   @override
-  String get southeastern_europe => "Југоисточна Европа";
+  String get taxonomy_supersectio => "надсекција";
   @override
   String get pacific => "Пацифиц";
+  @override
+  String get taxonomy_regnum => "царство";
   @override
   String get south_central_pacific => "Јужно-централни Пацифик";
   @override
@@ -2905,15 +3561,119 @@ class $sr extends S {
   @override
   String get help => "Помоћ";
   @override
-  String get northern_africa => "Северна Африка";
-  @override
   String get mexico => "Мексико";
+  @override
+  String get siberia => "Сибериа";
+  @override
+  String get taxonomy_subtribus => "подплеме";
+  @override
+  String get habitat_meadow => "ливаде или пашњаци";
+  @override
+  String get plant_trivia => "Тривијалност";
+  @override
+  String get taxonomy_cladus => "(клада)";
+  @override
+  String get plant_herbalism => "Траварство";
+  @override
+  String get plant_height_to => "до";
+  @override
+  String get habitat_wetland => "мочварама";
+  @override
+  String get eastern_canada => "Источна Канада";
+  @override
+  String get habitat_tree => "дрвеће или жбуње";
+  @override
+  String get settings => "Подешавања";
+  @override
+  String get color_red => "црвена, розе";
+  @override
+  String get north_central_pacific => "Северно-централни Пацифик";
+  @override
+  String get taxonomy_subsectio => "подсекција";
+  @override
+  String get southern_africa => "Јужна Африка";
+  @override
+  String get color_yellow => "жут";
+  @override
+  String get subantarctic_islands => "Субантарктични Острва";
+  @override
+  String get taxonomy_subfamilia => "потпородица";
+  @override
+  String get my_region => "Мој регион";
+  @override
+  String get indian_subcontinent => "Индијски подконтинент";
+  @override
+  String get plant_flower => "Цвеће";
+  @override
+  String get filter_habitat => "станишта";
+  @override
+  String get northwestern_pacific => "Северозападни Пацифик";
+  @override
+  String get southwestern_europe => "Југозападна Европа";
+  @override
+  String get taxonomy_species => "врста";
+  @override
+  String get plant_fruit => "Плод";
+  @override
+  String get plant_flowering_to => "до";
+  @override
+  String get taxonomy_familia => "породица";
+  @override
+  String get plant_stem => "Стабло";
+  @override
+  String get antarctic_continent => "Антарктички континент";
+  @override
+  String get brazil => "Бразил";
+  @override
+  String get eastern_europe => "Источна Европа";
+  @override
+  String get south_central_usa => "Јужна централна САД";
+  @override
+  String get plant_flowering_from => "Цветања од";
+  @override
+  String get taxonomy_tribus => "племе";
+  @override
+  String get arabian_peninsula => "Арабијско полуострво";
+  @override
+  String get west_tropical_africa => "Западна тропска Африка";
+  @override
+  String get northern_europe => "Северна Европа";
+  @override
+  String get northeast_tropical_africa => "Североисточна тропска Африка";
+  @override
+  String get pref_language => "Језик којем дајете предност";
+  @override
+  String get new_zealand => "Нови Зеланд";
+  @override
+  String get filter_distribution => "дистрибуција";
+  @override
+  String get eastern_asia => "Источна Азија";
+  @override
+  String get western_asia => "Западна Азија";
+  @override
+  String get subarctic_america => "Субарцтиц Америца";
+  @override
+  String get north_central_usa => "Северна централна САД";
+  @override
+  String get southeastern_usa => "Југоисточна САД";
+  @override
+  String get plant_height_from => "Висине од";
+  @override
+  String get petal_many => "више од 5";
+  @override
+  String get southeastern_europe => "Југоисточна Европа";
+  @override
+  String get taxonomy_unknown => "непознат";
+  @override
+  String get plant_inflorescence => "Цваст";
+  @override
+  String get northern_africa => "Северна Африка";
   @override
   String get china => "Кина";
   @override
-  String get papuasia => "Папуазија";
+  String get taxonomy_genus => "род";
   @override
-  String get siberia => "Сибериа";
+  String get papuasia => "Папуазија";
 }
 
 class $sv extends S {
@@ -2922,8 +3682,6 @@ class $sv extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "ängar eller gräsmarker";
   @override
   String get central_america => "Centralamerika";
   @override
@@ -2941,33 +3699,17 @@ class $sv extends S {
   @override
   String get caribbean => "Karibisk";
   @override
-  String get habitat_wetland => "hedar eller våtmarker";
-  @override
   String get australasia => "Australasien";
-  @override
-  String get eastern_canada => "Östra Kanada";
   @override
   String get petal_4 => "4 eller mindre";
   @override
   String get east_tropical_africa => "Östra tropiska Afrika";
   @override
-  String get habitat_tree => "träd eller buskar";
-  @override
-  String get settings => "Inställningar";
-  @override
-  String get color_red => "rött, rosa";
-  @override
   String get africa => "Afrika";
-  @override
-  String get north_central_pacific => "Norra centrala Stilla havet";
   @override
   String get south_tropical_africa => "Södra tropiska Afrika";
   @override
-  String get southern_africa => "Södra Afrika";
-  @override
   String get caucasus => "Kaukasus";
-  @override
-  String get color_yellow => "gul";
   @override
   String get middle_asia => "Mellanöstern Asien";
   @override
@@ -2975,13 +3717,11 @@ class $sv extends S {
   @override
   String get australia => "Australien";
   @override
-  String get subantarctic_islands => "Subantarctic Islands";
-  @override
-  String get my_region => "Min region";
+  String get plant_leaf => "Bladen";
   @override
   String get habitat_forest => "skogar";
   @override
-  String get indian_subcontinent => "Indiska subkontinenten";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malesien";
   @override
@@ -2989,79 +3729,53 @@ class $sv extends S {
   @override
   String get asia_tropical => "Asien Tropical";
   @override
-  String get filter_habitat => "växtplats";
-  @override
-  String get northwestern_pacific => "Nordvästra Stilla havet";
-  @override
   String get northwestern_usa => "Nordvästra USA";
   @override
   String get northern_south_america => "Norra Sydamerika";
-  @override
-  String get southwestern_europe => "Sydvästra Europa";
   @override
   String get southern_america => "Sydamerika";
   @override
   String get middle_atlantic_ocean => "Mellanöstern Atlanten";
   @override
-  String get antarctic_continent => "Antarktis kontinent";
-  @override
-  String get brazil => "Brasilien";
-  @override
-  String get eastern_europe => "Östeuropa";
-  @override
   String get habitat_garden => "trädgårdar eller fält";
-  @override
-  String get south_central_usa => "Syd-Central USA";
   @override
   String get russian_far_east => "Ryska Fjärran Östern";
   @override
   String get west_central_tropical_africa => "Västra central tropiska Afrika";
   @override
-  String get macaronesia => "Makaronesien";
+  String get plant_toxicity => "Giftighet";
   @override
-  String get arabian_peninsula => "Arabiska halvön";
+  String get macaronesia => "Makaronesien";
   @override
   String get asia_temperate => "Asien Temperate";
   @override
-  String get west_tropical_africa => "Västra tropiska Afrika";
-  @override
-  String get northern_europe => "Norra Europa";
-  @override
   String get habitat_rock => "stenar eller berg";
   @override
-  String get northeast_tropical_africa => "Nordöstra tropiska Afrika";
+  String get taxonomy_superregnum => "Domän";
   @override
-  String get pref_language => "Önskat språk";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongoliet";
   @override
-  String get new_zealand => "Nya Zeeland";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "Västra Sydamerika";
   @override
-  String get filter_distribution => "distribution";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "Europa";
   @override
   String get middle_europe => "Mellanöstern Europa";
   @override
-  String get eastern_asia => "Östra asien";
-  @override
-  String get western_asia => "Västra Asien";
-  @override
-  String get subarctic_america => "Subarctic Amerika";
-  @override
   String get color_blue => "blå, lila";
   @override
-  String get north_central_usa => "Nord-Central USA";
-  @override
   String get southern_south_america => "Södra Sydamerika";
+  @override
+  String get plant_habitat => "Växtplats";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "antal kronblad";
-  @override
-  String get southeastern_usa => "Sydöstra USA";
   @override
   String get color_white => "vit";
   @override
@@ -3069,11 +3783,13 @@ class $sv extends S {
   @override
   String get color_green => "grön, brun, svart";
   @override
-  String get petal_many => "mer än 5";
+  String get taxonomy_ordo => "Ordning";
   @override
-  String get southeastern_europe => "Sydöstra Europa";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Stilla havet";
+  @override
+  String get taxonomy_regnum => "Rike";
   @override
   String get south_central_pacific => "Syd centrala Stilla havet";
   @override
@@ -3081,15 +3797,119 @@ class $sv extends S {
   @override
   String get help => "Hjäjp";
   @override
-  String get northern_africa => "Nordafrika";
-  @override
   String get mexico => "Mexico";
+  @override
+  String get siberia => "Sibirien";
+  @override
+  String get taxonomy_subtribus => "Undertribus";
+  @override
+  String get habitat_meadow => "ängar eller gräsmarker";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get taxonomy_cladus => "(klad)";
+  @override
+  String get plant_herbalism => "Medicinalväxt";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "hedar eller våtmarker";
+  @override
+  String get eastern_canada => "Östra Kanada";
+  @override
+  String get habitat_tree => "träd eller buskar";
+  @override
+  String get settings => "Inställningar";
+  @override
+  String get color_red => "rött, rosa";
+  @override
+  String get north_central_pacific => "Norra centrala Stilla havet";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Södra Afrika";
+  @override
+  String get color_yellow => "gul";
+  @override
+  String get subantarctic_islands => "Subantarctic Islands";
+  @override
+  String get taxonomy_subfamilia => "Underfamilj";
+  @override
+  String get my_region => "Min region";
+  @override
+  String get indian_subcontinent => "Indiska subkontinenten";
+  @override
+  String get plant_flower => "Blomma";
+  @override
+  String get filter_habitat => "växtplats";
+  @override
+  String get northwestern_pacific => "Nordvästra Stilla havet";
+  @override
+  String get southwestern_europe => "Sydvästra Europa";
+  @override
+  String get taxonomy_species => "Art";
+  @override
+  String get plant_fruit => "Frukten";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Familj";
+  @override
+  String get plant_stem => "Stjälk";
+  @override
+  String get antarctic_continent => "Antarktis kontinent";
+  @override
+  String get brazil => "Brasilien";
+  @override
+  String get eastern_europe => "Östeuropa";
+  @override
+  String get south_central_usa => "Syd-Central USA";
+  @override
+  String get plant_flowering_from => "Blomningstid";
+  @override
+  String get taxonomy_tribus => "Tribus";
+  @override
+  String get arabian_peninsula => "Arabiska halvön";
+  @override
+  String get west_tropical_africa => "Västra tropiska Afrika";
+  @override
+  String get northern_europe => "Norra Europa";
+  @override
+  String get northeast_tropical_africa => "Nordöstra tropiska Afrika";
+  @override
+  String get pref_language => "Önskat språk";
+  @override
+  String get new_zealand => "Nya Zeeland";
+  @override
+  String get filter_distribution => "distribution";
+  @override
+  String get eastern_asia => "Östra asien";
+  @override
+  String get western_asia => "Västra Asien";
+  @override
+  String get subarctic_america => "Subarctic Amerika";
+  @override
+  String get north_central_usa => "Nord-Central USA";
+  @override
+  String get southeastern_usa => "Sydöstra USA";
+  @override
+  String get plant_height_from => "Höjd";
+  @override
+  String get petal_many => "mer än 5";
+  @override
+  String get southeastern_europe => "Sydöstra Europa";
+  @override
+  String get taxonomy_unknown => "okänd";
+  @override
+  String get plant_inflorescence => "Blomställning";
+  @override
+  String get northern_africa => "Nordafrika";
   @override
   String get china => "Kina";
   @override
-  String get papuasia => "Papuasien";
+  String get taxonomy_genus => "Släkte";
   @override
-  String get siberia => "Sibirien";
+  String get papuasia => "Papuasien";
 }
 
 class $en extends S {
@@ -3102,8 +3922,6 @@ class $it extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "prati o pascoli";
   @override
   String get central_america => "America Centrale";
   @override
@@ -3121,33 +3939,17 @@ class $it extends S {
   @override
   String get caribbean => "Caraibico";
   @override
-  String get habitat_wetland => "brughiere o zone umide";
-  @override
   String get australasia => "Australasia";
-  @override
-  String get eastern_canada => "Canada orientale";
   @override
   String get petal_4 => "4 o meno";
   @override
   String get east_tropical_africa => "Africa tropicale orientale";
   @override
-  String get habitat_tree => "alberi o arbusti";
-  @override
-  String get settings => "Impostazioni";
-  @override
-  String get color_red => "rosso, rosa";
-  @override
   String get africa => "Africa";
-  @override
-  String get north_central_pacific => "Pacifico centro-settentrionale";
   @override
   String get south_tropical_africa => "Sud Africa tropicale";
   @override
-  String get southern_africa => "Africa meridionale";
-  @override
   String get caucasus => "Caucaso";
-  @override
-  String get color_yellow => "giallo";
   @override
   String get middle_asia => "Asia centrale";
   @override
@@ -3155,13 +3957,11 @@ class $it extends S {
   @override
   String get australia => "Australia";
   @override
-  String get subantarctic_islands => "Isole Subantartiche";
-  @override
-  String get my_region => "La mia regione";
+  String get plant_leaf => "Foglie";
   @override
   String get habitat_forest => "boschi o foreste";
   @override
-  String get indian_subcontinent => "Subcontinente indiano";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malesia";
   @override
@@ -3169,79 +3969,53 @@ class $it extends S {
   @override
   String get asia_tropical => "Asia-tropicale";
   @override
-  String get filter_habitat => "habitat";
-  @override
-  String get northwestern_pacific => "Pacifico nordoccidentale";
-  @override
   String get northwestern_usa => "Stati Uniti nordoccidentali";
   @override
   String get northern_south_america => "Nord America del Sud";
-  @override
-  String get southwestern_europe => "Europa sudoccidentale";
   @override
   String get southern_america => "America meridionale";
   @override
   String get middle_atlantic_ocean => "Medio Oceano Atlantico";
   @override
-  String get antarctic_continent => "Continente Antartico";
-  @override
-  String get brazil => "Brasile";
-  @override
-  String get eastern_europe => "Europa orientale";
-  @override
   String get habitat_garden => "giardini o campi";
-  @override
-  String get south_central_usa => "Stati Uniti centro-meridionali";
   @override
   String get russian_far_east => "Estremo Oriente russo";
   @override
   String get west_central_tropical_africa => "Africa tropicale centro-occidentale";
   @override
-  String get macaronesia => "Macaronesia";
+  String get plant_toxicity => "Tossicità";
   @override
-  String get arabian_peninsula => "Penisola arabica";
+  String get macaronesia => "Macaronesia";
   @override
   String get asia_temperate => "Asia-Temperato";
   @override
-  String get west_tropical_africa => "Africa tropicale occidentale";
-  @override
-  String get northern_europe => "Europa settentrionale";
-  @override
   String get habitat_rock => "rocce o montagne";
   @override
-  String get northeast_tropical_africa => "Africa tropicale nordorientale";
+  String get taxonomy_superregnum => "Dominio";
   @override
-  String get pref_language => "Lingua preferita";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongolia";
   @override
-  String get new_zealand => "Nuova Zelanda";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "America del Sud Occidentale";
   @override
-  String get filter_distribution => "distribuzione";
+  String get taxonomy_subgenus => "Sottogenere";
   @override
   String get europe => "Europa";
   @override
   String get middle_europe => "Europa centrale";
   @override
-  String get eastern_asia => "Asia orientale";
-  @override
-  String get western_asia => "Asia occidentale";
-  @override
-  String get subarctic_america => "America subartica";
-  @override
   String get color_blue => "blu, viola";
   @override
-  String get north_central_usa => "Stati Uniti centro-nord";
-  @override
   String get southern_south_america => "Sud America del Sud";
+  @override
+  String get plant_habitat => "Habitat";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "numero di petali";
-  @override
-  String get southeastern_usa => "Stati Uniti sudorientali";
   @override
   String get color_white => "bianco";
   @override
@@ -3249,11 +4023,13 @@ class $it extends S {
   @override
   String get color_green => "verde, marrone, nero";
   @override
-  String get petal_many => "più di 5";
+  String get taxonomy_ordo => "Ordine";
   @override
-  String get southeastern_europe => "Europa sud-orientale";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Pacifico";
+  @override
+  String get taxonomy_regnum => "Regno";
   @override
   String get south_central_pacific => "Pacifico centro-meridionale";
   @override
@@ -3261,15 +4037,119 @@ class $it extends S {
   @override
   String get help => "Aiuto";
   @override
-  String get northern_africa => "Africa settentrionale";
-  @override
   String get mexico => "Messico";
+  @override
+  String get siberia => "Siberia";
+  @override
+  String get taxonomy_subtribus => "Sottotribù";
+  @override
+  String get habitat_meadow => "prati o pascoli";
+  @override
+  String get plant_trivia => "Curiosità";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "Erboristeria";
+  @override
+  String get plant_height_to => "a";
+  @override
+  String get habitat_wetland => "brughiere o zone umide";
+  @override
+  String get eastern_canada => "Canada orientale";
+  @override
+  String get habitat_tree => "alberi o arbusti";
+  @override
+  String get settings => "Impostazioni";
+  @override
+  String get color_red => "rosso, rosa";
+  @override
+  String get north_central_pacific => "Pacifico centro-settentrionale";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Africa meridionale";
+  @override
+  String get color_yellow => "giallo";
+  @override
+  String get subantarctic_islands => "Isole Subantartiche";
+  @override
+  String get taxonomy_subfamilia => "Sottofamiglia";
+  @override
+  String get my_region => "La mia regione";
+  @override
+  String get indian_subcontinent => "Subcontinente indiano";
+  @override
+  String get plant_flower => "Fiori";
+  @override
+  String get filter_habitat => "habitat";
+  @override
+  String get northwestern_pacific => "Pacifico nordoccidentale";
+  @override
+  String get southwestern_europe => "Europa sudoccidentale";
+  @override
+  String get taxonomy_species => "Specie";
+  @override
+  String get plant_fruit => "Frutti";
+  @override
+  String get plant_flowering_to => "a";
+  @override
+  String get taxonomy_familia => "Famiglia";
+  @override
+  String get plant_stem => "Stelo";
+  @override
+  String get antarctic_continent => "Continente Antartico";
+  @override
+  String get brazil => "Brasile";
+  @override
+  String get eastern_europe => "Europa orientale";
+  @override
+  String get south_central_usa => "Stati Uniti centro-meridionali";
+  @override
+  String get plant_flowering_from => "Fioritura da";
+  @override
+  String get taxonomy_tribus => "Tribù";
+  @override
+  String get arabian_peninsula => "Penisola arabica";
+  @override
+  String get west_tropical_africa => "Africa tropicale occidentale";
+  @override
+  String get northern_europe => "Europa settentrionale";
+  @override
+  String get northeast_tropical_africa => "Africa tropicale nordorientale";
+  @override
+  String get pref_language => "Lingua preferita";
+  @override
+  String get new_zealand => "Nuova Zelanda";
+  @override
+  String get filter_distribution => "distribuzione";
+  @override
+  String get eastern_asia => "Asia orientale";
+  @override
+  String get western_asia => "Asia occidentale";
+  @override
+  String get subarctic_america => "America subartica";
+  @override
+  String get north_central_usa => "Stati Uniti centro-nord";
+  @override
+  String get southeastern_usa => "Stati Uniti sudorientali";
+  @override
+  String get plant_height_from => "Altezza da";
+  @override
+  String get petal_many => "più di 5";
+  @override
+  String get southeastern_europe => "Europa sud-orientale";
+  @override
+  String get taxonomy_unknown => "sconosciuto";
+  @override
+  String get plant_inflorescence => "Infiorescenza";
+  @override
+  String get northern_africa => "Africa settentrionale";
   @override
   String get china => "Cina";
   @override
-  String get papuasia => "Papuasia";
+  String get taxonomy_genus => "Genere";
   @override
-  String get siberia => "Siberia";
+  String get papuasia => "Papuasia";
 }
 
 class $es extends S {
@@ -3278,8 +4158,6 @@ class $es extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "prado o pradera";
   @override
   String get central_america => "Centroamérica";
   @override
@@ -3297,33 +4175,17 @@ class $es extends S {
   @override
   String get caribbean => "Caribe";
   @override
-  String get habitat_wetland => "páramo o pantano";
-  @override
   String get australasia => "Australasia";
-  @override
-  String get eastern_canada => "Este de Canadá";
   @override
   String get petal_4 => "4 o menos";
   @override
   String get east_tropical_africa => "África tropical oriental";
   @override
-  String get habitat_tree => "árboles o arbustos";
-  @override
-  String get settings => "Configuración";
-  @override
-  String get color_red => "rojo, roso";
-  @override
   String get africa => "África";
-  @override
-  String get north_central_pacific => "Pacífico Norte-Central";
   @override
   String get south_tropical_africa => "África tropical del sur";
   @override
-  String get southern_africa => "Africa del Sur";
-  @override
   String get caucasus => "Cáucaso";
-  @override
-  String get color_yellow => "amarillo";
   @override
   String get middle_asia => "Medio Asia";
   @override
@@ -3331,13 +4193,11 @@ class $es extends S {
   @override
   String get australia => "Australia";
   @override
-  String get subantarctic_islands => "Islas Subantárticas";
-  @override
-  String get my_region => "Mi región";
+  String get plant_leaf => "Hojas";
   @override
   String get habitat_forest => "bosque";
   @override
-  String get indian_subcontinent => "Subcontinente indio";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malesia";
   @override
@@ -3345,79 +4205,53 @@ class $es extends S {
   @override
   String get asia_tropical => "Asia-Tropical";
   @override
-  String get filter_habitat => "localidad";
-  @override
-  String get northwestern_pacific => "Noroeste del Pacífico";
-  @override
   String get northwestern_usa => "Noroeste de los Estados Unidos";
   @override
   String get northern_south_america => "Norte de América del Sur";
-  @override
-  String get southwestern_europe => "Sudoeste de Europa";
   @override
   String get southern_america => "América del Sur";
   @override
   String get middle_atlantic_ocean => "Medio Océano Atlántico";
   @override
-  String get antarctic_continent => "Continente Antártico";
-  @override
-  String get brazil => "Brasil";
-  @override
-  String get eastern_europe => "Europa del Este";
-  @override
   String get habitat_garden => "jardín o campo";
-  @override
-  String get south_central_usa => "Central sur de los Estados Unidos";
   @override
   String get russian_far_east => "Extremo Oriente ruso";
   @override
   String get west_central_tropical_africa => "África tropical occidental central";
   @override
-  String get macaronesia => "Macaronesia";
+  String get plant_toxicity => "Toxicidad";
   @override
-  String get arabian_peninsula => "Península Arabica";
+  String get macaronesia => "Macaronesia";
   @override
   String get asia_temperate => "Asia-Templado";
   @override
-  String get west_tropical_africa => "África tropical occidental";
-  @override
-  String get northern_europe => "Norte de Europa";
-  @override
   String get habitat_rock => "rocas o montaña";
   @override
-  String get northeast_tropical_africa => "Noreste de África Tropical";
+  String get taxonomy_superregnum => "dominio";
   @override
-  String get pref_language => "Idioma preferido";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongolia";
   @override
-  String get new_zealand => "Nueva Zelanda";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "América del oeste occidental";
   @override
-  String get filter_distribution => "distribución";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "Europa";
   @override
   String get middle_europe => "Europa central";
   @override
-  String get eastern_asia => "Asia Oriental";
-  @override
-  String get western_asia => "Asia occidental";
-  @override
-  String get subarctic_america => "América Subártica";
-  @override
   String get color_blue => "azul, púrpura";
   @override
-  String get north_central_usa => "Norte central de los Estados Unidos";
-  @override
   String get southern_south_america => "Sur de América del Sur";
+  @override
+  String get plant_habitat => "Localidad";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "número de pétalos";
-  @override
-  String get southeastern_usa => "Sudeste de los Estados Unidos";
   @override
   String get color_white => "blanco";
   @override
@@ -3425,11 +4259,13 @@ class $es extends S {
   @override
   String get color_green => "verde, marrón, negro";
   @override
-  String get petal_many => "más de 5";
+  String get taxonomy_ordo => "orden";
   @override
-  String get southeastern_europe => "Sudorientale de Europa";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Pacífico";
+  @override
+  String get taxonomy_regnum => "reino";
   @override
   String get south_central_pacific => "Pacífico Sur-Central";
   @override
@@ -3437,15 +4273,117 @@ class $es extends S {
   @override
   String get help => "Ayuda";
   @override
-  String get northern_africa => "Africa del Norte";
-  @override
   String get mexico => "Méjico";
+  @override
+  String get siberia => "Siberia";
+  @override
+  String get taxonomy_subtribus => "subtribu";
+  @override
+  String get habitat_meadow => "prado o pradera";
+  @override
+  String get taxonomy_cladus => "(clado)";
+  @override
+  String get plant_herbalism => "Herboristería";
+  @override
+  String get plant_height_to => "hasta";
+  @override
+  String get habitat_wetland => "páramo o pantano";
+  @override
+  String get eastern_canada => "Este de Canadá";
+  @override
+  String get habitat_tree => "árboles o arbustos";
+  @override
+  String get settings => "Configuración";
+  @override
+  String get color_red => "rojo, roso";
+  @override
+  String get north_central_pacific => "Pacífico Norte-Central";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Africa del Sur";
+  @override
+  String get color_yellow => "amarillo";
+  @override
+  String get subantarctic_islands => "Islas Subantárticas";
+  @override
+  String get taxonomy_subfamilia => "subfamilia";
+  @override
+  String get my_region => "Mi región";
+  @override
+  String get indian_subcontinent => "Subcontinente indio";
+  @override
+  String get plant_flower => "Flores";
+  @override
+  String get filter_habitat => "localidad";
+  @override
+  String get northwestern_pacific => "Noroeste del Pacífico";
+  @override
+  String get southwestern_europe => "Sudoeste de Europa";
+  @override
+  String get taxonomy_species => "especie";
+  @override
+  String get plant_fruit => "Fruta";
+  @override
+  String get plant_flowering_to => "hasta";
+  @override
+  String get taxonomy_familia => "familia";
+  @override
+  String get plant_stem => "Tallo";
+  @override
+  String get antarctic_continent => "Continente Antártico";
+  @override
+  String get brazil => "Brasil";
+  @override
+  String get eastern_europe => "Europa del Este";
+  @override
+  String get south_central_usa => "Central sur de los Estados Unidos";
+  @override
+  String get plant_flowering_from => "Floración desde";
+  @override
+  String get taxonomy_tribus => "tribu";
+  @override
+  String get arabian_peninsula => "Península Arabica";
+  @override
+  String get west_tropical_africa => "África tropical occidental";
+  @override
+  String get northern_europe => "Norte de Europa";
+  @override
+  String get northeast_tropical_africa => "Noreste de África Tropical";
+  @override
+  String get pref_language => "Idioma preferido";
+  @override
+  String get new_zealand => "Nueva Zelanda";
+  @override
+  String get filter_distribution => "distribución";
+  @override
+  String get eastern_asia => "Asia Oriental";
+  @override
+  String get western_asia => "Asia occidental";
+  @override
+  String get subarctic_america => "América Subártica";
+  @override
+  String get north_central_usa => "Norte central de los Estados Unidos";
+  @override
+  String get southeastern_usa => "Sudeste de los Estados Unidos";
+  @override
+  String get plant_height_from => "Altura desde";
+  @override
+  String get petal_many => "más de 5";
+  @override
+  String get southeastern_europe => "Sudorientale de Europa";
+  @override
+  String get taxonomy_unknown => "desconocido";
+  @override
+  String get plant_inflorescence => "Inflorescencia";
+  @override
+  String get northern_africa => "Africa del Norte";
   @override
   String get china => "China";
   @override
-  String get papuasia => "Papuasia";
+  String get taxonomy_genus => "género";
   @override
-  String get siberia => "Siberia";
+  String get papuasia => "Papuasia";
 }
 
 class $et extends S {
@@ -3454,8 +4392,6 @@ class $et extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "heinamaad või rohumaade";
   @override
   String get central_america => "Kesk-Ameerika";
   @override
@@ -3473,33 +4409,17 @@ class $et extends S {
   @override
   String get caribbean => "Kariibimere saared";
   @override
-  String get habitat_wetland => "moorlandi või märgala";
-  @override
   String get australasia => "Austraalia";
-  @override
-  String get eastern_canada => "Ida-Kanada";
   @override
   String get petal_4 => "4 või vähem";
   @override
   String get east_tropical_africa => "Ida troopiline Aafrika";
   @override
-  String get habitat_tree => "puud või põõsad";
-  @override
-  String get settings => "Reguleerimine";
-  @override
-  String get color_red => "punane, roosa";
-  @override
   String get africa => "Aafrika";
-  @override
-  String get north_central_pacific => "Vaikse ookeani põhja-keskosa";
   @override
   String get south_tropical_africa => "Lõuna-troopiline Aafrika";
   @override
-  String get southern_africa => "Lõuna-Aafrika";
-  @override
   String get caucasus => "Kaukaasia";
-  @override
-  String get color_yellow => "kollane";
   @override
   String get middle_asia => "Kesk-Aasias";
   @override
@@ -3507,13 +4427,11 @@ class $et extends S {
   @override
   String get australia => "Austraalia";
   @override
-  String get subantarctic_islands => "Subantkartised saared";
-  @override
-  String get my_region => "Minu regioon";
+  String get plant_leaf => "Lehed";
   @override
   String get habitat_forest => "metsamaad või metsade";
   @override
-  String get indian_subcontinent => "India subkontinent";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malaisia";
   @override
@@ -3521,79 +4439,53 @@ class $et extends S {
   @override
   String get asia_tropical => "Aasia-Troopiline";
   @override
-  String get filter_habitat => "elupaikade";
-  @override
-  String get northwestern_pacific => "Vaikse ookeani loodeosas";
-  @override
   String get northwestern_usa => "Loode USA";
   @override
   String get northern_south_america => "Põhja-Lõuna-Ameerika";
-  @override
-  String get southwestern_europe => "Edela-Euroopa";
   @override
   String get southern_america => "Lõuna-Ameerika";
   @override
   String get middle_atlantic_ocean => "Kesk-Atlandi ookean";
   @override
-  String get antarctic_continent => "Antarktika mandril";
-  @override
-  String get brazil => "Brasiilia";
-  @override
-  String get eastern_europe => "Ida-Euroopa";
-  @override
   String get habitat_garden => "aiad või väljad";
-  @override
-  String get south_central_usa => "Lõuna-Keskne USA";
   @override
   String get russian_far_east => "Vene Kaug-Ida";
   @override
   String get west_central_tropical_africa => "Lääne-Kesk-troopiline Aafrika";
   @override
-  String get macaronesia => "Makaroneesia";
+  String get plant_toxicity => "Mürgisus";
   @override
-  String get arabian_peninsula => "Araabia poolsaar";
+  String get macaronesia => "Makaroneesia";
   @override
   String get asia_temperate => "Aasia-Mõõdukas";
   @override
-  String get west_tropical_africa => "Lääne troopiline Aafrika";
-  @override
-  String get northern_europe => "Põhja-Euroopa";
-  @override
   String get habitat_rock => "kivid või mägedes";
   @override
-  String get northeast_tropical_africa => "Kirde troopiline Aafrika";
+  String get taxonomy_superregnum => "Domeen";
   @override
-  String get pref_language => "Eelistatud keel";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongoolia";
   @override
-  String get new_zealand => "Uus-Meremaa";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "Lääne-Lõuna-Ameerika";
   @override
-  String get filter_distribution => "levitamine";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "Euroopa";
   @override
   String get middle_europe => "Kesk-Euroopa";
   @override
-  String get eastern_asia => "Ida-Aasias";
-  @override
-  String get western_asia => "Lääne-Aasias";
-  @override
-  String get subarctic_america => "Subarctic Ameerika";
-  @override
   String get color_blue => "sinine, lilla";
   @override
-  String get north_central_usa => "Põhja-Keskne USA";
-  @override
   String get southern_south_america => "Lõuna-Lõuna-Ameerika";
+  @override
+  String get plant_habitat => "Elupaik";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "arvu kroonlehed";
-  @override
-  String get southeastern_usa => "Kaguosas USA";
   @override
   String get color_white => "valge";
   @override
@@ -3601,11 +4493,13 @@ class $et extends S {
   @override
   String get color_green => "roheline, pruun, must";
   @override
-  String get petal_many => "rohkem kui 5";
+  String get taxonomy_ordo => "Selts";
   @override
-  String get southeastern_europe => "Kagu-Euroopa";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Vaikne ookean";
+  @override
+  String get taxonomy_regnum => "Riik";
   @override
   String get south_central_pacific => "Vaikse ookeani keskosas";
   @override
@@ -3613,15 +4507,119 @@ class $et extends S {
   @override
   String get help => "Appi";
   @override
-  String get northern_africa => "Põhja-Aafrika";
-  @override
   String get mexico => "Mehhiko";
+  @override
+  String get siberia => "Siberis";
+  @override
+  String get taxonomy_subtribus => "Subtriibus";
+  @override
+  String get habitat_meadow => "heinamaad või rohumaade";
+  @override
+  String get plant_trivia => "Tühiasi";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "Raviteaduse";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "moorlandi või märgala";
+  @override
+  String get eastern_canada => "Ida-Kanada";
+  @override
+  String get habitat_tree => "puud või põõsad";
+  @override
+  String get settings => "Reguleerimine";
+  @override
+  String get color_red => "punane, roosa";
+  @override
+  String get north_central_pacific => "Vaikse ookeani põhja-keskosa";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Lõuna-Aafrika";
+  @override
+  String get color_yellow => "kollane";
+  @override
+  String get subantarctic_islands => "Subantkartised saared";
+  @override
+  String get taxonomy_subfamilia => "Subfamily";
+  @override
+  String get my_region => "Minu regioon";
+  @override
+  String get indian_subcontinent => "India subkontinent";
+  @override
+  String get plant_flower => "Õis";
+  @override
+  String get filter_habitat => "elupaikade";
+  @override
+  String get northwestern_pacific => "Vaikse ookeani loodeosas";
+  @override
+  String get southwestern_europe => "Edela-Euroopa";
+  @override
+  String get taxonomy_species => "Liik";
+  @override
+  String get plant_fruit => "Vili";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Sugukond";
+  @override
+  String get plant_stem => "Vars";
+  @override
+  String get antarctic_continent => "Antarktika mandril";
+  @override
+  String get brazil => "Brasiilia";
+  @override
+  String get eastern_europe => "Ida-Euroopa";
+  @override
+  String get south_central_usa => "Lõuna-Keskne USA";
+  @override
+  String get plant_flowering_from => "Õitsemine";
+  @override
+  String get taxonomy_tribus => "Triibus";
+  @override
+  String get arabian_peninsula => "Araabia poolsaar";
+  @override
+  String get west_tropical_africa => "Lääne troopiline Aafrika";
+  @override
+  String get northern_europe => "Põhja-Euroopa";
+  @override
+  String get northeast_tropical_africa => "Kirde troopiline Aafrika";
+  @override
+  String get pref_language => "Eelistatud keel";
+  @override
+  String get new_zealand => "Uus-Meremaa";
+  @override
+  String get filter_distribution => "levitamine";
+  @override
+  String get eastern_asia => "Ida-Aasias";
+  @override
+  String get western_asia => "Lääne-Aasias";
+  @override
+  String get subarctic_america => "Subarctic Ameerika";
+  @override
+  String get north_central_usa => "Põhja-Keskne USA";
+  @override
+  String get southeastern_usa => "Kaguosas USA";
+  @override
+  String get plant_height_from => "Kõrgus";
+  @override
+  String get petal_many => "rohkem kui 5";
+  @override
+  String get southeastern_europe => "Kagu-Euroopa";
+  @override
+  String get taxonomy_unknown => "teadmata";
+  @override
+  String get plant_inflorescence => "Õisik";
+  @override
+  String get northern_africa => "Põhja-Aafrika";
   @override
   String get china => "Hiina";
   @override
-  String get papuasia => "Papuasia";
+  String get taxonomy_genus => "Perekond";
   @override
-  String get siberia => "Siberis";
+  String get papuasia => "Papuasia";
 }
 
 class $cs extends S {
@@ -3630,8 +4628,6 @@ class $cs extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "louky a travnaté porosty";
   @override
   String get central_america => "Střední Amerika";
   @override
@@ -3649,33 +4645,17 @@ class $cs extends S {
   @override
   String get caribbean => "Karibik";
   @override
-  String get habitat_wetland => "mokřady a bažiny";
-  @override
   String get australasia => "Australasie";
-  @override
-  String get eastern_canada => "Východní Kanada";
   @override
   String get petal_4 => "4 nebo méně";
   @override
   String get east_tropical_africa => "Východní tropická Afrika";
   @override
-  String get habitat_tree => "stromy a keře";
-  @override
-  String get settings => "Nastavení";
-  @override
-  String get color_red => "červená, růžová";
-  @override
   String get africa => "Afrika";
-  @override
-  String get north_central_pacific => "Středoseverní Tichomoří";
   @override
   String get south_tropical_africa => "Jižní tropická Afrika";
   @override
-  String get southern_africa => "Jižní Afrika";
-  @override
   String get caucasus => "Kavkaz";
-  @override
-  String get color_yellow => "žlutá";
   @override
   String get middle_asia => "Střední Asie";
   @override
@@ -3683,13 +4663,11 @@ class $cs extends S {
   @override
   String get australia => "Austrálie";
   @override
-  String get subantarctic_islands => "Subantarktické ostrovy";
-  @override
-  String get my_region => "Moje oblast";
+  String get plant_leaf => "List";
   @override
   String get habitat_forest => "lesy";
   @override
-  String get indian_subcontinent => "Indický subkontinent";
+  String get taxonomy_serie => "série";
   @override
   String get malesia => "Jihovýchodní Asie";
   @override
@@ -3697,79 +4675,53 @@ class $cs extends S {
   @override
   String get asia_tropical => "Tropická Asie";
   @override
-  String get filter_habitat => "ekologie";
-  @override
-  String get northwestern_pacific => "Severozápadní Tichomoří";
-  @override
   String get northwestern_usa => "Severozápad USA";
   @override
   String get northern_south_america => "Sever Jižní Ameriky";
-  @override
-  String get southwestern_europe => "Jihozápadní Evropa";
   @override
   String get southern_america => "Jižní Amerika";
   @override
   String get middle_atlantic_ocean => "Střední Atlantik";
   @override
-  String get antarctic_continent => "Antarktický kontinent";
-  @override
-  String get brazil => "Brazílie";
-  @override
-  String get eastern_europe => "Východní Evropa";
-  @override
   String get habitat_garden => "pole a zahrady";
-  @override
-  String get south_central_usa => "Středojih USA";
   @override
   String get russian_far_east => "Ruský dálný východ";
   @override
   String get west_central_tropical_africa => "Středozápadní tropická Afrika";
   @override
-  String get macaronesia => "Makaronézie";
+  String get plant_toxicity => "Toxicita";
   @override
-  String get arabian_peninsula => "Arabský poloostrov";
+  String get macaronesia => "Makaronézie";
   @override
   String get asia_temperate => "Temperátní Asie";
   @override
-  String get west_tropical_africa => "Západní tropická Afrika";
-  @override
-  String get northern_europe => "Severní Evropa";
-  @override
   String get habitat_rock => "vrcholky hor a skály";
   @override
-  String get northeast_tropical_africa => "Severovýchodní tropická Afrika";
+  String get taxonomy_superregnum => "doména";
   @override
-  String get pref_language => "Preferovaný jazyk";
+  String get taxonomy_sectio => "sekce";
   @override
   String get mongolia => "Mongolsko";
   @override
-  String get new_zealand => "Nový Zéland";
+  String get taxonomy_subserie => "podsérie";
   @override
   String get western_south_america => "Západ Jižní Ameriky";
   @override
-  String get filter_distribution => "distribuce";
+  String get taxonomy_subgenus => "podrod";
   @override
   String get europe => "Evropa";
   @override
   String get middle_europe => "Střední Evropa";
   @override
-  String get eastern_asia => "Východní Asie";
-  @override
-  String get western_asia => "Jihozápadní Asie";
-  @override
-  String get subarctic_america => "Subarktická Amerika";
-  @override
   String get color_blue => "modrá, fialová";
   @override
-  String get north_central_usa => "Středosever USA";
-  @override
   String get southern_south_america => "Jih Jižní Ameriky";
+  @override
+  String get plant_habitat => "Ekologie";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "počet okvětních lístků";
-  @override
-  String get southeastern_usa => "Jihovýchod USA";
   @override
   String get color_white => "bílá";
   @override
@@ -3777,11 +4729,13 @@ class $cs extends S {
   @override
   String get color_green => "zelená, hnědá, černá";
   @override
-  String get petal_many => "více než 5";
+  String get taxonomy_ordo => "řád";
   @override
-  String get southeastern_europe => "Jihovýchodní Evropa";
+  String get taxonomy_supersectio => "nadsekce";
   @override
   String get pacific => "Tichomoří";
+  @override
+  String get taxonomy_regnum => "říše";
   @override
   String get south_central_pacific => "Středojižní Tichomoří";
   @override
@@ -3789,15 +4743,117 @@ class $cs extends S {
   @override
   String get help => "Pomoc";
   @override
-  String get northern_africa => "Severní Afrika";
-  @override
   String get mexico => "Mexiko";
+  @override
+  String get siberia => "Sibiř";
+  @override
+  String get taxonomy_subtribus => "podskupina";
+  @override
+  String get habitat_meadow => "louky a travnaté porosty";
+  @override
+  String get taxonomy_cladus => "(klad)";
+  @override
+  String get plant_herbalism => "Bylinářství";
+  @override
+  String get plant_height_to => "do";
+  @override
+  String get habitat_wetland => "mokřady a bažiny";
+  @override
+  String get eastern_canada => "Východní Kanada";
+  @override
+  String get habitat_tree => "stromy a keře";
+  @override
+  String get settings => "Nastavení";
+  @override
+  String get color_red => "červená, růžová";
+  @override
+  String get north_central_pacific => "Středoseverní Tichomoří";
+  @override
+  String get taxonomy_subsectio => "podsekce";
+  @override
+  String get southern_africa => "Jižní Afrika";
+  @override
+  String get color_yellow => "žlutá";
+  @override
+  String get subantarctic_islands => "Subantarktické ostrovy";
+  @override
+  String get taxonomy_subfamilia => "podčeleď";
+  @override
+  String get my_region => "Moje oblast";
+  @override
+  String get indian_subcontinent => "Indický subkontinent";
+  @override
+  String get plant_flower => "Květ";
+  @override
+  String get filter_habitat => "ekologie";
+  @override
+  String get northwestern_pacific => "Severozápadní Tichomoří";
+  @override
+  String get southwestern_europe => "Jihozápadní Evropa";
+  @override
+  String get taxonomy_species => "druh";
+  @override
+  String get plant_fruit => "Plod";
+  @override
+  String get plant_flowering_to => "do";
+  @override
+  String get taxonomy_familia => "čeleď";
+  @override
+  String get plant_stem => "Lodyha";
+  @override
+  String get antarctic_continent => "Antarktický kontinent";
+  @override
+  String get brazil => "Brazílie";
+  @override
+  String get eastern_europe => "Východní Evropa";
+  @override
+  String get south_central_usa => "Středojih USA";
+  @override
+  String get plant_flowering_from => "Kvete od";
+  @override
+  String get taxonomy_tribus => "skupina";
+  @override
+  String get arabian_peninsula => "Arabský poloostrov";
+  @override
+  String get west_tropical_africa => "Západní tropická Afrika";
+  @override
+  String get northern_europe => "Severní Evropa";
+  @override
+  String get northeast_tropical_africa => "Severovýchodní tropická Afrika";
+  @override
+  String get pref_language => "Preferovaný jazyk";
+  @override
+  String get new_zealand => "Nový Zéland";
+  @override
+  String get filter_distribution => "distribuce";
+  @override
+  String get eastern_asia => "Východní Asie";
+  @override
+  String get western_asia => "Jihozápadní Asie";
+  @override
+  String get subarctic_america => "Subarktická Amerika";
+  @override
+  String get north_central_usa => "Středosever USA";
+  @override
+  String get southeastern_usa => "Jihovýchod USA";
+  @override
+  String get plant_height_from => "Výška od";
+  @override
+  String get petal_many => "více než 5";
+  @override
+  String get southeastern_europe => "Jihovýchodní Evropa";
+  @override
+  String get taxonomy_unknown => "neznámý";
+  @override
+  String get plant_inflorescence => "Květenství";
+  @override
+  String get northern_africa => "Severní Afrika";
   @override
   String get china => "Čína";
   @override
-  String get papuasia => "Papuasie";
+  String get taxonomy_genus => "rod";
   @override
-  String get siberia => "Sibiř";
+  String get papuasia => "Papuasie";
 }
 
 class $ar extends S {
@@ -3806,8 +4862,6 @@ class $ar extends S {
   @override
   TextDirection get textDirection => TextDirection.rtl;
 
-  @override
-  String get habitat_meadow => "مروج أو مراعي";
   @override
   String get central_america => "أمريكا الوسطى";
   @override
@@ -3825,33 +4879,17 @@ class $ar extends S {
   @override
   String get caribbean => "منطقة البحر الكاريبي";
   @override
-  String get habitat_wetland => "مستنقعات أو أراضي الرطبة";
-  @override
   String get australasia => "أستراليا";
-  @override
-  String get eastern_canada => "شرق كندا";
   @override
   String get petal_4 => "أربعة أو أقل";
   @override
   String get east_tropical_africa => "شرق الاستوائية أفريقيا";
   @override
-  String get habitat_tree => "أشجار أو شجيرات";
-  @override
-  String get settings => "إعدادات";
-  @override
-  String get color_red => "أحمر وردي";
-  @override
   String get africa => "أفريقيا";
-  @override
-  String get north_central_pacific => "شمال وسط المحيط الهادئ";
   @override
   String get south_tropical_africa => "جنوب الاستوائية أفريقيا";
   @override
-  String get southern_africa => "جنوب افريقيا";
-  @override
   String get caucasus => "القوقاز";
-  @override
-  String get color_yellow => "أصفر";
   @override
   String get middle_asia => "آسيا الوسطى";
   @override
@@ -3859,13 +4897,11 @@ class $ar extends S {
   @override
   String get australia => "أستراليا";
   @override
-  String get subantarctic_islands => "جزر سوبنتاركتيك";
-  @override
-  String get my_region => "منطقتي";
+  String get plant_leaf => "اوراق";
   @override
   String get habitat_forest => "الغابات";
   @override
-  String get indian_subcontinent => "شبه القارة الهندية";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "ماليزيا";
   @override
@@ -3873,79 +4909,53 @@ class $ar extends S {
   @override
   String get asia_tropical => "آسيا الاستوائية";
   @override
-  String get filter_habitat => "موطن";
-  @override
-  String get northwestern_pacific => "شمال غرب المحيط الهادئ";
-  @override
   String get northwestern_usa => "شمال غرب الولايات المتحدة";
   @override
   String get northern_south_america => "شمال أمريكا الجنوبية";
-  @override
-  String get southwestern_europe => "جنوب غرب أوروبا";
   @override
   String get southern_america => "أمريكا الجنوبية";
   @override
   String get middle_atlantic_ocean => "المحيط الأطلسي الأوسط";
   @override
-  String get antarctic_continent => "القارة القطبية الجنوبية";
-  @override
-  String get brazil => "البرازيل";
-  @override
-  String get eastern_europe => "أوروبا الشرقية";
-  @override
   String get habitat_garden => "حدائق أو حقول";
-  @override
-  String get south_central_usa => "جنوب وسط الولايات المتحدة";
   @override
   String get russian_far_east => "الشرق الأقصى الروسي";
   @override
   String get west_central_tropical_africa => "غرب وسط الاستوائية أفريقيا";
   @override
-  String get macaronesia => "ماكارونيسيا";
+  String get plant_toxicity => "تأثير سمي";
   @override
-  String get arabian_peninsula => "شبه الجزيرة العربية";
+  String get macaronesia => "ماكارونيسيا";
   @override
   String get asia_temperate => "آسيا المعتدلة";
   @override
-  String get west_tropical_africa => "غرب الاستوائية أفريقيا";
-  @override
-  String get northern_europe => "شمال أوروبا";
-  @override
   String get habitat_rock => "صخور أو جبال";
   @override
-  String get northeast_tropical_africa => "شمال شرق الاستوائية أفريقيا";
+  String get taxonomy_superregnum => "النطاق";
   @override
-  String get pref_language => "اللغة المفضلة";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "منغوليا";
   @override
-  String get new_zealand => "نيوزيلندا";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "غرب أمريكا الجنوبية";
   @override
-  String get filter_distribution => "توزيع";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "أوروبا";
   @override
   String get middle_europe => "وسط أوروبا";
   @override
-  String get eastern_asia => "شرق اسيا";
-  @override
-  String get western_asia => "آسيا الغربية";
-  @override
-  String get subarctic_america => "أمريكا الشمالية";
-  @override
   String get color_blue => "أزرق أرجواني";
   @override
-  String get north_central_usa => "شمال وسط الولايات المتحدة";
-  @override
   String get southern_south_america => "جنوب أمريكا الجنوبية";
+  @override
+  String get plant_habitat => "موطن";
   @override
   String get petal_5 => "خمسة";
   @override
   String get filter_petal => "عدد البتلات";
-  @override
-  String get southeastern_usa => "جنوب شرق الولايات المتحدة";
   @override
   String get color_white => "أبيض";
   @override
@@ -3953,11 +4963,13 @@ class $ar extends S {
   @override
   String get color_green => "أخضر، بني، أسود";
   @override
-  String get petal_many => "أكثر من خمسة";
+  String get taxonomy_ordo => "الرتبة";
   @override
-  String get southeastern_europe => "جنوب شرق أوروبا";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "المحيط الهادئ";
+  @override
+  String get taxonomy_regnum => "المملكة";
   @override
   String get south_central_pacific => "جنوب وسط المحيط الهادئ";
   @override
@@ -3965,15 +4977,119 @@ class $ar extends S {
   @override
   String get help => "مساعدة";
   @override
-  String get northern_africa => "شمال أفريقيا";
-  @override
   String get mexico => "المكسيك";
+  @override
+  String get siberia => "سيبيريا";
+  @override
+  String get taxonomy_subtribus => "العميرة";
+  @override
+  String get habitat_meadow => "مروج أو مراعي";
+  @override
+  String get plant_trivia => "معلومات";
+  @override
+  String get taxonomy_cladus => "(غير مصنف)";
+  @override
+  String get plant_herbalism => "دراسة الأعشاب";
+  @override
+  String get plant_height_to => "إلى";
+  @override
+  String get habitat_wetland => "مستنقعات أو أراضي الرطبة";
+  @override
+  String get eastern_canada => "شرق كندا";
+  @override
+  String get habitat_tree => "أشجار أو شجيرات";
+  @override
+  String get settings => "إعدادات";
+  @override
+  String get color_red => "أحمر وردي";
+  @override
+  String get north_central_pacific => "شمال وسط المحيط الهادئ";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "جنوب افريقيا";
+  @override
+  String get color_yellow => "أصفر";
+  @override
+  String get subantarctic_islands => "جزر سوبنتاركتيك";
+  @override
+  String get taxonomy_subfamilia => "القطاع";
+  @override
+  String get my_region => "منطقتي";
+  @override
+  String get indian_subcontinent => "شبه القارة الهندية";
+  @override
+  String get plant_flower => "زهور";
+  @override
+  String get filter_habitat => "موطن";
+  @override
+  String get northwestern_pacific => "شمال غرب المحيط الهادئ";
+  @override
+  String get southwestern_europe => "جنوب غرب أوروبا";
+  @override
+  String get taxonomy_species => "محيط";
+  @override
+  String get plant_fruit => "فواكه";
+  @override
+  String get plant_flowering_to => "إلى";
+  @override
+  String get taxonomy_familia => "الفصيلة";
+  @override
+  String get plant_stem => "ساق نبات";
+  @override
+  String get antarctic_continent => "القارة القطبية الجنوبية";
+  @override
+  String get brazil => "البرازيل";
+  @override
+  String get eastern_europe => "أوروبا الشرقية";
+  @override
+  String get south_central_usa => "جنوب وسط الولايات المتحدة";
+  @override
+  String get plant_flowering_from => "المزهرة من";
+  @override
+  String get taxonomy_tribus => "القبيلة";
+  @override
+  String get arabian_peninsula => "شبه الجزيرة العربية";
+  @override
+  String get west_tropical_africa => "غرب الاستوائية أفريقيا";
+  @override
+  String get northern_europe => "شمال أوروبا";
+  @override
+  String get northeast_tropical_africa => "شمال شرق الاستوائية أفريقيا";
+  @override
+  String get pref_language => "اللغة المفضلة";
+  @override
+  String get new_zealand => "نيوزيلندا";
+  @override
+  String get filter_distribution => "توزيع";
+  @override
+  String get eastern_asia => "شرق اسيا";
+  @override
+  String get western_asia => "آسيا الغربية";
+  @override
+  String get subarctic_america => "أمريكا الشمالية";
+  @override
+  String get north_central_usa => "شمال وسط الولايات المتحدة";
+  @override
+  String get southeastern_usa => "جنوب شرق الولايات المتحدة";
+  @override
+  String get plant_height_from => "الارتفاع من";
+  @override
+  String get petal_many => "أكثر من خمسة";
+  @override
+  String get southeastern_europe => "جنوب شرق أوروبا";
+  @override
+  String get taxonomy_unknown => "غير معروف";
+  @override
+  String get plant_inflorescence => "إزهار";
+  @override
+  String get northern_africa => "شمال أفريقيا";
   @override
   String get china => "الصين";
   @override
-  String get papuasia => "بابوا";
+  String get taxonomy_genus => "الجنس";
   @override
-  String get siberia => "سيبيريا";
+  String get papuasia => "بابوا";
 }
 
 class $pa extends S {
@@ -3982,8 +5098,6 @@ class $pa extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "ਅਨੁਵਾਦ ਸੁਧਾਰੋ";
   @override
   String get central_america => "ਮੱਧ ਅਮਰੀਕਾ";
   @override
@@ -4001,33 +5115,17 @@ class $pa extends S {
   @override
   String get caribbean => "ਕੈਰੀਬੀਅਨ";
   @override
-  String get habitat_wetland => "ਪਹਾੜਾਂ ਜਾਂ ਝੂਲਿਆਂ";
-  @override
   String get australasia => "ਆਸਟ੍ਰੇਲੀਆ";
-  @override
-  String get eastern_canada => "ਪੂਰਬੀ ਕੈਨੇਡਾ";
   @override
   String get petal_4 => "4 ਜਾਂ ਘੱਟ";
   @override
   String get east_tropical_africa => "ਪੂਰਬੀ ਤ੍ਰਿਕੋਸ਼ੀ ਅਫਰੀਕਾ";
   @override
-  String get habitat_tree => "ਰੁੱਖ ਜਾਂ ਬੂਟੇ";
-  @override
-  String get settings => "ਸੈਟਿੰਗਜ਼";
-  @override
-  String get color_red => "ਲਾਲ, ਗੁਲਾਬੀ";
-  @override
   String get africa => "ਅਫਰੀਕਾ";
-  @override
-  String get north_central_pacific => "ਉੱਤਰੀ-ਕੇਂਦਰੀ ਪੈਸੀਫਿਕ";
   @override
   String get south_tropical_africa => "ਦੱਖਣੀ ਖੰਡੀ ਅਫ਼ਰੀਕਾ";
   @override
-  String get southern_africa => "ਦੱਖਣੀ ਅਫਰੀਕਾ";
-  @override
   String get caucasus => "ਕਾਕੇਸਸ";
-  @override
-  String get color_yellow => "ਪੀਲਾ";
   @override
   String get middle_asia => "ਮੱਧ ਏਸ਼ੀਆ";
   @override
@@ -4035,13 +5133,11 @@ class $pa extends S {
   @override
   String get australia => "ਆਸਟ੍ਰੇਲੀਆ";
   @override
-  String get subantarctic_islands => "ਸਬਾਨਟਾਰਕਟਿਕਾ ਆਈਲੈਂਡਜ਼";
-  @override
-  String get my_region => "ਮੇਰਾ ਖੇਤਰ";
+  String get plant_leaf => "ਪੱਤਾ";
   @override
   String get habitat_forest => "ਮਦਦ ਕਰੋ";
   @override
-  String get indian_subcontinent => "ਭਾਰਤੀ ਉਪ ਮਹਾਂਦੀਪ";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "ਮਲੇਸ਼ੀਆ";
   @override
@@ -4049,79 +5145,53 @@ class $pa extends S {
   @override
   String get asia_tropical => "ਏਸ਼ੀਆ-ਖੰਡੀ";
   @override
-  String get filter_habitat => "ਆਵਾਸ";
-  @override
-  String get northwestern_pacific => "ਉੱਤਰੀ ਪੱਛਮੀ ਪੈਸੀਫਿਕ";
-  @override
   String get northwestern_usa => "ਉੱਤਰ ਪੱਛਮੀ ਅਮਰੀਕਾ";
   @override
   String get northern_south_america => "ਉੱਤਰੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
-  @override
-  String get southwestern_europe => "ਦੱਖਣ ਪੱਛਮੀ ਯੂਰਪ";
   @override
   String get southern_america => "ਦੱਖਣੀ ਅਮਰੀਕਾ";
   @override
   String get middle_atlantic_ocean => "ਮੱਧ ਅਟਲਾਂਟਿਕ ਮਹਾਂਸਾਗਰ";
   @override
-  String get antarctic_continent => "ਅੰਟਾਰਕਟਿਕਾ ਮਹਾਂਦੀਪ";
-  @override
-  String get brazil => "ਬ੍ਰਾਜ਼ੀਲ";
-  @override
-  String get eastern_europe => "ਪੂਰਬੀ ਯੂਰਪ";
-  @override
   String get habitat_garden => "ਪਲਾਂਟ ਦਾ ਦ੍ਰਿਸ਼ਟੀਕੋਣ";
-  @override
-  String get south_central_usa => "ਦੱਖਣੀ-ਕੇਂਦਰੀ ਅਮਰੀਕਾ";
   @override
   String get russian_far_east => "ਰੂਸੀ ਦੂਰ ਪੂਰਬ";
   @override
   String get west_central_tropical_africa => "ਵੈਸਟ-ਸੈਂਟਰਲ ਟ੍ਰੌਪੀਕਲ ਅਫਰੀਕਾ";
   @override
-  String get macaronesia => "ਮੈਕਰੋਨੀਆਸੀਆ";
+  String get plant_toxicity => "ਵਸ਼ੈਲਾਪਣ";
   @override
-  String get arabian_peninsula => "ਅਰਬੀ ਪ੍ਰਾਇਦੀਪ";
+  String get macaronesia => "ਮੈਕਰੋਨੀਆਸੀਆ";
   @override
   String get asia_temperate => "ਏਸ਼ੀਆ-ਤਾਪਤਾ";
   @override
-  String get west_tropical_africa => "ਪੱਛਮੀ ਖੰਡੀ ਅਫ਼ਰੀਕਾ";
-  @override
-  String get northern_europe => "ਉੱਤਰੀ ਯੂਰਪ";
-  @override
   String get habitat_rock => "ਇਕ ਚੁਣੋ";
   @override
-  String get northeast_tropical_africa => "ਨਾਰਥ ਈਸਟ ਟ੍ਰੌਪੀਕਲ ਅਫਰੀਕਾ";
+  String get taxonomy_superregnum => "Domain";
   @override
-  String get pref_language => "ਤਰਜੀਹੀ ਭਾਸ਼ਾ";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "ਮੰਗੋਲੀਆ";
   @override
-  String get new_zealand => "ਨਿਊਜ਼ੀਲੈਂਡ";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "ਪੱਛਮੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
   @override
-  String get filter_distribution => "ਵੰਡ";
+  String get taxonomy_subgenus => "ਉੱਪ-ਜਿਨਸ";
   @override
   String get europe => "ਯੂਰਪ";
   @override
   String get middle_europe => "ਮੱਧ ਯੂਰਪ";
   @override
-  String get eastern_asia => "ਪੂਰਬੀ ਏਸ਼ੀਆ";
-  @override
-  String get western_asia => "ਪੱਛਮੀ ਏਸ਼ੀਆ";
-  @override
-  String get subarctic_america => "ਸੁਬਰਟਿਕ ਅਮਰੀਕਾ";
-  @override
   String get color_blue => "ਨੀਲਾ, ਜਾਮਨੀ";
   @override
-  String get north_central_usa => "ਉੱਤਰੀ-ਕੇਂਦਰੀ ਅਮਰੀਕਾ";
-  @override
   String get southern_south_america => "ਦੱਖਣੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
+  @override
+  String get plant_habitat => "ਆਵਾਸ";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "ਫੁੱਲਾਂ ਦੀ ਗਿਣਤੀ";
-  @override
-  String get southeastern_usa => "ਦੱਖਣੀ-ਪੂਰਬੀ ਅਮਰੀਕਾ";
   @override
   String get color_white => "ਚਿੱਟਾ";
   @override
@@ -4129,11 +5199,13 @@ class $pa extends S {
   @override
   String get color_green => "ਹਰਾ, ਭੂਰੇ, ਕਾਲਾ";
   @override
-  String get petal_many => "5 ਤੋਂ ਵੱਧ";
+  String get taxonomy_ordo => "ਤਬਕਾ";
   @override
-  String get southeastern_europe => "ਦੱਖਣ ਯੂਰਪ";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "ਪ੍ਰਸ਼ਾਂਤ ਮਹਾਸਾਗਰ";
+  @override
+  String get taxonomy_regnum => "ਜਗਤ";
   @override
   String get south_central_pacific => "ਦੱਖਣੀ-ਕੇਂਦਰੀ ਪੈਸੀਫਿਕ";
   @override
@@ -4141,15 +5213,119 @@ class $pa extends S {
   @override
   String get help => "ਮਦਦ ਕਰੋ";
   @override
-  String get northern_africa => "ਉੱਤਰੀ ਅਫ਼ਰੀਕਾ";
-  @override
   String get mexico => "ਮੈਕਸੀਕੋ";
+  @override
+  String get siberia => "ਸਾਇਬੇਰੀਆ";
+  @override
+  String get taxonomy_subtribus => "Subtribe";
+  @override
+  String get habitat_meadow => "ਅਨੁਵਾਦ ਸੁਧਾਰੋ";
+  @override
+  String get plant_trivia => "ਟ੍ਰਿਜੀਆ";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "Herbalism";
+  @override
+  String get plant_height_to => "ਤੱਕ";
+  @override
+  String get habitat_wetland => "ਪਹਾੜਾਂ ਜਾਂ ਝੂਲਿਆਂ";
+  @override
+  String get eastern_canada => "ਪੂਰਬੀ ਕੈਨੇਡਾ";
+  @override
+  String get habitat_tree => "ਰੁੱਖ ਜਾਂ ਬੂਟੇ";
+  @override
+  String get settings => "ਸੈਟਿੰਗਜ਼";
+  @override
+  String get color_red => "ਲਾਲ, ਗੁਲਾਬੀ";
+  @override
+  String get north_central_pacific => "ਉੱਤਰੀ-ਕੇਂਦਰੀ ਪੈਸੀਫਿਕ";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "ਦੱਖਣੀ ਅਫਰੀਕਾ";
+  @override
+  String get color_yellow => "ਪੀਲਾ";
+  @override
+  String get subantarctic_islands => "ਸਬਾਨਟਾਰਕਟਿਕਾ ਆਈਲੈਂਡਜ਼";
+  @override
+  String get taxonomy_subfamilia => "ਉੱਪ-ਪਰਿਵਾਰ";
+  @override
+  String get my_region => "ਮੇਰਾ ਖੇਤਰ";
+  @override
+  String get indian_subcontinent => "ਭਾਰਤੀ ਉਪ ਮਹਾਂਦੀਪ";
+  @override
+  String get plant_flower => "ਫੁੱਲ";
+  @override
+  String get filter_habitat => "ਆਵਾਸ";
+  @override
+  String get northwestern_pacific => "ਉੱਤਰੀ ਪੱਛਮੀ ਪੈਸੀਫਿਕ";
+  @override
+  String get southwestern_europe => "ਦੱਖਣ ਪੱਛਮੀ ਯੂਰਪ";
+  @override
+  String get taxonomy_species => "ਸਪੀਸੀਜ਼";
+  @override
+  String get plant_fruit => "ਫਲ";
+  @override
+  String get plant_flowering_to => "ਤੱਕ";
+  @override
+  String get taxonomy_familia => "ਪਰਿਵਾਰ";
+  @override
+  String get plant_stem => "ਸਟੈਮ";
+  @override
+  String get antarctic_continent => "ਅੰਟਾਰਕਟਿਕਾ ਮਹਾਂਦੀਪ";
+  @override
+  String get brazil => "ਬ੍ਰਾਜ਼ੀਲ";
+  @override
+  String get eastern_europe => "ਪੂਰਬੀ ਯੂਰਪ";
+  @override
+  String get south_central_usa => "ਦੱਖਣੀ-ਕੇਂਦਰੀ ਅਮਰੀਕਾ";
+  @override
+  String get plant_flowering_from => "ਫੁਲਿੰਗ";
+  @override
+  String get taxonomy_tribus => "ਕਬੀਲਾ";
+  @override
+  String get arabian_peninsula => "ਅਰਬੀ ਪ੍ਰਾਇਦੀਪ";
+  @override
+  String get west_tropical_africa => "ਪੱਛਮੀ ਖੰਡੀ ਅਫ਼ਰੀਕਾ";
+  @override
+  String get northern_europe => "ਉੱਤਰੀ ਯੂਰਪ";
+  @override
+  String get northeast_tropical_africa => "ਨਾਰਥ ਈਸਟ ਟ੍ਰੌਪੀਕਲ ਅਫਰੀਕਾ";
+  @override
+  String get pref_language => "ਤਰਜੀਹੀ ਭਾਸ਼ਾ";
+  @override
+  String get new_zealand => "ਨਿਊਜ਼ੀਲੈਂਡ";
+  @override
+  String get filter_distribution => "ਵੰਡ";
+  @override
+  String get eastern_asia => "ਪੂਰਬੀ ਏਸ਼ੀਆ";
+  @override
+  String get western_asia => "ਪੱਛਮੀ ਏਸ਼ੀਆ";
+  @override
+  String get subarctic_america => "ਸੁਬਰਟਿਕ ਅਮਰੀਕਾ";
+  @override
+  String get north_central_usa => "ਉੱਤਰੀ-ਕੇਂਦਰੀ ਅਮਰੀਕਾ";
+  @override
+  String get southeastern_usa => "ਦੱਖਣੀ-ਪੂਰਬੀ ਅਮਰੀਕਾ";
+  @override
+  String get plant_height_from => "ਦੀ ਉਚਾਈ ਤੋਂ";
+  @override
+  String get petal_many => "5 ਤੋਂ ਵੱਧ";
+  @override
+  String get southeastern_europe => "ਦੱਖਣ ਯੂਰਪ";
+  @override
+  String get taxonomy_unknown => "ਅਣਜਾਣ";
+  @override
+  String get plant_inflorescence => "Inflorescence";
+  @override
+  String get northern_africa => "ਉੱਤਰੀ ਅਫ਼ਰੀਕਾ";
   @override
   String get china => "ਚੀਨ";
   @override
-  String get papuasia => "ਪੇਪੂਸੀਆ";
+  String get taxonomy_genus => "ਜਿਣਸ";
   @override
-  String get siberia => "ਸਾਇਬੇਰੀਆ";
+  String get papuasia => "ਪੇਪੂਸੀਆ";
 }
 
 class $en_US extends S {
@@ -4169,8 +5345,6 @@ class $ja extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get habitat_meadow => "草地、草原";
-  @override
   String get central_america => "中米";
   @override
   String get about => "約";
@@ -4187,33 +5361,17 @@ class $ja extends S {
   @override
   String get caribbean => "カリブ海";
   @override
-  String get habitat_wetland => "ムーア、沼地、ボグ、フェン";
-  @override
   String get australasia => "オーストラリア";
-  @override
-  String get eastern_canada => "カナダ東部";
   @override
   String get petal_4 => "4以下";
   @override
   String get east_tropical_africa => "東トロピカルアフリカ";
   @override
-  String get habitat_tree => "木、低木";
-  @override
-  String get settings => "設定";
-  @override
-  String get color_red => "赤、ピンク";
-  @override
   String get africa => "アフリカ";
-  @override
-  String get north_central_pacific => "北中太平洋";
   @override
   String get south_tropical_africa => "南トロピカルアフリカ";
   @override
-  String get southern_africa => "南アフリカ";
-  @override
   String get caucasus => "コーカサス";
-  @override
-  String get color_yellow => "黄色";
   @override
   String get middle_asia => "中東アジア";
   @override
@@ -4221,13 +5379,11 @@ class $ja extends S {
   @override
   String get australia => "オーストラリア";
   @override
-  String get subantarctic_islands => "亜南極諸島";
-  @override
-  String get my_region => "私の地域";
+  String get plant_leaf => "葉";
   @override
   String get habitat_forest => "森林";
   @override
-  String get indian_subcontinent => "インド亜大陸";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "マレーシア";
   @override
@@ -4235,79 +5391,53 @@ class $ja extends S {
   @override
   String get asia_tropical => "アジアトロピカル";
   @override
-  String get filter_habitat => "生息地";
-  @override
-  String get northwestern_pacific => "北西太平洋";
-  @override
   String get northwestern_usa => "米国北西部";
   @override
   String get northern_south_america => "南アメリカ北部";
-  @override
-  String get southwestern_europe => "南西ヨーロッパ";
   @override
   String get southern_america => "南アメリカ";
   @override
   String get middle_atlantic_ocean => "中部大西洋";
   @override
-  String get antarctic_continent => "南極大陸";
-  @override
-  String get brazil => "ブラジル";
-  @override
-  String get eastern_europe => "東ヨーロッパ";
-  @override
   String get habitat_garden => "庭園、畑";
-  @override
-  String get south_central_usa => "中南米";
   @override
   String get russian_far_east => "ロシア極東";
   @override
   String get west_central_tropical_africa => "西部中部トロピカルアフリカ";
   @override
-  String get macaronesia => "マカロニア";
+  String get plant_toxicity => "毒性";
   @override
-  String get arabian_peninsula => "アラビア半島";
+  String get macaronesia => "マカロニア";
   @override
   String get asia_temperate => "アジアの温帯";
   @override
-  String get west_tropical_africa => "西トロピカルアフリカ";
-  @override
-  String get northern_europe => "北欧";
-  @override
   String get habitat_rock => "山";
   @override
-  String get northeast_tropical_africa => "東北熱帯アフリカ";
+  String get taxonomy_superregnum => "ドメイン";
   @override
-  String get pref_language => "優先言語e";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "モンゴル";
   @override
-  String get new_zealand => "ニュージーランド";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "西南アメリカ";
   @override
-  String get filter_distribution => "分布";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "ヨーロッパ";
   @override
   String get middle_europe => "中欧";
   @override
-  String get eastern_asia => "東アジア";
-  @override
-  String get western_asia => "西アジア";
-  @override
-  String get subarctic_america => "亜寒帯アメリカ";
-  @override
   String get color_blue => "青、紫";
   @override
-  String get north_central_usa => "アメリカ北西部";
-  @override
   String get southern_south_america => "南アメリカ南部";
+  @override
+  String get plant_habitat => "生息地";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "花びらの数";
-  @override
-  String get southeastern_usa => "アメリカ南東部";
   @override
   String get color_white => "白";
   @override
@@ -4315,11 +5445,13 @@ class $ja extends S {
   @override
   String get color_green => "緑、茶色、黒";
   @override
-  String get petal_many => "以上5";
+  String get taxonomy_ordo => "目";
   @override
-  String get southeastern_europe => "南東ヨーロッパ";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "パシフィック";
+  @override
+  String get taxonomy_regnum => "界";
   @override
   String get south_central_pacific => "中南米";
   @override
@@ -4327,15 +5459,119 @@ class $ja extends S {
   @override
   String get help => "ヘルプ";
   @override
-  String get northern_africa => "北アフリカ";
-  @override
   String get mexico => "メキシコ";
+  @override
+  String get siberia => "シベリア";
+  @override
+  String get taxonomy_subtribus => "亜族";
+  @override
+  String get habitat_meadow => "草地、草原";
+  @override
+  String get plant_trivia => "トリビア";
+  @override
+  String get taxonomy_cladus => "(系統群)";
+  @override
+  String get plant_herbalism => "本草学";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "ムーア、沼地、ボグ、フェン";
+  @override
+  String get eastern_canada => "カナダ東部";
+  @override
+  String get habitat_tree => "木、低木";
+  @override
+  String get settings => "設定";
+  @override
+  String get color_red => "赤、ピンク";
+  @override
+  String get north_central_pacific => "北中太平洋";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "南アフリカ";
+  @override
+  String get color_yellow => "黄色";
+  @override
+  String get subantarctic_islands => "亜南極諸島";
+  @override
+  String get taxonomy_subfamilia => "亜科";
+  @override
+  String get my_region => "私の地域";
+  @override
+  String get indian_subcontinent => "インド亜大陸";
+  @override
+  String get plant_flower => "花";
+  @override
+  String get filter_habitat => "生息地";
+  @override
+  String get northwestern_pacific => "北西太平洋";
+  @override
+  String get southwestern_europe => "南西ヨーロッパ";
+  @override
+  String get taxonomy_species => "種";
+  @override
+  String get plant_fruit => "果実";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "科";
+  @override
+  String get plant_stem => "茎";
+  @override
+  String get antarctic_continent => "南極大陸";
+  @override
+  String get brazil => "ブラジル";
+  @override
+  String get eastern_europe => "東ヨーロッパ";
+  @override
+  String get south_central_usa => "中南米";
+  @override
+  String get plant_flowering_from => "開花";
+  @override
+  String get taxonomy_tribus => "族";
+  @override
+  String get arabian_peninsula => "アラビア半島";
+  @override
+  String get west_tropical_africa => "西トロピカルアフリカ";
+  @override
+  String get northern_europe => "北欧";
+  @override
+  String get northeast_tropical_africa => "東北熱帯アフリカ";
+  @override
+  String get pref_language => "優先言語e";
+  @override
+  String get new_zealand => "ニュージーランド";
+  @override
+  String get filter_distribution => "分布";
+  @override
+  String get eastern_asia => "東アジア";
+  @override
+  String get western_asia => "西アジア";
+  @override
+  String get subarctic_america => "亜寒帯アメリカ";
+  @override
+  String get north_central_usa => "アメリカ北西部";
+  @override
+  String get southeastern_usa => "アメリカ南東部";
+  @override
+  String get plant_height_from => "高さ";
+  @override
+  String get petal_many => "以上5";
+  @override
+  String get southeastern_europe => "南東ヨーロッパ";
+  @override
+  String get taxonomy_unknown => "未知の";
+  @override
+  String get plant_inflorescence => "花序";
+  @override
+  String get northern_africa => "北アフリカ";
   @override
   String get china => "中国";
   @override
-  String get papuasia => "パプアシア";
+  String get taxonomy_genus => "属";
   @override
-  String get siberia => "シベリア";
+  String get papuasia => "パプアシア";
 }
 
 class $fa extends S {
@@ -4344,8 +5580,6 @@ class $fa extends S {
   @override
   TextDirection get textDirection => TextDirection.rtl;
 
-  @override
-  String get habitat_meadow => "چمنزارها یا چمنزارها";
   @override
   String get central_america => "آمریکای مرکزی";
   @override
@@ -4363,33 +5597,17 @@ class $fa extends S {
   @override
   String get caribbean => "کارائیب";
   @override
-  String get habitat_wetland => "باتلاق یا تالاب";
-  @override
   String get australasia => "استرالیا";
-  @override
-  String get eastern_canada => "شرق کانادا";
   @override
   String get petal_4 => "4 یا کمتر";
   @override
   String get east_tropical_africa => "شرق گرمسیر آفریقا";
   @override
-  String get habitat_tree => "درختان یا درختچه ها";
-  @override
-  String get settings => "تنظیمات";
-  @override
-  String get color_red => "قرمز، صورتی";
-  @override
   String get africa => "آفریقا";
-  @override
-  String get north_central_pacific => "شمال اقیانوس آرام";
   @override
   String get south_tropical_africa => "آفریقای جنوبی گرمسیری";
   @override
-  String get southern_africa => "آفریقای جنوبی";
-  @override
   String get caucasus => "قفقاز";
-  @override
-  String get color_yellow => "رنگ زرد";
   @override
   String get middle_asia => "آسیای میانه";
   @override
@@ -4397,13 +5615,11 @@ class $fa extends S {
   @override
   String get australia => "استرالیا";
   @override
-  String get subantarctic_islands => "جزایر سابانتارکتیک";
-  @override
-  String get my_region => "منطقه من";
+  String get plant_leaf => "برگها";
   @override
   String get habitat_forest => "جنگل ها یا جنگل ها";
   @override
-  String get indian_subcontinent => "شبه قاره هند";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "مالزی";
   @override
@@ -4411,79 +5627,53 @@ class $fa extends S {
   @override
   String get asia_tropical => "آسیا گرمسیری";
   @override
-  String get filter_habitat => "زیستگاه ها";
-  @override
-  String get northwestern_pacific => "شمال غرب اقیانوس آرام";
-  @override
   String get northwestern_usa => "شمال غرب آمریکا";
   @override
   String get northern_south_america => "شمال امریکا جنوبی";
-  @override
-  String get southwestern_europe => "جنوب غربی اروپا";
   @override
   String get southern_america => "جنوب امریکا";
   @override
   String get middle_atlantic_ocean => "اقیانوس اطلس میانه";
   @override
-  String get antarctic_continent => "Antarctic Continent";
-  @override
-  String get brazil => "برزیل";
-  @override
-  String get eastern_europe => "اروپای شرقی";
-  @override
   String get habitat_garden => "باغ ها یا رشته ها";
-  @override
-  String get south_central_usa => "جنوبی مرکزی ایالات متحده آمریکا";
   @override
   String get russian_far_east => "شرق دور روسیه";
   @override
   String get west_central_tropical_africa => "غرب آفریقای مرکزی گرمسیری";
   @override
-  String get macaronesia => "ماکرونزی";
+  String get plant_toxicity => "سمی بودن";
   @override
-  String get arabian_peninsula => "شبه جزیره عربی";
+  String get macaronesia => "ماکرونزی";
   @override
   String get asia_temperate => "آسیا درجه حرارت";
   @override
-  String get west_tropical_africa => "غرب گرمسیر آفریقا";
-  @override
-  String get northern_europe => "شمال اروپا";
-  @override
   String get habitat_rock => "سنگ ها یا کوه ها";
   @override
-  String get northeast_tropical_africa => "آفریقا شمال شرقی گرمسیری";
+  String get taxonomy_superregnum => "Domain";
   @override
-  String get pref_language => "زبان ترجیحی";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "مغولستان";
   @override
-  String get new_zealand => "نیوزلند";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "آمریکای جنوبی غربی";
   @override
-  String get filter_distribution => "توزیع";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "اروپا";
   @override
   String get middle_europe => "اروپای مرکزی";
   @override
-  String get eastern_asia => "آسیای شرقی";
-  @override
-  String get western_asia => "آسیای غربی";
-  @override
-  String get subarctic_america => "Subarctic America";
-  @override
   String get color_blue => "آبی، بنفش";
   @override
-  String get north_central_usa => "مرکزی ایالات متحده آمریکا";
-  @override
   String get southern_south_america => "جنوبی جنوب امریکا";
+  @override
+  String get plant_habitat => "زیستگاه";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "تعداد گلبرگ ها";
-  @override
-  String get southeastern_usa => "جنوب شرقی ایالات متحده آمریکا";
   @override
   String get color_white => "سفید";
   @override
@@ -4491,11 +5681,13 @@ class $fa extends S {
   @override
   String get color_green => "سبز، قهوه ای، سیاه و سفید";
   @override
-  String get petal_many => "بیش از 5";
+  String get taxonomy_ordo => "Order";
   @override
-  String get southeastern_europe => "جنوب شرقی اروپا";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "اقیانوس آرام";
+  @override
+  String get taxonomy_regnum => "Kingdom";
   @override
   String get south_central_pacific => "جنوب آسیا اقیانوس آرام";
   @override
@@ -4503,15 +5695,117 @@ class $fa extends S {
   @override
   String get help => "کمک";
   @override
-  String get northern_africa => "آفریقای شمالی";
-  @override
   String get mexico => "مکزیک";
+  @override
+  String get siberia => "سیبری";
+  @override
+  String get taxonomy_subtribus => "Subtribe";
+  @override
+  String get habitat_meadow => "چمنزارها یا چمنزارها";
+  @override
+  String get plant_trivia => "چیزهای بی اهمیت";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "گیاه شناسی";
+  @override
+  String get plant_height_to => "به";
+  @override
+  String get habitat_wetland => "باتلاق یا تالاب";
+  @override
+  String get eastern_canada => "شرق کانادا";
+  @override
+  String get habitat_tree => "درختان یا درختچه ها";
+  @override
+  String get settings => "تنظیمات";
+  @override
+  String get color_red => "قرمز، صورتی";
+  @override
+  String get north_central_pacific => "شمال اقیانوس آرام";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "آفریقای جنوبی";
+  @override
+  String get color_yellow => "رنگ زرد";
+  @override
+  String get subantarctic_islands => "جزایر سابانتارکتیک";
+  @override
+  String get taxonomy_subfamilia => "Subfamily";
+  @override
+  String get my_region => "منطقه من";
+  @override
+  String get indian_subcontinent => "شبه قاره هند";
+  @override
+  String get plant_flower => "گل ها";
+  @override
+  String get filter_habitat => "زیستگاه ها";
+  @override
+  String get northwestern_pacific => "شمال غرب اقیانوس آرام";
+  @override
+  String get southwestern_europe => "جنوب غربی اروپا";
+  @override
+  String get taxonomy_species => "unknown";
+  @override
+  String get plant_fruit => "میوه ها";
+  @override
+  String get plant_flowering_to => "به";
+  @override
+  String get taxonomy_familia => "Family";
+  @override
+  String get plant_stem => "ساقه";
+  @override
+  String get antarctic_continent => "Antarctic Continent";
+  @override
+  String get brazil => "برزیل";
+  @override
+  String get eastern_europe => "اروپای شرقی";
+  @override
+  String get south_central_usa => "جنوبی مرکزی ایالات متحده آمریکا";
+  @override
+  String get plant_flowering_from => "گل از";
+  @override
+  String get taxonomy_tribus => "Tribe";
+  @override
+  String get arabian_peninsula => "شبه جزیره عربی";
+  @override
+  String get west_tropical_africa => "غرب گرمسیر آفریقا";
+  @override
+  String get northern_europe => "شمال اروپا";
+  @override
+  String get northeast_tropical_africa => "آفریقا شمال شرقی گرمسیری";
+  @override
+  String get pref_language => "زبان ترجیحی";
+  @override
+  String get new_zealand => "نیوزلند";
+  @override
+  String get filter_distribution => "توزیع";
+  @override
+  String get eastern_asia => "آسیای شرقی";
+  @override
+  String get western_asia => "آسیای غربی";
+  @override
+  String get subarctic_america => "Subarctic America";
+  @override
+  String get north_central_usa => "مرکزی ایالات متحده آمریکا";
+  @override
+  String get southeastern_usa => "جنوب شرقی ایالات متحده آمریکا";
+  @override
+  String get plant_height_from => "ارتفاع از";
+  @override
+  String get petal_many => "بیش از 5";
+  @override
+  String get southeastern_europe => "جنوب شرقی اروپا";
+  @override
+  String get plant_inflorescence => "گل آذین";
+  @override
+  String get northern_africa => "آفریقای شمالی";
   @override
   String get china => "چين";
   @override
-  String get papuasia => "پاپواشیا";
+  String get taxonomy_genus => "Genus";
   @override
-  String get siberia => "سیبری";
+  String get papuasia => "پاپواشیا";
 }
 
 class $pl extends S {
@@ -4520,8 +5814,6 @@ class $pl extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "Łąki";
   @override
   String get central_america => "Ameryka Środkowa";
   @override
@@ -4539,33 +5831,17 @@ class $pl extends S {
   @override
   String get caribbean => "Karaiby";
   @override
-  String get habitat_wetland => "Wrzosowiska lub tereny podmokłe";
-  @override
   String get australasia => "Australazja";
-  @override
-  String get eastern_canada => "Wschodnia Kanada";
   @override
   String get petal_4 => "4 lub mniej";
   @override
   String get east_tropical_africa => "Wschodnia Afryka Tropikalna";
   @override
-  String get habitat_tree => "Drzewa lub krzewy";
-  @override
-  String get settings => "Ustawienia";
-  @override
-  String get color_red => "czerwony, różowy";
-  @override
   String get africa => "Afryka";
-  @override
-  String get north_central_pacific => "Północno-Środkowy Pacyfik";
   @override
   String get south_tropical_africa => "Południowa Afryka Tropikalna";
   @override
-  String get southern_africa => "Południowa Afryka";
-  @override
   String get caucasus => "Kaukaz";
-  @override
-  String get color_yellow => "żółty";
   @override
   String get middle_asia => "Azja Środkowa";
   @override
@@ -4573,13 +5849,11 @@ class $pl extends S {
   @override
   String get australia => "Australia";
   @override
-  String get subantarctic_islands => "Wyspy Subantarctic";
-  @override
-  String get my_region => "Mój region";
+  String get plant_leaf => "Liście";
   @override
   String get habitat_forest => "Lasy";
   @override
-  String get indian_subcontinent => "Subkontynent indyjski";
+  String get taxonomy_serie => "Seria";
   @override
   String get malesia => "Malezja";
   @override
@@ -4587,79 +5861,53 @@ class $pl extends S {
   @override
   String get asia_tropical => "Azja tropikalna";
   @override
-  String get filter_habitat => "Habitat";
-  @override
-  String get northwestern_pacific => "Północno-Zachodni Pacyfik";
-  @override
   String get northwestern_usa => "Północno-zachodnie USA";
   @override
   String get northern_south_america => "Północna Ameryka Południowa";
-  @override
-  String get southwestern_europe => "Południowo-zachodnia Europa";
   @override
   String get southern_america => "Ameryka Południowa";
   @override
   String get middle_atlantic_ocean => "Środkowy Ocean Atlantycki";
   @override
-  String get antarctic_continent => "Kontynent Antarktyczny";
-  @override
-  String get brazil => "Brazylia";
-  @override
-  String get eastern_europe => "Wschodnia Europa";
-  @override
   String get habitat_garden => "Ogrody lub pola";
-  @override
-  String get south_central_usa => "Południowo-środkowe USA";
   @override
   String get russian_far_east => "Rosyjski Daleki Wschód";
   @override
   String get west_central_tropical_africa => "Zachodnio-Środkowa Afryka Tropikalna";
   @override
-  String get macaronesia => "Makaronezja";
+  String get plant_toxicity => "Toksyczność";
   @override
-  String get arabian_peninsula => "Półwysep Arabski";
+  String get macaronesia => "Makaronezja";
   @override
   String get asia_temperate => "Azja umiarkowana";
   @override
-  String get west_tropical_africa => "Zachodnia Afryka Tropikalna";
-  @override
-  String get northern_europe => "Północna Europa";
-  @override
   String get habitat_rock => "Skały lub góry";
   @override
-  String get northeast_tropical_africa => "Północno-wschodnia Afryka Tropikalna";
+  String get taxonomy_superregnum => "Domena";
   @override
-  String get pref_language => "Preferowany język";
+  String get taxonomy_sectio => "Sekcja";
   @override
   String get mongolia => "Mongolia";
   @override
-  String get new_zealand => "Nowa Zelandia";
+  String get taxonomy_subserie => "Podseria";
   @override
   String get western_south_america => "Zachodnia Ameryka Południowa";
   @override
-  String get filter_distribution => "Dystrybucja";
+  String get taxonomy_subgenus => "Podrodzaj";
   @override
   String get europe => "Europa";
   @override
   String get middle_europe => "Europa Środkowa";
   @override
-  String get eastern_asia => "Wschodnia Azja";
-  @override
-  String get western_asia => "Zachodnia Azja";
-  @override
-  String get subarctic_america => "Ameryka subarktyczna";
-  @override
   String get color_blue => "niebieski, fioletowy";
   @override
-  String get north_central_usa => "Północno-Środkowe USA";
-  @override
   String get southern_south_america => "Południowa Ameryka Południowa";
+  @override
+  String get plant_habitat => "Habitat";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "Liczba płatków";
-  @override
-  String get southeastern_usa => "Południowo-wschodnie USA";
   @override
   String get color_white => "biały";
   @override
@@ -4667,11 +5915,13 @@ class $pl extends S {
   @override
   String get color_green => "zielony, brązowy, czarny";
   @override
-  String get petal_many => "Więcej niż 5";
+  String get taxonomy_ordo => "Rząd";
   @override
-  String get southeastern_europe => "Europa Południowo-Wschodnia";
+  String get taxonomy_supersectio => "Supersekcja";
   @override
   String get pacific => "Pacyfik";
+  @override
+  String get taxonomy_regnum => "Królestwo";
   @override
   String get south_central_pacific => "Południowo-środkowy Pacyfik";
   @override
@@ -4679,15 +5929,119 @@ class $pl extends S {
   @override
   String get help => "Pomoc";
   @override
-  String get northern_africa => "Północna Afryka";
-  @override
   String get mexico => "Meksyk";
+  @override
+  String get siberia => "Syberia";
+  @override
+  String get taxonomy_subtribus => "Podplemię";
+  @override
+  String get habitat_meadow => "Łąki";
+  @override
+  String get plant_trivia => "Ciekawostki";
+  @override
+  String get taxonomy_cladus => "(klad)";
+  @override
+  String get plant_herbalism => "Ziołolecznictwo";
+  @override
+  String get plant_height_to => "do";
+  @override
+  String get habitat_wetland => "Wrzosowiska lub tereny podmokłe";
+  @override
+  String get eastern_canada => "Wschodnia Kanada";
+  @override
+  String get habitat_tree => "Drzewa lub krzewy";
+  @override
+  String get settings => "Ustawienia";
+  @override
+  String get color_red => "czerwony, różowy";
+  @override
+  String get north_central_pacific => "Północno-Środkowy Pacyfik";
+  @override
+  String get taxonomy_subsectio => "Podsekcja";
+  @override
+  String get southern_africa => "Południowa Afryka";
+  @override
+  String get color_yellow => "żółty";
+  @override
+  String get subantarctic_islands => "Wyspy Subantarctic";
+  @override
+  String get taxonomy_subfamilia => "Podrodzina";
+  @override
+  String get my_region => "Mój region";
+  @override
+  String get indian_subcontinent => "Subkontynent indyjski";
+  @override
+  String get plant_flower => "Kwiaty";
+  @override
+  String get filter_habitat => "Habitat";
+  @override
+  String get northwestern_pacific => "Północno-Zachodni Pacyfik";
+  @override
+  String get southwestern_europe => "Południowo-zachodnia Europa";
+  @override
+  String get taxonomy_species => "Gatunek";
+  @override
+  String get plant_fruit => "Owoce";
+  @override
+  String get plant_flowering_to => "do";
+  @override
+  String get taxonomy_familia => "Rodzina";
+  @override
+  String get plant_stem => "Łodyga";
+  @override
+  String get antarctic_continent => "Kontynent Antarktyczny";
+  @override
+  String get brazil => "Brazylia";
+  @override
+  String get eastern_europe => "Wschodnia Europa";
+  @override
+  String get south_central_usa => "Południowo-środkowe USA";
+  @override
+  String get plant_flowering_from => "Kwitnie od";
+  @override
+  String get taxonomy_tribus => "Plemię";
+  @override
+  String get arabian_peninsula => "Półwysep Arabski";
+  @override
+  String get west_tropical_africa => "Zachodnia Afryka Tropikalna";
+  @override
+  String get northern_europe => "Północna Europa";
+  @override
+  String get northeast_tropical_africa => "Północno-wschodnia Afryka Tropikalna";
+  @override
+  String get pref_language => "Preferowany język";
+  @override
+  String get new_zealand => "Nowa Zelandia";
+  @override
+  String get filter_distribution => "Dystrybucja";
+  @override
+  String get eastern_asia => "Wschodnia Azja";
+  @override
+  String get western_asia => "Zachodnia Azja";
+  @override
+  String get subarctic_america => "Ameryka subarktyczna";
+  @override
+  String get north_central_usa => "Północno-Środkowe USA";
+  @override
+  String get southeastern_usa => "Południowo-wschodnie USA";
+  @override
+  String get plant_height_from => "Wysokość od";
+  @override
+  String get petal_many => "Więcej niż 5";
+  @override
+  String get southeastern_europe => "Europa Południowo-Wschodnia";
+  @override
+  String get taxonomy_unknown => "nieznane";
+  @override
+  String get plant_inflorescence => "Kwiatostany";
+  @override
+  String get northern_africa => "Północna Afryka";
   @override
   String get china => "Chiny";
   @override
-  String get papuasia => "Papuasia";
+  String get taxonomy_genus => "Rodzaj";
   @override
-  String get siberia => "Syberia";
+  String get papuasia => "Papuasia";
 }
 
 class $da extends S {
@@ -4696,8 +6050,6 @@ class $da extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "enge eller overdrev";
   @override
   String get central_america => "Mellemamerika";
   @override
@@ -4715,33 +6067,17 @@ class $da extends S {
   @override
   String get caribbean => "Caribien";
   @override
-  String get habitat_wetland => "heder eller vådområder";
-  @override
   String get australasia => "Australasien";
-  @override
-  String get eastern_canada => "Østlige Canada";
   @override
   String get petal_4 => "4 eller mindre";
   @override
   String get east_tropical_africa => "Øst tropiske Afrika";
   @override
-  String get habitat_tree => "træer eller buske";
-  @override
-  String get settings => "Indstillinger";
-  @override
-  String get color_red => "rød, lyserød";
-  @override
   String get africa => "Afrika";
-  @override
-  String get north_central_pacific => "Nord-Central Stillehavet";
   @override
   String get south_tropical_africa => "Syd tropiske Afrika";
   @override
-  String get southern_africa => "Sydafrika";
-  @override
   String get caucasus => "Kaukasus";
-  @override
-  String get color_yellow => "gul";
   @override
   String get middle_asia => "Mellemasien";
   @override
@@ -4749,13 +6085,11 @@ class $da extends S {
   @override
   String get australia => "Australien";
   @override
-  String get subantarctic_islands => "Subantarctic Islands";
-  @override
-  String get my_region => "Min region";
+  String get plant_leaf => "Blade";
   @override
   String get habitat_forest => "skove";
   @override
-  String get indian_subcontinent => "Indiske subkontinent";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malaysia";
   @override
@@ -4763,77 +6097,51 @@ class $da extends S {
   @override
   String get asia_tropical => "Asien-Tropical";
   @override
-  String get filter_habitat => "vækststeder";
-  @override
-  String get northwestern_pacific => "Nordvestlige Stillehavet";
-  @override
   String get northwestern_usa => "Nordvestlige USA";
   @override
   String get northern_south_america => "Nord-Sydamerika";
-  @override
-  String get southwestern_europe => "Sydvesteuropa";
   @override
   String get southern_america => "Sydamerika";
   @override
   String get middle_atlantic_ocean => "Mellematlanten";
   @override
-  String get antarctic_continent => "Antarktis-kontinentet";
-  @override
-  String get brazil => "Brasilien";
-  @override
-  String get eastern_europe => "østeuropa";
-  @override
   String get habitat_garden => "haver eller marker";
-  @override
-  String get south_central_usa => "Syd-Central USA";
   @override
   String get russian_far_east => "Russiske fjernøsten";
   @override
   String get west_central_tropical_africa => "Vest Central tropiske Afrika";
   @override
-  String get macaronesia => "Makaronesien";
+  String get plant_toxicity => "Toksicitet";
   @override
-  String get arabian_peninsula => "Den arabiske halvø";
+  String get macaronesia => "Makaronesien";
   @override
   String get asia_temperate => "Asien-Tempereret";
   @override
-  String get west_tropical_africa => "Vestlige tropiske Afrika";
-  @override
-  String get northern_europe => "Nordeuropa";
-  @override
   String get habitat_rock => "klipper eller bjerge";
   @override
-  String get northeast_tropical_africa => "Nordøstlige tropiske Afrika";
+  String get taxonomy_superregnum => "Domæne";
   @override
-  String get pref_language => "Preferred language";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongoliet";
   @override
-  String get new_zealand => "New Zealand";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "Vestlige Sydamerika";
   @override
-  String get filter_distribution => "fordeling";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "Europa";
   @override
   String get middle_europe => "Mellemeuropa";
   @override
-  String get eastern_asia => "Østasien";
-  @override
-  String get western_asia => "Vestasien";
-  @override
-  String get subarctic_america => "Subarctic America";
-  @override
   String get color_blue => "blå, lilla";
-  @override
-  String get north_central_usa => "Nord-Central USA";
   @override
   String get southern_south_america => "Sydlige Sydamerika";
   @override
-  String get petal_5 => "5";
+  String get plant_habitat => "Vækststeder";
   @override
-  String get southeastern_usa => "Sydøstlige USA";
+  String get petal_5 => "5";
   @override
   String get color_white => "hvid";
   @override
@@ -4841,11 +6149,13 @@ class $da extends S {
   @override
   String get color_green => "grøn, brun, sort";
   @override
-  String get petal_many => "mere end 5";
+  String get taxonomy_ordo => "Ordo";
   @override
-  String get southeastern_europe => "Sydøsteuropa";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Stillehavet";
+  @override
+  String get taxonomy_regnum => "Rige";
   @override
   String get south_central_pacific => "Syd-Central Stillehavet";
   @override
@@ -4853,15 +6163,119 @@ class $da extends S {
   @override
   String get help => "Hjælp";
   @override
-  String get northern_africa => "Nordafrika";
-  @override
   String get mexico => "Mexico";
+  @override
+  String get siberia => "Sibirien";
+  @override
+  String get taxonomy_subtribus => "Undertribus";
+  @override
+  String get habitat_meadow => "enge eller overdrev";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get taxonomy_cladus => "Cladus";
+  @override
+  String get plant_herbalism => "Naturmedicin";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "heder eller vådområder";
+  @override
+  String get eastern_canada => "Østlige Canada";
+  @override
+  String get habitat_tree => "træer eller buske";
+  @override
+  String get settings => "Indstillinger";
+  @override
+  String get color_red => "rød, lyserød";
+  @override
+  String get north_central_pacific => "Nord-Central Stillehavet";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Sydafrika";
+  @override
+  String get color_yellow => "gul";
+  @override
+  String get subantarctic_islands => "Subantarctic Islands";
+  @override
+  String get taxonomy_subfamilia => "Underfamilie";
+  @override
+  String get my_region => "Min region";
+  @override
+  String get indian_subcontinent => "Indiske subkontinent";
+  @override
+  String get plant_flower => "Blomstre";
+  @override
+  String get filter_habitat => "vækststeder";
+  @override
+  String get northwestern_pacific => "Nordvestlige Stillehavet";
+  @override
+  String get southwestern_europe => "Sydvesteuropa";
+  @override
+  String get taxonomy_species => "Art";
+  @override
+  String get plant_fruit => "Frugt";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Familie";
+  @override
+  String get plant_stem => "Stængel";
+  @override
+  String get antarctic_continent => "Antarktis-kontinentet";
+  @override
+  String get brazil => "Brasilien";
+  @override
+  String get eastern_europe => "østeuropa";
+  @override
+  String get south_central_usa => "Syd-Central USA";
+  @override
+  String get plant_flowering_from => "Blomstringstid";
+  @override
+  String get taxonomy_tribus => "Tribus";
+  @override
+  String get arabian_peninsula => "Den arabiske halvø";
+  @override
+  String get west_tropical_africa => "Vestlige tropiske Afrika";
+  @override
+  String get northern_europe => "Nordeuropa";
+  @override
+  String get northeast_tropical_africa => "Nordøstlige tropiske Afrika";
+  @override
+  String get pref_language => "Preferred language";
+  @override
+  String get new_zealand => "New Zealand";
+  @override
+  String get filter_distribution => "fordeling";
+  @override
+  String get eastern_asia => "Østasien";
+  @override
+  String get western_asia => "Vestasien";
+  @override
+  String get subarctic_america => "Subarctic America";
+  @override
+  String get north_central_usa => "Nord-Central USA";
+  @override
+  String get southeastern_usa => "Sydøstlige USA";
+  @override
+  String get plant_height_from => "Højde";
+  @override
+  String get petal_many => "mere end 5";
+  @override
+  String get southeastern_europe => "Sydøsteuropa";
+  @override
+  String get taxonomy_unknown => "ukendt";
+  @override
+  String get plant_inflorescence => "Blomsterstand";
+  @override
+  String get northern_africa => "Nordafrika";
   @override
   String get china => "Kina";
   @override
-  String get papuasia => "Papuasia";
+  String get taxonomy_genus => "Slægt";
   @override
-  String get siberia => "Sibirien";
+  String get papuasia => "Papuasia";
 }
 
 class $he extends S {
@@ -4870,8 +6284,6 @@ class $he extends S {
   @override
   TextDirection get textDirection => TextDirection.rtl;
 
-  @override
-  String get habitat_meadow => "כרי דשא או מרעה";
   @override
   String get central_america => "מרכז אמריקה";
   @override
@@ -4889,33 +6301,17 @@ class $he extends S {
   @override
   String get caribbean => "הקאריביים";
   @override
-  String get habitat_wetland => "מורלנדס או ביצות";
-  @override
   String get australasia => "אוסטרליה";
-  @override
-  String get eastern_canada => "קנדה המזרחית";
   @override
   String get petal_4 => "4 או פחות";
   @override
   String get east_tropical_africa => "מזרח אפריקה טרופית";
   @override
-  String get habitat_tree => "עצים או שיחים";
-  @override
-  String get settings => "הגדרות";
-  @override
-  String get color_red => "אדום, ורוד";
-  @override
   String get africa => "אפריקה";
-  @override
-  String get north_central_pacific => "צפון מרכז האוקיינוס השקט";
   @override
   String get south_tropical_africa => "דרום אפריקה טרופית";
   @override
-  String get southern_africa => "דרום אפריקה";
-  @override
   String get caucasus => "קווקז";
-  @override
-  String get color_yellow => "צהוב";
   @override
   String get middle_asia => "אסיה התיכונה";
   @override
@@ -4923,13 +6319,11 @@ class $he extends S {
   @override
   String get australia => "אוסטרליה";
   @override
-  String get subantarctic_islands => "איי סובאנטארקטי";
-  @override
-  String get my_region => "אזור שלי";
+  String get plant_leaf => "עלים";
   @override
   String get habitat_forest => "יערות";
   @override
-  String get indian_subcontinent => "תת היבשת ההודית";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "מלזיה";
   @override
@@ -4937,19 +6331,131 @@ class $he extends S {
   @override
   String get asia_tropical => "אסיה טרופי";
   @override
-  String get filter_habitat => "בתי גידול";
-  @override
-  String get northwestern_pacific => "צפון מערב האוקיינוס השקט";
-  @override
   String get northwestern_usa => "צפון מערב ארצות הברית";
   @override
   String get northern_south_america => "צפון אמריקה";
   @override
-  String get southwestern_europe => "דרום מערב אירופה";
-  @override
   String get southern_america => "דרום אמריקה";
   @override
   String get middle_atlantic_ocean => "האוקיינוס האטלנטי התיכון";
+  @override
+  String get habitat_garden => "גנים או שדות";
+  @override
+  String get russian_far_east => "המזרח הרחוק הרוסי";
+  @override
+  String get west_central_tropical_africa => "מערב אפריקה מרכז טרופי";
+  @override
+  String get plant_toxicity => "רַעֲלָנוּת";
+  @override
+  String get macaronesia => "מקרונזיה";
+  @override
+  String get asia_temperate => "אסיה ממוזג";
+  @override
+  String get habitat_rock => "סלעים או הרים";
+  @override
+  String get taxonomy_superregnum => "על-ממלכה";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "מונגוליה";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "מערב אמריקה";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get europe => "אירופה";
+  @override
+  String get middle_europe => "אירופה המזרחית";
+  @override
+  String get southern_south_america => "דרום אמריקה הדרומית";
+  @override
+  String get plant_habitat => "בית גידול";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "מספר עלי כותרת";
+  @override
+  String get color_white => "לבן";
+  @override
+  String get northeastern_usa => "צפון מזרח ארצות הברית";
+  @override
+  String get color_green => "ירוק, חום, שחור";
+  @override
+  String get taxonomy_ordo => "סדרה";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "האוקיינוס השקט";
+  @override
+  String get taxonomy_regnum => "ממלכה";
+  @override
+  String get south_central_pacific => "דרום מרכז האוקיינוס השקט";
+  @override
+  String get filter_color => "צבע של פרחים";
+  @override
+  String get help => "עֶזרָה";
+  @override
+  String get mexico => "מקסיקו";
+  @override
+  String get siberia => "סיביר";
+  @override
+  String get taxonomy_subtribus => "Subtribe";
+  @override
+  String get habitat_meadow => "כרי דשא או מרעה";
+  @override
+  String get plant_trivia => "דְבָרִים בְּטֵלִים";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "צמחי מרפא";
+  @override
+  String get plant_height_to => "עד";
+  @override
+  String get habitat_wetland => "מורלנדס או ביצות";
+  @override
+  String get eastern_canada => "קנדה המזרחית";
+  @override
+  String get habitat_tree => "עצים או שיחים";
+  @override
+  String get settings => "הגדרות";
+  @override
+  String get color_red => "אדום, ורוד";
+  @override
+  String get north_central_pacific => "צפון מרכז האוקיינוס השקט";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "דרום אפריקה";
+  @override
+  String get color_yellow => "צהוב";
+  @override
+  String get subantarctic_islands => "איי סובאנטארקטי";
+  @override
+  String get taxonomy_subfamilia => "תת־משפחה";
+  @override
+  String get my_region => "אזור שלי";
+  @override
+  String get indian_subcontinent => "תת היבשת ההודית";
+  @override
+  String get plant_flower => "פרח";
+  @override
+  String get filter_habitat => "בתי גידול";
+  @override
+  String get northwestern_pacific => "צפון מערב האוקיינוס השקט";
+  @override
+  String get southwestern_europe => "דרום מערב אירופה";
+  @override
+  String get taxonomy_species => "מין";
+  @override
+  String get plant_fruit => "פרי";
+  @override
+  String get plant_flowering_to => "ל";
+  @override
+  String get taxonomy_familia => "משפחה";
+  @override
+  String get plant_stem => "גבעול";
   @override
   String get antarctic_continent => "יבשת אנטארקטיקה";
   @override
@@ -4957,41 +6463,25 @@ class $he extends S {
   @override
   String get eastern_europe => "מזרח אירופה";
   @override
-  String get habitat_garden => "גנים או שדות";
-  @override
   String get south_central_usa => "דרום מרכז ארצות הברית";
   @override
-  String get russian_far_east => "המזרח הרחוק הרוסי";
+  String get plant_flowering_from => "פריחה מ";
   @override
-  String get west_central_tropical_africa => "מערב אפריקה מרכז טרופי";
-  @override
-  String get macaronesia => "מקרונזיה";
+  String get taxonomy_tribus => "Tribe";
   @override
   String get arabian_peninsula => "חצי האי ערב";
-  @override
-  String get asia_temperate => "אסיה ממוזג";
   @override
   String get west_tropical_africa => "מערב אפריקה טרופית";
   @override
   String get northern_europe => "אירופה הצפונית";
   @override
-  String get habitat_rock => "סלעים או הרים";
-  @override
   String get northeast_tropical_africa => "Northeast Tropical Africa";
   @override
   String get pref_language => "שפה מועדפת";
   @override
-  String get mongolia => "מונגוליה";
-  @override
   String get new_zealand => "ניו זילנד";
   @override
-  String get western_south_america => "מערב אמריקה";
-  @override
   String get filter_distribution => "הפצה";
-  @override
-  String get europe => "אירופה";
-  @override
-  String get middle_europe => "אירופה המזרחית";
   @override
   String get eastern_asia => "מזרח אסיה";
   @override
@@ -5001,41 +6491,25 @@ class $he extends S {
   @override
   String get north_central_usa => "צפון מרכז ארצות הברית";
   @override
-  String get southern_south_america => "דרום אמריקה הדרומית";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "מספר עלי כותרת";
-  @override
   String get southeastern_usa => "דרום מזרח ארצות הברית";
   @override
-  String get color_white => "לבן";
-  @override
-  String get northeastern_usa => "צפון מזרח ארצות הברית";
-  @override
-  String get color_green => "ירוק, חום, שחור";
+  String get plant_height_from => "גובה מ";
   @override
   String get petal_many => "יותר מ 5";
   @override
   String get southeastern_europe => "דרום מזרח אירופה";
   @override
-  String get pacific => "האוקיינוס השקט";
+  String get taxonomy_unknown => "לא ידוע";
   @override
-  String get south_central_pacific => "דרום מרכז האוקיינוס השקט";
-  @override
-  String get filter_color => "צבע של פרחים";
-  @override
-  String get help => "עֶזרָה";
+  String get plant_inflorescence => "תִפרַחַת";
   @override
   String get northern_africa => "צפון אפריקה";
   @override
-  String get mexico => "מקסיקו";
-  @override
   String get china => "סין";
   @override
-  String get papuasia => "Papuasia";
+  String get taxonomy_genus => "סוג";
   @override
-  String get siberia => "סיביר";
+  String get papuasia => "Papuasia";
 }
 
 class $ro extends S {
@@ -5044,8 +6518,6 @@ class $ro extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "câmpie sau fâneață";
   @override
   String get central_america => "America Centrală";
   @override
@@ -5063,33 +6535,17 @@ class $ro extends S {
   @override
   String get caribbean => "Insulele Caraibe";
   @override
-  String get habitat_wetland => "zonele umede";
-  @override
   String get australasia => "Australasia";
-  @override
-  String get eastern_canada => "Estul Canadei";
   @override
   String get petal_4 => "4 sau mai puțin";
   @override
   String get east_tropical_africa => "Africa de Est tropicală";
   @override
-  String get habitat_tree => "arbori sau arbuști";
-  @override
-  String get settings => "Setări";
-  @override
-  String get color_red => "roșu, roz";
-  @override
   String get africa => "Africa";
-  @override
-  String get north_central_pacific => "Nord-central Pacificului";
   @override
   String get south_tropical_africa => "Africa de Sud tropicală";
   @override
-  String get southern_africa => "Africa de Sud";
-  @override
   String get caucasus => "Caucaz";
-  @override
-  String get color_yellow => "galben";
   @override
   String get middle_asia => "Asia centrală";
   @override
@@ -5097,13 +6553,11 @@ class $ro extends S {
   @override
   String get australia => "Australia";
   @override
-  String get subantarctic_islands => "Insulele subantarctice";
-  @override
-  String get my_region => "Regiunea mea";
+  String get plant_leaf => "Frunze";
   @override
   String get habitat_forest => "pădurea";
   @override
-  String get indian_subcontinent => "Subcontinentul indian";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Malesia";
   @override
@@ -5111,79 +6565,53 @@ class $ro extends S {
   @override
   String get asia_tropical => "Asia tropicală";
   @override
-  String get filter_habitat => "habitatul";
-  @override
-  String get northwestern_pacific => "Nord-vestul Pacificului";
-  @override
   String get northwestern_usa => "Nord-vestul SUA";
   @override
   String get northern_south_america => "Nord America de Sud";
-  @override
-  String get southwestern_europe => "Europa de Sud-Vest";
   @override
   String get southern_america => "America de Sud";
   @override
   String get middle_atlantic_ocean => "Oceanul Atlantic de Nord";
   @override
-  String get antarctic_continent => "Continentul Antarcticii";
-  @override
-  String get brazil => "Brazilia";
-  @override
-  String get eastern_europe => "Europa de Est";
-  @override
   String get habitat_garden => "grădina sau câmp";
-  @override
-  String get south_central_usa => "Sud-central SUA";
   @override
   String get russian_far_east => "Orientul Îndepărtat Rusesc";
   @override
   String get west_central_tropical_africa => "Africa de Vest-Central tropicală";
   @override
-  String get macaronesia => "Macaroneziei";
+  String get plant_toxicity => "Toxicitate";
   @override
-  String get arabian_peninsula => "Peninsula Arabică";
+  String get macaronesia => "Macaroneziei";
   @override
   String get asia_temperate => "Asia temperată";
   @override
-  String get west_tropical_africa => "Africa de Vest tropicală";
-  @override
-  String get northern_europe => "Europa de Nord";
-  @override
   String get habitat_rock => "stânci sau munți";
   @override
-  String get northeast_tropical_africa => "Africa de Nord-Est tropicală";
+  String get taxonomy_superregnum => "Domeniu";
   @override
-  String get pref_language => "Limba preferată";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongolia";
   @override
-  String get new_zealand => "Noua Zeelanda";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "Vestful America de Sud";
   @override
-  String get filter_distribution => "distribuire";
+  String get taxonomy_subgenus => "Subgen";
   @override
   String get europe => "Europa";
   @override
   String get middle_europe => "Europa Centrală";
   @override
-  String get eastern_asia => "Asia de Est";
-  @override
-  String get western_asia => "Asia de Vest";
-  @override
-  String get subarctic_america => "Subarctic America";
-  @override
   String get color_blue => "albastru, violet";
   @override
-  String get north_central_usa => "Nord-central SUA";
-  @override
   String get southern_south_america => "Sud America de Sud";
+  @override
+  String get plant_habitat => "Habitatul";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "numărul de petale";
-  @override
-  String get southeastern_usa => "Sud-estul SUA";
   @override
   String get color_white => "alb";
   @override
@@ -5191,11 +6619,13 @@ class $ro extends S {
   @override
   String get color_green => "verde, maro, negru";
   @override
-  String get petal_many => "mai mult de 5";
+  String get taxonomy_ordo => "Ordin";
   @override
-  String get southeastern_europe => "Europa de Sud-Est";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Oceanul Pacific";
+  @override
+  String get taxonomy_regnum => "Regn";
   @override
   String get south_central_pacific => "Sud-central Pacificului";
   @override
@@ -5203,15 +6633,119 @@ class $ro extends S {
   @override
   String get help => "Ajutor";
   @override
-  String get northern_africa => "Africa de Nord";
-  @override
   String get mexico => "Mexic";
+  @override
+  String get siberia => "Siberia";
+  @override
+  String get taxonomy_subtribus => "Subtrib";
+  @override
+  String get habitat_meadow => "câmpie sau fâneață";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get taxonomy_cladus => "(cladă)";
+  @override
+  String get plant_herbalism => "Herbalism";
+  @override
+  String get plant_height_to => "la";
+  @override
+  String get habitat_wetland => "zonele umede";
+  @override
+  String get eastern_canada => "Estul Canadei";
+  @override
+  String get habitat_tree => "arbori sau arbuști";
+  @override
+  String get settings => "Setări";
+  @override
+  String get color_red => "roșu, roz";
+  @override
+  String get north_central_pacific => "Nord-central Pacificului";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Africa de Sud";
+  @override
+  String get color_yellow => "galben";
+  @override
+  String get subantarctic_islands => "Insulele subantarctice";
+  @override
+  String get taxonomy_subfamilia => "Subfamilie";
+  @override
+  String get my_region => "Regiunea mea";
+  @override
+  String get indian_subcontinent => "Subcontinentul indian";
+  @override
+  String get plant_flower => "Flori";
+  @override
+  String get filter_habitat => "habitatul";
+  @override
+  String get northwestern_pacific => "Nord-vestul Pacificului";
+  @override
+  String get southwestern_europe => "Europa de Sud-Vest";
+  @override
+  String get taxonomy_species => "Specie";
+  @override
+  String get plant_fruit => "Fructe";
+  @override
+  String get plant_flowering_to => "la";
+  @override
+  String get taxonomy_familia => "Familie";
+  @override
+  String get plant_stem => "Tulpină";
+  @override
+  String get antarctic_continent => "Continentul Antarcticii";
+  @override
+  String get brazil => "Brazilia";
+  @override
+  String get eastern_europe => "Europa de Est";
+  @override
+  String get south_central_usa => "Sud-central SUA";
+  @override
+  String get plant_flowering_from => "Înflorire";
+  @override
+  String get taxonomy_tribus => "Trib";
+  @override
+  String get arabian_peninsula => "Peninsula Arabică";
+  @override
+  String get west_tropical_africa => "Africa de Vest tropicală";
+  @override
+  String get northern_europe => "Europa de Nord";
+  @override
+  String get northeast_tropical_africa => "Africa de Nord-Est tropicală";
+  @override
+  String get pref_language => "Limba preferată";
+  @override
+  String get new_zealand => "Noua Zeelanda";
+  @override
+  String get filter_distribution => "distribuire";
+  @override
+  String get eastern_asia => "Asia de Est";
+  @override
+  String get western_asia => "Asia de Vest";
+  @override
+  String get subarctic_america => "Subarctic America";
+  @override
+  String get north_central_usa => "Nord-central SUA";
+  @override
+  String get southeastern_usa => "Sud-estul SUA";
+  @override
+  String get plant_height_from => "Înălțimea de la";
+  @override
+  String get petal_many => "mai mult de 5";
+  @override
+  String get southeastern_europe => "Europa de Sud-Est";
+  @override
+  String get taxonomy_unknown => "necunoscut";
+  @override
+  String get plant_inflorescence => "Inflorescență";
+  @override
+  String get northern_africa => "Africa de Nord";
   @override
   String get china => "China";
   @override
-  String get papuasia => "Papuasia";
+  String get taxonomy_genus => "Gen";
   @override
-  String get siberia => "Siberia";
+  String get papuasia => "Papuasia";
 }
 
 class $nl extends S {
@@ -5220,8 +6754,6 @@ class $nl extends S {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  @override
-  String get habitat_meadow => "weiden of graslanden";
   @override
   String get central_america => "Centraal Amerika";
   @override
@@ -5239,33 +6771,17 @@ class $nl extends S {
   @override
   String get caribbean => "Caribbean";
   @override
-  String get habitat_wetland => "heidevelden of moerassen";
-  @override
   String get australasia => "Australazië";
-  @override
-  String get eastern_canada => "Oost-Canada";
   @override
   String get petal_4 => "4 of minder";
   @override
   String get east_tropical_africa => "Oost-tropisch Afrika";
   @override
-  String get habitat_tree => "bomen of struiken";
-  @override
-  String get settings => "Instellingen";
-  @override
-  String get color_red => "rood, roze";
-  @override
   String get africa => "Afrika";
-  @override
-  String get north_central_pacific => "Noord-centrale Stille Oceaan";
   @override
   String get south_tropical_africa => "Zuid-tropisch Afrika";
   @override
-  String get southern_africa => "Zuid-Afrika";
-  @override
   String get caucasus => "Kaukasus";
-  @override
-  String get color_yellow => "geel";
   @override
   String get middle_asia => "Midden-Azië";
   @override
@@ -5273,13 +6789,11 @@ class $nl extends S {
   @override
   String get australia => "Australië";
   @override
-  String get subantarctic_islands => "Subantarctic Islands";
-  @override
-  String get my_region => "Mijn regio";
+  String get plant_leaf => "Bladeren";
   @override
   String get habitat_forest => "bossen of wouden";
   @override
-  String get indian_subcontinent => "Indisch subcontinent";
+  String get taxonomy_serie => "Serie";
   @override
   String get malesia => "Maleisië";
   @override
@@ -5287,79 +6801,53 @@ class $nl extends S {
   @override
   String get asia_tropical => "Azië Tropical";
   @override
-  String get filter_habitat => "standplaats";
-  @override
-  String get northwestern_pacific => "Northwestern Stille Oceaan";
-  @override
   String get northwestern_usa => "Noordwest VS";
   @override
   String get northern_south_america => "Noord-Zuid-Amerika";
-  @override
-  String get southwestern_europe => "Zuidwest-Europa";
   @override
   String get southern_america => "Zuid-Amerika";
   @override
   String get middle_atlantic_ocean => "Midden-Atlantische Oceaan";
   @override
-  String get antarctic_continent => "Antarctisch continent";
-  @override
-  String get brazil => "Brazilië";
-  @override
-  String get eastern_europe => "Oost-Europa";
-  @override
   String get habitat_garden => "tuinen of velden";
-  @override
-  String get south_central_usa => "Zuid-Centraal VS";
   @override
   String get russian_far_east => "Russisch Verre Oosten";
   @override
   String get west_central_tropical_africa => "West-Centraal Tropisch Afrika";
   @override
-  String get macaronesia => "Macaronesia";
+  String get plant_toxicity => "Toxiciteit";
   @override
-  String get arabian_peninsula => "Arabisch Schiereiland";
+  String get macaronesia => "Macaronesia";
   @override
   String get asia_temperate => "Azië Gematigd";
   @override
-  String get west_tropical_africa => "West-tropisch Afrika";
-  @override
-  String get northern_europe => "Noord-Europa";
-  @override
   String get habitat_rock => "rotsen of bergen";
   @override
-  String get northeast_tropical_africa => "Noordoost-tropisch Afrika";
+  String get taxonomy_superregnum => "Domein";
   @override
-  String get pref_language => "Voorkeurstaal";
+  String get taxonomy_sectio => "Sectio";
   @override
   String get mongolia => "Mongolië";
   @override
-  String get new_zealand => "Nieuw Zeeland";
+  String get taxonomy_subserie => "Subserie";
   @override
   String get western_south_america => "West-Zuid-Amerika";
   @override
-  String get filter_distribution => "distributie";
+  String get taxonomy_subgenus => "Subgenus";
   @override
   String get europe => "Europa";
   @override
   String get middle_europe => "Midden-Europa";
   @override
-  String get eastern_asia => "Oost Azië";
-  @override
-  String get western_asia => "West-Azië";
-  @override
-  String get subarctic_america => "Subarctisch Amerika";
-  @override
   String get color_blue => "blauw, paars";
   @override
-  String get north_central_usa => "Noord-Centraal VS";
-  @override
   String get southern_south_america => "Zuid-Zuid-Amerika";
+  @override
+  String get plant_habitat => "Standplaats";
   @override
   String get petal_5 => "5";
   @override
   String get filter_petal => "aantal bloemblaadjes";
-  @override
-  String get southeastern_usa => "Zuidoost VS";
   @override
   String get color_white => "wit";
   @override
@@ -5367,11 +6855,13 @@ class $nl extends S {
   @override
   String get color_green => "groen, bruin, zwart";
   @override
-  String get petal_many => "meer dan 5";
+  String get taxonomy_ordo => "Orde";
   @override
-  String get southeastern_europe => "Zuidoost-Europa";
+  String get taxonomy_supersectio => "Supersectio";
   @override
   String get pacific => "Stille Oceaan";
+  @override
+  String get taxonomy_regnum => "Rijk";
   @override
   String get south_central_pacific => "Zuid-Central Stille Oceaan";
   @override
@@ -5379,15 +6869,119 @@ class $nl extends S {
   @override
   String get help => "Helpen";
   @override
-  String get northern_africa => "Noord-Afrika";
-  @override
   String get mexico => "Mexico";
+  @override
+  String get siberia => "Siberië";
+  @override
+  String get taxonomy_subtribus => "Subtribus";
+  @override
+  String get habitat_meadow => "weiden of graslanden";
+  @override
+  String get plant_trivia => "Weetjes";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "Geneeskundige toepassingen";
+  @override
+  String get plant_height_to => "tot";
+  @override
+  String get habitat_wetland => "heidevelden of moerassen";
+  @override
+  String get eastern_canada => "Oost-Canada";
+  @override
+  String get habitat_tree => "bomen of struiken";
+  @override
+  String get settings => "Instellingen";
+  @override
+  String get color_red => "rood, roze";
+  @override
+  String get north_central_pacific => "Noord-centrale Stille Oceaan";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Zuid-Afrika";
+  @override
+  String get color_yellow => "geel";
+  @override
+  String get subantarctic_islands => "Subantarctic Islands";
+  @override
+  String get taxonomy_subfamilia => "Onderfamilie";
+  @override
+  String get my_region => "Mijn regio";
+  @override
+  String get indian_subcontinent => "Indisch subcontinent";
+  @override
+  String get plant_flower => "Bloemen";
+  @override
+  String get filter_habitat => "standplaats";
+  @override
+  String get northwestern_pacific => "Northwestern Stille Oceaan";
+  @override
+  String get southwestern_europe => "Zuidwest-Europa";
+  @override
+  String get taxonomy_species => "Soort";
+  @override
+  String get plant_fruit => "Vrucht";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Familie";
+  @override
+  String get plant_stem => "Stengel";
+  @override
+  String get antarctic_continent => "Antarctisch continent";
+  @override
+  String get brazil => "Brazilië";
+  @override
+  String get eastern_europe => "Oost-Europa";
+  @override
+  String get south_central_usa => "Zuid-Centraal VS";
+  @override
+  String get plant_flowering_from => "Bloeit van";
+  @override
+  String get taxonomy_tribus => "Tak";
+  @override
+  String get arabian_peninsula => "Arabisch Schiereiland";
+  @override
+  String get west_tropical_africa => "West-tropisch Afrika";
+  @override
+  String get northern_europe => "Noord-Europa";
+  @override
+  String get northeast_tropical_africa => "Noordoost-tropisch Afrika";
+  @override
+  String get pref_language => "Voorkeurstaal";
+  @override
+  String get new_zealand => "Nieuw Zeeland";
+  @override
+  String get filter_distribution => "distributie";
+  @override
+  String get eastern_asia => "Oost Azië";
+  @override
+  String get western_asia => "West-Azië";
+  @override
+  String get subarctic_america => "Subarctisch Amerika";
+  @override
+  String get north_central_usa => "Noord-Centraal VS";
+  @override
+  String get southeastern_usa => "Zuidoost VS";
+  @override
+  String get plant_height_from => "Hoogte van";
+  @override
+  String get petal_many => "meer dan 5";
+  @override
+  String get southeastern_europe => "Zuidoost-Europa";
+  @override
+  String get taxonomy_unknown => "onbekend";
+  @override
+  String get plant_inflorescence => "Bloeiwijze";
+  @override
+  String get northern_africa => "Noord-Afrika";
   @override
   String get china => "China";
   @override
-  String get papuasia => "Papuasië";
+  String get taxonomy_genus => "Geslacht";
   @override
-  String get siberia => "Siberië";
+  String get papuasia => "Papuasië";
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
