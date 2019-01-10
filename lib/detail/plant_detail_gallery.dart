@@ -4,23 +4,6 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
 
-const String sourceWikipedia = "wikipedia";
-const String sourceWikimediaCommons = "commons.wikimedia.org";
-const String sourceWikimediaCommonsTitle = "commons";
-const String sourceWikimediaSpecies = "species.wikimedia.org";
-const String sourceWikimediaSpeciesTitle = "species";
-const String sourceWikimediaData = "wikidata.org";
-const String sourceWikimediaDataTitle = "wikidata";
-const String sourceLuontoportii = "luontoportti.com";
-const String sourceBotany = "botany.cz";
-const String sourceFloraNordica = "floranordica.org";
-const String sourceEflora = "efloras.org";
-const String sourceBerkeley = "berkeley.edu";
-const String sourceHortipedia = "hortipedia.com";
-const String sourceUsda = "plants.usda.gov";
-const String sourceUsfs = "forestryimages.org";
-const String sourceTelaBotanica = "tela-botanica.org";
-
 Widget getGallery(BuildContext context, Future<Plant> _plantF) {
   return FutureBuilder<Plant>(
       future: _plantF,
@@ -67,15 +50,17 @@ Widget getGallery(BuildContext context, Future<Plant> _plantF) {
               ));
             }
 
-            cards.add(Card(
-              child: Container(
-                padding: EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: _getSources(context, snapshot.data.sourceUrls),
+            if (snapshot.data.sourceUrls != null) {
+              cards.add(Card(
+                child: Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: _getSources(context, snapshot.data.sourceUrls),
+                  ),
                 ),
-              ),
-            ));
+              ));
+            }
 
             return ListView(
               shrinkWrap: true,

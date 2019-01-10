@@ -19,6 +19,7 @@ class Plant{
 
   Plant.fromJson(this.key, Map data) {
     name = data['name'];
+    apgIV = data['APGIV'];
     floweringFrom = data['floweringFrom'];
     floweringTo = data['floweringTo'] ?? 0;
     heightFrom = data['heightFrom'] ?? 0;
@@ -27,6 +28,7 @@ class Plant{
     illustrationUrl = data['illustrationUrl'];
     photoUrls = data['photoUrls'];
     sourceUrls = data['sourceUrls'];
+    synonyms = data['synonyms'];
     wikiLinks = data['wikilinks'];
   }
 }

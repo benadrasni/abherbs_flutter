@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:abherbs_flutter/detail/plant_detail_gallery.dart';
 import 'package:abherbs_flutter/detail/plant_detail_info.dart';
+import 'package:abherbs_flutter/detail/plant_detail_taxonomy.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
@@ -105,7 +106,10 @@ class _PlantDetailState extends State<PlantDetail> {
         return getGallery(context, _plantF);
       case 1:
         return getInfo(context, widget.myLocale, _plantF, _plantTranslationF);
+      case 2:
+        return getTaxonomy(context, widget.myLocale, _plantF, _plantTranslationF);
     }
+    return null;
   }
 
   @override

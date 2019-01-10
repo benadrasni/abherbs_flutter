@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:abherbs_flutter/generated/i18n.dart';
 
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
@@ -30,5 +32,26 @@ void launchURL(String url) async {
     await launch(url);
   } else {
     throw 'Could not launch $url';
+  }
+}
+
+String getTaxonLabel(BuildContext context, String taxon) {
+  switch (taxon) {
+    case 'Superregnum': return S.of(context).taxonomy_superregnum;
+    case 'Regnum': return S.of(context).taxonomy_regnum;
+    case 'Cladus': return S.of(context).taxonomy_cladus;
+    case 'Ordo': return S.of(context).taxonomy_ordo;
+    case 'Familia': return S.of(context).taxonomy_familia;
+    case 'Subfamilia': return S.of(context).taxonomy_subfamilia;
+    case 'Tribus': return S.of(context).taxonomy_tribus;
+    case 'Subtribus': return S.of(context).taxonomy_subtribus;
+    case 'Genus': return S.of(context).taxonomy_genus;
+    case 'Subgenus': return S.of(context).taxonomy_subgenus;
+    case 'Supersectio': return S.of(context).taxonomy_supersectio;
+    case 'Sectio': return S.of(context).taxonomy_sectio;
+    case 'Subsectio': return S.of(context).taxonomy_subsectio;
+    case 'Serie': return S.of(context).taxonomy_serie;
+    case 'Subserie': return S.of(context).taxonomy_subserie;
+    default: return S.of(context).taxonomy_unknown;
   }
 }
