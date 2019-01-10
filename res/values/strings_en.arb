@@ -98,6 +98,11 @@
   "plant_taxonomy": "Taxonomy",
   "plant_sources": "Sources",
 
+  "google_translate": "Translated with Google Translate",
+  "show_original": "Show English text",
+  "improve_translation": "Improve translation",
+  "show_translation": "Show translated text",
+
   "plant_height_from": "Height from",
   "plant_height_to": "to",
   "plant_flowering_from": "Flowering from",

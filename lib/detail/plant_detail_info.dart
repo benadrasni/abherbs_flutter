@@ -22,7 +22,8 @@ const String sourceUsda = "plants.usda.gov";
 const String sourceUsfs = "forestryimages.org";
 const String sourceTelaBotanica = "tela-botanica.org";
 
-Widget getInfo(BuildContext context, Locale myLocale, Future<Plant> _plantF, Future<PlantTranslation> _plantTranslationF) {
+Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Plant> _plantF, Future<PlantTranslation> _plantTranslationF,
+    Function(bool) onChangeTranslation) {
   return FutureBuilder<PlantTranslation>(
       future: _plantTranslationF,
       builder: (BuildContext context, AsyncSnapshot<PlantTranslation> snapshot) {
@@ -213,6 +214,42 @@ Widget getInfo(BuildContext context, Locale myLocale, Future<Plant> _plantF, Fut
               ));
             }
 
+            if (snapshot.data.isTranslatedWithGT) {
+              cards.add(Card(
+                child: Container(
+                  padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
+                  child: Column(
+                    children: [
+                      Text(S.of(context).google_translate),
+                      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                        RaisedButton(
+                          onPressed: () {
+                            onChangeTranslation(!isOriginal);
+                          },
+                          child: new Text(isOriginal ? S.of(context).show_translation : S.of(context).show_original),
+                        ),
+                        FutureBuilder<Plant>(
+                          future: _plantF,
+                          builder: (BuildContext context, AsyncSnapshot<Plant> plantSnapshot) {
+                            if (plantSnapshot.connectionState == ConnectionState.done) {
+                              return RaisedButton(
+                                onPressed: () {
+                                  launchURL(webUrl + 'translate_flower?lang=' + myLocale.languageCode + "&plant=" + plantSnapshot.data.name);
+                                },
+                                child: new Text(S.of(context).improve_translation),
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
+                        ),
+                      ]),
+                    ],
+                  ),
+                ),
+              ));
+            }
+
             cards.add(Card(
                 child: FutureBuilder<Plant>(
               future: _plantF,
@@ -237,7 +274,15 @@ Widget getInfo(BuildContext context, Locale myLocale, Future<Plant> _plantF, Fut
               children: cards,
             );
           default:
-            return Column(mainAxisAlignment: MainAxisAlignment.center, children: [CircularProgressIndicator()]);
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(),
+                CircularProgressIndicator(),
+                Container(),
+              ],
+            );
         }
       });
 }

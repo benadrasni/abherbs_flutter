@@ -13,6 +13,7 @@ class PlantTranslation {
   String toxicity;
   String herbalism;
   String trivia;
+  bool isTranslatedWithGT = false;
 
   PlantTranslation();
 
@@ -55,6 +56,21 @@ class PlantTranslation {
     names = plantTranslation.names ?? names;
     sourceUrls = plantTranslation.sourceUrls ?? sourceUrls;
     wikipedia = plantTranslation.wikipedia ?? wikipedia;
+    description = plantTranslation.description ?? description;
+    flower = plantTranslation.flower ?? flower;
+    inflorescence = plantTranslation.inflorescence ?? inflorescence;
+    fruit = plantTranslation.fruit ?? fruit;
+    leaf = plantTranslation.leaf ?? leaf;
+    stem = plantTranslation.stem ?? stem;
+    habitat = plantTranslation.habitat ?? habitat;
+    toxicity = plantTranslation.toxicity ?? toxicity;
+    herbalism = plantTranslation.herbalism ?? herbalism;
+    trivia = plantTranslation.trivia ?? trivia;
+
+    return this;
+  }
+
+  PlantTranslation mergeDataWith(PlantTranslation plantTranslation) {
     description = plantTranslation.description ?? description;
     flower = plantTranslation.flower ?? flower;
     inflorescence = plantTranslation.inflorescence ?? inflorescence;

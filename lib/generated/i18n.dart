@@ -47,6 +47,7 @@ class S implements WidgetsLocalizations {
   String get filter_distribution => "distribution";
   String get filter_habitat => "habitat";
   String get filter_petal => "petal";
+  String get google_translate => "Translated with Google Translate";
   String get habitat_forest => "woodlands or forests";
   String get habitat_garden => "gardens or fields";
   String get habitat_meadow => "meadows or grasslands";
@@ -54,6 +55,7 @@ class S implements WidgetsLocalizations {
   String get habitat_tree => "trees or shrubs";
   String get habitat_wetland => "moorlands or wetlands";
   String get help => "Help";
+  String get improve_translation => "Improve translation";
   String get indian_subcontinent => "Indian Subcontinent";
   String get indochina => "Indo-China";
   String get list_info => "Pick one";
@@ -102,6 +104,8 @@ class S implements WidgetsLocalizations {
   String get pref_language => "Preferred language";
   String get russian_far_east => "Russian Far East";
   String get settings => "Settings";
+  String get show_original => "Show English text";
+  String get show_translation => "Show translated text";
   String get siberia => "Siberia";
   String get south_central_pacific => "South-Central Pacific";
   String get south_central_usa => "South-Central U.S.A.";

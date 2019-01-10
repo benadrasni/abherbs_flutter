@@ -32,8 +32,83 @@ class PlantDetail extends StatefulWidget {
 class _PlantDetailState extends State<PlantDetail> {
   Future<Plant> _plantF;
   Future<PlantTranslation> _plantTranslationF;
-
   int _currentIndex;
+  bool _isOriginal;
+
+  onChangeTranslation(bool isOriginal) {
+    setState(() {
+      _isOriginal = isOriginal;
+      _plantTranslationF = _getTranslation();
+    });
+  }
+
+  Future<PlantTranslation> _getTranslation() {
+    return translationsReference.child(widget.myLocale.languageCode).child(widget.plantName).once().then((DataSnapshot snapshot) {
+      var plantTranslation = PlantTranslation.fromJson(snapshot.value);
+      if (plantTranslation != null && plantTranslation.isTranslated()) {
+        return plantTranslation;
+      } else {
+        plantTranslation.isTranslatedWithGT = true;
+        if (_isOriginal) {
+          return translationsReference
+              .child(widget.myLocale.languageCode == 'cs' ? languageSlovak : languageEnglish)
+              .child(widget.plantName)
+              .once()
+              .then((DataSnapshot snapshot) {
+            var plantTranslationOriginal = PlantTranslation.fromJson(snapshot.value);
+            return plantTranslation.mergeDataWith(plantTranslationOriginal);
+          });
+        } else {
+          return translationsReference
+              .child(widget.myLocale.languageCode + languageGTSuffix)
+              .child(widget.plantName)
+              .once()
+              .then((DataSnapshot snapshot) {
+            var plantTranslationGT = PlantTranslation.copy(plantTranslation);
+            if (snapshot.value != null) {
+              plantTranslationGT = PlantTranslation.fromJson(snapshot.value);
+              plantTranslationGT.mergeWith(plantTranslation);
+            }
+            if (plantTranslationGT.label == null) {
+              plantTranslationGT.label = widget.plantName;
+            }
+            if (plantTranslationGT.isTranslated()) {
+              plantTranslationGT.isTranslatedWithGT = true;
+              return plantTranslationGT;
+            } else {
+              return translationsReference
+                  .child(widget.myLocale.languageCode == 'cs' ? languageSlovak : languageEnglish)
+                  .child(widget.plantName)
+                  .once()
+                  .then((DataSnapshot snapshot) {
+                var plantTranslationOriginal = PlantTranslation.fromJson(snapshot.value);
+                var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
+                uri += '&source=' + ('cs' == widget.myLocale.languageCode ? 'sk' : 'en');
+                uri += '&target=' + widget.myLocale.languageCode;
+                for (var text in plantTranslation.getTextsToTranslate(plantTranslationOriginal)) {
+                  uri += '&q=' + text;
+                }
+                return http.get(uri).then((response) {
+                  if (response.statusCode == 200) {
+                    Translations translations = Translations.fromJson(json.decode(response.body));
+                    PlantTranslation onlyGoogleTranslation = plantTranslation.fillTranslations(
+                        translations.translatedTexts, plantTranslationOriginal);
+                    translationsReference
+                        .child(widget.myLocale.languageCode + languageGTSuffix)
+                        .child(widget.plantName)
+                        .set(onlyGoogleTranslation.toJson());
+                    return plantTranslation;
+                  } else {
+                    return plantTranslation.mergeWith(plantTranslationOriginal);
+                  }
+                });
+              });
+            }
+          });
+        }
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -45,59 +120,10 @@ class _PlantDetailState extends State<PlantDetail> {
       return Plant.fromJson(snapshot.key, snapshot.value);
     });
 
-    _plantTranslationF = translationsReference.child(widget.myLocale.languageCode).child(widget.plantName).once().then((DataSnapshot snapshot) {
-      var plantTranslation = PlantTranslation.fromJson(snapshot.value);
-      if (plantTranslation != null && plantTranslation.isTranslated()) {
-        return plantTranslation;
-      } else {
-        return translationsReference
-            .child(widget.myLocale.languageCode + languageGTSuffix)
-            .child(widget.plantName)
-            .once()
-            .then((DataSnapshot snapshot) {
-          var plantTranslationGT = PlantTranslation.copy(plantTranslation);
-          if (snapshot.value != null) {
-            plantTranslationGT = PlantTranslation.fromJson(snapshot.value);
-            plantTranslationGT.mergeWith(plantTranslation);
-          }
-          if (plantTranslationGT.label == null) {
-            plantTranslationGT.label = widget.plantName;
-          }
-          if (plantTranslationGT.isTranslated()) {
-            return plantTranslationGT;
-          } else {
-            return translationsReference
-                .child(widget.myLocale.languageCode == 'cs' ? languageSlovak : languageEnglish)
-                .child(widget.plantName)
-                .once()
-                .then((DataSnapshot snapshot) {
-              var plantTranslationOriginal = PlantTranslation.fromJson(snapshot.value);
-              var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
-              uri += '&source=' + ('cs' == widget.myLocale.languageCode ? 'sk' : 'en');
-              uri += '&target=' + widget.myLocale.languageCode;
-              for (var text in plantTranslation.getTextsToTranslate(plantTranslationOriginal)) {
-                uri += '&q=' + text;
-              }
-              return http.get(uri).then((response) {
-                if (response.statusCode == 200) {
-                  Translations translations = Translations.fromJson(json.decode(response.body));
-                  PlantTranslation onlyGoogleTranslation = plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
-                  translationsReference
-                      .child(widget.myLocale.languageCode + languageGTSuffix)
-                      .child(widget.plantName)
-                      .set(onlyGoogleTranslation.toJson());
-                  return plantTranslation;
-                } else {
-                  return plantTranslation.mergeWith(plantTranslationOriginal);
-                }
-              });
-            });
-          }
-        });
-      }
-    });
+    _plantTranslationF = _getTranslation();
 
     _currentIndex = 0;
+    _isOriginal = false;
   }
 
   Widget _getBody(BuildContext context) {
@@ -105,7 +131,7 @@ class _PlantDetailState extends State<PlantDetail> {
       case 0:
         return getGallery(context, _plantF);
       case 1:
-        return getInfo(context, widget.myLocale, _plantF, _plantTranslationF);
+        return getInfo(context, widget.myLocale, _isOriginal, _plantF, _plantTranslationF, this.onChangeTranslation);
       case 2:
         return getTaxonomy(context, widget.myLocale, _plantF, _plantTranslationF);
     }
