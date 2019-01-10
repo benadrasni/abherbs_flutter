@@ -217,7 +217,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Pl
             if (snapshot.data.isTranslatedWithGT) {
               cards.add(Card(
                 child: Container(
-                  padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
+                  padding: EdgeInsets.all(10.0),
                   child: Column(
                     children: [
                       Text(S.of(context).google_translate),
