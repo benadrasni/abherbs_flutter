@@ -1,12 +1,13 @@
-import 'package:abherbs_flutter/utils.dart';
 import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/legend.dart';
 import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
+import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -81,12 +82,23 @@ class _AppDrawerState extends State<AppDrawer> {
     listItems.add(ListTile(
       title: Text(S.of(context).settings),
       onTap: () {
-        Navigator.pop(context);
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => Settings(widget.onChangeLanguage)),
         ).then((result) {
+          Navigator.pop(context);
           widget.settingsCallback();
+        });
+      },
+    ));
+    listItems.add(ListTile(
+      title: Text(S.of(context).legend),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Legend()),
+        ).then((result) {
+          Navigator.pop(context);
         });
       },
     ));
