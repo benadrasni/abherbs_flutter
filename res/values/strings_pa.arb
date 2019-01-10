@@ -1,11 +1,31 @@
 {
+  "legend": "ਦੰਤਕਥਾ",
   "settings": "ਸੈਟਿੰਗਜ਼",
   "feedback": "ਸੁਝਾਅ",
   "about": "ਇਸ ਬਾਰੇ",
   "help": "ਮਦਦ ਕਰੋ",
 
+  "toxicity1": "ਜ਼ਹਿਰੀਲਾ ਪੌਦਾ",
+  "toxicity2": "ਥੋੜ੍ਹਾ ਜ਼ਹਿਰੀਲਾ ਪੌਦਾ",
+
   "pref_language": "ਤਰਜੀਹੀ ਭਾਸ਼ਾ",
   "my_region": "ਮੇਰਾ ਖੇਤਰ",
+
+  "feedback_intro": "ਬਾਗ ਜਾਂ ਖੇਤ",
+  "feedback_review": "ਘਾਹ ਦੇ ਮੈਦਾਨੇ ਜਾਂ ਘਾਹ ਦੇ ਮੈਦਾਨ",
+  "feedback_google_play": "ਜੰਗਲਾਂ ਜਾਂ ਜੰਗਲਾਂ",
+  "feedback_title": "ਰੁੱਖ ਜਾਂ ਬੂਟੇ",
+  "feedback_translate": "ਪਹਾੜਾਂ ਜਾਂ ਝੂਲਿਆਂ",
+  "feedback_submit_translate_data": "ਫੁੱਲ ਦਾ ਡਾਟਾ ਸੁਧਾਰੋ",
+  "feedback_submit_translate_app": "ਐਪਲੀਕੇਸ਼ਨ ਦੇ ਲੇਬਲ ਨੂੰ ਬਿਹਤਰ ਬਣਾਓ",
+
+  "rate_question": "ਕੀ ਇਹ ਐਪ ਉਪਯੋਗੀ ਹੈ?",
+  "rate_text": "ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਦੇ ਲੇਖਕ ਨੂੰ ਉਪਯੋਗਕਰਤਾ ਦੁਆਰਾ ਸਕਾਰਾਤਮਕ ਜਵਾਬ ਦੇ ਕੇ ਪ੍ਰੇਰਿਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ. ਕਿਰਪਾ ਕਰਕੇ ਉਸਨੂੰ ਗੂਗਲ ਪਲੇ ਸਟੋਰ ਦੁਆਰਾ ਕੁਝ ਸਟਾਰਫਲੋਪਰਾਂ ਭੇਜੋ.",
+  "rate_never": "ਕਦੇ ਨਹੀਂ",
+  "rate_later": "ਬਾਅਦ ਵਿਚ",
+  "rate": "ਸਮੀਖਿਆ",
+  "yes": "ਹਾਂ",
+  "no": "ਨਹੀਂ",
 
   "filter_color": "ਫੁੱਲ ਦਾ ਰੰਗ",
   "filter_habitat": "ਆਵਾਸ",
@@ -28,7 +48,7 @@
   "petal_4": "4 ਜਾਂ ਘੱਟ",
   "petal_5": "5",
   "petal_many": "5 ਤੋਂ ਵੱਧ",
-  "petal_bisymmetric": "ਅਨਿਯਮਿਤ",
+  "petal_zygomorphic": "ਅਨਿਯਮਿਤ",
 
   "europe": "ਯੂਰਪ",
   "africa": "ਅਫਰੀਕਾ",
@@ -91,19 +111,31 @@
   "subantarctic_islands": "ਸਬਾਨਟਾਰਕਟਿਕਾ ਆਈਲੈਂਡਜ਼",
   "antarctic_continent": "ਅੰਟਾਰਕਟਿਕਾ ਮਹਾਂਦੀਪ",
 
+  "list_info": "ਇਕ ਚੁਣੋ",
+
+  "plant_info": "ਜਾਣਕਾਰੀ",
+  "plant_gallery": "ਗੈਲਰੀ",
+  "plant_taxonomy": "ਟੈਕਸੌਮੋਰੀ",
+  "plant_sources": "ਸਰੋਤ",
+
+  "google_translate": "ਆਵਾਸ",
+  "show_original": "ਅੰਗ੍ਰੇਜ਼ੀ ਪਾਠ ਦਿਖਾਓ",
+  "improve_translation": "ਅਨੁਵਾਦ ਸੁਧਾਰੋ",
+  "show_translation": "ਅਨੁਵਾਦ ਕੀਤਾ ਟੈਕਸਟ ਦਿਖਾਉ",
+
   "plant_height_from": "ਦੀ ਉਚਾਈ ਤੋਂ",
   "plant_height_to": "ਤੱਕ",
   "plant_flowering_from": "ਫੁਲਿੰਗ",
   "plant_flowering_to": "ਤੱਕ",
   "plant_flower": "ਫੁੱਲ",
-  "plant_inflorescence": "Inflorescence",
+  "plant_inflorescence": "ਫੁਲੋਰੇਸੈਂਸ",
   "plant_fruit": "ਫਲ",
   "plant_leaf": "ਪੱਤਾ",
   "plant_stem": "ਸਟੈਮ",
   "plant_habitat": "ਆਵਾਸ",
-  "plant_trivia": "ਟ੍ਰਿਜੀਆ",
   "plant_toxicity": "ਵਸ਼ੈਲਾਪਣ",
-  "plant_herbalism": "Herbalism",
+  "plant_herbalism": "ਹਰਬਲਿਜ਼ਮ",
+  "plant_trivia": "ਟ੍ਰਿਜੀਆ",
 
   "taxonomy_superregnum": "Domain",
   "taxonomy_regnum": "ਜਗਤ",

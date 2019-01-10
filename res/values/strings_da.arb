@@ -1,11 +1,29 @@
 {
+  "legend": "Legende",
   "settings": "Indstillinger",
-  "feedback": "Feedback / Bidrag",
+  "feedback": "Feedback",
   "about": "Om ansøgning",
   "help": "Hjælp",
+  
+  "toxicity1": "giftig plante",
+  "toxicity2": "lidt giftig plante",
 
-  "pref_language": "Preferred language",
+  "feedback_intro": "Du har bidraget til denne applikation, da du har installeret den på din enhed, tak. Hvis du leder efter noget mere, her er nogle muligheder:",
+  "feedback_review": "Du kan skrive en positiv anmeldelse i Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Hvordan bidrage",
+  "feedback_translate": "Du kan rapportere enhver tastatur eller fejl, du har fundet eller indsende ny oversættelse på dit sprog.",
+
+  "pref_language": "Foretrukne sprog",
   "my_region": "Min region",
+
+  "rate_question": "Er denne app hjælpsom?",
+  "rate_text": "Forfatteren af denne ansøgning er drevet af et positivt svar fra brugerne. Send ham nogle stjerneblomster via Google Play Butik.",
+  "rate_never": "Aldrig",
+  "rate_later": "Senere",
+  "rate": "Anmeldelser",
+  "yes": "Ja",
+  "no": "Ingen",
 
   "filter_color": "blomsterfarve",
   "filter_habitat": "vækststeder",
@@ -28,7 +46,7 @@
   "petal_4": "4 eller mindre",
   "petal_5": "5",
   "petal_many": "mere end 5",
-  "petal_bisymmetric": "zygomorf",
+  "petal_zygomorphic": "zygomorf",
 
   "europe": "Europa",
   "africa": "Afrika",
@@ -90,6 +108,18 @@
   "eastern_canada": "Østlige Canada",
   "subantarctic_islands": "Subantarctic Islands",
   "antarctic_continent": "Antarktis-kontinentet",
+
+  "list_info": "Vælg en",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galleri",
+  "plant_taxonomy": "Taksonomi",
+  "plant_sources": "Kilder",
+
+  "google_translate": "Oversat med Google Translate",
+  "show_original": "Vis engelske tekst",
+  "improve_translation": "Forbedre oversættelse",
+  "show_translation": "Vis oversatte tekst",
   
   "plant_height_from": "Højde",
   "plant_height_to": "-",
@@ -114,12 +144,12 @@
   "taxonomy_tribus": "Tribus",
   "taxonomy_subtribus": "Undertribus",
   "taxonomy_genus": "Slægt",
-  "taxonomy_subgenus": "Subgenus",
-  "taxonomy_sectio": "Sectio",
-  "taxonomy_subsectio": "Subsectio",
+  "taxonomy_subgenus": "Underslægt",
+  "taxonomy_sectio": "Sektion",
+  "taxonomy_subsectio": "Undersektion",
   "taxonomy_serie": "Serie",
-  "taxonomy_subserie": "Subserie",
-  "taxonomy_supersectio": "Supersectio",
+  "taxonomy_subserie": "Underserie",
+  "taxonomy_supersectio": "Supersektion",
   "taxonomy_species": "Art",
   "taxonomy_unknown": "ukendt"
 }

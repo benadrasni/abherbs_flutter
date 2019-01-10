@@ -1,15 +1,35 @@
 {
+  "legend": "Legend",
   "settings": "Inställningar",
-  "feedback": "Återkoppling / Bidrag",
+  "feedback": "Återkoppling",
   "about": "Om ansökan",
   "help": "Hjäjp",
+
+  "toxicity1": "giftig växt",
+  "toxicity2": "något giftig växt",
 
   "pref_language": "Önskat språk",
   "my_region": "Min region",
 
-  "filter_color": "färg på blommor",
+  "feedback_intro": "Du har bidragit till den här applikationen eftersom du har installerat den på din enhet, tack. Om du letar efter något mer, här är några alternativ:",
+  "feedback_review": "Du kan skriva en positiv recension i Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Hur man bidrar",
+  "feedback_translate": "Du kan rapportera eventuellt typsnitt eller misstag du hittat eller skicka in ny översättning på ditt språk.",
+  "feedback_submit_translate_data": "Förbättra blommans data",
+  "feedback_submit_translate_app": "Förbättra programmets etiketter",
+
+  "rate_question": "Är det här programmet användbart?",
+  "rate_text": "Författaren av denna ansökan drivs av positivt svar från användarna. Var vänlig skicka honom några stjärnblommor via Google Play Butik.",
+  "rate_never": "Aldrig",
+  "rate_later": "Senare",
+  "rate": "Recensioner",
+  "yes": "Ja",
+  "no": "Nej",
+
+  "filter_color": "färg",
   "filter_habitat": "växtplats",
-  "filter_petal": "antal kronblad",
+  "filter_petal": "kronblad",
   "filter_distribution": "distribution",
 
   "color_white": "vit",
@@ -28,7 +48,7 @@
   "petal_4": "4 eller mindre",
   "petal_5": "5",
   "petal_many": "mer än 5",
-  "petal_bisymmetric": "zygomorf",
+  "petal_zygomorphic": "zygomorf",
 
   "europe": "Europa",
   "africa": "Afrika",
@@ -76,7 +96,7 @@
   "western_canada": "Västra Kanada",
   "northwestern_usa": "Nordvästra USA",
   "north_central_usa": "Nord-Central USA",
-    "northeastern_usa": "Nordöstra USA",
+  "northeastern_usa": "Nordöstra USA",
   "southwestern_usa": "Sydvästra USA",
   "south_central_usa": "Syd-Central USA",
   "southeastern_usa": "Sydöstra USA",
@@ -91,6 +111,18 @@
   "subantarctic_islands": "Subantarctic Islands",
   "antarctic_continent": "Antarktis kontinent",
 
+  "list_info": "Välj en",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galleri",
+  "plant_taxonomy": "Taxonomi",
+  "plant_sources": "Referenser",
+
+  "google_translate": "Översatt med Google Translate",
+  "show_original": "Visa engelsk text",
+  "improve_translation": "Förbättra translation",
+  "show_translation": "Visa översatt text",
+
   "plant_height_from": "Höjd",
   "plant_height_to": "-",
   "plant_flowering_from": "Blomningstid",
@@ -101,9 +133,9 @@
   "plant_leaf": "Bladen",
   "plant_stem": "Stjälk",
   "plant_habitat": "Växtplats",
-  "plant_trivia": "Trivia",
   "plant_toxicity": "Giftighet",
   "plant_herbalism": "Medicinalväxt",
+  "plant_trivia": "Trivia",
 
   "taxonomy_superregnum": "Domän",
   "taxonomy_regnum": "Rike",

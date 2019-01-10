@@ -1,11 +1,29 @@
 {
+  "legend": "Legenda",
+  "settings": "Configurações",
+  "feedback": "Comentários",
   "about": "Sobre a aplicação",
   "help": "Ajuda",
-  "settings": "Configurações",
-  "feedback": "Comentários / Contribuição",
+  
+  "toxicity1": "planta venenosa",
+  "toxicity2": "planta ligeiramente venenosa",
 
   "pref_language": "Língua preferida",
   "my_region": "Minha região",
+
+  "feedback_intro": "Você tem contribuído para este aplicativo desde que você o instalou no seu dispositivo, obrigado. Se você está procurando algo mais, aqui estão algumas opções:",
+  "feedback_review": "Você pode escrever um comentário positivo no Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Como contribuir",
+  "feedback_translate": "Você pode denunciar qualquer erro ou erro encontrado ou enviar uma nova tradução para o seu idioma.",
+  "feedback_cash": "Você pode suportar novo desenvolvimento e extensão de banco de dados com dinheiro.",
+  "feedback_submit_cash": "Doar",
+
+  "rate_question": "Esta aplicação é útil?",
+  "rate_text": "Autor desta aplicação é motivado pela resposta positiva dos usuários. Por favor, envie-lhe algumas flores estrela através do Google Play Store.",
+  "rate_never": "Nunca",
+  "rate_later": "Mais tarde",
+  "rate": "Resenha",
 
   "filter_color": "cor das flores",
   "filter_habitat": "habitat",
@@ -28,7 +46,7 @@
   "petal_4": "4 ou menos",
   "petal_5": "5",
   "petal_many": "mais que 5",
-  "petal_bisymmetric": "zigomorfo",
+  "petal_zygomorphic": "zigomorfo",
 
   "europe": "Europa",
   "africa": "África",
@@ -91,6 +109,18 @@
   "subantarctic_islands": "Ilhas Subantárticas",
   "antarctic_continent": "Continente Antártico",
 
+  "list_info": "Selecione uma",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galeria",
+  "plant_taxonomy": "Taxinomia",
+  "plant_sources": "Fontes",
+
+  "google_translate": "Traduzido com Google Tradutor",
+  "show_original": "Mostrar texto em inglês",
+  "improve_translation": "Melhorar a tradução",
+  "show_translation": "Mostrar texto traduzido",
+
   "plant_height_from": "altura de",
   "plant_height_to": "a",
   "plant_flowering_from": "Floresce de",
@@ -101,9 +131,9 @@
   "plant_leaf": "Folhas",
   "plant_stem": "Caule",
   "plant_habitat": "Habitat",
-  "plant_trivia": "Curiosidades",
   "plant_toxicity": "Toxicidade",
   "plant_herbalism": "Fitoterapia",
+  "plant_trivia": "Curiosidades",
 
   "taxonomy_superregnum": "domínio",
   "taxonomy_regnum": "reino",

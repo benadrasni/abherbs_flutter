@@ -1,11 +1,31 @@
 {
+  "legend": "Legenda",
   "settings": "Impostazioni",
   "feedback": "Invia un feedback / Contributo",
   "about": "Info sull'applicazione",
   "help": "Aiuto",
 
+  "toxicity1": "pianta velenosa",
+  "toxicity2": "pianta poco velenosa",
+
   "pref_language": "Lingua preferita",
   "my_region": "La mia regione",
+
+  "feedback_intro": "Hai contribuito a questa applicazione scaricandola sul tuo dispositivo, grazie. Se stai cercando qualcos'altro, ecco alcune opzioni:",
+  "feedback_review": "Puoi scrivere una recensione positiva su Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Come contribuire",
+  "feedback_translate": "Puoi segnalare refusi ed errori o inviare una nuova traduzione nella tua lingua.",
+  "feedback_submit_translate_data": "Migliorare le informazioni sui fiori",
+  "feedback_submit_translate_app": "Migliora le etichette delle applicazioni",
+
+  "rate_question": "Trovi utile questa applicazione?",
+  "rate_text": "L'autore di questa applicazione è entusiasta di ricevere feedback da parte degli utenti. Ti preghiamo di inviargli qualche stella (alpina) attraverso Google Play Store.",
+  "rate_never": "Mai",
+  "rate_later": "Dopo",
+  "rate": "Recensioni",
+  "yes": "Si",
+  "no": "No",
 
   "filter_color": "colore dei fiori",
   "filter_habitat": "habitat",
@@ -28,7 +48,7 @@
   "petal_4": "4 o meno",
   "petal_5": "5",
   "petal_many": "più di 5",
-  "petal_bisymmetric": "zigomorfi",
+  "petal_zygomorphic": "zigomorfi",
 
   "europe": "Europa",
   "africa": "Africa",
@@ -91,6 +111,18 @@
   "subantarctic_islands": "Isole Subantartiche",
   "antarctic_continent": "Continente Antartico",
 
+  "list_info": "Scegli un fiore",
+
+  "plant_info": "Informazioni",
+  "plant_gallery": "Galleria",
+  "plant_taxonomy": "Tassonomia",
+  "plant_sources": "Bibliografia",
+
+  "google_translate": "Tradotto con Google Translate",
+  "show_original": "Mostra il testo in inglese",
+  "improve_translation": "Migliora la traduzione",
+  "show_translation": "Mostra il testo tradotto",
+
   "plant_height_from": "Altezza da",
   "plant_height_to": "a",
   "plant_flowering_from": "Fioritura da",
@@ -101,9 +133,9 @@
   "plant_leaf": "Foglie",
   "plant_stem": "Stelo",
   "plant_habitat": "Habitat",
-  "plant_trivia": "Curiosità",
   "plant_toxicity": "Tossicità",
   "plant_herbalism": "Erboristeria",
+  "plant_trivia": "Curiosità",
 
   "taxonomy_superregnum": "Dominio",
   "taxonomy_regnum": "Regno",
@@ -115,11 +147,11 @@
   "taxonomy_subtribus": "Sottotribù",
   "taxonomy_genus": "Genere",
   "taxonomy_subgenus": "Sottogenere",
-  "taxonomy_sectio": "Sectio",
-  "taxonomy_subsectio": "Subsectio",
+  "taxonomy_sectio": "Sezione",
+  "taxonomy_subsectio": "Sottosezione",
   "taxonomy_serie": "Serie",
-  "taxonomy_subserie": "Subserie",
-  "taxonomy_supersectio": "Supersectio",  
+  "taxonomy_subserie": "Sottoserie",
+  "taxonomy_supersectio": "Supersezione",
   "taxonomy_species": "Specie",
   "taxonomy_unknown": "sconosciuto"
 }

@@ -1,15 +1,35 @@
 {
+  "legend": "Легенда",
   "settings": "Подешавања",
-  "feedback": "Повратне информације / допринос",
+  "feedback": "Повратне информације",
   "about": "О апликацији",
   "help": "Помоћ",
+
+  "toxicity1": "отровна биљка",
+  "toxicity2": "благо отровна биљка",
 
   "pref_language": "Језик којем дајете предност",
   "my_region": "Мој регион",
 
-  "filter_color": "боја цвећа",
+  "feedback_intro": "Ви сте доприносили овој апликацији пошто сте је инсталирали на свом уређају, хвала. Ако тражите нешто више, ево неколико опција:",
+  "feedback_review": "Можете написати позитивну рецензију на Гоогле Плаи.",
+  "feedback_google_play": "Гоогле Плаи",
+  "feedback_title": "Како доприносити",
+  "feedback_translate": "Можете пријавити било коју грешку или грешку коју сте пронашли или послати нови превод на свој језик.",
+  "feedback_submit_translate_data": "Побољшајте податке о цвету",
+  "feedback_submit_translate_app": "Побољшајте ознаке апликације",
+
+  "rate_question": "Да ли је ова апликација помоћи?",
+  "rate_text": "Аутор ове апликације је потакнут позитивним одговором корисника. Молим вас, пошаљите му неке звијезде кроз Гоогле Плаи Сторе.",
+  "rate_never": "Никад",
+  "rate_later": "Касније",
+  "rate": "Рецензије",
+  "yes": "Да",
+  "no": "Не",
+
+  "filter_color": "боја",
   "filter_habitat": "станишта",
-  "filter_petal": "број крунични листићи",
+  "filter_petal": "крунични листићи",
   "filter_distribution": "дистрибуција",
 
   "color_white": "бео",
@@ -28,7 +48,7 @@
   "petal_4": "4 или мање",
   "petal_5": "5",
   "petal_many": "више од 5",
-  "petal_bisymmetric": "зигоморфан",
+  "petal_zygomorphic": "зигоморфан",
 
   "europe": "Европа",
   "africa": "Африка",
@@ -91,6 +111,18 @@
   "subantarctic_islands": "Субантарктични Острва",
   "antarctic_continent": "Антарктички континент",
 
+  "list_info": "Одабрати једну",
+
+  "plant_info": "Инфо",
+  "plant_gallery": "Галерија",
+  "plant_taxonomy": "Такономи",
+  "plant_sources": "Извори",
+
+  "google_translate": "Превео са Гоогле Транслате",
+  "show_original": "Схов енглески текст",
+  "improve_translation": "Побољшати транслатион",
+  "show_translation": "Схов преведени текст",
+
   "plant_height_from": "Висине од",
   "plant_height_to": "до",
   "plant_flowering_from": "Цветања од",
@@ -101,9 +133,9 @@
   "plant_leaf": "Лист",
   "plant_stem": "Стабло",
   "plant_habitat": "Станишта",
-  "plant_trivia": "Тривијалност",
   "plant_toxicity": "Токсичност",
   "plant_herbalism": "Траварство",
+  "plant_trivia": "Тривијалност",
 
   "taxonomy_superregnum": "домен",
   "taxonomy_regnum": "царство",

@@ -1,11 +1,31 @@
 {
+  "legend": "Legenda",
   "settings": "Asetukset",
   "feedback": "Palaute / Panos",
   "about": "Tietoja sovellus",
   "help": "Ohje",
 
+  "toxicity1": "myrkyllinen kasvi",
+  "toxicity2": "lievästi myrkyllinen kasvi",
+
   "pref_language": "Suosittu kieli",
   "my_region": "Oma alue",
+
+  "feedback_intro": "Olet osallistunut tähän sovellukseen, koska olet asentanut sen laitteeseen, kiitos. Jos etsit jotain muuta, tässä on muutamia vaihtoehtoja:",
+  "feedback_review": "Voit kirjoittaa positiivisen arvioinnin Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Miten osallistua",
+  "feedback_translate": "Voit ilmoittaa havaitusta virheestä tai virheestä tai lähettää uuden käännöksen omalle kielellesi.",
+  "feedback_submit_translate_data": "Paranna kukkien tietoja",
+  "feedback_submit_translate_app": "Paranna sovelluksen tarroja",
+    
+  "rate_question": "Onko tämä sovellus hyödyllinen?",
+  "rate_text": "Tämän sovelluksen laatijaa tukee käyttäjien positiivinen vastaus. Lähetä hänelle joitakin starflowersia Google Play Storen kautta.",
+  "rate_never": "Ei ikinä",
+  "rate_later": "Myöhemmin",
+  "rate": "Arvostelut",
+  "yes": "Joo",
+  "no": "Ei",
 
   "filter_color": "kukkien väri",
   "filter_habitat": "kasvupaikka",
@@ -28,7 +48,7 @@
   "petal_4": "4 tai vähemmän",
   "petal_5": "5",
   "petal_many": "yli 5",
-  "petal_bisymmetric": "vastakohtainen",
+  "petal_zygomorphic": "vastakohtainen",
 
   "europe": "Eurooppa",
   "africa": "Afrikka",
@@ -51,7 +71,7 @@
   "northeast_tropical_africa": "Koillis-trooppinen Afrikka",
   "south_tropical_africa": "Etelä-trooppinen Afrikka",
   "southern_africa": "Etelä-Afrikka",
-    "middle_atlantic_ocean": "Lähi-Atlantin valtameri",
+  "middle_atlantic_ocean": "Lähi-Atlantin valtameri",
   "western_indian_ocean": "Länsi-Intian valtameri",
   "eastern_asia": "Itä-Aasiassa",
   "mongolia": "Mongolia",
@@ -91,6 +111,18 @@
   "subantarctic_islands": "Subantarkkinsaaret",
   "antarctic_continent": "Etelämanner",
 
+  "list_info": "Valitse yksi",
+
+  "plant_info": "Tiedot",
+  "plant_gallery": "Kuvia",
+  "plant_taxonomy": "Taksonomia",
+  "plant_sources": "Lähteet",
+
+  "google_translate": "Käännetty Google Translate",
+  "show_original": "Näytä Englanti teksti",
+  "improve_translation": "Parantamaan käännösten",
+  "show_translation": "Näytä käännetty teksti",
+
   "plant_height_from": "Korkeus",
   "plant_height_to": "-",
   "plant_flowering_from": "Kukinta",
@@ -101,9 +133,9 @@
   "plant_leaf": "Lehdet",
   "plant_stem": "Varsi",
   "plant_habitat": "Kasvupaikka",
-  "plant_trivia": "Trivia",
   "plant_toxicity": "Myrkyllisyys",
   "plant_herbalism": "Herbalismi",
+  "plant_trivia": "Trivia",
 
   "taxonomy_superregnum": "Domeeni",
   "taxonomy_regnum": "Kunta",
@@ -114,12 +146,12 @@
   "taxonomy_tribus": "Tribus",
   "taxonomy_subtribus": "Alatribus",
   "taxonomy_genus": "Suku",
-  "taxonomy_subgenus": "Subgenus",
-  "taxonomy_sectio": "Sectio",
-  "taxonomy_subsectio": "Subsectio",
-  "taxonomy_serie": "Serie",
-  "taxonomy_subserie": "Subserie",
-  "taxonomy_supersectio": "Supersectio",  
+  "taxonomy_subgenus": "Alasuku",
+  "taxonomy_sectio": "Sektio",
+  "taxonomy_subsectio": "Alasektio",
+  "taxonomy_serie": "Sarja",
+  "taxonomy_subserie": "Alasarja",
+  "taxonomy_supersectio": "Supersektio",
   "taxonomy_species": "Laji",
   "taxonomy_unknown": "tuntematon"
 }

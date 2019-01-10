@@ -1,11 +1,31 @@
 {
+  "legend": "Legenda",
   "settings": "Nastavitve",
   "feedback": "Povratne informacije / Prispevek",
   "about": "O aplikaciji",
   "help": "Pomoč",
 
+  "toxicity1": "strupena rastlina",
+  "toxicity2": "nekoliko strupena rastlina",
+
   "pref_language": "Želeni jezik",
   "my_region": "Moja regija",
+
+  "feedback_intro": "Prispevali ste k tej aplikaciji, ker ste jo namestili v napravo, hvala. Če iščete nekaj več, si oglejte nekaj možnosti:",
+  "feedback_review": "V Google Play lahko napišete pozitivno oceno.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Kako prispevati",
+  "feedback_translate": "Lahko prijavite kakršno koli tipkarsko napako ali napako, ki ste jo našli, ali pošljete nov prevod v vaš jezik.",
+  "feedback_submit_translate_data": "Izboljšajte podatke o cvetju",
+  "feedback_submit_translate_app": "Izboljšajte oznake aplikacij",
+
+  "rate_question": "Je ta vloga v pomoč?",
+  "rate_text": "Avtor te aplikacije je podprt s pozitivnim odzivom uporabnikov. Prosimo, pošljite mu nekaj Starflowerjev v Google Play Store.",
+  "rate_never": "Nikoli",
+  "rate_later": "Kasneje",
+  "rate": "Mnenja",
+  "yes": "Ja",
+  "no": "Ne",
 
   "filter_color": "barva cvetov",
   "filter_habitat": "habitate",
@@ -28,7 +48,7 @@
   "petal_4": "4 ali manj",
   "petal_5": "5",
   "petal_many": "več kot 5",
-  "petal_bisymmetric": "zigomorfna",
+  "petal_zygomorphic": "zigomorfna",
 
   "europe": "Evropa",
   "africa": "Afrika",
@@ -91,19 +111,31 @@
   "subantarctic_islands": "Podantarktični otoki",
   "antarctic_continent": "Antarktična celina",
 
+  "list_info": "Izbrati eno",
+
+  "plant_info": "Informacije",
+  "plant_gallery": "Galerija",
+  "plant_taxonomy": "Taksonomija",
+  "plant_sources": "Viri",
+
+  "google_translate": "Prevedeno z Google Translate",
+  "show_original": "Prikaži angleško besedilo",
+  "improve_translation": "Izboljšati prevod",
+  "show_translation": "Pokaži prevedeno besedilo",
+
   "plant_height_from": "Višina",
   "plant_height_to": "-",
-  "plant_flowering_from": "Cvetoče od",
-  "plant_flowering_to": "do",
+  "plant_flowering_from": "Cvetoče:",
+  "plant_flowering_to": "-",
   "plant_flower": "Cvetje",
   "plant_inflorescence": "Socvetje",
   "plant_fruit": "Plod",
   "plant_leaf": "Listi",
   "plant_stem": "Steblo",
   "plant_habitat": "Habitat",
-  "plant_trivia": "Trivia",
   "plant_toxicity": "Toksičnost",
   "plant_herbalism": "Zeliščarstvo",
+  "plant_trivia": "Trivia",
 
   "taxonomy_superregnum": "Domena",
   "taxonomy_regnum": "Kraljestvo",

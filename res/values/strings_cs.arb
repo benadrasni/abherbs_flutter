@@ -1,11 +1,31 @@
 {
+  "legend": "Legenda",
   "settings": "Nastavení",
-  "feedback": "Připomínky / Příspěvky",
+  "feedback": "Připomínky",
   "about": "O aplikaci",
   "help": "Pomoc",
 
+  "toxicity1": "jedovatá rostlina",
+  "toxicity2": "mírně jedovatá rostlina",
+
   "pref_language": "Preferovaný jazyk",
   "my_region": "Moje oblast",
+
+  "feedback_intro": "Tuto aplikaci podporujete odkdy jste si ji nainstalovali na své mobilní zařízení, děkuji. Pokud hledáte jiné formy podpory, zde jsou některé možnosti:",
+  "feedback_review": "Můžete napsat pozitivní recenzi na Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Jak přispět",
+  "feedback_translate": "Můžete upozornit na gramatické a faktické chyby v textu, případně navrhnout lepší překlad jednotlivých květin nebo aplikace samotné na stránce whatsthatflower.com.",
+  "feedback_submit_translate_data": "Opravit chyby datech",
+  "feedback_submit_translate_app": "Opravit chyby v aplikaci",
+
+  "rate_question": "Líbí se vám aplikace?",
+  "rate_text": "Autora této aplikace motivuje pozitívny ohlas uživatelů. Pošlete mu, prosím, nejaké květiny (nejlépe hvězdníky) přes Google Play Store.",
+  "rate_never": "Nikdy",
+  "rate_later": "Později",
+  "rate": "Recenze",
+  "yes": "Ano",
+  "no": "Ne",
 
   "filter_color": "barva květů",
   "filter_habitat": "ekologie",
@@ -28,7 +48,7 @@
   "petal_4": "4 nebo méně",
   "petal_5": "5",
   "petal_many": "více než 5",
-  "petal_bisymmetric": "souměrný",
+  "petal_zygomorphic": "souměrný",
 
   "europe": "Evropa",
   "africa": "Afrika",
@@ -90,11 +110,23 @@
   "eastern_canada": "Východní Kanada",
   "subantarctic_islands": "Subantarktické ostrovy",
   "antarctic_continent": "Antarktický kontinent",
-  
-  "plant_height_from": "Výška od",
-  "plant_height_to": "do",
-  "plant_flowering_from": "Kvete od",
-  "plant_flowering_to": "do",
+
+  "list_info": "Vyber si jednu",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galerie",
+  "plant_taxonomy": "Taxonomie",
+  "plant_sources": "Zdroje",
+
+  "google_translate": "Přeloženo pomocí Google překladače",
+  "show_original": "Zobraz slovenský text",
+  "improve_translation": "Vylepšit překlad",
+  "show_translation": "Zobraz přeložený text",
+
+  "plant_height_from": "Výška:",
+  "plant_height_to": "-",
+  "plant_flowering_from": "Kvete:",
+  "plant_flowering_to": "-",
   "plant_flower": "Květ",
   "plant_inflorescence": "Květenství",
   "plant_fruit": "Plod",
@@ -103,6 +135,7 @@
   "plant_habitat": "Ekologie",
   "plant_toxicity": "Toxicita",
   "plant_herbalism": "Bylinářství",
+  "plant_trivia": "Zajímavosti",
 
   "taxonomy_superregnum": "doména",
   "taxonomy_regnum": "říše",

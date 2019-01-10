@@ -1,11 +1,31 @@
 {
+  "legend": "Jelmagyarázat",
   "settings": "Beállítások",
   "feedback": "Visszajelzés küldése / Hozzájárulás",
   "about": "Az alkalmazásról",
   "help": "Súgó",
 
+  "toxicity1": "mérgező növény",
+  "toxicity2": "enyhén mérgező növény",
+
   "pref_language": "Kedvenc nyelv",
   "my_region": "Saját régió",
+
+  "feedback_intro": "Hozzájárult az alkalmazáshoz, mivel telepítette azt a készülékére. Ha valami többet keres, itt van néhány lehetőség:",
+  "feedback_review": "Pozitív értékelést írhat a Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Hogyan járulhat hozzá",
+  "feedback_translate": "Bármelyik hibát vagy hibát észlelhet, vagy új fordítást nyújthat be az ön nyelvén.",
+  "feedback_submit_translate_data": "Javítani kell a virágadatokat",
+  "feedback_submit_translate_app": "Javítsa az alkalmazás címkéit",
+    
+  "rate_question": "Ez az alkalmazás hasznos?",
+  "rate_text": "A szerző a pozitív visszajelzésekből dolgozik. A Google Play Store-on keresztül csillagzással értékelheti/támogathatja a munkáját.",
+  "rate_never": "Soha",
+  "rate_later": "Később",
+  "rate": "Vélemények",
+  "yes": "Igen",
+  "no": "Nem",
 
   "filter_color": "a virágok színe",
   "filter_habitat": "élettér",
@@ -28,7 +48,7 @@
   "petal_4": "4 vagy kevesebb",
   "petal_5": "5",
   "petal_many": "több mint 5",
-  "petal_bisymmetric": "kétoldali (zigomorf)",
+  "petal_zygomorphic": "kétoldali",
 
   "europe": "Európa",
   "africa": "Afrika",
@@ -91,6 +111,18 @@
   "subantarctic_islands": "Szubantarktikai szigetek",
   "antarctic_continent": "Antarktiszi kontinens",
 
+  "list_info": "Válasszon egyet",
+
+  "plant_info": "Infó",
+  "plant_gallery": "Képtár",
+  "plant_taxonomy": "Taxonómia",
+  "plant_sources": "Források",
+
+  "google_translate": "Lefordítva a Google Translate",
+  "show_original": "Megjelenítése angol szöveg",
+  "improve_translation": "Javítani fordítás",
+  "show_translation": "Fordított szöveg megjelenítése",
+
   "plant_height_from": "Magasság",
   "plant_height_to": "-",
   "plant_flowering_from": "A virágzás időszaka",
@@ -101,9 +133,9 @@
   "plant_leaf": "Levelek",
   "plant_stem": "Szár",
   "plant_habitat": "Élettér",
-  "plant_trivia": "Apróságok",
   "plant_toxicity": "Méregtartalom",
   "plant_herbalism": "Gyógynövények",
+  "plant_trivia": "Apróságok",
 
   "taxonomy_superregnum": "Domén",
   "taxonomy_regnum": "Ország",

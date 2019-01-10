@@ -1,11 +1,31 @@
 {
+  "legend": "Legenda",
   "settings": "Ustawienia",
-  "feedback": "Komentarze / Wkład",
+  "feedback": "Komentarze",
   "about": "O aplikacji",
   "help": "Pomoc",
 
+  "toxicity1": "Roślina trująca",
+  "toxicity2": "Roślina umiarkowanie trująca",
+
   "pref_language": "Preferowany język",
   "my_region": "Mój region",
+
+  "feedback_intro": "Jeśli chcesz dać coś od siebie i przyczynić się do rozwoju aplikacji, masz kilka opcji do wyboru:",
+  "feedback_review": "Możesz przyznać aplikacji 5 gwiazdek i napisać pozytywną recenzję w Sklepie Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Jak wnieść wkład?",
+  "feedback_translate": "Możesz zgłosić literówkę, błąd lub stworzyć nowe tłumaczenie dla Twojego języka.",
+  "feedback_submit_translate_data": "Poprawienie informacji dot. kwiatów",
+  "feedback_submit_translate_app": "Poprawki tłumaczenia aplikacji",
+
+  "rate_question": "Czy uważasz, że aplikacja jest pomocna?",
+  "rate_text": "Wyrażając swoją opinię, dajesz Autorowi aplikacji chęć i motywację do jej dalszego rozwijania. Napisz proszę kilka miłych słów w Sklepie Play.",
+  "rate_never": "Nigdy",
+  "rate_later": "Później",
+  "rate": "Opinie",
+  "yes": "Tak",
+  "no": "Nie",
 
   "filter_color": "Kolor kwiatów",
   "filter_habitat": "Habitat",
@@ -28,7 +48,7 @@
   "petal_4": "4 lub mniej",
   "petal_5": "5",
   "petal_many": "Więcej niż 5",
-  "petal_bisymmetric": "Zygomorficzny",
+  "petal_zygomorphic": "Zygomorficzny",
 
   "europe": "Europa",
   "africa": "Afryka",
@@ -91,19 +111,31 @@
   "subantarctic_islands": "Wyspy Subantarctic",
   "antarctic_continent": "Kontynent Antarktyczny",
 
-  "plant_height_from": "Wysokość od",
-  "plant_height_to": "do",
-  "plant_flowering_from": "Kwitnie od",
-  "plant_flowering_to": "do",
+  "list_info": "Wybierz jeden",
+
+  "plant_info": "Informacje",
+  "plant_gallery": "Galeria",
+  "plant_taxonomy": "Systematyka",
+  "plant_sources": "Źródła",
+
+  "google_translate": "Przetłumaczono przy pomocy Google Translate",
+  "show_original": "Pokaż angielski tekst",
+  "improve_translation": "Popraw tłumaczenie",
+  "show_translation": "Pokaż przetłumaczony tekst",
+
+  "plant_height_from": "Wysokość:",
+  "plant_height_to": "-",
+  "plant_flowering_from": "Kwitnie:",
+  "plant_flowering_to": "-",
   "plant_flower": "Kwiaty",
   "plant_inflorescence": "Kwiatostany",
   "plant_fruit": "Owoce",
   "plant_leaf": "Liście",
   "plant_stem": "Łodyga",
   "plant_habitat": "Habitat",
-  "plant_trivia": "Ciekawostki",
   "plant_toxicity": "Toksyczność",
   "plant_herbalism": "Ziołolecznictwo",
+  "plant_trivia": "Ciekawostki",
 
   "taxonomy_superregnum": "Domena",
   "taxonomy_regnum": "Królestwo",

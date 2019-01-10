@@ -1,11 +1,31 @@
 {
+  "legend": "Legendă",
   "settings": "Setări",
   "feedback": "Feedback / Contribuţie",
   "about": "Despre",
   "help": "Ajutor",
 
+  "toxicity1": "plantă otrăvitoare",
+  "toxicity2": "plantă ușor otrăvitoare",
+
   "pref_language": "Limba preferată",
   "my_region": "Regiunea mea",
+
+  "feedback_intro": "Ați contribuit la această aplicație de când ați instalat-o pe dispozitiv, mulțumită. Dacă sunteți în căutarea pentru ceva mai mult, iată câteva opțiuni:",
+  "feedback_review": "Puteți scrie o recenzie pozitivă în Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Cum să contribuiți",
+  "feedback_translate": "Puteți raporta orice greșeală sau greșeală pe care ați găsit-o sau trimiteți o nouă traducere în limba dvs.",
+  "feedback_submit_translate_data": "Îmbunătățiți datele florii",
+  "feedback_submit_translate_app": "Îmbunătățiți etichetele aplicației",
+
+  "rate_question": "Este această aplicație utilă?",
+  "rate_text": "Autorul acestei aplicații este motivat de răspunsul pozitiv al utilizatorilor. Vă rugăm trimiți-i câteva flori stea via Google Play Store.",
+  "rate_never": "Niciodată",
+  "rate_later": "Mai tarziu",
+  "rate": "Review",
+  "yes": "Da",
+  "no": "Nu",
 
   "filter_color": "culoarea florilor",
   "filter_habitat": "habitatul",
@@ -28,7 +48,7 @@
   "petal_4": "4 sau mai puțin",
   "petal_5": "5",
   "petal_many": "mai mult de 5",
-  "petal_bisymmetric": "zygomorphic",
+  "petal_zygomorphic": "zygomorphic",
 
   "europe": "Europa",
   "africa": "Africa",
@@ -66,7 +86,7 @@
   "indochina": "Indo-China",
   "malesia": "Malesia",
   "papuasia": "Papuasia",
-    "australia": "Australia",
+  "australia": "Australia",
   "new_zealand": "Noua Zeelanda",
   "southwestern_pacific": "Sud-vestul Pacificului",
   "south_central_pacific": "Sud-central Pacificului",
@@ -91,6 +111,18 @@
   "subantarctic_islands": "Insulele subantarctice",
   "antarctic_continent": "Continentul Antarcticii",
 
+  "list_info": "Alege una",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galerie",
+  "plant_taxonomy": "Taxonomie",
+  "plant_sources": "Surse",
+
+  "google_translate": "Tradus cu Google Translate",
+  "show_original": ""Afișați textul English "",
+  "improve_translation": "Îmbunătățirea traducere",
+  "show_translation": "Afișați textul tradus",
+
   "plant_height_from": "Înălțimea de la",
   "plant_height_to": "la",
   "plant_flowering_from": "Înflorire",
@@ -101,9 +133,9 @@
   "plant_leaf": "Frunze",
   "plant_stem": "Tulpină",
   "plant_habitat": "Habitatul",
-  "plant_trivia": "Trivia",
   "plant_toxicity": "Toxicitate",
   "plant_herbalism": "Herbalism",
+  "plant_trivia": "Trivia",
 
   "taxonomy_superregnum": "Domeniu",
   "taxonomy_regnum": "Regn",

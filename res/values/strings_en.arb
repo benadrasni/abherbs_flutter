@@ -1,11 +1,31 @@
 {
+  "legend": "Legend",
   "settings": "Settings",
   "feedback": "Feedback",
   "about": "About",
   "help": "Help",
 
+  "toxicity1": "poisonous plant",
+  "toxicity2": "slightly poisonous plant",
+
   "pref_language": "Preferred language",
   "my_region": "My region",
+
+  "feedback_intro": "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:",
+  "feedback_review": "You can write a positive review in Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "How to contribute",
+  "feedback_translate": "You can report any typo or mistranslation you found or submit new translation for flower's data or application's labels at whatsthatflower.com.",
+  "feedback_submit_translate_data": "Improve flower's data",
+  "feedback_submit_translate_app": "Improve application's labels"
+  
+  "rate_question": "Is this app helpful?",
+  "rate_text": "Author of this application is fueled by positive response from the users. Please send him some starflowers through Google Play Store.",
+  "rate_never": "Never",
+  "rate_later": "Later",
+  "rate": "Review",
+  "yes": "Yes",
+  "no": "No",
 
   "filter_color": "colour",
   "filter_habitat": "habitat",
@@ -133,5 +153,5 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
   "taxonomy_species": "Species",
-  "taxonomy_unknown": "unknown"
+  "taxonomy_unknown": "unknown",
 }

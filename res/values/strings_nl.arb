@@ -1,11 +1,31 @@
 {
+  "legend": "Legenda",
   "settings": "Instellingen",
   "feedback": "Terugkoppeling / Bijdrage",
   "about": "Over de app",
   "help": "Helpen",
 
+  "toxicity1": "giftige plant",
+  "toxicity2": "lichtjes giftige plant",
+
   "pref_language": "Voorkeurstaal",
   "my_region": "Mijn regio",
+
+  "feedback_intro": "Sinds u de app geïnstalleerd heeft, draagt u bij aan de app. Dank u wel. Als u ons nóg meer wilt helpen, kunt u de volgende opties overwegen:",
+  "feedback_review": "U kunt een positieve beoordeling in Google Play zetten.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Hoe u kunt bijdragen",
+  "feedback_translate": "U kunt typefouten of verkeerde vertalingen melden of nieuwer vertalingen toevoegen op whatsthatflower.com",
+  "feedback_submit_translate_data": "Verbeter de gegevens over de bloemen",
+  "feedback_submit_translate_app": "Verbeter de kopjes in de app",
+
+  "rate_question": "Is deze applicatie handig?",
+  "rate_text": "Auteur van deze applicatie wordt gevoed door positieve reactie van de gebruikers. Stuur hem alsjeblieft enkele starflowers via Google Play Store.",
+  "rate_never": "Nooit",
+  "rate_later": "Later",
+  "rate": "Recensies",
+  "yes": "Ja",
+  "no": "Nee",
 
   "filter_color": "kleur van de bloemen",
   "filter_habitat": "standplaats",
@@ -28,7 +48,7 @@
   "petal_4": "4 of minder",
   "petal_5": "5",
   "petal_many": "meer dan 5",
-  "petal_bisymmetric": "tweezijdig symmetrisch",
+  "petal_zygomorphic": "tweezijdig symmetrisch",
 
   "europe": "Europa",
   "africa": "Afrika",
@@ -91,6 +111,18 @@
   "subantarctic_islands": "Subantarctic Islands",
   "antarctic_continent": "Antarctisch continent",
 
+  "list_info": "Kies er een",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galerij",
+  "plant_taxonomy": "Taxonomie",
+  "plant_sources": "Bronnen",
+
+  "google_translate": "Vertaald met Google Translate",
+  "show_original": "Toon Engels tekst",
+  "improve_translation": "Verbeter vertaling",
+  "show_translation": "Toon vertaalde tekst",
+
   "plant_height_from": "Hoogte van",
   "plant_height_to": "tot",
   "plant_flowering_from": "Bloeit van",
@@ -101,9 +133,9 @@
   "plant_leaf": "Bladeren",
   "plant_stem": "Stengel",
   "plant_habitat": "Standplaats",
-  "plant_trivia": "Weetjes",
   "plant_toxicity": "Toxiciteit",
   "plant_herbalism": "Geneeskundige toepassingen",
+  "plant_trivia": "Weetjes",
 
   "taxonomy_superregnum": "Domein",
   "taxonomy_regnum": "Rijk",

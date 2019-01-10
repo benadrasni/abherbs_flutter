@@ -1,12 +1,32 @@
 {
+  "legend": "Légende",
   "settings": "Paramètres",
-  "feedback": "Retour d'information / Contribution",
+  "feedback": "Retour d'information",
   "about": "À propos",
   "help": "Aide",
+
+  "toxicity2": "plante légèrement toxique",
+  "toxicity1": "plante toxique",
 
   "pref_language": "Préférence de langue",
   "my_region": "Ma région",
 
+  "rate_question": "Cette application est-elle utile?",
+  "rate_never": "Jamais",
+  "rate_later": "Plus tard",
+  "rate": "Avis",
+  "rate_text": "L'auteur de cette application est motivé par les réponses positives des utilisateurs. S'il vous plaît,  envoyez lui quelques fleurs étoiles via Google Play Store.",
+  "yes": "Oui",
+  "no": "Non",
+
+  "feedback_intro": "Vous avez contribué à cette application car vous l'avez installé sur votre appareil, merci. Si vous cherchez quelque chose de plus, voici quelques options:",
+  "feedback_review": "Vous pouvez écrire une critique positive dans Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Contribution",
+  "feedback_translate": "Vous pouvez signaler toute erreur de frappe ou erreur que vous avez trouvée ou vous envoyer une nouvelle traduction dans votre langue.",
+  "feedback_submit_translate_data": "Améliorer les données de la fleur",
+  "feedback_submit_translate_app": "Améliorer les étiquettes de l'application",
+    
   "filter_color": "couleur des fleurs",
   "filter_habitat": "habitats",
   "filter_petal": "nombre de pétales",
@@ -28,7 +48,7 @@
   "petal_4": "4 ou moins",
   "petal_5": "5",
   "petal_many": "plus de 5",
-  "petal_bisymmetric": "zygomorphie",
+  "petal_zygomorphic": "zygomorphie",
 
   "europe": "Europe",
   "africa": "Afrique",
@@ -92,6 +112,18 @@
   "subantarctic_islands": "Îles subantarctiques",
   "antarctic_continent": "Continent de l'Antarctique",
 
+  "list_info": "Sélectionnez en une",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galerie",
+  "plant_taxonomy": "Taxonomie",
+  "plant_sources": "Sources",
+
+  "google_translate": "Traduit avec Google Translate",
+  "show_original": "Afficher le texte en anglais",
+  "improve_translation": "Améliorer la traduction",
+  "show_translation": "Afficher le texte traduit",
+
   "plant_height_from": "Hauteur entre",
   "plant_height_to": "et",
   "plant_flowering_from": "Floraison de",
@@ -102,9 +134,9 @@
   "plant_leaf": "Feuilles",
   "plant_stem": "Tige",
   "plant_habitat": "Habitat",
-  "plant_trivia": "Bagatelles",
   "plant_toxicity": "Toxicité",
   "plant_herbalism": "Herboristerie",
+  "plant_trivia": "Bagatelles",
 
   "taxonomy_superregnum": "Domaine",
   "taxonomy_regnum": "Règne",
@@ -115,12 +147,12 @@
   "taxonomy_tribus": "Tribu",
   "taxonomy_subtribus": "Sous-tribu",
   "taxonomy_genus": "Genre",
-  "taxonomy_subgenus": "Subgenus",
-  "taxonomy_sectio": "Sectio",
-  "taxonomy_subsectio": "Subsectio",
-  "taxonomy_serie": "Serie",
-  "taxonomy_subserie": "Subserie",
-  "taxonomy_supersectio": "Supersectio",  
+  "taxonomy_subgenus": "Sous-genre",
+  "taxonomy_sectio": "Section",
+  "taxonomy_subsectio": "Sous-section",
+  "taxonomy_serie": "Série",
+  "taxonomy_subserie": "Sous-série",
+  "taxonomy_supersectio": "Super-section",
   "taxonomy_species": "Espèce",
   "taxonomy_unknown": "inconnu"
 }

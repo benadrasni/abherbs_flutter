@@ -1,11 +1,31 @@
 {
+  "legend": "אגדה",
   "settings": "הגדרות",
   "feedback": "משוב / תרומה",
   "about": "על היישום",
   "help": "עֶזרָה",
 
+  "toxicity1": "צמח רעיל",
+  "toxicity2": "צמח רעיל במקצת",
+
   "pref_language": "שפה מועדפת",
   "my_region": "אזור שלי",
+
+  "feedback_intro": "אתה כבר תורם ליישום זה מאז התקנת את זה על המכשיר שלך, תודה. אם אתה מחפש משהו נוסף, הנה כמה אפשרויות:",
+  "feedback_review": "תוכל לכתוב ביקורת חיובית ב- גוגל פליי",
+  "feedback_google_play": "גוגל פליי",
+  "feedback_title": "כיצד לתרום",
+  "feedback_translate": "תוכל לדווח על שגיאת הקלדה או השגיאה שמצאת או שלח תרגום חדש בשפה שלך",
+  "feedback_submit_translate_data": "שפר את נתוני הפרחים",
+  "feedback_submit_translate_app": "שפר את תוויות היישום",
+
+  "rate_question": "האם האפליקציה הזו מועילה?",
+  "rate_text": "המחבר של יישום זה מונעת על ידי תגובה חיובית של המשתמשים. שלח לו כמה כוכבים באמצעות חנות גוגל פליי",
+  "rate_never": "לעולם לא",
+  "rate_later": "יותר מאוחר",
+  "rate": "סקירה",
+  "yes": "כן",
+  "no": "לא",
 
   "filter_color": "צבע של פרחים",
   "filter_habitat": "בתי גידול",
@@ -15,6 +35,7 @@
   "color_white": "לבן",
   "color_yellow": "צהוב",
   "color_red": "אדום, ורוד",
+  "color_blue": "כחול, סגול",
   "color_green": "ירוק, חום, שחור",
 
   "habitat_meadow": "כרי דשא או מרעה",
@@ -27,7 +48,7 @@
   "petal_4": "4 או פחות",
   "petal_5": "5",
   "petal_many": "יותר מ 5",
-  "petal_bisymmetric": "לֹא סָדִיר",
+  "petal_zygomorphic": "לֹא סָדִיר",
 
   "europe": "אירופה",
   "africa": "אפריקה",
@@ -90,6 +111,18 @@
   "subantarctic_islands": "איי סובאנטארקטי",
   "antarctic_continent": "יבשת אנטארקטיקה",
 
+  "list_info": "לבחור אחד",
+
+  "plant_info": "מידע",
+  "plant_gallery": "גלריה",
+  "plant_taxonomy": "טקסונומיה",
+  "plant_sources": "מקורות",
+
+  "google_translate": "תורגם עם גוגל תרגום",
+  "show_original": "הצג טקסט באנגלית",
+  "improve_translation": "שפר את התרגום",
+  "show_translation": "הצג טקסט מתורגם",
+
   "plant_height_from": "גובה מ",
   "plant_height_to": "עד",
   "plant_flowering_from": "פריחה מ",
@@ -100,9 +133,9 @@
   "plant_leaf": "עלים",
   "plant_stem": "גבעול",
   "plant_habitat": "בית גידול",
-  "plant_trivia": "דְבָרִים בְּטֵלִים",
   "plant_toxicity": "רַעֲלָנוּת",
   "plant_herbalism": "צמחי מרפא",
+  "plant_trivia": "דְבָרִים בְּטֵלִים",
 
   "taxonomy_superregnum": "על-ממלכה",
   "taxonomy_regnum": "ממלכה",
@@ -110,7 +143,7 @@
   "taxonomy_ordo": "סדרה",
   "taxonomy_familia": "משפחה",
   "taxonomy_subfamilia": "תת־משפחה",
-  "taxonomy_tribus": "Tribe",
+  "taxonomy_tribus": "שבט",
   "taxonomy_subtribus": "Subtribe",
   "taxonomy_genus": "סוג",
   "taxonomy_subgenus": "Subgenus",

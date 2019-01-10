@@ -1,11 +1,31 @@
 {
+  "legend": "Legende",
   "settings": "Innstillinger",
-  "feedback": "Tilbakemelding / Bidrag",
+  "feedback": "Tilbakemelding",
   "about": "Om apper",
   "help": "Hjelp",
 
+  "toxicity1": "giftig plante",
+  "toxicity2": "litt giftig plante",
+
   "pref_language": "Foretrukket Språk",
   "my_region": "Min region",
+
+  "feedback_intro": "Du har bidratt til dette programmet siden du har installert det på enheten, takk. Hvis du leter etter noe mer, er det noen alternativer:",
+  "feedback_review": "Du kan skrive en positiv anmeldelse i Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Hvordan bidra",
+  "feedback_translate": "Du kan rapportere hvilken som helst skrivefeil eller feil du fant eller sende inn ny oversettelse på ditt språk.",
+  "feedback_submit_translate_data": "Forbedre blomstens data",
+  "feedback_submit_translate_app": "Forbedre programmets etiketter",
+
+  "rate_question": "Er dette programmet nyttig?",
+  "rate_text": "Forfatteren av denne søknaden er drevet av positivt svar fra brukerne. Send ham noen stjerneblomster via Google Play Butikk.",
+  "rate_never": "Aldri",
+  "rate_later": "Seinere",
+  "rate": "Anmeldelser",
+  "yes": "Ja",
+  "no": "Nei",
 
   "filter_color": "farge på blomster",
   "filter_habitat": "voksested",
@@ -28,7 +48,7 @@
   "petal_4": "4 eller mindre",
   "petal_5": "5",
   "petal_many": "mer enn 5",
-  "petal_bisymmetric": "zygomorphic",
+  "petal_zygomorphic": "zygomorphic",
 
   "europe": "Europa",
   "africa": "Afrika",
@@ -90,6 +110,18 @@
   "eastern_canada": "Øst-Canada",
   "subantarctic_islands": "Subantarctic Islands",
   "antarctic_continent": "Antarktis-kontinentet",
+
+  "list_info": "Plukk en",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galleri",
+  "plant_taxonomy": "Taksonomi",
+  "plant_sources": "Referanser",
+
+  "google_translate": "Oversatt med Google Trans",
+  "show_original": "Vis engelsk tekst",
+  "improve_translation": "Forbedre oversettelse",
+  "show_translation": "Vis oversatt tekst",
 
   "plant_height_from": "Høyde",
   "plant_height_to": "-",

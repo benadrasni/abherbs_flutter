@@ -1,11 +1,31 @@
 {
+  "legend": "Legenda",
   "settings": "Nustatymai",
   "feedback": "Grįžtamasis ryšys / Indėlis",
   "about": "Apie paraišką",
   "help": "Padėkite",
 
+  "toxicity1": "nuodingas augalas",
+  "toxicity2": "šiek tiek nuodingas augalas",
+
   "pref_language": "Pageidautina kalba",
   "my_region": "Mano regionas",
+
+  "feedback_intro": "Jūs prisidėjote prie šios programos, nes ją įdiegėte savo prietaise. Jei ieškote ko nors daugiau, čia pateikiamos kelios parinktys:",
+  "feedback_review": "Google Play galite parašyti teigiamą apžvalgą.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Kaip prisidėti",
+  "feedback_translate": "Galite pranešti apie rastą klaidą ar klaidą arba pateikti naują vertimą į savo kalbą.",
+  "feedback_submit_translate_data": "Pagerinkite gėlių duomenis",
+  "feedback_submit_translate_app": "Pagerinti programos etiketes",
+
+  "rate_question": "Ar šią programą naudinga?",
+  "rate_text": "Autorius šioje paraiškoje kurstė teigiamą atsakymą iš vartotojų. Prašome siųsti jam šiek tiek starflowers per Google Play Store.",
+  "rate_never": "Niekada",
+  "rate_later": "Vėliau",
+  "rate": "Apžvalga",
+  "yes": "Taip",
+  "no": "Ne",
 
   "filter_color": "spalva gėlės",
   "filter_habitat": "buveinių",
@@ -28,7 +48,7 @@
   "petal_4": "4 arba mažiau",
   "petal_5": "5",
   "petal_many": "daugiau nei 5",
-  "petal_bisymmetric": "nereguliarus",
+  "petal_zygomorphic": "nereguliarus",
 
   "europe": "Europa",
   "africa": "Afrika",
@@ -91,6 +111,18 @@
   "subantarctic_islands": "Subartkartinės salos",
   "antarctic_continent": "Antarkties žemynas",
 
+  "list_info": "Pasirinkti vieną",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galerija",
+  "plant_taxonomy": "Taksonomija",
+  "plant_sources": "Šaltiniai",
+
+  "google_translate": "Išvertus su Google Translate",
+  "show_original": "Rodyti tekstas anglų kalba",
+  "improve_translation": "Pagerinti vertimą",
+  "show_translation": "Rodyti išverstas tekstas",
+
   "plant_height_from": "Aukštis",
   "plant_height_to": "-",
   "plant_flowering_from": "Žydėjimas nuo",
@@ -101,9 +133,9 @@
   "plant_leaf": "Lapai",
   "plant_stem": "Stiebas",
   "plant_habitat": "Buveinė",
-  "plant_trivia": "Obuolys",
   "plant_toxicity": "Toksiškumas",
   "plant_herbalism": "Žolininkystė",
+  "plant_trivia": "Obuolys",
 
   "taxonomy_superregnum": "Domenas",
   "taxonomy_regnum": "Karalystė",

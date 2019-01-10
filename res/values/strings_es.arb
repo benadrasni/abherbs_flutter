@@ -1,15 +1,35 @@
 {
+  "legend": "Leyenda",
   "settings": "Configuración",
   "feedback": "Sugerencias / Contribución",
   "about": "Acerca de",
   "help": "Ayuda",
 
+  "toxicity1": "planta venenosa",
+  "toxicity2": "planta ligeramente venenosa",
+
+  "feedback_intro": "Ha estado contribuyendo a esta aplicación desde que la ha instalado en su dispositivo, gracias. Si está buscando algo más, aquí hay algunas opciones:",
+  "feedback_review": "Puedes escribir una crítica positiva en Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Cómo contribuir",
+  "feedback_translate": "Puede reportar cualquier error tipográfico o error que encontró o enviar una nueva traducción en su idioma.",
+  "feedback_submit_translate_data": "Mejorar los datos de la flor.",
+  "feedback_submit_translate_app": "Mejorar las etiquetas de la aplicación.",
+
   "pref_language": "Idioma preferido",
   "my_region": "Mi región",
 
-  "filter_color": "color de la flor",
+  "rate_question": "¿Es útil esta aplicación?",
+  "rate_never": "Nunca",
+  "rate_later": "Más tarde",
+  "rate": "Opinione",
+  "rate_text": "Al autor de esta aplicación le motivan las reacciones positivas de los usuarios. Mándele, por favor, unas flores de la estrella a través del Google Play Store.",
+  "yes": "Sí",
+  "no": "No",
+
+  "filter_color": "color",
   "filter_habitat": "localidad",
-  "filter_petal": "número de pétalos",
+  "filter_petal": "pétalo",
   "filter_distribution": "distribución",
 
   "color_white": "blanco",
@@ -28,7 +48,7 @@
   "petal_4": "4 o menos",
   "petal_5": "5",
   "petal_many": "más de 5",
-  "petal_bisymmetric": "zigomorfo",
+  "petal_zygomorphic": "zigomorfo",
 
   "europe": "Europa",
   "africa": "África",
@@ -90,7 +110,19 @@
   "eastern_canada": "Este de Canadá",
   "subantarctic_islands": "Islas Subantárticas",
   "antarctic_continent": "Continente Antártico",
-  
+
+  "list_info": "Elige una",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galería",
+  "plant_taxonomy": "Taxonomía",
+  "plant_sources": "Fuentes",
+
+  "google_translate": "Traducido con Google Traductor",
+  "show_original": "Mostrar texto en inglés",
+  "improve_translation": "Mejorar la traducción",
+  "show_translation": "Mostrar texto traducido",
+
   "plant_height_from": "Altura desde",
   "plant_height_to": "hasta",
   "plant_flowering_from": "Floración desde",
@@ -103,6 +135,7 @@
   "plant_habitat": "Localidad",
   "plant_toxicity": "Toxicidad",
   "plant_herbalism": "Herboristería",
+  "plant_trivia": "Trivialidades",
 
   "taxonomy_superregnum": "dominio",
   "taxonomy_regnum": "reino",

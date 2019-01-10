@@ -1,11 +1,31 @@
 {
+  "legend": "Legenda",
   "settings": "Pengaturan",
   "feedback": "Umpan balik / Kontribusi",
   "about": "Tentang",
   "help": "Membantu",
 
+  "toxicity1": "tanaman beracun",
+  "toxicity2": "sedikit beracun tanaman",
+
   "pref_language": "Bahasa pilihan",
   "my_region": "Daerah saya",
+
+  "feedback_intro": "Anda telah berkontribusi untuk aplikasi ini karena Anda telah menginstalnya di perangkat Anda, terima kasih. Jika Anda mencari sesuatu yang lebih, berikut adalah beberapa opsi:",
+  "feedback_review": "Anda dapat menulis ulasan positif di Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Bagaimana cara berkontribusi",
+  "feedback_translate": "Anda dapat melaporkan kesalahan ketik atau kesalahan apa pun yang Anda temukan atau kirim terjemahan baru dalam bahasa Anda.",
+  "feedback_submit_translate_data": "Perbaiki data bunga",
+  "feedback_submit_translate_app": "Tingkatkan label aplikasi",
+    
+  "rate_question": "Apakah aplikasi ini bermanfaat?",
+  "rate_text": "Penulis aplikasi ini didorong oleh respon positif dari pengguna. Kirimkan dia beberapa bunga bintang melalui Google Play Store.",
+  "rate_never": "Tak pernah",
+  "rate_later": "Kemudian",
+  "rate": "Ulasan",
+  "yes": "iya nih",
+  "no": "Tidak",
 
   "filter_color": "warna bunga",
   "filter_habitat": "habitat",
@@ -28,7 +48,7 @@
   "petal_4": "4 atau kurang",
   "petal_5": "5",
   "petal_many": "Lebih dari 5",
-  "petal_bisymmetric": "tidak beraturan",
+  "petal_zygomorphic": "tidak beraturan",
 
   "europe": "Eropa",
   "africa": "Afrika",
@@ -91,6 +111,18 @@
   "subantarctic_islands": "Kepulauan Subantartika",
   "antarctic_continent": "Benua Antartika",
 
+  "list_info": "Pilih salah satu",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galeri",
+  "plant_taxonomy": "Taksonomi",
+  "plant_sources": "Sumber",
+
+  "google_translate": "Diterjemahkan dengan Google Terjemahan",
+  "show_original": "Tampilkan teks bahasa Inggris",
+  "improve_translation": "Perbaiki terjemahan",
+  "show_translation": "Tampilkan teks terjemahan",
+
   "plant_height_from": "Tinggi dari",
   "plant_height_to": "sampai",
   "plant_flowering_from": "Berbunga dari",
@@ -101,9 +133,9 @@
   "plant_leaf": "Daun",
   "plant_stem": "Batang",
   "plant_habitat": "Habitat",
-  "plant_trivia": "Trivia",
   "plant_toxicity": "Toksisitas",
   "plant_herbalism": "Herbalism",
+  "plant_trivia": "Trivia",
 
   "taxonomy_superregnum": "Domain",
   "taxonomy_regnum": "Kingdom",

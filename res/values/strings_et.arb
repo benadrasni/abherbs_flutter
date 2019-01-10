@@ -1,11 +1,31 @@
 {
+  "legend": "Legend",
   "settings": "Reguleerimine",
   "feedback": "Tagasiside / Panus",
   "about": "Rakenduse kohta",
   "help": "Appi",
 
+  "toxicity1": "mürgine taim",
+  "toxicity2": "veidi mürgine taim",
+
   "pref_language": "Eelistatud keel",
   "my_region": "Minu regioon",
+
+  "feedback_intro": "Tänu sellele, et olete selle seadmesse installinud, olete sellele rakendusele kaasa aidanud. Kui otsite midagi muud, on siin mõned võimalused:",
+  "feedback_review": "Google Play saate kirjutada positiivse ülevaate.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Kuidas aidata",
+  "feedback_translate": "Saate teatada mis tahes leitud veast või veast või esitada uue tõlke oma keelde.",
+  "feedback_submit_translate_data": "Parandage lilli andmeid",
+  "feedback_submit_translate_app": "Parandage rakenduse sildid",
+
+  "rate_question": "See app kasulik?",
+  "rate_text": "Autor käesoleva taotluse toidab positiivse vastuse kasutajatele. Palun saatke talle mõned starflowers Google Play Store.",
+  "rate_never": "Mitte kunagi",
+  "rate_later": "Pärast",
+  "rate": "Arvustus",
+  "yes": "Jah",
+  "no": "Ei",
 
   "filter_color": "värvi lilled",
   "filter_habitat": "elupaikade",
@@ -28,7 +48,7 @@
   "petal_4": "4 või vähem",
   "petal_5": "5",
   "petal_many": "rohkem kui 5",
-  "petal_bisymmetric": "ebaregulaarne",
+  "petal_zygomorphic": "ebaregulaarne",
 
   "europe": "Euroopa",
   "africa": "Aafrika",
@@ -91,6 +111,18 @@
   "subantarctic_islands": "Subantkartised saared",
   "antarctic_continent": "Antarktika mandril",
 
+  "list_info": "Vali üks",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galerii",
+  "plant_taxonomy": "Taksonoomia",
+  "plant_sources": "Allikad",
+
+  "google_translate": "Tõlgitud Google Translate",
+  "show_original": "Näita ingliskeelne tekst",
+  "improve_translation": "Parandada tõlge",
+  "show_translation": "Kuva tõlgitud tekst",
+
   "plant_height_from": "Kõrgus",
   "plant_height_to": "-",
   "plant_flowering_from": "Õitsemine",
@@ -101,9 +133,9 @@
   "plant_leaf": "Lehed",
   "plant_stem": "Vars",
   "plant_habitat": "Elupaik",
-  "plant_trivia": "Tühiasi",
   "plant_toxicity": "Mürgisus",
   "plant_herbalism": "Raviteaduse",
+  "plant_trivia": "Tühiasi",
 
   "taxonomy_superregnum": "Domeen",
   "taxonomy_regnum": "Riik",

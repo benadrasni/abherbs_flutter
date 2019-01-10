@@ -1,11 +1,31 @@
 {
+  "legend": "伝説",
   "settings": "設定",
-  "feedback": "フィードバック / 貢献",
+  "feedback": "フィードバック",
   "about": "約",
   "help": "ヘルプ",
 
+  "toxicity1": "有毒植物",
+  "toxicity2": "わずかに有毒な植物",
+
   "pref_language": "優先言語e",
   "my_region": "私の地域",
+
+  "feedback_intro": "デバイスにインストールしたので、このアプリケーションに貢献しました。ありがとうございます。 あなたがもっと何かを探しているなら、いくつかのオプションがあります：",
+  "feedback_review": "Google Playで肯定的なレビューを書くことができます。",
+  "feedback_google_play": "グーグルプレイ",
+  "feedback_title": "貢献する方法",
+  "feedback_translate": "誤植や誤りを報告したり、新しい翻訳をあなたの言語で提出することができます。",
+  "feedback_submit_translate_data": "花のデータを改善する",
+  "feedback_submit_translate_app": "アプリケーションのラベルを改善する",
+
+  "rate_question": "このアプリケーションは役に立ちましたか？",
+  "rate_text": "このアプリケーションの作成者は、ユーザーからの肯定的な応答によって促進されます。 Google Playストアでスターフラワーを送ってください。",
+  "rate_never": "絶対に",
+  "rate_later": "後で",
+  "rate": "レビュー",
+  "yes": "はい",
+  "no": "いいえ",
 
   "filter_color": "花の色",
   "filter_habitat": "生息地",
@@ -28,7 +48,7 @@
   "petal_4": "4以下",
   "petal_5": "5",
   "petal_many": "以上5",
-  "petal_bisymmetric": "不規則な",
+  "petal_zygomorphic": "不規則な",
 
   "europe": "ヨーロッパ",
   "africa": "アフリカ",
@@ -91,6 +111,18 @@
   "subantarctic_islands": "亜南極諸島",
   "antarctic_continent": "南極大陸",
 
+  "list_info": "一つを選ぶ",
+
+  "plant_info": "インフォ",
+  "plant_gallery": "ギャラリー",
+  "plant_taxonomy": "分類学",
+  "plant_sources": "出典",
+
+  "google_translate": "Google翻訳で翻訳された",
+  "show_original": "英語のテキストを表示する",
+  "improve_translation": "翻訳を改善する",
+  "show_translation": "翻訳されたテキストを表示する",
+
   "plant_height_from": "高さ",
   "plant_height_to": "-",
   "plant_flowering_from": "開花",
@@ -101,9 +133,9 @@
   "plant_leaf": "葉",
   "plant_stem": "茎",
   "plant_habitat": "生息地",
-  "plant_trivia": "トリビア",
   "plant_toxicity": "毒性",
   "plant_herbalism": "本草学",
+  "plant_trivia": "トリビア",
 
   "taxonomy_superregnum": "ドメイン",
   "taxonomy_regnum": "界",

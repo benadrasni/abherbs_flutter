@@ -1,12 +1,32 @@
 {
+  "legend": "مفتاح",
   "settings": "إعدادات",
   "feedback": "تعليق",
   "about": "حول",
   "help": "مساعدة",
-  
+
+  "toxicity1": "نبات سام",
+  "toxicity2": "نبات سام قليلا",
+
   "pref_language": "اللغة المفضلة",
   "my_region": "منطقتي",
-  
+      
+  "feedback_intro": "لقد ساهمت في هذا التطبيق منذ تثبيته على جهازك ، شكرًا. إذا كنت تبحث عن شيء أكثر ، فإليك بعض الخيارات:",
+  "feedback_review": "يمكنك كتابة تعليق إيجابي في تطبيقات جوجل",
+  "feedback_google_play": "تطبيقات جوجل",
+  "feedback_title": "كيف تساهم",
+  "feedback_translate": "يمكنك الإبلاغ عن أي خطأ مطبعي أو خطأ وجدته أو قدم ترجمة جديدة بلغتك.",
+  "feedback_submit_translate_data": "تحسين بيانات الزهور",
+  "feedback_submit_translate_app": "تحسين تسميات التطبيق"      
+
+  "rate_question": "هل هذا التطبيق مفيد؟",
+  "rate_text": "مؤلف هذا التطبيق يقدر ردود الفعل إيجابية من المستخدمين. الرجاء ارسال بعض ستارفلورز له من خلال متجر غوغل بلاي.",
+  "rate_never": "أبدا",
+  "rate_later": "في وقت لاحق",
+  "rate": "إعادة النظر",
+  "yes": "نعم فعلا",
+  "no": "لا",
+
   "filter_color": "لون الزهور",
   "filter_habitat": "موطن",
   "filter_petal": "عدد البتلات",
@@ -28,7 +48,7 @@
   "petal_4": "أربعة أو أقل",
   "petal_5": "خمسة",
   "petal_many": "أكثر من خمسة",
-  "petal_bisymmetric": "غير منتظم",
+  "petal_zygomorphic": "غير منتظم",
 
   "europe": "أوروبا",
   "africa": "أفريقيا",
@@ -90,6 +110,18 @@
   "eastern_canada": "شرق كندا",
   "subantarctic_islands": "جزر سوبنتاركتيك",
   "antarctic_continent": "القارة القطبية الجنوبية",
+
+  "list_info": "إختر واحدة",
+
+  "plant_info": "معلومات",
+  "plant_gallery": "صالة عرض",
+  "plant_taxonomy": "علم التصنيف",
+  "plant_sources": "مصادر",
+  
+  "google_translate": "تمت الترجمة مع الترجمة من غوغل",
+  "show_original": "عرض النص الإنكليزي",
+  "improve_translation": "تحسين الترجمة",
+  "show_translation": "عرض النص المترجم",
 
   "plant_height_from": "الارتفاع من",
   "plant_height_to": "إلى",

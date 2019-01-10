@@ -1,15 +1,35 @@
 {
+  "legend": "Legende",
   "settings": "Einstellungen",
   "feedback": "Feedback / Beitrag",
   "about": "Über",
   "help": "Hilfe",
 
+  "toxicity1": "giftige Pflanze",
+  "toxicity2": "leicht giftige Pflanze",
+
   "pref_language": "Bevorzugte Sprache",
   "my_region": "Meine Gegend",
 
+  "feedback_intro": "Sie haben zu dieser Anwendung beigetragen, seit Sie diese auf Ihrem Gerät installiert haben, vielen Dank. Wenn Sie noch mehr tun möchten, haben Sie folgende Möglichkeiten:",
+  "feedback_review": "Sie können eine positive Bewertung in Google Play schreiben.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Wie kann ich dazu beitragen?",
+  "feedback_translate": "Sie können Tippfehler oder falsche Übersetzungen melden, oder eine neue Übersetzung in Ihrer Sprache einreichen.",
+  "feedback_submit_translate_data": "Verbessere die Daten der Blume",
+  "feedback_submit_translate_app": "Verbessere den Text der Anwendung",  
+
+  "rate_question": "Ist diese Anwendung hilfreich?",
+  "rate_never": "Niemals ",
+  "rate_later": "Später",
+  "rate": "Bewertung",
+  "rate_text": "Der Autor dieser App wird durch positive Rückmeldungen der Benutzer  beflügelt. Bitte senden Sie ihm doch einen Sterne-Blumenstrauß über den Google Play Store.",
+  "yes": "Ja",
+  "no": "Nein",
+
   "filter_color": "Blütenfarbe",
   "filter_habitat": "Habitat",
-  "filter_petal": "Anzahl der Blütenblätter",
+  "filter_petal": "Blütenblätter",
   "filter_distribution": "Vorkommen",
 
   "color_white": "Weiß",
@@ -28,7 +48,7 @@
   "petal_4": "höchstens 4",
   "petal_5": "5",
   "petal_many": "mehr als 5",
-  "petal_bisymmetric": "dorsiventrale",
+  "petal_zygomorphic": "dorsiventrale",
 
   "europe": "Europa",
   "africa": "Afrika",
@@ -90,7 +110,19 @@
   "eastern_canada": "Östliches Kanada",
   "subantarctic_islands": "Subantarktische Inseln",
   "antarctic_continent": "Antarktischer Kontinent",
-  
+
+  "list_info": "Auswahl",
+
+  "plant_info": "Info",
+  "plant_gallery": "Gallerie",
+  "plant_taxonomy": "Taxonomy",
+  "plant_sources": "Quellen",
+
+  "google_translate": "Übersetzt mit Google Translate",
+  "show_original": "Englischen Text anzeigen",
+  "improve_translation": "Übersetzung verbessern",
+  "show_translation": "Übersetzten Text anzeigen",
+
   "plant_height_from": "Höhe",
   "plant_height_to": "-",
   "plant_flowering_from": "Blütezeit",
@@ -111,15 +143,15 @@
   "taxonomy_ordo": "Ordnung",
   "taxonomy_familia": "Familie",
   "taxonomy_subfamilia": "Unterfamilie",
-  "taxonomy_tribus": "Stamm",
-  "taxonomy_subtribus": "Unterstamm",
+  "taxonomy_tribus": "Tribus",
+  "taxonomy_subtribus": "Untertribus",
   "taxonomy_genus": "Gattung",
-  "taxonomy_subgenus": "Subgenus",
-  "taxonomy_sectio": "Sectio",
-  "taxonomy_subsectio": "Subsectio",
+  "taxonomy_subgenus": "Untergattung",
+  "taxonomy_sectio": "Sektion",
+  "taxonomy_subsectio": "Untersektion",
   "taxonomy_serie": "Serie",
-  "taxonomy_subserie": "Subserie",
-  "taxonomy_supersectio": "Supersectio",
+  "taxonomy_subserie": "Unterserie",
+  "taxonomy_supersectio": "Supersektion",
   "taxonomy_species": "Art",
   "taxonomy_unknown": "unbekannt"
 }

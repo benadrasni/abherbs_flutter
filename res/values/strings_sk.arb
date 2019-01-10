@@ -1,11 +1,31 @@
 {
+  "legend": "Legenda",
   "settings": "Nastavenia",
   "feedback": "Pripomienky",
   "about": "O aplikácii",
   "help": "Pomoc",
 
+  "toxicity1": "jedovatá rastlina",
+  "toxicity2": "mierne jedovatá rastlina",
+
   "pref_language": "Preferovaný jazyk",
   "my_region_title": "Moja oblasť",
+
+  "feedback_intro": "Túto aplikáciu podporujete odkedy ste si ju nainštalovali na svoje mobilné zariadenie, ďakujem. Ak hľadáte iné formy podpory, tu sú niektoré možnosti:",
+  "feedback_review": "Môžete napísať pozitívnu recenziu na Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Ako prispieť",
+  "feedback_translate": "Môžete upozorniť na gramatické a faktické chyby v texte alebo priamo v aplikácii na stránke whatsthatflower.com.",
+  "feedback_submit_translate_data": "Opraviť chyby v dátach",
+  "feedback_submit_translate_app": "Opraviť chyby v aplikácii",
+
+  "rate_question": "Je táto aplikácia užitočná?",
+  "rate_text": "Autora tejto aplikácie motivuje pozitívny ohlas použivateľov. Pošlite mu, prosím, nejaké kvetiny (najlepšie hviezdice) cez Google Play Store.",
+  "rate_never": "Nikdy",
+  "rate_later": "Neskôr",
+  "rate": "Recenzia",
+  "yes": "Áno",
+  "no": "Nie",
 
   "filter_color": "farba kvetov",
   "filter_habitat": "lokalita",
@@ -29,7 +49,7 @@
   "petal_4": "4 alebo menej",
   "petal_5": "5",
   "petal_many": "viac ako 5",
-  "petal_bisymmetric": "súmerný",
+  "petal_zygomorphic": "súmerný",
 
   "europe": "Európa",
   "africa": "Afrika",
@@ -91,6 +111,18 @@
   "southern_south_america": "Juh Južnej Ameriky",
   "eastern_canada": "Východná Kanada",
 
+  "list_info": "Vyber si jednu",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galéria",
+  "plant_taxonomy": "Taxonómia",
+  "plant_sources": "Zdroje",
+
+  "google_translate": "Preložené pomocou Google prekladača",
+  "show_original": "Ukáž anglický text",
+  "improve_translation": "Vylepšiť preklad",
+  "show_translation": "Ukáž preložený text",
+
   "plant_height_from": "Výška:",
   "plant_height_to": "-",
   "plant_flowering_from": "Kvitne:",
@@ -103,6 +135,7 @@
   "plant_habitat": "Lokalita",
   "plant_toxicity": "Toxicita",
   "plant_herbalism": "Bylinkárstvo",
+  "plant_trivia": "Zaujímavosti",
 
   "taxonomy_superregnum": "doména",
   "taxonomy_regnum": "ríša",

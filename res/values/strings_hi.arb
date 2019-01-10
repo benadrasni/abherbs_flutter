@@ -1,11 +1,31 @@
 {
+  "legend": "किंवदंती",
   "settings": "सेटिंग्स",
   "feedback": "प्रतिक्रिया",
   "about": "के बारे में",
   "help": "मदद",
 
+  "toxicity1": "जहरीला पौधा",
+  "toxicity2": "थोड़ा जहरीला पौधा",
+
   "pref_language": "पसंदीदा भाषा",
   "my_region": "मेरा क्षेत्र",
+
+  "feedback_intro": "उद्यान या खेत",
+  "feedback_review": "चारागाह​ या घास के मैदान",
+  "feedback_google_play": "वनप्रदेश​ या जंगल",
+  "feedback_title": "पेड़ या झाड़ियाँ",
+  "feedback_translate": "बंजर​ या झील",
+  "feedback_submit_translate_data": "फूल के डेटा में सुधार",
+  "feedback_submit_translate_app": "एप्लिकेशन के लेबल में सुधार करें",
+
+  "rate_question": "क्या यह एप्लिकेशन सहायक है?",
+  "rate_text": "इस एप्लिकेशन के लेखक उपयोगकर्ताओं से सकारात्मक प्रतिक्रिया से प्रेरित हैं। कृपया उसे Google Play Store के माध्यम से कुछ स्टारफ्लॉवर भेजें।",
+  "rate_never": "कभी नहीँ",
+  "rate_later": "बाद में",
+  "rate": "समीक्षाएं",
+  "yes": "हाँ",
+  "no": "नहीं",
 
   "filter_color": "फूलों का रंग",
   "filter_habitat": "पर्यावास",
@@ -28,7 +48,7 @@
   "petal_4": "४ या उससे कम",
   "petal_5": "५",
   "petal_many": "५ से अधिक",
-  "petal_bisymmetric": "अनियमित",
+  "petal_zygomorphic": "अनियमित",
 
   "europe": "यूरोप",
   "africa": "अफ्रीका",
@@ -91,6 +111,18 @@
   "subantarctic_islands": "Subantarctic द्वीप समूह",
   "antarctic_continent": "अंटार्कटिक महाद्वीप",
 
+  "list_info": "एक चुनें",
+
+  "plant_info": "जानकारी",
+  "plant_gallery": "गलियारा",
+  "plant_taxonomy": "वर्गीकरण",
+  "plant_sources": "स्रोत",
+
+  "google_translate": "पर्यावास",
+  "show_original": "अंग्रेज़ी  टेक्स्ट दिखाएं",
+  "improve_translation": "अनुवाद में सुधार करें",
+  "show_translation": "अनुवादित टेक्स्ट दिखाएं",
+
   "plant_height_from": "ऊँचाई से",
   "plant_height_to": "तक",
   "plant_flowering_from": "से फूल",
@@ -101,9 +133,9 @@
   "plant_leaf": "पत्ते",
   "plant_stem": "तना",
   "plant_habitat": "पर्यावास",
-  "plant_trivia": "सामान्य ज्ञान",
   "plant_toxicity": "आविषता",
   "plant_herbalism": "जड़ी-बूटी चिकित्सा",
+  "plant_trivia": "सामान्य ज्ञान",
 
   "taxonomy_superregnum": "कार्यक्षेत्र",
   "taxonomy_regnum": "राज्य",

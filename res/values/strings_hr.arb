@@ -1,11 +1,31 @@
 {
+  "legend": "Legenda",
   "settings": "Postavke",
-  "feedback": "Povratne informacije / Doprinos",
+  "feedback": "Povratne informacije",
   "about": "O aplikaciji",
   "help": "Pomoć",
 
+  "toxicity1": "otrovna biljka",
+  "toxicity2": "blago otrovna biljka",
+
   "pref_language": "Preferirani jezik",
   "my_region": "Moja regija",
+
+  "feedback_intro": "Doprinosili ste ovoj aplikaciji jer ste je instalirali na svom uređaju, hvala. Ako tražite nešto više, evo nekoliko opcija:",
+  "feedback_review": "Možete napisati pozitivnu recenziju na usluzi Google Play.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Kako pridonijeti",
+  "feedback_translate": "Možete prijaviti svaku pogrešku ili pogrešku koju ste pronašli ili poslati novi prijevod na svoj jezik.",
+  "feedback_submit_translate_data": "Poboljšajte podatke o cvijetu",
+  "feedback_submit_translate_app": "Poboljšajte oznake programa",
+
+  "rate_question": "Je li ova aplikacija korisna?",
+  "rate_text": "Autor ove aplikacije potaknut je pozitivnim odgovorom korisnika. Pošaljite mu neke zvijezde kroz Google Play Store.",
+  "rate_never": "Nikada",
+  "rate_later": "Kasnije",
+  "rate": "Recenzije",
+  "yes": "Da",
+  "no": "Ne",
 
   "filter_color": "boja cvjetova",
   "filter_habitat": "staništa",
@@ -91,19 +111,31 @@
   "subantarctic_islands": "Subantartički otoci",
   "antarctic_continent": "Antarktički kontinent",
 
-  "plant_height_from": "Visina",
+  "list_info": "Odabrati jedan",
+
+  "plant_info": "Info",
+  "plant_gallery": "Galerija",
+  "plant_taxonomy": "Taksonomija",
+  "plant_sources": "Izvori",
+
+  "google_translate": "Prevedeno s Google prevoditelj",
+  "show_original": "Prikaži engleski tekst",
+  "improve_translation": "Poboljšati prevođenje",
+  "show_translation": "Prikaži prevedeni tekst",
+
+  "plant_height_from": "Visina:",
   "plant_height_to": "-",
-  "plant_flowering_from": "Cvatnje od",
-  "plant_flowering_to": "do",
+  "plant_flowering_from": "Cvatnje:",
+  "plant_flowering_to": "-",
   "plant_flower": "Cvijeće",
   "plant_inflorescence": "Cvat",
   "plant_fruit": "Plod",
   "plant_leaf": "List",
   "plant_stem": "Stablo",
   "plant_habitat": "Staništa",
-  "plant_trivia": "Trivijalnost",
   "plant_toxicity": "Toksičnost",
   "plant_herbalism": "Travarstvo",
+  "plant_trivia": "Trivijalnost",
 
   "taxonomy_superregnum": "Domena",
   "taxonomy_regnum": "Carstvo",
