@@ -1,31 +1,31 @@
 {
-  <string name="legend">Leģenda</string>
+  "legend": "Leģenda",
   "settings": "Nustatymai",
   "feedback": "Grįžtamasis ryšys / Indėlis",
   "about": "Apie paraišką",
   "help": "Padėkite",
 
-  <string name="toxicity1">indīgs augs</string>
-  <string name="toxicity2">nedaudz indīgs augs</string>
+  "toxicity1": "indīgs augs",
+  "toxicity2": "nedaudz indīgs augs",
 
   "pref_language": "Pageidautina kalba",
   "my_region": "Mans reģions",
 
-  <string name="feedback_intro">Jūs esat veicinājis šo lietojumprogrammu, jo esat to instalējis savā ierīcē. Ja jūs meklējat kaut ko vairāk, šeit ir dažas iespējas:</string>
-  <string name="feedback_review">Google Play varat uzrakstīt pozitīvu pārskatu.</string>
-  <string name="feedback_google_play">Google Play</string>
-  <string name="feedback_title">Kā piedalīties</string>
-  <string name="feedback_translate">Jūs varat ziņot par atrasto kļūdu vai kļūdu vai iesniegt jaunu tulkojumu savā valodā.</string>
-  <string name="feedback_submit_translate_data">Uzlabojiet ziedu datus</string>
-  <string name="feedback_submit_translate_app">Uzlabojiet lietojumprogrammas uzlīmes</string>
+  "feedback_intro": "Jūs esat veicinājis šo lietojumprogrammu, jo esat to instalējis savā ierīcē. Ja jūs meklējat kaut ko vairāk, šeit ir dažas iespējas:",
+  "feedback_review": "Google Play varat uzrakstīt pozitīvu pārskatu.",
+  "feedback_google_play": "Google Play",
+  "feedback_title": "Kā piedalīties",
+  "feedback_translate": "Jūs varat ziņot par atrasto kļūdu vai kļūdu vai iesniegt jaunu tulkojumu savā valodā.",
+  "feedback_submit_translate_data": "Uzlabojiet ziedu datus",
+  "feedback_submit_translate_app": "Uzlabojiet lietojumprogrammas uzlīmes",
 
-  <string name="rate_question">Vai šī app noderīga?</string>
-  <string name="rate_text">Autors šajā pieteikumā ir veicinājuši pozitīvu atbildi no lietotājiem. Lūdzu, sūtiet viņam dažus starflowers izmantojot Google Play veikalā.</string>
-  <string name="rate_never">Nekad</string>
-  <string name="rate_later">Vēlāk</string>
-  <string name="rate">Pārskats</string>
-  <string name="yes">Jā</string>
-  <string name="no">Nē</string>
+  "rate_question": "Vai šī app noderīga?",
+  "rate_text": "Autors šajā pieteikumā ir veicinājuši pozitīvu atbildi no lietotājiem. Lūdzu, sūtiet viņam dažus starflowers izmantojot Google Play veikalā.",
+  "rate_never": "Nekad",
+  "rate_later": "Vēlāk",
+  "rate": "Pārskats",
+  "yes": "Jā",
+  "no": "Nē",
 
   "filter_color": "krāsu ziedi",
   "filter_habitat": "biotopi",
@@ -111,17 +111,17 @@
   "subantarctic_islands": "Subantkartiskas salas",
   "antarctic_continent": "Antarktikas kontinents",
 
-  <string name="list_info">Izvēlēties vienu</string>
+  "list_info": "Izvēlēties vienu",
 
-  <string name="plant_info">Info</string>
-  <string name="plant_gallery">Galerija</string>
-  <string name="plant_taxonomy">Taksonomija</string>
-  <string name="plant_sources">"Pirmsākums"</string>
+  "plant_info": "Info",
+  "plant_gallery": "Galerija",
+  "plant_taxonomy": "Taksonomija",
+  "plant_sources": "Pirmsākums",
 
-  <string name="google_translate">Tulkots ar Google Translate</string>
-  <string name="show_original">Rādīt angļu valodā</string>
-  <string name="improve_translation">Uzlabot tulkojumu</string>
-  <string name="show_translation">Rādīt tulkoto tekstu</string>
+  "google_translate": "Tulkots ar Google Translate",
+  "show_original": "Rādīt angļu valodā",
+  "improve_translation": "Uzlabot tulkojumu",
+  "show_translation": "Rādīt tulkoto tekstu",
 
   "plant_height_from": "Augstums",
   "plant_height_to": "-",
