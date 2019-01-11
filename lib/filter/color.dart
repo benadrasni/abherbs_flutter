@@ -201,8 +201,7 @@ class _ColorState extends State<Color> {
                     return GestureDetector(
                       onLongPress: () {
                         setState(() {
-                          _filter.clear();
-                          _setCount();
+                          clearFilter(_filter, _setCount);
                         });
                       },
                       child: FloatingActionButton(

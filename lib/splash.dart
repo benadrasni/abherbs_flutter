@@ -1,6 +1,9 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
+
 import 'package:abherbs_flutter/filter/filter_utils.dart';
+import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/utils.dart';
+import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -18,7 +21,19 @@ class _SplashState extends State<Splash> {
   }
 
   void navigationPage() {
-    Navigator.pushReplacement(context, getNextFilterRoute(null, widget.onChangeLanguage, new Map<String, String>()));
+    Prefs.getBoolF(keyAlwaysMyRegion, false).then((value) {
+      Map<String, String> filter = {};
+      if (value) {
+        Prefs.getStringF(keyMyRegion, null).then((value) {
+          if (value != null) {
+            filter[filterDistribution] = value;
+          }
+          Navigator.pushReplacement(context, getNextFilterRoute(null, widget.onChangeLanguage, filter));
+        });
+      } else {
+        Navigator.pushReplacement(context, getNextFilterRoute(null, widget.onChangeLanguage, filter));
+      }
+    });
   }
 
   @override

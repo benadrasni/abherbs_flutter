@@ -19,6 +19,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<String> _prefLanguageF;
   String _prefLanguage;
   Future<String> _myRegionF;
+  Future<bool> _alwaysMyRegionF;
 
   void _resetPrefLanguage() {
     setState(() {
@@ -50,6 +51,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
+  void _setAlwaysMyRegion(bool alwaysMyRegion) {
+    setState(() {
+      _alwaysMyRegionF = Prefs.setBool(keyAlwaysMyRegion, alwaysMyRegion).then((success) {
+        return alwaysMyRegion;
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -58,10 +67,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _prefLanguage = language;
     });
     _myRegionF = Prefs.getStringF(keyMyRegion);
+    _alwaysMyRegionF = Prefs.getBoolF(keyAlwaysMyRegion);
   }
 
   @override
   Widget build(BuildContext context) {
+    TextStyle titleTextStyle = TextStyle(
+      fontSize: 18.0,
+    );
+    TextStyle subtitleTextStyle = TextStyle(
+      fontSize: 16.0,
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).settings),
@@ -69,10 +86,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: ListView(shrinkWrap: true, padding: const EdgeInsets.all(10.0), children: [
         ListTile(
           title: Text(S.of(context).pref_language,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15.0,
-              )),
+              style: titleTextStyle,
+          ),
           subtitle: FutureBuilder<String>(
               future: _prefLanguageF,
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
@@ -83,9 +98,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                 return Text(
                   value,
-                  style: TextStyle(
-                    fontSize: 15.0,
-                  ),
+                  style: subtitleTextStyle,
                 );
               }),
           trailing: IconButton(
@@ -106,10 +119,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ListTile(
           title: Text(
             S.of(context).my_region,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15.0,
-            ),
+            style: titleTextStyle,
           ),
           subtitle: FutureBuilder<String>(
               future: _myRegionF,
@@ -120,9 +130,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 }
                 return Text(
                   value,
-                  style: TextStyle(
-                    fontSize: 15.0,
-                  ),
+                  style: subtitleTextStyle,
                 );
               }),
           trailing: IconButton(
@@ -141,6 +149,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
               });
             });
           },
+        ),
+        ListTile(
+          title: Text(
+            S.of(context).always_my_region_title,
+            style: titleTextStyle,
+          ),
+          subtitle: Text(
+            S.of(context).always_my_region_subtitle,
+            style: subtitleTextStyle,
+          ),
+          trailing: FutureBuilder<bool>(
+              future: _alwaysMyRegionF,
+              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                bool alwaysMyRegion = false;
+                if (snapshot.connectionState == ConnectionState.done) {
+                  alwaysMyRegion = snapshot.data;
+                }
+                return Switch(
+                  value: alwaysMyRegion,
+                  onChanged: (bool value) {
+                    _setAlwaysMyRegion(value);
+                  },
+                );
+              }),
         ),
       ]),
     );

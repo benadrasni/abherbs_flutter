@@ -4,6 +4,8 @@ import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
+import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
 
 const String filterColor = 'filterColor';
@@ -287,4 +289,21 @@ getFilterDistributionValue(context, filterValue) {
 
 String _getNextFilterAttribute(Map<String, String> filter) {
   return filterAttributes.firstWhere((attribute) => filter[attribute] == null, orElse: () => null);
+}
+
+Future<bool> clearFilter(Map<String, String> filter, Function() func) {
+  filter.clear();
+  return Prefs.getBoolF(keyAlwaysMyRegion, false).then((value) {
+    if (value) {
+      Prefs.getStringF(keyMyRegion).then((value) {
+        if (value != null) {
+          filter[filterDistribution] = value;
+        }
+        func();
+      });
+    } else {
+      func();
+    }
+    return true;
+  });
 }
