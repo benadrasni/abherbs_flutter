@@ -1,13 +1,7 @@
-import 'package:abherbs_flutter/utils.dart';
-import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/prefs.dart';
-import 'package:abherbs_flutter/settings/setting_my_region.dart';
-import 'package:abherbs_flutter/settings/setting_pref_language.dart';
-import 'package:abherbs_flutter/settings/setting_utils.dart';
 import 'package:flutter/material.dart';
 
-class Legend extends StatelessWidget {
+class LegendScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextStyle legendTextStyle = TextStyle(

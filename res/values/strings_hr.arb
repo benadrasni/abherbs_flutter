@@ -18,6 +18,8 @@
   "feedback_translate": "Možete prijaviti svaku pogrešku ili pogrešku koju ste pronašli ili poslati novi prijevod na svoj jezik.",
   "feedback_submit_translate_data": "Poboljšajte podatke o cvijetu",
   "feedback_submit_translate_app": "Poboljšajte oznake programa",
+  "feedback_buy_extended": "Možete kupiti proširenu verziju s dodatnim funkcijama kao što je izvanmrežni način rada, tražiti imena, pretraživati u taksonomiji, promatrati i konfigurirati filtar.",
+  "feedback_submit_buy": "Proširena verzija",
 
   "rate_question": "Je li ova aplikacija korisna?",
   "rate_text": "Autor ove aplikacije potaknut je pozitivnim odgovorom korisnika. Pošaljite mu neke zvijezde kroz Google Play Store.",

@@ -18,6 +18,8 @@
   "feedback_translate": "Voit ilmoittaa havaitusta virheestä tai virheestä tai lähettää uuden käännöksen omalle kielellesi.",
   "feedback_submit_translate_data": "Paranna kukkien tietoja",
   "feedback_submit_translate_app": "Paranna sovelluksen tarroja",
+  "feedback_buy_extended": "Voit ostaa laajennettua versiota, jossa on lisätoimintoja, kuten offline-tilassa, etsiä nimiä, etsiä taksonomiassa, havainnoissa ja konfiguroitavissa olevassa suodattimessa.",
+  "feedback_submit_buy": "Laajennettu versio",
     
   "rate_question": "Onko tämä sovellus hyödyllinen?",
   "rate_text": "Tämän sovelluksen laatijaa tukee käyttäjien positiivinen vastaus. Lähetä hänelle joitakin starflowersia Google Play Storen kautta.",

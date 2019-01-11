@@ -18,6 +18,8 @@
   "feedback_translate": "Du kan rapportere hvilken som helst skrivefeil eller feil du fant eller sende inn ny oversettelse på ditt språk.",
   "feedback_submit_translate_data": "Forbedre blomstens data",
   "feedback_submit_translate_app": "Forbedre programmets etiketter",
+  "feedback_buy_extended": "Du kan kjøpe utvidet versjon med ekstra funksjonalitet som frakoblet modus, søk i navn, søk i taksonomi, observasjoner og konfigurerbart filter.",
+  "feedback_submit_buy": "Utvidet versjon",
 
   "rate_question": "Er dette programmet nyttig?",
   "rate_text": "Forfatteren av denne søknaden er drevet av positivt svar fra brukerne. Send ham noen stjerneblomster via Google Play Butikk.",

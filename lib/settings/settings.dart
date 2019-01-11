@@ -7,15 +7,15 @@ import 'package:abherbs_flutter/settings/setting_utils.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
 
-class Settings extends StatefulWidget {
+class SettingsScreen extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  Settings(this.onChangeLanguage);
+  SettingsScreen(this.onChangeLanguage);
 
   @override
-  _SettingsState createState() => new _SettingsState();
+  _SettingsScreenState createState() => new _SettingsScreenState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsScreenState extends State<SettingsScreen> {
   Future<String> _prefLanguageF;
   String _prefLanguage;
   Future<String> _myRegionF;

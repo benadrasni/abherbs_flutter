@@ -1,7 +1,7 @@
 {
   "legend": "افسانه",
   "settings": "تنظیمات",
-  "feedback": "انتقادات / پیشنهادات",
+  "feedback": "انتقادات",
   "about": "درباره برنامه",
   "help": "کمک",
 
@@ -11,12 +11,13 @@
   "pref_language": "زبان ترجیحی",
   "my_region": "منطقه من",
 
-  "feedback": "انتقادات / پیشنهادات",
   "feedback_intro": "از زمان نصب آن بر روی دستگاه خود به این برنامه کمک کرده اید، با تشکر. اگر شما به دنبال چیزی بیشتر هستید، در اینجا چند گزینه وجود دارد:",
   "feedback_review": "شما می توانید یک نظر مثبت در Google Play بنویسید.",
   "feedback_translate": "شما می توانید هر نوع اشتباه یا اشتباهی را که به زبان خود پیدا کرده اید ارسال یا ارسال کنید.",
   "feedback_submit_translate_app": "برچسب های نرم افزار را بهبود بخشد",
   "feedback_submit_translate_data": "اطلاعات گل را بهبود بخشید",
+  "feedback_buy_extended": "شما می توانید نسخه پیشرفته با قابلیت های اضافی مانند حالت آفلاین، جستجو در اسامی، جستجو در طبقه بندی، مشاهدات و فیلتر قابل تنظیم را خریداری کنید.",
+  "feedback_submit_buy": "نسخه توسعه یافته",
 
   "rate": "مرور",
   "rate_later": "بعد",
@@ -151,5 +152,5 @@
   "taxonomy_subsectio": "Subsectio",
   "taxonomy_serie": "زنجیره",
   "taxonomy_subserie": "Subserie",
-  "taxonomy_species": "گونه",
+  "taxonomy_species": "گونه"
 }

@@ -18,6 +18,8 @@
   "feedback_translate": "Du kan rapportera eventuellt typsnitt eller misstag du hittat eller skicka in ny översättning på ditt språk.",
   "feedback_submit_translate_data": "Förbättra blommans data",
   "feedback_submit_translate_app": "Förbättra programmets etiketter",
+  "feedback_buy_extended": "Du kan köpa utökad version med ytterligare funktioner som offline-läge, sök i namn, sök i taxonomi, observationer och konfigurerbart filter.",
+  "feedback_submit_buy": "Förlängd version",
 
   "rate_question": "Är det här programmet användbart?",
   "rate_text": "Författaren av denna ansökan drivs av positivt svar från användarna. Var vänlig skicka honom några stjärnblommor via Google Play Butik.",

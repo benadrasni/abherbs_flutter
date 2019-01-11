@@ -43,9 +43,11 @@ class S implements WidgetsLocalizations {
   String get eastern_europe => "Eastern Europe";
   String get europe => "Europe";
   String get feedback => "Feedback";
+  String get feedback_buy_extended => "You can buy extended (+) version with additional functionality like offline mode, search in names, search in taxonomy, observations and configurable filter.";
   String get feedback_google_play => "Google Play";
   String get feedback_intro => "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:";
   String get feedback_review => "You can write a positive review in Google Play.";
+  String get feedback_submit_buy => "Go to extended (+) version";
   String get feedback_submit_translate_app => "Improve application's labels";
   String get feedback_submit_translate_data => "Improve flower's data";
   String get feedback_title => "How to contribute";
@@ -341,6 +343,8 @@ class $de extends S {
   @override
   String get taxonomy_subsectio => "Untersektion";
   @override
+  String get feedback_submit_buy => "Erweiterte Version";
+  @override
   String get southern_africa => "Südafrika";
   @override
   String get color_yellow => "Gelb";
@@ -418,6 +422,8 @@ class $de extends S {
   String get western_asia => "West-Asien";
   @override
   String get subarctic_america => "Subarktistisches Amerika";
+  @override
+  String get feedback_buy_extended => "Sie können eine erweiterte (+) Version mit zusätzlichen Funktionen wie Offline-Modus, Suche nach Namen, Suche in Taxonomie, Beobachtungen und konfigurierbaren Filter kaufen.";
   @override
   String get north_central_usa => "Nord-Zentral U.S.A.";
   @override
@@ -631,6 +637,8 @@ class $hi extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "विस्तारित संस्करण";
+  @override
   String get southern_africa => "दक्षिणी अफ्रीका";
   @override
   String get color_yellow => "पीला";
@@ -708,6 +716,8 @@ class $hi extends S {
   String get western_asia => "पश्चिमी एशिया";
   @override
   String get subarctic_america => "सुबाराक्टिक अमेरिका";
+  @override
+  String get feedback_buy_extended => "आप ऑफ़लाइन मोड जैसे अतिरिक्त कार्यक्षमता के साथ विस्तारित संस्करण खरीद सकते हैं, नामों में खोज कर सकते हैं, वर्गीकरण में देख सकते हैं, अवलोकन और कॉन्फ़िगर करने योग्य फ़िल्टर कर सकते हैं।";
   @override
   String get north_central_usa => "उत्तरी मध्य यूएसए";
   @override
@@ -921,6 +931,8 @@ class $no extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "Utvidet versjon";
+  @override
   String get southern_africa => "Sør Afrika";
   @override
   String get color_yellow => "gul";
@@ -998,6 +1010,8 @@ class $no extends S {
   String get western_asia => "Vest-Asia";
   @override
   String get subarctic_america => "Subarctic America";
+  @override
+  String get feedback_buy_extended => "Du kan kjøpe utvidet versjon med ekstra funksjonalitet som frakoblet modus, søk i navn, søk i taksonomi, observasjoner og konfigurerbart filter.";
   @override
   String get north_central_usa => "Nord-Sentral USA";
   @override
@@ -1211,6 +1225,8 @@ class $fi extends S {
   @override
   String get taxonomy_subsectio => "Alasektio";
   @override
+  String get feedback_submit_buy => "Laajennettu versio";
+  @override
   String get southern_africa => "Etelä-Afrikka";
   @override
   String get color_yellow => "keltainen";
@@ -1288,6 +1304,8 @@ class $fi extends S {
   String get western_asia => "Länsi-Aasia";
   @override
   String get subarctic_america => "Subarktinen Amerikka";
+  @override
+  String get feedback_buy_extended => "Voit ostaa laajennettua versiota, jossa on lisätoimintoja, kuten offline-tilassa, etsiä nimiä, etsiä taksonomiassa, havainnoissa ja konfiguroitavissa olevassa suodattimessa.";
   @override
   String get north_central_usa => "Pohjois-Keski-USA";
   @override
@@ -1501,6 +1519,8 @@ class $ru extends S {
   @override
   String get taxonomy_subsectio => "Подсекция";
   @override
+  String get feedback_submit_buy => "Расширенная версия";
+  @override
   String get southern_africa => "Южная Африка";
   @override
   String get color_yellow => "жёлтая";
@@ -1578,6 +1598,8 @@ class $ru extends S {
   String get western_asia => "Западная Азия";
   @override
   String get subarctic_america => "Субарктическая Америка";
+  @override
+  String get feedback_buy_extended => "Вы можете купить расширенную версию с дополнительными функциями, такими как автономный режим, поиск по именам, поиск по таксономии, наблюдения и настраиваемый фильтр.";
   @override
   String get north_central_usa => "Северо-Центральная часть США";
   @override
@@ -1789,6 +1811,8 @@ class $pt extends S {
   @override
   String get taxonomy_subsectio => "subseção";
   @override
+  String get feedback_submit_buy => "Versão extendida";
+  @override
   String get southern_africa => "África do Sul";
   @override
   String get color_yellow => "amarela";
@@ -1864,6 +1888,8 @@ class $pt extends S {
   String get western_asia => "Ásia Ocidental";
   @override
   String get subarctic_america => "América Subarctic";
+  @override
+  String get feedback_buy_extended => "Você pode comprar a versão estendida (+) com funcionalidades adicionais, como o modo off-line, pesquisar nomes, pesquisar em taxonomia, observações e filtros configuráveis.";
   @override
   String get north_central_usa => "EUA do centro-norte";
   @override
@@ -2073,6 +2099,8 @@ class $lt extends S {
   @override
   String get taxonomy_subsectio => "Subsekcija";
   @override
+  String get feedback_submit_buy => "Prailginta versija";
+  @override
   String get southern_africa => "Pietų Afrika";
   @override
   String get color_yellow => "geltonas";
@@ -2150,6 +2178,8 @@ class $lt extends S {
   String get western_asia => "Vakarų Azija";
   @override
   String get subarctic_america => "Subartikinė Amerika";
+  @override
+  String get feedback_buy_extended => "Galite įsigyti išplėstinę versiją su papildomomis funkcijomis, pavyzdžiui, neprisijungus, ieškoti vardų, ieškoti taksonomijos, stebėjimų ir konfigūruojamo filtro.";
   @override
   String get north_central_usa => "Šiaurės-Centrinė JAV";
   @override
@@ -2363,6 +2393,8 @@ class $hr extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "Proširena verzija";
+  @override
   String get southern_africa => "Južna Afrika";
   @override
   String get color_yellow => "žuta";
@@ -2440,6 +2472,8 @@ class $hr extends S {
   String get western_asia => "Zapadna Azija";
   @override
   String get subarctic_america => "Subarktička Amerika";
+  @override
+  String get feedback_buy_extended => "Možete kupiti proširenu verziju s dodatnim funkcijama kao što je izvanmrežni način rada, tražiti imena, pretraživati u taksonomiji, promatrati i konfigurirati filtar.";
   @override
   String get north_central_usa => "Sjeverno središnje SAD";
   @override
@@ -2651,6 +2685,8 @@ class $lv extends S {
   @override
   String get taxonomy_subsectio => "Apakšsekcija";
   @override
+  String get feedback_submit_buy => "Paplašināta versija";
+  @override
   String get southern_africa => "Dienvidāfrika";
   @override
   String get color_yellow => "geltonas";
@@ -2728,6 +2764,8 @@ class $lv extends S {
   String get western_asia => "Rietumu Āzija";
   @override
   String get subarctic_america => "Subartikā Amerika";
+  @override
+  String get feedback_buy_extended => "Jūs varat iegādāties paplašinātu versiju ar papildu funkcionalitāti, piemēram, bezsaistes režīmā, meklēt nosaukumos, meklēt taksonomijā, novērojumos un konfigurējamajā filtrā.";
   @override
   String get north_central_usa => "Ziemeļu ASV";
   @override
@@ -2941,6 +2979,8 @@ class $fr extends S {
   @override
   String get taxonomy_subsectio => "Sous-section";
   @override
+  String get feedback_submit_buy => "Version étendue";
+  @override
   String get southern_africa => "Afrique du sud";
   @override
   String get color_yellow => "jaune";
@@ -3018,6 +3058,8 @@ class $fr extends S {
   String get western_asia => "Asie occidentale";
   @override
   String get subarctic_america => "Amérique subarctique";
+  @override
+  String get feedback_buy_extended => "Vous pouvez acheter la version étendue avec des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche dans les noms, la recherche dans la taxonomie, les observations et le filtre configurable.";
   @override
   String get north_central_usa => "Nord-Central des États-Unis";
   @override
@@ -3231,6 +3273,8 @@ class $hu extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "Bővített változat";
+  @override
   String get southern_africa => "Dél-Afrika";
   @override
   String get color_yellow => "sárga";
@@ -3308,6 +3352,8 @@ class $hu extends S {
   String get western_asia => "Nyugat-Ázsia";
   @override
   String get subarctic_america => "Subarkti-Amerika";
+  @override
+  String get feedback_buy_extended => "A bővített változatot további funkciókkal vásárolhatja meg, mint például az offline mód, kereshet a nevekben, kereshet taxonómia, megfigyelések és konfigurálható szűrő segítségével.";
   @override
   String get north_central_usa => "Észak-Közép USA";
   @override
@@ -3521,6 +3567,8 @@ class $uk extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "Розширена версія";
+  @override
   String get southern_africa => "Південна Африка";
   @override
   String get color_yellow => "жовтий";
@@ -3598,6 +3646,8 @@ class $uk extends S {
   String get western_asia => "Західна Азія";
   @override
   String get subarctic_america => "Субарктична Америка";
+  @override
+  String get feedback_buy_extended => "Ви можете придбати розширену версію з додатковими функціональними можливостями, наприклад, автономний режим, пошук по іменах, пошук в таксономії, спостереженнях і налаштованому фільтрі.";
   @override
   String get north_central_usa => "Північ-Центральна США";
   @override
@@ -3811,6 +3861,8 @@ class $sk extends S {
   @override
   String get taxonomy_subsectio => "podsekcia";
   @override
+  String get feedback_submit_buy => "Rozšírená verzia";
+  @override
   String get southern_africa => "Južná Afrika";
   @override
   String get color_yellow => "žltá";
@@ -3882,6 +3934,8 @@ class $sk extends S {
   String get western_asia => "Juhozápadná Ázia";
   @override
   String get subarctic_america => "Subarktická Amerika";
+  @override
+  String get feedback_buy_extended => "Môžete si kúpiť rozšírenú verziu s funkciami navyše ako napríklad ofline režim, vyhľadávanie v názvoch a v taxonómii, pozorovania a nastaviteľný filter.";
   @override
   String get north_central_usa => "Stredosever USA";
   @override
@@ -4095,6 +4149,8 @@ class $sl extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "Razširjena različica";
+  @override
   String get southern_africa => "Južna Afrika";
   @override
   String get color_yellow => "rumena";
@@ -4172,6 +4228,8 @@ class $sl extends S {
   String get western_asia => "Zahodna Azija";
   @override
   String get subarctic_america => "Subarctic Amerika";
+  @override
+  String get feedback_buy_extended => "Razširjeno različico lahko kupite z dodatnimi funkcijami, kot je način brez povezave, iskanje imen, iskanje v taksonomiji, opazovanje in nastavljiv filter.";
   @override
   String get north_central_usa => "Severna osrednja ZDA";
   @override
@@ -4385,6 +4443,8 @@ class $id extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "Versi diperpanjang";
+  @override
   String get southern_africa => "Afrika Selatan";
   @override
   String get color_yellow => "kuning";
@@ -4462,6 +4522,8 @@ class $id extends S {
   String get western_asia => "Asia Barat";
   @override
   String get subarctic_america => "Subarctic America";
+  @override
+  String get feedback_buy_extended => "Anda dapat membeli versi lanjutan dengan fungsi tambahan seperti mode offline, pencarian nama, pencarian taksonomi, pengamatan, dan filter yang dapat dikonfigurasi.";
   @override
   String get north_central_usa => "Tengah Utara AS";
   @override
@@ -4675,6 +4737,8 @@ class $sr extends S {
   @override
   String get taxonomy_subsectio => "подсекција";
   @override
+  String get feedback_submit_buy => "Проширена верзија";
+  @override
   String get southern_africa => "Јужна Африка";
   @override
   String get color_yellow => "жут";
@@ -4752,6 +4816,8 @@ class $sr extends S {
   String get western_asia => "Западна Азија";
   @override
   String get subarctic_america => "Субарцтиц Америца";
+  @override
+  String get feedback_buy_extended => "Можете купити проширену верзију са додатном функционалношћу као што је оффлине режим, тражити имена, претраживати у таксономији, опажањима и конфигурирати филтер.";
   @override
   String get north_central_usa => "Северна централна САД";
   @override
@@ -4965,6 +5031,8 @@ class $sv extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "Förlängd version";
+  @override
   String get southern_africa => "Södra Afrika";
   @override
   String get color_yellow => "gul";
@@ -5042,6 +5110,8 @@ class $sv extends S {
   String get western_asia => "Västra Asien";
   @override
   String get subarctic_america => "Subarctic Amerika";
+  @override
+  String get feedback_buy_extended => "Du kan köpa utökad version med ytterligare funktioner som offline-läge, sök i namn, sök i taxonomi, observationer och konfigurerbart filter.";
   @override
   String get north_central_usa => "Nord-Central USA";
   @override
@@ -5259,6 +5329,8 @@ class $it extends S {
   @override
   String get taxonomy_subsectio => "Sottosezione";
   @override
+  String get feedback_submit_buy => "Versione estesa";
+  @override
   String get southern_africa => "Africa meridionale";
   @override
   String get color_yellow => "giallo";
@@ -5336,6 +5408,8 @@ class $it extends S {
   String get western_asia => "Asia occidentale";
   @override
   String get subarctic_america => "America subartica";
+  @override
+  String get feedback_buy_extended => "È possibile acquistare la versione estesa con funzionalità aggiuntive come la modalità offline, la ricerca nei nomi, la ricerca in tassonomia, le osservazioni e il filtro configurabile.";
   @override
   String get north_central_usa => "Stati Uniti centro-nord";
   @override
@@ -5549,6 +5623,8 @@ class $es extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "Versión extendida";
+  @override
   String get southern_africa => "Africa del Sur";
   @override
   String get color_yellow => "amarillo";
@@ -5626,6 +5702,8 @@ class $es extends S {
   String get western_asia => "Asia occidental";
   @override
   String get subarctic_america => "América Subártica";
+  @override
+  String get feedback_buy_extended => "Puede comprar la versión extendida (+) con funcionalidad adicional como el modo fuera de línea, buscar en nombres, buscar en taxonomía, observaciones y filtros configurables.";
   @override
   String get north_central_usa => "Norte central de los Estados Unidos";
   @override
@@ -5839,6 +5917,8 @@ class $et extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "Pikendatud versioon";
+  @override
   String get southern_africa => "Lõuna-Aafrika";
   @override
   String get color_yellow => "kollane";
@@ -5916,6 +5996,8 @@ class $et extends S {
   String get western_asia => "Lääne-Aasias";
   @override
   String get subarctic_america => "Subarctic Ameerika";
+  @override
+  String get feedback_buy_extended => "Laiendatud (+) versiooni saate osta täiendava funktsionaalsusega, näiteks offline režiimis, otsida nimesid, otsida taksonoomiast, vaatlustest ja seadistatavast filtrist.";
   @override
   String get north_central_usa => "Põhja-Keskne USA";
   @override
@@ -6129,6 +6211,8 @@ class $cs extends S {
   @override
   String get taxonomy_subsectio => "podsekce";
   @override
+  String get feedback_submit_buy => "Rozšířená verze";
+  @override
   String get southern_africa => "Jižní Afrika";
   @override
   String get color_yellow => "žlutá";
@@ -6207,6 +6291,8 @@ class $cs extends S {
   @override
   String get subarctic_america => "Subarktická Amerika";
   @override
+  String get feedback_buy_extended => "Můžete si koupit rozšířenou verzi s funkcemi navíc jako například ofline režim, vyhledávání v názvech a v taxonomii, pozorování a nastavitelný filtr.";
+  @override
   String get north_central_usa => "Středosever USA";
   @override
   String get improve_translation => "Vylepšit překlad";
@@ -6246,6 +6332,292 @@ class $ar extends S {
   @override
   TextDirection get textDirection => TextDirection.rtl;
 
+  @override
+  String get central_america => "أمريكا الوسطى";
+  @override
+  String get legend => "مفتاح";
+  @override
+  String get feedback_submit_translate_data => "تحسين بيانات الزهور";
+  @override
+  String get about => "حول";
+  @override
+  String get western_canada => "غرب كندا";
+  @override
+  String get northern_america => "أمريكا الشمالية";
+  @override
+  String get western_indian_ocean => "غرب المحيط الهندي";
+  @override
+  String get feedback => "تعليق";
+  @override
+  String get southwestern_usa => "جنوب غرب الولايات المتحدة";
+  @override
+  String get caribbean => "منطقة البحر الكاريبي";
+  @override
+  String get australasia => "أستراليا";
+  @override
+  String get petal_4 => "أربعة أو أقل";
+  @override
+  String get east_tropical_africa => "شرق الاستوائية أفريقيا";
+  @override
+  String get africa => "أفريقيا";
+  @override
+  String get south_tropical_africa => "جنوب الاستوائية أفريقيا";
+  @override
+  String get caucasus => "القوقاز";
+  @override
+  String get middle_asia => "آسيا الوسطى";
+  @override
+  String get plant_gallery => "صالة عرض";
+  @override
+  String get indochina => "الهند الصينية";
+  @override
+  String get feedback_translate => "يمكنك الإبلاغ عن أي خطأ مطبعي أو خطأ وجدته أو قدم ترجمة جديدة بلغتك.";
+  @override
+  String get australia => "أستراليا";
+  @override
+  String get google_translate => "تمت الترجمة مع الترجمة من غوغل";
+  @override
+  String get plant_leaf => "اوراق";
+  @override
+  String get habitat_forest => "الغابات";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "ماليزيا";
+  @override
+  String get southwestern_pacific => "جنوب غرب المحيط الهادئ";
+  @override
+  String get asia_tropical => "آسيا الاستوائية";
+  @override
+  String get northwestern_usa => "شمال غرب الولايات المتحدة";
+  @override
+  String get northern_south_america => "شمال أمريكا الجنوبية";
+  @override
+  String get show_original => "عرض النص الإنكليزي";
+  @override
+  String get southern_america => "أمريكا الجنوبية";
+  @override
+  String get middle_atlantic_ocean => "المحيط الأطلسي الأوسط";
+  @override
+  String get habitat_garden => "حدائق أو حقول";
+  @override
+  String get russian_far_east => "الشرق الأقصى الروسي";
+  @override
+  String get west_central_tropical_africa => "غرب وسط الاستوائية أفريقيا";
+  @override
+  String get plant_toxicity => "تأثير سمي";
+  @override
+  String get rate_question => "هل هذا التطبيق مفيد؟";
+  @override
+  String get macaronesia => "ماكارونيسيا";
+  @override
+  String get plant_taxonomy => "علم التصنيف";
+  @override
+  String get asia_temperate => "آسيا المعتدلة";
+  @override
+  String get habitat_rock => "صخور أو جبال";
+  @override
+  String get taxonomy_superregnum => "النطاق";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "منغوليا";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "غرب أمريكا الجنوبية";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get europe => "أوروبا";
+  @override
+  String get middle_europe => "وسط أوروبا";
+  @override
+  String get color_blue => "أزرق أرجواني";
+  @override
+  String get southern_south_america => "جنوب أمريكا الجنوبية";
+  @override
+  String get plant_habitat => "موطن";
+  @override
+  String get petal_5 => "خمسة";
+  @override
+  String get filter_petal => "عدد البتلات";
+  @override
+  String get color_white => "أبيض";
+  @override
+  String get northeastern_usa => "شمال شرق الولايات المتحدة";
+  @override
+  String get color_green => "أخضر، بني، أسود";
+  @override
+  String get taxonomy_ordo => "الرتبة";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "المحيط الهادئ";
+  @override
+  String get plant_sources => "مصادر";
+  @override
+  String get taxonomy_regnum => "المملكة";
+  @override
+  String get south_central_pacific => "جنوب وسط المحيط الهادئ";
+  @override
+  String get filter_color => "لون الزهور";
+  @override
+  String get help => "مساعدة";
+  @override
+  String get mexico => "المكسيك";
+  @override
+  String get siberia => "سيبيريا";
+  @override
+  String get taxonomy_subtribus => "العميرة";
+  @override
+  String get habitat_meadow => "مروج أو مراعي";
+  @override
+  String get plant_trivia => "معلومات";
+  @override
+  String get taxonomy_cladus => "(غير مصنف)";
+  @override
+  String get plant_herbalism => "دراسة الأعشاب";
+  @override
+  String get plant_height_to => "إلى";
+  @override
+  String get habitat_wetland => "مستنقعات أو أراضي الرطبة";
+  @override
+  String get feedback_title => "كيف تساهم";
+  @override
+  String get toxicity2 => "نبات سام قليلا";
+  @override
+  String get toxicity1 => "نبات سام";
+  @override
+  String get eastern_canada => "شرق كندا";
+  @override
+  String get plant_info => "معلومات";
+  @override
+  String get show_translation => "عرض النص المترجم";
+  @override
+  String get habitat_tree => "أشجار أو شجيرات";
+  @override
+  String get settings => "إعدادات";
+  @override
+  String get color_red => "أحمر وردي";
+  @override
+  String get north_central_pacific => "شمال وسط المحيط الهادئ";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get feedback_submit_buy => "نسخة موسعة";
+  @override
+  String get southern_africa => "جنوب افريقيا";
+  @override
+  String get color_yellow => "أصفر";
+  @override
+  String get subantarctic_islands => "جزر سوبنتاركتيك";
+  @override
+  String get list_info => "إختر واحدة";
+  @override
+  String get taxonomy_subfamilia => "القطاع";
+  @override
+  String get my_region => "منطقتي";
+  @override
+  String get indian_subcontinent => "شبه القارة الهندية";
+  @override
+  String get plant_flower => "زهور";
+  @override
+  String get filter_habitat => "موطن";
+  @override
+  String get rate_never => "أبدا";
+  @override
+  String get northwestern_pacific => "شمال غرب المحيط الهادئ";
+  @override
+  String get southwestern_europe => "جنوب غرب أوروبا";
+  @override
+  String get taxonomy_species => "محيط";
+  @override
+  String get plant_fruit => "فواكه";
+  @override
+  String get plant_flowering_to => "إلى";
+  @override
+  String get taxonomy_familia => "الفصيلة";
+  @override
+  String get plant_stem => "ساق نبات";
+  @override
+  String get antarctic_continent => "القارة القطبية الجنوبية";
+  @override
+  String get no => "لا";
+  @override
+  String get brazil => "البرازيل";
+  @override
+  String get rate_text => "مؤلف هذا التطبيق يقدر ردود الفعل إيجابية من المستخدمين. الرجاء ارسال بعض ستارفلورز له من خلال متجر غوغل بلاي.";
+  @override
+  String get eastern_europe => "أوروبا الشرقية";
+  @override
+  String get south_central_usa => "جنوب وسط الولايات المتحدة";
+  @override
+  String get plant_flowering_from => "المزهرة من";
+  @override
+  String get taxonomy_tribus => "القبيلة";
+  @override
+  String get arabian_peninsula => "شبه الجزيرة العربية";
+  @override
+  String get rate_later => "في وقت لاحق";
+  @override
+  String get west_tropical_africa => "غرب الاستوائية أفريقيا";
+  @override
+  String get northern_europe => "شمال أوروبا";
+  @override
+  String get rate => "إعادة النظر";
+  @override
+  String get northeast_tropical_africa => "شمال شرق الاستوائية أفريقيا";
+  @override
+  String get pref_language => "اللغة المفضلة";
+  @override
+  String get feedback_google_play => "تطبيقات جوجل";
+  @override
+  String get new_zealand => "نيوزيلندا";
+  @override
+  String get feedback_intro => "لقد ساهمت في هذا التطبيق منذ تثبيته على جهازك ، شكرًا. إذا كنت تبحث عن شيء أكثر ، فإليك بعض الخيارات:";
+  @override
+  String get filter_distribution => "توزيع";
+  @override
+  String get eastern_asia => "شرق اسيا";
+  @override
+  String get western_asia => "آسيا الغربية";
+  @override
+  String get subarctic_america => "أمريكا الشمالية";
+  @override
+  String get feedback_buy_extended => "يمكنك شراء إصدار موسّع (+) مع وظائف إضافية مثل وضع عدم الاتصال ، والبحث في الأسماء ، والبحث في التصنيف ، والملاحظات ، والفلتر القابل للتكوين.";
+  @override
+  String get north_central_usa => "شمال وسط الولايات المتحدة";
+  @override
+  String get improve_translation => "تحسين الترجمة";
+  @override
+  String get feedback_review => "يمكنك كتابة تعليق إيجابي في تطبيقات جوجل";
+  @override
+  String get southeastern_usa => "جنوب شرق الولايات المتحدة";
+  @override
+  String get yes => "نعم فعلا";
+  @override
+  String get plant_height_from => "الارتفاع من";
+  @override
+  String get petal_many => "أكثر من خمسة";
+  @override
+  String get southeastern_europe => "جنوب شرق أوروبا";
+  @override
+  String get taxonomy_unknown => "غير معروف";
+  @override
+  String get plant_inflorescence => "إزهار";
+  @override
+  String get northern_africa => "شمال أفريقيا";
+  @override
+  String get china => "الصين";
+  @override
+  String get petal_zygomorphic => "غير منتظم";
+  @override
+  String get taxonomy_genus => "الجنس";
+  @override
+  String get papuasia => "بابوا";
+  @override
+  String get feedback_submit_translate_app => "تحسين تسميات التطبيق";
 }
 
 class $pa extends S {
@@ -6427,6 +6799,8 @@ class $pa extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "ਵਧਾਇਆ ਹੋਇਆ ਵਰਜਨ";
+  @override
   String get southern_africa => "ਦੱਖਣੀ ਅਫਰੀਕਾ";
   @override
   String get color_yellow => "ਪੀਲਾ";
@@ -6504,6 +6878,8 @@ class $pa extends S {
   String get western_asia => "ਪੱਛਮੀ ਏਸ਼ੀਆ";
   @override
   String get subarctic_america => "ਸੁਬਰਟਿਕ ਅਮਰੀਕਾ";
+  @override
+  String get feedback_buy_extended => "ਤੁਸੀਂ ਅਤਿਰਿਕਤ ਫੰਕਸ਼ਨ ਜਿਵੇਂ ਐੱਮਲਾਈਨ ਮੋਡ, ਐਕਸਟੈਨਸ਼ਨ, ਨਾਮਾਂ ਦੀ ਖੋਜ, ਟੈਕਸਸੋਨੀਓ ਵਿੱਚ ਖੋਜ, ਨਿਰੀਖਣ ਅਤੇ ਕਨਫ਼ੀਗਰੇਬਲ ਫਿਲਟਰ ਨਾਲ ਐਕਸਟੈਂਡਡ ਵਰਜ਼ਨ ਖਰੀਦ ਸਕਦੇ ਹੋ.";
   @override
   String get north_central_usa => "ਉੱਤਰੀ-ਕੇਂਦਰੀ ਅਮਰੀਕਾ";
   @override
@@ -6727,6 +7103,8 @@ class $ja extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "拡張版";
+  @override
   String get southern_africa => "南アフリカ";
   @override
   String get color_yellow => "黄色";
@@ -6805,6 +7183,8 @@ class $ja extends S {
   @override
   String get subarctic_america => "亜寒帯アメリカ";
   @override
+  String get feedback_buy_extended => "オフラインモード、名前で検索、分類法で検索、観測、設定可能なフィルタなどの追加機能を備えた拡張バージョンを購入できます。";
+  @override
   String get north_central_usa => "アメリカ北西部";
   @override
   String get improve_translation => "翻訳を改善する";
@@ -6859,7 +7239,7 @@ class $fa extends S {
   @override
   String get western_indian_ocean => "اقیانوس هند غربی";
   @override
-  String get feedback => "انتقادات / پیشنهادات";
+  String get feedback => "انتقادات";
   @override
   String get southwestern_usa => "جنوب غربی ایالات متحده آمریکا";
   @override
@@ -7015,6 +7395,8 @@ class $fa extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "نسخه توسعه یافته";
+  @override
   String get southern_africa => "آفریقای جنوبی";
   @override
   String get color_yellow => "رنگ زرد";
@@ -7090,6 +7472,8 @@ class $fa extends S {
   String get western_asia => "آسیای غربی";
   @override
   String get subarctic_america => "Subarctic America";
+  @override
+  String get feedback_buy_extended => "شما می توانید نسخه پیشرفته با قابلیت های اضافی مانند حالت آفلاین، جستجو در اسامی، جستجو در طبقه بندی، مشاهدات و فیلتر قابل تنظیم را خریداری کنید.";
   @override
   String get north_central_usa => "مرکزی ایالات متحده آمریکا";
   @override
@@ -7301,6 +7685,8 @@ class $pl extends S {
   @override
   String get taxonomy_subsectio => "Podsekcja";
   @override
+  String get feedback_submit_buy => "Rozszerzona wersja";
+  @override
   String get southern_africa => "Południowa Afryka";
   @override
   String get color_yellow => "żółty";
@@ -7378,6 +7764,8 @@ class $pl extends S {
   String get western_asia => "Zachodnia Azja";
   @override
   String get subarctic_america => "Ameryka subarktyczna";
+  @override
+  String get feedback_buy_extended => "Możesz nabyć wersję rozszerzoną, która posiada dodatkowe funkcjonalności, jak np. tryb offline, wyszukiwanie po nazwach czy taksonomii.";
   @override
   String get north_central_usa => "Północno-Środkowe USA";
   @override
@@ -7587,6 +7975,8 @@ class $da extends S {
   @override
   String get taxonomy_subsectio => "Undersektion";
   @override
+  String get feedback_submit_buy => "Udvidet version";
+  @override
   String get southern_africa => "Sydafrika";
   @override
   String get color_yellow => "gul";
@@ -7664,6 +8054,8 @@ class $da extends S {
   String get western_asia => "Vestasien";
   @override
   String get subarctic_america => "Subarctic America";
+  @override
+  String get feedback_buy_extended => "Du kan købe udvidet (+) version med ekstra funktionalitet som offline-tilstand, søge i navne, søge i taksonomi, observationer og konfigurerbart filter.";
   @override
   String get north_central_usa => "Nord-Central USA";
   @override
@@ -7875,6 +8267,8 @@ class $he extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "גרסא מורחבת";
+  @override
   String get southern_africa => "דרום אפריקה";
   @override
   String get color_yellow => "צהוב";
@@ -7952,6 +8346,8 @@ class $he extends S {
   String get western_asia => "מערב אסיה";
   @override
   String get subarctic_america => "אמריקה הסובארקטית";
+  @override
+  String get feedback_buy_extended => "אתה יכול לקנות גרסה מורחבת עם פונקציונליות נוספת כמו במצב לא מקוון, חיפוש בשמות, חיפוש בטקסונומיה, תצפיות ומסנן להגדרה.";
   @override
   String get north_central_usa => "צפון מרכז ארצות הברית";
   @override
@@ -8165,6 +8561,8 @@ class $ro extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "Versiunea extinsa";
+  @override
   String get southern_africa => "Africa de Sud";
   @override
   String get color_yellow => "galben";
@@ -8242,6 +8640,8 @@ class $ro extends S {
   String get western_asia => "Asia de Vest";
   @override
   String get subarctic_america => "Subarctic America";
+  @override
+  String get feedback_buy_extended => "Puteți cumpăra o versiune extinsă cu funcționalități suplimentare, cum ar fi modul offline, căutarea în nume, căutare în taxonomie, observații și filtru configurabil.";
   @override
   String get north_central_usa => "Nord-central SUA";
   @override
@@ -8455,6 +8855,8 @@ class $nl extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
+  String get feedback_submit_buy => "Uitgebreide versie";
+  @override
   String get southern_africa => "Zuid-Afrika";
   @override
   String get color_yellow => "geel";
@@ -8532,6 +8934,8 @@ class $nl extends S {
   String get western_asia => "West-Azië";
   @override
   String get subarctic_america => "Subarctisch Amerika";
+  @override
+  String get feedback_buy_extended => "U kunt een uitgebreide versie kopen met extra functionaliteit zoals de offline modus, zoeken in namen, zoeken in taxonomie, observaties en configureerbare filter.";
   @override
   String get north_central_usa => "Noord-Centraal VS";
   @override

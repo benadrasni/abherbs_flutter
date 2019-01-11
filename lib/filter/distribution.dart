@@ -210,7 +210,7 @@ class _DistributionState extends State<Distribution> {
         } else {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Settings(widget.onChangeLanguage)),
+            MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage)),
           ).then((result) {
             setMyRegion();
           });

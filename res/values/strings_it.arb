@@ -18,6 +18,8 @@
   "feedback_translate": "Puoi segnalare refusi ed errori o inviare una nuova traduzione nella tua lingua.",
   "feedback_submit_translate_data": "Migliorare le informazioni sui fiori",
   "feedback_submit_translate_app": "Migliora le etichette delle applicazioni",
+  "feedback_buy_extended": "È possibile acquistare la versione estesa con funzionalità aggiuntive come la modalità offline, la ricerca nei nomi, la ricerca in tassonomia, le osservazioni e il filtro configurabile.",
+  "feedback_submit_buy": "Versione estesa",
 
   "rate_question": "Trovi utile questa applicazione?",
   "rate_text": "L'autore di questa applicazione è entusiasta di ricevere feedback da parte degli utenti. Ti preghiamo di inviargli qualche stella (alpina) attraverso Google Play Store.",

@@ -156,6 +156,8 @@ flutter:
     - res/images/wikipedia.png
     - res/images/toxicity1.png
     - res/images/toxicity2.png
+    - res/images/extended.png
+    - res/images/translate.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

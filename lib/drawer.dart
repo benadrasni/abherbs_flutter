@@ -1,3 +1,4 @@
+import 'package:abherbs_flutter/feedback.dart';
 import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
@@ -84,7 +85,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Settings(widget.onChangeLanguage)),
+          MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage)),
         ).then((result) {
           Navigator.pop(context);
           widget.settingsCallback();
@@ -96,7 +97,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Legend()),
+          MaterialPageRoute(builder: (context) => LegendScreen()),
         ).then((result) {
           Navigator.pop(context);
         });
@@ -105,7 +106,12 @@ class _AppDrawerState extends State<AppDrawer> {
     listItems.add(ListTile(
       title: Text(S.of(context).feedback),
       onTap: () {
-        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FeedbackScreen()),
+        ).then((result) {
+          Navigator.pop(context);
+        });
       },
     ));
     listItems.add(ListTile(

@@ -18,6 +18,8 @@
   "feedback_translate": "Galite pranešti apie rastą klaidą ar klaidą arba pateikti naują vertimą į savo kalbą.",
   "feedback_submit_translate_data": "Pagerinkite gėlių duomenis",
   "feedback_submit_translate_app": "Pagerinti programos etiketes",
+  "feedback_buy_extended": "Galite įsigyti išplėstinę versiją su papildomomis funkcijomis, pavyzdžiui, neprisijungus, ieškoti vardų, ieškoti taksonomijos, stebėjimų ir konfigūruojamo filtro.",
+  "feedback_submit_buy": "Prailginta versija",
 
   "rate_question": "Ar šią programą naudinga?",
   "rate_text": "Autorius šioje paraiškoje kurstė teigiamą atsakymą iš vartotojų. Prašome siųsti jam šiek tiek starflowers per Google Play Store.",

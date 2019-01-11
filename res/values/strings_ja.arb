@@ -18,6 +18,8 @@
   "feedback_translate": "誤植や誤りを報告したり、新しい翻訳をあなたの言語で提出することができます。",
   "feedback_submit_translate_data": "花のデータを改善する",
   "feedback_submit_translate_app": "アプリケーションのラベルを改善する",
+  "feedback_buy_extended": "オフラインモード、名前で検索、分類法で検索、観測、設定可能なフィルタなどの追加機能を備えた拡張バージョンを購入できます。",
+  "feedback_submit_buy": "拡張版",
 
   "rate_question": "このアプリケーションは役に立ちましたか？",
   "rate_text": "このアプリケーションの作成者は、ユーザーからの肯定的な応答によって促進されます。 Google Playストアでスターフラワーを送ってください。",

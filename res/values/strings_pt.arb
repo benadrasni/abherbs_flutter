@@ -18,6 +18,8 @@
   "feedback_translate": "Você pode denunciar qualquer erro ou erro encontrado ou enviar uma nova tradução para o seu idioma.",
   "feedback_cash": "Você pode suportar novo desenvolvimento e extensão de banco de dados com dinheiro.",
   "feedback_submit_cash": "Doar",
+  "feedback_buy_extended": "Você pode comprar a versão estendida (+) com funcionalidades adicionais, como o modo off-line, pesquisar nomes, pesquisar em taxonomia, observações e filtros configuráveis.",
+  "feedback_submit_buy": "Versão extendida",
 
   "rate_question": "Esta aplicação é útil?",
   "rate_text": "Autor desta aplicação é motivado pela resposta positiva dos usuários. Por favor, envie-lhe algumas flores estrela através do Google Play Store.",

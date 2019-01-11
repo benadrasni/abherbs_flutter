@@ -15,6 +15,8 @@
   "feedback_translate": "Puede reportar cualquier error tipográfico o error que encontró o enviar una nueva traducción en su idioma.",
   "feedback_submit_translate_data": "Mejorar los datos de la flor.",
   "feedback_submit_translate_app": "Mejorar las etiquetas de la aplicación.",
+  "feedback_buy_extended": "Puede comprar la versión extendida (+) con funcionalidad adicional como el modo fuera de línea, buscar en nombres, buscar en taxonomía, observaciones y filtros configurables.",
+  "feedback_submit_buy": "Versión extendida",
 
   "pref_language": "Idioma preferido",
   "my_region": "Mi región",

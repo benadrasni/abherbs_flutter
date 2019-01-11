@@ -17,7 +17,9 @@
   "feedback_title": "Wie kann ich dazu beitragen?",
   "feedback_translate": "Sie können Tippfehler oder falsche Übersetzungen melden, oder eine neue Übersetzung in Ihrer Sprache einreichen.",
   "feedback_submit_translate_data": "Verbessere die Daten der Blume",
-  "feedback_submit_translate_app": "Verbessere den Text der Anwendung",  
+  "feedback_submit_translate_app": "Verbessere den Text der Anwendung",
+  "feedback_buy_extended": "Sie können eine erweiterte (+) Version mit zusätzlichen Funktionen wie Offline-Modus, Suche nach Namen, Suche in Taxonomie, Beobachtungen und konfigurierbaren Filter kaufen.",
+  "feedback_submit_buy": "Erweiterte Version",
 
   "rate_question": "Ist diese Anwendung hilfreich?",
   "rate_never": "Niemals ",

@@ -26,6 +26,8 @@
   "feedback_translate": "Vous pouvez signaler toute erreur de frappe ou erreur que vous avez trouvée ou vous envoyer une nouvelle traduction dans votre langue.",
   "feedback_submit_translate_data": "Améliorer les données de la fleur",
   "feedback_submit_translate_app": "Améliorer les étiquettes de l'application",
+  "feedback_buy_extended": "Vous pouvez acheter la version étendue avec des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche dans les noms, la recherche dans la taxonomie, les observations et le filtre configurable.",
+  "feedback_submit_buy": "Version étendue",
     
   "filter_color": "couleur des fleurs",
   "filter_habitat": "habitats",

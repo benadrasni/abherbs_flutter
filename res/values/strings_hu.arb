@@ -18,6 +18,8 @@
   "feedback_translate": "Bármelyik hibát vagy hibát észlelhet, vagy új fordítást nyújthat be az ön nyelvén.",
   "feedback_submit_translate_data": "Javítani kell a virágadatokat",
   "feedback_submit_translate_app": "Javítsa az alkalmazás címkéit",
+  "feedback_buy_extended": "A bővített változatot további funkciókkal vásárolhatja meg, mint például az offline mód, kereshet a nevekben, kereshet taxonómia, megfigyelések és konfigurálható szűrő segítségével.",
+  "feedback_submit_buy": "Bővített változat",
     
   "rate_question": "Ez az alkalmazás hasznos?",
   "rate_text": "A szerző a pozitív visszajelzésekből dolgozik. A Google Play Store-on keresztül csillagzással értékelheti/támogathatja a munkáját.",

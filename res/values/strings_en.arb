@@ -18,6 +18,8 @@
   "feedback_translate": "You can report any typo or mistranslation you found or submit new translation for flower's data or application's labels at whatsthatflower.com.",
   "feedback_submit_translate_data": "Improve flower's data",
   "feedback_submit_translate_app": "Improve application's labels",
+  "feedback_buy_extended": "You can buy extended (+) version with additional functionality like offline mode, search in names, search in taxonomy, observations and configurable filter.",
+  "feedback_submit_buy": "Go to extended (+) version",
   
   "rate_question": "Is this app helpful?",
   "rate_text": "Author of this application is fueled by positive response from the users. Please send him some starflowers through Google Play Store.",
@@ -153,5 +155,5 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
   "taxonomy_species": "Species",
-  "taxonomy_unknown": "unknown",
+  "taxonomy_unknown": "unknown"
 }
