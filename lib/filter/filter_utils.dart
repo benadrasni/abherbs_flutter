@@ -26,16 +26,16 @@ MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Functio
 
   switch (nextFilterAttribute) {
     case filterColor:
-      route =  MaterialPageRoute(builder: (context) => Color(onChangeLanguage, filter));
+      route = MaterialPageRoute(builder: (context) => Color(onChangeLanguage, filter));
       break;
     case filterHabitat:
-      route =  MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, filter));
+      route = MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, filter));
       break;
     case filterPetal:
-      route =  MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, filter));
+      route = MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, filter));
       break;
     case filterDistribution:
-      route =  MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, filter));
+      route = MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, filter));
       break;
     default:
       route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, filter));
@@ -80,16 +80,28 @@ Image getFilterLeading(context, filterAttribute) {
   }
 }
 
-Text getFilterTitle(context, filterAttribute) {
+Text getFilterTitle(context, filterAttribute, drawerTextStyle) {
   switch (filterAttribute) {
     case filterColor:
-      return Text(S.of(context).filter_color);
+      return Text(
+        S.of(context).filter_color,
+        style: drawerTextStyle,
+      );
     case filterHabitat:
-      return Text(S.of(context).filter_habitat);
+      return Text(
+        S.of(context).filter_habitat,
+        style: drawerTextStyle,
+      );
     case filterPetal:
-      return Text(S.of(context).filter_petal);
+      return Text(
+        S.of(context).filter_petal,
+        style: drawerTextStyle,
+      );
     case filterDistribution:
-      return Text(S.of(context).filter_distribution);
+      return Text(
+        S.of(context).filter_distribution,
+        style: drawerTextStyle,
+      );
     default:
       return null;
   }

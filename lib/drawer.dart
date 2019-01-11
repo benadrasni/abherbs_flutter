@@ -45,12 +45,15 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    TextStyle drawerTextStyle = TextStyle(
+      fontSize: 16.0,
+    );
     Locale myLocale = Localizations.localeOf(context);
     var listItems = <Widget>[];
     listItems.addAll(filterAttributes.map((attribute) {
       return ListTile(
         leading: getFilterLeading(context, attribute),
-        title: getFilterTitle(context, attribute),
+        title: getFilterTitle(context, attribute, drawerTextStyle),
         subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ""),
         onTap: () {
           Navigator.pop(context);
@@ -81,7 +84,10 @@ class _AppDrawerState extends State<AppDrawer> {
     }));
     listItems.add(Divider());
     listItems.add(ListTile(
-      title: Text(S.of(context).settings),
+      title: Text(
+        S.of(context).settings,
+        style: drawerTextStyle,
+      ),
       onTap: () {
         Navigator.push(
           context,
@@ -93,7 +99,10 @@ class _AppDrawerState extends State<AppDrawer> {
       },
     ));
     listItems.add(ListTile(
-      title: Text(S.of(context).legend),
+      title: Text(
+        S.of(context).legend,
+        style: drawerTextStyle,
+      ),
       onTap: () {
         Navigator.push(
           context,
@@ -104,7 +113,10 @@ class _AppDrawerState extends State<AppDrawer> {
       },
     ));
     listItems.add(ListTile(
-      title: Text(S.of(context).feedback),
+      title: Text(
+        S.of(context).feedback,
+        style: drawerTextStyle,
+      ),
       onTap: () {
         Navigator.push(
           context,
@@ -115,14 +127,20 @@ class _AppDrawerState extends State<AppDrawer> {
       },
     ));
     listItems.add(ListTile(
-      title: Text(S.of(context).help),
+      title: Text(
+        S.of(context).help,
+        style: drawerTextStyle,
+      ),
       onTap: () {
         Navigator.pop(context);
         launchURL(webUrl + 'help?lang=' + myLocale.languageCode);
       },
     ));
     listItems.add(ListTile(
-      title: Text(S.of(context).about),
+      title: Text(
+        S.of(context).about,
+        style: drawerTextStyle,
+      ),
       onTap: () {
         Navigator.pop(context);
         launchURL(webUrl + 'about?lang=' + myLocale.languageCode);
