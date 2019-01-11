@@ -11,21 +11,21 @@ import 'package:screen/screen.dart';
 class Ads {
   static BannerAd _bannerAd;
   static bool isShown = false;
+  static bool _isGoingToBeShown = false;
 
   static void showBannerAd([State state]) {
     if (state != null && !state.mounted) return;
     if (_bannerAd == null) setBannerAd();
     if (!isShown) {
+      _isGoingToBeShown = true;
       _bannerAd
         ..load()
-        ..show(anchorOffset: 60.0, anchorType: AnchorType.bottom).then((shown) {
-          isShown = shown;
-        });
+        ..show(anchorOffset: 60.0, anchorType: AnchorType.bottom);
     }
   }
 
   static void hideBannerAd() {
-    if (_bannerAd != null) {
+    if (_bannerAd != null && !_isGoingToBeShown) {
       _bannerAd.dispose().then((disposed) {
         isShown = !disposed;
       });
@@ -48,6 +48,13 @@ class Ads {
       size: AdSize.banner,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
+        if (event == MobileAdEvent.loaded) {
+          isShown = true;
+          _isGoingToBeShown = false;
+        } else if (event == MobileAdEvent.failedToLoad) {
+          isShown = false;
+          _isGoingToBeShown = false;
+        }
         print("BannerAd event is $event");
       },
     );
