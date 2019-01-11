@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 class FeedbackScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final key = new GlobalKey<ScaffoldState>();
     TextStyle feedbackTextStyle = TextStyle(
       fontSize: 18.0,
     );
 
     Locale myLocale = Localizations.localeOf(context);
     return Scaffold(
+      key: key,
       appBar: AppBar(
         title: Text(S.of(context).feedback_title),
       ),
@@ -71,7 +73,13 @@ class FeedbackScreen extends StatelessWidget {
               ),
               RaisedButton(
                 onPressed: () {
-                  launchURL('market://details?id=sk.ab.herbs');
+                  if (Theme.of(context).platform == TargetPlatform.android) {
+                    launchURL('market://details?id=sk.ab.herbs');
+                  } else {
+                    key.currentState.showSnackBar(new SnackBar(
+                      content: new Text("... to be published"),
+                    ));
+                  }
                 },
                 child: new Text(S.of(context).feedback_google_play),
               )
@@ -139,7 +147,13 @@ class FeedbackScreen extends StatelessWidget {
               ),
               RaisedButton(
                 onPressed: () {
-                  launchURL('market://details?id=sk.ab.herbsplus');
+                  if (Theme.of(context).platform == TargetPlatform.android) {
+                    launchURL('market://details?id=sk.ab.herbsplus');
+                  } else {
+                    key.currentState.showSnackBar(new SnackBar(
+                      content: new Text("... to be published"),
+                    ));
+                  }
                 },
                 child: new Text(S.of(context).feedback_submit_buy),
               )
