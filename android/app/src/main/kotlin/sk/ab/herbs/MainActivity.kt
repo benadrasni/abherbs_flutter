@@ -1,4 +1,4 @@
-package com.whatsthatflower.abherbsflutter
+package sk.ab.herbs
 
 import android.os.Bundle
 

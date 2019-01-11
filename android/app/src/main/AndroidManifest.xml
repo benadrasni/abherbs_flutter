@@ -15,15 +15,16 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="abherbs_flutter"
-        android:icon="@mipmap/ic_launcher">
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round">
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-4417568961191754~2951136021"/>
 
         <activity
-            android:name="com.whatsthatflower.abherbsflutter.MainActivity"
+            android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
