@@ -29,9 +29,9 @@
   "yes": "Ano",
   "no": "Ne",
 
-  "filter_color": "barva květů",
+  "filter_color": "barva",
   "filter_habitat": "ekologie",
-  "filter_petal": "počet okvětních lístků",
+  "filter_petal": "okvětní list",
   "filter_distribution": "distribuce",
 
   "color_white": "bílá",

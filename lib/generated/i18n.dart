@@ -6147,7 +6147,7 @@ class $cs extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "počet okvětních lístků";
+  String get filter_petal => "okvětní list";
   @override
   String get color_white => "bílá";
   @override
@@ -6167,7 +6167,7 @@ class $cs extends S {
   @override
   String get south_central_pacific => "Středojižní Tichomoří";
   @override
-  String get filter_color => "barva květů";
+  String get filter_color => "barva";
   @override
   String get help => "Pomoc";
   @override

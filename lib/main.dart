@@ -1,10 +1,12 @@
+import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/keys.dart';
+import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/splash.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/splash.dart';
-import 'package:abherbs_flutter/prefs.dart';
-import 'package:abherbs_flutter/keys.dart';
+import 'package:screen/screen.dart';
 
 class Ads {
   static BannerAd _bannerAd;
@@ -52,7 +54,13 @@ class Ads {
   }
 }
 
-void main() async => runApp(App());
+void main() {
+  Screen.keepOn(true);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(App());
+  });
+}
 
 class App extends StatefulWidget {
   @override
