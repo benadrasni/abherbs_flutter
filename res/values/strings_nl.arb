@@ -10,6 +10,8 @@
 
   "pref_language": "Voorkeurstaal",
   "my_region": "Mijn regio",
+  "always_my_region_title": "Voeg altijd mijn regio toe aan het filter",
+  "always_my_region_subtitle": "Uw regio wordt vooraf ingesteld op het filter",
 
   "feedback_intro": "Sinds u de app geïnstalleerd heeft, draagt u bij aan de app. Dank u wel. Als u ons nóg meer wilt helpen, kunt u de volgende opties overwegen:",
   "feedback_review": "U kunt een positieve beoordeling in Google Play zetten.",

@@ -209,6 +209,8 @@ class $de extends S {
   @override
   String get plant_gallery => "Gallerie";
   @override
+  String get always_my_region_subtitle => "Ihre Region wird auf den Filter voreingestellt";
+  @override
   String get indochina => "Indochina";
   @override
   String get feedback_translate => "Sie können Tippfehler oder falsche Übersetzungen melden, oder eine neue Übersetzung in Ihrer Sprache einreichen.";
@@ -348,6 +350,8 @@ class $de extends S {
   String get feedback_submit_buy => "Erweiterte Version";
   @override
   String get southern_africa => "Südafrika";
+  @override
+  String get always_my_region_title => "Fügen Sie meine Region immer dem Filter hinzu";
   @override
   String get color_yellow => "Gelb";
   @override
@@ -503,6 +507,8 @@ class $hi extends S {
   @override
   String get plant_gallery => "गलियारा";
   @override
+  String get always_my_region_subtitle => "आपका क्षेत्र फ़िल्टर के लिए पूर्व-सेट किया जाएगा";
+  @override
   String get indochina => "हिंद चीन";
   @override
   String get feedback_translate => "बंजर​ या झील";
@@ -642,6 +648,8 @@ class $hi extends S {
   String get feedback_submit_buy => "विस्तारित संस्करण";
   @override
   String get southern_africa => "दक्षिणी अफ्रीका";
+  @override
+  String get always_my_region_title => "हमेशा मेरे क्षेत्र को फ़िल्टर में जोड़ें";
   @override
   String get color_yellow => "पीला";
   @override
@@ -797,6 +805,8 @@ class $no extends S {
   @override
   String get plant_gallery => "Galleri";
   @override
+  String get always_my_region_subtitle => "Din region vil bli forhåndsinnstilt til filteret";
+  @override
   String get indochina => "Indo-Kina";
   @override
   String get feedback_translate => "Du kan rapportere hvilken som helst skrivefeil eller feil du fant eller sende inn ny oversettelse på ditt språk.";
@@ -936,6 +946,8 @@ class $no extends S {
   String get feedback_submit_buy => "Utvidet versjon";
   @override
   String get southern_africa => "Sør Afrika";
+  @override
+  String get always_my_region_title => "Legg alltid til min region i filteret";
   @override
   String get color_yellow => "gul";
   @override
@@ -1091,6 +1103,8 @@ class $fi extends S {
   @override
   String get plant_gallery => "Kuvia";
   @override
+  String get always_my_region_subtitle => "Alueesi asetetaan etukäteen suodattimeen";
+  @override
   String get indochina => "Indokiinan";
   @override
   String get feedback_translate => "Voit ilmoittaa havaitusta virheestä tai virheestä tai lähettää uuden käännöksen omalle kielellesi.";
@@ -1230,6 +1244,8 @@ class $fi extends S {
   String get feedback_submit_buy => "Laajennettu versio";
   @override
   String get southern_africa => "Etelä-Afrikka";
+  @override
+  String get always_my_region_title => "Lisää alueeni aina suodattimeen";
   @override
   String get color_yellow => "keltainen";
   @override
@@ -1385,6 +1401,8 @@ class $ru extends S {
   @override
   String get plant_gallery => "Галерея";
   @override
+  String get always_my_region_subtitle => "Ваш регион будет предварительно настроен на фильтр";
+  @override
   String get indochina => "Индокитай";
   @override
   String get feedback_translate => "Вы можете сообщить о любой обнаруженной вами опечатке или ошибке или представить новый перевод на вашем языке.";
@@ -1524,6 +1542,8 @@ class $ru extends S {
   String get feedback_submit_buy => "Расширенная версия";
   @override
   String get southern_africa => "Южная Африка";
+  @override
+  String get always_my_region_title => "Всегда добавлять мой регион в фильтр";
   @override
   String get color_yellow => "жёлтая";
   @override
@@ -1677,6 +1697,8 @@ class $pt extends S {
   @override
   String get plant_gallery => "Galeria";
   @override
+  String get always_my_region_subtitle => "Sua região será pré-definida para o filtro";
+  @override
   String get indochina => "Indochina";
   @override
   String get feedback_translate => "Você pode denunciar qualquer erro ou erro encontrado ou enviar uma nova tradução para o seu idioma.";
@@ -1816,6 +1838,8 @@ class $pt extends S {
   String get feedback_submit_buy => "Versão extendida";
   @override
   String get southern_africa => "África do Sul";
+  @override
+  String get always_my_region_title => "Sempre adicione minha região ao filtro";
   @override
   String get color_yellow => "amarela";
   @override
@@ -1965,6 +1989,8 @@ class $lt extends S {
   @override
   String get plant_gallery => "Galerija";
   @override
+  String get always_my_region_subtitle => "Jūsų regionas bus iš anksto nustatytas filtre";
+  @override
   String get indochina => "Indijos Kinija";
   @override
   String get feedback_translate => "Galite pranešti apie rastą klaidą ar klaidą arba pateikti naują vertimą į savo kalbą.";
@@ -2104,6 +2130,8 @@ class $lt extends S {
   String get feedback_submit_buy => "Prailginta versija";
   @override
   String get southern_africa => "Pietų Afrika";
+  @override
+  String get always_my_region_title => "Visada pridėkite mano regioną prie filtro";
   @override
   String get color_yellow => "geltonas";
   @override
@@ -2259,6 +2287,8 @@ class $hr extends S {
   @override
   String get plant_gallery => "Galerija";
   @override
+  String get always_my_region_subtitle => "Vaša će regija biti unaprijed postavljena na filtar";
+  @override
   String get indochina => "Indo-Kina";
   @override
   String get feedback_translate => "Možete prijaviti svaku pogrešku ili pogrešku koju ste pronašli ili poslati novi prijevod na svoj jezik.";
@@ -2398,6 +2428,8 @@ class $hr extends S {
   String get feedback_submit_buy => "Proširena verzija";
   @override
   String get southern_africa => "Južna Afrika";
+  @override
+  String get always_my_region_title => "Uvijek dodajte moju regiju filtru";
   @override
   String get color_yellow => "žuta";
   @override
@@ -2551,6 +2583,8 @@ class $lv extends S {
   @override
   String get plant_gallery => "Galerija";
   @override
+  String get always_my_region_subtitle => "Jūsu reģions tiks iestatīts uz filtru";
+  @override
   String get indochina => "Indo Ķīna";
   @override
   String get feedback_translate => "Jūs varat ziņot par atrasto kļūdu vai kļūdu vai iesniegt jaunu tulkojumu savā valodā.";
@@ -2690,6 +2724,8 @@ class $lv extends S {
   String get feedback_submit_buy => "Paplašināta versija";
   @override
   String get southern_africa => "Dienvidāfrika";
+  @override
+  String get always_my_region_title => "Vienmēr pievienojiet manu reģionu filtram";
   @override
   String get color_yellow => "geltonas";
   @override
@@ -2845,6 +2881,8 @@ class $fr extends S {
   @override
   String get plant_gallery => "Galerie";
   @override
+  String get always_my_region_subtitle => "Votre région sera pré-réglée sur le filtre";
+  @override
   String get indochina => "Indochine";
   @override
   String get feedback_translate => "Vous pouvez signaler toute erreur de frappe ou erreur que vous avez trouvée ou vous envoyer une nouvelle traduction dans votre langue.";
@@ -2984,6 +3022,8 @@ class $fr extends S {
   String get feedback_submit_buy => "Version étendue";
   @override
   String get southern_africa => "Afrique du sud";
+  @override
+  String get always_my_region_title => "Toujours ajouter ma région au filtre";
   @override
   String get color_yellow => "jaune";
   @override
@@ -3139,6 +3179,8 @@ class $hu extends S {
   @override
   String get plant_gallery => "Képtár";
   @override
+  String get always_my_region_subtitle => "Az Ön régiója előre lesz beállítva a szűrőre";
+  @override
   String get indochina => "Indokína";
   @override
   String get feedback_translate => "Bármelyik hibát vagy hibát észlelhet, vagy új fordítást nyújthat be az ön nyelvén.";
@@ -3278,6 +3320,8 @@ class $hu extends S {
   String get feedback_submit_buy => "Bővített változat";
   @override
   String get southern_africa => "Dél-Afrika";
+  @override
+  String get always_my_region_title => "Mindig adjon hozzá régiót a szűrőhöz";
   @override
   String get color_yellow => "sárga";
   @override
@@ -3433,6 +3477,8 @@ class $uk extends S {
   @override
   String get plant_gallery => "Галерея";
   @override
+  String get always_my_region_subtitle => "Ваш регіон буде попередньо встановлено на фільтр";
+  @override
   String get indochina => "Індо-Китай";
   @override
   String get feedback_translate => "Ви можете повідомити про будь-яку друкарську помилку або помилку, яку ви знайшли, або подати новий переклад вашою мовою.";
@@ -3572,6 +3618,8 @@ class $uk extends S {
   String get feedback_submit_buy => "Розширена версія";
   @override
   String get southern_africa => "Південна Африка";
+  @override
+  String get always_my_region_title => "Завжди додайте мій регіон до фільтра";
   @override
   String get color_yellow => "жовтий";
   @override
@@ -3727,6 +3775,8 @@ class $sk extends S {
   @override
   String get plant_gallery => "Galéria";
   @override
+  String get always_my_region_subtitle => "Vaša oblasť bude prednastavená do filtra";
+  @override
   String get indochina => "Indočína";
   @override
   String get feedback_translate => "Môžete upozorniť na gramatické a faktické chyby v texte alebo priamo v aplikácii na stránke whatsthatflower.com.";
@@ -3866,6 +3916,8 @@ class $sk extends S {
   String get feedback_submit_buy => "Rozšírená verzia";
   @override
   String get southern_africa => "Južná Afrika";
+  @override
+  String get always_my_region_title => "Vždy pridať moju oblasť do filtra";
   @override
   String get color_yellow => "žltá";
   @override
@@ -4015,6 +4067,8 @@ class $sl extends S {
   @override
   String get plant_gallery => "Galerija";
   @override
+  String get always_my_region_subtitle => "Vaša regija bo vnaprej nastavljena na filter";
+  @override
   String get indochina => "Indo-Kitajska";
   @override
   String get feedback_translate => "Lahko prijavite kakršno koli tipkarsko napako ali napako, ki ste jo našli, ali pošljete nov prevod v vaš jezik.";
@@ -4154,6 +4208,8 @@ class $sl extends S {
   String get feedback_submit_buy => "Razširjena različica";
   @override
   String get southern_africa => "Južna Afrika";
+  @override
+  String get always_my_region_title => "Vedno dodajte mojo regijo v filter";
   @override
   String get color_yellow => "rumena";
   @override
@@ -4309,6 +4365,8 @@ class $id extends S {
   @override
   String get plant_gallery => "Galeri";
   @override
+  String get always_my_region_subtitle => "Wilayah Anda akan disetel sebelumnya ke filter";
+  @override
   String get indochina => "Indo-Cina";
   @override
   String get feedback_translate => "Anda dapat melaporkan kesalahan ketik atau kesalahan apa pun yang Anda temukan atau kirim terjemahan baru dalam bahasa Anda.";
@@ -4448,6 +4506,8 @@ class $id extends S {
   String get feedback_submit_buy => "Versi diperpanjang";
   @override
   String get southern_africa => "Afrika Selatan";
+  @override
+  String get always_my_region_title => "Selalu tambahkan wilayah saya ke filter";
   @override
   String get color_yellow => "kuning";
   @override
@@ -4603,6 +4663,8 @@ class $sr extends S {
   @override
   String get plant_gallery => "Галерија";
   @override
+  String get always_my_region_subtitle => "Ваш регион ће бити унапред подешен на филтер";
+  @override
   String get indochina => "Индо-Кина";
   @override
   String get feedback_translate => "Можете пријавити било коју грешку или грешку коју сте пронашли или послати нови превод на свој језик.";
@@ -4742,6 +4804,8 @@ class $sr extends S {
   String get feedback_submit_buy => "Проширена верзија";
   @override
   String get southern_africa => "Јужна Африка";
+  @override
+  String get always_my_region_title => "Увек додајте мој регион на филтер";
   @override
   String get color_yellow => "жут";
   @override
@@ -4897,6 +4961,8 @@ class $sv extends S {
   @override
   String get plant_gallery => "Galleri";
   @override
+  String get always_my_region_subtitle => "Din region kommer att förinställas till filtret";
+  @override
   String get indochina => "Indokina";
   @override
   String get feedback_translate => "Du kan rapportera eventuellt typsnitt eller misstag du hittat eller skicka in ny översättning på ditt språk.";
@@ -5036,6 +5102,8 @@ class $sv extends S {
   String get feedback_submit_buy => "Förlängd version";
   @override
   String get southern_africa => "Södra Afrika";
+  @override
+  String get always_my_region_title => "Lägg alltid till min region i filtret";
   @override
   String get color_yellow => "gul";
   @override
@@ -5195,6 +5263,8 @@ class $it extends S {
   @override
   String get plant_gallery => "Galleria";
   @override
+  String get always_my_region_subtitle => "La tua regione sarà preimpostata sul filtro";
+  @override
   String get indochina => "Indocina";
   @override
   String get feedback_translate => "Puoi segnalare refusi ed errori o inviare una nuova traduzione nella tua lingua.";
@@ -5334,6 +5404,8 @@ class $it extends S {
   String get feedback_submit_buy => "Versione estesa";
   @override
   String get southern_africa => "Africa meridionale";
+  @override
+  String get always_my_region_title => "Aggiungi sempre la mia regione al filtro";
   @override
   String get color_yellow => "giallo";
   @override
@@ -5489,6 +5561,8 @@ class $es extends S {
   @override
   String get plant_gallery => "Galería";
   @override
+  String get always_my_region_subtitle => "Su región estará preestablecida para el filtro";
+  @override
   String get indochina => "Indochina";
   @override
   String get feedback_translate => "Puede reportar cualquier error tipográfico o error que encontró o enviar una nueva traducción en su idioma.";
@@ -5628,6 +5702,8 @@ class $es extends S {
   String get feedback_submit_buy => "Versión extendida";
   @override
   String get southern_africa => "Africa del Sur";
+  @override
+  String get always_my_region_title => "Siempre agregue mi región al filtro";
   @override
   String get color_yellow => "amarillo";
   @override
@@ -5783,6 +5859,8 @@ class $et extends S {
   @override
   String get plant_gallery => "Galerii";
   @override
+  String get always_my_region_subtitle => "Teie piirkond on filtrile eelnevalt seadistatud";
+  @override
   String get indochina => "Indo-Hiina";
   @override
   String get feedback_translate => "Saate teatada mis tahes leitud veast või veast või esitada uue tõlke oma keelde.";
@@ -5922,6 +6000,8 @@ class $et extends S {
   String get feedback_submit_buy => "Pikendatud versioon";
   @override
   String get southern_africa => "Lõuna-Aafrika";
+  @override
+  String get always_my_region_title => "Lisage alati minu piirkond filtrile";
   @override
   String get color_yellow => "kollane";
   @override
@@ -6077,6 +6157,8 @@ class $cs extends S {
   @override
   String get plant_gallery => "Galerie";
   @override
+  String get always_my_region_subtitle => "Vaše oblast bude přednastavena do filtru";
+  @override
   String get indochina => "Indočína";
   @override
   String get feedback_translate => "Můžete upozornit na gramatické a faktické chyby v textu, případně navrhnout lepší překlad jednotlivých květin nebo aplikace samotné na stránce whatsthatflower.com.";
@@ -6216,6 +6298,8 @@ class $cs extends S {
   String get feedback_submit_buy => "Rozšířená verze";
   @override
   String get southern_africa => "Jižní Afrika";
+  @override
+  String get always_my_region_title => "Vždy přidat moji oblast do filtru";
   @override
   String get color_yellow => "žlutá";
   @override
@@ -6371,6 +6455,8 @@ class $ar extends S {
   @override
   String get plant_gallery => "صالة عرض";
   @override
+  String get always_my_region_subtitle => "سيتم إعداد منطقتك مسبقًا على الفلتر";
+  @override
   String get indochina => "الهند الصينية";
   @override
   String get feedback_translate => "يمكنك الإبلاغ عن أي خطأ مطبعي أو خطأ وجدته أو قدم ترجمة جديدة بلغتك.";
@@ -6510,6 +6596,8 @@ class $ar extends S {
   String get feedback_submit_buy => "نسخة موسعة";
   @override
   String get southern_africa => "جنوب افريقيا";
+  @override
+  String get always_my_region_title => "أضف دائمًا منطقتي إلى الفلتر";
   @override
   String get color_yellow => "أصفر";
   @override
@@ -6665,6 +6753,8 @@ class $pa extends S {
   @override
   String get plant_gallery => "ਗੈਲਰੀ";
   @override
+  String get always_my_region_subtitle => "ਤੁਹਾਡੇ ਖੇਤਰ ਨੂੰ ਫਿਲਟਰ ਤੇ ਪ੍ਰੀ-ਸੈੱਟ ਕੀਤਾ ਜਾਵੇਗਾ";
+  @override
   String get indochina => "ਇੰਡੋ-ਚਾਈਨਾ";
   @override
   String get feedback_translate => "ਪਹਾੜਾਂ ਜਾਂ ਝੂਲਿਆਂ";
@@ -6804,6 +6894,8 @@ class $pa extends S {
   String get feedback_submit_buy => "ਵਧਾਇਆ ਹੋਇਆ ਵਰਜਨ";
   @override
   String get southern_africa => "ਦੱਖਣੀ ਅਫਰੀਕਾ";
+  @override
+  String get always_my_region_title => "ਹਮੇਸ਼ਾਂ ਫਿਲਟਰ ਨੂੰ ਮੇਰਾ ਖੇਤਰ ਜੋੜੋ";
   @override
   String get color_yellow => "ਪੀਲਾ";
   @override
@@ -6969,6 +7061,8 @@ class $ja extends S {
   @override
   String get plant_gallery => "ギャラリー";
   @override
+  String get always_my_region_subtitle => "あなたの地域はフィルタにプリセットされます";
+  @override
   String get indochina => "インドシナ";
   @override
   String get feedback_translate => "誤植や誤りを報告したり、新しい翻訳をあなたの言語で提出することができます。";
@@ -7108,6 +7202,8 @@ class $ja extends S {
   String get feedback_submit_buy => "拡張版";
   @override
   String get southern_africa => "南アフリカ";
+  @override
+  String get always_my_region_title => "自分の地域を常にフィルタに追加する";
   @override
   String get color_yellow => "黄色";
   @override
@@ -7263,6 +7359,8 @@ class $fa extends S {
   @override
   String get plant_gallery => "آلبوم عکس";
   @override
+  String get always_my_region_subtitle => "منطقه شما به طور پیش فرض به فیلتر تنظیم می شود";
+  @override
   String get indochina => "هندو چین";
   @override
   String get feedback_translate => "شما می توانید هر نوع اشتباه یا اشتباهی را که به زبان خود پیدا کرده اید ارسال یا ارسال کنید.";
@@ -7400,6 +7498,8 @@ class $fa extends S {
   String get feedback_submit_buy => "نسخه توسعه یافته";
   @override
   String get southern_africa => "آفریقای جنوبی";
+  @override
+  String get always_my_region_title => "همیشه منطقه من را به فیلتر اضافه کنید";
   @override
   String get color_yellow => "رنگ زرد";
   @override
@@ -7551,6 +7651,8 @@ class $pl extends S {
   @override
   String get plant_gallery => "Galeria";
   @override
+  String get always_my_region_subtitle => "Twój region zostanie wstępnie ustawiony jako filtr";
+  @override
   String get indochina => "Indo-Chiny";
   @override
   String get feedback_translate => "Możesz zgłosić literówkę, błąd lub stworzyć nowe tłumaczenie dla Twojego języka.";
@@ -7690,6 +7792,8 @@ class $pl extends S {
   String get feedback_submit_buy => "Rozszerzona wersja";
   @override
   String get southern_africa => "Południowa Afryka";
+  @override
+  String get always_my_region_title => "Zawsze filtruj wg mojego wybranego regionu";
   @override
   String get color_yellow => "żółty";
   @override
@@ -7843,6 +7947,8 @@ class $da extends S {
   @override
   String get plant_gallery => "Galleri";
   @override
+  String get always_my_region_subtitle => "Din region vil blive forudindstillet til filteret";
+  @override
   String get indochina => "Indokina";
   @override
   String get feedback_translate => "Du kan rapportere enhver tastatur eller fejl, du har fundet eller indsende ny oversættelse på dit sprog.";
@@ -7981,6 +8087,8 @@ class $da extends S {
   @override
   String get southern_africa => "Sydafrika";
   @override
+  String get always_my_region_title => "Tilføj altid min region til filteret";
+  @override
   String get color_yellow => "gul";
   @override
   String get subantarctic_islands => "Subantarctic Islands";
@@ -8041,9 +8149,9 @@ class $da extends S {
   @override
   String get northeast_tropical_africa => "Nordøstlige tropiske Afrika";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get pref_language => "Foretrukne sprog";
+  @override
+  String get feedback_google_play => "Google Play";
   @override
   String get new_zealand => "New Zealand";
   @override
@@ -8132,6 +8240,8 @@ class $he extends S {
   String get middle_asia => "אסיה התיכונה";
   @override
   String get plant_gallery => "גלריה";
+  @override
+  String get always_my_region_subtitle => "האזור שלך יוגדר מראש למסנן";
   @override
   String get indochina => "הודו-סין";
   @override
@@ -8272,6 +8382,8 @@ class $he extends S {
   String get feedback_submit_buy => "גרסא מורחבת";
   @override
   String get southern_africa => "דרום אפריקה";
+  @override
+  String get always_my_region_title => "הוסף תמיד את האזור שלי למסנן";
   @override
   String get color_yellow => "צהוב";
   @override
@@ -8427,6 +8539,8 @@ class $ro extends S {
   @override
   String get plant_gallery => "Galerie";
   @override
+  String get always_my_region_subtitle => "Regiunea dvs. va fi pre-setată la filtru";
+  @override
   String get indochina => "Indo-China";
   @override
   String get feedback_translate => "Puteți raporta orice greșeală sau greșeală pe care ați găsit-o sau trimiteți o nouă traducere în limba dvs.";
@@ -8566,6 +8680,8 @@ class $ro extends S {
   String get feedback_submit_buy => "Versiunea extinsa";
   @override
   String get southern_africa => "Africa de Sud";
+  @override
+  String get always_my_region_title => "Adăugați întotdeauna regiunea mea la filtru";
   @override
   String get color_yellow => "galben";
   @override
@@ -8721,6 +8837,8 @@ class $nl extends S {
   @override
   String get plant_gallery => "Galerij";
   @override
+  String get always_my_region_subtitle => "Uw regio wordt vooraf ingesteld op het filter";
+  @override
   String get indochina => "Indo-China";
   @override
   String get feedback_translate => "U kunt typefouten of verkeerde vertalingen melden of nieuwer vertalingen toevoegen op whatsthatflower.com";
@@ -8860,6 +8978,8 @@ class $nl extends S {
   String get feedback_submit_buy => "Uitgebreide versie";
   @override
   String get southern_africa => "Zuid-Afrika";
+  @override
+  String get always_my_region_title => "Voeg altijd mijn regio toe aan het filter";
   @override
   String get color_yellow => "geel";
   @override

@@ -10,6 +10,8 @@
 
   "pref_language": "Suosittu kieli",
   "my_region": "Oma alue",
+  "always_my_region_title": "Lisää alueeni aina suodattimeen",
+  "always_my_region_subtitle": "Alueesi asetetaan etukäteen suodattimeen",
 
   "feedback_intro": "Olet osallistunut tähän sovellukseen, koska olet asentanut sen laitteeseen, kiitos. Jos etsit jotain muuta, tässä on muutamia vaihtoehtoja:",
   "feedback_review": "Voit kirjoittaa positiivisen arvioinnin Google Play.",

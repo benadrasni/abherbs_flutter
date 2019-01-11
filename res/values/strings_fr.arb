@@ -10,6 +10,8 @@
 
   "pref_language": "Préférence de langue",
   "my_region": "Ma région",
+  "always_my_region_title": "Toujours ajouter ma région au filtre",
+  "always_my_region_subtitle": "Votre région sera pré-réglée sur le filtre",
 
   "rate_question": "Cette application est-elle utile?",
   "rate_never": "Jamais",

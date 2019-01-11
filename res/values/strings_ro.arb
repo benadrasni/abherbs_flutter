@@ -10,6 +10,8 @@
 
   "pref_language": "Limba preferată",
   "my_region": "Regiunea mea",
+  "always_my_region_title": "Adăugați întotdeauna regiunea mea la filtru",
+  "always_my_region_subtitle": "Regiunea dvs. va fi pre-setată la filtru",
 
   "feedback_intro": "Ați contribuit la această aplicație de când ați instalat-o pe dispozitiv, mulțumită. Dacă sunteți în căutarea pentru ceva mai mult, iată câteva opțiuni:",
   "feedback_review": "Puteți scrie o recenzie pozitivă în Google Play.",

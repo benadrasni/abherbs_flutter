@@ -10,6 +10,8 @@
 
   "pref_language": "Pageidautina kalba",
   "my_region": "Mans reģions",
+  "always_my_region_title": "Vienmēr pievienojiet manu reģionu filtram",
+  "always_my_region_subtitle": "Jūsu reģions tiks iestatīts uz filtru",
 
   "feedback_intro": "Jūs esat veicinājis šo lietojumprogrammu, jo esat to instalējis savā ierīcē. Ja jūs meklējat kaut ko vairāk, šeit ir dažas iespējas:",
   "feedback_review": "Google Play varat uzrakstīt pozitīvu pārskatu.",

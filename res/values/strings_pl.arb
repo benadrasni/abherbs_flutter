@@ -10,6 +10,8 @@
 
   "pref_language": "Preferowany język",
   "my_region": "Mój region",
+  "always_my_region_title": "Zawsze filtruj wg mojego wybranego regionu",
+  "always_my_region_subtitle": "Twój region zostanie wstępnie ustawiony jako filtr",
 
   "feedback_intro": "Jeśli chcesz dać coś od siebie i przyczynić się do rozwoju aplikacji, masz kilka opcji do wyboru:",
   "feedback_review": "Możesz przyznać aplikacji 5 gwiazdek i napisać pozytywną recenzję w Sklepie Play.",

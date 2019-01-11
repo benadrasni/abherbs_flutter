@@ -10,6 +10,8 @@
 
   "pref_language": "Bahasa pilihan",
   "my_region": "Daerah saya",
+  "always_my_region_title": "Selalu tambahkan wilayah saya ke filter",
+  "always_my_region_subtitle": "Wilayah Anda akan disetel sebelumnya ke filter",
 
   "feedback_intro": "Anda telah berkontribusi untuk aplikasi ini karena Anda telah menginstalnya di perangkat Anda, terima kasih. Jika Anda mencari sesuatu yang lebih, berikut adalah beberapa opsi:",
   "feedback_review": "Anda dapat menulis ulasan positif di Google Play.",

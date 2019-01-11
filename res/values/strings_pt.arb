@@ -10,6 +10,8 @@
 
   "pref_language": "Língua preferida",
   "my_region": "Minha região",
+  "always_my_region_title": "Sempre adicione minha região ao filtro",
+  "always_my_region_subtitle": "Sua região será pré-definida para o filtro",
 
   "feedback_intro": "Você tem contribuído para este aplicativo desde que você o instalou no seu dispositivo, obrigado. Se você está procurando algo mais, aqui estão algumas opções:",
   "feedback_review": "Você pode escrever um comentário positivo no Google Play.",

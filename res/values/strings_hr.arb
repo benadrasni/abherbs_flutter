@@ -10,6 +10,8 @@
 
   "pref_language": "Preferirani jezik",
   "my_region": "Moja regija",
+  "always_my_region_title": "Uvijek dodajte moju regiju filtru",
+  "always_my_region_subtitle": "Vaša će regija biti unaprijed postavljena na filtar",
 
   "feedback_intro": "Doprinosili ste ovoj aplikaciji jer ste je instalirali na svom uređaju, hvala. Ako tražite nešto više, evo nekoliko opcija:",
   "feedback_review": "Možete napisati pozitivnu recenziju na usluzi Google Play.",

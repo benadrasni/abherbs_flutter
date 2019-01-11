@@ -10,6 +10,8 @@
 
   "pref_language": "Foretrukket Språk",
   "my_region": "Min region",
+  "always_my_region_title": "Legg alltid til min region i filteret",
+  "always_my_region_subtitle": "Din region vil bli forhåndsinnstilt til filteret",
 
   "feedback_intro": "Du har bidratt til dette programmet siden du har installert det på enheten, takk. Hvis du leter etter noe mer, er det noen alternativer:",
   "feedback_review": "Du kan skrive en positiv anmeldelse i Google Play.",

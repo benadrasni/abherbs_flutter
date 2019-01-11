@@ -7,6 +7,8 @@
 
   "toxicity1": "planta venenosa",
   "toxicity2": "planta ligeramente venenosa",
+  "always_my_region_title": "Siempre agregue mi región al filtro",
+  "always_my_region_subtitle": "Su región estará preestablecida para el filtro",
 
   "feedback_intro": "Ha estado contribuyendo a esta aplicación desde que la ha instalado en su dispositivo, gracias. Si está buscando algo más, aquí hay algunas opciones:",
   "feedback_review": "Puedes escribir una crítica positiva en Google Play.",

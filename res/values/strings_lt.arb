@@ -10,6 +10,8 @@
 
   "pref_language": "Pageidautina kalba",
   "my_region": "Mano regionas",
+  "always_my_region_title": "Visada pridėkite mano regioną prie filtro",
+  "always_my_region_subtitle": "Jūsų regionas bus iš anksto nustatytas filtre",
 
   "feedback_intro": "Jūs prisidėjote prie šios programos, nes ją įdiegėte savo prietaise. Jei ieškote ko nors daugiau, čia pateikiamos kelios parinktys:",
   "feedback_review": "Google Play galite parašyti teigiamą apžvalgą.",

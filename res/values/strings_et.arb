@@ -10,6 +10,8 @@
 
   "pref_language": "Eelistatud keel",
   "my_region": "Minu regioon",
+  "always_my_region_title": "Lisage alati minu piirkond filtrile",
+  "always_my_region_subtitle": "Teie piirkond on filtrile eelnevalt seadistatud",
 
   "feedback_intro": "Tänu sellele, et olete selle seadmesse installinud, olete sellele rakendusele kaasa aidanud. Kui otsite midagi muud, on siin mõned võimalused:",
   "feedback_review": "Google Play saate kirjutada positiivse ülevaate.",

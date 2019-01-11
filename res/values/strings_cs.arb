@@ -10,6 +10,8 @@
 
   "pref_language": "Preferovaný jazyk",
   "my_region": "Moje oblast",
+  "always_my_region_title": "Vždy přidat moji oblast do filtru",
+  "always_my_region_subtitle": "Vaše oblast bude přednastavena do filtru",
 
   "feedback_intro": "Tuto aplikaci podporujete odkdy jste si ji nainstalovali na své mobilní zařízení, děkuji. Pokud hledáte jiné formy podpory, zde jsou některé možnosti:",
   "feedback_review": "Můžete napsat pozitivní recenzi na Google Play.",

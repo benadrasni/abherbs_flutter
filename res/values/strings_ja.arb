@@ -10,6 +10,8 @@
 
   "pref_language": "優先言語e",
   "my_region": "私の地域",
+  "always_my_region_title": "自分の地域を常にフィルタに追加する",
+  "always_my_region_subtitle": "あなたの地域はフィルタにプリセットされます",
 
   "feedback_intro": "デバイスにインストールしたので、このアプリケーションに貢献しました。ありがとうございます。 あなたがもっと何かを探しているなら、いくつかのオプションがあります：",
   "feedback_review": "Google Playで肯定的なレビューを書くことができます。",

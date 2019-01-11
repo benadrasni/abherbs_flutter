@@ -10,6 +10,8 @@
 
   "pref_language": "Kedvenc nyelv",
   "my_region": "Saját régió",
+  "always_my_region_title": "Mindig adjon hozzá régiót a szűrőhöz",
+  "always_my_region_subtitle": "Az Ön régiója előre lesz beállítva a szűrőre",
 
   "feedback_intro": "Hozzájárult az alkalmazáshoz, mivel telepítette azt a készülékére. Ha valami többet keres, itt van néhány lehetőség:",
   "feedback_review": "Pozitív értékelést írhat a Google Play.",

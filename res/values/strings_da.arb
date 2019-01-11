@@ -8,6 +8,11 @@
   "toxicity1": "giftig plante",
   "toxicity2": "lidt giftig plante",
 
+  "pref_language": "Foretrukne sprog",
+  "my_region": "Min region",
+  "always_my_region_title": "Tilføj altid min region til filteret",
+  "always_my_region_subtitle": "Din region vil blive forudindstillet til filteret",
+
   "feedback_intro": "Du har bidraget til denne applikation, da du har installeret den på din enhed, tak. Hvis du leder efter noget mere, her er nogle muligheder:",
   "feedback_review": "Du kan skrive en positiv anmeldelse i Google Play.",
   "feedback_google_play": "Google Play",
@@ -15,9 +20,6 @@
   "feedback_translate": "Du kan rapportere enhver tastatur eller fejl, du har fundet eller indsende ny oversættelse på dit sprog.",
   "feedback_buy_extended": "Du kan købe udvidet (+) version med ekstra funktionalitet som offline-tilstand, søge i navne, søge i taksonomi, observationer og konfigurerbart filter.",
   "feedback_submit_buy": "Udvidet version",
-
-  "pref_language": "Foretrukne sprog",
-  "my_region": "Min region",
 
   "rate_question": "Er denne app hjælpsom?",
   "rate_text": "Forfatteren af denne ansøgning er drevet af et positivt svar fra brugerne. Send ham nogle stjerneblomster via Google Play Butik.",
