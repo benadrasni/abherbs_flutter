@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+final rootReference = FirebaseDatabase.instance.reference();
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 final listsReference = FirebaseDatabase.instance.reference().child(firebasePlantHeaders);
 final keysReference = FirebaseDatabase.instance.reference().child(firebaseLists);
@@ -17,7 +18,9 @@ final translationsTaxonomyReference = FirebaseDatabase.instance.reference().chil
 class PlantList extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
-  PlantList(this.onChangeLanguage, this.filter);
+  final String count;
+  final String path;
+  PlantList(this.onChangeLanguage, this.filter, [this.count, this.path]);
 
   @override
   _PlantListState createState() => _PlantListState();
@@ -31,9 +34,15 @@ class _PlantListState extends State<PlantList> {
   void initState() {
     super.initState();
 
-    _count = countsReference.child(getFilterKey(widget.filter)).once().then((DataSnapshot snapshot) {
-      return snapshot.value;
-    });
+    if (widget.count != null) {
+      _count = Future<int>(() {
+        return int.parse(widget.count);
+      });
+    } else {
+      _count = countsReference.child(getFilterKey(widget.filter)).once().then((DataSnapshot snapshot) {
+        return snapshot.value;
+      });
+    }
 
     translationCache = {};
 
@@ -53,7 +62,7 @@ class _PlantListState extends State<PlantList> {
             Flexible(
               child: FirebaseAnimatedIndexList(
                   query: listsReference,
-                  keyQuery: keysReference.child(getFilterKey(widget.filter)),
+                  keyQuery: widget.path != null ? rootReference.child(widget.path) : keysReference.child(getFilterKey(widget.filter)),
                   itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
                     String name = snapshot.value['name'];
                     String family = snapshot.value['family'];

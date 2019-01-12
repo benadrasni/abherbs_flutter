@@ -35,8 +35,8 @@ class Ads {
 
   static void setBannerAd() {
     MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-      //keywords: <String>['flutterio', 'beautiful apps'],
-      //contentUrl: 'https://flutter.io',
+      keywords: <String>['flower', 'identify flower', 'plant', 'tree'],
+      contentUrl: 'https://whatsthatflower.com/',
       childDirected: false,
       testDevices: <String>[], // Android emulators are considered test devices
     );
