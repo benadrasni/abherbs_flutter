@@ -2956,7 +2956,7 @@ class $fr extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "nombre de pétales";
+  String get filter_petal => "pétale";
   @override
   String get color_white => "blanc";
   @override
@@ -2976,7 +2976,7 @@ class $fr extends S {
   @override
   String get south_central_pacific => "Pacifique sud-central";
   @override
-  String get filter_color => "couleur des fleurs";
+  String get filter_color => "couleur";
   @override
   String get help => "Aide";
   @override
@@ -3040,7 +3040,7 @@ class $fr extends S {
   @override
   String get plant_flower => "Fleurs";
   @override
-  String get filter_habitat => "habitats";
+  String get filter_habitat => "habitat";
   @override
   String get rate_never => "Jamais";
   @override

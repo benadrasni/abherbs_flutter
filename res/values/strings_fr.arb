@@ -31,9 +31,9 @@
   "feedback_buy_extended": "Vous pouvez acheter la version étendue avec des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche dans les noms, la recherche dans la taxonomie, les observations et le filtre configurable.",
   "feedback_submit_buy": "Version étendue",
     
-  "filter_color": "couleur des fleurs",
-  "filter_habitat": "habitats",
-  "filter_petal": "nombre de pétales",
+  "filter_color": "couleur",
+  "filter_habitat": "habitat",
+  "filter_petal": "pétale",
   "filter_distribution": "distribution",
 
   "color_white": "blanc",
