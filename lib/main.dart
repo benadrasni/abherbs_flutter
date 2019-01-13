@@ -42,7 +42,7 @@ class Ads {
       keywords: <String>['flower', 'identify flower', 'plant', 'tree'],
       contentUrl: 'https://whatsthatflower.com/',
       childDirected: false,
-      testDevices: <String>[], // Android emulators are considered test devices
+      testDevices: <String>["E97A43B66C19A6831DFA72A48E922E5B"],
     );
     _bannerAd = BannerAd(
       adUnitId: bannerAdUnitId,

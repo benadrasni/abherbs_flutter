@@ -70,89 +70,96 @@ class _PetalState extends State<Petal> {
         title: Text(S.of(context).filter_petal),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
-      body: Column (
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      body: ListView(
+        shrinkWrap: true,
+        padding: EdgeInsets.all(5.0),
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: FlatButton(
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                    Text(
-                      S.of(context).petal_4,
-                      style: _defaultTextStyle,
-                    ),
-                    Image(
-                      image: AssetImage('res/images/nop_4.webp'),
-                    ),
-                  ]),
-                  onPressed: () {
-                    _navigate('1');
-                  },
+          Container(
+            padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: FlatButton(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                      Text(
+                        S.of(context).petal_4,
+                        style: _defaultTextStyle,
+                      ),
+                      Image(
+                        image: AssetImage('res/images/nop_4.webp'),
+                      ),
+                    ]),
+                    onPressed: () {
+                      _navigate('1');
+                    },
+                  ),
+                  flex: 1,
                 ),
-                flex: 1,
-              ),
-              Expanded(
-                child: FlatButton(
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                    Text(
-                      S.of(context).petal_5,
-                      style: _defaultTextStyle,
-                    ),
-                    Image(
-                      image: AssetImage('res/images/nop_5.webp'),
-                    ),
-                  ]),
-                  onPressed: () {
-                    _navigate('2');
-                  },
+                Expanded(
+                  child: FlatButton(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                      Text(
+                        S.of(context).petal_5,
+                        style: _defaultTextStyle,
+                      ),
+                      Image(
+                        image: AssetImage('res/images/nop_5.webp'),
+                      ),
+                    ]),
+                    onPressed: () {
+                      _navigate('2');
+                    },
+                  ),
+                  flex: 1,
                 ),
-                flex: 1,
-              ),
-            ],
+              ],
+            ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: FlatButton(
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                    Text(
-                      S.of(context).petal_many,
-                      style: _defaultTextStyle,
-                    ),
-                    Image(
-                      image: AssetImage('res/images/nop_many.webp'),
-                    ),
-                  ]),
-                  onPressed: () {
-                    _navigate('3');
-                  },
+          Container(
+            padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: FlatButton(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                      Text(
+                        S.of(context).petal_many,
+                        style: _defaultTextStyle,
+                      ),
+                      Image(
+                        image: AssetImage('res/images/nop_many.webp'),
+                      ),
+                    ]),
+                    onPressed: () {
+                      _navigate('3');
+                    },
+                  ),
+                  flex: 1,
                 ),
-                flex: 1,
-              ),
-              Expanded(
-                child: FlatButton(
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                    Text(
-                      S.of(context).petal_zygomorphic,
-                      style: _defaultTextStyle,
-                    ),
-                    Image(
-                      image: AssetImage('res/images/nop_zygomorphic.webp'),
-                    ),
-                  ]),
-                  onPressed: () {
-                    _navigate('4');
-                  },
+                Expanded(
+                  child: FlatButton(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                      Text(
+                        S.of(context).petal_zygomorphic,
+                        style: _defaultTextStyle,
+                      ),
+                      Image(
+                        image: AssetImage('res/images/nop_zygomorphic.webp'),
+                      ),
+                    ]),
+                    onPressed: () {
+                      _navigate('4');
+                    },
+                  ),
+                  flex: 1,
                 ),
-                flex: 1,
-              ),
-            ],
+              ],
+            ),
           ),
           Container(
             height: 50.0,
@@ -161,9 +168,27 @@ class _PetalState extends State<Petal> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/color.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_color)),
-          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/habitat.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_habitat)),
-          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/distribution.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_distribution)),
+          BottomNavigationBarItem(
+              icon: Image(
+                image: AssetImage('res/images/color.png'),
+                width: 25.0,
+                height: 25.0,
+              ),
+              title: Text(S.of(context).filter_color)),
+          BottomNavigationBarItem(
+              icon: Image(
+                image: AssetImage('res/images/habitat.png'),
+                width: 25.0,
+                height: 25.0,
+              ),
+              title: Text(S.of(context).filter_habitat)),
+          BottomNavigationBarItem(
+              icon: Image(
+                image: AssetImage('res/images/distribution.png'),
+                width: 25.0,
+                height: 25.0,
+              ),
+              title: Text(S.of(context).filter_distribution)),
         ],
         fixedColor: Colors.grey,
         onTap: (index) {

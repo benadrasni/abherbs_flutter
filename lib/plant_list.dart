@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/firebase_animated_index_list.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -130,10 +131,10 @@ class _PlantListState extends State<PlantList> {
                             CircularProgressIndicator(),
                             FlatButton(
                               padding: EdgeInsets.all(10.0),
-                              child: FadeInImage.assetNetwork(
+                              child: CachedNetworkImage(
                                 fit: BoxFit.scaleDown,
-                                placeholder: 'res/images/placeholder.webp',
-                                image: storageEndpoit + storagePhotos + snapshot.value['url'],
+                                placeholder: Image(image: AssetImage('res/images/placeholder.webp'),),
+                                imageUrl: storageEndpoit + storagePhotos + snapshot.value['url'],
                               ),
                               onPressed: () {
                                 Navigator.push(

@@ -2,6 +2,7 @@ import 'package:abherbs_flutter/detail/plant_detail_info.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 Widget getGallery(BuildContext context, Future<Plant> _plantF) {
@@ -19,10 +20,10 @@ Widget getGallery(BuildContext context, Future<Plant> _plantF) {
                   CircularProgressIndicator(),
                   FlatButton(
                     padding: EdgeInsets.all(10.0),
-                    child: FadeInImage.assetNetwork(
+                    child: CachedNetworkImage(
                       fit: BoxFit.scaleDown,
-                      placeholder: 'res/images/placeholder.webp',
-                      image: storageEndpoit + storagePhotos + snapshot.data.illustrationUrl,
+                      placeholder: Image(image: AssetImage('res/images/placeholder.webp'),),
+                      imageUrl: storageEndpoit + storagePhotos + snapshot.data.illustrationUrl,
                     ),
                     onPressed: () {},
                   ),
@@ -38,10 +39,10 @@ Widget getGallery(BuildContext context, Future<Plant> _plantF) {
                     CircularProgressIndicator(),
                     FlatButton(
                       padding: EdgeInsets.all(10.0),
-                      child: FadeInImage.assetNetwork(
+                      child: CachedNetworkImage(
                         fit: BoxFit.scaleDown,
-                        placeholder: 'res/images/placeholder.webp',
-                        image: storageEndpoit + storagePhotos + url,
+                        placeholder: Image(image: AssetImage('res/images/placeholder.webp'),),
+                        imageUrl: storageEndpoit + storagePhotos + url,
                       ),
                       onPressed: () {},
                     ),

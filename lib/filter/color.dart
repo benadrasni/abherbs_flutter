@@ -57,7 +57,6 @@ class _ColorState extends State<Color> {
             FlatButton(
               child: Text(S.of(context).rate_never),
               onPressed: () {
-                Navigator.of(context).pop();
                 Prefs.setString(keyRateState, rateStateNever).then((value) {
                   Navigator.of(context).pop();
                 }).catchError((error) {
