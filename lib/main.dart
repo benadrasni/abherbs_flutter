@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/prefs.dart';
@@ -6,6 +8,7 @@ import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_crashlytics/flutter_crashlytics.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:screen/screen.dart';
 
@@ -59,11 +62,29 @@ class Ads {
   }
 }
 
-void main() {
-  Screen.keepOn(true);
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
-    runApp(App());
+void main() async {
+  bool isInDebugMode = false;
+
+  FlutterError.onError = (FlutterErrorDetails details) {
+    if (isInDebugMode) {
+      // In development mode simply print to console.
+      FlutterError.dumpErrorToConsole(details);
+    } else {
+      // In production mode report to the application zone to report to Crashlytics.
+      Zone.current.handleUncaughtError(details.exception, details.stack);
+    }
+  };
+
+  await FlutterCrashlytics().initialize();
+
+  runZoned<Future<Null>>(() async {
+    Screen.keepOn(true);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+        .then((_) {
+      runApp(App());
+    });
+  }, onError: (error, stackTrace) async {
+    await FlutterCrashlytics().reportCrash(error, stackTrace, forceCrash: false);
   });
 }
 
