@@ -35,7 +35,9 @@ class _ColorState extends State<Color> {
     var newFilter = new Map<String, String>();
     newFilter.addAll(_filter);
     newFilter[filterColor] = value;
-    Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+    Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter)).then((result) {
+      Ads.showBannerAd(this);
+    });
   }
 
   _setCount() {
@@ -45,12 +47,10 @@ class _ColorState extends State<Color> {
   }
 
   Future<void> _rateDialog() async {
-    // flutter defined function
     return showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        // return object of type Dialog
         return AlertDialog(
           title: Text(S.of(context).rate_question),
           content: Text(S.of(context).rate_text),
@@ -106,11 +106,12 @@ class _ColorState extends State<Color> {
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterColor);
+    _key = new GlobalKey<ScaffoldState>();
+    _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
 
     _setCount();
 
-    _key = new GlobalKey<ScaffoldState>();
-    _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
+    Ads.showBannerAd(this);
   }
 
   @override
@@ -121,7 +122,6 @@ class _ColorState extends State<Color> {
 
   @override
   Widget build(BuildContext context) {
-    Ads.showBannerAd(this);
 
     var widgets = <Widget>[];
     widgets.add(Container(

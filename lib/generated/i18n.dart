@@ -3122,7 +3122,7 @@ class $fr extends S {
   @override
   String get taxonomy_unknown => "inconnu";
   @override
-  String get plant_inflorescence => "Floraison";
+  String get plant_inflorescence => "Inflorescence";
   @override
   String get northern_africa => "Afrique du Nord";
   @override
