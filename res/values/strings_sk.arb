@@ -157,5 +157,8 @@
   "taxonomy_subserie": "podséria",
   "taxonomy_supersectio": "nadsekcia",  
   "taxonomy_species": "druh",
-  "taxonomy_unknown": "neznámy"
+  "taxonomy_unknown": "neznámy",
+
+  "snack_copy": "Skopírované do schránky",
+  "snack_publish": "... bude dostupné neskôr"
 }

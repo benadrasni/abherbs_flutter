@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
   "taxonomy_species": "מין",
-  "taxonomy_unknown": "לא ידוע"
+  "taxonomy_unknown": "לא ידוע",
+
+  "snack_copy": "הועתק ללוח",
+  "snack_publish": "יפורסם בהמשך"
 }

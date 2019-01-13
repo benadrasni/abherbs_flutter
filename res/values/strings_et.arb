@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
   "taxonomy_species": "Liik",
-  "taxonomy_unknown": "teadmata"
+  "taxonomy_unknown": "teadmata",
+
+  "snack_copy": "Kopeeritud lõikelauale",
+  "snack_publish": "... avaldatakse hiljem"
 }

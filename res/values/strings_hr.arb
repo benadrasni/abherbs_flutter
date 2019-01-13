@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
   "taxonomy_species": "Vrsta",
-  "taxonomy_unknown": "nepoznat"
+  "taxonomy_unknown": "nepoznat",
+
+  "snack_copy": "Kopirano u međuspremnik",
+  "snack_publish": "... biti objavljen kasnije"
 }

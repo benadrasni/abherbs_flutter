@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
   "taxonomy_species": "Art",
-  "taxonomy_unknown": "ukjent"
+  "taxonomy_unknown": "ukjent",
+
+  "snack_copy": "Kopiert til utklippstavlen",
+  "snack_publish": "... å bli publisert senere"
 }

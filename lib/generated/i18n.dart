@@ -126,6 +126,8 @@ class S implements WidgetsLocalizations {
   String get show_original => "Show English text";
   String get show_translation => "Show translated text";
   String get siberia => "Siberia";
+  String get snack_copy => "Copied to Clipboard";
+  String get snack_publish => "... to be published later";
   String get south_central_pacific => "South-Central Pacific";
   String get south_central_usa => "South-Central U.S.A.";
   String get south_tropical_africa => "South Tropical Africa";
@@ -179,6 +181,8 @@ class $de extends S {
   String get legend => "Legende";
   @override
   String get feedback_submit_translate_data => "Verbessere die Daten der Blume";
+  @override
+  String get snack_copy => "In die Zwischenablage kopiert";
   @override
   String get about => "Über";
   @override
@@ -309,6 +313,8 @@ class $de extends S {
   String get help => "Hilfe";
   @override
   String get mexico => "Mexiko";
+  @override
+  String get snack_publish => "... wird später veröffentlicht";
   @override
   String get siberia => "Sibirien";
   @override
@@ -478,6 +484,8 @@ class $hi extends S {
   @override
   String get feedback_submit_translate_data => "फूल के डेटा में सुधार";
   @override
+  String get snack_copy => "क्लिपबोर्ड पर नकल";
+  @override
   String get about => "के बारे में";
   @override
   String get western_canada => "पश्चिमी कनाडा";
@@ -607,6 +615,8 @@ class $hi extends S {
   String get help => "मदद";
   @override
   String get mexico => "मेक्सिको";
+  @override
+  String get snack_publish => "... बाद में प्रकाशित किया जाना है";
   @override
   String get siberia => "साइबेरिया";
   @override
@@ -776,6 +786,8 @@ class $no extends S {
   @override
   String get feedback_submit_translate_data => "Forbedre blomstens data";
   @override
+  String get snack_copy => "Kopiert til utklippstavlen";
+  @override
   String get about => "Om apper";
   @override
   String get western_canada => "Vest-Canada";
@@ -905,6 +917,8 @@ class $no extends S {
   String get help => "Hjelp";
   @override
   String get mexico => "Mexico";
+  @override
+  String get snack_publish => "... å bli publisert senere";
   @override
   String get siberia => "Sibir";
   @override
@@ -1074,6 +1088,8 @@ class $fi extends S {
   @override
   String get feedback_submit_translate_data => "Paranna kukkien tietoja";
   @override
+  String get snack_copy => "Kopioitu leikepöydälle";
+  @override
   String get about => "Tietoja sovellus";
   @override
   String get western_canada => "Länsi-Kanada";
@@ -1203,6 +1219,8 @@ class $fi extends S {
   String get help => "Ohje";
   @override
   String get mexico => "Meksiko";
+  @override
+  String get snack_publish => "... julkaistaan myöhemmin";
   @override
   String get siberia => "Siperia";
   @override
@@ -1372,6 +1390,8 @@ class $ru extends S {
   @override
   String get feedback_submit_translate_data => "Улучшить данные цветка";
   @override
+  String get snack_copy => "Скопировано в буфер обмена";
+  @override
   String get about => "О приложении";
   @override
   String get western_canada => "Западная Канада";
@@ -1501,6 +1521,8 @@ class $ru extends S {
   String get help => "Cправка";
   @override
   String get mexico => "Мексика";
+  @override
+  String get snack_publish => "... будет опубликовано позже";
   @override
   String get siberia => "Сибирь";
   @override
@@ -1668,6 +1690,8 @@ class $pt extends S {
   @override
   String get legend => "Legenda";
   @override
+  String get snack_copy => "Copiado para a área de transferência";
+  @override
   String get about => "Sobre a aplicação";
   @override
   String get western_canada => "Canadá Ocidental";
@@ -1797,6 +1821,8 @@ class $pt extends S {
   String get help => "Ajuda";
   @override
   String get mexico => "México";
+  @override
+  String get snack_publish => "... para ser publicado mais tarde";
   @override
   String get siberia => "Sibéria";
   @override
@@ -1960,6 +1986,8 @@ class $lt extends S {
   @override
   String get feedback_submit_translate_data => "Pagerinkite gėlių duomenis";
   @override
+  String get snack_copy => "Kopijuojama į iškarpinę";
+  @override
   String get about => "Apie paraišką";
   @override
   String get western_canada => "Vakarų Kanadoje";
@@ -2089,6 +2117,8 @@ class $lt extends S {
   String get help => "Padėkite";
   @override
   String get mexico => "Meksika";
+  @override
+  String get snack_publish => "... bus paskelbta vėliau";
   @override
   String get siberia => "Sibiras";
   @override
@@ -2258,6 +2288,8 @@ class $hr extends S {
   @override
   String get feedback_submit_translate_data => "Poboljšajte podatke o cvijetu";
   @override
+  String get snack_copy => "Kopirano u međuspremnik";
+  @override
   String get about => "O aplikaciji";
   @override
   String get western_canada => "Zapadna Kanada";
@@ -2387,6 +2419,8 @@ class $hr extends S {
   String get help => "Pomoć";
   @override
   String get mexico => "Meksiko";
+  @override
+  String get snack_publish => "... biti objavljen kasnije";
   @override
   String get siberia => "Sibir";
   @override
@@ -2554,6 +2588,8 @@ class $lv extends S {
   @override
   String get feedback_submit_translate_data => "Uzlabojiet ziedu datus";
   @override
+  String get snack_copy => "Kopēts uz starpliktuvi";
+  @override
   String get about => "Apie paraišką";
   @override
   String get western_canada => "Rietumu Kanāda";
@@ -2683,6 +2719,8 @@ class $lv extends S {
   String get help => "Padėkite";
   @override
   String get mexico => "Meksika";
+  @override
+  String get snack_publish => "... publicēt vēlāk";
   @override
   String get siberia => "Sibīrija";
   @override
@@ -2852,6 +2890,8 @@ class $fr extends S {
   @override
   String get feedback_submit_translate_data => "Améliorer les données de la fleur";
   @override
+  String get snack_copy => "Copié dans le presse-papier";
+  @override
   String get about => "À propos";
   @override
   String get western_canada => "Ouest canadien";
@@ -2981,6 +3021,8 @@ class $fr extends S {
   String get help => "Aide";
   @override
   String get mexico => "Mexique";
+  @override
+  String get snack_publish => "... à publier plus tard";
   @override
   String get siberia => "Sibérie";
   @override
@@ -3150,6 +3192,8 @@ class $hu extends S {
   @override
   String get feedback_submit_translate_data => "Javítani kell a virágadatokat";
   @override
+  String get snack_copy => "A vágólapra másolt";
+  @override
   String get about => "Az alkalmazásról";
   @override
   String get western_canada => "Nyugat-Kanada";
@@ -3279,6 +3323,8 @@ class $hu extends S {
   String get help => "Súgó";
   @override
   String get mexico => "Mexikó";
+  @override
+  String get snack_publish => "... később közzé kell tenni";
   @override
   String get siberia => "Szibéria";
   @override
@@ -3448,6 +3494,8 @@ class $uk extends S {
   @override
   String get feedback_submit_translate_data => "Покращити дані квітки";
   @override
+  String get snack_copy => "Копіюється в буфер обміну";
+  @override
   String get about => "Про додатку";
   @override
   String get western_canada => "Західна Канада";
@@ -3577,6 +3625,8 @@ class $uk extends S {
   String get help => "Довідка";
   @override
   String get mexico => "Мексика";
+  @override
+  String get snack_publish => "... буде опубліковано пізніше";
   @override
   String get siberia => "Сибір";
   @override
@@ -3746,6 +3796,8 @@ class $sk extends S {
   @override
   String get feedback_submit_translate_data => "Opraviť chyby v dátach";
   @override
+  String get snack_copy => "Skopírované do schránky";
+  @override
   String get about => "O aplikácii";
   @override
   String get western_canada => "Západná Kanada";
@@ -3875,6 +3927,8 @@ class $sk extends S {
   String get help => "Pomoc";
   @override
   String get mexico => "Mexiko";
+  @override
+  String get snack_publish => "... bude dostupné neskôr";
   @override
   String get siberia => "Sibír";
   @override
@@ -4038,6 +4092,8 @@ class $sl extends S {
   @override
   String get feedback_submit_translate_data => "Izboljšajte podatke o cvetju";
   @override
+  String get snack_copy => "Kopirano v odložišče";
+  @override
   String get about => "O aplikaciji";
   @override
   String get western_canada => "Zahodna Kanada";
@@ -4167,6 +4223,8 @@ class $sl extends S {
   String get help => "Pomoč";
   @override
   String get mexico => "Mehika";
+  @override
+  String get snack_publish => "... bo objavljen pozneje";
   @override
   String get siberia => "Siberia";
   @override
@@ -4336,6 +4394,8 @@ class $id extends S {
   @override
   String get feedback_submit_translate_data => "Perbaiki data bunga";
   @override
+  String get snack_copy => "Disalin ke Clipboard";
+  @override
   String get about => "Tentang";
   @override
   String get western_canada => "Kanada Barat";
@@ -4465,6 +4525,8 @@ class $id extends S {
   String get help => "Membantu";
   @override
   String get mexico => "Meksiko";
+  @override
+  String get snack_publish => "... untuk diterbitkan nanti";
   @override
   String get siberia => "Siberia";
   @override
@@ -4634,6 +4696,8 @@ class $sr extends S {
   @override
   String get feedback_submit_translate_data => "Побољшајте податке о цвету";
   @override
+  String get snack_copy => "Копирано у Цлипбоард";
+  @override
   String get about => "О апликацији";
   @override
   String get western_canada => "Западна Канада";
@@ -4763,6 +4827,8 @@ class $sr extends S {
   String get help => "Помоћ";
   @override
   String get mexico => "Мексико";
+  @override
+  String get snack_publish => "... да се касније објави";
   @override
   String get siberia => "Сибериа";
   @override
@@ -4932,6 +4998,8 @@ class $sv extends S {
   @override
   String get feedback_submit_translate_data => "Förbättra blommans data";
   @override
+  String get snack_copy => "Kopieras till Urklipp";
+  @override
   String get about => "Om ansökan";
   @override
   String get western_canada => "Västra Kanada";
@@ -5061,6 +5129,8 @@ class $sv extends S {
   String get help => "Hjäjp";
   @override
   String get mexico => "Mexico";
+  @override
+  String get snack_publish => "... att publiceras senare";
   @override
   String get siberia => "Sibirien";
   @override
@@ -5234,6 +5304,8 @@ class $it extends S {
   @override
   String get feedback_submit_translate_data => "Migliorare le informazioni sui fiori";
   @override
+  String get snack_copy => "Copiato negli appunti";
+  @override
   String get about => "Info sull'applicazione";
   @override
   String get western_canada => "Canada occidentale";
@@ -5363,6 +5435,8 @@ class $it extends S {
   String get help => "Aiuto";
   @override
   String get mexico => "Messico";
+  @override
+  String get snack_publish => "... essere pubblicato più tardi";
   @override
   String get siberia => "Siberia";
   @override
@@ -5532,6 +5606,8 @@ class $es extends S {
   @override
   String get feedback_submit_translate_data => "Mejorar los datos de la flor.";
   @override
+  String get snack_copy => "Copiado al portapapeles";
+  @override
   String get about => "Acerca de";
   @override
   String get western_canada => "Canadá occidental";
@@ -5661,6 +5737,8 @@ class $es extends S {
   String get help => "Ayuda";
   @override
   String get mexico => "Méjico";
+  @override
+  String get snack_publish => "... para ser publicado más tarde";
   @override
   String get siberia => "Siberia";
   @override
@@ -5830,6 +5908,8 @@ class $et extends S {
   @override
   String get feedback_submit_translate_data => "Parandage lilli andmeid";
   @override
+  String get snack_copy => "Kopeeritud lõikelauale";
+  @override
   String get about => "Rakenduse kohta";
   @override
   String get western_canada => "Lääne-Kanada";
@@ -5959,6 +6039,8 @@ class $et extends S {
   String get help => "Appi";
   @override
   String get mexico => "Mehhiko";
+  @override
+  String get snack_publish => "... avaldatakse hiljem";
   @override
   String get siberia => "Siberis";
   @override
@@ -6128,6 +6210,8 @@ class $cs extends S {
   @override
   String get feedback_submit_translate_data => "Opravit chyby datech";
   @override
+  String get snack_copy => "Zkopírováno do schránky";
+  @override
   String get about => "O aplikaci";
   @override
   String get western_canada => "Západní Kanada";
@@ -6257,6 +6341,8 @@ class $cs extends S {
   String get help => "Pomoc";
   @override
   String get mexico => "Mexiko";
+  @override
+  String get snack_publish => "... bude zveřejněno později";
   @override
   String get siberia => "Sibiř";
   @override
@@ -6426,6 +6512,8 @@ class $ar extends S {
   @override
   String get feedback_submit_translate_data => "تحسين بيانات الزهور";
   @override
+  String get snack_copy => "نسخ إلى الحافظة";
+  @override
   String get about => "حول";
   @override
   String get western_canada => "غرب كندا";
@@ -6555,6 +6643,8 @@ class $ar extends S {
   String get help => "مساعدة";
   @override
   String get mexico => "المكسيك";
+  @override
+  String get snack_publish => "ليتم نشرها في وقت لاحق";
   @override
   String get siberia => "سيبيريا";
   @override
@@ -6724,6 +6814,8 @@ class $pa extends S {
   @override
   String get feedback_submit_translate_data => "ਫੁੱਲ ਦਾ ਡਾਟਾ ਸੁਧਾਰੋ";
   @override
+  String get snack_copy => "ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ";
+  @override
   String get about => "ਇਸ ਬਾਰੇ";
   @override
   String get western_canada => "ਪੱਛਮੀ ਕੈਨੇਡਾ";
@@ -6853,6 +6945,8 @@ class $pa extends S {
   String get help => "ਮਦਦ ਕਰੋ";
   @override
   String get mexico => "ਮੈਕਸੀਕੋ";
+  @override
+  String get snack_publish => "... ਬਾਅਦ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤੇ ਜਾਣ ਲਈ";
   @override
   String get siberia => "ਸਾਇਬੇਰੀਆ";
   @override
@@ -7032,6 +7126,8 @@ class $ja extends S {
   @override
   String get feedback_submit_translate_data => "花のデータを改善する";
   @override
+  String get snack_copy => "クリップボードにコピー";
+  @override
   String get about => "約";
   @override
   String get western_canada => "カナダ西部";
@@ -7161,6 +7257,8 @@ class $ja extends S {
   String get help => "ヘルプ";
   @override
   String get mexico => "メキシコ";
+  @override
+  String get snack_publish => "... 後で公開する";
   @override
   String get siberia => "シベリア";
   @override
@@ -7330,6 +7428,8 @@ class $fa extends S {
   @override
   String get feedback_submit_translate_data => "اطلاعات گل را بهبود بخشید";
   @override
+  String get snack_copy => "کپی به کلیپ بورد";
+  @override
   String get about => "درباره برنامه";
   @override
   String get western_canada => "غربی کانادا";
@@ -7459,6 +7559,8 @@ class $fa extends S {
   String get help => "کمک";
   @override
   String get mexico => "مکزیک";
+  @override
+  String get snack_publish => "بعدا منتشر شود";
   @override
   String get siberia => "سیبری";
   @override
@@ -7622,6 +7724,8 @@ class $pl extends S {
   @override
   String get feedback_submit_translate_data => "Poprawienie informacji dot. kwiatów";
   @override
+  String get snack_copy => "Skopiowane do schowka";
+  @override
   String get about => "O aplikacji";
   @override
   String get western_canada => "Zachodnia Kanada";
@@ -7751,6 +7855,8 @@ class $pl extends S {
   String get help => "Pomoc";
   @override
   String get mexico => "Meksyk";
+  @override
+  String get snack_publish => "... do opublikowania później";
   @override
   String get siberia => "Syberia";
   @override
@@ -7918,6 +8024,8 @@ class $da extends S {
   @override
   String get legend => "Legende";
   @override
+  String get snack_copy => "Kopieret til udklipsholderen";
+  @override
   String get about => "Om ansøgning";
   @override
   String get western_canada => "Vestlige Canada";
@@ -8045,6 +8153,8 @@ class $da extends S {
   String get help => "Hjælp";
   @override
   String get mexico => "Mexico";
+  @override
+  String get snack_publish => "... offentliggøres senere";
   @override
   String get siberia => "Sibirien";
   @override
@@ -8212,6 +8322,8 @@ class $he extends S {
   @override
   String get feedback_submit_translate_data => "שפר את נתוני הפרחים";
   @override
+  String get snack_copy => "הועתק ללוח";
+  @override
   String get about => "על היישום";
   @override
   String get western_canada => "קנדה המערבית";
@@ -8341,6 +8453,8 @@ class $he extends S {
   String get help => "עֶזרָה";
   @override
   String get mexico => "מקסיקו";
+  @override
+  String get snack_publish => "יפורסם בהמשך";
   @override
   String get siberia => "סיביר";
   @override
@@ -8510,6 +8624,8 @@ class $ro extends S {
   @override
   String get feedback_submit_translate_data => "Îmbunătățiți datele florii";
   @override
+  String get snack_copy => "Copiat în Clipboard";
+  @override
   String get about => "Despre";
   @override
   String get western_canada => "Vestul Canadei";
@@ -8639,6 +8755,8 @@ class $ro extends S {
   String get help => "Ajutor";
   @override
   String get mexico => "Mexic";
+  @override
+  String get snack_publish => "... care urmează să fie publicată ulterior";
   @override
   String get siberia => "Siberia";
   @override
@@ -8808,6 +8926,8 @@ class $nl extends S {
   @override
   String get feedback_submit_translate_data => "Verbeter de gegevens over de bloemen";
   @override
+  String get snack_copy => "Gekopieerd naar het klembord";
+  @override
   String get about => "Over de app";
   @override
   String get western_canada => "West-Canada";
@@ -8937,6 +9057,8 @@ class $nl extends S {
   String get help => "Helpen";
   @override
   String get mexico => "Mexico";
+  @override
+  String get snack_publish => "... later worden gepubliceerd";
   @override
   String get siberia => "Siberië";
   @override

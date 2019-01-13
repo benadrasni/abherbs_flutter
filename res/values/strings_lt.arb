@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Subserija",
   "taxonomy_supersectio": "Supersekcija",
   "taxonomy_species": "Rūšis",
-  "taxonomy_unknown": "nežinomas"
+  "taxonomy_unknown": "nežinomas",
+
+  "snack_copy": "Kopijuojama į iškarpinę",
+  "snack_publish": "... bus paskelbta vėliau"
 }

@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",
   "taxonomy_species": "especie",
-  "taxonomy_unknown": "desconocido"
+  "taxonomy_unknown": "desconocido",
+
+  "snack_copy": "Copiado al portapapeles",
+  "snack_publish": "... para ser publicado más tarde"
 }

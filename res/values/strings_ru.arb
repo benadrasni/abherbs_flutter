@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Подряд",
   "taxonomy_supersectio": "Надсекция",
   "taxonomy_species": "Вид",
-  "taxonomy_unknown": "неизвестный"
+  "taxonomy_unknown": "неизвестный",
+
+  "snack_copy": "Скопировано в буфер обмена",
+  "snack_publish": "... будет опубликовано позже"
 }

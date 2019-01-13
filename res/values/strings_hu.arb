@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
   "taxonomy_species": "Faj",
-  "taxonomy_unknown": "ismeretlen"
+  "taxonomy_unknown": "ismeretlen",
+
+  "snack_copy": "A vágólapra másolt",
+  "snack_publish": "... később közzé kell tenni"
 }

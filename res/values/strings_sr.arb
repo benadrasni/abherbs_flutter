@@ -157,5 +157,8 @@
   "taxonomy_subserie": "подсерија",
   "taxonomy_supersectio": "надсекција",
   "taxonomy_species": "врста",
-  "taxonomy_unknown": "непознат"
+  "taxonomy_unknown": "непознат",
+
+  "snack_copy": "Копирано у Цлипбоард",
+  "snack_publish": "... да се касније објави"
 }

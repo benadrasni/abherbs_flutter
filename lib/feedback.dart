@@ -79,7 +79,7 @@ class FeedbackScreen extends StatelessWidget {
                     launchURL('market://details?id=sk.ab.herbs');
                   } else {
                     key.currentState.showSnackBar(SnackBar(
-                      content: Text("... to be published"),
+                      content: Text(S.of(context).snack_publish),
                     ));
                   }
                 },
@@ -153,7 +153,7 @@ class FeedbackScreen extends StatelessWidget {
                     launchURL('market://details?id=sk.ab.herbsplus');
                   } else {
                     key.currentState.showSnackBar(new SnackBar(
-                      content: new Text("... to be published"),
+                      content: new Text(S.of(context).snack_publish),
                     ));
                   }
                 },

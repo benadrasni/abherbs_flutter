@@ -27,7 +27,6 @@ class Color extends StatefulWidget {
 class _ColorState extends State<Color> {
   Future<int> _count;
   Future<String> _rateStateF;
-
   Map<String, String> _filter;
   GlobalKey<ScaffoldState> _key;
 
@@ -89,7 +88,7 @@ class _ColorState extends State<Color> {
                   launchURL('market://details?id=sk.ab.herbs');
                 } else {
                   _key.currentState.showSnackBar(SnackBar(
-                    content: Text("... to be published"),
+                    content: Text(S.of(context).snack_publish),
                   ));
                 }
               },

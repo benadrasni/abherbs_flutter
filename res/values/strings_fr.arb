@@ -158,5 +158,8 @@
   "taxonomy_subserie": "Sous-série",
   "taxonomy_supersectio": "Super-section",
   "taxonomy_species": "Espèce",
-  "taxonomy_unknown": "inconnu"
+  "taxonomy_unknown": "inconnu",
+
+  "snack_copy": "Copié dans le presse-papier",
+  "snack_publish": "... à publier plus tard"
 }

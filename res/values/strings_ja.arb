@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
   "taxonomy_species": "種",
-  "taxonomy_unknown": "未知の"
+  "taxonomy_unknown": "未知の",
+
+  "snack_copy": "クリップボードにコピー",
+  "snack_publish": "... 後で公開する"
 }

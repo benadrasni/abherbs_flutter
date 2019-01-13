@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Apakšsērija",
   "taxonomy_supersectio": "Virssekcija",
   "taxonomy_species": "Suga",
-  "taxonomy_unknown": "nezināms"
+  "taxonomy_unknown": "nezināms",
+
+  "snack_copy": "Kopēts uz starpliktuvi",
+  "snack_publish": "... publicēt vēlāk"
 }

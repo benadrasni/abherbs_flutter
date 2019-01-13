@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
   "taxonomy_species": "ਸਪੀਸੀਜ਼",
-  "taxonomy_unknown": "ਅਣਜਾਣ"
+  "taxonomy_unknown": "ਅਣਜਾਣ",
+
+  "snack_copy": "ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ",
+  "snack_publish": "... ਬਾਅਦ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤੇ ਜਾਣ ਲਈ"
 }

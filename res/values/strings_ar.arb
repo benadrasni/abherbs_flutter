@@ -157,5 +157,8 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",
-  "taxonomy_unknown": "غير معروف"
+  "taxonomy_unknown": "غير معروف",
+
+  "snack_copy": "نسخ إلى الحافظة",
+  "snack_publish": "ليتم نشرها في وقت لاحق"
 }

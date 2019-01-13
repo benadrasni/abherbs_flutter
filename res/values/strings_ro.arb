@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
   "taxonomy_species": "Specie",
-  "taxonomy_unknown": "necunoscut"
+  "taxonomy_unknown": "necunoscut",
+
+  "snack_copy": "Copiat în Clipboard",
+  "snack_publish": "... care urmează să fie publicată ulterior"
 }

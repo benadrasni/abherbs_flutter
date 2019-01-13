@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Unterserie",
   "taxonomy_supersectio": "Supersektion",
   "taxonomy_species": "Art",
-  "taxonomy_unknown": "unbekannt"
+  "taxonomy_unknown": "unbekannt",
+
+  "snack_copy": "In die Zwischenablage kopiert",
+  "snack_publish": "... wird später veröffentlicht"
 }

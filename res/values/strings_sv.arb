@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",
   "taxonomy_species": "Art",
-  "taxonomy_unknown": "okänd"
+  "taxonomy_unknown": "okänd",
+
+  "snack_copy": "Kopieras till Urklipp",
+  "snack_publish": "... att publiceras senare"
 }

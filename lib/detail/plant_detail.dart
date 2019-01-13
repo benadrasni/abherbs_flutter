@@ -13,6 +13,7 @@ import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 final plantsReference = FirebaseDatabase.instance.reference().child(firebasePlants);
@@ -34,6 +35,7 @@ class _PlantDetailState extends State<PlantDetail> {
   Future<PlantTranslation> _plantTranslationF;
   int _currentIndex;
   bool _isOriginal;
+  GlobalKey<ScaffoldState> _key;
 
   onChangeTranslation(bool isOriginal) {
     setState(() {
@@ -114,16 +116,16 @@ class _PlantDetailState extends State<PlantDetail> {
   void initState() {
     super.initState();
 
-    Ads.hideBannerAd();
-
     _plantF = plantsReference.child(widget.plantName).once().then((DataSnapshot snapshot) {
       return Plant.fromJson(snapshot.key, snapshot.value);
     });
-
     _plantTranslationF = _getTranslation();
 
     _currentIndex = 0;
     _isOriginal = false;
+    _key = new GlobalKey<ScaffoldState>();
+
+    Ads.hideBannerAd();
   }
 
   Widget _getBody(BuildContext context) {
@@ -131,7 +133,7 @@ class _PlantDetailState extends State<PlantDetail> {
       case 0:
         return getGallery(context, _plantF);
       case 1:
-        return getInfo(context, widget.myLocale, _isOriginal, _plantF, _plantTranslationF, this.onChangeTranslation);
+        return getInfo(context, widget.myLocale, _isOriginal, _plantF, _plantTranslationF, this.onChangeTranslation, _key);
       case 2:
         return getTaxonomy(context, widget.myLocale, _plantF, _plantTranslationF);
     }
@@ -141,8 +143,17 @@ class _PlantDetailState extends State<PlantDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       appBar: AppBar(
-        title: Text(widget.plantName),
+        title: GestureDetector(
+          child: Text(widget.plantName),
+          onLongPress: () {
+            Clipboard.setData(new ClipboardData(text: widget.plantName));
+            _key.currentState.showSnackBar(SnackBar(
+              content: Text(S.of(context).snack_copy),
+            ));
+          },
+        )
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.filter, null),
       body: _getBody(context),

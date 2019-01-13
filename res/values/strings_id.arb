@@ -157,5 +157,8 @@
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
   "taxonomy_species": "Jenis",
-  "taxonomy_unknown": "tidak diketahui"
+  "taxonomy_unknown": "tidak diketahui",
+
+  "snack_copy": "Disalin ke Clipboard",
+  "snack_publish": "... untuk diterbitkan nanti"
 }

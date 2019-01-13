@@ -3,6 +3,7 @@ import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 const String sourceWikipedia = "wikipedia";
@@ -23,7 +24,7 @@ const String sourceUsfs = "forestryimages.org";
 const String sourceTelaBotanica = "tela-botanica.org";
 
 Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Plant> _plantF, Future<PlantTranslation> _plantTranslationF,
-    Function(bool) onChangeTranslation) {
+    Function(bool) onChangeTranslation, GlobalKey<ScaffoldState> key) {
   return FutureBuilder<PlantTranslation>(
       future: _plantTranslationF,
       builder: (BuildContext context, AsyncSnapshot<PlantTranslation> snapshot) {
@@ -36,7 +37,10 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Pl
               future: _plantF,
               builder: (BuildContext context, AsyncSnapshot<Plant> plantSnapshot) {
                 if (plantSnapshot.connectionState == ConnectionState.done) {
-                  return Container(padding: EdgeInsets.only(top: 15.0, bottom: 15.0), child: _getNames(plantSnapshot.data, snapshot.data));
+                  return Container(
+                    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                    child: _getNames(context, plantSnapshot.data, snapshot.data, key),
+                  );
                 } else {
                   return Container();
                 }
@@ -296,24 +300,40 @@ const TextStyle _defaultTextStyle = TextStyle(
   color: Colors.black,
 );
 
-Widget _getNames(Plant plant, PlantTranslation plantTranslation) {
-  var names = <Text>[];
-  names.add(Text(
-    plantTranslation.label,
-    style: TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 22.0,
-    ),
-    textAlign: TextAlign.center,
-  ));
-  if (plantTranslation.names != null) {
-    names.add(Text(
-      plantTranslation.names.take(3).join(', '),
+Widget _getNames(BuildContext context, Plant plant, PlantTranslation plantTranslation, GlobalKey<ScaffoldState> key) {
+  var names = <Widget>[];
+  names.add(GestureDetector(
+    child: Text(
+      plantTranslation.label,
       style: TextStyle(
-        fontStyle: FontStyle.italic,
-        fontSize: 14.0,
+        fontWeight: FontWeight.bold,
+        fontSize: 22.0,
       ),
       textAlign: TextAlign.center,
+    ),
+    onLongPress: () {
+      Clipboard.setData(new ClipboardData(text: plantTranslation.label));
+      key.currentState.showSnackBar(SnackBar(
+        content: Text(S.of(context).snack_copy),
+      ));
+    },
+  ));
+  if (plantTranslation.names != null) {
+    names.add(GestureDetector(
+      child: Text(
+        plantTranslation.names.take(3).join(', '),
+        style: TextStyle(
+          fontStyle: FontStyle.italic,
+          fontSize: 14.0,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      onLongPress: () {
+        Clipboard.setData(new ClipboardData(text: plantTranslation.label));
+        key.currentState.showSnackBar(SnackBar(
+          content: Text(S.of(context).snack_copy),
+        ));
+      },
     ));
   }
 
