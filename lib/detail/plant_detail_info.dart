@@ -218,6 +218,10 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Pl
               cards.add(Card(
                 child: Container(
                   padding: EdgeInsets.all(10.0),
+                  decoration: new BoxDecoration(
+                    borderRadius: new BorderRadius.circular(16.0),
+                    color: Theme.of(context).secondaryHeaderColor,
+                  ),
                   child: Column(
                     children: [
                       Text(S.of(context).google_translate),

@@ -2,6 +2,7 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/splash.dart';
+import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -91,8 +92,20 @@ class _AppState extends State<App> {
     FirebaseAdMob.instance.initialize(appId: adAppId);
 
     Prefs.init();
-    Prefs.getStringF('pref_language').then((String language) {
+    Prefs.getStringF(keyPreferredLanguage).then((String language) {
       onChangeLanguage(language);
+    });
+
+    Prefs.getIntF(keyRateCount, rateCountInitial).then((value) {
+      if (value < 0) {
+        Prefs.getStringF(keyRateState, rateStateInitial).then((value) {
+          if (value == rateStateInitial ) {
+            Prefs.setString(keyRateState, rateStateShould);
+          }
+        });
+      } else {
+        Prefs.setInt(keyRateCount, value-1);
+      }
     });
   }
 

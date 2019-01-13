@@ -5,6 +5,13 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
 const String keyAlwaysMyRegion = "always_my_region";
+const String keyRateState = "rate_state";
+const String keyRateCount = "rate_count";
+const int rateCountInitial = 0;
+const String rateStateInitial = "too_soon";
+const String rateStateNever = "never";
+const String rateStateShould = "should";
+const String rateStateDid = "did";
 
 const String languageEnglish = "en";
 const String languageSlovak = "sk";
