@@ -42,10 +42,7 @@ class Ads {
       testDevices: <String>[], // Android emulators are considered test devices
     );
     _bannerAd = BannerAd(
-      // Replace the testAdUnitId with an ad unit id from the AdMob dash.
-      // https://developers.google.com/admob/android/test-ads
-      // https://developers.google.com/admob/ios/test-ads
-      adUnitId: BannerAd.testAdUnitId,
+      adUnitId: bannerAdUnitId,
       size: AdSize.banner,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
