@@ -159,6 +159,7 @@
   "taxonomy_species": "Вид",
   "taxonomy_unknown": "невідомий",
 
+  "snack_no_flowers": "Критерії відповідності квітам відсутні.",
   "snack_copy": "Копіюється в буфер обміну",
   "snack_publish": "... буде опубліковано пізніше"
 }

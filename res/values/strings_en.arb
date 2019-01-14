@@ -161,6 +161,7 @@
   "taxonomy_species": "Species",
   "taxonomy_unknown": "unknown",
 
+  "snack_no_flowers": "There are no flowers matching criteria.",
   "snack_copy": "Copied to Clipboard",
   "snack_publish": "... to be published later"
 }

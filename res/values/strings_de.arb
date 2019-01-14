@@ -159,6 +159,7 @@
   "taxonomy_species": "Art",
   "taxonomy_unknown": "unbekannt",
 
+  "snack_no_flowers": "Keine Blumen die den Kriterien entsprechen.",
   "snack_copy": "In die Zwischenablage kopiert",
   "snack_publish": "... wird später veröffentlicht"
 }

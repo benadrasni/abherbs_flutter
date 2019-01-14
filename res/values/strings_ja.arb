@@ -159,6 +159,7 @@
   "taxonomy_species": "種",
   "taxonomy_unknown": "未知の",
 
+  "snack_no_flowers": "基準に一致する花はありません。",
   "snack_copy": "クリップボードにコピー",
   "snack_publish": "... 後で公開する"
 }

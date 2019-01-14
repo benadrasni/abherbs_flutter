@@ -159,6 +159,7 @@
   "taxonomy_species": "Laji",
   "taxonomy_unknown": "tuntematon",
 
+  "snack_no_flowers": "Ei kukkien yhteensopivuusvaatimuksia.",
   "snack_copy": "Kopioitu leikepöydälle",
   "snack_publish": "... julkaistaan myöhemmin"
 }

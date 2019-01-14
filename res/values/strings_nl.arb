@@ -159,6 +159,7 @@
   "taxonomy_species": "Soort",
   "taxonomy_unknown": "onbekend",
 
+  "snack_no_flowers": "Geen bloemen die voldoen aan criteria.",
   "snack_copy": "Gekopieerd naar het klembord",
   "snack_publish": "... later worden gepubliceerd"
 }

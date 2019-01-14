@@ -159,6 +159,7 @@
   "taxonomy_species": "Gatunek",
   "taxonomy_unknown": "nieznane",
 
+  "snack_no_flowers": "Brak kwiatów spełniających kryteria.",
   "snack_copy": "Skopiowane do schowka",
   "snack_publish": "... do opublikowania później"
 }

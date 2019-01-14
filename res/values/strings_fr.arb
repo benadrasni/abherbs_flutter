@@ -160,6 +160,7 @@
   "taxonomy_species": "Espèce",
   "taxonomy_unknown": "inconnu",
 
+  "snack_no_flowers": "Aucune fleur ne correspond aux critères.",
   "snack_copy": "Copié dans le presse-papier",
   "snack_publish": "... à publier plus tard"
 }

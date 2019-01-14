@@ -159,6 +159,7 @@
   "taxonomy_species": "Vrsta",
   "taxonomy_unknown": "nepoznat",
 
+  "snack_no_flowers": "Nema kriterija za podudaranje.",
   "snack_copy": "Kopirano u međuspremnik",
   "snack_publish": "... biti objavljen kasnije"
 }

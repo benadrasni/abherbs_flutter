@@ -159,6 +159,7 @@
   "taxonomy_species": "Art",
   "taxonomy_unknown": "okänd",
 
+  "snack_no_flowers": "Inga blommor matchande kriterier.",
   "snack_copy": "Kopieras till Urklipp",
   "snack_publish": "... att publiceras senare"
 }

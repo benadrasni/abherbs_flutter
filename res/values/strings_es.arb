@@ -159,6 +159,7 @@
   "taxonomy_species": "especie",
   "taxonomy_unknown": "desconocido",
 
+  "snack_no_flowers": "No hay criterios de correspondencia de flores.",
   "snack_copy": "Copiado al portapapeles",
   "snack_publish": "... para ser publicado más tarde"
 }

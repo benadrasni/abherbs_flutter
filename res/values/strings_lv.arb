@@ -159,6 +159,7 @@
   "taxonomy_species": "Suga",
   "taxonomy_unknown": "nezināms",
 
+  "snack_no_flowers": "Nav ziedu atbilstības kritēriju.",
   "snack_copy": "Kopēts uz starpliktuvi",
   "snack_publish": "... publicēt vēlāk"
 }

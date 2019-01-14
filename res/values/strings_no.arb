@@ -159,6 +159,7 @@
   "taxonomy_species": "Art",
   "taxonomy_unknown": "ukjent",
 
+  "snack_no_flowers": "Ingen blomster som samsvarer med kriterier.",
   "snack_copy": "Kopiert til utklippstavlen",
   "snack_publish": "... å bli publisert senere"
 }

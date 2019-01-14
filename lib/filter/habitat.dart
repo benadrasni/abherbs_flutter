@@ -24,13 +24,24 @@ class Habitat extends StatefulWidget {
 class _HabitatState extends State<Habitat> {
   Future<int> _countF;
   Map<String, String> _filter;
+  GlobalKey<ScaffoldState> _key;
 
   _navigate(String value) {
     var newFilter = new Map<String, String>();
     newFilter.addAll(_filter);
     newFilter[filterHabitat] = value;
-    Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter)).then((result) {
-      Ads.showBannerAd(this);
+
+    countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
+      if (snapshot.value != null && snapshot.value > 0) {
+        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter)).then((result) {
+          Ads.showBannerAd(this);
+        });
+      } else {
+        Ads.hideBannerAd();
+        _key.currentState.showSnackBar(SnackBar(
+          content: Text(S.of(context).snack_no_flowers),
+        ));
+      }
     });
   }
 
@@ -46,6 +57,7 @@ class _HabitatState extends State<Habitat> {
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterHabitat);
+    _key = new GlobalKey<ScaffoldState>();
 
     _setCount();
 
@@ -67,6 +79,7 @@ class _HabitatState extends State<Habitat> {
     );
 
     return Scaffold(
+      key: _key,
       appBar: new AppBar(
         title: new Text(S.of(context).filter_habitat),
       ),
@@ -237,6 +250,7 @@ class _HabitatState extends State<Habitat> {
               future: _countF,
               builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                 switch (snapshot.connectionState) {
+                  case ConnectionState.active:
                   case ConnectionState.waiting:
                     return const CircularProgressIndicator();
                   default:
@@ -255,7 +269,7 @@ class _HabitatState extends State<Habitat> {
                             Ads.showBannerAd(this);
                           });
                         },
-                        child: Text(snapshot.data.toString()),
+                        child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
                       ),
                     );
                 }

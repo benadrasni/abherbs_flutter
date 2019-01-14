@@ -159,6 +159,7 @@
   "taxonomy_species": "Faj",
   "taxonomy_unknown": "ismeretlen",
 
+  "snack_no_flowers": "Nincsenek virág illeszkedési feltételek.",
   "snack_copy": "A vágólapra másolt",
   "snack_publish": "... később közzé kell tenni"
 }

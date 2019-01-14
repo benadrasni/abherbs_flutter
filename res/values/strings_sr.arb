@@ -159,6 +159,7 @@
   "taxonomy_species": "врста",
   "taxonomy_unknown": "непознат",
 
+  "snack_no_flowers": "Нема критеријума за подударање цвећа.",
   "snack_copy": "Копирано у Цлипбоард",
   "snack_publish": "... да се касније објави"
 }

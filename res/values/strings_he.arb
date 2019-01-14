@@ -159,6 +159,7 @@
   "taxonomy_species": "מין",
   "taxonomy_unknown": "לא ידוע",
 
+  "snack_no_flowers": "אין קריטריונים תואמים לפרחים.",
   "snack_copy": "הועתק ללוח",
   "snack_publish": "יפורסם בהמשך"
 }

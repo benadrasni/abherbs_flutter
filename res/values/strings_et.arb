@@ -159,6 +159,7 @@
   "taxonomy_species": "Liik",
   "taxonomy_unknown": "teadmata",
 
+  "snack_no_flowers": "Lillede sobitamise kriteeriumid puuduvad.",
   "snack_copy": "Kopeeritud lõikelauale",
   "snack_publish": "... avaldatakse hiljem"
 }

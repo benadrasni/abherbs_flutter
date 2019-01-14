@@ -29,6 +29,7 @@ class _DistributionState extends State<Distribution> {
   int _region;
   Future<String> _myRegionF;
   String _myRegion;
+  GlobalKey<ScaffoldState> _key;
 
   void _openRegion(int region) {
     setState(() {
@@ -40,8 +41,18 @@ class _DistributionState extends State<Distribution> {
     var newFilter = new Map<String, String>();
     newFilter.addAll(_filter);
     newFilter[filterDistribution] = value;
-    Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter)).then((result) {
-      Ads.showBannerAd(this);
+
+    countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
+      if (snapshot.value != null && snapshot.value > 0) {
+        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter)).then((result) {
+          Ads.showBannerAd(this);
+        });
+      } else {
+        Ads.hideBannerAd();
+        _key.currentState.showSnackBar(SnackBar(
+          content: Text(S.of(context).snack_no_flowers),
+        ));
+      }
     });
   }
 
@@ -68,6 +79,7 @@ class _DistributionState extends State<Distribution> {
     _filter.addAll(widget.filter);
     _filter.remove(filterDistribution);
     _region = 0;
+    _key = new GlobalKey<ScaffoldState>();
 
     _setCount();
 
@@ -85,6 +97,7 @@ class _DistributionState extends State<Distribution> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       appBar: new AppBar(
         title: new Text(S.of(context).filter_distribution),
       ),
@@ -137,6 +150,7 @@ class _DistributionState extends State<Distribution> {
               future: _count,
               builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                 switch (snapshot.connectionState) {
+                  case ConnectionState.active:
                   case ConnectionState.waiting:
                     return const CircularProgressIndicator();
                   default:
@@ -155,7 +169,7 @@ class _DistributionState extends State<Distribution> {
                             Ads.showBannerAd(this);
                           });
                         },
-                        child: Text(snapshot.data.toString()),
+                        child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
                       ),
                     );
                 }

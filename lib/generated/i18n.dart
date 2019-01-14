@@ -127,6 +127,7 @@ class S implements WidgetsLocalizations {
   String get show_translation => "Show translated text";
   String get siberia => "Siberia";
   String get snack_copy => "Copied to Clipboard";
+  String get snack_no_flowers => "There are no flowers matching criteria.";
   String get snack_publish => "... to be published later";
   String get south_central_pacific => "South-Central Pacific";
   String get south_central_usa => "South-Central U.S.A.";
@@ -253,6 +254,8 @@ class $de extends S {
   String get west_central_tropical_africa => "West-Zentrales tropisches Afrika";
   @override
   String get plant_toxicity => "Toxizität";
+  @override
+  String get snack_no_flowers => "Keine Blumen die den Kriterien entsprechen.";
   @override
   String get rate_question => "Ist diese Anwendung hilfreich?";
   @override
@@ -556,6 +559,8 @@ class $hi extends S {
   @override
   String get plant_toxicity => "आविषता";
   @override
+  String get snack_no_flowers => "कोई फूल नहीं कसौटी।";
+  @override
   String get rate_question => "क्या यह एप्लिकेशन सहायक है?";
   @override
   String get macaronesia => "Macaronesia";
@@ -857,6 +862,8 @@ class $no extends S {
   String get west_central_tropical_africa => "Vest-Sentral-tropiske Afrika";
   @override
   String get plant_toxicity => "Toksisitet";
+  @override
+  String get snack_no_flowers => "Ingen blomster som samsvarer med kriterier.";
   @override
   String get rate_question => "Er dette programmet nyttig?";
   @override
@@ -1160,6 +1167,8 @@ class $fi extends S {
   @override
   String get plant_toxicity => "Myrkyllisyys";
   @override
+  String get snack_no_flowers => "Ei kukkien yhteensopivuusvaatimuksia.";
+  @override
   String get rate_question => "Onko tämä sovellus hyödyllinen?";
   @override
   String get macaronesia => "Makaronesia";
@@ -1462,6 +1471,8 @@ class $ru extends S {
   @override
   String get plant_toxicity => "Токсичность";
   @override
+  String get snack_no_flowers => "Нет цветов соответствующих критериям.";
+  @override
   String get rate_question => "Является ли это приложение полезным?";
   @override
   String get macaronesia => "Макронезии";
@@ -1762,6 +1773,8 @@ class $pt extends S {
   @override
   String get plant_toxicity => "Toxicidade";
   @override
+  String get snack_no_flowers => "Não há critérios de correspondência de flores.";
+  @override
   String get rate_question => "Esta aplicação é útil?";
   @override
   String get macaronesia => "Macaronésia";
@@ -2057,6 +2070,8 @@ class $lt extends S {
   String get west_central_tropical_africa => "Vakarų-Centrinė tropinė Afrika";
   @override
   String get plant_toxicity => "Toksiškumas";
+  @override
+  String get snack_no_flowers => "Nėra gėlių atitikimo kriterijų.";
   @override
   String get rate_question => "Ar šią programą naudinga?";
   @override
@@ -2360,6 +2375,8 @@ class $hr extends S {
   @override
   String get plant_toxicity => "Toksičnost";
   @override
+  String get snack_no_flowers => "Nema kriterija za podudaranje.";
+  @override
   String get rate_question => "Je li ova aplikacija korisna?";
   @override
   String get macaronesia => "Makaronezija";
@@ -2659,6 +2676,8 @@ class $lv extends S {
   String get west_central_tropical_africa => "Rietumu centrālā tropu afrika";
   @override
   String get plant_toxicity => "Toksiskums";
+  @override
+  String get snack_no_flowers => "Nav ziedu atbilstības kritēriju.";
   @override
   String get rate_question => "Vai šī app noderīga?";
   @override
@@ -2962,6 +2981,8 @@ class $fr extends S {
   @override
   String get plant_toxicity => "Toxicité";
   @override
+  String get snack_no_flowers => "Aucune fleur ne correspond aux critères.";
+  @override
   String get rate_question => "Cette application est-elle utile?";
   @override
   String get macaronesia => "Macaronésie";
@@ -3263,6 +3284,8 @@ class $hu extends S {
   String get west_central_tropical_africa => "Nyugat-Közép-Trópusi Afrika";
   @override
   String get plant_toxicity => "Méregtartalom";
+  @override
+  String get snack_no_flowers => "Nincsenek virág illeszkedési feltételek.";
   @override
   String get rate_question => "Ez az alkalmazás hasznos?";
   @override
@@ -3566,6 +3589,8 @@ class $uk extends S {
   @override
   String get plant_toxicity => "Токсичність";
   @override
+  String get snack_no_flowers => "Критерії відповідності квітам відсутні.";
+  @override
   String get rate_question => "Чи є це додаток корисним?";
   @override
   String get macaronesia => "Макаронезія";
@@ -3868,6 +3893,8 @@ class $sk extends S {
   @override
   String get plant_toxicity => "Toxicita";
   @override
+  String get snack_no_flowers => "Filtru nevyhovujú žiadne kvety v databáze.";
+  @override
   String get rate_question => "Je táto aplikácia užitočná?";
   @override
   String get macaronesia => "Makaronézia";
@@ -4163,6 +4190,8 @@ class $sl extends S {
   String get west_central_tropical_africa => "Zahodno-srednja tropska Afrika";
   @override
   String get plant_toxicity => "Toksičnost";
+  @override
+  String get snack_no_flowers => "Ni meril za ujemanje cvetja.";
   @override
   String get rate_question => "Je ta vloga v pomoč?";
   @override
@@ -4466,6 +4495,8 @@ class $id extends S {
   @override
   String get plant_toxicity => "Toksisitas";
   @override
+  String get snack_no_flowers => "Tidak ada kriteria pencocokan bunga.";
+  @override
   String get rate_question => "Apakah aplikasi ini bermanfaat?";
   @override
   String get macaronesia => "Macaronesia";
@@ -4768,6 +4799,8 @@ class $sr extends S {
   @override
   String get plant_toxicity => "Токсичност";
   @override
+  String get snack_no_flowers => "Нема критеријума за подударање цвећа.";
+  @override
   String get rate_question => "Да ли је ова апликација помоћи?";
   @override
   String get macaronesia => "Макаронезија";
@@ -5069,6 +5102,8 @@ class $sv extends S {
   String get west_central_tropical_africa => "Västra central tropiska Afrika";
   @override
   String get plant_toxicity => "Giftighet";
+  @override
+  String get snack_no_flowers => "Inga blommor matchande kriterier.";
   @override
   String get rate_question => "Är det här programmet användbart?";
   @override
@@ -5376,6 +5411,8 @@ class $it extends S {
   @override
   String get plant_toxicity => "Tossicità";
   @override
+  String get snack_no_flowers => "Nessun fiore che corrisponde ai criteri.";
+  @override
   String get rate_question => "Trovi utile questa applicazione?";
   @override
   String get macaronesia => "Macaronesia";
@@ -5677,6 +5714,8 @@ class $es extends S {
   String get west_central_tropical_africa => "África tropical occidental central";
   @override
   String get plant_toxicity => "Toxicidad";
+  @override
+  String get snack_no_flowers => "No hay criterios de correspondencia de flores.";
   @override
   String get rate_question => "¿Es útil esta aplicación?";
   @override
@@ -5980,6 +6019,8 @@ class $et extends S {
   @override
   String get plant_toxicity => "Mürgisus";
   @override
+  String get snack_no_flowers => "Lillede sobitamise kriteeriumid puuduvad.";
+  @override
   String get rate_question => "See app kasulik?";
   @override
   String get macaronesia => "Makaroneesia";
@@ -6281,6 +6322,8 @@ class $cs extends S {
   String get west_central_tropical_africa => "Středozápadní tropická Afrika";
   @override
   String get plant_toxicity => "Toxicita";
+  @override
+  String get snack_no_flowers => "Filtru nevyhovují žádné květiny v databázi.";
   @override
   String get rate_question => "Líbí se vám aplikace?";
   @override
@@ -6584,6 +6627,8 @@ class $ar extends S {
   @override
   String get plant_toxicity => "تأثير سمي";
   @override
+  String get snack_no_flowers => "لا توجد معايير مطابقة للزهور.";
+  @override
   String get rate_question => "هل هذا التطبيق مفيد؟";
   @override
   String get macaronesia => "ماكارونيسيا";
@@ -6885,6 +6930,8 @@ class $pa extends S {
   String get west_central_tropical_africa => "ਵੈਸਟ-ਸੈਂਟਰਲ ਟ੍ਰੌਪੀਕਲ ਅਫਰੀਕਾ";
   @override
   String get plant_toxicity => "ਵਸ਼ੈਲਾਪਣ";
+  @override
+  String get snack_no_flowers => "ਕੋਈ ਫੁੱਲ ਮਾਪਣ ਦੇ ਮਾਪਦੰਡ ਨਹੀਂ.";
   @override
   String get rate_question => "ਕੀ ਇਹ ਐਪ ਉਪਯੋਗੀ ਹੈ?";
   @override
@@ -7198,6 +7245,8 @@ class $ja extends S {
   @override
   String get plant_toxicity => "毒性";
   @override
+  String get snack_no_flowers => "基準に一致する花はありません。";
+  @override
   String get rate_question => "このアプリケーションは役に立ちましたか？";
   @override
   String get macaronesia => "マカロニア";
@@ -7500,6 +7549,8 @@ class $fa extends S {
   @override
   String get plant_toxicity => "سمی بودن";
   @override
+  String get snack_no_flowers => "بدون گل مطابق معیارهای.";
+  @override
   String get rate_question => "آیا این برنامه مفید است؟";
   @override
   String get macaronesia => "ماکرونزی";
@@ -7795,6 +7846,8 @@ class $pl extends S {
   String get west_central_tropical_africa => "Zachodnio-Środkowa Afryka Tropikalna";
   @override
   String get plant_toxicity => "Toksyczność";
+  @override
+  String get snack_no_flowers => "Brak kwiatów spełniających kryteria.";
   @override
   String get rate_question => "Czy uważasz, że aplikacja jest pomocna?";
   @override
@@ -8096,6 +8149,8 @@ class $da extends S {
   @override
   String get plant_toxicity => "Toksicitet";
   @override
+  String get snack_no_flowers => "Ingen blomster, der matcher kriterier.";
+  @override
   String get rate_question => "Er denne app hjælpsom?";
   @override
   String get macaronesia => "Makaronesien";
@@ -8393,6 +8448,8 @@ class $he extends S {
   String get west_central_tropical_africa => "מערב אפריקה מרכז טרופי";
   @override
   String get plant_toxicity => "רַעֲלָנוּת";
+  @override
+  String get snack_no_flowers => "אין קריטריונים תואמים לפרחים.";
   @override
   String get rate_question => "האם האפליקציה הזו מועילה?";
   @override
@@ -8696,6 +8753,8 @@ class $ro extends S {
   @override
   String get plant_toxicity => "Toxicitate";
   @override
+  String get snack_no_flowers => "Nu există criterii de potrivire a florilor.";
+  @override
   String get rate_question => "Este această aplicație utilă?";
   @override
   String get macaronesia => "Macaroneziei";
@@ -8997,6 +9056,8 @@ class $nl extends S {
   String get west_central_tropical_africa => "West-Centraal Tropisch Afrika";
   @override
   String get plant_toxicity => "Toxiciteit";
+  @override
+  String get snack_no_flowers => "Geen bloemen die voldoen aan criteria.";
   @override
   String get rate_question => "Is deze applicatie handig?";
   @override

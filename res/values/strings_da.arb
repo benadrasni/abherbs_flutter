@@ -157,6 +157,7 @@
   "taxonomy_species": "Art",
   "taxonomy_unknown": "ukendt",
 
+  "snack_no_flowers": "Ingen blomster, der matcher kriterier.",
   "snack_copy": "Kopieret til udklipsholderen",
   "snack_publish": "... offentliggøres senere"
 }

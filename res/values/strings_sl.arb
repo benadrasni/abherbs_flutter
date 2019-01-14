@@ -159,6 +159,7 @@
   "taxonomy_species": "Vrsta",
   "taxonomy_unknown": "neznano",
 
+  "snack_no_flowers": "Ni meril za ujemanje cvetja.",
   "snack_copy": "Kopirano v odložišče",
   "snack_publish": "... bo objavljen pozneje"
 }

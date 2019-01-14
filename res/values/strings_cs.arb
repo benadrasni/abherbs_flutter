@@ -159,6 +159,7 @@
   "taxonomy_species": "druh",
   "taxonomy_unknown": "neznámý",
 
+  "snack_no_flowers": "Filtru nevyhovují žádné květiny v databázi.",
   "snack_copy": "Zkopírováno do schránky",
   "snack_publish": "... bude zveřejněno později"
 }
