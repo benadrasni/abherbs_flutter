@@ -32,10 +32,7 @@ class _DistributionState extends State<Distribution> {
   GlobalKey<ScaffoldState> _key;
 
   void _openRegion(String region) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Distribution2(widget.onChangeLanguage, widget.filter, int.parse(region))))
-        .then((result) {
-      Ads.showBannerAd(this);
-    });
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Distribution2(widget.onChangeLanguage, widget.filter, int.parse(region))));
   }
 
   void _navigate(String value) {

@@ -33,9 +33,7 @@ class _Distribution2State extends State<Distribution2> {
 
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (snapshot.value != null && snapshot.value > 0) {
-        Navigator.pushReplacement(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter)).then((result) {
-          Ads.showBannerAd(this);
-        });
+        Navigator.pushReplacement(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
       } else {
         Ads.hideBannerAd();
         _key.currentState.showSnackBar(SnackBar(
@@ -220,9 +218,7 @@ class _Distribution2State extends State<Distribution2> {
             Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
           }
           filterRoutes[nextFilterAttribute] = route;
-          Navigator.push(context, route).then((result) {
-            Ads.showBannerAd(this);
-          });
+          Navigator.pushReplacement(context, route);
         },
       ),
       floatingActionButton: new Container(
@@ -247,12 +243,10 @@ class _Distribution2State extends State<Distribution2> {
                       },
                       child: FloatingActionButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.filter)),
-                          ).then((result) {
-                            Ads.showBannerAd(this);
-                          });
+                          );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
                       ),

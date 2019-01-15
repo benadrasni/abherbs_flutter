@@ -94,7 +94,7 @@ class _PetalState extends State<Petal> {
                 Expanded(
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                       Text(
                         S.of(context).petal_4,
                         style: _defaultTextStyle,
@@ -112,7 +112,7 @@ class _PetalState extends State<Petal> {
                 Expanded(
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                       Text(
                         S.of(context).petal_5,
                         style: _defaultTextStyle,
@@ -138,7 +138,7 @@ class _PetalState extends State<Petal> {
                 Expanded(
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                       Text(
                         S.of(context).petal_many,
                         style: _defaultTextStyle,
@@ -156,7 +156,7 @@ class _PetalState extends State<Petal> {
                 Expanded(
                   child: FlatButton(
                     padding: EdgeInsets.all(10.0),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                       Text(
                         S.of(context).petal_zygomorphic,
                         style: _defaultTextStyle,

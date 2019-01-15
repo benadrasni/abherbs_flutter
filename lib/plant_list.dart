@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/firebase_animated_index_list.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/main.dart';
+import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -124,6 +125,12 @@ class _PlantListState extends State<PlantList> {
                             width: 50.0,
                             height: 50.0,
                           ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.filter, name)),
+                            );
+                          },
                         ),
                         Stack(
                           alignment: Alignment.center,
@@ -133,7 +140,9 @@ class _PlantListState extends State<PlantList> {
                               padding: EdgeInsets.all(10.0),
                               child: CachedNetworkImage(
                                 fit: BoxFit.scaleDown,
-                                placeholder: Image(image: AssetImage('res/images/placeholder.webp'),),
+                                placeholder: Image(
+                                  image: AssetImage('res/images/placeholder.webp'),
+                                ),
                                 imageUrl: storageEndpoit + storagePhotos + snapshot.value['url'],
                               ),
                               onPressed: () {
@@ -162,12 +171,30 @@ class _PlantListState extends State<PlantList> {
               future: _count,
               builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                 switch (snapshot.connectionState) {
+                  case ConnectionState.active:
                   case ConnectionState.waiting:
                     return const CircularProgressIndicator();
                   default:
-                    return FloatingActionButton(
-                      onPressed: () {},
-                      child: Text(snapshot.data.toString()),
+                    return GestureDetector(
+                      onLongPress: () {
+                        Prefs.getBoolF(keyAlwaysMyRegion, false).then((value) {
+                          Map<String, String> filter = {};
+                          if (value) {
+                            Prefs.getStringF(keyMyRegion, null).then((value) {
+                              if (value != null) {
+                                filter[filterDistribution] = value;
+                              }
+                              Navigator.pushReplacement(context, getNextFilterRoute(null, widget.onChangeLanguage, filter));
+                            });
+                          } else {
+                            Navigator.pushReplacement(context, getNextFilterRoute(null, widget.onChangeLanguage, filter));
+                          }
+                        });
+                      },
+                      child: FloatingActionButton(
+                        onPressed: () {},
+                        child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
+                      ),
                     );
                 }
               }),
