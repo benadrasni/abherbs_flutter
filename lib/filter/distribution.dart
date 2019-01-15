@@ -1,9 +1,9 @@
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/color.dart';
+import 'package:abherbs_flutter/filter/distribution_2.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
-import 'package:abherbs_flutter/filter/distribution_2.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/plant_list.dart';
@@ -32,7 +32,8 @@ class _DistributionState extends State<Distribution> {
   GlobalKey<ScaffoldState> _key;
 
   void _openRegion(String region) {
-    Navigator.push(context,  MaterialPageRoute(builder: (context) => Distribution2(widget.onChangeLanguage, widget.filter, int.parse(region)))).then((result) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Distribution2(widget.onChangeLanguage, widget.filter, int.parse(region))))
+        .then((result) {
       Ads.showBannerAd(this);
     });
   }
@@ -170,12 +171,11 @@ class _DistributionState extends State<Distribution> {
     return Container(
         color: Colors.white30,
         child: GridView.count(
-            crossAxisCount: 1,
-            childAspectRatio: 4.0,
-            padding: const EdgeInsets.only(bottom: 50.0),
-            children: regionWidgets,
-        )
-    );
+          crossAxisCount: 1,
+          childAspectRatio: 4.0,
+          padding: const EdgeInsets.only(bottom: 50.0),
+          children: regionWidgets,
+        ));
   }
 
   @override
@@ -210,9 +210,27 @@ class _DistributionState extends State<Distribution> {
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/color.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_color)),
-          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/habitat.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_habitat)),
-          BottomNavigationBarItem(icon: Image(image: AssetImage('res/images/petal.png'), width: 25.0, height: 25.0,), title: Text(S.of(context).filter_petal)),
+          BottomNavigationBarItem(
+              icon: Image(
+                image: AssetImage('res/images/color.png'),
+                width: 25.0,
+                height: 25.0,
+              ),
+              title: Text(S.of(context).filter_color)),
+          BottomNavigationBarItem(
+              icon: Image(
+                image: AssetImage('res/images/habitat.png'),
+                width: 25.0,
+                height: 25.0,
+              ),
+              title: Text(S.of(context).filter_habitat)),
+          BottomNavigationBarItem(
+              icon: Image(
+                image: AssetImage('res/images/petal.png'),
+                width: 25.0,
+                height: 25.0,
+              ),
+              title: Text(S.of(context).filter_petal)),
         ],
         fixedColor: Colors.grey,
         onTap: (index) {
