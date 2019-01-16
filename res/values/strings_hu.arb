@@ -22,7 +22,10 @@
   "feedback_submit_translate_app": "Javítsa az alkalmazás címkéit",
   "feedback_buy_extended": "A bővített változatot további funkciókkal vásárolhatja meg, mint például az offline mód, kereshet a nevekben, kereshet taxonómia, megfigyelések és konfigurálható szűrő segítségével.",
   "feedback_submit_buy": "Bővített változat",
-    
+  "feedback_run_ads": "Megjelenítheti a teljes képernyős hirdetést vagy a videohirdetést, hogy támogassa a további fejlesztéseket és az adatbázis-fejlesztést.",
+  "feedback_run_ads_fullscreen": "Teljes képernyős hirdetés megjelenítése",
+  "feedback_run_ads_video": "Nézze meg a videohirdetést",
+
   "rate_question": "Ez az alkalmazás hasznos?",
   "rate_text": "A szerző a pozitív visszajelzésekből dolgozik. A Google Play Store-on keresztül csillagzással értékelheti/támogathatja a munkáját.",
   "rate_never": "Soha",

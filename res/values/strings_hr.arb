@@ -22,6 +22,9 @@
   "feedback_submit_translate_app": "Poboljšajte oznake programa",
   "feedback_buy_extended": "Možete kupiti proširenu verziju s dodatnim funkcijama kao što je izvanmrežni način rada, tražiti imena, pretraživati u taksonomiji, promatrati i konfigurirati filtar.",
   "feedback_submit_buy": "Proširena verzija",
+  "feedback_run_ads": "Možete prikazati oglas preko cijelog zaslona ili gledati video oglas kako biste podržali daljnji razvoj i poboljšanje baze podataka.",
+  "feedback_run_ads_fullscreen": "Pokaži oglas preko cijelog zaslona",
+  "feedback_run_ads_video": "Pogledajte video oglas",
 
   "rate_question": "Je li ova aplikacija korisna?",
   "rate_text": "Autor ove aplikacije potaknut je pozitivnim odgovorom korisnika. Pošaljite mu neke zvijezde kroz Google Play Store.",

@@ -22,6 +22,9 @@
   "feedback_submit_translate_app": "Pagerinti programos etiketes",
   "feedback_buy_extended": "Galite įsigyti išplėstinę versiją su papildomomis funkcijomis, pavyzdžiui, neprisijungus, ieškoti vardų, ieškoti taksonomijos, stebėjimų ir konfigūruojamo filtro.",
   "feedback_submit_buy": "Prailginta versija",
+  "feedback_run_ads": "Galite rodyti viso ekrano skelbimą arba žiūrėti vaizdo įrašo reklamą, kad palaikytumėte tolesnę plėtrą ir duomenų bazės tobulinimą.",
+  "feedback_run_ads_fullscreen": "Rodyti viso ekrano skelbimą",
+  "feedback_run_ads_video": "Žiūrėti vaizdo įrašo skelbimą",
 
   "rate_question": "Ar šią programą naudinga?",
   "rate_text": "Autorius šioje paraiškoje kurstė teigiamą atsakymą iš vartotojų. Prašome siųsti jam šiek tiek starflowers per Google Play Store.",

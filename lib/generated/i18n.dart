@@ -50,6 +50,9 @@ class S implements WidgetsLocalizations {
   String get feedback_google_play => "Google Play";
   String get feedback_intro => "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:";
   String get feedback_review => "You can write a positive review in Google Play.";
+  String get feedback_run_ads => "You can display full screen advertisement or watch video advertisement to support further development and database enhancement.";
+  String get feedback_run_ads_fullscreen => "Show a fullscreen advertisement";
+  String get feedback_run_ads_video => "Watch a video advertisement";
   String get feedback_submit_buy => "Go to extended (+) version";
   String get feedback_submit_translate_app => "Improve application's labels";
   String get feedback_submit_translate_data => "Improve flower's data";
@@ -247,6 +250,8 @@ class $de extends S {
   @override
   String get middle_atlantic_ocean => "Mittlerer Atlantischer Ozean";
   @override
+  String get feedback_run_ads => "Sie können Werbung im Vollbildmodus anzeigen oder Videowerbung ansehen, um die Weiterentwicklung und Datenbankverbesserung zu unterstützen.";
+  @override
   String get habitat_garden => "Gärten oder Felder";
   @override
   String get russian_far_east => "Russischer Ferner Osten";
@@ -262,6 +267,8 @@ class $de extends S {
   String get macaronesia => "Makaronesien";
   @override
   String get plant_taxonomy => "Taxonomy";
+  @override
+  String get feedback_run_ads_fullscreen => "Anzeige im Vollbildmodus";
   @override
   String get asia_temperate => "Asien-gemäßigt";
   @override
@@ -451,6 +458,8 @@ class $de extends S {
   @override
   String get yes => "Ja";
   @override
+  String get feedback_run_ads_video => "Videoanzeige ansehen";
+  @override
   String get plant_height_from => "Höhe";
   @override
   String get petal_many => "mehr als 5";
@@ -551,6 +560,8 @@ class $hi extends S {
   @override
   String get middle_atlantic_ocean => "मध्य अटलांटिक महासागर";
   @override
+  String get feedback_run_ads => "आप पूर्ण स्क्रीन विज्ञापन प्रदर्शित कर सकते हैं या वीडियो विज्ञापन देख सकते हैं ताकि आगे के विकास और डेटाबेस में वृद्धि हो सके।";
+  @override
   String get habitat_garden => "पौधे का उदाहरण";
   @override
   String get russian_far_east => "रूसी सुदूर पूर्व";
@@ -566,6 +577,8 @@ class $hi extends S {
   String get macaronesia => "Macaronesia";
   @override
   String get plant_taxonomy => "वर्गीकरण";
+  @override
+  String get feedback_run_ads_fullscreen => "एक फुलस्क्रीन विज्ञापन दिखाएं";
   @override
   String get asia_temperate => "एशिया टेम्पलेट";
   @override
@@ -755,6 +768,8 @@ class $hi extends S {
   @override
   String get yes => "हाँ";
   @override
+  String get feedback_run_ads_video => "एक वीडियो विज्ञापन देखें";
+  @override
   String get plant_height_from => "ऊँचाई से";
   @override
   String get petal_many => "५ से अधिक";
@@ -855,6 +870,8 @@ class $no extends S {
   @override
   String get middle_atlantic_ocean => "Midt-Atlanterhavet";
   @override
+  String get feedback_run_ads => "Du kan vise fullskjermsannonsering eller se videoannonse for å støtte videreutvikling og databaseforbedring.";
+  @override
   String get habitat_garden => "hager eller felt";
   @override
   String get russian_far_east => "Russisk fjernt øst";
@@ -870,6 +887,8 @@ class $no extends S {
   String get macaronesia => "Macaronesia";
   @override
   String get plant_taxonomy => "Taksonomi";
+  @override
+  String get feedback_run_ads_fullscreen => "Vis en fullskjerm-annonse";
   @override
   String get asia_temperate => "Asia-temperert";
   @override
@@ -1059,6 +1078,8 @@ class $no extends S {
   @override
   String get yes => "Ja";
   @override
+  String get feedback_run_ads_video => "Se en videoannonse";
+  @override
   String get plant_height_from => "Høyde";
   @override
   String get petal_many => "mer enn 5";
@@ -1159,6 +1180,8 @@ class $fi extends S {
   @override
   String get middle_atlantic_ocean => "Lähi-Atlantin valtameri";
   @override
+  String get feedback_run_ads => "Voit näyttää koko näytön mainoksen tai katsella videomainosta tukemaan edelleen kehitystä ja tietokannan parantamista.";
+  @override
   String get habitat_garden => "puutarhoissa tai kenttiä";
   @override
   String get russian_far_east => "Venäjän Kaukoidässä";
@@ -1174,6 +1197,8 @@ class $fi extends S {
   String get macaronesia => "Makaronesia";
   @override
   String get plant_taxonomy => "Taksonomia";
+  @override
+  String get feedback_run_ads_fullscreen => "Näytä koko näytön mainos";
   @override
   String get asia_temperate => "Aasia Lämpötilaa";
   @override
@@ -1363,6 +1388,8 @@ class $fi extends S {
   @override
   String get yes => "Joo";
   @override
+  String get feedback_run_ads_video => "Katso videomainos";
+  @override
   String get plant_height_from => "Korkeus";
   @override
   String get petal_many => "yli 5";
@@ -1463,6 +1490,8 @@ class $ru extends S {
   @override
   String get middle_atlantic_ocean => "Средний Атлантический океан";
   @override
+  String get feedback_run_ads => "Вы можете отображать полноэкранную рекламу или смотреть видео-рекламу для поддержки дальнейшего развития и улучшения базы данных.";
+  @override
   String get habitat_garden => "сады или поля";
   @override
   String get russian_far_east => "Российский Дальний Восток";
@@ -1478,6 +1507,8 @@ class $ru extends S {
   String get macaronesia => "Макронезии";
   @override
   String get plant_taxonomy => "Систематика";
+  @override
+  String get feedback_run_ads_fullscreen => "Показать полноэкранную рекламу";
   @override
   String get asia_temperate => "Азия умерная";
   @override
@@ -1667,6 +1698,8 @@ class $ru extends S {
   @override
   String get yes => "Да";
   @override
+  String get feedback_run_ads_video => "Смотреть видео рекламу";
+  @override
   String get plant_height_from => "Высота:";
   @override
   String get petal_many => "более 5";
@@ -1765,6 +1798,8 @@ class $pt extends S {
   @override
   String get middle_atlantic_ocean => "Oceano Atlântico Médio";
   @override
+  String get feedback_run_ads => "Você pode exibir anúncios em tela cheia ou assistir a anúncios em vídeo para dar suporte a mais desenvolvimento e aprimoramento do banco de dados.";
+  @override
   String get habitat_garden => "jardins e campos";
   @override
   String get russian_far_east => "Extremo Oriente Russo";
@@ -1780,6 +1815,8 @@ class $pt extends S {
   String get macaronesia => "Macaronésia";
   @override
   String get plant_taxonomy => "Taxinomia";
+  @override
+  String get feedback_run_ads_fullscreen => "Mostrar um anúncio em tela cheia";
   @override
   String get asia_temperate => "Ásia-Temperado";
   @override
@@ -1965,6 +2002,8 @@ class $pt extends S {
   @override
   String get southeastern_usa => "Sudeste dos EUA";
   @override
+  String get feedback_run_ads_video => "Assista a um anúncio em vídeo";
+  @override
   String get plant_height_from => "altura de";
   @override
   String get petal_many => "mais que 5";
@@ -2063,6 +2102,8 @@ class $lt extends S {
   @override
   String get middle_atlantic_ocean => "Vidurio Atlanto vandenynas";
   @override
+  String get feedback_run_ads => "Galite rodyti viso ekrano skelbimą arba žiūrėti vaizdo įrašo reklamą, kad palaikytumėte tolesnę plėtrą ir duomenų bazės tobulinimą.";
+  @override
   String get habitat_garden => "sodai ar laukai";
   @override
   String get russian_far_east => "Rusijos Tolimuosiuose Rytuose";
@@ -2078,6 +2119,8 @@ class $lt extends S {
   String get macaronesia => "Makaronezija";
   @override
   String get plant_taxonomy => "Taksonomija";
+  @override
+  String get feedback_run_ads_fullscreen => "Rodyti viso ekrano skelbimą";
   @override
   String get asia_temperate => "Azijos temperatuotas";
   @override
@@ -2267,6 +2310,8 @@ class $lt extends S {
   @override
   String get yes => "Taip";
   @override
+  String get feedback_run_ads_video => "Žiūrėti vaizdo įrašo skelbimą";
+  @override
   String get plant_height_from => "Aukštis";
   @override
   String get petal_many => "daugiau nei 5";
@@ -2367,6 +2412,8 @@ class $hr extends S {
   @override
   String get middle_atlantic_ocean => "Srednji Atlantski ocean";
   @override
+  String get feedback_run_ads => "Možete prikazati oglas preko cijelog zaslona ili gledati video oglas kako biste podržali daljnji razvoj i poboljšanje baze podataka.";
+  @override
   String get habitat_garden => "vrtovi ili polja";
   @override
   String get russian_far_east => "Ruski Daleki Istok";
@@ -2382,6 +2429,8 @@ class $hr extends S {
   String get macaronesia => "Makaronezija";
   @override
   String get plant_taxonomy => "Taksonomija";
+  @override
+  String get feedback_run_ads_fullscreen => "Pokaži oglas preko cijelog zaslona";
   @override
   String get asia_temperate => "Azija-umjerenih";
   @override
@@ -2571,6 +2620,8 @@ class $hr extends S {
   @override
   String get yes => "Da";
   @override
+  String get feedback_run_ads_video => "Pogledajte video oglas";
+  @override
   String get plant_height_from => "Visina:";
   @override
   String get petal_many => "više od 5";
@@ -2669,6 +2720,8 @@ class $lv extends S {
   @override
   String get middle_atlantic_ocean => "Viduvie Atlantijas okeāns";
   @override
+  String get feedback_run_ads => "Jūs varat parādīt pilnekrāna reklāmu vai skatīties video reklāmu, lai atbalstītu turpmāku attīstību un datu bāzes uzlabošanu.";
+  @override
   String get habitat_garden => "sodai ar laukai";
   @override
   String get russian_far_east => "Krievu Tālajos Austrumos";
@@ -2684,6 +2737,8 @@ class $lv extends S {
   String get macaronesia => "Makaronēzija";
   @override
   String get plant_taxonomy => "Taksonomija";
+  @override
+  String get feedback_run_ads_fullscreen => "Rādīt pilnekrāna reklāmu";
   @override
   String get asia_temperate => "Āzija Viduslaiku";
   @override
@@ -2873,6 +2928,8 @@ class $lv extends S {
   @override
   String get yes => "Jā";
   @override
+  String get feedback_run_ads_video => "Skatiet video reklāmu";
+  @override
   String get plant_height_from => "Augstums";
   @override
   String get petal_many => "daugiau nei 5";
@@ -2973,6 +3030,8 @@ class $fr extends S {
   @override
   String get middle_atlantic_ocean => "Moyen océan Atlantique";
   @override
+  String get feedback_run_ads => "Vous pouvez afficher une publicité en plein écran ou regarder une publicité vidéo pour prendre en charge le développement et l'amélioration de la base de données.";
+  @override
   String get habitat_garden => "jardins ou champs";
   @override
   String get russian_far_east => "Extrême-Orient russe";
@@ -2988,6 +3047,8 @@ class $fr extends S {
   String get macaronesia => "Macaronésie";
   @override
   String get plant_taxonomy => "Taxonomie";
+  @override
+  String get feedback_run_ads_fullscreen => "Afficher une publicité en plein écran";
   @override
   String get asia_temperate => "Asie-tempérée";
   @override
@@ -3177,6 +3238,8 @@ class $fr extends S {
   @override
   String get yes => "Oui";
   @override
+  String get feedback_run_ads_video => "Regarder une publicité vidéo";
+  @override
   String get plant_height_from => "Hauteur entre";
   @override
   String get petal_many => "plus de 5";
@@ -3277,6 +3340,8 @@ class $hu extends S {
   @override
   String get middle_atlantic_ocean => "Közép-Atlanti-óceán";
   @override
+  String get feedback_run_ads => "Megjelenítheti a teljes képernyős hirdetést vagy a videohirdetést, hogy támogassa a további fejlesztéseket és az adatbázis-fejlesztést.";
+  @override
   String get habitat_garden => "kertek vagy mezők";
   @override
   String get russian_far_east => "Orosz távol-keleten";
@@ -3292,6 +3357,8 @@ class $hu extends S {
   String get macaronesia => "Makaronézia";
   @override
   String get plant_taxonomy => "Taxonómia";
+  @override
+  String get feedback_run_ads_fullscreen => "Teljes képernyős hirdetés megjelenítése";
   @override
   String get asia_temperate => "Ázsia mérsékelt";
   @override
@@ -3481,6 +3548,8 @@ class $hu extends S {
   @override
   String get yes => "Igen";
   @override
+  String get feedback_run_ads_video => "Nézze meg a videohirdetést";
+  @override
   String get plant_height_from => "Magasság";
   @override
   String get petal_many => "több mint 5";
@@ -3581,6 +3650,8 @@ class $uk extends S {
   @override
   String get middle_atlantic_ocean => "Середній атлантичний океан";
   @override
+  String get feedback_run_ads => "Ви можете відображати повноекранну рекламу або переглядати відеооб'яву для підтримки подальшого розвитку та розширення бази даних.";
+  @override
   String get habitat_garden => "сади або поля";
   @override
   String get russian_far_east => "Російський Далекий Схід";
@@ -3596,6 +3667,8 @@ class $uk extends S {
   String get macaronesia => "Макаронезія";
   @override
   String get plant_taxonomy => "Систематика";
+  @override
+  String get feedback_run_ads_fullscreen => "Показати повноекранну рекламу";
   @override
   String get asia_temperate => "Азія-Темнолітнаа";
   @override
@@ -3785,6 +3858,8 @@ class $uk extends S {
   @override
   String get yes => "Так";
   @override
+  String get feedback_run_ads_video => "Дивитися відео рекламу";
+  @override
   String get plant_height_from => "Висота:";
   @override
   String get petal_many => "більше 5";
@@ -3885,6 +3960,8 @@ class $sk extends S {
   @override
   String get middle_atlantic_ocean => "Stredný Atlantik";
   @override
+  String get feedback_run_ads => "Môžete si pozrieť videoreklamu alebo nechať zobraziť reklamu na celú obrazovku a podporiť tak ďalší vývoj a rozširovanie databázy.";
+  @override
   String get habitat_garden => "polia a záhrady";
   @override
   String get russian_far_east => "Ruský ďaleký východ";
@@ -3900,6 +3977,8 @@ class $sk extends S {
   String get macaronesia => "Makaronézia";
   @override
   String get plant_taxonomy => "Taxonómia";
+  @override
+  String get feedback_run_ads_fullscreen => "Zobraziť reklamu na celej obrazovke";
   @override
   String get asia_temperate => "Mierne pásno Ázie";
   @override
@@ -4083,6 +4162,8 @@ class $sk extends S {
   @override
   String get yes => "Áno";
   @override
+  String get feedback_run_ads_video => "Pozrieť videoreklamu";
+  @override
   String get plant_height_from => "Výška:";
   @override
   String get petal_many => "viac ako 5";
@@ -4183,6 +4264,8 @@ class $sl extends S {
   @override
   String get middle_atlantic_ocean => "Srednji Atlantski ocean";
   @override
+  String get feedback_run_ads => "Lahko prikažete celozaslonski oglas ali si ogledate video oglas, ki podpira nadaljnji razvoj in izboljšavo baze podatkov.";
+  @override
   String get habitat_garden => "vrtov ali polja";
   @override
   String get russian_far_east => "Ruski daleč vzhod";
@@ -4198,6 +4281,8 @@ class $sl extends S {
   String get macaronesia => "Makaronezija";
   @override
   String get plant_taxonomy => "Taksonomija";
+  @override
+  String get feedback_run_ads_fullscreen => "Pokaži celozaslonski oglas";
   @override
   String get asia_temperate => "Azija temperaturna";
   @override
@@ -4387,6 +4472,8 @@ class $sl extends S {
   @override
   String get yes => "Ja";
   @override
+  String get feedback_run_ads_video => "Oglejte si video oglas";
+  @override
   String get plant_height_from => "Višina";
   @override
   String get petal_many => "več kot 5";
@@ -4487,6 +4574,8 @@ class $id extends S {
   @override
   String get middle_atlantic_ocean => "Samudera Atlantik Tengah";
   @override
+  String get feedback_run_ads => "Anda dapat menampilkan iklan layar penuh atau menonton iklan video untuk mendukung pengembangan lebih lanjut dan peningkatan basis data.";
+  @override
   String get habitat_garden => "kebun atau ladang";
   @override
   String get russian_far_east => "Timur Jauh Rusia";
@@ -4502,6 +4591,8 @@ class $id extends S {
   String get macaronesia => "Macaronesia";
   @override
   String get plant_taxonomy => "Taksonomi";
+  @override
+  String get feedback_run_ads_fullscreen => "Tampilkan iklan layar penuh";
   @override
   String get asia_temperate => "Asia Beriklim";
   @override
@@ -4691,6 +4782,8 @@ class $id extends S {
   @override
   String get yes => "iya nih";
   @override
+  String get feedback_run_ads_video => "Tonton iklan video";
+  @override
   String get plant_height_from => "Tinggi dari";
   @override
   String get petal_many => "Lebih dari 5";
@@ -4791,6 +4884,8 @@ class $sr extends S {
   @override
   String get middle_atlantic_ocean => "Средњи Атлантски океан";
   @override
+  String get feedback_run_ads => "Можете приказати оглас преко целог екрана или гледати видео рекламу како бисте подржали даљи развој и побољшање базе података.";
+  @override
   String get habitat_garden => "баште или поља";
   @override
   String get russian_far_east => "Руски Далеки Исток";
@@ -4806,6 +4901,8 @@ class $sr extends S {
   String get macaronesia => "Макаронезија";
   @override
   String get plant_taxonomy => "Такономи";
+  @override
+  String get feedback_run_ads_fullscreen => "Прикажи рекламу преко целог екрана";
   @override
   String get asia_temperate => "Асиа Температе";
   @override
@@ -4995,6 +5092,8 @@ class $sr extends S {
   @override
   String get yes => "Да";
   @override
+  String get feedback_run_ads_video => "Погледајте видео рекламу";
+  @override
   String get plant_height_from => "Висине од";
   @override
   String get petal_many => "више од 5";
@@ -5095,6 +5194,8 @@ class $sv extends S {
   @override
   String get middle_atlantic_ocean => "Mellanöstern Atlanten";
   @override
+  String get feedback_run_ads => "Du kan visa helskärmsannons eller titta på videoannonsering för att stödja ytterligare utveckling och databasförbättring.";
+  @override
   String get habitat_garden => "trädgårdar eller fält";
   @override
   String get russian_far_east => "Ryska Fjärran Östern";
@@ -5110,6 +5211,8 @@ class $sv extends S {
   String get macaronesia => "Makaronesien";
   @override
   String get plant_taxonomy => "Taxonomi";
+  @override
+  String get feedback_run_ads_fullscreen => "Visa en fullskärmsannons";
   @override
   String get asia_temperate => "Asien Temperate";
   @override
@@ -5299,6 +5402,8 @@ class $sv extends S {
   @override
   String get yes => "Ja";
   @override
+  String get feedback_run_ads_video => "Titta på en videoannons";
+  @override
   String get plant_height_from => "Höjd";
   @override
   String get petal_many => "mer än 5";
@@ -5403,6 +5508,8 @@ class $it extends S {
   @override
   String get middle_atlantic_ocean => "Medio Oceano Atlantico";
   @override
+  String get feedback_run_ads => "È possibile visualizzare pubblicità a schermo intero o guardare annunci video per supportare ulteriori sviluppi e miglioramenti del database.";
+  @override
   String get habitat_garden => "giardini o campi";
   @override
   String get russian_far_east => "Estremo Oriente russo";
@@ -5418,6 +5525,8 @@ class $it extends S {
   String get macaronesia => "Macaronesia";
   @override
   String get plant_taxonomy => "Tassonomia";
+  @override
+  String get feedback_run_ads_fullscreen => "Mostra una pubblicità a schermo intero";
   @override
   String get asia_temperate => "Asia-Temperato";
   @override
@@ -5607,6 +5716,8 @@ class $it extends S {
   @override
   String get yes => "Si";
   @override
+  String get feedback_run_ads_video => "Guarda un video pubblicitario";
+  @override
   String get plant_height_from => "Altezza da";
   @override
   String get petal_many => "più di 5";
@@ -5707,6 +5818,8 @@ class $es extends S {
   @override
   String get middle_atlantic_ocean => "Medio Océano Atlántico";
   @override
+  String get feedback_run_ads => "Puede mostrar anuncios a pantalla completa o ver anuncios de videos para respaldar el desarrollo adicional y la mejora de la base de datos.";
+  @override
   String get habitat_garden => "jardín o campo";
   @override
   String get russian_far_east => "Extremo Oriente ruso";
@@ -5722,6 +5835,8 @@ class $es extends S {
   String get macaronesia => "Macaronesia";
   @override
   String get plant_taxonomy => "Taxonomía";
+  @override
+  String get feedback_run_ads_fullscreen => "Mostrar un anuncio en pantalla completa";
   @override
   String get asia_temperate => "Asia-Templado";
   @override
@@ -5911,6 +6026,8 @@ class $es extends S {
   @override
   String get yes => "Sí";
   @override
+  String get feedback_run_ads_video => "Ver un video publicitario";
+  @override
   String get plant_height_from => "Altura desde";
   @override
   String get petal_many => "más de 5";
@@ -6011,6 +6128,8 @@ class $et extends S {
   @override
   String get middle_atlantic_ocean => "Kesk-Atlandi ookean";
   @override
+  String get feedback_run_ads => "Täiendava ekraani reklaami või videoreklaami saate kuvada edasise arengu ja andmebaaside täiustamise toetamiseks.";
+  @override
   String get habitat_garden => "aiad või väljad";
   @override
   String get russian_far_east => "Vene Kaug-Ida";
@@ -6026,6 +6145,8 @@ class $et extends S {
   String get macaronesia => "Makaroneesia";
   @override
   String get plant_taxonomy => "Taksonoomia";
+  @override
+  String get feedback_run_ads_fullscreen => "Näita täisekraani reklaami";
   @override
   String get asia_temperate => "Aasia-Mõõdukas";
   @override
@@ -6215,6 +6336,8 @@ class $et extends S {
   @override
   String get yes => "Jah";
   @override
+  String get feedback_run_ads_video => "Vaadake videoreklaami";
+  @override
   String get plant_height_from => "Kõrgus";
   @override
   String get petal_many => "rohkem kui 5";
@@ -6315,6 +6438,8 @@ class $cs extends S {
   @override
   String get middle_atlantic_ocean => "Střední Atlantik";
   @override
+  String get feedback_run_ads => "Můžete si prohlédnout videoreklamu nebo nechat zobrazit reklamu na celou obrazovku a podpořit tak další vývoj a rozšiřování databáze.";
+  @override
   String get habitat_garden => "pole a zahrady";
   @override
   String get russian_far_east => "Ruský dálný východ";
@@ -6330,6 +6455,8 @@ class $cs extends S {
   String get macaronesia => "Makaronézie";
   @override
   String get plant_taxonomy => "Taxonomie";
+  @override
+  String get feedback_run_ads_fullscreen => "Zobrazit reklamu na celé obrazovce";
   @override
   String get asia_temperate => "Temperátní Asie";
   @override
@@ -6519,6 +6646,8 @@ class $cs extends S {
   @override
   String get yes => "Ano";
   @override
+  String get feedback_run_ads_video => "Spustit video reklamu";
+  @override
   String get plant_height_from => "Výška:";
   @override
   String get petal_many => "více než 5";
@@ -6619,6 +6748,8 @@ class $ar extends S {
   @override
   String get middle_atlantic_ocean => "المحيط الأطلسي الأوسط";
   @override
+  String get feedback_run_ads => "يمكنك عرض إعلان بملء الشاشة أو مشاهدة إعلان فيديو لدعم تطوير إضافي وتحسين قاعدة البيانات.";
+  @override
   String get habitat_garden => "حدائق أو حقول";
   @override
   String get russian_far_east => "الشرق الأقصى الروسي";
@@ -6634,6 +6765,8 @@ class $ar extends S {
   String get macaronesia => "ماكارونيسيا";
   @override
   String get plant_taxonomy => "علم التصنيف";
+  @override
+  String get feedback_run_ads_fullscreen => "عرض إعلان بملء الشاشة";
   @override
   String get asia_temperate => "آسيا المعتدلة";
   @override
@@ -6823,6 +6956,8 @@ class $ar extends S {
   @override
   String get yes => "نعم فعلا";
   @override
+  String get feedback_run_ads_video => "شاهد إعلان فيديو";
+  @override
   String get plant_height_from => "الارتفاع من";
   @override
   String get petal_many => "أكثر من خمسة";
@@ -6923,6 +7058,8 @@ class $pa extends S {
   @override
   String get middle_atlantic_ocean => "ਮੱਧ ਅਟਲਾਂਟਿਕ ਮਹਾਂਸਾਗਰ";
   @override
+  String get feedback_run_ads => "ਤੁਸੀਂ ਪੂਰੇ ਵਿਵਰਣ ਦੇ ਇਸ਼ਤਿਹਾਰ ਜਾਂ ਹੋਰ ਵਿਕਾਸ ਅਤੇ ਡਾਟਾਬੇਸ ਵਧਾਉਣ ਲਈ ਸਮਰਥਨ ਪ੍ਰਾਪਤ ਵੀਡੀਓ ਵਿਗਿਆਪਨ ਵੇਖ ਸਕਦੇ ਹੋ.";
+  @override
   String get habitat_garden => "ਪਲਾਂਟ ਦਾ ਦ੍ਰਿਸ਼ਟੀਕੋਣ";
   @override
   String get russian_far_east => "ਰੂਸੀ ਦੂਰ ਪੂਰਬ";
@@ -6938,6 +7075,8 @@ class $pa extends S {
   String get macaronesia => "ਮੈਕਰੋਨੀਆਸੀਆ";
   @override
   String get plant_taxonomy => "ਟੈਕਸੌਮੋਰੀ";
+  @override
+  String get feedback_run_ads_fullscreen => "ਇੱਕ ਪੂਰੀ ਸਕ੍ਰੀਨ ਵਿਗਿਆਪਨ ਦਿਖਾਓ";
   @override
   String get asia_temperate => "ਏਸ਼ੀਆ-ਤਾਪਤਾ";
   @override
@@ -7127,6 +7266,8 @@ class $pa extends S {
   @override
   String get yes => "ਹਾਂ";
   @override
+  String get feedback_run_ads_video => "ਇੱਕ ਵੀਡੀਓ ਵਿਗਿਆਪਨ ਦੇਖੋ";
+  @override
   String get plant_height_from => "ਦੀ ਉਚਾਈ ਤੋਂ";
   @override
   String get petal_many => "5 ਤੋਂ ਵੱਧ";
@@ -7237,6 +7378,8 @@ class $ja extends S {
   @override
   String get middle_atlantic_ocean => "中部大西洋";
   @override
+  String get feedback_run_ads => "全画面広告を表示したり、ビデオ広告を見たりして、さらなる開発やデータベースの機能強化をサポートできます。";
+  @override
   String get habitat_garden => "庭園、畑";
   @override
   String get russian_far_east => "ロシア極東";
@@ -7252,6 +7395,8 @@ class $ja extends S {
   String get macaronesia => "マカロニア";
   @override
   String get plant_taxonomy => "分類学";
+  @override
+  String get feedback_run_ads_fullscreen => "フルスクリーン広告を表示する";
   @override
   String get asia_temperate => "アジアの温帯";
   @override
@@ -7441,6 +7586,8 @@ class $ja extends S {
   @override
   String get yes => "はい";
   @override
+  String get feedback_run_ads_video => "ビデオ広告を見る";
+  @override
   String get plant_height_from => "高さ";
   @override
   String get petal_many => "以上5";
@@ -7541,6 +7688,8 @@ class $fa extends S {
   @override
   String get middle_atlantic_ocean => "اقیانوس اطلس میانه";
   @override
+  String get feedback_run_ads => "شما می توانید تبلیغات تمام صفحه را نمایش دهید یا تبلیغات ویدئویی را تماشا کنید تا از توسعه بیشتر و بهبود پایگاه داده پشتیبانی کند.";
+  @override
   String get habitat_garden => "باغ ها یا رشته ها";
   @override
   String get russian_far_east => "شرق دور روسیه";
@@ -7556,6 +7705,8 @@ class $fa extends S {
   String get macaronesia => "ماکرونزی";
   @override
   String get plant_taxonomy => "طبقه بندی";
+  @override
+  String get feedback_run_ads_fullscreen => "یک تبلیغ تمام صفحه را نشان دهید";
   @override
   String get asia_temperate => "آسیا درجه حرارت";
   @override
@@ -7741,6 +7892,8 @@ class $fa extends S {
   @override
   String get yes => "بله";
   @override
+  String get feedback_run_ads_video => "تبلیغات ویدیویی را تماشا کنید";
+  @override
   String get plant_height_from => "ارتفاع از";
   @override
   String get petal_many => "بیش از 5";
@@ -7839,6 +7992,8 @@ class $pl extends S {
   @override
   String get middle_atlantic_ocean => "Środkowy Ocean Atlantycki";
   @override
+  String get feedback_run_ads => "Możesz wyświetlać reklamy pełnoekranowe lub oglądać reklamy wideo, aby wesprzeć dalszy rozwój i ulepszenie bazy danych.";
+  @override
   String get habitat_garden => "Ogrody lub pola";
   @override
   String get russian_far_east => "Rosyjski Daleki Wschód";
@@ -7854,6 +8009,8 @@ class $pl extends S {
   String get macaronesia => "Makaronezja";
   @override
   String get plant_taxonomy => "Systematyka";
+  @override
+  String get feedback_run_ads_fullscreen => "Pokaż reklamę pełnoekranową";
   @override
   String get asia_temperate => "Azja umiarkowana";
   @override
@@ -8043,6 +8200,8 @@ class $pl extends S {
   @override
   String get yes => "Tak";
   @override
+  String get feedback_run_ads_video => "Obejrzyj reklamę wideo";
+  @override
   String get plant_height_from => "Wysokość:";
   @override
   String get petal_many => "Więcej niż 5";
@@ -8141,6 +8300,8 @@ class $da extends S {
   @override
   String get middle_atlantic_ocean => "Mellematlanten";
   @override
+  String get feedback_run_ads => "Du kan vise fuldskærmsannonce eller se videoannonce for at understøtte yderligere udvikling og databaseforbedring.";
+  @override
   String get habitat_garden => "haver eller marker";
   @override
   String get russian_far_east => "Russiske fjernøsten";
@@ -8156,6 +8317,8 @@ class $da extends S {
   String get macaronesia => "Makaronesien";
   @override
   String get plant_taxonomy => "Taksonomi";
+  @override
+  String get feedback_run_ads_fullscreen => "Vis en fuldscreen reklame";
   @override
   String get asia_temperate => "Asien-Tempereret";
   @override
@@ -8343,6 +8506,8 @@ class $da extends S {
   @override
   String get yes => "Ja";
   @override
+  String get feedback_run_ads_video => "Se en videoannonce";
+  @override
   String get plant_height_from => "Højde";
   @override
   String get petal_many => "mere end 5";
@@ -8441,6 +8606,8 @@ class $he extends S {
   @override
   String get middle_atlantic_ocean => "האוקיינוס האטלנטי התיכון";
   @override
+  String get feedback_run_ads => "ניתן להציג פרסומת במסך מלא או לצפות בפרסומת וידאו כדי לתמוך בפיתוח ובשיפור נתונים נוספים.";
+  @override
   String get habitat_garden => "גנים או שדות";
   @override
   String get russian_far_east => "המזרח הרחוק הרוסי";
@@ -8456,6 +8623,8 @@ class $he extends S {
   String get macaronesia => "מקרונזיה";
   @override
   String get plant_taxonomy => "טקסונומיה";
+  @override
+  String get feedback_run_ads_fullscreen => "הצג פרסומת במסך מלא";
   @override
   String get asia_temperate => "אסיה ממוזג";
   @override
@@ -8645,6 +8814,8 @@ class $he extends S {
   @override
   String get yes => "כן";
   @override
+  String get feedback_run_ads_video => "צפה בפרסומת וידאו";
+  @override
   String get plant_height_from => "גובה מ";
   @override
   String get petal_many => "יותר מ 5";
@@ -8745,6 +8916,8 @@ class $ro extends S {
   @override
   String get middle_atlantic_ocean => "Oceanul Atlantic de Nord";
   @override
+  String get feedback_run_ads => "Puteți afișa anunțuri pe întreg ecranul sau puteți viziona anunțuri video pentru a susține dezvoltarea ulterioară și îmbunătățirea bazei de date.";
+  @override
   String get habitat_garden => "grădina sau câmp";
   @override
   String get russian_far_east => "Orientul Îndepărtat Rusesc";
@@ -8760,6 +8933,8 @@ class $ro extends S {
   String get macaronesia => "Macaroneziei";
   @override
   String get plant_taxonomy => "Taxonomie";
+  @override
+  String get feedback_run_ads_fullscreen => "Afișați o publicitate pe întregul ecran";
   @override
   String get asia_temperate => "Asia temperată";
   @override
@@ -8949,6 +9124,8 @@ class $ro extends S {
   @override
   String get yes => "Da";
   @override
+  String get feedback_run_ads_video => "Urmăriți o reclamă video";
+  @override
   String get plant_height_from => "Înălțimea de la";
   @override
   String get petal_many => "mai mult de 5";
@@ -9049,6 +9226,8 @@ class $nl extends S {
   @override
   String get middle_atlantic_ocean => "Midden-Atlantische Oceaan";
   @override
+  String get feedback_run_ads => "U kunt advertenties op volledig scherm weergeven of videoadvertenties bekijken om verdere ontwikkeling en databaseverbetering te ondersteunen.";
+  @override
   String get habitat_garden => "tuinen of velden";
   @override
   String get russian_far_east => "Russisch Verre Oosten";
@@ -9064,6 +9243,8 @@ class $nl extends S {
   String get macaronesia => "Macaronesia";
   @override
   String get plant_taxonomy => "Taxonomie";
+  @override
+  String get feedback_run_ads_fullscreen => "Laat een advertentie op volledig scherm zien";
   @override
   String get asia_temperate => "Azië Gematigd";
   @override
@@ -9252,6 +9433,8 @@ class $nl extends S {
   String get southeastern_usa => "Zuidoost VS";
   @override
   String get yes => "Ja";
+  @override
+  String get feedback_run_ads_video => "Bekijk een videoadvertentie";
   @override
   String get plant_height_from => "Hoogte van";
   @override

@@ -22,6 +22,9 @@
   "feedback_submit_translate_app": "Verbeter de kopjes in de app",
   "feedback_buy_extended": "U kunt een uitgebreide versie kopen met extra functionaliteit zoals de offline modus, zoeken in namen, zoeken in taxonomie, observaties en configureerbare filter.",
   "feedback_submit_buy": "Uitgebreide versie",
+  "feedback_run_ads": "U kunt advertenties op volledig scherm weergeven of videoadvertenties bekijken om verdere ontwikkeling en databaseverbetering te ondersteunen.",
+  "feedback_run_ads_fullscreen": "Laat een advertentie op volledig scherm zien",
+  "feedback_run_ads_video": "Bekijk een videoadvertentie",
 
   "rate_question": "Is deze applicatie handig?",
   "rate_text": "Auteur van deze applicatie wordt gevoed door positieve reactie van de gebruikers. Stuur hem alsjeblieft enkele starflowers via Google Play Store.",

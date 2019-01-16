@@ -22,6 +22,9 @@
   "feedback_submit_translate_app": "Forbedre programmets etiketter",
   "feedback_buy_extended": "Du kan kjøpe utvidet versjon med ekstra funksjonalitet som frakoblet modus, søk i navn, søk i taksonomi, observasjoner og konfigurerbart filter.",
   "feedback_submit_buy": "Utvidet versjon",
+  "feedback_run_ads": "Du kan vise fullskjermsannonsering eller se videoannonse for å støtte videreutvikling og databaseforbedring.",
+  "feedback_run_ads_fullscreen": "Vis en fullskjerm-annonse",
+  "feedback_run_ads_video": "Se en videoannonse",
 
   "rate_question": "Er dette programmet nyttig?",
   "rate_text": "Forfatteren av denne søknaden er drevet av positivt svar fra brukerne. Send ham noen stjerneblomster via Google Play Butikk.",

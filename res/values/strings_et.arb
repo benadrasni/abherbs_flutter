@@ -22,6 +22,9 @@
   "feedback_submit_translate_app": "Parandage rakenduse sildid",
   "feedback_buy_extended": "Laiendatud (+) versiooni saate osta täiendava funktsionaalsusega, näiteks offline režiimis, otsida nimesid, otsida taksonoomiast, vaatlustest ja seadistatavast filtrist.",
   "feedback_submit_buy": "Pikendatud versioon",
+  "feedback_run_ads": "Täiendava ekraani reklaami või videoreklaami saate kuvada edasise arengu ja andmebaaside täiustamise toetamiseks.",
+  "feedback_run_ads_fullscreen": "Näita täisekraani reklaami",
+  "feedback_run_ads_video": "Vaadake videoreklaami",
 
   "rate_question": "See app kasulik?",
   "rate_text": "Autor käesoleva taotluse toidab positiivse vastuse kasutajatele. Palun saatke talle mõned starflowers Google Play Store.",

@@ -22,6 +22,9 @@
   "feedback_submit_translate_app": "Verbessere den Text der Anwendung",
   "feedback_buy_extended": "Sie können eine erweiterte (+) Version mit zusätzlichen Funktionen wie Offline-Modus, Suche nach Namen, Suche in Taxonomie, Beobachtungen und konfigurierbaren Filter kaufen.",
   "feedback_submit_buy": "Erweiterte Version",
+  "feedback_run_ads": "Sie können Werbung im Vollbildmodus anzeigen oder Videowerbung ansehen, um die Weiterentwicklung und Datenbankverbesserung zu unterstützen.",
+  "feedback_run_ads_fullscreen": "Anzeige im Vollbildmodus",
+  "feedback_run_ads_video": "Videoanzeige ansehen",
 
   "rate_question": "Ist diese Anwendung hilfreich?",
   "rate_never": "Niemals ",

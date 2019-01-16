@@ -22,6 +22,9 @@
   "feedback_submit_translate_app": "Migliora le etichette delle applicazioni",
   "feedback_buy_extended": "È possibile acquistare la versione estesa con funzionalità aggiuntive come la modalità offline, la ricerca nei nomi, la ricerca in tassonomia, le osservazioni e il filtro configurabile.",
   "feedback_submit_buy": "Versione estesa",
+  "feedback_run_ads": "È possibile visualizzare pubblicità a schermo intero o guardare annunci video per supportare ulteriori sviluppi e miglioramenti del database.",
+  "feedback_run_ads_fullscreen": "Mostra una pubblicità a schermo intero",
+  "feedback_run_ads_video": "Guarda un video pubblicitario",
 
   "rate_question": "Trovi utile questa applicazione?",
   "rate_text": "L'autore di questa applicazione è entusiasta di ricevere feedback da parte degli utenti. Ti preghiamo di inviargli qualche stella (alpina) attraverso Google Play Store.",

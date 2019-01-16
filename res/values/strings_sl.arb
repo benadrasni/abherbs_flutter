@@ -22,6 +22,9 @@
   "feedback_submit_translate_app": "Izboljšajte oznake aplikacij",
   "feedback_buy_extended": "Razširjeno različico lahko kupite z dodatnimi funkcijami, kot je način brez povezave, iskanje imen, iskanje v taksonomiji, opazovanje in nastavljiv filter.",
   "feedback_submit_buy": "Razširjena različica",
+  "feedback_run_ads": "Lahko prikažete celozaslonski oglas ali si ogledate video oglas, ki podpira nadaljnji razvoj in izboljšavo baze podatkov.",
+  "feedback_run_ads_fullscreen": "Pokaži celozaslonski oglas",
+  "feedback_run_ads_video": "Oglejte si video oglas",
 
   "rate_question": "Je ta vloga v pomoč?",
   "rate_text": "Avtor te aplikacije je podprt s pozitivnim odzivom uporabnikov. Prosimo, pošljite mu nekaj Starflowerjev v Google Play Store.",

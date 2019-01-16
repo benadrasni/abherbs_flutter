@@ -30,7 +30,10 @@
   "feedback_submit_translate_app": "Améliorer les étiquettes de l'application",
   "feedback_buy_extended": "Vous pouvez acheter la version étendue avec des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche dans les noms, la recherche dans la taxonomie, les observations et le filtre configurable.",
   "feedback_submit_buy": "Version étendue",
-    
+  "feedback_run_ads": "Vous pouvez afficher une publicité en plein écran ou regarder une publicité vidéo pour prendre en charge le développement et l'amélioration de la base de données.",
+  "feedback_run_ads_fullscreen": "Afficher une publicité en plein écran",
+  "feedback_run_ads_video": "Regarder une publicité vidéo",
+
   "filter_color": "couleur",
   "filter_habitat": "habitat",
   "filter_petal": "pétale",

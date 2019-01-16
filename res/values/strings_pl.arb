@@ -22,6 +22,9 @@
   "feedback_submit_translate_app": "Poprawki tłumaczenia aplikacji",
   "feedback_buy_extended": "Możesz nabyć wersję rozszerzoną, która posiada dodatkowe funkcjonalności, jak np. tryb offline, wyszukiwanie po nazwach czy taksonomii.",
   "feedback_submit_buy": "Rozszerzona wersja",
+  "feedback_run_ads": "Możesz wyświetlać reklamy pełnoekranowe lub oglądać reklamy wideo, aby wesprzeć dalszy rozwój i ulepszenie bazy danych.",
+  "feedback_run_ads_fullscreen": "Pokaż reklamę pełnoekranową",
+  "feedback_run_ads_video": "Obejrzyj reklamę wideo",
 
   "rate_question": "Czy uważasz, że aplikacja jest pomocna?",
   "rate_text": "Wyrażając swoją opinię, dajesz Autorowi aplikacji chęć i motywację do jej dalszego rozwijania. Napisz proszę kilka miłych słów w Sklepie Play.",

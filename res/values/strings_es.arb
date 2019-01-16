@@ -19,6 +19,9 @@
   "feedback_submit_translate_app": "Mejorar las etiquetas de la aplicación.",
   "feedback_buy_extended": "Puede comprar la versión extendida (+) con funcionalidad adicional como el modo fuera de línea, buscar en nombres, buscar en taxonomía, observaciones y filtros configurables.",
   "feedback_submit_buy": "Versión extendida",
+  "feedback_run_ads": "Puede mostrar anuncios a pantalla completa o ver anuncios de videos para respaldar el desarrollo adicional y la mejora de la base de datos.",
+  "feedback_run_ads_fullscreen": "Mostrar un anuncio en pantalla completa",
+  "feedback_run_ads_video": "Ver un video publicitario",
 
   "pref_language": "Idioma preferido",
   "my_region": "Mi región",

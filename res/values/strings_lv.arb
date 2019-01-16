@@ -22,6 +22,9 @@
   "feedback_submit_translate_app": "Uzlabojiet lietojumprogrammas uzlīmes",
   "feedback_buy_extended": "Jūs varat iegādāties paplašinātu versiju ar papildu funkcionalitāti, piemēram, bezsaistes režīmā, meklēt nosaukumos, meklēt taksonomijā, novērojumos un konfigurējamajā filtrā.",
   "feedback_submit_buy": "Paplašināta versija",
+  "feedback_run_ads": "Jūs varat parādīt pilnekrāna reklāmu vai skatīties video reklāmu, lai atbalstītu turpmāku attīstību un datu bāzes uzlabošanu.",
+  "feedback_run_ads_fullscreen": "Rādīt pilnekrāna reklāmu",
+  "feedback_run_ads_video": "Skatiet video reklāmu",
 
   "rate_question": "Vai šī app noderīga?",
   "rate_text": "Autors šajā pieteikumā ir veicinājuši pozitīvu atbildi no lietotājiem. Lūdzu, sūtiet viņam dažus starflowers izmantojot Google Play veikalā.",

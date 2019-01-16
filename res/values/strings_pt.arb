@@ -22,6 +22,9 @@
   "feedback_submit_cash": "Doar",
   "feedback_buy_extended": "Você pode comprar a versão estendida (+) com funcionalidades adicionais, como o modo off-line, pesquisar nomes, pesquisar em taxonomia, observações e filtros configuráveis.",
   "feedback_submit_buy": "Versão extendida",
+  "feedback_run_ads": "Você pode exibir anúncios em tela cheia ou assistir a anúncios em vídeo para dar suporte a mais desenvolvimento e aprimoramento do banco de dados.",
+  "feedback_run_ads_fullscreen": "Mostrar um anúncio em tela cheia",
+  "feedback_run_ads_video": "Assista a um anúncio em vídeo",
 
   "rate_question": "Esta aplicação é útil?",
   "rate_text": "Autor desta aplicação é motivado pela resposta positiva dos usuários. Por favor, envie-lhe algumas flores estrela através do Google Play Store.",

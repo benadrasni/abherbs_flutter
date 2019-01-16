@@ -22,6 +22,9 @@
   "feedback_submit_translate_app": "Förbättra programmets etiketter",
   "feedback_buy_extended": "Du kan köpa utökad version med ytterligare funktioner som offline-läge, sök i namn, sök i taxonomi, observationer och konfigurerbart filter.",
   "feedback_submit_buy": "Förlängd version",
+  "feedback_run_ads": "Du kan visa helskärmsannons eller titta på videoannonsering för att stödja ytterligare utveckling och databasförbättring.",
+  "feedback_run_ads_fullscreen": "Visa en fullskärmsannons",
+  "feedback_run_ads_video": "Titta på en videoannons",
 
   "rate_question": "Är det här programmet användbart?",
   "rate_text": "Författaren av denna ansökan drivs av positivt svar från användarna. Var vänlig skicka honom några stjärnblommor via Google Play Butik.",
