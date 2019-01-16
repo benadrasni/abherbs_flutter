@@ -1,5 +1,6 @@
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/color.dart';
+import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
@@ -173,30 +174,9 @@ class _Distribution2State extends State<Distribution2> {
       drawer: AppDrawer(widget.onChangeLanguage, widget.filter, null),
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/color.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_color)),
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/habitat.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_habitat)),
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/petal.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_petal)),
-        ],
-        fixedColor: Colors.grey,
+        currentIndex: 3,
+        items: getBottomNavigationBarItems(context, widget.filter),
+        type: BottomNavigationBarType.fixed,
         onTap: (index) {
           var route;
           var nextFilterAttribute;
@@ -212,6 +192,10 @@ class _Distribution2State extends State<Distribution2> {
             case 2:
               route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.filter));
               nextFilterAttribute = filterPetal;
+              break;
+            case 3:
+              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, widget.filter));
+              nextFilterAttribute = filterDistribution;
               break;
           }
           if (filterRoutes[nextFilterAttribute] != null) {

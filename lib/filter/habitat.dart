@@ -190,30 +190,9 @@ class _HabitatState extends State<Habitat> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/color.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_color)),
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/petal.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_petal)),
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/distribution.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_distribution)),
-        ],
-        fixedColor: Colors.grey,
+        currentIndex: 1,
+        items:getBottomNavigationBarItems(context, _filter),
+        type: BottomNavigationBarType.fixed,
         onTap: (index) {
           var route;
           var nextFilterAttribute;
@@ -222,11 +201,11 @@ class _HabitatState extends State<Habitat> {
               route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, _filter));
               nextFilterAttribute = filterColor;
               break;
-            case 1:
+            case 2:
               route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, _filter));
               nextFilterAttribute = filterPetal;
               break;
-            case 2:
+            case 3:
               route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, _filter));
               nextFilterAttribute = filterDistribution;
               break;

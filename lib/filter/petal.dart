@@ -180,30 +180,9 @@ class _PetalState extends State<Petal> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/color.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_color)),
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/habitat.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_habitat)),
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/distribution.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_distribution)),
-        ],
-        fixedColor: Colors.grey,
+        currentIndex: 2,
+        items: getBottomNavigationBarItems(context, _filter),
+        type: BottomNavigationBarType.fixed,
         onTap: (index) {
           var route;
           var nextFilterAttribute;
@@ -216,7 +195,7 @@ class _PetalState extends State<Petal> {
               route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, _filter));
               nextFilterAttribute = filterHabitat;
               break;
-            case 2:
+            case 3:
               route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, _filter));
               nextFilterAttribute = filterDistribution;
               break;

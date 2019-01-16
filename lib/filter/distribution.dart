@@ -206,30 +206,9 @@ class _DistributionState extends State<Distribution> {
       drawer: AppDrawer(widget.onChangeLanguage, _filter, this.setMyRegion),
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/color.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_color)),
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/habitat.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_habitat)),
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/petal.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_petal)),
-        ],
-        fixedColor: Colors.grey,
+        currentIndex: 3,
+        items: getBottomNavigationBarItems(context, _filter),
+        type: BottomNavigationBarType.fixed,
         onTap: (index) {
           var route;
           var nextFilterAttribute;

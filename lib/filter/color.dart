@@ -131,7 +131,6 @@ class _ColorState extends State<Color> {
 
   @override
   Widget build(BuildContext context) {
-
     var widgets = <Widget>[];
     widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
@@ -218,11 +217,13 @@ class _ColorState extends State<Color> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container( padding: EdgeInsets.only(top: 10.0, bottom: 10.0), child:
-                    Text(
-                      S.of(context).rate_question,
-                      style: TextStyle(fontSize: 18.0),
-                    ),),
+                    Container(
+                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      child: Text(
+                        S.of(context).rate_question,
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                    ),
                     Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
                       RaisedButton(
                         child: Text(S.of(context).yes),
@@ -275,43 +276,22 @@ class _ColorState extends State<Color> {
         children: widgets,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/habitat.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_habitat)),
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/petal.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_petal)),
-          BottomNavigationBarItem(
-              icon: Image(
-                image: AssetImage('res/images/distribution.png'),
-                width: 25.0,
-                height: 25.0,
-              ),
-              title: Text(S.of(context).filter_distribution)),
-        ],
-        fixedColor: Colors.grey,
+        currentIndex: 0,
+        items: getBottomNavigationBarItems(context, _filter),
+        type: BottomNavigationBarType.fixed,
         onTap: (index) {
           var route;
           var nextFilterAttribute;
           switch (index) {
-            case 0:
+            case 1:
               route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, _filter));
               nextFilterAttribute = filterHabitat;
               break;
-            case 1:
+            case 2:
               route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, _filter));
               nextFilterAttribute = filterPetal;
               break;
-            case 2:
+            case 3:
               route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, _filter));
               nextFilterAttribute = filterDistribution;
               break;

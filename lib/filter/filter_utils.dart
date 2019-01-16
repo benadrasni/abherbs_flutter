@@ -307,3 +307,36 @@ Future<bool> clearFilter(Map<String, String> filter, Function() func) {
     return true;
   });
 }
+
+List<BottomNavigationBarItem> getBottomNavigationBarItems(BuildContext context, Map<String, String> filter) {
+  return <BottomNavigationBarItem>[
+    BottomNavigationBarItem(
+        icon: Image(
+          image: AssetImage(filter[filterColor] == null ? 'res/images/color_50.png' : 'res/images/color.png'),
+          width: 25.0,
+          height: 25.0,
+        ),
+        title: Text(S.of(context).filter_color)),
+    BottomNavigationBarItem(
+        icon: Image(
+          image: AssetImage(filter[filterHabitat] == null ? 'res/images/habitat_50.png' : 'res/images/habitat.png'),
+          width: 25.0,
+          height: 25.0,
+        ),
+        title: Text(S.of(context).filter_habitat)),
+    BottomNavigationBarItem(
+        icon: Image(
+          image: AssetImage(filter[filterPetal] == null ? 'res/images/petal_50.png' : 'res/images/petal.png'),
+          width: 25.0,
+          height: 25.0,
+        ),
+        title: Text(S.of(context).filter_petal)),
+    BottomNavigationBarItem(
+        icon: Image(
+          image: AssetImage(filter[filterDistribution] == null ? 'res/images/distribution_50.png' : 'res/images/distribution.png'),
+          width: 25.0,
+          height: 25.0,
+        ),
+        title: Text(S.of(context).filter_distribution)),
+  ];
+}
