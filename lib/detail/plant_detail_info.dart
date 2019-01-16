@@ -2,6 +2,7 @@ import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -275,6 +276,8 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Pl
                 }
               },
             )));
+
+            cards.add(getAdMobBanner(AdmobBannerSize.BANNER));
 
             return ListView(
               shrinkWrap: true,

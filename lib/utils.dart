@@ -1,6 +1,8 @@
+import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/keys.dart';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:abherbs_flutter/generated/i18n.dart';
 
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
@@ -63,4 +65,11 @@ String getTaxonLabel(BuildContext context, String taxon) {
     case 'Subserie': return S.of(context).taxonomy_subserie;
     default: return S.of(context).taxonomy_unknown;
   }
+}
+
+Widget getAdMobBanner(AdmobBannerSize bannerSize) {
+  return Container(
+    padding: EdgeInsets.all(5.0),
+    child: AdmobBanner(adUnitId: bannerAdUnitId, adSize: bannerSize, listener: (AdmobAdEvent event, Map<String, dynamic> args) {}),
+  );
 }

@@ -20,7 +20,7 @@ class FeedbackScreen extends StatelessWidget {
     );
 
     AdmobReward rewardAd = AdmobReward(
-        adUnitId: 'ca-app-pub-3940256099942544/5224354917',
+        adUnitId: rewardAdUnitId,
         listener: (AdmobAdEvent event, Map<String, dynamic> args) {});
 
     Locale myLocale = Localizations.localeOf(context);

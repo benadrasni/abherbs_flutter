@@ -2,6 +2,7 @@ import 'package:abherbs_flutter/detail/plant_detail_info.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -62,6 +63,8 @@ Widget getGallery(BuildContext context, Future<Plant> _plantF) {
                 ),
               ));
             }
+
+            cards.add(getAdMobBanner(AdmobBannerSize.BANNER));
 
             return ListView(
               shrinkWrap: true,
