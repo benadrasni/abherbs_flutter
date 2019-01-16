@@ -130,6 +130,7 @@ class S implements WidgetsLocalizations {
   String get show_translation => "Show translated text";
   String get siberia => "Siberia";
   String get snack_copy => "Copied to Clipboard";
+  String get snack_loading => "... loading";
   String get snack_no_flowers => "There are no flowers matching criteria.";
   String get snack_publish => "... to be published later";
   String get south_central_pacific => "South-Central Pacific";
@@ -237,6 +238,8 @@ class $de extends S {
   String get malesia => "Malesien";
   @override
   String get southwestern_pacific => "Südwestlicher Pazifik";
+  @override
+  String get snack_loading => "... wird geladen";
   @override
   String get asia_tropical => "Asien-Tropisch";
   @override
@@ -548,6 +551,8 @@ class $hi extends S {
   @override
   String get southwestern_pacific => "दक्षिणपश्चिम प्रशांत महासागर";
   @override
+  String get snack_loading => "... लोड हो रहा है";
+  @override
   String get asia_tropical => "एशिया उष्णकटिबंधीय";
   @override
   String get northwestern_usa => "नॉर्थवेस्टर्न यूएसए";
@@ -857,6 +862,8 @@ class $no extends S {
   String get malesia => "Malesia";
   @override
   String get southwestern_pacific => "Sørvestlige Stillehavet";
+  @override
+  String get snack_loading => "... loading";
   @override
   String get asia_tropical => "Asia-tropisk";
   @override
@@ -1168,6 +1175,8 @@ class $fi extends S {
   @override
   String get southwestern_pacific => "Lounais-Tyynenmeren";
   @override
+  String get snack_loading => "... ladataan";
+  @override
   String get asia_tropical => "Aasian trooppinen";
   @override
   String get northwestern_usa => "Luoteis-USA";
@@ -1478,6 +1487,8 @@ class $ru extends S {
   @override
   String get southwestern_pacific => "Юго-западная часть Тихого океана";
   @override
+  String get snack_loading => "... загрузка";
+  @override
   String get asia_tropical => "Азия тропическая";
   @override
   String get northwestern_usa => "Северо-западная часть США";
@@ -1786,6 +1797,8 @@ class $pt extends S {
   @override
   String get southwestern_pacific => "Pacífico sudoeste";
   @override
+  String get snack_loading => "... carregando";
+  @override
   String get asia_tropical => "Ásia-Tropical";
   @override
   String get northwestern_usa => "Noroeste dos EUA";
@@ -2089,6 +2102,8 @@ class $lt extends S {
   String get malesia => "Malaizija";
   @override
   String get southwestern_pacific => "Ramiojo vandenyno pietvakariai";
+  @override
+  String get snack_loading => "... pakrovimas";
   @override
   String get asia_tropical => "Azijos tropinis";
   @override
@@ -2400,6 +2415,8 @@ class $hr extends S {
   @override
   String get southwestern_pacific => "Jugozapadni Tihi ocean";
   @override
+  String get snack_loading => "... učitavam";
+  @override
   String get asia_tropical => "Azija-tropska";
   @override
   String get northwestern_usa => "Sjeverozapadna SAD";
@@ -2707,6 +2724,8 @@ class $lv extends S {
   String get malesia => "Malaizija";
   @override
   String get southwestern_pacific => "Klusā okeāna dienvidrietumu daļa";
+  @override
+  String get snack_loading => "... iekraušana";
   @override
   String get asia_tropical => "Āzija Tropisks";
   @override
@@ -3018,6 +3037,8 @@ class $fr extends S {
   @override
   String get southwestern_pacific => "Pacifique sud-ouest";
   @override
+  String get snack_loading => "... chargement";
+  @override
   String get asia_tropical => "Asie-tropicale";
   @override
   String get northwestern_usa => "Nord-Ouest des États-Unis";
@@ -3327,6 +3348,8 @@ class $hu extends S {
   String get malesia => "Malesia";
   @override
   String get southwestern_pacific => "Dél-Nyugat Csendes-óceán";
+  @override
+  String get snack_loading => "... betöltés";
   @override
   String get asia_tropical => "Ázsia trópusi";
   @override
@@ -3638,6 +3661,8 @@ class $uk extends S {
   @override
   String get southwestern_pacific => "Південно-Західний Тихий океан";
   @override
+  String get snack_loading => "... завантаження";
+  @override
   String get asia_tropical => "Азія-Тропічнаа";
   @override
   String get northwestern_usa => "Північно-західна США";
@@ -3948,6 +3973,8 @@ class $sk extends S {
   @override
   String get southwestern_pacific => "Juhozápadné Tichomorie";
   @override
+  String get snack_loading => "... načítavam";
+  @override
   String get asia_tropical => "Tropická Ázia";
   @override
   String get northwestern_usa => "Severovýchod USA";
@@ -4251,6 +4278,8 @@ class $sl extends S {
   String get malesia => "Malezija";
   @override
   String get southwestern_pacific => "Jugozahodni Pacifik";
+  @override
+  String get snack_loading => "... nalaganje";
   @override
   String get asia_tropical => "Azija tropski";
   @override
@@ -4562,6 +4591,8 @@ class $id extends S {
   @override
   String get southwestern_pacific => "Pasifik Barat Daya";
   @override
+  String get snack_loading => "... memuat";
+  @override
   String get asia_tropical => "Asia Tropis";
   @override
   String get northwestern_usa => "Barat laut AS";
@@ -4872,6 +4903,8 @@ class $sr extends S {
   @override
   String get southwestern_pacific => "Соутхвестерн Пацифиц";
   @override
+  String get snack_loading => "... учитавање";
+  @override
   String get asia_tropical => "Асиа Тропицал";
   @override
   String get northwestern_usa => "Северозапад САД";
@@ -5181,6 +5214,8 @@ class $sv extends S {
   String get malesia => "Malesien";
   @override
   String get southwestern_pacific => "Sydvästra Stilla havet";
+  @override
+  String get snack_loading => "... läser in";
   @override
   String get asia_tropical => "Asien Tropical";
   @override
@@ -5496,6 +5531,8 @@ class $it extends S {
   @override
   String get southwestern_pacific => "Pacifico sudoccidentale";
   @override
+  String get snack_loading => "... caricamento in corso";
+  @override
   String get asia_tropical => "Asia-tropicale";
   @override
   String get northwestern_usa => "Stati Uniti nordoccidentali";
@@ -5805,6 +5842,8 @@ class $es extends S {
   String get malesia => "Malesia";
   @override
   String get southwestern_pacific => "Pacífico sudoccidental";
+  @override
+  String get snack_loading => "... cargando";
   @override
   String get asia_tropical => "Asia-Tropical";
   @override
@@ -6116,6 +6155,8 @@ class $et extends S {
   @override
   String get southwestern_pacific => "Vaikse ookeani edelaosa";
   @override
+  String get snack_loading => "... laadimine";
+  @override
   String get asia_tropical => "Aasia-Troopiline";
   @override
   String get northwestern_usa => "Loode USA";
@@ -6425,6 +6466,8 @@ class $cs extends S {
   String get malesia => "Jihovýchodní Asie";
   @override
   String get southwestern_pacific => "Jihozápadní Tichomoří";
+  @override
+  String get snack_loading => "... načítám";
   @override
   String get asia_tropical => "Tropická Asie";
   @override
@@ -6736,6 +6779,8 @@ class $ar extends S {
   @override
   String get southwestern_pacific => "جنوب غرب المحيط الهادئ";
   @override
+  String get snack_loading => "... جار التحميل";
+  @override
   String get asia_tropical => "آسيا الاستوائية";
   @override
   String get northwestern_usa => "شمال غرب الولايات المتحدة";
@@ -7045,6 +7090,8 @@ class $pa extends S {
   String get malesia => "ਮਲੇਸ਼ੀਆ";
   @override
   String get southwestern_pacific => "ਦੱਖਣੀ ਪੱਛਮੀ ਪੈਸੀਫਿਕ";
+  @override
+  String get snack_loading => "... ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ";
   @override
   String get asia_tropical => "ਏਸ਼ੀਆ-ਖੰਡੀ";
   @override
@@ -7366,6 +7413,8 @@ class $ja extends S {
   @override
   String get southwestern_pacific => "南西太平洋";
   @override
+  String get snack_loading => "...読み込み中";
+  @override
   String get asia_tropical => "アジアトロピカル";
   @override
   String get northwestern_usa => "米国北西部";
@@ -7676,6 +7725,8 @@ class $fa extends S {
   @override
   String get southwestern_pacific => "جنوب غربی اقیانوس آرام";
   @override
+  String get snack_loading => "... loading";
+  @override
   String get asia_tropical => "آسیا گرمسیری";
   @override
   String get northwestern_usa => "شمال غرب آمریکا";
@@ -7979,6 +8030,8 @@ class $pl extends S {
   String get malesia => "Malezja";
   @override
   String get southwestern_pacific => "Południowo-zachodni Pacyfik";
+  @override
+  String get snack_loading => "... ładuję";
   @override
   String get asia_tropical => "Azja tropikalna";
   @override
@@ -8288,6 +8341,8 @@ class $da extends S {
   @override
   String get southwestern_pacific => "Sydvestlige Stillehavet";
   @override
+  String get snack_loading => "... indlæser";
+  @override
   String get asia_tropical => "Asien-Tropical";
   @override
   String get northwestern_usa => "Nordvestlige USA";
@@ -8593,6 +8648,8 @@ class $he extends S {
   String get malesia => "מלזיה";
   @override
   String get southwestern_pacific => "דרום מערב האוקיינוס השקט";
+  @override
+  String get snack_loading => "... טעינה";
   @override
   String get asia_tropical => "אסיה טרופי";
   @override
@@ -8904,6 +8961,8 @@ class $ro extends S {
   @override
   String get southwestern_pacific => "Sud-vestul Pacificului";
   @override
+  String get snack_loading => "... se incarca";
+  @override
   String get asia_tropical => "Asia tropicală";
   @override
   String get northwestern_usa => "Nord-vestul SUA";
@@ -9213,6 +9272,8 @@ class $nl extends S {
   String get malesia => "Maleisië";
   @override
   String get southwestern_pacific => "Zuidwestelijke Stille Oceaan";
+  @override
+  String get snack_loading => "... bezig met laden";
   @override
   String get asia_tropical => "Azië Tropical";
   @override

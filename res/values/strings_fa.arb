@@ -160,6 +160,7 @@
   "taxonomy_species": "گونه",
 
   "snack_no_flowers": "بدون گل مطابق معیارهای.",
+  "snack_loading": "... loading",
   "snack_copy": "کپی به کلیپ بورد",
   "snack_publish": "بعدا منتشر شود"
 }

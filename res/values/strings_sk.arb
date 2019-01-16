@@ -163,6 +163,7 @@
   "taxonomy_unknown": "neznámy",
 
   "snack_no_flowers": "Filtru nevyhovujú žiadne kvety v databáze.",
+  "snack_loading": "... načítavam",
   "snack_copy": "Skopírované do schránky",
   "snack_publish": "... bude dostupné neskôr"
 }

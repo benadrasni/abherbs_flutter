@@ -163,6 +163,7 @@
   "taxonomy_unknown": "nieznane",
 
   "snack_no_flowers": "Brak kwiatów spełniających kryteria.",
+  "snack_loading": "... ładuję",
   "snack_copy": "Skopiowane do schowka",
   "snack_publish": "... do opublikowania później"
 }

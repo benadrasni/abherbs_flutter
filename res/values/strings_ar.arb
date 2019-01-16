@@ -163,6 +163,7 @@
   "taxonomy_unknown": "غير معروف",
 
   "snack_no_flowers": "لا توجد معايير مطابقة للزهور.",
+  "snack_loading": "... جار التحميل",
   "snack_copy": "نسخ إلى الحافظة",
   "snack_publish": "ليتم نشرها في وقت لاحق"
 }

@@ -18,10 +18,12 @@ class FeedbackScreen extends StatelessWidget {
       adUnitId: interstitialAdUnitId,
       listener: (AdmobAdEvent event, Map<String, dynamic> args) {},
     );
+    interstitialAd.load();
 
     AdmobReward rewardAd = AdmobReward(
         adUnitId: rewardAdUnitId,
         listener: (AdmobAdEvent event, Map<String, dynamic> args) {});
+    rewardAd.load();
 
     Locale myLocale = Localizations.localeOf(context);
     return Scaffold(
@@ -197,18 +199,24 @@ class FeedbackScreen extends StatelessWidget {
               ),
               RaisedButton(
                 onPressed: () async {
-                  interstitialAd.load();
                   if (await interstitialAd.isLoaded) {
                     interstitialAd.show();
+                  } else {
+                    key.currentState.showSnackBar(SnackBar(
+                      content: Text(S.of(context).snack_loading),
+                    ));
                   }
                 },
                 child: Text(S.of(context).feedback_run_ads_fullscreen),
               ),
               RaisedButton(
                 onPressed: () async {
-                  rewardAd.load();
                   if (await rewardAd.isLoaded) {
                     rewardAd.show();
+                  } else {
+                    key.currentState.showSnackBar(SnackBar(
+                      content: Text(S.of(context).snack_loading),
+                    ));
                   }
                 },
                 child: Text(S.of(context).feedback_run_ads_video),

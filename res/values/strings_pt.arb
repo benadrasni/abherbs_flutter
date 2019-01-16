@@ -161,6 +161,7 @@
   "taxonomy_unknown": "desconhecido",
 
   "snack_no_flowers": "Não há critérios de correspondência de flores.",
+  "snack_loading": "... carregando",
   "snack_copy": "Copiado para a área de transferência",
   "snack_publish": "... para ser publicado mais tarde"
 }
