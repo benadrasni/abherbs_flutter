@@ -3,9 +3,11 @@ import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 
 const String filterColor = 'filterColor';
@@ -339,4 +341,12 @@ List<BottomNavigationBarItem> getBottomNavigationBarItems(BuildContext context, 
         ),
         title: Text(S.of(context).filter_distribution)),
   ];
+}
+
+Widget getAdmobBanner(AdmobBannerSize bannerSize) {
+  return AdmobBanner(
+      adUnitId: bannerAdUnitId,
+      adSize: bannerSize,
+      listener: (AdmobAdEvent event, Map<String, dynamic> args) {}
+  );
 }

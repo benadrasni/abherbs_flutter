@@ -9,7 +9,6 @@ import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/entity/translations.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
-import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -124,8 +123,6 @@ class _PlantDetailState extends State<PlantDetail> {
     _currentIndex = 0;
     _isOriginal = false;
     _key = new GlobalKey<ScaffoldState>();
-
-    Ads.hideBannerAd();
   }
 
   Widget _getBody(BuildContext context) {

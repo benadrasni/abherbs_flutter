@@ -1,5 +1,4 @@
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/settings/setting_my_region_2.dart';
 import 'package:abherbs_flutter/utils.dart';
@@ -21,13 +20,6 @@ class _SettingMyRegionState extends State<SettingMyRegion> {
   void _setMyRegion(String myRegion) {
     Prefs.setString(keyMyRegion, myRegion);
     Navigator.pop(context);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    Ads.hideBannerAd();
   }
 
   Widget _getBody(BuildContext context) {

@@ -4,9 +4,9 @@ import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +35,6 @@ class _HabitatState extends State<Habitat> {
       if (snapshot.value != null && snapshot.value > 0) {
         Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
       } else {
-        Ads.hideBannerAd();
         _key.currentState.showSnackBar(SnackBar(
           content: Text(S.of(context).snack_no_flowers),
         ));
@@ -181,7 +180,7 @@ class _HabitatState extends State<Habitat> {
             },
           ),
           Container(
-            height: 50.0,
+            child: getAdmobBanner(AdmobBannerSize.BANNER),
           ),
         ],
       ),
@@ -214,8 +213,7 @@ class _HabitatState extends State<Habitat> {
         },
       ),
       floatingActionButton: new Container(
-        padding: EdgeInsets.only(bottom: 50.0),
-        height: 120.0,
+        height: 70.0,
         width: 70.0,
         child: FittedBox(
           fit: BoxFit.fill,
