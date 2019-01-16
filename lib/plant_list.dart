@@ -91,6 +91,7 @@ class _PlantListState extends State<PlantList> {
 
   @override
   Widget build(BuildContext context) {
+    var mainContext = context;
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).list_info),
@@ -179,8 +180,7 @@ class _PlantListState extends State<PlantList> {
         ),
       ),
       floatingActionButton: Container(
-        padding: EdgeInsets.only(bottom: 50.0),
-        height: 120.0,
+        height: 70.0,
         width: 70.0,
         child: FittedBox(
           fit: BoxFit.fill,
@@ -201,10 +201,10 @@ class _PlantListState extends State<PlantList> {
                               if (value != null) {
                                 filter[filterDistribution] = value;
                               }
-                              Navigator.pushReplacement(context, getNextFilterRoute(null, widget.onChangeLanguage, filter));
+                              Navigator.pushReplacement(mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, filter));
                             });
                           } else {
-                            Navigator.pushReplacement(context, getNextFilterRoute(null, widget.onChangeLanguage, filter));
+                            Navigator.pushReplacement(mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, filter));
                           }
                         });
                       },

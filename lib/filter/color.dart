@@ -125,6 +125,7 @@ class _ColorState extends State<Color> {
 
   @override
   Widget build(BuildContext context) {
+    var mainContext = context;
     var widgets = <Widget>[];
     widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
@@ -315,7 +316,7 @@ class _ColorState extends State<Color> {
                       child: FloatingActionButton(
                         onPressed: () {
                           Navigator.push(
-                            context,
+                            mainContext,
                             MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
                           );
                         },

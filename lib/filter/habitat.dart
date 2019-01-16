@@ -67,6 +67,7 @@ class _HabitatState extends State<Habitat> {
 
   @override
   Widget build(BuildContext context) {
+    var mainContext = context;
     var _defaultTextStyle = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 22.0,
@@ -232,7 +233,7 @@ class _HabitatState extends State<Habitat> {
                       child: FloatingActionButton(
                         onPressed: () {
                           Navigator.push(
-                            context,
+                            mainContext,
                             MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
                           );
                         },

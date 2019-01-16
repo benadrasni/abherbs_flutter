@@ -67,6 +67,7 @@ class _PetalState extends State<Petal> {
 
   @override
   Widget build(BuildContext context) {
+    var mainContext = context;
     var _defaultTextStyle = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 22.0,
@@ -222,7 +223,7 @@ class _PetalState extends State<Petal> {
                       child: FloatingActionButton(
                         onPressed: () {
                           Navigator.push(
-                            context,
+                            mainContext,
                             MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
                           );
                         },

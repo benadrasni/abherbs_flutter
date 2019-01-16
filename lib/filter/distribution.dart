@@ -194,6 +194,7 @@ class _DistributionState extends State<Distribution> {
 
   @override
   Widget build(BuildContext context) {
+    var mainContext = context;
     return Scaffold(
       key: _key,
       appBar: new AppBar(
@@ -251,7 +252,7 @@ class _DistributionState extends State<Distribution> {
                       child: FloatingActionButton(
                         onPressed: () {
                           Navigator.push(
-                            context,
+                            mainContext,
                             MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
                           );
                         },
