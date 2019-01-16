@@ -34,6 +34,8 @@ const String firebasePlantHeaders = 'plants_headers';
 const String firebaseTranslations = 'translations';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
 
+const int adsFrequency = 2;
+
 void launchURL(String url) async {
   if (await canLaunch(url)) {
     await launch(url);

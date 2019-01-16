@@ -246,14 +246,10 @@ class _ColorState extends State<Color> {
                   ],
                 ),
               ),
-              Container(
-                child: getAdmobBanner(AdmobBannerSize.BANNER),
-              ),
+              getAdMobBanner(AdmobBannerSize.BANNER),
             ]);
           } else {
-            return Container(
-              child: getAdmobBanner(AdmobBannerSize.BANNER),
-            );
+            return getAdMobBanner(AdmobBannerSize.BANNER);
           }
         }));
 

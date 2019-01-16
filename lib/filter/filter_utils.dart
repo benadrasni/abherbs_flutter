@@ -343,10 +343,9 @@ List<BottomNavigationBarItem> getBottomNavigationBarItems(BuildContext context, 
   ];
 }
 
-Widget getAdmobBanner(AdmobBannerSize bannerSize) {
-  return AdmobBanner(
-      adUnitId: bannerAdUnitId,
-      adSize: bannerSize,
-      listener: (AdmobAdEvent event, Map<String, dynamic> args) {}
+Widget getAdMobBanner(AdmobBannerSize bannerSize) {
+  return Container(
+    padding: EdgeInsets.all(5.0),
+    child: AdmobBanner(adUnitId: bannerAdUnitId, adSize: bannerSize, listener: (AdmobAdEvent event, Map<String, dynamic> args) {}),
   );
 }

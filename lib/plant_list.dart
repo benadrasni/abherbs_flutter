@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:abherbs_flutter/detail/plant_detail.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
@@ -6,6 +8,7 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +32,44 @@ class PlantList extends StatefulWidget {
 
 class _PlantListState extends State<PlantList> {
   Future<int> _count;
-  Map<String, String> translationCache;
+  Map<String, String> _translationCache;
+  Random _random;
+
+  Widget _getImageWithAds(BuildContext context, Locale myLocale, String url, String name) {
+    var stack = Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        CircularProgressIndicator(),
+        FlatButton(
+          padding: EdgeInsets.all(10.0),
+          child: CachedNetworkImage(
+            fit: BoxFit.scaleDown,
+            placeholder: Image(
+              image: AssetImage('res/images/placeholder.webp'),
+            ),
+            imageUrl: storageEndpoit + storagePhotos + url,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.filter, name)),
+            );
+          },
+        ),
+      ],
+    );
+
+    if (_random.nextInt(100) < adsFrequency) {
+      return Column(
+        children: [
+          stack,
+          getAdMobBanner(AdmobBannerSize.BANNER),
+        ],
+      );
+    } else {
+      return stack;
+    }
+  }
 
   @override
   void initState() {
@@ -45,7 +85,8 @@ class _PlantListState extends State<PlantList> {
       });
     }
 
-    translationCache = {};
+    _translationCache = {};
+    _random = new Random();
   }
 
   @override
@@ -67,25 +108,25 @@ class _PlantListState extends State<PlantList> {
                     String family = snapshot.value['family'];
 
                     Locale myLocale = Localizations.localeOf(context);
-                    Future<String> nameF = translationCache.containsKey(name)
+                    Future<String> nameF = _translationCache.containsKey(name)
                         ? new Future<String>(() {
-                            return translationCache[name];
+                            return _translationCache[name];
                           })
                         : translationsReference.child(myLocale.languageCode).child(name).child('label').once().then((DataSnapshot snapshot) {
                             if (snapshot.value != null) {
-                              translationCache[name] = snapshot.value;
+                              _translationCache[name] = snapshot.value;
                               return snapshot.value;
                             } else {
                               return null;
                             }
                           });
-                    Future<String> familyF = translationCache.containsKey(family)
+                    Future<String> familyF = _translationCache.containsKey(family)
                         ? new Future<String>(() {
-                            return translationCache[family];
+                            return _translationCache[family];
                           })
                         : translationsTaxonomyReference.child(myLocale.languageCode).child(family).once().then((DataSnapshot snapshot) {
                             if (snapshot.value != null && snapshot.value.length > 0) {
-                              translationCache[family] = snapshot.value[0];
+                              _translationCache[family] = snapshot.value[0];
                               return snapshot.value[0];
                             } else {
                               return null;
@@ -129,28 +170,7 @@ class _PlantListState extends State<PlantList> {
                             );
                           },
                         ),
-                        Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            CircularProgressIndicator(),
-                            FlatButton(
-                              padding: EdgeInsets.all(10.0),
-                              child: CachedNetworkImage(
-                                fit: BoxFit.scaleDown,
-                                placeholder: Image(
-                                  image: AssetImage('res/images/placeholder.webp'),
-                                ),
-                                imageUrl: storageEndpoit + storagePhotos + snapshot.value['url'],
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.filter, name)),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
+                        _getImageWithAds(context, myLocale, snapshot.value['url'], name),
                       ]),
                     );
                   }),

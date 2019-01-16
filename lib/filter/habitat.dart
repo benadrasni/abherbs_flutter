@@ -179,9 +179,7 @@ class _HabitatState extends State<Habitat> {
               _navigate('6');
             },
           ),
-          Container(
-            child: getAdmobBanner(AdmobBannerSize.BANNER),
-          ),
+          getAdMobBanner(AdmobBannerSize.BANNER),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

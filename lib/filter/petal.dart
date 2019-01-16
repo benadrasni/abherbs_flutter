@@ -169,9 +169,7 @@ class _PetalState extends State<Petal> {
               ],
             ),
           ),
-          Container(
-            child: getAdmobBanner(AdmobBannerSize.BANNER),
-          ),
+          getAdMobBanner(AdmobBannerSize.BANNER),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
