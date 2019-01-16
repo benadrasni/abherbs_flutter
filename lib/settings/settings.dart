@@ -79,102 +79,121 @@ class _SettingsScreenState extends State<SettingsScreen> {
       fontSize: 16.0,
     );
 
+    var widgets = <Widget>[];
+    widgets.add(ListTile(
+      title: Text(
+        S.of(context).pref_language,
+        style: titleTextStyle,
+      ),
+      subtitle: FutureBuilder<String>(
+          future: _prefLanguageF,
+          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+            var value = "";
+            if (snapshot.connectionState == ConnectionState.done) {
+              value = snapshot.data.isNotEmpty ? languages[snapshot.data] : "";
+            }
+
+            return Text(
+              value,
+              style: subtitleTextStyle,
+            );
+          }),
+      trailing: IconButton(
+        icon: Icon(Icons.delete),
+        onPressed: () {
+          if (_prefLanguage.isNotEmpty) {
+            _resetPrefLanguage();
+          }
+        },
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SettingPrefLanguage()),
+        ).then((result) {
+          _getPrefLanguage();
+        });
+      },
+    ));
+    widgets.add(ListTile(
+      title: Text(
+        S.of(context).my_region,
+        style: titleTextStyle,
+      ),
+      subtitle: FutureBuilder<String>(
+          future: _myRegionF,
+          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+            var value = "";
+            if (snapshot.connectionState == ConnectionState.done) {
+              value = snapshot.data.isNotEmpty ? getFilterDistributionValue(context, snapshot.data) : "";
+            }
+            return Text(
+              value,
+              style: subtitleTextStyle,
+            );
+          }),
+      trailing: IconButton(
+        icon: Icon(Icons.delete),
+        onPressed: () {
+          _setMyRegion(null);
+        },
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SettingMyRegion()),
+        ).then((result) {
+          setState(() {
+            _myRegionF = Prefs.getStringF(keyMyRegion);
+          });
+        });
+      },
+    ));
+
+    widgets.add(FutureBuilder<String>(
+        future: _myRegionF,
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done && snapshot.data.isNotEmpty) {
+            return ListTile(
+              title: Text(
+                S.of(context).always_my_region_title,
+                style: titleTextStyle,
+              ),
+              subtitle: Text(
+                S.of(context).always_my_region_subtitle,
+                style: subtitleTextStyle,
+              ),
+              trailing: FutureBuilder<bool>(
+                  future: _alwaysMyRegionF,
+                  builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                    bool alwaysMyRegion = false;
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      alwaysMyRegion = snapshot.data;
+                    }
+                    return Switch(
+                      value: alwaysMyRegion,
+                      onChanged: (bool value) {
+                        _setAlwaysMyRegion(value);
+                      },
+                    );
+                  }),
+            );
+          } else {
+            return Container(
+              height: 50.0,
+            );
+          }
+        }));
+
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).settings),
       ),
-      body: ListView(shrinkWrap: true, padding: const EdgeInsets.all(10.0), children: [
-        ListTile(
-          title: Text(S.of(context).pref_language,
-              style: titleTextStyle,
-          ),
-          subtitle: FutureBuilder<String>(
-              future: _prefLanguageF,
-              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                var value = "";
-                if (snapshot.connectionState == ConnectionState.done) {
-                  value = snapshot.data.isNotEmpty ? languages[snapshot.data] : "";
-                }
-
-                return Text(
-                  value,
-                  style: subtitleTextStyle,
-                );
-              }),
-          trailing: IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: () {
-              _resetPrefLanguage();
-            },
-          ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SettingPrefLanguage()),
-            ).then((result) {
-              _getPrefLanguage();
-            });
-          },
-        ),
-        ListTile(
-          title: Text(
-            S.of(context).my_region,
-            style: titleTextStyle,
-          ),
-          subtitle: FutureBuilder<String>(
-              future: _myRegionF,
-              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                var value = "";
-                if (snapshot.connectionState == ConnectionState.done) {
-                  value = snapshot.data.isNotEmpty ? getFilterDistributionValue(context, snapshot.data) : "";
-                }
-                return Text(
-                  value,
-                  style: subtitleTextStyle,
-                );
-              }),
-          trailing: IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: () {
-              _setMyRegion(null);
-            },
-          ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SettingMyRegion()),
-            ).then((result) {
-              setState(() {
-                _myRegionF = Prefs.getStringF(keyMyRegion);
-              });
-            });
-          },
-        ),
-        ListTile(
-          title: Text(
-            S.of(context).always_my_region_title,
-            style: titleTextStyle,
-          ),
-          subtitle: Text(
-            S.of(context).always_my_region_subtitle,
-            style: subtitleTextStyle,
-          ),
-          trailing: FutureBuilder<bool>(
-              future: _alwaysMyRegionF,
-              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                bool alwaysMyRegion = false;
-                if (snapshot.connectionState == ConnectionState.done) {
-                  alwaysMyRegion = snapshot.data;
-                }
-                return Switch(
-                  value: alwaysMyRegion,
-                  onChanged: (bool value) {
-                    _setAlwaysMyRegion(value);
-                  },
-                );
-              }),
-        ),
-      ]),
+      body: ListView(
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(10.0),
+        children: widgets,
+      ),
     );
   }
 }
