@@ -107,7 +107,10 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    FirebaseAdMob.instance.initialize(appId: adAppId);
+    FirebaseAdMob.instance.initialize(appId: adAppId).then((success) {
+      Ads.showBannerAd(this);
+    });
+
 
     Prefs.init();
     Prefs.getStringF(keyPreferredLanguage).then((String language) {

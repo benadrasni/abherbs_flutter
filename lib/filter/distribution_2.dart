@@ -34,7 +34,7 @@ class _Distribution2State extends State<Distribution2> {
 
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (snapshot.value != null && snapshot.value > 0) {
-        Navigator.pushReplacement(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
       } else {
         Ads.hideBannerAd();
         _key.currentState.showSnackBar(SnackBar(
@@ -160,8 +160,6 @@ class _Distribution2State extends State<Distribution2> {
     _key = new GlobalKey<ScaffoldState>();
 
     _setCount();
-
-    Ads.showBannerAd(this);
   }
 
   @override

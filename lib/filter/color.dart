@@ -37,9 +37,7 @@ class _ColorState extends State<Color> {
 
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (snapshot.value != null && snapshot.value > 0) {
-        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter)).then((result) {
-          Ads.showBannerAd(this);
-        });
+        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
       } else {
         Ads.hideBannerAd();
         _key.currentState.showSnackBar(SnackBar(
@@ -119,8 +117,6 @@ class _ColorState extends State<Color> {
     _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
 
     _setCount();
-
-    Ads.showBannerAd(this);
   }
 
   @override
@@ -300,9 +296,7 @@ class _ColorState extends State<Color> {
             Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
           }
           filterRoutes[nextFilterAttribute] = route;
-          Navigator.push(context, route).then((result) {
-            Ads.showBannerAd(this);
-          });
+          Navigator.push(context, route);
         },
       ),
       floatingActionButton: Container(
@@ -330,9 +324,7 @@ class _ColorState extends State<Color> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
-                          ).then((result) {
-                            Ads.showBannerAd(this);
-                          });
+                          );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
                       ),
