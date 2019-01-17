@@ -163,7 +163,7 @@
   "taxonomy_unknown": "לא ידוע",
 
   "snack_no_flowers": "אין קריטריונים תואמים לפרחים.",
-  "snack_loading": "... טעינה",
+  "snack_loading_ad": "המודעה עדיין נטענת, לחץ שוב על הלחצן.",
   "snack_copy": "הועתק ללוח",
   "snack_publish": "יפורסם בהמשך"
 }

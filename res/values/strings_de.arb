@@ -163,7 +163,7 @@
   "taxonomy_unknown": "unbekannt",
 
   "snack_no_flowers": "Keine Blumen die den Kriterien entsprechen.",
-  "snack_loading": "... wird geladen",
+  "snack_loading_ad": "Werbung wird noch geladen, Taste erneut drücken.",
   "snack_copy": "In die Zwischenablage kopiert",
   "snack_publish": "... wird später veröffentlicht"
 }

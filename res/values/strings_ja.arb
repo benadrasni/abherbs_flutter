@@ -163,7 +163,7 @@
   "taxonomy_unknown": "未知の",
 
   "snack_no_flowers": "基準に一致する花はありません。",
-  "snack_loading": "...読み込み中",
+  "snack_loading_ad": "広告はまだ読み込まれています。もう一度ボタンを押してください。",
   "snack_copy": "クリップボードにコピー",
   "snack_publish": "... 後で公開する"
 }

@@ -27,6 +27,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         widget.onChangeLanguage(null);
         return null;
       });
+      _alwaysMyRegionF = Prefs.setBool(keyAlwaysMyRegion, false).then((success) {
+        return false;
+      });
     });
   }
 

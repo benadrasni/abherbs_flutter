@@ -163,7 +163,7 @@
   "taxonomy_unknown": "desconocido",
 
   "snack_no_flowers": "No hay criterios de correspondencia de flores.",
-  "snack_loading": "... cargando",
+  "snack_loading_ad": "El anuncio todavía se está cargando, presione el botón otra vez.",
   "snack_copy": "Copiado al portapapeles",
   "snack_publish": "... para ser publicado más tarde"
 }

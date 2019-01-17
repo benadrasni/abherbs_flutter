@@ -163,7 +163,7 @@
   "taxonomy_unknown": "nežinomas",
 
   "snack_no_flowers": "Nėra gėlių atitikimo kriterijų.",
-  "snack_loading": "... pakrovimas",
+  "snack_loading_ad": "Reklama vis dar įkeliama, dar kartą paspauskite mygtuką.",
   "snack_copy": "Kopijuojama į iškarpinę",
   "snack_publish": "... bus paskelbta vėliau"
 }

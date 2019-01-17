@@ -164,7 +164,7 @@
   "taxonomy_unknown": "inconnu",
 
   "snack_no_flowers": "Aucune fleur ne correspond aux critères.",
-  "snack_loading": "... chargement",
+  "snack_loading_ad": "L’annonce est toujours en cours de chargement, appuyez à nouveau sur le bouton.",
   "snack_copy": "Copié dans le presse-papier",
   "snack_publish": "... à publier plus tard"
 }

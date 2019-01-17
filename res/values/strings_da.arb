@@ -161,7 +161,7 @@
   "taxonomy_unknown": "ukendt",
 
   "snack_no_flowers": "Ingen blomster, der matcher kriterier.",
-  "snack_loading": "... indlæser",
+  "snack_loading_ad": "Annonce er stadig indlæst, tryk igen på knappen.",
   "snack_copy": "Kopieret til udklipsholderen",
   "snack_publish": "... offentliggøres senere"
 }

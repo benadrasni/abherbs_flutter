@@ -163,7 +163,7 @@
   "taxonomy_unknown": "teadmata",
 
   "snack_no_flowers": "Lillede sobitamise kriteeriumid puuduvad.",
-  "snack_loading": "... laadimine",
+  "snack_loading_ad": "Reklaam laaditakse ikka veel, vajutage uuesti nuppu.",
   "snack_copy": "Kopeeritud lõikelauale",
   "snack_publish": "... avaldatakse hiljem"
 }

@@ -163,7 +163,7 @@
   "taxonomy_unknown": "necunoscut",
 
   "snack_no_flowers": "Nu există criterii de potrivire a florilor.",
-  "snack_loading": "... se incarca",
+  "snack_loading_ad": "Anunțul se încarcă încă, apăsați butonul din nou.",
   "snack_copy": "Copiat în Clipboard",
   "snack_publish": "... care urmează să fie publicată ulterior"
 }

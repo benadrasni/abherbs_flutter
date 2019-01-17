@@ -203,7 +203,7 @@ class FeedbackScreen extends StatelessWidget {
                     interstitialAd.show();
                   } else {
                     key.currentState.showSnackBar(SnackBar(
-                      content: Text(S.of(context).snack_loading),
+                      content: Text(S.of(context).snack_loading_ad),
                     ));
                   }
                 },
@@ -215,7 +215,7 @@ class FeedbackScreen extends StatelessWidget {
                     rewardAd.show();
                   } else {
                     key.currentState.showSnackBar(SnackBar(
-                      content: Text(S.of(context).snack_loading),
+                      content: Text(S.of(context).snack_loading_ad),
                     ));
                   }
                 },

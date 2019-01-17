@@ -163,7 +163,7 @@
   "taxonomy_unknown": "neznámý",
 
   "snack_no_flowers": "Filtru nevyhovují žádné květiny v databázi.",
-  "snack_loading": "... načítám",
+  "snack_loading_ad": "Reklama se stále načítá, znovu stiskněte tlačítko.",
   "snack_copy": "Zkopírováno do schránky",
   "snack_publish": "... bude zveřejněno později"
 }

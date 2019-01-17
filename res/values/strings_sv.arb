@@ -163,7 +163,7 @@
   "taxonomy_unknown": "okänd",
 
   "snack_no_flowers": "Inga blommor matchande kriterier.",
-  "snack_loading": "... läser in",
+  "snack_loading_ad": "Annonsen laddas fortfarande, tryck på knappen igen.",
   "snack_copy": "Kopieras till Urklipp",
   "snack_publish": "... att publiceras senare"
 }

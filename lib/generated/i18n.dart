@@ -130,7 +130,7 @@ class S implements WidgetsLocalizations {
   String get show_translation => "Show translated text";
   String get siberia => "Siberia";
   String get snack_copy => "Copied to Clipboard";
-  String get snack_loading => "... loading";
+  String get snack_loading_ad => "Ad is still loading, press button again.";
   String get snack_no_flowers => "There are no flowers matching criteria.";
   String get snack_publish => "... to be published later";
   String get south_central_pacific => "South-Central Pacific";
@@ -239,8 +239,6 @@ class $de extends S {
   @override
   String get southwestern_pacific => "Südwestlicher Pazifik";
   @override
-  String get snack_loading => "... wird geladen";
-  @override
   String get asia_tropical => "Asien-Tropisch";
   @override
   String get northwestern_usa => "Nordwesten U.S.A.";
@@ -298,6 +296,8 @@ class $de extends S {
   String get southern_south_america => "Südliches Südamerika";
   @override
   String get plant_habitat => "Habitat";
+  @override
+  String get snack_loading_ad => "Werbung wird noch geladen, Taste erneut drücken.";
   @override
   String get petal_5 => "5";
   @override
@@ -551,8 +551,6 @@ class $hi extends S {
   @override
   String get southwestern_pacific => "दक्षिणपश्चिम प्रशांत महासागर";
   @override
-  String get snack_loading => "... लोड हो रहा है";
-  @override
   String get asia_tropical => "एशिया उष्णकटिबंधीय";
   @override
   String get northwestern_usa => "नॉर्थवेस्टर्न यूएसए";
@@ -610,6 +608,8 @@ class $hi extends S {
   String get southern_south_america => "दक्षिणी दक्षिण अमेरिका";
   @override
   String get plant_habitat => "पर्यावास";
+  @override
+  String get snack_loading_ad => "विज्ञापन अभी भी लोड हो रहा है, फिर से बटन दबाएं।";
   @override
   String get petal_5 => "५";
   @override
@@ -863,8 +863,6 @@ class $no extends S {
   @override
   String get southwestern_pacific => "Sørvestlige Stillehavet";
   @override
-  String get snack_loading => "... loading";
-  @override
   String get asia_tropical => "Asia-tropisk";
   @override
   String get northwestern_usa => "Nordvest USA";
@@ -922,6 +920,8 @@ class $no extends S {
   String get southern_south_america => "Sør Sør-Amerika";
   @override
   String get plant_habitat => "Voksested";
+  @override
+  String get snack_loading_ad => "Annonsen er fortsatt lasting, trykk på knappen igjen.";
   @override
   String get petal_5 => "5";
   @override
@@ -1175,8 +1175,6 @@ class $fi extends S {
   @override
   String get southwestern_pacific => "Lounais-Tyynenmeren";
   @override
-  String get snack_loading => "... ladataan";
-  @override
   String get asia_tropical => "Aasian trooppinen";
   @override
   String get northwestern_usa => "Luoteis-USA";
@@ -1234,6 +1232,8 @@ class $fi extends S {
   String get southern_south_america => "Etelä Etelä-Amerikka";
   @override
   String get plant_habitat => "Kasvupaikka";
+  @override
+  String get snack_loading_ad => "Mainos lataa, paina painiketta uudelleen.";
   @override
   String get petal_5 => "5";
   @override
@@ -1487,8 +1487,6 @@ class $ru extends S {
   @override
   String get southwestern_pacific => "Юго-западная часть Тихого океана";
   @override
-  String get snack_loading => "... загрузка";
-  @override
   String get asia_tropical => "Азия тропическая";
   @override
   String get northwestern_usa => "Северо-западная часть США";
@@ -1546,6 +1544,8 @@ class $ru extends S {
   String get southern_south_america => "Южная Южная Америка";
   @override
   String get plant_habitat => "Ареал";
+  @override
+  String get snack_loading_ad => "Реклама все еще загружается, нажмите кнопку еще раз.";
   @override
   String get petal_5 => "5";
   @override
@@ -1797,8 +1797,6 @@ class $pt extends S {
   @override
   String get southwestern_pacific => "Pacífico sudoeste";
   @override
-  String get snack_loading => "... carregando";
-  @override
   String get asia_tropical => "Ásia-Tropical";
   @override
   String get northwestern_usa => "Noroeste dos EUA";
@@ -1856,6 +1854,8 @@ class $pt extends S {
   String get southern_south_america => "Sul da América do Sul";
   @override
   String get plant_habitat => "Habitat";
+  @override
+  String get snack_loading_ad => "O anúncio ainda está carregando, pressione o botão novamente.";
   @override
   String get petal_5 => "5";
   @override
@@ -2103,8 +2103,6 @@ class $lt extends S {
   @override
   String get southwestern_pacific => "Ramiojo vandenyno pietvakariai";
   @override
-  String get snack_loading => "... pakrovimas";
-  @override
   String get asia_tropical => "Azijos tropinis";
   @override
   String get northwestern_usa => "Šiaurės vakarų JAV";
@@ -2162,6 +2160,8 @@ class $lt extends S {
   String get southern_south_america => "Pietų Pietų Amerika";
   @override
   String get plant_habitat => "Buveinė";
+  @override
+  String get snack_loading_ad => "Reklama vis dar įkeliama, dar kartą paspauskite mygtuką.";
   @override
   String get petal_5 => "5";
   @override
@@ -2415,8 +2415,6 @@ class $hr extends S {
   @override
   String get southwestern_pacific => "Jugozapadni Tihi ocean";
   @override
-  String get snack_loading => "... učitavam";
-  @override
   String get asia_tropical => "Azija-tropska";
   @override
   String get northwestern_usa => "Sjeverozapadna SAD";
@@ -2474,6 +2472,8 @@ class $hr extends S {
   String get southern_south_america => "Južna Južna Amerika";
   @override
   String get plant_habitat => "Staništa";
+  @override
+  String get snack_loading_ad => "Oglas se još uvijek učitava, ponovno pritisnite gumb.";
   @override
   String get petal_5 => "5";
   @override
@@ -2725,8 +2725,6 @@ class $lv extends S {
   @override
   String get southwestern_pacific => "Klusā okeāna dienvidrietumu daļa";
   @override
-  String get snack_loading => "... iekraušana";
-  @override
   String get asia_tropical => "Āzija Tropisks";
   @override
   String get northwestern_usa => "Ziemeļrietumu ASV";
@@ -2784,6 +2782,8 @@ class $lv extends S {
   String get southern_south_america => "Dienvidamerika dienvidos";
   @override
   String get plant_habitat => "Izplatības areāls";
+  @override
+  String get snack_loading_ad => "Reklāma joprojām tiek ielādēta, vēlreiz nospiediet pogu.";
   @override
   String get petal_5 => "5";
   @override
@@ -3037,8 +3037,6 @@ class $fr extends S {
   @override
   String get southwestern_pacific => "Pacifique sud-ouest";
   @override
-  String get snack_loading => "... chargement";
-  @override
   String get asia_tropical => "Asie-tropicale";
   @override
   String get northwestern_usa => "Nord-Ouest des États-Unis";
@@ -3096,6 +3094,8 @@ class $fr extends S {
   String get southern_south_america => "Sud de l'Amérique du Sud";
   @override
   String get plant_habitat => "Habitat";
+  @override
+  String get snack_loading_ad => "L’annonce est toujours en cours de chargement, appuyez à nouveau sur le bouton.";
   @override
   String get petal_5 => "5";
   @override
@@ -3349,8 +3349,6 @@ class $hu extends S {
   @override
   String get southwestern_pacific => "Dél-Nyugat Csendes-óceán";
   @override
-  String get snack_loading => "... betöltés";
-  @override
   String get asia_tropical => "Ázsia trópusi";
   @override
   String get northwestern_usa => "Északnyugati USA";
@@ -3408,6 +3406,8 @@ class $hu extends S {
   String get southern_south_america => "Dél-Dél-Amerika";
   @override
   String get plant_habitat => "Élettér";
+  @override
+  String get snack_loading_ad => "A hirdetés még mindig betöltődik, nyomja meg újra a gombot.";
   @override
   String get petal_5 => "5";
   @override
@@ -3661,8 +3661,6 @@ class $uk extends S {
   @override
   String get southwestern_pacific => "Південно-Західний Тихий океан";
   @override
-  String get snack_loading => "... завантаження";
-  @override
   String get asia_tropical => "Азія-Тропічнаа";
   @override
   String get northwestern_usa => "Північно-західна США";
@@ -3720,6 +3718,8 @@ class $uk extends S {
   String get southern_south_america => "Південна Південна Америка";
   @override
   String get plant_habitat => "Середовище";
+  @override
+  String get snack_loading_ad => "Реклама все ще завантажується, знову натисніть кнопку.";
   @override
   String get petal_5 => "5";
   @override
@@ -3973,8 +3973,6 @@ class $sk extends S {
   @override
   String get southwestern_pacific => "Juhozápadné Tichomorie";
   @override
-  String get snack_loading => "... načítavam";
-  @override
   String get asia_tropical => "Tropická Ázia";
   @override
   String get northwestern_usa => "Severovýchod USA";
@@ -4032,6 +4030,8 @@ class $sk extends S {
   String get southern_south_america => "Juh Južnej Ameriky";
   @override
   String get plant_habitat => "Lokalita";
+  @override
+  String get snack_loading_ad => "Reklama sa stále načítava, opäť stlačte tlačidlo.";
   @override
   String get petal_5 => "5";
   @override
@@ -4279,8 +4279,6 @@ class $sl extends S {
   @override
   String get southwestern_pacific => "Jugozahodni Pacifik";
   @override
-  String get snack_loading => "... nalaganje";
-  @override
   String get asia_tropical => "Azija tropski";
   @override
   String get northwestern_usa => "Severozahodna ZDA";
@@ -4338,6 +4336,8 @@ class $sl extends S {
   String get southern_south_america => "Južna Južna Amerika";
   @override
   String get plant_habitat => "Habitat";
+  @override
+  String get snack_loading_ad => "Oglas se še vedno nalaga, ponovno pritisnite gumb.";
   @override
   String get petal_5 => "5";
   @override
@@ -4591,8 +4591,6 @@ class $id extends S {
   @override
   String get southwestern_pacific => "Pasifik Barat Daya";
   @override
-  String get snack_loading => "... memuat";
-  @override
   String get asia_tropical => "Asia Tropis";
   @override
   String get northwestern_usa => "Barat laut AS";
@@ -4650,6 +4648,8 @@ class $id extends S {
   String get southern_south_america => "Amerika Selatan Selatan";
   @override
   String get plant_habitat => "Habitat";
+  @override
+  String get snack_loading_ad => "Iklan masih memuat, tekan tombol lagi.";
   @override
   String get petal_5 => "5";
   @override
@@ -4903,8 +4903,6 @@ class $sr extends S {
   @override
   String get southwestern_pacific => "Соутхвестерн Пацифиц";
   @override
-  String get snack_loading => "... учитавање";
-  @override
   String get asia_tropical => "Асиа Тропицал";
   @override
   String get northwestern_usa => "Северозапад САД";
@@ -4962,6 +4960,8 @@ class $sr extends S {
   String get southern_south_america => "Јужна Јужна Америка";
   @override
   String get plant_habitat => "Станишта";
+  @override
+  String get snack_loading_ad => "Оглас се и даље учитава, поново притисните дугме.";
   @override
   String get petal_5 => "5";
   @override
@@ -5215,8 +5215,6 @@ class $sv extends S {
   @override
   String get southwestern_pacific => "Sydvästra Stilla havet";
   @override
-  String get snack_loading => "... läser in";
-  @override
   String get asia_tropical => "Asien Tropical";
   @override
   String get northwestern_usa => "Nordvästra USA";
@@ -5274,6 +5272,8 @@ class $sv extends S {
   String get southern_south_america => "Södra Sydamerika";
   @override
   String get plant_habitat => "Växtplats";
+  @override
+  String get snack_loading_ad => "Annonsen laddas fortfarande, tryck på knappen igen.";
   @override
   String get petal_5 => "5";
   @override
@@ -5531,8 +5531,6 @@ class $it extends S {
   @override
   String get southwestern_pacific => "Pacifico sudoccidentale";
   @override
-  String get snack_loading => "... caricamento in corso";
-  @override
   String get asia_tropical => "Asia-tropicale";
   @override
   String get northwestern_usa => "Stati Uniti nordoccidentali";
@@ -5590,6 +5588,8 @@ class $it extends S {
   String get southern_south_america => "Sud America del Sud";
   @override
   String get plant_habitat => "Habitat";
+  @override
+  String get snack_loading_ad => "La pubblicità è ancora in fase di caricamento, premere nuovamente il pulsante.";
   @override
   String get petal_5 => "5";
   @override
@@ -5843,8 +5843,6 @@ class $es extends S {
   @override
   String get southwestern_pacific => "Pacífico sudoccidental";
   @override
-  String get snack_loading => "... cargando";
-  @override
   String get asia_tropical => "Asia-Tropical";
   @override
   String get northwestern_usa => "Noroeste de los Estados Unidos";
@@ -5902,6 +5900,8 @@ class $es extends S {
   String get southern_south_america => "Sur de América del Sur";
   @override
   String get plant_habitat => "Localidad";
+  @override
+  String get snack_loading_ad => "El anuncio todavía se está cargando, presione el botón otra vez.";
   @override
   String get petal_5 => "5";
   @override
@@ -6155,8 +6155,6 @@ class $et extends S {
   @override
   String get southwestern_pacific => "Vaikse ookeani edelaosa";
   @override
-  String get snack_loading => "... laadimine";
-  @override
   String get asia_tropical => "Aasia-Troopiline";
   @override
   String get northwestern_usa => "Loode USA";
@@ -6214,6 +6212,8 @@ class $et extends S {
   String get southern_south_america => "Lõuna-Lõuna-Ameerika";
   @override
   String get plant_habitat => "Elupaik";
+  @override
+  String get snack_loading_ad => "Reklaam laaditakse ikka veel, vajutage uuesti nuppu.";
   @override
   String get petal_5 => "5";
   @override
@@ -6467,8 +6467,6 @@ class $cs extends S {
   @override
   String get southwestern_pacific => "Jihozápadní Tichomoří";
   @override
-  String get snack_loading => "... načítám";
-  @override
   String get asia_tropical => "Tropická Asie";
   @override
   String get northwestern_usa => "Severozápad USA";
@@ -6526,6 +6524,8 @@ class $cs extends S {
   String get southern_south_america => "Jih Jižní Ameriky";
   @override
   String get plant_habitat => "Ekologie";
+  @override
+  String get snack_loading_ad => "Reklama se stále načítá, znovu stiskněte tlačítko.";
   @override
   String get petal_5 => "5";
   @override
@@ -6779,8 +6779,6 @@ class $ar extends S {
   @override
   String get southwestern_pacific => "جنوب غرب المحيط الهادئ";
   @override
-  String get snack_loading => "... جار التحميل";
-  @override
   String get asia_tropical => "آسيا الاستوائية";
   @override
   String get northwestern_usa => "شمال غرب الولايات المتحدة";
@@ -6838,6 +6836,8 @@ class $ar extends S {
   String get southern_south_america => "جنوب أمريكا الجنوبية";
   @override
   String get plant_habitat => "موطن";
+  @override
+  String get snack_loading_ad => "لا يزال يتم تحميل الإعلان ، اضغط على الزر مرة أخرى.";
   @override
   String get petal_5 => "خمسة";
   @override
@@ -7091,8 +7091,6 @@ class $pa extends S {
   @override
   String get southwestern_pacific => "ਦੱਖਣੀ ਪੱਛਮੀ ਪੈਸੀਫਿਕ";
   @override
-  String get snack_loading => "... ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ";
-  @override
   String get asia_tropical => "ਏਸ਼ੀਆ-ਖੰਡੀ";
   @override
   String get northwestern_usa => "ਉੱਤਰ ਪੱਛਮੀ ਅਮਰੀਕਾ";
@@ -7150,6 +7148,8 @@ class $pa extends S {
   String get southern_south_america => "ਦੱਖਣੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
   @override
   String get plant_habitat => "ਆਵਾਸ";
+  @override
+  String get snack_loading_ad => "ਵਿਗਿਆਪਨ ਅਜੇ ਵੀ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ, ਦੁਬਾਰਾ ਬਟਨ ਦਬਾਓ";
   @override
   String get petal_5 => "5";
   @override
@@ -7413,8 +7413,6 @@ class $ja extends S {
   @override
   String get southwestern_pacific => "南西太平洋";
   @override
-  String get snack_loading => "...読み込み中";
-  @override
   String get asia_tropical => "アジアトロピカル";
   @override
   String get northwestern_usa => "米国北西部";
@@ -7472,6 +7470,8 @@ class $ja extends S {
   String get southern_south_america => "南アメリカ南部";
   @override
   String get plant_habitat => "生息地";
+  @override
+  String get snack_loading_ad => "広告はまだ読み込まれています。もう一度ボタンを押してください。";
   @override
   String get petal_5 => "5";
   @override
@@ -7725,8 +7725,6 @@ class $fa extends S {
   @override
   String get southwestern_pacific => "جنوب غربی اقیانوس آرام";
   @override
-  String get snack_loading => "... loading";
-  @override
   String get asia_tropical => "آسیا گرمسیری";
   @override
   String get northwestern_usa => "شمال غرب آمریکا";
@@ -7784,6 +7782,8 @@ class $fa extends S {
   String get southern_south_america => "جنوبی جنوب امریکا";
   @override
   String get plant_habitat => "زیستگاه";
+  @override
+  String get snack_loading_ad => "تبلیغات هنوز بارگیری شده است، دوباره دکمه را فشار دهید.";
   @override
   String get petal_5 => "5";
   @override
@@ -8031,8 +8031,6 @@ class $pl extends S {
   @override
   String get southwestern_pacific => "Południowo-zachodni Pacyfik";
   @override
-  String get snack_loading => "... ładuję";
-  @override
   String get asia_tropical => "Azja tropikalna";
   @override
   String get northwestern_usa => "Północno-zachodnie USA";
@@ -8090,6 +8088,8 @@ class $pl extends S {
   String get southern_south_america => "Południowa Ameryka Południowa";
   @override
   String get plant_habitat => "Habitat";
+  @override
+  String get snack_loading_ad => "Reklama wciąż się ładuje, naciśnij przycisk ponownie.";
   @override
   String get petal_5 => "5";
   @override
@@ -8341,8 +8341,6 @@ class $da extends S {
   @override
   String get southwestern_pacific => "Sydvestlige Stillehavet";
   @override
-  String get snack_loading => "... indlæser";
-  @override
   String get asia_tropical => "Asien-Tropical";
   @override
   String get northwestern_usa => "Nordvestlige USA";
@@ -8400,6 +8398,8 @@ class $da extends S {
   String get southern_south_america => "Sydlige Sydamerika";
   @override
   String get plant_habitat => "Vækststeder";
+  @override
+  String get snack_loading_ad => "Annonce er stadig indlæst, tryk igen på knappen.";
   @override
   String get petal_5 => "5";
   @override
@@ -8649,8 +8649,6 @@ class $he extends S {
   @override
   String get southwestern_pacific => "דרום מערב האוקיינוס השקט";
   @override
-  String get snack_loading => "... טעינה";
-  @override
   String get asia_tropical => "אסיה טרופי";
   @override
   String get northwestern_usa => "צפון מערב ארצות הברית";
@@ -8708,6 +8706,8 @@ class $he extends S {
   String get southern_south_america => "דרום אמריקה הדרומית";
   @override
   String get plant_habitat => "בית גידול";
+  @override
+  String get snack_loading_ad => "המודעה עדיין נטענת, לחץ שוב על הלחצן.";
   @override
   String get petal_5 => "5";
   @override
@@ -8961,8 +8961,6 @@ class $ro extends S {
   @override
   String get southwestern_pacific => "Sud-vestul Pacificului";
   @override
-  String get snack_loading => "... se incarca";
-  @override
   String get asia_tropical => "Asia tropicală";
   @override
   String get northwestern_usa => "Nord-vestul SUA";
@@ -9020,6 +9018,8 @@ class $ro extends S {
   String get southern_south_america => "Sud America de Sud";
   @override
   String get plant_habitat => "Habitatul";
+  @override
+  String get snack_loading_ad => "Anunțul se încarcă încă, apăsați butonul din nou.";
   @override
   String get petal_5 => "5";
   @override
@@ -9273,8 +9273,6 @@ class $nl extends S {
   @override
   String get southwestern_pacific => "Zuidwestelijke Stille Oceaan";
   @override
-  String get snack_loading => "... bezig met laden";
-  @override
   String get asia_tropical => "Azië Tropical";
   @override
   String get northwestern_usa => "Noordwest VS";
@@ -9332,6 +9330,8 @@ class $nl extends S {
   String get southern_south_america => "Zuid-Zuid-Amerika";
   @override
   String get plant_habitat => "Standplaats";
+  @override
+  String get snack_loading_ad => "Advertentie wordt nog steeds geladen, druk opnieuw op de knop.";
   @override
   String get petal_5 => "5";
   @override

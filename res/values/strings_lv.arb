@@ -163,7 +163,7 @@
   "taxonomy_unknown": "nezināms",
 
   "snack_no_flowers": "Nav ziedu atbilstības kritēriju.",
-  "snack_loading": "... iekraušana",
+  "snack_loading_ad": "Reklāma joprojām tiek ielādēta, vēlreiz nospiediet pogu.",
   "snack_copy": "Kopēts uz starpliktuvi",
   "snack_publish": "... publicēt vēlāk"
 }

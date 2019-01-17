@@ -165,7 +165,7 @@
   "taxonomy_unknown": "unknown",
 
   "snack_no_flowers": "There are no flowers matching criteria.",
-  "snack_loading": "... loading",
+  "snack_loading_ad": "Ad is still loading, press button again.",
   "snack_copy": "Copied to Clipboard",
   "snack_publish": "... to be published later"
 }
