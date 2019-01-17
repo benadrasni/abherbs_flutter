@@ -98,7 +98,6 @@ class _AppState extends State<App> {
                   GlobalWidgetsLocalizations.delegate,
                 ],
                 supportedLocales: S.delegate.supportedLocales,
-                localeResolutionCallback: S.delegate.resolution(fallback: new Locale("en", "")),
                 home: Splash(this.onChangeLanguage),
               );
             default:

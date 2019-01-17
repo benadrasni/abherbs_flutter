@@ -9,7 +9,6 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/utils.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -162,7 +161,7 @@ class _DistributionState extends State<Distribution> {
       ),
     ));
 
-    regionWidgets.add(getAdMobBanner(AdmobBannerSize.BANNER));
+    regionWidgets.add(getAdMobBanner());
 
     return Container(
         color: Colors.white30,

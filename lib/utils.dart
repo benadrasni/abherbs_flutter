@@ -67,7 +67,7 @@ String getTaxonLabel(BuildContext context, String taxon) {
   }
 }
 
-Widget getAdMobBanner(AdmobBannerSize bannerSize) {
+Widget getAdMobBanner({AdmobBannerSize bannerSize = AdmobBannerSize.BANNER}) {
   return Container(
     padding: EdgeInsets.all(5.0),
     child: AdmobBanner(adUnitId: bannerAdUnitId, adSize: bannerSize, listener: (AdmobAdEvent event, Map<String, dynamic> args) {}),

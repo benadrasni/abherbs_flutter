@@ -1,7 +1,6 @@
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/utils.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +40,7 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Future<Plant> _plantF,
               ),
             ));
 
-            cards.add(getAdMobBanner(AdmobBannerSize.BANNER));
+            cards.add(getAdMobBanner());
 
             return ListView(
               shrinkWrap: true,

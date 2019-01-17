@@ -8,7 +8,6 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -63,7 +62,7 @@ class _PlantListState extends State<PlantList> {
       return Column(
         children: [
           stack,
-          getAdMobBanner(AdmobBannerSize.BANNER),
+          getAdMobBanner(),
         ],
       );
     } else {

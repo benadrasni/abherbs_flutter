@@ -6,7 +6,6 @@ import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/utils.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -180,7 +179,7 @@ class _HabitatState extends State<Habitat> {
               _navigate('6');
             },
           ),
-          getAdMobBanner(AdmobBannerSize.BANNER),
+          getAdMobBanner(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
