@@ -37,9 +37,11 @@ class S implements WidgetsLocalizations {
   String get china => "China";
   String get color_blue => "blue, purple";
   String get color_green => "green, brown, black";
+  String get color_message => "What's the colour of the flower? Choose the closest one.";
   String get color_red => "red, pink";
   String get color_white => "white";
   String get color_yellow => "yellow";
+  String get distribution_message => "Which geographic area should we focus on?";
   String get east_tropical_africa => "East Tropical Africa";
   String get eastern_asia => "Eastern Asia";
   String get eastern_canada => "Eastern Canada";
@@ -66,6 +68,7 @@ class S implements WidgetsLocalizations {
   String get habitat_forest => "woodlands or forests";
   String get habitat_garden => "gardens or fields";
   String get habitat_meadow => "meadows or grasslands";
+  String get habitat_message => "Whats around you? Identify plant's habitat.";
   String get habitat_rock => "rocks or mountains";
   String get habitat_tree => "trees or shrubs";
   String get habitat_wetland => "moorlands or wetlands";
@@ -100,6 +103,7 @@ class S implements WidgetsLocalizations {
   String get petal_4 => "4 or less";
   String get petal_5 => "5";
   String get petal_many => "more than 5";
+  String get petal_message => "Is the flower zygomorphic? No? Then how many petals does it have?";
   String get petal_zygomorphic => "zygomorphic";
   String get plant_flower => "Flower";
   String get plant_flowering_from => "Flowering from";

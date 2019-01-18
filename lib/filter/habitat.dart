@@ -187,6 +187,15 @@ class _HabitatState extends State<Habitat> {
                   _navigate('6');
                 },
               ),
+              Container(
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
+                child: Text(S.of(context).habitat_message,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ),
               getAdMobBanner(),
             ],
           ),

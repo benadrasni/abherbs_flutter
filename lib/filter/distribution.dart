@@ -161,6 +161,20 @@ class _DistributionState extends State<Distribution> {
       ),
     ));
 
+    regionWidgets.add(Container(
+        padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
+        child: Stack(alignment: Alignment.center,
+          children: [
+            Text(
+              S.of(context).distribution_message,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ],
+        )));
+
     //regionWidgets.add(getAdMobBanner());
 
     return Container(
@@ -200,7 +214,18 @@ class _DistributionState extends State<Distribution> {
         title: new Text(S.of(context).filter_distribution),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, _filter, this.setMyRegion),
-      body: _getBody(context),
+      body: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Image.asset(
+              "res/images/app_background.webp",
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.bottomCenter,
+            ),
+          ),
+          _getBody(context),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 3,
         items: getBottomNavigationBarItems(context, _filter),
