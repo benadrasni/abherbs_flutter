@@ -524,6 +524,7 @@ FlatButton getSourceButton(String url) {
       Text(
         textSource,
         textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 12.0),
       ),
     ]),
     onPressed: () {
