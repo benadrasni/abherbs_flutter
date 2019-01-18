@@ -1,4 +1,4 @@
 {
   "filter_color": "color",
-  "color_of_flower_message": "What's the color of the flower? Choose the closest one."
+  "color_message": "What's the color of the flower? Choose the closest one."
 }

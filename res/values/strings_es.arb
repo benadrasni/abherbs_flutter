@@ -39,6 +39,11 @@
   "filter_petal": "pétalo",
   "filter_distribution": "distribución",
 
+  "color_message": "¿Cuál es el color de la flor? Elige el más cercano. Puedes volver a cambiar la selección cuando sea.",
+  "habitat_message": "¿Dónde te encuentras? Identifica el lugar.",
+  "petal_message": "¿Es la flor zigomorfo? ¿No? Pués, ¿cuántos pétalos tiene?",
+  "distribution_message": "¿En qué área geográfica enfocarse?",
+
   "color_white": "blanco",
   "color_yellow": "amarillo",
   "color_red": "rojo, roso",

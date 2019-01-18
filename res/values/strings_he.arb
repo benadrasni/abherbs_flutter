@@ -39,6 +39,11 @@
   "filter_petal": "מספר עלי כותרת",
   "filter_distribution": "הפצה",
 
+  "color_message": "מה צבע הפרח? בחר את הקרוב ביותר.",
+  "habitat_message": "מה מסביבך? זיהוי בית הגידול של הצמח.",
+  "petal_message": "האם הפרח אינו סדיר? לא? אז כמה עלי כותרת יש את זה?",
+  "distribution_message": "באיזה אזור גיאוגרפי עלינו להתמקד?",
+
   "color_white": "לבן",
   "color_yellow": "צהוב",
   "color_red": "אדום, ורוד",

@@ -39,6 +39,11 @@
   "filter_petal": "花びらの数",
   "filter_distribution": "分布",
 
+  "color_message": "花の色は何ですか？ 最も近いものを選んでください。",
+  "habitat_message": "あなたの周りには何がありますか？ 植物の生息地を特定する。",
+  "petal_message": "花は不規則ですか？ いいえ？ それで花びらは何枚ですか？",
+  "distribution_message": "どの地理的領域に焦点を当てるべきか？",
+
   "color_white": "白",
   "color_yellow": "黄色",
   "color_red": "赤、ピンク",

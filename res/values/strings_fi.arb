@@ -39,6 +39,11 @@
   "filter_petal": "määrä terälehdet",
   "filter_distribution": "jakelu",
 
+  "color_message": "Mikä on kukka? Valitse lähin.",
+  "habitat_message": "Mitä ympärilläsi on? Tunnista laitoksen elinympäristö.",
+  "petal_message": "Onko kukka zygomorphic? Ei? Kuinka monta terälehteä sillä on?",
+  "distribution_message": "Mihin maantieteelliseen alueeseen meidän pitäisi keskittyä?",
+
   "color_white": "valkoinen",
   "color_yellow": "keltainen",
   "color_red": "punainen, vaaleanpunainen",

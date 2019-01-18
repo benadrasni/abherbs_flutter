@@ -39,6 +39,11 @@
   "filter_petal": "število venčnih listov",
   "filter_distribution": "distribucija",
 
+  "color_message": "Kaj je barva cveta? Izberite najustreznejšo.",
+  "habitat_message": "Kaj je okoli vas? Prepoznajte rastline habitat.",
+  "petal_message": "Je cvet zigomorfni? Ne? Potem, koliko venčnih listov ima?",
+  "distribution_message": "Na katero geografsko območje se moramo osredotočiti?",
+
   "color_white": "bela",
   "color_yellow": "rumena",
   "color_red": "rdeča, roza",

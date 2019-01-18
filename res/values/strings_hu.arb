@@ -39,6 +39,11 @@
   "filter_petal": "a szirmok száma",
   "filter_distribution": "terjesztés",
 
+  "color_message": "Milyen színű a virág? Válassza ki a legközelebbi színt.",
+  "habitat_message": "Mi veszi körül? Határozza meg a növény élőhelyét.",
+  "petal_message": "A virág szimmetriája kétoldali (zigomorf)? Nem? Akkor hány sziromlevele van?",
+  "distribution_message": "Melyik földrajzi területre kell összpontosítania?",
+
   "color_white": "fehér",
   "color_yellow": "sárga",
   "color_red": "piros, rózsaszín",

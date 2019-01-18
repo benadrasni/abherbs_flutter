@@ -39,6 +39,11 @@
   "filter_petal": "okvětní list",
   "filter_distribution": "distribuce",
 
+  "color_message": "Jaké barvy jsou květiny? Vyber tu nejbližší. Vždy se můžeš vrátit a vybrat jinou.",
+  "habitat_message": "Kde se nacházíš? Identifikuj lokalitu.",
+  "petal_message": "Je květ nepravidelný? Ne? Tak kolik má okvětních lístků?",
+  "distribution_message": "Na kterou geografickou oblast zaměřit pozornost?",
+
   "color_white": "bílá",
   "color_yellow": "žlutá",
   "color_red": "červená, růžová",

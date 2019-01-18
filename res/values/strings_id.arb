@@ -39,6 +39,11 @@
   "filter_petal": "jumlah kelopak bunga",
   "filter_distribution": "distribusi",
 
+  "color_message": "Apa warna bunga itu? Pilih yang terdekat.",
+  "habitat_message": "Ada apa di sekitar kamu Identifikasi habitat tanaman.",
+  "petal_message": "Apakah bunga bisimetris? Tidak? Lalu berapa kelopak bunga yang dimilikinya?",
+  "distribution_message": "Area geografis mana yang harus kita fokuskan?",
+
   "color_white": "putih",
   "color_yellow": "kuning",
   "color_red": "merah",

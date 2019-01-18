@@ -39,6 +39,11 @@
   "filter_petal": "numero di petali",
   "filter_distribution": "distribuzione",
 
+  "color_message": "Di che colore è il fiore? Scegli il più simile.",
+  "habitat_message": "Cosa c'è intorno a te? Identifica l'habitat.",
+  "petal_message": "Il fiore è zigomorfi? No? Allora quanti petali ha?",
+  "distribution_message": "Su quale area geografica concentrarsi?",
+
   "color_white": "bianco",
   "color_yellow": "giallo",
   "color_red": "rosso, rosa",

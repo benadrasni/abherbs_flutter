@@ -68,7 +68,7 @@ class S implements WidgetsLocalizations {
   String get habitat_forest => "woodlands or forests";
   String get habitat_garden => "gardens or fields";
   String get habitat_meadow => "meadows or grasslands";
-  String get habitat_message => "Whats around you? Identify plant's habitat.";
+  String get habitat_message => "What's around you? Identify plant's habitat.";
   String get habitat_rock => "rocks or mountains";
   String get habitat_tree => "trees or shrubs";
   String get habitat_wetland => "moorlands or wetlands";
@@ -205,6 +205,8 @@ class $de extends S {
   @override
   String get southwestern_usa => "Südwesten U.S.A.";
   @override
+  String get distribution_message => "Auf welches geografische Gebiet sollten Sie sich konzentrieren?";
+  @override
   String get caribbean => "Karibik";
   @override
   String get australasia => "Australasien";
@@ -263,6 +265,8 @@ class $de extends S {
   @override
   String get west_central_tropical_africa => "West-Zentrales tropisches Afrika";
   @override
+  String get habitat_message => "Was ist um dich herum? Identifiziere den Standort der Pflanze.";
+  @override
   String get plant_toxicity => "Toxizität";
   @override
   String get snack_no_flowers => "Keine Blumen die den Kriterien entsprechen.";
@@ -306,6 +310,8 @@ class $de extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "Blütenblätter";
+  @override
+  String get petal_message => "Ist die Blüte spiegelsymmetrisch? Falls nicht, wieviele Blütenblätter hat sie?";
   @override
   String get color_white => "Weiß";
   @override
@@ -429,6 +435,8 @@ class $de extends S {
   @override
   String get rate_later => "Später";
   @override
+  String get color_message => "Welche Farbe hat die Blume? Wähle die ähnlichste Farbe.";
+  @override
   String get west_tropical_africa => "Westliches tropisches Afrika";
   @override
   String get northern_europe => "Nordeuropa";
@@ -517,6 +525,8 @@ class $hi extends S {
   @override
   String get southwestern_usa => "साउथवेस्टर्न यूएसए";
   @override
+  String get distribution_message => "हमें किस भौगोलिक क्षेत्र पर ध्यान केंद्रित करना चाहिए?";
+  @override
   String get caribbean => "कैरेबियन";
   @override
   String get australasia => "ऑस्ट्रेलेशिया";
@@ -575,6 +585,8 @@ class $hi extends S {
   @override
   String get west_central_tropical_africa => "पश्चिम मध्य उष्णकटिबंधीय अफ्रीका";
   @override
+  String get habitat_message => "आपके आसपास क्या है? पौधे के आवास की पहचान करें।";
+  @override
   String get plant_toxicity => "आविषता";
   @override
   String get snack_no_flowers => "कोई फूल नहीं कसौटी।";
@@ -618,6 +630,8 @@ class $hi extends S {
   String get petal_5 => "५";
   @override
   String get filter_petal => "पंखुड़ियों की संख्या";
+  @override
+  String get petal_message => "क्या फूल बिसिमेट्रिक है? नहीं? तो यह कितनी पंखुड़ियाँ है?";
   @override
   String get color_white => "सफेद";
   @override
@@ -741,6 +755,8 @@ class $hi extends S {
   @override
   String get rate_later => "बाद में";
   @override
+  String get color_message => "फूल का रंग क्या है? निकटतम एक चुनें";
+  @override
   String get west_tropical_africa => "पश्चिम उष्णकटिबंधीय अफ्रीका";
   @override
   String get northern_europe => "उत्तरी यूरोप";
@@ -829,6 +845,8 @@ class $no extends S {
   @override
   String get southwestern_usa => "Sørvest USA";
   @override
+  String get distribution_message => "Hvilket geografisk område skal vi fokusere på?";
+  @override
   String get caribbean => "Caribbean";
   @override
   String get australasia => "Australasia";
@@ -887,6 +905,8 @@ class $no extends S {
   @override
   String get west_central_tropical_africa => "Vest-Sentral-tropiske Afrika";
   @override
+  String get habitat_message => "Hva er rundt deg? Identifiser plantens habitat.";
+  @override
   String get plant_toxicity => "Toksisitet";
   @override
   String get snack_no_flowers => "Ingen blomster som samsvarer med kriterier.";
@@ -930,6 +950,8 @@ class $no extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "antall kronblader";
+  @override
+  String get petal_message => "Er blomsten zygomorphic? Nei? Så hvor mange kronblad har det?";
   @override
   String get color_white => "hvit";
   @override
@@ -1053,6 +1075,8 @@ class $no extends S {
   @override
   String get rate_later => "Seinere";
   @override
+  String get color_message => "Hva er fargen på blomsten? Velg den nærmeste.";
+  @override
   String get west_tropical_africa => "Vest-tropiske Afrika";
   @override
   String get northern_europe => "Nord-Europa";
@@ -1141,6 +1165,8 @@ class $fi extends S {
   @override
   String get southwestern_usa => "Lounais USA";
   @override
+  String get distribution_message => "Mihin maantieteelliseen alueeseen meidän pitäisi keskittyä?";
+  @override
   String get caribbean => "Karibian";
   @override
   String get australasia => "Australiassa";
@@ -1199,6 +1225,8 @@ class $fi extends S {
   @override
   String get west_central_tropical_africa => "Länsi-Keski-trooppinen Afrikka";
   @override
+  String get habitat_message => "Mitä ympärilläsi on? Tunnista laitoksen elinympäristö.";
+  @override
   String get plant_toxicity => "Myrkyllisyys";
   @override
   String get snack_no_flowers => "Ei kukkien yhteensopivuusvaatimuksia.";
@@ -1242,6 +1270,8 @@ class $fi extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "määrä terälehdet";
+  @override
+  String get petal_message => "Onko kukka zygomorphic? Ei? Kuinka monta terälehteä sillä on?";
   @override
   String get color_white => "valkoinen";
   @override
@@ -1365,6 +1395,8 @@ class $fi extends S {
   @override
   String get rate_later => "Myöhemmin";
   @override
+  String get color_message => "Mikä on kukka? Valitse lähin.";
+  @override
   String get west_tropical_africa => "Läntinen trooppinen Afrikka";
   @override
   String get northern_europe => "Pohjoinen Eurooppa";
@@ -1453,6 +1485,8 @@ class $ru extends S {
   @override
   String get southwestern_usa => "Юго-западная часть США";
   @override
+  String get distribution_message => "На какой географической области мы должны сосредоточиться?";
+  @override
   String get caribbean => "Карибик";
   @override
   String get australasia => "Австралазия";
@@ -1511,6 +1545,8 @@ class $ru extends S {
   @override
   String get west_central_tropical_africa => "Западно-Центральная тропическая Африка";
   @override
+  String get habitat_message => "Что вокруг тебя? Определить среду обитания растений.";
+  @override
   String get plant_toxicity => "Токсичность";
   @override
   String get snack_no_flowers => "Нет цветов соответствующих критериям.";
@@ -1554,6 +1590,8 @@ class $ru extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "лепестоко";
+  @override
+  String get petal_message => "Является ли цветок зигоморфным? Нет? Тогда сколько у него лепестков?";
   @override
   String get color_white => "белая";
   @override
@@ -1677,6 +1715,8 @@ class $ru extends S {
   @override
   String get rate_later => "Позже";
   @override
+  String get color_message => "Какого цвета цветок? Выберите ближайший.";
+  @override
   String get west_tropical_africa => "Западная тропическая Африка";
   @override
   String get northern_europe => "Северная Европа";
@@ -1763,6 +1803,8 @@ class $pt extends S {
   @override
   String get southwestern_usa => "Sudoeste dos EUA";
   @override
+  String get distribution_message => "Em qual área geográfica se concentrar?";
+  @override
   String get caribbean => "Caraíbas";
   @override
   String get australasia => "Australásia";
@@ -1821,6 +1863,8 @@ class $pt extends S {
   @override
   String get west_central_tropical_africa => "África Tropical Centro-Ocidental";
   @override
+  String get habitat_message => "O que está a sua volta? Identifique o habitat da planta.";
+  @override
   String get plant_toxicity => "Toxicidade";
   @override
   String get snack_no_flowers => "Não há critérios de correspondência de flores.";
@@ -1864,6 +1908,8 @@ class $pt extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "número de pétalas";
+  @override
+  String get petal_message => "A flor é bissimétrica? Não? Quantas pétalas tem, então?";
   @override
   String get color_white => "branca";
   @override
@@ -1985,6 +2031,8 @@ class $pt extends S {
   @override
   String get rate_later => "Mais tarde";
   @override
+  String get color_message => "De que cor são as flores? Selecione a mais aproximada. Sempre pode voltar e selecionar uma outra.";
+  @override
   String get west_tropical_africa => "África Tropical Ocidental";
   @override
   String get northern_europe => "Norte da Europa";
@@ -2069,6 +2117,8 @@ class $lt extends S {
   @override
   String get southwestern_usa => "Pietvakarių JAV";
   @override
+  String get distribution_message => "Kokią geografinę vietovę turėtume sutelkti?";
+  @override
   String get caribbean => "Karibai";
   @override
   String get australasia => "Australasija";
@@ -2127,6 +2177,8 @@ class $lt extends S {
   @override
   String get west_central_tropical_africa => "Vakarų-Centrinė tropinė Afrika";
   @override
+  String get habitat_message => "Kas vyksta aplink jus? Nustatyti gamyklos buveinių.";
+  @override
   String get plant_toxicity => "Toksiškumas";
   @override
   String get snack_no_flowers => "Nėra gėlių atitikimo kriterijų.";
@@ -2170,6 +2222,8 @@ class $lt extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "skaičius žiedlapiais";
+  @override
+  String get petal_message => "Ar gėlė nereguliarus? Ar ne? Tada kiek žiedlapių ji neturi?";
   @override
   String get color_white => "baltas";
   @override
@@ -2293,6 +2347,8 @@ class $lt extends S {
   @override
   String get rate_later => "Vėliau";
   @override
+  String get color_message => "Koks gėlių spalva? Pasirinkite artimiausią.";
+  @override
   String get west_tropical_africa => "Vakarų tropinė Afrika";
   @override
   String get northern_europe => "Šiaurės Europa";
@@ -2381,6 +2437,8 @@ class $hr extends S {
   @override
   String get southwestern_usa => "Jugozapadno SAD";
   @override
+  String get distribution_message => "Na koje ćemo se geografsko područje usredotočiti?";
+  @override
   String get caribbean => "Karibi";
   @override
   String get australasia => "Australazija";
@@ -2439,6 +2497,8 @@ class $hr extends S {
   @override
   String get west_central_tropical_africa => "Zapadno-središnja tropska Afrika";
   @override
+  String get habitat_message => "Što je oko tebe? Identificirajte stanište biljke.";
+  @override
   String get plant_toxicity => "Toksičnost";
   @override
   String get snack_no_flowers => "Nema kriterija za podudaranje.";
@@ -2482,6 +2542,8 @@ class $hr extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "broj krunskih listić";
+  @override
+  String get petal_message => "Je li cvijet zigomorfan? Ne? Koliko latica ima?";
   @override
   String get color_white => "bijela";
   @override
@@ -2605,6 +2667,8 @@ class $hr extends S {
   @override
   String get rate_later => "Kasnije";
   @override
+  String get color_message => "Koja je boja cvijeta? Odaberite najbližeg.";
+  @override
   String get west_tropical_africa => "Zapadna tropska Afrika";
   @override
   String get northern_europe => "Sjeverna Europa";
@@ -2691,6 +2755,8 @@ class $lv extends S {
   @override
   String get southwestern_usa => "Dienvidrietumu ASV";
   @override
+  String get distribution_message => "Kuram ģeogrāfiskajam apgabalam vajadzētu koncentrēties?";
+  @override
   String get caribbean => "Karību jūras reģions";
   @override
   String get australasia => "Austrālāzija";
@@ -2749,6 +2815,8 @@ class $lv extends S {
   @override
   String get west_central_tropical_africa => "Rietumu centrālā tropu afrika";
   @override
+  String get habitat_message => "Kas ir ap jums? Identificēt auga dzīvotni.";
+  @override
   String get plant_toxicity => "Toksiskums";
   @override
   String get snack_no_flowers => "Nav ziedu atbilstības kritēriju.";
@@ -2792,6 +2860,8 @@ class $lv extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "skaičius žiedlapiais";
+  @override
+  String get petal_message => "Vai ziedu neregulāra? Nē? Tad cik ziedlapiņas tas ir?";
   @override
   String get color_white => "baltas";
   @override
@@ -2915,6 +2985,8 @@ class $lv extends S {
   @override
   String get rate_later => "Vēlāk";
   @override
+  String get color_message => "Kas ir krāsa ziedu? Izvēlieties tuvāko.";
+  @override
   String get west_tropical_africa => "Rietumu tropu Āfrika";
   @override
   String get northern_europe => "Ziemeļeiropa";
@@ -3003,6 +3075,8 @@ class $fr extends S {
   @override
   String get southwestern_usa => "Sud-Ouest des États-Unis";
   @override
+  String get distribution_message => "Sur quelle zone géographique se concentrer?";
+  @override
   String get caribbean => "Caraïbes";
   @override
   String get australasia => "Australasie";
@@ -3061,6 +3135,8 @@ class $fr extends S {
   @override
   String get west_central_tropical_africa => "Afrique tropicale ouest-centrale";
   @override
+  String get habitat_message => "Ce qui est autour de vous? Identifier l'habitat de la fleur.";
+  @override
   String get plant_toxicity => "Toxicité";
   @override
   String get snack_no_flowers => "Aucune fleur ne correspond aux critères.";
@@ -3104,6 +3180,8 @@ class $fr extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "pétale";
+  @override
+  String get petal_message => "Est-ce que la fleur est zygomorphie? Non? Alors combien de pétales a t'elle?";
   @override
   String get color_white => "blanc";
   @override
@@ -3227,6 +3305,8 @@ class $fr extends S {
   @override
   String get rate_later => "Plus tard";
   @override
+  String get color_message => "Quelle est la couleur des fleurs? Sélectionnez la couleur la plus proche.";
+  @override
   String get west_tropical_africa => "Afrique tropicale de l'Ouest";
   @override
   String get northern_europe => "Europe du Nord";
@@ -3315,6 +3395,8 @@ class $hu extends S {
   @override
   String get southwestern_usa => "Délnyugati USA";
   @override
+  String get distribution_message => "Melyik földrajzi területre kell összpontosítania?";
+  @override
   String get caribbean => "Karib";
   @override
   String get australasia => "Ausztrália";
@@ -3373,6 +3455,8 @@ class $hu extends S {
   @override
   String get west_central_tropical_africa => "Nyugat-Közép-Trópusi Afrika";
   @override
+  String get habitat_message => "Mi veszi körül? Határozza meg a növény élőhelyét.";
+  @override
   String get plant_toxicity => "Méregtartalom";
   @override
   String get snack_no_flowers => "Nincsenek virág illeszkedési feltételek.";
@@ -3416,6 +3500,8 @@ class $hu extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "a szirmok száma";
+  @override
+  String get petal_message => "A virág szimmetriája kétoldali (zigomorf)? Nem? Akkor hány sziromlevele van?";
   @override
   String get color_white => "fehér";
   @override
@@ -3539,6 +3625,8 @@ class $hu extends S {
   @override
   String get rate_later => "Később";
   @override
+  String get color_message => "Milyen színű a virág? Válassza ki a legközelebbi színt.";
+  @override
   String get west_tropical_africa => "Nyugat-trópusi Afrika";
   @override
   String get northern_europe => "Észak-Európa";
@@ -3627,6 +3715,8 @@ class $uk extends S {
   @override
   String get southwestern_usa => "Південно-західна США";
   @override
+  String get distribution_message => "На яку географічну область ми маємо зосередитися?";
+  @override
   String get caribbean => "Карибський басейн";
   @override
   String get australasia => "Австралазія";
@@ -3685,6 +3775,8 @@ class $uk extends S {
   @override
   String get west_central_tropical_africa => "Центрально-західна тропічна Африка";
   @override
+  String get habitat_message => "Що навколо тебе? Визначити місце проживання рослин.";
+  @override
   String get plant_toxicity => "Токсичність";
   @override
   String get snack_no_flowers => "Критерії відповідності квітам відсутні.";
@@ -3728,6 +3820,8 @@ class $uk extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "пелюстка";
+  @override
+  String get petal_message => "Чи квітка зигоморфна? Ні? Тоді скільки пелюсток є?";
   @override
   String get color_white => "білий";
   @override
@@ -3851,6 +3945,8 @@ class $uk extends S {
   @override
   String get rate_later => "Пізніше";
   @override
+  String get color_message => "Який колір квітки? Виберіть найближчий.";
+  @override
   String get west_tropical_africa => "Західна тропічна Африка";
   @override
   String get northern_europe => "Північна Європа";
@@ -3939,6 +4035,8 @@ class $sk extends S {
   @override
   String get southwestern_usa => "Juhozápad USA";
   @override
+  String get distribution_message => "Na ktorú geografickú oblasť zamerať pozornosť?";
+  @override
   String get caribbean => "Karibik";
   @override
   String get australasia => "Australázia";
@@ -3997,6 +4095,8 @@ class $sk extends S {
   @override
   String get west_central_tropical_africa => "Stredozápadná tropická Afrika";
   @override
+  String get habitat_message => "Kde sa nachádzaš? Identifikuj lokalitu.";
+  @override
   String get plant_toxicity => "Toxicita";
   @override
   String get snack_no_flowers => "Filtru nevyhovujú žiadne kvety v databáze.";
@@ -4039,7 +4139,9 @@ class $sk extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "počet lupienkov";
+  String get filter_petal => "okvetné lístky";
+  @override
+  String get petal_message => "Je kvet nepravidelný? Nie? Tak koľko má okvetných lístkov?";
   @override
   String get color_white => "biela";
   @override
@@ -4059,7 +4161,7 @@ class $sk extends S {
   @override
   String get south_central_pacific => "Stredojužné Tichomorie";
   @override
-  String get filter_color => "farba kvetov";
+  String get filter_color => "farba";
   @override
   String get help => "Pomoc";
   @override
@@ -4157,6 +4259,8 @@ class $sk extends S {
   @override
   String get rate_later => "Neskôr";
   @override
+  String get color_message => "Akej farby je kvet? Vyber tú najbližšiu. Vždy sa môžeš vrátiť a vybrať inú.";
+  @override
   String get west_tropical_africa => "Západná tropická Afrika";
   @override
   String get northern_europe => "Severná Európa";
@@ -4209,7 +4313,7 @@ class $sk extends S {
   @override
   String get china => "Čína";
   @override
-  String get petal_zygomorphic => "súmerný";
+  String get petal_zygomorphic => "nepravidelný";
   @override
   String get taxonomy_genus => "rod";
   @override
@@ -4244,6 +4348,8 @@ class $sl extends S {
   String get feedback => "Povratne informacije / Prispevek";
   @override
   String get southwestern_usa => "Jugozahodna ZDA";
+  @override
+  String get distribution_message => "Na katero geografsko območje se moramo osredotočiti?";
   @override
   String get caribbean => "Karibi";
   @override
@@ -4303,6 +4409,8 @@ class $sl extends S {
   @override
   String get west_central_tropical_africa => "Zahodno-srednja tropska Afrika";
   @override
+  String get habitat_message => "Kaj je okoli vas? Prepoznajte rastline habitat.";
+  @override
   String get plant_toxicity => "Toksičnost";
   @override
   String get snack_no_flowers => "Ni meril za ujemanje cvetja.";
@@ -4346,6 +4454,8 @@ class $sl extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "število venčnih listov";
+  @override
+  String get petal_message => "Je cvet zigomorfni? Ne? Potem, koliko venčnih listov ima?";
   @override
   String get color_white => "bela";
   @override
@@ -4469,6 +4579,8 @@ class $sl extends S {
   @override
   String get rate_later => "Kasneje";
   @override
+  String get color_message => "Kaj je barva cveta? Izberite najustreznejšo.";
+  @override
   String get west_tropical_africa => "Zahodna tropska Afrika";
   @override
   String get northern_europe => "Severna Evropa";
@@ -4557,6 +4669,8 @@ class $id extends S {
   @override
   String get southwestern_usa => "Barat daya AS";
   @override
+  String get distribution_message => "Area geografis mana yang harus kita fokuskan?";
+  @override
   String get caribbean => "Karibia";
   @override
   String get australasia => "Australasia";
@@ -4615,6 +4729,8 @@ class $id extends S {
   @override
   String get west_central_tropical_africa => "Afrika Barat Pusat Tropis";
   @override
+  String get habitat_message => "Ada apa di sekitar kamu Identifikasi habitat tanaman.";
+  @override
   String get plant_toxicity => "Toksisitas";
   @override
   String get snack_no_flowers => "Tidak ada kriteria pencocokan bunga.";
@@ -4658,6 +4774,8 @@ class $id extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "jumlah kelopak bunga";
+  @override
+  String get petal_message => "Apakah bunga bisimetris? Tidak? Lalu berapa kelopak bunga yang dimilikinya?";
   @override
   String get color_white => "putih";
   @override
@@ -4781,6 +4899,8 @@ class $id extends S {
   @override
   String get rate_later => "Kemudian";
   @override
+  String get color_message => "Apa warna bunga itu? Pilih yang terdekat.";
+  @override
   String get west_tropical_africa => "Afrika Barat Tropis";
   @override
   String get northern_europe => "Eropa Utara";
@@ -4869,6 +4989,8 @@ class $sr extends S {
   @override
   String get southwestern_usa => "Југозападна САД";
   @override
+  String get distribution_message => "На коју географску област треба да се фокусирамо?";
+  @override
   String get caribbean => "Кариби";
   @override
   String get australasia => "Аустраласиа";
@@ -4927,6 +5049,8 @@ class $sr extends S {
   @override
   String get west_central_tropical_africa => "Западна централна тропска Африка";
   @override
+  String get habitat_message => "Шта је око тебе? Идентификовати станиште биљке.";
+  @override
   String get plant_toxicity => "Токсичност";
   @override
   String get snack_no_flowers => "Нема критеријума за подударање цвећа.";
@@ -4970,6 +5094,8 @@ class $sr extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "крунични листићи";
+  @override
+  String get petal_message => "Да ли је цвет зигоморфан? Не? Колико латица има?";
   @override
   String get color_white => "бео";
   @override
@@ -5093,6 +5219,8 @@ class $sr extends S {
   @override
   String get rate_later => "Касније";
   @override
+  String get color_message => "Која је боја цвијета? Изаберите најближег.";
+  @override
   String get west_tropical_africa => "Западна тропска Африка";
   @override
   String get northern_europe => "Северна Европа";
@@ -5181,6 +5309,8 @@ class $sv extends S {
   @override
   String get southwestern_usa => "Sydvästra USA";
   @override
+  String get distribution_message => "Vilket geografiskt område ska vi fokusera på?";
+  @override
   String get caribbean => "Karibisk";
   @override
   String get australasia => "Australasien";
@@ -5239,6 +5369,8 @@ class $sv extends S {
   @override
   String get west_central_tropical_africa => "Västra central tropiska Afrika";
   @override
+  String get habitat_message => "Vad handlar du om? Identifiera växtens livsmiljö.";
+  @override
   String get plant_toxicity => "Giftighet";
   @override
   String get snack_no_flowers => "Inga blommor matchande kriterier.";
@@ -5282,6 +5414,8 @@ class $sv extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "kronblad";
+  @override
+  String get petal_message => "Är blomman zygomorf? Nej? Hur många kronblad har det då?";
   @override
   String get color_white => "vit";
   @override
@@ -5405,6 +5539,8 @@ class $sv extends S {
   @override
   String get rate_later => "Senare";
   @override
+  String get color_message => "Vad är blommans färg? Välj den närmaste.";
+  @override
   String get west_tropical_africa => "Västra tropiska Afrika";
   @override
   String get northern_europe => "Norra Europa";
@@ -5497,6 +5633,8 @@ class $it extends S {
   @override
   String get southwestern_usa => "Stati Uniti sudoccidentali";
   @override
+  String get distribution_message => "Su quale area geografica concentrarsi?";
+  @override
   String get caribbean => "Caraibico";
   @override
   String get australasia => "Australasia";
@@ -5555,6 +5693,8 @@ class $it extends S {
   @override
   String get west_central_tropical_africa => "Africa tropicale centro-occidentale";
   @override
+  String get habitat_message => "Cosa c'è intorno a te? Identifica l'habitat.";
+  @override
   String get plant_toxicity => "Tossicità";
   @override
   String get snack_no_flowers => "Nessun fiore che corrisponde ai criteri.";
@@ -5598,6 +5738,8 @@ class $it extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "numero di petali";
+  @override
+  String get petal_message => "Il fiore è zigomorfi? No? Allora quanti petali ha?";
   @override
   String get color_white => "bianco";
   @override
@@ -5721,6 +5863,8 @@ class $it extends S {
   @override
   String get rate_later => "Dopo";
   @override
+  String get color_message => "Di che colore è il fiore? Scegli il più simile.";
+  @override
   String get west_tropical_africa => "Africa tropicale occidentale";
   @override
   String get northern_europe => "Europa settentrionale";
@@ -5809,6 +5953,8 @@ class $es extends S {
   @override
   String get southwestern_usa => "Suroeste de los Estados Unidos";
   @override
+  String get distribution_message => "¿En qué área geográfica enfocarse?";
+  @override
   String get caribbean => "Caribe";
   @override
   String get australasia => "Australasia";
@@ -5867,6 +6013,8 @@ class $es extends S {
   @override
   String get west_central_tropical_africa => "África tropical occidental central";
   @override
+  String get habitat_message => "¿Dónde te encuentras? Identifica el lugar.";
+  @override
   String get plant_toxicity => "Toxicidad";
   @override
   String get snack_no_flowers => "No hay criterios de correspondencia de flores.";
@@ -5910,6 +6058,8 @@ class $es extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "pétalo";
+  @override
+  String get petal_message => "¿Es la flor zigomorfo? ¿No? Pués, ¿cuántos pétalos tiene?";
   @override
   String get color_white => "blanco";
   @override
@@ -6033,6 +6183,8 @@ class $es extends S {
   @override
   String get rate_later => "Más tarde";
   @override
+  String get color_message => "¿Cuál es el color de la flor? Elige el más cercano. Puedes volver a cambiar la selección cuando sea.";
+  @override
   String get west_tropical_africa => "África tropical occidental";
   @override
   String get northern_europe => "Norte de Europa";
@@ -6121,6 +6273,8 @@ class $et extends S {
   @override
   String get southwestern_usa => "Edelaosa USA";
   @override
+  String get distribution_message => "Milline geograafiline piirkond peaks keskenduma?";
+  @override
   String get caribbean => "Kariibimere saared";
   @override
   String get australasia => "Austraalia";
@@ -6179,6 +6333,8 @@ class $et extends S {
   @override
   String get west_central_tropical_africa => "Lääne-Kesk-troopiline Aafrika";
   @override
+  String get habitat_message => "Mis teie ümber? Nimetage taime elupaiga.";
+  @override
   String get plant_toxicity => "Mürgisus";
   @override
   String get snack_no_flowers => "Lillede sobitamise kriteeriumid puuduvad.";
@@ -6222,6 +6378,8 @@ class $et extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "arvu kroonlehed";
+  @override
+  String get petal_message => "Kas lill ebaregulaarne? Ei? Siis, kui palju kroonlehed see on?";
   @override
   String get color_white => "valge";
   @override
@@ -6345,6 +6503,8 @@ class $et extends S {
   @override
   String get rate_later => "Pärast";
   @override
+  String get color_message => "Mis värvi lill? Vali lähim.";
+  @override
   String get west_tropical_africa => "Lääne troopiline Aafrika";
   @override
   String get northern_europe => "Põhja-Euroopa";
@@ -6433,6 +6593,8 @@ class $cs extends S {
   @override
   String get southwestern_usa => "Jihozápad USA";
   @override
+  String get distribution_message => "Na kterou geografickou oblast zaměřit pozornost?";
+  @override
   String get caribbean => "Karibik";
   @override
   String get australasia => "Australasie";
@@ -6491,6 +6653,8 @@ class $cs extends S {
   @override
   String get west_central_tropical_africa => "Středozápadní tropická Afrika";
   @override
+  String get habitat_message => "Kde se nacházíš? Identifikuj lokalitu.";
+  @override
   String get plant_toxicity => "Toxicita";
   @override
   String get snack_no_flowers => "Filtru nevyhovují žádné květiny v databázi.";
@@ -6534,6 +6698,8 @@ class $cs extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "okvětní list";
+  @override
+  String get petal_message => "Je květ nepravidelný? Ne? Tak kolik má okvětních lístků?";
   @override
   String get color_white => "bílá";
   @override
@@ -6657,6 +6823,8 @@ class $cs extends S {
   @override
   String get rate_later => "Později";
   @override
+  String get color_message => "Jaké barvy jsou květiny? Vyber tu nejbližší. Vždy se můžeš vrátit a vybrat jinou.";
+  @override
   String get west_tropical_africa => "Západní tropická Afrika";
   @override
   String get northern_europe => "Severní Evropa";
@@ -6745,6 +6913,8 @@ class $ar extends S {
   @override
   String get southwestern_usa => "جنوب غرب الولايات المتحدة";
   @override
+  String get distribution_message => "ما هي المنطقة الجغرافية التي ينبغي لنا التركيز عليها؟";
+  @override
   String get caribbean => "منطقة البحر الكاريبي";
   @override
   String get australasia => "أستراليا";
@@ -6803,6 +6973,8 @@ class $ar extends S {
   @override
   String get west_central_tropical_africa => "غرب وسط الاستوائية أفريقيا";
   @override
+  String get habitat_message => "ماذا حولك؟ تحديد موطن النبات.";
+  @override
   String get plant_toxicity => "تأثير سمي";
   @override
   String get snack_no_flowers => "لا توجد معايير مطابقة للزهور.";
@@ -6846,6 +7018,8 @@ class $ar extends S {
   String get petal_5 => "خمسة";
   @override
   String get filter_petal => "عدد البتلات";
+  @override
+  String get petal_message => "هل الزهرة متناظرة؟ لا؟ ثم كم عدد بتلات الزهرة؟";
   @override
   String get color_white => "أبيض";
   @override
@@ -6969,6 +7143,8 @@ class $ar extends S {
   @override
   String get rate_later => "في وقت لاحق";
   @override
+  String get color_message => "ما هو لون الزهرة؟ اختيار أقرب واحد.";
+  @override
   String get west_tropical_africa => "غرب الاستوائية أفريقيا";
   @override
   String get northern_europe => "شمال أوروبا";
@@ -7057,6 +7233,8 @@ class $pa extends S {
   @override
   String get southwestern_usa => "ਦੱਖਣੀ ਪੱਛਮੀ ਅਮਰੀਕਾ";
   @override
+  String get distribution_message => "ਕਿਹੜੇ ਭੂਗੋਲਿਕ ਖੇਤਰ 'ਤੇ ਸਾਨੂੰ ਧਿਆਨ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ?";
+  @override
   String get caribbean => "ਕੈਰੀਬੀਅਨ";
   @override
   String get australasia => "ਆਸਟ੍ਰੇਲੀਆ";
@@ -7115,6 +7293,8 @@ class $pa extends S {
   @override
   String get west_central_tropical_africa => "ਵੈਸਟ-ਸੈਂਟਰਲ ਟ੍ਰੌਪੀਕਲ ਅਫਰੀਕਾ";
   @override
+  String get habitat_message => "ਤੁਹਾਡੇ ਆਲੇ ਦੁਆਲੇ ਕੀ ਹੈ? ਪਲਾਂਟ ਦੇ ਨਿਵਾਸ ਸਥਾਨ ਦੀ ਪਛਾਣ ਕਰੋ";
+  @override
   String get plant_toxicity => "ਵਸ਼ੈਲਾਪਣ";
   @override
   String get snack_no_flowers => "ਕੋਈ ਫੁੱਲ ਮਾਪਣ ਦੇ ਮਾਪਦੰਡ ਨਹੀਂ.";
@@ -7158,6 +7338,8 @@ class $pa extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "ਫੁੱਲਾਂ ਦੀ ਗਿਣਤੀ";
+  @override
+  String get petal_message => "ਕੀ ਫੁੱਲ ਬਿਸਮਮੈਟਿਕ ਹੈ? ਨਹੀਂ? ਫੇਰ ਕਿੰਨੇ ਫੁੱਲ ਹੁੰਦੇ ਹਨ?";
   @override
   String get color_white => "ਚਿੱਟਾ";
   @override
@@ -7281,6 +7463,8 @@ class $pa extends S {
   @override
   String get rate_later => "ਬਾਅਦ ਵਿਚ";
   @override
+  String get color_message => "ਫੁੱਲ ਦਾ ਰੰਗ ਕਿਹੜਾ ਹੈ? ਸਭ ਤੋਂ ਨਜ਼ਦੀਕੀ ਚੁਣੋ";
+  @override
   String get west_tropical_africa => "ਪੱਛਮੀ ਖੰਡੀ ਅਫ਼ਰੀਕਾ";
   @override
   String get northern_europe => "ਉੱਤਰੀ ਯੂਰਪ";
@@ -7349,6 +7533,8 @@ class $en_US extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
+  String get color_message => "What's the color of the flower? Choose the closest one.";
+  @override
   String get filter_color => "color";
 }
 
@@ -7378,6 +7564,8 @@ class $ja extends S {
   String get feedback => "フィードバック";
   @override
   String get southwestern_usa => "アメリカ南西部";
+  @override
+  String get distribution_message => "どの地理的領域に焦点を当てるべきか？";
   @override
   String get caribbean => "カリブ海";
   @override
@@ -7437,6 +7625,8 @@ class $ja extends S {
   @override
   String get west_central_tropical_africa => "西部中部トロピカルアフリカ";
   @override
+  String get habitat_message => "あなたの周りには何がありますか？ 植物の生息地を特定する。";
+  @override
   String get plant_toxicity => "毒性";
   @override
   String get snack_no_flowers => "基準に一致する花はありません。";
@@ -7480,6 +7670,8 @@ class $ja extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "花びらの数";
+  @override
+  String get petal_message => "花は不規則ですか？ いいえ？ それで花びらは何枚ですか？";
   @override
   String get color_white => "白";
   @override
@@ -7603,6 +7795,8 @@ class $ja extends S {
   @override
   String get rate_later => "後で";
   @override
+  String get color_message => "花の色は何ですか？ 最も近いものを選んでください。";
+  @override
   String get west_tropical_africa => "西トロピカルアフリカ";
   @override
   String get northern_europe => "北欧";
@@ -7691,6 +7885,8 @@ class $fa extends S {
   @override
   String get southwestern_usa => "جنوب غربی ایالات متحده آمریکا";
   @override
+  String get distribution_message => "کدام منطقه جغرافیایی باید تمرکز کنیم؟";
+  @override
   String get caribbean => "کارائیب";
   @override
   String get australasia => "استرالیا";
@@ -7749,6 +7945,8 @@ class $fa extends S {
   @override
   String get west_central_tropical_africa => "غرب آفریقای مرکزی گرمسیری";
   @override
+  String get habitat_message => "چه چیزی در اطراف شماست؟ شناسایی زیستگاه گیاه";
+  @override
   String get plant_toxicity => "سمی بودن";
   @override
   String get snack_no_flowers => "بدون گل مطابق معیارهای.";
@@ -7792,6 +7990,8 @@ class $fa extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "تعداد گلبرگ ها";
+  @override
+  String get petal_message => "آیا گل زگومورفیک است؟ نه؟ پس چقدر گلبرگها آن را دارند؟";
   @override
   String get color_white => "سفید";
   @override
@@ -7913,6 +8113,8 @@ class $fa extends S {
   @override
   String get rate_later => "بعد";
   @override
+  String get color_message => "رنگ گل چیست؟ نزدیک ترین را انتخاب کنید";
+  @override
   String get west_tropical_africa => "غرب گرمسیر آفریقا";
   @override
   String get northern_europe => "شمال اروپا";
@@ -7997,6 +8199,8 @@ class $pl extends S {
   @override
   String get southwestern_usa => "Południowo-zachodnie USA";
   @override
+  String get distribution_message => "Na jakim obszarze geograficznym się skupić?";
+  @override
   String get caribbean => "Karaiby";
   @override
   String get australasia => "Australazja";
@@ -8055,6 +8259,8 @@ class $pl extends S {
   @override
   String get west_central_tropical_africa => "Zachodnio-Środkowa Afryka Tropikalna";
   @override
+  String get habitat_message => "Co znajduje się wokół Ciebie? Zidentyfikuj otoczenie.";
+  @override
   String get plant_toxicity => "Toksyczność";
   @override
   String get snack_no_flowers => "Brak kwiatów spełniających kryteria.";
@@ -8098,6 +8304,8 @@ class $pl extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "Liczba płatków";
+  @override
+  String get petal_message => "Czy kwiat jest zygomorficzny? Nie? Ile w takim razie ma płatków?";
   @override
   String get color_white => "biały";
   @override
@@ -8221,6 +8429,8 @@ class $pl extends S {
   @override
   String get rate_later => "Później";
   @override
+  String get color_message => "Jakiego koloru jest kwiat? Wybierz najbliższy kolor.";
+  @override
   String get west_tropical_africa => "Zachodnia Afryka Tropikalna";
   @override
   String get northern_europe => "Północna Europa";
@@ -8307,6 +8517,8 @@ class $da extends S {
   @override
   String get southwestern_usa => "Sydvestlige USA";
   @override
+  String get distribution_message => "Hvilket geografisk område skal vi fokusere på?";
+  @override
   String get caribbean => "Caribien";
   @override
   String get australasia => "Australasien";
@@ -8365,6 +8577,8 @@ class $da extends S {
   @override
   String get west_central_tropical_africa => "Vest Central tropiske Afrika";
   @override
+  String get habitat_message => "Hvad er der omkring dig? Identificer plantens levested.";
+  @override
   String get plant_toxicity => "Toksicitet";
   @override
   String get snack_no_flowers => "Ingen blomster, der matcher kriterier.";
@@ -8406,6 +8620,8 @@ class $da extends S {
   String get snack_loading_ad => "Annonce er stadig indlæst, tryk igen på knappen.";
   @override
   String get petal_5 => "5";
+  @override
+  String get petal_message => "Er blomsten zygomorphic? Ingen? Så hvor mange kronblade har det?";
   @override
   String get color_white => "hvid";
   @override
@@ -8529,6 +8745,8 @@ class $da extends S {
   @override
   String get rate_later => "Senere";
   @override
+  String get color_message => "Hvad er farven på blomsten? Vælg den nærmeste.";
+  @override
   String get west_tropical_africa => "Vestlige tropiske Afrika";
   @override
   String get northern_europe => "Nordeuropa";
@@ -8615,6 +8833,8 @@ class $he extends S {
   @override
   String get southwestern_usa => "דרום מערב ארצות הברית";
   @override
+  String get distribution_message => "באיזה אזור גיאוגרפי עלינו להתמקד?";
+  @override
   String get caribbean => "הקאריביים";
   @override
   String get australasia => "אוסטרליה";
@@ -8673,6 +8893,8 @@ class $he extends S {
   @override
   String get west_central_tropical_africa => "מערב אפריקה מרכז טרופי";
   @override
+  String get habitat_message => "מה מסביבך? זיהוי בית הגידול של הצמח.";
+  @override
   String get plant_toxicity => "רַעֲלָנוּת";
   @override
   String get snack_no_flowers => "אין קריטריונים תואמים לפרחים.";
@@ -8716,6 +8938,8 @@ class $he extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "מספר עלי כותרת";
+  @override
+  String get petal_message => "האם הפרח אינו סדיר? לא? אז כמה עלי כותרת יש את זה?";
   @override
   String get color_white => "לבן";
   @override
@@ -8839,6 +9063,8 @@ class $he extends S {
   @override
   String get rate_later => "יותר מאוחר";
   @override
+  String get color_message => "מה צבע הפרח? בחר את הקרוב ביותר.";
+  @override
   String get west_tropical_africa => "מערב אפריקה טרופית";
   @override
   String get northern_europe => "אירופה הצפונית";
@@ -8927,6 +9153,8 @@ class $ro extends S {
   @override
   String get southwestern_usa => "Sud-vestul SUA";
   @override
+  String get distribution_message => "La ce zonă geografică trebuie să ne concentrăm?";
+  @override
   String get caribbean => "Insulele Caraibe";
   @override
   String get australasia => "Australasia";
@@ -8985,6 +9213,8 @@ class $ro extends S {
   @override
   String get west_central_tropical_africa => "Africa de Vest-Central tropicală";
   @override
+  String get habitat_message => "Ce se găsește în jurul tău? Identifică habitatul plantei.";
+  @override
   String get plant_toxicity => "Toxicitate";
   @override
   String get snack_no_flowers => "Nu există criterii de potrivire a florilor.";
@@ -9028,6 +9258,8 @@ class $ro extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "numărul de petale";
+  @override
+  String get petal_message => "Este bisimetrică această floare? Nu? Atunci câte petale are?";
   @override
   String get color_white => "alb";
   @override
@@ -9151,6 +9383,8 @@ class $ro extends S {
   @override
   String get rate_later => "Mai tarziu";
   @override
+  String get color_message => "Care este culoarea florii? Alege culoarea cea mai apropiată.";
+  @override
   String get west_tropical_africa => "Africa de Vest tropicală";
   @override
   String get northern_europe => "Europa de Nord";
@@ -9239,6 +9473,8 @@ class $nl extends S {
   @override
   String get southwestern_usa => "Zuidwest VS";
   @override
+  String get distribution_message => "Op welk geografisch gebied moet je focussen?";
+  @override
   String get caribbean => "Caribbean";
   @override
   String get australasia => "Australazië";
@@ -9297,6 +9533,8 @@ class $nl extends S {
   @override
   String get west_central_tropical_africa => "West-Centraal Tropisch Afrika";
   @override
+  String get habitat_message => "Hoe ziet de omgeving eruit? Identificeer de leefomgeving.";
+  @override
   String get plant_toxicity => "Toxiciteit";
   @override
   String get snack_no_flowers => "Geen bloemen die voldoen aan criteria.";
@@ -9340,6 +9578,8 @@ class $nl extends S {
   String get petal_5 => "5";
   @override
   String get filter_petal => "aantal bloemblaadjes";
+  @override
+  String get petal_message => "Is de bloem tweezijdig symmetrisch? Zo niet: hoeveel bloemblaadjes heeft hij?";
   @override
   String get color_white => "wit";
   @override
@@ -9462,6 +9702,8 @@ class $nl extends S {
   String get arabian_peninsula => "Arabisch Schiereiland";
   @override
   String get rate_later => "Later";
+  @override
+  String get color_message => "Wat is de kleur van de bloem? Kies de kleur die er het dichtst bij komt.";
   @override
   String get west_tropical_africa => "West-tropisch Afrika";
   @override

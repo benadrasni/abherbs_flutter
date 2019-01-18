@@ -39,6 +39,11 @@
   "filter_petal": "kronblad",
   "filter_distribution": "distribution",
 
+  "color_message": "Vad är blommans färg? Välj den närmaste.",
+  "habitat_message": "Vad handlar du om? Identifiera växtens livsmiljö.",
+  "petal_message": "Är blomman zygomorf? Nej? Hur många kronblad har det då?",
+  "distribution_message": "Vilket geografiskt område ska vi fokusera på?",
+
   "color_white": "vit",
   "color_yellow": "gul",
   "color_red": "rött, rosa",

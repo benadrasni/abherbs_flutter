@@ -39,6 +39,11 @@
   "filter_petal": "Blütenblätter",
   "filter_distribution": "Vorkommen",
 
+  "color_message": "Welche Farbe hat die Blume? Wähle die ähnlichste Farbe.",
+  "habitat_message": "Was ist um dich herum? Identifiziere den Standort der Pflanze.",
+  "petal_message": "Ist die Blüte spiegelsymmetrisch? Falls nicht, wieviele Blütenblätter hat sie?",
+  "distribution_message": "Auf welches geografische Gebiet sollten Sie sich konzentrieren?",
+
   "color_white": "Weiß",
   "color_yellow": "Gelb",
   "color_red": "Rot, Pink",

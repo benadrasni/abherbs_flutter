@@ -39,6 +39,11 @@
   "filter_petal": "skaičius žiedlapiais",
   "filter_distribution": "izplatīšana",
 
+  "color_message": "Kas ir krāsa ziedu? Izvēlieties tuvāko.",
+  "habitat_message": "Kas ir ap jums? Identificēt auga dzīvotni.",
+  "petal_message": "Vai ziedu neregulāra? Nē? Tad cik ziedlapiņas tas ir?",
+  "distribution_message": "Kuram ģeogrāfiskajam apgabalam vajadzētu koncentrēties?",
+
   "color_white": "baltas",
   "color_yellow": "geltonas",
   "color_red": "raudona, rožinė",

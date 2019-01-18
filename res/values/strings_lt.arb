@@ -39,6 +39,11 @@
   "filter_petal": "skaičius žiedlapiais",
   "filter_distribution": "platinimas",
 
+  "color_message": "Koks gėlių spalva? Pasirinkite artimiausią.",
+  "habitat_message": "Kas vyksta aplink jus? Nustatyti gamyklos buveinių.",
+  "petal_message": "Ar gėlė nereguliarus? Ar ne? Tada kiek žiedlapių ji neturi?",
+  "distribution_message": "Kokią geografinę vietovę turėtume sutelkti?",
+
   "color_white": "baltas",
   "color_yellow": "geltonas",
   "color_red": "raudona, rožinė",

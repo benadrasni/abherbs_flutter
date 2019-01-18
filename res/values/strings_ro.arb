@@ -39,6 +39,11 @@
   "filter_petal": "numărul de petale",
   "filter_distribution": "distribuire",
 
+  "color_message": "Care este culoarea florii? Alege culoarea cea mai apropiată.",
+  "habitat_message": "Ce se găsește în jurul tău? Identifică habitatul plantei.",
+  "petal_message": "Este bisimetrică această floare? Nu? Atunci câte petale are?",
+  "distribution_message": "La ce zonă geografică trebuie să ne concentrăm?",
+
   "color_white": "alb",
   "color_yellow": "galben",
   "color_red": "roșu, roz",

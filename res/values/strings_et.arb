@@ -39,6 +39,11 @@
   "filter_petal": "arvu kroonlehed",
   "filter_distribution": "levitamine",
 
+  "color_message": "Mis värvi lill? Vali lähim.",
+  "habitat_message": "Mis teie ümber? Nimetage taime elupaiga.",
+  "petal_message": "Kas lill ebaregulaarne? Ei? Siis, kui palju kroonlehed see on?",
+  "distribution_message": "Milline geograafiline piirkond peaks keskenduma?",
+
   "color_white": "valge",
   "color_yellow": "kollane",
   "color_red": "punane, roosa",

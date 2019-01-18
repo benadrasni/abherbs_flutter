@@ -42,7 +42,7 @@
   "filter_distribution": "distribution",
 
   "color_message": "What's the colour of the flower? Choose the closest one.",
-  "habitat_message": "Whats around you? Identify plant's habitat.",
+  "habitat_message": "What's around you? Identify plant's habitat.",
   "petal_message": "Is the flower zygomorphic? No? Then how many petals does it have?",
   "distribution_message": "Which geographic area should we focus on?",
 

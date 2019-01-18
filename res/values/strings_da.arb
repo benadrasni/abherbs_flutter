@@ -37,6 +37,11 @@
   "filter__petal": "antal kronblade",
   "filter_distribution": "fordeling",
 
+  "color_message": "Hvad er farven på blomsten? Vælg den nærmeste.",
+  "habitat_message": "Hvad er der omkring dig? Identificer plantens levested.",
+  "petal_message": "Er blomsten zygomorphic? Ingen? Så hvor mange kronblade har det?",
+  "distribution_message": "Hvilket geografisk område skal vi fokusere på?",
+
   "color_white": "hvid",
   "color_yellow": "gul",
   "color_red": "rød, lyserød",

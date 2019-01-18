@@ -39,6 +39,11 @@
   "filter_petal": "broj krunskih listić",
   "filter_distribution": "distribucija",
 
+  "color_message": "Koja je boja cvijeta? Odaberite najbližeg.",
+  "habitat_message": "Što je oko tebe? Identificirajte stanište biljke.",
+  "petal_message": "Je li cvijet zigomorfan? Ne? Koliko latica ima?",
+  "distribution_message": "Na koje ćemo se geografsko područje usredotočiti?",
+
   "color_white": "bijela",
   "color_yellow": "žuta",
   "color_red": "crvena, roza",

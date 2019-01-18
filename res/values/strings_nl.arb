@@ -39,6 +39,11 @@
   "filter_petal": "aantal bloemblaadjes",
   "filter_distribution": "distributie",
 
+  "color_message": "Wat is de kleur van de bloem? Kies de kleur die er het dichtst bij komt.",
+  "habitat_message": "Hoe ziet de omgeving eruit? Identificeer de leefomgeving.",
+  "petal_message": "Is de bloem tweezijdig symmetrisch? Zo niet: hoeveel bloemblaadjes heeft hij?",
+  "distribution_message": "Op welk geografisch gebied moet je focussen?",
+
   "color_white": "wit",
   "color_yellow": "geel",
   "color_red": "rood, roze",

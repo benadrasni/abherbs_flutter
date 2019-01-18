@@ -39,6 +39,11 @@
   "filter_petal": "عدد البتلات",
   "filter_distribution": "توزيع",
 
+  "color_message": "ما هو لون الزهرة؟ اختيار أقرب واحد.",
+  "habitat_message": "ماذا حولك؟ تحديد موطن النبات.",
+  "petal_message": "هل الزهرة متناظرة؟ لا؟ ثم كم عدد بتلات الزهرة؟",
+  "distribution_message": "ما هي المنطقة الجغرافية التي ينبغي لنا التركيز عليها؟",
+
   "color_white": "أبيض",
   "color_yellow": "أصفر",
   "color_red": "أحمر وردي",

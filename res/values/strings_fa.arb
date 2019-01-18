@@ -37,6 +37,11 @@
   "filter_petal": "تعداد گلبرگ ها",
   "filter_distribution": "توزیع",
 
+  "color_message": "رنگ گل چیست؟ نزدیک ترین را انتخاب کنید",
+  "habitat_message": "چه چیزی در اطراف شماست؟ شناسایی زیستگاه گیاه",
+  "petal_message": "آیا گل زگومورفیک است؟ نه؟ پس چقدر گلبرگها آن را دارند؟",
+  "distribution_message": "کدام منطقه جغرافیایی باید تمرکز کنیم؟",
+
   "color_white": "سفید",
   "color_yellow": "رنگ زرد",
   "color_red": "قرمز، صورتی",

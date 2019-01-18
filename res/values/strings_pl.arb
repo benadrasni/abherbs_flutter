@@ -39,6 +39,11 @@
   "filter_petal": "Liczba płatków",
   "filter_distribution": "Dystrybucja",
 
+  "color_message": "Jakiego koloru jest kwiat? Wybierz najbliższy kolor.",
+  "habitat_message": "Co znajduje się wokół Ciebie? Zidentyfikuj otoczenie.",
+  "petal_message": "Czy kwiat jest zygomorficzny? Nie? Ile w takim razie ma płatków?",
+  "distribution_message": "Na jakim obszarze geograficznym się skupić?",
+
   "color_white": "biały",
   "color_yellow": "żółty",
   "color_red": "czerwony, różowy",

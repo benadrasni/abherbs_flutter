@@ -34,10 +34,15 @@
   "yes": "Áno",
   "no": "Nie",
 
-  "filter_color": "farba kvetov",
+  "filter_color": "farba",
   "filter_habitat": "lokalita",
-  "filter_petal": "počet lupienkov",
+  "filter_petal": "okvetné lístky",
   "filter_distribution": "distribúcia",
+
+  "color_message": "Akej farby je kvet? Vyber tú najbližšiu. Vždy sa môžeš vrátiť a vybrať inú.",
+  "habitat_message": "Kde sa nachádzaš? Identifikuj lokalitu.",
+  "petal_message": "Je kvet nepravidelný? Nie? Tak koľko má okvetných lístkov?",
+  "distribution_message": "Na ktorú geografickú oblasť zamerať pozornosť?",
 
   "color_white": "biela",
   "color_yellow": "žltá",
@@ -52,11 +57,10 @@
   "habitat_rock": "vrcholky hôr a skaly",
   "habitat_tree": "stromy a kry",
 
-  "number_of_petals": "počet lupeňov",
   "petal_4": "4 alebo menej",
   "petal_5": "5",
   "petal_many": "viac ako 5",
-  "petal_zygomorphic": "súmerný",
+  "petal_zygomorphic": "nepravidelný",
 
   "europe": "Európa",
   "africa": "Afrika",

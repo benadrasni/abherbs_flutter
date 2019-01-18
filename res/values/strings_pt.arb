@@ -37,6 +37,11 @@
   "filter_petal": "número de pétalas",
   "filter_distribution": "distribution",
 
+  "color_message": "De que cor são as flores? Selecione a mais aproximada. Sempre pode voltar e selecionar uma outra.",
+  "habitat_message": "O que está a sua volta? Identifique o habitat da planta.",
+  "petal_message": "A flor é bissimétrica? Não? Quantas pétalas tem, então?",
+  "distribution_message": "Em qual área geográfica se concentrar?",
+
   "color_white": "branca",
   "color_yellow": "amarela",
   "color_red": "vermelha, cor-de-rosa",

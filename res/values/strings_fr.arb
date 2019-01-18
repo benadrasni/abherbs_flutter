@@ -39,6 +39,11 @@
   "filter_petal": "pétale",
   "filter_distribution": "distribution",
 
+  "color_message": "Quelle est la couleur des fleurs? Sélectionnez la couleur la plus proche.",
+  "habitat_message": "Ce qui est autour de vous? Identifier l'habitat de la fleur.",
+  "petal_message": "Est-ce que la fleur est zygomorphie? Non? Alors combien de pétales a t'elle?",
+  "distribution_message": "Sur quelle zone géographique se concentrer?",
+
   "color_white": "blanc",
   "color_yellow": "jaune",
   "color_red": "rouge, rose",
