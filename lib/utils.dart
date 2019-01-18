@@ -1,6 +1,4 @@
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/keys.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -67,9 +65,7 @@ String getTaxonLabel(BuildContext context, String taxon) {
   }
 }
 
-Widget getAdMobBanner({AdmobBannerSize bannerSize = AdmobBannerSize.BANNER}) {
+Widget getAdMobBanner() {
   return Container(
-    padding: EdgeInsets.all(5.0),
-    child: AdmobBanner(adUnitId: bannerAdUnitId, adSize: bannerSize, listener: (AdmobAdEvent event, Map<String, dynamic> args) {}),
   );
 }

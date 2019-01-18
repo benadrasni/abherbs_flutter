@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/splash.dart';
 import 'package:abherbs_flutter/utils.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_crashlytics/flutter_crashlytics.dart';
@@ -14,7 +12,6 @@ import 'package:screen/screen.dart';
 
 void main() async {
   bool isInDebugMode = false;
-  Admob.initialize(adAppId);
 
   FlutterError.onError = (FlutterErrorDetails details) {
     if (isInDebugMode) {

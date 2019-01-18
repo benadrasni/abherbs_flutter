@@ -79,112 +79,122 @@ class _HabitatState extends State<Habitat> {
         title: new Text(S.of(context).filter_habitat),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
-      body: ListView(
-        shrinkWrap: true,
-        padding: EdgeInsets.all(5.0),
-        children: [
-          FlatButton(
-            padding: EdgeInsets.only(bottom: 5.0),
-            child: Stack(alignment: Alignment.center, children: [
-              Image(
-                image: AssetImage('res/images/meadow.webp'),
-              ),
-              Text(
-                S.of(context).habitat_meadow,
-                style: _defaultTextStyle,
-                textAlign: TextAlign.center,
-              ),
-            ]),
-            onPressed: () {
-              _navigate('1');
-            },
+      body: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Image.asset(
+              "res/images/app_background.webp",
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.bottomCenter,
+            ),
           ),
-          FlatButton(
-            padding: EdgeInsets.only(bottom: 5.0),
-            child: Stack(alignment: Alignment.center, children: [
-              Image(
-                image: AssetImage('res/images/garden.webp'),
+          ListView(
+            padding: EdgeInsets.all(5.0),
+            children: [
+              FlatButton(
+                padding: EdgeInsets.only(bottom: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/meadow.webp'),
+                  ),
+                  Text(
+                    S.of(context).habitat_meadow,
+                    style: _defaultTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
+                onPressed: () {
+                  _navigate('1');
+                },
               ),
-              Text(
-                S.of(context).habitat_garden,
-                style: _defaultTextStyle,
-                textAlign: TextAlign.center,
+              FlatButton(
+                padding: EdgeInsets.only(bottom: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/garden.webp'),
+                  ),
+                  Text(
+                    S.of(context).habitat_garden,
+                    style: _defaultTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
+                onPressed: () {
+                  _navigate('2');
+                },
               ),
-            ]),
-            onPressed: () {
-              _navigate('2');
-            },
+              FlatButton(
+                padding: EdgeInsets.only(bottom: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/swamp.webp'),
+                  ),
+                  Text(
+                    S.of(context).habitat_wetland,
+                    style: _defaultTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
+                onPressed: () {
+                  _navigate('3');
+                },
+              ),
+              FlatButton(
+                padding: EdgeInsets.only(bottom: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/forest.webp'),
+                  ),
+                  Text(
+                    S.of(context).habitat_forest,
+                    style: _defaultTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
+                onPressed: () {
+                  _navigate('4');
+                },
+              ),
+              FlatButton(
+                padding: EdgeInsets.only(bottom: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/mountain.webp'),
+                  ),
+                  Text(
+                    S.of(context).habitat_rock,
+                    style: _defaultTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
+                onPressed: () {
+                  _navigate('5');
+                },
+              ),
+              FlatButton(
+                padding: EdgeInsets.only(bottom: 5.0),
+                child: Stack(alignment: Alignment.center, children: [
+                  Image(
+                    image: AssetImage('res/images/tree.webp'),
+                  ),
+                  Text(
+                    S.of(context).habitat_tree,
+                    style: _defaultTextStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
+                onPressed: () {
+                  _navigate('6');
+                },
+              ),
+              getAdMobBanner(),
+            ],
           ),
-          FlatButton(
-            padding: EdgeInsets.only(bottom: 5.0),
-            child: Stack(alignment: Alignment.center, children: [
-              Image(
-                image: AssetImage('res/images/swamp.webp'),
-              ),
-              Text(
-                S.of(context).habitat_wetland,
-                style: _defaultTextStyle,
-                textAlign: TextAlign.center,
-              ),
-            ]),
-            onPressed: () {
-              _navigate('3');
-            },
-          ),
-          FlatButton(
-            padding: EdgeInsets.only(bottom: 5.0),
-            child: Stack(alignment: Alignment.center, children: [
-              Image(
-                image: AssetImage('res/images/forest.webp'),
-              ),
-              Text(
-                S.of(context).habitat_forest,
-                style: _defaultTextStyle,
-                textAlign: TextAlign.center,
-              ),
-            ]),
-            onPressed: () {
-              _navigate('4');
-            },
-          ),
-          FlatButton(
-            padding: EdgeInsets.only(bottom: 5.0),
-            child: Stack(alignment: Alignment.center, children: [
-              Image(
-                image: AssetImage('res/images/mountain.webp'),
-              ),
-              Text(
-                S.of(context).habitat_rock,
-                style: _defaultTextStyle,
-                textAlign: TextAlign.center,
-              ),
-            ]),
-            onPressed: () {
-              _navigate('5');
-            },
-          ),
-          FlatButton(
-            padding: EdgeInsets.only(bottom: 5.0),
-            child: Stack(alignment: Alignment.center, children: [
-              Image(
-                image: AssetImage('res/images/tree.webp'),
-              ),
-              Text(
-                S.of(context).habitat_tree,
-                style: _defaultTextStyle,
-                textAlign: TextAlign.center,
-              ),
-            ]),
-            onPressed: () {
-              _navigate('6');
-            },
-          ),
-          getAdMobBanner(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
-        items:getBottomNavigationBarItems(context, _filter),
+        items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
           var route;

@@ -259,11 +259,20 @@ class _ColorState extends State<Color> {
         title: Text(S.of(context).filter_color),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
-      body: ListView(
-        shrinkWrap: true,
-        padding: EdgeInsets.all(5.0),
-        //mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: widgets,
+      body: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Image.asset(
+              "res/images/app_background.webp",
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.bottomCenter,
+            ),
+          ),
+          ListView(
+            padding: EdgeInsets.all(5.0),
+            children: widgets,
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
