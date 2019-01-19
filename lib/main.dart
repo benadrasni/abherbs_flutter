@@ -88,6 +88,7 @@ class _AppState extends State<App> {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               return MaterialApp(
+                debugShowCheckedModeBanner: false,
                 locale: snapshot.data,
                 localizationsDelegates: [
                   S.delegate,
