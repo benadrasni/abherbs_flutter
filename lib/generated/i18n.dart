@@ -49,13 +49,11 @@ class S implements WidgetsLocalizations {
   String get europe => "Europe";
   String get feedback => "Feedback";
   String get feedback_buy_extended => "You can buy extended (+) version with additional functionality like offline mode, search in names, search in taxonomy, observations and configurable filter.";
-  String get feedback_google_play => "Google Play";
   String get feedback_intro => "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:";
-  String get feedback_review => "You can write a positive review in Google Play.";
+  String get feedback_review => "You can write a positive review.";
   String get feedback_run_ads => "You can display full screen advertisement or watch video advertisement to support further development and database enhancement.";
   String get feedback_run_ads_fullscreen => "Show a fullscreen advertisement";
   String get feedback_run_ads_video => "Watch a video advertisement";
-  String get feedback_submit_buy => "Go to extended (+) version";
   String get feedback_submit_translate_app => "Improve application's labels";
   String get feedback_submit_translate_data => "Improve flower's data";
   String get feedback_title => "How to contribute";
@@ -377,8 +375,6 @@ class $de extends S {
   @override
   String get taxonomy_subsectio => "Untersektion";
   @override
-  String get feedback_submit_buy => "Erweiterte Version";
-  @override
   String get southern_africa => "Südafrika";
   @override
   String get always_my_region_title => "Fügen Sie meine Region immer dem Filter hinzu";
@@ -447,8 +443,6 @@ class $de extends S {
   @override
   String get pref_language => "Bevorzugte Sprache";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Neuseeland";
   @override
   String get feedback_intro => "Sie haben zu dieser Anwendung beigetragen, seit Sie diese auf Ihrem Gerät installiert haben, vielen Dank. Wenn Sie noch mehr tun möchten, haben Sie folgende Möglichkeiten:";
@@ -467,7 +461,7 @@ class $de extends S {
   @override
   String get improve_translation => "Übersetzung verbessern";
   @override
-  String get feedback_review => "Sie können eine positive Bewertung in Google Play schreiben.";
+  String get feedback_review => "Sie können eine positive Bewertung schreiben.";
   @override
   String get southeastern_usa => "Südöstlich U.S.A.";
   @override
@@ -697,8 +691,6 @@ class $hi extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "विस्तारित संस्करण";
-  @override
   String get southern_africa => "दक्षिणी अफ्रीका";
   @override
   String get always_my_region_title => "हमेशा मेरे क्षेत्र को फ़िल्टर में जोड़ें";
@@ -767,11 +759,9 @@ class $hi extends S {
   @override
   String get pref_language => "पसंदीदा भाषा";
   @override
-  String get feedback_google_play => "वनप्रदेश​ या जंगल";
-  @override
   String get new_zealand => "न्यूजीलैंड";
   @override
-  String get feedback_intro => "उद्यान या खेत";
+  String get feedback_intro => "जब से आपने इसे अपने डिवाइस पर स्थापित किया है, तब से आप इस एप्लिकेशन में योगदान दे रहे हैं, धन्यवाद यदि आप कुछ और देख रहे हैं, तो यहां कुछ विकल्प दिए गए हैं:";
   @override
   String get filter_distribution => "वितरण";
   @override
@@ -787,7 +777,7 @@ class $hi extends S {
   @override
   String get improve_translation => "अनुवाद में सुधार करें";
   @override
-  String get feedback_review => "चारागाह​ या घास के मैदान";
+  String get feedback_review => "आप एक सकारात्मक समीक्षा लिख सकते हैं।";
   @override
   String get southeastern_usa => "दक्षिणपूर्वी यूएसए";
   @override
@@ -1017,8 +1007,6 @@ class $no extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "Utvidet versjon";
-  @override
   String get southern_africa => "Sør Afrika";
   @override
   String get always_my_region_title => "Legg alltid til min region i filteret";
@@ -1087,8 +1075,6 @@ class $no extends S {
   @override
   String get pref_language => "Foretrukket Språk";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "New Zealand";
   @override
   String get feedback_intro => "Du har bidratt til dette programmet siden du har installert det på enheten, takk. Hvis du leter etter noe mer, er det noen alternativer:";
@@ -1107,7 +1093,7 @@ class $no extends S {
   @override
   String get improve_translation => "Forbedre oversettelse";
   @override
-  String get feedback_review => "Du kan skrive en positiv anmeldelse i Google Play.";
+  String get feedback_review => "Du kan skrive en positiv anmeldelse.";
   @override
   String get southeastern_usa => "Sørøst USA";
   @override
@@ -1337,8 +1323,6 @@ class $fi extends S {
   @override
   String get taxonomy_subsectio => "Alasektio";
   @override
-  String get feedback_submit_buy => "Laajennettu versio";
-  @override
   String get southern_africa => "Etelä-Afrikka";
   @override
   String get always_my_region_title => "Lisää alueeni aina suodattimeen";
@@ -1407,8 +1391,6 @@ class $fi extends S {
   @override
   String get pref_language => "Suosittu kieli";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Uusi Seelanti";
   @override
   String get feedback_intro => "Olet osallistunut tähän sovellukseen, koska olet asentanut sen laitteeseen, kiitos. Jos etsit jotain muuta, tässä on muutamia vaihtoehtoja:";
@@ -1427,7 +1409,7 @@ class $fi extends S {
   @override
   String get improve_translation => "Parantamaan käännösten";
   @override
-  String get feedback_review => "Voit kirjoittaa positiivisen arvioinnin Google Play.";
+  String get feedback_review => "Voit kirjoittaa positiivisen tarkistuksen.";
   @override
   String get southeastern_usa => "Kaakkois-USA";
   @override
@@ -1657,8 +1639,6 @@ class $ru extends S {
   @override
   String get taxonomy_subsectio => "Подсекция";
   @override
-  String get feedback_submit_buy => "Расширенная версия";
-  @override
   String get southern_africa => "Южная Африка";
   @override
   String get always_my_region_title => "Всегда добавлять мой регион в фильтр";
@@ -1727,8 +1707,6 @@ class $ru extends S {
   @override
   String get pref_language => "Предпочтительный язык";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Новая Зеландия";
   @override
   String get feedback_intro => "Вы вносите свой вклад в это приложение, так как вы установили его на своем устройстве, спасибо Если вы ищете что-то большее, вот несколько вариантов:";
@@ -1747,7 +1725,7 @@ class $ru extends S {
   @override
   String get improve_translation => "Улучшить перевод";
   @override
-  String get feedback_review => "Вы можете написать положительный отзыв в Google Play.";
+  String get feedback_review => "Вы можете написать положительный отзыв.";
   @override
   String get southeastern_usa => "Юго-Восточная часть США";
   @override
@@ -1975,8 +1953,6 @@ class $pt extends S {
   @override
   String get taxonomy_subsectio => "subseção";
   @override
-  String get feedback_submit_buy => "Versão extendida";
-  @override
   String get southern_africa => "África do Sul";
   @override
   String get always_my_region_title => "Sempre adicione minha região ao filtro";
@@ -2043,8 +2019,6 @@ class $pt extends S {
   @override
   String get pref_language => "Língua preferida";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Nova Zelândia";
   @override
   String get feedback_intro => "Você tem contribuído para este aplicativo desde que você o instalou no seu dispositivo, obrigado. Se você está procurando algo mais, aqui estão algumas opções:";
@@ -2063,7 +2037,7 @@ class $pt extends S {
   @override
   String get improve_translation => "Melhorar a tradução";
   @override
-  String get feedback_review => "Você pode escrever um comentário positivo no Google Play.";
+  String get feedback_review => "Você pode escrever um comentário positivo.";
   @override
   String get southeastern_usa => "Sudeste dos EUA";
   @override
@@ -2289,8 +2263,6 @@ class $lt extends S {
   @override
   String get taxonomy_subsectio => "Subsekcija";
   @override
-  String get feedback_submit_buy => "Prailginta versija";
-  @override
   String get southern_africa => "Pietų Afrika";
   @override
   String get always_my_region_title => "Visada pridėkite mano regioną prie filtro";
@@ -2359,8 +2331,6 @@ class $lt extends S {
   @override
   String get pref_language => "Pageidautina kalba";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Naujoji Zelandija";
   @override
   String get feedback_intro => "Jūs prisidėjote prie šios programos, nes ją įdiegėte savo prietaise. Jei ieškote ko nors daugiau, čia pateikiamos kelios parinktys:";
@@ -2379,7 +2349,7 @@ class $lt extends S {
   @override
   String get improve_translation => "Pagerinti vertimą";
   @override
-  String get feedback_review => "Google Play galite parašyti teigiamą apžvalgą.";
+  String get feedback_review => "Galite parašyti teigiamą apžvalgą.";
   @override
   String get southeastern_usa => "Pietryčių JAV";
   @override
@@ -2609,8 +2579,6 @@ class $hr extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "Proširena verzija";
-  @override
   String get southern_africa => "Južna Afrika";
   @override
   String get always_my_region_title => "Uvijek dodajte moju regiju filtru";
@@ -2679,8 +2647,6 @@ class $hr extends S {
   @override
   String get pref_language => "Preferirani jezik";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Novi Zeland";
   @override
   String get feedback_intro => "Doprinosili ste ovoj aplikaciji jer ste je instalirali na svom uređaju, hvala. Ako tražite nešto više, evo nekoliko opcija:";
@@ -2699,7 +2665,7 @@ class $hr extends S {
   @override
   String get improve_translation => "Poboljšati prevođenje";
   @override
-  String get feedback_review => "Možete napisati pozitivnu recenziju na usluzi Google Play.";
+  String get feedback_review => "Možete napisati pozitivnu recenziju.";
   @override
   String get southeastern_usa => "Jugoistočni SAD";
   @override
@@ -2927,8 +2893,6 @@ class $lv extends S {
   @override
   String get taxonomy_subsectio => "Apakšsekcija";
   @override
-  String get feedback_submit_buy => "Paplašināta versija";
-  @override
   String get southern_africa => "Dienvidāfrika";
   @override
   String get always_my_region_title => "Vienmēr pievienojiet manu reģionu filtram";
@@ -2997,8 +2961,6 @@ class $lv extends S {
   @override
   String get pref_language => "Pageidautina kalba";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Jaunzēlande";
   @override
   String get feedback_intro => "Jūs esat veicinājis šo lietojumprogrammu, jo esat to instalējis savā ierīcē. Ja jūs meklējat kaut ko vairāk, šeit ir dažas iespējas:";
@@ -3017,7 +2979,7 @@ class $lv extends S {
   @override
   String get improve_translation => "Uzlabot tulkojumu";
   @override
-  String get feedback_review => "Google Play varat uzrakstīt pozitīvu pārskatu.";
+  String get feedback_review => "Jūs varat uzrakstīt pozitīvu pārskatu.";
   @override
   String get southeastern_usa => "Dienvidaustrumu ASV";
   @override
@@ -3247,8 +3209,6 @@ class $fr extends S {
   @override
   String get taxonomy_subsectio => "Sous-section";
   @override
-  String get feedback_submit_buy => "Version étendue";
-  @override
   String get southern_africa => "Afrique du sud";
   @override
   String get always_my_region_title => "Toujours ajouter ma région au filtre";
@@ -3317,8 +3277,6 @@ class $fr extends S {
   @override
   String get pref_language => "Préférence de langue";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Nouvelle-Zélande";
   @override
   String get feedback_intro => "Vous avez contribué à cette application car vous l'avez installé sur votre appareil, merci. Si vous cherchez quelque chose de plus, voici quelques options:";
@@ -3337,7 +3295,7 @@ class $fr extends S {
   @override
   String get improve_translation => "Améliorer la traduction";
   @override
-  String get feedback_review => "Vous pouvez écrire une critique positive dans Google Play.";
+  String get feedback_review => "Vous pouvez écrire une critique positive.";
   @override
   String get southeastern_usa => "Sud-est des États-Unis";
   @override
@@ -3567,8 +3525,6 @@ class $hu extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "Bővített változat";
-  @override
   String get southern_africa => "Dél-Afrika";
   @override
   String get always_my_region_title => "Mindig adjon hozzá régiót a szűrőhöz";
@@ -3637,8 +3593,6 @@ class $hu extends S {
   @override
   String get pref_language => "Kedvenc nyelv";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Új Zéland";
   @override
   String get feedback_intro => "Hozzájárult az alkalmazáshoz, mivel telepítette azt a készülékére. Ha valami többet keres, itt van néhány lehetőség:";
@@ -3657,7 +3611,7 @@ class $hu extends S {
   @override
   String get improve_translation => "Javítani fordítás";
   @override
-  String get feedback_review => "Pozitív értékelést írhat a Google Play.";
+  String get feedback_review => "Pozitív értékelést írhat.";
   @override
   String get southeastern_usa => "Délkelet USA";
   @override
@@ -3887,8 +3841,6 @@ class $uk extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "Розширена версія";
-  @override
   String get southern_africa => "Південна Африка";
   @override
   String get always_my_region_title => "Завжди додайте мій регіон до фільтра";
@@ -3957,8 +3909,6 @@ class $uk extends S {
   @override
   String get pref_language => "Бажана мова";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Нова Зеландія";
   @override
   String get feedback_intro => "Ви внесли свій внесок у цю програму з моменту встановлення її на своєму пристрої. Якщо ви шукаєте більше тут, є кілька варіантів:";
@@ -3977,7 +3927,7 @@ class $uk extends S {
   @override
   String get improve_translation => "Поліпшення перекладу";
   @override
-  String get feedback_review => "Ви можете написати позитивний відгук у Google Play.";
+  String get feedback_review => "Можна написати позитивний відгук.";
   @override
   String get southeastern_usa => "Південно-східна США";
   @override
@@ -4207,8 +4157,6 @@ class $sk extends S {
   @override
   String get taxonomy_subsectio => "podsekcia";
   @override
-  String get feedback_submit_buy => "Rozšírená verzia";
-  @override
   String get southern_africa => "Južná Afrika";
   @override
   String get always_my_region_title => "Vždy pridať moju oblasť do filtra";
@@ -4271,8 +4219,6 @@ class $sk extends S {
   @override
   String get pref_language => "Preferovaný jazyk";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Nový Zéland";
   @override
   String get feedback_intro => "Túto aplikáciu podporujete odkedy ste si ju nainštalovali na svoje mobilné zariadenie, ďakujem. Ak hľadáte iné formy podpory, tu sú niektoré možnosti:";
@@ -4291,7 +4237,7 @@ class $sk extends S {
   @override
   String get improve_translation => "Vylepšiť preklad";
   @override
-  String get feedback_review => "Môžete napísať pozitívnu recenziu na Google Play.";
+  String get feedback_review => "Môžete napísať pozitívnu recenziu.";
   @override
   String get southeastern_usa => "Juhovýchod USA";
   @override
@@ -4521,8 +4467,6 @@ class $sl extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "Razširjena različica";
-  @override
   String get southern_africa => "Južna Afrika";
   @override
   String get always_my_region_title => "Vedno dodajte mojo regijo v filter";
@@ -4591,8 +4535,6 @@ class $sl extends S {
   @override
   String get pref_language => "Želeni jezik";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Nova Zelandija";
   @override
   String get feedback_intro => "Prispevali ste k tej aplikaciji, ker ste jo namestili v napravo, hvala. Če iščete nekaj več, si oglejte nekaj možnosti:";
@@ -4611,7 +4553,7 @@ class $sl extends S {
   @override
   String get improve_translation => "Izboljšati prevod";
   @override
-  String get feedback_review => "V Google Play lahko napišete pozitivno oceno.";
+  String get feedback_review => "Lahko napišete pozitivno mnenje.";
   @override
   String get southeastern_usa => "Jugovzhodna ZDA";
   @override
@@ -4841,8 +4783,6 @@ class $id extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "Versi diperpanjang";
-  @override
   String get southern_africa => "Afrika Selatan";
   @override
   String get always_my_region_title => "Selalu tambahkan wilayah saya ke filter";
@@ -4911,8 +4851,6 @@ class $id extends S {
   @override
   String get pref_language => "Bahasa pilihan";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Selandia Baru";
   @override
   String get feedback_intro => "Anda telah berkontribusi untuk aplikasi ini karena Anda telah menginstalnya di perangkat Anda, terima kasih. Jika Anda mencari sesuatu yang lebih, berikut adalah beberapa opsi:";
@@ -4931,7 +4869,7 @@ class $id extends S {
   @override
   String get improve_translation => "Perbaiki terjemahan";
   @override
-  String get feedback_review => "Anda dapat menulis ulasan positif di Google Play.";
+  String get feedback_review => "Anda dapat menulis ulasan positif.";
   @override
   String get southeastern_usa => "Tenggara AS";
   @override
@@ -5161,8 +5099,6 @@ class $sr extends S {
   @override
   String get taxonomy_subsectio => "подсекција";
   @override
-  String get feedback_submit_buy => "Проширена верзија";
-  @override
   String get southern_africa => "Јужна Африка";
   @override
   String get always_my_region_title => "Увек додајте мој регион на филтер";
@@ -5231,8 +5167,6 @@ class $sr extends S {
   @override
   String get pref_language => "Језик којем дајете предност";
   @override
-  String get feedback_google_play => "Гоогле Плаи";
-  @override
   String get new_zealand => "Нови Зеланд";
   @override
   String get feedback_intro => "Ви сте доприносили овој апликацији пошто сте је инсталирали на свом уређају, хвала. Ако тражите нешто више, ево неколико опција:";
@@ -5251,7 +5185,7 @@ class $sr extends S {
   @override
   String get improve_translation => "Побољшати транслатион";
   @override
-  String get feedback_review => "Можете написати позитивну рецензију на Гоогле Плаи.";
+  String get feedback_review => "Можете написати позитивну рецензију.";
   @override
   String get southeastern_usa => "Југоисточна САД";
   @override
@@ -5481,8 +5415,6 @@ class $sv extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "Förlängd version";
-  @override
   String get southern_africa => "Södra Afrika";
   @override
   String get always_my_region_title => "Lägg alltid till min region i filtret";
@@ -5551,8 +5483,6 @@ class $sv extends S {
   @override
   String get pref_language => "Önskat språk";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Nya Zeeland";
   @override
   String get feedback_intro => "Du har bidragit till den här applikationen eftersom du har installerat den på din enhet, tack. Om du letar efter något mer, här är några alternativ:";
@@ -5571,7 +5501,7 @@ class $sv extends S {
   @override
   String get improve_translation => "Förbättra translation";
   @override
-  String get feedback_review => "Du kan skriva en positiv recension i Google Play.";
+  String get feedback_review => "Du kan skriva en positiv recension.";
   @override
   String get southeastern_usa => "Sydöstra USA";
   @override
@@ -5805,8 +5735,6 @@ class $it extends S {
   @override
   String get taxonomy_subsectio => "Sottosezione";
   @override
-  String get feedback_submit_buy => "Versione estesa";
-  @override
   String get southern_africa => "Africa meridionale";
   @override
   String get always_my_region_title => "Aggiungi sempre la mia regione al filtro";
@@ -5875,8 +5803,6 @@ class $it extends S {
   @override
   String get pref_language => "Lingua preferita";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Nuova Zelanda";
   @override
   String get feedback_intro => "Hai contribuito a questa applicazione scaricandola sul tuo dispositivo, grazie. Se stai cercando qualcos'altro, ecco alcune opzioni:";
@@ -5895,7 +5821,7 @@ class $it extends S {
   @override
   String get improve_translation => "Migliora la traduzione";
   @override
-  String get feedback_review => "Puoi scrivere una recensione positiva su Google Play.";
+  String get feedback_review => "Puoi scrivere una recensione positiva.";
   @override
   String get southeastern_usa => "Stati Uniti sudorientali";
   @override
@@ -6125,8 +6051,6 @@ class $es extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "Versión extendida";
-  @override
   String get southern_africa => "Africa del Sur";
   @override
   String get always_my_region_title => "Siempre agregue mi región al filtro";
@@ -6193,8 +6117,6 @@ class $es extends S {
   @override
   String get northeast_tropical_africa => "Noreste de África Tropical";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get pref_language => "Idioma preferido";
   @override
   String get new_zealand => "Nueva Zelanda";
@@ -6215,7 +6137,7 @@ class $es extends S {
   @override
   String get improve_translation => "Mejorar la traducción";
   @override
-  String get feedback_review => "Puedes escribir una crítica positiva en Google Play.";
+  String get feedback_review => "Puedes escribir una crítica positiva.";
   @override
   String get southeastern_usa => "Sudeste de los Estados Unidos";
   @override
@@ -6445,8 +6367,6 @@ class $et extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "Pikendatud versioon";
-  @override
   String get southern_africa => "Lõuna-Aafrika";
   @override
   String get always_my_region_title => "Lisage alati minu piirkond filtrile";
@@ -6515,8 +6435,6 @@ class $et extends S {
   @override
   String get pref_language => "Eelistatud keel";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Uus-Meremaa";
   @override
   String get feedback_intro => "Tänu sellele, et olete selle seadmesse installinud, olete sellele rakendusele kaasa aidanud. Kui otsite midagi muud, on siin mõned võimalused:";
@@ -6535,7 +6453,7 @@ class $et extends S {
   @override
   String get improve_translation => "Parandada tõlge";
   @override
-  String get feedback_review => "Google Play saate kirjutada positiivse ülevaate.";
+  String get feedback_review => "Võite kirjutada positiivse ülevaate.";
   @override
   String get southeastern_usa => "Kaguosas USA";
   @override
@@ -6765,8 +6683,6 @@ class $cs extends S {
   @override
   String get taxonomy_subsectio => "podsekce";
   @override
-  String get feedback_submit_buy => "Rozšířená verze";
-  @override
   String get southern_africa => "Jižní Afrika";
   @override
   String get always_my_region_title => "Vždy přidat moji oblast do filtru";
@@ -6835,8 +6751,6 @@ class $cs extends S {
   @override
   String get pref_language => "Preferovaný jazyk";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Nový Zéland";
   @override
   String get feedback_intro => "Tuto aplikaci podporujete odkdy jste si ji nainstalovali na své mobilní zařízení, děkuji. Pokud hledáte jiné formy podpory, zde jsou některé možnosti:";
@@ -6855,7 +6769,7 @@ class $cs extends S {
   @override
   String get improve_translation => "Vylepšit překlad";
   @override
-  String get feedback_review => "Můžete napsat pozitivní recenzi na Google Play.";
+  String get feedback_review => "Můžete napsat pozitivní recenzi.";
   @override
   String get southeastern_usa => "Jihovýchod USA";
   @override
@@ -7085,8 +6999,6 @@ class $ar extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "نسخة موسعة";
-  @override
   String get southern_africa => "جنوب افريقيا";
   @override
   String get always_my_region_title => "أضف دائمًا منطقتي إلى الفلتر";
@@ -7155,8 +7067,6 @@ class $ar extends S {
   @override
   String get pref_language => "اللغة المفضلة";
   @override
-  String get feedback_google_play => "تطبيقات جوجل";
-  @override
   String get new_zealand => "نيوزيلندا";
   @override
   String get feedback_intro => "لقد ساهمت في هذا التطبيق منذ تثبيته على جهازك ، شكرًا. إذا كنت تبحث عن شيء أكثر ، فإليك بعض الخيارات:";
@@ -7175,7 +7085,7 @@ class $ar extends S {
   @override
   String get improve_translation => "تحسين الترجمة";
   @override
-  String get feedback_review => "يمكنك كتابة تعليق إيجابي في تطبيقات جوجل";
+  String get feedback_review => "يمكنك كتابة مراجعة إيجابية.";
   @override
   String get southeastern_usa => "جنوب شرق الولايات المتحدة";
   @override
@@ -7405,8 +7315,6 @@ class $pa extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "ਵਧਾਇਆ ਹੋਇਆ ਵਰਜਨ";
-  @override
   String get southern_africa => "ਦੱਖਣੀ ਅਫਰੀਕਾ";
   @override
   String get always_my_region_title => "ਹਮੇਸ਼ਾਂ ਫਿਲਟਰ ਨੂੰ ਮੇਰਾ ਖੇਤਰ ਜੋੜੋ";
@@ -7475,11 +7383,9 @@ class $pa extends S {
   @override
   String get pref_language => "ਤਰਜੀਹੀ ਭਾਸ਼ਾ";
   @override
-  String get feedback_google_play => "ਜੰਗਲਾਂ ਜਾਂ ਜੰਗਲਾਂ";
-  @override
   String get new_zealand => "ਨਿਊਜ਼ੀਲੈਂਡ";
   @override
-  String get feedback_intro => "ਬਾਗ ਜਾਂ ਖੇਤ";
+  String get feedback_intro => "ਤੁਸੀਂ ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਰਹੇ ਹੋ ਕਿਉਂਕਿ ਤੁਸੀਂ ਇਸ ਨੂੰ ਆਪਣੀ ਡਿਵਾਈਸ ਤੇ ਇੰਸਟਾਲ ਕੀਤਾ ਹੈ, ਧੰਨਵਾਦ. ਜੇ ਤੁਸੀਂ ਕੁਝ ਹੋਰ ਦੀ ਭਾਲ ਕਰ ਰਹੇ ਹੋ, ਇੱਥੇ ਕੁਝ ਵਿਕਲਪ ਹਨ:";
   @override
   String get filter_distribution => "ਵੰਡ";
   @override
@@ -7495,7 +7401,7 @@ class $pa extends S {
   @override
   String get improve_translation => "ਅਨੁਵਾਦ ਸੁਧਾਰੋ";
   @override
-  String get feedback_review => "ਘਾਹ ਦੇ ਮੈਦਾਨੇ ਜਾਂ ਘਾਹ ਦੇ ਮੈਦਾਨ";
+  String get feedback_review => "ਤੁਸੀਂ ਇੱਕ ਸਕਾਰਾਤਮਕ ਸਮੀਖਿਆ ਲਿਖ ਸਕਦੇ ਹੋ.";
   @override
   String get southeastern_usa => "ਦੱਖਣੀ-ਪੂਰਬੀ ਅਮਰੀਕਾ";
   @override
@@ -7737,8 +7643,6 @@ class $ja extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "拡張版";
-  @override
   String get southern_africa => "南アフリカ";
   @override
   String get always_my_region_title => "自分の地域を常にフィルタに追加する";
@@ -7807,8 +7711,6 @@ class $ja extends S {
   @override
   String get pref_language => "優先言語e";
   @override
-  String get feedback_google_play => "グーグルプレイ";
-  @override
   String get new_zealand => "ニュージーランド";
   @override
   String get feedback_intro => "デバイスにインストールしたので、このアプリケーションに貢献しました。ありがとうございます。 あなたがもっと何かを探しているなら、いくつかのオプションがあります：";
@@ -7827,7 +7729,7 @@ class $ja extends S {
   @override
   String get improve_translation => "翻訳を改善する";
   @override
-  String get feedback_review => "Google Playで肯定的なレビューを書くことができます。";
+  String get feedback_review => "あなたは肯定的なレビューを書くことができます。";
   @override
   String get southeastern_usa => "アメリカ南東部";
   @override
@@ -8055,8 +7957,6 @@ class $fa extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "نسخه توسعه یافته";
-  @override
   String get southern_africa => "آفریقای جنوبی";
   @override
   String get always_my_region_title => "همیشه منطقه من را به فیلتر اضافه کنید";
@@ -8143,7 +8043,7 @@ class $fa extends S {
   @override
   String get improve_translation => "بهبود ترجمه";
   @override
-  String get feedback_review => "شما می توانید یک نظر مثبت در Google Play بنویسید.";
+  String get feedback_review => "شما می توانید یک بررسی مثبت بنویسید.";
   @override
   String get southeastern_usa => "جنوب شرقی ایالات متحده آمریکا";
   @override
@@ -8371,8 +8271,6 @@ class $pl extends S {
   @override
   String get taxonomy_subsectio => "Podsekcja";
   @override
-  String get feedback_submit_buy => "Rozszerzona wersja";
-  @override
   String get southern_africa => "Południowa Afryka";
   @override
   String get always_my_region_title => "Zawsze filtruj wg mojego wybranego regionu";
@@ -8441,8 +8339,6 @@ class $pl extends S {
   @override
   String get pref_language => "Preferowany język";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Nowa Zelandia";
   @override
   String get feedback_intro => "Jeśli chcesz dać coś od siebie i przyczynić się do rozwoju aplikacji, masz kilka opcji do wyboru:";
@@ -8461,7 +8357,7 @@ class $pl extends S {
   @override
   String get improve_translation => "Popraw tłumaczenie";
   @override
-  String get feedback_review => "Możesz przyznać aplikacji 5 gwiazdek i napisać pozytywną recenzję w Sklepie Play.";
+  String get feedback_review => "Możesz przyznać aplikacji 5 gwiazdek i napisać pozytywną recenzję.";
   @override
   String get southeastern_usa => "Południowo-wschodnie USA";
   @override
@@ -8687,8 +8583,6 @@ class $da extends S {
   @override
   String get taxonomy_subsectio => "Undersektion";
   @override
-  String get feedback_submit_buy => "Udvidet version";
-  @override
   String get southern_africa => "Sydafrika";
   @override
   String get always_my_region_title => "Tilføj altid min region til filteret";
@@ -8757,8 +8651,6 @@ class $da extends S {
   @override
   String get pref_language => "Foretrukne sprog";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "New Zealand";
   @override
   String get feedback_intro => "Du har bidraget til denne applikation, da du har installeret den på din enhed, tak. Hvis du leder efter noget mere, her er nogle muligheder:";
@@ -8777,7 +8669,7 @@ class $da extends S {
   @override
   String get improve_translation => "Forbedre oversættelse";
   @override
-  String get feedback_review => "Du kan skrive en positiv anmeldelse i Google Play.";
+  String get feedback_review => "Du kan skrive en positiv anmeldelse.";
   @override
   String get southeastern_usa => "Sydøstlige USA";
   @override
@@ -9005,8 +8897,6 @@ class $he extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "גרסא מורחבת";
-  @override
   String get southern_africa => "דרום אפריקה";
   @override
   String get always_my_region_title => "הוסף תמיד את האזור שלי למסנן";
@@ -9075,8 +8965,6 @@ class $he extends S {
   @override
   String get pref_language => "שפה מועדפת";
   @override
-  String get feedback_google_play => "גוגל פליי";
-  @override
   String get new_zealand => "ניו זילנד";
   @override
   String get feedback_intro => "אתה כבר תורם ליישום זה מאז התקנת את זה על המכשיר שלך, תודה. אם אתה מחפש משהו נוסף, הנה כמה אפשרויות:";
@@ -9095,7 +8983,7 @@ class $he extends S {
   @override
   String get improve_translation => "שפר את התרגום";
   @override
-  String get feedback_review => "תוכל לכתוב ביקורת חיובית ב- גוגל פליי";
+  String get feedback_review => "אתה יכול לכתוב ביקורת חיובית.";
   @override
   String get southeastern_usa => "דרום מזרח ארצות הברית";
   @override
@@ -9325,8 +9213,6 @@ class $ro extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "Versiunea extinsa";
-  @override
   String get southern_africa => "Africa de Sud";
   @override
   String get always_my_region_title => "Adăugați întotdeauna regiunea mea la filtru";
@@ -9395,8 +9281,6 @@ class $ro extends S {
   @override
   String get pref_language => "Limba preferată";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Noua Zeelanda";
   @override
   String get feedback_intro => "Ați contribuit la această aplicație de când ați instalat-o pe dispozitiv, mulțumită. Dacă sunteți în căutarea pentru ceva mai mult, iată câteva opțiuni:";
@@ -9415,7 +9299,7 @@ class $ro extends S {
   @override
   String get improve_translation => "Îmbunătățirea traducere";
   @override
-  String get feedback_review => "Puteți scrie o recenzie pozitivă în Google Play.";
+  String get feedback_review => "Puteți scrie o recenzie pozitivă.";
   @override
   String get southeastern_usa => "Sud-estul SUA";
   @override
@@ -9645,8 +9529,6 @@ class $nl extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get feedback_submit_buy => "Uitgebreide versie";
-  @override
   String get southern_africa => "Zuid-Afrika";
   @override
   String get always_my_region_title => "Voeg altijd mijn regio toe aan het filter";
@@ -9715,8 +9597,6 @@ class $nl extends S {
   @override
   String get pref_language => "Voorkeurstaal";
   @override
-  String get feedback_google_play => "Google Play";
-  @override
   String get new_zealand => "Nieuw Zeeland";
   @override
   String get feedback_intro => "Sinds u de app geïnstalleerd heeft, draagt u bij aan de app. Dank u wel. Als u ons nóg meer wilt helpen, kunt u de volgende opties overwegen:";
@@ -9735,7 +9615,7 @@ class $nl extends S {
   @override
   String get improve_translation => "Verbeter vertaling";
   @override
-  String get feedback_review => "U kunt een positieve beoordeling in Google Play zetten.";
+  String get feedback_review => "U kunt een positieve beoordeling schrijven.";
   @override
   String get southeastern_usa => "Zuidoost VS";
   @override
