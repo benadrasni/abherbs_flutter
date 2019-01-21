@@ -51,51 +51,50 @@ class FeedbackScreen extends StatelessWidget {
                 style: feedbackTextStyle,
                 textAlign: TextAlign.center,
               ),
-              Container(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 50.0, right: 50.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Image(
-                      image: AssetImage('res/images/color.png'),
-                      width: 50.0,
-                      height: 50.0,
-                    ),
-                    Image(
-                      image: AssetImage('res/images/color.png'),
-                      width: 50.0,
-                      height: 50.0,
-                    ),
-                    Image(
-                      image: AssetImage('res/images/color.png'),
-                      width: 50.0,
-                      height: 50.0,
-                    ),
-                    Image(
-                      image: AssetImage('res/images/color.png'),
-                      width: 50.0,
-                      height: 50.0,
-                    ),
-                    Image(
-                      image: AssetImage('res/images/color.png'),
-                      width: 50.0,
-                      height: 50.0,
-                    ),
-                  ],
-                ),
+              SizedBox(height: 10.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    image: AssetImage('res/images/color.png'),
+                    width: 50.0,
+                    height: 50.0,
+                  ),
+                  Image(
+                    image: AssetImage('res/images/color.png'),
+                    width: 50.0,
+                    height: 50.0,
+                  ),
+                  Image(
+                    image: AssetImage('res/images/color.png'),
+                    width: 50.0,
+                    height: 50.0,
+                  ),
+                  Image(
+                    image: AssetImage('res/images/color.png'),
+                    width: 50.0,
+                    height: 50.0,
+                  ),
+                  Image(
+                    image: AssetImage('res/images/color.png'),
+                    width: 50.0,
+                    height: 50.0,
+                  ),
+                ],
               ),
-              RaisedButton(
-                onPressed: () {
+              SizedBox(height: 10.0),
+              GestureDetector(
+                onTap: () {
                   if (Platform.isAndroid) {
                     launchURL('market://details?id=sk.ab.herbs');
                   } else {
-                    key.currentState.showSnackBar(SnackBar(
-                      content: Text(S.of(context).snack_publish),
-                    ));
+                    launchURL('https://itunes.apple.com/us/app/whats-that-flower/id1449982118?mt=8&action=write-review');
                   }
                 },
-                child: Text(S.of(context).feedback_google_play),
-              )
+                child: Platform.isAndroid
+                    ? Image(image: AssetImage('res/images/google_play.png'))
+                    : Image(image: AssetImage('res/images/app_store.png')),
+              ),
             ]),
           ),
         ),
@@ -145,6 +144,7 @@ class FeedbackScreen extends StatelessWidget {
                 style: feedbackTextStyle,
                 textAlign: TextAlign.center,
               ),
+              SizedBox(height: 10.0),
               Container(
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Row(
@@ -158,9 +158,10 @@ class FeedbackScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              RaisedButton(
-                onPressed: () {
-                  if (Theme.of(context).platform == TargetPlatform.android) {
+              SizedBox(height: 10.0),
+              GestureDetector(
+                onTap: () {
+                  if (Platform.isAndroid) {
                     launchURL('market://details?id=sk.ab.herbsplus');
                   } else {
                     key.currentState.showSnackBar(new SnackBar(
@@ -168,8 +169,10 @@ class FeedbackScreen extends StatelessWidget {
                     ));
                   }
                 },
-                child: Text(S.of(context).feedback_submit_buy),
-              )
+                child: Platform.isAndroid
+                    ? Image(image: AssetImage('res/images/google_play.png'))
+                    : Image(image: AssetImage('res/images/app_store.png')),
+              ),
             ]),
           ),
         ),
