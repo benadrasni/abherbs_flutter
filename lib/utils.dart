@@ -13,6 +13,10 @@ const String rateStateNever = "never";
 const String rateStateShould = "should";
 const String rateStateDid = "did";
 
+const String playStore = "market://details?id=sk.ab.herbs";
+const String playStorePlus = "market://details?id=sk.ab.herbsplus";
+const String appStore = "https://itunes.apple.com/us/app/whats-that-flower/id1449982118?mt=8&action=write-review";
+
 const String languageEnglish = "en";
 const String languageSlovak = "sk";
 const String languageGTSuffix = "-GT";

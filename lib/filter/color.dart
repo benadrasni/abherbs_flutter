@@ -90,11 +90,9 @@ class _ColorState extends State<Color> {
                   Navigator.of(context).pop();
                 });
                 if (Platform.isAndroid) {
-                  launchURL('market://details?id=sk.ab.herbs');
+                  launchURL(playStore);
                 } else {
-                  _key.currentState.showSnackBar(SnackBar(
-                    content: Text(S.of(context).snack_publish),
-                  ));
+                  launchURL(appStore);
                 }
               },
             ),

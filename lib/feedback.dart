@@ -86,9 +86,9 @@ class FeedbackScreen extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   if (Platform.isAndroid) {
-                    launchURL('market://details?id=sk.ab.herbs');
+                    launchURL(playStore);
                   } else {
-                    launchURL('https://itunes.apple.com/us/app/whats-that-flower/id1449982118?mt=8&action=write-review');
+                    launchURL(appStore);
                   }
                 },
                 child: Platform.isAndroid
@@ -162,7 +162,7 @@ class FeedbackScreen extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   if (Platform.isAndroid) {
-                    launchURL('market://details?id=sk.ab.herbsplus');
+                    launchURL(playStorePlus);
                   } else {
                     key.currentState.showSnackBar(new SnackBar(
                       content: new Text(S.of(context).snack_publish),

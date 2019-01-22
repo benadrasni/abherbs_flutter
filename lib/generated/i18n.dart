@@ -125,7 +125,7 @@ class S implements WidgetsLocalizations {
   String get rate_later => "Later";
   String get rate_never => "Never";
   String get rate_question => "Is this app helpful?";
-  String get rate_text => "Author of this application is fueled by positive response from the users. Please send him some starflowers through Google Play Store.";
+  String get rate_text => "Author of this application is fueled by positive response from the users. Please send him some starflowers through application store.";
   String get russian_far_east => "Russian Far East";
   String get settings => "Settings";
   String get show_original => "Show English text";
@@ -417,7 +417,7 @@ class $de extends S {
   @override
   String get brazil => "Brasilien";
   @override
-  String get rate_text => "Der Autor dieser App wird durch positive Rückmeldungen der Benutzer  beflügelt. Bitte senden Sie ihm doch einen Sterne-Blumenstrauß über den Google Play Store.";
+  String get rate_text => "Der Autor dieser App wird durch positive Rückmeldungen der Benutzer  beflügelt. Bitte senden Sie ihm doch einen Sterne-Blumenstrauß über den Anwendungsspeicher.";
   @override
   String get eastern_europe => "Osteuropa";
   @override
@@ -733,7 +733,7 @@ class $hi extends S {
   @override
   String get brazil => "ब्राज़िल";
   @override
-  String get rate_text => "इस एप्लिकेशन के लेखक उपयोगकर्ताओं से सकारात्मक प्रतिक्रिया से प्रेरित हैं। कृपया उसे Google Play Store के माध्यम से कुछ स्टारफ्लॉवर भेजें।";
+  String get rate_text => "इस एप्लिकेशन के लेखक उपयोगकर्ताओं से सकारात्मक प्रतिक्रिया से प्रेरित हैं। कृपया उसे एप्लिकेशन स्टोर के माध्यम से कुछ सितारे भेजें।";
   @override
   String get eastern_europe => "पूर्वी यूरोप";
   @override
@@ -1049,7 +1049,7 @@ class $no extends S {
   @override
   String get brazil => "Brasil";
   @override
-  String get rate_text => "Forfatteren av denne søknaden er drevet av positivt svar fra brukerne. Send ham noen stjerneblomster via Google Play Butikk.";
+  String get rate_text => "Forfatteren av denne søknaden er motivert av positiv respons fra brukerne. Vennligst send ham noen stjerner gjennom applikasjonsbutikken.";
   @override
   String get eastern_europe => "Øst-Europa";
   @override
@@ -1365,7 +1365,7 @@ class $fi extends S {
   @override
   String get brazil => "Brasilia";
   @override
-  String get rate_text => "Tämän sovelluksen laatijaa tukee käyttäjien positiivinen vastaus. Lähetä hänelle joitakin starflowersia Google Play Storen kautta.";
+  String get rate_text => "Tämän sovelluksen laatijaa tukee käyttäjien positiivinen vastaus. Lähetä hänelle joitakin tähtiä sovellusvaraston kautta.";
   @override
   String get eastern_europe => "Itä-Eurooppa";
   @override
@@ -1681,7 +1681,7 @@ class $ru extends S {
   @override
   String get brazil => "Бразилия";
   @override
-  String get rate_text => "Автор этого приложения подпитывается положительным откликом пользователей. Пожалуйста, отправьте ему несколько звездочек через Google Play Store.";
+  String get rate_text => "Автор этого приложения мотивирован положительным откликом пользователей. Пожалуйста, отправьте ему несколько звезд через магазин приложений.";
   @override
   String get eastern_europe => "Восточная Европа";
   @override
@@ -1993,7 +1993,7 @@ class $pt extends S {
   @override
   String get brazil => "Brasil";
   @override
-  String get rate_text => "Autor desta aplicação é motivado pela resposta positiva dos usuários. Por favor, envie-lhe algumas flores estrela através do Google Play Store.";
+  String get rate_text => "Autor desta aplicação é motivada pela resposta positiva dos usuários. Por favor, envie-lhe algumas estrelas através da loja de aplicativos.";
   @override
   String get eastern_europe => "Europa Oriental";
   @override
@@ -2305,7 +2305,7 @@ class $lt extends S {
   @override
   String get brazil => "Brazilija";
   @override
-  String get rate_text => "Autorius šioje paraiškoje kurstė teigiamą atsakymą iš vartotojų. Prašome siųsti jam šiek tiek starflowers per Google Play Store.";
+  String get rate_text => "Šios programos autorius yra pagrįstas teigiamu vartotojų atsakymu. Atsiųskite jam keletą žvaigždžių per taikomąją parduotuvę.";
   @override
   String get eastern_europe => "Rytų Europa";
   @override
@@ -2621,7 +2621,7 @@ class $hr extends S {
   @override
   String get brazil => "Brazil";
   @override
-  String get rate_text => "Autor ove aplikacije potaknut je pozitivnim odgovorom korisnika. Pošaljite mu neke zvijezde kroz Google Play Store.";
+  String get rate_text => "Autor ove aplikacije motiviran je pozitivnim odgovorom korisnika. Molim vas, pošaljite mu neke zvijezde kroz prodavaonicu aplikacija.";
   @override
   String get eastern_europe => "Istočna Europa";
   @override
@@ -2935,7 +2935,7 @@ class $lv extends S {
   @override
   String get brazil => "Brazīlija";
   @override
-  String get rate_text => "Autors šajā pieteikumā ir veicinājuši pozitīvu atbildi no lietotājiem. Lūdzu, sūtiet viņam dažus starflowers izmantojot Google Play veikalā.";
+  String get rate_text => "Šī pieteikuma autors ir motivēts ar pozitīvu lietotāju atbildi. Lūdzu, sūtiet viņam dažas zvaigznes, izmantojot lietojumprogrammu veikalu.";
   @override
   String get eastern_europe => "Austrumeiropa";
   @override
@@ -3251,7 +3251,7 @@ class $fr extends S {
   @override
   String get brazil => "Brésil";
   @override
-  String get rate_text => "L'auteur de cette application est motivé par les réponses positives des utilisateurs. S'il vous plaît,  envoyez lui quelques fleurs étoiles via Google Play Store.";
+  String get rate_text => "L'auteur de cette application est motivé par les réponses positives des utilisateurs. S'il vous plaît, envoyez lui quelques fleurs étoiles à travers le magasin d'applications.";
   @override
   String get eastern_europe => "Europe de l'Est";
   @override
@@ -3567,7 +3567,7 @@ class $hu extends S {
   @override
   String get brazil => "Brazília";
   @override
-  String get rate_text => "A szerző a pozitív visszajelzésekből dolgozik. A Google Play Store-on keresztül csillagzással értékelheti/támogathatja a munkáját.";
+  String get rate_text => "A szerző a pozitív visszajelzésekből dolgozik. A alkalmazás tároló-on keresztül csillagzással értékelheti/támogathatja a munkáját.";
   @override
   String get eastern_europe => "Kelet-Európa";
   @override
@@ -3883,7 +3883,7 @@ class $uk extends S {
   @override
   String get brazil => "Бразилія";
   @override
-  String get rate_text => "Автор цієї програми підживлюється позитивною реакцією користувачів. Будь ласка, надішліть йому кілька зірочок через Google Play Store.";
+  String get rate_text => "Автор цієї програми мотивується позитивною реакцією користувачів. Будь ласка, надішліть йому кілька зірок через магазин додатків.";
   @override
   String get eastern_europe => "Східна Європа";
   @override
@@ -4193,7 +4193,7 @@ class $sk extends S {
   @override
   String get brazil => "Brazília";
   @override
-  String get rate_text => "Autora tejto aplikácie motivuje pozitívny ohlas použivateľov. Pošlite mu, prosím, nejaké kvetiny (najlepšie hviezdice) cez Google Play Store.";
+  String get rate_text => "Autora tejto aplikácie motivuje pozitívny ohlas použivateľov. Pošlite mu, prosím, nejaké kvetiny (najlepšie hviezdice) cez obchod s aplikáciami.";
   @override
   String get eastern_europe => "Východná Európa";
   @override
@@ -4509,7 +4509,7 @@ class $sl extends S {
   @override
   String get brazil => "Brazilija";
   @override
-  String get rate_text => "Avtor te aplikacije je podprt s pozitivnim odzivom uporabnikov. Prosimo, pošljite mu nekaj Starflowerjev v Google Play Store.";
+  String get rate_text => "Avtor te aplikacije je motiviran s pozitivnim odzivom uporabnikov. Prosim, pošljite mu nekaj zvezd skozi trgovino z aplikacijami.";
   @override
   String get eastern_europe => "Vzhodna Evropa";
   @override
@@ -4825,7 +4825,7 @@ class $id extends S {
   @override
   String get brazil => "Brazil";
   @override
-  String get rate_text => "Penulis aplikasi ini didorong oleh respon positif dari pengguna. Kirimkan dia beberapa bunga bintang melalui Google Play Store.";
+  String get rate_text => "Penulis aplikasi ini dimotivasi oleh respon positif dari pengguna. Tolong kirimkan dia beberapa bintang melalui toko aplikasi.";
   @override
   String get eastern_europe => "Eropa Timur";
   @override
@@ -5141,7 +5141,7 @@ class $sr extends S {
   @override
   String get brazil => "Бразил";
   @override
-  String get rate_text => "Аутор ове апликације је потакнут позитивним одговором корисника. Молим вас, пошаљите му неке звијезде кроз Гоогле Плаи Сторе.";
+  String get rate_text => "Аутор ове апликације је мотивисан позитивним одговором корисника. Молим вас, пошаљите му неке звезде кроз продавницу апликација.";
   @override
   String get eastern_europe => "Источна Европа";
   @override
@@ -5457,7 +5457,7 @@ class $sv extends S {
   @override
   String get brazil => "Brasilien";
   @override
-  String get rate_text => "Författaren av denna ansökan drivs av positivt svar från användarna. Var vänlig skicka honom några stjärnblommor via Google Play Butik.";
+  String get rate_text => "Författaren till denna ansökan motiveras av positivt svar från användarna. Vänligen skicka honom några stjärnor genom applikationsbutiken.";
   @override
   String get eastern_europe => "Östeuropa";
   @override
@@ -5777,7 +5777,7 @@ class $it extends S {
   @override
   String get brazil => "Brasile";
   @override
-  String get rate_text => "L'autore di questa applicazione è entusiasta di ricevere feedback da parte degli utenti. Ti preghiamo di inviargli qualche stella (alpina) attraverso Google Play Store.";
+  String get rate_text => "L'autore di questa applicazione è entusiasta di ricevere feedback da parte degli utenti. Ti preghiamo di inviargli qualche stella (alpina) attraverso il negozio di applicazioni.";
   @override
   String get eastern_europe => "Europa orientale";
   @override
@@ -6093,7 +6093,7 @@ class $es extends S {
   @override
   String get brazil => "Brasil";
   @override
-  String get rate_text => "Al autor de esta aplicación le motivan las reacciones positivas de los usuarios. Mándele, por favor, unas flores de la estrella a través del Google Play Store.";
+  String get rate_text => "Al autor de esta aplicación le motivan las reacciones positivas de los usuarios. Mándele, por favor, unas flores de la estrella a través de la tienda de aplicaciones.";
   @override
   String get eastern_europe => "Europa del Este";
   @override
@@ -6409,7 +6409,7 @@ class $et extends S {
   @override
   String get brazil => "Brasiilia";
   @override
-  String get rate_text => "Autor käesoleva taotluse toidab positiivse vastuse kasutajatele. Palun saatke talle mõned starflowers Google Play Store.";
+  String get rate_text => "Selle rakenduse autorit toetab kasutajate positiivne vastus. Palun saatke talle mõned tähed rakenduste poe kaudu.";
   @override
   String get eastern_europe => "Ida-Euroopa";
   @override
@@ -6725,7 +6725,7 @@ class $cs extends S {
   @override
   String get brazil => "Brazílie";
   @override
-  String get rate_text => "Autora této aplikace motivuje pozitívny ohlas uživatelů. Pošlete mu, prosím, nejaké květiny (nejlépe hvězdníky) přes Google Play Store.";
+  String get rate_text => "Autora této aplikace motivuje pozitívny ohlas uživatelů. Pošlete mu, prosím, nejaké květiny (nejlépe hvězdníky) přes obchod s aplikacemi.";
   @override
   String get eastern_europe => "Východní Evropa";
   @override
@@ -7041,7 +7041,7 @@ class $ar extends S {
   @override
   String get brazil => "البرازيل";
   @override
-  String get rate_text => "مؤلف هذا التطبيق يقدر ردود الفعل إيجابية من المستخدمين. الرجاء ارسال بعض ستارفلورز له من خلال متجر غوغل بلاي.";
+  String get rate_text => "تأجج المؤلف من هذا التطبيق من خلال استجابة إيجابية من المستخدمين. يرجى إرسال بعض النجوم له من خلال متجر التطبيقات.";
   @override
   String get eastern_europe => "أوروبا الشرقية";
   @override
@@ -7357,7 +7357,7 @@ class $pa extends S {
   @override
   String get brazil => "ਬ੍ਰਾਜ਼ੀਲ";
   @override
-  String get rate_text => "ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਦੇ ਲੇਖਕ ਨੂੰ ਉਪਯੋਗਕਰਤਾ ਦੁਆਰਾ ਸਕਾਰਾਤਮਕ ਜਵਾਬ ਦੇ ਕੇ ਪ੍ਰੇਰਿਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ. ਕਿਰਪਾ ਕਰਕੇ ਉਸਨੂੰ ਗੂਗਲ ਪਲੇ ਸਟੋਰ ਦੁਆਰਾ ਕੁਝ ਸਟਾਰਫਲੋਪਰਾਂ ਭੇਜੋ.";
+  String get rate_text => "ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਲੇਖਕ, ਯੂਜ਼ਰਸ ਦੁਆਰਾ ਸਕਾਰਾਤਮਕ ਜਵਾਬ ਦੁਆਰਾ ਪ੍ਰੇਰਿਤ ਹੁੰਦਾ ਹੈ. ਕਿਰਪਾ ਕਰਕੇ ਉਸਨੂੰ ਐਪਲ ਸਟੋਰ ਦੇ ਰਾਹੀਂ ਕੁਝ ਸਟਾਰ ਭੇਜੋ.";
   @override
   String get eastern_europe => "ਪੂਰਬੀ ਯੂਰਪ";
   @override
@@ -7685,7 +7685,7 @@ class $ja extends S {
   @override
   String get brazil => "ブラジル";
   @override
-  String get rate_text => "このアプリケーションの作成者は、ユーザーからの肯定的な応答によって促進されます。 Google Playストアでスターフラワーを送ってください。";
+  String get rate_text => "このアプリケーションの作者は、ユーザーからの良い反応によって動機づけられています。 アプリケーションストアを通じて彼にいくつかの星を送ってください。";
   @override
   String get eastern_europe => "東ヨーロッパ";
   @override
@@ -7999,7 +7999,7 @@ class $fa extends S {
   @override
   String get brazil => "برزیل";
   @override
-  String get rate_text => "نویسنده این برنامه توسط پاسخ مثبت از کاربران پر شده است. لطفا از طریق فروشگاه Google Play چند ستاره را بفرستید.";
+  String get rate_text => "نویسنده این برنامه توسط پاسخ مثبت از کاربران پر شده است. لطفا چند ستاره را از طریق فروشگاه نرم افزار ارسال کنید.";
   @override
   String get eastern_europe => "اروپای شرقی";
   @override
@@ -8313,7 +8313,7 @@ class $pl extends S {
   @override
   String get brazil => "Brazylia";
   @override
-  String get rate_text => "Wyrażając swoją opinię, dajesz Autorowi aplikacji chęć i motywację do jej dalszego rozwijania. Napisz proszę kilka miłych słów w Sklepie Play.";
+  String get rate_text => "Wyrażając swoją opinię, dajesz Autorowi aplikacji chęć i motywację do jej dalszego rozwijania. Napisz proszę kilka miłych słów w sklepu z aplikacjami.";
   @override
   String get eastern_europe => "Wschodnia Europa";
   @override
@@ -8625,7 +8625,7 @@ class $da extends S {
   @override
   String get brazil => "Brasilien";
   @override
-  String get rate_text => "Forfatteren af denne ansøgning er drevet af et positivt svar fra brugerne. Send ham nogle stjerneblomster via Google Play Butik.";
+  String get rate_text => "Forfatteren af denne ansøgning er drevet af et positivt svar fra brugerne. Venligst send ham nogle stjerner gennem applikationsbutikken.";
   @override
   String get eastern_europe => "østeuropa";
   @override
@@ -8939,7 +8939,7 @@ class $he extends S {
   @override
   String get brazil => "ברזיל";
   @override
-  String get rate_text => "המחבר של יישום זה מונעת על ידי תגובה חיובית של המשתמשים. שלח לו כמה כוכבים באמצעות חנות גוגל פליי";
+  String get rate_text => "מחבר של יישום זה מונע על ידי תגובה חיובית מהמשתמשים. נא לשלוח לו כמה כוכבים דרך חנות היישומים.";
   @override
   String get eastern_europe => "מזרח אירופה";
   @override
@@ -9255,7 +9255,7 @@ class $ro extends S {
   @override
   String get brazil => "Brazilia";
   @override
-  String get rate_text => "Autorul acestei aplicații este motivat de răspunsul pozitiv al utilizatorilor. Vă rugăm trimiți-i câteva flori stea via Google Play Store.";
+  String get rate_text => "Autor al acestei aplicații este motivată de răspunsul pozitiv din partea utilizatorilor. Trimiteți-i câteva stele prin magazinul de aplicații.";
   @override
   String get eastern_europe => "Europa de Est";
   @override
@@ -9571,7 +9571,7 @@ class $nl extends S {
   @override
   String get brazil => "Brazilië";
   @override
-  String get rate_text => "Auteur van deze applicatie wordt gevoed door positieve reactie van de gebruikers. Stuur hem alsjeblieft enkele starflowers via Google Play Store.";
+  String get rate_text => "Auteur van deze applicatie wordt gemotiveerd door positieve reactie van de gebruikers. Stuur hem alsjeblieft enkele sterren via de applicatiewinkel.";
   @override
   String get eastern_europe => "Oost-Europa";
   @override

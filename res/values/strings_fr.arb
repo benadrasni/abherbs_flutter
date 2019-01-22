@@ -13,14 +13,6 @@
   "always_my_region_title": "Toujours ajouter ma région au filtre",
   "always_my_region_subtitle": "Votre région sera pré-réglée sur le filtre",
 
-  "rate_question": "Cette application est-elle utile?",
-  "rate_never": "Jamais",
-  "rate_later": "Plus tard",
-  "rate": "Avis",
-  "rate_text": "L'auteur de cette application est motivé par les réponses positives des utilisateurs. S'il vous plaît,  envoyez lui quelques fleurs étoiles via Google Play Store.",
-  "yes": "Oui",
-  "no": "Non",
-
   "feedback_intro": "Vous avez contribué à cette application car vous l'avez installé sur votre appareil, merci. Si vous cherchez quelque chose de plus, voici quelques options:",
   "feedback_review": "Vous pouvez écrire une critique positive.",
   "feedback_title": "Contribution",
@@ -31,6 +23,14 @@
   "feedback_run_ads": "Vous pouvez afficher une publicité en plein écran ou regarder une publicité vidéo pour prendre en charge le développement et l'amélioration de la base de données.",
   "feedback_run_ads_fullscreen": "Afficher une publicité en plein écran",
   "feedback_run_ads_video": "Regarder une publicité vidéo",
+
+  "rate_question": "Cette application est-elle utile?",
+  "rate_text": "L'auteur de cette application est motivé par les réponses positives des utilisateurs. S'il vous plaît, envoyez lui quelques fleurs étoiles à travers le magasin d'applications.",
+  "rate_never": "Jamais",
+  "rate_later": "Plus tard",
+  "rate": "Avis",
+  "yes": "Oui",
+  "no": "Non",
 
   "filter_color": "couleur",
   "filter_habitat": "habitat",
