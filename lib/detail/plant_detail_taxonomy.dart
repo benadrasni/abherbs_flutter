@@ -121,7 +121,7 @@ Widget _getTaxonomy(BuildContext context, Locale myLocale, Plant plant) {
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       Expanded(
         child: Text(getTaxonLabel(context, taxonKey.substring(taxonKey.indexOf('_')+1))),
-        flex: 1,
+        flex: 2,
       ),
       _getTaxonInLanguage(myLocale, plant.apgIV[taxonKey]),
     ])));
@@ -161,6 +161,6 @@ Widget _getTaxonInLanguage(Locale myLocale, String taxon) {
             children: names,
           );
         }),
-    flex: 2,
+    flex: 3,
   );
 }
