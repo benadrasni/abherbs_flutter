@@ -11,6 +11,7 @@ var languages = {
   "hi": "हिन्दी",
   "he": "עברית",
   "hr": "Hrvatski",
+  "id": "Bahasa Indonesia",
   "it": "Italiano",
   "lv": "Latviešu",
   "lt": "Lietuvių",
