@@ -45,8 +45,8 @@ class _PlantDetailState extends State<PlantDetail> {
 
   Future<PlantTranslation> _getTranslation() {
     return translationsReference.child(widget.myLocale.languageCode).child(widget.plantName).once().then((DataSnapshot snapshot) {
-      var plantTranslation = PlantTranslation.fromJson(snapshot.value);
-      if (plantTranslation != null && plantTranslation.isTranslated()) {
+      var plantTranslation = snapshot.value == null ? PlantTranslation() : PlantTranslation.fromJson(snapshot.value);
+      if (plantTranslation.isTranslated()) {
         return plantTranslation;
       } else {
         plantTranslation.isTranslatedWithGT = true;
