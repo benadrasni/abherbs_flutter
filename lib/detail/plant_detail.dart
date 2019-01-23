@@ -44,7 +44,7 @@ class _PlantDetailState extends State<PlantDetail> {
   }
 
   Future<PlantTranslation> _getTranslation() {
-    return translationsReference.child(widget.myLocale.languageCode).child(widget.plantName).once().then((DataSnapshot snapshot) {
+    return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(widget.plantName).once().then((DataSnapshot snapshot) {
       var plantTranslation = snapshot.value == null ? PlantTranslation() : PlantTranslation.fromJson(snapshot.value);
       if (plantTranslation.isTranslated()) {
         return plantTranslation;
@@ -61,7 +61,7 @@ class _PlantDetailState extends State<PlantDetail> {
           });
         } else {
           return translationsReference
-              .child(widget.myLocale.languageCode + languageGTSuffix)
+              .child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix)
               .child(widget.plantName)
               .once()
               .then((DataSnapshot snapshot) {
@@ -85,7 +85,7 @@ class _PlantDetailState extends State<PlantDetail> {
                 var plantTranslationOriginal = PlantTranslation.fromJson(snapshot.value);
                 var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
                 uri += '&source=' + ('cs' == widget.myLocale.languageCode ? 'sk' : 'en');
-                uri += '&target=' + widget.myLocale.languageCode;
+                uri += '&target=' + getLanguageCode(widget.myLocale.languageCode);
                 for (var text in plantTranslation.getTextsToTranslate(plantTranslationOriginal)) {
                   uri += '&q=' + text;
                 }
@@ -95,7 +95,7 @@ class _PlantDetailState extends State<PlantDetail> {
                     PlantTranslation onlyGoogleTranslation = plantTranslation.fillTranslations(
                         translations.translatedTexts, plantTranslationOriginal);
                     translationsReference
-                        .child(widget.myLocale.languageCode + languageGTSuffix)
+                        .child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix)
                         .child(widget.plantName)
                         .set(onlyGoogleTranslation.toJson());
                     return plantTranslation;

@@ -134,7 +134,7 @@ Widget _getTaxonomy(BuildContext context, Locale myLocale, Plant plant) {
 }
 
 Widget _getTaxonInLanguage(Locale myLocale, String taxon) {
-  Future<String> translationF = translationsTaxonomyReference.child(myLocale.languageCode).child(taxon).once().then((DataSnapshot snapshot) {
+  Future<String> translationF = translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(taxon).once().then((DataSnapshot snapshot) {
     if (snapshot.value != null && snapshot.value.length > 0) {
       return snapshot.value.join(', ');
     } else {

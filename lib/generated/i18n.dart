@@ -808,322 +808,6 @@ class $hi extends S {
   String get feedback_submit_translate_app => "एप्लिकेशन के लेबल में सुधार करें";
 }
 
-class $no extends S {
-  const $no();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Sentral-Amerika";
-  @override
-  String get legend => "Legende";
-  @override
-  String get feedback_submit_translate_data => "Forbedre blomstens data";
-  @override
-  String get snack_copy => "Kopiert til utklippstavlen";
-  @override
-  String get about => "Om apper";
-  @override
-  String get western_canada => "Vest-Canada";
-  @override
-  String get northern_america => "Nord-Amerika";
-  @override
-  String get western_indian_ocean => "Vest-Indiskehavet";
-  @override
-  String get feedback => "Tilbakemelding";
-  @override
-  String get southwestern_usa => "Sørvest USA";
-  @override
-  String get distribution_message => "Hvilket geografisk område skal vi fokusere på?";
-  @override
-  String get caribbean => "Caribbean";
-  @override
-  String get australasia => "Australasia";
-  @override
-  String get petal_4 => "4 eller mindre";
-  @override
-  String get east_tropical_africa => "Øst-tropiske Afrika";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get south_tropical_africa => "Sør-tropiske Afrika";
-  @override
-  String get caucasus => "Kaukasus";
-  @override
-  String get middle_asia => "Midt-Asia";
-  @override
-  String get plant_gallery => "Galleri";
-  @override
-  String get always_my_region_subtitle => "Din region vil bli forhåndsinnstilt til filteret";
-  @override
-  String get indochina => "Indo-Kina";
-  @override
-  String get feedback_translate => "Du kan rapportere hvilken som helst skrivefeil eller feil du fant eller sende inn ny oversettelse på ditt språk.";
-  @override
-  String get australia => "Australia";
-  @override
-  String get google_translate => "Oversatt med Google Trans";
-  @override
-  String get plant_leaf => "Blader";
-  @override
-  String get habitat_forest => "skog";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "Malesia";
-  @override
-  String get southwestern_pacific => "Sørvestlige Stillehavet";
-  @override
-  String get asia_tropical => "Asia-tropisk";
-  @override
-  String get northwestern_usa => "Nordvest USA";
-  @override
-  String get northern_south_america => "Nord Sør-Amerika";
-  @override
-  String get show_original => "Vis engelsk tekst";
-  @override
-  String get southern_america => "Sør-Amerika";
-  @override
-  String get middle_atlantic_ocean => "Midt-Atlanterhavet";
-  @override
-  String get feedback_run_ads => "Du kan vise fullskjermsannonsering eller se videoannonse for å støtte videreutvikling og databaseforbedring.";
-  @override
-  String get habitat_garden => "hager eller felt";
-  @override
-  String get russian_far_east => "Russisk fjernt øst";
-  @override
-  String get west_central_tropical_africa => "Vest-Sentral-tropiske Afrika";
-  @override
-  String get habitat_message => "Hva er rundt deg? Identifiser plantens habitat.";
-  @override
-  String get plant_toxicity => "Toksisitet";
-  @override
-  String get snack_no_flowers => "Ingen blomster som samsvarer med kriterier.";
-  @override
-  String get rate_question => "Er dette programmet nyttig?";
-  @override
-  String get macaronesia => "Macaronesia";
-  @override
-  String get plant_taxonomy => "Taksonomi";
-  @override
-  String get feedback_run_ads_fullscreen => "Vis en fullskjerm-annonse";
-  @override
-  String get asia_temperate => "Asia-temperert";
-  @override
-  String get habitat_rock => "steiner eller fjell";
-  @override
-  String get taxonomy_superregnum => "Domene";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "Mongolia";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "Vest Sør-Amerika";
-  @override
-  String get taxonomy_subgenus => "Subgenus";
-  @override
-  String get europe => "Europa";
-  @override
-  String get middle_europe => "Midt-Europa";
-  @override
-  String get color_blue => "blå, lilla";
-  @override
-  String get southern_south_america => "Sør Sør-Amerika";
-  @override
-  String get plant_habitat => "Voksested";
-  @override
-  String get snack_loading_ad => "Annonsen er fortsatt lasting, trykk på knappen igjen.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "antall kronblader";
-  @override
-  String get petal_message => "Er blomsten zygomorphic? Nei? Så hvor mange kronblad har det?";
-  @override
-  String get color_white => "hvit";
-  @override
-  String get northeastern_usa => "Nordøst USA";
-  @override
-  String get color_green => "grønn, brun, svart";
-  @override
-  String get taxonomy_ordo => "Orden";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "Stillehavet";
-  @override
-  String get plant_sources => "Referanser";
-  @override
-  String get taxonomy_regnum => "Rike";
-  @override
-  String get south_central_pacific => "Sør-Sentral Stillehavet";
-  @override
-  String get filter_color => "farge på blomster";
-  @override
-  String get help => "Hjelp";
-  @override
-  String get mexico => "Mexico";
-  @override
-  String get snack_publish => "... å bli publisert senere";
-  @override
-  String get siberia => "Sibir";
-  @override
-  String get taxonomy_subtribus => "Undertribus";
-  @override
-  String get habitat_meadow => "enger eller gressletter";
-  @override
-  String get plant_trivia => "Trivia";
-  @override
-  String get taxonomy_cladus => "(klade)";
-  @override
-  String get plant_herbalism => "Plantelegemiddel";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get habitat_wetland => "heiene eller våtmark";
-  @override
-  String get feedback_title => "Hvordan bidra";
-  @override
-  String get toxicity2 => "litt giftig plante";
-  @override
-  String get toxicity1 => "giftig plante";
-  @override
-  String get eastern_canada => "Øst-Canada";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Vis oversatt tekst";
-  @override
-  String get habitat_tree => "trær eller busker";
-  @override
-  String get settings => "Innstillinger";
-  @override
-  String get color_red => "rød, rosa";
-  @override
-  String get north_central_pacific => "Nord-Sentral Stillehavet";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "Sør Afrika";
-  @override
-  String get always_my_region_title => "Legg alltid til min region i filteret";
-  @override
-  String get color_yellow => "gul";
-  @override
-  String get subantarctic_islands => "Subantarctic Islands";
-  @override
-  String get list_info => "Plukk en";
-  @override
-  String get taxonomy_subfamilia => "Underfamilier";
-  @override
-  String get my_region => "Min region";
-  @override
-  String get indian_subcontinent => "Indisk subkontinent";
-  @override
-  String get plant_flower => "Blomst";
-  @override
-  String get filter_habitat => "voksested";
-  @override
-  String get rate_never => "Aldri";
-  @override
-  String get northwestern_pacific => "Nordvest Stillehavet";
-  @override
-  String get southwestern_europe => "Sørvestlige Europa";
-  @override
-  String get taxonomy_species => "Art";
-  @override
-  String get plant_fruit => "Frukt";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "Familie";
-  @override
-  String get plant_stem => "Stengel";
-  @override
-  String get antarctic_continent => "Antarktis-kontinentet";
-  @override
-  String get no => "Nei";
-  @override
-  String get brazil => "Brasil";
-  @override
-  String get rate_text => "Forfatteren av denne søknaden er motivert av positiv respons fra brukerne. Vennligst send ham noen stjerner gjennom applikasjonsbutikken.";
-  @override
-  String get eastern_europe => "Øst-Europa";
-  @override
-  String get south_central_usa => "Sør-Sentral USA";
-  @override
-  String get plant_flowering_from => "Blomstringstid";
-  @override
-  String get taxonomy_tribus => "Tribus";
-  @override
-  String get arabian_peninsula => "Den arabiske halvøy";
-  @override
-  String get rate_later => "Seinere";
-  @override
-  String get color_message => "Hva er fargen på blomsten? Velg den nærmeste.";
-  @override
-  String get west_tropical_africa => "Vest-tropiske Afrika";
-  @override
-  String get northern_europe => "Nord-Europa";
-  @override
-  String get rate => "Anmeldelser";
-  @override
-  String get northeast_tropical_africa => "Nordøst-tropiske Afrika";
-  @override
-  String get pref_language => "Foretrukket Språk";
-  @override
-  String get new_zealand => "New Zealand";
-  @override
-  String get feedback_intro => "Du har bidratt til dette programmet siden du har installert det på enheten, takk. Hvis du leter etter noe mer, er det noen alternativer:";
-  @override
-  String get filter_distribution => "fordeling";
-  @override
-  String get eastern_asia => "Øst-Asia";
-  @override
-  String get western_asia => "Vest-Asia";
-  @override
-  String get subarctic_america => "Subarctic America";
-  @override
-  String get feedback_buy_extended => "Du kan kjøpe utvidet versjon med ekstra funksjonalitet som frakoblet modus, søk i navn, søk i taksonomi, observasjoner og konfigurerbart filter.";
-  @override
-  String get north_central_usa => "Nord-Sentral USA";
-  @override
-  String get improve_translation => "Forbedre oversettelse";
-  @override
-  String get feedback_review => "Du kan skrive en positiv anmeldelse.";
-  @override
-  String get southeastern_usa => "Sørøst USA";
-  @override
-  String get yes => "Ja";
-  @override
-  String get feedback_run_ads_video => "Se en videoannonse";
-  @override
-  String get plant_height_from => "Høyde";
-  @override
-  String get petal_many => "mer enn 5";
-  @override
-  String get southeastern_europe => "Sørøst-Europa";
-  @override
-  String get taxonomy_unknown => "ukjent";
-  @override
-  String get plant_inflorescence => "Blomsterstand";
-  @override
-  String get northern_africa => "Nord-Afrika";
-  @override
-  String get china => "Kina";
-  @override
-  String get petal_zygomorphic => "zygomorphic";
-  @override
-  String get taxonomy_genus => "Slekt";
-  @override
-  String get papuasia => "Papuasia";
-  @override
-  String get feedback_submit_translate_app => "Forbedre programmets etiketter";
-}
-
 class $fi extends S {
   const $fi();
 
@@ -7432,6 +7116,322 @@ class $pa extends S {
   String get feedback_submit_translate_app => "ਐਪਲੀਕੇਸ਼ਨ ਦੇ ਲੇਬਲ ਨੂੰ ਬਿਹਤਰ ਬਣਾਓ";
 }
 
+class $nb extends S {
+  const $nb();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Sentral-Amerika";
+  @override
+  String get legend => "Legende";
+  @override
+  String get feedback_submit_translate_data => "Forbedre blomstens data";
+  @override
+  String get snack_copy => "Kopiert til utklippstavlen";
+  @override
+  String get about => "Om apper";
+  @override
+  String get western_canada => "Vest-Canada";
+  @override
+  String get northern_america => "Nord-Amerika";
+  @override
+  String get western_indian_ocean => "Vest-Indiskehavet";
+  @override
+  String get feedback => "Tilbakemelding";
+  @override
+  String get southwestern_usa => "Sørvest USA";
+  @override
+  String get distribution_message => "Hvilket geografisk område skal vi fokusere på?";
+  @override
+  String get caribbean => "Caribbean";
+  @override
+  String get australasia => "Australasia";
+  @override
+  String get petal_4 => "4 eller mindre";
+  @override
+  String get east_tropical_africa => "Øst-tropiske Afrika";
+  @override
+  String get africa => "Afrika";
+  @override
+  String get south_tropical_africa => "Sør-tropiske Afrika";
+  @override
+  String get caucasus => "Kaukasus";
+  @override
+  String get middle_asia => "Midt-Asia";
+  @override
+  String get plant_gallery => "Galleri";
+  @override
+  String get always_my_region_subtitle => "Din region vil bli forhåndsinnstilt til filteret";
+  @override
+  String get indochina => "Indo-Kina";
+  @override
+  String get feedback_translate => "Du kan rapportere hvilken som helst skrivefeil eller feil du fant eller sende inn ny oversettelse på ditt språk.";
+  @override
+  String get australia => "Australia";
+  @override
+  String get google_translate => "Oversatt med Google Trans";
+  @override
+  String get plant_leaf => "Blader";
+  @override
+  String get habitat_forest => "skog";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Malesia";
+  @override
+  String get southwestern_pacific => "Sørvestlige Stillehavet";
+  @override
+  String get asia_tropical => "Asia-tropisk";
+  @override
+  String get northwestern_usa => "Nordvest USA";
+  @override
+  String get northern_south_america => "Nord Sør-Amerika";
+  @override
+  String get show_original => "Vis engelsk tekst";
+  @override
+  String get southern_america => "Sør-Amerika";
+  @override
+  String get middle_atlantic_ocean => "Midt-Atlanterhavet";
+  @override
+  String get feedback_run_ads => "Du kan vise fullskjermsannonsering eller se videoannonse for å støtte videreutvikling og databaseforbedring.";
+  @override
+  String get habitat_garden => "hager eller felt";
+  @override
+  String get russian_far_east => "Russisk fjernt øst";
+  @override
+  String get west_central_tropical_africa => "Vest-Sentral-tropiske Afrika";
+  @override
+  String get habitat_message => "Hva er rundt deg? Identifiser plantens habitat.";
+  @override
+  String get plant_toxicity => "Toksisitet";
+  @override
+  String get snack_no_flowers => "Ingen blomster som samsvarer med kriterier.";
+  @override
+  String get rate_question => "Er dette programmet nyttig?";
+  @override
+  String get macaronesia => "Macaronesia";
+  @override
+  String get plant_taxonomy => "Taksonomi";
+  @override
+  String get feedback_run_ads_fullscreen => "Vis en fullskjerm-annonse";
+  @override
+  String get asia_temperate => "Asia-temperert";
+  @override
+  String get habitat_rock => "steiner eller fjell";
+  @override
+  String get taxonomy_superregnum => "Domene";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "Mongolia";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "Vest Sør-Amerika";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get europe => "Europa";
+  @override
+  String get middle_europe => "Midt-Europa";
+  @override
+  String get color_blue => "blå, lilla";
+  @override
+  String get southern_south_america => "Sør Sør-Amerika";
+  @override
+  String get plant_habitat => "Voksested";
+  @override
+  String get snack_loading_ad => "Annonsen er fortsatt lasting, trykk på knappen igjen.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "antall kronblader";
+  @override
+  String get petal_message => "Er blomsten zygomorphic? Nei? Så hvor mange kronblad har det?";
+  @override
+  String get color_white => "hvit";
+  @override
+  String get northeastern_usa => "Nordøst USA";
+  @override
+  String get color_green => "grønn, brun, svart";
+  @override
+  String get taxonomy_ordo => "Orden";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "Stillehavet";
+  @override
+  String get plant_sources => "Referanser";
+  @override
+  String get taxonomy_regnum => "Rike";
+  @override
+  String get south_central_pacific => "Sør-Sentral Stillehavet";
+  @override
+  String get filter_color => "farge på blomster";
+  @override
+  String get help => "Hjelp";
+  @override
+  String get mexico => "Mexico";
+  @override
+  String get snack_publish => "... å bli publisert senere";
+  @override
+  String get siberia => "Sibir";
+  @override
+  String get taxonomy_subtribus => "Undertribus";
+  @override
+  String get habitat_meadow => "enger eller gressletter";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get taxonomy_cladus => "(klade)";
+  @override
+  String get plant_herbalism => "Plantelegemiddel";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get habitat_wetland => "heiene eller våtmark";
+  @override
+  String get feedback_title => "Hvordan bidra";
+  @override
+  String get toxicity2 => "litt giftig plante";
+  @override
+  String get toxicity1 => "giftig plante";
+  @override
+  String get eastern_canada => "Øst-Canada";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Vis oversatt tekst";
+  @override
+  String get habitat_tree => "trær eller busker";
+  @override
+  String get settings => "Innstillinger";
+  @override
+  String get color_red => "rød, rosa";
+  @override
+  String get north_central_pacific => "Nord-Sentral Stillehavet";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Sør Afrika";
+  @override
+  String get always_my_region_title => "Legg alltid til min region i filteret";
+  @override
+  String get color_yellow => "gul";
+  @override
+  String get subantarctic_islands => "Subantarctic Islands";
+  @override
+  String get list_info => "Plukk en";
+  @override
+  String get taxonomy_subfamilia => "Underfamilier";
+  @override
+  String get my_region => "Min region";
+  @override
+  String get indian_subcontinent => "Indisk subkontinent";
+  @override
+  String get plant_flower => "Blomst";
+  @override
+  String get filter_habitat => "voksested";
+  @override
+  String get rate_never => "Aldri";
+  @override
+  String get northwestern_pacific => "Nordvest Stillehavet";
+  @override
+  String get southwestern_europe => "Sørvestlige Europa";
+  @override
+  String get taxonomy_species => "Art";
+  @override
+  String get plant_fruit => "Frukt";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Familie";
+  @override
+  String get plant_stem => "Stengel";
+  @override
+  String get antarctic_continent => "Antarktis-kontinentet";
+  @override
+  String get no => "Nei";
+  @override
+  String get brazil => "Brasil";
+  @override
+  String get rate_text => "Forfatteren av denne søknaden er motivert av positiv respons fra brukerne. Vennligst send ham noen stjerner gjennom applikasjonsbutikken.";
+  @override
+  String get eastern_europe => "Øst-Europa";
+  @override
+  String get south_central_usa => "Sør-Sentral USA";
+  @override
+  String get plant_flowering_from => "Blomstringstid";
+  @override
+  String get taxonomy_tribus => "Tribus";
+  @override
+  String get arabian_peninsula => "Den arabiske halvøy";
+  @override
+  String get rate_later => "Seinere";
+  @override
+  String get color_message => "Hva er fargen på blomsten? Velg den nærmeste.";
+  @override
+  String get west_tropical_africa => "Vest-tropiske Afrika";
+  @override
+  String get northern_europe => "Nord-Europa";
+  @override
+  String get rate => "Anmeldelser";
+  @override
+  String get northeast_tropical_africa => "Nordøst-tropiske Afrika";
+  @override
+  String get pref_language => "Foretrukket Språk";
+  @override
+  String get new_zealand => "New Zealand";
+  @override
+  String get feedback_intro => "Du har bidratt til dette programmet siden du har installert det på enheten, takk. Hvis du leter etter noe mer, er det noen alternativer:";
+  @override
+  String get filter_distribution => "fordeling";
+  @override
+  String get eastern_asia => "Øst-Asia";
+  @override
+  String get western_asia => "Vest-Asia";
+  @override
+  String get subarctic_america => "Subarctic America";
+  @override
+  String get feedback_buy_extended => "Du kan kjøpe utvidet versjon med ekstra funksjonalitet som frakoblet modus, søk i navn, søk i taksonomi, observasjoner og konfigurerbart filter.";
+  @override
+  String get north_central_usa => "Nord-Sentral USA";
+  @override
+  String get improve_translation => "Forbedre oversettelse";
+  @override
+  String get feedback_review => "Du kan skrive en positiv anmeldelse.";
+  @override
+  String get southeastern_usa => "Sørøst USA";
+  @override
+  String get yes => "Ja";
+  @override
+  String get feedback_run_ads_video => "Se en videoannonse";
+  @override
+  String get plant_height_from => "Høyde";
+  @override
+  String get petal_many => "mer enn 5";
+  @override
+  String get southeastern_europe => "Sørøst-Europa";
+  @override
+  String get taxonomy_unknown => "ukjent";
+  @override
+  String get plant_inflorescence => "Blomsterstand";
+  @override
+  String get northern_africa => "Nord-Afrika";
+  @override
+  String get china => "Kina";
+  @override
+  String get petal_zygomorphic => "zygomorphic";
+  @override
+  String get taxonomy_genus => "Slekt";
+  @override
+  String get papuasia => "Papuasia";
+  @override
+  String get feedback_submit_translate_app => "Forbedre programmets etiketter";
+}
+
 class $en_US extends S {
   const $en_US();
 
@@ -9653,7 +9653,6 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
     return const <Locale>[
       Locale("de", ""),
       Locale("hi", ""),
-      Locale("no", ""),
       Locale("fi", ""),
       Locale("ru", ""),
       Locale("pt", ""),
@@ -9675,6 +9674,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
       Locale("cs", ""),
       Locale("ar", ""),
       Locale("pa", ""),
+      Locale("nb", ""),
       Locale("en", "US"),
       Locale("ja", ""),
       Locale("fa", ""),
@@ -9727,8 +9727,6 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
           return SynchronousFuture<S>(const $de());
         case "hi":
           return SynchronousFuture<S>(const $hi());
-        case "no":
-          return SynchronousFuture<S>(const $no());
         case "fi":
           return SynchronousFuture<S>(const $fi());
         case "ru":
@@ -9771,6 +9769,8 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
           return SynchronousFuture<S>(const $ar());
         case "pa":
           return SynchronousFuture<S>(const $pa());
+        case "nb":
+          return SynchronousFuture<S>(const $nb());
         case "en_US":
           return SynchronousFuture<S>(const $en_US());
         case "ja":

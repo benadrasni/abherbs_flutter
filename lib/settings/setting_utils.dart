@@ -18,7 +18,7 @@ var languages = {
   "hu": "Magyar",
   "nl": "Nederlands",
   "ja": "日本語",
-  "no": "Norsk",
+  "nb": "Norsk",
   "pa": "ਪੰਜਾਬੀ",
   "pl": "Polski",
   "pt": "Português",

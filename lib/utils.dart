@@ -73,3 +73,7 @@ Widget getAdMobBanner() {
   return Container(
   );
 }
+
+String getLanguageCode(String code) {
+  return code == 'nb' ? 'no' : code;
+}

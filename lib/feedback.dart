@@ -122,13 +122,13 @@ class FeedbackScreen extends StatelessWidget {
               ),
               RaisedButton(
                 onPressed: () {
-                  launchURL(webUrl + 'translate_app?lang=' + myLocale.languageCode);
+                  launchURL(webUrl + 'translate_app?lang=' + getLanguageCode(myLocale.languageCode));
                 },
                 child: Text(S.of(context).feedback_submit_translate_app),
               ),
               RaisedButton(
                 onPressed: () {
-                  launchURL(webUrl + 'translate_flower?lang=' + myLocale.languageCode);
+                  launchURL(webUrl + 'translate_flower?lang=' + getLanguageCode(myLocale.languageCode));
                 },
                 child: new Text(S.of(context).feedback_submit_translate_data),
               ),

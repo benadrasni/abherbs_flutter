@@ -112,7 +112,7 @@ class _PlantListState extends State<PlantList> {
                         ? new Future<String>(() {
                             return _translationCache[name];
                           })
-                        : translationsReference.child(myLocale.languageCode).child(name).child('label').once().then((DataSnapshot snapshot) {
+                        : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(name).child('label').once().then((DataSnapshot snapshot) {
                             if (snapshot.value != null) {
                               _translationCache[name] = snapshot.value;
                               return snapshot.value;
@@ -124,7 +124,7 @@ class _PlantListState extends State<PlantList> {
                         ? new Future<String>(() {
                             return _translationCache[family];
                           })
-                        : translationsTaxonomyReference.child(myLocale.languageCode).child(family).once().then((DataSnapshot snapshot) {
+                        : translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(family).once().then((DataSnapshot snapshot) {
                             if (snapshot.value != null && snapshot.value.length > 0) {
                               _translationCache[family] = snapshot.value[0];
                               return snapshot.value[0];

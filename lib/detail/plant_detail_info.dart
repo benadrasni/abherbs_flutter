@@ -242,7 +242,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Pl
                             if (plantSnapshot.connectionState == ConnectionState.done) {
                               return RaisedButton(
                                 onPressed: () {
-                                  launchURL(webUrl + 'translate_flower?lang=' + myLocale.languageCode + "&plant=" + plantSnapshot.data.name);
+                                  launchURL(webUrl + 'translate_flower?lang=' + getLanguageCode(myLocale.languageCode) + "&plant=" + plantSnapshot.data.name);
                                 },
                                 child: new Text(S.of(context).improve_translation),
                               );
