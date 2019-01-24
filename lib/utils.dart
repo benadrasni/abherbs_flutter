@@ -38,7 +38,7 @@ const String firebasePlantHeaders = 'plants_headers';
 const String firebaseTranslations = 'translations';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
 
-const int adsFrequency = 2;
+const int adsFrequency = -1;
 
 void launchURL(String url) async {
   if (await canLaunch(url)) {
@@ -71,9 +71,18 @@ String getTaxonLabel(BuildContext context, String taxon) {
 
 Widget getAdMobBanner() {
   return Container(
+    height: getFABPadding(),
   );
 }
 
 String getLanguageCode(String code) {
   return code == 'nb' ? 'no' : code;
+}
+
+bool isAdsAllowed() {
+  return true;
+}
+
+double getFABPadding() {
+  return isAdsAllowed() ? 50.0 : 0.0;
 }

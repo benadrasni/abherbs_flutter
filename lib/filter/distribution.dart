@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution_2.dart';
@@ -5,6 +7,7 @@ import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
@@ -196,6 +199,7 @@ class _DistributionState extends State<Distribution> {
 
     _setCount();
 
+    Ads.showBannerAd(this);
     setMyRegion();
   }
 
@@ -255,8 +259,9 @@ class _DistributionState extends State<Distribution> {
         },
       ),
       floatingActionButton: new Container(
-        height: 70.0,
+        height: 70.0 + getFABPadding(),
         width: 70.0,
+        padding: EdgeInsets.only(bottom: getFABPadding()),
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(

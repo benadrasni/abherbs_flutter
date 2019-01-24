@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/settings/setting_my_region.dart';
 import 'package:abherbs_flutter/settings/setting_pref_language.dart';
@@ -71,6 +74,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
     _myRegionF = Prefs.getStringF(keyMyRegion);
     _alwaysMyRegionF = Prefs.getBoolF(keyAlwaysMyRegion);
+
+    Ads.hideBannerAd();
   }
 
   @override

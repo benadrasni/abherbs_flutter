@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:abherbs_flutter/detail/plant_detail.dart';
@@ -5,6 +6,7 @@ import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/firebase_animated_index_list.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -86,6 +88,8 @@ class _PlantListState extends State<PlantList> {
 
     _translationCache = {};
     _random = new Random();
+
+    Ads.hideBannerAd();
   }
 
   @override

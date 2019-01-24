@@ -20,6 +20,7 @@ dependencies:
   shared_preferences:
   firebase_database: 1.0.5
   firebase_messaging: ^2.1.0
+  firebase_admob: ^0.7.0
   flutter_crashlytics: ^0.2.0
   cached_network_image: ^0.5.1
   url_launcher: 4.0.3

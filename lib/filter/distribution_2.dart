@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
@@ -5,6 +7,7 @@ import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -158,6 +161,8 @@ class _Distribution2State extends State<Distribution2> {
     _key = new GlobalKey<ScaffoldState>();
 
     _setCount();
+
+    Ads.showBannerAd(this);
   }
 
   @override
@@ -203,8 +208,9 @@ class _Distribution2State extends State<Distribution2> {
         },
       ),
       floatingActionButton: new Container(
-        height: 70.0,
+        height: 70.0 + getFABPadding(),
         width: 70.0,
+        padding: EdgeInsets.only(bottom: getFABPadding()),
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(

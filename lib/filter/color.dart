@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/drawer.dart';
@@ -6,11 +7,12 @@ import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/plant_list.dart';
+import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:abherbs_flutter/prefs.dart';
 
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
@@ -112,6 +114,8 @@ class _ColorState extends State<Color> {
     _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
 
     _setCount();
+
+    Ads.showBannerAd(this);
   }
 
   @override
@@ -310,8 +314,9 @@ class _ColorState extends State<Color> {
         },
       ),
       floatingActionButton: Container(
-        height: 70.0,
+        height: 70.0 + getFABPadding(),
         width: 70.0,
+        padding: EdgeInsets.only(bottom: getFABPadding()),
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';

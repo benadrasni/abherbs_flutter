@@ -6,6 +6,7 @@ import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/legend.dart';
+import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,8 @@ class _AppDrawerState extends State<AppDrawer> {
     super.initState();
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
+
+    Ads.hideBannerAd();
   }
 
   @override
