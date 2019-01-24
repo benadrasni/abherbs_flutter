@@ -14,13 +14,12 @@ import 'package:screen/screen.dart';
 
 class Ads {
   static BannerAd _bannerAd;
-  static InterstitialAd _interstitialAd;
   static bool isShown = false;
   static bool _isGoingToBeShown = false;
 
   static void setBannerAd() {
     _bannerAd = BannerAd(
-      adUnitId: bannerAdUnitId,
+      adUnitId: getBannerAdUnitId(),
       size: AdSize.banner,
       targetingInfo: _getMobileAdTargetingInfo(),
       listener: (MobileAdEvent event) {
@@ -56,19 +55,15 @@ class Ads {
     }
   }
 
-  static void setInterstitialAd() {
-    _interstitialAd = InterstitialAd(
-      adUnitId: interstitialAdUnitId,
+  static void showInterstitialAd() {
+    var interstitialAd = InterstitialAd(
+      adUnitId: getInterstitialAdUnitId(),
       targetingInfo: _getMobileAdTargetingInfo(),
       listener: (MobileAdEvent event) {
         print("InterstitialAd event is $event");
       },
     );
-  }
-
-  static void showInterstitialAd() {
-    if (_interstitialAd == null) setInterstitialAd();
-    _interstitialAd
+    interstitialAd
       ..load()
       ..show(anchorOffset: 0.0, anchorType: AnchorType.bottom);
   }
@@ -80,7 +75,7 @@ class Ads {
         RewardedVideoAd.instance.show();
       }
     };
-    RewardedVideoAd.instance.load(adUnitId: rewardAdUnitId, targetingInfo:_getMobileAdTargetingInfo());
+    RewardedVideoAd.instance.load(adUnitId: getRewardAdUnitId(), targetingInfo:_getMobileAdTargetingInfo());
   }
 
   static MobileAdTargetingInfo _getMobileAdTargetingInfo() {
@@ -137,7 +132,7 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    FirebaseAdMob.instance.initialize(appId: adAppId);
+    FirebaseAdMob.instance.initialize(appId: getAdAppId());
 
     Prefs.init();
     Prefs.getStringF(keyPreferredLanguage).then((String language) {

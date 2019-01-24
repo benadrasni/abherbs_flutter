@@ -190,7 +190,7 @@ class FeedbackScreen extends StatelessWidget {
               ),
               RaisedButton(
                 onPressed: () {
-                  Ads.setInterstitialAd();
+                  Ads.showInterstitialAd();
                 },
                 child: Text(S.of(context).feedback_run_ads_fullscreen),
               ),
