@@ -14,8 +14,27 @@ import 'package:screen/screen.dart';
 
 class Ads {
   static BannerAd _bannerAd;
+  static InterstitialAd _interstitialAd;
   static bool isShown = false;
   static bool _isGoingToBeShown = false;
+
+  static void setBannerAd() {
+    _bannerAd = BannerAd(
+      adUnitId: bannerAdUnitId,
+      size: AdSize.banner,
+      targetingInfo: _getMobileAdTargetingInfo(),
+      listener: (MobileAdEvent event) {
+        if (event == MobileAdEvent.loaded) {
+          isShown = true;
+          _isGoingToBeShown = false;
+        } else if (event == MobileAdEvent.failedToLoad) {
+          isShown = false;
+          _isGoingToBeShown = false;
+        }
+        print("BannerAd event is $event");
+      },
+    );
+  }
 
   static void showBannerAd([State state]) {
     if (state != null && !state.mounted) return;
@@ -37,27 +56,39 @@ class Ads {
     }
   }
 
-  static void setBannerAd() {
-    MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+  static void setInterstitialAd() {
+    _interstitialAd = InterstitialAd(
+      adUnitId: interstitialAdUnitId,
+      targetingInfo: _getMobileAdTargetingInfo(),
+      listener: (MobileAdEvent event) {
+        print("InterstitialAd event is $event");
+      },
+    );
+  }
+
+  static void showInterstitialAd() {
+    if (_interstitialAd == null) setInterstitialAd();
+    _interstitialAd
+      ..load()
+      ..show(anchorOffset: 0.0, anchorType: AnchorType.bottom);
+  }
+
+  static void showRewardedVideoAd() {
+    RewardedVideoAd.instance.listener =
+        (RewardedVideoAdEvent event, {String rewardType, int rewardAmount}) {
+      if (event == RewardedVideoAdEvent.loaded) {
+        RewardedVideoAd.instance.show();
+      }
+    };
+    RewardedVideoAd.instance.load(adUnitId: rewardAdUnitId, targetingInfo:_getMobileAdTargetingInfo());
+  }
+
+  static MobileAdTargetingInfo _getMobileAdTargetingInfo() {
+    return MobileAdTargetingInfo(
       keywords: <String>['flower', 'identify flower', 'plant', 'tree', 'botany', 'identification key'],
       contentUrl: 'https://whatsthatflower.com/',
       childDirected: false,
       testDevices: <String>["E97A43B66C19A6831DFA72A48E922E5B"],
-    );
-    _bannerAd = BannerAd(
-      adUnitId: bannerAdUnitId,
-      size: AdSize.banner,
-      targetingInfo: targetingInfo,
-      listener: (MobileAdEvent event) {
-        if (event == MobileAdEvent.loaded) {
-          isShown = true;
-          _isGoingToBeShown = false;
-        } else if (event == MobileAdEvent.failedToLoad) {
-          isShown = false;
-          _isGoingToBeShown = false;
-        }
-        print("BannerAd event is $event");
-      },
     );
   }
 }
