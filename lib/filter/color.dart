@@ -7,7 +7,7 @@ import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/main.dart';
+//import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
@@ -115,7 +115,7 @@ class _ColorState extends State<Color> {
 
     _setCount();
 
-    Ads.showBannerAd(this);
+    //Ads.showBannerAd(this);
   }
 
   @override
