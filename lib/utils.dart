@@ -1,6 +1,9 @@
+import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+const String productNoAds = "no_ads";
 
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
@@ -19,6 +22,7 @@ const String appStore = "https://itunes.apple.com/us/app/whats-that-flower/id144
 
 const String languageEnglish = "en";
 const String languageSlovak = "sk";
+const String languageCzech = "cs";
 const String languageGTSuffix = "-GT";
 const String heightUnitOfMeasure = "cm";
 
@@ -79,10 +83,6 @@ String getLanguageCode(String code) {
   return code == 'nb' ? 'no' : code;
 }
 
-bool isAdsAllowed() {
-  return true;
-}
-
 double getFABPadding() {
-  return isAdsAllowed() ? 50.0 : 0.0;
+  return Ads.isAllowed ? 50.0 : 0.0;
 }

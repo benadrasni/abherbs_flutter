@@ -1,3 +1,4 @@
+import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/feedback.dart';
 import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
@@ -6,7 +7,6 @@ import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/legend.dart';
-import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';

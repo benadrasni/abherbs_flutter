@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
 
