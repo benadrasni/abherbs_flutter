@@ -7,7 +7,7 @@ import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-//import 'package:abherbs_flutter/main.dart';
+import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
@@ -178,7 +178,7 @@ class _DistributionState extends State<Distribution> {
           ],
         )));
 
-    regionWidgets.add(getAdMobBanner());
+    //regionWidgets.add(getAdMobBanner());
 
     return Container(
         color: Colors.white30,
@@ -199,7 +199,7 @@ class _DistributionState extends State<Distribution> {
 
     _setCount();
 
-    //Ads.showBannerAd(this);
+    Ads.showBannerAd(this);
     setMyRegion();
   }
 

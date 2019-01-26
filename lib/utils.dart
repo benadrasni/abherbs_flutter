@@ -1,10 +1,6 @@
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/keys.dart';
-import 'package:abherbs_flutter/main.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'package:admob_flutter/admob_flutter.dart';
 
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
@@ -42,7 +38,7 @@ const String firebasePlantHeaders = 'plants_headers';
 const String firebaseTranslations = 'translations';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
 
-const int adsFrequency = 2;
+const int adsFrequency = -1;
 
 void launchURL(String url) async {
   if (await canLaunch(url)) {
@@ -76,7 +72,6 @@ String getTaxonLabel(BuildContext context, String taxon) {
 Widget getAdMobBanner() {
   return Container(
     height: getFABPadding(),
-    child: Ads.getBannerAd(),
   );
 }
 
