@@ -33,6 +33,15 @@ class _EnhacementsScreenState extends State<EnhacementsScreen> {
   Future<List<IAPItem>> _productsF;
   Future<List<PurchasedItem>> _purchasesF;
 
+  bool _isPurchased(String productId, List<PurchasedItem> purchases) {
+    for (var purchase in purchases) {
+      if (purchase.productId == productId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -60,6 +69,7 @@ class _EnhacementsScreenState extends State<EnhacementsScreen> {
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(10.0),
                 children: snapshot.data.products.map((IAPItem product) {
+                  bool isPurchased = _isPurchased(product.productId, snapshot.data.purchases);
                   return Card(
                     child: Container(
                       padding: EdgeInsets.all(10.0),
@@ -95,15 +105,18 @@ class _EnhacementsScreenState extends State<EnhacementsScreen> {
                         ),
                         SizedBox(height: 10.0),
                         RaisedButton(
-                          color: Theme.of(context).accentColor,
+                          color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
                           onPressed: () {
-                            FlutterInappPurchase.buyProduct(product.productId).then((PurchasedItem purchased) {
-                              widget.onBuyProduct();
-                            });
+                            if (!isPurchased) {
+                              FlutterInappPurchase.buyProduct(product.productId)
+                                  .then((PurchasedItem purchased) {
+                                widget.onBuyProduct();
+                              });
+                            }
                           },
                           child: Text(
-                            S.of(context).product_purchase,
-                            style: TextStyle(color: Colors.white),
+                            isPurchased ? S.of(context).product_purchased : S.of(context).product_purchase,
+                            style: TextStyle(color: isPurchased ? Colors.black : Colors.white),
                           ),
                         ),
                       ]),
