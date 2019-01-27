@@ -12,13 +12,6 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:screen/screen.dart';
 
-class MainMerged {
-  final Locale locale;
-  final List<PurchasedItem> purchases;
-
-  MainMerged({this.locale, this.purchases});
-}
-
 void main() async {
   bool isInDebugMode = false;
 
@@ -55,7 +48,7 @@ class _AppState extends State<App> {
 
   onChangeLanguage(String language) {
     setState(() {
-      _localeF = new Future<Locale>(() {
+      _localeF = Future<Locale>(() {
         return language.isEmpty ? null : Locale(language, '');
       });
     });
@@ -67,23 +60,20 @@ class _AppState extends State<App> {
     });
   }
 
-  Future<List<PurchasedItem>> initPlatformState() async {
-    // prepare
-    var result = await FlutterInappPurchase.initConnection;
-    print('result: $result');
-
-    return FlutterInappPurchase.getAvailablePurchases();
+  Future<List<PurchasedItem>> initPlatformState() {
+    return FlutterInappPurchase.initConnection.then((value) {
+      return FlutterInappPurchase.getAvailablePurchases();
+    });
   }
 
   @override
   void initState() {
     super.initState();
     Ads.initialize();
-    _purchasesF = initPlatformState();
-
     Prefs.init();
-    Prefs.getStringF(keyPreferredLanguage).then((String language) {
-      onChangeLanguage(language);
+    _purchasesF = initPlatformState();
+    _localeF = Prefs.getStringF(keyPreferredLanguage).then((String language) {
+      return language.isEmpty ? null : Locale(language, '');
     });
 
     Prefs.getIntF(keyRateCount, rateCountInitial).then((value) {
@@ -109,14 +99,12 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<MainMerged>(
-        future: Future.wait([_localeF, _purchasesF]).then((response) {
-          return MainMerged(locale: response[0], purchases: response[1]);
-        }),
-        builder: (BuildContext context, AsyncSnapshot<MainMerged> snapshot) {
+    return FutureBuilder<List<Object>>(
+        future: Future.wait([_localeF, _purchasesF]),
+        builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
-              for(PurchasedItem product in snapshot.data.purchases) {
+              for(PurchasedItem product in snapshot.data[1]) {
                 if (product.productId == productNoAdsAndroid || product.productId == productNoAdsIOS) {
                   Ads.isAllowed = false;
                   break;
@@ -124,7 +112,7 @@ class _AppState extends State<App> {
               }
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                locale: snapshot.data.locale,
+                locale: snapshot.data[0],
                 localizationsDelegates: [
                   S.delegate,
                   GlobalMaterialLocalizations.delegate,
