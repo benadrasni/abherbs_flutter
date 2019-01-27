@@ -63,6 +63,11 @@ class _AppState extends State<App> {
   Future<List<PurchasedItem>> initPlatformState() {
     return FlutterInappPurchase.initConnection.then((value) {
       return FlutterInappPurchase.getAvailablePurchases();
+    }).catchError((error) {
+      print(error);
+      return Future<List<PurchasedItem>>(() {
+        return <PurchasedItem>[];
+      });
     });
   }
 
