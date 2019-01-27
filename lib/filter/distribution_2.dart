@@ -37,7 +37,9 @@ class _Distribution2State extends State<Distribution2> {
 
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (snapshot.value != null && snapshot.value > 0) {
-        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter));
+        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
+          Ads.showBannerAd(this);
+        });
       } else {
         _key.currentState.showSnackBar(SnackBar(
           content: Text(S.of(context).snack_no_flowers),

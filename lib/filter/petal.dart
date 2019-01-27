@@ -36,7 +36,9 @@ class _PetalState extends State<Petal> {
 
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (snapshot.value != null && snapshot.value > 0) {
-        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter));
+        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
+          Ads.showBannerAd(this);
+        });
       } else {
         _key.currentState.showSnackBar(SnackBar(
           content: Text(S.of(context).snack_no_flowers),
@@ -250,7 +252,9 @@ class _PetalState extends State<Petal> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
-                          );
+                          ).then((value) {
+                            Ads.showBannerAd(this);
+                          });
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
                       ),
