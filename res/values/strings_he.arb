@@ -1,9 +1,15 @@
 {
   "legend": "אגדה",
+  "enhancements": "שיפורים",
   "settings": "הגדרות",
   "feedback": "משוב / תרומה",
   "about": "על היישום",
   "help": "עֶזרָה",
+
+  "product_no_ads_title": "אין פרסומת לא רצויה",
+  "product_no_ads_description": "היישום לא יציג מודעת באנר בחלק התחתון של המסך.",
+  "product_purchase": "רכישה",
+  "product_purchased": "נרכש",
 
   "toxicity1": "צמח רעיל",
   "toxicity2": "צמח רעיל במקצת",

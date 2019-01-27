@@ -1,9 +1,15 @@
 {
   "legend": "Legendă",
+  "enhancements": "Îmbunătățiri",
   "settings": "Setări",
   "feedback": "Feedback / Contribuţie",
   "about": "Despre",
   "help": "Ajutor",
+
+  "product_no_ads_title": "Nicio reclama nedorită",
+  "product_no_ads_description": "Aplicația nu va afișa banner publicitar în partea de jos a ecranului.",
+  "product_purchase": "Cumpărare",
+  "product_purchased": "Cumparate",
 
   "toxicity1": "plantă otrăvitoare",
   "toxicity2": "plantă ușor otrăvitoare",

@@ -1,9 +1,15 @@
 {
   "legend": "Legende",
+  "enhancements": "Forbedringer",
   "settings": "Innstillinger",
   "feedback": "Tilbakemelding",
   "about": "Om apper",
   "help": "Hjelp",
+
+  "product_no_ads_title": "Ingen uønsket annonse",
+  "product_no_ads_description": "Søknaden vil ikke vise annonse banner nederst på skjermen.",
+  "product_purchase": "Kjøpe",
+  "product_purchased": "Kjøpt",
 
   "toxicity1": "giftig plante",
   "toxicity2": "litt giftig plante",

@@ -1,9 +1,15 @@
 {
   "legend": "ਦੰਤਕਥਾ",
+  "enhancements": "ਸੁਧਾਰ",
   "settings": "ਸੈਟਿੰਗਜ਼",
   "feedback": "ਸੁਝਾਅ",
   "about": "ਇਸ ਬਾਰੇ",
   "help": "ਮਦਦ ਕਰੋ",
+
+  "product_no_ads_title": "ਕੋਈ ਅਣਚਾਹੇ ਇਸ਼ਤਿਹਾਰ",
+  "product_no_ads_description": "ਐਪਲੀਕੇਸ਼ਨ ਸਕ੍ਰੀਨ ਦੇ ਤਲ 'ਤੇ ਇਸ਼ਤਿਹਾਰ ਬੈਨਰ ਨਹੀਂ ਦਿਖਾਏਗੀ.",
+  "product_purchase": "ਖ਼ਰੀਦੋ",
+  "product_purchased": "ਖਰੀਦਿਆ",
 
   "toxicity1": "ਜ਼ਹਿਰੀਲਾ ਪੌਦਾ",
   "toxicity2": "ਥੋੜ੍ਹਾ ਜ਼ਹਿਰੀਲਾ ਪੌਦਾ",

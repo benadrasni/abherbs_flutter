@@ -1,9 +1,15 @@
 {
   "legend": "Legend",
+  "enhancements": "Täiendused",
   "settings": "Reguleerimine",
   "feedback": "Tagasiside / Panus",
   "about": "Rakenduse kohta",
   "help": "Appi",
+
+  "product_no_ads_title": "Soovimatu reklaam puudub",
+  "product_no_ads_description": "Rakendus ei näita ekraani allosas reklaami bännerit.",
+  "product_purchase": "Ostmine",
+  "product_purchased": "Ostetud",
 
   "toxicity1": "mürgine taim",
   "toxicity2": "veidi mürgine taim",

@@ -17,9 +17,10 @@ final countsReference = FirebaseDatabase.instance.reference().child(firebaseCoun
 
 class Distribution2 extends StatefulWidget {
   final void Function(String) onChangeLanguage;
+  final void Function() onBuyProduct;
   final Map<String, String> filter;
   final int region;
-  Distribution2(this.onChangeLanguage, this.filter, this.region);
+  Distribution2(this.onChangeLanguage, this.onBuyProduct, this.filter, this.region);
 
   @override
   _Distribution2State createState() => _Distribution2State();
@@ -36,7 +37,7 @@ class _Distribution2State extends State<Distribution2> {
 
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (snapshot.value != null && snapshot.value > 0) {
-        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter));
       } else {
         _key.currentState.showSnackBar(SnackBar(
           content: Text(S.of(context).snack_no_flowers),
@@ -173,7 +174,7 @@ class _Distribution2State extends State<Distribution2> {
       appBar: new AppBar(
         title: new Text(S.of(context).filter_distribution),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, widget.filter, null),
+      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 3,
@@ -184,19 +185,19 @@ class _Distribution2State extends State<Distribution2> {
           var nextFilterAttribute;
           switch (index) {
             case 0:
-              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.filter));
+              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.onBuyProduct, widget.filter));
               nextFilterAttribute = filterColor;
               break;
             case 1:
-              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.filter));
+              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, widget.filter));
               nextFilterAttribute = filterHabitat;
               break;
             case 2:
-              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.filter));
+              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, widget.filter));
               nextFilterAttribute = filterPetal;
               break;
             case 3:
-              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, widget.filter));
+              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, widget.onBuyProduct, widget.filter));
               nextFilterAttribute = filterDistribution;
               break;
           }
@@ -231,7 +232,7 @@ class _Distribution2State extends State<Distribution2> {
                         onPressed: () {
                           Navigator.pushReplacement(
                             mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.filter)),
+                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

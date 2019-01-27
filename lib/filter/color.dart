@@ -18,8 +18,9 @@ final countsReference = FirebaseDatabase.instance.reference().child(firebaseCoun
 
 class Color extends StatefulWidget {
   final void Function(String) onChangeLanguage;
+  final void Function() onBuyProduct;
   final Map<String, String> filter;
-  Color(this.onChangeLanguage, this.filter);
+  Color(this.onChangeLanguage, this.onBuyProduct, this.filter);
 
   @override
   _ColorState createState() => _ColorState();
@@ -38,7 +39,7 @@ class _ColorState extends State<Color> {
 
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (snapshot.value != null && snapshot.value > 0) {
-        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter));
       } else {
         _key.currentState.showSnackBar(SnackBar(
           content: Text(S.of(context).snack_no_flowers),
@@ -269,7 +270,7 @@ class _ColorState extends State<Color> {
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
+      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -294,15 +295,15 @@ class _ColorState extends State<Color> {
           var nextFilterAttribute;
           switch (index) {
             case 1:
-              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               nextFilterAttribute = filterHabitat;
               break;
             case 2:
-              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               nextFilterAttribute = filterPetal;
               break;
             case 3:
-              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               nextFilterAttribute = filterDistribution;
               break;
           }
@@ -337,7 +338,7 @@ class _ColorState extends State<Color> {
                         onPressed: () {
                           Navigator.push(
                             mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
+                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

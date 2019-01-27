@@ -1,4 +1,5 @@
 import 'package:abherbs_flutter/ads.dart';
+import 'package:abherbs_flutter/enhancements.dart';
 import 'package:abherbs_flutter/feedback.dart';
 import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
@@ -13,9 +14,10 @@ import 'package:flutter/material.dart';
 
 class AppDrawer extends StatefulWidget {
   final void Function(String) onChangeLanguage;
+  final void Function() onBuyProduct;
   final Map<String, String> filter;
   final void Function() settingsCallback;
-  AppDrawer(this.onChangeLanguage, this.filter, this.settingsCallback);
+  AppDrawer(this.onChangeLanguage, this.onBuyProduct, this.filter, this.settingsCallback);
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
@@ -50,16 +52,16 @@ class _AppDrawerState extends State<AppDrawer> {
           var route;
           switch (attribute) {
             case filterColor:
-              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               break;
             case filterHabitat:
-              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               break;
             case filterPetal:
-              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               break;
             case filterDistribution:
-              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               break;
           }
           if (filterRoutes[attribute] != null) {
@@ -71,6 +73,21 @@ class _AppDrawerState extends State<AppDrawer> {
       );
     }));
     listItems.add(Divider());
+    listItems.add(ListTile(
+      title: Text(
+        S.of(context).enhancements,
+        style: drawerTextStyle,
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => EnhacementsScreen(widget.onChangeLanguage, widget.onBuyProduct)),
+        ).then((result) {
+          Navigator.pop(context);
+          widget.settingsCallback();
+        });
+      },
+    ));
     listItems.add(ListTile(
       title: Text(
         S.of(context).settings,

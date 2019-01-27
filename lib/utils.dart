@@ -3,7 +3,8 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-const String productNoAds = "no_ads";
+const String productNoAdsAndroid = "no_ads";
+const String productNoAdsIOS = "NoAds";
 
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
@@ -70,6 +71,24 @@ String getTaxonLabel(BuildContext context, String taxon) {
     case 'Serie': return S.of(context).taxonomy_serie;
     case 'Subserie': return S.of(context).taxonomy_subserie;
     default: return S.of(context).taxonomy_unknown;
+  }
+}
+
+String getProductTitle(BuildContext context, String productId, String defaultTitle) {
+  switch (productId) {
+    case productNoAdsAndroid:
+    case productNoAdsIOS:
+      return S.of(context).product_no_ads_title;
+    default: return defaultTitle;
+  }
+}
+
+String getProductDescription(BuildContext context, String productId, String defaultDescription) {
+  switch (productId) {
+    case productNoAdsAndroid:
+    case productNoAdsIOS:
+      return S.of(context).product_no_ads_description;
+    default: return defaultDescription;
   }
 }
 

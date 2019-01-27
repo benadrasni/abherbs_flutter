@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  Splash(this.onChangeLanguage);
+  final void Function() onBuyProduct;
+  Splash(this.onChangeLanguage, this.onBuyProduct);
 
   @override
   _SplashState createState() => new _SplashState();
@@ -55,7 +56,7 @@ class _SplashState extends State<Splash> {
               String count = message['count'];
               String path = message['path'];
               if (count != null && path != null) {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, count, path)));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, {}, count, path)));
               }
               break;
           }
@@ -84,10 +85,10 @@ class _SplashState extends State<Splash> {
             if (value != null) {
               filter[filterDistribution] = value;
             }
-            Navigator.pushReplacement(context, getNextFilterRoute(null, widget.onChangeLanguage, filter));
+            Navigator.pushReplacement(context, getNextFilterRoute(null, widget.onChangeLanguage, widget.onBuyProduct, filter));
           });
         } else {
-          Navigator.pushReplacement(context, getNextFilterRoute(null, widget.onChangeLanguage, filter));
+          Navigator.pushReplacement(context, getNextFilterRoute(null, widget.onChangeLanguage, widget.onBuyProduct, filter));
         }
       });
     }

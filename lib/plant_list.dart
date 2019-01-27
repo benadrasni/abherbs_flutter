@@ -22,10 +22,11 @@ final translationsTaxonomyReference = FirebaseDatabase.instance.reference().chil
 
 class PlantList extends StatefulWidget {
   final void Function(String) onChangeLanguage;
+  final void Function() onBuyProduct;
   final Map<String, String> filter;
   final String count;
   final String path;
-  PlantList(this.onChangeLanguage, this.filter, [this.count, this.path]);
+  PlantList(this.onChangeLanguage, this.onBuyProduct, this.filter, [this.count, this.path]);
 
   @override
   _PlantListState createState() => _PlantListState();
@@ -53,7 +54,7 @@ class _PlantListState extends State<PlantList> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.filter, name)),
+              MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, name)),
             );
           },
         ),
@@ -99,7 +100,7 @@ class _PlantListState extends State<PlantList> {
       appBar: AppBar(
         title: Text(S.of(context).list_info),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, widget.filter, null),
+      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: Container(
         child: Column(
           children: <Widget>[
@@ -170,7 +171,7 @@ class _PlantListState extends State<PlantList> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.filter, name)),
+                              MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, name)),
                             );
                           },
                         ),
@@ -204,10 +205,10 @@ class _PlantListState extends State<PlantList> {
                               if (value != null) {
                                 filter[filterDistribution] = value;
                               }
-                              Navigator.pushReplacement(mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, filter));
+                              Navigator.pushReplacement(mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, widget.onBuyProduct, filter));
                             });
                           } else {
-                            Navigator.pushReplacement(mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, filter));
+                            Navigator.pushReplacement(mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, widget.onBuyProduct, filter));
                           }
                         });
                       },

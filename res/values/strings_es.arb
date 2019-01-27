@@ -1,9 +1,15 @@
 {
   "legend": "Leyenda",
+  "enhancements": "Mejoras",
   "settings": "Configuración",
   "feedback": "Sugerencias / Contribución",
   "about": "Acerca de",
   "help": "Ayuda",
+
+  "product_no_ads_title": "No hay publicidad no deseada",
+  "product_no_ads_description": "La aplicación no mostrará el anuncio publicitario en la parte inferior de la pantalla.",
+  "product_purchase": "Compra",
+  "product_purchased": "Comprado",
 
   "toxicity1": "planta venenosa",
   "toxicity2": "planta ligeramente venenosa",

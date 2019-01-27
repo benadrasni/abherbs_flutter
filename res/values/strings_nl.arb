@@ -1,9 +1,15 @@
 {
   "legend": "Legenda",
+  "enhancements": "Verbeteringen",
   "settings": "Instellingen",
   "feedback": "Terugkoppeling / Bijdrage",
   "about": "Over de app",
   "help": "Helpen",
+
+  "product_no_ads_title": "Geen ongewenste advertenties",
+  "product_no_ads_description": "Applicatie toont geen reclamebanner onderaan het scherm.",
+  "product_purchase": "Koop",
+  "product_purchased": "Gekocht",
 
   "toxicity1": "giftige plant",
   "toxicity2": "lichtjes giftige plant",

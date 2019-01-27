@@ -1,9 +1,15 @@
 {
   "legend": "Legenda",
+  "enhancements": "Ulepszenia",
   "settings": "Ustawienia",
   "feedback": "Komentarze",
   "about": "O aplikacji",
   "help": "Pomoc",
+
+  "product_no_ads_title": "Bez niechcianej reklamy",
+  "product_no_ads_description": "Aplikacja nie wyświetli banera reklamowego u dołu ekranu.",
+  "product_purchase": "Zakupić",
+  "product_purchased": "Zakupione",
 
   "toxicity1": "Roślina trująca",
   "toxicity2": "Roślina umiarkowanie trująca",

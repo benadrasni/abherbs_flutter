@@ -1,9 +1,15 @@
 {
   "legend": "Legend",
+  "enhancements": "Förbättringar",
   "settings": "Inställningar",
   "feedback": "Återkoppling",
   "about": "Om ansökan",
   "help": "Hjäjp",
+
+  "product_no_ads_title": "Ingen oönskad annonsering",
+  "product_no_ads_description": "Applikationen visar inte annonsbannern längst ner på skärmen.",
+  "product_purchase": "Köpa",
+  "product_purchased": "Köpt",
 
   "toxicity1": "giftig växt",
   "toxicity2": "något giftig växt",

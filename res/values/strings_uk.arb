@@ -1,9 +1,15 @@
 {
   "legend": "Легенда",
+  "enhancements": "Покращення",
   "settings": "Налаштування",
   "feedback": "Відповідь",
   "about": "Про додатку",
   "help": "Довідка",
+
+  "product_no_ads_title": "Немає небажаної реклами",
+  "product_no_ads_description": "Програма не покаже рекламний банер внизу екрана.",
+  "product_purchase": "Придбати",
+  "product_purchased": "Придбано",
 
   "toxicity1": "отруйна рослина",
   "toxicity2": "злегка отруйна рослина",

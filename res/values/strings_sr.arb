@@ -1,9 +1,15 @@
 {
   "legend": "Легенда",
+  "enhancements": "Побољшања",
   "settings": "Подешавања",
   "feedback": "Повратне информације",
   "about": "О апликацији",
   "help": "Помоћ",
+
+  "product_no_ads_title": "Нема нежељених реклама",
+  "product_no_ads_description": "Апликација не приказује рекламни баннер на дну екрана.",
+  "product_purchase": "Купити",
+  "product_purchased": "Купио",
 
   "toxicity1": "отровна биљка",
   "toxicity2": "благо отровна биљка",

@@ -1,9 +1,15 @@
 {
   "legend": "Legenda",
+  "enhancements": "Vylepšenia",
   "settings": "Nastavenia",
   "feedback": "Pripomienky",
   "about": "O aplikácii",
   "help": "Pomoc",
+
+  "product_no_ads_title": "Žiadna nežiadúca reklama",
+  "product_no_ads_description": "Aplikácia nezobrazí reklamný banner v spodnej časti obrazovky.",
+  "product_purchase": "Kúpiť",
+  "product_purchased": "Kúpené",
 
   "toxicity1": "jedovatá rastlina",
   "toxicity2": "mierne jedovatá rastlina",

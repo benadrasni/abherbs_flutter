@@ -1,9 +1,15 @@
 {
   "legend": "Legenda",
+  "enhancements": "Poboljšanja",
   "settings": "Postavke",
   "feedback": "Povratne informacije",
   "about": "O aplikaciji",
   "help": "Pomoć",
+
+  "product_no_ads_title": "Nema neželjenog oglasa",
+  "product_no_ads_description": "Aplikacija neće prikazati oglasni banner na dnu zaslona.",
+  "product_purchase": "Kupiti",
+  "product_purchased": "Kupljen",
 
   "toxicity1": "otrovna biljka",
   "toxicity2": "blago otrovna biljka",

@@ -1,9 +1,15 @@
 {
   "legend": "Legenda",
+  "enhancements": "Dodatki",
   "settings": "Nastavitve",
   "feedback": "Povratne informacije / Prispevek",
   "about": "O aplikaciji",
   "help": "Pomoč",
+
+  "product_no_ads_title": "Brez neželenega oglasa",
+  "product_no_ads_description": "Aplikacija ne bo prikazala oglasne pasice na dnu zaslona.",
+  "product_purchase": "Kupiti",
+  "product_purchased": "Kupljeno",
 
   "toxicity1": "strupena rastlina",
   "toxicity2": "nekoliko strupena rastlina",

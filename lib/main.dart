@@ -12,11 +12,11 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:screen/screen.dart';
 
-class Merged {
+class MainMerged {
   final Locale locale;
-  final List<PurchasedItem> purchased;
+  final List<PurchasedItem> purchases;
 
-  Merged({this.locale, this.purchased});
+  MainMerged({this.locale, this.purchases});
 }
 
 void main() async {
@@ -58,6 +58,12 @@ class _AppState extends State<App> {
       _localeF = new Future<Locale>(() {
         return language.isEmpty ? null : Locale(language, '');
       });
+    });
+  }
+
+  onBuyProduct() {
+    setState(() {
+      _purchasesF = FlutterInappPurchase.getAvailablePurchases();
     });
   }
 
@@ -103,16 +109,17 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Merged>(
+    return FutureBuilder<MainMerged>(
         future: Future.wait([_localeF, _purchasesF]).then((response) {
-          return Merged(locale: response[0], purchased: response[1]);
+          return MainMerged(locale: response[0], purchases: response[1]);
         }),
-        builder: (BuildContext context, AsyncSnapshot<Merged> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<MainMerged> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
-              for(PurchasedItem product in snapshot.data.purchased) {
-                if (product.productId == productNoAds) {
+              for(PurchasedItem product in snapshot.data.purchases) {
+                if (product.productId == productNoAdsAndroid || product.productId == productNoAdsIOS) {
                   Ads.isAllowed = false;
+                  break;
                 }
               }
               return MaterialApp(
@@ -124,7 +131,7 @@ class _AppState extends State<App> {
                   GlobalWidgetsLocalizations.delegate,
                 ],
                 supportedLocales: S.delegate.supportedLocales,
-                home: Splash(this.onChangeLanguage),
+                home: Splash(this.onChangeLanguage, this.onBuyProduct),
               );
             default:
               return Column(
