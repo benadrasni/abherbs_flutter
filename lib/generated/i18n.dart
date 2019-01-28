@@ -126,6 +126,7 @@ class S implements WidgetsLocalizations {
   String get product_no_ads_title => "No unwanted advertisement";
   String get product_purchase => "Purchase";
   String get product_purchased => "Purchased";
+  String get product_restore_purchases => "Restore Purchases";
   String get rate => "Review";
   String get rate_later => "Later";
   String get rate_never => "Never";
@@ -365,6 +366,8 @@ class $de extends S {
   String get enhancements => "Verbesserungen";
   @override
   String get habitat_wetland => "Moorlandschaft oder Feuchtgebiete";
+  @override
+  String get product_restore_purchases => "Käufe wiederherstellen";
   @override
   String get feedback_title => "Wie kann ich dazu beitragen?";
   @override
@@ -692,6 +695,8 @@ class $hi extends S {
   @override
   String get habitat_wetland => "मोरलैंड्स या झीलों";
   @override
+  String get product_restore_purchases => "खरीदारी वापस लौटाएं";
+  @override
   String get feedback_title => "पेड़ या झाड़ियाँ";
   @override
   String get toxicity2 => "थोड़ा जहरीला पौधा";
@@ -1017,6 +1022,8 @@ class $fi extends S {
   String get enhancements => "Parannukset";
   @override
   String get habitat_wetland => "nummimaista tai kosteikkojen";
+  @override
+  String get product_restore_purchases => "Palauttaa ostot";
   @override
   String get feedback_title => "Miten osallistua";
   @override
@@ -1344,6 +1351,8 @@ class $ru extends S {
   @override
   String get habitat_wetland => "водно-болотные угодья";
   @override
+  String get product_restore_purchases => "Восстановить покупки";
+  @override
   String get feedback_title => "Как внести свой вклад";
   @override
   String get toxicity2 => "слегка ядовитое растение";
@@ -1668,6 +1677,8 @@ class $pt extends S {
   @override
   String get habitat_wetland => "pântanos e zonas húmidas";
   @override
+  String get product_restore_purchases => "Restaurar compras";
+  @override
   String get feedback_title => "Como contribuir";
   @override
   String get toxicity2 => "planta ligeiramente venenosa";
@@ -1987,6 +1998,8 @@ class $lt extends S {
   String get enhancements => "Priedai";
   @override
   String get habitat_wetland => "šlapžemės";
+  @override
+  String get product_restore_purchases => "Atkurti pirkimus";
   @override
   String get feedback_title => "Kaip prisidėti";
   @override
@@ -2314,6 +2327,8 @@ class $hr extends S {
   @override
   String get habitat_wetland => "močvare";
   @override
+  String get product_restore_purchases => "Vraćanje kupnje";
+  @override
   String get feedback_title => "Kako pridonijeti";
   @override
   String get toxicity2 => "blago otrovna biljka";
@@ -2637,6 +2652,8 @@ class $lv extends S {
   String get enhancements => "Uzlabojumi";
   @override
   String get habitat_wetland => "šlapžemės";
+  @override
+  String get product_restore_purchases => "Atjaunot pirkumus";
   @override
   String get feedback_title => "Kā piedalīties";
   @override
@@ -2964,6 +2981,8 @@ class $fr extends S {
   @override
   String get habitat_wetland => "bruyères ou zones humides";
   @override
+  String get product_restore_purchases => "Restaurer les achats";
+  @override
   String get feedback_title => "Contribution";
   @override
   String get toxicity2 => "plante légèrement toxique";
@@ -3289,6 +3308,8 @@ class $hu extends S {
   String get enhancements => "Fejlesztések";
   @override
   String get habitat_wetland => "mocsarak vagy vizes élőhelyek";
+  @override
+  String get product_restore_purchases => "Vásárlás visszaállítása";
   @override
   String get feedback_title => "Hogyan járulhat hozzá";
   @override
@@ -3616,6 +3637,8 @@ class $uk extends S {
   @override
   String get habitat_wetland => "водно-болотні угіддя";
   @override
+  String get product_restore_purchases => "Відновити покупки";
+  @override
   String get feedback_title => "Як зробити внесок";
   @override
   String get toxicity2 => "злегка отруйна рослина";
@@ -3942,6 +3965,8 @@ class $sk extends S {
   @override
   String get habitat_wetland => "mokrade a močiare";
   @override
+  String get product_restore_purchases => "Obnoviť nákupy";
+  @override
   String get feedback_title => "Ako prispieť";
   @override
   String get toxicity2 => "mierne jedovatá rastlina";
@@ -4261,6 +4286,8 @@ class $sl extends S {
   String get enhancements => "Dodatki";
   @override
   String get habitat_wetland => "močvirje ali mokrišča";
+  @override
+  String get product_restore_purchases => "Obnovi nakup";
   @override
   String get feedback_title => "Kako prispevati";
   @override
@@ -4588,6 +4615,8 @@ class $id extends S {
   @override
   String get habitat_wetland => "lahan basah";
   @override
+  String get product_restore_purchases => "Mengembalikan pembelian";
+  @override
   String get feedback_title => "Bagaimana cara berkontribusi";
   @override
   String get toxicity2 => "sedikit beracun tanaman";
@@ -4914,6 +4943,8 @@ class $sr extends S {
   @override
   String get habitat_wetland => "мочварама";
   @override
+  String get product_restore_purchases => "Враћање куповине";
+  @override
   String get feedback_title => "Како доприносити";
   @override
   String get toxicity2 => "благо отровна биљка";
@@ -5239,6 +5270,8 @@ class $sv extends S {
   String get enhancements => "Förbättringar";
   @override
   String get habitat_wetland => "hedar eller våtmarker";
+  @override
+  String get product_restore_purchases => "Återställa köp";
   @override
   String get feedback_title => "Hur man bidrar";
   @override
@@ -5570,6 +5603,8 @@ class $it extends S {
   @override
   String get habitat_wetland => "brughiere o zone umide";
   @override
+  String get product_restore_purchases => "Ripristinare gli acquisti";
+  @override
   String get feedback_title => "Come contribuire";
   @override
   String get toxicity2 => "pianta poco velenosa";
@@ -5895,6 +5930,8 @@ class $es extends S {
   String get enhancements => "Mejoras";
   @override
   String get habitat_wetland => "páramo o pantano";
+  @override
+  String get product_restore_purchases => "Restaurar las compras";
   @override
   String get feedback_title => "Cómo contribuir";
   @override
@@ -6222,6 +6259,8 @@ class $et extends S {
   @override
   String get habitat_wetland => "moorlandi või märgala";
   @override
+  String get product_restore_purchases => "Ostude taastamine";
+  @override
   String get feedback_title => "Kuidas aidata";
   @override
   String get toxicity2 => "veidi mürgine taim";
@@ -6547,6 +6586,8 @@ class $cs extends S {
   String get enhancements => "Vylepšení";
   @override
   String get habitat_wetland => "mokřady a bažiny";
+  @override
+  String get product_restore_purchases => "Obnovit nákupy";
   @override
   String get feedback_title => "Jak přispět";
   @override
@@ -6874,6 +6915,8 @@ class $ar extends S {
   @override
   String get habitat_wetland => "مستنقعات أو أراضي الرطبة";
   @override
+  String get product_restore_purchases => "استعادة المشتريات";
+  @override
   String get feedback_title => "كيف تساهم";
   @override
   String get toxicity2 => "نبات سام قليلا";
@@ -7200,6 +7243,8 @@ class $pa extends S {
   @override
   String get habitat_wetland => "ਪਹਾੜਾਂ ਜਾਂ ਝੂਲਿਆਂ";
   @override
+  String get product_restore_purchases => "ਖ਼ਰੀਦਾਂ ਨੂੰ ਰੀਸਟੋਰ ਕਰੋ";
+  @override
   String get feedback_title => "ਰੁੱਖ ਜਾਂ ਬੂਟੇ";
   @override
   String get toxicity2 => "ਥੋੜ੍ਹਾ ਜ਼ਹਿਰੀਲਾ ਪੌਦਾ";
@@ -7525,6 +7570,8 @@ class $nb extends S {
   String get enhancements => "Forbedringer";
   @override
   String get habitat_wetland => "heiene eller våtmark";
+  @override
+  String get product_restore_purchases => "Gjenopprette kjøp";
   @override
   String get feedback_title => "Hvordan bidra";
   @override
@@ -7864,6 +7911,8 @@ class $ja extends S {
   @override
   String get habitat_wetland => "ムーア、沼地、ボグ、フェン";
   @override
+  String get product_restore_purchases => "購入を復元";
+  @override
   String get feedback_title => "貢献する方法";
   @override
   String get toxicity2 => "わずかに有毒な植物";
@@ -8190,6 +8239,8 @@ class $fa extends S {
   @override
   String get habitat_wetland => "باتلاق یا تالاب";
   @override
+  String get product_restore_purchases => "بازگرداندن خرید";
+  @override
   String get toxicity2 => "گیاه کمی سمی است";
   @override
   String get toxicity1 => "گیاه سمی";
@@ -8512,6 +8563,8 @@ class $pl extends S {
   @override
   String get habitat_wetland => "Wrzosowiska lub tereny podmokłe";
   @override
+  String get product_restore_purchases => "Przywróć zakupy";
+  @override
   String get feedback_title => "Jak wnieść wkład?";
   @override
   String get toxicity2 => "Roślina umiarkowanie trująca";
@@ -8833,6 +8886,8 @@ class $da extends S {
   String get enhancements => "Forbedringer";
   @override
   String get habitat_wetland => "heder eller vådområder";
+  @override
+  String get product_restore_purchases => "Genoprette indkøb";
   @override
   String get feedback_title => "Hvordan bidrage";
   @override
@@ -9157,6 +9212,8 @@ class $he extends S {
   String get enhancements => "שיפורים";
   @override
   String get habitat_wetland => "מורלנדס או ביצות";
+  @override
+  String get product_restore_purchases => "לשחזר רכישות";
   @override
   String get feedback_title => "כיצד לתרום";
   @override
@@ -9484,6 +9541,8 @@ class $ro extends S {
   @override
   String get habitat_wetland => "zonele umede";
   @override
+  String get product_restore_purchases => "Restaurați achizițiile";
+  @override
   String get feedback_title => "Cum să contribuiți";
   @override
   String get toxicity2 => "plantă ușor otrăvitoare";
@@ -9809,6 +9868,8 @@ class $nl extends S {
   String get enhancements => "Verbeteringen";
   @override
   String get habitat_wetland => "heidevelden of moerassen";
+  @override
+  String get product_restore_purchases => "Herstel aankopen";
   @override
   String get feedback_title => "Hoe u kunt bijdragen";
   @override
