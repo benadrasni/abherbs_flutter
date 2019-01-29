@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +53,16 @@ void launchURL(String url) async {
   } else {
     throw 'Could not launch $url';
   }
+}
+
+Future<void> launchURLF(String url) {
+  return canLaunch(url).then((value) {
+    if (value) {
+      return launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  });
 }
 
 String getTaxonLabel(BuildContext context, String taxon) {

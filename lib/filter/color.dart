@@ -130,8 +130,8 @@ class _ColorState extends State<Color> {
   @override
   Widget build(BuildContext context) {
     var mainContext = context;
-    var widgets = <Widget>[];
-    widgets.add(Container(
+    var _widgets = <Widget>[];
+    _widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: Row(
         children: [
@@ -160,7 +160,7 @@ class _ColorState extends State<Color> {
         ],
       ),
     ));
-    widgets.add(Container(
+    _widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -190,7 +190,7 @@ class _ColorState extends State<Color> {
         ],
       ),
     ));
-    widgets.add(Container(
+    _widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: FlatButton(
         child: Image(
@@ -201,7 +201,7 @@ class _ColorState extends State<Color> {
         },
       ),
     ));
-    widgets.add(Container(
+    _widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
       child: Text(S.of(context).color_message,
         textAlign: TextAlign.center,
@@ -211,7 +211,7 @@ class _ColorState extends State<Color> {
       ),
     ));
 
-    widgets.add(FutureBuilder<String>(
+    _widgets.add(FutureBuilder<String>(
         future: _rateStateF,
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == ConnectionState.done && snapshot.data == rateStateShould) {
@@ -284,7 +284,7 @@ class _ColorState extends State<Color> {
           ),
           ListView(
             padding: EdgeInsets.all(5.0),
-            children: widgets,
+            children: _widgets,
           ),
         ],
       ),

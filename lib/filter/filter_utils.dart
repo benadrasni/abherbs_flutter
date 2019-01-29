@@ -53,6 +53,21 @@ MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Functio
   return route;
 }
 
+Widget getFirstFilterPage(void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
+  String nextFilterAttribute = _getNextFilterAttribute(filter);
+
+  switch (nextFilterAttribute) {
+    case filterColor:
+      return Color(onChangeLanguage, onBuyProduct, filter);
+    case filterHabitat:
+      return Habitat(onChangeLanguage, onBuyProduct, filter);
+    case filterPetal:
+      return Petal(onChangeLanguage, onBuyProduct, filter);
+    case filterDistribution:
+      return Distribution(onChangeLanguage, onBuyProduct, filter);
+  }
+}
+
 Image getFilterLeading(context, filterAttribute) {
   switch (filterAttribute) {
     case filterColor:
