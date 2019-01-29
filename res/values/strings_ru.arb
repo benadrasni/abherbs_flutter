@@ -1,9 +1,16 @@
 {
   "legend": "Легенда",
+  "enhancements": "Улучшения",
   "settings": "Устройства",
   "feedback": "Отправить отзыв",
   "about": "О приложении",
   "help": "Cправка",
+
+  "product_restore_purchases": "Восстановить покупки",
+  "product_no_ads_title": "Без нежелательной рекламы",
+  "product_no_ads_description": "Приложение не будет показывать рекламный баннер внизу экрана.",
+  "product_purchase": "Покупать",
+  "product_purchased": "Купленный",
 
   "toxicity1": "ядовитое растение",
   "toxicity2": "слегка ядовитое растение",

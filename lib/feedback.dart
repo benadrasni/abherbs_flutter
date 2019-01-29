@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
@@ -11,17 +12,6 @@ class FeedbackScreen extends StatelessWidget {
     TextStyle feedbackTextStyle = TextStyle(
       fontSize: 18.0,
     );
-
-//    AdmobInterstitial interstitialAd = AdmobInterstitial(
-//      adUnitId: interstitialAdUnitId,
-//      listener: (AdmobAdEvent event, Map<String, dynamic> args) {},
-//    );
-//    interstitialAd.load();
-//
-//    AdmobReward rewardAd = AdmobReward(
-//        adUnitId: rewardAdUnitId,
-//        listener: (AdmobAdEvent event, Map<String, dynamic> args) {});
-//    rewardAd.load();
 
     Locale myLocale = Localizations.localeOf(context);
     return Scaffold(
@@ -176,55 +166,43 @@ class FeedbackScreen extends StatelessWidget {
             ]),
           ),
         ),
-//        Card(
-//          child: Container(
-//            padding: EdgeInsets.all(10.0),
-//            child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-//              Text(
-//                S.of(context).feedback_run_ads,
-//                style: feedbackTextStyle,
-//                textAlign: TextAlign.center,
-//              ),
-//              Container(
-//                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-//                child: Row(
-//                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                  children: [
-//                    Image(
-//                      image: AssetImage('res/images/admob.png'),
-//                      width: 50.0,
-//                      height: 50.0,
-//                    ),
-//                  ],
-//                ),
-//              ),
-//              RaisedButton(
-//                onPressed: () async {
-//                  if (await interstitialAd.isLoaded) {
-//                    interstitialAd.show();
-//                  } else {
-//                    key.currentState.showSnackBar(SnackBar(
-//                      content: Text(S.of(context).snack_loading_ad),
-//                    ));
-//                  }
-//                },
-//                child: Text(S.of(context).feedback_run_ads_fullscreen),
-//              ),
-//              RaisedButton(
-//                onPressed: () async {
-//                  if (await rewardAd.isLoaded) {
-//                    rewardAd.show();
-//                  } else {
-//                    key.currentState.showSnackBar(SnackBar(
-//                      content: Text(S.of(context).snack_loading_ad),
-//                    ));
-//                  }
-//                },
-//                child: Text(S.of(context).feedback_run_ads_video),
-//              ),
-//            ]),
-//          ),
-//        ),
+        Card(
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Text(
+                S.of(context).feedback_run_ads,
+                style: feedbackTextStyle,
+                textAlign: TextAlign.center,
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Image(
+                      image: AssetImage('res/images/admob.png'),
+                      width: 50.0,
+                      height: 50.0,
+                    ),
+                  ],
+                ),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Ads.showInterstitialAd();
+                },
+                child: Text(S.of(context).feedback_run_ads_fullscreen),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Ads.showRewardedVideoAd();
+                },
+                child: Text(S.of(context).feedback_run_ads_video),
+              ),
+            ]),
+          ),
+        ),
       ]),
     );
   }

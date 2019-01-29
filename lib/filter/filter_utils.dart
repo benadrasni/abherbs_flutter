@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
@@ -22,25 +24,25 @@ String getFilterKey(Map<String, String> filter) {
   }).join("_");
 }
 
-MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Function(String) onChangeLanguage, Map<String, String> filter) {
+MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
   var route;
   String nextFilterAttribute = _getNextFilterAttribute(filter);
 
   switch (nextFilterAttribute) {
     case filterColor:
-      route = MaterialPageRoute(builder: (context) => Color(onChangeLanguage, filter));
+      route = MaterialPageRoute(builder: (context) => Color(onChangeLanguage, onBuyProduct, filter));
       break;
     case filterHabitat:
-      route = MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, filter));
+      route = MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, onBuyProduct, filter));
       break;
     case filterPetal:
-      route = MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, filter));
+      route = MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, onBuyProduct, filter));
       break;
     case filterDistribution:
-      route = MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, filter));
+      route = MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, onBuyProduct, filter));
       break;
     default:
-      route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, filter));
+      route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, filter));
   }
   if (nextFilterAttribute != null) {
     if (filterRoutes[nextFilterAttribute] != null) {
@@ -49,6 +51,21 @@ MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Functio
     filterRoutes[nextFilterAttribute] = route;
   }
   return route;
+}
+
+Widget getFirstFilterPage(void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
+  String nextFilterAttribute = _getNextFilterAttribute(filter);
+
+  switch (nextFilterAttribute) {
+    case filterColor:
+      return Color(onChangeLanguage, onBuyProduct, filter);
+    case filterHabitat:
+      return Habitat(onChangeLanguage, onBuyProduct, filter);
+    case filterPetal:
+      return Petal(onChangeLanguage, onBuyProduct, filter);
+    case filterDistribution:
+      return Distribution(onChangeLanguage, onBuyProduct, filter);
+  }
 }
 
 Image getFilterLeading(context, filterAttribute) {

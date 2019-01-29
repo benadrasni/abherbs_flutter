@@ -1,9 +1,16 @@
 {
   "legend": "Jelmagyarázat",
+  "enhancements": "Fejlesztések",
   "settings": "Beállítások",
   "feedback": "Visszajelzés küldése / Hozzájárulás",
   "about": "Az alkalmazásról",
   "help": "Súgó",
+
+  "product_restore_purchases": "Vásárlás visszaállítása",
+  "product_no_ads_title": "Nem kívánt reklám",
+  "product_no_ads_description": "Az alkalmazás nem jeleníti meg a hirdetés bannerjét a képernyő alján.",
+  "product_purchase": "Vásárol",
+  "product_purchased": "Vásárolt",
 
   "toxicity1": "mérgező növény",
   "toxicity2": "enyhén mérgező növény",

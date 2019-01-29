@@ -1,9 +1,16 @@
 {
   "legend": "किंवदंती",
+  "enhancements": "संवर्द्धन",
   "settings": "सेटिंग्स",
   "feedback": "प्रतिक्रिया",
   "about": "के बारे में",
   "help": "मदद",
+
+  "product_restore_purchases": "खरीदारी वापस लौटाएं",
+  "product_no_ads_title": "कोई अवांछित विज्ञापन नहीं",
+  "product_no_ads_description": "एप्लिकेशन स्क्रीन के नीचे विज्ञापन बैनर नहीं दिखाएगा।",
+  "product_purchase": "खरीद फरोख्त",
+  "product_purchased": "खरीदी",
 
   "toxicity1": "जहरीला पौधा",
   "toxicity2": "थोड़ा जहरीला पौधा",
