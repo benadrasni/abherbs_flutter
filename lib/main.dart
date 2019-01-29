@@ -155,9 +155,9 @@ class _AppState extends State<App> {
           case 'browse':
             String uri = _notificationData['uri'];
             if (uri != null) {
-              return launchURLF(uri).then((_) {
-                return _getFirstFilterPage();
-              });
+              launchURLF(uri);
+              _notificationData = null;
+              return _getFirstFilterPage();
             }
             return _getFirstFilterPage();
           case 'list':
