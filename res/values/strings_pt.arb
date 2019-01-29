@@ -1,10 +1,17 @@
 {
   "legend": "Legenda",
+  "enhancements": "Melhorias",
   "settings": "Configurações",
   "feedback": "Comentários",
   "about": "Sobre a aplicação",
   "help": "Ajuda",
-  
+
+  "product_restore_purchases": "Restaurar compras",
+  "product_no_ads_title": "Nenhum anúncio indesejado",
+  "product_no_ads_description": "Aplicativo não mostrará banner de propaganda na parte inferior da tela.",
+  "product_purchase": "Compra",
+  "product_purchased": "Comprado",
+
   "toxicity1": "planta venenosa",
   "toxicity2": "planta ligeiramente venenosa",
 

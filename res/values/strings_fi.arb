@@ -1,9 +1,16 @@
 {
   "legend": "Legenda",
+  "enhancements": "Parannukset",
   "settings": "Asetukset",
   "feedback": "Palaute / Panos",
   "about": "Tietoja sovellus",
   "help": "Ohje",
+
+  "product_restore_purchases": "Palauttaa ostot",
+  "product_no_ads_title": "Ei ei-toivottua mainosta",
+  "product_no_ads_description": "Sovellus ei näytä ruudun alareunassa mainosbanneria.",
+  "product_purchase": "Ostaa",
+  "product_purchased": "Osti",
 
   "toxicity1": "myrkyllinen kasvi",
   "toxicity2": "lievästi myrkyllinen kasvi",

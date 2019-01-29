@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
@@ -13,8 +16,9 @@ final countsReference = FirebaseDatabase.instance.reference().child(firebaseCoun
 
 class Petal extends StatefulWidget {
   final void Function(String) onChangeLanguage;
+  final void Function() onBuyProduct;
   final Map<String, String> filter;
-  Petal(this.onChangeLanguage, this.filter);
+  Petal(this.onChangeLanguage, this.onBuyProduct, this.filter);
 
   @override
   _PetalState createState() => _PetalState();
@@ -32,7 +36,9 @@ class _PetalState extends State<Petal> {
 
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (snapshot.value != null && snapshot.value > 0) {
-        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
+          Ads.showBannerAd(this);
+        });
       } else {
         _key.currentState.showSnackBar(SnackBar(
           content: Text(S.of(context).snack_no_flowers),
@@ -56,6 +62,8 @@ class _PetalState extends State<Petal> {
     _key = new GlobalKey<ScaffoldState>();
 
     _setCount();
+
+    Ads.showBannerAd(this);
   }
 
   @override
@@ -77,7 +85,7 @@ class _PetalState extends State<Petal> {
       appBar: AppBar(
         title: Text(S.of(context).filter_petal),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
+      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -200,15 +208,15 @@ class _PetalState extends State<Petal> {
           var nextFilterAttribute;
           switch (index) {
             case 0:
-              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               nextFilterAttribute = filterColor;
               break;
             case 1:
-              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               nextFilterAttribute = filterHabitat;
               break;
             case 3:
-              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               nextFilterAttribute = filterDistribution;
               break;
           }
@@ -220,8 +228,9 @@ class _PetalState extends State<Petal> {
         },
       ),
       floatingActionButton: new Container(
-        height: 70.0,
+        height: 70.0 + getFABPadding(),
         width: 70.0,
+        padding: EdgeInsets.only(bottom: getFABPadding()),
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(
@@ -242,8 +251,10 @@ class _PetalState extends State<Petal> {
                         onPressed: () {
                           Navigator.push(
                             mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
-                          );
+                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                          ).then((value) {
+                            Ads.showBannerAd(this);
+                          });
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
                       ),

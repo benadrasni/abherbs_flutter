@@ -1,9 +1,16 @@
 {
   "legend": "Leģenda",
-  "settings": "Nustatymai",
-  "feedback": "Grįžtamasis ryšys / Indėlis",
-  "about": "Apie paraišką",
-  "help": "Padėkite",
+  "enhancements": "Uzlabojumi",
+  "settings": "Iestatījumi",
+  "feedback": "Atsauksmes",
+  "about": "Par lietojumprogrammu",
+  "help": "Palīdzība",
+
+  "product_restore_purchases": "Atjaunot pirkumus",
+  "product_no_ads_title": "Nav nevēlamas reklāmas",
+  "product_no_ads_description": "Pieteikums neparādīs reklāmas reklāmkarogu ekrāna apakšā.",
+  "product_purchase": "Pirkt",
+  "product_purchased": "Legādāts",
 
   "toxicity1": "indīgs augs",
   "toxicity2": "nedaudz indīgs augs",

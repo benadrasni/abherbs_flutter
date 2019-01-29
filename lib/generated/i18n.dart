@@ -46,6 +46,7 @@ class S implements WidgetsLocalizations {
   String get eastern_asia => "Eastern Asia";
   String get eastern_canada => "Eastern Canada";
   String get eastern_europe => "Eastern Europe";
+  String get enhancements => "Enhancements";
   String get europe => "Europe";
   String get feedback => "Feedback";
   String get feedback_buy_extended => "You can buy extended (+) version with additional functionality like offline mode, search in names, search in taxonomy, observations and configurable filter.";
@@ -121,6 +122,11 @@ class S implements WidgetsLocalizations {
   String get plant_toxicity => "Toxicity";
   String get plant_trivia => "Trivia";
   String get pref_language => "Preferred language";
+  String get product_no_ads_description => "Application won't show advertisement banner at the bottom of the screen.";
+  String get product_no_ads_title => "No unwanted advertisement";
+  String get product_purchase => "Purchase";
+  String get product_purchased => "Purchased";
+  String get product_restore_purchases => "Restore Purchases";
   String get rate => "Review";
   String get rate_later => "Later";
   String get rate_never => "Never";
@@ -193,6 +199,8 @@ class $de extends S {
   @override
   String get about => "Über";
   @override
+  String get product_no_ads_description => "Die Anwendung zeigt kein Werbebanner am unteren Bildschirmrand.";
+  @override
   String get western_canada => "Westkanada";
   @override
   String get northern_america => "Nordamerika";
@@ -258,6 +266,8 @@ class $de extends S {
   String get feedback_run_ads => "Sie können Werbung im Vollbildmodus anzeigen oder Videowerbung ansehen, um die Weiterentwicklung und Datenbankverbesserung zu unterstützen.";
   @override
   String get habitat_garden => "Gärten oder Felder";
+  @override
+  String get product_purchase => "Kaufen";
   @override
   String get russian_far_east => "Russischer Ferner Osten";
   @override
@@ -345,13 +355,19 @@ class $de extends S {
   @override
   String get plant_trivia => "Wissenswertes";
   @override
+  String get product_purchased => "Gekauft";
+  @override
   String get taxonomy_cladus => "(ohne Rang)";
   @override
   String get plant_herbalism => "Pflanzenheilkunde";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Verbesserungen";
+  @override
   String get habitat_wetland => "Moorlandschaft oder Feuchtgebiete";
+  @override
+  String get product_restore_purchases => "Käufe wiederherstellen";
   @override
   String get feedback_title => "Wie kann ich dazu beitragen?";
   @override
@@ -483,6 +499,8 @@ class $de extends S {
   @override
   String get china => "China";
   @override
+  String get product_no_ads_title => "Keine unerwünschte Werbung";
+  @override
   String get petal_zygomorphic => "dorsiventrale";
   @override
   String get taxonomy_genus => "Gattung";
@@ -508,6 +526,8 @@ class $hi extends S {
   String get snack_copy => "क्लिपबोर्ड पर नकल";
   @override
   String get about => "के बारे में";
+  @override
+  String get product_no_ads_description => "एप्लिकेशन स्क्रीन के नीचे विज्ञापन बैनर नहीं दिखाएगा।";
   @override
   String get western_canada => "पश्चिमी कनाडा";
   @override
@@ -574,6 +594,8 @@ class $hi extends S {
   String get feedback_run_ads => "आप पूर्ण स्क्रीन विज्ञापन प्रदर्शित कर सकते हैं या वीडियो विज्ञापन देख सकते हैं ताकि आगे के विकास और डेटाबेस में वृद्धि हो सके।";
   @override
   String get habitat_garden => "पौधे का उदाहरण";
+  @override
+  String get product_purchase => "खरीद फरोख्त";
   @override
   String get russian_far_east => "रूसी सुदूर पूर्व";
   @override
@@ -661,13 +683,19 @@ class $hi extends S {
   @override
   String get plant_trivia => "सामान्य ज्ञान";
   @override
+  String get product_purchased => "खरीदी";
+  @override
   String get taxonomy_cladus => "(अश्रेणिकृत)";
   @override
   String get plant_herbalism => "जड़ी-बूटी चिकित्सा";
   @override
   String get plant_height_to => "तक";
   @override
+  String get enhancements => "संवर्द्धन";
+  @override
   String get habitat_wetland => "मोरलैंड्स या झीलों";
+  @override
+  String get product_restore_purchases => "खरीदारी वापस लौटाएं";
   @override
   String get feedback_title => "पेड़ या झाड़ियाँ";
   @override
@@ -799,6 +827,8 @@ class $hi extends S {
   @override
   String get china => "चीन";
   @override
+  String get product_no_ads_title => "कोई अवांछित विज्ञापन नहीं";
+  @override
   String get petal_zygomorphic => "अनियमित";
   @override
   String get taxonomy_genus => "जाति";
@@ -824,6 +854,8 @@ class $fi extends S {
   String get snack_copy => "Kopioitu leikepöydälle";
   @override
   String get about => "Tietoja sovellus";
+  @override
+  String get product_no_ads_description => "Sovellus ei näytä ruudun alareunassa mainosbanneria.";
   @override
   String get western_canada => "Länsi-Kanada";
   @override
@@ -890,6 +922,8 @@ class $fi extends S {
   String get feedback_run_ads => "Voit näyttää koko näytön mainoksen tai katsella videomainosta tukemaan edelleen kehitystä ja tietokannan parantamista.";
   @override
   String get habitat_garden => "puutarhoissa tai kenttiä";
+  @override
+  String get product_purchase => "Ostaa";
   @override
   String get russian_far_east => "Venäjän Kaukoidässä";
   @override
@@ -977,13 +1011,19 @@ class $fi extends S {
   @override
   String get plant_trivia => "Trivia";
   @override
+  String get product_purchased => "Osti";
+  @override
   String get taxonomy_cladus => "(kladi)";
   @override
   String get plant_herbalism => "Herbalismi";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Parannukset";
+  @override
   String get habitat_wetland => "nummimaista tai kosteikkojen";
+  @override
+  String get product_restore_purchases => "Palauttaa ostot";
   @override
   String get feedback_title => "Miten osallistua";
   @override
@@ -1115,6 +1155,8 @@ class $fi extends S {
   @override
   String get china => "Kiina";
   @override
+  String get product_no_ads_title => "Ei ei-toivottua mainosta";
+  @override
   String get petal_zygomorphic => "vastakohtainen";
   @override
   String get taxonomy_genus => "Suku";
@@ -1140,6 +1182,8 @@ class $ru extends S {
   String get snack_copy => "Скопировано в буфер обмена";
   @override
   String get about => "О приложении";
+  @override
+  String get product_no_ads_description => "Приложение не будет показывать рекламный баннер внизу экрана.";
   @override
   String get western_canada => "Западная Канада";
   @override
@@ -1206,6 +1250,8 @@ class $ru extends S {
   String get feedback_run_ads => "Вы можете отображать полноэкранную рекламу или смотреть видео-рекламу для поддержки дальнейшего развития и улучшения базы данных.";
   @override
   String get habitat_garden => "сады или поля";
+  @override
+  String get product_purchase => "Покупать";
   @override
   String get russian_far_east => "Российский Дальний Восток";
   @override
@@ -1293,13 +1339,19 @@ class $ru extends S {
   @override
   String get plant_trivia => "Пустяки";
   @override
+  String get product_purchased => "Купленный";
+  @override
   String get taxonomy_cladus => "(клада)";
   @override
   String get plant_herbalism => "Травничество";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Улучшения";
+  @override
   String get habitat_wetland => "водно-болотные угодья";
+  @override
+  String get product_restore_purchases => "Восстановить покупки";
   @override
   String get feedback_title => "Как внести свой вклад";
   @override
@@ -1431,6 +1483,8 @@ class $ru extends S {
   @override
   String get china => "Китай";
   @override
+  String get product_no_ads_title => "Без нежелательной рекламы";
+  @override
   String get petal_zygomorphic => "зигоморфный";
   @override
   String get taxonomy_genus => "Род";
@@ -1454,6 +1508,8 @@ class $pt extends S {
   String get snack_copy => "Copiado para a área de transferência";
   @override
   String get about => "Sobre a aplicação";
+  @override
+  String get product_no_ads_description => "Aplicativo não mostrará banner de propaganda na parte inferior da tela.";
   @override
   String get western_canada => "Canadá Ocidental";
   @override
@@ -1520,6 +1576,8 @@ class $pt extends S {
   String get feedback_run_ads => "Você pode exibir anúncios em tela cheia ou assistir a anúncios em vídeo para dar suporte a mais desenvolvimento e aprimoramento do banco de dados.";
   @override
   String get habitat_garden => "jardins e campos";
+  @override
+  String get product_purchase => "Compra";
   @override
   String get russian_far_east => "Extremo Oriente Russo";
   @override
@@ -1607,13 +1665,19 @@ class $pt extends S {
   @override
   String get plant_trivia => "Curiosidades";
   @override
+  String get product_purchased => "Comprado";
+  @override
   String get taxonomy_cladus => "(clado)";
   @override
   String get plant_herbalism => "Fitoterapia";
   @override
   String get plant_height_to => "a";
   @override
+  String get enhancements => "Melhorias";
+  @override
   String get habitat_wetland => "pântanos e zonas húmidas";
+  @override
+  String get product_restore_purchases => "Restaurar compras";
   @override
   String get feedback_title => "Como contribuir";
   @override
@@ -1741,6 +1805,8 @@ class $pt extends S {
   @override
   String get china => "China";
   @override
+  String get product_no_ads_title => "Nenhum anúncio indesejado";
+  @override
   String get petal_zygomorphic => "zigomorfo";
   @override
   String get taxonomy_genus => "género";
@@ -1764,6 +1830,8 @@ class $lt extends S {
   String get snack_copy => "Kopijuojama į iškarpinę";
   @override
   String get about => "Apie paraišką";
+  @override
+  String get product_no_ads_description => "Programos apačioje ekrano reklama nebus rodoma.";
   @override
   String get western_canada => "Vakarų Kanadoje";
   @override
@@ -1830,6 +1898,8 @@ class $lt extends S {
   String get feedback_run_ads => "Galite rodyti viso ekrano skelbimą arba žiūrėti vaizdo įrašo reklamą, kad palaikytumėte tolesnę plėtrą ir duomenų bazės tobulinimą.";
   @override
   String get habitat_garden => "sodai ar laukai";
+  @override
+  String get product_purchase => "Įsigyti";
   @override
   String get russian_far_east => "Rusijos Tolimuosiuose Rytuose";
   @override
@@ -1917,13 +1987,19 @@ class $lt extends S {
   @override
   String get plant_trivia => "Obuolys";
   @override
+  String get product_purchased => "Įgytinis";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_herbalism => "Žolininkystė";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Priedai";
+  @override
   String get habitat_wetland => "šlapžemės";
+  @override
+  String get product_restore_purchases => "Atkurti pirkimus";
   @override
   String get feedback_title => "Kaip prisidėti";
   @override
@@ -2055,6 +2131,8 @@ class $lt extends S {
   @override
   String get china => "Kinija";
   @override
+  String get product_no_ads_title => "Nėra nepageidaujamo skelbimo";
+  @override
   String get petal_zygomorphic => "nereguliarus";
   @override
   String get taxonomy_genus => "Gentis";
@@ -2080,6 +2158,8 @@ class $hr extends S {
   String get snack_copy => "Kopirano u međuspremnik";
   @override
   String get about => "O aplikaciji";
+  @override
+  String get product_no_ads_description => "Aplikacija neće prikazati oglasni banner na dnu zaslona.";
   @override
   String get western_canada => "Zapadna Kanada";
   @override
@@ -2146,6 +2226,8 @@ class $hr extends S {
   String get feedback_run_ads => "Možete prikazati oglas preko cijelog zaslona ili gledati video oglas kako biste podržali daljnji razvoj i poboljšanje baze podataka.";
   @override
   String get habitat_garden => "vrtovi ili polja";
+  @override
+  String get product_purchase => "Kupiti";
   @override
   String get russian_far_east => "Ruski Daleki Istok";
   @override
@@ -2233,13 +2315,19 @@ class $hr extends S {
   @override
   String get plant_trivia => "Trivijalnost";
   @override
+  String get product_purchased => "Kupljen";
+  @override
   String get taxonomy_cladus => "(Cladus)";
   @override
   String get plant_herbalism => "Travarstvo";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Poboljšanja";
+  @override
   String get habitat_wetland => "močvare";
+  @override
+  String get product_restore_purchases => "Vraćanje kupnje";
   @override
   String get feedback_title => "Kako pridonijeti";
   @override
@@ -2371,6 +2459,8 @@ class $hr extends S {
   @override
   String get china => "Kina";
   @override
+  String get product_no_ads_title => "Nema neželjenog oglasa";
+  @override
   String get taxonomy_genus => "Rod";
   @override
   String get papuasia => "Papuazija";
@@ -2393,7 +2483,9 @@ class $lv extends S {
   @override
   String get snack_copy => "Kopēts uz starpliktuvi";
   @override
-  String get about => "Apie paraišką";
+  String get about => "Par lietojumprogrammu";
+  @override
+  String get product_no_ads_description => "Pieteikums neparādīs reklāmas reklāmkarogu ekrāna apakšā.";
   @override
   String get western_canada => "Rietumu Kanāda";
   @override
@@ -2401,7 +2493,7 @@ class $lv extends S {
   @override
   String get western_indian_ocean => "Indijas okeāna rietumi";
   @override
-  String get feedback => "Grįžtamasis ryšys / Indėlis";
+  String get feedback => "Atsauksmes";
   @override
   String get southwestern_usa => "Dienvidrietumu ASV";
   @override
@@ -2460,6 +2552,8 @@ class $lv extends S {
   String get feedback_run_ads => "Jūs varat parādīt pilnekrāna reklāmu vai skatīties video reklāmu, lai atbalstītu turpmāku attīstību un datu bāzes uzlabošanu.";
   @override
   String get habitat_garden => "sodai ar laukai";
+  @override
+  String get product_purchase => "Pirkt";
   @override
   String get russian_far_east => "Krievu Tālajos Austrumos";
   @override
@@ -2533,7 +2627,7 @@ class $lv extends S {
   @override
   String get filter_color => "krāsu ziedi";
   @override
-  String get help => "Padėkite";
+  String get help => "Palīdzība";
   @override
   String get mexico => "Meksika";
   @override
@@ -2547,13 +2641,19 @@ class $lv extends S {
   @override
   String get plant_trivia => "Nieki";
   @override
+  String get product_purchased => "Legādāts";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_herbalism => "Herbalism";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Uzlabojumi";
+  @override
   String get habitat_wetland => "šlapžemės";
+  @override
+  String get product_restore_purchases => "Atjaunot pirkumus";
   @override
   String get feedback_title => "Kā piedalīties";
   @override
@@ -2569,7 +2669,7 @@ class $lv extends S {
   @override
   String get habitat_tree => "medžiai ar krūmai";
   @override
-  String get settings => "Nustatymai";
+  String get settings => "Iestatījumi";
   @override
   String get color_red => "raudona, rožinė";
   @override
@@ -2685,6 +2785,8 @@ class $lv extends S {
   @override
   String get china => "Ķīna";
   @override
+  String get product_no_ads_title => "Nav nevēlamas reklāmas";
+  @override
   String get petal_zygomorphic => "nereguliarus";
   @override
   String get taxonomy_genus => "Ģints";
@@ -2710,6 +2812,8 @@ class $fr extends S {
   String get snack_copy => "Copié dans le presse-papier";
   @override
   String get about => "À propos";
+  @override
+  String get product_no_ads_description => "L'application ne montre pas la bannière de publicité au bas de l'écran.";
   @override
   String get western_canada => "Ouest canadien";
   @override
@@ -2776,6 +2880,8 @@ class $fr extends S {
   String get feedback_run_ads => "Vous pouvez afficher une publicité en plein écran ou regarder une publicité vidéo pour prendre en charge le développement et l'amélioration de la base de données.";
   @override
   String get habitat_garden => "jardins ou champs";
+  @override
+  String get product_purchase => "Acheter";
   @override
   String get russian_far_east => "Extrême-Orient russe";
   @override
@@ -2863,13 +2969,19 @@ class $fr extends S {
   @override
   String get plant_trivia => "Bagatelles";
   @override
+  String get product_purchased => "Acheté(e)";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_herbalism => "Herboristerie";
   @override
   String get plant_height_to => "et";
   @override
+  String get enhancements => "Améliorations";
+  @override
   String get habitat_wetland => "bruyères ou zones humides";
+  @override
+  String get product_restore_purchases => "Restaurer les achats";
   @override
   String get feedback_title => "Contribution";
   @override
@@ -3001,6 +3113,8 @@ class $fr extends S {
   @override
   String get china => "Chine";
   @override
+  String get product_no_ads_title => "Pas de publicité indésirable";
+  @override
   String get petal_zygomorphic => "zygomorphie";
   @override
   String get taxonomy_genus => "Genre";
@@ -3026,6 +3140,8 @@ class $hu extends S {
   String get snack_copy => "A vágólapra másolt";
   @override
   String get about => "Az alkalmazásról";
+  @override
+  String get product_no_ads_description => "Az alkalmazás nem jeleníti meg a hirdetés bannerjét a képernyő alján.";
   @override
   String get western_canada => "Nyugat-Kanada";
   @override
@@ -3092,6 +3208,8 @@ class $hu extends S {
   String get feedback_run_ads => "Megjelenítheti a teljes képernyős hirdetést vagy a videohirdetést, hogy támogassa a további fejlesztéseket és az adatbázis-fejlesztést.";
   @override
   String get habitat_garden => "kertek vagy mezők";
+  @override
+  String get product_purchase => "Vásárol";
   @override
   String get russian_far_east => "Orosz távol-keleten";
   @override
@@ -3179,13 +3297,19 @@ class $hu extends S {
   @override
   String get plant_trivia => "Apróságok";
   @override
+  String get product_purchased => "Vásárolt";
+  @override
   String get taxonomy_cladus => "Csoport";
   @override
   String get plant_herbalism => "Gyógynövények";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Fejlesztések";
+  @override
   String get habitat_wetland => "mocsarak vagy vizes élőhelyek";
+  @override
+  String get product_restore_purchases => "Vásárlás visszaállítása";
   @override
   String get feedback_title => "Hogyan járulhat hozzá";
   @override
@@ -3317,6 +3441,8 @@ class $hu extends S {
   @override
   String get china => "Kína";
   @override
+  String get product_no_ads_title => "Nem kívánt reklám";
+  @override
   String get petal_zygomorphic => "kétoldali";
   @override
   String get taxonomy_genus => "Nemzetség";
@@ -3342,6 +3468,8 @@ class $uk extends S {
   String get snack_copy => "Копіюється в буфер обміну";
   @override
   String get about => "Про додатку";
+  @override
+  String get product_no_ads_description => "Програма не покаже рекламний банер внизу екрана.";
   @override
   String get western_canada => "Західна Канада";
   @override
@@ -3408,6 +3536,8 @@ class $uk extends S {
   String get feedback_run_ads => "Ви можете відображати повноекранну рекламу або переглядати відеооб'яву для підтримки подальшого розвитку та розширення бази даних.";
   @override
   String get habitat_garden => "сади або поля";
+  @override
+  String get product_purchase => "Придбати";
   @override
   String get russian_far_east => "Російський Далекий Схід";
   @override
@@ -3495,13 +3625,19 @@ class $uk extends S {
   @override
   String get plant_trivia => "Дрібниці";
   @override
+  String get product_purchased => "Придбано";
+  @override
   String get taxonomy_cladus => "(клада)";
   @override
   String get plant_herbalism => "Травнічество";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Покращення";
+  @override
   String get habitat_wetland => "водно-болотні угіддя";
+  @override
+  String get product_restore_purchases => "Відновити покупки";
   @override
   String get feedback_title => "Як зробити внесок";
   @override
@@ -3633,6 +3769,8 @@ class $uk extends S {
   @override
   String get china => "Китай";
   @override
+  String get product_no_ads_title => "Немає небажаної реклами";
+  @override
   String get petal_zygomorphic => "зигоморфной";
   @override
   String get taxonomy_genus => "Рід";
@@ -3658,6 +3796,8 @@ class $sk extends S {
   String get snack_copy => "Skopírované do schránky";
   @override
   String get about => "O aplikácii";
+  @override
+  String get product_no_ads_description => "Aplikácia nezobrazí reklamný banner v spodnej časti obrazovky.";
   @override
   String get western_canada => "Západná Kanada";
   @override
@@ -3724,6 +3864,8 @@ class $sk extends S {
   String get feedback_run_ads => "Môžete si pozrieť videoreklamu alebo nechať zobraziť reklamu na celú obrazovku a podporiť tak ďalší vývoj a rozširovanie databázy.";
   @override
   String get habitat_garden => "polia a záhrady";
+  @override
+  String get product_purchase => "Kúpiť";
   @override
   String get russian_far_east => "Ruský ďaleký východ";
   @override
@@ -3811,13 +3953,19 @@ class $sk extends S {
   @override
   String get plant_trivia => "Zaujímavosti";
   @override
+  String get product_purchased => "Kúpené";
+  @override
   String get taxonomy_cladus => "Cladus";
   @override
   String get plant_herbalism => "Bylinkárstvo";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Vylepšenia";
+  @override
   String get habitat_wetland => "mokrade a močiare";
+  @override
+  String get product_restore_purchases => "Obnoviť nákupy";
   @override
   String get feedback_title => "Ako prispieť";
   @override
@@ -3943,6 +4091,8 @@ class $sk extends S {
   @override
   String get china => "Čína";
   @override
+  String get product_no_ads_title => "Žiadna nežiadúca reklama";
+  @override
   String get petal_zygomorphic => "nepravidelný";
   @override
   String get taxonomy_genus => "rod";
@@ -3968,6 +4118,8 @@ class $sl extends S {
   String get snack_copy => "Kopirano v odložišče";
   @override
   String get about => "O aplikaciji";
+  @override
+  String get product_no_ads_description => "Aplikacija ne bo prikazala oglasne pasice na dnu zaslona.";
   @override
   String get western_canada => "Zahodna Kanada";
   @override
@@ -4034,6 +4186,8 @@ class $sl extends S {
   String get feedback_run_ads => "Lahko prikažete celozaslonski oglas ali si ogledate video oglas, ki podpira nadaljnji razvoj in izboljšavo baze podatkov.";
   @override
   String get habitat_garden => "vrtov ali polja";
+  @override
+  String get product_purchase => "Kupiti";
   @override
   String get russian_far_east => "Ruski daleč vzhod";
   @override
@@ -4121,13 +4275,19 @@ class $sl extends S {
   @override
   String get plant_trivia => "Trivia";
   @override
+  String get product_purchased => "Kupljeno";
+  @override
   String get taxonomy_cladus => "(klad)";
   @override
   String get plant_herbalism => "Zeliščarstvo";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Dodatki";
+  @override
   String get habitat_wetland => "močvirje ali mokrišča";
+  @override
+  String get product_restore_purchases => "Obnovi nakup";
   @override
   String get feedback_title => "Kako prispevati";
   @override
@@ -4259,6 +4419,8 @@ class $sl extends S {
   @override
   String get china => "Kitajska";
   @override
+  String get product_no_ads_title => "Brez neželenega oglasa";
+  @override
   String get petal_zygomorphic => "zigomorfna";
   @override
   String get taxonomy_genus => "Rod";
@@ -4284,6 +4446,8 @@ class $id extends S {
   String get snack_copy => "Disalin ke Clipboard";
   @override
   String get about => "Tentang";
+  @override
+  String get product_no_ads_description => "Aplikasi tidak akan menampilkan spanduk iklan di bagian bawah layar.";
   @override
   String get western_canada => "Kanada Barat";
   @override
@@ -4350,6 +4514,8 @@ class $id extends S {
   String get feedback_run_ads => "Anda dapat menampilkan iklan layar penuh atau menonton iklan video untuk mendukung pengembangan lebih lanjut dan peningkatan basis data.";
   @override
   String get habitat_garden => "kebun atau ladang";
+  @override
+  String get product_purchase => "Membeli";
   @override
   String get russian_far_east => "Timur Jauh Rusia";
   @override
@@ -4437,13 +4603,19 @@ class $id extends S {
   @override
   String get plant_trivia => "Trivia";
   @override
+  String get product_purchased => "Dibeli";
+  @override
   String get taxonomy_cladus => "(tidak termasuk)";
   @override
   String get plant_herbalism => "Herbalism";
   @override
   String get plant_height_to => "sampai";
   @override
+  String get enhancements => "Perangkat tambahan";
+  @override
   String get habitat_wetland => "lahan basah";
+  @override
+  String get product_restore_purchases => "Mengembalikan pembelian";
   @override
   String get feedback_title => "Bagaimana cara berkontribusi";
   @override
@@ -4575,6 +4747,8 @@ class $id extends S {
   @override
   String get china => "Cina";
   @override
+  String get product_no_ads_title => "Tidak ada iklan yang tidak diinginkan";
+  @override
   String get petal_zygomorphic => "tidak beraturan";
   @override
   String get taxonomy_genus => "Genera";
@@ -4600,6 +4774,8 @@ class $sr extends S {
   String get snack_copy => "Копирано у Цлипбоард";
   @override
   String get about => "О апликацији";
+  @override
+  String get product_no_ads_description => "Апликација не приказује рекламни баннер на дну екрана.";
   @override
   String get western_canada => "Западна Канада";
   @override
@@ -4666,6 +4842,8 @@ class $sr extends S {
   String get feedback_run_ads => "Можете приказати оглас преко целог екрана или гледати видео рекламу како бисте подржали даљи развој и побољшање базе података.";
   @override
   String get habitat_garden => "баште или поља";
+  @override
+  String get product_purchase => "Купити";
   @override
   String get russian_far_east => "Руски Далеки Исток";
   @override
@@ -4753,13 +4931,19 @@ class $sr extends S {
   @override
   String get plant_trivia => "Тривијалност";
   @override
+  String get product_purchased => "Купио";
+  @override
   String get taxonomy_cladus => "(клада)";
   @override
   String get plant_herbalism => "Траварство";
   @override
   String get plant_height_to => "до";
   @override
+  String get enhancements => "Побољшања";
+  @override
   String get habitat_wetland => "мочварама";
+  @override
+  String get product_restore_purchases => "Враћање куповине";
   @override
   String get feedback_title => "Како доприносити";
   @override
@@ -4891,6 +5075,8 @@ class $sr extends S {
   @override
   String get china => "Кина";
   @override
+  String get product_no_ads_title => "Нема нежељених реклама";
+  @override
   String get petal_zygomorphic => "зигоморфан";
   @override
   String get taxonomy_genus => "род";
@@ -4916,6 +5102,8 @@ class $sv extends S {
   String get snack_copy => "Kopieras till Urklipp";
   @override
   String get about => "Om ansökan";
+  @override
+  String get product_no_ads_description => "Applikationen visar inte annonsbannern längst ner på skärmen.";
   @override
   String get western_canada => "Västra Kanada";
   @override
@@ -4982,6 +5170,8 @@ class $sv extends S {
   String get feedback_run_ads => "Du kan visa helskärmsannons eller titta på videoannonsering för att stödja ytterligare utveckling och databasförbättring.";
   @override
   String get habitat_garden => "trädgårdar eller fält";
+  @override
+  String get product_purchase => "Köpa";
   @override
   String get russian_far_east => "Ryska Fjärran Östern";
   @override
@@ -5069,13 +5259,19 @@ class $sv extends S {
   @override
   String get plant_trivia => "Trivia";
   @override
+  String get product_purchased => "Köpt";
+  @override
   String get taxonomy_cladus => "(klad)";
   @override
   String get plant_herbalism => "Medicinalväxt";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Förbättringar";
+  @override
   String get habitat_wetland => "hedar eller våtmarker";
+  @override
+  String get product_restore_purchases => "Återställa köp";
   @override
   String get feedback_title => "Hur man bidrar";
   @override
@@ -5207,6 +5403,8 @@ class $sv extends S {
   @override
   String get china => "Kina";
   @override
+  String get product_no_ads_title => "Ingen oönskad annonsering";
+  @override
   String get petal_zygomorphic => "zygomorf";
   @override
   String get taxonomy_genus => "Släkte";
@@ -5236,6 +5434,8 @@ class $it extends S {
   String get snack_copy => "Copiato negli appunti";
   @override
   String get about => "Info sull'applicazione";
+  @override
+  String get product_no_ads_description => "L'applicazione non mostrerà banner pubblicitari nella parte inferiore dello schermo.";
   @override
   String get western_canada => "Canada occidentale";
   @override
@@ -5302,6 +5502,8 @@ class $it extends S {
   String get feedback_run_ads => "È possibile visualizzare pubblicità a schermo intero o guardare annunci video per supportare ulteriori sviluppi e miglioramenti del database.";
   @override
   String get habitat_garden => "giardini o campi";
+  @override
+  String get product_purchase => "Acquistare";
   @override
   String get russian_far_east => "Estremo Oriente russo";
   @override
@@ -5389,13 +5591,19 @@ class $it extends S {
   @override
   String get plant_trivia => "Curiosità";
   @override
+  String get product_purchased => "Acquistato";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_herbalism => "Erboristeria";
   @override
   String get plant_height_to => "a";
   @override
+  String get enhancements => "Miglioramenti";
+  @override
   String get habitat_wetland => "brughiere o zone umide";
+  @override
+  String get product_restore_purchases => "Ripristinare gli acquisti";
   @override
   String get feedback_title => "Come contribuire";
   @override
@@ -5527,6 +5735,8 @@ class $it extends S {
   @override
   String get china => "Cina";
   @override
+  String get product_no_ads_title => "Nessuna pubblicità indesiderata";
+  @override
   String get petal_zygomorphic => "zigomorfi";
   @override
   String get taxonomy_genus => "Genere";
@@ -5552,6 +5762,8 @@ class $es extends S {
   String get snack_copy => "Copiado al portapapeles";
   @override
   String get about => "Acerca de";
+  @override
+  String get product_no_ads_description => "La aplicación no mostrará el anuncio publicitario en la parte inferior de la pantalla.";
   @override
   String get western_canada => "Canadá occidental";
   @override
@@ -5618,6 +5830,8 @@ class $es extends S {
   String get feedback_run_ads => "Puede mostrar anuncios a pantalla completa o ver anuncios de videos para respaldar el desarrollo adicional y la mejora de la base de datos.";
   @override
   String get habitat_garden => "jardín o campo";
+  @override
+  String get product_purchase => "Compra";
   @override
   String get russian_far_east => "Extremo Oriente ruso";
   @override
@@ -5705,13 +5919,19 @@ class $es extends S {
   @override
   String get plant_trivia => "Trivialidades";
   @override
+  String get product_purchased => "Comprado";
+  @override
   String get taxonomy_cladus => "(clado)";
   @override
   String get plant_herbalism => "Herboristería";
   @override
   String get plant_height_to => "hasta";
   @override
+  String get enhancements => "Mejoras";
+  @override
   String get habitat_wetland => "páramo o pantano";
+  @override
+  String get product_restore_purchases => "Restaurar las compras";
   @override
   String get feedback_title => "Cómo contribuir";
   @override
@@ -5843,6 +6063,8 @@ class $es extends S {
   @override
   String get china => "China";
   @override
+  String get product_no_ads_title => "No hay publicidad no deseada";
+  @override
   String get petal_zygomorphic => "zigomorfo";
   @override
   String get taxonomy_genus => "género";
@@ -5868,6 +6090,8 @@ class $et extends S {
   String get snack_copy => "Kopeeritud lõikelauale";
   @override
   String get about => "Rakenduse kohta";
+  @override
+  String get product_no_ads_description => "Rakendus ei näita ekraani allosas reklaami bännerit.";
   @override
   String get western_canada => "Lääne-Kanada";
   @override
@@ -5934,6 +6158,8 @@ class $et extends S {
   String get feedback_run_ads => "Täiendava ekraani reklaami või videoreklaami saate kuvada edasise arengu ja andmebaaside täiustamise toetamiseks.";
   @override
   String get habitat_garden => "aiad või väljad";
+  @override
+  String get product_purchase => "Ostmine";
   @override
   String get russian_far_east => "Vene Kaug-Ida";
   @override
@@ -6021,13 +6247,19 @@ class $et extends S {
   @override
   String get plant_trivia => "Tühiasi";
   @override
+  String get product_purchased => "Ostetud";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_herbalism => "Raviteaduse";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Täiendused";
+  @override
   String get habitat_wetland => "moorlandi või märgala";
+  @override
+  String get product_restore_purchases => "Ostude taastamine";
   @override
   String get feedback_title => "Kuidas aidata";
   @override
@@ -6159,6 +6391,8 @@ class $et extends S {
   @override
   String get china => "Hiina";
   @override
+  String get product_no_ads_title => "Soovimatu reklaam puudub";
+  @override
   String get petal_zygomorphic => "ebaregulaarne";
   @override
   String get taxonomy_genus => "Perekond";
@@ -6184,6 +6418,8 @@ class $cs extends S {
   String get snack_copy => "Zkopírováno do schránky";
   @override
   String get about => "O aplikaci";
+  @override
+  String get product_no_ads_description => "Aplikace nezobrazí reklamní banner ve spodní části obrazovky.";
   @override
   String get western_canada => "Západní Kanada";
   @override
@@ -6250,6 +6486,8 @@ class $cs extends S {
   String get feedback_run_ads => "Můžete si prohlédnout videoreklamu nebo nechat zobrazit reklamu na celou obrazovku a podpořit tak další vývoj a rozšiřování databáze.";
   @override
   String get habitat_garden => "pole a zahrady";
+  @override
+  String get product_purchase => "Koupit";
   @override
   String get russian_far_east => "Ruský dálný východ";
   @override
@@ -6337,13 +6575,19 @@ class $cs extends S {
   @override
   String get plant_trivia => "Zajímavosti";
   @override
+  String get product_purchased => "Koupeno";
+  @override
   String get taxonomy_cladus => "(klad)";
   @override
   String get plant_herbalism => "Bylinářství";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Vylepšení";
+  @override
   String get habitat_wetland => "mokřady a bažiny";
+  @override
+  String get product_restore_purchases => "Obnovit nákupy";
   @override
   String get feedback_title => "Jak přispět";
   @override
@@ -6475,6 +6719,8 @@ class $cs extends S {
   @override
   String get china => "Čína";
   @override
+  String get product_no_ads_title => "Žádná nežádoucí reklama";
+  @override
   String get petal_zygomorphic => "souměrný";
   @override
   String get taxonomy_genus => "rod";
@@ -6500,6 +6746,8 @@ class $ar extends S {
   String get snack_copy => "نسخ إلى الحافظة";
   @override
   String get about => "حول";
+  @override
+  String get product_no_ads_description => "لن يعرض التطبيق إعلان بانر في أسفل الشاشة.";
   @override
   String get western_canada => "غرب كندا";
   @override
@@ -6566,6 +6814,8 @@ class $ar extends S {
   String get feedback_run_ads => "يمكنك عرض إعلان بملء الشاشة أو مشاهدة إعلان فيديو لدعم تطوير إضافي وتحسين قاعدة البيانات.";
   @override
   String get habitat_garden => "حدائق أو حقول";
+  @override
+  String get product_purchase => "شراء";
   @override
   String get russian_far_east => "الشرق الأقصى الروسي";
   @override
@@ -6653,13 +6903,19 @@ class $ar extends S {
   @override
   String get plant_trivia => "معلومات";
   @override
+  String get product_purchased => "اشترى";
+  @override
   String get taxonomy_cladus => "(غير مصنف)";
   @override
   String get plant_herbalism => "دراسة الأعشاب";
   @override
   String get plant_height_to => "إلى";
   @override
+  String get enhancements => "التحسينات";
+  @override
   String get habitat_wetland => "مستنقعات أو أراضي الرطبة";
+  @override
+  String get product_restore_purchases => "استعادة المشتريات";
   @override
   String get feedback_title => "كيف تساهم";
   @override
@@ -6791,6 +7047,8 @@ class $ar extends S {
   @override
   String get china => "الصين";
   @override
+  String get product_no_ads_title => "لا اعلان غير مرغوب فيه";
+  @override
   String get petal_zygomorphic => "غير منتظم";
   @override
   String get taxonomy_genus => "الجنس";
@@ -6816,6 +7074,8 @@ class $pa extends S {
   String get snack_copy => "ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ";
   @override
   String get about => "ਇਸ ਬਾਰੇ";
+  @override
+  String get product_no_ads_description => "ਐਪਲੀਕੇਸ਼ਨ ਸਕ੍ਰੀਨ ਦੇ ਤਲ 'ਤੇ ਇਸ਼ਤਿਹਾਰ ਬੈਨਰ ਨਹੀਂ ਦਿਖਾਏਗੀ.";
   @override
   String get western_canada => "ਪੱਛਮੀ ਕੈਨੇਡਾ";
   @override
@@ -6882,6 +7142,8 @@ class $pa extends S {
   String get feedback_run_ads => "ਤੁਸੀਂ ਪੂਰੇ ਵਿਵਰਣ ਦੇ ਇਸ਼ਤਿਹਾਰ ਜਾਂ ਹੋਰ ਵਿਕਾਸ ਅਤੇ ਡਾਟਾਬੇਸ ਵਧਾਉਣ ਲਈ ਸਮਰਥਨ ਪ੍ਰਾਪਤ ਵੀਡੀਓ ਵਿਗਿਆਪਨ ਵੇਖ ਸਕਦੇ ਹੋ.";
   @override
   String get habitat_garden => "ਪਲਾਂਟ ਦਾ ਦ੍ਰਿਸ਼ਟੀਕੋਣ";
+  @override
+  String get product_purchase => "ਖ਼ਰੀਦੋ";
   @override
   String get russian_far_east => "ਰੂਸੀ ਦੂਰ ਪੂਰਬ";
   @override
@@ -6969,13 +7231,19 @@ class $pa extends S {
   @override
   String get plant_trivia => "ਟ੍ਰਿਜੀਆ";
   @override
+  String get product_purchased => "ਖਰੀਦਿਆ";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_herbalism => "ਹਰਬਲਿਜ਼ਮ";
   @override
   String get plant_height_to => "ਤੱਕ";
   @override
+  String get enhancements => "ਸੁਧਾਰ";
+  @override
   String get habitat_wetland => "ਪਹਾੜਾਂ ਜਾਂ ਝੂਲਿਆਂ";
+  @override
+  String get product_restore_purchases => "ਖ਼ਰੀਦਾਂ ਨੂੰ ਰੀਸਟੋਰ ਕਰੋ";
   @override
   String get feedback_title => "ਰੁੱਖ ਜਾਂ ਬੂਟੇ";
   @override
@@ -7107,6 +7375,8 @@ class $pa extends S {
   @override
   String get china => "ਚੀਨ";
   @override
+  String get product_no_ads_title => "ਕੋਈ ਅਣਚਾਹੇ ਇਸ਼ਤਿਹਾਰ";
+  @override
   String get petal_zygomorphic => "ਅਨਿਯਮਿਤ";
   @override
   String get taxonomy_genus => "ਜਿਣਸ";
@@ -7132,6 +7402,8 @@ class $nb extends S {
   String get snack_copy => "Kopiert til utklippstavlen";
   @override
   String get about => "Om apper";
+  @override
+  String get product_no_ads_description => "Søknaden vil ikke vise annonse banner nederst på skjermen.";
   @override
   String get western_canada => "Vest-Canada";
   @override
@@ -7198,6 +7470,8 @@ class $nb extends S {
   String get feedback_run_ads => "Du kan vise fullskjermsannonsering eller se videoannonse for å støtte videreutvikling og databaseforbedring.";
   @override
   String get habitat_garden => "hager eller felt";
+  @override
+  String get product_purchase => "Kjøpe";
   @override
   String get russian_far_east => "Russisk fjernt øst";
   @override
@@ -7285,13 +7559,19 @@ class $nb extends S {
   @override
   String get plant_trivia => "Trivia";
   @override
+  String get product_purchased => "Kjøpt";
+  @override
   String get taxonomy_cladus => "(klade)";
   @override
   String get plant_herbalism => "Plantelegemiddel";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Forbedringer";
+  @override
   String get habitat_wetland => "heiene eller våtmark";
+  @override
+  String get product_restore_purchases => "Gjenopprette kjøp";
   @override
   String get feedback_title => "Hvordan bidra";
   @override
@@ -7423,6 +7703,8 @@ class $nb extends S {
   @override
   String get china => "Kina";
   @override
+  String get product_no_ads_title => "Ingen uønsket annonse";
+  @override
   String get petal_zygomorphic => "zygomorphic";
   @override
   String get taxonomy_genus => "Slekt";
@@ -7460,6 +7742,8 @@ class $ja extends S {
   String get snack_copy => "クリップボードにコピー";
   @override
   String get about => "約";
+  @override
+  String get product_no_ads_description => "アプリケーションは画面の下部に広告バナーを表示しません。";
   @override
   String get western_canada => "カナダ西部";
   @override
@@ -7526,6 +7810,8 @@ class $ja extends S {
   String get feedback_run_ads => "全画面広告を表示したり、ビデオ広告を見たりして、さらなる開発やデータベースの機能強化をサポートできます。";
   @override
   String get habitat_garden => "庭園、畑";
+  @override
+  String get product_purchase => "買う";
   @override
   String get russian_far_east => "ロシア極東";
   @override
@@ -7613,13 +7899,19 @@ class $ja extends S {
   @override
   String get plant_trivia => "トリビア";
   @override
+  String get product_purchased => "購入した";
+  @override
   String get taxonomy_cladus => "(系統群)";
   @override
   String get plant_herbalism => "本草学";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "機能強化";
+  @override
   String get habitat_wetland => "ムーア、沼地、ボグ、フェン";
+  @override
+  String get product_restore_purchases => "購入を復元";
   @override
   String get feedback_title => "貢献する方法";
   @override
@@ -7751,6 +8043,8 @@ class $ja extends S {
   @override
   String get china => "中国";
   @override
+  String get product_no_ads_title => "迷惑な広告はありません";
+  @override
   String get petal_zygomorphic => "不規則な";
   @override
   String get taxonomy_genus => "属";
@@ -7776,6 +8070,8 @@ class $fa extends S {
   String get snack_copy => "کپی به کلیپ بورد";
   @override
   String get about => "درباره برنامه";
+  @override
+  String get product_no_ads_description => "برنامه بنر تبلیغاتی را در پایین صفحه نشان نمی دهد.";
   @override
   String get western_canada => "غربی کانادا";
   @override
@@ -7842,6 +8138,8 @@ class $fa extends S {
   String get feedback_run_ads => "شما می توانید تبلیغات تمام صفحه را نمایش دهید یا تبلیغات ویدئویی را تماشا کنید تا از توسعه بیشتر و بهبود پایگاه داده پشتیبانی کند.";
   @override
   String get habitat_garden => "باغ ها یا رشته ها";
+  @override
+  String get product_purchase => "خرید";
   @override
   String get russian_far_east => "شرق دور روسیه";
   @override
@@ -7929,13 +8227,19 @@ class $fa extends S {
   @override
   String get plant_trivia => "چیزهای بی اهمیت";
   @override
+  String get product_purchased => "خریداری شده";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_herbalism => "گیاه شناسی";
   @override
   String get plant_height_to => "به";
   @override
+  String get enhancements => "ارتقاء";
+  @override
   String get habitat_wetland => "باتلاق یا تالاب";
+  @override
+  String get product_restore_purchases => "بازگرداندن خرید";
   @override
   String get toxicity2 => "گیاه کمی سمی است";
   @override
@@ -8063,6 +8367,8 @@ class $fa extends S {
   @override
   String get china => "چين";
   @override
+  String get product_no_ads_title => "بدون تبلیغات ناخواسته";
+  @override
   String get petal_zygomorphic => "بی رویه";
   @override
   String get taxonomy_genus => "سرده";
@@ -8088,6 +8394,8 @@ class $pl extends S {
   String get snack_copy => "Skopiowane do schowka";
   @override
   String get about => "O aplikacji";
+  @override
+  String get product_no_ads_description => "Aplikacja nie wyświetli banera reklamowego u dołu ekranu.";
   @override
   String get western_canada => "Zachodnia Kanada";
   @override
@@ -8154,6 +8462,8 @@ class $pl extends S {
   String get feedback_run_ads => "Możesz wyświetlać reklamy pełnoekranowe lub oglądać reklamy wideo, aby wesprzeć dalszy rozwój i ulepszenie bazy danych.";
   @override
   String get habitat_garden => "Ogrody lub pola";
+  @override
+  String get product_purchase => "Zakupić";
   @override
   String get russian_far_east => "Rosyjski Daleki Wschód";
   @override
@@ -8241,13 +8551,19 @@ class $pl extends S {
   @override
   String get plant_trivia => "Ciekawostki";
   @override
+  String get product_purchased => "Zakupione";
+  @override
   String get taxonomy_cladus => "(klad)";
   @override
   String get plant_herbalism => "Ziołolecznictwo";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Ulepszenia";
+  @override
   String get habitat_wetland => "Wrzosowiska lub tereny podmokłe";
+  @override
+  String get product_restore_purchases => "Przywróć zakupy";
   @override
   String get feedback_title => "Jak wnieść wkład?";
   @override
@@ -8379,6 +8695,8 @@ class $pl extends S {
   @override
   String get china => "Chiny";
   @override
+  String get product_no_ads_title => "Bez niechcianej reklamy";
+  @override
   String get petal_zygomorphic => "Zygomorficzny";
   @override
   String get taxonomy_genus => "Rodzaj";
@@ -8402,6 +8720,8 @@ class $da extends S {
   String get snack_copy => "Kopieret til udklipsholderen";
   @override
   String get about => "Om ansøgning";
+  @override
+  String get product_no_ads_description => "Programmet viser ikke reklamebanner nederst på skærmen.";
   @override
   String get western_canada => "Vestlige Canada";
   @override
@@ -8468,6 +8788,8 @@ class $da extends S {
   String get feedback_run_ads => "Du kan vise fuldskærmsannonce eller se videoannonce for at understøtte yderligere udvikling og databaseforbedring.";
   @override
   String get habitat_garden => "haver eller marker";
+  @override
+  String get product_purchase => "Køb";
   @override
   String get russian_far_east => "Russiske fjernøsten";
   @override
@@ -8553,13 +8875,19 @@ class $da extends S {
   @override
   String get plant_trivia => "Trivia";
   @override
+  String get product_purchased => "Købt";
+  @override
   String get taxonomy_cladus => "Cladus";
   @override
   String get plant_herbalism => "Naturmedicin";
   @override
   String get plant_height_to => "-";
   @override
+  String get enhancements => "Forbedringer";
+  @override
   String get habitat_wetland => "heder eller vådområder";
+  @override
+  String get product_restore_purchases => "Genoprette indkøb";
   @override
   String get feedback_title => "Hvordan bidrage";
   @override
@@ -8691,6 +9019,8 @@ class $da extends S {
   @override
   String get china => "Kina";
   @override
+  String get product_no_ads_title => "Ingen uønsket reklame";
+  @override
   String get petal_zygomorphic => "zygomorf";
   @override
   String get taxonomy_genus => "Slægt";
@@ -8714,6 +9044,8 @@ class $he extends S {
   String get snack_copy => "הועתק ללוח";
   @override
   String get about => "על היישום";
+  @override
+  String get product_no_ads_description => "היישום לא יציג מודעת באנר בחלק התחתון של המסך.";
   @override
   String get western_canada => "קנדה המערבית";
   @override
@@ -8780,6 +9112,8 @@ class $he extends S {
   String get feedback_run_ads => "ניתן להציג פרסומת במסך מלא או לצפות בפרסומת וידאו כדי לתמוך בפיתוח ובשיפור נתונים נוספים.";
   @override
   String get habitat_garden => "גנים או שדות";
+  @override
+  String get product_purchase => "רכישה";
   @override
   String get russian_far_east => "המזרח הרחוק הרוסי";
   @override
@@ -8867,13 +9201,19 @@ class $he extends S {
   @override
   String get plant_trivia => "דְבָרִים בְּטֵלִים";
   @override
+  String get product_purchased => "נרכש";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_herbalism => "צמחי מרפא";
   @override
   String get plant_height_to => "עד";
   @override
+  String get enhancements => "שיפורים";
+  @override
   String get habitat_wetland => "מורלנדס או ביצות";
+  @override
+  String get product_restore_purchases => "לשחזר רכישות";
   @override
   String get feedback_title => "כיצד לתרום";
   @override
@@ -9005,6 +9345,8 @@ class $he extends S {
   @override
   String get china => "סין";
   @override
+  String get product_no_ads_title => "אין פרסומת לא רצויה";
+  @override
   String get petal_zygomorphic => "לֹא סָדִיר";
   @override
   String get taxonomy_genus => "סוג";
@@ -9030,6 +9372,8 @@ class $ro extends S {
   String get snack_copy => "Copiat în Clipboard";
   @override
   String get about => "Despre";
+  @override
+  String get product_no_ads_description => "Aplicația nu va afișa banner publicitar în partea de jos a ecranului.";
   @override
   String get western_canada => "Vestul Canadei";
   @override
@@ -9096,6 +9440,8 @@ class $ro extends S {
   String get feedback_run_ads => "Puteți afișa anunțuri pe întreg ecranul sau puteți viziona anunțuri video pentru a susține dezvoltarea ulterioară și îmbunătățirea bazei de date.";
   @override
   String get habitat_garden => "grădina sau câmp";
+  @override
+  String get product_purchase => "Cumpărare";
   @override
   String get russian_far_east => "Orientul Îndepărtat Rusesc";
   @override
@@ -9183,13 +9529,19 @@ class $ro extends S {
   @override
   String get plant_trivia => "Trivia";
   @override
+  String get product_purchased => "Cumparate";
+  @override
   String get taxonomy_cladus => "(cladă)";
   @override
   String get plant_herbalism => "Herbalism";
   @override
   String get plant_height_to => "la";
   @override
+  String get enhancements => "Îmbunătățiri";
+  @override
   String get habitat_wetland => "zonele umede";
+  @override
+  String get product_restore_purchases => "Restaurați achizițiile";
   @override
   String get feedback_title => "Cum să contribuiți";
   @override
@@ -9321,6 +9673,8 @@ class $ro extends S {
   @override
   String get china => "China";
   @override
+  String get product_no_ads_title => "Nicio reclama nedorită";
+  @override
   String get petal_zygomorphic => "zygomorphic";
   @override
   String get taxonomy_genus => "Gen";
@@ -9346,6 +9700,8 @@ class $nl extends S {
   String get snack_copy => "Gekopieerd naar het klembord";
   @override
   String get about => "Over de app";
+  @override
+  String get product_no_ads_description => "Applicatie toont geen reclamebanner onderaan het scherm.";
   @override
   String get western_canada => "West-Canada";
   @override
@@ -9412,6 +9768,8 @@ class $nl extends S {
   String get feedback_run_ads => "U kunt advertenties op volledig scherm weergeven of videoadvertenties bekijken om verdere ontwikkeling en databaseverbetering te ondersteunen.";
   @override
   String get habitat_garden => "tuinen of velden";
+  @override
+  String get product_purchase => "Koop";
   @override
   String get russian_far_east => "Russisch Verre Oosten";
   @override
@@ -9499,13 +9857,19 @@ class $nl extends S {
   @override
   String get plant_trivia => "Weetjes";
   @override
+  String get product_purchased => "Gekocht";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_herbalism => "Geneeskundige toepassingen";
   @override
   String get plant_height_to => "tot";
   @override
+  String get enhancements => "Verbeteringen";
+  @override
   String get habitat_wetland => "heidevelden of moerassen";
+  @override
+  String get product_restore_purchases => "Herstel aankopen";
   @override
   String get feedback_title => "Hoe u kunt bijdragen";
   @override
@@ -9636,6 +10000,8 @@ class $nl extends S {
   String get northern_africa => "Noord-Afrika";
   @override
   String get china => "China";
+  @override
+  String get product_no_ads_title => "Geen ongewenste advertenties";
   @override
   String get petal_zygomorphic => "tweezijdig symmetrisch";
   @override

@@ -1,9 +1,16 @@
 {
   "legend": "مفتاح",
+  "enhancements": "التحسينات",
   "settings": "إعدادات",
   "feedback": "تعليق",
   "about": "حول",
   "help": "مساعدة",
+
+  "product_restore_purchases": "استعادة المشتريات",
+  "product_no_ads_title": "لا اعلان غير مرغوب فيه",
+  "product_no_ads_description": "لن يعرض التطبيق إعلان بانر في أسفل الشاشة.",
+  "product_purchase": "شراء",
+  "product_purchased": "اشترى",
 
   "toxicity1": "نبات سام",
   "toxicity2": "نبات سام قليلا",

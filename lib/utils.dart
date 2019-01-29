@@ -1,6 +1,12 @@
+import 'dart:async';
+
+import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+const String productNoAdsAndroid = "no_ads";
+const String productNoAdsIOS = "NoAds";
 
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
@@ -19,6 +25,7 @@ const String appStore = "https://itunes.apple.com/us/app/whats-that-flower/id144
 
 const String languageEnglish = "en";
 const String languageSlovak = "sk";
+const String languageCzech = "cs";
 const String languageGTSuffix = "-GT";
 const String heightUnitOfMeasure = "cm";
 
@@ -38,7 +45,7 @@ const String firebasePlantHeaders = 'plants_headers';
 const String firebaseTranslations = 'translations';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
 
-const int adsFrequency = 2;
+const int adsFrequency = -1;
 
 void launchURL(String url) async {
   if (await canLaunch(url)) {
@@ -46,6 +53,16 @@ void launchURL(String url) async {
   } else {
     throw 'Could not launch $url';
   }
+}
+
+Future<void> launchURLF(String url) {
+  return canLaunch(url).then((value) {
+    if (value) {
+      return launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  });
 }
 
 String getTaxonLabel(BuildContext context, String taxon) {
@@ -69,11 +86,34 @@ String getTaxonLabel(BuildContext context, String taxon) {
   }
 }
 
+String getProductTitle(BuildContext context, String productId, String defaultTitle) {
+  switch (productId) {
+    case productNoAdsAndroid:
+    case productNoAdsIOS:
+      return S.of(context).product_no_ads_title;
+    default: return defaultTitle;
+  }
+}
+
+String getProductDescription(BuildContext context, String productId, String defaultDescription) {
+  switch (productId) {
+    case productNoAdsAndroid:
+    case productNoAdsIOS:
+      return S.of(context).product_no_ads_description;
+    default: return defaultDescription;
+  }
+}
+
 Widget getAdMobBanner() {
   return Container(
+    height: getFABPadding(),
   );
 }
 
 String getLanguageCode(String code) {
   return code == 'nb' ? 'no' : code;
+}
+
+double getFABPadding() {
+  return Ads.isAllowed ? 50.0 : 0.0;
 }

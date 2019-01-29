@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
@@ -13,8 +16,9 @@ final countsReference = FirebaseDatabase.instance.reference().child(firebaseCoun
 
 class Habitat extends StatefulWidget {
   final void Function(String) onChangeLanguage;
+  final void Function() onBuyProduct;
   final Map<String, String> filter;
-  Habitat(this.onChangeLanguage, this.filter);
+  Habitat(this.onChangeLanguage, this.onBuyProduct, this.filter);
 
   @override
   _HabitatState createState() => _HabitatState();
@@ -32,7 +36,9 @@ class _HabitatState extends State<Habitat> {
 
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (snapshot.value != null && snapshot.value > 0) {
-        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
+          Ads.showBannerAd(this);
+        });
       } else {
         _key.currentState.showSnackBar(SnackBar(
           content: Text(S.of(context).snack_no_flowers),
@@ -56,6 +62,8 @@ class _HabitatState extends State<Habitat> {
     _key = new GlobalKey<ScaffoldState>();
 
     _setCount();
+
+    Ads.showBannerAd(this);
   }
 
   @override
@@ -78,7 +86,7 @@ class _HabitatState extends State<Habitat> {
       appBar: new AppBar(
         title: new Text(S.of(context).filter_habitat),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
+      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -210,15 +218,15 @@ class _HabitatState extends State<Habitat> {
           var nextFilterAttribute;
           switch (index) {
             case 0:
-              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               nextFilterAttribute = filterColor;
               break;
             case 2:
-              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               nextFilterAttribute = filterPetal;
               break;
             case 3:
-              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               nextFilterAttribute = filterDistribution;
               break;
           }
@@ -230,8 +238,9 @@ class _HabitatState extends State<Habitat> {
         },
       ),
       floatingActionButton: new Container(
-        height: 70.0,
+        height: 70.0 + getFABPadding(),
         width: 70.0,
+        padding: EdgeInsets.only(bottom: getFABPadding()),
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(
@@ -252,8 +261,10 @@ class _HabitatState extends State<Habitat> {
                         onPressed: () {
                           Navigator.push(
                             mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
-                          );
+                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                          ).then((value) {
+                            Ads.showBannerAd(this);
+                          });
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
                       ),

@@ -1,9 +1,16 @@
 {
   "legend": "伝説",
+  "enhancements": "機能強化",
   "settings": "設定",
   "feedback": "フィードバック",
   "about": "約",
   "help": "ヘルプ",
+
+  "product_restore_purchases": "購入を復元",
+  "product_no_ads_title": "迷惑な広告はありません",
+  "product_no_ads_description": "アプリケーションは画面の下部に広告バナーを表示しません。",
+  "product_purchase": "買う",
+  "product_purchased": "購入した",
 
   "toxicity1": "有毒植物",
   "toxicity2": "わずかに有毒な植物",

@@ -1,9 +1,16 @@
 {
   "legend": "Legenda",
+  "enhancements": "Miglioramenti",
   "settings": "Impostazioni",
   "feedback": "Invia un feedback / Contributo",
   "about": "Info sull'applicazione",
   "help": "Aiuto",
+
+  "product_restore_purchases": "Ripristinare gli acquisti",
+  "product_no_ads_title": "Nessuna pubblicità indesiderata",
+  "product_no_ads_description": "L'applicazione non mostrerà banner pubblicitari nella parte inferiore dello schermo.",
+  "product_purchase": "Acquistare",
+  "product_purchased": "Acquistato",
 
   "toxicity1": "pianta velenosa",
   "toxicity2": "pianta poco velenosa",

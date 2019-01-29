@@ -1,9 +1,16 @@
 {
   "legend": "افسانه",
+  "enhancements": "ارتقاء",
   "settings": "تنظیمات",
   "feedback": "انتقادات",
   "about": "درباره برنامه",
   "help": "کمک",
+
+  "product_restore_purchases": "بازگرداندن خرید",
+  "product_no_ads_title": "بدون تبلیغات ناخواسته",
+  "product_no_ads_description": "برنامه بنر تبلیغاتی را در پایین صفحه نشان نمی دهد.",
+  "product_purchase": "خرید",
+  "product_purchased": "خریداری شده",
 
   "toxicity1": "گیاه سمی",
   "toxicity2": "گیاه کمی سمی است",

@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
@@ -7,17 +9,18 @@ import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
+import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:abherbs_flutter/prefs.dart';
 
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
 class Color extends StatefulWidget {
   final void Function(String) onChangeLanguage;
+  final void Function() onBuyProduct;
   final Map<String, String> filter;
-  Color(this.onChangeLanguage, this.filter);
+  Color(this.onChangeLanguage, this.onBuyProduct, this.filter);
 
   @override
   _ColorState createState() => _ColorState();
@@ -36,7 +39,9 @@ class _ColorState extends State<Color> {
 
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (snapshot.value != null && snapshot.value > 0) {
-        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
+          Ads.showBannerAd(this);
+        });
       } else {
         _key.currentState.showSnackBar(SnackBar(
           content: Text(S.of(context).snack_no_flowers),
@@ -112,6 +117,8 @@ class _ColorState extends State<Color> {
     _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
 
     _setCount();
+
+    Ads.showBannerAd(this);
   }
 
   @override
@@ -123,8 +130,8 @@ class _ColorState extends State<Color> {
   @override
   Widget build(BuildContext context) {
     var mainContext = context;
-    var widgets = <Widget>[];
-    widgets.add(Container(
+    var _widgets = <Widget>[];
+    _widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: Row(
         children: [
@@ -153,7 +160,7 @@ class _ColorState extends State<Color> {
         ],
       ),
     ));
-    widgets.add(Container(
+    _widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -183,7 +190,7 @@ class _ColorState extends State<Color> {
         ],
       ),
     ));
-    widgets.add(Container(
+    _widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: FlatButton(
         child: Image(
@@ -194,7 +201,7 @@ class _ColorState extends State<Color> {
         },
       ),
     ));
-    widgets.add(Container(
+    _widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
       child: Text(S.of(context).color_message,
         textAlign: TextAlign.center,
@@ -204,7 +211,7 @@ class _ColorState extends State<Color> {
       ),
     ));
 
-    widgets.add(FutureBuilder<String>(
+    _widgets.add(FutureBuilder<String>(
         future: _rateStateF,
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == ConnectionState.done && snapshot.data == rateStateShould) {
@@ -265,7 +272,7 @@ class _ColorState extends State<Color> {
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, _filter, null),
+      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -277,7 +284,7 @@ class _ColorState extends State<Color> {
           ),
           ListView(
             padding: EdgeInsets.all(5.0),
-            children: widgets,
+            children: _widgets,
           ),
         ],
       ),
@@ -290,15 +297,15 @@ class _ColorState extends State<Color> {
           var nextFilterAttribute;
           switch (index) {
             case 1:
-              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               nextFilterAttribute = filterHabitat;
               break;
             case 2:
-              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               nextFilterAttribute = filterPetal;
               break;
             case 3:
-              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, _filter));
+              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, widget.onBuyProduct, _filter));
               nextFilterAttribute = filterDistribution;
               break;
           }
@@ -310,8 +317,9 @@ class _ColorState extends State<Color> {
         },
       ),
       floatingActionButton: Container(
-        height: 70.0,
+        height: 70.0 + getFABPadding(),
         width: 70.0,
+        padding: EdgeInsets.only(bottom: getFABPadding()),
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(
@@ -332,8 +340,10 @@ class _ColorState extends State<Color> {
                         onPressed: () {
                           Navigator.push(
                             mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, _filter)),
-                          );
+                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                          ).then((value) {
+                            Ads.showBannerAd(this);
+                          });
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
                       ),

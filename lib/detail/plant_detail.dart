@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:abherbs_flutter/detail/plant_detail_gallery.dart';
@@ -21,9 +22,10 @@ final translationsReference = FirebaseDatabase.instance.reference().child(fireba
 class PlantDetail extends StatefulWidget {
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
+  final void Function() onBuyProduct;
   final Map<String, String> filter;
   final String plantName;
-  PlantDetail(this.myLocale, this.onChangeLanguage, this.filter, this.plantName);
+  PlantDetail(this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.filter, this.plantName);
 
   @override
   _PlantDetailState createState() => _PlantDetailState();
@@ -52,7 +54,7 @@ class _PlantDetailState extends State<PlantDetail> {
         plantTranslation.isTranslatedWithGT = true;
         if (_isOriginal) {
           return translationsReference
-              .child(widget.myLocale.languageCode == 'cs' ? languageSlovak : languageEnglish)
+              .child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish)
               .child(widget.plantName)
               .once()
               .then((DataSnapshot snapshot) {
@@ -78,13 +80,13 @@ class _PlantDetailState extends State<PlantDetail> {
               return plantTranslationGT;
             } else {
               return translationsReference
-                  .child(widget.myLocale.languageCode == 'cs' ? languageSlovak : languageEnglish)
+                  .child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish)
                   .child(widget.plantName)
                   .once()
                   .then((DataSnapshot snapshot) {
                 var plantTranslationOriginal = PlantTranslation.fromJson(snapshot.value);
                 var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
-                uri += '&source=' + ('cs' == widget.myLocale.languageCode ? 'sk' : 'en');
+                uri += '&source=' + (languageCzech == widget.myLocale.languageCode ? languageSlovak : languageEnglish);
                 uri += '&target=' + getLanguageCode(widget.myLocale.languageCode);
                 for (var text in plantTranslation.getTextsToTranslate(plantTranslationOriginal)) {
                   uri += '&q=' + text;
@@ -152,7 +154,7 @@ class _PlantDetailState extends State<PlantDetail> {
           },
         )
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, widget.filter, null),
+      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
