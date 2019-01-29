@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class EnhancementsMerged {
@@ -66,76 +67,90 @@ class _EnhacementsScreenState extends State<EnhacementsScreen> {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               var _cards = <Card>[];
-              _cards.add(Card(
-                child: Container(
-                  padding: EdgeInsets.all(10.0),
-                  child: RaisedButton(
-                    onPressed: () {
-                      setState(() {
-                        _purchasesF = FlutterInappPurchase.getAvailablePurchases();
-                      });
-                    },
-                    child: Text(
-                      S.of(context).product_restore_purchases,
+              if (snapshot.hasError) {
+                _cards.add(
+                  Card(
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        snapshot.error is PlatformException ? (snapshot.error as PlatformException).message : snapshot.error.toString(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16.0),
+                      ),
                     ),
                   ),
-                ),
-              ));
-              _cards.addAll(snapshot.data.products.map((IAPItem product) {
-                bool isPurchased = _isPurchased(product.productId, snapshot.data.purchases);
-                return Card(
+                );
+              } else {
+                _cards.add(Card(
                   child: Container(
                     padding: EdgeInsets.all(10.0),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            getProductTitle(context, product.productId, product.title),
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.start,
-                          ),
-                          Text(
-                            product.localizedPrice,
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 18.0,
-                            ),
-                            textAlign: TextAlign.end,
-                          ),
-                        ],
+                    child: RaisedButton(
+                      onPressed: () {
+                        setState(() {
+                          _purchasesF = FlutterInappPurchase.getAvailablePurchases();
+                        });
+                      },
+                      child: Text(
+                        S.of(context).product_restore_purchases,
                       ),
-                      SizedBox(height: 10.0),
-                      Text(
-                        getProductDescription(context, product.productId, product.description),
-                        style: TextStyle(
-                          fontSize: 16.0,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                      SizedBox(height: 10.0),
-                      RaisedButton(
-                        color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
-                        onPressed: () {
-                          if (!isPurchased) {
-                            FlutterInappPurchase.buyProduct(product.productId)
-                                .then((PurchasedItem purchased) {
-                              widget.onBuyProduct();
-                            });
-                          }
-                        },
-                        child: Text(
-                          isPurchased ? S.of(context).product_purchased : S.of(context).product_purchase,
-                          style: TextStyle(color: isPurchased ? Colors.black : Colors.white),
-                        ),
-                      ),
-                    ]),
+                    ),
                   ),
-                );
-              }).toList());
+                ));
+                _cards.addAll(snapshot.data.products.map((IAPItem product) {
+                  bool isPurchased = _isPurchased(product.productId, snapshot.data.purchases);
+                  return Card(
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              getProductTitle(context, product.productId, product.title),
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                            Text(
+                              product.localizedPrice,
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 18.0,
+                              ),
+                              textAlign: TextAlign.end,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10.0),
+                        Text(
+                          getProductDescription(context, product.productId, product.description),
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        SizedBox(height: 10.0),
+                        RaisedButton(
+                          color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
+                          onPressed: () {
+                            if (!isPurchased) {
+                              FlutterInappPurchase.buyProduct(product.productId).then((PurchasedItem purchased) {
+                                widget.onBuyProduct();
+                              });
+                            }
+                          },
+                          child: Text(
+                            isPurchased ? S.of(context).product_purchased : S.of(context).product_purchase,
+                            style: TextStyle(color: isPurchased ? Colors.black : Colors.white),
+                          ),
+                        ),
+                      ]),
+                    ),
+                  );
+                }).toList());
+              }
 
               return ListView(
                 shrinkWrap: true,
