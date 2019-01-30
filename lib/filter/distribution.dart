@@ -181,7 +181,7 @@ class _DistributionState extends State<Distribution> {
           ],
         )));
 
-    //regionWidgets.add(getAdMobBanner());
+    regionWidgets.add(getAdMobBanner());
 
     return Container(
         color: Colors.white30,
