@@ -9,6 +9,8 @@
   "product_restore_purchases": "Genoprette indkøb",
   "product_no_ads_title": "Ingen uønsket reklame",
   "product_no_ads_description": "Programmet viser ikke reklamebanner nederst på skærmen.",
+  "product_search_title": "Search in names or taxonomy",
+  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
   "product_purchase": "Køb",
   "product_purchased": "Købt",
 
@@ -173,5 +175,9 @@
   "snack_no_flowers": "Ingen blomster, der matcher kriterier.",
   "snack_loading_ad": "Annonce er stadig indlæst, tryk igen på knappen.",
   "snack_copy": "Kopieret til udklipsholderen",
-  "snack_publish": "... offentliggøres senere"
+  "snack_publish": "... offentliggøres senere",
+
+  "search": "Search...",
+  "search_names": "Search in names",
+  "search_taxonomy": "Search in taxonomy"
 }

@@ -9,6 +9,8 @@
   "product_restore_purchases": "بازگرداندن خرید",
   "product_no_ads_title": "بدون تبلیغات ناخواسته",
   "product_no_ads_description": "برنامه بنر تبلیغاتی را در پایین صفحه نشان نمی دهد.",
+  "product_search_title": "Search in names or taxonomy",
+  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
   "product_purchase": "خرید",
   "product_purchased": "خریداری شده",
 
@@ -173,5 +175,9 @@
   "snack_no_flowers": "بدون گل مطابق معیارهای.",
   "snack_loading_ad": "تبلیغات هنوز بارگیری شده است، دوباره دکمه را فشار دهید.",
   "snack_copy": "کپی به کلیپ بورد",
-  "snack_publish": "بعدا منتشر شود"
+  "snack_publish": "بعدا منتشر شود",
+
+  "search": "Search...",
+  "search_names": "Search in names",
+  "search_taxonomy": "Search in taxonomy"
 }

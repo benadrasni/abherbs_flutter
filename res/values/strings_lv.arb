@@ -9,6 +9,8 @@
   "product_restore_purchases": "Atjaunot pirkumus",
   "product_no_ads_title": "Nav nevēlamas reklāmas",
   "product_no_ads_description": "Pieteikums neparādīs reklāmas reklāmkarogu ekrāna apakšā.",
+  "product_search_title": "Search in names or taxonomy",
+  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
   "product_purchase": "Pirkt",
   "product_purchased": "Legādāts",
 
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Nav ziedu atbilstības kritēriju.",
   "snack_loading_ad": "Reklāma joprojām tiek ielādēta, vēlreiz nospiediet pogu.",
   "snack_copy": "Kopēts uz starpliktuvi",
-  "snack_publish": "... publicēt vēlāk"
+  "snack_publish": "... publicēt vēlāk",
+
+  "search": "Search...",
+  "search_names": "Search in names",
+  "search_taxonomy": "Search in taxonomy"
 }

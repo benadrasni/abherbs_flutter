@@ -9,6 +9,8 @@
   "product_restore_purchases": "Restaurați achizițiile",
   "product_no_ads_title": "Nicio reclama nedorită",
   "product_no_ads_description": "Aplicația nu va afișa banner publicitar în partea de jos a ecranului.",
+  "product_search_title": "Search in names or taxonomy",
+  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
   "product_purchase": "Cumpărare",
   "product_purchased": "Cumparate",
 
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Nu există criterii de potrivire a florilor.",
   "snack_loading_ad": "Anunțul se încarcă încă, apăsați butonul din nou.",
   "snack_copy": "Copiat în Clipboard",
-  "snack_publish": "... care urmează să fie publicată ulterior"
+  "snack_publish": "... care urmează să fie publicată ulterior",
+
+  "search": "Search...",
+  "search_names": "Search in names",
+  "search_taxonomy": "Search in taxonomy"
 }

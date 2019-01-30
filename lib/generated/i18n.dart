@@ -127,7 +127,7 @@ class S implements WidgetsLocalizations {
   String get product_purchase => "Purchase";
   String get product_purchased => "Purchased";
   String get product_restore_purchases => "Restore Purchases";
-  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
+  String get product_search_description => "You'll be able to find a flower by its English or Latin name or by its taxon (e.g. order, family, genus).";
   String get product_search_title => "Search in names or taxonomy";
   String get rate => "Review";
   String get rate_later => "Later";
@@ -220,6 +220,8 @@ class $de extends S {
   @override
   String get caribbean => "Karibik";
   @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
+  @override
   String get australasia => "Australasien";
   @override
   String get petal_4 => "höchstens 4";
@@ -293,6 +295,8 @@ class $de extends S {
   String get feedback_run_ads_fullscreen => "Anzeige im Vollbildmodus";
   @override
   String get asia_temperate => "Asien-gemäßigt";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "Felsen oder Berge";
   @override
@@ -420,6 +424,8 @@ class $de extends S {
   @override
   String get northwestern_pacific => "Nordwestlicher Pazifik";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Südwesteuropa";
   @override
   String get taxonomy_species => "Art";
@@ -450,6 +456,8 @@ class $de extends S {
   @override
   String get arabian_peninsula => "Arabische Halbinsel";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Später";
   @override
   String get color_message => "Welche Farbe hat die Blume? Wähle die ähnlichste Farbe.";
@@ -475,6 +483,8 @@ class $de extends S {
   String get western_asia => "West-Asien";
   @override
   String get subarctic_america => "Subarktistisches Amerika";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Sie können eine erweiterte (+) Version mit zusätzlichen Funktionen wie Offline-Modus, Suche nach Namen, Suche in Taxonomie, Beobachtungen und konfigurierbaren Filter kaufen.";
   @override
@@ -547,6 +557,8 @@ class $hi extends S {
   String get distribution_message => "हमें किस भौगोलिक क्षेत्र पर ध्यान केंद्रित करना चाहिए?";
   @override
   String get caribbean => "कैरेबियन";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "ऑस्ट्रेलेशिया";
   @override
@@ -621,6 +633,8 @@ class $hi extends S {
   String get feedback_run_ads_fullscreen => "एक फुलस्क्रीन विज्ञापन दिखाएं";
   @override
   String get asia_temperate => "एशिया टेम्पलेट";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "एक चुनें";
   @override
@@ -748,6 +762,8 @@ class $hi extends S {
   @override
   String get northwestern_pacific => "उत्तर पश्चिमी प्रशांत महासागर";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "दक्षिणपश्चिम यूरोप";
   @override
   String get taxonomy_species => "प्रजातियां";
@@ -778,6 +794,8 @@ class $hi extends S {
   @override
   String get arabian_peninsula => "अरबी द्वीप";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "बाद में";
   @override
   String get color_message => "फूल का रंग क्या है? निकटतम एक चुनें";
@@ -803,6 +821,8 @@ class $hi extends S {
   String get western_asia => "पश्चिमी एशिया";
   @override
   String get subarctic_america => "सुबाराक्टिक अमेरिका";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "आप ऑफ़लाइन मोड जैसे अतिरिक्त कार्यक्षमता के साथ विस्तारित संस्करण खरीद सकते हैं, नामों में खोज कर सकते हैं, वर्गीकरण में देख सकते हैं, अवलोकन और कॉन्फ़िगर करने योग्य फ़िल्टर कर सकते हैं।";
   @override
@@ -875,6 +895,8 @@ class $fi extends S {
   String get distribution_message => "Mihin maantieteelliseen alueeseen meidän pitäisi keskittyä?";
   @override
   String get caribbean => "Karibian";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australiassa";
   @override
@@ -949,6 +971,8 @@ class $fi extends S {
   String get feedback_run_ads_fullscreen => "Näytä koko näytön mainos";
   @override
   String get asia_temperate => "Aasia Lämpötilaa";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "kiviä tai vuoria";
   @override
@@ -1076,6 +1100,8 @@ class $fi extends S {
   @override
   String get northwestern_pacific => "Luoteis-Tyynenmeren";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Lounais-Eurooppa";
   @override
   String get taxonomy_species => "Laji";
@@ -1106,6 +1132,8 @@ class $fi extends S {
   @override
   String get arabian_peninsula => "Arabian niemimaalla";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Myöhemmin";
   @override
   String get color_message => "Mikä on kukka? Valitse lähin.";
@@ -1131,6 +1159,8 @@ class $fi extends S {
   String get western_asia => "Länsi-Aasia";
   @override
   String get subarctic_america => "Subarktinen Amerikka";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Voit ostaa laajennettua versiota, jossa on lisätoimintoja, kuten offline-tilassa, etsiä nimiä, etsiä taksonomiassa, havainnoissa ja konfiguroitavissa olevassa suodattimessa.";
   @override
@@ -1203,6 +1233,8 @@ class $ru extends S {
   String get distribution_message => "На какой географической области мы должны сосредоточиться?";
   @override
   String get caribbean => "Карибик";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Австралазия";
   @override
@@ -1277,6 +1309,8 @@ class $ru extends S {
   String get feedback_run_ads_fullscreen => "Показать полноэкранную рекламу";
   @override
   String get asia_temperate => "Азия умерная";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "скалы или горы";
   @override
@@ -1404,6 +1438,8 @@ class $ru extends S {
   @override
   String get northwestern_pacific => "Северо-западная часть Тихого океана";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Юго-Западная Европа";
   @override
   String get taxonomy_species => "Вид";
@@ -1434,6 +1470,8 @@ class $ru extends S {
   @override
   String get arabian_peninsula => "Аравийский полуостров";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Позже";
   @override
   String get color_message => "Какого цвета цветок? Выберите ближайший.";
@@ -1459,6 +1497,8 @@ class $ru extends S {
   String get western_asia => "Западная Азия";
   @override
   String get subarctic_america => "Субарктическая Америка";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Вы можете купить расширенную версию с дополнительными функциями, такими как автономный режим, поиск по именам, поиск по таксономии, наблюдения и настраиваемый фильтр.";
   @override
@@ -1529,6 +1569,8 @@ class $pt extends S {
   String get distribution_message => "Em qual área geográfica se concentrar?";
   @override
   String get caribbean => "Caraíbas";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australásia";
   @override
@@ -1603,6 +1645,8 @@ class $pt extends S {
   String get feedback_run_ads_fullscreen => "Mostrar um anúncio em tela cheia";
   @override
   String get asia_temperate => "Ásia-Temperado";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "rochas e montanhas";
   @override
@@ -1730,6 +1774,8 @@ class $pt extends S {
   @override
   String get northwestern_pacific => "Noroeste do Pacífico";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Europa do Sudoeste";
   @override
   String get taxonomy_species => "espécie";
@@ -1758,6 +1804,8 @@ class $pt extends S {
   @override
   String get arabian_peninsula => "Península Arábica";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Mais tarde";
   @override
   String get color_message => "De que cor são as flores? Selecione a mais aproximada. Sempre pode voltar e selecionar uma outra.";
@@ -1783,6 +1831,8 @@ class $pt extends S {
   String get western_asia => "Ásia Ocidental";
   @override
   String get subarctic_america => "América Subarctic";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Você pode comprar a versão estendida (+) com funcionalidades adicionais, como o modo off-line, pesquisar nomes, pesquisar em taxonomia, observações e filtros configuráveis.";
   @override
@@ -1851,6 +1901,8 @@ class $lt extends S {
   String get distribution_message => "Kokią geografinę vietovę turėtume sutelkti?";
   @override
   String get caribbean => "Karibai";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australasija";
   @override
@@ -1925,6 +1977,8 @@ class $lt extends S {
   String get feedback_run_ads_fullscreen => "Rodyti viso ekrano skelbimą";
   @override
   String get asia_temperate => "Azijos temperatuotas";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "uolienos ar kalnai";
   @override
@@ -2052,6 +2106,8 @@ class $lt extends S {
   @override
   String get northwestern_pacific => "Ramiojo vandenyno šiaurės vakarai";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Pietvakarių Europa";
   @override
   String get taxonomy_species => "Rūšis";
@@ -2082,6 +2138,8 @@ class $lt extends S {
   @override
   String get arabian_peninsula => "Arabijos pusiasalis";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Vėliau";
   @override
   String get color_message => "Koks gėlių spalva? Pasirinkite artimiausią.";
@@ -2107,6 +2165,8 @@ class $lt extends S {
   String get western_asia => "Vakarų Azija";
   @override
   String get subarctic_america => "Subartikinė Amerika";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Galite įsigyti išplėstinę versiją su papildomomis funkcijomis, pavyzdžiui, neprisijungus, ieškoti vardų, ieškoti taksonomijos, stebėjimų ir konfigūruojamo filtro.";
   @override
@@ -2179,6 +2239,8 @@ class $hr extends S {
   String get distribution_message => "Na koje ćemo se geografsko područje usredotočiti?";
   @override
   String get caribbean => "Karibi";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australazija";
   @override
@@ -2253,6 +2315,8 @@ class $hr extends S {
   String get feedback_run_ads_fullscreen => "Pokaži oglas preko cijelog zaslona";
   @override
   String get asia_temperate => "Azija-umjerenih";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "stijene ili planine";
   @override
@@ -2380,6 +2444,8 @@ class $hr extends S {
   @override
   String get northwestern_pacific => "Sjeverozapadni Tihi ocean";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Jugozapadna Europa";
   @override
   String get taxonomy_species => "Vrsta";
@@ -2410,6 +2476,8 @@ class $hr extends S {
   @override
   String get arabian_peninsula => "Arapski poluotok";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Kasnije";
   @override
   String get color_message => "Koja je boja cvijeta? Odaberite najbližeg.";
@@ -2435,6 +2503,8 @@ class $hr extends S {
   String get western_asia => "Zapadna Azija";
   @override
   String get subarctic_america => "Subarktička Amerika";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Možete kupiti proširenu verziju s dodatnim funkcijama kao što je izvanmrežni način rada, tražiti imena, pretraživati u taksonomiji, promatrati i konfigurirati filtar.";
   @override
@@ -2505,6 +2575,8 @@ class $lv extends S {
   String get distribution_message => "Kuram ģeogrāfiskajam apgabalam vajadzētu koncentrēties?";
   @override
   String get caribbean => "Karību jūras reģions";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Austrālāzija";
   @override
@@ -2579,6 +2651,8 @@ class $lv extends S {
   String get feedback_run_ads_fullscreen => "Rādīt pilnekrāna reklāmu";
   @override
   String get asia_temperate => "Āzija Viduslaiku";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "uolienos ar kalnai";
   @override
@@ -2706,6 +2780,8 @@ class $lv extends S {
   @override
   String get northwestern_pacific => "Klusā okeāna ziemeļrietumu daļa";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Dienvidrietumu Eiropa";
   @override
   String get taxonomy_species => "Suga";
@@ -2736,6 +2812,8 @@ class $lv extends S {
   @override
   String get arabian_peninsula => "Arābijas pussala";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Vēlāk";
   @override
   String get color_message => "Kas ir krāsa ziedu? Izvēlieties tuvāko.";
@@ -2761,6 +2839,8 @@ class $lv extends S {
   String get western_asia => "Rietumu Āzija";
   @override
   String get subarctic_america => "Subartikā Amerika";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Jūs varat iegādāties paplašinātu versiju ar papildu funkcionalitāti, piemēram, bezsaistes režīmā, meklēt nosaukumos, meklēt taksonomijā, novērojumos un konfigurējamajā filtrā.";
   @override
@@ -2833,6 +2913,8 @@ class $fr extends S {
   String get distribution_message => "Sur quelle zone géographique se concentrer?";
   @override
   String get caribbean => "Caraïbes";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australasie";
   @override
@@ -2907,6 +2989,8 @@ class $fr extends S {
   String get feedback_run_ads_fullscreen => "Afficher une publicité en plein écran";
   @override
   String get asia_temperate => "Asie-tempérée";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "roches ou montagnes";
   @override
@@ -3034,6 +3118,8 @@ class $fr extends S {
   @override
   String get northwestern_pacific => "Pacifique Nord-Ouest";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Europe du sud-ouest";
   @override
   String get taxonomy_species => "Espèce";
@@ -3064,6 +3150,8 @@ class $fr extends S {
   @override
   String get arabian_peninsula => "Arabie";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Plus tard";
   @override
   String get color_message => "Quelle est la couleur des fleurs? Sélectionnez la couleur la plus proche.";
@@ -3089,6 +3177,8 @@ class $fr extends S {
   String get western_asia => "Asie occidentale";
   @override
   String get subarctic_america => "Amérique subarctique";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Vous pouvez acheter la version étendue avec des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche dans les noms, la recherche dans la taxonomie, les observations et le filtre configurable.";
   @override
@@ -3161,6 +3251,8 @@ class $hu extends S {
   String get distribution_message => "Melyik földrajzi területre kell összpontosítania?";
   @override
   String get caribbean => "Karib";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Ausztrália";
   @override
@@ -3235,6 +3327,8 @@ class $hu extends S {
   String get feedback_run_ads_fullscreen => "Teljes képernyős hirdetés megjelenítése";
   @override
   String get asia_temperate => "Ázsia mérsékelt";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "sziklák vagy hegyek";
   @override
@@ -3362,6 +3456,8 @@ class $hu extends S {
   @override
   String get northwestern_pacific => "Észak-nyugat Csendes-óceán";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Délnyugat Európa";
   @override
   String get taxonomy_species => "Faj";
@@ -3392,6 +3488,8 @@ class $hu extends S {
   @override
   String get arabian_peninsula => "Arab félsziget";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Később";
   @override
   String get color_message => "Milyen színű a virág? Válassza ki a legközelebbi színt.";
@@ -3417,6 +3515,8 @@ class $hu extends S {
   String get western_asia => "Nyugat-Ázsia";
   @override
   String get subarctic_america => "Subarkti-Amerika";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "A bővített változatot további funkciókkal vásárolhatja meg, mint például az offline mód, kereshet a nevekben, kereshet taxonómia, megfigyelések és konfigurálható szűrő segítségével.";
   @override
@@ -3489,6 +3589,8 @@ class $uk extends S {
   String get distribution_message => "На яку географічну область ми маємо зосередитися?";
   @override
   String get caribbean => "Карибський басейн";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Австралазія";
   @override
@@ -3563,6 +3665,8 @@ class $uk extends S {
   String get feedback_run_ads_fullscreen => "Показати повноекранну рекламу";
   @override
   String get asia_temperate => "Азія-Темнолітнаа";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "скелі або гори";
   @override
@@ -3690,6 +3794,8 @@ class $uk extends S {
   @override
   String get northwestern_pacific => "Північно-західний Тихий океан";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Південно-Західна Європа";
   @override
   String get taxonomy_species => "Вид";
@@ -3720,6 +3826,8 @@ class $uk extends S {
   @override
   String get arabian_peninsula => "Аравійський півострів";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Пізніше";
   @override
   String get color_message => "Який колір квітки? Виберіть найближчий.";
@@ -3745,6 +3853,8 @@ class $uk extends S {
   String get western_asia => "Західна Азія";
   @override
   String get subarctic_america => "Субарктична Америка";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Ви можете придбати розширену версію з додатковими функціональними можливостями, наприклад, автономний режим, пошук по іменах, пошук в таксономії, спостереженнях і налаштованому фільтрі.";
   @override
@@ -3817,6 +3927,8 @@ class $sk extends S {
   String get distribution_message => "Na ktorú geografickú oblasť zamerať pozornosť?";
   @override
   String get caribbean => "Karibik";
+  @override
+  String get product_search_description => "Budete môcť nájsť kvetinu podľa slovenského alebo latinského názvu alebo podľa taxónu (napr. podľa rádu, čeľade, rodu).";
   @override
   String get australasia => "Australázia";
   @override
@@ -3891,6 +4003,8 @@ class $sk extends S {
   String get feedback_run_ads_fullscreen => "Zobraziť reklamu na celej obrazovke";
   @override
   String get asia_temperate => "Mierne pásno Ázie";
+  @override
+  String get search => "Hľadať...";
   @override
   String get habitat_rock => "vrcholky hôr a skaly";
   @override
@@ -4014,6 +4128,8 @@ class $sk extends S {
   @override
   String get northwestern_pacific => "Severozápadné Tichomorie";
   @override
+  String get search_names => "Hľadať v názvoch";
+  @override
   String get southwestern_europe => "Juhozápadná Európa";
   @override
   String get taxonomy_species => "druh";
@@ -4042,6 +4158,8 @@ class $sk extends S {
   @override
   String get arabian_peninsula => "Arabský polostrov";
   @override
+  String get search_taxonomy => "Hľadať v taxonómii";
+  @override
   String get rate_later => "Neskôr";
   @override
   String get color_message => "Akej farby je kvet? Vyber tú najbližšiu. Vždy sa môžeš vrátiť a vybrať inú.";
@@ -4067,6 +4185,8 @@ class $sk extends S {
   String get western_asia => "Juhozápadná Ázia";
   @override
   String get subarctic_america => "Subarktická Amerika";
+  @override
+  String get product_search_title => "Hľadať v názvoch alebo v taxonómii";
   @override
   String get feedback_buy_extended => "Môžete si kúpiť rozšírenú verziu s funkciami navyše ako napríklad ofline režim, vyhľadávanie v názvoch a v taxonómii, pozorovania a nastaviteľný filter.";
   @override
@@ -4139,6 +4259,8 @@ class $sl extends S {
   String get distribution_message => "Na katero geografsko območje se moramo osredotočiti?";
   @override
   String get caribbean => "Karibi";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Avstralija";
   @override
@@ -4213,6 +4335,8 @@ class $sl extends S {
   String get feedback_run_ads_fullscreen => "Pokaži celozaslonski oglas";
   @override
   String get asia_temperate => "Azija temperaturna";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "skale ali gore";
   @override
@@ -4340,6 +4464,8 @@ class $sl extends S {
   @override
   String get northwestern_pacific => "Severozahodni Pacifik";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Jugozahodna Evropa";
   @override
   String get taxonomy_species => "Vrsta";
@@ -4370,6 +4496,8 @@ class $sl extends S {
   @override
   String get arabian_peninsula => "Arabski polotok";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Kasneje";
   @override
   String get color_message => "Kaj je barva cveta? Izberite najustreznejšo.";
@@ -4395,6 +4523,8 @@ class $sl extends S {
   String get western_asia => "Zahodna Azija";
   @override
   String get subarctic_america => "Subarctic Amerika";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Razširjeno različico lahko kupite z dodatnimi funkcijami, kot je način brez povezave, iskanje imen, iskanje v taksonomiji, opazovanje in nastavljiv filter.";
   @override
@@ -4467,6 +4597,8 @@ class $id extends S {
   String get distribution_message => "Area geografis mana yang harus kita fokuskan?";
   @override
   String get caribbean => "Karibia";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australasia";
   @override
@@ -4541,6 +4673,8 @@ class $id extends S {
   String get feedback_run_ads_fullscreen => "Tampilkan iklan layar penuh";
   @override
   String get asia_temperate => "Asia Beriklim";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "batu atau gunung";
   @override
@@ -4668,6 +4802,8 @@ class $id extends S {
   @override
   String get northwestern_pacific => "Pasifik Barat Laut";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Eropa Barat Daya";
   @override
   String get taxonomy_species => "Jenis";
@@ -4698,6 +4834,8 @@ class $id extends S {
   @override
   String get arabian_peninsula => "Semenanjung Arab";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Kemudian";
   @override
   String get color_message => "Apa warna bunga itu? Pilih yang terdekat.";
@@ -4723,6 +4861,8 @@ class $id extends S {
   String get western_asia => "Asia Barat";
   @override
   String get subarctic_america => "Subarctic America";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Anda dapat membeli versi lanjutan dengan fungsi tambahan seperti mode offline, pencarian nama, pencarian taksonomi, pengamatan, dan filter yang dapat dikonfigurasi.";
   @override
@@ -4795,6 +4935,8 @@ class $sr extends S {
   String get distribution_message => "На коју географску област треба да се фокусирамо?";
   @override
   String get caribbean => "Кариби";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Аустраласиа";
   @override
@@ -4869,6 +5011,8 @@ class $sr extends S {
   String get feedback_run_ads_fullscreen => "Прикажи рекламу преко целог екрана";
   @override
   String get asia_temperate => "Асиа Температе";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "стене или планине";
   @override
@@ -4996,6 +5140,8 @@ class $sr extends S {
   @override
   String get northwestern_pacific => "Северозападни Пацифик";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Југозападна Европа";
   @override
   String get taxonomy_species => "врста";
@@ -5026,6 +5172,8 @@ class $sr extends S {
   @override
   String get arabian_peninsula => "Арабијско полуострво";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Касније";
   @override
   String get color_message => "Која је боја цвијета? Изаберите најближег.";
@@ -5051,6 +5199,8 @@ class $sr extends S {
   String get western_asia => "Западна Азија";
   @override
   String get subarctic_america => "Субарцтиц Америца";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Можете купити проширену верзију са додатном функционалношћу као што је оффлине режим, тражити имена, претраживати у таксономији, опажањима и конфигурирати филтер.";
   @override
@@ -5123,6 +5273,8 @@ class $sv extends S {
   String get distribution_message => "Vilket geografiskt område ska vi fokusera på?";
   @override
   String get caribbean => "Karibisk";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australasien";
   @override
@@ -5197,6 +5349,8 @@ class $sv extends S {
   String get feedback_run_ads_fullscreen => "Visa en fullskärmsannons";
   @override
   String get asia_temperate => "Asien Temperate";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "stenar eller berg";
   @override
@@ -5324,6 +5478,8 @@ class $sv extends S {
   @override
   String get northwestern_pacific => "Nordvästra Stilla havet";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Sydvästra Europa";
   @override
   String get taxonomy_species => "Art";
@@ -5354,6 +5510,8 @@ class $sv extends S {
   @override
   String get arabian_peninsula => "Arabiska halvön";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Senare";
   @override
   String get color_message => "Vad är blommans färg? Välj den närmaste.";
@@ -5379,6 +5537,8 @@ class $sv extends S {
   String get western_asia => "Västra Asien";
   @override
   String get subarctic_america => "Subarctic Amerika";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Du kan köpa utökad version med ytterligare funktioner som offline-läge, sök i namn, sök i taxonomi, observationer och konfigurerbart filter.";
   @override
@@ -5456,6 +5616,8 @@ class $it extends S {
   @override
   String get caribbean => "Caraibico";
   @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
+  @override
   String get australasia => "Australasia";
   @override
   String get petal_4 => "4 o meno";
@@ -5529,6 +5691,8 @@ class $it extends S {
   String get feedback_run_ads_fullscreen => "Mostra una pubblicità a schermo intero";
   @override
   String get asia_temperate => "Asia-Temperato";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "rocce o montagne";
   @override
@@ -5656,6 +5820,8 @@ class $it extends S {
   @override
   String get northwestern_pacific => "Pacifico nordoccidentale";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Europa sudoccidentale";
   @override
   String get taxonomy_species => "Specie";
@@ -5686,6 +5852,8 @@ class $it extends S {
   @override
   String get arabian_peninsula => "Penisola arabica";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Dopo";
   @override
   String get color_message => "Di che colore è il fiore? Scegli il più simile.";
@@ -5711,6 +5879,8 @@ class $it extends S {
   String get western_asia => "Asia occidentale";
   @override
   String get subarctic_america => "America subartica";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "È possibile acquistare la versione estesa con funzionalità aggiuntive come la modalità offline, la ricerca nei nomi, la ricerca in tassonomia, le osservazioni e il filtro configurabile.";
   @override
@@ -5783,6 +5953,8 @@ class $es extends S {
   String get distribution_message => "¿En qué área geográfica enfocarse?";
   @override
   String get caribbean => "Caribe";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australasia";
   @override
@@ -5857,6 +6029,8 @@ class $es extends S {
   String get feedback_run_ads_fullscreen => "Mostrar un anuncio en pantalla completa";
   @override
   String get asia_temperate => "Asia-Templado";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "rocas o montaña";
   @override
@@ -5984,6 +6158,8 @@ class $es extends S {
   @override
   String get northwestern_pacific => "Noroeste del Pacífico";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Sudoeste de Europa";
   @override
   String get taxonomy_species => "especie";
@@ -6014,6 +6190,8 @@ class $es extends S {
   @override
   String get arabian_peninsula => "Península Arabica";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Más tarde";
   @override
   String get color_message => "¿Cuál es el color de la flor? Elige el más cercano. Puedes volver a cambiar la selección cuando sea.";
@@ -6039,6 +6217,8 @@ class $es extends S {
   String get western_asia => "Asia occidental";
   @override
   String get subarctic_america => "América Subártica";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Puede comprar la versión extendida (+) con funcionalidad adicional como el modo fuera de línea, buscar en nombres, buscar en taxonomía, observaciones y filtros configurables.";
   @override
@@ -6111,6 +6291,8 @@ class $et extends S {
   String get distribution_message => "Milline geograafiline piirkond peaks keskenduma?";
   @override
   String get caribbean => "Kariibimere saared";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Austraalia";
   @override
@@ -6185,6 +6367,8 @@ class $et extends S {
   String get feedback_run_ads_fullscreen => "Näita täisekraani reklaami";
   @override
   String get asia_temperate => "Aasia-Mõõdukas";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "kivid või mägedes";
   @override
@@ -6312,6 +6496,8 @@ class $et extends S {
   @override
   String get northwestern_pacific => "Vaikse ookeani loodeosas";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Edela-Euroopa";
   @override
   String get taxonomy_species => "Liik";
@@ -6342,6 +6528,8 @@ class $et extends S {
   @override
   String get arabian_peninsula => "Araabia poolsaar";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Pärast";
   @override
   String get color_message => "Mis värvi lill? Vali lähim.";
@@ -6367,6 +6555,8 @@ class $et extends S {
   String get western_asia => "Lääne-Aasias";
   @override
   String get subarctic_america => "Subarctic Ameerika";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Laiendatud (+) versiooni saate osta täiendava funktsionaalsusega, näiteks offline režiimis, otsida nimesid, otsida taksonoomiast, vaatlustest ja seadistatavast filtrist.";
   @override
@@ -6439,6 +6629,8 @@ class $cs extends S {
   String get distribution_message => "Na kterou geografickou oblast zaměřit pozornost?";
   @override
   String get caribbean => "Karibik";
+  @override
+  String get product_search_description => "Budete moci najít květinu podle českého nebo latinského názvu nebo podle taxonu (např. podle řádu, čeledi, rodu).";
   @override
   String get australasia => "Australasie";
   @override
@@ -6513,6 +6705,8 @@ class $cs extends S {
   String get feedback_run_ads_fullscreen => "Zobrazit reklamu na celé obrazovce";
   @override
   String get asia_temperate => "Temperátní Asie";
+  @override
+  String get search => "Hledat...";
   @override
   String get habitat_rock => "vrcholky hor a skály";
   @override
@@ -6640,6 +6834,8 @@ class $cs extends S {
   @override
   String get northwestern_pacific => "Severozápadní Tichomoří";
   @override
+  String get search_names => "Hledat v jménech";
+  @override
   String get southwestern_europe => "Jihozápadní Evropa";
   @override
   String get taxonomy_species => "druh";
@@ -6670,6 +6866,8 @@ class $cs extends S {
   @override
   String get arabian_peninsula => "Arabský poloostrov";
   @override
+  String get search_taxonomy => "Hledat v taxonomii";
+  @override
   String get rate_later => "Později";
   @override
   String get color_message => "Jaké barvy jsou květiny? Vyber tu nejbližší. Vždy se můžeš vrátit a vybrat jinou.";
@@ -6695,6 +6893,8 @@ class $cs extends S {
   String get western_asia => "Jihozápadní Asie";
   @override
   String get subarctic_america => "Subarktická Amerika";
+  @override
+  String get product_search_title => "Hledat v jménech nebo v taxonomii";
   @override
   String get feedback_buy_extended => "Můžete si koupit rozšířenou verzi s funkcemi navíc jako například ofline režim, vyhledávání v názvech a v taxonomii, pozorování a nastavitelný filtr.";
   @override
@@ -6767,6 +6967,8 @@ class $ar extends S {
   String get distribution_message => "ما هي المنطقة الجغرافية التي ينبغي لنا التركيز عليها؟";
   @override
   String get caribbean => "منطقة البحر الكاريبي";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "أستراليا";
   @override
@@ -6841,6 +7043,8 @@ class $ar extends S {
   String get feedback_run_ads_fullscreen => "عرض إعلان بملء الشاشة";
   @override
   String get asia_temperate => "آسيا المعتدلة";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "صخور أو جبال";
   @override
@@ -6968,6 +7172,8 @@ class $ar extends S {
   @override
   String get northwestern_pacific => "شمال غرب المحيط الهادئ";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "جنوب غرب أوروبا";
   @override
   String get taxonomy_species => "محيط";
@@ -6998,6 +7204,8 @@ class $ar extends S {
   @override
   String get arabian_peninsula => "شبه الجزيرة العربية";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "في وقت لاحق";
   @override
   String get color_message => "ما هو لون الزهرة؟ اختيار أقرب واحد.";
@@ -7023,6 +7231,8 @@ class $ar extends S {
   String get western_asia => "آسيا الغربية";
   @override
   String get subarctic_america => "أمريكا الشمالية";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "يمكنك شراء إصدار موسّع (+) مع وظائف إضافية مثل وضع عدم الاتصال ، والبحث في الأسماء ، والبحث في التصنيف ، والملاحظات ، والفلتر القابل للتكوين.";
   @override
@@ -7095,6 +7305,8 @@ class $pa extends S {
   String get distribution_message => "ਕਿਹੜੇ ਭੂਗੋਲਿਕ ਖੇਤਰ 'ਤੇ ਸਾਨੂੰ ਧਿਆਨ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ?";
   @override
   String get caribbean => "ਕੈਰੀਬੀਅਨ";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "ਆਸਟ੍ਰੇਲੀਆ";
   @override
@@ -7169,6 +7381,8 @@ class $pa extends S {
   String get feedback_run_ads_fullscreen => "ਇੱਕ ਪੂਰੀ ਸਕ੍ਰੀਨ ਵਿਗਿਆਪਨ ਦਿਖਾਓ";
   @override
   String get asia_temperate => "ਏਸ਼ੀਆ-ਤਾਪਤਾ";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "ਇਕ ਚੁਣੋ";
   @override
@@ -7296,6 +7510,8 @@ class $pa extends S {
   @override
   String get northwestern_pacific => "ਉੱਤਰੀ ਪੱਛਮੀ ਪੈਸੀਫਿਕ";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "ਦੱਖਣ ਪੱਛਮੀ ਯੂਰਪ";
   @override
   String get taxonomy_species => "ਸਪੀਸੀਜ਼";
@@ -7326,6 +7542,8 @@ class $pa extends S {
   @override
   String get arabian_peninsula => "ਅਰਬੀ ਪ੍ਰਾਇਦੀਪ";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "ਬਾਅਦ ਵਿਚ";
   @override
   String get color_message => "ਫੁੱਲ ਦਾ ਰੰਗ ਕਿਹੜਾ ਹੈ? ਸਭ ਤੋਂ ਨਜ਼ਦੀਕੀ ਚੁਣੋ";
@@ -7351,6 +7569,8 @@ class $pa extends S {
   String get western_asia => "ਪੱਛਮੀ ਏਸ਼ੀਆ";
   @override
   String get subarctic_america => "ਸੁਬਰਟਿਕ ਅਮਰੀਕਾ";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "ਤੁਸੀਂ ਅਤਿਰਿਕਤ ਫੰਕਸ਼ਨ ਜਿਵੇਂ ਐੱਮਲਾਈਨ ਮੋਡ, ਐਕਸਟੈਨਸ਼ਨ, ਨਾਮਾਂ ਦੀ ਖੋਜ, ਟੈਕਸਸੋਨੀਓ ਵਿੱਚ ਖੋਜ, ਨਿਰੀਖਣ ਅਤੇ ਕਨਫ਼ੀਗਰੇਬਲ ਫਿਲਟਰ ਨਾਲ ਐਕਸਟੈਂਡਡ ਵਰਜ਼ਨ ਖਰੀਦ ਸਕਦੇ ਹੋ.";
   @override
@@ -7423,6 +7643,8 @@ class $nb extends S {
   String get distribution_message => "Hvilket geografisk område skal vi fokusere på?";
   @override
   String get caribbean => "Caribbean";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australasia";
   @override
@@ -7497,6 +7719,8 @@ class $nb extends S {
   String get feedback_run_ads_fullscreen => "Vis en fullskjerm-annonse";
   @override
   String get asia_temperate => "Asia-temperert";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "steiner eller fjell";
   @override
@@ -7624,6 +7848,8 @@ class $nb extends S {
   @override
   String get northwestern_pacific => "Nordvest Stillehavet";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Sørvestlige Europa";
   @override
   String get taxonomy_species => "Art";
@@ -7654,6 +7880,8 @@ class $nb extends S {
   @override
   String get arabian_peninsula => "Den arabiske halvøy";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Seinere";
   @override
   String get color_message => "Hva er fargen på blomsten? Velg den nærmeste.";
@@ -7679,6 +7907,8 @@ class $nb extends S {
   String get western_asia => "Vest-Asia";
   @override
   String get subarctic_america => "Subarctic America";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Du kan kjøpe utvidet versjon med ekstra funksjonalitet som frakoblet modus, søk i navn, søk i taksonomi, observasjoner og konfigurerbart filter.";
   @override
@@ -7764,6 +7994,8 @@ class $ja extends S {
   @override
   String get caribbean => "カリブ海";
   @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
+  @override
   String get australasia => "オーストラリア";
   @override
   String get petal_4 => "4以下";
@@ -7837,6 +8069,8 @@ class $ja extends S {
   String get feedback_run_ads_fullscreen => "フルスクリーン広告を表示する";
   @override
   String get asia_temperate => "アジアの温帯";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "山";
   @override
@@ -7964,6 +8198,8 @@ class $ja extends S {
   @override
   String get northwestern_pacific => "北西太平洋";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "南西ヨーロッパ";
   @override
   String get taxonomy_species => "種";
@@ -7994,6 +8230,8 @@ class $ja extends S {
   @override
   String get arabian_peninsula => "アラビア半島";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "後で";
   @override
   String get color_message => "花の色は何ですか？ 最も近いものを選んでください。";
@@ -8019,6 +8257,8 @@ class $ja extends S {
   String get western_asia => "西アジア";
   @override
   String get subarctic_america => "亜寒帯アメリカ";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "オフラインモード、名前で検索、分類法で検索、観測、設定可能なフィルタなどの追加機能を備えた拡張バージョンを購入できます。";
   @override
@@ -8091,6 +8331,8 @@ class $fa extends S {
   String get distribution_message => "کدام منطقه جغرافیایی باید تمرکز کنیم؟";
   @override
   String get caribbean => "کارائیب";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "استرالیا";
   @override
@@ -8165,6 +8407,8 @@ class $fa extends S {
   String get feedback_run_ads_fullscreen => "یک تبلیغ تمام صفحه را نشان دهید";
   @override
   String get asia_temperate => "آسیا درجه حرارت";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "سنگ ها یا کوه ها";
   @override
@@ -8290,6 +8534,8 @@ class $fa extends S {
   @override
   String get northwestern_pacific => "شمال غرب اقیانوس آرام";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "جنوب غربی اروپا";
   @override
   String get taxonomy_species => "گونه";
@@ -8320,6 +8566,8 @@ class $fa extends S {
   @override
   String get arabian_peninsula => "شبه جزیره عربی";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "بعد";
   @override
   String get color_message => "رنگ گل چیست؟ نزدیک ترین را انتخاب کنید";
@@ -8345,6 +8593,8 @@ class $fa extends S {
   String get western_asia => "آسیای غربی";
   @override
   String get subarctic_america => "Subarctic America";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "شما می توانید نسخه پیشرفته با قابلیت های اضافی مانند حالت آفلاین، جستجو در اسامی، جستجو در طبقه بندی، مشاهدات و فیلتر قابل تنظیم را خریداری کنید.";
   @override
@@ -8415,6 +8665,8 @@ class $pl extends S {
   String get distribution_message => "Na jakim obszarze geograficznym się skupić?";
   @override
   String get caribbean => "Karaiby";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australazja";
   @override
@@ -8489,6 +8741,8 @@ class $pl extends S {
   String get feedback_run_ads_fullscreen => "Pokaż reklamę pełnoekranową";
   @override
   String get asia_temperate => "Azja umiarkowana";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "Skały lub góry";
   @override
@@ -8616,6 +8870,8 @@ class $pl extends S {
   @override
   String get northwestern_pacific => "Północno-Zachodni Pacyfik";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Południowo-zachodnia Europa";
   @override
   String get taxonomy_species => "Gatunek";
@@ -8646,6 +8902,8 @@ class $pl extends S {
   @override
   String get arabian_peninsula => "Półwysep Arabski";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Później";
   @override
   String get color_message => "Jakiego koloru jest kwiat? Wybierz najbliższy kolor.";
@@ -8671,6 +8929,8 @@ class $pl extends S {
   String get western_asia => "Zachodnia Azja";
   @override
   String get subarctic_america => "Ameryka subarktyczna";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Możesz nabyć wersję rozszerzoną, która posiada dodatkowe funkcjonalności, jak np. tryb offline, wyszukiwanie po nazwach czy taksonomii.";
   @override
@@ -8741,6 +9001,8 @@ class $da extends S {
   String get distribution_message => "Hvilket geografisk område skal vi fokusere på?";
   @override
   String get caribbean => "Caribien";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australasien";
   @override
@@ -8815,6 +9077,8 @@ class $da extends S {
   String get feedback_run_ads_fullscreen => "Vis en fuldscreen reklame";
   @override
   String get asia_temperate => "Asien-Tempereret";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "klipper eller bjerge";
   @override
@@ -8940,6 +9204,8 @@ class $da extends S {
   @override
   String get northwestern_pacific => "Nordvestlige Stillehavet";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Sydvesteuropa";
   @override
   String get taxonomy_species => "Art";
@@ -8970,6 +9236,8 @@ class $da extends S {
   @override
   String get arabian_peninsula => "Den arabiske halvø";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Senere";
   @override
   String get color_message => "Hvad er farven på blomsten? Vælg den nærmeste.";
@@ -8995,6 +9263,8 @@ class $da extends S {
   String get western_asia => "Vestasien";
   @override
   String get subarctic_america => "Subarctic America";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Du kan købe udvidet (+) version med ekstra funktionalitet som offline-tilstand, søge i navne, søge i taksonomi, observationer og konfigurerbart filter.";
   @override
@@ -9065,6 +9335,8 @@ class $he extends S {
   String get distribution_message => "באיזה אזור גיאוגרפי עלינו להתמקד?";
   @override
   String get caribbean => "הקאריביים";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "אוסטרליה";
   @override
@@ -9139,6 +9411,8 @@ class $he extends S {
   String get feedback_run_ads_fullscreen => "הצג פרסומת במסך מלא";
   @override
   String get asia_temperate => "אסיה ממוזג";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "סלעים או הרים";
   @override
@@ -9266,6 +9540,8 @@ class $he extends S {
   @override
   String get northwestern_pacific => "צפון מערב האוקיינוס השקט";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "דרום מערב אירופה";
   @override
   String get taxonomy_species => "מין";
@@ -9296,6 +9572,8 @@ class $he extends S {
   @override
   String get arabian_peninsula => "חצי האי ערב";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "יותר מאוחר";
   @override
   String get color_message => "מה צבע הפרח? בחר את הקרוב ביותר.";
@@ -9321,6 +9599,8 @@ class $he extends S {
   String get western_asia => "מערב אסיה";
   @override
   String get subarctic_america => "אמריקה הסובארקטית";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "אתה יכול לקנות גרסה מורחבת עם פונקציונליות נוספת כמו במצב לא מקוון, חיפוש בשמות, חיפוש בטקסונומיה, תצפיות ומסנן להגדרה.";
   @override
@@ -9393,6 +9673,8 @@ class $ro extends S {
   String get distribution_message => "La ce zonă geografică trebuie să ne concentrăm?";
   @override
   String get caribbean => "Insulele Caraibe";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australasia";
   @override
@@ -9467,6 +9749,8 @@ class $ro extends S {
   String get feedback_run_ads_fullscreen => "Afișați o publicitate pe întregul ecran";
   @override
   String get asia_temperate => "Asia temperată";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "stânci sau munți";
   @override
@@ -9594,6 +9878,8 @@ class $ro extends S {
   @override
   String get northwestern_pacific => "Nord-vestul Pacificului";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Europa de Sud-Vest";
   @override
   String get taxonomy_species => "Specie";
@@ -9624,6 +9910,8 @@ class $ro extends S {
   @override
   String get arabian_peninsula => "Peninsula Arabică";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Mai tarziu";
   @override
   String get color_message => "Care este culoarea florii? Alege culoarea cea mai apropiată.";
@@ -9649,6 +9937,8 @@ class $ro extends S {
   String get western_asia => "Asia de Vest";
   @override
   String get subarctic_america => "Subarctic America";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "Puteți cumpăra o versiune extinsă cu funcționalități suplimentare, cum ar fi modul offline, căutarea în nume, căutare în taxonomie, observații și filtru configurabil.";
   @override
@@ -9721,6 +10011,8 @@ class $nl extends S {
   String get distribution_message => "Op welk geografisch gebied moet je focussen?";
   @override
   String get caribbean => "Caribbean";
+  @override
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
   @override
   String get australasia => "Australazië";
   @override
@@ -9795,6 +10087,8 @@ class $nl extends S {
   String get feedback_run_ads_fullscreen => "Laat een advertentie op volledig scherm zien";
   @override
   String get asia_temperate => "Azië Gematigd";
+  @override
+  String get search => "Search...";
   @override
   String get habitat_rock => "rotsen of bergen";
   @override
@@ -9922,6 +10216,8 @@ class $nl extends S {
   @override
   String get northwestern_pacific => "Northwestern Stille Oceaan";
   @override
+  String get search_names => "Search in names";
+  @override
   String get southwestern_europe => "Zuidwest-Europa";
   @override
   String get taxonomy_species => "Soort";
@@ -9952,6 +10248,8 @@ class $nl extends S {
   @override
   String get arabian_peninsula => "Arabisch Schiereiland";
   @override
+  String get search_taxonomy => "Search in taxonomy";
+  @override
   String get rate_later => "Later";
   @override
   String get color_message => "Wat is de kleur van de bloem? Kies de kleur die er het dichtst bij komt.";
@@ -9977,6 +10275,8 @@ class $nl extends S {
   String get western_asia => "West-Azië";
   @override
   String get subarctic_america => "Subarctisch Amerika";
+  @override
+  String get product_search_title => "Search in names or taxonomy";
   @override
   String get feedback_buy_extended => "U kunt een uitgebreide versie kopen met extra functionaliteit zoals de offline modus, zoeken in namen, zoeken in taxonomie, observaties en configureerbare filter.";
   @override
