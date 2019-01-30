@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:abherbs_flutter/purchases.dart';
+import 'package:abherbs_flutter/search/search.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -24,6 +25,7 @@ const String playStore = "market://details?id=sk.ab.herbs";
 const String playStorePlus = "market://details?id=sk.ab.herbsplus";
 const String appStore = "https://itunes.apple.com/us/app/whats-that-flower/id1449982118?mt=8&action=write-review";
 
+const String languageLatin = "la";
 const String languageEnglish = "en";
 const String languageSlovak = "sk";
 const String languageCzech = "cs";
@@ -42,6 +44,7 @@ const String thumbnailsDir = "/.thumbnails";
 const String firebaseCounts = 'counts_4_v2';
 const String firebaseLists = 'lists_4_v2';
 const String firebasePlants = 'plants_v2';
+const String firebaseSearch = 'search_v2';
 const String firebasePlantHeaders = 'plants_headers';
 const String firebaseTranslations = 'translations';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
@@ -110,6 +113,23 @@ Icon getIcon(String productId) {
     case productSearch:
       return Icon(Icons.search);
   }
+}
+
+List<Widget> getActions(BuildContext context, Function(String) onChangeLanguage, Function() onBuyProduct) {
+  var _actions = <Widget>[];
+  if (Purchases.isSearch()) {
+    _actions.add(IconButton(
+      icon: getIcon(productSearch),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+        );
+      },
+    ));
+  }
+
+  return _actions;
 }
 
 Widget getAdMobBanner() {

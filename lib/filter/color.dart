@@ -10,7 +10,6 @@ import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/prefs.dart';
-import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -268,19 +267,11 @@ class _ColorState extends State<Color> {
           }
         }));
 
-    var _actions = <Widget>[];
-    if (Purchases.isSearch()) {
-      _actions.add(IconButton(
-        icon: getIcon(productSearch),
-        onPressed: () {},
-      ));
-    }
-
     return Scaffold(
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
-        actions: _actions,
+        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
       body: Stack(
