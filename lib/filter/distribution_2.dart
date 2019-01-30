@@ -173,8 +173,8 @@ class _Distribution2State extends State<Distribution2> {
     var mainContext = context;
     return Scaffold(
       key: _key,
-      appBar: new AppBar(
-        title: new Text(S.of(context).filter_distribution),
+      appBar: AppBar(
+        title: Text(S.of(context).filter_distribution),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
