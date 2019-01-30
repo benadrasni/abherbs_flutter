@@ -127,6 +127,8 @@ class S implements WidgetsLocalizations {
   String get product_purchase => "Purchase";
   String get product_purchased => "Purchased";
   String get product_restore_purchases => "Restore Purchases";
+  String get product_search_description => "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).";
+  String get product_search_title => "Search in names or taxonomy";
   String get rate => "Review";
   String get rate_later => "Later";
   String get rate_never => "Never";

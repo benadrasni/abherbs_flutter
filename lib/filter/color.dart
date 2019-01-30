@@ -13,6 +13,7 @@ import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
@@ -29,6 +30,7 @@ class Color extends StatefulWidget {
 class _ColorState extends State<Color> {
   Future<int> _count;
   Future<String> _rateStateF;
+  Future<List<PurchasedItem>> _purchasesF;
   Map<String, String> _filter;
   GlobalKey<ScaffoldState> _key;
 
@@ -115,6 +117,11 @@ class _ColorState extends State<Color> {
     _filter.remove(filterColor);
     _key = new GlobalKey<ScaffoldState>();
     _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
+    _purchasesF = FlutterInappPurchase.getAvailablePurchases().catchError((error) {
+      return Future<List<PurchasedItem>>(() {
+        return <PurchasedItem>[];
+      });
+    });
 
     _setCount();
 
@@ -203,7 +210,8 @@ class _ColorState extends State<Color> {
     ));
     _widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
-      child: Text(S.of(context).color_message,
+      child: Text(
+        S.of(context).color_message,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontStyle: FontStyle.italic,
@@ -267,91 +275,123 @@ class _ColorState extends State<Color> {
           }
         }));
 
-    return Scaffold(
-      key: _key,
-      appBar: AppBar(
-        title: Text(S.of(context).filter_color),
-      ),
-      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
-      body: Stack(
-        children: <Widget>[
-          Positioned.fill(
-            child: Image.asset(
-              "res/images/app_background.webp",
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.bottomCenter,
-            ),
+    var _body = Stack(
+      children: <Widget>[
+        Positioned.fill(
+          child: Image.asset(
+            "res/images/app_background.webp",
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.bottomCenter,
           ),
-          ListView(
-            padding: EdgeInsets.all(5.0),
-            children: _widgets,
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        items: getBottomNavigationBarItems(context, _filter),
-        type: BottomNavigationBarType.fixed,
-        onTap: (index) {
-          var route;
-          var nextFilterAttribute;
-          switch (index) {
-            case 1:
-              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              nextFilterAttribute = filterHabitat;
-              break;
-            case 2:
-              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              nextFilterAttribute = filterPetal;
-              break;
-            case 3:
-              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              nextFilterAttribute = filterDistribution;
-              break;
-          }
-          if (filterRoutes[nextFilterAttribute] != null) {
-            Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
-          }
-          filterRoutes[nextFilterAttribute] = route;
-          Navigator.push(context, route);
-        },
-      ),
-      floatingActionButton: Container(
-        height: 70.0 + getFABPadding(),
-        width: 70.0,
-        padding: EdgeInsets.only(bottom: getFABPadding()),
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: FutureBuilder<int>(
-              future: _count,
-              builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.active:
-                  case ConnectionState.waiting:
-                    return const CircularProgressIndicator();
-                  default:
-                    return GestureDetector(
-                      onLongPress: () {
-                        setState(() {
-                          clearFilter(_filter, _setCount);
+        ),
+        ListView(
+          padding: EdgeInsets.all(5.0),
+          children: _widgets,
+        ),
+      ],
+    );
+
+    var _bottomNavigationBar = BottomNavigationBar(
+      currentIndex: 0,
+      items: getBottomNavigationBarItems(context, _filter),
+      type: BottomNavigationBarType.fixed,
+      onTap: (index) {
+        var route;
+        var nextFilterAttribute;
+        switch (index) {
+          case 1:
+            route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
+            nextFilterAttribute = filterHabitat;
+            break;
+          case 2:
+            route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
+            nextFilterAttribute = filterPetal;
+            break;
+          case 3:
+            route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, widget.onBuyProduct, _filter));
+            nextFilterAttribute = filterDistribution;
+            break;
+        }
+        if (filterRoutes[nextFilterAttribute] != null) {
+          Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
+        }
+        filterRoutes[nextFilterAttribute] = route;
+        Navigator.push(context, route);
+      },
+    );
+
+    var _floatingActionButton = Container(
+      height: 70.0 + getFABPadding(),
+      width: 70.0,
+      padding: EdgeInsets.only(bottom: getFABPadding()),
+      child: FittedBox(
+        fit: BoxFit.fill,
+        child: FutureBuilder<int>(
+            future: _count,
+            builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.active:
+                case ConnectionState.waiting:
+                  return const CircularProgressIndicator();
+                default:
+                  return GestureDetector(
+                    onLongPress: () {
+                      setState(() {
+                        clearFilter(_filter, _setCount);
+                      });
+                    },
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        Navigator.push(
+                          mainContext,
+                          MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                        ).then((value) {
+                          Ads.showBannerAd(this);
                         });
                       },
-                      child: FloatingActionButton(
-                        onPressed: () {
-                          Navigator.push(
-                            mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
-                          ).then((value) {
-                            Ads.showBannerAd(this);
-                          });
-                        },
-                        child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
-                      ),
-                    );
-                }
-              }),
-        ),
+                      child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
+                    ),
+                  );
+              }
+            }),
       ),
+    );
+
+    return FutureBuilder<List<PurchasedItem>>(
+      future: _purchasesF,
+      builder: (BuildContext context, AsyncSnapshot<List<PurchasedItem>> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.done:
+            return Scaffold(
+              key: _key,
+              appBar: AppBar(
+                title: Text(S.of(context).filter_color),
+                actions:
+                    snapshot.data.where((product) => product.productId != productNoAdsAndroid && product.productId != productNoAdsIOS).map((product) {
+                  return IconButton(
+                    icon: getIcon(product.productId),
+                    onPressed: () {},
+                  );
+                }).toList(),
+              ),
+              drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
+              body: _body,
+              bottomNavigationBar: _bottomNavigationBar,
+              floatingActionButton: _floatingActionButton,
+            );
+          default:
+            return Scaffold(
+              key: _key,
+              appBar: AppBar(
+                title: Text(S.of(context).filter_color),
+              ),
+              drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
+              body: _body,
+              bottomNavigationBar: _bottomNavigationBar,
+              floatingActionButton: _floatingActionButton,
+            );
+        }
+      },
     );
   }
 }

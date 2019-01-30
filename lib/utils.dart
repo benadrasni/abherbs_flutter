@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
+const String productSearch = "search";
 
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
@@ -101,6 +102,13 @@ String getProductDescription(BuildContext context, String productId, String defa
     case productNoAdsIOS:
       return S.of(context).product_no_ads_description;
     default: return defaultDescription;
+  }
+}
+
+Icon getIcon(String productId) {
+  switch (productId) {
+    case productSearch:
+      return Icon(Icons.search);
   }
 }
 
