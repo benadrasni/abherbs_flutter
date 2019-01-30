@@ -9,6 +9,8 @@
   "product_restore_purchases": "Ripristinare gli acquisti",
   "product_no_ads_title": "Nessuna pubblicità indesiderata",
   "product_no_ads_description": "L'applicazione non mostrerà banner pubblicitari nella parte inferiore dello schermo.",
+  "product_search_title": "Search in names or taxonomy",
+  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
   "product_purchase": "Acquistare",
   "product_purchased": "Acquistato",
 
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Nessun fiore che corrisponde ai criteri.",
   "snack_loading_ad": "La pubblicità è ancora in fase di caricamento, premere nuovamente il pulsante.",
   "snack_copy": "Copiato negli appunti",
-  "snack_publish": "... essere pubblicato più tardi"
+  "snack_publish": "... essere pubblicato più tardi",
+
+  "search": "Search...",
+  "search_names": "Search in names",
+  "search_taxonomy": "Search in taxonomy"
 }

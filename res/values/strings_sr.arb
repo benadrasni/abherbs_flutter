@@ -9,6 +9,8 @@
   "product_restore_purchases": "Враћање куповине",
   "product_no_ads_title": "Нема нежељених реклама",
   "product_no_ads_description": "Апликација не приказује рекламни баннер на дну екрана.",
+  "product_search_title": "Search in names or taxonomy",
+  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
   "product_purchase": "Купити",
   "product_purchased": "Купио",
 
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Нема критеријума за подударање цвећа.",
   "snack_loading_ad": "Оглас се и даље учитава, поново притисните дугме.",
   "snack_copy": "Копирано у Цлипбоард",
-  "snack_publish": "... да се касније објави"
+  "snack_publish": "... да се касније објави",
+
+  "search": "Search...",
+  "search_names": "Search in names",
+  "search_taxonomy": "Search in taxonomy"
 }

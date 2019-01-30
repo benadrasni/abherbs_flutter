@@ -9,6 +9,8 @@
   "product_restore_purchases": "Ostude taastamine",
   "product_no_ads_title": "Soovimatu reklaam puudub",
   "product_no_ads_description": "Rakendus ei näita ekraani allosas reklaami bännerit.",
+  "product_search_title": "Search in names or taxonomy",
+  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
   "product_purchase": "Ostmine",
   "product_purchased": "Ostetud",
 
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Lillede sobitamise kriteeriumid puuduvad.",
   "snack_loading_ad": "Reklaam laaditakse ikka veel, vajutage uuesti nuppu.",
   "snack_copy": "Kopeeritud lõikelauale",
-  "snack_publish": "... avaldatakse hiljem"
+  "snack_publish": "... avaldatakse hiljem",
+
+  "search": "Search...",
+  "search_names": "Search in names",
+  "search_taxonomy": "Search in taxonomy"
 }

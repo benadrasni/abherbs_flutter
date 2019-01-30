@@ -9,6 +9,8 @@
   "product_restore_purchases": "ਖ਼ਰੀਦਾਂ ਨੂੰ ਰੀਸਟੋਰ ਕਰੋ",
   "product_no_ads_title": "ਕੋਈ ਅਣਚਾਹੇ ਇਸ਼ਤਿਹਾਰ",
   "product_no_ads_description": "ਐਪਲੀਕੇਸ਼ਨ ਸਕ੍ਰੀਨ ਦੇ ਤਲ 'ਤੇ ਇਸ਼ਤਿਹਾਰ ਬੈਨਰ ਨਹੀਂ ਦਿਖਾਏਗੀ.",
+  "product_search_title": "Search in names or taxonomy",
+  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
   "product_purchase": "ਖ਼ਰੀਦੋ",
   "product_purchased": "ਖਰੀਦਿਆ",
 
@@ -175,5 +177,9 @@
   "snack_no_flowers": "ਕੋਈ ਫੁੱਲ ਮਾਪਣ ਦੇ ਮਾਪਦੰਡ ਨਹੀਂ.",
   "snack_loading_ad": "ਵਿਗਿਆਪਨ ਅਜੇ ਵੀ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ, ਦੁਬਾਰਾ ਬਟਨ ਦਬਾਓ",
   "snack_copy": "ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ",
-  "snack_publish": "... ਬਾਅਦ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤੇ ਜਾਣ ਲਈ"
+  "snack_publish": "... ਬਾਅਦ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤੇ ਜਾਣ ਲਈ",
+
+  "search": "Search...",
+  "search_names": "Search in names",
+  "search_taxonomy": "Search in taxonomy"
 }

@@ -9,6 +9,8 @@
   "product_restore_purchases": "Atkurti pirkimus",
   "product_no_ads_title": "Nėra nepageidaujamo skelbimo",
   "product_no_ads_description": "Programos apačioje ekrano reklama nebus rodoma.",
+  "product_search_title": "Search in names or taxonomy",
+  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
   "product_purchase": "Įsigyti",
   "product_purchased": "Įgytinis",
 
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Nėra gėlių atitikimo kriterijų.",
   "snack_loading_ad": "Reklama vis dar įkeliama, dar kartą paspauskite mygtuką.",
   "snack_copy": "Kopijuojama į iškarpinę",
-  "snack_publish": "... bus paskelbta vėliau"
+  "snack_publish": "... bus paskelbta vėliau",
+
+  "search": "Search...",
+  "search_names": "Search in names",
+  "search_taxonomy": "Search in taxonomy"
 }

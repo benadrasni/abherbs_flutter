@@ -9,6 +9,8 @@
   "product_restore_purchases": "購入を復元",
   "product_no_ads_title": "迷惑な広告はありません",
   "product_no_ads_description": "アプリケーションは画面の下部に広告バナーを表示しません。",
+  "product_search_title": "Search in names or taxonomy",
+  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
   "product_purchase": "買う",
   "product_purchased": "購入した",
 
@@ -175,5 +177,9 @@
   "snack_no_flowers": "基準に一致する花はありません。",
   "snack_loading_ad": "広告はまだ読み込まれています。もう一度ボタンを押してください。",
   "snack_copy": "クリップボードにコピー",
-  "snack_publish": "... 後で公開する"
+  "snack_publish": "... 後で公開する",
+
+  "search": "Search...",
+  "search_names": "Search in names",
+  "search_taxonomy": "Search in taxonomy"
 }
