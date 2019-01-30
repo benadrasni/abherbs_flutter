@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:abherbs_flutter/ads.dart';
+import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -123,5 +123,5 @@ String getLanguageCode(String code) {
 }
 
 double getFABPadding() {
-  return Ads.isAllowed ? 50.0 : 0.0;
+  return Purchases.isNoAds() ? 0.0 : 50.0;
 }
