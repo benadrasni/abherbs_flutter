@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -69,7 +70,7 @@ class _AppState extends State<App> {
   void _firebaseCloudMessagingListeners() {
     if (Platform.isIOS) _iOSPermission();
 
-    _firebaseMessaging.getToken().then((token){
+    _firebaseMessaging.getToken().then((token) {
       print('token $token');
     });
 
@@ -97,29 +98,31 @@ class _AppState extends State<App> {
   }
 
   void _iOSPermission() {
-    _firebaseMessaging.requestNotificationPermissions(
-        IosNotificationSettings(sound: true, badge: true, alert: true)
-    );
-    _firebaseMessaging.onIosSettingsRegistered
-        .listen((IosNotificationSettings settings)
-    {
+    _firebaseMessaging.requestNotificationPermissions(IosNotificationSettings(sound: true, badge: true, alert: true));
+    _firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
       print("Settings registered: $settings");
+    });
+  }
+
+  Future<List<PurchasedItem>> _iapError() {
+    Fluttertoast.showToast(
+        msg: 'IAP not prepared. Check if Platform service is available.',
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIos: 5
+    );
+    return Future<List<PurchasedItem>>(() {
+      return <PurchasedItem>[];
     });
   }
 
   Future<List<PurchasedItem>> _initPlatformState() {
     return FlutterInappPurchase.initConnection.then((value) {
       return FlutterInappPurchase.getAvailablePurchases().catchError((error) {
-        print(error);
-        return Future<List<PurchasedItem>>(() {
-          return <PurchasedItem>[];
-        });
+        return _iapError();
       });
     }).catchError((error) {
-      print(error);
-      return Future<List<PurchasedItem>>(() {
-        return <PurchasedItem>[];
-      });
+      return _iapError();
     });
   }
 
@@ -220,7 +223,7 @@ class _AppState extends State<App> {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               _notificationData = null;
-              for(PurchasedItem product in snapshot.data[1]) {
+              for (PurchasedItem product in snapshot.data[1]) {
                 if (product.productId == productNoAdsAndroid || product.productId == productNoAdsIOS) {
                   Ads.isAllowed = false;
                   break;

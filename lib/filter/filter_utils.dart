@@ -57,14 +57,14 @@ Widget getFirstFilterPage(void Function(String) onChangeLanguage, void Function(
   String nextFilterAttribute = _getNextFilterAttribute(filter);
 
   switch (nextFilterAttribute) {
-    case filterColor:
-      return Color(onChangeLanguage, onBuyProduct, filter);
     case filterHabitat:
       return Habitat(onChangeLanguage, onBuyProduct, filter);
     case filterPetal:
       return Petal(onChangeLanguage, onBuyProduct, filter);
     case filterDistribution:
       return Distribution(onChangeLanguage, onBuyProduct, filter);
+    default:
+      return Color(onChangeLanguage, onBuyProduct, filter);
   }
 }
 
