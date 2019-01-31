@@ -27,9 +27,11 @@ class _EnhacementsScreenState extends State<EnhacementsScreen> {
   final List<String> _productLists = Platform.isAndroid
       ? [
           productNoAdsAndroid,
+          productSearch,
         ]
       : [
           productNoAdsIOS,
+          productSearch
         ];
   Future<List<IAPItem>> _productsF;
   Future<List<PurchasedItem>> _purchasesF;

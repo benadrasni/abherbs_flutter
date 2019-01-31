@@ -101,6 +101,8 @@ String getProductTitle(BuildContext context, String productId, String defaultTit
     case productNoAdsAndroid:
     case productNoAdsIOS:
       return S.of(context).product_no_ads_title;
+    case productSearch:
+      return S.of(context).product_search_title;
     default: return defaultTitle;
   }
 }
@@ -110,6 +112,8 @@ String getProductDescription(BuildContext context, String productId, String defa
     case productNoAdsAndroid:
     case productNoAdsIOS:
       return S.of(context).product_no_ads_description;
+    case productSearch:
+      return S.of(context).product_search_description;
     default: return defaultDescription;
   }
 }

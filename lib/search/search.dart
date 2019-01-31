@@ -55,7 +55,7 @@ class _SearchState extends State<Search> {
     switch (_currentIndex) {
       case 0:
         if (_nativeNamesF == null) {
-          _nativeNamesF = searchReference.child(widget.myLocale.languageCode).once().then((DataSnapshot snapshot) {
+          _nativeNamesF = searchReference.child(getLanguageCode(widget.myLocale.languageCode)).once().then((DataSnapshot snapshot) {
             return snapshot.value;
           });
         }
@@ -72,7 +72,7 @@ class _SearchState extends State<Search> {
           });
         }
         if (_translationsTaxonomyF == null) {
-          _translationsTaxonomyF = translationsTaxonomyReference.child(widget.myLocale.languageCode).once().then((DataSnapshot snapshot) {
+          _translationsTaxonomyF = translationsTaxonomyReference.child(getLanguageCode(widget.myLocale.languageCode)).once().then((DataSnapshot snapshot) {
             return snapshot.value;
           });
         }
