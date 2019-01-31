@@ -16,12 +16,11 @@ class Purchases {
   }
 
   static bool isSearch() {
-//    for (PurchasedItem product in purchases) {
-//      if (product.productId == productSearch) {
-//        return true;
-//      }
-//    }
-//    return false;
-    return true;
+    for (PurchasedItem product in purchases) {
+      if (product.productId == productSearch) {
+        return true;
+      }
+    }
+    return false;
   }
 }
