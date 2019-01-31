@@ -64,7 +64,10 @@ class _AppState extends State<App> {
 
   onBuyProduct() {
     setState(() {
-      _purchasesF = FlutterInappPurchase.getAvailablePurchases();
+      _purchasesF = FlutterInappPurchase.getAvailablePurchases().then((value) {
+        Purchases.purchases = value;
+        return Purchases.purchases;
+      });
     });
   }
 
