@@ -84,6 +84,7 @@ class _PetalState extends State<Petal> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_petal),
+        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
       body: Stack(

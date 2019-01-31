@@ -9,8 +9,8 @@
   "product_restore_purchases": "Враћање куповине",
   "product_no_ads_title": "Нема нежељених реклама",
   "product_no_ads_description": "Апликација не приказује рекламни баннер на дну екрана.",
-  "product_search_title": "Search in names or taxonomy",
-  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
+  "product_search_title": "Претражујте имена или таксономију",
+  "product_search_description": "Моћи ћете пронаћи цвијет по његовом српском или латинском имену или по његовом таксону (нпр. ред, породица, род).",
   "product_purchase": "Купити",
   "product_purchased": "Купио",
 
@@ -179,7 +179,7 @@
   "snack_copy": "Копирано у Цлипбоард",
   "snack_publish": "... да се касније објави",
 
-  "search": "Search...",
-  "search_names": "Search in names",
-  "search_taxonomy": "Search in taxonomy"
+  "search": "Тражити...",
+  "search_names": "Тражи имена",
+  "search_taxonomy": "Тражи у таксономији"
 }

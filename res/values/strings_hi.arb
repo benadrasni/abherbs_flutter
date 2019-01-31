@@ -9,8 +9,8 @@
   "product_restore_purchases": "खरीदारी वापस लौटाएं",
   "product_no_ads_title": "कोई अवांछित विज्ञापन नहीं",
   "product_no_ads_description": "एप्लिकेशन स्क्रीन के नीचे विज्ञापन बैनर नहीं दिखाएगा।",
-  "product_search_title": "Search in names or taxonomy",
-  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
+  "product_search_title": "नामों में खोजें या वर्गीकरण",
+  "product_search_description": "आप इसके लैटिन नाम या इसके टैक्सोन (जैसे क्रम, परिवार, जाति) द्वारा एक फूल पा सकते हैं।",
   "product_purchase": "खरीद फरोख्त",
   "product_purchased": "खरीदी",
 
@@ -180,7 +180,7 @@
   "snack_copy": "क्लिपबोर्ड पर नकल",
   "snack_publish": "... बाद में प्रकाशित किया जाना है",
 
-  "search": "Search...",
-  "search_names": "Search in names",
-  "search_taxonomy": "Search in taxonomy"
+  "search": "खोज...",
+  "search_names": "नामों में खोजें",
+  "search_taxonomy": "टैक्सोनॉमी में खोजें"
 }

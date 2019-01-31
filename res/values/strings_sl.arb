@@ -9,8 +9,8 @@
   "product_restore_purchases": "Obnovi nakup",
   "product_no_ads_title": "Brez neželenega oglasa",
   "product_no_ads_description": "Aplikacija ne bo prikazala oglasne pasice na dnu zaslona.",
-  "product_search_title": "Search in names or taxonomy",
-  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
+  "product_search_title": "Išči po imenih ali taksonomiji",
+  "product_search_description": "Cvet bo mogoče najti po slovenskem ali latinskem imenu ali po taksonu (npr. red, družina, rod).",
   "product_purchase": "Kupiti",
   "product_purchased": "Kupljeno",
 
@@ -179,7 +179,7 @@
   "snack_copy": "Kopirano v odložišče",
   "snack_publish": "... bo objavljen pozneje",
 
-  "search": "Search...",
-  "search_names": "Search in names",
-  "search_taxonomy": "Search in taxonomy"
+  "search": "Iskati...",
+  "search_names": "Išči po imenih",
+  "search_taxonomy": "Išči v taksonomiji"
 }

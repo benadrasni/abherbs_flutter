@@ -9,8 +9,8 @@
   "product_restore_purchases": "Herstel aankopen",
   "product_no_ads_title": "Geen ongewenste advertenties",
   "product_no_ads_description": "Applicatie toont geen reclamebanner onderaan het scherm.",
-  "product_search_title": "Search in names or taxonomy",
-  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
+  "product_search_title": "Zoeken in namen of taxonomie",
+  "product_search_description": "Je zult in staat zijn om een bloem te vinden op zijn Nederlandse of Latijnse naam of op zijn taxon (bijvoorbeeld orde, familie, geslacht).",
   "product_purchase": "Koop",
   "product_purchased": "Gekocht",
 
@@ -179,7 +179,7 @@
   "snack_copy": "Gekopieerd naar het klembord",
   "snack_publish": "... later worden gepubliceerd",
 
-  "search": "Search...",
-  "search_names": "Search in names",
-  "search_taxonomy": "Search in taxonomy"
+  "search": "Zoeken...",
+  "search_names": "Zoeken in namen",
+  "search_taxonomy": "Zoeken in taxonomie"
 }
