@@ -45,9 +45,15 @@ const String firebaseCounts = 'counts_4_v2';
 const String firebaseLists = 'lists_4_v2';
 const String firebasePlants = 'plants_v2';
 const String firebaseSearch = 'search_v2';
+const String firebaseAPGIV = 'APG IV_v2';
 const String firebasePlantHeaders = 'plants_headers';
 const String firebaseTranslations = 'translations';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
+
+const String firebaseRootTaxon = 'Eukaryota';
+const String firebaseAPGType = "type";
+const String firebaseAPGList = "list";
+const String firebaseAPGCount = "count";
 
 const int adsFrequency = -1;
 
