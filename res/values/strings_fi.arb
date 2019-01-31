@@ -9,8 +9,8 @@
   "product_restore_purchases": "Palauttaa ostot",
   "product_no_ads_title": "Ei ei-toivottua mainosta",
   "product_no_ads_description": "Sovellus ei näytä ruudun alareunassa mainosbanneria.",
-  "product_search_title": "Search in names or taxonomy",
-  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
+  "product_search_title": "Hae nimistä tai taksonomiasta",
+  "product_search_description": "Voit löytää kukka Suomen tai latinankielisen nimen tai taksonin (esim. lahko, heimo, suku).",
   "product_purchase": "Ostaa",
   "product_purchased": "Osti",
 
@@ -179,7 +179,7 @@
   "snack_copy": "Kopioitu leikepöydälle",
   "snack_publish": "... julkaistaan myöhemmin",
 
-  "search": "Search...",
-  "search_names": "Search in names",
-  "search_taxonomy": "Search in taxonomy"
+  "search": "Hae...",
+  "search_names": "Hae nimistä",
+  "search_taxonomy": "Hae taksonomiassa"
 }

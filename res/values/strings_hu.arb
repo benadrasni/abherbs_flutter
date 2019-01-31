@@ -9,8 +9,8 @@
   "product_restore_purchases": "Vásárlás visszaállítása",
   "product_no_ads_title": "Nem kívánt reklám",
   "product_no_ads_description": "Az alkalmazás nem jeleníti meg a hirdetés bannerjét a képernyő alján.",
-  "product_search_title": "Search in names or taxonomy",
-  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
+  "product_search_title": "Keresés nevekben vagy taxonómiában",
+  "product_search_description": "A virágot a magyar vagy latin nevével vagy taxonnal (például rend, család, nemzetség) találhatja meg.",
   "product_purchase": "Vásárol",
   "product_purchased": "Vásárolt",
 
@@ -179,7 +179,7 @@
   "snack_copy": "A vágólapra másolt",
   "snack_publish": "... később közzé kell tenni",
 
-  "search": "Search...",
-  "search_names": "Search in names",
-  "search_taxonomy": "Search in taxonomy"
+  "search": "Keresés...",
+  "search_names": "Keresés a nevekben",
+  "search_taxonomy": "Keresés taxonómiában"
 }

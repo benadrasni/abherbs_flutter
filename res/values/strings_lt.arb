@@ -9,8 +9,8 @@
   "product_restore_purchases": "Atkurti pirkimus",
   "product_no_ads_title": "Nėra nepageidaujamo skelbimo",
   "product_no_ads_description": "Programos apačioje ekrano reklama nebus rodoma.",
-  "product_search_title": "Search in names or taxonomy",
-  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
+  "product_search_title": "Ieškoti vardų arba taksonomijos",
+  "product_search_description": "Gali rasti gėlę pagal savo lietuvių ar lotynų kalbą arba taksoną (pvz., Eilė, šeimą, gentį).",
   "product_purchase": "Įsigyti",
   "product_purchased": "Įgytinis",
 
@@ -179,7 +179,7 @@
   "snack_copy": "Kopijuojama į iškarpinę",
   "snack_publish": "... bus paskelbta vėliau",
 
-  "search": "Search...",
-  "search_names": "Search in names",
-  "search_taxonomy": "Search in taxonomy"
+  "search": "Paieška...",
+  "search_names": "Ieškoti vardų",
+  "search_taxonomy": "Ieškoti taksonomijoje"
 }

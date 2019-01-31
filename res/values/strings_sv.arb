@@ -9,8 +9,8 @@
   "product_restore_purchases": "Återställa köp",
   "product_no_ads_title": "Ingen oönskad annonsering",
   "product_no_ads_description": "Applikationen visar inte annonsbannern längst ner på skärmen.",
-  "product_search_title": "Search in names or taxonomy",
-  "product_search_description": "You'll be able to find a flower by its native or Latin name or by its taxon (e.g. order, family, genus).",
+  "product_search_title": "Sök i namn eller taxonomi",
+  "product_search_description": "Du kan hitta en blomma med sitt svenska eller latinska namn eller dess taxon (t ex ordning, familj, släkt).",
   "product_purchase": "Köpa",
   "product_purchased": "Köpt",
 
@@ -179,7 +179,7 @@
   "snack_copy": "Kopieras till Urklipp",
   "snack_publish": "... att publiceras senare",
 
-  "search": "Search...",
-  "search_names": "Search in names",
-  "search_taxonomy": "Search in taxonomy"
+  "search": "Sök...",
+  "search_names": "Sök i namn",
+  "search_taxonomy": "Sök i taxonomi"
 }

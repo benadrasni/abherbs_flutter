@@ -219,6 +219,7 @@ class _DistributionState extends State<Distribution> {
       key: _key,
       appBar: new AppBar(
         title: new Text(S.of(context).filter_distribution),
+        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, this.setMyRegion),
       body: Stack(

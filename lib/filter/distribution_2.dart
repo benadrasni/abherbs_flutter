@@ -175,6 +175,7 @@ class _Distribution2State extends State<Distribution2> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_distribution),
+        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
