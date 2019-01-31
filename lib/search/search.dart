@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/search/search_names.dart';
@@ -7,6 +9,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 final searchReference = FirebaseDatabase.instance.reference().child(firebaseSearch);
+final apgIVReference = FirebaseDatabase.instance.reference().child(firebaseAPGIV);
+final translationsTaxonomyReference = FirebaseDatabase.instance.reference().child(firebaseTranslationsTaxonomy);
 
 class Search extends StatefulWidget {
   final Locale myLocale;
@@ -23,6 +27,8 @@ class _SearchState extends State<Search> {
   GlobalKey<ScaffoldState> _key;
   Future<Map<dynamic, dynamic>> _nativeNamesF;
   Future<Map<dynamic, dynamic>> _latinNamesF;
+  Future<Map<dynamic, dynamic>> _apgIVF;
+  Future<Map<dynamic, dynamic>> _translationsTaxonomyF;
 
   final TextEditingController _filter = new TextEditingController();
   String _searchText = '';
@@ -42,22 +48,35 @@ class _SearchState extends State<Search> {
     _currentIndex = 0;
     _key = new GlobalKey<ScaffoldState>();
 
-    _nativeNamesF = searchReference.child(widget.myLocale.languageCode).once().then((DataSnapshot snapshot) {
-      return snapshot.value;
-    });
-    _latinNamesF = searchReference.child(languageLatin).once().then((DataSnapshot snapshot) {
-      return snapshot.value;
-    });
-
     Ads.hideBannerAd();
   }
 
-  Widget _getBody(BuildContext context, Map<dynamic, dynamic> nativeNames, Map<dynamic, dynamic> latinNames) {
+  Widget _getBody() {
     switch (_currentIndex) {
       case 0:
-        return searchNames(widget.myLocale, widget.onChangeLanguage, widget.onBuyProduct, context, nativeNames, latinNames, _searchText);
+        if (_nativeNamesF == null) {
+          _nativeNamesF = searchReference.child(widget.myLocale.languageCode).once().then((DataSnapshot snapshot) {
+            return snapshot.value;
+          });
+        }
+        if (_latinNamesF == null) {
+          _latinNamesF = searchReference.child(languageLatin).once().then((DataSnapshot snapshot) {
+            return snapshot.value;
+          });
+        }
+        return searchNames(widget.myLocale, widget.onChangeLanguage, widget.onBuyProduct, _searchText, _nativeNamesF, _latinNamesF);
       case 1:
-        return searchTaxonomy(context);
+        if (_apgIVF == null) {
+          _apgIVF = apgIVReference.once().then((DataSnapshot snapshot) {
+            return snapshot.value;
+          });
+        }
+        if (_translationsTaxonomyF == null) {
+          _translationsTaxonomyF = translationsTaxonomyReference.child(widget.myLocale.languageCode).once().then((DataSnapshot snapshot) {
+            return snapshot.value;
+          });
+        }
+        return searchTaxonomy(widget.myLocale, widget.onChangeLanguage, widget.onBuyProduct, _searchText, _apgIVF, _translationsTaxonomyF);
     }
     return null;
   }
@@ -75,17 +94,7 @@ class _SearchState extends State<Search> {
           ),
         ),
       ),
-      body: FutureBuilder<List<Object>>(
-        future: Future.wait([_nativeNamesF, _latinNamesF]),
-        builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
-              return _getBody(context, snapshot.data[0], snapshot.data[1]);
-            default:
-              return const CircularProgressIndicator();
-          }
-        },
-      ),
+      body: _getBody(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: <BottomNavigationBarItem>[
