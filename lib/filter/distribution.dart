@@ -239,27 +239,29 @@ class _DistributionState extends State<Distribution> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          var route;
-          var nextFilterAttribute;
-          switch (index) {
-            case 0:
-              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              nextFilterAttribute = filterColor;
-              break;
-            case 1:
-              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              nextFilterAttribute = filterHabitat;
-              break;
-            case 2:
-              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              nextFilterAttribute = filterPetal;
-              break;
+          if (index != 3) {
+            var route;
+            var nextFilterAttribute;
+            switch (index) {
+              case 0:
+                route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.onBuyProduct, _filter));
+                nextFilterAttribute = filterColor;
+                break;
+              case 1:
+                route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
+                nextFilterAttribute = filterHabitat;
+                break;
+              case 2:
+                route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
+                nextFilterAttribute = filterPetal;
+                break;
+            }
+            if (filterRoutes[nextFilterAttribute] != null) {
+              Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
+            }
+            filterRoutes[nextFilterAttribute] = route;
+            Navigator.push(context, route);
           }
-          if (filterRoutes[nextFilterAttribute] != null) {
-            Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
-          }
-          filterRoutes[nextFilterAttribute] = route;
-          Navigator.push(context, route);
         },
       ),
       floatingActionButton: new Container(
