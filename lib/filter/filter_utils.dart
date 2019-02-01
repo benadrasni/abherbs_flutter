@@ -45,7 +45,7 @@ MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Functio
       route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, filter));
   }
   if (nextFilterAttribute != null) {
-    if (filterRoutes[nextFilterAttribute] != null) {
+    if (filterRoutes[nextFilterAttribute] != null && filterRoutes[nextFilterAttribute].isActive) {
       Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
     }
     filterRoutes[nextFilterAttribute] = route;

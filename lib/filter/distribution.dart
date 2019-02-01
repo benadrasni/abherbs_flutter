@@ -207,12 +207,6 @@ class _DistributionState extends State<Distribution> {
   }
 
   @override
-  void dispose() {
-    filterRoutes[filterDistribution] = null;
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var mainContext = context;
     return Scaffold(
@@ -256,7 +250,7 @@ class _DistributionState extends State<Distribution> {
                 nextFilterAttribute = filterPetal;
                 break;
             }
-            if (filterRoutes[nextFilterAttribute] != null) {
+            if (filterRoutes[nextFilterAttribute] != null && filterRoutes[nextFilterAttribute].isActive) {
               Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
             }
             filterRoutes[nextFilterAttribute] = route;

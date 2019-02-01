@@ -122,12 +122,6 @@ class _ColorState extends State<Color> {
   }
 
   @override
-  void dispose() {
-    filterRoutes[filterColor] = null;
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var mainContext = context;
     var _widgets = <Widget>[];
@@ -295,7 +289,7 @@ class _ColorState extends State<Color> {
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
           if (index != 0) {
-            var route;
+            MaterialPageRoute<dynamic> route;
             var nextFilterAttribute;
             switch (index) {
               case 1:
@@ -311,7 +305,7 @@ class _ColorState extends State<Color> {
                 nextFilterAttribute = filterDistribution;
                 break;
             }
-            if (filterRoutes[nextFilterAttribute] != null) {
+            if (filterRoutes[nextFilterAttribute] != null && filterRoutes[nextFilterAttribute].isActive) {
               Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
             }
             filterRoutes[nextFilterAttribute] = route;

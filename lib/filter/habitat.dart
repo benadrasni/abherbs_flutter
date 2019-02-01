@@ -67,12 +67,6 @@ class _HabitatState extends State<Habitat> {
   }
 
   @override
-  void dispose() {
-    filterRoutes[filterHabitat] = null;
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var mainContext = context;
     var _defaultTextStyle = TextStyle(
@@ -232,7 +226,7 @@ class _HabitatState extends State<Habitat> {
                 nextFilterAttribute = filterDistribution;
                 break;
             }
-            if (filterRoutes[nextFilterAttribute] != null) {
+            if (filterRoutes[nextFilterAttribute] != null && filterRoutes[nextFilterAttribute].isActive) {
               Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
             }
             filterRoutes[nextFilterAttribute] = route;
