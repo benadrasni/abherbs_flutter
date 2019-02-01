@@ -89,8 +89,8 @@ class _DistributionState extends State<Distribution> {
     regions.add([S.of(context).southern_america, 'res/images/wgsrpd_southern_america.webp', '8']);
 
     var regionWidgets = <Widget>[];
-    regionWidgets.add(GridTile(
-      child: FlatButton(
+    regionWidgets.add(FlatButton(
+        padding: EdgeInsets.only(bottom: 5.0),
         child: Stack(alignment: Alignment.center, children: [
           Image(
             image: AssetImage('res/images/wgsrpd_my_region.webp'),
@@ -130,10 +130,10 @@ class _DistributionState extends State<Distribution> {
           }
         },
       ),
-    ));
+    );
     regionWidgets.addAll(regions.map((List<String> items) {
-      return GridTile(
-        child: FlatButton(
+      return FlatButton(
+        padding: EdgeInsets.only(bottom: 5.0),
           child: Stack(alignment: Alignment.center, children: [
             Image(
               image: AssetImage(items[1]),
@@ -146,12 +146,11 @@ class _DistributionState extends State<Distribution> {
           onPressed: () {
             _openRegion(items[2]);
           },
-        ),
       );
     }).toList());
 
-    regionWidgets.add(GridTile(
-      child: FlatButton(
+    regionWidgets.add(FlatButton(
+      padding: EdgeInsets.only(bottom: 5.0),
         child: Stack(alignment: Alignment.center, children: [
           Image(
             image: AssetImage('res/images/wgsrpd_antarctic.webp'),
@@ -165,7 +164,7 @@ class _DistributionState extends State<Distribution> {
           _navigate('90');
         },
       ),
-    ));
+    );
 
     regionWidgets.add(Container(
         padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
@@ -183,13 +182,10 @@ class _DistributionState extends State<Distribution> {
 
     regionWidgets.add(getAdMobBanner());
 
-    return Container(
-        color: Colors.white30,
-        child: GridView.count(
-          crossAxisCount: 1,
-          childAspectRatio: 4.0,
-          children: regionWidgets,
-        ));
+    return ListView(
+      padding: EdgeInsets.all(5.0),
+      children: regionWidgets,
+    );
   }
 
   @override
