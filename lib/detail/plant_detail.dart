@@ -125,6 +125,7 @@ class _PlantDetailState extends State<PlantDetail> {
   @override
   void initState() {
     super.initState();
+    _firebaseAnalytics = FirebaseAnalytics();
 
     _plantF = plantsReference.child(widget.plantName).once().then((DataSnapshot snapshot) {
       return Plant.fromJson(snapshot.key, snapshot.value);
