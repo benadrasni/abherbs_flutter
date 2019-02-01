@@ -41,9 +41,9 @@
   "yes": "Jā",
   "no": "Nē",
 
-  "filter_color": "krāsu ziedi",
+  "filter_color": "krāsa",
   "filter_habitat": "biotopi",
-  "filter_petal": "skaičius žiedlapiais",
+  "filter_petal": "ziedlapiņa",
   "filter_distribution": "izplatīšana",
 
   "color_message": "Kas ir krāsa ziedu? Izvēlieties tuvāko.",

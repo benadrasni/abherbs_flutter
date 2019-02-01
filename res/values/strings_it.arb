@@ -41,9 +41,9 @@
   "yes": "Si",
   "no": "No",
 
-  "filter_color": "colore dei fiori",
+  "filter_color": "colore",
   "filter_habitat": "habitat",
-  "filter_petal": "numero di petali",
+  "filter_petal": "petali",
   "filter_distribution": "distribuzione",
 
   "color_message": "Di che colore è il fiore? Scegli il più simile.",

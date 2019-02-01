@@ -41,9 +41,9 @@
   "yes": "כן",
   "no": "לא",
 
-  "filter_color": "צבע של פרחים",
+  "filter_color": "צבע",
   "filter_habitat": "בתי גידול",
-  "filter_petal": "מספר עלי כותרת",
+  "filter_petal": "עלי כותרת",
   "filter_distribution": "הפצה",
 
   "color_message": "מה צבע הפרח? בחר את הקרוב ביותר.",

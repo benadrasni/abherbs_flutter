@@ -326,7 +326,7 @@ class $de extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "Blütenblätter";
+  String get filter_petal => "Kronblatt";
   @override
   String get petal_message => "Ist die Blüte spiegelsymmetrisch? Falls nicht, wieviele Blütenblätter hat sie?";
   @override
@@ -348,7 +348,7 @@ class $de extends S {
   @override
   String get south_central_pacific => "Süd-Zentrales Pazifik";
   @override
-  String get filter_color => "Blütenfarbe";
+  String get filter_color => "Farbe";
   @override
   String get help => "Hilfe";
   @override
@@ -664,7 +664,7 @@ class $hi extends S {
   @override
   String get petal_5 => "५";
   @override
-  String get filter_petal => "पंखुड़ियों की संख्या";
+  String get filter_petal => "दल चक्र";
   @override
   String get petal_message => "क्या फूल बिसिमेट्रिक है? नहीं? तो यह कितनी पंखुड़ियाँ है?";
   @override
@@ -686,7 +686,7 @@ class $hi extends S {
   @override
   String get south_central_pacific => "दक्षिण-मध्य प्रशांत महासागर";
   @override
-  String get filter_color => "फूलों का रंग";
+  String get filter_color => "रंग";
   @override
   String get help => "मदद";
   @override
@@ -1002,7 +1002,7 @@ class $fi extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "määrä terälehdet";
+  String get filter_petal => "teriö";
   @override
   String get petal_message => "Onko kukka zygomorphic? Ei? Kuinka monta terälehteä sillä on?";
   @override
@@ -1024,7 +1024,7 @@ class $fi extends S {
   @override
   String get south_central_pacific => "Etelä Keski-Tyynenmeren";
   @override
-  String get filter_color => "kukkien väri";
+  String get filter_color => "väri";
   @override
   String get help => "Ohje";
   @override
@@ -1676,7 +1676,7 @@ class $pt extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "número de pétalas";
+  String get filter_petal => "pétala";
   @override
   String get petal_message => "A flor é bissimétrica? Não? Quantas pétalas tem, então?";
   @override
@@ -1698,7 +1698,7 @@ class $pt extends S {
   @override
   String get south_central_pacific => "Pacífico Sul-Central";
   @override
-  String get filter_color => "cor das flores";
+  String get filter_color => "cor";
   @override
   String get help => "Ajuda";
   @override
@@ -2008,7 +2008,7 @@ class $lt extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "skaičius žiedlapiais";
+  String get filter_petal => "vainiklapis";
   @override
   String get petal_message => "Ar gėlė nereguliarus? Ar ne? Tada kiek žiedlapių ji neturi?";
   @override
@@ -2030,7 +2030,7 @@ class $lt extends S {
   @override
   String get south_central_pacific => "Ramiojo vandenyno pietinė dalis";
   @override
-  String get filter_color => "spalva gėlės";
+  String get filter_color => "spalva";
   @override
   String get help => "Padėkite";
   @override
@@ -2346,7 +2346,7 @@ class $hr extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "broj krunskih listić";
+  String get filter_petal => "latica";
   @override
   String get petal_message => "Je li cvijet zigomorfan? Ne? Koliko latica ima?";
   @override
@@ -2368,7 +2368,7 @@ class $hr extends S {
   @override
   String get south_central_pacific => "Južno-središnji Tihi ocean";
   @override
-  String get filter_color => "boja cvjetova";
+  String get filter_color => "boja";
   @override
   String get help => "Pomoć";
   @override
@@ -2682,7 +2682,7 @@ class $lv extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "skaičius žiedlapiais";
+  String get filter_petal => "ziedlapiņa";
   @override
   String get petal_message => "Vai ziedu neregulāra? Nē? Tad cik ziedlapiņas tas ir?";
   @override
@@ -2704,7 +2704,7 @@ class $lv extends S {
   @override
   String get south_central_pacific => "Klusā okeāna dienvidu daļa";
   @override
-  String get filter_color => "krāsu ziedi";
+  String get filter_color => "krāsa";
   @override
   String get help => "Palīdzība";
   @override
@@ -3358,7 +3358,7 @@ class $hu extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "a szirmok száma";
+  String get filter_petal => "párta";
   @override
   String get petal_message => "A virág szimmetriája kétoldali (zigomorf)? Nem? Akkor hány sziromlevele van?";
   @override
@@ -3380,7 +3380,7 @@ class $hu extends S {
   @override
   String get south_central_pacific => "Dél-Közép Csendes-óceán";
   @override
-  String get filter_color => "a virágok színe";
+  String get filter_color => "szín";
   @override
   String get help => "Súgó";
   @override
@@ -4034,7 +4034,7 @@ class $sk extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "okvetné lístky";
+  String get filter_petal => "lupienok";
   @override
   String get petal_message => "Je kvet nepravidelný? Nie? Tak koľko má okvetných lístkov?";
   @override
@@ -4366,7 +4366,7 @@ class $sl extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "število venčnih listov";
+  String get filter_petal => "petali";
   @override
   String get petal_message => "Je cvet zigomorfni? Ne? Potem, koliko venčnih listov ima?";
   @override
@@ -4388,7 +4388,7 @@ class $sl extends S {
   @override
   String get south_central_pacific => "Južni osrednji Pacifik";
   @override
-  String get filter_color => "barva cvetov";
+  String get filter_color => "barve";
   @override
   String get help => "Pomoč";
   @override
@@ -4704,7 +4704,7 @@ class $id extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "jumlah kelopak bunga";
+  String get filter_petal => "mahkota";
   @override
   String get petal_message => "Apakah bunga bisimetris? Tidak? Lalu berapa kelopak bunga yang dimilikinya?";
   @override
@@ -4726,7 +4726,7 @@ class $id extends S {
   @override
   String get south_central_pacific => "Pasifik Tengah Selatan";
   @override
-  String get filter_color => "warna bunga";
+  String get filter_color => "warna";
   @override
   String get help => "Membantu";
   @override
@@ -5042,7 +5042,7 @@ class $sr extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "крунични листићи";
+  String get filter_petal => "латица";
   @override
   String get petal_message => "Да ли је цвет зигоморфан? Не? Колико латица има?";
   @override
@@ -5722,7 +5722,7 @@ class $it extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "numero di petali";
+  String get filter_petal => "petali";
   @override
   String get petal_message => "Il fiore è zigomorfi? No? Allora quanti petali ha?";
   @override
@@ -5744,7 +5744,7 @@ class $it extends S {
   @override
   String get south_central_pacific => "Pacifico centro-meridionale";
   @override
-  String get filter_color => "colore dei fiori";
+  String get filter_color => "colore";
   @override
   String get help => "Aiuto";
   @override
@@ -6398,7 +6398,7 @@ class $et extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "arvu kroonlehed";
+  String get filter_petal => "kroonlehed";
   @override
   String get petal_message => "Kas lill ebaregulaarne? Ei? Siis, kui palju kroonlehed see on?";
   @override
@@ -6420,7 +6420,7 @@ class $et extends S {
   @override
   String get south_central_pacific => "Vaikse ookeani keskosas";
   @override
-  String get filter_color => "värvi lilled";
+  String get filter_color => "värv";
   @override
   String get help => "Appi";
   @override
@@ -7074,7 +7074,7 @@ class $ar extends S {
   @override
   String get petal_5 => "خمسة";
   @override
-  String get filter_petal => "عدد البتلات";
+  String get filter_petal => "بتلة";
   @override
   String get petal_message => "هل الزهرة متناظرة؟ لا؟ ثم كم عدد بتلات الزهرة؟";
   @override
@@ -7096,7 +7096,7 @@ class $ar extends S {
   @override
   String get south_central_pacific => "جنوب وسط المحيط الهادئ";
   @override
-  String get filter_color => "لون الزهور";
+  String get filter_color => "اللون";
   @override
   String get help => "مساعدة";
   @override
@@ -7412,7 +7412,7 @@ class $pa extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "ਫੁੱਲਾਂ ਦੀ ਗਿਣਤੀ";
+  String get filter_petal => "ਪੱਟੇਲ";
   @override
   String get petal_message => "ਕੀ ਫੁੱਲ ਬਿਸਮਮੈਟਿਕ ਹੈ? ਨਹੀਂ? ਫੇਰ ਕਿੰਨੇ ਫੁੱਲ ਹੁੰਦੇ ਹਨ?";
   @override
@@ -7434,7 +7434,7 @@ class $pa extends S {
   @override
   String get south_central_pacific => "ਦੱਖਣੀ-ਕੇਂਦਰੀ ਪੈਸੀਫਿਕ";
   @override
-  String get filter_color => "ਫੁੱਲ ਦਾ ਰੰਗ";
+  String get filter_color => "ਰੰਗ";
   @override
   String get help => "ਮਦਦ ਕਰੋ";
   @override
@@ -7750,7 +7750,7 @@ class $nb extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "antall kronblader";
+  String get filter_petal => "kronblader";
   @override
   String get petal_message => "Er blomsten zygomorphic? Nei? Så hvor mange kronblad har det?";
   @override
@@ -7772,7 +7772,7 @@ class $nb extends S {
   @override
   String get south_central_pacific => "Sør-Sentral Stillehavet";
   @override
-  String get filter_color => "farge på blomster";
+  String get filter_color => "farge";
   @override
   String get help => "Hjelp";
   @override
@@ -8100,7 +8100,7 @@ class $ja extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "花びらの数";
+  String get filter_petal => "花弁";
   @override
   String get petal_message => "花は不規則ですか？ いいえ？ それで花びらは何枚ですか？";
   @override
@@ -8122,7 +8122,7 @@ class $ja extends S {
   @override
   String get south_central_pacific => "中南米";
   @override
-  String get filter_color => "花の色";
+  String get filter_color => "色";
   @override
   String get help => "ヘルプ";
   @override
@@ -8438,7 +8438,7 @@ class $fa extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "تعداد گلبرگ ها";
+  String get filter_petal => "گلبرگ";
   @override
   String get petal_message => "آیا گل زگومورفیک است؟ نه؟ پس چقدر گلبرگها آن را دارند؟";
   @override
@@ -8460,7 +8460,7 @@ class $fa extends S {
   @override
   String get south_central_pacific => "جنوب آسیا اقیانوس آرام";
   @override
-  String get filter_color => "رنگ گل";
+  String get filter_color => "رنگ";
   @override
   String get help => "کمک";
   @override
@@ -8772,7 +8772,7 @@ class $pl extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "Liczba płatków";
+  String get filter_petal => "Płatek";
   @override
   String get petal_message => "Czy kwiat jest zygomorficzny? Nie? Ile w takim razie ma płatków?";
   @override
@@ -8794,7 +8794,7 @@ class $pl extends S {
   @override
   String get south_central_pacific => "Południowo-środkowy Pacyfik";
   @override
-  String get filter_color => "Kolor kwiatów";
+  String get filter_color => "Kolor";
   @override
   String get help => "Pomoc";
   @override
@@ -9128,7 +9128,7 @@ class $da extends S {
   @override
   String get south_central_pacific => "Syd-Central Stillehavet";
   @override
-  String get filter_color => "blomsterfarve";
+  String get filter_color => "farve";
   @override
   String get help => "Hjælp";
   @override
@@ -9442,7 +9442,7 @@ class $he extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "מספר עלי כותרת";
+  String get filter_petal => "עלי כותרת";
   @override
   String get petal_message => "האם הפרח אינו סדיר? לא? אז כמה עלי כותרת יש את זה?";
   @override
@@ -9464,7 +9464,7 @@ class $he extends S {
   @override
   String get south_central_pacific => "דרום מרכז האוקיינוס השקט";
   @override
-  String get filter_color => "צבע של פרחים";
+  String get filter_color => "צבע";
   @override
   String get help => "עֶזרָה";
   @override
@@ -9780,7 +9780,7 @@ class $ro extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "numărul de petale";
+  String get filter_petal => "petală";
   @override
   String get petal_message => "Este bisimetrică această floare? Nu? Atunci câte petale are?";
   @override
@@ -9802,7 +9802,7 @@ class $ro extends S {
   @override
   String get south_central_pacific => "Sud-central Pacificului";
   @override
-  String get filter_color => "culoarea florilor";
+  String get filter_color => "culoare";
   @override
   String get help => "Ajutor";
   @override
@@ -10118,7 +10118,7 @@ class $nl extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "aantal bloemblaadjes";
+  String get filter_petal => "kroonblad";
   @override
   String get petal_message => "Is de bloem tweezijdig symmetrisch? Zo niet: hoeveel bloemblaadjes heeft hij?";
   @override
@@ -10140,7 +10140,7 @@ class $nl extends S {
   @override
   String get south_central_pacific => "Zuid-Central Stille Oceaan";
   @override
-  String get filter_color => "kleur van de bloemen";
+  String get filter_color => "kleur";
   @override
   String get help => "Helpen";
   @override

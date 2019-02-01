@@ -41,9 +41,9 @@
   "yes": "Taip",
   "no": "Ne",
 
-  "filter_color": "spalva gėlės",
+  "filter_color": "spalva",
   "filter_habitat": "buveinių",
-  "filter_petal": "skaičius žiedlapiais",
+  "filter_petal": "vainiklapis",
   "filter_distribution": "platinimas",
 
   "color_message": "Koks gėlių spalva? Pasirinkite artimiausią.",

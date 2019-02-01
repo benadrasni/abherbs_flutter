@@ -41,9 +41,9 @@
   "yes": "Da",
   "no": "Nu",
 
-  "filter_color": "culoarea florilor",
+  "filter_color": "culoare",
   "filter_habitat": "habitatul",
-  "filter_petal": "numărul de petale",
+  "filter_petal": "petală",
   "filter_distribution": "distribuire",
 
   "color_message": "Care este culoarea florii? Alege culoarea cea mai apropiată.",

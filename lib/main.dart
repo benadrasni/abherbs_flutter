@@ -8,6 +8,8 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,6 +51,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   FirebaseMessaging _firebaseMessaging;
+  FirebaseAnalytics _firebaseAnalytics;
   Map<String, dynamic> _notificationData;
   Future<List<PurchasedItem>> _purchasesF;
   Future<Locale> _localeF;
@@ -190,6 +193,7 @@ class _AppState extends State<App> {
     Prefs.init();
 
     _firebaseMessaging = FirebaseMessaging();
+    _firebaseAnalytics = FirebaseAnalytics();
     _purchasesF = _initPlatformState();
     _localeF = Prefs.getStringF(keyPreferredLanguage).then((String language) {
       return language.isEmpty ? null : Locale(language, '');
@@ -237,6 +241,9 @@ class _AppState extends State<App> {
                 ],
                 supportedLocales: S.delegate.supportedLocales,
                 home: snapshot.data[2],
+                navigatorObservers: [
+                  FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
+                ],
               );
             default:
               return Container(

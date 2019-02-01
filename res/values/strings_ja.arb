@@ -41,9 +41,9 @@
   "yes": "はい",
   "no": "いいえ",
 
-  "filter_color": "花の色",
+  "filter_color": "色",
   "filter_habitat": "生息地",
-  "filter_petal": "花びらの数",
+  "filter_petal": "花弁",
   "filter_distribution": "分布",
 
   "color_message": "花の色は何ですか？ 最も近いものを選んでください。",

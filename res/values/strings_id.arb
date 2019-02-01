@@ -41,9 +41,9 @@
   "yes": "iya nih",
   "no": "Tidak",
 
-  "filter_color": "warna bunga",
+  "filter_color": "warna",
   "filter_habitat": "habitat",
-  "filter_petal": "jumlah kelopak bunga",
+  "filter_petal": "mahkota",
   "filter_distribution": "distribusi",
 
   "color_message": "Apa warna bunga itu? Pilih yang terdekat.",

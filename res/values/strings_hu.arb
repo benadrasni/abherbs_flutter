@@ -41,9 +41,9 @@
   "yes": "Igen",
   "no": "Nem",
 
-  "filter_color": "a virágok színe",
+  "filter_color": "szín",
   "filter_habitat": "élettér",
-  "filter_petal": "a szirmok száma",
+  "filter_petal": "párta",
   "filter_distribution": "terjesztés",
 
   "color_message": "Milyen színű a virág? Válassza ki a legközelebbi színt.",

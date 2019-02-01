@@ -41,9 +41,9 @@
   "yes": "نعم فعلا",
   "no": "لا",
 
-  "filter_color": "لون الزهور",
+  "filter_color": "اللون",
   "filter_habitat": "موطن",
-  "filter_petal": "عدد البتلات",
+  "filter_petal": "بتلة",
   "filter_distribution": "توزيع",
 
   "color_message": "ما هو لون الزهرة؟ اختيار أقرب واحد.",
