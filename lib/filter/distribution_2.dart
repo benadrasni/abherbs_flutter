@@ -204,7 +204,7 @@ class _Distribution2State extends State<Distribution2> {
               nextFilterAttribute = filterDistribution;
               break;
           }
-          if (filterRoutes[nextFilterAttribute] != null) {
+          if (filterRoutes[nextFilterAttribute] != null && filterRoutes[nextFilterAttribute].isActive) {
             Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
           }
           filterRoutes[nextFilterAttribute] = route;

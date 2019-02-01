@@ -67,12 +67,6 @@ class _PetalState extends State<Petal> {
   }
 
   @override
-  void dispose() {
-    filterRoutes[filterPetal] = null;
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var mainContext = context;
     var _defaultTextStyle = TextStyle(
@@ -222,7 +216,7 @@ class _PetalState extends State<Petal> {
                 nextFilterAttribute = filterDistribution;
                 break;
             }
-            if (filterRoutes[nextFilterAttribute] != null) {
+            if (filterRoutes[nextFilterAttribute] != null && filterRoutes[nextFilterAttribute].isActive) {
               Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
             }
             filterRoutes[nextFilterAttribute] = route;
