@@ -41,9 +41,9 @@
   "yes": "Ja",
   "no": "Nee",
 
-  "filter_color": "kleur van de bloemen",
+  "filter_color": "kleur",
   "filter_habitat": "standplaats",
-  "filter_petal": "aantal bloemblaadjes",
+  "filter_petal": "kroonblad",
   "filter_distribution": "distributie",
 
   "color_message": "Wat is de kleur van de bloem? Kies de kleur die er het dichtst bij komt.",

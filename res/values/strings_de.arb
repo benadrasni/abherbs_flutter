@@ -41,9 +41,9 @@
   "yes": "Ja",
   "no": "Nein",
 
-  "filter_color": "Blütenfarbe",
+  "filter_color": "Farbe",
   "filter_habitat": "Habitat",
-  "filter_petal": "Blütenblätter",
+  "filter_petal": "Kronblatt",
   "filter_distribution": "Vorkommen",
 
   "color_message": "Welche Farbe hat die Blume? Wähle die ähnlichste Farbe.",

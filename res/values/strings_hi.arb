@@ -42,9 +42,9 @@
   "yes": "हाँ",
   "no": "नहीं",
 
-  "filter_color": "फूलों का रंग",
+  "filter_color": "रंग",
   "filter_habitat": "पर्यावास",
-  "filter_petal": "पंखुड़ियों की संख्या",
+  "filter_petal": "दल चक्र",
   "filter_distribution": "वितरण",
 
   "color_message": "फूल का रंग क्या है? निकटतम एक चुनें",

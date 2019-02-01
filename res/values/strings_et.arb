@@ -41,9 +41,9 @@
   "yes": "Jah",
   "no": "Ei",
 
-  "filter_color": "värvi lilled",
+  "filter_color": "värv",
   "filter_habitat": "elupaikade",
-  "filter_petal": "arvu kroonlehed",
+  "filter_petal": "kroonlehed",
   "filter_distribution": "levitamine",
 
   "color_message": "Mis värvi lill? Vali lähim.",

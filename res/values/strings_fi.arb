@@ -41,9 +41,9 @@
   "yes": "Joo",
   "no": "Ei",
 
-  "filter_color": "kukkien väri",
+  "filter_color": "väri",
   "filter_habitat": "kasvupaikka",
-  "filter_petal": "määrä terälehdet",
+  "filter_petal": "teriö",
   "filter_distribution": "jakelu",
 
   "color_message": "Mikä on kukka? Valitse lähin.",

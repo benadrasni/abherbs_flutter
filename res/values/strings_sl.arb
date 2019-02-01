@@ -41,9 +41,9 @@
   "yes": "Ja",
   "no": "Ne",
 
-  "filter_color": "barva cvetov",
+  "filter_color": "barve",
   "filter_habitat": "habitate",
-  "filter_petal": "število venčnih listov",
+  "filter_petal": "petali",
   "filter_distribution": "distribucija",
 
   "color_message": "Kaj je barva cveta? Izberite najustreznejšo.",

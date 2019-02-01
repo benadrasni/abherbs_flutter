@@ -39,9 +39,9 @@
   "rate_later": "Mais tarde",
   "rate": "Resenha",
 
-  "filter_color": "cor das flores",
+  "filter_color": "cor",
   "filter_habitat": "habitat",
-  "filter_petal": "número de pétalas",
+  "filter_petal": "pétala",
   "filter_distribution": "distribution",
 
   "color_message": "De que cor são as flores? Selecione a mais aproximada. Sempre pode voltar e selecionar uma outra.",

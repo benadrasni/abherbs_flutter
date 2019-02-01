@@ -41,9 +41,9 @@
   "yes": "Ja",
   "no": "Nei",
 
-  "filter_color": "farge på blomster",
+  "filter_color": "farge",
   "filter_habitat": "voksested",
-  "filter_petal": "antall kronblader",
+  "filter_petal": "kronblader",
   "filter_distribution": "fordeling",
 
   "color_message": "Hva er fargen på blomsten? Velg den nærmeste.",

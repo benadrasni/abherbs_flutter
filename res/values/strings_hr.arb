@@ -41,9 +41,9 @@
   "yes": "Da",
   "no": "Ne",
 
-  "filter_color": "boja cvjetova",
+  "filter_color": "boja",
   "filter_habitat": "staništa",
-  "filter_petal": "broj krunskih listić",
+  "filter_petal": "latica",
   "filter_distribution": "distribucija",
 
   "color_message": "Koja je boja cvijeta? Odaberite najbližeg.",

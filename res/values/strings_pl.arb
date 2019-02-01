@@ -41,9 +41,9 @@
   "yes": "Tak",
   "no": "Nie",
 
-  "filter_color": "Kolor kwiatów",
+  "filter_color": "Kolor",
   "filter_habitat": "Habitat",
-  "filter_petal": "Liczba płatków",
+  "filter_petal": "Płatek",
   "filter_distribution": "Dystrybucja",
 
   "color_message": "Jakiego koloru jest kwiat? Wybierz najbliższy kolor.",
