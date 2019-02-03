@@ -2,12 +2,10 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/drawer.dart';
-import 'package:abherbs_flutter/filter/color.dart';
-import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
-import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
+import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -205,33 +203,11 @@ class _HabitatState extends State<Habitat> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 1,
+        currentIndex: Preferences.myFilterAttributes.indexOf(filterHabitat),
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          if (index != 1) {
-            var route;
-            var nextFilterAttribute;
-            switch (index) {
-              case 0:
-                route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-                nextFilterAttribute = filterColor;
-                break;
-              case 2:
-                route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-                nextFilterAttribute = filterPetal;
-                break;
-              case 3:
-                route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-                nextFilterAttribute = filterDistribution;
-                break;
-            }
-            if (filterRoutes[nextFilterAttribute] != null && filterRoutes[nextFilterAttribute].isActive) {
-              Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
-            }
-            filterRoutes[nextFilterAttribute] = route;
-            Navigator.push(context, route);
-          }
+          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, index, Preferences.myFilterAttributes.indexOf(filterHabitat));
         },
       ),
       floatingActionButton: new Container(

@@ -2,13 +2,11 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/drawer.dart';
-import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution_2.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
-import 'package:abherbs_flutter/filter/habitat.dart';
-import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
+import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/utils.dart';
@@ -125,7 +123,7 @@ class _DistributionState extends State<Distribution> {
           } else {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage)),
+              MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter)),
             ).then((result) {
               setMyRegion();
             });
@@ -229,33 +227,11 @@ class _DistributionState extends State<Distribution> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 3,
+        currentIndex: Preferences.myFilterAttributes.indexOf(filterDistribution),
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          if (index != 3) {
-            var route;
-            var nextFilterAttribute;
-            switch (index) {
-              case 0:
-                route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-                nextFilterAttribute = filterColor;
-                break;
-              case 1:
-                route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-                nextFilterAttribute = filterHabitat;
-                break;
-              case 2:
-                route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-                nextFilterAttribute = filterPetal;
-                break;
-            }
-            if (filterRoutes[nextFilterAttribute] != null && filterRoutes[nextFilterAttribute].isActive) {
-              Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
-            }
-            filterRoutes[nextFilterAttribute] = route;
-            Navigator.push(context, route);
-          }
+          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, index, Preferences.myFilterAttributes.indexOf(filterDistribution));
         },
       ),
       floatingActionButton: new Container(

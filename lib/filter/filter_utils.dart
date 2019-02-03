@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -22,50 +23,6 @@ String getFilterKey(Map<String, String> filter) {
   return filterAttributes.map((attribute) {
     return filter[attribute] ?? "";
   }).join("_");
-}
-
-MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
-  var route;
-  String nextFilterAttribute = _getNextFilterAttribute(filter);
-
-  switch (nextFilterAttribute) {
-    case filterColor:
-      route = MaterialPageRoute(builder: (context) => Color(onChangeLanguage, onBuyProduct, filter));
-      break;
-    case filterHabitat:
-      route = MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, onBuyProduct, filter));
-      break;
-    case filterPetal:
-      route = MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, onBuyProduct, filter));
-      break;
-    case filterDistribution:
-      route = MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, onBuyProduct, filter));
-      break;
-    default:
-      route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, filter));
-  }
-  if (nextFilterAttribute != null) {
-    if (filterRoutes[nextFilterAttribute] != null && filterRoutes[nextFilterAttribute].isActive) {
-      Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
-    }
-    filterRoutes[nextFilterAttribute] = route;
-  }
-  return route;
-}
-
-Widget getFirstFilterPage(void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
-  String nextFilterAttribute = _getNextFilterAttribute(filter);
-
-  switch (nextFilterAttribute) {
-    case filterHabitat:
-      return Habitat(onChangeLanguage, onBuyProduct, filter);
-    case filterPetal:
-      return Petal(onChangeLanguage, onBuyProduct, filter);
-    case filterDistribution:
-      return Distribution(onChangeLanguage, onBuyProduct, filter);
-    default:
-      return Color(onChangeLanguage, onBuyProduct, filter);
-  }
 }
 
 Image getFilterLeading(context, filterAttribute) {
@@ -293,7 +250,7 @@ getFilterDistributionValue(context, filterValue) {
 }
 
 String _getNextFilterAttribute(Map<String, String> filter) {
-  return filterAttributes.firstWhere((attribute) => filter[attribute] == null, orElse: () => null);
+  return Preferences.myFilterAttributes.firstWhere((attribute) => filter[attribute] == null, orElse: () => null);
 }
 
 Future<bool> clearFilter(Map<String, String> filter, Function() func) {
@@ -314,34 +271,65 @@ Future<bool> clearFilter(Map<String, String> filter, Function() func) {
 }
 
 List<BottomNavigationBarItem> getBottomNavigationBarItems(BuildContext context, Map<String, String> filter) {
-  return <BottomNavigationBarItem>[
-    BottomNavigationBarItem(
+  var attrToAsset = {filterColor: 'color',  filterHabitat: 'habitat', filterPetal: 'petal', filterDistribution: 'distribution'};
+  return Preferences.myFilterAttributes.map((filterAttribute) {
+    return BottomNavigationBarItem(
         icon: Image(
-          image: AssetImage(filter[filterColor] == null ? 'res/images/color_50.png' : 'res/images/color.png'),
+          image: AssetImage(filter[filterAttribute] == null ? 'res/images/' + attrToAsset[filterAttribute] + '_50.png' : 'res/images/' + attrToAsset[filterAttribute] + '.png'),
           width: 25.0,
           height: 25.0,
         ),
-        title: Text(S.of(context).filter_color)),
-    BottomNavigationBarItem(
-        icon: Image(
-          image: AssetImage(filter[filterHabitat] == null ? 'res/images/habitat_50.png' : 'res/images/habitat.png'),
-          width: 25.0,
-          height: 25.0,
-        ),
-        title: Text(S.of(context).filter_habitat)),
-    BottomNavigationBarItem(
-        icon: Image(
-          image: AssetImage(filter[filterPetal] == null ? 'res/images/petal_50.png' : 'res/images/petal.png'),
-          width: 25.0,
-          height: 25.0,
-        ),
-        title: Text(S.of(context).filter_petal)),
-    BottomNavigationBarItem(
-        icon: Image(
-          image: AssetImage(filter[filterDistribution] == null ? 'res/images/distribution_50.png' : 'res/images/distribution.png'),
-          width: 25.0,
-          height: 25.0,
-        ),
-        title: Text(S.of(context).filter_distribution)),
-  ];
+        title: Text(getFilterText(context, filterAttribute)));
+  }).toList();
+}
+
+void onBottomNavigationBarTap(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter, int index, int currentIndex) {
+  if (index != currentIndex) {
+    if (currentIndex == -1) {
+      Navigator.pushReplacement(context, getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, Preferences.myFilterAttributes.elementAt(index)));
+    } else {
+      Navigator.push(context, getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, Preferences.myFilterAttributes.elementAt(index)));
+    }
+  }
+}
+
+void onLeftNavigationTap(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter, String filterAttribute) {
+  Navigator.push(context, getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, filterAttribute));
+}
+
+MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
+  return getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter));
+}
+
+MaterialPageRoute<dynamic> getFirstFilterRoute(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
+  return getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter));
+}
+
+
+MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter, String filterAttribute) {
+  var route;
+
+  switch (filterAttribute) {
+    case filterColor:
+      route = MaterialPageRoute(builder: (context) => Color(onChangeLanguage, onBuyProduct, filter));
+      break;
+    case filterHabitat:
+      route = MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, onBuyProduct, filter));
+      break;
+    case filterPetal:
+      route = MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, onBuyProduct, filter));
+      break;
+    case filterDistribution:
+      route = MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, onBuyProduct, filter));
+      break;
+    default:
+      route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, filter));
+  }
+  if (filterAttribute != null) {
+    if (filterRoutes[filterAttribute] != null && filterRoutes[filterAttribute].isActive) {
+      Navigator.removeRoute(context, filterRoutes[filterAttribute]);
+    }
+    filterRoutes[filterAttribute] = route;
+  }
+  return route;
 }
