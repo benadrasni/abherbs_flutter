@@ -2,11 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/ads.dart';
-import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/purchases.dart';
+import 'package:abherbs_flutter/splash.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
@@ -20,7 +19,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:screen/screen.dart';
 
 void main() async {
-  bool isInDebugMode = false;
+  bool isInDebugMode = true;
 
   FlutterError.onError = (FlutterErrorDetails details) {
     if (isInDebugMode) {
@@ -55,7 +54,6 @@ class _AppState extends State<App> {
   Map<String, dynamic> _notificationData;
   Future<List<PurchasedItem>> _purchasesF;
   Future<Locale> _localeF;
-  Future<Widget> _firstPageF;
 
   onChangeLanguage(String language) {
     setState(() {
@@ -86,19 +84,16 @@ class _AppState extends State<App> {
 //        TODO: whether to show upcoming notification or not when app is active
 //        setState(() {
 //          _notification = message['data'];
-//          _firstPageF = _findFirstPage();
 //        });
       },
       onResume: (Map<String, dynamic> message) async {
         setState(() {
           _notificationData = message;
-          _firstPageF = _findFirstPage();
         });
       },
       onLaunch: (Map<String, dynamic> message) async {
         setState(() {
           _notificationData = message;
-          _firstPageF = _findFirstPage();
         });
       },
     );
@@ -112,7 +107,11 @@ class _AppState extends State<App> {
   }
 
   Future<List<PurchasedItem>> _iapError() {
-    Fluttertoast.showToast(msg: 'IAP not prepared. Check if Platform service is available.', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.BOTTOM, timeInSecForIos: 5);
+    Fluttertoast.showToast(
+        msg: 'IAP not prepared. Check if Platform service is available.',
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIos: 5);
     return Future<List<PurchasedItem>>(() {
       Purchases.purchases = <PurchasedItem>[];
       return Purchases.purchases;
@@ -133,59 +132,6 @@ class _AppState extends State<App> {
     });
   }
 
-  Future<Widget> _getFirstFilterPage() {
-    return Prefs.getBoolF(keyAlwaysMyRegion, false).then((alwaysMyRegionValue) {
-      Map<String, String> filter = {};
-      if (alwaysMyRegionValue) {
-        return Prefs.getStringF(keyMyRegion, null).then((myRegionValue) {
-          if (myRegionValue != null) {
-            filter[filterDistribution] = myRegionValue;
-          }
-          return Future<Widget>(() {
-            return getFirstFilterPage(this.onChangeLanguage, this.onBuyProduct, filter);
-          });
-        });
-      } else {
-        return Future<Widget>(() {
-          return getFirstFilterPage(this.onChangeLanguage, this.onBuyProduct, filter);
-        });
-      }
-    });
-  }
-
-  Future<Widget> _findFirstPage() {
-    if (_notificationData == null) {
-      return _getFirstFilterPage();
-    } else {
-      String action = _notificationData['action'];
-      if (action == null) {
-        return _getFirstFilterPage();
-      } else {
-        switch (action) {
-          case 'browse':
-            String uri = _notificationData['uri'];
-            if (uri != null) {
-              launchURLF(uri);
-              _notificationData = null;
-              return _getFirstFilterPage();
-            }
-            return _getFirstFilterPage();
-          case 'list':
-            String count = _notificationData['count'];
-            String path = _notificationData['path'];
-            if (count != null && path != null) {
-              return Future<Widget>(() {
-                return PlantList(this.onChangeLanguage, this.onBuyProduct, {}, count, path);
-              });
-            }
-            return _getFirstFilterPage();
-          default:
-            return _getFirstFilterPage();
-        }
-      }
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -198,7 +144,6 @@ class _AppState extends State<App> {
     _localeF = Prefs.getStringF(keyPreferredLanguage).then((String language) {
       return language.isEmpty ? null : Locale(language, '');
     });
-    _firstPageF = _findFirstPage();
 
     Prefs.getIntF(keyRateCount, rateCountInitial).then((value) {
       if (value < 0) {
@@ -226,10 +171,11 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Object>>(
-        future: Future.wait([_localeF, _purchasesF, _firstPageF]),
+        future: Future.wait([_localeF, _purchasesF]),
         builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
+              var notificationData = _notificationData != null ? Map.from(_notificationData) : null;
               _notificationData = null;
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
@@ -240,7 +186,7 @@ class _AppState extends State<App> {
                   GlobalWidgetsLocalizations.delegate,
                 ],
                 supportedLocales: S.delegate.supportedLocales,
-                home: snapshot.data[2],
+                home: Splash(this.onChangeLanguage, this.onBuyProduct, notificationData),
                 navigatorObservers: [
                   FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
                 ],

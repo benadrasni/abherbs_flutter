@@ -10,10 +10,12 @@ import 'package:abherbs_flutter/settings/setting_pref_language.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:abherbs_flutter/preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  SettingsScreen(this.onChangeLanguage);
+  final Map<String, String> filter;
+  SettingsScreen(this.onChangeLanguage, this.filter);
 
   @override
   _SettingsScreenState createState() => new _SettingsScreenState();
@@ -241,10 +243,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SettingMyFilter()),
+          MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter)),
         ).then((result) {
           setState(() {
-            _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes);
+            _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
+              Preferences.myFilterAttributes = myFilter;
+              return myFilter;
+            });
           });
         });
       },

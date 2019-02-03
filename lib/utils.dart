@@ -142,6 +142,8 @@ Icon getIcon(String productId) {
   switch (productId) {
     case productSearch:
       return Icon(Icons.search);
+    default:
+      return Icon(Icons.mood_bad);
   }
 }
 

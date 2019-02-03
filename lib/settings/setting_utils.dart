@@ -1,4 +1,5 @@
-var languages = {
+const int minFilterAttributes = 2;
+const languages = {
   "ar": "العربية",
   "cs": "Čeština",
   "da": "Dansk",
