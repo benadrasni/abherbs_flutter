@@ -9,6 +9,8 @@
   "product_restore_purchases": "Obnoviť nákupy",
   "product_no_ads_title": "Žiadna nežiadúca reklama",
   "product_no_ads_description": "Aplikácia nezobrazí reklamný banner v spodnej časti obrazovky.",
+  "product_search_title": "Hľadať v názvoch alebo v taxonómii",
+  "product_search_description": "Budete môcť nájsť kvetinu podľa slovenského alebo latinského názvu alebo podľa taxónu (napr. podľa rádu, čeľade, rodu).",
   "product_purchase": "Kúpiť",
   "product_purchased": "Kúpené",
 
@@ -41,7 +43,7 @@
 
   "filter_color": "farba",
   "filter_habitat": "lokalita",
-  "filter_petal": "okvetné lístky",
+  "filter_petal": "lupienok",
   "filter_distribution": "distribúcia",
 
   "color_message": "Akej farby je kvet? Vyber tú najbližšiu. Vždy sa môžeš vrátiť a vybrať inú.",
@@ -174,5 +176,9 @@
   "snack_no_flowers": "Filtru nevyhovujú žiadne kvety v databáze.",
   "snack_loading_ad": "Reklama sa stále načítava, opäť stlačte tlačidlo.",
   "snack_copy": "Skopírované do schránky",
-  "snack_publish": "... bude dostupné neskôr"
+  "snack_publish": "... bude dostupné neskôr",
+
+  "search": "Hľadať...",
+  "search_names": "Hľadať v názvoch",
+  "search_taxonomy": "Hľadať v taxonómii"
 }

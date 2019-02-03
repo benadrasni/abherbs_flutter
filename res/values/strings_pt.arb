@@ -9,6 +9,8 @@
   "product_restore_purchases": "Restaurar compras",
   "product_no_ads_title": "Nenhum anúncio indesejado",
   "product_no_ads_description": "Aplicativo não mostrará banner de propaganda na parte inferior da tela.",
+  "product_search_title": "Pesquisa em nomes ou taxonomia",
+  "product_search_description": "Você poderá encontrar uma flor pelo seu nome em português ou latim ou por seu táxon (por exemplo, ordem, família, gênero).",
   "product_purchase": "Compra",
   "product_purchased": "Comprado",
 
@@ -37,9 +39,9 @@
   "rate_later": "Mais tarde",
   "rate": "Resenha",
 
-  "filter_color": "cor das flores",
+  "filter_color": "cor",
   "filter_habitat": "habitat",
-  "filter_petal": "número de pétalas",
+  "filter_petal": "pétala",
   "filter_distribution": "distribution",
 
   "color_message": "De que cor são as flores? Selecione a mais aproximada. Sempre pode voltar e selecionar uma outra.",
@@ -173,5 +175,9 @@
   "snack_no_flowers": "Não há critérios de correspondência de flores.",
   "snack_loading_ad": "O anúncio ainda está carregando, pressione o botão novamente.",
   "snack_copy": "Copiado para a área de transferência",
-  "snack_publish": "... para ser publicado mais tarde"
+  "snack_publish": "... para ser publicado mais tarde",
+
+  "search": "Procurar...",
+  "search_names": "Pesquisa nos nomes",
+  "search_taxonomy": "Pesquisa na taxonomia"
 }

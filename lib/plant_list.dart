@@ -38,17 +38,16 @@ class _PlantListState extends State<PlantList> {
   Random _random;
 
   Widget _getImageWithAds(BuildContext context, Locale myLocale, String url, String name) {
-    var stack = Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        CircularProgressIndicator(),
-        FlatButton(
+    var stack = FlatButton(
           padding: EdgeInsets.all(10.0),
           child: CachedNetworkImage(
             fit: BoxFit.scaleDown,
-            placeholder: Image(
-              image: AssetImage('res/images/placeholder.webp'),
-            ),
+            placeholder: Stack(alignment: Alignment.center, children: [
+              CircularProgressIndicator(),
+              Image(
+                image: AssetImage('res/images/placeholder.webp'),
+              ),
+            ]),
             imageUrl: storageEndpoit + storagePhotos + url,
           ),
           onPressed: () {
@@ -57,9 +56,7 @@ class _PlantListState extends State<PlantList> {
               MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, name)),
             );
           },
-        ),
-      ],
-    );
+        );
 
     if (_random.nextInt(100) < adsFrequency) {
       return Column(

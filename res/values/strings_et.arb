@@ -9,6 +9,8 @@
   "product_restore_purchases": "Ostude taastamine",
   "product_no_ads_title": "Soovimatu reklaam puudub",
   "product_no_ads_description": "Rakendus ei näita ekraani allosas reklaami bännerit.",
+  "product_search_title": "Otsi nimedest või taksonoomiast",
+  "product_search_description": "Sul on võimalik leida lill oma eesti või ladina nime või taksoni järgi (nt selts, sugukond, perekond).",
   "product_purchase": "Ostmine",
   "product_purchased": "Ostetud",
 
@@ -39,9 +41,9 @@
   "yes": "Jah",
   "no": "Ei",
 
-  "filter_color": "värvi lilled",
+  "filter_color": "värv",
   "filter_habitat": "elupaikade",
-  "filter_petal": "arvu kroonlehed",
+  "filter_petal": "kroonlehed",
   "filter_distribution": "levitamine",
 
   "color_message": "Mis värvi lill? Vali lähim.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Lillede sobitamise kriteeriumid puuduvad.",
   "snack_loading_ad": "Reklaam laaditakse ikka veel, vajutage uuesti nuppu.",
   "snack_copy": "Kopeeritud lõikelauale",
-  "snack_publish": "... avaldatakse hiljem"
+  "snack_publish": "... avaldatakse hiljem",
+
+  "search": "Otsing...",
+  "search_names": "Otsi nimedest",
+  "search_taxonomy": "Otsi taksonoomias"
 }

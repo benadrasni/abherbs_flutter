@@ -9,6 +9,8 @@
   "product_restore_purchases": "Obnovit nákupy",
   "product_no_ads_title": "Žádná nežádoucí reklama",
   "product_no_ads_description": "Aplikace nezobrazí reklamní banner ve spodní části obrazovky.",
+  "product_search_title": "Hledat v jménech nebo v taxonomii",
+  "product_search_description": "Budete moci najít květinu podle českého nebo latinského názvu nebo podle taxonu (např. podle řádu, čeledi, rodu).",
   "product_purchase": "Koupit",
   "product_purchased": "Koupeno",
 
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Filtru nevyhovují žádné květiny v databázi.",
   "snack_loading_ad": "Reklama se stále načítá, znovu stiskněte tlačítko.",
   "snack_copy": "Zkopírováno do schránky",
-  "snack_publish": "... bude zveřejněno později"
+  "snack_publish": "... bude zveřejněno později",
+
+  "search": "Hledat...",
+  "search_names": "Hledat v jménech",
+  "search_taxonomy": "Hledat v taxonomii"
 }

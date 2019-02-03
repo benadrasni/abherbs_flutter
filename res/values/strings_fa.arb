@@ -9,6 +9,8 @@
   "product_restore_purchases": "بازگرداندن خرید",
   "product_no_ads_title": "بدون تبلیغات ناخواسته",
   "product_no_ads_description": "برنامه بنر تبلیغاتی را در پایین صفحه نشان نمی دهد.",
+  "product_search_title": "جستجو در نام یا طبقه بندی",
+  "product_search_description": "شما می توانید یک گل را با نام لاتین خود یا طوفان آن (مانند سفارش، خانواده، جنس) پیدا کنید.",
   "product_purchase": "خرید",
   "product_purchased": "خریداری شده",
 
@@ -38,9 +40,9 @@
   "yes": "بله",
   "no": "نه",
 
-  "filter_color": "رنگ گل",
+  "filter_color": "رنگ",
   "filter_habitat": "زیستگاه ها",
-  "filter_petal": "تعداد گلبرگ ها",
+  "filter_petal": "گلبرگ",
   "filter_distribution": "توزیع",
 
   "color_message": "رنگ گل چیست؟ نزدیک ترین را انتخاب کنید",
@@ -173,5 +175,9 @@
   "snack_no_flowers": "بدون گل مطابق معیارهای.",
   "snack_loading_ad": "تبلیغات هنوز بارگیری شده است، دوباره دکمه را فشار دهید.",
   "snack_copy": "کپی به کلیپ بورد",
-  "snack_publish": "بعدا منتشر شود"
+  "snack_publish": "بعدا منتشر شود",
+
+  "search": "جستجو کردن...",
+  "search_names": "جستجو در اسامی",
+  "search_taxonomy": "جستجو در طبقه بندی"
 }

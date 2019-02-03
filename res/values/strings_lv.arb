@@ -9,6 +9,8 @@
   "product_restore_purchases": "Atjaunot pirkumus",
   "product_no_ads_title": "Nav nevēlamas reklāmas",
   "product_no_ads_description": "Pieteikums neparādīs reklāmas reklāmkarogu ekrāna apakšā.",
+  "product_search_title": "Meklēt nosaukumos vai taksonomijā",
+  "product_search_description": "Jūs varēsiet atrast ziedu ar savu latviešu vai latīņu vārdu vai taksonu (piemēram, Rinda, Dzimta, Ģints).",
   "product_purchase": "Pirkt",
   "product_purchased": "Legādāts",
 
@@ -39,9 +41,9 @@
   "yes": "Jā",
   "no": "Nē",
 
-  "filter_color": "krāsu ziedi",
+  "filter_color": "krāsa",
   "filter_habitat": "biotopi",
-  "filter_petal": "skaičius žiedlapiais",
+  "filter_petal": "ziedlapiņa",
   "filter_distribution": "izplatīšana",
 
   "color_message": "Kas ir krāsa ziedu? Izvēlieties tuvāko.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Nav ziedu atbilstības kritēriju.",
   "snack_loading_ad": "Reklāma joprojām tiek ielādēta, vēlreiz nospiediet pogu.",
   "snack_copy": "Kopēts uz starpliktuvi",
-  "snack_publish": "... publicēt vēlāk"
+  "snack_publish": "... publicēt vēlāk",
+
+  "search": "Meklēt...",
+  "search_names": "Meklēt vārdos",
+  "search_taxonomy": "Meklēt taksonomijā"
 }

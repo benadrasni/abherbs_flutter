@@ -9,6 +9,8 @@
   "product_restore_purchases": "Враћање куповине",
   "product_no_ads_title": "Нема нежељених реклама",
   "product_no_ads_description": "Апликација не приказује рекламни баннер на дну екрана.",
+  "product_search_title": "Претражујте имена или таксономију",
+  "product_search_description": "Моћи ћете пронаћи цвијет по његовом српском или латинском имену или по његовом таксону (нпр. ред, породица, род).",
   "product_purchase": "Купити",
   "product_purchased": "Купио",
 
@@ -41,7 +43,7 @@
 
   "filter_color": "боја",
   "filter_habitat": "станишта",
-  "filter_petal": "крунични листићи",
+  "filter_petal": "латица",
   "filter_distribution": "дистрибуција",
 
   "color_message": "Која је боја цвијета? Изаберите најближег.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Нема критеријума за подударање цвећа.",
   "snack_loading_ad": "Оглас се и даље учитава, поново притисните дугме.",
   "snack_copy": "Копирано у Цлипбоард",
-  "snack_publish": "... да се касније објави"
+  "snack_publish": "... да се касније објави",
+
+  "search": "Тражити...",
+  "search_names": "Тражи имена",
+  "search_taxonomy": "Тражи у таксономији"
 }

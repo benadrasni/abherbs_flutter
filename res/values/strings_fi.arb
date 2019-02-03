@@ -9,6 +9,8 @@
   "product_restore_purchases": "Palauttaa ostot",
   "product_no_ads_title": "Ei ei-toivottua mainosta",
   "product_no_ads_description": "Sovellus ei näytä ruudun alareunassa mainosbanneria.",
+  "product_search_title": "Hae nimistä tai taksonomiasta",
+  "product_search_description": "Voit löytää kukka Suomen tai latinankielisen nimen tai taksonin (esim. lahko, heimo, suku).",
   "product_purchase": "Ostaa",
   "product_purchased": "Osti",
 
@@ -39,9 +41,9 @@
   "yes": "Joo",
   "no": "Ei",
 
-  "filter_color": "kukkien väri",
+  "filter_color": "väri",
   "filter_habitat": "kasvupaikka",
-  "filter_petal": "määrä terälehdet",
+  "filter_petal": "teriö",
   "filter_distribution": "jakelu",
 
   "color_message": "Mikä on kukka? Valitse lähin.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Ei kukkien yhteensopivuusvaatimuksia.",
   "snack_loading_ad": "Mainos lataa, paina painiketta uudelleen.",
   "snack_copy": "Kopioitu leikepöydälle",
-  "snack_publish": "... julkaistaan myöhemmin"
+  "snack_publish": "... julkaistaan myöhemmin",
+
+  "search": "Hae...",
+  "search_names": "Hae nimistä",
+  "search_taxonomy": "Hae taksonomiassa"
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +28,11 @@ class _EnhacementsScreenState extends State<EnhacementsScreen> {
   final List<String> _productLists = Platform.isAndroid
       ? [
           productNoAdsAndroid,
+          productSearch,
         ]
       : [
           productNoAdsIOS,
+          productSearch
         ];
   Future<List<IAPItem>> _productsF;
   Future<List<PurchasedItem>> _purchasesF;
@@ -48,6 +51,8 @@ class _EnhacementsScreenState extends State<EnhacementsScreen> {
     super.initState();
     _productsF = FlutterInappPurchase.getProducts(_productLists);
     _purchasesF = FlutterInappPurchase.getAvailablePurchases();
+
+    Ads.hideBannerAd();
   }
 
   @override

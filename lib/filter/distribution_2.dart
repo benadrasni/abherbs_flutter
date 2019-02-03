@@ -173,8 +173,9 @@ class _Distribution2State extends State<Distribution2> {
     var mainContext = context;
     return Scaffold(
       key: _key,
-      appBar: new AppBar(
-        title: new Text(S.of(context).filter_distribution),
+      appBar: AppBar(
+        title: Text(S.of(context).filter_distribution),
+        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
@@ -203,7 +204,7 @@ class _Distribution2State extends State<Distribution2> {
               nextFilterAttribute = filterDistribution;
               break;
           }
-          if (filterRoutes[nextFilterAttribute] != null) {
+          if (filterRoutes[nextFilterAttribute] != null && filterRoutes[nextFilterAttribute].isActive) {
             Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
           }
           filterRoutes[nextFilterAttribute] = route;

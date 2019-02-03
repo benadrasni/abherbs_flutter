@@ -9,6 +9,8 @@
   "product_restore_purchases": "Atkurti pirkimus",
   "product_no_ads_title": "Nėra nepageidaujamo skelbimo",
   "product_no_ads_description": "Programos apačioje ekrano reklama nebus rodoma.",
+  "product_search_title": "Ieškoti vardų arba taksonomijos",
+  "product_search_description": "Gali rasti gėlę pagal savo lietuvių ar lotynų kalbą arba taksoną (pvz., Eilė, šeimą, gentį).",
   "product_purchase": "Įsigyti",
   "product_purchased": "Įgytinis",
 
@@ -39,9 +41,9 @@
   "yes": "Taip",
   "no": "Ne",
 
-  "filter_color": "spalva gėlės",
+  "filter_color": "spalva",
   "filter_habitat": "buveinių",
-  "filter_petal": "skaičius žiedlapiais",
+  "filter_petal": "vainiklapis",
   "filter_distribution": "platinimas",
 
   "color_message": "Koks gėlių spalva? Pasirinkite artimiausią.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Nėra gėlių atitikimo kriterijų.",
   "snack_loading_ad": "Reklama vis dar įkeliama, dar kartą paspauskite mygtuką.",
   "snack_copy": "Kopijuojama į iškarpinę",
-  "snack_publish": "... bus paskelbta vėliau"
+  "snack_publish": "... bus paskelbta vėliau",
+
+  "search": "Paieška...",
+  "search_names": "Ieškoti vardų",
+  "search_taxonomy": "Ieškoti taksonomijoje"
 }

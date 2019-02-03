@@ -9,6 +9,8 @@
   "product_restore_purchases": "Herstel aankopen",
   "product_no_ads_title": "Geen ongewenste advertenties",
   "product_no_ads_description": "Applicatie toont geen reclamebanner onderaan het scherm.",
+  "product_search_title": "Zoeken in namen of taxonomie",
+  "product_search_description": "Je zult in staat zijn om een bloem te vinden op zijn Nederlandse of Latijnse naam of op zijn taxon (bijvoorbeeld orde, familie, geslacht).",
   "product_purchase": "Koop",
   "product_purchased": "Gekocht",
 
@@ -39,9 +41,9 @@
   "yes": "Ja",
   "no": "Nee",
 
-  "filter_color": "kleur van de bloemen",
+  "filter_color": "kleur",
   "filter_habitat": "standplaats",
-  "filter_petal": "aantal bloemblaadjes",
+  "filter_petal": "kroonblad",
   "filter_distribution": "distributie",
 
   "color_message": "Wat is de kleur van de bloem? Kies de kleur die er het dichtst bij komt.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Geen bloemen die voldoen aan criteria.",
   "snack_loading_ad": "Advertentie wordt nog steeds geladen, druk opnieuw op de knop.",
   "snack_copy": "Gekopieerd naar het klembord",
-  "snack_publish": "... later worden gepubliceerd"
+  "snack_publish": "... later worden gepubliceerd",
+
+  "search": "Zoeken...",
+  "search_names": "Zoeken in namen",
+  "search_taxonomy": "Zoeken in taxonomie"
 }

@@ -1,9 +1,9 @@
 import 'package:abherbs_flutter/keys.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
+import 'package:abherbs_flutter/purchases.dart';
 
 class Ads {
-  static bool isAllowed = true;
   static bool isShown = false;
   static bool _isGoingToBeShown = false;
   static BannerAd _bannerAd;
@@ -31,7 +31,7 @@ class Ads {
   }
 
   static void showBannerAd([State state]) {
-    if (!isAllowed) return;
+    if (Purchases.isNoAds()) return;
     if (state != null && !state.mounted) return;
     if (_bannerAd == null) setBannerAd();
     if (!isShown && !_isGoingToBeShown) {
@@ -43,7 +43,7 @@ class Ads {
   }
 
   static void hideBannerAd() {
-    if (!isAllowed) return;
+    if (Purchases.isNoAds()) return;
     if (_bannerAd != null && !_isGoingToBeShown) {
       _bannerAd.dispose().then((disposed) {
         isShown = !disposed;

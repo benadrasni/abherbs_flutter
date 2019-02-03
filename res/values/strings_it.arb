@@ -9,6 +9,8 @@
   "product_restore_purchases": "Ripristinare gli acquisti",
   "product_no_ads_title": "Nessuna pubblicità indesiderata",
   "product_no_ads_description": "L'applicazione non mostrerà banner pubblicitari nella parte inferiore dello schermo.",
+  "product_search_title": "Cerca nei nomi o nella tassonomia",
+  "product_search_description": "Sarai in grado di trovare un fiore con il suo nome italiano o latino o dal suo taxon (ad esempio, ordine, famiglia, genere).",
   "product_purchase": "Acquistare",
   "product_purchased": "Acquistato",
 
@@ -39,9 +41,9 @@
   "yes": "Si",
   "no": "No",
 
-  "filter_color": "colore dei fiori",
+  "filter_color": "colore",
   "filter_habitat": "habitat",
-  "filter_petal": "numero di petali",
+  "filter_petal": "petali",
   "filter_distribution": "distribuzione",
 
   "color_message": "Di che colore è il fiore? Scegli il più simile.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Nessun fiore che corrisponde ai criteri.",
   "snack_loading_ad": "La pubblicità è ancora in fase di caricamento, premere nuovamente il pulsante.",
   "snack_copy": "Copiato negli appunti",
-  "snack_publish": "... essere pubblicato più tardi"
+  "snack_publish": "... essere pubblicato più tardi",
+
+  "search": "Ricerca...",
+  "search_names": "Cerca nei nomi",
+  "search_taxonomy": "Cerca in tassonomia"
 }

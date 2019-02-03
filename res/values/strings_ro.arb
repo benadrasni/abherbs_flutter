@@ -9,6 +9,8 @@
   "product_restore_purchases": "Restaurați achizițiile",
   "product_no_ads_title": "Nicio reclama nedorită",
   "product_no_ads_description": "Aplicația nu va afișa banner publicitar în partea de jos a ecranului.",
+  "product_search_title": "Căutați în nume sau în taxonomie",
+  "product_search_description": "Veți găsi o floare prin numele său românesc sau latin sau prin taxonul său (de exemplu, ordin, familie, gen).",
   "product_purchase": "Cumpărare",
   "product_purchased": "Cumparate",
 
@@ -39,9 +41,9 @@
   "yes": "Da",
   "no": "Nu",
 
-  "filter_color": "culoarea florilor",
+  "filter_color": "culoare",
   "filter_habitat": "habitatul",
-  "filter_petal": "numărul de petale",
+  "filter_petal": "petală",
   "filter_distribution": "distribuire",
 
   "color_message": "Care este culoarea florii? Alege culoarea cea mai apropiată.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Nu există criterii de potrivire a florilor.",
   "snack_loading_ad": "Anunțul se încarcă încă, apăsați butonul din nou.",
   "snack_copy": "Copiat în Clipboard",
-  "snack_publish": "... care urmează să fie publicată ulterior"
+  "snack_publish": "... care urmează să fie publicată ulterior",
+
+  "search": "Căutare...",
+  "search_names": "Căutați în nume",
+  "search_taxonomy": "Căutați în taxonomie"
 }
