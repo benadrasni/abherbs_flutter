@@ -23,4 +23,13 @@ class Purchases {
     }
     return false;
   }
+
+  static bool isCustomFilter() {
+    for (PurchasedItem product in purchases) {
+      if (product.productId == productCustomFilter) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

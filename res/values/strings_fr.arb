@@ -11,6 +11,8 @@
   "product_no_ads_description": "L'application ne montre pas la bannière de publicité au bas de l'écran.",
   "product_search_title": "Chercher dans les noms ou la taxonomie",
   "product_search_description": "Vous pourrez trouver une fleur par son nom français ou latin ou par son taxon (ordre, famille, genre, par exemple).",
+  "product_custom_filter_title": "Filtre personnalisé",
+  "product_custom_filter_description": "Vous pourrez modifier l'ordre et le nombre de filtres par défaut (couleur, habitat, pétale, distribution).",
   "product_purchase": "Acheter",
   "product_purchased": "Acheté(e)",
 
@@ -21,6 +23,8 @@
   "my_region": "Ma région",
   "always_my_region_title": "Toujours ajouter ma région au filtre",
   "always_my_region_subtitle": "Votre région sera pré-réglée sur le filtre",
+
+  "my_filter": "Mon filtre",
 
   "feedback_intro": "Vous avez contribué à cette application car vous l'avez installé sur votre appareil, merci. Si vous cherchez quelque chose de plus, voici quelques options:",
   "feedback_review": "Vous pouvez écrire une critique positive.",

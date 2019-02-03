@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
 const String productSearch = "search";
+const String productCustomFilter = "custom_filter";
 
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
@@ -121,6 +122,8 @@ String getProductTitle(BuildContext context, String productId, String defaultTit
       return S.of(context).product_no_ads_title;
     case productSearch:
       return S.of(context).product_search_title;
+    case productCustomFilter:
+      return S.of(context).product_custom_filter_title;
     default:
       return defaultTitle;
   }
@@ -133,6 +136,8 @@ String getProductDescription(BuildContext context, String productId, String defa
       return S.of(context).product_no_ads_description;
     case productSearch:
       return S.of(context).product_search_description;
+    case productCustomFilter:
+      return S.of(context).product_custom_filter_description;
     default:
       return defaultDescription;
   }

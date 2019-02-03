@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/settings/setting_my_filter.dart';
 import 'package:abherbs_flutter/settings/setting_my_region.dart';
 import 'package:abherbs_flutter/settings/setting_pref_language.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
+import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/preferences.dart';
@@ -212,48 +213,52 @@ class _SettingsScreenState extends State<SettingsScreen> {
         }));
 
     // my filter
-    widgets.add(ListTile(
-      title: Text(
-        S.of(context).my_filter,
-        style: titleTextStyle,
-      ),
-      subtitle: FutureBuilder<List<String>>(
-          future: _myFilterF,
-          builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
-            var value = "";
-            if (snapshot.connectionState == ConnectionState.done) {
-              value = snapshot.data
-                  .map((item) {
-                    return getFilterText(context, item);
-                  })
-                  .toList()
-                  .join(', ');
-            }
-            return Text(
-              value,
-              style: subtitleTextStyle,
-            );
-          }),
-      trailing: IconButton(
-        icon: Icon(Icons.delete),
-        onPressed: () {
-          _setMyFilter(null);
-        },
-      ),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter)),
-        ).then((result) {
-          setState(() {
-            _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
-              Preferences.myFilterAttributes = myFilter;
-              return myFilter;
+    if (Purchases.isCustomFilter()) {
+      widgets.add(ListTile(
+        title: Text(
+          S
+              .of(context)
+              .my_filter,
+          style: titleTextStyle,
+        ),
+        subtitle: FutureBuilder<List<String>>(
+            future: _myFilterF,
+            builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+              var value = "";
+              if (snapshot.connectionState == ConnectionState.done) {
+                value = snapshot.data
+                    .map((item) {
+                  return getFilterText(context, item);
+                })
+                    .toList()
+                    .join(', ');
+              }
+              return Text(
+                value,
+                style: subtitleTextStyle,
+              );
+            }),
+        trailing: IconButton(
+          icon: Icon(Icons.delete),
+          onPressed: () {
+            _setMyFilter(null);
+          },
+        ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter)),
+          ).then((result) {
+            setState(() {
+              _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
+                Preferences.myFilterAttributes = myFilter;
+                return myFilter;
+              });
             });
           });
-        });
-      },
-    ));
+        },
+      ));
+    }
 
     return Scaffold(
       appBar: AppBar(

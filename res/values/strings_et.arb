@@ -11,6 +11,8 @@
   "product_no_ads_description": "Rakendus ei näita ekraani allosas reklaami bännerit.",
   "product_search_title": "Otsi nimedest või taksonoomiast",
   "product_search_description": "Sul on võimalik leida lill oma eesti või ladina nime või taksoni järgi (nt selts, sugukond, perekond).",
+  "product_custom_filter_title": "Kohandatud filter",
+  "product_custom_filter_description": "Saate muuta vaikimisi järjekorra ja filtrite arvu (värv, elupaikade, kroonleht, levitamine).",
   "product_purchase": "Ostmine",
   "product_purchased": "Ostetud",
 
@@ -21,6 +23,8 @@
   "my_region": "Minu regioon",
   "always_my_region_title": "Lisage alati minu piirkond filtrile",
   "always_my_region_subtitle": "Teie piirkond on filtrile eelnevalt seadistatud",
+
+  "my_filter": "Minu filter",
 
   "feedback_intro": "Tänu sellele, et olete selle seadmesse installinud, olete sellele rakendusele kaasa aidanud. Kui otsite midagi muud, on siin mõned võimalused:",
   "feedback_review": "Võite kirjutada positiivse ülevaate.",
