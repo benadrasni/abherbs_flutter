@@ -9,6 +9,8 @@
   "product_restore_purchases": "לשחזר רכישות",
   "product_no_ads_title": "אין פרסומת לא רצויה",
   "product_no_ads_description": "היישום לא יציג מודעת באנר בחלק התחתון של המסך.",
+  "product_search_title": "חיפוש בשמות או בטקסונומיה",
+  "product_search_description": "תוכל למצוא פרח בשם הלטיני שלה או על ידי הטקסון שלה (למשל סדרה, משפחה, סוג).",
   "product_purchase": "רכישה",
   "product_purchased": "נרכש",
 
@@ -39,9 +41,9 @@
   "yes": "כן",
   "no": "לא",
 
-  "filter_color": "צבע של פרחים",
+  "filter_color": "צבע",
   "filter_habitat": "בתי גידול",
-  "filter_petal": "מספר עלי כותרת",
+  "filter_petal": "עלי כותרת",
   "filter_distribution": "הפצה",
 
   "color_message": "מה צבע הפרח? בחר את הקרוב ביותר.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "אין קריטריונים תואמים לפרחים.",
   "snack_loading_ad": "המודעה עדיין נטענת, לחץ שוב על הלחצן.",
   "snack_copy": "הועתק ללוח",
-  "snack_publish": "יפורסם בהמשך"
+  "snack_publish": "יפורסם בהמשך",
+
+  "search": "לחפש...",
+  "search_names": "חפש בשמות",
+  "search_taxonomy": "חפש בטקסונומיה"
 }

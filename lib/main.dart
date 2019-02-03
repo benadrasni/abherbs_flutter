@@ -6,14 +6,17 @@ import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/utils.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_crashlytics/flutter_crashlytics.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:screen/screen.dart';
 
 void main() async {
@@ -48,6 +51,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   FirebaseMessaging _firebaseMessaging;
+  FirebaseAnalytics _firebaseAnalytics;
   Map<String, dynamic> _notificationData;
   Future<List<PurchasedItem>> _purchasesF;
   Future<Locale> _localeF;
@@ -63,7 +67,10 @@ class _AppState extends State<App> {
 
   onBuyProduct() {
     setState(() {
-      _purchasesF = FlutterInappPurchase.getAvailablePurchases();
+      _purchasesF = FlutterInappPurchase.getAvailablePurchases().then((value) {
+        Purchases.purchases = value;
+        return Purchases.purchases;
+      });
     });
   }
 
@@ -105,20 +112,20 @@ class _AppState extends State<App> {
   }
 
   Future<List<PurchasedItem>> _iapError() {
-    Fluttertoast.showToast(
-        msg: 'IAP not prepared. Check if Platform service is available.',
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIos: 5
-    );
+    Fluttertoast.showToast(msg: 'IAP not prepared. Check if Platform service is available.', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.BOTTOM, timeInSecForIos: 5);
     return Future<List<PurchasedItem>>(() {
-      return <PurchasedItem>[];
+      Purchases.purchases = <PurchasedItem>[];
+      return Purchases.purchases;
     });
   }
 
   Future<List<PurchasedItem>> _initPlatformState() {
     return FlutterInappPurchase.initConnection.then((value) {
-      return FlutterInappPurchase.getAvailablePurchases().catchError((error) {
+      Purchases.isAllowed = true;
+      return FlutterInappPurchase.getAvailablePurchases().then((value) {
+        Purchases.purchases = value;
+        return Purchases.purchases;
+      }).catchError((error) {
         return _iapError();
       });
     }).catchError((error) {
@@ -186,6 +193,7 @@ class _AppState extends State<App> {
     Prefs.init();
 
     _firebaseMessaging = FirebaseMessaging();
+    _firebaseAnalytics = FirebaseAnalytics();
     _purchasesF = _initPlatformState();
     _localeF = Prefs.getStringF(keyPreferredLanguage).then((String language) {
       return language.isEmpty ? null : Locale(language, '');
@@ -223,12 +231,6 @@ class _AppState extends State<App> {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               _notificationData = null;
-              for (PurchasedItem product in snapshot.data[1]) {
-                if (product.productId == productNoAdsAndroid || product.productId == productNoAdsIOS) {
-                  Ads.isAllowed = false;
-                  break;
-                }
-              }
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
                 locale: snapshot.data[0],
@@ -239,6 +241,9 @@ class _AppState extends State<App> {
                 ],
                 supportedLocales: S.delegate.supportedLocales,
                 home: snapshot.data[2],
+                navigatorObservers: [
+                  FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
+                ],
               );
             default:
               return Container(

@@ -9,6 +9,8 @@
   "product_restore_purchases": "Vraćanje kupnje",
   "product_no_ads_title": "Nema neželjenog oglasa",
   "product_no_ads_description": "Aplikacija neće prikazati oglasni banner na dnu zaslona.",
+  "product_search_title": "Pretražujte imena ili taksonomiju",
+  "product_search_description": "Cvijet ćete moći pronaći po njegovom hrvatskom ili latinskom nazivu ili po svojoj taksonu (npr. red, porodica, rod).",
   "product_purchase": "Kupiti",
   "product_purchased": "Kupljen",
 
@@ -39,9 +41,9 @@
   "yes": "Da",
   "no": "Ne",
 
-  "filter_color": "boja cvjetova",
+  "filter_color": "boja",
   "filter_habitat": "staništa",
-  "filter_petal": "broj krunskih listić",
+  "filter_petal": "latica",
   "filter_distribution": "distribucija",
 
   "color_message": "Koja je boja cvijeta? Odaberite najbližeg.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Nema kriterija za podudaranje.",
   "snack_loading_ad": "Oglas se još uvijek učitava, ponovno pritisnite gumb.",
   "snack_copy": "Kopirano u međuspremnik",
-  "snack_publish": "... biti objavljen kasnije"
+  "snack_publish": "... biti objavljen kasnije",
+
+  "search": "Traži...",
+  "search_names": "Pretražujte imena",
+  "search_taxonomy": "Pretražujte taksonomiju"
 }

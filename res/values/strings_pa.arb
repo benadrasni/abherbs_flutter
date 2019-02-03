@@ -9,6 +9,8 @@
   "product_restore_purchases": "ਖ਼ਰੀਦਾਂ ਨੂੰ ਰੀਸਟੋਰ ਕਰੋ",
   "product_no_ads_title": "ਕੋਈ ਅਣਚਾਹੇ ਇਸ਼ਤਿਹਾਰ",
   "product_no_ads_description": "ਐਪਲੀਕੇਸ਼ਨ ਸਕ੍ਰੀਨ ਦੇ ਤਲ 'ਤੇ ਇਸ਼ਤਿਹਾਰ ਬੈਨਰ ਨਹੀਂ ਦਿਖਾਏਗੀ.",
+  "product_search_title": "ਨਾਮਾਂ ਜਾਂ ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਲੱਭੋ",
+  "product_search_description": "ਤੁਸੀਂ ਇਸਦੇ ਲਾਤੀਨੀ ਨਾਮ ਦੁਆਰਾ ਜਾਂ ਇਸਦੇ ਟੈਕਸੋਂ ਦੁਆਰਾ ਇੱਕ ਫੁੱਲ ਲੱਭਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ (ਜਿਵੇਂ ਤਬਕਾ, ਪਰਿਵਾਰ, ਜਿਣਸ).",
   "product_purchase": "ਖ਼ਰੀਦੋ",
   "product_purchased": "ਖਰੀਦਿਆ",
 
@@ -39,9 +41,9 @@
   "yes": "ਹਾਂ",
   "no": "ਨਹੀਂ",
 
-  "filter_color": "ਫੁੱਲ ਦਾ ਰੰਗ",
+  "filter_color": "ਰੰਗ",
   "filter_habitat": "ਆਵਾਸ",
-  "filter_petal": "ਫੁੱਲਾਂ ਦੀ ਗਿਣਤੀ",
+  "filter_petal": "ਪੱਟੇਲ",
   "filter_distribution": "ਵੰਡ",
 
   "color_message": "ਫੁੱਲ ਦਾ ਰੰਗ ਕਿਹੜਾ ਹੈ? ਸਭ ਤੋਂ ਨਜ਼ਦੀਕੀ ਚੁਣੋ",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "ਕੋਈ ਫੁੱਲ ਮਾਪਣ ਦੇ ਮਾਪਦੰਡ ਨਹੀਂ.",
   "snack_loading_ad": "ਵਿਗਿਆਪਨ ਅਜੇ ਵੀ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ, ਦੁਬਾਰਾ ਬਟਨ ਦਬਾਓ",
   "snack_copy": "ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ",
-  "snack_publish": "... ਬਾਅਦ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤੇ ਜਾਣ ਲਈ"
+  "snack_publish": "... ਬਾਅਦ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤੇ ਜਾਣ ਲਈ",
+
+  "search": "ਖੋਜ ...",
+  "search_names": "ਨਾਮਾਂ ਵਿੱਚ ਖੋਜ ਕਰੋ",
+  "search_taxonomy": "ਟੈਕਸੋਨੀਟੀ ਵਿੱਚ ਖੋਜ ਕਰੋ"
 }

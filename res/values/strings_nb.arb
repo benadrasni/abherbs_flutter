@@ -9,6 +9,8 @@
   "product_restore_purchases": "Gjenopprette kjøp",
   "product_no_ads_title": "Ingen uønsket annonse",
   "product_no_ads_description": "Søknaden vil ikke vise annonse banner nederst på skjermen.",
+  "product_search_title": "Søk i navn eller taksonomi",
+  "product_search_description": "Du vil kunne finne en blomst med sitt norske eller latinske navn eller med dets taxon (for eksempel orden, familie, slekt).",
   "product_purchase": "Kjøpe",
   "product_purchased": "Kjøpt",
 
@@ -39,9 +41,9 @@
   "yes": "Ja",
   "no": "Nei",
 
-  "filter_color": "farge på blomster",
+  "filter_color": "farge",
   "filter_habitat": "voksested",
-  "filter_petal": "antall kronblader",
+  "filter_petal": "kronblader",
   "filter_distribution": "fordeling",
 
   "color_message": "Hva er fargen på blomsten? Velg den nærmeste.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Ingen blomster som samsvarer med kriterier.",
   "snack_loading_ad": "Annonsen er fortsatt lasting, trykk på knappen igjen.",
   "snack_copy": "Kopiert til utklippstavlen",
-  "snack_publish": "... å bli publisert senere"
+  "snack_publish": "... å bli publisert senere",
+
+  "search": "Søke...",
+  "search_names": "Søk i navn",
+  "search_taxonomy": "Søk i taksonomi"
 }

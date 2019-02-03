@@ -9,6 +9,8 @@
   "product_restore_purchases": "Mengembalikan pembelian",
   "product_no_ads_title": "Tidak ada iklan yang tidak diinginkan",
   "product_no_ads_description": "Aplikasi tidak akan menampilkan spanduk iklan di bagian bawah layar.",
+  "product_search_title": "Cari nama atau taksonomi",
+  "product_search_description": "Anda dapat menemukan bunga dengan nama Latin atau dengan taksonnya (mis. ordo, famili, genera)",
   "product_purchase": "Membeli",
   "product_purchased": "Dibeli",
 
@@ -39,9 +41,9 @@
   "yes": "iya nih",
   "no": "Tidak",
 
-  "filter_color": "warna bunga",
+  "filter_color": "warna",
   "filter_habitat": "habitat",
-  "filter_petal": "jumlah kelopak bunga",
+  "filter_petal": "mahkota",
   "filter_distribution": "distribusi",
 
   "color_message": "Apa warna bunga itu? Pilih yang terdekat.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Tidak ada kriteria pencocokan bunga.",
   "snack_loading_ad": "Iklan masih memuat, tekan tombol lagi.",
   "snack_copy": "Disalin ke Clipboard",
-  "snack_publish": "... untuk diterbitkan nanti"
+  "snack_publish": "... untuk diterbitkan nanti",
+
+  "search": "Mencari...",
+  "search_names": "Cari nama",
+  "search_taxonomy": "Cari dalam taksonomi"
 }

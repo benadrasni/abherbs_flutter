@@ -84,7 +84,6 @@ class _AppDrawerState extends State<AppDrawer> {
           MaterialPageRoute(builder: (context) => EnhacementsScreen(widget.onChangeLanguage, widget.onBuyProduct)),
         ).then((result) {
           Navigator.pop(context);
-          widget.settingsCallback();
         });
       },
     ));
@@ -99,7 +98,9 @@ class _AppDrawerState extends State<AppDrawer> {
           MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage)),
         ).then((result) {
           Navigator.pop(context);
-          widget.settingsCallback();
+          if (widget.settingsCallback != null) {
+            widget.settingsCallback();
+          }
         });
       },
     ));

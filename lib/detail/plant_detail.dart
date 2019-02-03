@@ -11,6 +11,7 @@ import 'package:abherbs_flutter/entity/translations.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,6 +33,7 @@ class PlantDetail extends StatefulWidget {
 }
 
 class _PlantDetailState extends State<PlantDetail> {
+  FirebaseAnalytics _firebaseAnalytics;
   Future<Plant> _plantF;
   Future<PlantTranslation> _plantTranslationF;
   int _currentIndex;
@@ -94,8 +96,8 @@ class _PlantDetailState extends State<PlantDetail> {
                 return http.get(uri).then((response) {
                   if (response.statusCode == 200) {
                     Translations translations = Translations.fromJson(json.decode(response.body));
-                    PlantTranslation onlyGoogleTranslation = plantTranslation.fillTranslations(
-                        translations.translatedTexts, plantTranslationOriginal);
+                    PlantTranslation onlyGoogleTranslation =
+                        plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
                     translationsReference
                         .child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix)
                         .child(widget.plantName)
@@ -113,9 +115,17 @@ class _PlantDetailState extends State<PlantDetail> {
     });
   }
 
+  Future<void> _logSelectContentEvent(String contentId) async {
+    await _firebaseAnalytics.logSelectContent(
+      contentType: 'plant',
+      itemId: contentId,
+    );
+  }
+
   @override
   void initState() {
     super.initState();
+    _firebaseAnalytics = FirebaseAnalytics();
 
     _plantF = plantsReference.child(widget.plantName).once().then((DataSnapshot snapshot) {
       return Plant.fromJson(snapshot.key, snapshot.value);
@@ -125,6 +135,8 @@ class _PlantDetailState extends State<PlantDetail> {
     _currentIndex = 0;
     _isOriginal = false;
     _key = new GlobalKey<ScaffoldState>();
+
+    _logSelectContentEvent(widget.plantName);
   }
 
   Widget _getBody(BuildContext context) {
@@ -144,16 +156,15 @@ class _PlantDetailState extends State<PlantDetail> {
     return Scaffold(
       key: _key,
       appBar: AppBar(
-        title: GestureDetector(
-          child: Text(widget.plantName),
-          onLongPress: () {
-            Clipboard.setData(new ClipboardData(text: widget.plantName));
-            _key.currentState.showSnackBar(SnackBar(
-              content: Text(S.of(context).snack_copy),
-            ));
-          },
-        )
-      ),
+          title: GestureDetector(
+        child: Text(widget.plantName),
+        onLongPress: () {
+          Clipboard.setData(new ClipboardData(text: widget.plantName));
+          _key.currentState.showSnackBar(SnackBar(
+            content: Text(S.of(context).snack_copy),
+          ));
+        },
+      )),
       drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(

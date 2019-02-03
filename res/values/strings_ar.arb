@@ -9,6 +9,8 @@
   "product_restore_purchases": "استعادة المشتريات",
   "product_no_ads_title": "لا اعلان غير مرغوب فيه",
   "product_no_ads_description": "لن يعرض التطبيق إعلان بانر في أسفل الشاشة.",
+  "product_search_title": "البحث في الأسماء أو التصنيف",
+  "product_search_description": "ستتمكن من العثور على زهرة باسمها اللاتيني أو عن طريق صنفها (على سبيل المثال ، الرتبة ، الفصيلة ، الجنس.",
   "product_purchase": "شراء",
   "product_purchased": "اشترى",
 
@@ -39,9 +41,9 @@
   "yes": "نعم فعلا",
   "no": "لا",
 
-  "filter_color": "لون الزهور",
+  "filter_color": "اللون",
   "filter_habitat": "موطن",
-  "filter_petal": "عدد البتلات",
+  "filter_petal": "بتلة",
   "filter_distribution": "توزيع",
 
   "color_message": "ما هو لون الزهرة؟ اختيار أقرب واحد.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "لا توجد معايير مطابقة للزهور.",
   "snack_loading_ad": "لا يزال يتم تحميل الإعلان ، اضغط على الزر مرة أخرى.",
   "snack_copy": "نسخ إلى الحافظة",
-  "snack_publish": "ليتم نشرها في وقت لاحق"
+  "snack_publish": "ليتم نشرها في وقت لاحق",
+
+  "search": "بحث...",
+  "search_names": "البحث في الأسماء",
+  "search_taxonomy": "البحث في التصنيف"
 }

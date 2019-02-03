@@ -89,8 +89,8 @@ class _DistributionState extends State<Distribution> {
     regions.add([S.of(context).southern_america, 'res/images/wgsrpd_southern_america.webp', '8']);
 
     var regionWidgets = <Widget>[];
-    regionWidgets.add(GridTile(
-      child: FlatButton(
+    regionWidgets.add(FlatButton(
+        padding: EdgeInsets.only(bottom: 5.0),
         child: Stack(alignment: Alignment.center, children: [
           Image(
             image: AssetImage('res/images/wgsrpd_my_region.webp'),
@@ -130,10 +130,10 @@ class _DistributionState extends State<Distribution> {
           }
         },
       ),
-    ));
+    );
     regionWidgets.addAll(regions.map((List<String> items) {
-      return GridTile(
-        child: FlatButton(
+      return FlatButton(
+        padding: EdgeInsets.only(bottom: 5.0),
           child: Stack(alignment: Alignment.center, children: [
             Image(
               image: AssetImage(items[1]),
@@ -146,12 +146,11 @@ class _DistributionState extends State<Distribution> {
           onPressed: () {
             _openRegion(items[2]);
           },
-        ),
       );
     }).toList());
 
-    regionWidgets.add(GridTile(
-      child: FlatButton(
+    regionWidgets.add(FlatButton(
+      padding: EdgeInsets.only(bottom: 5.0),
         child: Stack(alignment: Alignment.center, children: [
           Image(
             image: AssetImage('res/images/wgsrpd_antarctic.webp'),
@@ -165,7 +164,7 @@ class _DistributionState extends State<Distribution> {
           _navigate('90');
         },
       ),
-    ));
+    );
 
     regionWidgets.add(Container(
         padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
@@ -181,15 +180,12 @@ class _DistributionState extends State<Distribution> {
           ],
         )));
 
-    //regionWidgets.add(getAdMobBanner());
+    regionWidgets.add(getAdMobBanner());
 
-    return Container(
-        color: Colors.white30,
-        child: GridView.count(
-          crossAxisCount: 1,
-          childAspectRatio: 4.0,
-          children: regionWidgets,
-        ));
+    return ListView(
+      padding: EdgeInsets.all(5.0),
+      children: regionWidgets,
+    );
   }
 
   @override
@@ -207,18 +203,13 @@ class _DistributionState extends State<Distribution> {
   }
 
   @override
-  void dispose() {
-    filterRoutes[filterDistribution] = null;
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var mainContext = context;
     return Scaffold(
       key: _key,
       appBar: new AppBar(
         title: new Text(S.of(context).filter_distribution),
+        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, this.setMyRegion),
       body: Stack(
@@ -238,27 +229,29 @@ class _DistributionState extends State<Distribution> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          var route;
-          var nextFilterAttribute;
-          switch (index) {
-            case 0:
-              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              nextFilterAttribute = filterColor;
-              break;
-            case 1:
-              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              nextFilterAttribute = filterHabitat;
-              break;
-            case 2:
-              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              nextFilterAttribute = filterPetal;
-              break;
+          if (index != 3) {
+            var route;
+            var nextFilterAttribute;
+            switch (index) {
+              case 0:
+                route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.onBuyProduct, _filter));
+                nextFilterAttribute = filterColor;
+                break;
+              case 1:
+                route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
+                nextFilterAttribute = filterHabitat;
+                break;
+              case 2:
+                route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
+                nextFilterAttribute = filterPetal;
+                break;
+            }
+            if (filterRoutes[nextFilterAttribute] != null && filterRoutes[nextFilterAttribute].isActive) {
+              Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
+            }
+            filterRoutes[nextFilterAttribute] = route;
+            Navigator.push(context, route);
           }
-          if (filterRoutes[nextFilterAttribute] != null) {
-            Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
-          }
-          filterRoutes[nextFilterAttribute] = route;
-          Navigator.push(context, route);
         },
       ),
       floatingActionButton: new Container(

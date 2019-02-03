@@ -9,6 +9,8 @@
   "product_restore_purchases": "Restaurar las compras",
   "product_no_ads_title": "No hay publicidad no deseada",
   "product_no_ads_description": "La aplicación no mostrará el anuncio publicitario en la parte inferior de la pantalla.",
+  "product_search_title": "Búsqueda en nombres o taxonomía",
+  "product_search_description": "Podrá encontrar una flor por su nombre en español o latino o por su taxón (por ejemplo orden, familia, género).",
   "product_purchase": "Compra",
   "product_purchased": "Comprado",
 
@@ -175,5 +177,9 @@
   "snack_no_flowers": "No hay criterios de correspondencia de flores.",
   "snack_loading_ad": "El anuncio todavía se está cargando, presione el botón otra vez.",
   "snack_copy": "Copiado al portapapeles",
-  "snack_publish": "... para ser publicado más tarde"
+  "snack_publish": "... para ser publicado más tarde",
+
+  "search": "Buscar...",
+  "search_names": "Buscar en nombres",
+  "search_taxonomy": "Buscar en taxonomía"
 }

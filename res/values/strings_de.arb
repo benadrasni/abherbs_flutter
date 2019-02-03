@@ -9,6 +9,8 @@
   "product_restore_purchases": "Käufe wiederherstellen",
   "product_no_ads_title": "Keine unerwünschte Werbung",
   "product_no_ads_description": "Die Anwendung zeigt kein Werbebanner am unteren Bildschirmrand.",
+  "product_search_title": "Suche nach Namen oder Taxonomie",
+  "product_search_description": "Sie finden eine Blume nach ihrem deutschen oder lateinischen Namen oder nach ihrem Taxon (z. B. Ordnung, Familie, Gattung).",
   "product_purchase": "Kaufen",
   "product_purchased": "Gekauft",
 
@@ -39,9 +41,9 @@
   "yes": "Ja",
   "no": "Nein",
 
-  "filter_color": "Blütenfarbe",
+  "filter_color": "Farbe",
   "filter_habitat": "Habitat",
-  "filter_petal": "Blütenblätter",
+  "filter_petal": "Kronblatt",
   "filter_distribution": "Vorkommen",
 
   "color_message": "Welche Farbe hat die Blume? Wähle die ähnlichste Farbe.",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "Keine Blumen die den Kriterien entsprechen.",
   "snack_loading_ad": "Werbung wird noch geladen, Taste erneut drücken.",
   "snack_copy": "In die Zwischenablage kopiert",
-  "snack_publish": "... wird später veröffentlicht"
+  "snack_publish": "... wird später veröffentlicht",
+
+  "search": "Suche...",
+  "search_names": "Suche in Namen",
+  "search_taxonomy": "Suche in der Taxonomie"
 }

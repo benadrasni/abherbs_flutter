@@ -9,6 +9,8 @@
   "product_restore_purchases": "購入を復元",
   "product_no_ads_title": "迷惑な広告はありません",
   "product_no_ads_description": "アプリケーションは画面の下部に広告バナーを表示しません。",
+  "product_search_title": "名前または分類法で検索する",
+  "product_search_description": "花は、日本語またはラテン語の名前で、あるいは分類群（たとえば、目、科、属）で見つけることができます。",
   "product_purchase": "買う",
   "product_purchased": "購入した",
 
@@ -39,9 +41,9 @@
   "yes": "はい",
   "no": "いいえ",
 
-  "filter_color": "花の色",
+  "filter_color": "色",
   "filter_habitat": "生息地",
-  "filter_petal": "花びらの数",
+  "filter_petal": "花弁",
   "filter_distribution": "分布",
 
   "color_message": "花の色は何ですか？ 最も近いものを選んでください。",
@@ -175,5 +177,9 @@
   "snack_no_flowers": "基準に一致する花はありません。",
   "snack_loading_ad": "広告はまだ読み込まれています。もう一度ボタンを押してください。",
   "snack_copy": "クリップボードにコピー",
-  "snack_publish": "... 後で公開する"
+  "snack_publish": "... 後で公開する",
+
+  "search": "サーチ...",
+  "search_names": "名前で検索",
+  "search_taxonomy": "分類法で検索する"
 }

@@ -9,6 +9,8 @@
   "product_restore_purchases": "Genoprette indkøb",
   "product_no_ads_title": "Ingen uønsket reklame",
   "product_no_ads_description": "Programmet viser ikke reklamebanner nederst på skærmen.",
+  "product_search_title": "Søg i navne eller taksonomi",
+  "product_search_description": "Du kan finde en blomst ved sit danske eller latinske navn eller ved dets taxon (fx ordo, familie, slægt).",
   "product_purchase": "Køb",
   "product_purchased": "Købt",
 
@@ -37,9 +39,9 @@
   "yes": "Ja",
   "no": "Ingen",
 
-  "filter_color": "blomsterfarve",
+  "filter_color": "farve",
   "filter_habitat": "vækststeder",
-  "filter__petal": "antal kronblade",
+  "filter__petal": "kronblad",
   "filter_distribution": "fordeling",
 
   "color_message": "Hvad er farven på blomsten? Vælg den nærmeste.",
@@ -173,5 +175,9 @@
   "snack_no_flowers": "Ingen blomster, der matcher kriterier.",
   "snack_loading_ad": "Annonce er stadig indlæst, tryk igen på knappen.",
   "snack_copy": "Kopieret til udklipsholderen",
-  "snack_publish": "... offentliggøres senere"
+  "snack_publish": "... offentliggøres senere",
+
+  "search": "Søg...",
+  "search_names": "Søg i navne",
+  "search_taxonomy": "Søg i taksonomi"
 }
