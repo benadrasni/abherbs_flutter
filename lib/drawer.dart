@@ -45,7 +45,7 @@ class _AppDrawerState extends State<AppDrawer> {
     listItems.addAll(filterAttributes.map((attribute) {
       return ListTile(
         leading: getFilterLeading(context, attribute),
-        title: getFilterTitle(context, attribute, drawerTextStyle),
+        title: Text(getFilterText(context, attribute), style: drawerTextStyle,),
         subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ""),
         onTap: () {
           Navigator.pop(context);

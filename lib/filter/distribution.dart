@@ -35,7 +35,8 @@ class _DistributionState extends State<Distribution> {
   GlobalKey<ScaffoldState> _key;
 
   void _openRegion(String region) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Distribution2(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, int.parse(region))));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => Distribution2(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, int.parse(region))));
   }
 
   void _navigate(String value) {
@@ -89,7 +90,8 @@ class _DistributionState extends State<Distribution> {
     regions.add([S.of(context).southern_america, 'res/images/wgsrpd_southern_america.webp', '8']);
 
     var regionWidgets = <Widget>[];
-    regionWidgets.add(FlatButton(
+    regionWidgets.add(
+      FlatButton(
         padding: EdgeInsets.only(bottom: 5.0),
         child: Stack(alignment: Alignment.center, children: [
           Image(
@@ -134,23 +136,24 @@ class _DistributionState extends State<Distribution> {
     regionWidgets.addAll(regions.map((List<String> items) {
       return FlatButton(
         padding: EdgeInsets.only(bottom: 5.0),
-          child: Stack(alignment: Alignment.center, children: [
-            Image(
-              image: AssetImage(items[1]),
-            ),
-            Text(
-              items[0],
-              style: _firstLevelTextStyle,
-            ),
-          ]),
-          onPressed: () {
-            _openRegion(items[2]);
-          },
+        child: Stack(alignment: Alignment.center, children: [
+          Image(
+            image: AssetImage(items[1]),
+          ),
+          Text(
+            items[0],
+            style: _firstLevelTextStyle,
+          ),
+        ]),
+        onPressed: () {
+          _openRegion(items[2]);
+        },
       );
     }).toList());
 
-    regionWidgets.add(FlatButton(
-      padding: EdgeInsets.only(bottom: 5.0),
+    regionWidgets.add(
+      FlatButton(
+        padding: EdgeInsets.only(bottom: 5.0),
         child: Stack(alignment: Alignment.center, children: [
           Image(
             image: AssetImage('res/images/wgsrpd_antarctic.webp'),
@@ -168,7 +171,8 @@ class _DistributionState extends State<Distribution> {
 
     regionWidgets.add(Container(
         padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
-        child: Stack(alignment: Alignment.center,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
             Text(
               S.of(context).distribution_message,

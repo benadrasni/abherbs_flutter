@@ -99,30 +99,18 @@ Image getFilterLeading(context, filterAttribute) {
   }
 }
 
-Text getFilterTitle(context, filterAttribute, drawerTextStyle) {
+String getFilterText(context, filterAttribute) {
   switch (filterAttribute) {
     case filterColor:
-      return Text(
-        S.of(context).filter_color,
-        style: drawerTextStyle,
-      );
+      return S.of(context).filter_color;
     case filterHabitat:
-      return Text(
-        S.of(context).filter_habitat,
-        style: drawerTextStyle,
-      );
+      return S.of(context).filter_habitat;
     case filterPetal:
-      return Text(
-        S.of(context).filter_petal,
-        style: drawerTextStyle,
-      );
+      return S.of(context).filter_petal;
     case filterDistribution:
-      return Text(
-        S.of(context).filter_distribution,
-        style: drawerTextStyle,
-      );
+      return S.of(context).filter_distribution;
     default:
-      return null;
+      return "";
   }
 }
 

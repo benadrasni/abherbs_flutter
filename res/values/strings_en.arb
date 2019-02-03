@@ -24,6 +24,8 @@
   "always_my_region_title": "Always add my region to the filter",
   "always_my_region_subtitle": "Your region will be pre-set to the filter",
 
+  "my_filter": "My filter",
+
   "feedback_intro": "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:",
   "feedback_review": "You can write a positive review.",
   "feedback_title": "How to contribute",
