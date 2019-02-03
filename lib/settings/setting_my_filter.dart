@@ -97,8 +97,11 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
                           // delete filter attribute from the filter
                           widget.filter.remove(item);
                           // delete filter attribute from the navigator
-                          if (filterRoutes[item] != null && filterRoutes[item].isActive) {
+                          if (filterRoutes[item] != null && filterRoutes[item].isActive && context != null) {
                             Navigator.removeRoute(context, filterRoutes[item]);
+                            if (item == filterDistribution && filterRoutes[filterDistribution2] != null && filterRoutes[filterDistribution2].isActive) {
+                              Navigator.removeRoute(context, filterRoutes[filterDistribution2]);
+                            }
                           }
 
                           setState(() {

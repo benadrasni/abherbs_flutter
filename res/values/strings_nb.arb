@@ -11,6 +11,8 @@
   "product_no_ads_description": "Søknaden vil ikke vise annonse banner nederst på skjermen.",
   "product_search_title": "Søk i navn eller taksonomi",
   "product_search_description": "Du vil kunne finne en blomst med sitt norske eller latinske navn eller med dets taxon (for eksempel orden, familie, slekt).",
+  "product_custom_filter_title": "Egendefinert filter",
+  "product_custom_filter_description": "Du kan endre standard rekkefølge og antall filtre (farge, voksested, kronblader, fordeling).",
   "product_purchase": "Kjøpe",
   "product_purchased": "Kjøpt",
 
@@ -21,6 +23,8 @@
   "my_region": "Min region",
   "always_my_region_title": "Legg alltid til min region i filteret",
   "always_my_region_subtitle": "Din region vil bli forhåndsinnstilt til filteret",
+
+  "my_filter": "Mitt filter",
 
   "feedback_intro": "Du har bidratt til dette programmet siden du har installert det på enheten, takk. Hvis du leter etter noe mer, er det noen alternativer:",
   "feedback_review": "Du kan skrive en positiv anmeldelse.",

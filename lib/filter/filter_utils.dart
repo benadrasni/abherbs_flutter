@@ -6,8 +6,8 @@ import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
-import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/preferences.dart';
+import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -15,9 +15,16 @@ const String filterColor = 'filterColor';
 const String filterHabitat = 'filterHabitat';
 const String filterPetal = 'filterPetal';
 const String filterDistribution = 'filterDistribution';
+const String filterDistribution2 = 'filterDistribution2';
 
 const filterAttributes = [filterColor, filterHabitat, filterPetal, filterDistribution];
-var filterRoutes = <String, MaterialPageRoute<dynamic>>{filterColor: null, filterHabitat: null, filterPetal: null, filterDistribution: null};
+var filterRoutes = <String, MaterialPageRoute<dynamic>>{
+  filterColor: null,
+  filterHabitat: null,
+  filterPetal: null,
+  filterDistribution: null,
+  filterDistribution2: null
+};
 
 String getFilterKey(Map<String, String> filter) {
   return filterAttributes.map((attribute) {
@@ -271,11 +278,13 @@ Future<bool> clearFilter(Map<String, String> filter, Function() func) {
 }
 
 List<BottomNavigationBarItem> getBottomNavigationBarItems(BuildContext context, Map<String, String> filter) {
-  var attrToAsset = {filterColor: 'color',  filterHabitat: 'habitat', filterPetal: 'petal', filterDistribution: 'distribution'};
+  var attrToAsset = {filterColor: 'color', filterHabitat: 'habitat', filterPetal: 'petal', filterDistribution: 'distribution'};
   return Preferences.myFilterAttributes.map((filterAttribute) {
     return BottomNavigationBarItem(
         icon: Image(
-          image: AssetImage(filter[filterAttribute] == null ? 'res/images/' + attrToAsset[filterAttribute] + '_50.png' : 'res/images/' + attrToAsset[filterAttribute] + '.png'),
+          image: AssetImage(filter[filterAttribute] == null
+              ? 'res/images/' + attrToAsset[filterAttribute] + '_50.png'
+              : 'res/images/' + attrToAsset[filterAttribute] + '.png'),
           width: 25.0,
           height: 25.0,
         ),
@@ -283,30 +292,35 @@ List<BottomNavigationBarItem> getBottomNavigationBarItems(BuildContext context, 
   }).toList();
 }
 
-void onBottomNavigationBarTap(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter, int index, int currentIndex) {
+void onBottomNavigationBarTap(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter,
+    int index, int currentIndex) {
   if (index != currentIndex) {
     if (currentIndex == -1) {
-      Navigator.pushReplacement(context, getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, Preferences.myFilterAttributes.elementAt(index)));
+      Navigator.pushReplacement(
+          context, getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, Preferences.myFilterAttributes.elementAt(index)));
     } else {
       Navigator.push(context, getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, Preferences.myFilterAttributes.elementAt(index)));
     }
   }
 }
 
-void onLeftNavigationTap(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter, String filterAttribute) {
+void onLeftNavigationTap(
+    BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter, String filterAttribute) {
   Navigator.push(context, getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, filterAttribute));
 }
 
-MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
+MaterialPageRoute<dynamic> getNextFilterRoute(
+    BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
   return getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter));
 }
 
-MaterialPageRoute<dynamic> getFirstFilterRoute(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
+MaterialPageRoute<dynamic> getFirstFilterRoute(
+    BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
   return getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter));
 }
 
-
-MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter, String filterAttribute) {
+MaterialPageRoute<dynamic> getFilterRoute(
+    BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter, String filterAttribute) {
   var route;
 
   switch (filterAttribute) {

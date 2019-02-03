@@ -11,6 +11,8 @@
   "product_no_ads_description": "Aplikacija ne bo prikazala oglasne pasice na dnu zaslona.",
   "product_search_title": "Išči po imenih ali taksonomiji",
   "product_search_description": "Cvet bo mogoče najti po slovenskem ali latinskem imenu ali po taksonu (npr. red, družina, rod).",
+  "product_custom_filter_title": "Filter po meri",
+  "product_custom_filter_description": "Spremenili boste lahko privzeti vrstni red in število filtrov (barve, habitate, petali, distribucija).",
   "product_purchase": "Kupiti",
   "product_purchased": "Kupljeno",
 
@@ -21,6 +23,8 @@
   "my_region": "Moja regija",
   "always_my_region_title": "Vedno dodajte mojo regijo v filter",
   "always_my_region_subtitle": "Vaša regija bo vnaprej nastavljena na filter",
+
+  "my_filter": "Moj filter",
 
   "feedback_intro": "Prispevali ste k tej aplikaciji, ker ste jo namestili v napravo, hvala. Če iščete nekaj več, si oglejte nekaj možnosti:",
   "feedback_review": "Lahko napišete pozitivno mnenje.",

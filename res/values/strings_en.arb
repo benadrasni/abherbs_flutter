@@ -13,6 +13,8 @@
   "product_no_ads_description": "Application won't show advertisement banner at the bottom of the screen.",
   "product_search_title": "Search in names or taxonomy",
   "product_search_description": "You'll be able to find a flower by its English or Latin name or by its taxon (e.g. order, family, genus).",
+  "product_custom_filter_title": "Custom filter",
+  "product_custom_filter_description": "You'll be able to change default order and number of filters (color, habitat, petal, distribution).",
   "product_purchase": "Purchase",
   "product_purchased": "Purchased",
 

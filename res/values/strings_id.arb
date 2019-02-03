@@ -11,6 +11,8 @@
   "product_no_ads_description": "Aplikasi tidak akan menampilkan spanduk iklan di bagian bawah layar.",
   "product_search_title": "Cari nama atau taksonomi",
   "product_search_description": "Anda dapat menemukan bunga dengan nama Latin atau dengan taksonnya (mis. ordo, famili, genera)",
+  "product_custom_filter_title": "Filter khusus",
+  "product_custom_filter_description": "Anda dapat mengubah urutan dan jumlah filter default (warna, habitat, mahkota, distribusi).",
   "product_purchase": "Membeli",
   "product_purchased": "Dibeli",
 
@@ -21,6 +23,8 @@
   "my_region": "Daerah saya",
   "always_my_region_title": "Selalu tambahkan wilayah saya ke filter",
   "always_my_region_subtitle": "Wilayah Anda akan disetel sebelumnya ke filter",
+
+  "my_filter": "Filter saya",
 
   "feedback_intro": "Anda telah berkontribusi untuk aplikasi ini karena Anda telah menginstalnya di perangkat Anda, terima kasih. Jika Anda mencari sesuatu yang lebih, berikut adalah beberapa opsi:",
   "feedback_review": "Anda dapat menulis ulasan positif.",

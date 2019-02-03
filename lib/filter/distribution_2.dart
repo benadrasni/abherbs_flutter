@@ -166,6 +166,12 @@ class _Distribution2State extends State<Distribution2> {
   }
 
   @override
+  void dispose() {
+    filterRoutes[filterDistribution2] = null;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var mainContext = context;
     return Scaffold(
@@ -206,6 +212,7 @@ class _Distribution2State extends State<Distribution2> {
                       },
                       child: FloatingActionButton(
                         onPressed: () {
+                          filterRoutes[filterDistribution2] = null;
                           Navigator.pushReplacement(
                             mainContext,
                             MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),

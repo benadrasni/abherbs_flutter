@@ -11,6 +11,8 @@
   "product_no_ads_description": "Aplicația nu va afișa banner publicitar în partea de jos a ecranului.",
   "product_search_title": "Căutați în nume sau în taxonomie",
   "product_search_description": "Veți găsi o floare prin numele său românesc sau latin sau prin taxonul său (de exemplu, ordin, familie, gen).",
+  "product_custom_filter_title": "Filtru customizat",
+  "product_custom_filter_description": "Veți putea schimba ordinea implicită și numărul de filtre (culoare, habitatul, petală, distribuție).",
   "product_purchase": "Cumpărare",
   "product_purchased": "Cumparate",
 
@@ -21,6 +23,8 @@
   "my_region": "Regiunea mea",
   "always_my_region_title": "Adăugați întotdeauna regiunea mea la filtru",
   "always_my_region_subtitle": "Regiunea dvs. va fi pre-setată la filtru",
+
+  "my_filter": "Filtrul meu",
 
   "feedback_intro": "Ați contribuit la această aplicație de când ați instalat-o pe dispozitiv, mulțumită. Dacă sunteți în căutarea pentru ceva mai mult, iată câteva opțiuni:",
   "feedback_review": "Puteți scrie o recenzie pozitivă.",
