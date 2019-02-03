@@ -175,7 +175,7 @@ class _AppState extends State<App> {
         builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
-              var notificationData = _notificationData != null ? Map.from(_notificationData) : null;
+              Map<String, dynamic> notificationData = _notificationData != null ? Map.from(_notificationData) : null;
               _notificationData = null;
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
