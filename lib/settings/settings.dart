@@ -73,7 +73,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _setMyFilter(List<String> filter) {
     setState(() {
       _myFilterF = Prefs.setStringList(keyMyFilter, filter).then((success) {
-        return filter == null ? filterAttributes : filter;
+        Preferences.myFilterAttributes = filter == null ? filterAttributes : filter;
+        return Preferences.myFilterAttributes;
       });
     });
   }
@@ -216,9 +217,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (Purchases.isCustomFilter()) {
       widgets.add(ListTile(
         title: Text(
-          S
-              .of(context)
-              .my_filter,
+          S.of(context).my_filter,
           style: titleTextStyle,
         ),
         subtitle: FutureBuilder<List<String>>(
@@ -228,8 +227,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               if (snapshot.connectionState == ConnectionState.done) {
                 value = snapshot.data
                     .map((item) {
-                  return getFilterText(context, item);
-                })
+                      return getFilterText(context, item);
+                    })
                     .toList()
                     .join(', ');
               }
