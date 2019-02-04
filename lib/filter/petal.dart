@@ -33,14 +33,18 @@ class _PetalState extends State<Petal> {
     newFilter[filterPetal] = value;
 
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
-      if (snapshot.value != null && snapshot.value > 0) {
-        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
-          Ads.showBannerAd(this);
-        });
-      } else {
-        _key.currentState.showSnackBar(SnackBar(
-          content: Text(S.of(context).snack_no_flowers),
-        ));
+      if (this.mounted) {
+        if (snapshot.value != null && snapshot.value > 0) {
+          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
+            Ads.showBannerAd(this);
+          });
+        } else {
+          _key.currentState.showSnackBar(SnackBar(
+            content: Text(S
+                .of(context)
+                .snack_no_flowers),
+          ));
+        }
       }
     });
   }

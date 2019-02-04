@@ -58,7 +58,7 @@ class _AppState extends State<App> {
   onChangeLanguage(String language) {
     setState(() {
       _localeF = Future<Locale>(() {
-        return language.isEmpty ? null : Locale(language, '');
+        return language == null || language.isEmpty ? null : Locale(language, '');
       });
     });
   }
