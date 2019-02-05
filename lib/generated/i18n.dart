@@ -128,6 +128,7 @@ class S implements WidgetsLocalizations {
   String get product_no_ads_description => "Application won't show advertisement banner at the bottom of the screen.";
   String get product_no_ads_title => "No unwanted advertisement";
   String get product_purchase => "Purchase";
+  String get product_purchase_failed => "Purchase failed";
   String get product_purchased => "Purchased";
   String get product_restore_purchases => "Restore Purchases";
   String get product_search_description => "You'll be able to find a flower by its English or Latin name or by its taxon (e.g. order, family, genus).";
@@ -204,6 +205,8 @@ class $de extends S {
   String get feedback_submit_translate_data => "Verbessere die Daten der Blume";
   @override
   String get snack_copy => "In die Zwischenablage kopiert";
+  @override
+  String get product_purchase_failed => "Kauf gescheitert";
   @override
   String get about => "Über";
   @override
@@ -549,6 +552,8 @@ class $hi extends S {
   @override
   String get snack_copy => "क्लिपबोर्ड पर नकल";
   @override
+  String get product_purchase_failed => "खरीद विफल रही";
+  @override
   String get about => "के बारे में";
   @override
   String get product_no_ads_description => "एप्लिकेशन स्क्रीन के नीचे विज्ञापन बैनर नहीं दिखाएगा।";
@@ -892,6 +897,8 @@ class $fi extends S {
   String get feedback_submit_translate_data => "Paranna kukkien tietoja";
   @override
   String get snack_copy => "Kopioitu leikepöydälle";
+  @override
+  String get product_purchase_failed => "Osto epäonnistui";
   @override
   String get about => "Tietoja sovellus";
   @override
@@ -1237,6 +1244,8 @@ class $ru extends S {
   @override
   String get snack_copy => "Скопировано в буфер обмена";
   @override
+  String get product_purchase_failed => "Покупка не удалась";
+  @override
   String get about => "О приложении";
   @override
   String get product_no_ads_description => "Приложение не будет показывать рекламный баннер внизу экрана.";
@@ -1579,6 +1588,8 @@ class $pt extends S {
   @override
   String get snack_copy => "Copiado para a área de transferência";
   @override
+  String get product_purchase_failed => "A compra falhou";
+  @override
   String get about => "Sobre a aplicação";
   @override
   String get product_no_ads_description => "Aplicativo não mostrará banner de propaganda na parte inferior da tela.";
@@ -1916,6 +1927,8 @@ class $lt extends S {
   String get feedback_submit_translate_data => "Pagerinkite gėlių duomenis";
   @override
   String get snack_copy => "Kopijuojama į iškarpinę";
+  @override
+  String get product_purchase_failed => "Pirkimas nepavyko";
   @override
   String get about => "Apie paraišką";
   @override
@@ -2261,6 +2274,8 @@ class $hr extends S {
   @override
   String get snack_copy => "Kopirano u međuspremnik";
   @override
+  String get product_purchase_failed => "Kupnja nije uspjela";
+  @override
   String get about => "O aplikaciji";
   @override
   String get product_no_ads_description => "Aplikacija neće prikazati oglasni banner na dnu zaslona.";
@@ -2602,6 +2617,8 @@ class $lv extends S {
   String get feedback_submit_translate_data => "Uzlabojiet ziedu datus";
   @override
   String get snack_copy => "Kopēts uz starpliktuvi";
+  @override
+  String get product_purchase_failed => "Pirkums neizdevās";
   @override
   String get about => "Par lietojumprogrammu";
   @override
@@ -2947,6 +2964,8 @@ class $fr extends S {
   @override
   String get snack_copy => "Copié dans le presse-papier";
   @override
+  String get product_purchase_failed => "Achat raté";
+  @override
   String get about => "À propos";
   @override
   String get product_no_ads_description => "L'application ne montre pas la bannière de publicité au bas de l'écran.";
@@ -3290,6 +3309,8 @@ class $hu extends S {
   String get feedback_submit_translate_data => "Javítani kell a virágadatokat";
   @override
   String get snack_copy => "A vágólapra másolt";
+  @override
+  String get product_purchase_failed => "A vásárlás nem sikerült";
   @override
   String get about => "Az alkalmazásról";
   @override
@@ -3635,6 +3656,8 @@ class $uk extends S {
   @override
   String get snack_copy => "Копіюється в буфер обміну";
   @override
+  String get product_purchase_failed => "Покупку не вдалося";
+  @override
   String get about => "Про додатку";
   @override
   String get product_no_ads_description => "Програма не покаже рекламний банер внизу екрана.";
@@ -3979,6 +4002,8 @@ class $sk extends S {
   @override
   String get snack_copy => "Skopírované do schránky";
   @override
+  String get product_purchase_failed => "Nákup sa neuskutočnil";
+  @override
   String get about => "O aplikácii";
   @override
   String get product_no_ads_description => "Aplikácia nezobrazí reklamný banner v spodnej časti obrazovky.";
@@ -4316,6 +4341,8 @@ class $sl extends S {
   String get feedback_submit_translate_data => "Izboljšajte podatke o cvetju";
   @override
   String get snack_copy => "Kopirano v odložišče";
+  @override
+  String get product_purchase_failed => "Nakup ni uspel";
   @override
   String get about => "O aplikaciji";
   @override
@@ -4661,6 +4688,8 @@ class $id extends S {
   @override
   String get snack_copy => "Disalin ke Clipboard";
   @override
+  String get product_purchase_failed => "Pembelian gagal";
+  @override
   String get about => "Tentang";
   @override
   String get product_no_ads_description => "Aplikasi tidak akan menampilkan spanduk iklan di bagian bawah layar.";
@@ -5005,6 +5034,8 @@ class $sr extends S {
   @override
   String get snack_copy => "Копирано у Цлипбоард";
   @override
+  String get product_purchase_failed => "Куповина није успела";
+  @override
   String get about => "О апликацији";
   @override
   String get product_no_ads_description => "Апликација не приказује рекламни баннер на дну екрана.";
@@ -5348,6 +5379,8 @@ class $sv extends S {
   String get feedback_submit_translate_data => "Förbättra blommans data";
   @override
   String get snack_copy => "Kopieras till Urklipp";
+  @override
+  String get product_purchase_failed => "Köp misslyckades";
   @override
   String get about => "Om ansökan";
   @override
@@ -5697,6 +5730,8 @@ class $it extends S {
   @override
   String get snack_copy => "Copiato negli appunti";
   @override
+  String get product_purchase_failed => "Acquisto fallito";
+  @override
   String get about => "Info sull'applicazione";
   @override
   String get product_no_ads_description => "L'applicazione non mostrerà banner pubblicitari nella parte inferiore dello schermo.";
@@ -6040,6 +6075,8 @@ class $es extends S {
   String get feedback_submit_translate_data => "Mejorar los datos de la flor.";
   @override
   String get snack_copy => "Copiado al portapapeles";
+  @override
+  String get product_purchase_failed => "La compra falló";
   @override
   String get about => "Acerca de";
   @override
@@ -6385,6 +6422,8 @@ class $et extends S {
   @override
   String get snack_copy => "Kopeeritud lõikelauale";
   @override
+  String get product_purchase_failed => "Ostmine nurjus";
+  @override
   String get about => "Rakenduse kohta";
   @override
   String get product_no_ads_description => "Rakendus ei näita ekraani allosas reklaami bännerit.";
@@ -6728,6 +6767,8 @@ class $cs extends S {
   String get feedback_submit_translate_data => "Opravit chyby datech";
   @override
   String get snack_copy => "Zkopírováno do schránky";
+  @override
+  String get product_purchase_failed => "Nákup selhal";
   @override
   String get about => "O aplikaci";
   @override
@@ -7073,6 +7114,8 @@ class $ar extends S {
   @override
   String get snack_copy => "نسخ إلى الحافظة";
   @override
+  String get product_purchase_failed => "الشراء لم ينجح";
+  @override
   String get about => "حول";
   @override
   String get product_no_ads_description => "لن يعرض التطبيق إعلان بانر في أسفل الشاشة.";
@@ -7417,6 +7460,8 @@ class $pa extends S {
   @override
   String get snack_copy => "ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ";
   @override
+  String get product_purchase_failed => "ਖਰੀਦ ਫੇਲ੍ਹ ਹੋਈ";
+  @override
   String get about => "ਇਸ ਬਾਰੇ";
   @override
   String get product_no_ads_description => "ਐਪਲੀਕੇਸ਼ਨ ਸਕ੍ਰੀਨ ਦੇ ਤਲ 'ਤੇ ਇਸ਼ਤਿਹਾਰ ਬੈਨਰ ਨਹੀਂ ਦਿਖਾਏਗੀ.";
@@ -7760,6 +7805,8 @@ class $nb extends S {
   String get feedback_submit_translate_data => "Forbedre blomstens data";
   @override
   String get snack_copy => "Kopiert til utklippstavlen";
+  @override
+  String get product_purchase_failed => "Kjøpet mislyktes";
   @override
   String get about => "Om apper";
   @override
@@ -8117,6 +8164,8 @@ class $ja extends S {
   @override
   String get snack_copy => "クリップボードにコピー";
   @override
+  String get product_purchase_failed => "購入に失敗しました";
+  @override
   String get about => "約";
   @override
   String get product_no_ads_description => "アプリケーションは画面の下部に広告バナーを表示しません。";
@@ -8461,6 +8510,8 @@ class $fa extends S {
   @override
   String get snack_copy => "کپی به کلیپ بورد";
   @override
+  String get product_purchase_failed => "خرید خراب شد";
+  @override
   String get about => "درباره برنامه";
   @override
   String get product_no_ads_description => "برنامه بنر تبلیغاتی را در پایین صفحه نشان نمی دهد.";
@@ -8800,6 +8851,8 @@ class $pl extends S {
   String get feedback_submit_translate_data => "Poprawienie informacji dot. kwiatów";
   @override
   String get snack_copy => "Skopiowane do schowka";
+  @override
+  String get product_purchase_failed => "Zakup nie powiódł się";
   @override
   String get about => "O aplikacji";
   @override
@@ -9143,6 +9196,8 @@ class $da extends S {
   @override
   String get snack_copy => "Kopieret til udklipsholderen";
   @override
+  String get product_purchase_failed => "Køb mislykkedes";
+  @override
   String get about => "Om ansøgning";
   @override
   String get product_no_ads_description => "Programmet viser ikke reklamebanner nederst på skærmen.";
@@ -9482,6 +9537,8 @@ class $he extends S {
   String get feedback_submit_translate_data => "שפר את נתוני הפרחים";
   @override
   String get snack_copy => "הועתק ללוח";
+  @override
+  String get product_purchase_failed => "הרכישה נכשלה";
   @override
   String get about => "על היישום";
   @override
@@ -9827,6 +9884,8 @@ class $ro extends S {
   @override
   String get snack_copy => "Copiat în Clipboard";
   @override
+  String get product_purchase_failed => "Achiziționare eșuată";
+  @override
   String get about => "Despre";
   @override
   String get product_no_ads_description => "Aplicația nu va afișa banner publicitar în partea de jos a ecranului.";
@@ -10170,6 +10229,8 @@ class $nl extends S {
   String get feedback_submit_translate_data => "Verbeter de gegevens over de bloemen";
   @override
   String get snack_copy => "Gekopieerd naar het klembord";
+  @override
+  String get product_purchase_failed => "Aankoop mislukt";
   @override
   String get about => "Over de app";
   @override

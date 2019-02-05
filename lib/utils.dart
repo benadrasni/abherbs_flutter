@@ -60,6 +60,12 @@ const String firebaseAPGCount = "count";
 
 const int adsFrequency = -1;
 
+bool get isInDebugMode {
+  bool inDebugMode = false;
+  assert(inDebugMode = true);
+  return inDebugMode;
+}
+
 void launchURL(String url) async {
   if (await canLaunch(url)) {
     await launch(url);
@@ -165,7 +171,7 @@ List<Widget> getActions(BuildContext context, Function(String) onChangeLanguage,
       } else {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => EnhacementsScreen(onChangeLanguage, onBuyProduct)),
+          MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct)),
         );
       }
     },

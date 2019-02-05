@@ -14,6 +14,7 @@
   "product_custom_filter_title": "فیلتر سفارشی",
   "product_custom_filter_description": "شما می توانید سفارش پیش فرض و تعداد فیلترها (رنگ، زیستگاه ها، گلبرگ، توزیع) را تغییر دهید.",
   "product_purchase": "خرید",
+  "product_purchase_failed": "خرید خراب شد",
   "product_purchased": "خریداری شده",
 
   "toxicity1": "گیاه سمی",

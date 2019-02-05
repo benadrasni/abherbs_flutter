@@ -14,6 +14,7 @@
   "product_custom_filter_title": "Pielāgots filtrs",
   "product_custom_filter_description": "Jūs varēsiet mainīt noklusējuma secību un filtru skaitu (krāsa, biotopa, ziedlapiņa, izplatīšana).",
   "product_purchase": "Pirkt",
+  "product_purchase_failed": "Pirkums neizdevās",
   "product_purchased": "Legādāts",
 
   "toxicity1": "indīgs augs",

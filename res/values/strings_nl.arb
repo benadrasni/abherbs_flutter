@@ -14,6 +14,7 @@
   "product_custom_filter_title": "Aangepast filter",
   "product_custom_filter_description": "U kunt de standaardvolgorde en het aantal filters wijzigen (kleur, standplaats, bloemblad, distributie).",
   "product_purchase": "Koop",
+  "product_purchase_failed": "Aankoop mislukt",
   "product_purchased": "Gekocht",
 
   "toxicity1": "giftige plant",

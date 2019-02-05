@@ -14,6 +14,7 @@
   "product_custom_filter_title": "Brugerdefineret filter",
   "product_custom_filter_description": "Du kan ændre standardordre og antal filtre (farve, vækststeder, kronblad, fordeling).",
   "product_purchase": "Køb",
+  "product_purchase_failed": "Køb mislykkedes",
   "product_purchased": "Købt",
 
   "toxicity1": "giftig plante",

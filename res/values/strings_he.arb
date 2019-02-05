@@ -14,6 +14,7 @@
   "product_custom_filter_title": "מסנן מותאם אישית",
   "product_custom_filter_description": "תוכל לשנות את סדר ברירת המחדל ואת מספר המסננים (צבע, בתי גידול, עלי כותרת, הפצה).",
   "product_purchase": "רכישה",
+  "product_purchase_failed": "הרכישה נכשלה",
   "product_purchased": "נרכש",
 
   "toxicity1": "צמח רעיל",
