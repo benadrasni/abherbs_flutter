@@ -52,7 +52,6 @@ class _AppState extends State<App> {
   FirebaseMessaging _firebaseMessaging;
   FirebaseAnalytics _firebaseAnalytics;
   Map<String, dynamic> _notificationData;
-  Future<List<PurchasedItem>> _purchasesF;
   Future<Locale> _localeF;
 
   onChangeLanguage(String language) {
@@ -65,9 +64,8 @@ class _AppState extends State<App> {
 
   onBuyProduct() {
     setState(() {
-      _purchasesF = FlutterInappPurchase.getAvailablePurchases().then((value) {
+      FlutterInappPurchase.getAvailablePurchases().then((value) {
         Purchases.purchases = value;
-        return Purchases.purchases;
       });
     });
   }
@@ -106,29 +104,26 @@ class _AppState extends State<App> {
     });
   }
 
-  Future<List<PurchasedItem>> _iapError() {
+  void _iapError() {
     Fluttertoast.showToast(
         msg: 'IAP not prepared. Check if Platform service is available.',
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIos: 5);
-    return Future<List<PurchasedItem>>(() {
-      Purchases.purchases = <PurchasedItem>[];
-      return Purchases.purchases;
-    });
+    Purchases.isAllowed = false;
+    Purchases.purchases = <PurchasedItem>[];
   }
 
-  Future<List<PurchasedItem>> _initPlatformState() {
-    return FlutterInappPurchase.initConnection.then((value) {
-      Purchases.isAllowed = true;
-      return FlutterInappPurchase.getAvailablePurchases().then((value) {
+  void _initPlatformState() async {
+    FlutterInappPurchase.initConnection.then((value) {
+      FlutterInappPurchase.getAvailablePurchases().then((value) {
+        Purchases.isAllowed = true;
         Purchases.purchases = value;
-        return Purchases.purchases;
       }).catchError((error) {
-        return _iapError();
+        _iapError();
       });
     }).catchError((error) {
-      return _iapError();
+      _iapError();
     });
   }
 
@@ -137,10 +132,10 @@ class _AppState extends State<App> {
     super.initState();
     Ads.initialize();
     Prefs.init();
+    _initPlatformState();
 
     _firebaseMessaging = FirebaseMessaging();
     _firebaseAnalytics = FirebaseAnalytics();
-    _purchasesF = _initPlatformState();
     _localeF = Prefs.getStringF(keyPreferredLanguage).then((String language) {
       return language.isEmpty ? null : Locale(language, '');
     });
@@ -170,16 +165,16 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Object>>(
-        future: Future.wait([_localeF, _purchasesF]),
-        builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
+    return FutureBuilder<Locale>(
+        future: _localeF,
+        builder: (BuildContext context, AsyncSnapshot<Locale> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               Map<String, dynamic> notificationData = _notificationData != null ? Map.from(_notificationData) : null;
               _notificationData = null;
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                locale: snapshot.data[0],
+                locale: snapshot.data,
                 localizationsDelegates: [
                   S.delegate,
                   GlobalMaterialLocalizations.delegate,
