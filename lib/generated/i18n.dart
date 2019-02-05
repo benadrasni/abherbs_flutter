@@ -267,7 +267,7 @@ class $de extends S {
   @override
   String get northern_south_america => "Nördliches Südamerika";
   @override
-  String get show_original => "Englischen Text anzeigen";
+  String get show_original => "Englischer Text";
   @override
   String get southern_america => "Südamerika";
   @override
@@ -395,7 +395,7 @@ class $de extends S {
   @override
   String get plant_info => "Info";
   @override
-  String get show_translation => "Übersetzten Text anzeigen";
+  String get show_translation => "Übersetzter Text";
   @override
   String get habitat_tree => "Bäume oder Sträucher";
   @override
