@@ -14,6 +14,7 @@
   "product_custom_filter_title": "カスタムフィルター",
   "product_custom_filter_description": "あなたは、デフォルトの順番とフィルタの数（色、生息地、花弁、分布）を変えることができるでしょう。",
   "product_purchase": "買う",
+  "product_purchase_failed": "購入に失敗しました",
   "product_purchased": "購入した",
 
   "toxicity1": "有毒植物",

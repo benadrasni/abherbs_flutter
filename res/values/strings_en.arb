@@ -16,6 +16,7 @@
   "product_custom_filter_title": "Custom filter",
   "product_custom_filter_description": "You'll be able to change default order and number of filters (color, habitat, petal, distribution).",
   "product_purchase": "Purchase",
+  "product_purchase_failed": "Purchase failed",
   "product_purchased": "Purchased",
 
   "toxicity1": "poisonous plant",

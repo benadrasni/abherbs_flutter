@@ -14,6 +14,7 @@
   "product_custom_filter_title": "Anpassat filter",
   "product_custom_filter_description": "Du kan ändra standardordning och antal filter (färg, växtplats, kronblad, distribution).",
   "product_purchase": "Köpa",
+  "product_purchase_failed": "Köp misslyckades",
   "product_purchased": "Köpt",
 
   "toxicity1": "giftig växt",

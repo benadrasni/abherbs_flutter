@@ -14,6 +14,7 @@
   "product_custom_filter_title": "Vlastný filter",
   "product_custom_filter_description": "Budete môcť zmeniť predvolené poradie a počet filtrov (farba, biotop, lupienok, distribúcia).",
   "product_purchase": "Kúpiť",
+  "product_purchase_failed": "Nákup sa neuskutočnil",
   "product_purchased": "Kúpené",
 
   "toxicity1": "jedovatá rastlina",

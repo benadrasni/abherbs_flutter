@@ -59,7 +59,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => EnhacementsScreen(widget.onChangeLanguage, widget.onBuyProduct)),
+          MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.onChangeLanguage, widget.onBuyProduct)),
         ).then((result) {
           Navigator.pop(context);
         });

@@ -14,6 +14,7 @@
   "product_custom_filter_title": "Filter khusus",
   "product_custom_filter_description": "Anda dapat mengubah urutan dan jumlah filter default (warna, habitat, mahkota, distribusi).",
   "product_purchase": "Membeli",
+  "product_purchase_failed": "Pembelian gagal",
   "product_purchased": "Dibeli",
 
   "toxicity1": "tanaman beracun",

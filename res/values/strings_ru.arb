@@ -14,6 +14,7 @@
   "product_custom_filter_title": "Пользовательский фильтр",
   "product_custom_filter_description": "Вы сможете изменить порядок по умолчанию и количество фильтров (окраска, ареалы, лепесток, распределение).",
   "product_purchase": "Покупать",
+  "product_purchase_failed": "Покупка не удалась",
   "product_purchased": "Купленный",
 
   "toxicity1": "ядовитое растение",

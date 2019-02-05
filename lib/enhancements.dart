@@ -15,16 +15,16 @@ class EnhancementsMerged {
   EnhancementsMerged({this.products, this.purchases});
 }
 
-class EnhacementsScreen extends StatefulWidget {
+class EnhancementsScreen extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final void Function() onBuyProduct;
-  EnhacementsScreen(this.onChangeLanguage, this.onBuyProduct);
+  EnhancementsScreen(this.onChangeLanguage, this.onBuyProduct);
 
   @override
-  _EnhacementsScreenState createState() => new _EnhacementsScreenState();
+  _EnhancementsScreenState createState() => new _EnhancementsScreenState();
 }
 
-class _EnhacementsScreenState extends State<EnhacementsScreen> {
+class _EnhancementsScreenState extends State<EnhancementsScreen> {
   final List<String> _productLists = Platform.isAndroid
       ? [
           productNoAdsAndroid,
@@ -145,6 +145,12 @@ class _EnhacementsScreenState extends State<EnhacementsScreen> {
                             if (!isPurchased) {
                               FlutterInappPurchase.buyProduct(product.productId).then((PurchasedItem purchased) {
                                 widget.onBuyProduct();
+                              }).catchError((error) {
+                                if (key.currentState.mounted) {
+                                  key.currentState.showSnackBar(new SnackBar(
+                                    content: new Text(S.of(context).product_purchase_failed),
+                                  ));
+                                }
                               });
                             }
                           },

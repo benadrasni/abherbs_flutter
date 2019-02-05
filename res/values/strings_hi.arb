@@ -14,6 +14,7 @@
   "product_custom_filter_title": "कस्टम फ़िल्टर",
   "product_custom_filter_description": "आप डिफ़ॉल्ट क्रम और फ़िल्टर की संख्या (रंग, पर्यावास, दल चक्र, वितरण) को बदलने में सक्षम होंगे।",
   "product_purchase": "खरीद फरोख्त",
+  "product_purchase_failed": "खरीद विफल रही",
   "product_purchased": "खरीदी",
 
   "toxicity1": "जहरीला पौधा",
