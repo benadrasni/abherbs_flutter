@@ -11,6 +11,8 @@
   "product_no_ads_description": "Die Anwendung zeigt kein Werbebanner am unteren Bildschirmrand.",
   "product_search_title": "Suche nach Namen oder Taxonomie",
   "product_search_description": "Sie finden eine Blume nach ihrem deutschen oder lateinischen Namen oder nach ihrem Taxon (z. B. Ordnung, Familie, Gattung).",
+  "product_custom_filter_title": "Benutzerdefinierte Filter",
+  "product_custom_filter_description": "Sie können die Standardreihenfolge und die Anzahl der Filter ändern (Farbe, Habitat, Kronblatt, Vorkommen).",
   "product_purchase": "Kaufen",
   "product_purchased": "Gekauft",
 
@@ -21,6 +23,8 @@
   "my_region": "Meine Gegend",
   "always_my_region_title": "Fügen Sie meine Region immer dem Filter hinzu",
   "always_my_region_subtitle": "Ihre Region wird auf den Filter voreingestellt",
+
+  "my_filter": "Mein Filter",
 
   "feedback_intro": "Sie haben zu dieser Anwendung beigetragen, seit Sie diese auf Ihrem Gerät installiert haben, vielen Dank. Wenn Sie noch mehr tun möchten, haben Sie folgende Möglichkeiten:",
   "feedback_review": "Sie können eine positive Bewertung schreiben.",
@@ -138,9 +142,9 @@
   "plant_sources": "Quellen",
 
   "google_translate": "Übersetzt mit Google Translate",
-  "show_original": "Englischen Text anzeigen",
+  "show_original": "Englischer Text",
   "improve_translation": "Übersetzung verbessern",
-  "show_translation": "Übersetzten Text anzeigen",
+  "show_translation": "Übersetzter Text",
 
   "plant_height_from": "Höhe",
   "plant_height_to": "-",

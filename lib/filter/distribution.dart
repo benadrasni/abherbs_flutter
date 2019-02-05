@@ -2,13 +2,11 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/drawer.dart';
-import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution_2.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
-import 'package:abherbs_flutter/filter/habitat.dart';
-import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
+import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/utils.dart';
@@ -35,7 +33,11 @@ class _DistributionState extends State<Distribution> {
   GlobalKey<ScaffoldState> _key;
 
   void _openRegion(String region) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Distribution2(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, int.parse(region))));
+    var route = MaterialPageRoute(builder: (context) => Distribution2(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, int.parse(region)));
+    filterRoutes[filterDistribution2] = route;
+    Navigator.push(context, route).then((value) {
+      filterRoutes[filterDistribution2] = null;
+    });
   }
 
   void _navigate(String value) {
@@ -44,14 +46,18 @@ class _DistributionState extends State<Distribution> {
     newFilter[filterDistribution] = value;
 
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
-      if (snapshot.value != null && snapshot.value > 0) {
-        Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
-          Ads.showBannerAd(this);
-        });
-      } else {
-        _key.currentState.showSnackBar(SnackBar(
-          content: Text(S.of(context).snack_no_flowers),
-        ));
+      if (this.mounted) {
+        if (snapshot.value != null && snapshot.value > 0) {
+          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
+            Ads.showBannerAd(this);
+          });
+        } else {
+          _key.currentState.showSnackBar(SnackBar(
+            content: Text(S
+                .of(context)
+                .snack_no_flowers),
+          ));
+        }
       }
     });
   }
@@ -89,7 +95,8 @@ class _DistributionState extends State<Distribution> {
     regions.add([S.of(context).southern_america, 'res/images/wgsrpd_southern_america.webp', '8']);
 
     var regionWidgets = <Widget>[];
-    regionWidgets.add(FlatButton(
+    regionWidgets.add(
+      FlatButton(
         padding: EdgeInsets.only(bottom: 5.0),
         child: Stack(alignment: Alignment.center, children: [
           Image(
@@ -123,7 +130,7 @@ class _DistributionState extends State<Distribution> {
           } else {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage)),
+              MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter)),
             ).then((result) {
               setMyRegion();
             });
@@ -134,23 +141,24 @@ class _DistributionState extends State<Distribution> {
     regionWidgets.addAll(regions.map((List<String> items) {
       return FlatButton(
         padding: EdgeInsets.only(bottom: 5.0),
-          child: Stack(alignment: Alignment.center, children: [
-            Image(
-              image: AssetImage(items[1]),
-            ),
-            Text(
-              items[0],
-              style: _firstLevelTextStyle,
-            ),
-          ]),
-          onPressed: () {
-            _openRegion(items[2]);
-          },
+        child: Stack(alignment: Alignment.center, children: [
+          Image(
+            image: AssetImage(items[1]),
+          ),
+          Text(
+            items[0],
+            style: _firstLevelTextStyle,
+          ),
+        ]),
+        onPressed: () {
+          _openRegion(items[2]);
+        },
       );
     }).toList());
 
-    regionWidgets.add(FlatButton(
-      padding: EdgeInsets.only(bottom: 5.0),
+    regionWidgets.add(
+      FlatButton(
+        padding: EdgeInsets.only(bottom: 5.0),
         child: Stack(alignment: Alignment.center, children: [
           Image(
             image: AssetImage('res/images/wgsrpd_antarctic.webp'),
@@ -168,7 +176,8 @@ class _DistributionState extends State<Distribution> {
 
     regionWidgets.add(Container(
         padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
-        child: Stack(alignment: Alignment.center,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
             Text(
               S.of(context).distribution_message,
@@ -225,33 +234,11 @@ class _DistributionState extends State<Distribution> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 3,
+        currentIndex: Preferences.myFilterAttributes.indexOf(filterDistribution),
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          if (index != 3) {
-            var route;
-            var nextFilterAttribute;
-            switch (index) {
-              case 0:
-                route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-                nextFilterAttribute = filterColor;
-                break;
-              case 1:
-                route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-                nextFilterAttribute = filterHabitat;
-                break;
-              case 2:
-                route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-                nextFilterAttribute = filterPetal;
-                break;
-            }
-            if (filterRoutes[nextFilterAttribute] != null && filterRoutes[nextFilterAttribute].isActive) {
-              Navigator.removeRoute(context, filterRoutes[nextFilterAttribute]);
-            }
-            filterRoutes[nextFilterAttribute] = route;
-            Navigator.push(context, route);
-          }
+          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, index, Preferences.myFilterAttributes.indexOf(filterDistribution));
         },
       ),
       floatingActionButton: new Container(

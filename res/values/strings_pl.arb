@@ -11,6 +11,8 @@
   "product_no_ads_description": "Aplikacja nie wyświetli banera reklamowego u dołu ekranu.",
   "product_search_title": "Wyszukaj w nazwach lub taksonomii",
   "product_search_description": "Będziesz mógł znaleźć kwiatek pod polską lub łacińską nazwą lub według jego taksonu (np. rząd, rodzina, rodzaj).",
+  "product_custom_filter_title": "Filtr niestandardowy",
+  "product_custom_filter_description": "Będziesz mógł zmienić domyślną kolejność i liczbę filtrów (kolor, siedlisko, płatek, dystrybucja).",
   "product_purchase": "Zakupić",
   "product_purchased": "Zakupione",
 
@@ -21,6 +23,8 @@
   "my_region": "Mój region",
   "always_my_region_title": "Zawsze filtruj wg mojego wybranego regionu",
   "always_my_region_subtitle": "Twój region zostanie wstępnie ustawiony jako filtr",
+
+  "my_filter": "Mój filtr",
 
   "feedback_intro": "Jeśli chcesz dać coś od siebie i przyczynić się do rozwoju aplikacji, masz kilka opcji do wyboru:",
   "feedback_review": "Możesz przyznać aplikacji 5 gwiazdek i napisać pozytywną recenzję.",
@@ -42,7 +46,7 @@
   "no": "Nie",
 
   "filter_color": "Kolor",
-  "filter_habitat": "Habitat",
+  "filter_habitat": "Siedlisko",
   "filter_petal": "Płatek",
   "filter_distribution": "Dystrybucja",
 

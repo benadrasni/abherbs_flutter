@@ -11,6 +11,8 @@
   "product_no_ads_description": "Applicatie toont geen reclamebanner onderaan het scherm.",
   "product_search_title": "Zoeken in namen of taxonomie",
   "product_search_description": "Je zult in staat zijn om een bloem te vinden op zijn Nederlandse of Latijnse naam of op zijn taxon (bijvoorbeeld orde, familie, geslacht).",
+  "product_custom_filter_title": "Aangepast filter",
+  "product_custom_filter_description": "U kunt de standaardvolgorde en het aantal filters wijzigen (kleur, standplaats, bloemblad, distributie).",
   "product_purchase": "Koop",
   "product_purchased": "Gekocht",
 
@@ -21,6 +23,8 @@
   "my_region": "Mijn regio",
   "always_my_region_title": "Voeg altijd mijn regio toe aan het filter",
   "always_my_region_subtitle": "Uw regio wordt vooraf ingesteld op het filter",
+
+  "my_filter": "Mijn filter",
 
   "feedback_intro": "Sinds u de app geïnstalleerd heeft, draagt u bij aan de app. Dank u wel. Als u ons nóg meer wilt helpen, kunt u de volgende opties overwegen:",
   "feedback_review": "U kunt een positieve beoordeling schrijven.",

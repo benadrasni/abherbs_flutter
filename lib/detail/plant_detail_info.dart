@@ -231,29 +231,37 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Pl
                   child: Column(
                     children: [
                       Text(S.of(context).google_translate),
-                      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                        RaisedButton(
+                      Container(
+                        width: 300.0,
+                        child: RaisedButton(
                           onPressed: () {
                             onChangeTranslation(!isOriginal);
                           },
                           child: new Text(isOriginal ? S.of(context).show_translation : S.of(context).show_original),
                         ),
-                        FutureBuilder<Plant>(
-                          future: _plantF,
-                          builder: (BuildContext context, AsyncSnapshot<Plant> plantSnapshot) {
-                            if (plantSnapshot.connectionState == ConnectionState.done) {
-                              return RaisedButton(
+                      ),
+                      FutureBuilder<Plant>(
+                        future: _plantF,
+                        builder: (BuildContext context, AsyncSnapshot<Plant> plantSnapshot) {
+                          if (plantSnapshot.connectionState == ConnectionState.done) {
+                            return Container(
+                              width: 300.0,
+                              child: RaisedButton(
                                 onPressed: () {
-                                  launchURL(webUrl + 'translate_flower?lang=' + getLanguageCode(myLocale.languageCode) + "&plant=" + plantSnapshot.data.name);
+                                  launchURL(webUrl +
+                                      'translate_flower?lang=' +
+                                      getLanguageCode(myLocale.languageCode) +
+                                      "&plant=" +
+                                      plantSnapshot.data.name);
                                 },
                                 child: new Text(S.of(context).improve_translation),
-                              );
-                            } else {
-                              return Container();
-                            }
-                          },
-                        ),
-                      ]),
+                              ),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ),

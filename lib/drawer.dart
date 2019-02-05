@@ -1,13 +1,10 @@
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/enhancements.dart';
 import 'package:abherbs_flutter/feedback.dart';
-import 'package:abherbs_flutter/filter/color.dart';
-import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
-import 'package:abherbs_flutter/filter/habitat.dart';
-import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/legend.dart';
+import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
@@ -42,37 +39,18 @@ class _AppDrawerState extends State<AppDrawer> {
     );
     Locale myLocale = Localizations.localeOf(context);
     var listItems = <Widget>[];
-    listItems.addAll(filterAttributes.map((attribute) {
+    listItems.addAll(Preferences.myFilterAttributes.map((attribute) {
       return ListTile(
         leading: getFilterLeading(context, attribute),
-        title: getFilterTitle(context, attribute, drawerTextStyle),
+        title: Text(getFilterText(context, attribute), style: drawerTextStyle,),
         subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ""),
         onTap: () {
           Navigator.pop(context);
-          var route;
-          switch (attribute) {
-            case filterColor:
-              route = MaterialPageRoute(builder: (context) => Color(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              break;
-            case filterHabitat:
-              route = MaterialPageRoute(builder: (context) => Habitat(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              break;
-            case filterPetal:
-              route = MaterialPageRoute(builder: (context) => Petal(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              break;
-            case filterDistribution:
-              route = MaterialPageRoute(builder: (context) => Distribution(widget.onChangeLanguage, widget.onBuyProduct, _filter));
-              break;
-          }
-          if (filterRoutes[attribute] != null) {
-            Navigator.removeRoute(context, filterRoutes[attribute]);
-          }
-          filterRoutes[attribute] = route;
-          Navigator.push(context, route);
+          onLeftNavigationTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, attribute);
         },
       );
     }));
-    listItems.add(Divider());
+    listItems.add(Container(height:5.0, color: Theme.of(context).buttonColor,));
     listItems.add(ListTile(
       title: Text(
         S.of(context).enhancements,
@@ -95,7 +73,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage)),
+          MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter)),
         ).then((result) {
           Navigator.pop(context);
           if (widget.settingsCallback != null) {

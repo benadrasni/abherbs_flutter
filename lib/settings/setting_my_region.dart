@@ -2,10 +2,7 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/settings/setting_my_region_2.dart';
 import 'package:abherbs_flutter/utils.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-
-final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
 class SettingMyRegion extends StatefulWidget {
   @override
@@ -40,48 +37,42 @@ class _SettingMyRegionState extends State<SettingMyRegion> {
 
     var regionWidgets = <Widget>[];
     regionWidgets.addAll(regions.map((List<String> items) {
-      return GridTile(
-        child: FlatButton(
-          child: Stack(alignment: Alignment.center, children: [
-            Image(
-              image: AssetImage(items[1]),
-            ),
-            Text(
-              items[0],
-              style: _firstLevelTextStyle,
-            ),
-          ]),
-          onPressed: () {
-            _openRegion(items[2]);
-          },
-        ),
-      );
-    }).toList());
-
-    regionWidgets.add(GridTile(
-      child: FlatButton(
+      return FlatButton(
+        padding: EdgeInsets.only(bottom: 5.0),
         child: Stack(alignment: Alignment.center, children: [
           Image(
-            image: AssetImage('res/images/wgsrpd_antarctic.webp'),
+            image: AssetImage(items[1]),
           ),
           Text(
-            S.of(context).subantarctic_islands,
+            items[0],
             style: _firstLevelTextStyle,
           ),
         ]),
         onPressed: () {
-          _setMyRegion('90');
+          _openRegion(items[2]);
         },
-      ),
+      );
+    }).toList());
+
+    regionWidgets.add(FlatButton(
+      padding: EdgeInsets.only(bottom: 5.0),
+      child: Stack(alignment: Alignment.center, children: [
+        Image(
+          image: AssetImage('res/images/wgsrpd_antarctic.webp'),
+        ),
+        Text(
+          S.of(context).subantarctic_islands,
+          style: _firstLevelTextStyle,
+        ),
+      ]),
+      onPressed: () {
+        _setMyRegion('90');
+      },
     ));
 
-    return Container(
-      color: Colors.white30,
-      child: GridView.count(
-        crossAxisCount: 1,
-        childAspectRatio: 4.0,
-        children: regionWidgets,
-      ),
+    return ListView(
+      padding: EdgeInsets.all(5.0),
+      children: regionWidgets,
     );
   }
 

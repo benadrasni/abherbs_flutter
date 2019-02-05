@@ -43,7 +43,6 @@ class Ads {
   }
 
   static void hideBannerAd() {
-    if (Purchases.isNoAds()) return;
     if (_bannerAd != null && !_isGoingToBeShown) {
       _bannerAd.dispose().then((disposed) {
         isShown = !disposed;

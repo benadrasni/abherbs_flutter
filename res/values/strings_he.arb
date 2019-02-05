@@ -11,6 +11,8 @@
   "product_no_ads_description": "היישום לא יציג מודעת באנר בחלק התחתון של המסך.",
   "product_search_title": "חיפוש בשמות או בטקסונומיה",
   "product_search_description": "תוכל למצוא פרח בשם הלטיני שלה או על ידי הטקסון שלה (למשל סדרה, משפחה, סוג).",
+  "product_custom_filter_title": "מסנן מותאם אישית",
+  "product_custom_filter_description": "תוכל לשנות את סדר ברירת המחדל ואת מספר המסננים (צבע, בתי גידול, עלי כותרת, הפצה).",
   "product_purchase": "רכישה",
   "product_purchased": "נרכש",
 
@@ -21,6 +23,8 @@
   "my_region": "אזור שלי",
   "always_my_region_title": "הוסף תמיד את האזור שלי למסנן",
   "always_my_region_subtitle": "האזור שלך יוגדר מראש למסנן",
+
+  "my_filter": "המסנן שלי",
 
   "feedback_intro": "אתה כבר תורם ליישום זה מאז התקנת את זה על המכשיר שלך, תודה. אם אתה מחפש משהו נוסף, הנה כמה אפשרויות:",
   "feedback_review": "אתה יכול לכתוב ביקורת חיובית.",

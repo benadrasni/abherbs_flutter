@@ -97,7 +97,7 @@ class Prefs {
       var instance = await _prefs;
       value = instance?.getBool(key) ?? defValue ?? false;
     } else {
-      value = getBool(key);
+      value = getBool(key, defValue);
     }
     return value;
   }
@@ -114,7 +114,7 @@ class Prefs {
       var instance = await _prefs;
       value = instance?.getInt(key) ?? defValue ?? 0;
     } else {
-      value = getInt(key);
+      value = getInt(key, defValue);
     }
     return value;
   }
@@ -131,7 +131,7 @@ class Prefs {
       var instance = await _prefs;
       value = instance?.getDouble(key) ?? defValue ?? 0.0;
     } else {
-      value = getDouble(key);
+      value = getDouble(key, defValue);
     }
     return value;
   }
@@ -148,7 +148,7 @@ class Prefs {
       var instance = await _prefs;
       value = instance?.getString(key) ?? defValue ?? "";
     } else {
-      value = getString(key);
+      value = getString(key, defValue);
     }
     return value;
   }
@@ -165,7 +165,7 @@ class Prefs {
       var instance = await _prefs;
       value = instance?.getStringList(key) ?? defValue ?? [""];
     } else {
-      value = getStringList(key);
+      value = getStringList(key, defValue);
     }
     return value;
   }

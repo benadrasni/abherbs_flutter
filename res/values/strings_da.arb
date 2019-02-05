@@ -11,6 +11,8 @@
   "product_no_ads_description": "Programmet viser ikke reklamebanner nederst på skærmen.",
   "product_search_title": "Søg i navne eller taksonomi",
   "product_search_description": "Du kan finde en blomst ved sit danske eller latinske navn eller ved dets taxon (fx ordo, familie, slægt).",
+  "product_custom_filter_title": "Brugerdefineret filter",
+  "product_custom_filter_description": "Du kan ændre standardordre og antal filtre (farve, vækststeder, kronblad, fordeling).",
   "product_purchase": "Køb",
   "product_purchased": "Købt",
 
@@ -21,6 +23,8 @@
   "my_region": "Min region",
   "always_my_region_title": "Tilføj altid min region til filteret",
   "always_my_region_subtitle": "Din region vil blive forudindstillet til filteret",
+
+  "my_filter": "Mit filter",
 
   "feedback_intro": "Du har bidraget til denne applikation, da du har installeret den på din enhed, tak. Hvis du leder efter noget mere, her er nogle muligheder:",
   "feedback_review": "Du kan skrive en positiv anmeldelse.",
