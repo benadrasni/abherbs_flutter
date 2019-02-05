@@ -4,7 +4,7 @@ import 'package:abherbs_flutter/utils.dart';
 
 class Purchases {
   static bool isAllowed = false;
-  static List<PurchasedItem> purchases;
+  static List<PurchasedItem> purchases = <PurchasedItem>[];
 
   static bool isNoAds() {
     for (PurchasedItem product in purchases) {
@@ -18,6 +18,15 @@ class Purchases {
   static bool isSearch() {
     for (PurchasedItem product in purchases) {
       if (product.productId == productSearch) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static bool isCustomFilter() {
+    for (PurchasedItem product in purchases) {
+      if (product.productId == productCustomFilter) {
         return true;
       }
     }

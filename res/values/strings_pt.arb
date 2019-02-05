@@ -11,6 +11,8 @@
   "product_no_ads_description": "Aplicativo não mostrará banner de propaganda na parte inferior da tela.",
   "product_search_title": "Pesquisa em nomes ou taxonomia",
   "product_search_description": "Você poderá encontrar uma flor pelo seu nome em português ou latim ou por seu táxon (por exemplo, ordem, família, gênero).",
+  "product_custom_filter_title": "Filtro customizado",
+  "product_custom_filter_description": "Você poderá alterar a ordem padrão e o número de filtros (cor, habitat, pétala, distribuição).",
   "product_purchase": "Compra",
   "product_purchased": "Comprado",
 
@@ -21,6 +23,8 @@
   "my_region": "Minha região",
   "always_my_region_title": "Sempre adicione minha região ao filtro",
   "always_my_region_subtitle": "Sua região será pré-definida para o filtro",
+
+  "my_filter": "Meu filtro",
 
   "feedback_intro": "Você tem contribuído para este aplicativo desde que você o instalou no seu dispositivo, obrigado. Se você está procurando algo mais, aqui estão algumas opções:",
   "feedback_review": "Você pode escrever um comentário positivo.",
@@ -42,7 +46,7 @@
   "filter_color": "cor",
   "filter_habitat": "habitat",
   "filter_petal": "pétala",
-  "filter_distribution": "distribution",
+  "filter_distribution": "distribuição",
 
   "color_message": "De que cor são as flores? Selecione a mais aproximada. Sempre pode voltar e selecionar uma outra.",
   "habitat_message": "O que está a sua volta? Identifique o habitat da planta.",

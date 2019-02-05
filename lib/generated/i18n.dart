@@ -84,6 +84,7 @@ class S implements WidgetsLocalizations {
   String get middle_atlantic_ocean => "Middle Atlantic Ocean";
   String get middle_europe => "Middle Europe";
   String get mongolia => "Mongolia";
+  String get my_filter => "My filter";
   String get my_region => "My region";
   String get new_zealand => "New Zealand";
   String get no => "No";
@@ -122,6 +123,8 @@ class S implements WidgetsLocalizations {
   String get plant_toxicity => "Toxicity";
   String get plant_trivia => "Trivia";
   String get pref_language => "Preferred language";
+  String get product_custom_filter_description => "You'll be able to change default order and number of filters (color, habitat, petal, distribution).";
+  String get product_custom_filter_title => "Custom filter";
   String get product_no_ads_description => "Application won't show advertisement banner at the bottom of the screen.";
   String get product_no_ads_title => "No unwanted advertisement";
   String get product_purchase => "Purchase";
@@ -264,7 +267,7 @@ class $de extends S {
   @override
   String get northern_south_america => "Nördliches Südamerika";
   @override
-  String get show_original => "Englischen Text anzeigen";
+  String get show_original => "Englischer Text";
   @override
   String get southern_america => "Südamerika";
   @override
@@ -318,6 +321,8 @@ class $de extends S {
   @override
   String get color_blue => "Blau, Lila";
   @override
+  String get my_filter => "Mein Filter";
+  @override
   String get southern_south_america => "Südliches Südamerika";
   @override
   String get plant_habitat => "Habitat";
@@ -360,6 +365,8 @@ class $de extends S {
   @override
   String get taxonomy_subtribus => "Untertribus";
   @override
+  String get product_custom_filter_description => "Sie können die Standardreihenfolge und die Anzahl der Filter ändern (Farbe, Habitat, Kronblatt, Vorkommen).";
+  @override
   String get habitat_meadow => "Wiesen oder Grünland";
   @override
   String get plant_trivia => "Wissenswertes";
@@ -388,7 +395,7 @@ class $de extends S {
   @override
   String get plant_info => "Info";
   @override
-  String get show_translation => "Übersetzten Text anzeigen";
+  String get show_translation => "Übersetzter Text";
   @override
   String get habitat_tree => "Bäume oder Sträucher";
   @override
@@ -471,6 +478,8 @@ class $de extends S {
   String get northeast_tropical_africa => "Nordost-tropisches Afrika";
   @override
   String get pref_language => "Bevorzugte Sprache";
+  @override
+  String get product_custom_filter_title => "Benutzerdefinierte Filter";
   @override
   String get new_zealand => "Neuseeland";
   @override
@@ -656,6 +665,8 @@ class $hi extends S {
   @override
   String get color_blue => "नीला, बैंगनी";
   @override
+  String get my_filter => "मेरा फ़िल्टर";
+  @override
   String get southern_south_america => "दक्षिणी दक्षिण अमेरिका";
   @override
   String get plant_habitat => "पर्यावास";
@@ -697,6 +708,8 @@ class $hi extends S {
   String get siberia => "साइबेरिया";
   @override
   String get taxonomy_subtribus => "उपजनजाति";
+  @override
+  String get product_custom_filter_description => "आप डिफ़ॉल्ट क्रम और फ़िल्टर की संख्या (रंग, पर्यावास, दल चक्र, वितरण) को बदलने में सक्षम होंगे।";
   @override
   String get habitat_meadow => "अनुवाद में सुधार करें";
   @override
@@ -809,6 +822,8 @@ class $hi extends S {
   String get northeast_tropical_africa => "पूर्वोत्तर उष्णकटिबंधीय अफ्रीका";
   @override
   String get pref_language => "पसंदीदा भाषा";
+  @override
+  String get product_custom_filter_title => "कस्टम फ़िल्टर";
   @override
   String get new_zealand => "न्यूजीलैंड";
   @override
@@ -994,6 +1009,8 @@ class $fi extends S {
   @override
   String get color_blue => "sininen, violetti";
   @override
+  String get my_filter => "Oma suodatin";
+  @override
   String get southern_south_america => "Etelä Etelä-Amerikka";
   @override
   String get plant_habitat => "Kasvupaikka";
@@ -1035,6 +1052,8 @@ class $fi extends S {
   String get siberia => "Siperia";
   @override
   String get taxonomy_subtribus => "Alatribus";
+  @override
+  String get product_custom_filter_description => "Voit muuttaa oletusjärjestystä ja suodattimien määrää (väri, kasvupaikka, teriö, jakelu).";
   @override
   String get habitat_meadow => "niityt";
   @override
@@ -1147,6 +1166,8 @@ class $fi extends S {
   String get northeast_tropical_africa => "Koillis-trooppinen Afrikka";
   @override
   String get pref_language => "Suosittu kieli";
+  @override
+  String get product_custom_filter_title => "Mukautettu suodatin";
   @override
   String get new_zealand => "Uusi Seelanti";
   @override
@@ -1332,6 +1353,8 @@ class $ru extends S {
   @override
   String get color_blue => "синая, фиолетовая";
   @override
+  String get my_filter => "Мой фильтр";
+  @override
   String get southern_south_america => "Южная Южная Америка";
   @override
   String get plant_habitat => "Ареал";
@@ -1340,7 +1363,7 @@ class $ru extends S {
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "лепестоко";
+  String get filter_petal => "лепесток";
   @override
   String get petal_message => "Является ли цветок зигоморфным? Нет? Тогда сколько у него лепестков?";
   @override
@@ -1373,6 +1396,8 @@ class $ru extends S {
   String get siberia => "Сибирь";
   @override
   String get taxonomy_subtribus => "Подтриба";
+  @override
+  String get product_custom_filter_description => "Вы сможете изменить порядок по умолчанию и количество фильтров (окраска, ареалы, лепесток, распределение).";
   @override
   String get habitat_meadow => "луга или пастбища";
   @override
@@ -1485,6 +1510,8 @@ class $ru extends S {
   String get northeast_tropical_africa => "Северо-Восточная тропическая Африка";
   @override
   String get pref_language => "Предпочтительный язык";
+  @override
+  String get product_custom_filter_title => "Пользовательский фильтр";
   @override
   String get new_zealand => "Новая Зеландия";
   @override
@@ -1668,6 +1695,8 @@ class $pt extends S {
   @override
   String get color_blue => "azul, violeta";
   @override
+  String get my_filter => "Meu filtro";
+  @override
   String get southern_south_america => "Sul da América do Sul";
   @override
   String get plant_habitat => "Habitat";
@@ -1709,6 +1738,8 @@ class $pt extends S {
   String get siberia => "Sibéria";
   @override
   String get taxonomy_subtribus => "subtribo";
+  @override
+  String get product_custom_filter_description => "Você poderá alterar a ordem padrão e o número de filtros (cor, habitat, pétala, distribuição).";
   @override
   String get habitat_meadow => "prados e pastagens";
   @override
@@ -1820,11 +1851,13 @@ class $pt extends S {
   @override
   String get pref_language => "Língua preferida";
   @override
+  String get product_custom_filter_title => "Filtro customizado";
+  @override
   String get new_zealand => "Nova Zelândia";
   @override
   String get feedback_intro => "Você tem contribuído para este aplicativo desde que você o instalou no seu dispositivo, obrigado. Se você está procurando algo mais, aqui estão algumas opções:";
   @override
-  String get filter_distribution => "distribution";
+  String get filter_distribution => "distribuição";
   @override
   String get eastern_asia => "Ásia Oriental";
   @override
@@ -2000,6 +2033,8 @@ class $lt extends S {
   @override
   String get color_blue => "mėlyna, violetinė";
   @override
+  String get my_filter => "Mano filtras";
+  @override
   String get southern_south_america => "Pietų Pietų Amerika";
   @override
   String get plant_habitat => "Buveinė";
@@ -2041,6 +2076,8 @@ class $lt extends S {
   String get siberia => "Sibiras";
   @override
   String get taxonomy_subtribus => "Subtriba";
+  @override
+  String get product_custom_filter_description => "Galėsite pakeisti numatytąjį užsakymų skaičių ir filtrų skaičių (spalva, buveinė, vainiklapis, platinimas).";
   @override
   String get habitat_meadow => "pievas ar pievos";
   @override
@@ -2153,6 +2190,8 @@ class $lt extends S {
   String get northeast_tropical_africa => "Šiaurės rytų tropinė Afrika";
   @override
   String get pref_language => "Pageidautina kalba";
+  @override
+  String get product_custom_filter_title => "Pasirinktinis filtras";
   @override
   String get new_zealand => "Naujoji Zelandija";
   @override
@@ -2338,6 +2377,8 @@ class $hr extends S {
   @override
   String get color_blue => "plava, ljubičasta";
   @override
+  String get my_filter => "Moj filtar";
+  @override
   String get southern_south_america => "Južna Južna Amerika";
   @override
   String get plant_habitat => "Staništa";
@@ -2379,6 +2420,8 @@ class $hr extends S {
   String get siberia => "Sibir";
   @override
   String get taxonomy_subtribus => "Podtribus";
+  @override
+  String get product_custom_filter_description => "Moći ćete promijeniti zadani redoslijed i broj filtara (boja, stanište, latica, distribucija).";
   @override
   String get habitat_meadow => "livade ili pašnjaci";
   @override
@@ -2438,7 +2481,7 @@ class $hr extends S {
   @override
   String get plant_flower => "Cvijeće";
   @override
-  String get filter_habitat => "staništa";
+  String get filter_habitat => "stanište";
   @override
   String get rate_never => "Nikada";
   @override
@@ -2491,6 +2534,8 @@ class $hr extends S {
   String get northeast_tropical_africa => "Sjeveroistočna tropska Afrika";
   @override
   String get pref_language => "Preferirani jezik";
+  @override
+  String get product_custom_filter_title => "Prilagođeni filtar";
   @override
   String get new_zealand => "Novi Zeland";
   @override
@@ -2674,6 +2719,8 @@ class $lv extends S {
   @override
   String get color_blue => "mėlyna, violetinė";
   @override
+  String get my_filter => "Mans filtrs";
+  @override
   String get southern_south_america => "Dienvidamerika dienvidos";
   @override
   String get plant_habitat => "Izplatības areāls";
@@ -2715,6 +2762,8 @@ class $lv extends S {
   String get siberia => "Sibīrija";
   @override
   String get taxonomy_subtribus => "Apakšcilts";
+  @override
+  String get product_custom_filter_description => "Jūs varēsiet mainīt noklusējuma secību un filtru skaitu (krāsa, biotopa, ziedlapiņa, izplatīšana).";
   @override
   String get habitat_meadow => "pievas ar pievos";
   @override
@@ -2827,6 +2876,8 @@ class $lv extends S {
   String get northeast_tropical_africa => "Ziemeļaustrumu tropu Āfrika";
   @override
   String get pref_language => "Pageidautina kalba";
+  @override
+  String get product_custom_filter_title => "Pielāgots filtrs";
   @override
   String get new_zealand => "Jaunzēlande";
   @override
@@ -3012,6 +3063,8 @@ class $fr extends S {
   @override
   String get color_blue => "bleu, violet";
   @override
+  String get my_filter => "Mon filtre";
+  @override
   String get southern_south_america => "Sud de l'Amérique du Sud";
   @override
   String get plant_habitat => "Habitat";
@@ -3053,6 +3106,8 @@ class $fr extends S {
   String get siberia => "Sibérie";
   @override
   String get taxonomy_subtribus => "Sous-tribu";
+  @override
+  String get product_custom_filter_description => "Vous pourrez modifier l'ordre et le nombre de filtres par défaut (couleur, habitat, pétale, distribution).";
   @override
   String get habitat_meadow => "prés ou prairies";
   @override
@@ -3165,6 +3220,8 @@ class $fr extends S {
   String get northeast_tropical_africa => "Afrique tropicale du nord-est";
   @override
   String get pref_language => "Préférence de langue";
+  @override
+  String get product_custom_filter_title => "Filtre personnalisé";
   @override
   String get new_zealand => "Nouvelle-Zélande";
   @override
@@ -3350,6 +3407,8 @@ class $hu extends S {
   @override
   String get color_blue => "kék, lila";
   @override
+  String get my_filter => "Saját szűrőm";
+  @override
   String get southern_south_america => "Dél-Dél-Amerika";
   @override
   String get plant_habitat => "Élettér";
@@ -3391,6 +3450,8 @@ class $hu extends S {
   String get siberia => "Szibéria";
   @override
   String get taxonomy_subtribus => "Alnemzetségcsoport";
+  @override
+  String get product_custom_filter_description => "Meg tudod változtatni az alapértelmezett sorrendet és a szűrők számát (szín, élettér, párta, terjesztés).";
   @override
   String get habitat_meadow => "rétek vagy legelők";
   @override
@@ -3503,6 +3564,8 @@ class $hu extends S {
   String get northeast_tropical_africa => "Észak-Trópusi Afrika";
   @override
   String get pref_language => "Kedvenc nyelv";
+  @override
+  String get product_custom_filter_title => "Egyéni szűrő";
   @override
   String get new_zealand => "Új Zéland";
   @override
@@ -3688,6 +3751,8 @@ class $uk extends S {
   @override
   String get color_blue => "синій, фіолетовий";
   @override
+  String get my_filter => "Мій фільтр";
+  @override
   String get southern_south_america => "Південна Південна Америка";
   @override
   String get plant_habitat => "Середовище";
@@ -3729,6 +3794,8 @@ class $uk extends S {
   String get siberia => "Сибір";
   @override
   String get taxonomy_subtribus => "Підтриба";
+  @override
+  String get product_custom_filter_description => "Ви зможете змінити стандартний порядок і кількість фільтрів (колір, середовище, пелюстка, розповсюдження).";
   @override
   String get habitat_meadow => "луки або пасовища";
   @override
@@ -3841,6 +3908,8 @@ class $uk extends S {
   String get northeast_tropical_africa => "Північно-східна тропічна Африка";
   @override
   String get pref_language => "Бажана мова";
+  @override
+  String get product_custom_filter_title => "Спеціальний фільтр";
   @override
   String get new_zealand => "Нова Зеландія";
   @override
@@ -4026,6 +4095,8 @@ class $sk extends S {
   @override
   String get color_blue => "modrá, fialová";
   @override
+  String get my_filter => "Môj filter";
+  @override
   String get southern_south_america => "Juh Južnej Ameriky";
   @override
   String get plant_habitat => "Lokalita";
@@ -4067,6 +4138,8 @@ class $sk extends S {
   String get siberia => "Sibír";
   @override
   String get taxonomy_subtribus => "podskupina";
+  @override
+  String get product_custom_filter_description => "Budete môcť zmeniť predvolené poradie a počet filtrov (farba, biotop, lupienok, distribúcia).";
   @override
   String get habitat_meadow => "lúky a trávnaté porasty";
   @override
@@ -4122,7 +4195,7 @@ class $sk extends S {
   @override
   String get plant_flower => "Kvety";
   @override
-  String get filter_habitat => "lokalita";
+  String get filter_habitat => "biotop";
   @override
   String get rate_never => "Nikdy";
   @override
@@ -4173,6 +4246,8 @@ class $sk extends S {
   String get northeast_tropical_africa => "Severovýchodná tropická Afrika";
   @override
   String get pref_language => "Preferovaný jazyk";
+  @override
+  String get product_custom_filter_title => "Vlastný filter";
   @override
   String get new_zealand => "Nový Zéland";
   @override
@@ -4358,6 +4433,8 @@ class $sl extends S {
   @override
   String get color_blue => "modra, vijolična";
   @override
+  String get my_filter => "Moj filter";
+  @override
   String get southern_south_america => "Južna Južna Amerika";
   @override
   String get plant_habitat => "Habitat";
@@ -4399,6 +4476,8 @@ class $sl extends S {
   String get siberia => "Siberia";
   @override
   String get taxonomy_subtribus => "Podpleme";
+  @override
+  String get product_custom_filter_description => "Spremenili boste lahko privzeti vrstni red in število filtrov (barve, habitate, petali, distribucija).";
   @override
   String get habitat_meadow => "travniki ali pašniki";
   @override
@@ -4511,6 +4590,8 @@ class $sl extends S {
   String get northeast_tropical_africa => "Severovzhodna tropska Afrika";
   @override
   String get pref_language => "Želeni jezik";
+  @override
+  String get product_custom_filter_title => "Filter po meri";
   @override
   String get new_zealand => "Nova Zelandija";
   @override
@@ -4696,6 +4777,8 @@ class $id extends S {
   @override
   String get color_blue => "biru, ungu";
   @override
+  String get my_filter => "Filter saya";
+  @override
   String get southern_south_america => "Amerika Selatan Selatan";
   @override
   String get plant_habitat => "Habitat";
@@ -4737,6 +4820,8 @@ class $id extends S {
   String get siberia => "Siberia";
   @override
   String get taxonomy_subtribus => "Subtribe";
+  @override
+  String get product_custom_filter_description => "Anda dapat mengubah urutan dan jumlah filter default (warna, habitat, mahkota, distribusi).";
   @override
   String get habitat_meadow => "padang rumput";
   @override
@@ -4849,6 +4934,8 @@ class $id extends S {
   String get northeast_tropical_africa => "Afrika Timur laut Tropis  ";
   @override
   String get pref_language => "Bahasa pilihan";
+  @override
+  String get product_custom_filter_title => "Filter khusus";
   @override
   String get new_zealand => "Selandia Baru";
   @override
@@ -5034,6 +5121,8 @@ class $sr extends S {
   @override
   String get color_blue => "плава, љубичаста";
   @override
+  String get my_filter => "Мој филтер";
+  @override
   String get southern_south_america => "Јужна Јужна Америка";
   @override
   String get plant_habitat => "Станишта";
@@ -5075,6 +5164,8 @@ class $sr extends S {
   String get siberia => "Сибериа";
   @override
   String get taxonomy_subtribus => "подплеме";
+  @override
+  String get product_custom_filter_description => "Моћи ћете да промените редослед и број филтера (боја, станиште, латица, дистрибуција).";
   @override
   String get habitat_meadow => "ливаде или пашњаци";
   @override
@@ -5134,7 +5225,7 @@ class $sr extends S {
   @override
   String get plant_flower => "Цвеће";
   @override
-  String get filter_habitat => "станишта";
+  String get filter_habitat => "станиште";
   @override
   String get rate_never => "Никад";
   @override
@@ -5187,6 +5278,8 @@ class $sr extends S {
   String get northeast_tropical_africa => "Североисточна тропска Африка";
   @override
   String get pref_language => "Језик којем дајете предност";
+  @override
+  String get product_custom_filter_title => "Прилагођени филтер";
   @override
   String get new_zealand => "Нови Зеланд";
   @override
@@ -5372,6 +5465,8 @@ class $sv extends S {
   @override
   String get color_blue => "blå, lila";
   @override
+  String get my_filter => "Mitt filter";
+  @override
   String get southern_south_america => "Södra Sydamerika";
   @override
   String get plant_habitat => "Växtplats";
@@ -5413,6 +5508,8 @@ class $sv extends S {
   String get siberia => "Sibirien";
   @override
   String get taxonomy_subtribus => "Undertribus";
+  @override
+  String get product_custom_filter_description => "Du kan ändra standardordning och antal filter (färg, växtplats, kronblad, distribution).";
   @override
   String get habitat_meadow => "ängar eller gräsmarker";
   @override
@@ -5525,6 +5622,8 @@ class $sv extends S {
   String get northeast_tropical_africa => "Nordöstra tropiska Afrika";
   @override
   String get pref_language => "Önskat språk";
+  @override
+  String get product_custom_filter_title => "Anpassat filter";
   @override
   String get new_zealand => "Nya Zeeland";
   @override
@@ -5714,6 +5813,8 @@ class $it extends S {
   @override
   String get color_blue => "blu, viola";
   @override
+  String get my_filter => "Il mio filtro";
+  @override
   String get southern_south_america => "Sud America del Sud";
   @override
   String get plant_habitat => "Habitat";
@@ -5755,6 +5856,8 @@ class $it extends S {
   String get siberia => "Siberia";
   @override
   String get taxonomy_subtribus => "Sottotribù";
+  @override
+  String get product_custom_filter_description => "Sarai in grado di modificare l'ordine di default e il numero di filtri (colore, habitat, petali, distribuzione).";
   @override
   String get habitat_meadow => "prati o pascoli";
   @override
@@ -5867,6 +5970,8 @@ class $it extends S {
   String get northeast_tropical_africa => "Africa tropicale nordorientale";
   @override
   String get pref_language => "Lingua preferita";
+  @override
+  String get product_custom_filter_title => "Filtro personalizzato";
   @override
   String get new_zealand => "Nuova Zelanda";
   @override
@@ -6052,6 +6157,8 @@ class $es extends S {
   @override
   String get color_blue => "azul, púrpura";
   @override
+  String get my_filter => "Mi filtro";
+  @override
   String get southern_south_america => "Sur de América del Sur";
   @override
   String get plant_habitat => "Localidad";
@@ -6093,6 +6200,8 @@ class $es extends S {
   String get siberia => "Siberia";
   @override
   String get taxonomy_subtribus => "subtribu";
+  @override
+  String get product_custom_filter_description => "Podrás cambiar el orden predeterminado y la cantidad de filtros (color, localidad, pétalo, distribución).";
   @override
   String get habitat_meadow => "prado o pradera";
   @override
@@ -6205,6 +6314,8 @@ class $es extends S {
   String get northeast_tropical_africa => "Noreste de África Tropical";
   @override
   String get pref_language => "Idioma preferido";
+  @override
+  String get product_custom_filter_title => "Filtro personalizado";
   @override
   String get new_zealand => "Nueva Zelanda";
   @override
@@ -6390,6 +6501,8 @@ class $et extends S {
   @override
   String get color_blue => "sinine, lilla";
   @override
+  String get my_filter => "Minu filter";
+  @override
   String get southern_south_america => "Lõuna-Lõuna-Ameerika";
   @override
   String get plant_habitat => "Elupaik";
@@ -6431,6 +6544,8 @@ class $et extends S {
   String get siberia => "Siberis";
   @override
   String get taxonomy_subtribus => "Subtriibus";
+  @override
+  String get product_custom_filter_description => "Saate muuta vaikimisi järjekorra ja filtrite arvu (värv, elupaikade, kroonleht, levitamine).";
   @override
   String get habitat_meadow => "heinamaad või rohumaade";
   @override
@@ -6543,6 +6658,8 @@ class $et extends S {
   String get northeast_tropical_africa => "Kirde troopiline Aafrika";
   @override
   String get pref_language => "Eelistatud keel";
+  @override
+  String get product_custom_filter_title => "Kohandatud filter";
   @override
   String get new_zealand => "Uus-Meremaa";
   @override
@@ -6728,6 +6845,8 @@ class $cs extends S {
   @override
   String get color_blue => "modrá, fialová";
   @override
+  String get my_filter => "Můj filtr";
+  @override
   String get southern_south_america => "Jih Jižní Ameriky";
   @override
   String get plant_habitat => "Ekologie";
@@ -6769,6 +6888,8 @@ class $cs extends S {
   String get siberia => "Sibiř";
   @override
   String get taxonomy_subtribus => "podskupina";
+  @override
+  String get product_custom_filter_description => "Budete moci změnit výchozí pořadí a počet filtrů (barva, ekologie, okvětní líst, distribuce).";
   @override
   String get habitat_meadow => "louky a travnaté porosty";
   @override
@@ -6881,6 +7002,8 @@ class $cs extends S {
   String get northeast_tropical_africa => "Severovýchodní tropická Afrika";
   @override
   String get pref_language => "Preferovaný jazyk";
+  @override
+  String get product_custom_filter_title => "Vlastní filtr";
   @override
   String get new_zealand => "Nový Zéland";
   @override
@@ -7066,6 +7189,8 @@ class $ar extends S {
   @override
   String get color_blue => "أزرق أرجواني";
   @override
+  String get my_filter => "مرشح بلدي";
+  @override
   String get southern_south_america => "جنوب أمريكا الجنوبية";
   @override
   String get plant_habitat => "موطن";
@@ -7107,6 +7232,8 @@ class $ar extends S {
   String get siberia => "سيبيريا";
   @override
   String get taxonomy_subtribus => "العميرة";
+  @override
+  String get product_custom_filter_description => "ستتمكن من تغيير الترتيب الافتراضي وعدد المرشحات (اللون ، موطن ، بتلة ، توزيع).";
   @override
   String get habitat_meadow => "مروج أو مراعي";
   @override
@@ -7219,6 +7346,8 @@ class $ar extends S {
   String get northeast_tropical_africa => "شمال شرق الاستوائية أفريقيا";
   @override
   String get pref_language => "اللغة المفضلة";
+  @override
+  String get product_custom_filter_title => "تصفية مخصص";
   @override
   String get new_zealand => "نيوزيلندا";
   @override
@@ -7404,6 +7533,8 @@ class $pa extends S {
   @override
   String get color_blue => "ਨੀਲਾ, ਜਾਮਨੀ";
   @override
+  String get my_filter => "ਮੇਰੇ ਫਿਲਟਰ";
+  @override
   String get southern_south_america => "ਦੱਖਣੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
   @override
   String get plant_habitat => "ਆਵਾਸ";
@@ -7445,6 +7576,8 @@ class $pa extends S {
   String get siberia => "ਸਾਇਬੇਰੀਆ";
   @override
   String get taxonomy_subtribus => "Subtribe";
+  @override
+  String get product_custom_filter_description => "ਤੁਸੀਂ ਡਿਫਾਲਟ ਆਰਡਰ ਅਤੇ ਫਿਲਟਰਸ ਦੀ ਗਿਣਤੀ (ਰੰਗ, ਆਵਾਸ, ਪੱਟੇਲ, ਵੰਡ) ਨੂੰ ਬਦਲਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ.";
   @override
   String get habitat_meadow => "ਅਨੁਵਾਦ ਸੁਧਾਰੋ";
   @override
@@ -7557,6 +7690,8 @@ class $pa extends S {
   String get northeast_tropical_africa => "ਨਾਰਥ ਈਸਟ ਟ੍ਰੌਪੀਕਲ ਅਫਰੀਕਾ";
   @override
   String get pref_language => "ਤਰਜੀਹੀ ਭਾਸ਼ਾ";
+  @override
+  String get product_custom_filter_title => "ਕਸਟਮ ਫਿਲਟਰ";
   @override
   String get new_zealand => "ਨਿਊਜ਼ੀਲੈਂਡ";
   @override
@@ -7742,6 +7877,8 @@ class $nb extends S {
   @override
   String get color_blue => "blå, lilla";
   @override
+  String get my_filter => "Mitt filter";
+  @override
   String get southern_south_america => "Sør Sør-Amerika";
   @override
   String get plant_habitat => "Voksested";
@@ -7783,6 +7920,8 @@ class $nb extends S {
   String get siberia => "Sibir";
   @override
   String get taxonomy_subtribus => "Undertribus";
+  @override
+  String get product_custom_filter_description => "Du kan endre standard rekkefølge og antall filtre (farge, voksested, kronblader, fordeling).";
   @override
   String get habitat_meadow => "enger eller gressletter";
   @override
@@ -7895,6 +8034,8 @@ class $nb extends S {
   String get northeast_tropical_africa => "Nordøst-tropiske Afrika";
   @override
   String get pref_language => "Foretrukket Språk";
+  @override
+  String get product_custom_filter_title => "Egendefinert filter";
   @override
   String get new_zealand => "New Zealand";
   @override
@@ -8092,6 +8233,8 @@ class $ja extends S {
   @override
   String get color_blue => "青、紫";
   @override
+  String get my_filter => "私のフィルター";
+  @override
   String get southern_south_america => "南アメリカ南部";
   @override
   String get plant_habitat => "生息地";
@@ -8133,6 +8276,8 @@ class $ja extends S {
   String get siberia => "シベリア";
   @override
   String get taxonomy_subtribus => "亜族";
+  @override
+  String get product_custom_filter_description => "あなたは、デフォルトの順番とフィルタの数（色、生息地、花弁、分布）を変えることができるでしょう。";
   @override
   String get habitat_meadow => "草地、草原";
   @override
@@ -8245,6 +8390,8 @@ class $ja extends S {
   String get northeast_tropical_africa => "東北熱帯アフリカ";
   @override
   String get pref_language => "優先言語e";
+  @override
+  String get product_custom_filter_title => "カスタムフィルター";
   @override
   String get new_zealand => "ニュージーランド";
   @override
@@ -8430,6 +8577,8 @@ class $fa extends S {
   @override
   String get color_blue => "آبی، بنفش";
   @override
+  String get my_filter => "فیلتر من";
+  @override
   String get southern_south_america => "جنوبی جنوب امریکا";
   @override
   String get plant_habitat => "زیستگاه";
@@ -8471,6 +8620,8 @@ class $fa extends S {
   String get siberia => "سیبری";
   @override
   String get taxonomy_subtribus => "زیرتبار";
+  @override
+  String get product_custom_filter_description => "شما می توانید سفارش پیش فرض و تعداد فیلترها (رنگ، زیستگاه ها، گلبرگ، توزیع) را تغییر دهید.";
   @override
   String get habitat_meadow => "چمنزارها یا چمنزارها";
   @override
@@ -8581,6 +8732,8 @@ class $fa extends S {
   String get northeast_tropical_africa => "آفریقا شمال شرقی گرمسیری";
   @override
   String get pref_language => "زبان ترجیحی";
+  @override
+  String get product_custom_filter_title => "فیلتر سفارشی";
   @override
   String get new_zealand => "نیوزلند";
   @override
@@ -8764,6 +8917,8 @@ class $pl extends S {
   @override
   String get color_blue => "niebieski, fioletowy";
   @override
+  String get my_filter => "Mój filtr";
+  @override
   String get southern_south_america => "Południowa Ameryka Południowa";
   @override
   String get plant_habitat => "Habitat";
@@ -8805,6 +8960,8 @@ class $pl extends S {
   String get siberia => "Syberia";
   @override
   String get taxonomy_subtribus => "Podplemię";
+  @override
+  String get product_custom_filter_description => "Będziesz mógł zmienić domyślną kolejność i liczbę filtrów (kolor, siedlisko, płatek, dystrybucja).";
   @override
   String get habitat_meadow => "Łąki";
   @override
@@ -8864,7 +9021,7 @@ class $pl extends S {
   @override
   String get plant_flower => "Kwiaty";
   @override
-  String get filter_habitat => "Habitat";
+  String get filter_habitat => "Siedlisko";
   @override
   String get rate_never => "Nigdy";
   @override
@@ -8917,6 +9074,8 @@ class $pl extends S {
   String get northeast_tropical_africa => "Północno-wschodnia Afryka Tropikalna";
   @override
   String get pref_language => "Preferowany język";
+  @override
+  String get product_custom_filter_title => "Filtr niestandardowy";
   @override
   String get new_zealand => "Nowa Zelandia";
   @override
@@ -9100,6 +9259,8 @@ class $da extends S {
   @override
   String get color_blue => "blå, lilla";
   @override
+  String get my_filter => "Mit filter";
+  @override
   String get southern_south_america => "Sydlige Sydamerika";
   @override
   String get plant_habitat => "Vækststeder";
@@ -9139,6 +9300,8 @@ class $da extends S {
   String get siberia => "Sibirien";
   @override
   String get taxonomy_subtribus => "Undertribus";
+  @override
+  String get product_custom_filter_description => "Du kan ændre standardordre og antal filtre (farve, vækststeder, kronblad, fordeling).";
   @override
   String get habitat_meadow => "enge eller overdrev";
   @override
@@ -9251,6 +9414,8 @@ class $da extends S {
   String get northeast_tropical_africa => "Nordøstlige tropiske Afrika";
   @override
   String get pref_language => "Foretrukne sprog";
+  @override
+  String get product_custom_filter_title => "Brugerdefineret filter";
   @override
   String get new_zealand => "New Zealand";
   @override
@@ -9434,6 +9599,8 @@ class $he extends S {
   @override
   String get color_blue => "כחול, סגול";
   @override
+  String get my_filter => "המסנן שלי";
+  @override
   String get southern_south_america => "דרום אמריקה הדרומית";
   @override
   String get plant_habitat => "בית גידול";
@@ -9475,6 +9642,8 @@ class $he extends S {
   String get siberia => "סיביר";
   @override
   String get taxonomy_subtribus => "Subtribe";
+  @override
+  String get product_custom_filter_description => "תוכל לשנות את סדר ברירת המחדל ואת מספר המסננים (צבע, בתי גידול, עלי כותרת, הפצה).";
   @override
   String get habitat_meadow => "כרי דשא או מרעה";
   @override
@@ -9587,6 +9756,8 @@ class $he extends S {
   String get northeast_tropical_africa => "Northeast Tropical Africa";
   @override
   String get pref_language => "שפה מועדפת";
+  @override
+  String get product_custom_filter_title => "מסנן מותאם אישית";
   @override
   String get new_zealand => "ניו זילנד";
   @override
@@ -9772,6 +9943,8 @@ class $ro extends S {
   @override
   String get color_blue => "albastru, violet";
   @override
+  String get my_filter => "Filtrul meu";
+  @override
   String get southern_south_america => "Sud America de Sud";
   @override
   String get plant_habitat => "Habitatul";
@@ -9813,6 +9986,8 @@ class $ro extends S {
   String get siberia => "Siberia";
   @override
   String get taxonomy_subtribus => "Subtrib";
+  @override
+  String get product_custom_filter_description => "Veți putea schimba ordinea implicită și numărul de filtre (culoare, habitatul, petală, distribuție).";
   @override
   String get habitat_meadow => "câmpie sau fâneață";
   @override
@@ -9925,6 +10100,8 @@ class $ro extends S {
   String get northeast_tropical_africa => "Africa de Nord-Est tropicală";
   @override
   String get pref_language => "Limba preferată";
+  @override
+  String get product_custom_filter_title => "Filtru customizat";
   @override
   String get new_zealand => "Noua Zeelanda";
   @override
@@ -10110,6 +10287,8 @@ class $nl extends S {
   @override
   String get color_blue => "blauw, paars";
   @override
+  String get my_filter => "Mijn filter";
+  @override
   String get southern_south_america => "Zuid-Zuid-Amerika";
   @override
   String get plant_habitat => "Standplaats";
@@ -10151,6 +10330,8 @@ class $nl extends S {
   String get siberia => "Siberië";
   @override
   String get taxonomy_subtribus => "Subtribus";
+  @override
+  String get product_custom_filter_description => "U kunt de standaardvolgorde en het aantal filters wijzigen (kleur, standplaats, bloemblad, distributie).";
   @override
   String get habitat_meadow => "weiden of graslanden";
   @override
@@ -10263,6 +10444,8 @@ class $nl extends S {
   String get northeast_tropical_africa => "Noordoost-tropisch Afrika";
   @override
   String get pref_language => "Voorkeurstaal";
+  @override
+  String get product_custom_filter_title => "Aangepast filter";
   @override
   String get new_zealand => "Nieuw Zeeland";
   @override

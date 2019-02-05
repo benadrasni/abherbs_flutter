@@ -4,15 +4,19 @@ import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/settings/setting_my_filter.dart';
 import 'package:abherbs_flutter/settings/setting_my_region.dart';
 import 'package:abherbs_flutter/settings/setting_pref_language.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
+import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:abherbs_flutter/preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  SettingsScreen(this.onChangeLanguage);
+  final Map<String, String> filter;
+  SettingsScreen(this.onChangeLanguage, this.filter);
 
   @override
   _SettingsScreenState createState() => new _SettingsScreenState();
@@ -23,16 +27,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String _prefLanguage;
   Future<String> _myRegionF;
   Future<bool> _alwaysMyRegionF;
+  Future<List<String>> _myFilterF;
 
   void _resetPrefLanguage() {
-    setState(() {
-      _prefLanguageF = Prefs.setString(keyPreferredLanguage, null).then((bool success) {
-        widget.onChangeLanguage(null);
-        return null;
-      });
-      _alwaysMyRegionF = Prefs.setBool(keyAlwaysMyRegion, false).then((success) {
-        return false;
-      });
+    Prefs.setString(keyPreferredLanguage, null).then((bool success) {
+      Navigator.pop(context);
+      widget.onChangeLanguage('');
     });
   }
 
@@ -54,6 +54,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _myRegionF = Prefs.setString(keyMyRegion, region).then((success) {
         return region == null ? "" : region;
       });
+      if (region == null) {
+        _alwaysMyRegionF = Prefs.setBool(keyAlwaysMyRegion, false).then((success) {
+          return false;
+        });
+      }
     });
   }
 
@@ -61,6 +66,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       _alwaysMyRegionF = Prefs.setBool(keyAlwaysMyRegion, alwaysMyRegion).then((success) {
         return alwaysMyRegion;
+      });
+    });
+  }
+
+  void _setMyFilter(List<String> filter) {
+    setState(() {
+      _myFilterF = Prefs.setStringList(keyMyFilter, filter).then((success) {
+        Preferences.myFilterAttributes = filter == null ? filterAttributes : filter;
+        return Preferences.myFilterAttributes;
       });
     });
   }
@@ -73,7 +87,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _prefLanguage = language;
     });
     _myRegionF = Prefs.getStringF(keyMyRegion);
-    _alwaysMyRegionF = Prefs.getBoolF(keyAlwaysMyRegion);
+    _alwaysMyRegionF = Prefs.getBoolF(keyAlwaysMyRegion, false);
+    _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes);
 
     Ads.hideBannerAd();
   }
@@ -88,6 +103,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
 
     var widgets = <Widget>[];
+
+    // preferred language
     widgets.add(ListTile(
       title: Text(
         S.of(context).pref_language,
@@ -123,6 +140,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         });
       },
     ));
+
+    // my region
     widgets.add(ListTile(
       title: Text(
         S.of(context).my_region,
@@ -158,6 +177,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       },
     ));
 
+    // always add my region
     widgets.add(FutureBuilder<String>(
         future: _myRegionF,
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
@@ -188,10 +208,56 @@ class _SettingsScreenState extends State<SettingsScreen> {
             );
           } else {
             return Container(
-              height: 50.0,
+              height: 0.0,
             );
           }
         }));
+
+    // my filter
+    if (Purchases.isCustomFilter()) {
+      widgets.add(ListTile(
+        title: Text(
+          S.of(context).my_filter,
+          style: titleTextStyle,
+        ),
+        subtitle: FutureBuilder<List<String>>(
+            future: _myFilterF,
+            builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+              var value = "";
+              if (snapshot.connectionState == ConnectionState.done) {
+                value = snapshot.data
+                    .map((item) {
+                      return getFilterText(context, item);
+                    })
+                    .toList()
+                    .join(', ');
+              }
+              return Text(
+                value,
+                style: subtitleTextStyle,
+              );
+            }),
+        trailing: IconButton(
+          icon: Icon(Icons.delete),
+          onPressed: () {
+            _setMyFilter(null);
+          },
+        ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter)),
+          ).then((result) {
+            setState(() {
+              _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
+                Preferences.myFilterAttributes = myFilter;
+                return myFilter;
+              });
+            });
+          });
+        },
+      ));
+    }
 
     return Scaffold(
       appBar: AppBar(

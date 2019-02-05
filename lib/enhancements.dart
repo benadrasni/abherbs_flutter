@@ -29,10 +29,12 @@ class _EnhacementsScreenState extends State<EnhacementsScreen> {
       ? [
           productNoAdsAndroid,
           productSearch,
+          productCustomFilter,
         ]
       : [
           productNoAdsIOS,
-          productSearch
+          productSearch,
+          productCustomFilter,
         ];
   Future<List<IAPItem>> _productsF;
   Future<List<PurchasedItem>> _purchasesF;

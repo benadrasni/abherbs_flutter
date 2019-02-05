@@ -11,6 +11,8 @@
   "product_no_ads_description": "Aplikace nezobrazí reklamní banner ve spodní části obrazovky.",
   "product_search_title": "Hledat v jménech nebo v taxonomii",
   "product_search_description": "Budete moci najít květinu podle českého nebo latinského názvu nebo podle taxonu (např. podle řádu, čeledi, rodu).",
+  "product_custom_filter_title": "Vlastní filtr",
+  "product_custom_filter_description": "Budete moci změnit výchozí pořadí a počet filtrů (barva, ekologie, okvětní líst, distribuce).",
   "product_purchase": "Koupit",
   "product_purchased": "Koupeno",
 
@@ -21,6 +23,8 @@
   "my_region": "Moje oblast",
   "always_my_region_title": "Vždy přidat moji oblast do filtru",
   "always_my_region_subtitle": "Vaše oblast bude přednastavena do filtru",
+
+  "my_filter": "Můj filtr",
 
   "feedback_intro": "Tuto aplikaci podporujete odkdy jste si ji nainstalovali na své mobilní zařízení, děkuji. Pokud hledáte jiné formy podpory, zde jsou některé možnosti:",
   "feedback_review": "Můžete napsat pozitivní recenzi.",

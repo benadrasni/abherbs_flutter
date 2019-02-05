@@ -11,6 +11,8 @@
   "product_no_ads_description": "لن يعرض التطبيق إعلان بانر في أسفل الشاشة.",
   "product_search_title": "البحث في الأسماء أو التصنيف",
   "product_search_description": "ستتمكن من العثور على زهرة باسمها اللاتيني أو عن طريق صنفها (على سبيل المثال ، الرتبة ، الفصيلة ، الجنس.",
+  "product_custom_filter_title": "تصفية مخصص",
+  "product_custom_filter_description": "ستتمكن من تغيير الترتيب الافتراضي وعدد المرشحات (اللون ، موطن ، بتلة ، توزيع).",
   "product_purchase": "شراء",
   "product_purchased": "اشترى",
 
@@ -21,7 +23,9 @@
   "my_region": "منطقتي",
   "always_my_region_title": "أضف دائمًا منطقتي إلى الفلتر",
   "always_my_region_subtitle": "سيتم إعداد منطقتك مسبقًا على الفلتر",
-      
+
+  "my_filter": "مرشح بلدي",
+
   "feedback_intro": "لقد ساهمت في هذا التطبيق منذ تثبيته على جهازك ، شكرًا. إذا كنت تبحث عن شيء أكثر ، فإليك بعض الخيارات:",
   "feedback_review": "يمكنك كتابة مراجعة إيجابية.",
   "feedback_title": "كيف تساهم",

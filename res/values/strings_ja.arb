@@ -11,6 +11,8 @@
   "product_no_ads_description": "アプリケーションは画面の下部に広告バナーを表示しません。",
   "product_search_title": "名前または分類法で検索する",
   "product_search_description": "花は、日本語またはラテン語の名前で、あるいは分類群（たとえば、目、科、属）で見つけることができます。",
+  "product_custom_filter_title": "カスタムフィルター",
+  "product_custom_filter_description": "あなたは、デフォルトの順番とフィルタの数（色、生息地、花弁、分布）を変えることができるでしょう。",
   "product_purchase": "買う",
   "product_purchased": "購入した",
 
@@ -21,6 +23,8 @@
   "my_region": "私の地域",
   "always_my_region_title": "自分の地域を常にフィルタに追加する",
   "always_my_region_subtitle": "あなたの地域はフィルタにプリセットされます",
+
+  "my_filter": "私のフィルター",
 
   "feedback_intro": "デバイスにインストールしたので、このアプリケーションに貢献しました。ありがとうございます。 あなたがもっと何かを探しているなら、いくつかのオプションがあります：",
   "feedback_review": "あなたは肯定的なレビューを書くことができます。",

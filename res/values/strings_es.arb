@@ -11,6 +11,8 @@
   "product_no_ads_description": "La aplicación no mostrará el anuncio publicitario en la parte inferior de la pantalla.",
   "product_search_title": "Búsqueda en nombres o taxonomía",
   "product_search_description": "Podrá encontrar una flor por su nombre en español o latino o por su taxón (por ejemplo orden, familia, género).",
+  "product_custom_filter_title": "Filtro personalizado",
+  "product_custom_filter_description": "Podrás cambiar el orden predeterminado y la cantidad de filtros (color, localidad, pétalo, distribución).",
   "product_purchase": "Compra",
   "product_purchased": "Comprado",
 
@@ -18,6 +20,8 @@
   "toxicity2": "planta ligeramente venenosa",
   "always_my_region_title": "Siempre agregue mi región al filtro",
   "always_my_region_subtitle": "Su región estará preestablecida para el filtro",
+
+  "my_filter": "Mi filtro",
 
   "feedback_intro": "Ha estado contribuyendo a esta aplicación desde que la ha instalado en su dispositivo, gracias. Si está buscando algo más, aquí hay algunas opciones:",
   "feedback_review": "Puedes escribir una crítica positiva.",

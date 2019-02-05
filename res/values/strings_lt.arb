@@ -11,6 +11,8 @@
   "product_no_ads_description": "Programos apačioje ekrano reklama nebus rodoma.",
   "product_search_title": "Ieškoti vardų arba taksonomijos",
   "product_search_description": "Gali rasti gėlę pagal savo lietuvių ar lotynų kalbą arba taksoną (pvz., Eilė, šeimą, gentį).",
+  "product_custom_filter_title": "Pasirinktinis filtras",
+  "product_custom_filter_description": "Galėsite pakeisti numatytąjį užsakymų skaičių ir filtrų skaičių (spalva, buveinė, vainiklapis, platinimas).",
   "product_purchase": "Įsigyti",
   "product_purchased": "Įgytinis",
 
@@ -21,6 +23,8 @@
   "my_region": "Mano regionas",
   "always_my_region_title": "Visada pridėkite mano regioną prie filtro",
   "always_my_region_subtitle": "Jūsų regionas bus iš anksto nustatytas filtre",
+
+  "my_filter": "Mano filtras",
 
   "feedback_intro": "Jūs prisidėjote prie šios programos, nes ją įdiegėte savo prietaise. Jei ieškote ko nors daugiau, čia pateikiamos kelios parinktys:",
   "feedback_review": "Galite parašyti teigiamą apžvalgą.",
