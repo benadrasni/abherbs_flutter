@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 var supportedLanguages = {
   "cs": "Čeština",
@@ -33,7 +34,7 @@ var supportedLanguages = {
   "uk": "Українська"
 };
 
-Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, Function() onBuyProduct, String searchText,
+Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText,
     Future<Map<dynamic, dynamic>> _nativeNamesF, Future<Map<dynamic, dynamic>> _latinNamesF) {
   return FutureBuilder<List<Object>>(
     future: Future.wait([_nativeNamesF, _latinNamesF]),
@@ -52,7 +53,7 @@ Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, Function(
   );
 }
 
-Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function() onBuyProduct, String searchText, Map<dynamic, dynamic> nativeNames,
+Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText, Map<dynamic, dynamic> nativeNames,
     Map<dynamic, dynamic> latinNames) {
   var filteredNativeNames = <String>[];
   nativeNames.forEach((key, value) {

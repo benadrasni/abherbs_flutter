@@ -12,6 +12,7 @@ import 'package:abherbs_flutter/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 final rootReference = FirebaseDatabase.instance.reference();
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
@@ -22,7 +23,7 @@ final translationsTaxonomyReference = FirebaseDatabase.instance.reference().chil
 
 class PlantList extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  final void Function() onBuyProduct;
+  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final String count;
   final String path;

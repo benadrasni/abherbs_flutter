@@ -12,12 +12,13 @@ import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
 class Distribution extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  final void Function() onBuyProduct;
+  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   Distribution(this.onChangeLanguage, this.onBuyProduct, this.filter);
 

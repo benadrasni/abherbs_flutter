@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/search/search_taxonomy.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 final searchReference = FirebaseDatabase.instance.reference().child(firebaseSearch);
 final apgIVReference = FirebaseDatabase.instance.reference().child(firebaseAPGIV);
@@ -15,7 +16,7 @@ final translationsTaxonomyReference = FirebaseDatabase.instance.reference().chil
 class Search extends StatefulWidget {
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
-  final void Function() onBuyProduct;
+  final void Function(PurchasedItem) onBuyProduct;
   Search(this.myLocale, this.onChangeLanguage, this.onBuyProduct);
 
   @override

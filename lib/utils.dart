@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:abherbs_flutter/enhancements.dart';
+import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
-import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const String productNoAdsAndroid = "no_ads";
@@ -158,7 +159,7 @@ Icon getIcon(String productId) {
   }
 }
 
-List<Widget> getActions(BuildContext context, Function(String) onChangeLanguage, Function() onBuyProduct) {
+List<Widget> getActions(BuildContext context, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct) {
   var _actions = <Widget>[];
   _actions.add(IconButton(
     icon: getIcon(productSearch),

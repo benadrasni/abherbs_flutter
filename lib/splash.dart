@@ -6,10 +6,11 @@ import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class Splash extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  final void Function() onBuyProduct;
+  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, dynamic> notificationData;
   Splash(this.onChangeLanguage, this.onBuyProduct, this.notificationData);
 

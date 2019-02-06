@@ -10,6 +10,7 @@ import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 const String filterColor = 'filterColor';
 const String filterHabitat = 'filterHabitat';
@@ -292,7 +293,7 @@ List<BottomNavigationBarItem> getBottomNavigationBarItems(BuildContext context, 
   }).toList();
 }
 
-void onBottomNavigationBarTap(BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter,
+void onBottomNavigationBarTap(BuildContext context, void Function(String) onChangeLanguage, void Function(PurchasedItem) onBuyProduct, Map<String, String> filter,
     int index, int currentIndex) {
   if (index != currentIndex) {
     if (currentIndex == -1) {
@@ -305,22 +306,22 @@ void onBottomNavigationBarTap(BuildContext context, void Function(String) onChan
 }
 
 void onLeftNavigationTap(
-    BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter, String filterAttribute) {
+    BuildContext context, void Function(String) onChangeLanguage, void Function(PurchasedItem) onBuyProduct, Map<String, String> filter, String filterAttribute) {
   Navigator.push(context, getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, filterAttribute));
 }
 
 MaterialPageRoute<dynamic> getNextFilterRoute(
-    BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
+    BuildContext context, void Function(String) onChangeLanguage, void Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
   return getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter));
 }
 
 MaterialPageRoute<dynamic> getFirstFilterRoute(
-    BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter) {
+    BuildContext context, void Function(String) onChangeLanguage, void Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
   return getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter));
 }
 
 MaterialPageRoute<dynamic> getFilterRoute(
-    BuildContext context, void Function(String) onChangeLanguage, void Function() onBuyProduct, Map<String, String> filter, String filterAttribute) {
+    BuildContext context, void Function(String) onChangeLanguage, void Function(PurchasedItem) onBuyProduct, Map<String, String> filter, String filterAttribute) {
   var route;
 
   switch (filterAttribute) {

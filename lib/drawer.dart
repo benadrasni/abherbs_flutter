@@ -8,10 +8,11 @@ import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class AppDrawer extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  final void Function() onBuyProduct;
+  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final void Function() settingsCallback;
   AppDrawer(this.onChangeLanguage, this.onBuyProduct, this.filter, this.settingsCallback);
@@ -42,7 +43,10 @@ class _AppDrawerState extends State<AppDrawer> {
     listItems.addAll(Preferences.myFilterAttributes.map((attribute) {
       return ListTile(
         leading: getFilterLeading(context, attribute),
-        title: Text(getFilterText(context, attribute), style: drawerTextStyle,),
+        title: Text(
+          getFilterText(context, attribute),
+          style: drawerTextStyle,
+        ),
         subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ""),
         onTap: () {
           Navigator.pop(context);
@@ -50,7 +54,10 @@ class _AppDrawerState extends State<AppDrawer> {
         },
       );
     }));
-    listItems.add(Container(height:5.0, color: Theme.of(context).buttonColor,));
+    listItems.add(Container(
+      height: 5.0,
+      color: Theme.of(context).buttonColor,
+    ));
     listItems.add(ListTile(
       title: Text(
         S.of(context).enhancements,
