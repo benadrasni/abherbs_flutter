@@ -127,6 +127,8 @@ class S implements WidgetsLocalizations {
   String get product_custom_filter_title => "Custom filter";
   String get product_no_ads_description => "Application won't show advertisement banner at the bottom of the screen.";
   String get product_no_ads_title => "No unwanted advertisement";
+  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_title => "Offline mode";
   String get product_purchase => "Purchase";
   String get product_purchase_failed => "Purchase failed";
   String get product_purchased => "Purchased";

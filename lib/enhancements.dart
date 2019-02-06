@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -32,23 +33,16 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           productNoAdsAndroid,
           productSearch,
           productCustomFilter,
+          productOffline,
         ]
       : [
           productNoAdsIOS,
           productSearch,
           productCustomFilter,
+          productOffline,
         ];
   Future<List<IAPItem>> _productsF;
   Future<List<PurchasedItem>> _purchasesF;
-
-  bool _isPurchased(String productId, List<PurchasedItem> purchases) {
-    for (var purchase in purchases) {
-      if (purchase.productId == productId) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   Future<void> _logFailedPurchaseEvent(String productId) async {
     await _firebaseAnalytics.logEvent(name: 'purchase_failed', parameters: {
@@ -97,6 +91,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                   ),
                 );
               } else {
+                Purchases.purchases = snapshot.data.purchases;
                 _cards.add(Card(
                   child: Container(
                     padding: EdgeInsets.all(10.0),
@@ -113,7 +108,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                   ),
                 ));
                 _cards.addAll(snapshot.data.products.map((IAPItem product) {
-                  bool isPurchased = _isPurchased(product.productId, snapshot.data.purchases);
+                  bool isPurchased = Purchases.isPurchased(product.productId);
                   return Card(
                     child: Container(
                       padding: EdgeInsets.all(10.0),
