@@ -15,6 +15,8 @@
   "product_search_description": "You'll be able to find a flower by its English or Latin name or by its taxon (e.g. order, family, genus).",
   "product_custom_filter_title": "Custom filter",
   "product_custom_filter_description": "You'll be able to change default order and number of filters (color, habitat, petal, distribution).",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "Purchase",
   "product_purchase_failed": "Purchase failed",
   "product_purchased": "Purchased",

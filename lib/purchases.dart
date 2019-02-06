@@ -6,6 +6,15 @@ class Purchases {
   static bool isAllowed = false;
   static List<PurchasedItem> purchases = <PurchasedItem>[];
 
+  static bool isPurchased(String productId) {
+    for (var purchase in purchases) {
+      if (purchase.productId == productId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   static bool isNoAds() {
     for (PurchasedItem product in purchases) {
       if (product.productId == productNoAdsAndroid || product.productId == productNoAdsIOS) {
@@ -27,6 +36,15 @@ class Purchases {
   static bool isCustomFilter() {
     for (PurchasedItem product in purchases) {
       if (product.productId == productCustomFilter) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static bool isOffline() {
+    for (PurchasedItem product in purchases) {
+      if (product.productId == productOffline) {
         return true;
       }
     }
