@@ -12,6 +12,13 @@ class Offline {
       FirebaseDatabase.instance.setPersistenceCacheSizeBytes(firebaseCacheSize);
 
       setKeepSynced(true);
+      Prefs.getBoolF(keyOffline, false).then((value) {
+        if (value) {
+
+        } else {
+          downloadFinished = false;
+        }
+      });
     }
   }
 
