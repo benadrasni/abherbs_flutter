@@ -28,8 +28,12 @@
   "my_region": "My region",
   "always_my_region_title": "Always add my region to the filter",
   "always_my_region_subtitle": "Your region will be pre-set to the filter",
-
   "my_filter": "My filter",
+  "offline_title": "Offline mode",
+  "offline_subtitle": "requires 300+ MB additional space.",
+  "offline_download_message": "You're going to download 300+ MB of photos and illustrations. Please check if your device is connected to wi-fi. Are you ready for a download?",
+  "offline_delete_message": "Do you want to delete offline data?",
+  "offline_download": "Download data",
 
   "feedback_intro": "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:",
   "feedback_review": "You can write a positive review.",

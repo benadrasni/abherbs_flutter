@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/settings/setting_my_filter.dart';
 import 'package:abherbs_flutter/settings/setting_my_region.dart';
 import 'package:abherbs_flutter/settings/setting_pref_language.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
+import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<String> _myRegionF;
   Future<bool> _alwaysMyRegionF;
   Future<List<String>> _myFilterF;
+  Future<bool> _offlineF;
 
   void _resetPrefLanguage() {
     Prefs.setString(keyPreferredLanguage, null).then((bool success) {
@@ -70,6 +72,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
+  void _setOffline(bool offline) {
+    if (offline) {
+      _offlineDownloadDialog();
+      setState(() {
+        _offlineF = Prefs.setBool(keyOffline, offline).then((success) {
+          return offline;
+        });
+      });
+    } else {
+      _offlineDeleteDialog();
+    }
+  }
+
   void _setMyFilter(List<String> filter) {
     setState(() {
       _myFilterF = Prefs.setStringList(keyMyFilter, filter).then((success) {
@@ -77,6 +92,67 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return Preferences.myFilterAttributes;
       });
     });
+  }
+
+  Future<void> _offlineDownloadDialog() async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(S.of(context).offline_title),
+          content: Text(S.of(context).offline_download_message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(S.of(context).yes),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Offline.download();
+              },
+            ),
+            FlatButton(
+              child: Text(S.of(context).no),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _offlineDeleteDialog() async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(S.of(context).offline_title),
+          content: Text(S.of(context).offline_delete_message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(S.of(context).yes),
+              onPressed: () {
+                Navigator.of(context).pop();
+                setState(() {
+                  _offlineF = Prefs.setBool(keyOffline, false).then((success) {
+                    return false;
+                  });
+                });
+                Offline.delete();
+              },
+            ),
+            FlatButton(
+              child: Text(S.of(context).no),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -89,6 +165,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _myRegionF = Prefs.getStringF(keyMyRegion);
     _alwaysMyRegionF = Prefs.getBoolF(keyAlwaysMyRegion, false);
     _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes);
+    _offlineF = Prefs.getBoolF(keyOffline, false);
 
     Ads.hideBannerAd();
   }
@@ -257,6 +334,48 @@ class _SettingsScreenState extends State<SettingsScreen> {
           });
         },
       ));
+    }
+
+    // offline
+    if (Purchases.isOffline()) {
+      widgets.add(FutureBuilder<bool>(
+          future: _offlineF,
+          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+            return ListTile(
+              title: snapshot.data == null || !snapshot.data || Offline.downloadFinished
+                  ? Text(
+                      S.of(context).offline_title,
+                      style: titleTextStyle,
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          S.of(context).offline_title,
+                          style: titleTextStyle,
+                        ),
+                        RaisedButton(
+                          color: Theme.of(context).accentColor,
+                          child: Text(S.of(context).offline_download),
+                          onPressed: () {
+                            _offlineDownloadDialog();
+                          },
+                        ),
+                      ],
+                    ),
+              subtitle: Text(
+                S.of(context).offline_subtitle,
+                style: subtitleTextStyle,
+              ),
+              trailing: Switch(
+                value: snapshot.data ?? false,
+                onChanged: (bool value) {
+                  _setOffline(value);
+                },
+              ),
+              onTap: () {},
+            );
+          }));
     }
 
     return Scaffold(
