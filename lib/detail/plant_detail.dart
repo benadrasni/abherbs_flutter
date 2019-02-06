@@ -15,6 +15,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:http/http.dart' as http;
 
 final plantsReference = FirebaseDatabase.instance.reference().child(firebasePlants);
@@ -23,7 +24,7 @@ final translationsReference = FirebaseDatabase.instance.reference().child(fireba
 class PlantDetail extends StatefulWidget {
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
-  final void Function() onBuyProduct;
+  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final String plantName;
   PlantDetail(this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.filter, this.plantName);

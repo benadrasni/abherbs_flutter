@@ -9,12 +9,13 @@ import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
 class Habitat extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  final void Function() onBuyProduct;
+  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   Habitat(this.onChangeLanguage, this.onBuyProduct, this.filter);
 

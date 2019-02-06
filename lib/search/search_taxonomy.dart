@@ -5,8 +5,9 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
-Widget searchTaxonomy(Locale myLocale, Function(String) onChangeLanguage, Function() onBuyProduct, String searchText,
+Widget searchTaxonomy(Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText,
     Future<Map<dynamic, dynamic>> _apgIVF, Future<Map<dynamic, dynamic>> _translationsTaxonomyF) {
   return FutureBuilder<List<Object>>(
     future: Future.wait([_apgIVF, _translationsTaxonomyF]),
@@ -25,7 +26,7 @@ Widget searchTaxonomy(Locale myLocale, Function(String) onChangeLanguage, Functi
   );
 }
 
-Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function() onBuyProduct, String searchText, Map<dynamic, dynamic> apgIV,
+Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText, Map<dynamic, dynamic> apgIV,
     Map<dynamic, dynamic> dictionary) {
   var _taxons = <PlantTaxon>[];
   _buildTaxonomy(_taxons, dictionary, apgIV[firebaseRootTaxon], 0, firebaseAPGIV + '/', firebaseRootTaxon, searchText);

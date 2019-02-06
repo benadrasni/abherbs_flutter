@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
@@ -17,7 +18,7 @@ class EnhancementsMerged {
 
 class EnhancementsScreen extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  final void Function() onBuyProduct;
+  final void Function(PurchasedItem) onBuyProduct;
   EnhancementsScreen(this.onChangeLanguage, this.onBuyProduct);
 
   @override
@@ -25,6 +26,7 @@ class EnhancementsScreen extends StatefulWidget {
 }
 
 class _EnhancementsScreenState extends State<EnhancementsScreen> {
+  FirebaseAnalytics _firebaseAnalytics;
   final List<String> _productLists = Platform.isAndroid
       ? [
           productNoAdsAndroid,
@@ -48,9 +50,16 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     return false;
   }
 
+  Future<void> _logFailedPurchaseEvent(String productId) async {
+    await _firebaseAnalytics.logEvent(name: 'purchase_failed', parameters: {
+      'productId': productId
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _firebaseAnalytics = FirebaseAnalytics();
     _productsF = FlutterInappPurchase.getProducts(_productLists);
     _purchasesF = FlutterInappPurchase.getAvailablePurchases();
 
@@ -144,8 +153,9 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                           onPressed: () {
                             if (!isPurchased) {
                               FlutterInappPurchase.buyProduct(product.productId).then((PurchasedItem purchased) {
-                                widget.onBuyProduct();
+                                widget.onBuyProduct(purchased);
                               }).catchError((error) {
+                                _logFailedPurchaseEvent(product.productId);
                                 if (key.currentState.mounted) {
                                   key.currentState.showSnackBar(new SnackBar(
                                     content: new Text(S.of(context).product_purchase_failed),
