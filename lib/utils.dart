@@ -14,6 +14,7 @@ const String productSearch = "search";
 const String productCustomFilter = "custom_filter";
 const String productOffline = "offline";
 
+const String keyLanguage = "language";
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
 const String keyAlwaysMyRegion = "always_my_region";
@@ -46,6 +47,7 @@ const String storagePhotos = "photos/";
 const String defaultExtension = ".webp";
 const String thumbnailsDir = "/.thumbnails";
 
+const int firebaseCacheSize = 1024*1024*15;
 const String firebaseCounts = 'counts_4_v2';
 const String firebaseLists = 'lists_4_v2';
 const String firebasePlants = 'plants_v2';

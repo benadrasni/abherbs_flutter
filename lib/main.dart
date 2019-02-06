@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/splash.dart';
@@ -115,6 +116,7 @@ class _AppState extends State<App> {
       FlutterInappPurchase.getAvailablePurchases().then((value) {
         Purchases.isAllowed = true;
         Purchases.purchases = value;
+        Offline.initialize();
       }).catchError((error) {
         _iapError();
       });
@@ -169,8 +171,16 @@ class _AppState extends State<App> {
               Map<String, dynamic> notificationData = _notificationData != null ? Map.from(_notificationData) : null;
               _notificationData = null;
               return MaterialApp(
+                localeResolutionCallback: (deviceLocale, supportedLocales) {
+                  if (snapshot.data == null) {
+                    Prefs.setString(keyLanguage, deviceLocale.languageCode);
+                    return deviceLocale;
+                  } else {
+                    Prefs.setString(keyLanguage, snapshot.data.languageCode);
+                    return snapshot.data;
+                  }
+                },
                 debugShowCheckedModeBanner: false,
-                locale: snapshot.data,
                 localizationsDelegates: [
                   S.delegate,
                   GlobalMaterialLocalizations.delegate,

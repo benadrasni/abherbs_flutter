@@ -13,8 +13,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
-final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
-
 class Color extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
@@ -26,6 +24,7 @@ class Color extends StatefulWidget {
 }
 
 class _ColorState extends State<Color> {
+  DatabaseReference _countsReference;
   Future<int> _count;
   Future<String> _rateStateF;
   Map<String, String> _filter;
@@ -36,7 +35,7 @@ class _ColorState extends State<Color> {
     newFilter.addAll(_filter);
     newFilter[filterColor] = value;
 
-    countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
+    _countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
           Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
@@ -54,7 +53,7 @@ class _ColorState extends State<Color> {
   }
 
   _setCount() {
-    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
+    _count = _countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
       return snapshot.value;
     });
   }
@@ -113,6 +112,7 @@ class _ColorState extends State<Color> {
   @override
   void initState() {
     super.initState();
+    _countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterColor);
