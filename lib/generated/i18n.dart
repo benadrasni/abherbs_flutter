@@ -98,6 +98,11 @@ class S implements WidgetsLocalizations {
   String get northern_south_america => "Northern South America";
   String get northwestern_pacific => "Northwestern Pacific";
   String get northwestern_usa => "Northwestern U.S.A.";
+  String get offline_delete_message => "Do you want to delete offline data?";
+  String get offline_download => "Download data";
+  String get offline_download_message => "You're going to download 300+ MB of photos and illustrations. Please check if your device is connected to wi-fi. Are you ready for a download?";
+  String get offline_subtitle => "requires 300+ MB additional space.";
+  String get offline_title => "Offline mode";
   String get pacific => "Pacific";
   String get papuasia => "Papuasia";
   String get petal_4 => "4 or less";
