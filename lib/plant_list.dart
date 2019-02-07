@@ -8,7 +8,6 @@ import 'package:abherbs_flutter/firebase_animated_index_list.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
@@ -36,28 +35,23 @@ class _PlantListState extends State<PlantList> {
   Future<int> _count;
   Map<String, String> _translationCache;
 
-  Widget _getImageWithAds(BuildContext context, Locale myLocale, String url, String name) {
-    var stack = FlatButton(
-          padding: EdgeInsets.all(10.0),
-          child: CachedNetworkImage(
-            fit: BoxFit.scaleDown,
-            placeholder: Stack(alignment: Alignment.center, children: [
-              CircularProgressIndicator(),
-              Image(
-                image: AssetImage('res/images/placeholder.webp'),
-              ),
-            ]),
-            imageUrl: storageEndpoit + storagePhotos + url,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, name)),
-            );
-          },
+  Widget _getImageButton(BuildContext context, Locale myLocale, String url, String name) {
+    var placeholder = Stack(alignment: Alignment.center, children: [
+      CircularProgressIndicator(),
+      Image(
+        image: AssetImage('res/images/placeholder.webp'),
+      ),
+    ]);
+    return FlatButton(
+      padding: EdgeInsets.all(10.0),
+      child: getImage(url, placeholder: placeholder),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, name)),
         );
-
-    return stack;
+      },
+    );
   }
 
   @override
@@ -149,8 +143,8 @@ class _PlantListState extends State<PlantList> {
                                 }
                                 return Text(familyLocal);
                               }),
-                          leading: Image.network(
-                            storageEndpoit + storageFamilies + snapshot.value['family'] + defaultExtension,
+                          leading: getImage(
+                            storageFamilies + snapshot.value['family'] + defaultExtension,
                             width: 50.0,
                             height: 50.0,
                           ),
@@ -161,7 +155,7 @@ class _PlantListState extends State<PlantList> {
                             );
                           },
                         ),
-                        _getImageWithAds(context, myLocale, snapshot.value['url'], name),
+                        _getImageButton(context, myLocale, storagePhotos + snapshot.value['url'], name),
                       ]),
                     );
                   }),
