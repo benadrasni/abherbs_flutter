@@ -13,6 +13,8 @@
   "product_search_description": "Você poderá encontrar uma flor pelo seu nome em português ou latim ou por seu táxon (por exemplo, ordem, família, gênero).",
   "product_custom_filter_title": "Filtro customizado",
   "product_custom_filter_description": "Você poderá alterar a ordem padrão e o número de filtros (cor, habitat, pétala, distribuição).",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "Compra",
   "product_purchase_failed": "A compra falhou",
   "product_purchased": "Comprado",
@@ -24,8 +26,15 @@
   "my_region": "Minha região",
   "always_my_region_title": "Sempre adicione minha região ao filtro",
   "always_my_region_subtitle": "Sua região será pré-definida para o filtro",
-
   "my_filter": "Meu filtro",
+  "offline_title": "Modo offline",
+  "offline_subtitle": "requer mais de 300 MB de espaço adicional.",
+  "offline_download_message": "Você vai baixar mais de 300 MB de fotos e ilustrações. Por favor, verifique se o seu dispositivo está conectado a wi-fi. Você está pronto para um download?",
+  "offline_download_progress": "Download de fotos e ilustrações ...",
+  "offline_download_success": "Fotos e ilustrações transferidas com sucesso.",
+  "offline_download_fail": "Falha no Download. Por favor, verifique sua conexão com a internet ou espaço livre no dispositivo e tente novamente.",
+  "offline_delete_message": "Você deseja excluir dados off-line?",
+  "offline_download": "Retomar download",
 
   "feedback_intro": "Você tem contribuído para este aplicativo desde que você o instalou no seu dispositivo, obrigado. Se você está procurando algo mais, aqui estão algumas opções:",
   "feedback_review": "Você pode escrever um comentário positivo.",
@@ -43,6 +52,12 @@
   "rate_never": "Nunca",
   "rate_later": "Mais tarde",
   "rate": "Resenha",
+  "new_version": "Nova versão está disponível, por favor atualize.",
+
+  "yes": "Sim",
+  "no": "Não",
+  "close": "Perto",
+  "pause": "Pausa",
 
   "filter_color": "cor",
   "filter_habitat": "habitat",

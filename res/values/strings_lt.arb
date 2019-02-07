@@ -13,6 +13,8 @@
   "product_search_description": "Gali rasti gėlę pagal savo lietuvių ar lotynų kalbą arba taksoną (pvz., Eilė, šeimą, gentį).",
   "product_custom_filter_title": "Pasirinktinis filtras",
   "product_custom_filter_description": "Galėsite pakeisti numatytąjį užsakymų skaičių ir filtrų skaičių (spalva, buveinė, vainiklapis, platinimas).",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "Įsigyti",
   "product_purchase_failed": "Pirkimas nepavyko",
   "product_purchased": "Įgytinis",
@@ -24,8 +26,15 @@
   "my_region": "Mano regionas",
   "always_my_region_title": "Visada pridėkite mano regioną prie filtro",
   "always_my_region_subtitle": "Jūsų regionas bus iš anksto nustatytas filtre",
-
   "my_filter": "Mano filtras",
+  "offline_title": "Atsijungęs režimas",
+  "offline_subtitle": "reikia 300+ MB papildomos vietos.",
+  "offline_download_message": "Atsisiųsite 300+ MB nuotraukų ir iliustracijų. Patikrinkite, ar įrenginys prijungtas prie „Wi-Fi“. Ar esate pasiruošę atsisiųsti?",
+  "offline_download_progress": "Nuotraukų ir iliustracijų atsisiuntimas ...",
+  "offline_download_success": "Nuotraukos ir iliustracijos sėkmingai atsisiųsti.",
+  "offline_download_fail": "Atsisiuntimas nepavyko. Patikrinkite interneto ryšį arba laisvą vietą įrenginyje ir bandykite dar kartą.",
+  "offline_delete_message": "Ar norite ištrinti neprisijungus duomenis?",
+  "offline_download": "Tęsti atsisiuntimą",
 
   "feedback_intro": "Jūs prisidėjote prie šios programos, nes ją įdiegėte savo prietaise. Jei ieškote ko nors daugiau, čia pateikiamos kelios parinktys:",
   "feedback_review": "Galite parašyti teigiamą apžvalgą.",
@@ -43,8 +52,12 @@
   "rate_never": "Niekada",
   "rate_later": "Vėliau",
   "rate": "Apžvalga",
+  "new_version": "Yra nauja versija, atnaujinkite.",
+
   "yes": "Taip",
   "no": "Ne",
+  "close": "Uždaryti",
+  "pause": "Pauzė",
 
   "filter_color": "spalva",
   "filter_habitat": "buveinių",

@@ -13,6 +13,8 @@
   "product_search_description": "A virágot a magyar vagy latin nevével vagy taxonnal (például rend, család, nemzetség) találhatja meg.",
   "product_custom_filter_title": "Egyéni szűrő",
   "product_custom_filter_description": "Meg tudod változtatni az alapértelmezett sorrendet és a szűrők számát (szín, élettér, párta, terjesztés).",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "Vásárol",
   "product_purchase_failed": "A vásárlás nem sikerült",
   "product_purchased": "Vásárolt",
@@ -24,8 +26,15 @@
   "my_region": "Saját régió",
   "always_my_region_title": "Mindig adjon hozzá régiót a szűrőhöz",
   "always_my_region_subtitle": "Az Ön régiója előre lesz beállítva a szűrőre",
-
   "my_filter": "Saját szűrőm",
+  "offline_title": "Offline módban",
+  "offline_subtitle": "szüksége 300+ MB további helyet.",
+  "offline_download_message": "300+ MB fotót és illusztrációkat tölthet le. Ellenőrizze, hogy a készülék wi-fi-hez van-e csatlakoztatva. Készen állsz a letöltésre?",
+  "offline_download_progress": "Fényképek és illusztrációk letöltése ...",
+  "offline_download_success": "A fényképek és illusztrációk sikeresen letöltöttek.",
+  "offline_download_fail": "Sikertelen letöltés. Kérjük, ellenőrizze az internetkapcsolatot vagy a szabad helyet az eszközön, és próbálja újra.",
+  "offline_delete_message": "Törli az offline adatokat?",
+  "offline_download": "A letöltés folytatása",
 
   "feedback_intro": "Hozzájárult az alkalmazáshoz, mivel telepítette azt a készülékére. Ha valami többet keres, itt van néhány lehetőség:",
   "feedback_review": "Pozitív értékelést írhat.",
@@ -43,8 +52,12 @@
   "rate_never": "Soha",
   "rate_later": "Később",
   "rate": "Vélemények",
+  "new_version": "Új verzió elérhető, kérjük, frissítse.",
+
   "yes": "Igen",
   "no": "Nem",
+  "close": "Bezár",
+  "pause": "Szünet",
 
   "filter_color": "szín",
   "filter_habitat": "élettér",

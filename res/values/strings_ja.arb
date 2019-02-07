@@ -13,6 +13,8 @@
   "product_search_description": "花は、日本語またはラテン語の名前で、あるいは分類群（たとえば、目、科、属）で見つけることができます。",
   "product_custom_filter_title": "カスタムフィルター",
   "product_custom_filter_description": "あなたは、デフォルトの順番とフィルタの数（色、生息地、花弁、分布）を変えることができるでしょう。",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "買う",
   "product_purchase_failed": "購入に失敗しました",
   "product_purchased": "購入した",
@@ -24,8 +26,15 @@
   "my_region": "私の地域",
   "always_my_region_title": "自分の地域を常にフィルタに追加する",
   "always_my_region_subtitle": "あなたの地域はフィルタにプリセットされます",
-
   "my_filter": "私のフィルター",
+  "offline_title": "オフラインモード",
+  "offline_subtitle": "300 MB以上の追加スペースが必要です。",
+  "offline_download_message": "あなたは300 MB以上の写真やイラストをダウンロードしようとしています。 お使いの機器がWi-Fiに接続されているか確認してください。 ダウンロードの準備はできていますか？",
+  "offline_download_progress": "写真やイラストをダウンロードしています...",
+  "offline_download_success": "写真やイラストのダウンロードに成功しました。",
+  "offline_download_fail": "ダウンロードに失敗しました。 インターネット接続またはデバイスの空き容量を確認して、もう一度やり直してください。",
+  "offline_delete_message": "オフラインデータを削除しますか？",
+  "offline_download": "ダウンロードを再開",
 
   "feedback_intro": "デバイスにインストールしたので、このアプリケーションに貢献しました。ありがとうございます。 あなたがもっと何かを探しているなら、いくつかのオプションがあります：",
   "feedback_review": "あなたは肯定的なレビューを書くことができます。",
@@ -43,8 +52,12 @@
   "rate_never": "絶対に",
   "rate_later": "後で",
   "rate": "レビュー",
+  "new_version": "新しいバージョンが利用可能です、更新してください。",
+
   "yes": "はい",
   "no": "いいえ",
+  "close": "閉じる",
+  "pause": "一時停止",
 
   "filter_color": "色",
   "filter_habitat": "生息地",

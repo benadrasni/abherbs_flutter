@@ -13,6 +13,8 @@
   "product_search_description": "Voit löytää kukka Suomen tai latinankielisen nimen tai taksonin (esim. lahko, heimo, suku).",
   "product_custom_filter_title": "Mukautettu suodatin",
   "product_custom_filter_description": "Voit muuttaa oletusjärjestystä ja suodattimien määrää (väri, kasvupaikka, teriö, jakelu).",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "Ostaa",
   "product_purchase_failed": "Osto epäonnistui",
   "product_purchased": "Osti",
@@ -24,8 +26,15 @@
   "my_region": "Oma alue",
   "always_my_region_title": "Lisää alueeni aina suodattimeen",
   "always_my_region_subtitle": "Alueesi asetetaan etukäteen suodattimeen",
-
   "my_filter": "Oma suodatin",
+  "offline_title": "Offline-tila",
+  "offline_subtitle": "vaatii 300+ MB lisää tilaa.",
+  "offline_download_message": "Voit ladata 300+ MB kuvia ja kuvia. Tarkista, onko laite liitetty wi-fi-verkkoon. Oletko valmis lataamaan?",
+  "offline_download_progress": "Valokuvien ja kuvien lataaminen ...",
+  "offline_download_success": "Kuvat ja kuvat on ladattu onnistuneesti.",
+  "offline_download_fail": "Lataus epäonnistui. Tarkista Internet-yhteys tai vapaa tila laitteessa ja yritä uudelleen.",
+  "offline_delete_message": "Haluatko poistaa offline-tietoja?",
+  "offline_download": "Jatka lataamista",
 
   "feedback_intro": "Olet osallistunut tähän sovellukseen, koska olet asentanut sen laitteeseen, kiitos. Jos etsit jotain muuta, tässä on muutamia vaihtoehtoja:",
   "feedback_review": "Voit kirjoittaa positiivisen tarkistuksen.",
@@ -43,8 +52,12 @@
   "rate_never": "Ei ikinä",
   "rate_later": "Myöhemmin",
   "rate": "Arvostelut",
+  "new_version": "Uusi versio on saatavilla, päivitä.",
+
   "yes": "Joo",
   "no": "Ei",
+  "close": "Kiinni",
+  "pause": "Tauko",
 
   "filter_color": "väri",
   "filter_habitat": "kasvupaikka",

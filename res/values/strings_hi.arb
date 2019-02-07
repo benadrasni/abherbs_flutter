@@ -13,6 +13,8 @@
   "product_search_description": "आप इसके लैटिन नाम या इसके टैक्सोन (जैसे क्रम, परिवार, जाति) द्वारा एक फूल पा सकते हैं।",
   "product_custom_filter_title": "कस्टम फ़िल्टर",
   "product_custom_filter_description": "आप डिफ़ॉल्ट क्रम और फ़िल्टर की संख्या (रंग, पर्यावास, दल चक्र, वितरण) को बदलने में सक्षम होंगे।",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "खरीद फरोख्त",
   "product_purchase_failed": "खरीद विफल रही",
   "product_purchased": "खरीदी",
@@ -24,8 +26,15 @@
   "my_region": "मेरा क्षेत्र",
   "always_my_region_title": "हमेशा मेरे क्षेत्र को फ़िल्टर में जोड़ें",
   "always_my_region_subtitle": "आपका क्षेत्र फ़िल्टर के लिए पूर्व-सेट किया जाएगा",
-
   "my_filter": "मेरा फ़िल्टर",
+  "offline_title": "ऑफ़लाइन मोड",
+  "offline_subtitle": "300+ MB अतिरिक्त स्थान की आवश्यकता है",
+  "offline_download_message": "आप 300+ MB फ़ोटो और चित्र डाउनलोड करने जा रहे हैं। कृपया जांचें कि क्या आपका उपकरण वाई-फाई से जुड़ा है। क्या आप डाउनलोड के लिए तैयार हैं?",
+  "offline_download_progress": "फ़ोटो और चित्र डाउनलोड कर रहा है ...",
+  "offline_download_success": "फ़ोटो और चित्र सफलतापूर्वक डाउनलोड किए गए हैं।",
+  "offline_download_fail": "डाउनलोड विफल। कृपया अपने इंटरनेट कनेक्शन या उपकरण पर निःशुल्क स्थान देखें और पुनः प्रयास करें",
+  "offline_delete_message": "क्या आप ऑफ़लाइन डेटा हटाना चाहते हैं?",
+  "offline_download": "डाउनलोड फिर से शुरू करें",
 
   "feedback_intro": "जब से आपने इसे अपने डिवाइस पर स्थापित किया है, तब से आप इस एप्लिकेशन में योगदान दे रहे हैं, धन्यवाद यदि आप कुछ और देख रहे हैं, तो यहां कुछ विकल्प दिए गए हैं:",
   "feedback_review": "आप एक सकारात्मक समीक्षा लिख सकते हैं।",
@@ -44,8 +53,12 @@
   "rate_never": "कभी नहीँ",
   "rate_later": "बाद में",
   "rate": "समीक्षाएं",
+  "new_version": "नया संस्करण उपलब्ध है, कृपया अपडेट करें।",
+
   "yes": "हाँ",
   "no": "नहीं",
+  "close": "बंद करे",
+  "pause": "ठहराव",
 
   "filter_color": "रंग",
   "filter_habitat": "पर्यावास",
