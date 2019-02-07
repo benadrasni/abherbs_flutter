@@ -12,6 +12,7 @@ import 'package:path_provider/path_provider.dart';
 class Offline {
   static var httpClient = new HttpClient();
   static bool downloadFinished = false;
+  static bool downloadPaused = false;
 
   static void initialize() {
     if (Purchases.isOffline()) {
@@ -56,7 +57,9 @@ class Offline {
       Function(int, int) onFamilyDownload, Function(int, int) onPlantDownload, Function() onDownloadFinish, Function() onDownloadFail) {
     Future.wait([downloadFamilies(onFamilyDownload), _downloadPlants(onPlantDownload)]).then((List<bool> results) {
       downloadFinished = results.reduce((x, y) => x && y);
-      if (downloadFinished) {
+      if (downloadPaused) {
+        downloadPaused = false;
+      } else if (downloadFinished) {
         onDownloadFinish();
       } else {
         onDownloadFail();
@@ -81,6 +84,9 @@ class Offline {
         position++;
         Prefs.setInt(keyOfflineFamily, position);
         onFamilyDownload(position, familyTotal);
+        if (downloadPaused) {
+          break;
+        }
       } else {
         return false;
       }
@@ -122,6 +128,9 @@ class Offline {
         position++;
         Prefs.setInt(keyOfflinePlant, position);
         onPlantDownload(position, plantTotal);
+        if (downloadPaused) {
+          break;
+        }
       } else {
         return false;
       }

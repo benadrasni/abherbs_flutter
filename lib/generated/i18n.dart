@@ -109,6 +109,7 @@ class S implements WidgetsLocalizations {
   String get offline_title => "Offline mode";
   String get pacific => "Pacific";
   String get papuasia => "Papuasia";
+  String get pause => "Pause";
   String get petal_4 => "4 or less";
   String get petal_5 => "5";
   String get petal_many => "more than 5";
