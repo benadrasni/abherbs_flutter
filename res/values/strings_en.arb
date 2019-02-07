@@ -54,6 +54,8 @@
   "rate_never": "Never",
   "rate_later": "Later",
   "rate": "Review",
+  "new_version": "New version is available, please update.",
+
   "yes": "Yes",
   "no": "No",
   "close": "Close",

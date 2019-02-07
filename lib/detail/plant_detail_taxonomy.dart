@@ -42,8 +42,6 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Future<Plant> _plantF,
               ),
             ));
 
-            cards.add(getAdMobBanner());
-
             return ListView(
               shrinkWrap: true,
               padding: EdgeInsets.all(5.0),

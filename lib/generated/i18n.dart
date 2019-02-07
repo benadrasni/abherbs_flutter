@@ -87,6 +87,7 @@ class S implements WidgetsLocalizations {
   String get mongolia => "Mongolia";
   String get my_filter => "My filter";
   String get my_region => "My region";
+  String get new_version => "New version is available, please update.";
   String get new_zealand => "New Zealand";
   String get no => "No";
   String get north_central_pacific => "North-Central Pacific";

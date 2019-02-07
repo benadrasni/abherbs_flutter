@@ -12,6 +12,7 @@ import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
+import 'package:package_info/package_info.dart';
 
 class Color extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -27,6 +28,7 @@ class _ColorState extends State<Color> {
   DatabaseReference _countsReference;
   Future<int> _count;
   Future<String> _rateStateF;
+  Future<bool> _isNewVersionF;
   Map<String, String> _filter;
   GlobalKey<ScaffoldState> _key;
 
@@ -43,9 +45,7 @@ class _ColorState extends State<Color> {
           });
         } else {
           _key.currentState.showSnackBar(SnackBar(
-            content: Text(S
-                .of(context)
-                .snack_no_flowers),
+            content: Text(S.of(context).snack_no_flowers),
           ));
         }
       }
@@ -118,6 +118,16 @@ class _ColorState extends State<Color> {
     _filter.remove(filterColor);
     _key = new GlobalKey<ScaffoldState>();
     _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
+    _isNewVersionF = PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+      return FirebaseDatabase.instance
+          .reference()
+          .child(firebaseVersions)
+          .child(Platform.isAndroid ? firebaseAttributeAndroid : firebaseAttributeIOS)
+          .once()
+          .then((DataSnapshot snapshot) {
+        return int.parse(packageInfo.buildNumber) < snapshot.value;
+      });
+    });
 
     _setCount();
 
@@ -200,7 +210,8 @@ class _ColorState extends State<Color> {
     ));
     _widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
-      child: Text(S.of(context).color_message,
+      child: Text(
+        S.of(context).color_message,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontStyle: FontStyle.italic,
@@ -212,24 +223,25 @@ class _ColorState extends State<Color> {
         future: _rateStateF,
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == ConnectionState.done && snapshot.data == rateStateShould) {
-            return Column(children: [
-              Container(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                decoration: new BoxDecoration(
-                  borderRadius: new BorderRadius.circular(16.0),
-                  color: Theme.of(context).secondaryHeaderColor,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                      child: Text(
-                        S.of(context).rate_question,
-                        style: TextStyle(fontSize: 18.0),
-                      ),
+            return Container(
+              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+              decoration: new BoxDecoration(
+                borderRadius: new BorderRadius.circular(16.0),
+                color: Theme.of(context).secondaryHeaderColor,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                    child: Text(
+                      S.of(context).rate_question,
+                      style: TextStyle(fontSize: 18.0),
                     ),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
                       RaisedButton(
                         child: Text(S.of(context).yes),
                         onPressed: () {
@@ -253,16 +265,64 @@ class _ColorState extends State<Color> {
                           Prefs.setInt(keyRateCount, rateCountInitial);
                         },
                       ),
-                    ]),
-                  ],
-                ),
+                    ],
+                  ),
+                ],
               ),
-              getAdMobBanner(),
-            ]);
+            );
           } else {
-            return getAdMobBanner();
+            return Container();
           }
         }));
+
+    _widgets.add(Container(height: 10.0));
+
+    _widgets.add(FutureBuilder<bool>(
+        future: _isNewVersionF,
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done && snapshot.data) {
+            return Container(
+              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+              decoration: new BoxDecoration(
+                borderRadius: new BorderRadius.circular(16.0),
+                color: Theme.of(context).secondaryHeaderColor,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                    child: Text(
+                      S.of(context).new_version,
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          if (Platform.isAndroid) {
+                            launchURL(playStore);
+                          } else {
+                            launchURL(appStore);
+                          }
+                        },
+                        child: Platform.isAndroid
+                            ? Image(image: AssetImage('res/images/google_play.png'))
+                            : Image(image: AssetImage('res/images/app_store.png')),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            );
+          } else {
+            return Container();
+          }
+        }));
+
+    _widgets.add(getAdMobBanner());
 
     return Scaffold(
       key: _key,
@@ -291,7 +351,8 @@ class _ColorState extends State<Color> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, index, Preferences.myFilterAttributes.indexOf(filterColor));
+          onBottomNavigationBarTap(
+              context, widget.onChangeLanguage, widget.onBuyProduct, _filter, index, Preferences.myFilterAttributes.indexOf(filterColor));
         },
       ),
       floatingActionButton: Container(
