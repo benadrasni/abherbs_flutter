@@ -35,6 +35,7 @@ class S implements WidgetsLocalizations {
   String get caucasus => "Caucasus";
   String get central_america => "Central America";
   String get china => "China";
+  String get close => "Close";
   String get color_blue => "blue, purple";
   String get color_green => "green, brown, black";
   String get color_message => "What's the colour of the flower? Choose the closest one.";
@@ -99,8 +100,11 @@ class S implements WidgetsLocalizations {
   String get northwestern_pacific => "Northwestern Pacific";
   String get northwestern_usa => "Northwestern U.S.A.";
   String get offline_delete_message => "Do you want to delete offline data?";
-  String get offline_download => "Download data";
+  String get offline_download => "Resume download";
+  String get offline_download_fail => "Download failed. Please check your internet connection or free space on device and try again.";
   String get offline_download_message => "You're going to download 300+ MB of photos and illustrations. Please check if your device is connected to wi-fi. Are you ready for a download?";
+  String get offline_download_progress => "Downloading photos and illustrations...";
+  String get offline_download_success => "Photos and illustrations successfully downloaded.";
   String get offline_subtitle => "requires 300+ MB additional space.";
   String get offline_title => "Offline mode";
   String get pacific => "Pacific";

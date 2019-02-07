@@ -19,6 +19,8 @@ const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
 const String keyAlwaysMyRegion = "always_my_region";
 const String keyOffline = "offline";
+const String keyOfflinePlant = "offline_plant";
+const String keyOfflineFamily = "offline_family";
 const String keyRateState = "rate_state";
 const String keyRateCount = "rate_count";
 const String keyMyFilter = "my_filter";
@@ -57,11 +59,13 @@ const String firebaseAPGIV = 'APG IV_v2';
 const String firebasePlantHeaders = 'plants_headers';
 const String firebaseTranslations = 'translations';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
+const String firebasePlantsToUpdate = "plants_to_update";
+const String firebaseFamiliesToUpdate = "families_to_update";
 
 const String firebaseRootTaxon = 'Eukaryota';
 const String firebaseAPGType = "type";
-const String firebaseAPGList = "list";
-const String firebaseAPGCount = "count";
+const String firebaseAttributeList = "list";
+const String firebaseAttributeCount = "count";
 
 const int adsFrequency = -1;
 

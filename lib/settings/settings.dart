@@ -6,6 +6,7 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/settings/setting_my_filter.dart';
 import 'package:abherbs_flutter/settings/setting_my_region.dart';
+import 'package:abherbs_flutter/settings/setting_offline.dart';
 import 'package:abherbs_flutter/settings/setting_pref_language.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
 import 'package:abherbs_flutter/offline.dart';
@@ -99,25 +100,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(S.of(context).offline_title),
-          content: Text(S.of(context).offline_download_message),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(S.of(context).yes),
-              onPressed: () {
-                Navigator.of(context).pop();
-                Offline.download();
-              },
-            ),
-            FlatButton(
-              child: Text(S.of(context).no),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
+        return SettingOffline();
       },
     );
   }
@@ -358,7 +341,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           color: Theme.of(context).accentColor,
                           child: Text(S.of(context).offline_download),
                           onPressed: () {
-                            _offlineDownloadDialog();
+                            _offlineDownloadDialog().then((_) {
+                              setState(() {
+                                _offlineF = Prefs.getBoolF(keyOffline, false);
+                              });
+                            });
                           },
                         ),
                       ],
