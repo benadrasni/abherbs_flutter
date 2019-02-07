@@ -13,6 +13,8 @@
   "product_search_description": "Моћи ћете пронаћи цвијет по његовом српском или латинском имену или по његовом таксону (нпр. ред, породица, род).",
   "product_custom_filter_title": "Прилагођени филтер",
   "product_custom_filter_description": "Моћи ћете да промените редослед и број филтера (боја, станиште, латица, дистрибуција).",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "Купити",
   "product_purchase_failed": "Куповина није успела",
   "product_purchased": "Купио",
@@ -24,8 +26,15 @@
   "my_region": "Мој регион",
   "always_my_region_title": "Увек додајте мој регион на филтер",
   "always_my_region_subtitle": "Ваш регион ће бити унапред подешен на филтер",
-
   "my_filter": "Мој филтер",
+  "offline_title": "Режим ван мреже",
+  "offline_subtitle": "захтева додатни простор од 300+ МБ.",
+  "offline_download_message": "Преузет ћете 300+ МБ фотографија и илустрација. Проверите да ли је ваш уређај повезан са Ви-Фи. Да ли сте спремни за преузимање?",
+  "offline_download_progress": "Преузимање фотографија и илустрација ...",
+  "offline_download_success": "Фотографије и илустрације су успешно преузете.",
+  "offline_download_fail": "Преузимање није успело. Проверите интернет везу или слободан простор на уређају и покушајте поново.",
+  "offline_delete_message": "Да ли желите да избришете ванмрежне податке?",
+  "offline_download": "Настави преузимање",
 
   "feedback_intro": "Ви сте доприносили овој апликацији пошто сте је инсталирали на свом уређају, хвала. Ако тражите нешто више, ево неколико опција:",
   "feedback_review": "Можете написати позитивну рецензију.",
@@ -43,8 +52,12 @@
   "rate_never": "Никад",
   "rate_later": "Касније",
   "rate": "Рецензије",
+  "new_version": "Доступна је нова верзија, ажурирајте.",
+
   "yes": "Да",
   "no": "Не",
+  "close": "Близу",
+  "pause": "Пауза",
 
   "filter_color": "боја",
   "filter_habitat": "станиште",

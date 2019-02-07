@@ -13,6 +13,8 @@
   "product_search_description": "Vous pourrez trouver une fleur par son nom français ou latin ou par son taxon (ordre, famille, genre, par exemple).",
   "product_custom_filter_title": "Filtre personnalisé",
   "product_custom_filter_description": "Vous pourrez modifier l'ordre et le nombre de filtres par défaut (couleur, habitat, pétale, distribution).",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "Acheter",
   "product_purchase_failed": "Achat raté",
   "product_purchased": "Acheté(e)",
@@ -24,8 +26,15 @@
   "my_region": "Ma région",
   "always_my_region_title": "Toujours ajouter ma région au filtre",
   "always_my_region_subtitle": "Votre région sera pré-réglée sur le filtre",
-
   "my_filter": "Mon filtre",
+  "offline_title": "Mode hors-ligne",
+  "offline_subtitle": "nécessite plus de 300+ MB d'espace.",
+  "offline_download_message": "Vous allez télécharger plus de 300 Mo de photos et d'illustrations. Veuillez vérifier si votre appareil est connecté au wi-fi. Êtes-vous prêt pour un téléchargement?",
+  "offline_download_progress": "Téléchargement de photos et d'illustrations ...",
+  "offline_download_success": "Les photos et illustrations ont été téléchargées avec succès.",
+  "offline_download_fail": "Échec du téléchargement. Vérifiez votre connexion Internet ou l'espace disponible sur votre appareil, puis réessayez.",
+  "offline_delete_message": "Voulez-vous supprimer les données hors connexion?",
+  "offline_download": "Reprendre le téléchargement",
 
   "feedback_intro": "Vous avez contribué à cette application car vous l'avez installé sur votre appareil, merci. Si vous cherchez quelque chose de plus, voici quelques options:",
   "feedback_review": "Vous pouvez écrire une critique positive.",
@@ -43,8 +52,12 @@
   "rate_never": "Jamais",
   "rate_later": "Plus tard",
   "rate": "Avis",
+  "new_version": "Nouvelle version est disponible, s'il vous plaît mettre à jour.",
+
   "yes": "Oui",
   "no": "Non",
+  "close": "Sortie",
+  "pause": "Pause",
 
   "filter_color": "couleur",
   "filter_habitat": "habitat",

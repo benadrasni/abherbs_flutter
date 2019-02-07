@@ -13,6 +13,8 @@
   "product_search_description": "Du kan hitta en blomma med sitt svenska eller latinska namn eller dess taxon (t ex ordning, familj, släkt).",
   "product_custom_filter_title": "Anpassat filter",
   "product_custom_filter_description": "Du kan ändra standardordning och antal filter (färg, växtplats, kronblad, distribution).",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "Köpa",
   "product_purchase_failed": "Köp misslyckades",
   "product_purchased": "Köpt",
@@ -24,8 +26,15 @@
   "my_region": "Min region",
   "always_my_region_title": "Lägg alltid till min region i filtret",
   "always_my_region_subtitle": "Din region kommer att förinställas till filtret",
-
   "my_filter": "Mitt filter",
+  "offline_title": "Offlineläge",
+  "offline_subtitle": "kräver 300 + MB extra utrymme.",
+  "offline_download_message": "Du ska ladda ner 300+ MB bilder och illustrationer. Kontrollera om enheten är ansluten till Wi-Fi. Är du redo för nedladdning?",
+  "offline_download_progress": "Ladda ner bilder och illustrationer ...",
+  "offline_download_success": "Bilder och illustrationer har laddats ner.",
+  "offline_download_fail": "Nedladdning misslyckad. Kontrollera din internetanslutning eller ledigt utrymme på enheten och försök igen.",
+  "offline_delete_message": "Vill du radera offline-data?",
+  "offline_download": "Återuppta nedladdning",
 
   "feedback_intro": "Du har bidragit till den här applikationen eftersom du har installerat den på din enhet, tack. Om du letar efter något mer, här är några alternativ:",
   "feedback_review": "Du kan skriva en positiv recension.",
@@ -43,8 +52,12 @@
   "rate_never": "Aldrig",
   "rate_later": "Senare",
   "rate": "Recensioner",
+  "new_version": "Ny version finns tillgänglig, uppdatera.",
+
   "yes": "Ja",
   "no": "Nej",
+  "close": "Stänga",
+  "pause": "Paus",
 
   "filter_color": "färg",
   "filter_habitat": "växtplats",

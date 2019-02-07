@@ -13,6 +13,8 @@
   "product_search_description": "Budete môcť nájsť kvetinu podľa slovenského alebo latinského názvu alebo podľa taxónu (napr. podľa rádu, čeľade, rodu).",
   "product_custom_filter_title": "Vlastný filter",
   "product_custom_filter_description": "Budete môcť zmeniť predvolené poradie a počet filtrov (farba, biotop, lupienok, distribúcia).",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "Kúpiť",
   "product_purchase_failed": "Nákup sa neuskutočnil",
   "product_purchased": "Kúpené",
@@ -24,8 +26,15 @@
   "my_region_title": "Moja oblasť",
   "always_my_region_title": "Vždy pridať moju oblasť do filtra",
   "always_my_region_subtitle": "Vaša oblasť bude prednastavená do filtra",
-
   "my_filter": "Môj filter",
+  "offline_title": "Offline mód",
+  "offline_subtitle": "potrebuje viac ako 300 MB voľného priestoru.",
+  "offline_download_message": "Chystáte sa stiahnuť viac ako 300 MB fotografií a ilustrácii. Skontrolujte, prosím, či je vaše zariadenie pripojené na wifi sieť. Chcete začať sťahovať súbory?",
+  "offline_download_progress": "Prebieha sťahovanie fotografií a ilustrácii ...",
+  "offline_download_success": "Fotografie a ilustrácie boli úspešne stiahnuté.",
+  "offline_download_fail": "Sťahovanie súborov zlyhalo. Prosím skontrolujte pripojenie k internetu alebo voľný priestor na zariadení a skúste znova.",
+  "offline_delete_message": "Naozaj chcete zmazať offline dáta?",
+  "offline_download": "Pokračovať v sťahovaní",
 
   "feedback_intro": "Túto aplikáciu podporujete odkedy ste si ju nainštalovali na svoje mobilné zariadenie, ďakujem. Ak hľadáte iné formy podpory, tu sú niektoré možnosti:",
   "feedback_review": "Môžete napísať pozitívnu recenziu.",
@@ -43,8 +52,12 @@
   "rate_never": "Nikdy",
   "rate_later": "Neskôr",
   "rate": "Recenzia",
+  "new_version": "K dispozícii je nová verzia, prosím nainštalujte si ju.",
+
   "yes": "Áno",
   "no": "Nie",
+  "close": "Zavrieť",
+  "pause": "Prerušiť",
 
   "filter_color": "farba",
   "filter_habitat": "biotop",

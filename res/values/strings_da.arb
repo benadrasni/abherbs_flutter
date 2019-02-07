@@ -13,6 +13,8 @@
   "product_search_description": "Du kan finde en blomst ved sit danske eller latinske navn eller ved dets taxon (fx ordo, familie, slægt).",
   "product_custom_filter_title": "Brugerdefineret filter",
   "product_custom_filter_description": "Du kan ændre standardordre og antal filtre (farve, vækststeder, kronblad, fordeling).",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "Køb",
   "product_purchase_failed": "Køb mislykkedes",
   "product_purchased": "Købt",
@@ -24,8 +26,15 @@
   "my_region": "Min region",
   "always_my_region_title": "Tilføj altid min region til filteret",
   "always_my_region_subtitle": "Din region vil blive forudindstillet til filteret",
-
   "my_filter": "Mit filter",
+  "offline_title": "Offline-tilstand",
+  "offline_subtitle": "kræver 300 + MB ekstra plads.",
+  "offline_download_message": "Du skal downloade 300+ MB billeder og illustrationer. Kontroller, om din enhed er tilsluttet wi-fi. Er du klar til download?",
+  "offline_download_progress": "Downloadning af billeder og illustrationer ...",
+  "offline_download_success": "Billeder og illustrationer er blevet downloadet.",
+  "offline_download_fail": "Download fejlede. Kontroller din internetforbindelse eller ledig plads på enheden, og prøv igen.",
+  "offline_delete_message": "Vil du slette offline data?",
+  "offline_download": "Genoptag download",
 
   "feedback_intro": "Du har bidraget til denne applikation, da du har installeret den på din enhed, tak. Hvis du leder efter noget mere, her er nogle muligheder:",
   "feedback_review": "Du kan skrive en positiv anmeldelse.",
@@ -41,8 +50,12 @@
   "rate_never": "Aldrig",
   "rate_later": "Senere",
   "rate": "Anmeldelser",
+  "new_version": "Ny version er tilgængelig, opdater venligst.",
+
   "yes": "Ja",
   "no": "Ingen",
+  "close": "Tæt",
+  "pause": "Pause",
 
   "filter_color": "farve",
   "filter_habitat": "vækststeder",

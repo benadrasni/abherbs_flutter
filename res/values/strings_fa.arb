@@ -13,6 +13,8 @@
   "product_search_description": "شما می توانید یک گل را با نام لاتین خود یا طوفان آن (مانند سفارش، خانواده، جنس) پیدا کنید.",
   "product_custom_filter_title": "فیلتر سفارشی",
   "product_custom_filter_description": "شما می توانید سفارش پیش فرض و تعداد فیلترها (رنگ، زیستگاه ها، گلبرگ، توزیع) را تغییر دهید.",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "خرید",
   "product_purchase_failed": "خرید خراب شد",
   "product_purchased": "خریداری شده",
@@ -24,8 +26,15 @@
   "my_region": "منطقه من",
   "always_my_region_title": "همیشه منطقه من را به فیلتر اضافه کنید",
   "always_my_region_subtitle": "منطقه شما به طور پیش فرض به فیلتر تنظیم می شود",
-
   "my_filter": "فیلتر من",
+  "offline_title": "حالت آفلاین",
+  "offline_subtitle": "نیاز به 300+ MB فضای اضافی.",
+  "offline_download_message": "شما قصد دارید 300+ MB عکس و تصاویر را دانلود کنید. لطفا بررسی کنید که آیا دستگاه شما به Wi-Fi متصل است یا خیر. آیا برای دانلود آماده هستید؟",
+  "offline_download_progress": "دانلود عکس ها و تصاویر ...",
+  "offline_download_success": "عکس ها و تصاویر با موفقیت دانلود شده اند.",
+  "offline_download_fail": "دانلود نشد. لطفا اتصال اینترنت یا فضای آزاد خود را بر روی دستگاه بررسی کنید و دوباره امتحان کنید.",
+  "offline_delete_message": "میخواهید دادههای آفلاین را حذف کنید؟",
+  "offline_download": "رزومه دانلود",
 
   "feedback_intro": "از زمان نصب آن بر روی دستگاه خود به این برنامه کمک کرده اید، با تشکر. اگر شما به دنبال چیزی بیشتر هستید، در اینجا چند گزینه وجود دارد:",
   "feedback_review": "شما می توانید یک بررسی مثبت بنویسید.",
@@ -42,8 +51,12 @@
   "rate_later": "بعد",
   "rate_never": "هرگز",
   "rate": "مرور",
+  "new_version": "نسخه جدید در دسترس است، لطفا به روز رسانی کنید.",
+
   "yes": "بله",
   "no": "نه",
+  "close": "نزدیک",
+  "pause": "مکث",
 
   "filter_color": "رنگ",
   "filter_habitat": "زیستگاه ها",

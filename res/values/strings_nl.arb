@@ -13,6 +13,8 @@
   "product_search_description": "Je zult in staat zijn om een bloem te vinden op zijn Nederlandse of Latijnse naam of op zijn taxon (bijvoorbeeld orde, familie, geslacht).",
   "product_custom_filter_title": "Aangepast filter",
   "product_custom_filter_description": "U kunt de standaardvolgorde en het aantal filters wijzigen (kleur, standplaats, bloemblad, distributie).",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "Koop",
   "product_purchase_failed": "Aankoop mislukt",
   "product_purchased": "Gekocht",
@@ -24,8 +26,15 @@
   "my_region": "Mijn regio",
   "always_my_region_title": "Voeg altijd mijn regio toe aan het filter",
   "always_my_region_subtitle": "Uw regio wordt vooraf ingesteld op het filter",
-
   "my_filter": "Mijn filter",
+  "offline_title": "Offline modus",
+  "offline_subtitle": "vereist 300+ MB extra ruimte.",
+  "offline_download_message": "U gaat 300+ MB foto's en illustraties downloaden. Controleer of uw apparaat is verbonden met wifi. Ben je klaar voor een download?",
+  "offline_download_progress": "Foto's en illustraties downloaden ...",
+  "offline_download_success": "Foto's en illustraties succesvol gedownload.",
+  "offline_download_fail": "Download mislukt. Controleer uw internetverbinding of vrije ruimte op het apparaat en probeer het opnieuw.",
+  "offline_delete_message": "Wilt u offline gegevens verwijderen?",
+  "offline_download": "Download doorgaan",
 
   "feedback_intro": "Sinds u de app geïnstalleerd heeft, draagt u bij aan de app. Dank u wel. Als u ons nóg meer wilt helpen, kunt u de volgende opties overwegen:",
   "feedback_review": "U kunt een positieve beoordeling schrijven.",
@@ -43,8 +52,12 @@
   "rate_never": "Nooit",
   "rate_later": "Later",
   "rate": "Recensies",
+  "new_version": "Nieuwe versie beschikbaar, update.",
+
   "yes": "Ja",
   "no": "Nee",
+  "close": "Dichtbij",
+  "pause": "Pauze",
 
   "filter_color": "kleur",
   "filter_habitat": "standplaats",

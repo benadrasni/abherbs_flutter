@@ -13,6 +13,8 @@
   "product_search_description": "Będziesz mógł znaleźć kwiatek pod polską lub łacińską nazwą lub według jego taksonu (np. rząd, rodzina, rodzaj).",
   "product_custom_filter_title": "Filtr niestandardowy",
   "product_custom_filter_description": "Będziesz mógł zmienić domyślną kolejność i liczbę filtrów (kolor, siedlisko, płatek, dystrybucja).",
+  "product_offline_title": "Offline mode",
+  "product_offline_description": "You'll be able to run application without internet connection.",
   "product_purchase": "Zakupić",
   "product_purchase_failed": "Zakup nie powiódł się",
   "product_purchased": "Zakupione",
@@ -24,8 +26,15 @@
   "my_region": "Mój region",
   "always_my_region_title": "Zawsze filtruj wg mojego wybranego regionu",
   "always_my_region_subtitle": "Twój region zostanie wstępnie ustawiony jako filtr",
-
   "my_filter": "Mój filtr",
+  "offline_title": "Tryb offline",
+  "offline_subtitle": "wymaga dodatkowo ponad 300MB miejsca.",
+  "offline_download_message": "Pobrasz ponad 300 MB zdjęć i ilustracji. Sprawdź, czy twoje urządzenie jest podłączone do sieci Wi-Fi. Czy jesteś gotowy na pobranie?",
+  "offline_download_progress": "Pobieranie zdjęć i ilustracji ...",
+  "offline_download_success": "Zdjęcia i ilustracje zostały pomyślnie pobrane.",
+  "offline_download_fail": "Pobieranie nie udane. Sprawdź połączenie internetowe lub wolne miejsce na urządzeniu i spróbuj ponownie.",
+  "offline_delete_message": "Czy chcesz usunąć dane offline?",
+  "offline_download": "Wznów pobieranie",
 
   "feedback_intro": "Jeśli chcesz dać coś od siebie i przyczynić się do rozwoju aplikacji, masz kilka opcji do wyboru:",
   "feedback_review": "Możesz przyznać aplikacji 5 gwiazdek i napisać pozytywną recenzję.",
@@ -43,8 +52,12 @@
   "rate_never": "Nigdy",
   "rate_later": "Później",
   "rate": "Opinie",
+  "new_version": "Dostępna jest nowa wersja, proszę dokonać aktualizacji.",
+
   "yes": "Tak",
   "no": "Nie",
+  "close": "Zamknij",
+  "pause": "Pauza",
 
   "filter_color": "Kolor",
   "filter_habitat": "Siedlisko",
