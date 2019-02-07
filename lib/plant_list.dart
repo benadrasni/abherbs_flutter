@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/detail/plant_detail.dart';
@@ -36,7 +35,6 @@ class PlantList extends StatefulWidget {
 class _PlantListState extends State<PlantList> {
   Future<int> _count;
   Map<String, String> _translationCache;
-  Random _random;
 
   Widget _getImageWithAds(BuildContext context, Locale myLocale, String url, String name) {
     var stack = FlatButton(
@@ -59,16 +57,7 @@ class _PlantListState extends State<PlantList> {
           },
         );
 
-    if (_random.nextInt(100) < adsFrequency) {
-      return Column(
-        children: [
-          stack,
-          getAdMobBanner(),
-        ],
-      );
-    } else {
-      return stack;
-    }
+    return stack;
   }
 
   @override
@@ -86,7 +75,6 @@ class _PlantListState extends State<PlantList> {
     }
 
     _translationCache = {};
-    _random = new Random();
 
     Ads.hideBannerAd();
   }

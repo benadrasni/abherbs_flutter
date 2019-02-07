@@ -65,8 +65,6 @@ Widget getGallery(BuildContext context, Future<Plant> _plantF) {
               ));
             }
 
-            cards.add(getAdMobBanner());
-
             return ListView(
               shrinkWrap: true,
               padding: EdgeInsets.all(5.0),

@@ -286,8 +286,6 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Pl
               },
             )));
 
-            cards.add(getAdMobBanner());
-
             return ListView(
               shrinkWrap: true,
               padding: EdgeInsets.all(5.0),

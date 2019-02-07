@@ -61,13 +61,14 @@ const String firebaseTranslations = 'translations';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
 const String firebasePlantsToUpdate = "plants_to_update";
 const String firebaseFamiliesToUpdate = "families_to_update";
+const String firebaseVersions = "versions";
 
 const String firebaseRootTaxon = 'Eukaryota';
 const String firebaseAPGType = "type";
 const String firebaseAttributeList = "list";
 const String firebaseAttributeCount = "count";
-
-const int adsFrequency = -1;
+const String firebaseAttributeIOS= "ios";
+const String firebaseAttributeAndroid= "android";
 
 bool get isInDebugMode {
   bool inDebugMode = false;
