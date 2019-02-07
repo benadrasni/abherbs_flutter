@@ -61,7 +61,10 @@ class _SettingOfflineState extends State<SettingOffline> {
     var _title;
     switch (_downloadStatus) {
       case 0:
-        _title = Text(S.of(context).offline_title, textAlign: TextAlign.center,);
+        _title = Text(
+          S.of(context).offline_title,
+          textAlign: TextAlign.center,
+        );
         _content = Text(S.of(context).offline_download_message);
         _actions.add(FlatButton(
           child: Text(S.of(context).yes),
@@ -80,7 +83,10 @@ class _SettingOfflineState extends State<SettingOffline> {
         ));
         break;
       case 1:
-        _title = Text(S.of(context).offline_download_progress, textAlign: TextAlign.center,);
+        _title = Text(
+          S.of(context).offline_download_progress,
+          textAlign: TextAlign.center,
+        );
         _content = LinearPercentIndicator(
           width: MediaQuery.of(context).size.width - 150,
           lineHeight: 20.0,
@@ -88,9 +94,19 @@ class _SettingOfflineState extends State<SettingOffline> {
           backgroundColor: Theme.of(context).buttonColor,
           progressColor: Theme.of(context).accentColor,
         );
+        _actions.add(FlatButton(
+          child: Text(S.of(context).pause),
+          onPressed: () {
+            Offline.downloadPaused = true;
+            Navigator.of(context).pop();
+          },
+        ));
         break;
       case 2:
-        _title = Text(S.of(context).offline_title, textAlign: TextAlign.center,);
+        _title = Text(
+          S.of(context).offline_title,
+          textAlign: TextAlign.center,
+        );
         _content = Text(S.of(context).offline_download_success);
         _actions.add(FlatButton(
           child: Text(S.of(context).close),
@@ -100,7 +116,10 @@ class _SettingOfflineState extends State<SettingOffline> {
         ));
         break;
       case 3:
-        _title = Text(S.of(context).offline_title, textAlign: TextAlign.center, );
+        _title = Text(
+          S.of(context).offline_title,
+          textAlign: TextAlign.center,
+        );
         _content = Text(S.of(context).offline_download_fail);
         _actions.add(FlatButton(
           child: Text(S.of(context).close),
@@ -111,10 +130,12 @@ class _SettingOfflineState extends State<SettingOffline> {
         break;
     }
 
-    return AlertDialog(
-      title: _title,
-      content: _content,
-      actions: _actions,
-    );
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: AlertDialog(
+          title: _title,
+          content: _content,
+          actions: _actions,
+        ));
   }
 }
