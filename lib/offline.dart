@@ -11,10 +11,15 @@ import 'package:path_provider/path_provider.dart';
 
 class Offline {
   static var httpClient = new HttpClient();
+  static String rootPath;
   static bool downloadFinished = false;
   static bool downloadPaused = false;
 
   static void initialize() {
+    getApplicationDocumentsDirectory().then((dir) {
+      rootPath = dir.path;
+    });
+
     if (Purchases.isOffline()) {
       FirebaseDatabase.instance.setPersistenceEnabled(true);
       FirebaseDatabase.instance.setPersistenceCacheSizeBytes(firebaseCacheSize);
@@ -176,19 +181,40 @@ class Offline {
     }
   }
 
-  static void delete() {
+  static Future<void> delete() async {
     setKeepSynced(false);
-    print('delete');
+    if (rootPath == null) {
+      rootPath = (await getApplicationDocumentsDirectory()).path;
+    }
+    var familiesDir = Directory('$rootPath/$storageFamilies');
+    familiesDir.delete(recursive: true);
+    var photosDir = Directory('$rootPath/$storagePhotos');
+    photosDir.delete(recursive: true);
+    Prefs.setInt(keyOfflineFamily, 0);
+    Prefs.setInt(keyOfflinePlant, 0);
+    downloadFinished = false;
   }
 
   static Future<File> _downloadFile(String url, String dir, String filename) async {
     var request = await httpClient.getUrl(Uri.parse(url));
     var response = await request.close();
     var bytes = await consolidateHttpClientResponseBytes(response);
-    String rootDir = (await getApplicationDocumentsDirectory()).path;
-    await Directory('$rootDir/$dir').create(recursive: true);
-    File file = File('$rootDir/$dir$filename');
+    if (rootPath == null) {
+      rootPath = (await getApplicationDocumentsDirectory()).path;
+    }
+    await Directory('$rootPath/$dir').create(recursive: true);
+    File file = File('$rootPath/$dir/$filename');
     await file.writeAsBytes(bytes);
     return file;
+  }
+
+  static Future<File> getLocalFile(String filename) async {
+    if (rootPath == null) {
+      rootPath = (await getApplicationDocumentsDirectory()).path;
+    }
+    File file = new File('$rootPath/$filename');
+    return file.exists().then((exists) {
+      return exists ? file : null;
+    });
   }
 }

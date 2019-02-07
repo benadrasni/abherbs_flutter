@@ -44,7 +44,7 @@ class _PlantListState extends State<PlantList> {
     ]);
     return FlatButton(
       padding: EdgeInsets.all(10.0),
-      child: getImage(url, placeholder: placeholder),
+      child: getImage(url, placeholder),
       onPressed: () {
         Navigator.push(
           context,
@@ -145,8 +145,9 @@ class _PlantListState extends State<PlantList> {
                               }),
                           leading: getImage(
                             storageFamilies + snapshot.value['family'] + defaultExtension,
+                              Container(width: 0.0, height: 0.0,),
                             width: 50.0,
-                            height: 50.0,
+                            height: 50.0
                           ),
                           onTap: () {
                             Navigator.push(

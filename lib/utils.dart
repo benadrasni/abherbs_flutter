@@ -3,12 +3,12 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/enhancements.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const String productNoAdsAndroid = "no_ads";
@@ -79,21 +79,6 @@ bool get isInDebugMode {
   return inDebugMode;
 }
 
-Future<String> get localRootDirectory {
-  return getApplicationDocumentsDirectory().then((dir) {
-    return dir.path;
-  });
-}
-
-Future<File> getLocalFile(String filename) {
-  return localRootDirectory.then((dir) {
-    File file = new File('$dir/$filename');
-    return file.exists().then((exists) {
-      return exists ? file : null;
-    });
-  });
-}
-
 void launchURL(String url) async {
   if (await canLaunch(url)) {
     await launch(url);
@@ -112,9 +97,9 @@ Future<void> launchURLF(String url) {
   });
 }
 
-Widget getImage(String url, {double width, double height, Widget placeholder}) {
+Widget getImage(String url, Widget placeholder, {double width, double height}) {
   return FutureBuilder<File>(
-      future: getLocalFile(url),
+      future: Offline.getLocalFile(url),
       builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data != null) {
