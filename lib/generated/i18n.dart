@@ -105,7 +105,7 @@ class S implements WidgetsLocalizations {
   String get offline_download_fail => "Download failed. Please check your internet connection or free space on device and try again.";
   String get offline_download_message => "You're going to download 300+ MB of photos and illustrations. Please check if your device is connected to wi-fi. Are you ready for a download?";
   String get offline_download_progress => "Downloading photos and illustrations...";
-  String get offline_download_success => "Photos and illustrations successfully downloaded.";
+  String get offline_download_success => "Photos and illustrations have been successfully downloaded.";
   String get offline_subtitle => "requires 300+ MB additional space.";
   String get offline_title => "Offline mode";
   String get pacific => "Pacific";
