@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/offline.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+
 
 class SettingOffline extends StatefulWidget {
   SettingOffline();
@@ -11,6 +15,7 @@ class SettingOffline extends StatefulWidget {
 }
 
 class _SettingOfflineState extends State<SettingOffline> {
+  FirebaseAnalytics _firebaseAnalytics;
   int _familiesTotal;
   int _familiesDownloaded;
   int _plantsTotal;
@@ -25,27 +30,42 @@ class _SettingOfflineState extends State<SettingOffline> {
   }
 
   onPlantDownload(int position, int total) {
-    setState(() {
-      _plantsTotal = total;
-      _plantsDownloaded = position;
-    });
+    if (mounted) {
+      setState(() {
+        _plantsTotal = total;
+        _plantsDownloaded = position;
+      });
+    }
   }
 
   onDownloadFail() {
-    setState(() {
-      _downloadStatus = 3;
-    });
+    _logOfflineDownloadEvent('failed');
+    if (mounted) {
+      setState(() {
+        _downloadStatus = 3;
+      });
+    }
   }
 
   onDownloadFinish() {
-    setState(() {
-      _downloadStatus = 2;
+    _logOfflineDownloadEvent('finished');
+    if (mounted) {
+      setState(() {
+        _downloadStatus = 2;
+      });
+    }
+  }
+
+  Future<void> _logOfflineDownloadEvent(String status) async {
+    await _firebaseAnalytics.logEvent(name: 'offline_download', parameters: {
+      'status': status
     });
   }
 
   @override
   void initState() {
     super.initState();
+    _firebaseAnalytics = FirebaseAnalytics();
 
     _downloadStatus = 0;
     _familiesDownloaded = 0;
@@ -62,13 +82,13 @@ class _SettingOfflineState extends State<SettingOffline> {
     switch (_downloadStatus) {
       case 0:
         _title = Text(
-          S.of(context).offline_title,
-          textAlign: TextAlign.center,
+          S.of(context).offline_title
         );
         _content = Text(S.of(context).offline_download_message);
         _actions.add(FlatButton(
           child: Text(S.of(context).yes),
           onPressed: () {
+            _logOfflineDownloadEvent('started');
             setState(() {
               _downloadStatus = 1;
             });
@@ -97,6 +117,7 @@ class _SettingOfflineState extends State<SettingOffline> {
         _actions.add(FlatButton(
           child: Text(S.of(context).pause),
           onPressed: () {
+            _logOfflineDownloadEvent('paused');
             Offline.downloadPaused = true;
             Navigator.of(context).pop();
           },
@@ -104,8 +125,7 @@ class _SettingOfflineState extends State<SettingOffline> {
         break;
       case 2:
         _title = Text(
-          S.of(context).offline_title,
-          textAlign: TextAlign.center,
+          S.of(context).offline_title
         );
         _content = Text(S.of(context).offline_download_success);
         _actions.add(FlatButton(
@@ -118,7 +138,6 @@ class _SettingOfflineState extends State<SettingOffline> {
       case 3:
         _title = Text(
           S.of(context).offline_title,
-          textAlign: TextAlign.center,
         );
         _content = Text(S.of(context).offline_download_fail);
         _actions.add(FlatButton(
