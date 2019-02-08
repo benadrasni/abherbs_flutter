@@ -165,9 +165,11 @@ class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
   }
 
   void _onValue(DataSnapshot _) {
-    setState(() {
-      _loaded = true;
-    });
+    if (mounted) {
+      setState(() {
+        _loaded = true;
+      });
+    }
   }
 
   Widget _buildItem(
