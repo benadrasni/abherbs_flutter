@@ -138,7 +138,7 @@ class S implements WidgetsLocalizations {
   String get product_custom_filter_title => "Custom filter";
   String get product_no_ads_description => "Application won't show advertisement banner at the bottom of the screen.";
   String get product_no_ads_title => "No unwanted advertisement";
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Application will work without internet connection.";
   String get product_offline_title => "Offline mode";
   String get product_purchase => "Purchase";
   String get product_purchase_failed => "Purchase failed";
@@ -215,7 +215,7 @@ class $de extends S {
   @override
   String get legend => "Legende";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Offline-Modus";
   @override
   String get feedback_submit_translate_data => "Verbessere die Daten der Blume";
   @override
@@ -457,7 +457,7 @@ class $de extends S {
   @override
   String get indian_subcontinent => "Indischer Subkontinent";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Sie können die Anwendung ohne Internetverbindung ausführen.";
   @override
   String get plant_flower => "Blüte";
   @override
@@ -587,7 +587,7 @@ class $hi extends S {
   @override
   String get legend => "किंवदंती";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "ऑफ़लाइन मोड";
   @override
   String get feedback_submit_translate_data => "फूल के डेटा में सुधार";
   @override
@@ -829,7 +829,7 @@ class $hi extends S {
   @override
   String get indian_subcontinent => "भारतीय उपमहाद्वीप";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "आप इंटरनेट कनेक्शन के बिना आवेदन चला सकेंगे।";
   @override
   String get plant_flower => "पुष्प";
   @override
@@ -959,7 +959,7 @@ class $fi extends S {
   @override
   String get legend => "Legenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Offline-tila";
   @override
   String get feedback_submit_translate_data => "Paranna kukkien tietoja";
   @override
@@ -1201,7 +1201,7 @@ class $fi extends S {
   @override
   String get indian_subcontinent => "Intian niemimaalla";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Voit suorittaa sovelluksen ilman internet-yhteyttä.";
   @override
   String get plant_flower => "Kukka";
   @override
@@ -1331,7 +1331,7 @@ class $ru extends S {
   @override
   String get legend => "Легенда";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Автономный режим";
   @override
   String get feedback_submit_translate_data => "Улучшить данные цветка";
   @override
@@ -1573,7 +1573,7 @@ class $ru extends S {
   @override
   String get indian_subcontinent => "Индийский субконтинент";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Вы сможете запустить приложение без подключения к интернету.";
   @override
   String get plant_flower => "Цветы";
   @override
@@ -1703,7 +1703,7 @@ class $pt extends S {
   @override
   String get legend => "Legenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Modo offline";
   @override
   String get snack_copy => "Copiado para a área de transferência";
   @override
@@ -1943,7 +1943,7 @@ class $pt extends S {
   @override
   String get indian_subcontinent => "Subcontinente indiano";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Você será capaz de executar aplicativos sem conexão com a internet.";
   @override
   String get plant_flower => "Flores";
   @override
@@ -2071,7 +2071,7 @@ class $lt extends S {
   @override
   String get legend => "Legenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Atsijungęs režimas";
   @override
   String get feedback_submit_translate_data => "Pagerinkite gėlių duomenis";
   @override
@@ -2313,7 +2313,7 @@ class $lt extends S {
   @override
   String get indian_subcontinent => "Indijos subkontinentas";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Galėsite paleisti programą be interneto ryšio.";
   @override
   String get plant_flower => "Žiedas";
   @override
@@ -2443,7 +2443,7 @@ class $hr extends S {
   @override
   String get legend => "Legenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Izvanmrežni način";
   @override
   String get feedback_submit_translate_data => "Poboljšajte podatke o cvijetu";
   @override
@@ -2685,7 +2685,7 @@ class $hr extends S {
   @override
   String get indian_subcontinent => "Indijski potkontinent";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Moći ćete pokrenuti aplikaciju bez internetske veze.";
   @override
   String get plant_flower => "Cvijeće";
   @override
@@ -2813,7 +2813,7 @@ class $lv extends S {
   @override
   String get legend => "Leģenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Bezsaistes režīms";
   @override
   String get feedback_submit_translate_data => "Uzlabojiet ziedu datus";
   @override
@@ -3055,7 +3055,7 @@ class $lv extends S {
   @override
   String get indian_subcontinent => "Indijas subkontinents";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Jūs varēsiet palaist programmu bez interneta pieslēguma.";
   @override
   String get plant_flower => "Zieds";
   @override
@@ -3185,7 +3185,7 @@ class $fr extends S {
   @override
   String get legend => "Légende";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Mode hors-ligne";
   @override
   String get feedback_submit_translate_data => "Améliorer les données de la fleur";
   @override
@@ -3427,7 +3427,7 @@ class $fr extends S {
   @override
   String get indian_subcontinent => "Sous-continent indien";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Vous pourrez exécuter une application sans connexion Internet.";
   @override
   String get plant_flower => "Fleurs";
   @override
@@ -3557,7 +3557,7 @@ class $hu extends S {
   @override
   String get legend => "Jelmagyarázat";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Offline módban";
   @override
   String get feedback_submit_translate_data => "Javítani kell a virágadatokat";
   @override
@@ -3799,7 +3799,7 @@ class $hu extends S {
   @override
   String get indian_subcontinent => "Indiai szubkontinens";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Internetes kapcsolat nélkül is futtathatja az alkalmazást.";
   @override
   String get plant_flower => "Virágok";
   @override
@@ -3929,7 +3929,7 @@ class $uk extends S {
   @override
   String get legend => "Легенда";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Автономний режим";
   @override
   String get feedback_submit_translate_data => "Покращити дані квітки";
   @override
@@ -4171,7 +4171,7 @@ class $uk extends S {
   @override
   String get indian_subcontinent => "Індійський субконтинент";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Ви зможете запускати програму без підключення до Інтернету.";
   @override
   String get plant_flower => "Квіти";
   @override
@@ -4301,7 +4301,7 @@ class $sk extends S {
   @override
   String get legend => "Legenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Režm offline";
   @override
   String get feedback_submit_translate_data => "Opraviť chyby v dátach";
   @override
@@ -4539,7 +4539,7 @@ class $sk extends S {
   @override
   String get indian_subcontinent => "Indický subkontinent";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Aplikáciu budete môcť spustiť bez pripojenia k internetu.";
   @override
   String get plant_flower => "Kvety";
   @override
@@ -4645,7 +4645,7 @@ class $sk extends S {
   @override
   String get product_no_ads_title => "Žiadna nežiadúca reklama";
   @override
-  String get offline_title => "Offline mód";
+  String get offline_title => "Režm offline";
   @override
   String get petal_zygomorphic => "nepravidelný";
   @override
@@ -4667,7 +4667,7 @@ class $sl extends S {
   @override
   String get legend => "Legenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Način brez povezave";
   @override
   String get feedback_submit_translate_data => "Izboljšajte podatke o cvetju";
   @override
@@ -4909,7 +4909,7 @@ class $sl extends S {
   @override
   String get indian_subcontinent => "Indijski podcelini";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Aplikacijo lahko zaženete brez internetne povezave.";
   @override
   String get plant_flower => "Cvetje";
   @override
@@ -5039,7 +5039,7 @@ class $id extends S {
   @override
   String get legend => "Legenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Mode offline";
   @override
   String get feedback_submit_translate_data => "Perbaiki data bunga";
   @override
@@ -5281,7 +5281,7 @@ class $id extends S {
   @override
   String get indian_subcontinent => "Sub Benua India";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Anda dapat menjalankan aplikasi tanpa koneksi internet.";
   @override
   String get plant_flower => "Bunga";
   @override
@@ -5411,7 +5411,7 @@ class $sr extends S {
   @override
   String get legend => "Легенда";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Режим ван мреже";
   @override
   String get feedback_submit_translate_data => "Побољшајте податке о цвету";
   @override
@@ -5653,7 +5653,7 @@ class $sr extends S {
   @override
   String get indian_subcontinent => "Индијски подконтинент";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Моћи ћете покренути апликацију без интернет везе.";
   @override
   String get plant_flower => "Цвеће";
   @override
@@ -5783,7 +5783,7 @@ class $sv extends S {
   @override
   String get legend => "Legend";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Offlineläge";
   @override
   String get feedback_submit_translate_data => "Förbättra blommans data";
   @override
@@ -6025,7 +6025,7 @@ class $sv extends S {
   @override
   String get indian_subcontinent => "Indiska subkontinenten";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Du kan köra program utan internetanslutning.";
   @override
   String get plant_flower => "Blomma";
   @override
@@ -6159,7 +6159,7 @@ class $it extends S {
   @override
   String get legend => "Legenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Modalità offline";
   @override
   String get feedback_submit_translate_data => "Migliorare le informazioni sui fiori";
   @override
@@ -6401,7 +6401,7 @@ class $it extends S {
   @override
   String get indian_subcontinent => "Subcontinente indiano";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Sarai in grado di eseguire l'applicazione senza connessione a Internet.";
   @override
   String get plant_flower => "Fiori";
   @override
@@ -6531,7 +6531,7 @@ class $es extends S {
   @override
   String get legend => "Leyenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Modo offline";
   @override
   String get feedback_submit_translate_data => "Mejorar los datos de la flor.";
   @override
@@ -6773,7 +6773,7 @@ class $es extends S {
   @override
   String get indian_subcontinent => "Subcontinente indio";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Podrás ejecutar la aplicación sin conexión a internet.";
   @override
   String get plant_flower => "Flores";
   @override
@@ -6903,7 +6903,7 @@ class $et extends S {
   @override
   String get legend => "Legend";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Võrguühenduseta režiim";
   @override
   String get feedback_submit_translate_data => "Parandage lilli andmeid";
   @override
@@ -7145,7 +7145,7 @@ class $et extends S {
   @override
   String get indian_subcontinent => "India subkontinent";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Teil on võimalik käivitada rakendust ilma internetiühenduseta.";
   @override
   String get plant_flower => "Õis";
   @override
@@ -7275,7 +7275,7 @@ class $cs extends S {
   @override
   String get legend => "Legenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Offline režim";
   @override
   String get feedback_submit_translate_data => "Opravit chyby datech";
   @override
@@ -7517,7 +7517,7 @@ class $cs extends S {
   @override
   String get indian_subcontinent => "Indický subkontinent";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Aplikace poběží i bez připojení k internetu.";
   @override
   String get plant_flower => "Květ";
   @override
@@ -7647,7 +7647,7 @@ class $ar extends S {
   @override
   String get legend => "مفتاح";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "غير متصل بالشبكة";
   @override
   String get feedback_submit_translate_data => "تحسين بيانات الزهور";
   @override
@@ -7889,7 +7889,7 @@ class $ar extends S {
   @override
   String get indian_subcontinent => "شبه القارة الهندية";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "ستتمكن من تشغيل التطبيق دون اتصال بالإنترنت.";
   @override
   String get plant_flower => "زهور";
   @override
@@ -8019,7 +8019,7 @@ class $pa extends S {
   @override
   String get legend => "ਦੰਤਕਥਾ";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "ਔਫਲਾਈਨ ਮੋਡ";
   @override
   String get feedback_submit_translate_data => "ਫੁੱਲ ਦਾ ਡਾਟਾ ਸੁਧਾਰੋ";
   @override
@@ -8261,7 +8261,7 @@ class $pa extends S {
   @override
   String get indian_subcontinent => "ਭਾਰਤੀ ਉਪ ਮਹਾਂਦੀਪ";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "ਤੁਸੀਂ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਤੋਂ ਬਿਨਾਂ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਚਲਾਉਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ.";
   @override
   String get plant_flower => "ਫੁੱਲ";
   @override
@@ -8391,7 +8391,7 @@ class $nb extends S {
   @override
   String get legend => "Legende";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Frakoblet modus";
   @override
   String get feedback_submit_translate_data => "Forbedre blomstens data";
   @override
@@ -8633,7 +8633,7 @@ class $nb extends S {
   @override
   String get indian_subcontinent => "Indisk subkontinent";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Du kan kjøre program uten Internett-tilkobling.";
   @override
   String get plant_flower => "Blomst";
   @override
@@ -8775,7 +8775,7 @@ class $ja extends S {
   @override
   String get legend => "伝説";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "オフラインモード";
   @override
   String get feedback_submit_translate_data => "花のデータを改善する";
   @override
@@ -9017,7 +9017,7 @@ class $ja extends S {
   @override
   String get indian_subcontinent => "インド亜大陸";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "あなたはインターネットに接続せずにアプリケーションを実行することができるでしょう。";
   @override
   String get plant_flower => "花";
   @override
@@ -9147,7 +9147,7 @@ class $fa extends S {
   @override
   String get legend => "افسانه";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "حالت آفلاین";
   @override
   String get feedback_submit_translate_data => "اطلاعات گل را بهبود بخشید";
   @override
@@ -9387,7 +9387,7 @@ class $fa extends S {
   @override
   String get indian_subcontinent => "شبه قاره هند";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "شما قادر به اجرای برنامه بدون اتصال به اینترنت خواهید بود.";
   @override
   String get plant_flower => "گل ها";
   @override
@@ -9515,7 +9515,7 @@ class $pl extends S {
   @override
   String get legend => "Legenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Tryb offline";
   @override
   String get feedback_submit_translate_data => "Poprawienie informacji dot. kwiatów";
   @override
@@ -9757,7 +9757,7 @@ class $pl extends S {
   @override
   String get indian_subcontinent => "Subkontynent indyjski";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Będziesz mógł uruchomić aplikację bez połączenia z Internetem.";
   @override
   String get plant_flower => "Kwiaty";
   @override
@@ -9887,7 +9887,7 @@ class $da extends S {
   @override
   String get legend => "Legende";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Offline-tilstand";
   @override
   String get snack_copy => "Kopieret til udklipsholderen";
   @override
@@ -10125,7 +10125,7 @@ class $da extends S {
   @override
   String get indian_subcontinent => "Indiske subkontinent";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Du kan køre applikation uden internetforbindelse.";
   @override
   String get plant_flower => "Blomstre";
   @override
@@ -10253,7 +10253,7 @@ class $he extends S {
   @override
   String get legend => "אגדה";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "מצב לא מקוון";
   @override
   String get feedback_submit_translate_data => "שפר את נתוני הפרחים";
   @override
@@ -10495,7 +10495,7 @@ class $he extends S {
   @override
   String get indian_subcontinent => "תת היבשת ההודית";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "תוכל להפעיל את היישום ללא חיבור לאינטרנט.";
   @override
   String get plant_flower => "פרח";
   @override
@@ -10625,7 +10625,7 @@ class $ro extends S {
   @override
   String get legend => "Legendă";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Modul offline";
   @override
   String get feedback_submit_translate_data => "Îmbunătățiți datele florii";
   @override
@@ -10867,7 +10867,7 @@ class $ro extends S {
   @override
   String get indian_subcontinent => "Subcontinentul indian";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "Veți putea rula aplicația fără conexiune la internet.";
   @override
   String get plant_flower => "Flori";
   @override
@@ -10997,7 +10997,7 @@ class $nl extends S {
   @override
   String get legend => "Legenda";
   @override
-  String get product_offline_title => "Offline mode";
+  String get product_offline_title => "Offline modus";
   @override
   String get feedback_submit_translate_data => "Verbeter de gegevens over de bloemen";
   @override
@@ -11239,7 +11239,7 @@ class $nl extends S {
   @override
   String get indian_subcontinent => "Indisch subcontinent";
   @override
-  String get product_offline_description => "You'll be able to run application without internet connection.";
+  String get product_offline_description => "U kunt de toepassing uitvoeren zonder internetverbinding.";
   @override
   String get plant_flower => "Bloemen";
   @override
