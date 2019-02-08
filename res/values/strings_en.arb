@@ -33,7 +33,7 @@
   "offline_subtitle": "requires 300+ MB additional space.",
   "offline_download_message": "You're going to download 300+ MB of photos and illustrations. Please check if your device is connected to wi-fi. Are you ready for a download?",
   "offline_download_progress": "Downloading photos and illustrations...",
-  "offline_download_success": "Photos and illustrations successfully downloaded.",
+  "offline_download_success": "Photos and illustrations have been successfully downloaded.",
   "offline_download_fail": "Download failed. Please check your internet connection or free space on device and try again.",
   "offline_delete_message": "Do you want to delete offline data?",
   "offline_download": "Resume download",
