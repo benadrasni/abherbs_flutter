@@ -314,7 +314,7 @@ Widget _getNames(BuildContext context, Plant plant, PlantTranslation plantTransl
   var names = <Widget>[];
   names.add(GestureDetector(
     child: Text(
-      plantTranslation.label,
+      plantTranslation.label ?? plant.name,
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 22.0,
