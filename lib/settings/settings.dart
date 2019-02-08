@@ -3,17 +3,18 @@ import 'dart:async';
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/offline.dart';
+import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/settings/setting_my_filter.dart';
 import 'package:abherbs_flutter/settings/setting_my_region.dart';
 import 'package:abherbs_flutter/settings/setting_offline.dart';
 import 'package:abherbs_flutter/settings/setting_pref_language.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
-import 'package:abherbs_flutter/offline.dart';
-import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
-import 'package:abherbs_flutter/preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -25,6 +26,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  FirebaseAnalytics _firebaseAnalytics;
   Future<String> _prefLanguageF;
   String _prefLanguage;
   Future<String> _myRegionF;
@@ -34,6 +36,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void _resetPrefLanguage() {
     Prefs.setString(keyPreferredLanguage, null).then((bool success) {
+      _logPrefLanguageEvent('default');
       Navigator.pop(context);
       widget.onChangeLanguage('');
     });
@@ -45,6 +48,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _prefLanguageF.then((language) {
         if (language != _prefLanguage) {
           _prefLanguage = language;
+          _logPrefLanguageEvent(language);
           widget.onChangeLanguage(_prefLanguage);
         }
         return language;
@@ -138,9 +142,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  Future<void> _logPrefLanguageEvent(String language) async {
+    await _firebaseAnalytics.logEvent(name: 'setting', parameters: {
+      'type': 'preffered_language',
+      'language': language
+    });
+  }
+
+  Future<void> _logMyRegionEvent(String region) async {
+    await _firebaseAnalytics.logEvent(name: 'setting', parameters: {
+      'type': 'my_region',
+      'region': region
+    });
+  }
+
+  Future<void> _logMyFilterEvent(String filter) async {
+    await _firebaseAnalytics.logEvent(name: 'setting', parameters: {
+      'type': 'my_filter',
+      'region': filter
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _firebaseAnalytics = FirebaseAnalytics();
     _prefLanguageF = Prefs.getStringF(keyPreferredLanguage);
     _prefLanguageF.then((language) {
       _prefLanguage = language;
@@ -231,7 +257,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           MaterialPageRoute(builder: (context) => SettingMyRegion()),
         ).then((result) {
           setState(() {
-            _myRegionF = Prefs.getStringF(keyMyRegion);
+            _myRegionF = Prefs.getStringF(keyMyRegion).then((value) {
+              _logMyRegionEvent(value);
+              return value;
+            });
           });
         });
       },
@@ -311,6 +340,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             setState(() {
               _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
                 Preferences.myFilterAttributes = myFilter;
+                _logMyFilterEvent(myFilter.join(', '));
                 return myFilter;
               });
             });
