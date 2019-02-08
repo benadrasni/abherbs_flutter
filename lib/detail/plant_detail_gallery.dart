@@ -13,10 +13,9 @@ Widget _getImageButton(String url) {
       image: AssetImage('res/images/placeholder.webp'),
     ),
   ]);
-  return FlatButton(
+  return Container(
     padding: EdgeInsets.all(10.0),
     child: getImage(url, placeholder),
-    onPressed: () {},
   );
 }
 
