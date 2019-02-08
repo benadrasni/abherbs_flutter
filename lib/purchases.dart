@@ -43,12 +43,11 @@ class Purchases {
   }
 
   static bool isOffline() {
-//    for (PurchasedItem product in purchases) {
-//      if (product.productId == productOffline) {
-//        return true;
-//      }
-//    }
-//    return false;
-    return true;
+    for (PurchasedItem product in purchases) {
+      if (product.productId == productOffline) {
+        return true;
+      }
+    }
+    return false;
   }
 }
