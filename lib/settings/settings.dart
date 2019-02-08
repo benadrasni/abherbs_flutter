@@ -330,8 +330,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       S.of(context).offline_title,
                       style: titleTextStyle,
                     )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           S.of(context).offline_title,

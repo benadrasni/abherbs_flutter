@@ -64,6 +64,7 @@ class Offline {
       downloadFinished = results.reduce((x, y) => x && y);
       if (downloadPaused) {
         downloadPaused = false;
+        downloadFinished = false;
       } else if (downloadFinished) {
         onDownloadFinish();
       } else {
