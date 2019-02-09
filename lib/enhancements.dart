@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +21,8 @@ class EnhancementsMerged {
 class EnhancementsScreen extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
-  EnhancementsScreen(this.onChangeLanguage, this.onBuyProduct);
+  final Map<String, String> filter;
+  EnhancementsScreen(this.onChangeLanguage, this.onBuyProduct, this.filter);
 
   @override
   _EnhancementsScreenState createState() => new _EnhancementsScreenState();
@@ -45,9 +47,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
   Future<List<PurchasedItem>> _purchasesF;
 
   Future<void> _logFailedPurchaseEvent(String productId) async {
-    await _firebaseAnalytics.logEvent(name: 'purchase_failed', parameters: {
-      'productId': productId
-    });
+    await _firebaseAnalytics.logEvent(name: 'purchase_failed', parameters: {'productId': productId});
   }
 
   @override
@@ -58,6 +58,51 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     _purchasesF = FlutterInappPurchase.getAvailablePurchases();
 
     Ads.hideBannerAd();
+  }
+
+  List<Widget> _getButtons(IAPItem product, bool isPurchased, key) {
+    var buttons = <Widget>[];
+    buttons.add(
+      RaisedButton(
+        color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
+        onPressed: () {
+          if (!isPurchased) {
+            FlutterInappPurchase.buyProduct(product.productId).then((PurchasedItem purchased) {
+              widget.onBuyProduct(purchased);
+            }).catchError((error) {
+              _logFailedPurchaseEvent(product.productId);
+              if (key.currentState.mounted) {
+                key.currentState.showSnackBar(new SnackBar(
+                  content: new Text(S.of(context).product_purchase_failed),
+                ));
+              }
+            });
+          }
+        },
+        child: Text(
+          isPurchased ? S.of(context).product_purchased : S.of(context).product_purchase,
+          style: TextStyle(color: isPurchased ? Colors.black : Colors.white),
+        ),
+      ),
+    );
+
+    if ([productOffline, productCustomFilter].contains(product.productId)) {
+      buttons.add(RaisedButton(
+        color: Theme.of(context).accentColor,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter)),
+          );
+        },
+        child: Text(
+          S.of(context).settings,
+          style: TextStyle(color: Colors.white),
+        ),
+      ));
+    }
+
+    return buttons;
   }
 
   @override
@@ -143,27 +188,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                           textAlign: TextAlign.start,
                         ),
                         SizedBox(height: 10.0),
-                        RaisedButton(
-                          color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
-                          onPressed: () {
-                            if (!isPurchased) {
-                              FlutterInappPurchase.buyProduct(product.productId).then((PurchasedItem purchased) {
-                                widget.onBuyProduct(purchased);
-                              }).catchError((error) {
-                                _logFailedPurchaseEvent(product.productId);
-                                if (key.currentState.mounted) {
-                                  key.currentState.showSnackBar(new SnackBar(
-                                    content: new Text(S.of(context).product_purchase_failed),
-                                  ));
-                                }
-                              });
-                            }
-                          },
-                          child: Text(
-                            isPurchased ? S.of(context).product_purchased : S.of(context).product_purchase,
-                            style: TextStyle(color: isPurchased ? Colors.black : Colors.white),
-                          ),
-                        ),
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: _getButtons(product, isPurchased, key)),
                       ]),
                     ),
                   );
