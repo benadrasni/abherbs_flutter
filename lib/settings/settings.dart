@@ -119,7 +119,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           content: Text(S.of(context).offline_delete_message),
           actions: <Widget>[
             FlatButton(
-              child: Text(S.of(context).yes),
+              child: Text(S.of(context).yes.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
               onPressed: () {
                 Navigator.of(context).pop();
                 setState(() {
@@ -131,7 +131,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               },
             ),
             FlatButton(
-              child: Text(S.of(context).no),
+              child: Text(S.of(context).no.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
               onPressed: () {
                 Navigator.of(context).pop();
               },

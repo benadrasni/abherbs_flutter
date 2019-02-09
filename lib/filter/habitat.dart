@@ -82,7 +82,7 @@ class _HabitatState extends State<Habitat> {
       key: _key,
       appBar: new AppBar(
         title: new Text(S.of(context).filter_habitat),
-        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct),
+        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
       body: Stack(

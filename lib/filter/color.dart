@@ -328,7 +328,7 @@ class _ColorState extends State<Color> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
-        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct),
+        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
       body: Stack(

@@ -103,11 +103,11 @@ Widget getImage(String url, Widget placeholder, {double width, double height}) {
       builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data != null) {
-            return Image.file(snapshot.data, fit: BoxFit.scaleDown, width: width, height: height);
+            return Image.file(snapshot.data, fit: BoxFit.contain, width: width, height: height);
           }
 
           return CachedNetworkImage(
-            fit: BoxFit.scaleDown,
+            fit: BoxFit.contain,
             width: width,
             height: height,
             placeholder: placeholder,
@@ -197,7 +197,7 @@ Icon getIcon(String productId) {
   }
 }
 
-List<Widget> getActions(BuildContext context, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct) {
+List<Widget> getActions(BuildContext context, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
   var _actions = <Widget>[];
   _actions.add(IconButton(
     icon: getIcon(productSearch),
@@ -210,7 +210,7 @@ List<Widget> getActions(BuildContext context, Function(String) onChangeLanguage,
       } else {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct)),
+          MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
         );
       }
     },

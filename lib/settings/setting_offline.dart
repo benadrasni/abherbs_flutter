@@ -86,7 +86,7 @@ class _SettingOfflineState extends State<SettingOffline> {
         );
         _content = Text(S.of(context).offline_download_message);
         _actions.add(FlatButton(
-          child: Text(S.of(context).yes),
+          child: Text(S.of(context).yes.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             _logOfflineDownloadEvent('started');
             setState(() {
@@ -96,7 +96,7 @@ class _SettingOfflineState extends State<SettingOffline> {
           },
         ));
         _actions.add(FlatButton(
-          child: Text(S.of(context).no),
+          child: Text(S.of(context).no.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -115,7 +115,7 @@ class _SettingOfflineState extends State<SettingOffline> {
           progressColor: Theme.of(context).accentColor,
         );
         _actions.add(FlatButton(
-          child: Text(S.of(context).pause),
+          child: Text(S.of(context).pause.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             _logOfflineDownloadEvent('paused');
             Offline.downloadPaused = true;
@@ -129,7 +129,7 @@ class _SettingOfflineState extends State<SettingOffline> {
         );
         _content = Text(S.of(context).offline_download_success);
         _actions.add(FlatButton(
-          child: Text(S.of(context).close),
+          child: Text(S.of(context).close.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -141,7 +141,7 @@ class _SettingOfflineState extends State<SettingOffline> {
         );
         _content = Text(S.of(context).offline_download_fail);
         _actions.add(FlatButton(
-          child: Text(S.of(context).close),
+          child: Text(S.of(context).close.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Navigator.of(context).pop();
           },
