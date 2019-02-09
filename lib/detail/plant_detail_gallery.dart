@@ -55,7 +55,7 @@ Widget getGallery(BuildContext context, Future<Plant> _plantF) {
               children: cards,
             );
           default:
-            return Column(mainAxisAlignment: MainAxisAlignment.center, children: [CircularProgressIndicator()]);
+            return Center(child: CircularProgressIndicator());
         }
       });
 }
