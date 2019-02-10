@@ -18,6 +18,8 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:screen/screen.dart';
+import 'package:connectivity/connectivity.dart';
+
 
 void main() async {
   FlutterError.onError = (FlutterErrorDetails details) {
@@ -64,6 +66,7 @@ class _AppState extends State<App> {
   onBuyProduct(PurchasedItem purchased) {
     setState(() {
       Purchases.purchases.add(purchased);
+      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
     });
   }
 
@@ -107,18 +110,27 @@ class _AppState extends State<App> {
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIos: 5);
-    Purchases.isAllowed = false;
     Purchases.purchases = <PurchasedItem>[];
   }
 
   void _initPlatformState() async {
     FlutterInappPurchase.initConnection.then((value) {
-      FlutterInappPurchase.getAvailablePurchases().then((value) {
-        Purchases.isAllowed = true;
-        Purchases.purchases = value;
-        Offline.initialize();
-      }).catchError((error) {
-        _iapError();
+      Connectivity().checkConnectivity().then((result) {
+        // TODO check for a fix: when iOS is offline it doesn't return purchased products
+        if (Platform.isIOS && result == ConnectivityResult.none) {
+          Prefs.getStringListF(keyPurchases, []).then((products) {
+            Purchases.purchases = products.map((productId) => Purchases.offlineProducts[productId]).toList();
+            Offline.initialize();
+          });
+        } else {
+          FlutterInappPurchase.getAvailablePurchases().then((value) {
+            Purchases.purchases = value;
+            Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
+            Offline.initialize();
+          }).catchError((error) {
+            _iapError();
+          });
+        }
       });
     }).catchError((error) {
       _iapError();

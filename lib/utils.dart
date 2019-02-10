@@ -27,6 +27,7 @@ const String keyOfflineFamily = "offline_family";
 const String keyRateState = "rate_state";
 const String keyRateCount = "rate_count";
 const String keyMyFilter = "my_filter";
+const String keyPurchases = "purchases";
 const int rateCountInitial = 5;
 const String rateStateInitial = "";
 const String rateStateNever = "never";
