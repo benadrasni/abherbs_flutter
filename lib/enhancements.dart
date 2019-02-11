@@ -58,7 +58,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     super.initState();
     _firebaseAnalytics = FirebaseAnalytics();
     _productsF = Connectivity().checkConnectivity().then((result) {
-      if (Platform.isIOS && result == ConnectivityResult.none) {
+      if (result == ConnectivityResult.none) {
         throw PlatformException(
             code: Platform.operatingSystem, message: "IAP not prepared. Check if Platform service is available.");
       } else {
