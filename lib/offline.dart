@@ -46,15 +46,19 @@ class Offline {
     reference.child(firebasePlantHeaders).keepSynced(value);
     reference.child(firebasePlants).keepSynced(value);
     reference.child(firebaseAPGIV).keepSynced(value);
-    reference.child(firebaseSearch).child(languageLatin).keepSynced(value);
-    reference.child(firebaseSearch).child(languageEnglish).keepSynced(value);
+    if (Purchases.isSearch()) {
+      reference.child(firebaseSearch).child(languageLatin).keepSynced(value);
+      reference.child(firebaseSearch).child(languageEnglish).keepSynced(value);
+    }
     reference.child(firebasePlantsToUpdate).keepSynced(value);
     reference.child(firebaseFamiliesToUpdate).keepSynced(value);
     Prefs.getStringF(keyLanguage, languageEnglish).then((language) {
       reference.child(firebaseTranslations).child(language).keepSynced(value);
       reference.child(firebaseTranslations).child(language + languageGTSuffix).keepSynced(value);
       reference.child(firebaseTranslationsTaxonomy).child(language).keepSynced(value);
-      reference.child(firebaseSearch).child(language).keepSynced(value);
+      if (Purchases.isSearch()) {
+        reference.child(firebaseSearch).child(language).keepSynced(value);
+      }
     });
   }
 
