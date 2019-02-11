@@ -14,6 +14,7 @@ class Offline {
   static String rootPath;
   static bool downloadFinished = false;
   static bool downloadPaused = false;
+  static List<bool> keepSynced = [false, false, false, false];
 
   static void initialize() {
     getApplicationDocumentsDirectory().then((dir) {
@@ -24,7 +25,6 @@ class Offline {
       FirebaseDatabase.instance.setPersistenceEnabled(true);
       FirebaseDatabase.instance.setPersistenceCacheSizeBytes(firebaseCacheSize);
 
-      setKeepSynced(true);
       Prefs.getBoolF(keyOffline, false).then((value) {
         if (value) {
           Prefs.getIntF(keyOfflinePlant, 0).then((value) {
@@ -39,27 +39,52 @@ class Offline {
     }
   }
 
-  static void setKeepSynced(bool value) {
-    var reference = FirebaseDatabase.instance.reference();
-    reference.child(firebaseCounts).keepSynced(value);
-    reference.child(firebaseLists).keepSynced(value);
-    reference.child(firebasePlantHeaders).keepSynced(value);
-    reference.child(firebasePlants).keepSynced(value);
-    reference.child(firebaseAPGIV).keepSynced(value);
-    if (Purchases.isSearch()) {
-      reference.child(firebaseSearch).child(languageLatin).keepSynced(value);
-      reference.child(firebaseSearch).child(languageEnglish).keepSynced(value);
+  static void setKeepSynced1(bool value) {
+    if (Purchases.isOffline() && !keepSynced[0]) {
+      var reference = FirebaseDatabase.instance.reference();
+      reference.child(firebaseCounts).keepSynced(value);
+      reference.child(firebaseLists).keepSynced(value);
+      keepSynced[0] = true;
     }
-    reference.child(firebasePlantsToUpdate).keepSynced(value);
-    reference.child(firebaseFamiliesToUpdate).keepSynced(value);
-    Prefs.getStringF(keyLanguage, languageEnglish).then((language) {
-      reference.child(firebaseTranslations).child(language).keepSynced(value);
-      reference.child(firebaseTranslations).child(language + languageGTSuffix).keepSynced(value);
-      reference.child(firebaseTranslationsTaxonomy).child(language).keepSynced(value);
+  }
+
+  static void setKeepSynced2(bool value) {
+    if (Purchases.isOffline() && !keepSynced[1]) {
+      var reference = FirebaseDatabase.instance.reference();
+      reference.child(firebasePlantHeaders).keepSynced(value);
+      reference.child(firebasePlants).keepSynced(value);
+      keepSynced[1] = true;
+    }
+  }
+
+  static void setKeepSynced3(bool value) {
+    if (Purchases.isOffline() && !keepSynced[2]) {
+      var reference = FirebaseDatabase.instance.reference();
+      reference.child(firebaseTranslations).child(languageEnglish).keepSynced(value);
+      Prefs.getStringF(keyLanguage, languageEnglish).then((language) {
+        reference.child(firebaseTranslations).child(language).keepSynced(value);
+        reference.child(firebaseTranslations).child(language + languageGTSuffix).keepSynced(value);
+        reference.child(firebaseTranslationsTaxonomy).child(language).keepSynced(value);
+      });
+      keepSynced[2] = true;
+    }
+  }
+
+  static void setKeepSynced4(bool value) {
+    if (Purchases.isOffline() && !keepSynced[3]) {
+      var reference = FirebaseDatabase.instance.reference();
       if (Purchases.isSearch()) {
-        reference.child(firebaseSearch).child(language).keepSynced(value);
+        reference.child(firebaseAPGIV).keepSynced(value);
+        reference.child(firebaseSearch).child(languageLatin).keepSynced(value);
+        reference.child(firebaseSearch).child(languageEnglish).keepSynced(value);
+        Prefs.getStringF(keyLanguage, languageEnglish).then((language) {
+          if (language != languageEnglish) {
+            reference.child(firebaseSearch).child(language).keepSynced(value);
+          }
+        });
       }
-    });
+      keepSynced[3] = true;
+    }
   }
 
   static void download(
@@ -187,7 +212,10 @@ class Offline {
   }
 
   static Future<void> delete() async {
-    setKeepSynced(false);
+    setKeepSynced1(false);
+    setKeepSynced2(false);
+    setKeepSynced3(false);
+    setKeepSynced4(false);
     if (rootPath == null) {
       rootPath = (await getApplicationDocumentsDirectory()).path;
     }
