@@ -14,6 +14,8 @@ class Offline {
   static String rootPath;
   static bool downloadFinished = false;
   static bool downloadPaused = false;
+  static bool downloadDB = false;
+  static String downloadDBDate;
   static List<bool> keepSynced = [false, false, false, false];
 
   static void initialize() {
@@ -36,30 +38,49 @@ class Offline {
           downloadFinished = false;
         }
       });
+
+      FirebaseDatabase.instance.reference().child(firebaseVersions).child(firebaseAttributeLastUpdate).once().then((DataSnapshot snapshot) {
+        if (snapshot.value != null) {
+          Prefs.getStringF(keyOfflineDB, '').then((value) {
+            downloadDBDate = snapshot.value;
+            DateTime dbUpdate = DateTime.parse(downloadDBDate);
+            downloadDB = value.isEmpty || dbUpdate.isAfter(DateTime.parse(value));
+          });
+        }
+      });
+    }
+  }
+
+  static void finalizeDownloadDB() {
+    if (Purchases.isOffline() && keepSynced.reduce((value, item) => value && item)) {
+      Prefs.setString(keyOfflineDB, downloadDBDate);
+      downloadDB = false;
     }
   }
 
   static void setKeepSynced1(bool value) {
-    if (Purchases.isOffline() && !keepSynced[0]) {
+    if (Purchases.isOffline() && downloadDB && !keepSynced[0]) {
       var reference = FirebaseDatabase.instance.reference();
       reference.child(firebaseCounts).keepSynced(value);
-      reference.child(firebaseLists).keepSynced(value);
       keepSynced[0] = true;
+      finalizeDownloadDB();
     }
   }
 
   static void setKeepSynced2(bool value) {
-    if (Purchases.isOffline() && !keepSynced[1]) {
+    if (Purchases.isOffline() && downloadDB && !keepSynced[1]) {
       var reference = FirebaseDatabase.instance.reference();
+      reference.child(firebaseLists).keepSynced(value);
       reference.child(firebasePlantHeaders).keepSynced(value);
-      reference.child(firebasePlants).keepSynced(value);
       keepSynced[1] = true;
+      finalizeDownloadDB();
     }
   }
 
   static void setKeepSynced3(bool value) {
-    if (Purchases.isOffline() && !keepSynced[2]) {
+    if (Purchases.isOffline() && downloadDB && !keepSynced[2]) {
       var reference = FirebaseDatabase.instance.reference();
+      reference.child(firebasePlants).keepSynced(value);
       reference.child(firebaseTranslations).child(languageEnglish).keepSynced(value);
       Prefs.getStringF(keyLanguage, languageEnglish).then((language) {
         reference.child(firebaseTranslations).child(language).keepSynced(value);
@@ -67,11 +88,12 @@ class Offline {
         reference.child(firebaseTranslationsTaxonomy).child(language).keepSynced(value);
       });
       keepSynced[2] = true;
+      finalizeDownloadDB();
     }
   }
 
   static void setKeepSynced4(bool value) {
-    if (Purchases.isOffline() && !keepSynced[3]) {
+    if (Purchases.isOffline() && downloadDB && !keepSynced[3]) {
       var reference = FirebaseDatabase.instance.reference();
       if (Purchases.isSearch()) {
         reference.child(firebaseAPGIV).keepSynced(value);
@@ -84,6 +106,7 @@ class Offline {
         });
       }
       keepSynced[3] = true;
+      finalizeDownloadDB();
     }
   }
 

@@ -24,6 +24,7 @@ const String keyAlwaysMyRegion = "always_my_region";
 const String keyOffline = "offline";
 const String keyOfflinePlant = "offline_plant";
 const String keyOfflineFamily = "offline_family";
+const String keyOfflineDB = "offline_db";
 const String keyRateState = "rate_state";
 const String keyRateCount = "rate_count";
 const String keyMyFilter = "my_filter";
@@ -73,6 +74,7 @@ const String firebaseAttributeList = "list";
 const String firebaseAttributeCount = "count";
 const String firebaseAttributeIOS= "ios";
 const String firebaseAttributeAndroid= "android";
+const String firebaseAttributeLastUpdate= "db_update";
 
 bool get isInDebugMode {
   bool inDebugMode = false;
