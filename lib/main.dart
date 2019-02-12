@@ -18,6 +18,7 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:screen/screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   FlutterError.onError = (FlutterErrorDetails details) {
@@ -50,6 +51,9 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   FirebaseMessaging _firebaseMessaging;
   FirebaseAnalytics _firebaseAnalytics;
+  FirebaseAuth _firebaseAuth;
+  StreamSubscription<FirebaseUser> _listener;
+  FirebaseUser _currentUser;
   Map<String, dynamic> _notificationData;
   Future<Locale> _localeF;
 
@@ -133,6 +137,17 @@ class _AppState extends State<App> {
     });
   }
 
+  void _checkCurrentUser() async {
+    _currentUser = await _firebaseAuth.currentUser();
+    _currentUser?.getIdToken(refresh: true);
+
+    _listener = _firebaseAuth.onAuthStateChanged.listen((FirebaseUser user) {
+      setState(() {
+        _currentUser = user;
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -142,6 +157,10 @@ class _AppState extends State<App> {
 
     _firebaseMessaging = FirebaseMessaging();
     _firebaseAnalytics = FirebaseAnalytics();
+    _firebaseAuth = FirebaseAuth.instance;
+
+    _checkCurrentUser();
+
     _localeF = Prefs.getStringF(keyPreferredLanguage).then((String language) {
       return language.isEmpty ? null : Locale(language, '');
     });
