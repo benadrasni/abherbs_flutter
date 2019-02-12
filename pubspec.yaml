@@ -22,6 +22,7 @@ dependencies:
   firebase_messaging: 3.0.0
   firebase_admob: 0.8.0
   firebase_analytics: 2.0.0
+  firebase_auth: 0.8.1
   flutter_crashlytics:
     path: ../flutter_crashlytics
   flutter_inapp_purchase:
