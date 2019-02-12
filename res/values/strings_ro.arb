@@ -13,6 +13,8 @@
   "product_search_description": "Veți găsi o floare prin numele său românesc sau latin sau prin taxonul său (de exemplu, ordin, familie, gen).",
   "product_custom_filter_title": "Filtru customizat",
   "product_custom_filter_description": "Veți putea schimba ordinea implicită și numărul de filtre (culoare, habitatul, petală, distribuție).",
+  "product_offline_title": "Modul offline",
+  "product_offline_description": "Veți putea rula aplicația fără conexiune la internet.",
   "product_purchase": "Cumpărare",
   "product_purchase_failed": "Achiziționare eșuată",
   "product_purchased": "Cumparate",
@@ -24,8 +26,15 @@
   "my_region": "Regiunea mea",
   "always_my_region_title": "Adăugați întotdeauna regiunea mea la filtru",
   "always_my_region_subtitle": "Regiunea dvs. va fi pre-setată la filtru",
-
   "my_filter": "Filtrul meu",
+  "offline_title": "Modul offline",
+  "offline_subtitle": "necesită spațiu suplimentar de 300 MB.",
+  "offline_download_message": "Veți descărca 300 MB de fotografii și ilustrații. Verificați dacă dispozitivul dvs. este conectat la Wi-Fi. Sunteți gata pentru descărcare?",
+  "offline_download_progress": "Descărcarea de fotografii și ilustrații ...",
+  "offline_download_success": "Fotografii și ilustrații au fost descărcate cu succes.",
+  "offline_download_fail": "Descarcare esuata. Verificați conexiunea la internet sau spațiul liber pe dispozitiv și încercați din nou.",
+  "offline_delete_message": "Doriți să ștergeți datele offline?",
+  "offline_download": "Reia descărcarea",
 
   "feedback_intro": "Ați contribuit la această aplicație de când ați instalat-o pe dispozitiv, mulțumită. Dacă sunteți în căutarea pentru ceva mai mult, iată câteva opțiuni:",
   "feedback_review": "Puteți scrie o recenzie pozitivă.",
@@ -43,8 +52,12 @@
   "rate_never": "Niciodată",
   "rate_later": "Mai tarziu",
   "rate": "Review",
+  "new_version": "Versiunea nouă este disponibilă, actualizați-vă.",
+
   "yes": "Da",
   "no": "Nu",
+  "close": "Închide",
+  "pause": "Pauză",
 
   "filter_color": "culoare",
   "filter_habitat": "habitatul",

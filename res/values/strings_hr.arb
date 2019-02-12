@@ -13,6 +13,8 @@
   "product_search_description": "Cvijet ćete moći pronaći po njegovom hrvatskom ili latinskom nazivu ili po svojoj taksonu (npr. red, porodica, rod).",
   "product_custom_filter_title": "Prilagođeni filtar",
   "product_custom_filter_description": "Moći ćete promijeniti zadani redoslijed i broj filtara (boja, stanište, latica, distribucija).",
+  "product_offline_title": "Izvanmrežni način",
+  "product_offline_description": "Moći ćete pokrenuti aplikaciju bez internetske veze.",
   "product_purchase": "Kupiti",
   "product_purchase_failed": "Kupnja nije uspjela",
   "product_purchased": "Kupljen",
@@ -24,8 +26,15 @@
   "my_region": "Moja regija",
   "always_my_region_title": "Uvijek dodajte moju regiju filtru",
   "always_my_region_subtitle": "Vaša će regija biti unaprijed postavljena na filtar",
-
   "my_filter": "Moj filtar",
+  "offline_title": "Izvanmrežni način",
+  "offline_subtitle": "zahtijeva dodatni prostor od 300+ MB.",
+  "offline_download_message": "Preuzet ćete 300+ MB fotografija i ilustracija. Provjerite je li uređaj spojen na Wi-Fi. Jeste li spremni za preuzimanje?",
+  "offline_download_progress": "Preuzimanje fotografija i ilustracija ...",
+  "offline_download_success": "Fotografije i ilustracije uspješno su preuzete.",
+  "offline_download_fail": "Preuzimanje nije uspjelo. Provjerite internetsku vezu ili slobodan prostor na uređaju i pokušajte ponovno.",
+  "offline_delete_message": "Želite li izbrisati izvanmrežne podatke?",
+  "offline_download": "Nastavi preuzimanje",
 
   "feedback_intro": "Doprinosili ste ovoj aplikaciji jer ste je instalirali na svom uređaju, hvala. Ako tražite nešto više, evo nekoliko opcija:",
   "feedback_review": "Možete napisati pozitivnu recenziju.",
@@ -43,8 +52,12 @@
   "rate_never": "Nikada",
   "rate_later": "Kasnije",
   "rate": "Recenzije",
+  "new_version": "Dostupna je nova verzija, ažurirajte.",
+
   "yes": "Da",
   "no": "Ne",
+  "close": "Zatvoriti",
+  "pause": "Pauza",
 
   "filter_color": "boja",
   "filter_habitat": "stanište",

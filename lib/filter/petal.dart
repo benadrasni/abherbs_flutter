@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/utils.dart';
@@ -59,6 +60,7 @@ class _PetalState extends State<Petal> {
   @override
   void initState() {
     super.initState();
+    Offline.setKeepSynced1(true);
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterPetal);
@@ -81,7 +83,7 @@ class _PetalState extends State<Petal> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_petal),
-        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct),
+        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
       body: Stack(

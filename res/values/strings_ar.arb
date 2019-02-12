@@ -13,6 +13,8 @@
   "product_search_description": "ستتمكن من العثور على زهرة باسمها اللاتيني أو عن طريق صنفها (على سبيل المثال ، الرتبة ، الفصيلة ، الجنس.",
   "product_custom_filter_title": "تصفية مخصص",
   "product_custom_filter_description": "ستتمكن من تغيير الترتيب الافتراضي وعدد المرشحات (اللون ، موطن ، بتلة ، توزيع).",
+  "product_offline_title": "غير متصل بالشبكة",
+  "product_offline_description": "ستتمكن من تشغيل التطبيق دون اتصال بالإنترنت.",
   "product_purchase": "شراء",
   "product_purchase_failed": "الشراء لم ينجح",
   "product_purchased": "اشترى",
@@ -24,8 +26,15 @@
   "my_region": "منطقتي",
   "always_my_region_title": "أضف دائمًا منطقتي إلى الفلتر",
   "always_my_region_subtitle": "سيتم إعداد منطقتك مسبقًا على الفلتر",
-
   "my_filter": "مرشح بلدي",
+  "offline_title": "غير متصل بالشبكة",
+  "offline_subtitle": "يتطلب 300+ ميغابايت مساحة إضافية",
+  "offline_download_message": "ستقوم بتنزيل 300+ ميغابايت من الصور والرسوم التوضيحية. يرجى التحقق مما إذا كان جهازك متصلاً بشبكة wi-fi. هل أنت مستعد للتنزيل؟",
+  "offline_download_progress": "جارٍ تنزيل الصور والرسوم التوضيحية ...",
+  "offline_download_success": "تم تنزيل الصور والرسوم التوضيحية بنجاح.",
+  "offline_download_fail": "التحميل فشل. يرجى التحقق من اتصالك بالإنترنت أو المساحة الخالية على الجهاز وإعادة المحاولة.",
+  "offline_delete_message": "هل تريد حذف البيانات بلا اتصال؟",
+  "offline_download": "استئناف تحميل",
 
   "feedback_intro": "لقد ساهمت في هذا التطبيق منذ تثبيته على جهازك ، شكرًا. إذا كنت تبحث عن شيء أكثر ، فإليك بعض الخيارات:",
   "feedback_review": "يمكنك كتابة مراجعة إيجابية.",
@@ -43,8 +52,12 @@
   "rate_never": "أبدا",
   "rate_later": "في وقت لاحق",
   "rate": "إعادة النظر",
+  "new_version": "الإصدار الجديد هو متاح، يرجى تحديث.",
+
   "yes": "نعم فعلا",
   "no": "لا",
+  "close": "قريب",
+  "pause": "وقفة",
 
   "filter_color": "اللون",
   "filter_habitat": "موطن",

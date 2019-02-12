@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/detail/plant_detail.dart';
@@ -7,9 +6,9 @@ import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/firebase_animated_index_list.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
@@ -36,44 +35,30 @@ class PlantList extends StatefulWidget {
 class _PlantListState extends State<PlantList> {
   Future<int> _count;
   Map<String, String> _translationCache;
-  Random _random;
 
-  Widget _getImageWithAds(BuildContext context, Locale myLocale, String url, String name) {
-    var stack = FlatButton(
-          padding: EdgeInsets.all(10.0),
-          child: CachedNetworkImage(
-            fit: BoxFit.scaleDown,
-            placeholder: Stack(alignment: Alignment.center, children: [
-              CircularProgressIndicator(),
-              Image(
-                image: AssetImage('res/images/placeholder.webp'),
-              ),
-            ]),
-            imageUrl: storageEndpoit + storagePhotos + url,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, name)),
-            );
-          },
+  Widget _getImageButton(BuildContext context, Locale myLocale, String url, String name) {
+    var placeholder = Stack(alignment: Alignment.center, children: [
+      CircularProgressIndicator(),
+      Image(
+        image: AssetImage('res/images/placeholder.webp'),
+      ),
+    ]);
+    return FlatButton(
+      padding: EdgeInsets.all(10.0),
+      child: getImage(url, placeholder),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, name)),
         );
-
-    if (_random.nextInt(100) < adsFrequency) {
-      return Column(
-        children: [
-          stack,
-          getAdMobBanner(),
-        ],
-      );
-    } else {
-      return stack;
-    }
+      },
+    );
   }
 
   @override
   void initState() {
     super.initState();
+    Offline.setKeepSynced2(true);
 
     if (widget.count != null) {
       _count = Future<int>(() {
@@ -86,7 +71,6 @@ class _PlantListState extends State<PlantList> {
     }
 
     _translationCache = {};
-    _random = new Random();
 
     Ads.hideBannerAd();
   }
@@ -161,10 +145,11 @@ class _PlantListState extends State<PlantList> {
                                 }
                                 return Text(familyLocal);
                               }),
-                          leading: Image.network(
-                            storageEndpoit + storageFamilies + snapshot.value['family'] + defaultExtension,
+                          leading: getImage(
+                            storageFamilies + snapshot.value['family'] + defaultExtension,
+                              Container(width: 0.0, height: 0.0,),
                             width: 50.0,
-                            height: 50.0,
+                            height: 50.0
                           ),
                           onTap: () {
                             Navigator.push(
@@ -173,7 +158,7 @@ class _PlantListState extends State<PlantList> {
                             );
                           },
                         ),
-                        _getImageWithAds(context, myLocale, snapshot.value['url'], name),
+                        _getImageButton(context, myLocale, storagePhotos + snapshot.value['url'], name),
                       ]),
                     );
                   }),

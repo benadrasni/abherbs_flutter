@@ -13,6 +13,8 @@
   "product_search_description": "Sie finden eine Blume nach ihrem deutschen oder lateinischen Namen oder nach ihrem Taxon (z. B. Ordnung, Familie, Gattung).",
   "product_custom_filter_title": "Benutzerdefinierte Filter",
   "product_custom_filter_description": "Sie können die Standardreihenfolge und die Anzahl der Filter ändern (Farbe, Habitat, Kronblatt, Vorkommen).",
+  "product_offline_title": "Offline-Modus",
+  "product_offline_description": "Sie können die Anwendung ohne Internetverbindung ausführen.",
   "product_purchase": "Kaufen",
   "product_purchase_failed": "Kauf gescheitert",
   "product_purchased": "Gekauft",
@@ -24,8 +26,15 @@
   "my_region": "Meine Gegend",
   "always_my_region_title": "Fügen Sie meine Region immer dem Filter hinzu",
   "always_my_region_subtitle": "Ihre Region wird auf den Filter voreingestellt",
-
   "my_filter": "Mein Filter",
+  "offline_title": "Offline-Modus",
+  "offline_subtitle": "Benötigt 300+ MB zusätzlichen Platz.",
+  "offline_download_message": "Sie werden mehr als 300 MB Fotos und Illustrationen herunterladen. Bitte überprüfen Sie, ob Ihr Gerät mit Wi-Fi verbunden ist. Sind Sie zum Download bereit?",
+  "offline_download_progress": "Fotos und Illustrationen herunterladen ...",
+  "offline_download_success": "Fotos und Illustrationen wurden erfolgreich heruntergeladen.",
+  "offline_download_fail": "Herunterladen fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung oder den freien Speicherplatz auf dem Gerät und versuchen Sie es erneut.",
+  "offline_delete_message": "Möchten Sie Offline-Daten löschen?",
+  "offline_download": "Download fortsetzen",
 
   "feedback_intro": "Sie haben zu dieser Anwendung beigetragen, seit Sie diese auf Ihrem Gerät installiert haben, vielen Dank. Wenn Sie noch mehr tun möchten, haben Sie folgende Möglichkeiten:",
   "feedback_review": "Sie können eine positive Bewertung schreiben.",
@@ -43,8 +52,12 @@
   "rate_later": "Später",
   "rate": "Bewertung",
   "rate_text": "Der Autor dieser App wird durch positive Rückmeldungen der Benutzer  beflügelt. Bitte senden Sie ihm doch einen Sterne-Blumenstrauß über den Anwendungsspeicher.",
+  "new_version": "Eine neue Version ist verfügbar, bitte updaten.",
+
   "yes": "Ja",
   "no": "Nein",
+  "close": "Schließen",
+  "pause": "Pause",
 
   "filter_color": "Farbe",
   "filter_habitat": "Habitat",

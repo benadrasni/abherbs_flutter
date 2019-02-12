@@ -10,6 +10,7 @@ import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/entity/translations.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
+import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -126,6 +127,7 @@ class _PlantDetailState extends State<PlantDetail> {
   @override
   void initState() {
     super.initState();
+    Offline.setKeepSynced3(true);
     _firebaseAnalytics = FirebaseAnalytics();
 
     _plantF = plantsReference.child(widget.plantName).once().then((DataSnapshot snapshot) {

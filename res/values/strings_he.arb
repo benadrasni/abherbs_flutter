@@ -13,6 +13,8 @@
   "product_search_description": "תוכל למצוא פרח בשם הלטיני שלה או על ידי הטקסון שלה (למשל סדרה, משפחה, סוג).",
   "product_custom_filter_title": "מסנן מותאם אישית",
   "product_custom_filter_description": "תוכל לשנות את סדר ברירת המחדל ואת מספר המסננים (צבע, בתי גידול, עלי כותרת, הפצה).",
+  "product_offline_title": "מצב לא מקוון",
+  "product_offline_description": "תוכל להפעיל את היישום ללא חיבור לאינטרנט.",
   "product_purchase": "רכישה",
   "product_purchase_failed": "הרכישה נכשלה",
   "product_purchased": "נרכש",
@@ -24,8 +26,15 @@
   "my_region": "אזור שלי",
   "always_my_region_title": "הוסף תמיד את האזור שלי למסנן",
   "always_my_region_subtitle": "האזור שלך יוגדר מראש למסנן",
-
   "my_filter": "המסנן שלי",
+  "offline_title": "מצב לא מקוון",
+  "offline_subtitle": "דורש 300+ MB שטח נוסף.",
+  "offline_download_message": "אתה הולך להוריד 300+ MB של תמונות ואיורים. בדוק אם המכשיר מחובר ל- Wi-Fi. האם אתה מוכן להורדה?",
+  "offline_download_progress": "מוריד תמונות ואיורים ...",
+  "offline_download_success": "תמונות ואיורים הורדו בהצלחה.",
+  "offline_download_fail": "הורדה נכשלה. בדוק את חיבור האינטרנט או את המקום הפנוי במכשיר ונסה שוב.",
+  "offline_delete_message": "האם ברצונך למחוק נתונים לא מקוונים?",
+  "offline_download": "המשך הורדה",
 
   "feedback_intro": "אתה כבר תורם ליישום זה מאז התקנת את זה על המכשיר שלך, תודה. אם אתה מחפש משהו נוסף, הנה כמה אפשרויות:",
   "feedback_review": "אתה יכול לכתוב ביקורת חיובית.",
@@ -43,8 +52,12 @@
   "rate_never": "לעולם לא",
   "rate_later": "יותר מאוחר",
   "rate": "סקירה",
+  "new_version": "גרסה חדשה זמינה, אנא עדכן.",
+
   "yes": "כן",
   "no": "לא",
+  "close": "סגור",
+  "pause": "השהה",
 
   "filter_color": "צבע",
   "filter_habitat": "בתי גידול",

@@ -3,15 +3,18 @@ import 'dart:async';
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/offline.dart';
+import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/settings/setting_my_filter.dart';
 import 'package:abherbs_flutter/settings/setting_my_region.dart';
+import 'package:abherbs_flutter/settings/setting_offline.dart';
 import 'package:abherbs_flutter/settings/setting_pref_language.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
-import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
-import 'package:abherbs_flutter/preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -23,14 +26,17 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  FirebaseAnalytics _firebaseAnalytics;
   Future<String> _prefLanguageF;
   String _prefLanguage;
   Future<String> _myRegionF;
   Future<bool> _alwaysMyRegionF;
   Future<List<String>> _myFilterF;
+  Future<bool> _offlineF;
 
   void _resetPrefLanguage() {
     Prefs.setString(keyPreferredLanguage, null).then((bool success) {
+      _logPrefLanguageEvent('default');
       Navigator.pop(context);
       widget.onChangeLanguage('');
     });
@@ -42,6 +48,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _prefLanguageF.then((language) {
         if (language != _prefLanguage) {
           _prefLanguage = language;
+          _logPrefLanguageEvent(language);
           widget.onChangeLanguage(_prefLanguage);
         }
         return language;
@@ -70,6 +77,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
+  void _setOffline(bool offline) {
+    if (offline) {
+      _offlineDownloadDialog();
+      setState(() {
+        _offlineF = Prefs.setBool(keyOffline, offline).then((success) {
+          return offline;
+        });
+      });
+    } else {
+      _offlineDeleteDialog();
+    }
+  }
+
   void _setMyFilter(List<String> filter) {
     setState(() {
       _myFilterF = Prefs.setStringList(keyMyFilter, filter).then((success) {
@@ -79,9 +99,74 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
+  Future<void> _offlineDownloadDialog() async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return SettingOffline();
+      },
+    );
+  }
+
+  Future<void> _offlineDeleteDialog() async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(S.of(context).offline_title),
+          content: Text(S.of(context).offline_delete_message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(S.of(context).yes.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+              onPressed: () {
+                Navigator.of(context).pop();
+                setState(() {
+                  _offlineF = Prefs.setBool(keyOffline, false).then((success) {
+                    return false;
+                  });
+                });
+                Offline.delete();
+              },
+            ),
+            FlatButton(
+              child: Text(S.of(context).no.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _logPrefLanguageEvent(String language) async {
+    await _firebaseAnalytics.logEvent(name: 'setting', parameters: {
+      'type': 'preffered_language',
+      'language': language
+    });
+  }
+
+  Future<void> _logMyRegionEvent(String region) async {
+    await _firebaseAnalytics.logEvent(name: 'setting', parameters: {
+      'type': 'my_region',
+      'region': region
+    });
+  }
+
+  Future<void> _logMyFilterEvent(String filter) async {
+    await _firebaseAnalytics.logEvent(name: 'setting', parameters: {
+      'type': 'my_filter',
+      'region': filter
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _firebaseAnalytics = FirebaseAnalytics();
     _prefLanguageF = Prefs.getStringF(keyPreferredLanguage);
     _prefLanguageF.then((language) {
       _prefLanguage = language;
@@ -89,6 +174,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _myRegionF = Prefs.getStringF(keyMyRegion);
     _alwaysMyRegionF = Prefs.getBoolF(keyAlwaysMyRegion, false);
     _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes);
+    _offlineF = Prefs.getBoolF(keyOffline, false);
 
     Ads.hideBannerAd();
   }
@@ -171,7 +257,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           MaterialPageRoute(builder: (context) => SettingMyRegion()),
         ).then((result) {
           setState(() {
-            _myRegionF = Prefs.getStringF(keyMyRegion);
+            _myRegionF = Prefs.getStringF(keyMyRegion).then((value) {
+              _logMyRegionEvent(value);
+              return value;
+            });
           });
         });
       },
@@ -251,12 +340,59 @@ class _SettingsScreenState extends State<SettingsScreen> {
             setState(() {
               _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
                 Preferences.myFilterAttributes = myFilter;
+                _logMyFilterEvent(myFilter.join(', '));
                 return myFilter;
               });
             });
           });
         },
       ));
+    }
+
+    // offline
+    if (Purchases.isOffline()) {
+      widgets.add(FutureBuilder<bool>(
+          future: _offlineF,
+          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+            return ListTile(
+              title: snapshot.data == null || !snapshot.data || Offline.downloadFinished
+                  ? Text(
+                      S.of(context).offline_title,
+                      style: titleTextStyle,
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          S.of(context).offline_title,
+                          style: titleTextStyle,
+                        ),
+                        RaisedButton(
+                          color: Theme.of(context).accentColor,
+                          child: Text(S.of(context).offline_download),
+                          onPressed: () {
+                            _offlineDownloadDialog().then((_) {
+                              setState(() {
+                                _offlineF = Prefs.getBoolF(keyOffline, false);
+                              });
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+              subtitle: Text(
+                S.of(context).offline_subtitle,
+                style: subtitleTextStyle,
+              ),
+              trailing: Switch(
+                value: snapshot.data ?? false,
+                onChanged: (bool value) {
+                  _setOffline(value);
+                },
+              ),
+              onTap: () {},
+            );
+          }));
     }
 
     return Scaffold(
