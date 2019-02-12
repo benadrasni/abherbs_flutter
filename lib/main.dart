@@ -181,8 +181,22 @@ class _AppState extends State<App> {
               return MaterialApp(
                 localeResolutionCallback: (deviceLocale, supportedLocales) {
                   if (snapshot.data == null) {
-                    Prefs.setString(keyLanguage, deviceLocale.languageCode);
-                    return deviceLocale;
+                    Locale defaultLocale;
+                    Locale resultLocale;
+                    for (Locale locale in supportedLocales) {
+                      if (locale.languageCode == 'en' && locale.countryCode == 'US') {
+                        defaultLocale = locale;
+                      }
+
+                      if (locale.countryCode.isEmpty && deviceLocale.languageCode == locale.languageCode) {
+                        resultLocale = locale;
+                      }
+                    }
+                    if (resultLocale == null) {
+                      resultLocale = defaultLocale;
+                    }
+                    Prefs.setString(keyLanguage, resultLocale.languageCode);
+                    return resultLocale;
                   } else {
                     Prefs.setString(keyLanguage, snapshot.data.languageCode);
                     return snapshot.data;
