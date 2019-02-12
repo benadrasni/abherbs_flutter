@@ -128,17 +128,17 @@ void _buildTaxonomy(List<PlantTaxon> taxons, Map<dynamic, dynamic> dictionary, M
   List<dynamic> names = dictionary[taxonName];
   if (searchText.isEmpty || taxonName.toLowerCase().contains(searchText.toLowerCase()) || _isInNames(names, searchText)) {
     PlantTaxon taxon = PlantTaxon();
-    taxon.path = path + taxonName + '/' + firebaseAPGList;
+    taxon.path = path + taxonName + '/' + firebaseAttributeList;
     taxon.offset = offset;
     taxon.type = taxonomy[firebaseAPGType];
     taxon.latinName = taxonName;
     taxon.names = names;
-    taxon.count = taxonomy[firebaseAPGCount];
+    taxon.count = taxonomy[firebaseAttributeCount];
     taxons.add(taxon);
   }
 
   taxonomy.forEach((key, value) {
-    if (firebaseAPGType != key && firebaseAPGList != key && firebaseAPGCount != key) {
+    if (firebaseAPGType != key && firebaseAttributeList != key && firebaseAttributeCount != key) {
       _buildTaxonomy(taxons, dictionary, value, offset + 1, path + taxonName + '/', key, searchText);
     }
   });

@@ -13,6 +13,8 @@
   "product_search_description": "Anda dapat menemukan bunga dengan nama Latin atau dengan taksonnya (mis. ordo, famili, genera)",
   "product_custom_filter_title": "Filter khusus",
   "product_custom_filter_description": "Anda dapat mengubah urutan dan jumlah filter default (warna, habitat, mahkota, distribusi).",
+  "product_offline_title": "Mode offline",
+  "product_offline_description": "Anda dapat menjalankan aplikasi tanpa koneksi internet.",
   "product_purchase": "Membeli",
   "product_purchase_failed": "Pembelian gagal",
   "product_purchased": "Dibeli",
@@ -24,8 +26,15 @@
   "my_region": "Daerah saya",
   "always_my_region_title": "Selalu tambahkan wilayah saya ke filter",
   "always_my_region_subtitle": "Wilayah Anda akan disetel sebelumnya ke filter",
-
   "my_filter": "Filter saya",
+  "offline_title": "Mode offline",
+  "offline_subtitle": "membutuhkan 300+ MB ruang tambahan.",
+  "offline_download_message": "Anda akan mengunduh 300+ MB foto dan ilustrasi. Periksa apakah perangkat Anda terhubung ke wi-fi. Sudah siap untuk mengunduh?",
+  "offline_download_progress": "Mengunduh foto dan ilustrasi ...",
+  "offline_download_success": "Foto dan ilustrasi telah berhasil diunduh.",
+  "offline_download_fail": "Pengunduhan gagal. Silakan periksa koneksi internet Anda atau ruang kosong di perangkat dan coba lagi.",
+  "offline_delete_message": "Apakah Anda ingin menghapus data offline?",
+  "offline_download": "Lanjutkan unduhan",
 
   "feedback_intro": "Anda telah berkontribusi untuk aplikasi ini karena Anda telah menginstalnya di perangkat Anda, terima kasih. Jika Anda mencari sesuatu yang lebih, berikut adalah beberapa opsi:",
   "feedback_review": "Anda dapat menulis ulasan positif.",
@@ -43,8 +52,12 @@
   "rate_never": "Tak pernah",
   "rate_later": "Kemudian",
   "rate": "Ulasan",
+  "new_version": "Versi baru tersedia, perbarui.",
+
   "yes": "iya nih",
   "no": "Tidak",
+  "close": "Dekat",
+  "pause": "Jeda",
 
   "filter_color": "warna",
   "filter_habitat": "habitat",

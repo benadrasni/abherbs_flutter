@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/search/search_names.dart';
 import 'package:abherbs_flutter/search/search_taxonomy.dart';
 import 'package:abherbs_flutter/utils.dart';
@@ -45,6 +46,7 @@ class _SearchState extends State<Search> {
   @override
   void initState() {
     super.initState();
+    Offline.setKeepSynced4(true);
 
     _currentIndex = 0;
     _key = new GlobalKey<ScaffoldState>();

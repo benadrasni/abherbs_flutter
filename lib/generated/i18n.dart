@@ -35,6 +35,7 @@ class S implements WidgetsLocalizations {
   String get caucasus => "Caucasus";
   String get central_america => "Central America";
   String get china => "China";
+  String get close => "Close";
   String get color_blue => "blue, purple";
   String get color_green => "green, brown, black";
   String get color_message => "What's the colour of the flower? Choose the closest one.";
@@ -86,6 +87,7 @@ class S implements WidgetsLocalizations {
   String get mongolia => "Mongolia";
   String get my_filter => "My filter";
   String get my_region => "My region";
+  String get new_version => "New version is available, please update.";
   String get new_zealand => "New Zealand";
   String get no => "No";
   String get north_central_pacific => "North-Central Pacific";
@@ -98,8 +100,17 @@ class S implements WidgetsLocalizations {
   String get northern_south_america => "Northern South America";
   String get northwestern_pacific => "Northwestern Pacific";
   String get northwestern_usa => "Northwestern U.S.A.";
+  String get offline_delete_message => "Do you want to delete offline data?";
+  String get offline_download => "Resume download";
+  String get offline_download_fail => "Download failed. Please check your internet connection or free space on device and try again.";
+  String get offline_download_message => "You're going to download 300+ MB of photos and illustrations. Please check if your device is connected to wi-fi. Are you ready for a download?";
+  String get offline_download_progress => "Downloading photos and illustrations...";
+  String get offline_download_success => "Photos and illustrations have been successfully downloaded.";
+  String get offline_subtitle => "requires 300+ MB additional space.";
+  String get offline_title => "Offline mode";
   String get pacific => "Pacific";
   String get papuasia => "Papuasia";
+  String get pause => "Pause";
   String get petal_4 => "4 or less";
   String get petal_5 => "5";
   String get petal_many => "more than 5";
@@ -127,6 +138,8 @@ class S implements WidgetsLocalizations {
   String get product_custom_filter_title => "Custom filter";
   String get product_no_ads_description => "Application won't show advertisement banner at the bottom of the screen.";
   String get product_no_ads_title => "No unwanted advertisement";
+  String get product_offline_description => "Application will work without internet connection.";
+  String get product_offline_title => "Offline mode";
   String get product_purchase => "Purchase";
   String get product_purchase_failed => "Purchase failed";
   String get product_purchased => "Purchased";
@@ -202,6 +215,8 @@ class $de extends S {
   @override
   String get legend => "Legende";
   @override
+  String get product_offline_title => "Offline-Modus";
+  @override
   String get feedback_submit_translate_data => "Verbessere die Daten der Blume";
   @override
   String get snack_copy => "In die Zwischenablage kopiert";
@@ -211,6 +226,8 @@ class $de extends S {
   String get about => "Über";
   @override
   String get product_no_ads_description => "Die Anwendung zeigt kein Werbebanner am unteren Bildschirmrand.";
+  @override
+  String get offline_download_progress => "Fotos und Illustrationen herunterladen ...";
   @override
   String get western_canada => "Westkanada";
   @override
@@ -227,6 +244,8 @@ class $de extends S {
   String get caribbean => "Karibik";
   @override
   String get product_search_description => "Sie finden eine Blume nach ihrem deutschen oder lateinischen Namen oder nach ihrem Taxon (z. B. Ordnung, Familie, Gattung).";
+  @override
+  String get offline_delete_message => "Möchten Sie Offline-Daten löschen?";
   @override
   String get australasia => "Australasien";
   @override
@@ -272,6 +291,8 @@ class $de extends S {
   @override
   String get show_original => "Englischer Text";
   @override
+  String get offline_download_message => "Sie werden mehr als 300 MB Fotos und Illustrationen herunterladen. Bitte überprüfen Sie, ob Ihr Gerät mit Wi-Fi verbunden ist. Sind Sie zum Download bereit?";
+  @override
   String get southern_america => "Südamerika";
   @override
   String get middle_atlantic_ocean => "Mittlerer Atlantischer Ozean";
@@ -289,6 +310,8 @@ class $de extends S {
   String get habitat_message => "Was ist um dich herum? Identifiziere den Standort der Pflanze.";
   @override
   String get plant_toxicity => "Toxizität";
+  @override
+  String get offline_download_fail => "Herunterladen fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung oder den freien Speicherplatz auf dem Gerät und versuchen Sie es erneut.";
   @override
   String get snack_no_flowers => "Keine Blumen die den Kriterien entsprechen.";
   @override
@@ -317,6 +340,8 @@ class $de extends S {
   String get western_south_america => "Westliches Südamerika";
   @override
   String get taxonomy_subgenus => "Untergattung";
+  @override
+  String get close => "Schließen";
   @override
   String get europe => "Europa";
   @override
@@ -382,6 +407,8 @@ class $de extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Download fortsetzen";
+  @override
   String get enhancements => "Verbesserungen";
   @override
   String get habitat_wetland => "Moorlandschaft oder Feuchtgebiete";
@@ -420,11 +447,17 @@ class $de extends S {
   @override
   String get list_info => "Auswahl";
   @override
+  String get new_version => "Eine neue Version ist verfügbar, bitte updaten.";
+  @override
   String get taxonomy_subfamilia => "Unterfamilie";
   @override
   String get my_region => "Meine Gegend";
   @override
+  String get pause => "Pause";
+  @override
   String get indian_subcontinent => "Indischer Subkontinent";
+  @override
+  String get product_offline_description => "Sie können die Anwendung ohne Internetverbindung ausführen.";
   @override
   String get plant_flower => "Blüte";
   @override
@@ -459,6 +492,8 @@ class $de extends S {
   String get eastern_europe => "Osteuropa";
   @override
   String get south_central_usa => "Süd-Zentral U.S.A.";
+  @override
+  String get offline_download_success => "Fotos und Illustrationen wurden erfolgreich heruntergeladen.";
   @override
   String get plant_flowering_from => "Blütezeit";
   @override
@@ -524,9 +559,13 @@ class $de extends S {
   @override
   String get northern_africa => "Nordafrika";
   @override
+  String get offline_subtitle => "Benötigt 300+ MB zusätzlichen Platz.";
+  @override
   String get china => "China";
   @override
   String get product_no_ads_title => "Keine unerwünschte Werbung";
+  @override
+  String get offline_title => "Offline-Modus";
   @override
   String get petal_zygomorphic => "dorsiventrale";
   @override
@@ -548,6 +587,8 @@ class $hi extends S {
   @override
   String get legend => "किंवदंती";
   @override
+  String get product_offline_title => "ऑफ़लाइन मोड";
+  @override
   String get feedback_submit_translate_data => "फूल के डेटा में सुधार";
   @override
   String get snack_copy => "क्लिपबोर्ड पर नकल";
@@ -557,6 +598,8 @@ class $hi extends S {
   String get about => "के बारे में";
   @override
   String get product_no_ads_description => "एप्लिकेशन स्क्रीन के नीचे विज्ञापन बैनर नहीं दिखाएगा।";
+  @override
+  String get offline_download_progress => "फ़ोटो और चित्र डाउनलोड कर रहा है ...";
   @override
   String get western_canada => "पश्चिमी कनाडा";
   @override
@@ -573,6 +616,8 @@ class $hi extends S {
   String get caribbean => "कैरेबियन";
   @override
   String get product_search_description => "आप इसके लैटिन नाम या इसके टैक्सोन (जैसे क्रम, परिवार, जाति) द्वारा एक फूल पा सकते हैं।";
+  @override
+  String get offline_delete_message => "क्या आप ऑफ़लाइन डेटा हटाना चाहते हैं?";
   @override
   String get australasia => "ऑस्ट्रेलेशिया";
   @override
@@ -618,6 +663,8 @@ class $hi extends S {
   @override
   String get show_original => "अंग्रेज़ी  टेक्स्ट दिखाएं";
   @override
+  String get offline_download_message => "आप 300+ MB फ़ोटो और चित्र डाउनलोड करने जा रहे हैं। कृपया जांचें कि क्या आपका उपकरण वाई-फाई से जुड़ा है। क्या आप डाउनलोड के लिए तैयार हैं?";
+  @override
   String get southern_america => "दक्षिणी अमेरिका";
   @override
   String get middle_atlantic_ocean => "मध्य अटलांटिक महासागर";
@@ -635,6 +682,8 @@ class $hi extends S {
   String get habitat_message => "आपके आसपास क्या है? पौधे के आवास की पहचान करें।";
   @override
   String get plant_toxicity => "आविषता";
+  @override
+  String get offline_download_fail => "डाउनलोड विफल। कृपया अपने इंटरनेट कनेक्शन या उपकरण पर निःशुल्क स्थान देखें और पुनः प्रयास करें";
   @override
   String get snack_no_flowers => "कोई फूल नहीं कसौटी।";
   @override
@@ -663,6 +712,8 @@ class $hi extends S {
   String get western_south_america => "पश्चिमी दक्षिण अमेरिका";
   @override
   String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "बंद करे";
   @override
   String get europe => "यूरोप";
   @override
@@ -728,6 +779,8 @@ class $hi extends S {
   @override
   String get plant_height_to => "तक";
   @override
+  String get offline_download => "डाउनलोड फिर से शुरू करें";
+  @override
   String get enhancements => "संवर्द्धन";
   @override
   String get habitat_wetland => "मोरलैंड्स या झीलों";
@@ -766,11 +819,17 @@ class $hi extends S {
   @override
   String get list_info => "एक चुनें";
   @override
+  String get new_version => "नया संस्करण उपलब्ध है, कृपया अपडेट करें।";
+  @override
   String get taxonomy_subfamilia => "उपपरिवार";
   @override
   String get my_region => "मेरा क्षेत्र";
   @override
+  String get pause => "ठहराव";
+  @override
   String get indian_subcontinent => "भारतीय उपमहाद्वीप";
+  @override
+  String get product_offline_description => "आप इंटरनेट कनेक्शन के बिना आवेदन चला सकेंगे।";
   @override
   String get plant_flower => "पुष्प";
   @override
@@ -805,6 +864,8 @@ class $hi extends S {
   String get eastern_europe => "पूर्वी यूरोप";
   @override
   String get south_central_usa => "दक्षिण मध्य यूएसए";
+  @override
+  String get offline_download_success => "फ़ोटो और चित्र सफलतापूर्वक डाउनलोड किए गए हैं।";
   @override
   String get plant_flowering_from => "से फूल";
   @override
@@ -870,9 +931,13 @@ class $hi extends S {
   @override
   String get northern_africa => "उत्तरी अफ्रीका";
   @override
+  String get offline_subtitle => "300+ MB अतिरिक्त स्थान की आवश्यकता है";
+  @override
   String get china => "चीन";
   @override
   String get product_no_ads_title => "कोई अवांछित विज्ञापन नहीं";
+  @override
+  String get offline_title => "ऑफ़लाइन मोड";
   @override
   String get petal_zygomorphic => "अनियमित";
   @override
@@ -894,6 +959,8 @@ class $fi extends S {
   @override
   String get legend => "Legenda";
   @override
+  String get product_offline_title => "Offline-tila";
+  @override
   String get feedback_submit_translate_data => "Paranna kukkien tietoja";
   @override
   String get snack_copy => "Kopioitu leikepöydälle";
@@ -903,6 +970,8 @@ class $fi extends S {
   String get about => "Tietoja sovellus";
   @override
   String get product_no_ads_description => "Sovellus ei näytä ruudun alareunassa mainosbanneria.";
+  @override
+  String get offline_download_progress => "Valokuvien ja kuvien lataaminen ...";
   @override
   String get western_canada => "Länsi-Kanada";
   @override
@@ -919,6 +988,8 @@ class $fi extends S {
   String get caribbean => "Karibian";
   @override
   String get product_search_description => "Voit löytää kukka Suomen tai latinankielisen nimen tai taksonin (esim. lahko, heimo, suku).";
+  @override
+  String get offline_delete_message => "Haluatko poistaa offline-tietoja?";
   @override
   String get australasia => "Australiassa";
   @override
@@ -964,6 +1035,8 @@ class $fi extends S {
   @override
   String get show_original => "Näytä Englanti teksti";
   @override
+  String get offline_download_message => "Voit ladata 300+ MB kuvia ja kuvia. Tarkista, onko laite liitetty wi-fi-verkkoon. Oletko valmis lataamaan?";
+  @override
   String get southern_america => "Etelä-Amerikka";
   @override
   String get middle_atlantic_ocean => "Lähi-Atlantin valtameri";
@@ -981,6 +1054,8 @@ class $fi extends S {
   String get habitat_message => "Mitä ympärilläsi on? Tunnista laitoksen elinympäristö.";
   @override
   String get plant_toxicity => "Myrkyllisyys";
+  @override
+  String get offline_download_fail => "Lataus epäonnistui. Tarkista Internet-yhteys tai vapaa tila laitteessa ja yritä uudelleen.";
   @override
   String get snack_no_flowers => "Ei kukkien yhteensopivuusvaatimuksia.";
   @override
@@ -1009,6 +1084,8 @@ class $fi extends S {
   String get western_south_america => "Länsi Etelä-Amerikka";
   @override
   String get taxonomy_subgenus => "Alasuku";
+  @override
+  String get close => "Kiinni";
   @override
   String get europe => "Eurooppa";
   @override
@@ -1074,6 +1151,8 @@ class $fi extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Jatka lataamista";
+  @override
   String get enhancements => "Parannukset";
   @override
   String get habitat_wetland => "nummimaista tai kosteikkojen";
@@ -1112,11 +1191,17 @@ class $fi extends S {
   @override
   String get list_info => "Valitse yksi";
   @override
+  String get new_version => "Uusi versio on saatavilla, päivitä.";
+  @override
   String get taxonomy_subfamilia => "Alaheimo";
   @override
   String get my_region => "Oma alue";
   @override
+  String get pause => "Tauko";
+  @override
   String get indian_subcontinent => "Intian niemimaalla";
+  @override
+  String get product_offline_description => "Voit suorittaa sovelluksen ilman internet-yhteyttä.";
   @override
   String get plant_flower => "Kukka";
   @override
@@ -1151,6 +1236,8 @@ class $fi extends S {
   String get eastern_europe => "Itä-Eurooppa";
   @override
   String get south_central_usa => "Etelä-Keski-USA";
+  @override
+  String get offline_download_success => "Kuvat ja kuvat on ladattu onnistuneesti.";
   @override
   String get plant_flowering_from => "Kukinta";
   @override
@@ -1216,9 +1303,13 @@ class $fi extends S {
   @override
   String get northern_africa => "Pohjois-Afrikka";
   @override
+  String get offline_subtitle => "vaatii 300+ MB lisää tilaa.";
+  @override
   String get china => "Kiina";
   @override
   String get product_no_ads_title => "Ei ei-toivottua mainosta";
+  @override
+  String get offline_title => "Offline-tila";
   @override
   String get petal_zygomorphic => "vastakohtainen";
   @override
@@ -1240,6 +1331,8 @@ class $ru extends S {
   @override
   String get legend => "Легенда";
   @override
+  String get product_offline_title => "Автономный режим";
+  @override
   String get feedback_submit_translate_data => "Улучшить данные цветка";
   @override
   String get snack_copy => "Скопировано в буфер обмена";
@@ -1249,6 +1342,8 @@ class $ru extends S {
   String get about => "О приложении";
   @override
   String get product_no_ads_description => "Приложение не будет показывать рекламный баннер внизу экрана.";
+  @override
+  String get offline_download_progress => "Загрузка фотографий и иллюстраций ...";
   @override
   String get western_canada => "Западная Канада";
   @override
@@ -1265,6 +1360,8 @@ class $ru extends S {
   String get caribbean => "Карибик";
   @override
   String get product_search_description => "Вы сможете найти цветок по его русскому или латинскому имени или по таксону (например, порядок, семейство, род).";
+  @override
+  String get offline_delete_message => "Вы хотите удалить автономные данные?";
   @override
   String get australasia => "Австралазия";
   @override
@@ -1310,6 +1407,8 @@ class $ru extends S {
   @override
   String get show_original => "Показать английский текст";
   @override
+  String get offline_download_message => "Вы собираетесь загрузить более 300 МБ фотографий и иллюстраций. Пожалуйста, проверьте, если ваше устройство подключено к Wi-Fi. Вы готовы к загрузке?";
+  @override
   String get southern_america => "Южная Америка";
   @override
   String get middle_atlantic_ocean => "Средний Атлантический океан";
@@ -1327,6 +1426,8 @@ class $ru extends S {
   String get habitat_message => "Что вокруг тебя? Определить среду обитания растений.";
   @override
   String get plant_toxicity => "Токсичность";
+  @override
+  String get offline_download_fail => "Ошибка загрузки. Пожалуйста, проверьте ваше интернет-соединение или свободное место на устройстве и попробуйте снова.";
   @override
   String get snack_no_flowers => "Нет цветов соответствующих критериям.";
   @override
@@ -1355,6 +1456,8 @@ class $ru extends S {
   String get western_south_america => "Западная Южная Америка";
   @override
   String get taxonomy_subgenus => "Подрод";
+  @override
+  String get close => "Закрытие";
   @override
   String get europe => "Европа";
   @override
@@ -1420,6 +1523,8 @@ class $ru extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Возобновление загрузки";
+  @override
   String get enhancements => "Улучшения";
   @override
   String get habitat_wetland => "водно-болотные угодья";
@@ -1458,11 +1563,17 @@ class $ru extends S {
   @override
   String get list_info => "Выбери один";
   @override
+  String get new_version => "Новая версия доступна, пожалуйста, обновите.";
+  @override
   String get taxonomy_subfamilia => "Подсемейство";
   @override
   String get my_region => "Мой район";
   @override
+  String get pause => "Пауза";
+  @override
   String get indian_subcontinent => "Индийский субконтинент";
+  @override
+  String get product_offline_description => "Вы сможете запустить приложение без подключения к интернету.";
   @override
   String get plant_flower => "Цветы";
   @override
@@ -1497,6 +1608,8 @@ class $ru extends S {
   String get eastern_europe => "Восточная Европа";
   @override
   String get south_central_usa => "Юго-Центральная часть США";
+  @override
+  String get offline_download_success => "Фотографии и иллюстрации успешно загружены.";
   @override
   String get plant_flowering_from => "Цветет:";
   @override
@@ -1562,9 +1675,13 @@ class $ru extends S {
   @override
   String get northern_africa => "Северная Африка";
   @override
+  String get offline_subtitle => "требует 300+ МБ дополнительного места.";
+  @override
   String get china => "Китай";
   @override
   String get product_no_ads_title => "Без нежелательной рекламы";
+  @override
+  String get offline_title => "Автономный режим";
   @override
   String get petal_zygomorphic => "зигоморфный";
   @override
@@ -1586,6 +1703,8 @@ class $pt extends S {
   @override
   String get legend => "Legenda";
   @override
+  String get product_offline_title => "Modo offline";
+  @override
   String get snack_copy => "Copiado para a área de transferência";
   @override
   String get product_purchase_failed => "A compra falhou";
@@ -1593,6 +1712,8 @@ class $pt extends S {
   String get about => "Sobre a aplicação";
   @override
   String get product_no_ads_description => "Aplicativo não mostrará banner de propaganda na parte inferior da tela.";
+  @override
+  String get offline_download_progress => "Download de fotos e ilustrações ...";
   @override
   String get western_canada => "Canadá Ocidental";
   @override
@@ -1609,6 +1730,8 @@ class $pt extends S {
   String get caribbean => "Caraíbas";
   @override
   String get product_search_description => "Você poderá encontrar uma flor pelo seu nome em português ou latim ou por seu táxon (por exemplo, ordem, família, gênero).";
+  @override
+  String get offline_delete_message => "Você deseja excluir dados off-line?";
   @override
   String get australasia => "Australásia";
   @override
@@ -1654,6 +1777,8 @@ class $pt extends S {
   @override
   String get show_original => "Mostrar texto em inglês";
   @override
+  String get offline_download_message => "Você vai baixar mais de 300 MB de fotos e ilustrações. Por favor, verifique se o seu dispositivo está conectado a wi-fi. Você está pronto para um download?";
+  @override
   String get southern_america => "América do Sul";
   @override
   String get middle_atlantic_ocean => "Oceano Atlântico Médio";
@@ -1671,6 +1796,8 @@ class $pt extends S {
   String get habitat_message => "O que está a sua volta? Identifique o habitat da planta.";
   @override
   String get plant_toxicity => "Toxicidade";
+  @override
+  String get offline_download_fail => "Falha no Download. Por favor, verifique sua conexão com a internet ou espaço livre no dispositivo e tente novamente.";
   @override
   String get snack_no_flowers => "Não há critérios de correspondência de flores.";
   @override
@@ -1699,6 +1826,8 @@ class $pt extends S {
   String get western_south_america => "Oeste da América do Sul";
   @override
   String get taxonomy_subgenus => "subgênero";
+  @override
+  String get close => "Perto";
   @override
   String get europe => "Europa";
   @override
@@ -1764,6 +1893,8 @@ class $pt extends S {
   @override
   String get plant_height_to => "a";
   @override
+  String get offline_download => "Retomar download";
+  @override
   String get enhancements => "Melhorias";
   @override
   String get habitat_wetland => "pântanos e zonas húmidas";
@@ -1802,11 +1933,17 @@ class $pt extends S {
   @override
   String get list_info => "Selecione uma";
   @override
+  String get new_version => "Nova versão está disponível, por favor atualize.";
+  @override
   String get taxonomy_subfamilia => "subfamília";
   @override
   String get my_region => "Minha região";
   @override
+  String get pause => "Pausa";
+  @override
   String get indian_subcontinent => "Subcontinente indiano";
+  @override
+  String get product_offline_description => "Você será capaz de executar aplicativos sem conexão com a internet.";
   @override
   String get plant_flower => "Flores";
   @override
@@ -1832,6 +1969,8 @@ class $pt extends S {
   @override
   String get antarctic_continent => "Continente Antártico";
   @override
+  String get no => "Não";
+  @override
   String get brazil => "Brasil";
   @override
   String get rate_text => "Autor desta aplicação é motivada pela resposta positiva dos usuários. Por favor, envie-lhe algumas estrelas através da loja de aplicativos.";
@@ -1839,6 +1978,8 @@ class $pt extends S {
   String get eastern_europe => "Europa Oriental";
   @override
   String get south_central_usa => "EUA Centro-Sul";
+  @override
+  String get offline_download_success => "Fotos e ilustrações transferidas com sucesso.";
   @override
   String get plant_flowering_from => "Floresce de";
   @override
@@ -1888,6 +2029,8 @@ class $pt extends S {
   @override
   String get southeastern_usa => "Sudeste dos EUA";
   @override
+  String get yes => "Sim";
+  @override
   String get feedback_run_ads_video => "Assista a um anúncio em vídeo";
   @override
   String get plant_height_from => "altura de";
@@ -1902,9 +2045,13 @@ class $pt extends S {
   @override
   String get northern_africa => "Norte da África";
   @override
+  String get offline_subtitle => "requer mais de 300 MB de espaço adicional.";
+  @override
   String get china => "China";
   @override
   String get product_no_ads_title => "Nenhum anúncio indesejado";
+  @override
+  String get offline_title => "Modo offline";
   @override
   String get petal_zygomorphic => "zigomorfo";
   @override
@@ -1924,6 +2071,8 @@ class $lt extends S {
   @override
   String get legend => "Legenda";
   @override
+  String get product_offline_title => "Atsijungęs režimas";
+  @override
   String get feedback_submit_translate_data => "Pagerinkite gėlių duomenis";
   @override
   String get snack_copy => "Kopijuojama į iškarpinę";
@@ -1933,6 +2082,8 @@ class $lt extends S {
   String get about => "Apie paraišką";
   @override
   String get product_no_ads_description => "Programos apačioje ekrano reklama nebus rodoma.";
+  @override
+  String get offline_download_progress => "Nuotraukų ir iliustracijų atsisiuntimas ...";
   @override
   String get western_canada => "Vakarų Kanadoje";
   @override
@@ -1949,6 +2100,8 @@ class $lt extends S {
   String get caribbean => "Karibai";
   @override
   String get product_search_description => "Gali rasti gėlę pagal savo lietuvių ar lotynų kalbą arba taksoną (pvz., Eilė, šeimą, gentį).";
+  @override
+  String get offline_delete_message => "Ar norite ištrinti neprisijungus duomenis?";
   @override
   String get australasia => "Australasija";
   @override
@@ -1994,6 +2147,8 @@ class $lt extends S {
   @override
   String get show_original => "Rodyti tekstas anglų kalba";
   @override
+  String get offline_download_message => "Atsisiųsite 300+ MB nuotraukų ir iliustracijų. Patikrinkite, ar įrenginys prijungtas prie „Wi-Fi“. Ar esate pasiruošę atsisiųsti?";
+  @override
   String get southern_america => "Pietų Amerika";
   @override
   String get middle_atlantic_ocean => "Vidurio Atlanto vandenynas";
@@ -2011,6 +2166,8 @@ class $lt extends S {
   String get habitat_message => "Kas vyksta aplink jus? Nustatyti gamyklos buveinių.";
   @override
   String get plant_toxicity => "Toksiškumas";
+  @override
+  String get offline_download_fail => "Atsisiuntimas nepavyko. Patikrinkite interneto ryšį arba laisvą vietą įrenginyje ir bandykite dar kartą.";
   @override
   String get snack_no_flowers => "Nėra gėlių atitikimo kriterijų.";
   @override
@@ -2039,6 +2196,8 @@ class $lt extends S {
   String get western_south_america => "Vakarų Pietų Amerika";
   @override
   String get taxonomy_subgenus => "Pogentė";
+  @override
+  String get close => "Uždaryti";
   @override
   String get europe => "Europa";
   @override
@@ -2104,6 +2263,8 @@ class $lt extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Tęsti atsisiuntimą";
+  @override
   String get enhancements => "Priedai";
   @override
   String get habitat_wetland => "šlapžemės";
@@ -2142,11 +2303,17 @@ class $lt extends S {
   @override
   String get list_info => "Pasirinkti vieną";
   @override
+  String get new_version => "Yra nauja versija, atnaujinkite.";
+  @override
   String get taxonomy_subfamilia => "Pošeimis";
   @override
   String get my_region => "Mano regionas";
   @override
+  String get pause => "Pauzė";
+  @override
   String get indian_subcontinent => "Indijos subkontinentas";
+  @override
+  String get product_offline_description => "Galėsite paleisti programą be interneto ryšio.";
   @override
   String get plant_flower => "Žiedas";
   @override
@@ -2181,6 +2348,8 @@ class $lt extends S {
   String get eastern_europe => "Rytų Europa";
   @override
   String get south_central_usa => "Pietu-Centrinė JAV";
+  @override
+  String get offline_download_success => "Nuotraukos ir iliustracijos sėkmingai atsisiųsti.";
   @override
   String get plant_flowering_from => "Žydėjimas nuo";
   @override
@@ -2246,9 +2415,13 @@ class $lt extends S {
   @override
   String get northern_africa => "Šiaurės Afrika";
   @override
+  String get offline_subtitle => "reikia 300+ MB papildomos vietos.";
+  @override
   String get china => "Kinija";
   @override
   String get product_no_ads_title => "Nėra nepageidaujamo skelbimo";
+  @override
+  String get offline_title => "Atsijungęs režimas";
   @override
   String get petal_zygomorphic => "nereguliarus";
   @override
@@ -2270,6 +2443,8 @@ class $hr extends S {
   @override
   String get legend => "Legenda";
   @override
+  String get product_offline_title => "Izvanmrežni način";
+  @override
   String get feedback_submit_translate_data => "Poboljšajte podatke o cvijetu";
   @override
   String get snack_copy => "Kopirano u međuspremnik";
@@ -2279,6 +2454,8 @@ class $hr extends S {
   String get about => "O aplikaciji";
   @override
   String get product_no_ads_description => "Aplikacija neće prikazati oglasni banner na dnu zaslona.";
+  @override
+  String get offline_download_progress => "Preuzimanje fotografija i ilustracija ...";
   @override
   String get western_canada => "Zapadna Kanada";
   @override
@@ -2295,6 +2472,8 @@ class $hr extends S {
   String get caribbean => "Karibi";
   @override
   String get product_search_description => "Cvijet ćete moći pronaći po njegovom hrvatskom ili latinskom nazivu ili po svojoj taksonu (npr. red, porodica, rod).";
+  @override
+  String get offline_delete_message => "Želite li izbrisati izvanmrežne podatke?";
   @override
   String get australasia => "Australazija";
   @override
@@ -2340,6 +2519,8 @@ class $hr extends S {
   @override
   String get show_original => "Prikaži engleski tekst";
   @override
+  String get offline_download_message => "Preuzet ćete 300+ MB fotografija i ilustracija. Provjerite je li uređaj spojen na Wi-Fi. Jeste li spremni za preuzimanje?";
+  @override
   String get southern_america => "Južna Amerika";
   @override
   String get middle_atlantic_ocean => "Srednji Atlantski ocean";
@@ -2357,6 +2538,8 @@ class $hr extends S {
   String get habitat_message => "Što je oko tebe? Identificirajte stanište biljke.";
   @override
   String get plant_toxicity => "Toksičnost";
+  @override
+  String get offline_download_fail => "Preuzimanje nije uspjelo. Provjerite internetsku vezu ili slobodan prostor na uređaju i pokušajte ponovno.";
   @override
   String get snack_no_flowers => "Nema kriterija za podudaranje.";
   @override
@@ -2385,6 +2568,8 @@ class $hr extends S {
   String get western_south_america => "Zapadna Južna Amerika";
   @override
   String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Zatvoriti";
   @override
   String get europe => "Europa";
   @override
@@ -2450,6 +2635,8 @@ class $hr extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Nastavi preuzimanje";
+  @override
   String get enhancements => "Poboljšanja";
   @override
   String get habitat_wetland => "močvare";
@@ -2488,11 +2675,17 @@ class $hr extends S {
   @override
   String get list_info => "Odabrati jedan";
   @override
+  String get new_version => "Dostupna je nova verzija, ažurirajte.";
+  @override
   String get taxonomy_subfamilia => "Potporodica";
   @override
   String get my_region => "Moja regija";
   @override
+  String get pause => "Pauza";
+  @override
   String get indian_subcontinent => "Indijski potkontinent";
+  @override
+  String get product_offline_description => "Moći ćete pokrenuti aplikaciju bez internetske veze.";
   @override
   String get plant_flower => "Cvijeće";
   @override
@@ -2527,6 +2720,8 @@ class $hr extends S {
   String get eastern_europe => "Istočna Europa";
   @override
   String get south_central_usa => "Južno-središnje SAD";
+  @override
+  String get offline_download_success => "Fotografije i ilustracije uspješno su preuzete.";
   @override
   String get plant_flowering_from => "Cvatnje:";
   @override
@@ -2592,9 +2787,13 @@ class $hr extends S {
   @override
   String get northern_africa => "Sjeverna Afrika";
   @override
+  String get offline_subtitle => "zahtijeva dodatni prostor od 300+ MB.";
+  @override
   String get china => "Kina";
   @override
   String get product_no_ads_title => "Nema neželjenog oglasa";
+  @override
+  String get offline_title => "Izvanmrežni način";
   @override
   String get taxonomy_genus => "Rod";
   @override
@@ -2614,6 +2813,8 @@ class $lv extends S {
   @override
   String get legend => "Leģenda";
   @override
+  String get product_offline_title => "Bezsaistes režīms";
+  @override
   String get feedback_submit_translate_data => "Uzlabojiet ziedu datus";
   @override
   String get snack_copy => "Kopēts uz starpliktuvi";
@@ -2623,6 +2824,8 @@ class $lv extends S {
   String get about => "Par lietojumprogrammu";
   @override
   String get product_no_ads_description => "Pieteikums neparādīs reklāmas reklāmkarogu ekrāna apakšā.";
+  @override
+  String get offline_download_progress => "Fotoattēlu un ilustrāciju lejupielāde ...";
   @override
   String get western_canada => "Rietumu Kanāda";
   @override
@@ -2639,6 +2842,8 @@ class $lv extends S {
   String get caribbean => "Karību jūras reģions";
   @override
   String get product_search_description => "Jūs varēsiet atrast ziedu ar savu latviešu vai latīņu vārdu vai taksonu (piemēram, Rinda, Dzimta, Ģints).";
+  @override
+  String get offline_delete_message => "Vai vēlaties dzēst bezsaistes datus?";
   @override
   String get australasia => "Austrālāzija";
   @override
@@ -2684,6 +2889,8 @@ class $lv extends S {
   @override
   String get show_original => "Rādīt angļu valodā";
   @override
+  String get offline_download_message => "Jūs lejupielādēsiet 300+ MB fotogrāfijas un ilustrācijas. Lūdzu, pārbaudiet, vai ierīce ir savienota ar Wi-Fi. Vai esat gatavs lejupielādei?";
+  @override
   String get southern_america => "Dienvidamerika";
   @override
   String get middle_atlantic_ocean => "Viduvie Atlantijas okeāns";
@@ -2701,6 +2908,8 @@ class $lv extends S {
   String get habitat_message => "Kas ir ap jums? Identificēt auga dzīvotni.";
   @override
   String get plant_toxicity => "Toksiskums";
+  @override
+  String get offline_download_fail => "Lejupielāde neizdevās. Lūdzu, pārbaudiet interneta savienojumu vai brīvo vietu ierīcē un mēģiniet vēlreiz.";
   @override
   String get snack_no_flowers => "Nav ziedu atbilstības kritēriju.";
   @override
@@ -2729,6 +2938,8 @@ class $lv extends S {
   String get western_south_america => "Rietumu Dienvidamerika";
   @override
   String get taxonomy_subgenus => "Apakšģints";
+  @override
+  String get close => "Aizvērt";
   @override
   String get europe => "Eiropa";
   @override
@@ -2794,6 +3005,8 @@ class $lv extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Atsākt lejupielādi";
+  @override
   String get enhancements => "Uzlabojumi";
   @override
   String get habitat_wetland => "šlapžemės";
@@ -2832,11 +3045,17 @@ class $lv extends S {
   @override
   String get list_info => "Izvēlēties vienu";
   @override
+  String get new_version => "Ir pieejama jauna versija, lūdzu, atjauniniet to.";
+  @override
   String get taxonomy_subfamilia => "Apakšdzimta";
   @override
   String get my_region => "Mans reģions";
   @override
+  String get pause => "Pauze";
+  @override
   String get indian_subcontinent => "Indijas subkontinents";
+  @override
+  String get product_offline_description => "Jūs varēsiet palaist programmu bez interneta pieslēguma.";
   @override
   String get plant_flower => "Zieds";
   @override
@@ -2871,6 +3090,8 @@ class $lv extends S {
   String get eastern_europe => "Austrumeiropa";
   @override
   String get south_central_usa => "Dienvidu ASV";
+  @override
+  String get offline_download_success => "Fotogrāfijas un ilustrācijas ir veiksmīgi lejupielādētas.";
   @override
   String get plant_flowering_from => "Ziedēšanas no";
   @override
@@ -2936,9 +3157,13 @@ class $lv extends S {
   @override
   String get northern_africa => "Ziemeļāfrika";
   @override
+  String get offline_subtitle => "nepieciešama 300+ MB papildu telpa.";
+  @override
   String get china => "Ķīna";
   @override
   String get product_no_ads_title => "Nav nevēlamas reklāmas";
+  @override
+  String get offline_title => "Bezsaistes režīms";
   @override
   String get petal_zygomorphic => "nereguliarus";
   @override
@@ -2960,6 +3185,8 @@ class $fr extends S {
   @override
   String get legend => "Légende";
   @override
+  String get product_offline_title => "Mode hors-ligne";
+  @override
   String get feedback_submit_translate_data => "Améliorer les données de la fleur";
   @override
   String get snack_copy => "Copié dans le presse-papier";
@@ -2969,6 +3196,8 @@ class $fr extends S {
   String get about => "À propos";
   @override
   String get product_no_ads_description => "L'application ne montre pas la bannière de publicité au bas de l'écran.";
+  @override
+  String get offline_download_progress => "Téléchargement de photos et d'illustrations ...";
   @override
   String get western_canada => "Ouest canadien";
   @override
@@ -2985,6 +3214,8 @@ class $fr extends S {
   String get caribbean => "Caraïbes";
   @override
   String get product_search_description => "Vous pourrez trouver une fleur par son nom français ou latin ou par son taxon (ordre, famille, genre, par exemple).";
+  @override
+  String get offline_delete_message => "Voulez-vous supprimer les données hors connexion?";
   @override
   String get australasia => "Australasie";
   @override
@@ -3030,6 +3261,8 @@ class $fr extends S {
   @override
   String get show_original => "Afficher le texte en anglais";
   @override
+  String get offline_download_message => "Vous allez télécharger plus de 300 Mo de photos et d'illustrations. Veuillez vérifier si votre appareil est connecté au wi-fi. Êtes-vous prêt pour un téléchargement?";
+  @override
   String get southern_america => "Amérique du Sud";
   @override
   String get middle_atlantic_ocean => "Moyen océan Atlantique";
@@ -3047,6 +3280,8 @@ class $fr extends S {
   String get habitat_message => "Ce qui est autour de vous? Identifier l'habitat de la fleur.";
   @override
   String get plant_toxicity => "Toxicité";
+  @override
+  String get offline_download_fail => "Échec du téléchargement. Vérifiez votre connexion Internet ou l'espace disponible sur votre appareil, puis réessayez.";
   @override
   String get snack_no_flowers => "Aucune fleur ne correspond aux critères.";
   @override
@@ -3075,6 +3310,8 @@ class $fr extends S {
   String get western_south_america => "Ouest de l'Amérique du Sud";
   @override
   String get taxonomy_subgenus => "Sous-genre";
+  @override
+  String get close => "Sortie";
   @override
   String get europe => "Europe";
   @override
@@ -3140,6 +3377,8 @@ class $fr extends S {
   @override
   String get plant_height_to => "et";
   @override
+  String get offline_download => "Reprendre le téléchargement";
+  @override
   String get enhancements => "Améliorations";
   @override
   String get habitat_wetland => "bruyères ou zones humides";
@@ -3178,11 +3417,17 @@ class $fr extends S {
   @override
   String get list_info => "Sélectionnez en une";
   @override
+  String get new_version => "Nouvelle version est disponible, s'il vous plaît mettre à jour.";
+  @override
   String get taxonomy_subfamilia => "Sous-famille";
   @override
   String get my_region => "Ma région";
   @override
+  String get pause => "Pause";
+  @override
   String get indian_subcontinent => "Sous-continent indien";
+  @override
+  String get product_offline_description => "Vous pourrez exécuter une application sans connexion Internet.";
   @override
   String get plant_flower => "Fleurs";
   @override
@@ -3217,6 +3462,8 @@ class $fr extends S {
   String get eastern_europe => "Europe de l'Est";
   @override
   String get south_central_usa => "Sud-Central des États-Unis";
+  @override
+  String get offline_download_success => "Les photos et illustrations ont été téléchargées avec succès.";
   @override
   String get plant_flowering_from => "Floraison de";
   @override
@@ -3282,9 +3529,13 @@ class $fr extends S {
   @override
   String get northern_africa => "Afrique du Nord";
   @override
+  String get offline_subtitle => "nécessite plus de 300+ MB d'espace.";
+  @override
   String get china => "Chine";
   @override
   String get product_no_ads_title => "Pas de publicité indésirable";
+  @override
+  String get offline_title => "Mode hors-ligne";
   @override
   String get petal_zygomorphic => "zygomorphie";
   @override
@@ -3306,6 +3557,8 @@ class $hu extends S {
   @override
   String get legend => "Jelmagyarázat";
   @override
+  String get product_offline_title => "Offline módban";
+  @override
   String get feedback_submit_translate_data => "Javítani kell a virágadatokat";
   @override
   String get snack_copy => "A vágólapra másolt";
@@ -3315,6 +3568,8 @@ class $hu extends S {
   String get about => "Az alkalmazásról";
   @override
   String get product_no_ads_description => "Az alkalmazás nem jeleníti meg a hirdetés bannerjét a képernyő alján.";
+  @override
+  String get offline_download_progress => "Fényképek és illusztrációk letöltése ...";
   @override
   String get western_canada => "Nyugat-Kanada";
   @override
@@ -3331,6 +3586,8 @@ class $hu extends S {
   String get caribbean => "Karib";
   @override
   String get product_search_description => "A virágot a magyar vagy latin nevével vagy taxonnal (például rend, család, nemzetség) találhatja meg.";
+  @override
+  String get offline_delete_message => "Törli az offline adatokat?";
   @override
   String get australasia => "Ausztrália";
   @override
@@ -3376,6 +3633,8 @@ class $hu extends S {
   @override
   String get show_original => "Megjelenítése angol szöveg";
   @override
+  String get offline_download_message => "300+ MB fotót és illusztrációkat tölthet le. Ellenőrizze, hogy a készülék wi-fi-hez van-e csatlakoztatva. Készen állsz a letöltésre?";
+  @override
   String get southern_america => "Dél-Amerika";
   @override
   String get middle_atlantic_ocean => "Közép-Atlanti-óceán";
@@ -3393,6 +3652,8 @@ class $hu extends S {
   String get habitat_message => "Mi veszi körül? Határozza meg a növény élőhelyét.";
   @override
   String get plant_toxicity => "Méregtartalom";
+  @override
+  String get offline_download_fail => "Sikertelen letöltés. Kérjük, ellenőrizze az internetkapcsolatot vagy a szabad helyet az eszközön, és próbálja újra.";
   @override
   String get snack_no_flowers => "Nincsenek virág illeszkedési feltételek.";
   @override
@@ -3421,6 +3682,8 @@ class $hu extends S {
   String get western_south_america => "Nyugat-Dél-Amerika";
   @override
   String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Bezár";
   @override
   String get europe => "Európa";
   @override
@@ -3486,6 +3749,8 @@ class $hu extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "A letöltés folytatása";
+  @override
   String get enhancements => "Fejlesztések";
   @override
   String get habitat_wetland => "mocsarak vagy vizes élőhelyek";
@@ -3524,11 +3789,17 @@ class $hu extends S {
   @override
   String get list_info => "Válasszon egyet";
   @override
+  String get new_version => "Új verzió elérhető, kérjük, frissítse.";
+  @override
   String get taxonomy_subfamilia => "Alcsalád";
   @override
   String get my_region => "Saját régió";
   @override
+  String get pause => "Szünet";
+  @override
   String get indian_subcontinent => "Indiai szubkontinens";
+  @override
+  String get product_offline_description => "Internetes kapcsolat nélkül is futtathatja az alkalmazást.";
   @override
   String get plant_flower => "Virágok";
   @override
@@ -3563,6 +3834,8 @@ class $hu extends S {
   String get eastern_europe => "Kelet-Európa";
   @override
   String get south_central_usa => "Dél-Közép USA";
+  @override
+  String get offline_download_success => "A fényképek és illusztrációk sikeresen letöltöttek.";
   @override
   String get plant_flowering_from => "A virágzás időszaka";
   @override
@@ -3628,9 +3901,13 @@ class $hu extends S {
   @override
   String get northern_africa => "Észak-Afrika";
   @override
+  String get offline_subtitle => "szüksége 300+ MB további helyet.";
+  @override
   String get china => "Kína";
   @override
   String get product_no_ads_title => "Nem kívánt reklám";
+  @override
+  String get offline_title => "Offline módban";
   @override
   String get petal_zygomorphic => "kétoldali";
   @override
@@ -3652,6 +3929,8 @@ class $uk extends S {
   @override
   String get legend => "Легенда";
   @override
+  String get product_offline_title => "Автономний режим";
+  @override
   String get feedback_submit_translate_data => "Покращити дані квітки";
   @override
   String get snack_copy => "Копіюється в буфер обміну";
@@ -3661,6 +3940,8 @@ class $uk extends S {
   String get about => "Про додатку";
   @override
   String get product_no_ads_description => "Програма не покаже рекламний банер внизу екрана.";
+  @override
+  String get offline_download_progress => "Завантаження фотографій і ілюстрацій ...";
   @override
   String get western_canada => "Західна Канада";
   @override
@@ -3677,6 +3958,8 @@ class $uk extends S {
   String get caribbean => "Карибський басейн";
   @override
   String get product_search_description => "Ви зможете знайти квітку за її українською або латинською назвою або за її таксоном (наприклад ряд, родина, рід).";
+  @override
+  String get offline_delete_message => "Видалити дані в автономному режимі?";
   @override
   String get australasia => "Австралазія";
   @override
@@ -3722,6 +4005,8 @@ class $uk extends S {
   @override
   String get show_original => "Показати англійський текст";
   @override
+  String get offline_download_message => "Ви збираєтеся завантажити 300+ Мб фотографій і ілюстрацій. Перевірте, чи пристрій підключено до wi-fi. Чи готові ви до завантаження?";
+  @override
   String get southern_america => "Південна Америка";
   @override
   String get middle_atlantic_ocean => "Середній атлантичний океан";
@@ -3739,6 +4024,8 @@ class $uk extends S {
   String get habitat_message => "Що навколо тебе? Визначити місце проживання рослин.";
   @override
   String get plant_toxicity => "Токсичність";
+  @override
+  String get offline_download_fail => "Помилка завантаження. Перевірте підключення до Інтернету або вільний простір на пристрої та повторіть спробу.";
   @override
   String get snack_no_flowers => "Критерії відповідності квітам відсутні.";
   @override
@@ -3767,6 +4054,8 @@ class $uk extends S {
   String get western_south_america => "Західна Південна Америка";
   @override
   String get taxonomy_subgenus => "Підрід";
+  @override
+  String get close => "Закрити";
   @override
   String get europe => "Європа";
   @override
@@ -3832,6 +4121,8 @@ class $uk extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Відновити завантаження";
+  @override
   String get enhancements => "Покращення";
   @override
   String get habitat_wetland => "водно-болотні угіддя";
@@ -3870,11 +4161,17 @@ class $uk extends S {
   @override
   String get list_info => "Вибрати один";
   @override
+  String get new_version => "Нова версія доступна, будь ласка, оновіть.";
+  @override
   String get taxonomy_subfamilia => "Підродина";
   @override
   String get my_region => "Мій регіон";
   @override
+  String get pause => "Пауза";
+  @override
   String get indian_subcontinent => "Індійський субконтинент";
+  @override
+  String get product_offline_description => "Ви зможете запускати програму без підключення до Інтернету.";
   @override
   String get plant_flower => "Квіти";
   @override
@@ -3900,7 +4197,7 @@ class $uk extends S {
   @override
   String get antarctic_continent => "Антарктичний континент";
   @override
-  String get no => "Немає";
+  String get no => "Ні";
   @override
   String get brazil => "Бразилія";
   @override
@@ -3909,6 +4206,8 @@ class $uk extends S {
   String get eastern_europe => "Східна Європа";
   @override
   String get south_central_usa => "Південно-Центральна США";
+  @override
+  String get offline_download_success => "Фотографії та ілюстрації успішно завантажені.";
   @override
   String get plant_flowering_from => "Цвіте:";
   @override
@@ -3974,9 +4273,13 @@ class $uk extends S {
   @override
   String get northern_africa => "Північна Африка";
   @override
+  String get offline_subtitle => "потрібно більше 300 МБ додаткового простору.";
+  @override
   String get china => "Китай";
   @override
   String get product_no_ads_title => "Немає небажаної реклами";
+  @override
+  String get offline_title => "Автономний режим";
   @override
   String get petal_zygomorphic => "зигоморфной";
   @override
@@ -3998,6 +4301,8 @@ class $sk extends S {
   @override
   String get legend => "Legenda";
   @override
+  String get product_offline_title => "Režm offline";
+  @override
   String get feedback_submit_translate_data => "Opraviť chyby v dátach";
   @override
   String get snack_copy => "Skopírované do schránky";
@@ -4007,6 +4312,8 @@ class $sk extends S {
   String get about => "O aplikácii";
   @override
   String get product_no_ads_description => "Aplikácia nezobrazí reklamný banner v spodnej časti obrazovky.";
+  @override
+  String get offline_download_progress => "Prebieha sťahovanie fotografií a ilustrácii ...";
   @override
   String get western_canada => "Západná Kanada";
   @override
@@ -4023,6 +4330,8 @@ class $sk extends S {
   String get caribbean => "Karibik";
   @override
   String get product_search_description => "Budete môcť nájsť kvetinu podľa slovenského alebo latinského názvu alebo podľa taxónu (napr. podľa rádu, čeľade, rodu).";
+  @override
+  String get offline_delete_message => "Naozaj chcete zmazať offline dáta?";
   @override
   String get australasia => "Australázia";
   @override
@@ -4068,6 +4377,8 @@ class $sk extends S {
   @override
   String get show_original => "Ukáž anglický text";
   @override
+  String get offline_download_message => "Chystáte sa stiahnuť viac ako 300 MB fotografií a ilustrácii. Skontrolujte, prosím, či je vaše zariadenie pripojené na wifi sieť. Chcete začať sťahovať súbory?";
+  @override
   String get southern_america => "Južná Amerika";
   @override
   String get middle_atlantic_ocean => "Stredný Atlantik";
@@ -4085,6 +4396,8 @@ class $sk extends S {
   String get habitat_message => "Kde sa nachádzaš? Identifikuj lokalitu.";
   @override
   String get plant_toxicity => "Toxicita";
+  @override
+  String get offline_download_fail => "Sťahovanie súborov zlyhalo. Prosím skontrolujte pripojenie k internetu alebo voľný priestor na zariadení a skúste znova.";
   @override
   String get snack_no_flowers => "Filtru nevyhovujú žiadne kvety v databáze.";
   @override
@@ -4113,6 +4426,8 @@ class $sk extends S {
   String get western_south_america => "Západ Južnej Ameriky";
   @override
   String get taxonomy_subgenus => "podrod";
+  @override
+  String get close => "Zavrieť";
   @override
   String get europe => "Európa";
   @override
@@ -4178,6 +4493,8 @@ class $sk extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Pokračovať v sťahovaní";
+  @override
   String get enhancements => "Vylepšenia";
   @override
   String get habitat_wetland => "mokrade a močiare";
@@ -4214,9 +4531,15 @@ class $sk extends S {
   @override
   String get list_info => "Vyber si jednu";
   @override
+  String get new_version => "K dispozícii je nová verzia, prosím nainštalujte si ju.";
+  @override
   String get taxonomy_subfamilia => "podčeľaď";
   @override
+  String get pause => "Prerušiť";
+  @override
   String get indian_subcontinent => "Indický subkontinent";
+  @override
+  String get product_offline_description => "Aplikáciu budete môcť spustiť bez pripojenia k internetu.";
   @override
   String get plant_flower => "Kvety";
   @override
@@ -4249,6 +4572,8 @@ class $sk extends S {
   String get eastern_europe => "Východná Európa";
   @override
   String get south_central_usa => "Stredojuh USA";
+  @override
+  String get offline_download_success => "Fotografie a ilustrácie boli úspešne stiahnuté.";
   @override
   String get plant_flowering_from => "Kvitne:";
   @override
@@ -4314,9 +4639,13 @@ class $sk extends S {
   @override
   String get northern_africa => "Severná Afrika";
   @override
+  String get offline_subtitle => "potrebuje viac ako 300 MB voľného priestoru.";
+  @override
   String get china => "Čína";
   @override
   String get product_no_ads_title => "Žiadna nežiadúca reklama";
+  @override
+  String get offline_title => "Režm offline";
   @override
   String get petal_zygomorphic => "nepravidelný";
   @override
@@ -4338,6 +4667,8 @@ class $sl extends S {
   @override
   String get legend => "Legenda";
   @override
+  String get product_offline_title => "Način brez povezave";
+  @override
   String get feedback_submit_translate_data => "Izboljšajte podatke o cvetju";
   @override
   String get snack_copy => "Kopirano v odložišče";
@@ -4347,6 +4678,8 @@ class $sl extends S {
   String get about => "O aplikaciji";
   @override
   String get product_no_ads_description => "Aplikacija ne bo prikazala oglasne pasice na dnu zaslona.";
+  @override
+  String get offline_download_progress => "Prenos fotografij in ilustracij ...";
   @override
   String get western_canada => "Zahodna Kanada";
   @override
@@ -4363,6 +4696,8 @@ class $sl extends S {
   String get caribbean => "Karibi";
   @override
   String get product_search_description => "Cvet bo mogoče najti po slovenskem ali latinskem imenu ali po taksonu (npr. red, družina, rod).";
+  @override
+  String get offline_delete_message => "Ali želite izbrisati podatke brez povezave?";
   @override
   String get australasia => "Avstralija";
   @override
@@ -4408,6 +4743,8 @@ class $sl extends S {
   @override
   String get show_original => "Prikaži angleško besedilo";
   @override
+  String get offline_download_message => "Naložili boste 300+ MB fotografij in ilustracij. Preverite, ali je vaša naprava povezana z wi-fi. Ste pripravljeni za prenos?";
+  @override
   String get southern_america => "Južna Amerika";
   @override
   String get middle_atlantic_ocean => "Srednji Atlantski ocean";
@@ -4425,6 +4762,8 @@ class $sl extends S {
   String get habitat_message => "Kaj je okoli vas? Prepoznajte rastline habitat.";
   @override
   String get plant_toxicity => "Toksičnost";
+  @override
+  String get offline_download_fail => "Prenos ni uspel. Preverite internetno povezavo ali pa sprostite prostor na napravi in poskusite znova.";
   @override
   String get snack_no_flowers => "Ni meril za ujemanje cvetja.";
   @override
@@ -4453,6 +4792,8 @@ class $sl extends S {
   String get western_south_america => "Zahodna Južna Amerika";
   @override
   String get taxonomy_subgenus => "Podrod";
+  @override
+  String get close => "Zapri";
   @override
   String get europe => "Evropa";
   @override
@@ -4518,6 +4859,8 @@ class $sl extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Nadaljuj prenos";
+  @override
   String get enhancements => "Dodatki";
   @override
   String get habitat_wetland => "močvirje ali mokrišča";
@@ -4556,11 +4899,17 @@ class $sl extends S {
   @override
   String get list_info => "Izbrati eno";
   @override
+  String get new_version => "Na voljo je nova različica, posodobite.";
+  @override
   String get taxonomy_subfamilia => "Poddružina";
   @override
   String get my_region => "Moja regija";
   @override
+  String get pause => "Pavza";
+  @override
   String get indian_subcontinent => "Indijski podcelini";
+  @override
+  String get product_offline_description => "Aplikacijo lahko zaženete brez internetne povezave.";
   @override
   String get plant_flower => "Cvetje";
   @override
@@ -4595,6 +4944,8 @@ class $sl extends S {
   String get eastern_europe => "Vzhodna Evropa";
   @override
   String get south_central_usa => "Južna osrednja ZDA";
+  @override
+  String get offline_download_success => "Fotografije in ilustracije so bile uspešno prenesene.";
   @override
   String get plant_flowering_from => "Cvetoče:";
   @override
@@ -4660,9 +5011,13 @@ class $sl extends S {
   @override
   String get northern_africa => "Severna Afrika";
   @override
+  String get offline_subtitle => "potrebuje dodatnih 300 MB dodatnega prostora.";
+  @override
   String get china => "Kitajska";
   @override
   String get product_no_ads_title => "Brez neželenega oglasa";
+  @override
+  String get offline_title => "Način brez povezave";
   @override
   String get petal_zygomorphic => "zigomorfna";
   @override
@@ -4684,6 +5039,8 @@ class $id extends S {
   @override
   String get legend => "Legenda";
   @override
+  String get product_offline_title => "Mode offline";
+  @override
   String get feedback_submit_translate_data => "Perbaiki data bunga";
   @override
   String get snack_copy => "Disalin ke Clipboard";
@@ -4693,6 +5050,8 @@ class $id extends S {
   String get about => "Tentang";
   @override
   String get product_no_ads_description => "Aplikasi tidak akan menampilkan spanduk iklan di bagian bawah layar.";
+  @override
+  String get offline_download_progress => "Mengunduh foto dan ilustrasi ...";
   @override
   String get western_canada => "Kanada Barat";
   @override
@@ -4709,6 +5068,8 @@ class $id extends S {
   String get caribbean => "Karibia";
   @override
   String get product_search_description => "Anda dapat menemukan bunga dengan nama Latin atau dengan taksonnya (mis. ordo, famili, genera)";
+  @override
+  String get offline_delete_message => "Apakah Anda ingin menghapus data offline?";
   @override
   String get australasia => "Australasia";
   @override
@@ -4754,6 +5115,8 @@ class $id extends S {
   @override
   String get show_original => "Tampilkan teks bahasa Inggris";
   @override
+  String get offline_download_message => "Anda akan mengunduh 300+ MB foto dan ilustrasi. Periksa apakah perangkat Anda terhubung ke wi-fi. Sudah siap untuk mengunduh?";
+  @override
   String get southern_america => "Amerika Selatan";
   @override
   String get middle_atlantic_ocean => "Samudera Atlantik Tengah";
@@ -4771,6 +5134,8 @@ class $id extends S {
   String get habitat_message => "Ada apa di sekitar kamu Identifikasi habitat tanaman.";
   @override
   String get plant_toxicity => "Toksisitas";
+  @override
+  String get offline_download_fail => "Pengunduhan gagal. Silakan periksa koneksi internet Anda atau ruang kosong di perangkat dan coba lagi.";
   @override
   String get snack_no_flowers => "Tidak ada kriteria pencocokan bunga.";
   @override
@@ -4799,6 +5164,8 @@ class $id extends S {
   String get western_south_america => "Amerika Selatan bagian Barat";
   @override
   String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Dekat";
   @override
   String get europe => "Eropa";
   @override
@@ -4864,6 +5231,8 @@ class $id extends S {
   @override
   String get plant_height_to => "sampai";
   @override
+  String get offline_download => "Lanjutkan unduhan";
+  @override
   String get enhancements => "Perangkat tambahan";
   @override
   String get habitat_wetland => "lahan basah";
@@ -4902,11 +5271,17 @@ class $id extends S {
   @override
   String get list_info => "Pilih salah satu";
   @override
+  String get new_version => "Versi baru tersedia, perbarui.";
+  @override
   String get taxonomy_subfamilia => "Subfamily";
   @override
   String get my_region => "Daerah saya";
   @override
+  String get pause => "Jeda";
+  @override
   String get indian_subcontinent => "Sub Benua India";
+  @override
+  String get product_offline_description => "Anda dapat menjalankan aplikasi tanpa koneksi internet.";
   @override
   String get plant_flower => "Bunga";
   @override
@@ -4941,6 +5316,8 @@ class $id extends S {
   String get eastern_europe => "Eropa Timur";
   @override
   String get south_central_usa => "Pusat Selatan AS";
+  @override
+  String get offline_download_success => "Foto dan ilustrasi telah berhasil diunduh.";
   @override
   String get plant_flowering_from => "Berbunga dari";
   @override
@@ -5006,9 +5383,13 @@ class $id extends S {
   @override
   String get northern_africa => "Afrika Utara";
   @override
+  String get offline_subtitle => "membutuhkan 300+ MB ruang tambahan.";
+  @override
   String get china => "Cina";
   @override
   String get product_no_ads_title => "Tidak ada iklan yang tidak diinginkan";
+  @override
+  String get offline_title => "Mode offline";
   @override
   String get petal_zygomorphic => "tidak beraturan";
   @override
@@ -5030,6 +5411,8 @@ class $sr extends S {
   @override
   String get legend => "Легенда";
   @override
+  String get product_offline_title => "Режим ван мреже";
+  @override
   String get feedback_submit_translate_data => "Побољшајте податке о цвету";
   @override
   String get snack_copy => "Копирано у Цлипбоард";
@@ -5039,6 +5422,8 @@ class $sr extends S {
   String get about => "О апликацији";
   @override
   String get product_no_ads_description => "Апликација не приказује рекламни баннер на дну екрана.";
+  @override
+  String get offline_download_progress => "Преузимање фотографија и илустрација ...";
   @override
   String get western_canada => "Западна Канада";
   @override
@@ -5055,6 +5440,8 @@ class $sr extends S {
   String get caribbean => "Кариби";
   @override
   String get product_search_description => "Моћи ћете пронаћи цвијет по његовом српском или латинском имену или по његовом таксону (нпр. ред, породица, род).";
+  @override
+  String get offline_delete_message => "Да ли желите да избришете ванмрежне податке?";
   @override
   String get australasia => "Аустраласиа";
   @override
@@ -5100,6 +5487,8 @@ class $sr extends S {
   @override
   String get show_original => "Схов енглески текст";
   @override
+  String get offline_download_message => "Преузет ћете 300+ МБ фотографија и илустрација. Проверите да ли је ваш уређај повезан са Ви-Фи. Да ли сте спремни за преузимање?";
+  @override
   String get southern_america => "Јужна Америка";
   @override
   String get middle_atlantic_ocean => "Средњи Атлантски океан";
@@ -5117,6 +5506,8 @@ class $sr extends S {
   String get habitat_message => "Шта је око тебе? Идентификовати станиште биљке.";
   @override
   String get plant_toxicity => "Токсичност";
+  @override
+  String get offline_download_fail => "Преузимање није успело. Проверите интернет везу или слободан простор на уређају и покушајте поново.";
   @override
   String get snack_no_flowers => "Нема критеријума за подударање цвећа.";
   @override
@@ -5145,6 +5536,8 @@ class $sr extends S {
   String get western_south_america => "Западна Јужна Америка";
   @override
   String get taxonomy_subgenus => "подрод";
+  @override
+  String get close => "Близу";
   @override
   String get europe => "Европа";
   @override
@@ -5210,6 +5603,8 @@ class $sr extends S {
   @override
   String get plant_height_to => "до";
   @override
+  String get offline_download => "Настави преузимање";
+  @override
   String get enhancements => "Побољшања";
   @override
   String get habitat_wetland => "мочварама";
@@ -5248,11 +5643,17 @@ class $sr extends S {
   @override
   String get list_info => "Одабрати једну";
   @override
+  String get new_version => "Доступна је нова верзија, ажурирајте.";
+  @override
   String get taxonomy_subfamilia => "потпородица";
   @override
   String get my_region => "Мој регион";
   @override
+  String get pause => "Пауза";
+  @override
   String get indian_subcontinent => "Индијски подконтинент";
+  @override
+  String get product_offline_description => "Моћи ћете покренути апликацију без интернет везе.";
   @override
   String get plant_flower => "Цвеће";
   @override
@@ -5287,6 +5688,8 @@ class $sr extends S {
   String get eastern_europe => "Источна Европа";
   @override
   String get south_central_usa => "Јужна централна САД";
+  @override
+  String get offline_download_success => "Фотографије и илустрације су успешно преузете.";
   @override
   String get plant_flowering_from => "Цветања од";
   @override
@@ -5352,9 +5755,13 @@ class $sr extends S {
   @override
   String get northern_africa => "Северна Африка";
   @override
+  String get offline_subtitle => "захтева додатни простор од 300+ МБ.";
+  @override
   String get china => "Кина";
   @override
   String get product_no_ads_title => "Нема нежељених реклама";
+  @override
+  String get offline_title => "Режим ван мреже";
   @override
   String get petal_zygomorphic => "зигоморфан";
   @override
@@ -5376,6 +5783,8 @@ class $sv extends S {
   @override
   String get legend => "Legend";
   @override
+  String get product_offline_title => "Offlineläge";
+  @override
   String get feedback_submit_translate_data => "Förbättra blommans data";
   @override
   String get snack_copy => "Kopieras till Urklipp";
@@ -5385,6 +5794,8 @@ class $sv extends S {
   String get about => "Om ansökan";
   @override
   String get product_no_ads_description => "Applikationen visar inte annonsbannern längst ner på skärmen.";
+  @override
+  String get offline_download_progress => "Ladda ner bilder och illustrationer ...";
   @override
   String get western_canada => "Västra Kanada";
   @override
@@ -5401,6 +5812,8 @@ class $sv extends S {
   String get caribbean => "Karibisk";
   @override
   String get product_search_description => "Du kan hitta en blomma med sitt svenska eller latinska namn eller dess taxon (t ex ordning, familj, släkt).";
+  @override
+  String get offline_delete_message => "Vill du radera offline-data?";
   @override
   String get australasia => "Australasien";
   @override
@@ -5446,6 +5859,8 @@ class $sv extends S {
   @override
   String get show_original => "Visa engelsk text";
   @override
+  String get offline_download_message => "Du ska ladda ner 300+ MB bilder och illustrationer. Kontrollera om enheten är ansluten till Wi-Fi. Är du redo för nedladdning?";
+  @override
   String get southern_america => "Sydamerika";
   @override
   String get middle_atlantic_ocean => "Mellanöstern Atlanten";
@@ -5463,6 +5878,8 @@ class $sv extends S {
   String get habitat_message => "Vad handlar du om? Identifiera växtens livsmiljö.";
   @override
   String get plant_toxicity => "Giftighet";
+  @override
+  String get offline_download_fail => "Nedladdning misslyckad. Kontrollera din internetanslutning eller ledigt utrymme på enheten och försök igen.";
   @override
   String get snack_no_flowers => "Inga blommor matchande kriterier.";
   @override
@@ -5491,6 +5908,8 @@ class $sv extends S {
   String get western_south_america => "Västra Sydamerika";
   @override
   String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Stänga";
   @override
   String get europe => "Europa";
   @override
@@ -5556,6 +5975,8 @@ class $sv extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Återuppta nedladdning";
+  @override
   String get enhancements => "Förbättringar";
   @override
   String get habitat_wetland => "hedar eller våtmarker";
@@ -5594,11 +6015,17 @@ class $sv extends S {
   @override
   String get list_info => "Välj en";
   @override
+  String get new_version => "Ny version finns tillgänglig, uppdatera.";
+  @override
   String get taxonomy_subfamilia => "Underfamilj";
   @override
   String get my_region => "Min region";
   @override
+  String get pause => "Paus";
+  @override
   String get indian_subcontinent => "Indiska subkontinenten";
+  @override
+  String get product_offline_description => "Du kan köra program utan internetanslutning.";
   @override
   String get plant_flower => "Blomma";
   @override
@@ -5633,6 +6060,8 @@ class $sv extends S {
   String get eastern_europe => "Östeuropa";
   @override
   String get south_central_usa => "Syd-Central USA";
+  @override
+  String get offline_download_success => "Bilder och illustrationer har laddats ner.";
   @override
   String get plant_flowering_from => "Blomningstid";
   @override
@@ -5698,9 +6127,13 @@ class $sv extends S {
   @override
   String get northern_africa => "Nordafrika";
   @override
+  String get offline_subtitle => "kräver 300 + MB extra utrymme.";
+  @override
   String get china => "Kina";
   @override
   String get product_no_ads_title => "Ingen oönskad annonsering";
+  @override
+  String get offline_title => "Offlineläge";
   @override
   String get petal_zygomorphic => "zygomorf";
   @override
@@ -5726,6 +6159,8 @@ class $it extends S {
   @override
   String get legend => "Legenda";
   @override
+  String get product_offline_title => "Modalità offline";
+  @override
   String get feedback_submit_translate_data => "Migliorare le informazioni sui fiori";
   @override
   String get snack_copy => "Copiato negli appunti";
@@ -5735,6 +6170,8 @@ class $it extends S {
   String get about => "Info sull'applicazione";
   @override
   String get product_no_ads_description => "L'applicazione non mostrerà banner pubblicitari nella parte inferiore dello schermo.";
+  @override
+  String get offline_download_progress => "Download di foto e illustrazioni ...";
   @override
   String get western_canada => "Canada occidentale";
   @override
@@ -5751,6 +6188,8 @@ class $it extends S {
   String get caribbean => "Caraibico";
   @override
   String get product_search_description => "Sarai in grado di trovare un fiore con il suo nome italiano o latino o dal suo taxon (ad esempio, ordine, famiglia, genere).";
+  @override
+  String get offline_delete_message => "Vuoi eliminare i dati offline?";
   @override
   String get australasia => "Australasia";
   @override
@@ -5796,6 +6235,8 @@ class $it extends S {
   @override
   String get show_original => "Mostra il testo in inglese";
   @override
+  String get offline_download_message => "Stai per scaricare oltre 300 MB di foto e illustrazioni. Si prega di verificare se il dispositivo è collegato al wi-fi. Sei pronto per il download?";
+  @override
   String get southern_america => "America meridionale";
   @override
   String get middle_atlantic_ocean => "Medio Oceano Atlantico";
@@ -5813,6 +6254,8 @@ class $it extends S {
   String get habitat_message => "Cosa c'è intorno a te? Identifica l'habitat.";
   @override
   String get plant_toxicity => "Tossicità";
+  @override
+  String get offline_download_fail => "Scaricamento fallito. Controlla la tua connessione Internet o lo spazio libero sul dispositivo e riprova.";
   @override
   String get snack_no_flowers => "Nessun fiore che corrisponde ai criteri.";
   @override
@@ -5841,6 +6284,8 @@ class $it extends S {
   String get western_south_america => "America del Sud Occidentale";
   @override
   String get taxonomy_subgenus => "Sottogenere";
+  @override
+  String get close => "Chiudi";
   @override
   String get europe => "Europa";
   @override
@@ -5906,6 +6351,8 @@ class $it extends S {
   @override
   String get plant_height_to => "a";
   @override
+  String get offline_download => "Riprendi a scaricare";
+  @override
   String get enhancements => "Miglioramenti";
   @override
   String get habitat_wetland => "brughiere o zone umide";
@@ -5944,11 +6391,17 @@ class $it extends S {
   @override
   String get list_info => "Scegli un fiore";
   @override
+  String get new_version => "È disponibile una nuova versione, aggiorna l'applicazione.";
+  @override
   String get taxonomy_subfamilia => "Sottofamiglia";
   @override
   String get my_region => "La mia regione";
   @override
+  String get pause => "Pausa";
+  @override
   String get indian_subcontinent => "Subcontinente indiano";
+  @override
+  String get product_offline_description => "Sarai in grado di eseguire l'applicazione senza connessione a Internet.";
   @override
   String get plant_flower => "Fiori";
   @override
@@ -5983,6 +6436,8 @@ class $it extends S {
   String get eastern_europe => "Europa orientale";
   @override
   String get south_central_usa => "Stati Uniti centro-meridionali";
+  @override
+  String get offline_download_success => "Foto e illustrazioni scaricate con successo.";
   @override
   String get plant_flowering_from => "Fioritura da";
   @override
@@ -6048,9 +6503,13 @@ class $it extends S {
   @override
   String get northern_africa => "Africa settentrionale";
   @override
+  String get offline_subtitle => "richiede oltre 300 MB di spazio aggiuntivo.";
+  @override
   String get china => "Cina";
   @override
   String get product_no_ads_title => "Nessuna pubblicità indesiderata";
+  @override
+  String get offline_title => "Modalità offline";
   @override
   String get petal_zygomorphic => "zigomorfi";
   @override
@@ -6072,6 +6531,8 @@ class $es extends S {
   @override
   String get legend => "Leyenda";
   @override
+  String get product_offline_title => "Modo offline";
+  @override
   String get feedback_submit_translate_data => "Mejorar los datos de la flor.";
   @override
   String get snack_copy => "Copiado al portapapeles";
@@ -6081,6 +6542,8 @@ class $es extends S {
   String get about => "Acerca de";
   @override
   String get product_no_ads_description => "La aplicación no mostrará el anuncio publicitario en la parte inferior de la pantalla.";
+  @override
+  String get offline_download_progress => "Descargando fotos e ilustraciones ...";
   @override
   String get western_canada => "Canadá occidental";
   @override
@@ -6097,6 +6560,8 @@ class $es extends S {
   String get caribbean => "Caribe";
   @override
   String get product_search_description => "Podrá encontrar una flor por su nombre en español o latino o por su taxón (por ejemplo orden, familia, género).";
+  @override
+  String get offline_delete_message => "¿Desea borrar los datos fuera de línea?";
   @override
   String get australasia => "Australasia";
   @override
@@ -6142,6 +6607,8 @@ class $es extends S {
   @override
   String get show_original => "Mostrar texto en inglés";
   @override
+  String get offline_download_message => "Vas a descargar más de 300 MB de fotos e ilustraciones. Por favor, compruebe si su dispositivo está conectado a Wi-Fi. ¿Estás listo para una descarga?";
+  @override
   String get southern_america => "América del Sur";
   @override
   String get middle_atlantic_ocean => "Medio Océano Atlántico";
@@ -6159,6 +6626,8 @@ class $es extends S {
   String get habitat_message => "¿Dónde te encuentras? Identifica el lugar.";
   @override
   String get plant_toxicity => "Toxicidad";
+  @override
+  String get offline_download_fail => "Descarga fracasó. Verifique su conexión a Internet o espacio libre en el dispositivo e intente nuevamente.";
   @override
   String get snack_no_flowers => "No hay criterios de correspondencia de flores.";
   @override
@@ -6187,6 +6656,8 @@ class $es extends S {
   String get western_south_america => "América del oeste occidental";
   @override
   String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Cerrar";
   @override
   String get europe => "Europa";
   @override
@@ -6252,6 +6723,8 @@ class $es extends S {
   @override
   String get plant_height_to => "hasta";
   @override
+  String get offline_download => "Descarga hoja de vida";
+  @override
   String get enhancements => "Mejoras";
   @override
   String get habitat_wetland => "páramo o pantano";
@@ -6290,11 +6763,17 @@ class $es extends S {
   @override
   String get list_info => "Elige una";
   @override
+  String get new_version => "La nueva versión está disponible, por favor actualice.";
+  @override
   String get taxonomy_subfamilia => "subfamilia";
   @override
   String get my_region => "Mi región";
   @override
+  String get pause => "Pausa";
+  @override
   String get indian_subcontinent => "Subcontinente indio";
+  @override
+  String get product_offline_description => "Podrás ejecutar la aplicación sin conexión a internet.";
   @override
   String get plant_flower => "Flores";
   @override
@@ -6329,6 +6808,8 @@ class $es extends S {
   String get eastern_europe => "Europa del Este";
   @override
   String get south_central_usa => "Central sur de los Estados Unidos";
+  @override
+  String get offline_download_success => "Fotos e ilustraciones han sido descargadas exitosamente.";
   @override
   String get plant_flowering_from => "Floración desde";
   @override
@@ -6394,9 +6875,13 @@ class $es extends S {
   @override
   String get northern_africa => "Africa del Norte";
   @override
+  String get offline_subtitle => "requiere espacio adicional de 300 MB.";
+  @override
   String get china => "China";
   @override
   String get product_no_ads_title => "No hay publicidad no deseada";
+  @override
+  String get offline_title => "Modo offline";
   @override
   String get petal_zygomorphic => "zigomorfo";
   @override
@@ -6418,6 +6903,8 @@ class $et extends S {
   @override
   String get legend => "Legend";
   @override
+  String get product_offline_title => "Võrguühenduseta režiim";
+  @override
   String get feedback_submit_translate_data => "Parandage lilli andmeid";
   @override
   String get snack_copy => "Kopeeritud lõikelauale";
@@ -6427,6 +6914,8 @@ class $et extends S {
   String get about => "Rakenduse kohta";
   @override
   String get product_no_ads_description => "Rakendus ei näita ekraani allosas reklaami bännerit.";
+  @override
+  String get offline_download_progress => "Fotode ja illustratsioonide allalaadimine ...";
   @override
   String get western_canada => "Lääne-Kanada";
   @override
@@ -6443,6 +6932,8 @@ class $et extends S {
   String get caribbean => "Kariibimere saared";
   @override
   String get product_search_description => "Sul on võimalik leida lill oma eesti või ladina nime või taksoni järgi (nt selts, sugukond, perekond).";
+  @override
+  String get offline_delete_message => "Kas soovite offline andmeid kustutada?";
   @override
   String get australasia => "Austraalia";
   @override
@@ -6488,6 +6979,8 @@ class $et extends S {
   @override
   String get show_original => "Näita ingliskeelne tekst";
   @override
+  String get offline_download_message => "Sa laadid alla 300+ MB fotosid ja illustratsioone. Kontrollige, kas teie seade on ühendatud Wi-Fi-ga. Kas olete valmis allalaadimiseks?";
+  @override
   String get southern_america => "Lõuna-Ameerika";
   @override
   String get middle_atlantic_ocean => "Kesk-Atlandi ookean";
@@ -6505,6 +6998,8 @@ class $et extends S {
   String get habitat_message => "Mis teie ümber? Nimetage taime elupaiga.";
   @override
   String get plant_toxicity => "Mürgisus";
+  @override
+  String get offline_download_fail => "Allalaadimine ebaõnnestus. Palun kontrollige oma Interneti-ühendust või vaba ruumi seadmes ja proovige uuesti.";
   @override
   String get snack_no_flowers => "Lillede sobitamise kriteeriumid puuduvad.";
   @override
@@ -6533,6 +7028,8 @@ class $et extends S {
   String get western_south_america => "Lääne-Lõuna-Ameerika";
   @override
   String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Sulge";
   @override
   String get europe => "Euroopa";
   @override
@@ -6598,6 +7095,8 @@ class $et extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Jätka allalaadimist";
+  @override
   String get enhancements => "Täiendused";
   @override
   String get habitat_wetland => "moorlandi või märgala";
@@ -6636,11 +7135,17 @@ class $et extends S {
   @override
   String get list_info => "Vali üks";
   @override
+  String get new_version => "Uus versioon on saadaval, värskendage.";
+  @override
   String get taxonomy_subfamilia => "Subfamily";
   @override
   String get my_region => "Minu regioon";
   @override
+  String get pause => "Paus";
+  @override
   String get indian_subcontinent => "India subkontinent";
+  @override
+  String get product_offline_description => "Teil on võimalik käivitada rakendust ilma internetiühenduseta.";
   @override
   String get plant_flower => "Õis";
   @override
@@ -6675,6 +7180,8 @@ class $et extends S {
   String get eastern_europe => "Ida-Euroopa";
   @override
   String get south_central_usa => "Lõuna-Keskne USA";
+  @override
+  String get offline_download_success => "Fotod ja illustratsioonid on edukalt alla laaditud.";
   @override
   String get plant_flowering_from => "Õitsemine";
   @override
@@ -6740,9 +7247,13 @@ class $et extends S {
   @override
   String get northern_africa => "Põhja-Aafrika";
   @override
+  String get offline_subtitle => "vajab 300+ MB lisaruumi.";
+  @override
   String get china => "Hiina";
   @override
   String get product_no_ads_title => "Soovimatu reklaam puudub";
+  @override
+  String get offline_title => "Võrguühenduseta režiim";
   @override
   String get petal_zygomorphic => "ebaregulaarne";
   @override
@@ -6764,6 +7275,8 @@ class $cs extends S {
   @override
   String get legend => "Legenda";
   @override
+  String get product_offline_title => "Offline režim";
+  @override
   String get feedback_submit_translate_data => "Opravit chyby datech";
   @override
   String get snack_copy => "Zkopírováno do schránky";
@@ -6773,6 +7286,8 @@ class $cs extends S {
   String get about => "O aplikaci";
   @override
   String get product_no_ads_description => "Aplikace nezobrazí reklamní banner ve spodní části obrazovky.";
+  @override
+  String get offline_download_progress => "Probíhá stahování fotografií a ilustrací ...";
   @override
   String get western_canada => "Západní Kanada";
   @override
@@ -6789,6 +7304,8 @@ class $cs extends S {
   String get caribbean => "Karibik";
   @override
   String get product_search_description => "Budete moci najít květinu podle českého nebo latinského názvu nebo podle taxonu (např. podle řádu, čeledi, rodu).";
+  @override
+  String get offline_delete_message => "Opravdu chcete vymazat offline data?";
   @override
   String get australasia => "Australasie";
   @override
@@ -6834,6 +7351,8 @@ class $cs extends S {
   @override
   String get show_original => "Zobraz slovenský text";
   @override
+  String get offline_download_message => "Chystáte se stáhnout více než 300 MB fotografií a ilustrací. Zkontrolujte, prosím, zda je vaše zařízení připojeno na wifi síť. Chcete začít stahovat soubory?";
+  @override
   String get southern_america => "Jižní Amerika";
   @override
   String get middle_atlantic_ocean => "Střední Atlantik";
@@ -6851,6 +7370,8 @@ class $cs extends S {
   String get habitat_message => "Kde se nacházíš? Identifikuj lokalitu.";
   @override
   String get plant_toxicity => "Toxicita";
+  @override
+  String get offline_download_fail => "Stahování souborů selhalo. Prosím zkontrolujte připojení k internetu nebo volný prostor na zařízení a zkuste znovu.";
   @override
   String get snack_no_flowers => "Filtru nevyhovují žádné květiny v databázi.";
   @override
@@ -6879,6 +7400,8 @@ class $cs extends S {
   String get western_south_america => "Západ Jižní Ameriky";
   @override
   String get taxonomy_subgenus => "podrod";
+  @override
+  String get close => "Zavřít";
   @override
   String get europe => "Evropa";
   @override
@@ -6944,6 +7467,8 @@ class $cs extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Obnovit stahování";
+  @override
   String get enhancements => "Vylepšení";
   @override
   String get habitat_wetland => "mokřady a bažiny";
@@ -6982,11 +7507,17 @@ class $cs extends S {
   @override
   String get list_info => "Vyber si jednu";
   @override
+  String get new_version => "K dispozici je nová verze, aktualizujte prosím.";
+  @override
   String get taxonomy_subfamilia => "podčeleď";
   @override
   String get my_region => "Moje oblast";
   @override
+  String get pause => "Pozastavit";
+  @override
   String get indian_subcontinent => "Indický subkontinent";
+  @override
+  String get product_offline_description => "Aplikace poběží i bez připojení k internetu.";
   @override
   String get plant_flower => "Květ";
   @override
@@ -7021,6 +7552,8 @@ class $cs extends S {
   String get eastern_europe => "Východní Evropa";
   @override
   String get south_central_usa => "Středojih USA";
+  @override
+  String get offline_download_success => "Fotografie a ilustrace byly úspěšně staženy.";
   @override
   String get plant_flowering_from => "Kvete:";
   @override
@@ -7086,9 +7619,13 @@ class $cs extends S {
   @override
   String get northern_africa => "Severní Afrika";
   @override
+  String get offline_subtitle => "vyžaduje 300+ MB volného místa";
+  @override
   String get china => "Čína";
   @override
   String get product_no_ads_title => "Žádná nežádoucí reklama";
+  @override
+  String get offline_title => "Offline režim";
   @override
   String get petal_zygomorphic => "souměrný";
   @override
@@ -7110,6 +7647,8 @@ class $ar extends S {
   @override
   String get legend => "مفتاح";
   @override
+  String get product_offline_title => "غير متصل بالشبكة";
+  @override
   String get feedback_submit_translate_data => "تحسين بيانات الزهور";
   @override
   String get snack_copy => "نسخ إلى الحافظة";
@@ -7119,6 +7658,8 @@ class $ar extends S {
   String get about => "حول";
   @override
   String get product_no_ads_description => "لن يعرض التطبيق إعلان بانر في أسفل الشاشة.";
+  @override
+  String get offline_download_progress => "جارٍ تنزيل الصور والرسوم التوضيحية ...";
   @override
   String get western_canada => "غرب كندا";
   @override
@@ -7135,6 +7676,8 @@ class $ar extends S {
   String get caribbean => "منطقة البحر الكاريبي";
   @override
   String get product_search_description => "ستتمكن من العثور على زهرة باسمها اللاتيني أو عن طريق صنفها (على سبيل المثال ، الرتبة ، الفصيلة ، الجنس.";
+  @override
+  String get offline_delete_message => "هل تريد حذف البيانات بلا اتصال؟";
   @override
   String get australasia => "أستراليا";
   @override
@@ -7180,6 +7723,8 @@ class $ar extends S {
   @override
   String get show_original => "عرض النص الإنكليزي";
   @override
+  String get offline_download_message => "ستقوم بتنزيل 300+ ميغابايت من الصور والرسوم التوضيحية. يرجى التحقق مما إذا كان جهازك متصلاً بشبكة wi-fi. هل أنت مستعد للتنزيل؟";
+  @override
   String get southern_america => "أمريكا الجنوبية";
   @override
   String get middle_atlantic_ocean => "المحيط الأطلسي الأوسط";
@@ -7197,6 +7742,8 @@ class $ar extends S {
   String get habitat_message => "ماذا حولك؟ تحديد موطن النبات.";
   @override
   String get plant_toxicity => "تأثير سمي";
+  @override
+  String get offline_download_fail => "التحميل فشل. يرجى التحقق من اتصالك بالإنترنت أو المساحة الخالية على الجهاز وإعادة المحاولة.";
   @override
   String get snack_no_flowers => "لا توجد معايير مطابقة للزهور.";
   @override
@@ -7225,6 +7772,8 @@ class $ar extends S {
   String get western_south_america => "غرب أمريكا الجنوبية";
   @override
   String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "قريب";
   @override
   String get europe => "أوروبا";
   @override
@@ -7290,6 +7839,8 @@ class $ar extends S {
   @override
   String get plant_height_to => "إلى";
   @override
+  String get offline_download => "استئناف تحميل";
+  @override
   String get enhancements => "التحسينات";
   @override
   String get habitat_wetland => "مستنقعات أو أراضي الرطبة";
@@ -7328,11 +7879,17 @@ class $ar extends S {
   @override
   String get list_info => "إختر واحدة";
   @override
+  String get new_version => "الإصدار الجديد هو متاح، يرجى تحديث.";
+  @override
   String get taxonomy_subfamilia => "القطاع";
   @override
   String get my_region => "منطقتي";
   @override
+  String get pause => "وقفة";
+  @override
   String get indian_subcontinent => "شبه القارة الهندية";
+  @override
+  String get product_offline_description => "ستتمكن من تشغيل التطبيق دون اتصال بالإنترنت.";
   @override
   String get plant_flower => "زهور";
   @override
@@ -7367,6 +7924,8 @@ class $ar extends S {
   String get eastern_europe => "أوروبا الشرقية";
   @override
   String get south_central_usa => "جنوب وسط الولايات المتحدة";
+  @override
+  String get offline_download_success => "تم تنزيل الصور والرسوم التوضيحية بنجاح.";
   @override
   String get plant_flowering_from => "المزهرة من";
   @override
@@ -7432,9 +7991,13 @@ class $ar extends S {
   @override
   String get northern_africa => "شمال أفريقيا";
   @override
+  String get offline_subtitle => "يتطلب 300+ ميغابايت مساحة إضافية";
+  @override
   String get china => "الصين";
   @override
   String get product_no_ads_title => "لا اعلان غير مرغوب فيه";
+  @override
+  String get offline_title => "غير متصل بالشبكة";
   @override
   String get petal_zygomorphic => "غير منتظم";
   @override
@@ -7456,6 +8019,8 @@ class $pa extends S {
   @override
   String get legend => "ਦੰਤਕਥਾ";
   @override
+  String get product_offline_title => "ਔਫਲਾਈਨ ਮੋਡ";
+  @override
   String get feedback_submit_translate_data => "ਫੁੱਲ ਦਾ ਡਾਟਾ ਸੁਧਾਰੋ";
   @override
   String get snack_copy => "ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ";
@@ -7465,6 +8030,8 @@ class $pa extends S {
   String get about => "ਇਸ ਬਾਰੇ";
   @override
   String get product_no_ads_description => "ਐਪਲੀਕੇਸ਼ਨ ਸਕ੍ਰੀਨ ਦੇ ਤਲ 'ਤੇ ਇਸ਼ਤਿਹਾਰ ਬੈਨਰ ਨਹੀਂ ਦਿਖਾਏਗੀ.";
+  @override
+  String get offline_download_progress => "ਫੋਟੋਆਂ ਅਤੇ ਵਰਣਨ ਡਾਊਨਲੋਡ ਕਰ ਰਿਹਾ ਹੈ ...";
   @override
   String get western_canada => "ਪੱਛਮੀ ਕੈਨੇਡਾ";
   @override
@@ -7481,6 +8048,8 @@ class $pa extends S {
   String get caribbean => "ਕੈਰੀਬੀਅਨ";
   @override
   String get product_search_description => "ਤੁਸੀਂ ਇਸਦੇ ਲਾਤੀਨੀ ਨਾਮ ਦੁਆਰਾ ਜਾਂ ਇਸਦੇ ਟੈਕਸੋਂ ਦੁਆਰਾ ਇੱਕ ਫੁੱਲ ਲੱਭਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ (ਜਿਵੇਂ ਤਬਕਾ, ਪਰਿਵਾਰ, ਜਿਣਸ).";
+  @override
+  String get offline_delete_message => "ਕੀ ਤੁਸੀਂ ਔਫਲਾਈਨ ਡਾਟਾ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?";
   @override
   String get australasia => "ਆਸਟ੍ਰੇਲੀਆ";
   @override
@@ -7526,6 +8095,8 @@ class $pa extends S {
   @override
   String get show_original => "ਅੰਗ੍ਰੇਜ਼ੀ ਪਾਠ ਦਿਖਾਓ";
   @override
+  String get offline_download_message => "ਤੁਸੀਂ 300+ ਮੈਬਾ ਫੋਟੋਆਂ ਅਤੇ ਤਸਵੀਰਾਂ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਜਾ ਰਹੇ ਹੋ. ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਹਾਡੀ ਡਿਵਾਈਸ Wi-Fi ਨਾਲ ਕਨੈਕਟ ਕੀਤੀ ਹੋਈ ਹੈ ਜਾਂ ਨਹੀਂ. ਕੀ ਤੁਸੀਂ ਡਾਉਨਲੋਡ ਲਈ ਤਿਆਰ ਹੋ?";
+  @override
   String get southern_america => "ਦੱਖਣੀ ਅਮਰੀਕਾ";
   @override
   String get middle_atlantic_ocean => "ਮੱਧ ਅਟਲਾਂਟਿਕ ਮਹਾਂਸਾਗਰ";
@@ -7543,6 +8114,8 @@ class $pa extends S {
   String get habitat_message => "ਤੁਹਾਡੇ ਆਲੇ ਦੁਆਲੇ ਕੀ ਹੈ? ਪਲਾਂਟ ਦੇ ਨਿਵਾਸ ਸਥਾਨ ਦੀ ਪਛਾਣ ਕਰੋ";
   @override
   String get plant_toxicity => "ਵਸ਼ੈਲਾਪਣ";
+  @override
+  String get offline_download_fail => "ਡਾਊਨਲੋਡ ਅਸਫਲ. ਕਿਰਪਾ ਕਰਕੇ ਡਿਵਾਈਸ ਤੇ ਆਪਣੇ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਜਾਂ ਖਾਲੀ ਸਪੇਸ ਦੀ ਜਾਂਚ ਕਰੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ.";
   @override
   String get snack_no_flowers => "ਕੋਈ ਫੁੱਲ ਮਾਪਣ ਦੇ ਮਾਪਦੰਡ ਨਹੀਂ.";
   @override
@@ -7571,6 +8144,8 @@ class $pa extends S {
   String get western_south_america => "ਪੱਛਮੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
   @override
   String get taxonomy_subgenus => "ਉੱਪ-ਜਿਨਸ";
+  @override
+  String get close => "ਬੰਦ ਕਰੋ";
   @override
   String get europe => "ਯੂਰਪ";
   @override
@@ -7636,6 +8211,8 @@ class $pa extends S {
   @override
   String get plant_height_to => "ਤੱਕ";
   @override
+  String get offline_download => "ਡਾਊਨਲੋਡ ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ";
+  @override
   String get enhancements => "ਸੁਧਾਰ";
   @override
   String get habitat_wetland => "ਪਹਾੜਾਂ ਜਾਂ ਝੂਲਿਆਂ";
@@ -7674,11 +8251,17 @@ class $pa extends S {
   @override
   String get list_info => "ਇਕ ਚੁਣੋ";
   @override
+  String get new_version => "ਨਵਾਂ ਵਰਜਨ ਉਪਲਬਧ ਹੈ, ਕਿਰਪਾ ਕਰਕੇ ਅਪਡੇਟ ਕਰੋ.";
+  @override
   String get taxonomy_subfamilia => "ਉੱਪ-ਪਰਿਵਾਰ";
   @override
   String get my_region => "ਮੇਰਾ ਖੇਤਰ";
   @override
+  String get pause => "ਰੋਕੋ";
+  @override
   String get indian_subcontinent => "ਭਾਰਤੀ ਉਪ ਮਹਾਂਦੀਪ";
+  @override
+  String get product_offline_description => "ਤੁਸੀਂ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਤੋਂ ਬਿਨਾਂ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਚਲਾਉਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ.";
   @override
   String get plant_flower => "ਫੁੱਲ";
   @override
@@ -7713,6 +8296,8 @@ class $pa extends S {
   String get eastern_europe => "ਪੂਰਬੀ ਯੂਰਪ";
   @override
   String get south_central_usa => "ਦੱਖਣੀ-ਕੇਂਦਰੀ ਅਮਰੀਕਾ";
+  @override
+  String get offline_download_success => "ਫੋਟੋਆਂ ਅਤੇ ਦ੍ਰਿਸ਼ਟੀਕੋਣ ਸਫਲਤਾਪੂਰਵਕ ਡਾਊਨਲੋਡ ਕੀਤੇ ਗਏ.";
   @override
   String get plant_flowering_from => "ਫੁਲਿੰਗ";
   @override
@@ -7778,9 +8363,13 @@ class $pa extends S {
   @override
   String get northern_africa => "ਉੱਤਰੀ ਅਫ਼ਰੀਕਾ";
   @override
+  String get offline_subtitle => "300+ ਮੈਬਾ ਵਾਧੂ ਜਗ੍ਹਾ ਦੀ ਲੋੜ ਹੈ";
+  @override
   String get china => "ਚੀਨ";
   @override
   String get product_no_ads_title => "ਕੋਈ ਅਣਚਾਹੇ ਇਸ਼ਤਿਹਾਰ";
+  @override
+  String get offline_title => "ਔਫਲਾਈਨ ਮੋਡ";
   @override
   String get petal_zygomorphic => "ਅਨਿਯਮਿਤ";
   @override
@@ -7802,6 +8391,8 @@ class $nb extends S {
   @override
   String get legend => "Legende";
   @override
+  String get product_offline_title => "Frakoblet modus";
+  @override
   String get feedback_submit_translate_data => "Forbedre blomstens data";
   @override
   String get snack_copy => "Kopiert til utklippstavlen";
@@ -7811,6 +8402,8 @@ class $nb extends S {
   String get about => "Om apper";
   @override
   String get product_no_ads_description => "Søknaden vil ikke vise annonse banner nederst på skjermen.";
+  @override
+  String get offline_download_progress => "Laster ned bilder og illustrasjoner ...";
   @override
   String get western_canada => "Vest-Canada";
   @override
@@ -7827,6 +8420,8 @@ class $nb extends S {
   String get caribbean => "Caribbean";
   @override
   String get product_search_description => "Du vil kunne finne en blomst med sitt norske eller latinske navn eller med dets taxon (for eksempel orden, familie, slekt).";
+  @override
+  String get offline_delete_message => "Vil du slette frakoblede data?";
   @override
   String get australasia => "Australasia";
   @override
@@ -7872,6 +8467,8 @@ class $nb extends S {
   @override
   String get show_original => "Vis engelsk tekst";
   @override
+  String get offline_download_message => "Du skal laste ned 300 + MB bilder og illustrasjoner. Sjekk om enheten din er koblet til wi-fi. Er du klar for nedlasting?";
+  @override
   String get southern_america => "Sør-Amerika";
   @override
   String get middle_atlantic_ocean => "Midt-Atlanterhavet";
@@ -7889,6 +8486,8 @@ class $nb extends S {
   String get habitat_message => "Hva er rundt deg? Identifiser plantens habitat.";
   @override
   String get plant_toxicity => "Toksisitet";
+  @override
+  String get offline_download_fail => "Nedlasting mislyktes. Kontroller din internettforbindelse eller ledig plass på enheten, og prøv igjen.";
   @override
   String get snack_no_flowers => "Ingen blomster som samsvarer med kriterier.";
   @override
@@ -7917,6 +8516,8 @@ class $nb extends S {
   String get western_south_america => "Vest Sør-Amerika";
   @override
   String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Lukk";
   @override
   String get europe => "Europa";
   @override
@@ -7982,6 +8583,8 @@ class $nb extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Fortsett nedlasting";
+  @override
   String get enhancements => "Forbedringer";
   @override
   String get habitat_wetland => "heiene eller våtmark";
@@ -8020,11 +8623,17 @@ class $nb extends S {
   @override
   String get list_info => "Plukk en";
   @override
+  String get new_version => "Ny versjon er tilgjengelig, vennligst oppdater.";
+  @override
   String get taxonomy_subfamilia => "Underfamilier";
   @override
   String get my_region => "Min region";
   @override
+  String get pause => "Pause";
+  @override
   String get indian_subcontinent => "Indisk subkontinent";
+  @override
+  String get product_offline_description => "Du kan kjøre program uten Internett-tilkobling.";
   @override
   String get plant_flower => "Blomst";
   @override
@@ -8059,6 +8668,8 @@ class $nb extends S {
   String get eastern_europe => "Øst-Europa";
   @override
   String get south_central_usa => "Sør-Sentral USA";
+  @override
+  String get offline_download_success => "Bilder og illustrasjoner ble lastet ned.";
   @override
   String get plant_flowering_from => "Blomstringstid";
   @override
@@ -8124,9 +8735,13 @@ class $nb extends S {
   @override
   String get northern_africa => "Nord-Afrika";
   @override
+  String get offline_subtitle => "krever 300 + MB ekstra plass.";
+  @override
   String get china => "Kina";
   @override
   String get product_no_ads_title => "Ingen uønsket annonse";
+  @override
+  String get offline_title => "Frakoblet modus";
   @override
   String get petal_zygomorphic => "zygomorphic";
   @override
@@ -8160,6 +8775,8 @@ class $ja extends S {
   @override
   String get legend => "伝説";
   @override
+  String get product_offline_title => "オフラインモード";
+  @override
   String get feedback_submit_translate_data => "花のデータを改善する";
   @override
   String get snack_copy => "クリップボードにコピー";
@@ -8169,6 +8786,8 @@ class $ja extends S {
   String get about => "約";
   @override
   String get product_no_ads_description => "アプリケーションは画面の下部に広告バナーを表示しません。";
+  @override
+  String get offline_download_progress => "写真やイラストをダウンロードしています...";
   @override
   String get western_canada => "カナダ西部";
   @override
@@ -8185,6 +8804,8 @@ class $ja extends S {
   String get caribbean => "カリブ海";
   @override
   String get product_search_description => "花は、日本語またはラテン語の名前で、あるいは分類群（たとえば、目、科、属）で見つけることができます。";
+  @override
+  String get offline_delete_message => "オフラインデータを削除しますか？";
   @override
   String get australasia => "オーストラリア";
   @override
@@ -8230,6 +8851,8 @@ class $ja extends S {
   @override
   String get show_original => "英語のテキストを表示する";
   @override
+  String get offline_download_message => "あなたは300 MB以上の写真やイラストをダウンロードしようとしています。 お使いの機器がWi-Fiに接続されているか確認してください。 ダウンロードの準備はできていますか？";
+  @override
   String get southern_america => "南アメリカ";
   @override
   String get middle_atlantic_ocean => "中部大西洋";
@@ -8247,6 +8870,8 @@ class $ja extends S {
   String get habitat_message => "あなたの周りには何がありますか？ 植物の生息地を特定する。";
   @override
   String get plant_toxicity => "毒性";
+  @override
+  String get offline_download_fail => "ダウンロードに失敗しました。 インターネット接続またはデバイスの空き容量を確認して、もう一度やり直してください。";
   @override
   String get snack_no_flowers => "基準に一致する花はありません。";
   @override
@@ -8275,6 +8900,8 @@ class $ja extends S {
   String get western_south_america => "西南アメリカ";
   @override
   String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "閉じる";
   @override
   String get europe => "ヨーロッパ";
   @override
@@ -8340,6 +8967,8 @@ class $ja extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "ダウンロードを再開";
+  @override
   String get enhancements => "機能強化";
   @override
   String get habitat_wetland => "ムーア、沼地、ボグ、フェン";
@@ -8378,11 +9007,17 @@ class $ja extends S {
   @override
   String get list_info => "一つを選ぶ";
   @override
+  String get new_version => "新しいバージョンが利用可能です、更新してください。";
+  @override
   String get taxonomy_subfamilia => "亜科";
   @override
   String get my_region => "私の地域";
   @override
+  String get pause => "一時停止";
+  @override
   String get indian_subcontinent => "インド亜大陸";
+  @override
+  String get product_offline_description => "あなたはインターネットに接続せずにアプリケーションを実行することができるでしょう。";
   @override
   String get plant_flower => "花";
   @override
@@ -8417,6 +9052,8 @@ class $ja extends S {
   String get eastern_europe => "東ヨーロッパ";
   @override
   String get south_central_usa => "中南米";
+  @override
+  String get offline_download_success => "写真やイラストのダウンロードに成功しました。";
   @override
   String get plant_flowering_from => "開花";
   @override
@@ -8482,9 +9119,13 @@ class $ja extends S {
   @override
   String get northern_africa => "北アフリカ";
   @override
+  String get offline_subtitle => "300 MB以上の追加スペースが必要です。";
+  @override
   String get china => "中国";
   @override
   String get product_no_ads_title => "迷惑な広告はありません";
+  @override
+  String get offline_title => "オフラインモード";
   @override
   String get petal_zygomorphic => "不規則な";
   @override
@@ -8506,6 +9147,8 @@ class $fa extends S {
   @override
   String get legend => "افسانه";
   @override
+  String get product_offline_title => "حالت آفلاین";
+  @override
   String get feedback_submit_translate_data => "اطلاعات گل را بهبود بخشید";
   @override
   String get snack_copy => "کپی به کلیپ بورد";
@@ -8515,6 +9158,8 @@ class $fa extends S {
   String get about => "درباره برنامه";
   @override
   String get product_no_ads_description => "برنامه بنر تبلیغاتی را در پایین صفحه نشان نمی دهد.";
+  @override
+  String get offline_download_progress => "دانلود عکس ها و تصاویر ...";
   @override
   String get western_canada => "غربی کانادا";
   @override
@@ -8531,6 +9176,8 @@ class $fa extends S {
   String get caribbean => "کارائیب";
   @override
   String get product_search_description => "شما می توانید یک گل را با نام لاتین خود یا طوفان آن (مانند سفارش، خانواده، جنس) پیدا کنید.";
+  @override
+  String get offline_delete_message => "میخواهید دادههای آفلاین را حذف کنید؟";
   @override
   String get australasia => "استرالیا";
   @override
@@ -8576,6 +9223,8 @@ class $fa extends S {
   @override
   String get show_original => "نمایش متن انگلیسی";
   @override
+  String get offline_download_message => "شما قصد دارید 300+ MB عکس و تصاویر را دانلود کنید. لطفا بررسی کنید که آیا دستگاه شما به Wi-Fi متصل است یا خیر. آیا برای دانلود آماده هستید؟";
+  @override
   String get southern_america => "جنوب امریکا";
   @override
   String get middle_atlantic_ocean => "اقیانوس اطلس میانه";
@@ -8593,6 +9242,8 @@ class $fa extends S {
   String get habitat_message => "چه چیزی در اطراف شماست؟ شناسایی زیستگاه گیاه";
   @override
   String get plant_toxicity => "سمی بودن";
+  @override
+  String get offline_download_fail => "دانلود نشد. لطفا اتصال اینترنت یا فضای آزاد خود را بر روی دستگاه بررسی کنید و دوباره امتحان کنید.";
   @override
   String get snack_no_flowers => "بدون گل مطابق معیارهای.";
   @override
@@ -8621,6 +9272,8 @@ class $fa extends S {
   String get western_south_america => "آمریکای جنوبی غربی";
   @override
   String get taxonomy_subgenus => "زیرسرده";
+  @override
+  String get close => "نزدیک";
   @override
   String get europe => "اروپا";
   @override
@@ -8686,6 +9339,8 @@ class $fa extends S {
   @override
   String get plant_height_to => "به";
   @override
+  String get offline_download => "رزومه دانلود";
+  @override
   String get enhancements => "ارتقاء";
   @override
   String get habitat_wetland => "باتلاق یا تالاب";
@@ -8722,11 +9377,17 @@ class $fa extends S {
   @override
   String get list_info => "یکی را انتخاب کن";
   @override
+  String get new_version => "نسخه جدید در دسترس است، لطفا به روز رسانی کنید.";
+  @override
   String get taxonomy_subfamilia => "زیرخانواده";
   @override
   String get my_region => "منطقه من";
   @override
+  String get pause => "مکث";
+  @override
   String get indian_subcontinent => "شبه قاره هند";
+  @override
+  String get product_offline_description => "شما قادر به اجرای برنامه بدون اتصال به اینترنت خواهید بود.";
   @override
   String get plant_flower => "گل ها";
   @override
@@ -8761,6 +9422,8 @@ class $fa extends S {
   String get eastern_europe => "اروپای شرقی";
   @override
   String get south_central_usa => "جنوبی مرکزی ایالات متحده آمریکا";
+  @override
+  String get offline_download_success => "عکس ها و تصاویر با موفقیت دانلود شده اند.";
   @override
   String get plant_flowering_from => "گل از";
   @override
@@ -8824,9 +9487,13 @@ class $fa extends S {
   @override
   String get northern_africa => "آفریقای شمالی";
   @override
+  String get offline_subtitle => "نیاز به 300+ MB فضای اضافی.";
+  @override
   String get china => "چين";
   @override
   String get product_no_ads_title => "بدون تبلیغات ناخواسته";
+  @override
+  String get offline_title => "حالت آفلاین";
   @override
   String get petal_zygomorphic => "بی رویه";
   @override
@@ -8848,6 +9515,8 @@ class $pl extends S {
   @override
   String get legend => "Legenda";
   @override
+  String get product_offline_title => "Tryb offline";
+  @override
   String get feedback_submit_translate_data => "Poprawienie informacji dot. kwiatów";
   @override
   String get snack_copy => "Skopiowane do schowka";
@@ -8857,6 +9526,8 @@ class $pl extends S {
   String get about => "O aplikacji";
   @override
   String get product_no_ads_description => "Aplikacja nie wyświetli banera reklamowego u dołu ekranu.";
+  @override
+  String get offline_download_progress => "Pobieranie zdjęć i ilustracji ...";
   @override
   String get western_canada => "Zachodnia Kanada";
   @override
@@ -8873,6 +9544,8 @@ class $pl extends S {
   String get caribbean => "Karaiby";
   @override
   String get product_search_description => "Będziesz mógł znaleźć kwiatek pod polską lub łacińską nazwą lub według jego taksonu (np. rząd, rodzina, rodzaj).";
+  @override
+  String get offline_delete_message => "Czy chcesz usunąć dane offline?";
   @override
   String get australasia => "Australazja";
   @override
@@ -8918,6 +9591,8 @@ class $pl extends S {
   @override
   String get show_original => "Pokaż angielski tekst";
   @override
+  String get offline_download_message => "Pobrasz ponad 300 MB zdjęć i ilustracji. Sprawdź, czy twoje urządzenie jest podłączone do sieci Wi-Fi. Czy jesteś gotowy na pobranie?";
+  @override
   String get southern_america => "Ameryka Południowa";
   @override
   String get middle_atlantic_ocean => "Środkowy Ocean Atlantycki";
@@ -8935,6 +9610,8 @@ class $pl extends S {
   String get habitat_message => "Co znajduje się wokół Ciebie? Zidentyfikuj otoczenie.";
   @override
   String get plant_toxicity => "Toksyczność";
+  @override
+  String get offline_download_fail => "Pobieranie nie udane. Sprawdź połączenie internetowe lub wolne miejsce na urządzeniu i spróbuj ponownie.";
   @override
   String get snack_no_flowers => "Brak kwiatów spełniających kryteria.";
   @override
@@ -8963,6 +9640,8 @@ class $pl extends S {
   String get western_south_america => "Zachodnia Ameryka Południowa";
   @override
   String get taxonomy_subgenus => "Podrodzaj";
+  @override
+  String get close => "Zamknij";
   @override
   String get europe => "Europa";
   @override
@@ -9028,6 +9707,8 @@ class $pl extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Wznów pobieranie";
+  @override
   String get enhancements => "Ulepszenia";
   @override
   String get habitat_wetland => "Wrzosowiska lub tereny podmokłe";
@@ -9066,11 +9747,17 @@ class $pl extends S {
   @override
   String get list_info => "Wybierz jeden";
   @override
+  String get new_version => "Dostępna jest nowa wersja, proszę dokonać aktualizacji.";
+  @override
   String get taxonomy_subfamilia => "Podrodzina";
   @override
   String get my_region => "Mój region";
   @override
+  String get pause => "Pauza";
+  @override
   String get indian_subcontinent => "Subkontynent indyjski";
+  @override
+  String get product_offline_description => "Będziesz mógł uruchomić aplikację bez połączenia z Internetem.";
   @override
   String get plant_flower => "Kwiaty";
   @override
@@ -9105,6 +9792,8 @@ class $pl extends S {
   String get eastern_europe => "Wschodnia Europa";
   @override
   String get south_central_usa => "Południowo-środkowe USA";
+  @override
+  String get offline_download_success => "Zdjęcia i ilustracje zostały pomyślnie pobrane.";
   @override
   String get plant_flowering_from => "Kwitnie:";
   @override
@@ -9170,9 +9859,13 @@ class $pl extends S {
   @override
   String get northern_africa => "Północna Afryka";
   @override
+  String get offline_subtitle => "wymaga dodatkowo ponad 300MB miejsca.";
+  @override
   String get china => "Chiny";
   @override
   String get product_no_ads_title => "Bez niechcianej reklamy";
+  @override
+  String get offline_title => "Tryb offline";
   @override
   String get petal_zygomorphic => "Zygomorficzny";
   @override
@@ -9194,6 +9887,8 @@ class $da extends S {
   @override
   String get legend => "Legende";
   @override
+  String get product_offline_title => "Offline-tilstand";
+  @override
   String get snack_copy => "Kopieret til udklipsholderen";
   @override
   String get product_purchase_failed => "Køb mislykkedes";
@@ -9201,6 +9896,8 @@ class $da extends S {
   String get about => "Om ansøgning";
   @override
   String get product_no_ads_description => "Programmet viser ikke reklamebanner nederst på skærmen.";
+  @override
+  String get offline_download_progress => "Downloadning af billeder og illustrationer ...";
   @override
   String get western_canada => "Vestlige Canada";
   @override
@@ -9217,6 +9914,8 @@ class $da extends S {
   String get caribbean => "Caribien";
   @override
   String get product_search_description => "Du kan finde en blomst ved sit danske eller latinske navn eller ved dets taxon (fx ordo, familie, slægt).";
+  @override
+  String get offline_delete_message => "Vil du slette offline data?";
   @override
   String get australasia => "Australasien";
   @override
@@ -9262,6 +9961,8 @@ class $da extends S {
   @override
   String get show_original => "Vis engelske tekst";
   @override
+  String get offline_download_message => "Du skal downloade 300+ MB billeder og illustrationer. Kontroller, om din enhed er tilsluttet wi-fi. Er du klar til download?";
+  @override
   String get southern_america => "Sydamerika";
   @override
   String get middle_atlantic_ocean => "Mellematlanten";
@@ -9279,6 +9980,8 @@ class $da extends S {
   String get habitat_message => "Hvad er der omkring dig? Identificer plantens levested.";
   @override
   String get plant_toxicity => "Toksicitet";
+  @override
+  String get offline_download_fail => "Download fejlede. Kontroller din internetforbindelse eller ledig plads på enheden, og prøv igen.";
   @override
   String get snack_no_flowers => "Ingen blomster, der matcher kriterier.";
   @override
@@ -9307,6 +10010,8 @@ class $da extends S {
   String get western_south_america => "Vestlige Sydamerika";
   @override
   String get taxonomy_subgenus => "Underslægt";
+  @override
+  String get close => "Tæt";
   @override
   String get europe => "Europa";
   @override
@@ -9370,6 +10075,8 @@ class $da extends S {
   @override
   String get plant_height_to => "-";
   @override
+  String get offline_download => "Genoptag download";
+  @override
   String get enhancements => "Forbedringer";
   @override
   String get habitat_wetland => "heder eller vådområder";
@@ -9408,11 +10115,17 @@ class $da extends S {
   @override
   String get list_info => "Vælg en";
   @override
+  String get new_version => "Ny version er tilgængelig, opdater venligst.";
+  @override
   String get taxonomy_subfamilia => "Underfamilie";
   @override
   String get my_region => "Min region";
   @override
+  String get pause => "Pause";
+  @override
   String get indian_subcontinent => "Indiske subkontinent";
+  @override
+  String get product_offline_description => "Du kan køre applikation uden internetforbindelse.";
   @override
   String get plant_flower => "Blomstre";
   @override
@@ -9447,6 +10160,8 @@ class $da extends S {
   String get eastern_europe => "østeuropa";
   @override
   String get south_central_usa => "Syd-Central USA";
+  @override
+  String get offline_download_success => "Billeder og illustrationer er blevet downloadet.";
   @override
   String get plant_flowering_from => "Blomstringstid";
   @override
@@ -9512,9 +10227,13 @@ class $da extends S {
   @override
   String get northern_africa => "Nordafrika";
   @override
+  String get offline_subtitle => "kræver 300 + MB ekstra plads.";
+  @override
   String get china => "Kina";
   @override
   String get product_no_ads_title => "Ingen uønsket reklame";
+  @override
+  String get offline_title => "Offline-tilstand";
   @override
   String get petal_zygomorphic => "zygomorf";
   @override
@@ -9534,6 +10253,8 @@ class $he extends S {
   @override
   String get legend => "אגדה";
   @override
+  String get product_offline_title => "מצב לא מקוון";
+  @override
   String get feedback_submit_translate_data => "שפר את נתוני הפרחים";
   @override
   String get snack_copy => "הועתק ללוח";
@@ -9543,6 +10264,8 @@ class $he extends S {
   String get about => "על היישום";
   @override
   String get product_no_ads_description => "היישום לא יציג מודעת באנר בחלק התחתון של המסך.";
+  @override
+  String get offline_download_progress => "מוריד תמונות ואיורים ...";
   @override
   String get western_canada => "קנדה המערבית";
   @override
@@ -9559,6 +10282,8 @@ class $he extends S {
   String get caribbean => "הקאריביים";
   @override
   String get product_search_description => "תוכל למצוא פרח בשם הלטיני שלה או על ידי הטקסון שלה (למשל סדרה, משפחה, סוג).";
+  @override
+  String get offline_delete_message => "האם ברצונך למחוק נתונים לא מקוונים?";
   @override
   String get australasia => "אוסטרליה";
   @override
@@ -9604,6 +10329,8 @@ class $he extends S {
   @override
   String get show_original => "הצג טקסט באנגלית";
   @override
+  String get offline_download_message => "אתה הולך להוריד 300+ MB של תמונות ואיורים. בדוק אם המכשיר מחובר ל- Wi-Fi. האם אתה מוכן להורדה?";
+  @override
   String get southern_america => "דרום אמריקה";
   @override
   String get middle_atlantic_ocean => "האוקיינוס האטלנטי התיכון";
@@ -9621,6 +10348,8 @@ class $he extends S {
   String get habitat_message => "מה מסביבך? זיהוי בית הגידול של הצמח.";
   @override
   String get plant_toxicity => "רַעֲלָנוּת";
+  @override
+  String get offline_download_fail => "הורדה נכשלה. בדוק את חיבור האינטרנט או את המקום הפנוי במכשיר ונסה שוב.";
   @override
   String get snack_no_flowers => "אין קריטריונים תואמים לפרחים.";
   @override
@@ -9649,6 +10378,8 @@ class $he extends S {
   String get western_south_america => "מערב אמריקה";
   @override
   String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "סגור";
   @override
   String get europe => "אירופה";
   @override
@@ -9714,6 +10445,8 @@ class $he extends S {
   @override
   String get plant_height_to => "עד";
   @override
+  String get offline_download => "המשך הורדה";
+  @override
   String get enhancements => "שיפורים";
   @override
   String get habitat_wetland => "מורלנדס או ביצות";
@@ -9752,11 +10485,17 @@ class $he extends S {
   @override
   String get list_info => "לבחור אחד";
   @override
+  String get new_version => "גרסה חדשה זמינה, אנא עדכן.";
+  @override
   String get taxonomy_subfamilia => "תת־משפחה";
   @override
   String get my_region => "אזור שלי";
   @override
+  String get pause => "השהה";
+  @override
   String get indian_subcontinent => "תת היבשת ההודית";
+  @override
+  String get product_offline_description => "תוכל להפעיל את היישום ללא חיבור לאינטרנט.";
   @override
   String get plant_flower => "פרח";
   @override
@@ -9791,6 +10530,8 @@ class $he extends S {
   String get eastern_europe => "מזרח אירופה";
   @override
   String get south_central_usa => "דרום מרכז ארצות הברית";
+  @override
+  String get offline_download_success => "תמונות ואיורים הורדו בהצלחה.";
   @override
   String get plant_flowering_from => "פריחה מ";
   @override
@@ -9856,9 +10597,13 @@ class $he extends S {
   @override
   String get northern_africa => "צפון אפריקה";
   @override
+  String get offline_subtitle => "דורש 300+ MB שטח נוסף.";
+  @override
   String get china => "סין";
   @override
   String get product_no_ads_title => "אין פרסומת לא רצויה";
+  @override
+  String get offline_title => "מצב לא מקוון";
   @override
   String get petal_zygomorphic => "לֹא סָדִיר";
   @override
@@ -9880,6 +10625,8 @@ class $ro extends S {
   @override
   String get legend => "Legendă";
   @override
+  String get product_offline_title => "Modul offline";
+  @override
   String get feedback_submit_translate_data => "Îmbunătățiți datele florii";
   @override
   String get snack_copy => "Copiat în Clipboard";
@@ -9889,6 +10636,8 @@ class $ro extends S {
   String get about => "Despre";
   @override
   String get product_no_ads_description => "Aplicația nu va afișa banner publicitar în partea de jos a ecranului.";
+  @override
+  String get offline_download_progress => "Descărcarea de fotografii și ilustrații ...";
   @override
   String get western_canada => "Vestul Canadei";
   @override
@@ -9905,6 +10654,8 @@ class $ro extends S {
   String get caribbean => "Insulele Caraibe";
   @override
   String get product_search_description => "Veți găsi o floare prin numele său românesc sau latin sau prin taxonul său (de exemplu, ordin, familie, gen).";
+  @override
+  String get offline_delete_message => "Doriți să ștergeți datele offline?";
   @override
   String get australasia => "Australasia";
   @override
@@ -9950,6 +10701,8 @@ class $ro extends S {
   @override
   String get show_original => "Afișați textul English";
   @override
+  String get offline_download_message => "Veți descărca 300 MB de fotografii și ilustrații. Verificați dacă dispozitivul dvs. este conectat la Wi-Fi. Sunteți gata pentru descărcare?";
+  @override
   String get southern_america => "America de Sud";
   @override
   String get middle_atlantic_ocean => "Oceanul Atlantic de Nord";
@@ -9967,6 +10720,8 @@ class $ro extends S {
   String get habitat_message => "Ce se găsește în jurul tău? Identifică habitatul plantei.";
   @override
   String get plant_toxicity => "Toxicitate";
+  @override
+  String get offline_download_fail => "Descarcare esuata. Verificați conexiunea la internet sau spațiul liber pe dispozitiv și încercați din nou.";
   @override
   String get snack_no_flowers => "Nu există criterii de potrivire a florilor.";
   @override
@@ -9995,6 +10750,8 @@ class $ro extends S {
   String get western_south_america => "Vestful America de Sud";
   @override
   String get taxonomy_subgenus => "Subgen";
+  @override
+  String get close => "Închide";
   @override
   String get europe => "Europa";
   @override
@@ -10060,6 +10817,8 @@ class $ro extends S {
   @override
   String get plant_height_to => "la";
   @override
+  String get offline_download => "Reia descărcarea";
+  @override
   String get enhancements => "Îmbunătățiri";
   @override
   String get habitat_wetland => "zonele umede";
@@ -10098,11 +10857,17 @@ class $ro extends S {
   @override
   String get list_info => "Alege una";
   @override
+  String get new_version => "Versiunea nouă este disponibilă, actualizați-vă.";
+  @override
   String get taxonomy_subfamilia => "Subfamilie";
   @override
   String get my_region => "Regiunea mea";
   @override
+  String get pause => "Pauză";
+  @override
   String get indian_subcontinent => "Subcontinentul indian";
+  @override
+  String get product_offline_description => "Veți putea rula aplicația fără conexiune la internet.";
   @override
   String get plant_flower => "Flori";
   @override
@@ -10137,6 +10902,8 @@ class $ro extends S {
   String get eastern_europe => "Europa de Est";
   @override
   String get south_central_usa => "Sud-central SUA";
+  @override
+  String get offline_download_success => "Fotografii și ilustrații au fost descărcate cu succes.";
   @override
   String get plant_flowering_from => "Înflorire";
   @override
@@ -10202,9 +10969,13 @@ class $ro extends S {
   @override
   String get northern_africa => "Africa de Nord";
   @override
+  String get offline_subtitle => "necesită spațiu suplimentar de 300 MB.";
+  @override
   String get china => "China";
   @override
   String get product_no_ads_title => "Nicio reclama nedorită";
+  @override
+  String get offline_title => "Modul offline";
   @override
   String get petal_zygomorphic => "zygomorphic";
   @override
@@ -10226,6 +10997,8 @@ class $nl extends S {
   @override
   String get legend => "Legenda";
   @override
+  String get product_offline_title => "Offline modus";
+  @override
   String get feedback_submit_translate_data => "Verbeter de gegevens over de bloemen";
   @override
   String get snack_copy => "Gekopieerd naar het klembord";
@@ -10235,6 +11008,8 @@ class $nl extends S {
   String get about => "Over de app";
   @override
   String get product_no_ads_description => "Applicatie toont geen reclamebanner onderaan het scherm.";
+  @override
+  String get offline_download_progress => "Foto's en illustraties downloaden ...";
   @override
   String get western_canada => "West-Canada";
   @override
@@ -10251,6 +11026,8 @@ class $nl extends S {
   String get caribbean => "Caribbean";
   @override
   String get product_search_description => "Je zult in staat zijn om een bloem te vinden op zijn Nederlandse of Latijnse naam of op zijn taxon (bijvoorbeeld orde, familie, geslacht).";
+  @override
+  String get offline_delete_message => "Wilt u offline gegevens verwijderen?";
   @override
   String get australasia => "Australazië";
   @override
@@ -10296,6 +11073,8 @@ class $nl extends S {
   @override
   String get show_original => "Toon Engels tekst";
   @override
+  String get offline_download_message => "U gaat 300+ MB foto's en illustraties downloaden. Controleer of uw apparaat is verbonden met wifi. Ben je klaar voor een download?";
+  @override
   String get southern_america => "Zuid-Amerika";
   @override
   String get middle_atlantic_ocean => "Midden-Atlantische Oceaan";
@@ -10313,6 +11092,8 @@ class $nl extends S {
   String get habitat_message => "Hoe ziet de omgeving eruit? Identificeer de leefomgeving.";
   @override
   String get plant_toxicity => "Toxiciteit";
+  @override
+  String get offline_download_fail => "Download mislukt. Controleer uw internetverbinding of vrije ruimte op het apparaat en probeer het opnieuw.";
   @override
   String get snack_no_flowers => "Geen bloemen die voldoen aan criteria.";
   @override
@@ -10341,6 +11122,8 @@ class $nl extends S {
   String get western_south_america => "West-Zuid-Amerika";
   @override
   String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Dichtbij";
   @override
   String get europe => "Europa";
   @override
@@ -10406,6 +11189,8 @@ class $nl extends S {
   @override
   String get plant_height_to => "tot";
   @override
+  String get offline_download => "Download doorgaan";
+  @override
   String get enhancements => "Verbeteringen";
   @override
   String get habitat_wetland => "heidevelden of moerassen";
@@ -10444,11 +11229,17 @@ class $nl extends S {
   @override
   String get list_info => "Kies er een";
   @override
+  String get new_version => "Nieuwe versie beschikbaar, update.";
+  @override
   String get taxonomy_subfamilia => "Onderfamilie";
   @override
   String get my_region => "Mijn regio";
   @override
+  String get pause => "Pauze";
+  @override
   String get indian_subcontinent => "Indisch subcontinent";
+  @override
+  String get product_offline_description => "U kunt de toepassing uitvoeren zonder internetverbinding.";
   @override
   String get plant_flower => "Bloemen";
   @override
@@ -10483,6 +11274,8 @@ class $nl extends S {
   String get eastern_europe => "Oost-Europa";
   @override
   String get south_central_usa => "Zuid-Centraal VS";
+  @override
+  String get offline_download_success => "Foto's en illustraties succesvol gedownload.";
   @override
   String get plant_flowering_from => "Bloeit van";
   @override
@@ -10548,9 +11341,13 @@ class $nl extends S {
   @override
   String get northern_africa => "Noord-Afrika";
   @override
+  String get offline_subtitle => "vereist 300+ MB extra ruimte.";
+  @override
   String get china => "China";
   @override
   String get product_no_ads_title => "Geen ongewenste advertenties";
+  @override
+  String get offline_title => "Offline modus";
   @override
   String get petal_zygomorphic => "tweezijdig symmetrisch";
   @override

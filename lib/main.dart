@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/splash.dart';
@@ -63,6 +64,7 @@ class _AppState extends State<App> {
   onBuyProduct(PurchasedItem purchased) {
     setState(() {
       Purchases.purchases.add(purchased);
+      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
     });
   }
 
@@ -106,20 +108,28 @@ class _AppState extends State<App> {
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIos: 5);
-    Purchases.isAllowed = false;
     Purchases.purchases = <PurchasedItem>[];
   }
 
   void _initPlatformState() async {
     FlutterInappPurchase.initConnection.then((value) {
-      FlutterInappPurchase.getAvailablePurchases().then((value) {
-        Purchases.isAllowed = true;
-        Purchases.purchases = value;
-      }).catchError((error) {
-        _iapError();
-      });
-    }).catchError((error) {
-      _iapError();
+      // TODO check for a fix: when iOS is offline it doesn't return purchased products
+      if (Platform.isIOS) {
+        Prefs.getStringListF(keyPurchases, []).then((products) {
+          Purchases.purchases = products.map((productId) => Purchases.offlineProducts[productId]).toList();
+          Offline.initialize();
+        });
+      } else if (Platform.isAndroid) {
+        FlutterInappPurchase.getAvailablePurchases().then((value) {
+          Purchases.purchases = value;
+          Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
+          Offline.initialize();
+        }).catchError((error) {
+          _iapError();
+        });
+      } else {
+        throw PlatformException(code: Platform.operatingSystem, message: "platform not supported");
+      }
     });
   }
 
@@ -169,8 +179,16 @@ class _AppState extends State<App> {
               Map<String, dynamic> notificationData = _notificationData != null ? Map.from(_notificationData) : null;
               _notificationData = null;
               return MaterialApp(
+                localeResolutionCallback: (deviceLocale, supportedLocales) {
+                  if (snapshot.data == null) {
+                    Prefs.setString(keyLanguage, deviceLocale.languageCode);
+                    return deviceLocale;
+                  } else {
+                    Prefs.setString(keyLanguage, snapshot.data.languageCode);
+                    return snapshot.data;
+                  }
+                },
                 debugShowCheckedModeBanner: false,
-                locale: snapshot.data,
                 localizationsDelegates: [
                   S.delegate,
                   GlobalMaterialLocalizations.delegate,

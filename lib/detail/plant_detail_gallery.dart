@@ -4,8 +4,20 @@ import 'package:abherbs_flutter/detail/plant_detail_info.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
+Widget _getImageButton(String url) {
+  var placeholder = Stack(alignment: Alignment.center, children: [
+    CircularProgressIndicator(),
+    Image(
+      image: AssetImage('res/images/placeholder.webp'),
+    ),
+  ]);
+  return Container(
+    padding: EdgeInsets.all(10.0),
+    child: getImage(url, placeholder),
+  );
+}
 
 Widget getGallery(BuildContext context, Future<Plant> _plantF) {
   return FutureBuilder<Plant>(
@@ -16,42 +28,14 @@ Widget getGallery(BuildContext context, Future<Plant> _plantF) {
             List<Widget> cards = [];
 
             cards.add(Card(
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  CircularProgressIndicator(),
-                  FlatButton(
-                    padding: EdgeInsets.all(10.0),
-                    child: CachedNetworkImage(
-                      fit: BoxFit.scaleDown,
-                      placeholder: Image(image: AssetImage('res/images/placeholder.webp'),),
-                      imageUrl: storageEndpoit + storagePhotos + snapshot.data.illustrationUrl,
-                    ),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+              child: _getImageButton(storagePhotos + snapshot.data.illustrationUrl),
             ));
 
-            for (String url in snapshot.data.photoUrls) {
-              cards.add(Card(
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    FlatButton(
-                      padding: EdgeInsets.all(10.0),
-                      child: CachedNetworkImage(
-                        fit: BoxFit.scaleDown,
-                        placeholder: Image(image: AssetImage('res/images/placeholder.webp'),),
-                        imageUrl: storageEndpoit + storagePhotos + url,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ));
-            }
+            cards.addAll(snapshot.data.photoUrls.map((url) {
+              return Card(
+                child: _getImageButton(storagePhotos + url),
+              );
+            }));
 
             if (snapshot.data.sourceUrls != null) {
               cards.add(Card(
@@ -65,15 +49,13 @@ Widget getGallery(BuildContext context, Future<Plant> _plantF) {
               ));
             }
 
-            cards.add(getAdMobBanner());
-
             return ListView(
               shrinkWrap: true,
               padding: EdgeInsets.all(5.0),
               children: cards,
             );
           default:
-            return Column(mainAxisAlignment: MainAxisAlignment.center, children: [CircularProgressIndicator()]);
+            return Center(child: CircularProgressIndicator());
         }
       });
 }

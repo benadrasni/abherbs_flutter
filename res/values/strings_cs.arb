@@ -13,6 +13,8 @@
   "product_search_description": "Budete moci najít květinu podle českého nebo latinského názvu nebo podle taxonu (např. podle řádu, čeledi, rodu).",
   "product_custom_filter_title": "Vlastní filtr",
   "product_custom_filter_description": "Budete moci změnit výchozí pořadí a počet filtrů (barva, ekologie, okvětní líst, distribuce).",
+  "product_offline_title": "Offline režim",
+  "product_offline_description": "Aplikace poběží i bez připojení k internetu.",
   "product_purchase": "Koupit",
   "product_purchase_failed": "Nákup selhal",
   "product_purchased": "Koupeno",
@@ -24,8 +26,15 @@
   "my_region": "Moje oblast",
   "always_my_region_title": "Vždy přidat moji oblast do filtru",
   "always_my_region_subtitle": "Vaše oblast bude přednastavena do filtru",
-
   "my_filter": "Můj filtr",
+  "offline_title": "Offline režim",
+  "offline_subtitle": "vyžaduje 300+ MB volného místa",
+  "offline_download_message": "Chystáte se stáhnout více než 300 MB fotografií a ilustrací. Zkontrolujte, prosím, zda je vaše zařízení připojeno na wifi síť. Chcete začít stahovat soubory?",
+  "offline_download_progress": "Probíhá stahování fotografií a ilustrací ...",
+  "offline_download_success": "Fotografie a ilustrace byly úspěšně staženy.",
+  "offline_download_fail": "Stahování souborů selhalo. Prosím zkontrolujte připojení k internetu nebo volný prostor na zařízení a zkuste znovu.",
+  "offline_delete_message": "Opravdu chcete vymazat offline data?",
+  "offline_download": "Obnovit stahování",
 
   "feedback_intro": "Tuto aplikaci podporujete odkdy jste si ji nainstalovali na své mobilní zařízení, děkuji. Pokud hledáte jiné formy podpory, zde jsou některé možnosti:",
   "feedback_review": "Můžete napsat pozitivní recenzi.",
@@ -43,8 +52,12 @@
   "rate_never": "Nikdy",
   "rate_later": "Později",
   "rate": "Recenze",
+  "new_version": "K dispozici je nová verze, aktualizujte prosím.",
+
   "yes": "Ano",
   "no": "Ne",
+  "close": "Zavřít",
+  "pause": "Pozastavit",
 
   "filter_color": "barva",
   "filter_habitat": "ekologie",

@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:abherbs_flutter/enhancements.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,13 +15,20 @@ const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
 const String productSearch = "search";
 const String productCustomFilter = "custom_filter";
+const String productOffline = "offline";
 
+const String keyLanguage = "language";
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
 const String keyAlwaysMyRegion = "always_my_region";
+const String keyOffline = "offline";
+const String keyOfflinePlant = "offline_plant";
+const String keyOfflineFamily = "offline_family";
+const String keyOfflineDB = "offline_db";
 const String keyRateState = "rate_state";
 const String keyRateCount = "rate_count";
 const String keyMyFilter = "my_filter";
+const String keyPurchases = "purchases";
 const int rateCountInitial = 5;
 const String rateStateInitial = "";
 const String rateStateNever = "never";
@@ -45,6 +55,7 @@ const String storagePhotos = "photos/";
 const String defaultExtension = ".webp";
 const String thumbnailsDir = "/.thumbnails";
 
+const int firebaseCacheSize = 1024*1024*20;
 const String firebaseCounts = 'counts_4_v2';
 const String firebaseLists = 'lists_4_v2';
 const String firebasePlants = 'plants_v2';
@@ -53,13 +64,17 @@ const String firebaseAPGIV = 'APG IV_v2';
 const String firebasePlantHeaders = 'plants_headers';
 const String firebaseTranslations = 'translations';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
+const String firebasePlantsToUpdate = "plants_to_update";
+const String firebaseFamiliesToUpdate = "families_to_update";
+const String firebaseVersions = "versions";
 
 const String firebaseRootTaxon = 'Eukaryota';
 const String firebaseAPGType = "type";
-const String firebaseAPGList = "list";
-const String firebaseAPGCount = "count";
-
-const int adsFrequency = -1;
+const String firebaseAttributeList = "list";
+const String firebaseAttributeCount = "count";
+const String firebaseAttributeIOS= "ios";
+const String firebaseAttributeAndroid= "android";
+const String firebaseAttributeLastUpdate= "db_update";
 
 bool get isInDebugMode {
   bool inDebugMode = false;
@@ -83,6 +98,28 @@ Future<void> launchURLF(String url) {
       throw 'Could not launch $url';
     }
   });
+}
+
+Widget getImage(String url, Widget placeholder, {double width, double height}) {
+  return FutureBuilder<File>(
+      future: Offline.getLocalFile(url),
+      builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.data != null) {
+            return Image.file(snapshot.data, fit: BoxFit.contain, width: width, height: height);
+          }
+
+          return CachedNetworkImage(
+            fit: BoxFit.contain,
+            width: width,
+            height: height,
+            placeholder: placeholder,
+            imageUrl: storageEndpoit + url,
+          );
+        } else {
+          return placeholder;
+        }
+      });
 }
 
 String getTaxonLabel(BuildContext context, String taxon) {
@@ -131,6 +168,8 @@ String getProductTitle(BuildContext context, String productId, String defaultTit
       return S.of(context).product_search_title;
     case productCustomFilter:
       return S.of(context).product_custom_filter_title;
+    case productOffline:
+      return S.of(context).product_offline_title;
     default:
       return defaultTitle;
   }
@@ -145,6 +184,8 @@ String getProductDescription(BuildContext context, String productId, String defa
       return S.of(context).product_search_description;
     case productCustomFilter:
       return S.of(context).product_custom_filter_description;
+    case productOffline:
+      return S.of(context).product_offline_description;
     default:
       return defaultDescription;
   }
@@ -159,7 +200,7 @@ Icon getIcon(String productId) {
   }
 }
 
-List<Widget> getActions(BuildContext context, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct) {
+List<Widget> getActions(BuildContext context, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
   var _actions = <Widget>[];
   _actions.add(IconButton(
     icon: getIcon(productSearch),
@@ -172,7 +213,7 @@ List<Widget> getActions(BuildContext context, Function(String) onChangeLanguage,
       } else {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct)),
+          MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
         );
       }
     },

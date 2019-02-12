@@ -42,8 +42,6 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Future<Plant> _plantF,
               ),
             ));
 
-            cards.add(getAdMobBanner());
-
             return ListView(
               shrinkWrap: true,
               padding: EdgeInsets.all(5.0),
@@ -58,7 +56,7 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Future<Plant> _plantF,
 Widget _getNames(Plant plant, PlantTranslation plantTranslation) {
   var names = <Text>[];
   names.add(Text(
-    plantTranslation.label,
+    plantTranslation.label ?? plant.name,
     style: TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 22.0,

@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/distribution_2.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/prefs.dart';
@@ -200,6 +201,7 @@ class _DistributionState extends State<Distribution> {
 
   @override
   void initState() {
+    Offline.setKeepSynced1(true);
     super.initState();
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
@@ -219,7 +221,7 @@ class _DistributionState extends State<Distribution> {
       key: _key,
       appBar: new AppBar(
         title: new Text(S.of(context).filter_distribution),
-        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct),
+        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
       ),
       drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, this.setMyRegion),
       body: Stack(
