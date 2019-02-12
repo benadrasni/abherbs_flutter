@@ -13,13 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
-class EnhancementsMerged {
-  final List<IAPItem> products;
-  final List<PurchasedItem> purchases;
-
-  EnhancementsMerged({this.products, this.purchases});
-}
-
 class EnhancementsScreen extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
@@ -46,11 +39,10 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           productOffline,
         ];
   Future<List<IAPItem>> _productsF;
-  Future<List<PurchasedItem>> _purchasesF;
 
   Future<void> _logFailedPurchaseEvent(String productId) async {
     await _firebaseAnalytics.logEvent(
-        name: 'purchase_failed', parameters: {'productId': productId});
+        name: 'purchase_canceled', parameters: {'productId': productId});
   }
 
   @override
@@ -60,17 +52,11 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     _productsF = Connectivity().checkConnectivity().then((result) {
       if (result == ConnectivityResult.none) {
         throw PlatformException(
-            code: Platform.operatingSystem, message: "IAP not prepared. Check if Platform service is available.");
+            code: Platform.operatingSystem,
+            message:
+                "IAP not prepared. Check if Platform service is available.");
       } else {
         return FlutterInappPurchase.getProducts(_productLists);
-      }
-    });
-    _purchasesF = Connectivity().checkConnectivity().then((result) {
-      if (Platform.isIOS && result == ConnectivityResult.none) {
-        throw PlatformException(
-            code: Platform.operatingSystem, message: "IAP not prepared. Check if Platform service is available.");
-      } else {
-        return FlutterInappPurchase.getAvailablePurchases();
       }
     });
 
@@ -139,13 +125,9 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
       appBar: AppBar(
         title: Text(S.of(context).enhancements),
       ),
-      body: FutureBuilder<EnhancementsMerged>(
-        future: Future.wait([_productsF, _purchasesF]).then((response) {
-          return EnhancementsMerged(
-              products: response[0], purchases: response[1]);
-        }),
-        builder:
-            (BuildContext context, AsyncSnapshot<EnhancementsMerged> snapshot) {
+      body: FutureBuilder<List<IAPItem>>(
+        future: _productsF,
+        builder: (BuildContext context, AsyncSnapshot<List<IAPItem>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               var _cards = <Card>[];
@@ -165,16 +147,20 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                   ),
                 );
               } else {
-                Purchases.purchases = snapshot.data.purchases;
-                Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
                 _cards.add(Card(
                   child: Container(
                     padding: EdgeInsets.all(10.0),
                     child: RaisedButton(
                       onPressed: () {
-                        setState(() {
-                          _purchasesF =
-                              FlutterInappPurchase.getAvailablePurchases();
+                        FlutterInappPurchase.getAvailablePurchases()
+                            .then((purchases) {
+                          Purchases.purchases = purchases;
+                          Prefs.setStringList(
+                              keyPurchases,
+                              Purchases.purchases
+                                  .map((item) => item.productId)
+                                  .toList());
+                          setState(() {});
                         });
                       },
                       child: Text(
@@ -183,7 +169,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                     ),
                   ),
                 ));
-                _cards.addAll(snapshot.data.products.map((IAPItem product) {
+                _cards.addAll(snapshot.data.map((IAPItem product) {
                   bool isPurchased = Purchases.isPurchased(product.productId);
                   return Card(
                     child: Container(
