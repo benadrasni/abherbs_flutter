@@ -7,7 +7,6 @@ import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:abherbs_flutter/prefs.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,16 +48,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
   void initState() {
     super.initState();
     _firebaseAnalytics = FirebaseAnalytics();
-    _productsF = Connectivity().checkConnectivity().then((result) {
-      if (result == ConnectivityResult.none) {
-        throw PlatformException(
-            code: Platform.operatingSystem,
-            message:
-                "IAP not prepared. Check if Platform service is available.");
-      } else {
-        return FlutterInappPurchase.getProducts(_productLists);
-      }
-    });
+    _productsF = FlutterInappPurchase.getProducts(_productLists);
 
     Ads.hideBannerAd();
   }
