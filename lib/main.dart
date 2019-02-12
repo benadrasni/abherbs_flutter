@@ -18,8 +18,6 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:screen/screen.dart';
-import 'package:connectivity/connectivity.dart';
-
 
 void main() async {
   FlutterError.onError = (FlutterErrorDetails details) {
