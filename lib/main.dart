@@ -115,25 +115,23 @@ class _AppState extends State<App> {
 
   void _initPlatformState() async {
     FlutterInappPurchase.initConnection.then((value) {
-      Connectivity().checkConnectivity().then((result) {
-        // TODO check for a fix: when iOS is offline it doesn't return purchased products
-        if (Platform.isIOS && result == ConnectivityResult.none) {
-          Prefs.getStringListF(keyPurchases, []).then((products) {
-            Purchases.purchases = products.map((productId) => Purchases.offlineProducts[productId]).toList();
-            Offline.initialize();
-          });
-        } else {
-          FlutterInappPurchase.getAvailablePurchases().then((value) {
-            Purchases.purchases = value;
-            Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
-            Offline.initialize();
-          }).catchError((error) {
-            _iapError();
-          });
-        }
-      });
-    }).catchError((error) {
-      _iapError();
+      // TODO check for a fix: when iOS is offline it doesn't return purchased products
+      if (Platform.isIOS) {
+        Prefs.getStringListF(keyPurchases, []).then((products) {
+          Purchases.purchases = products.map((productId) => Purchases.offlineProducts[productId]).toList();
+          Offline.initialize();
+        });
+      } else if (Platform.isAndroid) {
+        FlutterInappPurchase.getAvailablePurchases().then((value) {
+          Purchases.purchases = value;
+          Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
+          Offline.initialize();
+        }).catchError((error) {
+          _iapError();
+        });
+      } else {
+        throw PlatformException(code: Platform.operatingSystem, message: "platform not supported");
+      }
     });
   }
 
