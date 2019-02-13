@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -55,7 +56,7 @@ const String storagePhotos = "photos/";
 const String defaultExtension = ".webp";
 const String thumbnailsDir = "/.thumbnails";
 
-const int firebaseCacheSize = 1024*1024*20;
+const int firebaseCacheSize = 1024 * 1024 * 20;
 const String firebaseCounts = 'counts_4_v2';
 const String firebaseLists = 'lists_4_v2';
 const String firebasePlants = 'plants_v2';
@@ -72,9 +73,9 @@ const String firebaseRootTaxon = 'Eukaryota';
 const String firebaseAPGType = "type";
 const String firebaseAttributeList = "list";
 const String firebaseAttributeCount = "count";
-const String firebaseAttributeIOS= "ios";
-const String firebaseAttributeAndroid= "android";
-const String firebaseAttributeLastUpdate= "db_update";
+const String firebaseAttributeIOS = "ios";
+const String firebaseAttributeAndroid = "android";
+const String firebaseAttributeLastUpdate = "db_update";
 
 bool get isInDebugMode {
   bool inDebugMode = false;
@@ -200,7 +201,8 @@ Icon getIcon(String productId) {
   }
 }
 
-List<Widget> getActions(BuildContext context, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
+List<Widget> getActions(BuildContext context, FirebaseUser currentUser, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct,
+    Map<String, String> filter) {
   var _actions = <Widget>[];
   _actions.add(IconButton(
     icon: getIcon(productSearch),
@@ -208,7 +210,7 @@ List<Widget> getActions(BuildContext context, Function(String) onChangeLanguage,
       if (Purchases.isSearch()) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+          MaterialPageRoute(builder: (context) => Search(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
         );
       } else {
         Navigator.push(

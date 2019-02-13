@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
@@ -14,11 +15,12 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
 class Distribution2 extends StatefulWidget {
+  final FirebaseUser currentUser;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final int region;
-  Distribution2(this.onChangeLanguage, this.onBuyProduct, this.filter, this.region);
+  Distribution2(this.currentUser, this.onChangeLanguage, this.onBuyProduct, this.filter, this.region);
 
   @override
   _Distribution2State createState() => _Distribution2State();
@@ -36,14 +38,13 @@ class _Distribution2State extends State<Distribution2> {
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
+          Navigator.push(context, getNextFilterRoute(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
+              .then((value) {
             Ads.showBannerAd(this);
           });
         } else {
           _key.currentState.showSnackBar(SnackBar(
-            content: Text(S
-                .of(context)
-                .snack_no_flowers),
+            content: Text(S.of(context).snack_no_flowers),
           ));
         }
       }
@@ -183,16 +184,16 @@ class _Distribution2State extends State<Distribution2> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_distribution),
-        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
+        actions: getActions(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
+      drawer: AppDrawer(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: Preferences.myFilterAttributes.indexOf(filterDistribution),
         items: getBottomNavigationBarItems(context, widget.filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, index, -1);
+          onBottomNavigationBarTap(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, index, -1);
         },
       ),
       floatingActionButton: new Container(
@@ -220,7 +221,8 @@ class _Distribution2State extends State<Distribution2> {
                           filterRoutes[filterDistribution2] = null;
                           Navigator.pushReplacement(
                             mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
+                            MaterialPageRoute(
+                                builder: (context) => PlantList(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

@@ -7,7 +7,7 @@ description: Flutter version of abherbs
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 5.4.2+542
+version: 5.5.0+550
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -23,6 +23,7 @@ dependencies:
   firebase_admob: 0.8.0
   firebase_analytics: 2.0.0
   firebase_auth: 0.8.1
+  google_sign_in: 4.0.1
   flutter_crashlytics:
     path: ../flutter_crashlytics
   flutter_inapp_purchase:

@@ -6,16 +6,19 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/legend.dart';
 import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
+import 'package:abherbs_flutter/sign_in.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class AppDrawer extends StatefulWidget {
+  final FirebaseUser currentUser;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final void Function() settingsCallback;
-  AppDrawer(this.onChangeLanguage, this.onBuyProduct, this.filter, this.settingsCallback);
+  AppDrawer(this.currentUser, this.onChangeLanguage, this.onBuyProduct, this.filter, this.settingsCallback);
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
@@ -50,7 +53,7 @@ class _AppDrawerState extends State<AppDrawer> {
         subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ""),
         onTap: () {
           Navigator.pop(context);
-          onLeftNavigationTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, attribute);
+          onLeftNavigationTap(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, attribute);
         },
       );
     }));
@@ -137,6 +140,32 @@ class _AppDrawerState extends State<AppDrawer> {
         launchURL(webUrl + 'about?lang=' + getLanguageCode(myLocale.languageCode));
       },
     ));
+    if (widget.currentUser != null) {
+      listItems.add(ListTile(
+        title: Text(
+          S.of(context).logout,
+          style: drawerTextStyle,
+        ),
+        onTap: () {
+          //logout
+        },
+      ));
+    } else {
+      listItems.add(ListTile(
+        title: Text(
+          S.of(context).login,
+          style: drawerTextStyle,
+        ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SignInScreen()),
+          ).then((result) {
+            Navigator.pop(context);
+          });
+        },
+      ));
+    }
 
     return Drawer(
         child: ListView(

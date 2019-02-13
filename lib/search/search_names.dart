@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/utils.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 var supportedLanguages = {
   "cs": "Čeština",
@@ -34,14 +35,14 @@ var supportedLanguages = {
   "uk": "Українська"
 };
 
-Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText,
+Widget searchNames(FirebaseUser currentUser, Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText,
     Future<Map<dynamic, dynamic>> _nativeNamesF, Future<Map<dynamic, dynamic>> _latinNamesF) {
   return FutureBuilder<List<Object>>(
     future: Future.wait([_nativeNamesF, _latinNamesF]),
     builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
       switch (snapshot.connectionState) {
         case ConnectionState.done:
-          return _getBody(myLocale, onChangeLanguage, onBuyProduct, searchText, snapshot.data[0], snapshot.data[1]);
+          return _getBody(currentUser, myLocale, onChangeLanguage, onBuyProduct, searchText, snapshot.data[0], snapshot.data[1]);
         default:
           return Container(
             child: Center(
@@ -53,7 +54,7 @@ Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, Function(
   );
 }
 
-Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText, Map<dynamic, dynamic> nativeNames,
+Widget _getBody(FirebaseUser currentUser, Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText, Map<dynamic, dynamic> nativeNames,
     Map<dynamic, dynamic> latinNames) {
   var filteredNativeNames = <String>[];
   nativeNames.forEach((key, value) {
@@ -91,7 +92,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
                 Map<dynamic, dynamic> value = nativeNames[filteredNativeNames[index]];
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, value.length.toString(), path)),
+                  MaterialPageRoute(builder: (context) => PlantList(currentUser, onChangeLanguage, onBuyProduct, {}, value.length.toString(), path)),
                 );
               },
             );
@@ -120,7 +121,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
               Map<dynamic, dynamic> value = latinNames[filteredLatinNames[index]];
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, value.length.toString(), path)),
+                MaterialPageRoute(builder: (context) => PlantList(currentUser, onChangeLanguage, onBuyProduct, {}, value.length.toString(), path)),
               );
             },
           );

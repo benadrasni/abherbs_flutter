@@ -49,6 +49,11 @@
   "feedback_run_ads_fullscreen": "Show a fullscreen advertisement",
   "feedback_run_ads_video": "Watch a video advertisement",
 
+  "login": "Sign in",
+  "logout": "Logout",
+  "google": "Sign in with Google",
+
+
   "rate_question": "Is this app helpful?",
   "rate_text": "Author of this application is fueled by positive response from the users. Please send him some starflowers through application store.",
   "rate_never": "Never",

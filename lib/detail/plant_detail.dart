@@ -13,6 +13,7 @@ import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,12 +24,13 @@ final plantsReference = FirebaseDatabase.instance.reference().child(firebasePlan
 final translationsReference = FirebaseDatabase.instance.reference().child(firebaseTranslations);
 
 class PlantDetail extends StatefulWidget {
+  final FirebaseUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final String plantName;
-  PlantDetail(this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.filter, this.plantName);
+  PlantDetail(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.filter, this.plantName);
 
   @override
   _PlantDetailState createState() => _PlantDetailState();
@@ -168,7 +170,7 @@ class _PlantDetailState extends State<PlantDetail> {
           ));
         },
       )),
-      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
+      drawer: AppDrawer(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,

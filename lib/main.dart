@@ -10,6 +10,7 @@ import 'package:abherbs_flutter/splash.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +19,6 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:screen/screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   FlutterError.onError = (FlutterErrorDetails details) {
@@ -185,6 +185,7 @@ class _AppState extends State<App> {
     Prefs.dispose();
     Ads.hideBannerAd();
     await FlutterInappPurchase.endConnection;
+    _listener.cancel();
     super.dispose();
   }
 
@@ -228,7 +229,7 @@ class _AppState extends State<App> {
                   GlobalWidgetsLocalizations.delegate,
                 ],
                 supportedLocales: S.delegate.supportedLocales,
-                home: Splash(this.onChangeLanguage, this.onBuyProduct, notificationData),
+                home: Splash(_currentUser, this.onChangeLanguage, this.onBuyProduct, notificationData),
                 navigatorObservers: [
                   FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
                 ],

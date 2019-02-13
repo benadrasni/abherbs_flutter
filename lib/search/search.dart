@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/search/search_taxonomy.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 final searchReference = FirebaseDatabase.instance.reference().child(firebaseSearch);
@@ -15,10 +16,11 @@ final apgIVReference = FirebaseDatabase.instance.reference().child(firebaseAPGIV
 final translationsTaxonomyReference = FirebaseDatabase.instance.reference().child(firebaseTranslationsTaxonomy);
 
 class Search extends StatefulWidget {
+  final FirebaseUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
-  Search(this.myLocale, this.onChangeLanguage, this.onBuyProduct);
+  Search(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct);
 
   @override
   _SearchState createState() => _SearchState();
@@ -67,7 +69,7 @@ class _SearchState extends State<Search> {
             return snapshot.value;
           });
         }
-        return searchNames(widget.myLocale, widget.onChangeLanguage, widget.onBuyProduct, _searchText, _nativeNamesF, _latinNamesF);
+        return searchNames(widget.currentUser, widget.myLocale, widget.onChangeLanguage, widget.onBuyProduct, _searchText, _nativeNamesF, _latinNamesF);
       case 1:
         if (_apgIVF == null) {
           _apgIVF = apgIVReference.once().then((DataSnapshot snapshot) {
@@ -79,7 +81,7 @@ class _SearchState extends State<Search> {
             return snapshot.value;
           });
         }
-        return searchTaxonomy(widget.myLocale, widget.onChangeLanguage, widget.onBuyProduct, _searchText, _apgIVF, _translationsTaxonomyF);
+        return searchTaxonomy(widget.currentUser, widget.myLocale, widget.onChangeLanguage, widget.onBuyProduct, _searchText, _apgIVF, _translationsTaxonomyF);
     }
     return null;
   }
