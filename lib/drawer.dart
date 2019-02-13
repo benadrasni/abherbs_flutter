@@ -6,7 +6,7 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/legend.dart';
 import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
-import 'package:abherbs_flutter/sign_in.dart';
+import 'package:abherbs_flutter/signin/sign_in.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

@@ -51,8 +51,21 @@
 
   "login": "Sign in",
   "logout": "Logout",
+  "email": "Sign in with email",
+  "email_hint": "Email",
+  "email_validation_message": "Email can't be empty",
+  "password_hint": "Password",
+  "password_validation_message": "Password can't be empty",
+  "create_account": "Create an account",
+  "create_account_text": "Create an account",
+  "sign_in": "Login",
+  "sign_in_text": "Have an account? Sign in",
+  "verify_title": "Verify your account",
+  "verify_message": "Link to verify account has been sent to your email",
+  "phone": "Sign in with phone",
   "google": "Sign in with Google",
-
+  "facebook": "Sign in with Facebook",
+  "twitter": "Sign in with Twitter",
 
   "rate_question": "Is this app helpful?",
   "rate_text": "Author of this application is fueled by positive response from the users. Please send him some starflowers through application store.",
