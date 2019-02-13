@@ -64,6 +64,7 @@ class S implements WidgetsLocalizations {
   String get filter_distribution => "distribution";
   String get filter_habitat => "habitat";
   String get filter_petal => "petal";
+  String get google => "Sign in with Google";
   String get google_translate => "Translated with Google Translate";
   String get habitat_forest => "woodlands or forests";
   String get habitat_garden => "gardens or fields";
@@ -78,6 +79,8 @@ class S implements WidgetsLocalizations {
   String get indochina => "Indo-China";
   String get legend => "Legend";
   String get list_info => "Pick one";
+  String get login => "Sign in";
+  String get logout => "Logout";
   String get macaronesia => "Macaronesia";
   String get malesia => "Malesia";
   String get mexico => "Mexico";

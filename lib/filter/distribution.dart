@@ -11,6 +11,7 @@ import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
@@ -18,10 +19,11 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
 class Distribution extends StatefulWidget {
+  final FirebaseUser currentUser;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
-  Distribution(this.onChangeLanguage, this.onBuyProduct, this.filter);
+  Distribution(this.currentUser, this.onChangeLanguage, this.onBuyProduct, this.filter);
 
   @override
   _DistributionState createState() => _DistributionState();
@@ -35,7 +37,8 @@ class _DistributionState extends State<Distribution> {
   GlobalKey<ScaffoldState> _key;
 
   void _openRegion(String region) {
-    var route = MaterialPageRoute(builder: (context) => Distribution2(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, int.parse(region)));
+    var route = MaterialPageRoute(
+        builder: (context) => Distribution2(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, int.parse(region)));
     filterRoutes[filterDistribution2] = route;
     Navigator.push(context, route).then((value) {
       filterRoutes[filterDistribution2] = null;
@@ -50,14 +53,13 @@ class _DistributionState extends State<Distribution> {
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
+          Navigator.push(context, getNextFilterRoute(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
+              .then((value) {
             Ads.showBannerAd(this);
           });
         } else {
           _key.currentState.showSnackBar(SnackBar(
-            content: Text(S
-                .of(context)
-                .snack_no_flowers),
+            content: Text(S.of(context).snack_no_flowers),
           ));
         }
       }
@@ -221,9 +223,9 @@ class _DistributionState extends State<Distribution> {
       key: _key,
       appBar: new AppBar(
         title: new Text(S.of(context).filter_distribution),
-        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
+        actions: getActions(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, this.setMyRegion),
+      drawer: AppDrawer(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, this.setMyRegion),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -241,7 +243,8 @@ class _DistributionState extends State<Distribution> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, index, Preferences.myFilterAttributes.indexOf(filterDistribution));
+          onBottomNavigationBarTap(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, index,
+              Preferences.myFilterAttributes.indexOf(filterDistribution));
         },
       ),
       floatingActionButton: new Container(
@@ -268,7 +271,8 @@ class _DistributionState extends State<Distribution> {
                         onPressed: () {
                           Navigator.push(
                             mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                            MaterialPageRoute(
+                                builder: (context) => PlantList(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter)),
                           ).then((value) {
                             Ads.showBannerAd(this);
                           });

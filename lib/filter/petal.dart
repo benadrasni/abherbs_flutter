@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
@@ -15,10 +16,11 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
 class Petal extends StatefulWidget {
+  final FirebaseUser currentUser;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
-  Petal(this.onChangeLanguage, this.onBuyProduct, this.filter);
+  Petal(this.currentUser, this.onChangeLanguage, this.onBuyProduct, this.filter);
 
   @override
   _PetalState createState() => _PetalState();
@@ -37,14 +39,13 @@ class _PetalState extends State<Petal> {
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
+          Navigator.push(context, getNextFilterRoute(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
+              .then((value) {
             Ads.showBannerAd(this);
           });
         } else {
           _key.currentState.showSnackBar(SnackBar(
-            content: Text(S
-                .of(context)
-                .snack_no_flowers),
+            content: Text(S.of(context).snack_no_flowers),
           ));
         }
       }
@@ -83,9 +84,9 @@ class _PetalState extends State<Petal> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_petal),
-        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
+        actions: getActions(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
+      drawer: AppDrawer(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -187,7 +188,8 @@ class _PetalState extends State<Petal> {
               ),
               Container(
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
-                child: Text(S.of(context).petal_message,
+                child: Text(
+                  S.of(context).petal_message,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontStyle: FontStyle.italic,
@@ -204,7 +206,8 @@ class _PetalState extends State<Petal> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, index, Preferences.myFilterAttributes.indexOf(filterPetal));
+          onBottomNavigationBarTap(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, index,
+              Preferences.myFilterAttributes.indexOf(filterPetal));
         },
       ),
       floatingActionButton: new Container(
@@ -231,7 +234,8 @@ class _PetalState extends State<Petal> {
                         onPressed: () {
                           Navigator.push(
                             mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                            MaterialPageRoute(
+                                builder: (context) => PlantList(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter)),
                           ).then((value) {
                             Ads.showBannerAd(this);
                           });
