@@ -38,11 +38,11 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
 
   // Perform login or signup
   void _validateAndSubmit() async {
-    setState(() {
-      _errorMessage = "";
-      _isLoading = true;
-    });
     if (_validateAndSave()) {
+      setState(() {
+        _errorMessage = "";
+        _isLoading = true;
+      });
       String userId = "";
       try {
         if (_formMode == FormMode.LOGIN) {
@@ -117,8 +117,8 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
   Widget _showCircularProgress(){
     if (_isLoading) {
       return Center(child: CircularProgressIndicator());
-    } return Container(height: 0.0, width: 0.0,);
-
+    }
+    return Container(height: 0.0, width: 0.0,);
   }
 
   void _showVerifyEmailSentDialog() {
