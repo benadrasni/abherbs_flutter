@@ -1,4 +1,5 @@
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/signin/email.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,32 +13,32 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final Auth _auth = Auth();
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<void> _handleGoogleSignIn() async {
-    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    if (googleUser != null) {
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      if (googleAuth.accessToken != null) {
-        try {
-          final AuthCredential credential = GoogleAuthProvider.getCredential(
-            accessToken: googleAuth.accessToken,
-            idToken: googleAuth.idToken,
-          );
-          final FirebaseUser user = await _auth.signInWithCredential(credential);
-          print(user);
-        } catch (e) {
-          print(e);
-        }
-      }
-    }
+//    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+//    if (googleUser != null) {
+//      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+//      if (googleAuth.accessToken != null) {
+//        try {
+//          final AuthCredential credential = GoogleAuthProvider.getCredential(
+//            accessToken: googleAuth.accessToken,
+//            idToken: googleAuth.idToken,
+//          );
+//          final FirebaseUser user = await _auth.signInWithCredential(credential);
+//          print(user);
+//        } catch (e) {
+//          print(e);
+//        }
+//      }
+//    }
   }
 
   _handleEmailSignIn() async {
     String value = await Navigator.of(context)
         .push(MaterialPageRoute<String>(builder: (BuildContext context) {
-      return EmailLoginSignUpPage();
+      return EmailLoginSignUpPage(auth: _auth,);
     }));
 
     if (value != null) {
