@@ -14,18 +14,23 @@ class _SignInScreenState extends State<SignInScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  Future<FirebaseUser> _handleGoogleSignIn() async {
+  Future<void> _handleGoogleSignIn() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    final FirebaseUser user = await _auth.signInWithCredential(credential);
-    print("signed in " + user.displayName);
-    return user;
+    if (googleUser != null) {
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      if (googleAuth.accessToken != null) {
+        try {
+          final AuthCredential credential = GoogleAuthProvider.getCredential(
+            accessToken: googleAuth.accessToken,
+            idToken: googleAuth.idToken,
+          );
+          final FirebaseUser user = await _auth.signInWithCredential(credential);
+          print(user);
+        } catch (e) {
+          print(e);
+        }
+      }
+    }
   }
 
   @override
@@ -57,11 +62,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ],
                     ),
                     onPressed: () {
-                      _handleGoogleSignIn().then((user) {
-                        print(user);
-                      }).catchError((error) {
-                        print(error);
-                      });
+                      _handleGoogleSignIn();
                     }),
               )
             ],
