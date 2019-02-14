@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 
 class EmailLoginSignUpPage extends StatefulWidget {
-  EmailLoginSignUpPage({this.auth, this.onSignedIn});
+  EmailLoginSignUpPage({this.onSignedIn});
 
-  final BaseAuth auth;
   final VoidCallback onSignedIn;
 
   @override
@@ -46,11 +45,13 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
       String userId = "";
       try {
         if (_formMode == FormMode.LOGIN) {
-          userId = await widget.auth.signIn(_email, _password);
+          userId = await Auth.signIn(_email, _password);
+          Navigator.pop(context);
+          Navigator.pop(context);
           print('Signed in: $userId');
         } else {
-          userId = await widget.auth.signUp(_email, _password);
-          widget.auth.sendEmailVerification();
+          userId = await Auth.signUp(_email, _password);
+          Auth.sendEmailVerification();
           _showVerifyEmailSentDialog();
           print('Signed up user: $userId');
         }
@@ -61,7 +62,6 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
         if (userId.length > 0 && userId != null && _formMode == FormMode.LOGIN) {
           widget.onSignedIn();
         }
-
       } catch (e) {
         print('Error: $e');
         setState(() {
@@ -75,12 +75,11 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
     }
   }
 
-
   @override
   void initState() {
+    super.initState();
     _errorMessage = "";
     _isLoading = false;
-    super.initState();
   }
 
   void _changeFormToSignUp() {
@@ -114,11 +113,14 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
         ));
   }
 
-  Widget _showCircularProgress(){
+  Widget _showCircularProgress() {
     if (_isLoading) {
       return Center(child: CircularProgressIndicator());
     }
-    return Container(height: 0.0, width: 0.0,);
+    return Container(
+      height: 0.0,
+      width: 0.0,
+    );
   }
 
   void _showVerifyEmailSentDialog() {
@@ -142,7 +144,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
     );
   }
 
-  Widget _showBody(){
+  Widget _showBody() {
     return new Container(
         padding: EdgeInsets.all(16.0),
         child: new Form(
@@ -165,11 +167,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
     if (_errorMessage.length > 0 && _errorMessage != null) {
       return Text(
         _errorMessage,
-        style: TextStyle(
-            fontSize: 13.0,
-            color: Colors.red,
-            height: 1.0,
-            fontWeight: FontWeight.w300),
+        style: TextStyle(fontSize: 13.0, color: Colors.red, height: 1.0, fontWeight: FontWeight.w300),
       );
     } else {
       return Container(
@@ -233,14 +231,9 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
   Widget _showSecondaryButton() {
     return FlatButton(
       child: _formMode == FormMode.LOGIN
-          ? Text(S.of(context).create_account_text,
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300))
-          : Text(S.of(context).sign_in_text,
-          style:
-          TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
-      onPressed: _formMode == FormMode.LOGIN
-          ? _changeFormToSignUp
-          : _changeFormToLogin,
+          ? Text(S.of(context).create_account_text, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300))
+          : Text(S.of(context).sign_in_text, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
+      onPressed: _formMode == FormMode.LOGIN ? _changeFormToSignUp : _changeFormToLogin,
     );
   }
 
@@ -254,10 +247,8 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
             shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
             color: Colors.blue,
             child: _formMode == FormMode.LOGIN
-                ? Text(S.of(context).sign_in,
-                style: TextStyle(fontSize: 20.0, color: Colors.white))
-                : Text(S.of(context).create_account,
-                style: TextStyle(fontSize: 20.0, color: Colors.white)),
+                ? Text(S.of(context).login, style: TextStyle(fontSize: 20.0, color: Colors.white))
+                : Text(S.of(context).create_account, style: TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed: _validateAndSubmit,
           ),
         ));

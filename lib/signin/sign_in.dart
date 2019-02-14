@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/signin/email.dart';
@@ -13,46 +15,44 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final Auth _auth = Auth();
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  Future<void> _handleGoogleSignIn() async {
-//    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-//    if (googleUser != null) {
-//      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-//      if (googleAuth.accessToken != null) {
-//        try {
-//          final AuthCredential credential = GoogleAuthProvider.getCredential(
-//            accessToken: googleAuth.accessToken,
-//            idToken: googleAuth.idToken,
-//          );
-//          final FirebaseUser user = await _auth.signInWithCredential(credential);
-//          print(user);
-//        } catch (e) {
-//          print(e);
-//        }
-//      }
-//    }
+  Future<void> _handleGoogleSignIn(GlobalKey<ScaffoldState> key) async {
+    try {
+      final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+        if (googleAuth.accessToken != null) {
+          final AuthCredential credential = GoogleAuthProvider.getCredential(
+            accessToken: googleAuth.accessToken,
+            idToken: googleAuth.idToken,
+          );
+          String userId = await Auth.signInWithCredential(credential);
+          Navigator.pop(context);
+          print('Signed in: $userId');
+        }
+      }
+    } catch (e) {
+      key.currentState.showSnackBar(new SnackBar(
+        content: new Text(S.of(context).login_failed),
+      ));
+    }
   }
 
   _handleEmailSignIn() async {
-    String value = await Navigator.of(context)
-        .push(MaterialPageRoute<String>(builder: (BuildContext context) {
-      return EmailLoginSignUpPage(auth: _auth,);
+    Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
+      return EmailLoginSignUpPage();
     }));
-
-    if (value != null) {
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final key = new GlobalKey<ScaffoldState>();
+    final key = GlobalKey<ScaffoldState>();
 
     return Scaffold(
         key: key,
         appBar: AppBar(
-          title: Text(S.of(context).login),
+          title: Text(S.of(context).sign_in),
         ),
         body: Center(
           child: Column(
@@ -92,8 +92,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         )
                       ],
                     ),
-                    onPressed: () {
-                    }),
+                    onPressed: () {}),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
@@ -111,7 +110,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ],
                     ),
                     onPressed: () {
-                      _handleGoogleSignIn();
+                      _handleGoogleSignIn(key);
                     }),
               ),
               Padding(
@@ -130,7 +129,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       ],
                     ),
                     onPressed: () {
-                      _handleGoogleSignIn();
                     }),
               ),
               Padding(
@@ -148,8 +146,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         )
                       ],
                     ),
-                    onPressed: () {
-                    }),
+                    onPressed: () {}),
               )
             ],
           ),

@@ -6,13 +6,12 @@ import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/preferences.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
-
-final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
 class Distribution2 extends StatefulWidget {
   final FirebaseUser currentUser;
@@ -27,6 +26,8 @@ class Distribution2 extends StatefulWidget {
 }
 
 class _Distribution2State extends State<Distribution2> {
+  StreamSubscription<FirebaseUser> _listener;
+  FirebaseUser _currentUser;
   Future<int> _count;
   GlobalKey<ScaffoldState> _key;
 
@@ -38,7 +39,7 @@ class _Distribution2State extends State<Distribution2> {
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
+          Navigator.push(context, getNextFilterRoute(context, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
               .then((value) {
             Ads.showBannerAd(this);
           });
@@ -161,10 +162,22 @@ class _Distribution2State extends State<Distribution2> {
             }).toList()));
   }
 
+  _onAuthStateChanged(FirebaseUser user) {
+    setState(() {
+      _currentUser = user;
+    });
+  }
+
+  _checkCurrentUser() async {
+    _currentUser = await Auth.getCurrentUser();
+    _listener = Auth.subscribe(_onAuthStateChanged);
+  }
+
   @override
   void initState() {
     super.initState();
-    _key = new GlobalKey<ScaffoldState>();
+    _checkCurrentUser();
+    _key = GlobalKey<ScaffoldState>();
 
     _setCount();
 
@@ -174,6 +187,7 @@ class _Distribution2State extends State<Distribution2> {
   @override
   void dispose() {
     filterRoutes[filterDistribution2] = null;
+    _listener.cancel();
     super.dispose();
   }
 
@@ -184,16 +198,16 @@ class _Distribution2State extends State<Distribution2> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_distribution),
-        actions: getActions(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
+        actions: getActions(context, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
       ),
-      drawer: AppDrawer(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
+      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: Preferences.myFilterAttributes.indexOf(filterDistribution),
         items: getBottomNavigationBarItems(context, widget.filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, index, -1);
+          onBottomNavigationBarTap(context, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, index, -1);
         },
       ),
       floatingActionButton: new Container(
@@ -222,7 +236,7 @@ class _Distribution2State extends State<Distribution2> {
                           Navigator.pushReplacement(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
+                                builder: (context) => PlantList(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

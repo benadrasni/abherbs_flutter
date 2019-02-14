@@ -51,8 +51,6 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   FirebaseMessaging _firebaseMessaging;
   FirebaseAnalytics _firebaseAnalytics;
-  FirebaseAuth _firebaseAuth;
-  StreamSubscription<FirebaseUser> _listener;
   FirebaseUser _currentUser;
   Map<String, dynamic> _notificationData;
   Future<Locale> _localeF;
@@ -137,17 +135,6 @@ class _AppState extends State<App> {
     });
   }
 
-  void _checkCurrentUser() async {
-    _currentUser = await _firebaseAuth.currentUser();
-    _currentUser?.getIdToken(refresh: true);
-
-    _listener = _firebaseAuth.onAuthStateChanged.listen((FirebaseUser user) {
-      setState(() {
-        _currentUser = user;
-      });
-    });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -157,9 +144,6 @@ class _AppState extends State<App> {
 
     _firebaseMessaging = FirebaseMessaging();
     _firebaseAnalytics = FirebaseAnalytics();
-    _firebaseAuth = FirebaseAuth.instance;
-
-    _checkCurrentUser();
 
     _localeF = Prefs.getStringF(keyPreferredLanguage).then((String language) {
       return language.isEmpty ? null : Locale(language, '');
@@ -185,7 +169,7 @@ class _AppState extends State<App> {
     Prefs.dispose();
     Ads.hideBannerAd();
     await FlutterInappPurchase.endConnection;
-    _listener.cancel();
+    //_listener.cancel();
     super.dispose();
   }
 
