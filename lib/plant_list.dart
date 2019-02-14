@@ -8,18 +8,12 @@ import 'package:abherbs_flutter/firebase_animated_index_list.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
-
-final rootReference = FirebaseDatabase.instance.reference();
-final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
-final listsReference = FirebaseDatabase.instance.reference().child(firebasePlantHeaders);
-final keysReference = FirebaseDatabase.instance.reference().child(firebaseLists);
-final translationsReference = FirebaseDatabase.instance.reference().child(firebaseTranslations);
-final translationsTaxonomyReference = FirebaseDatabase.instance.reference().child(firebaseTranslationsTaxonomy);
 
 class PlantList extends StatefulWidget {
   final FirebaseUser currentUser;
@@ -35,6 +29,8 @@ class PlantList extends StatefulWidget {
 }
 
 class _PlantListState extends State<PlantList> {
+  StreamSubscription<FirebaseUser> _listener;
+  FirebaseUser _currentUser;
   Future<int> _count;
   Map<String, String> _translationCache;
 
@@ -52,15 +48,27 @@ class _PlantListState extends State<PlantList> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => PlantDetail(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, name)),
+              builder: (context) => PlantDetail(_currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, name)),
         );
       },
     );
   }
 
+  _onAuthStateChanged(FirebaseUser user) {
+    setState(() {
+      _currentUser = user;
+    });
+  }
+
+  void _checkCurrentUser() async {
+    _currentUser = await Auth.getCurrentUser();
+    _listener = Auth.subscribe(_onAuthStateChanged);
+  }
+
   @override
   void initState() {
     super.initState();
+    _checkCurrentUser();
     Offline.setKeepSynced2(true);
 
     if (widget.count != null) {
@@ -79,13 +87,19 @@ class _PlantListState extends State<PlantList> {
   }
 
   @override
+  void dispose() {
+    _listener.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var mainContext = context;
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).list_info),
       ),
-      drawer: AppDrawer(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
+      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: Container(
         child: Column(
           children: <Widget>[
@@ -170,7 +184,7 @@ class _PlantListState extends State<PlantList> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      PlantDetail(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, name)),
+                                      PlantDetail(_currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, name)),
                             );
                           },
                         ),
@@ -205,11 +219,11 @@ class _PlantListState extends State<PlantList> {
                                 filter[filterDistribution] = value;
                               }
                               Navigator.pushReplacement(mainContext,
-                                  getNextFilterRoute(mainContext, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, filter));
+                                  getNextFilterRoute(mainContext, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, filter));
                             });
                           } else {
                             Navigator.pushReplacement(mainContext,
-                                getNextFilterRoute(mainContext, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, filter));
+                                getNextFilterRoute(mainContext, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, filter));
                           }
                         });
                       },

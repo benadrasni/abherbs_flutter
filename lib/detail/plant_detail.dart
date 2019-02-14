@@ -11,6 +11,7 @@ import 'package:abherbs_flutter/entity/translations.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/offline.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,9 +20,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:http/http.dart' as http;
-
-final plantsReference = FirebaseDatabase.instance.reference().child(firebasePlants);
-final translationsReference = FirebaseDatabase.instance.reference().child(firebaseTranslations);
 
 class PlantDetail extends StatefulWidget {
   final FirebaseUser currentUser;
@@ -37,6 +35,8 @@ class PlantDetail extends StatefulWidget {
 }
 
 class _PlantDetailState extends State<PlantDetail> {
+  StreamSubscription<FirebaseUser> _listener;
+  FirebaseUser _currentUser;
   FirebaseAnalytics _firebaseAnalytics;
   Future<Plant> _plantF;
   Future<PlantTranslation> _plantTranslationF;
@@ -126,9 +126,33 @@ class _PlantDetailState extends State<PlantDetail> {
     );
   }
 
+  Widget _getBody(BuildContext context) {
+    switch (_currentIndex) {
+      case 0:
+        return getGallery(context, _plantF);
+      case 1:
+        return getInfo(context, widget.myLocale, _isOriginal, _plantF, _plantTranslationF, this.onChangeTranslation, _key);
+      case 2:
+        return getTaxonomy(context, widget.myLocale, _plantF, _plantTranslationF);
+    }
+    return null;
+  }
+
+  _onAuthStateChanged(FirebaseUser user) {
+    setState(() {
+      _currentUser = user;
+    });
+  }
+
+  void _checkCurrentUser() async {
+    _currentUser = await Auth.getCurrentUser();
+    _listener = Auth.subscribe(_onAuthStateChanged);
+  }
+
   @override
   void initState() {
     super.initState();
+    _checkCurrentUser();
     Offline.setKeepSynced3(true);
     _firebaseAnalytics = FirebaseAnalytics();
 
@@ -144,16 +168,10 @@ class _PlantDetailState extends State<PlantDetail> {
     _logSelectContentEvent(widget.plantName);
   }
 
-  Widget _getBody(BuildContext context) {
-    switch (_currentIndex) {
-      case 0:
-        return getGallery(context, _plantF);
-      case 1:
-        return getInfo(context, widget.myLocale, _isOriginal, _plantF, _plantTranslationF, this.onChangeTranslation, _key);
-      case 2:
-        return getTaxonomy(context, widget.myLocale, _plantF, _plantTranslationF);
-    }
-    return null;
+  @override
+  void dispose() {
+    _listener.cancel();
+    super.dispose();
   }
 
   @override
@@ -170,7 +188,7 @@ class _PlantDetailState extends State<PlantDetail> {
           ));
         },
       )),
-      drawer: AppDrawer(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
+      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,

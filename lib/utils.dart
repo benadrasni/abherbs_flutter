@@ -11,6 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
@@ -76,6 +77,14 @@ const String firebaseAttributeCount = "count";
 const String firebaseAttributeIOS = "ios";
 const String firebaseAttributeAndroid = "android";
 const String firebaseAttributeLastUpdate = "db_update";
+
+final DatabaseReference rootReference = FirebaseDatabase.instance.reference();
+final DatabaseReference countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
+final DatabaseReference listsReference = FirebaseDatabase.instance.reference().child(firebasePlantHeaders);
+final DatabaseReference keysReference = FirebaseDatabase.instance.reference().child(firebaseLists);
+final DatabaseReference translationsReference = FirebaseDatabase.instance.reference().child(firebaseTranslations);
+final DatabaseReference translationsTaxonomyReference = FirebaseDatabase.instance.reference().child(firebaseTranslationsTaxonomy);
+final DatabaseReference plantsReference = FirebaseDatabase.instance.reference().child(firebasePlants);
 
 bool get isInDebugMode {
   bool inDebugMode = false;

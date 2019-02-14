@@ -9,6 +9,7 @@ import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -28,7 +29,8 @@ class Color extends StatefulWidget {
 }
 
 class _ColorState extends State<Color> {
-  DatabaseReference _countsReference;
+  StreamSubscription<FirebaseUser> _listener;
+  FirebaseUser _currentUser;
   Future<int> _count;
   Future<String> _rateStateF;
   Future<bool> _isNewVersionF;
@@ -40,10 +42,10 @@ class _ColorState extends State<Color> {
     newFilter.addAll(_filter);
     newFilter[filterColor] = value;
 
-    _countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
+    countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
+          Navigator.push(context, getNextFilterRoute(context, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
               .then((value) {
             Ads.showBannerAd(this);
           });
@@ -57,7 +59,7 @@ class _ColorState extends State<Color> {
   }
 
   _setCount() {
-    _count = _countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
+    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
       return snapshot.value;
     });
   }
@@ -113,11 +115,23 @@ class _ColorState extends State<Color> {
     );
   }
 
+  _onAuthStateChanged(FirebaseUser user) {
+    setState(() {
+      _currentUser = user;
+    });
+  }
+
+  void _checkCurrentUser() async {
+    _currentUser = await Auth.getCurrentUser();
+    _listener = Auth.subscribe(_onAuthStateChanged);
+  }
+
   @override
   void initState() {
     super.initState();
+    _checkCurrentUser();
     Offline.setKeepSynced1(true);
-    _countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
+
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterColor);
@@ -137,6 +151,12 @@ class _ColorState extends State<Color> {
     _setCount();
 
     Ads.showBannerAd(this);
+  }
+
+  @override
+  void dispose() {
+    _listener.cancel();
+    super.dispose();
   }
 
   @override
@@ -333,9 +353,9 @@ class _ColorState extends State<Color> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
-        actions: getActions(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
+        actions: getActions(context, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
       ),
-      drawer: AppDrawer(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
+      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -356,7 +376,7 @@ class _ColorState extends State<Color> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, index,
+          onBottomNavigationBarTap(context, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, index,
               Preferences.myFilterAttributes.indexOf(filterColor));
         },
       ),
@@ -385,7 +405,7 @@ class _ColorState extends State<Color> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                                builder: (context) => PlantList(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter)),
                           ).then((value) {
                             Ads.showBannerAd(this);
                           });

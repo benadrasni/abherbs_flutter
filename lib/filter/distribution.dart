@@ -10,13 +10,12 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
-
-final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
 class Distribution extends StatefulWidget {
   final FirebaseUser currentUser;
@@ -30,6 +29,8 @@ class Distribution extends StatefulWidget {
 }
 
 class _DistributionState extends State<Distribution> {
+  StreamSubscription<FirebaseUser> _listener;
+  FirebaseUser _currentUser;
   Future<int> _count;
   Map<String, String> _filter;
   Future<String> _myRegionF;
@@ -38,7 +39,7 @@ class _DistributionState extends State<Distribution> {
 
   void _openRegion(String region) {
     var route = MaterialPageRoute(
-        builder: (context) => Distribution2(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, int.parse(region)));
+        builder: (context) => Distribution2(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, int.parse(region)));
     filterRoutes[filterDistribution2] = route;
     Navigator.push(context, route).then((value) {
       filterRoutes[filterDistribution2] = null;
@@ -53,7 +54,7 @@ class _DistributionState extends State<Distribution> {
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
+          Navigator.push(context, getNextFilterRoute(context, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
               .then((value) {
             Ads.showBannerAd(this);
           });
@@ -72,7 +73,7 @@ class _DistributionState extends State<Distribution> {
     });
   }
 
-  void setMyRegion() {
+  _setMyRegion() {
     _myRegion = "";
     _myRegionF = Prefs.getStringF(keyMyRegion);
     _myRegionF.then((region) {
@@ -136,7 +137,7 @@ class _DistributionState extends State<Distribution> {
               context,
               MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter)),
             ).then((result) {
-              setMyRegion();
+              _setMyRegion();
             });
           }
         },
@@ -201,10 +202,23 @@ class _DistributionState extends State<Distribution> {
     );
   }
 
+  _onAuthStateChanged(FirebaseUser user) {
+    setState(() {
+      _currentUser = user;
+    });
+  }
+
+  void _checkCurrentUser() async {
+    _currentUser = await Auth.getCurrentUser();
+    _listener = Auth.subscribe(_onAuthStateChanged);
+  }
+
   @override
   void initState() {
-    Offline.setKeepSynced1(true);
     super.initState();
+    _checkCurrentUser();
+    Offline.setKeepSynced1(true);
+
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterDistribution);
@@ -213,7 +227,13 @@ class _DistributionState extends State<Distribution> {
     _setCount();
 
     Ads.showBannerAd(this);
-    setMyRegion();
+    _setMyRegion();
+  }
+
+  @override
+  void dispose() {
+    _listener.cancel();
+    super.dispose();
   }
 
   @override
@@ -223,9 +243,9 @@ class _DistributionState extends State<Distribution> {
       key: _key,
       appBar: new AppBar(
         title: new Text(S.of(context).filter_distribution),
-        actions: getActions(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
+        actions: getActions(context, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
       ),
-      drawer: AppDrawer(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, this.setMyRegion),
+      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, this._setMyRegion),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -243,7 +263,7 @@ class _DistributionState extends State<Distribution> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, index,
+          onBottomNavigationBarTap(context, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, index,
               Preferences.myFilterAttributes.indexOf(filterDistribution));
         },
       ),
@@ -272,7 +292,7 @@ class _DistributionState extends State<Distribution> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                                builder: (context) => PlantList(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter)),
                           ).then((value) {
                             Ads.showBannerAd(this);
                           });

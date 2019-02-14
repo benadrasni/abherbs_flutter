@@ -85,7 +85,8 @@ class S implements WidgetsLocalizations {
   String get indochina => "Indo-China";
   String get legend => "Legend";
   String get list_info => "Pick one";
-  String get login => "Sign in";
+  String get login => "Login";
+  String get login_failed => "Sign in failed. Please check your connection.";
   String get logout => "Logout";
   String get macaronesia => "Macaronesia";
   String get malesia => "Malesia";
@@ -171,7 +172,7 @@ class S implements WidgetsLocalizations {
   String get show_original => "Show English text";
   String get show_translation => "Show translated text";
   String get siberia => "Siberia";
-  String get sign_in => "Login";
+  String get sign_in => "Sign in";
   String get sign_in_text => "Have an account? Sign in";
   String get snack_copy => "Copied to Clipboard";
   String get snack_loading_ad => "Ad is still loading, press button again.";
