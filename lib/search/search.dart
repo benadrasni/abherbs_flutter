@@ -46,7 +46,7 @@ class _SearchState extends State<Search> {
   @override
   void initState() {
     super.initState();
-    Offline.setKeepSynced4(true);
+    Offline.setKeepSynced(4, true);
 
     _currentIndex = 0;
     _key = new GlobalKey<ScaffoldState>();

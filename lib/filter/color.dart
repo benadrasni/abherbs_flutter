@@ -113,7 +113,7 @@ class _ColorState extends State<Color> {
   @override
   void initState() {
     super.initState();
-    Offline.setKeepSynced1(true);
+    Offline.setKeepSynced(1, true);
     _countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);

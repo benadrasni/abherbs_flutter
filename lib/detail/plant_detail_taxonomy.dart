@@ -8,49 +8,40 @@ import 'package:flutter/material.dart';
 
 final translationsTaxonomyReference = FirebaseDatabase.instance.reference().child(firebaseTranslationsTaxonomy);
 
-Widget getTaxonomy(BuildContext context, Locale myLocale, Future<Plant> _plantF, Future<PlantTranslation> _plantTranslationF) {
-  return FutureBuilder<Plant>(
-      future: _plantF,
-      builder: (BuildContext context, AsyncSnapshot<Plant> snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.done:
-            List<Widget> cards = [];
+Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF) {
+  List<Widget> cards = [];
 
-            cards.add(Card(
-                child: FutureBuilder<PlantTranslation>(
-              future: _plantTranslationF,
-              builder: (BuildContext context, AsyncSnapshot<PlantTranslation> plantTranslationSnapshot) {
-                if (plantTranslationSnapshot.connectionState == ConnectionState.done) {
-                  return Container(padding: EdgeInsets.only(top: 15.0, bottom: 15.0), child: _getNames(snapshot.data, plantTranslationSnapshot.data));
-                } else {
-                  return Container();
-                }
-              },
-            )));
+  cards.add(Card(
+      child: FutureBuilder<PlantTranslation>(
+    future: _plantTranslationF,
+    builder: (BuildContext context, AsyncSnapshot<PlantTranslation> plantTranslationSnapshot) {
+      if (plantTranslationSnapshot.connectionState == ConnectionState.done) {
+        return Container(padding: EdgeInsets.only(top: 15.0, bottom: 15.0), child: _getNames(plant, plantTranslationSnapshot.data));
+      } else {
+        return Container();
+      }
+    },
+  )));
 
-            cards.add(Card(
-              child: Container(
-                padding: EdgeInsets.all(10.0),
-                child: _getSynonyms(snapshot.data),
-              ),
-            ));
+  cards.add(Card(
+    child: Container(
+      padding: EdgeInsets.all(10.0),
+      child: _getSynonyms(plant),
+    ),
+  ));
 
-            cards.add(Card(
-              child: Container(
-                padding: EdgeInsets.all(10.0),
-                child: _getTaxonomy(context, myLocale, snapshot.data),
-              ),
-            ));
+  cards.add(Card(
+    child: Container(
+      padding: EdgeInsets.all(10.0),
+      child: _getTaxonomy(context, myLocale, plant),
+    ),
+  ));
 
-            return ListView(
-              shrinkWrap: true,
-              padding: EdgeInsets.all(5.0),
-              children: cards,
-            );
-          default:
-            return Column(mainAxisAlignment: MainAxisAlignment.center, children: [CircularProgressIndicator()]);
-        }
-      });
+  return ListView(
+    shrinkWrap: true,
+    padding: EdgeInsets.all(5.0),
+    children: cards,
+  );
 }
 
 Widget _getNames(Plant plant, PlantTranslation plantTranslation) {
@@ -119,12 +110,12 @@ Widget _getTaxonomy(BuildContext context, Locale myLocale, Plant plant) {
     taxonTiles.add(Container(
         padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Expanded(
-        child: Text(getTaxonLabel(context, taxonKey.substring(taxonKey.indexOf('_')+1))),
-        flex: 2,
-      ),
-      _getTaxonInLanguage(myLocale, plant.apgIV[taxonKey]),
-    ])));
+          Expanded(
+            child: Text(getTaxonLabel(context, taxonKey.substring(taxonKey.indexOf('_') + 1))),
+            flex: 2,
+          ),
+          _getTaxonInLanguage(myLocale, plant.apgIV[taxonKey]),
+        ])));
   }
 
   return Column(
@@ -134,7 +125,8 @@ Widget _getTaxonomy(BuildContext context, Locale myLocale, Plant plant) {
 }
 
 Widget _getTaxonInLanguage(Locale myLocale, String taxon) {
-  Future<String> translationF = translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(taxon).once().then((DataSnapshot snapshot) {
+  Future<String> translationF =
+      translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(taxon).once().then((DataSnapshot snapshot) {
     if (snapshot.value != null && snapshot.value.length > 0) {
       return snapshot.value.join(', ');
     } else {

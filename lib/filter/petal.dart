@@ -60,7 +60,7 @@ class _PetalState extends State<Petal> {
   @override
   void initState() {
     super.initState();
-    Offline.setKeepSynced1(true);
+    Offline.setKeepSynced(1, true);
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterPetal);

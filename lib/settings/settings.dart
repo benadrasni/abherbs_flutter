@@ -78,6 +78,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _setOffline(bool offline) {
+    Offline.onChange(offline);
     if (offline) {
       _offlineDownloadDialog();
       setState(() {
