@@ -25,7 +25,7 @@ const String sourceUsda = "plants.usda.gov";
 const String sourceUsfs = "forestryimages.org";
 const String sourceTelaBotanica = "tela-botanica.org";
 
-Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Plant> _plantF, Future<PlantTranslation> _plantTranslationF,
+Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant plant, Future<PlantTranslation> _plantTranslationF,
     Function(bool) onChangeTranslation, GlobalKey<ScaffoldState> key) {
   return FutureBuilder<PlantTranslation>(
       future: _plantTranslationF,
@@ -35,37 +35,21 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Pl
             List<Widget> cards = [];
 
             cards.add(Card(
-                child: FutureBuilder<Plant>(
-              future: _plantF,
-              builder: (BuildContext context, AsyncSnapshot<Plant> plantSnapshot) {
-                if (plantSnapshot.connectionState == ConnectionState.done) {
-                  return Container(
-                    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                    child: _getNames(context, plantSnapshot.data, snapshot.data, key),
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            )));
+              child: Container(
+                padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                child: _getNames(context, plant, snapshot.data, key),
+              ),
+            ));
 
             cards.add(Card(
-                child: FutureBuilder<Plant>(
-              future: _plantF,
-              builder: (BuildContext context, AsyncSnapshot<Plant> plantSnapshot) {
-                if (plantSnapshot.connectionState == ConnectionState.done) {
-                  return Container(
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: _getDescription(context, myLocale, plantSnapshot.data, snapshot.data),
-                    ),
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            )));
+              child: Container(
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: _getDescription(context, myLocale, plant, snapshot.data),
+                ),
+              ),
+            ));
 
             cards.add(Card(
               child: Container(
@@ -240,27 +224,14 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Pl
                           child: new Text(isOriginal ? S.of(context).show_translation : S.of(context).show_original),
                         ),
                       ),
-                      FutureBuilder<Plant>(
-                        future: _plantF,
-                        builder: (BuildContext context, AsyncSnapshot<Plant> plantSnapshot) {
-                          if (plantSnapshot.connectionState == ConnectionState.done) {
-                            return Container(
-                              width: 300.0,
-                              child: RaisedButton(
-                                onPressed: () {
-                                  launchURL(webUrl +
-                                      'translate_flower?lang=' +
-                                      getLanguageCode(myLocale.languageCode) +
-                                      "&plant=" +
-                                      plantSnapshot.data.name);
-                                },
-                                child: new Text(S.of(context).improve_translation),
-                              ),
-                            );
-                          } else {
-                            return Container();
-                          }
-                        },
+                      Container(
+                        width: 300.0,
+                        child: RaisedButton(
+                          onPressed: () {
+                            launchURL(webUrl + 'translate_flower?lang=' + getLanguageCode(myLocale.languageCode) + "&plant=" + plant.name);
+                          },
+                          child: new Text(S.of(context).improve_translation),
+                        ),
                       ),
                     ],
                   ),
@@ -269,22 +240,14 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Future<Pl
             }
 
             cards.add(Card(
-                child: FutureBuilder<Plant>(
-              future: _plantF,
-              builder: (BuildContext context, AsyncSnapshot<Plant> plantSnapshot) {
-                if (plantSnapshot.connectionState == ConnectionState.done) {
-                  return Container(
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: _getSources(context, plantSnapshot.data, snapshot.data),
-                    ),
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            )));
+              child: Container(
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: _getSources(context, plant, snapshot.data),
+                ),
+              ),
+            ));
 
             return ListView(
               shrinkWrap: true,

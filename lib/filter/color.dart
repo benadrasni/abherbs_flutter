@@ -130,7 +130,7 @@ class _ColorState extends State<Color> {
   void initState() {
     super.initState();
     _checkCurrentUser();
-    Offline.setKeepSynced1(true);
+    Offline.setKeepSynced(1, true);
 
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);

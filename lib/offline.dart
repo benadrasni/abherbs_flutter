@@ -10,17 +10,19 @@ import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
 class Offline {
-  static var httpClient = new HttpClient();
-  static String rootPath;
   static bool downloadFinished = false;
   static bool downloadPaused = false;
-  static bool downloadDB = false;
-  static String downloadDBDate;
-  static List<bool> keepSynced = [false, false, false, false];
+
+  static var _httpClient = new HttpClient();
+  static String _rootPath;
+  static bool _offline = false;
+  static bool _downloadDB = false;
+  static String _downloadDBDate;
+  static List<bool> _keepSynced = [false, false, false, false];
 
   static void initialize() {
     getApplicationDocumentsDirectory().then((dir) {
-      rootPath = dir.path;
+      _rootPath = dir.path;
     });
 
     if (Purchases.isOffline()) {
@@ -28,84 +30,73 @@ class Offline {
       FirebaseDatabase.instance.setPersistenceCacheSizeBytes(firebaseCacheSize);
 
       Prefs.getBoolF(keyOffline, false).then((value) {
+        _offline = value;
         if (value) {
           Prefs.getIntF(keyOfflinePlant, 0).then((value) {
             FirebaseDatabase.instance.reference().child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((DataSnapshot snapshot) {
               downloadFinished = snapshot.value == null || value >= snapshot.value;
             });
           });
+          FirebaseDatabase.instance.reference().child(firebaseVersions).child(firebaseAttributeLastUpdate).once().then((DataSnapshot snapshot) {
+            if (snapshot.value != null) {
+              Prefs.getStringF(keyOfflineDB, '').then((value) {
+                _downloadDBDate = snapshot.value;
+                DateTime dbUpdate = DateTime.parse(_downloadDBDate);
+                _downloadDB = value.isEmpty || dbUpdate.isAfter(DateTime.parse(value));
+              });
+            }
+          });
         } else {
           downloadFinished = false;
-        }
-      });
-
-      FirebaseDatabase.instance.reference().child(firebaseVersions).child(firebaseAttributeLastUpdate).once().then((DataSnapshot snapshot) {
-        if (snapshot.value != null) {
-          Prefs.getStringF(keyOfflineDB, '').then((value) {
-            downloadDBDate = snapshot.value;
-            DateTime dbUpdate = DateTime.parse(downloadDBDate);
-            downloadDB = value.isEmpty || dbUpdate.isAfter(DateTime.parse(value));
-          });
+          _downloadDB = false;
         }
       });
     }
+  }
+
+  static onChange(bool offline) {
+    _offline = offline;
+    _downloadDB = offline;
+    downloadFinished = false;
+    _keepSynced = [false, false, false, false];
   }
 
   static void finalizeDownloadDB() {
-    if (Purchases.isOffline() && keepSynced.reduce((value, item) => value && item)) {
-      Prefs.setString(keyOfflineDB, downloadDBDate);
-      downloadDB = false;
+    if (_offline && _keepSynced.reduce((value, item) => value && item)) {
+      Prefs.setString(keyOfflineDB, _downloadDBDate);
+      _downloadDB = false;
     }
   }
 
-  static void setKeepSynced1(bool value) {
-    if (Purchases.isOffline() && downloadDB && !keepSynced[0]) {
+  static Future<void> setKeepSynced(int section, bool value) async {
+    if (!value || (_offline && _downloadDB && !_keepSynced[section-1])) {
       var reference = FirebaseDatabase.instance.reference();
-      reference.child(firebaseCounts).keepSynced(value);
-      keepSynced[0] = true;
-      finalizeDownloadDB();
-    }
-  }
-
-  static void setKeepSynced2(bool value) {
-    if (Purchases.isOffline() && downloadDB && !keepSynced[1]) {
-      var reference = FirebaseDatabase.instance.reference();
-      reference.child(firebaseLists).keepSynced(value);
-      reference.child(firebasePlantHeaders).keepSynced(value);
-      keepSynced[1] = true;
-      finalizeDownloadDB();
-    }
-  }
-
-  static void setKeepSynced3(bool value) {
-    if (Purchases.isOffline() && downloadDB && !keepSynced[2]) {
-      var reference = FirebaseDatabase.instance.reference();
-      reference.child(firebasePlants).keepSynced(value);
-      reference.child(firebaseTranslations).child(languageEnglish).keepSynced(value);
-      Prefs.getStringF(keyLanguage, languageEnglish).then((language) {
-        reference.child(firebaseTranslations).child(language).keepSynced(value);
-        reference.child(firebaseTranslations).child(language + languageGTSuffix).keepSynced(value);
-        reference.child(firebaseTranslationsTaxonomy).child(language).keepSynced(value);
-      });
-      keepSynced[2] = true;
-      finalizeDownloadDB();
-    }
-  }
-
-  static void setKeepSynced4(bool value) {
-    if (Purchases.isOffline() && downloadDB && !keepSynced[3]) {
-      var reference = FirebaseDatabase.instance.reference();
-      if (Purchases.isSearch()) {
-        reference.child(firebaseAPGIV).keepSynced(value);
-        reference.child(firebaseSearch).child(languageLatin).keepSynced(value);
-        reference.child(firebaseSearch).child(languageEnglish).keepSynced(value);
-        Prefs.getStringF(keyLanguage, languageEnglish).then((language) {
-          if (language != languageEnglish) {
-            reference.child(firebaseSearch).child(language).keepSynced(value);
-          }
-        });
+      switch (section) {
+        case 1:
+          await reference.child(firebaseCounts).keepSynced(value);
+          break;
+        case 2:
+          await reference.child(firebaseLists).keepSynced(value);
+          await reference.child(firebasePlantHeaders).keepSynced(value);
+          break;
+        case 3:
+          await reference.child(firebasePlants).keepSynced(value);
+          await reference.child(firebaseTranslations).child(languageEnglish).keepSynced(value);
+          String language = await Prefs.getStringF(keyLanguage, languageEnglish);
+          await reference.child(firebaseTranslations).child(language).keepSynced(value);
+          await reference.child(firebaseTranslations).child(language + languageGTSuffix).keepSynced(value);
+          await reference.child(firebaseTranslationsTaxonomy).child(language).keepSynced(value);
+          break;
+        case 4:
+          await reference.child(firebasePlants).keepSynced(value);
+          await reference.child(firebaseTranslations).child(languageEnglish).keepSynced(value);
+          String language = await Prefs.getStringF(keyLanguage, languageEnglish);
+          await reference.child(firebaseTranslations).child(language).keepSynced(value);
+          await reference.child(firebaseTranslations).child(language + languageGTSuffix).keepSynced(value);
+          await reference.child(firebaseTranslationsTaxonomy).child(language).keepSynced(value);
+          break;
       }
-      keepSynced[3] = true;
+      _keepSynced[section - 1] = value;
       finalizeDownloadDB();
     }
   }
@@ -235,40 +226,44 @@ class Offline {
   }
 
   static Future<void> delete() async {
-    setKeepSynced1(false);
-    setKeepSynced2(false);
-    setKeepSynced3(false);
-    setKeepSynced4(false);
-    if (rootPath == null) {
-      rootPath = (await getApplicationDocumentsDirectory()).path;
+    setKeepSynced(1, false);
+    setKeepSynced(2, false);
+    setKeepSynced(3, false);
+    setKeepSynced(4, false);
+    if (_rootPath == null) {
+      _rootPath = (await getApplicationDocumentsDirectory()).path;
     }
-    var familiesDir = Directory('$rootPath/$storageFamilies');
-    familiesDir.delete(recursive: true);
-    var photosDir = Directory('$rootPath/$storagePhotos');
-    photosDir.delete(recursive: true);
+    var familiesDir = Directory('$_rootPath/$storageFamilies');
+    if (await familiesDir.exists()) {
+      familiesDir.delete(recursive: true);
+    }
+    var photosDir = Directory('$_rootPath/$storagePhotos');
+    if (await photosDir.exists()) {
+      photosDir.delete(recursive: true);
+    }
     Prefs.setInt(keyOfflineFamily, 0);
     Prefs.setInt(keyOfflinePlant, 0);
-    downloadFinished = false;
+    Prefs.setString(keyOfflineDB, null);
   }
 
   static Future<File> _downloadFile(String url, String dir, String filename) async {
-    var request = await httpClient.getUrl(Uri.parse(url));
+    var request = await _httpClient.getUrl(Uri.parse(url));
     var response = await request.close();
     var bytes = await consolidateHttpClientResponseBytes(response);
-    if (rootPath == null) {
-      rootPath = (await getApplicationDocumentsDirectory()).path;
+    if (_rootPath == null) {
+      _rootPath = (await getApplicationDocumentsDirectory()).path;
     }
-    await Directory('$rootPath/$dir').create(recursive: true);
-    File file = File('$rootPath/$dir/$filename');
+    await Directory('$_rootPath/$dir').create(recursive: true);
+    File file = File('$_rootPath/$dir/$filename');
     await file.writeAsBytes(bytes);
     return file;
   }
 
   static Future<File> getLocalFile(String filename) async {
-    if (rootPath == null) {
-      rootPath = (await getApplicationDocumentsDirectory()).path;
+    if (_rootPath == null) {
+      _rootPath = (await getApplicationDocumentsDirectory()).path;
     }
-    File file = new File('$rootPath/$filename');
+    File file = new File('$_rootPath/$filename');
     return file.exists().then((exists) {
       return exists ? file : null;
     });
