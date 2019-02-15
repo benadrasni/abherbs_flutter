@@ -201,7 +201,7 @@ class _DistributionState extends State<Distribution> {
 
   @override
   void initState() {
-    Offline.setKeepSynced1(true);
+    Offline.setKeepSynced(1, true);
     super.initState();
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);

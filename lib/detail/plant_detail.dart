@@ -27,8 +27,8 @@ class PlantDetail extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
-  final String plantName;
-  PlantDetail(this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.filter, this.plantName);
+  final Plant plant;
+  PlantDetail(this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.filter, this.plant);
 
   @override
   _PlantDetailState createState() => _PlantDetailState();
@@ -36,7 +36,6 @@ class PlantDetail extends StatefulWidget {
 
 class _PlantDetailState extends State<PlantDetail> {
   FirebaseAnalytics _firebaseAnalytics;
-  Future<Plant> _plantF;
   Future<PlantTranslation> _plantTranslationF;
   int _currentIndex;
   bool _isOriginal;
@@ -50,7 +49,7 @@ class _PlantDetailState extends State<PlantDetail> {
   }
 
   Future<PlantTranslation> _getTranslation() {
-    return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(widget.plantName).once().then((DataSnapshot snapshot) {
+    return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(widget.plant.name).once().then((DataSnapshot snapshot) {
       var plantTranslation = snapshot.value == null ? PlantTranslation() : PlantTranslation.fromJson(snapshot.value);
       if (plantTranslation.isTranslated()) {
         return plantTranslation;
@@ -59,7 +58,7 @@ class _PlantDetailState extends State<PlantDetail> {
         if (_isOriginal) {
           return translationsReference
               .child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish)
-              .child(widget.plantName)
+              .child(widget.plant.name)
               .once()
               .then((DataSnapshot snapshot) {
             var plantTranslationOriginal = PlantTranslation.fromJson(snapshot.value);
@@ -68,7 +67,7 @@ class _PlantDetailState extends State<PlantDetail> {
         } else {
           return translationsReference
               .child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix)
-              .child(widget.plantName)
+              .child(widget.plant.name)
               .once()
               .then((DataSnapshot snapshot) {
             var plantTranslationGT = PlantTranslation.copy(plantTranslation);
@@ -77,7 +76,7 @@ class _PlantDetailState extends State<PlantDetail> {
               plantTranslationGT.mergeWith(plantTranslation);
             }
             if (plantTranslationGT.label == null) {
-              plantTranslationGT.label = widget.plantName;
+              plantTranslationGT.label = widget.plant.name;
             }
             if (plantTranslationGT.isTranslated()) {
               plantTranslationGT.isTranslatedWithGT = true;
@@ -85,7 +84,7 @@ class _PlantDetailState extends State<PlantDetail> {
             } else {
               return translationsReference
                   .child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish)
-                  .child(widget.plantName)
+                  .child(widget.plant.name)
                   .once()
                   .then((DataSnapshot snapshot) {
                 var plantTranslationOriginal = PlantTranslation.fromJson(snapshot.value);
@@ -102,7 +101,7 @@ class _PlantDetailState extends State<PlantDetail> {
                         plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
                     translationsReference
                         .child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix)
-                        .child(widget.plantName)
+                        .child(widget.plant.name)
                         .set(onlyGoogleTranslation.toJson());
                     return plantTranslation;
                   } else {
@@ -127,29 +126,26 @@ class _PlantDetailState extends State<PlantDetail> {
   @override
   void initState() {
     super.initState();
-    Offline.setKeepSynced3(true);
+    Offline.setKeepSynced(3, true);
     _firebaseAnalytics = FirebaseAnalytics();
 
-    _plantF = plantsReference.child(widget.plantName).once().then((DataSnapshot snapshot) {
-      return Plant.fromJson(snapshot.key, snapshot.value);
-    });
     _plantTranslationF = _getTranslation();
 
     _currentIndex = 0;
     _isOriginal = false;
     _key = new GlobalKey<ScaffoldState>();
 
-    _logSelectContentEvent(widget.plantName);
+    _logSelectContentEvent(widget.plant.name);
   }
 
   Widget _getBody(BuildContext context) {
     switch (_currentIndex) {
       case 0:
-        return getGallery(context, _plantF);
+        return getGallery(context, widget.plant);
       case 1:
-        return getInfo(context, widget.myLocale, _isOriginal, _plantF, _plantTranslationF, this.onChangeTranslation, _key);
+        return getInfo(context, widget.myLocale, _isOriginal, widget.plant, _plantTranslationF, this.onChangeTranslation, _key);
       case 2:
-        return getTaxonomy(context, widget.myLocale, _plantF, _plantTranslationF);
+        return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF);
     }
     return null;
   }
@@ -160,9 +156,9 @@ class _PlantDetailState extends State<PlantDetail> {
       key: _key,
       appBar: AppBar(
           title: GestureDetector(
-        child: Text(widget.plantName),
+        child: Text(widget.plant.name),
         onLongPress: () {
-          Clipboard.setData(new ClipboardData(text: widget.plantName));
+          Clipboard.setData(new ClipboardData(text: widget.plant.name));
           _key.currentState.showSnackBar(SnackBar(
             content: Text(S.of(context).snack_copy),
           ));
