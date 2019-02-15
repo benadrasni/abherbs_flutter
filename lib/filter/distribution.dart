@@ -216,8 +216,8 @@ class _DistributionState extends State<Distribution> {
   @override
   void initState() {
     super.initState();
+    Offline.setKeepSynced(1, true);
     _checkCurrentUser();
-    Offline.setKeepSynced1(true);
 
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);

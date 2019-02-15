@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/detail/plant_detail_info.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
@@ -19,45 +17,36 @@ Widget _getImageButton(String url) {
   );
 }
 
-Widget getGallery(BuildContext context, Future<Plant> _plantF) {
-  return FutureBuilder<Plant>(
-      future: _plantF,
-      builder: (BuildContext context, AsyncSnapshot<Plant> snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.done:
-            List<Widget> cards = [];
+Widget getGallery(BuildContext context, Plant plant) {
+  List<Widget> cards = [];
 
-            cards.add(Card(
-              child: _getImageButton(storagePhotos + snapshot.data.illustrationUrl),
-            ));
+  cards.add(Card(
+    child: _getImageButton(storagePhotos + plant.illustrationUrl),
+  ));
 
-            cards.addAll(snapshot.data.photoUrls.map((url) {
-              return Card(
-                child: _getImageButton(storagePhotos + url),
-              );
-            }));
+  cards.addAll(plant.photoUrls.map((url) {
+    return Card(
+      child: _getImageButton(storagePhotos + url),
+    );
+  }));
 
-            if (snapshot.data.sourceUrls != null) {
-              cards.add(Card(
-                child: Container(
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: _getSources(context, snapshot.data.sourceUrls),
-                  ),
-                ),
-              ));
-            }
+  if (plant.sourceUrls != null) {
+    cards.add(Card(
+      child: Container(
+        padding: EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: _getSources(context, plant.sourceUrls),
+        ),
+      ),
+    ));
+  }
 
-            return ListView(
-              shrinkWrap: true,
-              padding: EdgeInsets.all(5.0),
-              children: cards,
-            );
-          default:
-            return Center(child: CircularProgressIndicator());
-        }
-      });
+  return ListView(
+    shrinkWrap: true,
+    padding: EdgeInsets.all(5.0),
+    children: cards,
+  );
 }
 
 List<Widget> _getSources(BuildContext context, List<dynamic> sourceUrls) {

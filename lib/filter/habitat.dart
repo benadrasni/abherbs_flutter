@@ -73,8 +73,8 @@ class _HabitatState extends State<Habitat> {
   @override
   void initState() {
     super.initState();
+    Offline.setKeepSynced(1, true);
     _checkCurrentUser();
-    Offline.setKeepSynced1(true);
 
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
