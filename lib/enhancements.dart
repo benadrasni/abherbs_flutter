@@ -67,7 +67,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
               widget.onBuyProduct(purchased);
             }).catchError((error) {
               _logFailedPurchaseEvent(product.productId);
-              if (key.currentState.mounted) {
+              if (key.currentState != null && key.currentState.mounted) {
                 key.currentState.showSnackBar(new SnackBar(
                   content: new Text(S.of(context).product_purchase_failed),
                 ));
