@@ -47,6 +47,11 @@ class _PlantListState extends State<PlantList> {
         );
       } else {
         plantsReference.child(name).keepSynced(true);
+        translationsReference.child(myLocale.languageCode).child(name).keepSynced(true);
+        if (myLocale.languageCode != languageEnglish) {
+          translationsReference.child(languageEnglish).child(name).keepSynced(true);
+          translationsReference.child(myLocale.languageCode + languageGTSuffix).child(name).keepSynced(true);
+        }
       }
     });
   }
