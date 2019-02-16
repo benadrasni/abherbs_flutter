@@ -41,7 +41,7 @@ class _PlantListState extends State<PlantList> {
         Plant plant = Plant.fromJson(snapshot.key, snapshot.value);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PlantDetail(myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, plant)),
+          MaterialPageRoute(builder: (context) => PlantDetail(_currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, plant)),
         );
       } else {
         plantsReference.child(name).keepSynced(true);

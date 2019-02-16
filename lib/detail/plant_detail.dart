@@ -28,7 +28,7 @@ class PlantDetail extends StatefulWidget {
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final Plant plant;
-  PlantDetail(this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.filter, this.plant);
+  PlantDetail(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.filter, this.plant);
 
   @override
   _PlantDetailState createState() => _PlantDetailState();
@@ -128,11 +128,11 @@ class _PlantDetailState extends State<PlantDetail> {
   Widget _getBody(BuildContext context) {
     switch (_currentIndex) {
       case 0:
-        return getGallery(context, _plantF);
+        return getGallery(context, widget.plant);
       case 1:
-        return getInfo(context, widget.myLocale, _isOriginal, _plantF, _plantTranslationF, this.onChangeTranslation, _key);
+        return getInfo(context, widget.myLocale, _isOriginal, widget.plant, _plantTranslationF, this.onChangeTranslation, _key);
       case 2:
-        return getTaxonomy(context, widget.myLocale, _plantF, _plantTranslationF);
+        return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF);
     }
     return null;
   }
