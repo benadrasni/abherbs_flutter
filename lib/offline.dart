@@ -81,22 +81,27 @@ class Offline {
           break;
         case 3:
           await reference.child(firebasePlants).keepSynced(value);
-          await reference.child(firebaseTranslations).child(languageEnglish).keepSynced(value);
           String language = await Prefs.getStringF(keyLanguage, languageEnglish);
           await reference.child(firebaseTranslations).child(language).keepSynced(value);
-          await reference.child(firebaseTranslations).child(language + languageGTSuffix).keepSynced(value);
           await reference.child(firebaseTranslationsTaxonomy).child(language).keepSynced(value);
+          if (language != languageEnglish) {
+            await reference.child(firebaseTranslations).child(languageEnglish).keepSynced(value);
+            await reference.child(firebaseTranslations).child(language + languageGTSuffix).keepSynced(value);
+          }
           break;
         case 4:
-          await reference.child(firebasePlants).keepSynced(value);
-          await reference.child(firebaseTranslations).child(languageEnglish).keepSynced(value);
-          String language = await Prefs.getStringF(keyLanguage, languageEnglish);
-          await reference.child(firebaseTranslations).child(language).keepSynced(value);
-          await reference.child(firebaseTranslations).child(language + languageGTSuffix).keepSynced(value);
-          await reference.child(firebaseTranslationsTaxonomy).child(language).keepSynced(value);
+          if (Purchases.isSearch()) {
+            await reference.child(firebaseAPGIV).keepSynced(value);
+            await reference.child(firebaseSearch).child(languageLatin).keepSynced(value);
+            String language = await Prefs.getStringF(keyLanguage, languageEnglish);
+            await reference.child(firebaseSearch).child(language).keepSynced(value);
+          }
           break;
       }
       _keepSynced[section - 1] = value;
+      if (!Purchases.isSearch()) {
+        _keepSynced[3] = value;
+      }
       finalizeDownloadDB();
     }
   }
