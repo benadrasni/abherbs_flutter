@@ -88,7 +88,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
               ),
               onTap: () {
                 String path = '/' + firebaseSearch + '/' + getLanguageCode(myLocale.languageCode) + '/' + filteredNativeNames[index];
-                Map<dynamic, dynamic> value = nativeNames[filteredNativeNames[index]];
+                var value = nativeNames[filteredNativeNames[index]];
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, value.length.toString(), path)),
@@ -117,7 +117,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
             ),
             onTap: () {
               String path = '/' + firebaseSearch + '/' + languageLatin + '/' + filteredLatinNames[index];
-              Map<dynamic, dynamic> value = latinNames[filteredLatinNames[index]];
+              var value = latinNames[filteredLatinNames[index]];
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, value.length.toString(), path)),
