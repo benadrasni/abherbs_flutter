@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/signin/email.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -16,6 +18,7 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FacebookLogin facebookLogin = new FacebookLogin();
 
   Future<void> _handleGoogleSignIn(GlobalKey<ScaffoldState> key) async {
     try {
@@ -32,6 +35,35 @@ class _SignInScreenState extends State<SignInScreen> {
           print('Signed in: $userId');
         }
       }
+    } catch (e) {
+      key.currentState.showSnackBar(new SnackBar(
+        content: new Text(S.of(context).login_failed),
+      ));
+    }
+  }
+
+  _handleFacebookSignIn(GlobalKey<ScaffoldState> key) async {
+    FacebookLoginResult result = await facebookLogin.logInWithReadPermissions(['email']);
+    if (result.accessToken != null) {
+      try {
+        var facebookCredential = FacebookAuthProvider.getCredential(accessToken: result.accessToken.token);
+        String userId = await Auth.signInWithCredential(facebookCredential);
+        Navigator.pop(context);
+        print('Signed in: $userId');
+      } catch (e) {
+        key.currentState.showSnackBar(new SnackBar(
+          content: new Text(S.of(context).login_failed),
+        ));
+      }
+    }
+  }
+
+  _handleTwitterSignIn(GlobalKey<ScaffoldState> key) async {
+    try {
+      var twitterCredential = TwitterAuthProvider.getCredential(authToken: twitterConsumerKey, authTokenSecret: twitterConsumerSecret);
+      String userId = await Auth.signInWithCredential(twitterCredential);
+      Navigator.pop(context);
+      print('Signed in: $userId');
     } catch (e) {
       key.currentState.showSnackBar(new SnackBar(
         content: new Text(S.of(context).login_failed),
@@ -129,6 +161,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ],
                     ),
                     onPressed: () {
+                      _handleFacebookSignIn(key);
                     }),
               ),
               Padding(
@@ -146,7 +179,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         )
                       ],
                     ),
-                    onPressed: () {}),
+                    onPressed: () {
+                      _handleTwitterSignIn(key);
+                    }),
               )
             ],
           ),
