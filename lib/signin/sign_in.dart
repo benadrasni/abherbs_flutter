@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/signin/email.dart';
+import 'package:abherbs_flutter/signin/phone.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
@@ -77,6 +78,12 @@ class _SignInScreenState extends State<SignInScreen> {
     }));
   }
 
+  _handlePhoneSignIn() async {
+    Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
+      return PhoneLoginSignUpPage();
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     final key = GlobalKey<ScaffoldState>();
@@ -124,7 +131,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         )
                       ],
                     ),
-                    onPressed: () {}),
+                    onPressed: () {
+                      _handlePhoneSignIn();
+                    }),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),

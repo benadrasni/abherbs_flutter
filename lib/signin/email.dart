@@ -45,12 +45,12 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
       String userId = "";
       try {
         if (_formMode == FormMode.LOGIN) {
-          userId = await Auth.signIn(_email, _password);
+          userId = await Auth.signInWithEmail(_email, _password);
           Navigator.pop(context);
           Navigator.pop(context);
           print('Signed in: $userId');
         } else {
-          userId = await Auth.signUp(_email, _password);
+          userId = await Auth.signUpWithEmail(_email, _password);
           Auth.sendEmailVerification();
           _showVerifyEmailSentDialog();
           print('Signed up user: $userId');
@@ -128,8 +128,8 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(S.of(context).verify_title),
-          content: Text(S.of(context).verify_message),
+          title: Text(S.of(context).verify_email_title),
+          content: Text(S.of(context).verify_email_message),
           actions: <Widget>[
             FlatButton(
               child: Text(S.of(context).close),
