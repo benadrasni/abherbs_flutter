@@ -80,7 +80,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   _handlePhoneSignIn() async {
     Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
-      return PhoneLoginSignUpPage();
+      return PhoneLoginSignUpPage(Localizations.localeOf(context));
     }));
   }
 
@@ -125,7 +125,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/phone-logo.png')),
                         Expanded(
                           child: Text(
-                            S.of(context).phone,
+                            S.of(context).auth_phone,
                             style: new TextStyle(color: Colors.white, fontSize: 18.0),
                           ),
                         )

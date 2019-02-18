@@ -30,6 +30,17 @@ class S implements WidgetsLocalizations {
   String get asia_tropical => "Asia-Tropical";
   String get australasia => "Australasia";
   String get australia => "Australia";
+  String get auth_code_hint => "SMS code";
+  String get auth_enter_confirmation_code => "Enter the 6-digit code we sent to ";
+  String get auth_incorrect_code => "Wrong code. Try again.";
+  String get auth_invalid_code => "Enter a valid sms code";
+  String get auth_invalid_phone_number => "Enter a valid phone number";
+  String get auth_phone => "Sign in with phone";
+  String get auth_phone_hint => "Phone Number";
+  String get auth_resend_code => "Resend Code";
+  String get auth_sms_terms_of_service => "By tapping \"Verify Phone Number\", an SMS may be sent. Message & data rates may apply.";
+  String get auth_verify_phone_number => "Verify phone number";
+  String get auth_verify_phone_number_title => "Enter your phone number";
   String get brazil => "Brazil";
   String get caribbean => "Caribbean";
   String get caucasus => "Caucasus";
@@ -128,9 +139,6 @@ class S implements WidgetsLocalizations {
   String get petal_many => "more than 5";
   String get petal_message => "Is the flower zygomorphic? No? Then how many petals does it have?";
   String get petal_zygomorphic => "zygomorphic";
-  String get phone => "Sign in with phone";
-  String get phone_hint => "Phone";
-  String get phone_validation_message => "Phone can't be empty";
   String get plant_flower => "Flower";
   String get plant_flowering_from => "Flowering from";
   String get plant_flowering_to => "to";
@@ -176,8 +184,6 @@ class S implements WidgetsLocalizations {
   String get siberia => "Siberia";
   String get sign_in => "Sign in";
   String get sign_in_text => "Have an account? Sign in";
-  String get sms_hint => "SMS code";
-  String get sms_validation_message => "SMS code can't be empty";
   String get snack_copy => "Copied to Clipboard";
   String get snack_loading_ad => "Ad is still loading, press button again.";
   String get snack_no_flowers => "There are no flowers matching criteria.";
@@ -217,9 +223,6 @@ class S implements WidgetsLocalizations {
   String get twitter => "Sign in with Twitter";
   String get verify_email_message => "Link to verify account has been sent to your email";
   String get verify_email_title => "Verify your account";
-  String get verify_phone => "Verify phone number";
-  String get verify_phone_message => "SMS to verify phone has been sent to your number";
-  String get verify_phone_title => "Verify your phone";
   String get west_central_tropical_africa => "West-Central Tropical Africa";
   String get west_tropical_africa => "West Tropical Africa";
   String get western_asia => "Western Asia";

@@ -25,7 +25,7 @@ class Auth {
       Function(AuthException) verificationFailed,
       Function(String, [int]) codeSent,
       Function(String) codeAutoRetrievalTimeout,
-      String phoneNumber) async {
+      String phoneNumber, [int token]) async {
 
 
     await firebaseAuth.verifyPhoneNumber(
@@ -34,7 +34,9 @@ class Auth {
         verificationCompleted: verificationCompleted,
         verificationFailed: verificationFailed,
         codeSent: codeSent,
-        codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+        codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+        forceResendingToken: token,
+    );
   }
 
 

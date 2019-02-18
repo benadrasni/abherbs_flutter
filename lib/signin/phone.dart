@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:async';
 
 import 'package:abherbs_flutter/generated/i18n.dart';
@@ -7,9 +8,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_country_picker/flutter_country_picker.dart';
 
 class PhoneLoginSignUpPage extends StatefulWidget {
-  PhoneLoginSignUpPage({this.onSignedIn});
+  final Locale myLocale;
 
-  final VoidCallback onSignedIn;
+  PhoneLoginSignUpPage(this.myLocale);
 
   @override
   State<StatefulWidget> createState() => new _PhoneLoginSignUpPageState();
@@ -17,10 +18,12 @@ class PhoneLoginSignUpPage extends StatefulWidget {
 
 enum FormMode { PHONE, SMS }
 
+const String errorInvalidCredential = 'invalidCredential';
+const String errorInvalidVerificationCode = 'ERROR_INVALID_VERIFICATION_CODE';
+
 class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _smsCodeController = TextEditingController();
-  Future<String> _message;
+  Future<String> _errorMessage;
   PhoneVerificationCompleted _verificationCompleted;
   PhoneVerificationFailed _verificationFailed;
   PhoneCodeSent _codeSent;
@@ -28,12 +31,14 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
 
   Country _country;
   String _phone;
+  bool _isWrongNumber;
+  bool _showResendButton;
   String _verificationId;
-  String _sms;
+  String _code;
+  int _token;
 
   // Initial form is login form
   FormMode _formMode = FormMode.PHONE;
-  bool _isIos;
   bool _isLoading;
 
   // Check if form is valid before perform login or signup
@@ -50,13 +55,13 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   void _validateAndSubmit() async {
     if (_validateAndSave()) {
       setState(() {
-        _message = Future<String>.value('');
+        _errorMessage = Future<String>.value('');
         _isLoading = true;
       });
       String userId = "";
       try {
         if (_formMode == FormMode.SMS) {
-          //userId = await Auth.signInWithEmail(_email, _password);
+          userId = await Auth.signInWithCredential(PhoneAuthProvider.getCredential(verificationId: _verificationId, smsCode: _code));
           Navigator.pop(context);
           Navigator.pop(context);
           print('Signed in: $userId');
@@ -66,19 +71,25 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
         setState(() {
           _isLoading = false;
         });
-
-        if (userId.length > 0 && userId != null && _formMode == FormMode.SMS) {
-          widget.onSignedIn();
-        }
       } catch (e) {
-        print('Error: $e');
-        setState(() {
-          _isLoading = false;
-          if (_isIos) {
-            _message = e.details;
-          } else
-            _message = e.message;
-        });
+        if (e.code == errorInvalidVerificationCode) {
+          _isWrongNumber = true;
+          _validateAndSave();
+          _isWrongNumber = false;
+          _showResendButton = true;
+          setState(() {
+            _isLoading = false;
+          });
+        } else {
+          setState(() {
+            _isLoading = false;
+            if (Platform.isIOS) {
+              _errorMessage = Future<String>.value(e.details);
+            } else {
+              _errorMessage = Future<String>.value(e.message);
+            }
+          });
+        }
       }
     }
   }
@@ -86,8 +97,11 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   @override
   void initState() {
     super.initState();
-    _message = Future<String>.value('');
+    _errorMessage = Future<String>.value('');
     _isLoading = false;
+    _isWrongNumber = false;
+    _showResendButton = false;
+    _country = Country.findByIsoCode(widget.myLocale.countryCode);
 
     _verificationCompleted = (FirebaseUser user) {
       Navigator.pop(context);
@@ -95,50 +109,46 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     };
 
     _verificationFailed = (AuthException authException) {
-      setState(() {
-        _message = Future<String>.value('Phone number verification failed. Code: ${authException.code}. Message: ${authException.message}');
-      });
+      if (authException.code == errorInvalidCredential) {
+        _isWrongNumber = true;
+        _validateAndSave();
+        _isWrongNumber = false;
+      } else {
+        setState(() {
+          _errorMessage = Future<String>.value('Phone number verification failed. Code: ${authException.code}. Message: ${authException.message}');
+        });
+      }
     };
 
     _codeSent = (String verificationId, [int forceResendingToken]) async {
       _verificationId = verificationId;
-      //_smsCodeController.text = testSmsCode;
+      _token = forceResendingToken;
+      _changeFormToSMS();
     };
 
     _codeAutoRetrievalTimeout = (String verificationId) {
       _verificationId = verificationId;
-      //_smsCodeController.text = testSmsCode;
+      _changeFormToSMS();
     };
   }
 
   void _changeFormToSMS() {
     _formKey.currentState.reset();
-    _message = Future<String>.value('');
+    _errorMessage = Future<String>.value('');
     setState(() {
       _formMode = FormMode.SMS;
     });
   }
 
-  void _changeFormToPhone() {
-    _formKey.currentState.reset();
-    _message = Future<String>.value('');
-    setState(() {
-      _formMode = FormMode.PHONE;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    _isIos = Theme.of(context).platform == TargetPlatform.iOS;
-    _country = Country.findByIsoCode(Localizations.localeOf(context).countryCode);
     return Scaffold(
         appBar: AppBar(
-          title: Text(S.of(context).phone),
+          title: Text(_formMode == FormMode.PHONE ? S.of(context).auth_verify_phone_number_title : S.of(context).auth_verify_phone_number),
         ),
         body: Stack(
           children: <Widget>[
             _showBody(),
-            _showCircularProgress(),
           ],
         ));
   }
@@ -153,27 +163,6 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     );
   }
 
-  void _showVerifyPhoneSentDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(S.of(context).verify_phone_title),
-          content: Text(S.of(context).verify_phone_message),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(S.of(context).close),
-              onPressed: () {
-                _changeFormToSMS();
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   Widget _showBody() {
     return new Container(
         padding: EdgeInsets.all(16.0),
@@ -184,8 +173,10 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
             children: <Widget>[
               _showLogo(),
               _showInput(),
-              _showPrimaryButton(),
+              _showButton(),
+              _showSecondaryButton(),
               _showMessage(),
+              _showErrorMessage(),
             ],
           ),
         ));
@@ -195,73 +186,133 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     return Hero(
       tag: 'hero',
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 70.0, 0.0, 0.0),
-        child: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 48.0,
-          child: Image.asset('res/images/home.png'),
+        padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+        child: Stack(alignment: Alignment.center,
+          children: [
+            CircleAvatar(
+              backgroundColor: Colors.transparent,
+              radius: 48.0,
+              child: Image.asset('res/images/home.png'),
+            ),
+            _showCircularProgress(),
+          ],
         ),
       ),
     );
   }
 
   Widget _showInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: CountryPicker(
-              onChanged: (Country country) {
-                setState(() {
-                  _country = country;
-                });
-              },
-              selectedCountry: _country,
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: TextFormField(
-              maxLines: 1,
-              keyboardType: TextInputType.phone,
-              autofocus: false,
-              decoration: InputDecoration(
-                hintText: _formMode == FormMode.PHONE ? S.of(context).phone_hint : S.of(context).sms_hint,
+    if (_formMode == FormMode.PHONE) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: CountryPicker(
+                onChanged: (Country country) {
+                  setState(() {
+                    _country = country;
+                  });
+                },
+                selectedCountry: _country,
               ),
-              validator: (value) =>
-                  value.isEmpty ? _formMode == FormMode.PHONE ? S.of(context).phone_validation_message : S.of(context).sms_validation_message : null,
-              onSaved: (value) => _phone = '+' + _country.dialingCode + value,
             ),
-          ),
-        ],
-      ),
-    );
+            Expanded(
+              flex: 2,
+              child: TextFormField(
+                maxLines: 1,
+                keyboardType: TextInputType.phone,
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: S.of(context).auth_phone_hint,
+                ),
+                validator: (value) => value.isEmpty || _isWrongNumber ? S.of(context).auth_invalid_phone_number : null,
+                onSaved: (value) => _phone = '+' + _country.dialingCode + value,
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+        child: Column(
+          children: [
+            Text(
+              S.of(context).auth_enter_confirmation_code + (_phone ?? ''),
+              style: TextStyle(fontSize: 16.0),
+            ),
+            TextFormField(
+              maxLength: 6,
+              maxLengthEnforced: true,
+              maxLines: 1,
+              keyboardType: TextInputType.number,
+              autofocus: true,
+              decoration: InputDecoration(
+                hintText: S.of(context).auth_code_hint,
+              ),
+              validator: (value) => value.length != 6 ? S.of(context).auth_invalid_code : _isWrongNumber ? S.of(context).auth_invalid_code : null,
+              onSaved: (value) => _code = value,
+            ),
+          ],
+        ),
+      );
+    }
   }
 
-  Widget _showPrimaryButton() {
+  Widget _showButton() {
     return Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
         child: SizedBox(
           height: 40.0,
           child: RaisedButton(
             elevation: 5.0,
             shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
             color: Colors.blue,
-            child: _formMode == FormMode.SMS
-                ? Text(S.of(context).login, style: TextStyle(fontSize: 20.0, color: Colors.white))
-                : Text(S.of(context).verify_phone, style: TextStyle(fontSize: 20.0, color: Colors.white)),
+            child: Text(
+              _formMode == FormMode.SMS ? S.of(context).login : S.of(context).auth_verify_phone_number,
+              style: TextStyle(fontSize: 20.0, color: Colors.white),
+            ),
             onPressed: _validateAndSubmit,
           ),
         ));
   }
 
+  Widget _showSecondaryButton() {
+    if (_formMode == FormMode.SMS && _showResendButton) {
+      return Padding(
+          padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+          child: FlatButton(
+              child: Text(S.of(context).auth_resend_code,
+                style: TextStyle(fontSize: 20.0, color: Colors.blue),
+              ),
+              onPressed: () {
+                Auth.signUpWithPhone(_verificationCompleted, _verificationFailed, _codeSent, _codeAutoRetrievalTimeout, _phone, _token);
+              },
+            ),);
+    }
+    return Container(
+      height: 0.0,
+      width: 0.0,
+    );
+  }
+
   Widget _showMessage() {
     return Container(
       padding: EdgeInsets.all(10.0),
+      child: Text(
+        _formMode == FormMode.PHONE ? S.of(context).auth_sms_terms_of_service : '',
+        style: const TextStyle(fontSize: 16.0, color: Colors.black, height: 1.0, fontWeight: FontWeight.w300),
+      ),
+    );
+  }
+
+  Widget _showErrorMessage() {
+    return Container(
+      padding: EdgeInsets.all(10.0),
       child: FutureBuilder<String>(
-          future: _message,
+          future: _errorMessage,
           builder: (_, AsyncSnapshot<String> snapshot) {
             return Text(
               snapshot.data ?? '',
