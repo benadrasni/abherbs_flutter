@@ -122,7 +122,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     color: Colors.green,
                     child: Row(
                       children: [
-                        Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/email-logo.png')),
+                        Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/phone-logo.png')),
                         Expanded(
                           child: Text(
                             S.of(context).phone,

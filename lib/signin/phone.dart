@@ -26,7 +26,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   PhoneCodeSent _codeSent;
   PhoneCodeAutoRetrievalTimeout _codeAutoRetrievalTimeout;
 
-  Country _selected;
+  Country _country;
   String _phone;
   String _verificationId;
   String _sms;
@@ -90,14 +90,14 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     _isLoading = false;
 
     _verificationCompleted = (FirebaseUser user) {
-      setState(() {
-        _message = Future<String>.value('signInWithPhoneNumber auto succeeded: $user');
-      });
+      Navigator.pop(context);
+      Navigator.pop(context);
     };
 
     _verificationFailed = (AuthException authException) {
-      Navigator.pop(context);
-      Navigator.pop(context);
+      setState(() {
+        _message = Future<String>.value('Phone number verification failed. Code: ${authException.code}. Message: ${authException.message}');
+      });
     };
 
     _codeSent = (String verificationId, [int forceResendingToken]) async {
@@ -130,6 +130,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   @override
   Widget build(BuildContext context) {
     _isIos = Theme.of(context).platform == TargetPlatform.iOS;
+    _country = Country.findByIsoCode(Localizations.localeOf(context).countryCode);
     return Scaffold(
         appBar: AppBar(
           title: Text(S.of(context).phone),
@@ -214,10 +215,10 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
             child: CountryPicker(
               onChanged: (Country country) {
                 setState(() {
-                  _selected = country;
+                  _country = country;
                 });
               },
-              selectedCountry: _selected,
+              selectedCountry: _country,
             ),
           ),
           Expanded(
@@ -231,7 +232,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
               ),
               validator: (value) =>
                   value.isEmpty ? _formMode == FormMode.PHONE ? S.of(context).phone_validation_message : S.of(context).sms_validation_message : null,
-              onSaved: (value) => _phone = value,
+              onSaved: (value) => _phone = '+' + _country.dialingCode + value,
             ),
           ),
         ],
