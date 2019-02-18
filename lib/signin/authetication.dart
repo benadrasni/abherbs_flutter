@@ -9,17 +9,34 @@ class Auth {
     return user.uid;
   }
 
-  static Future<String> signIn(String email, String password) async {
+  static Future<String> signInWithEmail(String email, String password) async {
     FirebaseUser user = await firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
     return user.uid;
   }
 
-  static Future<String> signUp(String email, String password) async {
+  static Future<String> signUpWithEmail(String email, String password) async {
     FirebaseUser user = await firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
     return user.uid;
   }
+
+  static Future<void> signUpWithPhone(Function(FirebaseUser) verificationCompleted,
+      Function(AuthException) verificationFailed,
+      Function(String, [int]) codeSent,
+      Function(String) codeAutoRetrievalTimeout,
+      String phoneNumber) async {
+
+
+    await firebaseAuth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        timeout: const Duration(seconds: 5),
+        verificationCompleted: verificationCompleted,
+        verificationFailed: verificationFailed,
+        codeSent: codeSent,
+        codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+  }
+
 
   static Future<FirebaseUser> getCurrentUser() async {
     FirebaseUser user = await firebaseAuth.currentUser();

@@ -38,7 +38,7 @@ class S implements WidgetsLocalizations {
   String get close => "Close";
   String get color_blue => "blue, purple";
   String get color_green => "green, brown, black";
-  String get color_message => "What's the colour of the flower? Choose the closest one.";
+  String get color_message => "What's the color of the flower? Choose the closest one.";
   String get color_red => "red, pink";
   String get color_white => "white";
   String get color_yellow => "yellow";
@@ -66,7 +66,7 @@ class S implements WidgetsLocalizations {
   String get feedback_submit_translate_data => "Improve flower's data";
   String get feedback_title => "How to contribute";
   String get feedback_translate => "You can report any typo or mistranslation you found or submit new translation for flower's data or application's labels at whatsthatflower.com.";
-  String get filter_color => "colour";
+  String get filter_color => "color";
   String get filter_distribution => "distribution";
   String get filter_habitat => "habitat";
   String get filter_petal => "petal";
@@ -129,6 +129,8 @@ class S implements WidgetsLocalizations {
   String get petal_message => "Is the flower zygomorphic? No? Then how many petals does it have?";
   String get petal_zygomorphic => "zygomorphic";
   String get phone => "Sign in with phone";
+  String get phone_hint => "Phone";
+  String get phone_validation_message => "Phone can't be empty";
   String get plant_flower => "Flower";
   String get plant_flowering_from => "Flowering from";
   String get plant_flowering_to => "to";
@@ -174,6 +176,8 @@ class S implements WidgetsLocalizations {
   String get siberia => "Siberia";
   String get sign_in => "Sign in";
   String get sign_in_text => "Have an account? Sign in";
+  String get sms_hint => "SMS code";
+  String get sms_validation_message => "SMS code can't be empty";
   String get snack_copy => "Copied to Clipboard";
   String get snack_loading_ad => "Ad is still loading, press button again.";
   String get snack_no_flowers => "There are no flowers matching criteria.";
@@ -211,8 +215,11 @@ class S implements WidgetsLocalizations {
   String get toxicity1 => "poisonous plant";
   String get toxicity2 => "slightly poisonous plant";
   String get twitter => "Sign in with Twitter";
-  String get verify_message => "Link to verify account has been sent to your email";
-  String get verify_title => "Verify your account";
+  String get verify_email_message => "Link to verify account has been sent to your email";
+  String get verify_email_title => "Verify your account";
+  String get verify_phone => "Verify phone number";
+  String get verify_phone_message => "SMS to verify phone has been sent to your number";
+  String get verify_phone_title => "Verify your phone";
   String get west_central_tropical_africa => "West-Central Tropical Africa";
   String get west_tropical_africa => "West Tropical Africa";
   String get western_asia => "Western Asia";
@@ -222,5952 +229,8 @@ class S implements WidgetsLocalizations {
   String get yes => "Yes";
 }
 
-class $de extends S {
-  const $de();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Zentralamerika";
-  @override
-  String get legend => "Legende";
-  @override
-  String get product_offline_title => "Offline-Modus";
-  @override
-  String get feedback_submit_translate_data => "Verbessere die Daten der Blume";
-  @override
-  String get snack_copy => "In die Zwischenablage kopiert";
-  @override
-  String get product_purchase_failed => "Kauf gescheitert";
-  @override
-  String get about => "Über";
-  @override
-  String get product_no_ads_description => "Die Anwendung zeigt kein Werbebanner am unteren Bildschirmrand.";
-  @override
-  String get offline_download_progress => "Fotos und Illustrationen herunterladen ...";
-  @override
-  String get western_canada => "Westkanada";
-  @override
-  String get northern_america => "Nordamerika";
-  @override
-  String get western_indian_ocean => "Westlicher Indischer Ozean";
-  @override
-  String get feedback => "Feedback / Beitrag";
-  @override
-  String get southwestern_usa => "Südwesten U.S.A.";
-  @override
-  String get distribution_message => "Auf welches geografische Gebiet sollten Sie sich konzentrieren?";
-  @override
-  String get caribbean => "Karibik";
-  @override
-  String get product_search_description => "Sie finden eine Blume nach ihrem deutschen oder lateinischen Namen oder nach ihrem Taxon (z. B. Ordnung, Familie, Gattung).";
-  @override
-  String get offline_delete_message => "Möchten Sie Offline-Daten löschen?";
-  @override
-  String get australasia => "Australasien";
-  @override
-  String get petal_4 => "höchstens 4";
-  @override
-  String get east_tropical_africa => "Osttropisches Afrika";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get south_tropical_africa => "Südliches tropisches Afrika";
-  @override
-  String get caucasus => "Kaukasus";
-  @override
-  String get middle_asia => "Mittelasien";
-  @override
-  String get plant_gallery => "Gallerie";
-  @override
-  String get always_my_region_subtitle => "Ihre Region wird auf den Filter voreingestellt";
-  @override
-  String get indochina => "Indochina";
-  @override
-  String get feedback_translate => "Sie können Tippfehler oder falsche Übersetzungen melden, oder eine neue Übersetzung in Ihrer Sprache einreichen.";
-  @override
-  String get australia => "Australien";
-  @override
-  String get google_translate => "Übersetzt mit Google Translate";
-  @override
-  String get plant_leaf => "Blätter";
-  @override
-  String get habitat_forest => "Wälder";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "Malesien";
-  @override
-  String get southwestern_pacific => "Südwestlicher Pazifik";
-  @override
-  String get asia_tropical => "Asien-Tropisch";
-  @override
-  String get northwestern_usa => "Nordwesten U.S.A.";
-  @override
-  String get northern_south_america => "Nördliches Südamerika";
-  @override
-  String get show_original => "Englischer Text";
-  @override
-  String get offline_download_message => "Sie werden mehr als 300 MB Fotos und Illustrationen herunterladen. Bitte überprüfen Sie, ob Ihr Gerät mit Wi-Fi verbunden ist. Sind Sie zum Download bereit?";
-  @override
-  String get southern_america => "Südamerika";
-  @override
-  String get middle_atlantic_ocean => "Mittlerer Atlantischer Ozean";
-  @override
-  String get feedback_run_ads => "Sie können Werbung im Vollbildmodus anzeigen oder Videowerbung ansehen, um die Weiterentwicklung und Datenbankverbesserung zu unterstützen.";
-  @override
-  String get habitat_garden => "Gärten oder Felder";
-  @override
-  String get product_purchase => "Kaufen";
-  @override
-  String get russian_far_east => "Russischer Ferner Osten";
-  @override
-  String get west_central_tropical_africa => "West-Zentrales tropisches Afrika";
-  @override
-  String get habitat_message => "Was ist um dich herum? Identifiziere den Standort der Pflanze.";
-  @override
-  String get plant_toxicity => "Toxizität";
-  @override
-  String get offline_download_fail => "Herunterladen fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung oder den freien Speicherplatz auf dem Gerät und versuchen Sie es erneut.";
-  @override
-  String get snack_no_flowers => "Keine Blumen die den Kriterien entsprechen.";
-  @override
-  String get rate_question => "Ist diese Anwendung hilfreich?";
-  @override
-  String get macaronesia => "Makaronesien";
-  @override
-  String get plant_taxonomy => "Taxonomy";
-  @override
-  String get feedback_run_ads_fullscreen => "Anzeige im Vollbildmodus";
-  @override
-  String get asia_temperate => "Asien-gemäßigt";
-  @override
-  String get search => "Suche...";
-  @override
-  String get habitat_rock => "Felsen oder Berge";
-  @override
-  String get taxonomy_superregnum => "Domäne";
-  @override
-  String get taxonomy_sectio => "Sektion";
-  @override
-  String get mongolia => "Mongolei";
-  @override
-  String get taxonomy_subserie => "Unterserie";
-  @override
-  String get western_south_america => "Westliches Südamerika";
-  @override
-  String get taxonomy_subgenus => "Untergattung";
-  @override
-  String get close => "Schließen";
-  @override
-  String get europe => "Europa";
-  @override
-  String get middle_europe => "Mitteleuropa";
-  @override
-  String get color_blue => "Blau, Lila";
-  @override
-  String get my_filter => "Mein Filter";
-  @override
-  String get southern_south_america => "Südliches Südamerika";
-  @override
-  String get plant_habitat => "Habitat";
-  @override
-  String get snack_loading_ad => "Werbung wird noch geladen, Taste erneut drücken.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "Kronblatt";
-  @override
-  String get petal_message => "Ist die Blüte spiegelsymmetrisch? Falls nicht, wieviele Blütenblätter hat sie?";
-  @override
-  String get color_white => "Weiß";
-  @override
-  String get northeastern_usa => "Nordöstlich U.S.A.";
-  @override
-  String get color_green => "Grün, Braun, Schwarz";
-  @override
-  String get taxonomy_ordo => "Ordnung";
-  @override
-  String get taxonomy_supersectio => "Supersektion";
-  @override
-  String get pacific => "Pazifik";
-  @override
-  String get plant_sources => "Quellen";
-  @override
-  String get taxonomy_regnum => "Reich";
-  @override
-  String get south_central_pacific => "Süd-Zentrales Pazifik";
-  @override
-  String get filter_color => "Farbe";
-  @override
-  String get help => "Hilfe";
-  @override
-  String get mexico => "Mexiko";
-  @override
-  String get snack_publish => "... wird später veröffentlicht";
-  @override
-  String get siberia => "Sibirien";
-  @override
-  String get taxonomy_subtribus => "Untertribus";
-  @override
-  String get product_custom_filter_description => "Sie können die Standardreihenfolge und die Anzahl der Filter ändern (Farbe, Habitat, Kronblatt, Vorkommen).";
-  @override
-  String get habitat_meadow => "Wiesen oder Grünland";
-  @override
-  String get plant_trivia => "Wissenswertes";
-  @override
-  String get product_purchased => "Gekauft";
-  @override
-  String get taxonomy_cladus => "(ohne Rang)";
-  @override
-  String get plant_herbalism => "Pflanzenheilkunde";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Download fortsetzen";
-  @override
-  String get enhancements => "Verbesserungen";
-  @override
-  String get habitat_wetland => "Moorlandschaft oder Feuchtgebiete";
-  @override
-  String get product_restore_purchases => "Käufe wiederherstellen";
-  @override
-  String get feedback_title => "Wie kann ich dazu beitragen?";
-  @override
-  String get toxicity2 => "leicht giftige Pflanze";
-  @override
-  String get toxicity1 => "giftige Pflanze";
-  @override
-  String get eastern_canada => "Östliches Kanada";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Übersetzter Text";
-  @override
-  String get habitat_tree => "Bäume oder Sträucher";
-  @override
-  String get settings => "Einstellungen";
-  @override
-  String get color_red => "Rot, Pink";
-  @override
-  String get north_central_pacific => "Nord-Zentrales Pazifik";
-  @override
-  String get taxonomy_subsectio => "Untersektion";
-  @override
-  String get southern_africa => "Südafrika";
-  @override
-  String get always_my_region_title => "Fügen Sie meine Region immer dem Filter hinzu";
-  @override
-  String get color_yellow => "Gelb";
-  @override
-  String get subantarctic_islands => "Subantarktische Inseln";
-  @override
-  String get list_info => "Auswahl";
-  @override
-  String get new_version => "Eine neue Version ist verfügbar, bitte updaten.";
-  @override
-  String get taxonomy_subfamilia => "Unterfamilie";
-  @override
-  String get my_region => "Meine Gegend";
-  @override
-  String get pause => "Pause";
-  @override
-  String get indian_subcontinent => "Indischer Subkontinent";
-  @override
-  String get product_offline_description => "Sie können die Anwendung ohne Internetverbindung ausführen.";
-  @override
-  String get plant_flower => "Blüte";
-  @override
-  String get filter_habitat => "Habitat";
-  @override
-  String get rate_never => "Niemals ";
-  @override
-  String get northwestern_pacific => "Nordwestlicher Pazifik";
-  @override
-  String get search_names => "Suche in Namen";
-  @override
-  String get southwestern_europe => "Südwesteuropa";
-  @override
-  String get taxonomy_species => "Art";
-  @override
-  String get plant_fruit => "Früchte";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "Familie";
-  @override
-  String get plant_stem => "Stängel";
-  @override
-  String get antarctic_continent => "Antarktischer Kontinent";
-  @override
-  String get no => "Nein";
-  @override
-  String get brazil => "Brasilien";
-  @override
-  String get rate_text => "Der Autor dieser App wird durch positive Rückmeldungen der Benutzer  beflügelt. Bitte senden Sie ihm doch einen Sterne-Blumenstrauß über den Anwendungsspeicher.";
-  @override
-  String get eastern_europe => "Osteuropa";
-  @override
-  String get south_central_usa => "Süd-Zentral U.S.A.";
-  @override
-  String get offline_download_success => "Fotos und Illustrationen wurden erfolgreich heruntergeladen.";
-  @override
-  String get plant_flowering_from => "Blütezeit";
-  @override
-  String get taxonomy_tribus => "Tribus";
-  @override
-  String get arabian_peninsula => "Arabische Halbinsel";
-  @override
-  String get search_taxonomy => "Suche in der Taxonomie";
-  @override
-  String get rate_later => "Später";
-  @override
-  String get color_message => "Welche Farbe hat die Blume? Wähle die ähnlichste Farbe.";
-  @override
-  String get west_tropical_africa => "Westliches tropisches Afrika";
-  @override
-  String get northern_europe => "Nordeuropa";
-  @override
-  String get rate => "Bewertung";
-  @override
-  String get northeast_tropical_africa => "Nordost-tropisches Afrika";
-  @override
-  String get pref_language => "Bevorzugte Sprache";
-  @override
-  String get product_custom_filter_title => "Benutzerdefinierte Filter";
-  @override
-  String get new_zealand => "Neuseeland";
-  @override
-  String get feedback_intro => "Sie haben zu dieser Anwendung beigetragen, seit Sie diese auf Ihrem Gerät installiert haben, vielen Dank. Wenn Sie noch mehr tun möchten, haben Sie folgende Möglichkeiten:";
-  @override
-  String get filter_distribution => "Vorkommen";
-  @override
-  String get eastern_asia => "Ostasien";
-  @override
-  String get western_asia => "West-Asien";
-  @override
-  String get subarctic_america => "Subarktistisches Amerika";
-  @override
-  String get product_search_title => "Suche nach Namen oder Taxonomie";
-  @override
-  String get feedback_buy_extended => "Sie können eine erweiterte (+) Version mit zusätzlichen Funktionen wie Offline-Modus, Suche nach Namen, Suche in Taxonomie, Beobachtungen und konfigurierbaren Filter kaufen.";
-  @override
-  String get north_central_usa => "Nord-Zentral U.S.A.";
-  @override
-  String get improve_translation => "Übersetzung verbessern";
-  @override
-  String get feedback_review => "Sie können eine positive Bewertung schreiben.";
-  @override
-  String get southeastern_usa => "Südöstlich U.S.A.";
-  @override
-  String get yes => "Ja";
-  @override
-  String get feedback_run_ads_video => "Videoanzeige ansehen";
-  @override
-  String get plant_height_from => "Höhe";
-  @override
-  String get petal_many => "mehr als 5";
-  @override
-  String get southeastern_europe => "Südosteuropa";
-  @override
-  String get taxonomy_unknown => "unbekannt";
-  @override
-  String get plant_inflorescence => "Blütenstand";
-  @override
-  String get northern_africa => "Nordafrika";
-  @override
-  String get offline_subtitle => "Benötigt 300+ MB zusätzlichen Platz.";
-  @override
-  String get china => "China";
-  @override
-  String get product_no_ads_title => "Keine unerwünschte Werbung";
-  @override
-  String get offline_title => "Offline-Modus";
-  @override
-  String get petal_zygomorphic => "dorsiventrale";
-  @override
-  String get taxonomy_genus => "Gattung";
-  @override
-  String get papuasia => "Papuasien";
-  @override
-  String get feedback_submit_translate_app => "Verbessere den Text der Anwendung";
-}
-
-class $hi extends S {
-  const $hi();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "मध्य अमरीका";
-  @override
-  String get legend => "किंवदंती";
-  @override
-  String get product_offline_title => "ऑफ़लाइन मोड";
-  @override
-  String get feedback_submit_translate_data => "फूल के डेटा में सुधार";
-  @override
-  String get snack_copy => "क्लिपबोर्ड पर नकल";
-  @override
-  String get product_purchase_failed => "खरीद विफल रही";
-  @override
-  String get about => "के बारे में";
-  @override
-  String get product_no_ads_description => "एप्लिकेशन स्क्रीन के नीचे विज्ञापन बैनर नहीं दिखाएगा।";
-  @override
-  String get offline_download_progress => "फ़ोटो और चित्र डाउनलोड कर रहा है ...";
-  @override
-  String get western_canada => "पश्चिमी कनाडा";
-  @override
-  String get northern_america => "उत्तरी अमेरिका";
-  @override
-  String get western_indian_ocean => "पश्चिमी हिंद महासागर";
-  @override
-  String get feedback => "प्रतिक्रिया";
-  @override
-  String get southwestern_usa => "साउथवेस्टर्न यूएसए";
-  @override
-  String get distribution_message => "हमें किस भौगोलिक क्षेत्र पर ध्यान केंद्रित करना चाहिए?";
-  @override
-  String get caribbean => "कैरेबियन";
-  @override
-  String get product_search_description => "आप इसके लैटिन नाम या इसके टैक्सोन (जैसे क्रम, परिवार, जाति) द्वारा एक फूल पा सकते हैं।";
-  @override
-  String get offline_delete_message => "क्या आप ऑफ़लाइन डेटा हटाना चाहते हैं?";
-  @override
-  String get australasia => "ऑस्ट्रेलेशिया";
-  @override
-  String get petal_4 => "४ या उससे कम";
-  @override
-  String get east_tropical_africa => "पूर्वी उष्णकटिबंधीय अफ्रीका";
-  @override
-  String get africa => "अफ्रीका";
-  @override
-  String get south_tropical_africa => "दक्षिण उष्णकटिबंधीय अफ्रीका";
-  @override
-  String get caucasus => "काकेशस";
-  @override
-  String get middle_asia => "मध्य एशिया";
-  @override
-  String get plant_gallery => "गलियारा";
-  @override
-  String get always_my_region_subtitle => "आपका क्षेत्र फ़िल्टर के लिए पूर्व-सेट किया जाएगा";
-  @override
-  String get indochina => "हिंद चीन";
-  @override
-  String get feedback_translate => "बंजर​ या झील";
-  @override
-  String get australia => "ऑस्ट्रेलिया";
-  @override
-  String get google_translate => "पर्यावास";
-  @override
-  String get plant_leaf => "पत्ते";
-  @override
-  String get habitat_forest => "मदद";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "Malesia";
-  @override
-  String get southwestern_pacific => "दक्षिणपश्चिम प्रशांत महासागर";
-  @override
-  String get asia_tropical => "एशिया उष्णकटिबंधीय";
-  @override
-  String get northwestern_usa => "नॉर्थवेस्टर्न यूएसए";
-  @override
-  String get northern_south_america => "उत्तरी दक्षिण अमेरिका";
-  @override
-  String get show_original => "अंग्रेज़ी  टेक्स्ट दिखाएं";
-  @override
-  String get offline_download_message => "आप 300+ MB फ़ोटो और चित्र डाउनलोड करने जा रहे हैं। कृपया जांचें कि क्या आपका उपकरण वाई-फाई से जुड़ा है। क्या आप डाउनलोड के लिए तैयार हैं?";
-  @override
-  String get southern_america => "दक्षिणी अमेरिका";
-  @override
-  String get middle_atlantic_ocean => "मध्य अटलांटिक महासागर";
-  @override
-  String get feedback_run_ads => "आप पूर्ण स्क्रीन विज्ञापन प्रदर्शित कर सकते हैं या वीडियो विज्ञापन देख सकते हैं ताकि आगे के विकास और डेटाबेस में वृद्धि हो सके।";
-  @override
-  String get habitat_garden => "पौधे का उदाहरण";
-  @override
-  String get product_purchase => "खरीद फरोख्त";
-  @override
-  String get russian_far_east => "रूसी सुदूर पूर्व";
-  @override
-  String get west_central_tropical_africa => "पश्चिम मध्य उष्णकटिबंधीय अफ्रीका";
-  @override
-  String get habitat_message => "आपके आसपास क्या है? पौधे के आवास की पहचान करें।";
-  @override
-  String get plant_toxicity => "आविषता";
-  @override
-  String get offline_download_fail => "डाउनलोड विफल। कृपया अपने इंटरनेट कनेक्शन या उपकरण पर निःशुल्क स्थान देखें और पुनः प्रयास करें";
-  @override
-  String get snack_no_flowers => "कोई फूल नहीं कसौटी।";
-  @override
-  String get rate_question => "क्या यह एप्लिकेशन सहायक है?";
-  @override
-  String get macaronesia => "Macaronesia";
-  @override
-  String get plant_taxonomy => "वर्गीकरण";
-  @override
-  String get feedback_run_ads_fullscreen => "एक फुलस्क्रीन विज्ञापन दिखाएं";
-  @override
-  String get asia_temperate => "एशिया टेम्पलेट";
-  @override
-  String get search => "खोज...";
-  @override
-  String get habitat_rock => "एक चुनें";
-  @override
-  String get taxonomy_superregnum => "कार्यक्षेत्र";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "मंगोलिया";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "पश्चिमी दक्षिण अमेरिका";
-  @override
-  String get taxonomy_subgenus => "Subgenus";
-  @override
-  String get close => "बंद करे";
-  @override
-  String get europe => "यूरोप";
-  @override
-  String get middle_europe => "मध्य यूरोप";
-  @override
-  String get color_blue => "नीला, बैंगनी";
-  @override
-  String get my_filter => "मेरा फ़िल्टर";
-  @override
-  String get southern_south_america => "दक्षिणी दक्षिण अमेरिका";
-  @override
-  String get plant_habitat => "पर्यावास";
-  @override
-  String get snack_loading_ad => "विज्ञापन अभी भी लोड हो रहा है, फिर से बटन दबाएं।";
-  @override
-  String get petal_5 => "५";
-  @override
-  String get filter_petal => "दल चक्र";
-  @override
-  String get petal_message => "क्या फूल बिसिमेट्रिक है? नहीं? तो यह कितनी पंखुड़ियाँ है?";
-  @override
-  String get color_white => "सफेद";
-  @override
-  String get northeastern_usa => "पूर्वोत्तर यूएसए";
-  @override
-  String get color_green => "हरा, भूरा, काला";
-  @override
-  String get taxonomy_ordo => "क्रम";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "प्रशांत महासागर";
-  @override
-  String get plant_sources => "स्रोत";
-  @override
-  String get taxonomy_regnum => "राज्य";
-  @override
-  String get south_central_pacific => "दक्षिण-मध्य प्रशांत महासागर";
-  @override
-  String get filter_color => "रंग";
-  @override
-  String get help => "मदद";
-  @override
-  String get mexico => "मेक्सिको";
-  @override
-  String get snack_publish => "... बाद में प्रकाशित किया जाना है";
-  @override
-  String get siberia => "साइबेरिया";
-  @override
-  String get taxonomy_subtribus => "उपजनजाति";
-  @override
-  String get product_custom_filter_description => "आप डिफ़ॉल्ट क्रम और फ़िल्टर की संख्या (रंग, पर्यावास, दल चक्र, वितरण) को बदलने में सक्षम होंगे।";
-  @override
-  String get habitat_meadow => "अनुवाद में सुधार करें";
-  @override
-  String get plant_trivia => "सामान्य ज्ञान";
-  @override
-  String get product_purchased => "खरीदी";
-  @override
-  String get taxonomy_cladus => "(अश्रेणिकृत)";
-  @override
-  String get plant_herbalism => "जड़ी-बूटी चिकित्सा";
-  @override
-  String get plant_height_to => "तक";
-  @override
-  String get offline_download => "डाउनलोड फिर से शुरू करें";
-  @override
-  String get enhancements => "संवर्द्धन";
-  @override
-  String get habitat_wetland => "मोरलैंड्स या झीलों";
-  @override
-  String get product_restore_purchases => "खरीदारी वापस लौटाएं";
-  @override
-  String get feedback_title => "पेड़ या झाड़ियाँ";
-  @override
-  String get toxicity2 => "थोड़ा जहरीला पौधा";
-  @override
-  String get toxicity1 => "जहरीला पौधा";
-  @override
-  String get eastern_canada => "पूर्वी कनाडा";
-  @override
-  String get plant_info => "जानकारी";
-  @override
-  String get show_translation => "अनुवादित टेक्स्ट दिखाएं";
-  @override
-  String get habitat_tree => "पेड़ों या झाड़ियाँ";
-  @override
-  String get settings => "सेटिंग्स";
-  @override
-  String get color_red => "लाल, गुलाबी";
-  @override
-  String get north_central_pacific => "उत्तर मध्य प्रशांत महासागर";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "दक्षिणी अफ्रीका";
-  @override
-  String get always_my_region_title => "हमेशा मेरे क्षेत्र को फ़िल्टर में जोड़ें";
-  @override
-  String get color_yellow => "पीला";
-  @override
-  String get subantarctic_islands => "Subantarctic द्वीप समूह";
-  @override
-  String get list_info => "एक चुनें";
-  @override
-  String get new_version => "नया संस्करण उपलब्ध है, कृपया अपडेट करें।";
-  @override
-  String get taxonomy_subfamilia => "उपपरिवार";
-  @override
-  String get my_region => "मेरा क्षेत्र";
-  @override
-  String get pause => "ठहराव";
-  @override
-  String get indian_subcontinent => "भारतीय उपमहाद्वीप";
-  @override
-  String get product_offline_description => "आप इंटरनेट कनेक्शन के बिना आवेदन चला सकेंगे।";
-  @override
-  String get plant_flower => "पुष्प";
-  @override
-  String get filter_habitat => "पर्यावास";
-  @override
-  String get rate_never => "कभी नहीँ";
-  @override
-  String get northwestern_pacific => "उत्तर पश्चिमी प्रशांत महासागर";
-  @override
-  String get search_names => "नामों में खोजें";
-  @override
-  String get southwestern_europe => "दक्षिणपश्चिम यूरोप";
-  @override
-  String get taxonomy_species => "प्रजातियां";
-  @override
-  String get plant_fruit => "फल";
-  @override
-  String get plant_flowering_to => "तक";
-  @override
-  String get taxonomy_familia => "परिवार";
-  @override
-  String get plant_stem => "तना";
-  @override
-  String get antarctic_continent => "अंटार्कटिक महाद्वीप";
-  @override
-  String get no => "नहीं";
-  @override
-  String get brazil => "ब्राज़िल";
-  @override
-  String get rate_text => "इस एप्लिकेशन के लेखक उपयोगकर्ताओं से सकारात्मक प्रतिक्रिया से प्रेरित हैं। कृपया उसे एप्लिकेशन स्टोर के माध्यम से कुछ सितारे भेजें।";
-  @override
-  String get eastern_europe => "पूर्वी यूरोप";
-  @override
-  String get south_central_usa => "दक्षिण मध्य यूएसए";
-  @override
-  String get offline_download_success => "फ़ोटो और चित्र सफलतापूर्वक डाउनलोड किए गए हैं।";
-  @override
-  String get plant_flowering_from => "से फूल";
-  @override
-  String get taxonomy_tribus => "जनजाति";
-  @override
-  String get arabian_peninsula => "अरबी द्वीप";
-  @override
-  String get search_taxonomy => "टैक्सोनॉमी में खोजें";
-  @override
-  String get rate_later => "बाद में";
-  @override
-  String get color_message => "फूल का रंग क्या है? निकटतम एक चुनें";
-  @override
-  String get west_tropical_africa => "पश्चिम उष्णकटिबंधीय अफ्रीका";
-  @override
-  String get northern_europe => "उत्तरी यूरोप";
-  @override
-  String get rate => "समीक्षाएं";
-  @override
-  String get northeast_tropical_africa => "पूर्वोत्तर उष्णकटिबंधीय अफ्रीका";
-  @override
-  String get pref_language => "पसंदीदा भाषा";
-  @override
-  String get product_custom_filter_title => "कस्टम फ़िल्टर";
-  @override
-  String get new_zealand => "न्यूजीलैंड";
-  @override
-  String get feedback_intro => "जब से आपने इसे अपने डिवाइस पर स्थापित किया है, तब से आप इस एप्लिकेशन में योगदान दे रहे हैं, धन्यवाद यदि आप कुछ और देख रहे हैं, तो यहां कुछ विकल्प दिए गए हैं:";
-  @override
-  String get filter_distribution => "वितरण";
-  @override
-  String get eastern_asia => "पूर्वी एशिया";
-  @override
-  String get western_asia => "पश्चिमी एशिया";
-  @override
-  String get subarctic_america => "सुबाराक्टिक अमेरिका";
-  @override
-  String get product_search_title => "नामों में खोजें या वर्गीकरण";
-  @override
-  String get feedback_buy_extended => "आप ऑफ़लाइन मोड जैसे अतिरिक्त कार्यक्षमता के साथ विस्तारित संस्करण खरीद सकते हैं, नामों में खोज कर सकते हैं, वर्गीकरण में देख सकते हैं, अवलोकन और कॉन्फ़िगर करने योग्य फ़िल्टर कर सकते हैं।";
-  @override
-  String get north_central_usa => "उत्तरी मध्य यूएसए";
-  @override
-  String get improve_translation => "अनुवाद में सुधार करें";
-  @override
-  String get feedback_review => "आप एक सकारात्मक समीक्षा लिख सकते हैं।";
-  @override
-  String get southeastern_usa => "दक्षिणपूर्वी यूएसए";
-  @override
-  String get yes => "हाँ";
-  @override
-  String get feedback_run_ads_video => "एक वीडियो विज्ञापन देखें";
-  @override
-  String get plant_height_from => "ऊँचाई से";
-  @override
-  String get petal_many => "५ से अधिक";
-  @override
-  String get southeastern_europe => "दक्षिणपूर्वी यूरोप";
-  @override
-  String get taxonomy_unknown => "अनजान";
-  @override
-  String get plant_inflorescence => "पुष्पक्रम";
-  @override
-  String get northern_africa => "उत्तरी अफ्रीका";
-  @override
-  String get offline_subtitle => "300+ MB अतिरिक्त स्थान की आवश्यकता है";
-  @override
-  String get china => "चीन";
-  @override
-  String get product_no_ads_title => "कोई अवांछित विज्ञापन नहीं";
-  @override
-  String get offline_title => "ऑफ़लाइन मोड";
-  @override
-  String get petal_zygomorphic => "अनियमित";
-  @override
-  String get taxonomy_genus => "जाति";
-  @override
-  String get papuasia => "Papuasia";
-  @override
-  String get feedback_submit_translate_app => "एप्लिकेशन के लेबल में सुधार करें";
-}
-
-class $fi extends S {
-  const $fi();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Keski-Amerikka";
-  @override
-  String get legend => "Legenda";
-  @override
-  String get product_offline_title => "Offline-tila";
-  @override
-  String get feedback_submit_translate_data => "Paranna kukkien tietoja";
-  @override
-  String get snack_copy => "Kopioitu leikepöydälle";
-  @override
-  String get product_purchase_failed => "Osto epäonnistui";
-  @override
-  String get about => "Tietoja sovellus";
-  @override
-  String get product_no_ads_description => "Sovellus ei näytä ruudun alareunassa mainosbanneria.";
-  @override
-  String get offline_download_progress => "Valokuvien ja kuvien lataaminen ...";
-  @override
-  String get western_canada => "Länsi-Kanada";
-  @override
-  String get northern_america => "Pohjois-Amerikka";
-  @override
-  String get western_indian_ocean => "Länsi-Intian valtameri";
-  @override
-  String get feedback => "Palaute / Panos";
-  @override
-  String get southwestern_usa => "Lounais USA";
-  @override
-  String get distribution_message => "Mihin maantieteelliseen alueeseen meidän pitäisi keskittyä?";
-  @override
-  String get caribbean => "Karibian";
-  @override
-  String get product_search_description => "Voit löytää kukka Suomen tai latinankielisen nimen tai taksonin (esim. lahko, heimo, suku).";
-  @override
-  String get offline_delete_message => "Haluatko poistaa offline-tietoja?";
-  @override
-  String get australasia => "Australiassa";
-  @override
-  String get petal_4 => "4 tai vähemmän";
-  @override
-  String get east_tropical_africa => "Itä-trooppinen Afrikka";
-  @override
-  String get africa => "Afrikka";
-  @override
-  String get south_tropical_africa => "Etelä-trooppinen Afrikka";
-  @override
-  String get caucasus => "Kaukasus";
-  @override
-  String get middle_asia => "Lähi-Aasia";
-  @override
-  String get plant_gallery => "Kuvia";
-  @override
-  String get always_my_region_subtitle => "Alueesi asetetaan etukäteen suodattimeen";
-  @override
-  String get indochina => "Indokiinan";
-  @override
-  String get feedback_translate => "Voit ilmoittaa havaitusta virheestä tai virheestä tai lähettää uuden käännöksen omalle kielellesi.";
-  @override
-  String get australia => "Australia";
-  @override
-  String get google_translate => "Käännetty Google Translate";
-  @override
-  String get plant_leaf => "Lehdet";
-  @override
-  String get habitat_forest => "metsä";
-  @override
-  String get taxonomy_serie => "Sarja";
-  @override
-  String get malesia => "Malesia";
-  @override
-  String get southwestern_pacific => "Lounais-Tyynenmeren";
-  @override
-  String get asia_tropical => "Aasian trooppinen";
-  @override
-  String get northwestern_usa => "Luoteis-USA";
-  @override
-  String get northern_south_america => "Pohjois Etelä-Amerikka";
-  @override
-  String get show_original => "Näytä Englanti teksti";
-  @override
-  String get offline_download_message => "Voit ladata 300+ MB kuvia ja kuvia. Tarkista, onko laite liitetty wi-fi-verkkoon. Oletko valmis lataamaan?";
-  @override
-  String get southern_america => "Etelä-Amerikka";
-  @override
-  String get middle_atlantic_ocean => "Lähi-Atlantin valtameri";
-  @override
-  String get feedback_run_ads => "Voit näyttää koko näytön mainoksen tai katsella videomainosta tukemaan edelleen kehitystä ja tietokannan parantamista.";
-  @override
-  String get habitat_garden => "puutarhoissa tai kenttiä";
-  @override
-  String get product_purchase => "Ostaa";
-  @override
-  String get russian_far_east => "Venäjän Kaukoidässä";
-  @override
-  String get west_central_tropical_africa => "Länsi-Keski-trooppinen Afrikka";
-  @override
-  String get habitat_message => "Mitä ympärilläsi on? Tunnista laitoksen elinympäristö.";
-  @override
-  String get plant_toxicity => "Myrkyllisyys";
-  @override
-  String get offline_download_fail => "Lataus epäonnistui. Tarkista Internet-yhteys tai vapaa tila laitteessa ja yritä uudelleen.";
-  @override
-  String get snack_no_flowers => "Ei kukkien yhteensopivuusvaatimuksia.";
-  @override
-  String get rate_question => "Onko tämä sovellus hyödyllinen?";
-  @override
-  String get macaronesia => "Makaronesia";
-  @override
-  String get plant_taxonomy => "Taksonomia";
-  @override
-  String get feedback_run_ads_fullscreen => "Näytä koko näytön mainos";
-  @override
-  String get asia_temperate => "Aasia Lämpötilaa";
-  @override
-  String get search => "Hae...";
-  @override
-  String get habitat_rock => "kiviä tai vuoria";
-  @override
-  String get taxonomy_superregnum => "Domeeni";
-  @override
-  String get taxonomy_sectio => "Sektio";
-  @override
-  String get mongolia => "Mongolia";
-  @override
-  String get taxonomy_subserie => "Alasarja";
-  @override
-  String get western_south_america => "Länsi Etelä-Amerikka";
-  @override
-  String get taxonomy_subgenus => "Alasuku";
-  @override
-  String get close => "Kiinni";
-  @override
-  String get europe => "Eurooppa";
-  @override
-  String get middle_europe => "Keski-Eurooppa";
-  @override
-  String get color_blue => "sininen, violetti";
-  @override
-  String get my_filter => "Oma suodatin";
-  @override
-  String get southern_south_america => "Etelä Etelä-Amerikka";
-  @override
-  String get plant_habitat => "Kasvupaikka";
-  @override
-  String get snack_loading_ad => "Mainos lataa, paina painiketta uudelleen.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "teriö";
-  @override
-  String get petal_message => "Onko kukka zygomorphic? Ei? Kuinka monta terälehteä sillä on?";
-  @override
-  String get color_white => "valkoinen";
-  @override
-  String get northeastern_usa => "Koillis-USA";
-  @override
-  String get color_green => "vihreä, ruskea, musta";
-  @override
-  String get taxonomy_ordo => "Lahko";
-  @override
-  String get taxonomy_supersectio => "Supersektio";
-  @override
-  String get pacific => "Tyyni valtameri";
-  @override
-  String get plant_sources => "Lähteet";
-  @override
-  String get taxonomy_regnum => "Kunta";
-  @override
-  String get south_central_pacific => "Etelä Keski-Tyynenmeren";
-  @override
-  String get filter_color => "väri";
-  @override
-  String get help => "Ohje";
-  @override
-  String get mexico => "Meksiko";
-  @override
-  String get snack_publish => "... julkaistaan myöhemmin";
-  @override
-  String get siberia => "Siperia";
-  @override
-  String get taxonomy_subtribus => "Alatribus";
-  @override
-  String get product_custom_filter_description => "Voit muuttaa oletusjärjestystä ja suodattimien määrää (väri, kasvupaikka, teriö, jakelu).";
-  @override
-  String get habitat_meadow => "niityt";
-  @override
-  String get plant_trivia => "Trivia";
-  @override
-  String get product_purchased => "Osti";
-  @override
-  String get taxonomy_cladus => "(kladi)";
-  @override
-  String get plant_herbalism => "Herbalismi";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Jatka lataamista";
-  @override
-  String get enhancements => "Parannukset";
-  @override
-  String get habitat_wetland => "nummimaista tai kosteikkojen";
-  @override
-  String get product_restore_purchases => "Palauttaa ostot";
-  @override
-  String get feedback_title => "Miten osallistua";
-  @override
-  String get toxicity2 => "lievästi myrkyllinen kasvi";
-  @override
-  String get toxicity1 => "myrkyllinen kasvi";
-  @override
-  String get eastern_canada => "Itä-Kanada";
-  @override
-  String get plant_info => "Tiedot";
-  @override
-  String get show_translation => "Näytä käännetty teksti";
-  @override
-  String get habitat_tree => "puita tai pensaita";
-  @override
-  String get settings => "Asetukset";
-  @override
-  String get color_red => "punainen, vaaleanpunainen";
-  @override
-  String get north_central_pacific => "Pohjois Keski-Tyynenmeren";
-  @override
-  String get taxonomy_subsectio => "Alasektio";
-  @override
-  String get southern_africa => "Etelä-Afrikka";
-  @override
-  String get always_my_region_title => "Lisää alueeni aina suodattimeen";
-  @override
-  String get color_yellow => "keltainen";
-  @override
-  String get subantarctic_islands => "Subantarkkinsaaret";
-  @override
-  String get list_info => "Valitse yksi";
-  @override
-  String get new_version => "Uusi versio on saatavilla, päivitä.";
-  @override
-  String get taxonomy_subfamilia => "Alaheimo";
-  @override
-  String get my_region => "Oma alue";
-  @override
-  String get pause => "Tauko";
-  @override
-  String get indian_subcontinent => "Intian niemimaalla";
-  @override
-  String get product_offline_description => "Voit suorittaa sovelluksen ilman internet-yhteyttä.";
-  @override
-  String get plant_flower => "Kukka";
-  @override
-  String get filter_habitat => "kasvupaikka";
-  @override
-  String get rate_never => "Ei ikinä";
-  @override
-  String get northwestern_pacific => "Luoteis-Tyynenmeren";
-  @override
-  String get search_names => "Hae nimistä";
-  @override
-  String get southwestern_europe => "Lounais-Eurooppa";
-  @override
-  String get taxonomy_species => "Laji";
-  @override
-  String get plant_fruit => "Hedelmä";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "Heimo";
-  @override
-  String get plant_stem => "Varsi";
-  @override
-  String get antarctic_continent => "Etelämanner";
-  @override
-  String get no => "Ei";
-  @override
-  String get brazil => "Brasilia";
-  @override
-  String get rate_text => "Tämän sovelluksen laatijaa tukee käyttäjien positiivinen vastaus. Lähetä hänelle joitakin tähtiä sovellusvaraston kautta.";
-  @override
-  String get eastern_europe => "Itä-Eurooppa";
-  @override
-  String get south_central_usa => "Etelä-Keski-USA";
-  @override
-  String get offline_download_success => "Kuvat ja kuvat on ladattu onnistuneesti.";
-  @override
-  String get plant_flowering_from => "Kukinta";
-  @override
-  String get taxonomy_tribus => "Tribus";
-  @override
-  String get arabian_peninsula => "Arabian niemimaalla";
-  @override
-  String get search_taxonomy => "Hae taksonomiassa";
-  @override
-  String get rate_later => "Myöhemmin";
-  @override
-  String get color_message => "Mikä on kukka? Valitse lähin.";
-  @override
-  String get west_tropical_africa => "Läntinen trooppinen Afrikka";
-  @override
-  String get northern_europe => "Pohjoinen Eurooppa";
-  @override
-  String get rate => "Arvostelut";
-  @override
-  String get northeast_tropical_africa => "Koillis-trooppinen Afrikka";
-  @override
-  String get pref_language => "Suosittu kieli";
-  @override
-  String get product_custom_filter_title => "Mukautettu suodatin";
-  @override
-  String get new_zealand => "Uusi Seelanti";
-  @override
-  String get feedback_intro => "Olet osallistunut tähän sovellukseen, koska olet asentanut sen laitteeseen, kiitos. Jos etsit jotain muuta, tässä on muutamia vaihtoehtoja:";
-  @override
-  String get filter_distribution => "jakelu";
-  @override
-  String get eastern_asia => "Itä-Aasiassa";
-  @override
-  String get western_asia => "Länsi-Aasia";
-  @override
-  String get subarctic_america => "Subarktinen Amerikka";
-  @override
-  String get product_search_title => "Hae nimistä tai taksonomiasta";
-  @override
-  String get feedback_buy_extended => "Voit ostaa laajennettua versiota, jossa on lisätoimintoja, kuten offline-tilassa, etsiä nimiä, etsiä taksonomiassa, havainnoissa ja konfiguroitavissa olevassa suodattimessa.";
-  @override
-  String get north_central_usa => "Pohjois-Keski-USA";
-  @override
-  String get improve_translation => "Parantamaan käännösten";
-  @override
-  String get feedback_review => "Voit kirjoittaa positiivisen tarkistuksen.";
-  @override
-  String get southeastern_usa => "Kaakkois-USA";
-  @override
-  String get yes => "Joo";
-  @override
-  String get feedback_run_ads_video => "Katso videomainos";
-  @override
-  String get plant_height_from => "Korkeus";
-  @override
-  String get petal_many => "yli 5";
-  @override
-  String get southeastern_europe => "Kaakkois-Eurooppa";
-  @override
-  String get taxonomy_unknown => "tuntematon";
-  @override
-  String get plant_inflorescence => "Kukinto";
-  @override
-  String get northern_africa => "Pohjois-Afrikka";
-  @override
-  String get offline_subtitle => "vaatii 300+ MB lisää tilaa.";
-  @override
-  String get china => "Kiina";
-  @override
-  String get product_no_ads_title => "Ei ei-toivottua mainosta";
-  @override
-  String get offline_title => "Offline-tila";
-  @override
-  String get petal_zygomorphic => "vastakohtainen";
-  @override
-  String get taxonomy_genus => "Suku";
-  @override
-  String get papuasia => "Papuasia";
-  @override
-  String get feedback_submit_translate_app => "Paranna sovelluksen tarroja";
-}
-
-class $ru extends S {
-  const $ru();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Центральная Америка";
-  @override
-  String get legend => "Легенда";
-  @override
-  String get product_offline_title => "Автономный режим";
-  @override
-  String get feedback_submit_translate_data => "Улучшить данные цветка";
-  @override
-  String get snack_copy => "Скопировано в буфер обмена";
-  @override
-  String get product_purchase_failed => "Покупка не удалась";
-  @override
-  String get about => "О приложении";
-  @override
-  String get product_no_ads_description => "Приложение не будет показывать рекламный баннер внизу экрана.";
-  @override
-  String get offline_download_progress => "Загрузка фотографий и иллюстраций ...";
-  @override
-  String get western_canada => "Западная Канада";
-  @override
-  String get northern_america => "Северная Америка";
-  @override
-  String get western_indian_ocean => "Западный Индийский океан";
-  @override
-  String get feedback => "Отправить отзыв";
-  @override
-  String get southwestern_usa => "Юго-западная часть США";
-  @override
-  String get distribution_message => "На какой географической области мы должны сосредоточиться?";
-  @override
-  String get caribbean => "Карибик";
-  @override
-  String get product_search_description => "Вы сможете найти цветок по его русскому или латинскому имени или по таксону (например, порядок, семейство, род).";
-  @override
-  String get offline_delete_message => "Вы хотите удалить автономные данные?";
-  @override
-  String get australasia => "Австралазия";
-  @override
-  String get petal_4 => "4 или менее";
-  @override
-  String get east_tropical_africa => "Восточная тропическая Африка";
-  @override
-  String get africa => "Африка";
-  @override
-  String get south_tropical_africa => "Южная тропическая Африка";
-  @override
-  String get caucasus => "Кавказ";
-  @override
-  String get middle_asia => "Средняя Азия";
-  @override
-  String get plant_gallery => "Галерея";
-  @override
-  String get always_my_region_subtitle => "Ваш регион будет предварительно настроен на фильтр";
-  @override
-  String get indochina => "Индокитай";
-  @override
-  String get feedback_translate => "Вы можете сообщить о любой обнаруженной вами опечатке или ошибке или представить новый перевод на вашем языке.";
-  @override
-  String get australia => "Австралия";
-  @override
-  String get google_translate => "Перевод с Google Translate";
-  @override
-  String get plant_leaf => "Листья";
-  @override
-  String get habitat_forest => "леса";
-  @override
-  String get taxonomy_serie => "Ряд";
-  @override
-  String get malesia => "Юго-Восточная Азия";
-  @override
-  String get southwestern_pacific => "Юго-западная часть Тихого океана";
-  @override
-  String get asia_tropical => "Азия тропическая";
-  @override
-  String get northwestern_usa => "Северо-западная часть США";
-  @override
-  String get northern_south_america => "Север Южной Америки";
-  @override
-  String get show_original => "Показать английский текст";
-  @override
-  String get offline_download_message => "Вы собираетесь загрузить более 300 МБ фотографий и иллюстраций. Пожалуйста, проверьте, если ваше устройство подключено к Wi-Fi. Вы готовы к загрузке?";
-  @override
-  String get southern_america => "Южная Америка";
-  @override
-  String get middle_atlantic_ocean => "Средний Атлантический океан";
-  @override
-  String get feedback_run_ads => "Вы можете отображать полноэкранную рекламу или смотреть видео-рекламу для поддержки дальнейшего развития и улучшения базы данных.";
-  @override
-  String get habitat_garden => "сады или поля";
-  @override
-  String get product_purchase => "Покупать";
-  @override
-  String get russian_far_east => "Российский Дальний Восток";
-  @override
-  String get west_central_tropical_africa => "Западно-Центральная тропическая Африка";
-  @override
-  String get habitat_message => "Что вокруг тебя? Определить среду обитания растений.";
-  @override
-  String get plant_toxicity => "Токсичность";
-  @override
-  String get offline_download_fail => "Ошибка загрузки. Пожалуйста, проверьте ваше интернет-соединение или свободное место на устройстве и попробуйте снова.";
-  @override
-  String get snack_no_flowers => "Нет цветов соответствующих критериям.";
-  @override
-  String get rate_question => "Является ли это приложение полезным?";
-  @override
-  String get macaronesia => "Макронезии";
-  @override
-  String get plant_taxonomy => "Систематика";
-  @override
-  String get feedback_run_ads_fullscreen => "Показать полноэкранную рекламу";
-  @override
-  String get asia_temperate => "Азия умерная";
-  @override
-  String get search => "Поиск...";
-  @override
-  String get habitat_rock => "скалы или горы";
-  @override
-  String get taxonomy_superregnum => "Домен";
-  @override
-  String get taxonomy_sectio => "Секция";
-  @override
-  String get mongolia => "Монголия";
-  @override
-  String get taxonomy_subserie => "Подряд";
-  @override
-  String get western_south_america => "Западная Южная Америка";
-  @override
-  String get taxonomy_subgenus => "Подрод";
-  @override
-  String get close => "Закрытие";
-  @override
-  String get europe => "Европа";
-  @override
-  String get middle_europe => "Средняя Европа";
-  @override
-  String get color_blue => "синая, фиолетовая";
-  @override
-  String get my_filter => "Мой фильтр";
-  @override
-  String get southern_south_america => "Южная Южная Америка";
-  @override
-  String get plant_habitat => "Ареал";
-  @override
-  String get snack_loading_ad => "Реклама все еще загружается, нажмите кнопку еще раз.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "лепесток";
-  @override
-  String get petal_message => "Является ли цветок зигоморфным? Нет? Тогда сколько у него лепестков?";
-  @override
-  String get color_white => "белая";
-  @override
-  String get northeastern_usa => "Северо-восточная часть США";
-  @override
-  String get color_green => "зелёная, коричневая, чёрная";
-  @override
-  String get taxonomy_ordo => "Порядок";
-  @override
-  String get taxonomy_supersectio => "Надсекция";
-  @override
-  String get pacific => "Тихий океан";
-  @override
-  String get plant_sources => "Ссылки";
-  @override
-  String get taxonomy_regnum => "Царство";
-  @override
-  String get south_central_pacific => "Юго-Центральная часть Тихого океана";
-  @override
-  String get filter_color => "окраска";
-  @override
-  String get help => "Cправка";
-  @override
-  String get mexico => "Мексика";
-  @override
-  String get snack_publish => "... будет опубликовано позже";
-  @override
-  String get siberia => "Сибирь";
-  @override
-  String get taxonomy_subtribus => "Подтриба";
-  @override
-  String get product_custom_filter_description => "Вы сможете изменить порядок по умолчанию и количество фильтров (окраска, ареалы, лепесток, распределение).";
-  @override
-  String get habitat_meadow => "луга или пастбища";
-  @override
-  String get plant_trivia => "Пустяки";
-  @override
-  String get product_purchased => "Купленный";
-  @override
-  String get taxonomy_cladus => "(клада)";
-  @override
-  String get plant_herbalism => "Травничество";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Возобновление загрузки";
-  @override
-  String get enhancements => "Улучшения";
-  @override
-  String get habitat_wetland => "водно-болотные угодья";
-  @override
-  String get product_restore_purchases => "Восстановить покупки";
-  @override
-  String get feedback_title => "Как внести свой вклад";
-  @override
-  String get toxicity2 => "слегка ядовитое растение";
-  @override
-  String get toxicity1 => "ядовитое растение";
-  @override
-  String get eastern_canada => "Восточная Канада";
-  @override
-  String get plant_info => "Информация";
-  @override
-  String get show_translation => "Показать перевод";
-  @override
-  String get habitat_tree => "деревья или кустарники";
-  @override
-  String get settings => "Устройства";
-  @override
-  String get color_red => "красная, розовая";
-  @override
-  String get north_central_pacific => "Северо-Центральная часть Тихого океана";
-  @override
-  String get taxonomy_subsectio => "Подсекция";
-  @override
-  String get southern_africa => "Южная Африка";
-  @override
-  String get always_my_region_title => "Всегда добавлять мой регион в фильтр";
-  @override
-  String get color_yellow => "жёлтая";
-  @override
-  String get subantarctic_islands => "Субантарктические острова";
-  @override
-  String get list_info => "Выбери один";
-  @override
-  String get new_version => "Новая версия доступна, пожалуйста, обновите.";
-  @override
-  String get taxonomy_subfamilia => "Подсемейство";
-  @override
-  String get my_region => "Мой район";
-  @override
-  String get pause => "Пауза";
-  @override
-  String get indian_subcontinent => "Индийский субконтинент";
-  @override
-  String get product_offline_description => "Вы сможете запустить приложение без подключения к интернету.";
-  @override
-  String get plant_flower => "Цветы";
-  @override
-  String get filter_habitat => "ареалы";
-  @override
-  String get rate_never => "Никогда";
-  @override
-  String get northwestern_pacific => "Северо-западная часть Тихого океана";
-  @override
-  String get search_names => "Поиск по именам";
-  @override
-  String get southwestern_europe => "Юго-Западная Европа";
-  @override
-  String get taxonomy_species => "Вид";
-  @override
-  String get plant_fruit => "Плоды";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "Семейство";
-  @override
-  String get plant_stem => "Стебель";
-  @override
-  String get antarctic_continent => "Антарктический континент";
-  @override
-  String get no => "Нет";
-  @override
-  String get brazil => "Бразилия";
-  @override
-  String get rate_text => "Автор этого приложения мотивирован положительным откликом пользователей. Пожалуйста, отправьте ему несколько звезд через магазин приложений.";
-  @override
-  String get eastern_europe => "Восточная Европа";
-  @override
-  String get south_central_usa => "Юго-Центральная часть США";
-  @override
-  String get offline_download_success => "Фотографии и иллюстрации успешно загружены.";
-  @override
-  String get plant_flowering_from => "Цветет:";
-  @override
-  String get taxonomy_tribus => "Триба";
-  @override
-  String get arabian_peninsula => "Аравийский полуостров";
-  @override
-  String get search_taxonomy => "Поиск в таксономии";
-  @override
-  String get rate_later => "Позже";
-  @override
-  String get color_message => "Какого цвета цветок? Выберите ближайший.";
-  @override
-  String get west_tropical_africa => "Западная тропическая Африка";
-  @override
-  String get northern_europe => "Северная Европа";
-  @override
-  String get rate => "Отзывы";
-  @override
-  String get northeast_tropical_africa => "Северо-Восточная тропическая Африка";
-  @override
-  String get pref_language => "Предпочтительный язык";
-  @override
-  String get product_custom_filter_title => "Пользовательский фильтр";
-  @override
-  String get new_zealand => "Новая Зеландия";
-  @override
-  String get feedback_intro => "Вы вносите свой вклад в это приложение, так как вы установили его на своем устройстве, спасибо Если вы ищете что-то большее, вот несколько вариантов:";
-  @override
-  String get filter_distribution => "распределение";
-  @override
-  String get eastern_asia => "Восточная Азия";
-  @override
-  String get western_asia => "Западная Азия";
-  @override
-  String get subarctic_america => "Субарктическая Америка";
-  @override
-  String get product_search_title => "Поиск по именам или таксономии";
-  @override
-  String get feedback_buy_extended => "Вы можете купить расширенную версию с дополнительными функциями, такими как автономный режим, поиск по именам, поиск по таксономии, наблюдения и настраиваемый фильтр.";
-  @override
-  String get north_central_usa => "Северо-Центральная часть США";
-  @override
-  String get improve_translation => "Улучшить перевод";
-  @override
-  String get feedback_review => "Вы можете написать положительный отзыв.";
-  @override
-  String get southeastern_usa => "Юго-Восточная часть США";
-  @override
-  String get yes => "Да";
-  @override
-  String get feedback_run_ads_video => "Смотреть видео рекламу";
-  @override
-  String get plant_height_from => "Высота:";
-  @override
-  String get petal_many => "более 5";
-  @override
-  String get southeastern_europe => "Юго-Восточная Европа";
-  @override
-  String get taxonomy_unknown => "неизвестный";
-  @override
-  String get plant_inflorescence => "Соцветие";
-  @override
-  String get northern_africa => "Северная Африка";
-  @override
-  String get offline_subtitle => "требует 300+ МБ дополнительного места.";
-  @override
-  String get china => "Китай";
-  @override
-  String get product_no_ads_title => "Без нежелательной рекламы";
-  @override
-  String get offline_title => "Автономный режим";
-  @override
-  String get petal_zygomorphic => "зигоморфный";
-  @override
-  String get taxonomy_genus => "Род";
-  @override
-  String get papuasia => "Papuasia";
-  @override
-  String get feedback_submit_translate_app => "Улучшить ярлыки приложений";
-}
-
-class $pt extends S {
-  const $pt();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "América Central";
-  @override
-  String get legend => "Legenda";
-  @override
-  String get product_offline_title => "Modo offline";
-  @override
-  String get snack_copy => "Copiado para a área de transferência";
-  @override
-  String get product_purchase_failed => "A compra falhou";
-  @override
-  String get about => "Sobre a aplicação";
-  @override
-  String get product_no_ads_description => "Aplicativo não mostrará banner de propaganda na parte inferior da tela.";
-  @override
-  String get offline_download_progress => "Download de fotos e ilustrações ...";
-  @override
-  String get western_canada => "Canadá Ocidental";
-  @override
-  String get northern_america => "América do Norte";
-  @override
-  String get western_indian_ocean => "Oceano Índico Ocidental";
-  @override
-  String get feedback => "Comentários";
-  @override
-  String get southwestern_usa => "Sudoeste dos EUA";
-  @override
-  String get distribution_message => "Em qual área geográfica se concentrar?";
-  @override
-  String get caribbean => "Caraíbas";
-  @override
-  String get product_search_description => "Você poderá encontrar uma flor pelo seu nome em português ou latim ou por seu táxon (por exemplo, ordem, família, gênero).";
-  @override
-  String get offline_delete_message => "Você deseja excluir dados off-line?";
-  @override
-  String get australasia => "Australásia";
-  @override
-  String get petal_4 => "4 ou menos";
-  @override
-  String get east_tropical_africa => "África Tropical Oriental";
-  @override
-  String get africa => "África";
-  @override
-  String get south_tropical_africa => "África tropical do sul";
-  @override
-  String get caucasus => "Cáucaso";
-  @override
-  String get middle_asia => "Ásia média";
-  @override
-  String get plant_gallery => "Galeria";
-  @override
-  String get always_my_region_subtitle => "Sua região será pré-definida para o filtro";
-  @override
-  String get indochina => "Indochina";
-  @override
-  String get feedback_translate => "Você pode denunciar qualquer erro ou erro encontrado ou enviar uma nova tradução para o seu idioma.";
-  @override
-  String get australia => "Austrália";
-  @override
-  String get google_translate => "Traduzido com Google Tradutor";
-  @override
-  String get plant_leaf => "Folhas";
-  @override
-  String get habitat_forest => "florestas";
-  @override
-  String get taxonomy_serie => "série";
-  @override
-  String get malesia => "Malésia";
-  @override
-  String get southwestern_pacific => "Pacífico sudoeste";
-  @override
-  String get asia_tropical => "Ásia-Tropical";
-  @override
-  String get northwestern_usa => "Noroeste dos EUA";
-  @override
-  String get northern_south_america => "Norte da América do Sul";
-  @override
-  String get show_original => "Mostrar texto em inglês";
-  @override
-  String get offline_download_message => "Você vai baixar mais de 300 MB de fotos e ilustrações. Por favor, verifique se o seu dispositivo está conectado a wi-fi. Você está pronto para um download?";
-  @override
-  String get southern_america => "América do Sul";
-  @override
-  String get middle_atlantic_ocean => "Oceano Atlântico Médio";
-  @override
-  String get feedback_run_ads => "Você pode exibir anúncios em tela cheia ou assistir a anúncios em vídeo para dar suporte a mais desenvolvimento e aprimoramento do banco de dados.";
-  @override
-  String get habitat_garden => "jardins e campos";
-  @override
-  String get product_purchase => "Compra";
-  @override
-  String get russian_far_east => "Extremo Oriente Russo";
-  @override
-  String get west_central_tropical_africa => "África Tropical Centro-Ocidental";
-  @override
-  String get habitat_message => "O que está a sua volta? Identifique o habitat da planta.";
-  @override
-  String get plant_toxicity => "Toxicidade";
-  @override
-  String get offline_download_fail => "Falha no Download. Por favor, verifique sua conexão com a internet ou espaço livre no dispositivo e tente novamente.";
-  @override
-  String get snack_no_flowers => "Não há critérios de correspondência de flores.";
-  @override
-  String get rate_question => "Esta aplicação é útil?";
-  @override
-  String get macaronesia => "Macaronésia";
-  @override
-  String get plant_taxonomy => "Taxinomia";
-  @override
-  String get feedback_run_ads_fullscreen => "Mostrar um anúncio em tela cheia";
-  @override
-  String get asia_temperate => "Ásia-Temperado";
-  @override
-  String get search => "Procurar...";
-  @override
-  String get habitat_rock => "rochas e montanhas";
-  @override
-  String get taxonomy_superregnum => "domínio";
-  @override
-  String get taxonomy_sectio => "seção";
-  @override
-  String get mongolia => "Mongólia";
-  @override
-  String get taxonomy_subserie => "subsérie";
-  @override
-  String get western_south_america => "Oeste da América do Sul";
-  @override
-  String get taxonomy_subgenus => "subgênero";
-  @override
-  String get close => "Perto";
-  @override
-  String get europe => "Europa";
-  @override
-  String get middle_europe => "Europa Central";
-  @override
-  String get color_blue => "azul, violeta";
-  @override
-  String get my_filter => "Meu filtro";
-  @override
-  String get southern_south_america => "Sul da América do Sul";
-  @override
-  String get plant_habitat => "Habitat";
-  @override
-  String get snack_loading_ad => "O anúncio ainda está carregando, pressione o botão novamente.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "pétala";
-  @override
-  String get petal_message => "A flor é bissimétrica? Não? Quantas pétalas tem, então?";
-  @override
-  String get color_white => "branca";
-  @override
-  String get northeastern_usa => "EUA do nordeste";
-  @override
-  String get color_green => "verde, castanha, preta";
-  @override
-  String get taxonomy_ordo => "ordem";
-  @override
-  String get taxonomy_supersectio => "superseção";
-  @override
-  String get pacific => "Pacífico";
-  @override
-  String get plant_sources => "Fontes";
-  @override
-  String get taxonomy_regnum => "reino";
-  @override
-  String get south_central_pacific => "Pacífico Sul-Central";
-  @override
-  String get filter_color => "cor";
-  @override
-  String get help => "Ajuda";
-  @override
-  String get mexico => "México";
-  @override
-  String get snack_publish => "... para ser publicado mais tarde";
-  @override
-  String get siberia => "Sibéria";
-  @override
-  String get taxonomy_subtribus => "subtribo";
-  @override
-  String get product_custom_filter_description => "Você poderá alterar a ordem padrão e o número de filtros (cor, habitat, pétala, distribuição).";
-  @override
-  String get habitat_meadow => "prados e pastagens";
-  @override
-  String get plant_trivia => "Curiosidades";
-  @override
-  String get product_purchased => "Comprado";
-  @override
-  String get taxonomy_cladus => "(clado)";
-  @override
-  String get plant_herbalism => "Fitoterapia";
-  @override
-  String get plant_height_to => "a";
-  @override
-  String get offline_download => "Retomar download";
-  @override
-  String get enhancements => "Melhorias";
-  @override
-  String get habitat_wetland => "pântanos e zonas húmidas";
-  @override
-  String get product_restore_purchases => "Restaurar compras";
-  @override
-  String get feedback_title => "Como contribuir";
-  @override
-  String get toxicity2 => "planta ligeiramente venenosa";
-  @override
-  String get toxicity1 => "planta venenosa";
-  @override
-  String get eastern_canada => "Canadá Oriental";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Mostrar texto traduzido";
-  @override
-  String get habitat_tree => "árvores e arbustos";
-  @override
-  String get settings => "Configurações";
-  @override
-  String get color_red => "vermelha, cor-de-rosa";
-  @override
-  String get north_central_pacific => "Pacífico Norte-Central";
-  @override
-  String get taxonomy_subsectio => "subseção";
-  @override
-  String get southern_africa => "África do Sul";
-  @override
-  String get always_my_region_title => "Sempre adicione minha região ao filtro";
-  @override
-  String get color_yellow => "amarela";
-  @override
-  String get subantarctic_islands => "Ilhas Subantárticas";
-  @override
-  String get list_info => "Selecione uma";
-  @override
-  String get new_version => "Nova versão está disponível, por favor atualize.";
-  @override
-  String get taxonomy_subfamilia => "subfamília";
-  @override
-  String get my_region => "Minha região";
-  @override
-  String get pause => "Pausa";
-  @override
-  String get indian_subcontinent => "Subcontinente indiano";
-  @override
-  String get product_offline_description => "Você será capaz de executar aplicativos sem conexão com a internet.";
-  @override
-  String get plant_flower => "Flores";
-  @override
-  String get filter_habitat => "habitat";
-  @override
-  String get rate_never => "Nunca";
-  @override
-  String get northwestern_pacific => "Noroeste do Pacífico";
-  @override
-  String get search_names => "Pesquisa nos nomes";
-  @override
-  String get southwestern_europe => "Europa do Sudoeste";
-  @override
-  String get taxonomy_species => "espécie";
-  @override
-  String get plant_fruit => "Frutos";
-  @override
-  String get plant_flowering_to => "a";
-  @override
-  String get taxonomy_familia => "família";
-  @override
-  String get plant_stem => "Caule";
-  @override
-  String get antarctic_continent => "Continente Antártico";
-  @override
-  String get no => "Não";
-  @override
-  String get brazil => "Brasil";
-  @override
-  String get rate_text => "Autor desta aplicação é motivada pela resposta positiva dos usuários. Por favor, envie-lhe algumas estrelas através da loja de aplicativos.";
-  @override
-  String get eastern_europe => "Europa Oriental";
-  @override
-  String get south_central_usa => "EUA Centro-Sul";
-  @override
-  String get offline_download_success => "Fotos e ilustrações transferidas com sucesso.";
-  @override
-  String get plant_flowering_from => "Floresce de";
-  @override
-  String get taxonomy_tribus => "tribo";
-  @override
-  String get arabian_peninsula => "Península Arábica";
-  @override
-  String get search_taxonomy => "Pesquisa na taxonomia";
-  @override
-  String get rate_later => "Mais tarde";
-  @override
-  String get color_message => "De que cor são as flores? Selecione a mais aproximada. Sempre pode voltar e selecionar uma outra.";
-  @override
-  String get west_tropical_africa => "África Tropical Ocidental";
-  @override
-  String get northern_europe => "Norte da Europa";
-  @override
-  String get rate => "Resenha";
-  @override
-  String get northeast_tropical_africa => "Nordeste da África Tropical";
-  @override
-  String get pref_language => "Língua preferida";
-  @override
-  String get product_custom_filter_title => "Filtro customizado";
-  @override
-  String get new_zealand => "Nova Zelândia";
-  @override
-  String get feedback_intro => "Você tem contribuído para este aplicativo desde que você o instalou no seu dispositivo, obrigado. Se você está procurando algo mais, aqui estão algumas opções:";
-  @override
-  String get filter_distribution => "distribuição";
-  @override
-  String get eastern_asia => "Ásia Oriental";
-  @override
-  String get western_asia => "Ásia Ocidental";
-  @override
-  String get subarctic_america => "América Subarctic";
-  @override
-  String get product_search_title => "Pesquisa em nomes ou taxonomia";
-  @override
-  String get feedback_buy_extended => "Você pode comprar a versão estendida (+) com funcionalidades adicionais, como o modo off-line, pesquisar nomes, pesquisar em taxonomia, observações e filtros configuráveis.";
-  @override
-  String get north_central_usa => "EUA do centro-norte";
-  @override
-  String get improve_translation => "Melhorar a tradução";
-  @override
-  String get feedback_review => "Você pode escrever um comentário positivo.";
-  @override
-  String get southeastern_usa => "Sudeste dos EUA";
-  @override
-  String get yes => "Sim";
-  @override
-  String get feedback_run_ads_video => "Assista a um anúncio em vídeo";
-  @override
-  String get plant_height_from => "altura de";
-  @override
-  String get petal_many => "mais que 5";
-  @override
-  String get southeastern_europe => "Sudeste da Europa";
-  @override
-  String get taxonomy_unknown => "desconhecido";
-  @override
-  String get plant_inflorescence => "Inflorescência";
-  @override
-  String get northern_africa => "Norte da África";
-  @override
-  String get offline_subtitle => "requer mais de 300 MB de espaço adicional.";
-  @override
-  String get china => "China";
-  @override
-  String get product_no_ads_title => "Nenhum anúncio indesejado";
-  @override
-  String get offline_title => "Modo offline";
-  @override
-  String get petal_zygomorphic => "zigomorfo";
-  @override
-  String get taxonomy_genus => "género";
-  @override
-  String get papuasia => "Papuásia";
-}
-
-class $lt extends S {
-  const $lt();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Centrinė Amerika";
-  @override
-  String get legend => "Legenda";
-  @override
-  String get product_offline_title => "Atsijungęs režimas";
-  @override
-  String get feedback_submit_translate_data => "Pagerinkite gėlių duomenis";
-  @override
-  String get snack_copy => "Kopijuojama į iškarpinę";
-  @override
-  String get product_purchase_failed => "Pirkimas nepavyko";
-  @override
-  String get about => "Apie paraišką";
-  @override
-  String get product_no_ads_description => "Programos apačioje ekrano reklama nebus rodoma.";
-  @override
-  String get offline_download_progress => "Nuotraukų ir iliustracijų atsisiuntimas ...";
-  @override
-  String get western_canada => "Vakarų Kanadoje";
-  @override
-  String get northern_america => "Šiaurės Amerika";
-  @override
-  String get western_indian_ocean => "Indijos vandenyno vakaras";
-  @override
-  String get feedback => "Grįžtamasis ryšys / Indėlis";
-  @override
-  String get southwestern_usa => "Pietvakarių JAV";
-  @override
-  String get distribution_message => "Kokią geografinę vietovę turėtume sutelkti?";
-  @override
-  String get caribbean => "Karibai";
-  @override
-  String get product_search_description => "Gali rasti gėlę pagal savo lietuvių ar lotynų kalbą arba taksoną (pvz., Eilė, šeimą, gentį).";
-  @override
-  String get offline_delete_message => "Ar norite ištrinti neprisijungus duomenis?";
-  @override
-  String get australasia => "Australasija";
-  @override
-  String get petal_4 => "4 arba mažiau";
-  @override
-  String get east_tropical_africa => "Rytų tropinė Afrika";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get south_tropical_africa => "Pietų tropinė Afrika";
-  @override
-  String get caucasus => "Kaukazas";
-  @override
-  String get middle_asia => "Vidurinė Azija";
-  @override
-  String get plant_gallery => "Galerija";
-  @override
-  String get always_my_region_subtitle => "Jūsų regionas bus iš anksto nustatytas filtre";
-  @override
-  String get indochina => "Indijos Kinija";
-  @override
-  String get feedback_translate => "Galite pranešti apie rastą klaidą ar klaidą arba pateikti naują vertimą į savo kalbą.";
-  @override
-  String get australia => "Australija";
-  @override
-  String get google_translate => "Išvertus su Google Translate";
-  @override
-  String get plant_leaf => "Lapai";
-  @override
-  String get habitat_forest => "miškai";
-  @override
-  String get taxonomy_serie => "Serija";
-  @override
-  String get malesia => "Malaizija";
-  @override
-  String get southwestern_pacific => "Ramiojo vandenyno pietvakariai";
-  @override
-  String get asia_tropical => "Azijos tropinis";
-  @override
-  String get northwestern_usa => "Šiaurės vakarų JAV";
-  @override
-  String get northern_south_america => "Šiaurės Pietų Amerika";
-  @override
-  String get show_original => "Rodyti tekstas anglų kalba";
-  @override
-  String get offline_download_message => "Atsisiųsite 300+ MB nuotraukų ir iliustracijų. Patikrinkite, ar įrenginys prijungtas prie „Wi-Fi“. Ar esate pasiruošę atsisiųsti?";
-  @override
-  String get southern_america => "Pietų Amerika";
-  @override
-  String get middle_atlantic_ocean => "Vidurio Atlanto vandenynas";
-  @override
-  String get feedback_run_ads => "Galite rodyti viso ekrano skelbimą arba žiūrėti vaizdo įrašo reklamą, kad palaikytumėte tolesnę plėtrą ir duomenų bazės tobulinimą.";
-  @override
-  String get habitat_garden => "sodai ar laukai";
-  @override
-  String get product_purchase => "Įsigyti";
-  @override
-  String get russian_far_east => "Rusijos Tolimuosiuose Rytuose";
-  @override
-  String get west_central_tropical_africa => "Vakarų-Centrinė tropinė Afrika";
-  @override
-  String get habitat_message => "Kas vyksta aplink jus? Nustatyti gamyklos buveinių.";
-  @override
-  String get plant_toxicity => "Toksiškumas";
-  @override
-  String get offline_download_fail => "Atsisiuntimas nepavyko. Patikrinkite interneto ryšį arba laisvą vietą įrenginyje ir bandykite dar kartą.";
-  @override
-  String get snack_no_flowers => "Nėra gėlių atitikimo kriterijų.";
-  @override
-  String get rate_question => "Ar šią programą naudinga?";
-  @override
-  String get macaronesia => "Makaronezija";
-  @override
-  String get plant_taxonomy => "Taksonomija";
-  @override
-  String get feedback_run_ads_fullscreen => "Rodyti viso ekrano skelbimą";
-  @override
-  String get asia_temperate => "Azijos temperatuotas";
-  @override
-  String get search => "Paieška...";
-  @override
-  String get habitat_rock => "uolienos ar kalnai";
-  @override
-  String get taxonomy_superregnum => "Domenas";
-  @override
-  String get taxonomy_sectio => "Sekcija";
-  @override
-  String get mongolia => "Mongolija";
-  @override
-  String get taxonomy_subserie => "Subserija";
-  @override
-  String get western_south_america => "Vakarų Pietų Amerika";
-  @override
-  String get taxonomy_subgenus => "Pogentė";
-  @override
-  String get close => "Uždaryti";
-  @override
-  String get europe => "Europa";
-  @override
-  String get middle_europe => "Vidurio Europa";
-  @override
-  String get color_blue => "mėlyna, violetinė";
-  @override
-  String get my_filter => "Mano filtras";
-  @override
-  String get southern_south_america => "Pietų Pietų Amerika";
-  @override
-  String get plant_habitat => "Buveinė";
-  @override
-  String get snack_loading_ad => "Reklama vis dar įkeliama, dar kartą paspauskite mygtuką.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "vainiklapis";
-  @override
-  String get petal_message => "Ar gėlė nereguliarus? Ar ne? Tada kiek žiedlapių ji neturi?";
-  @override
-  String get color_white => "baltas";
-  @override
-  String get northeastern_usa => "Šiaurės rytų JAV";
-  @override
-  String get color_green => "žalia, ruda, juoda";
-  @override
-  String get taxonomy_ordo => "Eilė";
-  @override
-  String get taxonomy_supersectio => "Supersekcija";
-  @override
-  String get pacific => "Ramusis vandenynas";
-  @override
-  String get plant_sources => "Šaltiniai";
-  @override
-  String get taxonomy_regnum => "Karalystė";
-  @override
-  String get south_central_pacific => "Ramiojo vandenyno pietinė dalis";
-  @override
-  String get filter_color => "spalva";
-  @override
-  String get help => "Padėkite";
-  @override
-  String get mexico => "Meksika";
-  @override
-  String get snack_publish => "... bus paskelbta vėliau";
-  @override
-  String get siberia => "Sibiras";
-  @override
-  String get taxonomy_subtribus => "Subtriba";
-  @override
-  String get product_custom_filter_description => "Galėsite pakeisti numatytąjį užsakymų skaičių ir filtrų skaičių (spalva, buveinė, vainiklapis, platinimas).";
-  @override
-  String get habitat_meadow => "pievas ar pievos";
-  @override
-  String get plant_trivia => "Obuolys";
-  @override
-  String get product_purchased => "Įgytinis";
-  @override
-  String get taxonomy_cladus => "(clade)";
-  @override
-  String get plant_herbalism => "Žolininkystė";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Tęsti atsisiuntimą";
-  @override
-  String get enhancements => "Priedai";
-  @override
-  String get habitat_wetland => "šlapžemės";
-  @override
-  String get product_restore_purchases => "Atkurti pirkimus";
-  @override
-  String get feedback_title => "Kaip prisidėti";
-  @override
-  String get toxicity2 => "šiek tiek nuodingas augalas";
-  @override
-  String get toxicity1 => "nuodingas augalas";
-  @override
-  String get eastern_canada => "Rytų Kanadoje";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Rodyti išverstas tekstas";
-  @override
-  String get habitat_tree => "medžiai ar krūmai";
-  @override
-  String get settings => "Nustatymai";
-  @override
-  String get color_red => "raudona, rožinė";
-  @override
-  String get north_central_pacific => "Ramiojo vandenyno šiaurės ir centrinė dalis";
-  @override
-  String get taxonomy_subsectio => "Subsekcija";
-  @override
-  String get southern_africa => "Pietų Afrika";
-  @override
-  String get always_my_region_title => "Visada pridėkite mano regioną prie filtro";
-  @override
-  String get color_yellow => "geltonas";
-  @override
-  String get subantarctic_islands => "Subartkartinės salos";
-  @override
-  String get list_info => "Pasirinkti vieną";
-  @override
-  String get new_version => "Yra nauja versija, atnaujinkite.";
-  @override
-  String get taxonomy_subfamilia => "Pošeimis";
-  @override
-  String get my_region => "Mano regionas";
-  @override
-  String get pause => "Pauzė";
-  @override
-  String get indian_subcontinent => "Indijos subkontinentas";
-  @override
-  String get product_offline_description => "Galėsite paleisti programą be interneto ryšio.";
-  @override
-  String get plant_flower => "Žiedas";
-  @override
-  String get filter_habitat => "buveinių";
-  @override
-  String get rate_never => "Niekada";
-  @override
-  String get northwestern_pacific => "Ramiojo vandenyno šiaurės vakarai";
-  @override
-  String get search_names => "Ieškoti vardų";
-  @override
-  String get southwestern_europe => "Pietvakarių Europa";
-  @override
-  String get taxonomy_species => "Rūšis";
-  @override
-  String get plant_fruit => "Vaisius";
-  @override
-  String get plant_flowering_to => "iki";
-  @override
-  String get taxonomy_familia => "Šeima";
-  @override
-  String get plant_stem => "Stiebas";
-  @override
-  String get antarctic_continent => "Antarkties žemynas";
-  @override
-  String get no => "Ne";
-  @override
-  String get brazil => "Brazilija";
-  @override
-  String get rate_text => "Šios programos autorius yra pagrįstas teigiamu vartotojų atsakymu. Atsiųskite jam keletą žvaigždžių per taikomąją parduotuvę.";
-  @override
-  String get eastern_europe => "Rytų Europa";
-  @override
-  String get south_central_usa => "Pietu-Centrinė JAV";
-  @override
-  String get offline_download_success => "Nuotraukos ir iliustracijos sėkmingai atsisiųsti.";
-  @override
-  String get plant_flowering_from => "Žydėjimas nuo";
-  @override
-  String get taxonomy_tribus => "Triba";
-  @override
-  String get arabian_peninsula => "Arabijos pusiasalis";
-  @override
-  String get search_taxonomy => "Ieškoti taksonomijoje";
-  @override
-  String get rate_later => "Vėliau";
-  @override
-  String get color_message => "Koks gėlių spalva? Pasirinkite artimiausią.";
-  @override
-  String get west_tropical_africa => "Vakarų tropinė Afrika";
-  @override
-  String get northern_europe => "Šiaurės Europa";
-  @override
-  String get rate => "Apžvalga";
-  @override
-  String get northeast_tropical_africa => "Šiaurės rytų tropinė Afrika";
-  @override
-  String get pref_language => "Pageidautina kalba";
-  @override
-  String get product_custom_filter_title => "Pasirinktinis filtras";
-  @override
-  String get new_zealand => "Naujoji Zelandija";
-  @override
-  String get feedback_intro => "Jūs prisidėjote prie šios programos, nes ją įdiegėte savo prietaise. Jei ieškote ko nors daugiau, čia pateikiamos kelios parinktys:";
-  @override
-  String get filter_distribution => "platinimas";
-  @override
-  String get eastern_asia => "Rytų Azija";
-  @override
-  String get western_asia => "Vakarų Azija";
-  @override
-  String get subarctic_america => "Subartikinė Amerika";
-  @override
-  String get product_search_title => "Ieškoti vardų arba taksonomijos";
-  @override
-  String get feedback_buy_extended => "Galite įsigyti išplėstinę versiją su papildomomis funkcijomis, pavyzdžiui, neprisijungus, ieškoti vardų, ieškoti taksonomijos, stebėjimų ir konfigūruojamo filtro.";
-  @override
-  String get north_central_usa => "Šiaurės-Centrinė JAV";
-  @override
-  String get improve_translation => "Pagerinti vertimą";
-  @override
-  String get feedback_review => "Galite parašyti teigiamą apžvalgą.";
-  @override
-  String get southeastern_usa => "Pietryčių JAV";
-  @override
-  String get yes => "Taip";
-  @override
-  String get feedback_run_ads_video => "Žiūrėti vaizdo įrašo skelbimą";
-  @override
-  String get plant_height_from => "Aukštis";
-  @override
-  String get petal_many => "daugiau nei 5";
-  @override
-  String get southeastern_europe => "Pietryčių Europa";
-  @override
-  String get taxonomy_unknown => "nežinomas";
-  @override
-  String get plant_inflorescence => "Žiedynas";
-  @override
-  String get northern_africa => "Šiaurės Afrika";
-  @override
-  String get offline_subtitle => "reikia 300+ MB papildomos vietos.";
-  @override
-  String get china => "Kinija";
-  @override
-  String get product_no_ads_title => "Nėra nepageidaujamo skelbimo";
-  @override
-  String get offline_title => "Atsijungęs režimas";
-  @override
-  String get petal_zygomorphic => "nereguliarus";
-  @override
-  String get taxonomy_genus => "Gentis";
-  @override
-  String get papuasia => "Papuazija";
-  @override
-  String get feedback_submit_translate_app => "Pagerinti programos etiketes";
-}
-
-class $hr extends S {
-  const $hr();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Centralna Amerika";
-  @override
-  String get legend => "Legenda";
-  @override
-  String get product_offline_title => "Izvanmrežni način";
-  @override
-  String get feedback_submit_translate_data => "Poboljšajte podatke o cvijetu";
-  @override
-  String get snack_copy => "Kopirano u međuspremnik";
-  @override
-  String get product_purchase_failed => "Kupnja nije uspjela";
-  @override
-  String get about => "O aplikaciji";
-  @override
-  String get product_no_ads_description => "Aplikacija neće prikazati oglasni banner na dnu zaslona.";
-  @override
-  String get offline_download_progress => "Preuzimanje fotografija i ilustracija ...";
-  @override
-  String get western_canada => "Zapadna Kanada";
-  @override
-  String get northern_america => "Sjeverna Amerika";
-  @override
-  String get western_indian_ocean => "Zapadni Indijski ocean";
-  @override
-  String get feedback => "Povratne informacije";
-  @override
-  String get southwestern_usa => "Jugozapadno SAD";
-  @override
-  String get distribution_message => "Na koje ćemo se geografsko područje usredotočiti?";
-  @override
-  String get caribbean => "Karibi";
-  @override
-  String get product_search_description => "Cvijet ćete moći pronaći po njegovom hrvatskom ili latinskom nazivu ili po svojoj taksonu (npr. red, porodica, rod).";
-  @override
-  String get offline_delete_message => "Želite li izbrisati izvanmrežne podatke?";
-  @override
-  String get australasia => "Australazija";
-  @override
-  String get petal_4 => "4 ili manje";
-  @override
-  String get east_tropical_africa => "Istočna tropska Afrika";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get south_tropical_africa => "Južna tropska Afrika";
-  @override
-  String get caucasus => "Kavkaz";
-  @override
-  String get middle_asia => "Srednja Azija";
-  @override
-  String get plant_gallery => "Galerija";
-  @override
-  String get always_my_region_subtitle => "Vaša će regija biti unaprijed postavljena na filtar";
-  @override
-  String get indochina => "Indo-Kina";
-  @override
-  String get feedback_translate => "Možete prijaviti svaku pogrešku ili pogrešku koju ste pronašli ili poslati novi prijevod na svoj jezik.";
-  @override
-  String get australia => "Australija";
-  @override
-  String get google_translate => "Prevedeno s Google prevoditelj";
-  @override
-  String get plant_leaf => "List";
-  @override
-  String get habitat_forest => "šume";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "Malezija";
-  @override
-  String get southwestern_pacific => "Jugozapadni Tihi ocean";
-  @override
-  String get asia_tropical => "Azija-tropska";
-  @override
-  String get northwestern_usa => "Sjeverozapadna SAD";
-  @override
-  String get northern_south_america => "Sjeverna Južna Amerika";
-  @override
-  String get show_original => "Prikaži engleski tekst";
-  @override
-  String get offline_download_message => "Preuzet ćete 300+ MB fotografija i ilustracija. Provjerite je li uređaj spojen na Wi-Fi. Jeste li spremni za preuzimanje?";
-  @override
-  String get southern_america => "Južna Amerika";
-  @override
-  String get middle_atlantic_ocean => "Srednji Atlantski ocean";
-  @override
-  String get feedback_run_ads => "Možete prikazati oglas preko cijelog zaslona ili gledati video oglas kako biste podržali daljnji razvoj i poboljšanje baze podataka.";
-  @override
-  String get habitat_garden => "vrtovi ili polja";
-  @override
-  String get product_purchase => "Kupiti";
-  @override
-  String get russian_far_east => "Ruski Daleki Istok";
-  @override
-  String get west_central_tropical_africa => "Zapadno-središnja tropska Afrika";
-  @override
-  String get habitat_message => "Što je oko tebe? Identificirajte stanište biljke.";
-  @override
-  String get plant_toxicity => "Toksičnost";
-  @override
-  String get offline_download_fail => "Preuzimanje nije uspjelo. Provjerite internetsku vezu ili slobodan prostor na uređaju i pokušajte ponovno.";
-  @override
-  String get snack_no_flowers => "Nema kriterija za podudaranje.";
-  @override
-  String get rate_question => "Je li ova aplikacija korisna?";
-  @override
-  String get macaronesia => "Makaronezija";
-  @override
-  String get plant_taxonomy => "Taksonomija";
-  @override
-  String get feedback_run_ads_fullscreen => "Pokaži oglas preko cijelog zaslona";
-  @override
-  String get asia_temperate => "Azija-umjerenih";
-  @override
-  String get search => "Traži...";
-  @override
-  String get habitat_rock => "stijene ili planine";
-  @override
-  String get taxonomy_superregnum => "Domena";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "Mongolija";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "Zapadna Južna Amerika";
-  @override
-  String get taxonomy_subgenus => "Subgenus";
-  @override
-  String get close => "Zatvoriti";
-  @override
-  String get europe => "Europa";
-  @override
-  String get middle_europe => "Srednja Europa";
-  @override
-  String get color_blue => "plava, ljubičasta";
-  @override
-  String get my_filter => "Moj filtar";
-  @override
-  String get southern_south_america => "Južna Južna Amerika";
-  @override
-  String get plant_habitat => "Staništa";
-  @override
-  String get snack_loading_ad => "Oglas se još uvijek učitava, ponovno pritisnite gumb.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "latica";
-  @override
-  String get petal_message => "Je li cvijet zigomorfan? Ne? Koliko latica ima?";
-  @override
-  String get color_white => "bijela";
-  @override
-  String get northeastern_usa => "Sjeveroistočni SAD";
-  @override
-  String get color_green => "zelena, smeđa, crna";
-  @override
-  String get taxonomy_ordo => "Red";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "Tihi ocean";
-  @override
-  String get plant_sources => "Izvori";
-  @override
-  String get taxonomy_regnum => "Carstvo";
-  @override
-  String get south_central_pacific => "Južno-središnji Tihi ocean";
-  @override
-  String get filter_color => "boja";
-  @override
-  String get help => "Pomoć";
-  @override
-  String get mexico => "Meksiko";
-  @override
-  String get snack_publish => "... biti objavljen kasnije";
-  @override
-  String get siberia => "Sibir";
-  @override
-  String get taxonomy_subtribus => "Podtribus";
-  @override
-  String get product_custom_filter_description => "Moći ćete promijeniti zadani redoslijed i broj filtara (boja, stanište, latica, distribucija).";
-  @override
-  String get habitat_meadow => "livade ili pašnjaci";
-  @override
-  String get plant_trivia => "Trivijalnost";
-  @override
-  String get product_purchased => "Kupljen";
-  @override
-  String get taxonomy_cladus => "(Cladus)";
-  @override
-  String get plant_herbalism => "Travarstvo";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Nastavi preuzimanje";
-  @override
-  String get enhancements => "Poboljšanja";
-  @override
-  String get habitat_wetland => "močvare";
-  @override
-  String get product_restore_purchases => "Vraćanje kupnje";
-  @override
-  String get feedback_title => "Kako pridonijeti";
-  @override
-  String get toxicity2 => "blago otrovna biljka";
-  @override
-  String get toxicity1 => "otrovna biljka";
-  @override
-  String get eastern_canada => "Istočna Kanada";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Prikaži prevedeni tekst";
-  @override
-  String get habitat_tree => "stabala ili grmova";
-  @override
-  String get settings => "Postavke";
-  @override
-  String get color_red => "crvena, roza";
-  @override
-  String get north_central_pacific => "Sjeverno-središnji Tihi ocean";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "Južna Afrika";
-  @override
-  String get always_my_region_title => "Uvijek dodajte moju regiju filtru";
-  @override
-  String get color_yellow => "žuta";
-  @override
-  String get subantarctic_islands => "Subantartički otoci";
-  @override
-  String get list_info => "Odabrati jedan";
-  @override
-  String get new_version => "Dostupna je nova verzija, ažurirajte.";
-  @override
-  String get taxonomy_subfamilia => "Potporodica";
-  @override
-  String get my_region => "Moja regija";
-  @override
-  String get pause => "Pauza";
-  @override
-  String get indian_subcontinent => "Indijski potkontinent";
-  @override
-  String get product_offline_description => "Moći ćete pokrenuti aplikaciju bez internetske veze.";
-  @override
-  String get plant_flower => "Cvijeće";
-  @override
-  String get filter_habitat => "stanište";
-  @override
-  String get rate_never => "Nikada";
-  @override
-  String get northwestern_pacific => "Sjeverozapadni Tihi ocean";
-  @override
-  String get search_names => "Pretražujte imena";
-  @override
-  String get southwestern_europe => "Jugozapadna Europa";
-  @override
-  String get taxonomy_species => "Vrsta";
-  @override
-  String get plant_fruit => "Plod";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "Porodica";
-  @override
-  String get plant_stem => "Stablo";
-  @override
-  String get antarctic_continent => "Antarktički kontinent";
-  @override
-  String get no => "Ne";
-  @override
-  String get brazil => "Brazil";
-  @override
-  String get rate_text => "Autor ove aplikacije motiviran je pozitivnim odgovorom korisnika. Molim vas, pošaljite mu neke zvijezde kroz prodavaonicu aplikacija.";
-  @override
-  String get eastern_europe => "Istočna Europa";
-  @override
-  String get south_central_usa => "Južno-središnje SAD";
-  @override
-  String get offline_download_success => "Fotografije i ilustracije uspješno su preuzete.";
-  @override
-  String get plant_flowering_from => "Cvatnje:";
-  @override
-  String get taxonomy_tribus => "Tribus";
-  @override
-  String get arabian_peninsula => "Arapski poluotok";
-  @override
-  String get search_taxonomy => "Pretražujte taksonomiju";
-  @override
-  String get rate_later => "Kasnije";
-  @override
-  String get color_message => "Koja je boja cvijeta? Odaberite najbližeg.";
-  @override
-  String get west_tropical_africa => "Zapadna tropska Afrika";
-  @override
-  String get northern_europe => "Sjeverna Europa";
-  @override
-  String get rate => "Recenzije";
-  @override
-  String get northeast_tropical_africa => "Sjeveroistočna tropska Afrika";
-  @override
-  String get pref_language => "Preferirani jezik";
-  @override
-  String get product_custom_filter_title => "Prilagođeni filtar";
-  @override
-  String get new_zealand => "Novi Zeland";
-  @override
-  String get feedback_intro => "Doprinosili ste ovoj aplikaciji jer ste je instalirali na svom uređaju, hvala. Ako tražite nešto više, evo nekoliko opcija:";
-  @override
-  String get filter_distribution => "distribucija";
-  @override
-  String get eastern_asia => "Istočna Azija";
-  @override
-  String get western_asia => "Zapadna Azija";
-  @override
-  String get subarctic_america => "Subarktička Amerika";
-  @override
-  String get product_search_title => "Pretražujte imena ili taksonomiju";
-  @override
-  String get feedback_buy_extended => "Možete kupiti proširenu verziju s dodatnim funkcijama kao što je izvanmrežni način rada, tražiti imena, pretraživati u taksonomiji, promatrati i konfigurirati filtar.";
-  @override
-  String get north_central_usa => "Sjeverno središnje SAD";
-  @override
-  String get improve_translation => "Poboljšati prevođenje";
-  @override
-  String get feedback_review => "Možete napisati pozitivnu recenziju.";
-  @override
-  String get southeastern_usa => "Jugoistočni SAD";
-  @override
-  String get yes => "Da";
-  @override
-  String get feedback_run_ads_video => "Pogledajte video oglas";
-  @override
-  String get plant_height_from => "Visina:";
-  @override
-  String get petal_many => "više od 5";
-  @override
-  String get southeastern_europe => "Jugoistočna Europa";
-  @override
-  String get taxonomy_unknown => "nepoznat";
-  @override
-  String get plant_inflorescence => "Cvat";
-  @override
-  String get northern_africa => "Sjeverna Afrika";
-  @override
-  String get offline_subtitle => "zahtijeva dodatni prostor od 300+ MB.";
-  @override
-  String get china => "Kina";
-  @override
-  String get product_no_ads_title => "Nema neželjenog oglasa";
-  @override
-  String get offline_title => "Izvanmrežni način";
-  @override
-  String get taxonomy_genus => "Rod";
-  @override
-  String get papuasia => "Papuazija";
-  @override
-  String get feedback_submit_translate_app => "Poboljšajte oznake programa";
-}
-
-class $lv extends S {
-  const $lv();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Centrālamerika";
-  @override
-  String get legend => "Leģenda";
-  @override
-  String get product_offline_title => "Bezsaistes režīms";
-  @override
-  String get feedback_submit_translate_data => "Uzlabojiet ziedu datus";
-  @override
-  String get snack_copy => "Kopēts uz starpliktuvi";
-  @override
-  String get product_purchase_failed => "Pirkums neizdevās";
-  @override
-  String get about => "Par lietojumprogrammu";
-  @override
-  String get product_no_ads_description => "Pieteikums neparādīs reklāmas reklāmkarogu ekrāna apakšā.";
-  @override
-  String get offline_download_progress => "Fotoattēlu un ilustrāciju lejupielāde ...";
-  @override
-  String get western_canada => "Rietumu Kanāda";
-  @override
-  String get northern_america => "Ziemeļamerika";
-  @override
-  String get western_indian_ocean => "Indijas okeāna rietumi";
-  @override
-  String get feedback => "Atsauksmes";
-  @override
-  String get southwestern_usa => "Dienvidrietumu ASV";
-  @override
-  String get distribution_message => "Kuram ģeogrāfiskajam apgabalam vajadzētu koncentrēties?";
-  @override
-  String get caribbean => "Karību jūras reģions";
-  @override
-  String get product_search_description => "Jūs varēsiet atrast ziedu ar savu latviešu vai latīņu vārdu vai taksonu (piemēram, Rinda, Dzimta, Ģints).";
-  @override
-  String get offline_delete_message => "Vai vēlaties dzēst bezsaistes datus?";
-  @override
-  String get australasia => "Austrālāzija";
-  @override
-  String get petal_4 => "4 arba mažiau";
-  @override
-  String get east_tropical_africa => "Austrumu tropu Āfrika";
-  @override
-  String get africa => "Āfrika";
-  @override
-  String get south_tropical_africa => "Dienvidu tropu Āfrika";
-  @override
-  String get caucasus => "Kaukāzs";
-  @override
-  String get middle_asia => "Vidusāzija";
-  @override
-  String get plant_gallery => "Galerija";
-  @override
-  String get always_my_region_subtitle => "Jūsu reģions tiks iestatīts uz filtru";
-  @override
-  String get indochina => "Indo Ķīna";
-  @override
-  String get feedback_translate => "Jūs varat ziņot par atrasto kļūdu vai kļūdu vai iesniegt jaunu tulkojumu savā valodā.";
-  @override
-  String get australia => "Austrālija";
-  @override
-  String get google_translate => "Tulkots ar Google Translate";
-  @override
-  String get plant_leaf => "Lapas";
-  @override
-  String get habitat_forest => "miškai";
-  @override
-  String get taxonomy_serie => "Sērija";
-  @override
-  String get malesia => "Malaizija";
-  @override
-  String get southwestern_pacific => "Klusā okeāna dienvidrietumu daļa";
-  @override
-  String get asia_tropical => "Āzija Tropisks";
-  @override
-  String get northwestern_usa => "Ziemeļrietumu ASV";
-  @override
-  String get northern_south_america => "Ziemeļu Dienvidamerika";
-  @override
-  String get show_original => "Rādīt angļu valodā";
-  @override
-  String get offline_download_message => "Jūs lejupielādēsiet 300+ MB fotogrāfijas un ilustrācijas. Lūdzu, pārbaudiet, vai ierīce ir savienota ar Wi-Fi. Vai esat gatavs lejupielādei?";
-  @override
-  String get southern_america => "Dienvidamerika";
-  @override
-  String get middle_atlantic_ocean => "Viduvie Atlantijas okeāns";
-  @override
-  String get feedback_run_ads => "Jūs varat parādīt pilnekrāna reklāmu vai skatīties video reklāmu, lai atbalstītu turpmāku attīstību un datu bāzes uzlabošanu.";
-  @override
-  String get habitat_garden => "sodai ar laukai";
-  @override
-  String get product_purchase => "Pirkt";
-  @override
-  String get russian_far_east => "Krievu Tālajos Austrumos";
-  @override
-  String get west_central_tropical_africa => "Rietumu centrālā tropu afrika";
-  @override
-  String get habitat_message => "Kas ir ap jums? Identificēt auga dzīvotni.";
-  @override
-  String get plant_toxicity => "Toksiskums";
-  @override
-  String get offline_download_fail => "Lejupielāde neizdevās. Lūdzu, pārbaudiet interneta savienojumu vai brīvo vietu ierīcē un mēģiniet vēlreiz.";
-  @override
-  String get snack_no_flowers => "Nav ziedu atbilstības kritēriju.";
-  @override
-  String get rate_question => "Vai šī app noderīga?";
-  @override
-  String get macaronesia => "Makaronēzija";
-  @override
-  String get plant_taxonomy => "Taksonomija";
-  @override
-  String get feedback_run_ads_fullscreen => "Rādīt pilnekrāna reklāmu";
-  @override
-  String get asia_temperate => "Āzija Viduslaiku";
-  @override
-  String get search => "Meklēt...";
-  @override
-  String get habitat_rock => "uolienos ar kalnai";
-  @override
-  String get taxonomy_superregnum => "Impērija";
-  @override
-  String get taxonomy_sectio => "Sekcija";
-  @override
-  String get mongolia => "Mongolija";
-  @override
-  String get taxonomy_subserie => "Apakšsērija";
-  @override
-  String get western_south_america => "Rietumu Dienvidamerika";
-  @override
-  String get taxonomy_subgenus => "Apakšģints";
-  @override
-  String get close => "Aizvērt";
-  @override
-  String get europe => "Eiropa";
-  @override
-  String get middle_europe => "Vidēja Eiropa";
-  @override
-  String get color_blue => "mėlyna, violetinė";
-  @override
-  String get my_filter => "Mans filtrs";
-  @override
-  String get southern_south_america => "Dienvidamerika dienvidos";
-  @override
-  String get plant_habitat => "Izplatības areāls";
-  @override
-  String get snack_loading_ad => "Reklāma joprojām tiek ielādēta, vēlreiz nospiediet pogu.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "ziedlapiņa";
-  @override
-  String get petal_message => "Vai ziedu neregulāra? Nē? Tad cik ziedlapiņas tas ir?";
-  @override
-  String get color_white => "baltas";
-  @override
-  String get northeastern_usa => "Ziemeļaustrumu ASV";
-  @override
-  String get color_green => "žalia, ruda, juoda";
-  @override
-  String get taxonomy_ordo => "Rinda";
-  @override
-  String get taxonomy_supersectio => "Virssekcija";
-  @override
-  String get pacific => "Klusais okeāns";
-  @override
-  String get plant_sources => "Pirmsākums";
-  @override
-  String get taxonomy_regnum => "Valsts";
-  @override
-  String get south_central_pacific => "Klusā okeāna dienvidu daļa";
-  @override
-  String get filter_color => "krāsa";
-  @override
-  String get help => "Palīdzība";
-  @override
-  String get mexico => "Meksika";
-  @override
-  String get snack_publish => "... publicēt vēlāk";
-  @override
-  String get siberia => "Sibīrija";
-  @override
-  String get taxonomy_subtribus => "Apakšcilts";
-  @override
-  String get product_custom_filter_description => "Jūs varēsiet mainīt noklusējuma secību un filtru skaitu (krāsa, biotopa, ziedlapiņa, izplatīšana).";
-  @override
-  String get habitat_meadow => "pievas ar pievos";
-  @override
-  String get plant_trivia => "Nieki";
-  @override
-  String get product_purchased => "Legādāts";
-  @override
-  String get taxonomy_cladus => "(clade)";
-  @override
-  String get plant_herbalism => "Herbalism";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Atsākt lejupielādi";
-  @override
-  String get enhancements => "Uzlabojumi";
-  @override
-  String get habitat_wetland => "šlapžemės";
-  @override
-  String get product_restore_purchases => "Atjaunot pirkumus";
-  @override
-  String get feedback_title => "Kā piedalīties";
-  @override
-  String get toxicity2 => "nedaudz indīgs augs";
-  @override
-  String get toxicity1 => "indīgs augs";
-  @override
-  String get eastern_canada => "Austrumu Kanāda";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Rādīt tulkoto tekstu";
-  @override
-  String get habitat_tree => "medžiai ar krūmai";
-  @override
-  String get settings => "Iestatījumi";
-  @override
-  String get color_red => "raudona, rožinė";
-  @override
-  String get north_central_pacific => "Klusā okeāna ziemeļu daļa";
-  @override
-  String get taxonomy_subsectio => "Apakšsekcija";
-  @override
-  String get southern_africa => "Dienvidāfrika";
-  @override
-  String get always_my_region_title => "Vienmēr pievienojiet manu reģionu filtram";
-  @override
-  String get color_yellow => "geltonas";
-  @override
-  String get subantarctic_islands => "Subantkartiskas salas";
-  @override
-  String get list_info => "Izvēlēties vienu";
-  @override
-  String get new_version => "Ir pieejama jauna versija, lūdzu, atjauniniet to.";
-  @override
-  String get taxonomy_subfamilia => "Apakšdzimta";
-  @override
-  String get my_region => "Mans reģions";
-  @override
-  String get pause => "Pauze";
-  @override
-  String get indian_subcontinent => "Indijas subkontinents";
-  @override
-  String get product_offline_description => "Jūs varēsiet palaist programmu bez interneta pieslēguma.";
-  @override
-  String get plant_flower => "Zieds";
-  @override
-  String get filter_habitat => "biotopi";
-  @override
-  String get rate_never => "Nekad";
-  @override
-  String get northwestern_pacific => "Klusā okeāna ziemeļrietumu daļa";
-  @override
-  String get search_names => "Meklēt vārdos";
-  @override
-  String get southwestern_europe => "Dienvidrietumu Eiropa";
-  @override
-  String get taxonomy_species => "Suga";
-  @override
-  String get plant_fruit => "Auglis";
-  @override
-  String get plant_flowering_to => "līdz";
-  @override
-  String get taxonomy_familia => "Dzimta";
-  @override
-  String get plant_stem => "Stumbrs";
-  @override
-  String get antarctic_continent => "Antarktikas kontinents";
-  @override
-  String get no => "Nē";
-  @override
-  String get brazil => "Brazīlija";
-  @override
-  String get rate_text => "Šī pieteikuma autors ir motivēts ar pozitīvu lietotāju atbildi. Lūdzu, sūtiet viņam dažas zvaigznes, izmantojot lietojumprogrammu veikalu.";
-  @override
-  String get eastern_europe => "Austrumeiropa";
-  @override
-  String get south_central_usa => "Dienvidu ASV";
-  @override
-  String get offline_download_success => "Fotogrāfijas un ilustrācijas ir veiksmīgi lejupielādētas.";
-  @override
-  String get plant_flowering_from => "Ziedēšanas no";
-  @override
-  String get taxonomy_tribus => "Cilts";
-  @override
-  String get arabian_peninsula => "Arābijas pussala";
-  @override
-  String get search_taxonomy => "Meklēt taksonomijā";
-  @override
-  String get rate_later => "Vēlāk";
-  @override
-  String get color_message => "Kas ir krāsa ziedu? Izvēlieties tuvāko.";
-  @override
-  String get west_tropical_africa => "Rietumu tropu Āfrika";
-  @override
-  String get northern_europe => "Ziemeļeiropa";
-  @override
-  String get rate => "Pārskats";
-  @override
-  String get northeast_tropical_africa => "Ziemeļaustrumu tropu Āfrika";
-  @override
-  String get pref_language => "Pageidautina kalba";
-  @override
-  String get product_custom_filter_title => "Pielāgots filtrs";
-  @override
-  String get new_zealand => "Jaunzēlande";
-  @override
-  String get feedback_intro => "Jūs esat veicinājis šo lietojumprogrammu, jo esat to instalējis savā ierīcē. Ja jūs meklējat kaut ko vairāk, šeit ir dažas iespējas:";
-  @override
-  String get filter_distribution => "izplatīšana";
-  @override
-  String get eastern_asia => "Austrumāzija";
-  @override
-  String get western_asia => "Rietumu Āzija";
-  @override
-  String get subarctic_america => "Subartikā Amerika";
-  @override
-  String get product_search_title => "Meklēt nosaukumos vai taksonomijā";
-  @override
-  String get feedback_buy_extended => "Jūs varat iegādāties paplašinātu versiju ar papildu funkcionalitāti, piemēram, bezsaistes režīmā, meklēt nosaukumos, meklēt taksonomijā, novērojumos un konfigurējamajā filtrā.";
-  @override
-  String get north_central_usa => "Ziemeļu ASV";
-  @override
-  String get improve_translation => "Uzlabot tulkojumu";
-  @override
-  String get feedback_review => "Jūs varat uzrakstīt pozitīvu pārskatu.";
-  @override
-  String get southeastern_usa => "Dienvidaustrumu ASV";
-  @override
-  String get yes => "Jā";
-  @override
-  String get feedback_run_ads_video => "Skatiet video reklāmu";
-  @override
-  String get plant_height_from => "Augstums";
-  @override
-  String get petal_many => "daugiau nei 5";
-  @override
-  String get southeastern_europe => "Dienvidaustrumeiropa";
-  @override
-  String get taxonomy_unknown => "nezināms";
-  @override
-  String get plant_inflorescence => "Ziedkopa";
-  @override
-  String get northern_africa => "Ziemeļāfrika";
-  @override
-  String get offline_subtitle => "nepieciešama 300+ MB papildu telpa.";
-  @override
-  String get china => "Ķīna";
-  @override
-  String get product_no_ads_title => "Nav nevēlamas reklāmas";
-  @override
-  String get offline_title => "Bezsaistes režīms";
-  @override
-  String get petal_zygomorphic => "nereguliarus";
-  @override
-  String get taxonomy_genus => "Ģints";
-  @override
-  String get papuasia => "Papuāzija";
-  @override
-  String get feedback_submit_translate_app => "Uzlabojiet lietojumprogrammas uzlīmes";
-}
-
-class $fr extends S {
-  const $fr();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Amérique centrale";
-  @override
-  String get legend => "Légende";
-  @override
-  String get product_offline_title => "Mode hors-ligne";
-  @override
-  String get feedback_submit_translate_data => "Améliorer les données de la fleur";
-  @override
-  String get snack_copy => "Copié dans le presse-papier";
-  @override
-  String get product_purchase_failed => "Achat raté";
-  @override
-  String get about => "À propos";
-  @override
-  String get product_no_ads_description => "L'application ne montre pas la bannière de publicité au bas de l'écran.";
-  @override
-  String get offline_download_progress => "Téléchargement de photos et d'illustrations ...";
-  @override
-  String get western_canada => "Ouest canadien";
-  @override
-  String get northern_america => "Amérique du Nord";
-  @override
-  String get western_indian_ocean => "Océan Indien occidental";
-  @override
-  String get feedback => "Retour d'information";
-  @override
-  String get southwestern_usa => "Sud-Ouest des États-Unis";
-  @override
-  String get distribution_message => "Sur quelle zone géographique se concentrer?";
-  @override
-  String get caribbean => "Caraïbes";
-  @override
-  String get product_search_description => "Vous pourrez trouver une fleur par son nom français ou latin ou par son taxon (ordre, famille, genre, par exemple).";
-  @override
-  String get offline_delete_message => "Voulez-vous supprimer les données hors connexion?";
-  @override
-  String get australasia => "Australasie";
-  @override
-  String get petal_4 => "4 ou moins";
-  @override
-  String get east_tropical_africa => "Afrique tropicale de l'Est";
-  @override
-  String get africa => "Afrique";
-  @override
-  String get south_tropical_africa => "Afrique tropicale du Sud";
-  @override
-  String get caucasus => "Caucase";
-  @override
-  String get middle_asia => "Asie moyenne";
-  @override
-  String get plant_gallery => "Galerie";
-  @override
-  String get always_my_region_subtitle => "Votre région sera pré-réglée sur le filtre";
-  @override
-  String get indochina => "Indochine";
-  @override
-  String get feedback_translate => "Vous pouvez signaler toute erreur de frappe ou erreur que vous avez trouvée ou vous envoyer une nouvelle traduction dans votre langue.";
-  @override
-  String get australia => "Australie";
-  @override
-  String get google_translate => "Traduit avec Google Translate";
-  @override
-  String get plant_leaf => "Feuilles";
-  @override
-  String get habitat_forest => "bois ou forêts";
-  @override
-  String get taxonomy_serie => "Série";
-  @override
-  String get malesia => "Malaisie";
-  @override
-  String get southwestern_pacific => "Pacifique sud-ouest";
-  @override
-  String get asia_tropical => "Asie-tropicale";
-  @override
-  String get northwestern_usa => "Nord-Ouest des États-Unis";
-  @override
-  String get northern_south_america => "Nord de l'Amérique du Sud";
-  @override
-  String get show_original => "Afficher le texte en anglais";
-  @override
-  String get offline_download_message => "Vous allez télécharger plus de 300 Mo de photos et d'illustrations. Veuillez vérifier si votre appareil est connecté au wi-fi. Êtes-vous prêt pour un téléchargement?";
-  @override
-  String get southern_america => "Amérique du Sud";
-  @override
-  String get middle_atlantic_ocean => "Moyen océan Atlantique";
-  @override
-  String get feedback_run_ads => "Vous pouvez afficher une publicité en plein écran ou regarder une publicité vidéo pour prendre en charge le développement et l'amélioration de la base de données.";
-  @override
-  String get habitat_garden => "jardins ou champs";
-  @override
-  String get product_purchase => "Acheter";
-  @override
-  String get russian_far_east => "Extrême-Orient russe";
-  @override
-  String get west_central_tropical_africa => "Afrique tropicale ouest-centrale";
-  @override
-  String get habitat_message => "Ce qui est autour de vous? Identifier l'habitat de la fleur.";
-  @override
-  String get plant_toxicity => "Toxicité";
-  @override
-  String get offline_download_fail => "Échec du téléchargement. Vérifiez votre connexion Internet ou l'espace disponible sur votre appareil, puis réessayez.";
-  @override
-  String get snack_no_flowers => "Aucune fleur ne correspond aux critères.";
-  @override
-  String get rate_question => "Cette application est-elle utile?";
-  @override
-  String get macaronesia => "Macaronésie";
-  @override
-  String get plant_taxonomy => "Taxonomie";
-  @override
-  String get feedback_run_ads_fullscreen => "Afficher une publicité en plein écran";
-  @override
-  String get asia_temperate => "Asie-tempérée";
-  @override
-  String get search => "Chercher...";
-  @override
-  String get habitat_rock => "roches ou montagnes";
-  @override
-  String get taxonomy_superregnum => "Domaine";
-  @override
-  String get taxonomy_sectio => "Section";
-  @override
-  String get mongolia => "Mongolie";
-  @override
-  String get taxonomy_subserie => "Sous-série";
-  @override
-  String get western_south_america => "Ouest de l'Amérique du Sud";
-  @override
-  String get taxonomy_subgenus => "Sous-genre";
-  @override
-  String get close => "Sortie";
-  @override
-  String get europe => "Europe";
-  @override
-  String get middle_europe => "Moyen-Europe";
-  @override
-  String get color_blue => "bleu, violet";
-  @override
-  String get my_filter => "Mon filtre";
-  @override
-  String get southern_south_america => "Sud de l'Amérique du Sud";
-  @override
-  String get plant_habitat => "Habitat";
-  @override
-  String get snack_loading_ad => "L’annonce est toujours en cours de chargement, appuyez à nouveau sur le bouton.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "pétale";
-  @override
-  String get petal_message => "Est-ce que la fleur est zygomorphie? Non? Alors combien de pétales a t'elle?";
-  @override
-  String get color_white => "blanc";
-  @override
-  String get northeastern_usa => "Nord-est des États-Unis";
-  @override
-  String get color_green => "vert, brun, noir";
-  @override
-  String get taxonomy_ordo => "Ordre";
-  @override
-  String get taxonomy_supersectio => "Super-section";
-  @override
-  String get pacific => "Pacifique";
-  @override
-  String get plant_sources => "Sources";
-  @override
-  String get taxonomy_regnum => "Règne";
-  @override
-  String get south_central_pacific => "Pacifique sud-central";
-  @override
-  String get filter_color => "couleur";
-  @override
-  String get help => "Aide";
-  @override
-  String get mexico => "Mexique";
-  @override
-  String get snack_publish => "... à publier plus tard";
-  @override
-  String get siberia => "Sibérie";
-  @override
-  String get taxonomy_subtribus => "Sous-tribu";
-  @override
-  String get product_custom_filter_description => "Vous pourrez modifier l'ordre et le nombre de filtres par défaut (couleur, habitat, pétale, distribution).";
-  @override
-  String get habitat_meadow => "prés ou prairies";
-  @override
-  String get plant_trivia => "Bagatelles";
-  @override
-  String get product_purchased => "Acheté(e)";
-  @override
-  String get taxonomy_cladus => "(clade)";
-  @override
-  String get plant_herbalism => "Herboristerie";
-  @override
-  String get plant_height_to => "et";
-  @override
-  String get offline_download => "Reprendre le téléchargement";
-  @override
-  String get enhancements => "Améliorations";
-  @override
-  String get habitat_wetland => "bruyères ou zones humides";
-  @override
-  String get product_restore_purchases => "Restaurer les achats";
-  @override
-  String get feedback_title => "Contribution";
-  @override
-  String get toxicity2 => "plante légèrement toxique";
-  @override
-  String get toxicity1 => "plante toxique";
-  @override
-  String get eastern_canada => "Est du Canada";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Afficher le texte traduit";
-  @override
-  String get habitat_tree => "arbres ou arbustes";
-  @override
-  String get settings => "Paramètres";
-  @override
-  String get color_red => "rouge, rose";
-  @override
-  String get north_central_pacific => "Pacifique Nord-Centre";
-  @override
-  String get taxonomy_subsectio => "Sous-section";
-  @override
-  String get southern_africa => "Afrique du sud";
-  @override
-  String get always_my_region_title => "Toujours ajouter ma région au filtre";
-  @override
-  String get color_yellow => "jaune";
-  @override
-  String get subantarctic_islands => "Îles subantarctiques";
-  @override
-  String get list_info => "Sélectionnez en une";
-  @override
-  String get new_version => "Nouvelle version est disponible, s'il vous plaît mettre à jour.";
-  @override
-  String get taxonomy_subfamilia => "Sous-famille";
-  @override
-  String get my_region => "Ma région";
-  @override
-  String get pause => "Pause";
-  @override
-  String get indian_subcontinent => "Sous-continent indien";
-  @override
-  String get product_offline_description => "Vous pourrez exécuter une application sans connexion Internet.";
-  @override
-  String get plant_flower => "Fleurs";
-  @override
-  String get filter_habitat => "habitat";
-  @override
-  String get rate_never => "Jamais";
-  @override
-  String get northwestern_pacific => "Pacifique Nord-Ouest";
-  @override
-  String get search_names => "Chercher dans les noms";
-  @override
-  String get southwestern_europe => "Europe du sud-ouest";
-  @override
-  String get taxonomy_species => "Espèce";
-  @override
-  String get plant_fruit => "Fruits";
-  @override
-  String get plant_flowering_to => "à";
-  @override
-  String get taxonomy_familia => "Famille";
-  @override
-  String get plant_stem => "Tige";
-  @override
-  String get antarctic_continent => "Continent de l'Antarctique";
-  @override
-  String get no => "Non";
-  @override
-  String get brazil => "Brésil";
-  @override
-  String get rate_text => "L'auteur de cette application est motivé par les réponses positives des utilisateurs. S'il vous plaît, envoyez lui quelques fleurs étoiles à travers le magasin d'applications.";
-  @override
-  String get eastern_europe => "Europe de l'Est";
-  @override
-  String get south_central_usa => "Sud-Central des États-Unis";
-  @override
-  String get offline_download_success => "Les photos et illustrations ont été téléchargées avec succès.";
-  @override
-  String get plant_flowering_from => "Floraison de";
-  @override
-  String get taxonomy_tribus => "Tribu";
-  @override
-  String get arabian_peninsula => "Arabie";
-  @override
-  String get search_taxonomy => "Chercher en taxonomie";
-  @override
-  String get rate_later => "Plus tard";
-  @override
-  String get color_message => "Quelle est la couleur des fleurs? Sélectionnez la couleur la plus proche.";
-  @override
-  String get west_tropical_africa => "Afrique tropicale de l'Ouest";
-  @override
-  String get northern_europe => "Europe du Nord";
-  @override
-  String get rate => "Avis";
-  @override
-  String get northeast_tropical_africa => "Afrique tropicale du nord-est";
-  @override
-  String get pref_language => "Préférence de langue";
-  @override
-  String get product_custom_filter_title => "Filtre personnalisé";
-  @override
-  String get new_zealand => "Nouvelle-Zélande";
-  @override
-  String get feedback_intro => "Vous avez contribué à cette application car vous l'avez installé sur votre appareil, merci. Si vous cherchez quelque chose de plus, voici quelques options:";
-  @override
-  String get filter_distribution => "distribution";
-  @override
-  String get eastern_asia => "Asie de l'Est";
-  @override
-  String get western_asia => "Asie occidentale";
-  @override
-  String get subarctic_america => "Amérique subarctique";
-  @override
-  String get product_search_title => "Chercher dans les noms ou la taxonomie";
-  @override
-  String get feedback_buy_extended => "Vous pouvez acheter la version étendue avec des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche dans les noms, la recherche dans la taxonomie, les observations et le filtre configurable.";
-  @override
-  String get north_central_usa => "Nord-Central des États-Unis";
-  @override
-  String get improve_translation => "Améliorer la traduction";
-  @override
-  String get feedback_review => "Vous pouvez écrire une critique positive.";
-  @override
-  String get southeastern_usa => "Sud-est des États-Unis";
-  @override
-  String get yes => "Oui";
-  @override
-  String get feedback_run_ads_video => "Regarder une publicité vidéo";
-  @override
-  String get plant_height_from => "Hauteur entre";
-  @override
-  String get petal_many => "plus de 5";
-  @override
-  String get southeastern_europe => "Europe du sud-est";
-  @override
-  String get taxonomy_unknown => "inconnu";
-  @override
-  String get plant_inflorescence => "Inflorescence";
-  @override
-  String get northern_africa => "Afrique du Nord";
-  @override
-  String get offline_subtitle => "nécessite plus de 300+ MB d'espace.";
-  @override
-  String get china => "Chine";
-  @override
-  String get product_no_ads_title => "Pas de publicité indésirable";
-  @override
-  String get offline_title => "Mode hors-ligne";
-  @override
-  String get petal_zygomorphic => "zygomorphie";
-  @override
-  String get taxonomy_genus => "Genre";
-  @override
-  String get papuasia => "Papuasie";
-  @override
-  String get feedback_submit_translate_app => "Améliorer les étiquettes de l'application";
-}
-
-class $hu extends S {
-  const $hu();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Közép-Amerika";
-  @override
-  String get legend => "Jelmagyarázat";
-  @override
-  String get product_offline_title => "Offline módban";
-  @override
-  String get feedback_submit_translate_data => "Javítani kell a virágadatokat";
-  @override
-  String get snack_copy => "A vágólapra másolt";
-  @override
-  String get product_purchase_failed => "A vásárlás nem sikerült";
-  @override
-  String get about => "Az alkalmazásról";
-  @override
-  String get product_no_ads_description => "Az alkalmazás nem jeleníti meg a hirdetés bannerjét a képernyő alján.";
-  @override
-  String get offline_download_progress => "Fényképek és illusztrációk letöltése ...";
-  @override
-  String get western_canada => "Nyugat-Kanada";
-  @override
-  String get northern_america => "Észak-Amerika";
-  @override
-  String get western_indian_ocean => "Nyugati Indiai-óceán";
-  @override
-  String get feedback => "Visszajelzés küldése / Hozzájárulás";
-  @override
-  String get southwestern_usa => "Délnyugati USA";
-  @override
-  String get distribution_message => "Melyik földrajzi területre kell összpontosítania?";
-  @override
-  String get caribbean => "Karib";
-  @override
-  String get product_search_description => "A virágot a magyar vagy latin nevével vagy taxonnal (például rend, család, nemzetség) találhatja meg.";
-  @override
-  String get offline_delete_message => "Törli az offline adatokat?";
-  @override
-  String get australasia => "Ausztrália";
-  @override
-  String get petal_4 => "4 vagy kevesebb";
-  @override
-  String get east_tropical_africa => "Kelet-trópusi Afrika";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get south_tropical_africa => "Dél-Trópusi Afrika";
-  @override
-  String get caucasus => "Kaukázus";
-  @override
-  String get middle_asia => "Közép-Ázsia";
-  @override
-  String get plant_gallery => "Képtár";
-  @override
-  String get always_my_region_subtitle => "Az Ön régiója előre lesz beállítva a szűrőre";
-  @override
-  String get indochina => "Indokína";
-  @override
-  String get feedback_translate => "Bármelyik hibát vagy hibát észlelhet, vagy új fordítást nyújthat be az ön nyelvén.";
-  @override
-  String get australia => "Ausztrália";
-  @override
-  String get google_translate => "Lefordítva a Google Translate";
-  @override
-  String get plant_leaf => "Levelek";
-  @override
-  String get habitat_forest => "erdők";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "Malesia";
-  @override
-  String get southwestern_pacific => "Dél-Nyugat Csendes-óceán";
-  @override
-  String get asia_tropical => "Ázsia trópusi";
-  @override
-  String get northwestern_usa => "Északnyugati USA";
-  @override
-  String get northern_south_america => "Észak-Dél-Amerika";
-  @override
-  String get show_original => "Megjelenítése angol szöveg";
-  @override
-  String get offline_download_message => "300+ MB fotót és illusztrációkat tölthet le. Ellenőrizze, hogy a készülék wi-fi-hez van-e csatlakoztatva. Készen állsz a letöltésre?";
-  @override
-  String get southern_america => "Dél-Amerika";
-  @override
-  String get middle_atlantic_ocean => "Közép-Atlanti-óceán";
-  @override
-  String get feedback_run_ads => "Megjelenítheti a teljes képernyős hirdetést vagy a videohirdetést, hogy támogassa a további fejlesztéseket és az adatbázis-fejlesztést.";
-  @override
-  String get habitat_garden => "kertek vagy mezők";
-  @override
-  String get product_purchase => "Vásárol";
-  @override
-  String get russian_far_east => "Orosz távol-keleten";
-  @override
-  String get west_central_tropical_africa => "Nyugat-Közép-Trópusi Afrika";
-  @override
-  String get habitat_message => "Mi veszi körül? Határozza meg a növény élőhelyét.";
-  @override
-  String get plant_toxicity => "Méregtartalom";
-  @override
-  String get offline_download_fail => "Sikertelen letöltés. Kérjük, ellenőrizze az internetkapcsolatot vagy a szabad helyet az eszközön, és próbálja újra.";
-  @override
-  String get snack_no_flowers => "Nincsenek virág illeszkedési feltételek.";
-  @override
-  String get rate_question => "Ez az alkalmazás hasznos?";
-  @override
-  String get macaronesia => "Makaronézia";
-  @override
-  String get plant_taxonomy => "Taxonómia";
-  @override
-  String get feedback_run_ads_fullscreen => "Teljes képernyős hirdetés megjelenítése";
-  @override
-  String get asia_temperate => "Ázsia mérsékelt";
-  @override
-  String get search => "Keresés...";
-  @override
-  String get habitat_rock => "sziklák vagy hegyek";
-  @override
-  String get taxonomy_superregnum => "Domén";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "Mongólia";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "Nyugat-Dél-Amerika";
-  @override
-  String get taxonomy_subgenus => "Subgenus";
-  @override
-  String get close => "Bezár";
-  @override
-  String get europe => "Európa";
-  @override
-  String get middle_europe => "Közép-Európa";
-  @override
-  String get color_blue => "kék, lila";
-  @override
-  String get my_filter => "Saját szűrőm";
-  @override
-  String get southern_south_america => "Dél-Dél-Amerika";
-  @override
-  String get plant_habitat => "Élettér";
-  @override
-  String get snack_loading_ad => "A hirdetés még mindig betöltődik, nyomja meg újra a gombot.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "párta";
-  @override
-  String get petal_message => "A virág szimmetriája kétoldali (zigomorf)? Nem? Akkor hány sziromlevele van?";
-  @override
-  String get color_white => "fehér";
-  @override
-  String get northeastern_usa => "Északkelet USA";
-  @override
-  String get color_green => "zöld, barna, fekete";
-  @override
-  String get taxonomy_ordo => "Rend";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "Csendes-óceán";
-  @override
-  String get plant_sources => "Források";
-  @override
-  String get taxonomy_regnum => "Ország";
-  @override
-  String get south_central_pacific => "Dél-Közép Csendes-óceán";
-  @override
-  String get filter_color => "szín";
-  @override
-  String get help => "Súgó";
-  @override
-  String get mexico => "Mexikó";
-  @override
-  String get snack_publish => "... később közzé kell tenni";
-  @override
-  String get siberia => "Szibéria";
-  @override
-  String get taxonomy_subtribus => "Alnemzetségcsoport";
-  @override
-  String get product_custom_filter_description => "Meg tudod változtatni az alapértelmezett sorrendet és a szűrők számát (szín, élettér, párta, terjesztés).";
-  @override
-  String get habitat_meadow => "rétek vagy legelők";
-  @override
-  String get plant_trivia => "Apróságok";
-  @override
-  String get product_purchased => "Vásárolt";
-  @override
-  String get taxonomy_cladus => "Csoport";
-  @override
-  String get plant_herbalism => "Gyógynövények";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "A letöltés folytatása";
-  @override
-  String get enhancements => "Fejlesztések";
-  @override
-  String get habitat_wetland => "mocsarak vagy vizes élőhelyek";
-  @override
-  String get product_restore_purchases => "Vásárlás visszaállítása";
-  @override
-  String get feedback_title => "Hogyan járulhat hozzá";
-  @override
-  String get toxicity2 => "enyhén mérgező növény";
-  @override
-  String get toxicity1 => "mérgező növény";
-  @override
-  String get eastern_canada => "Kelet-Kanada";
-  @override
-  String get plant_info => "Infó";
-  @override
-  String get show_translation => "Fordított szöveg megjelenítése";
-  @override
-  String get habitat_tree => "fák vagy cserjék";
-  @override
-  String get settings => "Beállítások";
-  @override
-  String get color_red => "piros, rózsaszín";
-  @override
-  String get north_central_pacific => "Észak-Közép Csendes-óceán";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "Dél-Afrika";
-  @override
-  String get always_my_region_title => "Mindig adjon hozzá régiót a szűrőhöz";
-  @override
-  String get color_yellow => "sárga";
-  @override
-  String get subantarctic_islands => "Szubantarktikai szigetek";
-  @override
-  String get list_info => "Válasszon egyet";
-  @override
-  String get new_version => "Új verzió elérhető, kérjük, frissítse.";
-  @override
-  String get taxonomy_subfamilia => "Alcsalád";
-  @override
-  String get my_region => "Saját régió";
-  @override
-  String get pause => "Szünet";
-  @override
-  String get indian_subcontinent => "Indiai szubkontinens";
-  @override
-  String get product_offline_description => "Internetes kapcsolat nélkül is futtathatja az alkalmazást.";
-  @override
-  String get plant_flower => "Virágok";
-  @override
-  String get filter_habitat => "élettér";
-  @override
-  String get rate_never => "Soha";
-  @override
-  String get northwestern_pacific => "Észak-nyugat Csendes-óceán";
-  @override
-  String get search_names => "Keresés a nevekben";
-  @override
-  String get southwestern_europe => "Délnyugat Európa";
-  @override
-  String get taxonomy_species => "Faj";
-  @override
-  String get plant_fruit => "Gyümölcsök";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "Család";
-  @override
-  String get plant_stem => "Szár";
-  @override
-  String get antarctic_continent => "Antarktiszi kontinens";
-  @override
-  String get no => "Nem";
-  @override
-  String get brazil => "Brazília";
-  @override
-  String get rate_text => "A szerző a pozitív visszajelzésekből dolgozik. A alkalmazás tároló-on keresztül csillagzással értékelheti/támogathatja a munkáját.";
-  @override
-  String get eastern_europe => "Kelet-Európa";
-  @override
-  String get south_central_usa => "Dél-Közép USA";
-  @override
-  String get offline_download_success => "A fényképek és illusztrációk sikeresen letöltöttek.";
-  @override
-  String get plant_flowering_from => "A virágzás időszaka";
-  @override
-  String get taxonomy_tribus => "Nemzetségcsoport";
-  @override
-  String get arabian_peninsula => "Arab félsziget";
-  @override
-  String get search_taxonomy => "Keresés taxonómiában";
-  @override
-  String get rate_later => "Később";
-  @override
-  String get color_message => "Milyen színű a virág? Válassza ki a legközelebbi színt.";
-  @override
-  String get west_tropical_africa => "Nyugat-trópusi Afrika";
-  @override
-  String get northern_europe => "Észak-Európa";
-  @override
-  String get rate => "Vélemények";
-  @override
-  String get northeast_tropical_africa => "Észak-Trópusi Afrika";
-  @override
-  String get pref_language => "Kedvenc nyelv";
-  @override
-  String get product_custom_filter_title => "Egyéni szűrő";
-  @override
-  String get new_zealand => "Új Zéland";
-  @override
-  String get feedback_intro => "Hozzájárult az alkalmazáshoz, mivel telepítette azt a készülékére. Ha valami többet keres, itt van néhány lehetőség:";
-  @override
-  String get filter_distribution => "terjesztés";
-  @override
-  String get eastern_asia => "Kelet-Ázsia";
-  @override
-  String get western_asia => "Nyugat-Ázsia";
-  @override
-  String get subarctic_america => "Subarkti-Amerika";
-  @override
-  String get product_search_title => "Keresés nevekben vagy taxonómiában";
-  @override
-  String get feedback_buy_extended => "A bővített változatot további funkciókkal vásárolhatja meg, mint például az offline mód, kereshet a nevekben, kereshet taxonómia, megfigyelések és konfigurálható szűrő segítségével.";
-  @override
-  String get north_central_usa => "Észak-Közép USA";
-  @override
-  String get improve_translation => "Javítani fordítás";
-  @override
-  String get feedback_review => "Pozitív értékelést írhat.";
-  @override
-  String get southeastern_usa => "Délkelet USA";
-  @override
-  String get yes => "Igen";
-  @override
-  String get feedback_run_ads_video => "Nézze meg a videohirdetést";
-  @override
-  String get plant_height_from => "Magasság";
-  @override
-  String get petal_many => "több mint 5";
-  @override
-  String get southeastern_europe => "Délkelet-Európa";
-  @override
-  String get taxonomy_unknown => "ismeretlen";
-  @override
-  String get plant_inflorescence => "Virágzat";
-  @override
-  String get northern_africa => "Észak-Afrika";
-  @override
-  String get offline_subtitle => "szüksége 300+ MB további helyet.";
-  @override
-  String get china => "Kína";
-  @override
-  String get product_no_ads_title => "Nem kívánt reklám";
-  @override
-  String get offline_title => "Offline módban";
-  @override
-  String get petal_zygomorphic => "kétoldali";
-  @override
-  String get taxonomy_genus => "Nemzetség";
-  @override
-  String get papuasia => "Papuasia";
-  @override
-  String get feedback_submit_translate_app => "Javítsa az alkalmazás címkéit";
-}
-
-class $uk extends S {
-  const $uk();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Центральна Америка";
-  @override
-  String get legend => "Легенда";
-  @override
-  String get product_offline_title => "Автономний режим";
-  @override
-  String get feedback_submit_translate_data => "Покращити дані квітки";
-  @override
-  String get snack_copy => "Копіюється в буфер обміну";
-  @override
-  String get product_purchase_failed => "Покупку не вдалося";
-  @override
-  String get about => "Про додатку";
-  @override
-  String get product_no_ads_description => "Програма не покаже рекламний банер внизу екрана.";
-  @override
-  String get offline_download_progress => "Завантаження фотографій і ілюстрацій ...";
-  @override
-  String get western_canada => "Західна Канада";
-  @override
-  String get northern_america => "Північна Америка";
-  @override
-  String get western_indian_ocean => "Західний індійський океан";
-  @override
-  String get feedback => "Відповідь";
-  @override
-  String get southwestern_usa => "Південно-західна США";
-  @override
-  String get distribution_message => "На яку географічну область ми маємо зосередитися?";
-  @override
-  String get caribbean => "Карибський басейн";
-  @override
-  String get product_search_description => "Ви зможете знайти квітку за її українською або латинською назвою або за її таксоном (наприклад ряд, родина, рід).";
-  @override
-  String get offline_delete_message => "Видалити дані в автономному режимі?";
-  @override
-  String get australasia => "Австралазія";
-  @override
-  String get petal_4 => "4 або менш";
-  @override
-  String get east_tropical_africa => "Східна тропічна Африка";
-  @override
-  String get africa => "Африка";
-  @override
-  String get south_tropical_africa => "Південна тропічна Африка";
-  @override
-  String get caucasus => "Кавказ";
-  @override
-  String get middle_asia => "Середня Азія";
-  @override
-  String get plant_gallery => "Галерея";
-  @override
-  String get always_my_region_subtitle => "Ваш регіон буде попередньо встановлено на фільтр";
-  @override
-  String get indochina => "Індо-Китай";
-  @override
-  String get feedback_translate => "Ви можете повідомити про будь-яку друкарську помилку або помилку, яку ви знайшли, або подати новий переклад вашою мовою.";
-  @override
-  String get australia => "Австралія";
-  @override
-  String get google_translate => "Переклад з Google Translate";
-  @override
-  String get plant_leaf => "Листя";
-  @override
-  String get habitat_forest => "ліси";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "Малезія";
-  @override
-  String get southwestern_pacific => "Південно-Західний Тихий океан";
-  @override
-  String get asia_tropical => "Азія-Тропічнаа";
-  @override
-  String get northwestern_usa => "Північно-західна США";
-  @override
-  String get northern_south_america => "Північна Південна Америка";
-  @override
-  String get show_original => "Показати англійський текст";
-  @override
-  String get offline_download_message => "Ви збираєтеся завантажити 300+ Мб фотографій і ілюстрацій. Перевірте, чи пристрій підключено до wi-fi. Чи готові ви до завантаження?";
-  @override
-  String get southern_america => "Південна Америка";
-  @override
-  String get middle_atlantic_ocean => "Середній атлантичний океан";
-  @override
-  String get feedback_run_ads => "Ви можете відображати повноекранну рекламу або переглядати відеооб'яву для підтримки подальшого розвитку та розширення бази даних.";
-  @override
-  String get habitat_garden => "сади або поля";
-  @override
-  String get product_purchase => "Придбати";
-  @override
-  String get russian_far_east => "Російський Далекий Схід";
-  @override
-  String get west_central_tropical_africa => "Центрально-західна тропічна Африка";
-  @override
-  String get habitat_message => "Що навколо тебе? Визначити місце проживання рослин.";
-  @override
-  String get plant_toxicity => "Токсичність";
-  @override
-  String get offline_download_fail => "Помилка завантаження. Перевірте підключення до Інтернету або вільний простір на пристрої та повторіть спробу.";
-  @override
-  String get snack_no_flowers => "Критерії відповідності квітам відсутні.";
-  @override
-  String get rate_question => "Чи є це додаток корисним?";
-  @override
-  String get macaronesia => "Макаронезія";
-  @override
-  String get plant_taxonomy => "Систематика";
-  @override
-  String get feedback_run_ads_fullscreen => "Показати повноекранну рекламу";
-  @override
-  String get asia_temperate => "Азія-Темнолітнаа";
-  @override
-  String get search => "Шукати ...";
-  @override
-  String get habitat_rock => "скелі або гори";
-  @override
-  String get taxonomy_superregnum => "Домен";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "Монголія";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "Західна Південна Америка";
-  @override
-  String get taxonomy_subgenus => "Підрід";
-  @override
-  String get close => "Закрити";
-  @override
-  String get europe => "Європа";
-  @override
-  String get middle_europe => "Середня Європа";
-  @override
-  String get color_blue => "синій, фіолетовий";
-  @override
-  String get my_filter => "Мій фільтр";
-  @override
-  String get southern_south_america => "Південна Південна Америка";
-  @override
-  String get plant_habitat => "Середовище";
-  @override
-  String get snack_loading_ad => "Реклама все ще завантажується, знову натисніть кнопку.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "пелюстка";
-  @override
-  String get petal_message => "Чи квітка зигоморфна? Ні? Тоді скільки пелюсток є?";
-  @override
-  String get color_white => "білий";
-  @override
-  String get northeastern_usa => "Північно-східна США";
-  @override
-  String get color_green => "зелений, коричневий, чорний";
-  @override
-  String get taxonomy_ordo => "Ряд";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "Тихий океан";
-  @override
-  String get plant_sources => "Джерела";
-  @override
-  String get taxonomy_regnum => "Царство";
-  @override
-  String get south_central_pacific => "Південно-центральний Тихий океан";
-  @override
-  String get filter_color => "колір";
-  @override
-  String get help => "Довідка";
-  @override
-  String get mexico => "Мексика";
-  @override
-  String get snack_publish => "... буде опубліковано пізніше";
-  @override
-  String get siberia => "Сибір";
-  @override
-  String get taxonomy_subtribus => "Підтриба";
-  @override
-  String get product_custom_filter_description => "Ви зможете змінити стандартний порядок і кількість фільтрів (колір, середовище, пелюстка, розповсюдження).";
-  @override
-  String get habitat_meadow => "луки або пасовища";
-  @override
-  String get plant_trivia => "Дрібниці";
-  @override
-  String get product_purchased => "Придбано";
-  @override
-  String get taxonomy_cladus => "(клада)";
-  @override
-  String get plant_herbalism => "Травнічество";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Відновити завантаження";
-  @override
-  String get enhancements => "Покращення";
-  @override
-  String get habitat_wetland => "водно-болотні угіддя";
-  @override
-  String get product_restore_purchases => "Відновити покупки";
-  @override
-  String get feedback_title => "Як зробити внесок";
-  @override
-  String get toxicity2 => "злегка отруйна рослина";
-  @override
-  String get toxicity1 => "отруйна рослина";
-  @override
-  String get eastern_canada => "Східна Канада";
-  @override
-  String get plant_info => "Інформація";
-  @override
-  String get show_translation => "Показати перекладений текст";
-  @override
-  String get habitat_tree => "дерева або чагарники";
-  @override
-  String get settings => "Налаштування";
-  @override
-  String get color_red => "червоний, рожевий";
-  @override
-  String get north_central_pacific => "Північно-Центральний Тихий океан";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "Південна Африка";
-  @override
-  String get always_my_region_title => "Завжди додайте мій регіон до фільтра";
-  @override
-  String get color_yellow => "жовтий";
-  @override
-  String get subantarctic_islands => "Субантарктичні острови";
-  @override
-  String get list_info => "Вибрати один";
-  @override
-  String get new_version => "Нова версія доступна, будь ласка, оновіть.";
-  @override
-  String get taxonomy_subfamilia => "Підродина";
-  @override
-  String get my_region => "Мій регіон";
-  @override
-  String get pause => "Пауза";
-  @override
-  String get indian_subcontinent => "Індійський субконтинент";
-  @override
-  String get product_offline_description => "Ви зможете запускати програму без підключення до Інтернету.";
-  @override
-  String get plant_flower => "Квіти";
-  @override
-  String get filter_habitat => "середовище";
-  @override
-  String get rate_never => "Ніколи";
-  @override
-  String get northwestern_pacific => "Північно-західний Тихий океан";
-  @override
-  String get search_names => "Пошук по іменах";
-  @override
-  String get southwestern_europe => "Південно-Західна Європа";
-  @override
-  String get taxonomy_species => "Вид";
-  @override
-  String get plant_fruit => "Плід";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "Родина";
-  @override
-  String get plant_stem => "Стебло";
-  @override
-  String get antarctic_continent => "Антарктичний континент";
-  @override
-  String get no => "Ні";
-  @override
-  String get brazil => "Бразилія";
-  @override
-  String get rate_text => "Автор цієї програми мотивується позитивною реакцією користувачів. Будь ласка, надішліть йому кілька зірок через магазин додатків.";
-  @override
-  String get eastern_europe => "Східна Європа";
-  @override
-  String get south_central_usa => "Південно-Центральна США";
-  @override
-  String get offline_download_success => "Фотографії та ілюстрації успішно завантажені.";
-  @override
-  String get plant_flowering_from => "Цвіте:";
-  @override
-  String get taxonomy_tribus => "Триба";
-  @override
-  String get arabian_peninsula => "Аравійський півострів";
-  @override
-  String get search_taxonomy => "Пошук у таксономії";
-  @override
-  String get rate_later => "Пізніше";
-  @override
-  String get color_message => "Який колір квітки? Виберіть найближчий.";
-  @override
-  String get west_tropical_africa => "Західна тропічна Африка";
-  @override
-  String get northern_europe => "Північна Європа";
-  @override
-  String get rate => "Відгуки";
-  @override
-  String get northeast_tropical_africa => "Північно-східна тропічна Африка";
-  @override
-  String get pref_language => "Бажана мова";
-  @override
-  String get product_custom_filter_title => "Спеціальний фільтр";
-  @override
-  String get new_zealand => "Нова Зеландія";
-  @override
-  String get feedback_intro => "Ви внесли свій внесок у цю програму з моменту встановлення її на своєму пристрої. Якщо ви шукаєте більше тут, є кілька варіантів:";
-  @override
-  String get filter_distribution => "розповсюдження";
-  @override
-  String get eastern_asia => "Східна Азія";
-  @override
-  String get western_asia => "Західна Азія";
-  @override
-  String get subarctic_america => "Субарктична Америка";
-  @override
-  String get product_search_title => "Пошук по іменах або таксономії";
-  @override
-  String get feedback_buy_extended => "Ви можете придбати розширену версію з додатковими функціональними можливостями, наприклад, автономний режим, пошук по іменах, пошук в таксономії, спостереженнях і налаштованому фільтрі.";
-  @override
-  String get north_central_usa => "Північ-Центральна США";
-  @override
-  String get improve_translation => "Поліпшення перекладу";
-  @override
-  String get feedback_review => "Можна написати позитивний відгук.";
-  @override
-  String get southeastern_usa => "Південно-східна США";
-  @override
-  String get yes => "Так";
-  @override
-  String get feedback_run_ads_video => "Дивитися відео рекламу";
-  @override
-  String get plant_height_from => "Висота:";
-  @override
-  String get petal_many => "більше 5";
-  @override
-  String get southeastern_europe => "Південно-Східна Європа";
-  @override
-  String get taxonomy_unknown => "невідомий";
-  @override
-  String get plant_inflorescence => "Суцвіття";
-  @override
-  String get northern_africa => "Північна Африка";
-  @override
-  String get offline_subtitle => "потрібно більше 300 МБ додаткового простору.";
-  @override
-  String get china => "Китай";
-  @override
-  String get product_no_ads_title => "Немає небажаної реклами";
-  @override
-  String get offline_title => "Автономний режим";
-  @override
-  String get petal_zygomorphic => "зигоморфной";
-  @override
-  String get taxonomy_genus => "Рід";
-  @override
-  String get papuasia => "Папуазія";
-  @override
-  String get feedback_submit_translate_app => "Покращити ярлики програми";
-}
-
-class $sk extends S {
-  const $sk();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Stredná Amerika";
-  @override
-  String get legend => "Legenda";
-  @override
-  String get product_offline_title => "Režm offline";
-  @override
-  String get feedback_submit_translate_data => "Opraviť chyby v dátach";
-  @override
-  String get snack_copy => "Skopírované do schránky";
-  @override
-  String get product_purchase_failed => "Nákup sa neuskutočnil";
-  @override
-  String get about => "O aplikácii";
-  @override
-  String get product_no_ads_description => "Aplikácia nezobrazí reklamný banner v spodnej časti obrazovky.";
-  @override
-  String get offline_download_progress => "Prebieha sťahovanie fotografií a ilustrácii ...";
-  @override
-  String get western_canada => "Západná Kanada";
-  @override
-  String get northern_america => "Severná Amerika";
-  @override
-  String get western_indian_ocean => "Západný Indický oceán";
-  @override
-  String get feedback => "Pripomienky";
-  @override
-  String get southwestern_usa => "Juhozápad USA";
-  @override
-  String get distribution_message => "Na ktorú geografickú oblasť zamerať pozornosť?";
-  @override
-  String get caribbean => "Karibik";
-  @override
-  String get product_search_description => "Budete môcť nájsť kvetinu podľa slovenského alebo latinského názvu alebo podľa taxónu (napr. podľa rádu, čeľade, rodu).";
-  @override
-  String get offline_delete_message => "Naozaj chcete zmazať offline dáta?";
-  @override
-  String get australasia => "Australázia";
-  @override
-  String get petal_4 => "4 alebo menej";
-  @override
-  String get east_tropical_africa => "Východná tropická Afrika";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get south_tropical_africa => "Južná tropická Afrika";
-  @override
-  String get caucasus => "Kaukaz";
-  @override
-  String get middle_asia => "Stredná Ázia";
-  @override
-  String get plant_gallery => "Galéria";
-  @override
-  String get always_my_region_subtitle => "Vaša oblasť bude prednastavená do filtra";
-  @override
-  String get indochina => "Indočína";
-  @override
-  String get feedback_translate => "Môžete upozorniť na gramatické a faktické chyby v texte alebo priamo v aplikácii na stránke whatsthatflower.com.";
-  @override
-  String get australia => "Austrália";
-  @override
-  String get google_translate => "Preložené pomocou Google prekladača";
-  @override
-  String get plant_leaf => "Listy";
-  @override
-  String get habitat_forest => "lesy";
-  @override
-  String get taxonomy_serie => "séria";
-  @override
-  String get malesia => "Juhovýchodná Ázia";
-  @override
-  String get southwestern_pacific => "Juhozápadné Tichomorie";
-  @override
-  String get asia_tropical => "Tropická Ázia";
-  @override
-  String get northwestern_usa => "Severovýchod USA";
-  @override
-  String get northern_south_america => "Sever Južnej Ameriky";
-  @override
-  String get show_original => "Ukáž anglický text";
-  @override
-  String get offline_download_message => "Chystáte sa stiahnuť viac ako 300 MB fotografií a ilustrácii. Skontrolujte, prosím, či je vaše zariadenie pripojené na wifi sieť. Chcete začať sťahovať súbory?";
-  @override
-  String get southern_america => "Južná Amerika";
-  @override
-  String get middle_atlantic_ocean => "Stredný Atlantik";
-  @override
-  String get feedback_run_ads => "Môžete si pozrieť videoreklamu alebo nechať zobraziť reklamu na celú obrazovku a podporiť tak ďalší vývoj a rozširovanie databázy.";
-  @override
-  String get habitat_garden => "polia a záhrady";
-  @override
-  String get product_purchase => "Kúpiť";
-  @override
-  String get russian_far_east => "Ruský ďaleký východ";
-  @override
-  String get west_central_tropical_africa => "Stredozápadná tropická Afrika";
-  @override
-  String get habitat_message => "Kde sa nachádzaš? Identifikuj lokalitu.";
-  @override
-  String get plant_toxicity => "Toxicita";
-  @override
-  String get offline_download_fail => "Sťahovanie súborov zlyhalo. Prosím skontrolujte pripojenie k internetu alebo voľný priestor na zariadení a skúste znova.";
-  @override
-  String get snack_no_flowers => "Filtru nevyhovujú žiadne kvety v databáze.";
-  @override
-  String get rate_question => "Je táto aplikácia užitočná?";
-  @override
-  String get macaronesia => "Makaronézia";
-  @override
-  String get plant_taxonomy => "Taxonómia";
-  @override
-  String get feedback_run_ads_fullscreen => "Zobraziť reklamu na celej obrazovke";
-  @override
-  String get asia_temperate => "Mierne pásno Ázie";
-  @override
-  String get search => "Hľadať...";
-  @override
-  String get habitat_rock => "vrcholky hôr a skaly";
-  @override
-  String get taxonomy_superregnum => "doména";
-  @override
-  String get taxonomy_sectio => "sekcia";
-  @override
-  String get mongolia => "Mongólsko";
-  @override
-  String get taxonomy_subserie => "podséria";
-  @override
-  String get western_south_america => "Západ Južnej Ameriky";
-  @override
-  String get taxonomy_subgenus => "podrod";
-  @override
-  String get close => "Zavrieť";
-  @override
-  String get europe => "Európa";
-  @override
-  String get middle_europe => "Stredná Európa";
-  @override
-  String get color_blue => "modrá, fialová";
-  @override
-  String get my_filter => "Môj filter";
-  @override
-  String get southern_south_america => "Juh Južnej Ameriky";
-  @override
-  String get plant_habitat => "Lokalita";
-  @override
-  String get snack_loading_ad => "Reklama sa stále načítava, opäť stlačte tlačidlo.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "lupienok";
-  @override
-  String get petal_message => "Je kvet nepravidelný? Nie? Tak koľko má okvetných lístkov?";
-  @override
-  String get color_white => "biela";
-  @override
-  String get northeastern_usa => "Severovýchod USA";
-  @override
-  String get color_green => "zelená, hnedá, čierna";
-  @override
-  String get taxonomy_ordo => "trieda";
-  @override
-  String get taxonomy_supersectio => "nadsekcia";
-  @override
-  String get pacific => "Tichomorie";
-  @override
-  String get plant_sources => "Zdroje";
-  @override
-  String get taxonomy_regnum => "ríša";
-  @override
-  String get south_central_pacific => "Stredojužné Tichomorie";
-  @override
-  String get filter_color => "farba";
-  @override
-  String get help => "Pomoc";
-  @override
-  String get mexico => "Mexiko";
-  @override
-  String get snack_publish => "... bude dostupné neskôr";
-  @override
-  String get siberia => "Sibír";
-  @override
-  String get taxonomy_subtribus => "podskupina";
-  @override
-  String get product_custom_filter_description => "Budete môcť zmeniť predvolené poradie a počet filtrov (farba, biotop, lupienok, distribúcia).";
-  @override
-  String get habitat_meadow => "lúky a trávnaté porasty";
-  @override
-  String get plant_trivia => "Zaujímavosti";
-  @override
-  String get product_purchased => "Kúpené";
-  @override
-  String get taxonomy_cladus => "Cladus";
-  @override
-  String get plant_herbalism => "Bylinkárstvo";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Pokračovať v sťahovaní";
-  @override
-  String get enhancements => "Vylepšenia";
-  @override
-  String get habitat_wetland => "mokrade a močiare";
-  @override
-  String get product_restore_purchases => "Obnoviť nákupy";
-  @override
-  String get feedback_title => "Ako prispieť";
-  @override
-  String get toxicity2 => "mierne jedovatá rastlina";
-  @override
-  String get toxicity1 => "jedovatá rastlina";
-  @override
-  String get eastern_canada => "Východná Kanada";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Ukáž preložený text";
-  @override
-  String get habitat_tree => "stromy a kry";
-  @override
-  String get settings => "Nastavenia";
-  @override
-  String get color_red => "červená, ružová";
-  @override
-  String get north_central_pacific => "Stredoseverné Tichomorie";
-  @override
-  String get taxonomy_subsectio => "podsekcia";
-  @override
-  String get southern_africa => "Južná Afrika";
-  @override
-  String get always_my_region_title => "Vždy pridať moju oblasť do filtra";
-  @override
-  String get color_yellow => "žltá";
-  @override
-  String get list_info => "Vyber si jednu";
-  @override
-  String get new_version => "K dispozícii je nová verzia, prosím nainštalujte si ju.";
-  @override
-  String get taxonomy_subfamilia => "podčeľaď";
-  @override
-  String get pause => "Prerušiť";
-  @override
-  String get indian_subcontinent => "Indický subkontinent";
-  @override
-  String get product_offline_description => "Aplikáciu budete môcť spustiť bez pripojenia k internetu.";
-  @override
-  String get plant_flower => "Kvety";
-  @override
-  String get filter_habitat => "biotop";
-  @override
-  String get rate_never => "Nikdy";
-  @override
-  String get northwestern_pacific => "Severozápadné Tichomorie";
-  @override
-  String get search_names => "Hľadať v názvoch";
-  @override
-  String get southwestern_europe => "Juhozápadná Európa";
-  @override
-  String get taxonomy_species => "druh";
-  @override
-  String get plant_fruit => "Plody";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "čeľaď";
-  @override
-  String get plant_stem => "Stonka";
-  @override
-  String get no => "Nie";
-  @override
-  String get brazil => "Brazília";
-  @override
-  String get rate_text => "Autora tejto aplikácie motivuje pozitívny ohlas použivateľov. Pošlite mu, prosím, nejaké kvetiny (najlepšie hviezdice) cez obchod s aplikáciami.";
-  @override
-  String get eastern_europe => "Východná Európa";
-  @override
-  String get south_central_usa => "Stredojuh USA";
-  @override
-  String get offline_download_success => "Fotografie a ilustrácie boli úspešne stiahnuté.";
-  @override
-  String get plant_flowering_from => "Kvitne:";
-  @override
-  String get taxonomy_tribus => "skupina";
-  @override
-  String get arabian_peninsula => "Arabský polostrov";
-  @override
-  String get search_taxonomy => "Hľadať v taxonómii";
-  @override
-  String get rate_later => "Neskôr";
-  @override
-  String get color_message => "Akej farby je kvet? Vyber tú najbližšiu. Vždy sa môžeš vrátiť a vybrať inú.";
-  @override
-  String get west_tropical_africa => "Západná tropická Afrika";
-  @override
-  String get northern_europe => "Severná Európa";
-  @override
-  String get rate => "Recenzia";
-  @override
-  String get northeast_tropical_africa => "Severovýchodná tropická Afrika";
-  @override
-  String get pref_language => "Preferovaný jazyk";
-  @override
-  String get product_custom_filter_title => "Vlastný filter";
-  @override
-  String get new_zealand => "Nový Zéland";
-  @override
-  String get feedback_intro => "Túto aplikáciu podporujete odkedy ste si ju nainštalovali na svoje mobilné zariadenie, ďakujem. Ak hľadáte iné formy podpory, tu sú niektoré možnosti:";
-  @override
-  String get filter_distribution => "distribúcia";
-  @override
-  String get eastern_asia => "Východná Ázia";
-  @override
-  String get western_asia => "Juhozápadná Ázia";
-  @override
-  String get subarctic_america => "Subarktická Amerika";
-  @override
-  String get product_search_title => "Hľadať v názvoch alebo v taxonómii";
-  @override
-  String get feedback_buy_extended => "Môžete si kúpiť rozšírenú verziu s funkciami navyše ako napríklad ofline režim, vyhľadávanie v názvoch a v taxonómii, pozorovania a nastaviteľný filter.";
-  @override
-  String get north_central_usa => "Stredosever USA";
-  @override
-  String get improve_translation => "Vylepšiť preklad";
-  @override
-  String get feedback_review => "Môžete napísať pozitívnu recenziu.";
-  @override
-  String get southeastern_usa => "Juhovýchod USA";
-  @override
-  String get yes => "Áno";
-  @override
-  String get feedback_run_ads_video => "Pozrieť videoreklamu";
-  @override
-  String get plant_height_from => "Výška:";
-  @override
-  String get petal_many => "viac ako 5";
-  @override
-  String get southeastern_europe => "Juhovýchodná Európa";
-  @override
-  String get taxonomy_unknown => "neznámy";
-  @override
-  String get plant_inflorescence => "Súkvetie";
-  @override
-  String get northern_africa => "Severná Afrika";
-  @override
-  String get offline_subtitle => "potrebuje viac ako 300 MB voľného priestoru.";
-  @override
-  String get china => "Čína";
-  @override
-  String get product_no_ads_title => "Žiadna nežiadúca reklama";
-  @override
-  String get offline_title => "Režm offline";
-  @override
-  String get petal_zygomorphic => "nepravidelný";
-  @override
-  String get taxonomy_genus => "rod";
-  @override
-  String get papuasia => "Papuázia";
-  @override
-  String get feedback_submit_translate_app => "Opraviť chyby v aplikácii";
-}
-
-class $sl extends S {
-  const $sl();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Srednja Amerika";
-  @override
-  String get legend => "Legenda";
-  @override
-  String get product_offline_title => "Način brez povezave";
-  @override
-  String get feedback_submit_translate_data => "Izboljšajte podatke o cvetju";
-  @override
-  String get snack_copy => "Kopirano v odložišče";
-  @override
-  String get product_purchase_failed => "Nakup ni uspel";
-  @override
-  String get about => "O aplikaciji";
-  @override
-  String get product_no_ads_description => "Aplikacija ne bo prikazala oglasne pasice na dnu zaslona.";
-  @override
-  String get offline_download_progress => "Prenos fotografij in ilustracij ...";
-  @override
-  String get western_canada => "Zahodna Kanada";
-  @override
-  String get northern_america => "Severna Amerika";
-  @override
-  String get western_indian_ocean => "Zahodni Indijski ocean";
-  @override
-  String get feedback => "Povratne informacije / Prispevek";
-  @override
-  String get southwestern_usa => "Jugozahodna ZDA";
-  @override
-  String get distribution_message => "Na katero geografsko območje se moramo osredotočiti?";
-  @override
-  String get caribbean => "Karibi";
-  @override
-  String get product_search_description => "Cvet bo mogoče najti po slovenskem ali latinskem imenu ali po taksonu (npr. red, družina, rod).";
-  @override
-  String get offline_delete_message => "Ali želite izbrisati podatke brez povezave?";
-  @override
-  String get australasia => "Avstralija";
-  @override
-  String get petal_4 => "4 ali manj";
-  @override
-  String get east_tropical_africa => "Vzhodna tropska Afrika";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get south_tropical_africa => "Južna tropska Afrika";
-  @override
-  String get caucasus => "Kavkaz";
-  @override
-  String get middle_asia => "Srednja Azija";
-  @override
-  String get plant_gallery => "Galerija";
-  @override
-  String get always_my_region_subtitle => "Vaša regija bo vnaprej nastavljena na filter";
-  @override
-  String get indochina => "Indo-Kitajska";
-  @override
-  String get feedback_translate => "Lahko prijavite kakršno koli tipkarsko napako ali napako, ki ste jo našli, ali pošljete nov prevod v vaš jezik.";
-  @override
-  String get australia => "Avstralija";
-  @override
-  String get google_translate => "Prevedeno z Google Translate";
-  @override
-  String get plant_leaf => "Listi";
-  @override
-  String get habitat_forest => "gozdovi";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "Malezija";
-  @override
-  String get southwestern_pacific => "Jugozahodni Pacifik";
-  @override
-  String get asia_tropical => "Azija tropski";
-  @override
-  String get northwestern_usa => "Severozahodna ZDA";
-  @override
-  String get northern_south_america => "Severna Južna Amerika";
-  @override
-  String get show_original => "Prikaži angleško besedilo";
-  @override
-  String get offline_download_message => "Naložili boste 300+ MB fotografij in ilustracij. Preverite, ali je vaša naprava povezana z wi-fi. Ste pripravljeni za prenos?";
-  @override
-  String get southern_america => "Južna Amerika";
-  @override
-  String get middle_atlantic_ocean => "Srednji Atlantski ocean";
-  @override
-  String get feedback_run_ads => "Lahko prikažete celozaslonski oglas ali si ogledate video oglas, ki podpira nadaljnji razvoj in izboljšavo baze podatkov.";
-  @override
-  String get habitat_garden => "vrtov ali polja";
-  @override
-  String get product_purchase => "Kupiti";
-  @override
-  String get russian_far_east => "Ruski daleč vzhod";
-  @override
-  String get west_central_tropical_africa => "Zahodno-srednja tropska Afrika";
-  @override
-  String get habitat_message => "Kaj je okoli vas? Prepoznajte rastline habitat.";
-  @override
-  String get plant_toxicity => "Toksičnost";
-  @override
-  String get offline_download_fail => "Prenos ni uspel. Preverite internetno povezavo ali pa sprostite prostor na napravi in poskusite znova.";
-  @override
-  String get snack_no_flowers => "Ni meril za ujemanje cvetja.";
-  @override
-  String get rate_question => "Je ta vloga v pomoč?";
-  @override
-  String get macaronesia => "Makaronezija";
-  @override
-  String get plant_taxonomy => "Taksonomija";
-  @override
-  String get feedback_run_ads_fullscreen => "Pokaži celozaslonski oglas";
-  @override
-  String get asia_temperate => "Azija temperaturna";
-  @override
-  String get search => "Iskati...";
-  @override
-  String get habitat_rock => "skale ali gore";
-  @override
-  String get taxonomy_superregnum => "Domena";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "Mongolija";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "Zahodna Južna Amerika";
-  @override
-  String get taxonomy_subgenus => "Podrod";
-  @override
-  String get close => "Zapri";
-  @override
-  String get europe => "Evropa";
-  @override
-  String get middle_europe => "Srednja Evropa";
-  @override
-  String get color_blue => "modra, vijolična";
-  @override
-  String get my_filter => "Moj filter";
-  @override
-  String get southern_south_america => "Južna Južna Amerika";
-  @override
-  String get plant_habitat => "Habitat";
-  @override
-  String get snack_loading_ad => "Oglas se še vedno nalaga, ponovno pritisnite gumb.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "petali";
-  @override
-  String get petal_message => "Je cvet zigomorfni? Ne? Potem, koliko venčnih listov ima?";
-  @override
-  String get color_white => "bela";
-  @override
-  String get northeastern_usa => "Severovzhodna ZDA";
-  @override
-  String get color_green => "zelena, rjava, črna";
-  @override
-  String get taxonomy_ordo => "Red";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "Pacifik";
-  @override
-  String get plant_sources => "Viri";
-  @override
-  String get taxonomy_regnum => "Kraljestvo";
-  @override
-  String get south_central_pacific => "Južni osrednji Pacifik";
-  @override
-  String get filter_color => "barve";
-  @override
-  String get help => "Pomoč";
-  @override
-  String get mexico => "Mehika";
-  @override
-  String get snack_publish => "... bo objavljen pozneje";
-  @override
-  String get siberia => "Siberia";
-  @override
-  String get taxonomy_subtribus => "Podpleme";
-  @override
-  String get product_custom_filter_description => "Spremenili boste lahko privzeti vrstni red in število filtrov (barve, habitate, petali, distribucija).";
-  @override
-  String get habitat_meadow => "travniki ali pašniki";
-  @override
-  String get plant_trivia => "Trivia";
-  @override
-  String get product_purchased => "Kupljeno";
-  @override
-  String get taxonomy_cladus => "(klad)";
-  @override
-  String get plant_herbalism => "Zeliščarstvo";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Nadaljuj prenos";
-  @override
-  String get enhancements => "Dodatki";
-  @override
-  String get habitat_wetland => "močvirje ali mokrišča";
-  @override
-  String get product_restore_purchases => "Obnovi nakup";
-  @override
-  String get feedback_title => "Kako prispevati";
-  @override
-  String get toxicity2 => "nekoliko strupena rastlina";
-  @override
-  String get toxicity1 => "strupena rastlina";
-  @override
-  String get eastern_canada => "Vzhodna Kanada";
-  @override
-  String get plant_info => "Informacije";
-  @override
-  String get show_translation => "Pokaži prevedeno besedilo";
-  @override
-  String get habitat_tree => "drevesa ali grmi";
-  @override
-  String get settings => "Nastavitve";
-  @override
-  String get color_red => "rdeča, roza";
-  @override
-  String get north_central_pacific => "Severni osrednji Pacifik";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "Južna Afrika";
-  @override
-  String get always_my_region_title => "Vedno dodajte mojo regijo v filter";
-  @override
-  String get color_yellow => "rumena";
-  @override
-  String get subantarctic_islands => "Podantarktični otoki";
-  @override
-  String get list_info => "Izbrati eno";
-  @override
-  String get new_version => "Na voljo je nova različica, posodobite.";
-  @override
-  String get taxonomy_subfamilia => "Poddružina";
-  @override
-  String get my_region => "Moja regija";
-  @override
-  String get pause => "Pavza";
-  @override
-  String get indian_subcontinent => "Indijski podcelini";
-  @override
-  String get product_offline_description => "Aplikacijo lahko zaženete brez internetne povezave.";
-  @override
-  String get plant_flower => "Cvetje";
-  @override
-  String get filter_habitat => "habitate";
-  @override
-  String get rate_never => "Nikoli";
-  @override
-  String get northwestern_pacific => "Severozahodni Pacifik";
-  @override
-  String get search_names => "Išči po imenih";
-  @override
-  String get southwestern_europe => "Jugozahodna Evropa";
-  @override
-  String get taxonomy_species => "Vrsta";
-  @override
-  String get plant_fruit => "Plod";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "Družina";
-  @override
-  String get plant_stem => "Steblo";
-  @override
-  String get antarctic_continent => "Antarktična celina";
-  @override
-  String get no => "Ne";
-  @override
-  String get brazil => "Brazilija";
-  @override
-  String get rate_text => "Avtor te aplikacije je motiviran s pozitivnim odzivom uporabnikov. Prosim, pošljite mu nekaj zvezd skozi trgovino z aplikacijami.";
-  @override
-  String get eastern_europe => "Vzhodna Evropa";
-  @override
-  String get south_central_usa => "Južna osrednja ZDA";
-  @override
-  String get offline_download_success => "Fotografije in ilustracije so bile uspešno prenesene.";
-  @override
-  String get plant_flowering_from => "Cvetoče:";
-  @override
-  String get taxonomy_tribus => "Pleme";
-  @override
-  String get arabian_peninsula => "Arabski polotok";
-  @override
-  String get search_taxonomy => "Išči v taksonomiji";
-  @override
-  String get rate_later => "Kasneje";
-  @override
-  String get color_message => "Kaj je barva cveta? Izberite najustreznejšo.";
-  @override
-  String get west_tropical_africa => "Zahodna tropska Afrika";
-  @override
-  String get northern_europe => "Severna Evropa";
-  @override
-  String get rate => "Mnenja";
-  @override
-  String get northeast_tropical_africa => "Severovzhodna tropska Afrika";
-  @override
-  String get pref_language => "Želeni jezik";
-  @override
-  String get product_custom_filter_title => "Filter po meri";
-  @override
-  String get new_zealand => "Nova Zelandija";
-  @override
-  String get feedback_intro => "Prispevali ste k tej aplikaciji, ker ste jo namestili v napravo, hvala. Če iščete nekaj več, si oglejte nekaj možnosti:";
-  @override
-  String get filter_distribution => "distribucija";
-  @override
-  String get eastern_asia => "Vzhodna Azija";
-  @override
-  String get western_asia => "Zahodna Azija";
-  @override
-  String get subarctic_america => "Subarctic Amerika";
-  @override
-  String get product_search_title => "Išči po imenih ali taksonomiji";
-  @override
-  String get feedback_buy_extended => "Razširjeno različico lahko kupite z dodatnimi funkcijami, kot je način brez povezave, iskanje imen, iskanje v taksonomiji, opazovanje in nastavljiv filter.";
-  @override
-  String get north_central_usa => "Severna osrednja ZDA";
-  @override
-  String get improve_translation => "Izboljšati prevod";
-  @override
-  String get feedback_review => "Lahko napišete pozitivno mnenje.";
-  @override
-  String get southeastern_usa => "Jugovzhodna ZDA";
-  @override
-  String get yes => "Ja";
-  @override
-  String get feedback_run_ads_video => "Oglejte si video oglas";
-  @override
-  String get plant_height_from => "Višina";
-  @override
-  String get petal_many => "več kot 5";
-  @override
-  String get southeastern_europe => "Jugovzhodna Evropa";
-  @override
-  String get taxonomy_unknown => "neznano";
-  @override
-  String get plant_inflorescence => "Socvetje";
-  @override
-  String get northern_africa => "Severna Afrika";
-  @override
-  String get offline_subtitle => "potrebuje dodatnih 300 MB dodatnega prostora.";
-  @override
-  String get china => "Kitajska";
-  @override
-  String get product_no_ads_title => "Brez neželenega oglasa";
-  @override
-  String get offline_title => "Način brez povezave";
-  @override
-  String get petal_zygomorphic => "zigomorfna";
-  @override
-  String get taxonomy_genus => "Rod";
-  @override
-  String get papuasia => "Papuazija";
-  @override
-  String get feedback_submit_translate_app => "Izboljšajte oznake aplikacij";
-}
-
-class $id extends S {
-  const $id();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Amerika Tengah";
-  @override
-  String get legend => "Legenda";
-  @override
-  String get product_offline_title => "Mode offline";
-  @override
-  String get feedback_submit_translate_data => "Perbaiki data bunga";
-  @override
-  String get snack_copy => "Disalin ke Clipboard";
-  @override
-  String get product_purchase_failed => "Pembelian gagal";
-  @override
-  String get about => "Tentang";
-  @override
-  String get product_no_ads_description => "Aplikasi tidak akan menampilkan spanduk iklan di bagian bawah layar.";
-  @override
-  String get offline_download_progress => "Mengunduh foto dan ilustrasi ...";
-  @override
-  String get western_canada => "Kanada Barat";
-  @override
-  String get northern_america => "Amerika Utara";
-  @override
-  String get western_indian_ocean => "Samudra Hindia Barat";
-  @override
-  String get feedback => "Umpan balik / Kontribusi";
-  @override
-  String get southwestern_usa => "Barat daya AS";
-  @override
-  String get distribution_message => "Area geografis mana yang harus kita fokuskan?";
-  @override
-  String get caribbean => "Karibia";
-  @override
-  String get product_search_description => "Anda dapat menemukan bunga dengan nama Latin atau dengan taksonnya (mis. ordo, famili, genera)";
-  @override
-  String get offline_delete_message => "Apakah Anda ingin menghapus data offline?";
-  @override
-  String get australasia => "Australasia";
-  @override
-  String get petal_4 => "4 atau kurang";
-  @override
-  String get east_tropical_africa => "Afrika Timur Tropis";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get south_tropical_africa => "Afrika Selatan Tropis";
-  @override
-  String get caucasus => "Kaukasus";
-  @override
-  String get middle_asia => "Asia Tengah";
-  @override
-  String get plant_gallery => "Galeri";
-  @override
-  String get always_my_region_subtitle => "Wilayah Anda akan disetel sebelumnya ke filter";
-  @override
-  String get indochina => "Indo-Cina";
-  @override
-  String get feedback_translate => "Anda dapat melaporkan kesalahan ketik atau kesalahan apa pun yang Anda temukan atau kirim terjemahan baru dalam bahasa Anda.";
-  @override
-  String get australia => "Australia";
-  @override
-  String get google_translate => "Diterjemahkan dengan Google Terjemahan";
-  @override
-  String get plant_leaf => "Daun";
-  @override
-  String get habitat_forest => "hutan";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "Malesia";
-  @override
-  String get southwestern_pacific => "Pasifik Barat Daya";
-  @override
-  String get asia_tropical => "Asia Tropis";
-  @override
-  String get northwestern_usa => "Barat laut AS";
-  @override
-  String get northern_south_america => "Amerika Selatan bagian Utara";
-  @override
-  String get show_original => "Tampilkan teks bahasa Inggris";
-  @override
-  String get offline_download_message => "Anda akan mengunduh 300+ MB foto dan ilustrasi. Periksa apakah perangkat Anda terhubung ke wi-fi. Sudah siap untuk mengunduh?";
-  @override
-  String get southern_america => "Amerika Selatan";
-  @override
-  String get middle_atlantic_ocean => "Samudera Atlantik Tengah";
-  @override
-  String get feedback_run_ads => "Anda dapat menampilkan iklan layar penuh atau menonton iklan video untuk mendukung pengembangan lebih lanjut dan peningkatan basis data.";
-  @override
-  String get habitat_garden => "kebun atau ladang";
-  @override
-  String get product_purchase => "Membeli";
-  @override
-  String get russian_far_east => "Timur Jauh Rusia";
-  @override
-  String get west_central_tropical_africa => "Afrika Barat Pusat Tropis";
-  @override
-  String get habitat_message => "Ada apa di sekitar kamu Identifikasi habitat tanaman.";
-  @override
-  String get plant_toxicity => "Toksisitas";
-  @override
-  String get offline_download_fail => "Pengunduhan gagal. Silakan periksa koneksi internet Anda atau ruang kosong di perangkat dan coba lagi.";
-  @override
-  String get snack_no_flowers => "Tidak ada kriteria pencocokan bunga.";
-  @override
-  String get rate_question => "Apakah aplikasi ini bermanfaat?";
-  @override
-  String get macaronesia => "Macaronesia";
-  @override
-  String get plant_taxonomy => "Taksonomi";
-  @override
-  String get feedback_run_ads_fullscreen => "Tampilkan iklan layar penuh";
-  @override
-  String get asia_temperate => "Asia Beriklim";
-  @override
-  String get search => "Mencari...";
-  @override
-  String get habitat_rock => "batu atau gunung";
-  @override
-  String get taxonomy_superregnum => "Domain";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "Mongolia";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "Amerika Selatan bagian Barat";
-  @override
-  String get taxonomy_subgenus => "Subgenus";
-  @override
-  String get close => "Dekat";
-  @override
-  String get europe => "Eropa";
-  @override
-  String get middle_europe => "Eropa Tengah";
-  @override
-  String get color_blue => "biru, ungu";
-  @override
-  String get my_filter => "Filter saya";
-  @override
-  String get southern_south_america => "Amerika Selatan Selatan";
-  @override
-  String get plant_habitat => "Habitat";
-  @override
-  String get snack_loading_ad => "Iklan masih memuat, tekan tombol lagi.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "mahkota";
-  @override
-  String get petal_message => "Apakah bunga bisimetris? Tidak? Lalu berapa kelopak bunga yang dimilikinya?";
-  @override
-  String get color_white => "putih";
-  @override
-  String get northeastern_usa => "Timur laut AS";
-  @override
-  String get color_green => "hijau, coklat, hitam";
-  @override
-  String get taxonomy_ordo => "Ordo";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "Samudera Pasifik";
-  @override
-  String get plant_sources => "Sumber";
-  @override
-  String get taxonomy_regnum => "Kingdom";
-  @override
-  String get south_central_pacific => "Pasifik Tengah Selatan";
-  @override
-  String get filter_color => "warna";
-  @override
-  String get help => "Membantu";
-  @override
-  String get mexico => "Meksiko";
-  @override
-  String get snack_publish => "... untuk diterbitkan nanti";
-  @override
-  String get siberia => "Siberia";
-  @override
-  String get taxonomy_subtribus => "Subtribe";
-  @override
-  String get product_custom_filter_description => "Anda dapat mengubah urutan dan jumlah filter default (warna, habitat, mahkota, distribusi).";
-  @override
-  String get habitat_meadow => "padang rumput";
-  @override
-  String get plant_trivia => "Trivia";
-  @override
-  String get product_purchased => "Dibeli";
-  @override
-  String get taxonomy_cladus => "(tidak termasuk)";
-  @override
-  String get plant_herbalism => "Herbalism";
-  @override
-  String get plant_height_to => "sampai";
-  @override
-  String get offline_download => "Lanjutkan unduhan";
-  @override
-  String get enhancements => "Perangkat tambahan";
-  @override
-  String get habitat_wetland => "lahan basah";
-  @override
-  String get product_restore_purchases => "Mengembalikan pembelian";
-  @override
-  String get feedback_title => "Bagaimana cara berkontribusi";
-  @override
-  String get toxicity2 => "sedikit beracun tanaman";
-  @override
-  String get toxicity1 => "tanaman beracun";
-  @override
-  String get eastern_canada => "Kanada Timur";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Tampilkan teks terjemahan";
-  @override
-  String get habitat_tree => "pohon atau semak belukar";
-  @override
-  String get settings => "Pengaturan";
-  @override
-  String get color_red => "merah";
-  @override
-  String get north_central_pacific => "Pasifik Utara Tengah";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "Afrika Selatan";
-  @override
-  String get always_my_region_title => "Selalu tambahkan wilayah saya ke filter";
-  @override
-  String get color_yellow => "kuning";
-  @override
-  String get subantarctic_islands => "Kepulauan Subantartika";
-  @override
-  String get list_info => "Pilih salah satu";
-  @override
-  String get new_version => "Versi baru tersedia, perbarui.";
-  @override
-  String get taxonomy_subfamilia => "Subfamily";
-  @override
-  String get my_region => "Daerah saya";
-  @override
-  String get pause => "Jeda";
-  @override
-  String get indian_subcontinent => "Sub Benua India";
-  @override
-  String get product_offline_description => "Anda dapat menjalankan aplikasi tanpa koneksi internet.";
-  @override
-  String get plant_flower => "Bunga";
-  @override
-  String get filter_habitat => "habitat";
-  @override
-  String get rate_never => "Tak pernah";
-  @override
-  String get northwestern_pacific => "Pasifik Barat Laut";
-  @override
-  String get search_names => "Cari nama";
-  @override
-  String get southwestern_europe => "Eropa Barat Daya";
-  @override
-  String get taxonomy_species => "Jenis";
-  @override
-  String get plant_fruit => "Buah";
-  @override
-  String get plant_flowering_to => "sampai";
-  @override
-  String get taxonomy_familia => "Famili";
-  @override
-  String get plant_stem => "Batang";
-  @override
-  String get antarctic_continent => "Benua Antartika";
-  @override
-  String get no => "Tidak";
-  @override
-  String get brazil => "Brazil";
-  @override
-  String get rate_text => "Penulis aplikasi ini dimotivasi oleh respon positif dari pengguna. Tolong kirimkan dia beberapa bintang melalui toko aplikasi.";
-  @override
-  String get eastern_europe => "Eropa Timur";
-  @override
-  String get south_central_usa => "Pusat Selatan AS";
-  @override
-  String get offline_download_success => "Foto dan ilustrasi telah berhasil diunduh.";
-  @override
-  String get plant_flowering_from => "Berbunga dari";
-  @override
-  String get taxonomy_tribus => "Tribe";
-  @override
-  String get arabian_peninsula => "Semenanjung Arab";
-  @override
-  String get search_taxonomy => "Cari dalam taksonomi";
-  @override
-  String get rate_later => "Kemudian";
-  @override
-  String get color_message => "Apa warna bunga itu? Pilih yang terdekat.";
-  @override
-  String get west_tropical_africa => "Afrika Barat Tropis";
-  @override
-  String get northern_europe => "Eropa Utara";
-  @override
-  String get rate => "Ulasan";
-  @override
-  String get northeast_tropical_africa => "Afrika Timur laut Tropis  ";
-  @override
-  String get pref_language => "Bahasa pilihan";
-  @override
-  String get product_custom_filter_title => "Filter khusus";
-  @override
-  String get new_zealand => "Selandia Baru";
-  @override
-  String get feedback_intro => "Anda telah berkontribusi untuk aplikasi ini karena Anda telah menginstalnya di perangkat Anda, terima kasih. Jika Anda mencari sesuatu yang lebih, berikut adalah beberapa opsi:";
-  @override
-  String get filter_distribution => "distribusi";
-  @override
-  String get eastern_asia => "Asia Timur";
-  @override
-  String get western_asia => "Asia Barat";
-  @override
-  String get subarctic_america => "Subarctic America";
-  @override
-  String get product_search_title => "Cari nama atau taksonomi";
-  @override
-  String get feedback_buy_extended => "Anda dapat membeli versi lanjutan dengan fungsi tambahan seperti mode offline, pencarian nama, pencarian taksonomi, pengamatan, dan filter yang dapat dikonfigurasi.";
-  @override
-  String get north_central_usa => "Tengah Utara AS";
-  @override
-  String get improve_translation => "Perbaiki terjemahan";
-  @override
-  String get feedback_review => "Anda dapat menulis ulasan positif.";
-  @override
-  String get southeastern_usa => "Tenggara AS";
-  @override
-  String get yes => "iya nih";
-  @override
-  String get feedback_run_ads_video => "Tonton iklan video";
-  @override
-  String get plant_height_from => "Tinggi dari";
-  @override
-  String get petal_many => "Lebih dari 5";
-  @override
-  String get southeastern_europe => "Eropa Tenggara";
-  @override
-  String get taxonomy_unknown => "tidak diketahui";
-  @override
-  String get plant_inflorescence => "Bunga majemuk";
-  @override
-  String get northern_africa => "Afrika Utara";
-  @override
-  String get offline_subtitle => "membutuhkan 300+ MB ruang tambahan.";
-  @override
-  String get china => "Cina";
-  @override
-  String get product_no_ads_title => "Tidak ada iklan yang tidak diinginkan";
-  @override
-  String get offline_title => "Mode offline";
-  @override
-  String get petal_zygomorphic => "tidak beraturan";
-  @override
-  String get taxonomy_genus => "Genera";
-  @override
-  String get papuasia => "Papuasia";
-  @override
-  String get feedback_submit_translate_app => "Tingkatkan label aplikasi";
-}
-
-class $sr extends S {
-  const $sr();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Централна Америка";
-  @override
-  String get legend => "Легенда";
-  @override
-  String get product_offline_title => "Режим ван мреже";
-  @override
-  String get feedback_submit_translate_data => "Побољшајте податке о цвету";
-  @override
-  String get snack_copy => "Копирано у Цлипбоард";
-  @override
-  String get product_purchase_failed => "Куповина није успела";
-  @override
-  String get about => "О апликацији";
-  @override
-  String get product_no_ads_description => "Апликација не приказује рекламни баннер на дну екрана.";
-  @override
-  String get offline_download_progress => "Преузимање фотографија и илустрација ...";
-  @override
-  String get western_canada => "Западна Канада";
-  @override
-  String get northern_america => "Северна Америка";
-  @override
-  String get western_indian_ocean => "Западни Индијски океан";
-  @override
-  String get feedback => "Повратне информације";
-  @override
-  String get southwestern_usa => "Југозападна САД";
-  @override
-  String get distribution_message => "На коју географску област треба да се фокусирамо?";
-  @override
-  String get caribbean => "Кариби";
-  @override
-  String get product_search_description => "Моћи ћете пронаћи цвијет по његовом српском или латинском имену или по његовом таксону (нпр. ред, породица, род).";
-  @override
-  String get offline_delete_message => "Да ли желите да избришете ванмрежне податке?";
-  @override
-  String get australasia => "Аустраласиа";
-  @override
-  String get petal_4 => "4 или мање";
-  @override
-  String get east_tropical_africa => "Источна тропска Африка";
-  @override
-  String get africa => "Африка";
-  @override
-  String get south_tropical_africa => "Јужна тропска Африка";
-  @override
-  String get caucasus => "Кавказ";
-  @override
-  String get middle_asia => "Средња Азија";
-  @override
-  String get plant_gallery => "Галерија";
-  @override
-  String get always_my_region_subtitle => "Ваш регион ће бити унапред подешен на филтер";
-  @override
-  String get indochina => "Индо-Кина";
-  @override
-  String get feedback_translate => "Можете пријавити било коју грешку или грешку коју сте пронашли или послати нови превод на свој језик.";
-  @override
-  String get australia => "Аустралија";
-  @override
-  String get google_translate => "Превео са Гоогле Транслате";
-  @override
-  String get plant_leaf => "Лист";
-  @override
-  String get habitat_forest => "шуме";
-  @override
-  String get taxonomy_serie => "серија";
-  @override
-  String get malesia => "Малезија";
-  @override
-  String get southwestern_pacific => "Соутхвестерн Пацифиц";
-  @override
-  String get asia_tropical => "Асиа Тропицал";
-  @override
-  String get northwestern_usa => "Северозапад САД";
-  @override
-  String get northern_south_america => "Северна Јужна Америка";
-  @override
-  String get show_original => "Схов енглески текст";
-  @override
-  String get offline_download_message => "Преузет ћете 300+ МБ фотографија и илустрација. Проверите да ли је ваш уређај повезан са Ви-Фи. Да ли сте спремни за преузимање?";
-  @override
-  String get southern_america => "Јужна Америка";
-  @override
-  String get middle_atlantic_ocean => "Средњи Атлантски океан";
-  @override
-  String get feedback_run_ads => "Можете приказати оглас преко целог екрана или гледати видео рекламу како бисте подржали даљи развој и побољшање базе података.";
-  @override
-  String get habitat_garden => "баште или поља";
-  @override
-  String get product_purchase => "Купити";
-  @override
-  String get russian_far_east => "Руски Далеки Исток";
-  @override
-  String get west_central_tropical_africa => "Западна централна тропска Африка";
-  @override
-  String get habitat_message => "Шта је око тебе? Идентификовати станиште биљке.";
-  @override
-  String get plant_toxicity => "Токсичност";
-  @override
-  String get offline_download_fail => "Преузимање није успело. Проверите интернет везу или слободан простор на уређају и покушајте поново.";
-  @override
-  String get snack_no_flowers => "Нема критеријума за подударање цвећа.";
-  @override
-  String get rate_question => "Да ли је ова апликација помоћи?";
-  @override
-  String get macaronesia => "Макаронезија";
-  @override
-  String get plant_taxonomy => "Такономи";
-  @override
-  String get feedback_run_ads_fullscreen => "Прикажи рекламу преко целог екрана";
-  @override
-  String get asia_temperate => "Асиа Температе";
-  @override
-  String get search => "Тражити...";
-  @override
-  String get habitat_rock => "стене или планине";
-  @override
-  String get taxonomy_superregnum => "домен";
-  @override
-  String get taxonomy_sectio => "секција";
-  @override
-  String get mongolia => "Монголија";
-  @override
-  String get taxonomy_subserie => "подсерија";
-  @override
-  String get western_south_america => "Западна Јужна Америка";
-  @override
-  String get taxonomy_subgenus => "подрод";
-  @override
-  String get close => "Близу";
-  @override
-  String get europe => "Европа";
-  @override
-  String get middle_europe => "Средња Европа";
-  @override
-  String get color_blue => "плава, љубичаста";
-  @override
-  String get my_filter => "Мој филтер";
-  @override
-  String get southern_south_america => "Јужна Јужна Америка";
-  @override
-  String get plant_habitat => "Станишта";
-  @override
-  String get snack_loading_ad => "Оглас се и даље учитава, поново притисните дугме.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "латица";
-  @override
-  String get petal_message => "Да ли је цвет зигоморфан? Не? Колико латица има?";
-  @override
-  String get color_white => "бео";
-  @override
-  String get northeastern_usa => "Североисточна САД";
-  @override
-  String get color_green => "зелена, браон, црна";
-  @override
-  String get taxonomy_ordo => "ред";
-  @override
-  String get taxonomy_supersectio => "надсекција";
-  @override
-  String get pacific => "Пацифиц";
-  @override
-  String get plant_sources => "Извори";
-  @override
-  String get taxonomy_regnum => "царство";
-  @override
-  String get south_central_pacific => "Јужно-централни Пацифик";
-  @override
-  String get filter_color => "боја";
-  @override
-  String get help => "Помоћ";
-  @override
-  String get mexico => "Мексико";
-  @override
-  String get snack_publish => "... да се касније објави";
-  @override
-  String get siberia => "Сибериа";
-  @override
-  String get taxonomy_subtribus => "подплеме";
-  @override
-  String get product_custom_filter_description => "Моћи ћете да промените редослед и број филтера (боја, станиште, латица, дистрибуција).";
-  @override
-  String get habitat_meadow => "ливаде или пашњаци";
-  @override
-  String get plant_trivia => "Тривијалност";
-  @override
-  String get product_purchased => "Купио";
-  @override
-  String get taxonomy_cladus => "(клада)";
-  @override
-  String get plant_herbalism => "Траварство";
-  @override
-  String get plant_height_to => "до";
-  @override
-  String get offline_download => "Настави преузимање";
-  @override
-  String get enhancements => "Побољшања";
-  @override
-  String get habitat_wetland => "мочварама";
-  @override
-  String get product_restore_purchases => "Враћање куповине";
-  @override
-  String get feedback_title => "Како доприносити";
-  @override
-  String get toxicity2 => "благо отровна биљка";
-  @override
-  String get toxicity1 => "отровна биљка";
-  @override
-  String get eastern_canada => "Источна Канада";
-  @override
-  String get plant_info => "Инфо";
-  @override
-  String get show_translation => "Схов преведени текст";
-  @override
-  String get habitat_tree => "дрвеће или жбуње";
-  @override
-  String get settings => "Подешавања";
-  @override
-  String get color_red => "црвена, розе";
-  @override
-  String get north_central_pacific => "Северно-централни Пацифик";
-  @override
-  String get taxonomy_subsectio => "подсекција";
-  @override
-  String get southern_africa => "Јужна Африка";
-  @override
-  String get always_my_region_title => "Увек додајте мој регион на филтер";
-  @override
-  String get color_yellow => "жут";
-  @override
-  String get subantarctic_islands => "Субантарктични Острва";
-  @override
-  String get list_info => "Одабрати једну";
-  @override
-  String get new_version => "Доступна је нова верзија, ажурирајте.";
-  @override
-  String get taxonomy_subfamilia => "потпородица";
-  @override
-  String get my_region => "Мој регион";
-  @override
-  String get pause => "Пауза";
-  @override
-  String get indian_subcontinent => "Индијски подконтинент";
-  @override
-  String get product_offline_description => "Моћи ћете покренути апликацију без интернет везе.";
-  @override
-  String get plant_flower => "Цвеће";
-  @override
-  String get filter_habitat => "станиште";
-  @override
-  String get rate_never => "Никад";
-  @override
-  String get northwestern_pacific => "Северозападни Пацифик";
-  @override
-  String get search_names => "Тражи имена";
-  @override
-  String get southwestern_europe => "Југозападна Европа";
-  @override
-  String get taxonomy_species => "врста";
-  @override
-  String get plant_fruit => "Плод";
-  @override
-  String get plant_flowering_to => "до";
-  @override
-  String get taxonomy_familia => "породица";
-  @override
-  String get plant_stem => "Стабло";
-  @override
-  String get antarctic_continent => "Антарктички континент";
-  @override
-  String get no => "Не";
-  @override
-  String get brazil => "Бразил";
-  @override
-  String get rate_text => "Аутор ове апликације је мотивисан позитивним одговором корисника. Молим вас, пошаљите му неке звезде кроз продавницу апликација.";
-  @override
-  String get eastern_europe => "Источна Европа";
-  @override
-  String get south_central_usa => "Јужна централна САД";
-  @override
-  String get offline_download_success => "Фотографије и илустрације су успешно преузете.";
-  @override
-  String get plant_flowering_from => "Цветања од";
-  @override
-  String get taxonomy_tribus => "племе";
-  @override
-  String get arabian_peninsula => "Арабијско полуострво";
-  @override
-  String get search_taxonomy => "Тражи у таксономији";
-  @override
-  String get rate_later => "Касније";
-  @override
-  String get color_message => "Која је боја цвијета? Изаберите најближег.";
-  @override
-  String get west_tropical_africa => "Западна тропска Африка";
-  @override
-  String get northern_europe => "Северна Европа";
-  @override
-  String get rate => "Рецензије";
-  @override
-  String get northeast_tropical_africa => "Североисточна тропска Африка";
-  @override
-  String get pref_language => "Језик којем дајете предност";
-  @override
-  String get product_custom_filter_title => "Прилагођени филтер";
-  @override
-  String get new_zealand => "Нови Зеланд";
-  @override
-  String get feedback_intro => "Ви сте доприносили овој апликацији пошто сте је инсталирали на свом уређају, хвала. Ако тражите нешто више, ево неколико опција:";
-  @override
-  String get filter_distribution => "дистрибуција";
-  @override
-  String get eastern_asia => "Источна Азија";
-  @override
-  String get western_asia => "Западна Азија";
-  @override
-  String get subarctic_america => "Субарцтиц Америца";
-  @override
-  String get product_search_title => "Претражујте имена или таксономију";
-  @override
-  String get feedback_buy_extended => "Можете купити проширену верзију са додатном функционалношћу као што је оффлине режим, тражити имена, претраживати у таксономији, опажањима и конфигурирати филтер.";
-  @override
-  String get north_central_usa => "Северна централна САД";
-  @override
-  String get improve_translation => "Побољшати транслатион";
-  @override
-  String get feedback_review => "Можете написати позитивну рецензију.";
-  @override
-  String get southeastern_usa => "Југоисточна САД";
-  @override
-  String get yes => "Да";
-  @override
-  String get feedback_run_ads_video => "Погледајте видео рекламу";
-  @override
-  String get plant_height_from => "Висине од";
-  @override
-  String get petal_many => "више од 5";
-  @override
-  String get southeastern_europe => "Југоисточна Европа";
-  @override
-  String get taxonomy_unknown => "непознат";
-  @override
-  String get plant_inflorescence => "Цваст";
-  @override
-  String get northern_africa => "Северна Африка";
-  @override
-  String get offline_subtitle => "захтева додатни простор од 300+ МБ.";
-  @override
-  String get china => "Кина";
-  @override
-  String get product_no_ads_title => "Нема нежељених реклама";
-  @override
-  String get offline_title => "Режим ван мреже";
-  @override
-  String get petal_zygomorphic => "зигоморфан";
-  @override
-  String get taxonomy_genus => "род";
-  @override
-  String get papuasia => "Папуазија";
-  @override
-  String get feedback_submit_translate_app => "Побољшајте ознаке апликације";
-}
-
-class $sv extends S {
-  const $sv();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Centralamerika";
-  @override
-  String get legend => "Legend";
-  @override
-  String get product_offline_title => "Offlineläge";
-  @override
-  String get feedback_submit_translate_data => "Förbättra blommans data";
-  @override
-  String get snack_copy => "Kopieras till Urklipp";
-  @override
-  String get product_purchase_failed => "Köp misslyckades";
-  @override
-  String get about => "Om ansökan";
-  @override
-  String get product_no_ads_description => "Applikationen visar inte annonsbannern längst ner på skärmen.";
-  @override
-  String get offline_download_progress => "Ladda ner bilder och illustrationer ...";
-  @override
-  String get western_canada => "Västra Kanada";
-  @override
-  String get northern_america => "Nordamerika";
-  @override
-  String get western_indian_ocean => "Västra indiska oceanen";
-  @override
-  String get feedback => "Återkoppling";
-  @override
-  String get southwestern_usa => "Sydvästra USA";
-  @override
-  String get distribution_message => "Vilket geografiskt område ska vi fokusera på?";
-  @override
-  String get caribbean => "Karibisk";
-  @override
-  String get product_search_description => "Du kan hitta en blomma med sitt svenska eller latinska namn eller dess taxon (t ex ordning, familj, släkt).";
-  @override
-  String get offline_delete_message => "Vill du radera offline-data?";
-  @override
-  String get australasia => "Australasien";
-  @override
-  String get petal_4 => "4 eller mindre";
-  @override
-  String get east_tropical_africa => "Östra tropiska Afrika";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get south_tropical_africa => "Södra tropiska Afrika";
-  @override
-  String get caucasus => "Kaukasus";
-  @override
-  String get middle_asia => "Mellanöstern Asien";
-  @override
-  String get plant_gallery => "Galleri";
-  @override
-  String get always_my_region_subtitle => "Din region kommer att förinställas till filtret";
-  @override
-  String get indochina => "Indokina";
-  @override
-  String get feedback_translate => "Du kan rapportera eventuellt typsnitt eller misstag du hittat eller skicka in ny översättning på ditt språk.";
-  @override
-  String get australia => "Australien";
-  @override
-  String get google_translate => "Översatt med Google Translate";
-  @override
-  String get plant_leaf => "Bladen";
-  @override
-  String get habitat_forest => "skogar";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "Malesien";
-  @override
-  String get southwestern_pacific => "Sydvästra Stilla havet";
-  @override
-  String get asia_tropical => "Asien Tropical";
-  @override
-  String get northwestern_usa => "Nordvästra USA";
-  @override
-  String get northern_south_america => "Norra Sydamerika";
-  @override
-  String get show_original => "Visa engelsk text";
-  @override
-  String get offline_download_message => "Du ska ladda ner 300+ MB bilder och illustrationer. Kontrollera om enheten är ansluten till Wi-Fi. Är du redo för nedladdning?";
-  @override
-  String get southern_america => "Sydamerika";
-  @override
-  String get middle_atlantic_ocean => "Mellanöstern Atlanten";
-  @override
-  String get feedback_run_ads => "Du kan visa helskärmsannons eller titta på videoannonsering för att stödja ytterligare utveckling och databasförbättring.";
-  @override
-  String get habitat_garden => "trädgårdar eller fält";
-  @override
-  String get product_purchase => "Köpa";
-  @override
-  String get russian_far_east => "Ryska Fjärran Östern";
-  @override
-  String get west_central_tropical_africa => "Västra central tropiska Afrika";
-  @override
-  String get habitat_message => "Vad handlar du om? Identifiera växtens livsmiljö.";
-  @override
-  String get plant_toxicity => "Giftighet";
-  @override
-  String get offline_download_fail => "Nedladdning misslyckad. Kontrollera din internetanslutning eller ledigt utrymme på enheten och försök igen.";
-  @override
-  String get snack_no_flowers => "Inga blommor matchande kriterier.";
-  @override
-  String get rate_question => "Är det här programmet användbart?";
-  @override
-  String get macaronesia => "Makaronesien";
-  @override
-  String get plant_taxonomy => "Taxonomi";
-  @override
-  String get feedback_run_ads_fullscreen => "Visa en fullskärmsannons";
-  @override
-  String get asia_temperate => "Asien Temperate";
-  @override
-  String get search => "Sök...";
-  @override
-  String get habitat_rock => "stenar eller berg";
-  @override
-  String get taxonomy_superregnum => "Domän";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "Mongoliet";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "Västra Sydamerika";
-  @override
-  String get taxonomy_subgenus => "Subgenus";
-  @override
-  String get close => "Stänga";
-  @override
-  String get europe => "Europa";
-  @override
-  String get middle_europe => "Mellanöstern Europa";
-  @override
-  String get color_blue => "blå, lila";
-  @override
-  String get my_filter => "Mitt filter";
-  @override
-  String get southern_south_america => "Södra Sydamerika";
-  @override
-  String get plant_habitat => "Växtplats";
-  @override
-  String get snack_loading_ad => "Annonsen laddas fortfarande, tryck på knappen igen.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "kronblad";
-  @override
-  String get petal_message => "Är blomman zygomorf? Nej? Hur många kronblad har det då?";
-  @override
-  String get color_white => "vit";
-  @override
-  String get northeastern_usa => "Nordöstra USA";
-  @override
-  String get color_green => "grön, brun, svart";
-  @override
-  String get taxonomy_ordo => "Ordning";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "Stilla havet";
-  @override
-  String get plant_sources => "Referenser";
-  @override
-  String get taxonomy_regnum => "Rike";
-  @override
-  String get south_central_pacific => "Syd centrala Stilla havet";
-  @override
-  String get filter_color => "färg";
-  @override
-  String get help => "Hjäjp";
-  @override
-  String get mexico => "Mexico";
-  @override
-  String get snack_publish => "... att publiceras senare";
-  @override
-  String get siberia => "Sibirien";
-  @override
-  String get taxonomy_subtribus => "Undertribus";
-  @override
-  String get product_custom_filter_description => "Du kan ändra standardordning och antal filter (färg, växtplats, kronblad, distribution).";
-  @override
-  String get habitat_meadow => "ängar eller gräsmarker";
-  @override
-  String get plant_trivia => "Trivia";
-  @override
-  String get product_purchased => "Köpt";
-  @override
-  String get taxonomy_cladus => "(klad)";
-  @override
-  String get plant_herbalism => "Medicinalväxt";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Återuppta nedladdning";
-  @override
-  String get enhancements => "Förbättringar";
-  @override
-  String get habitat_wetland => "hedar eller våtmarker";
-  @override
-  String get product_restore_purchases => "Återställa köp";
-  @override
-  String get feedback_title => "Hur man bidrar";
-  @override
-  String get toxicity2 => "något giftig växt";
-  @override
-  String get toxicity1 => "giftig växt";
-  @override
-  String get eastern_canada => "Östra Kanada";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Visa översatt text";
-  @override
-  String get habitat_tree => "träd eller buskar";
-  @override
-  String get settings => "Inställningar";
-  @override
-  String get color_red => "rött, rosa";
-  @override
-  String get north_central_pacific => "Norra centrala Stilla havet";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "Södra Afrika";
-  @override
-  String get always_my_region_title => "Lägg alltid till min region i filtret";
-  @override
-  String get color_yellow => "gul";
-  @override
-  String get subantarctic_islands => "Subantarctic Islands";
-  @override
-  String get list_info => "Välj en";
-  @override
-  String get new_version => "Ny version finns tillgänglig, uppdatera.";
-  @override
-  String get taxonomy_subfamilia => "Underfamilj";
-  @override
-  String get my_region => "Min region";
-  @override
-  String get pause => "Paus";
-  @override
-  String get indian_subcontinent => "Indiska subkontinenten";
-  @override
-  String get product_offline_description => "Du kan köra program utan internetanslutning.";
-  @override
-  String get plant_flower => "Blomma";
-  @override
-  String get filter_habitat => "växtplats";
-  @override
-  String get rate_never => "Aldrig";
-  @override
-  String get northwestern_pacific => "Nordvästra Stilla havet";
-  @override
-  String get search_names => "Sök i namn";
-  @override
-  String get southwestern_europe => "Sydvästra Europa";
-  @override
-  String get taxonomy_species => "Art";
-  @override
-  String get plant_fruit => "Frukten";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "Familj";
-  @override
-  String get plant_stem => "Stjälk";
-  @override
-  String get antarctic_continent => "Antarktis kontinent";
-  @override
-  String get no => "Nej";
-  @override
-  String get brazil => "Brasilien";
-  @override
-  String get rate_text => "Författaren till denna ansökan motiveras av positivt svar från användarna. Vänligen skicka honom några stjärnor genom applikationsbutiken.";
-  @override
-  String get eastern_europe => "Östeuropa";
-  @override
-  String get south_central_usa => "Syd-Central USA";
-  @override
-  String get offline_download_success => "Bilder och illustrationer har laddats ner.";
-  @override
-  String get plant_flowering_from => "Blomningstid";
-  @override
-  String get taxonomy_tribus => "Tribus";
-  @override
-  String get arabian_peninsula => "Arabiska halvön";
-  @override
-  String get search_taxonomy => "Sök i taxonomi";
-  @override
-  String get rate_later => "Senare";
-  @override
-  String get color_message => "Vad är blommans färg? Välj den närmaste.";
-  @override
-  String get west_tropical_africa => "Västra tropiska Afrika";
-  @override
-  String get northern_europe => "Norra Europa";
-  @override
-  String get rate => "Recensioner";
-  @override
-  String get northeast_tropical_africa => "Nordöstra tropiska Afrika";
-  @override
-  String get pref_language => "Önskat språk";
-  @override
-  String get product_custom_filter_title => "Anpassat filter";
-  @override
-  String get new_zealand => "Nya Zeeland";
-  @override
-  String get feedback_intro => "Du har bidragit till den här applikationen eftersom du har installerat den på din enhet, tack. Om du letar efter något mer, här är några alternativ:";
-  @override
-  String get filter_distribution => "distribution";
-  @override
-  String get eastern_asia => "Östra asien";
-  @override
-  String get western_asia => "Västra Asien";
-  @override
-  String get subarctic_america => "Subarctic Amerika";
-  @override
-  String get product_search_title => "Sök i namn eller taxonomi";
-  @override
-  String get feedback_buy_extended => "Du kan köpa utökad version med ytterligare funktioner som offline-läge, sök i namn, sök i taxonomi, observationer och konfigurerbart filter.";
-  @override
-  String get north_central_usa => "Nord-Central USA";
-  @override
-  String get improve_translation => "Förbättra translation";
-  @override
-  String get feedback_review => "Du kan skriva en positiv recension.";
-  @override
-  String get southeastern_usa => "Sydöstra USA";
-  @override
-  String get yes => "Ja";
-  @override
-  String get feedback_run_ads_video => "Titta på en videoannons";
-  @override
-  String get plant_height_from => "Höjd";
-  @override
-  String get petal_many => "mer än 5";
-  @override
-  String get southeastern_europe => "Sydöstra Europa";
-  @override
-  String get taxonomy_unknown => "okänd";
-  @override
-  String get plant_inflorescence => "Blomställning";
-  @override
-  String get northern_africa => "Nordafrika";
-  @override
-  String get offline_subtitle => "kräver 300 + MB extra utrymme.";
-  @override
-  String get china => "Kina";
-  @override
-  String get product_no_ads_title => "Ingen oönskad annonsering";
-  @override
-  String get offline_title => "Offlineläge";
-  @override
-  String get petal_zygomorphic => "zygomorf";
-  @override
-  String get taxonomy_genus => "Släkte";
-  @override
-  String get papuasia => "Papuasien";
-  @override
-  String get feedback_submit_translate_app => "Förbättra programmets etiketter";
-}
-
-class $en extends S {
-  const $en();
-}
-
-class $it extends S {
-  const $it();
+class $it_IT extends S {
+  const $it_IT();
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -6538,2992 +601,380 @@ class $it extends S {
   String get feedback_submit_translate_app => "Migliora le etichette delle applicazioni";
 }
 
-class $es extends S {
-  const $es();
+class $ru_RU extends S {
+  const $ru_RU();
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
-  String get central_america => "Centroamérica";
+  String get central_america => "Центральная Америка";
   @override
-  String get legend => "Leyenda";
+  String get legend => "Легенда";
   @override
-  String get product_offline_title => "Modo offline";
+  String get product_offline_title => "Автономный режим";
   @override
-  String get feedback_submit_translate_data => "Mejorar los datos de la flor.";
+  String get feedback_submit_translate_data => "Улучшить данные цветка";
   @override
-  String get snack_copy => "Copiado al portapapeles";
+  String get snack_copy => "Скопировано в буфер обмена";
   @override
-  String get product_purchase_failed => "La compra falló";
+  String get product_purchase_failed => "Покупка не удалась";
   @override
-  String get about => "Acerca de";
+  String get about => "О приложении";
   @override
-  String get product_no_ads_description => "La aplicación no mostrará el anuncio publicitario en la parte inferior de la pantalla.";
+  String get product_no_ads_description => "Приложение не будет показывать рекламный баннер внизу экрана.";
   @override
-  String get offline_download_progress => "Descargando fotos e ilustraciones ...";
+  String get offline_download_progress => "Загрузка фотографий и иллюстраций ...";
   @override
-  String get western_canada => "Canadá occidental";
+  String get western_canada => "Западная Канада";
   @override
-  String get northern_america => "América del Norte";
+  String get northern_america => "Северная Америка";
   @override
-  String get western_indian_ocean => "Océano Índico occidental";
+  String get western_indian_ocean => "Западный Индийский океан";
   @override
-  String get feedback => "Sugerencias / Contribución";
+  String get feedback => "Отправить отзыв";
   @override
-  String get southwestern_usa => "Suroeste de los Estados Unidos";
+  String get southwestern_usa => "Юго-западная часть США";
   @override
-  String get distribution_message => "¿En qué área geográfica enfocarse?";
+  String get distribution_message => "На какой географической области мы должны сосредоточиться?";
   @override
-  String get caribbean => "Caribe";
+  String get caribbean => "Карибик";
   @override
-  String get product_search_description => "Podrá encontrar una flor por su nombre en español o latino o por su taxón (por ejemplo orden, familia, género).";
+  String get product_search_description => "Вы сможете найти цветок по его русскому или латинскому имени или по таксону (например, порядок, семейство, род).";
   @override
-  String get offline_delete_message => "¿Desea borrar los datos fuera de línea?";
+  String get offline_delete_message => "Вы хотите удалить автономные данные?";
   @override
-  String get australasia => "Australasia";
+  String get australasia => "Австралазия";
   @override
-  String get petal_4 => "4 o menos";
+  String get petal_4 => "4 или менее";
   @override
-  String get east_tropical_africa => "África tropical oriental";
+  String get east_tropical_africa => "Восточная тропическая Африка";
   @override
-  String get africa => "África";
+  String get africa => "Африка";
   @override
-  String get south_tropical_africa => "África tropical del sur";
+  String get south_tropical_africa => "Южная тропическая Африка";
   @override
-  String get caucasus => "Cáucaso";
+  String get caucasus => "Кавказ";
   @override
-  String get middle_asia => "Medio Asia";
+  String get middle_asia => "Средняя Азия";
   @override
-  String get plant_gallery => "Galería";
+  String get plant_gallery => "Галерея";
   @override
-  String get always_my_region_subtitle => "Su región estará preestablecida para el filtro";
+  String get always_my_region_subtitle => "Ваш регион будет предварительно настроен на фильтр";
   @override
-  String get indochina => "Indochina";
+  String get indochina => "Индокитай";
   @override
-  String get feedback_translate => "Puede reportar cualquier error tipográfico o error que encontró o enviar una nueva traducción en su idioma.";
+  String get feedback_translate => "Вы можете сообщить о любой обнаруженной вами опечатке или ошибке или представить новый перевод на вашем языке.";
   @override
-  String get australia => "Australia";
+  String get australia => "Австралия";
   @override
-  String get google_translate => "Traducido con Google Traductor";
+  String get google_translate => "Перевод с Google Translate";
   @override
-  String get plant_leaf => "Hojas";
+  String get plant_leaf => "Листья";
   @override
-  String get habitat_forest => "bosque";
+  String get habitat_forest => "леса";
   @override
-  String get taxonomy_serie => "Serie";
+  String get taxonomy_serie => "Ряд";
   @override
-  String get malesia => "Malesia";
+  String get malesia => "Юго-Восточная Азия";
   @override
-  String get southwestern_pacific => "Pacífico sudoccidental";
+  String get southwestern_pacific => "Юго-западная часть Тихого океана";
   @override
-  String get asia_tropical => "Asia-Tropical";
+  String get asia_tropical => "Азия тропическая";
   @override
-  String get northwestern_usa => "Noroeste de los Estados Unidos";
+  String get northwestern_usa => "Северо-западная часть США";
   @override
-  String get northern_south_america => "Norte de América del Sur";
+  String get northern_south_america => "Север Южной Америки";
   @override
-  String get show_original => "Mostrar texto en inglés";
+  String get show_original => "Показать английский текст";
   @override
-  String get offline_download_message => "Vas a descargar más de 300 MB de fotos e ilustraciones. Por favor, compruebe si su dispositivo está conectado a Wi-Fi. ¿Estás listo para una descarga?";
+  String get offline_download_message => "Вы собираетесь загрузить более 300 МБ фотографий и иллюстраций. Пожалуйста, проверьте, если ваше устройство подключено к Wi-Fi. Вы готовы к загрузке?";
   @override
-  String get southern_america => "América del Sur";
+  String get southern_america => "Южная Америка";
   @override
-  String get middle_atlantic_ocean => "Medio Océano Atlántico";
+  String get middle_atlantic_ocean => "Средний Атлантический океан";
   @override
-  String get feedback_run_ads => "Puede mostrar anuncios a pantalla completa o ver anuncios de videos para respaldar el desarrollo adicional y la mejora de la base de datos.";
+  String get feedback_run_ads => "Вы можете отображать полноэкранную рекламу или смотреть видео-рекламу для поддержки дальнейшего развития и улучшения базы данных.";
   @override
-  String get habitat_garden => "jardín o campo";
+  String get habitat_garden => "сады или поля";
   @override
-  String get product_purchase => "Compra";
+  String get product_purchase => "Покупать";
   @override
-  String get russian_far_east => "Extremo Oriente ruso";
+  String get russian_far_east => "Российский Дальний Восток";
   @override
-  String get west_central_tropical_africa => "África tropical occidental central";
+  String get west_central_tropical_africa => "Западно-Центральная тропическая Африка";
   @override
-  String get habitat_message => "¿Dónde te encuentras? Identifica el lugar.";
+  String get habitat_message => "Что вокруг тебя? Определить среду обитания растений.";
   @override
-  String get plant_toxicity => "Toxicidad";
+  String get plant_toxicity => "Токсичность";
   @override
-  String get offline_download_fail => "Descarga fracasó. Verifique su conexión a Internet o espacio libre en el dispositivo e intente nuevamente.";
+  String get offline_download_fail => "Ошибка загрузки. Пожалуйста, проверьте ваше интернет-соединение или свободное место на устройстве и попробуйте снова.";
   @override
-  String get snack_no_flowers => "No hay criterios de correspondencia de flores.";
+  String get snack_no_flowers => "Нет цветов соответствующих критериям.";
   @override
-  String get rate_question => "¿Es útil esta aplicación?";
+  String get rate_question => "Является ли это приложение полезным?";
   @override
-  String get macaronesia => "Macaronesia";
+  String get macaronesia => "Макронезии";
   @override
-  String get plant_taxonomy => "Taxonomía";
+  String get plant_taxonomy => "Систематика";
   @override
-  String get feedback_run_ads_fullscreen => "Mostrar un anuncio en pantalla completa";
+  String get feedback_run_ads_fullscreen => "Показать полноэкранную рекламу";
   @override
-  String get asia_temperate => "Asia-Templado";
+  String get asia_temperate => "Азия умерная";
   @override
-  String get search => "Buscar...";
+  String get search => "Поиск...";
   @override
-  String get habitat_rock => "rocas o montaña";
+  String get habitat_rock => "скалы или горы";
   @override
-  String get taxonomy_superregnum => "dominio";
+  String get taxonomy_superregnum => "Домен";
   @override
-  String get taxonomy_sectio => "Sectio";
+  String get taxonomy_sectio => "Секция";
   @override
-  String get mongolia => "Mongolia";
+  String get mongolia => "Монголия";
   @override
-  String get taxonomy_subserie => "Subserie";
+  String get taxonomy_subserie => "Подряд";
   @override
-  String get western_south_america => "América del oeste occidental";
+  String get western_south_america => "Западная Южная Америка";
   @override
-  String get taxonomy_subgenus => "Subgenus";
+  String get taxonomy_subgenus => "Подрод";
   @override
-  String get close => "Cerrar";
+  String get close => "Закрытие";
   @override
-  String get europe => "Europa";
+  String get europe => "Европа";
   @override
-  String get middle_europe => "Europa central";
+  String get middle_europe => "Средняя Европа";
   @override
-  String get color_blue => "azul, púrpura";
+  String get color_blue => "синая, фиолетовая";
   @override
-  String get my_filter => "Mi filtro";
+  String get my_filter => "Мой фильтр";
   @override
-  String get southern_south_america => "Sur de América del Sur";
+  String get southern_south_america => "Южная Южная Америка";
   @override
-  String get plant_habitat => "Localidad";
+  String get plant_habitat => "Ареал";
   @override
-  String get snack_loading_ad => "El anuncio todavía se está cargando, presione el botón otra vez.";
+  String get snack_loading_ad => "Реклама все еще загружается, нажмите кнопку еще раз.";
   @override
   String get petal_5 => "5";
   @override
-  String get filter_petal => "pétalo";
+  String get filter_petal => "лепесток";
   @override
-  String get petal_message => "¿Es la flor zigomorfo? ¿No? Pués, ¿cuántos pétalos tiene?";
+  String get petal_message => "Является ли цветок зигоморфным? Нет? Тогда сколько у него лепестков?";
   @override
-  String get color_white => "blanco";
+  String get color_white => "белая";
   @override
-  String get northeastern_usa => "Nordeste de los Estados Unidos";
+  String get northeastern_usa => "Северо-восточная часть США";
   @override
-  String get color_green => "verde, marrón, negro";
+  String get color_green => "зелёная, коричневая, чёрная";
   @override
-  String get taxonomy_ordo => "orden";
+  String get taxonomy_ordo => "Порядок";
   @override
-  String get taxonomy_supersectio => "Supersectio";
+  String get taxonomy_supersectio => "Надсекция";
   @override
-  String get pacific => "Pacífico";
+  String get pacific => "Тихий океан";
   @override
-  String get plant_sources => "Fuentes";
+  String get plant_sources => "Ссылки";
   @override
-  String get taxonomy_regnum => "reino";
+  String get taxonomy_regnum => "Царство";
   @override
-  String get south_central_pacific => "Pacífico Sur-Central";
+  String get south_central_pacific => "Юго-Центральная часть Тихого океана";
   @override
-  String get filter_color => "color";
+  String get filter_color => "окраска";
   @override
-  String get help => "Ayuda";
+  String get help => "Cправка";
   @override
-  String get mexico => "Méjico";
+  String get mexico => "Мексика";
   @override
-  String get snack_publish => "... para ser publicado más tarde";
+  String get snack_publish => "... будет опубликовано позже";
   @override
-  String get siberia => "Siberia";
+  String get siberia => "Сибирь";
   @override
-  String get taxonomy_subtribus => "subtribu";
+  String get taxonomy_subtribus => "Подтриба";
   @override
-  String get product_custom_filter_description => "Podrás cambiar el orden predeterminado y la cantidad de filtros (color, localidad, pétalo, distribución).";
+  String get product_custom_filter_description => "Вы сможете изменить порядок по умолчанию и количество фильтров (окраска, ареалы, лепесток, распределение).";
   @override
-  String get habitat_meadow => "prado o pradera";
+  String get habitat_meadow => "луга или пастбища";
   @override
-  String get plant_trivia => "Trivialidades";
+  String get plant_trivia => "Пустяки";
   @override
-  String get product_purchased => "Comprado";
+  String get product_purchased => "Купленный";
   @override
-  String get taxonomy_cladus => "(clado)";
+  String get taxonomy_cladus => "(клада)";
   @override
-  String get plant_herbalism => "Herboristería";
+  String get plant_herbalism => "Травничество";
   @override
-  String get plant_height_to => "hasta";
+  String get plant_height_to => "-";
   @override
-  String get offline_download => "Descarga hoja de vida";
+  String get offline_download => "Возобновление загрузки";
   @override
-  String get enhancements => "Mejoras";
+  String get enhancements => "Улучшения";
   @override
-  String get habitat_wetland => "páramo o pantano";
+  String get habitat_wetland => "водно-болотные угодья";
   @override
-  String get product_restore_purchases => "Restaurar las compras";
+  String get product_restore_purchases => "Восстановить покупки";
   @override
-  String get feedback_title => "Cómo contribuir";
+  String get feedback_title => "Как внести свой вклад";
   @override
-  String get toxicity2 => "planta ligeramente venenosa";
+  String get toxicity2 => "слегка ядовитое растение";
   @override
-  String get toxicity1 => "planta venenosa";
+  String get toxicity1 => "ядовитое растение";
   @override
-  String get eastern_canada => "Este de Canadá";
+  String get eastern_canada => "Восточная Канада";
   @override
-  String get plant_info => "Info";
+  String get plant_info => "Информация";
   @override
-  String get show_translation => "Mostrar texto traducido";
+  String get show_translation => "Показать перевод";
   @override
-  String get habitat_tree => "árboles o arbustos";
+  String get habitat_tree => "деревья или кустарники";
   @override
-  String get settings => "Configuración";
+  String get settings => "Устройства";
   @override
-  String get color_red => "rojo, roso";
+  String get color_red => "красная, розовая";
   @override
-  String get north_central_pacific => "Pacífico Norte-Central";
+  String get north_central_pacific => "Северо-Центральная часть Тихого океана";
   @override
-  String get taxonomy_subsectio => "Subsectio";
+  String get taxonomy_subsectio => "Подсекция";
   @override
-  String get southern_africa => "Africa del Sur";
+  String get southern_africa => "Южная Африка";
   @override
-  String get always_my_region_title => "Siempre agregue mi región al filtro";
+  String get always_my_region_title => "Всегда добавлять мой регион в фильтр";
   @override
-  String get color_yellow => "amarillo";
+  String get color_yellow => "жёлтая";
   @override
-  String get subantarctic_islands => "Islas Subantárticas";
+  String get subantarctic_islands => "Субантарктические острова";
   @override
-  String get list_info => "Elige una";
+  String get list_info => "Выбери один";
   @override
-  String get new_version => "La nueva versión está disponible, por favor actualice.";
+  String get new_version => "Новая версия доступна, пожалуйста, обновите.";
   @override
-  String get taxonomy_subfamilia => "subfamilia";
+  String get taxonomy_subfamilia => "Подсемейство";
   @override
-  String get my_region => "Mi región";
+  String get my_region => "Мой район";
   @override
-  String get pause => "Pausa";
+  String get pause => "Пауза";
   @override
-  String get indian_subcontinent => "Subcontinente indio";
+  String get indian_subcontinent => "Индийский субконтинент";
   @override
-  String get product_offline_description => "Podrás ejecutar la aplicación sin conexión a internet.";
+  String get product_offline_description => "Вы сможете запустить приложение без подключения к интернету.";
   @override
-  String get plant_flower => "Flores";
+  String get plant_flower => "Цветы";
   @override
-  String get filter_habitat => "localidad";
+  String get filter_habitat => "ареалы";
   @override
-  String get rate_never => "Nunca";
+  String get rate_never => "Никогда";
   @override
-  String get northwestern_pacific => "Noroeste del Pacífico";
+  String get northwestern_pacific => "Северо-западная часть Тихого океана";
   @override
-  String get search_names => "Buscar en nombres";
+  String get search_names => "Поиск по именам";
   @override
-  String get southwestern_europe => "Sudoeste de Europa";
+  String get southwestern_europe => "Юго-Западная Европа";
   @override
-  String get taxonomy_species => "especie";
+  String get taxonomy_species => "Вид";
   @override
-  String get plant_fruit => "Fruta";
+  String get plant_fruit => "Плоды";
   @override
-  String get plant_flowering_to => "hasta";
+  String get plant_flowering_to => "-";
   @override
-  String get taxonomy_familia => "familia";
+  String get taxonomy_familia => "Семейство";
   @override
-  String get plant_stem => "Tallo";
+  String get plant_stem => "Стебель";
   @override
-  String get antarctic_continent => "Continente Antártico";
+  String get antarctic_continent => "Антарктический континент";
   @override
-  String get no => "No";
+  String get no => "Нет";
   @override
-  String get brazil => "Brasil";
+  String get brazil => "Бразилия";
   @override
-  String get rate_text => "Al autor de esta aplicación le motivan las reacciones positivas de los usuarios. Mándele, por favor, unas flores de la estrella a través de la tienda de aplicaciones.";
+  String get rate_text => "Автор этого приложения мотивирован положительным откликом пользователей. Пожалуйста, отправьте ему несколько звезд через магазин приложений.";
   @override
-  String get eastern_europe => "Europa del Este";
+  String get eastern_europe => "Восточная Европа";
   @override
-  String get south_central_usa => "Central sur de los Estados Unidos";
+  String get south_central_usa => "Юго-Центральная часть США";
   @override
-  String get offline_download_success => "Fotos e ilustraciones han sido descargadas exitosamente.";
+  String get offline_download_success => "Фотографии и иллюстрации успешно загружены.";
   @override
-  String get plant_flowering_from => "Floración desde";
+  String get plant_flowering_from => "Цветет:";
   @override
-  String get taxonomy_tribus => "tribu";
+  String get taxonomy_tribus => "Триба";
   @override
-  String get arabian_peninsula => "Península Arabica";
+  String get arabian_peninsula => "Аравийский полуостров";
   @override
-  String get search_taxonomy => "Buscar en taxonomía";
+  String get search_taxonomy => "Поиск в таксономии";
   @override
-  String get rate_later => "Más tarde";
+  String get rate_later => "Позже";
   @override
-  String get color_message => "¿Cuál es el color de la flor? Elige el más cercano. Puedes volver a cambiar la selección cuando sea.";
+  String get color_message => "Какого цвета цветок? Выберите ближайший.";
   @override
-  String get west_tropical_africa => "África tropical occidental";
+  String get west_tropical_africa => "Западная тропическая Африка";
   @override
-  String get northern_europe => "Norte de Europa";
+  String get northern_europe => "Северная Европа";
   @override
-  String get rate => "Opinione";
+  String get rate => "Отзывы";
   @override
-  String get northeast_tropical_africa => "Noreste de África Tropical";
+  String get northeast_tropical_africa => "Северо-Восточная тропическая Африка";
   @override
-  String get pref_language => "Idioma preferido";
+  String get pref_language => "Предпочтительный язык";
   @override
-  String get product_custom_filter_title => "Filtro personalizado";
+  String get product_custom_filter_title => "Пользовательский фильтр";
   @override
-  String get new_zealand => "Nueva Zelanda";
+  String get new_zealand => "Новая Зеландия";
   @override
-  String get feedback_intro => "Ha estado contribuyendo a esta aplicación desde que la ha instalado en su dispositivo, gracias. Si está buscando algo más, aquí hay algunas opciones:";
+  String get feedback_intro => "Вы вносите свой вклад в это приложение, так как вы установили его на своем устройстве, спасибо Если вы ищете что-то большее, вот несколько вариантов:";
   @override
-  String get filter_distribution => "distribución";
+  String get filter_distribution => "распределение";
   @override
-  String get eastern_asia => "Asia Oriental";
+  String get eastern_asia => "Восточная Азия";
   @override
-  String get western_asia => "Asia occidental";
+  String get western_asia => "Западная Азия";
   @override
-  String get subarctic_america => "América Subártica";
+  String get subarctic_america => "Субарктическая Америка";
   @override
-  String get product_search_title => "Búsqueda en nombres o taxonomía";
+  String get product_search_title => "Поиск по именам или таксономии";
   @override
-  String get feedback_buy_extended => "Puede comprar la versión extendida (+) con funcionalidad adicional como el modo fuera de línea, buscar en nombres, buscar en taxonomía, observaciones y filtros configurables.";
+  String get feedback_buy_extended => "Вы можете купить расширенную версию с дополнительными функциями, такими как автономный режим, поиск по именам, поиск по таксономии, наблюдения и настраиваемый фильтр.";
   @override
-  String get north_central_usa => "Norte central de los Estados Unidos";
+  String get north_central_usa => "Северо-Центральная часть США";
   @override
-  String get improve_translation => "Mejorar la traducción";
+  String get improve_translation => "Улучшить перевод";
   @override
-  String get feedback_review => "Puedes escribir una crítica positiva.";
+  String get feedback_review => "Вы можете написать положительный отзыв.";
   @override
-  String get southeastern_usa => "Sudeste de los Estados Unidos";
+  String get southeastern_usa => "Юго-Восточная часть США";
   @override
-  String get yes => "Sí";
+  String get yes => "Да";
   @override
-  String get feedback_run_ads_video => "Ver un video publicitario";
+  String get feedback_run_ads_video => "Смотреть видео рекламу";
   @override
-  String get plant_height_from => "Altura desde";
+  String get plant_height_from => "Высота:";
   @override
-  String get petal_many => "más de 5";
+  String get petal_many => "более 5";
   @override
-  String get southeastern_europe => "Sudorientale de Europa";
+  String get southeastern_europe => "Юго-Восточная Европа";
   @override
-  String get taxonomy_unknown => "desconocido";
+  String get taxonomy_unknown => "неизвестный";
   @override
-  String get plant_inflorescence => "Inflorescencia";
+  String get plant_inflorescence => "Соцветие";
   @override
-  String get northern_africa => "Africa del Norte";
+  String get northern_africa => "Северная Африка";
   @override
-  String get offline_subtitle => "requiere espacio adicional de 300 MB.";
+  String get offline_subtitle => "требует 300+ МБ дополнительного места.";
   @override
-  String get china => "China";
+  String get china => "Китай";
   @override
-  String get product_no_ads_title => "No hay publicidad no deseada";
+  String get product_no_ads_title => "Без нежелательной рекламы";
   @override
-  String get offline_title => "Modo offline";
+  String get offline_title => "Автономный режим";
   @override
-  String get petal_zygomorphic => "zigomorfo";
+  String get petal_zygomorphic => "зигоморфный";
   @override
-  String get taxonomy_genus => "género";
+  String get taxonomy_genus => "Род";
   @override
   String get papuasia => "Papuasia";
   @override
-  String get feedback_submit_translate_app => "Mejorar las etiquetas de la aplicación.";
+  String get feedback_submit_translate_app => "Улучшить ярлыки приложений";
 }
 
-class $et extends S {
-  const $et();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Kesk-Ameerika";
-  @override
-  String get legend => "Legend";
-  @override
-  String get product_offline_title => "Võrguühenduseta režiim";
-  @override
-  String get feedback_submit_translate_data => "Parandage lilli andmeid";
-  @override
-  String get snack_copy => "Kopeeritud lõikelauale";
-  @override
-  String get product_purchase_failed => "Ostmine nurjus";
-  @override
-  String get about => "Rakenduse kohta";
-  @override
-  String get product_no_ads_description => "Rakendus ei näita ekraani allosas reklaami bännerit.";
-  @override
-  String get offline_download_progress => "Fotode ja illustratsioonide allalaadimine ...";
-  @override
-  String get western_canada => "Lääne-Kanada";
-  @override
-  String get northern_america => "Põhja-Ameerika";
-  @override
-  String get western_indian_ocean => "India ookeani lääneosa";
-  @override
-  String get feedback => "Tagasiside / Panus";
-  @override
-  String get southwestern_usa => "Edelaosa USA";
-  @override
-  String get distribution_message => "Milline geograafiline piirkond peaks keskenduma?";
-  @override
-  String get caribbean => "Kariibimere saared";
-  @override
-  String get product_search_description => "Sul on võimalik leida lill oma eesti või ladina nime või taksoni järgi (nt selts, sugukond, perekond).";
-  @override
-  String get offline_delete_message => "Kas soovite offline andmeid kustutada?";
-  @override
-  String get australasia => "Austraalia";
-  @override
-  String get petal_4 => "4 või vähem";
-  @override
-  String get east_tropical_africa => "Ida troopiline Aafrika";
-  @override
-  String get africa => "Aafrika";
-  @override
-  String get south_tropical_africa => "Lõuna-troopiline Aafrika";
-  @override
-  String get caucasus => "Kaukaasia";
-  @override
-  String get middle_asia => "Kesk-Aasias";
-  @override
-  String get plant_gallery => "Galerii";
-  @override
-  String get always_my_region_subtitle => "Teie piirkond on filtrile eelnevalt seadistatud";
-  @override
-  String get indochina => "Indo-Hiina";
-  @override
-  String get feedback_translate => "Saate teatada mis tahes leitud veast või veast või esitada uue tõlke oma keelde.";
-  @override
-  String get australia => "Austraalia";
-  @override
-  String get google_translate => "Tõlgitud Google Translate";
-  @override
-  String get plant_leaf => "Lehed";
-  @override
-  String get habitat_forest => "metsamaad või metsade";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "Malaisia";
-  @override
-  String get southwestern_pacific => "Vaikse ookeani edelaosa";
-  @override
-  String get asia_tropical => "Aasia-Troopiline";
-  @override
-  String get northwestern_usa => "Loode USA";
-  @override
-  String get northern_south_america => "Põhja-Lõuna-Ameerika";
-  @override
-  String get show_original => "Näita ingliskeelne tekst";
-  @override
-  String get offline_download_message => "Sa laadid alla 300+ MB fotosid ja illustratsioone. Kontrollige, kas teie seade on ühendatud Wi-Fi-ga. Kas olete valmis allalaadimiseks?";
-  @override
-  String get southern_america => "Lõuna-Ameerika";
-  @override
-  String get middle_atlantic_ocean => "Kesk-Atlandi ookean";
-  @override
-  String get feedback_run_ads => "Täiendava ekraani reklaami või videoreklaami saate kuvada edasise arengu ja andmebaaside täiustamise toetamiseks.";
-  @override
-  String get habitat_garden => "aiad või väljad";
-  @override
-  String get product_purchase => "Ostmine";
-  @override
-  String get russian_far_east => "Vene Kaug-Ida";
-  @override
-  String get west_central_tropical_africa => "Lääne-Kesk-troopiline Aafrika";
-  @override
-  String get habitat_message => "Mis teie ümber? Nimetage taime elupaiga.";
-  @override
-  String get plant_toxicity => "Mürgisus";
-  @override
-  String get offline_download_fail => "Allalaadimine ebaõnnestus. Palun kontrollige oma Interneti-ühendust või vaba ruumi seadmes ja proovige uuesti.";
-  @override
-  String get snack_no_flowers => "Lillede sobitamise kriteeriumid puuduvad.";
-  @override
-  String get rate_question => "See app kasulik?";
-  @override
-  String get macaronesia => "Makaroneesia";
-  @override
-  String get plant_taxonomy => "Taksonoomia";
-  @override
-  String get feedback_run_ads_fullscreen => "Näita täisekraani reklaami";
-  @override
-  String get asia_temperate => "Aasia-Mõõdukas";
-  @override
-  String get search => "Otsing...";
-  @override
-  String get habitat_rock => "kivid või mägedes";
-  @override
-  String get taxonomy_superregnum => "Domeen";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "Mongoolia";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "Lääne-Lõuna-Ameerika";
-  @override
-  String get taxonomy_subgenus => "Subgenus";
-  @override
-  String get close => "Sulge";
-  @override
-  String get europe => "Euroopa";
-  @override
-  String get middle_europe => "Kesk-Euroopa";
-  @override
-  String get color_blue => "sinine, lilla";
-  @override
-  String get my_filter => "Minu filter";
-  @override
-  String get southern_south_america => "Lõuna-Lõuna-Ameerika";
-  @override
-  String get plant_habitat => "Elupaik";
-  @override
-  String get snack_loading_ad => "Reklaam laaditakse ikka veel, vajutage uuesti nuppu.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "kroonlehed";
-  @override
-  String get petal_message => "Kas lill ebaregulaarne? Ei? Siis, kui palju kroonlehed see on?";
-  @override
-  String get color_white => "valge";
-  @override
-  String get northeastern_usa => "Kirdeosas USA";
-  @override
-  String get color_green => "roheline, pruun, must";
-  @override
-  String get taxonomy_ordo => "Selts";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "Vaikne ookean";
-  @override
-  String get plant_sources => "Allikad";
-  @override
-  String get taxonomy_regnum => "Riik";
-  @override
-  String get south_central_pacific => "Vaikse ookeani keskosas";
-  @override
-  String get filter_color => "värv";
-  @override
-  String get help => "Appi";
-  @override
-  String get mexico => "Mehhiko";
-  @override
-  String get snack_publish => "... avaldatakse hiljem";
-  @override
-  String get siberia => "Siberis";
-  @override
-  String get taxonomy_subtribus => "Subtriibus";
-  @override
-  String get product_custom_filter_description => "Saate muuta vaikimisi järjekorra ja filtrite arvu (värv, elupaikade, kroonleht, levitamine).";
-  @override
-  String get habitat_meadow => "heinamaad või rohumaade";
-  @override
-  String get plant_trivia => "Tühiasi";
-  @override
-  String get product_purchased => "Ostetud";
-  @override
-  String get taxonomy_cladus => "(clade)";
-  @override
-  String get plant_herbalism => "Raviteaduse";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Jätka allalaadimist";
-  @override
-  String get enhancements => "Täiendused";
-  @override
-  String get habitat_wetland => "moorlandi või märgala";
-  @override
-  String get product_restore_purchases => "Ostude taastamine";
-  @override
-  String get feedback_title => "Kuidas aidata";
-  @override
-  String get toxicity2 => "veidi mürgine taim";
-  @override
-  String get toxicity1 => "mürgine taim";
-  @override
-  String get eastern_canada => "Ida-Kanada";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Kuva tõlgitud tekst";
-  @override
-  String get habitat_tree => "puud või põõsad";
-  @override
-  String get settings => "Reguleerimine";
-  @override
-  String get color_red => "punane, roosa";
-  @override
-  String get north_central_pacific => "Vaikse ookeani põhja-keskosa";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "Lõuna-Aafrika";
-  @override
-  String get always_my_region_title => "Lisage alati minu piirkond filtrile";
-  @override
-  String get color_yellow => "kollane";
-  @override
-  String get subantarctic_islands => "Subantkartised saared";
-  @override
-  String get list_info => "Vali üks";
-  @override
-  String get new_version => "Uus versioon on saadaval, värskendage.";
-  @override
-  String get taxonomy_subfamilia => "Subfamily";
-  @override
-  String get my_region => "Minu regioon";
-  @override
-  String get pause => "Paus";
-  @override
-  String get indian_subcontinent => "India subkontinent";
-  @override
-  String get product_offline_description => "Teil on võimalik käivitada rakendust ilma internetiühenduseta.";
-  @override
-  String get plant_flower => "Õis";
-  @override
-  String get filter_habitat => "elupaikade";
-  @override
-  String get rate_never => "Mitte kunagi";
-  @override
-  String get northwestern_pacific => "Vaikse ookeani loodeosas";
-  @override
-  String get search_names => "Otsi nimedest";
-  @override
-  String get southwestern_europe => "Edela-Euroopa";
-  @override
-  String get taxonomy_species => "Liik";
-  @override
-  String get plant_fruit => "Vili";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "Sugukond";
-  @override
-  String get plant_stem => "Vars";
-  @override
-  String get antarctic_continent => "Antarktika mandril";
-  @override
-  String get no => "Ei";
-  @override
-  String get brazil => "Brasiilia";
-  @override
-  String get rate_text => "Selle rakenduse autorit toetab kasutajate positiivne vastus. Palun saatke talle mõned tähed rakenduste poe kaudu.";
-  @override
-  String get eastern_europe => "Ida-Euroopa";
-  @override
-  String get south_central_usa => "Lõuna-Keskne USA";
-  @override
-  String get offline_download_success => "Fotod ja illustratsioonid on edukalt alla laaditud.";
-  @override
-  String get plant_flowering_from => "Õitsemine";
-  @override
-  String get taxonomy_tribus => "Triibus";
-  @override
-  String get arabian_peninsula => "Araabia poolsaar";
-  @override
-  String get search_taxonomy => "Otsi taksonoomias";
-  @override
-  String get rate_later => "Pärast";
-  @override
-  String get color_message => "Mis värvi lill? Vali lähim.";
-  @override
-  String get west_tropical_africa => "Lääne troopiline Aafrika";
-  @override
-  String get northern_europe => "Põhja-Euroopa";
-  @override
-  String get rate => "Arvustus";
-  @override
-  String get northeast_tropical_africa => "Kirde troopiline Aafrika";
-  @override
-  String get pref_language => "Eelistatud keel";
-  @override
-  String get product_custom_filter_title => "Kohandatud filter";
-  @override
-  String get new_zealand => "Uus-Meremaa";
-  @override
-  String get feedback_intro => "Tänu sellele, et olete selle seadmesse installinud, olete sellele rakendusele kaasa aidanud. Kui otsite midagi muud, on siin mõned võimalused:";
-  @override
-  String get filter_distribution => "levitamine";
-  @override
-  String get eastern_asia => "Ida-Aasias";
-  @override
-  String get western_asia => "Lääne-Aasias";
-  @override
-  String get subarctic_america => "Subarctic Ameerika";
-  @override
-  String get product_search_title => "Otsi nimedest või taksonoomiast";
-  @override
-  String get feedback_buy_extended => "Laiendatud (+) versiooni saate osta täiendava funktsionaalsusega, näiteks offline režiimis, otsida nimesid, otsida taksonoomiast, vaatlustest ja seadistatavast filtrist.";
-  @override
-  String get north_central_usa => "Põhja-Keskne USA";
-  @override
-  String get improve_translation => "Parandada tõlge";
-  @override
-  String get feedback_review => "Võite kirjutada positiivse ülevaate.";
-  @override
-  String get southeastern_usa => "Kaguosas USA";
-  @override
-  String get yes => "Jah";
-  @override
-  String get feedback_run_ads_video => "Vaadake videoreklaami";
-  @override
-  String get plant_height_from => "Kõrgus";
-  @override
-  String get petal_many => "rohkem kui 5";
-  @override
-  String get southeastern_europe => "Kagu-Euroopa";
-  @override
-  String get taxonomy_unknown => "teadmata";
-  @override
-  String get plant_inflorescence => "Õisik";
-  @override
-  String get northern_africa => "Põhja-Aafrika";
-  @override
-  String get offline_subtitle => "vajab 300+ MB lisaruumi.";
-  @override
-  String get china => "Hiina";
-  @override
-  String get product_no_ads_title => "Soovimatu reklaam puudub";
-  @override
-  String get offline_title => "Võrguühenduseta režiim";
-  @override
-  String get petal_zygomorphic => "ebaregulaarne";
-  @override
-  String get taxonomy_genus => "Perekond";
-  @override
-  String get papuasia => "Papuasia";
-  @override
-  String get feedback_submit_translate_app => "Parandage rakenduse sildid";
-}
-
-class $cs extends S {
-  const $cs();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Střední Amerika";
-  @override
-  String get legend => "Legenda";
-  @override
-  String get product_offline_title => "Offline režim";
-  @override
-  String get feedback_submit_translate_data => "Opravit chyby datech";
-  @override
-  String get snack_copy => "Zkopírováno do schránky";
-  @override
-  String get product_purchase_failed => "Nákup selhal";
-  @override
-  String get about => "O aplikaci";
-  @override
-  String get product_no_ads_description => "Aplikace nezobrazí reklamní banner ve spodní části obrazovky.";
-  @override
-  String get offline_download_progress => "Probíhá stahování fotografií a ilustrací ...";
-  @override
-  String get western_canada => "Západní Kanada";
-  @override
-  String get northern_america => "Severní Amerika";
-  @override
-  String get western_indian_ocean => "Západní Indický oceán";
-  @override
-  String get feedback => "Připomínky";
-  @override
-  String get southwestern_usa => "Jihozápad USA";
-  @override
-  String get distribution_message => "Na kterou geografickou oblast zaměřit pozornost?";
-  @override
-  String get caribbean => "Karibik";
-  @override
-  String get product_search_description => "Budete moci najít květinu podle českého nebo latinského názvu nebo podle taxonu (např. podle řádu, čeledi, rodu).";
-  @override
-  String get offline_delete_message => "Opravdu chcete vymazat offline data?";
-  @override
-  String get australasia => "Australasie";
-  @override
-  String get petal_4 => "4 nebo méně";
-  @override
-  String get east_tropical_africa => "Východní tropická Afrika";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get south_tropical_africa => "Jižní tropická Afrika";
-  @override
-  String get caucasus => "Kavkaz";
-  @override
-  String get middle_asia => "Střední Asie";
-  @override
-  String get plant_gallery => "Galerie";
-  @override
-  String get always_my_region_subtitle => "Vaše oblast bude přednastavena do filtru";
-  @override
-  String get indochina => "Indočína";
-  @override
-  String get feedback_translate => "Můžete upozornit na gramatické a faktické chyby v textu, případně navrhnout lepší překlad jednotlivých květin nebo aplikace samotné na stránce whatsthatflower.com.";
-  @override
-  String get australia => "Austrálie";
-  @override
-  String get google_translate => "Přeloženo pomocí Google překladače";
-  @override
-  String get plant_leaf => "List";
-  @override
-  String get habitat_forest => "lesy";
-  @override
-  String get taxonomy_serie => "série";
-  @override
-  String get malesia => "Jihovýchodní Asie";
-  @override
-  String get southwestern_pacific => "Jihozápadní Tichomoří";
-  @override
-  String get asia_tropical => "Tropická Asie";
-  @override
-  String get northwestern_usa => "Severozápad USA";
-  @override
-  String get northern_south_america => "Sever Jižní Ameriky";
-  @override
-  String get show_original => "Zobraz slovenský text";
-  @override
-  String get offline_download_message => "Chystáte se stáhnout více než 300 MB fotografií a ilustrací. Zkontrolujte, prosím, zda je vaše zařízení připojeno na wifi síť. Chcete začít stahovat soubory?";
-  @override
-  String get southern_america => "Jižní Amerika";
-  @override
-  String get middle_atlantic_ocean => "Střední Atlantik";
-  @override
-  String get feedback_run_ads => "Můžete si prohlédnout videoreklamu nebo nechat zobrazit reklamu na celou obrazovku a podpořit tak další vývoj a rozšiřování databáze.";
-  @override
-  String get habitat_garden => "pole a zahrady";
-  @override
-  String get product_purchase => "Koupit";
-  @override
-  String get russian_far_east => "Ruský dálný východ";
-  @override
-  String get west_central_tropical_africa => "Středozápadní tropická Afrika";
-  @override
-  String get habitat_message => "Kde se nacházíš? Identifikuj lokalitu.";
-  @override
-  String get plant_toxicity => "Toxicita";
-  @override
-  String get offline_download_fail => "Stahování souborů selhalo. Prosím zkontrolujte připojení k internetu nebo volný prostor na zařízení a zkuste znovu.";
-  @override
-  String get snack_no_flowers => "Filtru nevyhovují žádné květiny v databázi.";
-  @override
-  String get rate_question => "Líbí se vám aplikace?";
-  @override
-  String get macaronesia => "Makaronézie";
-  @override
-  String get plant_taxonomy => "Taxonomie";
-  @override
-  String get feedback_run_ads_fullscreen => "Zobrazit reklamu na celé obrazovce";
-  @override
-  String get asia_temperate => "Temperátní Asie";
-  @override
-  String get search => "Hledat...";
-  @override
-  String get habitat_rock => "vrcholky hor a skály";
-  @override
-  String get taxonomy_superregnum => "doména";
-  @override
-  String get taxonomy_sectio => "sekce";
-  @override
-  String get mongolia => "Mongolsko";
-  @override
-  String get taxonomy_subserie => "podsérie";
-  @override
-  String get western_south_america => "Západ Jižní Ameriky";
-  @override
-  String get taxonomy_subgenus => "podrod";
-  @override
-  String get close => "Zavřít";
-  @override
-  String get europe => "Evropa";
-  @override
-  String get middle_europe => "Střední Evropa";
-  @override
-  String get color_blue => "modrá, fialová";
-  @override
-  String get my_filter => "Můj filtr";
-  @override
-  String get southern_south_america => "Jih Jižní Ameriky";
-  @override
-  String get plant_habitat => "Ekologie";
-  @override
-  String get snack_loading_ad => "Reklama se stále načítá, znovu stiskněte tlačítko.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "okvětní list";
-  @override
-  String get petal_message => "Je květ nepravidelný? Ne? Tak kolik má okvětních lístků?";
-  @override
-  String get color_white => "bílá";
-  @override
-  String get northeastern_usa => "Severovýchod USA";
-  @override
-  String get color_green => "zelená, hnědá, černá";
-  @override
-  String get taxonomy_ordo => "řád";
-  @override
-  String get taxonomy_supersectio => "nadsekce";
-  @override
-  String get pacific => "Tichomoří";
-  @override
-  String get plant_sources => "Zdroje";
-  @override
-  String get taxonomy_regnum => "říše";
-  @override
-  String get south_central_pacific => "Středojižní Tichomoří";
-  @override
-  String get filter_color => "barva";
-  @override
-  String get help => "Pomoc";
-  @override
-  String get mexico => "Mexiko";
-  @override
-  String get snack_publish => "... bude zveřejněno později";
-  @override
-  String get siberia => "Sibiř";
-  @override
-  String get taxonomy_subtribus => "podskupina";
-  @override
-  String get product_custom_filter_description => "Budete moci změnit výchozí pořadí a počet filtrů (barva, ekologie, okvětní líst, distribuce).";
-  @override
-  String get habitat_meadow => "louky a travnaté porosty";
-  @override
-  String get plant_trivia => "Zajímavosti";
-  @override
-  String get product_purchased => "Koupeno";
-  @override
-  String get taxonomy_cladus => "(klad)";
-  @override
-  String get plant_herbalism => "Bylinářství";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Obnovit stahování";
-  @override
-  String get enhancements => "Vylepšení";
-  @override
-  String get habitat_wetland => "mokřady a bažiny";
-  @override
-  String get product_restore_purchases => "Obnovit nákupy";
-  @override
-  String get feedback_title => "Jak přispět";
-  @override
-  String get toxicity2 => "mírně jedovatá rostlina";
-  @override
-  String get toxicity1 => "jedovatá rostlina";
-  @override
-  String get eastern_canada => "Východní Kanada";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Zobraz přeložený text";
-  @override
-  String get habitat_tree => "stromy a keře";
-  @override
-  String get settings => "Nastavení";
-  @override
-  String get color_red => "červená, růžová";
-  @override
-  String get north_central_pacific => "Středoseverní Tichomoří";
-  @override
-  String get taxonomy_subsectio => "podsekce";
-  @override
-  String get southern_africa => "Jižní Afrika";
-  @override
-  String get always_my_region_title => "Vždy přidat moji oblast do filtru";
-  @override
-  String get color_yellow => "žlutá";
-  @override
-  String get subantarctic_islands => "Subantarktické ostrovy";
-  @override
-  String get list_info => "Vyber si jednu";
-  @override
-  String get new_version => "K dispozici je nová verze, aktualizujte prosím.";
-  @override
-  String get taxonomy_subfamilia => "podčeleď";
-  @override
-  String get my_region => "Moje oblast";
-  @override
-  String get pause => "Pozastavit";
-  @override
-  String get indian_subcontinent => "Indický subkontinent";
-  @override
-  String get product_offline_description => "Aplikace poběží i bez připojení k internetu.";
-  @override
-  String get plant_flower => "Květ";
-  @override
-  String get filter_habitat => "ekologie";
-  @override
-  String get rate_never => "Nikdy";
-  @override
-  String get northwestern_pacific => "Severozápadní Tichomoří";
-  @override
-  String get search_names => "Hledat v jménech";
-  @override
-  String get southwestern_europe => "Jihozápadní Evropa";
-  @override
-  String get taxonomy_species => "druh";
-  @override
-  String get plant_fruit => "Plod";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "čeleď";
-  @override
-  String get plant_stem => "Lodyha";
-  @override
-  String get antarctic_continent => "Antarktický kontinent";
-  @override
-  String get no => "Ne";
-  @override
-  String get brazil => "Brazílie";
-  @override
-  String get rate_text => "Autora této aplikace motivuje pozitívny ohlas uživatelů. Pošlete mu, prosím, nejaké květiny (nejlépe hvězdníky) přes obchod s aplikacemi.";
-  @override
-  String get eastern_europe => "Východní Evropa";
-  @override
-  String get south_central_usa => "Středojih USA";
-  @override
-  String get offline_download_success => "Fotografie a ilustrace byly úspěšně staženy.";
-  @override
-  String get plant_flowering_from => "Kvete:";
-  @override
-  String get taxonomy_tribus => "skupina";
-  @override
-  String get arabian_peninsula => "Arabský poloostrov";
-  @override
-  String get search_taxonomy => "Hledat v taxonomii";
-  @override
-  String get rate_later => "Později";
-  @override
-  String get color_message => "Jaké barvy jsou květiny? Vyber tu nejbližší. Vždy se můžeš vrátit a vybrat jinou.";
-  @override
-  String get west_tropical_africa => "Západní tropická Afrika";
-  @override
-  String get northern_europe => "Severní Evropa";
-  @override
-  String get rate => "Recenze";
-  @override
-  String get northeast_tropical_africa => "Severovýchodní tropická Afrika";
-  @override
-  String get pref_language => "Preferovaný jazyk";
-  @override
-  String get product_custom_filter_title => "Vlastní filtr";
-  @override
-  String get new_zealand => "Nový Zéland";
-  @override
-  String get feedback_intro => "Tuto aplikaci podporujete odkdy jste si ji nainstalovali na své mobilní zařízení, děkuji. Pokud hledáte jiné formy podpory, zde jsou některé možnosti:";
-  @override
-  String get filter_distribution => "distribuce";
-  @override
-  String get eastern_asia => "Východní Asie";
-  @override
-  String get western_asia => "Jihozápadní Asie";
-  @override
-  String get subarctic_america => "Subarktická Amerika";
-  @override
-  String get product_search_title => "Hledat v jménech nebo v taxonomii";
-  @override
-  String get feedback_buy_extended => "Můžete si koupit rozšířenou verzi s funkcemi navíc jako například ofline režim, vyhledávání v názvech a v taxonomii, pozorování a nastavitelný filtr.";
-  @override
-  String get north_central_usa => "Středosever USA";
-  @override
-  String get improve_translation => "Vylepšit překlad";
-  @override
-  String get feedback_review => "Můžete napsat pozitivní recenzi.";
-  @override
-  String get southeastern_usa => "Jihovýchod USA";
-  @override
-  String get yes => "Ano";
-  @override
-  String get feedback_run_ads_video => "Spustit video reklamu";
-  @override
-  String get plant_height_from => "Výška:";
-  @override
-  String get petal_many => "více než 5";
-  @override
-  String get southeastern_europe => "Jihovýchodní Evropa";
-  @override
-  String get taxonomy_unknown => "neznámý";
-  @override
-  String get plant_inflorescence => "Květenství";
-  @override
-  String get northern_africa => "Severní Afrika";
-  @override
-  String get offline_subtitle => "vyžaduje 300+ MB volného místa";
-  @override
-  String get china => "Čína";
-  @override
-  String get product_no_ads_title => "Žádná nežádoucí reklama";
-  @override
-  String get offline_title => "Offline režim";
-  @override
-  String get petal_zygomorphic => "souměrný";
-  @override
-  String get taxonomy_genus => "rod";
-  @override
-  String get papuasia => "Papuasie";
-  @override
-  String get feedback_submit_translate_app => "Opravit chyby v aplikaci";
-}
-
-class $ar extends S {
-  const $ar();
-
-  @override
-  TextDirection get textDirection => TextDirection.rtl;
-
-  @override
-  String get central_america => "أمريكا الوسطى";
-  @override
-  String get legend => "مفتاح";
-  @override
-  String get product_offline_title => "غير متصل بالشبكة";
-  @override
-  String get feedback_submit_translate_data => "تحسين بيانات الزهور";
-  @override
-  String get snack_copy => "نسخ إلى الحافظة";
-  @override
-  String get product_purchase_failed => "الشراء لم ينجح";
-  @override
-  String get about => "حول";
-  @override
-  String get product_no_ads_description => "لن يعرض التطبيق إعلان بانر في أسفل الشاشة.";
-  @override
-  String get offline_download_progress => "جارٍ تنزيل الصور والرسوم التوضيحية ...";
-  @override
-  String get western_canada => "غرب كندا";
-  @override
-  String get northern_america => "أمريكا الشمالية";
-  @override
-  String get western_indian_ocean => "غرب المحيط الهندي";
-  @override
-  String get feedback => "تعليق";
-  @override
-  String get southwestern_usa => "جنوب غرب الولايات المتحدة";
-  @override
-  String get distribution_message => "ما هي المنطقة الجغرافية التي ينبغي لنا التركيز عليها؟";
-  @override
-  String get caribbean => "منطقة البحر الكاريبي";
-  @override
-  String get product_search_description => "ستتمكن من العثور على زهرة باسمها اللاتيني أو عن طريق صنفها (على سبيل المثال ، الرتبة ، الفصيلة ، الجنس.";
-  @override
-  String get offline_delete_message => "هل تريد حذف البيانات بلا اتصال؟";
-  @override
-  String get australasia => "أستراليا";
-  @override
-  String get petal_4 => "أربعة أو أقل";
-  @override
-  String get east_tropical_africa => "شرق الاستوائية أفريقيا";
-  @override
-  String get africa => "أفريقيا";
-  @override
-  String get south_tropical_africa => "جنوب الاستوائية أفريقيا";
-  @override
-  String get caucasus => "القوقاز";
-  @override
-  String get middle_asia => "آسيا الوسطى";
-  @override
-  String get plant_gallery => "صالة عرض";
-  @override
-  String get always_my_region_subtitle => "سيتم إعداد منطقتك مسبقًا على الفلتر";
-  @override
-  String get indochina => "الهند الصينية";
-  @override
-  String get feedback_translate => "يمكنك الإبلاغ عن أي خطأ مطبعي أو خطأ وجدته أو قدم ترجمة جديدة بلغتك.";
-  @override
-  String get australia => "أستراليا";
-  @override
-  String get google_translate => "تمت الترجمة مع الترجمة من غوغل";
-  @override
-  String get plant_leaf => "اوراق";
-  @override
-  String get habitat_forest => "الغابات";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "ماليزيا";
-  @override
-  String get southwestern_pacific => "جنوب غرب المحيط الهادئ";
-  @override
-  String get asia_tropical => "آسيا الاستوائية";
-  @override
-  String get northwestern_usa => "شمال غرب الولايات المتحدة";
-  @override
-  String get northern_south_america => "شمال أمريكا الجنوبية";
-  @override
-  String get show_original => "عرض النص الإنكليزي";
-  @override
-  String get offline_download_message => "ستقوم بتنزيل 300+ ميغابايت من الصور والرسوم التوضيحية. يرجى التحقق مما إذا كان جهازك متصلاً بشبكة wi-fi. هل أنت مستعد للتنزيل؟";
-  @override
-  String get southern_america => "أمريكا الجنوبية";
-  @override
-  String get middle_atlantic_ocean => "المحيط الأطلسي الأوسط";
-  @override
-  String get feedback_run_ads => "يمكنك عرض إعلان بملء الشاشة أو مشاهدة إعلان فيديو لدعم تطوير إضافي وتحسين قاعدة البيانات.";
-  @override
-  String get habitat_garden => "حدائق أو حقول";
-  @override
-  String get product_purchase => "شراء";
-  @override
-  String get russian_far_east => "الشرق الأقصى الروسي";
-  @override
-  String get west_central_tropical_africa => "غرب وسط الاستوائية أفريقيا";
-  @override
-  String get habitat_message => "ماذا حولك؟ تحديد موطن النبات.";
-  @override
-  String get plant_toxicity => "تأثير سمي";
-  @override
-  String get offline_download_fail => "التحميل فشل. يرجى التحقق من اتصالك بالإنترنت أو المساحة الخالية على الجهاز وإعادة المحاولة.";
-  @override
-  String get snack_no_flowers => "لا توجد معايير مطابقة للزهور.";
-  @override
-  String get rate_question => "هل هذا التطبيق مفيد؟";
-  @override
-  String get macaronesia => "ماكارونيسيا";
-  @override
-  String get plant_taxonomy => "علم التصنيف";
-  @override
-  String get feedback_run_ads_fullscreen => "عرض إعلان بملء الشاشة";
-  @override
-  String get asia_temperate => "آسيا المعتدلة";
-  @override
-  String get search => "بحث...";
-  @override
-  String get habitat_rock => "صخور أو جبال";
-  @override
-  String get taxonomy_superregnum => "النطاق";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "منغوليا";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "غرب أمريكا الجنوبية";
-  @override
-  String get taxonomy_subgenus => "Subgenus";
-  @override
-  String get close => "قريب";
-  @override
-  String get europe => "أوروبا";
-  @override
-  String get middle_europe => "وسط أوروبا";
-  @override
-  String get color_blue => "أزرق أرجواني";
-  @override
-  String get my_filter => "مرشح بلدي";
-  @override
-  String get southern_south_america => "جنوب أمريكا الجنوبية";
-  @override
-  String get plant_habitat => "موطن";
-  @override
-  String get snack_loading_ad => "لا يزال يتم تحميل الإعلان ، اضغط على الزر مرة أخرى.";
-  @override
-  String get petal_5 => "خمسة";
-  @override
-  String get filter_petal => "بتلة";
-  @override
-  String get petal_message => "هل الزهرة متناظرة؟ لا؟ ثم كم عدد بتلات الزهرة؟";
-  @override
-  String get color_white => "أبيض";
-  @override
-  String get northeastern_usa => "شمال شرق الولايات المتحدة";
-  @override
-  String get color_green => "أخضر، بني، أسود";
-  @override
-  String get taxonomy_ordo => "الرتبة";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "المحيط الهادئ";
-  @override
-  String get plant_sources => "مصادر";
-  @override
-  String get taxonomy_regnum => "المملكة";
-  @override
-  String get south_central_pacific => "جنوب وسط المحيط الهادئ";
-  @override
-  String get filter_color => "اللون";
-  @override
-  String get help => "مساعدة";
-  @override
-  String get mexico => "المكسيك";
-  @override
-  String get snack_publish => "ليتم نشرها في وقت لاحق";
-  @override
-  String get siberia => "سيبيريا";
-  @override
-  String get taxonomy_subtribus => "العميرة";
-  @override
-  String get product_custom_filter_description => "ستتمكن من تغيير الترتيب الافتراضي وعدد المرشحات (اللون ، موطن ، بتلة ، توزيع).";
-  @override
-  String get habitat_meadow => "مروج أو مراعي";
-  @override
-  String get plant_trivia => "معلومات";
-  @override
-  String get product_purchased => "اشترى";
-  @override
-  String get taxonomy_cladus => "(غير مصنف)";
-  @override
-  String get plant_herbalism => "دراسة الأعشاب";
-  @override
-  String get plant_height_to => "إلى";
-  @override
-  String get offline_download => "استئناف تحميل";
-  @override
-  String get enhancements => "التحسينات";
-  @override
-  String get habitat_wetland => "مستنقعات أو أراضي الرطبة";
-  @override
-  String get product_restore_purchases => "استعادة المشتريات";
-  @override
-  String get feedback_title => "كيف تساهم";
-  @override
-  String get toxicity2 => "نبات سام قليلا";
-  @override
-  String get toxicity1 => "نبات سام";
-  @override
-  String get eastern_canada => "شرق كندا";
-  @override
-  String get plant_info => "معلومات";
-  @override
-  String get show_translation => "عرض النص المترجم";
-  @override
-  String get habitat_tree => "أشجار أو شجيرات";
-  @override
-  String get settings => "إعدادات";
-  @override
-  String get color_red => "أحمر وردي";
-  @override
-  String get north_central_pacific => "شمال وسط المحيط الهادئ";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "جنوب افريقيا";
-  @override
-  String get always_my_region_title => "أضف دائمًا منطقتي إلى الفلتر";
-  @override
-  String get color_yellow => "أصفر";
-  @override
-  String get subantarctic_islands => "جزر سوبنتاركتيك";
-  @override
-  String get list_info => "إختر واحدة";
-  @override
-  String get new_version => "الإصدار الجديد هو متاح، يرجى تحديث.";
-  @override
-  String get taxonomy_subfamilia => "القطاع";
-  @override
-  String get my_region => "منطقتي";
-  @override
-  String get pause => "وقفة";
-  @override
-  String get indian_subcontinent => "شبه القارة الهندية";
-  @override
-  String get product_offline_description => "ستتمكن من تشغيل التطبيق دون اتصال بالإنترنت.";
-  @override
-  String get plant_flower => "زهور";
-  @override
-  String get filter_habitat => "موطن";
-  @override
-  String get rate_never => "أبدا";
-  @override
-  String get northwestern_pacific => "شمال غرب المحيط الهادئ";
-  @override
-  String get search_names => "البحث في الأسماء";
-  @override
-  String get southwestern_europe => "جنوب غرب أوروبا";
-  @override
-  String get taxonomy_species => "محيط";
-  @override
-  String get plant_fruit => "فواكه";
-  @override
-  String get plant_flowering_to => "إلى";
-  @override
-  String get taxonomy_familia => "الفصيلة";
-  @override
-  String get plant_stem => "ساق نبات";
-  @override
-  String get antarctic_continent => "القارة القطبية الجنوبية";
-  @override
-  String get no => "لا";
-  @override
-  String get brazil => "البرازيل";
-  @override
-  String get rate_text => "تأجج المؤلف من هذا التطبيق من خلال استجابة إيجابية من المستخدمين. يرجى إرسال بعض النجوم له من خلال متجر التطبيقات.";
-  @override
-  String get eastern_europe => "أوروبا الشرقية";
-  @override
-  String get south_central_usa => "جنوب وسط الولايات المتحدة";
-  @override
-  String get offline_download_success => "تم تنزيل الصور والرسوم التوضيحية بنجاح.";
-  @override
-  String get plant_flowering_from => "المزهرة من";
-  @override
-  String get taxonomy_tribus => "القبيلة";
-  @override
-  String get arabian_peninsula => "شبه الجزيرة العربية";
-  @override
-  String get search_taxonomy => "البحث في التصنيف";
-  @override
-  String get rate_later => "في وقت لاحق";
-  @override
-  String get color_message => "ما هو لون الزهرة؟ اختيار أقرب واحد.";
-  @override
-  String get west_tropical_africa => "غرب الاستوائية أفريقيا";
-  @override
-  String get northern_europe => "شمال أوروبا";
-  @override
-  String get rate => "إعادة النظر";
-  @override
-  String get northeast_tropical_africa => "شمال شرق الاستوائية أفريقيا";
-  @override
-  String get pref_language => "اللغة المفضلة";
-  @override
-  String get product_custom_filter_title => "تصفية مخصص";
-  @override
-  String get new_zealand => "نيوزيلندا";
-  @override
-  String get feedback_intro => "لقد ساهمت في هذا التطبيق منذ تثبيته على جهازك ، شكرًا. إذا كنت تبحث عن شيء أكثر ، فإليك بعض الخيارات:";
-  @override
-  String get filter_distribution => "توزيع";
-  @override
-  String get eastern_asia => "شرق اسيا";
-  @override
-  String get western_asia => "آسيا الغربية";
-  @override
-  String get subarctic_america => "أمريكا الشمالية";
-  @override
-  String get product_search_title => "البحث في الأسماء أو التصنيف";
-  @override
-  String get feedback_buy_extended => "يمكنك شراء إصدار موسّع (+) مع وظائف إضافية مثل وضع عدم الاتصال ، والبحث في الأسماء ، والبحث في التصنيف ، والملاحظات ، والفلتر القابل للتكوين.";
-  @override
-  String get north_central_usa => "شمال وسط الولايات المتحدة";
-  @override
-  String get improve_translation => "تحسين الترجمة";
-  @override
-  String get feedback_review => "يمكنك كتابة مراجعة إيجابية.";
-  @override
-  String get southeastern_usa => "جنوب شرق الولايات المتحدة";
-  @override
-  String get yes => "نعم فعلا";
-  @override
-  String get feedback_run_ads_video => "شاهد إعلان فيديو";
-  @override
-  String get plant_height_from => "الارتفاع من";
-  @override
-  String get petal_many => "أكثر من خمسة";
-  @override
-  String get southeastern_europe => "جنوب شرق أوروبا";
-  @override
-  String get taxonomy_unknown => "غير معروف";
-  @override
-  String get plant_inflorescence => "إزهار";
-  @override
-  String get northern_africa => "شمال أفريقيا";
-  @override
-  String get offline_subtitle => "يتطلب 300+ ميغابايت مساحة إضافية";
-  @override
-  String get china => "الصين";
-  @override
-  String get product_no_ads_title => "لا اعلان غير مرغوب فيه";
-  @override
-  String get offline_title => "غير متصل بالشبكة";
-  @override
-  String get petal_zygomorphic => "غير منتظم";
-  @override
-  String get taxonomy_genus => "الجنس";
-  @override
-  String get papuasia => "بابوا";
-  @override
-  String get feedback_submit_translate_app => "تحسين تسميات التطبيق";
-}
-
-class $pa extends S {
-  const $pa();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "ਮੱਧ ਅਮਰੀਕਾ";
-  @override
-  String get legend => "ਦੰਤਕਥਾ";
-  @override
-  String get product_offline_title => "ਔਫਲਾਈਨ ਮੋਡ";
-  @override
-  String get feedback_submit_translate_data => "ਫੁੱਲ ਦਾ ਡਾਟਾ ਸੁਧਾਰੋ";
-  @override
-  String get snack_copy => "ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ";
-  @override
-  String get product_purchase_failed => "ਖਰੀਦ ਫੇਲ੍ਹ ਹੋਈ";
-  @override
-  String get about => "ਇਸ ਬਾਰੇ";
-  @override
-  String get product_no_ads_description => "ਐਪਲੀਕੇਸ਼ਨ ਸਕ੍ਰੀਨ ਦੇ ਤਲ 'ਤੇ ਇਸ਼ਤਿਹਾਰ ਬੈਨਰ ਨਹੀਂ ਦਿਖਾਏਗੀ.";
-  @override
-  String get offline_download_progress => "ਫੋਟੋਆਂ ਅਤੇ ਵਰਣਨ ਡਾਊਨਲੋਡ ਕਰ ਰਿਹਾ ਹੈ ...";
-  @override
-  String get western_canada => "ਪੱਛਮੀ ਕੈਨੇਡਾ";
-  @override
-  String get northern_america => "ਉੱਤਰੀ ਅਮਰੀਕਾ";
-  @override
-  String get western_indian_ocean => "ਪੱਛਮੀ ਹਿੰਦ ਮਹਾਂਸਾਗਰ";
-  @override
-  String get feedback => "ਸੁਝਾਅ";
-  @override
-  String get southwestern_usa => "ਦੱਖਣੀ ਪੱਛਮੀ ਅਮਰੀਕਾ";
-  @override
-  String get distribution_message => "ਕਿਹੜੇ ਭੂਗੋਲਿਕ ਖੇਤਰ 'ਤੇ ਸਾਨੂੰ ਧਿਆਨ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ?";
-  @override
-  String get caribbean => "ਕੈਰੀਬੀਅਨ";
-  @override
-  String get product_search_description => "ਤੁਸੀਂ ਇਸਦੇ ਲਾਤੀਨੀ ਨਾਮ ਦੁਆਰਾ ਜਾਂ ਇਸਦੇ ਟੈਕਸੋਂ ਦੁਆਰਾ ਇੱਕ ਫੁੱਲ ਲੱਭਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ (ਜਿਵੇਂ ਤਬਕਾ, ਪਰਿਵਾਰ, ਜਿਣਸ).";
-  @override
-  String get offline_delete_message => "ਕੀ ਤੁਸੀਂ ਔਫਲਾਈਨ ਡਾਟਾ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?";
-  @override
-  String get australasia => "ਆਸਟ੍ਰੇਲੀਆ";
-  @override
-  String get petal_4 => "4 ਜਾਂ ਘੱਟ";
-  @override
-  String get east_tropical_africa => "ਪੂਰਬੀ ਤ੍ਰਿਕੋਸ਼ੀ ਅਫਰੀਕਾ";
-  @override
-  String get africa => "ਅਫਰੀਕਾ";
-  @override
-  String get south_tropical_africa => "ਦੱਖਣੀ ਖੰਡੀ ਅਫ਼ਰੀਕਾ";
-  @override
-  String get caucasus => "ਕਾਕੇਸਸ";
-  @override
-  String get middle_asia => "ਮੱਧ ਏਸ਼ੀਆ";
-  @override
-  String get plant_gallery => "ਗੈਲਰੀ";
-  @override
-  String get always_my_region_subtitle => "ਤੁਹਾਡੇ ਖੇਤਰ ਨੂੰ ਫਿਲਟਰ ਤੇ ਪ੍ਰੀ-ਸੈੱਟ ਕੀਤਾ ਜਾਵੇਗਾ";
-  @override
-  String get indochina => "ਇੰਡੋ-ਚਾਈਨਾ";
-  @override
-  String get feedback_translate => "ਪਹਾੜਾਂ ਜਾਂ ਝੂਲਿਆਂ";
-  @override
-  String get australia => "ਆਸਟ੍ਰੇਲੀਆ";
-  @override
-  String get google_translate => "ਆਵਾਸ";
-  @override
-  String get plant_leaf => "ਪੱਤਾ";
-  @override
-  String get habitat_forest => "ਮਦਦ ਕਰੋ";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "ਮਲੇਸ਼ੀਆ";
-  @override
-  String get southwestern_pacific => "ਦੱਖਣੀ ਪੱਛਮੀ ਪੈਸੀਫਿਕ";
-  @override
-  String get asia_tropical => "ਏਸ਼ੀਆ-ਖੰਡੀ";
-  @override
-  String get northwestern_usa => "ਉੱਤਰ ਪੱਛਮੀ ਅਮਰੀਕਾ";
-  @override
-  String get northern_south_america => "ਉੱਤਰੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
-  @override
-  String get show_original => "ਅੰਗ੍ਰੇਜ਼ੀ ਪਾਠ ਦਿਖਾਓ";
-  @override
-  String get offline_download_message => "ਤੁਸੀਂ 300+ ਮੈਬਾ ਫੋਟੋਆਂ ਅਤੇ ਤਸਵੀਰਾਂ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਜਾ ਰਹੇ ਹੋ. ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਹਾਡੀ ਡਿਵਾਈਸ Wi-Fi ਨਾਲ ਕਨੈਕਟ ਕੀਤੀ ਹੋਈ ਹੈ ਜਾਂ ਨਹੀਂ. ਕੀ ਤੁਸੀਂ ਡਾਉਨਲੋਡ ਲਈ ਤਿਆਰ ਹੋ?";
-  @override
-  String get southern_america => "ਦੱਖਣੀ ਅਮਰੀਕਾ";
-  @override
-  String get middle_atlantic_ocean => "ਮੱਧ ਅਟਲਾਂਟਿਕ ਮਹਾਂਸਾਗਰ";
-  @override
-  String get feedback_run_ads => "ਤੁਸੀਂ ਪੂਰੇ ਵਿਵਰਣ ਦੇ ਇਸ਼ਤਿਹਾਰ ਜਾਂ ਹੋਰ ਵਿਕਾਸ ਅਤੇ ਡਾਟਾਬੇਸ ਵਧਾਉਣ ਲਈ ਸਮਰਥਨ ਪ੍ਰਾਪਤ ਵੀਡੀਓ ਵਿਗਿਆਪਨ ਵੇਖ ਸਕਦੇ ਹੋ.";
-  @override
-  String get habitat_garden => "ਪਲਾਂਟ ਦਾ ਦ੍ਰਿਸ਼ਟੀਕੋਣ";
-  @override
-  String get product_purchase => "ਖ਼ਰੀਦੋ";
-  @override
-  String get russian_far_east => "ਰੂਸੀ ਦੂਰ ਪੂਰਬ";
-  @override
-  String get west_central_tropical_africa => "ਵੈਸਟ-ਸੈਂਟਰਲ ਟ੍ਰੌਪੀਕਲ ਅਫਰੀਕਾ";
-  @override
-  String get habitat_message => "ਤੁਹਾਡੇ ਆਲੇ ਦੁਆਲੇ ਕੀ ਹੈ? ਪਲਾਂਟ ਦੇ ਨਿਵਾਸ ਸਥਾਨ ਦੀ ਪਛਾਣ ਕਰੋ";
-  @override
-  String get plant_toxicity => "ਵਸ਼ੈਲਾਪਣ";
-  @override
-  String get offline_download_fail => "ਡਾਊਨਲੋਡ ਅਸਫਲ. ਕਿਰਪਾ ਕਰਕੇ ਡਿਵਾਈਸ ਤੇ ਆਪਣੇ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਜਾਂ ਖਾਲੀ ਸਪੇਸ ਦੀ ਜਾਂਚ ਕਰੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ.";
-  @override
-  String get snack_no_flowers => "ਕੋਈ ਫੁੱਲ ਮਾਪਣ ਦੇ ਮਾਪਦੰਡ ਨਹੀਂ.";
-  @override
-  String get rate_question => "ਕੀ ਇਹ ਐਪ ਉਪਯੋਗੀ ਹੈ?";
-  @override
-  String get macaronesia => "ਮੈਕਰੋਨੀਆਸੀਆ";
-  @override
-  String get plant_taxonomy => "ਟੈਕਸੌਮੋਰੀ";
-  @override
-  String get feedback_run_ads_fullscreen => "ਇੱਕ ਪੂਰੀ ਸਕ੍ਰੀਨ ਵਿਗਿਆਪਨ ਦਿਖਾਓ";
-  @override
-  String get asia_temperate => "ਏਸ਼ੀਆ-ਤਾਪਤਾ";
-  @override
-  String get search => "ਖੋਜ ...";
-  @override
-  String get habitat_rock => "ਇਕ ਚੁਣੋ";
-  @override
-  String get taxonomy_superregnum => "Domain";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "ਮੰਗੋਲੀਆ";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "ਪੱਛਮੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
-  @override
-  String get taxonomy_subgenus => "ਉੱਪ-ਜਿਨਸ";
-  @override
-  String get close => "ਬੰਦ ਕਰੋ";
-  @override
-  String get europe => "ਯੂਰਪ";
-  @override
-  String get middle_europe => "ਮੱਧ ਯੂਰਪ";
-  @override
-  String get color_blue => "ਨੀਲਾ, ਜਾਮਨੀ";
-  @override
-  String get my_filter => "ਮੇਰੇ ਫਿਲਟਰ";
-  @override
-  String get southern_south_america => "ਦੱਖਣੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
-  @override
-  String get plant_habitat => "ਆਵਾਸ";
-  @override
-  String get snack_loading_ad => "ਵਿਗਿਆਪਨ ਅਜੇ ਵੀ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ, ਦੁਬਾਰਾ ਬਟਨ ਦਬਾਓ";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "ਪੱਟੇਲ";
-  @override
-  String get petal_message => "ਕੀ ਫੁੱਲ ਬਿਸਮਮੈਟਿਕ ਹੈ? ਨਹੀਂ? ਫੇਰ ਕਿੰਨੇ ਫੁੱਲ ਹੁੰਦੇ ਹਨ?";
-  @override
-  String get color_white => "ਚਿੱਟਾ";
-  @override
-  String get northeastern_usa => "ਉੱਤਰ-ਪੂਰਬ ਅਮਰੀਕਾ";
-  @override
-  String get color_green => "ਹਰਾ, ਭੂਰੇ, ਕਾਲਾ";
-  @override
-  String get taxonomy_ordo => "ਤਬਕਾ";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "ਪ੍ਰਸ਼ਾਂਤ ਮਹਾਸਾਗਰ";
-  @override
-  String get plant_sources => "ਸਰੋਤ";
-  @override
-  String get taxonomy_regnum => "ਜਗਤ";
-  @override
-  String get south_central_pacific => "ਦੱਖਣੀ-ਕੇਂਦਰੀ ਪੈਸੀਫਿਕ";
-  @override
-  String get filter_color => "ਰੰਗ";
-  @override
-  String get help => "ਮਦਦ ਕਰੋ";
-  @override
-  String get mexico => "ਮੈਕਸੀਕੋ";
-  @override
-  String get snack_publish => "... ਬਾਅਦ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤੇ ਜਾਣ ਲਈ";
-  @override
-  String get siberia => "ਸਾਇਬੇਰੀਆ";
-  @override
-  String get taxonomy_subtribus => "Subtribe";
-  @override
-  String get product_custom_filter_description => "ਤੁਸੀਂ ਡਿਫਾਲਟ ਆਰਡਰ ਅਤੇ ਫਿਲਟਰਸ ਦੀ ਗਿਣਤੀ (ਰੰਗ, ਆਵਾਸ, ਪੱਟੇਲ, ਵੰਡ) ਨੂੰ ਬਦਲਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ.";
-  @override
-  String get habitat_meadow => "ਅਨੁਵਾਦ ਸੁਧਾਰੋ";
-  @override
-  String get plant_trivia => "ਟ੍ਰਿਜੀਆ";
-  @override
-  String get product_purchased => "ਖਰੀਦਿਆ";
-  @override
-  String get taxonomy_cladus => "(clade)";
-  @override
-  String get plant_herbalism => "ਹਰਬਲਿਜ਼ਮ";
-  @override
-  String get plant_height_to => "ਤੱਕ";
-  @override
-  String get offline_download => "ਡਾਊਨਲੋਡ ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ";
-  @override
-  String get enhancements => "ਸੁਧਾਰ";
-  @override
-  String get habitat_wetland => "ਪਹਾੜਾਂ ਜਾਂ ਝੂਲਿਆਂ";
-  @override
-  String get product_restore_purchases => "ਖ਼ਰੀਦਾਂ ਨੂੰ ਰੀਸਟੋਰ ਕਰੋ";
-  @override
-  String get feedback_title => "ਰੁੱਖ ਜਾਂ ਬੂਟੇ";
-  @override
-  String get toxicity2 => "ਥੋੜ੍ਹਾ ਜ਼ਹਿਰੀਲਾ ਪੌਦਾ";
-  @override
-  String get toxicity1 => "ਜ਼ਹਿਰੀਲਾ ਪੌਦਾ";
-  @override
-  String get eastern_canada => "ਪੂਰਬੀ ਕੈਨੇਡਾ";
-  @override
-  String get plant_info => "ਜਾਣਕਾਰੀ";
-  @override
-  String get show_translation => "ਅਨੁਵਾਦ ਕੀਤਾ ਟੈਕਸਟ ਦਿਖਾਉ";
-  @override
-  String get habitat_tree => "ਰੁੱਖ ਜਾਂ ਬੂਟੇ";
-  @override
-  String get settings => "ਸੈਟਿੰਗਜ਼";
-  @override
-  String get color_red => "ਲਾਲ, ਗੁਲਾਬੀ";
-  @override
-  String get north_central_pacific => "ਉੱਤਰੀ-ਕੇਂਦਰੀ ਪੈਸੀਫਿਕ";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "ਦੱਖਣੀ ਅਫਰੀਕਾ";
-  @override
-  String get always_my_region_title => "ਹਮੇਸ਼ਾਂ ਫਿਲਟਰ ਨੂੰ ਮੇਰਾ ਖੇਤਰ ਜੋੜੋ";
-  @override
-  String get color_yellow => "ਪੀਲਾ";
-  @override
-  String get subantarctic_islands => "ਸਬਾਨਟਾਰਕਟਿਕਾ ਆਈਲੈਂਡਜ਼";
-  @override
-  String get list_info => "ਇਕ ਚੁਣੋ";
-  @override
-  String get new_version => "ਨਵਾਂ ਵਰਜਨ ਉਪਲਬਧ ਹੈ, ਕਿਰਪਾ ਕਰਕੇ ਅਪਡੇਟ ਕਰੋ.";
-  @override
-  String get taxonomy_subfamilia => "ਉੱਪ-ਪਰਿਵਾਰ";
-  @override
-  String get my_region => "ਮੇਰਾ ਖੇਤਰ";
-  @override
-  String get pause => "ਰੋਕੋ";
-  @override
-  String get indian_subcontinent => "ਭਾਰਤੀ ਉਪ ਮਹਾਂਦੀਪ";
-  @override
-  String get product_offline_description => "ਤੁਸੀਂ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਤੋਂ ਬਿਨਾਂ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਚਲਾਉਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ.";
-  @override
-  String get plant_flower => "ਫੁੱਲ";
-  @override
-  String get filter_habitat => "ਆਵਾਸ";
-  @override
-  String get rate_never => "ਕਦੇ ਨਹੀਂ";
-  @override
-  String get northwestern_pacific => "ਉੱਤਰੀ ਪੱਛਮੀ ਪੈਸੀਫਿਕ";
-  @override
-  String get search_names => "ਨਾਮਾਂ ਵਿੱਚ ਖੋਜ ਕਰੋ";
-  @override
-  String get southwestern_europe => "ਦੱਖਣ ਪੱਛਮੀ ਯੂਰਪ";
-  @override
-  String get taxonomy_species => "ਸਪੀਸੀਜ਼";
-  @override
-  String get plant_fruit => "ਫਲ";
-  @override
-  String get plant_flowering_to => "ਤੱਕ";
-  @override
-  String get taxonomy_familia => "ਪਰਿਵਾਰ";
-  @override
-  String get plant_stem => "ਸਟੈਮ";
-  @override
-  String get antarctic_continent => "ਅੰਟਾਰਕਟਿਕਾ ਮਹਾਂਦੀਪ";
-  @override
-  String get no => "ਨਹੀਂ";
-  @override
-  String get brazil => "ਬ੍ਰਾਜ਼ੀਲ";
-  @override
-  String get rate_text => "ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਲੇਖਕ, ਯੂਜ਼ਰਸ ਦੁਆਰਾ ਸਕਾਰਾਤਮਕ ਜਵਾਬ ਦੁਆਰਾ ਪ੍ਰੇਰਿਤ ਹੁੰਦਾ ਹੈ. ਕਿਰਪਾ ਕਰਕੇ ਉਸਨੂੰ ਐਪਲ ਸਟੋਰ ਦੇ ਰਾਹੀਂ ਕੁਝ ਸਟਾਰ ਭੇਜੋ.";
-  @override
-  String get eastern_europe => "ਪੂਰਬੀ ਯੂਰਪ";
-  @override
-  String get south_central_usa => "ਦੱਖਣੀ-ਕੇਂਦਰੀ ਅਮਰੀਕਾ";
-  @override
-  String get offline_download_success => "ਫੋਟੋਆਂ ਅਤੇ ਦ੍ਰਿਸ਼ਟੀਕੋਣ ਸਫਲਤਾਪੂਰਵਕ ਡਾਊਨਲੋਡ ਕੀਤੇ ਗਏ.";
-  @override
-  String get plant_flowering_from => "ਫੁਲਿੰਗ";
-  @override
-  String get taxonomy_tribus => "ਕਬੀਲਾ";
-  @override
-  String get arabian_peninsula => "ਅਰਬੀ ਪ੍ਰਾਇਦੀਪ";
-  @override
-  String get search_taxonomy => "ਟੈਕਸੋਨੀਟੀ ਵਿੱਚ ਖੋਜ ਕਰੋ";
-  @override
-  String get rate_later => "ਬਾਅਦ ਵਿਚ";
-  @override
-  String get color_message => "ਫੁੱਲ ਦਾ ਰੰਗ ਕਿਹੜਾ ਹੈ? ਸਭ ਤੋਂ ਨਜ਼ਦੀਕੀ ਚੁਣੋ";
-  @override
-  String get west_tropical_africa => "ਪੱਛਮੀ ਖੰਡੀ ਅਫ਼ਰੀਕਾ";
-  @override
-  String get northern_europe => "ਉੱਤਰੀ ਯੂਰਪ";
-  @override
-  String get rate => "ਸਮੀਖਿਆ";
-  @override
-  String get northeast_tropical_africa => "ਨਾਰਥ ਈਸਟ ਟ੍ਰੌਪੀਕਲ ਅਫਰੀਕਾ";
-  @override
-  String get pref_language => "ਤਰਜੀਹੀ ਭਾਸ਼ਾ";
-  @override
-  String get product_custom_filter_title => "ਕਸਟਮ ਫਿਲਟਰ";
-  @override
-  String get new_zealand => "ਨਿਊਜ਼ੀਲੈਂਡ";
-  @override
-  String get feedback_intro => "ਤੁਸੀਂ ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਰਹੇ ਹੋ ਕਿਉਂਕਿ ਤੁਸੀਂ ਇਸ ਨੂੰ ਆਪਣੀ ਡਿਵਾਈਸ ਤੇ ਇੰਸਟਾਲ ਕੀਤਾ ਹੈ, ਧੰਨਵਾਦ. ਜੇ ਤੁਸੀਂ ਕੁਝ ਹੋਰ ਦੀ ਭਾਲ ਕਰ ਰਹੇ ਹੋ, ਇੱਥੇ ਕੁਝ ਵਿਕਲਪ ਹਨ:";
-  @override
-  String get filter_distribution => "ਵੰਡ";
-  @override
-  String get eastern_asia => "ਪੂਰਬੀ ਏਸ਼ੀਆ";
-  @override
-  String get western_asia => "ਪੱਛਮੀ ਏਸ਼ੀਆ";
-  @override
-  String get subarctic_america => "ਸੁਬਰਟਿਕ ਅਮਰੀਕਾ";
-  @override
-  String get product_search_title => "ਨਾਮਾਂ ਜਾਂ ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਲੱਭੋ";
-  @override
-  String get feedback_buy_extended => "ਤੁਸੀਂ ਅਤਿਰਿਕਤ ਫੰਕਸ਼ਨ ਜਿਵੇਂ ਐੱਮਲਾਈਨ ਮੋਡ, ਐਕਸਟੈਨਸ਼ਨ, ਨਾਮਾਂ ਦੀ ਖੋਜ, ਟੈਕਸਸੋਨੀਓ ਵਿੱਚ ਖੋਜ, ਨਿਰੀਖਣ ਅਤੇ ਕਨਫ਼ੀਗਰੇਬਲ ਫਿਲਟਰ ਨਾਲ ਐਕਸਟੈਂਡਡ ਵਰਜ਼ਨ ਖਰੀਦ ਸਕਦੇ ਹੋ.";
-  @override
-  String get north_central_usa => "ਉੱਤਰੀ-ਕੇਂਦਰੀ ਅਮਰੀਕਾ";
-  @override
-  String get improve_translation => "ਅਨੁਵਾਦ ਸੁਧਾਰੋ";
-  @override
-  String get feedback_review => "ਤੁਸੀਂ ਇੱਕ ਸਕਾਰਾਤਮਕ ਸਮੀਖਿਆ ਲਿਖ ਸਕਦੇ ਹੋ.";
-  @override
-  String get southeastern_usa => "ਦੱਖਣੀ-ਪੂਰਬੀ ਅਮਰੀਕਾ";
-  @override
-  String get yes => "ਹਾਂ";
-  @override
-  String get feedback_run_ads_video => "ਇੱਕ ਵੀਡੀਓ ਵਿਗਿਆਪਨ ਦੇਖੋ";
-  @override
-  String get plant_height_from => "ਦੀ ਉਚਾਈ ਤੋਂ";
-  @override
-  String get petal_many => "5 ਤੋਂ ਵੱਧ";
-  @override
-  String get southeastern_europe => "ਦੱਖਣ ਯੂਰਪ";
-  @override
-  String get taxonomy_unknown => "ਅਣਜਾਣ";
-  @override
-  String get plant_inflorescence => "ਫੁਲੋਰੇਸੈਂਸ";
-  @override
-  String get northern_africa => "ਉੱਤਰੀ ਅਫ਼ਰੀਕਾ";
-  @override
-  String get offline_subtitle => "300+ ਮੈਬਾ ਵਾਧੂ ਜਗ੍ਹਾ ਦੀ ਲੋੜ ਹੈ";
-  @override
-  String get china => "ਚੀਨ";
-  @override
-  String get product_no_ads_title => "ਕੋਈ ਅਣਚਾਹੇ ਇਸ਼ਤਿਹਾਰ";
-  @override
-  String get offline_title => "ਔਫਲਾਈਨ ਮੋਡ";
-  @override
-  String get petal_zygomorphic => "ਅਨਿਯਮਿਤ";
-  @override
-  String get taxonomy_genus => "ਜਿਣਸ";
-  @override
-  String get papuasia => "ਪੇਪੂਸੀਆ";
-  @override
-  String get feedback_submit_translate_app => "ਐਪਲੀਕੇਸ਼ਨ ਦੇ ਲੇਬਲ ਨੂੰ ਬਿਹਤਰ ਬਣਾਓ";
-}
-
-class $nb extends S {
-  const $nb();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Sentral-Amerika";
-  @override
-  String get legend => "Legende";
-  @override
-  String get product_offline_title => "Frakoblet modus";
-  @override
-  String get feedback_submit_translate_data => "Forbedre blomstens data";
-  @override
-  String get snack_copy => "Kopiert til utklippstavlen";
-  @override
-  String get product_purchase_failed => "Kjøpet mislyktes";
-  @override
-  String get about => "Om apper";
-  @override
-  String get product_no_ads_description => "Søknaden vil ikke vise annonse banner nederst på skjermen.";
-  @override
-  String get offline_download_progress => "Laster ned bilder og illustrasjoner ...";
-  @override
-  String get western_canada => "Vest-Canada";
-  @override
-  String get northern_america => "Nord-Amerika";
-  @override
-  String get western_indian_ocean => "Vest-Indiskehavet";
-  @override
-  String get feedback => "Tilbakemelding";
-  @override
-  String get southwestern_usa => "Sørvest USA";
-  @override
-  String get distribution_message => "Hvilket geografisk område skal vi fokusere på?";
-  @override
-  String get caribbean => "Caribbean";
-  @override
-  String get product_search_description => "Du vil kunne finne en blomst med sitt norske eller latinske navn eller med dets taxon (for eksempel orden, familie, slekt).";
-  @override
-  String get offline_delete_message => "Vil du slette frakoblede data?";
-  @override
-  String get australasia => "Australasia";
-  @override
-  String get petal_4 => "4 eller mindre";
-  @override
-  String get east_tropical_africa => "Øst-tropiske Afrika";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get south_tropical_africa => "Sør-tropiske Afrika";
-  @override
-  String get caucasus => "Kaukasus";
-  @override
-  String get middle_asia => "Midt-Asia";
-  @override
-  String get plant_gallery => "Galleri";
-  @override
-  String get always_my_region_subtitle => "Din region vil bli forhåndsinnstilt til filteret";
-  @override
-  String get indochina => "Indo-Kina";
-  @override
-  String get feedback_translate => "Du kan rapportere hvilken som helst skrivefeil eller feil du fant eller sende inn ny oversettelse på ditt språk.";
-  @override
-  String get australia => "Australia";
-  @override
-  String get google_translate => "Oversatt med Google Trans";
-  @override
-  String get plant_leaf => "Blader";
-  @override
-  String get habitat_forest => "skog";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "Malesia";
-  @override
-  String get southwestern_pacific => "Sørvestlige Stillehavet";
-  @override
-  String get asia_tropical => "Asia-tropisk";
-  @override
-  String get northwestern_usa => "Nordvest USA";
-  @override
-  String get northern_south_america => "Nord Sør-Amerika";
-  @override
-  String get show_original => "Vis engelsk tekst";
-  @override
-  String get offline_download_message => "Du skal laste ned 300 + MB bilder og illustrasjoner. Sjekk om enheten din er koblet til wi-fi. Er du klar for nedlasting?";
-  @override
-  String get southern_america => "Sør-Amerika";
-  @override
-  String get middle_atlantic_ocean => "Midt-Atlanterhavet";
-  @override
-  String get feedback_run_ads => "Du kan vise fullskjermsannonsering eller se videoannonse for å støtte videreutvikling og databaseforbedring.";
-  @override
-  String get habitat_garden => "hager eller felt";
-  @override
-  String get product_purchase => "Kjøpe";
-  @override
-  String get russian_far_east => "Russisk fjernt øst";
-  @override
-  String get west_central_tropical_africa => "Vest-Sentral-tropiske Afrika";
-  @override
-  String get habitat_message => "Hva er rundt deg? Identifiser plantens habitat.";
-  @override
-  String get plant_toxicity => "Toksisitet";
-  @override
-  String get offline_download_fail => "Nedlasting mislyktes. Kontroller din internettforbindelse eller ledig plass på enheten, og prøv igjen.";
-  @override
-  String get snack_no_flowers => "Ingen blomster som samsvarer med kriterier.";
-  @override
-  String get rate_question => "Er dette programmet nyttig?";
-  @override
-  String get macaronesia => "Macaronesia";
-  @override
-  String get plant_taxonomy => "Taksonomi";
-  @override
-  String get feedback_run_ads_fullscreen => "Vis en fullskjerm-annonse";
-  @override
-  String get asia_temperate => "Asia-temperert";
-  @override
-  String get search => "Søke...";
-  @override
-  String get habitat_rock => "steiner eller fjell";
-  @override
-  String get taxonomy_superregnum => "Domene";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "Mongolia";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "Vest Sør-Amerika";
-  @override
-  String get taxonomy_subgenus => "Subgenus";
-  @override
-  String get close => "Lukk";
-  @override
-  String get europe => "Europa";
-  @override
-  String get middle_europe => "Midt-Europa";
-  @override
-  String get color_blue => "blå, lilla";
-  @override
-  String get my_filter => "Mitt filter";
-  @override
-  String get southern_south_america => "Sør Sør-Amerika";
-  @override
-  String get plant_habitat => "Voksested";
-  @override
-  String get snack_loading_ad => "Annonsen er fortsatt lasting, trykk på knappen igjen.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "kronblader";
-  @override
-  String get petal_message => "Er blomsten zygomorphic? Nei? Så hvor mange kronblad har det?";
-  @override
-  String get color_white => "hvit";
-  @override
-  String get northeastern_usa => "Nordøst USA";
-  @override
-  String get color_green => "grønn, brun, svart";
-  @override
-  String get taxonomy_ordo => "Orden";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "Stillehavet";
-  @override
-  String get plant_sources => "Referanser";
-  @override
-  String get taxonomy_regnum => "Rike";
-  @override
-  String get south_central_pacific => "Sør-Sentral Stillehavet";
-  @override
-  String get filter_color => "farge";
-  @override
-  String get help => "Hjelp";
-  @override
-  String get mexico => "Mexico";
-  @override
-  String get snack_publish => "... å bli publisert senere";
-  @override
-  String get siberia => "Sibir";
-  @override
-  String get taxonomy_subtribus => "Undertribus";
-  @override
-  String get product_custom_filter_description => "Du kan endre standard rekkefølge og antall filtre (farge, voksested, kronblader, fordeling).";
-  @override
-  String get habitat_meadow => "enger eller gressletter";
-  @override
-  String get plant_trivia => "Trivia";
-  @override
-  String get product_purchased => "Kjøpt";
-  @override
-  String get taxonomy_cladus => "(klade)";
-  @override
-  String get plant_herbalism => "Plantelegemiddel";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Fortsett nedlasting";
-  @override
-  String get enhancements => "Forbedringer";
-  @override
-  String get habitat_wetland => "heiene eller våtmark";
-  @override
-  String get product_restore_purchases => "Gjenopprette kjøp";
-  @override
-  String get feedback_title => "Hvordan bidra";
-  @override
-  String get toxicity2 => "litt giftig plante";
-  @override
-  String get toxicity1 => "giftig plante";
-  @override
-  String get eastern_canada => "Øst-Canada";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Vis oversatt tekst";
-  @override
-  String get habitat_tree => "trær eller busker";
-  @override
-  String get settings => "Innstillinger";
-  @override
-  String get color_red => "rød, rosa";
-  @override
-  String get north_central_pacific => "Nord-Sentral Stillehavet";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "Sør Afrika";
-  @override
-  String get always_my_region_title => "Legg alltid til min region i filteret";
-  @override
-  String get color_yellow => "gul";
-  @override
-  String get subantarctic_islands => "Subantarctic Islands";
-  @override
-  String get list_info => "Plukk en";
-  @override
-  String get new_version => "Ny versjon er tilgjengelig, vennligst oppdater.";
-  @override
-  String get taxonomy_subfamilia => "Underfamilier";
-  @override
-  String get my_region => "Min region";
-  @override
-  String get pause => "Pause";
-  @override
-  String get indian_subcontinent => "Indisk subkontinent";
-  @override
-  String get product_offline_description => "Du kan kjøre program uten Internett-tilkobling.";
-  @override
-  String get plant_flower => "Blomst";
-  @override
-  String get filter_habitat => "voksested";
-  @override
-  String get rate_never => "Aldri";
-  @override
-  String get northwestern_pacific => "Nordvest Stillehavet";
-  @override
-  String get search_names => "Søk i navn";
-  @override
-  String get southwestern_europe => "Sørvestlige Europa";
-  @override
-  String get taxonomy_species => "Art";
-  @override
-  String get plant_fruit => "Frukt";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "Familie";
-  @override
-  String get plant_stem => "Stengel";
-  @override
-  String get antarctic_continent => "Antarktis-kontinentet";
-  @override
-  String get no => "Nei";
-  @override
-  String get brazil => "Brasil";
-  @override
-  String get rate_text => "Forfatteren av denne søknaden er motivert av positiv respons fra brukerne. Vennligst send ham noen stjerner gjennom applikasjonsbutikken.";
-  @override
-  String get eastern_europe => "Øst-Europa";
-  @override
-  String get south_central_usa => "Sør-Sentral USA";
-  @override
-  String get offline_download_success => "Bilder og illustrasjoner ble lastet ned.";
-  @override
-  String get plant_flowering_from => "Blomstringstid";
-  @override
-  String get taxonomy_tribus => "Tribus";
-  @override
-  String get arabian_peninsula => "Den arabiske halvøy";
-  @override
-  String get search_taxonomy => "Søk i taksonomi";
-  @override
-  String get rate_later => "Seinere";
-  @override
-  String get color_message => "Hva er fargen på blomsten? Velg den nærmeste.";
-  @override
-  String get west_tropical_africa => "Vest-tropiske Afrika";
-  @override
-  String get northern_europe => "Nord-Europa";
-  @override
-  String get rate => "Anmeldelser";
-  @override
-  String get northeast_tropical_africa => "Nordøst-tropiske Afrika";
-  @override
-  String get pref_language => "Foretrukket Språk";
-  @override
-  String get product_custom_filter_title => "Egendefinert filter";
-  @override
-  String get new_zealand => "New Zealand";
-  @override
-  String get feedback_intro => "Du har bidratt til dette programmet siden du har installert det på enheten, takk. Hvis du leter etter noe mer, er det noen alternativer:";
-  @override
-  String get filter_distribution => "fordeling";
-  @override
-  String get eastern_asia => "Øst-Asia";
-  @override
-  String get western_asia => "Vest-Asia";
-  @override
-  String get subarctic_america => "Subarctic America";
-  @override
-  String get product_search_title => "Søk i navn eller taksonomi";
-  @override
-  String get feedback_buy_extended => "Du kan kjøpe utvidet versjon med ekstra funksjonalitet som frakoblet modus, søk i navn, søk i taksonomi, observasjoner og konfigurerbart filter.";
-  @override
-  String get north_central_usa => "Nord-Sentral USA";
-  @override
-  String get improve_translation => "Forbedre oversettelse";
-  @override
-  String get feedback_review => "Du kan skrive en positiv anmeldelse.";
-  @override
-  String get southeastern_usa => "Sørøst USA";
-  @override
-  String get yes => "Ja";
-  @override
-  String get feedback_run_ads_video => "Se en videoannonse";
-  @override
-  String get plant_height_from => "Høyde";
-  @override
-  String get petal_many => "mer enn 5";
-  @override
-  String get southeastern_europe => "Sørøst-Europa";
-  @override
-  String get taxonomy_unknown => "ukjent";
-  @override
-  String get plant_inflorescence => "Blomsterstand";
-  @override
-  String get northern_africa => "Nord-Afrika";
-  @override
-  String get offline_subtitle => "krever 300 + MB ekstra plass.";
-  @override
-  String get china => "Kina";
-  @override
-  String get product_no_ads_title => "Ingen uønsket annonse";
-  @override
-  String get offline_title => "Frakoblet modus";
-  @override
-  String get petal_zygomorphic => "zygomorphic";
-  @override
-  String get taxonomy_genus => "Slekt";
-  @override
-  String get papuasia => "Papuasia";
-  @override
-  String get feedback_submit_translate_app => "Forbedre programmets etiketter";
-}
-
-class $en_US extends S {
-  const $en_US();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get color_message => "What's the color of the flower? Choose the closest one.";
-  @override
-  String get filter_color => "color";
-}
-
-class $ja extends S {
-  const $ja();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "中米";
-  @override
-  String get legend => "伝説";
-  @override
-  String get product_offline_title => "オフラインモード";
-  @override
-  String get feedback_submit_translate_data => "花のデータを改善する";
-  @override
-  String get snack_copy => "クリップボードにコピー";
-  @override
-  String get product_purchase_failed => "購入に失敗しました";
-  @override
-  String get about => "約";
-  @override
-  String get product_no_ads_description => "アプリケーションは画面の下部に広告バナーを表示しません。";
-  @override
-  String get offline_download_progress => "写真やイラストをダウンロードしています...";
-  @override
-  String get western_canada => "カナダ西部";
-  @override
-  String get northern_america => "北アメリカ";
-  @override
-  String get western_indian_ocean => "西インド洋";
-  @override
-  String get feedback => "フィードバック";
-  @override
-  String get southwestern_usa => "アメリカ南西部";
-  @override
-  String get distribution_message => "どの地理的領域に焦点を当てるべきか？";
-  @override
-  String get caribbean => "カリブ海";
-  @override
-  String get product_search_description => "花は、日本語またはラテン語の名前で、あるいは分類群（たとえば、目、科、属）で見つけることができます。";
-  @override
-  String get offline_delete_message => "オフラインデータを削除しますか？";
-  @override
-  String get australasia => "オーストラリア";
-  @override
-  String get petal_4 => "4以下";
-  @override
-  String get east_tropical_africa => "東トロピカルアフリカ";
-  @override
-  String get africa => "アフリカ";
-  @override
-  String get south_tropical_africa => "南トロピカルアフリカ";
-  @override
-  String get caucasus => "コーカサス";
-  @override
-  String get middle_asia => "中東アジア";
-  @override
-  String get plant_gallery => "ギャラリー";
-  @override
-  String get always_my_region_subtitle => "あなたの地域はフィルタにプリセットされます";
-  @override
-  String get indochina => "インドシナ";
-  @override
-  String get feedback_translate => "誤植や誤りを報告したり、新しい翻訳をあなたの言語で提出することができます。";
-  @override
-  String get australia => "オーストラリア";
-  @override
-  String get google_translate => "Google翻訳で翻訳された";
-  @override
-  String get plant_leaf => "葉";
-  @override
-  String get habitat_forest => "森林";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "マレーシア";
-  @override
-  String get southwestern_pacific => "南西太平洋";
-  @override
-  String get asia_tropical => "アジアトロピカル";
-  @override
-  String get northwestern_usa => "米国北西部";
-  @override
-  String get northern_south_america => "南アメリカ北部";
-  @override
-  String get show_original => "英語のテキストを表示する";
-  @override
-  String get offline_download_message => "あなたは300 MB以上の写真やイラストをダウンロードしようとしています。 お使いの機器がWi-Fiに接続されているか確認してください。 ダウンロードの準備はできていますか？";
-  @override
-  String get southern_america => "南アメリカ";
-  @override
-  String get middle_atlantic_ocean => "中部大西洋";
-  @override
-  String get feedback_run_ads => "全画面広告を表示したり、ビデオ広告を見たりして、さらなる開発やデータベースの機能強化をサポートできます。";
-  @override
-  String get habitat_garden => "庭園、畑";
-  @override
-  String get product_purchase => "買う";
-  @override
-  String get russian_far_east => "ロシア極東";
-  @override
-  String get west_central_tropical_africa => "西部中部トロピカルアフリカ";
-  @override
-  String get habitat_message => "あなたの周りには何がありますか？ 植物の生息地を特定する。";
-  @override
-  String get plant_toxicity => "毒性";
-  @override
-  String get offline_download_fail => "ダウンロードに失敗しました。 インターネット接続またはデバイスの空き容量を確認して、もう一度やり直してください。";
-  @override
-  String get snack_no_flowers => "基準に一致する花はありません。";
-  @override
-  String get rate_question => "このアプリケーションは役に立ちましたか？";
-  @override
-  String get macaronesia => "マカロニア";
-  @override
-  String get plant_taxonomy => "分類学";
-  @override
-  String get feedback_run_ads_fullscreen => "フルスクリーン広告を表示する";
-  @override
-  String get asia_temperate => "アジアの温帯";
-  @override
-  String get search => "サーチ...";
-  @override
-  String get habitat_rock => "山";
-  @override
-  String get taxonomy_superregnum => "ドメイン";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "モンゴル";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "西南アメリカ";
-  @override
-  String get taxonomy_subgenus => "Subgenus";
-  @override
-  String get close => "閉じる";
-  @override
-  String get europe => "ヨーロッパ";
-  @override
-  String get middle_europe => "中欧";
-  @override
-  String get color_blue => "青、紫";
-  @override
-  String get my_filter => "私のフィルター";
-  @override
-  String get southern_south_america => "南アメリカ南部";
-  @override
-  String get plant_habitat => "生息地";
-  @override
-  String get snack_loading_ad => "広告はまだ読み込まれています。もう一度ボタンを押してください。";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "花弁";
-  @override
-  String get petal_message => "花は不規則ですか？ いいえ？ それで花びらは何枚ですか？";
-  @override
-  String get color_white => "白";
-  @override
-  String get northeastern_usa => "北東アメリカ";
-  @override
-  String get color_green => "緑、茶色、黒";
-  @override
-  String get taxonomy_ordo => "目";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "パシフィック";
-  @override
-  String get plant_sources => "出典";
-  @override
-  String get taxonomy_regnum => "界";
-  @override
-  String get south_central_pacific => "中南米";
-  @override
-  String get filter_color => "色";
-  @override
-  String get help => "ヘルプ";
-  @override
-  String get mexico => "メキシコ";
-  @override
-  String get snack_publish => "... 後で公開する";
-  @override
-  String get siberia => "シベリア";
-  @override
-  String get taxonomy_subtribus => "亜族";
-  @override
-  String get product_custom_filter_description => "あなたは、デフォルトの順番とフィルタの数（色、生息地、花弁、分布）を変えることができるでしょう。";
-  @override
-  String get habitat_meadow => "草地、草原";
-  @override
-  String get plant_trivia => "トリビア";
-  @override
-  String get product_purchased => "購入した";
-  @override
-  String get taxonomy_cladus => "(系統群)";
-  @override
-  String get plant_herbalism => "本草学";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "ダウンロードを再開";
-  @override
-  String get enhancements => "機能強化";
-  @override
-  String get habitat_wetland => "ムーア、沼地、ボグ、フェン";
-  @override
-  String get product_restore_purchases => "購入を復元";
-  @override
-  String get feedback_title => "貢献する方法";
-  @override
-  String get toxicity2 => "わずかに有毒な植物";
-  @override
-  String get toxicity1 => "有毒植物";
-  @override
-  String get eastern_canada => "カナダ東部";
-  @override
-  String get plant_info => "インフォ";
-  @override
-  String get show_translation => "翻訳されたテキストを表示する";
-  @override
-  String get habitat_tree => "木、低木";
-  @override
-  String get settings => "設定";
-  @override
-  String get color_red => "赤、ピンク";
-  @override
-  String get north_central_pacific => "北中太平洋";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "南アフリカ";
-  @override
-  String get always_my_region_title => "自分の地域を常にフィルタに追加する";
-  @override
-  String get color_yellow => "黄色";
-  @override
-  String get subantarctic_islands => "亜南極諸島";
-  @override
-  String get list_info => "一つを選ぶ";
-  @override
-  String get new_version => "新しいバージョンが利用可能です、更新してください。";
-  @override
-  String get taxonomy_subfamilia => "亜科";
-  @override
-  String get my_region => "私の地域";
-  @override
-  String get pause => "一時停止";
-  @override
-  String get indian_subcontinent => "インド亜大陸";
-  @override
-  String get product_offline_description => "あなたはインターネットに接続せずにアプリケーションを実行することができるでしょう。";
-  @override
-  String get plant_flower => "花";
-  @override
-  String get filter_habitat => "生息地";
-  @override
-  String get rate_never => "絶対に";
-  @override
-  String get northwestern_pacific => "北西太平洋";
-  @override
-  String get search_names => "名前で検索";
-  @override
-  String get southwestern_europe => "南西ヨーロッパ";
-  @override
-  String get taxonomy_species => "種";
-  @override
-  String get plant_fruit => "果実";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "科";
-  @override
-  String get plant_stem => "茎";
-  @override
-  String get antarctic_continent => "南極大陸";
-  @override
-  String get no => "いいえ";
-  @override
-  String get brazil => "ブラジル";
-  @override
-  String get rate_text => "このアプリケーションの作者は、ユーザーからの良い反応によって動機づけられています。 アプリケーションストアを通じて彼にいくつかの星を送ってください。";
-  @override
-  String get eastern_europe => "東ヨーロッパ";
-  @override
-  String get south_central_usa => "中南米";
-  @override
-  String get offline_download_success => "写真やイラストのダウンロードに成功しました。";
-  @override
-  String get plant_flowering_from => "開花";
-  @override
-  String get taxonomy_tribus => "族";
-  @override
-  String get arabian_peninsula => "アラビア半島";
-  @override
-  String get search_taxonomy => "分類法で検索する";
-  @override
-  String get rate_later => "後で";
-  @override
-  String get color_message => "花の色は何ですか？ 最も近いものを選んでください。";
-  @override
-  String get west_tropical_africa => "西トロピカルアフリカ";
-  @override
-  String get northern_europe => "北欧";
-  @override
-  String get rate => "レビュー";
-  @override
-  String get northeast_tropical_africa => "東北熱帯アフリカ";
-  @override
-  String get pref_language => "優先言語e";
-  @override
-  String get product_custom_filter_title => "カスタムフィルター";
-  @override
-  String get new_zealand => "ニュージーランド";
-  @override
-  String get feedback_intro => "デバイスにインストールしたので、このアプリケーションに貢献しました。ありがとうございます。 あなたがもっと何かを探しているなら、いくつかのオプションがあります：";
-  @override
-  String get filter_distribution => "分布";
-  @override
-  String get eastern_asia => "東アジア";
-  @override
-  String get western_asia => "西アジア";
-  @override
-  String get subarctic_america => "亜寒帯アメリカ";
-  @override
-  String get product_search_title => "名前または分類法で検索する";
-  @override
-  String get feedback_buy_extended => "オフラインモード、名前で検索、分類法で検索、観測、設定可能なフィルタなどの追加機能を備えた拡張バージョンを購入できます。";
-  @override
-  String get north_central_usa => "アメリカ北西部";
-  @override
-  String get improve_translation => "翻訳を改善する";
-  @override
-  String get feedback_review => "あなたは肯定的なレビューを書くことができます。";
-  @override
-  String get southeastern_usa => "アメリカ南東部";
-  @override
-  String get yes => "はい";
-  @override
-  String get feedback_run_ads_video => "ビデオ広告を見る";
-  @override
-  String get plant_height_from => "高さ";
-  @override
-  String get petal_many => "以上5";
-  @override
-  String get southeastern_europe => "南東ヨーロッパ";
-  @override
-  String get taxonomy_unknown => "未知の";
-  @override
-  String get plant_inflorescence => "花序";
-  @override
-  String get northern_africa => "北アフリカ";
-  @override
-  String get offline_subtitle => "300 MB以上の追加スペースが必要です。";
-  @override
-  String get china => "中国";
-  @override
-  String get product_no_ads_title => "迷惑な広告はありません";
-  @override
-  String get offline_title => "オフラインモード";
-  @override
-  String get petal_zygomorphic => "不規則な";
-  @override
-  String get taxonomy_genus => "属";
-  @override
-  String get papuasia => "パプアシア";
-  @override
-  String get feedback_submit_translate_app => "アプリケーションのラベルを改善する";
-}
-
-class $fa extends S {
-  const $fa();
-
-  @override
-  TextDirection get textDirection => TextDirection.rtl;
-
-  @override
-  String get central_america => "آمریکای مرکزی";
-  @override
-  String get legend => "افسانه";
-  @override
-  String get product_offline_title => "حالت آفلاین";
-  @override
-  String get feedback_submit_translate_data => "اطلاعات گل را بهبود بخشید";
-  @override
-  String get snack_copy => "کپی به کلیپ بورد";
-  @override
-  String get product_purchase_failed => "خرید خراب شد";
-  @override
-  String get about => "درباره برنامه";
-  @override
-  String get product_no_ads_description => "برنامه بنر تبلیغاتی را در پایین صفحه نشان نمی دهد.";
-  @override
-  String get offline_download_progress => "دانلود عکس ها و تصاویر ...";
-  @override
-  String get western_canada => "غربی کانادا";
-  @override
-  String get northern_america => "آمریکای شمالی";
-  @override
-  String get western_indian_ocean => "اقیانوس هند غربی";
-  @override
-  String get feedback => "انتقادات";
-  @override
-  String get southwestern_usa => "جنوب غربی ایالات متحده آمریکا";
-  @override
-  String get distribution_message => "کدام منطقه جغرافیایی باید تمرکز کنیم؟";
-  @override
-  String get caribbean => "کارائیب";
-  @override
-  String get product_search_description => "شما می توانید یک گل را با نام لاتین خود یا طوفان آن (مانند سفارش، خانواده، جنس) پیدا کنید.";
-  @override
-  String get offline_delete_message => "میخواهید دادههای آفلاین را حذف کنید؟";
-  @override
-  String get australasia => "استرالیا";
-  @override
-  String get petal_4 => "4 یا کمتر";
-  @override
-  String get east_tropical_africa => "شرق گرمسیر آفریقا";
-  @override
-  String get africa => "آفریقا";
-  @override
-  String get south_tropical_africa => "آفریقای جنوبی گرمسیری";
-  @override
-  String get caucasus => "قفقاز";
-  @override
-  String get middle_asia => "آسیای میانه";
-  @override
-  String get plant_gallery => "آلبوم عکس";
-  @override
-  String get always_my_region_subtitle => "منطقه شما به طور پیش فرض به فیلتر تنظیم می شود";
-  @override
-  String get indochina => "هندو چین";
-  @override
-  String get feedback_translate => "شما می توانید هر نوع اشتباه یا اشتباهی را که به زبان خود پیدا کرده اید ارسال یا ارسال کنید.";
-  @override
-  String get australia => "استرالیا";
-  @override
-  String get google_translate => "ترجمه شده با ترجمه گوگل";
-  @override
-  String get plant_leaf => "برگها";
-  @override
-  String get habitat_forest => "جنگل ها یا جنگل ها";
-  @override
-  String get taxonomy_serie => "زنجیره";
-  @override
-  String get malesia => "مالزی";
-  @override
-  String get southwestern_pacific => "جنوب غربی اقیانوس آرام";
-  @override
-  String get asia_tropical => "آسیا گرمسیری";
-  @override
-  String get northwestern_usa => "شمال غرب آمریکا";
-  @override
-  String get northern_south_america => "شمال امریکا جنوبی";
-  @override
-  String get show_original => "نمایش متن انگلیسی";
-  @override
-  String get offline_download_message => "شما قصد دارید 300+ MB عکس و تصاویر را دانلود کنید. لطفا بررسی کنید که آیا دستگاه شما به Wi-Fi متصل است یا خیر. آیا برای دانلود آماده هستید؟";
-  @override
-  String get southern_america => "جنوب امریکا";
-  @override
-  String get middle_atlantic_ocean => "اقیانوس اطلس میانه";
-  @override
-  String get feedback_run_ads => "شما می توانید تبلیغات تمام صفحه را نمایش دهید یا تبلیغات ویدئویی را تماشا کنید تا از توسعه بیشتر و بهبود پایگاه داده پشتیبانی کند.";
-  @override
-  String get habitat_garden => "باغ ها یا رشته ها";
-  @override
-  String get product_purchase => "خرید";
-  @override
-  String get russian_far_east => "شرق دور روسیه";
-  @override
-  String get west_central_tropical_africa => "غرب آفریقای مرکزی گرمسیری";
-  @override
-  String get habitat_message => "چه چیزی در اطراف شماست؟ شناسایی زیستگاه گیاه";
-  @override
-  String get plant_toxicity => "سمی بودن";
-  @override
-  String get offline_download_fail => "دانلود نشد. لطفا اتصال اینترنت یا فضای آزاد خود را بر روی دستگاه بررسی کنید و دوباره امتحان کنید.";
-  @override
-  String get snack_no_flowers => "بدون گل مطابق معیارهای.";
-  @override
-  String get rate_question => "آیا این برنامه مفید است؟";
-  @override
-  String get macaronesia => "ماکرونزی";
-  @override
-  String get plant_taxonomy => "طبقه بندی";
-  @override
-  String get feedback_run_ads_fullscreen => "یک تبلیغ تمام صفحه را نشان دهید";
-  @override
-  String get asia_temperate => "آسیا درجه حرارت";
-  @override
-  String get search => "جستجو کردن...";
-  @override
-  String get habitat_rock => "سنگ ها یا کوه ها";
-  @override
-  String get taxonomy_superregnum => "حوزه";
-  @override
-  String get taxonomy_sectio => "بخشه";
-  @override
-  String get mongolia => "مغولستان";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "آمریکای جنوبی غربی";
-  @override
-  String get taxonomy_subgenus => "زیرسرده";
-  @override
-  String get close => "نزدیک";
-  @override
-  String get europe => "اروپا";
-  @override
-  String get middle_europe => "اروپای مرکزی";
-  @override
-  String get color_blue => "آبی، بنفش";
-  @override
-  String get my_filter => "فیلتر من";
-  @override
-  String get southern_south_america => "جنوبی جنوب امریکا";
-  @override
-  String get plant_habitat => "زیستگاه";
-  @override
-  String get snack_loading_ad => "تبلیغات هنوز بارگیری شده است، دوباره دکمه را فشار دهید.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "گلبرگ";
-  @override
-  String get petal_message => "آیا گل زگومورفیک است؟ نه؟ پس چقدر گلبرگها آن را دارند؟";
-  @override
-  String get color_white => "سفید";
-  @override
-  String get northeastern_usa => "شمال شرقی ایالات متحده آمریکا";
-  @override
-  String get color_green => "سبز، قهوه ای، سیاه و سفید";
-  @override
-  String get taxonomy_ordo => "راسته";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "اقیانوس آرام";
-  @override
-  String get plant_sources => "منابع";
-  @override
-  String get taxonomy_regnum => "فرمانرو";
-  @override
-  String get south_central_pacific => "جنوب آسیا اقیانوس آرام";
-  @override
-  String get filter_color => "رنگ";
-  @override
-  String get help => "کمک";
-  @override
-  String get mexico => "مکزیک";
-  @override
-  String get snack_publish => "بعدا منتشر شود";
-  @override
-  String get siberia => "سیبری";
-  @override
-  String get taxonomy_subtribus => "زیرتبار";
-  @override
-  String get product_custom_filter_description => "شما می توانید سفارش پیش فرض و تعداد فیلترها (رنگ، زیستگاه ها، گلبرگ، توزیع) را تغییر دهید.";
-  @override
-  String get habitat_meadow => "چمنزارها یا چمنزارها";
-  @override
-  String get plant_trivia => "چیزهای بی اهمیت";
-  @override
-  String get product_purchased => "خریداری شده";
-  @override
-  String get taxonomy_cladus => "(clade)";
-  @override
-  String get plant_herbalism => "گیاه شناسی";
-  @override
-  String get plant_height_to => "به";
-  @override
-  String get offline_download => "رزومه دانلود";
-  @override
-  String get enhancements => "ارتقاء";
-  @override
-  String get habitat_wetland => "باتلاق یا تالاب";
-  @override
-  String get product_restore_purchases => "بازگرداندن خرید";
-  @override
-  String get toxicity2 => "گیاه کمی سمی است";
-  @override
-  String get toxicity1 => "گیاه سمی";
-  @override
-  String get eastern_canada => "شرق کانادا";
-  @override
-  String get plant_info => "اطلاعات";
-  @override
-  String get show_translation => "نمایش متن ترجمه شده";
-  @override
-  String get habitat_tree => "درختان یا درختچه ها";
-  @override
-  String get settings => "تنظیمات";
-  @override
-  String get color_red => "قرمز، صورتی";
-  @override
-  String get north_central_pacific => "شمال اقیانوس آرام";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "آفریقای جنوبی";
-  @override
-  String get always_my_region_title => "همیشه منطقه من را به فیلتر اضافه کنید";
-  @override
-  String get color_yellow => "رنگ زرد";
-  @override
-  String get subantarctic_islands => "جزایر سابانتارکتیک";
-  @override
-  String get list_info => "یکی را انتخاب کن";
-  @override
-  String get new_version => "نسخه جدید در دسترس است، لطفا به روز رسانی کنید.";
-  @override
-  String get taxonomy_subfamilia => "زیرخانواده";
-  @override
-  String get my_region => "منطقه من";
-  @override
-  String get pause => "مکث";
-  @override
-  String get indian_subcontinent => "شبه قاره هند";
-  @override
-  String get product_offline_description => "شما قادر به اجرای برنامه بدون اتصال به اینترنت خواهید بود.";
-  @override
-  String get plant_flower => "گل ها";
-  @override
-  String get filter_habitat => "زیستگاه ها";
-  @override
-  String get rate_never => "هرگز";
-  @override
-  String get northwestern_pacific => "شمال غرب اقیانوس آرام";
-  @override
-  String get search_names => "جستجو در اسامی";
-  @override
-  String get southwestern_europe => "جنوب غربی اروپا";
-  @override
-  String get taxonomy_species => "گونه";
-  @override
-  String get plant_fruit => "میوه ها";
-  @override
-  String get plant_flowering_to => "به";
-  @override
-  String get taxonomy_familia => "تیره";
-  @override
-  String get plant_stem => "ساقه";
-  @override
-  String get antarctic_continent => "قاره قطب جنوب";
-  @override
-  String get no => "نه";
-  @override
-  String get brazil => "برزیل";
-  @override
-  String get rate_text => "نویسنده این برنامه توسط پاسخ مثبت از کاربران پر شده است. لطفا چند ستاره را از طریق فروشگاه نرم افزار ارسال کنید.";
-  @override
-  String get eastern_europe => "اروپای شرقی";
-  @override
-  String get south_central_usa => "جنوبی مرکزی ایالات متحده آمریکا";
-  @override
-  String get offline_download_success => "عکس ها و تصاویر با موفقیت دانلود شده اند.";
-  @override
-  String get plant_flowering_from => "گل از";
-  @override
-  String get taxonomy_tribus => "تبار";
-  @override
-  String get arabian_peninsula => "شبه جزیره عربی";
-  @override
-  String get search_taxonomy => "جستجو در طبقه بندی";
-  @override
-  String get rate_later => "بعد";
-  @override
-  String get color_message => "رنگ گل چیست؟ نزدیک ترین را انتخاب کنید";
-  @override
-  String get west_tropical_africa => "غرب گرمسیر آفریقا";
-  @override
-  String get northern_europe => "شمال اروپا";
-  @override
-  String get rate => "مرور";
-  @override
-  String get northeast_tropical_africa => "آفریقا شمال شرقی گرمسیری";
-  @override
-  String get pref_language => "زبان ترجیحی";
-  @override
-  String get product_custom_filter_title => "فیلتر سفارشی";
-  @override
-  String get new_zealand => "نیوزلند";
-  @override
-  String get feedback_intro => "از زمان نصب آن بر روی دستگاه خود به این برنامه کمک کرده اید، با تشکر. اگر شما به دنبال چیزی بیشتر هستید، در اینجا چند گزینه وجود دارد:";
-  @override
-  String get filter_distribution => "توزیع";
-  @override
-  String get eastern_asia => "آسیای شرقی";
-  @override
-  String get western_asia => "آسیای غربی";
-  @override
-  String get subarctic_america => "Subarctic America";
-  @override
-  String get product_search_title => "جستجو در نام یا طبقه بندی";
-  @override
-  String get feedback_buy_extended => "شما می توانید نسخه پیشرفته با قابلیت های اضافی مانند حالت آفلاین، جستجو در اسامی، جستجو در طبقه بندی، مشاهدات و فیلتر قابل تنظیم را خریداری کنید.";
-  @override
-  String get north_central_usa => "مرکزی ایالات متحده آمریکا";
-  @override
-  String get improve_translation => "بهبود ترجمه";
-  @override
-  String get feedback_review => "شما می توانید یک بررسی مثبت بنویسید.";
-  @override
-  String get southeastern_usa => "جنوب شرقی ایالات متحده آمریکا";
-  @override
-  String get yes => "بله";
-  @override
-  String get feedback_run_ads_video => "تبلیغات ویدیویی را تماشا کنید";
-  @override
-  String get plant_height_from => "ارتفاع از";
-  @override
-  String get petal_many => "بیش از 5";
-  @override
-  String get southeastern_europe => "جنوب شرقی اروپا";
-  @override
-  String get plant_inflorescence => "گل آذین";
-  @override
-  String get northern_africa => "آفریقای شمالی";
-  @override
-  String get offline_subtitle => "نیاز به 300+ MB فضای اضافی.";
-  @override
-  String get china => "چين";
-  @override
-  String get product_no_ads_title => "بدون تبلیغات ناخواسته";
-  @override
-  String get offline_title => "حالت آفلاین";
-  @override
-  String get petal_zygomorphic => "بی رویه";
-  @override
-  String get taxonomy_genus => "سرده";
-  @override
-  String get papuasia => "پاپواشیا";
-  @override
-  String get feedback_submit_translate_app => "برچسب های نرم افزار را بهبود بخشد";
-}
-
-class $pl extends S {
-  const $pl();
+class $pl_PL extends S {
+  const $pl_PL();
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -9894,746 +1345,8 @@ class $pl extends S {
   String get feedback_submit_translate_app => "Poprawki tłumaczenia aplikacji";
 }
 
-class $da extends S {
-  const $da();
-
-  @override
-  TextDirection get textDirection => TextDirection.ltr;
-
-  @override
-  String get central_america => "Mellemamerika";
-  @override
-  String get legend => "Legende";
-  @override
-  String get product_offline_title => "Offline-tilstand";
-  @override
-  String get snack_copy => "Kopieret til udklipsholderen";
-  @override
-  String get product_purchase_failed => "Køb mislykkedes";
-  @override
-  String get about => "Om ansøgning";
-  @override
-  String get product_no_ads_description => "Programmet viser ikke reklamebanner nederst på skærmen.";
-  @override
-  String get offline_download_progress => "Downloadning af billeder og illustrationer ...";
-  @override
-  String get western_canada => "Vestlige Canada";
-  @override
-  String get northern_america => "Nordamerika";
-  @override
-  String get western_indian_ocean => "Vestlige indiske ocean";
-  @override
-  String get feedback => "Feedback";
-  @override
-  String get southwestern_usa => "Sydvestlige USA";
-  @override
-  String get distribution_message => "Hvilket geografisk område skal vi fokusere på?";
-  @override
-  String get caribbean => "Caribien";
-  @override
-  String get product_search_description => "Du kan finde en blomst ved sit danske eller latinske navn eller ved dets taxon (fx ordo, familie, slægt).";
-  @override
-  String get offline_delete_message => "Vil du slette offline data?";
-  @override
-  String get australasia => "Australasien";
-  @override
-  String get petal_4 => "4 eller mindre";
-  @override
-  String get east_tropical_africa => "Øst tropiske Afrika";
-  @override
-  String get africa => "Afrika";
-  @override
-  String get south_tropical_africa => "Syd tropiske Afrika";
-  @override
-  String get caucasus => "Kaukasus";
-  @override
-  String get middle_asia => "Mellemasien";
-  @override
-  String get plant_gallery => "Galleri";
-  @override
-  String get always_my_region_subtitle => "Din region vil blive forudindstillet til filteret";
-  @override
-  String get indochina => "Indokina";
-  @override
-  String get feedback_translate => "Du kan rapportere enhver tastatur eller fejl, du har fundet eller indsende ny oversættelse på dit sprog.";
-  @override
-  String get australia => "Australien";
-  @override
-  String get google_translate => "Oversat med Google Translate";
-  @override
-  String get plant_leaf => "Blade";
-  @override
-  String get habitat_forest => "skove";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "Malaysia";
-  @override
-  String get southwestern_pacific => "Sydvestlige Stillehavet";
-  @override
-  String get asia_tropical => "Asien-Tropical";
-  @override
-  String get northwestern_usa => "Nordvestlige USA";
-  @override
-  String get northern_south_america => "Nord-Sydamerika";
-  @override
-  String get show_original => "Vis engelske tekst";
-  @override
-  String get offline_download_message => "Du skal downloade 300+ MB billeder og illustrationer. Kontroller, om din enhed er tilsluttet wi-fi. Er du klar til download?";
-  @override
-  String get southern_america => "Sydamerika";
-  @override
-  String get middle_atlantic_ocean => "Mellematlanten";
-  @override
-  String get feedback_run_ads => "Du kan vise fuldskærmsannonce eller se videoannonce for at understøtte yderligere udvikling og databaseforbedring.";
-  @override
-  String get habitat_garden => "haver eller marker";
-  @override
-  String get product_purchase => "Køb";
-  @override
-  String get russian_far_east => "Russiske fjernøsten";
-  @override
-  String get west_central_tropical_africa => "Vest Central tropiske Afrika";
-  @override
-  String get habitat_message => "Hvad er der omkring dig? Identificer plantens levested.";
-  @override
-  String get plant_toxicity => "Toksicitet";
-  @override
-  String get offline_download_fail => "Download fejlede. Kontroller din internetforbindelse eller ledig plads på enheden, og prøv igen.";
-  @override
-  String get snack_no_flowers => "Ingen blomster, der matcher kriterier.";
-  @override
-  String get rate_question => "Er denne app hjælpsom?";
-  @override
-  String get macaronesia => "Makaronesien";
-  @override
-  String get plant_taxonomy => "Taksonomi";
-  @override
-  String get feedback_run_ads_fullscreen => "Vis en fuldscreen reklame";
-  @override
-  String get asia_temperate => "Asien-Tempereret";
-  @override
-  String get search => "Søg...";
-  @override
-  String get habitat_rock => "klipper eller bjerge";
-  @override
-  String get taxonomy_superregnum => "Domæne";
-  @override
-  String get taxonomy_sectio => "Sektion";
-  @override
-  String get mongolia => "Mongoliet";
-  @override
-  String get taxonomy_subserie => "Underserie";
-  @override
-  String get western_south_america => "Vestlige Sydamerika";
-  @override
-  String get taxonomy_subgenus => "Underslægt";
-  @override
-  String get close => "Tæt";
-  @override
-  String get europe => "Europa";
-  @override
-  String get middle_europe => "Mellemeuropa";
-  @override
-  String get color_blue => "blå, lilla";
-  @override
-  String get my_filter => "Mit filter";
-  @override
-  String get southern_south_america => "Sydlige Sydamerika";
-  @override
-  String get plant_habitat => "Vækststeder";
-  @override
-  String get snack_loading_ad => "Annonce er stadig indlæst, tryk igen på knappen.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get petal_message => "Er blomsten zygomorphic? Ingen? Så hvor mange kronblade har det?";
-  @override
-  String get color_white => "hvid";
-  @override
-  String get northeastern_usa => "Nordøstlige USA";
-  @override
-  String get color_green => "grøn, brun, sort";
-  @override
-  String get taxonomy_ordo => "Ordo";
-  @override
-  String get taxonomy_supersectio => "Supersektion";
-  @override
-  String get pacific => "Stillehavet";
-  @override
-  String get plant_sources => "Kilder";
-  @override
-  String get taxonomy_regnum => "Rige";
-  @override
-  String get south_central_pacific => "Syd-Central Stillehavet";
-  @override
-  String get filter_color => "farve";
-  @override
-  String get help => "Hjælp";
-  @override
-  String get mexico => "Mexico";
-  @override
-  String get snack_publish => "... offentliggøres senere";
-  @override
-  String get siberia => "Sibirien";
-  @override
-  String get taxonomy_subtribus => "Undertribus";
-  @override
-  String get product_custom_filter_description => "Du kan ændre standardordre og antal filtre (farve, vækststeder, kronblad, fordeling).";
-  @override
-  String get habitat_meadow => "enge eller overdrev";
-  @override
-  String get plant_trivia => "Trivia";
-  @override
-  String get product_purchased => "Købt";
-  @override
-  String get taxonomy_cladus => "Cladus";
-  @override
-  String get plant_herbalism => "Naturmedicin";
-  @override
-  String get plant_height_to => "-";
-  @override
-  String get offline_download => "Genoptag download";
-  @override
-  String get enhancements => "Forbedringer";
-  @override
-  String get habitat_wetland => "heder eller vådområder";
-  @override
-  String get product_restore_purchases => "Genoprette indkøb";
-  @override
-  String get feedback_title => "Hvordan bidrage";
-  @override
-  String get toxicity2 => "lidt giftig plante";
-  @override
-  String get toxicity1 => "giftig plante";
-  @override
-  String get eastern_canada => "Østlige Canada";
-  @override
-  String get plant_info => "Info";
-  @override
-  String get show_translation => "Vis oversatte tekst";
-  @override
-  String get habitat_tree => "træer eller buske";
-  @override
-  String get settings => "Indstillinger";
-  @override
-  String get color_red => "rød, lyserød";
-  @override
-  String get north_central_pacific => "Nord-Central Stillehavet";
-  @override
-  String get taxonomy_subsectio => "Undersektion";
-  @override
-  String get southern_africa => "Sydafrika";
-  @override
-  String get always_my_region_title => "Tilføj altid min region til filteret";
-  @override
-  String get color_yellow => "gul";
-  @override
-  String get subantarctic_islands => "Subantarctic Islands";
-  @override
-  String get list_info => "Vælg en";
-  @override
-  String get new_version => "Ny version er tilgængelig, opdater venligst.";
-  @override
-  String get taxonomy_subfamilia => "Underfamilie";
-  @override
-  String get my_region => "Min region";
-  @override
-  String get pause => "Pause";
-  @override
-  String get indian_subcontinent => "Indiske subkontinent";
-  @override
-  String get product_offline_description => "Du kan køre applikation uden internetforbindelse.";
-  @override
-  String get plant_flower => "Blomstre";
-  @override
-  String get filter_habitat => "vækststeder";
-  @override
-  String get rate_never => "Aldrig";
-  @override
-  String get northwestern_pacific => "Nordvestlige Stillehavet";
-  @override
-  String get search_names => "Søg i navne";
-  @override
-  String get southwestern_europe => "Sydvesteuropa";
-  @override
-  String get taxonomy_species => "Art";
-  @override
-  String get plant_fruit => "Frugt";
-  @override
-  String get plant_flowering_to => "-";
-  @override
-  String get taxonomy_familia => "Familie";
-  @override
-  String get plant_stem => "Stængel";
-  @override
-  String get antarctic_continent => "Antarktis-kontinentet";
-  @override
-  String get no => "Ingen";
-  @override
-  String get brazil => "Brasilien";
-  @override
-  String get rate_text => "Forfatteren af denne ansøgning er drevet af et positivt svar fra brugerne. Venligst send ham nogle stjerner gennem applikationsbutikken.";
-  @override
-  String get eastern_europe => "østeuropa";
-  @override
-  String get south_central_usa => "Syd-Central USA";
-  @override
-  String get offline_download_success => "Billeder og illustrationer er blevet downloadet.";
-  @override
-  String get plant_flowering_from => "Blomstringstid";
-  @override
-  String get taxonomy_tribus => "Tribus";
-  @override
-  String get arabian_peninsula => "Den arabiske halvø";
-  @override
-  String get search_taxonomy => "Søg i taksonomi";
-  @override
-  String get rate_later => "Senere";
-  @override
-  String get color_message => "Hvad er farven på blomsten? Vælg den nærmeste.";
-  @override
-  String get west_tropical_africa => "Vestlige tropiske Afrika";
-  @override
-  String get northern_europe => "Nordeuropa";
-  @override
-  String get rate => "Anmeldelser";
-  @override
-  String get northeast_tropical_africa => "Nordøstlige tropiske Afrika";
-  @override
-  String get pref_language => "Foretrukne sprog";
-  @override
-  String get product_custom_filter_title => "Brugerdefineret filter";
-  @override
-  String get new_zealand => "New Zealand";
-  @override
-  String get feedback_intro => "Du har bidraget til denne applikation, da du har installeret den på din enhed, tak. Hvis du leder efter noget mere, her er nogle muligheder:";
-  @override
-  String get filter_distribution => "fordeling";
-  @override
-  String get eastern_asia => "Østasien";
-  @override
-  String get western_asia => "Vestasien";
-  @override
-  String get subarctic_america => "Subarctic America";
-  @override
-  String get product_search_title => "Søg i navne eller taksonomi";
-  @override
-  String get feedback_buy_extended => "Du kan købe udvidet (+) version med ekstra funktionalitet som offline-tilstand, søge i navne, søge i taksonomi, observationer og konfigurerbart filter.";
-  @override
-  String get north_central_usa => "Nord-Central USA";
-  @override
-  String get improve_translation => "Forbedre oversættelse";
-  @override
-  String get feedback_review => "Du kan skrive en positiv anmeldelse.";
-  @override
-  String get southeastern_usa => "Sydøstlige USA";
-  @override
-  String get yes => "Ja";
-  @override
-  String get feedback_run_ads_video => "Se en videoannonce";
-  @override
-  String get plant_height_from => "Højde";
-  @override
-  String get petal_many => "mere end 5";
-  @override
-  String get southeastern_europe => "Sydøsteuropa";
-  @override
-  String get taxonomy_unknown => "ukendt";
-  @override
-  String get plant_inflorescence => "Blomsterstand";
-  @override
-  String get northern_africa => "Nordafrika";
-  @override
-  String get offline_subtitle => "kræver 300 + MB ekstra plads.";
-  @override
-  String get china => "Kina";
-  @override
-  String get product_no_ads_title => "Ingen uønsket reklame";
-  @override
-  String get offline_title => "Offline-tilstand";
-  @override
-  String get petal_zygomorphic => "zygomorf";
-  @override
-  String get taxonomy_genus => "Slægt";
-  @override
-  String get papuasia => "Papuasia";
-}
-
-class $he extends S {
-  const $he();
-
-  @override
-  TextDirection get textDirection => TextDirection.rtl;
-
-  @override
-  String get central_america => "מרכז אמריקה";
-  @override
-  String get legend => "אגדה";
-  @override
-  String get product_offline_title => "מצב לא מקוון";
-  @override
-  String get feedback_submit_translate_data => "שפר את נתוני הפרחים";
-  @override
-  String get snack_copy => "הועתק ללוח";
-  @override
-  String get product_purchase_failed => "הרכישה נכשלה";
-  @override
-  String get about => "על היישום";
-  @override
-  String get product_no_ads_description => "היישום לא יציג מודעת באנר בחלק התחתון של המסך.";
-  @override
-  String get offline_download_progress => "מוריד תמונות ואיורים ...";
-  @override
-  String get western_canada => "קנדה המערבית";
-  @override
-  String get northern_america => "צפון אמריקה";
-  @override
-  String get western_indian_ocean => "האוקיינוס ההודי המערבי";
-  @override
-  String get feedback => "משוב / תרומה";
-  @override
-  String get southwestern_usa => "דרום מערב ארצות הברית";
-  @override
-  String get distribution_message => "באיזה אזור גיאוגרפי עלינו להתמקד?";
-  @override
-  String get caribbean => "הקאריביים";
-  @override
-  String get product_search_description => "תוכל למצוא פרח בשם הלטיני שלה או על ידי הטקסון שלה (למשל סדרה, משפחה, סוג).";
-  @override
-  String get offline_delete_message => "האם ברצונך למחוק נתונים לא מקוונים?";
-  @override
-  String get australasia => "אוסטרליה";
-  @override
-  String get petal_4 => "4 או פחות";
-  @override
-  String get east_tropical_africa => "מזרח אפריקה טרופית";
-  @override
-  String get africa => "אפריקה";
-  @override
-  String get south_tropical_africa => "דרום אפריקה טרופית";
-  @override
-  String get caucasus => "קווקז";
-  @override
-  String get middle_asia => "אסיה התיכונה";
-  @override
-  String get plant_gallery => "גלריה";
-  @override
-  String get always_my_region_subtitle => "האזור שלך יוגדר מראש למסנן";
-  @override
-  String get indochina => "הודו-סין";
-  @override
-  String get feedback_translate => "תוכל לדווח על שגיאת הקלדה או השגיאה שמצאת או שלח תרגום חדש בשפה שלך";
-  @override
-  String get australia => "אוסטרליה";
-  @override
-  String get google_translate => "תורגם עם גוגל תרגום";
-  @override
-  String get plant_leaf => "עלים";
-  @override
-  String get habitat_forest => "יערות";
-  @override
-  String get taxonomy_serie => "Serie";
-  @override
-  String get malesia => "מלזיה";
-  @override
-  String get southwestern_pacific => "דרום מערב האוקיינוס השקט";
-  @override
-  String get asia_tropical => "אסיה טרופי";
-  @override
-  String get northwestern_usa => "צפון מערב ארצות הברית";
-  @override
-  String get northern_south_america => "צפון אמריקה";
-  @override
-  String get show_original => "הצג טקסט באנגלית";
-  @override
-  String get offline_download_message => "אתה הולך להוריד 300+ MB של תמונות ואיורים. בדוק אם המכשיר מחובר ל- Wi-Fi. האם אתה מוכן להורדה?";
-  @override
-  String get southern_america => "דרום אמריקה";
-  @override
-  String get middle_atlantic_ocean => "האוקיינוס האטלנטי התיכון";
-  @override
-  String get feedback_run_ads => "ניתן להציג פרסומת במסך מלא או לצפות בפרסומת וידאו כדי לתמוך בפיתוח ובשיפור נתונים נוספים.";
-  @override
-  String get habitat_garden => "גנים או שדות";
-  @override
-  String get product_purchase => "רכישה";
-  @override
-  String get russian_far_east => "המזרח הרחוק הרוסי";
-  @override
-  String get west_central_tropical_africa => "מערב אפריקה מרכז טרופי";
-  @override
-  String get habitat_message => "מה מסביבך? זיהוי בית הגידול של הצמח.";
-  @override
-  String get plant_toxicity => "רַעֲלָנוּת";
-  @override
-  String get offline_download_fail => "הורדה נכשלה. בדוק את חיבור האינטרנט או את המקום הפנוי במכשיר ונסה שוב.";
-  @override
-  String get snack_no_flowers => "אין קריטריונים תואמים לפרחים.";
-  @override
-  String get rate_question => "האם האפליקציה הזו מועילה?";
-  @override
-  String get macaronesia => "מקרונזיה";
-  @override
-  String get plant_taxonomy => "טקסונומיה";
-  @override
-  String get feedback_run_ads_fullscreen => "הצג פרסומת במסך מלא";
-  @override
-  String get asia_temperate => "אסיה ממוזג";
-  @override
-  String get search => "לחפש...";
-  @override
-  String get habitat_rock => "סלעים או הרים";
-  @override
-  String get taxonomy_superregnum => "על-ממלכה";
-  @override
-  String get taxonomy_sectio => "Sectio";
-  @override
-  String get mongolia => "מונגוליה";
-  @override
-  String get taxonomy_subserie => "Subserie";
-  @override
-  String get western_south_america => "מערב אמריקה";
-  @override
-  String get taxonomy_subgenus => "Subgenus";
-  @override
-  String get close => "סגור";
-  @override
-  String get europe => "אירופה";
-  @override
-  String get middle_europe => "אירופה המזרחית";
-  @override
-  String get color_blue => "כחול, סגול";
-  @override
-  String get my_filter => "המסנן שלי";
-  @override
-  String get southern_south_america => "דרום אמריקה הדרומית";
-  @override
-  String get plant_habitat => "בית גידול";
-  @override
-  String get snack_loading_ad => "המודעה עדיין נטענת, לחץ שוב על הלחצן.";
-  @override
-  String get petal_5 => "5";
-  @override
-  String get filter_petal => "עלי כותרת";
-  @override
-  String get petal_message => "האם הפרח אינו סדיר? לא? אז כמה עלי כותרת יש את זה?";
-  @override
-  String get color_white => "לבן";
-  @override
-  String get northeastern_usa => "צפון מזרח ארצות הברית";
-  @override
-  String get color_green => "ירוק, חום, שחור";
-  @override
-  String get taxonomy_ordo => "סדרה";
-  @override
-  String get taxonomy_supersectio => "Supersectio";
-  @override
-  String get pacific => "האוקיינוס השקט";
-  @override
-  String get plant_sources => "מקורות";
-  @override
-  String get taxonomy_regnum => "ממלכה";
-  @override
-  String get south_central_pacific => "דרום מרכז האוקיינוס השקט";
-  @override
-  String get filter_color => "צבע";
-  @override
-  String get help => "עֶזרָה";
-  @override
-  String get mexico => "מקסיקו";
-  @override
-  String get snack_publish => "יפורסם בהמשך";
-  @override
-  String get siberia => "סיביר";
-  @override
-  String get taxonomy_subtribus => "Subtribe";
-  @override
-  String get product_custom_filter_description => "תוכל לשנות את סדר ברירת המחדל ואת מספר המסננים (צבע, בתי גידול, עלי כותרת, הפצה).";
-  @override
-  String get habitat_meadow => "כרי דשא או מרעה";
-  @override
-  String get plant_trivia => "דְבָרִים בְּטֵלִים";
-  @override
-  String get product_purchased => "נרכש";
-  @override
-  String get taxonomy_cladus => "(clade)";
-  @override
-  String get plant_herbalism => "צמחי מרפא";
-  @override
-  String get plant_height_to => "עד";
-  @override
-  String get offline_download => "המשך הורדה";
-  @override
-  String get enhancements => "שיפורים";
-  @override
-  String get habitat_wetland => "מורלנדס או ביצות";
-  @override
-  String get product_restore_purchases => "לשחזר רכישות";
-  @override
-  String get feedback_title => "כיצד לתרום";
-  @override
-  String get toxicity2 => "צמח רעיל במקצת";
-  @override
-  String get toxicity1 => "צמח רעיל";
-  @override
-  String get eastern_canada => "קנדה המזרחית";
-  @override
-  String get plant_info => "מידע";
-  @override
-  String get show_translation => "הצג טקסט מתורגם";
-  @override
-  String get habitat_tree => "עצים או שיחים";
-  @override
-  String get settings => "הגדרות";
-  @override
-  String get color_red => "אדום, ורוד";
-  @override
-  String get north_central_pacific => "צפון מרכז האוקיינוס השקט";
-  @override
-  String get taxonomy_subsectio => "Subsectio";
-  @override
-  String get southern_africa => "דרום אפריקה";
-  @override
-  String get always_my_region_title => "הוסף תמיד את האזור שלי למסנן";
-  @override
-  String get color_yellow => "צהוב";
-  @override
-  String get subantarctic_islands => "איי סובאנטארקטי";
-  @override
-  String get list_info => "לבחור אחד";
-  @override
-  String get new_version => "גרסה חדשה זמינה, אנא עדכן.";
-  @override
-  String get taxonomy_subfamilia => "תת־משפחה";
-  @override
-  String get my_region => "אזור שלי";
-  @override
-  String get pause => "השהה";
-  @override
-  String get indian_subcontinent => "תת היבשת ההודית";
-  @override
-  String get product_offline_description => "תוכל להפעיל את היישום ללא חיבור לאינטרנט.";
-  @override
-  String get plant_flower => "פרח";
-  @override
-  String get filter_habitat => "בתי גידול";
-  @override
-  String get rate_never => "לעולם לא";
-  @override
-  String get northwestern_pacific => "צפון מערב האוקיינוס השקט";
-  @override
-  String get search_names => "חפש בשמות";
-  @override
-  String get southwestern_europe => "דרום מערב אירופה";
-  @override
-  String get taxonomy_species => "מין";
-  @override
-  String get plant_fruit => "פרי";
-  @override
-  String get plant_flowering_to => "ל";
-  @override
-  String get taxonomy_familia => "משפחה";
-  @override
-  String get plant_stem => "גבעול";
-  @override
-  String get antarctic_continent => "יבשת אנטארקטיקה";
-  @override
-  String get no => "לא";
-  @override
-  String get brazil => "ברזיל";
-  @override
-  String get rate_text => "מחבר של יישום זה מונע על ידי תגובה חיובית מהמשתמשים. נא לשלוח לו כמה כוכבים דרך חנות היישומים.";
-  @override
-  String get eastern_europe => "מזרח אירופה";
-  @override
-  String get south_central_usa => "דרום מרכז ארצות הברית";
-  @override
-  String get offline_download_success => "תמונות ואיורים הורדו בהצלחה.";
-  @override
-  String get plant_flowering_from => "פריחה מ";
-  @override
-  String get taxonomy_tribus => "שבט";
-  @override
-  String get arabian_peninsula => "חצי האי ערב";
-  @override
-  String get search_taxonomy => "חפש בטקסונומיה";
-  @override
-  String get rate_later => "יותר מאוחר";
-  @override
-  String get color_message => "מה צבע הפרח? בחר את הקרוב ביותר.";
-  @override
-  String get west_tropical_africa => "מערב אפריקה טרופית";
-  @override
-  String get northern_europe => "אירופה הצפונית";
-  @override
-  String get rate => "סקירה";
-  @override
-  String get northeast_tropical_africa => "Northeast Tropical Africa";
-  @override
-  String get pref_language => "שפה מועדפת";
-  @override
-  String get product_custom_filter_title => "מסנן מותאם אישית";
-  @override
-  String get new_zealand => "ניו זילנד";
-  @override
-  String get feedback_intro => "אתה כבר תורם ליישום זה מאז התקנת את זה על המכשיר שלך, תודה. אם אתה מחפש משהו נוסף, הנה כמה אפשרויות:";
-  @override
-  String get filter_distribution => "הפצה";
-  @override
-  String get eastern_asia => "מזרח אסיה";
-  @override
-  String get western_asia => "מערב אסיה";
-  @override
-  String get subarctic_america => "אמריקה הסובארקטית";
-  @override
-  String get product_search_title => "חיפוש בשמות או בטקסונומיה";
-  @override
-  String get feedback_buy_extended => "אתה יכול לקנות גרסה מורחבת עם פונקציונליות נוספת כמו במצב לא מקוון, חיפוש בשמות, חיפוש בטקסונומיה, תצפיות ומסנן להגדרה.";
-  @override
-  String get north_central_usa => "צפון מרכז ארצות הברית";
-  @override
-  String get improve_translation => "שפר את התרגום";
-  @override
-  String get feedback_review => "אתה יכול לכתוב ביקורת חיובית.";
-  @override
-  String get southeastern_usa => "דרום מזרח ארצות הברית";
-  @override
-  String get yes => "כן";
-  @override
-  String get feedback_run_ads_video => "צפה בפרסומת וידאו";
-  @override
-  String get plant_height_from => "גובה מ";
-  @override
-  String get petal_many => "יותר מ 5";
-  @override
-  String get southeastern_europe => "דרום מזרח אירופה";
-  @override
-  String get taxonomy_unknown => "לא ידוע";
-  @override
-  String get plant_inflorescence => "תִפרַחַת";
-  @override
-  String get northern_africa => "צפון אפריקה";
-  @override
-  String get offline_subtitle => "דורש 300+ MB שטח נוסף.";
-  @override
-  String get china => "סין";
-  @override
-  String get product_no_ads_title => "אין פרסומת לא רצויה";
-  @override
-  String get offline_title => "מצב לא מקוון";
-  @override
-  String get petal_zygomorphic => "לֹא סָדִיר";
-  @override
-  String get taxonomy_genus => "סוג";
-  @override
-  String get papuasia => "Papuasia";
-  @override
-  String get feedback_submit_translate_app => "שפר את תוויות היישום";
-}
-
-class $ro extends S {
-  const $ro();
+class $ro_RO extends S {
+  const $ro_RO();
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -11004,8 +1717,4094 @@ class $ro extends S {
   String get feedback_submit_translate_app => "Îmbunătățiți etichetele aplicației";
 }
 
-class $nl extends S {
-  const $nl();
+class $hi_IN extends S {
+  const $hi_IN();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "मध्य अमरीका";
+  @override
+  String get legend => "किंवदंती";
+  @override
+  String get product_offline_title => "ऑफ़लाइन मोड";
+  @override
+  String get feedback_submit_translate_data => "फूल के डेटा में सुधार";
+  @override
+  String get snack_copy => "क्लिपबोर्ड पर नकल";
+  @override
+  String get product_purchase_failed => "खरीद विफल रही";
+  @override
+  String get about => "के बारे में";
+  @override
+  String get product_no_ads_description => "एप्लिकेशन स्क्रीन के नीचे विज्ञापन बैनर नहीं दिखाएगा।";
+  @override
+  String get offline_download_progress => "फ़ोटो और चित्र डाउनलोड कर रहा है ...";
+  @override
+  String get western_canada => "पश्चिमी कनाडा";
+  @override
+  String get northern_america => "उत्तरी अमेरिका";
+  @override
+  String get western_indian_ocean => "पश्चिमी हिंद महासागर";
+  @override
+  String get feedback => "प्रतिक्रिया";
+  @override
+  String get southwestern_usa => "साउथवेस्टर्न यूएसए";
+  @override
+  String get distribution_message => "हमें किस भौगोलिक क्षेत्र पर ध्यान केंद्रित करना चाहिए?";
+  @override
+  String get caribbean => "कैरेबियन";
+  @override
+  String get product_search_description => "आप इसके लैटिन नाम या इसके टैक्सोन (जैसे क्रम, परिवार, जाति) द्वारा एक फूल पा सकते हैं।";
+  @override
+  String get offline_delete_message => "क्या आप ऑफ़लाइन डेटा हटाना चाहते हैं?";
+  @override
+  String get australasia => "ऑस्ट्रेलेशिया";
+  @override
+  String get petal_4 => "४ या उससे कम";
+  @override
+  String get east_tropical_africa => "पूर्वी उष्णकटिबंधीय अफ्रीका";
+  @override
+  String get africa => "अफ्रीका";
+  @override
+  String get south_tropical_africa => "दक्षिण उष्णकटिबंधीय अफ्रीका";
+  @override
+  String get caucasus => "काकेशस";
+  @override
+  String get middle_asia => "मध्य एशिया";
+  @override
+  String get plant_gallery => "गलियारा";
+  @override
+  String get always_my_region_subtitle => "आपका क्षेत्र फ़िल्टर के लिए पूर्व-सेट किया जाएगा";
+  @override
+  String get indochina => "हिंद चीन";
+  @override
+  String get feedback_translate => "बंजर​ या झील";
+  @override
+  String get australia => "ऑस्ट्रेलिया";
+  @override
+  String get google_translate => "पर्यावास";
+  @override
+  String get plant_leaf => "पत्ते";
+  @override
+  String get habitat_forest => "मदद";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Malesia";
+  @override
+  String get southwestern_pacific => "दक्षिणपश्चिम प्रशांत महासागर";
+  @override
+  String get asia_tropical => "एशिया उष्णकटिबंधीय";
+  @override
+  String get northwestern_usa => "नॉर्थवेस्टर्न यूएसए";
+  @override
+  String get northern_south_america => "उत्तरी दक्षिण अमेरिका";
+  @override
+  String get show_original => "अंग्रेज़ी  टेक्स्ट दिखाएं";
+  @override
+  String get offline_download_message => "आप 300+ MB फ़ोटो और चित्र डाउनलोड करने जा रहे हैं। कृपया जांचें कि क्या आपका उपकरण वाई-फाई से जुड़ा है। क्या आप डाउनलोड के लिए तैयार हैं?";
+  @override
+  String get southern_america => "दक्षिणी अमेरिका";
+  @override
+  String get middle_atlantic_ocean => "मध्य अटलांटिक महासागर";
+  @override
+  String get feedback_run_ads => "आप पूर्ण स्क्रीन विज्ञापन प्रदर्शित कर सकते हैं या वीडियो विज्ञापन देख सकते हैं ताकि आगे के विकास और डेटाबेस में वृद्धि हो सके।";
+  @override
+  String get habitat_garden => "पौधे का उदाहरण";
+  @override
+  String get product_purchase => "खरीद फरोख्त";
+  @override
+  String get russian_far_east => "रूसी सुदूर पूर्व";
+  @override
+  String get west_central_tropical_africa => "पश्चिम मध्य उष्णकटिबंधीय अफ्रीका";
+  @override
+  String get habitat_message => "आपके आसपास क्या है? पौधे के आवास की पहचान करें।";
+  @override
+  String get plant_toxicity => "आविषता";
+  @override
+  String get offline_download_fail => "डाउनलोड विफल। कृपया अपने इंटरनेट कनेक्शन या उपकरण पर निःशुल्क स्थान देखें और पुनः प्रयास करें";
+  @override
+  String get snack_no_flowers => "कोई फूल नहीं कसौटी।";
+  @override
+  String get rate_question => "क्या यह एप्लिकेशन सहायक है?";
+  @override
+  String get macaronesia => "Macaronesia";
+  @override
+  String get plant_taxonomy => "वर्गीकरण";
+  @override
+  String get feedback_run_ads_fullscreen => "एक फुलस्क्रीन विज्ञापन दिखाएं";
+  @override
+  String get asia_temperate => "एशिया टेम्पलेट";
+  @override
+  String get search => "खोज...";
+  @override
+  String get habitat_rock => "एक चुनें";
+  @override
+  String get taxonomy_superregnum => "कार्यक्षेत्र";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "मंगोलिया";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "पश्चिमी दक्षिण अमेरिका";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "बंद करे";
+  @override
+  String get europe => "यूरोप";
+  @override
+  String get middle_europe => "मध्य यूरोप";
+  @override
+  String get color_blue => "नीला, बैंगनी";
+  @override
+  String get my_filter => "मेरा फ़िल्टर";
+  @override
+  String get southern_south_america => "दक्षिणी दक्षिण अमेरिका";
+  @override
+  String get plant_habitat => "पर्यावास";
+  @override
+  String get snack_loading_ad => "विज्ञापन अभी भी लोड हो रहा है, फिर से बटन दबाएं।";
+  @override
+  String get petal_5 => "५";
+  @override
+  String get filter_petal => "दल चक्र";
+  @override
+  String get petal_message => "क्या फूल बिसिमेट्रिक है? नहीं? तो यह कितनी पंखुड़ियाँ है?";
+  @override
+  String get color_white => "सफेद";
+  @override
+  String get northeastern_usa => "पूर्वोत्तर यूएसए";
+  @override
+  String get color_green => "हरा, भूरा, काला";
+  @override
+  String get taxonomy_ordo => "क्रम";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "प्रशांत महासागर";
+  @override
+  String get plant_sources => "स्रोत";
+  @override
+  String get taxonomy_regnum => "राज्य";
+  @override
+  String get south_central_pacific => "दक्षिण-मध्य प्रशांत महासागर";
+  @override
+  String get filter_color => "रंग";
+  @override
+  String get help => "मदद";
+  @override
+  String get mexico => "मेक्सिको";
+  @override
+  String get snack_publish => "... बाद में प्रकाशित किया जाना है";
+  @override
+  String get siberia => "साइबेरिया";
+  @override
+  String get taxonomy_subtribus => "उपजनजाति";
+  @override
+  String get product_custom_filter_description => "आप डिफ़ॉल्ट क्रम और फ़िल्टर की संख्या (रंग, पर्यावास, दल चक्र, वितरण) को बदलने में सक्षम होंगे।";
+  @override
+  String get habitat_meadow => "अनुवाद में सुधार करें";
+  @override
+  String get plant_trivia => "सामान्य ज्ञान";
+  @override
+  String get product_purchased => "खरीदी";
+  @override
+  String get taxonomy_cladus => "(अश्रेणिकृत)";
+  @override
+  String get plant_herbalism => "जड़ी-बूटी चिकित्सा";
+  @override
+  String get plant_height_to => "तक";
+  @override
+  String get offline_download => "डाउनलोड फिर से शुरू करें";
+  @override
+  String get enhancements => "संवर्द्धन";
+  @override
+  String get habitat_wetland => "मोरलैंड्स या झीलों";
+  @override
+  String get product_restore_purchases => "खरीदारी वापस लौटाएं";
+  @override
+  String get feedback_title => "पेड़ या झाड़ियाँ";
+  @override
+  String get toxicity2 => "थोड़ा जहरीला पौधा";
+  @override
+  String get toxicity1 => "जहरीला पौधा";
+  @override
+  String get eastern_canada => "पूर्वी कनाडा";
+  @override
+  String get plant_info => "जानकारी";
+  @override
+  String get show_translation => "अनुवादित टेक्स्ट दिखाएं";
+  @override
+  String get habitat_tree => "पेड़ों या झाड़ियाँ";
+  @override
+  String get settings => "सेटिंग्स";
+  @override
+  String get color_red => "लाल, गुलाबी";
+  @override
+  String get north_central_pacific => "उत्तर मध्य प्रशांत महासागर";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "दक्षिणी अफ्रीका";
+  @override
+  String get always_my_region_title => "हमेशा मेरे क्षेत्र को फ़िल्टर में जोड़ें";
+  @override
+  String get color_yellow => "पीला";
+  @override
+  String get subantarctic_islands => "Subantarctic द्वीप समूह";
+  @override
+  String get list_info => "एक चुनें";
+  @override
+  String get new_version => "नया संस्करण उपलब्ध है, कृपया अपडेट करें।";
+  @override
+  String get taxonomy_subfamilia => "उपपरिवार";
+  @override
+  String get my_region => "मेरा क्षेत्र";
+  @override
+  String get pause => "ठहराव";
+  @override
+  String get indian_subcontinent => "भारतीय उपमहाद्वीप";
+  @override
+  String get product_offline_description => "आप इंटरनेट कनेक्शन के बिना आवेदन चला सकेंगे।";
+  @override
+  String get plant_flower => "पुष्प";
+  @override
+  String get filter_habitat => "पर्यावास";
+  @override
+  String get rate_never => "कभी नहीँ";
+  @override
+  String get northwestern_pacific => "उत्तर पश्चिमी प्रशांत महासागर";
+  @override
+  String get search_names => "नामों में खोजें";
+  @override
+  String get southwestern_europe => "दक्षिणपश्चिम यूरोप";
+  @override
+  String get taxonomy_species => "प्रजातियां";
+  @override
+  String get plant_fruit => "फल";
+  @override
+  String get plant_flowering_to => "तक";
+  @override
+  String get taxonomy_familia => "परिवार";
+  @override
+  String get plant_stem => "तना";
+  @override
+  String get antarctic_continent => "अंटार्कटिक महाद्वीप";
+  @override
+  String get no => "नहीं";
+  @override
+  String get brazil => "ब्राज़िल";
+  @override
+  String get rate_text => "इस एप्लिकेशन के लेखक उपयोगकर्ताओं से सकारात्मक प्रतिक्रिया से प्रेरित हैं। कृपया उसे एप्लिकेशन स्टोर के माध्यम से कुछ सितारे भेजें।";
+  @override
+  String get eastern_europe => "पूर्वी यूरोप";
+  @override
+  String get south_central_usa => "दक्षिण मध्य यूएसए";
+  @override
+  String get offline_download_success => "फ़ोटो और चित्र सफलतापूर्वक डाउनलोड किए गए हैं।";
+  @override
+  String get plant_flowering_from => "से फूल";
+  @override
+  String get taxonomy_tribus => "जनजाति";
+  @override
+  String get arabian_peninsula => "अरबी द्वीप";
+  @override
+  String get search_taxonomy => "टैक्सोनॉमी में खोजें";
+  @override
+  String get rate_later => "बाद में";
+  @override
+  String get color_message => "फूल का रंग क्या है? निकटतम एक चुनें";
+  @override
+  String get west_tropical_africa => "पश्चिम उष्णकटिबंधीय अफ्रीका";
+  @override
+  String get northern_europe => "उत्तरी यूरोप";
+  @override
+  String get rate => "समीक्षाएं";
+  @override
+  String get northeast_tropical_africa => "पूर्वोत्तर उष्णकटिबंधीय अफ्रीका";
+  @override
+  String get pref_language => "पसंदीदा भाषा";
+  @override
+  String get product_custom_filter_title => "कस्टम फ़िल्टर";
+  @override
+  String get new_zealand => "न्यूजीलैंड";
+  @override
+  String get feedback_intro => "जब से आपने इसे अपने डिवाइस पर स्थापित किया है, तब से आप इस एप्लिकेशन में योगदान दे रहे हैं, धन्यवाद यदि आप कुछ और देख रहे हैं, तो यहां कुछ विकल्प दिए गए हैं:";
+  @override
+  String get filter_distribution => "वितरण";
+  @override
+  String get eastern_asia => "पूर्वी एशिया";
+  @override
+  String get western_asia => "पश्चिमी एशिया";
+  @override
+  String get subarctic_america => "सुबाराक्टिक अमेरिका";
+  @override
+  String get product_search_title => "नामों में खोजें या वर्गीकरण";
+  @override
+  String get feedback_buy_extended => "आप ऑफ़लाइन मोड जैसे अतिरिक्त कार्यक्षमता के साथ विस्तारित संस्करण खरीद सकते हैं, नामों में खोज कर सकते हैं, वर्गीकरण में देख सकते हैं, अवलोकन और कॉन्फ़िगर करने योग्य फ़िल्टर कर सकते हैं।";
+  @override
+  String get north_central_usa => "उत्तरी मध्य यूएसए";
+  @override
+  String get improve_translation => "अनुवाद में सुधार करें";
+  @override
+  String get feedback_review => "आप एक सकारात्मक समीक्षा लिख सकते हैं।";
+  @override
+  String get southeastern_usa => "दक्षिणपूर्वी यूएसए";
+  @override
+  String get yes => "हाँ";
+  @override
+  String get feedback_run_ads_video => "एक वीडियो विज्ञापन देखें";
+  @override
+  String get plant_height_from => "ऊँचाई से";
+  @override
+  String get petal_many => "५ से अधिक";
+  @override
+  String get southeastern_europe => "दक्षिणपूर्वी यूरोप";
+  @override
+  String get taxonomy_unknown => "अनजान";
+  @override
+  String get plant_inflorescence => "पुष्पक्रम";
+  @override
+  String get northern_africa => "उत्तरी अफ्रीका";
+  @override
+  String get offline_subtitle => "300+ MB अतिरिक्त स्थान की आवश्यकता है";
+  @override
+  String get china => "चीन";
+  @override
+  String get product_no_ads_title => "कोई अवांछित विज्ञापन नहीं";
+  @override
+  String get offline_title => "ऑफ़लाइन मोड";
+  @override
+  String get petal_zygomorphic => "अनियमित";
+  @override
+  String get taxonomy_genus => "जाति";
+  @override
+  String get papuasia => "Papuasia";
+  @override
+  String get feedback_submit_translate_app => "एप्लिकेशन के लेबल में सुधार करें";
+}
+
+class $id_ID extends S {
+  const $id_ID();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Amerika Tengah";
+  @override
+  String get legend => "Legenda";
+  @override
+  String get product_offline_title => "Mode offline";
+  @override
+  String get feedback_submit_translate_data => "Perbaiki data bunga";
+  @override
+  String get snack_copy => "Disalin ke Clipboard";
+  @override
+  String get product_purchase_failed => "Pembelian gagal";
+  @override
+  String get about => "Tentang";
+  @override
+  String get product_no_ads_description => "Aplikasi tidak akan menampilkan spanduk iklan di bagian bawah layar.";
+  @override
+  String get offline_download_progress => "Mengunduh foto dan ilustrasi ...";
+  @override
+  String get western_canada => "Kanada Barat";
+  @override
+  String get northern_america => "Amerika Utara";
+  @override
+  String get western_indian_ocean => "Samudra Hindia Barat";
+  @override
+  String get feedback => "Umpan balik / Kontribusi";
+  @override
+  String get southwestern_usa => "Barat daya AS";
+  @override
+  String get distribution_message => "Area geografis mana yang harus kita fokuskan?";
+  @override
+  String get caribbean => "Karibia";
+  @override
+  String get product_search_description => "Anda dapat menemukan bunga dengan nama Latin atau dengan taksonnya (mis. ordo, famili, genera)";
+  @override
+  String get offline_delete_message => "Apakah Anda ingin menghapus data offline?";
+  @override
+  String get australasia => "Australasia";
+  @override
+  String get petal_4 => "4 atau kurang";
+  @override
+  String get east_tropical_africa => "Afrika Timur Tropis";
+  @override
+  String get africa => "Afrika";
+  @override
+  String get south_tropical_africa => "Afrika Selatan Tropis";
+  @override
+  String get caucasus => "Kaukasus";
+  @override
+  String get middle_asia => "Asia Tengah";
+  @override
+  String get plant_gallery => "Galeri";
+  @override
+  String get always_my_region_subtitle => "Wilayah Anda akan disetel sebelumnya ke filter";
+  @override
+  String get indochina => "Indo-Cina";
+  @override
+  String get feedback_translate => "Anda dapat melaporkan kesalahan ketik atau kesalahan apa pun yang Anda temukan atau kirim terjemahan baru dalam bahasa Anda.";
+  @override
+  String get australia => "Australia";
+  @override
+  String get google_translate => "Diterjemahkan dengan Google Terjemahan";
+  @override
+  String get plant_leaf => "Daun";
+  @override
+  String get habitat_forest => "hutan";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Malesia";
+  @override
+  String get southwestern_pacific => "Pasifik Barat Daya";
+  @override
+  String get asia_tropical => "Asia Tropis";
+  @override
+  String get northwestern_usa => "Barat laut AS";
+  @override
+  String get northern_south_america => "Amerika Selatan bagian Utara";
+  @override
+  String get show_original => "Tampilkan teks bahasa Inggris";
+  @override
+  String get offline_download_message => "Anda akan mengunduh 300+ MB foto dan ilustrasi. Periksa apakah perangkat Anda terhubung ke wi-fi. Sudah siap untuk mengunduh?";
+  @override
+  String get southern_america => "Amerika Selatan";
+  @override
+  String get middle_atlantic_ocean => "Samudera Atlantik Tengah";
+  @override
+  String get feedback_run_ads => "Anda dapat menampilkan iklan layar penuh atau menonton iklan video untuk mendukung pengembangan lebih lanjut dan peningkatan basis data.";
+  @override
+  String get habitat_garden => "kebun atau ladang";
+  @override
+  String get product_purchase => "Membeli";
+  @override
+  String get russian_far_east => "Timur Jauh Rusia";
+  @override
+  String get west_central_tropical_africa => "Afrika Barat Pusat Tropis";
+  @override
+  String get habitat_message => "Ada apa di sekitar kamu Identifikasi habitat tanaman.";
+  @override
+  String get plant_toxicity => "Toksisitas";
+  @override
+  String get offline_download_fail => "Pengunduhan gagal. Silakan periksa koneksi internet Anda atau ruang kosong di perangkat dan coba lagi.";
+  @override
+  String get snack_no_flowers => "Tidak ada kriteria pencocokan bunga.";
+  @override
+  String get rate_question => "Apakah aplikasi ini bermanfaat?";
+  @override
+  String get macaronesia => "Macaronesia";
+  @override
+  String get plant_taxonomy => "Taksonomi";
+  @override
+  String get feedback_run_ads_fullscreen => "Tampilkan iklan layar penuh";
+  @override
+  String get asia_temperate => "Asia Beriklim";
+  @override
+  String get search => "Mencari...";
+  @override
+  String get habitat_rock => "batu atau gunung";
+  @override
+  String get taxonomy_superregnum => "Domain";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "Mongolia";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "Amerika Selatan bagian Barat";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Dekat";
+  @override
+  String get europe => "Eropa";
+  @override
+  String get middle_europe => "Eropa Tengah";
+  @override
+  String get color_blue => "biru, ungu";
+  @override
+  String get my_filter => "Filter saya";
+  @override
+  String get southern_south_america => "Amerika Selatan Selatan";
+  @override
+  String get plant_habitat => "Habitat";
+  @override
+  String get snack_loading_ad => "Iklan masih memuat, tekan tombol lagi.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "mahkota";
+  @override
+  String get petal_message => "Apakah bunga bisimetris? Tidak? Lalu berapa kelopak bunga yang dimilikinya?";
+  @override
+  String get color_white => "putih";
+  @override
+  String get northeastern_usa => "Timur laut AS";
+  @override
+  String get color_green => "hijau, coklat, hitam";
+  @override
+  String get taxonomy_ordo => "Ordo";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "Samudera Pasifik";
+  @override
+  String get plant_sources => "Sumber";
+  @override
+  String get taxonomy_regnum => "Kingdom";
+  @override
+  String get south_central_pacific => "Pasifik Tengah Selatan";
+  @override
+  String get filter_color => "warna";
+  @override
+  String get help => "Membantu";
+  @override
+  String get mexico => "Meksiko";
+  @override
+  String get snack_publish => "... untuk diterbitkan nanti";
+  @override
+  String get siberia => "Siberia";
+  @override
+  String get taxonomy_subtribus => "Subtribe";
+  @override
+  String get product_custom_filter_description => "Anda dapat mengubah urutan dan jumlah filter default (warna, habitat, mahkota, distribusi).";
+  @override
+  String get habitat_meadow => "padang rumput";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get product_purchased => "Dibeli";
+  @override
+  String get taxonomy_cladus => "(tidak termasuk)";
+  @override
+  String get plant_herbalism => "Herbalism";
+  @override
+  String get plant_height_to => "sampai";
+  @override
+  String get offline_download => "Lanjutkan unduhan";
+  @override
+  String get enhancements => "Perangkat tambahan";
+  @override
+  String get habitat_wetland => "lahan basah";
+  @override
+  String get product_restore_purchases => "Mengembalikan pembelian";
+  @override
+  String get feedback_title => "Bagaimana cara berkontribusi";
+  @override
+  String get toxicity2 => "sedikit beracun tanaman";
+  @override
+  String get toxicity1 => "tanaman beracun";
+  @override
+  String get eastern_canada => "Kanada Timur";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Tampilkan teks terjemahan";
+  @override
+  String get habitat_tree => "pohon atau semak belukar";
+  @override
+  String get settings => "Pengaturan";
+  @override
+  String get color_red => "merah";
+  @override
+  String get north_central_pacific => "Pasifik Utara Tengah";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Afrika Selatan";
+  @override
+  String get always_my_region_title => "Selalu tambahkan wilayah saya ke filter";
+  @override
+  String get color_yellow => "kuning";
+  @override
+  String get subantarctic_islands => "Kepulauan Subantartika";
+  @override
+  String get list_info => "Pilih salah satu";
+  @override
+  String get new_version => "Versi baru tersedia, perbarui.";
+  @override
+  String get taxonomy_subfamilia => "Subfamily";
+  @override
+  String get my_region => "Daerah saya";
+  @override
+  String get pause => "Jeda";
+  @override
+  String get indian_subcontinent => "Sub Benua India";
+  @override
+  String get product_offline_description => "Anda dapat menjalankan aplikasi tanpa koneksi internet.";
+  @override
+  String get plant_flower => "Bunga";
+  @override
+  String get filter_habitat => "habitat";
+  @override
+  String get rate_never => "Tak pernah";
+  @override
+  String get northwestern_pacific => "Pasifik Barat Laut";
+  @override
+  String get search_names => "Cari nama";
+  @override
+  String get southwestern_europe => "Eropa Barat Daya";
+  @override
+  String get taxonomy_species => "Jenis";
+  @override
+  String get plant_fruit => "Buah";
+  @override
+  String get plant_flowering_to => "sampai";
+  @override
+  String get taxonomy_familia => "Famili";
+  @override
+  String get plant_stem => "Batang";
+  @override
+  String get antarctic_continent => "Benua Antartika";
+  @override
+  String get no => "Tidak";
+  @override
+  String get brazil => "Brazil";
+  @override
+  String get rate_text => "Penulis aplikasi ini dimotivasi oleh respon positif dari pengguna. Tolong kirimkan dia beberapa bintang melalui toko aplikasi.";
+  @override
+  String get eastern_europe => "Eropa Timur";
+  @override
+  String get south_central_usa => "Pusat Selatan AS";
+  @override
+  String get offline_download_success => "Foto dan ilustrasi telah berhasil diunduh.";
+  @override
+  String get plant_flowering_from => "Berbunga dari";
+  @override
+  String get taxonomy_tribus => "Tribe";
+  @override
+  String get arabian_peninsula => "Semenanjung Arab";
+  @override
+  String get search_taxonomy => "Cari dalam taksonomi";
+  @override
+  String get rate_later => "Kemudian";
+  @override
+  String get color_message => "Apa warna bunga itu? Pilih yang terdekat.";
+  @override
+  String get west_tropical_africa => "Afrika Barat Tropis";
+  @override
+  String get northern_europe => "Eropa Utara";
+  @override
+  String get rate => "Ulasan";
+  @override
+  String get northeast_tropical_africa => "Afrika Timur laut Tropis  ";
+  @override
+  String get pref_language => "Bahasa pilihan";
+  @override
+  String get product_custom_filter_title => "Filter khusus";
+  @override
+  String get new_zealand => "Selandia Baru";
+  @override
+  String get feedback_intro => "Anda telah berkontribusi untuk aplikasi ini karena Anda telah menginstalnya di perangkat Anda, terima kasih. Jika Anda mencari sesuatu yang lebih, berikut adalah beberapa opsi:";
+  @override
+  String get filter_distribution => "distribusi";
+  @override
+  String get eastern_asia => "Asia Timur";
+  @override
+  String get western_asia => "Asia Barat";
+  @override
+  String get subarctic_america => "Subarctic America";
+  @override
+  String get product_search_title => "Cari nama atau taksonomi";
+  @override
+  String get feedback_buy_extended => "Anda dapat membeli versi lanjutan dengan fungsi tambahan seperti mode offline, pencarian nama, pencarian taksonomi, pengamatan, dan filter yang dapat dikonfigurasi.";
+  @override
+  String get north_central_usa => "Tengah Utara AS";
+  @override
+  String get improve_translation => "Perbaiki terjemahan";
+  @override
+  String get feedback_review => "Anda dapat menulis ulasan positif.";
+  @override
+  String get southeastern_usa => "Tenggara AS";
+  @override
+  String get yes => "iya nih";
+  @override
+  String get feedback_run_ads_video => "Tonton iklan video";
+  @override
+  String get plant_height_from => "Tinggi dari";
+  @override
+  String get petal_many => "Lebih dari 5";
+  @override
+  String get southeastern_europe => "Eropa Tenggara";
+  @override
+  String get taxonomy_unknown => "tidak diketahui";
+  @override
+  String get plant_inflorescence => "Bunga majemuk";
+  @override
+  String get northern_africa => "Afrika Utara";
+  @override
+  String get offline_subtitle => "membutuhkan 300+ MB ruang tambahan.";
+  @override
+  String get china => "Cina";
+  @override
+  String get product_no_ads_title => "Tidak ada iklan yang tidak diinginkan";
+  @override
+  String get offline_title => "Mode offline";
+  @override
+  String get petal_zygomorphic => "tidak beraturan";
+  @override
+  String get taxonomy_genus => "Genera";
+  @override
+  String get papuasia => "Papuasia";
+  @override
+  String get feedback_submit_translate_app => "Tingkatkan label aplikasi";
+}
+
+class $fr_FR extends S {
+  const $fr_FR();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Amérique centrale";
+  @override
+  String get legend => "Légende";
+  @override
+  String get product_offline_title => "Mode hors-ligne";
+  @override
+  String get feedback_submit_translate_data => "Améliorer les données de la fleur";
+  @override
+  String get snack_copy => "Copié dans le presse-papier";
+  @override
+  String get product_purchase_failed => "Achat raté";
+  @override
+  String get about => "À propos";
+  @override
+  String get product_no_ads_description => "L'application ne montre pas la bannière de publicité au bas de l'écran.";
+  @override
+  String get offline_download_progress => "Téléchargement de photos et d'illustrations ...";
+  @override
+  String get western_canada => "Ouest canadien";
+  @override
+  String get northern_america => "Amérique du Nord";
+  @override
+  String get western_indian_ocean => "Océan Indien occidental";
+  @override
+  String get feedback => "Retour d'information";
+  @override
+  String get southwestern_usa => "Sud-Ouest des États-Unis";
+  @override
+  String get distribution_message => "Sur quelle zone géographique se concentrer?";
+  @override
+  String get caribbean => "Caraïbes";
+  @override
+  String get product_search_description => "Vous pourrez trouver une fleur par son nom français ou latin ou par son taxon (ordre, famille, genre, par exemple).";
+  @override
+  String get offline_delete_message => "Voulez-vous supprimer les données hors connexion?";
+  @override
+  String get australasia => "Australasie";
+  @override
+  String get petal_4 => "4 ou moins";
+  @override
+  String get east_tropical_africa => "Afrique tropicale de l'Est";
+  @override
+  String get africa => "Afrique";
+  @override
+  String get south_tropical_africa => "Afrique tropicale du Sud";
+  @override
+  String get caucasus => "Caucase";
+  @override
+  String get middle_asia => "Asie moyenne";
+  @override
+  String get plant_gallery => "Galerie";
+  @override
+  String get always_my_region_subtitle => "Votre région sera pré-réglée sur le filtre";
+  @override
+  String get indochina => "Indochine";
+  @override
+  String get feedback_translate => "Vous pouvez signaler toute erreur de frappe ou erreur que vous avez trouvée ou vous envoyer une nouvelle traduction dans votre langue.";
+  @override
+  String get australia => "Australie";
+  @override
+  String get google_translate => "Traduit avec Google Translate";
+  @override
+  String get plant_leaf => "Feuilles";
+  @override
+  String get habitat_forest => "bois ou forêts";
+  @override
+  String get taxonomy_serie => "Série";
+  @override
+  String get malesia => "Malaisie";
+  @override
+  String get southwestern_pacific => "Pacifique sud-ouest";
+  @override
+  String get asia_tropical => "Asie-tropicale";
+  @override
+  String get northwestern_usa => "Nord-Ouest des États-Unis";
+  @override
+  String get northern_south_america => "Nord de l'Amérique du Sud";
+  @override
+  String get show_original => "Afficher le texte en anglais";
+  @override
+  String get offline_download_message => "Vous allez télécharger plus de 300 Mo de photos et d'illustrations. Veuillez vérifier si votre appareil est connecté au wi-fi. Êtes-vous prêt pour un téléchargement?";
+  @override
+  String get southern_america => "Amérique du Sud";
+  @override
+  String get middle_atlantic_ocean => "Moyen océan Atlantique";
+  @override
+  String get feedback_run_ads => "Vous pouvez afficher une publicité en plein écran ou regarder une publicité vidéo pour prendre en charge le développement et l'amélioration de la base de données.";
+  @override
+  String get habitat_garden => "jardins ou champs";
+  @override
+  String get product_purchase => "Acheter";
+  @override
+  String get russian_far_east => "Extrême-Orient russe";
+  @override
+  String get west_central_tropical_africa => "Afrique tropicale ouest-centrale";
+  @override
+  String get habitat_message => "Ce qui est autour de vous? Identifier l'habitat de la fleur.";
+  @override
+  String get plant_toxicity => "Toxicité";
+  @override
+  String get offline_download_fail => "Échec du téléchargement. Vérifiez votre connexion Internet ou l'espace disponible sur votre appareil, puis réessayez.";
+  @override
+  String get snack_no_flowers => "Aucune fleur ne correspond aux critères.";
+  @override
+  String get rate_question => "Cette application est-elle utile?";
+  @override
+  String get macaronesia => "Macaronésie";
+  @override
+  String get plant_taxonomy => "Taxonomie";
+  @override
+  String get feedback_run_ads_fullscreen => "Afficher une publicité en plein écran";
+  @override
+  String get asia_temperate => "Asie-tempérée";
+  @override
+  String get search => "Chercher...";
+  @override
+  String get habitat_rock => "roches ou montagnes";
+  @override
+  String get taxonomy_superregnum => "Domaine";
+  @override
+  String get taxonomy_sectio => "Section";
+  @override
+  String get mongolia => "Mongolie";
+  @override
+  String get taxonomy_subserie => "Sous-série";
+  @override
+  String get western_south_america => "Ouest de l'Amérique du Sud";
+  @override
+  String get taxonomy_subgenus => "Sous-genre";
+  @override
+  String get close => "Sortie";
+  @override
+  String get europe => "Europe";
+  @override
+  String get middle_europe => "Moyen-Europe";
+  @override
+  String get color_blue => "bleu, violet";
+  @override
+  String get my_filter => "Mon filtre";
+  @override
+  String get southern_south_america => "Sud de l'Amérique du Sud";
+  @override
+  String get plant_habitat => "Habitat";
+  @override
+  String get snack_loading_ad => "L’annonce est toujours en cours de chargement, appuyez à nouveau sur le bouton.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "pétale";
+  @override
+  String get petal_message => "Est-ce que la fleur est zygomorphie? Non? Alors combien de pétales a t'elle?";
+  @override
+  String get color_white => "blanc";
+  @override
+  String get northeastern_usa => "Nord-est des États-Unis";
+  @override
+  String get color_green => "vert, brun, noir";
+  @override
+  String get taxonomy_ordo => "Ordre";
+  @override
+  String get taxonomy_supersectio => "Super-section";
+  @override
+  String get pacific => "Pacifique";
+  @override
+  String get plant_sources => "Sources";
+  @override
+  String get taxonomy_regnum => "Règne";
+  @override
+  String get south_central_pacific => "Pacifique sud-central";
+  @override
+  String get filter_color => "couleur";
+  @override
+  String get help => "Aide";
+  @override
+  String get mexico => "Mexique";
+  @override
+  String get snack_publish => "... à publier plus tard";
+  @override
+  String get siberia => "Sibérie";
+  @override
+  String get taxonomy_subtribus => "Sous-tribu";
+  @override
+  String get product_custom_filter_description => "Vous pourrez modifier l'ordre et le nombre de filtres par défaut (couleur, habitat, pétale, distribution).";
+  @override
+  String get habitat_meadow => "prés ou prairies";
+  @override
+  String get plant_trivia => "Bagatelles";
+  @override
+  String get product_purchased => "Acheté(e)";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "Herboristerie";
+  @override
+  String get plant_height_to => "et";
+  @override
+  String get offline_download => "Reprendre le téléchargement";
+  @override
+  String get enhancements => "Améliorations";
+  @override
+  String get habitat_wetland => "bruyères ou zones humides";
+  @override
+  String get product_restore_purchases => "Restaurer les achats";
+  @override
+  String get feedback_title => "Contribution";
+  @override
+  String get toxicity2 => "plante légèrement toxique";
+  @override
+  String get toxicity1 => "plante toxique";
+  @override
+  String get eastern_canada => "Est du Canada";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Afficher le texte traduit";
+  @override
+  String get habitat_tree => "arbres ou arbustes";
+  @override
+  String get settings => "Paramètres";
+  @override
+  String get color_red => "rouge, rose";
+  @override
+  String get north_central_pacific => "Pacifique Nord-Centre";
+  @override
+  String get taxonomy_subsectio => "Sous-section";
+  @override
+  String get southern_africa => "Afrique du sud";
+  @override
+  String get always_my_region_title => "Toujours ajouter ma région au filtre";
+  @override
+  String get color_yellow => "jaune";
+  @override
+  String get subantarctic_islands => "Îles subantarctiques";
+  @override
+  String get list_info => "Sélectionnez en une";
+  @override
+  String get new_version => "Nouvelle version est disponible, s'il vous plaît mettre à jour.";
+  @override
+  String get taxonomy_subfamilia => "Sous-famille";
+  @override
+  String get my_region => "Ma région";
+  @override
+  String get pause => "Pause";
+  @override
+  String get indian_subcontinent => "Sous-continent indien";
+  @override
+  String get product_offline_description => "Vous pourrez exécuter une application sans connexion Internet.";
+  @override
+  String get plant_flower => "Fleurs";
+  @override
+  String get filter_habitat => "habitat";
+  @override
+  String get rate_never => "Jamais";
+  @override
+  String get northwestern_pacific => "Pacifique Nord-Ouest";
+  @override
+  String get search_names => "Chercher dans les noms";
+  @override
+  String get southwestern_europe => "Europe du sud-ouest";
+  @override
+  String get taxonomy_species => "Espèce";
+  @override
+  String get plant_fruit => "Fruits";
+  @override
+  String get plant_flowering_to => "à";
+  @override
+  String get taxonomy_familia => "Famille";
+  @override
+  String get plant_stem => "Tige";
+  @override
+  String get antarctic_continent => "Continent de l'Antarctique";
+  @override
+  String get no => "Non";
+  @override
+  String get brazil => "Brésil";
+  @override
+  String get rate_text => "L'auteur de cette application est motivé par les réponses positives des utilisateurs. S'il vous plaît, envoyez lui quelques fleurs étoiles à travers le magasin d'applications.";
+  @override
+  String get eastern_europe => "Europe de l'Est";
+  @override
+  String get south_central_usa => "Sud-Central des États-Unis";
+  @override
+  String get offline_download_success => "Les photos et illustrations ont été téléchargées avec succès.";
+  @override
+  String get plant_flowering_from => "Floraison de";
+  @override
+  String get taxonomy_tribus => "Tribu";
+  @override
+  String get arabian_peninsula => "Arabie";
+  @override
+  String get search_taxonomy => "Chercher en taxonomie";
+  @override
+  String get rate_later => "Plus tard";
+  @override
+  String get color_message => "Quelle est la couleur des fleurs? Sélectionnez la couleur la plus proche.";
+  @override
+  String get west_tropical_africa => "Afrique tropicale de l'Ouest";
+  @override
+  String get northern_europe => "Europe du Nord";
+  @override
+  String get rate => "Avis";
+  @override
+  String get northeast_tropical_africa => "Afrique tropicale du nord-est";
+  @override
+  String get pref_language => "Préférence de langue";
+  @override
+  String get product_custom_filter_title => "Filtre personnalisé";
+  @override
+  String get new_zealand => "Nouvelle-Zélande";
+  @override
+  String get feedback_intro => "Vous avez contribué à cette application car vous l'avez installé sur votre appareil, merci. Si vous cherchez quelque chose de plus, voici quelques options:";
+  @override
+  String get filter_distribution => "distribution";
+  @override
+  String get eastern_asia => "Asie de l'Est";
+  @override
+  String get western_asia => "Asie occidentale";
+  @override
+  String get subarctic_america => "Amérique subarctique";
+  @override
+  String get product_search_title => "Chercher dans les noms ou la taxonomie";
+  @override
+  String get feedback_buy_extended => "Vous pouvez acheter la version étendue avec des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche dans les noms, la recherche dans la taxonomie, les observations et le filtre configurable.";
+  @override
+  String get north_central_usa => "Nord-Central des États-Unis";
+  @override
+  String get improve_translation => "Améliorer la traduction";
+  @override
+  String get feedback_review => "Vous pouvez écrire une critique positive.";
+  @override
+  String get southeastern_usa => "Sud-est des États-Unis";
+  @override
+  String get yes => "Oui";
+  @override
+  String get feedback_run_ads_video => "Regarder une publicité vidéo";
+  @override
+  String get plant_height_from => "Hauteur entre";
+  @override
+  String get petal_many => "plus de 5";
+  @override
+  String get southeastern_europe => "Europe du sud-est";
+  @override
+  String get taxonomy_unknown => "inconnu";
+  @override
+  String get plant_inflorescence => "Inflorescence";
+  @override
+  String get northern_africa => "Afrique du Nord";
+  @override
+  String get offline_subtitle => "nécessite plus de 300+ MB d'espace.";
+  @override
+  String get china => "Chine";
+  @override
+  String get product_no_ads_title => "Pas de publicité indésirable";
+  @override
+  String get offline_title => "Mode hors-ligne";
+  @override
+  String get petal_zygomorphic => "zygomorphie";
+  @override
+  String get taxonomy_genus => "Genre";
+  @override
+  String get papuasia => "Papuasie";
+  @override
+  String get feedback_submit_translate_app => "Améliorer les étiquettes de l'application";
+}
+
+class $he_IL extends S {
+  const $he_IL();
+
+  @override
+  TextDirection get textDirection => TextDirection.rtl;
+
+  @override
+  String get central_america => "מרכז אמריקה";
+  @override
+  String get legend => "אגדה";
+  @override
+  String get product_offline_title => "מצב לא מקוון";
+  @override
+  String get feedback_submit_translate_data => "שפר את נתוני הפרחים";
+  @override
+  String get snack_copy => "הועתק ללוח";
+  @override
+  String get product_purchase_failed => "הרכישה נכשלה";
+  @override
+  String get about => "על היישום";
+  @override
+  String get product_no_ads_description => "היישום לא יציג מודעת באנר בחלק התחתון של המסך.";
+  @override
+  String get offline_download_progress => "מוריד תמונות ואיורים ...";
+  @override
+  String get western_canada => "קנדה המערבית";
+  @override
+  String get northern_america => "צפון אמריקה";
+  @override
+  String get western_indian_ocean => "האוקיינוס ההודי המערבי";
+  @override
+  String get feedback => "משוב / תרומה";
+  @override
+  String get southwestern_usa => "דרום מערב ארצות הברית";
+  @override
+  String get distribution_message => "באיזה אזור גיאוגרפי עלינו להתמקד?";
+  @override
+  String get caribbean => "הקאריביים";
+  @override
+  String get product_search_description => "תוכל למצוא פרח בשם הלטיני שלה או על ידי הטקסון שלה (למשל סדרה, משפחה, סוג).";
+  @override
+  String get offline_delete_message => "האם ברצונך למחוק נתונים לא מקוונים?";
+  @override
+  String get australasia => "אוסטרליה";
+  @override
+  String get petal_4 => "4 או פחות";
+  @override
+  String get east_tropical_africa => "מזרח אפריקה טרופית";
+  @override
+  String get africa => "אפריקה";
+  @override
+  String get south_tropical_africa => "דרום אפריקה טרופית";
+  @override
+  String get caucasus => "קווקז";
+  @override
+  String get middle_asia => "אסיה התיכונה";
+  @override
+  String get plant_gallery => "גלריה";
+  @override
+  String get always_my_region_subtitle => "האזור שלך יוגדר מראש למסנן";
+  @override
+  String get indochina => "הודו-סין";
+  @override
+  String get feedback_translate => "תוכל לדווח על שגיאת הקלדה או השגיאה שמצאת או שלח תרגום חדש בשפה שלך";
+  @override
+  String get australia => "אוסטרליה";
+  @override
+  String get google_translate => "תורגם עם גוגל תרגום";
+  @override
+  String get plant_leaf => "עלים";
+  @override
+  String get habitat_forest => "יערות";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "מלזיה";
+  @override
+  String get southwestern_pacific => "דרום מערב האוקיינוס השקט";
+  @override
+  String get asia_tropical => "אסיה טרופי";
+  @override
+  String get northwestern_usa => "צפון מערב ארצות הברית";
+  @override
+  String get northern_south_america => "צפון אמריקה";
+  @override
+  String get show_original => "הצג טקסט באנגלית";
+  @override
+  String get offline_download_message => "אתה הולך להוריד 300+ MB של תמונות ואיורים. בדוק אם המכשיר מחובר ל- Wi-Fi. האם אתה מוכן להורדה?";
+  @override
+  String get southern_america => "דרום אמריקה";
+  @override
+  String get middle_atlantic_ocean => "האוקיינוס האטלנטי התיכון";
+  @override
+  String get feedback_run_ads => "ניתן להציג פרסומת במסך מלא או לצפות בפרסומת וידאו כדי לתמוך בפיתוח ובשיפור נתונים נוספים.";
+  @override
+  String get habitat_garden => "גנים או שדות";
+  @override
+  String get product_purchase => "רכישה";
+  @override
+  String get russian_far_east => "המזרח הרחוק הרוסי";
+  @override
+  String get west_central_tropical_africa => "מערב אפריקה מרכז טרופי";
+  @override
+  String get habitat_message => "מה מסביבך? זיהוי בית הגידול של הצמח.";
+  @override
+  String get plant_toxicity => "רַעֲלָנוּת";
+  @override
+  String get offline_download_fail => "הורדה נכשלה. בדוק את חיבור האינטרנט או את המקום הפנוי במכשיר ונסה שוב.";
+  @override
+  String get snack_no_flowers => "אין קריטריונים תואמים לפרחים.";
+  @override
+  String get rate_question => "האם האפליקציה הזו מועילה?";
+  @override
+  String get macaronesia => "מקרונזיה";
+  @override
+  String get plant_taxonomy => "טקסונומיה";
+  @override
+  String get feedback_run_ads_fullscreen => "הצג פרסומת במסך מלא";
+  @override
+  String get asia_temperate => "אסיה ממוזג";
+  @override
+  String get search => "לחפש...";
+  @override
+  String get habitat_rock => "סלעים או הרים";
+  @override
+  String get taxonomy_superregnum => "על-ממלכה";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "מונגוליה";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "מערב אמריקה";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "סגור";
+  @override
+  String get europe => "אירופה";
+  @override
+  String get middle_europe => "אירופה המזרחית";
+  @override
+  String get color_blue => "כחול, סגול";
+  @override
+  String get my_filter => "המסנן שלי";
+  @override
+  String get southern_south_america => "דרום אמריקה הדרומית";
+  @override
+  String get plant_habitat => "בית גידול";
+  @override
+  String get snack_loading_ad => "המודעה עדיין נטענת, לחץ שוב על הלחצן.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "עלי כותרת";
+  @override
+  String get petal_message => "האם הפרח אינו סדיר? לא? אז כמה עלי כותרת יש את זה?";
+  @override
+  String get color_white => "לבן";
+  @override
+  String get northeastern_usa => "צפון מזרח ארצות הברית";
+  @override
+  String get color_green => "ירוק, חום, שחור";
+  @override
+  String get taxonomy_ordo => "סדרה";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "האוקיינוס השקט";
+  @override
+  String get plant_sources => "מקורות";
+  @override
+  String get taxonomy_regnum => "ממלכה";
+  @override
+  String get south_central_pacific => "דרום מרכז האוקיינוס השקט";
+  @override
+  String get filter_color => "צבע";
+  @override
+  String get help => "עֶזרָה";
+  @override
+  String get mexico => "מקסיקו";
+  @override
+  String get snack_publish => "יפורסם בהמשך";
+  @override
+  String get siberia => "סיביר";
+  @override
+  String get taxonomy_subtribus => "Subtribe";
+  @override
+  String get product_custom_filter_description => "תוכל לשנות את סדר ברירת המחדל ואת מספר המסננים (צבע, בתי גידול, עלי כותרת, הפצה).";
+  @override
+  String get habitat_meadow => "כרי דשא או מרעה";
+  @override
+  String get plant_trivia => "דְבָרִים בְּטֵלִים";
+  @override
+  String get product_purchased => "נרכש";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "צמחי מרפא";
+  @override
+  String get plant_height_to => "עד";
+  @override
+  String get offline_download => "המשך הורדה";
+  @override
+  String get enhancements => "שיפורים";
+  @override
+  String get habitat_wetland => "מורלנדס או ביצות";
+  @override
+  String get product_restore_purchases => "לשחזר רכישות";
+  @override
+  String get feedback_title => "כיצד לתרום";
+  @override
+  String get toxicity2 => "צמח רעיל במקצת";
+  @override
+  String get toxicity1 => "צמח רעיל";
+  @override
+  String get eastern_canada => "קנדה המזרחית";
+  @override
+  String get plant_info => "מידע";
+  @override
+  String get show_translation => "הצג טקסט מתורגם";
+  @override
+  String get habitat_tree => "עצים או שיחים";
+  @override
+  String get settings => "הגדרות";
+  @override
+  String get color_red => "אדום, ורוד";
+  @override
+  String get north_central_pacific => "צפון מרכז האוקיינוס השקט";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "דרום אפריקה";
+  @override
+  String get always_my_region_title => "הוסף תמיד את האזור שלי למסנן";
+  @override
+  String get color_yellow => "צהוב";
+  @override
+  String get subantarctic_islands => "איי סובאנטארקטי";
+  @override
+  String get list_info => "לבחור אחד";
+  @override
+  String get new_version => "גרסה חדשה זמינה, אנא עדכן.";
+  @override
+  String get taxonomy_subfamilia => "תת־משפחה";
+  @override
+  String get my_region => "אזור שלי";
+  @override
+  String get pause => "השהה";
+  @override
+  String get indian_subcontinent => "תת היבשת ההודית";
+  @override
+  String get product_offline_description => "תוכל להפעיל את היישום ללא חיבור לאינטרנט.";
+  @override
+  String get plant_flower => "פרח";
+  @override
+  String get filter_habitat => "בתי גידול";
+  @override
+  String get rate_never => "לעולם לא";
+  @override
+  String get northwestern_pacific => "צפון מערב האוקיינוס השקט";
+  @override
+  String get search_names => "חפש בשמות";
+  @override
+  String get southwestern_europe => "דרום מערב אירופה";
+  @override
+  String get taxonomy_species => "מין";
+  @override
+  String get plant_fruit => "פרי";
+  @override
+  String get plant_flowering_to => "ל";
+  @override
+  String get taxonomy_familia => "משפחה";
+  @override
+  String get plant_stem => "גבעול";
+  @override
+  String get antarctic_continent => "יבשת אנטארקטיקה";
+  @override
+  String get no => "לא";
+  @override
+  String get brazil => "ברזיל";
+  @override
+  String get rate_text => "מחבר של יישום זה מונע על ידי תגובה חיובית מהמשתמשים. נא לשלוח לו כמה כוכבים דרך חנות היישומים.";
+  @override
+  String get eastern_europe => "מזרח אירופה";
+  @override
+  String get south_central_usa => "דרום מרכז ארצות הברית";
+  @override
+  String get offline_download_success => "תמונות ואיורים הורדו בהצלחה.";
+  @override
+  String get plant_flowering_from => "פריחה מ";
+  @override
+  String get taxonomy_tribus => "שבט";
+  @override
+  String get arabian_peninsula => "חצי האי ערב";
+  @override
+  String get search_taxonomy => "חפש בטקסונומיה";
+  @override
+  String get rate_later => "יותר מאוחר";
+  @override
+  String get color_message => "מה צבע הפרח? בחר את הקרוב ביותר.";
+  @override
+  String get west_tropical_africa => "מערב אפריקה טרופית";
+  @override
+  String get northern_europe => "אירופה הצפונית";
+  @override
+  String get rate => "סקירה";
+  @override
+  String get northeast_tropical_africa => "Northeast Tropical Africa";
+  @override
+  String get pref_language => "שפה מועדפת";
+  @override
+  String get product_custom_filter_title => "מסנן מותאם אישית";
+  @override
+  String get new_zealand => "ניו זילנד";
+  @override
+  String get feedback_intro => "אתה כבר תורם ליישום זה מאז התקנת את זה על המכשיר שלך, תודה. אם אתה מחפש משהו נוסף, הנה כמה אפשרויות:";
+  @override
+  String get filter_distribution => "הפצה";
+  @override
+  String get eastern_asia => "מזרח אסיה";
+  @override
+  String get western_asia => "מערב אסיה";
+  @override
+  String get subarctic_america => "אמריקה הסובארקטית";
+  @override
+  String get product_search_title => "חיפוש בשמות או בטקסונומיה";
+  @override
+  String get feedback_buy_extended => "אתה יכול לקנות גרסה מורחבת עם פונקציונליות נוספת כמו במצב לא מקוון, חיפוש בשמות, חיפוש בטקסונומיה, תצפיות ומסנן להגדרה.";
+  @override
+  String get north_central_usa => "צפון מרכז ארצות הברית";
+  @override
+  String get improve_translation => "שפר את התרגום";
+  @override
+  String get feedback_review => "אתה יכול לכתוב ביקורת חיובית.";
+  @override
+  String get southeastern_usa => "דרום מזרח ארצות הברית";
+  @override
+  String get yes => "כן";
+  @override
+  String get feedback_run_ads_video => "צפה בפרסומת וידאו";
+  @override
+  String get plant_height_from => "גובה מ";
+  @override
+  String get petal_many => "יותר מ 5";
+  @override
+  String get southeastern_europe => "דרום מזרח אירופה";
+  @override
+  String get taxonomy_unknown => "לא ידוע";
+  @override
+  String get plant_inflorescence => "תִפרַחַת";
+  @override
+  String get northern_africa => "צפון אפריקה";
+  @override
+  String get offline_subtitle => "דורש 300+ MB שטח נוסף.";
+  @override
+  String get china => "סין";
+  @override
+  String get product_no_ads_title => "אין פרסומת לא רצויה";
+  @override
+  String get offline_title => "מצב לא מקוון";
+  @override
+  String get petal_zygomorphic => "לֹא סָדִיר";
+  @override
+  String get taxonomy_genus => "סוג";
+  @override
+  String get papuasia => "Papuasia";
+  @override
+  String get feedback_submit_translate_app => "שפר את תוויות היישום";
+}
+
+class $ja_JP extends S {
+  const $ja_JP();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "中米";
+  @override
+  String get legend => "伝説";
+  @override
+  String get product_offline_title => "オフラインモード";
+  @override
+  String get feedback_submit_translate_data => "花のデータを改善する";
+  @override
+  String get snack_copy => "クリップボードにコピー";
+  @override
+  String get product_purchase_failed => "購入に失敗しました";
+  @override
+  String get about => "約";
+  @override
+  String get product_no_ads_description => "アプリケーションは画面の下部に広告バナーを表示しません。";
+  @override
+  String get offline_download_progress => "写真やイラストをダウンロードしています...";
+  @override
+  String get western_canada => "カナダ西部";
+  @override
+  String get northern_america => "北アメリカ";
+  @override
+  String get western_indian_ocean => "西インド洋";
+  @override
+  String get feedback => "フィードバック";
+  @override
+  String get southwestern_usa => "アメリカ南西部";
+  @override
+  String get distribution_message => "どの地理的領域に焦点を当てるべきか？";
+  @override
+  String get caribbean => "カリブ海";
+  @override
+  String get product_search_description => "花は、日本語またはラテン語の名前で、あるいは分類群（たとえば、目、科、属）で見つけることができます。";
+  @override
+  String get offline_delete_message => "オフラインデータを削除しますか？";
+  @override
+  String get australasia => "オーストラリア";
+  @override
+  String get petal_4 => "4以下";
+  @override
+  String get east_tropical_africa => "東トロピカルアフリカ";
+  @override
+  String get africa => "アフリカ";
+  @override
+  String get south_tropical_africa => "南トロピカルアフリカ";
+  @override
+  String get caucasus => "コーカサス";
+  @override
+  String get middle_asia => "中東アジア";
+  @override
+  String get plant_gallery => "ギャラリー";
+  @override
+  String get always_my_region_subtitle => "あなたの地域はフィルタにプリセットされます";
+  @override
+  String get indochina => "インドシナ";
+  @override
+  String get feedback_translate => "誤植や誤りを報告したり、新しい翻訳をあなたの言語で提出することができます。";
+  @override
+  String get australia => "オーストラリア";
+  @override
+  String get google_translate => "Google翻訳で翻訳された";
+  @override
+  String get plant_leaf => "葉";
+  @override
+  String get habitat_forest => "森林";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "マレーシア";
+  @override
+  String get southwestern_pacific => "南西太平洋";
+  @override
+  String get asia_tropical => "アジアトロピカル";
+  @override
+  String get northwestern_usa => "米国北西部";
+  @override
+  String get northern_south_america => "南アメリカ北部";
+  @override
+  String get show_original => "英語のテキストを表示する";
+  @override
+  String get offline_download_message => "あなたは300 MB以上の写真やイラストをダウンロードしようとしています。 お使いの機器がWi-Fiに接続されているか確認してください。 ダウンロードの準備はできていますか？";
+  @override
+  String get southern_america => "南アメリカ";
+  @override
+  String get middle_atlantic_ocean => "中部大西洋";
+  @override
+  String get feedback_run_ads => "全画面広告を表示したり、ビデオ広告を見たりして、さらなる開発やデータベースの機能強化をサポートできます。";
+  @override
+  String get habitat_garden => "庭園、畑";
+  @override
+  String get product_purchase => "買う";
+  @override
+  String get russian_far_east => "ロシア極東";
+  @override
+  String get west_central_tropical_africa => "西部中部トロピカルアフリカ";
+  @override
+  String get habitat_message => "あなたの周りには何がありますか？ 植物の生息地を特定する。";
+  @override
+  String get plant_toxicity => "毒性";
+  @override
+  String get offline_download_fail => "ダウンロードに失敗しました。 インターネット接続またはデバイスの空き容量を確認して、もう一度やり直してください。";
+  @override
+  String get snack_no_flowers => "基準に一致する花はありません。";
+  @override
+  String get rate_question => "このアプリケーションは役に立ちましたか？";
+  @override
+  String get macaronesia => "マカロニア";
+  @override
+  String get plant_taxonomy => "分類学";
+  @override
+  String get feedback_run_ads_fullscreen => "フルスクリーン広告を表示する";
+  @override
+  String get asia_temperate => "アジアの温帯";
+  @override
+  String get search => "サーチ...";
+  @override
+  String get habitat_rock => "山";
+  @override
+  String get taxonomy_superregnum => "ドメイン";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "モンゴル";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "西南アメリカ";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "閉じる";
+  @override
+  String get europe => "ヨーロッパ";
+  @override
+  String get middle_europe => "中欧";
+  @override
+  String get color_blue => "青、紫";
+  @override
+  String get my_filter => "私のフィルター";
+  @override
+  String get southern_south_america => "南アメリカ南部";
+  @override
+  String get plant_habitat => "生息地";
+  @override
+  String get snack_loading_ad => "広告はまだ読み込まれています。もう一度ボタンを押してください。";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "花弁";
+  @override
+  String get petal_message => "花は不規則ですか？ いいえ？ それで花びらは何枚ですか？";
+  @override
+  String get color_white => "白";
+  @override
+  String get northeastern_usa => "北東アメリカ";
+  @override
+  String get color_green => "緑、茶色、黒";
+  @override
+  String get taxonomy_ordo => "目";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "パシフィック";
+  @override
+  String get plant_sources => "出典";
+  @override
+  String get taxonomy_regnum => "界";
+  @override
+  String get south_central_pacific => "中南米";
+  @override
+  String get filter_color => "色";
+  @override
+  String get help => "ヘルプ";
+  @override
+  String get mexico => "メキシコ";
+  @override
+  String get snack_publish => "... 後で公開する";
+  @override
+  String get siberia => "シベリア";
+  @override
+  String get taxonomy_subtribus => "亜族";
+  @override
+  String get product_custom_filter_description => "あなたは、デフォルトの順番とフィルタの数（色、生息地、花弁、分布）を変えることができるでしょう。";
+  @override
+  String get habitat_meadow => "草地、草原";
+  @override
+  String get plant_trivia => "トリビア";
+  @override
+  String get product_purchased => "購入した";
+  @override
+  String get taxonomy_cladus => "(系統群)";
+  @override
+  String get plant_herbalism => "本草学";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "ダウンロードを再開";
+  @override
+  String get enhancements => "機能強化";
+  @override
+  String get habitat_wetland => "ムーア、沼地、ボグ、フェン";
+  @override
+  String get product_restore_purchases => "購入を復元";
+  @override
+  String get feedback_title => "貢献する方法";
+  @override
+  String get toxicity2 => "わずかに有毒な植物";
+  @override
+  String get toxicity1 => "有毒植物";
+  @override
+  String get eastern_canada => "カナダ東部";
+  @override
+  String get plant_info => "インフォ";
+  @override
+  String get show_translation => "翻訳されたテキストを表示する";
+  @override
+  String get habitat_tree => "木、低木";
+  @override
+  String get settings => "設定";
+  @override
+  String get color_red => "赤、ピンク";
+  @override
+  String get north_central_pacific => "北中太平洋";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "南アフリカ";
+  @override
+  String get always_my_region_title => "自分の地域を常にフィルタに追加する";
+  @override
+  String get color_yellow => "黄色";
+  @override
+  String get subantarctic_islands => "亜南極諸島";
+  @override
+  String get list_info => "一つを選ぶ";
+  @override
+  String get new_version => "新しいバージョンが利用可能です、更新してください。";
+  @override
+  String get taxonomy_subfamilia => "亜科";
+  @override
+  String get my_region => "私の地域";
+  @override
+  String get pause => "一時停止";
+  @override
+  String get indian_subcontinent => "インド亜大陸";
+  @override
+  String get product_offline_description => "あなたはインターネットに接続せずにアプリケーションを実行することができるでしょう。";
+  @override
+  String get plant_flower => "花";
+  @override
+  String get filter_habitat => "生息地";
+  @override
+  String get rate_never => "絶対に";
+  @override
+  String get northwestern_pacific => "北西太平洋";
+  @override
+  String get search_names => "名前で検索";
+  @override
+  String get southwestern_europe => "南西ヨーロッパ";
+  @override
+  String get taxonomy_species => "種";
+  @override
+  String get plant_fruit => "果実";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "科";
+  @override
+  String get plant_stem => "茎";
+  @override
+  String get antarctic_continent => "南極大陸";
+  @override
+  String get no => "いいえ";
+  @override
+  String get brazil => "ブラジル";
+  @override
+  String get rate_text => "このアプリケーションの作者は、ユーザーからの良い反応によって動機づけられています。 アプリケーションストアを通じて彼にいくつかの星を送ってください。";
+  @override
+  String get eastern_europe => "東ヨーロッパ";
+  @override
+  String get south_central_usa => "中南米";
+  @override
+  String get offline_download_success => "写真やイラストのダウンロードに成功しました。";
+  @override
+  String get plant_flowering_from => "開花";
+  @override
+  String get taxonomy_tribus => "族";
+  @override
+  String get arabian_peninsula => "アラビア半島";
+  @override
+  String get search_taxonomy => "分類法で検索する";
+  @override
+  String get rate_later => "後で";
+  @override
+  String get color_message => "花の色は何ですか？ 最も近いものを選んでください。";
+  @override
+  String get west_tropical_africa => "西トロピカルアフリカ";
+  @override
+  String get northern_europe => "北欧";
+  @override
+  String get rate => "レビュー";
+  @override
+  String get northeast_tropical_africa => "東北熱帯アフリカ";
+  @override
+  String get pref_language => "優先言語e";
+  @override
+  String get product_custom_filter_title => "カスタムフィルター";
+  @override
+  String get new_zealand => "ニュージーランド";
+  @override
+  String get feedback_intro => "デバイスにインストールしたので、このアプリケーションに貢献しました。ありがとうございます。 あなたがもっと何かを探しているなら、いくつかのオプションがあります：";
+  @override
+  String get filter_distribution => "分布";
+  @override
+  String get eastern_asia => "東アジア";
+  @override
+  String get western_asia => "西アジア";
+  @override
+  String get subarctic_america => "亜寒帯アメリカ";
+  @override
+  String get product_search_title => "名前または分類法で検索する";
+  @override
+  String get feedback_buy_extended => "オフラインモード、名前で検索、分類法で検索、観測、設定可能なフィルタなどの追加機能を備えた拡張バージョンを購入できます。";
+  @override
+  String get north_central_usa => "アメリカ北西部";
+  @override
+  String get improve_translation => "翻訳を改善する";
+  @override
+  String get feedback_review => "あなたは肯定的なレビューを書くことができます。";
+  @override
+  String get southeastern_usa => "アメリカ南東部";
+  @override
+  String get yes => "はい";
+  @override
+  String get feedback_run_ads_video => "ビデオ広告を見る";
+  @override
+  String get plant_height_from => "高さ";
+  @override
+  String get petal_many => "以上5";
+  @override
+  String get southeastern_europe => "南東ヨーロッパ";
+  @override
+  String get taxonomy_unknown => "未知の";
+  @override
+  String get plant_inflorescence => "花序";
+  @override
+  String get northern_africa => "北アフリカ";
+  @override
+  String get offline_subtitle => "300 MB以上の追加スペースが必要です。";
+  @override
+  String get china => "中国";
+  @override
+  String get product_no_ads_title => "迷惑な広告はありません";
+  @override
+  String get offline_title => "オフラインモード";
+  @override
+  String get petal_zygomorphic => "不規則な";
+  @override
+  String get taxonomy_genus => "属";
+  @override
+  String get papuasia => "パプアシア";
+  @override
+  String get feedback_submit_translate_app => "アプリケーションのラベルを改善する";
+}
+
+class $cs_CZ extends S {
+  const $cs_CZ();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Střední Amerika";
+  @override
+  String get legend => "Legenda";
+  @override
+  String get product_offline_title => "Offline režim";
+  @override
+  String get feedback_submit_translate_data => "Opravit chyby datech";
+  @override
+  String get snack_copy => "Zkopírováno do schránky";
+  @override
+  String get product_purchase_failed => "Nákup selhal";
+  @override
+  String get about => "O aplikaci";
+  @override
+  String get product_no_ads_description => "Aplikace nezobrazí reklamní banner ve spodní části obrazovky.";
+  @override
+  String get offline_download_progress => "Probíhá stahování fotografií a ilustrací ...";
+  @override
+  String get western_canada => "Západní Kanada";
+  @override
+  String get northern_america => "Severní Amerika";
+  @override
+  String get western_indian_ocean => "Západní Indický oceán";
+  @override
+  String get feedback => "Připomínky";
+  @override
+  String get southwestern_usa => "Jihozápad USA";
+  @override
+  String get distribution_message => "Na kterou geografickou oblast zaměřit pozornost?";
+  @override
+  String get caribbean => "Karibik";
+  @override
+  String get product_search_description => "Budete moci najít květinu podle českého nebo latinského názvu nebo podle taxonu (např. podle řádu, čeledi, rodu).";
+  @override
+  String get offline_delete_message => "Opravdu chcete vymazat offline data?";
+  @override
+  String get australasia => "Australasie";
+  @override
+  String get petal_4 => "4 nebo méně";
+  @override
+  String get east_tropical_africa => "Východní tropická Afrika";
+  @override
+  String get africa => "Afrika";
+  @override
+  String get south_tropical_africa => "Jižní tropická Afrika";
+  @override
+  String get caucasus => "Kavkaz";
+  @override
+  String get middle_asia => "Střední Asie";
+  @override
+  String get plant_gallery => "Galerie";
+  @override
+  String get always_my_region_subtitle => "Vaše oblast bude přednastavena do filtru";
+  @override
+  String get indochina => "Indočína";
+  @override
+  String get feedback_translate => "Můžete upozornit na gramatické a faktické chyby v textu, případně navrhnout lepší překlad jednotlivých květin nebo aplikace samotné na stránce whatsthatflower.com.";
+  @override
+  String get australia => "Austrálie";
+  @override
+  String get google_translate => "Přeloženo pomocí Google překladače";
+  @override
+  String get plant_leaf => "List";
+  @override
+  String get habitat_forest => "lesy";
+  @override
+  String get taxonomy_serie => "série";
+  @override
+  String get malesia => "Jihovýchodní Asie";
+  @override
+  String get southwestern_pacific => "Jihozápadní Tichomoří";
+  @override
+  String get asia_tropical => "Tropická Asie";
+  @override
+  String get northwestern_usa => "Severozápad USA";
+  @override
+  String get northern_south_america => "Sever Jižní Ameriky";
+  @override
+  String get show_original => "Zobraz slovenský text";
+  @override
+  String get offline_download_message => "Chystáte se stáhnout více než 300 MB fotografií a ilustrací. Zkontrolujte, prosím, zda je vaše zařízení připojeno na wifi síť. Chcete začít stahovat soubory?";
+  @override
+  String get southern_america => "Jižní Amerika";
+  @override
+  String get middle_atlantic_ocean => "Střední Atlantik";
+  @override
+  String get feedback_run_ads => "Můžete si prohlédnout videoreklamu nebo nechat zobrazit reklamu na celou obrazovku a podpořit tak další vývoj a rozšiřování databáze.";
+  @override
+  String get habitat_garden => "pole a zahrady";
+  @override
+  String get product_purchase => "Koupit";
+  @override
+  String get russian_far_east => "Ruský dálný východ";
+  @override
+  String get west_central_tropical_africa => "Středozápadní tropická Afrika";
+  @override
+  String get habitat_message => "Kde se nacházíš? Identifikuj lokalitu.";
+  @override
+  String get plant_toxicity => "Toxicita";
+  @override
+  String get offline_download_fail => "Stahování souborů selhalo. Prosím zkontrolujte připojení k internetu nebo volný prostor na zařízení a zkuste znovu.";
+  @override
+  String get snack_no_flowers => "Filtru nevyhovují žádné květiny v databázi.";
+  @override
+  String get rate_question => "Líbí se vám aplikace?";
+  @override
+  String get macaronesia => "Makaronézie";
+  @override
+  String get plant_taxonomy => "Taxonomie";
+  @override
+  String get feedback_run_ads_fullscreen => "Zobrazit reklamu na celé obrazovce";
+  @override
+  String get asia_temperate => "Temperátní Asie";
+  @override
+  String get search => "Hledat...";
+  @override
+  String get habitat_rock => "vrcholky hor a skály";
+  @override
+  String get taxonomy_superregnum => "doména";
+  @override
+  String get taxonomy_sectio => "sekce";
+  @override
+  String get mongolia => "Mongolsko";
+  @override
+  String get taxonomy_subserie => "podsérie";
+  @override
+  String get western_south_america => "Západ Jižní Ameriky";
+  @override
+  String get taxonomy_subgenus => "podrod";
+  @override
+  String get close => "Zavřít";
+  @override
+  String get europe => "Evropa";
+  @override
+  String get middle_europe => "Střední Evropa";
+  @override
+  String get color_blue => "modrá, fialová";
+  @override
+  String get my_filter => "Můj filtr";
+  @override
+  String get southern_south_america => "Jih Jižní Ameriky";
+  @override
+  String get plant_habitat => "Ekologie";
+  @override
+  String get snack_loading_ad => "Reklama se stále načítá, znovu stiskněte tlačítko.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "okvětní list";
+  @override
+  String get petal_message => "Je květ nepravidelný? Ne? Tak kolik má okvětních lístků?";
+  @override
+  String get color_white => "bílá";
+  @override
+  String get northeastern_usa => "Severovýchod USA";
+  @override
+  String get color_green => "zelená, hnědá, černá";
+  @override
+  String get taxonomy_ordo => "řád";
+  @override
+  String get taxonomy_supersectio => "nadsekce";
+  @override
+  String get pacific => "Tichomoří";
+  @override
+  String get plant_sources => "Zdroje";
+  @override
+  String get taxonomy_regnum => "říše";
+  @override
+  String get south_central_pacific => "Středojižní Tichomoří";
+  @override
+  String get filter_color => "barva";
+  @override
+  String get help => "Pomoc";
+  @override
+  String get mexico => "Mexiko";
+  @override
+  String get snack_publish => "... bude zveřejněno později";
+  @override
+  String get siberia => "Sibiř";
+  @override
+  String get taxonomy_subtribus => "podskupina";
+  @override
+  String get product_custom_filter_description => "Budete moci změnit výchozí pořadí a počet filtrů (barva, ekologie, okvětní líst, distribuce).";
+  @override
+  String get habitat_meadow => "louky a travnaté porosty";
+  @override
+  String get plant_trivia => "Zajímavosti";
+  @override
+  String get product_purchased => "Koupeno";
+  @override
+  String get taxonomy_cladus => "(klad)";
+  @override
+  String get plant_herbalism => "Bylinářství";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Obnovit stahování";
+  @override
+  String get enhancements => "Vylepšení";
+  @override
+  String get habitat_wetland => "mokřady a bažiny";
+  @override
+  String get product_restore_purchases => "Obnovit nákupy";
+  @override
+  String get feedback_title => "Jak přispět";
+  @override
+  String get toxicity2 => "mírně jedovatá rostlina";
+  @override
+  String get toxicity1 => "jedovatá rostlina";
+  @override
+  String get eastern_canada => "Východní Kanada";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Zobraz přeložený text";
+  @override
+  String get habitat_tree => "stromy a keře";
+  @override
+  String get settings => "Nastavení";
+  @override
+  String get color_red => "červená, růžová";
+  @override
+  String get north_central_pacific => "Středoseverní Tichomoří";
+  @override
+  String get taxonomy_subsectio => "podsekce";
+  @override
+  String get southern_africa => "Jižní Afrika";
+  @override
+  String get always_my_region_title => "Vždy přidat moji oblast do filtru";
+  @override
+  String get color_yellow => "žlutá";
+  @override
+  String get subantarctic_islands => "Subantarktické ostrovy";
+  @override
+  String get list_info => "Vyber si jednu";
+  @override
+  String get new_version => "K dispozici je nová verze, aktualizujte prosím.";
+  @override
+  String get taxonomy_subfamilia => "podčeleď";
+  @override
+  String get my_region => "Moje oblast";
+  @override
+  String get pause => "Pozastavit";
+  @override
+  String get indian_subcontinent => "Indický subkontinent";
+  @override
+  String get product_offline_description => "Aplikace poběží i bez připojení k internetu.";
+  @override
+  String get plant_flower => "Květ";
+  @override
+  String get filter_habitat => "ekologie";
+  @override
+  String get rate_never => "Nikdy";
+  @override
+  String get northwestern_pacific => "Severozápadní Tichomoří";
+  @override
+  String get search_names => "Hledat v jménech";
+  @override
+  String get southwestern_europe => "Jihozápadní Evropa";
+  @override
+  String get taxonomy_species => "druh";
+  @override
+  String get plant_fruit => "Plod";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "čeleď";
+  @override
+  String get plant_stem => "Lodyha";
+  @override
+  String get antarctic_continent => "Antarktický kontinent";
+  @override
+  String get no => "Ne";
+  @override
+  String get brazil => "Brazílie";
+  @override
+  String get rate_text => "Autora této aplikace motivuje pozitívny ohlas uživatelů. Pošlete mu, prosím, nejaké květiny (nejlépe hvězdníky) přes obchod s aplikacemi.";
+  @override
+  String get eastern_europe => "Východní Evropa";
+  @override
+  String get south_central_usa => "Středojih USA";
+  @override
+  String get offline_download_success => "Fotografie a ilustrace byly úspěšně staženy.";
+  @override
+  String get plant_flowering_from => "Kvete:";
+  @override
+  String get taxonomy_tribus => "skupina";
+  @override
+  String get arabian_peninsula => "Arabský poloostrov";
+  @override
+  String get search_taxonomy => "Hledat v taxonomii";
+  @override
+  String get rate_later => "Později";
+  @override
+  String get color_message => "Jaké barvy jsou květiny? Vyber tu nejbližší. Vždy se můžeš vrátit a vybrat jinou.";
+  @override
+  String get west_tropical_africa => "Západní tropická Afrika";
+  @override
+  String get northern_europe => "Severní Evropa";
+  @override
+  String get rate => "Recenze";
+  @override
+  String get northeast_tropical_africa => "Severovýchodní tropická Afrika";
+  @override
+  String get pref_language => "Preferovaný jazyk";
+  @override
+  String get product_custom_filter_title => "Vlastní filtr";
+  @override
+  String get new_zealand => "Nový Zéland";
+  @override
+  String get feedback_intro => "Tuto aplikaci podporujete odkdy jste si ji nainstalovali na své mobilní zařízení, děkuji. Pokud hledáte jiné formy podpory, zde jsou některé možnosti:";
+  @override
+  String get filter_distribution => "distribuce";
+  @override
+  String get eastern_asia => "Východní Asie";
+  @override
+  String get western_asia => "Jihozápadní Asie";
+  @override
+  String get subarctic_america => "Subarktická Amerika";
+  @override
+  String get product_search_title => "Hledat v jménech nebo v taxonomii";
+  @override
+  String get feedback_buy_extended => "Můžete si koupit rozšířenou verzi s funkcemi navíc jako například ofline režim, vyhledávání v názvech a v taxonomii, pozorování a nastavitelný filtr.";
+  @override
+  String get north_central_usa => "Středosever USA";
+  @override
+  String get improve_translation => "Vylepšit překlad";
+  @override
+  String get feedback_review => "Můžete napsat pozitivní recenzi.";
+  @override
+  String get southeastern_usa => "Jihovýchod USA";
+  @override
+  String get yes => "Ano";
+  @override
+  String get feedback_run_ads_video => "Spustit video reklamu";
+  @override
+  String get plant_height_from => "Výška:";
+  @override
+  String get petal_many => "více než 5";
+  @override
+  String get southeastern_europe => "Jihovýchodní Evropa";
+  @override
+  String get taxonomy_unknown => "neznámý";
+  @override
+  String get plant_inflorescence => "Květenství";
+  @override
+  String get northern_africa => "Severní Afrika";
+  @override
+  String get offline_subtitle => "vyžaduje 300+ MB volného místa";
+  @override
+  String get china => "Čína";
+  @override
+  String get product_no_ads_title => "Žádná nežádoucí reklama";
+  @override
+  String get offline_title => "Offline režim";
+  @override
+  String get petal_zygomorphic => "souměrný";
+  @override
+  String get taxonomy_genus => "rod";
+  @override
+  String get papuasia => "Papuasie";
+  @override
+  String get feedback_submit_translate_app => "Opravit chyby v aplikaci";
+}
+
+class $de_DE extends S {
+  const $de_DE();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Zentralamerika";
+  @override
+  String get legend => "Legende";
+  @override
+  String get product_offline_title => "Offline-Modus";
+  @override
+  String get feedback_submit_translate_data => "Verbessere die Daten der Blume";
+  @override
+  String get snack_copy => "In die Zwischenablage kopiert";
+  @override
+  String get product_purchase_failed => "Kauf gescheitert";
+  @override
+  String get about => "Über";
+  @override
+  String get product_no_ads_description => "Die Anwendung zeigt kein Werbebanner am unteren Bildschirmrand.";
+  @override
+  String get offline_download_progress => "Fotos und Illustrationen herunterladen ...";
+  @override
+  String get western_canada => "Westkanada";
+  @override
+  String get northern_america => "Nordamerika";
+  @override
+  String get western_indian_ocean => "Westlicher Indischer Ozean";
+  @override
+  String get feedback => "Feedback / Beitrag";
+  @override
+  String get southwestern_usa => "Südwesten U.S.A.";
+  @override
+  String get distribution_message => "Auf welches geografische Gebiet sollten Sie sich konzentrieren?";
+  @override
+  String get caribbean => "Karibik";
+  @override
+  String get product_search_description => "Sie finden eine Blume nach ihrem deutschen oder lateinischen Namen oder nach ihrem Taxon (z. B. Ordnung, Familie, Gattung).";
+  @override
+  String get offline_delete_message => "Möchten Sie Offline-Daten löschen?";
+  @override
+  String get australasia => "Australasien";
+  @override
+  String get petal_4 => "höchstens 4";
+  @override
+  String get east_tropical_africa => "Osttropisches Afrika";
+  @override
+  String get africa => "Afrika";
+  @override
+  String get south_tropical_africa => "Südliches tropisches Afrika";
+  @override
+  String get caucasus => "Kaukasus";
+  @override
+  String get middle_asia => "Mittelasien";
+  @override
+  String get plant_gallery => "Gallerie";
+  @override
+  String get always_my_region_subtitle => "Ihre Region wird auf den Filter voreingestellt";
+  @override
+  String get indochina => "Indochina";
+  @override
+  String get feedback_translate => "Sie können Tippfehler oder falsche Übersetzungen melden, oder eine neue Übersetzung in Ihrer Sprache einreichen.";
+  @override
+  String get australia => "Australien";
+  @override
+  String get google_translate => "Übersetzt mit Google Translate";
+  @override
+  String get plant_leaf => "Blätter";
+  @override
+  String get habitat_forest => "Wälder";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Malesien";
+  @override
+  String get southwestern_pacific => "Südwestlicher Pazifik";
+  @override
+  String get asia_tropical => "Asien-Tropisch";
+  @override
+  String get northwestern_usa => "Nordwesten U.S.A.";
+  @override
+  String get northern_south_america => "Nördliches Südamerika";
+  @override
+  String get show_original => "Englischer Text";
+  @override
+  String get offline_download_message => "Sie werden mehr als 300 MB Fotos und Illustrationen herunterladen. Bitte überprüfen Sie, ob Ihr Gerät mit Wi-Fi verbunden ist. Sind Sie zum Download bereit?";
+  @override
+  String get southern_america => "Südamerika";
+  @override
+  String get middle_atlantic_ocean => "Mittlerer Atlantischer Ozean";
+  @override
+  String get feedback_run_ads => "Sie können Werbung im Vollbildmodus anzeigen oder Videowerbung ansehen, um die Weiterentwicklung und Datenbankverbesserung zu unterstützen.";
+  @override
+  String get habitat_garden => "Gärten oder Felder";
+  @override
+  String get product_purchase => "Kaufen";
+  @override
+  String get russian_far_east => "Russischer Ferner Osten";
+  @override
+  String get west_central_tropical_africa => "West-Zentrales tropisches Afrika";
+  @override
+  String get habitat_message => "Was ist um dich herum? Identifiziere den Standort der Pflanze.";
+  @override
+  String get plant_toxicity => "Toxizität";
+  @override
+  String get offline_download_fail => "Herunterladen fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung oder den freien Speicherplatz auf dem Gerät und versuchen Sie es erneut.";
+  @override
+  String get snack_no_flowers => "Keine Blumen die den Kriterien entsprechen.";
+  @override
+  String get rate_question => "Ist diese Anwendung hilfreich?";
+  @override
+  String get macaronesia => "Makaronesien";
+  @override
+  String get plant_taxonomy => "Taxonomy";
+  @override
+  String get feedback_run_ads_fullscreen => "Anzeige im Vollbildmodus";
+  @override
+  String get asia_temperate => "Asien-gemäßigt";
+  @override
+  String get search => "Suche...";
+  @override
+  String get habitat_rock => "Felsen oder Berge";
+  @override
+  String get taxonomy_superregnum => "Domäne";
+  @override
+  String get taxonomy_sectio => "Sektion";
+  @override
+  String get mongolia => "Mongolei";
+  @override
+  String get taxonomy_subserie => "Unterserie";
+  @override
+  String get western_south_america => "Westliches Südamerika";
+  @override
+  String get taxonomy_subgenus => "Untergattung";
+  @override
+  String get close => "Schließen";
+  @override
+  String get europe => "Europa";
+  @override
+  String get middle_europe => "Mitteleuropa";
+  @override
+  String get color_blue => "Blau, Lila";
+  @override
+  String get my_filter => "Mein Filter";
+  @override
+  String get southern_south_america => "Südliches Südamerika";
+  @override
+  String get plant_habitat => "Habitat";
+  @override
+  String get snack_loading_ad => "Werbung wird noch geladen, Taste erneut drücken.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "Kronblatt";
+  @override
+  String get petal_message => "Ist die Blüte spiegelsymmetrisch? Falls nicht, wieviele Blütenblätter hat sie?";
+  @override
+  String get color_white => "Weiß";
+  @override
+  String get northeastern_usa => "Nordöstlich U.S.A.";
+  @override
+  String get color_green => "Grün, Braun, Schwarz";
+  @override
+  String get taxonomy_ordo => "Ordnung";
+  @override
+  String get taxonomy_supersectio => "Supersektion";
+  @override
+  String get pacific => "Pazifik";
+  @override
+  String get plant_sources => "Quellen";
+  @override
+  String get taxonomy_regnum => "Reich";
+  @override
+  String get south_central_pacific => "Süd-Zentrales Pazifik";
+  @override
+  String get filter_color => "Farbe";
+  @override
+  String get help => "Hilfe";
+  @override
+  String get mexico => "Mexiko";
+  @override
+  String get snack_publish => "... wird später veröffentlicht";
+  @override
+  String get siberia => "Sibirien";
+  @override
+  String get taxonomy_subtribus => "Untertribus";
+  @override
+  String get product_custom_filter_description => "Sie können die Standardreihenfolge und die Anzahl der Filter ändern (Farbe, Habitat, Kronblatt, Vorkommen).";
+  @override
+  String get habitat_meadow => "Wiesen oder Grünland";
+  @override
+  String get plant_trivia => "Wissenswertes";
+  @override
+  String get product_purchased => "Gekauft";
+  @override
+  String get taxonomy_cladus => "(ohne Rang)";
+  @override
+  String get plant_herbalism => "Pflanzenheilkunde";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Download fortsetzen";
+  @override
+  String get enhancements => "Verbesserungen";
+  @override
+  String get habitat_wetland => "Moorlandschaft oder Feuchtgebiete";
+  @override
+  String get product_restore_purchases => "Käufe wiederherstellen";
+  @override
+  String get feedback_title => "Wie kann ich dazu beitragen?";
+  @override
+  String get toxicity2 => "leicht giftige Pflanze";
+  @override
+  String get toxicity1 => "giftige Pflanze";
+  @override
+  String get eastern_canada => "Östliches Kanada";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Übersetzter Text";
+  @override
+  String get habitat_tree => "Bäume oder Sträucher";
+  @override
+  String get settings => "Einstellungen";
+  @override
+  String get color_red => "Rot, Pink";
+  @override
+  String get north_central_pacific => "Nord-Zentrales Pazifik";
+  @override
+  String get taxonomy_subsectio => "Untersektion";
+  @override
+  String get southern_africa => "Südafrika";
+  @override
+  String get always_my_region_title => "Fügen Sie meine Region immer dem Filter hinzu";
+  @override
+  String get color_yellow => "Gelb";
+  @override
+  String get subantarctic_islands => "Subantarktische Inseln";
+  @override
+  String get list_info => "Auswahl";
+  @override
+  String get new_version => "Eine neue Version ist verfügbar, bitte updaten.";
+  @override
+  String get taxonomy_subfamilia => "Unterfamilie";
+  @override
+  String get my_region => "Meine Gegend";
+  @override
+  String get pause => "Pause";
+  @override
+  String get indian_subcontinent => "Indischer Subkontinent";
+  @override
+  String get product_offline_description => "Sie können die Anwendung ohne Internetverbindung ausführen.";
+  @override
+  String get plant_flower => "Blüte";
+  @override
+  String get filter_habitat => "Habitat";
+  @override
+  String get rate_never => "Niemals ";
+  @override
+  String get northwestern_pacific => "Nordwestlicher Pazifik";
+  @override
+  String get search_names => "Suche in Namen";
+  @override
+  String get southwestern_europe => "Südwesteuropa";
+  @override
+  String get taxonomy_species => "Art";
+  @override
+  String get plant_fruit => "Früchte";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Familie";
+  @override
+  String get plant_stem => "Stängel";
+  @override
+  String get antarctic_continent => "Antarktischer Kontinent";
+  @override
+  String get no => "Nein";
+  @override
+  String get brazil => "Brasilien";
+  @override
+  String get rate_text => "Der Autor dieser App wird durch positive Rückmeldungen der Benutzer  beflügelt. Bitte senden Sie ihm doch einen Sterne-Blumenstrauß über den Anwendungsspeicher.";
+  @override
+  String get eastern_europe => "Osteuropa";
+  @override
+  String get south_central_usa => "Süd-Zentral U.S.A.";
+  @override
+  String get offline_download_success => "Fotos und Illustrationen wurden erfolgreich heruntergeladen.";
+  @override
+  String get plant_flowering_from => "Blütezeit";
+  @override
+  String get taxonomy_tribus => "Tribus";
+  @override
+  String get arabian_peninsula => "Arabische Halbinsel";
+  @override
+  String get search_taxonomy => "Suche in der Taxonomie";
+  @override
+  String get rate_later => "Später";
+  @override
+  String get color_message => "Welche Farbe hat die Blume? Wähle die ähnlichste Farbe.";
+  @override
+  String get west_tropical_africa => "Westliches tropisches Afrika";
+  @override
+  String get northern_europe => "Nordeuropa";
+  @override
+  String get rate => "Bewertung";
+  @override
+  String get northeast_tropical_africa => "Nordost-tropisches Afrika";
+  @override
+  String get pref_language => "Bevorzugte Sprache";
+  @override
+  String get product_custom_filter_title => "Benutzerdefinierte Filter";
+  @override
+  String get new_zealand => "Neuseeland";
+  @override
+  String get feedback_intro => "Sie haben zu dieser Anwendung beigetragen, seit Sie diese auf Ihrem Gerät installiert haben, vielen Dank. Wenn Sie noch mehr tun möchten, haben Sie folgende Möglichkeiten:";
+  @override
+  String get filter_distribution => "Vorkommen";
+  @override
+  String get eastern_asia => "Ostasien";
+  @override
+  String get western_asia => "West-Asien";
+  @override
+  String get subarctic_america => "Subarktistisches Amerika";
+  @override
+  String get product_search_title => "Suche nach Namen oder Taxonomie";
+  @override
+  String get feedback_buy_extended => "Sie können eine erweiterte (+) Version mit zusätzlichen Funktionen wie Offline-Modus, Suche nach Namen, Suche in Taxonomie, Beobachtungen und konfigurierbaren Filter kaufen.";
+  @override
+  String get north_central_usa => "Nord-Zentral U.S.A.";
+  @override
+  String get improve_translation => "Übersetzung verbessern";
+  @override
+  String get feedback_review => "Sie können eine positive Bewertung schreiben.";
+  @override
+  String get southeastern_usa => "Südöstlich U.S.A.";
+  @override
+  String get yes => "Ja";
+  @override
+  String get feedback_run_ads_video => "Videoanzeige ansehen";
+  @override
+  String get plant_height_from => "Höhe";
+  @override
+  String get petal_many => "mehr als 5";
+  @override
+  String get southeastern_europe => "Südosteuropa";
+  @override
+  String get taxonomy_unknown => "unbekannt";
+  @override
+  String get plant_inflorescence => "Blütenstand";
+  @override
+  String get northern_africa => "Nordafrika";
+  @override
+  String get offline_subtitle => "Benötigt 300+ MB zusätzlichen Platz.";
+  @override
+  String get china => "China";
+  @override
+  String get product_no_ads_title => "Keine unerwünschte Werbung";
+  @override
+  String get offline_title => "Offline-Modus";
+  @override
+  String get petal_zygomorphic => "dorsiventrale";
+  @override
+  String get taxonomy_genus => "Gattung";
+  @override
+  String get papuasia => "Papuasien";
+  @override
+  String get feedback_submit_translate_app => "Verbessere den Text der Anwendung";
+}
+
+class $hu_HU extends S {
+  const $hu_HU();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Közép-Amerika";
+  @override
+  String get legend => "Jelmagyarázat";
+  @override
+  String get product_offline_title => "Offline módban";
+  @override
+  String get feedback_submit_translate_data => "Javítani kell a virágadatokat";
+  @override
+  String get snack_copy => "A vágólapra másolt";
+  @override
+  String get product_purchase_failed => "A vásárlás nem sikerült";
+  @override
+  String get about => "Az alkalmazásról";
+  @override
+  String get product_no_ads_description => "Az alkalmazás nem jeleníti meg a hirdetés bannerjét a képernyő alján.";
+  @override
+  String get offline_download_progress => "Fényképek és illusztrációk letöltése ...";
+  @override
+  String get western_canada => "Nyugat-Kanada";
+  @override
+  String get northern_america => "Észak-Amerika";
+  @override
+  String get western_indian_ocean => "Nyugati Indiai-óceán";
+  @override
+  String get feedback => "Visszajelzés küldése / Hozzájárulás";
+  @override
+  String get southwestern_usa => "Délnyugati USA";
+  @override
+  String get distribution_message => "Melyik földrajzi területre kell összpontosítania?";
+  @override
+  String get caribbean => "Karib";
+  @override
+  String get product_search_description => "A virágot a magyar vagy latin nevével vagy taxonnal (például rend, család, nemzetség) találhatja meg.";
+  @override
+  String get offline_delete_message => "Törli az offline adatokat?";
+  @override
+  String get australasia => "Ausztrália";
+  @override
+  String get petal_4 => "4 vagy kevesebb";
+  @override
+  String get east_tropical_africa => "Kelet-trópusi Afrika";
+  @override
+  String get africa => "Afrika";
+  @override
+  String get south_tropical_africa => "Dél-Trópusi Afrika";
+  @override
+  String get caucasus => "Kaukázus";
+  @override
+  String get middle_asia => "Közép-Ázsia";
+  @override
+  String get plant_gallery => "Képtár";
+  @override
+  String get always_my_region_subtitle => "Az Ön régiója előre lesz beállítva a szűrőre";
+  @override
+  String get indochina => "Indokína";
+  @override
+  String get feedback_translate => "Bármelyik hibát vagy hibát észlelhet, vagy új fordítást nyújthat be az ön nyelvén.";
+  @override
+  String get australia => "Ausztrália";
+  @override
+  String get google_translate => "Lefordítva a Google Translate";
+  @override
+  String get plant_leaf => "Levelek";
+  @override
+  String get habitat_forest => "erdők";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Malesia";
+  @override
+  String get southwestern_pacific => "Dél-Nyugat Csendes-óceán";
+  @override
+  String get asia_tropical => "Ázsia trópusi";
+  @override
+  String get northwestern_usa => "Északnyugati USA";
+  @override
+  String get northern_south_america => "Észak-Dél-Amerika";
+  @override
+  String get show_original => "Megjelenítése angol szöveg";
+  @override
+  String get offline_download_message => "300+ MB fotót és illusztrációkat tölthet le. Ellenőrizze, hogy a készülék wi-fi-hez van-e csatlakoztatva. Készen állsz a letöltésre?";
+  @override
+  String get southern_america => "Dél-Amerika";
+  @override
+  String get middle_atlantic_ocean => "Közép-Atlanti-óceán";
+  @override
+  String get feedback_run_ads => "Megjelenítheti a teljes képernyős hirdetést vagy a videohirdetést, hogy támogassa a további fejlesztéseket és az adatbázis-fejlesztést.";
+  @override
+  String get habitat_garden => "kertek vagy mezők";
+  @override
+  String get product_purchase => "Vásárol";
+  @override
+  String get russian_far_east => "Orosz távol-keleten";
+  @override
+  String get west_central_tropical_africa => "Nyugat-Közép-Trópusi Afrika";
+  @override
+  String get habitat_message => "Mi veszi körül? Határozza meg a növény élőhelyét.";
+  @override
+  String get plant_toxicity => "Méregtartalom";
+  @override
+  String get offline_download_fail => "Sikertelen letöltés. Kérjük, ellenőrizze az internetkapcsolatot vagy a szabad helyet az eszközön, és próbálja újra.";
+  @override
+  String get snack_no_flowers => "Nincsenek virág illeszkedési feltételek.";
+  @override
+  String get rate_question => "Ez az alkalmazás hasznos?";
+  @override
+  String get macaronesia => "Makaronézia";
+  @override
+  String get plant_taxonomy => "Taxonómia";
+  @override
+  String get feedback_run_ads_fullscreen => "Teljes képernyős hirdetés megjelenítése";
+  @override
+  String get asia_temperate => "Ázsia mérsékelt";
+  @override
+  String get search => "Keresés...";
+  @override
+  String get habitat_rock => "sziklák vagy hegyek";
+  @override
+  String get taxonomy_superregnum => "Domén";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "Mongólia";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "Nyugat-Dél-Amerika";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Bezár";
+  @override
+  String get europe => "Európa";
+  @override
+  String get middle_europe => "Közép-Európa";
+  @override
+  String get color_blue => "kék, lila";
+  @override
+  String get my_filter => "Saját szűrőm";
+  @override
+  String get southern_south_america => "Dél-Dél-Amerika";
+  @override
+  String get plant_habitat => "Élettér";
+  @override
+  String get snack_loading_ad => "A hirdetés még mindig betöltődik, nyomja meg újra a gombot.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "párta";
+  @override
+  String get petal_message => "A virág szimmetriája kétoldali (zigomorf)? Nem? Akkor hány sziromlevele van?";
+  @override
+  String get color_white => "fehér";
+  @override
+  String get northeastern_usa => "Északkelet USA";
+  @override
+  String get color_green => "zöld, barna, fekete";
+  @override
+  String get taxonomy_ordo => "Rend";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "Csendes-óceán";
+  @override
+  String get plant_sources => "Források";
+  @override
+  String get taxonomy_regnum => "Ország";
+  @override
+  String get south_central_pacific => "Dél-Közép Csendes-óceán";
+  @override
+  String get filter_color => "szín";
+  @override
+  String get help => "Súgó";
+  @override
+  String get mexico => "Mexikó";
+  @override
+  String get snack_publish => "... később közzé kell tenni";
+  @override
+  String get siberia => "Szibéria";
+  @override
+  String get taxonomy_subtribus => "Alnemzetségcsoport";
+  @override
+  String get product_custom_filter_description => "Meg tudod változtatni az alapértelmezett sorrendet és a szűrők számát (szín, élettér, párta, terjesztés).";
+  @override
+  String get habitat_meadow => "rétek vagy legelők";
+  @override
+  String get plant_trivia => "Apróságok";
+  @override
+  String get product_purchased => "Vásárolt";
+  @override
+  String get taxonomy_cladus => "Csoport";
+  @override
+  String get plant_herbalism => "Gyógynövények";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "A letöltés folytatása";
+  @override
+  String get enhancements => "Fejlesztések";
+  @override
+  String get habitat_wetland => "mocsarak vagy vizes élőhelyek";
+  @override
+  String get product_restore_purchases => "Vásárlás visszaállítása";
+  @override
+  String get feedback_title => "Hogyan járulhat hozzá";
+  @override
+  String get toxicity2 => "enyhén mérgező növény";
+  @override
+  String get toxicity1 => "mérgező növény";
+  @override
+  String get eastern_canada => "Kelet-Kanada";
+  @override
+  String get plant_info => "Infó";
+  @override
+  String get show_translation => "Fordított szöveg megjelenítése";
+  @override
+  String get habitat_tree => "fák vagy cserjék";
+  @override
+  String get settings => "Beállítások";
+  @override
+  String get color_red => "piros, rózsaszín";
+  @override
+  String get north_central_pacific => "Észak-Közép Csendes-óceán";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Dél-Afrika";
+  @override
+  String get always_my_region_title => "Mindig adjon hozzá régiót a szűrőhöz";
+  @override
+  String get color_yellow => "sárga";
+  @override
+  String get subantarctic_islands => "Szubantarktikai szigetek";
+  @override
+  String get list_info => "Válasszon egyet";
+  @override
+  String get new_version => "Új verzió elérhető, kérjük, frissítse.";
+  @override
+  String get taxonomy_subfamilia => "Alcsalád";
+  @override
+  String get my_region => "Saját régió";
+  @override
+  String get pause => "Szünet";
+  @override
+  String get indian_subcontinent => "Indiai szubkontinens";
+  @override
+  String get product_offline_description => "Internetes kapcsolat nélkül is futtathatja az alkalmazást.";
+  @override
+  String get plant_flower => "Virágok";
+  @override
+  String get filter_habitat => "élettér";
+  @override
+  String get rate_never => "Soha";
+  @override
+  String get northwestern_pacific => "Észak-nyugat Csendes-óceán";
+  @override
+  String get search_names => "Keresés a nevekben";
+  @override
+  String get southwestern_europe => "Délnyugat Európa";
+  @override
+  String get taxonomy_species => "Faj";
+  @override
+  String get plant_fruit => "Gyümölcsök";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Család";
+  @override
+  String get plant_stem => "Szár";
+  @override
+  String get antarctic_continent => "Antarktiszi kontinens";
+  @override
+  String get no => "Nem";
+  @override
+  String get brazil => "Brazília";
+  @override
+  String get rate_text => "A szerző a pozitív visszajelzésekből dolgozik. A alkalmazás tároló-on keresztül csillagzással értékelheti/támogathatja a munkáját.";
+  @override
+  String get eastern_europe => "Kelet-Európa";
+  @override
+  String get south_central_usa => "Dél-Közép USA";
+  @override
+  String get offline_download_success => "A fényképek és illusztrációk sikeresen letöltöttek.";
+  @override
+  String get plant_flowering_from => "A virágzás időszaka";
+  @override
+  String get taxonomy_tribus => "Nemzetségcsoport";
+  @override
+  String get arabian_peninsula => "Arab félsziget";
+  @override
+  String get search_taxonomy => "Keresés taxonómiában";
+  @override
+  String get rate_later => "Később";
+  @override
+  String get color_message => "Milyen színű a virág? Válassza ki a legközelebbi színt.";
+  @override
+  String get west_tropical_africa => "Nyugat-trópusi Afrika";
+  @override
+  String get northern_europe => "Észak-Európa";
+  @override
+  String get rate => "Vélemények";
+  @override
+  String get northeast_tropical_africa => "Észak-Trópusi Afrika";
+  @override
+  String get pref_language => "Kedvenc nyelv";
+  @override
+  String get product_custom_filter_title => "Egyéni szűrő";
+  @override
+  String get new_zealand => "Új Zéland";
+  @override
+  String get feedback_intro => "Hozzájárult az alkalmazáshoz, mivel telepítette azt a készülékére. Ha valami többet keres, itt van néhány lehetőség:";
+  @override
+  String get filter_distribution => "terjesztés";
+  @override
+  String get eastern_asia => "Kelet-Ázsia";
+  @override
+  String get western_asia => "Nyugat-Ázsia";
+  @override
+  String get subarctic_america => "Subarkti-Amerika";
+  @override
+  String get product_search_title => "Keresés nevekben vagy taxonómiában";
+  @override
+  String get feedback_buy_extended => "A bővített változatot további funkciókkal vásárolhatja meg, mint például az offline mód, kereshet a nevekben, kereshet taxonómia, megfigyelések és konfigurálható szűrő segítségével.";
+  @override
+  String get north_central_usa => "Észak-Közép USA";
+  @override
+  String get improve_translation => "Javítani fordítás";
+  @override
+  String get feedback_review => "Pozitív értékelést írhat.";
+  @override
+  String get southeastern_usa => "Délkelet USA";
+  @override
+  String get yes => "Igen";
+  @override
+  String get feedback_run_ads_video => "Nézze meg a videohirdetést";
+  @override
+  String get plant_height_from => "Magasság";
+  @override
+  String get petal_many => "több mint 5";
+  @override
+  String get southeastern_europe => "Délkelet-Európa";
+  @override
+  String get taxonomy_unknown => "ismeretlen";
+  @override
+  String get plant_inflorescence => "Virágzat";
+  @override
+  String get northern_africa => "Észak-Afrika";
+  @override
+  String get offline_subtitle => "szüksége 300+ MB további helyet.";
+  @override
+  String get china => "Kína";
+  @override
+  String get product_no_ads_title => "Nem kívánt reklám";
+  @override
+  String get offline_title => "Offline módban";
+  @override
+  String get petal_zygomorphic => "kétoldali";
+  @override
+  String get taxonomy_genus => "Nemzetség";
+  @override
+  String get papuasia => "Papuasia";
+  @override
+  String get feedback_submit_translate_app => "Javítsa az alkalmazás címkéit";
+}
+
+class $nb_NO extends S {
+  const $nb_NO();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Sentral-Amerika";
+  @override
+  String get legend => "Legende";
+  @override
+  String get product_offline_title => "Frakoblet modus";
+  @override
+  String get feedback_submit_translate_data => "Forbedre blomstens data";
+  @override
+  String get snack_copy => "Kopiert til utklippstavlen";
+  @override
+  String get product_purchase_failed => "Kjøpet mislyktes";
+  @override
+  String get about => "Om apper";
+  @override
+  String get product_no_ads_description => "Søknaden vil ikke vise annonse banner nederst på skjermen.";
+  @override
+  String get offline_download_progress => "Laster ned bilder og illustrasjoner ...";
+  @override
+  String get western_canada => "Vest-Canada";
+  @override
+  String get northern_america => "Nord-Amerika";
+  @override
+  String get western_indian_ocean => "Vest-Indiskehavet";
+  @override
+  String get feedback => "Tilbakemelding";
+  @override
+  String get southwestern_usa => "Sørvest USA";
+  @override
+  String get distribution_message => "Hvilket geografisk område skal vi fokusere på?";
+  @override
+  String get caribbean => "Caribbean";
+  @override
+  String get product_search_description => "Du vil kunne finne en blomst med sitt norske eller latinske navn eller med dets taxon (for eksempel orden, familie, slekt).";
+  @override
+  String get offline_delete_message => "Vil du slette frakoblede data?";
+  @override
+  String get australasia => "Australasia";
+  @override
+  String get petal_4 => "4 eller mindre";
+  @override
+  String get east_tropical_africa => "Øst-tropiske Afrika";
+  @override
+  String get africa => "Afrika";
+  @override
+  String get south_tropical_africa => "Sør-tropiske Afrika";
+  @override
+  String get caucasus => "Kaukasus";
+  @override
+  String get middle_asia => "Midt-Asia";
+  @override
+  String get plant_gallery => "Galleri";
+  @override
+  String get always_my_region_subtitle => "Din region vil bli forhåndsinnstilt til filteret";
+  @override
+  String get indochina => "Indo-Kina";
+  @override
+  String get feedback_translate => "Du kan rapportere hvilken som helst skrivefeil eller feil du fant eller sende inn ny oversettelse på ditt språk.";
+  @override
+  String get australia => "Australia";
+  @override
+  String get google_translate => "Oversatt med Google Trans";
+  @override
+  String get plant_leaf => "Blader";
+  @override
+  String get habitat_forest => "skog";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Malesia";
+  @override
+  String get southwestern_pacific => "Sørvestlige Stillehavet";
+  @override
+  String get asia_tropical => "Asia-tropisk";
+  @override
+  String get northwestern_usa => "Nordvest USA";
+  @override
+  String get northern_south_america => "Nord Sør-Amerika";
+  @override
+  String get show_original => "Vis engelsk tekst";
+  @override
+  String get offline_download_message => "Du skal laste ned 300 + MB bilder og illustrasjoner. Sjekk om enheten din er koblet til wi-fi. Er du klar for nedlasting?";
+  @override
+  String get southern_america => "Sør-Amerika";
+  @override
+  String get middle_atlantic_ocean => "Midt-Atlanterhavet";
+  @override
+  String get feedback_run_ads => "Du kan vise fullskjermsannonsering eller se videoannonse for å støtte videreutvikling og databaseforbedring.";
+  @override
+  String get habitat_garden => "hager eller felt";
+  @override
+  String get product_purchase => "Kjøpe";
+  @override
+  String get russian_far_east => "Russisk fjernt øst";
+  @override
+  String get west_central_tropical_africa => "Vest-Sentral-tropiske Afrika";
+  @override
+  String get habitat_message => "Hva er rundt deg? Identifiser plantens habitat.";
+  @override
+  String get plant_toxicity => "Toksisitet";
+  @override
+  String get offline_download_fail => "Nedlasting mislyktes. Kontroller din internettforbindelse eller ledig plass på enheten, og prøv igjen.";
+  @override
+  String get snack_no_flowers => "Ingen blomster som samsvarer med kriterier.";
+  @override
+  String get rate_question => "Er dette programmet nyttig?";
+  @override
+  String get macaronesia => "Macaronesia";
+  @override
+  String get plant_taxonomy => "Taksonomi";
+  @override
+  String get feedback_run_ads_fullscreen => "Vis en fullskjerm-annonse";
+  @override
+  String get asia_temperate => "Asia-temperert";
+  @override
+  String get search => "Søke...";
+  @override
+  String get habitat_rock => "steiner eller fjell";
+  @override
+  String get taxonomy_superregnum => "Domene";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "Mongolia";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "Vest Sør-Amerika";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Lukk";
+  @override
+  String get europe => "Europa";
+  @override
+  String get middle_europe => "Midt-Europa";
+  @override
+  String get color_blue => "blå, lilla";
+  @override
+  String get my_filter => "Mitt filter";
+  @override
+  String get southern_south_america => "Sør Sør-Amerika";
+  @override
+  String get plant_habitat => "Voksested";
+  @override
+  String get snack_loading_ad => "Annonsen er fortsatt lasting, trykk på knappen igjen.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "kronblader";
+  @override
+  String get petal_message => "Er blomsten zygomorphic? Nei? Så hvor mange kronblad har det?";
+  @override
+  String get color_white => "hvit";
+  @override
+  String get northeastern_usa => "Nordøst USA";
+  @override
+  String get color_green => "grønn, brun, svart";
+  @override
+  String get taxonomy_ordo => "Orden";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "Stillehavet";
+  @override
+  String get plant_sources => "Referanser";
+  @override
+  String get taxonomy_regnum => "Rike";
+  @override
+  String get south_central_pacific => "Sør-Sentral Stillehavet";
+  @override
+  String get filter_color => "farge";
+  @override
+  String get help => "Hjelp";
+  @override
+  String get mexico => "Mexico";
+  @override
+  String get snack_publish => "... å bli publisert senere";
+  @override
+  String get siberia => "Sibir";
+  @override
+  String get taxonomy_subtribus => "Undertribus";
+  @override
+  String get product_custom_filter_description => "Du kan endre standard rekkefølge og antall filtre (farge, voksested, kronblader, fordeling).";
+  @override
+  String get habitat_meadow => "enger eller gressletter";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get product_purchased => "Kjøpt";
+  @override
+  String get taxonomy_cladus => "(klade)";
+  @override
+  String get plant_herbalism => "Plantelegemiddel";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Fortsett nedlasting";
+  @override
+  String get enhancements => "Forbedringer";
+  @override
+  String get habitat_wetland => "heiene eller våtmark";
+  @override
+  String get product_restore_purchases => "Gjenopprette kjøp";
+  @override
+  String get feedback_title => "Hvordan bidra";
+  @override
+  String get toxicity2 => "litt giftig plante";
+  @override
+  String get toxicity1 => "giftig plante";
+  @override
+  String get eastern_canada => "Øst-Canada";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Vis oversatt tekst";
+  @override
+  String get habitat_tree => "trær eller busker";
+  @override
+  String get settings => "Innstillinger";
+  @override
+  String get color_red => "rød, rosa";
+  @override
+  String get north_central_pacific => "Nord-Sentral Stillehavet";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Sør Afrika";
+  @override
+  String get always_my_region_title => "Legg alltid til min region i filteret";
+  @override
+  String get color_yellow => "gul";
+  @override
+  String get subantarctic_islands => "Subantarctic Islands";
+  @override
+  String get list_info => "Plukk en";
+  @override
+  String get new_version => "Ny versjon er tilgjengelig, vennligst oppdater.";
+  @override
+  String get taxonomy_subfamilia => "Underfamilier";
+  @override
+  String get my_region => "Min region";
+  @override
+  String get pause => "Pause";
+  @override
+  String get indian_subcontinent => "Indisk subkontinent";
+  @override
+  String get product_offline_description => "Du kan kjøre program uten Internett-tilkobling.";
+  @override
+  String get plant_flower => "Blomst";
+  @override
+  String get filter_habitat => "voksested";
+  @override
+  String get rate_never => "Aldri";
+  @override
+  String get northwestern_pacific => "Nordvest Stillehavet";
+  @override
+  String get search_names => "Søk i navn";
+  @override
+  String get southwestern_europe => "Sørvestlige Europa";
+  @override
+  String get taxonomy_species => "Art";
+  @override
+  String get plant_fruit => "Frukt";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Familie";
+  @override
+  String get plant_stem => "Stengel";
+  @override
+  String get antarctic_continent => "Antarktis-kontinentet";
+  @override
+  String get no => "Nei";
+  @override
+  String get brazil => "Brasil";
+  @override
+  String get rate_text => "Forfatteren av denne søknaden er motivert av positiv respons fra brukerne. Vennligst send ham noen stjerner gjennom applikasjonsbutikken.";
+  @override
+  String get eastern_europe => "Øst-Europa";
+  @override
+  String get south_central_usa => "Sør-Sentral USA";
+  @override
+  String get offline_download_success => "Bilder og illustrasjoner ble lastet ned.";
+  @override
+  String get plant_flowering_from => "Blomstringstid";
+  @override
+  String get taxonomy_tribus => "Tribus";
+  @override
+  String get arabian_peninsula => "Den arabiske halvøy";
+  @override
+  String get search_taxonomy => "Søk i taksonomi";
+  @override
+  String get rate_later => "Seinere";
+  @override
+  String get color_message => "Hva er fargen på blomsten? Velg den nærmeste.";
+  @override
+  String get west_tropical_africa => "Vest-tropiske Afrika";
+  @override
+  String get northern_europe => "Nord-Europa";
+  @override
+  String get rate => "Anmeldelser";
+  @override
+  String get northeast_tropical_africa => "Nordøst-tropiske Afrika";
+  @override
+  String get pref_language => "Foretrukket Språk";
+  @override
+  String get product_custom_filter_title => "Egendefinert filter";
+  @override
+  String get new_zealand => "New Zealand";
+  @override
+  String get feedback_intro => "Du har bidratt til dette programmet siden du har installert det på enheten, takk. Hvis du leter etter noe mer, er det noen alternativer:";
+  @override
+  String get filter_distribution => "fordeling";
+  @override
+  String get eastern_asia => "Øst-Asia";
+  @override
+  String get western_asia => "Vest-Asia";
+  @override
+  String get subarctic_america => "Subarctic America";
+  @override
+  String get product_search_title => "Søk i navn eller taksonomi";
+  @override
+  String get feedback_buy_extended => "Du kan kjøpe utvidet versjon med ekstra funksjonalitet som frakoblet modus, søk i navn, søk i taksonomi, observasjoner og konfigurerbart filter.";
+  @override
+  String get north_central_usa => "Nord-Sentral USA";
+  @override
+  String get improve_translation => "Forbedre oversettelse";
+  @override
+  String get feedback_review => "Du kan skrive en positiv anmeldelse.";
+  @override
+  String get southeastern_usa => "Sørøst USA";
+  @override
+  String get yes => "Ja";
+  @override
+  String get feedback_run_ads_video => "Se en videoannonse";
+  @override
+  String get plant_height_from => "Høyde";
+  @override
+  String get petal_many => "mer enn 5";
+  @override
+  String get southeastern_europe => "Sørøst-Europa";
+  @override
+  String get taxonomy_unknown => "ukjent";
+  @override
+  String get plant_inflorescence => "Blomsterstand";
+  @override
+  String get northern_africa => "Nord-Afrika";
+  @override
+  String get offline_subtitle => "krever 300 + MB ekstra plass.";
+  @override
+  String get china => "Kina";
+  @override
+  String get product_no_ads_title => "Ingen uønsket annonse";
+  @override
+  String get offline_title => "Frakoblet modus";
+  @override
+  String get petal_zygomorphic => "zygomorphic";
+  @override
+  String get taxonomy_genus => "Slekt";
+  @override
+  String get papuasia => "Papuasia";
+  @override
+  String get feedback_submit_translate_app => "Forbedre programmets etiketter";
+}
+
+class $sk_SK extends S {
+  const $sk_SK();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Stredná Amerika";
+  @override
+  String get legend => "Legenda";
+  @override
+  String get product_offline_title => "Režm offline";
+  @override
+  String get feedback_submit_translate_data => "Opraviť chyby v dátach";
+  @override
+  String get snack_copy => "Skopírované do schránky";
+  @override
+  String get product_purchase_failed => "Nákup sa neuskutočnil";
+  @override
+  String get about => "O aplikácii";
+  @override
+  String get product_no_ads_description => "Aplikácia nezobrazí reklamný banner v spodnej časti obrazovky.";
+  @override
+  String get offline_download_progress => "Prebieha sťahovanie fotografií a ilustrácii ...";
+  @override
+  String get western_canada => "Západná Kanada";
+  @override
+  String get northern_america => "Severná Amerika";
+  @override
+  String get western_indian_ocean => "Západný Indický oceán";
+  @override
+  String get feedback => "Pripomienky";
+  @override
+  String get southwestern_usa => "Juhozápad USA";
+  @override
+  String get distribution_message => "Na ktorú geografickú oblasť zamerať pozornosť?";
+  @override
+  String get caribbean => "Karibik";
+  @override
+  String get product_search_description => "Budete môcť nájsť kvetinu podľa slovenského alebo latinského názvu alebo podľa taxónu (napr. podľa rádu, čeľade, rodu).";
+  @override
+  String get offline_delete_message => "Naozaj chcete zmazať offline dáta?";
+  @override
+  String get australasia => "Australázia";
+  @override
+  String get petal_4 => "4 alebo menej";
+  @override
+  String get east_tropical_africa => "Východná tropická Afrika";
+  @override
+  String get africa => "Afrika";
+  @override
+  String get south_tropical_africa => "Južná tropická Afrika";
+  @override
+  String get caucasus => "Kaukaz";
+  @override
+  String get middle_asia => "Stredná Ázia";
+  @override
+  String get plant_gallery => "Galéria";
+  @override
+  String get always_my_region_subtitle => "Vaša oblasť bude prednastavená do filtra";
+  @override
+  String get indochina => "Indočína";
+  @override
+  String get feedback_translate => "Môžete upozorniť na gramatické a faktické chyby v texte alebo priamo v aplikácii na stránke whatsthatflower.com.";
+  @override
+  String get australia => "Austrália";
+  @override
+  String get google_translate => "Preložené pomocou Google prekladača";
+  @override
+  String get plant_leaf => "Listy";
+  @override
+  String get habitat_forest => "lesy";
+  @override
+  String get taxonomy_serie => "séria";
+  @override
+  String get malesia => "Juhovýchodná Ázia";
+  @override
+  String get southwestern_pacific => "Juhozápadné Tichomorie";
+  @override
+  String get asia_tropical => "Tropická Ázia";
+  @override
+  String get northwestern_usa => "Severovýchod USA";
+  @override
+  String get northern_south_america => "Sever Južnej Ameriky";
+  @override
+  String get show_original => "Ukáž anglický text";
+  @override
+  String get offline_download_message => "Chystáte sa stiahnuť viac ako 300 MB fotografií a ilustrácii. Skontrolujte, prosím, či je vaše zariadenie pripojené na wifi sieť. Chcete začať sťahovať súbory?";
+  @override
+  String get southern_america => "Južná Amerika";
+  @override
+  String get middle_atlantic_ocean => "Stredný Atlantik";
+  @override
+  String get feedback_run_ads => "Môžete si pozrieť videoreklamu alebo nechať zobraziť reklamu na celú obrazovku a podporiť tak ďalší vývoj a rozširovanie databázy.";
+  @override
+  String get habitat_garden => "polia a záhrady";
+  @override
+  String get product_purchase => "Kúpiť";
+  @override
+  String get russian_far_east => "Ruský ďaleký východ";
+  @override
+  String get west_central_tropical_africa => "Stredozápadná tropická Afrika";
+  @override
+  String get habitat_message => "Kde sa nachádzaš? Identifikuj lokalitu.";
+  @override
+  String get plant_toxicity => "Toxicita";
+  @override
+  String get offline_download_fail => "Sťahovanie súborov zlyhalo. Prosím skontrolujte pripojenie k internetu alebo voľný priestor na zariadení a skúste znova.";
+  @override
+  String get snack_no_flowers => "Filtru nevyhovujú žiadne kvety v databáze.";
+  @override
+  String get rate_question => "Je táto aplikácia užitočná?";
+  @override
+  String get macaronesia => "Makaronézia";
+  @override
+  String get plant_taxonomy => "Taxonómia";
+  @override
+  String get feedback_run_ads_fullscreen => "Zobraziť reklamu na celej obrazovke";
+  @override
+  String get asia_temperate => "Mierne pásno Ázie";
+  @override
+  String get search => "Hľadať...";
+  @override
+  String get habitat_rock => "vrcholky hôr a skaly";
+  @override
+  String get taxonomy_superregnum => "doména";
+  @override
+  String get taxonomy_sectio => "sekcia";
+  @override
+  String get mongolia => "Mongólsko";
+  @override
+  String get taxonomy_subserie => "podséria";
+  @override
+  String get western_south_america => "Západ Južnej Ameriky";
+  @override
+  String get taxonomy_subgenus => "podrod";
+  @override
+  String get close => "Zavrieť";
+  @override
+  String get europe => "Európa";
+  @override
+  String get middle_europe => "Stredná Európa";
+  @override
+  String get color_blue => "modrá, fialová";
+  @override
+  String get my_filter => "Môj filter";
+  @override
+  String get southern_south_america => "Juh Južnej Ameriky";
+  @override
+  String get plant_habitat => "Lokalita";
+  @override
+  String get snack_loading_ad => "Reklama sa stále načítava, opäť stlačte tlačidlo.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "lupienok";
+  @override
+  String get petal_message => "Je kvet nepravidelný? Nie? Tak koľko má okvetných lístkov?";
+  @override
+  String get color_white => "biela";
+  @override
+  String get northeastern_usa => "Severovýchod USA";
+  @override
+  String get color_green => "zelená, hnedá, čierna";
+  @override
+  String get taxonomy_ordo => "trieda";
+  @override
+  String get taxonomy_supersectio => "nadsekcia";
+  @override
+  String get pacific => "Tichomorie";
+  @override
+  String get plant_sources => "Zdroje";
+  @override
+  String get taxonomy_regnum => "ríša";
+  @override
+  String get south_central_pacific => "Stredojužné Tichomorie";
+  @override
+  String get filter_color => "farba";
+  @override
+  String get help => "Pomoc";
+  @override
+  String get mexico => "Mexiko";
+  @override
+  String get snack_publish => "... bude dostupné neskôr";
+  @override
+  String get siberia => "Sibír";
+  @override
+  String get taxonomy_subtribus => "podskupina";
+  @override
+  String get product_custom_filter_description => "Budete môcť zmeniť predvolené poradie a počet filtrov (farba, biotop, lupienok, distribúcia).";
+  @override
+  String get habitat_meadow => "lúky a trávnaté porasty";
+  @override
+  String get plant_trivia => "Zaujímavosti";
+  @override
+  String get product_purchased => "Kúpené";
+  @override
+  String get taxonomy_cladus => "Cladus";
+  @override
+  String get plant_herbalism => "Bylinkárstvo";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Pokračovať v sťahovaní";
+  @override
+  String get enhancements => "Vylepšenia";
+  @override
+  String get habitat_wetland => "mokrade a močiare";
+  @override
+  String get product_restore_purchases => "Obnoviť nákupy";
+  @override
+  String get feedback_title => "Ako prispieť";
+  @override
+  String get toxicity2 => "mierne jedovatá rastlina";
+  @override
+  String get toxicity1 => "jedovatá rastlina";
+  @override
+  String get eastern_canada => "Východná Kanada";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Ukáž preložený text";
+  @override
+  String get habitat_tree => "stromy a kry";
+  @override
+  String get settings => "Nastavenia";
+  @override
+  String get color_red => "červená, ružová";
+  @override
+  String get north_central_pacific => "Stredoseverné Tichomorie";
+  @override
+  String get taxonomy_subsectio => "podsekcia";
+  @override
+  String get southern_africa => "Južná Afrika";
+  @override
+  String get always_my_region_title => "Vždy pridať moju oblasť do filtra";
+  @override
+  String get color_yellow => "žltá";
+  @override
+  String get list_info => "Vyber si jednu";
+  @override
+  String get new_version => "K dispozícii je nová verzia, prosím nainštalujte si ju.";
+  @override
+  String get taxonomy_subfamilia => "podčeľaď";
+  @override
+  String get pause => "Prerušiť";
+  @override
+  String get indian_subcontinent => "Indický subkontinent";
+  @override
+  String get product_offline_description => "Aplikáciu budete môcť spustiť bez pripojenia k internetu.";
+  @override
+  String get plant_flower => "Kvety";
+  @override
+  String get filter_habitat => "biotop";
+  @override
+  String get rate_never => "Nikdy";
+  @override
+  String get northwestern_pacific => "Severozápadné Tichomorie";
+  @override
+  String get search_names => "Hľadať v názvoch";
+  @override
+  String get southwestern_europe => "Juhozápadná Európa";
+  @override
+  String get taxonomy_species => "druh";
+  @override
+  String get plant_fruit => "Plody";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "čeľaď";
+  @override
+  String get plant_stem => "Stonka";
+  @override
+  String get no => "Nie";
+  @override
+  String get brazil => "Brazília";
+  @override
+  String get rate_text => "Autora tejto aplikácie motivuje pozitívny ohlas použivateľov. Pošlite mu, prosím, nejaké kvetiny (najlepšie hviezdice) cez obchod s aplikáciami.";
+  @override
+  String get eastern_europe => "Východná Európa";
+  @override
+  String get south_central_usa => "Stredojuh USA";
+  @override
+  String get offline_download_success => "Fotografie a ilustrácie boli úspešne stiahnuté.";
+  @override
+  String get plant_flowering_from => "Kvitne:";
+  @override
+  String get taxonomy_tribus => "skupina";
+  @override
+  String get arabian_peninsula => "Arabský polostrov";
+  @override
+  String get search_taxonomy => "Hľadať v taxonómii";
+  @override
+  String get rate_later => "Neskôr";
+  @override
+  String get color_message => "Akej farby je kvet? Vyber tú najbližšiu. Vždy sa môžeš vrátiť a vybrať inú.";
+  @override
+  String get west_tropical_africa => "Západná tropická Afrika";
+  @override
+  String get northern_europe => "Severná Európa";
+  @override
+  String get rate => "Recenzia";
+  @override
+  String get northeast_tropical_africa => "Severovýchodná tropická Afrika";
+  @override
+  String get pref_language => "Preferovaný jazyk";
+  @override
+  String get product_custom_filter_title => "Vlastný filter";
+  @override
+  String get new_zealand => "Nový Zéland";
+  @override
+  String get feedback_intro => "Túto aplikáciu podporujete odkedy ste si ju nainštalovali na svoje mobilné zariadenie, ďakujem. Ak hľadáte iné formy podpory, tu sú niektoré možnosti:";
+  @override
+  String get filter_distribution => "distribúcia";
+  @override
+  String get eastern_asia => "Východná Ázia";
+  @override
+  String get western_asia => "Juhozápadná Ázia";
+  @override
+  String get subarctic_america => "Subarktická Amerika";
+  @override
+  String get product_search_title => "Hľadať v názvoch alebo v taxonómii";
+  @override
+  String get feedback_buy_extended => "Môžete si kúpiť rozšírenú verziu s funkciami navyše ako napríklad ofline režim, vyhľadávanie v názvoch a v taxonómii, pozorovania a nastaviteľný filter.";
+  @override
+  String get north_central_usa => "Stredosever USA";
+  @override
+  String get improve_translation => "Vylepšiť preklad";
+  @override
+  String get feedback_review => "Môžete napísať pozitívnu recenziu.";
+  @override
+  String get southeastern_usa => "Juhovýchod USA";
+  @override
+  String get yes => "Áno";
+  @override
+  String get feedback_run_ads_video => "Pozrieť videoreklamu";
+  @override
+  String get plant_height_from => "Výška:";
+  @override
+  String get petal_many => "viac ako 5";
+  @override
+  String get southeastern_europe => "Juhovýchodná Európa";
+  @override
+  String get taxonomy_unknown => "neznámy";
+  @override
+  String get plant_inflorescence => "Súkvetie";
+  @override
+  String get northern_africa => "Severná Afrika";
+  @override
+  String get offline_subtitle => "potrebuje viac ako 300 MB voľného priestoru.";
+  @override
+  String get china => "Čína";
+  @override
+  String get product_no_ads_title => "Žiadna nežiadúca reklama";
+  @override
+  String get offline_title => "Režm offline";
+  @override
+  String get petal_zygomorphic => "nepravidelný";
+  @override
+  String get taxonomy_genus => "rod";
+  @override
+  String get papuasia => "Papuázia";
+  @override
+  String get feedback_submit_translate_app => "Opraviť chyby v aplikácii";
+}
+
+class $es_ES extends S {
+  const $es_ES();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Centroamérica";
+  @override
+  String get legend => "Leyenda";
+  @override
+  String get product_offline_title => "Modo offline";
+  @override
+  String get feedback_submit_translate_data => "Mejorar los datos de la flor.";
+  @override
+  String get snack_copy => "Copiado al portapapeles";
+  @override
+  String get product_purchase_failed => "La compra falló";
+  @override
+  String get about => "Acerca de";
+  @override
+  String get product_no_ads_description => "La aplicación no mostrará el anuncio publicitario en la parte inferior de la pantalla.";
+  @override
+  String get offline_download_progress => "Descargando fotos e ilustraciones ...";
+  @override
+  String get western_canada => "Canadá occidental";
+  @override
+  String get northern_america => "América del Norte";
+  @override
+  String get western_indian_ocean => "Océano Índico occidental";
+  @override
+  String get feedback => "Sugerencias / Contribución";
+  @override
+  String get southwestern_usa => "Suroeste de los Estados Unidos";
+  @override
+  String get distribution_message => "¿En qué área geográfica enfocarse?";
+  @override
+  String get caribbean => "Caribe";
+  @override
+  String get product_search_description => "Podrá encontrar una flor por su nombre en español o latino o por su taxón (por ejemplo orden, familia, género).";
+  @override
+  String get offline_delete_message => "¿Desea borrar los datos fuera de línea?";
+  @override
+  String get australasia => "Australasia";
+  @override
+  String get petal_4 => "4 o menos";
+  @override
+  String get east_tropical_africa => "África tropical oriental";
+  @override
+  String get africa => "África";
+  @override
+  String get south_tropical_africa => "África tropical del sur";
+  @override
+  String get caucasus => "Cáucaso";
+  @override
+  String get middle_asia => "Medio Asia";
+  @override
+  String get plant_gallery => "Galería";
+  @override
+  String get always_my_region_subtitle => "Su región estará preestablecida para el filtro";
+  @override
+  String get indochina => "Indochina";
+  @override
+  String get feedback_translate => "Puede reportar cualquier error tipográfico o error que encontró o enviar una nueva traducción en su idioma.";
+  @override
+  String get australia => "Australia";
+  @override
+  String get google_translate => "Traducido con Google Traductor";
+  @override
+  String get plant_leaf => "Hojas";
+  @override
+  String get habitat_forest => "bosque";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Malesia";
+  @override
+  String get southwestern_pacific => "Pacífico sudoccidental";
+  @override
+  String get asia_tropical => "Asia-Tropical";
+  @override
+  String get northwestern_usa => "Noroeste de los Estados Unidos";
+  @override
+  String get northern_south_america => "Norte de América del Sur";
+  @override
+  String get show_original => "Mostrar texto en inglés";
+  @override
+  String get offline_download_message => "Vas a descargar más de 300 MB de fotos e ilustraciones. Por favor, compruebe si su dispositivo está conectado a Wi-Fi. ¿Estás listo para una descarga?";
+  @override
+  String get southern_america => "América del Sur";
+  @override
+  String get middle_atlantic_ocean => "Medio Océano Atlántico";
+  @override
+  String get feedback_run_ads => "Puede mostrar anuncios a pantalla completa o ver anuncios de videos para respaldar el desarrollo adicional y la mejora de la base de datos.";
+  @override
+  String get habitat_garden => "jardín o campo";
+  @override
+  String get product_purchase => "Compra";
+  @override
+  String get russian_far_east => "Extremo Oriente ruso";
+  @override
+  String get west_central_tropical_africa => "África tropical occidental central";
+  @override
+  String get habitat_message => "¿Dónde te encuentras? Identifica el lugar.";
+  @override
+  String get plant_toxicity => "Toxicidad";
+  @override
+  String get offline_download_fail => "Descarga fracasó. Verifique su conexión a Internet o espacio libre en el dispositivo e intente nuevamente.";
+  @override
+  String get snack_no_flowers => "No hay criterios de correspondencia de flores.";
+  @override
+  String get rate_question => "¿Es útil esta aplicación?";
+  @override
+  String get macaronesia => "Macaronesia";
+  @override
+  String get plant_taxonomy => "Taxonomía";
+  @override
+  String get feedback_run_ads_fullscreen => "Mostrar un anuncio en pantalla completa";
+  @override
+  String get asia_temperate => "Asia-Templado";
+  @override
+  String get search => "Buscar...";
+  @override
+  String get habitat_rock => "rocas o montaña";
+  @override
+  String get taxonomy_superregnum => "dominio";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "Mongolia";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "América del oeste occidental";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Cerrar";
+  @override
+  String get europe => "Europa";
+  @override
+  String get middle_europe => "Europa central";
+  @override
+  String get color_blue => "azul, púrpura";
+  @override
+  String get my_filter => "Mi filtro";
+  @override
+  String get southern_south_america => "Sur de América del Sur";
+  @override
+  String get plant_habitat => "Localidad";
+  @override
+  String get snack_loading_ad => "El anuncio todavía se está cargando, presione el botón otra vez.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "pétalo";
+  @override
+  String get petal_message => "¿Es la flor zigomorfo? ¿No? Pués, ¿cuántos pétalos tiene?";
+  @override
+  String get color_white => "blanco";
+  @override
+  String get northeastern_usa => "Nordeste de los Estados Unidos";
+  @override
+  String get color_green => "verde, marrón, negro";
+  @override
+  String get taxonomy_ordo => "orden";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "Pacífico";
+  @override
+  String get plant_sources => "Fuentes";
+  @override
+  String get taxonomy_regnum => "reino";
+  @override
+  String get south_central_pacific => "Pacífico Sur-Central";
+  @override
+  String get filter_color => "color";
+  @override
+  String get help => "Ayuda";
+  @override
+  String get mexico => "Méjico";
+  @override
+  String get snack_publish => "... para ser publicado más tarde";
+  @override
+  String get siberia => "Siberia";
+  @override
+  String get taxonomy_subtribus => "subtribu";
+  @override
+  String get product_custom_filter_description => "Podrás cambiar el orden predeterminado y la cantidad de filtros (color, localidad, pétalo, distribución).";
+  @override
+  String get habitat_meadow => "prado o pradera";
+  @override
+  String get plant_trivia => "Trivialidades";
+  @override
+  String get product_purchased => "Comprado";
+  @override
+  String get taxonomy_cladus => "(clado)";
+  @override
+  String get plant_herbalism => "Herboristería";
+  @override
+  String get plant_height_to => "hasta";
+  @override
+  String get offline_download => "Descarga hoja de vida";
+  @override
+  String get enhancements => "Mejoras";
+  @override
+  String get habitat_wetland => "páramo o pantano";
+  @override
+  String get product_restore_purchases => "Restaurar las compras";
+  @override
+  String get feedback_title => "Cómo contribuir";
+  @override
+  String get toxicity2 => "planta ligeramente venenosa";
+  @override
+  String get toxicity1 => "planta venenosa";
+  @override
+  String get eastern_canada => "Este de Canadá";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Mostrar texto traducido";
+  @override
+  String get habitat_tree => "árboles o arbustos";
+  @override
+  String get settings => "Configuración";
+  @override
+  String get color_red => "rojo, roso";
+  @override
+  String get north_central_pacific => "Pacífico Norte-Central";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Africa del Sur";
+  @override
+  String get always_my_region_title => "Siempre agregue mi región al filtro";
+  @override
+  String get color_yellow => "amarillo";
+  @override
+  String get subantarctic_islands => "Islas Subantárticas";
+  @override
+  String get list_info => "Elige una";
+  @override
+  String get new_version => "La nueva versión está disponible, por favor actualice.";
+  @override
+  String get taxonomy_subfamilia => "subfamilia";
+  @override
+  String get my_region => "Mi región";
+  @override
+  String get pause => "Pausa";
+  @override
+  String get indian_subcontinent => "Subcontinente indio";
+  @override
+  String get product_offline_description => "Podrás ejecutar la aplicación sin conexión a internet.";
+  @override
+  String get plant_flower => "Flores";
+  @override
+  String get filter_habitat => "localidad";
+  @override
+  String get rate_never => "Nunca";
+  @override
+  String get northwestern_pacific => "Noroeste del Pacífico";
+  @override
+  String get search_names => "Buscar en nombres";
+  @override
+  String get southwestern_europe => "Sudoeste de Europa";
+  @override
+  String get taxonomy_species => "especie";
+  @override
+  String get plant_fruit => "Fruta";
+  @override
+  String get plant_flowering_to => "hasta";
+  @override
+  String get taxonomy_familia => "familia";
+  @override
+  String get plant_stem => "Tallo";
+  @override
+  String get antarctic_continent => "Continente Antártico";
+  @override
+  String get no => "No";
+  @override
+  String get brazil => "Brasil";
+  @override
+  String get rate_text => "Al autor de esta aplicación le motivan las reacciones positivas de los usuarios. Mándele, por favor, unas flores de la estrella a través de la tienda de aplicaciones.";
+  @override
+  String get eastern_europe => "Europa del Este";
+  @override
+  String get south_central_usa => "Central sur de los Estados Unidos";
+  @override
+  String get offline_download_success => "Fotos e ilustraciones han sido descargadas exitosamente.";
+  @override
+  String get plant_flowering_from => "Floración desde";
+  @override
+  String get taxonomy_tribus => "tribu";
+  @override
+  String get arabian_peninsula => "Península Arabica";
+  @override
+  String get search_taxonomy => "Buscar en taxonomía";
+  @override
+  String get rate_later => "Más tarde";
+  @override
+  String get color_message => "¿Cuál es el color de la flor? Elige el más cercano. Puedes volver a cambiar la selección cuando sea.";
+  @override
+  String get west_tropical_africa => "África tropical occidental";
+  @override
+  String get northern_europe => "Norte de Europa";
+  @override
+  String get rate => "Opinione";
+  @override
+  String get northeast_tropical_africa => "Noreste de África Tropical";
+  @override
+  String get pref_language => "Idioma preferido";
+  @override
+  String get product_custom_filter_title => "Filtro personalizado";
+  @override
+  String get new_zealand => "Nueva Zelanda";
+  @override
+  String get feedback_intro => "Ha estado contribuyendo a esta aplicación desde que la ha instalado en su dispositivo, gracias. Si está buscando algo más, aquí hay algunas opciones:";
+  @override
+  String get filter_distribution => "distribución";
+  @override
+  String get eastern_asia => "Asia Oriental";
+  @override
+  String get western_asia => "Asia occidental";
+  @override
+  String get subarctic_america => "América Subártica";
+  @override
+  String get product_search_title => "Búsqueda en nombres o taxonomía";
+  @override
+  String get feedback_buy_extended => "Puede comprar la versión extendida (+) con funcionalidad adicional como el modo fuera de línea, buscar en nombres, buscar en taxonomía, observaciones y filtros configurables.";
+  @override
+  String get north_central_usa => "Norte central de los Estados Unidos";
+  @override
+  String get improve_translation => "Mejorar la traducción";
+  @override
+  String get feedback_review => "Puedes escribir una crítica positiva.";
+  @override
+  String get southeastern_usa => "Sudeste de los Estados Unidos";
+  @override
+  String get yes => "Sí";
+  @override
+  String get feedback_run_ads_video => "Ver un video publicitario";
+  @override
+  String get plant_height_from => "Altura desde";
+  @override
+  String get petal_many => "más de 5";
+  @override
+  String get southeastern_europe => "Sudorientale de Europa";
+  @override
+  String get taxonomy_unknown => "desconocido";
+  @override
+  String get plant_inflorescence => "Inflorescencia";
+  @override
+  String get northern_africa => "Africa del Norte";
+  @override
+  String get offline_subtitle => "requiere espacio adicional de 300 MB.";
+  @override
+  String get china => "China";
+  @override
+  String get product_no_ads_title => "No hay publicidad no deseada";
+  @override
+  String get offline_title => "Modo offline";
+  @override
+  String get petal_zygomorphic => "zigomorfo";
+  @override
+  String get taxonomy_genus => "género";
+  @override
+  String get papuasia => "Papuasia";
+  @override
+  String get feedback_submit_translate_app => "Mejorar las etiquetas de la aplicación.";
+}
+
+class $nl_NL extends S {
+  const $nl_NL();
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -11376,43 +6175,5260 @@ class $nl extends S {
   String get feedback_submit_translate_app => "Verbeter de kopjes in de app";
 }
 
+class $pa_IN extends S {
+  const $pa_IN();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "ਮੱਧ ਅਮਰੀਕਾ";
+  @override
+  String get legend => "ਦੰਤਕਥਾ";
+  @override
+  String get product_offline_title => "ਔਫਲਾਈਨ ਮੋਡ";
+  @override
+  String get feedback_submit_translate_data => "ਫੁੱਲ ਦਾ ਡਾਟਾ ਸੁਧਾਰੋ";
+  @override
+  String get snack_copy => "ਕਲਿੱਪਬੋਰਡ ਤੇ ਕਾਪੀ ਕੀਤਾ ਗਿਆ";
+  @override
+  String get product_purchase_failed => "ਖਰੀਦ ਫੇਲ੍ਹ ਹੋਈ";
+  @override
+  String get about => "ਇਸ ਬਾਰੇ";
+  @override
+  String get product_no_ads_description => "ਐਪਲੀਕੇਸ਼ਨ ਸਕ੍ਰੀਨ ਦੇ ਤਲ 'ਤੇ ਇਸ਼ਤਿਹਾਰ ਬੈਨਰ ਨਹੀਂ ਦਿਖਾਏਗੀ.";
+  @override
+  String get offline_download_progress => "ਫੋਟੋਆਂ ਅਤੇ ਵਰਣਨ ਡਾਊਨਲੋਡ ਕਰ ਰਿਹਾ ਹੈ ...";
+  @override
+  String get western_canada => "ਪੱਛਮੀ ਕੈਨੇਡਾ";
+  @override
+  String get northern_america => "ਉੱਤਰੀ ਅਮਰੀਕਾ";
+  @override
+  String get western_indian_ocean => "ਪੱਛਮੀ ਹਿੰਦ ਮਹਾਂਸਾਗਰ";
+  @override
+  String get feedback => "ਸੁਝਾਅ";
+  @override
+  String get southwestern_usa => "ਦੱਖਣੀ ਪੱਛਮੀ ਅਮਰੀਕਾ";
+  @override
+  String get distribution_message => "ਕਿਹੜੇ ਭੂਗੋਲਿਕ ਖੇਤਰ 'ਤੇ ਸਾਨੂੰ ਧਿਆਨ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ?";
+  @override
+  String get caribbean => "ਕੈਰੀਬੀਅਨ";
+  @override
+  String get product_search_description => "ਤੁਸੀਂ ਇਸਦੇ ਲਾਤੀਨੀ ਨਾਮ ਦੁਆਰਾ ਜਾਂ ਇਸਦੇ ਟੈਕਸੋਂ ਦੁਆਰਾ ਇੱਕ ਫੁੱਲ ਲੱਭਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ (ਜਿਵੇਂ ਤਬਕਾ, ਪਰਿਵਾਰ, ਜਿਣਸ).";
+  @override
+  String get offline_delete_message => "ਕੀ ਤੁਸੀਂ ਔਫਲਾਈਨ ਡਾਟਾ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?";
+  @override
+  String get australasia => "ਆਸਟ੍ਰੇਲੀਆ";
+  @override
+  String get petal_4 => "4 ਜਾਂ ਘੱਟ";
+  @override
+  String get east_tropical_africa => "ਪੂਰਬੀ ਤ੍ਰਿਕੋਸ਼ੀ ਅਫਰੀਕਾ";
+  @override
+  String get africa => "ਅਫਰੀਕਾ";
+  @override
+  String get south_tropical_africa => "ਦੱਖਣੀ ਖੰਡੀ ਅਫ਼ਰੀਕਾ";
+  @override
+  String get caucasus => "ਕਾਕੇਸਸ";
+  @override
+  String get middle_asia => "ਮੱਧ ਏਸ਼ੀਆ";
+  @override
+  String get plant_gallery => "ਗੈਲਰੀ";
+  @override
+  String get always_my_region_subtitle => "ਤੁਹਾਡੇ ਖੇਤਰ ਨੂੰ ਫਿਲਟਰ ਤੇ ਪ੍ਰੀ-ਸੈੱਟ ਕੀਤਾ ਜਾਵੇਗਾ";
+  @override
+  String get indochina => "ਇੰਡੋ-ਚਾਈਨਾ";
+  @override
+  String get feedback_translate => "ਪਹਾੜਾਂ ਜਾਂ ਝੂਲਿਆਂ";
+  @override
+  String get australia => "ਆਸਟ੍ਰੇਲੀਆ";
+  @override
+  String get google_translate => "ਆਵਾਸ";
+  @override
+  String get plant_leaf => "ਪੱਤਾ";
+  @override
+  String get habitat_forest => "ਮਦਦ ਕਰੋ";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "ਮਲੇਸ਼ੀਆ";
+  @override
+  String get southwestern_pacific => "ਦੱਖਣੀ ਪੱਛਮੀ ਪੈਸੀਫਿਕ";
+  @override
+  String get asia_tropical => "ਏਸ਼ੀਆ-ਖੰਡੀ";
+  @override
+  String get northwestern_usa => "ਉੱਤਰ ਪੱਛਮੀ ਅਮਰੀਕਾ";
+  @override
+  String get northern_south_america => "ਉੱਤਰੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
+  @override
+  String get show_original => "ਅੰਗ੍ਰੇਜ਼ੀ ਪਾਠ ਦਿਖਾਓ";
+  @override
+  String get offline_download_message => "ਤੁਸੀਂ 300+ ਮੈਬਾ ਫੋਟੋਆਂ ਅਤੇ ਤਸਵੀਰਾਂ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਜਾ ਰਹੇ ਹੋ. ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਹਾਡੀ ਡਿਵਾਈਸ Wi-Fi ਨਾਲ ਕਨੈਕਟ ਕੀਤੀ ਹੋਈ ਹੈ ਜਾਂ ਨਹੀਂ. ਕੀ ਤੁਸੀਂ ਡਾਉਨਲੋਡ ਲਈ ਤਿਆਰ ਹੋ?";
+  @override
+  String get southern_america => "ਦੱਖਣੀ ਅਮਰੀਕਾ";
+  @override
+  String get middle_atlantic_ocean => "ਮੱਧ ਅਟਲਾਂਟਿਕ ਮਹਾਂਸਾਗਰ";
+  @override
+  String get feedback_run_ads => "ਤੁਸੀਂ ਪੂਰੇ ਵਿਵਰਣ ਦੇ ਇਸ਼ਤਿਹਾਰ ਜਾਂ ਹੋਰ ਵਿਕਾਸ ਅਤੇ ਡਾਟਾਬੇਸ ਵਧਾਉਣ ਲਈ ਸਮਰਥਨ ਪ੍ਰਾਪਤ ਵੀਡੀਓ ਵਿਗਿਆਪਨ ਵੇਖ ਸਕਦੇ ਹੋ.";
+  @override
+  String get habitat_garden => "ਪਲਾਂਟ ਦਾ ਦ੍ਰਿਸ਼ਟੀਕੋਣ";
+  @override
+  String get product_purchase => "ਖ਼ਰੀਦੋ";
+  @override
+  String get russian_far_east => "ਰੂਸੀ ਦੂਰ ਪੂਰਬ";
+  @override
+  String get west_central_tropical_africa => "ਵੈਸਟ-ਸੈਂਟਰਲ ਟ੍ਰੌਪੀਕਲ ਅਫਰੀਕਾ";
+  @override
+  String get habitat_message => "ਤੁਹਾਡੇ ਆਲੇ ਦੁਆਲੇ ਕੀ ਹੈ? ਪਲਾਂਟ ਦੇ ਨਿਵਾਸ ਸਥਾਨ ਦੀ ਪਛਾਣ ਕਰੋ";
+  @override
+  String get plant_toxicity => "ਵਸ਼ੈਲਾਪਣ";
+  @override
+  String get offline_download_fail => "ਡਾਊਨਲੋਡ ਅਸਫਲ. ਕਿਰਪਾ ਕਰਕੇ ਡਿਵਾਈਸ ਤੇ ਆਪਣੇ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਜਾਂ ਖਾਲੀ ਸਪੇਸ ਦੀ ਜਾਂਚ ਕਰੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ.";
+  @override
+  String get snack_no_flowers => "ਕੋਈ ਫੁੱਲ ਮਾਪਣ ਦੇ ਮਾਪਦੰਡ ਨਹੀਂ.";
+  @override
+  String get rate_question => "ਕੀ ਇਹ ਐਪ ਉਪਯੋਗੀ ਹੈ?";
+  @override
+  String get macaronesia => "ਮੈਕਰੋਨੀਆਸੀਆ";
+  @override
+  String get plant_taxonomy => "ਟੈਕਸੌਮੋਰੀ";
+  @override
+  String get feedback_run_ads_fullscreen => "ਇੱਕ ਪੂਰੀ ਸਕ੍ਰੀਨ ਵਿਗਿਆਪਨ ਦਿਖਾਓ";
+  @override
+  String get asia_temperate => "ਏਸ਼ੀਆ-ਤਾਪਤਾ";
+  @override
+  String get search => "ਖੋਜ ...";
+  @override
+  String get habitat_rock => "ਇਕ ਚੁਣੋ";
+  @override
+  String get taxonomy_superregnum => "Domain";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "ਮੰਗੋਲੀਆ";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "ਪੱਛਮੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
+  @override
+  String get taxonomy_subgenus => "ਉੱਪ-ਜਿਨਸ";
+  @override
+  String get close => "ਬੰਦ ਕਰੋ";
+  @override
+  String get europe => "ਯੂਰਪ";
+  @override
+  String get middle_europe => "ਮੱਧ ਯੂਰਪ";
+  @override
+  String get color_blue => "ਨੀਲਾ, ਜਾਮਨੀ";
+  @override
+  String get my_filter => "ਮੇਰੇ ਫਿਲਟਰ";
+  @override
+  String get southern_south_america => "ਦੱਖਣੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
+  @override
+  String get plant_habitat => "ਆਵਾਸ";
+  @override
+  String get snack_loading_ad => "ਵਿਗਿਆਪਨ ਅਜੇ ਵੀ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ, ਦੁਬਾਰਾ ਬਟਨ ਦਬਾਓ";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "ਪੱਟੇਲ";
+  @override
+  String get petal_message => "ਕੀ ਫੁੱਲ ਬਿਸਮਮੈਟਿਕ ਹੈ? ਨਹੀਂ? ਫੇਰ ਕਿੰਨੇ ਫੁੱਲ ਹੁੰਦੇ ਹਨ?";
+  @override
+  String get color_white => "ਚਿੱਟਾ";
+  @override
+  String get northeastern_usa => "ਉੱਤਰ-ਪੂਰਬ ਅਮਰੀਕਾ";
+  @override
+  String get color_green => "ਹਰਾ, ਭੂਰੇ, ਕਾਲਾ";
+  @override
+  String get taxonomy_ordo => "ਤਬਕਾ";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "ਪ੍ਰਸ਼ਾਂਤ ਮਹਾਸਾਗਰ";
+  @override
+  String get plant_sources => "ਸਰੋਤ";
+  @override
+  String get taxonomy_regnum => "ਜਗਤ";
+  @override
+  String get south_central_pacific => "ਦੱਖਣੀ-ਕੇਂਦਰੀ ਪੈਸੀਫਿਕ";
+  @override
+  String get filter_color => "ਰੰਗ";
+  @override
+  String get help => "ਮਦਦ ਕਰੋ";
+  @override
+  String get mexico => "ਮੈਕਸੀਕੋ";
+  @override
+  String get snack_publish => "... ਬਾਅਦ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤੇ ਜਾਣ ਲਈ";
+  @override
+  String get siberia => "ਸਾਇਬੇਰੀਆ";
+  @override
+  String get taxonomy_subtribus => "Subtribe";
+  @override
+  String get product_custom_filter_description => "ਤੁਸੀਂ ਡਿਫਾਲਟ ਆਰਡਰ ਅਤੇ ਫਿਲਟਰਸ ਦੀ ਗਿਣਤੀ (ਰੰਗ, ਆਵਾਸ, ਪੱਟੇਲ, ਵੰਡ) ਨੂੰ ਬਦਲਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ.";
+  @override
+  String get habitat_meadow => "ਅਨੁਵਾਦ ਸੁਧਾਰੋ";
+  @override
+  String get plant_trivia => "ਟ੍ਰਿਜੀਆ";
+  @override
+  String get product_purchased => "ਖਰੀਦਿਆ";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "ਹਰਬਲਿਜ਼ਮ";
+  @override
+  String get plant_height_to => "ਤੱਕ";
+  @override
+  String get offline_download => "ਡਾਊਨਲੋਡ ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ";
+  @override
+  String get enhancements => "ਸੁਧਾਰ";
+  @override
+  String get habitat_wetland => "ਪਹਾੜਾਂ ਜਾਂ ਝੂਲਿਆਂ";
+  @override
+  String get product_restore_purchases => "ਖ਼ਰੀਦਾਂ ਨੂੰ ਰੀਸਟੋਰ ਕਰੋ";
+  @override
+  String get feedback_title => "ਰੁੱਖ ਜਾਂ ਬੂਟੇ";
+  @override
+  String get toxicity2 => "ਥੋੜ੍ਹਾ ਜ਼ਹਿਰੀਲਾ ਪੌਦਾ";
+  @override
+  String get toxicity1 => "ਜ਼ਹਿਰੀਲਾ ਪੌਦਾ";
+  @override
+  String get eastern_canada => "ਪੂਰਬੀ ਕੈਨੇਡਾ";
+  @override
+  String get plant_info => "ਜਾਣਕਾਰੀ";
+  @override
+  String get show_translation => "ਅਨੁਵਾਦ ਕੀਤਾ ਟੈਕਸਟ ਦਿਖਾਉ";
+  @override
+  String get habitat_tree => "ਰੁੱਖ ਜਾਂ ਬੂਟੇ";
+  @override
+  String get settings => "ਸੈਟਿੰਗਜ਼";
+  @override
+  String get color_red => "ਲਾਲ, ਗੁਲਾਬੀ";
+  @override
+  String get north_central_pacific => "ਉੱਤਰੀ-ਕੇਂਦਰੀ ਪੈਸੀਫਿਕ";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "ਦੱਖਣੀ ਅਫਰੀਕਾ";
+  @override
+  String get always_my_region_title => "ਹਮੇਸ਼ਾਂ ਫਿਲਟਰ ਨੂੰ ਮੇਰਾ ਖੇਤਰ ਜੋੜੋ";
+  @override
+  String get color_yellow => "ਪੀਲਾ";
+  @override
+  String get subantarctic_islands => "ਸਬਾਨਟਾਰਕਟਿਕਾ ਆਈਲੈਂਡਜ਼";
+  @override
+  String get list_info => "ਇਕ ਚੁਣੋ";
+  @override
+  String get new_version => "ਨਵਾਂ ਵਰਜਨ ਉਪਲਬਧ ਹੈ, ਕਿਰਪਾ ਕਰਕੇ ਅਪਡੇਟ ਕਰੋ.";
+  @override
+  String get taxonomy_subfamilia => "ਉੱਪ-ਪਰਿਵਾਰ";
+  @override
+  String get my_region => "ਮੇਰਾ ਖੇਤਰ";
+  @override
+  String get pause => "ਰੋਕੋ";
+  @override
+  String get indian_subcontinent => "ਭਾਰਤੀ ਉਪ ਮਹਾਂਦੀਪ";
+  @override
+  String get product_offline_description => "ਤੁਸੀਂ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਤੋਂ ਬਿਨਾਂ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਚਲਾਉਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ.";
+  @override
+  String get plant_flower => "ਫੁੱਲ";
+  @override
+  String get filter_habitat => "ਆਵਾਸ";
+  @override
+  String get rate_never => "ਕਦੇ ਨਹੀਂ";
+  @override
+  String get northwestern_pacific => "ਉੱਤਰੀ ਪੱਛਮੀ ਪੈਸੀਫਿਕ";
+  @override
+  String get search_names => "ਨਾਮਾਂ ਵਿੱਚ ਖੋਜ ਕਰੋ";
+  @override
+  String get southwestern_europe => "ਦੱਖਣ ਪੱਛਮੀ ਯੂਰਪ";
+  @override
+  String get taxonomy_species => "ਸਪੀਸੀਜ਼";
+  @override
+  String get plant_fruit => "ਫਲ";
+  @override
+  String get plant_flowering_to => "ਤੱਕ";
+  @override
+  String get taxonomy_familia => "ਪਰਿਵਾਰ";
+  @override
+  String get plant_stem => "ਸਟੈਮ";
+  @override
+  String get antarctic_continent => "ਅੰਟਾਰਕਟਿਕਾ ਮਹਾਂਦੀਪ";
+  @override
+  String get no => "ਨਹੀਂ";
+  @override
+  String get brazil => "ਬ੍ਰਾਜ਼ੀਲ";
+  @override
+  String get rate_text => "ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਲੇਖਕ, ਯੂਜ਼ਰਸ ਦੁਆਰਾ ਸਕਾਰਾਤਮਕ ਜਵਾਬ ਦੁਆਰਾ ਪ੍ਰੇਰਿਤ ਹੁੰਦਾ ਹੈ. ਕਿਰਪਾ ਕਰਕੇ ਉਸਨੂੰ ਐਪਲ ਸਟੋਰ ਦੇ ਰਾਹੀਂ ਕੁਝ ਸਟਾਰ ਭੇਜੋ.";
+  @override
+  String get eastern_europe => "ਪੂਰਬੀ ਯੂਰਪ";
+  @override
+  String get south_central_usa => "ਦੱਖਣੀ-ਕੇਂਦਰੀ ਅਮਰੀਕਾ";
+  @override
+  String get offline_download_success => "ਫੋਟੋਆਂ ਅਤੇ ਦ੍ਰਿਸ਼ਟੀਕੋਣ ਸਫਲਤਾਪੂਰਵਕ ਡਾਊਨਲੋਡ ਕੀਤੇ ਗਏ.";
+  @override
+  String get plant_flowering_from => "ਫੁਲਿੰਗ";
+  @override
+  String get taxonomy_tribus => "ਕਬੀਲਾ";
+  @override
+  String get arabian_peninsula => "ਅਰਬੀ ਪ੍ਰਾਇਦੀਪ";
+  @override
+  String get search_taxonomy => "ਟੈਕਸੋਨੀਟੀ ਵਿੱਚ ਖੋਜ ਕਰੋ";
+  @override
+  String get rate_later => "ਬਾਅਦ ਵਿਚ";
+  @override
+  String get color_message => "ਫੁੱਲ ਦਾ ਰੰਗ ਕਿਹੜਾ ਹੈ? ਸਭ ਤੋਂ ਨਜ਼ਦੀਕੀ ਚੁਣੋ";
+  @override
+  String get west_tropical_africa => "ਪੱਛਮੀ ਖੰਡੀ ਅਫ਼ਰੀਕਾ";
+  @override
+  String get northern_europe => "ਉੱਤਰੀ ਯੂਰਪ";
+  @override
+  String get rate => "ਸਮੀਖਿਆ";
+  @override
+  String get northeast_tropical_africa => "ਨਾਰਥ ਈਸਟ ਟ੍ਰੌਪੀਕਲ ਅਫਰੀਕਾ";
+  @override
+  String get pref_language => "ਤਰਜੀਹੀ ਭਾਸ਼ਾ";
+  @override
+  String get product_custom_filter_title => "ਕਸਟਮ ਫਿਲਟਰ";
+  @override
+  String get new_zealand => "ਨਿਊਜ਼ੀਲੈਂਡ";
+  @override
+  String get feedback_intro => "ਤੁਸੀਂ ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾ ਰਹੇ ਹੋ ਕਿਉਂਕਿ ਤੁਸੀਂ ਇਸ ਨੂੰ ਆਪਣੀ ਡਿਵਾਈਸ ਤੇ ਇੰਸਟਾਲ ਕੀਤਾ ਹੈ, ਧੰਨਵਾਦ. ਜੇ ਤੁਸੀਂ ਕੁਝ ਹੋਰ ਦੀ ਭਾਲ ਕਰ ਰਹੇ ਹੋ, ਇੱਥੇ ਕੁਝ ਵਿਕਲਪ ਹਨ:";
+  @override
+  String get filter_distribution => "ਵੰਡ";
+  @override
+  String get eastern_asia => "ਪੂਰਬੀ ਏਸ਼ੀਆ";
+  @override
+  String get western_asia => "ਪੱਛਮੀ ਏਸ਼ੀਆ";
+  @override
+  String get subarctic_america => "ਸੁਬਰਟਿਕ ਅਮਰੀਕਾ";
+  @override
+  String get product_search_title => "ਨਾਮਾਂ ਜਾਂ ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਲੱਭੋ";
+  @override
+  String get feedback_buy_extended => "ਤੁਸੀਂ ਅਤਿਰਿਕਤ ਫੰਕਸ਼ਨ ਜਿਵੇਂ ਐੱਮਲਾਈਨ ਮੋਡ, ਐਕਸਟੈਨਸ਼ਨ, ਨਾਮਾਂ ਦੀ ਖੋਜ, ਟੈਕਸਸੋਨੀਓ ਵਿੱਚ ਖੋਜ, ਨਿਰੀਖਣ ਅਤੇ ਕਨਫ਼ੀਗਰੇਬਲ ਫਿਲਟਰ ਨਾਲ ਐਕਸਟੈਂਡਡ ਵਰਜ਼ਨ ਖਰੀਦ ਸਕਦੇ ਹੋ.";
+  @override
+  String get north_central_usa => "ਉੱਤਰੀ-ਕੇਂਦਰੀ ਅਮਰੀਕਾ";
+  @override
+  String get improve_translation => "ਅਨੁਵਾਦ ਸੁਧਾਰੋ";
+  @override
+  String get feedback_review => "ਤੁਸੀਂ ਇੱਕ ਸਕਾਰਾਤਮਕ ਸਮੀਖਿਆ ਲਿਖ ਸਕਦੇ ਹੋ.";
+  @override
+  String get southeastern_usa => "ਦੱਖਣੀ-ਪੂਰਬੀ ਅਮਰੀਕਾ";
+  @override
+  String get yes => "ਹਾਂ";
+  @override
+  String get feedback_run_ads_video => "ਇੱਕ ਵੀਡੀਓ ਵਿਗਿਆਪਨ ਦੇਖੋ";
+  @override
+  String get plant_height_from => "ਦੀ ਉਚਾਈ ਤੋਂ";
+  @override
+  String get petal_many => "5 ਤੋਂ ਵੱਧ";
+  @override
+  String get southeastern_europe => "ਦੱਖਣ ਯੂਰਪ";
+  @override
+  String get taxonomy_unknown => "ਅਣਜਾਣ";
+  @override
+  String get plant_inflorescence => "ਫੁਲੋਰੇਸੈਂਸ";
+  @override
+  String get northern_africa => "ਉੱਤਰੀ ਅਫ਼ਰੀਕਾ";
+  @override
+  String get offline_subtitle => "300+ ਮੈਬਾ ਵਾਧੂ ਜਗ੍ਹਾ ਦੀ ਲੋੜ ਹੈ";
+  @override
+  String get china => "ਚੀਨ";
+  @override
+  String get product_no_ads_title => "ਕੋਈ ਅਣਚਾਹੇ ਇਸ਼ਤਿਹਾਰ";
+  @override
+  String get offline_title => "ਔਫਲਾਈਨ ਮੋਡ";
+  @override
+  String get petal_zygomorphic => "ਅਨਿਯਮਿਤ";
+  @override
+  String get taxonomy_genus => "ਜਿਣਸ";
+  @override
+  String get papuasia => "ਪੇਪੂਸੀਆ";
+  @override
+  String get feedback_submit_translate_app => "ਐਪਲੀਕੇਸ਼ਨ ਦੇ ਲੇਬਲ ਨੂੰ ਬਿਹਤਰ ਬਣਾਓ";
+}
+
+class $sv_SE extends S {
+  const $sv_SE();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Centralamerika";
+  @override
+  String get legend => "Legend";
+  @override
+  String get product_offline_title => "Offlineläge";
+  @override
+  String get feedback_submit_translate_data => "Förbättra blommans data";
+  @override
+  String get snack_copy => "Kopieras till Urklipp";
+  @override
+  String get product_purchase_failed => "Köp misslyckades";
+  @override
+  String get about => "Om ansökan";
+  @override
+  String get product_no_ads_description => "Applikationen visar inte annonsbannern längst ner på skärmen.";
+  @override
+  String get offline_download_progress => "Ladda ner bilder och illustrationer ...";
+  @override
+  String get western_canada => "Västra Kanada";
+  @override
+  String get northern_america => "Nordamerika";
+  @override
+  String get western_indian_ocean => "Västra indiska oceanen";
+  @override
+  String get feedback => "Återkoppling";
+  @override
+  String get southwestern_usa => "Sydvästra USA";
+  @override
+  String get distribution_message => "Vilket geografiskt område ska vi fokusera på?";
+  @override
+  String get caribbean => "Karibisk";
+  @override
+  String get product_search_description => "Du kan hitta en blomma med sitt svenska eller latinska namn eller dess taxon (t ex ordning, familj, släkt).";
+  @override
+  String get offline_delete_message => "Vill du radera offline-data?";
+  @override
+  String get australasia => "Australasien";
+  @override
+  String get petal_4 => "4 eller mindre";
+  @override
+  String get east_tropical_africa => "Östra tropiska Afrika";
+  @override
+  String get africa => "Afrika";
+  @override
+  String get south_tropical_africa => "Södra tropiska Afrika";
+  @override
+  String get caucasus => "Kaukasus";
+  @override
+  String get middle_asia => "Mellanöstern Asien";
+  @override
+  String get plant_gallery => "Galleri";
+  @override
+  String get always_my_region_subtitle => "Din region kommer att förinställas till filtret";
+  @override
+  String get indochina => "Indokina";
+  @override
+  String get feedback_translate => "Du kan rapportera eventuellt typsnitt eller misstag du hittat eller skicka in ny översättning på ditt språk.";
+  @override
+  String get australia => "Australien";
+  @override
+  String get google_translate => "Översatt med Google Translate";
+  @override
+  String get plant_leaf => "Bladen";
+  @override
+  String get habitat_forest => "skogar";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Malesien";
+  @override
+  String get southwestern_pacific => "Sydvästra Stilla havet";
+  @override
+  String get asia_tropical => "Asien Tropical";
+  @override
+  String get northwestern_usa => "Nordvästra USA";
+  @override
+  String get northern_south_america => "Norra Sydamerika";
+  @override
+  String get show_original => "Visa engelsk text";
+  @override
+  String get offline_download_message => "Du ska ladda ner 300+ MB bilder och illustrationer. Kontrollera om enheten är ansluten till Wi-Fi. Är du redo för nedladdning?";
+  @override
+  String get southern_america => "Sydamerika";
+  @override
+  String get middle_atlantic_ocean => "Mellanöstern Atlanten";
+  @override
+  String get feedback_run_ads => "Du kan visa helskärmsannons eller titta på videoannonsering för att stödja ytterligare utveckling och databasförbättring.";
+  @override
+  String get habitat_garden => "trädgårdar eller fält";
+  @override
+  String get product_purchase => "Köpa";
+  @override
+  String get russian_far_east => "Ryska Fjärran Östern";
+  @override
+  String get west_central_tropical_africa => "Västra central tropiska Afrika";
+  @override
+  String get habitat_message => "Vad handlar du om? Identifiera växtens livsmiljö.";
+  @override
+  String get plant_toxicity => "Giftighet";
+  @override
+  String get offline_download_fail => "Nedladdning misslyckad. Kontrollera din internetanslutning eller ledigt utrymme på enheten och försök igen.";
+  @override
+  String get snack_no_flowers => "Inga blommor matchande kriterier.";
+  @override
+  String get rate_question => "Är det här programmet användbart?";
+  @override
+  String get macaronesia => "Makaronesien";
+  @override
+  String get plant_taxonomy => "Taxonomi";
+  @override
+  String get feedback_run_ads_fullscreen => "Visa en fullskärmsannons";
+  @override
+  String get asia_temperate => "Asien Temperate";
+  @override
+  String get search => "Sök...";
+  @override
+  String get habitat_rock => "stenar eller berg";
+  @override
+  String get taxonomy_superregnum => "Domän";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "Mongoliet";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "Västra Sydamerika";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Stänga";
+  @override
+  String get europe => "Europa";
+  @override
+  String get middle_europe => "Mellanöstern Europa";
+  @override
+  String get color_blue => "blå, lila";
+  @override
+  String get my_filter => "Mitt filter";
+  @override
+  String get southern_south_america => "Södra Sydamerika";
+  @override
+  String get plant_habitat => "Växtplats";
+  @override
+  String get snack_loading_ad => "Annonsen laddas fortfarande, tryck på knappen igen.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "kronblad";
+  @override
+  String get petal_message => "Är blomman zygomorf? Nej? Hur många kronblad har det då?";
+  @override
+  String get color_white => "vit";
+  @override
+  String get northeastern_usa => "Nordöstra USA";
+  @override
+  String get color_green => "grön, brun, svart";
+  @override
+  String get taxonomy_ordo => "Ordning";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "Stilla havet";
+  @override
+  String get plant_sources => "Referenser";
+  @override
+  String get taxonomy_regnum => "Rike";
+  @override
+  String get south_central_pacific => "Syd centrala Stilla havet";
+  @override
+  String get filter_color => "färg";
+  @override
+  String get help => "Hjäjp";
+  @override
+  String get mexico => "Mexico";
+  @override
+  String get snack_publish => "... att publiceras senare";
+  @override
+  String get siberia => "Sibirien";
+  @override
+  String get taxonomy_subtribus => "Undertribus";
+  @override
+  String get product_custom_filter_description => "Du kan ändra standardordning och antal filter (färg, växtplats, kronblad, distribution).";
+  @override
+  String get habitat_meadow => "ängar eller gräsmarker";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get product_purchased => "Köpt";
+  @override
+  String get taxonomy_cladus => "(klad)";
+  @override
+  String get plant_herbalism => "Medicinalväxt";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Återuppta nedladdning";
+  @override
+  String get enhancements => "Förbättringar";
+  @override
+  String get habitat_wetland => "hedar eller våtmarker";
+  @override
+  String get product_restore_purchases => "Återställa köp";
+  @override
+  String get feedback_title => "Hur man bidrar";
+  @override
+  String get toxicity2 => "något giftig växt";
+  @override
+  String get toxicity1 => "giftig växt";
+  @override
+  String get eastern_canada => "Östra Kanada";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Visa översatt text";
+  @override
+  String get habitat_tree => "träd eller buskar";
+  @override
+  String get settings => "Inställningar";
+  @override
+  String get color_red => "rött, rosa";
+  @override
+  String get north_central_pacific => "Norra centrala Stilla havet";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Södra Afrika";
+  @override
+  String get always_my_region_title => "Lägg alltid till min region i filtret";
+  @override
+  String get color_yellow => "gul";
+  @override
+  String get subantarctic_islands => "Subantarctic Islands";
+  @override
+  String get list_info => "Välj en";
+  @override
+  String get new_version => "Ny version finns tillgänglig, uppdatera.";
+  @override
+  String get taxonomy_subfamilia => "Underfamilj";
+  @override
+  String get my_region => "Min region";
+  @override
+  String get pause => "Paus";
+  @override
+  String get indian_subcontinent => "Indiska subkontinenten";
+  @override
+  String get product_offline_description => "Du kan köra program utan internetanslutning.";
+  @override
+  String get plant_flower => "Blomma";
+  @override
+  String get filter_habitat => "växtplats";
+  @override
+  String get rate_never => "Aldrig";
+  @override
+  String get northwestern_pacific => "Nordvästra Stilla havet";
+  @override
+  String get search_names => "Sök i namn";
+  @override
+  String get southwestern_europe => "Sydvästra Europa";
+  @override
+  String get taxonomy_species => "Art";
+  @override
+  String get plant_fruit => "Frukten";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Familj";
+  @override
+  String get plant_stem => "Stjälk";
+  @override
+  String get antarctic_continent => "Antarktis kontinent";
+  @override
+  String get no => "Nej";
+  @override
+  String get brazil => "Brasilien";
+  @override
+  String get rate_text => "Författaren till denna ansökan motiveras av positivt svar från användarna. Vänligen skicka honom några stjärnor genom applikationsbutiken.";
+  @override
+  String get eastern_europe => "Östeuropa";
+  @override
+  String get south_central_usa => "Syd-Central USA";
+  @override
+  String get offline_download_success => "Bilder och illustrationer har laddats ner.";
+  @override
+  String get plant_flowering_from => "Blomningstid";
+  @override
+  String get taxonomy_tribus => "Tribus";
+  @override
+  String get arabian_peninsula => "Arabiska halvön";
+  @override
+  String get search_taxonomy => "Sök i taxonomi";
+  @override
+  String get rate_later => "Senare";
+  @override
+  String get color_message => "Vad är blommans färg? Välj den närmaste.";
+  @override
+  String get west_tropical_africa => "Västra tropiska Afrika";
+  @override
+  String get northern_europe => "Norra Europa";
+  @override
+  String get rate => "Recensioner";
+  @override
+  String get northeast_tropical_africa => "Nordöstra tropiska Afrika";
+  @override
+  String get pref_language => "Önskat språk";
+  @override
+  String get product_custom_filter_title => "Anpassat filter";
+  @override
+  String get new_zealand => "Nya Zeeland";
+  @override
+  String get feedback_intro => "Du har bidragit till den här applikationen eftersom du har installerat den på din enhet, tack. Om du letar efter något mer, här är några alternativ:";
+  @override
+  String get filter_distribution => "distribution";
+  @override
+  String get eastern_asia => "Östra asien";
+  @override
+  String get western_asia => "Västra Asien";
+  @override
+  String get subarctic_america => "Subarctic Amerika";
+  @override
+  String get product_search_title => "Sök i namn eller taxonomi";
+  @override
+  String get feedback_buy_extended => "Du kan köpa utökad version med ytterligare funktioner som offline-läge, sök i namn, sök i taxonomi, observationer och konfigurerbart filter.";
+  @override
+  String get north_central_usa => "Nord-Central USA";
+  @override
+  String get improve_translation => "Förbättra translation";
+  @override
+  String get feedback_review => "Du kan skriva en positiv recension.";
+  @override
+  String get southeastern_usa => "Sydöstra USA";
+  @override
+  String get yes => "Ja";
+  @override
+  String get feedback_run_ads_video => "Titta på en videoannons";
+  @override
+  String get plant_height_from => "Höjd";
+  @override
+  String get petal_many => "mer än 5";
+  @override
+  String get southeastern_europe => "Sydöstra Europa";
+  @override
+  String get taxonomy_unknown => "okänd";
+  @override
+  String get plant_inflorescence => "Blomställning";
+  @override
+  String get northern_africa => "Nordafrika";
+  @override
+  String get offline_subtitle => "kräver 300 + MB extra utrymme.";
+  @override
+  String get china => "Kina";
+  @override
+  String get product_no_ads_title => "Ingen oönskad annonsering";
+  @override
+  String get offline_title => "Offlineläge";
+  @override
+  String get petal_zygomorphic => "zygomorf";
+  @override
+  String get taxonomy_genus => "Släkte";
+  @override
+  String get papuasia => "Papuasien";
+  @override
+  String get feedback_submit_translate_app => "Förbättra programmets etiketter";
+}
+
+class $da_DK extends S {
+  const $da_DK();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Mellemamerika";
+  @override
+  String get legend => "Legende";
+  @override
+  String get product_offline_title => "Offline-tilstand";
+  @override
+  String get snack_copy => "Kopieret til udklipsholderen";
+  @override
+  String get product_purchase_failed => "Køb mislykkedes";
+  @override
+  String get about => "Om ansøgning";
+  @override
+  String get product_no_ads_description => "Programmet viser ikke reklamebanner nederst på skærmen.";
+  @override
+  String get offline_download_progress => "Downloadning af billeder og illustrationer ...";
+  @override
+  String get western_canada => "Vestlige Canada";
+  @override
+  String get northern_america => "Nordamerika";
+  @override
+  String get western_indian_ocean => "Vestlige indiske ocean";
+  @override
+  String get feedback => "Feedback";
+  @override
+  String get southwestern_usa => "Sydvestlige USA";
+  @override
+  String get distribution_message => "Hvilket geografisk område skal vi fokusere på?";
+  @override
+  String get caribbean => "Caribien";
+  @override
+  String get product_search_description => "Du kan finde en blomst ved sit danske eller latinske navn eller ved dets taxon (fx ordo, familie, slægt).";
+  @override
+  String get offline_delete_message => "Vil du slette offline data?";
+  @override
+  String get australasia => "Australasien";
+  @override
+  String get petal_4 => "4 eller mindre";
+  @override
+  String get east_tropical_africa => "Øst tropiske Afrika";
+  @override
+  String get africa => "Afrika";
+  @override
+  String get south_tropical_africa => "Syd tropiske Afrika";
+  @override
+  String get caucasus => "Kaukasus";
+  @override
+  String get middle_asia => "Mellemasien";
+  @override
+  String get plant_gallery => "Galleri";
+  @override
+  String get always_my_region_subtitle => "Din region vil blive forudindstillet til filteret";
+  @override
+  String get indochina => "Indokina";
+  @override
+  String get feedback_translate => "Du kan rapportere enhver tastatur eller fejl, du har fundet eller indsende ny oversættelse på dit sprog.";
+  @override
+  String get australia => "Australien";
+  @override
+  String get google_translate => "Oversat med Google Translate";
+  @override
+  String get plant_leaf => "Blade";
+  @override
+  String get habitat_forest => "skove";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Malaysia";
+  @override
+  String get southwestern_pacific => "Sydvestlige Stillehavet";
+  @override
+  String get asia_tropical => "Asien-Tropical";
+  @override
+  String get northwestern_usa => "Nordvestlige USA";
+  @override
+  String get northern_south_america => "Nord-Sydamerika";
+  @override
+  String get show_original => "Vis engelske tekst";
+  @override
+  String get offline_download_message => "Du skal downloade 300+ MB billeder og illustrationer. Kontroller, om din enhed er tilsluttet wi-fi. Er du klar til download?";
+  @override
+  String get southern_america => "Sydamerika";
+  @override
+  String get middle_atlantic_ocean => "Mellematlanten";
+  @override
+  String get feedback_run_ads => "Du kan vise fuldskærmsannonce eller se videoannonce for at understøtte yderligere udvikling og databaseforbedring.";
+  @override
+  String get habitat_garden => "haver eller marker";
+  @override
+  String get product_purchase => "Køb";
+  @override
+  String get russian_far_east => "Russiske fjernøsten";
+  @override
+  String get west_central_tropical_africa => "Vest Central tropiske Afrika";
+  @override
+  String get habitat_message => "Hvad er der omkring dig? Identificer plantens levested.";
+  @override
+  String get plant_toxicity => "Toksicitet";
+  @override
+  String get offline_download_fail => "Download fejlede. Kontroller din internetforbindelse eller ledig plads på enheden, og prøv igen.";
+  @override
+  String get snack_no_flowers => "Ingen blomster, der matcher kriterier.";
+  @override
+  String get rate_question => "Er denne app hjælpsom?";
+  @override
+  String get macaronesia => "Makaronesien";
+  @override
+  String get plant_taxonomy => "Taksonomi";
+  @override
+  String get feedback_run_ads_fullscreen => "Vis en fuldscreen reklame";
+  @override
+  String get asia_temperate => "Asien-Tempereret";
+  @override
+  String get search => "Søg...";
+  @override
+  String get habitat_rock => "klipper eller bjerge";
+  @override
+  String get taxonomy_superregnum => "Domæne";
+  @override
+  String get taxonomy_sectio => "Sektion";
+  @override
+  String get mongolia => "Mongoliet";
+  @override
+  String get taxonomy_subserie => "Underserie";
+  @override
+  String get western_south_america => "Vestlige Sydamerika";
+  @override
+  String get taxonomy_subgenus => "Underslægt";
+  @override
+  String get close => "Tæt";
+  @override
+  String get europe => "Europa";
+  @override
+  String get middle_europe => "Mellemeuropa";
+  @override
+  String get color_blue => "blå, lilla";
+  @override
+  String get my_filter => "Mit filter";
+  @override
+  String get southern_south_america => "Sydlige Sydamerika";
+  @override
+  String get plant_habitat => "Vækststeder";
+  @override
+  String get snack_loading_ad => "Annonce er stadig indlæst, tryk igen på knappen.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get petal_message => "Er blomsten zygomorphic? Ingen? Så hvor mange kronblade har det?";
+  @override
+  String get color_white => "hvid";
+  @override
+  String get northeastern_usa => "Nordøstlige USA";
+  @override
+  String get color_green => "grøn, brun, sort";
+  @override
+  String get taxonomy_ordo => "Ordo";
+  @override
+  String get taxonomy_supersectio => "Supersektion";
+  @override
+  String get pacific => "Stillehavet";
+  @override
+  String get plant_sources => "Kilder";
+  @override
+  String get taxonomy_regnum => "Rige";
+  @override
+  String get south_central_pacific => "Syd-Central Stillehavet";
+  @override
+  String get filter_color => "farve";
+  @override
+  String get help => "Hjælp";
+  @override
+  String get mexico => "Mexico";
+  @override
+  String get snack_publish => "... offentliggøres senere";
+  @override
+  String get siberia => "Sibirien";
+  @override
+  String get taxonomy_subtribus => "Undertribus";
+  @override
+  String get product_custom_filter_description => "Du kan ændre standardordre og antal filtre (farve, vækststeder, kronblad, fordeling).";
+  @override
+  String get habitat_meadow => "enge eller overdrev";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get product_purchased => "Købt";
+  @override
+  String get taxonomy_cladus => "Cladus";
+  @override
+  String get plant_herbalism => "Naturmedicin";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Genoptag download";
+  @override
+  String get enhancements => "Forbedringer";
+  @override
+  String get habitat_wetland => "heder eller vådområder";
+  @override
+  String get product_restore_purchases => "Genoprette indkøb";
+  @override
+  String get feedback_title => "Hvordan bidrage";
+  @override
+  String get toxicity2 => "lidt giftig plante";
+  @override
+  String get toxicity1 => "giftig plante";
+  @override
+  String get eastern_canada => "Østlige Canada";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Vis oversatte tekst";
+  @override
+  String get habitat_tree => "træer eller buske";
+  @override
+  String get settings => "Indstillinger";
+  @override
+  String get color_red => "rød, lyserød";
+  @override
+  String get north_central_pacific => "Nord-Central Stillehavet";
+  @override
+  String get taxonomy_subsectio => "Undersektion";
+  @override
+  String get southern_africa => "Sydafrika";
+  @override
+  String get always_my_region_title => "Tilføj altid min region til filteret";
+  @override
+  String get color_yellow => "gul";
+  @override
+  String get subantarctic_islands => "Subantarctic Islands";
+  @override
+  String get list_info => "Vælg en";
+  @override
+  String get new_version => "Ny version er tilgængelig, opdater venligst.";
+  @override
+  String get taxonomy_subfamilia => "Underfamilie";
+  @override
+  String get my_region => "Min region";
+  @override
+  String get pause => "Pause";
+  @override
+  String get indian_subcontinent => "Indiske subkontinent";
+  @override
+  String get product_offline_description => "Du kan køre applikation uden internetforbindelse.";
+  @override
+  String get plant_flower => "Blomstre";
+  @override
+  String get filter_habitat => "vækststeder";
+  @override
+  String get rate_never => "Aldrig";
+  @override
+  String get northwestern_pacific => "Nordvestlige Stillehavet";
+  @override
+  String get search_names => "Søg i navne";
+  @override
+  String get southwestern_europe => "Sydvesteuropa";
+  @override
+  String get taxonomy_species => "Art";
+  @override
+  String get plant_fruit => "Frugt";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Familie";
+  @override
+  String get plant_stem => "Stængel";
+  @override
+  String get antarctic_continent => "Antarktis-kontinentet";
+  @override
+  String get no => "Ingen";
+  @override
+  String get brazil => "Brasilien";
+  @override
+  String get rate_text => "Forfatteren af denne ansøgning er drevet af et positivt svar fra brugerne. Venligst send ham nogle stjerner gennem applikationsbutikken.";
+  @override
+  String get eastern_europe => "østeuropa";
+  @override
+  String get south_central_usa => "Syd-Central USA";
+  @override
+  String get offline_download_success => "Billeder og illustrationer er blevet downloadet.";
+  @override
+  String get plant_flowering_from => "Blomstringstid";
+  @override
+  String get taxonomy_tribus => "Tribus";
+  @override
+  String get arabian_peninsula => "Den arabiske halvø";
+  @override
+  String get search_taxonomy => "Søg i taksonomi";
+  @override
+  String get rate_later => "Senere";
+  @override
+  String get color_message => "Hvad er farven på blomsten? Vælg den nærmeste.";
+  @override
+  String get west_tropical_africa => "Vestlige tropiske Afrika";
+  @override
+  String get northern_europe => "Nordeuropa";
+  @override
+  String get rate => "Anmeldelser";
+  @override
+  String get northeast_tropical_africa => "Nordøstlige tropiske Afrika";
+  @override
+  String get pref_language => "Foretrukne sprog";
+  @override
+  String get product_custom_filter_title => "Brugerdefineret filter";
+  @override
+  String get new_zealand => "New Zealand";
+  @override
+  String get feedback_intro => "Du har bidraget til denne applikation, da du har installeret den på din enhed, tak. Hvis du leder efter noget mere, her er nogle muligheder:";
+  @override
+  String get filter_distribution => "fordeling";
+  @override
+  String get eastern_asia => "Østasien";
+  @override
+  String get western_asia => "Vestasien";
+  @override
+  String get subarctic_america => "Subarctic America";
+  @override
+  String get product_search_title => "Søg i navne eller taksonomi";
+  @override
+  String get feedback_buy_extended => "Du kan købe udvidet (+) version med ekstra funktionalitet som offline-tilstand, søge i navne, søge i taksonomi, observationer og konfigurerbart filter.";
+  @override
+  String get north_central_usa => "Nord-Central USA";
+  @override
+  String get improve_translation => "Forbedre oversættelse";
+  @override
+  String get feedback_review => "Du kan skrive en positiv anmeldelse.";
+  @override
+  String get southeastern_usa => "Sydøstlige USA";
+  @override
+  String get yes => "Ja";
+  @override
+  String get feedback_run_ads_video => "Se en videoannonce";
+  @override
+  String get plant_height_from => "Højde";
+  @override
+  String get petal_many => "mere end 5";
+  @override
+  String get southeastern_europe => "Sydøsteuropa";
+  @override
+  String get taxonomy_unknown => "ukendt";
+  @override
+  String get plant_inflorescence => "Blomsterstand";
+  @override
+  String get northern_africa => "Nordafrika";
+  @override
+  String get offline_subtitle => "kræver 300 + MB ekstra plads.";
+  @override
+  String get china => "Kina";
+  @override
+  String get product_no_ads_title => "Ingen uønsket reklame";
+  @override
+  String get offline_title => "Offline-tilstand";
+  @override
+  String get petal_zygomorphic => "zygomorf";
+  @override
+  String get taxonomy_genus => "Slægt";
+  @override
+  String get papuasia => "Papuasia";
+}
+
+class $fa_IR extends S {
+  const $fa_IR();
+
+  @override
+  TextDirection get textDirection => TextDirection.rtl;
+
+  @override
+  String get central_america => "آمریکای مرکزی";
+  @override
+  String get legend => "افسانه";
+  @override
+  String get product_offline_title => "حالت آفلاین";
+  @override
+  String get feedback_submit_translate_data => "اطلاعات گل را بهبود بخشید";
+  @override
+  String get snack_copy => "کپی به کلیپ بورد";
+  @override
+  String get product_purchase_failed => "خرید خراب شد";
+  @override
+  String get about => "درباره برنامه";
+  @override
+  String get product_no_ads_description => "برنامه بنر تبلیغاتی را در پایین صفحه نشان نمی دهد.";
+  @override
+  String get offline_download_progress => "دانلود عکس ها و تصاویر ...";
+  @override
+  String get western_canada => "غربی کانادا";
+  @override
+  String get northern_america => "آمریکای شمالی";
+  @override
+  String get western_indian_ocean => "اقیانوس هند غربی";
+  @override
+  String get feedback => "انتقادات";
+  @override
+  String get southwestern_usa => "جنوب غربی ایالات متحده آمریکا";
+  @override
+  String get distribution_message => "کدام منطقه جغرافیایی باید تمرکز کنیم؟";
+  @override
+  String get caribbean => "کارائیب";
+  @override
+  String get product_search_description => "شما می توانید یک گل را با نام لاتین خود یا طوفان آن (مانند سفارش، خانواده، جنس) پیدا کنید.";
+  @override
+  String get offline_delete_message => "میخواهید دادههای آفلاین را حذف کنید؟";
+  @override
+  String get australasia => "استرالیا";
+  @override
+  String get petal_4 => "4 یا کمتر";
+  @override
+  String get east_tropical_africa => "شرق گرمسیر آفریقا";
+  @override
+  String get africa => "آفریقا";
+  @override
+  String get south_tropical_africa => "آفریقای جنوبی گرمسیری";
+  @override
+  String get caucasus => "قفقاز";
+  @override
+  String get middle_asia => "آسیای میانه";
+  @override
+  String get plant_gallery => "آلبوم عکس";
+  @override
+  String get always_my_region_subtitle => "منطقه شما به طور پیش فرض به فیلتر تنظیم می شود";
+  @override
+  String get indochina => "هندو چین";
+  @override
+  String get feedback_translate => "شما می توانید هر نوع اشتباه یا اشتباهی را که به زبان خود پیدا کرده اید ارسال یا ارسال کنید.";
+  @override
+  String get australia => "استرالیا";
+  @override
+  String get google_translate => "ترجمه شده با ترجمه گوگل";
+  @override
+  String get plant_leaf => "برگها";
+  @override
+  String get habitat_forest => "جنگل ها یا جنگل ها";
+  @override
+  String get taxonomy_serie => "زنجیره";
+  @override
+  String get malesia => "مالزی";
+  @override
+  String get southwestern_pacific => "جنوب غربی اقیانوس آرام";
+  @override
+  String get asia_tropical => "آسیا گرمسیری";
+  @override
+  String get northwestern_usa => "شمال غرب آمریکا";
+  @override
+  String get northern_south_america => "شمال امریکا جنوبی";
+  @override
+  String get show_original => "نمایش متن انگلیسی";
+  @override
+  String get offline_download_message => "شما قصد دارید 300+ MB عکس و تصاویر را دانلود کنید. لطفا بررسی کنید که آیا دستگاه شما به Wi-Fi متصل است یا خیر. آیا برای دانلود آماده هستید؟";
+  @override
+  String get southern_america => "جنوب امریکا";
+  @override
+  String get middle_atlantic_ocean => "اقیانوس اطلس میانه";
+  @override
+  String get feedback_run_ads => "شما می توانید تبلیغات تمام صفحه را نمایش دهید یا تبلیغات ویدئویی را تماشا کنید تا از توسعه بیشتر و بهبود پایگاه داده پشتیبانی کند.";
+  @override
+  String get habitat_garden => "باغ ها یا رشته ها";
+  @override
+  String get product_purchase => "خرید";
+  @override
+  String get russian_far_east => "شرق دور روسیه";
+  @override
+  String get west_central_tropical_africa => "غرب آفریقای مرکزی گرمسیری";
+  @override
+  String get habitat_message => "چه چیزی در اطراف شماست؟ شناسایی زیستگاه گیاه";
+  @override
+  String get plant_toxicity => "سمی بودن";
+  @override
+  String get offline_download_fail => "دانلود نشد. لطفا اتصال اینترنت یا فضای آزاد خود را بر روی دستگاه بررسی کنید و دوباره امتحان کنید.";
+  @override
+  String get snack_no_flowers => "بدون گل مطابق معیارهای.";
+  @override
+  String get rate_question => "آیا این برنامه مفید است؟";
+  @override
+  String get macaronesia => "ماکرونزی";
+  @override
+  String get plant_taxonomy => "طبقه بندی";
+  @override
+  String get feedback_run_ads_fullscreen => "یک تبلیغ تمام صفحه را نشان دهید";
+  @override
+  String get asia_temperate => "آسیا درجه حرارت";
+  @override
+  String get search => "جستجو کردن...";
+  @override
+  String get habitat_rock => "سنگ ها یا کوه ها";
+  @override
+  String get taxonomy_superregnum => "حوزه";
+  @override
+  String get taxonomy_sectio => "بخشه";
+  @override
+  String get mongolia => "مغولستان";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "آمریکای جنوبی غربی";
+  @override
+  String get taxonomy_subgenus => "زیرسرده";
+  @override
+  String get close => "نزدیک";
+  @override
+  String get europe => "اروپا";
+  @override
+  String get middle_europe => "اروپای مرکزی";
+  @override
+  String get color_blue => "آبی، بنفش";
+  @override
+  String get my_filter => "فیلتر من";
+  @override
+  String get southern_south_america => "جنوبی جنوب امریکا";
+  @override
+  String get plant_habitat => "زیستگاه";
+  @override
+  String get snack_loading_ad => "تبلیغات هنوز بارگیری شده است، دوباره دکمه را فشار دهید.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "گلبرگ";
+  @override
+  String get petal_message => "آیا گل زگومورفیک است؟ نه؟ پس چقدر گلبرگها آن را دارند؟";
+  @override
+  String get color_white => "سفید";
+  @override
+  String get northeastern_usa => "شمال شرقی ایالات متحده آمریکا";
+  @override
+  String get color_green => "سبز، قهوه ای، سیاه و سفید";
+  @override
+  String get taxonomy_ordo => "راسته";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "اقیانوس آرام";
+  @override
+  String get plant_sources => "منابع";
+  @override
+  String get taxonomy_regnum => "فرمانرو";
+  @override
+  String get south_central_pacific => "جنوب آسیا اقیانوس آرام";
+  @override
+  String get filter_color => "رنگ";
+  @override
+  String get help => "کمک";
+  @override
+  String get mexico => "مکزیک";
+  @override
+  String get snack_publish => "بعدا منتشر شود";
+  @override
+  String get siberia => "سیبری";
+  @override
+  String get taxonomy_subtribus => "زیرتبار";
+  @override
+  String get product_custom_filter_description => "شما می توانید سفارش پیش فرض و تعداد فیلترها (رنگ، زیستگاه ها، گلبرگ، توزیع) را تغییر دهید.";
+  @override
+  String get habitat_meadow => "چمنزارها یا چمنزارها";
+  @override
+  String get plant_trivia => "چیزهای بی اهمیت";
+  @override
+  String get product_purchased => "خریداری شده";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "گیاه شناسی";
+  @override
+  String get plant_height_to => "به";
+  @override
+  String get offline_download => "رزومه دانلود";
+  @override
+  String get enhancements => "ارتقاء";
+  @override
+  String get habitat_wetland => "باتلاق یا تالاب";
+  @override
+  String get product_restore_purchases => "بازگرداندن خرید";
+  @override
+  String get toxicity2 => "گیاه کمی سمی است";
+  @override
+  String get toxicity1 => "گیاه سمی";
+  @override
+  String get eastern_canada => "شرق کانادا";
+  @override
+  String get plant_info => "اطلاعات";
+  @override
+  String get show_translation => "نمایش متن ترجمه شده";
+  @override
+  String get habitat_tree => "درختان یا درختچه ها";
+  @override
+  String get settings => "تنظیمات";
+  @override
+  String get color_red => "قرمز، صورتی";
+  @override
+  String get north_central_pacific => "شمال اقیانوس آرام";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "آفریقای جنوبی";
+  @override
+  String get always_my_region_title => "همیشه منطقه من را به فیلتر اضافه کنید";
+  @override
+  String get color_yellow => "رنگ زرد";
+  @override
+  String get subantarctic_islands => "جزایر سابانتارکتیک";
+  @override
+  String get list_info => "یکی را انتخاب کن";
+  @override
+  String get new_version => "نسخه جدید در دسترس است، لطفا به روز رسانی کنید.";
+  @override
+  String get taxonomy_subfamilia => "زیرخانواده";
+  @override
+  String get my_region => "منطقه من";
+  @override
+  String get pause => "مکث";
+  @override
+  String get indian_subcontinent => "شبه قاره هند";
+  @override
+  String get product_offline_description => "شما قادر به اجرای برنامه بدون اتصال به اینترنت خواهید بود.";
+  @override
+  String get plant_flower => "گل ها";
+  @override
+  String get filter_habitat => "زیستگاه ها";
+  @override
+  String get rate_never => "هرگز";
+  @override
+  String get northwestern_pacific => "شمال غرب اقیانوس آرام";
+  @override
+  String get search_names => "جستجو در اسامی";
+  @override
+  String get southwestern_europe => "جنوب غربی اروپا";
+  @override
+  String get taxonomy_species => "گونه";
+  @override
+  String get plant_fruit => "میوه ها";
+  @override
+  String get plant_flowering_to => "به";
+  @override
+  String get taxonomy_familia => "تیره";
+  @override
+  String get plant_stem => "ساقه";
+  @override
+  String get antarctic_continent => "قاره قطب جنوب";
+  @override
+  String get no => "نه";
+  @override
+  String get brazil => "برزیل";
+  @override
+  String get rate_text => "نویسنده این برنامه توسط پاسخ مثبت از کاربران پر شده است. لطفا چند ستاره را از طریق فروشگاه نرم افزار ارسال کنید.";
+  @override
+  String get eastern_europe => "اروپای شرقی";
+  @override
+  String get south_central_usa => "جنوبی مرکزی ایالات متحده آمریکا";
+  @override
+  String get offline_download_success => "عکس ها و تصاویر با موفقیت دانلود شده اند.";
+  @override
+  String get plant_flowering_from => "گل از";
+  @override
+  String get taxonomy_tribus => "تبار";
+  @override
+  String get arabian_peninsula => "شبه جزیره عربی";
+  @override
+  String get search_taxonomy => "جستجو در طبقه بندی";
+  @override
+  String get rate_later => "بعد";
+  @override
+  String get color_message => "رنگ گل چیست؟ نزدیک ترین را انتخاب کنید";
+  @override
+  String get west_tropical_africa => "غرب گرمسیر آفریقا";
+  @override
+  String get northern_europe => "شمال اروپا";
+  @override
+  String get rate => "مرور";
+  @override
+  String get northeast_tropical_africa => "آفریقا شمال شرقی گرمسیری";
+  @override
+  String get pref_language => "زبان ترجیحی";
+  @override
+  String get product_custom_filter_title => "فیلتر سفارشی";
+  @override
+  String get new_zealand => "نیوزلند";
+  @override
+  String get feedback_intro => "از زمان نصب آن بر روی دستگاه خود به این برنامه کمک کرده اید، با تشکر. اگر شما به دنبال چیزی بیشتر هستید، در اینجا چند گزینه وجود دارد:";
+  @override
+  String get filter_distribution => "توزیع";
+  @override
+  String get eastern_asia => "آسیای شرقی";
+  @override
+  String get western_asia => "آسیای غربی";
+  @override
+  String get subarctic_america => "Subarctic America";
+  @override
+  String get product_search_title => "جستجو در نام یا طبقه بندی";
+  @override
+  String get feedback_buy_extended => "شما می توانید نسخه پیشرفته با قابلیت های اضافی مانند حالت آفلاین، جستجو در اسامی، جستجو در طبقه بندی، مشاهدات و فیلتر قابل تنظیم را خریداری کنید.";
+  @override
+  String get north_central_usa => "مرکزی ایالات متحده آمریکا";
+  @override
+  String get improve_translation => "بهبود ترجمه";
+  @override
+  String get feedback_review => "شما می توانید یک بررسی مثبت بنویسید.";
+  @override
+  String get southeastern_usa => "جنوب شرقی ایالات متحده آمریکا";
+  @override
+  String get yes => "بله";
+  @override
+  String get feedback_run_ads_video => "تبلیغات ویدیویی را تماشا کنید";
+  @override
+  String get plant_height_from => "ارتفاع از";
+  @override
+  String get petal_many => "بیش از 5";
+  @override
+  String get southeastern_europe => "جنوب شرقی اروپا";
+  @override
+  String get plant_inflorescence => "گل آذین";
+  @override
+  String get northern_africa => "آفریقای شمالی";
+  @override
+  String get offline_subtitle => "نیاز به 300+ MB فضای اضافی.";
+  @override
+  String get china => "چين";
+  @override
+  String get product_no_ads_title => "بدون تبلیغات ناخواسته";
+  @override
+  String get offline_title => "حالت آفلاین";
+  @override
+  String get petal_zygomorphic => "بی رویه";
+  @override
+  String get taxonomy_genus => "سرده";
+  @override
+  String get papuasia => "پاپواشیا";
+  @override
+  String get feedback_submit_translate_app => "برچسب های نرم افزار را بهبود بخشد";
+}
+
+class $sr_RS extends S {
+  const $sr_RS();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Централна Америка";
+  @override
+  String get legend => "Легенда";
+  @override
+  String get product_offline_title => "Режим ван мреже";
+  @override
+  String get feedback_submit_translate_data => "Побољшајте податке о цвету";
+  @override
+  String get snack_copy => "Копирано у Цлипбоард";
+  @override
+  String get product_purchase_failed => "Куповина није успела";
+  @override
+  String get about => "О апликацији";
+  @override
+  String get product_no_ads_description => "Апликација не приказује рекламни баннер на дну екрана.";
+  @override
+  String get offline_download_progress => "Преузимање фотографија и илустрација ...";
+  @override
+  String get western_canada => "Западна Канада";
+  @override
+  String get northern_america => "Северна Америка";
+  @override
+  String get western_indian_ocean => "Западни Индијски океан";
+  @override
+  String get feedback => "Повратне информације";
+  @override
+  String get southwestern_usa => "Југозападна САД";
+  @override
+  String get distribution_message => "На коју географску област треба да се фокусирамо?";
+  @override
+  String get caribbean => "Кариби";
+  @override
+  String get product_search_description => "Моћи ћете пронаћи цвијет по његовом српском или латинском имену или по његовом таксону (нпр. ред, породица, род).";
+  @override
+  String get offline_delete_message => "Да ли желите да избришете ванмрежне податке?";
+  @override
+  String get australasia => "Аустраласиа";
+  @override
+  String get petal_4 => "4 или мање";
+  @override
+  String get east_tropical_africa => "Источна тропска Африка";
+  @override
+  String get africa => "Африка";
+  @override
+  String get south_tropical_africa => "Јужна тропска Африка";
+  @override
+  String get caucasus => "Кавказ";
+  @override
+  String get middle_asia => "Средња Азија";
+  @override
+  String get plant_gallery => "Галерија";
+  @override
+  String get always_my_region_subtitle => "Ваш регион ће бити унапред подешен на филтер";
+  @override
+  String get indochina => "Индо-Кина";
+  @override
+  String get feedback_translate => "Можете пријавити било коју грешку или грешку коју сте пронашли или послати нови превод на свој језик.";
+  @override
+  String get australia => "Аустралија";
+  @override
+  String get google_translate => "Превео са Гоогле Транслате";
+  @override
+  String get plant_leaf => "Лист";
+  @override
+  String get habitat_forest => "шуме";
+  @override
+  String get taxonomy_serie => "серија";
+  @override
+  String get malesia => "Малезија";
+  @override
+  String get southwestern_pacific => "Соутхвестерн Пацифиц";
+  @override
+  String get asia_tropical => "Асиа Тропицал";
+  @override
+  String get northwestern_usa => "Северозапад САД";
+  @override
+  String get northern_south_america => "Северна Јужна Америка";
+  @override
+  String get show_original => "Схов енглески текст";
+  @override
+  String get offline_download_message => "Преузет ћете 300+ МБ фотографија и илустрација. Проверите да ли је ваш уређај повезан са Ви-Фи. Да ли сте спремни за преузимање?";
+  @override
+  String get southern_america => "Јужна Америка";
+  @override
+  String get middle_atlantic_ocean => "Средњи Атлантски океан";
+  @override
+  String get feedback_run_ads => "Можете приказати оглас преко целог екрана или гледати видео рекламу како бисте подржали даљи развој и побољшање базе података.";
+  @override
+  String get habitat_garden => "баште или поља";
+  @override
+  String get product_purchase => "Купити";
+  @override
+  String get russian_far_east => "Руски Далеки Исток";
+  @override
+  String get west_central_tropical_africa => "Западна централна тропска Африка";
+  @override
+  String get habitat_message => "Шта је око тебе? Идентификовати станиште биљке.";
+  @override
+  String get plant_toxicity => "Токсичност";
+  @override
+  String get offline_download_fail => "Преузимање није успело. Проверите интернет везу или слободан простор на уређају и покушајте поново.";
+  @override
+  String get snack_no_flowers => "Нема критеријума за подударање цвећа.";
+  @override
+  String get rate_question => "Да ли је ова апликација помоћи?";
+  @override
+  String get macaronesia => "Макаронезија";
+  @override
+  String get plant_taxonomy => "Такономи";
+  @override
+  String get feedback_run_ads_fullscreen => "Прикажи рекламу преко целог екрана";
+  @override
+  String get asia_temperate => "Асиа Температе";
+  @override
+  String get search => "Тражити...";
+  @override
+  String get habitat_rock => "стене или планине";
+  @override
+  String get taxonomy_superregnum => "домен";
+  @override
+  String get taxonomy_sectio => "секција";
+  @override
+  String get mongolia => "Монголија";
+  @override
+  String get taxonomy_subserie => "подсерија";
+  @override
+  String get western_south_america => "Западна Јужна Америка";
+  @override
+  String get taxonomy_subgenus => "подрод";
+  @override
+  String get close => "Близу";
+  @override
+  String get europe => "Европа";
+  @override
+  String get middle_europe => "Средња Европа";
+  @override
+  String get color_blue => "плава, љубичаста";
+  @override
+  String get my_filter => "Мој филтер";
+  @override
+  String get southern_south_america => "Јужна Јужна Америка";
+  @override
+  String get plant_habitat => "Станишта";
+  @override
+  String get snack_loading_ad => "Оглас се и даље учитава, поново притисните дугме.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "латица";
+  @override
+  String get petal_message => "Да ли је цвет зигоморфан? Не? Колико латица има?";
+  @override
+  String get color_white => "бео";
+  @override
+  String get northeastern_usa => "Североисточна САД";
+  @override
+  String get color_green => "зелена, браон, црна";
+  @override
+  String get taxonomy_ordo => "ред";
+  @override
+  String get taxonomy_supersectio => "надсекција";
+  @override
+  String get pacific => "Пацифиц";
+  @override
+  String get plant_sources => "Извори";
+  @override
+  String get taxonomy_regnum => "царство";
+  @override
+  String get south_central_pacific => "Јужно-централни Пацифик";
+  @override
+  String get filter_color => "боја";
+  @override
+  String get help => "Помоћ";
+  @override
+  String get mexico => "Мексико";
+  @override
+  String get snack_publish => "... да се касније објави";
+  @override
+  String get siberia => "Сибериа";
+  @override
+  String get taxonomy_subtribus => "подплеме";
+  @override
+  String get product_custom_filter_description => "Моћи ћете да промените редослед и број филтера (боја, станиште, латица, дистрибуција).";
+  @override
+  String get habitat_meadow => "ливаде или пашњаци";
+  @override
+  String get plant_trivia => "Тривијалност";
+  @override
+  String get product_purchased => "Купио";
+  @override
+  String get taxonomy_cladus => "(клада)";
+  @override
+  String get plant_herbalism => "Траварство";
+  @override
+  String get plant_height_to => "до";
+  @override
+  String get offline_download => "Настави преузимање";
+  @override
+  String get enhancements => "Побољшања";
+  @override
+  String get habitat_wetland => "мочварама";
+  @override
+  String get product_restore_purchases => "Враћање куповине";
+  @override
+  String get feedback_title => "Како доприносити";
+  @override
+  String get toxicity2 => "благо отровна биљка";
+  @override
+  String get toxicity1 => "отровна биљка";
+  @override
+  String get eastern_canada => "Источна Канада";
+  @override
+  String get plant_info => "Инфо";
+  @override
+  String get show_translation => "Схов преведени текст";
+  @override
+  String get habitat_tree => "дрвеће или жбуње";
+  @override
+  String get settings => "Подешавања";
+  @override
+  String get color_red => "црвена, розе";
+  @override
+  String get north_central_pacific => "Северно-централни Пацифик";
+  @override
+  String get taxonomy_subsectio => "подсекција";
+  @override
+  String get southern_africa => "Јужна Африка";
+  @override
+  String get always_my_region_title => "Увек додајте мој регион на филтер";
+  @override
+  String get color_yellow => "жут";
+  @override
+  String get subantarctic_islands => "Субантарктични Острва";
+  @override
+  String get list_info => "Одабрати једну";
+  @override
+  String get new_version => "Доступна је нова верзија, ажурирајте.";
+  @override
+  String get taxonomy_subfamilia => "потпородица";
+  @override
+  String get my_region => "Мој регион";
+  @override
+  String get pause => "Пауза";
+  @override
+  String get indian_subcontinent => "Индијски подконтинент";
+  @override
+  String get product_offline_description => "Моћи ћете покренути апликацију без интернет везе.";
+  @override
+  String get plant_flower => "Цвеће";
+  @override
+  String get filter_habitat => "станиште";
+  @override
+  String get rate_never => "Никад";
+  @override
+  String get northwestern_pacific => "Северозападни Пацифик";
+  @override
+  String get search_names => "Тражи имена";
+  @override
+  String get southwestern_europe => "Југозападна Европа";
+  @override
+  String get taxonomy_species => "врста";
+  @override
+  String get plant_fruit => "Плод";
+  @override
+  String get plant_flowering_to => "до";
+  @override
+  String get taxonomy_familia => "породица";
+  @override
+  String get plant_stem => "Стабло";
+  @override
+  String get antarctic_continent => "Антарктички континент";
+  @override
+  String get no => "Не";
+  @override
+  String get brazil => "Бразил";
+  @override
+  String get rate_text => "Аутор ове апликације је мотивисан позитивним одговором корисника. Молим вас, пошаљите му неке звезде кроз продавницу апликација.";
+  @override
+  String get eastern_europe => "Источна Европа";
+  @override
+  String get south_central_usa => "Јужна централна САД";
+  @override
+  String get offline_download_success => "Фотографије и илустрације су успешно преузете.";
+  @override
+  String get plant_flowering_from => "Цветања од";
+  @override
+  String get taxonomy_tribus => "племе";
+  @override
+  String get arabian_peninsula => "Арабијско полуострво";
+  @override
+  String get search_taxonomy => "Тражи у таксономији";
+  @override
+  String get rate_later => "Касније";
+  @override
+  String get color_message => "Која је боја цвијета? Изаберите најближег.";
+  @override
+  String get west_tropical_africa => "Западна тропска Африка";
+  @override
+  String get northern_europe => "Северна Европа";
+  @override
+  String get rate => "Рецензије";
+  @override
+  String get northeast_tropical_africa => "Североисточна тропска Африка";
+  @override
+  String get pref_language => "Језик којем дајете предност";
+  @override
+  String get product_custom_filter_title => "Прилагођени филтер";
+  @override
+  String get new_zealand => "Нови Зеланд";
+  @override
+  String get feedback_intro => "Ви сте доприносили овој апликацији пошто сте је инсталирали на свом уређају, хвала. Ако тражите нешто више, ево неколико опција:";
+  @override
+  String get filter_distribution => "дистрибуција";
+  @override
+  String get eastern_asia => "Источна Азија";
+  @override
+  String get western_asia => "Западна Азија";
+  @override
+  String get subarctic_america => "Субарцтиц Америца";
+  @override
+  String get product_search_title => "Претражујте имена или таксономију";
+  @override
+  String get feedback_buy_extended => "Можете купити проширену верзију са додатном функционалношћу као што је оффлине режим, тражити имена, претраживати у таксономији, опажањима и конфигурирати филтер.";
+  @override
+  String get north_central_usa => "Северна централна САД";
+  @override
+  String get improve_translation => "Побољшати транслатион";
+  @override
+  String get feedback_review => "Можете написати позитивну рецензију.";
+  @override
+  String get southeastern_usa => "Југоисточна САД";
+  @override
+  String get yes => "Да";
+  @override
+  String get feedback_run_ads_video => "Погледајте видео рекламу";
+  @override
+  String get plant_height_from => "Висине од";
+  @override
+  String get petal_many => "више од 5";
+  @override
+  String get southeastern_europe => "Југоисточна Европа";
+  @override
+  String get taxonomy_unknown => "непознат";
+  @override
+  String get plant_inflorescence => "Цваст";
+  @override
+  String get northern_africa => "Северна Африка";
+  @override
+  String get offline_subtitle => "захтева додатни простор од 300+ МБ.";
+  @override
+  String get china => "Кина";
+  @override
+  String get product_no_ads_title => "Нема нежељених реклама";
+  @override
+  String get offline_title => "Режим ван мреже";
+  @override
+  String get petal_zygomorphic => "зигоморфан";
+  @override
+  String get taxonomy_genus => "род";
+  @override
+  String get papuasia => "Папуазија";
+  @override
+  String get feedback_submit_translate_app => "Побољшајте ознаке апликације";
+}
+
+class $en extends S {
+  const $en();
+}
+
+class $en_UK extends S {
+  const $en_UK();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get color_message => "What's the colour of the flower? Choose the closest one.";
+  @override
+  String get filter_color => "colour";
+}
+
+class $fi_FI extends S {
+  const $fi_FI();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Keski-Amerikka";
+  @override
+  String get legend => "Legenda";
+  @override
+  String get product_offline_title => "Offline-tila";
+  @override
+  String get feedback_submit_translate_data => "Paranna kukkien tietoja";
+  @override
+  String get snack_copy => "Kopioitu leikepöydälle";
+  @override
+  String get product_purchase_failed => "Osto epäonnistui";
+  @override
+  String get about => "Tietoja sovellus";
+  @override
+  String get product_no_ads_description => "Sovellus ei näytä ruudun alareunassa mainosbanneria.";
+  @override
+  String get offline_download_progress => "Valokuvien ja kuvien lataaminen ...";
+  @override
+  String get western_canada => "Länsi-Kanada";
+  @override
+  String get northern_america => "Pohjois-Amerikka";
+  @override
+  String get western_indian_ocean => "Länsi-Intian valtameri";
+  @override
+  String get feedback => "Palaute / Panos";
+  @override
+  String get southwestern_usa => "Lounais USA";
+  @override
+  String get distribution_message => "Mihin maantieteelliseen alueeseen meidän pitäisi keskittyä?";
+  @override
+  String get caribbean => "Karibian";
+  @override
+  String get product_search_description => "Voit löytää kukka Suomen tai latinankielisen nimen tai taksonin (esim. lahko, heimo, suku).";
+  @override
+  String get offline_delete_message => "Haluatko poistaa offline-tietoja?";
+  @override
+  String get australasia => "Australiassa";
+  @override
+  String get petal_4 => "4 tai vähemmän";
+  @override
+  String get east_tropical_africa => "Itä-trooppinen Afrikka";
+  @override
+  String get africa => "Afrikka";
+  @override
+  String get south_tropical_africa => "Etelä-trooppinen Afrikka";
+  @override
+  String get caucasus => "Kaukasus";
+  @override
+  String get middle_asia => "Lähi-Aasia";
+  @override
+  String get plant_gallery => "Kuvia";
+  @override
+  String get always_my_region_subtitle => "Alueesi asetetaan etukäteen suodattimeen";
+  @override
+  String get indochina => "Indokiinan";
+  @override
+  String get feedback_translate => "Voit ilmoittaa havaitusta virheestä tai virheestä tai lähettää uuden käännöksen omalle kielellesi.";
+  @override
+  String get australia => "Australia";
+  @override
+  String get google_translate => "Käännetty Google Translate";
+  @override
+  String get plant_leaf => "Lehdet";
+  @override
+  String get habitat_forest => "metsä";
+  @override
+  String get taxonomy_serie => "Sarja";
+  @override
+  String get malesia => "Malesia";
+  @override
+  String get southwestern_pacific => "Lounais-Tyynenmeren";
+  @override
+  String get asia_tropical => "Aasian trooppinen";
+  @override
+  String get northwestern_usa => "Luoteis-USA";
+  @override
+  String get northern_south_america => "Pohjois Etelä-Amerikka";
+  @override
+  String get show_original => "Näytä Englanti teksti";
+  @override
+  String get offline_download_message => "Voit ladata 300+ MB kuvia ja kuvia. Tarkista, onko laite liitetty wi-fi-verkkoon. Oletko valmis lataamaan?";
+  @override
+  String get southern_america => "Etelä-Amerikka";
+  @override
+  String get middle_atlantic_ocean => "Lähi-Atlantin valtameri";
+  @override
+  String get feedback_run_ads => "Voit näyttää koko näytön mainoksen tai katsella videomainosta tukemaan edelleen kehitystä ja tietokannan parantamista.";
+  @override
+  String get habitat_garden => "puutarhoissa tai kenttiä";
+  @override
+  String get product_purchase => "Ostaa";
+  @override
+  String get russian_far_east => "Venäjän Kaukoidässä";
+  @override
+  String get west_central_tropical_africa => "Länsi-Keski-trooppinen Afrikka";
+  @override
+  String get habitat_message => "Mitä ympärilläsi on? Tunnista laitoksen elinympäristö.";
+  @override
+  String get plant_toxicity => "Myrkyllisyys";
+  @override
+  String get offline_download_fail => "Lataus epäonnistui. Tarkista Internet-yhteys tai vapaa tila laitteessa ja yritä uudelleen.";
+  @override
+  String get snack_no_flowers => "Ei kukkien yhteensopivuusvaatimuksia.";
+  @override
+  String get rate_question => "Onko tämä sovellus hyödyllinen?";
+  @override
+  String get macaronesia => "Makaronesia";
+  @override
+  String get plant_taxonomy => "Taksonomia";
+  @override
+  String get feedback_run_ads_fullscreen => "Näytä koko näytön mainos";
+  @override
+  String get asia_temperate => "Aasia Lämpötilaa";
+  @override
+  String get search => "Hae...";
+  @override
+  String get habitat_rock => "kiviä tai vuoria";
+  @override
+  String get taxonomy_superregnum => "Domeeni";
+  @override
+  String get taxonomy_sectio => "Sektio";
+  @override
+  String get mongolia => "Mongolia";
+  @override
+  String get taxonomy_subserie => "Alasarja";
+  @override
+  String get western_south_america => "Länsi Etelä-Amerikka";
+  @override
+  String get taxonomy_subgenus => "Alasuku";
+  @override
+  String get close => "Kiinni";
+  @override
+  String get europe => "Eurooppa";
+  @override
+  String get middle_europe => "Keski-Eurooppa";
+  @override
+  String get color_blue => "sininen, violetti";
+  @override
+  String get my_filter => "Oma suodatin";
+  @override
+  String get southern_south_america => "Etelä Etelä-Amerikka";
+  @override
+  String get plant_habitat => "Kasvupaikka";
+  @override
+  String get snack_loading_ad => "Mainos lataa, paina painiketta uudelleen.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "teriö";
+  @override
+  String get petal_message => "Onko kukka zygomorphic? Ei? Kuinka monta terälehteä sillä on?";
+  @override
+  String get color_white => "valkoinen";
+  @override
+  String get northeastern_usa => "Koillis-USA";
+  @override
+  String get color_green => "vihreä, ruskea, musta";
+  @override
+  String get taxonomy_ordo => "Lahko";
+  @override
+  String get taxonomy_supersectio => "Supersektio";
+  @override
+  String get pacific => "Tyyni valtameri";
+  @override
+  String get plant_sources => "Lähteet";
+  @override
+  String get taxonomy_regnum => "Kunta";
+  @override
+  String get south_central_pacific => "Etelä Keski-Tyynenmeren";
+  @override
+  String get filter_color => "väri";
+  @override
+  String get help => "Ohje";
+  @override
+  String get mexico => "Meksiko";
+  @override
+  String get snack_publish => "... julkaistaan myöhemmin";
+  @override
+  String get siberia => "Siperia";
+  @override
+  String get taxonomy_subtribus => "Alatribus";
+  @override
+  String get product_custom_filter_description => "Voit muuttaa oletusjärjestystä ja suodattimien määrää (väri, kasvupaikka, teriö, jakelu).";
+  @override
+  String get habitat_meadow => "niityt";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get product_purchased => "Osti";
+  @override
+  String get taxonomy_cladus => "(kladi)";
+  @override
+  String get plant_herbalism => "Herbalismi";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Jatka lataamista";
+  @override
+  String get enhancements => "Parannukset";
+  @override
+  String get habitat_wetland => "nummimaista tai kosteikkojen";
+  @override
+  String get product_restore_purchases => "Palauttaa ostot";
+  @override
+  String get feedback_title => "Miten osallistua";
+  @override
+  String get toxicity2 => "lievästi myrkyllinen kasvi";
+  @override
+  String get toxicity1 => "myrkyllinen kasvi";
+  @override
+  String get eastern_canada => "Itä-Kanada";
+  @override
+  String get plant_info => "Tiedot";
+  @override
+  String get show_translation => "Näytä käännetty teksti";
+  @override
+  String get habitat_tree => "puita tai pensaita";
+  @override
+  String get settings => "Asetukset";
+  @override
+  String get color_red => "punainen, vaaleanpunainen";
+  @override
+  String get north_central_pacific => "Pohjois Keski-Tyynenmeren";
+  @override
+  String get taxonomy_subsectio => "Alasektio";
+  @override
+  String get southern_africa => "Etelä-Afrikka";
+  @override
+  String get always_my_region_title => "Lisää alueeni aina suodattimeen";
+  @override
+  String get color_yellow => "keltainen";
+  @override
+  String get subantarctic_islands => "Subantarkkinsaaret";
+  @override
+  String get list_info => "Valitse yksi";
+  @override
+  String get new_version => "Uusi versio on saatavilla, päivitä.";
+  @override
+  String get taxonomy_subfamilia => "Alaheimo";
+  @override
+  String get my_region => "Oma alue";
+  @override
+  String get pause => "Tauko";
+  @override
+  String get indian_subcontinent => "Intian niemimaalla";
+  @override
+  String get product_offline_description => "Voit suorittaa sovelluksen ilman internet-yhteyttä.";
+  @override
+  String get plant_flower => "Kukka";
+  @override
+  String get filter_habitat => "kasvupaikka";
+  @override
+  String get rate_never => "Ei ikinä";
+  @override
+  String get northwestern_pacific => "Luoteis-Tyynenmeren";
+  @override
+  String get search_names => "Hae nimistä";
+  @override
+  String get southwestern_europe => "Lounais-Eurooppa";
+  @override
+  String get taxonomy_species => "Laji";
+  @override
+  String get plant_fruit => "Hedelmä";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Heimo";
+  @override
+  String get plant_stem => "Varsi";
+  @override
+  String get antarctic_continent => "Etelämanner";
+  @override
+  String get no => "Ei";
+  @override
+  String get brazil => "Brasilia";
+  @override
+  String get rate_text => "Tämän sovelluksen laatijaa tukee käyttäjien positiivinen vastaus. Lähetä hänelle joitakin tähtiä sovellusvaraston kautta.";
+  @override
+  String get eastern_europe => "Itä-Eurooppa";
+  @override
+  String get south_central_usa => "Etelä-Keski-USA";
+  @override
+  String get offline_download_success => "Kuvat ja kuvat on ladattu onnistuneesti.";
+  @override
+  String get plant_flowering_from => "Kukinta";
+  @override
+  String get taxonomy_tribus => "Tribus";
+  @override
+  String get arabian_peninsula => "Arabian niemimaalla";
+  @override
+  String get search_taxonomy => "Hae taksonomiassa";
+  @override
+  String get rate_later => "Myöhemmin";
+  @override
+  String get color_message => "Mikä on kukka? Valitse lähin.";
+  @override
+  String get west_tropical_africa => "Läntinen trooppinen Afrikka";
+  @override
+  String get northern_europe => "Pohjoinen Eurooppa";
+  @override
+  String get rate => "Arvostelut";
+  @override
+  String get northeast_tropical_africa => "Koillis-trooppinen Afrikka";
+  @override
+  String get pref_language => "Suosittu kieli";
+  @override
+  String get product_custom_filter_title => "Mukautettu suodatin";
+  @override
+  String get new_zealand => "Uusi Seelanti";
+  @override
+  String get feedback_intro => "Olet osallistunut tähän sovellukseen, koska olet asentanut sen laitteeseen, kiitos. Jos etsit jotain muuta, tässä on muutamia vaihtoehtoja:";
+  @override
+  String get filter_distribution => "jakelu";
+  @override
+  String get eastern_asia => "Itä-Aasiassa";
+  @override
+  String get western_asia => "Länsi-Aasia";
+  @override
+  String get subarctic_america => "Subarktinen Amerikka";
+  @override
+  String get product_search_title => "Hae nimistä tai taksonomiasta";
+  @override
+  String get feedback_buy_extended => "Voit ostaa laajennettua versiota, jossa on lisätoimintoja, kuten offline-tilassa, etsiä nimiä, etsiä taksonomiassa, havainnoissa ja konfiguroitavissa olevassa suodattimessa.";
+  @override
+  String get north_central_usa => "Pohjois-Keski-USA";
+  @override
+  String get improve_translation => "Parantamaan käännösten";
+  @override
+  String get feedback_review => "Voit kirjoittaa positiivisen tarkistuksen.";
+  @override
+  String get southeastern_usa => "Kaakkois-USA";
+  @override
+  String get yes => "Joo";
+  @override
+  String get feedback_run_ads_video => "Katso videomainos";
+  @override
+  String get plant_height_from => "Korkeus";
+  @override
+  String get petal_many => "yli 5";
+  @override
+  String get southeastern_europe => "Kaakkois-Eurooppa";
+  @override
+  String get taxonomy_unknown => "tuntematon";
+  @override
+  String get plant_inflorescence => "Kukinto";
+  @override
+  String get northern_africa => "Pohjois-Afrikka";
+  @override
+  String get offline_subtitle => "vaatii 300+ MB lisää tilaa.";
+  @override
+  String get china => "Kiina";
+  @override
+  String get product_no_ads_title => "Ei ei-toivottua mainosta";
+  @override
+  String get offline_title => "Offline-tila";
+  @override
+  String get petal_zygomorphic => "vastakohtainen";
+  @override
+  String get taxonomy_genus => "Suku";
+  @override
+  String get papuasia => "Papuasia";
+  @override
+  String get feedback_submit_translate_app => "Paranna sovelluksen tarroja";
+}
+
+class $hr_HR extends S {
+  const $hr_HR();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Centralna Amerika";
+  @override
+  String get legend => "Legenda";
+  @override
+  String get product_offline_title => "Izvanmrežni način";
+  @override
+  String get feedback_submit_translate_data => "Poboljšajte podatke o cvijetu";
+  @override
+  String get snack_copy => "Kopirano u međuspremnik";
+  @override
+  String get product_purchase_failed => "Kupnja nije uspjela";
+  @override
+  String get about => "O aplikaciji";
+  @override
+  String get product_no_ads_description => "Aplikacija neće prikazati oglasni banner na dnu zaslona.";
+  @override
+  String get offline_download_progress => "Preuzimanje fotografija i ilustracija ...";
+  @override
+  String get western_canada => "Zapadna Kanada";
+  @override
+  String get northern_america => "Sjeverna Amerika";
+  @override
+  String get western_indian_ocean => "Zapadni Indijski ocean";
+  @override
+  String get feedback => "Povratne informacije";
+  @override
+  String get southwestern_usa => "Jugozapadno SAD";
+  @override
+  String get distribution_message => "Na koje ćemo se geografsko područje usredotočiti?";
+  @override
+  String get caribbean => "Karibi";
+  @override
+  String get product_search_description => "Cvijet ćete moći pronaći po njegovom hrvatskom ili latinskom nazivu ili po svojoj taksonu (npr. red, porodica, rod).";
+  @override
+  String get offline_delete_message => "Želite li izbrisati izvanmrežne podatke?";
+  @override
+  String get australasia => "Australazija";
+  @override
+  String get petal_4 => "4 ili manje";
+  @override
+  String get east_tropical_africa => "Istočna tropska Afrika";
+  @override
+  String get africa => "Afrika";
+  @override
+  String get south_tropical_africa => "Južna tropska Afrika";
+  @override
+  String get caucasus => "Kavkaz";
+  @override
+  String get middle_asia => "Srednja Azija";
+  @override
+  String get plant_gallery => "Galerija";
+  @override
+  String get always_my_region_subtitle => "Vaša će regija biti unaprijed postavljena na filtar";
+  @override
+  String get indochina => "Indo-Kina";
+  @override
+  String get feedback_translate => "Možete prijaviti svaku pogrešku ili pogrešku koju ste pronašli ili poslati novi prijevod na svoj jezik.";
+  @override
+  String get australia => "Australija";
+  @override
+  String get google_translate => "Prevedeno s Google prevoditelj";
+  @override
+  String get plant_leaf => "List";
+  @override
+  String get habitat_forest => "šume";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Malezija";
+  @override
+  String get southwestern_pacific => "Jugozapadni Tihi ocean";
+  @override
+  String get asia_tropical => "Azija-tropska";
+  @override
+  String get northwestern_usa => "Sjeverozapadna SAD";
+  @override
+  String get northern_south_america => "Sjeverna Južna Amerika";
+  @override
+  String get show_original => "Prikaži engleski tekst";
+  @override
+  String get offline_download_message => "Preuzet ćete 300+ MB fotografija i ilustracija. Provjerite je li uređaj spojen na Wi-Fi. Jeste li spremni za preuzimanje?";
+  @override
+  String get southern_america => "Južna Amerika";
+  @override
+  String get middle_atlantic_ocean => "Srednji Atlantski ocean";
+  @override
+  String get feedback_run_ads => "Možete prikazati oglas preko cijelog zaslona ili gledati video oglas kako biste podržali daljnji razvoj i poboljšanje baze podataka.";
+  @override
+  String get habitat_garden => "vrtovi ili polja";
+  @override
+  String get product_purchase => "Kupiti";
+  @override
+  String get russian_far_east => "Ruski Daleki Istok";
+  @override
+  String get west_central_tropical_africa => "Zapadno-središnja tropska Afrika";
+  @override
+  String get habitat_message => "Što je oko tebe? Identificirajte stanište biljke.";
+  @override
+  String get plant_toxicity => "Toksičnost";
+  @override
+  String get offline_download_fail => "Preuzimanje nije uspjelo. Provjerite internetsku vezu ili slobodan prostor na uređaju i pokušajte ponovno.";
+  @override
+  String get snack_no_flowers => "Nema kriterija za podudaranje.";
+  @override
+  String get rate_question => "Je li ova aplikacija korisna?";
+  @override
+  String get macaronesia => "Makaronezija";
+  @override
+  String get plant_taxonomy => "Taksonomija";
+  @override
+  String get feedback_run_ads_fullscreen => "Pokaži oglas preko cijelog zaslona";
+  @override
+  String get asia_temperate => "Azija-umjerenih";
+  @override
+  String get search => "Traži...";
+  @override
+  String get habitat_rock => "stijene ili planine";
+  @override
+  String get taxonomy_superregnum => "Domena";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "Mongolija";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "Zapadna Južna Amerika";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Zatvoriti";
+  @override
+  String get europe => "Europa";
+  @override
+  String get middle_europe => "Srednja Europa";
+  @override
+  String get color_blue => "plava, ljubičasta";
+  @override
+  String get my_filter => "Moj filtar";
+  @override
+  String get southern_south_america => "Južna Južna Amerika";
+  @override
+  String get plant_habitat => "Staništa";
+  @override
+  String get snack_loading_ad => "Oglas se još uvijek učitava, ponovno pritisnite gumb.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "latica";
+  @override
+  String get petal_message => "Je li cvijet zigomorfan? Ne? Koliko latica ima?";
+  @override
+  String get color_white => "bijela";
+  @override
+  String get northeastern_usa => "Sjeveroistočni SAD";
+  @override
+  String get color_green => "zelena, smeđa, crna";
+  @override
+  String get taxonomy_ordo => "Red";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "Tihi ocean";
+  @override
+  String get plant_sources => "Izvori";
+  @override
+  String get taxonomy_regnum => "Carstvo";
+  @override
+  String get south_central_pacific => "Južno-središnji Tihi ocean";
+  @override
+  String get filter_color => "boja";
+  @override
+  String get help => "Pomoć";
+  @override
+  String get mexico => "Meksiko";
+  @override
+  String get snack_publish => "... biti objavljen kasnije";
+  @override
+  String get siberia => "Sibir";
+  @override
+  String get taxonomy_subtribus => "Podtribus";
+  @override
+  String get product_custom_filter_description => "Moći ćete promijeniti zadani redoslijed i broj filtara (boja, stanište, latica, distribucija).";
+  @override
+  String get habitat_meadow => "livade ili pašnjaci";
+  @override
+  String get plant_trivia => "Trivijalnost";
+  @override
+  String get product_purchased => "Kupljen";
+  @override
+  String get taxonomy_cladus => "(Cladus)";
+  @override
+  String get plant_herbalism => "Travarstvo";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Nastavi preuzimanje";
+  @override
+  String get enhancements => "Poboljšanja";
+  @override
+  String get habitat_wetland => "močvare";
+  @override
+  String get product_restore_purchases => "Vraćanje kupnje";
+  @override
+  String get feedback_title => "Kako pridonijeti";
+  @override
+  String get toxicity2 => "blago otrovna biljka";
+  @override
+  String get toxicity1 => "otrovna biljka";
+  @override
+  String get eastern_canada => "Istočna Kanada";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Prikaži prevedeni tekst";
+  @override
+  String get habitat_tree => "stabala ili grmova";
+  @override
+  String get settings => "Postavke";
+  @override
+  String get color_red => "crvena, roza";
+  @override
+  String get north_central_pacific => "Sjeverno-središnji Tihi ocean";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Južna Afrika";
+  @override
+  String get always_my_region_title => "Uvijek dodajte moju regiju filtru";
+  @override
+  String get color_yellow => "žuta";
+  @override
+  String get subantarctic_islands => "Subantartički otoci";
+  @override
+  String get list_info => "Odabrati jedan";
+  @override
+  String get new_version => "Dostupna je nova verzija, ažurirajte.";
+  @override
+  String get taxonomy_subfamilia => "Potporodica";
+  @override
+  String get my_region => "Moja regija";
+  @override
+  String get pause => "Pauza";
+  @override
+  String get indian_subcontinent => "Indijski potkontinent";
+  @override
+  String get product_offline_description => "Moći ćete pokrenuti aplikaciju bez internetske veze.";
+  @override
+  String get plant_flower => "Cvijeće";
+  @override
+  String get filter_habitat => "stanište";
+  @override
+  String get rate_never => "Nikada";
+  @override
+  String get northwestern_pacific => "Sjeverozapadni Tihi ocean";
+  @override
+  String get search_names => "Pretražujte imena";
+  @override
+  String get southwestern_europe => "Jugozapadna Europa";
+  @override
+  String get taxonomy_species => "Vrsta";
+  @override
+  String get plant_fruit => "Plod";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Porodica";
+  @override
+  String get plant_stem => "Stablo";
+  @override
+  String get antarctic_continent => "Antarktički kontinent";
+  @override
+  String get no => "Ne";
+  @override
+  String get brazil => "Brazil";
+  @override
+  String get rate_text => "Autor ove aplikacije motiviran je pozitivnim odgovorom korisnika. Molim vas, pošaljite mu neke zvijezde kroz prodavaonicu aplikacija.";
+  @override
+  String get eastern_europe => "Istočna Europa";
+  @override
+  String get south_central_usa => "Južno-središnje SAD";
+  @override
+  String get offline_download_success => "Fotografije i ilustracije uspješno su preuzete.";
+  @override
+  String get plant_flowering_from => "Cvatnje:";
+  @override
+  String get taxonomy_tribus => "Tribus";
+  @override
+  String get arabian_peninsula => "Arapski poluotok";
+  @override
+  String get search_taxonomy => "Pretražujte taksonomiju";
+  @override
+  String get rate_later => "Kasnije";
+  @override
+  String get color_message => "Koja je boja cvijeta? Odaberite najbližeg.";
+  @override
+  String get west_tropical_africa => "Zapadna tropska Afrika";
+  @override
+  String get northern_europe => "Sjeverna Europa";
+  @override
+  String get rate => "Recenzije";
+  @override
+  String get northeast_tropical_africa => "Sjeveroistočna tropska Afrika";
+  @override
+  String get pref_language => "Preferirani jezik";
+  @override
+  String get product_custom_filter_title => "Prilagođeni filtar";
+  @override
+  String get new_zealand => "Novi Zeland";
+  @override
+  String get feedback_intro => "Doprinosili ste ovoj aplikaciji jer ste je instalirali na svom uređaju, hvala. Ako tražite nešto više, evo nekoliko opcija:";
+  @override
+  String get filter_distribution => "distribucija";
+  @override
+  String get eastern_asia => "Istočna Azija";
+  @override
+  String get western_asia => "Zapadna Azija";
+  @override
+  String get subarctic_america => "Subarktička Amerika";
+  @override
+  String get product_search_title => "Pretražujte imena ili taksonomiju";
+  @override
+  String get feedback_buy_extended => "Možete kupiti proširenu verziju s dodatnim funkcijama kao što je izvanmrežni način rada, tražiti imena, pretraživati u taksonomiji, promatrati i konfigurirati filtar.";
+  @override
+  String get north_central_usa => "Sjeverno središnje SAD";
+  @override
+  String get improve_translation => "Poboljšati prevođenje";
+  @override
+  String get feedback_review => "Možete napisati pozitivnu recenziju.";
+  @override
+  String get southeastern_usa => "Jugoistočni SAD";
+  @override
+  String get yes => "Da";
+  @override
+  String get feedback_run_ads_video => "Pogledajte video oglas";
+  @override
+  String get plant_height_from => "Visina:";
+  @override
+  String get petal_many => "više od 5";
+  @override
+  String get southeastern_europe => "Jugoistočna Europa";
+  @override
+  String get taxonomy_unknown => "nepoznat";
+  @override
+  String get plant_inflorescence => "Cvat";
+  @override
+  String get northern_africa => "Sjeverna Afrika";
+  @override
+  String get offline_subtitle => "zahtijeva dodatni prostor od 300+ MB.";
+  @override
+  String get china => "Kina";
+  @override
+  String get product_no_ads_title => "Nema neželjenog oglasa";
+  @override
+  String get offline_title => "Izvanmrežni način";
+  @override
+  String get taxonomy_genus => "Rod";
+  @override
+  String get papuasia => "Papuazija";
+  @override
+  String get feedback_submit_translate_app => "Poboljšajte oznake programa";
+}
+
+class $et_EE extends S {
+  const $et_EE();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Kesk-Ameerika";
+  @override
+  String get legend => "Legend";
+  @override
+  String get product_offline_title => "Võrguühenduseta režiim";
+  @override
+  String get feedback_submit_translate_data => "Parandage lilli andmeid";
+  @override
+  String get snack_copy => "Kopeeritud lõikelauale";
+  @override
+  String get product_purchase_failed => "Ostmine nurjus";
+  @override
+  String get about => "Rakenduse kohta";
+  @override
+  String get product_no_ads_description => "Rakendus ei näita ekraani allosas reklaami bännerit.";
+  @override
+  String get offline_download_progress => "Fotode ja illustratsioonide allalaadimine ...";
+  @override
+  String get western_canada => "Lääne-Kanada";
+  @override
+  String get northern_america => "Põhja-Ameerika";
+  @override
+  String get western_indian_ocean => "India ookeani lääneosa";
+  @override
+  String get feedback => "Tagasiside / Panus";
+  @override
+  String get southwestern_usa => "Edelaosa USA";
+  @override
+  String get distribution_message => "Milline geograafiline piirkond peaks keskenduma?";
+  @override
+  String get caribbean => "Kariibimere saared";
+  @override
+  String get product_search_description => "Sul on võimalik leida lill oma eesti või ladina nime või taksoni järgi (nt selts, sugukond, perekond).";
+  @override
+  String get offline_delete_message => "Kas soovite offline andmeid kustutada?";
+  @override
+  String get australasia => "Austraalia";
+  @override
+  String get petal_4 => "4 või vähem";
+  @override
+  String get east_tropical_africa => "Ida troopiline Aafrika";
+  @override
+  String get africa => "Aafrika";
+  @override
+  String get south_tropical_africa => "Lõuna-troopiline Aafrika";
+  @override
+  String get caucasus => "Kaukaasia";
+  @override
+  String get middle_asia => "Kesk-Aasias";
+  @override
+  String get plant_gallery => "Galerii";
+  @override
+  String get always_my_region_subtitle => "Teie piirkond on filtrile eelnevalt seadistatud";
+  @override
+  String get indochina => "Indo-Hiina";
+  @override
+  String get feedback_translate => "Saate teatada mis tahes leitud veast või veast või esitada uue tõlke oma keelde.";
+  @override
+  String get australia => "Austraalia";
+  @override
+  String get google_translate => "Tõlgitud Google Translate";
+  @override
+  String get plant_leaf => "Lehed";
+  @override
+  String get habitat_forest => "metsamaad või metsade";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Malaisia";
+  @override
+  String get southwestern_pacific => "Vaikse ookeani edelaosa";
+  @override
+  String get asia_tropical => "Aasia-Troopiline";
+  @override
+  String get northwestern_usa => "Loode USA";
+  @override
+  String get northern_south_america => "Põhja-Lõuna-Ameerika";
+  @override
+  String get show_original => "Näita ingliskeelne tekst";
+  @override
+  String get offline_download_message => "Sa laadid alla 300+ MB fotosid ja illustratsioone. Kontrollige, kas teie seade on ühendatud Wi-Fi-ga. Kas olete valmis allalaadimiseks?";
+  @override
+  String get southern_america => "Lõuna-Ameerika";
+  @override
+  String get middle_atlantic_ocean => "Kesk-Atlandi ookean";
+  @override
+  String get feedback_run_ads => "Täiendava ekraani reklaami või videoreklaami saate kuvada edasise arengu ja andmebaaside täiustamise toetamiseks.";
+  @override
+  String get habitat_garden => "aiad või väljad";
+  @override
+  String get product_purchase => "Ostmine";
+  @override
+  String get russian_far_east => "Vene Kaug-Ida";
+  @override
+  String get west_central_tropical_africa => "Lääne-Kesk-troopiline Aafrika";
+  @override
+  String get habitat_message => "Mis teie ümber? Nimetage taime elupaiga.";
+  @override
+  String get plant_toxicity => "Mürgisus";
+  @override
+  String get offline_download_fail => "Allalaadimine ebaõnnestus. Palun kontrollige oma Interneti-ühendust või vaba ruumi seadmes ja proovige uuesti.";
+  @override
+  String get snack_no_flowers => "Lillede sobitamise kriteeriumid puuduvad.";
+  @override
+  String get rate_question => "See app kasulik?";
+  @override
+  String get macaronesia => "Makaroneesia";
+  @override
+  String get plant_taxonomy => "Taksonoomia";
+  @override
+  String get feedback_run_ads_fullscreen => "Näita täisekraani reklaami";
+  @override
+  String get asia_temperate => "Aasia-Mõõdukas";
+  @override
+  String get search => "Otsing...";
+  @override
+  String get habitat_rock => "kivid või mägedes";
+  @override
+  String get taxonomy_superregnum => "Domeen";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "Mongoolia";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "Lääne-Lõuna-Ameerika";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "Sulge";
+  @override
+  String get europe => "Euroopa";
+  @override
+  String get middle_europe => "Kesk-Euroopa";
+  @override
+  String get color_blue => "sinine, lilla";
+  @override
+  String get my_filter => "Minu filter";
+  @override
+  String get southern_south_america => "Lõuna-Lõuna-Ameerika";
+  @override
+  String get plant_habitat => "Elupaik";
+  @override
+  String get snack_loading_ad => "Reklaam laaditakse ikka veel, vajutage uuesti nuppu.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "kroonlehed";
+  @override
+  String get petal_message => "Kas lill ebaregulaarne? Ei? Siis, kui palju kroonlehed see on?";
+  @override
+  String get color_white => "valge";
+  @override
+  String get northeastern_usa => "Kirdeosas USA";
+  @override
+  String get color_green => "roheline, pruun, must";
+  @override
+  String get taxonomy_ordo => "Selts";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "Vaikne ookean";
+  @override
+  String get plant_sources => "Allikad";
+  @override
+  String get taxonomy_regnum => "Riik";
+  @override
+  String get south_central_pacific => "Vaikse ookeani keskosas";
+  @override
+  String get filter_color => "värv";
+  @override
+  String get help => "Appi";
+  @override
+  String get mexico => "Mehhiko";
+  @override
+  String get snack_publish => "... avaldatakse hiljem";
+  @override
+  String get siberia => "Siberis";
+  @override
+  String get taxonomy_subtribus => "Subtriibus";
+  @override
+  String get product_custom_filter_description => "Saate muuta vaikimisi järjekorra ja filtrite arvu (värv, elupaikade, kroonleht, levitamine).";
+  @override
+  String get habitat_meadow => "heinamaad või rohumaade";
+  @override
+  String get plant_trivia => "Tühiasi";
+  @override
+  String get product_purchased => "Ostetud";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "Raviteaduse";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Jätka allalaadimist";
+  @override
+  String get enhancements => "Täiendused";
+  @override
+  String get habitat_wetland => "moorlandi või märgala";
+  @override
+  String get product_restore_purchases => "Ostude taastamine";
+  @override
+  String get feedback_title => "Kuidas aidata";
+  @override
+  String get toxicity2 => "veidi mürgine taim";
+  @override
+  String get toxicity1 => "mürgine taim";
+  @override
+  String get eastern_canada => "Ida-Kanada";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Kuva tõlgitud tekst";
+  @override
+  String get habitat_tree => "puud või põõsad";
+  @override
+  String get settings => "Reguleerimine";
+  @override
+  String get color_red => "punane, roosa";
+  @override
+  String get north_central_pacific => "Vaikse ookeani põhja-keskosa";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Lõuna-Aafrika";
+  @override
+  String get always_my_region_title => "Lisage alati minu piirkond filtrile";
+  @override
+  String get color_yellow => "kollane";
+  @override
+  String get subantarctic_islands => "Subantkartised saared";
+  @override
+  String get list_info => "Vali üks";
+  @override
+  String get new_version => "Uus versioon on saadaval, värskendage.";
+  @override
+  String get taxonomy_subfamilia => "Subfamily";
+  @override
+  String get my_region => "Minu regioon";
+  @override
+  String get pause => "Paus";
+  @override
+  String get indian_subcontinent => "India subkontinent";
+  @override
+  String get product_offline_description => "Teil on võimalik käivitada rakendust ilma internetiühenduseta.";
+  @override
+  String get plant_flower => "Õis";
+  @override
+  String get filter_habitat => "elupaikade";
+  @override
+  String get rate_never => "Mitte kunagi";
+  @override
+  String get northwestern_pacific => "Vaikse ookeani loodeosas";
+  @override
+  String get search_names => "Otsi nimedest";
+  @override
+  String get southwestern_europe => "Edela-Euroopa";
+  @override
+  String get taxonomy_species => "Liik";
+  @override
+  String get plant_fruit => "Vili";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Sugukond";
+  @override
+  String get plant_stem => "Vars";
+  @override
+  String get antarctic_continent => "Antarktika mandril";
+  @override
+  String get no => "Ei";
+  @override
+  String get brazil => "Brasiilia";
+  @override
+  String get rate_text => "Selle rakenduse autorit toetab kasutajate positiivne vastus. Palun saatke talle mõned tähed rakenduste poe kaudu.";
+  @override
+  String get eastern_europe => "Ida-Euroopa";
+  @override
+  String get south_central_usa => "Lõuna-Keskne USA";
+  @override
+  String get offline_download_success => "Fotod ja illustratsioonid on edukalt alla laaditud.";
+  @override
+  String get plant_flowering_from => "Õitsemine";
+  @override
+  String get taxonomy_tribus => "Triibus";
+  @override
+  String get arabian_peninsula => "Araabia poolsaar";
+  @override
+  String get search_taxonomy => "Otsi taksonoomias";
+  @override
+  String get rate_later => "Pärast";
+  @override
+  String get color_message => "Mis värvi lill? Vali lähim.";
+  @override
+  String get west_tropical_africa => "Lääne troopiline Aafrika";
+  @override
+  String get northern_europe => "Põhja-Euroopa";
+  @override
+  String get rate => "Arvustus";
+  @override
+  String get northeast_tropical_africa => "Kirde troopiline Aafrika";
+  @override
+  String get pref_language => "Eelistatud keel";
+  @override
+  String get product_custom_filter_title => "Kohandatud filter";
+  @override
+  String get new_zealand => "Uus-Meremaa";
+  @override
+  String get feedback_intro => "Tänu sellele, et olete selle seadmesse installinud, olete sellele rakendusele kaasa aidanud. Kui otsite midagi muud, on siin mõned võimalused:";
+  @override
+  String get filter_distribution => "levitamine";
+  @override
+  String get eastern_asia => "Ida-Aasias";
+  @override
+  String get western_asia => "Lääne-Aasias";
+  @override
+  String get subarctic_america => "Subarctic Ameerika";
+  @override
+  String get product_search_title => "Otsi nimedest või taksonoomiast";
+  @override
+  String get feedback_buy_extended => "Laiendatud (+) versiooni saate osta täiendava funktsionaalsusega, näiteks offline režiimis, otsida nimesid, otsida taksonoomiast, vaatlustest ja seadistatavast filtrist.";
+  @override
+  String get north_central_usa => "Põhja-Keskne USA";
+  @override
+  String get improve_translation => "Parandada tõlge";
+  @override
+  String get feedback_review => "Võite kirjutada positiivse ülevaate.";
+  @override
+  String get southeastern_usa => "Kaguosas USA";
+  @override
+  String get yes => "Jah";
+  @override
+  String get feedback_run_ads_video => "Vaadake videoreklaami";
+  @override
+  String get plant_height_from => "Kõrgus";
+  @override
+  String get petal_many => "rohkem kui 5";
+  @override
+  String get southeastern_europe => "Kagu-Euroopa";
+  @override
+  String get taxonomy_unknown => "teadmata";
+  @override
+  String get plant_inflorescence => "Õisik";
+  @override
+  String get northern_africa => "Põhja-Aafrika";
+  @override
+  String get offline_subtitle => "vajab 300+ MB lisaruumi.";
+  @override
+  String get china => "Hiina";
+  @override
+  String get product_no_ads_title => "Soovimatu reklaam puudub";
+  @override
+  String get offline_title => "Võrguühenduseta režiim";
+  @override
+  String get petal_zygomorphic => "ebaregulaarne";
+  @override
+  String get taxonomy_genus => "Perekond";
+  @override
+  String get papuasia => "Papuasia";
+  @override
+  String get feedback_submit_translate_app => "Parandage rakenduse sildid";
+}
+
+class $en_US extends S {
+  const $en_US();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+}
+
+class $lt_LT extends S {
+  const $lt_LT();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Centrinė Amerika";
+  @override
+  String get legend => "Legenda";
+  @override
+  String get product_offline_title => "Atsijungęs režimas";
+  @override
+  String get feedback_submit_translate_data => "Pagerinkite gėlių duomenis";
+  @override
+  String get snack_copy => "Kopijuojama į iškarpinę";
+  @override
+  String get product_purchase_failed => "Pirkimas nepavyko";
+  @override
+  String get about => "Apie paraišką";
+  @override
+  String get product_no_ads_description => "Programos apačioje ekrano reklama nebus rodoma.";
+  @override
+  String get offline_download_progress => "Nuotraukų ir iliustracijų atsisiuntimas ...";
+  @override
+  String get western_canada => "Vakarų Kanadoje";
+  @override
+  String get northern_america => "Šiaurės Amerika";
+  @override
+  String get western_indian_ocean => "Indijos vandenyno vakaras";
+  @override
+  String get feedback => "Grįžtamasis ryšys / Indėlis";
+  @override
+  String get southwestern_usa => "Pietvakarių JAV";
+  @override
+  String get distribution_message => "Kokią geografinę vietovę turėtume sutelkti?";
+  @override
+  String get caribbean => "Karibai";
+  @override
+  String get product_search_description => "Gali rasti gėlę pagal savo lietuvių ar lotynų kalbą arba taksoną (pvz., Eilė, šeimą, gentį).";
+  @override
+  String get offline_delete_message => "Ar norite ištrinti neprisijungus duomenis?";
+  @override
+  String get australasia => "Australasija";
+  @override
+  String get petal_4 => "4 arba mažiau";
+  @override
+  String get east_tropical_africa => "Rytų tropinė Afrika";
+  @override
+  String get africa => "Afrika";
+  @override
+  String get south_tropical_africa => "Pietų tropinė Afrika";
+  @override
+  String get caucasus => "Kaukazas";
+  @override
+  String get middle_asia => "Vidurinė Azija";
+  @override
+  String get plant_gallery => "Galerija";
+  @override
+  String get always_my_region_subtitle => "Jūsų regionas bus iš anksto nustatytas filtre";
+  @override
+  String get indochina => "Indijos Kinija";
+  @override
+  String get feedback_translate => "Galite pranešti apie rastą klaidą ar klaidą arba pateikti naują vertimą į savo kalbą.";
+  @override
+  String get australia => "Australija";
+  @override
+  String get google_translate => "Išvertus su Google Translate";
+  @override
+  String get plant_leaf => "Lapai";
+  @override
+  String get habitat_forest => "miškai";
+  @override
+  String get taxonomy_serie => "Serija";
+  @override
+  String get malesia => "Malaizija";
+  @override
+  String get southwestern_pacific => "Ramiojo vandenyno pietvakariai";
+  @override
+  String get asia_tropical => "Azijos tropinis";
+  @override
+  String get northwestern_usa => "Šiaurės vakarų JAV";
+  @override
+  String get northern_south_america => "Šiaurės Pietų Amerika";
+  @override
+  String get show_original => "Rodyti tekstas anglų kalba";
+  @override
+  String get offline_download_message => "Atsisiųsite 300+ MB nuotraukų ir iliustracijų. Patikrinkite, ar įrenginys prijungtas prie „Wi-Fi“. Ar esate pasiruošę atsisiųsti?";
+  @override
+  String get southern_america => "Pietų Amerika";
+  @override
+  String get middle_atlantic_ocean => "Vidurio Atlanto vandenynas";
+  @override
+  String get feedback_run_ads => "Galite rodyti viso ekrano skelbimą arba žiūrėti vaizdo įrašo reklamą, kad palaikytumėte tolesnę plėtrą ir duomenų bazės tobulinimą.";
+  @override
+  String get habitat_garden => "sodai ar laukai";
+  @override
+  String get product_purchase => "Įsigyti";
+  @override
+  String get russian_far_east => "Rusijos Tolimuosiuose Rytuose";
+  @override
+  String get west_central_tropical_africa => "Vakarų-Centrinė tropinė Afrika";
+  @override
+  String get habitat_message => "Kas vyksta aplink jus? Nustatyti gamyklos buveinių.";
+  @override
+  String get plant_toxicity => "Toksiškumas";
+  @override
+  String get offline_download_fail => "Atsisiuntimas nepavyko. Patikrinkite interneto ryšį arba laisvą vietą įrenginyje ir bandykite dar kartą.";
+  @override
+  String get snack_no_flowers => "Nėra gėlių atitikimo kriterijų.";
+  @override
+  String get rate_question => "Ar šią programą naudinga?";
+  @override
+  String get macaronesia => "Makaronezija";
+  @override
+  String get plant_taxonomy => "Taksonomija";
+  @override
+  String get feedback_run_ads_fullscreen => "Rodyti viso ekrano skelbimą";
+  @override
+  String get asia_temperate => "Azijos temperatuotas";
+  @override
+  String get search => "Paieška...";
+  @override
+  String get habitat_rock => "uolienos ar kalnai";
+  @override
+  String get taxonomy_superregnum => "Domenas";
+  @override
+  String get taxonomy_sectio => "Sekcija";
+  @override
+  String get mongolia => "Mongolija";
+  @override
+  String get taxonomy_subserie => "Subserija";
+  @override
+  String get western_south_america => "Vakarų Pietų Amerika";
+  @override
+  String get taxonomy_subgenus => "Pogentė";
+  @override
+  String get close => "Uždaryti";
+  @override
+  String get europe => "Europa";
+  @override
+  String get middle_europe => "Vidurio Europa";
+  @override
+  String get color_blue => "mėlyna, violetinė";
+  @override
+  String get my_filter => "Mano filtras";
+  @override
+  String get southern_south_america => "Pietų Pietų Amerika";
+  @override
+  String get plant_habitat => "Buveinė";
+  @override
+  String get snack_loading_ad => "Reklama vis dar įkeliama, dar kartą paspauskite mygtuką.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "vainiklapis";
+  @override
+  String get petal_message => "Ar gėlė nereguliarus? Ar ne? Tada kiek žiedlapių ji neturi?";
+  @override
+  String get color_white => "baltas";
+  @override
+  String get northeastern_usa => "Šiaurės rytų JAV";
+  @override
+  String get color_green => "žalia, ruda, juoda";
+  @override
+  String get taxonomy_ordo => "Eilė";
+  @override
+  String get taxonomy_supersectio => "Supersekcija";
+  @override
+  String get pacific => "Ramusis vandenynas";
+  @override
+  String get plant_sources => "Šaltiniai";
+  @override
+  String get taxonomy_regnum => "Karalystė";
+  @override
+  String get south_central_pacific => "Ramiojo vandenyno pietinė dalis";
+  @override
+  String get filter_color => "spalva";
+  @override
+  String get help => "Padėkite";
+  @override
+  String get mexico => "Meksika";
+  @override
+  String get snack_publish => "... bus paskelbta vėliau";
+  @override
+  String get siberia => "Sibiras";
+  @override
+  String get taxonomy_subtribus => "Subtriba";
+  @override
+  String get product_custom_filter_description => "Galėsite pakeisti numatytąjį užsakymų skaičių ir filtrų skaičių (spalva, buveinė, vainiklapis, platinimas).";
+  @override
+  String get habitat_meadow => "pievas ar pievos";
+  @override
+  String get plant_trivia => "Obuolys";
+  @override
+  String get product_purchased => "Įgytinis";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "Žolininkystė";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Tęsti atsisiuntimą";
+  @override
+  String get enhancements => "Priedai";
+  @override
+  String get habitat_wetland => "šlapžemės";
+  @override
+  String get product_restore_purchases => "Atkurti pirkimus";
+  @override
+  String get feedback_title => "Kaip prisidėti";
+  @override
+  String get toxicity2 => "šiek tiek nuodingas augalas";
+  @override
+  String get toxicity1 => "nuodingas augalas";
+  @override
+  String get eastern_canada => "Rytų Kanadoje";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Rodyti išverstas tekstas";
+  @override
+  String get habitat_tree => "medžiai ar krūmai";
+  @override
+  String get settings => "Nustatymai";
+  @override
+  String get color_red => "raudona, rožinė";
+  @override
+  String get north_central_pacific => "Ramiojo vandenyno šiaurės ir centrinė dalis";
+  @override
+  String get taxonomy_subsectio => "Subsekcija";
+  @override
+  String get southern_africa => "Pietų Afrika";
+  @override
+  String get always_my_region_title => "Visada pridėkite mano regioną prie filtro";
+  @override
+  String get color_yellow => "geltonas";
+  @override
+  String get subantarctic_islands => "Subartkartinės salos";
+  @override
+  String get list_info => "Pasirinkti vieną";
+  @override
+  String get new_version => "Yra nauja versija, atnaujinkite.";
+  @override
+  String get taxonomy_subfamilia => "Pošeimis";
+  @override
+  String get my_region => "Mano regionas";
+  @override
+  String get pause => "Pauzė";
+  @override
+  String get indian_subcontinent => "Indijos subkontinentas";
+  @override
+  String get product_offline_description => "Galėsite paleisti programą be interneto ryšio.";
+  @override
+  String get plant_flower => "Žiedas";
+  @override
+  String get filter_habitat => "buveinių";
+  @override
+  String get rate_never => "Niekada";
+  @override
+  String get northwestern_pacific => "Ramiojo vandenyno šiaurės vakarai";
+  @override
+  String get search_names => "Ieškoti vardų";
+  @override
+  String get southwestern_europe => "Pietvakarių Europa";
+  @override
+  String get taxonomy_species => "Rūšis";
+  @override
+  String get plant_fruit => "Vaisius";
+  @override
+  String get plant_flowering_to => "iki";
+  @override
+  String get taxonomy_familia => "Šeima";
+  @override
+  String get plant_stem => "Stiebas";
+  @override
+  String get antarctic_continent => "Antarkties žemynas";
+  @override
+  String get no => "Ne";
+  @override
+  String get brazil => "Brazilija";
+  @override
+  String get rate_text => "Šios programos autorius yra pagrįstas teigiamu vartotojų atsakymu. Atsiųskite jam keletą žvaigždžių per taikomąją parduotuvę.";
+  @override
+  String get eastern_europe => "Rytų Europa";
+  @override
+  String get south_central_usa => "Pietu-Centrinė JAV";
+  @override
+  String get offline_download_success => "Nuotraukos ir iliustracijos sėkmingai atsisiųsti.";
+  @override
+  String get plant_flowering_from => "Žydėjimas nuo";
+  @override
+  String get taxonomy_tribus => "Triba";
+  @override
+  String get arabian_peninsula => "Arabijos pusiasalis";
+  @override
+  String get search_taxonomy => "Ieškoti taksonomijoje";
+  @override
+  String get rate_later => "Vėliau";
+  @override
+  String get color_message => "Koks gėlių spalva? Pasirinkite artimiausią.";
+  @override
+  String get west_tropical_africa => "Vakarų tropinė Afrika";
+  @override
+  String get northern_europe => "Šiaurės Europa";
+  @override
+  String get rate => "Apžvalga";
+  @override
+  String get northeast_tropical_africa => "Šiaurės rytų tropinė Afrika";
+  @override
+  String get pref_language => "Pageidautina kalba";
+  @override
+  String get product_custom_filter_title => "Pasirinktinis filtras";
+  @override
+  String get new_zealand => "Naujoji Zelandija";
+  @override
+  String get feedback_intro => "Jūs prisidėjote prie šios programos, nes ją įdiegėte savo prietaise. Jei ieškote ko nors daugiau, čia pateikiamos kelios parinktys:";
+  @override
+  String get filter_distribution => "platinimas";
+  @override
+  String get eastern_asia => "Rytų Azija";
+  @override
+  String get western_asia => "Vakarų Azija";
+  @override
+  String get subarctic_america => "Subartikinė Amerika";
+  @override
+  String get product_search_title => "Ieškoti vardų arba taksonomijos";
+  @override
+  String get feedback_buy_extended => "Galite įsigyti išplėstinę versiją su papildomomis funkcijomis, pavyzdžiui, neprisijungus, ieškoti vardų, ieškoti taksonomijos, stebėjimų ir konfigūruojamo filtro.";
+  @override
+  String get north_central_usa => "Šiaurės-Centrinė JAV";
+  @override
+  String get improve_translation => "Pagerinti vertimą";
+  @override
+  String get feedback_review => "Galite parašyti teigiamą apžvalgą.";
+  @override
+  String get southeastern_usa => "Pietryčių JAV";
+  @override
+  String get yes => "Taip";
+  @override
+  String get feedback_run_ads_video => "Žiūrėti vaizdo įrašo skelbimą";
+  @override
+  String get plant_height_from => "Aukštis";
+  @override
+  String get petal_many => "daugiau nei 5";
+  @override
+  String get southeastern_europe => "Pietryčių Europa";
+  @override
+  String get taxonomy_unknown => "nežinomas";
+  @override
+  String get plant_inflorescence => "Žiedynas";
+  @override
+  String get northern_africa => "Šiaurės Afrika";
+  @override
+  String get offline_subtitle => "reikia 300+ MB papildomos vietos.";
+  @override
+  String get china => "Kinija";
+  @override
+  String get product_no_ads_title => "Nėra nepageidaujamo skelbimo";
+  @override
+  String get offline_title => "Atsijungęs režimas";
+  @override
+  String get petal_zygomorphic => "nereguliarus";
+  @override
+  String get taxonomy_genus => "Gentis";
+  @override
+  String get papuasia => "Papuazija";
+  @override
+  String get feedback_submit_translate_app => "Pagerinti programos etiketes";
+}
+
+class $lv_LV extends S {
+  const $lv_LV();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Centrālamerika";
+  @override
+  String get legend => "Leģenda";
+  @override
+  String get product_offline_title => "Bezsaistes režīms";
+  @override
+  String get feedback_submit_translate_data => "Uzlabojiet ziedu datus";
+  @override
+  String get snack_copy => "Kopēts uz starpliktuvi";
+  @override
+  String get product_purchase_failed => "Pirkums neizdevās";
+  @override
+  String get about => "Par lietojumprogrammu";
+  @override
+  String get product_no_ads_description => "Pieteikums neparādīs reklāmas reklāmkarogu ekrāna apakšā.";
+  @override
+  String get offline_download_progress => "Fotoattēlu un ilustrāciju lejupielāde ...";
+  @override
+  String get western_canada => "Rietumu Kanāda";
+  @override
+  String get northern_america => "Ziemeļamerika";
+  @override
+  String get western_indian_ocean => "Indijas okeāna rietumi";
+  @override
+  String get feedback => "Atsauksmes";
+  @override
+  String get southwestern_usa => "Dienvidrietumu ASV";
+  @override
+  String get distribution_message => "Kuram ģeogrāfiskajam apgabalam vajadzētu koncentrēties?";
+  @override
+  String get caribbean => "Karību jūras reģions";
+  @override
+  String get product_search_description => "Jūs varēsiet atrast ziedu ar savu latviešu vai latīņu vārdu vai taksonu (piemēram, Rinda, Dzimta, Ģints).";
+  @override
+  String get offline_delete_message => "Vai vēlaties dzēst bezsaistes datus?";
+  @override
+  String get australasia => "Austrālāzija";
+  @override
+  String get petal_4 => "4 arba mažiau";
+  @override
+  String get east_tropical_africa => "Austrumu tropu Āfrika";
+  @override
+  String get africa => "Āfrika";
+  @override
+  String get south_tropical_africa => "Dienvidu tropu Āfrika";
+  @override
+  String get caucasus => "Kaukāzs";
+  @override
+  String get middle_asia => "Vidusāzija";
+  @override
+  String get plant_gallery => "Galerija";
+  @override
+  String get always_my_region_subtitle => "Jūsu reģions tiks iestatīts uz filtru";
+  @override
+  String get indochina => "Indo Ķīna";
+  @override
+  String get feedback_translate => "Jūs varat ziņot par atrasto kļūdu vai kļūdu vai iesniegt jaunu tulkojumu savā valodā.";
+  @override
+  String get australia => "Austrālija";
+  @override
+  String get google_translate => "Tulkots ar Google Translate";
+  @override
+  String get plant_leaf => "Lapas";
+  @override
+  String get habitat_forest => "miškai";
+  @override
+  String get taxonomy_serie => "Sērija";
+  @override
+  String get malesia => "Malaizija";
+  @override
+  String get southwestern_pacific => "Klusā okeāna dienvidrietumu daļa";
+  @override
+  String get asia_tropical => "Āzija Tropisks";
+  @override
+  String get northwestern_usa => "Ziemeļrietumu ASV";
+  @override
+  String get northern_south_america => "Ziemeļu Dienvidamerika";
+  @override
+  String get show_original => "Rādīt angļu valodā";
+  @override
+  String get offline_download_message => "Jūs lejupielādēsiet 300+ MB fotogrāfijas un ilustrācijas. Lūdzu, pārbaudiet, vai ierīce ir savienota ar Wi-Fi. Vai esat gatavs lejupielādei?";
+  @override
+  String get southern_america => "Dienvidamerika";
+  @override
+  String get middle_atlantic_ocean => "Viduvie Atlantijas okeāns";
+  @override
+  String get feedback_run_ads => "Jūs varat parādīt pilnekrāna reklāmu vai skatīties video reklāmu, lai atbalstītu turpmāku attīstību un datu bāzes uzlabošanu.";
+  @override
+  String get habitat_garden => "sodai ar laukai";
+  @override
+  String get product_purchase => "Pirkt";
+  @override
+  String get russian_far_east => "Krievu Tālajos Austrumos";
+  @override
+  String get west_central_tropical_africa => "Rietumu centrālā tropu afrika";
+  @override
+  String get habitat_message => "Kas ir ap jums? Identificēt auga dzīvotni.";
+  @override
+  String get plant_toxicity => "Toksiskums";
+  @override
+  String get offline_download_fail => "Lejupielāde neizdevās. Lūdzu, pārbaudiet interneta savienojumu vai brīvo vietu ierīcē un mēģiniet vēlreiz.";
+  @override
+  String get snack_no_flowers => "Nav ziedu atbilstības kritēriju.";
+  @override
+  String get rate_question => "Vai šī app noderīga?";
+  @override
+  String get macaronesia => "Makaronēzija";
+  @override
+  String get plant_taxonomy => "Taksonomija";
+  @override
+  String get feedback_run_ads_fullscreen => "Rādīt pilnekrāna reklāmu";
+  @override
+  String get asia_temperate => "Āzija Viduslaiku";
+  @override
+  String get search => "Meklēt...";
+  @override
+  String get habitat_rock => "uolienos ar kalnai";
+  @override
+  String get taxonomy_superregnum => "Impērija";
+  @override
+  String get taxonomy_sectio => "Sekcija";
+  @override
+  String get mongolia => "Mongolija";
+  @override
+  String get taxonomy_subserie => "Apakšsērija";
+  @override
+  String get western_south_america => "Rietumu Dienvidamerika";
+  @override
+  String get taxonomy_subgenus => "Apakšģints";
+  @override
+  String get close => "Aizvērt";
+  @override
+  String get europe => "Eiropa";
+  @override
+  String get middle_europe => "Vidēja Eiropa";
+  @override
+  String get color_blue => "mėlyna, violetinė";
+  @override
+  String get my_filter => "Mans filtrs";
+  @override
+  String get southern_south_america => "Dienvidamerika dienvidos";
+  @override
+  String get plant_habitat => "Izplatības areāls";
+  @override
+  String get snack_loading_ad => "Reklāma joprojām tiek ielādēta, vēlreiz nospiediet pogu.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "ziedlapiņa";
+  @override
+  String get petal_message => "Vai ziedu neregulāra? Nē? Tad cik ziedlapiņas tas ir?";
+  @override
+  String get color_white => "baltas";
+  @override
+  String get northeastern_usa => "Ziemeļaustrumu ASV";
+  @override
+  String get color_green => "žalia, ruda, juoda";
+  @override
+  String get taxonomy_ordo => "Rinda";
+  @override
+  String get taxonomy_supersectio => "Virssekcija";
+  @override
+  String get pacific => "Klusais okeāns";
+  @override
+  String get plant_sources => "Pirmsākums";
+  @override
+  String get taxonomy_regnum => "Valsts";
+  @override
+  String get south_central_pacific => "Klusā okeāna dienvidu daļa";
+  @override
+  String get filter_color => "krāsa";
+  @override
+  String get help => "Palīdzība";
+  @override
+  String get mexico => "Meksika";
+  @override
+  String get snack_publish => "... publicēt vēlāk";
+  @override
+  String get siberia => "Sibīrija";
+  @override
+  String get taxonomy_subtribus => "Apakšcilts";
+  @override
+  String get product_custom_filter_description => "Jūs varēsiet mainīt noklusējuma secību un filtru skaitu (krāsa, biotopa, ziedlapiņa, izplatīšana).";
+  @override
+  String get habitat_meadow => "pievas ar pievos";
+  @override
+  String get plant_trivia => "Nieki";
+  @override
+  String get product_purchased => "Legādāts";
+  @override
+  String get taxonomy_cladus => "(clade)";
+  @override
+  String get plant_herbalism => "Herbalism";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Atsākt lejupielādi";
+  @override
+  String get enhancements => "Uzlabojumi";
+  @override
+  String get habitat_wetland => "šlapžemės";
+  @override
+  String get product_restore_purchases => "Atjaunot pirkumus";
+  @override
+  String get feedback_title => "Kā piedalīties";
+  @override
+  String get toxicity2 => "nedaudz indīgs augs";
+  @override
+  String get toxicity1 => "indīgs augs";
+  @override
+  String get eastern_canada => "Austrumu Kanāda";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Rādīt tulkoto tekstu";
+  @override
+  String get habitat_tree => "medžiai ar krūmai";
+  @override
+  String get settings => "Iestatījumi";
+  @override
+  String get color_red => "raudona, rožinė";
+  @override
+  String get north_central_pacific => "Klusā okeāna ziemeļu daļa";
+  @override
+  String get taxonomy_subsectio => "Apakšsekcija";
+  @override
+  String get southern_africa => "Dienvidāfrika";
+  @override
+  String get always_my_region_title => "Vienmēr pievienojiet manu reģionu filtram";
+  @override
+  String get color_yellow => "geltonas";
+  @override
+  String get subantarctic_islands => "Subantkartiskas salas";
+  @override
+  String get list_info => "Izvēlēties vienu";
+  @override
+  String get new_version => "Ir pieejama jauna versija, lūdzu, atjauniniet to.";
+  @override
+  String get taxonomy_subfamilia => "Apakšdzimta";
+  @override
+  String get my_region => "Mans reģions";
+  @override
+  String get pause => "Pauze";
+  @override
+  String get indian_subcontinent => "Indijas subkontinents";
+  @override
+  String get product_offline_description => "Jūs varēsiet palaist programmu bez interneta pieslēguma.";
+  @override
+  String get plant_flower => "Zieds";
+  @override
+  String get filter_habitat => "biotopi";
+  @override
+  String get rate_never => "Nekad";
+  @override
+  String get northwestern_pacific => "Klusā okeāna ziemeļrietumu daļa";
+  @override
+  String get search_names => "Meklēt vārdos";
+  @override
+  String get southwestern_europe => "Dienvidrietumu Eiropa";
+  @override
+  String get taxonomy_species => "Suga";
+  @override
+  String get plant_fruit => "Auglis";
+  @override
+  String get plant_flowering_to => "līdz";
+  @override
+  String get taxonomy_familia => "Dzimta";
+  @override
+  String get plant_stem => "Stumbrs";
+  @override
+  String get antarctic_continent => "Antarktikas kontinents";
+  @override
+  String get no => "Nē";
+  @override
+  String get brazil => "Brazīlija";
+  @override
+  String get rate_text => "Šī pieteikuma autors ir motivēts ar pozitīvu lietotāju atbildi. Lūdzu, sūtiet viņam dažas zvaigznes, izmantojot lietojumprogrammu veikalu.";
+  @override
+  String get eastern_europe => "Austrumeiropa";
+  @override
+  String get south_central_usa => "Dienvidu ASV";
+  @override
+  String get offline_download_success => "Fotogrāfijas un ilustrācijas ir veiksmīgi lejupielādētas.";
+  @override
+  String get plant_flowering_from => "Ziedēšanas no";
+  @override
+  String get taxonomy_tribus => "Cilts";
+  @override
+  String get arabian_peninsula => "Arābijas pussala";
+  @override
+  String get search_taxonomy => "Meklēt taksonomijā";
+  @override
+  String get rate_later => "Vēlāk";
+  @override
+  String get color_message => "Kas ir krāsa ziedu? Izvēlieties tuvāko.";
+  @override
+  String get west_tropical_africa => "Rietumu tropu Āfrika";
+  @override
+  String get northern_europe => "Ziemeļeiropa";
+  @override
+  String get rate => "Pārskats";
+  @override
+  String get northeast_tropical_africa => "Ziemeļaustrumu tropu Āfrika";
+  @override
+  String get pref_language => "Pageidautina kalba";
+  @override
+  String get product_custom_filter_title => "Pielāgots filtrs";
+  @override
+  String get new_zealand => "Jaunzēlande";
+  @override
+  String get feedback_intro => "Jūs esat veicinājis šo lietojumprogrammu, jo esat to instalējis savā ierīcē. Ja jūs meklējat kaut ko vairāk, šeit ir dažas iespējas:";
+  @override
+  String get filter_distribution => "izplatīšana";
+  @override
+  String get eastern_asia => "Austrumāzija";
+  @override
+  String get western_asia => "Rietumu Āzija";
+  @override
+  String get subarctic_america => "Subartikā Amerika";
+  @override
+  String get product_search_title => "Meklēt nosaukumos vai taksonomijā";
+  @override
+  String get feedback_buy_extended => "Jūs varat iegādāties paplašinātu versiju ar papildu funkcionalitāti, piemēram, bezsaistes režīmā, meklēt nosaukumos, meklēt taksonomijā, novērojumos un konfigurējamajā filtrā.";
+  @override
+  String get north_central_usa => "Ziemeļu ASV";
+  @override
+  String get improve_translation => "Uzlabot tulkojumu";
+  @override
+  String get feedback_review => "Jūs varat uzrakstīt pozitīvu pārskatu.";
+  @override
+  String get southeastern_usa => "Dienvidaustrumu ASV";
+  @override
+  String get yes => "Jā";
+  @override
+  String get feedback_run_ads_video => "Skatiet video reklāmu";
+  @override
+  String get plant_height_from => "Augstums";
+  @override
+  String get petal_many => "daugiau nei 5";
+  @override
+  String get southeastern_europe => "Dienvidaustrumeiropa";
+  @override
+  String get taxonomy_unknown => "nezināms";
+  @override
+  String get plant_inflorescence => "Ziedkopa";
+  @override
+  String get northern_africa => "Ziemeļāfrika";
+  @override
+  String get offline_subtitle => "nepieciešama 300+ MB papildu telpa.";
+  @override
+  String get china => "Ķīna";
+  @override
+  String get product_no_ads_title => "Nav nevēlamas reklāmas";
+  @override
+  String get offline_title => "Bezsaistes režīms";
+  @override
+  String get petal_zygomorphic => "nereguliarus";
+  @override
+  String get taxonomy_genus => "Ģints";
+  @override
+  String get papuasia => "Papuāzija";
+  @override
+  String get feedback_submit_translate_app => "Uzlabojiet lietojumprogrammas uzlīmes";
+}
+
+class $uk_UA extends S {
+  const $uk_UA();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Центральна Америка";
+  @override
+  String get legend => "Легенда";
+  @override
+  String get product_offline_title => "Автономний режим";
+  @override
+  String get feedback_submit_translate_data => "Покращити дані квітки";
+  @override
+  String get snack_copy => "Копіюється в буфер обміну";
+  @override
+  String get product_purchase_failed => "Покупку не вдалося";
+  @override
+  String get about => "Про додатку";
+  @override
+  String get product_no_ads_description => "Програма не покаже рекламний банер внизу екрана.";
+  @override
+  String get offline_download_progress => "Завантаження фотографій і ілюстрацій ...";
+  @override
+  String get western_canada => "Західна Канада";
+  @override
+  String get northern_america => "Північна Америка";
+  @override
+  String get western_indian_ocean => "Західний індійський океан";
+  @override
+  String get feedback => "Відповідь";
+  @override
+  String get southwestern_usa => "Південно-західна США";
+  @override
+  String get distribution_message => "На яку географічну область ми маємо зосередитися?";
+  @override
+  String get caribbean => "Карибський басейн";
+  @override
+  String get product_search_description => "Ви зможете знайти квітку за її українською або латинською назвою або за її таксоном (наприклад ряд, родина, рід).";
+  @override
+  String get offline_delete_message => "Видалити дані в автономному режимі?";
+  @override
+  String get australasia => "Австралазія";
+  @override
+  String get petal_4 => "4 або менш";
+  @override
+  String get east_tropical_africa => "Східна тропічна Африка";
+  @override
+  String get africa => "Африка";
+  @override
+  String get south_tropical_africa => "Південна тропічна Африка";
+  @override
+  String get caucasus => "Кавказ";
+  @override
+  String get middle_asia => "Середня Азія";
+  @override
+  String get plant_gallery => "Галерея";
+  @override
+  String get always_my_region_subtitle => "Ваш регіон буде попередньо встановлено на фільтр";
+  @override
+  String get indochina => "Індо-Китай";
+  @override
+  String get feedback_translate => "Ви можете повідомити про будь-яку друкарську помилку або помилку, яку ви знайшли, або подати новий переклад вашою мовою.";
+  @override
+  String get australia => "Австралія";
+  @override
+  String get google_translate => "Переклад з Google Translate";
+  @override
+  String get plant_leaf => "Листя";
+  @override
+  String get habitat_forest => "ліси";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Малезія";
+  @override
+  String get southwestern_pacific => "Південно-Західний Тихий океан";
+  @override
+  String get asia_tropical => "Азія-Тропічнаа";
+  @override
+  String get northwestern_usa => "Північно-західна США";
+  @override
+  String get northern_south_america => "Північна Південна Америка";
+  @override
+  String get show_original => "Показати англійський текст";
+  @override
+  String get offline_download_message => "Ви збираєтеся завантажити 300+ Мб фотографій і ілюстрацій. Перевірте, чи пристрій підключено до wi-fi. Чи готові ви до завантаження?";
+  @override
+  String get southern_america => "Південна Америка";
+  @override
+  String get middle_atlantic_ocean => "Середній атлантичний океан";
+  @override
+  String get feedback_run_ads => "Ви можете відображати повноекранну рекламу або переглядати відеооб'яву для підтримки подальшого розвитку та розширення бази даних.";
+  @override
+  String get habitat_garden => "сади або поля";
+  @override
+  String get product_purchase => "Придбати";
+  @override
+  String get russian_far_east => "Російський Далекий Схід";
+  @override
+  String get west_central_tropical_africa => "Центрально-західна тропічна Африка";
+  @override
+  String get habitat_message => "Що навколо тебе? Визначити місце проживання рослин.";
+  @override
+  String get plant_toxicity => "Токсичність";
+  @override
+  String get offline_download_fail => "Помилка завантаження. Перевірте підключення до Інтернету або вільний простір на пристрої та повторіть спробу.";
+  @override
+  String get snack_no_flowers => "Критерії відповідності квітам відсутні.";
+  @override
+  String get rate_question => "Чи є це додаток корисним?";
+  @override
+  String get macaronesia => "Макаронезія";
+  @override
+  String get plant_taxonomy => "Систематика";
+  @override
+  String get feedback_run_ads_fullscreen => "Показати повноекранну рекламу";
+  @override
+  String get asia_temperate => "Азія-Темнолітнаа";
+  @override
+  String get search => "Шукати ...";
+  @override
+  String get habitat_rock => "скелі або гори";
+  @override
+  String get taxonomy_superregnum => "Домен";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "Монголія";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "Західна Південна Америка";
+  @override
+  String get taxonomy_subgenus => "Підрід";
+  @override
+  String get close => "Закрити";
+  @override
+  String get europe => "Європа";
+  @override
+  String get middle_europe => "Середня Європа";
+  @override
+  String get color_blue => "синій, фіолетовий";
+  @override
+  String get my_filter => "Мій фільтр";
+  @override
+  String get southern_south_america => "Південна Південна Америка";
+  @override
+  String get plant_habitat => "Середовище";
+  @override
+  String get snack_loading_ad => "Реклама все ще завантажується, знову натисніть кнопку.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "пелюстка";
+  @override
+  String get petal_message => "Чи квітка зигоморфна? Ні? Тоді скільки пелюсток є?";
+  @override
+  String get color_white => "білий";
+  @override
+  String get northeastern_usa => "Північно-східна США";
+  @override
+  String get color_green => "зелений, коричневий, чорний";
+  @override
+  String get taxonomy_ordo => "Ряд";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "Тихий океан";
+  @override
+  String get plant_sources => "Джерела";
+  @override
+  String get taxonomy_regnum => "Царство";
+  @override
+  String get south_central_pacific => "Південно-центральний Тихий океан";
+  @override
+  String get filter_color => "колір";
+  @override
+  String get help => "Довідка";
+  @override
+  String get mexico => "Мексика";
+  @override
+  String get snack_publish => "... буде опубліковано пізніше";
+  @override
+  String get siberia => "Сибір";
+  @override
+  String get taxonomy_subtribus => "Підтриба";
+  @override
+  String get product_custom_filter_description => "Ви зможете змінити стандартний порядок і кількість фільтрів (колір, середовище, пелюстка, розповсюдження).";
+  @override
+  String get habitat_meadow => "луки або пасовища";
+  @override
+  String get plant_trivia => "Дрібниці";
+  @override
+  String get product_purchased => "Придбано";
+  @override
+  String get taxonomy_cladus => "(клада)";
+  @override
+  String get plant_herbalism => "Травнічество";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Відновити завантаження";
+  @override
+  String get enhancements => "Покращення";
+  @override
+  String get habitat_wetland => "водно-болотні угіддя";
+  @override
+  String get product_restore_purchases => "Відновити покупки";
+  @override
+  String get feedback_title => "Як зробити внесок";
+  @override
+  String get toxicity2 => "злегка отруйна рослина";
+  @override
+  String get toxicity1 => "отруйна рослина";
+  @override
+  String get eastern_canada => "Східна Канада";
+  @override
+  String get plant_info => "Інформація";
+  @override
+  String get show_translation => "Показати перекладений текст";
+  @override
+  String get habitat_tree => "дерева або чагарники";
+  @override
+  String get settings => "Налаштування";
+  @override
+  String get color_red => "червоний, рожевий";
+  @override
+  String get north_central_pacific => "Північно-Центральний Тихий океан";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Південна Африка";
+  @override
+  String get always_my_region_title => "Завжди додайте мій регіон до фільтра";
+  @override
+  String get color_yellow => "жовтий";
+  @override
+  String get subantarctic_islands => "Субантарктичні острови";
+  @override
+  String get list_info => "Вибрати один";
+  @override
+  String get new_version => "Нова версія доступна, будь ласка, оновіть.";
+  @override
+  String get taxonomy_subfamilia => "Підродина";
+  @override
+  String get my_region => "Мій регіон";
+  @override
+  String get pause => "Пауза";
+  @override
+  String get indian_subcontinent => "Індійський субконтинент";
+  @override
+  String get product_offline_description => "Ви зможете запускати програму без підключення до Інтернету.";
+  @override
+  String get plant_flower => "Квіти";
+  @override
+  String get filter_habitat => "середовище";
+  @override
+  String get rate_never => "Ніколи";
+  @override
+  String get northwestern_pacific => "Північно-західний Тихий океан";
+  @override
+  String get search_names => "Пошук по іменах";
+  @override
+  String get southwestern_europe => "Південно-Західна Європа";
+  @override
+  String get taxonomy_species => "Вид";
+  @override
+  String get plant_fruit => "Плід";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Родина";
+  @override
+  String get plant_stem => "Стебло";
+  @override
+  String get antarctic_continent => "Антарктичний континент";
+  @override
+  String get no => "Ні";
+  @override
+  String get brazil => "Бразилія";
+  @override
+  String get rate_text => "Автор цієї програми мотивується позитивною реакцією користувачів. Будь ласка, надішліть йому кілька зірок через магазин додатків.";
+  @override
+  String get eastern_europe => "Східна Європа";
+  @override
+  String get south_central_usa => "Південно-Центральна США";
+  @override
+  String get offline_download_success => "Фотографії та ілюстрації успішно завантажені.";
+  @override
+  String get plant_flowering_from => "Цвіте:";
+  @override
+  String get taxonomy_tribus => "Триба";
+  @override
+  String get arabian_peninsula => "Аравійський півострів";
+  @override
+  String get search_taxonomy => "Пошук у таксономії";
+  @override
+  String get rate_later => "Пізніше";
+  @override
+  String get color_message => "Який колір квітки? Виберіть найближчий.";
+  @override
+  String get west_tropical_africa => "Західна тропічна Африка";
+  @override
+  String get northern_europe => "Північна Європа";
+  @override
+  String get rate => "Відгуки";
+  @override
+  String get northeast_tropical_africa => "Північно-східна тропічна Африка";
+  @override
+  String get pref_language => "Бажана мова";
+  @override
+  String get product_custom_filter_title => "Спеціальний фільтр";
+  @override
+  String get new_zealand => "Нова Зеландія";
+  @override
+  String get feedback_intro => "Ви внесли свій внесок у цю програму з моменту встановлення її на своєму пристрої. Якщо ви шукаєте більше тут, є кілька варіантів:";
+  @override
+  String get filter_distribution => "розповсюдження";
+  @override
+  String get eastern_asia => "Східна Азія";
+  @override
+  String get western_asia => "Західна Азія";
+  @override
+  String get subarctic_america => "Субарктична Америка";
+  @override
+  String get product_search_title => "Пошук по іменах або таксономії";
+  @override
+  String get feedback_buy_extended => "Ви можете придбати розширену версію з додатковими функціональними можливостями, наприклад, автономний режим, пошук по іменах, пошук в таксономії, спостереженнях і налаштованому фільтрі.";
+  @override
+  String get north_central_usa => "Північ-Центральна США";
+  @override
+  String get improve_translation => "Поліпшення перекладу";
+  @override
+  String get feedback_review => "Можна написати позитивний відгук.";
+  @override
+  String get southeastern_usa => "Південно-східна США";
+  @override
+  String get yes => "Так";
+  @override
+  String get feedback_run_ads_video => "Дивитися відео рекламу";
+  @override
+  String get plant_height_from => "Висота:";
+  @override
+  String get petal_many => "більше 5";
+  @override
+  String get southeastern_europe => "Південно-Східна Європа";
+  @override
+  String get taxonomy_unknown => "невідомий";
+  @override
+  String get plant_inflorescence => "Суцвіття";
+  @override
+  String get northern_africa => "Північна Африка";
+  @override
+  String get offline_subtitle => "потрібно більше 300 МБ додаткового простору.";
+  @override
+  String get china => "Китай";
+  @override
+  String get product_no_ads_title => "Немає небажаної реклами";
+  @override
+  String get offline_title => "Автономний режим";
+  @override
+  String get petal_zygomorphic => "зигоморфной";
+  @override
+  String get taxonomy_genus => "Рід";
+  @override
+  String get papuasia => "Папуазія";
+  @override
+  String get feedback_submit_translate_app => "Покращити ярлики програми";
+}
+
+class $sl_SI extends S {
+  const $sl_SI();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "Srednja Amerika";
+  @override
+  String get legend => "Legenda";
+  @override
+  String get product_offline_title => "Način brez povezave";
+  @override
+  String get feedback_submit_translate_data => "Izboljšajte podatke o cvetju";
+  @override
+  String get snack_copy => "Kopirano v odložišče";
+  @override
+  String get product_purchase_failed => "Nakup ni uspel";
+  @override
+  String get about => "O aplikaciji";
+  @override
+  String get product_no_ads_description => "Aplikacija ne bo prikazala oglasne pasice na dnu zaslona.";
+  @override
+  String get offline_download_progress => "Prenos fotografij in ilustracij ...";
+  @override
+  String get western_canada => "Zahodna Kanada";
+  @override
+  String get northern_america => "Severna Amerika";
+  @override
+  String get western_indian_ocean => "Zahodni Indijski ocean";
+  @override
+  String get feedback => "Povratne informacije / Prispevek";
+  @override
+  String get southwestern_usa => "Jugozahodna ZDA";
+  @override
+  String get distribution_message => "Na katero geografsko območje se moramo osredotočiti?";
+  @override
+  String get caribbean => "Karibi";
+  @override
+  String get product_search_description => "Cvet bo mogoče najti po slovenskem ali latinskem imenu ali po taksonu (npr. red, družina, rod).";
+  @override
+  String get offline_delete_message => "Ali želite izbrisati podatke brez povezave?";
+  @override
+  String get australasia => "Avstralija";
+  @override
+  String get petal_4 => "4 ali manj";
+  @override
+  String get east_tropical_africa => "Vzhodna tropska Afrika";
+  @override
+  String get africa => "Afrika";
+  @override
+  String get south_tropical_africa => "Južna tropska Afrika";
+  @override
+  String get caucasus => "Kavkaz";
+  @override
+  String get middle_asia => "Srednja Azija";
+  @override
+  String get plant_gallery => "Galerija";
+  @override
+  String get always_my_region_subtitle => "Vaša regija bo vnaprej nastavljena na filter";
+  @override
+  String get indochina => "Indo-Kitajska";
+  @override
+  String get feedback_translate => "Lahko prijavite kakršno koli tipkarsko napako ali napako, ki ste jo našli, ali pošljete nov prevod v vaš jezik.";
+  @override
+  String get australia => "Avstralija";
+  @override
+  String get google_translate => "Prevedeno z Google Translate";
+  @override
+  String get plant_leaf => "Listi";
+  @override
+  String get habitat_forest => "gozdovi";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "Malezija";
+  @override
+  String get southwestern_pacific => "Jugozahodni Pacifik";
+  @override
+  String get asia_tropical => "Azija tropski";
+  @override
+  String get northwestern_usa => "Severozahodna ZDA";
+  @override
+  String get northern_south_america => "Severna Južna Amerika";
+  @override
+  String get show_original => "Prikaži angleško besedilo";
+  @override
+  String get offline_download_message => "Naložili boste 300+ MB fotografij in ilustracij. Preverite, ali je vaša naprava povezana z wi-fi. Ste pripravljeni za prenos?";
+  @override
+  String get southern_america => "Južna Amerika";
+  @override
+  String get middle_atlantic_ocean => "Srednji Atlantski ocean";
+  @override
+  String get feedback_run_ads => "Lahko prikažete celozaslonski oglas ali si ogledate video oglas, ki podpira nadaljnji razvoj in izboljšavo baze podatkov.";
+  @override
+  String get habitat_garden => "vrtov ali polja";
+  @override
+  String get product_purchase => "Kupiti";
+  @override
+  String get russian_far_east => "Ruski daleč vzhod";
+  @override
+  String get west_central_tropical_africa => "Zahodno-srednja tropska Afrika";
+  @override
+  String get habitat_message => "Kaj je okoli vas? Prepoznajte rastline habitat.";
+  @override
+  String get plant_toxicity => "Toksičnost";
+  @override
+  String get offline_download_fail => "Prenos ni uspel. Preverite internetno povezavo ali pa sprostite prostor na napravi in poskusite znova.";
+  @override
+  String get snack_no_flowers => "Ni meril za ujemanje cvetja.";
+  @override
+  String get rate_question => "Je ta vloga v pomoč?";
+  @override
+  String get macaronesia => "Makaronezija";
+  @override
+  String get plant_taxonomy => "Taksonomija";
+  @override
+  String get feedback_run_ads_fullscreen => "Pokaži celozaslonski oglas";
+  @override
+  String get asia_temperate => "Azija temperaturna";
+  @override
+  String get search => "Iskati...";
+  @override
+  String get habitat_rock => "skale ali gore";
+  @override
+  String get taxonomy_superregnum => "Domena";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "Mongolija";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "Zahodna Južna Amerika";
+  @override
+  String get taxonomy_subgenus => "Podrod";
+  @override
+  String get close => "Zapri";
+  @override
+  String get europe => "Evropa";
+  @override
+  String get middle_europe => "Srednja Evropa";
+  @override
+  String get color_blue => "modra, vijolična";
+  @override
+  String get my_filter => "Moj filter";
+  @override
+  String get southern_south_america => "Južna Južna Amerika";
+  @override
+  String get plant_habitat => "Habitat";
+  @override
+  String get snack_loading_ad => "Oglas se še vedno nalaga, ponovno pritisnite gumb.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "petali";
+  @override
+  String get petal_message => "Je cvet zigomorfni? Ne? Potem, koliko venčnih listov ima?";
+  @override
+  String get color_white => "bela";
+  @override
+  String get northeastern_usa => "Severovzhodna ZDA";
+  @override
+  String get color_green => "zelena, rjava, črna";
+  @override
+  String get taxonomy_ordo => "Red";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "Pacifik";
+  @override
+  String get plant_sources => "Viri";
+  @override
+  String get taxonomy_regnum => "Kraljestvo";
+  @override
+  String get south_central_pacific => "Južni osrednji Pacifik";
+  @override
+  String get filter_color => "barve";
+  @override
+  String get help => "Pomoč";
+  @override
+  String get mexico => "Mehika";
+  @override
+  String get snack_publish => "... bo objavljen pozneje";
+  @override
+  String get siberia => "Siberia";
+  @override
+  String get taxonomy_subtribus => "Podpleme";
+  @override
+  String get product_custom_filter_description => "Spremenili boste lahko privzeti vrstni red in število filtrov (barve, habitate, petali, distribucija).";
+  @override
+  String get habitat_meadow => "travniki ali pašniki";
+  @override
+  String get plant_trivia => "Trivia";
+  @override
+  String get product_purchased => "Kupljeno";
+  @override
+  String get taxonomy_cladus => "(klad)";
+  @override
+  String get plant_herbalism => "Zeliščarstvo";
+  @override
+  String get plant_height_to => "-";
+  @override
+  String get offline_download => "Nadaljuj prenos";
+  @override
+  String get enhancements => "Dodatki";
+  @override
+  String get habitat_wetland => "močvirje ali mokrišča";
+  @override
+  String get product_restore_purchases => "Obnovi nakup";
+  @override
+  String get feedback_title => "Kako prispevati";
+  @override
+  String get toxicity2 => "nekoliko strupena rastlina";
+  @override
+  String get toxicity1 => "strupena rastlina";
+  @override
+  String get eastern_canada => "Vzhodna Kanada";
+  @override
+  String get plant_info => "Informacije";
+  @override
+  String get show_translation => "Pokaži prevedeno besedilo";
+  @override
+  String get habitat_tree => "drevesa ali grmi";
+  @override
+  String get settings => "Nastavitve";
+  @override
+  String get color_red => "rdeča, roza";
+  @override
+  String get north_central_pacific => "Severni osrednji Pacifik";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "Južna Afrika";
+  @override
+  String get always_my_region_title => "Vedno dodajte mojo regijo v filter";
+  @override
+  String get color_yellow => "rumena";
+  @override
+  String get subantarctic_islands => "Podantarktični otoki";
+  @override
+  String get list_info => "Izbrati eno";
+  @override
+  String get new_version => "Na voljo je nova različica, posodobite.";
+  @override
+  String get taxonomy_subfamilia => "Poddružina";
+  @override
+  String get my_region => "Moja regija";
+  @override
+  String get pause => "Pavza";
+  @override
+  String get indian_subcontinent => "Indijski podcelini";
+  @override
+  String get product_offline_description => "Aplikacijo lahko zaženete brez internetne povezave.";
+  @override
+  String get plant_flower => "Cvetje";
+  @override
+  String get filter_habitat => "habitate";
+  @override
+  String get rate_never => "Nikoli";
+  @override
+  String get northwestern_pacific => "Severozahodni Pacifik";
+  @override
+  String get search_names => "Išči po imenih";
+  @override
+  String get southwestern_europe => "Jugozahodna Evropa";
+  @override
+  String get taxonomy_species => "Vrsta";
+  @override
+  String get plant_fruit => "Plod";
+  @override
+  String get plant_flowering_to => "-";
+  @override
+  String get taxonomy_familia => "Družina";
+  @override
+  String get plant_stem => "Steblo";
+  @override
+  String get antarctic_continent => "Antarktična celina";
+  @override
+  String get no => "Ne";
+  @override
+  String get brazil => "Brazilija";
+  @override
+  String get rate_text => "Avtor te aplikacije je motiviran s pozitivnim odzivom uporabnikov. Prosim, pošljite mu nekaj zvezd skozi trgovino z aplikacijami.";
+  @override
+  String get eastern_europe => "Vzhodna Evropa";
+  @override
+  String get south_central_usa => "Južna osrednja ZDA";
+  @override
+  String get offline_download_success => "Fotografije in ilustracije so bile uspešno prenesene.";
+  @override
+  String get plant_flowering_from => "Cvetoče:";
+  @override
+  String get taxonomy_tribus => "Pleme";
+  @override
+  String get arabian_peninsula => "Arabski polotok";
+  @override
+  String get search_taxonomy => "Išči v taksonomiji";
+  @override
+  String get rate_later => "Kasneje";
+  @override
+  String get color_message => "Kaj je barva cveta? Izberite najustreznejšo.";
+  @override
+  String get west_tropical_africa => "Zahodna tropska Afrika";
+  @override
+  String get northern_europe => "Severna Evropa";
+  @override
+  String get rate => "Mnenja";
+  @override
+  String get northeast_tropical_africa => "Severovzhodna tropska Afrika";
+  @override
+  String get pref_language => "Želeni jezik";
+  @override
+  String get product_custom_filter_title => "Filter po meri";
+  @override
+  String get new_zealand => "Nova Zelandija";
+  @override
+  String get feedback_intro => "Prispevali ste k tej aplikaciji, ker ste jo namestili v napravo, hvala. Če iščete nekaj več, si oglejte nekaj možnosti:";
+  @override
+  String get filter_distribution => "distribucija";
+  @override
+  String get eastern_asia => "Vzhodna Azija";
+  @override
+  String get western_asia => "Zahodna Azija";
+  @override
+  String get subarctic_america => "Subarctic Amerika";
+  @override
+  String get product_search_title => "Išči po imenih ali taksonomiji";
+  @override
+  String get feedback_buy_extended => "Razširjeno različico lahko kupite z dodatnimi funkcijami, kot je način brez povezave, iskanje imen, iskanje v taksonomiji, opazovanje in nastavljiv filter.";
+  @override
+  String get north_central_usa => "Severna osrednja ZDA";
+  @override
+  String get improve_translation => "Izboljšati prevod";
+  @override
+  String get feedback_review => "Lahko napišete pozitivno mnenje.";
+  @override
+  String get southeastern_usa => "Jugovzhodna ZDA";
+  @override
+  String get yes => "Ja";
+  @override
+  String get feedback_run_ads_video => "Oglejte si video oglas";
+  @override
+  String get plant_height_from => "Višina";
+  @override
+  String get petal_many => "več kot 5";
+  @override
+  String get southeastern_europe => "Jugovzhodna Evropa";
+  @override
+  String get taxonomy_unknown => "neznano";
+  @override
+  String get plant_inflorescence => "Socvetje";
+  @override
+  String get northern_africa => "Severna Afrika";
+  @override
+  String get offline_subtitle => "potrebuje dodatnih 300 MB dodatnega prostora.";
+  @override
+  String get china => "Kitajska";
+  @override
+  String get product_no_ads_title => "Brez neželenega oglasa";
+  @override
+  String get offline_title => "Način brez povezave";
+  @override
+  String get petal_zygomorphic => "zigomorfna";
+  @override
+  String get taxonomy_genus => "Rod";
+  @override
+  String get papuasia => "Papuazija";
+  @override
+  String get feedback_submit_translate_app => "Izboljšajte oznake aplikacij";
+}
+
+class $ar_EG extends S {
+  const $ar_EG();
+
+  @override
+  TextDirection get textDirection => TextDirection.rtl;
+
+  @override
+  String get central_america => "أمريكا الوسطى";
+  @override
+  String get legend => "مفتاح";
+  @override
+  String get product_offline_title => "غير متصل بالشبكة";
+  @override
+  String get feedback_submit_translate_data => "تحسين بيانات الزهور";
+  @override
+  String get snack_copy => "نسخ إلى الحافظة";
+  @override
+  String get product_purchase_failed => "الشراء لم ينجح";
+  @override
+  String get about => "حول";
+  @override
+  String get product_no_ads_description => "لن يعرض التطبيق إعلان بانر في أسفل الشاشة.";
+  @override
+  String get offline_download_progress => "جارٍ تنزيل الصور والرسوم التوضيحية ...";
+  @override
+  String get western_canada => "غرب كندا";
+  @override
+  String get northern_america => "أمريكا الشمالية";
+  @override
+  String get western_indian_ocean => "غرب المحيط الهندي";
+  @override
+  String get feedback => "تعليق";
+  @override
+  String get southwestern_usa => "جنوب غرب الولايات المتحدة";
+  @override
+  String get distribution_message => "ما هي المنطقة الجغرافية التي ينبغي لنا التركيز عليها؟";
+  @override
+  String get caribbean => "منطقة البحر الكاريبي";
+  @override
+  String get product_search_description => "ستتمكن من العثور على زهرة باسمها اللاتيني أو عن طريق صنفها (على سبيل المثال ، الرتبة ، الفصيلة ، الجنس.";
+  @override
+  String get offline_delete_message => "هل تريد حذف البيانات بلا اتصال؟";
+  @override
+  String get australasia => "أستراليا";
+  @override
+  String get petal_4 => "أربعة أو أقل";
+  @override
+  String get east_tropical_africa => "شرق الاستوائية أفريقيا";
+  @override
+  String get africa => "أفريقيا";
+  @override
+  String get south_tropical_africa => "جنوب الاستوائية أفريقيا";
+  @override
+  String get caucasus => "القوقاز";
+  @override
+  String get middle_asia => "آسيا الوسطى";
+  @override
+  String get plant_gallery => "صالة عرض";
+  @override
+  String get always_my_region_subtitle => "سيتم إعداد منطقتك مسبقًا على الفلتر";
+  @override
+  String get indochina => "الهند الصينية";
+  @override
+  String get feedback_translate => "يمكنك الإبلاغ عن أي خطأ مطبعي أو خطأ وجدته أو قدم ترجمة جديدة بلغتك.";
+  @override
+  String get australia => "أستراليا";
+  @override
+  String get google_translate => "تمت الترجمة مع الترجمة من غوغل";
+  @override
+  String get plant_leaf => "اوراق";
+  @override
+  String get habitat_forest => "الغابات";
+  @override
+  String get taxonomy_serie => "Serie";
+  @override
+  String get malesia => "ماليزيا";
+  @override
+  String get southwestern_pacific => "جنوب غرب المحيط الهادئ";
+  @override
+  String get asia_tropical => "آسيا الاستوائية";
+  @override
+  String get northwestern_usa => "شمال غرب الولايات المتحدة";
+  @override
+  String get northern_south_america => "شمال أمريكا الجنوبية";
+  @override
+  String get show_original => "عرض النص الإنكليزي";
+  @override
+  String get offline_download_message => "ستقوم بتنزيل 300+ ميغابايت من الصور والرسوم التوضيحية. يرجى التحقق مما إذا كان جهازك متصلاً بشبكة wi-fi. هل أنت مستعد للتنزيل؟";
+  @override
+  String get southern_america => "أمريكا الجنوبية";
+  @override
+  String get middle_atlantic_ocean => "المحيط الأطلسي الأوسط";
+  @override
+  String get feedback_run_ads => "يمكنك عرض إعلان بملء الشاشة أو مشاهدة إعلان فيديو لدعم تطوير إضافي وتحسين قاعدة البيانات.";
+  @override
+  String get habitat_garden => "حدائق أو حقول";
+  @override
+  String get product_purchase => "شراء";
+  @override
+  String get russian_far_east => "الشرق الأقصى الروسي";
+  @override
+  String get west_central_tropical_africa => "غرب وسط الاستوائية أفريقيا";
+  @override
+  String get habitat_message => "ماذا حولك؟ تحديد موطن النبات.";
+  @override
+  String get plant_toxicity => "تأثير سمي";
+  @override
+  String get offline_download_fail => "التحميل فشل. يرجى التحقق من اتصالك بالإنترنت أو المساحة الخالية على الجهاز وإعادة المحاولة.";
+  @override
+  String get snack_no_flowers => "لا توجد معايير مطابقة للزهور.";
+  @override
+  String get rate_question => "هل هذا التطبيق مفيد؟";
+  @override
+  String get macaronesia => "ماكارونيسيا";
+  @override
+  String get plant_taxonomy => "علم التصنيف";
+  @override
+  String get feedback_run_ads_fullscreen => "عرض إعلان بملء الشاشة";
+  @override
+  String get asia_temperate => "آسيا المعتدلة";
+  @override
+  String get search => "بحث...";
+  @override
+  String get habitat_rock => "صخور أو جبال";
+  @override
+  String get taxonomy_superregnum => "النطاق";
+  @override
+  String get taxonomy_sectio => "Sectio";
+  @override
+  String get mongolia => "منغوليا";
+  @override
+  String get taxonomy_subserie => "Subserie";
+  @override
+  String get western_south_america => "غرب أمريكا الجنوبية";
+  @override
+  String get taxonomy_subgenus => "Subgenus";
+  @override
+  String get close => "قريب";
+  @override
+  String get europe => "أوروبا";
+  @override
+  String get middle_europe => "وسط أوروبا";
+  @override
+  String get color_blue => "أزرق أرجواني";
+  @override
+  String get my_filter => "مرشح بلدي";
+  @override
+  String get southern_south_america => "جنوب أمريكا الجنوبية";
+  @override
+  String get plant_habitat => "موطن";
+  @override
+  String get snack_loading_ad => "لا يزال يتم تحميل الإعلان ، اضغط على الزر مرة أخرى.";
+  @override
+  String get petal_5 => "خمسة";
+  @override
+  String get filter_petal => "بتلة";
+  @override
+  String get petal_message => "هل الزهرة متناظرة؟ لا؟ ثم كم عدد بتلات الزهرة؟";
+  @override
+  String get color_white => "أبيض";
+  @override
+  String get northeastern_usa => "شمال شرق الولايات المتحدة";
+  @override
+  String get color_green => "أخضر، بني، أسود";
+  @override
+  String get taxonomy_ordo => "الرتبة";
+  @override
+  String get taxonomy_supersectio => "Supersectio";
+  @override
+  String get pacific => "المحيط الهادئ";
+  @override
+  String get plant_sources => "مصادر";
+  @override
+  String get taxonomy_regnum => "المملكة";
+  @override
+  String get south_central_pacific => "جنوب وسط المحيط الهادئ";
+  @override
+  String get filter_color => "اللون";
+  @override
+  String get help => "مساعدة";
+  @override
+  String get mexico => "المكسيك";
+  @override
+  String get snack_publish => "ليتم نشرها في وقت لاحق";
+  @override
+  String get siberia => "سيبيريا";
+  @override
+  String get taxonomy_subtribus => "العميرة";
+  @override
+  String get product_custom_filter_description => "ستتمكن من تغيير الترتيب الافتراضي وعدد المرشحات (اللون ، موطن ، بتلة ، توزيع).";
+  @override
+  String get habitat_meadow => "مروج أو مراعي";
+  @override
+  String get plant_trivia => "معلومات";
+  @override
+  String get product_purchased => "اشترى";
+  @override
+  String get taxonomy_cladus => "(غير مصنف)";
+  @override
+  String get plant_herbalism => "دراسة الأعشاب";
+  @override
+  String get plant_height_to => "إلى";
+  @override
+  String get offline_download => "استئناف تحميل";
+  @override
+  String get enhancements => "التحسينات";
+  @override
+  String get habitat_wetland => "مستنقعات أو أراضي الرطبة";
+  @override
+  String get product_restore_purchases => "استعادة المشتريات";
+  @override
+  String get feedback_title => "كيف تساهم";
+  @override
+  String get toxicity2 => "نبات سام قليلا";
+  @override
+  String get toxicity1 => "نبات سام";
+  @override
+  String get eastern_canada => "شرق كندا";
+  @override
+  String get plant_info => "معلومات";
+  @override
+  String get show_translation => "عرض النص المترجم";
+  @override
+  String get habitat_tree => "أشجار أو شجيرات";
+  @override
+  String get settings => "إعدادات";
+  @override
+  String get color_red => "أحمر وردي";
+  @override
+  String get north_central_pacific => "شمال وسط المحيط الهادئ";
+  @override
+  String get taxonomy_subsectio => "Subsectio";
+  @override
+  String get southern_africa => "جنوب افريقيا";
+  @override
+  String get always_my_region_title => "أضف دائمًا منطقتي إلى الفلتر";
+  @override
+  String get color_yellow => "أصفر";
+  @override
+  String get subantarctic_islands => "جزر سوبنتاركتيك";
+  @override
+  String get list_info => "إختر واحدة";
+  @override
+  String get new_version => "الإصدار الجديد هو متاح، يرجى تحديث.";
+  @override
+  String get taxonomy_subfamilia => "القطاع";
+  @override
+  String get my_region => "منطقتي";
+  @override
+  String get pause => "وقفة";
+  @override
+  String get indian_subcontinent => "شبه القارة الهندية";
+  @override
+  String get product_offline_description => "ستتمكن من تشغيل التطبيق دون اتصال بالإنترنت.";
+  @override
+  String get plant_flower => "زهور";
+  @override
+  String get filter_habitat => "موطن";
+  @override
+  String get rate_never => "أبدا";
+  @override
+  String get northwestern_pacific => "شمال غرب المحيط الهادئ";
+  @override
+  String get search_names => "البحث في الأسماء";
+  @override
+  String get southwestern_europe => "جنوب غرب أوروبا";
+  @override
+  String get taxonomy_species => "محيط";
+  @override
+  String get plant_fruit => "فواكه";
+  @override
+  String get plant_flowering_to => "إلى";
+  @override
+  String get taxonomy_familia => "الفصيلة";
+  @override
+  String get plant_stem => "ساق نبات";
+  @override
+  String get antarctic_continent => "القارة القطبية الجنوبية";
+  @override
+  String get no => "لا";
+  @override
+  String get brazil => "البرازيل";
+  @override
+  String get rate_text => "تأجج المؤلف من هذا التطبيق من خلال استجابة إيجابية من المستخدمين. يرجى إرسال بعض النجوم له من خلال متجر التطبيقات.";
+  @override
+  String get eastern_europe => "أوروبا الشرقية";
+  @override
+  String get south_central_usa => "جنوب وسط الولايات المتحدة";
+  @override
+  String get offline_download_success => "تم تنزيل الصور والرسوم التوضيحية بنجاح.";
+  @override
+  String get plant_flowering_from => "المزهرة من";
+  @override
+  String get taxonomy_tribus => "القبيلة";
+  @override
+  String get arabian_peninsula => "شبه الجزيرة العربية";
+  @override
+  String get search_taxonomy => "البحث في التصنيف";
+  @override
+  String get rate_later => "في وقت لاحق";
+  @override
+  String get color_message => "ما هو لون الزهرة؟ اختيار أقرب واحد.";
+  @override
+  String get west_tropical_africa => "غرب الاستوائية أفريقيا";
+  @override
+  String get northern_europe => "شمال أوروبا";
+  @override
+  String get rate => "إعادة النظر";
+  @override
+  String get northeast_tropical_africa => "شمال شرق الاستوائية أفريقيا";
+  @override
+  String get pref_language => "اللغة المفضلة";
+  @override
+  String get product_custom_filter_title => "تصفية مخصص";
+  @override
+  String get new_zealand => "نيوزيلندا";
+  @override
+  String get feedback_intro => "لقد ساهمت في هذا التطبيق منذ تثبيته على جهازك ، شكرًا. إذا كنت تبحث عن شيء أكثر ، فإليك بعض الخيارات:";
+  @override
+  String get filter_distribution => "توزيع";
+  @override
+  String get eastern_asia => "شرق اسيا";
+  @override
+  String get western_asia => "آسيا الغربية";
+  @override
+  String get subarctic_america => "أمريكا الشمالية";
+  @override
+  String get product_search_title => "البحث في الأسماء أو التصنيف";
+  @override
+  String get feedback_buy_extended => "يمكنك شراء إصدار موسّع (+) مع وظائف إضافية مثل وضع عدم الاتصال ، والبحث في الأسماء ، والبحث في التصنيف ، والملاحظات ، والفلتر القابل للتكوين.";
+  @override
+  String get north_central_usa => "شمال وسط الولايات المتحدة";
+  @override
+  String get improve_translation => "تحسين الترجمة";
+  @override
+  String get feedback_review => "يمكنك كتابة مراجعة إيجابية.";
+  @override
+  String get southeastern_usa => "جنوب شرق الولايات المتحدة";
+  @override
+  String get yes => "نعم فعلا";
+  @override
+  String get feedback_run_ads_video => "شاهد إعلان فيديو";
+  @override
+  String get plant_height_from => "الارتفاع من";
+  @override
+  String get petal_many => "أكثر من خمسة";
+  @override
+  String get southeastern_europe => "جنوب شرق أوروبا";
+  @override
+  String get taxonomy_unknown => "غير معروف";
+  @override
+  String get plant_inflorescence => "إزهار";
+  @override
+  String get northern_africa => "شمال أفريقيا";
+  @override
+  String get offline_subtitle => "يتطلب 300+ ميغابايت مساحة إضافية";
+  @override
+  String get china => "الصين";
+  @override
+  String get product_no_ads_title => "لا اعلان غير مرغوب فيه";
+  @override
+  String get offline_title => "غير متصل بالشبكة";
+  @override
+  String get petal_zygomorphic => "غير منتظم";
+  @override
+  String get taxonomy_genus => "الجنس";
+  @override
+  String get papuasia => "بابوا";
+  @override
+  String get feedback_submit_translate_app => "تحسين تسميات التطبيق";
+}
+
+class $pt_PT extends S {
+  const $pt_PT();
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+
+  @override
+  String get central_america => "América Central";
+  @override
+  String get legend => "Legenda";
+  @override
+  String get product_offline_title => "Modo offline";
+  @override
+  String get snack_copy => "Copiado para a área de transferência";
+  @override
+  String get product_purchase_failed => "A compra falhou";
+  @override
+  String get about => "Sobre a aplicação";
+  @override
+  String get product_no_ads_description => "Aplicativo não mostrará banner de propaganda na parte inferior da tela.";
+  @override
+  String get offline_download_progress => "Download de fotos e ilustrações ...";
+  @override
+  String get western_canada => "Canadá Ocidental";
+  @override
+  String get northern_america => "América do Norte";
+  @override
+  String get western_indian_ocean => "Oceano Índico Ocidental";
+  @override
+  String get feedback => "Comentários";
+  @override
+  String get southwestern_usa => "Sudoeste dos EUA";
+  @override
+  String get distribution_message => "Em qual área geográfica se concentrar?";
+  @override
+  String get caribbean => "Caraíbas";
+  @override
+  String get product_search_description => "Você poderá encontrar uma flor pelo seu nome em português ou latim ou por seu táxon (por exemplo, ordem, família, gênero).";
+  @override
+  String get offline_delete_message => "Você deseja excluir dados off-line?";
+  @override
+  String get australasia => "Australásia";
+  @override
+  String get petal_4 => "4 ou menos";
+  @override
+  String get east_tropical_africa => "África Tropical Oriental";
+  @override
+  String get africa => "África";
+  @override
+  String get south_tropical_africa => "África tropical do sul";
+  @override
+  String get caucasus => "Cáucaso";
+  @override
+  String get middle_asia => "Ásia média";
+  @override
+  String get plant_gallery => "Galeria";
+  @override
+  String get always_my_region_subtitle => "Sua região será pré-definida para o filtro";
+  @override
+  String get indochina => "Indochina";
+  @override
+  String get feedback_translate => "Você pode denunciar qualquer erro ou erro encontrado ou enviar uma nova tradução para o seu idioma.";
+  @override
+  String get australia => "Austrália";
+  @override
+  String get google_translate => "Traduzido com Google Tradutor";
+  @override
+  String get plant_leaf => "Folhas";
+  @override
+  String get habitat_forest => "florestas";
+  @override
+  String get taxonomy_serie => "série";
+  @override
+  String get malesia => "Malésia";
+  @override
+  String get southwestern_pacific => "Pacífico sudoeste";
+  @override
+  String get asia_tropical => "Ásia-Tropical";
+  @override
+  String get northwestern_usa => "Noroeste dos EUA";
+  @override
+  String get northern_south_america => "Norte da América do Sul";
+  @override
+  String get show_original => "Mostrar texto em inglês";
+  @override
+  String get offline_download_message => "Você vai baixar mais de 300 MB de fotos e ilustrações. Por favor, verifique se o seu dispositivo está conectado a wi-fi. Você está pronto para um download?";
+  @override
+  String get southern_america => "América do Sul";
+  @override
+  String get middle_atlantic_ocean => "Oceano Atlântico Médio";
+  @override
+  String get feedback_run_ads => "Você pode exibir anúncios em tela cheia ou assistir a anúncios em vídeo para dar suporte a mais desenvolvimento e aprimoramento do banco de dados.";
+  @override
+  String get habitat_garden => "jardins e campos";
+  @override
+  String get product_purchase => "Compra";
+  @override
+  String get russian_far_east => "Extremo Oriente Russo";
+  @override
+  String get west_central_tropical_africa => "África Tropical Centro-Ocidental";
+  @override
+  String get habitat_message => "O que está a sua volta? Identifique o habitat da planta.";
+  @override
+  String get plant_toxicity => "Toxicidade";
+  @override
+  String get offline_download_fail => "Falha no Download. Por favor, verifique sua conexão com a internet ou espaço livre no dispositivo e tente novamente.";
+  @override
+  String get snack_no_flowers => "Não há critérios de correspondência de flores.";
+  @override
+  String get rate_question => "Esta aplicação é útil?";
+  @override
+  String get macaronesia => "Macaronésia";
+  @override
+  String get plant_taxonomy => "Taxinomia";
+  @override
+  String get feedback_run_ads_fullscreen => "Mostrar um anúncio em tela cheia";
+  @override
+  String get asia_temperate => "Ásia-Temperado";
+  @override
+  String get search => "Procurar...";
+  @override
+  String get habitat_rock => "rochas e montanhas";
+  @override
+  String get taxonomy_superregnum => "domínio";
+  @override
+  String get taxonomy_sectio => "seção";
+  @override
+  String get mongolia => "Mongólia";
+  @override
+  String get taxonomy_subserie => "subsérie";
+  @override
+  String get western_south_america => "Oeste da América do Sul";
+  @override
+  String get taxonomy_subgenus => "subgênero";
+  @override
+  String get close => "Perto";
+  @override
+  String get europe => "Europa";
+  @override
+  String get middle_europe => "Europa Central";
+  @override
+  String get color_blue => "azul, violeta";
+  @override
+  String get my_filter => "Meu filtro";
+  @override
+  String get southern_south_america => "Sul da América do Sul";
+  @override
+  String get plant_habitat => "Habitat";
+  @override
+  String get snack_loading_ad => "O anúncio ainda está carregando, pressione o botão novamente.";
+  @override
+  String get petal_5 => "5";
+  @override
+  String get filter_petal => "pétala";
+  @override
+  String get petal_message => "A flor é bissimétrica? Não? Quantas pétalas tem, então?";
+  @override
+  String get color_white => "branca";
+  @override
+  String get northeastern_usa => "EUA do nordeste";
+  @override
+  String get color_green => "verde, castanha, preta";
+  @override
+  String get taxonomy_ordo => "ordem";
+  @override
+  String get taxonomy_supersectio => "superseção";
+  @override
+  String get pacific => "Pacífico";
+  @override
+  String get plant_sources => "Fontes";
+  @override
+  String get taxonomy_regnum => "reino";
+  @override
+  String get south_central_pacific => "Pacífico Sul-Central";
+  @override
+  String get filter_color => "cor";
+  @override
+  String get help => "Ajuda";
+  @override
+  String get mexico => "México";
+  @override
+  String get snack_publish => "... para ser publicado mais tarde";
+  @override
+  String get siberia => "Sibéria";
+  @override
+  String get taxonomy_subtribus => "subtribo";
+  @override
+  String get product_custom_filter_description => "Você poderá alterar a ordem padrão e o número de filtros (cor, habitat, pétala, distribuição).";
+  @override
+  String get habitat_meadow => "prados e pastagens";
+  @override
+  String get plant_trivia => "Curiosidades";
+  @override
+  String get product_purchased => "Comprado";
+  @override
+  String get taxonomy_cladus => "(clado)";
+  @override
+  String get plant_herbalism => "Fitoterapia";
+  @override
+  String get plant_height_to => "a";
+  @override
+  String get offline_download => "Retomar download";
+  @override
+  String get enhancements => "Melhorias";
+  @override
+  String get habitat_wetland => "pântanos e zonas húmidas";
+  @override
+  String get product_restore_purchases => "Restaurar compras";
+  @override
+  String get feedback_title => "Como contribuir";
+  @override
+  String get toxicity2 => "planta ligeiramente venenosa";
+  @override
+  String get toxicity1 => "planta venenosa";
+  @override
+  String get eastern_canada => "Canadá Oriental";
+  @override
+  String get plant_info => "Info";
+  @override
+  String get show_translation => "Mostrar texto traduzido";
+  @override
+  String get habitat_tree => "árvores e arbustos";
+  @override
+  String get settings => "Configurações";
+  @override
+  String get color_red => "vermelha, cor-de-rosa";
+  @override
+  String get north_central_pacific => "Pacífico Norte-Central";
+  @override
+  String get taxonomy_subsectio => "subseção";
+  @override
+  String get southern_africa => "África do Sul";
+  @override
+  String get always_my_region_title => "Sempre adicione minha região ao filtro";
+  @override
+  String get color_yellow => "amarela";
+  @override
+  String get subantarctic_islands => "Ilhas Subantárticas";
+  @override
+  String get list_info => "Selecione uma";
+  @override
+  String get new_version => "Nova versão está disponível, por favor atualize.";
+  @override
+  String get taxonomy_subfamilia => "subfamília";
+  @override
+  String get my_region => "Minha região";
+  @override
+  String get pause => "Pausa";
+  @override
+  String get indian_subcontinent => "Subcontinente indiano";
+  @override
+  String get product_offline_description => "Você será capaz de executar aplicativos sem conexão com a internet.";
+  @override
+  String get plant_flower => "Flores";
+  @override
+  String get filter_habitat => "habitat";
+  @override
+  String get rate_never => "Nunca";
+  @override
+  String get northwestern_pacific => "Noroeste do Pacífico";
+  @override
+  String get search_names => "Pesquisa nos nomes";
+  @override
+  String get southwestern_europe => "Europa do Sudoeste";
+  @override
+  String get taxonomy_species => "espécie";
+  @override
+  String get plant_fruit => "Frutos";
+  @override
+  String get plant_flowering_to => "a";
+  @override
+  String get taxonomy_familia => "família";
+  @override
+  String get plant_stem => "Caule";
+  @override
+  String get antarctic_continent => "Continente Antártico";
+  @override
+  String get no => "Não";
+  @override
+  String get brazil => "Brasil";
+  @override
+  String get rate_text => "Autor desta aplicação é motivada pela resposta positiva dos usuários. Por favor, envie-lhe algumas estrelas através da loja de aplicativos.";
+  @override
+  String get eastern_europe => "Europa Oriental";
+  @override
+  String get south_central_usa => "EUA Centro-Sul";
+  @override
+  String get offline_download_success => "Fotos e ilustrações transferidas com sucesso.";
+  @override
+  String get plant_flowering_from => "Floresce de";
+  @override
+  String get taxonomy_tribus => "tribo";
+  @override
+  String get arabian_peninsula => "Península Arábica";
+  @override
+  String get search_taxonomy => "Pesquisa na taxonomia";
+  @override
+  String get rate_later => "Mais tarde";
+  @override
+  String get color_message => "De que cor são as flores? Selecione a mais aproximada. Sempre pode voltar e selecionar uma outra.";
+  @override
+  String get west_tropical_africa => "África Tropical Ocidental";
+  @override
+  String get northern_europe => "Norte da Europa";
+  @override
+  String get rate => "Resenha";
+  @override
+  String get northeast_tropical_africa => "Nordeste da África Tropical";
+  @override
+  String get pref_language => "Língua preferida";
+  @override
+  String get product_custom_filter_title => "Filtro customizado";
+  @override
+  String get new_zealand => "Nova Zelândia";
+  @override
+  String get feedback_intro => "Você tem contribuído para este aplicativo desde que você o instalou no seu dispositivo, obrigado. Se você está procurando algo mais, aqui estão algumas opções:";
+  @override
+  String get filter_distribution => "distribuição";
+  @override
+  String get eastern_asia => "Ásia Oriental";
+  @override
+  String get western_asia => "Ásia Ocidental";
+  @override
+  String get subarctic_america => "América Subarctic";
+  @override
+  String get product_search_title => "Pesquisa em nomes ou taxonomia";
+  @override
+  String get feedback_buy_extended => "Você pode comprar a versão estendida (+) com funcionalidades adicionais, como o modo off-line, pesquisar nomes, pesquisar em taxonomia, observações e filtros configuráveis.";
+  @override
+  String get north_central_usa => "EUA do centro-norte";
+  @override
+  String get improve_translation => "Melhorar a tradução";
+  @override
+  String get feedback_review => "Você pode escrever um comentário positivo.";
+  @override
+  String get southeastern_usa => "Sudeste dos EUA";
+  @override
+  String get yes => "Sim";
+  @override
+  String get feedback_run_ads_video => "Assista a um anúncio em vídeo";
+  @override
+  String get plant_height_from => "altura de";
+  @override
+  String get petal_many => "mais que 5";
+  @override
+  String get southeastern_europe => "Sudeste da Europa";
+  @override
+  String get taxonomy_unknown => "desconhecido";
+  @override
+  String get plant_inflorescence => "Inflorescência";
+  @override
+  String get northern_africa => "Norte da África";
+  @override
+  String get offline_subtitle => "requer mais de 300 MB de espaço adicional.";
+  @override
+  String get china => "China";
+  @override
+  String get product_no_ads_title => "Nenhum anúncio indesejado";
+  @override
+  String get offline_title => "Modo offline";
+  @override
+  String get petal_zygomorphic => "zigomorfo";
+  @override
+  String get taxonomy_genus => "género";
+  @override
+  String get papuasia => "Papuásia";
+}
+
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
   const GeneratedLocalizationsDelegate();
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale("de", ""),
-      Locale("hi", ""),
-      Locale("fi", ""),
-      Locale("ru", ""),
-      Locale("pt", ""),
-      Locale("lt", ""),
-      Locale("hr", ""),
-      Locale("lv", ""),
-      Locale("fr", ""),
-      Locale("hu", ""),
-      Locale("uk", ""),
-      Locale("sk", ""),
-      Locale("sl", ""),
-      Locale("id", ""),
-      Locale("sr", ""),
-      Locale("sv", ""),
+      Locale("it", "IT"),
+      Locale("ru", "RU"),
+      Locale("pl", "PL"),
+      Locale("ro", "RO"),
+      Locale("hi", "IN"),
+      Locale("id", "ID"),
+      Locale("fr", "FR"),
+      Locale("he", "IL"),
+      Locale("ja", "JP"),
+      Locale("cs", "CZ"),
+      Locale("de", "DE"),
+      Locale("hu", "HU"),
+      Locale("nb", "NO"),
+      Locale("sk", "SK"),
+      Locale("es", "ES"),
+      Locale("nl", "NL"),
+      Locale("pa", "IN"),
+      Locale("sv", "SE"),
+      Locale("da", "DK"),
+      Locale("fa", "IR"),
+      Locale("sr", "RS"),
       Locale("en", ""),
-      Locale("it", ""),
-      Locale("es", ""),
-      Locale("et", ""),
-      Locale("cs", ""),
-      Locale("ar", ""),
-      Locale("pa", ""),
-      Locale("nb", ""),
+      Locale("en", "UK"),
+      Locale("fi", "FI"),
+      Locale("hr", "HR"),
+      Locale("et", "EE"),
       Locale("en", "US"),
-      Locale("ja", ""),
-      Locale("fa", ""),
-      Locale("pl", ""),
-      Locale("da", ""),
-      Locale("he", ""),
-      Locale("ro", ""),
-      Locale("nl", ""),
+      Locale("lt", "LT"),
+      Locale("lv", "LV"),
+      Locale("uk", "UA"),
+      Locale("sl", "SI"),
+      Locale("ar", "EG"),
+      Locale("pt", "PT"),
     ];
   }
 
@@ -11437,70 +11453,72 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
     final String lang = getLang(locale);
     if (lang != null) {
       switch (lang) {
-        case "de":
-          return SynchronousFuture<S>(const $de());
-        case "hi":
-          return SynchronousFuture<S>(const $hi());
-        case "fi":
-          return SynchronousFuture<S>(const $fi());
-        case "ru":
-          return SynchronousFuture<S>(const $ru());
-        case "pt":
-          return SynchronousFuture<S>(const $pt());
-        case "lt":
-          return SynchronousFuture<S>(const $lt());
-        case "hr":
-          return SynchronousFuture<S>(const $hr());
-        case "lv":
-          return SynchronousFuture<S>(const $lv());
-        case "fr":
-          return SynchronousFuture<S>(const $fr());
-        case "hu":
-          return SynchronousFuture<S>(const $hu());
-        case "uk":
-          return SynchronousFuture<S>(const $uk());
-        case "sk":
-          return SynchronousFuture<S>(const $sk());
-        case "sl":
-          return SynchronousFuture<S>(const $sl());
-        case "id":
-          return SynchronousFuture<S>(const $id());
-        case "sr":
-          return SynchronousFuture<S>(const $sr());
-        case "sv":
-          return SynchronousFuture<S>(const $sv());
+        case "it_IT":
+          return SynchronousFuture<S>(const $it_IT());
+        case "ru_RU":
+          return SynchronousFuture<S>(const $ru_RU());
+        case "pl_PL":
+          return SynchronousFuture<S>(const $pl_PL());
+        case "ro_RO":
+          return SynchronousFuture<S>(const $ro_RO());
+        case "hi_IN":
+          return SynchronousFuture<S>(const $hi_IN());
+        case "id_ID":
+          return SynchronousFuture<S>(const $id_ID());
+        case "fr_FR":
+          return SynchronousFuture<S>(const $fr_FR());
+        case "he_IL":
+          return SynchronousFuture<S>(const $he_IL());
+        case "ja_JP":
+          return SynchronousFuture<S>(const $ja_JP());
+        case "cs_CZ":
+          return SynchronousFuture<S>(const $cs_CZ());
+        case "de_DE":
+          return SynchronousFuture<S>(const $de_DE());
+        case "hu_HU":
+          return SynchronousFuture<S>(const $hu_HU());
+        case "nb_NO":
+          return SynchronousFuture<S>(const $nb_NO());
+        case "sk_SK":
+          return SynchronousFuture<S>(const $sk_SK());
+        case "es_ES":
+          return SynchronousFuture<S>(const $es_ES());
+        case "nl_NL":
+          return SynchronousFuture<S>(const $nl_NL());
+        case "pa_IN":
+          return SynchronousFuture<S>(const $pa_IN());
+        case "sv_SE":
+          return SynchronousFuture<S>(const $sv_SE());
+        case "da_DK":
+          return SynchronousFuture<S>(const $da_DK());
+        case "fa_IR":
+          return SynchronousFuture<S>(const $fa_IR());
+        case "sr_RS":
+          return SynchronousFuture<S>(const $sr_RS());
         case "en":
           return SynchronousFuture<S>(const $en());
-        case "it":
-          return SynchronousFuture<S>(const $it());
-        case "es":
-          return SynchronousFuture<S>(const $es());
-        case "et":
-          return SynchronousFuture<S>(const $et());
-        case "cs":
-          return SynchronousFuture<S>(const $cs());
-        case "ar":
-          return SynchronousFuture<S>(const $ar());
-        case "pa":
-          return SynchronousFuture<S>(const $pa());
-        case "nb":
-          return SynchronousFuture<S>(const $nb());
+        case "en_UK":
+          return SynchronousFuture<S>(const $en_UK());
+        case "fi_FI":
+          return SynchronousFuture<S>(const $fi_FI());
+        case "hr_HR":
+          return SynchronousFuture<S>(const $hr_HR());
+        case "et_EE":
+          return SynchronousFuture<S>(const $et_EE());
         case "en_US":
           return SynchronousFuture<S>(const $en_US());
-        case "ja":
-          return SynchronousFuture<S>(const $ja());
-        case "fa":
-          return SynchronousFuture<S>(const $fa());
-        case "pl":
-          return SynchronousFuture<S>(const $pl());
-        case "da":
-          return SynchronousFuture<S>(const $da());
-        case "he":
-          return SynchronousFuture<S>(const $he());
-        case "ro":
-          return SynchronousFuture<S>(const $ro());
-        case "nl":
-          return SynchronousFuture<S>(const $nl());
+        case "lt_LT":
+          return SynchronousFuture<S>(const $lt_LT());
+        case "lv_LV":
+          return SynchronousFuture<S>(const $lv_LV());
+        case "uk_UA":
+          return SynchronousFuture<S>(const $uk_UA());
+        case "sl_SI":
+          return SynchronousFuture<S>(const $sl_SI());
+        case "ar_EG":
+          return SynchronousFuture<S>(const $ar_EG());
+        case "pt_PT":
+          return SynchronousFuture<S>(const $pt_PT());
         default:
           // NO-OP.
       }
