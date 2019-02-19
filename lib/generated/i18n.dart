@@ -31,14 +31,31 @@ class S implements WidgetsLocalizations {
   String get australasia => "Australasia";
   String get australia => "Australia";
   String get auth_code_hint => "SMS code";
+  String get auth_create_account => "Create an account";
+  String get auth_email => "Sign in with email";
+  String get auth_email_hint => "Email";
+  String get auth_empty_password => "Password can't be empty";
   String get auth_enter_confirmation_code => "Enter the 6-digit code we sent to ";
+  String get auth_facebook => "Sign in with Facebook";
+  String get auth_google => "Sign in with Google";
   String get auth_incorrect_code => "Wrong code. Try again.";
   String get auth_invalid_code => "Enter a valid sms code";
+  String get auth_invalid_email_address => "Enter a valid email address";
   String get auth_invalid_phone_number => "Enter a valid phone number";
+  String get auth_password_hint => "Password";
   String get auth_phone => "Sign in with phone";
   String get auth_phone_hint => "Phone Number";
   String get auth_resend_code => "Resend Code";
+  String get auth_reset_password => "Reset Password";
+  String get auth_reset_password_email_title => "Reset password";
+  String get auth_sign_in => "Sign in";
+  String get auth_sign_in_failed => "Sign in failed. Check your connection and try again.";
+  String get auth_sign_in_text => "Have an account? Sign in";
+  String get auth_sign_out => "Sign out";
   String get auth_sms_terms_of_service => "By tapping \"Verify Phone Number\", an SMS may be sent. Message & data rates may apply.";
+  String get auth_twitter => "Sign in with Twitter";
+  String get auth_verify_email_message => "Link to verify account has been sent to your email address.";
+  String get auth_verify_email_title => "Verify your account";
   String get auth_verify_phone_number => "Verify phone number";
   String get auth_verify_phone_number_title => "Enter your phone number";
   String get brazil => "Brazil";
@@ -53,19 +70,13 @@ class S implements WidgetsLocalizations {
   String get color_red => "red, pink";
   String get color_white => "white";
   String get color_yellow => "yellow";
-  String get create_account => "Create an account";
-  String get create_account_text => "Create an account";
   String get distribution_message => "Which geographic area should we focus on?";
   String get east_tropical_africa => "East Tropical Africa";
   String get eastern_asia => "Eastern Asia";
   String get eastern_canada => "Eastern Canada";
   String get eastern_europe => "Eastern Europe";
-  String get email => "Sign in with email";
-  String get email_hint => "Email";
-  String get email_validation_message => "Email can't be empty";
   String get enhancements => "Enhancements";
   String get europe => "Europe";
-  String get facebook => "Sign in with Facebook";
   String get feedback => "Feedback";
   String get feedback_buy_extended => "You can buy extended (+) version with additional functionality like offline mode, search in names, search in taxonomy, observations and configurable filter.";
   String get feedback_intro => "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:";
@@ -81,7 +92,6 @@ class S implements WidgetsLocalizations {
   String get filter_distribution => "distribution";
   String get filter_habitat => "habitat";
   String get filter_petal => "petal";
-  String get google => "Sign in with Google";
   String get google_translate => "Translated with Google Translate";
   String get habitat_forest => "woodlands or forests";
   String get habitat_garden => "gardens or fields";
@@ -96,9 +106,6 @@ class S implements WidgetsLocalizations {
   String get indochina => "Indo-China";
   String get legend => "Legend";
   String get list_info => "Pick one";
-  String get login => "Login";
-  String get login_failed => "Sign in failed. Please check your connection.";
-  String get logout => "Logout";
   String get macaronesia => "Macaronesia";
   String get malesia => "Malesia";
   String get mexico => "Mexico";
@@ -131,8 +138,6 @@ class S implements WidgetsLocalizations {
   String get offline_title => "Offline mode";
   String get pacific => "Pacific";
   String get papuasia => "Papuasia";
-  String get password_hint => "Password";
-  String get password_validation_message => "Password can't be empty";
   String get pause => "Pause";
   String get petal_4 => "4 or less";
   String get petal_5 => "5";
@@ -182,8 +187,6 @@ class S implements WidgetsLocalizations {
   String get show_original => "Show English text";
   String get show_translation => "Show translated text";
   String get siberia => "Siberia";
-  String get sign_in => "Sign in";
-  String get sign_in_text => "Have an account? Sign in";
   String get snack_copy => "Copied to Clipboard";
   String get snack_loading_ad => "Ad is still loading, press button again.";
   String get snack_no_flowers => "There are no flowers matching criteria.";
@@ -220,9 +223,6 @@ class S implements WidgetsLocalizations {
   String get taxonomy_unknown => "unknown";
   String get toxicity1 => "poisonous plant";
   String get toxicity2 => "slightly poisonous plant";
-  String get twitter => "Sign in with Twitter";
-  String get verify_email_message => "Link to verify account has been sent to your email";
-  String get verify_email_title => "Verify your account";
   String get west_central_tropical_africa => "West-Central Tropical Africa";
   String get west_tropical_africa => "West Tropical Africa";
   String get western_asia => "Western Asia";
@@ -230,6 +230,7 @@ class S implements WidgetsLocalizations {
   String get western_indian_ocean => "Western Indian Ocean";
   String get western_south_america => "Western South America";
   String get yes => "Yes";
+  String auth_reset_password_email_message(String _email) => "Follow the instructions sent to $_email to reset your password.";
 }
 
 class $it_IT extends S {

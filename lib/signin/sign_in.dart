@@ -38,7 +38,7 @@ class _SignInScreenState extends State<SignInScreen> {
       }
     } catch (e) {
       key.currentState.showSnackBar(new SnackBar(
-        content: new Text(S.of(context).login_failed),
+        content: new Text(S.of(context).auth_sign_in_failed),
       ));
     }
   }
@@ -53,7 +53,7 @@ class _SignInScreenState extends State<SignInScreen> {
         print('Signed in: $userId');
       } catch (e) {
         key.currentState.showSnackBar(new SnackBar(
-          content: new Text(S.of(context).login_failed),
+          content: new Text(S.of(context).auth_sign_in_failed),
         ));
       }
     }
@@ -61,13 +61,13 @@ class _SignInScreenState extends State<SignInScreen> {
 
   _handleTwitterSignIn(GlobalKey<ScaffoldState> key) async {
     try {
-      var twitterCredential = TwitterAuthProvider.getCredential(authToken: twitterConsumerKey, authTokenSecret: twitterConsumerSecret);
+      var twitterCredential = TwitterAuthProvider.getCredential(authToken: twitterAccessKey, authTokenSecret: twitterAccessSecret);
       String userId = await Auth.signInWithCredential(twitterCredential);
       Navigator.pop(context);
       print('Signed in: $userId');
     } catch (e) {
       key.currentState.showSnackBar(new SnackBar(
-        content: new Text(S.of(context).login_failed),
+        content: new Text(S.of(context).auth_sign_in_failed),
       ));
     }
   }
@@ -91,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
     return Scaffold(
         key: key,
         appBar: AppBar(
-          title: Text(S.of(context).sign_in),
+          title: Text(S.of(context).auth_sign_in),
         ),
         body: Center(
           child: Column(
@@ -106,7 +106,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/email-logo.png')),
                         Expanded(
                           child: Text(
-                            S.of(context).email,
+                            S.of(context).auth_email,
                             style: new TextStyle(color: Colors.white, fontSize: 18.0),
                           ),
                         )
@@ -144,7 +144,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/go-logo.png')),
                         Expanded(
                           child: Text(
-                            S.of(context).google,
+                            S.of(context).auth_google,
                             style: new TextStyle(fontSize: 18.0),
                           ),
                         )
@@ -163,7 +163,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/fb-logo.png')),
                         Expanded(
                           child: Text(
-                            S.of(context).facebook,
+                            S.of(context).auth_facebook,
                             style: new TextStyle(color: Colors.white, fontSize: 18.0),
                           ),
                         )
@@ -182,7 +182,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/twitter-logo.png')),
                         Expanded(
                           child: Text(
-                            S.of(context).twitter,
+                            S.of(context).auth_twitter,
                             style: new TextStyle(color: Colors.white, fontSize: 18.0),
                           ),
                         )

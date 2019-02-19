@@ -186,7 +186,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     return Hero(
       tag: 'hero',
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
         child: Stack(alignment: Alignment.center,
           children: [
             CircleAvatar(
@@ -204,7 +204,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   Widget _showInput() {
     if (_formMode == FormMode.PHONE) {
       return Padding(
-        padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
         child: Row(
           children: [
             Expanded(
@@ -236,7 +236,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
       );
     } else {
       return Padding(
-        padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
         child: Column(
           children: [
             Text(
@@ -263,7 +263,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
 
   Widget _showButton() {
     return Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
         child: SizedBox(
           height: 40.0,
           child: RaisedButton(
@@ -271,7 +271,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
             shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
             color: Colors.blue,
             child: Text(
-              _formMode == FormMode.SMS ? S.of(context).login : S.of(context).auth_verify_phone_number,
+              _formMode == FormMode.SMS ? S.of(context).auth_sign_in: S.of(context).auth_verify_phone_number,
               style: TextStyle(fontSize: 20.0, color: Colors.white),
             ),
             onPressed: _validateAndSubmit,
@@ -282,7 +282,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   Widget _showSecondaryButton() {
     if (_formMode == FormMode.SMS && _showResendButton) {
       return Padding(
-          padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+          padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
           child: FlatButton(
               child: Text(S.of(context).auth_resend_code,
                 style: TextStyle(fontSize: 20.0, color: Colors.blue),
@@ -300,23 +300,24 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
 
   Widget _showMessage() {
     return Container(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(5.0),
       child: Text(
         _formMode == FormMode.PHONE ? S.of(context).auth_sms_terms_of_service : '',
-        style: const TextStyle(fontSize: 16.0, color: Colors.black, height: 1.0, fontWeight: FontWeight.w300),
+        style: const TextStyle(fontSize: 16.0, color: Colors.black, height: 1.0),
       ),
     );
   }
 
   Widget _showErrorMessage() {
     return Container(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(5.0),
       child: FutureBuilder<String>(
           future: _errorMessage,
           builder: (_, AsyncSnapshot<String> snapshot) {
             return Text(
               snapshot.data ?? '',
-              style: const TextStyle(fontSize: 14.0, color: Colors.red, height: 1.0, fontWeight: FontWeight.w300),
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 14.0, color: Colors.red, height: 1.0),
             );
           }),
     );

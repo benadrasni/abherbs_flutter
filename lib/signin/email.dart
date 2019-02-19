@@ -1,11 +1,11 @@
+import 'dart:io';
+
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 
 class EmailLoginSignUpPage extends StatefulWidget {
-  EmailLoginSignUpPage({this.onSignedIn});
-
-  final VoidCallback onSignedIn;
+  EmailLoginSignUpPage();
 
   @override
   State<StatefulWidget> createState() => new _EmailLoginSignUpPageState();
@@ -13,16 +13,18 @@ class EmailLoginSignUpPage extends StatefulWidget {
 
 enum FormMode { LOGIN, SIGNUP }
 
+const String errorWrongPassword = 'ERROR_WRONG_PASSWORD';
+
 class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
   final _formKey = new GlobalKey<FormState>();
 
   String _email;
   String _password;
   String _errorMessage;
+  bool _isWrongPassword;
 
   // Initial form is login form
   FormMode _formMode = FormMode.LOGIN;
-  bool _isIos;
   bool _isLoading;
 
   // Check if form is valid before perform login or signup
@@ -35,7 +37,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
     return false;
   }
 
-  // Perform login or signup
+  // Perform login or sign up
   void _validateAndSubmit() async {
     if (_validateAndSave()) {
       setState(() {
@@ -52,21 +54,21 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
         } else {
           userId = await Auth.signUpWithEmail(_email, _password);
           Auth.sendEmailVerification();
-          _showVerifyEmailSentDialog();
+          _showVerifyEmailSentDialog().then((value) {
+            Navigator.of(context).pop();
+            Navigator.of(context).pop();
+          });
           print('Signed up user: $userId');
         }
         setState(() {
           _isLoading = false;
         });
-
-        if (userId.length > 0 && userId != null && _formMode == FormMode.LOGIN) {
-          widget.onSignedIn();
-        }
       } catch (e) {
         print('Error: $e');
         setState(() {
+          _isWrongPassword = e.code == errorWrongPassword;
           _isLoading = false;
-          if (_isIos) {
+          if (Platform.isIOS) {
             _errorMessage = e.details;
           } else
             _errorMessage = e.message;
@@ -80,6 +82,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
     super.initState();
     _errorMessage = "";
     _isLoading = false;
+    _isWrongPassword = false;
   }
 
   void _changeFormToSignUp() {
@@ -100,15 +103,13 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    _isIos = Theme.of(context).platform == TargetPlatform.iOS;
     return Scaffold(
         appBar: AppBar(
-          title: Text(S.of(context).email),
+          title: Text(S.of(context).auth_email),
         ),
         body: Stack(
           children: <Widget>[
             _showBody(),
-            _showCircularProgress(),
           ],
         ));
   }
@@ -123,18 +124,37 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
     );
   }
 
-  void _showVerifyEmailSentDialog() {
-    showDialog(
+  Future<dynamic> _showVerifyEmailSentDialog() {
+    return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(S.of(context).verify_email_title),
-          content: Text(S.of(context).verify_email_message),
+          title: Text(S.of(context).auth_verify_email_title),
+          content: Text(S.of(context).auth_verify_email_message),
           actions: <Widget>[
             FlatButton(
               child: Text(S.of(context).close),
               onPressed: () {
-                _changeFormToLogin();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<dynamic> _showResetPasswordEmailSentDialog() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(S.of(context).auth_reset_password_email_title),
+          content: Text(S.of(context).auth_reset_password_email_message(_email)),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(S.of(context).close),
+              onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
@@ -158,33 +178,27 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
               _showPrimaryButton(),
               _showSecondaryButton(),
               _showErrorMessage(),
+              _showTertiaryButton(),
             ],
           ),
         ));
-  }
-
-  Widget _showErrorMessage() {
-    if (_errorMessage.length > 0 && _errorMessage != null) {
-      return Text(
-        _errorMessage,
-        style: TextStyle(fontSize: 13.0, color: Colors.red, height: 1.0, fontWeight: FontWeight.w300),
-      );
-    } else {
-      return Container(
-        height: 0.0,
-      );
-    }
   }
 
   Widget _showLogo() {
     return Hero(
       tag: 'hero',
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 70.0, 0.0, 0.0),
-        child: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 48.0,
-          child: Image.asset('res/images/home.png'),
+        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            CircleAvatar(
+              backgroundColor: Colors.transparent,
+              radius: 48.0,
+              child: Image.asset('res/images/home.png'),
+            ),
+            _showCircularProgress(),
+          ],
         ),
       ),
     );
@@ -192,18 +206,20 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
 
   Widget _showEmailInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
       child: TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
-        autofocus: false,
+        autofocus: true,
+        initialValue: _email,
         decoration: InputDecoration(
-            hintText: S.of(context).email_hint,
+            hintText: S.of(context).auth_email_hint,
             icon: Icon(
               Icons.mail,
               color: Colors.grey,
             )),
-        validator: (value) => value.isEmpty ? S.of(context).email_validation_message : null,
+        validator: (value) =>
+            value.isEmpty || !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) ? S.of(context).auth_invalid_email_address : null,
         onSaved: (value) => _email = value,
       ),
     );
@@ -211,46 +227,88 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
 
   Widget _showPasswordInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
       child: TextFormField(
         maxLines: 1,
         obscureText: true,
         autofocus: false,
         decoration: InputDecoration(
-            hintText: S.of(context).password_hint,
+            hintText: S.of(context).auth_password_hint,
             icon: new Icon(
               Icons.lock,
               color: Colors.grey,
             )),
-        validator: (value) => value.isEmpty ? S.of(context).password_validation_message : null,
+        validator: (value) => value.isEmpty ? S.of(context).auth_empty_password : null,
         onSaved: (value) => _password = value,
       ),
     );
   }
 
-  Widget _showSecondaryButton() {
-    return FlatButton(
-      child: _formMode == FormMode.LOGIN
-          ? Text(S.of(context).create_account_text, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300))
-          : Text(S.of(context).sign_in_text, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
-      onPressed: _formMode == FormMode.LOGIN ? _changeFormToSignUp : _changeFormToLogin,
-    );
-  }
-
   Widget _showPrimaryButton() {
     return Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
+        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
         child: SizedBox(
           height: 40.0,
           child: RaisedButton(
             elevation: 5.0,
             shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
             color: Colors.blue,
-            child: _formMode == FormMode.LOGIN
-                ? Text(S.of(context).login, style: TextStyle(fontSize: 20.0, color: Colors.white))
-                : Text(S.of(context).create_account, style: TextStyle(fontSize: 20.0, color: Colors.white)),
+            child: Text(
+              _formMode == FormMode.LOGIN ? S.of(context).auth_sign_in : S.of(context).auth_create_account,
+              style: TextStyle(fontSize: 20.0, color: Colors.white),
+            ),
             onPressed: _validateAndSubmit,
           ),
         ));
+  }
+
+  Widget _showSecondaryButton() {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+      child: FlatButton(
+        child: Text(
+          _formMode == FormMode.LOGIN ? S.of(context).auth_create_account : S.of(context).auth_sign_in_text,
+          style: TextStyle(fontSize: 20.0, color: Colors.blue),
+        ),
+        onPressed: _formMode == FormMode.LOGIN ? _changeFormToSignUp : _changeFormToLogin,
+      ),
+    );
+  }
+
+  Widget _showTertiaryButton() {
+    if (_formMode == FormMode.LOGIN && _isWrongPassword) {
+      return Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+        child: FlatButton(
+          child: Text(S.of(context).auth_reset_password,
+            style: TextStyle(fontSize: 20.0, color: Colors.blue),
+          ),
+          onPressed: () {
+            Auth.resetPassword(_email);
+            _showResetPasswordEmailSentDialog();
+          },
+        ),);
+    }
+    return Container(
+      height: 0.0,
+      width: 0.0,
+    );
+  }
+
+  Widget _showErrorMessage() {
+    if (_errorMessage.length > 0 && _errorMessage != null) {
+      return Container(
+        padding: EdgeInsets.all(5.0),
+        child: Text(
+          _errorMessage,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 14.0, color: Colors.red, height: 1.0),
+        ),
+      );
+    } else {
+      return Container(
+        height: 0.0,
+      );
+    }
   }
 }
