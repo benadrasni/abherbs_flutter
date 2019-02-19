@@ -21,6 +21,10 @@ class Auth {
     return user.uid;
   }
 
+  static Future<void> resetPassword(String email) async {
+    return firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
   static Future<void> signUpWithPhone(Function(FirebaseUser) verificationCompleted,
       Function(AuthException) verificationFailed,
       Function(String, [int]) codeSent,

@@ -144,7 +144,7 @@ class _AppDrawerState extends State<AppDrawer> {
     if (widget.currentUser != null) {
       listItems.add(ListTile(
         title: Text(
-          S.of(context).logout,
+          S.of(context).auth_sign_out,
           style: drawerTextStyle,
         ),
         onTap: () {
@@ -155,7 +155,7 @@ class _AppDrawerState extends State<AppDrawer> {
     } else {
       listItems.add(ListTile(
         title: Text(
-          S.of(context).login,
+          S.of(context).auth_sign_in,
           style: drawerTextStyle,
         ),
         onTap: () {
