@@ -75,7 +75,7 @@
   "auth_phone_hint": "Phone Number",
   "auth_code_hint": "SMS code",
   "auth_invalid_phone_number": "Enter a valid phone number",
-  "auth_invalid_code": "Enter a valid sms code",
+  "auth_invalid_code": "Enter a valid SMS code",
   "auth_incorrect_code": "Wrong code. Try again.",
   "auth_sms_terms_of_service": "By tapping \"Verify Phone Number\", an SMS may be sent. Message & data rates may apply.",
   "auth_enter_confirmation_code": "Enter the 6-digit code we sent to ",
