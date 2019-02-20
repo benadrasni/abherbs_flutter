@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/feedback.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/legend.dart';
+import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/signin/sign_in.dart';
@@ -44,6 +45,53 @@ class _AppDrawerState extends State<AppDrawer> {
     );
     Locale myLocale = Localizations.localeOf(context);
     var listItems = <Widget>[];
+    if (Purchases.isSignNeeded()) {
+      listItems.add(Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).accentColor,
+        ),
+        child: Column(children: [
+          Container(
+            padding: EdgeInsets.only(left: 10.0, right: 10.0),
+            child: ListTile(
+              leading: Icon(Icons.person, color: Colors.white,),
+              title: Text(
+                widget.currentUser?.displayName ?? '',
+                style: TextStyle(color: Colors.white),
+              ),
+              subtitle: Text(
+                widget.currentUser?.email ?? widget.currentUser?.phoneNumber ?? '',
+                style: TextStyle(color: Colors.white70),
+              ),
+              onTap: () {},
+            ),
+          ),
+          Container(
+            alignment: Alignment(1.0, 1.0),
+            child: FlatButton(
+              child: Text(
+                widget.currentUser == null ? S.of(context).auth_sign_in : S.of(context).auth_sign_out,
+                textAlign: TextAlign.end,
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                if (widget.currentUser == null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignInScreen()),
+                  ).then((result) {
+                    Navigator.pop(context);
+                  });
+                } else {
+                  Auth.signOut(); //logout
+                  Navigator.pop(context);
+                }
+              },
+            ),
+          ),
+        ]),
+      ));
+    }
     listItems.addAll(Preferences.myFilterAttributes.map((attribute) {
       return ListTile(
         leading: getFilterLeading(context, attribute),
@@ -51,7 +99,7 @@ class _AppDrawerState extends State<AppDrawer> {
           getFilterText(context, attribute),
           style: drawerTextStyle,
         ),
-        subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ""),
+        subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ''),
         onTap: () {
           Navigator.pop(context);
           onLeftNavigationTap(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, attribute);
@@ -63,6 +111,7 @@ class _AppDrawerState extends State<AppDrawer> {
       color: Theme.of(context).buttonColor,
     ));
     listItems.add(ListTile(
+      dense: true,
       title: Text(
         S.of(context).enhancements,
         style: drawerTextStyle,
@@ -77,6 +126,7 @@ class _AppDrawerState extends State<AppDrawer> {
       },
     ));
     listItems.add(ListTile(
+      dense: true,
       title: Text(
         S.of(context).settings,
         style: drawerTextStyle,
@@ -94,6 +144,7 @@ class _AppDrawerState extends State<AppDrawer> {
       },
     ));
     listItems.add(ListTile(
+      dense: true,
       title: Text(
         S.of(context).legend,
         style: drawerTextStyle,
@@ -122,6 +173,7 @@ class _AppDrawerState extends State<AppDrawer> {
       },
     ));
     listItems.add(ListTile(
+      dense: true,
       title: Text(
         S.of(context).help,
         style: drawerTextStyle,
@@ -132,6 +184,7 @@ class _AppDrawerState extends State<AppDrawer> {
       },
     ));
     listItems.add(ListTile(
+      dense: true,
       title: Text(
         S.of(context).about,
         style: drawerTextStyle,
@@ -141,33 +194,6 @@ class _AppDrawerState extends State<AppDrawer> {
         launchURL(webUrl + 'about?lang=' + getLanguageCode(myLocale.languageCode));
       },
     ));
-    if (widget.currentUser != null) {
-      listItems.add(ListTile(
-        title: Text(
-          S.of(context).auth_sign_out,
-          style: drawerTextStyle,
-        ),
-        onTap: () {
-          Auth.signOut();//logout
-          Navigator.pop(context);
-        },
-      ));
-    } else {
-      listItems.add(ListTile(
-        title: Text(
-          S.of(context).auth_sign_in,
-          style: drawerTextStyle,
-        ),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SignInScreen()),
-          ).then((result) {
-            Navigator.pop(context);
-          });
-        },
-      ));
-    }
 
     return Drawer(
         child: ListView(
