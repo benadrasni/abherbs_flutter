@@ -9,6 +9,8 @@ class Purchases {
     productSearch: PurchasedItem.fromJSON({'productId': productSearch}),
     productCustomFilter: PurchasedItem.fromJSON({'productId': productCustomFilter}),
     productOffline: PurchasedItem.fromJSON({'productId': productOffline}),
+    productObservations: PurchasedItem.fromJSON({'productId': productObservations}),
+    productPhotoSearch: PurchasedItem.fromJSON({'productId': productPhotoSearch}),
   };
 
   static bool isPurchased(String productId) {
@@ -55,5 +57,28 @@ class Purchases {
       }
     }
     return false;
+  }
+
+  static bool isObservations() {
+    for (PurchasedItem product in purchases) {
+      if (product.productId == productObservations) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static bool isPhotoSearch() {
+    for (PurchasedItem product in purchases) {
+      if (product.productId == productPhotoSearch) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static bool isSignNeeded() {
+//    return isObservations() || isPhotoSearch();
+    return true;
   }
 }

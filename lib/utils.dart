@@ -18,6 +18,8 @@ const String productNoAdsIOS = "NoAds";
 const String productSearch = "search";
 const String productCustomFilter = "custom_filter";
 const String productOffline = "offline";
+const String productObservations = "observations";
+const String productPhotoSearch = "photo_search";
 
 const String keyLanguage = "language";
 const String keyLanguageAndCountry = "language_country";
