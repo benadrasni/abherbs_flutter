@@ -2440,11 +2440,11 @@ class $id_ID extends S {
   @override
   String get macaronesia => "Macaronesia";
   @override
-  String get auth_verify_phone_number_title => "Enter your phone number";
+  String get auth_verify_phone_number_title => "Masukkan nomor telepon";
   @override
   String get search => "Mencari...";
   @override
-  String get auth_sms_terms_of_service => "By tapping \"Verify Phone Number\", an SMS may be sent. Message & data rates may apply.";
+  String get auth_sms_terms_of_service => "Dengan mengetuk \"Verifikasi Nomor Telepon\", SMS dapat dikirim. Tarif pesan & data mungkin berlaku.";
   @override
   String get habitat_rock => "batu atau gunung";
   @override
@@ -2468,11 +2468,11 @@ class $id_ID extends S {
   @override
   String get product_custom_filter_description => "Anda dapat mengubah urutan dan jumlah filter default (warna, habitat, mahkota, distribusi).";
   @override
-  String get auth_password_hint => "Password";
+  String get auth_password_hint => "Kata sandi";
   @override
   String get habitat_meadow => "padang rumput";
   @override
-  String get auth_google => "Sign in with Google";
+  String get auth_google => "Masuk dengan Google";
   @override
   String get plant_herbalism => "Herbalism";
   @override
@@ -2490,7 +2490,7 @@ class $id_ID extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get auth_invalid_phone_number => "Enter a valid phone number";
+  String get auth_invalid_phone_number => "Masukkan nomor telepon yang validr";
   @override
   String get list_info => "Pilih salah satu";
   @override
@@ -2522,19 +2522,19 @@ class $id_ID extends S {
   @override
   String get auth_verify_email_message => "Tautan untuk memverifikasi akun telah dikirim ke alamat email Anda.";
   @override
-  String get auth_email => "Sign in with email";
+  String get auth_email => "Masuk dengan email";
   @override
   String get arabian_peninsula => "Semenanjung Arab";
   @override
   String get search_taxonomy => "Cari dalam taksonomi";
   @override
-  String get auth_incorrect_code => "Wrong code. Try again.";
+  String get auth_incorrect_code => "Salah kode. Coba lagi.";
   @override
   String get west_tropical_africa => "Afrika Barat Tropis";
   @override
   String get northern_europe => "Eropa Utara";
   @override
-  String get auth_verify_phone_number => "Verify phone number";
+  String get auth_verify_phone_number => "Verifikasi nomor telepon";
   @override
   String get rate => "Ulasan";
   @override
@@ -2576,7 +2576,7 @@ class $id_ID extends S {
   @override
   String get product_purchase_failed => "Pembelian gagal";
   @override
-  String get auth_twitter => "Sign in with Twitter";
+  String get auth_twitter => "Masuk dengan Twitter";
   @override
   String get auth_create_account => "Buat sebuah akun";
   @override
@@ -2588,7 +2588,7 @@ class $id_ID extends S {
   @override
   String get southwestern_usa => "Barat daya AS";
   @override
-  String get auth_invalid_email_address => "Enter a valid email address";
+  String get auth_invalid_email_address => "Masukkan alamat email yang valid";
   @override
   String get distribution_message => "Area geografis mana yang harus kita fokuskan?";
   @override
@@ -2612,11 +2612,11 @@ class $id_ID extends S {
   @override
   String get plant_leaf => "Daun";
   @override
-  String get auth_facebook => "Sign in with Facebook";
+  String get auth_facebook => "Masuk dengan Facebook";
   @override
   String get taxonomy_serie => "Serie";
   @override
-  String get auth_phone => "Sign in with phone";
+  String get auth_phone => "Masuk dengan telepon";
   @override
   String get northern_south_america => "Amerika Selatan bagian Utara";
   @override
@@ -2626,7 +2626,7 @@ class $id_ID extends S {
   @override
   String get southern_america => "Amerika Selatan";
   @override
-  String get auth_email_hint => "Email";
+  String get auth_email_hint => "E-mail";
   @override
   String get habitat_garden => "kebun atau ladang";
   @override
@@ -2680,7 +2680,7 @@ class $id_ID extends S {
   @override
   String get taxonomy_ordo => "Ordo";
   @override
-  String get auth_enter_confirmation_code => "Enter the 6-digit code we sent to ";
+  String get auth_enter_confirmation_code => "Masukkan kode 6 digit yang kami kirim ke ";
   @override
   String get taxonomy_supersectio => "Supersectio";
   @override
@@ -2724,7 +2724,7 @@ class $id_ID extends S {
   @override
   String get settings => "Pengaturan";
   @override
-  String get auth_sign_in => "Sign in";
+  String get auth_sign_in => "Masuk";
   @override
   String get color_red => "merah";
   @override
@@ -2768,7 +2768,7 @@ class $id_ID extends S {
   @override
   String get taxonomy_tribus => "Tribe";
   @override
-  String get auth_resend_code => "Resend Code";
+  String get auth_resend_code => "Kirim ulang kode";
   @override
   String get rate_later => "Kemudian";
   @override
@@ -2796,7 +2796,7 @@ class $id_ID extends S {
   @override
   String get southeastern_europe => "Eropa Tenggara";
   @override
-  String get auth_empty_password => "Password can't be empty";
+  String get auth_empty_password => "Kata sandi tidak boleh kosong";
   @override
   String get plant_inflorescence => "Bunga majemuk";
   @override
@@ -3266,7 +3266,7 @@ class $he_IL extends S {
   @override
   String get australasia => "אוסטרליה";
   @override
-  String get auth_verify_email_title => "Verify your account";
+  String get auth_verify_email_title => "אמת את חשבונך";
   @override
   String get east_tropical_africa => "מזרח אפריקה טרופית";
   @override
@@ -3300,11 +3300,11 @@ class $he_IL extends S {
   @override
   String get macaronesia => "מקרונזיה";
   @override
-  String get auth_verify_phone_number_title => "Enter your phone number";
+  String get auth_verify_phone_number_title => "הזן מספר טלפון";
   @override
   String get search => "לחפש...";
   @override
-  String get auth_sms_terms_of_service => "By tapping \"Verify Phone Number\", an SMS may be sent. Message & data rates may apply.";
+  String get auth_sms_terms_of_service => "על ידי הקשה על \"אימות מספר טלפון\", ניתן לשלוח הודעת סמס. ייתכן שיחולו תעריפי הודעות ונתונים.";
   @override
   String get habitat_rock => "סלעים או הרים";
   @override
@@ -3328,17 +3328,17 @@ class $he_IL extends S {
   @override
   String get product_custom_filter_description => "תוכל לשנות את סדר ברירת המחדל ואת מספר המסננים (צבע, בתי גידול, עלי כותרת, הפצה).";
   @override
-  String get auth_password_hint => "Password";
+  String get auth_password_hint => "סיסמה";
   @override
   String get habitat_meadow => "כרי דשא או מרעה";
   @override
-  String get auth_google => "Sign in with Google";
+  String get auth_google => "היכנס באמצעות Google";
   @override
   String get plant_herbalism => "צמחי מרפא";
   @override
   String get product_restore_purchases => "לשחזר רכישות";
   @override
-  String get auth_reset_password => "Reset Password";
+  String get auth_reset_password => "לאפס את הסיסמה";
   @override
   String get feedback_title => "כיצד לתרום";
   @override
@@ -3350,7 +3350,7 @@ class $he_IL extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get auth_invalid_phone_number => "Enter a valid phone number";
+  String get auth_invalid_phone_number => "הזן מספר טלפון חוקי";
   @override
   String get list_info => "לבחור אחד";
   @override
@@ -3380,21 +3380,21 @@ class $he_IL extends S {
   @override
   String get offline_download_success => "תמונות ואיורים הורדו בהצלחה.";
   @override
-  String get auth_verify_email_message => "Link to verify account has been sent to your email address.";
+  String get auth_verify_email_message => "קישור לאימות החשבון נשלח לכתובת דוא\"ל שלך.";
   @override
-  String get auth_email => "Sign in with email";
+  String get auth_email => "היכנס באמצעות דוא\"ל";
   @override
   String get arabian_peninsula => "חצי האי ערב";
   @override
   String get search_taxonomy => "חפש בטקסונומיה";
   @override
-  String get auth_incorrect_code => "Wrong code. Try again.";
+  String get auth_incorrect_code => "קוד שגוי. נסה שוב.";
   @override
   String get west_tropical_africa => "מערב אפריקה טרופית";
   @override
   String get northern_europe => "אירופה הצפונית";
   @override
-  String get auth_verify_phone_number => "Verify phone number";
+  String get auth_verify_phone_number => "אמת את מספר הטלפון";
   @override
   String get rate => "סקירה";
   @override
@@ -3436,9 +3436,9 @@ class $he_IL extends S {
   @override
   String get product_purchase_failed => "הרכישה נכשלה";
   @override
-  String get auth_twitter => "Sign in with Twitter";
+  String get auth_twitter => "היכנס באמצעות Twitter";
   @override
-  String get auth_create_account => "Create an account";
+  String get auth_create_account => "צור חשבון";
   @override
   String get offline_download_progress => "מוריד תמונות ואיורים ...";
   @override
@@ -3448,13 +3448,13 @@ class $he_IL extends S {
   @override
   String get southwestern_usa => "דרום מערב ארצות הברית";
   @override
-  String get auth_invalid_email_address => "Enter a valid email address";
+  String get auth_invalid_email_address => "הכנס כתובת אימייל תקינה";
   @override
   String get distribution_message => "באיזה אזור גיאוגרפי עלינו להתמקד?";
   @override
   String get caribbean => "הקאריביים";
   @override
-  String get auth_sign_in_failed => "Sign in failed. Check your connection and try again.";
+  String get auth_sign_in_failed => "ההרשמה נכשלה. בדוק את החיבור ונסה שוב.";
   @override
   String get offline_delete_message => "האם ברצונך למחוק נתונים לא מקוונים?";
   @override
@@ -3472,11 +3472,11 @@ class $he_IL extends S {
   @override
   String get plant_leaf => "עלים";
   @override
-  String get auth_facebook => "Sign in with Facebook";
+  String get auth_facebook => "התחבר עם פייסבוק";
   @override
   String get taxonomy_serie => "Serie";
   @override
-  String get auth_phone => "Sign in with phone";
+  String get auth_phone => "היכנס באמצעות הטלפון";
   @override
   String get northern_south_america => "צפון אמריקה";
   @override
@@ -3486,7 +3486,7 @@ class $he_IL extends S {
   @override
   String get southern_america => "דרום אמריקה";
   @override
-  String get auth_email_hint => "Email";
+  String get auth_email_hint => "דוא\"ל";
   @override
   String get habitat_garden => "גנים או שדות";
   @override
@@ -3520,13 +3520,13 @@ class $he_IL extends S {
   @override
   String get middle_europe => "אירופה המזרחית";
   @override
-  String get auth_reset_password_email_title => "Reset password";
+  String get auth_reset_password_email_title => "לאפס את הסיסמה";
   @override
   String get color_blue => "כחול, סגול";
   @override
   String get my_filter => "המסנן שלי";
   @override
-  String get auth_sign_in_text => "Have an account? Sign in";
+  String get auth_sign_in_text => "כבר יש לך חשבון? היכנס";
   @override
   String get petal_5 => "5";
   @override
@@ -3540,7 +3540,7 @@ class $he_IL extends S {
   @override
   String get taxonomy_ordo => "סדרה";
   @override
-  String get auth_enter_confirmation_code => "Enter the 6-digit code we sent to ";
+  String get auth_enter_confirmation_code => "הזן את הקוד בן 6 הספרות ששלחנו אל ";
   @override
   String get taxonomy_supersectio => "Supersectio";
   @override
@@ -3560,7 +3560,7 @@ class $he_IL extends S {
   @override
   String get taxonomy_subtribus => "Subtribe";
   @override
-  String get auth_phone_hint => "Phone Number";
+  String get auth_phone_hint => "מספר טלפון";
   @override
   String get plant_trivia => "דְבָרִים בְּטֵלִים";
   @override
@@ -3584,13 +3584,13 @@ class $he_IL extends S {
   @override
   String get settings => "הגדרות";
   @override
-  String get auth_sign_in => "Sign in";
+  String get auth_sign_in => "היכנס";
   @override
   String get color_red => "אדום, ורוד";
   @override
   String get north_central_pacific => "צפון מרכז האוקיינוס השקט";
   @override
-  String get auth_code_hint => "SMS code";
+  String get auth_code_hint => "קוד ה- סמס";
   @override
   String get southern_africa => "דרום אפריקה";
   @override
@@ -3620,7 +3620,7 @@ class $he_IL extends S {
   @override
   String get rate_text => "מחבר של יישום זה מונע על ידי תגובה חיובית מהמשתמשים. נא לשלוח לו כמה כוכבים דרך חנות היישומים.";
   @override
-  String get auth_sign_out => "Sign out";
+  String get auth_sign_out => "התנתק";
   @override
   String get south_central_usa => "דרום מרכז ארצות הברית";
   @override
@@ -3628,7 +3628,7 @@ class $he_IL extends S {
   @override
   String get taxonomy_tribus => "שבט";
   @override
-  String get auth_resend_code => "Resend Code";
+  String get auth_resend_code => "שלח קוד שוב";
   @override
   String get rate_later => "יותר מאוחר";
   @override
@@ -3656,7 +3656,7 @@ class $he_IL extends S {
   @override
   String get southeastern_europe => "דרום מזרח אירופה";
   @override
-  String get auth_empty_password => "Password can't be empty";
+  String get auth_empty_password => "הסיסמה לא יכולה להיות ריקה";
   @override
   String get plant_inflorescence => "תִפרַחַת";
   @override
@@ -3668,9 +3668,9 @@ class $he_IL extends S {
   @override
   String get petal_zygomorphic => "לֹא סָדִיר";
   @override
-  String get auth_invalid_code => "Enter a valid sms code";
+  String get auth_invalid_code => "הזן קוד סמס חוקי";
   @override
-  String auth_reset_password_email_message(String _email) => "Follow the instructions sent to $_email to reset your password.";
+  String auth_reset_password_email_message(String _email) => "בצע את ההוראות שנשלחו אל $_email כדי לאפס את הסיסמה.";
 }
 
 class $ja_JP extends S {
@@ -7164,11 +7164,11 @@ class $pa_IN extends S {
   @override
   String get macaronesia => "ਮੈਕਰੋਨੀਆਸੀਆ";
   @override
-  String get auth_verify_phone_number_title => "Enter your phone number";
+  String get auth_verify_phone_number_title => "ਇੱਕ ਫੋਨ ਨੰਬਰ ਦਰਜ ਕਰੋ";
   @override
   String get search => "ਖੋਜ ...";
   @override
-  String get auth_sms_terms_of_service => "By tapping \"Verify Phone Number\", an SMS may be sent. Message & data rates may apply.";
+  String get auth_sms_terms_of_service => "\"ਫੋਨ ਨੰਬਰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ\" ਟੈਪ ਕਰਕੇ, ਇੱਕ SMS ਭੇਜਿਆ ਜਾ ਸਕਦਾ ਹੈ. ਸੁਨੇਹਾ ਅਤੇ ਡੇਟਾ ਦਰਾਂ ਲਾਗੂ ਹੋ ਸਕਦੀਆਂ ਹਨ.";
   @override
   String get habitat_rock => "ਇਕ ਚੁਣੋ";
   @override
@@ -7192,11 +7192,11 @@ class $pa_IN extends S {
   @override
   String get product_custom_filter_description => "ਤੁਸੀਂ ਡਿਫਾਲਟ ਆਰਡਰ ਅਤੇ ਫਿਲਟਰਸ ਦੀ ਗਿਣਤੀ (ਰੰਗ, ਆਵਾਸ, ਪੱਟੇਲ, ਵੰਡ) ਨੂੰ ਬਦਲਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ.";
   @override
-  String get auth_password_hint => "Password";
+  String get auth_password_hint => "ਪਾਸਵਰਡ";
   @override
   String get habitat_meadow => "ਅਨੁਵਾਦ ਸੁਧਾਰੋ";
   @override
-  String get auth_google => "Sign in with Google";
+  String get auth_google => "Google ਦੇ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ";
   @override
   String get plant_herbalism => "ਹਰਬਲਿਜ਼ਮ";
   @override
@@ -7214,7 +7214,7 @@ class $pa_IN extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get auth_invalid_phone_number => "Enter a valid phone number";
+  String get auth_invalid_phone_number => "ਇੱਕ ਵੈਧ ਫੋਨ ਨੰਬਰ ਦਰਜ ਕਰੋ";
   @override
   String get list_info => "ਇਕ ਚੁਣੋ";
   @override
@@ -7246,19 +7246,19 @@ class $pa_IN extends S {
   @override
   String get auth_verify_email_message => "ਖਾਤੇ ਦੀ ਤਸਦੀਕ ਕਰਨ ਲਈ ਲਿੰਕ ਨੂੰ ਤੁਹਾਡੇ ਈਮੇਲ ਪਤੇ 'ਤੇ ਭੇਜਿਆ ਗਿਆ ਹੈ.";
   @override
-  String get auth_email => "Sign in with email";
+  String get auth_email => "ਈਮੇਲ ਦੇ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ";
   @override
   String get arabian_peninsula => "ਅਰਬੀ ਪ੍ਰਾਇਦੀਪ";
   @override
   String get search_taxonomy => "ਟੈਕਸੋਨੀਟੀ ਵਿੱਚ ਖੋਜ ਕਰੋ";
   @override
-  String get auth_incorrect_code => "Wrong code. Try again.";
+  String get auth_incorrect_code => "ਗਲਤ ਕੋਡ. ਫਿਰ ਕੋਸ਼ਿਸ਼ ਕਰੋ.";
   @override
   String get west_tropical_africa => "ਪੱਛਮੀ ਖੰਡੀ ਅਫ਼ਰੀਕਾ";
   @override
   String get northern_europe => "ਉੱਤਰੀ ਯੂਰਪ";
   @override
-  String get auth_verify_phone_number => "Verify phone number";
+  String get auth_verify_phone_number => "ਫੋਨ ਨੰਬਰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ";
   @override
   String get rate => "ਸਮੀਖਿਆ";
   @override
@@ -7300,7 +7300,7 @@ class $pa_IN extends S {
   @override
   String get product_purchase_failed => "ਖਰੀਦ ਫੇਲ੍ਹ ਹੋਈ";
   @override
-  String get auth_twitter => "Sign in with Twitter";
+  String get auth_twitter => "Twitter ਦੇ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ";
   @override
   String get auth_create_account => "ਅਕਾਉਂਟ ਬਣਾਓ";
   @override
@@ -7312,7 +7312,7 @@ class $pa_IN extends S {
   @override
   String get southwestern_usa => "ਦੱਖਣੀ ਪੱਛਮੀ ਅਮਰੀਕਾ";
   @override
-  String get auth_invalid_email_address => "Enter a valid email address";
+  String get auth_invalid_email_address => "ਇੱਕ ਵੈਧ ਈਮੇਲ ਪਤਾ ਦਾਖਲ ਕਰੋ";
   @override
   String get distribution_message => "ਕਿਹੜੇ ਭੂਗੋਲਿਕ ਖੇਤਰ 'ਤੇ ਸਾਨੂੰ ਧਿਆਨ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ?";
   @override
@@ -7336,11 +7336,11 @@ class $pa_IN extends S {
   @override
   String get plant_leaf => "ਪੱਤਾ";
   @override
-  String get auth_facebook => "Sign in with Facebook";
+  String get auth_facebook => "Facebook ਦੇ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ";
   @override
   String get taxonomy_serie => "Serie";
   @override
-  String get auth_phone => "Sign in with phone";
+  String get auth_phone => "ਫੋਨ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ";
   @override
   String get northern_south_america => "ਉੱਤਰੀ ਦੱਖਣੀ ਅਮਰੀਕਾ";
   @override
@@ -7350,7 +7350,7 @@ class $pa_IN extends S {
   @override
   String get southern_america => "ਦੱਖਣੀ ਅਮਰੀਕਾ";
   @override
-  String get auth_email_hint => "Email";
+  String get auth_email_hint => "ਈ - ਮੇਲ";
   @override
   String get habitat_garden => "ਪਲਾਂਟ ਦਾ ਦ੍ਰਿਸ਼ਟੀਕੋਣ";
   @override
@@ -7404,7 +7404,7 @@ class $pa_IN extends S {
   @override
   String get taxonomy_ordo => "ਤਬਕਾ";
   @override
-  String get auth_enter_confirmation_code => "Enter the 6-digit code we sent to ";
+  String get auth_enter_confirmation_code => "ਤੇ 6-ਅੰਕ ਕੋਡ ਨੂੰ ਭੇਜਿਆ ";
   @override
   String get taxonomy_supersectio => "Supersectio";
   @override
@@ -7424,7 +7424,7 @@ class $pa_IN extends S {
   @override
   String get taxonomy_subtribus => "Subtribe";
   @override
-  String get auth_phone_hint => "Phone Number";
+  String get auth_phone_hint => "ਫੋਨ ਨੰਬਰ";
   @override
   String get plant_trivia => "ਟ੍ਰਿਜੀਆ";
   @override
@@ -7492,7 +7492,7 @@ class $pa_IN extends S {
   @override
   String get taxonomy_tribus => "ਕਬੀਲਾ";
   @override
-  String get auth_resend_code => "Resend Code";
+  String get auth_resend_code => "ਕੋਡ ਵਾਪਸ ਭੇਜੋ";
   @override
   String get rate_later => "ਬਾਅਦ ਵਿਚ";
   @override
@@ -7520,7 +7520,7 @@ class $pa_IN extends S {
   @override
   String get southeastern_europe => "ਦੱਖਣ ਯੂਰਪ";
   @override
-  String get auth_empty_password => "Password can't be empty";
+  String get auth_empty_password => "ਪਾਸਵਰਡ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ";
   @override
   String get plant_inflorescence => "ਫੁਲੋਰੇਸੈਂਸ";
   @override
@@ -10144,7 +10144,7 @@ class $et_EE extends S {
   @override
   String get australasia => "Austraalia";
   @override
-  String get auth_verify_email_title => "Verify your account";
+  String get auth_verify_email_title => "Kinnita oma kasutaja";
   @override
   String get east_tropical_africa => "Ida troopiline Aafrika";
   @override
@@ -10178,11 +10178,11 @@ class $et_EE extends S {
   @override
   String get macaronesia => "Makaroneesia";
   @override
-  String get auth_verify_phone_number_title => "Enter your phone number";
+  String get auth_verify_phone_number_title => "Sisesta oma telefoninumber";
   @override
   String get search => "Otsing...";
   @override
-  String get auth_sms_terms_of_service => "By tapping \"Verify Phone Number\", an SMS may be sent. Message & data rates may apply.";
+  String get auth_sms_terms_of_service => "Puudutades \"Kinnita telefoninumber\", võidakse saata SMS. Võib kehtida sõnumi ja andmeedastuskiirus.";
   @override
   String get habitat_rock => "kivid või mägedes";
   @override
@@ -10206,17 +10206,17 @@ class $et_EE extends S {
   @override
   String get product_custom_filter_description => "Saate muuta vaikimisi järjekorra ja filtrite arvu (värv, elupaikade, kroonleht, levitamine).";
   @override
-  String get auth_password_hint => "Password";
+  String get auth_password_hint => "Parool";
   @override
   String get habitat_meadow => "heinamaad või rohumaade";
   @override
-  String get auth_google => "Sign in with Google";
+  String get auth_google => "Logige Google'iga sisse";
   @override
   String get plant_herbalism => "Raviteaduse";
   @override
   String get product_restore_purchases => "Ostude taastamine";
   @override
-  String get auth_reset_password => "Reset Password";
+  String get auth_reset_password => "Lähtesta parool";
   @override
   String get feedback_title => "Kuidas aidata";
   @override
@@ -10228,7 +10228,7 @@ class $et_EE extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get auth_invalid_phone_number => "Enter a valid phone number";
+  String get auth_invalid_phone_number => "Sisestage kehtiv telefoninumber";
   @override
   String get list_info => "Vali üks";
   @override
@@ -10258,21 +10258,21 @@ class $et_EE extends S {
   @override
   String get offline_download_success => "Fotod ja illustratsioonid on edukalt alla laaditud.";
   @override
-  String get auth_verify_email_message => "Link to verify account has been sent to your email address.";
+  String get auth_verify_email_message => "Kontot kinnitav link on saadetud teie e-posti aadressile.";
   @override
-  String get auth_email => "Sign in with email";
+  String get auth_email => "Logige sisse e-posti teel";
   @override
   String get arabian_peninsula => "Araabia poolsaar";
   @override
   String get search_taxonomy => "Otsi taksonoomias";
   @override
-  String get auth_incorrect_code => "Wrong code. Try again.";
+  String get auth_incorrect_code => "Vale kood. Proovi uuesti.";
   @override
   String get west_tropical_africa => "Lääne troopiline Aafrika";
   @override
   String get northern_europe => "Põhja-Euroopa";
   @override
-  String get auth_verify_phone_number => "Verify phone number";
+  String get auth_verify_phone_number => "Kinnitage telefoninumber";
   @override
   String get rate => "Arvustus";
   @override
@@ -10314,9 +10314,9 @@ class $et_EE extends S {
   @override
   String get product_purchase_failed => "Ostmine nurjus";
   @override
-  String get auth_twitter => "Sign in with Twitter";
+  String get auth_twitter => "Logige Twitter'iga sisse";
   @override
-  String get auth_create_account => "Create an account";
+  String get auth_create_account => "Kontot looma";
   @override
   String get offline_download_progress => "Fotode ja illustratsioonide allalaadimine ...";
   @override
@@ -10326,13 +10326,13 @@ class $et_EE extends S {
   @override
   String get southwestern_usa => "Edelaosa USA";
   @override
-  String get auth_invalid_email_address => "Enter a valid email address";
+  String get auth_invalid_email_address => "Sisestage kehtiv emaili aadress";
   @override
   String get distribution_message => "Milline geograafiline piirkond peaks keskenduma?";
   @override
   String get caribbean => "Kariibimere saared";
   @override
-  String get auth_sign_in_failed => "Sign in failed. Check your connection and try again.";
+  String get auth_sign_in_failed => "Sisselogimine ebaõnnestus. Kontrollige oma ühendust ja proovige uuesti.";
   @override
   String get offline_delete_message => "Kas soovite offline andmeid kustutada?";
   @override
@@ -10350,11 +10350,11 @@ class $et_EE extends S {
   @override
   String get plant_leaf => "Lehed";
   @override
-  String get auth_facebook => "Sign in with Facebook";
+  String get auth_facebook => "Logige Facebook'iga sisse";
   @override
   String get taxonomy_serie => "Serie";
   @override
-  String get auth_phone => "Sign in with phone";
+  String get auth_phone => "Logige sisse telefoni teel";
   @override
   String get northern_south_america => "Põhja-Lõuna-Ameerika";
   @override
@@ -10364,7 +10364,7 @@ class $et_EE extends S {
   @override
   String get southern_america => "Lõuna-Ameerika";
   @override
-  String get auth_email_hint => "Email";
+  String get auth_email_hint => "E-post";
   @override
   String get habitat_garden => "aiad või väljad";
   @override
@@ -10398,13 +10398,13 @@ class $et_EE extends S {
   @override
   String get middle_europe => "Kesk-Euroopa";
   @override
-  String get auth_reset_password_email_title => "Reset password";
+  String get auth_reset_password_email_title => "Lähtesta parool";
   @override
   String get color_blue => "sinine, lilla";
   @override
   String get my_filter => "Minu filter";
   @override
-  String get auth_sign_in_text => "Have an account? Sign in";
+  String get auth_sign_in_text => "Kas teil on konto? Logi sisse";
   @override
   String get petal_5 => "5";
   @override
@@ -10418,7 +10418,7 @@ class $et_EE extends S {
   @override
   String get taxonomy_ordo => "Selts";
   @override
-  String get auth_enter_confirmation_code => "Enter the 6-digit code we sent to ";
+  String get auth_enter_confirmation_code => "Sisestage 6-kohaline kood, mille me saatisime aadressile ";
   @override
   String get taxonomy_supersectio => "Supersectio";
   @override
@@ -10438,7 +10438,7 @@ class $et_EE extends S {
   @override
   String get taxonomy_subtribus => "Subtriibus";
   @override
-  String get auth_phone_hint => "Phone Number";
+  String get auth_phone_hint => "Telefoninumber";
   @override
   String get plant_trivia => "Tühiasi";
   @override
@@ -10462,13 +10462,13 @@ class $et_EE extends S {
   @override
   String get settings => "Reguleerimine";
   @override
-  String get auth_sign_in => "Sign in";
+  String get auth_sign_in => "Logi sisse";
   @override
   String get color_red => "punane, roosa";
   @override
   String get north_central_pacific => "Vaikse ookeani põhja-keskosa";
   @override
-  String get auth_code_hint => "SMS code";
+  String get auth_code_hint => "SMS-kood";
   @override
   String get southern_africa => "Lõuna-Aafrika";
   @override
@@ -10498,7 +10498,7 @@ class $et_EE extends S {
   @override
   String get rate_text => "Selle rakenduse autorit toetab kasutajate positiivne vastus. Palun saatke talle mõned tähed rakenduste poe kaudu.";
   @override
-  String get auth_sign_out => "Sign out";
+  String get auth_sign_out => "Logi välja";
   @override
   String get south_central_usa => "Lõuna-Keskne USA";
   @override
@@ -10506,7 +10506,7 @@ class $et_EE extends S {
   @override
   String get taxonomy_tribus => "Triibus";
   @override
-  String get auth_resend_code => "Resend Code";
+  String get auth_resend_code => "Koodi uuesti saatmine";
   @override
   String get rate_later => "Pärast";
   @override
@@ -10534,7 +10534,7 @@ class $et_EE extends S {
   @override
   String get southeastern_europe => "Kagu-Euroopa";
   @override
-  String get auth_empty_password => "Password can't be empty";
+  String get auth_empty_password => "Parool ei saa olla tühi";
   @override
   String get plant_inflorescence => "Õisik";
   @override
@@ -10546,9 +10546,9 @@ class $et_EE extends S {
   @override
   String get petal_zygomorphic => "ebaregulaarne";
   @override
-  String get auth_invalid_code => "Enter a valid sms code";
+  String get auth_invalid_code => "Sisestage kehtiv SMS-kood";
   @override
-  String auth_reset_password_email_message(String _email) => "Follow the instructions sent to $_email to reset your password.";
+  String auth_reset_password_email_message(String _email) => "Parooli lähtestamiseks järgige $_email saadetud juhiseid.";
 }
 
 class $en_US extends S {
