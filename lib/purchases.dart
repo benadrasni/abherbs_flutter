@@ -78,7 +78,6 @@ class Purchases {
   }
 
   static bool isSignNeeded() {
-//    return isObservations() || isPhotoSearch();
-    return true;
+    return isObservations() || isPhotoSearch();
   }
 }
