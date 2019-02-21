@@ -30,12 +30,14 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           productSearch,
           productCustomFilter,
           productOffline,
+          productObservations,
         ]
       : [
           productNoAdsIOS,
           productSearch,
           productCustomFilter,
           productOffline,
+          productObservations,
         ];
   Future<List<IAPItem>> _productsF;
 

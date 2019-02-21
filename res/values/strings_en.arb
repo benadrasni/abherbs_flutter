@@ -17,6 +17,10 @@
   "product_custom_filter_description": "You'll be able to change default order and number of filters (color, habitat, petal, distribution).",
   "product_offline_title": "Offline mode",
   "product_offline_description": "Application will work without internet connection.",
+  "product_observations_title": "Observations",
+  "product_observations_description": "You'll be able to save your own observations with flower name, date, location, photos and notes.",
+  "product_photo_search_title": "Observations",
+  "product_photo_search_description": "You'll be able to find a flower by photo. This feature is using Google AI for labeling photos.",
   "product_purchase": "Purchase",
   "product_purchase_failed": "Purchase failed",
   "product_purchased": "Purchased",
@@ -233,5 +237,7 @@
 
   "search": "Search...",
   "search_names": "Search in names",
-  "search_taxonomy": "Search in taxonomy"
+  "search_taxonomy": "Search in taxonomy",
+
+  "observations": "Observations"
 }
