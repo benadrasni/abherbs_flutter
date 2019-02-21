@@ -23,15 +23,16 @@ const Key _privateKey = Key('private');
 class _ObservationsState extends State<Observations> {
   Key _key;
   bool _isPublic;
-  Query _listReference;
+  Query _privateQuery;
+  Query _publicQuery;
+  Query _query;
   Map<String, String> _translationCache;
 
   void _setIsPublic(bool isPublic) {
     setState(() {
       _isPublic = isPublic;
       _key = _isPublic ? _publicKey : _privateKey;
-      _listReference = _isPublic ? publicObservationsReference.child(firebaseObservationsByDate).child(firebaseAttributeList).orderByChild('order')
-          : privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList);
+      _query = _isPublic ? _publicQuery : _privateQuery;
     });
   }
 
@@ -41,7 +42,9 @@ class _ObservationsState extends State<Observations> {
     super.initState();
     _isPublic = false;
     _key = _privateKey;
-    _listReference = privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList);
+    _privateQuery = privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).orderByChild('order');
+    _publicQuery = publicObservationsReference.child(firebaseObservationsByDate).child(firebaseAttributeList).orderByChild('order');
+    _query = _privateQuery;
     _translationCache = {};
 
     Ads.hideBannerAd();
@@ -74,7 +77,7 @@ class _ObservationsState extends State<Observations> {
       body: FirebaseAnimatedList(
           key: _key,
           defaultChild: Center(child: CircularProgressIndicator()),
-          query: _listReference,
+          query: _query,
           itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
             String name = snapshot.value['plant'];
 
