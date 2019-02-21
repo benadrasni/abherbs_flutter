@@ -11,10 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
-final searchReference = FirebaseDatabase.instance.reference().child(firebaseSearch);
-final apgIVReference = FirebaseDatabase.instance.reference().child(firebaseAPGIV);
-final translationsTaxonomyReference = FirebaseDatabase.instance.reference().child(firebaseTranslationsTaxonomy);
-
 class Search extends StatefulWidget {
   final FirebaseUser currentUser;
   final Locale myLocale;

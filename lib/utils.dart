@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/enhancements.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/observations/observations.dart';
 import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
@@ -72,6 +73,10 @@ const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
 const String firebasePlantsToUpdate = "plants_to_update";
 const String firebaseFamiliesToUpdate = "families_to_update";
 const String firebaseVersions = "versions";
+const String firebaseObservationsPublic = "observations/public";
+const String firebaseObservationsPrivate = "observations/by users";
+const String firebaseObservationsByDate = "by date";
+const String firebaseObservationsByPlant = "by plant";
 
 const String firebaseRootTaxon = 'Eukaryota';
 const String firebaseAPGType = "type";
@@ -88,6 +93,10 @@ final DatabaseReference keysReference = FirebaseDatabase.instance.reference().ch
 final DatabaseReference translationsReference = FirebaseDatabase.instance.reference().child(firebaseTranslations);
 final DatabaseReference translationsTaxonomyReference = FirebaseDatabase.instance.reference().child(firebaseTranslationsTaxonomy);
 final DatabaseReference plantsReference = FirebaseDatabase.instance.reference().child(firebasePlants);
+final DatabaseReference searchReference = FirebaseDatabase.instance.reference().child(firebaseSearch);
+final DatabaseReference apgIVReference = FirebaseDatabase.instance.reference().child(firebaseAPGIV);
+final DatabaseReference publicObservationsReference = FirebaseDatabase.instance.reference().child(firebaseObservationsPublic);
+final DatabaseReference privateObservationsReference = FirebaseDatabase.instance.reference().child(firebaseObservationsPrivate);
 
 bool get isInDebugMode {
   bool inDebugMode = false;
@@ -183,6 +192,10 @@ String getProductTitle(BuildContext context, String productId, String defaultTit
       return S.of(context).product_custom_filter_title;
     case productOffline:
       return S.of(context).product_offline_title;
+    case productObservations:
+      return S.of(context).product_observations_title;
+    case productPhotoSearch:
+      return S.of(context).product_observations_title;
     default:
       return defaultTitle;
   }
@@ -199,6 +212,10 @@ String getProductDescription(BuildContext context, String productId, String defa
       return S.of(context).product_custom_filter_description;
     case productOffline:
       return S.of(context).product_offline_description;
+    case productObservations:
+      return S.of(context).product_observations_description;
+    case productPhotoSearch:
+      return S.of(context).product_photo_search_description;
     default:
       return defaultDescription;
   }
@@ -208,6 +225,10 @@ Icon getIcon(String productId) {
   switch (productId) {
     case productSearch:
       return Icon(Icons.search);
+    case productObservations:
+      return Icon(Icons.remove_red_eye);
+    case productPhotoSearch:
+      return Icon(Icons.photo_camera);
     default:
       return Icon(Icons.mood_bad);
   }
@@ -216,6 +237,22 @@ Icon getIcon(String productId) {
 List<Widget> getActions(BuildContext context, FirebaseUser currentUser, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct,
     Map<String, String> filter) {
   var _actions = <Widget>[];
+  _actions.add(IconButton(
+    icon: getIcon(productObservations),
+    onPressed: () {
+      if (Purchases.isObservations()) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Observations(currentUser, onChangeLanguage, onBuyProduct)),
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+        );
+      }
+    },
+  ));
   _actions.add(IconButton(
     icon: getIcon(productSearch),
     onPressed: () {
