@@ -3,16 +3,17 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/enhancements.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/observations/observations.dart';
 import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
@@ -54,6 +55,7 @@ const String heightUnitOfMeasure = "cm";
 
 const String webUrl = "https://whatsthatflower.com/";
 const String googleTranslateEndpoint = "https://translation.googleapis.com/language/translate/v2";
+const String googleMapsEndpoint = "https://maps.googleapis.com/maps/api/staticmap?";
 
 const String storageEndpoit = "https://storage.googleapis.com/abherbs-resources/";
 const String storageFamilies = "families/";
@@ -85,6 +87,8 @@ const String firebaseAttributeCount = "count";
 const String firebaseAttributeIOS = "ios";
 const String firebaseAttributeAndroid = "android";
 const String firebaseAttributeLastUpdate = "db_update";
+const String firebaseAttributeLabel = "label";
+const String firebaseAttributeOrder = "order";
 
 final DatabaseReference rootReference = FirebaseDatabase.instance.reference();
 final DatabaseReference countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
@@ -120,6 +124,15 @@ Future<void> launchURLF(String url) {
       throw 'Could not launch $url';
     }
   });
+}
+
+String getMapImageUrl(double latitude, double longitude, double width, double height) {
+  String url = googleMapsEndpoint;
+  url += 'zoom=11';
+  url += '&size=' + width.round().toString() + 'x' + height.round().toString();
+  url += '&markers=color:red|' + latitude.toString() + ',' + longitude.toString();
+  url += '&key=' + mapsAPIKey;
+  return url;
 }
 
 Widget getImage(String url, Widget placeholder, {double width, double height}) {
@@ -243,7 +256,7 @@ List<Widget> getActions(BuildContext context, FirebaseUser currentUser, Function
       if (Purchases.isObservations()) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Observations(currentUser, onChangeLanguage, onBuyProduct)),
+          MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
         );
       } else {
         Navigator.push(
