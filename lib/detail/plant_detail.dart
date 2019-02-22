@@ -22,13 +22,12 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:http/http.dart' as http;
 
 class PlantDetail extends StatefulWidget {
-  final FirebaseUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final Plant plant;
-  PlantDetail(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.filter, this.plant);
+  PlantDetail(this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.filter, this.plant);
 
   @override
   _PlantDetailState createState() => _PlantDetailState();

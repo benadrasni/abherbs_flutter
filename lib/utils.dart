@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:abherbs_flutter/detail/plant_detail.dart';
 import 'package:abherbs_flutter/enhancements.dart';
+import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/observations/observations.dart';
@@ -101,6 +103,8 @@ final DatabaseReference searchReference = FirebaseDatabase.instance.reference().
 final DatabaseReference apgIVReference = FirebaseDatabase.instance.reference().child(firebaseAPGIV);
 final DatabaseReference publicObservationsReference = FirebaseDatabase.instance.reference().child(firebaseObservationsPublic);
 final DatabaseReference privateObservationsReference = FirebaseDatabase.instance.reference().child(firebaseObservationsPrivate);
+
+Map<String, String> translationCache = {};
 
 bool get isInDebugMode {
   bool inDebugMode = false;
@@ -284,6 +288,26 @@ List<Widget> getActions(BuildContext context, FirebaseUser currentUser, Function
   ));
 
   return _actions;
+}
+
+void goToDetail(BuildContext context, Locale myLocale, String name, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct,
+    Map<String, String> filter) {
+  plantsReference.child(name).once().then((DataSnapshot snapshot) {
+    if (snapshot.value != null) {
+      Plant plant = Plant.fromJson(snapshot.key, snapshot.value);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PlantDetail(myLocale, onChangeLanguage, onBuyProduct, filter, plant)),
+      );
+    } else {
+      plantsReference.child(name).keepSynced(true);
+      translationsReference.child(myLocale.languageCode).child(name).keepSynced(true);
+      if (myLocale.languageCode != languageEnglish) {
+        translationsReference.child(languageEnglish).child(name).keepSynced(true);
+        translationsReference.child(myLocale.languageCode + languageGTSuffix).child(name).keepSynced(true);
+      }
+    }
+  });
 }
 
 Widget getAdMobBanner() {

@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:abherbs_flutter/ads.dart';
-import 'package:abherbs_flutter/entity/plant.dart';
-import 'package:abherbs_flutter/detail/plant_detail.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/firebase_animated_index_list.dart';
@@ -35,26 +33,6 @@ class _PlantListState extends State<PlantList> {
   Future<int> _count;
   Map<String, String> _translationCache;
 
-  void _onPressed(Locale myLocale, String name) {
-    plantsReference.child(name).once().then((DataSnapshot snapshot) {
-      if (snapshot.value != null) {
-        Plant plant = Plant.fromJson(snapshot.key, snapshot.value);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => PlantDetail(_currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, plant)),
-        );
-      } else {
-        plantsReference.child(name).keepSynced(true);
-        translationsReference.child(myLocale.languageCode).child(name).keepSynced(true);
-        if (myLocale.languageCode != languageEnglish) {
-          translationsReference.child(languageEnglish).child(name).keepSynced(true);
-          translationsReference.child(myLocale.languageCode + languageGTSuffix).child(name).keepSynced(true);
-        }
-      }
-    });
-  }
-
   Widget _getImageButton(BuildContext context, Locale myLocale, String url, String name) {
     var placeholder = Stack(alignment: Alignment.center, children: [
       CircularProgressIndicator(),
@@ -66,7 +44,7 @@ class _PlantListState extends State<PlantList> {
       padding: EdgeInsets.all(10.0),
       child: getImage(url, placeholder),
       onPressed: () {
-        _onPressed(myLocale, name);
+        goToDetail(context, myLocale, name, widget.onChangeLanguage, widget.onBuyProduct, widget.filter);
       },
     );
   }
@@ -185,7 +163,7 @@ class _PlantListState extends State<PlantList> {
                       width: 50.0,
                       height: 50.0),
                   onTap: () {
-                    _onPressed(myLocale, name);
+                    goToDetail(context, myLocale, name, widget.onChangeLanguage, widget.onBuyProduct, widget.filter);
                   },
                 ),
                 _getImageButton(context, myLocale, storagePhotos + snapshot.value['url'], name),
