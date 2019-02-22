@@ -31,7 +31,6 @@ class _PlantListState extends State<PlantList> {
   StreamSubscription<FirebaseUser> _listener;
   FirebaseUser _currentUser;
   Future<int> _count;
-  Map<String, String> _translationCache;
 
   Widget _getImageButton(BuildContext context, Locale myLocale, String url, String name) {
     var placeholder = Stack(alignment: Alignment.center, children: [
@@ -76,8 +75,6 @@ class _PlantListState extends State<PlantList> {
       });
     }
 
-    _translationCache = {};
-
     Ads.hideBannerAd();
   }
 
@@ -104,25 +101,25 @@ class _PlantListState extends State<PlantList> {
             String family = snapshot.value['family'];
 
             Locale myLocale = Localizations.localeOf(context);
-            Future<String> nameF = _translationCache.containsKey(name)
+            Future<String> nameF = translationCache.containsKey(name)
                 ? Future<String>(() {
-                    return _translationCache[name];
+                    return translationCache[name];
                   })
                 : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(name).child(firebaseAttributeLabel).once().then((DataSnapshot snapshot) {
                     if (snapshot.value != null) {
-                      _translationCache[name] = snapshot.value;
+                      translationCache[name] = snapshot.value;
                       return snapshot.value;
                     } else {
                       return null;
                     }
                   });
-            Future<String> familyF = _translationCache.containsKey(family)
+            Future<String> familyF = translationCache.containsKey(family)
                 ? Future<String>(() {
-                    return _translationCache[family];
+                    return translationCache[family];
                   })
                 : translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(family).once().then((DataSnapshot snapshot) {
                     if (snapshot.value != null && snapshot.value.length > 0) {
-                      _translationCache[family] = snapshot.value[0];
+                      translationCache[family] = snapshot.value[0];
                       return snapshot.value[0];
                     } else {
                       return null;
