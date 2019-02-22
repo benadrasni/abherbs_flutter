@@ -89,6 +89,7 @@ class _SettingOfflineState extends State<SettingOffline> {
           child: Text(S.of(context).yes.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             _logOfflineDownloadEvent('started');
+            Offline.downloadPaused = false;
             setState(() {
               _downloadStatus = 1;
             });

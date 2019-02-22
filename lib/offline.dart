@@ -114,14 +114,15 @@ class Offline {
       setKeepSynced(i, true);
     }
     Future.wait([downloadFamilies(onFamilyDownload), _downloadPlants(onPlantDownload)]).then((List<bool> results) {
-      downloadFinished = results.reduce((x, y) => x && y);
       if (downloadPaused) {
-        downloadPaused = false;
         downloadFinished = false;
-      } else if (downloadFinished) {
-        onDownloadFinish();
       } else {
-        onDownloadFail();
+        downloadFinished = results.reduce((x, y) => x && y);
+        if (downloadFinished) {
+          onDownloadFinish();
+        } else {
+          onDownloadFail();
+        }
       }
     }).catchError((error) {
       onDownloadFail();
