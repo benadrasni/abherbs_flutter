@@ -130,7 +130,7 @@ class _PlantListState extends State<PlantList> {
                 ? Future<String>(() {
                     return _translationCache[name];
                   })
-                : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(name).child('label').once().then((DataSnapshot snapshot) {
+                : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(name).child(firebaseAttributeLabel).once().then((DataSnapshot snapshot) {
                     if (snapshot.value != null) {
                       _translationCache[name] = snapshot.value;
                       return snapshot.value;
