@@ -125,7 +125,11 @@ class _ObservationViewState extends State<ObservationView> {
                 child: Icon(Icons.arrow_back_ios),
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
               ),
-              onTap: () {},
+              onTap: () {
+                setState(() {
+                  _position = (_position-1)%widget.observation.photoUrls.length;
+                });
+              },
             ),
             Text((_position + 1).toString() + ' / ' + widget.observation.photoUrls.length.toString()),
             GestureDetector(
@@ -133,7 +137,12 @@ class _ObservationViewState extends State<ObservationView> {
                 child: Icon(Icons.arrow_forward_ios),
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
               ),
-              onTap: () {},
+              onTap: () {
+                setState(() {
+                  _position = (_position+1)%widget.observation.photoUrls.length;
+                });
+
+              },
             ),
           ],
         ),
