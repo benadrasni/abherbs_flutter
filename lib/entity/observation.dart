@@ -15,7 +15,7 @@ class Observation{
     longitude = data['longitude'];
     latitude = data['latitude'];
     note = data['note'];
-    photoUrls = data['photoUrls'];
+    photoUrls = data['photoPaths'];
     status = data['status'];
     order = data['order'];
   }
