@@ -74,6 +74,8 @@ class Offline {
       switch (section) {
         case 1:
           await reference.child(firebaseCounts).keepSynced(value);
+          await reference.child(firebaseFamiliesToUpdate).keepSynced(value);
+          await reference.child(firebasePlantsToUpdate).keepSynced(value);
           break;
         case 2:
           await reference.child(firebaseLists).keepSynced(value);
@@ -108,6 +110,9 @@ class Offline {
 
   static void download(
       Function(int, int) onFamilyDownload, Function(int, int) onPlantDownload, Function() onDownloadFinish, Function() onDownloadFail) {
+    for (var i = 1; i <= 4; i++) {
+      setKeepSynced(i, true);
+    }
     Future.wait([downloadFamilies(onFamilyDownload), _downloadPlants(onPlantDownload)]).then((List<bool> results) {
       downloadFinished = results.reduce((x, y) => x && y);
       if (downloadPaused) {
