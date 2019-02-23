@@ -139,7 +139,7 @@ String getMapImageUrl(double latitude, double longitude, double width, double he
   return url;
 }
 
-Widget getImage(String url, Widget placeholder, {double width, double height}) {
+Widget getImage(String url, Widget placeholder, {double width, double height, BoxFit fit}) {
   return FutureBuilder<File>(
       future: Offline.getLocalFile(url),
       builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
@@ -149,7 +149,7 @@ Widget getImage(String url, Widget placeholder, {double width, double height}) {
           }
 
           return CachedNetworkImage(
-            fit: BoxFit.contain,
+            fit: fit ?? BoxFit.contain,
             width: width,
             height: height,
             placeholder: placeholder,

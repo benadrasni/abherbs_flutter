@@ -24,7 +24,6 @@ class ObservationView extends StatefulWidget {
 }
 
 class _ObservationViewState extends State<ObservationView> {
-  int _position;
   DateFormat _dateFormat;
   DateFormat _timeFormat;
 
@@ -34,7 +33,6 @@ class _ObservationViewState extends State<ObservationView> {
     initializeDateFormatting();
     _dateFormat = new DateFormat.yMMMMd(widget.myLocale.toString());
     _timeFormat = new DateFormat.Hms(widget.myLocale.toString());
-    _position = 0;
   }
 
   @override
@@ -44,8 +42,9 @@ class _ObservationViewState extends State<ObservationView> {
 
     var placeholder = Stack(alignment: Alignment.center, children: [
       CircularProgressIndicator(),
-      Image(
-        image: AssetImage('res/images/placeholder.webp'),
+      Container(
+        width: mapWidth,
+        height: mapWidth,
       ),
     ]);
 
@@ -100,14 +99,14 @@ class _ObservationViewState extends State<ObservationView> {
 
     widgets.add(
       FlatButton(
-        padding: EdgeInsets.only(bottom: 5.0),
+        padding: EdgeInsets.all(5.0),
         child: CachedNetworkImage(
           fit: BoxFit.contain,
           width: mapWidth,
           height: mapHeight,
           placeholder: Container(
-            width: 0.0,
-            height: 0.0,
+            width: mapWidth,
+            height: mapHeight,
           ),
           imageUrl: getMapImageUrl(widget.observation.latitude, widget.observation.longitude, mapWidth, mapHeight),
         ),
@@ -115,44 +114,25 @@ class _ObservationViewState extends State<ObservationView> {
       ),
     );
 
-    widgets.add(
-      ListTile(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              child: Padding(
-                child: Icon(Icons.arrow_back_ios),
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-              ),
-              onTap: () {
-                setState(() {
-                  _position = (_position-1)%widget.observation.photoUrls.length;
-                });
-              },
-            ),
-            Text((_position + 1).toString() + ' / ' + widget.observation.photoUrls.length.toString()),
-            GestureDetector(
-              child: Padding(
-                child: Icon(Icons.arrow_forward_ios),
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-              ),
-              onTap: () {
-                setState(() {
-                  _position = (_position+1)%widget.observation.photoUrls.length;
-                });
-
-              },
-            ),
-          ],
-        ),
-        trailing: widget.observation.key.startsWith(widget.currentUser.uid) ? Icon(Icons.edit) : null,
-      ),
-    );
-
     widgets.add(Container(
       padding: EdgeInsets.all(5.0),
-      child: getImage(widget.observation.photoUrls[_position], placeholder),
+      width: mapWidth,
+      height: mapWidth,
+      child: PageView.builder(
+        itemCount: widget.observation.photoUrls.length,
+        itemBuilder: (context, position) {
+          return Stack(children: [
+            getImage(widget.observation.photoUrls[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
+            Container(
+              padding: EdgeInsets.all(5.0),
+              child: Text(
+                (position + 1).toString() + ' / ' + widget.observation.photoUrls.length.toString(),
+                style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ]);
+        },
+      ),
     ));
 
     return Card(
