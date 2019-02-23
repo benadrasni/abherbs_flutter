@@ -6,9 +6,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:abherbs_flutter/firebase_index_list.dart';
 
-typedef Widget FirebaseAnimatedListItemBuilder(
+import 'package:firebase_database/ui/firebase_list.dart';
+import 'package:firebase_database/ui/firebase_sorted_list.dart';
+
+typedef Widget MyFirebaseAnimatedListItemBuilder(
     BuildContext context,
     DataSnapshot snapshot,
     Animation<double> animation,
@@ -16,15 +18,15 @@ typedef Widget FirebaseAnimatedListItemBuilder(
     );
 
 /// An AnimatedList widget that is bound to a query
-class FirebaseAnimatedIndexList extends StatefulWidget {
+class MyFirebaseAnimatedList extends StatefulWidget {
   /// Creates a scrolling container that animates items when they are inserted or removed.
-  FirebaseAnimatedIndexList({
+  MyFirebaseAnimatedList({
     Key key,
     @required this.query,
-    @required this.keyQuery,
     @required this.itemBuilder,
     this.sort,
     this.defaultChild,
+    this.emptyChild,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
     this.controller,
@@ -39,7 +41,6 @@ class FirebaseAnimatedIndexList extends StatefulWidget {
 
   /// A Firebase query to use to populate the animated list
   final Query query;
-  final Query keyQuery;
 
   /// Optional function used to compare snapshots when sorting the list
   ///
@@ -50,6 +51,10 @@ class FirebaseAnimatedIndexList extends StatefulWidget {
   /// Container().
   final Widget defaultChild;
 
+  /// A widget to display when the query result is empty. Defaults to an empty
+  /// Container().
+  final Widget emptyChild;
+
   /// Called, as needed, to build list item widgets.
   ///
   /// List items are only built when they're scrolled into view.
@@ -59,7 +64,7 @@ class FirebaseAnimatedIndexList extends StatefulWidget {
   ///
   /// Implementations of this callback should assume that [AnimatedList.removeItem]
   /// removes an item immediately.
-  final FirebaseAnimatedListItemBuilder itemBuilder;
+  final MyFirebaseAnimatedListItemBuilder itemBuilder;
 
   /// The axis along which the scroll view scrolls.
   ///
@@ -129,23 +134,37 @@ class FirebaseAnimatedIndexList extends StatefulWidget {
   final Duration duration;
 
   @override
-  FirebaseAnimatedIndexListState createState() => FirebaseAnimatedIndexListState();
+  MyFirebaseAnimatedListState createState() => MyFirebaseAnimatedListState();
 }
 
-class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
+class MyFirebaseAnimatedListState extends State<MyFirebaseAnimatedList> {
   final GlobalKey<AnimatedListState> _animatedListKey =
   GlobalKey<AnimatedListState>();
   List<DataSnapshot> _model;
   bool _loaded = false;
+  bool _empty = false;
 
   @override
   void didChangeDependencies() {
-    _model = FirebaseIndexList(
-      query: widget.query,
-      keyQuery: widget.keyQuery,
-      onChildAdded: _onChildAdded,
-      onValue: _onValue,
-    );
+    if (widget.sort != null) {
+      _model = FirebaseSortedList(
+        query: widget.query,
+        comparator: widget.sort,
+        onChildAdded: _onChildAdded,
+        onChildRemoved: _onChildRemoved,
+        onChildChanged: _onChildChanged,
+        onValue: _onValue,
+      );
+    } else {
+      _model = FirebaseList(
+        query: widget.query,
+        onChildAdded: _onChildAdded,
+        onChildRemoved: _onChildRemoved,
+        onChildChanged: _onChildChanged,
+        onChildMoved: _onChildMoved,
+        onValue: _onValue,
+      );
+    }
     super.didChangeDependencies();
   }
 
@@ -164,12 +183,33 @@ class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
     _animatedListKey.currentState.insertItem(index, duration: widget.duration);
   }
 
-  void _onValue(DataSnapshot _) {
-    if (mounted) {
-      setState(() {
-        _loaded = true;
-      });
-    }
+  void _onChildRemoved(int index, DataSnapshot snapshot) {
+    // The child should have already been removed from the model by now
+    assert(index >= _model.length || _model[index].key != snapshot.key);
+    _animatedListKey.currentState.removeItem(
+      index,
+          (BuildContext context, Animation<double> animation) {
+        return widget.itemBuilder(context, snapshot, animation, index);
+      },
+      duration: widget.duration,
+    );
+  }
+
+  // No animation, just update contents
+  void _onChildChanged(int index, DataSnapshot snapshot) {
+    setState(() {});
+  }
+
+  // No animation, just update contents
+  void _onChildMoved(int fromIndex, int toIndex, DataSnapshot snapshot) {
+    setState(() {});
+  }
+
+  void _onValue(DataSnapshot snapshot) {
+    setState(() {
+      _loaded = true;
+      _empty = snapshot.value == null;
+    });
   }
 
   Widget _buildItem(
@@ -181,6 +221,9 @@ class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
   Widget build(BuildContext context) {
     if (!_loaded) {
       return widget.defaultChild ?? Container();
+    }
+    if (_empty) {
+      return widget.emptyChild ?? Container();
     }
     return AnimatedList(
       key: _animatedListKey,
