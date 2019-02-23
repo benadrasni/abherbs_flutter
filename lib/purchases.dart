@@ -2,6 +2,7 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:abherbs_flutter/utils.dart';
 
 class Purchases {
+  static bool hasOldVersion;
   static List<PurchasedItem> purchases = <PurchasedItem>[];
   static Map<String, PurchasedItem> offlineProducts = {
     productNoAdsIOS: PurchasedItem.fromJSON({'productId': productNoAdsIOS}),
@@ -29,7 +30,7 @@ class Purchases {
         return true;
       }
     }
-    return false;
+    return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isSearch() {
@@ -38,7 +39,7 @@ class Purchases {
         return true;
       }
     }
-    return false;
+    return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isCustomFilter() {
@@ -47,7 +48,7 @@ class Purchases {
         return true;
       }
     }
-    return false;
+    return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isOffline() {
@@ -56,7 +57,7 @@ class Purchases {
         return true;
       }
     }
-    return false;
+    return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isObservations() {
@@ -65,7 +66,7 @@ class Purchases {
         return true;
       }
     }
-    return false;
+    return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isPhotoSearch() {
@@ -74,7 +75,7 @@ class Purchases {
         return true;
       }
     }
-    return false;
+    return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isSignNeeded() {

@@ -9,7 +9,6 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
@@ -294,53 +293,53 @@ List<BottomNavigationBarItem> getBottomNavigationBarItems(BuildContext context, 
   }).toList();
 }
 
-void onBottomNavigationBarTap(BuildContext context, FirebaseUser currentUser, void Function(String) onChangeLanguage,
+void onBottomNavigationBarTap(BuildContext context, void Function(String) onChangeLanguage,
     void Function(PurchasedItem) onBuyProduct, Map<String, String> filter, int index, int currentIndex) {
   if (index != currentIndex) {
     if (currentIndex == -1) {
       Navigator.pushReplacement(
-          context, getFilterRoute(context, currentUser, onChangeLanguage, onBuyProduct, filter, Preferences.myFilterAttributes.elementAt(index)));
+          context, getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, Preferences.myFilterAttributes.elementAt(index)));
     } else {
       Navigator.push(
-          context, getFilterRoute(context, currentUser, onChangeLanguage, onBuyProduct, filter, Preferences.myFilterAttributes.elementAt(index)));
+          context, getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, Preferences.myFilterAttributes.elementAt(index)));
     }
   }
 }
 
-void onLeftNavigationTap(BuildContext context, FirebaseUser currentUser, void Function(String) onChangeLanguage,
+void onLeftNavigationTap(BuildContext context, void Function(String) onChangeLanguage,
     void Function(PurchasedItem) onBuyProduct, Map<String, String> filter, String filterAttribute) {
-  Navigator.push(context, getFilterRoute(context, currentUser, onChangeLanguage, onBuyProduct, filter, filterAttribute));
+  Navigator.push(context, getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, filterAttribute));
 }
 
-MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, FirebaseUser currentUser, void Function(String) onChangeLanguage,
+MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Function(String) onChangeLanguage,
     void Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
-  return getFilterRoute(context, currentUser, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter));
+  return getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter));
 }
 
-MaterialPageRoute<dynamic> getFirstFilterRoute(BuildContext context, FirebaseUser currentUser, void Function(String) onChangeLanguage,
+MaterialPageRoute<dynamic> getFirstFilterRoute(BuildContext context, void Function(String) onChangeLanguage,
     void Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
-  return getFilterRoute(context, currentUser, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter));
+  return getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter));
 }
 
-MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, FirebaseUser currentUser, void Function(String) onChangeLanguage,
+MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, void Function(String) onChangeLanguage,
     void Function(PurchasedItem) onBuyProduct, Map<String, String> filter, String filterAttribute) {
   var route;
 
   switch (filterAttribute) {
     case filterColor:
-      route = MaterialPageRoute(builder: (context) => Color(currentUser, onChangeLanguage, onBuyProduct, filter));
+      route = MaterialPageRoute(builder: (context) => Color(onChangeLanguage, onBuyProduct, filter));
       break;
     case filterHabitat:
-      route = MaterialPageRoute(builder: (context) => Habitat(currentUser, onChangeLanguage, onBuyProduct, filter));
+      route = MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, onBuyProduct, filter));
       break;
     case filterPetal:
-      route = MaterialPageRoute(builder: (context) => Petal(currentUser, onChangeLanguage, onBuyProduct, filter));
+      route = MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, onBuyProduct, filter));
       break;
     case filterDistribution:
-      route = MaterialPageRoute(builder: (context) => Distribution(currentUser, onChangeLanguage, onBuyProduct, filter));
+      route = MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, onBuyProduct, filter));
       break;
     default:
-      route = MaterialPageRoute(builder: (context) => PlantList(currentUser, onChangeLanguage, onBuyProduct, filter));
+      route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, filter));
   }
   if (filterAttribute != null) {
     if (filterRoutes[filterAttribute] != null && filterRoutes[filterAttribute].isActive && context != null) {

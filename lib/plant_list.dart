@@ -15,13 +15,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class PlantList extends StatefulWidget {
-  final FirebaseUser currentUser;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final String count;
   final String path;
-  PlantList(this.currentUser, this.onChangeLanguage, this.onBuyProduct, this.filter, [this.count, this.path]);
+  PlantList(this.onChangeLanguage, this.onBuyProduct, this.filter, [this.count, this.path]);
 
   @override
   _PlantListState createState() => _PlantListState();
@@ -190,11 +189,11 @@ class _PlantListState extends State<PlantList> {
                                 filter[filterDistribution] = value;
                               }
                               Navigator.pushReplacement(
-                                  mainContext, getNextFilterRoute(mainContext, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, filter));
+                                  mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, widget.onBuyProduct, filter));
                             });
                           } else {
                             Navigator.pushReplacement(
-                                mainContext, getNextFilterRoute(mainContext, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, filter));
+                                mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, widget.onBuyProduct, filter));
                           }
                         });
                       },

@@ -10,7 +10,6 @@ import 'package:abherbs_flutter/splash.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,7 +50,6 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   FirebaseMessaging _firebaseMessaging;
   FirebaseAnalytics _firebaseAnalytics;
-  FirebaseUser _currentUser;
   Map<String, dynamic> _notificationData;
   Future<Locale> _localeF;
 
@@ -82,7 +80,7 @@ class _AppState extends State<App> {
       onMessage: (Map<String, dynamic> message) async {
 //        TODO: whether to show upcoming notification or not when app is active
 //        setState(() {
-//          _notification = message['data'];
+//          _notificationData = message;
 //        });
       },
       onResume: (Map<String, dynamic> message) async {
@@ -236,7 +234,7 @@ class _AppState extends State<App> {
                   GlobalWidgetsLocalizations.delegate,
                 ],
                 supportedLocales: S.delegate.supportedLocales,
-                home: Splash(_currentUser, this.onChangeLanguage, this.onBuyProduct, notificationData),
+                home: Splash(this.onChangeLanguage, this.onBuyProduct, notificationData),
                 navigatorObservers: [
                   FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
                 ],
