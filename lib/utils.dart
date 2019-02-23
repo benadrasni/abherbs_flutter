@@ -77,6 +77,7 @@ const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
 const String firebasePlantsToUpdate = "plants_to_update";
 const String firebaseFamiliesToUpdate = "families_to_update";
 const String firebaseVersions = "versions";
+const String firebaseUsers = "users";
 const String firebaseObservationsPublic = "observations/public";
 const String firebaseObservationsPrivate = "observations/by users";
 const String firebaseObservationsByDate = "by date";
@@ -91,6 +92,7 @@ const String firebaseAttributeAndroid = "android";
 const String firebaseAttributeLastUpdate = "db_update";
 const String firebaseAttributeLabel = "label";
 const String firebaseAttributeOrder = "order";
+const String firebaseAttributeOldVersion = "old version";
 
 final DatabaseReference rootReference = FirebaseDatabase.instance.reference();
 final DatabaseReference countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
@@ -103,6 +105,7 @@ final DatabaseReference searchReference = FirebaseDatabase.instance.reference().
 final DatabaseReference apgIVReference = FirebaseDatabase.instance.reference().child(firebaseAPGIV);
 final DatabaseReference publicObservationsReference = FirebaseDatabase.instance.reference().child(firebaseObservationsPublic);
 final DatabaseReference privateObservationsReference = FirebaseDatabase.instance.reference().child(firebaseObservationsPrivate);
+final DatabaseReference usersReference = FirebaseDatabase.instance.reference().child(firebaseUsers);
 
 Map<String, String> translationCache = {};
 
@@ -276,7 +279,7 @@ List<Widget> getActions(BuildContext context, FirebaseUser currentUser, Function
       if (Purchases.isSearch()) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Search(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+          MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
         );
       } else {
         Navigator.push(

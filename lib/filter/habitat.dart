@@ -15,11 +15,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class Habitat extends StatefulWidget {
-  final FirebaseUser currentUser;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
-  Habitat(this.currentUser, this.onChangeLanguage, this.onBuyProduct, this.filter);
+  Habitat(this.onChangeLanguage, this.onBuyProduct, this.filter);
 
   @override
   _HabitatState createState() => _HabitatState();
@@ -40,7 +39,7 @@ class _HabitatState extends State<Habitat> {
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
+          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
               .then((value) {
             Ads.showBannerAd(this);
           });
@@ -236,7 +235,7 @@ class _HabitatState extends State<Habitat> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, index,
+          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, index,
               Preferences.myFilterAttributes.indexOf(filterHabitat));
         },
       ),
@@ -265,7 +264,7 @@ class _HabitatState extends State<Habitat> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                                builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
                           ).then((value) {
                             Ads.showBannerAd(this);
                           });

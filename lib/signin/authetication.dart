@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/purchases.dart';
 
 class Auth {
   static FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -45,7 +47,18 @@ class Auth {
 
 
   static Future<FirebaseUser> getCurrentUser() async {
-    FirebaseUser user = await firebaseAuth.currentUser();
+    FirebaseUser user = await firebaseAuth.currentUser().then((user) {
+      if (user != null) {
+        if (Purchases.hasOldVersion == null) {
+          usersReference.child(user.uid).child(firebaseAttributeOldVersion).once().then((snapshot) {
+            Purchases.hasOldVersion = snapshot.value != null && snapshot.value;
+          });
+        }
+      } else {
+        Purchases.hasOldVersion = null;
+      }
+      return user;
+    });
     return user;
   }
 

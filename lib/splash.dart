@@ -5,16 +5,14 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/preferences.dart';
 import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/utils.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class Splash extends StatefulWidget {
-  final FirebaseUser currentUser;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, dynamic> notificationData;
-  Splash(this.currentUser, this.onChangeLanguage, this.onBuyProduct, this.notificationData);
+  Splash(this.onChangeLanguage, this.onBuyProduct, this.notificationData);
 
   @override
   _SplashState createState() => new _SplashState();
@@ -38,12 +36,12 @@ class _SplashState extends State<Splash> {
             filter[filterDistribution] = myRegionValue;
           }
           return Future<MaterialPageRoute<dynamic>>(() {
-            return getFirstFilterRoute(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, filter);
+            return getFirstFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, filter);
           });
         });
       } else {
         return Future<MaterialPageRoute<dynamic>>(() {
-          return getFirstFilterRoute(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, filter);
+          return getFirstFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, filter);
         });
       }
     });
@@ -73,7 +71,7 @@ class _SplashState extends State<Splash> {
               if (count != null && path != null) {
                 return Future<MaterialPageRoute<dynamic>>(() {
                   return MaterialPageRoute(
-                      builder: (context) => PlantList(widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, {}, count, path));
+                      builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, {}, count, path));
                 });
               }
               return _getFirstFilterRoute();

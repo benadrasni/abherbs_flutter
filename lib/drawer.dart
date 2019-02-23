@@ -102,7 +102,7 @@ class _AppDrawerState extends State<AppDrawer> {
         subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ''),
         onTap: () {
           Navigator.pop(context);
-          onLeftNavigationTap(context, widget.currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, attribute);
+          onLeftNavigationTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, attribute);
         },
       );
     }));
