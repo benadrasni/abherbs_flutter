@@ -239,7 +239,8 @@
   "search_names": "Search in names",
   "search_taxonomy": "Search in taxonomy",
 
-  "observation": "Observations",
+  "observation": "Observation",
+  "observations": "Observations",
   "observation_camera_failed": "No picture was taken.",
   "observation_gallery_failed": "No picture was added.",
   "observation_saved": "Observation was saved.",

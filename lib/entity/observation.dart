@@ -1,5 +1,6 @@
 class Observation{
   final String key;
+  String id;
   String plantName;
   DateTime dateTime;
   double longitude;
@@ -10,6 +11,7 @@ class Observation{
   int order;
 
   Observation.fromJson(this.key, Map data) {
+    id = data['id'];
     plantName = data['plant'];
     dateTime = DateTime.fromMillisecondsSinceEpoch(data['date']['time']);
     longitude = data['longitude'];

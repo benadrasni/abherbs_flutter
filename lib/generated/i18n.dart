@@ -128,7 +128,7 @@ class S implements WidgetsLocalizations {
   String get northern_south_america => "Northern South America";
   String get northwestern_pacific => "Northwestern Pacific";
   String get northwestern_usa => "Northwestern U.S.A.";
-  String get observation => "Observations";
+  String get observation => "Observation";
   String get observation_camera_failed => "No picture was taken.";
   String get observation_delete => "Delete observation";
   String get observation_delete_question => "Do you want to delete the observation?";
@@ -140,6 +140,7 @@ class S implements WidgetsLocalizations {
   String get observation_photo_delete_question => "Do you want to remove photo from the observation?";
   String get observation_photo_duplicate => "Duplicate photo. Skipped.";
   String get observation_saved => "Observation was saved.";
+  String get observations => "Observations";
   String get offline_delete_message => "Do you want to delete offline data?";
   String get offline_download => "Resume download";
   String get offline_download_fail => "Download failed. Please check your internet connection or free space on device and try again.";
