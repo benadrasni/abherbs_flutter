@@ -55,6 +55,7 @@ class _AppState extends State<App> {
 
   onChangeLanguage(String language) {
     setState(() {
+      translationCache = {};
       _localeF = Future<Locale>(() {
         var languageCountry = language?.split('_');
         return language == null || language.isEmpty ? null : Locale(languageCountry[0], languageCountry[1]);

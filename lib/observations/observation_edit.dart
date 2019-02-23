@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:abherbs_flutter/entity/observation.dart';
-import 'package:abherbs_flutter/observations/observation_edit.dart';
+import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/observations/observation_map.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -12,20 +12,20 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
-class ObservationView extends StatefulWidget {
+class ObservationEdit extends StatefulWidget {
   final FirebaseUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Observation observation;
 
-  ObservationView(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.observation);
+  ObservationEdit(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.observation);
 
   @override
-  _ObservationViewState createState() => _ObservationViewState();
+  _ObservationEditState createState() => _ObservationEditState();
 }
 
-class _ObservationViewState extends State<ObservationView> {
+class _ObservationEditState extends State<ObservationEdit> {
   DateFormat _dateFormat;
   DateFormat _timeFormat;
 
@@ -92,9 +92,6 @@ class _ObservationViewState extends State<ObservationView> {
                   Text(_timeFormat.format(widget.observation.dateTime)),
                 ],
               ),
-              onTap: () {
-                goToDetail(context, myLocale, widget.observation.plantName, widget.onChangeLanguage, widget.onBuyProduct, {});
-              },
             );
           }),
     );
@@ -142,26 +139,10 @@ class _ObservationViewState extends State<ObservationView> {
       ),
     ));
 
-    return Card(
-      child: widget.observation.id.startsWith(widget.currentUser.uid)
-          ? Stack(children: [
-              Column(mainAxisSize: MainAxisSize.min, children: widgets),
-              Positioned(
-                bottom: 20.0,
-                right: 20.0,
-                child: FloatingActionButton(
-                  heroTag: widget.observation.id,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.observation)),
-                  );
-                },
-                child: Icon(Icons.edit),
-              ),),
-            ])
-          : Column(mainAxisSize: MainAxisSize.min, children: widgets),
-    );
+    return Scaffold(
+        appBar: AppBar(title: Text(S.of(context).observation),),
+        body: Card(
+          child: Column(mainAxisSize: MainAxisSize.min, children: widgets),
+        ));
   }
 }

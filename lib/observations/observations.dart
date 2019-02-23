@@ -66,7 +66,7 @@ class _ObservationsState extends State<Observations> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(S.of(context).observation),
+            Text(S.of(context).observations),
             Row(
               children: [
                 Icon(Icons.person),
