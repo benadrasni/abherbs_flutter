@@ -167,7 +167,7 @@ class Offline {
     });
     if (family != null) {
       var errors = 0;
-      await _downloadFile(storageEndpoit + storageFamilies + family + defaultExtension, storageFamilies, family + defaultExtension)
+      await _downloadFile(storageEndpoint + storageFamilies + family + defaultExtension, storageFamilies, family + defaultExtension)
           .catchError((error) {
         errors++;
       });
@@ -220,7 +220,7 @@ class Offline {
           urls.add(url);
         }
         await Future.wait(urls.map((String url) {
-          return _downloadFile(storageEndpoit + storagePhotos + url, storagePhotos + url.substring(0, url.lastIndexOf('/')),
+          return _downloadFile(storageEndpoint + storagePhotos + url, storagePhotos + url.substring(0, url.lastIndexOf('/')),
                   url.substring(url.lastIndexOf('/') + 1))
               .catchError((error) {
             errors++;

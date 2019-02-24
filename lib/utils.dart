@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/detail/plant_detail.dart';
+import 'package:abherbs_flutter/dialogs.dart';
 import 'package:abherbs_flutter/enhancements.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
@@ -59,7 +60,7 @@ const String webUrl = "https://whatsthatflower.com/";
 const String googleTranslateEndpoint = "https://translation.googleapis.com/language/translate/v2";
 const String googleMapsEndpoint = "https://maps.googleapis.com/maps/api/staticmap?";
 
-const String storageEndpoit = "https://storage.googleapis.com/abherbs-resources/";
+const String storageEndpoint = "https://storage.googleapis.com/abherbs-resources/";
 const String storageFamilies = "families/";
 const String storagePhotos = "photos/";
 const String defaultExtension = ".webp";
@@ -156,7 +157,7 @@ Widget getImage(String url, Widget placeholder, {double width, double height, Bo
             width: width,
             height: height,
             placeholder: placeholder,
-            imageUrl: storageEndpoit + url,
+            imageUrl: storageEndpoint + url,
           );
         } else {
           return placeholder;
@@ -254,8 +255,8 @@ Icon getIcon(String productId) {
   }
 }
 
-List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, FirebaseUser currentUser, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct,
-    Map<String, String> filter) {
+List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, FirebaseUser currentUser, Function(String) onChangeLanguage,
+    Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
   var _actions = <Widget>[];
   _actions.add(IconButton(
     icon: getIcon(productObservations),
@@ -267,27 +268,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
             MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
           );
         } else {
-          showDialog(
-              context: mainContext,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(S.of(context).observations),
-                  content: Text(S.of(context).observation_no_login),
-                  actions: [
-                    FlatButton(
-                      child: Text(S.of(context).close.toUpperCase(),
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        key.currentState.openDrawer();
-                      },
-                    )
-                  ],
-                );
-              });
+          observationDialog(mainContext, key);
         }
       } else {
         Navigator.push(
