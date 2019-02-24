@@ -1,5 +1,18 @@
+const String observationId = "id";
+const String observationPlantName = "plant";
+const String observationLatitude = "latitude";
+const String observationLongitude = "longitude";
+const String observationPhotoUrls = "photoPaths";
+const String observationNote = "note";
+const String observationDate = "date";
+const String observationTime = "time";
+const String observationOrder = "order";
+const String observationStatus = "status";
+const String observationStatusPrivate = "private";
+const String observationStatusPublic = "public";
+
 class Observation{
-  final String key;
+  String key;
   String id;
   String plantName;
   DateTime dateTime;
@@ -10,15 +23,25 @@ class Observation{
   String status;
   int order;
 
-  Observation.fromJson(this.key, Map data) {
-    id = data['id'];
-    plantName = data['plant'];
-    dateTime = DateTime.fromMillisecondsSinceEpoch(data['date']['time']);
-    longitude = data['longitude'];
-    latitude = data['latitude'];
-    note = data['note'];
-    photoUrls = data['photoPaths'];
-    status = data['status'];
-    order = data['order'];
+  Observation(String plantName) {
+    this.plantName = plantName;
+    this.dateTime = DateTime.now();
+    this.latitude = 0.0;
+    this.longitude = 0.0;
+    this.photoUrls = [];
+    this.status = observationStatusPrivate;
+  }
+
+  Observation.fromJson(key, Map data) {
+    this.key = key;
+    this.id = data[observationId];
+    this.plantName = data[observationPlantName];
+    this.dateTime = DateTime.fromMillisecondsSinceEpoch(data[observationDate][observationTime]);
+    this.longitude = data[observationLongitude];
+    this.latitude = data[observationLatitude];
+    this.note = data[observationNote];
+    this.photoUrls = data[observationPhotoUrls];
+    this.status = data[observationStatus];
+    this.order = data[observationOrder];
   }
 }
