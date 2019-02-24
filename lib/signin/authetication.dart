@@ -1,10 +1,16 @@
 import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:abherbs_flutter/utils.dart';
+
 import 'package:abherbs_flutter/purchases.dart';
+import 'package:abherbs_flutter/utils.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Auth {
   static FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+  static Future<void> _logOldVersionEvent() async {
+    await FirebaseAnalytics().logEvent(name: 'offline_download');
+  }
 
   static Future<String> signInWithCredential(AuthCredential credential) async {
     FirebaseUser user = await firebaseAuth.signInWithCredential(credential);
@@ -52,6 +58,9 @@ class Auth {
         if (Purchases.hasOldVersion == null) {
           usersReference.child(user.uid).child(firebaseAttributeOldVersion).once().then((snapshot) {
             Purchases.hasOldVersion = snapshot.value != null && snapshot.value;
+            if (Purchases.hasOldVersion) {
+              _logOldVersionEvent();
+            }
           });
         }
       } else {
