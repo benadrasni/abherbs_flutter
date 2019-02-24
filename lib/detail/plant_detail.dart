@@ -10,6 +10,7 @@ import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/entity/translations.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/observations/observation_plant.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/offline.dart';
 import 'package:abherbs_flutter/purchases.dart';
@@ -43,6 +44,7 @@ class _PlantDetailState extends State<PlantDetail> {
   int _currentIndex;
   bool _isOriginal;
   GlobalKey<ScaffoldState> _key;
+  bool _isPublic;
 
   onChangeTranslation(bool isOriginal) {
     setState(() {
@@ -134,8 +136,16 @@ class _PlantDetailState extends State<PlantDetail> {
         return getInfo(context, widget.myLocale, _isOriginal, widget.plant, _plantTranslationF, this.onChangeTranslation, _key);
       case 2:
         return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF);
+      case 3:
+        return ObservationsPlant(_currentUser, Localizations.localeOf(context), widget.onChangeLanguage, widget.onBuyProduct, _isPublic, widget.plant.name);
     }
     return null;
+  }
+
+  void _setIsPublic(bool isPublic) {
+    setState(() {
+      _isPublic = isPublic;
+    });
   }
 
   _onAuthStateChanged(FirebaseUser user) {
@@ -161,6 +171,7 @@ class _PlantDetailState extends State<PlantDetail> {
     _currentIndex = 0;
     _isOriginal = false;
     _key = new GlobalKey<ScaffoldState>();
+    _isPublic = false;
 
     _logSelectContentEvent(widget.plant.name);
   }
@@ -183,16 +194,47 @@ class _PlantDetailState extends State<PlantDetail> {
 
     return Scaffold(
       key: _key,
-      appBar: AppBar(
-          title: GestureDetector(
-        child: Text(widget.plant.name),
-        onLongPress: () {
-          Clipboard.setData(new ClipboardData(text: widget.plant.name));
-          _key.currentState.showSnackBar(SnackBar(
-            content: Text(S.of(context).snack_copy),
-          ));
-        },
-      )),
+      appBar: _currentIndex == 3
+          ? AppBar(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(flex: 2, child: GestureDetector(
+                    child: Text(widget.plant.name),
+                    onLongPress: () {
+                      Clipboard.setData(new ClipboardData(text: widget.plant.name));
+                      _key.currentState.showSnackBar(SnackBar(
+                        content: Text(S.of(context).snack_copy),
+                      ));
+                    },
+                  ),),
+                  Expanded(flex: 1, child: Row(
+                    children: [
+                      Icon(Icons.person),
+                      Switch(
+                        value: _isPublic,
+                        activeColor: Colors.white,
+                        inactiveThumbColor: Colors.white,
+                        onChanged: (bool value) {
+                          _setIsPublic(value);
+                        },
+                      ),
+                      Icon(Icons.people),
+                    ],
+                  ),),
+                ],
+              ),
+            )
+          : AppBar(
+              title: GestureDetector(
+              child: Text(widget.plant.name),
+              onLongPress: () {
+                Clipboard.setData(new ClipboardData(text: widget.plant.name));
+                _key.currentState.showSnackBar(SnackBar(
+                  content: Text(S.of(context).snack_copy),
+                ));
+              },
+            )),
       drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
