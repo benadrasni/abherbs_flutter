@@ -254,20 +254,44 @@ Icon getIcon(String productId) {
   }
 }
 
-List<Widget> getActions(BuildContext context, FirebaseUser currentUser, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct,
+List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, FirebaseUser currentUser, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct,
     Map<String, String> filter) {
   var _actions = <Widget>[];
   _actions.add(IconButton(
     icon: getIcon(productObservations),
     onPressed: () {
       if (Purchases.isObservations()) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
-        );
+        if (currentUser != null) {
+          Navigator.push(
+            mainContext,
+            MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+          );
+        } else {
+          showDialog(
+              context: mainContext,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(S.of(context).observations),
+                  content: Text(S.of(context).observation_no_login),
+                  actions: [
+                    FlatButton(
+                      child: Text(S.of(context).close.toUpperCase(),
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        key.currentState.openDrawer();
+                      },
+                    )
+                  ],
+                );
+              });
+        }
       } else {
         Navigator.push(
-          context,
+          mainContext,
           MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
         );
       }
@@ -278,12 +302,12 @@ List<Widget> getActions(BuildContext context, FirebaseUser currentUser, Function
     onPressed: () {
       if (Purchases.isSearch()) {
         Navigator.push(
-          context,
+          mainContext,
           MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
         );
       } else {
         Navigator.push(
-          context,
+          mainContext,
           MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
         );
       }
