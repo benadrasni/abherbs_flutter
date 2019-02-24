@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/ads.dart';
+import 'package:abherbs_flutter/dialogs.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
@@ -61,57 +62,6 @@ class _ColorState extends State<Color> {
     _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
       return snapshot.value;
     });
-  }
-
-  Future<void> _rateDialog() async {
-    return showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(S.of(context).rate_question),
-          content: Text(S.of(context).rate_text),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(S.of(context).rate_never),
-              onPressed: () {
-                Prefs.setString(keyRateState, rateStateNever).then((value) {
-                  Navigator.of(context).pop();
-                }).catchError((error) {
-                  Navigator.of(context).pop();
-                });
-              },
-            ),
-            FlatButton(
-              child: Text(S.of(context).rate_later),
-              onPressed: () {
-                Prefs.setInt(keyRateCount, rateCountInitial);
-                Prefs.setString(keyRateState, rateStateInitial).then((value) {
-                  Navigator.of(context).pop();
-                }).catchError((error) {
-                  Navigator.of(context).pop();
-                });
-              },
-            ),
-            FlatButton(
-              child: Text(S.of(context).rate),
-              onPressed: () {
-                Prefs.setString(keyRateState, rateStateDid).then((value) {
-                  Navigator.of(context).pop();
-                }).catchError((error) {
-                  Navigator.of(context).pop();
-                });
-                if (Platform.isAndroid) {
-                  launchURL(playStore);
-                } else {
-                  launchURL(appStore);
-                }
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   _onAuthStateChanged(FirebaseUser user) {
@@ -269,7 +219,7 @@ class _ColorState extends State<Color> {
                       RaisedButton(
                         child: Text(S.of(context).yes),
                         onPressed: () {
-                          _rateDialog().then((_) {
+                          rateDialog(context).then((_) {
                             setState(() {
                               _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
                             });

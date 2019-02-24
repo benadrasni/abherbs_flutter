@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:abherbs_flutter/detail/plant_detail_gallery.dart';
 import 'package:abherbs_flutter/detail/plant_detail_info.dart';
 import 'package:abherbs_flutter/detail/plant_detail_taxonomy.dart';
+import 'package:abherbs_flutter/dialogs.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
@@ -11,6 +12,7 @@ import 'package:abherbs_flutter/entity/translations.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/offline.dart';
+import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -171,6 +173,14 @@ class _PlantDetailState extends State<PlantDetail> {
 
   @override
   Widget build(BuildContext context) {
+    var items = <BottomNavigationBarItem>[];
+    items.add(BottomNavigationBarItem(icon: Icon(Icons.photo_library), title: Text(S.of(context).plant_gallery)));
+    items.add(BottomNavigationBarItem(icon: Icon(Icons.info), title: Text(S.of(context).plant_info)));
+    items.add(BottomNavigationBarItem(icon: Icon(Icons.format_list_bulleted), title: Text(S.of(context).plant_taxonomy)));
+    if (Purchases.isObservations()) {
+      items.add(BottomNavigationBarItem(icon: Icon(Icons.remove_red_eye), title: Text(S.of(context).observations)));
+    }
+
     return Scaffold(
       key: _key,
       appBar: AppBar(
@@ -187,16 +197,17 @@ class _PlantDetailState extends State<PlantDetail> {
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.photo_library), title: Text(S.of(context).plant_gallery)),
-          BottomNavigationBarItem(icon: Icon(Icons.info), title: Text(S.of(context).plant_info)),
-          BottomNavigationBarItem(icon: Icon(Icons.format_list_bulleted), title: Text(S.of(context).plant_taxonomy)),
-        ],
+        items: items,
+        type: BottomNavigationBarType.fixed,
         fixedColor: Colors.blue,
         onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
+          if (index == 3 && _currentUser == null) {
+            observationDialog(context, _key);
+          } else {
+            setState(() {
+              _currentIndex = index;
+            });
+          }
         },
       ),
     );
