@@ -236,6 +236,26 @@ String getTaxonLabel(BuildContext context, String taxon) {
   }
 }
 
+Widget getProductIcon(BuildContext context, String productId) {
+  switch (productId) {
+    case productNoAdsAndroid:
+    case productNoAdsIOS:
+      return Icon(Icons.remove_shopping_cart);
+    case productSearch:
+      return Icon(Icons.search);
+    case productCustomFilter:
+      return Icon(Icons.search);
+    case productOffline:
+      return Icon(Icons.signal_wifi_off);
+    case productObservations:
+      return Icon(Icons.remove_red_eye);
+    case productPhotoSearch:
+      return Icon(Icons.photo_camera);
+    default:
+      return null;
+  }
+}
+
 String getProductTitle(BuildContext context, String productId, String defaultTitle) {
   switch (productId) {
     case productNoAdsAndroid:
