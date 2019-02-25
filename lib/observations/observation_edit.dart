@@ -76,6 +76,10 @@ class _ObservationEditState extends State<ObservationEdit> {
     setState(() {});
   }
 
+  void _saveObservation() {
+
+  }
+
   @override
   void initState() {
     super.initState();
@@ -228,7 +232,8 @@ class _ObservationEditState extends State<ObservationEdit> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-
+            _saveObservation();
+            Navigator.pop(context);
           },
           child: Icon(Icons.save),
         ),
