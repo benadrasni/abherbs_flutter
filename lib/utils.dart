@@ -17,6 +17,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:exif/exif.dart';
 
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
@@ -63,7 +64,9 @@ const String googleMapsEndpoint = "https://maps.googleapis.com/maps/api/staticma
 const String storageEndpoint = "https://storage.googleapis.com/abherbs-resources/";
 const String storageFamilies = "families/";
 const String storagePhotos = "photos/";
+const String storageObservations = "observations/";
 const String defaultExtension = ".webp";
+const String defaultPhotoExtension = ".jpg";
 const String thumbnailsDir = "/.thumbnails";
 
 const int firebaseCacheSize = 1024 * 1024 * 20;
@@ -94,6 +97,9 @@ const String firebaseAttributeLastUpdate = "db_update";
 const String firebaseAttributeLabel = "label";
 const String firebaseAttributeOrder = "order";
 const String firebaseAttributeOldVersion = "old version";
+
+const String mapModeView = "view";
+const String mapModeEdit = "edit";
 
 final DatabaseReference rootReference = FirebaseDatabase.instance.reference();
 final DatabaseReference countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
@@ -143,13 +149,41 @@ String getMapImageUrl(double latitude, double longitude, double width, double he
   return url;
 }
 
+double getLatitudeFromExif(IfdTag latitudeRef, IfdTag latitude) {
+  if (latitudeRef == null || latitude == null) return null;
+  double latDegrees = latitude.values[0].numerator/latitude.values[0].denominator;
+  double latMinutes = latitude.values[1].numerator/latitude.values[1].denominator;
+  double latSeconds = latitude.values[2].numerator/latitude.values[2].denominator;
+
+  int northSouth = latitudeRef.toString() == 'N' ? 1 : -1;
+  return northSouth * (latDegrees + latMinutes/60 + latSeconds/60/60);
+}
+
+double getLongitudeFromExif(IfdTag longitudeRef, IfdTag longitude) {
+  if (longitudeRef == null || longitude == null) return null;
+  double longDegrees = longitude.values[0].numerator/longitude.values[0].denominator;
+  double longMinutes = longitude.values[1].numerator/longitude.values[1].denominator;
+  double longSeconds = longitude.values[2].numerator/longitude.values[2].denominator;
+
+  int eastWest = longitudeRef.toString() == 'E' ? 1 : -1;
+  return eastWest * (longDegrees + longMinutes/60 + longSeconds/60/60);
+}
+
+DateTime getDateTimeFromExif(IfdTag dateTime) {
+  if (dateTime == null) return null;
+  var dateParts = dateTime.toString().split(' ');
+  var datePart = dateParts[0].split(':');
+  var timePart = dateParts[1].split(':');
+  return DateTime(int.parse(datePart[0]), int.parse(datePart[1]), int.parse(datePart[2]), int.parse(timePart[0]), int.parse(timePart[1]), int.parse(timePart[2]));
+}
+
 Widget getImage(String url, Widget placeholder, {double width, double height, BoxFit fit}) {
   return FutureBuilder<File>(
       future: Offline.getLocalFile(url),
       builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data != null) {
-            return Image.file(snapshot.data, fit: BoxFit.contain, width: width, height: height);
+            return Image.file(snapshot.data, fit: fit ?? BoxFit.contain, width: width, height: height);
           }
 
           return CachedNetworkImage(

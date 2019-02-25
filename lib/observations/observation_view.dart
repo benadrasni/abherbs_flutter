@@ -115,7 +115,7 @@ class _ObservationViewState extends State<ObservationView> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ObservationMap(myLocale, widget.observation)),
+            MaterialPageRoute(builder: (context) => ObservationMap(myLocale, widget.observation, mapModeView)),
           );
         },
       ),

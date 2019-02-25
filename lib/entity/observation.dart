@@ -26,8 +26,6 @@ class Observation{
   Observation(String plantName) {
     this.plantName = plantName;
     this.dateTime = DateTime.now();
-    this.latitude = 0.0;
-    this.longitude = 0.0;
     this.photoUrls = [];
     this.status = observationStatusPrivate;
   }

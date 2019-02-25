@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
@@ -11,6 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:exif/exif.dart';
 
 class ObservationEdit extends StatefulWidget {
   final FirebaseUser currentUser;
@@ -28,6 +32,49 @@ class ObservationEdit extends StatefulWidget {
 class _ObservationEditState extends State<ObservationEdit> {
   DateFormat _dateFormat;
   DateFormat _timeFormat;
+
+  Future<void> _getImage(ImageSource source) async {
+    var image = await ImagePicker.pickImage(source: source);
+
+    // store file
+    var dir = storageObservations + widget.currentUser.uid + '/' + widget.observation.plantName.replaceAll(' ', '_');
+    var prefix = "unknown_";
+    var names = widget.observation.plantName.toLowerCase().split(' ');
+    if (names.length > 1) {
+      prefix = names[0].substring(0, 1) + names[1].substring(0, 1) + '_';
+    }
+    var suffix = image.path.indexOf('.', image.path.lastIndexOf('/')) > -1 ? image.path.substring(image.path.lastIndexOf('.')) : defaultPhotoExtension;
+    var filename = prefix + DateTime.now().millisecondsSinceEpoch.toString() + suffix;
+
+    String rootPath = (await getApplicationDocumentsDirectory()).path;
+    await Directory('$rootPath/$dir').create(recursive: true);
+    image.copy('$rootPath/$dir/$filename');
+    await File('$rootPath/$dir/$filename');
+    widget.observation.photoUrls.add('$dir/$filename');
+
+    // store exif data
+    Map<String, IfdTag> data = await readExifFromBytes(await image.readAsBytes());
+
+    if (data != null && data.isNotEmpty) {
+      widget.observation.latitude = getLatitudeFromExif(data['GPS GPSLatitudeRef'], data['GPS GPSLatitude']);
+      widget.observation.longitude = getLongitudeFromExif(data['GPS GPSLongitudeRef'], data['GPS GPSLongitude']);
+      widget.observation.dateTime= getDateTimeFromExif(data['Image DateTime']) ?? DateTime.now();
+//      for (String key in data.keys) {
+//        print("$key (${data[key].tagType}): ${data[key]}");
+//      }
+    }
+    setState(() {});
+  }
+
+  Future<void> _deleteImage(int position) async {
+    String rootPath = (await getApplicationDocumentsDirectory()).path;
+    var filename = widget.observation.photoUrls[position];
+    File file = await File('$rootPath/$filename');
+    file.delete();
+    widget.observation.photoUrls.removeAt(position);
+
+    setState(() {});
+  }
 
   @override
   void initState() {
@@ -112,8 +159,12 @@ class _ObservationEditState extends State<ObservationEdit> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ObservationMap(myLocale, widget.observation)),
-          );
+            MaterialPageRoute(builder: (context) => ObservationMap(myLocale, widget.observation, mapModeEdit)),
+          ).then((value) {
+            widget.observation.latitude = value.latitude;
+            widget.observation.longitude = value.longitude;
+            setState(() {});
+          });
         },
       ),
     );
@@ -129,9 +180,20 @@ class _ObservationEditState extends State<ObservationEdit> {
             getImage(widget.observation.photoUrls[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
             Container(
               padding: EdgeInsets.all(5.0),
-              child: Text(
-                (position + 1).toString() + ' / ' + widget.observation.photoUrls.length.toString(),
-                style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    (position + 1).toString() + ' / ' + widget.observation.photoUrls.length.toString(),
+                    style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.delete, color: Colors.white,),
+                    onPressed: () {
+                      _deleteImage(position);
+                    },
+                  ),
+                ],
               ),
             ),
           ]);
@@ -140,9 +202,36 @@ class _ObservationEditState extends State<ObservationEdit> {
     ));
 
     return Scaffold(
-        appBar: AppBar(title: Text(S.of(context).observation),),
+        appBar: AppBar(
+          title: Text(S.of(context).observation),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add_a_photo),
+              onPressed: () {
+                _getImage(ImageSource.camera);
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.add_photo_alternate),
+              onPressed: () {
+                _getImage(ImageSource.gallery);
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {},
+            ),
+          ],
+        ),
         body: Card(
           child: Column(mainAxisSize: MainAxisSize.min, children: widgets),
-        ));
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+
+          },
+          child: Icon(Icons.save),
+        ),
+    );
   }
 }
