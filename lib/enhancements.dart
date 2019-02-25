@@ -43,8 +43,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
   Future<List<IAPItem>> _productsF;
 
   Future<void> _logFailedPurchaseEvent(String productId) async {
-    await _firebaseAnalytics.logEvent(
-        name: 'purchase_canceled', parameters: {'productId': productId});
+    await _firebaseAnalytics.logEvent(name: 'purchase_canceled', parameters: {'productId': productId});
   }
 
   @override
@@ -60,13 +59,10 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     var buttons = <Widget>[];
     buttons.add(
       RaisedButton(
-        color: isPurchased
-            ? Theme.of(context).buttonColor
-            : Theme.of(context).accentColor,
+        color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
         onPressed: () {
           if (!isPurchased) {
-            FlutterInappPurchase.buyProduct(product.productId)
-                .then((PurchasedItem purchased) {
+            FlutterInappPurchase.buyProduct(product.productId).then((PurchasedItem purchased) {
               widget.onBuyProduct(purchased);
             }).catchError((error) {
               _logFailedPurchaseEvent(product.productId);
@@ -79,9 +75,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           }
         },
         child: Text(
-          isPurchased
-              ? S.of(context).product_purchased
-              : S.of(context).product_purchase,
+          isPurchased ? S.of(context).product_purchased : S.of(context).product_purchase,
           style: TextStyle(color: isPurchased ? Colors.black : Colors.white),
         ),
       ),
@@ -94,9 +88,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      SettingsScreen(widget.onChangeLanguage, widget.filter)),
+              MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter)),
             );
           },
           child: Text(
@@ -111,9 +103,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      SettingMyFilter(widget.filter)),
+              MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter)),
             );
           },
           child: Text(
@@ -149,9 +139,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                     child: Container(
                       padding: EdgeInsets.all(10.0),
                       child: Text(
-                        snapshot.error is PlatformException
-                            ? (snapshot.error as PlatformException).message
-                            : snapshot.error.toString(),
+                        snapshot.error is PlatformException ? (snapshot.error as PlatformException).message : snapshot.error.toString(),
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 16.0),
                       ),
@@ -164,14 +152,9 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                     padding: EdgeInsets.all(10.0),
                     child: RaisedButton(
                       onPressed: () {
-                        FlutterInappPurchase.getAvailablePurchases()
-                            .then((purchases) {
+                        FlutterInappPurchase.getAvailablePurchases().then((purchases) {
                           Purchases.purchases = purchases;
-                          Prefs.setStringList(
-                              keyPurchases,
-                              Purchases.purchases
-                                  .map((item) => item.productId)
-                                  .toList());
+                          Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
                           setState(() {});
                         });
                       },
@@ -186,47 +169,36 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                   return Card(
                     child: Container(
                       padding: EdgeInsets.all(10.0),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  getProductTitle(context, product.productId,
-                                      product.title),
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.start,
-                                ),
-                                Text(
-                                  product.localizedPrice,
-                                  style: TextStyle(
-                                    color: Colors.blue,
-                                    fontSize: 18.0,
-                                  ),
-                                  textAlign: TextAlign.end,
-                                ),
-                              ],
+                      child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                        ListTile(
+                          leading: getProductIcon(context, product.productId),
+                          title: Text(
+                            getProductTitle(context, product.productId, product.title),
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
                             ),
-                            SizedBox(height: 10.0),
-                            Text(
-                              getProductDescription(context, product.productId,
-                                  product.description),
-                              style: TextStyle(
-                                fontSize: 16.0,
-                              ),
-                              textAlign: TextAlign.start,
+                            textAlign: TextAlign.start,
+                          ),
+                          trailing: Text(
+                            product.localizedPrice,
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 18.0,
                             ),
-                            SizedBox(height: 10.0),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children:
-                                    _getButtons(product, isPurchased, key)),
-                          ]),
+                          ),
+                        ),
+                        SizedBox(height: 10.0),
+                        Text(
+                          getProductDescription(context, product.productId, product.description),
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10.0),
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: _getButtons(product, isPurchased, key)),
+                      ]),
                     ),
                   );
                 }).toList());
