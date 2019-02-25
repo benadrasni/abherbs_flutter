@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:abherbs_flutter/dialogs.dart';
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/observations/observation_map.dart';
@@ -192,9 +193,13 @@ class _ObservationEditState extends State<ObservationEdit> {
                     style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
                   IconButton(
-                    icon: Icon(Icons.delete, color: Colors.white,),
+                    icon: Icon(Icons.delete, color: Theme.of(context).accentColor,),
                     onPressed: () {
-                      _deleteImage(position);
+                      deletePhotoDialog(context).then((value) {
+                        if (value) {
+                          _deleteImage(position);
+                        }
+                      });
                     },
                   ),
                 ],
