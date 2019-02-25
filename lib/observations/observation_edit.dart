@@ -195,7 +195,7 @@ class _ObservationEditState extends State<ObservationEdit> {
                   IconButton(
                     icon: Icon(Icons.delete, color: Theme.of(context).accentColor,),
                     onPressed: () {
-                      deletePhotoDialog(context).then((value) {
+                      deleteDialog(context, S.of(context).observation_photo_delete, S.of(context).observation_photo_delete_question).then((value) {
                         if (value) {
                           _deleteImage(position);
                         }

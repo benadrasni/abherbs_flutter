@@ -81,13 +81,13 @@ Future<void> observationDialog(BuildContext mainContext, GlobalKey<ScaffoldState
       });
 }
 
-Future<bool> deletePhotoDialog(BuildContext mainContext) async {
+Future<bool> deleteDialog(BuildContext mainContext, String title, String content) async {
   return showDialog(
       context: mainContext,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(S.of(context).observation_photo_delete),
-          content: Text(S.of(context).observation_photo_delete_question),
+          title: Text(title),
+          content: Text(content),
           actions: [
             FlatButton(
               child: Text(S.of(context).yes.toUpperCase(),
