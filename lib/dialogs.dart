@@ -80,3 +80,36 @@ Future<void> observationDialog(BuildContext mainContext, GlobalKey<ScaffoldState
         );
       });
 }
+
+Future<bool> deletePhotoDialog(BuildContext mainContext) async {
+  return showDialog(
+      context: mainContext,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(S.of(context).observation_photo_delete),
+          content: Text(S.of(context).observation_photo_delete_question),
+          actions: [
+            FlatButton(
+              child: Text(S.of(context).yes.toUpperCase(),
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                )),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            ),
+            FlatButton(
+              child: Text(S.of(context).no.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  )),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            )
+          ],
+        );
+      });
+}
