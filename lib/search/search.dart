@@ -28,7 +28,7 @@ class _SearchState extends State<Search> {
   Future<Map<dynamic, dynamic>> _apgIVF;
   Future<Map<dynamic, dynamic>> _translationsTaxonomyF;
 
-  final TextEditingController _filter = new TextEditingController();
+  final TextEditingController _filter = TextEditingController();
   String _searchText = '';
 
   _SearchState() {

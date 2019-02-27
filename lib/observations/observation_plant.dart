@@ -82,7 +82,9 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, observation)),
-              );
+              ).then((_) {
+                setState(() {});
+              });
             },
             child: Icon(Icons.add),
           ),),

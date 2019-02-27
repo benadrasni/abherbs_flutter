@@ -67,18 +67,18 @@ class _ObservationMapState extends State<ObservationMap> {
   @override
   Widget build(BuildContext context) {
 
-    Future<String> nameF = translationCache.containsKey(widget.observation.plantName)
+    Future<String> nameF = translationCache.containsKey(widget.observation.plant)
         ? Future<String>(() {
-            return translationCache[widget.observation.plantName];
+            return translationCache[widget.observation.plant];
           })
         : translationsReference
             .child(getLanguageCode(widget.myLocale.languageCode))
-            .child(widget.observation.plantName)
+            .child(widget.observation.plant)
             .child(firebaseAttributeLabel)
             .once()
             .then((DataSnapshot snapshot) {
             if (snapshot.value != null) {
-              translationCache[widget.observation.plantName] = snapshot.value;
+              translationCache[widget.observation.plant] = snapshot.value;
               return snapshot.value;
             } else {
               return null;
@@ -133,7 +133,7 @@ class _ObservationMapState extends State<ObservationMap> {
           FutureBuilder<String>(
               future: nameF,
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                String labelLocal = widget.observation.plantName;
+                String labelLocal = widget.observation.plant;
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.data != null) {
                     labelLocal = snapshot.data;
@@ -144,11 +144,11 @@ class _ObservationMapState extends State<ObservationMap> {
                     labelLocal,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
-                  subtitle: labelLocal != widget.observation.plantName ? Text(widget.observation.plantName) : null,
+                  subtitle: labelLocal != widget.observation.plant ? Text(widget.observation.plant) : null,
                   trailing: Column(
                     children: [
-                      Text(_dateFormat.format(widget.observation.dateTime)),
-                      Text(_timeFormat.format(widget.observation.dateTime)),
+                      Text(_dateFormat.format(widget.observation.date)),
+                      Text(_timeFormat.format(widget.observation.date)),
                     ],
                   ),
                 );

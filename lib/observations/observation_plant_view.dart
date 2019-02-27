@@ -58,7 +58,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
                 color: Colors.white,
               ))
           : null,
-      title: Text(_dateFormat.format(widget.observation.dateTime) + ' ' + _timeFormat.format(widget.observation.dateTime)),
+      title: Text(_dateFormat.format(widget.observation.date) + ' ' + _timeFormat.format(widget.observation.date)),
       onTap: () {
         if (widget.observation.id.startsWith(widget.currentUser.uid)) {
           Navigator.push(
@@ -97,14 +97,14 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
       width: mapWidth,
       height: mapWidth,
       child: PageView.builder(
-        itemCount: widget.observation.photoUrls.length,
+        itemCount: widget.observation.photoPaths.length,
         itemBuilder: (context, position) {
           return Stack(children: [
-            getImage(widget.observation.photoUrls[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
+            getImage(widget.observation.photoPaths[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
             Container(
               padding: EdgeInsets.all(5.0),
               child: Text(
-                (position + 1).toString() + ' / ' + widget.observation.photoUrls.length.toString(),
+                (position + 1).toString() + ' / ' + widget.observation.photoPaths.length.toString(),
                 style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
             ),
@@ -112,6 +112,16 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
         },
       ),
     ));
+
+    if (widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.uid)) {
+      widgets.add(Card(color: Theme.of(context).buttonColor, child:Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+        height: 50.0,
+        alignment: Alignment.topLeft,
+        child: Text(widget.observation.note, style: TextStyle(fontSize: 16.0),
+        textAlign: TextAlign.start,),
+      )));
+    }
 
     return Card(
       child: Column(mainAxisSize: MainAxisSize.min, children: widgets),);
