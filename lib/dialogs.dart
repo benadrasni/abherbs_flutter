@@ -91,10 +91,10 @@ Future<bool> deleteDialog(BuildContext mainContext, String title, String content
           actions: [
             FlatButton(
               child: Text(S.of(context).yes.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                )),
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  )),
               onPressed: () {
                 Navigator.of(context).pop(true);
               },
@@ -109,6 +109,29 @@ Future<bool> deleteDialog(BuildContext mainContext, String title, String content
                 Navigator.of(context).pop(false);
               },
             )
+          ],
+        );
+      });
+}
+
+Future<bool> infoDialog(BuildContext mainContext, String title, String content) async {
+  return showDialog(
+      context: mainContext,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(content),
+          actions: [
+            FlatButton(
+              child: Text(S.of(context).close.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  )),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
           ],
         );
       });

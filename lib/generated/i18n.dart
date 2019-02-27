@@ -129,13 +129,12 @@ class S implements WidgetsLocalizations {
   String get northwestern_pacific => "Northwestern Pacific";
   String get northwestern_usa => "Northwestern U.S.A.";
   String get observation => "Observation";
-  String get observation_camera_failed => "No picture was taken.";
   String get observation_delete => "Delete observation";
   String get observation_delete_question => "Do you want to delete the observation?";
   String get observation_empty => "There is no observation yet.";
-  String get observation_gallery_failed => "No picture was added.";
   String get observation_no_login => "Observations are available only for logged users. Please log in.";
   String get observation_not_saved => "Observation was incomplete thus it wasn't saved. Location or photo is misssing.";
+  String get observation_note => "Place for your private notes.";
   String get observation_photo_delete => "Remove photo";
   String get observation_photo_delete_question => "Do you want to remove photo from the observation?";
   String get observation_photo_duplicate => "Duplicate photo. Skipped.";

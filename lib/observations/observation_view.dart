@@ -51,18 +51,18 @@ class _ObservationViewState extends State<ObservationView> {
     ]);
 
     Locale myLocale = Localizations.localeOf(context);
-    Future<String> nameF = translationCache.containsKey(widget.observation.plantName)
+    Future<String> nameF = translationCache.containsKey(widget.observation.plant)
         ? Future<String>(() {
-            return translationCache[widget.observation.plantName];
+            return translationCache[widget.observation.plant];
           })
         : translationsReference
             .child(getLanguageCode(myLocale.languageCode))
-            .child(widget.observation.plantName)
+            .child(widget.observation.plant)
             .child(firebaseAttributeLabel)
             .once()
             .then((DataSnapshot snapshot) {
             if (snapshot.value != null) {
-              translationCache[widget.observation.plantName] = snapshot.value;
+              translationCache[widget.observation.plant] = snapshot.value;
               return snapshot.value;
             } else {
               return null;
@@ -74,7 +74,7 @@ class _ObservationViewState extends State<ObservationView> {
       FutureBuilder<String>(
           future: nameF,
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-            String labelLocal = widget.observation.plantName;
+            String labelLocal = widget.observation.plant;
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.data != null) {
                 labelLocal = snapshot.data;
@@ -85,15 +85,15 @@ class _ObservationViewState extends State<ObservationView> {
                 labelLocal,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
-              subtitle: labelLocal != widget.observation.plantName ? Text(widget.observation.plantName) : null,
+              subtitle: labelLocal != widget.observation.plant ? Text(widget.observation.plant) : null,
               trailing: Column(
                 children: [
-                  Text(_dateFormat.format(widget.observation.dateTime)),
-                  Text(_timeFormat.format(widget.observation.dateTime)),
+                  Text(_dateFormat.format(widget.observation.date)),
+                  Text(_timeFormat.format(widget.observation.date)),
                 ],
               ),
               onTap: () {
-                goToDetail(context, myLocale, widget.observation.plantName, widget.onChangeLanguage, widget.onBuyProduct, {});
+                goToDetail(context, myLocale, widget.observation.plant, widget.onChangeLanguage, widget.onBuyProduct, {});
               },
             );
           }),
@@ -126,14 +126,14 @@ class _ObservationViewState extends State<ObservationView> {
       width: mapWidth,
       height: mapWidth,
       child: PageView.builder(
-        itemCount: widget.observation.photoUrls.length,
+        itemCount: widget.observation.photoPaths.length,
         itemBuilder: (context, position) {
           return Stack(children: [
-            getImage(widget.observation.photoUrls[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
+            getImage(widget.observation.photoPaths[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
             Container(
               padding: EdgeInsets.all(5.0),
               child: Text(
-                (position + 1).toString() + ' / ' + widget.observation.photoUrls.length.toString(),
+                (position + 1).toString() + ' / ' + widget.observation.photoPaths.length.toString(),
                 style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
             ),
@@ -141,6 +141,16 @@ class _ObservationViewState extends State<ObservationView> {
         },
       ),
     ));
+
+    if (widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.uid)) {
+      widgets.add(Card(color: Theme.of(context).buttonColor, child:Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+        height: 50.0,
+        alignment: Alignment.topLeft,
+        child: Text(widget.observation.note, style: TextStyle(fontSize: 16.0),
+          textAlign: TextAlign.start,),
+      )));
+    }
 
     return Card(
       child: widget.observation.id.startsWith(widget.currentUser.uid)
