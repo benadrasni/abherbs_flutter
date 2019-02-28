@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:abherbs_flutter/prefs.dart';
 import 'package:abherbs_flutter/purchases.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -60,6 +61,11 @@ class Auth {
             Purchases.hasOldVersion = snapshot.value != null && snapshot.value;
             if (Purchases.hasOldVersion) {
               _logOldVersionEvent();
+            }
+          });
+          Prefs.getStringF(keyToken).then((token) {
+            if (token.isNotEmpty) {
+              usersReference.child(user.uid).child(firebaseAttributeToken).set(token);
             }
           });
         }

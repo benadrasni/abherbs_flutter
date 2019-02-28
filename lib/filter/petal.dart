@@ -18,7 +18,8 @@ class Petal extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
-  Petal(this.onChangeLanguage, this.onBuyProduct, this.filter);
+  final Future<MaterialPageRoute<dynamic>> redirect;
+  Petal(this.onChangeLanguage, this.onBuyProduct, this.filter, this.redirect);
 
   @override
   _PetalState createState() => _PetalState();
@@ -30,6 +31,15 @@ class _PetalState extends State<Petal> {
   Future<int> _count;
   Map<String, String> _filter;
   GlobalKey<ScaffoldState> _key;
+  bool _wasRedirected;
+
+  _redirect(BuildContext context) async {
+    var _duration = Duration(milliseconds: timer);
+    var redirectRoute = await widget.redirect;
+    return Timer(_duration, () {
+      Navigator.push(context, redirectRoute);
+    });
+  }
 
   _navigate(String value) {
     var newFilter = new Map<String, String>();
@@ -75,6 +85,7 @@ class _PetalState extends State<Petal> {
     Offline.setKeepSynced(1, true);
     _checkCurrentUser();
 
+    _wasRedirected = false;
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterPetal);
@@ -82,7 +93,9 @@ class _PetalState extends State<Petal> {
 
     _setCount();
 
-    Ads.showBannerAd(this);
+    if (widget.redirect == null) {
+      Ads.showBannerAd(this);
+    }
   }
 
   @override
@@ -98,6 +111,12 @@ class _PetalState extends State<Petal> {
       fontWeight: FontWeight.bold,
       fontSize: 22.0,
     );
+
+    // redirect to route from notification
+    if (widget.redirect != null && !_wasRedirected) {
+      _redirect(context);
+      _wasRedirected = true;
+    }
 
     return Scaffold(
       key: _key,

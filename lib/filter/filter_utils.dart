@@ -317,26 +317,26 @@ MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Functio
 }
 
 MaterialPageRoute<dynamic> getFirstFilterRoute(BuildContext context, void Function(String) onChangeLanguage,
-    void Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
-  return getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter));
+    void Function(PurchasedItem) onBuyProduct, Map<String, String> filter, Future<MaterialPageRoute<dynamic>> redirect) {
+  return getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter), redirect);
 }
 
 MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, void Function(String) onChangeLanguage,
-    void Function(PurchasedItem) onBuyProduct, Map<String, String> filter, String filterAttribute) {
+    void Function(PurchasedItem) onBuyProduct, Map<String, String> filter, String filterAttribute, [Future<MaterialPageRoute<dynamic>> redirect]) {
   var route;
 
   switch (filterAttribute) {
     case filterColor:
-      route = MaterialPageRoute(builder: (context) => Color(onChangeLanguage, onBuyProduct, filter));
+      route = MaterialPageRoute(builder: (context) => Color(onChangeLanguage, onBuyProduct, filter, redirect));
       break;
     case filterHabitat:
-      route = MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, onBuyProduct, filter));
+      route = MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, onBuyProduct, filter, redirect));
       break;
     case filterPetal:
-      route = MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, onBuyProduct, filter));
+      route = MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, onBuyProduct, filter, redirect));
       break;
     case filterDistribution:
-      route = MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, onBuyProduct, filter));
+      route = MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, onBuyProduct, filter, redirect));
       break;
     default:
       route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, filter));
