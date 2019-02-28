@@ -21,7 +21,8 @@ class Distribution extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
-  Distribution(this.onChangeLanguage, this.onBuyProduct, this.filter);
+  final Future<MaterialPageRoute<dynamic>> redirect;
+  Distribution(this.onChangeLanguage, this.onBuyProduct, this.filter, this.redirect);
 
   @override
   _DistributionState createState() => _DistributionState();
@@ -35,6 +36,15 @@ class _DistributionState extends State<Distribution> {
   Future<String> _myRegionF;
   String _myRegion;
   GlobalKey<ScaffoldState> _key;
+  bool _wasRedirected;
+
+  _redirect(BuildContext context) async {
+    var _duration = Duration(milliseconds: timer);
+    var redirectRoute = await widget.redirect;
+    return Timer(_duration, () {
+      Navigator.push(context, redirectRoute);
+    });
+  }
 
   void _openRegion(String region) {
     var route = MaterialPageRoute(
@@ -218,6 +228,7 @@ class _DistributionState extends State<Distribution> {
     Offline.setKeepSynced(1, true);
     _checkCurrentUser();
 
+    _wasRedirected = false;
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterDistribution);
@@ -225,7 +236,9 @@ class _DistributionState extends State<Distribution> {
 
     _setCount();
 
-    Ads.showBannerAd(this);
+    if (widget.redirect == null) {
+      Ads.showBannerAd(this);
+    }
     _setMyRegion();
   }
 
@@ -238,6 +251,13 @@ class _DistributionState extends State<Distribution> {
   @override
   Widget build(BuildContext context) {
     var mainContext = context;
+
+    // redirect to route from notification
+    if (widget.redirect != null && !_wasRedirected) {
+      _redirect(mainContext);
+      _wasRedirected = true;
+    }
+
     return Scaffold(
       key: _key,
       appBar: new AppBar(

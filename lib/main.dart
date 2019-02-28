@@ -74,24 +74,21 @@ class _AppState extends State<App> {
     if (Platform.isIOS) _iOSPermission();
 
     _firebaseMessaging.getToken().then((token) {
+      Prefs.setString(keyToken, token);
       print('token $token');
     });
 
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-//        TODO: whether to show upcoming notification or not when app is active
-//        setState(() {
-//          _notificationData = message;
-//        });
       },
       onResume: (Map<String, dynamic> message) async {
         setState(() {
-          _notificationData = message;
+          _notificationData = Map.from(message[notificationAttributeData]);
         });
       },
       onLaunch: (Map<String, dynamic> message) async {
         setState(() {
-          _notificationData = message;
+          _notificationData = Map.from(message[notificationAttributeData]);
         });
       },
     );
@@ -207,11 +204,10 @@ class _AppState extends State<App> {
   }
 
   @override
-  void dispose() async {
+  void dispose() {
     Prefs.dispose();
     Ads.hideBannerAd();
-    await FlutterInappPurchase.endConnection;
-    //_listener.cancel();
+    FlutterInappPurchase.endConnection;
     super.dispose();
   }
 

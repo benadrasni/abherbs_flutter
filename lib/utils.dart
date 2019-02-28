@@ -40,6 +40,7 @@ const String keyRateState = "rate_state";
 const String keyRateCount = "rate_count";
 const String keyMyFilter = "my_filter";
 const String keyPurchases = "purchases";
+const String keyToken = "token";
 const int rateCountInitial = 5;
 const String rateStateInitial = "";
 const String rateStateNever = "never";
@@ -69,6 +70,8 @@ const String defaultExtension = ".webp";
 const String defaultPhotoExtension = ".jpg";
 const String thumbnailsDir = "/.thumbnails";
 
+const int timer = 300;
+
 const int firebaseCacheSize = 1024 * 1024 * 20;
 const String firebaseCounts = 'counts_4_v2';
 const String firebaseLists = 'lists_4_v2';
@@ -97,9 +100,12 @@ const String firebaseAttributeLastUpdate = "db_update";
 const String firebaseAttributeLabel = "label";
 const String firebaseAttributeOrder = "order";
 const String firebaseAttributeOldVersion = "old version";
+const String firebaseAttributeToken = "token";
 
 const String mapModeView = "view";
 const String mapModeEdit = "edit";
+
+const String notificationAttributeData = "data";
 
 final DatabaseReference rootReference = FirebaseDatabase.instance.reference();
 final DatabaseReference countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
