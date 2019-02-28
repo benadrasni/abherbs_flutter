@@ -197,7 +197,7 @@ Widget getImage(String url, Widget placeholder, {double width, double height, Bo
             width: width,
             height: height,
             placeholder: (context, url) => placeholder,
-            errorWidget: (context, url, error) => Icon(Icons.error),
+            errorWidget: (context, url, error) => Icon(Icons.error, color: Theme.of(context).buttonColor, size: 80.0),
             imageUrl: storageEndpoint + url,
           );
         } else {

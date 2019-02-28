@@ -22,39 +22,28 @@ class _ObservationMapState extends State<ObservationMap> {
   GoogleMapController _mapController;
   DateFormat _dateFormat;
   DateFormat _timeFormat;
+  MarkerId _markerId;
+  Map<MarkerId, Marker> _markers = <MarkerId, Marker>{};
 
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
-    if (widget.observation.latitude != null && widget.observation.longitude != null) {
-      _mapController.addMarker(
-        MarkerOptions(
-//          draggable: true,
-          position: LatLng(
-            widget.observation.latitude,
-            widget.observation.longitude,
-          ),
-          icon: BitmapDescriptor.defaultMarker,
-        ),
-      );
-    }
   }
 
   void _onAddMarkerButtonPressed() {
-    _mapController.clearMarkers();
-    _mapController.addMarker(
-      MarkerOptions(
-//        draggable: true,
-        position: LatLng(
+    final Marker marker = _markers[_markerId];
+    setState(() {
+      _markers[_markerId] = marker.copyWith(
+        positionParam: LatLng(
           _mapController.cameraPosition.target.latitude,
           _mapController.cameraPosition.target.longitude,
         ),
-        icon: BitmapDescriptor.defaultMarker,
-      ),
-    );
+      );
+    });
   }
 
   void _onSaveButtonPressed(BuildContext context) {
-    Navigator.pop(context, LatLng(_mapController.markers.first.options.position.latitude, _mapController.markers.first.options.position.longitude));
+    Marker marker = _markers[_markerId];
+    Navigator.pop(context, LatLng(marker.position.latitude, marker.position.longitude));
   }
 
   @override
@@ -62,6 +51,16 @@ class _ObservationMapState extends State<ObservationMap> {
     super.initState();
     _dateFormat = new DateFormat.yMMMMd(widget.myLocale.toString());
     _timeFormat = new DateFormat.Hms(widget.myLocale.toString());
+    _markerId = MarkerId(widget.observation.plant);
+    _markers = <MarkerId, Marker>{};
+    _markers[_markerId] = Marker(
+      markerId: _markerId,
+      //draggable: true,
+      position: LatLng(
+        widget.observation.latitude ?? 0.0,
+        widget.observation.longitude ?? 0.0,
+      ),
+    );
   }
 
   @override
@@ -93,6 +92,7 @@ class _ObservationMapState extends State<ObservationMap> {
         target: LatLng(widget.observation.latitude ?? 0.0, widget.observation.longitude ?? 0.0),
         zoom: widget.observation.latitude == null || widget.observation.longitude == null ? 1 : 13,
       ),
+      markers: Set<Marker>.of(_markers.values),
     ));
 
     if (widget.mode == mapModeEdit) {
