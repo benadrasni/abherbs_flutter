@@ -77,7 +77,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
           fit: BoxFit.contain,
           width: mapWidth,
           height: mapHeight,
-          placeholder: Container(
+          placeholder: (context, url) => Container(
             width: mapWidth,
             height: mapHeight,
           ),
