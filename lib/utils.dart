@@ -196,7 +196,8 @@ Widget getImage(String url, Widget placeholder, {double width, double height, Bo
             fit: fit ?? BoxFit.contain,
             width: width,
             height: height,
-            placeholder: placeholder,
+            placeholder: (context, url) => placeholder,
+            errorWidget: (context, url, error) => Center(child: Icon(Icons.error)),
             imageUrl: storageEndpoint + url,
           );
         } else {

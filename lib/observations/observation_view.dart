@@ -106,7 +106,7 @@ class _ObservationViewState extends State<ObservationView> {
           fit: BoxFit.contain,
           width: mapWidth,
           height: mapHeight,
-          placeholder: Container(
+          placeholder: (context, url) => Container(
             width: mapWidth,
             height: mapHeight,
           ),

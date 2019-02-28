@@ -209,7 +209,7 @@ class _ObservationEditState extends State<ObservationEdit> {
           fit: BoxFit.contain,
           width: mapWidth,
           height: mapHeight,
-          placeholder: Container(
+          placeholder: (context, url) =>  Container(
             width: mapWidth,
             height: mapHeight,
           ),
