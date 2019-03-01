@@ -101,6 +101,7 @@ const String firebaseAttributeAndroid = "android";
 const String firebaseAttributeLastUpdate = "db_update";
 const String firebaseAttributeLabel = "label";
 const String firebaseAttributeOrder = "order";
+const String firebaseAttributeStatus = "status";
 const String firebaseAttributeOldVersion = "old version";
 const String firebaseAttributeToken = "token";
 

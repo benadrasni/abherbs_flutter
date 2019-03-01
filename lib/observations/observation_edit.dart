@@ -341,7 +341,12 @@ class _ObservationEditState extends State<ObservationEdit> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: Container(
+    height: 70.0,
+    width: 70.0,
+    child: FittedBox(
+    fit: BoxFit.fill,
+    child: FloatingActionButton(
         onPressed: () {
           _saveObservation(context).then((result) {
             if (result) {
@@ -350,7 +355,7 @@ class _ObservationEditState extends State<ObservationEdit> {
           });
         },
         child: Icon(Icons.save),
-      ),
+      ),),),
     );
   }
 }

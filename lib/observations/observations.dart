@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/observations/observation_view.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,6 +33,7 @@ class _ObservationsState extends State<Observations> {
   Query _privateQuery;
   Query _publicQuery;
   Query _query;
+  Future<int> _countUploadF;
 
   void _setIsPublic(bool isPublic) {
     setState(() {
@@ -52,6 +56,23 @@ class _ObservationsState extends State<Observations> {
         .orderByChild(firebaseAttributeOrder);
     _publicQuery = publicObservationsReference.child(firebaseObservationsByDate).child(firebaseAttributeList).orderByChild(firebaseAttributeOrder);
     _query = _privateQuery;
+
+    if (Purchases.isSubscribed()) {
+      _countUploadF = privateObservationsReference
+          .child(widget.currentUser.uid)
+          .child(firebaseObservationsByDate)
+          .child(firebaseAttributeList)
+          .orderByChild(firebaseAttributeStatus)
+          .equalTo('private')
+          .once()
+          .then((DataSnapshot snapshot) {
+        return snapshot.value?.length ?? 0;
+      });
+    } else {
+      _countUploadF = Future<int>(() {
+        return 0;
+      });
+    }
 
     Ads.hideBannerAd();
   }
@@ -96,6 +117,26 @@ class _ObservationsState extends State<Observations> {
           itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
             Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
             return ObservationView(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, observation);
+          }),
+      floatingActionButton: FutureBuilder<int>(
+          future: _countUploadF,
+          builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.done:
+                if (snapshot.data > 0) {
+                  return Container(
+                    height: 70.0,
+                    width: 70.0,
+                    child: FittedBox(
+                      fit: BoxFit.fill,
+                      child: FloatingActionButton(
+                    onPressed: () {},
+                    child: Icon(Icons.cloud_upload),
+                  ),),);
+                }
+                return Container(width: 0.0, height: 0.0,);
+              default: return Container(width: 0.0, height: 0.0,);
+            }
           }),
     );
   }

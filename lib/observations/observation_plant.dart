@@ -75,7 +75,12 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
         Positioned(
           bottom: 20.0,
           right: 20.0,
-          child: FloatingActionButton(
+          child: Container(
+          height: 70.0,
+          width: 70.0,
+    child: FittedBox(
+    fit: BoxFit.fill,
+    child: FloatingActionButton(
             onPressed: () {
               var observation = Observation(widget.plantName);
               Navigator.push(
@@ -87,7 +92,7 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
               });
             },
             child: Icon(Icons.add),
-          ),),
+          ),),),),
       ],
     );
   }
