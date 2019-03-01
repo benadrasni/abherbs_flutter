@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/purchases.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

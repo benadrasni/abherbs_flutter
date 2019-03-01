@@ -2,14 +2,14 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/detail/plant_detail.dart';
-import 'package:abherbs_flutter/dialogs.dart';
-import 'package:abherbs_flutter/enhancements.dart';
+import 'package:abherbs_flutter/utils/dialogs.dart';
+import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/observations/observations.dart';
-import 'package:abherbs_flutter/offline.dart';
-import 'package:abherbs_flutter/purchases.dart';
+import 'package:abherbs_flutter/settings/offline.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';

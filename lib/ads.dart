@@ -1,7 +1,7 @@
 import 'package:abherbs_flutter/keys.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
-import 'package:abherbs_flutter/purchases.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 
 class Ads {
   static bool isShown = false;

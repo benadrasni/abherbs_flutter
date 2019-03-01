@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/observations/observation_edit.dart';
 import 'package:abherbs_flutter/observations/observation_map.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';

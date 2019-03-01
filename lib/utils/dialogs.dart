@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/utils.dart';
-import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:flutter/material.dart';
 
 Future<void> rateDialog(BuildContext context) async {
