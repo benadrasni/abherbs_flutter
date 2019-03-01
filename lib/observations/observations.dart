@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/observations/observation_view.dart';
+import 'package:abherbs_flutter/observations/observation_upload.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
@@ -43,6 +44,16 @@ class _ObservationsState extends State<Observations> {
     });
   }
 
+  Future<void> _uploadObservationDialog(int observationsToUpload) async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return ObservationUpload(widget.currentUser, observationsToUpload);
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -63,7 +74,7 @@ class _ObservationsState extends State<Observations> {
           .child(firebaseObservationsByDate)
           .child(firebaseAttributeList)
           .orderByChild(firebaseAttributeStatus)
-          .equalTo('private')
+          .equalTo(firebaseValuePrivate)
           .once()
           .then((DataSnapshot snapshot) {
         return snapshot.value?.length ?? 0;
@@ -130,7 +141,9 @@ class _ObservationsState extends State<Observations> {
                     child: FittedBox(
                       fit: BoxFit.fill,
                       child: FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _uploadObservationDialog(snapshot.data);
+                    },
                     child: Icon(Icons.cloud_upload),
                   ),),);
                 }

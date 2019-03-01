@@ -255,6 +255,11 @@
   "observation_photo_delete": "Remove photo",
   "observation_photo_delete_question": "Do you want to remove photo from the observation?",
   "observation_photo_duplicate": "Duplicate photo. Skipped.",
+  "observation_upload_title": "Upload observations",
+  "observation_upload_message": "You're going to upload $param observations. Please check if your device is connected to wi-fi. Are you ready for an upload?",
+  "observation_upload_progress": "Uploading observations...",
+  "observation_upload_success": "Observations have been successfully uploaded.",
+  "observation_upload_fail": "Upload failed. Please check your internet connection and try again.",
 
   "subscription": "Subscription",
   "subscription_info": "Shared observations are visible only for subscribed users.",

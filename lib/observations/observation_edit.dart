@@ -52,7 +52,6 @@ class _ObservationEditState extends State<ObservationEdit> {
     String rootPath = (await getApplicationDocumentsDirectory()).path;
     await Directory('$rootPath/$dir').create(recursive: true);
     image.copy('$rootPath/$dir/$filename');
-    await File('$rootPath/$dir/$filename');
     widget.observation.photoPaths.add('$dir/$filename');
 
     // store exif data
