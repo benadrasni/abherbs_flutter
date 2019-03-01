@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:abherbs_flutter/entity/observation.dart';
-import 'package:abherbs_flutter/observations/observation_edit.dart';
 import 'package:abherbs_flutter/observations/observation_map.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -153,25 +152,7 @@ class _ObservationViewState extends State<ObservationView> {
     }
 
     return Card(
-      child: widget.observation.id.startsWith(widget.currentUser.uid)
-          ? Stack(children: [
-              Column(mainAxisSize: MainAxisSize.min, children: widgets),
-              Positioned(
-                bottom: 20.0,
-                right: 20.0,
-                child: FloatingActionButton(
-                  heroTag: widget.observation.id,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.observation)),
-                  );
-                },
-                child: Icon(Icons.edit),
-              ),),
-            ])
-          : Column(mainAxisSize: MainAxisSize.min, children: widgets),
+      child: Column(mainAxisSize: MainAxisSize.min, children: widgets),
     );
   }
 }
