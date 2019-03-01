@@ -12,6 +12,8 @@ class Purchases {
     productOffline: PurchasedItem.fromJSON({'productId': productOffline}),
     productObservations: PurchasedItem.fromJSON({'productId': productObservations}),
     productPhotoSearch: PurchasedItem.fromJSON({'productId': productPhotoSearch}),
+    subscriptionMonthly: PurchasedItem.fromJSON({'productId': subscriptionMonthly}),
+    subscriptionYearly: PurchasedItem.fromJSON({'productId': subscriptionYearly}),
   };
 
   static bool isPurchased(String productId) {
@@ -78,7 +80,30 @@ class Purchases {
     return hasOldVersion != null && hasOldVersion;
   }
 
+  static bool isSubscribedMonthly() {
+    for (PurchasedItem product in purchases) {
+      if (product.productId == subscriptionMonthly) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static bool isSubscribedYearly() {
+    for (PurchasedItem product in purchases) {
+      if (product.productId == subscriptionYearly) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   static bool isSignNeeded() {
     return isObservations() || isPhotoSearch();
   }
+
+  static bool isSubscribed() {
+    return isSubscribedMonthly() || isSubscribedYearly();
+  }
+
 }

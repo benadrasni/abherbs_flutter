@@ -26,6 +26,8 @@ const String productCustomFilter = "custom_filter";
 const String productOffline = "offline";
 const String productObservations = "observations";
 const String productPhotoSearch = "photo_search";
+const String subscriptionMonthly = "store_photos_monthly";
+const String subscriptionYearly = "store_photos_yearly";
 
 const String keyLanguage = "language";
 const String keyLanguageAndCountry = "language_country";
@@ -258,6 +260,10 @@ Widget getProductIcon(BuildContext context, String productId) {
       return Icon(Icons.remove_red_eye);
     case productPhotoSearch:
       return Icon(Icons.photo_camera);
+    case subscriptionMonthly:
+      return Icon(Icons.calendar_today);
+    case subscriptionYearly:
+      return Icon(Icons.calendar_today);
     default:
       return null;
   }
@@ -278,6 +284,10 @@ String getProductTitle(BuildContext context, String productId, String defaultTit
       return S.of(context).product_observations_title;
     case productPhotoSearch:
       return S.of(context).product_observations_title;
+    case subscriptionMonthly:
+      return S.of(context).subscription_monthly_title;
+    case subscriptionYearly:
+      return S.of(context).subscription_yearly_title;
     default:
       return defaultTitle;
   }
@@ -298,6 +308,10 @@ String getProductDescription(BuildContext context, String productId, String defa
       return S.of(context).product_observations_description;
     case productPhotoSearch:
       return S.of(context).product_photo_search_description;
+    case subscriptionMonthly:
+      return S.of(context).subscription_monthly_description;
+    case subscriptionYearly:
+      return S.of(context).subscription_yearly_description;
     default:
       return defaultDescription;
   }

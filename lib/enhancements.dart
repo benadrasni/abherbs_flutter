@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/settings/setting_my_filter.dart';
 import 'package:abherbs_flutter/utils.dart';
 import 'package:abherbs_flutter/prefs.dart';
+import 'package:abherbs_flutter/subscription.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -81,38 +82,55 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
       ),
     );
 
-    switch (product.productId) {
-      case productOffline:
-        buttons.add(RaisedButton(
-          color: Theme.of(context).accentColor,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter)),
-            );
-          },
-          child: Text(
-            S.of(context).settings,
-            style: TextStyle(color: Colors.white),
-          ),
-        ));
-        break;
-      case productCustomFilter:
-        buttons.add(RaisedButton(
-          color: Theme.of(context).accentColor,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter)),
-            );
-          },
-          child: Text(
-            S.of(context).my_filter,
-            style: TextStyle(color: Colors.white),
-          ),
-        ));
-        break;
-      default:
+    if (isPurchased) {
+      switch (product.productId) {
+        case productOffline:
+          buttons.add(RaisedButton(
+            color: Theme.of(context).accentColor,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter)),
+              );
+            },
+            child: Text(
+              S.of(context).settings,
+              style: TextStyle(color: Colors.white),
+            ),
+          ));
+          break;
+        case productCustomFilter:
+          buttons.add(RaisedButton(
+            color: Theme.of(context).accentColor,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter)),
+              );
+            },
+            child: Text(
+              S.of(context).my_filter,
+              style: TextStyle(color: Colors.white),
+            ),
+          ));
+          break;
+        case productObservations:
+          buttons.add(RaisedButton(
+            color: Theme.of(context).accentColor,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Subscription(widget.onBuyProduct)),
+              );
+            },
+            child: Text(
+              S.of(context).subscription,
+              style: TextStyle(color: Colors.white),
+            ),
+          ));
+          break;
+        default:
+      }
     }
 
     return buttons;
