@@ -224,9 +224,13 @@ class S implements WidgetsLocalizations {
   String get subscription_info => "Shared observations are visible only for subscribed users.";
   String get subscription_intro1 => "Your observation's date, location and note are saved and persisted across devices without subscription, but photos are stored only locally on the device. You will lose connection to them (even photo itself when you shot it from the application) when you clear data, reinstall or switch device.";
   String get subscription_intro2 => "You are about to subscribe for saving and persisting your photos across all your devices. With subscription you agree to share your observations with other subscribed users. You'll also be able to see their observations. All shared observations are anonymous and its note stays private and won't be shared. To simplify process your photos will be shared under CC0 (Creative Commons Zero) licence, so you also agree with this.";
-  String get subscription_intro3 => "Based on these observations distribution maps will be created along with other, not yet implemented, goodies which will be accessible only for subscribed users.";
-  String get subscription_intro4 => "If you still hesitate to hit the button below, there is a 30 days trial period for both subscriptions.";
+  String get subscription_intro3 => "If you still hesitate to hit the button below, there is a 30 days trial period for both subscriptions.";
+  String get subscription_monthly_description => "Preserve observation's photos across devices - monthly payment.";
+  String get subscription_monthly_title => "Store photos - monthly";
   String get subscription_subscribe => "Subscribe";
+  String get subscription_subscribed => "Subscribed";
+  String get subscription_yearly_description => "Preserve observation's photos across devices - yearly payment.";
+  String get subscription_yearly_title => "Store photos - yearly";
   String get taxonomy_cladus => "(clade)";
   String get taxonomy_familia => "Family";
   String get taxonomy_genus => "Genus";
