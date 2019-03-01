@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/plant_list.dart';
-import 'package:abherbs_flutter/preferences.dart';
-import 'package:abherbs_flutter/prefs.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/settings/preferences.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 

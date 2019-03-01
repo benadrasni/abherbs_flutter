@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/entity/plant.dart';
-import 'package:abherbs_flutter/prefs.dart';
-import 'package:abherbs_flutter/purchases.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';

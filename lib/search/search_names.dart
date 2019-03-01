@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:abherbs_flutter/plant_list.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';

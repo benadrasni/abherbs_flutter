@@ -1,5 +1,5 @@
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 
 class Purchases {
   static bool hasOldVersion;
