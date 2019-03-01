@@ -139,6 +139,10 @@ class S implements WidgetsLocalizations {
   String get observation_photo_delete_question => "Do you want to remove photo from the observation?";
   String get observation_photo_duplicate => "Duplicate photo. Skipped.";
   String get observation_saved => "Observation was saved.";
+  String get observation_upload_fail => "Upload failed. Please check your internet connection and try again.";
+  String get observation_upload_progress => "Uploading observations...";
+  String get observation_upload_success => "Observations have been successfully uploaded.";
+  String get observation_upload_title => "Upload observations";
   String get observations => "Observations";
   String get offline_delete_message => "Do you want to delete offline data?";
   String get offline_download => "Resume download";
@@ -258,6 +262,7 @@ class S implements WidgetsLocalizations {
   String get western_south_america => "Western South America";
   String get yes => "Yes";
   String auth_reset_password_email_message(String _email) => "Follow the instructions sent to $_email to reset your password.";
+  String observation_upload_message(String param) => "You're going to upload $param observations. Please check if your device is connected to wi-fi. Are you ready for an upload?";
 }
 
 class $it_IT extends S {

@@ -105,6 +105,8 @@ const String firebaseAttributeStatus = "status";
 const String firebaseAttributeOldVersion = "old version";
 const String firebaseAttributeToken = "token";
 
+const String firebaseValuePrivate = "private";
+
 const String mapModeView = "view";
 const String mapModeEdit = "edit";
 
