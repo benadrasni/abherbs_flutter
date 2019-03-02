@@ -7,7 +7,6 @@ import 'package:abherbs_flutter/signin/email.dart';
 import 'package:abherbs_flutter/signin/phone.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -19,7 +18,6 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FacebookLogin facebookLogin = new FacebookLogin();
 
   Future<void> _handleGoogleSignIn(GlobalKey<ScaffoldState> key) async {
     try {
@@ -40,22 +38,6 @@ class _SignInScreenState extends State<SignInScreen> {
       key.currentState.showSnackBar(new SnackBar(
         content: new Text(S.of(context).auth_sign_in_failed),
       ));
-    }
-  }
-
-  _handleFacebookSignIn(GlobalKey<ScaffoldState> key) async {
-    FacebookLoginResult result = await facebookLogin.logInWithReadPermissions(['email']);
-    if (result.accessToken != null) {
-      try {
-        var facebookCredential = FacebookAuthProvider.getCredential(accessToken: result.accessToken.token);
-        String userId = await Auth.signInWithCredential(facebookCredential);
-        Navigator.pop(context);
-        print('Signed in: $userId');
-      } catch (e) {
-        key.currentState.showSnackBar(new SnackBar(
-          content: new Text(S.of(context).auth_sign_in_failed),
-        ));
-      }
     }
   }
 
@@ -152,25 +134,6 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     onPressed: () {
                       _handleGoogleSignIn(key);
-                    }),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
-                child: RaisedButton(
-                    color: Color.fromRGBO(59, 87, 157, 1.0),
-                    child: Row(
-                      children: [
-                        Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/fb-logo.png')),
-                        Expanded(
-                          child: Text(
-                            S.of(context).auth_facebook,
-                            style: new TextStyle(color: Colors.white, fontSize: 18.0),
-                          ),
-                        )
-                      ],
-                    ),
-                    onPressed: () {
-                      _handleFacebookSignIn(key);
                     }),
               ),
               Padding(
