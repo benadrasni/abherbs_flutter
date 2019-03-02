@@ -33,11 +33,11 @@ class Offline {
         _offline = value;
         if (value) {
           Prefs.getIntF(keyOfflinePlant, 0).then((value) {
-            FirebaseDatabase.instance.reference().child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((DataSnapshot snapshot) {
+            rootReference.child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((DataSnapshot snapshot) {
               downloadFinished = snapshot.value == null || value >= snapshot.value;
             });
           });
-          FirebaseDatabase.instance.reference().child(firebaseVersions).child(firebaseAttributeLastUpdate).once().then((DataSnapshot snapshot) {
+          rootReference.child(firebaseVersions).child(firebaseAttributeLastUpdate).once().then((DataSnapshot snapshot) {
             if (snapshot.value != null) {
               Prefs.getStringF(keyOfflineDB, '').then((value) {
                 _downloadDBDate = snapshot.value;

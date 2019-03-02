@@ -3,13 +3,14 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/settings/offline.dart';
-import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/splash.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -128,6 +129,40 @@ class _AppState extends State<App> {
         });
       } else {
         throw PlatformException(code: Platform.operatingSystem, message: "platform not supported");
+      }
+    });
+
+    // check promotions
+    rootReference.child(firebasePromotions).once().then((DataSnapshot snapshot) {
+      print(snapshot);
+      if (snapshot.value != null) {
+        if (snapshot.value[firebaseAttributeObservations] != null) {
+          var observationsFrom = DateTime.parse(snapshot.value[firebaseAttributeObservations][firebaseAttributeFrom]);
+          var observationsTo = DateTime.parse(snapshot.value[firebaseAttributeObservations][firebaseAttributeTo]);
+
+          var currentDate = DateTime.now();
+          Purchases.observationPromotionFrom = observationsFrom;
+          Purchases.observationPromotionTo = observationsTo;
+          Purchases.isObservationPromotion = currentDate.isAfter(observationsFrom) && currentDate.isBefore(observationsTo.add(Duration(days: 1)));
+        }
+        if (snapshot.value[firebaseAttributeSearch] != null) {
+          var searchFrom = DateTime.parse(snapshot.value[firebaseAttributeSearch][firebaseAttributeFrom]);
+          var searchTo = DateTime.parse(snapshot.value[firebaseAttributeSearch][firebaseAttributeTo]);
+
+          var currentDate = DateTime.now();
+          Purchases.searchPromotionFrom = searchFrom;
+          Purchases.searchPromotionTo = searchTo;
+          Purchases.isSearchPromotion = currentDate.isAfter(searchFrom) && currentDate.isBefore(searchTo.add(Duration(days: 1)));
+        }
+        if (snapshot.value[firebaseAttributeSearchByPhoto] != null) {
+          var searchByPhotoFrom = DateTime.parse(snapshot.value[firebaseAttributeSearchByPhoto][firebaseAttributeFrom]);
+          var searchByPhotoTo = DateTime.parse(snapshot.value[firebaseAttributeSearchByPhoto][firebaseAttributeTo]);
+
+          var currentDate = DateTime.now();
+          Purchases.searchByPhotoPromotionFrom = searchByPhotoFrom;
+          Purchases.searchByPhotoPromotionTo = searchByPhotoTo;
+          Purchases.isSearchByPhotoPromotion = currentDate.isAfter(searchByPhotoFrom) && currentDate.isBefore(searchByPhotoTo.add(Duration(days: 1)));
+        }
       }
     });
   }

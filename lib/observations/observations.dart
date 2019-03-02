@@ -19,7 +19,8 @@ class Observations extends StatefulWidget {
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
-  Observations(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct);
+  final bool isPublicOnly;
+  Observations(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.isPublicOnly);
 
   @override
   _ObservationsState createState() => _ObservationsState();
@@ -78,14 +79,19 @@ class _ObservationsState extends State<Observations> {
     super.initState();
     _key = _privateKey;
     initializeDateFormatting();
-    _isPublic = false;
-    _privateQuery = privateObservationsReference
-        .child(widget.currentUser.uid)
-        .child(firebaseObservationsByDate)
-        .child(firebaseAttributeList)
-        .orderByChild(firebaseAttributeOrder);
     _publicQuery = publicObservationsReference.child(firebaseObservationsByDate).child(firebaseAttributeList).orderByChild(firebaseAttributeOrder);
-    _query = _privateQuery;
+    if (widget.isPublicOnly) {
+      _isPublic = true;
+      _query = _publicQuery;
+    } else {
+      _isPublic = false;
+      _privateQuery = privateObservationsReference
+          .child(widget.currentUser.uid)
+          .child(firebaseObservationsByDate)
+          .child(firebaseAttributeList)
+          .orderByChild(firebaseAttributeOrder);
+      _query = _privateQuery;
+    }
 
     _setCountUploadF();
 
@@ -96,28 +102,33 @@ class _ObservationsState extends State<Observations> {
   Widget build(BuildContext context) {
     var myLocale = Localizations.localeOf(context);
 
+    List<Widget> appBarItems = [];
+    appBarItems.add(Text(S.of(context).observations));
+    if (widget.isPublicOnly) {
+      appBarItems.add(Icon(Icons.people));
+    } else {
+      appBarItems.add(Row(
+        children: [
+          Icon(Icons.person),
+          Switch(
+            value: _isPublic,
+            activeColor: Colors.white,
+            inactiveThumbColor: Colors.white,
+            onChanged: (bool value) {
+              _setIsPublic(value);
+            },
+          ),
+          Icon(Icons.people),
+        ],
+      ));
+    }
+
     return Scaffold(
       key: _key,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(S.of(context).observations),
-            Row(
-              children: [
-                Icon(Icons.person),
-                Switch(
-                  value: _isPublic,
-                  activeColor: Colors.white,
-                  inactiveThumbColor: Colors.white,
-                  onChanged: (bool value) {
-                    _setIsPublic(value);
-                  },
-                ),
-                Icon(Icons.people),
-              ],
-            ),
-          ],
+          children: appBarItems,
         ),
       ),
       body: MyFirebaseAnimatedList(

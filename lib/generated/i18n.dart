@@ -194,6 +194,7 @@ class S implements WidgetsLocalizations {
   String get product_restore_purchases => "Restore Purchases";
   String get product_search_description => "You'll be able to find a flower by its English or Latin name or by its taxon (e.g. order, family, genus).";
   String get product_search_title => "Search in names or taxonomy";
+  String get promotion_title => "Promotion";
   String get rate => "Review";
   String get rate_later => "Later";
   String get rate_never => "Never";
@@ -263,6 +264,7 @@ class S implements WidgetsLocalizations {
   String get yes => "Yes";
   String auth_reset_password_email_message(String _email) => "Follow the instructions sent to $_email to reset your password.";
   String observation_upload_message(String param) => "You're going to upload $param observations. Please check if your device is connected to wi-fi. Are you ready for an upload?";
+  String promotion_content(String date) => "This is a promotion. The feature will available until $date";
 }
 
 class $it_IT extends S {
