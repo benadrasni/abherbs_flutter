@@ -19,7 +19,7 @@ class ObservationUpload extends StatefulWidget {
 class _ObservationUploadState extends State<ObservationUpload> {
   FirebaseAnalytics _firebaseAnalytics;
   int _observationsRemain;
-  int _uploadStatus; // 0: initial, 1: downloading,  2: successful, 3: failed
+  int _uploadStatus; // 0: initial, 1: uploading,  2: successful, 3: failed
 
   onObservationUpload() {
     if (mounted) {
