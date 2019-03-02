@@ -43,7 +43,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
         ];
   Future<List<IAPItem>> _productsF;
 
-  Future<void> _logFailedPurchaseEvent(String productId) async {
+  Future<void> _logCancelledPurchaseEvent(String productId) async {
     await _firebaseAnalytics.logEvent(name: 'purchase_canceled', parameters: {'productId': productId});
   }
 
@@ -66,7 +66,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
             FlutterInappPurchase.buyProduct(product.productId).then((PurchasedItem purchased) {
               widget.onBuyProduct(purchased);
             }).catchError((error) {
-              _logFailedPurchaseEvent(product.productId);
+              _logCancelledPurchaseEvent(product.productId);
               if (key.currentState != null && key.currentState.mounted) {
                 key.currentState.showSnackBar(new SnackBar(
                   content: new Text(S.of(context).product_purchase_failed),

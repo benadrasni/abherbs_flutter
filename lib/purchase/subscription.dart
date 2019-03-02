@@ -31,8 +31,18 @@ class _SubscriptionState extends State<Subscription> {
         ];
   Future<List<IAPItem>> _subscriptionsF;
 
-  Future<void> _logFailedSubscriptionEvent(String subscriptionId) async {
+  Future<void> _logCanceledSubscriptionEvent(String subscriptionId) async {
     await _firebaseAnalytics.logEvent(name: 'subscription_canceled', parameters: {'subscriptionId': subscriptionId});
+  }
+
+  String _getOldSubscription(String productId) {
+    switch (productId) {
+      case subscriptionMonthly:
+        return Purchases.isPurchased(subscriptionYearly) ? subscriptionYearly : null;
+      case subscriptionYearly:
+        return Purchases.isPurchased(subscriptionMonthly) ? subscriptionMonthly : null;
+    }
+    return null;
   }
 
   @override
@@ -71,19 +81,25 @@ class _SubscriptionState extends State<Subscription> {
                   ),
                 ));
               } else {
-                List<Widget> texts = [S.of(context).subscription_intro1, S.of(context).subscription_intro2, S.of(context).subscription_intro3].map((item) {
-                  return Container(padding: EdgeInsets.all(10.0), child: Text(
-                    item,
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                    textAlign: TextAlign.justify,
-                  ));
+                List<Widget> texts =
+                    [S.of(context).subscription_intro1, S.of(context).subscription_intro2, S.of(context).subscription_intro3].map((item) {
+                  return Container(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        item,
+                        style: TextStyle(
+                          fontSize: 16.0,
+                        ),
+                        textAlign: TextAlign.justify,
+                      ));
                 }).toList();
 
-                _cards.add(Card(child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: texts),));
+                _cards.add(Card(
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: texts),
+                ));
                 _cards.addAll(snapshot.data.map((IAPItem subscription) {
                   bool isPurchased = Purchases.isPurchased(subscription.productId);
+                  String oldSubscription = _getOldSubscription(subscription.productId);
                   return Card(
                     child: Container(
                       padding: EdgeInsets.all(10.0),
@@ -119,20 +135,22 @@ class _SubscriptionState extends State<Subscription> {
                           color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
                           onPressed: () {
                             if (!isPurchased) {
-                              FlutterInappPurchase.buySubscription(subscription.productId).then((PurchasedItem purchased) {
+                              FlutterInappPurchase.buySubscription(subscription.productId, oldSku: oldSubscription).then((PurchasedItem purchased) {
                                 widget.onBuyProduct(purchased);
                               }).catchError((error) {
-                                _logFailedSubscriptionEvent(subscription.productId);
+                                _logCanceledSubscriptionEvent(subscription.productId);
                                 if (key.currentState != null && key.currentState.mounted) {
                                   key.currentState.showSnackBar(new SnackBar(
-                                    content: new Text(S.of(context).product_purchase_failed),
+                                    content: new Text(S.of(context).product_subscribe_failed),
                                   ));
                                 }
                               });
                             }
                           },
                           child: Text(
-                            isPurchased ? S.of(context).subscription_subscribed : S.of(context).subscription_subscribe,
+                            isPurchased
+                                ? S.of(context).product_subscribed
+                                : oldSubscription != null ? S.of(context).product_change : S.of(context).product_subscribe,
                             style: TextStyle(color: isPurchased ? Colors.black : Colors.white),
                           ),
                         ),
