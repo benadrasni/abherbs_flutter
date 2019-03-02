@@ -3,6 +3,15 @@ import 'package:abherbs_flutter/utils/utils.dart';
 
 class Purchases {
   static bool hasOldVersion;
+  static bool isSearchPromotion;
+  static DateTime searchPromotionFrom;
+  static DateTime searchPromotionTo;
+  static bool isObservationPromotion;
+  static DateTime observationPromotionFrom;
+  static DateTime observationPromotionTo;
+  static bool isSearchByPhotoPromotion;
+  static DateTime searchByPhotoPromotionFrom;
+  static DateTime searchByPhotoPromotionTo;
   static List<PurchasedItem> purchases = <PurchasedItem>[];
   static Map<String, PurchasedItem> offlineProducts = {
     productNoAdsIOS: PurchasedItem.fromJSON({'productId': productNoAdsIOS}),
@@ -15,6 +24,10 @@ class Purchases {
     subscriptionMonthly: PurchasedItem.fromJSON({'productId': subscriptionMonthly}),
     subscriptionYearly: PurchasedItem.fromJSON({'productId': subscriptionYearly}),
   };
+
+  static void initialize() {
+
+  }
 
   static bool isPurchased(String productId) {
     for (var purchase in purchases) {

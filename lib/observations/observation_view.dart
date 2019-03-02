@@ -32,8 +32,8 @@ class _ObservationViewState extends State<ObservationView> {
   void initState() {
     super.initState();
     initializeDateFormatting();
-    _dateFormat = new DateFormat.yMMMMd(widget.myLocale.toString());
-    _timeFormat = new DateFormat.Hms(widget.myLocale.toString());
+    _dateFormat = DateFormat.yMMMMd(widget.myLocale.toString());
+    _timeFormat = DateFormat.Hms(widget.myLocale.toString());
   }
 
   @override
@@ -141,7 +141,7 @@ class _ObservationViewState extends State<ObservationView> {
       ),
     ));
 
-    if (widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.uid)) {
+    if (widget.currentUser != null && widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.uid)) {
       widgets.add(Card(color: Theme.of(context).buttonColor, child:Container(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
         height: 50.0,

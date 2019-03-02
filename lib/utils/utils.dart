@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:exif/exif.dart';
+import 'package:intl/intl.dart';
 
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
@@ -88,6 +89,7 @@ const String firebasePlantsToUpdate = "plants_to_update";
 const String firebaseFamiliesToUpdate = "families_to_update";
 const String firebaseVersions = "versions";
 const String firebaseUsers = "users";
+const String firebasePromotions = "promotions";
 const String firebaseObservationsPublic = "observations/public";
 const String firebaseObservationsPrivate = "observations/by users";
 const String firebaseObservationsByDate = "by date";
@@ -105,6 +107,11 @@ const String firebaseAttributeOrder = "order";
 const String firebaseAttributeStatus = "status";
 const String firebaseAttributeOldVersion = "old version";
 const String firebaseAttributeToken = "token";
+const String firebaseAttributeSearch = "search";
+const String firebaseAttributeSearchByPhoto = "searchByPhoto";
+const String firebaseAttributeObservations = "observations";
+const String firebaseAttributeFrom = "from";
+const String firebaseAttributeTo = "to";
 
 const String firebaseValuePrivate = "private";
 const String firebaseValueReview = "review";
@@ -116,17 +123,17 @@ const String mapModeEdit = "edit";
 const String notificationAttributeData = "data";
 
 final DatabaseReference rootReference = FirebaseDatabase.instance.reference();
-final DatabaseReference countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
-final DatabaseReference listsReference = FirebaseDatabase.instance.reference().child(firebasePlantHeaders);
-final DatabaseReference keysReference = FirebaseDatabase.instance.reference().child(firebaseLists);
-final DatabaseReference translationsReference = FirebaseDatabase.instance.reference().child(firebaseTranslations);
-final DatabaseReference translationsTaxonomyReference = FirebaseDatabase.instance.reference().child(firebaseTranslationsTaxonomy);
-final DatabaseReference plantsReference = FirebaseDatabase.instance.reference().child(firebasePlants);
-final DatabaseReference searchReference = FirebaseDatabase.instance.reference().child(firebaseSearch);
-final DatabaseReference apgIVReference = FirebaseDatabase.instance.reference().child(firebaseAPGIV);
-final DatabaseReference publicObservationsReference = FirebaseDatabase.instance.reference().child(firebaseObservationsPublic);
-final DatabaseReference privateObservationsReference = FirebaseDatabase.instance.reference().child(firebaseObservationsPrivate);
-final DatabaseReference usersReference = FirebaseDatabase.instance.reference().child(firebaseUsers);
+final DatabaseReference countsReference = rootReference.child(firebaseCounts);
+final DatabaseReference listsReference = rootReference.child(firebasePlantHeaders);
+final DatabaseReference keysReference = rootReference.child(firebaseLists);
+final DatabaseReference translationsReference = rootReference.child(firebaseTranslations);
+final DatabaseReference translationsTaxonomyReference = rootReference.child(firebaseTranslationsTaxonomy);
+final DatabaseReference plantsReference = rootReference.child(firebasePlants);
+final DatabaseReference searchReference = rootReference.child(firebaseSearch);
+final DatabaseReference apgIVReference = rootReference.child(firebaseAPGIV);
+final DatabaseReference publicObservationsReference = rootReference.child(firebaseObservationsPublic);
+final DatabaseReference privateObservationsReference = rootReference.child(firebaseObservationsPrivate);
+final DatabaseReference usersReference = rootReference.child(firebaseUsers);
 
 Map<String, String> translationCache = {};
 
@@ -338,6 +345,7 @@ Icon getIcon(String productId) {
 
 List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, FirebaseUser currentUser, Function(String) onChangeLanguage,
     Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
+  DateFormat dateFormat = new DateFormat.yMMMMd(Localizations.localeOf(mainContext).toString());
   var _actions = <Widget>[];
   _actions.add(IconButton(
     icon: getIcon(productObservations),
@@ -346,11 +354,18 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
         if (currentUser != null) {
           Navigator.push(
             mainContext,
-            MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+            MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct, false)),
           );
         } else {
           observationDialog(mainContext, key);
         }
+      } else if (Purchases.isObservationPromotion != null && Purchases.isObservationPromotion) {
+        infoDialog(mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo))).then((value) {
+          Navigator.push(
+            mainContext,
+            MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct, true)),
+          );
+        });
       } else {
         Navigator.push(
           mainContext,
@@ -367,6 +382,13 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
           mainContext,
           MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
         );
+      } else if (Purchases.isSearchPromotion != null && Purchases.isSearchPromotion) {
+        infoDialog(mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo))).then((value) {
+          Navigator.push(
+            mainContext,
+            MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+          );
+        });
       } else {
         Navigator.push(
           mainContext,

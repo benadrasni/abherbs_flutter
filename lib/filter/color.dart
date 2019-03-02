@@ -33,7 +33,7 @@ class _ColorState extends State<Color> {
   GlobalKey<ScaffoldState> _key;
   StreamSubscription<FirebaseUser> _listener;
   FirebaseUser _currentUser;
-  Future<int> _count;
+  Future<int> _countF;
   Future<String> _rateStateF;
   Future<bool> _isNewVersionF;
   Map<String, String> _filter;
@@ -69,7 +69,7 @@ class _ColorState extends State<Color> {
   }
 
   _setCount() {
-    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
+    _countF = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
       return snapshot.value;
     });
   }
@@ -355,7 +355,7 @@ class _ColorState extends State<Color> {
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(
-              future: _count,
+              future: _countF,
               builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.active:

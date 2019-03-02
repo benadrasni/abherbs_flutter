@@ -27,7 +27,7 @@ class Distribution2 extends StatefulWidget {
 class _Distribution2State extends State<Distribution2> {
   StreamSubscription<FirebaseUser> _listener;
   FirebaseUser _currentUser;
-  Future<int> _count;
+  Future<int> _countF;
   GlobalKey<ScaffoldState> _key;
 
   void _navigate(String value) {
@@ -52,7 +52,7 @@ class _Distribution2State extends State<Distribution2> {
   }
 
   _setCount() {
-    _count = countsReference.child(getFilterKey(widget.filter)).once().then((DataSnapshot snapshot) {
+    _countF = countsReference.child(getFilterKey(widget.filter)).once().then((DataSnapshot snapshot) {
       return snapshot.value;
     });
   }
@@ -216,7 +216,7 @@ class _Distribution2State extends State<Distribution2> {
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(
-              future: _count,
+              future: _countF,
               builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.active:

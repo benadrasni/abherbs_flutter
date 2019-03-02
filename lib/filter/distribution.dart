@@ -31,7 +31,7 @@ class Distribution extends StatefulWidget {
 class _DistributionState extends State<Distribution> {
   StreamSubscription<FirebaseUser> _listener;
   FirebaseUser _currentUser;
-  Future<int> _count;
+  Future<int> _countF;
   Map<String, String> _filter;
   Future<String> _myRegionF;
   String _myRegion;
@@ -77,7 +77,7 @@ class _DistributionState extends State<Distribution> {
   }
 
   _setCount() {
-    _count = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
+    _countF = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
       return snapshot.value;
     });
   }
@@ -293,7 +293,7 @@ class _DistributionState extends State<Distribution> {
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(
-              future: _count,
+              future: _countF,
               builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.active:
