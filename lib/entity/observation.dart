@@ -32,6 +32,19 @@ class Observation{
     this.status = observationStatusPrivate;
   }
 
+  Observation.from(Observation observation) {
+    this.key = observation.key;
+    this.id = observation.id;
+    this.plant = observation.plant;
+    this.date = observation.date;
+    this.longitude = observation.longitude;
+    this.latitude = observation.latitude;
+    this.note = observation.note;
+    this.photoPaths = List.from(observation.photoPaths);
+    this.status = observation.status;
+    this.order = observation.order;
+  }
+
   Observation.fromJson(key, Map data) {
     this.key = key;
     this.id = data[observationId];

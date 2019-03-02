@@ -64,6 +64,7 @@ const String webUrl = "https://whatsthatflower.com/";
 const String googleTranslateEndpoint = "https://translation.googleapis.com/language/translate/v2";
 const String googleMapsEndpoint = "https://maps.googleapis.com/maps/api/staticmap?";
 
+const String storageBucket = "gs://abherbs-resources";
 const String storageEndpoint = "https://storage.googleapis.com/abherbs-resources/";
 const String storageFamilies = "families/";
 const String storagePhotos = "photos/";
@@ -106,6 +107,8 @@ const String firebaseAttributeOldVersion = "old version";
 const String firebaseAttributeToken = "token";
 
 const String firebaseValuePrivate = "private";
+const String firebaseValueReview = "review";
+const String firebaseValuePublic = "public";
 
 const String mapModeView = "view";
 const String mapModeEdit = "edit";

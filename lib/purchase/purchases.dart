@@ -103,7 +103,7 @@ class Purchases {
   }
 
   static bool isSubscribed() {
-    return true; //isSubscribedMonthly() || isSubscribedYearly();
+    return isSubscribedMonthly() || isSubscribedYearly();
   }
 
 }

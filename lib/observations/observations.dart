@@ -44,6 +44,25 @@ class _ObservationsState extends State<Observations> {
     });
   }
 
+  void _setCountUploadF() {
+    if (Purchases.isSubscribed()) {
+      _countUploadF = privateObservationsReference
+          .child(widget.currentUser.uid)
+          .child(firebaseObservationsByDate)
+          .child(firebaseAttributeList)
+          .orderByChild(firebaseAttributeStatus)
+          .equalTo(firebaseValuePrivate)
+          .once()
+          .then((DataSnapshot snapshot) {
+        return snapshot.value?.length ?? 0;
+      });
+    } else {
+      _countUploadF = Future<int>(() {
+        return 0;
+      });
+    }
+  }
+
   Future<void> _uploadObservationDialog(int observationsToUpload) async {
     return showDialog(
       context: context,
@@ -68,22 +87,7 @@ class _ObservationsState extends State<Observations> {
     _publicQuery = publicObservationsReference.child(firebaseObservationsByDate).child(firebaseAttributeList).orderByChild(firebaseAttributeOrder);
     _query = _privateQuery;
 
-    if (Purchases.isSubscribed()) {
-      _countUploadF = privateObservationsReference
-          .child(widget.currentUser.uid)
-          .child(firebaseObservationsByDate)
-          .child(firebaseAttributeList)
-          .orderByChild(firebaseAttributeStatus)
-          .equalTo(firebaseValuePrivate)
-          .once()
-          .then((DataSnapshot snapshot) {
-        return snapshot.value?.length ?? 0;
-      });
-    } else {
-      _countUploadF = Future<int>(() {
-        return 0;
-      });
-    }
+    _setCountUploadF();
 
     Ads.hideBannerAd();
   }
@@ -142,7 +146,11 @@ class _ObservationsState extends State<Observations> {
                       fit: BoxFit.fill,
                       child: FloatingActionButton(
                     onPressed: () {
-                      _uploadObservationDialog(snapshot.data);
+                      _uploadObservationDialog(snapshot.data).then((value) {
+                        setState(() {
+                          _setCountUploadF();
+                        });
+                      });
                     },
                     child: Icon(Icons.cloud_upload),
                   ),),);
