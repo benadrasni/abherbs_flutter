@@ -106,6 +106,7 @@ const String firebaseAttributeLabel = "label";
 const String firebaseAttributeOrder = "order";
 const String firebaseAttributeStatus = "status";
 const String firebaseAttributeOldVersion = "old version";
+const String firebaseAttributeLifetimeSubscription = "lifetime_subscription";
 const String firebaseAttributeToken = "token";
 const String firebaseAttributeSearch = "search";
 const String firebaseAttributeSearchByPhoto = "searchByPhoto";

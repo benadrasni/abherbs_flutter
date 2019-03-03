@@ -69,8 +69,14 @@ class Auth {
             }
           });
         }
+        if (Purchases.hasLifetimeSubscription == null) {
+          usersReference.child(user.uid).child(firebaseAttributeLifetimeSubscription).once().then((snapshot) {
+            Purchases.hasLifetimeSubscription = snapshot.value != null && snapshot.value;
+          });
+        }
       } else {
         Purchases.hasOldVersion = null;
+        Purchases.hasLifetimeSubscription = null;
       }
       return user;
     });

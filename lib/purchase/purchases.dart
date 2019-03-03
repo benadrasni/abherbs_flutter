@@ -3,6 +3,7 @@ import 'package:abherbs_flutter/utils/utils.dart';
 
 class Purchases {
   static bool hasOldVersion;
+  static bool hasLifetimeSubscription;
   static bool isSearchPromotion;
   static DateTime searchPromotionFrom;
   static DateTime searchPromotionTo;
@@ -116,7 +117,7 @@ class Purchases {
   }
 
   static bool isSubscribed() {
-    return isSubscribedMonthly() || isSubscribedYearly();
+    return isSubscribedMonthly() || isSubscribedYearly() || (hasLifetimeSubscription != null && hasLifetimeSubscription);
   }
 
 }
