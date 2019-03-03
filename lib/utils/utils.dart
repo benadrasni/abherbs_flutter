@@ -406,11 +406,13 @@ void goToDetail(BuildContext context, Locale myLocale, String name, Function(Str
     Map<String, String> filter) {
   plantsReference.child(name).once().then((DataSnapshot snapshot) {
     if (snapshot.value != null) {
-      Plant plant = Plant.fromJson(snapshot.key, snapshot.value);
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => PlantDetail(myLocale, onChangeLanguage, onBuyProduct, filter, plant)),
-      );
+      if (context != null) {
+        Plant plant = Plant.fromJson(snapshot.key, snapshot.value);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PlantDetail(myLocale, onChangeLanguage, onBuyProduct, filter, plant)),
+        );
+      }
     } else {
       plantsReference.child(name).keepSynced(true);
       translationsReference.child(myLocale.languageCode).child(name).keepSynced(true);

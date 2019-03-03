@@ -134,7 +134,7 @@ class S implements WidgetsLocalizations {
   String get observation_empty => "There is no observation yet.";
   String get observation_no_login => "Observations are available only for logged users. Please log in.";
   String get observation_not_saved => "Observation was incomplete thus it wasn't saved. Location or photo is misssing.";
-  String get observation_note => "Place for your private notes.";
+  String get observation_note => "Place for your private note.";
   String get observation_photo_delete => "Remove photo";
   String get observation_photo_delete_question => "Do you want to remove photo from the observation?";
   String get observation_photo_duplicate => "Duplicate photo. Skipped.";
@@ -198,7 +198,7 @@ class S implements WidgetsLocalizations {
   String get product_subscribe => "Subscribe";
   String get product_subscribe_failed => "Subscription failed";
   String get product_subscribed => "Subscribed";
-  String get promotion_title => "Promotion";
+  String get promotion_title => "Paid feature";
   String get rate => "Review";
   String get rate_later => "Later";
   String get rate_never => "Never";
@@ -266,7 +266,7 @@ class S implements WidgetsLocalizations {
   String get yes => "Yes";
   String auth_reset_password_email_message(String _email) => "Follow the instructions sent to $_email to reset your password.";
   String observation_upload_message(String param) => "You're going to upload $param observations. Please check if your device is connected to wi-fi. Are you ready for an upload?";
-  String promotion_content(String date) => "This is a promotion. The feature will available until $date";
+  String promotion_content(String date) => "This is a paid feature. You can use it for free until $date";
 }
 
 class $it_IT extends S {
@@ -5308,11 +5308,11 @@ class $de_DE extends S {
   @override
   String get product_search_description => "Sie finden eine Blume nach ihrem deutschen oder lateinischen Namen oder nach ihrem Taxon (z. B. Ordnung, Familie, Gattung).";
   @override
-  String get product_change => "Change";
+  String get product_change => "Veränderung";
   @override
   String get australasia => "Australasien";
   @override
-  String get observation_note => "Place for your private notes.";
+  String get observation_note => "Platz für Ihre private Notiz.";
   @override
   String get auth_verify_email_title => "Überprüfen Sie Ihr Konto";
   @override
@@ -5340,23 +5340,23 @@ class $de_DE extends S {
   @override
   String get middle_atlantic_ocean => "Mittlerer Atlantischer Ozean";
   @override
-  String get subscription_intro1 => "Your observation's date, location and note are saved and persisted across devices without subscription, but photos are stored only locally on the device. You will lose connection to them (even photo itself when you shot it from the application) when you clear data, reinstall or switch device.";
+  String get subscription_intro1 => "Das Datum, der Standort und die Notizen Ihrer Beobachtung werden auch ohne Abonnement auf allen Ihren Geräten gespeichert und synchronisiert, aber Fotos werden nur lokal gespeichert. Die Verbindung zu den Fotos wird verloren (das Foto selbst wird sogar gelöscht, wenn Sie es durch die Anwendung aufgenommen haben), wenn Sie Daten löschen, die Anwendung neu installieren oder Ihr Gerät wechseln.";
   @override
   String get feedback_run_ads => "Sie können Werbung im Vollbildmodus anzeigen oder Videowerbung ansehen, um die Weiterentwicklung und Datenbankverbesserung zu unterstützen.";
   @override
-  String get observation_empty => "There is no observation yet.";
+  String get observation_empty => "Es gibt noch keine Beobachtung.";
   @override
   String get habitat_message => "Was ist um dich herum? Identifiziere den Standort der Pflanze.";
   @override
   String get offline_download_fail => "Herunterladen fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung oder den freien Speicherplatz auf dem Gerät und versuchen Sie es erneut.";
   @override
-  String get observation_photo_delete => "Remove photo";
+  String get observation_photo_delete => "Foto entfernen";
   @override
-  String get subscription_intro3 => "If you still hesitate to hit the button below, there is a 30 days trial period for both subscriptions.";
+  String get subscription_intro3 => "Wenn Sie immer noch zögern, den unten stehenden Button zu drücken, gibt es eine 30-tägige Probezeit für beide Abonnements.";
   @override
   String get macaronesia => "Makaronesien";
   @override
-  String get subscription_intro2 => "You are about to subscribe for saving and persisting your photos across all your devices. With subscription you agree to share your observations with other subscribed users. You'll also be able to see their observations. All shared observations are anonymous and its note stays private and won't be shared. To simplify process your photos will be shared under CC0 (Creative Commons Zero) licence, so you also agree with this.";
+  String get subscription_intro2 => "Sie sind gerade dabei, Ihre Fotos auf allen Ihren Geräten zu synchronisieren und dauerhaft zu speichern. Mit dem Abonnement stimmen Sie zu, Ihre Beobachtungen mit anderen abonnierten Benutzern zu teilen. Sie werden auch die Beobachtungen der anderen Nutzer sehen können. Alle gemeinsamen Beobachtungen sind anonym und ihre Notizen bleiben privat und werden nicht geteilt. Um den Prozess zu vereinfachen, werden Ihre Fotos unter der CC0-Lizenz (Creative Commons Zero) geteilt, also stimmen Sie auch damit zu.";
   @override
   String get auth_verify_phone_number_title => "Telefonnummer bestätigen";
   @override
@@ -5368,7 +5368,7 @@ class $de_DE extends S {
   @override
   String get taxonomy_subserie => "Unterserie";
   @override
-  String get observation_no_login => "Observations are available only for logged users. Please log in.";
+  String get observation_no_login => "Beobachtungen sind nur für angemeldete Benutzer verfügbar. Bitte loggen Sie sich ein.";
   @override
   String get western_south_america => "Westliches Südamerika";
   @override
@@ -5382,7 +5382,7 @@ class $de_DE extends S {
   @override
   String get petal_message => "Ist die Blüte spiegelsymmetrisch? Falls nicht, wieviele Blütenblätter hat sie?";
   @override
-  String get observation_upload_title => "Upload observations";
+  String get observation_upload_title => "Beobachtungen hochladen";
   @override
   String get plant_sources => "Quellen";
   @override
@@ -5410,7 +5410,7 @@ class $de_DE extends S {
   @override
   String get show_translation => "Übersetzter Text";
   @override
-  String get subscription_monthly_title => "Store photos - monthly";
+  String get subscription_monthly_title => "Speichern Sie Fotos - monatlich";
   @override
   String get taxonomy_subsectio => "Untersektion";
   @override
@@ -5424,7 +5424,7 @@ class $de_DE extends S {
   @override
   String get product_offline_description => "Sie können die Anwendung ohne Internetverbindung ausführen.";
   @override
-  String get product_subscribed => "Subscribed";
+  String get product_subscribed => "Abonniert";
   @override
   String get search_names => "Suche in Namen";
   @override
@@ -5436,19 +5436,19 @@ class $de_DE extends S {
   @override
   String get plant_flowering_to => "-";
   @override
-  String get subscription_yearly_description => "Preserve observation's photos across devices, see shared observations - yearly payment.";
+  String get subscription_yearly_description => "Behalten Sie die Beobachtungsfotos auf allen Geräten, sehen Sie sich die gemeinsamen Beobachtungen an - jährliche Zahlung.";
   @override
   String get taxonomy_familia => "Familie";
   @override
   String get antarctic_continent => "Antarktischer Kontinent";
   @override
-  String get observation_delete => "Delete observation";
+  String get observation_delete => "Beobachtung löschen";
   @override
   String get brazil => "Brasilien";
   @override
   String get eastern_europe => "Osteuropa";
   @override
-  String get product_subscribe => "Subscribe";
+  String get product_subscribe => "Abonnieren";
   @override
   String get offline_download_success => "Fotos und Illustrationen wurden erfolgreich heruntergeladen.";
   @override
@@ -5472,7 +5472,7 @@ class $de_DE extends S {
   @override
   String get pref_language => "Bevorzugte Sprache";
   @override
-  String get observation_photo_delete_question => "Do you want to remove photo from the observation?";
+  String get observation_photo_delete_question => "Möchten Sie das Foto aus der Beobachtung entfernen?";
   @override
   String get new_zealand => "Neuseeland";
   @override
@@ -5484,7 +5484,7 @@ class $de_DE extends S {
   @override
   String get product_search_title => "Suche nach Namen oder Taxonomie";
   @override
-  String get observation_not_saved => "Observation was incomplete thus it wasn't saved. Location or photo is misssing.";
+  String get observation_not_saved => "Die Beobachtung wurde nicht abgeschlossen, so dass nichts gespeichert wurde. Ort oder Foto fehlt.";
   @override
   String get feedback_review => "Sie können eine positive Bewertung schreiben.";
   @override
@@ -5504,9 +5504,9 @@ class $de_DE extends S {
   @override
   String get feedback_submit_translate_app => "Verbessere den Text der Anwendung";
   @override
-  String get subscription_yearly_title => "Store photos - yearly";
+  String get subscription_yearly_title => "Speichern Sie Fotos - jährlich";
   @override
-  String get observation_upload_progress => "Uploading observations...";
+  String get observation_upload_progress => "Beobachtungen hochladen...";
   @override
   String get product_offline_title => "Offline-Modus";
   @override
@@ -5526,7 +5526,7 @@ class $de_DE extends S {
   @override
   String get feedback => "Feedback / Beitrag";
   @override
-  String get subscription_monthly_description => "Preserve observation's photos across devices, see shared observations - monthly payment.";
+  String get subscription_monthly_description => "Behalten Sie die Beobachtungsfotos auf allen Geräten, sehen Sie sich die gemeinsamen Beobachtungen an - monatliche Zahlung.";
   @override
   String get southwestern_usa => "Südwesten U.S.A.";
   @override
@@ -5558,9 +5558,9 @@ class $de_DE extends S {
   @override
   String get taxonomy_serie => "Serie";
   @override
-  String get subscription_info => "Shared observations are visible only for subscribed users.";
+  String get subscription_info => "Gemeinsame Beobachtungen sind nur für abonnierte Benutzer sichtbar.";
   @override
-  String get product_photo_search_description => "You'll be able to find a flower by photo. This feature is using Google AI for labeling photos.";
+  String get product_photo_search_description => "Sie können eine Blume per Foto finden. Diese Funktion verwendet Artificial Intelligence zum Beschriften von Fotos von Google.";
   @override
   String get auth_phone => "Mit einer Telefonnummer anmelden";
   @override
@@ -5574,7 +5574,7 @@ class $de_DE extends S {
   @override
   String get auth_email_hint => "E-Mail-Adresse";
   @override
-  String get promotion_title => "Promotion";
+  String get promotion_title => "Bezahlte Funktion";
   @override
   String get habitat_garden => "Gärten oder Felder";
   @override
@@ -5584,15 +5584,15 @@ class $de_DE extends S {
   @override
   String get west_central_tropical_africa => "West-Zentrales tropisches Afrika";
   @override
-  String get observation_photo_duplicate => "Duplicate photo. Skipped.";
+  String get observation_photo_duplicate => "Das Foto wurde bereits hinzugefügt.";
   @override
-  String get subscription => "Subscription";
+  String get subscription => "Abonnement";
   @override
   String get plant_toxicity => "Toxizität";
   @override
   String get snack_no_flowers => "Keine Blumen die den Kriterien entsprechen.";
   @override
-  String get observation_saved => "Observation was saved.";
+  String get observation_saved => "Beobachtung wurde gespeichert.";
   @override
   String get rate_question => "Ist diese Anwendung hilfreich?";
   @override
@@ -5608,7 +5608,7 @@ class $de_DE extends S {
   @override
   String get mongolia => "Mongolei";
   @override
-  String get product_photo_search_title => "Search by photo";
+  String get product_photo_search_title => "Suche nach Foto";
   @override
   String get taxonomy_subgenus => "Untergattung";
   @override
@@ -5630,7 +5630,7 @@ class $de_DE extends S {
   @override
   String get color_white => "Weiß";
   @override
-  String get observation => "Observation";
+  String get observation => "Beobachtung";
   @override
   String get northeastern_usa => "Nordöstlich U.S.A.";
   @override
@@ -5660,7 +5660,7 @@ class $de_DE extends S {
   @override
   String get auth_phone_hint => "Telefonnummer";
   @override
-  String get product_observations_description => "You'll be able to save your own observations with flower name, date, location, photos and notes.";
+  String get product_observations_description => "Sie können Ihre eigenen Beobachtungen mit Blumenname, Datum, Ort, Fotos und Notizen speichern.";
   @override
   String get plant_trivia => "Wissenswertes";
   @override
@@ -5696,13 +5696,13 @@ class $de_DE extends S {
   @override
   String get always_my_region_title => "Fügen Sie meine Region immer dem Filter hinzu";
   @override
-  String get observation_upload_fail => "Upload failed. Please check your internet connection and try again.";
+  String get observation_upload_fail => "Upload fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.";
   @override
   String get color_yellow => "Gelb";
   @override
   String get subantarctic_islands => "Subantarktische Inseln";
   @override
-  String get product_observations_title => "Observations";
+  String get product_observations_title => "Beobachtungen";
   @override
   String get new_version => "Eine neue Version ist verfügbar, bitte updaten.";
   @override
@@ -5740,7 +5740,7 @@ class $de_DE extends S {
   @override
   String get northeast_tropical_africa => "Nordost-tropisches Afrika";
   @override
-  String get observations => "Observations";
+  String get observations => "Beobachtungen";
   @override
   String get product_custom_filter_title => "Benutzerdefinierte Filter";
   @override
@@ -5754,11 +5754,11 @@ class $de_DE extends S {
   @override
   String get improve_translation => "Übersetzung verbessern";
   @override
-  String get observation_delete_question => "Do you want to delete the observation?";
+  String get observation_delete_question => "Möchten Sie die Beobachtung löschen?";
   @override
   String get southeastern_usa => "Südöstlich U.S.A.";
   @override
-  String get product_subscribe_failed => "Subscription failed";
+  String get product_subscribe_failed => "Kauf gescheitert";
   @override
   String get plant_height_from => "Höhe";
   @override
@@ -5768,7 +5768,7 @@ class $de_DE extends S {
   @override
   String get auth_empty_password => "Pflichtfeld";
   @override
-  String get observation_upload_success => "Observations have been successfully uploaded.";
+  String get observation_upload_success => "Beobachtungen wurden erfolgreich hochgeladen.";
   @override
   String get plant_inflorescence => "Blütenstand";
   @override
@@ -5782,11 +5782,11 @@ class $de_DE extends S {
   @override
   String get auth_invalid_code => "Geben Sie einen gültigen SMS-Code ein";
   @override
-  String promotion_content(String date) => "This is a promotion. The feature will available until $date";
+  String promotion_content(String date) => "Dies ist eine kostenpflichtige Funktion. Sie können es bis $date kostenlos nutzen.";
   @override
   String auth_reset_password_email_message(String _email) => "Folgen Sie den Anweisungen, die an $_email gesendet wurden, um Ihr Passwort zurückzusetzen.";
   @override
-  String observation_upload_message(String param) => "You're going to upload $param observations. Please check if your device is connected to wi-fi. Are you ready for an upload?";
+  String observation_upload_message(String param) => "Sie werden $param Beobachtungen hochladen. Bitte überprüfen Sie, ob Ihr Gerät mit Wi-Fi verbunden ist. Bist du bereit für einen Hochladen?";
 }
 
 class $hu_HU extends S {
