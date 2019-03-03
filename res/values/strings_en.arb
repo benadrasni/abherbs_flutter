@@ -249,7 +249,7 @@
 
   "observation": "Observation",
   "observations": "Observations",
-  "observation_note": "Place for your private notes.",
+  "observation_note": "Place for your private note.",
   "observation_saved": "Observation was saved.",
   "observation_not_saved": "Observation was incomplete thus it wasn't saved. Location or photo is misssing.",
   "observation_delete": "Delete observation",
@@ -271,6 +271,6 @@
   "subscription_intro2": "You are about to subscribe for saving and persisting your photos across all your devices. With subscription you agree to share your observations with other subscribed users. You'll also be able to see their observations. All shared observations are anonymous and its note stays private and won't be shared. To simplify process your photos will be shared under CC0 (Creative Commons Zero) licence, so you also agree with this.",
   "subscription_intro3": "If you still hesitate to hit the button below, there is a 30 days trial period for both subscriptions.",
 
-  "promotion_title": "Promotion",
-  "promotion_content": "This is a promotion. The feature will available until $date"
+  "promotion_title": "Paid feature",
+  "promotion_content": "This is a paid feature. You can use it for free until $date"
 }

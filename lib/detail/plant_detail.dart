@@ -150,7 +150,7 @@ class _PlantDetailState extends State<PlantDetail> {
       });
     } else {
       subscriptionDialog(context, S.of(context).subscription, S.of(context).subscription_info).then((value) {
-        if (value) {
+        if (value != null && value) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Subscription(widget.onBuyProduct)),
