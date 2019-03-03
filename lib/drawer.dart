@@ -166,7 +166,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => FeedbackScreen()),
+          MaterialPageRoute(builder: (context) => FeedbackScreen(widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
         ).then((result) {
           Navigator.pop(context);
         });

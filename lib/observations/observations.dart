@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/observations/observation_view.dart';
 import 'package:abherbs_flutter/observations/observation_upload.dart';
+import 'package:abherbs_flutter/observations/observation_view.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/purchase/subscription.dart';
+import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,11 +40,22 @@ class _ObservationsState extends State<Observations> {
   Future<int> _countUploadF;
 
   void _setIsPublic(bool isPublic) {
-    setState(() {
-      _isPublic = isPublic;
-      _key = _isPublic ? _publicKey : _privateKey;
-      _query = _isPublic ? _publicQuery : _privateQuery;
-    });
+    if (Purchases.isSubscribed()) {
+      setState(() {
+        _isPublic = isPublic;
+        _key = _isPublic ? _publicKey : _privateKey;
+        _query = _isPublic ? _publicQuery : _privateQuery;
+      });
+    } else {
+      subscriptionDialog(context, S.of(context).subscription, S.of(context).subscription_info).then((value) {
+        if (value) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Subscription(widget.onBuyProduct)),
+          );
+        }
+      });
+    }
   }
 
   void _setCountUploadF() {

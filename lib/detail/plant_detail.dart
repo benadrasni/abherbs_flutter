@@ -4,17 +4,18 @@ import 'dart:convert';
 import 'package:abherbs_flutter/detail/plant_detail_gallery.dart';
 import 'package:abherbs_flutter/detail/plant_detail_info.dart';
 import 'package:abherbs_flutter/detail/plant_detail_taxonomy.dart';
-import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/entity/translations.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/observations/observation_plant.dart';
 import 'package:abherbs_flutter/keys.dart';
-import 'package:abherbs_flutter/settings/offline.dart';
+import 'package:abherbs_flutter/observations/observation_plant.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/purchase/subscription.dart';
+import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -143,9 +144,20 @@ class _PlantDetailState extends State<PlantDetail> {
   }
 
   void _setIsPublic(bool isPublic) {
-    setState(() {
-      _isPublic = isPublic;
-    });
+    if (Purchases.isSubscribed()) {
+      setState(() {
+        _isPublic = isPublic;
+      });
+    } else {
+      subscriptionDialog(context, S.of(context).subscription, S.of(context).subscription_info).then((value) {
+        if (value) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Subscription(widget.onBuyProduct)),
+          );
+        }
+      });
+    }
   }
 
   _onAuthStateChanged(FirebaseUser user) {
