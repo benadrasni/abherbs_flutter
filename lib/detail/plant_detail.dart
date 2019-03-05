@@ -138,7 +138,7 @@ class _PlantDetailState extends State<PlantDetail> {
       case 2:
         return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF);
       case 3:
-        return ObservationsPlant(_currentUser, Localizations.localeOf(context), widget.onChangeLanguage, widget.onBuyProduct, _isPublic, widget.plant.name);
+        return ObservationsPlant(_currentUser, Localizations.localeOf(context), widget.onChangeLanguage, widget.onBuyProduct, _isPublic, widget.plant.name, _key);
     }
     return null;
   }
