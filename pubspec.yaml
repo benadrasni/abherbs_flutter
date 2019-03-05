@@ -18,7 +18,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   shared_preferences:
-  firebase_database: 2.0.1+1
+  firebase_database: 2.0.2
   firebase_messaging: 4.0.0+1
   firebase_admob: 0.8.0+3
   firebase_analytics: 2.0.2+1
