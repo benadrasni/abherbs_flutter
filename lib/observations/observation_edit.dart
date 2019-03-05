@@ -40,43 +40,58 @@ class _ObservationEditState extends State<ObservationEdit> {
 
   Future<void> _getImage(GlobalKey<ScaffoldState> _key, ImageSource source) async {
     var image = await ImagePicker.pickImage(source: source);
-    Map<String, IfdTag> exifData = await readExifFromBytes(await image.readAsBytes());
-    IfdTag dateTime = exifData['Image DateTime'];
-    for (String path in _observation.photoPaths) {
-      File file =  await Offline.getLocalFile(path);
-      Map<String, IfdTag> exifDataFile = await readExifFromBytes(await file.readAsBytes());
-      IfdTag dateTimeFile = exifDataFile['Image DateTime'];
-      if (dateTime != null && dateTimeFile != null && dateTime.toString() == dateTimeFile.toString()) {
-        _key.currentState.showSnackBar(SnackBar(
-          content: Text(S.of(context).observation_photo_duplicate),
-        ));
-        return;
+    if (image != null) {
+      Map<String, IfdTag> exifData = await readExifFromBytes(
+          await image.readAsBytes());
+      IfdTag dateTime = exifData['Image DateTime'];
+      for (String path in _observation.photoPaths) {
+        File file = await Offline.getLocalFile(path);
+        Map<String, IfdTag> exifDataFile = await readExifFromBytes(
+            await file.readAsBytes());
+        IfdTag dateTimeFile = exifDataFile['Image DateTime'];
+        if (dateTime != null && dateTimeFile != null &&
+            dateTime.toString() == dateTimeFile.toString()) {
+          _key.currentState.showSnackBar(SnackBar(
+            content: Text(S
+                .of(context)
+                .observation_photo_duplicate),
+          ));
+          return;
+        }
       }
-    }
 
-    // store file
-    var dir = storageObservations + widget.currentUser.uid + '/' + _observation.plant.replaceAll(' ', '_');
-    var prefix = "unknown_";
-    var names = _observation.plant.toLowerCase().split(' ');
-    if (names.length > 1) {
-      prefix = names[0].substring(0, 1) + names[1].substring(0, 1) + '_';
-    }
-    var suffix =
-        image.path.indexOf('.', image.path.lastIndexOf('/')) > -1 ? image.path.substring(image.path.lastIndexOf('.')) : defaultPhotoExtension;
-    var filename = prefix + DateTime.now().millisecondsSinceEpoch.toString() + suffix;
+      // store file
+      var dir = storageObservations + widget.currentUser.uid + '/' +
+          _observation.plant.replaceAll(' ', '_');
+      var prefix = "unknown_";
+      var names = _observation.plant.toLowerCase().split(' ');
+      if (names.length > 1) {
+        prefix = names[0].substring(0, 1) + names[1].substring(0, 1) + '_';
+      }
+      var suffix =
+      image.path.indexOf('.', image.path.lastIndexOf('/')) > -1 ? image.path
+          .substring(image.path.lastIndexOf('.')) : defaultPhotoExtension;
+      var filename = prefix + DateTime
+          .now()
+          .millisecondsSinceEpoch
+          .toString() + suffix;
 
-    String rootPath = (await getApplicationDocumentsDirectory()).path;
-    await Directory('$rootPath/$dir').create(recursive: true);
-    image.copy('$rootPath/$dir/$filename');
-    _observation.photoPaths.add('$dir/$filename');
+      String rootPath = (await getApplicationDocumentsDirectory()).path;
+      await Directory('$rootPath/$dir').create(recursive: true);
+      image.copy('$rootPath/$dir/$filename');
+      _observation.photoPaths.add('$dir/$filename');
 
-    // store exif data
-    if (exifData != null && exifData.isNotEmpty) {
-      _observation.latitude = getLatitudeFromExif(exifData['GPS GPSLatitudeRef'], exifData['GPS GPSLatitude']);
-      _observation.longitude = getLongitudeFromExif(exifData['GPS GPSLongitudeRef'], exifData['GPS GPSLongitude']);
-      _observation.date = getDateTimeFromExif(exifData['Image DateTime']) ?? DateTime.now();
+      // store exif data
+      if (exifData != null && exifData.isNotEmpty) {
+        _observation.latitude = getLatitudeFromExif(
+            exifData['GPS GPSLatitudeRef'], exifData['GPS GPSLatitude']);
+        _observation.longitude = getLongitudeFromExif(
+            exifData['GPS GPSLongitudeRef'], exifData['GPS GPSLongitude']);
+        _observation.date =
+            getDateTimeFromExif(exifData['Image DateTime']) ?? DateTime.now();
+      }
+      setState(() {});
     }
-    setState(() {});
   }
 
   Future<void> _deleteImage(int position) async {
@@ -95,7 +110,7 @@ class _ObservationEditState extends State<ObservationEdit> {
         _observation.id = widget.currentUser.uid + '_' + _observation.date.millisecondsSinceEpoch.toString();
       }
       _observation.order = -1 * _observation.date.millisecondsSinceEpoch;
-      _observation.note = _noteController.text;
+      _observation.note = _noteController.text.isNotEmpty ? _noteController.text : null;
 
       await privateObservationsReference
           .child(widget.currentUser.uid)
