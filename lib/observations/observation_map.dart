@@ -24,6 +24,7 @@ class _ObservationMapState extends State<ObservationMap> {
   DateFormat _timeFormat;
   MarkerId _markerId;
   Map<MarkerId, Marker> _markers = <MarkerId, Marker>{};
+  Future<String> nameF;
 
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
@@ -43,7 +44,8 @@ class _ObservationMapState extends State<ObservationMap> {
 
   void _onSaveButtonPressed(BuildContext context) {
     Marker marker = _markers[_markerId];
-    Navigator.pop(context, LatLng(marker.position.latitude, marker.position.longitude));
+    Navigator.pop(
+        context, LatLng(marker.position.latitude, marker.position.longitude));
   }
 
   @override
@@ -61,12 +63,8 @@ class _ObservationMapState extends State<ObservationMap> {
         widget.observation.longitude ?? 0.0,
       ),
     );
-  }
 
-  @override
-  Widget build(BuildContext context) {
-
-    Future<String> nameF = translationCache.containsKey(widget.observation.plant)
+    nameF = translationCache.containsKey(widget.observation.plant)
         ? Future<String>(() {
             return translationCache[widget.observation.plant];
           })
@@ -83,14 +81,21 @@ class _ObservationMapState extends State<ObservationMap> {
               return null;
             }
           });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     var widgets = <Widget>[];
     widgets.add(GoogleMap(
       onMapCreated: _onMapCreated,
       trackCameraPosition: true,
       initialCameraPosition: CameraPosition(
-        target: LatLng(widget.observation.latitude ?? 0.0, widget.observation.longitude ?? 0.0),
-        zoom: widget.observation.latitude == null || widget.observation.longitude == null ? 1 : 13,
+        target: LatLng(widget.observation.latitude ?? 0.0,
+            widget.observation.longitude ?? 0.0),
+        zoom: widget.observation.latitude == null ||
+                widget.observation.longitude == null
+            ? 1
+            : 13,
       ),
       markers: Set<Marker>.of(_markers.values),
     ));
@@ -142,9 +147,12 @@ class _ObservationMapState extends State<ObservationMap> {
                 return ListTile(
                   title: Text(
                     labelLocal,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
-                  subtitle: labelLocal != widget.observation.plant ? Text(widget.observation.plant) : null,
+                  subtitle: labelLocal != widget.observation.plant
+                      ? Text(widget.observation.plant)
+                      : null,
                   trailing: Column(
                     children: [
                       Text(_dateFormat.format(widget.observation.date)),
