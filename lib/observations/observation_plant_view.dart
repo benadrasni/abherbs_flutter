@@ -1,4 +1,5 @@
 import 'package:abherbs_flutter/entity/observation.dart';
+import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/observations/observation_edit.dart';
 import 'package:abherbs_flutter/observations/observation_map.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -15,8 +16,8 @@ class ObservationPlantView extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Observation observation;
-
-  ObservationPlantView(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.observation);
+  final GlobalKey<ScaffoldState> parentKey;
+  ObservationPlantView(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.observation, this.parentKey);
 
   @override
   _ObservationPlantViewState createState() => _ObservationPlantViewState();
@@ -65,7 +66,13 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
             context,
             MaterialPageRoute(
                 builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.observation)),
-          );
+          ).then((value) {
+            if (value) {
+              widget.parentKey.currentState.showSnackBar(SnackBar(
+                content: Text(S.of(context).observation_saved),
+              ));
+            }
+          });
         }
       },
     ));

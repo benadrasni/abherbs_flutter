@@ -363,7 +363,7 @@ class _ObservationEditState extends State<ObservationEdit> {
         onPressed: () {
           _saveObservation(context).then((result) {
             if (result) {
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(true);
             }
           });
         },

@@ -17,7 +17,8 @@ class ObservationsPlant extends StatefulWidget {
   final void Function(PurchasedItem) onBuyProduct;
   final bool isPublic;
   final String plantName;
-  ObservationsPlant(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.isPublic, this.plantName);
+  final GlobalKey<ScaffoldState> parentKey;
+  ObservationsPlant(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.isPublic, this.plantName, this.parentKey);
 
   @override
   _ObservationsPlantState createState() => _ObservationsPlantState();
@@ -70,7 +71,7 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
             query: _query,
             itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
               Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
-              return ObservationPlantView(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, observation);
+              return ObservationPlantView(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, observation, widget.parentKey);
             }),
         Positioned(
           bottom: 20.0,
@@ -87,7 +88,12 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, observation)),
-              ).then((_) {
+              ).then((value) {
+                if (value != null && value) {
+                  widget.parentKey.currentState.showSnackBar(SnackBar(
+                    content: Text(S.of(context).observation_saved),
+                  ));
+                }
                 setState(() {});
               });
             },
