@@ -268,5 +268,11 @@
   "subscription_intro3": "Ak ešte stále váhate so stlačením tlačidla na konci stránky, tak predplatné obsahuje skúšobnú dobu 30 dní, počas ktorých bude zadarmo.",
 
   "promotion_title": "Platená funkcia",
-  "promotion_content": "Toto je platená funkcia. Voľne dostupná bude do $date"
+  "promotion_content": "Toto je platená funkcia. Voľne dostupná bude do $date",
+
+  "photo_search_no_login": "Vyhľadávanie podľa fotografie je dostupné iba pre prihlásených používateľov. Prihláste sa, prosím.",
+  "photo_search_failed": ">Vyhľadávanie bolo neúspešné. Skontrolujte svoje pripojenie na internet a skúse znova.",
+  "photo_to_search_by": "Fotka, podľa ktorej sa vyhľadáva",
+  "photo_search_note": "Toto je experimentálna funkcia, ktorá funguje iba online. Niekedy nájde presne to, čo hľadáte, niekedy sa ani nepriblíži. Úplne sa v tom spolieham na Google, keďže ide o ich softvér. Časom by to malo byť lepšie a lepšie, ale táto funkcia nie je primárne určená na rozpoznávanie kvetín. Používajte ju uvážlivo a, prosím, nehodnoťte celú aplikáciu na základe tohto experimentu. Za účelom zvyšovania kvality budú všetky výsledky vyhľadávania (nie fotografie) uložené.",
+  "photo_search_empty": "Google UI (umelá inteligencia) na obrázku nerozoznala žiadnu konkrétnu kvetinu. Skúste znova s iným uhlom, vzdialenosťou alebo svetelnými podmienkami. Ak ste to už urobili, vyzerá to tak, že nový UI vládca nepríde tak skoro."
 }

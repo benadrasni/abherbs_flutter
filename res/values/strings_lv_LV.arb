@@ -270,5 +270,11 @@
   "subscription_intro3": "Ja jūs joprojām nevilcinieties, lai sasniegtu zemāk redzamo pogu, abiem abonementiem ir 30 dienu izmēģinājuma periods.",
 
   "promotion_title": "Maksas funkcija",
-  "promotion_content": "Tā ir maksas funkcija. To var izmantot bez maksas līdz $date"
+  "promotion_content": "Tā ir maksas funkcija. To var izmantot bez maksas līdz $date",
+
+  "photo_search_no_login": "Meklēšana pēc fotoattēla ir pieejama tikai reģistrētiem lietotājiem. Lūdzu, piesakieties.",
+  "photo_search_failed": "Meklēšana pēc fotoattēla neizdevās. Pārbaudiet savu interneta savienojumu un mēģiniet vēlreiz.",
+  "photo_to_search_by": "Fotoattēls meklēšanai pēc",
+  "photo_search_note": "Šī ir eksperimentāla funkcija, kas darbojas tikai tiešsaistē. Dažreiz tā atrod tieši to, ko meklējat, dažreiz pat ne tuvu. Es esmu pilnīgi paļauties uz Google, jo viņi dara visu smago darbu. Laika gaitā tai vajadzētu būt labākai un labākai, bet tas nebija galvenokārt veidots ziedu atpazīšanai. Izmantojiet to saprātīgi un, neskatoties uz šo eksperimentu, nelietojiet visu pieteikumu. Kvalitātes nolūkos tiks saglabāti visi meklēšanas rezultāti (nevis fotoattēli).",
+  "photo_search_empty": "Google MI (mākslīgais intelekts) neatpazina kādu konkrētu ziedu attēlā. Mēģiniet vēlreiz ar dažādiem leņķa, attāluma vai gaismas apstākļiem. Ja jūs jau to darāt, izskatās, ka MI virsnieks drīzumā nenāks."
 }

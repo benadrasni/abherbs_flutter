@@ -270,5 +270,11 @@
   "subscription_intro3": "Jei vis dar nedvejodami paspausite žemiau esantį mygtuką, abiejų prenumeratų bandomojo laikotarpio trukmė yra 30 dienų.",
 
   "promotion_title": "Mokama funkcija",
-  "promotion_content": "Tai mokama funkcija. Ją galite naudoti nemokamai iki $date"
+  "promotion_content": "Tai mokama funkcija. Ją galite naudoti nemokamai iki $date",
+
+  "photo_search_no_login": "Ieškoti pagal nuotrauką galima tik prisijungusiems vartotojams. Prašome prisijungti.",
+  "photo_search_failed": "Nepavyko ieškoti pagal nuotrauką. Patikrinkite interneto ryšį ir bandykite dar kartą.",
+  "photo_to_search_by": "Nuotraukas ieškoti pagal",
+  "photo_search_note": "Tai eksperimentinė funkcija, kuri veikia tik internete. Kartais jis randa tiksliai tai, ko ieškote, kartais net arti. Aš visiškai pasitikiu „Google“, nes jie daro visą sunkų darbą. Laikui bėgant, jis turėtų būti geresnis ir geresnis, tačiau jis nebuvo pastatytas pirmiausia gėlių pripažinimui. Naudokite ją išmintingai ir nediskriminuokite visos paraiškos pagal šį eksperimentą. Kokybės tikslais bus išsaugoti visi paieškos rezultatai (ne nuotraukos).",
+  "photo_search_empty": "„Google“ DI (dirbtinis intelektas) neatpažino jokios konkrečios gėlių ant nuotraukos. Bandykite dar kartą su skirtingais kampais, atstumu arba šviesos sąlygomis. Jei jau tai padarėte, atrodo, kad DI viršininkas netrukus ateis."
 }

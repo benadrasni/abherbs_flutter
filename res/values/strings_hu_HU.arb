@@ -270,5 +270,11 @@
   "subscription_intro3": "Ha még mindig habozott eltalálni az alábbi gombot, mindkét előfizetés esetében 30 napos próbaidő van.",
 
   "promotion_title": "Fizetett szolgáltatás",
-  "promotion_content": "Ez fizetett funkció. A $date ingyenesen használhatja"
+  "promotion_content": "Ez fizetett funkció. A $date ingyenesen használhatja",
+
+  "photo_search_no_login": "A fotókeresés csak naplózott felhasználók számára érhető el. Kérjük jelentkezzen be.",
+  "photo_search_failed": "A fénykép keresése sikertelen. Ellenőrizze az internetkapcsolatot és próbálja újra.",
+  "photo_to_search_by": "Fénykép a kereséshez",
+  "photo_search_note": "Ez egy kísérleti funkció, amely csak online működik. Néha pontosan megtalálja azt, amit keres, néha még közel sem. Teljesen támaszkodom a Google-ra, hiszen minden kemény munkát végeznek. Ahogy az idő megy, jobbnak és jobbnak kell lennie, de nem elsősorban a virág elismerésére épült. Használja okosan, és ne vizsgálja meg a teljes alkalmazást a kísérlet alapján. Minőségi okokból minden keresési eredmény (nem fotó) mentésre kerül.",
+  "photo_search_empty": "A Google MI (mesterséges intelligencia) nem ismerte fel a képen látható virágot. Próbálkozzon újra különböző szög, távolság vagy fényviszonyokkal. Ha már csináltad, úgy tűnik, hogy az MI overlord hamarosan nem jön."
 }
