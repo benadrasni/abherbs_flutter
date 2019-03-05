@@ -211,7 +211,7 @@ class _PlantDetailState extends State<PlantDetail> {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(flex: 2, child: GestureDetector(
+                  Expanded(flex: 3, child: GestureDetector(
                     child: Text(widget.plant.name),
                     onLongPress: () {
                       Clipboard.setData(new ClipboardData(text: widget.plant.name));
@@ -220,7 +220,7 @@ class _PlantDetailState extends State<PlantDetail> {
                       ));
                     },
                   ),),
-                  Expanded(flex: 1, child: Row(
+                  Expanded(flex: 2, child: Row(
                     children: [
                       Icon(Icons.person),
                       Switch(
