@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/signin/email.dart';
 import 'package:abherbs_flutter/signin/phone.dart';
@@ -34,19 +33,6 @@ class _SignInScreenState extends State<SignInScreen> {
           print('Signed in: $userId');
         }
       }
-    } catch (e) {
-      key.currentState.showSnackBar(new SnackBar(
-        content: new Text(S.of(context).auth_sign_in_failed),
-      ));
-    }
-  }
-
-  _handleTwitterSignIn(GlobalKey<ScaffoldState> key) async {
-    try {
-      var twitterCredential = TwitterAuthProvider.getCredential(authToken: twitterAccessKey, authTokenSecret: twitterAccessSecret);
-      String userId = await Auth.signInWithCredential(twitterCredential);
-      Navigator.pop(context);
-      print('Signed in: $userId');
     } catch (e) {
       key.currentState.showSnackBar(new SnackBar(
         content: new Text(S.of(context).auth_sign_in_failed),
@@ -136,25 +122,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       _handleGoogleSignIn(key);
                     }),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
-                child: RaisedButton(
-                    color: Color.fromRGBO(29, 161, 242, 1.0),
-                    child: Row(
-                      children: [
-                        Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/twitter-logo.png')),
-                        Expanded(
-                          child: Text(
-                            S.of(context).auth_twitter,
-                            style: new TextStyle(color: Colors.white, fontSize: 18.0),
-                          ),
-                        )
-                      ],
-                    ),
-                    onPressed: () {
-                      _handleTwitterSignIn(key);
-                    }),
-              )
             ],
           ),
         ));
