@@ -270,5 +270,11 @@
   "subscription_intro3": "Hvis du fortsatt nøler med å trykke på knappen nedenfor, er det en prøveperiode på 30 dager for begge abonnementene.",
 
   "promotion_title": "Betalt funksjon",
-  "promotion_content": "Dette er en betalt funksjon. Du kan bruke det gratis til $date"
+  "promotion_content": "Dette er en betalt funksjon. Du kan bruke det gratis til $date",
+
+  "photo_search_no_login": "Søk etter bilde er bare tilgjengelig for loggede brukere. Vennligst Logg inn.",
+  "photo_search_failed": "Søk etter bilde mislyktes. Sjekk Internett-tilkoblingen din og prøv igjen.",
+  "photo_to_search_by": "Bilde å søke etter",
+  "photo_search_note": "Dette er en eksperimentell funksjon som bare fungerer online. Noen ganger finner den akkurat det du leter etter, noen ganger ikke engang i nærheten. Jeg er helt stolt på Google her, siden de gjør alt hardt arbeid. Etter hvert som tiden går, bør det bli bedre og bedre, men det ble ikke primært bygget for blomsters anerkjennelse. Bruk det klokt og vær så snill å ikke dømme hele applikasjonen basert på dette eksperimentet. For kvalitetsmål blir alle søkeresultatene (ikke bilder) lagret.",
+  "photo_search_empty": "Google KI (kunstig intelligens) kjente ikke noen bestemt blomst på bildet. Prøv igjen med forskjellige vinkel-, avstands- eller lysforhold. Hvis du allerede gjorde det, ser det ut som at KI overlord ikke kommer når som helst snart."
 }

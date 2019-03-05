@@ -270,5 +270,11 @@
   "subscription_intro3": "Als je nog steeds aarzelt om op de knop hieronder te klikken, is er een proefperiode van 30 dagen voor beide abonnementen.",
 
   "promotion_title": "Betaalde functie",
-  "promotion_content": "Dit is een betaalde functie. Je kunt het gratis gebruiken tot $date"
+  "promotion_content": "Dit is een betaalde functie. Je kunt het gratis gebruiken tot $date",
+
+  "photo_search_no_login": "Zoeken op foto is alleen beschikbaar voor aangemelde gebruikers. Log alstublieft in.",
+  "photo_search_failed": "Zoeken op foto is mislukt. Controleer uw internetverbinding en probeer het opnieuw.",
+  "photo_to_search_by": "Foto om op te zoeken",
+  "photo_search_note": "Dit is een experimentele functie die alleen online werkt. Soms vindt het precies wat u zoekt, soms zelfs niet in de buurt. Ik vertrouw hier volledig op Google omdat ze al het harde werk doen. Naarmate de tijd vordert zou het beter en beter moeten worden, maar het was niet in de eerste plaats gebouwd voor de herkenning van bloemen. Gebruik het verstandig en veroordeel de hele applicatie niet op basis van dit experiment. Voor kwaliteitsdoeleinden worden alle zoekresultaten (niet foto's) opgeslagen.",
+  "photo_search_empty": "Google KI (kunstmatige intelligentie) herkende geen enkele specifieke bloem op de foto. Probeer het opnieuw met verschillende hoeken, afstanden of lichtomstandigheden. Als je het al hebt gedaan, ziet het er naar uit dat KI-oploper niet snel zal komen."
 }

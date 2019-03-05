@@ -270,5 +270,11 @@
   "subscription_intro3": "Kui te ikka veel allpool olevat nuppu tabate, on mõlema tellimuse jaoks 30-päevane prooviperiood.",
 
   "promotion_title": "Tasuline funktsioon",
-  "promotion_content": "See on tasuline funktsioon. Võite seda kasutada kuni $date"
+  "promotion_content": "See on tasuline funktsioon. Võite seda kasutada kuni $date",
+
+  "photo_search_no_login": "Fotode otsing on saadaval ainult logitud kasutajatele. Palun logige sisse.",
+  "photo_search_failed": "Otsing foto järgi nurjus. Kontrollige oma Interneti-ühendust ja proovige uuesti.",
+  "photo_to_search_by": "Foto otsimiseks",
+  "photo_search_note": "See on eksperimentaalne funktsioon, mis töötab ainult võrgus. Mõnikord leiab ta täpselt seda, mida otsite, mõnikord isegi lähedal. Ma olen täiesti Google'ist siin, sest nad teevad kõvasti tööd. Aja möödudes peaks see olema parem ja parem, kuid seda ei ehitatud peamiselt lille tunnustamiseks. Kasutage seda targalt ja ärge hinnake kogu seda rakendust selle katse põhjal. Kvaliteedi eesmärgil salvestatakse kõik otsingutulemused (mitte fotod).",
+  "photo_search_empty": "Google'i AI (tehisintellekt) ei tuvastanud pildil ühtegi konkreetset lille. Proovige uuesti erinevate nurkade, kauguste või valgustingimustega. Kui sa juba tegid, siis näib, et AI ülempreester ei jõua peagi."
 }
