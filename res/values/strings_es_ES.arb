@@ -270,5 +270,11 @@
   "subscription_intro3": "Si aún tiene dudas de presionar el botón de abajo, hay un período de prueba de 30 días para ambas suscripciones.",
 
   "promotion_title": "Característica de pago",
-  "promotion_content": "Esta es una característica de pago. Puedes usarlo gratis hasta $date"
+  "promotion_content": "Esta es una característica de pago. Puedes usarlo gratis hasta $date",
+
+  "photo_search_no_login": "La búsqueda por foto está disponible solo para usuarios registrados. Por favor Iniciar sesión.",
+  "photo_search_failed": "La búsqueda por foto falló. Verifique su conexión a Internet y vuelva a intentarlo.",
+  "photo_to_search_by": "Foto para buscar por",
+  "photo_search_note": "Esta es una característica experimental que funciona solo en línea. A veces encuentra exactamente lo que estás buscando, a veces ni siquiera cerca. Confío plenamente en Google aquí ya que están haciendo todo el trabajo duro. A medida que pasa el tiempo, debería ser mejor y mejor, pero no fue construido principalmente para el reconocimiento de las flores. Úselo con prudencia y no juzgue toda la aplicación en función de este experimento. Por motivos de calidad, todos los resultados de búsqueda (no fotos) se guardarán.",
+  "photo_search_empty": "Google IA (inteligencia artificial) no reconoció ninguna flor en particular en la imagen. Inténtalo de nuevo con diferentes ángulos, distancias o condiciones de luz. Si ya lo hiciste, parece que IA Overlord no vendrá pronto."
 }

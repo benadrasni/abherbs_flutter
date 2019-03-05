@@ -160,6 +160,11 @@ class S implements WidgetsLocalizations {
   String get petal_many => "more than 5";
   String get petal_message => "Is the flower zygomorphic? No? Then how many petals does it have?";
   String get petal_zygomorphic => "zygomorphic";
+  String get photo_search_empty => "Google AI (artificial intelligence) didn't recognize any particular flower on the picture. Try again with different angle, distance or light conditions. If you already did it looks like AI overlord won't come anytime soon.";
+  String get photo_search_failed => "Search by photo failed. Check your internet connection and try again.";
+  String get photo_search_no_login => "Search by photo is available only for logged users. Please log in.";
+  String get photo_search_note => "This is an experimental feature which works only online. Sometimes it finds exactly what you're looking for, sometimes not even close. I'm totally rely on Google here since they're doing all the hard work. As time goes it should be better and better, but it wasn't primarily built for flower's recognition. Use it wisely and please don't judge the whole application based on this experiment. For quality purposes all search results (not photos) will be saved.";
+  String get photo_to_search_by => "Photo to search by";
   String get plant_flower => "Flower";
   String get plant_flowering_from => "Flowering from";
   String get plant_flowering_to => "to";
@@ -300,6 +305,8 @@ class $it_IT extends S {
   @override
   String get east_tropical_africa => "Africa tropicale orientale";
   @override
+  String get photo_search_failed => "Ricerca per foto fallita. Controlla la tua connessione Internet e riprova.";
+  @override
   String get middle_asia => "Asia centrale";
   @override
   String get always_my_region_subtitle => "La tua regione sarà preimpostata sul filtro";
@@ -347,6 +354,8 @@ class $it_IT extends S {
   String get auth_sms_terms_of_service => "Se tocchi “Verifica numero di telefono”, è possibile che venga inviato un SMS. Potrebbero essere applicate le tariffe per l'invio dei messaggi e per il traffico dati.";
   @override
   String get habitat_rock => "rocce o montagne";
+  @override
+  String get photo_search_note => "Questa è una funzionalità sperimentale che funziona solo online. A volte trova esattamente quello che stai cercando, a volte nemmeno vicino. Sono totalmente dipendente da Google qui poiché stanno facendo tutto il duro lavoro. Col passare del tempo dovrebbe essere sempre meglio, ma non è stato costruito principalmente per il riconoscimento dei fiori. Usalo saggiamente e per favore non giudicare l'intera applicazione basata su questo esperimento. Per motivi di qualità, tutti i risultati della ricerca (non le foto) verranno salvati.";
   @override
   String get taxonomy_subserie => "Sottoserie";
   @override
@@ -560,6 +569,8 @@ class $it_IT extends S {
   @override
   String get habitat_garden => "giardini o campi";
   @override
+  String get photo_to_search_by => "Foto da cercare";
+  @override
   String get product_purchase => "Acquistare";
   @override
   String get russian_far_east => "Estremo Oriente russo";
@@ -722,6 +733,8 @@ class $it_IT extends S {
   @override
   String get northeast_tropical_africa => "Africa tropicale nordorientale";
   @override
+  String get photo_search_no_login => "La ricerca per foto è disponibile solo per gli utenti registrati. Accedete, per favore.";
+  @override
   String get observations => "Osservazioni";
   @override
   String get product_custom_filter_title => "Filtro personalizzato";
@@ -762,6 +775,8 @@ class $it_IT extends S {
   @override
   String get petal_zygomorphic => "zigomorfi";
   @override
+  String get photo_search_empty => "Google IA (intelligenza artificiale) non ha riconosciuto alcun fiore particolare sull'immagine. Riprovare con diverse angolazioni, distanze o condizioni di luce. Se l'hai già fatto sembra che il signore dell'IA non arriverà presto.";
+  @override
   String get auth_invalid_code => "Inserisci un codice SMS valido";
   @override
   String promotion_content(String date) => "Questa è una funzionalità a pagamento. Puoi usarlo gratuitamente fino a $date";
@@ -801,6 +816,8 @@ class $ru_RU extends S {
   String get auth_verify_email_title => "Подтвердите ваш аккаунт";
   @override
   String get east_tropical_africa => "Восточная тропическая Африка";
+  @override
+  String get photo_search_failed => "Поиск по фото не удался. Проверьте подключение к Интернету и повторите попытку.";
   @override
   String get middle_asia => "Средняя Азия";
   @override
@@ -849,6 +866,8 @@ class $ru_RU extends S {
   String get auth_sms_terms_of_service => "Нажимая кнопку “Подтвердить номер телефона”, вы соглашаетесь получить SMS. За его отправку и обмен данными может взиматься плата.";
   @override
   String get habitat_rock => "скалы или горы";
+  @override
+  String get photo_search_note => "Это экспериментальная функция, которая работает только в Интернете. Иногда он находит именно то, что вы ищете, иногда даже близко. Я полностью полагаюсь на Google здесь, так как они делают всю тяжелую работу. Со временем это должно быть лучше и лучше, но оно не было в основном построено для распознавания цветов. Используйте его с умом и, пожалуйста, не судите о целом заявлении на основе этого эксперимента. Для целей качества все результаты поиска (а не фотографии) будут сохранены.";
   @override
   String get taxonomy_subserie => "Подряд";
   @override
@@ -1062,6 +1081,8 @@ class $ru_RU extends S {
   @override
   String get habitat_garden => "сады или поля";
   @override
+  String get photo_to_search_by => "Фото для поиска по";
+  @override
   String get product_purchase => "Покупать";
   @override
   String get russian_far_east => "Российский Дальний Восток";
@@ -1224,6 +1245,8 @@ class $ru_RU extends S {
   @override
   String get northeast_tropical_africa => "Северо-Восточная тропическая Африка";
   @override
+  String get photo_search_no_login => "Поиск по фотографиям доступен только для зарегистрированных пользователей. Пожалуйста, войдите.";
+  @override
   String get observations => "Наблюдения";
   @override
   String get product_custom_filter_title => "Пользовательский фильтр";
@@ -1264,6 +1287,8 @@ class $ru_RU extends S {
   @override
   String get petal_zygomorphic => "зигоморфный";
   @override
+  String get photo_search_empty => "Google ИИ (искусственный интеллект) не распознал какой-либо конкретный цветок на картинке. Повторите попытку с различными углами, расстояниями или условиями освещения. Если вы уже это сделали, похоже, что повелитель ИИ не придет в ближайшее время.";
+  @override
   String get auth_invalid_code => "Введите действительный код СМС";
   @override
   String promotion_content(String date) => "Это платная функция. Вы можете использовать его бесплатно до $date";
@@ -1303,6 +1328,8 @@ class $pl_PL extends S {
   String get auth_verify_email_title => "Zweryfikuj swoje konto";
   @override
   String get east_tropical_africa => "Wschodnia Afryka Tropikalna";
+  @override
+  String get photo_search_failed => "Wyszukiwanie po zdjęciu nie powiodło się. Sprawdź połączenie internetowe i spróbuj ponownie.";
   @override
   String get middle_asia => "Azja Środkowa";
   @override
@@ -1351,6 +1378,8 @@ class $pl_PL extends S {
   String get auth_sms_terms_of_service => "Gdy klikniesz „Zweryfikuj numer telefonu”, może zostać wysłany SMS. Może to skutkować pobraniem opłaty za przesłanie wiadomości i danych.";
   @override
   String get habitat_rock => "Skały lub góry";
+  @override
+  String get photo_search_note => "Jest to funkcja eksperymentalna, która działa tylko online. Czasami znajdzie dokładnie to, czego szukasz, czasami w ogóle nie trafi. Całkowicie polegam tutaj na Google, ponieważ jest to ich oprogramowanie. Z czasem powinno być coraz lepiej, ale ta funkcja nie była tworzona z myślą o rozpoznawaniu kwiatów. Używaj jej mądrze i nie oceniaj całej aplikacji na podstawie tego eksperymentu. Aby poprawić jakość, wszystkie wyniki wyszukiwania (nie zdjęcia) będą zapisywane.";
   @override
   String get taxonomy_subserie => "Podseria";
   @override
@@ -1564,6 +1593,8 @@ class $pl_PL extends S {
   @override
   String get habitat_garden => "Ogrody lub pola";
   @override
+  String get photo_to_search_by => "Wybierz zdjęcie";
+  @override
   String get product_purchase => "Zakupić";
   @override
   String get russian_far_east => "Rosyjski Daleki Wschód";
@@ -1726,6 +1757,8 @@ class $pl_PL extends S {
   @override
   String get northeast_tropical_africa => "Północno-wschodnia Afryka Tropikalna";
   @override
+  String get photo_search_no_login => "Wyszukiwanie według zdjęcia jest dostępne tylko dla zalogowanych użytkowników. Proszę się zalogować.";
+  @override
   String get observations => "Okaz";
   @override
   String get product_custom_filter_title => "Filtr niestandardowy";
@@ -1766,6 +1799,8 @@ class $pl_PL extends S {
   @override
   String get petal_zygomorphic => "Zygomorficzny";
   @override
+  String get photo_search_empty => "Google SI (sztuczna inteligencja) nie rozpoznaje żadnego konkretnego kwiatu na zdjęciu. Spróbuj ponownie pod różnymi kątami, odległościami lub warunkami oświetlenia. Jeśli już to zrobiłeś, wygląda na to, że władca SI nie pojawi się w najbliższym czasie.";
+  @override
   String get auth_invalid_code => "Wpisz poprawny kod SMS";
   @override
   String promotion_content(String date) => "To jest płatna funkcja. Możesz go używać za darmo do $date";
@@ -1805,6 +1840,8 @@ class $ro_RO extends S {
   String get auth_verify_email_title => "Verifica-ti contul";
   @override
   String get east_tropical_africa => "Africa de Est tropicală";
+  @override
+  String get photo_search_failed => "Căutarea după fotografie a eșuat. Verificați conexiunea la internet și încercați din nou.";
   @override
   String get middle_asia => "Asia centrală";
   @override
@@ -1853,6 +1890,8 @@ class $ro_RO extends S {
   String get auth_sms_terms_of_service => "Dacă atingeți „Confirmați numărul de telefon”, poate fi trimis un SMS. Se pot aplica tarife pentru mesaje și date.";
   @override
   String get habitat_rock => "stânci sau munți";
+  @override
+  String get photo_search_note => "Aceasta este o caracteristică experimentală care funcționează numai online. Uneori găsește exact ceea ce cauți, uneori chiar și aproape. Mă bazez pe Google aici, deoarece fac toată munca grea. Odată cu trecerea timpului ar trebui să fie mai bine și mai bine, dar nu a fost construită în primul rând pentru recunoașterea florilor. Utilizați-l cu înțelepciune și vă rugăm să nu judeca întreaga aplicație bazată pe acest experiment. În scopuri de calitate, toate rezultatele căutării (nu fotografiile) vor fi salvate.";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -2066,6 +2105,8 @@ class $ro_RO extends S {
   @override
   String get habitat_garden => "grădina sau câmp";
   @override
+  String get photo_to_search_by => "Foto pentru a căuta după";
+  @override
   String get product_purchase => "Cumpărare";
   @override
   String get russian_far_east => "Orientul Îndepărtat Rusesc";
@@ -2228,6 +2269,8 @@ class $ro_RO extends S {
   @override
   String get northeast_tropical_africa => "Africa de Nord-Est tropicală";
   @override
+  String get photo_search_no_login => "Căutarea după fotografie este disponibilă numai pentru utilizatorii înregistrați. Va rugam sa va logati.";
+  @override
   String get observations => "Observaţii";
   @override
   String get product_custom_filter_title => "Filtru customizat";
@@ -2268,6 +2311,8 @@ class $ro_RO extends S {
   @override
   String get petal_zygomorphic => "zygomorphic";
   @override
+  String get photo_search_empty => "Google IA (inteligenta artificiala) nu a recunoscut nici o floare particulara in imagine. Încercați din nou cu diferite unghiuri, distanțe sau condiții de lumină. Dacă ați făcut-o deja, arata că IA overlord nu va veni în curând.";
+  @override
   String get auth_invalid_code => "Introduceți un cod SMS valid";
   @override
   String promotion_content(String date) => "Aceasta este o caracteristică plătită. Puteți să-l utilizați gratuit până la $date";
@@ -2307,6 +2352,8 @@ class $hi_IN extends S {
   String get auth_verify_email_title => "अपने खाते को सत्यापित करें";
   @override
   String get east_tropical_africa => "पूर्वी उष्णकटिबंधीय अफ्रीका";
+  @override
+  String get photo_search_failed => "फोटो द्वारा खोज विफल रहा। अपना इंटरनेट कनेक्शन जांचें और पुन: प्रयास करें।";
   @override
   String get middle_asia => "मध्य एशिया";
   @override
@@ -2355,6 +2402,8 @@ class $hi_IN extends S {
   String get auth_sms_terms_of_service => "“फ़ोन नंबर की पुष्टि करें” पर टैप करने पर, एक मैसेज (एसएमएस) भेजा जा सकता है. मैसेज और डेटा दरें लागू हो सकती हैं.";
   @override
   String get habitat_rock => "एक चुनें";
+  @override
+  String get photo_search_note => "यह एक प्रायोगिक विशेषता है जो केवल ऑनलाइन काम करती है। कभी-कभी यह वही पाता है जो आप खोज रहे हैं, कभी-कभी करीब भी नहीं। मैं पूरी तरह से Google पर निर्भर हूं क्योंकि वे पूरी मेहनत कर रहे हैं। समय के साथ यह बेहतर और बेहतर होना चाहिए, लेकिन इसे मुख्य रूप से फूल की मान्यता के लिए नहीं बनाया गया था। इसे बुद्धिमानी से उपयोग करें और कृपया इस प्रयोग के आधार पर पूरे आवेदन का न्याय न करें। गुणवत्ता उद्देश्यों के लिए सभी खोज परिणाम (फ़ोटो नहीं) सहेजे जाएंगे।";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -2568,6 +2617,8 @@ class $hi_IN extends S {
   @override
   String get habitat_garden => "पौधे का उदाहरण";
   @override
+  String get photo_to_search_by => "द्वारा खोज करने के लिए फोटो";
+  @override
   String get product_purchase => "खरीद फरोख्त";
   @override
   String get russian_far_east => "रूसी सुदूर पूर्व";
@@ -2730,6 +2781,8 @@ class $hi_IN extends S {
   @override
   String get northeast_tropical_africa => "पूर्वोत्तर उष्णकटिबंधीय अफ्रीका";
   @override
+  String get photo_search_no_login => "फोटो द्वारा खोज केवल लॉग किए गए उपयोगकर्ताओं के लिए उपलब्ध है। कृपया लॉगिन करें।";
+  @override
   String get observations => "टिप्पणियों";
   @override
   String get product_custom_filter_title => "कस्टम फ़िल्टर";
@@ -2770,6 +2823,8 @@ class $hi_IN extends S {
   @override
   String get petal_zygomorphic => "अनियमित";
   @override
+  String get photo_search_empty => "Google AI (कृत्रिम बुद्धिमत्ता) चित्र पर किसी विशेष फूल को नहीं पहचानता है। अलग कोण, दूरी या प्रकाश स्थितियों के साथ फिर से प्रयास करें। यदि आप पहले से ही ऐसा कर चुके हैं तो ऐसा लगता है कि एआई ओवरलोर्ड जल्द ही कभी नहीं आएगा।";
+  @override
   String get auth_invalid_code => "एक मान्य एसएमएस कोड दर्ज करें";
   @override
   String promotion_content(String date) => "यह एक पेड फीचर है। आप इसे $date तक मुफ्त में उपयोग कर सकते हैं";
@@ -2809,6 +2864,8 @@ class $id_ID extends S {
   String get auth_verify_email_title => "Verifikasi akun anda";
   @override
   String get east_tropical_africa => "Afrika Timur Tropis";
+  @override
+  String get photo_search_failed => "Pencarian berdasarkan foto gagal. Periksa koneksi internet Anda dan coba lagi.";
   @override
   String get middle_asia => "Asia Tengah";
   @override
@@ -2857,6 +2914,8 @@ class $id_ID extends S {
   String get auth_sms_terms_of_service => "Dengan mengetuk \"Verifikasi Nomor Telepon\", SMS dapat dikirim. Tarif pesan & data mungkin berlaku.";
   @override
   String get habitat_rock => "batu atau gunung";
+  @override
+  String get photo_search_note => "Ini adalah fitur eksperimental yang hanya berfungsi online. Terkadang ia menemukan apa yang Anda cari, terkadang bahkan tidak dekat. Saya sepenuhnya bergantung pada Google di sini karena mereka melakukan semua kerja keras. Seiring berjalannya waktu, itu seharusnya lebih baik dan lebih baik, tetapi itu tidak terutama dibangun untuk pengakuan bunga. Gunakan dengan bijak dan tolong jangan menilai seluruh aplikasi berdasarkan percobaan ini. Untuk tujuan kualitas semua hasil pencarian (bukan foto) akan disimpan.";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -3070,6 +3129,8 @@ class $id_ID extends S {
   @override
   String get habitat_garden => "kebun atau ladang";
   @override
+  String get photo_to_search_by => "Foto yang akan dicari";
+  @override
   String get product_purchase => "Membeli";
   @override
   String get russian_far_east => "Timur Jauh Rusia";
@@ -3232,6 +3293,8 @@ class $id_ID extends S {
   @override
   String get northeast_tropical_africa => "Afrika Timur laut Tropis  ";
   @override
+  String get photo_search_no_login => "Pencarian berdasarkan foto hanya tersedia untuk pengguna yang login. Silahkan masuk.";
+  @override
   String get observations => "Pengamatan";
   @override
   String get product_custom_filter_title => "Filter khusus";
@@ -3272,6 +3335,8 @@ class $id_ID extends S {
   @override
   String get petal_zygomorphic => "tidak beraturan";
   @override
+  String get photo_search_empty => "Google AI (kecerdasan buatan) tidak mengenali bunga tertentu pada gambar. Coba lagi dengan kondisi sudut, jarak, atau cahaya yang berbeda. Jika Anda sudah melakukannya sepertinya AI tuan tidak akan datang dalam waktu dekat.";
+  @override
   String get auth_invalid_code => "Masukkan kode SMS yang valid";
   @override
   String promotion_content(String date) => "Ini adalah fitur berbayar. Anda dapat menggunakannya secara gratis hingga $date";
@@ -3311,6 +3376,8 @@ class $fr_FR extends S {
   String get auth_verify_email_title => "Vérifiez votre compte";
   @override
   String get east_tropical_africa => "Afrique tropicale de l'Est";
+  @override
+  String get photo_search_failed => "La recherche par photo a échoué. Vérifiez votre connexion Internet et réessayez.";
   @override
   String get middle_asia => "Asie moyenne";
   @override
@@ -3359,6 +3426,8 @@ class $fr_FR extends S {
   String get auth_sms_terms_of_service => "En appuyant sur “Valider le numéro de téléphone”, vous déclencherez peut-être l'envoi d'un SMS. Des frais de messages et de données peuvent être facturés.";
   @override
   String get habitat_rock => "roches ou montagnes";
+  @override
+  String get photo_search_note => "Ceci est une fonctionnalité expérimentale qui ne fonctionne qu'en ligne. Parfois, il trouve exactement ce que vous cherchez, parfois même pas proche. Je compte totalement sur Google ici car ils font tout le travail. Au fil du temps, il devrait être de mieux en mieux, mais il n'a pas été construit principalement pour la reconnaissance des fleurs. Utilisez-le judicieusement et ne jugez pas l'ensemble de l'application en fonction de cette expérience. Pour des raisons de qualité, tous les résultats de recherche (pas les photos) seront enregistrés.";
   @override
   String get taxonomy_subserie => "Sous-série";
   @override
@@ -3572,6 +3641,8 @@ class $fr_FR extends S {
   @override
   String get habitat_garden => "jardins ou champs";
   @override
+  String get photo_to_search_by => "Photo à rechercher par";
+  @override
   String get product_purchase => "Acheter";
   @override
   String get russian_far_east => "Extrême-Orient russe";
@@ -3734,6 +3805,8 @@ class $fr_FR extends S {
   @override
   String get northeast_tropical_africa => "Afrique tropicale du nord-est";
   @override
+  String get photo_search_no_login => "La recherche par photo est disponible uniquement pour les utilisateurs connectés. Veuillez vous connecter.";
+  @override
   String get observations => "Observations";
   @override
   String get product_custom_filter_title => "Filtre personnalisé";
@@ -3774,6 +3847,8 @@ class $fr_FR extends S {
   @override
   String get petal_zygomorphic => "zygomorphie";
   @override
+  String get photo_search_empty => "Google IA (Intelligence artificielle) n'a reconnu aucune fleur particulière sur la photo. Réessayez avec différents angles, distances ou conditions d'éclairage. Si vous l'avez déjà fait, il semble que le suzerain d'IA ne viendra pas de sitôt.";
+  @override
   String get auth_invalid_code => "Entrez un code SMS valide";
   @override
   String promotion_content(String date) => "Ceci est une fonctionnalité payante. Vous pouvez l'utiliser gratuitement jusqu'à $date";
@@ -3813,6 +3888,8 @@ class $he_IL extends S {
   String get auth_verify_email_title => "אמת את חשבונך";
   @override
   String get east_tropical_africa => "מזרח אפריקה טרופית";
+  @override
+  String get photo_search_failed => "החיפוש לפי תמונות נכשל. בדוק את חיבור האינטרנט שלך ונסה שוב.";
   @override
   String get middle_asia => "אסיה התיכונה";
   @override
@@ -3861,6 +3938,8 @@ class $he_IL extends S {
   String get auth_sms_terms_of_service => "על ידי הקשה על \"אימות מספר טלפון\", ניתן לשלוח הודעת סמס. ייתכן שיחולו תעריפי הודעות ונתונים.";
   @override
   String get habitat_rock => "סלעים או הרים";
+  @override
+  String get photo_search_note => "זוהי תכונה ניסיונית שעובדת רק באינטרנט. לפעמים הוא מוצא בדיוק את מה שאתה מחפש, לפעמים אפילו לא קרוב. אני לגמרי מסתמך על גוגל כאן מאז שהם עושים את כל העבודה הקשה. עם הזמן זה צריך להיות טוב יותר וטוב יותר, אבל זה לא היה בנוי בעיקר להכרה של פרח. להשתמש בו בתבונה בבקשה לא לשפוט את היישום כולו מבוסס על הניסוי הזה. למטרות איכות, כל תוצאות החיפוש (לא תמונות) יישמרו.";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -4074,6 +4153,8 @@ class $he_IL extends S {
   @override
   String get habitat_garden => "גנים או שדות";
   @override
+  String get photo_to_search_by => "צילום לחיפוש לפי";
+  @override
   String get product_purchase => "רכישה";
   @override
   String get russian_far_east => "המזרח הרחוק הרוסי";
@@ -4236,6 +4317,8 @@ class $he_IL extends S {
   @override
   String get northeast_tropical_africa => "Northeast Tropical Africa";
   @override
+  String get photo_search_no_login => "חיפוש לפי תמונה זמין רק עבור משתמשים רשומים. היכנס.";
+  @override
   String get observations => "תצפיות";
   @override
   String get product_custom_filter_title => "מסנן מותאם אישית";
@@ -4276,6 +4359,8 @@ class $he_IL extends S {
   @override
   String get petal_zygomorphic => "לֹא סָדִיר";
   @override
+  String get photo_search_empty => "Google AI (בינה מלאכותית) לא זיהה פרח מסוים בתמונה. נסה שוב עם זווית, מרחק או תנאי תאורה שונים. אם אתה כבר עשה את זה נראה כמו AI overlord לא יגיע בקרוב.";
+  @override
   String get auth_invalid_code => "הזן קוד סמס חוקי";
   @override
   String promotion_content(String date) => "זוהי תכונה בתשלום. אתה יכול להשתמש בו בחינם עד $date";
@@ -4315,6 +4400,8 @@ class $ja_JP extends S {
   String get auth_verify_email_title => "アカウントを確認する";
   @override
   String get east_tropical_africa => "東トロピカルアフリカ";
+  @override
+  String get photo_search_failed => "写真で検索できませんでした。 インターネット接続を確認してもう一度やり直してください。";
   @override
   String get middle_asia => "中東アジア";
   @override
@@ -4363,6 +4450,8 @@ class $ja_JP extends S {
   String get auth_sms_terms_of_service => "[電話番号を確認] をタップすると、SMS が送信されます。データ通信料がかかることがあります。";
   @override
   String get habitat_rock => "山";
+  @override
+  String get photo_search_note => "これはオンラインでのみ機能する実験的な機能です。 時にはそれはあなたが探しているものを正確に見つけ、時には近くにさえない。 彼らはすべて大変な仕事をしているので、私はここで完全にGoogleに頼っています。 時間が経つにつれてそれはどんどん良くなるはずですが、それは主に花の認識のために構築されていませんでした。 この実験に基づいてアプリケーション全体を判断しないでください。 品質上の理由から、すべての検索結果（写真ではありません）が保存されます。";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -4576,6 +4665,8 @@ class $ja_JP extends S {
   @override
   String get habitat_garden => "庭園、畑";
   @override
+  String get photo_to_search_by => "検索する写真";
+  @override
   String get product_purchase => "買う";
   @override
   String get russian_far_east => "ロシア極東";
@@ -4738,6 +4829,8 @@ class $ja_JP extends S {
   @override
   String get northeast_tropical_africa => "東北熱帯アフリカ";
   @override
+  String get photo_search_no_login => "写真による検索は、ログインしているユーザーのみが利用できます。 ログインしてください。";
+  @override
   String get observations => "観察";
   @override
   String get product_custom_filter_title => "カスタムフィルター";
@@ -4778,6 +4871,8 @@ class $ja_JP extends S {
   @override
   String get petal_zygomorphic => "不規則な";
   @override
+  String get photo_search_empty => "グーグルＡＩ（人工知能）は写真上の特定の花を認識しなかった。 角度、距離、光の状態を変えてもう一度試してください。 あなたがすでにやったことがあるならば、AI君主はすぐに来ることはないようです。";
+  @override
   String get auth_invalid_code => "有効なSMSコードを入力してください";
   @override
   String promotion_content(String date) => "これは有料機能です。$date まで無料で使えます";
@@ -4817,6 +4912,8 @@ class $cs_CZ extends S {
   String get auth_verify_email_title => "Ověřit svůj účet";
   @override
   String get east_tropical_africa => "Východní tropická Afrika";
+  @override
+  String get photo_search_failed => "Vyhledávání bylo neúspěšné. Zkontrolujte své připojení na internet a skuste znovu.";
   @override
   String get middle_asia => "Střední Asie";
   @override
@@ -4865,6 +4962,8 @@ class $cs_CZ extends S {
   String get auth_sms_terms_of_service => "Po klepnutí na možnost „Ověřit telefonní číslo” může být odeslána SMS. Mohou být účtovány poplatky za zprávy a data.";
   @override
   String get habitat_rock => "vrcholky hor a skály";
+  @override
+  String get photo_search_note => "Toto je experimentální funkce, která funguje pouze online. Někdy najde přesně to, co hledáte, někdy ani zdaleka. Úplně se v tom spoléhám na Google, protože jde o jejich software. Časem by to mělo být lepší a lepší, ale tato funkce není primárně určena pro rozpoznávání květin. Používejte ji uvážlivě a prosím nehodnoťte celou aplikaci na základě tohoto experimentu. Za účelem zvyšování kvality budou všechny výsledky vyhledávání (ne fotografie) uložené.";
   @override
   String get taxonomy_subserie => "podsérie";
   @override
@@ -5078,6 +5177,8 @@ class $cs_CZ extends S {
   @override
   String get habitat_garden => "pole a zahrady";
   @override
+  String get photo_to_search_by => "Fotka, podle níž se vyhledává";
+  @override
   String get product_purchase => "Koupit";
   @override
   String get russian_far_east => "Ruský dálný východ";
@@ -5238,6 +5339,8 @@ class $cs_CZ extends S {
   @override
   String get northeast_tropical_africa => "Severovýchodní tropická Afrika";
   @override
+  String get photo_search_no_login => "Vyhledávání podle fotografie je dostupné pouze pro přihlášené uživatele. Přihlaste se, prosím.";
+  @override
   String get observations => "Pozorování";
   @override
   String get product_custom_filter_title => "Vlastní filtr";
@@ -5278,6 +5381,8 @@ class $cs_CZ extends S {
   @override
   String get petal_zygomorphic => "souměrný";
   @override
+  String get photo_search_empty => "Google UI (umělá inteligence) na obrázku nerozeznala žádnou konkrétní květinu. Zkuste znovu s jiným úhlem, vzdáleností nebo světelnými podmínkami. Pokud jste to již udělali, vypadá to tak, že nový UI vládce nepřijde tak brzy.";
+  @override
   String get auth_invalid_code => "Zadejte platný kód";
   @override
   String promotion_content(String date) => "Toto je placená funkce. Volně dostupná bude do $date";
@@ -5317,6 +5422,8 @@ class $de_DE extends S {
   String get auth_verify_email_title => "Überprüfen Sie Ihr Konto";
   @override
   String get east_tropical_africa => "Osttropisches Afrika";
+  @override
+  String get photo_search_failed => "Suche nach Foto fehlgeschlagen. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.";
   @override
   String get middle_asia => "Mittelasien";
   @override
@@ -5365,6 +5472,8 @@ class $de_DE extends S {
   String get auth_sms_terms_of_service => "Wenn Sie auf “Telefonnummer eingeben” tippen, erhalten Sie möglicherweise eine SMS. Es können Gebühren für SMS und Datenübertragung anfallen.";
   @override
   String get habitat_rock => "Felsen oder Berge";
+  @override
+  String get photo_search_note => "Dies ist ein experimentelles Feature, das nur online funktioniert. Manchmal findet es genau das, wonach Sie suchen, manchmal nicht einmal in der Nähe. Ich bin völlig auf Google angewiesen, da sie die ganze harte Arbeit machen. Mit der Zeit sollte es besser und besser werden, aber es wurde nicht in erster Linie für die Anerkennung der Blume gebaut. Verwende es mit Bedacht und beurteile bitte nicht die gesamte Anwendung basierend auf diesem Experiment. Aus Qualitätsgründen werden alle Suchergebnisse (nicht Fotos) gespeichert.";
   @override
   String get taxonomy_subserie => "Unterserie";
   @override
@@ -5578,6 +5687,8 @@ class $de_DE extends S {
   @override
   String get habitat_garden => "Gärten oder Felder";
   @override
+  String get photo_to_search_by => "Foto zum Suchen nach";
+  @override
   String get product_purchase => "Kaufen";
   @override
   String get russian_far_east => "Russischer Ferner Osten";
@@ -5740,6 +5851,8 @@ class $de_DE extends S {
   @override
   String get northeast_tropical_africa => "Nordost-tropisches Afrika";
   @override
+  String get photo_search_no_login => "Die Suche nach Fotos ist nur für angemeldete Benutzer verfügbar. Bitte loggen Sie sich ein.";
+  @override
   String get observations => "Beobachtungen";
   @override
   String get product_custom_filter_title => "Benutzerdefinierte Filter";
@@ -5780,6 +5893,8 @@ class $de_DE extends S {
   @override
   String get petal_zygomorphic => "dorsiventrale";
   @override
+  String get photo_search_empty => "Google KI (Künstliche Intelligenz) hat keine bestimmte Blume auf dem Bild erkannt. Versuchen Sie es erneut mit anderen Winkeln, Entfernungen oder Lichtverhältnissen. Wenn du es schon getan hast, sieht es so aus, als ob der KI Overlord nicht bald kommen würde.";
+  @override
   String get auth_invalid_code => "Geben Sie einen gültigen SMS-Code ein";
   @override
   String promotion_content(String date) => "Dies ist eine kostenpflichtige Funktion. Sie können es bis $date kostenlos nutzen.";
@@ -5819,6 +5934,8 @@ class $hu_HU extends S {
   String get auth_verify_email_title => "Ellenőrizze fiókját";
   @override
   String get east_tropical_africa => "Kelet-trópusi Afrika";
+  @override
+  String get photo_search_failed => "A fénykép keresése sikertelen. Ellenőrizze az internetkapcsolatot és próbálja újra.";
   @override
   String get middle_asia => "Közép-Ázsia";
   @override
@@ -5867,6 +5984,8 @@ class $hu_HU extends S {
   String get auth_sms_terms_of_service => "Ha a(z) „Telefonszám igazolása” gombra koppint, a rendszer SMS-t küldhet Önnek. A szolgáltató ezért üzenet- és adatforgalmi díjat számíthat fel.";
   @override
   String get habitat_rock => "sziklák vagy hegyek";
+  @override
+  String get photo_search_note => "Ez egy kísérleti funkció, amely csak online működik. Néha pontosan megtalálja azt, amit keres, néha még közel sem. Teljesen támaszkodom a Google-ra, hiszen minden kemény munkát végeznek. Ahogy az idő megy, jobbnak és jobbnak kell lennie, de nem elsősorban a virág elismerésére épült. Használja okosan, és ne vizsgálja meg a teljes alkalmazást a kísérlet alapján. Minőségi okokból minden keresési eredmény (nem fotó) mentésre kerül.";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -6080,6 +6199,8 @@ class $hu_HU extends S {
   @override
   String get habitat_garden => "kertek vagy mezők";
   @override
+  String get photo_to_search_by => "Fénykép a kereséshez";
+  @override
   String get product_purchase => "Vásárol";
   @override
   String get russian_far_east => "Orosz távol-keleten";
@@ -6242,6 +6363,8 @@ class $hu_HU extends S {
   @override
   String get northeast_tropical_africa => "Észak-Trópusi Afrika";
   @override
+  String get photo_search_no_login => "A fotókeresés csak naplózott felhasználók számára érhető el. Kérjük jelentkezzen be.";
+  @override
   String get observations => "Megfigyelések";
   @override
   String get product_custom_filter_title => "Egyéni szűrő";
@@ -6282,6 +6405,8 @@ class $hu_HU extends S {
   @override
   String get petal_zygomorphic => "kétoldali";
   @override
+  String get photo_search_empty => "A Google MI (mesterséges intelligencia) nem ismerte fel a képen látható virágot. Próbálkozzon újra különböző szög, távolság vagy fényviszonyokkal. Ha már csináltad, úgy tűnik, hogy az MI overlord hamarosan nem jön.";
+  @override
   String get auth_invalid_code => "Adjon meg érvényes SMS-kódot";
   @override
   String promotion_content(String date) => "Ez fizetett funkció. A $date ingyenesen használhatja";
@@ -6321,6 +6446,8 @@ class $nb_NO extends S {
   String get auth_verify_email_title => "Bekreft kontoen din";
   @override
   String get east_tropical_africa => "Øst-tropiske Afrika";
+  @override
+  String get photo_search_failed => "Søk etter bilde mislyktes. Sjekk Internett-tilkoblingen din og prøv igjen.";
   @override
   String get middle_asia => "Midt-Asia";
   @override
@@ -6369,6 +6496,8 @@ class $nb_NO extends S {
   String get auth_sms_terms_of_service => "Når du trykker på «Bekreft telefonnummeret», kan det bli sendt en SMS. Kostnader for meldinger og datatrafikk kan påløpe.";
   @override
   String get habitat_rock => "steiner eller fjell";
+  @override
+  String get photo_search_note => "Dette er en eksperimentell funksjon som bare fungerer online. Noen ganger finner den akkurat det du leter etter, noen ganger ikke engang i nærheten. Jeg er helt stolt på Google her, siden de gjør alt hardt arbeid. Etter hvert som tiden går, bør det bli bedre og bedre, men det ble ikke primært bygget for blomsters anerkjennelse. Bruk det klokt og vær så snill å ikke dømme hele applikasjonen basert på dette eksperimentet. For kvalitetsmål blir alle søkeresultatene (ikke bilder) lagret.";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -6582,6 +6711,8 @@ class $nb_NO extends S {
   @override
   String get habitat_garden => "hager eller felt";
   @override
+  String get photo_to_search_by => "Bilde å søke etter";
+  @override
   String get product_purchase => "Kjøpe";
   @override
   String get russian_far_east => "Russisk fjernt øst";
@@ -6744,6 +6875,8 @@ class $nb_NO extends S {
   @override
   String get northeast_tropical_africa => "Nordøst-tropiske Afrika";
   @override
+  String get photo_search_no_login => "Søk etter bilde er bare tilgjengelig for loggede brukere. Vennligst Logg inn.";
+  @override
   String get observations => "Observasjoner";
   @override
   String get product_custom_filter_title => "Egendefinert filter";
@@ -6784,6 +6917,8 @@ class $nb_NO extends S {
   @override
   String get petal_zygomorphic => "zygomorphic";
   @override
+  String get photo_search_empty => "Google KI (kunstig intelligens) kjente ikke noen bestemt blomst på bildet. Prøv igjen med forskjellige vinkel-, avstands- eller lysforhold. Hvis du allerede gjorde det, ser det ut som at KI overlord ikke kommer når som helst snart.";
+  @override
   String get auth_invalid_code => "Skriv inn et gyldig telefonnummer";
   @override
   String promotion_content(String date) => "Dette er en betalt funksjon. Du kan bruke det gratis til $date";
@@ -6823,6 +6958,8 @@ class $sk_SK extends S {
   String get auth_verify_email_title => "Overte svoj účet";
   @override
   String get east_tropical_africa => "Východná tropická Afrika";
+  @override
+  String get photo_search_failed => ">Vyhľadávanie bolo neúspešné. Skontrolujte svoje pripojenie na internet a skúse znova.";
   @override
   String get middle_asia => "Stredná Ázia";
   @override
@@ -6871,6 +7008,8 @@ class $sk_SK extends S {
   String get auth_sms_terms_of_service => "Klepnutím na tlačidlo „Overiť telefónne číslo” možno odoslať SMS. Môžu sa účtovať poplatky za správy a dáta.";
   @override
   String get habitat_rock => "vrcholky hôr a skaly";
+  @override
+  String get photo_search_note => "Toto je experimentálna funkcia, ktorá funguje iba online. Niekedy nájde presne to, čo hľadáte, niekedy sa ani nepriblíži. Úplne sa v tom spolieham na Google, keďže ide o ich softvér. Časom by to malo byť lepšie a lepšie, ale táto funkcia nie je primárne určená na rozpoznávanie kvetín. Používajte ju uvážlivo a, prosím, nehodnoťte celú aplikáciu na základe tohto experimentu. Za účelom zvyšovania kvality budú všetky výsledky vyhľadávania (nie fotografie) uložené.";
   @override
   String get taxonomy_subserie => "podséria";
   @override
@@ -7080,6 +7219,8 @@ class $sk_SK extends S {
   @override
   String get habitat_garden => "polia a záhrady";
   @override
+  String get photo_to_search_by => "Fotka, podľa ktorej sa vyhľadáva";
+  @override
   String get product_purchase => "Kúpiť";
   @override
   String get russian_far_east => "Ruský ďaleký východ";
@@ -7238,6 +7379,8 @@ class $sk_SK extends S {
   @override
   String get northeast_tropical_africa => "Severovýchodná tropická Afrika";
   @override
+  String get photo_search_no_login => "Vyhľadávanie podľa fotografie je dostupné iba pre prihlásených používateľov. Prihláste sa, prosím.";
+  @override
   String get observations => "Pozorovania";
   @override
   String get product_custom_filter_title => "Vlastný filter";
@@ -7278,6 +7421,8 @@ class $sk_SK extends S {
   @override
   String get petal_zygomorphic => "nepravidelný";
   @override
+  String get photo_search_empty => "Google UI (umelá inteligencia) na obrázku nerozoznala žiadnu konkrétnu kvetinu. Skúste znova s iným uhlom, vzdialenosťou alebo svetelnými podmienkami. Ak ste to už urobili, vyzerá to tak, že nový UI vládca nepríde tak skoro.";
+  @override
   String get auth_invalid_code => "Zadajte platné SMS kód";
   @override
   String promotion_content(String date) => "Toto je platená funkcia. Voľne dostupná bude do $date";
@@ -7317,6 +7462,8 @@ class $es_ES extends S {
   String get auth_verify_email_title => "Verifica tu cuenta";
   @override
   String get east_tropical_africa => "África tropical oriental";
+  @override
+  String get photo_search_failed => "La búsqueda por foto falló. Verifique su conexión a Internet y vuelva a intentarlo.";
   @override
   String get middle_asia => "Medio Asia";
   @override
@@ -7365,6 +7512,8 @@ class $es_ES extends S {
   String get auth_sms_terms_of_service => "Al tocar \"Verificar número de teléfono\", podría enviarse un SMS. Es posible que se apliquen cargos de mensajería y de uso de datos.";
   @override
   String get habitat_rock => "rocas o montaña";
+  @override
+  String get photo_search_note => "Esta es una característica experimental que funciona solo en línea. A veces encuentra exactamente lo que estás buscando, a veces ni siquiera cerca. Confío plenamente en Google aquí ya que están haciendo todo el trabajo duro. A medida que pasa el tiempo, debería ser mejor y mejor, pero no fue construido principalmente para el reconocimiento de las flores. Úselo con prudencia y no juzgue toda la aplicación en función de este experimento. Por motivos de calidad, todos los resultados de búsqueda (no fotos) se guardarán.";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -7578,6 +7727,8 @@ class $es_ES extends S {
   @override
   String get habitat_garden => "jardín o campo";
   @override
+  String get photo_to_search_by => "Foto para buscar por";
+  @override
   String get product_purchase => "Compra";
   @override
   String get russian_far_east => "Extremo Oriente ruso";
@@ -7740,6 +7891,8 @@ class $es_ES extends S {
   @override
   String get northeast_tropical_africa => "Noreste de África Tropical";
   @override
+  String get photo_search_no_login => "La búsqueda por foto está disponible solo para usuarios registrados. Por favor Iniciar sesión.";
+  @override
   String get observations => "Observaciones";
   @override
   String get product_custom_filter_title => "Filtro personalizado";
@@ -7780,6 +7933,8 @@ class $es_ES extends S {
   @override
   String get petal_zygomorphic => "zigomorfo";
   @override
+  String get photo_search_empty => "Google IA (inteligencia artificial) no reconoció ninguna flor en particular en la imagen. Inténtalo de nuevo con diferentes ángulos, distancias o condiciones de luz. Si ya lo hiciste, parece que IA Overlord no vendrá pronto.";
+  @override
   String get auth_invalid_code => "Ingrese un código SMS válido";
   @override
   String promotion_content(String date) => "Esta es una característica de pago. Puedes usarlo gratis hasta $date";
@@ -7819,6 +7974,8 @@ class $nl_NL extends S {
   String get auth_verify_email_title => "Verifieer uw account";
   @override
   String get east_tropical_africa => "Oost-tropisch Afrika";
+  @override
+  String get photo_search_failed => "Zoeken op foto is mislukt. Controleer uw internetverbinding en probeer het opnieuw.";
   @override
   String get middle_asia => "Midden-Azië";
   @override
@@ -7867,6 +8024,8 @@ class $nl_NL extends S {
   String get auth_sms_terms_of_service => "Als u op “Telefoonnummer verifiëren” tikt, ontvangt u mogelijk een sms. Er kunnen sms- en datakosten in rekening worden gebracht.";
   @override
   String get habitat_rock => "rotsen of bergen";
+  @override
+  String get photo_search_note => "Dit is een experimentele functie die alleen online werkt. Soms vindt het precies wat u zoekt, soms zelfs niet in de buurt. Ik vertrouw hier volledig op Google omdat ze al het harde werk doen. Naarmate de tijd vordert zou het beter en beter moeten worden, maar het was niet in de eerste plaats gebouwd voor de herkenning van bloemen. Gebruik het verstandig en veroordeel de hele applicatie niet op basis van dit experiment. Voor kwaliteitsdoeleinden worden alle zoekresultaten (niet foto's) opgeslagen.";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -8080,6 +8239,8 @@ class $nl_NL extends S {
   @override
   String get habitat_garden => "tuinen of velden";
   @override
+  String get photo_to_search_by => "Foto om op te zoeken";
+  @override
   String get product_purchase => "Koop";
   @override
   String get russian_far_east => "Russisch Verre Oosten";
@@ -8242,6 +8403,8 @@ class $nl_NL extends S {
   @override
   String get northeast_tropical_africa => "Noordoost-tropisch Afrika";
   @override
+  String get photo_search_no_login => "Zoeken op foto is alleen beschikbaar voor aangemelde gebruikers. Log alstublieft in.";
+  @override
   String get observations => "Observaties";
   @override
   String get product_custom_filter_title => "Aangepast filter";
@@ -8282,6 +8445,8 @@ class $nl_NL extends S {
   @override
   String get petal_zygomorphic => "tweezijdig symmetrisch";
   @override
+  String get photo_search_empty => "Google KI (kunstmatige intelligentie) herkende geen enkele specifieke bloem op de foto. Probeer het opnieuw met verschillende hoeken, afstanden of lichtomstandigheden. Als je het al hebt gedaan, ziet het er naar uit dat KI-oploper niet snel zal komen.";
+  @override
   String get auth_invalid_code => "Voer een geldige sms-code in";
   @override
   String promotion_content(String date) => "Dit is een betaalde functie. Je kunt het gratis gebruiken tot $date";
@@ -8321,6 +8486,8 @@ class $pa_IN extends S {
   String get auth_verify_email_title => "ਆਪਣੇ ਖਾਤੇ ਦੀ ਤਸਦੀਕ ਕਰੋ";
   @override
   String get east_tropical_africa => "ਪੂਰਬੀ ਤ੍ਰਿਕੋਸ਼ੀ ਅਫਰੀਕਾ";
+  @override
+  String get photo_search_failed => "ਫੋਟੋ ਦੁਆਰਾ ਖੋਜ ਫੇਲ੍ਹ ਹੋਈ. ਆਪਣੇ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ.";
   @override
   String get middle_asia => "ਮੱਧ ਏਸ਼ੀਆ";
   @override
@@ -8369,6 +8536,8 @@ class $pa_IN extends S {
   String get auth_sms_terms_of_service => "\"ਫੋਨ ਨੰਬਰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ\" ਟੈਪ ਕਰਕੇ, ਇੱਕ SMS ਭੇਜਿਆ ਜਾ ਸਕਦਾ ਹੈ. ਸੁਨੇਹਾ ਅਤੇ ਡੇਟਾ ਦਰਾਂ ਲਾਗੂ ਹੋ ਸਕਦੀਆਂ ਹਨ.";
   @override
   String get habitat_rock => "ਇਕ ਚੁਣੋ";
+  @override
+  String get photo_search_note => "ਇਹ ਇੱਕ ਪ੍ਰਯੋਗਾਤਮਕ ਵਿਸ਼ੇਸ਼ਤਾ ਹੈ ਜੋ ਕੇਵਲ ਔਨਲਾਈਨ ਹੀ ਕੰਮ ਕਰਦੀ ਹੈ. ਕਦੇ-ਕਦੇ ਇਸ ਨੂੰ ਉਹ ਚੀਜ਼ ਮਿਲਦੀ ਹੈ ਜੋ ਤੁਸੀਂ ਲੱਭ ਰਹੇ ਹੋ, ਕਈ ਵਾਰੀ ਇਸਦੇ ਨੇੜੇ ਨਹੀਂ. ਮੈਂ ਪੂਰੀ ਤਰਾਂ Google ਤੇ ਨਿਰਭਰ ਹਾਂ ਕਿਉਂਕਿ ਉਹ ਸਾਰੇ ਸਖ਼ਤ ਮਿਹਨਤ ਕਰ ਰਹੇ ਹਨ ਸਮੇਂ ਦੇ ਨਾਲ ਇਹ ਬਿਹਤਰ ਅਤੇ ਵਧੀਆ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ, ਪਰ ਇਹ ਮੁੱਖ ਤੌਰ ਤੇ ਫੁੱਲ ਦੀ ਪਛਾਣ ਲਈ ਨਹੀਂ ਬਣਾਇਆ ਗਿਆ ਸੀ. ਸਮਝਦਾਰੀ ਨਾਲ ਇਸ ਦੀ ਵਰਤੋਂ ਕਰੋ ਅਤੇ ਕਿਰਪਾ ਕਰਕੇ ਇਸ ਪ੍ਰਯੋਗ ਦੇ ਆਧਾਰ ਤੇ ਸਮੁੱਚੀ ਅਰਜ਼ੀ ਦਾ ਜੱਜ ਨਾ ਕਰੋ. ਗੁਣਵੱਤਾ ਦੇ ਉਦੇਸ਼ਾਂ ਲਈ ਸਾਰੇ ਖੋਜ ਨਤੀਜੇ (ਫੋਟੋਆਂ ਨਹੀਂ) ਸੰਭਾਲੇ ਜਾਣਗੇ.";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -8582,6 +8751,8 @@ class $pa_IN extends S {
   @override
   String get habitat_garden => "ਪਲਾਂਟ ਦਾ ਦ੍ਰਿਸ਼ਟੀਕੋਣ";
   @override
+  String get photo_to_search_by => "ਦੁਆਰਾ ਖੋਜਣ ਲਈ ਫੋਟੋ";
+  @override
   String get product_purchase => "ਖ਼ਰੀਦੋ";
   @override
   String get russian_far_east => "ਰੂਸੀ ਦੂਰ ਪੂਰਬ";
@@ -8744,6 +8915,8 @@ class $pa_IN extends S {
   @override
   String get northeast_tropical_africa => "ਨਾਰਥ ਈਸਟ ਟ੍ਰੌਪੀਕਲ ਅਫਰੀਕਾ";
   @override
+  String get photo_search_no_login => "ਫੋਟੋ ਦੁਆਰਾ ਖੋਜ ਕੇਵਲ ਲੌਗ ਕੀਤੇ ਉਪਭੋਗਤਾਵਾਂ ਲਈ ਉਪਲਬਧ ਹੈ. ਕਿਰਪਾ ਕਰਕੇ ਲੌਗਇਨ ਕਰੋ.";
+  @override
   String get observations => "ਅਵਲੋਕਨ";
   @override
   String get product_custom_filter_title => "ਕਸਟਮ ਫਿਲਟਰ";
@@ -8784,6 +8957,8 @@ class $pa_IN extends S {
   @override
   String get petal_zygomorphic => "ਅਨਿਯਮਿਤ";
   @override
+  String get photo_search_empty => "ਗੂਗਲ ਏ.ਆਈ. (ਨਕਲੀ ਖੁਫੀਆ) ਤਸਵੀਰ ਤੇ ਕਿਸੇ ਖ਼ਾਸ ਫੁੱਲ ਨੂੰ ਨਹੀਂ ਪਛਾਣਦਾ. ਵੱਖ ਵੱਖ ਕੋਣ, ਦੂਰੀ ਜਾਂ ਹਲਕਾ ਸਥਿਤੀਆਂ ਨਾਲ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੇ ਤੁਸੀਂ ਪਹਿਲਾਂ ਹੀ ਅਜਿਹਾ ਦਿਖਾਈ ਦਿੰਦੇ ਹੋ ਜਿਵੇਂ ਏ.ਆਈ. ਦਾ ਪਾਲਣ-ਪੋਸਣ ਕਿਸੇ ਵੀ ਸਮੇਂ ਛੇਤੀ ਨਹੀਂ ਆਵੇਗਾ";
+  @override
   String get auth_invalid_code => "ਇੱਕ ਪ੍ਰਮਾਣਿਤ ਐਸਐਮਐਸ ਕੋਡ ਦਰਜ ਕਰੋ";
   @override
   String promotion_content(String date) => "ਇਹ ਇੱਕ ਅਦਾਇਗੀਯੋਗ ਵਿਸ਼ੇਸ਼ਤਾ ਹੈ ਤੁਸੀਂ ਇਸ ਨੂੰ $date ਤੱਕ ਮੁਫ਼ਤ ਵਿੱਚ ਵਰਤ ਸਕਦੇ ਹੋ";
@@ -8823,6 +8998,8 @@ class $sv_SE extends S {
   String get auth_verify_email_title => "Verifiera ditt konto";
   @override
   String get east_tropical_africa => "Östra tropiska Afrika";
+  @override
+  String get photo_search_failed => "Sök på foto misslyckades. Kontrollera din internetanslutning och försök igen.";
   @override
   String get middle_asia => "Mellanöstern Asien";
   @override
@@ -8871,6 +9048,8 @@ class $sv_SE extends S {
   String get auth_sms_terms_of_service => "Genom att trycka på „Verifiera telefonnummer“ skickas ett sms. Meddelande- och dataavgifter kan tillkomma.";
   @override
   String get habitat_rock => "stenar eller berg";
+  @override
+  String get photo_search_note => "Det här är en experimentell funktion som bara fungerar online. Ibland hittar det exakt vad du letar efter, ibland inte ens nära. Jag är helt beroende av Google här, eftersom de gör allt hårt arbete. Med tiden går det att bli bättre och bättre, men det var inte främst byggt för blomsters erkännande. Använd det klokt och var god och döm inte hela applikationen baserat på detta experiment. För kvalitetsändamål sparas alla sökresultat (inte foton).";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -9084,6 +9263,8 @@ class $sv_SE extends S {
   @override
   String get habitat_garden => "trädgårdar eller fält";
   @override
+  String get photo_to_search_by => "Foto att söka efter";
+  @override
   String get product_purchase => "Köpa";
   @override
   String get russian_far_east => "Ryska Fjärran Östern";
@@ -9246,6 +9427,8 @@ class $sv_SE extends S {
   @override
   String get northeast_tropical_africa => "Nordöstra tropiska Afrika";
   @override
+  String get photo_search_no_login => "Sök på foto är endast tillgängligt för inloggade användare. Vänligen logga in.";
+  @override
   String get observations => "Observationer";
   @override
   String get product_custom_filter_title => "Anpassat filter";
@@ -9286,6 +9469,8 @@ class $sv_SE extends S {
   @override
   String get petal_zygomorphic => "zygomorf";
   @override
+  String get photo_search_empty => "Google AI (artificiell intelligens) kände inte igen någon speciell blomma på bilden. Försök igen med olika vinkel-, distans- eller ljusförhållanden. Om du redan gjorde det ser det ut som AI overlord kommer inte när som helst snart.";
+  @override
   String get auth_invalid_code => "Ange ett giltig SMS-kod";
   @override
   String promotion_content(String date) => "Detta är en betald funktion. Du kan använda den gratis till $date";
@@ -9325,6 +9510,8 @@ class $da_DK extends S {
   String get auth_verify_email_title => "Bekræft din konto";
   @override
   String get east_tropical_africa => "Øst tropiske Afrika";
+  @override
+  String get photo_search_failed => "Søg efter billede mislykkedes. Tjek din internetforbindelse og prøv igen.";
   @override
   String get middle_asia => "Mellemasien";
   @override
@@ -9373,6 +9560,8 @@ class $da_DK extends S {
   String get auth_sms_terms_of_service => "Når du trykker på “Bekræft dit telefonnummer”, sendes der måske en sms. Der opkræves muligvis gebyrer for beskeder og data.";
   @override
   String get habitat_rock => "klipper eller bjerge";
+  @override
+  String get photo_search_note => "Dette er en eksperimentel funktion, der kun fungerer online. Nogle gange finder den præcis det, du leder efter, nogle gange ikke engang tæt. Jeg er helt afhængig af Google her, da de laver alt det hårde arbejde. Som tiden går, skal det være bedre og bedre, men det blev ikke primært bygget til blomsters anerkendelse. Brug det klogt og bedøm ikke hele applikationen baseret på dette eksperiment. Til kvalitetsformål bliver alle søgeresultater (ikke fotos) gemt.";
   @override
   String get taxonomy_subserie => "Underserie";
   @override
@@ -9582,6 +9771,8 @@ class $da_DK extends S {
   @override
   String get habitat_garden => "haver eller marker";
   @override
+  String get photo_to_search_by => "Foto til søgning efter";
+  @override
   String get product_purchase => "Køb";
   @override
   String get russian_far_east => "Russiske fjernøsten";
@@ -9742,6 +9933,8 @@ class $da_DK extends S {
   @override
   String get northeast_tropical_africa => "Nordøstlige tropiske Afrika";
   @override
+  String get photo_search_no_login => "Søgning efter foto er kun tilgængelig for logget brugere. Vær venlig at logge ind.";
+  @override
   String get observations => "Observationer";
   @override
   String get product_custom_filter_title => "Brugerdefineret filter";
@@ -9782,6 +9975,8 @@ class $da_DK extends S {
   @override
   String get petal_zygomorphic => "zygomorf";
   @override
+  String get photo_search_empty => "Google KI (kunstig intelligens) genkendte ikke nogen bestemt blomst på billedet. Prøv igen med forskellige vinkel-, afstands- eller lysforhold. Hvis du allerede gjorde det ser ud som KI overlord ikke kommer når som helst snart.";
+  @override
   String get auth_invalid_code => "Angiv et gyldigt kode";
   @override
   String promotion_content(String date) => "Dette er en betalt funktion. Du kan bruge det gratis indtil $date";
@@ -9821,6 +10016,8 @@ class $fa_IR extends S {
   String get auth_verify_email_title => "حساب کاربری خودراتایید کنید";
   @override
   String get east_tropical_africa => "شرق گرمسیر آفریقا";
+  @override
+  String get photo_search_failed => "جستجو بر اساس عکس انجام نشد اتصال اینترنت خود را بررسی کنید و دوباره امتحان کنید.";
   @override
   String get middle_asia => "آسیای میانه";
   @override
@@ -9869,6 +10066,8 @@ class $fa_IR extends S {
   String get auth_sms_terms_of_service => "با ضربه زدن روی «تأیید شماره تلفن»، پیامکی برایتان ارسال می‌شود. هزینه پیام و داده اعمال می‌شود.";
   @override
   String get habitat_rock => "سنگ ها یا کوه ها";
+  @override
+  String get photo_search_note => "این یک ویژگی آزمایشی است که فقط آنلاین کار میکند. گاهی اوقات دقیقا همان چیزی است که شما دنبال آن هستید، گاهی اوقات حتی نزدیک نیست. از آنجا که همه کارهای سخت را انجام می دهند، من کاملا بر روی گوگل متکی هستم. با گذشت زمان، باید بهتر و بهتر شود، اما برای تشخیص گل به طور عمده ساخته نشده است. استفاده از آن را عاقلانه و لطفا تمام برنامه را بر اساس این آزمایش قضاوت نکنید. برای اهداف کیفیت همه نتایج جستجو (عکس ها) ذخیره نمی شوند.";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -10078,6 +10277,8 @@ class $fa_IR extends S {
   @override
   String get habitat_garden => "باغ ها یا رشته ها";
   @override
+  String get photo_to_search_by => "عکس برای جستجو توسط";
+  @override
   String get product_purchase => "خرید";
   @override
   String get russian_far_east => "شرق دور روسیه";
@@ -10240,6 +10441,8 @@ class $fa_IR extends S {
   @override
   String get northeast_tropical_africa => "آفریقا شمال شرقی گرمسیری";
   @override
+  String get photo_search_no_login => "جستجو بر اساس عکس تنها برای کاربران وارد شده در دسترس است. لطفا وارد شوید.";
+  @override
   String get observations => "مشاهدات";
   @override
   String get product_custom_filter_title => "فیلتر سفارشی";
@@ -10280,6 +10483,8 @@ class $fa_IR extends S {
   @override
   String get petal_zygomorphic => "بی رویه";
   @override
+  String get photo_search_empty => "گوگل هوش مصنوعی (هوش مصنوعی) هیچ گل خاصی در تصویر را نمی شناسد. دوباره با زاویه، فاصله یا شرایط نور، دوباره امتحان کنید. اگر قبلا این کار را انجام دادید، به نظر می رسد سرپرست AI در آینده به زودی نخواهد آمد.";
+  @override
   String get auth_invalid_code => "یک کد معتبر SMS وارد کنید";
   @override
   String promotion_content(String date) => "این یک ویژگی پرداخت شده است. شما می توانید آن را به صورت رایگان تا $date استفاده کنید";
@@ -10319,6 +10524,8 @@ class $sr_RS extends S {
   String get auth_verify_email_title => "Потврдите свој налог";
   @override
   String get east_tropical_africa => "Источна тропска Африка";
+  @override
+  String get photo_search_failed => "Претрага по фотографији није успела. Проверите своју интернет везу и покушајте поново.";
   @override
   String get middle_asia => "Средња Азија";
   @override
@@ -10367,6 +10574,8 @@ class $sr_RS extends S {
   String get auth_sms_terms_of_service => "Ако додирнете „Верификуј број телефона“, можда ћете послати SMS. Могу да вам буду наплаћени трошкови слања поруке и преноса података.";
   @override
   String get habitat_rock => "стене или планине";
+  @override
+  String get photo_search_note => "Ово је експериментална функција која ради само на мрежи. Понекад пронађе управо оно што тражите, понекад чак ни близу. Овде се потпуно ослањам на Гоогле јер раде сав тежак посао. Како време пролази, требало би да буде боље и боље, али није првенствено направљено за признање цвећа. Користите га мудро и немојте просуђивати цијелу апликацију на основу овог експеримента. За потребе квалитета, сви резултати претраге (не фотографије) ће бити сачувани.";
   @override
   String get taxonomy_subserie => "подсерија";
   @override
@@ -10580,6 +10789,8 @@ class $sr_RS extends S {
   @override
   String get habitat_garden => "баште или поља";
   @override
+  String get photo_to_search_by => "Фотографија за претрагу по";
+  @override
   String get product_purchase => "Купити";
   @override
   String get russian_far_east => "Руски Далеки Исток";
@@ -10742,6 +10953,8 @@ class $sr_RS extends S {
   @override
   String get northeast_tropical_africa => "Североисточна тропска Африка";
   @override
+  String get photo_search_no_login => "Претрага по фотографијама доступна је само за пријављене кориснике. Молимо вас да се пријавите.";
+  @override
   String get observations => "Опажања";
   @override
   String get product_custom_filter_title => "Прилагођени филтер";
@@ -10781,6 +10994,8 @@ class $sr_RS extends S {
   String get product_no_ads_title => "Нема нежељених реклама";
   @override
   String get petal_zygomorphic => "зигоморфан";
+  @override
+  String get photo_search_empty => "Гоогле АИ (вештачка интелигенција) није препознао ниједан цвет на слици. Покушајте поново са различитим кутовима, удаљеностима или условима осветљења. Ако си то већ учинио, изгледа да АИ надгледник неће ускоро доћи.";
   @override
   String get auth_invalid_code => "Унесите важећи СМС код";
   @override
@@ -10838,6 +11053,8 @@ class $fi_FI extends S {
   @override
   String get east_tropical_africa => "Itä-trooppinen Afrikka";
   @override
+  String get photo_search_failed => "Haku valokuvan mukaan epäonnistui. Tarkista Internet-yhteys ja yritä uudelleen.";
+  @override
   String get middle_asia => "Lähi-Aasia";
   @override
   String get always_my_region_subtitle => "Alueesi asetetaan etukäteen suodattimeen";
@@ -10885,6 +11102,8 @@ class $fi_FI extends S {
   String get auth_sms_terms_of_service => "Kun napautat „Vahvista puhelinnumero”, tekstiviesti voidaan lähettää. Datan ja viestien käyttö voi olla maksullista.";
   @override
   String get habitat_rock => "kiviä tai vuoria";
+  @override
+  String get photo_search_note => "Tämä on kokeellinen ominaisuus, joka toimii vain verkossa. Joskus se löytää juuri sen, mitä etsit, joskus ei edes lähellä. Luotan täysin siihen, että Google on täällä, koska he tekevät kaiken kovan työn. Ajan myötä sen pitäisi olla parempi ja parempi, mutta sitä ei rakennettu ensisijaisesti kukka-tunnusta varten. Käytä sitä viisaasti ja älä arvioi koko sovellusta tämän kokeilun perusteella. Laadullisiin tarkoituksiin kaikki hakutulokset (ei valokuvia) tallennetaan.";
   @override
   String get taxonomy_subserie => "Alasarja";
   @override
@@ -11098,6 +11317,8 @@ class $fi_FI extends S {
   @override
   String get habitat_garden => "puutarhoissa tai kenttiä";
   @override
+  String get photo_to_search_by => "Kuva, jonka haluat etsiä";
+  @override
   String get product_purchase => "Ostaa";
   @override
   String get russian_far_east => "Venäjän Kaukoidässä";
@@ -11260,6 +11481,8 @@ class $fi_FI extends S {
   @override
   String get northeast_tropical_africa => "Koillis-trooppinen Afrikka";
   @override
+  String get photo_search_no_login => "Valokuvien haku on käytettävissä vain kirjautuneille käyttäjille. Kirjaudu sisään, ole hyvä.";
+  @override
   String get observations => "Havaintoja";
   @override
   String get product_custom_filter_title => "Mukautettu suodatin";
@@ -11300,6 +11523,8 @@ class $fi_FI extends S {
   @override
   String get petal_zygomorphic => "vastakohtainen";
   @override
+  String get photo_search_empty => "Google AI (keinotekoinen äly) ei tunnistanut mitään tiettyä kukkaa kuvassa. Yritä uudelleen eri kulma-, etäisyys- tai valo-olosuhteissa. Jos olet jo tehnyt, näyttää siltä, että AI: n ylimies ei tule pian.";
+  @override
   String get auth_invalid_code => "Anna kelvollinen SMS-koodi";
   @override
   String promotion_content(String date) => "Tämä on maksullinen ominaisuus. Voit käyttää sitä ilmaiseksi, kunnes $date";
@@ -11339,6 +11564,8 @@ class $hr_HR extends S {
   String get auth_verify_email_title => "Potvrdite svoj račun";
   @override
   String get east_tropical_africa => "Istočna tropska Afrika";
+  @override
+  String get photo_search_failed => "Pretraživanje po fotografiji nije uspjelo. Provjerite internetsku vezu i pokušajte ponovno.";
   @override
   String get middle_asia => "Srednja Azija";
   @override
@@ -11387,6 +11614,8 @@ class $hr_HR extends S {
   String get auth_sms_terms_of_service => "Dodirivanje gumba “Potvrda telefonskog broja” može dovesti do slanja SMS poruke. Mogu se primijeniti naknade za slanje poruka i podatkovni promet.";
   @override
   String get habitat_rock => "stijene ili planine";
+  @override
+  String get photo_search_note => "Ovo je eksperimentalna značajka koja funkcionira samo na mreži. Ponekad pronađe upravo ono što tražite, ponekad čak ni blizu. Ovdje se potpuno oslanjam na Google jer rade sav težak posao. Kako vrijeme prolazi, to bi trebalo biti bolje i bolje, ali nije prvenstveno izgrađeno za prepoznavanje cvijeta. Koristite ga mudro i nemojte prosuđivati cijelu aplikaciju na temelju ovog eksperimenta. U svrhu kvalitete bit će spremljeni svi rezultati pretraživanja (ne fotografije).";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -11600,6 +11829,8 @@ class $hr_HR extends S {
   @override
   String get habitat_garden => "vrtovi ili polja";
   @override
+  String get photo_to_search_by => "Fotografija za pretraživanje po";
+  @override
   String get product_purchase => "Kupiti";
   @override
   String get russian_far_east => "Ruski Daleki Istok";
@@ -11762,6 +11993,8 @@ class $hr_HR extends S {
   @override
   String get northeast_tropical_africa => "Sjeveroistočna tropska Afrika";
   @override
+  String get photo_search_no_login => "Pretraživanje po fotografijama dostupno je samo prijavljenim korisnicima. Molimo prijavite se.";
+  @override
   String get observations => "Zapažanja";
   @override
   String get product_custom_filter_title => "Prilagođeni filtar";
@@ -11799,6 +12032,8 @@ class $hr_HR extends S {
   String get offline_subtitle => "zahtijeva dodatni prostor od 300+ MB.";
   @override
   String get product_no_ads_title => "Nema neželjenog oglasa";
+  @override
+  String get photo_search_empty => "Google UI (umjetna inteligencija) nije prepoznao nijedan određeni cvijet na slici. Pokušajte ponovno s različitim kutovima, udaljenostima ili uvjetima osvjetljenja. Ako ste to već učinili, izgleda da UI vladar neće uskoro doći.";
   @override
   String get auth_invalid_code => "Unesite valjani SMS kôd";
   @override
@@ -11839,6 +12074,8 @@ class $et_EE extends S {
   String get auth_verify_email_title => "Kinnita oma kasutaja";
   @override
   String get east_tropical_africa => "Ida troopiline Aafrika";
+  @override
+  String get photo_search_failed => "Otsing foto järgi nurjus. Kontrollige oma Interneti-ühendust ja proovige uuesti.";
   @override
   String get middle_asia => "Kesk-Aasias";
   @override
@@ -11887,6 +12124,8 @@ class $et_EE extends S {
   String get auth_sms_terms_of_service => "Puudutades \"Kinnita telefoninumber\", võidakse saata SMS. Võib kehtida sõnumi ja andmeedastuskiirus.";
   @override
   String get habitat_rock => "kivid või mägedes";
+  @override
+  String get photo_search_note => "See on eksperimentaalne funktsioon, mis töötab ainult võrgus. Mõnikord leiab ta täpselt seda, mida otsite, mõnikord isegi lähedal. Ma olen täiesti Google'ist siin, sest nad teevad kõvasti tööd. Aja möödudes peaks see olema parem ja parem, kuid seda ei ehitatud peamiselt lille tunnustamiseks. Kasutage seda targalt ja ärge hinnake kogu seda rakendust selle katse põhjal. Kvaliteedi eesmärgil salvestatakse kõik otsingutulemused (mitte fotod).";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -12100,6 +12339,8 @@ class $et_EE extends S {
   @override
   String get habitat_garden => "aiad või väljad";
   @override
+  String get photo_to_search_by => "Foto otsimiseks";
+  @override
   String get product_purchase => "Ostmine";
   @override
   String get russian_far_east => "Vene Kaug-Ida";
@@ -12262,6 +12503,8 @@ class $et_EE extends S {
   @override
   String get northeast_tropical_africa => "Kirde troopiline Aafrika";
   @override
+  String get photo_search_no_login => "Fotode otsing on saadaval ainult logitud kasutajatele. Palun logige sisse.";
+  @override
   String get observations => "Vaatlused";
   @override
   String get product_custom_filter_title => "Kohandatud filter";
@@ -12301,6 +12544,8 @@ class $et_EE extends S {
   String get product_no_ads_title => "Soovimatu reklaam puudub";
   @override
   String get petal_zygomorphic => "ebaregulaarne";
+  @override
+  String get photo_search_empty => "Google'i AI (tehisintellekt) ei tuvastanud pildil ühtegi konkreetset lille. Proovige uuesti erinevate nurkade, kauguste või valgustingimustega. Kui sa juba tegid, siis näib, et AI ülempreester ei jõua peagi.";
   @override
   String get auth_invalid_code => "Sisestage kehtiv SMS-kood";
   @override
@@ -12350,6 +12595,8 @@ class $lt_LT extends S {
   @override
   String get east_tropical_africa => "Rytų tropinė Afrika";
   @override
+  String get photo_search_failed => "Nepavyko ieškoti pagal nuotrauką. Patikrinkite interneto ryšį ir bandykite dar kartą.";
+  @override
   String get middle_asia => "Vidurinė Azija";
   @override
   String get always_my_region_subtitle => "Jūsų regionas bus iš anksto nustatytas filtre";
@@ -12397,6 +12644,8 @@ class $lt_LT extends S {
   String get auth_sms_terms_of_service => "Palietus „Patvirtinti telefono numerį“ gali būti išsiųstas SMS pranešimas. Gali būti taikomi pranešimų ir duomenų įkainiai..";
   @override
   String get habitat_rock => "uolienos ar kalnai";
+  @override
+  String get photo_search_note => "Tai eksperimentinė funkcija, kuri veikia tik internete. Kartais jis randa tiksliai tai, ko ieškote, kartais net arti. Aš visiškai pasitikiu „Google“, nes jie daro visą sunkų darbą. Laikui bėgant, jis turėtų būti geresnis ir geresnis, tačiau jis nebuvo pastatytas pirmiausia gėlių pripažinimui. Naudokite ją išmintingai ir nediskriminuokite visos paraiškos pagal šį eksperimentą. Kokybės tikslais bus išsaugoti visi paieškos rezultatai (ne nuotraukos).";
   @override
   String get taxonomy_subserie => "Subserija";
   @override
@@ -12610,6 +12859,8 @@ class $lt_LT extends S {
   @override
   String get habitat_garden => "sodai ar laukai";
   @override
+  String get photo_to_search_by => "Nuotraukas ieškoti pagal";
+  @override
   String get product_purchase => "Įsigyti";
   @override
   String get russian_far_east => "Rusijos Tolimuosiuose Rytuose";
@@ -12772,6 +13023,8 @@ class $lt_LT extends S {
   @override
   String get northeast_tropical_africa => "Šiaurės rytų tropinė Afrika";
   @override
+  String get photo_search_no_login => "Ieškoti pagal nuotrauką galima tik prisijungusiems vartotojams. Prašome prisijungti.";
+  @override
   String get observations => "Stebėjimas";
   @override
   String get product_custom_filter_title => "Pasirinktinis filtras";
@@ -12812,6 +13065,8 @@ class $lt_LT extends S {
   @override
   String get petal_zygomorphic => "nereguliarus";
   @override
+  String get photo_search_empty => "„Google“ DI (dirbtinis intelektas) neatpažino jokios konkrečios gėlių ant nuotraukos. Bandykite dar kartą su skirtingais kampais, atstumu arba šviesos sąlygomis. Jei jau tai padarėte, atrodo, kad DI viršininkas netrukus ateis.";
+  @override
   String get auth_invalid_code => "Įveskite galiojantį SMS kodą";
   @override
   String promotion_content(String date) => "Tai mokama funkcija. Ją galite naudoti nemokamai iki $date";
@@ -12851,6 +13106,8 @@ class $lv_LV extends S {
   String get auth_verify_email_title => "Apstipriniet savu kontu";
   @override
   String get east_tropical_africa => "Austrumu tropu Āfrika";
+  @override
+  String get photo_search_failed => "Meklēšana pēc fotoattēla neizdevās. Pārbaudiet savu interneta savienojumu un mēģiniet vēlreiz.";
   @override
   String get middle_asia => "Vidusāzija";
   @override
@@ -12899,6 +13156,8 @@ class $lv_LV extends S {
   String get auth_sms_terms_of_service => "Pieskaroties pogai Verificēt tālruņa numuru, var tikt nosūtīta īsziņa. Var tikt piemērota maksa par ziņojumiem un datu pārsūtīšanu.";
   @override
   String get habitat_rock => "uolienos ar kalnai";
+  @override
+  String get photo_search_note => "Šī ir eksperimentāla funkcija, kas darbojas tikai tiešsaistē. Dažreiz tā atrod tieši to, ko meklējat, dažreiz pat ne tuvu. Es esmu pilnīgi paļauties uz Google, jo viņi dara visu smago darbu. Laika gaitā tai vajadzētu būt labākai un labākai, bet tas nebija galvenokārt veidots ziedu atpazīšanai. Izmantojiet to saprātīgi un, neskatoties uz šo eksperimentu, nelietojiet visu pieteikumu. Kvalitātes nolūkos tiks saglabāti visi meklēšanas rezultāti (nevis fotoattēli).";
   @override
   String get taxonomy_subserie => "Apakšsērija";
   @override
@@ -13112,6 +13371,8 @@ class $lv_LV extends S {
   @override
   String get habitat_garden => "sodai ar laukai";
   @override
+  String get photo_to_search_by => "Fotoattēls meklēšanai pēc";
+  @override
   String get product_purchase => "Pirkt";
   @override
   String get russian_far_east => "Krievu Tālajos Austrumos";
@@ -13274,6 +13535,8 @@ class $lv_LV extends S {
   @override
   String get northeast_tropical_africa => "Ziemeļaustrumu tropu Āfrika";
   @override
+  String get photo_search_no_login => "Meklēšana pēc fotoattēla ir pieejama tikai reģistrētiem lietotājiem. Lūdzu, piesakieties.";
+  @override
   String get observations => "Novērojumi";
   @override
   String get product_custom_filter_title => "Pielāgots filtrs";
@@ -13314,6 +13577,8 @@ class $lv_LV extends S {
   @override
   String get petal_zygomorphic => "nereguliarus";
   @override
+  String get photo_search_empty => "Google MI (mākslīgais intelekts) neatpazina kādu konkrētu ziedu attēlā. Mēģiniet vēlreiz ar dažādiem leņķa, attāluma vai gaismas apstākļiem. Ja jūs jau to darāt, izskatās, ka MI virsnieks drīzumā nenāks.";
+  @override
   String get auth_invalid_code => "Ievadiet derīgu SMS kodu";
   @override
   String promotion_content(String date) => "Tā ir maksas funkcija. To var izmantot bez maksas līdz $date";
@@ -13353,6 +13618,8 @@ class $uk_UA extends S {
   String get auth_verify_email_title => "Підтвердіть ваш аккаунт";
   @override
   String get east_tropical_africa => "Східна тропічна Африка";
+  @override
+  String get photo_search_failed => "Помилка пошуку за фотографією. Перевірте підключення до Інтернету та повторіть спробу.";
   @override
   String get middle_asia => "Середня Азія";
   @override
@@ -13401,6 +13668,8 @@ class $uk_UA extends S {
   String get auth_sms_terms_of_service => "Коли ви торкнетесь опції “Підтвердити номер телефону”, вам може надійти SMS-повідомлення. За SMS і використання трафіку може стягуватися плата.";
   @override
   String get habitat_rock => "скелі або гори";
+  @override
+  String get photo_search_note => "Це експериментальна функція, яка працює лише в Інтернеті. Іноді він знаходить саме те, що ви шукаєте, іноді навіть не близькі. Я повністю покладаюся на Google тут, оскільки вони роблять всю важку роботу. З часом вона повинна бути кращою і кращою, але вона не була побудована для визнання квітки. Використовуйте це розумно і не варто судити про всю програму на основі цього експерименту. Для цілей якості всі результати пошуку (не фотографії) будуть збережені.";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -13614,6 +13883,8 @@ class $uk_UA extends S {
   @override
   String get habitat_garden => "сади або поля";
   @override
+  String get photo_to_search_by => "Фото для пошуку";
+  @override
   String get product_purchase => "Придбати";
   @override
   String get russian_far_east => "Російський Далекий Схід";
@@ -13776,6 +14047,8 @@ class $uk_UA extends S {
   @override
   String get northeast_tropical_africa => "Північно-східна тропічна Африка";
   @override
+  String get photo_search_no_login => "Пошук за фото доступний лише для зареєстрованих користувачів. Увійдіть у систему.";
+  @override
   String get observations => "Спостереження";
   @override
   String get product_custom_filter_title => "Спеціальний фільтр";
@@ -13816,6 +14089,8 @@ class $uk_UA extends S {
   @override
   String get petal_zygomorphic => "зигоморфной";
   @override
+  String get photo_search_empty => "Google AI (штучний інтелект) не визнавав жодної квітки на картинці. Повторіть спробу з різних кутів, відстаней або світла. Якщо ви вже зробили це, схоже, AI повелитель не прийде в будь-який час найближчим часом.";
+  @override
   String get auth_invalid_code => "Введіть дійсний код SMS";
   @override
   String promotion_content(String date) => "Це платна функція. Ви можете використовувати його безкоштовно до $date";
@@ -13855,6 +14130,8 @@ class $sl_SI extends S {
   String get auth_verify_email_title => "Potrdi svoj račun";
   @override
   String get east_tropical_africa => "Vzhodna tropska Afrika";
+  @override
+  String get photo_search_failed => "Iskanje po fotografiji ni uspelo. Preverite internetno povezavo in poskusite znova.";
   @override
   String get middle_asia => "Srednja Azija";
   @override
@@ -13903,6 +14180,8 @@ class $sl_SI extends S {
   String get auth_sms_terms_of_service => "Če se dotaknete možnosti »Preverjanje telefonske številke«, bo morda poslano sporočilo SMS. Pošiljanje sporočila in prenos podatkov boste morda morali plačati.";
   @override
   String get habitat_rock => "skale ali gore";
+  @override
+  String get photo_search_note => "To je poskusna funkcija, ki deluje samo v spletu. Včasih najde točno to, kar iščete, včasih tudi ne blizu. Tukaj sem popolnoma odvisna od Googla, ker delajo vse trdo delo. Sčasoma mora biti boljše in boljše, vendar ni bilo zgrajeno predvsem zaradi priznanja cvetja. Uporabite ga pametno in prosimo, da ne ocenjujete celotne aplikacije na podlagi tega poskusa. Za kakovostne namene bodo shranjeni vsi rezultati iskanja (ne fotografij).";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -14116,6 +14395,8 @@ class $sl_SI extends S {
   @override
   String get habitat_garden => "vrtov ali polja";
   @override
+  String get photo_to_search_by => "Fotografije za iskanje po";
+  @override
   String get product_purchase => "Kupiti";
   @override
   String get russian_far_east => "Ruski daleč vzhod";
@@ -14278,6 +14559,8 @@ class $sl_SI extends S {
   @override
   String get northeast_tropical_africa => "Severovzhodna tropska Afrika";
   @override
+  String get photo_search_no_login => "Iskanje po fotografijah je na voljo samo za prijavljene uporabnike. Prijavite se.";
+  @override
   String get observations => "Opažanja";
   @override
   String get product_custom_filter_title => "Filter po meri";
@@ -14318,6 +14601,8 @@ class $sl_SI extends S {
   @override
   String get petal_zygomorphic => "zigomorfna";
   @override
+  String get photo_search_empty => "Google UI (umetna inteligenca) na sliki ni prepoznal nobene določene rože. Poskusite znova z različnimi koti, razdaljo ali svetlobnimi pogoji. Če si že naredil, izgleda, da UI nadrejeni ne bo kmalu prišel.";
+  @override
   String get auth_invalid_code => "Vnesite veljavno kodo SMS";
   @override
   String promotion_content(String date) => "To je plačana funkcija. Uporabite ga lahko brezplačno do $date";
@@ -14357,6 +14642,8 @@ class $ar_EG extends S {
   String get auth_verify_email_title => "تحقق من حسابك";
   @override
   String get east_tropical_africa => "شرق الاستوائية أفريقيا";
+  @override
+  String get photo_search_failed => "فشل البحث بالصور. تحقق من اتصالك بالإنترنت وحاول مرة أخرى.";
   @override
   String get middle_asia => "آسيا الوسطى";
   @override
@@ -14405,6 +14692,8 @@ class $ar_EG extends S {
   String get auth_sms_terms_of_service => "عند النقر على ، قد يتمّ إرسال رسالة قصيرة SMS وقد يتمّ تطبيق رسوم الرسائل والبيانات.";
   @override
   String get habitat_rock => "صخور أو جبال";
+  @override
+  String get photo_search_note => "هذه ميزة تجريبية تعمل عبر الإنترنت فقط. في بعض الأحيان تجد ما تبحث عنه بالضبط ، وأحيانًا لا تكون قريبة من ذلك. أنا أعتمد تمامًا على Google هنا حيث أنهم يقومون بكل العمل الشاق. مع مرور الوقت ، يجب أن يكون أفضل وأفضل ، ولكن لم يتم بناؤه في المقام الأول للتعرف على الزهرة. استخدمها بحكمة ورجاء عدم الحكم على التطبيق بأكمله بناءً على هذه التجربة. لأغراض الجودة ، سيتم حفظ جميع نتائج البحث (وليس الصور).";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -14618,6 +14907,8 @@ class $ar_EG extends S {
   @override
   String get habitat_garden => "حدائق أو حقول";
   @override
+  String get photo_to_search_by => "صور للبحث عن طريق";
+  @override
   String get product_purchase => "شراء";
   @override
   String get russian_far_east => "الشرق الأقصى الروسي";
@@ -14780,6 +15071,8 @@ class $ar_EG extends S {
   @override
   String get northeast_tropical_africa => "شمال شرق الاستوائية أفريقيا";
   @override
+  String get photo_search_no_login => "البحث بالصور متاح فقط للمستخدمين المسجلين. الرجاء تسجيل الدخول.";
+  @override
   String get observations => "الملاحظات";
   @override
   String get product_custom_filter_title => "تصفية مخصص";
@@ -14820,6 +15113,8 @@ class $ar_EG extends S {
   @override
   String get petal_zygomorphic => "غير منتظم";
   @override
+  String get photo_search_empty => "لم تتعرف Google AI (الذكاء الاصطناعي) على أي زهرة معينة في الصورة. حاول مرة أخرى بزاوية أو مسافة أو ظروف إضاءة مختلفة. إذا كنت بالفعل فعلت ذلك يبدو أن أفرلورد AI لن يأتي في أي وقت قريب.";
+  @override
   String get auth_invalid_code => "أدخل رمزًا صالحًا";
   @override
   String promotion_content(String date) => "هذه هي الميزة المدفوعة. يمكنك استخدامه مجانا حتى $date";
@@ -14859,6 +15154,8 @@ class $pt_PT extends S {
   String get auth_verify_email_title => "Verifique sua conta";
   @override
   String get east_tropical_africa => "África Tropical Oriental";
+  @override
+  String get photo_search_failed => "Pesquisa por foto falhou. Verifique sua conexão com a Internet e tente novamente.";
   @override
   String get middle_asia => "Ásia média";
   @override
@@ -14907,6 +15204,8 @@ class $pt_PT extends S {
   String get auth_sms_terms_of_service => "Se você tocar em “Confirmar número de telefone”, um SMS poderá ser enviado e tarifas de mensagens e de dados serão cobradas.";
   @override
   String get habitat_rock => "rochas e montanhas";
+  @override
+  String get photo_search_note => "Esta é uma funcionalidade experimental que funciona apenas online. Às vezes, encontra exatamente o que você está procurando, às vezes nem perto. Eu confio totalmente no Google, já que eles estão fazendo todo o trabalho duro. Conforme o tempo passa, deve ser melhor e melhor, mas não foi construído principalmente para o reconhecimento da flor. Use-o com sabedoria e, por favor, não julgue o aplicativo inteiro com base nesse experimento. Para fins de qualidade, todos os resultados da pesquisa (não fotos) serão salvos.";
   @override
   String get taxonomy_subserie => "subsérie";
   @override
@@ -15116,6 +15415,8 @@ class $pt_PT extends S {
   @override
   String get habitat_garden => "jardins e campos";
   @override
+  String get photo_to_search_by => "Foto para pesquisar por";
+  @override
   String get product_purchase => "Compra";
   @override
   String get russian_far_east => "Extremo Oriente Russo";
@@ -15278,6 +15579,8 @@ class $pt_PT extends S {
   @override
   String get northeast_tropical_africa => "Nordeste da África Tropical";
   @override
+  String get photo_search_no_login => "A pesquisa por foto está disponível apenas para usuários registrados. Por favor entre.";
+  @override
   String get observations => "Observações";
   @override
   String get product_custom_filter_title => "Filtro customizado";
@@ -15317,6 +15620,8 @@ class $pt_PT extends S {
   String get product_no_ads_title => "Nenhum anúncio indesejado";
   @override
   String get petal_zygomorphic => "zigomorfo";
+  @override
+  String get photo_search_empty => "O Google IA (inteligência artificial) não reconheceu nenhuma flor em particular na foto. Tente novamente com diferentes condições de ângulo, distância ou luz. Se você já fez isso, parece que o senhor da IA não virá tão cedo.";
   @override
   String get auth_invalid_code => "Insira um código SMS válido";
   @override

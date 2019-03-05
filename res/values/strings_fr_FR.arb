@@ -271,5 +271,11 @@
   "subscription_intro3": "Si vous hésitez encore à cliquer sur le bouton ci-dessous, il y a une période d'essai de 30 jours pour les deux abonnements.",
 
   "promotion_title": "Fonctionnalité payante",
-  "promotion_content": "Ceci est une fonctionnalité payante. Vous pouvez l'utiliser gratuitement jusqu'à $date"
+  "promotion_content": "Ceci est une fonctionnalité payante. Vous pouvez l'utiliser gratuitement jusqu'à $date",
+
+  "photo_search_no_login": "La recherche par photo est disponible uniquement pour les utilisateurs connectés. Veuillez vous connecter.",
+  "photo_search_failed": "La recherche par photo a échoué. Vérifiez votre connexion Internet et réessayez.",
+  "photo_to_search_by": "Photo à rechercher par",
+  "photo_search_note": "Ceci est une fonctionnalité expérimentale qui ne fonctionne qu'en ligne. Parfois, il trouve exactement ce que vous cherchez, parfois même pas proche. Je compte totalement sur Google ici car ils font tout le travail. Au fil du temps, il devrait être de mieux en mieux, mais il n'a pas été construit principalement pour la reconnaissance des fleurs. Utilisez-le judicieusement et ne jugez pas l'ensemble de l'application en fonction de cette expérience. Pour des raisons de qualité, tous les résultats de recherche (pas les photos) seront enregistrés.",
+  "photo_search_empty": "Google IA (Intelligence artificielle) n'a reconnu aucune fleur particulière sur la photo. Réessayez avec différents angles, distances ou conditions d'éclairage. Si vous l'avez déjà fait, il semble que le suzerain d'IA ne viendra pas de sitôt."
 }

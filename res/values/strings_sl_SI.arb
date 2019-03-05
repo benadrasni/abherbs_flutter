@@ -270,5 +270,11 @@
   "subscription_intro3": "Če se še vedno obotavljate na spodnji gumb, je za obe naročnini na voljo 30-dnevno poskusno obdobje.",
 
   "promotion_title": "Plačana funkcija",
-  "promotion_content": "To je plačana funkcija. Uporabite ga lahko brezplačno do $date"
+  "promotion_content": "To je plačana funkcija. Uporabite ga lahko brezplačno do $date",
+
+  "photo_search_no_login": "Iskanje po fotografijah je na voljo samo za prijavljene uporabnike. Prijavite se.",
+  "photo_search_failed": "Iskanje po fotografiji ni uspelo. Preverite internetno povezavo in poskusite znova.",
+  "photo_to_search_by": "Fotografije za iskanje po",
+  "photo_search_note": "To je poskusna funkcija, ki deluje samo v spletu. Včasih najde točno to, kar iščete, včasih tudi ne blizu. Tukaj sem popolnoma odvisna od Googla, ker delajo vse trdo delo. Sčasoma mora biti boljše in boljše, vendar ni bilo zgrajeno predvsem zaradi priznanja cvetja. Uporabite ga pametno in prosimo, da ne ocenjujete celotne aplikacije na podlagi tega poskusa. Za kakovostne namene bodo shranjeni vsi rezultati iskanja (ne fotografij).",
+  "photo_search_empty": "Google UI (umetna inteligenca) na sliki ni prepoznal nobene določene rože. Poskusite znova z različnimi koti, razdaljo ali svetlobnimi pogoji. Če si že naredil, izgleda, da UI nadrejeni ne bo kmalu prišel."
 }
