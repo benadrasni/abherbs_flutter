@@ -270,5 +270,11 @@
   "subscription_intro3": "Om du fortfarande tvekar att träffa knappen nedan finns det en testperiod på 30 dagar för båda prenumerationerna.",
 
   "promotion_title": "Betald funktion",
-  "promotion_content": "Detta är en betald funktion. Du kan använda den gratis till $date"
+  "promotion_content": "Detta är en betald funktion. Du kan använda den gratis till $date",
+
+  "photo_search_no_login": "Sök på foto är endast tillgängligt för inloggade användare. Vänligen logga in.",
+  "photo_search_failed": "Sök på foto misslyckades. Kontrollera din internetanslutning och försök igen.",
+  "photo_to_search_by": "Foto att söka efter",
+  "photo_search_note": "Det här är en experimentell funktion som bara fungerar online. Ibland hittar det exakt vad du letar efter, ibland inte ens nära. Jag är helt beroende av Google här, eftersom de gör allt hårt arbete. Med tiden går det att bli bättre och bättre, men det var inte främst byggt för blomsters erkännande. Använd det klokt och var god och döm inte hela applikationen baserat på detta experiment. För kvalitetsändamål sparas alla sökresultat (inte foton).",
+  "photo_search_empty": "Google AI (artificiell intelligens) kände inte igen någon speciell blomma på bilden. Försök igen med olika vinkel-, distans- eller ljusförhållanden. Om du redan gjorde det ser det ut som AI overlord kommer inte när som helst snart."
 }

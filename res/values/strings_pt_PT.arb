@@ -270,5 +270,11 @@
   "subscription_intro3": "Se você ainda hesitar em clicar no botão abaixo, haverá um período experimental de 30 dias para ambas as inscrições.",
 
   "promotion_title": "Recurso pago",
-  "promotion_content": "Este é um recurso pago. Você pode usá-lo gratuitamente até $date"
+  "promotion_content": "Este é um recurso pago. Você pode usá-lo gratuitamente até $date",
+
+  "photo_search_no_login": "A pesquisa por foto está disponível apenas para usuários registrados. Por favor entre.",
+  "photo_search_failed": "Pesquisa por foto falhou. Verifique sua conexão com a Internet e tente novamente.",
+  "photo_to_search_by": "Foto para pesquisar por",
+  "photo_search_note": "Esta é uma funcionalidade experimental que funciona apenas online. Às vezes, encontra exatamente o que você está procurando, às vezes nem perto. Eu confio totalmente no Google, já que eles estão fazendo todo o trabalho duro. Conforme o tempo passa, deve ser melhor e melhor, mas não foi construído principalmente para o reconhecimento da flor. Use-o com sabedoria e, por favor, não julgue o aplicativo inteiro com base nesse experimento. Para fins de qualidade, todos os resultados da pesquisa (não fotos) serão salvos.",
+  "photo_search_empty": "O Google IA (inteligência artificial) não reconheceu nenhuma flor em particular na foto. Tente novamente com diferentes condições de ângulo, distância ou luz. Se você já fez isso, parece que o senhor da IA não virá tão cedo."
 }

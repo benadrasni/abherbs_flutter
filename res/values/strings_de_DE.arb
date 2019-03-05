@@ -270,5 +270,11 @@
   "subscription_intro3": "Wenn Sie immer noch zögern, den unten stehenden Button zu drücken, gibt es eine 30-tägige Probezeit für beide Abonnements.",
 
   "promotion_title": "Bezahlte Funktion",
-  "promotion_content": "Dies ist eine kostenpflichtige Funktion. Sie können es bis $date kostenlos nutzen."
+  "promotion_content": "Dies ist eine kostenpflichtige Funktion. Sie können es bis $date kostenlos nutzen.",
+
+  "photo_search_no_login": "Die Suche nach Fotos ist nur für angemeldete Benutzer verfügbar. Bitte loggen Sie sich ein.",
+  "photo_search_failed": "Suche nach Foto fehlgeschlagen. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
+  "photo_to_search_by": "Foto zum Suchen nach",
+  "photo_search_note": "Dies ist ein experimentelles Feature, das nur online funktioniert. Manchmal findet es genau das, wonach Sie suchen, manchmal nicht einmal in der Nähe. Ich bin völlig auf Google angewiesen, da sie die ganze harte Arbeit machen. Mit der Zeit sollte es besser und besser werden, aber es wurde nicht in erster Linie für die Anerkennung der Blume gebaut. Verwende es mit Bedacht und beurteile bitte nicht die gesamte Anwendung basierend auf diesem Experiment. Aus Qualitätsgründen werden alle Suchergebnisse (nicht Fotos) gespeichert.",
+  "photo_search_empty": "Google KI (Künstliche Intelligenz) hat keine bestimmte Blume auf dem Bild erkannt. Versuchen Sie es erneut mit anderen Winkeln, Entfernungen oder Lichtverhältnissen. Wenn du es schon getan hast, sieht es so aus, als ob der KI Overlord nicht bald kommen würde."
 }
