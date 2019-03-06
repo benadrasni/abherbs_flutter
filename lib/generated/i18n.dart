@@ -24,7 +24,6 @@ class S implements WidgetsLocalizations {
   String get always_my_region_subtitle => "Your region will be pre-set to the filter";
   String get always_my_region_title => "Always add my region to the filter";
   String get antarctic_continent => "Antarctic Continent";
-  String get app_name => "What's that flower?";
   String get arabian_peninsula => "Arabian Peninsula";
   String get asia_temperate => "Asia-Temperate";
   String get asia_tropical => "Asia-Tropical";
