@@ -7443,7 +7443,7 @@ class $es_ES extends S {
   @override
   String get legend => "Leyenda";
   @override
-  String get about => "Acerca de";
+  String get about => "Información";
   @override
   String get product_no_ads_description => "La aplicación no mostrará el anuncio publicitario en la parte inferior de la pantalla.";
   @override
@@ -7467,7 +7467,7 @@ class $es_ES extends S {
   @override
   String get middle_asia => "Medio Asia";
   @override
-  String get always_my_region_subtitle => "Su región estará preestablecida para el filtro";
+  String get always_my_region_subtitle => "Su región estará predefinida en el filtro";
   @override
   String get feedback_translate => "Puede reportar cualquier error tipográfico o error que encontró o enviar una nueva traducción en su idioma.";
   @override
@@ -7605,7 +7605,7 @@ class $es_ES extends S {
   @override
   String get auth_email => "Iniciar sesión con el correo electrónico";
   @override
-  String get arabian_peninsula => "Península Arabica";
+  String get arabian_peninsula => "Península Arábica";
   @override
   String get search_taxonomy => "Buscar en taxonomía";
   @override
@@ -7667,7 +7667,7 @@ class $es_ES extends S {
   @override
   String get auth_twitter => "Iniciar sesión con Twitter";
   @override
-  String get auth_create_account => "Crea una cuenta";
+  String get auth_create_account => "Crear una cuenta";
   @override
   String get offline_download_progress => "Descargando fotos e ilustraciones ...";
   @override
@@ -7845,7 +7845,7 @@ class $es_ES extends S {
   @override
   String get southern_africa => "Africa del Sur";
   @override
-  String get always_my_region_title => "Siempre agregue mi región al filtro";
+  String get always_my_region_title => "Siempre añadir mi región al filtro";
   @override
   String get observation_upload_fail => "Subida fallida. Por favor, compruebe su conexión a Internet y vuelva a intentarlo.";
   @override
@@ -7919,7 +7919,7 @@ class $es_ES extends S {
   @override
   String get southeastern_europe => "Sudorientale de Europa";
   @override
-  String get auth_empty_password => "No puedes dejar este campo en blanco.";
+  String get auth_empty_password => "La contraseña no puede estar en blanco.";
   @override
   String get observation_upload_success => "Las observaciones se han subido con éxito.";
   @override
@@ -7935,7 +7935,7 @@ class $es_ES extends S {
   @override
   String get photo_search_empty => "Google IA (inteligencia artificial) no reconoció ninguna flor en particular en la imagen. Inténtalo de nuevo con diferentes ángulos, distancias o condiciones de luz. Si ya lo hiciste, parece que IA Overlord no vendrá pronto.";
   @override
-  String get auth_invalid_code => "Ingrese un código SMS válido";
+  String get auth_invalid_code => "Introduce un código SMS válido";
   @override
   String promotion_content(String date) => "Esta es una característica de pago. Puedes usarlo gratis hasta $date";
   @override
