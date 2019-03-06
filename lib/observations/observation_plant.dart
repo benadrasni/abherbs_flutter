@@ -89,7 +89,7 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
                 MaterialPageRoute(
                     builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, observation)),
               ).then((value) {
-                if (value != null && value) {
+                if (value != null && value && widget.parentKey.currentState != null) {
                   widget.parentKey.currentState.showSnackBar(SnackBar(
                     content: Text(S.of(context).observation_saved),
                   ));
