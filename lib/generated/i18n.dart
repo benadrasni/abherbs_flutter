@@ -7062,6 +7062,8 @@ class $sk_SK extends S {
   @override
   String get list_info => "Vyber si jednu";
   @override
+  String get my_region => "Moja oblasť";
+  @override
   String get indian_subcontinent => "Indický subkontinent";
   @override
   String get product_offline_description => "Aplikáciu budete môcť spustiť bez pripojenia k internetu.";
