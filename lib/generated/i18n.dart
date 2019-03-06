@@ -1316,7 +1316,7 @@ class $pl_PL extends S {
   @override
   String get northern_america => "Ameryka Północna";
   @override
-  String get product_search_description => "Będziesz mógł znaleźć kwiatek pod polską lub łacińską nazwą lub według jego taksonu (np. rząd, rodzina, rodzaj).";
+  String get product_search_description => "Będzie można znaleźć kwiat pod polską lub łacińską nazwą, lub według jego taksonu (np. rząd, rodzina, rodzaj).";
   @override
   String get product_change => "Zmieniać";
   @override
@@ -1402,7 +1402,7 @@ class $pl_PL extends S {
   @override
   String get south_central_pacific => "Południowo-środkowy Pacyfik";
   @override
-  String get product_custom_filter_description => "Będziesz mógł zmienić domyślną kolejność i liczbę filtrów (kolor, siedlisko, płatek, dystrybucja).";
+  String get product_custom_filter_description => "Będzie można zmienić domyślną kolejność i liczbę filtrów (kolor, siedlisko, płatek, dystrybucja).";
   @override
   String get auth_password_hint => "Hasło";
   @override
@@ -1412,7 +1412,7 @@ class $pl_PL extends S {
   @override
   String get plant_herbalism => "Ziołolecznictwo";
   @override
-  String get product_restore_purchases => "Przywróć zakupy";
+  String get product_restore_purchases => "Przywróć zakup";
   @override
   String get auth_reset_password => "Zresetuj hasło";
   @override
@@ -1424,7 +1424,7 @@ class $pl_PL extends S {
   @override
   String get show_translation => "Pokaż przetłumaczony tekst";
   @override
-  String get subscription_monthly_title => "Przechowuj zdjęcia - co miesiąc";
+  String get subscription_monthly_title => "Przechowuj zdjęcia - miesięczna";
   @override
   String get taxonomy_subsectio => "Podsekcja";
   @override
@@ -1436,7 +1436,7 @@ class $pl_PL extends S {
   @override
   String get indian_subcontinent => "Subkontynent indyjski";
   @override
-  String get product_offline_description => "Będziesz mógł uruchomić aplikację bez połączenia z Internetem.";
+  String get product_offline_description => "Będzie można uruchomić aplikację, nie mając połączenia z Internetem.";
   @override
   String get product_subscribed => "Subskrybujesz";
   @override
@@ -1518,7 +1518,7 @@ class $pl_PL extends S {
   @override
   String get feedback_submit_translate_app => "Poprawki tłumaczenia aplikacji";
   @override
-  String get subscription_yearly_title => "Store photos - yearly";
+  String get subscription_yearly_title => "Przechowuj zdjęcia - roczna";
   @override
   String get observation_upload_progress => "Przesyłanie zaobserwowanych okazów...";
   @override
@@ -1574,7 +1574,7 @@ class $pl_PL extends S {
   @override
   String get subscription_info => "Udostępnione okazy są widoczne tylko dla subskrybentów.";
   @override
-  String get product_photo_search_description => "Będziesz mógł znaleźć kwiatek na zdjęciu. Ta funkcja wykorzystuje sztuczną inteligencję do oznaczania zdjęć z Google.";
+  String get product_photo_search_description => "Będzie można wyszukać kwiat po zdjęciu. Ta funkcja wykorzystuje oznaczanie zdjęć przez sztuczną inteligencję Google.";
   @override
   String get auth_phone => "Zaloguj się z użyciem numeru telefonu";
   @override
@@ -1594,7 +1594,7 @@ class $pl_PL extends S {
   @override
   String get photo_to_search_by => "Wybierz zdjęcie";
   @override
-  String get product_purchase => "Zakupić";
+  String get product_purchase => "Kup";
   @override
   String get russian_far_east => "Rosyjski Daleki Wschód";
   @override
@@ -1676,7 +1676,7 @@ class $pl_PL extends S {
   @override
   String get auth_phone_hint => "Numer telefonu";
   @override
-  String get product_observations_description => "Będziesz mógł zapisać własne zaobserwowane okazy z nazwą, datą, lokalizacją, zdjęciami i notatkami kwiatów.";
+  String get product_observations_description => "Będzie można zapisać własne zaobserwowane okazy z nazwą, datą, lokalizacją, zdjęciami i notatkami kwiatów.";
   @override
   String get plant_trivia => "Ciekawostki";
   @override
@@ -1716,7 +1716,7 @@ class $pl_PL extends S {
   @override
   String get color_yellow => "żółty";
   @override
-  String get subantarctic_islands => "Wyspy Subantarctic";
+  String get subantarctic_islands => "Wyspy subantarktyczne";
   @override
   String get product_observations_title => "Zaobserwowane okazy";
   @override
@@ -1738,7 +1738,7 @@ class $pl_PL extends S {
   @override
   String get no => "Nie";
   @override
-  String get rate_text => "Wyrażając swoją opinię, dajesz Autorowi aplikacji chęć i motywację do jej dalszego rozwijania. Napisz proszę kilka miłych słów w sklepu z aplikacjami.";
+  String get rate_text => "Wyrażając swoją opinię, dajesz Autorowi aplikacji chęć i motywację do jej dalszego rozwijania. Napisz proszę kilka miłych słów w Sklepie Play.";
   @override
   String get auth_sign_out => "Wyloguj się";
   @override
@@ -1776,7 +1776,7 @@ class $pl_PL extends S {
   @override
   String get southeastern_usa => "Południowo-wschodnie USA";
   @override
-  String get product_subscribe_failed => "akup nie powiódł się";
+  String get product_subscribe_failed => "Subskrybowanie nie powiodło się";
   @override
   String get plant_height_from => "Wysokość:";
   @override
@@ -1802,7 +1802,7 @@ class $pl_PL extends S {
   @override
   String get auth_invalid_code => "Wpisz poprawny kod SMS";
   @override
-  String promotion_content(String date) => "To jest płatna funkcja. Możesz go używać za darmo do $date";
+  String promotion_content(String date) => "To jest płatna funkcja. Możesz jej używać za darmo do $date";
   @override
   String auth_reset_password_email_message(String _email) => "Postępuj zgodnie z instrukcjami przesłanymi do $_email, aby zresetować hasło.";
   @override
