@@ -9820,6 +9820,8 @@ class $da_DK extends S {
   @override
   String get petal_5 => "5";
   @override
+  String get filter_petal => "kronblad";
+  @override
   String get color_white => "hvid";
   @override
   String get observation => "Observation";
@@ -12031,6 +12033,8 @@ class $hr_HR extends S {
   String get offline_subtitle => "zahtijeva dodatni prostor od 300+ MB.";
   @override
   String get product_no_ads_title => "Nema neželjenog oglasa";
+  @override
+  String get petal_zygomorphic => "zigomorfnih";
   @override
   String get photo_search_empty => "Google UI (umjetna inteligencija) nije prepoznao nijedan određeni cvijet na slici. Pokušajte ponovno s različitim kutovima, udaljenostima ili uvjetima osvjetljenja. Ako ste to već učinili, izgleda da UI vladar neće uskoro doći.";
   @override
