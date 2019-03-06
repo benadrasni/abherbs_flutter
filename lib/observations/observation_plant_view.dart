@@ -67,7 +67,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
             MaterialPageRoute(
                 builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.observation)),
           ).then((value) {
-            if (value) {
+            if (value != null && value) {
               widget.parentKey.currentState.showSnackBar(SnackBar(
                 content: Text(S.of(context).observation_saved),
               ));

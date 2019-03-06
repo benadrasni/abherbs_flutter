@@ -32,9 +32,20 @@ class Offline {
       Prefs.getBoolF(keyOffline, false).then((value) {
         _offline = value;
         if (value) {
-          Prefs.getIntF(keyOfflinePlant, 0).then((value) {
+          Prefs.getStringF(keyOfflinePlant, '0').then((value) {
             rootReference.child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((DataSnapshot snapshot) {
-              downloadFinished = snapshot.value == null || value >= snapshot.value;
+              downloadFinished = snapshot.value == null || int.parse(value) >= snapshot.value;
+            });
+          }).catchError((_) {
+            // deal with previous int shared preferences
+            Prefs.getIntF(keyOfflinePlant, 0).then((value) {
+              Prefs.setString(keyOfflinePlant, value.toString());
+              rootReference.child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((DataSnapshot snapshot) {
+                downloadFinished = snapshot.value == null || value >= snapshot.value;
+              });
+            });
+            Prefs.getIntF(keyOfflineFamily, 0).then((value) {
+              Prefs.setString(keyOfflineFamily, value.toString());
             });
           });
           rootReference.child(firebaseVersions).child(firebaseAttributeLastUpdate).once().then((DataSnapshot snapshot) {
@@ -69,7 +80,7 @@ class Offline {
   }
 
   static Future<void> setKeepSynced(int section, bool value) async {
-    if (!value || (_offline && _downloadDB && !_keepSynced[section-1])) {
+    if (!value || (_offline && _downloadDB && !_keepSynced[section - 1])) {
       var reference = FirebaseDatabase.instance.reference();
       switch (section) {
         case 1:
@@ -130,7 +141,7 @@ class Offline {
   }
 
   static Future<bool> downloadFamilies(Function(int, int) onFamilyDownload) async {
-    int position = await Prefs.getIntF(keyOfflineFamily, 0);
+    int position = int.parse(await Prefs.getStringF(keyOfflineFamily, '0'));
     int familyTotal = await FirebaseDatabase.instance
         .reference()
         .child(firebaseFamiliesToUpdate)
@@ -142,7 +153,7 @@ class Offline {
     while (position < familyTotal) {
       if (await _downloadFamilyIcon(position)) {
         position++;
-        Prefs.setInt(keyOfflineFamily, position);
+        Prefs.setString(keyOfflineFamily, position.toString());
         onFamilyDownload(position, familyTotal);
         if (downloadPaused) {
           break;
@@ -178,7 +189,7 @@ class Offline {
   }
 
   static Future<bool> _downloadPlants(Function(int, int) onPlantDownload) async {
-    int position = await Prefs.getIntF(keyOfflinePlant, 0);
+    int position = int.parse(await Prefs.getStringF(keyOfflinePlant, '0'));
     int plantTotal =
         await FirebaseDatabase.instance.reference().child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((DataSnapshot snapshot) {
       return snapshot.value ?? 0;
@@ -186,7 +197,7 @@ class Offline {
     while (position < plantTotal) {
       if (await _downloadPlantPhotos(position)) {
         position++;
-        Prefs.setInt(keyOfflinePlant, position);
+        Prefs.setString(keyOfflinePlant, position.toString());
         onPlantDownload(position, plantTotal);
         if (downloadPaused) {
           break;
@@ -252,8 +263,8 @@ class Offline {
     if (await photosDir.exists()) {
       photosDir.delete(recursive: true);
     }
-    Prefs.setInt(keyOfflineFamily, 0);
-    Prefs.setInt(keyOfflinePlant, 0);
+    Prefs.setString(keyOfflineFamily, '0');
+    Prefs.setString(keyOfflinePlant, '0');
     Prefs.setString(keyOfflineDB, null);
   }
 

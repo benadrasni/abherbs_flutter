@@ -182,16 +182,19 @@ class _AppState extends State<App> {
       return languageCountry.length < 2 ? null : Locale(languageCountry[0], languageCountry[1]);
     });
 
-    Prefs.getIntF(keyRateCount, rateCountInitial).then((value) {
-      if (value < 0) {
+    Prefs.getStringF(keyRateCount, rateCountInitial.toString()).then((value) {
+      if (int.parse(value) < 0) {
         Prefs.getStringF(keyRateState, rateStateInitial).then((value) {
           if (value == rateStateInitial) {
             Prefs.setString(keyRateState, rateStateShould);
           }
         });
       } else {
-        Prefs.setInt(keyRateCount, value - 1);
+        Prefs.setString(keyRateCount, (int.parse(value) - 1).toString());
       }
+    }).catchError((_) {
+      // deal with previous int shared preferences
+      Prefs.setString(keyRateCount, rateCountInitial.toString());
     });
 
     _firebaseCloudMessagingListeners();
