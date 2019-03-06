@@ -2,7 +2,7 @@
 Map<String, dynamic> dateTimeToJson(DateTime dateTime) {
   Map<String, dynamic> result = {};
   result['year'] = dateTime.year - 1900;
-  result['month'] = dateTime.month;
+  result['month'] = dateTime.month - 1;
   result['date'] = dateTime.day;
   result['hours'] = dateTime.hour;
   result['minutes'] = dateTime.minute;
