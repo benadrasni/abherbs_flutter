@@ -180,19 +180,23 @@ class MyFirebaseAnimatedListState extends State<MyFirebaseAnimatedList> {
     if (!_loaded) {
       return; // AnimatedList is not created yet
     }
-    _animatedListKey.currentState.insertItem(index, duration: widget.duration);
+    if (_animatedListKey.currentState != null) {
+      _animatedListKey.currentState.insertItem(index, duration: widget.duration);
+    }
   }
 
   void _onChildRemoved(int index, DataSnapshot snapshot) {
     // The child should have already been removed from the model by now
     assert(index >= _model.length || _model[index].key != snapshot.key);
-    _animatedListKey.currentState.removeItem(
-      index,
-          (BuildContext context, Animation<double> animation) {
-        return widget.itemBuilder(context, snapshot, animation, index);
-      },
-      duration: widget.duration,
-    );
+    if (_animatedListKey.currentState != null) {
+      _animatedListKey.currentState.removeItem(
+        index,
+            (BuildContext context, Animation<double> animation) {
+          return widget.itemBuilder(context, snapshot, animation, index);
+        },
+        duration: widget.duration,
+      );
+    }
   }
 
   // No animation, just update contents
