@@ -249,7 +249,7 @@ class _ColorState extends State<Color> {
                               });
                             }
                           });
-                          Prefs.setInt(keyRateCount, rateCountInitial);
+                          Prefs.setString(keyRateCount, rateCountInitial.toString());
                         },
                       ),
                     ],

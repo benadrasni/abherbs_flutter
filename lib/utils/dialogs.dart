@@ -28,7 +28,7 @@ Future<void> rateDialog(BuildContext context) async {
           FlatButton(
             child: Text(S.of(context).rate_later),
             onPressed: () {
-              Prefs.setInt(keyRateCount, rateCountInitial);
+              Prefs.setString(keyRateCount, rateCountInitial.toString());
               Prefs.setString(keyRateState, rateStateInitial).then((value) {
                 Navigator.of(context).pop();
               }).catchError((error) {
