@@ -1346,7 +1346,7 @@ class $pl_PL extends S {
   @override
   String get southwestern_pacific => "Południowo-zachodni Pacyfik";
   @override
-  String get asia_tropical => "Azja tropikalna";
+  String get asia_tropical => "Azja Tropikalna";
   @override
   String get northwestern_usa => "Północno-zachodnie USA";
   @override
@@ -1360,7 +1360,7 @@ class $pl_PL extends S {
   @override
   String get habitat_message => "Co znajduje się wokół Ciebie? Zidentyfikuj otoczenie.";
   @override
-  String get offline_download_fail => "Pobieranie nie udane. Sprawdź połączenie internetowe lub wolne miejsce na urządzeniu i spróbuj ponownie.";
+  String get offline_download_fail => "Pobieranie się nie powiodło. Sprawdź stan połączenia internetowego lub ilość wolnego miejsca na urządzeniu i spróbuj ponownie.";
   @override
   String get observation_photo_delete => "Usuń zdjęcie";
   @override
@@ -1408,7 +1408,7 @@ class $pl_PL extends S {
   @override
   String get habitat_meadow => "Łąki";
   @override
-  String get auth_google => "Zaloguj się przez Google";
+  String get auth_google => "Zaloguj się za pomocą Google";
   @override
   String get plant_herbalism => "Ziołolecznictwo";
   @override
@@ -1454,7 +1454,7 @@ class $pl_PL extends S {
   @override
   String get taxonomy_familia => "Rodzina";
   @override
-  String get antarctic_continent => "Kontynent Antarktyczny";
+  String get antarctic_continent => "Antarktyka";
   @override
   String get observation_delete => "Usuń ten okaz";
   @override
@@ -1514,7 +1514,7 @@ class $pl_PL extends S {
   @override
   String get taxonomy_genus => "Rodzaj";
   @override
-  String get papuasia => "Papuasia";
+  String get papuasia => "Papuazja";
   @override
   String get feedback_submit_translate_app => "Poprawki tłumaczenia aplikacji";
   @override
@@ -1530,7 +1530,7 @@ class $pl_PL extends S {
   @override
   String get product_purchase_failed => "Zakup nie powiódł się";
   @override
-  String get auth_twitter => "Zaloguj się przez Twitter";
+  String get auth_twitter => "Zaloguj się za pomocą Twittera";
   @override
   String get auth_create_account => "Utwórz konto";
   @override
@@ -1544,7 +1544,7 @@ class $pl_PL extends S {
   @override
   String get southwestern_usa => "Południowo-zachodnie USA";
   @override
-  String get auth_invalid_email_address => "Nieprawidłowy adres e-mail";
+  String get auth_invalid_email_address => "Wprowadź prawidłowy adres e-mail";
   @override
   String get distribution_message => "Na jakim obszarze geograficznym się skupić?";
   @override
@@ -1564,11 +1564,11 @@ class $pl_PL extends S {
   @override
   String get plant_gallery => "Galeria";
   @override
-  String get indochina => "Indo-Chiny";
+  String get indochina => "Indochiny";
   @override
   String get plant_leaf => "Liście";
   @override
-  String get auth_facebook => "Zaloguj się przez Facebook";
+  String get auth_facebook => "Zaloguj się za pomocą Facebooka";
   @override
   String get taxonomy_serie => "Seria";
   @override
@@ -1616,7 +1616,7 @@ class $pl_PL extends S {
   @override
   String get feedback_run_ads_fullscreen => "Pokaż reklamę pełnoekranową";
   @override
-  String get asia_temperate => "Azja umiarkowana";
+  String get asia_temperate => "Azja (kl. umiarkowany)";
   @override
   String get taxonomy_superregnum => "Domena";
   @override
@@ -1638,7 +1638,7 @@ class $pl_PL extends S {
   @override
   String get my_filter => "Mój filtr";
   @override
-  String get auth_sign_in_text => "Mieć konto? Zaloguj się";
+  String get auth_sign_in_text => "Masz już konto? Zaloguj się";
   @override
   String get petal_5 => "5";
   @override
@@ -1784,7 +1784,7 @@ class $pl_PL extends S {
   @override
   String get southeastern_europe => "Europa Południowo-Wschodnia";
   @override
-  String get auth_empty_password => "Nie możesz zostawić tego pola pustego.";
+  String get auth_empty_password => "Hasło nie może być puste.";
   @override
   String get observation_upload_success => "Zaobserwowane okazy zostały pomyślnie przesłane.";
   @override
