@@ -103,7 +103,7 @@
 
   "filter_color": "farve",
   "filter_habitat": "vækststeder",
-  "filter__petal": "kronblad",
+  "filter_petal": "kronblad",
   "filter_distribution": "fordeling",
 
   "color_message": "Hvad er farven på blomsten? Vælg den nærmeste.",

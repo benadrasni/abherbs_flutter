@@ -115,19 +115,21 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           ));
           break;
         case productObservations:
-          buttons.add(RaisedButton(
-            color: Theme.of(context).accentColor,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Subscription(widget.onBuyProduct)),
-              );
-            },
-            child: Text(
-              S.of(context).subscription,
-              style: TextStyle(color: Colors.white),
-            ),
-          ));
+          if (Purchases.hasLifetimeSubscription == null || !Purchases.hasLifetimeSubscription) {
+            buttons.add(RaisedButton(
+              color: Theme.of(context).accentColor,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Subscription(widget.onBuyProduct)),
+                );
+              },
+              child: Text(
+                S.of(context).subscription,
+                style: TextStyle(color: Colors.white),
+              ),
+            ));
+          }
           break;
         default:
       }
