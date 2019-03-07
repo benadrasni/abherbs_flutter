@@ -2,26 +2,23 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/detail/plant_detail.dart';
-import 'package:abherbs_flutter/utils/dialogs.dart';
-import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/observations/observations.dart';
-import 'package:abherbs_flutter/settings/offline.dart';
+import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
+import 'package:abherbs_flutter/settings/offline.dart';
+import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:exif/exif.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:exif/exif.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
@@ -212,7 +209,6 @@ Widget getImage(String url, Widget placeholder, {double width, double height, Bo
           }
 
           return CachedNetworkImage(
-            cacheManager: CustomCacheManager(),
             fit: fit ?? BoxFit.contain,
             width: width,
             height: height,
@@ -440,26 +436,4 @@ String getLanguageCode(String code) {
 
 double getFABPadding() {
   return Purchases.isNoAds() ? 0.0 : 50.0;
-}
-
-class CustomCacheManager extends BaseCacheManager {
-  static const key = "customCache";
-
-  static CustomCacheManager _instance;
-
-  factory CustomCacheManager() {
-    if (_instance == null) {
-      _instance = new CustomCacheManager._();
-    }
-    return _instance;
-  }
-
-  CustomCacheManager._() : super(key,
-      maxAgeCacheObject: Duration(days: 7),
-      maxNrOfCacheObjects: 20);
-
-  Future<String> getFilePath() async {
-    var directory = await getTemporaryDirectory();
-    return p.join(directory.path, key);
-  }
 }
