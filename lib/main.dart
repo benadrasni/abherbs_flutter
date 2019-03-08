@@ -81,6 +81,7 @@ class _AppState extends State<App> {
 
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
+        print(message);
       },
       onResume: (Map<String, dynamic> message) async {
         setState(() {
@@ -89,7 +90,7 @@ class _AppState extends State<App> {
       },
       onLaunch: (Map<String, dynamic> message) async {
         setState(() {
-          _notificationData = Map.from(message[notificationAttributeData]);
+          _notificationData = Map.from(Platform.isIOS ? message : message[notificationAttributeData]);
         });
       },
     );
