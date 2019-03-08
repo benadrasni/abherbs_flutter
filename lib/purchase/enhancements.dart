@@ -175,7 +175,9 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                         FlutterInappPurchase.getAvailablePurchases().then((purchases) {
                           Purchases.purchases = purchases;
                           Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
-                          setState(() {});
+                          if (mounted) {
+                            setState(() {});
+                          }
                         });
                       },
                       child: Text(
