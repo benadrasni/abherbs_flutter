@@ -22,8 +22,11 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
 
   _redirect(BuildContext context) async {
+    var _duration = Duration(milliseconds: timer);
     var firstRoute = await _findFirstRoute();
-    Navigator.pushReplacement(context, firstRoute);
+    return Timer(_duration, () {
+      Navigator.pushReplacement(context, firstRoute);
+    });
   }
 
   Future<MaterialPageRoute<dynamic>> _getFirstFilterRoute([MaterialPageRoute<dynamic> redirect]) {
