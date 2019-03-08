@@ -15,6 +15,7 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class Distribution extends StatefulWidget {
@@ -39,11 +40,12 @@ class _DistributionState extends State<Distribution> {
   bool _wasRedirected;
 
   _redirect(BuildContext context) async {
-    var _duration = Duration(milliseconds: timer);
-    var redirectRoute = await widget.redirect;
-    return Timer(_duration, () {
+    // redirect to route from notification
+    if (widget.redirect != null && !_wasRedirected) {
+      _wasRedirected = true;
+      var redirectRoute = await widget.redirect;
       Navigator.push(context, redirectRoute);
-    });
+    }
   }
 
   void _openRegion(String region) {
@@ -240,6 +242,8 @@ class _DistributionState extends State<Distribution> {
       Ads.showBannerAd(this);
     }
     _setMyRegion();
+
+    SchedulerBinding.instance.addPostFrameCallback((_) => _redirect(context));
   }
 
   @override
@@ -251,13 +255,6 @@ class _DistributionState extends State<Distribution> {
   @override
   Widget build(BuildContext context) {
     var mainContext = context;
-
-    // redirect to route from notification
-    if (widget.redirect != null && !_wasRedirected) {
-      _redirect(mainContext);
-      _wasRedirected = true;
-    }
-
     return Scaffold(
       key: _key,
       appBar: new AppBar(
