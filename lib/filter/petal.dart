@@ -12,6 +12,7 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class Petal extends StatefulWidget {
@@ -34,11 +35,12 @@ class _PetalState extends State<Petal> {
   bool _wasRedirected;
 
   _redirect(BuildContext context) async {
-    var _duration = Duration(milliseconds: timer);
-    var redirectRoute = await widget.redirect;
-    return Timer(_duration, () {
+    // redirect to route from notification
+    if (widget.redirect != null && !_wasRedirected) {
+      _wasRedirected = true;
+      var redirectRoute = await widget.redirect;
       Navigator.push(context, redirectRoute);
-    });
+    }
   }
 
   _navigate(String value) {
@@ -96,6 +98,8 @@ class _PetalState extends State<Petal> {
     if (widget.redirect == null) {
       Ads.showBannerAd(this);
     }
+
+    SchedulerBinding.instance.addPostFrameCallback((_) => _redirect(context));
   }
 
   @override
@@ -111,13 +115,6 @@ class _PetalState extends State<Petal> {
       fontWeight: FontWeight.bold,
       fontSize: 22.0,
     );
-
-    // redirect to route from notification
-    if (widget.redirect != null && !_wasRedirected) {
-      _redirect(context);
-      _wasRedirected = true;
-    }
-
     return Scaffold(
       key: _key,
       appBar: AppBar(
