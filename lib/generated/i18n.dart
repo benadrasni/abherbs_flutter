@@ -7564,7 +7564,7 @@ class $es_ES extends S {
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get auth_invalid_phone_number => "Ingrese un número de teléfono válido";
+  String get auth_invalid_phone_number => "Introduzca un número de teléfono válido";
   @override
   String get list_info => "Elige una";
   @override
@@ -7686,7 +7686,7 @@ class $es_ES extends S {
   @override
   String get caribbean => "Caribe";
   @override
-  String get auth_sign_in_failed => "Fallo al iniciar sesion. Comprueba tu conexión y vuelve a intentarlo.";
+  String get auth_sign_in_failed => "El inico de sesión ha fallado. Revisa tu conexión y vuelve a intentarlo.";
   @override
   String get offline_delete_message => "¿Desea borrar los datos fuera de línea?";
   @override
@@ -7774,7 +7774,7 @@ class $es_ES extends S {
   @override
   String get my_filter => "Mi filtro";
   @override
-  String get auth_sign_in_text => "¿Tener una cuenta? Iniciar sesión";
+  String get auth_sign_in_text => "¿Tienes una cuenta? Iniciar sesión";
   @override
   String get petal_5 => "5";
   @override
@@ -7876,7 +7876,7 @@ class $es_ES extends S {
   @override
   String get rate_text => "Al autor de esta aplicación le motivan las reacciones positivas de los usuarios. Mándele, por favor, unas flores de la estrella a través de la tienda de aplicaciones.";
   @override
-  String get auth_sign_out => "Desconectar";
+  String get auth_sign_out => "Cerrar sesión";
   @override
   String get south_central_usa => "Central sur de los Estados Unidos";
   @override
@@ -7884,7 +7884,7 @@ class $es_ES extends S {
   @override
   String get taxonomy_tribus => "tribu";
   @override
-  String get auth_resend_code => "Volver a enviar código";
+  String get auth_resend_code => "Reenviar código";
   @override
   String get rate_later => "Más tarde";
   @override
