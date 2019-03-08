@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> {
     Navigator.pushReplacement(context, firstRoute);
   }
 
-  Future<MaterialPageRoute<dynamic>> _getFirstFilterRoute([Future<MaterialPageRoute<dynamic>> redirect]) {
+  Future<MaterialPageRoute<dynamic>> _getFirstFilterRoute([MaterialPageRoute<dynamic> redirect]) {
     return Prefs.getBoolF(keyAlwaysMyRegion, false).then((alwaysMyRegionValue) {
       Map<String, String> filter = {};
       if (alwaysMyRegionValue) {
@@ -68,10 +68,8 @@ class _SplashState extends State<Splash> {
               String count = widget.notificationData['count'];
               String path = widget.notificationData['path'];
               if (count != null && path != null) {
-                return _getFirstFilterRoute(Future<MaterialPageRoute<dynamic>>(() {
-                  return MaterialPageRoute(
-                      builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, {}, count, path));
-                }));
+                return _getFirstFilterRoute(MaterialPageRoute(
+                    builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, {}, count, path)));
               }
               return _getFirstFilterRoute();
             default:

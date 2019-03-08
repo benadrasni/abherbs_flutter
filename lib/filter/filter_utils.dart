@@ -317,12 +317,12 @@ MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Functio
 }
 
 MaterialPageRoute<dynamic> getFirstFilterRoute(BuildContext context, void Function(String) onChangeLanguage,
-    void Function(PurchasedItem) onBuyProduct, Map<String, String> filter, Future<MaterialPageRoute<dynamic>> redirect) {
+    void Function(PurchasedItem) onBuyProduct, Map<String, String> filter, MaterialPageRoute<dynamic> redirect) {
   return getFilterRoute(context, onChangeLanguage, onBuyProduct, filter, _getNextFilterAttribute(filter), redirect);
 }
 
 MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, void Function(String) onChangeLanguage,
-    void Function(PurchasedItem) onBuyProduct, Map<String, String> filter, String filterAttribute, [Future<MaterialPageRoute<dynamic>> redirect]) {
+    void Function(PurchasedItem) onBuyProduct, Map<String, String> filter, String filterAttribute, [MaterialPageRoute<dynamic> redirect]) {
   var route;
 
   switch (filterAttribute) {
