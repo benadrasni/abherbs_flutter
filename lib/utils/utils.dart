@@ -74,8 +74,6 @@ const String defaultExtension = ".webp";
 const String defaultPhotoExtension = ".jpg";
 const String thumbnailsDir = "/.thumbnails";
 
-const int timer = 300;
-
 const int firebaseCacheSize = 1024 * 1024 * 20;
 const String firebaseCounts = 'counts_4_v2';
 const String firebaseLists = 'lists_4_v2';

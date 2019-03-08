@@ -6,6 +6,7 @@ import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class Splash extends StatefulWidget {
@@ -20,12 +21,9 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
 
-  startTime(BuildContext context) async {
-    var _duration = Duration(milliseconds: timer);
+  _redirect(BuildContext context) async {
     var firstRoute = await _findFirstRoute();
-    return Timer(_duration, () {
-      Navigator.pushReplacement(context, firstRoute);
-    });
+    Navigator.pushReplacement(context, firstRoute);
   }
 
   Future<MaterialPageRoute<dynamic>> _getFirstFilterRoute([Future<MaterialPageRoute<dynamic>> redirect]) {
@@ -85,8 +83,13 @@ class _SplashState extends State<Splash> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) => _redirect(context));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    startTime(context);
     return Scaffold(
       body: Center(
         child: Image(
