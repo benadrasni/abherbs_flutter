@@ -22,7 +22,7 @@ class Distribution extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
-  final Future<MaterialPageRoute<dynamic>> redirect;
+  final MaterialPageRoute<dynamic> redirect;
   Distribution(this.onChangeLanguage, this.onBuyProduct, this.filter, this.redirect);
 
   @override
@@ -37,14 +37,11 @@ class _DistributionState extends State<Distribution> {
   Future<String> _myRegionF;
   String _myRegion;
   GlobalKey<ScaffoldState> _key;
-  bool _wasRedirected;
 
   _redirect(BuildContext context) async {
     // redirect to route from notification
-    if (widget.redirect != null && !_wasRedirected) {
-      _wasRedirected = true;
-      var redirectRoute = await widget.redirect;
-      Navigator.push(context, redirectRoute);
+    if (widget.redirect != null) {
+      Navigator.push(context, widget.redirect);
     }
   }
 
@@ -230,7 +227,6 @@ class _DistributionState extends State<Distribution> {
     Offline.setKeepSynced(1, true);
     _checkCurrentUser();
 
-    _wasRedirected = false;
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterDistribution);

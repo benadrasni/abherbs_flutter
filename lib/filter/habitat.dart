@@ -19,7 +19,7 @@ class Habitat extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
-  final Future<MaterialPageRoute<dynamic>> redirect;
+  final MaterialPageRoute<dynamic> redirect;
   Habitat(this.onChangeLanguage, this.onBuyProduct, this.filter, this.redirect);
 
   @override
@@ -32,14 +32,11 @@ class _HabitatState extends State<Habitat> {
   Future<int> _countF;
   Map<String, String> _filter;
   GlobalKey<ScaffoldState> _key;
-  bool _wasRedirected;
 
   _redirect(BuildContext context) async {
     // redirect to route from notification
-    if (widget.redirect != null && !_wasRedirected) {
-      _wasRedirected = true;
-      var redirectRoute = await widget.redirect;
-      Navigator.push(context, redirectRoute);
+    if (widget.redirect != null) {
+      Navigator.push(context, widget.redirect);
     }
   }
 
@@ -87,7 +84,6 @@ class _HabitatState extends State<Habitat> {
     Offline.setKeepSynced(1, true);
     _checkCurrentUser();
 
-    _wasRedirected = false;
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterHabitat);
