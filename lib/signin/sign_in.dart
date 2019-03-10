@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/signin/email.dart';
 import 'package:abherbs_flutter/signin/phone.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -121,6 +122,29 @@ class _SignInScreenState extends State<SignInScreen> {
                     onPressed: () {
                       _handleGoogleSignIn(key);
                     }),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  FlatButton(
+                    onPressed: () {
+                      launchURL(termsOfUseUrl);
+                    },
+                    child: Text(
+                      S.of(context).terms_of_use,
+                      style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
+                    ),
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      launchURL(privacyPolicyUrl);
+                    },
+                    child: Text(
+                      S.of(context).privacy_policy,
+                      style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
+                    ),
+                  ),
+                ]),
               ),
             ],
           ),
