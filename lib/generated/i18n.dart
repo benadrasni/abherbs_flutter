@@ -323,6 +323,8 @@ class $it_IT extends S {
   @override
   String get australia => "Australia";
   @override
+  String get google => "Google";
+  @override
   String get google_translate => "Tradotto con Google Translate";
   @override
   String get habitat_forest => "boschi o foreste";
@@ -397,6 +399,8 @@ class $it_IT extends S {
   @override
   String get plant_herbalism => "Erboristeria";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Ripristinare gli acquisti";
   @override
   String get auth_reset_password => "Resetta la password";
@@ -409,7 +413,7 @@ class $it_IT extends S {
   @override
   String get show_translation => "Mostra il testo tradotto";
   @override
-  String get subscription_monthly_title => "Archivia le foto - mensilmente";
+  String get subscription_monthly_title => "Archivia le foto";
   @override
   String get taxonomy_subsectio => "Sottosezione";
   @override
@@ -426,6 +430,8 @@ class $it_IT extends S {
   String get product_subscribed => "Sottoscritto";
   @override
   String get search_names => "Cerca nei nomi";
+  @override
+  String get subscription_period_month => "mese";
   @override
   String get southwestern_europe => "Europa sudoccidentale";
   @override
@@ -459,6 +465,8 @@ class $it_IT extends S {
   @override
   String get search_taxonomy => "Cerca in tassonomia";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Codice errato. Riprova.";
   @override
   String get west_tropical_africa => "Africa tropicale occidentale";
@@ -476,6 +484,8 @@ class $it_IT extends S {
   String get new_zealand => "Nuova Zelanda";
   @override
   String get eastern_asia => "Asia orientale";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "Asia occidentale";
   @override
@@ -497,13 +507,17 @@ class $it_IT extends S {
   @override
   String get offline_title => "Modalità offline";
   @override
+  String get privacy_policy => "Politica sulla riservatezza";
+  @override
   String get taxonomy_genus => "Genere";
+  @override
+  String get subscription_period_year => "anno";
   @override
   String get papuasia => "Papuasia";
   @override
   String get feedback_submit_translate_app => "Migliora le etichette delle applicazioni";
   @override
-  String get subscription_yearly_title => "Archivia le foto - ogni anno";
+  String get subscription_yearly_title => "Archivia le foto";
   @override
   String get observation_upload_progress => "Caricamento osservazioni...";
   @override
@@ -667,6 +681,8 @@ class $it_IT extends S {
   @override
   String get product_purchased => "Acquistato";
   @override
+  String get terms_of_use => "Condizioni d'uso";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_height_to => "a";
@@ -792,6 +808,8 @@ class $it_IT extends S {
   String auth_reset_password_email_message(String _email) => "Seguire le istruzioni inviate a $_email per reimpostare la password.";
   @override
   String observation_upload_message(String param) => "Caricherete le osservazioni $param. Si prega di verificare se il dispositivo è collegato al wi-fi. Sei pronto per un caricamento?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Il primo pagamento verrà addebitato sul tuo account $account 30 giorni dopo la conferma di acquisto. L'abbonamento si rinnova automaticamente a meno che non venga annullato almeno 24 ore prima della fine del periodo corrente. Il tuo account verrà addebitato per il rinnovo entro 24 ore prima della fine del periodo corrente. Puoi gestire e annullare le tue iscrizioni andando alle impostazioni del tuo account su $store dopo l'acquisto.";
 }
 
 class $ru_RU extends S {
@@ -834,6 +852,8 @@ class $ru_RU extends S {
   String get feedback_translate => "Вы можете сообщить о любой обнаруженной вами опечатке или ошибке или представить новый перевод на вашем языке.";
   @override
   String get australia => "Австралия";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Перевод с Google Translate";
   @override
@@ -909,6 +929,8 @@ class $ru_RU extends S {
   @override
   String get plant_herbalism => "Травничество";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Восстановить покупки";
   @override
   String get auth_reset_password => "Сброс пароля";
@@ -921,7 +943,7 @@ class $ru_RU extends S {
   @override
   String get show_translation => "Показать перевод";
   @override
-  String get subscription_monthly_title => "Хранить фотографии - ежемесячно";
+  String get subscription_monthly_title => "Хранить фотографии";
   @override
   String get taxonomy_subsectio => "Подсекция";
   @override
@@ -938,6 +960,8 @@ class $ru_RU extends S {
   String get product_subscribed => "Подписаны";
   @override
   String get search_names => "Поиск по именам";
+  @override
+  String get subscription_period_month => "месяц";
   @override
   String get southwestern_europe => "Юго-Западная Европа";
   @override
@@ -971,6 +995,8 @@ class $ru_RU extends S {
   @override
   String get search_taxonomy => "Поиск в таксономии";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Неверный код. Повторите попытку.";
   @override
   String get west_tropical_africa => "Западная тропическая Африка";
@@ -988,6 +1014,8 @@ class $ru_RU extends S {
   String get new_zealand => "Новая Зеландия";
   @override
   String get eastern_asia => "Восточная Азия";
+  @override
+  String get play_store => "Google Play Маркет";
   @override
   String get western_asia => "Западная Азия";
   @override
@@ -1009,13 +1037,17 @@ class $ru_RU extends S {
   @override
   String get offline_title => "Автономный режим";
   @override
+  String get privacy_policy => "Политика конфиденциальности";
+  @override
   String get taxonomy_genus => "Род";
+  @override
+  String get subscription_period_year => "год";
   @override
   String get papuasia => "Papuasia";
   @override
   String get feedback_submit_translate_app => "Улучшить ярлыки приложений";
   @override
-  String get subscription_yearly_title => "Хранить фотографии - ежегодно";
+  String get subscription_yearly_title => "Хранить фотографии";
   @override
   String get observation_upload_progress => "Загрузка наблюдений...";
   @override
@@ -1179,6 +1211,8 @@ class $ru_RU extends S {
   @override
   String get product_purchased => "Купленный";
   @override
+  String get terms_of_use => "Условия эксплуатации";
+  @override
   String get taxonomy_cladus => "(клада)";
   @override
   String get plant_height_to => "-";
@@ -1304,6 +1338,8 @@ class $ru_RU extends S {
   String auth_reset_password_email_message(String _email) => "Следуйте инструкциям, отправленным на $_email, чтобы сбросить пароль.";
   @override
   String observation_upload_message(String param) => "Вы собираетесь загрузить наблюдения $param. Пожалуйста, проверьте, если ваше устройство подключено к Wi-Fi. Вы готовы к загрузке?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Первый платеж будет снят с вашего счета в размере $account через 30 дней после подтверждения покупки. Подписка автоматически продлевается, если она не отменена как минимум за 24 часа до окончания текущего периода. С вашего счета будет взиматься плата за продление в течение 24 часов до окончания текущего периода. Вы можете управлять своими подписками и отменять их, перейдя в настройки своей учетной записи на $store после покупки.";
 }
 
 class $pl_PL extends S {
@@ -1346,6 +1382,8 @@ class $pl_PL extends S {
   String get feedback_translate => "Możesz zgłosić literówkę, błąd lub stworzyć nowe tłumaczenie dla Twojego języka.";
   @override
   String get australia => "Australia";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Przetłumaczono przy pomocy Google Translate";
   @override
@@ -1421,6 +1459,8 @@ class $pl_PL extends S {
   @override
   String get plant_herbalism => "Ziołolecznictwo";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Przywróć zakup";
   @override
   String get auth_reset_password => "Zresetuj hasło";
@@ -1433,7 +1473,7 @@ class $pl_PL extends S {
   @override
   String get show_translation => "Pokaż przetłumaczony tekst";
   @override
-  String get subscription_monthly_title => "Przechowuj zdjęcia - miesięczna";
+  String get subscription_monthly_title => "Przechowuj zdjęcia";
   @override
   String get taxonomy_subsectio => "Podsekcja";
   @override
@@ -1450,6 +1490,8 @@ class $pl_PL extends S {
   String get product_subscribed => "Subskrybujesz";
   @override
   String get search_names => "Szukaj w nazwach";
+  @override
+  String get subscription_period_month => "miesiąc";
   @override
   String get southwestern_europe => "Południowo-zachodnia Europa";
   @override
@@ -1483,6 +1525,8 @@ class $pl_PL extends S {
   @override
   String get search_taxonomy => "Szukaj w taksonomii";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Nieprawidłowy kod. Spróbuj jeszcze raz.";
   @override
   String get west_tropical_africa => "Zachodnia Afryka Tropikalna";
@@ -1500,6 +1544,8 @@ class $pl_PL extends S {
   String get new_zealand => "Nowa Zelandia";
   @override
   String get eastern_asia => "Wschodnia Azja";
+  @override
+  String get play_store => "Sklep Google Play";
   @override
   String get western_asia => "Zachodnia Azja";
   @override
@@ -1521,13 +1567,17 @@ class $pl_PL extends S {
   @override
   String get offline_title => "Tryb offline";
   @override
+  String get privacy_policy => "Polityka prywatności";
+  @override
   String get taxonomy_genus => "Rodzaj";
+  @override
+  String get subscription_period_year => "rok";
   @override
   String get papuasia => "Papuazja";
   @override
   String get feedback_submit_translate_app => "Poprawki tłumaczenia aplikacji";
   @override
-  String get subscription_yearly_title => "Przechowuj zdjęcia - roczna";
+  String get subscription_yearly_title => "Przechowuj zdjęcia";
   @override
   String get observation_upload_progress => "Przesyłanie zaobserwowanych okazów...";
   @override
@@ -1691,6 +1741,8 @@ class $pl_PL extends S {
   @override
   String get product_purchased => "Zakupione";
   @override
+  String get terms_of_use => "Warunki korzystania";
+  @override
   String get taxonomy_cladus => "(klad)";
   @override
   String get plant_height_to => "-";
@@ -1816,6 +1868,8 @@ class $pl_PL extends S {
   String auth_reset_password_email_message(String _email) => "Postępuj zgodnie z instrukcjami przesłanymi do $_email, aby zresetować hasło.";
   @override
   String observation_upload_message(String param) => "Zamierzasz przesłać zaobserwowane okazy w formacie $param. Sprawdź, czy twoje urządzenie jest podłączone do sieci Wi-Fi. Czy jesteś gotowy na przesłanie?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Pierwsza płatność zostanie pobrana na Twoje konto $account 30 dni po potwierdzeniu zakupu. Subskrypcja automatycznie odnawia, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu. Twoje konto zostanie obciążone opłatą za przedłużenie w ciągu 24 godzin przed końcem bieżącego okresu. Możesz zarządzać i anulować subskrypcje, przechodząc do ustawień konta na $store po zakupie.";
 }
 
 class $ro_RO extends S {
@@ -1858,6 +1912,8 @@ class $ro_RO extends S {
   String get feedback_translate => "Puteți raporta orice greșeală sau greșeală pe care ați găsit-o sau trimiteți o nouă traducere în limba dvs.";
   @override
   String get australia => "Australia";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Tradus cu Google Translate";
   @override
@@ -1933,6 +1989,8 @@ class $ro_RO extends S {
   @override
   String get plant_herbalism => "Herbalism";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Restaurați achizițiile";
   @override
   String get auth_reset_password => "Reseteaza parola";
@@ -1945,7 +2003,7 @@ class $ro_RO extends S {
   @override
   String get show_translation => "Afișați textul tradus";
   @override
-  String get subscription_monthly_title => "Stocați fotografii - lunar";
+  String get subscription_monthly_title => "Stocați fotografii";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -1962,6 +2020,8 @@ class $ro_RO extends S {
   String get product_subscribed => "Subscrisă";
   @override
   String get search_names => "Căutați în nume";
+  @override
+  String get subscription_period_month => "lună";
   @override
   String get southwestern_europe => "Europa de Sud-Vest";
   @override
@@ -1995,6 +2055,8 @@ class $ro_RO extends S {
   @override
   String get search_taxonomy => "Căutați în taxonomie";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Cod greșit. Încercați din nou.";
   @override
   String get west_tropical_africa => "Africa de Vest tropicală";
@@ -2012,6 +2074,8 @@ class $ro_RO extends S {
   String get new_zealand => "Noua Zeelanda";
   @override
   String get eastern_asia => "Asia de Est";
+  @override
+  String get play_store => "Magazin Google Play";
   @override
   String get western_asia => "Asia de Vest";
   @override
@@ -2033,13 +2097,17 @@ class $ro_RO extends S {
   @override
   String get offline_title => "Modul offline";
   @override
+  String get privacy_policy => "Politica de confidentialitate";
+  @override
   String get taxonomy_genus => "Gen";
+  @override
+  String get subscription_period_year => "an";
   @override
   String get papuasia => "Papuasia";
   @override
   String get feedback_submit_translate_app => "Îmbunătățiți etichetele aplicației";
   @override
-  String get subscription_yearly_title => "Stocați fotografii - anual";
+  String get subscription_yearly_title => "Stocați fotografii";
   @override
   String get observation_upload_progress => "Încărcarea observațiilor...";
   @override
@@ -2203,6 +2271,8 @@ class $ro_RO extends S {
   @override
   String get product_purchased => "Cumparate";
   @override
+  String get terms_of_use => "Termeni de utilizare";
+  @override
   String get taxonomy_cladus => "(cladă)";
   @override
   String get plant_height_to => "la";
@@ -2328,6 +2398,8 @@ class $ro_RO extends S {
   String auth_reset_password_email_message(String _email) => "Urmați instrucțiunile trimise la $_email pentru a vă reseta parola.";
   @override
   String observation_upload_message(String param) => "Veți încărca observații $param. Verificați dacă dispozitivul dvs. este conectat la Wi-Fi. Sunteți gata pentru o încărcare?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Prima plată va fi debitată în contul dvs. de $account după 30 de zile de la confirmarea achiziției. Abonamentul se reînnoiește automat, cu excepția cazului în care este anulată cu cel puțin 24 de ore înainte de sfârșitul perioadei curente. Contul dvs. va fi taxat pentru reînnoire cu 24 de ore înainte de sfârșitul perioadei curente. Puteți gestiona și anula abonamentele dvs. accesând setările contului dvs. la suma de $store după cumpărare.";
 }
 
 class $hi_IN extends S {
@@ -2370,6 +2442,8 @@ class $hi_IN extends S {
   String get feedback_translate => "बंजर​ या झील";
   @override
   String get australia => "ऑस्ट्रेलिया";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "पर्यावास";
   @override
@@ -2445,6 +2519,8 @@ class $hi_IN extends S {
   @override
   String get plant_herbalism => "जड़ी-बूटी चिकित्सा";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "खरीदारी वापस लौटाएं";
   @override
   String get auth_reset_password => "पासवर्ड रीसेट";
@@ -2457,7 +2533,7 @@ class $hi_IN extends S {
   @override
   String get show_translation => "अनुवादित टेक्स्ट दिखाएं";
   @override
-  String get subscription_monthly_title => "स्टोर फोटो - मासिक";
+  String get subscription_monthly_title => "स्टोर फोटो";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -2474,6 +2550,8 @@ class $hi_IN extends S {
   String get product_subscribed => "सदस्यता लिया";
   @override
   String get search_names => "नामों में खोजें";
+  @override
+  String get subscription_period_month => "महीना";
   @override
   String get southwestern_europe => "दक्षिणपश्चिम यूरोप";
   @override
@@ -2507,6 +2585,8 @@ class $hi_IN extends S {
   @override
   String get search_taxonomy => "टैक्सोनॉमी में खोजें";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "गलत कोड. फिर से कोशिश करें.";
   @override
   String get west_tropical_africa => "पश्चिम उष्णकटिबंधीय अफ्रीका";
@@ -2524,6 +2604,8 @@ class $hi_IN extends S {
   String get new_zealand => "न्यूजीलैंड";
   @override
   String get eastern_asia => "पूर्वी एशिया";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "पश्चिमी एशिया";
   @override
@@ -2545,13 +2627,17 @@ class $hi_IN extends S {
   @override
   String get offline_title => "ऑफ़लाइन मोड";
   @override
+  String get privacy_policy => "गोपनीयता नीति";
+  @override
   String get taxonomy_genus => "जाति";
+  @override
+  String get subscription_period_year => "साल";
   @override
   String get papuasia => "Papuasia";
   @override
   String get feedback_submit_translate_app => "एप्लिकेशन के लेबल में सुधार करें";
   @override
-  String get subscription_yearly_title => "स्टोर तस्वीरें - वार्षिक";
+  String get subscription_yearly_title => "स्टोर फोटो";
   @override
   String get observation_upload_progress => "अवलोकन अपलोड करना...";
   @override
@@ -2715,6 +2801,8 @@ class $hi_IN extends S {
   @override
   String get product_purchased => "खरीदी";
   @override
+  String get terms_of_use => "उपयोग की शर्तें";
+  @override
   String get taxonomy_cladus => "(अश्रेणिकृत)";
   @override
   String get plant_height_to => "तक";
@@ -2840,6 +2928,8 @@ class $hi_IN extends S {
   String auth_reset_password_email_message(String _email) => "अपना पासवर्ड रीसेट करने के लिए $_email को भेजे गए निर्देशों का पालन करें।";
   @override
   String observation_upload_message(String param) => "आप $param टिप्पणियों को अपलोड करने जा रहे हैं। कृपया जांचें कि क्या आपका उपकरण वाई-फाई से जुड़ा है। क्या आप अपलोड के लिए तैयार हैं?";
+  @override
+  String subscription_disclaimer(String account, String store) => "खरीद की पुष्टि के 30 दिन बाद पहले भुगतान आपके $account खाते से किया जाएगा। वर्तमान अवधि की समाप्ति से कम से कम 24 घंटे पहले रद्द होने तक सदस्यता स्वतः नवीनीकृत हो जाती है। वर्तमान अवधि के अंत से पहले 24 घंटों के भीतर आपके खाते को नवीनीकरण के लिए चार्ज किया जाएगा। आप खरीद के बाद $store पर अपनी खाता सेटिंग में जाकर अपनी सदस्यताएँ प्रबंधित और रद्द कर सकते हैं।";
 }
 
 class $id_ID extends S {
@@ -2882,6 +2972,8 @@ class $id_ID extends S {
   String get feedback_translate => "Anda dapat melaporkan kesalahan ketik atau kesalahan apa pun yang Anda temukan atau kirim terjemahan baru dalam bahasa Anda.";
   @override
   String get australia => "Australia";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Diterjemahkan dengan Google Terjemahan";
   @override
@@ -2957,6 +3049,8 @@ class $id_ID extends S {
   @override
   String get plant_herbalism => "Herbalism";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Mengembalikan pembelian";
   @override
   String get auth_reset_password => "Setel Ulang Kata Sandi";
@@ -2969,7 +3063,7 @@ class $id_ID extends S {
   @override
   String get show_translation => "Tampilkan teks terjemahan";
   @override
-  String get subscription_monthly_title => "Simpan foto - setiap bulan";
+  String get subscription_monthly_title => "Simpan foto";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -2986,6 +3080,8 @@ class $id_ID extends S {
   String get product_subscribed => "Berlangganan";
   @override
   String get search_names => "Cari nama";
+  @override
+  String get subscription_period_month => "bulan";
   @override
   String get southwestern_europe => "Eropa Barat Daya";
   @override
@@ -3019,6 +3115,8 @@ class $id_ID extends S {
   @override
   String get search_taxonomy => "Cari dalam taksonomi";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Salah kode. Coba lagi.";
   @override
   String get west_tropical_africa => "Afrika Barat Tropis";
@@ -3036,6 +3134,8 @@ class $id_ID extends S {
   String get new_zealand => "Selandia Baru";
   @override
   String get eastern_asia => "Asia Timur";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "Asia Barat";
   @override
@@ -3057,13 +3157,17 @@ class $id_ID extends S {
   @override
   String get offline_title => "Mode offline";
   @override
+  String get privacy_policy => "Rahasia pribadi";
+  @override
   String get taxonomy_genus => "Genera";
+  @override
+  String get subscription_period_year => "tahun";
   @override
   String get papuasia => "Papuasia";
   @override
   String get feedback_submit_translate_app => "Tingkatkan label aplikasi";
   @override
-  String get subscription_yearly_title => "Simpan foto - setiap tahun";
+  String get subscription_yearly_title => "Simpan foto";
   @override
   String get observation_upload_progress => "Mengunggah pengamatan...";
   @override
@@ -3227,6 +3331,8 @@ class $id_ID extends S {
   @override
   String get product_purchased => "Dibeli";
   @override
+  String get terms_of_use => "Syarat Penggunaan";
+  @override
   String get taxonomy_cladus => "(tidak termasuk)";
   @override
   String get plant_height_to => "sampai";
@@ -3352,6 +3458,8 @@ class $id_ID extends S {
   String auth_reset_password_email_message(String _email) => "Ikuti instruksi yang dikirim ke $_email untuk mereset kata sandi Anda.";
   @override
   String observation_upload_message(String param) => "Anda akan mengunggah $param observasi. Periksa apakah perangkat Anda terhubung ke wi-fi. Apakah Anda siap untuk diunggah?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Pembayaran pertama akan dibebankan ke akun $account Anda 30 hari setelah konfirmasi pembelian. Berlangganan secara otomatis memperbarui kecuali dibatalkan setidaknya 24 jam sebelum akhir periode berjalan. Akun Anda akan dikenakan biaya untuk pembaruan dalam waktu 24 jam sebelum akhir periode berjalan. Anda dapat mengelola dan membatalkan langganan Anda dengan masuk ke pengaturan akun Anda di $store setelah pembelian.";
 }
 
 class $fr_FR extends S {
@@ -3394,6 +3502,8 @@ class $fr_FR extends S {
   String get feedback_translate => "Vous pouvez signaler toute erreur de frappe ou erreur que vous avez trouvée ou vous envoyer une nouvelle traduction dans votre langue.";
   @override
   String get australia => "Australie";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Traduit avec Google Translate";
   @override
@@ -3469,6 +3579,8 @@ class $fr_FR extends S {
   @override
   String get plant_herbalism => "Herboristerie";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Restaurer les achats";
   @override
   String get auth_reset_password => "Réinitialiser le mot de passe";
@@ -3481,7 +3593,7 @@ class $fr_FR extends S {
   @override
   String get show_translation => "Afficher le texte traduit";
   @override
-  String get subscription_monthly_title => "Stocker des photos - mensuel";
+  String get subscription_monthly_title => "Stocker des photos";
   @override
   String get taxonomy_subsectio => "Sous-section";
   @override
@@ -3498,6 +3610,8 @@ class $fr_FR extends S {
   String get product_subscribed => "Abonné";
   @override
   String get search_names => "Chercher dans les noms";
+  @override
+  String get subscription_period_month => "mois";
   @override
   String get southwestern_europe => "Europe du sud-ouest";
   @override
@@ -3531,6 +3645,8 @@ class $fr_FR extends S {
   @override
   String get search_taxonomy => "Chercher en taxonomie";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Code erroné. Veuillez réessayer.";
   @override
   String get west_tropical_africa => "Afrique tropicale de l'Ouest";
@@ -3548,6 +3664,8 @@ class $fr_FR extends S {
   String get new_zealand => "Nouvelle-Zélande";
   @override
   String get eastern_asia => "Asie de l'Est";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "Asie occidentale";
   @override
@@ -3569,13 +3687,17 @@ class $fr_FR extends S {
   @override
   String get offline_title => "Mode hors-ligne";
   @override
+  String get privacy_policy => "Politique de confidentialité";
+  @override
   String get taxonomy_genus => "Genre";
+  @override
+  String get subscription_period_year => "année";
   @override
   String get papuasia => "Papuasie";
   @override
   String get feedback_submit_translate_app => "Améliorer les étiquettes de l'application";
   @override
-  String get subscription_yearly_title => "Stocker des photos - annuel";
+  String get subscription_yearly_title => "Stocker des photos";
   @override
   String get observation_upload_progress => "Mise en ligne des observations...";
   @override
@@ -3739,6 +3861,8 @@ class $fr_FR extends S {
   @override
   String get product_purchased => "Acheté(e)";
   @override
+  String get terms_of_use => "Conditions d'utilisation";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_height_to => "et";
@@ -3864,6 +3988,8 @@ class $fr_FR extends S {
   String auth_reset_password_email_message(String _email) => "Suivez les instructions envoyées à $_email pour réinitialiser votre mot de passe.";
   @override
   String observation_upload_message(String param) => "Vous allez télécharger des observations $param. Veuillez vérifier si votre appareil est connecté au wi-fi. Êtes-vous prêt pour un téléchargement?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Le premier paiement sera débité de votre compte $account 30 jours après la confirmation d'achat. L'abonnement est automatiquement renouvelé sauf s'il est annulé au moins 24 heures avant la fin de la période en cours. Votre compte sera facturé pour le renouvellement dans les 24 heures précédant la fin de la période en cours. Vous pouvez gérer et annuler vos abonnements en accédant aux paramètres de votre compte sur le $store après l'achat.";
 }
 
 class $he_IL extends S {
@@ -3906,6 +4032,8 @@ class $he_IL extends S {
   String get feedback_translate => "תוכל לדווח על שגיאת הקלדה או השגיאה שמצאת או שלח תרגום חדש בשפה שלך";
   @override
   String get australia => "אוסטרליה";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "תורגם עם גוגל תרגום";
   @override
@@ -3981,6 +4109,8 @@ class $he_IL extends S {
   @override
   String get plant_herbalism => "צמחי מרפא";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "לשחזר רכישות";
   @override
   String get auth_reset_password => "לאפס את הסיסמה";
@@ -3993,7 +4123,7 @@ class $he_IL extends S {
   @override
   String get show_translation => "הצג טקסט מתורגם";
   @override
-  String get subscription_monthly_title => "חנות תמונות - חודשי";
+  String get subscription_monthly_title => "חנות תמונות";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -4010,6 +4140,8 @@ class $he_IL extends S {
   String get product_subscribed => "מנוי";
   @override
   String get search_names => "חפש בשמות";
+  @override
+  String get subscription_period_month => "חודש";
   @override
   String get southwestern_europe => "דרום מערב אירופה";
   @override
@@ -4043,6 +4175,8 @@ class $he_IL extends S {
   @override
   String get search_taxonomy => "חפש בטקסונומיה";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "קוד שגוי. נסה שוב.";
   @override
   String get west_tropical_africa => "מערב אפריקה טרופית";
@@ -4060,6 +4194,8 @@ class $he_IL extends S {
   String get new_zealand => "ניו זילנד";
   @override
   String get eastern_asia => "מזרח אסיה";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "מערב אסיה";
   @override
@@ -4081,13 +4217,17 @@ class $he_IL extends S {
   @override
   String get offline_title => "מצב לא מקוון";
   @override
+  String get privacy_policy => "מדיניות פרטיות";
+  @override
   String get taxonomy_genus => "סוג";
+  @override
+  String get subscription_period_year => "שנה";
   @override
   String get papuasia => "Papuasia";
   @override
   String get feedback_submit_translate_app => "שפר את תוויות היישום";
   @override
-  String get subscription_yearly_title => "חנות תמונות - מדי שנה";
+  String get subscription_yearly_title => "חנות תמונות";
   @override
   String get observation_upload_progress => "העלאת תצפיות...";
   @override
@@ -4251,6 +4391,8 @@ class $he_IL extends S {
   @override
   String get product_purchased => "נרכש";
   @override
+  String get terms_of_use => "תנאי שימוש";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_height_to => "עד";
@@ -4376,6 +4518,8 @@ class $he_IL extends S {
   String auth_reset_password_email_message(String _email) => "בצע את ההוראות שנשלחו אל $_email כדי לאפס את הסיסמה.";
   @override
   String observation_upload_message(String param) => "אתה הולך להעלות $param תצפיות. בדוק אם המכשיר מחובר ל- Wi-Fi. האם אתה מוכן להעלאה?";
+  @override
+  String subscription_disclaimer(String account, String store) => "התשלום הראשון יחויב בחשבון $account שלך 30 יום לאחר אישור הרכישה. המנוי מתחדשת אוטומטית, אלא אם כן הוא מבוטל לפחות 24 שעות לפני תום התקופה הנוכחית. החשבון שלך יחויב לחידוש תוך 24 שעות לפני תום התקופה הנוכחית. תוכל לנהל ולבטל את ההרשמות שלך על ידי מעבר להגדרות החשבון שלך ב- $store לאחר הרכישה.";
 }
 
 class $ja_JP extends S {
@@ -4418,6 +4562,8 @@ class $ja_JP extends S {
   String get feedback_translate => "誤植や誤りを報告したり、新しい翻訳をあなたの言語で提出することができます。";
   @override
   String get australia => "オーストラリア";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Google翻訳で翻訳された";
   @override
@@ -4493,6 +4639,8 @@ class $ja_JP extends S {
   @override
   String get plant_herbalism => "本草学";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "購入を復元";
   @override
   String get auth_reset_password => "パスワードを再設定する";
@@ -4505,7 +4653,7 @@ class $ja_JP extends S {
   @override
   String get show_translation => "翻訳されたテキストを表示する";
   @override
-  String get subscription_monthly_title => "写真を保存 - 毎月";
+  String get subscription_monthly_title => "写真を保存";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -4522,6 +4670,8 @@ class $ja_JP extends S {
   String get product_subscribed => "購読しています";
   @override
   String get search_names => "名前で検索";
+  @override
+  String get subscription_period_month => "月";
   @override
   String get southwestern_europe => "南西ヨーロッパ";
   @override
@@ -4555,6 +4705,8 @@ class $ja_JP extends S {
   @override
   String get search_taxonomy => "分類法で検索する";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "コードが間違っています。もう一度お試しください。";
   @override
   String get west_tropical_africa => "西トロピカルアフリカ";
@@ -4572,6 +4724,8 @@ class $ja_JP extends S {
   String get new_zealand => "ニュージーランド";
   @override
   String get eastern_asia => "東アジア";
+  @override
+  String get play_store => "Google Play ストア";
   @override
   String get western_asia => "西アジア";
   @override
@@ -4593,13 +4747,17 @@ class $ja_JP extends S {
   @override
   String get offline_title => "オフラインモード";
   @override
+  String get privacy_policy => "個人情報保護方針";
+  @override
   String get taxonomy_genus => "属";
+  @override
+  String get subscription_period_year => "年";
   @override
   String get papuasia => "パプアシア";
   @override
   String get feedback_submit_translate_app => "アプリケーションのラベルを改善する";
   @override
-  String get subscription_yearly_title => "写真を保存する - 毎年";
+  String get subscription_yearly_title => "写真を保存する";
   @override
   String get observation_upload_progress => "観測をアップロードする...";
   @override
@@ -4763,6 +4921,8 @@ class $ja_JP extends S {
   @override
   String get product_purchased => "購入した";
   @override
+  String get terms_of_use => "利用規約";
+  @override
   String get taxonomy_cladus => "(系統群)";
   @override
   String get plant_height_to => "-";
@@ -4888,6 +5048,8 @@ class $ja_JP extends S {
   String auth_reset_password_email_message(String _) => "パスワードをリセットするには、 $_ email に送信された指示に従ってください。";
   @override
   String observation_upload_message(String param) => "$param の観測結果をアップロードします。 お使いの機器がWi-Fiに接続されているか確認してください。 アップロードの準備はできていますか？";
+  @override
+  String subscription_disclaimer(String account, String store) => "購入の確認から30日後に最初の支払いがあなたの $account アカウントに請求されます。 現在の期間が終了する少なくとも24時間前にキャンセルされない限り、サブスクリプションは自動的に更新されます。 あなたのアカウントは、現在の期間の終了前に24時間以内に更新のために課金されます。 購入後に $store のアカウント設定にアクセスして、購読を管理およびキャンセルできます。";
 }
 
 class $cs_CZ extends S {
@@ -4930,6 +5092,8 @@ class $cs_CZ extends S {
   String get feedback_translate => "Můžete upozornit na gramatické a faktické chyby v textu, případně navrhnout lepší překlad jednotlivých květin nebo aplikace samotné na stránce whatsthatflower.com.";
   @override
   String get australia => "Austrálie";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Přeloženo pomocí Google překladače";
   @override
@@ -5005,6 +5169,8 @@ class $cs_CZ extends S {
   @override
   String get plant_herbalism => "Bylinářství";
   @override
+  String get app_store => "App obchod";
+  @override
   String get product_restore_purchases => "Obnovit nákupy";
   @override
   String get auth_reset_password => "Obnovit heslo";
@@ -5017,7 +5183,7 @@ class $cs_CZ extends S {
   @override
   String get show_translation => "Zobraz přeložený text";
   @override
-  String get subscription_monthly_title => "Záloha fotografií z pozorování - měsíční platba";
+  String get subscription_monthly_title => "Záloha fotografií z pozorování";
   @override
   String get taxonomy_subsectio => "podsekce";
   @override
@@ -5034,6 +5200,8 @@ class $cs_CZ extends S {
   String get product_subscribed => "Předplacené";
   @override
   String get search_names => "Hledat v jménech";
+  @override
+  String get subscription_period_month => "měsíc";
   @override
   String get southwestern_europe => "Jihozápadní Evropa";
   @override
@@ -5067,6 +5235,8 @@ class $cs_CZ extends S {
   @override
   String get search_taxonomy => "Hledat v taxonomii";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Špatný kód. Zkuste to znovu.";
   @override
   String get west_tropical_africa => "Západní tropická Afrika";
@@ -5084,6 +5254,8 @@ class $cs_CZ extends S {
   String get new_zealand => "Nový Zéland";
   @override
   String get eastern_asia => "Východní Asie";
+  @override
+  String get play_store => "Obchod Google Play";
   @override
   String get western_asia => "Jihozápadní Asie";
   @override
@@ -5105,13 +5277,17 @@ class $cs_CZ extends S {
   @override
   String get offline_title => "Offline režim";
   @override
+  String get privacy_policy => "Zásady ochrany osobních údajů";
+  @override
   String get taxonomy_genus => "rod";
+  @override
+  String get subscription_period_year => "rok";
   @override
   String get papuasia => "Papuasie";
   @override
   String get feedback_submit_translate_app => "Opravit chyby v aplikaci";
   @override
-  String get subscription_yearly_title => "Záloha fotografií z pozorování - roční platba";
+  String get subscription_yearly_title => "Záloha fotografií z pozorování";
   @override
   String get observation_upload_progress => "Záloha pozorování...";
   @override
@@ -5273,6 +5449,8 @@ class $cs_CZ extends S {
   @override
   String get product_purchased => "Koupeno";
   @override
+  String get terms_of_use => "Podmínky použití";
+  @override
   String get taxonomy_cladus => "(klad)";
   @override
   String get plant_height_to => "-";
@@ -5398,6 +5576,8 @@ class $cs_CZ extends S {
   String auth_reset_password_email_message(String _email) => "Postupujte podle pokynů odeslaných na adresu $_email a obnovte heslo.";
   @override
   String observation_upload_message(String param) => "Chystáte se zálohovat $param pozorování. Zkontrolujte, prosím, vaše připojení na wi-fi. Jste připraven začít zálohovat fotografie?";
+  @override
+  String subscription_disclaimer(String account, String store) => "První platba bude účtována vašemu účtu $account 30 dní po potvrzení nákupu. Předplatné se automaticky obnovuje, pokud není zrušeno nejméně 24 hodin před koncem aktuálního období. Nové předplatné bude účtováno do 24 hodin před koncem aktuálního období. Své odběry můžete spravovat a zrušit tak, že po zakoupení přejdete do nastavení účtu na $store.";
 }
 
 class $de_DE extends S {
@@ -5440,6 +5620,8 @@ class $de_DE extends S {
   String get feedback_translate => "Sie können Tippfehler oder falsche Übersetzungen melden, oder eine neue Übersetzung in Ihrer Sprache einreichen.";
   @override
   String get australia => "Australien";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Übersetzt mit Google Translate";
   @override
@@ -5515,6 +5697,8 @@ class $de_DE extends S {
   @override
   String get plant_herbalism => "Pflanzenheilkunde";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Käufe wiederherstellen";
   @override
   String get auth_reset_password => "Passwort zurücksetzen";
@@ -5527,7 +5711,7 @@ class $de_DE extends S {
   @override
   String get show_translation => "Übersetzter Text";
   @override
-  String get subscription_monthly_title => "Speichern Sie Fotos - monatlich";
+  String get subscription_monthly_title => "Speichern Sie Fotos";
   @override
   String get taxonomy_subsectio => "Untersektion";
   @override
@@ -5544,6 +5728,8 @@ class $de_DE extends S {
   String get product_subscribed => "Abonniert";
   @override
   String get search_names => "Suche in Namen";
+  @override
+  String get subscription_period_month => "Monat";
   @override
   String get southwestern_europe => "Südwesteuropa";
   @override
@@ -5577,6 +5763,8 @@ class $de_DE extends S {
   @override
   String get search_taxonomy => "Suche in der Taxonomie";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Falscher Code. Versuchen Sie es noch einmal.";
   @override
   String get west_tropical_africa => "Westliches tropisches Afrika";
@@ -5594,6 +5782,8 @@ class $de_DE extends S {
   String get new_zealand => "Neuseeland";
   @override
   String get eastern_asia => "Ostasien";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "West-Asien";
   @override
@@ -5615,13 +5805,17 @@ class $de_DE extends S {
   @override
   String get offline_title => "Offline-Modus";
   @override
+  String get privacy_policy => "Datenschutz-Bestimmungen";
+  @override
   String get taxonomy_genus => "Gattung";
+  @override
+  String get subscription_period_year => "Jahr";
   @override
   String get papuasia => "Papuasien";
   @override
   String get feedback_submit_translate_app => "Verbessere den Text der Anwendung";
   @override
-  String get subscription_yearly_title => "Speichern Sie Fotos - jährlich";
+  String get subscription_yearly_title => "Speichern Sie Fotos";
   @override
   String get observation_upload_progress => "Beobachtungen hochladen...";
   @override
@@ -5785,6 +5979,8 @@ class $de_DE extends S {
   @override
   String get product_purchased => "Gekauft";
   @override
+  String get terms_of_use => "Nutzungsbedingungen";
+  @override
   String get taxonomy_cladus => "(ohne Rang)";
   @override
   String get plant_height_to => "-";
@@ -5910,6 +6106,8 @@ class $de_DE extends S {
   String auth_reset_password_email_message(String _email) => "Folgen Sie den Anweisungen, die an $_email gesendet wurden, um Ihr Passwort zurückzusetzen.";
   @override
   String observation_upload_message(String param) => "Sie werden $param Beobachtungen hochladen. Bitte überprüfen Sie, ob Ihr Gerät mit Wi-Fi verbunden ist. Bist du bereit für einen Hochladen?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Die erste Zahlung wird 30 Tage nach der Kaufbestätigung Ihrem $account Konto belastet. Das Abonnement wird automatisch erneuert, es sei denn, es wird mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums gekündigt. Ihr Konto wird innerhalb von 24 Stunden vor Ablauf des laufenden Zeitraums für die Erneuerung belastet. Sie können Ihre Abonnements verwalten und kündigen, indem Sie nach dem Kauf Ihre Kontoeinstellungen auf dem $store aufrufen.";
 }
 
 class $hu_HU extends S {
@@ -5925,7 +6123,7 @@ class $hu_HU extends S {
   @override
   String get about => "Az alkalmazásról";
   @override
-  String get product_no_ads_description => "Az alkalmazás nem jeleníti meg a hirdetés bannerjét a képernyő alján.";
+  String get product_no_ads_description => "Az alkalmazás nem jelenít meg hirdetést a képernyő alján.";
   @override
   String get western_canada => "Nyugat-Kanada";
   @override
@@ -5939,21 +6137,23 @@ class $hu_HU extends S {
   @override
   String get observation_note => "Helyezze el a magánjegyzetet.";
   @override
-  String get auth_verify_email_title => "Ellenőrizze fiókját";
+  String get auth_verify_email_title => "Ellenőrizze a fiókját";
   @override
-  String get east_tropical_africa => "Kelet-trópusi Afrika";
+  String get east_tropical_africa => "trópusi Kelet-Afrika";
   @override
-  String get photo_search_failed => "A fénykép keresése sikertelen. Ellenőrizze az internetkapcsolatot és próbálja újra.";
+  String get photo_search_failed => "A fénykép általi keresés sikertelen lett. Ellenőrizze az internetkapcsolatot és próbálja újra.";
   @override
   String get middle_asia => "Közép-Ázsia";
   @override
-  String get always_my_region_subtitle => "Az Ön régiója előre lesz beállítva a szűrőre";
+  String get always_my_region_subtitle => "Az Ön régiója lesz beállítva a szűrőn";
   @override
-  String get feedback_translate => "Bármelyik hibát vagy hibát észlelhet, vagy új fordítást nyújthat be az ön nyelvén.";
+  String get feedback_translate => "Visszajelzést küldhet a whatsthatflower.com című oldal által, hiba, új fordítás vagy az adatbázis bővítése esetén.";
   @override
   String get australia => "Ausztrália";
   @override
-  String get google_translate => "Lefordítva a Google Translate";
+  String get google => "Google";
+  @override
+  String get google_translate => "Lefordítva a Google Translate-el";
   @override
   String get habitat_forest => "erdők";
   @override
@@ -5961,39 +6161,39 @@ class $hu_HU extends S {
   @override
   String get southwestern_pacific => "Dél-Nyugat Csendes-óceán";
   @override
-  String get asia_tropical => "Ázsia trópusi";
+  String get asia_tropical => "Ázsia - trópusi éghajlat";
   @override
-  String get northwestern_usa => "Északnyugati USA";
+  String get northwestern_usa => "Észak-Kelet USA";
   @override
   String get middle_atlantic_ocean => "Közép-Atlanti-óceán";
   @override
-  String get subscription_intro1 => "A megfigyelés dátumát, helyét és jegyzetét elmenti és megmarad az előfizetés nélküli eszközök között, de a fényképeket csak helyben tárolja az eszközön. Az adatok törlése, újratelepítése vagy kapcsolása közben elveszíti a kapcsolatukat velük (még akkor is, ha maga a fénykép készíti az alkalmazásból).";
+  String get subscription_intro1 => "A megfigyelésének dátumát, helyét és jegyzetét elmenti és megosztja az előfizetés nélküli eszközök között, de a fényképeket csak helyi eszközön tárolja. Az adatok törlése, az eszköz újratelepítése vagy lecserélese esetén elveszíti ezen adatait (még a fényképeket is, ha azokat az alkalmazásból készítette).";
   @override
-  String get feedback_run_ads => "Megjelenítheti a teljes képernyős hirdetést vagy a videohirdetést, hogy támogassa a további fejlesztéseket és az adatbázis-fejlesztést.";
+  String get feedback_run_ads => "Megjeleníthet teljes képernyős hirdetést vagy videohirdetést, hogy támogassa az adatbázis és egyébb fejlesztéseket.";
   @override
   String get observation_empty => "Még nincs megfigyelés.";
   @override
   String get habitat_message => "Mi veszi körül? Határozza meg a növény élőhelyét.";
   @override
-  String get offline_download_fail => "Sikertelen letöltés. Kérjük, ellenőrizze az internetkapcsolatot vagy a szabad helyet az eszközön, és próbálja újra.";
+  String get offline_download_fail => "Sikertelen letöltés. Kérjük ellenőrizze az internetkapcsolatot vagy a szabad hely mennyiségét az eszközön és próbálja újra.";
   @override
   String get observation_photo_delete => "Fotó eltávolítása";
   @override
-  String get subscription_intro3 => "Ha még mindig habozott eltalálni az alábbi gombot, mindkét előfizetés esetében 30 napos próbaidő van.";
+  String get subscription_intro3 => "Ha még mindig habozik lehetőség van mindkét feliratkozás esetében egy 30 napos próbaidőre.";
   @override
   String get macaronesia => "Makaronézia";
   @override
-  String get subscription_intro2 => "Először feliratkozik a fényképek mentésére és tartósítására az összes eszközön. Az előfizetéssel egyetért azzal, hogy megosztja észrevételeit más előfizetett felhasználókkal. Látni fogja a megfigyeléseiket is. Minden megosztott észrevétel anonim, és a jegyzet privát marad, és nem lesz megosztva. A folyamatok egyszerűsítése érdekében a CC0 (Creative Commons Zero) licenc alatt megosztják a fotókat, így Ön is egyetért ezzel.";
+  String get subscription_intro2 => "Feliratkozásával menti és megosztja fényképeit az eszközei között. Feliratkozásával beleeggyezik abba, hogy megosztja megfigyeléseit a többi feliratkozott felhasználóval. Továbbá látni fogja az ő megfigyeléseiket is. Minden megosztott megfigyelés anonim, a hozzá tartozó jegyzet privát marad és nem lesz megosztva. A folyamatok egyszerűsítése érdekében a fotók a CC0 (Creative Commons Zero) licenc alatt kerülnek megosztásra, amibe ezáltal szintén beleeggyezik.";
   @override
   String get auth_verify_phone_number_title => "Írja be a telefonszámát";
   @override
   String get search => "Keresés...";
   @override
-  String get auth_sms_terms_of_service => "Ha a(z) „Telefonszám igazolása” gombra koppint, a rendszer SMS-t küldhet Önnek. A szolgáltató ezért üzenet- és adatforgalmi díjat számíthat fel.";
+  String get auth_sms_terms_of_service => "Ha a „Telefonszám általi azonosítás” lehetőséget választja, a rendszer SMS-t küldhet Önnek. A szolgáltató ezért üzenet- és adatforgalmi díjat számíthat fel.";
   @override
   String get habitat_rock => "sziklák vagy hegyek";
   @override
-  String get photo_search_note => "Ez egy kísérleti funkció, amely csak online működik. Néha pontosan megtalálja azt, amit keres, néha még közel sem. Teljesen támaszkodom a Google-ra, hiszen minden kemény munkát végeznek. Ahogy az idő megy, jobbnak és jobbnak kell lennie, de nem elsősorban a virág elismerésére épült. Használja okosan, és ne vizsgálja meg a teljes alkalmazást a kísérlet alapján. Minőségi okokból minden keresési eredmény (nem fotó) mentésre kerül.";
+  String get photo_search_note => "Ez egy kísérleti funkció, amely csak online működik. Néha pontos a végeredmény, máskor viszont teljesen megbízhatatlan. Teljesen mértékben a Google-ra támaszkodunk, hiszen a munka lényegét ő végzi. Idővel javulni kéne az eredményeknek, de ezen szolgáltatás nem elsősorban virágok felismerésére készült. Használja elővigyázatosan, és ne ez alapján ítélje meg az alkalmazásunkat. A minőség feljavítása érdekében minden keresési eredmény (nem fotó) mentésre kerül.";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
@@ -6011,21 +6211,23 @@ class $hu_HU extends S {
   @override
   String get petal_message => "A virág szimmetriája kétoldali (zigomorf)? Nem? Akkor hány sziromlevele van?";
   @override
-  String get observation_upload_title => "Feltöltés megfigyelése";
+  String get observation_upload_title => "Megfigyelés feltöltése";
   @override
   String get plant_sources => "Források";
   @override
   String get south_central_pacific => "Dél-Közép Csendes-óceán";
   @override
-  String get product_custom_filter_description => "Meg tudod változtatni az alapértelmezett sorrendet és a szűrők számát (szín, élettér, párta, terjesztés).";
+  String get product_custom_filter_description => "Megváltoztathatja az alapértelmezett sorrendet és a szűrők számát (szín, élettér, párta, terjesztés).";
   @override
   String get auth_password_hint => "Jelszó";
   @override
   String get habitat_meadow => "rétek vagy legelők";
   @override
-  String get auth_google => "Bejelentkezés Google-fiókkal";
+  String get auth_google => "Bejelentkezés Google azonosítóval";
   @override
   String get plant_herbalism => "Gyógynövények";
+  @override
+  String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Vásárlás visszaállítása";
   @override
@@ -6039,11 +6241,11 @@ class $hu_HU extends S {
   @override
   String get show_translation => "Fordított szöveg megjelenítése";
   @override
-  String get subscription_monthly_title => "Fényképek tárolása - havonta";
+  String get subscription_monthly_title => "Fényképek tárolása";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
-  String get auth_invalid_phone_number => "Érvényes telefonszámot adjon meg.";
+  String get auth_invalid_phone_number => "Adjon meg érvényes telefonszámot.";
   @override
   String get list_info => "Válasszon egyet";
   @override
@@ -6057,6 +6259,8 @@ class $hu_HU extends S {
   @override
   String get search_names => "Keresés a nevekben";
   @override
+  String get subscription_period_month => "hónap";
+  @override
   String get southwestern_europe => "Délnyugat Európa";
   @override
   String get taxonomy_species => "Faj";
@@ -6069,7 +6273,7 @@ class $hu_HU extends S {
   @override
   String get taxonomy_familia => "Család";
   @override
-  String get antarctic_continent => "Antarktiszi kontinens";
+  String get antarctic_continent => "Antarktisz";
   @override
   String get observation_delete => "A megfigyelés törlése";
   @override
@@ -6079,23 +6283,25 @@ class $hu_HU extends S {
   @override
   String get product_subscribe => "Iratkozz fel";
   @override
-  String get offline_download_success => "A fényképek és illusztrációk sikeresen letöltöttek.";
+  String get offline_download_success => "A fényképek és illusztrációk sikeresen letöltődtek.";
   @override
   String get auth_verify_email_message => "A fiók ellenőrzésére szolgáló linket elküldtük az e-mail címére.";
   @override
-  String get auth_email => "Bejelentkezés e-mail-fiókkal";
+  String get auth_email => "Bejelentkezés e-mail azonosítóval";
   @override
   String get arabian_peninsula => "Arab félsziget";
   @override
   String get search_taxonomy => "Keresés taxonómiában";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Hibás kód. Próbálja újra.";
   @override
-  String get west_tropical_africa => "Nyugat-trópusi Afrika";
+  String get west_tropical_africa => "trópusi Nyugat-Afrika";
   @override
   String get northern_europe => "Észak-Európa";
   @override
-  String get auth_verify_phone_number => "Telefonszám igazolása";
+  String get auth_verify_phone_number => "Telefonszám ellenőrzése";
   @override
   String get rate => "Vélemények";
   @override
@@ -6107,15 +6313,17 @@ class $hu_HU extends S {
   @override
   String get eastern_asia => "Kelet-Ázsia";
   @override
+  String get play_store => "Google Play Áruház";
+  @override
   String get western_asia => "Nyugat-Ázsia";
   @override
   String get subarctic_america => "Subarkti-Amerika";
   @override
   String get product_search_title => "Keresés nevekben vagy taxonómiában";
   @override
-  String get observation_not_saved => "A megfigyelés hiányos volt, így nem mentették meg. Hiányzik a hely vagy a fénykép.";
+  String get observation_not_saved => "A megfigyelés hiányos volt, így nem lett elmentve. Hiányzik a hely vagy a fénykép.";
   @override
-  String get feedback_review => "Pozitív értékelést írhat.";
+  String get feedback_review => "Írhat pozitív értékelést.";
   @override
   String get yes => "Igen";
   @override
@@ -6127,25 +6335,29 @@ class $hu_HU extends S {
   @override
   String get offline_title => "Offline módban";
   @override
+  String get privacy_policy => "Adatvédelmi irányelvek";
+  @override
   String get taxonomy_genus => "Nemzetség";
+  @override
+  String get subscription_period_year => "év";
   @override
   String get papuasia => "Papuasia";
   @override
   String get feedback_submit_translate_app => "Javítsa az alkalmazás címkéit";
   @override
-  String get subscription_yearly_title => "Fotók tárolása - évente";
+  String get subscription_yearly_title => "Fotók tárolása";
   @override
   String get observation_upload_progress => "Megfigyelések feltöltése...";
   @override
   String get product_offline_title => "Offline módban";
   @override
-  String get feedback_submit_translate_data => "Javítani kell a virágadatokat";
+  String get feedback_submit_translate_data => "A virágok adatainak bővítése/javítása";
   @override
   String get snack_copy => "A vágólapra másolt";
   @override
   String get product_purchase_failed => "A vásárlás nem sikerült";
   @override
-  String get auth_twitter => "Bejelentkezés Twitter-fiókkal";
+  String get auth_twitter => "Bejelentkezés Twitter azonosítóval";
   @override
   String get auth_create_account => "Hozzon létre egy fiókot";
   @override
@@ -6159,11 +6371,11 @@ class $hu_HU extends S {
   @override
   String get southwestern_usa => "Délnyugati USA";
   @override
-  String get auth_invalid_email_address => "Az e-mail-cím helytelen.";
+  String get auth_invalid_email_address => "Az e-mail cím helytelen.";
   @override
-  String get distribution_message => "Melyik földrajzi területre kell összpontosítania?";
+  String get distribution_message => "Melyik földrajzi területre összpontosítsunk?";
   @override
-  String get caribbean => "Karib";
+  String get caribbean => "Karib-térség";
   @override
   String get auth_sign_in_failed => "A bejelentkezés sikertelen. Ellenőrizze a kapcsolatot és próbálja újra.";
   @override
@@ -6173,7 +6385,7 @@ class $hu_HU extends S {
   @override
   String get africa => "Afrika";
   @override
-  String get south_tropical_africa => "Dél-Trópusi Afrika";
+  String get south_tropical_africa => "trópusi Dél-Afrika";
   @override
   String get caucasus => "Kaukázus";
   @override
@@ -6183,27 +6395,27 @@ class $hu_HU extends S {
   @override
   String get plant_leaf => "Levelek";
   @override
-  String get auth_facebook => "Bejelentkezés Facebook-fiókkal";
+  String get auth_facebook => "Bejelentkezés Facebook azonosítóval";
   @override
   String get taxonomy_serie => "Serie";
   @override
   String get subscription_info => "A megosztott megfigyelések csak az előfizetett felhasználók számára láthatóak.";
   @override
-  String get product_photo_search_description => "Képpel virágot találhat. Ez a funkció a mesterséges intelligenciát használja a fényképek Google-ból történő címkézésére.";
+  String get product_photo_search_description => "Képes lesz fénykép általi virágkikeresésre. Ez a funkció a mesterséges intelligenciát használja a fényképek Google-ból történő címkézésére.";
   @override
-  String get auth_phone => "Bejelentkezés telefonnal";
+  String get auth_phone => "Bejelentkezés telefonszám általi azonosítóval";
   @override
   String get northern_south_america => "Észak-Dél-Amerika";
   @override
-  String get show_original => "Megjelenítése angol szöveg";
+  String get show_original => "Angolul";
   @override
-  String get offline_download_message => "300+ MB fotót és illusztrációkat tölthet le. Ellenőrizze, hogy a készülék wi-fi-hez van-e csatlakoztatva. Készen állsz a letöltésre?";
+  String get offline_download_message => "300+ MB fotót és illusztrációt tölthet le. Ellenőrizze készüléke csatlakozását a wi-fi hálózathoz. Készen áll a letöltésre?";
   @override
   String get southern_america => "Dél-Amerika";
   @override
   String get auth_email_hint => "E-mail";
   @override
-  String get promotion_title => "Fizetett szolgáltatás";
+  String get promotion_title => "Fizetett funkció";
   @override
   String get habitat_garden => "kertek vagy mezők";
   @override
@@ -6211,9 +6423,9 @@ class $hu_HU extends S {
   @override
   String get product_purchase => "Vásárol";
   @override
-  String get russian_far_east => "Orosz távol-keleten";
+  String get russian_far_east => "Orosz távol-kelet";
   @override
-  String get west_central_tropical_africa => "Nyugat-Közép-Trópusi Afrika";
+  String get west_central_tropical_africa => "trópusi Nyugat-Közép Afrika";
   @override
   String get observation_photo_duplicate => "Ismétlődő fotó. Kimarad.";
   @override
@@ -6225,13 +6437,13 @@ class $hu_HU extends S {
   @override
   String get observation_saved => "Megfigyelés történt.";
   @override
-  String get rate_question => "Ez az alkalmazás hasznos?";
+  String get rate_question => "Hasznos az alkalmazás?";
   @override
   String get plant_taxonomy => "Taxonómia";
   @override
   String get feedback_run_ads_fullscreen => "Teljes képernyős hirdetés megjelenítése";
   @override
-  String get asia_temperate => "Ázsia mérsékelt";
+  String get asia_temperate => "Ázsia - mérsékelt éghajlat";
   @override
   String get taxonomy_superregnum => "Domén";
   @override
@@ -6253,7 +6465,7 @@ class $hu_HU extends S {
   @override
   String get my_filter => "Saját szűrőm";
   @override
-  String get auth_sign_in_text => "Fiókot birtokolni? Bejelentkezés";
+  String get auth_sign_in_text => "Már van fiókja? Jelentkezzen be";
   @override
   String get petal_5 => "5";
   @override
@@ -6269,7 +6481,7 @@ class $hu_HU extends S {
   @override
   String get taxonomy_ordo => "Rend";
   @override
-  String get auth_enter_confirmation_code => "Adja meg a telefonszámra elküldött 6 számjegyű kódot ";
+  String get auth_enter_confirmation_code => "Adja meg a telefonszámára elküldött 6 számjegyű kódot.";
   @override
   String get taxonomy_supersectio => "Supersectio";
   @override
@@ -6283,7 +6495,7 @@ class $hu_HU extends S {
   @override
   String get mexico => "Mexikó";
   @override
-  String get snack_publish => "... később közzé kell tenni";
+  String get snack_publish => "... később lesz közzétéve";
   @override
   String get siberia => "Szibéria";
   @override
@@ -6291,11 +6503,13 @@ class $hu_HU extends S {
   @override
   String get auth_phone_hint => "Telefonszám";
   @override
-  String get product_observations_description => "A saját nevének, nevének, dátumának, helyének, fényképeinek és jegyzeteinek mentésére képes lesz.";
+  String get product_observations_description => "Képes lesz menteni saját megfigyeléseit virágnévvel, dátummal, helyszínnel, fényképpel és megjegyzéssel.";
   @override
   String get plant_trivia => "Apróságok";
   @override
-  String get product_purchased => "Vásárolt";
+  String get product_purchased => "Megvásárolt";
+  @override
+  String get terms_of_use => "Használati feltételek";
   @override
   String get taxonomy_cladus => "Csoport";
   @override
@@ -6325,9 +6539,9 @@ class $hu_HU extends S {
   @override
   String get southern_africa => "Dél-Afrika";
   @override
-  String get always_my_region_title => "Mindig adjon hozzá régiót a szűrőhöz";
+  String get always_my_region_title => "Mindig adja hozzá a régióját a szűrőhöz";
   @override
-  String get observation_upload_fail => "Feltöltés sikertelen. Kérjük, ellenőrizze az internetkapcsolatot, és próbálja újra.";
+  String get observation_upload_fail => "Feltöltés sikertelen. Kérjük ellenőrizze az internetkapcsolatot és próbálja újra.";
   @override
   String get color_yellow => "sárga";
   @override
@@ -6347,13 +6561,13 @@ class $hu_HU extends S {
   @override
   String get rate_never => "Soha";
   @override
-  String get northwestern_pacific => "Észak-nyugat Csendes-óceán";
+  String get northwestern_pacific => "Északnyugati Csendes-óceán";
   @override
   String get plant_stem => "Szár";
   @override
   String get no => "Nem";
   @override
-  String get rate_text => "A szerző a pozitív visszajelzésekből dolgozik. A alkalmazás tároló-on keresztül csillagzással értékelheti/támogathatja a munkáját.";
+  String get rate_text => "A szerző a pozitív visszajelzésekből dolgozik. A alkalmazás tárolón keresztül csillagzással értékelheti/támogathatja a munkáját.";
   @override
   String get auth_sign_out => "Kijelentkezés";
   @override
@@ -6367,25 +6581,25 @@ class $hu_HU extends S {
   @override
   String get rate_later => "Később";
   @override
-  String get color_message => "Milyen színű a virág? Válassza ki a legközelebbi színt.";
+  String get color_message => "Milyen színű a virág? Válassza ki a legmegfelelőbb színt.";
   @override
-  String get northeast_tropical_africa => "Észak-Trópusi Afrika";
+  String get northeast_tropical_africa => "trópusi Észak-Afrika";
   @override
-  String get photo_search_no_login => "A fotókeresés csak naplózott felhasználók számára érhető el. Kérjük jelentkezzen be.";
+  String get photo_search_no_login => "A fénykép általi keresés csak bejelentkezett felhasználók számára lehetséges. Kérjük jelentkezzen be.";
   @override
   String get observations => "Megfigyelések";
   @override
   String get product_custom_filter_title => "Egyéni szűrő";
   @override
-  String get feedback_intro => "Hozzájárult az alkalmazáshoz, mivel telepítette azt a készülékére. Ha valami többet keres, itt van néhány lehetőség:";
+  String get feedback_intro => "Köszönjük a támogatását, mivel telepítette az alkalmazást. Ha többet szeretne, itt van néhány lehetőség:";
   @override
   String get filter_distribution => "terjesztés";
   @override
-  String get feedback_buy_extended => "A bővített változatot további funkciókkal vásárolhatja meg, mint például az offline mód, kereshet a nevekben, kereshet taxonómia, megfigyelések és konfigurálható szűrő segítségével.";
+  String get feedback_buy_extended => "A bővített változat megvásárlása további funkciókat eredményez, mint például az offline mód, név általi keresés, taxonómia általi keresés, megfigyelések és konfigurálható szűrő.";
   @override
   String get north_central_usa => "Észak-Közép USA";
   @override
-  String get improve_translation => "Javítani fordítás";
+  String get improve_translation => "A fordítás javítása";
   @override
   String get observation_delete_question => "Törli a megfigyelést?";
   @override
@@ -6399,29 +6613,31 @@ class $hu_HU extends S {
   @override
   String get southeastern_europe => "Délkelet-Európa";
   @override
-  String get auth_empty_password => "Ezt nem hagyhatja üresen.";
+  String get auth_empty_password => "A jelszó megadása kötelező.";
   @override
-  String get observation_upload_success => "A megfigyelések sikeresen feltöltöttek.";
+  String get observation_upload_success => "A megfigyeléseket sikerült feltölteni.";
   @override
   String get plant_inflorescence => "Virágzat";
   @override
   String get northern_africa => "Észak-Afrika";
   @override
-  String get offline_subtitle => "szüksége 300+ MB további helyet.";
+  String get offline_subtitle => "szüksége van 300+ MB további tárhelyre.";
   @override
   String get product_no_ads_title => "Nem kívánt reklám";
   @override
   String get petal_zygomorphic => "kétoldali";
   @override
-  String get photo_search_empty => "A Google MI (mesterséges intelligencia) nem ismerte fel a képen látható virágot. Próbálkozzon újra különböző szög, távolság vagy fényviszonyokkal. Ha már csináltad, úgy tűnik, hogy az MI overlord hamarosan nem jön.";
+  String get photo_search_empty => "A Google MI (mesterséges intelligencia) nem ismerte fel a képen látható virágot. Próbálkozzon újra különböző szög, távolság vagy fényviszonyokkal. Ha már próbálta, úgy tűnik, hogy az MI overlord hamarosan nem jön.";
   @override
-  String get auth_invalid_code => "Adjon meg érvényes SMS-kódot";
+  String get auth_invalid_code => "Adjon meg érvényes SMS kódot";
   @override
-  String promotion_content(String date) => "Ez fizetett funkció. A $date ingyenesen használhatja";
+  String promotion_content(String date) => "Fizetett funkció. $date -ig ingyenesen használhatja";
   @override
-  String auth_reset_password_email_message(String _email) => "A jelszó visszaállításához kövesse a $_email címre küldött utasításokat.";
+  String auth_reset_password_email_message(String _email) => "A jelszó visszaállításához kövesse a(z) $_email címre küldött utasításokat.";
   @override
-  String observation_upload_message(String param) => "$param megfigyelések feltöltésére kerül sor. Ellenőrizze, hogy a készülék wi-fi-hez van-e csatlakoztatva. Készen állsz egy feltöltésre?";
+  String observation_upload_message(String param) => "$param megfigyelés kerül feltöltésre. Ellenőrizze készüléke csatlakozását a wi-fi hálózathoz. Készen áll a feltöltésre?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Az első befizetés a vásárlás visszaigazolását követő 30 nappal az Ön $account számláján kerül felszámításra. Az előfizetés automatikusan megújul, kivéve, ha legalább 24 órával a jelenlegi időszak vége előtt törlődik. Fiókját a jelenlegi időszak vége előtt 24 órán belül meg kell fizetni a megújításról. Az előfizetései kezelése és törlése a vásárlást követő $store fiókbeállításaival érhető el.";
 }
 
 class $nb_NO extends S {
@@ -6464,6 +6680,8 @@ class $nb_NO extends S {
   String get feedback_translate => "Du kan rapportere hvilken som helst skrivefeil eller feil du fant eller sende inn ny oversettelse på ditt språk.";
   @override
   String get australia => "Australia";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Oversatt med Google Trans";
   @override
@@ -6539,6 +6757,8 @@ class $nb_NO extends S {
   @override
   String get plant_herbalism => "Plantelegemiddel";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Gjenopprette kjøp";
   @override
   String get auth_reset_password => "Tilbakestille passord";
@@ -6551,7 +6771,7 @@ class $nb_NO extends S {
   @override
   String get show_translation => "Vis oversatt tekst";
   @override
-  String get subscription_monthly_title => "Lagre bilder - månedlig";
+  String get subscription_monthly_title => "Lagre bilder";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -6568,6 +6788,8 @@ class $nb_NO extends S {
   String get product_subscribed => "Abonnerer";
   @override
   String get search_names => "Søk i navn";
+  @override
+  String get subscription_period_month => "måned";
   @override
   String get southwestern_europe => "Sørvestlige Europa";
   @override
@@ -6601,6 +6823,8 @@ class $nb_NO extends S {
   @override
   String get search_taxonomy => "Søk i taksonomi";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Feil kode. Prøv på nytt.";
   @override
   String get west_tropical_africa => "Vest-tropiske Afrika";
@@ -6618,6 +6842,8 @@ class $nb_NO extends S {
   String get new_zealand => "New Zealand";
   @override
   String get eastern_asia => "Øst-Asia";
+  @override
+  String get play_store => "Google Play Butikk";
   @override
   String get western_asia => "Vest-Asia";
   @override
@@ -6639,13 +6865,17 @@ class $nb_NO extends S {
   @override
   String get offline_title => "Frakoblet modus";
   @override
+  String get privacy_policy => "Personvernregler";
+  @override
   String get taxonomy_genus => "Slekt";
+  @override
+  String get subscription_period_year => "år";
   @override
   String get papuasia => "Papuasia";
   @override
   String get feedback_submit_translate_app => "Forbedre programmets etiketter";
   @override
-  String get subscription_yearly_title => "Lagre bilder - årlig";
+  String get subscription_yearly_title => "Lagre bilder";
   @override
   String get observation_upload_progress => "Laster opp observasjoner...";
   @override
@@ -6809,6 +7039,8 @@ class $nb_NO extends S {
   @override
   String get product_purchased => "Kjøpt";
   @override
+  String get terms_of_use => "Vilkår for bruk";
+  @override
   String get taxonomy_cladus => "(klade)";
   @override
   String get plant_height_to => "-";
@@ -6934,6 +7166,8 @@ class $nb_NO extends S {
   String auth_reset_password_email_message(String _email) => "Følg instruksjonene som sendes til $_email for å tilbakestille passordet ditt.";
   @override
   String observation_upload_message(String param) => "Du skal laste opp $param observasjoner. Sjekk om enheten din er koblet til wi-fi. Er du klar for en opplasting?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Første betaling vil bli belastet din $account -konto 30 dager etter bekreftelsen av kjøpet. Abonnementet fornyes automatisk med mindre det er kansellert minst 24 timer før slutten av den nåværende perioden. Kontoen din vil bli belastet for fornyelse innen 24 timer før slutten av den nåværende perioden. Du kan administrere og kansellere abonnementene dine ved å gå til kontoinnstillingene dine på $store etter kjøp.";
 }
 
 class $sk_SK extends S {
@@ -6976,6 +7210,8 @@ class $sk_SK extends S {
   String get feedback_translate => "Môžete upozorniť na gramatické a faktické chyby v texte alebo priamo v aplikácii na stránke whatsthatflower.com.";
   @override
   String get australia => "Austrália";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Preložené pomocou Google prekladača";
   @override
@@ -7051,6 +7287,8 @@ class $sk_SK extends S {
   @override
   String get plant_herbalism => "Bylinkárstvo";
   @override
+  String get app_store => "App obchod";
+  @override
   String get product_restore_purchases => "Obnoviť nákupy";
   @override
   String get auth_reset_password => "Obnoviť heslo";
@@ -7063,7 +7301,7 @@ class $sk_SK extends S {
   @override
   String get show_translation => "Ukáž preložený text";
   @override
-  String get subscription_monthly_title => "Záloha fotografií z pozorovaní - mesačná platba";
+  String get subscription_monthly_title => "Záloha fotografií z pozorovaní";
   @override
   String get taxonomy_subsectio => "podsekcia";
   @override
@@ -7080,6 +7318,8 @@ class $sk_SK extends S {
   String get product_subscribed => "Predplatené";
   @override
   String get search_names => "Hľadať v názvoch";
+  @override
+  String get subscription_period_month => "mesiac";
   @override
   String get southwestern_europe => "Juhozápadná Európa";
   @override
@@ -7111,6 +7351,8 @@ class $sk_SK extends S {
   @override
   String get search_taxonomy => "Hľadať v taxonómii";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Nesprávny kód. Skúste to znova.";
   @override
   String get west_tropical_africa => "Západná tropická Afrika";
@@ -7128,6 +7370,8 @@ class $sk_SK extends S {
   String get new_zealand => "Nový Zéland";
   @override
   String get eastern_asia => "Východná Ázia";
+  @override
+  String get play_store => "Obchod Google Play";
   @override
   String get western_asia => "Juhozápadná Ázia";
   @override
@@ -7149,13 +7393,17 @@ class $sk_SK extends S {
   @override
   String get offline_title => "Režm offline";
   @override
+  String get privacy_policy => "Zásady ochrany osobných údajov";
+  @override
   String get taxonomy_genus => "rod";
+  @override
+  String get subscription_period_year => "rok";
   @override
   String get papuasia => "Papuázia";
   @override
   String get feedback_submit_translate_app => "Opraviť chyby v aplikácii";
   @override
-  String get subscription_yearly_title => "Záloha fotografií z pozorovaní - ročná platba";
+  String get subscription_yearly_title => "Záloha fotografií z pozorovaní";
   @override
   String get observation_upload_progress => "Zálohujem pozorovania...";
   @override
@@ -7317,6 +7565,8 @@ class $sk_SK extends S {
   @override
   String get product_purchased => "Kúpené";
   @override
+  String get terms_of_use => "Podmienky používania";
+  @override
   String get taxonomy_cladus => "Cladus";
   @override
   String get plant_height_to => "-";
@@ -7440,6 +7690,8 @@ class $sk_SK extends S {
   String auth_reset_password_email_message(String _email) => "Postupujte podľa pokynov odoslaných na adresu $_email, aby ste obnovili svoje heslo.";
   @override
   String observation_upload_message(String param) => "Chystáte sa zálohovať $param pozorovaní. Skontrolujte, prosím, vaše pripojenia na wi-fi. Ste pripravený začať zálohovať fotografie?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Prvá platba bude účtovaná vášmu účtu $account 30 dní po potvrdení nákupu. Predplatné sa automaticky obnovuje, pokiaľ nie je zrušené najmenej 24 hodín pred koncom aktuálneho obdobia. Nové predplatné bude účtované do 24 hodín pred koncom aktuálneho obdobia. Svoje odbery môžete spravovať a zrušiť tak, že po zakúpení prejdete do nastavenia účtu na $store.";
 }
 
 class $es_ES extends S {
@@ -7482,6 +7734,8 @@ class $es_ES extends S {
   String get feedback_translate => "Puede reportar cualquier error tipográfico o error que encontró o enviar una nueva traducción en su idioma.";
   @override
   String get australia => "Australia";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Traducido con Google Traductor";
   @override
@@ -7557,6 +7811,8 @@ class $es_ES extends S {
   @override
   String get plant_herbalism => "Herboristería";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Restaurar las compras";
   @override
   String get auth_reset_password => "Restablecer la contraseña";
@@ -7569,7 +7825,7 @@ class $es_ES extends S {
   @override
   String get show_translation => "Mostrar texto traducido";
   @override
-  String get subscription_monthly_title => "Fotos de la tienda - mensuales";
+  String get subscription_monthly_title => "Fotos de la tienda";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -7586,6 +7842,8 @@ class $es_ES extends S {
   String get product_subscribed => "Suscrito";
   @override
   String get search_names => "Buscar en nombres";
+  @override
+  String get subscription_period_month => "mes";
   @override
   String get southwestern_europe => "Sudoeste de Europa";
   @override
@@ -7619,6 +7877,8 @@ class $es_ES extends S {
   @override
   String get search_taxonomy => "Buscar en taxonomía";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "El código es incorrecto. Vuelve a intentarlo.";
   @override
   String get west_tropical_africa => "África tropical occidental";
@@ -7636,6 +7896,8 @@ class $es_ES extends S {
   String get new_zealand => "Nueva Zelanda";
   @override
   String get eastern_asia => "Asia Oriental";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "Asia occidental";
   @override
@@ -7657,13 +7919,17 @@ class $es_ES extends S {
   @override
   String get offline_title => "Modo offline";
   @override
+  String get privacy_policy => "Política de privacidad";
+  @override
   String get taxonomy_genus => "género";
+  @override
+  String get subscription_period_year => "año";
   @override
   String get papuasia => "Papuasia";
   @override
   String get feedback_submit_translate_app => "Mejorar las etiquetas de la aplicación.";
   @override
-  String get subscription_yearly_title => "Fotos de la tienda - anualmente";
+  String get subscription_yearly_title => "Fotos de la tienda";
   @override
   String get observation_upload_progress => "Cargando observaciones...";
   @override
@@ -7827,6 +8093,8 @@ class $es_ES extends S {
   @override
   String get product_purchased => "Comprado";
   @override
+  String get terms_of_use => "Términos de Uso";
+  @override
   String get taxonomy_cladus => "(clado)";
   @override
   String get plant_height_to => "hasta";
@@ -7952,6 +8220,8 @@ class $es_ES extends S {
   String auth_reset_password_email_message(String _email) => "Siga las instrucciones enviadas a $_email para restablecer su contraseña.";
   @override
   String observation_upload_message(String param) => "Vas a subir $param observaciones. Por favor, compruebe si su dispositivo está conectado a Wi-Fi. ¿Estás listo para una carga?";
+  @override
+  String subscription_disclaimer(String account, String store) => "El primer pago se cargará a su cuenta de $account 30 días después de la confirmación de la compra. La suscripción se renueva automáticamente a menos que se cancele al menos 24 horas antes del final del período actual. Se le cobrará a su cuenta la renovación dentro de las 24 horas anteriores al final del período actual. Puede administrar y cancelar sus suscripciones en la configuración de su cuenta en $store después de la compra.";
 }
 
 class $nl_NL extends S {
@@ -7994,6 +8264,8 @@ class $nl_NL extends S {
   String get feedback_translate => "U kunt typefouten of verkeerde vertalingen melden of nieuwer vertalingen toevoegen op whatsthatflower.com";
   @override
   String get australia => "Australië";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Vertaald met Google Translate";
   @override
@@ -8069,6 +8341,8 @@ class $nl_NL extends S {
   @override
   String get plant_herbalism => "Geneeskundige toepassingen";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Herstel aankopen";
   @override
   String get auth_reset_password => "Reset wachtwoord";
@@ -8081,7 +8355,7 @@ class $nl_NL extends S {
   @override
   String get show_translation => "Toon vertaalde tekst";
   @override
-  String get subscription_monthly_title => "Foto's opslaan - maandelijks";
+  String get subscription_monthly_title => "Foto's opslaan";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -8098,6 +8372,8 @@ class $nl_NL extends S {
   String get product_subscribed => "Geabonneerd";
   @override
   String get search_names => "Zoeken in namen";
+  @override
+  String get subscription_period_month => "maand";
   @override
   String get southwestern_europe => "Zuidwest-Europa";
   @override
@@ -8131,6 +8407,8 @@ class $nl_NL extends S {
   @override
   String get search_taxonomy => "Zoeken in taxonomie";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Onjuiste code. Probeer het opnieuw.";
   @override
   String get west_tropical_africa => "West-tropisch Afrika";
@@ -8148,6 +8426,8 @@ class $nl_NL extends S {
   String get new_zealand => "Nieuw Zeeland";
   @override
   String get eastern_asia => "Oost Azië";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "West-Azië";
   @override
@@ -8169,13 +8449,17 @@ class $nl_NL extends S {
   @override
   String get offline_title => "Offline modus";
   @override
+  String get privacy_policy => "Privacybeleid";
+  @override
   String get taxonomy_genus => "Geslacht";
+  @override
+  String get subscription_period_year => "jaar";
   @override
   String get papuasia => "Papuasië";
   @override
   String get feedback_submit_translate_app => "Verbeter de kopjes in de app";
   @override
-  String get subscription_yearly_title => "Foto's opslaan - jaarlijks";
+  String get subscription_yearly_title => "Foto's opslaan";
   @override
   String get observation_upload_progress => "Observaties uploaden...";
   @override
@@ -8339,6 +8623,8 @@ class $nl_NL extends S {
   @override
   String get product_purchased => "Gekocht";
   @override
+  String get terms_of_use => "Gebruiksvoorwaarden";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_height_to => "tot";
@@ -8464,6 +8750,8 @@ class $nl_NL extends S {
   String auth_reset_password_email_message(String _email) => "Volg de instructies verzonden naar $_email om uw wachtwoord opnieuw in te stellen.";
   @override
   String observation_upload_message(String param) => "Je gaat $param observaties uploaden. Controleer of uw apparaat is verbonden met wifi. Ben je klaar voor een upload?";
+  @override
+  String subscription_disclaimer(String account, String store) => "De eerste betaling wordt 30 dagen na de bevestiging van de aankoop in rekening gebracht op uw account voor $account. Abonnement wordt automatisch verlengd, tenzij het ten minste 24 uur voor het einde van de lopende periode wordt geannuleerd. Uw account wordt binnen 24 uur voorafgaand aan het einde van de lopende periode in rekening gebracht voor verlenging. Je kunt je abonnementen beheren en annuleren door na aankoop naar je accountinstellingen op de $store te gaan.";
 }
 
 class $pa_IN extends S {
@@ -8506,6 +8794,8 @@ class $pa_IN extends S {
   String get feedback_translate => "ਪਹਾੜਾਂ ਜਾਂ ਝੂਲਿਆਂ";
   @override
   String get australia => "ਆਸਟ੍ਰੇਲੀਆ";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "ਆਵਾਸ";
   @override
@@ -8581,6 +8871,8 @@ class $pa_IN extends S {
   @override
   String get plant_herbalism => "ਹਰਬਲਿਜ਼ਮ";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "ਖ਼ਰੀਦਾਂ ਨੂੰ ਰੀਸਟੋਰ ਕਰੋ";
   @override
   String get auth_reset_password => "ਪਾਸਵਰਡ ਰੀਸੈਟ ਕਰੋ";
@@ -8593,7 +8885,7 @@ class $pa_IN extends S {
   @override
   String get show_translation => "ਅਨੁਵਾਦ ਕੀਤਾ ਟੈਕਸਟ ਦਿਖਾਉ";
   @override
-  String get subscription_monthly_title => "ਸਟੋਰ ਫੋਟੋ - ਮਹੀਨਾਵਾਰ";
+  String get subscription_monthly_title => "ਸਟੋਰ ਫੋਟੋ";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -8610,6 +8902,8 @@ class $pa_IN extends S {
   String get product_subscribed => "ਗਾਹਕ ਬਣੇ";
   @override
   String get search_names => "ਨਾਮਾਂ ਵਿੱਚ ਖੋਜ ਕਰੋ";
+  @override
+  String get subscription_period_month => "ਮਹੀਨੇ";
   @override
   String get southwestern_europe => "ਦੱਖਣ ਪੱਛਮੀ ਯੂਰਪ";
   @override
@@ -8643,6 +8937,8 @@ class $pa_IN extends S {
   @override
   String get search_taxonomy => "ਟੈਕਸੋਨੀਟੀ ਵਿੱਚ ਖੋਜ ਕਰੋ";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "ਗਲਤ ਕੋਡ. ਫਿਰ ਕੋਸ਼ਿਸ਼ ਕਰੋ.";
   @override
   String get west_tropical_africa => "ਪੱਛਮੀ ਖੰਡੀ ਅਫ਼ਰੀਕਾ";
@@ -8660,6 +8956,8 @@ class $pa_IN extends S {
   String get new_zealand => "ਨਿਊਜ਼ੀਲੈਂਡ";
   @override
   String get eastern_asia => "ਪੂਰਬੀ ਏਸ਼ੀਆ";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "ਪੱਛਮੀ ਏਸ਼ੀਆ";
   @override
@@ -8681,13 +8979,17 @@ class $pa_IN extends S {
   @override
   String get offline_title => "ਔਫਲਾਈਨ ਮੋਡ";
   @override
+  String get privacy_policy => "ਪਰਾਈਵੇਟ ਨੀਤੀ";
+  @override
   String get taxonomy_genus => "ਜਿਣਸ";
+  @override
+  String get subscription_period_year => "ਸਾਲ";
   @override
   String get papuasia => "ਪੇਪੂਸੀਆ";
   @override
   String get feedback_submit_translate_app => "ਐਪਲੀਕੇਸ਼ਨ ਦੇ ਲੇਬਲ ਨੂੰ ਬਿਹਤਰ ਬਣਾਓ";
   @override
-  String get subscription_yearly_title => "ਸਟੋਰ ਫੋਟੋ - ਸਾਲਾਨਾ";
+  String get subscription_yearly_title => "ਸਟੋਰ ਫੋਟੋ";
   @override
   String get observation_upload_progress => "ਅਪਲੋਡਿੰਗ ਨਿਰੀਖਣ...";
   @override
@@ -8851,6 +9153,8 @@ class $pa_IN extends S {
   @override
   String get product_purchased => "ਖਰੀਦਿਆ";
   @override
+  String get terms_of_use => "ਵਰਤੋ ਦੀਆਂ ਸ਼ਰਤਾਂ";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_height_to => "ਤੱਕ";
@@ -8976,6 +9280,8 @@ class $pa_IN extends S {
   String auth_reset_password_email_message(String _email) => "ਆਪਣੇ ਪਾਸਵਰਡ ਨੂੰ ਰੀਸੈੱਟ ਕਰਨ ਲਈ $_email ਨੂੰ ਭੇਜੀਆਂ ਹਦਾਇਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ.";
   @override
   String observation_upload_message(String param) => "ਤੁਸੀਂ $param ਨਿਰੀਖਣ ਅਪਲੋਡ ਕਰਨ ਜਾ ਰਹੇ ਹੋ ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਹਾਡੀ ਡਿਵਾਈਸ Wi-Fi ਨਾਲ ਕਨੈਕਟ ਕੀਤੀ ਹੋਈ ਹੈ ਜਾਂ ਨਹੀਂ. ਕੀ ਤੁਸੀਂ ਅਪਲੋਡ ਲਈ ਤਿਆਰ ਹੋ?";
+  @override
+  String subscription_disclaimer(String account, String store) => "ਖਰੀਦਾਰੀ ਦੀ ਪੁਸ਼ਟੀ ਤੋਂ 30 ਦਿਨਾਂ ਬਾਅਦ ਤੁਹਾਡੇ ਪਹਿਲੇ $account ਖਾਤੇ ਵਿੱਚ ਪਹਿਲੀ ਅਦਾਇਗੀ ਕੀਤੀ ਜਾਏਗੀ. ਗਾਹਕੀ ਆਪਣੇ ਆਪ ਤਾਜ਼ਾ ਹੋ ਜਾਂਦੀ ਹੈ ਜਦੋਂ ਤਕ ਇਹ ਚਾਲੂ ਮਿਆਦ ਦੇ ਸਮਾਪਤ ਹੋਣ ਤੋਂ ਘੱਟੋ-ਘੱਟ 24 ਘੰਟੇ ਰੱਦ ਨਹੀਂ ਹੁੰਦੀ. ਤੁਹਾਡੇ ਅਕਾਉਂਟ ਨੂੰ ਮੌਜੂਦਾ ਸਮੇਂ ਦੇ ਅੰਤ ਤੋਂ 24 ਘੰਟਿਆਂ ਦੇ ਅੰਦਰ ਅੰਦਰ ਨਵੀਨੀਕਰਨ ਲਈ ਚਾਰਜ ਕੀਤਾ ਜਾਵੇਗਾ. ਤੁਸੀਂ ਖਰੀਦਣ ਤੋਂ ਬਾਅਦ $store ਤੇ ਆਪਣੀ ਖਾਤਾ ਸੈਟਿੰਗਜ਼ ਤੇ ਜਾ ਕੇ ਆਪਣੀ ਗਾਹਕੀ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਰੱਦ ਕਰ ਸਕਦੇ ਹੋ.";
 }
 
 class $sv_SE extends S {
@@ -9018,6 +9324,8 @@ class $sv_SE extends S {
   String get feedback_translate => "Du kan rapportera eventuellt typsnitt eller misstag du hittat eller skicka in ny översättning på ditt språk.";
   @override
   String get australia => "Australien";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Översatt med Google Translate";
   @override
@@ -9093,6 +9401,8 @@ class $sv_SE extends S {
   @override
   String get plant_herbalism => "Medicinalväxt";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Återställa köp";
   @override
   String get auth_reset_password => "Återställ lösenord";
@@ -9105,7 +9415,7 @@ class $sv_SE extends S {
   @override
   String get show_translation => "Visa översatt text";
   @override
-  String get subscription_monthly_title => "Spara bilder - månadsvis";
+  String get subscription_monthly_title => "Spara bilder";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -9122,6 +9432,8 @@ class $sv_SE extends S {
   String get product_subscribed => "Prenumererar";
   @override
   String get search_names => "Sök i namn";
+  @override
+  String get subscription_period_month => "månad";
   @override
   String get southwestern_europe => "Sydvästra Europa";
   @override
@@ -9155,6 +9467,8 @@ class $sv_SE extends S {
   @override
   String get search_taxonomy => "Sök i taxonomi";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Fel kod. Försök igen.";
   @override
   String get west_tropical_africa => "Västra tropiska Afrika";
@@ -9172,6 +9486,8 @@ class $sv_SE extends S {
   String get new_zealand => "Nya Zeeland";
   @override
   String get eastern_asia => "Östra asien";
+  @override
+  String get play_store => "Google Play Butik";
   @override
   String get western_asia => "Västra Asien";
   @override
@@ -9193,13 +9509,17 @@ class $sv_SE extends S {
   @override
   String get offline_title => "Offlineläge";
   @override
+  String get privacy_policy => "Integritetspolicy";
+  @override
   String get taxonomy_genus => "Släkte";
+  @override
+  String get subscription_period_year => "år";
   @override
   String get papuasia => "Papuasien";
   @override
   String get feedback_submit_translate_app => "Förbättra programmets etiketter";
   @override
-  String get subscription_yearly_title => "Spara bilder - årligen";
+  String get subscription_yearly_title => "Spara bilder";
   @override
   String get observation_upload_progress => "Överför observationer...";
   @override
@@ -9363,6 +9683,8 @@ class $sv_SE extends S {
   @override
   String get product_purchased => "Köpt";
   @override
+  String get terms_of_use => "Villkor";
+  @override
   String get taxonomy_cladus => "(klad)";
   @override
   String get plant_height_to => "-";
@@ -9488,6 +9810,8 @@ class $sv_SE extends S {
   String auth_reset_password_email_message(String _email) => "Följ instruktionerna som skickas till $_email för att återställa ditt lösenord.";
   @override
   String observation_upload_message(String param) => "Du kommer att ladda upp $param observationer. Kontrollera om enheten är ansluten till Wi-Fi. Är du redo för en uppladdning?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Första betalningen debiteras ditt $account -konto 30 dagar efter bekräftelsen av inköpet. Prenumerationen förnyas automatiskt om den inte längre är inställd minst 24 timmar före slutet av den aktuella perioden. Ditt konto debiteras för förnyelse inom 24 timmar före slutet av den aktuella perioden. Du kan hantera och avbryta dina prenumerationer genom att gå till dina kontoinställningar på $store efter inköpet.";
 }
 
 class $da_DK extends S {
@@ -9530,6 +9854,8 @@ class $da_DK extends S {
   String get feedback_translate => "Du kan rapportere enhver tastatur eller fejl, du har fundet eller indsende ny oversættelse på dit sprog.";
   @override
   String get australia => "Australien";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Oversat med Google Translate";
   @override
@@ -9605,6 +9931,8 @@ class $da_DK extends S {
   @override
   String get plant_herbalism => "Naturmedicin";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Genoprette indkøb";
   @override
   String get auth_reset_password => "Nulstille kodeord";
@@ -9617,7 +9945,7 @@ class $da_DK extends S {
   @override
   String get show_translation => "Vis oversatte tekst";
   @override
-  String get subscription_monthly_title => "Gem billeder - månedligt";
+  String get subscription_monthly_title => "Gem billeder";
   @override
   String get taxonomy_subsectio => "Undersektion";
   @override
@@ -9634,6 +9962,8 @@ class $da_DK extends S {
   String get product_subscribed => "Abonneret";
   @override
   String get search_names => "Søg i navne";
+  @override
+  String get subscription_period_month => "måned";
   @override
   String get southwestern_europe => "Sydvesteuropa";
   @override
@@ -9667,6 +9997,8 @@ class $da_DK extends S {
   @override
   String get search_taxonomy => "Søg i taksonomi";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Koden er forkert. Prøv igen.";
   @override
   String get west_tropical_africa => "Vestlige tropiske Afrika";
@@ -9684,6 +10016,8 @@ class $da_DK extends S {
   String get new_zealand => "New Zealand";
   @override
   String get eastern_asia => "Østasien";
+  @override
+  String get play_store => "Google Play Butik";
   @override
   String get western_asia => "Vestasien";
   @override
@@ -9705,11 +10039,15 @@ class $da_DK extends S {
   @override
   String get offline_title => "Offline-tilstand";
   @override
+  String get privacy_policy => "Fortrolighedspolitik";
+  @override
   String get taxonomy_genus => "Slægt";
+  @override
+  String get subscription_period_year => "år";
   @override
   String get papuasia => "Papuasia";
   @override
-  String get subscription_yearly_title => "Gem billeder - årligt";
+  String get subscription_yearly_title => "Gem billeder";
   @override
   String get observation_upload_progress => "Overførsel af observationer...";
   @override
@@ -9871,6 +10209,8 @@ class $da_DK extends S {
   @override
   String get product_purchased => "Købt";
   @override
+  String get terms_of_use => "Vilkår for brug";
+  @override
   String get taxonomy_cladus => "Cladus";
   @override
   String get plant_height_to => "-";
@@ -9996,6 +10336,8 @@ class $da_DK extends S {
   String auth_reset_password_email_message(String _email) => "Følg instruktionerne sendt til $_email for at nulstille din adgangskode.";
   @override
   String observation_upload_message(String param) => "Du skal uploade $param observationer. Kontroller, om din enhed er tilsluttet wi-fi. Er du klar til en upload?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Første betaling vil blive opkrævet på din $account konto 30 dage efter bekræftelsen af køb. Abonnementet fornyes automatisk, medmindre det annulleres mindst 24 timer inden udgangen af den aktuelle periode. Din konto vil blive opkrævet for fornyelse inden for 24 timer inden udgangen af den aktuelle periode. Du kan administrere og annullere dine abonnementer ved at gå til dine kontoindstillinger på $store efter køb.";
 }
 
 class $fa_IR extends S {
@@ -10038,6 +10380,8 @@ class $fa_IR extends S {
   String get feedback_translate => "شما می توانید هر نوع اشتباه یا اشتباهی را که به زبان خود پیدا کرده اید ارسال یا ارسال کنید.";
   @override
   String get australia => "استرالیا";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "ترجمه شده با ترجمه گوگل";
   @override
@@ -10113,6 +10457,8 @@ class $fa_IR extends S {
   @override
   String get plant_herbalism => "گیاه شناسی";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "بازگرداندن خرید";
   @override
   String get auth_reset_password => "بازنشانی گذرواژه";
@@ -10123,7 +10469,7 @@ class $fa_IR extends S {
   @override
   String get show_translation => "نمایش متن ترجمه شده";
   @override
-  String get subscription_monthly_title => "عکس ها را ذخیره کنید - ماهانه";
+  String get subscription_monthly_title => "عکس ها را ذخیره کنید";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -10140,6 +10486,8 @@ class $fa_IR extends S {
   String get product_subscribed => "مشترک شده";
   @override
   String get search_names => "جستجو در اسامی";
+  @override
+  String get subscription_period_month => "ماه";
   @override
   String get southwestern_europe => "جنوب غربی اروپا";
   @override
@@ -10173,6 +10521,8 @@ class $fa_IR extends S {
   @override
   String get search_taxonomy => "جستجو در طبقه بندی";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "کد اشتباه است. دوباره امتحان کنید.";
   @override
   String get west_tropical_africa => "غرب گرمسیر آفریقا";
@@ -10190,6 +10540,8 @@ class $fa_IR extends S {
   String get new_zealand => "نیوزلند";
   @override
   String get eastern_asia => "آسیای شرقی";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "آسیای غربی";
   @override
@@ -10209,13 +10561,17 @@ class $fa_IR extends S {
   @override
   String get offline_title => "حالت آفلاین";
   @override
+  String get privacy_policy => "سیاست حفظ حریم خصوصی";
+  @override
   String get taxonomy_genus => "سرده";
+  @override
+  String get subscription_period_year => "سال";
   @override
   String get papuasia => "پاپواشیا";
   @override
   String get feedback_submit_translate_app => "برچسب های نرم افزار را بهبود بخشد";
   @override
-  String get subscription_yearly_title => "عکس ها را سالانه ذخیره کنید";
+  String get subscription_yearly_title => "عکس ها را ذخیره کنید";
   @override
   String get observation_upload_progress => "بارگیری مشاهدات...";
   @override
@@ -10379,6 +10735,8 @@ class $fa_IR extends S {
   @override
   String get product_purchased => "خریداری شده";
   @override
+  String get terms_of_use => "شرایط استفاده";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_height_to => "به";
@@ -10504,6 +10862,8 @@ class $fa_IR extends S {
   String auth_reset_password_email_message(String _email) => "دستورالعمل ارسال شده به $_email را برای بازنشانی گذرواژه خود دنبال کنید.";
   @override
   String observation_upload_message(String param) => "شما قصد دارید مشاهدات $param را آپلود کنید. لطفا بررسی کنید که آیا دستگاه شما به Wi-Fi متصل است یا خیر. آیا شما برای آپلود آماده هستید؟";
+  @override
+  String subscription_disclaimer(String account, String store) => "30 روز پس از تأیید خرید، اولین پرداخت شما به حساب $account شما محاسبه خواهد شد. اشتراک به صورت خودکار تجدید می شود مگر اینکه آن حداقل 24 ساعت قبل از پایان دوره فعلی لغو شود. حساب شما برای تمدید ظرف 24 ساعت قبل از پایان دوره جاری تادیه خواهد شد. با رفتن به تنظیمات حسابتان در $store پس از خرید میتوانید اشتراک خود را مدیریت کنید و لغو کنید.";
 }
 
 class $sr_RS extends S {
@@ -10546,6 +10906,8 @@ class $sr_RS extends S {
   String get feedback_translate => "Можете пријавити било коју грешку или грешку коју сте пронашли или послати нови превод на свој језик.";
   @override
   String get australia => "Аустралија";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Превео са Гоогле Транслате";
   @override
@@ -10621,6 +10983,8 @@ class $sr_RS extends S {
   @override
   String get plant_herbalism => "Траварство";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Враћање куповине";
   @override
   String get auth_reset_password => "Ресетуј лозинка";
@@ -10633,7 +10997,7 @@ class $sr_RS extends S {
   @override
   String get show_translation => "Схов преведени текст";
   @override
-  String get subscription_monthly_title => "Чувајте фотографије - месечно";
+  String get subscription_monthly_title => "Чувајте фотографије";
   @override
   String get taxonomy_subsectio => "подсекција";
   @override
@@ -10650,6 +11014,8 @@ class $sr_RS extends S {
   String get product_subscribed => "Претплаћено";
   @override
   String get search_names => "Тражи имена";
+  @override
+  String get subscription_period_month => "месец";
   @override
   String get southwestern_europe => "Југозападна Европа";
   @override
@@ -10683,6 +11049,8 @@ class $sr_RS extends S {
   @override
   String get search_taxonomy => "Тражи у таксономији";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Кôд није тачан. Пробајте поново.";
   @override
   String get west_tropical_africa => "Западна тропска Африка";
@@ -10700,6 +11068,8 @@ class $sr_RS extends S {
   String get new_zealand => "Нови Зеланд";
   @override
   String get eastern_asia => "Источна Азија";
+  @override
+  String get play_store => "Google Play продавница";
   @override
   String get western_asia => "Западна Азија";
   @override
@@ -10721,13 +11091,17 @@ class $sr_RS extends S {
   @override
   String get offline_title => "Режим ван мреже";
   @override
+  String get privacy_policy => "Правила о приватности";
+  @override
   String get taxonomy_genus => "род";
+  @override
+  String get subscription_period_year => "година";
   @override
   String get papuasia => "Папуазија";
   @override
   String get feedback_submit_translate_app => "Побољшајте ознаке апликације";
   @override
-  String get subscription_yearly_title => "Чувајте фотографије - годишње";
+  String get subscription_yearly_title => "Чувајте фотографије";
   @override
   String get observation_upload_progress => "Учитавање запажања...";
   @override
@@ -10891,6 +11265,8 @@ class $sr_RS extends S {
   @override
   String get product_purchased => "Купио";
   @override
+  String get terms_of_use => "Услови коришћења";
+  @override
   String get taxonomy_cladus => "(клада)";
   @override
   String get plant_height_to => "до";
@@ -11016,6 +11392,8 @@ class $sr_RS extends S {
   String auth_reset_password_email_message(String _email) => "Следите упутства која су послата на $_email да бисте поново поставили лозинку.";
   @override
   String observation_upload_message(String param) => "Учитавате $param опажања. Проверите да ли је ваш уређај повезан са Ви-Фи. Да ли сте спремни за отпремање?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Прва уплата ће бити наплаћена на ваш $account рачун 30 дана након потврде куповине. Претплата се аутоматски обнавља, осим ако није отказана најмање 24 сата прије краја текућег периода. Ваш рачун ће бити наплаћен за обнављање у року од 24 сата прије краја текућег периода. Можете да управљате и откажете своје претплате тако што ћете након куповине отићи на поставке налога на $store.";
 }
 
 class $en extends S {
@@ -11074,6 +11452,8 @@ class $fi_FI extends S {
   String get feedback_translate => "Voit ilmoittaa havaitusta virheestä tai virheestä tai lähettää uuden käännöksen omalle kielellesi.";
   @override
   String get australia => "Australia";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Käännetty Google Translate";
   @override
@@ -11149,6 +11529,8 @@ class $fi_FI extends S {
   @override
   String get plant_herbalism => "Herbalismi";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Palauttaa ostot";
   @override
   String get auth_reset_password => "Nollaa salasana";
@@ -11161,7 +11543,7 @@ class $fi_FI extends S {
   @override
   String get show_translation => "Näytä käännetty teksti";
   @override
-  String get subscription_monthly_title => "Tallenna kuvat - kuukausittain";
+  String get subscription_monthly_title => "Tallenna kuvat";
   @override
   String get taxonomy_subsectio => "Alasektio";
   @override
@@ -11178,6 +11560,8 @@ class $fi_FI extends S {
   String get product_subscribed => "Merkitsi";
   @override
   String get search_names => "Hae nimistä";
+  @override
+  String get subscription_period_month => "kuukausi";
   @override
   String get southwestern_europe => "Lounais-Eurooppa";
   @override
@@ -11211,6 +11595,8 @@ class $fi_FI extends S {
   @override
   String get search_taxonomy => "Hae taksonomiassa";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Väärä koodi. Yritä uudelleen.";
   @override
   String get west_tropical_africa => "Läntinen trooppinen Afrikka";
@@ -11228,6 +11614,8 @@ class $fi_FI extends S {
   String get new_zealand => "Uusi Seelanti";
   @override
   String get eastern_asia => "Itä-Aasiassa";
+  @override
+  String get play_store => "Google Play Kauppa";
   @override
   String get western_asia => "Länsi-Aasia";
   @override
@@ -11249,13 +11637,17 @@ class $fi_FI extends S {
   @override
   String get offline_title => "Offline-tila";
   @override
+  String get privacy_policy => "Tietosuojakäytäntö";
+  @override
   String get taxonomy_genus => "Suku";
+  @override
+  String get subscription_period_year => "vuosi";
   @override
   String get papuasia => "Papuasia";
   @override
   String get feedback_submit_translate_app => "Paranna sovelluksen tarroja";
   @override
-  String get subscription_yearly_title => "Tallenna kuvat - vuosittain";
+  String get subscription_yearly_title => "Tallenna kuvat";
   @override
   String get observation_upload_progress => "Havaintojen lataaminen...";
   @override
@@ -11419,6 +11811,8 @@ class $fi_FI extends S {
   @override
   String get product_purchased => "Osti";
   @override
+  String get terms_of_use => "Käyttöehdot";
+  @override
   String get taxonomy_cladus => "(kladi)";
   @override
   String get plant_height_to => "-";
@@ -11544,6 +11938,8 @@ class $fi_FI extends S {
   String auth_reset_password_email_message(String _email) => "Voit palauttaa salasanasi noudattamalla $_email lähetettyjä ohjeita.";
   @override
   String observation_upload_message(String param) => "Lähetät $param havaintoja. Tarkista, onko laite liitetty wi-fi-verkkoon. Oletko valmis lataamaan?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Ensimmäinen maksu veloitetaan $account -tilillesi 30 päivän kuluttua oston vahvistamisesta. Tilaus uusitaan automaattisesti, ellei sitä peruuteta vähintään 24 tuntia ennen nykyisen kauden päättymistä. Tilisi veloitetaan uusimisesta 24 tunnin kuluessa ennen nykyisen kauden päättymistä. Voit hallita ja peruuttaa tilauksesi siirtymällä tilisi asetuksiin $store oston jälkeen.";
 }
 
 class $hr_HR extends S {
@@ -11586,6 +11982,8 @@ class $hr_HR extends S {
   String get feedback_translate => "Možete prijaviti svaku pogrešku ili pogrešku koju ste pronašli ili poslati novi prijevod na svoj jezik.";
   @override
   String get australia => "Australija";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Prevedeno s Google prevoditelj";
   @override
@@ -11661,6 +12059,8 @@ class $hr_HR extends S {
   @override
   String get plant_herbalism => "Travarstvo";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Vraćanje kupnje";
   @override
   String get auth_reset_password => "Resetiranje lozinke";
@@ -11673,7 +12073,7 @@ class $hr_HR extends S {
   @override
   String get show_translation => "Prikaži prevedeni tekst";
   @override
-  String get subscription_monthly_title => "Čuvajte fotografije - mjesečno";
+  String get subscription_monthly_title => "Čuvajte fotografije";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -11690,6 +12090,8 @@ class $hr_HR extends S {
   String get product_subscribed => "Pretplaćen";
   @override
   String get search_names => "Pretražujte imena";
+  @override
+  String get subscription_period_month => "mjesec";
   @override
   String get southwestern_europe => "Jugozapadna Europa";
   @override
@@ -11723,6 +12125,8 @@ class $hr_HR extends S {
   @override
   String get search_taxonomy => "Pretražujte taksonomiju";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Pogrešan kôd. Pokušajte ponovo.";
   @override
   String get west_tropical_africa => "Zapadna tropska Afrika";
@@ -11740,6 +12144,8 @@ class $hr_HR extends S {
   String get new_zealand => "Novi Zeland";
   @override
   String get eastern_asia => "Istočna Azija";
+  @override
+  String get play_store => "Trgovini Google Play";
   @override
   String get western_asia => "Zapadna Azija";
   @override
@@ -11761,13 +12167,17 @@ class $hr_HR extends S {
   @override
   String get offline_title => "Izvanmrežni način";
   @override
+  String get privacy_policy => "Pravila o privatnosti";
+  @override
   String get taxonomy_genus => "Rod";
+  @override
+  String get subscription_period_year => "godina";
   @override
   String get papuasia => "Papuazija";
   @override
   String get feedback_submit_translate_app => "Poboljšajte oznake programa";
   @override
-  String get subscription_yearly_title => "Čuvajte fotografije - godišnje";
+  String get subscription_yearly_title => "Čuvajte fotografije";
   @override
   String get observation_upload_progress => "Učitavanje zapažanja...";
   @override
@@ -11931,6 +12341,8 @@ class $hr_HR extends S {
   @override
   String get product_purchased => "Kupljen";
   @override
+  String get terms_of_use => "Uvjeti korištenja";
+  @override
   String get taxonomy_cladus => "(Cladus)";
   @override
   String get plant_height_to => "-";
@@ -12056,6 +12468,8 @@ class $hr_HR extends S {
   String auth_reset_password_email_message(String _email) => "Slijedite upute poslane na $_email da biste poništili zaporku.";
   @override
   String observation_upload_message(String param) => "Učitat ćete $param zapažanja. Provjerite je li uređaj spojen na Wi-Fi. Jeste li spremni za prijenos?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Prvo plaćanje bit će naplaćeno na vašem računu u vrijednosti $account 30 dana nakon potvrde kupnje. Pretplata se automatski obnavlja, osim ako je otkazana najmanje 24 sata prije kraja tekućeg razdoblja. Vaš će račun biti naplaćen u roku od 24 sata prije kraja tekućeg razdoblja. Možete upravljati i otkazivati svoje pretplate tako da odete na postavke računa na $store nakon kupnje.";
 }
 
 class $et_EE extends S {
@@ -12098,6 +12512,8 @@ class $et_EE extends S {
   String get feedback_translate => "Saate teatada mis tahes leitud veast või veast või esitada uue tõlke oma keelde.";
   @override
   String get australia => "Austraalia";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Tõlgitud Google Translate";
   @override
@@ -12173,6 +12589,8 @@ class $et_EE extends S {
   @override
   String get plant_herbalism => "Raviteaduse";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Ostude taastamine";
   @override
   String get auth_reset_password => "Lähtesta parool";
@@ -12185,7 +12603,7 @@ class $et_EE extends S {
   @override
   String get show_translation => "Kuva tõlgitud tekst";
   @override
-  String get subscription_monthly_title => "Salvestage fotosid - kord kuus";
+  String get subscription_monthly_title => "Salvestage fotosid";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -12202,6 +12620,8 @@ class $et_EE extends S {
   String get product_subscribed => "Tellitud";
   @override
   String get search_names => "Otsi nimedest";
+  @override
+  String get subscription_period_month => "kuus";
   @override
   String get southwestern_europe => "Edela-Euroopa";
   @override
@@ -12235,6 +12655,8 @@ class $et_EE extends S {
   @override
   String get search_taxonomy => "Otsi taksonoomias";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Vale kood. Proovi uuesti.";
   @override
   String get west_tropical_africa => "Lääne troopiline Aafrika";
@@ -12252,6 +12674,8 @@ class $et_EE extends S {
   String get new_zealand => "Uus-Meremaa";
   @override
   String get eastern_asia => "Ida-Aasias";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "Lääne-Aasias";
   @override
@@ -12273,13 +12697,17 @@ class $et_EE extends S {
   @override
   String get offline_title => "Võrguühenduseta režiim";
   @override
+  String get privacy_policy => "Privaatsuspoliitika";
+  @override
   String get taxonomy_genus => "Perekond";
+  @override
+  String get subscription_period_year => "aasta";
   @override
   String get papuasia => "Papuasia";
   @override
   String get feedback_submit_translate_app => "Parandage rakenduse sildid";
   @override
-  String get subscription_yearly_title => "Salvestage fotosid - kord aastas";
+  String get subscription_yearly_title => "Salvestage fotosid";
   @override
   String get observation_upload_progress => "Vaatluste üleslaadimine...";
   @override
@@ -12443,6 +12871,8 @@ class $et_EE extends S {
   @override
   String get product_purchased => "Ostetud";
   @override
+  String get terms_of_use => "Kasutustingimused";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_height_to => "-";
@@ -12568,6 +12998,8 @@ class $et_EE extends S {
   String auth_reset_password_email_message(String _email) => "Parooli lähtestamiseks järgige $_email saadetud juhiseid.";
   @override
   String observation_upload_message(String param) => "Te laadite üles $param tähelepanekud. Kontrollige, kas teie seade on ühendatud Wi-Fi-ga. Kas olete valmis üleslaadimiseks valmis?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Esimene makse tasutakse teie $account kontolt 30 päeva pärast ostu kinnitamist. Tellimus uuendatakse automaatselt, kui seda ei tühistata vähemalt 24 tundi enne jooksva perioodi lõppu. Teie kontot tasutakse uuendamise eest 24 tunni jooksul enne jooksva perioodi lõppu. Saate oma tellimusi hallata ja tühistada, minnes pärast ostu oma konto seadetele $store.";
 }
 
 class $en_US extends S {
@@ -12618,6 +13050,8 @@ class $lt_LT extends S {
   String get feedback_translate => "Galite pranešti apie rastą klaidą ar klaidą arba pateikti naują vertimą į savo kalbą.";
   @override
   String get australia => "Australija";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Išvertus su Google Translate";
   @override
@@ -12693,6 +13127,8 @@ class $lt_LT extends S {
   @override
   String get plant_herbalism => "Žolininkystė";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Atkurti pirkimus";
   @override
   String get auth_reset_password => "Atstatyti slaptažodį";
@@ -12705,7 +13141,7 @@ class $lt_LT extends S {
   @override
   String get show_translation => "Rodyti išverstas tekstas";
   @override
-  String get subscription_monthly_title => "Išsaugokite nuotraukas - kas mėnesį";
+  String get subscription_monthly_title => "Išsaugokite nuotraukas";
   @override
   String get taxonomy_subsectio => "Subsekcija";
   @override
@@ -12722,6 +13158,8 @@ class $lt_LT extends S {
   String get product_subscribed => "Prenumeruota";
   @override
   String get search_names => "Ieškoti vardų";
+  @override
+  String get subscription_period_month => "mėnesį";
   @override
   String get southwestern_europe => "Pietvakarių Europa";
   @override
@@ -12755,6 +13193,8 @@ class $lt_LT extends S {
   @override
   String get search_taxonomy => "Ieškoti taksonomijoje";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Klaidingas kodas. Bandykite dar kartą.";
   @override
   String get west_tropical_africa => "Vakarų tropinė Afrika";
@@ -12772,6 +13212,8 @@ class $lt_LT extends S {
   String get new_zealand => "Naujoji Zelandija";
   @override
   String get eastern_asia => "Rytų Azija";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "Vakarų Azija";
   @override
@@ -12793,13 +13235,17 @@ class $lt_LT extends S {
   @override
   String get offline_title => "Atsijungęs režimas";
   @override
+  String get privacy_policy => "Privatumo politika";
+  @override
   String get taxonomy_genus => "Gentis";
+  @override
+  String get subscription_period_year => "metus";
   @override
   String get papuasia => "Papuazija";
   @override
   String get feedback_submit_translate_app => "Pagerinti programos etiketes";
   @override
-  String get subscription_yearly_title => "Nuotraukų saugojimas - kasmet";
+  String get subscription_yearly_title => "Išsaugokite nuotraukas";
   @override
   String get observation_upload_progress => "Pastabų įkėlimas...";
   @override
@@ -12963,6 +13409,8 @@ class $lt_LT extends S {
   @override
   String get product_purchased => "Įgytinis";
   @override
+  String get terms_of_use => "Naudojimo sąlygos";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_height_to => "-";
@@ -13088,6 +13536,8 @@ class $lt_LT extends S {
   String auth_reset_password_email_message(String _email) => "Jei norite iš naujo nustatyti slaptažodį, vadovaukitės nurodytomis instrukcijomis $_email.";
   @override
   String observation_upload_message(String param) => "Jūs ketinate įkelti $param pastabas. Patikrinkite, ar įrenginys prijungtas prie „Wi-Fi“. Ar esate pasiruošę įkelti?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Pirmoji įmoka bus apmokėta iš jūsų $account sąskaitos praėjus 30 dienų po pirkimo patvirtinimo. Prenumerata automatiškai atnaujinama, nebent ji būtų atšaukta likus ne mažiau kaip 24 valandoms iki einamojo laikotarpio pabaigos. Jūsų sąskaita bus apmokėta už atnaujinimą per 24 valandas iki einamojo laikotarpio pabaigos. Galite valdyti ir atšaukti savo prenumeratas, apsilankę savo paskyros nustatymuose po $store po įsigijimo.";
 }
 
 class $lv_LV extends S {
@@ -13130,6 +13580,8 @@ class $lv_LV extends S {
   String get feedback_translate => "Jūs varat ziņot par atrasto kļūdu vai kļūdu vai iesniegt jaunu tulkojumu savā valodā.";
   @override
   String get australia => "Austrālija";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Tulkots ar Google Translate";
   @override
@@ -13205,6 +13657,8 @@ class $lv_LV extends S {
   @override
   String get plant_herbalism => "Herbalism";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Atjaunot pirkumus";
   @override
   String get auth_reset_password => "Atiestatīt paroli";
@@ -13217,7 +13671,7 @@ class $lv_LV extends S {
   @override
   String get show_translation => "Rādīt tulkoto tekstu";
   @override
-  String get subscription_monthly_title => "Uzglabāt fotoattēlus - katru mēnesi";
+  String get subscription_monthly_title => "Uzglabāt fotoattēlus";
   @override
   String get taxonomy_subsectio => "Apakšsekcija";
   @override
@@ -13234,6 +13688,8 @@ class $lv_LV extends S {
   String get product_subscribed => "Abonēts";
   @override
   String get search_names => "Meklēt vārdos";
+  @override
+  String get subscription_period_month => "mēnesī";
   @override
   String get southwestern_europe => "Dienvidrietumu Eiropa";
   @override
@@ -13267,6 +13723,8 @@ class $lv_LV extends S {
   @override
   String get search_taxonomy => "Meklēt taksonomijā";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Nepareizs kods. Mēģiniet vēlreiz.";
   @override
   String get west_tropical_africa => "Rietumu tropu Āfrika";
@@ -13284,6 +13742,8 @@ class $lv_LV extends S {
   String get new_zealand => "Jaunzēlande";
   @override
   String get eastern_asia => "Austrumāzija";
+  @override
+  String get play_store => "Google Play veikals";
   @override
   String get western_asia => "Rietumu Āzija";
   @override
@@ -13305,13 +13765,17 @@ class $lv_LV extends S {
   @override
   String get offline_title => "Bezsaistes režīms";
   @override
+  String get privacy_policy => "Privātuma politika";
+  @override
   String get taxonomy_genus => "Ģints";
+  @override
+  String get subscription_period_year => "gadā";
   @override
   String get papuasia => "Papuāzija";
   @override
   String get feedback_submit_translate_app => "Uzlabojiet lietojumprogrammas uzlīmes";
   @override
-  String get subscription_yearly_title => "Uzglabāt fotoattēlus - katru gadu";
+  String get subscription_yearly_title => "Uzglabāt fotoattēlus";
   @override
   String get observation_upload_progress => "Novērojumu augšupielāde...";
   @override
@@ -13475,6 +13939,8 @@ class $lv_LV extends S {
   @override
   String get product_purchased => "Legādāts";
   @override
+  String get terms_of_use => "Lietošanas noteikumi";
+  @override
   String get taxonomy_cladus => "(clade)";
   @override
   String get plant_height_to => "-";
@@ -13600,6 +14066,8 @@ class $lv_LV extends S {
   String auth_reset_password_email_message(String _email) => "Lai atiestatītu paroli, izpildiet norādījumus, kas nosūtīti uz $_email.";
   @override
   String observation_upload_message(String param) => "Jūs plānojat augšupielādēt $param novērojumus. Lūdzu, pārbaudiet, vai ierīce ir savienota ar Wi-Fi. Vai esat gatavs augšupielādei?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Pirmais maksājums tiks iekasēts no jūsu $account konta 30 dienas pēc pirkuma apstiprināšanas. Abonēšana tiek automātiski atjaunota, ja tā nav atcelta vismaz 24 stundas pirms kārtējā perioda beigām. Jūsu konts tiks iekasēts par atjaunošanu 24 stundu laikā pirms pašreizējā perioda beigām. Varat pārvaldīt un atcelt abonementus, iegādājoties konta iestatījumus pēc $store pēc iegādes.";
 }
 
 class $uk_UA extends S {
@@ -13642,6 +14110,8 @@ class $uk_UA extends S {
   String get feedback_translate => "Ви можете повідомити про будь-яку друкарську помилку або помилку, яку ви знайшли, або подати новий переклад вашою мовою.";
   @override
   String get australia => "Австралія";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Переклад з Google Translate";
   @override
@@ -13717,6 +14187,8 @@ class $uk_UA extends S {
   @override
   String get plant_herbalism => "Травнічество";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Відновити покупки";
   @override
   String get auth_reset_password => "Скинути пароль";
@@ -13729,7 +14201,7 @@ class $uk_UA extends S {
   @override
   String get show_translation => "Показати перекладений текст";
   @override
-  String get subscription_monthly_title => "Зберігайте фотографії - щомісяця";
+  String get subscription_monthly_title => "Зберігайте фотографії";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -13746,6 +14218,8 @@ class $uk_UA extends S {
   String get product_subscribed => "Передплачено";
   @override
   String get search_names => "Пошук по іменах";
+  @override
+  String get subscription_period_month => "місяць";
   @override
   String get southwestern_europe => "Південно-Західна Європа";
   @override
@@ -13779,6 +14253,8 @@ class $uk_UA extends S {
   @override
   String get search_taxonomy => "Пошук у таксономії";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Неправильний код. Повторіть спробу.";
   @override
   String get west_tropical_africa => "Західна тропічна Африка";
@@ -13796,6 +14272,8 @@ class $uk_UA extends S {
   String get new_zealand => "Нова Зеландія";
   @override
   String get eastern_asia => "Східна Азія";
+  @override
+  String get play_store => "Google Play Маркет";
   @override
   String get western_asia => "Західна Азія";
   @override
@@ -13817,13 +14295,17 @@ class $uk_UA extends S {
   @override
   String get offline_title => "Автономний режим";
   @override
+  String get privacy_policy => "Політика конфіденційності";
+  @override
   String get taxonomy_genus => "Рід";
+  @override
+  String get subscription_period_year => "рік";
   @override
   String get papuasia => "Папуазія";
   @override
   String get feedback_submit_translate_app => "Покращити ярлики програми";
   @override
-  String get subscription_yearly_title => "Зберігайте фотографії - щорічно";
+  String get subscription_yearly_title => "Зберігайте фотографії";
   @override
   String get observation_upload_progress => "Завантаження спостережень...";
   @override
@@ -13987,6 +14469,8 @@ class $uk_UA extends S {
   @override
   String get product_purchased => "Придбано";
   @override
+  String get terms_of_use => "Умови використання";
+  @override
   String get taxonomy_cladus => "(клада)";
   @override
   String get plant_height_to => "-";
@@ -14112,6 +14596,8 @@ class $uk_UA extends S {
   String auth_reset_password_email_message(String _email) => "Виконуйте інструкції, надіслані на адресу $_email, щоб скинути пароль.";
   @override
   String observation_upload_message(String param) => "Ви збираєтеся завантажити $param спостереження. Перевірте, чи пристрій підключено до wi-fi. Ви готові до завантаження?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Перший платіж буде стягнуто з вашого рахунку $account через 30 днів після підтвердження покупки. Підписка автоматично продовжується, якщо вона не буде скасована принаймні за 24 години до закінчення поточного періоду. Ваш обліковий запис буде стягнено за поновлення протягом 24 годин до закінчення поточного періоду. Ви можете керувати та скасувати свої підписки, перейшовши до налаштувань свого облікового запису на сторінці $store після покупки.";
 }
 
 class $sl_SI extends S {
@@ -14154,6 +14640,8 @@ class $sl_SI extends S {
   String get feedback_translate => "Lahko prijavite kakršno koli tipkarsko napako ali napako, ki ste jo našli, ali pošljete nov prevod v vaš jezik.";
   @override
   String get australia => "Avstralija";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Prevedeno z Google Translate";
   @override
@@ -14229,6 +14717,8 @@ class $sl_SI extends S {
   @override
   String get plant_herbalism => "Zeliščarstvo";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Obnovi nakup";
   @override
   String get auth_reset_password => "Ponastavitev gesla";
@@ -14241,7 +14731,7 @@ class $sl_SI extends S {
   @override
   String get show_translation => "Pokaži prevedeno besedilo";
   @override
-  String get subscription_monthly_title => "Shranite fotografije - mesečno";
+  String get subscription_monthly_title => "Shranite fotografije";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -14258,6 +14748,8 @@ class $sl_SI extends S {
   String get product_subscribed => "Naročen";
   @override
   String get search_names => "Išči po imenih";
+  @override
+  String get subscription_period_month => "mesec";
   @override
   String get southwestern_europe => "Jugozahodna Evropa";
   @override
@@ -14291,6 +14783,8 @@ class $sl_SI extends S {
   @override
   String get search_taxonomy => "Išči v taksonomiji";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Napačna koda. Poskusite znova.";
   @override
   String get west_tropical_africa => "Zahodna tropska Afrika";
@@ -14308,6 +14802,8 @@ class $sl_SI extends S {
   String get new_zealand => "Nova Zelandija";
   @override
   String get eastern_asia => "Vzhodna Azija";
+  @override
+  String get play_store => "Trgovina Google Play";
   @override
   String get western_asia => "Zahodna Azija";
   @override
@@ -14329,13 +14825,17 @@ class $sl_SI extends S {
   @override
   String get offline_title => "Način brez povezave";
   @override
+  String get privacy_policy => "Pravilnik o zasebnosti";
+  @override
   String get taxonomy_genus => "Rod";
+  @override
+  String get subscription_period_year => "leto";
   @override
   String get papuasia => "Papuazija";
   @override
   String get feedback_submit_translate_app => "Izboljšajte oznake aplikacij";
   @override
-  String get subscription_yearly_title => "Shranite fotografije - letno";
+  String get subscription_yearly_title => "Shranite fotografije";
   @override
   String get observation_upload_progress => "Nalaganje opazovanj...";
   @override
@@ -14499,6 +14999,8 @@ class $sl_SI extends S {
   @override
   String get product_purchased => "Kupljeno";
   @override
+  String get terms_of_use => "Pogoji uporabe";
+  @override
   String get taxonomy_cladus => "(klad)";
   @override
   String get plant_height_to => "-";
@@ -14624,6 +15126,8 @@ class $sl_SI extends S {
   String auth_reset_password_email_message(String _email) => "Sledite navodilom, poslanim $_email, da ponastavite geslo.";
   @override
   String observation_upload_message(String param) => "Naložili boste $param opažanja. Preverite, ali je vaša naprava povezana z wi-fi. Ste pripravljeni za nalaganje?";
+  @override
+  String subscription_disclaimer(String account, String store) => "Prvo plačilo se zaračuna vašemu računu $account 30 dni po potrditvi nakupa. Naročnina se samodejno obnovi, razen če je preklicana vsaj 24 ur pred koncem trenutnega obdobja. Vaš račun bo zaračunan za podaljšanje v 24 urah pred koncem trenutnega obdobja. Naročnine lahko upravljate in prekličete tako, da po nakupu obiščete nastavitve računa na $store.";
 }
 
 class $ar_EG extends S {
@@ -14666,6 +15170,8 @@ class $ar_EG extends S {
   String get feedback_translate => "يمكنك الإبلاغ عن أي خطأ مطبعي أو خطأ وجدته أو قدم ترجمة جديدة بلغتك.";
   @override
   String get australia => "أستراليا";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "تمت الترجمة مع الترجمة من غوغل";
   @override
@@ -14741,6 +15247,8 @@ class $ar_EG extends S {
   @override
   String get plant_herbalism => "دراسة الأعشاب";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "استعادة المشتريات";
   @override
   String get auth_reset_password => "إعادة تعيين كلمة المرور";
@@ -14753,7 +15261,7 @@ class $ar_EG extends S {
   @override
   String get show_translation => "عرض النص المترجم";
   @override
-  String get subscription_monthly_title => "تخزين الصور - شهريا";
+  String get subscription_monthly_title => "تخزين الصور";
   @override
   String get taxonomy_subsectio => "Subsectio";
   @override
@@ -14770,6 +15278,8 @@ class $ar_EG extends S {
   String get product_subscribed => "المشترك";
   @override
   String get search_names => "البحث في الأسماء";
+  @override
+  String get subscription_period_month => "شهر";
   @override
   String get southwestern_europe => "جنوب غرب أوروبا";
   @override
@@ -14803,6 +15313,8 @@ class $ar_EG extends S {
   @override
   String get search_taxonomy => "البحث في التصنيف";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "الرمز غير صحيح. يُرجى المحاولة مجددًا.";
   @override
   String get west_tropical_africa => "غرب الاستوائية أفريقيا";
@@ -14820,6 +15332,8 @@ class $ar_EG extends S {
   String get new_zealand => "نيوزيلندا";
   @override
   String get eastern_asia => "شرق اسيا";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "آسيا الغربية";
   @override
@@ -14841,13 +15355,17 @@ class $ar_EG extends S {
   @override
   String get offline_title => "غير متصل بالشبكة";
   @override
+  String get privacy_policy => "سياسة خاصة";
+  @override
   String get taxonomy_genus => "الجنس";
+  @override
+  String get subscription_period_year => "عام";
   @override
   String get papuasia => "بابوا";
   @override
   String get feedback_submit_translate_app => "تحسين تسميات التطبيق";
   @override
-  String get subscription_yearly_title => "تخزين الصور - سنويا";
+  String get subscription_yearly_title => "تخزين الصور";
   @override
   String get observation_upload_progress => "تحميل الملاحظات...";
   @override
@@ -15011,6 +15529,8 @@ class $ar_EG extends S {
   @override
   String get product_purchased => "اشترى";
   @override
+  String get terms_of_use => "تعليمات الاستخدام";
+  @override
   String get taxonomy_cladus => "(غير مصنف)";
   @override
   String get plant_height_to => "إلى";
@@ -15136,6 +15656,8 @@ class $ar_EG extends S {
   String auth_reset_password_email_message(String _email) => "اتبع التعليمات المرسلة إلى $_email لإعادة تعيين كلمة المرور الخاصة بك.";
   @override
   String observation_upload_message(String param) => "ستقوم بتحميل ملاحظات $param. يرجى التحقق مما إذا كان جهازك متصلاً بشبكة wi-fi. هل أنت مستعد للتحميل؟";
+  @override
+  String subscription_disclaimer(String account, String store) => "سيتم خصم الدفعة الأولى من حسابك $account بعد 30 يومًا من تأكيد الشراء. يتم تجديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل 24 ساعة على الأقل من نهاية الفترة الحالية. سيتم فرض رسوم على حسابك خلال 24 ساعة قبل نهاية الفترة الحالية. يمكنك إدارة اشتراكاتك وإلغاؤها عن طريق الانتقال إلى إعدادات حسابك على $store بعد الشراء.";
 }
 
 class $pt_PT extends S {
@@ -15178,6 +15700,8 @@ class $pt_PT extends S {
   String get feedback_translate => "Você pode denunciar qualquer erro ou erro encontrado ou enviar uma nova tradução para o seu idioma.";
   @override
   String get australia => "Austrália";
+  @override
+  String get google => "Google";
   @override
   String get google_translate => "Traduzido com Google Tradutor";
   @override
@@ -15253,6 +15777,8 @@ class $pt_PT extends S {
   @override
   String get plant_herbalism => "Fitoterapia";
   @override
+  String get app_store => "App Store";
+  @override
   String get product_restore_purchases => "Restaurar compras";
   @override
   String get auth_reset_password => "Redefinir senha";
@@ -15265,7 +15791,7 @@ class $pt_PT extends S {
   @override
   String get show_translation => "Mostrar texto traduzido";
   @override
-  String get subscription_monthly_title => "Armazene fotos - mensalmente";
+  String get subscription_monthly_title => "Armazene fotos";
   @override
   String get taxonomy_subsectio => "subseção";
   @override
@@ -15282,6 +15808,8 @@ class $pt_PT extends S {
   String get product_subscribed => "Subscrito";
   @override
   String get search_names => "Pesquisa nos nomes";
+  @override
+  String get subscription_period_month => "mês";
   @override
   String get southwestern_europe => "Europa do Sudoeste";
   @override
@@ -15315,6 +15843,8 @@ class $pt_PT extends S {
   @override
   String get search_taxonomy => "Pesquisa na taxonomia";
   @override
+  String get apple => "Apple";
+  @override
   String get auth_incorrect_code => "Código incorreto. Tente novamente.";
   @override
   String get west_tropical_africa => "África Tropical Ocidental";
@@ -15332,6 +15862,8 @@ class $pt_PT extends S {
   String get new_zealand => "Nova Zelândia";
   @override
   String get eastern_asia => "Ásia Oriental";
+  @override
+  String get play_store => "Google Play Store";
   @override
   String get western_asia => "Ásia Ocidental";
   @override
@@ -15353,11 +15885,15 @@ class $pt_PT extends S {
   @override
   String get offline_title => "Modo offline";
   @override
+  String get privacy_policy => "Política de Privacidade";
+  @override
   String get taxonomy_genus => "género";
+  @override
+  String get subscription_period_year => "ano";
   @override
   String get papuasia => "Papuásia";
   @override
-  String get subscription_yearly_title => "Armazene fotos - anualmente";
+  String get subscription_yearly_title => "Armazene fotos";
   @override
   String get observation_upload_progress => "Fazendo upload de observações...";
   @override
@@ -15519,6 +16055,8 @@ class $pt_PT extends S {
   @override
   String get product_purchased => "Comprado";
   @override
+  String get terms_of_use => "Termos de uso";
+  @override
   String get taxonomy_cladus => "(clado)";
   @override
   String get plant_height_to => "a";
@@ -15644,6 +16182,8 @@ class $pt_PT extends S {
   String auth_reset_password_email_message(String _email) => "Siga as instruções enviadas para $_email para redefinir sua senha.";
   @override
   String observation_upload_message(String param) => "Você vai enviar observações do $param. Por favor, verifique se o seu dispositivo está conectado a wi-fi. Você está pronto para um upload?";
+  @override
+  String subscription_disclaimer(String account, String store) => "O primeiro pagamento será cobrado em sua conta de $account 30 dias após a confirmação da compra. A assinatura é renovada automaticamente, a menos que seja cancelada pelo menos 24 horas antes do final do período atual. Sua conta será cobrada para renovação dentro de 24 horas antes do final do período atual. Você pode gerenciar e cancelar suas assinaturas acessando as configurações da sua conta no $store após a compra.";
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
