@@ -64,6 +64,8 @@ const String languageGTSuffix = "-GT";
 const String heightUnitOfMeasure = "cm";
 
 const String webUrl = "https://whatsthatflower.com/";
+const String termsOfUseUrl = "https://storage.googleapis.com/abherbs-resources/misc/TermsOfServiceofWhatsthatflower.htm";
+const String privacyPolicyUrl = "https://storage.googleapis.com/abherbs-resources/misc/PrivacyPolicyofWhatsthatflower.htm";
 const String googleTranslateEndpoint = "https://translation.googleapis.com/language/translate/v2";
 const String googleMapsEndpoint = "https://maps.googleapis.com/maps/api/staticmap?";
 
@@ -328,6 +330,17 @@ String getProductDescription(BuildContext context, String productId, String defa
       return S.of(context).subscription_yearly_description;
     default:
       return defaultDescription;
+  }
+}
+
+String getProductPeriod(BuildContext context, String productId) {
+  switch (productId) {
+    case 'P1M':
+      return S.of(context).subscription_period_month;
+    case 'P1Y':
+      return S.of(context).subscription_period_year;
+    default:
+      return '';
   }
 }
 

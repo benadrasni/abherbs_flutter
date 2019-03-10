@@ -24,6 +24,8 @@ class S implements WidgetsLocalizations {
   String get always_my_region_subtitle => "Your region will be pre-set to the filter";
   String get always_my_region_title => "Always add my region to the filter";
   String get antarctic_continent => "Antarctic Continent";
+  String get app_store => "App Store";
+  String get apple => "Apple";
   String get arabian_peninsula => "Arabian Peninsula";
   String get asia_temperate => "Asia-Temperate";
   String get asia_tropical => "Asia-Tropical";
@@ -91,6 +93,7 @@ class S implements WidgetsLocalizations {
   String get filter_distribution => "distribution";
   String get filter_habitat => "habitat";
   String get filter_petal => "petal";
+  String get google => "Google";
   String get google_translate => "Translated with Google Translate";
   String get habitat_forest => "woodlands or forests";
   String get habitat_garden => "gardens or fields";
@@ -181,7 +184,9 @@ class S implements WidgetsLocalizations {
   String get plant_taxonomy => "Taxonomy";
   String get plant_toxicity => "Toxicity";
   String get plant_trivia => "Trivia";
+  String get play_store => "Google Play Store";
   String get pref_language => "Preferred language";
+  String get privacy_policy => "Privacy Policy";
   String get product_change => "Change";
   String get product_custom_filter_description => "You'll be able to change default order and number of filters (color, habitat, petal, distribution).";
   String get product_custom_filter_title => "Custom filter";
@@ -239,9 +244,11 @@ class S implements WidgetsLocalizations {
   String get subscription_intro2 => "You are about to subscribe for saving and persisting your photos across all your devices. With subscription you agree to share your observations with other subscribed users. You'll also be able to see their observations. All shared observations are anonymous and its note stays private and won't be shared. To simplify process your photos will be shared under CC0 (Creative Commons Zero) licence, so you also agree with this.";
   String get subscription_intro3 => "If you still hesitate to hit the button below, there is a 30 days trial period for both subscriptions.";
   String get subscription_monthly_description => "Preserve observation's photos across devices, see shared observations - monthly payment.";
-  String get subscription_monthly_title => "Store photos - monthly";
+  String get subscription_monthly_title => "Store photos";
+  String get subscription_period_month => "month";
+  String get subscription_period_year => "year";
   String get subscription_yearly_description => "Preserve observation's photos across devices, see shared observations - yearly payment.";
-  String get subscription_yearly_title => "Store photos - yearly";
+  String get subscription_yearly_title => "Store photos";
   String get taxonomy_cladus => "(clade)";
   String get taxonomy_familia => "Family";
   String get taxonomy_genus => "Genus";
@@ -259,6 +266,7 @@ class S implements WidgetsLocalizations {
   String get taxonomy_supersectio => "Supersectio";
   String get taxonomy_tribus => "Tribe";
   String get taxonomy_unknown => "unknown";
+  String get terms_of_use => "Terms of use";
   String get toxicity1 => "poisonous plant";
   String get toxicity2 => "slightly poisonous plant";
   String get west_central_tropical_africa => "West-Central Tropical Africa";
@@ -271,6 +279,7 @@ class S implements WidgetsLocalizations {
   String auth_reset_password_email_message(String _email) => "Follow the instructions sent to $_email to reset your password.";
   String observation_upload_message(String param) => "You're going to upload $param observations. Please check if your device is connected to wi-fi. Are you ready for an upload?";
   String promotion_content(String date) => "This is a paid feature. You can use it for free until $date";
+  String subscription_disclaimer(String account, String store) => "First payment will be charged to your $account account 30 days after the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the $store after purchase.";
 }
 
 class $it_IT extends S {

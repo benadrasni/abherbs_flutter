@@ -170,7 +170,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                 _cards.add(Card(
                   child: Container(
                     padding: EdgeInsets.all(10.0),
-                    child: RaisedButton(
+                    child: FlatButton(
                       onPressed: () {
                         FlutterInappPurchase.getAvailablePurchases().then((purchases) {
                           Purchases.purchases = purchases;
@@ -182,6 +182,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                       },
                       child: Text(
                         S.of(context).product_restore_purchases,
+                        style: TextStyle(color: Theme.of(context).accentColor, fontSize: 18.0),
                       ),
                     ),
                   ),
