@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -93,6 +94,22 @@ class _SubscriptionState extends State<Subscription> {
                         textAlign: TextAlign.justify,
                       ));
                 }).toList();
+                texts.add(Container(
+                    child: FlatButton(
+                  onPressed: () {
+                    FlutterInappPurchase.getAvailablePurchases().then((purchases) {
+                      Purchases.purchases = purchases;
+                      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
+                      if (mounted) {
+                        setState(() {});
+                      }
+                    });
+                  },
+                  child: Text(
+                    S.of(context).product_restore_purchases,
+                    style: TextStyle(color: Theme.of(context).accentColor, fontSize: 18.0),
+                  ),
+                )));
 
                 _cards.add(Card(
                   child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: texts),
@@ -115,7 +132,10 @@ class _SubscriptionState extends State<Subscription> {
                             textAlign: TextAlign.start,
                           ),
                           trailing: Text(
-                            subscription.localizedPrice,
+                            subscription.localizedPrice +
+                                '/' +
+                                getProductPeriod(
+                                    context, Platform.isIOS ? subscription.subscriptionPeriodUnitIOS : subscription.subscriptionPeriodAndroid),
                             style: TextStyle(
                               color: Colors.blue,
                               fontSize: 18.0,
@@ -158,6 +178,42 @@ class _SubscriptionState extends State<Subscription> {
                     ),
                   );
                 }).toList());
+
+                _cards.add(Card(
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          S.of(context).subscription_disclaimer(Platform.isIOS ? S.of(context).apple : S.of(context).google,
+                              Platform.isIOS ? S.of(context).app_store : S.of(context).play_store),
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                          FlatButton(
+                            onPressed: () {
+                              launchURL(termsOfUseUrl);
+                            },
+                            child: Text(
+                              S.of(context).terms_of_use,
+                              style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
+                            ),
+                          ),
+                          FlatButton(
+                            onPressed: () {
+                              launchURL(privacyPolicyUrl);
+                            },
+                            child: Text(
+                              S.of(context).privacy_policy,
+                              style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
+                            ),
+                          ),
+                        ]),
+                      ],
+                    ),
+                  ),
+                ));
 
                 return ListView(shrinkWrap: true, padding: const EdgeInsets.all(10.0), children: _cards);
               }
