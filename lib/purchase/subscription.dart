@@ -185,8 +185,7 @@ class _SubscriptionState extends State<Subscription> {
                     child: Column(
                       children: [
                         Text(
-                          S.of(context).subscription_disclaimer(Platform.isIOS ? S.of(context).apple : S.of(context).google,
-                              Platform.isIOS ? S.of(context).app_store : S.of(context).play_store),
+                          Platform.isIOS ? S.of(context).subscription_disclaimer_ios : S.of(context).subscription_disclaimer_android,
                           textAlign: TextAlign.justify,
                           style: TextStyle(fontSize: 16.0),
                         ),

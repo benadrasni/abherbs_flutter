@@ -239,6 +239,8 @@ class S implements WidgetsLocalizations {
   String get subantarctic_islands => "Subantarctic Islands";
   String get subarctic_america => "Subarctic America";
   String get subscription => "Subscription";
+  String get subscription_disclaimer_android => "First payment will be charged to your Google Play account 30 days after the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the Google Play Store after purchase.";
+  String get subscription_disclaimer_ios => "Payment will be charged to your Apple ID account after the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.";
   String get subscription_info => "Shared observations are visible only for subscribed users.";
   String get subscription_intro1 => "Your observation's date, location and note are saved and persisted across devices without subscription, but photos are stored only locally on the device. You will lose connection to them (even photo itself when you shot it from the application) when you clear data, reinstall or switch device.";
   String get subscription_intro2 => "You are about to subscribe for saving and persisting your photos across all your devices. With subscription you agree to share your observations with other subscribed users. You'll also be able to see their observations. All shared observations are anonymous and its note stays private and won't be shared. To simplify process your photos will be shared under CC0 (Creative Commons Zero) licence, so you also agree with this.";
@@ -279,7 +281,6 @@ class S implements WidgetsLocalizations {
   String auth_reset_password_email_message(String _email) => "Follow the instructions sent to $_email to reset your password.";
   String observation_upload_message(String param) => "You're going to upload $param observations. Please check if your device is connected to wi-fi. Are you ready for an upload?";
   String promotion_content(String date) => "This is a paid feature. You can use it for free until $date";
-  String subscription_disclaimer(String account, String store) => "First payment will be charged to your $account account 30 days after the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the $store after purchase.";
 }
 
 class $it_IT extends S {
@@ -808,8 +809,6 @@ class $it_IT extends S {
   String auth_reset_password_email_message(String _email) => "Seguire le istruzioni inviate a $_email per reimpostare la password.";
   @override
   String observation_upload_message(String param) => "Caricherete le osservazioni $param. Si prega di verificare se il dispositivo è collegato al wi-fi. Sei pronto per un caricamento?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Il primo pagamento verrà addebitato sul tuo account $account 30 giorni dopo la conferma di acquisto. L'abbonamento si rinnova automaticamente a meno che non venga annullato almeno 24 ore prima della fine del periodo corrente. Il tuo account verrà addebitato per il rinnovo entro 24 ore prima della fine del periodo corrente. Puoi gestire e annullare le tue iscrizioni andando alle impostazioni del tuo account su $store dopo l'acquisto.";
 }
 
 class $ru_RU extends S {
@@ -1338,8 +1337,6 @@ class $ru_RU extends S {
   String auth_reset_password_email_message(String _email) => "Следуйте инструкциям, отправленным на $_email, чтобы сбросить пароль.";
   @override
   String observation_upload_message(String param) => "Вы собираетесь загрузить наблюдения $param. Пожалуйста, проверьте, если ваше устройство подключено к Wi-Fi. Вы готовы к загрузке?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Первый платеж будет снят с вашего счета в размере $account через 30 дней после подтверждения покупки. Подписка автоматически продлевается, если она не отменена как минимум за 24 часа до окончания текущего периода. С вашего счета будет взиматься плата за продление в течение 24 часов до окончания текущего периода. Вы можете управлять своими подписками и отменять их, перейдя в настройки своей учетной записи на $store после покупки.";
 }
 
 class $pl_PL extends S {
@@ -1868,8 +1865,6 @@ class $pl_PL extends S {
   String auth_reset_password_email_message(String _email) => "Postępuj zgodnie z instrukcjami przesłanymi do $_email, aby zresetować hasło.";
   @override
   String observation_upload_message(String param) => "Zamierzasz przesłać zaobserwowane okazy w formacie $param. Sprawdź, czy twoje urządzenie jest podłączone do sieci Wi-Fi. Czy jesteś gotowy na przesłanie?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Pierwsza płatność zostanie pobrana na Twoje konto $account 30 dni po potwierdzeniu zakupu. Subskrypcja automatycznie odnawia, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu. Twoje konto zostanie obciążone opłatą za przedłużenie w ciągu 24 godzin przed końcem bieżącego okresu. Możesz zarządzać i anulować subskrypcje, przechodząc do ustawień konta na $store po zakupie.";
 }
 
 class $ro_RO extends S {
@@ -2398,8 +2393,6 @@ class $ro_RO extends S {
   String auth_reset_password_email_message(String _email) => "Urmați instrucțiunile trimise la $_email pentru a vă reseta parola.";
   @override
   String observation_upload_message(String param) => "Veți încărca observații $param. Verificați dacă dispozitivul dvs. este conectat la Wi-Fi. Sunteți gata pentru o încărcare?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Prima plată va fi debitată în contul dvs. de $account după 30 de zile de la confirmarea achiziției. Abonamentul se reînnoiește automat, cu excepția cazului în care este anulată cu cel puțin 24 de ore înainte de sfârșitul perioadei curente. Contul dvs. va fi taxat pentru reînnoire cu 24 de ore înainte de sfârșitul perioadei curente. Puteți gestiona și anula abonamentele dvs. accesând setările contului dvs. la suma de $store după cumpărare.";
 }
 
 class $hi_IN extends S {
@@ -2928,8 +2921,6 @@ class $hi_IN extends S {
   String auth_reset_password_email_message(String _email) => "अपना पासवर्ड रीसेट करने के लिए $_email को भेजे गए निर्देशों का पालन करें।";
   @override
   String observation_upload_message(String param) => "आप $param टिप्पणियों को अपलोड करने जा रहे हैं। कृपया जांचें कि क्या आपका उपकरण वाई-फाई से जुड़ा है। क्या आप अपलोड के लिए तैयार हैं?";
-  @override
-  String subscription_disclaimer(String account, String store) => "खरीद की पुष्टि के 30 दिन बाद पहले भुगतान आपके $account खाते से किया जाएगा। वर्तमान अवधि की समाप्ति से कम से कम 24 घंटे पहले रद्द होने तक सदस्यता स्वतः नवीनीकृत हो जाती है। वर्तमान अवधि के अंत से पहले 24 घंटों के भीतर आपके खाते को नवीनीकरण के लिए चार्ज किया जाएगा। आप खरीद के बाद $store पर अपनी खाता सेटिंग में जाकर अपनी सदस्यताएँ प्रबंधित और रद्द कर सकते हैं।";
 }
 
 class $id_ID extends S {
@@ -3458,8 +3449,6 @@ class $id_ID extends S {
   String auth_reset_password_email_message(String _email) => "Ikuti instruksi yang dikirim ke $_email untuk mereset kata sandi Anda.";
   @override
   String observation_upload_message(String param) => "Anda akan mengunggah $param observasi. Periksa apakah perangkat Anda terhubung ke wi-fi. Apakah Anda siap untuk diunggah?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Pembayaran pertama akan dibebankan ke akun $account Anda 30 hari setelah konfirmasi pembelian. Berlangganan secara otomatis memperbarui kecuali dibatalkan setidaknya 24 jam sebelum akhir periode berjalan. Akun Anda akan dikenakan biaya untuk pembaruan dalam waktu 24 jam sebelum akhir periode berjalan. Anda dapat mengelola dan membatalkan langganan Anda dengan masuk ke pengaturan akun Anda di $store setelah pembelian.";
 }
 
 class $fr_FR extends S {
@@ -3988,8 +3977,6 @@ class $fr_FR extends S {
   String auth_reset_password_email_message(String _email) => "Suivez les instructions envoyées à $_email pour réinitialiser votre mot de passe.";
   @override
   String observation_upload_message(String param) => "Vous allez télécharger des observations $param. Veuillez vérifier si votre appareil est connecté au wi-fi. Êtes-vous prêt pour un téléchargement?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Le premier paiement sera débité de votre compte $account 30 jours après la confirmation d'achat. L'abonnement est automatiquement renouvelé sauf s'il est annulé au moins 24 heures avant la fin de la période en cours. Votre compte sera facturé pour le renouvellement dans les 24 heures précédant la fin de la période en cours. Vous pouvez gérer et annuler vos abonnements en accédant aux paramètres de votre compte sur le $store après l'achat.";
 }
 
 class $he_IL extends S {
@@ -4518,8 +4505,6 @@ class $he_IL extends S {
   String auth_reset_password_email_message(String _email) => "בצע את ההוראות שנשלחו אל $_email כדי לאפס את הסיסמה.";
   @override
   String observation_upload_message(String param) => "אתה הולך להעלות $param תצפיות. בדוק אם המכשיר מחובר ל- Wi-Fi. האם אתה מוכן להעלאה?";
-  @override
-  String subscription_disclaimer(String account, String store) => "התשלום הראשון יחויב בחשבון $account שלך 30 יום לאחר אישור הרכישה. המנוי מתחדשת אוטומטית, אלא אם כן הוא מבוטל לפחות 24 שעות לפני תום התקופה הנוכחית. החשבון שלך יחויב לחידוש תוך 24 שעות לפני תום התקופה הנוכחית. תוכל לנהל ולבטל את ההרשמות שלך על ידי מעבר להגדרות החשבון שלך ב- $store לאחר הרכישה.";
 }
 
 class $ja_JP extends S {
@@ -5048,8 +5033,6 @@ class $ja_JP extends S {
   String auth_reset_password_email_message(String _) => "パスワードをリセットするには、 $_ email に送信された指示に従ってください。";
   @override
   String observation_upload_message(String param) => "$param の観測結果をアップロードします。 お使いの機器がWi-Fiに接続されているか確認してください。 アップロードの準備はできていますか？";
-  @override
-  String subscription_disclaimer(String account, String store) => "購入の確認から30日後に最初の支払いがあなたの $account アカウントに請求されます。 現在の期間が終了する少なくとも24時間前にキャンセルされない限り、サブスクリプションは自動的に更新されます。 あなたのアカウントは、現在の期間の終了前に24時間以内に更新のために課金されます。 購入後に $store のアカウント設定にアクセスして、購読を管理およびキャンセルできます。";
 }
 
 class $cs_CZ extends S {
@@ -5576,8 +5559,6 @@ class $cs_CZ extends S {
   String auth_reset_password_email_message(String _email) => "Postupujte podle pokynů odeslaných na adresu $_email a obnovte heslo.";
   @override
   String observation_upload_message(String param) => "Chystáte se zálohovat $param pozorování. Zkontrolujte, prosím, vaše připojení na wi-fi. Jste připraven začít zálohovat fotografie?";
-  @override
-  String subscription_disclaimer(String account, String store) => "První platba bude účtována vašemu účtu $account 30 dní po potvrzení nákupu. Předplatné se automaticky obnovuje, pokud není zrušeno nejméně 24 hodin před koncem aktuálního období. Nové předplatné bude účtováno do 24 hodin před koncem aktuálního období. Své odběry můžete spravovat a zrušit tak, že po zakoupení přejdete do nastavení účtu na $store.";
 }
 
 class $de_DE extends S {
@@ -6106,8 +6087,6 @@ class $de_DE extends S {
   String auth_reset_password_email_message(String _email) => "Folgen Sie den Anweisungen, die an $_email gesendet wurden, um Ihr Passwort zurückzusetzen.";
   @override
   String observation_upload_message(String param) => "Sie werden $param Beobachtungen hochladen. Bitte überprüfen Sie, ob Ihr Gerät mit Wi-Fi verbunden ist. Bist du bereit für einen Hochladen?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Die erste Zahlung wird 30 Tage nach der Kaufbestätigung Ihrem $account Konto belastet. Das Abonnement wird automatisch erneuert, es sei denn, es wird mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums gekündigt. Ihr Konto wird innerhalb von 24 Stunden vor Ablauf des laufenden Zeitraums für die Erneuerung belastet. Sie können Ihre Abonnements verwalten und kündigen, indem Sie nach dem Kauf Ihre Kontoeinstellungen auf dem $store aufrufen.";
 }
 
 class $hu_HU extends S {
@@ -6636,8 +6615,6 @@ class $hu_HU extends S {
   String auth_reset_password_email_message(String _email) => "A jelszó visszaállításához kövesse a(z) $_email címre küldött utasításokat.";
   @override
   String observation_upload_message(String param) => "$param megfigyelés kerül feltöltésre. Ellenőrizze készüléke csatlakozását a wi-fi hálózathoz. Készen áll a feltöltésre?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Az első befizetés a vásárlás visszaigazolását követő 30 nappal az Ön $account számláján kerül felszámításra. Az előfizetés automatikusan megújul, kivéve, ha legalább 24 órával a jelenlegi időszak vége előtt törlődik. Fiókját a jelenlegi időszak vége előtt 24 órán belül meg kell fizetni a megújításról. Az előfizetései kezelése és törlése a vásárlást követő $store fiókbeállításaival érhető el.";
 }
 
 class $nb_NO extends S {
@@ -7166,8 +7143,6 @@ class $nb_NO extends S {
   String auth_reset_password_email_message(String _email) => "Følg instruksjonene som sendes til $_email for å tilbakestille passordet ditt.";
   @override
   String observation_upload_message(String param) => "Du skal laste opp $param observasjoner. Sjekk om enheten din er koblet til wi-fi. Er du klar for en opplasting?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Første betaling vil bli belastet din $account -konto 30 dager etter bekreftelsen av kjøpet. Abonnementet fornyes automatisk med mindre det er kansellert minst 24 timer før slutten av den nåværende perioden. Kontoen din vil bli belastet for fornyelse innen 24 timer før slutten av den nåværende perioden. Du kan administrere og kansellere abonnementene dine ved å gå til kontoinnstillingene dine på $store etter kjøp.";
 }
 
 class $sk_SK extends S {
@@ -7690,8 +7665,6 @@ class $sk_SK extends S {
   String auth_reset_password_email_message(String _email) => "Postupujte podľa pokynov odoslaných na adresu $_email, aby ste obnovili svoje heslo.";
   @override
   String observation_upload_message(String param) => "Chystáte sa zálohovať $param pozorovaní. Skontrolujte, prosím, vaše pripojenia na wi-fi. Ste pripravený začať zálohovať fotografie?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Prvá platba bude účtovaná vášmu účtu $account 30 dní po potvrdení nákupu. Predplatné sa automaticky obnovuje, pokiaľ nie je zrušené najmenej 24 hodín pred koncom aktuálneho obdobia. Nové predplatné bude účtované do 24 hodín pred koncom aktuálneho obdobia. Svoje odbery môžete spravovať a zrušiť tak, že po zakúpení prejdete do nastavenia účtu na $store.";
 }
 
 class $es_ES extends S {
@@ -8220,8 +8193,6 @@ class $es_ES extends S {
   String auth_reset_password_email_message(String _email) => "Siga las instrucciones enviadas a $_email para restablecer su contraseña.";
   @override
   String observation_upload_message(String param) => "Vas a subir $param observaciones. Por favor, compruebe si su dispositivo está conectado a Wi-Fi. ¿Estás listo para una carga?";
-  @override
-  String subscription_disclaimer(String account, String store) => "El primer pago se cargará a su cuenta de $account 30 días después de la confirmación de la compra. La suscripción se renueva automáticamente a menos que se cancele al menos 24 horas antes del final del período actual. Se le cobrará a su cuenta la renovación dentro de las 24 horas anteriores al final del período actual. Puede administrar y cancelar sus suscripciones en la configuración de su cuenta en $store después de la compra.";
 }
 
 class $nl_NL extends S {
@@ -8750,8 +8721,6 @@ class $nl_NL extends S {
   String auth_reset_password_email_message(String _email) => "Volg de instructies verzonden naar $_email om uw wachtwoord opnieuw in te stellen.";
   @override
   String observation_upload_message(String param) => "Je gaat $param observaties uploaden. Controleer of uw apparaat is verbonden met wifi. Ben je klaar voor een upload?";
-  @override
-  String subscription_disclaimer(String account, String store) => "De eerste betaling wordt 30 dagen na de bevestiging van de aankoop in rekening gebracht op uw account voor $account. Abonnement wordt automatisch verlengd, tenzij het ten minste 24 uur voor het einde van de lopende periode wordt geannuleerd. Uw account wordt binnen 24 uur voorafgaand aan het einde van de lopende periode in rekening gebracht voor verlenging. Je kunt je abonnementen beheren en annuleren door na aankoop naar je accountinstellingen op de $store te gaan.";
 }
 
 class $pa_IN extends S {
@@ -9280,8 +9249,6 @@ class $pa_IN extends S {
   String auth_reset_password_email_message(String _email) => "ਆਪਣੇ ਪਾਸਵਰਡ ਨੂੰ ਰੀਸੈੱਟ ਕਰਨ ਲਈ $_email ਨੂੰ ਭੇਜੀਆਂ ਹਦਾਇਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ.";
   @override
   String observation_upload_message(String param) => "ਤੁਸੀਂ $param ਨਿਰੀਖਣ ਅਪਲੋਡ ਕਰਨ ਜਾ ਰਹੇ ਹੋ ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਹਾਡੀ ਡਿਵਾਈਸ Wi-Fi ਨਾਲ ਕਨੈਕਟ ਕੀਤੀ ਹੋਈ ਹੈ ਜਾਂ ਨਹੀਂ. ਕੀ ਤੁਸੀਂ ਅਪਲੋਡ ਲਈ ਤਿਆਰ ਹੋ?";
-  @override
-  String subscription_disclaimer(String account, String store) => "ਖਰੀਦਾਰੀ ਦੀ ਪੁਸ਼ਟੀ ਤੋਂ 30 ਦਿਨਾਂ ਬਾਅਦ ਤੁਹਾਡੇ ਪਹਿਲੇ $account ਖਾਤੇ ਵਿੱਚ ਪਹਿਲੀ ਅਦਾਇਗੀ ਕੀਤੀ ਜਾਏਗੀ. ਗਾਹਕੀ ਆਪਣੇ ਆਪ ਤਾਜ਼ਾ ਹੋ ਜਾਂਦੀ ਹੈ ਜਦੋਂ ਤਕ ਇਹ ਚਾਲੂ ਮਿਆਦ ਦੇ ਸਮਾਪਤ ਹੋਣ ਤੋਂ ਘੱਟੋ-ਘੱਟ 24 ਘੰਟੇ ਰੱਦ ਨਹੀਂ ਹੁੰਦੀ. ਤੁਹਾਡੇ ਅਕਾਉਂਟ ਨੂੰ ਮੌਜੂਦਾ ਸਮੇਂ ਦੇ ਅੰਤ ਤੋਂ 24 ਘੰਟਿਆਂ ਦੇ ਅੰਦਰ ਅੰਦਰ ਨਵੀਨੀਕਰਨ ਲਈ ਚਾਰਜ ਕੀਤਾ ਜਾਵੇਗਾ. ਤੁਸੀਂ ਖਰੀਦਣ ਤੋਂ ਬਾਅਦ $store ਤੇ ਆਪਣੀ ਖਾਤਾ ਸੈਟਿੰਗਜ਼ ਤੇ ਜਾ ਕੇ ਆਪਣੀ ਗਾਹਕੀ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਰੱਦ ਕਰ ਸਕਦੇ ਹੋ.";
 }
 
 class $sv_SE extends S {
@@ -9810,8 +9777,6 @@ class $sv_SE extends S {
   String auth_reset_password_email_message(String _email) => "Följ instruktionerna som skickas till $_email för att återställa ditt lösenord.";
   @override
   String observation_upload_message(String param) => "Du kommer att ladda upp $param observationer. Kontrollera om enheten är ansluten till Wi-Fi. Är du redo för en uppladdning?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Första betalningen debiteras ditt $account -konto 30 dagar efter bekräftelsen av inköpet. Prenumerationen förnyas automatiskt om den inte längre är inställd minst 24 timmar före slutet av den aktuella perioden. Ditt konto debiteras för förnyelse inom 24 timmar före slutet av den aktuella perioden. Du kan hantera och avbryta dina prenumerationer genom att gå till dina kontoinställningar på $store efter inköpet.";
 }
 
 class $da_DK extends S {
@@ -10336,8 +10301,6 @@ class $da_DK extends S {
   String auth_reset_password_email_message(String _email) => "Følg instruktionerne sendt til $_email for at nulstille din adgangskode.";
   @override
   String observation_upload_message(String param) => "Du skal uploade $param observationer. Kontroller, om din enhed er tilsluttet wi-fi. Er du klar til en upload?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Første betaling vil blive opkrævet på din $account konto 30 dage efter bekræftelsen af køb. Abonnementet fornyes automatisk, medmindre det annulleres mindst 24 timer inden udgangen af den aktuelle periode. Din konto vil blive opkrævet for fornyelse inden for 24 timer inden udgangen af den aktuelle periode. Du kan administrere og annullere dine abonnementer ved at gå til dine kontoindstillinger på $store efter køb.";
 }
 
 class $fa_IR extends S {
@@ -10862,8 +10825,6 @@ class $fa_IR extends S {
   String auth_reset_password_email_message(String _email) => "دستورالعمل ارسال شده به $_email را برای بازنشانی گذرواژه خود دنبال کنید.";
   @override
   String observation_upload_message(String param) => "شما قصد دارید مشاهدات $param را آپلود کنید. لطفا بررسی کنید که آیا دستگاه شما به Wi-Fi متصل است یا خیر. آیا شما برای آپلود آماده هستید؟";
-  @override
-  String subscription_disclaimer(String account, String store) => "30 روز پس از تأیید خرید، اولین پرداخت شما به حساب $account شما محاسبه خواهد شد. اشتراک به صورت خودکار تجدید می شود مگر اینکه آن حداقل 24 ساعت قبل از پایان دوره فعلی لغو شود. حساب شما برای تمدید ظرف 24 ساعت قبل از پایان دوره جاری تادیه خواهد شد. با رفتن به تنظیمات حسابتان در $store پس از خرید میتوانید اشتراک خود را مدیریت کنید و لغو کنید.";
 }
 
 class $sr_RS extends S {
@@ -11392,8 +11353,6 @@ class $sr_RS extends S {
   String auth_reset_password_email_message(String _email) => "Следите упутства која су послата на $_email да бисте поново поставили лозинку.";
   @override
   String observation_upload_message(String param) => "Учитавате $param опажања. Проверите да ли је ваш уређај повезан са Ви-Фи. Да ли сте спремни за отпремање?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Прва уплата ће бити наплаћена на ваш $account рачун 30 дана након потврде куповине. Претплата се аутоматски обнавља, осим ако није отказана најмање 24 сата прије краја текућег периода. Ваш рачун ће бити наплаћен за обнављање у року од 24 сата прије краја текућег периода. Можете да управљате и откажете своје претплате тако што ћете након куповине отићи на поставке налога на $store.";
 }
 
 class $en extends S {
@@ -11938,8 +11897,6 @@ class $fi_FI extends S {
   String auth_reset_password_email_message(String _email) => "Voit palauttaa salasanasi noudattamalla $_email lähetettyjä ohjeita.";
   @override
   String observation_upload_message(String param) => "Lähetät $param havaintoja. Tarkista, onko laite liitetty wi-fi-verkkoon. Oletko valmis lataamaan?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Ensimmäinen maksu veloitetaan $account -tilillesi 30 päivän kuluttua oston vahvistamisesta. Tilaus uusitaan automaattisesti, ellei sitä peruuteta vähintään 24 tuntia ennen nykyisen kauden päättymistä. Tilisi veloitetaan uusimisesta 24 tunnin kuluessa ennen nykyisen kauden päättymistä. Voit hallita ja peruuttaa tilauksesi siirtymällä tilisi asetuksiin $store oston jälkeen.";
 }
 
 class $hr_HR extends S {
@@ -12468,8 +12425,6 @@ class $hr_HR extends S {
   String auth_reset_password_email_message(String _email) => "Slijedite upute poslane na $_email da biste poništili zaporku.";
   @override
   String observation_upload_message(String param) => "Učitat ćete $param zapažanja. Provjerite je li uređaj spojen na Wi-Fi. Jeste li spremni za prijenos?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Prvo plaćanje bit će naplaćeno na vašem računu u vrijednosti $account 30 dana nakon potvrde kupnje. Pretplata se automatski obnavlja, osim ako je otkazana najmanje 24 sata prije kraja tekućeg razdoblja. Vaš će račun biti naplaćen u roku od 24 sata prije kraja tekućeg razdoblja. Možete upravljati i otkazivati svoje pretplate tako da odete na postavke računa na $store nakon kupnje.";
 }
 
 class $et_EE extends S {
@@ -12998,8 +12953,6 @@ class $et_EE extends S {
   String auth_reset_password_email_message(String _email) => "Parooli lähtestamiseks järgige $_email saadetud juhiseid.";
   @override
   String observation_upload_message(String param) => "Te laadite üles $param tähelepanekud. Kontrollige, kas teie seade on ühendatud Wi-Fi-ga. Kas olete valmis üleslaadimiseks valmis?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Esimene makse tasutakse teie $account kontolt 30 päeva pärast ostu kinnitamist. Tellimus uuendatakse automaatselt, kui seda ei tühistata vähemalt 24 tundi enne jooksva perioodi lõppu. Teie kontot tasutakse uuendamise eest 24 tunni jooksul enne jooksva perioodi lõppu. Saate oma tellimusi hallata ja tühistada, minnes pärast ostu oma konto seadetele $store.";
 }
 
 class $en_US extends S {
@@ -13536,8 +13489,6 @@ class $lt_LT extends S {
   String auth_reset_password_email_message(String _email) => "Jei norite iš naujo nustatyti slaptažodį, vadovaukitės nurodytomis instrukcijomis $_email.";
   @override
   String observation_upload_message(String param) => "Jūs ketinate įkelti $param pastabas. Patikrinkite, ar įrenginys prijungtas prie „Wi-Fi“. Ar esate pasiruošę įkelti?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Pirmoji įmoka bus apmokėta iš jūsų $account sąskaitos praėjus 30 dienų po pirkimo patvirtinimo. Prenumerata automatiškai atnaujinama, nebent ji būtų atšaukta likus ne mažiau kaip 24 valandoms iki einamojo laikotarpio pabaigos. Jūsų sąskaita bus apmokėta už atnaujinimą per 24 valandas iki einamojo laikotarpio pabaigos. Galite valdyti ir atšaukti savo prenumeratas, apsilankę savo paskyros nustatymuose po $store po įsigijimo.";
 }
 
 class $lv_LV extends S {
@@ -14066,8 +14017,6 @@ class $lv_LV extends S {
   String auth_reset_password_email_message(String _email) => "Lai atiestatītu paroli, izpildiet norādījumus, kas nosūtīti uz $_email.";
   @override
   String observation_upload_message(String param) => "Jūs plānojat augšupielādēt $param novērojumus. Lūdzu, pārbaudiet, vai ierīce ir savienota ar Wi-Fi. Vai esat gatavs augšupielādei?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Pirmais maksājums tiks iekasēts no jūsu $account konta 30 dienas pēc pirkuma apstiprināšanas. Abonēšana tiek automātiski atjaunota, ja tā nav atcelta vismaz 24 stundas pirms kārtējā perioda beigām. Jūsu konts tiks iekasēts par atjaunošanu 24 stundu laikā pirms pašreizējā perioda beigām. Varat pārvaldīt un atcelt abonementus, iegādājoties konta iestatījumus pēc $store pēc iegādes.";
 }
 
 class $uk_UA extends S {
@@ -14596,8 +14545,6 @@ class $uk_UA extends S {
   String auth_reset_password_email_message(String _email) => "Виконуйте інструкції, надіслані на адресу $_email, щоб скинути пароль.";
   @override
   String observation_upload_message(String param) => "Ви збираєтеся завантажити $param спостереження. Перевірте, чи пристрій підключено до wi-fi. Ви готові до завантаження?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Перший платіж буде стягнуто з вашого рахунку $account через 30 днів після підтвердження покупки. Підписка автоматично продовжується, якщо вона не буде скасована принаймні за 24 години до закінчення поточного періоду. Ваш обліковий запис буде стягнено за поновлення протягом 24 годин до закінчення поточного періоду. Ви можете керувати та скасувати свої підписки, перейшовши до налаштувань свого облікового запису на сторінці $store після покупки.";
 }
 
 class $sl_SI extends S {
@@ -15126,8 +15073,6 @@ class $sl_SI extends S {
   String auth_reset_password_email_message(String _email) => "Sledite navodilom, poslanim $_email, da ponastavite geslo.";
   @override
   String observation_upload_message(String param) => "Naložili boste $param opažanja. Preverite, ali je vaša naprava povezana z wi-fi. Ste pripravljeni za nalaganje?";
-  @override
-  String subscription_disclaimer(String account, String store) => "Prvo plačilo se zaračuna vašemu računu $account 30 dni po potrditvi nakupa. Naročnina se samodejno obnovi, razen če je preklicana vsaj 24 ur pred koncem trenutnega obdobja. Vaš račun bo zaračunan za podaljšanje v 24 urah pred koncem trenutnega obdobja. Naročnine lahko upravljate in prekličete tako, da po nakupu obiščete nastavitve računa na $store.";
 }
 
 class $ar_EG extends S {
@@ -15656,8 +15601,6 @@ class $ar_EG extends S {
   String auth_reset_password_email_message(String _email) => "اتبع التعليمات المرسلة إلى $_email لإعادة تعيين كلمة المرور الخاصة بك.";
   @override
   String observation_upload_message(String param) => "ستقوم بتحميل ملاحظات $param. يرجى التحقق مما إذا كان جهازك متصلاً بشبكة wi-fi. هل أنت مستعد للتحميل؟";
-  @override
-  String subscription_disclaimer(String account, String store) => "سيتم خصم الدفعة الأولى من حسابك $account بعد 30 يومًا من تأكيد الشراء. يتم تجديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل 24 ساعة على الأقل من نهاية الفترة الحالية. سيتم فرض رسوم على حسابك خلال 24 ساعة قبل نهاية الفترة الحالية. يمكنك إدارة اشتراكاتك وإلغاؤها عن طريق الانتقال إلى إعدادات حسابك على $store بعد الشراء.";
 }
 
 class $pt_PT extends S {
@@ -16182,8 +16125,6 @@ class $pt_PT extends S {
   String auth_reset_password_email_message(String _email) => "Siga as instruções enviadas para $_email para redefinir sua senha.";
   @override
   String observation_upload_message(String param) => "Você vai enviar observações do $param. Por favor, verifique se o seu dispositivo está conectado a wi-fi. Você está pronto para um upload?";
-  @override
-  String subscription_disclaimer(String account, String store) => "O primeiro pagamento será cobrado em sua conta de $account 30 dias após a confirmação da compra. A assinatura é renovada automaticamente, a menos que seja cancelada pelo menos 24 horas antes do final do período atual. Sua conta será cobrada para renovação dentro de 24 horas antes do final do período atual. Você pode gerenciar e cancelar suas assinaturas acessando as configurações da sua conta no $store após a compra.";
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
