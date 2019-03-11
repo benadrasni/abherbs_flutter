@@ -6345,7 +6345,7 @@ class $hu_HU extends S {
   @override
   String get feedback_submit_translate_app => "Javítsa az alkalmazás címkéit";
   @override
-  String get subscription_yearly_title => "Fotók tárolása";
+  String get subscription_yearly_title => "Fényképek tárolása";
   @override
   String get observation_upload_progress => "Megfigyelések feltöltése...";
   @override
