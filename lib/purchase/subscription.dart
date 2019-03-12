@@ -189,26 +189,24 @@ class _SubscriptionState extends State<Subscription> {
                           textAlign: TextAlign.justify,
                           style: TextStyle(fontSize: 16.0),
                         ),
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                          FlatButton(
-                            onPressed: () {
-                              launchURL(termsOfUseUrl);
-                            },
-                            child: Text(
-                              S.of(context).terms_of_use,
-                              style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
-                            ),
+                        FlatButton(
+                          onPressed: () {
+                            launchURL(termsOfUseUrl);
+                          },
+                          child: Text(
+                            S.of(context).terms_of_use,
+                            style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
                           ),
-                          FlatButton(
-                            onPressed: () {
-                              launchURL(privacyPolicyUrl);
-                            },
-                            child: Text(
-                              S.of(context).privacy_policy,
-                              style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
-                            ),
+                        ),
+                        FlatButton(
+                          onPressed: () {
+                            launchURL(privacyPolicyUrl);
+                          },
+                          child: Text(
+                            S.of(context).privacy_policy,
+                            style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
                           ),
-                        ]),
+                        ),
                       ],
                     ),
                   ),
