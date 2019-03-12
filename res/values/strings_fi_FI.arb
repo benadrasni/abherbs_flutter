@@ -270,7 +270,8 @@
   "subscription_intro3": "Jos et edes epäröi lyödä alla olevaa painiketta, molempien tilausten kokeilujakso on 30 päivää.",
   "subscription_period_month": "kuukausi",
   "subscription_period_year": "vuosi",
-  "subscription_disclaimer": "Ensimmäinen maksu veloitetaan $account -tilillesi 30 päivän kuluttua oston vahvistamisesta. Tilaus uusitaan automaattisesti, ellei sitä peruuteta vähintään 24 tuntia ennen nykyisen kauden päättymistä. Tilisi veloitetaan uusimisesta 24 tunnin kuluessa ennen nykyisen kauden päättymistä. Voit hallita ja peruuttaa tilauksesi siirtymällä tilisi asetuksiin $store oston jälkeen.",
+  "subscription_disclaimer_android": "Ensimmäinen maksu veloitetaan Google Play -tililtäsi 30 päivän kuluttua oston vahvistamisesta. Tilaus uusitaan automaattisesti, ellei sitä peruuteta vähintään 24 tuntia ennen nykyisen kauden päättymistä. Tilisi veloitetaan uusimisesta 24 tunnin kuluessa ennen nykyisen kauden päättymistä. Voit hallita ja peruuttaa tilauksesi siirtymällä Google Play Storen tiliasetuksiin oston jälkeen.",
+  "subscription_disclaimer_ios": "Maksu veloitetaan Apple ID -tiliisi oston vahvistuksen jälkeen. Tilaus uusitaan automaattisesti, ellei sitä peruuteta vähintään 24 tuntia ennen nykyisen kauden päättymistä. Tilisi veloitetaan uusimisesta 24 tunnin kuluessa ennen nykyisen kauden päättymistä. Voit hallita ja peruuttaa tilauksesi siirtymällä App Store-tilisi tiliasetuksiin oston jälkeen.",
 
   "terms_of_use": "Käyttöehdot",
   "privacy_policy": "Tietosuojakäytäntö",

@@ -270,7 +270,8 @@
   "subscription_intro3": "Kui te ikka veel allpool olevat nuppu tabate, on mõlema tellimuse jaoks 30-päevane prooviperiood.",
   "subscription_period_month": "kuus",
   "subscription_period_year": "aasta",
-  "subscription_disclaimer": "Esimene makse tasutakse teie $account kontolt 30 päeva pärast ostu kinnitamist. Tellimus uuendatakse automaatselt, kui seda ei tühistata vähemalt 24 tundi enne jooksva perioodi lõppu. Teie kontot tasutakse uuendamise eest 24 tunni jooksul enne jooksva perioodi lõppu. Saate oma tellimusi hallata ja tühistada, minnes pärast ostu oma konto seadetele $store.",
+  "subscription_disclaimer_android": "Esimene makse tasutakse teie Google Play kontolt 30 päeva pärast ostu kinnitamist. Tellimus uuendatakse automaatselt, kui seda ei tühistata vähemalt 24 tundi enne jooksva perioodi lõppu. Teie kontot tasutakse uuendamise eest 24 tunni jooksul enne jooksva perioodi lõppu. Saate oma tellimusi hallata ja tühistada, kui ostate pärast Google Play poe konto seadeid.",
+  "subscription_disclaimer_ios": "Makse võetakse teie Apple ID kontolt pärast ostu kinnitamist. Tellimus uuendatakse automaatselt, kui seda ei tühistata vähemalt 24 tundi enne jooksva perioodi lõppu. Teie kontot tasutakse uuendamise eest 24 tunni jooksul enne jooksva perioodi lõppu. Saate oma tellimusi hallata ja tühistada, minnes pärast ostmist rakenduse App Store konto seadetele.",
 
   "terms_of_use": "Kasutustingimused",
   "privacy_policy": "Privaatsuspoliitika",

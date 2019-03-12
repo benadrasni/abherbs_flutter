@@ -270,7 +270,8 @@
   "subscription_intro3": "Dacă încă ezitați să apăsați butonul de mai jos, există o perioadă de probă de 30 de zile pentru ambele abonamente.",
   "subscription_period_month": "lună",
   "subscription_period_year": "an",
-  "subscription_disclaimer": "Prima plată va fi debitată în contul dvs. de $account după 30 de zile de la confirmarea achiziției. Abonamentul se reînnoiește automat, cu excepția cazului în care este anulată cu cel puțin 24 de ore înainte de sfârșitul perioadei curente. Contul dvs. va fi taxat pentru reînnoire cu 24 de ore înainte de sfârșitul perioadei curente. Puteți gestiona și anula abonamentele dvs. accesând setările contului dvs. la suma de $store după cumpărare.",
+  "subscription_disclaimer_android": "Prima plată va fi debitată în contul Google Play după 30 de zile de la confirmarea achiziției. Abonamentul se reînnoiește automat, cu excepția cazului în care este anulată cu cel puțin 24 de ore înainte de sfârșitul perioadei curente. Contul dvs. va fi taxat pentru reînnoire cu 24 de ore înainte de sfârșitul perioadei curente. Vă puteți gestiona și anula abonamentele accesând setările contului dvs. din Magazin Google Play după cumpărare.",
+  "subscription_disclaimer_ios": "Plata va fi debitată în contul dvs. Apple ID după confirmarea achiziției. Abonamentul se reînnoiește automat, cu excepția cazului în care este anulată cu cel puțin 24 de ore înainte de sfârșitul perioadei curente. Contul dvs. va fi taxat pentru reînnoire cu 24 de ore înainte de sfârșitul perioadei curente. Puteți gestiona și anula abonamentele dvs. accesând setările contului din App Store după cumpărare.",
 
   "terms_of_use": "Termeni de utilizare",
   "privacy_policy": "Politica de confidentialitate",

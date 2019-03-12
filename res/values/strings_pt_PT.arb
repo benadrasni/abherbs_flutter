@@ -268,7 +268,8 @@
   "subscription_intro3": "Se você ainda hesitar em clicar no botão abaixo, haverá um período experimental de 30 dias para ambas as inscrições.",
   "subscription_period_month": "mês",
   "subscription_period_year": "ano",
-  "subscription_disclaimer": "O primeiro pagamento será cobrado em sua conta de $account 30 dias após a confirmação da compra. A assinatura é renovada automaticamente, a menos que seja cancelada pelo menos 24 horas antes do final do período atual. Sua conta será cobrada para renovação dentro de 24 horas antes do final do período atual. Você pode gerenciar e cancelar suas assinaturas acessando as configurações da sua conta no $store após a compra.",
+  "subscription_disclaimer_android": "O primeiro pagamento será cobrado em sua conta do Google Play 30 dias após a confirmação da compra. A assinatura é renovada automaticamente, a menos que seja cancelada pelo menos 24 horas antes do final do período atual. Sua conta será cobrada para renovação dentro de 24 horas antes do final do período atual. Você pode gerenciar e cancelar suas inscrições acessando as configurações da sua conta na Google Play Store após a compra.",
+  "subscription_disclaimer_ios": "O pagamento será cobrado em sua conta da Apple ID após a confirmação da compra. A assinatura é renovada automaticamente, a menos que seja cancelada pelo menos 24 horas antes do final do período atual. Sua conta será cobrada para renovação dentro de 24 horas antes do final do período atual. Você pode gerenciar e cancelar suas assinaturas acessando as configurações da sua conta na App Store após a compra.",
 
   "terms_of_use": "Termos de uso",
   "privacy_policy": "Política de Privacidade",

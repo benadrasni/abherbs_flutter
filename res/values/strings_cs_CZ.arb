@@ -269,7 +269,8 @@
   "subscription_intro3": "Pokud ještě stále váháte se stisknutím tlačítka na konci stránky, tak předplatné obsahuje zkušební dobu 30 dní, během kterých bude zdarma.",
   "subscription_period_month": "měsíc",
   "subscription_period_year": "rok",
-  "subscription_disclaimer": "První platba bude účtována vašemu účtu $account 30 dní po potvrzení nákupu. Předplatné se automaticky obnovuje, pokud není zrušeno nejméně 24 hodin před koncem aktuálního období. Nové předplatné bude účtováno do 24 hodin před koncem aktuálního období. Své odběry můžete spravovat a zrušit tak, že po zakoupení přejdete do nastavení účtu na $store.",
+  "subscription_disclaimer_android": "První platba bude účtována vašemu Google účtu 30 dní po potvrzení nákupu. Předplatné se automaticky obnovuje, pokud není zrušeno nejméně 24 hodin před koncem aktuálního období. Nové předplatné bude účtováno do 24 hodin před koncem aktuálního období. Své odběry můžete spravovat a zrušit tak, že po zakoupení přejdete do nastavení účtu na Obchodu Google Play.",
+  "subscription_disclaimer_ios": "Platba bude účtována vašemu Apple ID účtu po potvrzení nákupu. Předplatné se automaticky obnovuje, pokud není zrušeno nejméně 24 hodin před koncem aktuálního období. Nové předplatné bude účtováno do 24 hodin před koncem aktuálního období. Své odběry můžete spravovat a zrušit tak, že po zakoupení přejdete do nastavení účtu na App Store.",
 
   "terms_of_use": "Podmínky použití",
   "privacy_policy": "Zásady ochrany osobních údajů",

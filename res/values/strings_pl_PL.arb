@@ -270,7 +270,8 @@
   "subscription_intro3": "Jeśli wciąż się wahasz czy nacisnąć poniższy przycisk, pamiętaj że obydwie subskrypcje są objęte 30-dniowym okresem próbnym.",
   "subscription_period_month": "miesiąc",
   "subscription_period_year": "rok",
-  "subscription_disclaimer": "Pierwsza płatność zostanie pobrana na Twoje konto $account 30 dni po potwierdzeniu zakupu. Subskrypcja automatycznie odnawia, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu. Twoje konto zostanie obciążone opłatą za przedłużenie w ciągu 24 godzin przed końcem bieżącego okresu. Możesz zarządzać i anulować subskrypcje, przechodząc do ustawień konta na $store po zakupie.",
+  "subscription_disclaimer_android": "Pierwsza płatność zostanie pobrana z konta Google Play 30 dni po potwierdzeniu zakupu. Subskrypcja automatycznie odnawia, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu. Twoje konto zostanie obciążone opłatą za przedłużenie w ciągu 24 godzin przed końcem bieżącego okresu. Możesz zarządzać subskrypcjami i anulować je, przechodząc do ustawień konta w sklepie Google Play po zakupie.",
+  "subscription_disclaimer_ios": "Płatność zostanie naliczona na konto Apple ID po potwierdzeniu zakupu. Subskrypcja automatycznie odnawia, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu. Twoje konto zostanie obciążone opłatą za przedłużenie w ciągu 24 godzin przed końcem bieżącego okresu. Możesz zarządzać subskrypcjami i je anulować, przechodząc do ustawień konta w App Store po zakupie.",
 
   "terms_of_use": "Warunki korzystania",
   "privacy_policy": "Polityka prywatności",

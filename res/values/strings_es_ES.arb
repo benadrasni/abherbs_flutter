@@ -270,7 +270,8 @@
   "subscription_intro3": "Si aún tiene dudas de presionar el botón de abajo, hay un período de prueba de 30 días para ambas suscripciones.",
   "subscription_period_month": "mes",
   "subscription_period_year": "año",
-  "subscription_disclaimer": "El primer pago se cargará a su cuenta de $account 30 días después de la confirmación de la compra. La suscripción se renueva automáticamente a menos que se cancele al menos 24 horas antes del final del período actual. Se le cobrará a su cuenta la renovación dentro de las 24 horas anteriores al final del período actual. Puede administrar y cancelar sus suscripciones en la configuración de su cuenta en $store después de la compra.",
+  "subscription_disclaimer_android": "El primer pago se cargará a su cuenta de Google Play 30 días después de la confirmación de la compra. La suscripción se renueva automáticamente a menos que se cancele al menos 24 horas antes del final del período actual. Se le cobrará a su cuenta la renovación dentro de las 24 horas anteriores al final del período actual. Puede administrar y cancelar sus suscripciones en la configuración de su cuenta en Google Play Store después de la compra.",
+  "subscription_disclaimer_ios": "El pago se cargará a su cuenta de Apple ID después de la confirmación de la compra. La suscripción se renueva automáticamente a menos que se cancele al menos 24 horas antes del final del período actual. Se le cobrará a su cuenta la renovación dentro de las 24 horas anteriores al final del período actual. Puede administrar y cancelar sus suscripciones en la configuración de su cuenta en App Store después de la compra.",
 
   "terms_of_use": "Términos de Uso",
   "privacy_policy": "Política de privacidad",

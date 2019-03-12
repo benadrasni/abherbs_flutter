@@ -270,7 +270,8 @@
   "subscription_intro3": "Ako još uvijek oklijevate pritisnuti gumb u nastavku, za oba pretplate postoji probno razdoblje od 30 dana.",
   "subscription_period_month": "mjesec",
   "subscription_period_year": "godina",
-  "subscription_disclaimer": "Prvo plaćanje bit će naplaćeno na vašem računu u vrijednosti $account 30 dana nakon potvrde kupnje. Pretplata se automatski obnavlja, osim ako je otkazana najmanje 24 sata prije kraja tekućeg razdoblja. Vaš će račun biti naplaćen u roku od 24 sata prije kraja tekućeg razdoblja. Možete upravljati i otkazivati svoje pretplate tako da odete na postavke računa na $store nakon kupnje.",
+  "subscription_disclaimer_android": "Prvo plaćanje naplaćuje se na vašem računu na usluzi Google Play 30 dana nakon potvrde kupnje. Pretplata se automatski obnavlja, osim ako je otkazana najmanje 24 sata prije kraja tekućeg razdoblja. Vaš će račun biti naplaćen u roku od 24 sata prije kraja tekućeg razdoblja. Možete upravljati i otkazivati svoje pretplate tako da nakon kupnje odete na postavke računa na Trgovini Google Play.",
+  "subscription_disclaimer_ios": "Plaćanje će biti naplaćeno na vašem Apple ID računu nakon potvrde kupnje. Pretplata se automatski obnavlja, osim ako je otkazana najmanje 24 sata prije kraja tekućeg razdoblja. Vaš će račun biti naplaćen u roku od 24 sata prije kraja tekućeg razdoblja. Možete upravljati i otkazati svoje pretplate tako da odete na postavke računa na App Store nakon kupnje.",
 
   "terms_of_use": "Uvjeti korištenja",
   "privacy_policy": "Pravila o privatnosti",
