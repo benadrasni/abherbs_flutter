@@ -125,7 +125,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                child: Column(children: [
                   FlatButton(
                     onPressed: () {
                       launchURL(termsOfUseUrl);
