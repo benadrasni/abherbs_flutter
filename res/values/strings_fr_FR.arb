@@ -270,7 +270,8 @@
   "subscription_intro3": "Si vous hésitez encore à cliquer sur le bouton ci-dessous, il y a une période d'essai de 30 jours pour les deux abonnements.",
   "subscription_period_month": "mois",
   "subscription_period_year": "année",
-  "subscription_disclaimer": "Le premier paiement sera débité de votre compte $account 30 jours après la confirmation d'achat. L'abonnement est automatiquement renouvelé sauf s'il est annulé au moins 24 heures avant la fin de la période en cours. Votre compte sera facturé pour le renouvellement dans les 24 heures précédant la fin de la période en cours. Vous pouvez gérer et annuler vos abonnements en accédant aux paramètres de votre compte sur le $store après l'achat.",
+  "subscription_disclaimer_android": "Le premier paiement sera débité de votre compte Google Play 30 jours après la confirmation de l'achat. L'abonnement est automatiquement renouvelé sauf s'il est annulé au moins 24 heures avant la fin de la période en cours. Votre compte sera facturé pour le renouvellement dans les 24 heures précédant la fin de la période en cours. Vous pouvez gérer et annuler vos abonnements en accédant aux paramètres de votre compte sur le Google Play Store après l'achat.",
+  "subscription_disclaimer_ios": "Le paiement sera débité de votre compte Apple ID après la confirmation de l'achat. L'abonnement est automatiquement renouvelé sauf s'il est annulé au moins 24 heures avant la fin de la période en cours. Votre compte sera facturé pour le renouvellement dans les 24 heures précédant la fin de la période en cours. Vous pouvez gérer et annuler vos abonnements en accédant aux paramètres de votre compte sur App Store après l'achat.",
 
   "terms_of_use": "Conditions d'utilisation",
   "privacy_policy": "Politique de confidentialité",

@@ -270,7 +270,8 @@
   "subscription_intro3": "Jika Anda masih ragu untuk menekan tombol di bawah ini, ada masa uji coba 30 hari untuk kedua langganan.",
   "subscription_period_month": "bulan",
   "subscription_period_year": "tahun",
-  "subscription_disclaimer": "Pembayaran pertama akan dibebankan ke akun $account Anda 30 hari setelah konfirmasi pembelian. Berlangganan secara otomatis memperbarui kecuali dibatalkan setidaknya 24 jam sebelum akhir periode berjalan. Akun Anda akan dikenakan biaya untuk pembaruan dalam waktu 24 jam sebelum akhir periode berjalan. Anda dapat mengelola dan membatalkan langganan Anda dengan masuk ke pengaturan akun Anda di $store setelah pembelian.",
+  "subscription_disclaimer_android": "Pembayaran pertama akan dibebankan ke akun Google Play Anda 30 hari setelah konfirmasi pembelian. Berlangganan secara otomatis memperbarui kecuali dibatalkan setidaknya 24 jam sebelum akhir periode berjalan. Akun Anda akan dikenakan biaya untuk pembaruan dalam waktu 24 jam sebelum akhir periode berjalan. Anda dapat mengelola dan membatalkan langganan Anda dengan masuk ke pengaturan akun Anda di Google Play Store setelah pembelian.",
+  "subscription_disclaimer_ios": "Pembayaran akan dibebankan ke akun ID Apple Anda setelah konfirmasi pembelian. Berlangganan secara otomatis memperbarui kecuali dibatalkan setidaknya 24 jam sebelum akhir periode berjalan. Akun Anda akan dikenakan biaya untuk pembaruan dalam waktu 24 jam sebelum akhir periode berjalan. Anda dapat mengelola dan membatalkan langganan Anda dengan masuk ke pengaturan akun Anda di App Store setelah pembelian.",
 
   "terms_of_use": "Syarat Penggunaan",
   "privacy_policy": "Rahasia pribadi",

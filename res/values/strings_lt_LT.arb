@@ -270,7 +270,8 @@
   "subscription_intro3": "Jei vis dar nedvejodami paspausite žemiau esantį mygtuką, abiejų prenumeratų bandomojo laikotarpio trukmė yra 30 dienų.",
   "subscription_period_month": "mėnesį",
   "subscription_period_year": "metus",
-  "subscription_disclaimer": "Pirmoji įmoka bus apmokėta iš jūsų $account sąskaitos praėjus 30 dienų po pirkimo patvirtinimo. Prenumerata automatiškai atnaujinama, nebent ji būtų atšaukta likus ne mažiau kaip 24 valandoms iki einamojo laikotarpio pabaigos. Jūsų sąskaita bus apmokėta už atnaujinimą per 24 valandas iki einamojo laikotarpio pabaigos. Galite valdyti ir atšaukti savo prenumeratas, apsilankę savo paskyros nustatymuose po $store po įsigijimo.",
+  "subscription_disclaimer_android": "Pirmasis mokėjimas bus apmokestintas „Google Play“ paskyroje praėjus 30 dienų po pirkimo patvirtinimo. Prenumerata automatiškai atnaujinama, nebent ji būtų atšaukta likus ne mažiau kaip 24 valandoms iki einamojo laikotarpio pabaigos. Jūsų sąskaita bus apmokėta už atnaujinimą per 24 valandas iki einamojo laikotarpio pabaigos. Po įsigijimo galite tvarkyti ir atšaukti savo prenumeratas naudodami „Google Play“ parduotuvės paskyros nustatymus.",
+  "subscription_disclaimer_ios": "Apmokėjimas bus apmokestintas „Apple ID“ paskyroje po pirkimo patvirtinimo. Prenumerata automatiškai atnaujinama, nebent ji būtų atšaukta likus ne mažiau kaip 24 valandoms iki einamojo laikotarpio pabaigos. Jūsų sąskaita bus apmokėta už atnaujinimą per 24 valandas iki einamojo laikotarpio pabaigos. Po įsigijimo galite tvarkyti ir atšaukti savo prenumeratas naudodami „App Store“ paskyros nustatymus.",
 
   "terms_of_use": "Naudojimo sąlygos",
   "privacy_policy": "Privatumo politika",

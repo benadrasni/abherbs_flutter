@@ -270,7 +270,8 @@
   "subscription_intro3": "Ha még mindig habozik lehetőség van mindkét feliratkozás esetében egy 30 napos próbaidőre.",
   "subscription_period_month": "hónap",
   "subscription_period_year": "év",
-  "subscription_disclaimer": "Az első befizetés a vásárlás visszaigazolását követő 30 nappal az Ön $account számláján kerül felszámításra. Az előfizetés automatikusan megújul, kivéve, ha legalább 24 órával a jelenlegi időszak vége előtt törlődik. Fiókját a jelenlegi időszak vége előtt 24 órán belül meg kell fizetni a megújításról. Az előfizetései kezelése és törlése a vásárlást követő $store fiókbeállításaival érhető el.",
+  "subscription_disclaimer_android": "Az első befizetés a Google Play-fiókból 30 nappal a vásárlás visszaigazolása után kerül felszámításra. Az előfizetés automatikusan megújul, kivéve, ha legalább 24 órával a jelenlegi időszak vége előtt törlődik. Fiókját a jelenlegi időszak vége előtt 24 órán belül meg kell fizetni a megújításról. A vásárlást követően a Google Play Áruházban lévő fiókbeállításaira irányíthatja és törölheti előfizetését.",
+  "subscription_disclaimer_ios": "A kifizetést az Apple ID-fiókja terheli a vásárlás visszaigazolása után. Az előfizetés automatikusan megújul, kivéve, ha legalább 24 órával a jelenlegi időszak vége előtt törlődik. Fiókját a jelenlegi időszak vége előtt 24 órán belül meg kell fizetni a megújításról. A vásárlást követően az App Store fiókbeállításaira irányíthatja és törölheti előfizetését.",
 
   "terms_of_use": "Használati feltételek",
   "privacy_policy": "Adatvédelmi irányelvek",

@@ -268,7 +268,8 @@
   "subscription_intro3": "Hvis du stadig tøver med at ramme nedenstående knap, er der en prøveperiode på 30 dage for begge abonnementer.",
   "subscription_period_month": "måned",
   "subscription_period_year": "år",
-  "subscription_disclaimer": "Første betaling vil blive opkrævet på din $account konto 30 dage efter bekræftelsen af køb. Abonnementet fornyes automatisk, medmindre det annulleres mindst 24 timer inden udgangen af den aktuelle periode. Din konto vil blive opkrævet for fornyelse inden for 24 timer inden udgangen af den aktuelle periode. Du kan administrere og annullere dine abonnementer ved at gå til dine kontoindstillinger på $store efter køb.",
+  "subscription_disclaimer_android": "Første betaling vil blive opkrævet på din Google Play-konto 30 dage efter bekræftelsen af køb. Abonnementet fornyes automatisk, medmindre det annulleres mindst 24 timer inden udgangen af den aktuelle periode. Din konto vil blive opkrævet for fornyelse inden for 24 timer inden udgangen af den aktuelle periode. Du kan administrere og annullere dine abonnementer ved at gå til dine kontoindstillinger i Google Play Butik efter køb.",
+  "subscription_disclaimer_ios": "Betaling vil blive opkrævet på din Apple ID-konto efter bekræftelse af køb. Abonnementet fornyes automatisk, medmindre det annulleres mindst 24 timer inden udgangen af den aktuelle periode. Din konto vil blive opkrævet for fornyelse inden for 24 timer inden udgangen af den aktuelle periode. Du kan administrere og annullere dine abonnementer ved at gå til dine kontoindstillinger på App Store efter køb.",
 
   "terms_of_use": "Vilkår for brug",
   "privacy_policy": "Fortrolighedspolitik",

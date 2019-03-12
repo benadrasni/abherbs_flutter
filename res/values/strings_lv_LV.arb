@@ -270,7 +270,8 @@
   "subscription_intro3": "Ja jūs joprojām nevilcinieties, lai sasniegtu zemāk redzamo pogu, abiem abonementiem ir 30 dienu izmēģinājuma periods.",
   "subscription_period_month": "mēnesī",
   "subscription_period_year": "gadā",
-  "subscription_disclaimer": "Pirmais maksājums tiks iekasēts no jūsu $account konta 30 dienas pēc pirkuma apstiprināšanas. Abonēšana tiek automātiski atjaunota, ja tā nav atcelta vismaz 24 stundas pirms kārtējā perioda beigām. Jūsu konts tiks iekasēts par atjaunošanu 24 stundu laikā pirms pašreizējā perioda beigām. Varat pārvaldīt un atcelt abonementus, iegādājoties konta iestatījumus pēc $store pēc iegādes.",
+  "subscription_disclaimer_android": "Pirmais maksājums tiks iekasēts no jūsu Google Play konta 30 dienas pēc pirkuma apstiprināšanas. Abonēšana tiek automātiski atjaunota, ja tā nav atcelta vismaz 24 stundas pirms kārtējā perioda beigām. Jūsu konts tiks iekasēts par atjaunošanu 24 stundu laikā pirms pašreizējā perioda beigām. Pēc iegādes varat pārvaldīt un atcelt abonementus, dodoties uz sava konta iestatījumiem pakalpojumā Google Play veikals.",
+  "subscription_disclaimer_ios": "Maksājums tiks iekasēts no jūsu Apple ID konta pēc pirkuma apstiprināšanas. Abonēšana tiek automātiski atjaunota, ja tā nav atcelta vismaz 24 stundas pirms kārtējā perioda beigām. Jūsu konts tiks iekasēts par atjaunošanu 24 stundu laikā pirms pašreizējā perioda beigām. Pēc iegādes varat pārvaldīt un atcelt abonementus, dodoties uz sava konta iestatījumiem lietotnē App Store.",
 
   "terms_of_use": "Lietošanas noteikumi",
   "privacy_policy": "Privātuma politika",

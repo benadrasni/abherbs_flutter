@@ -270,7 +270,8 @@
   "subscription_intro3": "Wenn Sie immer noch zögern, den unten stehenden Button zu drücken, gibt es eine 30-tägige Probezeit für beide Abonnements.",
   "subscription_period_month": "Monat",
   "subscription_period_year": "Jahr",
-  "subscription_disclaimer": "Die erste Zahlung wird 30 Tage nach der Kaufbestätigung Ihrem $account Konto belastet. Das Abonnement wird automatisch erneuert, es sei denn, es wird mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums gekündigt. Ihr Konto wird innerhalb von 24 Stunden vor Ablauf des laufenden Zeitraums für die Erneuerung belastet. Sie können Ihre Abonnements verwalten und kündigen, indem Sie nach dem Kauf Ihre Kontoeinstellungen auf dem $store aufrufen.",
+  "subscription_disclaimer_android": "Die erste Zahlung wird 30 Tage nach der Kaufbestätigung Ihrem Google Play-Konto belastet. Das Abonnement wird automatisch erneuert, es sei denn, es wird mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums gekündigt. Ihr Konto wird innerhalb von 24 Stunden vor Ablauf des laufenden Zeitraums für die Erneuerung belastet. Sie können Ihre Abonnements verwalten und kündigen, indem Sie nach dem Kauf zu Ihren Kontoeinstellungen im Google Play Store wechseln.",
+  "subscription_disclaimer_ios": "Die Zahlung wird Ihrem Apple ID-Konto nach der Kaufbestätigung in Rechnung gestellt. Das Abonnement wird automatisch erneuert, es sei denn, es wird mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums gekündigt. Ihr Konto wird innerhalb von 24 Stunden vor Ablauf des laufenden Zeitraums für die Erneuerung belastet. Sie können Ihre Abonnements verwalten und kündigen, indem Sie nach dem Kauf Ihre Kontoeinstellungen im App Store aufrufen.",
 
   "terms_of_use": "Nutzungsbedingungen",
   "privacy_policy": "Datenschutz-Bestimmungen",

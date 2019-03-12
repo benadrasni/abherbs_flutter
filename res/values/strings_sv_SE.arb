@@ -270,7 +270,8 @@
   "subscription_intro3": "Om du fortfarande tvekar att träffa knappen nedan finns det en testperiod på 30 dagar för båda prenumerationerna.",
   "subscription_period_month": "månad",
   "subscription_period_year": "år",
-  "subscription_disclaimer": "Första betalningen debiteras ditt $account -konto 30 dagar efter bekräftelsen av inköpet. Prenumerationen förnyas automatiskt om den inte längre är inställd minst 24 timmar före slutet av den aktuella perioden. Ditt konto debiteras för förnyelse inom 24 timmar före slutet av den aktuella perioden. Du kan hantera och avbryta dina prenumerationer genom att gå till dina kontoinställningar på $store efter inköpet.",
+  "subscription_disclaimer_android": "Första betalningen debiteras på ditt Google Play-konto 30 dagar efter bekräftelsen på inköpet. Prenumerationen förnyas automatiskt om den inte längre är inställd minst 24 timmar före slutet av den aktuella perioden. Ditt konto debiteras för förnyelse inom 24 timmar före slutet av den aktuella perioden. Du kan hantera och avbryta dina prenumerationer genom att gå till dina kontoinställningar i Google Play Butik efter köp.",
+  "subscription_disclaimer_ios": "Betalningen debiteras på ditt Apple ID-konto efter bekräftelse på köp. Prenumerationen förnyas automatiskt om den inte längre är inställd minst 24 timmar före slutet av den aktuella perioden. Ditt konto debiteras för förnyelse inom 24 timmar före slutet av den aktuella perioden. Du kan hantera och avbryta dina prenumerationer genom att gå till dina kontoinställningar på App Store efter inköpet.",
 
   "terms_of_use": "Villkor",
   "privacy_policy": "Integritetspolicy",

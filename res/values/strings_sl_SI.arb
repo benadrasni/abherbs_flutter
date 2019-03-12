@@ -270,7 +270,8 @@
   "subscription_intro3": "Če se še vedno obotavljate na spodnji gumb, je za obe naročnini na voljo 30-dnevno poskusno obdobje.",
   "subscription_period_month": "mesec",
   "subscription_period_year": "leto",
-  "subscription_disclaimer": "Prvo plačilo se zaračuna vašemu računu $account 30 dni po potrditvi nakupa. Naročnina se samodejno obnovi, razen če je preklicana vsaj 24 ur pred koncem trenutnega obdobja. Vaš račun bo zaračunan za podaljšanje v 24 urah pred koncem trenutnega obdobja. Naročnine lahko upravljate in prekličete tako, da po nakupu obiščete nastavitve računa na $store.",
+  "subscription_disclaimer_android": "Prvo plačilo bo zaračunano vašemu računu Google Play 30 dni po potrditvi nakupa. Naročnina se samodejno obnovi, razen če je preklicana vsaj 24 ur pred koncem trenutnega obdobja. Vaš račun bo zaračunan za podaljšanje v 24 urah pred koncem trenutnega obdobja. Naročnine lahko upravljate in prekličete tako, da po nakupu odprete nastavitve računa v Trgovini Google Play.",
+  "subscription_disclaimer_ios": "Plačilo bo zaračunano na vaš račun Apple ID po potrditvi nakupa. Naročnina se samodejno obnovi, razen če je preklicana vsaj 24 ur pred koncem trenutnega obdobja. Vaš račun bo zaračunan za podaljšanje v 24 urah pred koncem trenutnega obdobja. Naročnine lahko upravljate in prekličete tako, da po nakupu obiščete nastavitve računa na App Store.",
 
   "terms_of_use": "Pogoji uporabe",
   "privacy_policy": "Pravilnik o zasebnosti",

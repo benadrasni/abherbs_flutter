@@ -270,7 +270,8 @@
   "subscription_intro3": "Als je nog steeds aarzelt om op de knop hieronder te klikken, is er een proefperiode van 30 dagen voor beide abonnementen.",
   "subscription_period_month": "maand",
   "subscription_period_year": "jaar",
-  "subscription_disclaimer": "De eerste betaling wordt 30 dagen na de bevestiging van de aankoop in rekening gebracht op uw account voor $account. Abonnement wordt automatisch verlengd, tenzij het ten minste 24 uur voor het einde van de lopende periode wordt geannuleerd. Uw account wordt binnen 24 uur voorafgaand aan het einde van de lopende periode in rekening gebracht voor verlenging. Je kunt je abonnementen beheren en annuleren door na aankoop naar je accountinstellingen op de $store te gaan.",
+  "subscription_disclaimer_android": "De eerste betaling wordt 30 dagen na de bevestiging van de aankoop in rekening gebracht op uw Google Play-account. Abonnement wordt automatisch verlengd, tenzij het ten minste 24 uur voor het einde van de lopende periode wordt geannuleerd. Uw account wordt binnen 24 uur voorafgaand aan het einde van de lopende periode in rekening gebracht voor verlenging. U kunt uw abonnementen beheren en annuleren door na aankoop naar uw accountinstellingen in de Google Play Store te gaan.",
+  "subscription_disclaimer_ios": "De betaling wordt na de bevestiging van de aankoop in rekening gebracht op uw Apple ID-account. Abonnement wordt automatisch verlengd, tenzij het ten minste 24 uur voor het einde van de lopende periode wordt geannuleerd. Uw account wordt binnen 24 uur voorafgaand aan het einde van de lopende periode in rekening gebracht voor verlenging. U kunt uw abonnementen beheren en annuleren door na aankoop naar uw accountinstellingen op de App Store te gaan.",
 
   "terms_of_use": "Gebruiksvoorwaarden",
   "privacy_policy": "Privacybeleid",
