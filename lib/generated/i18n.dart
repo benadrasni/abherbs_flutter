@@ -1906,7 +1906,7 @@ class $ro_RO extends S {
   @override
   String get observation_note => "Locul pentru nota ta privată.";
   @override
-  String get auth_verify_email_title => "Verifica-ti contul";
+  String get auth_verify_email_title => "Verificați-vă contul";
   @override
   String get east_tropical_africa => "Africa de Est tropicală";
   @override
@@ -1962,11 +1962,11 @@ class $ro_RO extends S {
   @override
   String get habitat_rock => "stânci sau munți";
   @override
-  String get photo_search_note => "Aceasta este o caracteristică experimentală care funcționează numai online. Uneori găsește exact ceea ce cauți, uneori chiar și aproape. Mă bazez pe Google aici, deoarece fac toată munca grea. Odată cu trecerea timpului ar trebui să fie mai bine și mai bine, dar nu a fost construită în primul rând pentru recunoașterea florilor. Utilizați-l cu înțelepciune și vă rugăm să nu judeca întreaga aplicație bazată pe acest experiment. În scopuri de calitate, toate rezultatele căutării (nu fotografiile) vor fi salvate.";
+  String get photo_search_note => "Aceasta este o caracteristică experimentală care funcționează numai online. Uneori găsește exact ceea ce cauți, uneori chiar și aproape. Mă bazez pe Google aici, deoarece fac toată munca grea. Odată cu trecerea timpului ar trebui să fie mai bine și mai bine, dar nu a fost construită în primul rând pentru recunoașterea florilor. Utilizați-o cu atenție și vă rugăm să nu judeca întreaga aplicație bazată pe acest experiment. În scopuri de calitate, toate rezultatele căutării (nu fotografiile) vor fi salvate.";
   @override
   String get taxonomy_subserie => "Subserie";
   @override
-  String get observation_no_login => "Observațiile sunt disponibile numai pentru utilizatorii înregistrați. Va rugam sa va logati.";
+  String get observation_no_login => "Observațiile sunt disponibile numai pentru utilizatorii înregistrați. Va rugăm sa va logați.";
   @override
   String get western_south_america => "Vestful America de Sud";
   @override
@@ -2000,7 +2000,7 @@ class $ro_RO extends S {
   @override
   String get product_restore_purchases => "Restaurați achizițiile";
   @override
-  String get auth_reset_password => "Reseteaza parola";
+  String get auth_reset_password => "Resetează parola";
   @override
   String get feedback_title => "Cum să contribuiți";
   @override
@@ -2052,7 +2052,7 @@ class $ro_RO extends S {
   @override
   String get product_subscribe => "Abonati-va";
   @override
-  String get offline_download_success => "Fotografii și ilustrații au fost descărcate cu succes.";
+  String get offline_download_success => "Fotografiile și ilustrațiile au fost descărcate cu succes.";
   @override
   String get auth_verify_email_message => "Linkul pentru a verifica contul a fost trimis la adresa dvs. de e-mail.";
   @override
@@ -2072,7 +2072,7 @@ class $ro_RO extends S {
   @override
   String get auth_verify_phone_number => "Confirmați numărul de telefon";
   @override
-  String get rate => "Review";
+  String get rate => "Revizie";
   @override
   String get pref_language => "Limba preferată";
   @override
@@ -2090,7 +2090,7 @@ class $ro_RO extends S {
   @override
   String get product_search_title => "Căutați în nume sau în taxonomie";
   @override
-  String get observation_not_saved => "Observarea a fost incompletă, astfel încât nu a fost salvată. Locația sau fotografia lipsesc.";
+  String get observation_not_saved => "Observația a fost incompletă, astfel încât nu a fost salvată. Locația sau fotografia lipsesc.";
   @override
   String get feedback_review => "Puteți scrie o recenzie pozitivă.";
   @override
@@ -2104,7 +2104,7 @@ class $ro_RO extends S {
   @override
   String get offline_title => "Modul offline";
   @override
-  String get privacy_policy => "Politica de confidentialitate";
+  String get privacy_policy => "Politica de confidențialitate";
   @override
   String get taxonomy_genus => "Gen";
   @override
@@ -2136,7 +2136,7 @@ class $ro_RO extends S {
   @override
   String get western_indian_ocean => "Oceanul Indian de Vest";
   @override
-  String get feedback => "Feedback / Contribuţie";
+  String get feedback => "Feedback";
   @override
   String get subscription_monthly_description => "Păstrați fotografiile de observare pe toate dispozitivele, consultați observațiile comune - plata lunară.";
   @override
@@ -2178,7 +2178,7 @@ class $ro_RO extends S {
   @override
   String get northern_south_america => "Nord America de Sud";
   @override
-  String get show_original => "Afișați textul English";
+  String get show_original => "Afișați textul în engleză";
   @override
   String get offline_download_message => "Veți descărca 300 MB de fotografii și ilustrații. Verificați dacă dispozitivul dvs. este conectat la Wi-Fi. Sunteți gata pentru descărcare?";
   @override
@@ -2198,7 +2198,7 @@ class $ro_RO extends S {
   @override
   String get west_central_tropical_africa => "Africa de Vest-Central tropicală";
   @override
-  String get observation_photo_duplicate => "Duplicați fotografia. Omit.";
+  String get observation_photo_duplicate => "Fotografie duplicată. Omisiune.";
   @override
   String get subscription => "Abonament";
   @override
@@ -2206,7 +2206,7 @@ class $ro_RO extends S {
   @override
   String get snack_no_flowers => "Nu există criterii de potrivire a florilor.";
   @override
-  String get observation_saved => "Observarea a fost salvată.";
+  String get observation_saved => "Observația a fost salvată.";
   @override
   String get rate_question => "Este această aplicație utilă?";
   @override
@@ -2230,13 +2230,13 @@ class $ro_RO extends S {
   @override
   String get middle_europe => "Europa Centrală";
   @override
-  String get auth_reset_password_email_title => "Reseteaza parola";
+  String get auth_reset_password_email_title => "Resetează parola";
   @override
   String get color_blue => "albastru, violet";
   @override
   String get my_filter => "Filtrul meu";
   @override
-  String get auth_sign_in_text => "Are un cont? Conectați-vă";
+  String get auth_sign_in_text => "Aveți un cont? Conectați-vă";
   @override
   String get petal_5 => "5";
   @override
@@ -2244,7 +2244,7 @@ class $ro_RO extends S {
   @override
   String get color_white => "alb";
   @override
-  String get observation => "Observare";
+  String get observation => "Observație";
   @override
   String get northeastern_usa => "Nord-estul SUA";
   @override
@@ -2322,7 +2322,7 @@ class $ro_RO extends S {
   @override
   String get product_observations_title => "Observaţii";
   @override
-  String get new_version => "Versiunea nouă este disponibilă, actualizați-vă.";
+  String get new_version => "O nouă versiunea este disponibilă, vă rugăm actualizați versiunea aplicației.";
   @override
   String get taxonomy_subfamilia => "Subfamilie";
   @override
@@ -2342,7 +2342,7 @@ class $ro_RO extends S {
   @override
   String get rate_text => "Autor al acestei aplicații este motivată de răspunsul pozitiv din partea utilizatorilor. Trimiteți-i câteva stele prin magazinul de aplicații.";
   @override
-  String get auth_sign_out => "Sign out";
+  String get auth_sign_out => "Delogare";
   @override
   String get south_central_usa => "Sud-central SUA";
   @override
@@ -2352,19 +2352,19 @@ class $ro_RO extends S {
   @override
   String get auth_resend_code => "Retrimiteți codul";
   @override
-  String get rate_later => "Mai tarziu";
+  String get rate_later => "Mai târziu";
   @override
   String get color_message => "Care este culoarea florii? Alege culoarea cea mai apropiată.";
   @override
   String get northeast_tropical_africa => "Africa de Nord-Est tropicală";
   @override
-  String get photo_search_no_login => "Căutarea după fotografie este disponibilă numai pentru utilizatorii înregistrați. Va rugam sa va logati.";
+  String get photo_search_no_login => "Căutarea după fotografie este disponibilă numai pentru utilizatorii înregistrați. Va rugăm sa va logați.";
   @override
   String get observations => "Observaţii";
   @override
   String get product_custom_filter_title => "Filtru customizat";
   @override
-  String get feedback_intro => "Ați contribuit la această aplicație de când ați instalat-o pe dispozitiv, mulțumită. Dacă sunteți în căutarea pentru ceva mai mult, iată câteva opțiuni:";
+  String get feedback_intro => "Ați contribuit la această aplicație de când ați instalat-o pe dispozitiv, mulțumiri. Dacă sunteți în căutarea pentru ceva mai mult, iată câteva opțiuni:";
   @override
   String get filter_distribution => "distribuire";
   @override
@@ -2394,7 +2394,7 @@ class $ro_RO extends S {
   @override
   String get northern_africa => "Africa de Nord";
   @override
-  String get offline_subtitle => "necesită spațiu suplimentar de 300 MB.";
+  String get offline_subtitle => "necesită spațiu suplimentar de 300+ MB.";
   @override
   String get product_no_ads_title => "Nicio reclama nedorită";
   @override
