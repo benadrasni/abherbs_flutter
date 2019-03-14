@@ -17,6 +17,7 @@ import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:exif/exif.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class ObservationEdit extends StatefulWidget {
   final FirebaseUser currentUser;
@@ -35,46 +36,36 @@ class _ObservationEditState extends State<ObservationEdit> {
   GlobalKey<ScaffoldState> _key;
   Observation _observation;
   DateFormat _dateFormat;
-  DateFormat _timeFormat;
   TextEditingController _noteController = TextEditingController();
+  TextEditingController _dateController = TextEditingController();
 
   Future<void> _getImage(GlobalKey<ScaffoldState> _key, ImageSource source) async {
     var image = await ImagePicker.pickImage(source: source);
     if (image != null) {
-      Map<String, IfdTag> exifData = await readExifFromBytes(
-          await image.readAsBytes());
+      Map<String, IfdTag> exifData = await readExifFromBytes(await image.readAsBytes());
       IfdTag dateTime = exifData['Image DateTime'];
       for (String path in _observation.photoPaths) {
         File file = await Offline.getLocalFile(path);
-        Map<String, IfdTag> exifDataFile = await readExifFromBytes(
-            await file.readAsBytes());
+        Map<String, IfdTag> exifDataFile = await readExifFromBytes(await file.readAsBytes());
         IfdTag dateTimeFile = exifDataFile['Image DateTime'];
-        if (dateTime != null && dateTimeFile != null &&
-            dateTime.toString() == dateTimeFile.toString()) {
+        if (dateTime != null && dateTimeFile != null && dateTime.toString() == dateTimeFile.toString()) {
           _key.currentState.showSnackBar(SnackBar(
-            content: Text(S
-                .of(context)
-                .observation_photo_duplicate),
+            content: Text(S.of(context).observation_photo_duplicate),
           ));
           return;
         }
       }
 
       // store file
-      var dir = storageObservations + widget.currentUser.uid + '/' +
-          _observation.plant.replaceAll(' ', '_');
+      var dir = storageObservations + widget.currentUser.uid + '/' + _observation.plant.replaceAll(' ', '_');
       var prefix = "unknown_";
       var names = _observation.plant.toLowerCase().split(' ');
       if (names.length > 1) {
         prefix = names[0].substring(0, 1) + names[1].substring(0, 1) + '_';
       }
       var suffix =
-      image.path.indexOf('.', image.path.lastIndexOf('/')) > -1 ? image.path
-          .substring(image.path.lastIndexOf('.')) : defaultPhotoExtension;
-      var filename = prefix + DateTime
-          .now()
-          .millisecondsSinceEpoch
-          .toString() + suffix;
+          image.path.indexOf('.', image.path.lastIndexOf('/')) > -1 ? image.path.substring(image.path.lastIndexOf('.')) : defaultPhotoExtension;
+      var filename = prefix + DateTime.now().millisecondsSinceEpoch.toString() + suffix;
 
       String rootPath = (await getApplicationDocumentsDirectory()).path;
       await Directory('$rootPath/$dir').create(recursive: true);
@@ -83,12 +74,10 @@ class _ObservationEditState extends State<ObservationEdit> {
 
       // store exif data
       if (exifData != null && exifData.isNotEmpty) {
-        _observation.latitude = getLatitudeFromExif(
-            exifData['GPS GPSLatitudeRef'], exifData['GPS GPSLatitude']);
-        _observation.longitude = getLongitudeFromExif(
-            exifData['GPS GPSLongitudeRef'], exifData['GPS GPSLongitude']);
-        _observation.date =
-            getDateTimeFromExif(exifData['Image DateTime']) ?? DateTime.now();
+        _observation.latitude = getLatitudeFromExif(exifData['GPS GPSLatitudeRef'], exifData['GPS GPSLatitude']);
+        _observation.longitude = getLongitudeFromExif(exifData['GPS GPSLongitudeRef'], exifData['GPS GPSLongitude']);
+        _observation.date = getDateTimeFromExif(exifData['Image DateTime']) ?? DateTime.now();
+        _dateController.text = _dateFormat.format(_observation.date);
       }
       setState(() {});
     }
@@ -162,12 +151,12 @@ class _ObservationEditState extends State<ObservationEdit> {
   @override
   void initState() {
     super.initState();
-    _key = new GlobalKey<ScaffoldState>();
+    _key = GlobalKey<ScaffoldState>();
     _observation = Observation.from(widget.observation);
     initializeDateFormatting();
-    _dateFormat = new DateFormat.yMMMMd(widget.myLocale.toString());
-    _timeFormat = new DateFormat.Hms(widget.myLocale.toString());
-    _noteController.text =  _observation.note;
+    _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString()).add_jm();
+    _noteController.text = _observation.note;
+    _dateController.text = _dateFormat.format(_observation.date);
   }
 
   @override
@@ -213,18 +202,27 @@ class _ObservationEditState extends State<ObservationEdit> {
                 labelLocal = snapshot.data;
               }
             }
-            return ListTile(
-              title: Text(
-                labelLocal,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-              subtitle: labelLocal != _observation.plant ? Text(_observation.plant) : null,
-              trailing: Column(
-                children: [
-                  Text(_dateFormat.format(_observation.date)),
-                  Text(_timeFormat.format(_observation.date)),
-                ],
-              ),
+            return Column(
+              children: [
+                ListTile(
+                  title: Text(
+                    labelLocal,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                  ),
+                  subtitle: labelLocal != _observation.plant ? Text(_observation.plant) : null,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: DateTimePickerFormField(
+                    inputType: InputType.both,
+                    format: _dateFormat,
+                    editable: false,
+                    controller: _dateController,
+                    onChanged: (dt) => setState(() => _observation.date = dt ?? DateTime.now()),
+                  ),
+                ),
+                //Text(_timeFormat.format(_observation.date)),
+              ],
             );
           }),
     );
@@ -236,10 +234,10 @@ class _ObservationEditState extends State<ObservationEdit> {
           fit: BoxFit.contain,
           width: mapWidth,
           height: mapHeight,
-          placeholder: (context, url) =>  Container(
-            width: mapWidth,
-            height: mapHeight,
-          ),
+          placeholder: (context, url) => Container(
+                width: mapWidth,
+                height: mapHeight,
+              ),
           imageUrl: getMapImageUrl(_observation.latitude, _observation.longitude, mapWidth, mapHeight),
         ),
         onPressed: () {
@@ -370,20 +368,22 @@ class _ObservationEditState extends State<ObservationEdit> {
         ],
       ),
       floatingActionButton: Container(
-    height: 70.0,
-    width: 70.0,
-    child: FittedBox(
-    fit: BoxFit.fill,
-    child: FloatingActionButton(
-        onPressed: () {
-          _saveObservation(context).then((result) {
-            if (result) {
-              Navigator.of(context).pop(true);
-            }
-          });
-        },
-        child: Icon(Icons.save),
-      ),),),
+        height: 70.0,
+        width: 70.0,
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: FloatingActionButton(
+            onPressed: () {
+              _saveObservation(context).then((result) {
+                if (result) {
+                  Navigator.of(context).pop(true);
+                }
+              });
+            },
+            child: Icon(Icons.save),
+          ),
+        ),
+      ),
     );
   }
 }
