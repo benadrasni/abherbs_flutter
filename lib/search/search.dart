@@ -2,17 +2,13 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/offline.dart';
+import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/search/search_names.dart';
 import 'package:abherbs_flutter/search/search_taxonomy.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
-
-final searchReference = FirebaseDatabase.instance.reference().child(firebaseSearch);
-final apgIVReference = FirebaseDatabase.instance.reference().child(firebaseAPGIV);
-final translationsTaxonomyReference = FirebaseDatabase.instance.reference().child(firebaseTranslationsTaxonomy);
 
 class Search extends StatefulWidget {
   final Locale myLocale;
@@ -32,7 +28,7 @@ class _SearchState extends State<Search> {
   Future<Map<dynamic, dynamic>> _apgIVF;
   Future<Map<dynamic, dynamic>> _translationsTaxonomyF;
 
-  final TextEditingController _filter = new TextEditingController();
+  final TextEditingController _filter = TextEditingController();
   String _searchText = '';
 
   _SearchState() {

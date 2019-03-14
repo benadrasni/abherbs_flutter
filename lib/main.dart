@@ -3,13 +3,14 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/offline.dart';
-import 'package:abherbs_flutter/prefs.dart';
-import 'package:abherbs_flutter/purchases.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/splash.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -55,8 +56,10 @@ class _AppState extends State<App> {
 
   onChangeLanguage(String language) {
     setState(() {
+      translationCache = {};
       _localeF = Future<Locale>(() {
-        return language == null || language.isEmpty ? null : Locale(language, '');
+        var languageCountry = language?.split('_');
+        return language == null || language.isEmpty ? null : Locale(languageCountry[0], languageCountry[1]);
       });
     });
   }
@@ -72,24 +75,22 @@ class _AppState extends State<App> {
     if (Platform.isIOS) _iOSPermission();
 
     _firebaseMessaging.getToken().then((token) {
+      Prefs.setString(keyToken, token);
       print('token $token');
     });
 
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-//        TODO: whether to show upcoming notification or not when app is active
-//        setState(() {
-//          _notification = message['data'];
-//        });
+        print(message);
       },
       onResume: (Map<String, dynamic> message) async {
         setState(() {
-          _notificationData = message;
+          _notificationData = Map.from(message[notificationAttributeData]);
         });
       },
       onLaunch: (Map<String, dynamic> message) async {
         setState(() {
-          _notificationData = message;
+          _notificationData = Map.from(Platform.isIOS ? message : message[notificationAttributeData]);
         });
       },
     );
@@ -131,6 +132,40 @@ class _AppState extends State<App> {
         throw PlatformException(code: Platform.operatingSystem, message: "platform not supported");
       }
     });
+
+    // check promotions
+    rootReference.child(firebasePromotions).once().then((DataSnapshot snapshot) {
+      print(snapshot);
+      if (snapshot.value != null) {
+        if (snapshot.value[firebaseAttributeObservations] != null) {
+          var observationsFrom = DateTime.parse(snapshot.value[firebaseAttributeObservations][firebaseAttributeFrom]);
+          var observationsTo = DateTime.parse(snapshot.value[firebaseAttributeObservations][firebaseAttributeTo]);
+
+          var currentDate = DateTime.now();
+          Purchases.observationPromotionFrom = observationsFrom;
+          Purchases.observationPromotionTo = observationsTo;
+          Purchases.isObservationPromotion = currentDate.isAfter(observationsFrom) && currentDate.isBefore(observationsTo.add(Duration(days: 1)));
+        }
+        if (snapshot.value[firebaseAttributeSearch] != null) {
+          var searchFrom = DateTime.parse(snapshot.value[firebaseAttributeSearch][firebaseAttributeFrom]);
+          var searchTo = DateTime.parse(snapshot.value[firebaseAttributeSearch][firebaseAttributeTo]);
+
+          var currentDate = DateTime.now();
+          Purchases.searchPromotionFrom = searchFrom;
+          Purchases.searchPromotionTo = searchTo;
+          Purchases.isSearchPromotion = currentDate.isAfter(searchFrom) && currentDate.isBefore(searchTo.add(Duration(days: 1)));
+        }
+        if (snapshot.value[firebaseAttributeSearchByPhoto] != null) {
+          var searchByPhotoFrom = DateTime.parse(snapshot.value[firebaseAttributeSearchByPhoto][firebaseAttributeFrom]);
+          var searchByPhotoTo = DateTime.parse(snapshot.value[firebaseAttributeSearchByPhoto][firebaseAttributeTo]);
+
+          var currentDate = DateTime.now();
+          Purchases.searchByPhotoPromotionFrom = searchByPhotoFrom;
+          Purchases.searchByPhotoPromotionTo = searchByPhotoTo;
+          Purchases.isSearchByPhotoPromotion = currentDate.isAfter(searchByPhotoFrom) && currentDate.isBefore(searchByPhotoTo.add(Duration(days: 1)));
+        }
+      }
+    });
   }
 
   @override
@@ -142,30 +177,76 @@ class _AppState extends State<App> {
 
     _firebaseMessaging = FirebaseMessaging();
     _firebaseAnalytics = FirebaseAnalytics();
+
     _localeF = Prefs.getStringF(keyPreferredLanguage).then((String language) {
-      return language.isEmpty ? null : Locale(language, '');
+      var languageCountry = language.split('_');
+      return languageCountry.length < 2 ? null : Locale(languageCountry[0], languageCountry[1]);
     });
 
-    Prefs.getIntF(keyRateCount, rateCountInitial).then((value) {
-      if (value < 0) {
+    Prefs.getStringF(keyRateCount, rateCountInitial.toString()).then((value) {
+      if (int.parse(value) < 0) {
         Prefs.getStringF(keyRateState, rateStateInitial).then((value) {
           if (value == rateStateInitial) {
             Prefs.setString(keyRateState, rateStateShould);
           }
         });
       } else {
-        Prefs.setInt(keyRateCount, value - 1);
+        Prefs.setString(keyRateCount, (int.parse(value) - 1).toString());
       }
+    }).catchError((_) {
+      // deal with previous int shared preferences
+      Prefs.setString(keyRateCount, rateCountInitial.toString());
     });
 
     _firebaseCloudMessagingListeners();
   }
 
+  Locale _localeResolutionCallback(Locale locale, Locale deviceLocale, Iterable<Locale> supportedLocales) {
+    Locale resultLocale = locale;
+    if (resultLocale == null) {
+      Map<String, Locale> defaultLocale = {};
+      for (Locale locale in supportedLocales) {
+        if ((locale.languageCode == 'en' && locale.countryCode == 'US')
+          || (locale.languageCode == 'ar' && locale.countryCode == 'EG')
+          || (locale.languageCode == 'de' && locale.countryCode == 'DE')
+          || (locale.languageCode == 'es' && locale.countryCode == 'ES')
+          || (locale.languageCode == 'fr' && locale.countryCode == 'FR')
+          || (locale.languageCode == 'pt' && locale.countryCode == 'PT')
+          || (locale.languageCode == 'it' && locale.countryCode == 'IT')
+          || (locale.languageCode == 'ru' && locale.countryCode == 'RU')
+          || (locale.languageCode == 'sr' && locale.countryCode == 'RS')
+          ) {
+          defaultLocale[locale.languageCode] = locale;
+        } else if (!['en', 'ar', 'de', 'es', 'fr', 'pt', 'it', 'ru', 'sr'].contains(locale.languageCode)) {
+          defaultLocale[locale.languageCode] = locale;
+        }
+
+        if (locale.languageCode == deviceLocale.languageCode && locale.countryCode == deviceLocale.countryCode) {
+          resultLocale = locale;
+          break;
+        }
+      }
+      if (resultLocale == null) {
+        for (Locale locale in supportedLocales) {
+          if (locale.languageCode == deviceLocale.languageCode) {
+            resultLocale = defaultLocale[locale.languageCode];
+            break;
+          }
+        }
+      }
+      if (resultLocale == null) {
+        resultLocale = defaultLocale[languageEnglish];
+      }
+    }
+    Prefs.setStringList(keyLanguageAndCountry, [resultLocale.languageCode, resultLocale.countryCode]);
+    return resultLocale;
+  }
+
   @override
-  void dispose() async {
+  void dispose() {
     Prefs.dispose();
     Ads.hideBannerAd();
-    await FlutterInappPurchase.endConnection;
+    FlutterInappPurchase.endConnection;
     super.dispose();
   }
 
@@ -180,27 +261,7 @@ class _AppState extends State<App> {
               _notificationData = null;
               return MaterialApp(
                 localeResolutionCallback: (deviceLocale, supportedLocales) {
-                  if (snapshot.data == null) {
-                    Locale defaultLocale;
-                    Locale resultLocale;
-                    for (Locale locale in supportedLocales) {
-                      if (locale.languageCode == 'en' && locale.countryCode == 'US') {
-                        defaultLocale = locale;
-                      }
-
-                      if (locale.countryCode.isEmpty && deviceLocale.languageCode == locale.languageCode) {
-                        resultLocale = locale;
-                      }
-                    }
-                    if (resultLocale == null) {
-                      resultLocale = defaultLocale;
-                    }
-                    Prefs.setString(keyLanguage, resultLocale.languageCode);
-                    return resultLocale;
-                  } else {
-                    Prefs.setString(keyLanguage, snapshot.data.languageCode);
-                    return snapshot.data;
-                  }
+                  return _localeResolutionCallback(snapshot.data, deviceLocale, supportedLocales);
                 },
                 debugShowCheckedModeBanner: false,
                 localizationsDelegates: [

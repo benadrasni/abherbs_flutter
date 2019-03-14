@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/plant_list.dart';
-import 'package:abherbs_flutter/preferences.dart';
-import 'package:abherbs_flutter/prefs.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/settings/preferences.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class Splash extends StatefulWidget {
@@ -20,15 +21,15 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
 
-  startTime() async {
-    var _duration = new Duration(milliseconds: 300);
+  _redirect(BuildContext context) async {
+    var _duration = Duration(milliseconds: timer);
     var firstRoute = await _findFirstRoute();
-    return new Timer(_duration, () {
+    return Timer(_duration, () {
       Navigator.pushReplacement(context, firstRoute);
     });
   }
 
-  Future<MaterialPageRoute<dynamic>> _getFirstFilterRoute() {
+  Future<MaterialPageRoute<dynamic>> _getFirstFilterRoute([MaterialPageRoute<dynamic> redirect]) {
     return Prefs.getBoolF(keyAlwaysMyRegion, false).then((alwaysMyRegionValue) {
       Map<String, String> filter = {};
       if (alwaysMyRegionValue) {
@@ -37,12 +38,12 @@ class _SplashState extends State<Splash> {
             filter[filterDistribution] = myRegionValue;
           }
           return Future<MaterialPageRoute<dynamic>>(() {
-            return getFirstFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, filter);
+            return getFirstFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, filter, redirect);
           });
         });
       } else {
         return Future<MaterialPageRoute<dynamic>>(() {
-          return getFirstFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, filter);
+          return getFirstFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, filter, redirect);
         });
       }
     });
@@ -70,9 +71,8 @@ class _SplashState extends State<Splash> {
               String count = widget.notificationData['count'];
               String path = widget.notificationData['path'];
               if (count != null && path != null) {
-                return Future<MaterialPageRoute<dynamic>>(() {
-                  return MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, {}, count, path));
-                });
+                return _getFirstFilterRoute(MaterialPageRoute(
+                    builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, {}, count, path)));
               }
               return _getFirstFilterRoute();
             default:
@@ -84,8 +84,13 @@ class _SplashState extends State<Splash> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) => _redirect(context));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    startTime();
     return Scaffold(
       body: Center(
         child: Image(
