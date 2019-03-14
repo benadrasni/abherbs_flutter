@@ -1,21 +1,25 @@
 import 'package:abherbs_flutter/ads.dart';
-import 'package:abherbs_flutter/enhancements.dart';
 import 'package:abherbs_flutter/feedback.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/legend.dart';
-import 'package:abherbs_flutter/preferences.dart';
+import 'package:abherbs_flutter/purchase/enhancements.dart';
+import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/signin/sign_in.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class AppDrawer extends StatefulWidget {
+  final FirebaseUser currentUser;
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final void Function() settingsCallback;
-  AppDrawer(this.onChangeLanguage, this.onBuyProduct, this.filter, this.settingsCallback);
+  AppDrawer(this.currentUser, this.onChangeLanguage, this.onBuyProduct, this.filter, this.settingsCallback);
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
@@ -40,6 +44,53 @@ class _AppDrawerState extends State<AppDrawer> {
     );
     Locale myLocale = Localizations.localeOf(context);
     var listItems = <Widget>[];
+
+    listItems.add(Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).accentColor,
+      ),
+      child: Column(children: [
+        Container(
+          padding: EdgeInsets.only(left: 10.0, right: 10.0),
+          child: ListTile(
+            leading: Icon(Icons.person, color: Colors.white,),
+            title: Text(
+              widget.currentUser?.displayName ?? '',
+              style: TextStyle(color: Colors.white),
+            ),
+            subtitle: Text(
+              widget.currentUser?.email ?? widget.currentUser?.phoneNumber ?? '',
+              style: TextStyle(color: Colors.white70),
+            ),
+            onTap: () {},
+          ),
+        ),
+        Container(
+          alignment: Alignment(1.0, 1.0),
+          child: FlatButton(
+            child: Text(
+              widget.currentUser == null ? S.of(context).auth_sign_in : S.of(context).auth_sign_out,
+              textAlign: TextAlign.end,
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () {
+              if (widget.currentUser == null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignInScreen()),
+                ).then((result) {
+                  Navigator.pop(context);
+                });
+              } else {
+                Auth.signOut(); //logout
+                Navigator.pop(context);
+              }
+            },
+          ),
+        ),
+      ]),
+    ));
+
     listItems.addAll(Preferences.myFilterAttributes.map((attribute) {
       return ListTile(
         leading: getFilterLeading(context, attribute),
@@ -47,7 +98,7 @@ class _AppDrawerState extends State<AppDrawer> {
           getFilterText(context, attribute),
           style: drawerTextStyle,
         ),
-        subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ""),
+        subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ''),
         onTap: () {
           Navigator.pop(context);
           onLeftNavigationTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, attribute);
@@ -59,6 +110,7 @@ class _AppDrawerState extends State<AppDrawer> {
       color: Theme.of(context).buttonColor,
     ));
     listItems.add(ListTile(
+      dense: true,
       title: Text(
         S.of(context).enhancements,
         style: drawerTextStyle,
@@ -73,6 +125,7 @@ class _AppDrawerState extends State<AppDrawer> {
       },
     ));
     listItems.add(ListTile(
+      dense: true,
       title: Text(
         S.of(context).settings,
         style: drawerTextStyle,
@@ -90,6 +143,7 @@ class _AppDrawerState extends State<AppDrawer> {
       },
     ));
     listItems.add(ListTile(
+      dense: true,
       title: Text(
         S.of(context).legend,
         style: drawerTextStyle,
@@ -111,13 +165,14 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => FeedbackScreen()),
+          MaterialPageRoute(builder: (context) => FeedbackScreen(widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
         ).then((result) {
           Navigator.pop(context);
         });
       },
     ));
     listItems.add(ListTile(
+      dense: true,
       title: Text(
         S.of(context).help,
         style: drawerTextStyle,
@@ -128,6 +183,7 @@ class _AppDrawerState extends State<AppDrawer> {
       },
     ));
     listItems.add(ListTile(
+      dense: true,
       title: Text(
         S.of(context).about,
         style: drawerTextStyle,

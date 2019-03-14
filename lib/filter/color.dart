@@ -2,16 +2,20 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/ads.dart';
+import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/offline.dart';
+import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/plant_list.dart';
-import 'package:abherbs_flutter/preferences.dart';
-import 'package:abherbs_flutter/prefs.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/settings/preferences.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:package_info/package_info.dart';
 
@@ -19,29 +23,39 @@ class Color extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
-  Color(this.onChangeLanguage, this.onBuyProduct, this.filter);
+  final MaterialPageRoute<dynamic> redirect;
+  Color(this.onChangeLanguage, this.onBuyProduct, this.filter, this.redirect);
 
   @override
   _ColorState createState() => _ColorState();
 }
 
 class _ColorState extends State<Color> {
-  DatabaseReference _countsReference;
-  Future<int> _count;
+  GlobalKey<ScaffoldState> _key;
+  StreamSubscription<FirebaseUser> _listener;
+  FirebaseUser _currentUser;
+  Future<int> _countF;
   Future<String> _rateStateF;
   Future<bool> _isNewVersionF;
   Map<String, String> _filter;
-  GlobalKey<ScaffoldState> _key;
+
+  _redirect(BuildContext context) {
+    // redirect to route from notification
+    if (widget.redirect != null) {
+      Navigator.push(context, widget.redirect);
+    }
+  }
 
   _navigate(String value) {
     var newFilter = new Map<String, String>();
     newFilter.addAll(_filter);
     newFilter[filterColor] = value;
 
-    _countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
+    countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
+          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
+              .then((value) {
             Ads.showBannerAd(this);
           });
         } else {
@@ -54,67 +68,28 @@ class _ColorState extends State<Color> {
   }
 
   _setCount() {
-    _count = _countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
+    _countF = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
       return snapshot.value;
     });
   }
 
-  Future<void> _rateDialog() async {
-    return showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(S.of(context).rate_question),
-          content: Text(S.of(context).rate_text),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(S.of(context).rate_never),
-              onPressed: () {
-                Prefs.setString(keyRateState, rateStateNever).then((value) {
-                  Navigator.of(context).pop();
-                }).catchError((error) {
-                  Navigator.of(context).pop();
-                });
-              },
-            ),
-            FlatButton(
-              child: Text(S.of(context).rate_later),
-              onPressed: () {
-                Prefs.setInt(keyRateCount, rateCountInitial);
-                Prefs.setString(keyRateState, rateStateInitial).then((value) {
-                  Navigator.of(context).pop();
-                }).catchError((error) {
-                  Navigator.of(context).pop();
-                });
-              },
-            ),
-            FlatButton(
-              child: Text(S.of(context).rate),
-              onPressed: () {
-                Prefs.setString(keyRateState, rateStateDid).then((value) {
-                  Navigator.of(context).pop();
-                }).catchError((error) {
-                  Navigator.of(context).pop();
-                });
-                if (Platform.isAndroid) {
-                  launchURL(playStore);
-                } else {
-                  launchURL(appStore);
-                }
-              },
-            ),
-          ],
-        );
-      },
-    );
+  _onAuthStateChanged(FirebaseUser user) {
+    setState(() {
+      _currentUser = user;
+    });
+  }
+
+  void _checkCurrentUser() async {
+    _currentUser = await Auth.getCurrentUser();
+    _listener = Auth.subscribe(_onAuthStateChanged);
   }
 
   @override
   void initState() {
     super.initState();
+    _checkCurrentUser();
     Offline.setKeepSynced(1, true);
-    _countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
+
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterColor);
@@ -133,7 +108,17 @@ class _ColorState extends State<Color> {
 
     _setCount();
 
-    Ads.showBannerAd(this);
+    if (widget.redirect == null) {
+      Ads.showBannerAd(this);
+    }
+
+    SchedulerBinding.instance.addPostFrameCallback((_) => _redirect(context));
+  }
+
+  @override
+  void dispose() {
+    _listener.cancel();
+    super.dispose();
   }
 
   @override
@@ -247,7 +232,7 @@ class _ColorState extends State<Color> {
                       RaisedButton(
                         child: Text(S.of(context).yes),
                         onPressed: () {
-                          _rateDialog().then((_) {
+                          rateDialog(context).then((_) {
                             setState(() {
                               _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
                             });
@@ -264,7 +249,7 @@ class _ColorState extends State<Color> {
                               });
                             }
                           });
-                          Prefs.setInt(keyRateCount, rateCountInitial);
+                          Prefs.setString(keyRateCount, rateCountInitial.toString());
                         },
                       ),
                     ],
@@ -330,9 +315,9 @@ class _ColorState extends State<Color> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
-        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
+        actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
+      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -353,8 +338,8 @@ class _ColorState extends State<Color> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(
-              context, widget.onChangeLanguage, widget.onBuyProduct, _filter, index, Preferences.myFilterAttributes.indexOf(filterColor));
+          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, index,
+              Preferences.myFilterAttributes.indexOf(filterColor));
         },
       ),
       floatingActionButton: Container(
@@ -364,7 +349,7 @@ class _ColorState extends State<Color> {
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(
-              future: _count,
+              future: _countF,
               builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.active:
@@ -381,7 +366,8 @@ class _ColorState extends State<Color> {
                         onPressed: () {
                           Navigator.push(
                             mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                            MaterialPageRoute(
+                                builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
                           ).then((value) {
                             Ads.showBannerAd(this);
                           });

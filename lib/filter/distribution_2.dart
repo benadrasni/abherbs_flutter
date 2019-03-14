@@ -5,13 +5,13 @@ import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
-import 'package:abherbs_flutter/preferences.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/settings/preferences.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
-
-final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
 class Distribution2 extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -25,7 +25,9 @@ class Distribution2 extends StatefulWidget {
 }
 
 class _Distribution2State extends State<Distribution2> {
-  Future<int> _count;
+  StreamSubscription<FirebaseUser> _listener;
+  FirebaseUser _currentUser;
+  Future<int> _countF;
   GlobalKey<ScaffoldState> _key;
 
   void _navigate(String value) {
@@ -36,14 +38,13 @@ class _Distribution2State extends State<Distribution2> {
     countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter)).then((value) {
+          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
+              .then((value) {
             Ads.showBannerAd(this);
           });
         } else {
           _key.currentState.showSnackBar(SnackBar(
-            content: Text(S
-                .of(context)
-                .snack_no_flowers),
+            content: Text(S.of(context).snack_no_flowers),
           ));
         }
       }
@@ -51,7 +52,7 @@ class _Distribution2State extends State<Distribution2> {
   }
 
   _setCount() {
-    _count = countsReference.child(getFilterKey(widget.filter)).once().then((DataSnapshot snapshot) {
+    _countF = countsReference.child(getFilterKey(widget.filter)).once().then((DataSnapshot snapshot) {
       return snapshot.value;
     });
   }
@@ -160,10 +161,22 @@ class _Distribution2State extends State<Distribution2> {
             }).toList()));
   }
 
+  _onAuthStateChanged(FirebaseUser user) {
+    setState(() {
+      _currentUser = user;
+    });
+  }
+
+  _checkCurrentUser() async {
+    _currentUser = await Auth.getCurrentUser();
+    _listener = Auth.subscribe(_onAuthStateChanged);
+  }
+
   @override
   void initState() {
     super.initState();
-    _key = new GlobalKey<ScaffoldState>();
+    _checkCurrentUser();
+    _key = GlobalKey<ScaffoldState>();
 
     _setCount();
 
@@ -173,6 +186,7 @@ class _Distribution2State extends State<Distribution2> {
   @override
   void dispose() {
     filterRoutes[filterDistribution2] = null;
+    _listener.cancel();
     super.dispose();
   }
 
@@ -183,9 +197,9 @@ class _Distribution2State extends State<Distribution2> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_distribution),
-        actions: getActions(context, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
+        actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
       ),
-      drawer: AppDrawer(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
+      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: Preferences.myFilterAttributes.indexOf(filterDistribution),
@@ -202,7 +216,7 @@ class _Distribution2State extends State<Distribution2> {
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(
-              future: _count,
+              future: _countF,
               builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.active:
@@ -220,7 +234,8 @@ class _Distribution2State extends State<Distribution2> {
                           filterRoutes[filterDistribution2] = null;
                           Navigator.pushReplacement(
                             mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
+                            MaterialPageRoute(
+                                builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

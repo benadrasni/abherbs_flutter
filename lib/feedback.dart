@@ -2,10 +2,17 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/utils.dart';
+import 'package:abherbs_flutter/purchase/enhancements.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class FeedbackScreen extends StatelessWidget {
+  final void Function(String) onChangeLanguage;
+  final void Function(PurchasedItem) onBuyProduct;
+  final Map<String, String> filter;
+  FeedbackScreen(this.onChangeLanguage, this.onBuyProduct, this.filter);
+
   @override
   Widget build(BuildContext context) {
     final key = new GlobalKey<ScaffoldState>();
@@ -149,19 +156,18 @@ class FeedbackScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10.0),
-              GestureDetector(
-                onTap: () {
-                  if (Platform.isAndroid) {
-                    launchURL(playStorePlus);
-                  } else {
-                    key.currentState.showSnackBar(new SnackBar(
-                      content: new Text(S.of(context).snack_publish),
-                    ));
-                  }
+              RaisedButton(
+                color: Theme.of(context).accentColor,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+                  );
                 },
-                child: Platform.isAndroid
-                    ? Image(image: AssetImage('res/images/google_play.png'))
-                    : Image(image: AssetImage('res/images/app_store.png')),
+                child: Text(
+                  S.of(context).enhancements,
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ]),
           ),
