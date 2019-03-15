@@ -286,6 +286,6 @@
   "photo_search_no_login": "Search by photo is available only for logged users. Please log in.",
   "photo_search_failed": "Search by photo failed. Check your internet connection and try again.",
   "photo_to_search_by": "Photo to search by",
-  "photo_search_note": "This is an experimental feature which works only online. Sometimes it finds exactly what you're looking for, sometimes not even close. I'm totally rely on Google here since they're doing all the hard work. As time goes it should be better and better, but it wasn't primarily built for flower's recognition. Use it wisely and please don't judge the whole application based on this experiment. For quality purposes all search results (not photos) will be saved.",
+  "photo_search_note": "This is an experimental feature which works only online. Sometimes it finds exactly what you're looking for, sometimes not even close. I'm totally relying on Google here since they're doing all the hard work. As time goes it should be better and better, but it wasn't primarily built for flower's recognition. Use it wisely and please don't judge the whole application based on this experiment. For quality purposes all search results (not photos) will be saved.",
   "photo_search_empty": "Google AI (artificial intelligence) didn't recognize any particular flower on the picture. Try again with different angle, distance or light conditions. If you already did it looks like AI overlord won't come anytime soon."
 }

@@ -9,6 +9,7 @@ import 'package:abherbs_flutter/observations/observations.dart';
 import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
+import 'package:abherbs_flutter/search/search_photo.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -363,6 +364,33 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
     Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
   DateFormat dateFormat = new DateFormat.yMMMMd(Localizations.localeOf(mainContext).toString());
   var _actions = <Widget>[];
+  _actions.add(IconButton(
+    icon: getIcon(productPhotoSearch),
+    onPressed: () {
+      if (Purchases.isPhotoSearch()) {
+        if (currentUser != null) {
+          Navigator.push(
+            mainContext,
+            MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+          );
+        } else {
+          photoSearchDialog(mainContext, key);
+        }
+      } else if (Purchases.isSearchByPhotoPromotion != null && Purchases.isSearchByPhotoPromotion) {
+        infoDialog(mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo))).then((value) {
+          Navigator.push(
+            mainContext,
+            MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+          );
+        });
+      } else {
+        Navigator.push(
+          mainContext,
+          MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+        );
+      }
+    },
+  ));
   _actions.add(IconButton(
     icon: getIcon(productObservations),
     onPressed: () {
