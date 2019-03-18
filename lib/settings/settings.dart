@@ -33,6 +33,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<bool> _alwaysMyRegionF;
   Future<List<String>> _myFilterF;
   Future<bool> _offlineF;
+  Future<bool> _scaleDownPhotosF;
 
   void _resetPrefLanguage() {
     Prefs.setString(keyPreferredLanguage, null).then((bool success) {
@@ -96,6 +97,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _myFilterF = Prefs.setStringList(keyMyFilter, filter).then((success) {
         Preferences.myFilterAttributes = filter == null ? filterAttributes : filter;
         return Preferences.myFilterAttributes;
+      });
+    });
+  }
+
+  void _setScaleDownPhotos(bool scaleDownPhotos) {
+    setState(() {
+      _scaleDownPhotosF = Prefs.setBool(keyScaleDownPhotos, scaleDownPhotos).then((success) {
+        return scaleDownPhotos;
       });
     });
   }
@@ -176,6 +185,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _alwaysMyRegionF = Prefs.getBoolF(keyAlwaysMyRegion, false);
     _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes);
     _offlineF = Prefs.getBoolF(keyOffline, false);
+    _scaleDownPhotosF = Prefs.getBoolF(keyScaleDownPhotos, false);
 
     Ads.hideBannerAd();
   }
@@ -394,6 +404,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onTap: () {},
             );
           }));
+    }
+
+    // scale down observation's photos
+    if (Purchases.isObservations()) {
+      widgets.add(ListTile(
+          title: Text(S.of(context).scale_down_photos_title,
+            style: titleTextStyle,
+          ),
+          subtitle: Text(
+            S.of(context).scale_down_photos_subtitle,
+            style: subtitleTextStyle,
+          ),
+          trailing: FutureBuilder<bool>(
+              future: _scaleDownPhotosF,
+              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                bool scaleDownPhotos = false;
+                if (snapshot.connectionState == ConnectionState.done) {
+                  scaleDownPhotos = snapshot.data;
+                }
+                return Switch(
+                  value: scaleDownPhotos,
+                  onChanged: (bool value) {
+                    _setScaleDownPhotos(value);
+                  },
+                );
+              }),
+        )
+      );
     }
 
     return Scaffold(

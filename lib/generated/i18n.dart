@@ -214,6 +214,8 @@ class S implements WidgetsLocalizations {
   String get rate_question => "Is this app helpful?";
   String get rate_text => "Author of this application is fueled by positive response from the users. Please send him some starflowers through application store.";
   String get russian_far_east => "Russian Far East";
+  String get scale_down_photos_subtitle => "Switch on when you don't see your photos after pick.";
+  String get scale_down_photos_title => "Scale down observation's photos";
   String get search => "Search...";
   String get search_names => "Search in names";
   String get search_taxonomy => "Search in taxonomy";

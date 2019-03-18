@@ -47,6 +47,8 @@
   "offline_download_fail": "Download failed. Please check your internet connection or free space on device and try again.",
   "offline_delete_message": "Do you want to delete offline data?",
   "offline_download": "Resume download",
+  "scale_down_photos_title": "Scale down observation's photos",
+  "scale_down_photos_subtitle": "Switch on when you don't see your photos after pick.",
 
   "feedback_intro": "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:",
   "feedback_review": "You can write a positive review.",
