@@ -37,6 +37,7 @@ const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
 const String keyAlwaysMyRegion = "always_my_region";
 const String keyOffline = "offline";
+const String keyScaleDownPhotos = "scale_down_photos";
 const String keyOfflinePlant = "offline_plant";
 const String keyOfflineFamily = "offline_family";
 const String keyOfflineDB = "offline_db";
@@ -78,6 +79,7 @@ const String storageObservations = "observations/";
 const String defaultExtension = ".webp";
 const String defaultPhotoExtension = ".jpg";
 const String thumbnailsDir = "/.thumbnails";
+const double imageSize = 512;
 
 const int firebaseCacheSize = 1024 * 1024 * 20;
 const String firebaseCounts = 'counts_4_v2';
