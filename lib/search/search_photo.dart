@@ -66,6 +66,19 @@ class _SearchPhotoState extends State<SearchPhoto> {
           significantLabels.add(label);
         }
       }
+      // save labels
+      if (significantLabels.length > 0) {
+        usersReference
+            .child(widget.currentUser.uid)
+            .child(firebaseSearchPhoto)
+            .child(DateTime.now().millisecondsSinceEpoch.toString())
+            .set(significantLabels.map((label) {
+          Map<String, dynamic> labelMap = {};
+          labelMap['confidence'] = label.confidence;
+          labelMap['label'] = label.label;
+          return labelMap;
+        }).toList());
+      }
 
       var results = <SearchResult>[];
       for (Label label in significantLabels) {
