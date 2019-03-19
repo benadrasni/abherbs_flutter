@@ -5482,7 +5482,7 @@ class $cs_CZ extends S {
   @override
   String get subscription_info => "Sdílené pozorování jsou přístupné pouze uživatelům s předplatným.";
   @override
-  String get product_photo_search_description => "Budete mít možnost najít květinu podle fotografie. Tato funkce používá umělé inteligence pro určování objektů na fotografiích od Googlu.";
+  String get product_photo_search_description => "Budete mít možnost najít květinu podle fotografie. Tato funkce využívá umělé inteligence pro určování objektů na fotografiích od Googlu.";
   @override
   String get auth_phone => "Přihlásit se pomocí telefonu";
   @override
@@ -7654,7 +7654,7 @@ class $sk_SK extends S {
   @override
   String get subscription_info => "Zdieľané pozorovania sú prístupné iba používateľom s predplatným.";
   @override
-  String get product_photo_search_description => "Budete mať možnosť nájsť kvetinu podľa fotografie. Táto funkcia používa umelú inteligencíu na určovanie objektov na fotografiách od Googlu.";
+  String get product_photo_search_description => "Budete mať možnosť nájsť kvetinu podľa fotografie. Táto funkcia využíva umelú inteligencíu na určovanie objektov na fotografiách od Googlu.";
   @override
   String get auth_phone => "Prihlásiť sa telefónom";
   @override
