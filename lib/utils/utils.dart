@@ -28,7 +28,7 @@ const String productSearch = "search";
 const String productCustomFilter = "custom_filter";
 const String productOffline = "offline";
 const String productObservations = "observations";
-const String productPhotoSearch = "photo_search";
+const String productPhotoSearch = "search_by_photo";
 const String subscriptionMonthly = "store_photos_monthly";
 const String subscriptionYearly = "store_photos_yearly";
 
@@ -307,7 +307,7 @@ String getProductTitle(BuildContext context, String productId, String defaultTit
     case productObservations:
       return S.of(context).product_observations_title;
     case productPhotoSearch:
-      return S.of(context).product_observations_title;
+      return S.of(context).product_photo_search_title;
     case subscriptionMonthly:
       return S.of(context).subscription_monthly_title;
     case subscriptionYearly:
