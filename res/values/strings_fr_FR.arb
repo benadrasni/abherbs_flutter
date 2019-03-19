@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Le lien pour vérifier que le compte a bien été envoyé à votre adresse e-mail.",
   "auth_reset_password_email_title": "Réinitialiser le mot de passe",
   "auth_reset_password_email_message": "Suivez les instructions envoyées à $_email pour réinitialiser votre mot de passe.",
+  "auth_resend_email": "Ré-envoyer l'email",
 
   "auth_verify_phone_number": "Valider le numéro de téléphone",
   "auth_verify_phone_number_title": "Entrez votre numéro de téléphone",

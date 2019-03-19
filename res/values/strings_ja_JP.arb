@@ -81,6 +81,7 @@
   "auth_verify_email_message": "アカウントを確認するためのリンクがあなたのメールアドレスに送信されました。",
   "auth_reset_password_email_title": "パスワードを再設定する",
   "auth_reset_password_email_message": "パスワードをリセットするには、 $_ email に送信された指示に従ってください。",
+  "auth_resend_email": "メールを再送",
 
   "auth_verify_phone_number": "電話番号を確認",
   "auth_verify_phone_number_title": "あなたの電話番号を入力してください",

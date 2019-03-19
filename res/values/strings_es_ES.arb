@@ -81,6 +81,7 @@
   "auth_verify_email_message": "El enlace para verificar la cuenta ha sido enviado a su dirección de correo electrónico.",
   "auth_reset_password_email_title": "Restablecer la contraseña",
   "auth_reset_password_email_message": "Siga las instrucciones enviadas a $_email para restablecer su contraseña.",
+  "auth_resend_email": "Reenviar correo electrónico",
 
   "auth_verify_phone_number": "Verificar número de teléfono",
   "auth_verify_phone_number_title": "Verificar el número de teléfono",

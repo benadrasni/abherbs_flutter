@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Kontot kinnitav link on saadetud teie e-posti aadressile.",
   "auth_reset_password_email_title": "Lähtesta parool",
   "auth_reset_password_email_message": "Parooli lähtestamiseks järgige $_email saadetud juhiseid.",
+  "auth_resend_email": "Saada uuesti e-post",
 
   "auth_verify_phone_number": "Kinnitage telefoninumber",
   "auth_verify_phone_number_title": "Sisesta oma telefoninumber",
@@ -91,7 +92,7 @@
   "auth_incorrect_code": "Vale kood. Proovi uuesti.",
   "auth_sms_terms_of_service": "Puudutades \"Kinnita telefoninumber\", võidakse saata SMS. Võib kehtida sõnumi ja andmeedastuskiirus.",
   "auth_enter_confirmation_code": "Sisestage 6-kohaline kood, mille me saatisime aadressile ",
-  "auth_resend_code": "Koodi uuesti saatmine",
+  "auth_resend_code": "Saada kood uuesti",
 
   "rate_question": "See app kasulik?",
   "rate_text": "Selle rakenduse autorit toetab kasutajate positiivne vastus. Palun saatke talle mõned tähed rakenduste poe kaudu.",

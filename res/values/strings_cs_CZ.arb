@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Na vaši adresu byl odeslán přihlašovací e-mail s dalšími pokyny. Dokončete přihlášení podle instrukcí v e-mailu.",
   "auth_reset_password_email_title": "Obnovit heslo",
   "auth_reset_password_email_message": "Postupujte podle pokynů odeslaných na adresu $_email a obnovte heslo.",
+  "auth_resend_email": "Přeposlat e-mail",
 
   "auth_verify_phone_number": "Ověřit telefonní číslo",
   "auth_verify_phone_number_title": "Zadejte své telefonní číslo",
@@ -91,7 +92,7 @@
   "auth_incorrect_code": "Špatný kód. Zkuste to znovu.",
   "auth_sms_terms_of_service": "Po klepnutí na možnost „Ověřit telefonní číslo” může být odeslána SMS. Mohou být účtovány poplatky za zprávy a data.",
   "auth_enter_confirmation_code": "Zadejte šestimístný kód, který jsme vám zaslali na ",
-  "auth_resend_code": "Znovu zaslat kód",
+  "auth_resend_code": "Přeposlat kód",
 
   "rate_question": "Líbí se vám aplikace?",
   "rate_text": "Autora této aplikace motivuje pozitívny ohlas uživatelů. Pošlete mu, prosím, nejaké květiny (nejlépe hvězdníky) přes obchod s aplikacemi.",

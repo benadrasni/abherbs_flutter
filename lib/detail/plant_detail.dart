@@ -24,6 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:http/http.dart' as http;
+import 'package:connectivity/connectivity.dart';
 
 class PlantDetail extends StatefulWidget {
   final Locale myLocale;
@@ -255,13 +256,19 @@ class _PlantDetailState extends State<PlantDetail> {
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.blue,
         onTap: (index) {
-          if (index == 3 && _currentUser == null) {
-            observationDialog(context, _key);
-          } else {
-            setState(() {
-              _currentIndex = index;
-            });
-          }
+          Connectivity().checkConnectivity().then((result) {
+            if (result == ConnectivityResult.none) {
+              infoDialog(context, S.of(context).no_connection_title, S.of(context).no_connection_content);
+            } else {
+              if (index == 3 && _currentUser == null) {
+                observationDialog(context, _key);
+              } else {
+                setState(() {
+                  _currentIndex = index;
+                });
+              }
+            }
+          });
         },
       ),
     );

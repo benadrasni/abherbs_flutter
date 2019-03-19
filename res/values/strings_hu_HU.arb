@@ -81,6 +81,7 @@
   "auth_verify_email_message": "A fiók ellenőrzésére szolgáló linket elküldtük az e-mail címére.",
   "auth_reset_password_email_title": "Jelszó visszaállítása",
   "auth_reset_password_email_message": "A jelszó visszaállításához kövesse a(z) $_email címre küldött utasításokat.",
+  "auth_resend_email": "E-mail újraküldése",
 
   "auth_verify_phone_number": "Telefonszám ellenőrzése",
   "auth_verify_phone_number_title": "Írja be a telefonszámát",

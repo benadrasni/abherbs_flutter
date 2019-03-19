@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Веза на потврду налога послата је на вашу адресу е-поште.",
   "auth_reset_password_email_title": "Ресетуј лозинка",
   "auth_reset_password_email_message": "Следите упутства која су послата на $_email да бисте поново поставили лозинку.",
+  "auth_resend_email": "Поново пошаљи е-маил",
 
   "auth_verify_phone_number": "Верификуј број телефона",
   "auth_verify_phone_number_title": "Унесите број телефона",

@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Tautan untuk memverifikasi akun telah dikirim ke alamat email Anda.",
   "auth_reset_password_email_title": "Setel Ulang Kata Sandi",
   "auth_reset_password_email_message": "Ikuti instruksi yang dikirim ke $_email untuk mereset kata sandi Anda.",
+  "auth_resend_email": "Kirim ulang email",
 
   "auth_verify_phone_number": "Verifikasi nomor telepon",
   "auth_verify_phone_number_title": "Masukkan nomor telepon",

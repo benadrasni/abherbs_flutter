@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Linkul pentru a verifica contul a fost trimis la adresa dvs. de e-mail.",
   "auth_reset_password_email_title": "Resetează parola",
   "auth_reset_password_email_message": "Urmați instrucțiunile trimise la $_email pentru a vă reseta parola.",
+  "auth_resend_email": "Retrimiteți e-mailul",
 
   "auth_verify_phone_number": "Confirmați numărul de telefon",
   "auth_verify_phone_number_title": "Introduceți un număr de telefon",

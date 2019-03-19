@@ -18,16 +18,16 @@ class Auth {
     return user.uid;
   }
 
-  static Future<String> signInWithEmail(String email, String password) async {
+  static Future<FirebaseUser> signInWithEmail(String email, String password) async {
     FirebaseUser user = await firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
-    return user.uid;
+    return user;
   }
 
-  static Future<String> signUpWithEmail(String email, String password) async {
+  static Future<FirebaseUser> signUpWithEmail(String email, String password) async {
     FirebaseUser user = await firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
-    return user.uid;
+    return user;
   }
 
   static Future<void> resetPassword(String email) async {

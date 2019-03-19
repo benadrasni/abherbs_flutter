@@ -47,6 +47,7 @@ class S implements WidgetsLocalizations {
   String get auth_phone => "Sign in with phone";
   String get auth_phone_hint => "Phone Number";
   String get auth_resend_code => "Resend Code";
+  String get auth_resend_email => "Resend Email";
   String get auth_reset_password => "Reset Password";
   String get auth_reset_password_email_title => "Reset password";
   String get auth_sign_in => "Sign in";
@@ -757,6 +758,8 @@ class $it_IT extends S {
   @override
   String get plant_stem => "Stelo";
   @override
+  String get auth_resend_email => "Rinvia l'e-mail";
+  @override
   String get no => "No";
   @override
   String get rate_text => "L'autore di questa applicazione è entusiasta di ricevere feedback da parte degli utenti. Ti preghiamo di inviargli qualche stella (alpina) attraverso il negozio di applicazioni.";
@@ -1298,6 +1301,8 @@ class $ru_RU extends S {
   String get northwestern_pacific => "Северо-западная часть Тихого океана";
   @override
   String get plant_stem => "Стебель";
+  @override
+  String get auth_resend_email => "Переслать письмо";
   @override
   String get no => "Нет";
   @override
@@ -1841,6 +1846,8 @@ class $pl_PL extends S {
   @override
   String get plant_stem => "Łodyga";
   @override
+  String get auth_resend_email => "Wyślij e-mail ponownie";
+  @override
   String get no => "Nie";
   @override
   String get rate_text => "Wyrażając swoją opinię, dajesz Autorowi aplikacji chęć i motywację do jej dalszego rozwijania. Napisz proszę kilka miłych słów w Sklepie Play.";
@@ -2382,6 +2389,8 @@ class $ro_RO extends S {
   String get northwestern_pacific => "Nord-vestul Pacificului";
   @override
   String get plant_stem => "Tulpină";
+  @override
+  String get auth_resend_email => "Retrimiteți e-mailul";
   @override
   String get no => "Nu";
   @override
@@ -2925,6 +2934,8 @@ class $hi_IN extends S {
   @override
   String get plant_stem => "तना";
   @override
+  String get auth_resend_email => "पुन: ईमेल भेजें";
+  @override
   String get no => "नहीं";
   @override
   String get rate_text => "इस एप्लिकेशन के लेखक उपयोगकर्ताओं से सकारात्मक प्रतिक्रिया से प्रेरित हैं। कृपया उसे एप्लिकेशन स्टोर के माध्यम से कुछ सितारे भेजें।";
@@ -3466,6 +3477,8 @@ class $id_ID extends S {
   String get northwestern_pacific => "Pasifik Barat Laut";
   @override
   String get plant_stem => "Batang";
+  @override
+  String get auth_resend_email => "Kirim ulang email";
   @override
   String get no => "Tidak";
   @override
@@ -4009,6 +4022,8 @@ class $fr_FR extends S {
   @override
   String get plant_stem => "Tige";
   @override
+  String get auth_resend_email => "Ré-envoyer l'email";
+  @override
   String get no => "Non";
   @override
   String get rate_text => "L'auteur de cette application est motivé par les réponses positives des utilisateurs. S'il vous plaît, envoyez lui quelques fleurs étoiles à travers le magasin d'applications.";
@@ -4550,6 +4565,8 @@ class $he_IL extends S {
   String get northwestern_pacific => "צפון מערב האוקיינוס השקט";
   @override
   String get plant_stem => "גבעול";
+  @override
+  String get auth_resend_email => "שלח אימייל מחדש";
   @override
   String get no => "לא";
   @override
@@ -5093,6 +5110,8 @@ class $ja_JP extends S {
   @override
   String get plant_stem => "茎";
   @override
+  String get auth_resend_email => "メールを再送";
+  @override
   String get no => "いいえ";
   @override
   String get rate_text => "このアプリケーションの作者は、ユーザーからの良い反応によって動機づけられています。 アプリケーションストアを通じて彼にいくつかの星を送ってください。";
@@ -5633,6 +5652,8 @@ class $cs_CZ extends S {
   @override
   String get plant_stem => "Lodyha";
   @override
+  String get auth_resend_email => "Přeposlat e-mail";
+  @override
   String get no => "Ne";
   @override
   String get rate_text => "Autora této aplikace motivuje pozitívny ohlas uživatelů. Pošlete mu, prosím, nejaké květiny (nejlépe hvězdníky) přes obchod s aplikacemi.";
@@ -5645,7 +5666,7 @@ class $cs_CZ extends S {
   @override
   String get taxonomy_tribus => "skupina";
   @override
-  String get auth_resend_code => "Znovu zaslat kód";
+  String get auth_resend_code => "Přeposlat kód";
   @override
   String get rate_later => "Později";
   @override
@@ -6174,6 +6195,8 @@ class $de_DE extends S {
   String get northwestern_pacific => "Nordwestlicher Pazifik";
   @override
   String get plant_stem => "Stängel";
+  @override
+  String get auth_resend_email => "E-Mail zurücksenden";
   @override
   String get no => "Nein";
   @override
@@ -6717,6 +6740,8 @@ class $hu_HU extends S {
   @override
   String get plant_stem => "Szár";
   @override
+  String get auth_resend_email => "E-mail újraküldése";
+  @override
   String get no => "Nem";
   @override
   String get rate_text => "A szerző a pozitív visszajelzésekből dolgozik. A alkalmazás tárolón keresztül csillagzással értékelheti/támogathatja a munkáját.";
@@ -7259,6 +7284,8 @@ class $nb_NO extends S {
   @override
   String get plant_stem => "Stengel";
   @override
+  String get auth_resend_email => "Send e-post igjen";
+  @override
   String get no => "Nei";
   @override
   String get rate_text => "Forfatteren av denne søknaden er motivert av positiv respons fra brukerne. Vennligst send ham noen stjerner gjennom applikasjonsbutikken.";
@@ -7795,6 +7822,8 @@ class $sk_SK extends S {
   @override
   String get plant_stem => "Stonka";
   @override
+  String get auth_resend_email => "Preposlať email";
+  @override
   String get no => "Nie";
   @override
   String get rate_text => "Autora tejto aplikácie motivuje pozitívny ohlas použivateľov. Pošlite mu, prosím, nejaké kvetiny (najlepšie hviezdice) cez obchod s aplikáciami.";
@@ -7807,7 +7836,7 @@ class $sk_SK extends S {
   @override
   String get taxonomy_tribus => "skupina";
   @override
-  String get auth_resend_code => "Znova odoslať kód";
+  String get auth_resend_code => "Preposlať kód";
   @override
   String get rate_later => "Neskôr";
   @override
@@ -8336,6 +8365,8 @@ class $es_ES extends S {
   String get northwestern_pacific => "Noroeste del Pacífico";
   @override
   String get plant_stem => "Tallo";
+  @override
+  String get auth_resend_email => "Reenviar correo electrónico";
   @override
   String get no => "No";
   @override
@@ -8879,6 +8910,8 @@ class $nl_NL extends S {
   @override
   String get plant_stem => "Stengel";
   @override
+  String get auth_resend_email => "Email opnieuw verzenden";
+  @override
   String get no => "Nee";
   @override
   String get rate_text => "Auteur van deze applicatie wordt gemotiveerd door positieve reactie van de gebruikers. Stuur hem alsjeblieft enkele sterren via de applicatiewinkel.";
@@ -9420,6 +9453,8 @@ class $pa_IN extends S {
   String get northwestern_pacific => "ਉੱਤਰੀ ਪੱਛਮੀ ਪੈਸੀਫਿਕ";
   @override
   String get plant_stem => "ਸਟੈਮ";
+  @override
+  String get auth_resend_email => "ਈਮੇਲ ਦੁਬਾਰਾ ਭੇਜੋ";
   @override
   String get no => "ਨਹੀਂ";
   @override
@@ -9963,6 +9998,8 @@ class $sv_SE extends S {
   @override
   String get plant_stem => "Stjälk";
   @override
+  String get auth_resend_email => "Skicka email igen";
+  @override
   String get no => "Nej";
   @override
   String get rate_text => "Författaren till denna ansökan motiveras av positivt svar från användarna. Vänligen skicka honom några stjärnor genom applikationsbutiken.";
@@ -10501,6 +10538,8 @@ class $da_DK extends S {
   @override
   String get plant_stem => "Stængel";
   @override
+  String get auth_resend_email => "Send e-mail igen";
+  @override
   String get no => "Ingen";
   @override
   String get rate_text => "Forfatteren af denne ansøgning er drevet af et positivt svar fra brugerne. Venligst send ham nogle stjerner gennem applikationsbutikken.";
@@ -11038,6 +11077,8 @@ class $fa_IR extends S {
   String get northwestern_pacific => "شمال غرب اقیانوس آرام";
   @override
   String get plant_stem => "ساقه";
+  @override
+  String get auth_resend_email => "ایمیل را دوباره ارسال کن";
   @override
   String get no => "نه";
   @override
@@ -11580,6 +11621,8 @@ class $sr_RS extends S {
   String get northwestern_pacific => "Северозападни Пацифик";
   @override
   String get plant_stem => "Стабло";
+  @override
+  String get auth_resend_email => "Поново пошаљи е-маил";
   @override
   String get no => "Не";
   @override
@@ -12139,6 +12182,8 @@ class $fi_FI extends S {
   @override
   String get plant_stem => "Varsi";
   @override
+  String get auth_resend_email => "Lähetä uudelleen sähköposti";
+  @override
   String get no => "Ei";
   @override
   String get rate_text => "Tämän sovelluksen laatijaa tukee käyttäjien positiivinen vastaus. Lähetä hänelle joitakin tähtiä sovellusvaraston kautta.";
@@ -12151,7 +12196,7 @@ class $fi_FI extends S {
   @override
   String get taxonomy_tribus => "Tribus";
   @override
-  String get auth_resend_code => "Lähetä koodi uudelleen";
+  String get auth_resend_code => "Lähetä uudelleen koodi";
   @override
   String get rate_later => "Myöhemmin";
   @override
@@ -12680,6 +12725,8 @@ class $hr_HR extends S {
   String get northwestern_pacific => "Sjeverozapadni Tihi ocean";
   @override
   String get plant_stem => "Stablo";
+  @override
+  String get auth_resend_email => "Ponovi slanje e-pošte";
   @override
   String get no => "Ne";
   @override
@@ -13223,6 +13270,8 @@ class $et_EE extends S {
   @override
   String get plant_stem => "Vars";
   @override
+  String get auth_resend_email => "Saada uuesti e-post";
+  @override
   String get no => "Ei";
   @override
   String get rate_text => "Selle rakenduse autorit toetab kasutajate positiivne vastus. Palun saatke talle mõned tähed rakenduste poe kaudu.";
@@ -13235,7 +13284,7 @@ class $et_EE extends S {
   @override
   String get taxonomy_tribus => "Triibus";
   @override
-  String get auth_resend_code => "Koodi uuesti saatmine";
+  String get auth_resend_code => "Saada kood uuesti";
   @override
   String get rate_later => "Pärast";
   @override
@@ -13772,6 +13821,8 @@ class $lt_LT extends S {
   String get northwestern_pacific => "Ramiojo vandenyno šiaurės vakarai";
   @override
   String get plant_stem => "Stiebas";
+  @override
+  String get auth_resend_email => "Išsiųsti el. laišką";
   @override
   String get no => "Ne";
   @override
@@ -14315,6 +14366,8 @@ class $lv_LV extends S {
   @override
   String get plant_stem => "Stumbrs";
   @override
+  String get auth_resend_email => "Sūtīt vēlreiz e-pastu";
+  @override
   String get no => "Nē";
   @override
   String get rate_text => "Šī pieteikuma autors ir motivēts ar pozitīvu lietotāju atbildi. Lūdzu, sūtiet viņam dažas zvaigznes, izmantojot lietojumprogrammu veikalu.";
@@ -14856,6 +14909,8 @@ class $uk_UA extends S {
   String get northwestern_pacific => "Північно-західний Тихий океан";
   @override
   String get plant_stem => "Стебло";
+  @override
+  String get auth_resend_email => "Повторно надіслати пошту";
   @override
   String get no => "Ні";
   @override
@@ -15399,6 +15454,8 @@ class $sl_SI extends S {
   @override
   String get plant_stem => "Steblo";
   @override
+  String get auth_resend_email => "Ponovno pošlji e-pošto";
+  @override
   String get no => "Ne";
   @override
   String get rate_text => "Avtor te aplikacije je motiviran s pozitivnim odzivom uporabnikov. Prosim, pošljite mu nekaj zvezd skozi trgovino z aplikacijami.";
@@ -15941,6 +15998,8 @@ class $ar_EG extends S {
   @override
   String get plant_stem => "ساق نبات";
   @override
+  String get auth_resend_email => "إعادة إرسال البريد الإلكتروني";
+  @override
   String get no => "لا";
   @override
   String get rate_text => "تأجج المؤلف من هذا التطبيق من خلال استجابة إيجابية من المستخدمين. يرجى إرسال بعض النجوم له من خلال متجر التطبيقات.";
@@ -16478,6 +16537,8 @@ class $pt_PT extends S {
   String get northwestern_pacific => "Noroeste do Pacífico";
   @override
   String get plant_stem => "Caule";
+  @override
+  String get auth_resend_email => "Reenviar email";
   @override
   String get no => "Não";
   @override
