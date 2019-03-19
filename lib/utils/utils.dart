@@ -94,6 +94,7 @@ const String firebasePlantsToUpdate = "plants_to_update";
 const String firebaseFamiliesToUpdate = "families_to_update";
 const String firebaseVersions = "versions";
 const String firebaseUsers = "users";
+const String firebaseUsersPhotoSearch = "users_photo_search";
 const String firebasePromotions = "promotions";
 const String firebaseSearchPhoto = 'search_photo';
 const String firebaseSettingsGenericLabels = "settings/generic_labels";
