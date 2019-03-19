@@ -68,9 +68,8 @@ class _SearchPhotoState extends State<SearchPhoto> {
       }
       // save labels
       if (significantLabels.length > 0) {
-        usersReference
+        rootReference.child(firebaseUsersPhotoSearch)
             .child(widget.currentUser.uid)
-            .child(firebaseSearchPhoto)
             .child(DateTime.now().millisecondsSinceEpoch.toString())
             .set(significantLabels.map((label) {
           Map<String, dynamic> labelMap = {};
