@@ -47,6 +47,8 @@
   "offline_download_fail": "Scaricamento fallito. Controlla la tua connessione Internet o lo spazio libero sul dispositivo e riprova.",
   "offline_delete_message": "Vuoi eliminare i dati offline?",
   "offline_download": "Riprendi a scaricare",
+  "scale_down_photos_title": "Riduci le foto dell'osservazione",
+  "scale_down_photos_subtitle": "Accendi quando non vedi le tue foto dopo il ritiro.",
 
   "feedback_intro": "Hai contribuito a questa applicazione scaricandola sul tuo dispositivo, grazie. Se stai cercando qualcos'altro, ecco alcune opzioni:",
   "feedback_review": "Puoi scrivere una recensione positiva.",
@@ -249,7 +251,8 @@
   "observations": "Osservazioni",
   "observation_note": "Posto per la tua nota privata.",
   "observation_saved": "Osservazione salvata.",
-  "observation_not_saved": "L'osservazione era incompleta quindi non è stata salvata. Posizione o foto mancanti.",
+  "observation_missing_photo": "L'osservazione era incompleta quindi non è stata salvata. Foto mancanti.",
+  "observation_missing_location": "L'osservazione era incompleta quindi non è stata salvata. Posizione mancanti.",
   "observation_delete": "Cancella osservazione",
   "observation_delete_question": "Vuoi cancellare l'osservazione?",
   "observation_empty": "Non ci sono ancora osservazioni.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Caratteristica a pagamento",
   "promotion_content": "Questa è una funzionalità a pagamento. Puoi usarlo gratuitamente fino a $date",
+
+  "no_connection_title": "Connessione",
+  "no_connection_content": "Questa funzione non funziona senza connessione a Internet.",
 
   "photo_search_no_login": "La ricerca per foto è disponibile solo per gli utenti registrati. Accedete, per favore.",
   "photo_search_failed": "Ricerca per foto fallita. Controlla la tua connessione Internet e riprova.",

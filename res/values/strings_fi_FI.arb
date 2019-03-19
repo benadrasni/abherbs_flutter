@@ -47,6 +47,8 @@
   "offline_download_fail": "Lataus epäonnistui. Tarkista Internet-yhteys tai vapaa tila laitteessa ja yritä uudelleen.",
   "offline_delete_message": "Haluatko poistaa offline-tietoja?",
   "offline_download": "Jatka lataamista",
+  "scale_down_photos_title": "Pienennä havaintojen kuvia",
+  "scale_down_photos_subtitle": "Kytke päälle, kun et näe valokuvia valinnan jälkeen.",
 
   "feedback_intro": "Olet osallistunut tähän sovellukseen, koska olet asentanut sen laitteeseen, kiitos. Jos etsit jotain muuta, tässä on muutamia vaihtoehtoja:",
   "feedback_review": "Voit kirjoittaa positiivisen tarkistuksen.",
@@ -249,7 +251,8 @@
   "observations": "Havaintoja",
   "observation_note": "Paikka yksityiselle muistiinpanolle.",
   "observation_saved": "Havainto tallennettiin.",
-  "observation_not_saved": "Havainto epätäydellinen, joten sitä ei tallennettu. Sijainti tai valokuva puuttuu.",
+  "observation_missing_photo": "Havainto epätäydellinen, joten sitä ei tallennettu. Kuva puuttuu.",
+  "observation_missing_location": "Havainto epätäydellinen, joten sitä ei tallennettu. Sijainti puuttuu.",
   "observation_delete": "Poista havainto",
   "observation_delete_question": "Haluatko poistaa havainnon?",
   "observation_empty": "Ei ole vielä havaintoja.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Maksettu ominaisuus",
   "promotion_content": "Tämä on maksullinen ominaisuus. Voit käyttää sitä ilmaiseksi, kunnes $date",
+
+  "no_connection_title": "Yhteys",
+  "no_connection_content": "Tämä ominaisuus ei toimi ilman Internet-yhteyttä.",
 
   "photo_search_no_login": "Valokuvien haku on käytettävissä vain kirjautuneille käyttäjille. Kirjaudu sisään, ole hyvä.",
   "photo_search_failed": "Haku valokuvan mukaan epäonnistui. Tarkista Internet-yhteys ja yritä uudelleen.",

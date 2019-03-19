@@ -47,6 +47,8 @@
   "offline_download_fail": "Sikertelen letöltés. Kérjük ellenőrizze az internetkapcsolatot vagy a szabad hely mennyiségét az eszközön és próbálja újra.",
   "offline_delete_message": "Törli az offline adatokat?",
   "offline_download": "A letöltés folytatása",
+  "scale_down_photos_title": "Mérje le a megfigyelés fotóit",
+  "scale_down_photos_subtitle": "Kapcsolja be, ha nem látja a fényképeket a felvétel után.",
 
   "feedback_intro": "Köszönjük a támogatását, mivel telepítette az alkalmazást. Ha többet szeretne, itt van néhány lehetőség:",
   "feedback_review": "Írhat pozitív értékelést.",
@@ -249,7 +251,8 @@
   "observations": "Megfigyelések",
   "observation_note": "Helyezze el a magánjegyzetet.",
   "observation_saved": "Megfigyelés történt.",
-  "observation_not_saved": "A megfigyelés hiányos volt, így nem lett elmentve. Hiányzik a hely vagy a fénykép.",
+  "observation_missing_photo": "A megfigyelés hiányos volt, így nem lett elmentve. A fotó hiányzik.",
+  "observation_missing_location": "A megfigyelés hiányos volt, így nem lett elmentve. A hely hiányzik.",
   "observation_delete": "A megfigyelés törlése",
   "observation_delete_question": "Törli a megfigyelést?",
   "observation_empty": "Még nincs megfigyelés.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Fizetett funkció",
   "promotion_content": "Fizetett funkció. $date -ig ingyenesen használhatja",
+
+  "no_connection_title": "Kapcsolat",
+  "no_connection_content": "Ez a funkció nem működik internetkapcsolat nélkül.",
 
   "photo_search_no_login": "A fénykép általi keresés csak bejelentkezett felhasználók számára lehetséges. Kérjük jelentkezzen be.",
   "photo_search_failed": "A fénykép általi keresés sikertelen lett. Ellenőrizze az internetkapcsolatot és próbálja újra.",

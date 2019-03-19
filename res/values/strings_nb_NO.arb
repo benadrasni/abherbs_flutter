@@ -47,6 +47,8 @@
   "offline_download_fail": "Nedlasting mislyktes. Kontroller din internettforbindelse eller ledig plass på enheten, og prøv igjen.",
   "offline_delete_message": "Vil du slette frakoblede data?",
   "offline_download": "Fortsett nedlasting",
+  "scale_down_photos_title": "Skal ned observasjonens bilder",
+  "scale_down_photos_subtitle": "Slå på når du ikke ser bildene dine etter valg.",
 
   "feedback_intro": "Du har bidratt til dette programmet siden du har installert det på enheten, takk. Hvis du leter etter noe mer, er det noen alternativer:",
   "feedback_review": "Du kan skrive en positiv anmeldelse.",
@@ -249,7 +251,8 @@
   "observations": "Observasjoner",
   "observation_note": "Plasser for ditt private notat.",
   "observation_saved": "Observasjon ble reddet.",
-  "observation_not_saved": "Observasjonen var ufullstendig, slik at den ikke ble frelst. Sted eller bilde mangler.",
+  "observation_missing_photo": "Observasjonen var ufullstendig, slik at den ikke ble frelst. Bilde mangler.",
+  "observation_missing_location": "Observasjonen var ufullstendig, slik at den ikke ble frelst. Sted mangler.",
   "observation_delete": "Slett observasjon",
   "observation_delete_question": "Ønsker du å slette observasjonen?",
   "observation_empty": "Det er ingen observasjon enda.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Betalt funksjon",
   "promotion_content": "Dette er en betalt funksjon. Du kan bruke det gratis til $date",
+
+  "no_connection_title": "Forbindelse",
+  "no_connection_content": "Denne funksjonen virker ikke uten Internett-tilkobling.",
 
   "photo_search_no_login": "Søk etter bilde er bare tilgjengelig for loggede brukere. Vennligst Logg inn.",
   "photo_search_failed": "Søk etter bilde mislyktes. Sjekk Internett-tilkoblingen din og prøv igjen.",

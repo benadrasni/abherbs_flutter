@@ -47,6 +47,8 @@
   "offline_download_fail": "Prenos ni uspel. Preverite internetno povezavo ali pa sprostite prostor na napravi in poskusite znova.",
   "offline_delete_message": "Ali želite izbrisati podatke brez povezave?",
   "offline_download": "Nadaljuj prenos",
+  "scale_down_photos_title": "Prilagodite fotografije opazovanja",
+  "scale_down_photos_subtitle": "Vklopite, ko po izbiri ne vidite fotografij.",
 
   "feedback_intro": "Prispevali ste k tej aplikaciji, ker ste jo namestili v napravo, hvala. Če iščete nekaj več, si oglejte nekaj možnosti:",
   "feedback_review": "Lahko napišete pozitivno mnenje.",
@@ -249,7 +251,8 @@
   "observations": "Opažanja",
   "observation_note": "Kraj za vašo zasebno noto.",
   "observation_saved": "Opazovanje je bilo shranjeno.",
-  "observation_not_saved": "Opazovanje je bilo nepopolno, zato ni bilo rešeno. Manjka lokacija ali fotografija.",
+  "observation_missing_photo": "Opazovanje je bilo nepopolno, zato ni bilo rešeno. Manjka fotografija.",
+  "observation_missing_location": "Opazovanje je bilo nepopolno, zato ni bilo rešeno. Manjka lokacija.",
   "observation_delete": "Izbriši opazovanje",
   "observation_delete_question": "Ali želite izbrisati opazovanje?",
   "observation_empty": "Opažanja še ni.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Plačana funkcija",
   "promotion_content": "To je plačana funkcija. Uporabite ga lahko brezplačno do $date",
+
+  "no_connection_title": "Povezava",
+  "no_connection_content": "Ta funkcija ne deluje brez internetne povezave.",
 
   "photo_search_no_login": "Iskanje po fotografijah je na voljo samo za prijavljene uporabnike. Prijavite se.",
   "photo_search_failed": "Iskanje po fotografiji ni uspelo. Preverite internetno povezavo in poskusite znova.",

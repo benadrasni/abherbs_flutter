@@ -47,6 +47,8 @@
   "offline_download_fail": "Sťahovanie súborov zlyhalo. Prosím skontrolujte pripojenie k internetu alebo voľný priestor na zariadení a skúste znova.",
   "offline_delete_message": "Naozaj chcete zmazať offline dáta?",
   "offline_download": "Pokračovať v sťahovaní",
+  "scale_down_photos_title": "Zmenšiť fotografie z pozorovania",
+  "scale_down_photos_subtitle": "Zapnite, keď sa vaše fotografie po vybratí nezobrazia.",
 
   "feedback_intro": "Túto aplikáciu podporujete odkedy ste si ju nainštalovali na svoje mobilné zariadenie, ďakujem. Ak hľadáte iné formy podpory, tu sú niektoré možnosti:",
   "feedback_review": "Môžete napísať pozitívnu recenziu.",
@@ -246,7 +248,8 @@
   "observations": "Pozorovania",
   "observation_note": "Miesto pre vaše súkromné poznámky.",
   "observation_saved": "Pozorovanie bolo uložené.",
-  "observation_not_saved": "Pozorovanie nebolo úplné, takže nebolo uložené. Chýbala poloha alebo fotka.",
+  "observation_missing_photo": "Pozorovanie nebolo úplné, takže nebolo uložené. Chýba fotografia.",
+  "observation_missing_location": "Pozorovanie nebolo úplné, takže nebolo uložené. Chýba poloha.",
   "observation_delete": "Zmazať pozorovanie",
   "observation_delete_question": "Chcete zmazať pozorovanie?",
   "observation_empty": "Zatiaľ nie je žiadne pozorovanie.",
@@ -279,6 +282,9 @@
 
   "promotion_title": "Platená funkcia",
   "promotion_content": "Toto je platená funkcia. Voľne dostupná bude do $date",
+
+  "no_connection_title": "Pripojenie",
+  "no_connection_content": "Táto funkcia bez pripojenia na Internet nefunguje.",
 
   "photo_search_no_login": "Vyhľadávanie podľa fotografie je dostupné iba pre prihlásených používateľov. Prihláste sa, prosím.",
   "photo_search_failed": ">Vyhľadávanie bolo neúspešné. Skontrolujte svoje pripojenie na internet a skúse znova.",

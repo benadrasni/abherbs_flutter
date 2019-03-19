@@ -47,6 +47,8 @@
   "offline_download_fail": "Lejupielāde neizdevās. Lūdzu, pārbaudiet interneta savienojumu vai brīvo vietu ierīcē un mēģiniet vēlreiz.",
   "offline_delete_message": "Vai vēlaties dzēst bezsaistes datus?",
   "offline_download": "Atsākt lejupielādi",
+  "scale_down_photos_title": "Samaziniet novērošanas fotoattēlus",
+  "scale_down_photos_subtitle": "Ieslēdziet, kad pēc fotoattēlu saņemšanas neredzat fotoattēlus.",
 
   "feedback_intro": "Jūs esat veicinājis šo lietojumprogrammu, jo esat to instalējis savā ierīcē. Ja jūs meklējat kaut ko vairāk, šeit ir dažas iespējas:",
   "feedback_review": "Jūs varat uzrakstīt pozitīvu pārskatu.",
@@ -249,7 +251,8 @@
   "observations": "Novērojumi",
   "observation_note": "Vieta jūsu privātajai piezīmei.",
   "observation_saved": "Novērošana tika saglabāta.",
-  "observation_not_saved": "Novērošana bija nepilnīga, tāpēc tā netika saglabāta. Trūkst vietas vai fotoattēla.",
+  "observation_missing_photo": "Novērošana bija nepilnīga, tāpēc tā netika saglabāta. Trūkst fotoattēla.",
+  "observation_missing_location": "Novērošana bija nepilnīga, tāpēc tā netika saglabāta. Trūkst vietas.",
   "observation_delete": "Dzēst novērojumu",
   "observation_delete_question": "Vai vēlaties dzēst novērojumu?",
   "observation_empty": "Vēl nav novērojumu.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Maksas funkcija",
   "promotion_content": "Tā ir maksas funkcija. To var izmantot bez maksas līdz $date",
+
+  "no_connection_title": "Savienojums",
+  "no_connection_content": "Šī funkcija nedarbojas bez interneta pieslēguma.",
 
   "photo_search_no_login": "Meklēšana pēc fotoattēla ir pieejama tikai reģistrētiem lietotājiem. Lūdzu, piesakieties.",
   "photo_search_failed": "Meklēšana pēc fotoattēla neizdevās. Pārbaudiet savu interneta savienojumu un mēģiniet vēlreiz.",

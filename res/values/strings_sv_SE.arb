@@ -47,6 +47,8 @@
   "offline_download_fail": "Nedladdning misslyckad. Kontrollera din internetanslutning eller ledigt utrymme på enheten och försök igen.",
   "offline_delete_message": "Vill du radera offline-data?",
   "offline_download": "Återuppta nedladdning",
+  "scale_down_photos_title": "Skala ner observationens foton",
+  "scale_down_photos_subtitle": "Slå på när du inte ser dina foton efter val.",
 
   "feedback_intro": "Du har bidragit till den här applikationen eftersom du har installerat den på din enhet, tack. Om du letar efter något mer, här är några alternativ:",
   "feedback_review": "Du kan skriva en positiv recension.",
@@ -249,7 +251,8 @@
   "observations": "Observationer",
   "observation_note": "Placera för din privata anteckning.",
   "observation_saved": "Observationen räddades.",
-  "observation_not_saved": "Observationen var ofullständig så att den inte sparades. Plats eller foto saknas.",
+  "observation_missing_photo": "Observationen var ofullständig så att den inte sparades. Foto saknas.",
+  "observation_missing_location": "Observationen var ofullständig så att den inte sparades. Plats saknas.",
   "observation_delete": "Ta bort observation",
   "observation_delete_question": "Vill du radera observationen?",
   "observation_empty": "Det finns ingen observation än.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Betald funktion",
   "promotion_content": "Detta är en betald funktion. Du kan använda den gratis till $date",
+
+  "no_connection_title": "Förbindelse",
+  "no_connection_content": "Den här funktionen fungerar inte utan Internetanslutning.",
 
   "photo_search_no_login": "Sök på foto är endast tillgängligt för inloggade användare. Vänligen logga in.",
   "photo_search_failed": "Sök på foto misslyckades. Kontrollera din internetanslutning och försök igen.",

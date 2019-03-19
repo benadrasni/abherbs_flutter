@@ -47,6 +47,8 @@
   "offline_download_fail": "Descarcare esuata. Verificați conexiunea la internet sau spațiul liber pe dispozitiv și încercați din nou.",
   "offline_delete_message": "Doriți să ștergeți datele offline?",
   "offline_download": "Reia descărcarea",
+  "scale_down_photos_title": "Scalarea fotografiilor observatorului",
+  "scale_down_photos_subtitle": "Porniți când nu vedeți fotografiile după alegere.",
 
   "feedback_intro": "Ați contribuit la această aplicație de când ați instalat-o pe dispozitiv, mulțumiri. Dacă sunteți în căutarea pentru ceva mai mult, iată câteva opțiuni:",
   "feedback_review": "Puteți scrie o recenzie pozitivă.",
@@ -249,7 +251,8 @@
   "observations": "Observaţii",
   "observation_note": "Locul pentru nota ta privată.",
   "observation_saved": "Observația a fost salvată.",
-  "observation_not_saved": "Observația a fost incompletă, astfel încât nu a fost salvată. Locația sau fotografia lipsesc.",
+  "observation_missing_photo": "Observația a fost incompletă, astfel încât nu a fost salvată. Fotografia lipsesc.",
+  "observation_missing_location": "Observația a fost incompletă, astfel încât nu a fost salvată. Locația lipsesc.",
   "observation_delete": "Șterge observația",
   "observation_delete_question": "Doriți să ștergeți observația?",
   "observation_empty": "Nu există nicio observație încă.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Caracteristică plătită",
   "promotion_content": "Aceasta este o caracteristică plătită. Puteți să-l utilizați gratuit până la $date",
+
+  "no_connection_title": "Conexiune",
+  "no_connection_content": "Această caracteristică nu funcționează fără conexiune la Internet.",
 
   "photo_search_no_login": "Căutarea după fotografie este disponibilă numai pentru utilizatorii înregistrați. Va rugăm sa va logați.",
   "photo_search_failed": "Căutarea după fotografie a eșuat. Verificați conexiunea la internet și încercați din nou.",
