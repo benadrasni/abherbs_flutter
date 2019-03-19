@@ -450,11 +450,11 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
   return _actions;
 }
 
-void goToDetail(BuildContext context, Locale myLocale, String name, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct,
+void goToDetail(State state, BuildContext context, Locale myLocale, String name, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct,
     Map<String, String> filter) {
   plantsReference.child(name).once().then((DataSnapshot snapshot) {
     if (snapshot.value != null) {
-      if (context != null) {
+      if (state.mounted && context != null) {
         Plant plant = Plant.fromJson(snapshot.key, snapshot.value);
         Navigator.push(
           context,

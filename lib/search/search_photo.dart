@@ -142,6 +142,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
 
   @override
   Widget build(BuildContext context) {
+    var self = this;
     double maxSize = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -227,7 +228,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                                   PlantList(widget.onChangeLanguage, widget.onBuyProduct, {}, result.count.toString(), result.path)),
                                         );
                                       } else {
-                                        goToDetail(context, widget.myLocale, result.path, widget.onChangeLanguage, widget.onBuyProduct, {});
+                                        goToDetail(self, context, widget.myLocale, result.path, widget.onChangeLanguage, widget.onBuyProduct, {});
                                       }
                                     },
                                   );

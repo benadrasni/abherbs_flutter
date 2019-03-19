@@ -45,7 +45,9 @@ class _ObservationEditState extends State<ObservationEdit> {
     String rootPath = (await getApplicationDocumentsDirectory()).path;
     var filename = _observation.photoPaths[position];
     File file = File('$rootPath/$filename');
-    file.delete();
+    if (await file.exists()) {
+      file.delete();
+    }
     _observation.photoPaths.removeAt(position);
 
     setState(() {});

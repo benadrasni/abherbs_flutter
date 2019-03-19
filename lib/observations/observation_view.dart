@@ -38,6 +38,8 @@ class _ObservationViewState extends State<ObservationView> {
 
   @override
   Widget build(BuildContext context) {
+    var self = this;
+    var mainContext = context;
     double mapWidth = MediaQuery.of(context).size.width;
     double mapHeight = 100.0;
 
@@ -92,7 +94,7 @@ class _ObservationViewState extends State<ObservationView> {
                 ],
               ),
               onTap: () {
-                goToDetail(context, myLocale, widget.observation.plant, widget.onChangeLanguage, widget.onBuyProduct, {});
+                goToDetail(self, mainContext, myLocale, widget.observation.plant, widget.onChangeLanguage, widget.onBuyProduct, {});
               },
             );
           }),
