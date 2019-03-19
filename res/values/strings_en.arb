@@ -286,6 +286,9 @@
   "promotion_title": "Paid feature",
   "promotion_content": "This is a paid feature. You can use it for free until $date",
 
+  "no_connection_title": "Connection",
+  "no_connection_content": "This feature doesn't work without Internet connection",
+
   "photo_search_no_login": "Search by photo is available only for logged users. Please log in.",
   "photo_search_failed": "Search by photo failed. Check your internet connection and try again.",
   "photo_to_search_by": "Photo to search by",

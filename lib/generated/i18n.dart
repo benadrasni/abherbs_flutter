@@ -120,6 +120,8 @@ class S implements WidgetsLocalizations {
   String get new_version => "New version is available, please update.";
   String get new_zealand => "New Zealand";
   String get no => "No";
+  String get no_connection_content => "This feature doesn't work without Internet connection";
+  String get no_connection_title => "Connection";
   String get north_central_pacific => "North-Central Pacific";
   String get north_central_usa => "North-Central U.S.A.";
   String get northeast_tropical_africa => "Northeast Tropical Africa";
