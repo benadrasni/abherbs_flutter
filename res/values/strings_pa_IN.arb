@@ -81,6 +81,7 @@
   "auth_verify_email_message": "ਖਾਤੇ ਦੀ ਤਸਦੀਕ ਕਰਨ ਲਈ ਲਿੰਕ ਨੂੰ ਤੁਹਾਡੇ ਈਮੇਲ ਪਤੇ 'ਤੇ ਭੇਜਿਆ ਗਿਆ ਹੈ.",
   "auth_reset_password_email_title": "ਪਾਸਵਰਡ ਰੀਸੈਟ ਕਰੋ",
   "auth_reset_password_email_message": "ਆਪਣੇ ਪਾਸਵਰਡ ਨੂੰ ਰੀਸੈੱਟ ਕਰਨ ਲਈ $_email ਨੂੰ ਭੇਜੀਆਂ ਹਦਾਇਤਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ.",
+  "auth_resend_email": "ਈਮੇਲ ਦੁਬਾਰਾ ਭੇਜੋ",
 
   "auth_verify_phone_number": "ਫੋਨ ਨੰਬਰ ਪ੍ਰਮਾਣਿਤ ਕਰੋ",
   "auth_verify_phone_number_title": "ਇੱਕ ਫੋਨ ਨੰਬਰ ਦਰਜ ਕਰੋ",

@@ -81,6 +81,7 @@
   "auth_verify_email_message": "सत्यापन खाते से लिंक आपके ईमेल पते पर भेज दिया गया है।",
   "auth_reset_password_email_title": "पासवर्ड रीसेट",
   "auth_reset_password_email_message": "अपना पासवर्ड रीसेट करने के लिए $_email को भेजे गए निर्देशों का पालन करें।",
+  "auth_resend_email": "पुन: ईमेल भेजें",
 
   "auth_verify_phone_number": "फ़ोन नंबर की पुष्टि करें",
   "auth_verify_phone_number_title": "अपना दूरभाष क्रमांक दर्ज करें",

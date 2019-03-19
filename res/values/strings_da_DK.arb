@@ -79,6 +79,7 @@
   "auth_verify_email_message": "En loginmail med yderligere vejledning er sendt. Tjek din mail for at fuldføre loginprocessen.",
   "auth_reset_password_email_title": "Nulstille kodeord",
   "auth_reset_password_email_message": "Følg instruktionerne sendt til $_email for at nulstille din adgangskode.",
+  "auth_resend_email": "Send e-mail igen",
 
   "auth_verify_phone_number": "Bekræft dit telefonnummer",
   "auth_verify_phone_number_title": "Angiv dit telefonnummer",

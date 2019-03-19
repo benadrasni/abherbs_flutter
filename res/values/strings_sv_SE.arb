@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Länk till verifiera konto har skickats till din e-postadress.",
   "auth_reset_password_email_title": "Återställ lösenord",
   "auth_reset_password_email_message": "Följ instruktionerna som skickas till $_email för att återställa ditt lösenord.",
+  "auth_resend_email": "Skicka email igen",
 
   "auth_verify_phone_number": "Verifiera telefonnummer",
   "auth_verify_phone_number_title": "Ange ett telefonnummer",

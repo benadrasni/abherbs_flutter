@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Ссылка для проверки аккаунта была отправлена на ваш адрес электронной почты.",
   "auth_reset_password_email_title": "Сброс пароля",
   "auth_reset_password_email_message": "Следуйте инструкциям, отправленным на $_email, чтобы сбросить пароль.",
+  "auth_resend_email": "Переслать письмо",
 
   "auth_verify_phone_number": "Подтвердить номер телефона",
   "auth_verify_phone_number_title": "Введите номер телефона.",

@@ -79,6 +79,7 @@
   "auth_verify_email_message": "O link para confirmar conta foi enviado para seu endereço de e-mail.",
   "auth_reset_password_email_title": "Redefinir senha",
   "auth_reset_password_email_message": "Siga as instruções enviadas para $_email para redefinir sua senha.",
+  "auth_resend_email": "Reenviar email",
 
   "auth_verify_phone_number": "Confirmar número de telefone",
   "auth_verify_phone_number_title": "Insira um número de telefone",

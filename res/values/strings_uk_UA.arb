@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Посилання на підтвердження облікового запису надіслано на вашу адресу електронної пошти.",
   "auth_reset_password_email_title": "Скинути пароль",
   "auth_reset_password_email_message": "Виконуйте інструкції, надіслані на адресу $_email, щоб скинути пароль.",
+  "auth_resend_email": "Повторно надіслати пошту",
 
   "auth_verify_phone_number": "Підтвердити номер телефону",
   "auth_verify_phone_number_title": "Введіть номер телефону",

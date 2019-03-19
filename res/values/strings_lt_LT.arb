@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Nuoroda, patvirtinanti paskyrą, buvo išsiųsta į jūsų el. pašto adresą.",
   "auth_reset_password_email_title": "Atstatyti slaptažodį",
   "auth_reset_password_email_message": "Jei norite iš naujo nustatyti slaptažodį, vadovaukitės nurodytomis instrukcijomis $_email.",
+  "auth_resend_email": "Išsiųsti el. laišką",
 
   "auth_verify_phone_number": "Patvirtinti telefono numerį",
   "auth_verify_phone_number_title": "Įveskite savo telefono numerį",

@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Link zur Bestätigung, dass das Konto an Ihre E-Mail-Adresse gesendet wurde.",
   "auth_reset_password_email_title": "Passwort zurücksetzen",
   "auth_reset_password_email_message": "Folgen Sie den Anweisungen, die an $_email gesendet wurden, um Ihr Passwort zurückzusetzen.",
+  "auth_resend_email": "E-Mail zurücksenden",
 
   "auth_verify_phone_number": "Telefonnummer eingeben",
   "auth_verify_phone_number_title": "Telefonnummer bestätigen",

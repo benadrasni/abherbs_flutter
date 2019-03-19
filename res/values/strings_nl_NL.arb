@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Link om het account te verifiëren is verzonden naar uw e-mailadres.",
   "auth_reset_password_email_title": "Reset wachtwoord",
   "auth_reset_password_email_message": "Volg de instructies verzonden naar $_email om uw wachtwoord opnieuw in te stellen.",
+  "auth_resend_email": "Email opnieuw verzenden",
 
   "auth_verify_phone_number": "Telefoonnummer verifiëren",
   "auth_verify_phone_number_title": "Vul je telefoonnummer in",

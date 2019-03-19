@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Povezava za preverjanje računa je bila poslana na vaš e-poštni naslov.",
   "auth_reset_password_email_title": "Ponastavitev gesla",
   "auth_reset_password_email_message": "Sledite navodilom, poslanim $_email, da ponastavite geslo.",
+  "auth_resend_email": "Ponovno pošlji e-pošto",
 
   "auth_verify_phone_number": "Preverjanje telefonske številke",
   "auth_verify_phone_number_title": "Vnesite telefonsko številko",

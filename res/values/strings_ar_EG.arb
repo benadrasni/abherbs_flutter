@@ -81,6 +81,7 @@
   "auth_verify_email_message": "تم إرسال رابط التحقق من الحساب إلى عنوان بريدك الإلكتروني.",
   "auth_reset_password_email_title": "إعادة تعيين كلمة المرور",
   "auth_reset_password_email_message": "اتبع التعليمات المرسلة إلى $_email لإعادة تعيين كلمة المرور الخاصة بك.",
+  "auth_resend_email": "إعادة إرسال البريد الإلكتروني",
 
   "auth_verify_phone_number": "تأكيد ملكية رقم الهاتف",
   "auth_verify_phone_number_title": "أدخل رقم هاتفك",

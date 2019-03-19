@@ -81,6 +81,7 @@
   "auth_verify_email_message": "קישור לאימות החשבון נשלח לכתובת דוא\"ל שלך.",
   "auth_reset_password_email_title": "לאפס את הסיסמה",
   "auth_reset_password_email_message": "בצע את ההוראות שנשלחו אל $_email כדי לאפס את הסיסמה.",
+  "auth_resend_email": "שלח אימייל מחדש",
 
   "auth_verify_phone_number": "אמת את מספר הטלפון",
   "auth_verify_phone_number_title": "הזן מספר טלפון",

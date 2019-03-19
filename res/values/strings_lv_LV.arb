@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Saite, lai pārbaudītu kontu, ir nosūtīta uz jūsu e-pasta adresi.",
   "auth_reset_password_email_title": "Atiestatīt paroli",
   "auth_reset_password_email_message": "Lai atiestatītu paroli, izpildiet norādījumus, kas nosūtīti uz $_email.",
+  "auth_resend_email": "Sūtīt vēlreiz e-pastu",
 
   "auth_verify_phone_number": "Verificēt tālruņa numuru",
   "auth_verify_phone_number_title": "Ievadiet savu tālruņa numuru",

@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Il link per verificare l'account è stato inviato al tuo indirizzo email.",
   "auth_reset_password_email_title": "Resetta la password",
   "auth_reset_password_email_message": "Seguire le istruzioni inviate a $_email per reimpostare la password.",
+  "auth_resend_email": "Rinvia l'e-mail",
 
   "auth_verify_phone_number": "Verifica numero di telefono",
   "auth_verify_phone_number_title": "Inserisci il tuo numero di telefono",

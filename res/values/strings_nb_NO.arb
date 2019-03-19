@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Link til verifiser konto er sendt til e-postadressen din.",
   "auth_reset_password_email_title": "Tilbakestille passord",
   "auth_reset_password_email_message": "Følg instruksjonene som sendes til $_email for å tilbakestille passordet ditt.",
+  "auth_resend_email": "Send e-post igjen",
 
   "auth_verify_phone_number": "Bekreft telefonnummeret",
   "auth_verify_phone_number_title": "Tast inn ditt telefonnummer",

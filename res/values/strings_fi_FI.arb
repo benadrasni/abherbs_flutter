@@ -81,6 +81,7 @@
   "auth_verify_email_message": "Linkki, jolla voit tarkistaa tilin, on lähetetty sähköpostiosoitteeseesi.",
   "auth_reset_password_email_title": "Nollaa salasana",
   "auth_reset_password_email_message": "Voit palauttaa salasanasi noudattamalla $_email lähetettyjä ohjeita.",
+  "auth_resend_email": "Lähetä uudelleen sähköposti",
 
   "auth_verify_phone_number": "Vahvista puhelinnumero",
   "auth_verify_phone_number_title": "Anna puhelinnumerosi",
@@ -91,7 +92,7 @@
   "auth_incorrect_code": "Väärä koodi. Yritä uudelleen.",
   "auth_sms_terms_of_service": "Kun napautat „Vahvista puhelinnumero”, tekstiviesti voidaan lähettää. Datan ja viestien käyttö voi olla maksullista.",
   "auth_enter_confirmation_code": "Anna 6 merkin pituinen koodi, jonka lähetimme numeroon ",
-  "auth_resend_code": "Lähetä koodi uudelleen",
+  "auth_resend_code": "Lähetä uudelleen koodi",
 
   "rate_question": "Onko tämä sovellus hyödyllinen?",
   "rate_text": "Tämän sovelluksen laatijaa tukee käyttäjien positiivinen vastaus. Lähetä hänelle joitakin tähtiä sovellusvaraston kautta.",
