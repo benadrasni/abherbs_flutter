@@ -47,6 +47,8 @@
   "offline_download_fail": "הורדה נכשלה. בדוק את חיבור האינטרנט או את המקום הפנוי במכשיר ונסה שוב.",
   "offline_delete_message": "האם ברצונך למחוק נתונים לא מקוונים?",
   "offline_download": "המשך הורדה",
+  "scale_down_photos_title": "סולם את תצפיות התצלומים",
+  "scale_down_photos_subtitle": "הפעל כאשר אינך רואה את התמונות שלך לאחר הבחירה.",
 
   "feedback_intro": "אתה כבר תורם ליישום זה מאז התקנת את זה על המכשיר שלך, תודה. אם אתה מחפש משהו נוסף, הנה כמה אפשרויות:",
   "feedback_review": "אתה יכול לכתוב ביקורת חיובית.",
@@ -249,7 +251,8 @@
   "observations": "תצפיות",
   "observation_note": "מקום ההערה הפרטית שלך.",
   "observation_saved": "תצפית נשמרה.",
-  "observation_not_saved": "התצפית לא הושלמה ולכן היא לא נשמרה. המיקום או התמונה חסרים.",
+  "observation_missing_photo": "התצפית לא הושלמה ולכן היא לא נשמרה. התמונה חסרה.",
+  "observation_missing_location": "התצפית לא הושלמה ולכן היא לא נשמרה. המיקום חסר.",
   "observation_delete": "מחק תצפית",
   "observation_delete_question": "האם ברצונך למחוק את התצפית?",
   "observation_empty": "עדיין אין תצפית.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "תכונה בתשלום",
   "promotion_content": "זוהי תכונה בתשלום. אתה יכול להשתמש בו בחינם עד $date",
+
+  "no_connection_title": "חיבור",
+  "no_connection_content": "תכונה זו אינה פועלת ללא חיבור לאינטרנט.",
 
   "photo_search_no_login": "חיפוש לפי תמונה זמין רק עבור משתמשים רשומים. היכנס.",
   "photo_search_failed": "החיפוש לפי תמונות נכשל. בדוק את חיבור האינטרנט שלך ונסה שוב.",

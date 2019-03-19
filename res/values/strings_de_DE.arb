@@ -47,6 +47,8 @@
   "offline_download_fail": "Herunterladen fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung oder den freien Speicherplatz auf dem Gerät und versuchen Sie es erneut.",
   "offline_delete_message": "Möchten Sie Offline-Daten löschen?",
   "offline_download": "Download fortsetzen",
+  "scale_down_photos_title": "Verkleinern Sie die Beobachtungsfotos",
+  "scale_down_photos_subtitle": "Schalten Sie ein, wenn Sie Ihre Fotos nach der Auswahl nicht sehen.",
 
   "feedback_intro": "Sie haben zu dieser Anwendung beigetragen, seit Sie diese auf Ihrem Gerät installiert haben, vielen Dank. Wenn Sie noch mehr tun möchten, haben Sie folgende Möglichkeiten:",
   "feedback_review": "Sie können eine positive Bewertung schreiben.",
@@ -249,7 +251,8 @@
   "observations": "Beobachtungen",
   "observation_note": "Platz für Ihre private Notiz.",
   "observation_saved": "Beobachtung wurde gespeichert.",
-  "observation_not_saved": "Die Beobachtung wurde nicht abgeschlossen, so dass nichts gespeichert wurde. Ort oder Foto fehlt.",
+  "observation_missing_photo": "Die Beobachtung wurde nicht abgeschlossen, so dass nichts gespeichert wurde. Foto fehlt.",
+  "observation_missing_location": "Die Beobachtung wurde nicht abgeschlossen, so dass nichts gespeichert wurde. Ort fehlt.",
   "observation_delete": "Beobachtung löschen",
   "observation_delete_question": "Möchten Sie die Beobachtung löschen?",
   "observation_empty": "Es gibt noch keine Beobachtung.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Bezahlte Funktion",
   "promotion_content": "Dies ist eine kostenpflichtige Funktion. Sie können es bis $date kostenlos nutzen.",
+
+  "no_connection_title": "Verbindung",
+  "no_connection_content": "Diese Funktion funktioniert nicht ohne Internetverbindung.",
 
   "photo_search_no_login": "Die Suche nach Fotos ist nur für angemeldete Benutzer verfügbar. Bitte loggen Sie sich ein.",
   "photo_search_failed": "Suche nach Foto fehlgeschlagen. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",

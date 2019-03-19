@@ -47,6 +47,8 @@
   "offline_download_fail": "Download fejlede. Kontroller din internetforbindelse eller ledig plads på enheden, og prøv igen.",
   "offline_delete_message": "Vil du slette offline data?",
   "offline_download": "Genoptag download",
+  "scale_down_photos_title": "Skal ned observationens fotos",
+  "scale_down_photos_subtitle": "Tænd, når du ikke kan se dine billeder efter valg.",
 
   "feedback_intro": "Du har bidraget til denne applikation, da du har installeret den på din enhed, tak. Hvis du leder efter noget mere, her er nogle muligheder:",
   "feedback_review": "Du kan skrive en positiv anmeldelse.",
@@ -247,7 +249,8 @@
   "observations": "Observationer",
   "observation_note": "Placer til din private note.",
   "observation_saved": "Observation blev reddet.",
-  "observation_not_saved": "Observationen var ufuldstændig, så den blev ikke reddet. Placering eller foto mangler.",
+  "observation_missing_photo": "Observationen var ufuldstændig, så den blev ikke reddet. Foto mangler.",
+  "observation_missing_location": "Observationen var ufuldstændig, så den blev ikke reddet. Placering mangler.",
   "observation_delete": "Slet observation",
   "observation_delete_question": "Vil du slette observationen?",
   "observation_empty": "Der er ingen observation endnu.",
@@ -280,6 +283,9 @@
 
   "promotion_title": "Betalt funktion",
   "promotion_content": "Dette er en betalt funktion. Du kan bruge det gratis indtil $date",
+
+  "no_connection_title": "Forbindelse",
+  "no_connection_content": "Denne funktion virker ikke uden internetforbindelse.",
 
   "photo_search_no_login": "Søgning efter foto er kun tilgængelig for logget brugere. Vær venlig at logge ind.",
   "photo_search_failed": "Søg efter billede mislykkedes. Tjek din internetforbindelse og prøv igen.",

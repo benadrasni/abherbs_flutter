@@ -47,6 +47,8 @@
   "offline_download_fail": "Stahování souborů selhalo. Prosím zkontrolujte připojení k internetu nebo volný prostor na zařízení a zkuste znovu.",
   "offline_delete_message": "Opravdu chcete vymazat offline data?",
   "offline_download": "Obnovit stahování",
+  "scale_down_photos_title": "Zmenšit fotografie z pozorování",
+  "scale_down_photos_subtitle": "Zapněte, když se vaše fotografie po vyjmutí nezobrazí.",
 
   "feedback_intro": "Tuto aplikaci podporujete odkdy jste si ji nainstalovali na své mobilní zařízení, děkuji. Pokud hledáte jiné formy podpory, zde jsou některé možnosti:",
   "feedback_review": "Můžete napsat pozitivní recenzi.",
@@ -248,7 +250,8 @@
   "observations": "Pozorování",
   "observation_note": "Místo pro vaše soukromé poznámky.",
   "observation_saved": "Pozorování bylo uloženo.",
-  "observation_not_saved": "Pozorování bylo neúplné, takže nebylo uloženo. Chyběla poloha nebo fotka.",
+  "observation_missing_photo": "Pozorování bylo neúplné, takže nebylo uloženo. Chybí fotografie.",
+  "observation_missing_location": "Pozorování bylo neúplné, takže nebylo uloženo. Chybí poloha.",
   "observation_delete": "Zmazat pozorování",
   "observation_delete_question": "Chcete zmazat pozorování?",
   "observation_empty": "Zatím není žádné pozorování.",
@@ -281,6 +284,9 @@
 
   "promotion_title": "Placená funkce",
   "promotion_content": "Toto je placená funkce. Volně dostupná bude do $date",
+
+  "no_connection_title": "Připojení",
+  "no_connection_content": "Tato funkce bez připojení k Internetu nefunguje.",
 
   "photo_search_no_login": "Vyhledávání podle fotografie je dostupné pouze pro přihlášené uživatele. Přihlaste se, prosím.",
   "photo_search_failed": "Vyhledávání bylo neúspěšné. Zkontrolujte své připojení na internet a skuste znovu.",

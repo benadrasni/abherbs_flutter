@@ -47,6 +47,8 @@
   "offline_download_fail": "Allalaadimine ebaõnnestus. Palun kontrollige oma Interneti-ühendust või vaba ruumi seadmes ja proovige uuesti.",
   "offline_delete_message": "Kas soovite offline andmeid kustutada?",
   "offline_download": "Jätka allalaadimist",
+  "scale_down_photos_title": "Vähendage vaatluse fotosid",
+  "scale_down_photos_subtitle": "Lülitage sisse, kui fotosid pärast valimist ei näe.",
 
   "feedback_intro": "Tänu sellele, et olete selle seadmesse installinud, olete sellele rakendusele kaasa aidanud. Kui otsite midagi muud, on siin mõned võimalused:",
   "feedback_review": "Võite kirjutada positiivse ülevaate.",
@@ -249,7 +251,8 @@
   "observations": "Vaatlused",
   "observation_note": "Koht teie privaatseks märkuseks.",
   "observation_saved": "Vaatlus salvestati.",
-  "observation_not_saved": "Vaatlus oli puudulik, seega ei salvestatud. Asukoht või foto puudub.",
+  "observation_missing_photo": "Vaatlus oli puudulik, seega ei salvestatud. Foto puudub.",
+  "observation_missing_location": "Vaatlus oli puudulik, seega ei salvestatud. Asukoht puudub.",
   "observation_delete": "Kustuta vaatlus",
   "observation_delete_question": "Kas soovite vaatluse kustutada?",
   "observation_empty": "Tähelepanu pole veel.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Tasuline funktsioon",
   "promotion_content": "See on tasuline funktsioon. Võite seda kasutada kuni $date",
+
+  "no_connection_title": "Ühendus",
+  "no_connection_content": "See funktsioon ei tööta ilma internetiühenduseta.",
 
   "photo_search_no_login": "Fotode otsing on saadaval ainult logitud kasutajatele. Palun logige sisse.",
   "photo_search_failed": "Otsing foto järgi nurjus. Kontrollige oma Interneti-ühendust ja proovige uuesti.",

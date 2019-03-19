@@ -47,6 +47,8 @@
   "offline_download_fail": "ダウンロードに失敗しました。 インターネット接続またはデバイスの空き容量を確認して、もう一度やり直してください。",
   "offline_delete_message": "オフラインデータを削除しますか？",
   "offline_download": "ダウンロードを再開",
+  "scale_down_photos_title": "観測の写真を縮小する",
+  "scale_down_photos_subtitle": "ピック後に写真が見えなくなったら電源を入れます。",
 
   "feedback_intro": "デバイスにインストールしたので、このアプリケーションに貢献しました。ありがとうございます。 あなたがもっと何かを探しているなら、いくつかのオプションがあります：",
   "feedback_review": "あなたは肯定的なレビューを書くことができます。",
@@ -249,7 +251,8 @@
   "observations": "観察",
   "observation_note": "あなたのプライベートメモのための場所。",
   "observation_saved": "観察は助かりました。",
-  "observation_not_saved": "観測は不完全だったので保存されませんでした。 場所や写真が見つかりません。",
+  "observation_missing_photo": "観測は不完全だったので保存されませんでした。 写真がありません。",
+  "observation_missing_location": "観測は不完全だったので保存されませんでした。 場所が見つかりません。",
   "observation_delete": "観測を削除",
   "observation_delete_question": "観測を削除しますか？",
   "observation_empty": "まだ観測はありません。",
@@ -282,6 +285,9 @@
 
   "promotion_title": "有料機能",
   "promotion_content": "これは有料機能です。$date まで無料で使えます",
+
+  "no_connection_title": "接続",
+  "no_connection_content": "この機能はインターネットに接続していないと機能しません。",
 
   "photo_search_no_login": "写真による検索は、ログインしているユーザーのみが利用できます。 ログインしてください。",
   "photo_search_failed": "写真で検索できませんでした。 インターネット接続を確認してもう一度やり直してください。",

@@ -47,6 +47,8 @@
   "offline_download_fail": "Atsisiuntimas nepavyko. Patikrinkite interneto ryšį arba laisvą vietą įrenginyje ir bandykite dar kartą.",
   "offline_delete_message": "Ar norite ištrinti neprisijungus duomenis?",
   "offline_download": "Tęsti atsisiuntimą",
+  "scale_down_photos_title": "Sumažinkite stebėjimo nuotraukas",
+  "scale_down_photos_subtitle": "Įjunkite, kai nematote nuotraukų po pasirinkimo.",
 
   "feedback_intro": "Jūs prisidėjote prie šios programos, nes ją įdiegėte savo prietaise. Jei ieškote ko nors daugiau, čia pateikiamos kelios parinktys:",
   "feedback_review": "Galite parašyti teigiamą apžvalgą.",
@@ -249,7 +251,8 @@
   "observations": "Stebėjimas",
   "observation_note": "Vieta jūsų asmeninei pastabai.",
   "observation_saved": "Stebėjimas buvo išsaugotas.",
-  "observation_not_saved": "Stebėjimas buvo neišsamus, todėl jis nebuvo išsaugotas. Trūksta vietos ar nuotraukos.",
+  "observation_missing_photo": "Stebėjimas buvo neišsamus, todėl jis nebuvo išsaugotas. Trūksta nuotraukos.",
+  "observation_missing_location": "Stebėjimas buvo neišsamus, todėl jis nebuvo išsaugotas. Trūksta vietos.",
   "observation_delete": "Ištrinti stebėjimą",
   "observation_delete_question": "Ar norite ištrinti stebėjimą?",
   "observation_empty": "Dar nėra jokių stebėjimų.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Mokama funkcija",
   "promotion_content": "Tai mokama funkcija. Ją galite naudoti nemokamai iki $date",
+
+  "no_connection_title": "Ryšys",
+  "no_connection_content": "Ši funkcija neveikia be interneto ryšio.",
 
   "photo_search_no_login": "Ieškoti pagal nuotrauką galima tik prisijungusiems vartotojams. Prašome prisijungti.",
   "photo_search_failed": "Nepavyko ieškoti pagal nuotrauką. Patikrinkite interneto ryšį ir bandykite dar kartą.",

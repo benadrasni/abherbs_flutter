@@ -47,6 +47,8 @@
   "offline_download_fail": "Pengunduhan gagal. Silakan periksa koneksi internet Anda atau ruang kosong di perangkat dan coba lagi.",
   "offline_delete_message": "Apakah Anda ingin menghapus data offline?",
   "offline_download": "Lanjutkan unduhan",
+  "scale_down_photos_title": "Perkecil foto pengamatan",
+  "scale_down_photos_subtitle": "Hidupkan ketika Anda tidak melihat foto Anda setelah memilih.",
 
   "feedback_intro": "Anda telah berkontribusi untuk aplikasi ini karena Anda telah menginstalnya di perangkat Anda, terima kasih. Jika Anda mencari sesuatu yang lebih, berikut adalah beberapa opsi:",
   "feedback_review": "Anda dapat menulis ulasan positif.",
@@ -249,7 +251,8 @@
   "observations": "Pengamatan",
   "observation_note": "Tempat untuk catatan pribadi Anda.",
   "observation_saved": "Pengamatan disimpan.",
-  "observation_not_saved": "Pengamatan tidak lengkap sehingga tidak disimpan. Lokasi atau foto tidak ada.",
+  "observation_missing_photo": "Pengamatan tidak lengkap sehingga tidak disimpan. Foto tidak ada.",
+  "observation_missing_location": "Pengamatan tidak lengkap sehingga tidak disimpan. Lokasi tidak ada.",
   "observation_delete": "Hapus pengamatan",
   "observation_delete_question": "Apakah Anda ingin menghapus pengamatan?",
   "observation_empty": "Belum ada observasi.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Fitur berbayar",
   "promotion_content": "Ini adalah fitur berbayar. Anda dapat menggunakannya secara gratis hingga $date",
+
+  "no_connection_title": "Koneksi",
+  "no_connection_content": "Fitur ini tidak berfungsi tanpa koneksi internet.",
 
   "photo_search_no_login": "Pencarian berdasarkan foto hanya tersedia untuk pengguna yang login. Silahkan masuk.",
   "photo_search_failed": "Pencarian berdasarkan foto gagal. Periksa koneksi internet Anda dan coba lagi.",

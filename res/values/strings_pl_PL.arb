@@ -47,6 +47,8 @@
   "offline_download_fail": "Pobieranie się nie powiodło. Sprawdź stan połączenia internetowego lub ilość wolnego miejsca na urządzeniu i spróbuj ponownie.",
   "offline_delete_message": "Czy chcesz usunąć dane offline?",
   "offline_download": "Wznów pobieranie",
+  "scale_down_photos_title": "Skaluj zdjęcia obserwacji",
+  "scale_down_photos_subtitle": "Włącz, gdy nie widzisz swoich zdjęć po wybraniu.",
 
   "feedback_intro": "Jeśli chcesz dać coś od siebie i przyczynić się do rozwoju aplikacji, masz kilka opcji do wyboru:",
   "feedback_review": "Możesz przyznać aplikacji 5 gwiazdek i napisać pozytywną recenzję.",
@@ -249,7 +251,8 @@
   "observations": "Okaz",
   "observation_note": "Miejsce na prywatną notatkę.",
   "observation_saved": "Okaz został zapisany.",
-  "observation_not_saved": "Okaz nie został zapisany. Brakuje zdjęcia lub lokalizacji.",
+  "observation_missing_photo": "Okaz nie został zapisany. Brakuje zdjęcia.",
+  "observation_missing_location": "Okaz nie został zapisany. Brakuje lokalizacji.",
   "observation_delete": "Usuń ten okaz",
   "observation_delete_question": "Czy chcesz usunąć ten okaz?",
   "observation_empty": "Nie masz jeszcze zaobserwowanych okazów.",
@@ -282,6 +285,9 @@
 
   "promotion_title": "Płatna funkcja",
   "promotion_content": "To jest płatna funkcja. Możesz jej używać za darmo do $date",
+
+  "no_connection_title": "Połączenie",
+  "no_connection_content": "Ta funkcja nie działa bez połączenia z Internetem.",
 
   "photo_search_no_login": "Wyszukiwanie według zdjęcia jest dostępne tylko dla zalogowanych użytkowników. Proszę się zalogować.",
   "photo_search_failed": "Wyszukiwanie po zdjęciu nie powiodło się. Sprawdź połączenie internetowe i spróbuj ponownie.",
