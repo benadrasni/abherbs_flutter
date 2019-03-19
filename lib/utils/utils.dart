@@ -20,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:connectivity/connectivity.dart';
 
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
@@ -181,22 +182,22 @@ String getMapImageUrl(double latitude, double longitude, double width, double he
 
 double getLatitudeFromExif(IfdTag latitudeRef, IfdTag latitude) {
   if (latitudeRef == null || latitude == null) return null;
-  double latDegrees = latitude.values[0].numerator/latitude.values[0].denominator;
-  double latMinutes = latitude.values[1].numerator/latitude.values[1].denominator;
-  double latSeconds = latitude.values[2].numerator/latitude.values[2].denominator;
+  double latDegrees = latitude.values[0].numerator / latitude.values[0].denominator;
+  double latMinutes = latitude.values[1].numerator / latitude.values[1].denominator;
+  double latSeconds = latitude.values[2].numerator / latitude.values[2].denominator;
 
   int northSouth = latitudeRef.toString() == 'N' ? 1 : -1;
-  return northSouth * (latDegrees + latMinutes/60 + latSeconds/60/60);
+  return northSouth * (latDegrees + latMinutes / 60 + latSeconds / 60 / 60);
 }
 
 double getLongitudeFromExif(IfdTag longitudeRef, IfdTag longitude) {
   if (longitudeRef == null || longitude == null) return null;
-  double longDegrees = longitude.values[0].numerator/longitude.values[0].denominator;
-  double longMinutes = longitude.values[1].numerator/longitude.values[1].denominator;
-  double longSeconds = longitude.values[2].numerator/longitude.values[2].denominator;
+  double longDegrees = longitude.values[0].numerator / longitude.values[0].denominator;
+  double longMinutes = longitude.values[1].numerator / longitude.values[1].denominator;
+  double longSeconds = longitude.values[2].numerator / longitude.values[2].denominator;
 
   int eastWest = longitudeRef.toString() == 'E' ? 1 : -1;
-  return eastWest * (longDegrees + longMinutes/60 + longSeconds/60/60);
+  return eastWest * (longDegrees + longMinutes / 60 + longSeconds / 60 / 60);
 }
 
 DateTime getDateTimeFromExif(IfdTag dateTime) {
@@ -204,7 +205,8 @@ DateTime getDateTimeFromExif(IfdTag dateTime) {
   var dateParts = dateTime.toString().split(' ');
   var datePart = dateParts[0].split(':');
   var timePart = dateParts[1].split(':');
-  return DateTime(int.parse(datePart[0]), int.parse(datePart[1]), int.parse(datePart[2]), int.parse(timePart[0]), int.parse(timePart[1]), int.parse(timePart[2]));
+  return DateTime(
+      int.parse(datePart[0]), int.parse(datePart[1]), int.parse(datePart[2]), int.parse(timePart[0]), int.parse(timePart[1]), int.parse(timePart[2]));
 }
 
 Widget getImage(String url, Widget placeholder, {double width, double height, BoxFit fit}) {
@@ -369,60 +371,84 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
     Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
   DateFormat dateFormat = new DateFormat.yMMMMd(Localizations.localeOf(mainContext).toString());
   var _actions = <Widget>[];
+
+  // search by photo
   _actions.add(IconButton(
     icon: getIcon(productPhotoSearch),
     onPressed: () {
-      if (Purchases.isPhotoSearch()) {
-        if (currentUser != null) {
-          Navigator.push(
-            mainContext,
-            MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
-          );
+      Connectivity().checkConnectivity().then((result) {
+        if (result == ConnectivityResult.none) {
+          infoDialog(mainContext, S.of(mainContext).no_connection_title, S.of(mainContext).no_connection_content);
         } else {
-          photoSearchDialog(mainContext, key);
+          if (Purchases.isPhotoSearch()) {
+            if (currentUser != null) {
+              Navigator.push(
+                mainContext,
+                MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+              );
+            } else {
+              photoSearchDialog(mainContext, key);
+            }
+          } else if (Purchases.isSearchByPhotoPromotion != null && Purchases.isSearchByPhotoPromotion) {
+            infoDialog(mainContext, S.of(mainContext).promotion_title,
+                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo)))
+                .then((value) {
+              Navigator.push(
+                mainContext,
+                MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+              );
+            });
+          } else {
+            Navigator.push(
+              mainContext,
+              MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+            );
+          }
         }
-      } else if (Purchases.isSearchByPhotoPromotion != null && Purchases.isSearchByPhotoPromotion) {
-        infoDialog(mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo))).then((value) {
-          Navigator.push(
-            mainContext,
-            MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
-          );
-        });
-      } else {
-        Navigator.push(
-          mainContext,
-          MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
-        );
-      }
+      });
     },
   ));
+
+  // observations
   _actions.add(IconButton(
     icon: getIcon(productObservations),
     onPressed: () {
-      if (Purchases.isObservations()) {
-        if (currentUser != null) {
-          Navigator.push(
-            mainContext,
-            MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct, false)),
-          );
+      Connectivity().checkConnectivity().then((result) {
+        if (result == ConnectivityResult.none) {
+          infoDialog(mainContext, S.of(mainContext).no_connection_title, S.of(mainContext).no_connection_content);
         } else {
-          observationDialog(mainContext, key);
+          if (Purchases.isObservations()) {
+            if (currentUser != null) {
+              Navigator.push(
+                mainContext,
+                MaterialPageRoute(
+                    builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct, false)),
+              );
+            } else {
+              observationDialog(mainContext, key);
+            }
+          } else if (Purchases.isObservationPromotion != null && Purchases.isObservationPromotion) {
+            infoDialog(mainContext, S.of(mainContext).promotion_title,
+                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo)))
+                .then((value) {
+              Navigator.push(
+                mainContext,
+                MaterialPageRoute(
+                    builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct, true)),
+              );
+            });
+          } else {
+            Navigator.push(
+              mainContext,
+              MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+            );
+          }
         }
-      } else if (Purchases.isObservationPromotion != null && Purchases.isObservationPromotion) {
-        infoDialog(mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo))).then((value) {
-          Navigator.push(
-            mainContext,
-            MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct, true)),
-          );
-        });
-      } else {
-        Navigator.push(
-          mainContext,
-          MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
-        );
-      }
+      });
     },
   ));
+
+  // search by name or taxonomy
   _actions.add(IconButton(
     icon: getIcon(productSearch),
     onPressed: () {
@@ -432,7 +458,9 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
           MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
         );
       } else if (Purchases.isSearchPromotion != null && Purchases.isSearchPromotion) {
-        infoDialog(mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo))).then((value) {
+        infoDialog(
+                mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo)))
+            .then((value) {
           Navigator.push(
             mainContext,
             MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
@@ -450,8 +478,8 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
   return _actions;
 }
 
-void goToDetail(State state, BuildContext context, Locale myLocale, String name, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct,
-    Map<String, String> filter) {
+void goToDetail(State state, BuildContext context, Locale myLocale, String name, Function(String) onChangeLanguage,
+    Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
   plantsReference.child(name).once().then((DataSnapshot snapshot) {
     if (snapshot.value != null) {
       if (state.mounted && context != null) {
