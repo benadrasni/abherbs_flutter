@@ -42,7 +42,7 @@ class _PlantListState extends State<PlantList> {
       padding: EdgeInsets.all(10.0),
       child: getImage(url, placeholder),
       onPressed: () {
-        goToDetail(context, myLocale, name, widget.onChangeLanguage, widget.onBuyProduct, widget.filter);
+        goToDetail(this, context, myLocale, name, widget.onChangeLanguage, widget.onBuyProduct, widget.filter);
       },
     );
   }
@@ -85,6 +85,7 @@ class _PlantListState extends State<PlantList> {
 
   @override
   Widget build(BuildContext context) {
+    var self = this;
     var mainContext = context;
     return Scaffold(
       appBar: AppBar(
@@ -159,7 +160,7 @@ class _PlantListState extends State<PlantList> {
                       width: 50.0,
                       height: 50.0),
                   onTap: () {
-                    goToDetail(context, myLocale, name, widget.onChangeLanguage, widget.onBuyProduct, widget.filter);
+                    goToDetail(self, context, myLocale, name, widget.onChangeLanguage, widget.onBuyProduct, widget.filter);
                   },
                 ),
                 _getImageButton(context, myLocale, storagePhotos + snapshot.value['url'], name),
