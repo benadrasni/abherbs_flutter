@@ -134,8 +134,9 @@ class S implements WidgetsLocalizations {
   String get observation_delete => "Delete observation";
   String get observation_delete_question => "Do you want to delete the observation?";
   String get observation_empty => "There is no observation yet.";
+  String get observation_missing_location => "Observation was incomplete thus it wasn't saved. Location is missing.";
+  String get observation_missing_photo => "Observation was incomplete thus it wasn't saved. Photo is missing.";
   String get observation_no_login => "Observations are available only for logged users. Please log in.";
-  String get observation_not_saved => "Observation was incomplete thus it wasn't saved. Location or photo is missing.";
   String get observation_note => "Place for your private note.";
   String get observation_photo_delete => "Remove photo";
   String get observation_photo_delete_question => "Do you want to remove photo from the observation?";
@@ -495,8 +496,6 @@ class $it_IT extends S {
   String get subarctic_america => "America subartica";
   @override
   String get product_search_title => "Cerca nei nomi o nella tassonomia";
-  @override
-  String get observation_not_saved => "L'osservazione era incompleta quindi non è stata salvata. Posizione o foto mancanti.";
   @override
   String get feedback_review => "Puoi scrivere una recensione positiva.";
   @override
@@ -1028,8 +1027,6 @@ class $ru_RU extends S {
   @override
   String get product_search_title => "Поиск по именам или таксономии";
   @override
-  String get observation_not_saved => "Наблюдение было неполным, поэтому оно не было сохранено. Местоположение или фотография отсутствует.";
-  @override
   String get feedback_review => "Вы можете написать положительный отзыв.";
   @override
   String get yes => "Да";
@@ -1559,8 +1556,6 @@ class $pl_PL extends S {
   String get subarctic_america => "Ameryka subarktyczna";
   @override
   String get product_search_title => "Wyszukaj w nazwach lub taksonomii";
-  @override
-  String get observation_not_saved => "Okaz nie został zapisany. Brakuje zdjęcia lub lokalizacji.";
   @override
   String get feedback_review => "Możesz przyznać aplikacji 5 gwiazdek i napisać pozytywną recenzję.";
   @override
@@ -2092,8 +2087,6 @@ class $ro_RO extends S {
   @override
   String get product_search_title => "Căutați în nume sau în taxonomie";
   @override
-  String get observation_not_saved => "Observația a fost incompletă, astfel încât nu a fost salvată. Locația sau fotografia lipsesc.";
-  @override
   String get feedback_review => "Puteți scrie o recenzie pozitivă.";
   @override
   String get yes => "Da";
@@ -2623,8 +2616,6 @@ class $hi_IN extends S {
   String get subarctic_america => "सुबाराक्टिक अमेरिका";
   @override
   String get product_search_title => "नामों में खोजें या वर्गीकरण";
-  @override
-  String get observation_not_saved => "अवलोकन अपूर्ण था इसलिए इसे बचाया नहीं गया था। स्थान या फोटो गायब है।";
   @override
   String get feedback_review => "आप एक सकारात्मक समीक्षा लिख सकते हैं।";
   @override
@@ -3156,8 +3147,6 @@ class $id_ID extends S {
   @override
   String get product_search_title => "Cari nama atau taksonomi";
   @override
-  String get observation_not_saved => "Pengamatan tidak lengkap sehingga tidak disimpan. Lokasi atau foto tidak ada.";
-  @override
   String get feedback_review => "Anda dapat menulis ulasan positif.";
   @override
   String get yes => "iya nih";
@@ -3687,8 +3676,6 @@ class $fr_FR extends S {
   String get subarctic_america => "Amérique subarctique";
   @override
   String get product_search_title => "Chercher dans les noms ou la taxonomie";
-  @override
-  String get observation_not_saved => "L'observation était incomplète, donc elle n'a pas été sauvegardée. L'emplacement de la photo est manquant.";
   @override
   String get feedback_review => "Vous pouvez écrire une critique positive.";
   @override
@@ -4220,8 +4207,6 @@ class $he_IL extends S {
   @override
   String get product_search_title => "חיפוש בשמות או בטקסונומיה";
   @override
-  String get observation_not_saved => "התצפית לא הושלמה ולכן היא לא נשמרה. המיקום או התמונה חסרים.";
-  @override
   String get feedback_review => "אתה יכול לכתוב ביקורת חיובית.";
   @override
   String get yes => "כן";
@@ -4751,8 +4736,6 @@ class $ja_JP extends S {
   String get subarctic_america => "亜寒帯アメリカ";
   @override
   String get product_search_title => "名前または分類法で検索する";
-  @override
-  String get observation_not_saved => "観測は不完全だったので保存されませんでした。 場所や写真が見つかりません。";
   @override
   String get feedback_review => "あなたは肯定的なレビューを書くことができます。";
   @override
@@ -5284,8 +5267,6 @@ class $cs_CZ extends S {
   @override
   String get product_search_title => "Hledat v jménech nebo v taxonomii";
   @override
-  String get observation_not_saved => "Pozorování bylo neúplné, takže nebylo uloženo. Chyběla poloha nebo fotka.";
-  @override
   String get feedback_review => "Můžete napsat pozitivní recenzi.";
   @override
   String get yes => "Ano";
@@ -5813,8 +5794,6 @@ class $de_DE extends S {
   String get subarctic_america => "Subarktistisches Amerika";
   @override
   String get product_search_title => "Suche nach Namen oder Taxonomie";
-  @override
-  String get observation_not_saved => "Die Beobachtung wurde nicht abgeschlossen, so dass nichts gespeichert wurde. Ort oder Foto fehlt.";
   @override
   String get feedback_review => "Sie können eine positive Bewertung schreiben.";
   @override
@@ -6346,8 +6325,6 @@ class $hu_HU extends S {
   @override
   String get product_search_title => "Keresés nevekben vagy taxonómiában";
   @override
-  String get observation_not_saved => "A megfigyelés hiányos volt, így nem lett elmentve. Hiányzik a hely vagy a fénykép.";
-  @override
   String get feedback_review => "Írhat pozitív értékelést.";
   @override
   String get yes => "Igen";
@@ -6878,8 +6855,6 @@ class $nb_NO extends S {
   @override
   String get product_search_title => "Søk i navn eller taksonomi";
   @override
-  String get observation_not_saved => "Observasjonen var ufullstendig, slik at den ikke ble frelst. Sted eller bilde mangler.";
-  @override
   String get feedback_review => "Du kan skrive en positiv anmeldelse.";
   @override
   String get yes => "Ja";
@@ -7408,8 +7383,6 @@ class $sk_SK extends S {
   @override
   String get product_search_title => "Hľadať v názvoch alebo v taxonómii";
   @override
-  String get observation_not_saved => "Pozorovanie nebolo úplné, takže nebolo uložené. Chýbala poloha alebo fotka.";
-  @override
   String get feedback_review => "Môžete napísať pozitívnu recenziu.";
   @override
   String get yes => "Áno";
@@ -7935,8 +7908,6 @@ class $es_ES extends S {
   String get subarctic_america => "América Subártica";
   @override
   String get product_search_title => "Búsqueda en nombres o taxonomía";
-  @override
-  String get observation_not_saved => "La observación fue incompleta por lo que no se salvó. Falta la ubicación o la foto.";
   @override
   String get feedback_review => "Puedes escribir una crítica positiva.";
   @override
@@ -8468,8 +8439,6 @@ class $nl_NL extends S {
   @override
   String get product_search_title => "Zoeken in namen of taxonomie";
   @override
-  String get observation_not_saved => "Observatie was onvolledig dus het werd niet opgeslagen. Locatie of foto ontbreekt.";
-  @override
   String get feedback_review => "U kunt een positieve beoordeling schrijven.";
   @override
   String get yes => "Ja";
@@ -8999,8 +8968,6 @@ class $pa_IN extends S {
   String get subarctic_america => "ਸੁਬਰਟਿਕ ਅਮਰੀਕਾ";
   @override
   String get product_search_title => "ਨਾਮਾਂ ਜਾਂ ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਲੱਭੋ";
-  @override
-  String get observation_not_saved => "ਨਜ਼ਰਅੰਦਾਜ਼ੀ ਅਧੂਰੀ ਸੀ ਇਸ ਲਈ ਇਸ ਨੂੰ ਨਹੀਂ ਬਚਾਇਆ ਗਿਆ ਸੀ. ਸਥਾਨ ਜਾਂ ਫੋਟੋ ਗੁੰਮ ਹੈ";
   @override
   String get feedback_review => "ਤੁਸੀਂ ਇੱਕ ਸਕਾਰਾਤਮਕ ਸਮੀਖਿਆ ਲਿਖ ਸਕਦੇ ਹੋ.";
   @override
@@ -9532,8 +9499,6 @@ class $sv_SE extends S {
   @override
   String get product_search_title => "Sök i namn eller taxonomi";
   @override
-  String get observation_not_saved => "Observationen var ofullständig så att den inte sparades. Plats eller foto saknas.";
-  @override
   String get feedback_review => "Du kan skriva en positiv recension.";
   @override
   String get yes => "Ja";
@@ -10064,8 +10029,6 @@ class $da_DK extends S {
   @override
   String get product_search_title => "Søg i navne eller taksonomi";
   @override
-  String get observation_not_saved => "Observationen var ufuldstændig, så den blev ikke reddet. Placering eller foto mangler.";
-  @override
   String get feedback_review => "Du kan skrive en positiv anmeldelse.";
   @override
   String get yes => "Ja";
@@ -10589,8 +10552,6 @@ class $fa_IR extends S {
   String get subarctic_america => "Subarctic America";
   @override
   String get product_search_title => "جستجو در نام یا طبقه بندی";
-  @override
-  String get observation_not_saved => "نظارت ناقص بود بنابراین ذخیره نشد. مکان یا عکس گم شده است";
   @override
   String get feedback_review => "شما می توانید یک بررسی مثبت بنویسید.";
   @override
@@ -11119,8 +11080,6 @@ class $sr_RS extends S {
   String get subarctic_america => "Субарцтиц Америца";
   @override
   String get product_search_title => "Претражујте имена или таксономију";
-  @override
-  String get observation_not_saved => "Опажање је било непотпуно, тако да није било спашено. Недостаје локација или фотографија.";
   @override
   String get feedback_review => "Можете написати позитивну рецензију.";
   @override
@@ -11668,8 +11627,6 @@ class $fi_FI extends S {
   @override
   String get product_search_title => "Hae nimistä tai taksonomiasta";
   @override
-  String get observation_not_saved => "Havainto epätäydellinen, joten sitä ei tallennettu. Sijainti tai valokuva puuttuu.";
-  @override
   String get feedback_review => "Voit kirjoittaa positiivisen tarkistuksen.";
   @override
   String get yes => "Joo";
@@ -12200,8 +12157,6 @@ class $hr_HR extends S {
   @override
   String get product_search_title => "Pretražujte imena ili taksonomiju";
   @override
-  String get observation_not_saved => "Zapažanje je bilo nepotpuno pa nije bilo spašeno. Nedostaje lokacija ili fotografija.";
-  @override
   String get feedback_review => "Možete napisati pozitivnu recenziju.";
   @override
   String get yes => "Da";
@@ -12731,8 +12686,6 @@ class $et_EE extends S {
   String get subarctic_america => "Subarctic Ameerika";
   @override
   String get product_search_title => "Otsi nimedest või taksonoomiast";
-  @override
-  String get observation_not_saved => "Vaatlus oli puudulik, seega ei salvestatud. Asukoht või foto puudub.";
   @override
   String get feedback_review => "Võite kirjutada positiivse ülevaate.";
   @override
@@ -13272,8 +13225,6 @@ class $lt_LT extends S {
   @override
   String get product_search_title => "Ieškoti vardų arba taksonomijos";
   @override
-  String get observation_not_saved => "Stebėjimas buvo neišsamus, todėl jis nebuvo išsaugotas. Trūksta vietos ar nuotraukos.";
-  @override
   String get feedback_review => "Galite parašyti teigiamą apžvalgą.";
   @override
   String get yes => "Taip";
@@ -13803,8 +13754,6 @@ class $lv_LV extends S {
   String get subarctic_america => "Subartikā Amerika";
   @override
   String get product_search_title => "Meklēt nosaukumos vai taksonomijā";
-  @override
-  String get observation_not_saved => "Novērošana bija nepilnīga, tāpēc tā netika saglabāta. Trūkst vietas vai fotoattēla.";
   @override
   String get feedback_review => "Jūs varat uzrakstīt pozitīvu pārskatu.";
   @override
@@ -14336,8 +14285,6 @@ class $uk_UA extends S {
   @override
   String get product_search_title => "Пошук по іменах або таксономії";
   @override
-  String get observation_not_saved => "Спостереження було неповним, тому його не врятували. Місцезнаходження чи фото відсутні.";
-  @override
   String get feedback_review => "Можна написати позитивний відгук.";
   @override
   String get yes => "Так";
@@ -14867,8 +14814,6 @@ class $sl_SI extends S {
   String get subarctic_america => "Subarctic Amerika";
   @override
   String get product_search_title => "Išči po imenih ali taksonomiji";
-  @override
-  String get observation_not_saved => "Opazovanje je bilo nepopolno, zato ni bilo rešeno. Manjka lokacija ali fotografija.";
   @override
   String get feedback_review => "Lahko napišete pozitivno mnenje.";
   @override
@@ -15400,8 +15345,6 @@ class $ar_EG extends S {
   @override
   String get product_search_title => "البحث في الأسماء أو التصنيف";
   @override
-  String get observation_not_saved => "كانت الملاحظة غير كاملة وبالتالي لم يتم حفظها. الموقع أو الصورة مفقودة.";
-  @override
   String get feedback_review => "يمكنك كتابة مراجعة إيجابية.";
   @override
   String get yes => "نعم فعلا";
@@ -15931,8 +15874,6 @@ class $pt_PT extends S {
   String get subarctic_america => "América Subarctic";
   @override
   String get product_search_title => "Pesquisa em nomes ou taxonomia";
-  @override
-  String get observation_not_saved => "A observação estava incompleta, portanto, não foi salva. Localização ou foto está faltando.";
   @override
   String get feedback_review => "Você pode escrever um comentário positivo.";
   @override

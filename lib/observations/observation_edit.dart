@@ -52,7 +52,13 @@ class _ObservationEditState extends State<ObservationEdit> {
   }
 
   Future<bool> _saveObservation(BuildContext context) async {
-    if (_observation.photoPaths.length > 0 && _observation.latitude != null && _observation.longitude != null) {
+    if (_observation.photoPaths.length == 0) {
+      await infoDialog(context, S.of(context).observation, S.of(context).observation_missing_photo);
+      return false;
+    } else if (_observation.latitude == null || _observation.longitude == null) {
+      await infoDialog(context, S.of(context).observation, S.of(context).observation_missing_location);
+      return false;
+    } else {
       if (_observation.id == null) {
         _observation.id = widget.currentUser.uid + '_' + _observation.date.millisecondsSinceEpoch.toString();
       }
@@ -73,9 +79,6 @@ class _ObservationEditState extends State<ObservationEdit> {
           .child(_observation.id)
           .set(_observation.toJson());
       return true;
-    } else {
-      await infoDialog(context, S.of(context).observation, S.of(context).observation_not_saved);
-      return false;
     }
   }
 
@@ -115,8 +118,14 @@ class _ObservationEditState extends State<ObservationEdit> {
 
       // store exif data
       if (exifData != null && exifData.isNotEmpty) {
-        _observation.latitude = getLatitudeFromExif(exifData['GPS GPSLatitudeRef'], exifData['GPS GPSLatitude']);
-        _observation.longitude = getLongitudeFromExif(exifData['GPS GPSLongitudeRef'], exifData['GPS GPSLongitude']);
+        var latitude = getLatitudeFromExif(exifData['GPS GPSLatitudeRef'], exifData['GPS GPSLatitude']);
+        if (latitude != null) {
+          _observation.latitude = latitude;
+        }
+        var longitude = getLongitudeFromExif(exifData['GPS GPSLongitudeRef'], exifData['GPS GPSLongitude']);
+        if (longitude != null) {
+          _observation.longitude = longitude;
+        }
         _observation.date = getDateTimeFromExif(exifData['Image DateTime']) ?? DateTime.now();
         _dateController.text = _dateFormat.format(_observation.date);
       }
@@ -320,7 +329,8 @@ class _ObservationEditState extends State<ObservationEdit> {
         child: TextField(
           controller: _noteController,
           keyboardType: TextInputType.multiline,
-          maxLines: 3,
+          maxLines: 5,
+          maxLength: 300,
           decoration: InputDecoration(
             hintText: S.of(context).observation_note,
             border: OutlineInputBorder(
