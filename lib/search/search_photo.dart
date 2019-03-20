@@ -205,7 +205,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                     builder: (BuildContext context, AsyncSnapshot<List<SearchResult>> results) {
                       switch (results.connectionState) {
                         case ConnectionState.done:
-                          if (results.data.isEmpty) {
+                          if (results.data == null || results.data.isEmpty) {
                             return Text(
                               S.of(context).photo_search_empty,
                               style: TextStyle(fontSize: 18.0),
