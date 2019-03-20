@@ -8,7 +8,8 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 
 class SettingOffline extends StatefulWidget {
-  SettingOffline();
+  final void Function(bool) onDownloadFinished;
+  SettingOffline(this.onDownloadFinished);
 
   @override
   _SettingOfflineState createState() => _SettingOfflineState();
@@ -100,6 +101,7 @@ class _SettingOfflineState extends State<SettingOffline> {
           child: Text(S.of(context).no.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Navigator.of(context).pop();
+            widget.onDownloadFinished(false);
           },
         ));
         break;
@@ -121,6 +123,7 @@ class _SettingOfflineState extends State<SettingOffline> {
             _logOfflineDownloadEvent('paused');
             Offline.downloadPaused = true;
             Navigator.of(context).pop();
+            widget.onDownloadFinished(false);
           },
         ));
         break;
@@ -133,6 +136,7 @@ class _SettingOfflineState extends State<SettingOffline> {
           child: Text(S.of(context).close.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Navigator.of(context).pop();
+            widget.onDownloadFinished(true);
           },
         ));
         break;
@@ -145,6 +149,7 @@ class _SettingOfflineState extends State<SettingOffline> {
           child: Text(S.of(context).close.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Navigator.of(context).pop();
+            widget.onDownloadFinished(false);
           },
         ));
         break;
