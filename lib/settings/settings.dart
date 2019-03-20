@@ -36,6 +36,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<bool> _offlineF;
   Future<bool> _scaleDownPhotosF;
 
+  void onDownloadFinished(bool result) {
+    setState(() {
+      _downloadFinished = result;
+    });
+  }
+
   void _resetPrefLanguage() {
     Prefs.setString(keyPreferredLanguage, null).then((bool success) {
       _logPrefLanguageEvent('default');
@@ -115,7 +121,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return SettingOffline();
+        return SettingOffline(this.onDownloadFinished);
       },
     );
   }
@@ -384,11 +390,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           color: Theme.of(context).accentColor,
                           child: Text(S.of(context).offline_download),
                           onPressed: () {
-                            _offlineDownloadDialog().then((_) {
-                              setState(() {
-                                _downloadFinished = Offline.downloadFinished;
-                              });
-                            });
+                            _offlineDownloadDialog();
                           },
                         ),
                       ],
