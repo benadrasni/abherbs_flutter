@@ -7,7 +7,7 @@ description: Flutter version of abherbs
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 5.6.1+561
+version: 5.6.2+562
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -37,7 +37,7 @@ dependencies:
   percent_indicator: 1.0.14
   package_info: 0.4.0+2
   google_maps_flutter: 0.3.0+2
-  image_picker: 0.5.0+9
+  image_picker: 0.5.0+3
   exif: 1.0.1
   datetime_picker_formfield: 0.1.8
   connectivity: 0.4.2
