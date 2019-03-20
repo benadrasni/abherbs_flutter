@@ -29,6 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   FirebaseAnalytics _firebaseAnalytics;
   Future<String> _prefLanguageF;
   String _prefLanguage;
+  bool _downloadFinished;
   Future<String> _myRegionF;
   Future<bool> _alwaysMyRegionF;
   Future<List<String>> _myFilterF;
@@ -185,6 +186,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _alwaysMyRegionF = Prefs.getBoolF(keyAlwaysMyRegion, false);
     _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes);
     _offlineF = Prefs.getBoolF(keyOffline, false);
+    _downloadFinished = Offline.downloadFinished;
     _scaleDownPhotosF = Prefs.getBoolF(keyScaleDownPhotos, false);
 
     Ads.hideBannerAd();
@@ -366,7 +368,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           future: _offlineF,
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             return ListTile(
-              title: snapshot.data == null || !snapshot.data || Offline.downloadFinished
+              title: snapshot.data == null || !snapshot.data || _downloadFinished
                   ? Text(
                       S.of(context).offline_title,
                       style: titleTextStyle,
@@ -384,7 +386,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           onPressed: () {
                             _offlineDownloadDialog().then((_) {
                               setState(() {
-                                _offlineF = Prefs.getBoolF(keyOffline, false);
+                                _downloadFinished = Offline.downloadFinished;
                               });
                             });
                           },
