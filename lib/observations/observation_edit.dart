@@ -260,9 +260,11 @@ class _ObservationEditState extends State<ObservationEdit> {
             context,
             MaterialPageRoute(builder: (context) => ObservationMap(myLocale, _observation, mapModeEdit)),
           ).then((value) {
-            _observation.latitude = value.latitude;
-            _observation.longitude = value.longitude;
-            setState(() {});
+            if (value != null) {
+              _observation.latitude = value.latitude;
+              _observation.longitude = value.longitude;
+              setState(() {});
+            }
           });
         },
       ),
