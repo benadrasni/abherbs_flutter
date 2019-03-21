@@ -7582,7 +7582,7 @@ class $sk_SK extends S {
   @override
   String get china => "Čína";
   @override
-  String get offline_title => "Režm offline";
+  String get offline_title => "Režim offline";
   @override
   String get observation_missing_location => "Pozorovanie nebolo úplné, takže nebolo uložené. Chýba poloha.";
   @override
