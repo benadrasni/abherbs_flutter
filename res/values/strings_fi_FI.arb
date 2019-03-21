@@ -56,7 +56,7 @@
   "feedback_translate": "Voit ilmoittaa havaitusta virheestä tai virheestä tai lähettää uuden käännöksen omalle kielellesi.",
   "feedback_submit_translate_data": "Paranna kukkien tietoja",
   "feedback_submit_translate_app": "Paranna sovelluksen tarroja",
-  "feedback_buy_extended": "Voit ostaa laajennettua versiota, jossa on lisätoimintoja, kuten offline-tilassa, etsiä nimiä, etsiä taksonomiassa, havainnoissa ja konfiguroitavissa olevassa suodattimessa.",
+  "feedback_buy_extended": "Voit ostaa lisätoimintoja, kuten offline-tilassa, etsiä nimissä tai taksonomiassa, etsiä valokuvien, havaintojen ja konfiguroitavan suodattimen avulla.",
   "feedback_run_ads": "Voit näyttää koko näytön mainoksen tai katsella videomainosta tukemaan edelleen kehitystä ja tietokannan parantamista.",
   "feedback_run_ads_fullscreen": "Näytä koko näytön mainos",
   "feedback_run_ads_video": "Katso videomainos",
