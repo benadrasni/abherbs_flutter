@@ -66,18 +66,6 @@ class _SearchPhotoState extends State<SearchPhoto> {
           significantLabels.add(label);
         }
       }
-      // save labels
-      if (significantLabels.length > 0) {
-        rootReference.child(firebaseUsersPhotoSearch)
-            .child(widget.currentUser.uid)
-            .child(DateTime.now().millisecondsSinceEpoch.toString())
-            .set(significantLabels.map((label) {
-          Map<String, dynamic> labelMap = {};
-          labelMap['confidence'] = label.confidence;
-          labelMap['label'] = label.label;
-          return labelMap;
-        }).toList());
-      }
 
       var results = <SearchResult>[];
       for (Label label in significantLabels) {
@@ -123,6 +111,25 @@ class _SearchPhotoState extends State<SearchPhoto> {
           return result;
         }));
       }
+      // save labels
+      if (results.length > 0) {
+        rootReference.child(firebaseUsersPhotoSearch)
+            .child(widget.currentUser.uid)
+            .child(DateTime.now().millisecondsSinceEpoch.toString())
+            .set(results.map((searchResult) {
+          Map<String, dynamic> labelMap = {};
+          labelMap['languae'] = widget.myLocale.languageCode;
+          labelMap['confidence'] = searchResult.confidence;
+          if (searchResult.labelLatin != null) {
+            labelMap['label_latin'] = searchResult.labelLatin;
+          }
+          if (searchResult.labelInLanguage != null) {
+            labelMap['label_language'] = searchResult.labelInLanguage;
+          }
+          return labelMap;
+        }).toList());
+      }
+
       return results;
     });
   }

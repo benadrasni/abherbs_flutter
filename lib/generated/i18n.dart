@@ -80,7 +80,7 @@ class S implements WidgetsLocalizations {
   String get enhancements => "Enhancements";
   String get europe => "Europe";
   String get feedback => "Feedback";
-  String get feedback_buy_extended => "You can buy additional functionality like offline mode, search in names, search in taxonomy, observations and configurable filter.";
+  String get feedback_buy_extended => "You can buy additional functionality like offline mode, search in names or in taxonomy, search by photo, observations and configurable filter.";
   String get feedback_intro => "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:";
   String get feedback_review => "You can write a positive review.";
   String get feedback_run_ads => "You can display full screen advertisement or watch video advertisement to support further development and database enhancement.";
@@ -790,7 +790,7 @@ class $it_IT extends S {
   @override
   String get filter_distribution => "distribuzione";
   @override
-  String get feedback_buy_extended => "È possibile acquistare la versione estesa con funzionalità aggiuntive come la modalità offline, la ricerca nei nomi, la ricerca in tassonomia, le osservazioni e il filtro configurabile.";
+  String get feedback_buy_extended => "È possibile acquistare funzionalità aggiuntive come la modalità offline, la ricerca nei nomi o nella tassonomia, la ricerca per foto, le osservazioni e il filtro configurabile.";
   @override
   String get north_central_usa => "Stati Uniti centro-nord";
   @override
@@ -1334,7 +1334,7 @@ class $ru_RU extends S {
   @override
   String get filter_distribution => "распределение";
   @override
-  String get feedback_buy_extended => "Вы можете купить расширенную версию с дополнительными функциями, такими как автономный режим, поиск по именам, поиск по таксономии, наблюдения и настраиваемый фильтр.";
+  String get feedback_buy_extended => "Вы можете приобрести дополнительные функции, такие как автономный режим, поиск по именам или таксономии, поиск по фотографиям, наблюдения и настраиваемый фильтр.";
   @override
   String get north_central_usa => "Северо-Центральная часть США";
   @override
@@ -1878,7 +1878,7 @@ class $pl_PL extends S {
   @override
   String get filter_distribution => "Dystrybucja";
   @override
-  String get feedback_buy_extended => "Możesz nabyć wersję rozszerzoną, która posiada dodatkowe funkcjonalności, jak np. tryb offline, wyszukiwanie po nazwach czy taksonomii.";
+  String get feedback_buy_extended => "Możesz kupić dodatkowe funkcje, takie jak tryb offline, wyszukiwanie po nazwach czy taksonomii, wyszukiwanie według zdjęć, obserwacje i konfigurowalny filtr.";
   @override
   String get north_central_usa => "Północno-Środkowe USA";
   @override
@@ -2422,7 +2422,7 @@ class $ro_RO extends S {
   @override
   String get filter_distribution => "distribuire";
   @override
-  String get feedback_buy_extended => "Puteți cumpăra o versiune extinsă cu funcționalități suplimentare, cum ar fi modul offline, căutarea în nume, căutare în taxonomie, observații și filtru configurabil.";
+  String get feedback_buy_extended => "Puteți cumpăra funcții suplimentare, cum ar fi modul offline, căutarea în nume sau în taxonomie, căutarea după fotografie, observații și filtru configurabil.";
   @override
   String get north_central_usa => "Nord-central SUA";
   @override
@@ -2966,7 +2966,7 @@ class $hi_IN extends S {
   @override
   String get filter_distribution => "वितरण";
   @override
-  String get feedback_buy_extended => "आप ऑफ़लाइन मोड जैसे अतिरिक्त कार्यक्षमता के साथ विस्तारित संस्करण खरीद सकते हैं, नामों में खोज कर सकते हैं, वर्गीकरण में देख सकते हैं, अवलोकन और कॉन्फ़िगर करने योग्य फ़िल्टर कर सकते हैं।";
+  String get feedback_buy_extended => "आप ऑफ़लाइन मोड, नामों में खोज या वर्गीकरण में अतिरिक्त कार्यक्षमता खरीद सकते हैं, फ़ोटो, टिप्पणियों और कॉन्फ़िगर करने योग्य फ़िल्टर द्वारा खोज कर सकते हैं।";
   @override
   String get north_central_usa => "उत्तरी मध्य यूएसए";
   @override
@@ -3510,7 +3510,7 @@ class $id_ID extends S {
   @override
   String get filter_distribution => "distribusi";
   @override
-  String get feedback_buy_extended => "Anda dapat membeli versi lanjutan dengan fungsi tambahan seperti mode offline, pencarian nama, pencarian taksonomi, pengamatan, dan filter yang dapat dikonfigurasi.";
+  String get feedback_buy_extended => "Anda dapat membeli fungsionalitas tambahan seperti mode offline, pencarian nama atau taksonomi, pencarian berdasarkan foto, pengamatan dan filter yang dapat dikonfigurasi.";
   @override
   String get north_central_usa => "Tengah Utara AS";
   @override
@@ -4054,7 +4054,7 @@ class $fr_FR extends S {
   @override
   String get filter_distribution => "distribution";
   @override
-  String get feedback_buy_extended => "Vous pouvez acheter la version étendue avec des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche dans les noms, la recherche dans la taxonomie, les observations et le filtre configurable.";
+  String get feedback_buy_extended => "Vous pouvez acheter des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche par noms ou par taxonomie, la recherche par photo, les observations et le filtre configurable.";
   @override
   String get north_central_usa => "Nord-Central des États-Unis";
   @override
@@ -4598,7 +4598,7 @@ class $he_IL extends S {
   @override
   String get filter_distribution => "הפצה";
   @override
-  String get feedback_buy_extended => "אתה יכול לקנות גרסה מורחבת עם פונקציונליות נוספת כמו במצב לא מקוון, חיפוש בשמות, חיפוש בטקסונומיה, תצפיות ומסנן להגדרה.";
+  String get feedback_buy_extended => "אתה יכול לקנות פונקציונליות נוספת כמו במצב לא מקוון, חיפוש בשמות או בטקסונומיה, חיפוש לפי תמונה, תצפיות ומסנן להגדרה.";
   @override
   String get north_central_usa => "צפון מרכז ארצות הברית";
   @override
@@ -5142,7 +5142,7 @@ class $ja_JP extends S {
   @override
   String get filter_distribution => "分布";
   @override
-  String get feedback_buy_extended => "オフラインモード、名前で検索、分類法で検索、観測、設定可能なフィルタなどの追加機能を備えた拡張バージョンを購入できます。";
+  String get feedback_buy_extended => "あなたはオフラインモードのような追加の機能を購入することができます名前または分類法での検索、写真による検索、観察および設定可能なフィルタ。";
   @override
   String get north_central_usa => "アメリカ北西部";
   @override
@@ -5684,7 +5684,7 @@ class $cs_CZ extends S {
   @override
   String get filter_distribution => "distribuce";
   @override
-  String get feedback_buy_extended => "Můžete si koupit funkce navíc jako například ofline režim, vyhledávání v názvech a v taxonomii, pozorování a nastavitelný filtr.";
+  String get feedback_buy_extended => "Můžete si koupit funkce navíc jako například offline režim, vyhledávání v názvech a v taxonomii, vyhledávání pomocí fotografie, pozorování a nastavitelný filtr.";
   @override
   String get north_central_usa => "Středosever USA";
   @override
@@ -6228,7 +6228,7 @@ class $de_DE extends S {
   @override
   String get filter_distribution => "Vorkommen";
   @override
-  String get feedback_buy_extended => "Sie können eine erweiterte (+) Version mit zusätzlichen Funktionen wie Offline-Modus, Suche nach Namen, Suche in Taxonomie, Beobachtungen und konfigurierbaren Filter kaufen.";
+  String get feedback_buy_extended => "Sie können zusätzliche Funktionen erwerben, z. B. den Offline-Modus, die Suche in Namen oder in der Taxonomie, die Suche nach Foto, Beobachtungen und konfigurierbare Filter.";
   @override
   String get north_central_usa => "Nord-Zentral U.S.A.";
   @override
@@ -6772,7 +6772,7 @@ class $hu_HU extends S {
   @override
   String get filter_distribution => "terjesztés";
   @override
-  String get feedback_buy_extended => "A bővített változat megvásárlása további funkciókat eredményez, mint például az offline mód, név általi keresés, taxonómia általi keresés, megfigyelések és konfigurálható szűrő.";
+  String get feedback_buy_extended => "Megvásárolhat további funkciókat, mint például az offline mód, név általi keresés, taxonómia általi keresés, megfigyelések és konfigurálható szűrő.";
   @override
   String get north_central_usa => "Észak-Közép USA";
   @override
@@ -7316,7 +7316,7 @@ class $nb_NO extends S {
   @override
   String get filter_distribution => "fordeling";
   @override
-  String get feedback_buy_extended => "Du kan kjøpe utvidet versjon med ekstra funksjonalitet som frakoblet modus, søk i navn, søk i taksonomi, observasjoner og konfigurerbart filter.";
+  String get feedback_buy_extended => "Du kan kjøpe tilleggsfunksjoner som frakoblet modus, søk i navn eller i taksonomi, søk etter bilde, observasjoner og konfigurerbart filter.";
   @override
   String get north_central_usa => "Nord-Sentral USA";
   @override
@@ -7854,7 +7854,7 @@ class $sk_SK extends S {
   @override
   String get filter_distribution => "distribúcia";
   @override
-  String get feedback_buy_extended => "Môžete si kúpiť funkcie navyše ako napríklad ofline režim, vyhľadávanie v názvoch a v taxonómii, pozorovania a nastaviteľný filter.";
+  String get feedback_buy_extended => "Môžete si kúpiť funkcie navyše ako napríklad offline režim, vyhľadávanie v názvoch a v taxonómii, vyhľadávanie pomocou fotografie, pozorovania a nastaviteľný filter.";
   @override
   String get north_central_usa => "Stredosever USA";
   @override
@@ -8398,7 +8398,7 @@ class $es_ES extends S {
   @override
   String get filter_distribution => "distribución";
   @override
-  String get feedback_buy_extended => "Puede comprar la versión extendida (+) con funcionalidad adicional como el modo fuera de línea, buscar en nombres, buscar en taxonomía, observaciones y filtros configurables.";
+  String get feedback_buy_extended => "Puede comprar funciones adicionales como el modo fuera de línea, buscar en nombres o en taxonomía, buscar por foto, observaciones y filtros configurables.";
   @override
   String get north_central_usa => "Norte central de los Estados Unidos";
   @override
@@ -8942,7 +8942,7 @@ class $nl_NL extends S {
   @override
   String get filter_distribution => "distributie";
   @override
-  String get feedback_buy_extended => "U kunt een uitgebreide versie kopen met extra functionaliteit zoals de offline modus, zoeken in namen, zoeken in taxonomie, observaties en configureerbare filter.";
+  String get feedback_buy_extended => "U kunt extra functies kopen, zoals de offline modus, zoeken in namen of in taxonomie, zoeken op foto, observaties en configureerbare filters.";
   @override
   String get north_central_usa => "Noord-Centraal VS";
   @override
@@ -9486,7 +9486,7 @@ class $pa_IN extends S {
   @override
   String get filter_distribution => "ਵੰਡ";
   @override
-  String get feedback_buy_extended => "ਤੁਸੀਂ ਅਤਿਰਿਕਤ ਫੰਕਸ਼ਨ ਜਿਵੇਂ ਐੱਮਲਾਈਨ ਮੋਡ, ਐਕਸਟੈਨਸ਼ਨ, ਨਾਮਾਂ ਦੀ ਖੋਜ, ਟੈਕਸਸੋਨੀਓ ਵਿੱਚ ਖੋਜ, ਨਿਰੀਖਣ ਅਤੇ ਕਨਫ਼ੀਗਰੇਬਲ ਫਿਲਟਰ ਨਾਲ ਐਕਸਟੈਂਡਡ ਵਰਜ਼ਨ ਖਰੀਦ ਸਕਦੇ ਹੋ.";
+  String get feedback_buy_extended => "ਤੁਸੀਂ ਅਤਿਰਿਕਤ ਕਾਰਜਸ਼ੀਲਤਾ ਜਿਵੇਂ ਆਫਲਾਈਨ ਮੋਡ ਖਰੀਦ ਸਕਦੇ ਹੋ, ਨਾਵਾਂ ਜਾਂ ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਖੋਜ ਕਰ ਸਕਦੇ ਹੋ, ਤਸਵੀਰਾਂ, ਨਿਰਣਿਆਂ ਅਤੇ ਸੰਰਚਨਾ ਯੋਗ ਫਿਲਟਰ ਦੁਆਰਾ ਖੋਜ ਕਰ ਸਕਦੇ ਹੋ.";
   @override
   String get north_central_usa => "ਉੱਤਰੀ-ਕੇਂਦਰੀ ਅਮਰੀਕਾ";
   @override
@@ -10030,7 +10030,7 @@ class $sv_SE extends S {
   @override
   String get filter_distribution => "distribution";
   @override
-  String get feedback_buy_extended => "Du kan köpa utökad version med ytterligare funktioner som offline-läge, sök i namn, sök i taxonomi, observationer och konfigurerbart filter.";
+  String get feedback_buy_extended => "Du kan köpa ytterligare funktioner som offline-läge, söka i namn eller i taxonomi, söka efter foto, observationer och konfigurerbart filter.";
   @override
   String get north_central_usa => "Nord-Central USA";
   @override
@@ -10570,7 +10570,7 @@ class $da_DK extends S {
   @override
   String get filter_distribution => "fordeling";
   @override
-  String get feedback_buy_extended => "Du kan købe udvidet (+) version med ekstra funktionalitet som offline-tilstand, søge i navne, søge i taksonomi, observationer og konfigurerbart filter.";
+  String get feedback_buy_extended => "Du kan købe yderligere funktioner som offline-tilstand, søge i navne eller i taxonomi, søge efter foto, observationer og konfigurerbart filter.";
   @override
   String get north_central_usa => "Nord-Central USA";
   @override
@@ -11110,7 +11110,7 @@ class $fa_IR extends S {
   @override
   String get filter_distribution => "توزیع";
   @override
-  String get feedback_buy_extended => "شما می توانید نسخه پیشرفته با قابلیت های اضافی مانند حالت آفلاین، جستجو در اسامی، جستجو در طبقه بندی، مشاهدات و فیلتر قابل تنظیم را خریداری کنید.";
+  String get feedback_buy_extended => "شما می توانید از ویژگی های اضافی مانند حالت آفلاین، جستجو در نام و یا در طبقه بندی، جستجوی عکس، مشاهدات و فیلتر قابل تنظیم کنید.";
   @override
   String get north_central_usa => "مرکزی ایالات متحده آمریکا";
   @override
@@ -11654,7 +11654,7 @@ class $sr_RS extends S {
   @override
   String get filter_distribution => "дистрибуција";
   @override
-  String get feedback_buy_extended => "Можете купити проширену верзију са додатном функционалношћу као што је оффлине режим, тражити имена, претраживати у таксономији, опажањима и конфигурирати филтер.";
+  String get feedback_buy_extended => "Можете да купите додатне функционалности као што је „оффлине“ начин рада, да тражите у именима или у таксономији, претражујете по фотографијама, посматрањима и филтерима који се могу конфигурисати.";
   @override
   String get north_central_usa => "Северна централна САД";
   @override
@@ -12214,7 +12214,7 @@ class $fi_FI extends S {
   @override
   String get filter_distribution => "jakelu";
   @override
-  String get feedback_buy_extended => "Voit ostaa laajennettua versiota, jossa on lisätoimintoja, kuten offline-tilassa, etsiä nimiä, etsiä taksonomiassa, havainnoissa ja konfiguroitavissa olevassa suodattimessa.";
+  String get feedback_buy_extended => "Voit ostaa lisätoimintoja, kuten offline-tilassa, etsiä nimissä tai taksonomiassa, etsiä valokuvien, havaintojen ja konfiguroitavan suodattimen avulla.";
   @override
   String get north_central_usa => "Pohjois-Keski-USA";
   @override
@@ -12758,7 +12758,7 @@ class $hr_HR extends S {
   @override
   String get filter_distribution => "distribucija";
   @override
-  String get feedback_buy_extended => "Možete kupiti proširenu verziju s dodatnim funkcijama kao što je izvanmrežni način rada, tražiti imena, pretraživati u taksonomiji, promatrati i konfigurirati filtar.";
+  String get feedback_buy_extended => "Možete kupiti dodatne funkcionalnosti kao što je izvanmrežni način rada, tražiti imena ili taksonomiju, pretraživati po fotografijama, promatranjima i konfigurirati filtar.";
   @override
   String get north_central_usa => "Sjeverno središnje SAD";
   @override
@@ -13302,7 +13302,7 @@ class $et_EE extends S {
   @override
   String get filter_distribution => "levitamine";
   @override
-  String get feedback_buy_extended => "Laiendatud (+) versiooni saate osta täiendava funktsionaalsusega, näiteks offline režiimis, otsida nimesid, otsida taksonoomiast, vaatlustest ja seadistatavast filtrist.";
+  String get feedback_buy_extended => "Teil on võimalik osta täiendavaid funktsioone, nagu offline režiim, otsida nimedest või taksonoomiast, otsida fotode, vaatluste ja konfigureeritava filtri järgi.";
   @override
   String get north_central_usa => "Põhja-Keskne USA";
   @override
@@ -13854,7 +13854,7 @@ class $lt_LT extends S {
   @override
   String get filter_distribution => "platinimas";
   @override
-  String get feedback_buy_extended => "Galite įsigyti išplėstinę versiją su papildomomis funkcijomis, pavyzdžiui, neprisijungus, ieškoti vardų, ieškoti taksonomijos, stebėjimų ir konfigūruojamo filtro.";
+  String get feedback_buy_extended => "Galite įsigyti papildomų funkcijų, pvz., Neprisijungus, ieškoti vardų arba taksonomijoje, ieškoti pagal nuotrauką, stebėjimus ir konfigūruojamą filtrą.";
   @override
   String get north_central_usa => "Šiaurės-Centrinė JAV";
   @override
@@ -14398,7 +14398,7 @@ class $lv_LV extends S {
   @override
   String get filter_distribution => "izplatīšana";
   @override
-  String get feedback_buy_extended => "Jūs varat iegādāties paplašinātu versiju ar papildu funkcionalitāti, piemēram, bezsaistes režīmā, meklēt nosaukumos, meklēt taksonomijā, novērojumos un konfigurējamajā filtrā.";
+  String get feedback_buy_extended => "Jūs varat iegādāties papildu funkcionalitāti, piemēram, bezsaistes režīmā, meklēt nosaukumos vai taksonomijā, meklēt pēc fotoattēla, novērojumiem un konfigurējama filtra.";
   @override
   String get north_central_usa => "Ziemeļu ASV";
   @override
@@ -14942,7 +14942,7 @@ class $uk_UA extends S {
   @override
   String get filter_distribution => "розповсюдження";
   @override
-  String get feedback_buy_extended => "Ви можете придбати розширену версію з додатковими функціональними можливостями, наприклад, автономний режим, пошук по іменах, пошук в таксономії, спостереженнях і налаштованому фільтрі.";
+  String get feedback_buy_extended => "Ви можете придбати додаткові функціональні можливості, такі як автономний режим, пошук по іменах або в таксономії, пошук за фото, спостереження та налаштований фільтр.";
   @override
   String get north_central_usa => "Північ-Центральна США";
   @override
@@ -15486,7 +15486,7 @@ class $sl_SI extends S {
   @override
   String get filter_distribution => "distribucija";
   @override
-  String get feedback_buy_extended => "Razširjeno različico lahko kupite z dodatnimi funkcijami, kot je način brez povezave, iskanje imen, iskanje v taksonomiji, opazovanje in nastavljiv filter.";
+  String get feedback_buy_extended => "Dodatne funkcije, kot je način brez povezave, lahko iščete po imenih ali taksonomiji, iščete po fotografijah, opazovanjih in nastavljivem filtru.";
   @override
   String get north_central_usa => "Severna osrednja ZDA";
   @override
@@ -16030,7 +16030,7 @@ class $ar_EG extends S {
   @override
   String get filter_distribution => "توزيع";
   @override
-  String get feedback_buy_extended => "يمكنك شراء إصدار موسّع (+) مع وظائف إضافية مثل وضع عدم الاتصال ، والبحث في الأسماء ، والبحث في التصنيف ، والملاحظات ، والفلتر القابل للتكوين.";
+  String get feedback_buy_extended => "يمكنك شراء وظائف إضافية مثل الوضع في وضع عدم الاتصال ، والبحث في الأسماء أو في التصنيف ، والبحث بالصور والملاحظات والتصفية القابلة للتكوين.";
   @override
   String get north_central_usa => "شمال وسط الولايات المتحدة";
   @override
@@ -16570,7 +16570,7 @@ class $pt_PT extends S {
   @override
   String get filter_distribution => "distribuição";
   @override
-  String get feedback_buy_extended => "Você pode comprar a versão estendida (+) com funcionalidades adicionais, como o modo off-line, pesquisar nomes, pesquisar em taxonomia, observações e filtros configuráveis.";
+  String get feedback_buy_extended => "Você pode comprar funcionalidades adicionais como o modo off-line, pesquisar em nomes ou em taxonomia, pesquisar por foto, observações e filtro configurável.";
   @override
   String get north_central_usa => "EUA do centro-norte";
   @override
