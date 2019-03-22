@@ -55,7 +55,7 @@ android {
 
     defaultConfig {
         applicationId "sk.ab.herbs"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
