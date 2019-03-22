@@ -32,7 +32,6 @@ const String productPhotoSearch = "search_by_photo";
 const String subscriptionMonthly = "store_photos_monthly";
 const String subscriptionYearly = "store_photos_yearly";
 
-const String keyLanguage = "language";
 const String keyLanguageAndCountry = "language_country";
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
