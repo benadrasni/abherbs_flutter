@@ -257,16 +257,20 @@ class _PlantDetailState extends State<PlantDetail> {
         fixedColor: Colors.blue,
         onTap: (index) {
           Connectivity().checkConnectivity().then((result) {
-            if (result == ConnectivityResult.none) {
-              infoDialog(context, S.of(context).no_connection_title, S.of(context).no_connection_content);
-            } else {
-              if (index == 3 && _currentUser == null) {
+            if (index == 3) {
+              if (result == ConnectivityResult.none) {
+                infoDialog(context, S.of(context).no_connection_title, S.of(context).no_connection_content);
+              } else if (_currentUser == null) {
                 observationDialog(context, _key);
               } else {
                 setState(() {
                   _currentIndex = index;
                 });
               }
+            } else {
+              setState(() {
+                _currentIndex = index;
+              });
             }
           });
         },
