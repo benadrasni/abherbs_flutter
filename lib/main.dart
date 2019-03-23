@@ -112,30 +112,8 @@ class _AppState extends State<App> {
     Purchases.purchases = <PurchasedItem>[];
   }
 
-  void _initPlatformState() async {
-    FlutterInappPurchase.initConnection.then((value) {
-      // TODO check for a fix: when iOS is offline it doesn't return purchased products
-      if (Platform.isIOS) {
-        Prefs.getStringListF(keyPurchases, []).then((products) {
-          Purchases.purchases = products.map((productId) => Purchases.offlineProducts[productId]).toList();
-          Offline.initialize();
-        });
-      } else if (Platform.isAndroid) {
-        FlutterInappPurchase.getAvailablePurchases().then((value) {
-          Purchases.purchases = value;
-          Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
-          Offline.initialize();
-        }).catchError((error) {
-          _iapError();
-        });
-      } else {
-        throw PlatformException(code: Platform.operatingSystem, message: "platform not supported");
-      }
-    });
-
-    // check promotions
+  void _checkPromotions() {
     rootReference.child(firebasePromotions).once().then((DataSnapshot snapshot) {
-      print(snapshot);
       if (snapshot.value != null) {
         if (snapshot.value[firebaseAttributeObservations] != null) {
           var observationsFrom = DateTime.parse(snapshot.value[firebaseAttributeObservations][firebaseAttributeFrom]);
@@ -164,6 +142,30 @@ class _AppState extends State<App> {
           Purchases.searchByPhotoPromotionTo = searchByPhotoTo;
           Purchases.isSearchByPhotoPromotion = currentDate.isAfter(searchByPhotoFrom) && currentDate.isBefore(searchByPhotoTo.add(Duration(days: 1)));
         }
+      }
+    });
+  }
+
+  void _initPlatformState() async {
+    FlutterInappPurchase.initConnection.then((value) {
+      // TODO check for a fix: when iOS is offline it doesn't return purchased products
+      if (Platform.isIOS) {
+        Prefs.getStringListF(keyPurchases, []).then((products) {
+          Purchases.purchases = products.map((productId) => Purchases.offlineProducts[productId]).toList();
+          Offline.initialize();
+          _checkPromotions();
+        });
+      } else if (Platform.isAndroid) {
+        FlutterInappPurchase.getAvailablePurchases().then((value) {
+          Purchases.purchases = value;
+          Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
+          Offline.initialize();
+          _checkPromotions();
+        }).catchError((error) {
+          _iapError();
+        });
+      } else {
+        throw PlatformException(code: Platform.operatingSystem, message: "platform not supported");
       }
     });
   }
