@@ -35,7 +35,7 @@ class _SignInScreenState extends State<SignInScreen> {
         }
       }
     } catch (e) {
-      if (key.currentState.mounted) {
+      if (key.currentState != null && key.currentState.mounted) {
         key.currentState.showSnackBar(new SnackBar(
           content: new Text(S.of(context).auth_sign_in_failed),
         ));
