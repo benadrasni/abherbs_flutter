@@ -7602,7 +7602,7 @@ class $sk_SK extends S {
   @override
   String get subscription_disclaimer_android => "Prvá platba bude účtovaná vášmu Google účtu 30 dní po potvrdení nákupu. Predplatné sa automaticky obnovuje, pokiaľ nie je zrušené najmenej 24 hodín pred koncom aktuálneho obdobia. Nové predplatné bude účtované do 24 hodín pred koncom aktuálneho obdobia. Svoje odbery môžete spravovať a zrušiť tak, že po zakúpení prejdete do nastavenia účtu v Obchode Google Play.";
   @override
-  String get product_offline_title => "Režm offline";
+  String get product_offline_title => "Režim offline";
   @override
   String get feedback_submit_translate_data => "Opraviť chyby v dátach";
   @override
