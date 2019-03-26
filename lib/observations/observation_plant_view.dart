@@ -107,16 +107,20 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
       child: PageView.builder(
         itemCount: widget.observation.photoPaths.length,
         itemBuilder: (context, position) {
-          return Stack(children: [
-            getImage(widget.observation.photoPaths[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
-            Container(
-              padding: EdgeInsets.all(5.0),
-              child: Text(
-                (position + 1).toString() + ' / ' + widget.observation.photoPaths.length.toString(),
-                style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+          if (widget.observation.status == firebaseValueReview) {
+            return Center(child: Image(image: AssetImage('res/images/review.png'),));
+          } else {
+            return Stack(children: [
+              getImage(widget.observation.photoPaths[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
+              Container(
+                padding: EdgeInsets.all(5.0),
+                child: Text(
+                  (position + 1).toString() + ' / ' + widget.observation.photoPaths.length.toString(),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-          ]);
+            ]);
+          }
         },
       ),
     ));

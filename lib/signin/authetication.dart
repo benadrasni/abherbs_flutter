@@ -68,6 +68,11 @@ class Auth {
               usersReference.child(user.uid).child(firebaseAttributeToken).set(token);
             }
           });
+          Prefs.getStringListF(keyPurchases, []).then((purchases) {
+            if (purchases.length > 0) {
+              usersReference.child(user.uid).child(firebaseAttributePurchases).set(purchases);
+            }
+          });
         }
         if (Purchases.hasLifetimeSubscription == null) {
           usersReference.child(user.uid).child(firebaseAttributeLifetimeSubscription).once().then((snapshot) {

@@ -68,48 +68,56 @@ class _SearchPhotoState extends State<SearchPhoto> {
       }
 
       var results = <SearchResult>[];
+      var unique = Set<String>();
       for (Label label in significantLabels) {
-        results.add(await rootReference.child(firebaseSearchPhoto).child(label.label.toLowerCase()).once().then((snapshot) {
-          var result = SearchResult();
-          result.labelLatin = label.label;
-          result.confidence = label.confidence;
-          if (snapshot != null) {
-            if (snapshot.value != null) {
-              result.count = snapshot.value['count'];
-              result.path = snapshot.value['path'];
-              result.labelInLanguage = '';
-              if (result.path.contains('/')) {
-                String path = result.path.substring(0, result.path.length - 5);
-                result.labelLatin = path.substring(path.lastIndexOf('/') + 1);
-              } else {
-                result.labelLatin = result.path;
-                return translationsReference.child(widget.myLocale.languageCode).child(result.labelLatin).child(firebaseAttributeLabel)
-                    .once()
-                    .then((snapshot) {
-                  if (snapshot.value != null) {
-                    result.labelInLanguage = snapshot.value;
-                  }
+        var adjustedLabel = label.label;
+        if (adjustedLabel.indexOf(' (') >= 0) {
+          adjustedLabel = adjustedLabel.substring(0, adjustedLabel.indexOf(' ('));
+        }
+        if (!unique.contains(adjustedLabel.toLowerCase())) {
+          unique.add(adjustedLabel.toLowerCase());
+          results.add(await rootReference.child(firebaseSearchPhoto).child(adjustedLabel.toLowerCase()).once().then((snapshot) {
+            var result = SearchResult();
+            result.labelLatin = adjustedLabel;
+            result.confidence = label.confidence;
+            if (snapshot != null) {
+              if (snapshot.value != null) {
+                result.count = snapshot.value['count'];
+                result.path = snapshot.value['path'];
+                result.labelInLanguage = '';
+                if (result.path.contains('/')) {
+                  String path = result.path.substring(0, result.path.length - 5);
+                  result.labelLatin = path.substring(path.lastIndexOf('/') + 1);
+                } else {
+                  result.labelLatin = result.path;
+                  return translationsReference.child(widget.myLocale.languageCode).child(result.labelLatin).child(firebaseAttributeLabel)
+                      .once()
+                      .then((snapshot) {
+                    if (snapshot.value != null) {
+                      result.labelInLanguage = snapshot.value;
+                    }
+                    return result;
+                  });
+                }
+                if (translationCache.containsKey(result.labelLatin)) {
+                  result.labelInLanguage = translationCache[result.labelLatin];
                   return result;
-                });
-              }
-              if (translationCache.containsKey(result.labelLatin)) {
-                result.labelInLanguage = translationCache[result.labelLatin];
-                return result;
-              } else {
-                return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin)
-                    .once()
-                    .then((snapshot) {
-                  if (snapshot.value != null && snapshot.value.length > 0) {
-                    translationCache[result.labelLatin] = snapshot.value[0];
-                    result.labelInLanguage = snapshot.value[0];
-                  }
-                  return result;
-                });
+                } else {
+                  return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin)
+                      .once()
+                      .then((snapshot) {
+                    if (snapshot.value != null && snapshot.value.length > 0) {
+                      translationCache[result.labelLatin] = snapshot.value[0];
+                      result.labelInLanguage = snapshot.value[0];
+                    }
+                    return result;
+                  });
+                }
               }
             }
-          }
-          return result;
-        }));
+            return result;
+          }));
+        }
       }
       // save labels
       if (results.length > 0) {
