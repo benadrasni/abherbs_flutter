@@ -439,7 +439,7 @@ List<Widget> _getSources(BuildContext context, Plant plant, PlantTranslation pla
 }
 
 FlatButton getSourceButton(String url) {
-  assert(url.contains('//') && url.contains('/'), url.indexOf('//') + 2);
+  assert(url.contains('//') && url.contains('/', url.indexOf('//') + 2));
   String imageSource = 'res/images/internet.png';
   String textSource = url.substring(url.indexOf('//') + 2, url.indexOf('/', url.indexOf('//') + 2));
 
