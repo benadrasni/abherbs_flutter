@@ -37,7 +37,7 @@ dependencies:
   percent_indicator: 1.0.14
   package_info: 0.4.0+2
   google_maps_flutter: 0.3.0+2
-  image_picker: 0.5.0+3
+  #image_picker: 0.5.0+3
   exif: 1.0.1
   datetime_picker_formfield: 0.1.8
   connectivity: 0.4.2
@@ -45,6 +45,8 @@ dependencies:
     path: ../flutter_screen
   flutter_country_picker:
     path: ../flutter_country_picker
+  image_picker:
+    path: ../plugins/packages/image_picker
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
