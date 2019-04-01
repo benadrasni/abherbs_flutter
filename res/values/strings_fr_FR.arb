@@ -294,5 +294,9 @@
   "photo_search_failed": "La recherche par photo a échoué. Vérifiez votre connexion Internet et réessayez.",
   "photo_to_search_by": "Photo à rechercher par",
   "photo_search_note": "Ceci est une fonctionnalité expérimentale qui ne fonctionne qu'en ligne. Parfois, il trouve exactement ce que vous cherchez, parfois même pas proche. Je compte totalement sur Google ici car ils font tout le travail. Au fil du temps, il devrait être de mieux en mieux, mais il n'a pas été construit principalement pour la reconnaissance des fleurs. Utilisez-le judicieusement et ne jugez pas l'ensemble de l'application en fonction de cette expérience. Pour des raisons de qualité, tous les résultats de recherche (pas les photos) seront enregistrés.",
-  "photo_search_empty": "Google IA (Intelligence artificielle) n'a reconnu aucune fleur particulière sur la photo. Réessayez avec différents angles, distances ou conditions d'éclairage. Si vous l'avez déjà fait, il semble que le suzerain d'IA ne viendra pas de sitôt."
+  "photo_search_empty": "Google IA (Intelligence artificielle) n'a reconnu aucune fleur particulière sur la photo. Réessayez avec différents angles, distances ou conditions d'éclairage. Si vous l'avez déjà fait, il semble que le suzerain d'IA ne viendra pas de sitôt.",
+
+  "favorite_title": "Fleurs préférées",
+  "favorite_empty": "Il n'y a pas encore de fleurs préférées.",
+  "favorite_no_login": "La liste des fleurs préférées est disponible uniquement pour les utilisateurs connectés. Veuillez vous connecter."
 }

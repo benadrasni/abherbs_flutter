@@ -294,5 +294,9 @@
   "photo_search_failed": "Haku valokuvan mukaan epäonnistui. Tarkista Internet-yhteys ja yritä uudelleen.",
   "photo_to_search_by": "Kuva, jonka haluat etsiä",
   "photo_search_note": "Tämä on kokeellinen ominaisuus, joka toimii vain verkossa. Joskus se löytää juuri sen, mitä etsit, joskus ei edes lähellä. Luotan täysin siihen, että Google on täällä, koska he tekevät kaiken kovan työn. Ajan myötä sen pitäisi olla parempi ja parempi, mutta sitä ei rakennettu ensisijaisesti kukka-tunnusta varten. Käytä sitä viisaasti ja älä arvioi koko sovellusta tämän kokeilun perusteella. Laadullisiin tarkoituksiin kaikki hakutulokset (ei valokuvia) tallennetaan.",
-  "photo_search_empty": "Google AI (keinotekoinen äly) ei tunnistanut mitään tiettyä kukkaa kuvassa. Yritä uudelleen eri kulma-, etäisyys- tai valo-olosuhteissa. Jos olet jo tehnyt, näyttää siltä, että AI: n ylimies ei tule pian."
+  "photo_search_empty": "Google AI (keinotekoinen äly) ei tunnistanut mitään tiettyä kukkaa kuvassa. Yritä uudelleen eri kulma-, etäisyys- tai valo-olosuhteissa. Jos olet jo tehnyt, näyttää siltä, että AI: n ylimies ei tule pian.",
+
+  "favorite_title": "Suosikki kukat",
+  "favorite_empty": "Ei ole vielä suosikkikukkia.",
+  "favorite_no_login": "Suosikkikukkien luettelo on käytettävissä vain kirjautuneille käyttäjille. Kirjaudu sisään, ole hyvä."
 }

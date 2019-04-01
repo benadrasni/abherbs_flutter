@@ -294,5 +294,9 @@
   "photo_search_failed": "A fénykép általi keresés sikertelen lett. Ellenőrizze az internetkapcsolatot és próbálja újra.",
   "photo_to_search_by": "Fénykép a kereséshez",
   "photo_search_note": "Ez egy kísérleti funkció, amely csak online működik. Néha pontos a végeredmény, máskor viszont teljesen megbízhatatlan. Teljesen mértékben a Google-ra támaszkodunk, hiszen a munka lényegét ő végzi. Idővel javulni kéne az eredményeknek, de ezen szolgáltatás nem elsősorban virágok felismerésére készült. Használja elővigyázatosan, és ne ez alapján ítélje meg az alkalmazásunkat. A minőség feljavítása érdekében minden keresési eredmény (nem fotó) mentésre kerül.",
-  "photo_search_empty": "A Google MI (mesterséges intelligencia) nem ismerte fel a képen látható virágot. Próbálkozzon újra különböző szög, távolság vagy fényviszonyokkal. Ha már próbálta, úgy tűnik, hogy az MI overlord hamarosan nem jön."
+  "photo_search_empty": "A Google MI (mesterséges intelligencia) nem ismerte fel a képen látható virágot. Próbálkozzon újra különböző szög, távolság vagy fényviszonyokkal. Ha már próbálta, úgy tűnik, hogy az MI overlord hamarosan nem jön.",
+
+  "favorite_title": "Kedvenc virágok",
+  "favorite_empty": "Még nincs kedvenc virág.",
+  "favorite_no_login": "A kedvenc virágok listája csak a naplózott felhasználók számára érhető el. Kérjük jelentkezzen be."
 }

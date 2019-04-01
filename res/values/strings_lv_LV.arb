@@ -294,5 +294,9 @@
   "photo_search_failed": "Meklēšana pēc fotoattēla neizdevās. Pārbaudiet savu interneta savienojumu un mēģiniet vēlreiz.",
   "photo_to_search_by": "Fotoattēls meklēšanai pēc",
   "photo_search_note": "Šī ir eksperimentāla funkcija, kas darbojas tikai tiešsaistē. Dažreiz tā atrod tieši to, ko meklējat, dažreiz pat ne tuvu. Es esmu pilnīgi paļauties uz Google, jo viņi dara visu smago darbu. Laika gaitā tai vajadzētu būt labākai un labākai, bet tas nebija galvenokārt veidots ziedu atpazīšanai. Izmantojiet to saprātīgi un, neskatoties uz šo eksperimentu, nelietojiet visu pieteikumu. Kvalitātes nolūkos tiks saglabāti visi meklēšanas rezultāti (nevis fotoattēli).",
-  "photo_search_empty": "Google MI (mākslīgais intelekts) neatpazina kādu konkrētu ziedu attēlā. Mēģiniet vēlreiz ar dažādiem leņķa, attāluma vai gaismas apstākļiem. Ja jūs jau to darāt, izskatās, ka MI virsnieks drīzumā nenāks."
+  "photo_search_empty": "Google MI (mākslīgais intelekts) neatpazina kādu konkrētu ziedu attēlā. Mēģiniet vēlreiz ar dažādiem leņķa, attāluma vai gaismas apstākļiem. Ja jūs jau to darāt, izskatās, ka MI virsnieks drīzumā nenāks.",
+
+  "favorite_title": "Mīļākie ziedi",
+  "favorite_empty": "Vēl nav neviena mīļākā zieda.",
+  "favorite_no_login": "Mīļāko ziedu saraksts ir pieejams tikai reģistrētiem lietotājiem. Lūdzu, piesakieties."
 }

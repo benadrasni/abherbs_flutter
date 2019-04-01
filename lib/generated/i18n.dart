@@ -399,6 +399,8 @@ class $it_IT extends S {
   @override
   String get south_central_pacific => "Pacifico centro-meridionale";
   @override
+  String get favorite_empty => "Non ci sono ancora fiori preferiti.";
+  @override
   String get product_custom_filter_description => "Sarai in grado di modificare l'ordine di default e il numero di filtri (colore, habitat, petali, distribuzione).";
   @override
   String get auth_password_hint => "Password";
@@ -414,6 +416,8 @@ class $it_IT extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Ripristinare gli acquisti";
+  @override
+  String get favorite_title => "Fiori preferiti";
   @override
   String get auth_reset_password => "Resetta la password";
   @override
@@ -799,6 +803,8 @@ class $it_IT extends S {
   @override
   String get improve_translation => "Migliora la traduzione";
   @override
+  String get favorite_no_login => "L'elenco dei fiori preferiti è disponibile solo per gli utenti registrati. Accedete, per favore.";
+  @override
   String get observation_delete_question => "Vuoi cancellare l'osservazione?";
   @override
   String get southeastern_usa => "Stati Uniti sudorientali";
@@ -943,6 +949,8 @@ class $ru_RU extends S {
   @override
   String get south_central_pacific => "Юго-Центральная часть Тихого океана";
   @override
+  String get favorite_empty => "Там нет любимых цветов еще.";
+  @override
   String get product_custom_filter_description => "Вы сможете изменить порядок по умолчанию и количество фильтров (окраска, ареалы, лепесток, распределение).";
   @override
   String get auth_password_hint => "Пароль";
@@ -958,6 +966,8 @@ class $ru_RU extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Восстановить покупки";
+  @override
+  String get favorite_title => "Любимые цветы";
   @override
   String get auth_reset_password => "Сброс пароля";
   @override
@@ -1343,6 +1353,8 @@ class $ru_RU extends S {
   @override
   String get improve_translation => "Улучшить перевод";
   @override
+  String get favorite_no_login => "Список любимых цветов доступен только зарегистрированным пользователям. Пожалуйста, войдите.";
+  @override
   String get observation_delete_question => "Вы хотите удалить наблюдение?";
   @override
   String get southeastern_usa => "Юго-Восточная часть США";
@@ -1487,6 +1499,8 @@ class $pl_PL extends S {
   @override
   String get south_central_pacific => "Południowo-środkowy Pacyfik";
   @override
+  String get favorite_empty => "Nie ma jeszcze ulubionych kwiatów.";
+  @override
   String get product_custom_filter_description => "Będzie można zmienić domyślną kolejność i liczbę filtrów (kolor, siedlisko, płatek, dystrybucja).";
   @override
   String get auth_password_hint => "Hasło";
@@ -1502,6 +1516,8 @@ class $pl_PL extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Przywróć zakup";
+  @override
+  String get favorite_title => "Ulubione kwiaty";
   @override
   String get auth_reset_password => "Zresetuj hasło";
   @override
@@ -1887,6 +1903,8 @@ class $pl_PL extends S {
   @override
   String get improve_translation => "Popraw tłumaczenie";
   @override
+  String get favorite_no_login => "Lista ulubionych kwiatów jest dostępna tylko dla zalogowanych użytkowników. Proszę się zalogować.";
+  @override
   String get observation_delete_question => "Czy chcesz usunąć ten okaz?";
   @override
   String get southeastern_usa => "Południowo-wschodnie USA";
@@ -2031,6 +2049,8 @@ class $ro_RO extends S {
   @override
   String get south_central_pacific => "Sud-central Pacificului";
   @override
+  String get favorite_empty => "Nu există încă flori preferate.";
+  @override
   String get product_custom_filter_description => "Veți putea schimba ordinea implicită și numărul de filtre (culoare, habitatul, petală, distribuție).";
   @override
   String get auth_password_hint => "Parolă";
@@ -2046,6 +2066,8 @@ class $ro_RO extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Restaurați achizițiile";
+  @override
+  String get favorite_title => "Flori preferate";
   @override
   String get auth_reset_password => "Resetează parola";
   @override
@@ -2431,6 +2453,8 @@ class $ro_RO extends S {
   @override
   String get improve_translation => "Îmbunătățirea traducere";
   @override
+  String get favorite_no_login => "Lista florilor preferate este disponibilă numai pentru utilizatorii înregistrați. Va rugam sa va logati.";
+  @override
   String get observation_delete_question => "Doriți să ștergeți observația?";
   @override
   String get southeastern_usa => "Sud-estul SUA";
@@ -2575,6 +2599,8 @@ class $hi_IN extends S {
   @override
   String get south_central_pacific => "दक्षिण-मध्य प्रशांत महासागर";
   @override
+  String get favorite_empty => "अभी तक कोई पसंदीदा फूल नहीं है।";
+  @override
   String get product_custom_filter_description => "आप डिफ़ॉल्ट क्रम और फ़िल्टर की संख्या (रंग, पर्यावास, दल चक्र, वितरण) को बदलने में सक्षम होंगे।";
   @override
   String get auth_password_hint => "पासवर्ड";
@@ -2590,6 +2616,8 @@ class $hi_IN extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "खरीदारी वापस लौटाएं";
+  @override
+  String get favorite_title => "पसंदीदा फूल";
   @override
   String get auth_reset_password => "पासवर्ड रीसेट";
   @override
@@ -2975,6 +3003,8 @@ class $hi_IN extends S {
   @override
   String get improve_translation => "अनुवाद में सुधार करें";
   @override
+  String get favorite_no_login => "पसंदीदा फूलों की सूची केवल लॉग किए गए उपयोगकर्ताओं के लिए उपलब्ध है। कृपया लॉगिन करें।";
+  @override
   String get observation_delete_question => "क्या आप अवलोकन हटाना चाहते हैं?";
   @override
   String get southeastern_usa => "दक्षिणपूर्वी यूएसए";
@@ -3119,6 +3149,8 @@ class $id_ID extends S {
   @override
   String get south_central_pacific => "Pasifik Tengah Selatan";
   @override
+  String get favorite_empty => "Belum ada bunga favorit.";
+  @override
   String get product_custom_filter_description => "Anda dapat mengubah urutan dan jumlah filter default (warna, habitat, mahkota, distribusi).";
   @override
   String get auth_password_hint => "Kata sandi";
@@ -3134,6 +3166,8 @@ class $id_ID extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Mengembalikan pembelian";
+  @override
+  String get favorite_title => "Bunga favorit";
   @override
   String get auth_reset_password => "Setel Ulang Kata Sandi";
   @override
@@ -3519,6 +3553,8 @@ class $id_ID extends S {
   @override
   String get improve_translation => "Perbaiki terjemahan";
   @override
+  String get favorite_no_login => "Daftar bunga favorit hanya tersedia untuk pengguna yang login. Silahkan masuk.";
+  @override
   String get observation_delete_question => "Apakah Anda ingin menghapus pengamatan?";
   @override
   String get southeastern_usa => "Tenggara AS";
@@ -3663,6 +3699,8 @@ class $fr_FR extends S {
   @override
   String get south_central_pacific => "Pacifique sud-central";
   @override
+  String get favorite_empty => "Il n'y a pas encore de fleurs préférées.";
+  @override
   String get product_custom_filter_description => "Vous pourrez modifier l'ordre et le nombre de filtres par défaut (couleur, habitat, pétale, distribution).";
   @override
   String get auth_password_hint => "Mot de passe";
@@ -3678,6 +3716,8 @@ class $fr_FR extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Restaurer les achats";
+  @override
+  String get favorite_title => "Fleurs préférées";
   @override
   String get auth_reset_password => "Réinitialiser le mot de passe";
   @override
@@ -4063,6 +4103,8 @@ class $fr_FR extends S {
   @override
   String get improve_translation => "Améliorer la traduction";
   @override
+  String get favorite_no_login => "La liste des fleurs préférées est disponible uniquement pour les utilisateurs connectés. Veuillez vous connecter.";
+  @override
   String get observation_delete_question => "Voulez-vous retirer l'observation?";
   @override
   String get southeastern_usa => "Sud-est des États-Unis";
@@ -4207,6 +4249,8 @@ class $he_IL extends S {
   @override
   String get south_central_pacific => "דרום מרכז האוקיינוס השקט";
   @override
+  String get favorite_empty => "אין עדיין פרחים מועדפים.";
+  @override
   String get product_custom_filter_description => "תוכל לשנות את סדר ברירת המחדל ואת מספר המסננים (צבע, בתי גידול, עלי כותרת, הפצה).";
   @override
   String get auth_password_hint => "סיסמה";
@@ -4222,6 +4266,8 @@ class $he_IL extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "לשחזר רכישות";
+  @override
+  String get favorite_title => "פרחים מועדפים";
   @override
   String get auth_reset_password => "לאפס את הסיסמה";
   @override
@@ -4607,6 +4653,8 @@ class $he_IL extends S {
   @override
   String get improve_translation => "שפר את התרגום";
   @override
+  String get favorite_no_login => "רשימה של פרחים מועדפים זמין רק עבור משתמשים רשומים. היכנס.";
+  @override
   String get observation_delete_question => "האם ברצונך למחוק את התצפית?";
   @override
   String get southeastern_usa => "דרום מזרח ארצות הברית";
@@ -4751,6 +4799,8 @@ class $ja_JP extends S {
   @override
   String get south_central_pacific => "中南米";
   @override
+  String get favorite_empty => "好きな花はまだありません。";
+  @override
   String get product_custom_filter_description => "あなたは、デフォルトの順番とフィルタの数（色、生息地、花弁、分布）を変えることができるでしょう。";
   @override
   String get auth_password_hint => "パスワード";
@@ -4766,6 +4816,8 @@ class $ja_JP extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "購入を復元";
+  @override
+  String get favorite_title => "好きな花";
   @override
   String get auth_reset_password => "パスワードを再設定する";
   @override
@@ -5151,6 +5203,8 @@ class $ja_JP extends S {
   @override
   String get improve_translation => "翻訳を改善する";
   @override
+  String get favorite_no_login => "お気に入りの花のリストはログインしたユーザーにのみ利用可能です。 ログインしてください。";
+  @override
   String get observation_delete_question => "観測を削除しますか？";
   @override
   String get southeastern_usa => "アメリカ南東部";
@@ -5295,6 +5349,8 @@ class $cs_CZ extends S {
   @override
   String get south_central_pacific => "Středojižní Tichomoří";
   @override
+  String get favorite_empty => "Zatím nejsou žádné oblíbené květy.";
+  @override
   String get product_custom_filter_description => "Budete moci změnit výchozí pořadí a počet filtrů (barva, ekologie, okvětní líst, distribuce).";
   @override
   String get auth_password_hint => "Heslo";
@@ -5310,6 +5366,8 @@ class $cs_CZ extends S {
   String get app_store => "App obchod";
   @override
   String get product_restore_purchases => "Obnovit nákupy";
+  @override
+  String get favorite_title => "Oblíbené květy";
   @override
   String get auth_reset_password => "Obnovit heslo";
   @override
@@ -5693,6 +5751,8 @@ class $cs_CZ extends S {
   @override
   String get improve_translation => "Vylepšit překlad";
   @override
+  String get favorite_no_login => "Seznam oblíbených květin je dostupný pouze pro přihlášené uživatele. Přihlašte se, prosím.";
+  @override
   String get observation_delete_question => "Chcete zmazat pozorování?";
   @override
   String get southeastern_usa => "Jihovýchod USA";
@@ -5837,6 +5897,8 @@ class $de_DE extends S {
   @override
   String get south_central_pacific => "Süd-Zentrales Pazifik";
   @override
+  String get favorite_empty => "Es gibt noch keine Lieblingsblumen.";
+  @override
   String get product_custom_filter_description => "Sie können die Standardreihenfolge und die Anzahl der Filter ändern (Farbe, Habitat, Kronblatt, Vorkommen).";
   @override
   String get auth_password_hint => "Passwort";
@@ -5852,6 +5914,8 @@ class $de_DE extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Käufe wiederherstellen";
+  @override
+  String get favorite_title => "Lieblingsblumen";
   @override
   String get auth_reset_password => "Passwort zurücksetzen";
   @override
@@ -6237,6 +6301,8 @@ class $de_DE extends S {
   @override
   String get improve_translation => "Übersetzung verbessern";
   @override
+  String get favorite_no_login => "Die Liste der Lieblingsblumen ist nur für angemeldete Benutzer verfügbar. Bitte loggen Sie sich ein.";
+  @override
   String get observation_delete_question => "Möchten Sie die Beobachtung löschen?";
   @override
   String get southeastern_usa => "Südöstlich U.S.A.";
@@ -6381,6 +6447,8 @@ class $hu_HU extends S {
   @override
   String get south_central_pacific => "Dél-Közép Csendes-óceán";
   @override
+  String get favorite_empty => "Még nincs kedvenc virág.";
+  @override
   String get product_custom_filter_description => "Megváltoztathatja az alapértelmezett sorrendet és a szűrők számát (szín, élettér, párta, terjesztés).";
   @override
   String get auth_password_hint => "Jelszó";
@@ -6396,6 +6464,8 @@ class $hu_HU extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Vásárlás visszaállítása";
+  @override
+  String get favorite_title => "Kedvenc virágok";
   @override
   String get auth_reset_password => "Jelszó visszaállítása";
   @override
@@ -6781,6 +6851,8 @@ class $hu_HU extends S {
   @override
   String get improve_translation => "A fordítás javítása";
   @override
+  String get favorite_no_login => "A kedvenc virágok listája csak a naplózott felhasználók számára érhető el. Kérjük jelentkezzen be.";
+  @override
   String get observation_delete_question => "Törli a megfigyelést?";
   @override
   String get southeastern_usa => "Délkelet USA";
@@ -6925,6 +6997,8 @@ class $nb_NO extends S {
   @override
   String get south_central_pacific => "Sør-Sentral Stillehavet";
   @override
+  String get favorite_empty => "Det er ingen favoritt blomster ennå.";
+  @override
   String get product_custom_filter_description => "Du kan endre standard rekkefølge og antall filtre (farge, voksested, kronblader, fordeling).";
   @override
   String get auth_password_hint => "Passord";
@@ -6940,6 +7014,8 @@ class $nb_NO extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Gjenopprette kjøp";
+  @override
+  String get favorite_title => "Favorittblomster";
   @override
   String get auth_reset_password => "Tilbakestille passord";
   @override
@@ -7325,6 +7401,8 @@ class $nb_NO extends S {
   @override
   String get improve_translation => "Forbedre oversettelse";
   @override
+  String get favorite_no_login => "Liste over favorittblomster er bare tilgjengelig for loggede brukere. Vennligst Logg inn.";
+  @override
   String get observation_delete_question => "Ønsker du å slette observasjonen?";
   @override
   String get southeastern_usa => "Sørøst USA";
@@ -7469,6 +7547,8 @@ class $sk_SK extends S {
   @override
   String get south_central_pacific => "Stredojužné Tichomorie";
   @override
+  String get favorite_empty => "Zatiaľ nie sú žiadne obľúbené kvety.";
+  @override
   String get product_custom_filter_description => "Budete mať možnosť zmeniť predvolené poradie a počet filtrov (farba, biotop, lupienok, distribúcia).";
   @override
   String get auth_password_hint => "Heslo";
@@ -7484,6 +7564,8 @@ class $sk_SK extends S {
   String get app_store => "App obchod";
   @override
   String get product_restore_purchases => "Obnoviť nákupy";
+  @override
+  String get favorite_title => "Obľúbené kvety";
   @override
   String get auth_reset_password => "Obnoviť heslo";
   @override
@@ -7863,6 +7945,8 @@ class $sk_SK extends S {
   @override
   String get improve_translation => "Vylepšiť preklad";
   @override
+  String get favorite_no_login => "Zoznam obľúbených kvetov je dostupný len pre prihlásených používateľov. Prihláste sa, prosím .";
+  @override
   String get observation_delete_question => "Chcete zmazať pozorovanie?";
   @override
   String get southeastern_usa => "Juhovýchod USA";
@@ -8007,6 +8091,8 @@ class $es_ES extends S {
   @override
   String get south_central_pacific => "Pacífico Sur-Central";
   @override
+  String get favorite_empty => "No hay flores favoritas todavía.";
+  @override
   String get product_custom_filter_description => "Podrás cambiar el orden predeterminado y la cantidad de filtros (color, localidad, pétalo, distribución).";
   @override
   String get auth_password_hint => "Contraseña";
@@ -8022,6 +8108,8 @@ class $es_ES extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Restaurar las compras";
+  @override
+  String get favorite_title => "Flores favoritas";
   @override
   String get auth_reset_password => "Restablecer la contraseña";
   @override
@@ -8407,6 +8495,8 @@ class $es_ES extends S {
   @override
   String get improve_translation => "Mejorar la traducción";
   @override
+  String get favorite_no_login => "La lista de flores favoritas está disponible solo para usuarios registrados. Por favor Iniciar sesión.";
+  @override
   String get observation_delete_question => "¿Quieres borrar la observación?";
   @override
   String get southeastern_usa => "Sudeste de los Estados Unidos";
@@ -8551,6 +8641,8 @@ class $nl_NL extends S {
   @override
   String get south_central_pacific => "Zuid-Central Stille Oceaan";
   @override
+  String get favorite_empty => "Er zijn nog geen favoriete bloemen.";
+  @override
   String get product_custom_filter_description => "U kunt de standaardvolgorde en het aantal filters wijzigen (kleur, standplaats, bloemblad, distributie).";
   @override
   String get auth_password_hint => "Wachtwoord";
@@ -8566,6 +8658,8 @@ class $nl_NL extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Herstel aankopen";
+  @override
+  String get favorite_title => "Favoriete bloemen";
   @override
   String get auth_reset_password => "Reset wachtwoord";
   @override
@@ -8951,6 +9045,8 @@ class $nl_NL extends S {
   @override
   String get improve_translation => "Verbeter vertaling";
   @override
+  String get favorite_no_login => "Lijst met favoriete bloemen is alleen beschikbaar voor aangemelde gebruikers. Log alstublieft in.";
+  @override
   String get observation_delete_question => "Wilt u de observatie verwijderen?";
   @override
   String get southeastern_usa => "Zuidoost VS";
@@ -9095,6 +9191,8 @@ class $pa_IN extends S {
   @override
   String get south_central_pacific => "ਦੱਖਣੀ-ਕੇਂਦਰੀ ਪੈਸੀਫਿਕ";
   @override
+  String get favorite_empty => "ਹਾਲੇ ਤੱਕ ਕੋਈ ਪਸੰਦੀਦਾ ਫੁੱਲ ਨਹੀਂ ਹੈ.";
+  @override
   String get product_custom_filter_description => "ਤੁਸੀਂ ਡਿਫਾਲਟ ਆਰਡਰ ਅਤੇ ਫਿਲਟਰਸ ਦੀ ਗਿਣਤੀ (ਰੰਗ, ਆਵਾਸ, ਪੱਟੇਲ, ਵੰਡ) ਨੂੰ ਬਦਲਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ.";
   @override
   String get auth_password_hint => "ਪਾਸਵਰਡ";
@@ -9110,6 +9208,8 @@ class $pa_IN extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "ਖ਼ਰੀਦਾਂ ਨੂੰ ਰੀਸਟੋਰ ਕਰੋ";
+  @override
+  String get favorite_title => "ਪਸੰਦੀਦਾ ਫੁੱਲ";
   @override
   String get auth_reset_password => "ਪਾਸਵਰਡ ਰੀਸੈਟ ਕਰੋ";
   @override
@@ -9495,6 +9595,8 @@ class $pa_IN extends S {
   @override
   String get improve_translation => "ਅਨੁਵਾਦ ਸੁਧਾਰੋ";
   @override
+  String get favorite_no_login => "ਮਨਪਸੰਦ ਫੁੱਲ ਦੀ ਸੂਚੀ ਕੇਵਲ ਲੌਗ ਕੀਤੇ ਉਪਭੋਗਤਾਵਾਂ ਲਈ ਉਪਲਬਧ ਹੈ. ਕਿਰਪਾ ਕਰਕੇ ਲੌਗਇਨ ਕਰੋ.";
+  @override
   String get observation_delete_question => "ਕੀ ਤੁਸੀਂ ਨਿਰੀਖਣ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?";
   @override
   String get southeastern_usa => "ਦੱਖਣੀ-ਪੂਰਬੀ ਅਮਰੀਕਾ";
@@ -9639,6 +9741,8 @@ class $sv_SE extends S {
   @override
   String get south_central_pacific => "Syd centrala Stilla havet";
   @override
+  String get favorite_empty => "Det finns inga favoritblommor än.";
+  @override
   String get product_custom_filter_description => "Du kan ändra standardordning och antal filter (färg, växtplats, kronblad, distribution).";
   @override
   String get auth_password_hint => "Lösenord";
@@ -9654,6 +9758,8 @@ class $sv_SE extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Återställa köp";
+  @override
+  String get favorite_title => "Favoritblommor";
   @override
   String get auth_reset_password => "Återställ lösenord";
   @override
@@ -10039,6 +10145,8 @@ class $sv_SE extends S {
   @override
   String get improve_translation => "Förbättra translation";
   @override
+  String get favorite_no_login => "Lista över favoritblommor är endast tillgänglig för inloggade användare. Vänligen logga in.";
+  @override
   String get observation_delete_question => "Vill du radera observationen?";
   @override
   String get southeastern_usa => "Sydöstra USA";
@@ -10183,6 +10291,8 @@ class $da_DK extends S {
   @override
   String get south_central_pacific => "Syd-Central Stillehavet";
   @override
+  String get favorite_empty => "Der er endnu ingen favorit blomster.";
+  @override
   String get product_custom_filter_description => "Du kan ændre standardordre og antal filtre (farve, vækststeder, kronblad, fordeling).";
   @override
   String get auth_password_hint => "Adgangskode";
@@ -10198,6 +10308,8 @@ class $da_DK extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Genoprette indkøb";
+  @override
+  String get favorite_title => "Favorit blomster";
   @override
   String get auth_reset_password => "Nulstille kodeord";
   @override
@@ -10579,6 +10691,8 @@ class $da_DK extends S {
   @override
   String get improve_translation => "Forbedre oversættelse";
   @override
+  String get favorite_no_login => "Liste over foretrukne blomster er kun tilgængelig for logget brugere. Vær venlig at logge ind.";
+  @override
   String get observation_delete_question => "Vil du slette observationen?";
   @override
   String get southeastern_usa => "Sydøstlige USA";
@@ -10723,6 +10837,8 @@ class $fa_IR extends S {
   @override
   String get south_central_pacific => "جنوب آسیا اقیانوس آرام";
   @override
+  String get favorite_empty => "گل های مورد علاقه هنوز وجود ندارد.";
+  @override
   String get product_custom_filter_description => "شما می توانید سفارش پیش فرض و تعداد فیلترها (رنگ، زیستگاه ها، گلبرگ، توزیع) را تغییر دهید.";
   @override
   String get auth_password_hint => "گذرواژه";
@@ -10738,6 +10854,8 @@ class $fa_IR extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "بازگرداندن خرید";
+  @override
+  String get favorite_title => "گل های مورد علاقه";
   @override
   String get auth_reset_password => "بازنشانی گذرواژه";
   @override
@@ -11119,6 +11237,8 @@ class $fa_IR extends S {
   @override
   String get improve_translation => "بهبود ترجمه";
   @override
+  String get favorite_no_login => "لیست گل های مورد علاقه تنها برای کاربران وارد شده در دسترس است. لطفا وارد شوید.";
+  @override
   String get observation_delete_question => "میخواهید مشاهدات را حذف کنید؟";
   @override
   String get southeastern_usa => "جنوب شرقی ایالات متحده آمریکا";
@@ -11263,6 +11383,8 @@ class $sr_RS extends S {
   @override
   String get south_central_pacific => "Јужно-централни Пацифик";
   @override
+  String get favorite_empty => "Још нема омиљено цвеће.";
+  @override
   String get product_custom_filter_description => "Моћи ћете да промените редослед и број филтера (боја, станиште, латица, дистрибуција).";
   @override
   String get auth_password_hint => "Лозинка";
@@ -11278,6 +11400,8 @@ class $sr_RS extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Враћање куповине";
+  @override
+  String get favorite_title => "Омиљено цвеће";
   @override
   String get auth_reset_password => "Ресетуј лозинка";
   @override
@@ -11663,6 +11787,8 @@ class $sr_RS extends S {
   @override
   String get improve_translation => "Побољшати транслатион";
   @override
+  String get favorite_no_login => "Листа омиљених цвећа доступна је само за пријављене кориснике. Молимо вас да се пријавите.";
+  @override
   String get observation_delete_question => "Желите ли избрисати опажање?";
   @override
   String get southeastern_usa => "Југоисточна САД";
@@ -11712,6 +11838,12 @@ class $en_UK extends S {
 
   @override
   String get color_message => "What's the colour of the flower? Choose the closest one.";
+  @override
+  String get favorite_no_login => "List of favourite flowers is available only for logged users. Please log in.";
+  @override
+  String get favorite_title => "Favourite flowers";
+  @override
+  String get favorite_empty => "There is no favourite flowers yet.";
   @override
   String get filter_color => "colour";
 }
@@ -11823,6 +11955,8 @@ class $fi_FI extends S {
   @override
   String get south_central_pacific => "Etelä Keski-Tyynenmeren";
   @override
+  String get favorite_empty => "Ei ole vielä suosikkikukkia.";
+  @override
   String get product_custom_filter_description => "Voit muuttaa oletusjärjestystä ja suodattimien määrää (väri, kasvupaikka, teriö, jakelu).";
   @override
   String get auth_password_hint => "Salasana";
@@ -11838,6 +11972,8 @@ class $fi_FI extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Palauttaa ostot";
+  @override
+  String get favorite_title => "Suosikki kukat";
   @override
   String get auth_reset_password => "Nollaa salasana";
   @override
@@ -12223,6 +12359,8 @@ class $fi_FI extends S {
   @override
   String get improve_translation => "Parantamaan käännösten";
   @override
+  String get favorite_no_login => "Suosikkikukkien luettelo on käytettävissä vain kirjautuneille käyttäjille. Kirjaudu sisään, ole hyvä.";
+  @override
   String get observation_delete_question => "Haluatko poistaa havainnon?";
   @override
   String get southeastern_usa => "Kaakkois-USA";
@@ -12367,6 +12505,8 @@ class $hr_HR extends S {
   @override
   String get south_central_pacific => "Južno-središnji Tihi ocean";
   @override
+  String get favorite_empty => "Još nema omiljenog cvijeća.";
+  @override
   String get product_custom_filter_description => "Moći ćete promijeniti zadani redoslijed i broj filtara (boja, stanište, latica, distribucija).";
   @override
   String get auth_password_hint => "Zaporka";
@@ -12382,6 +12522,8 @@ class $hr_HR extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Vraćanje kupnje";
+  @override
+  String get favorite_title => "Omiljeno cvijeće";
   @override
   String get auth_reset_password => "Resetiranje lozinke";
   @override
@@ -12767,6 +12909,8 @@ class $hr_HR extends S {
   @override
   String get improve_translation => "Poboljšati prevođenje";
   @override
+  String get favorite_no_login => "Popis omiljenih cvijeća dostupan je samo za prijavljene korisnike. Molimo prijavite se.";
+  @override
   String get observation_delete_question => "Želite li izbrisati zapažanje?";
   @override
   String get southeastern_usa => "Jugoistočni SAD";
@@ -12911,6 +13055,8 @@ class $et_EE extends S {
   @override
   String get south_central_pacific => "Vaikse ookeani keskosas";
   @override
+  String get favorite_empty => "Veel ei ole lemmik lilli.";
+  @override
   String get product_custom_filter_description => "Saate muuta vaikimisi järjekorra ja filtrite arvu (värv, elupaikade, kroonleht, levitamine).";
   @override
   String get auth_password_hint => "Parool";
@@ -12926,6 +13072,8 @@ class $et_EE extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Ostude taastamine";
+  @override
+  String get favorite_title => "Lemmik lilled";
   @override
   String get auth_reset_password => "Lähtesta parool";
   @override
@@ -13311,6 +13459,8 @@ class $et_EE extends S {
   @override
   String get improve_translation => "Parandada tõlge";
   @override
+  String get favorite_no_login => "Lemmiklillede nimekiri on saadaval ainult logitud kasutajatele. Palun logige sisse.";
+  @override
   String get observation_delete_question => "Kas soovite vaatluse kustutada?";
   @override
   String get southeastern_usa => "Kaguosas USA";
@@ -13463,6 +13613,8 @@ class $lt_LT extends S {
   @override
   String get south_central_pacific => "Ramiojo vandenyno pietinė dalis";
   @override
+  String get favorite_empty => "Dar nėra mėgstamiausių gėlių.";
+  @override
   String get product_custom_filter_description => "Galėsite pakeisti numatytąjį užsakymų skaičių ir filtrų skaičių (spalva, buveinė, vainiklapis, platinimas).";
   @override
   String get auth_password_hint => "Slaptažodis";
@@ -13478,6 +13630,8 @@ class $lt_LT extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Atkurti pirkimus";
+  @override
+  String get favorite_title => "Mėgstamiausios gėlės";
   @override
   String get auth_reset_password => "Atstatyti slaptažodį";
   @override
@@ -13863,6 +14017,8 @@ class $lt_LT extends S {
   @override
   String get improve_translation => "Pagerinti vertimą";
   @override
+  String get favorite_no_login => "Mėgstamiausių gėlių sąrašas galimas tik prisijungusiems vartotojams. Prašome prisijungti.";
+  @override
   String get observation_delete_question => "Ar norite ištrinti stebėjimą?";
   @override
   String get southeastern_usa => "Pietryčių JAV";
@@ -14007,6 +14163,8 @@ class $lv_LV extends S {
   @override
   String get south_central_pacific => "Klusā okeāna dienvidu daļa";
   @override
+  String get favorite_empty => "Vēl nav neviena mīļākā zieda.";
+  @override
   String get product_custom_filter_description => "Jūs varēsiet mainīt noklusējuma secību un filtru skaitu (krāsa, biotopa, ziedlapiņa, izplatīšana).";
   @override
   String get auth_password_hint => "Parole";
@@ -14022,6 +14180,8 @@ class $lv_LV extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Atjaunot pirkumus";
+  @override
+  String get favorite_title => "Mīļākie ziedi";
   @override
   String get auth_reset_password => "Atiestatīt paroli";
   @override
@@ -14407,6 +14567,8 @@ class $lv_LV extends S {
   @override
   String get improve_translation => "Uzlabot tulkojumu";
   @override
+  String get favorite_no_login => "Mīļāko ziedu saraksts ir pieejams tikai reģistrētiem lietotājiem. Lūdzu, piesakieties.";
+  @override
   String get observation_delete_question => "Vai vēlaties dzēst novērojumu?";
   @override
   String get southeastern_usa => "Dienvidaustrumu ASV";
@@ -14551,6 +14713,8 @@ class $uk_UA extends S {
   @override
   String get south_central_pacific => "Південно-центральний Тихий океан";
   @override
+  String get favorite_empty => "Улюблених квітів поки немає.";
+  @override
   String get product_custom_filter_description => "Ви зможете змінити стандартний порядок і кількість фільтрів (колір, середовище, пелюстка, розповсюдження).";
   @override
   String get auth_password_hint => "Пароль";
@@ -14566,6 +14730,8 @@ class $uk_UA extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Відновити покупки";
+  @override
+  String get favorite_title => "Улюблені квіти";
   @override
   String get auth_reset_password => "Скинути пароль";
   @override
@@ -14951,6 +15117,8 @@ class $uk_UA extends S {
   @override
   String get improve_translation => "Поліпшення перекладу";
   @override
+  String get favorite_no_login => "Список улюблених квітів доступний тільки для зареєстрованих користувачів. Увійдіть у систему.";
+  @override
   String get observation_delete_question => "Ви хочете видалити спостереження?";
   @override
   String get southeastern_usa => "Південно-східна США";
@@ -15095,6 +15263,8 @@ class $sl_SI extends S {
   @override
   String get south_central_pacific => "Južni osrednji Pacifik";
   @override
+  String get favorite_empty => "Še ni najljubšega cvetja.";
+  @override
   String get product_custom_filter_description => "Spremenili boste lahko privzeti vrstni red in število filtrov (barve, habitate, petali, distribucija).";
   @override
   String get auth_password_hint => "Geslo";
@@ -15110,6 +15280,8 @@ class $sl_SI extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Obnovi nakup";
+  @override
+  String get favorite_title => "Najljubše cvetja";
   @override
   String get auth_reset_password => "Ponastavitev gesla";
   @override
@@ -15495,6 +15667,8 @@ class $sl_SI extends S {
   @override
   String get improve_translation => "Izboljšati prevod";
   @override
+  String get favorite_no_login => "Seznam priljubljenih cvetov je na voljo samo za prijavljene uporabnike. Prijavite se.";
+  @override
   String get observation_delete_question => "Ali želite izbrisati opazovanje?";
   @override
   String get southeastern_usa => "Jugovzhodna ZDA";
@@ -15639,6 +15813,8 @@ class $ar_EG extends S {
   @override
   String get south_central_pacific => "جنوب وسط المحيط الهادئ";
   @override
+  String get favorite_empty => "لا يوجد زهور مفضلة";
+  @override
   String get product_custom_filter_description => "ستتمكن من تغيير الترتيب الافتراضي وعدد المرشحات (اللون ، موطن ، بتلة ، توزيع).";
   @override
   String get auth_password_hint => "كلمة المرور";
@@ -15654,6 +15830,8 @@ class $ar_EG extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "استعادة المشتريات";
+  @override
+  String get favorite_title => "الزهور المفضلة";
   @override
   String get auth_reset_password => "إعادة تعيين كلمة المرور";
   @override
@@ -16039,6 +16217,8 @@ class $ar_EG extends S {
   @override
   String get improve_translation => "تحسين الترجمة";
   @override
+  String get favorite_no_login => "قائمة الزهور المفضلة متاحة فقط للمستخدمين المسجلين. الرجاء تسجيل الدخول.";
+  @override
   String get observation_delete_question => "هل تريد حذف الملاحظة؟";
   @override
   String get southeastern_usa => "جنوب شرق الولايات المتحدة";
@@ -16183,6 +16363,8 @@ class $pt_PT extends S {
   @override
   String get south_central_pacific => "Pacífico Sul-Central";
   @override
+  String get favorite_empty => "Não há flores favoritas ainda.";
+  @override
   String get product_custom_filter_description => "Você poderá alterar a ordem padrão e o número de filtros (cor, habitat, pétala, distribuição).";
   @override
   String get auth_password_hint => "Senha";
@@ -16198,6 +16380,8 @@ class $pt_PT extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Restaurar compras";
+  @override
+  String get favorite_title => "Flores favoritas";
   @override
   String get auth_reset_password => "Redefinir senha";
   @override
@@ -16578,6 +16762,8 @@ class $pt_PT extends S {
   String get north_central_usa => "EUA do centro-norte";
   @override
   String get improve_translation => "Melhorar a tradução";
+  @override
+  String get favorite_no_login => "A lista de flores favoritas está disponível apenas para usuários registrados. Por favor entre.";
   @override
   String get observation_delete_question => "Você quer apagar a observação?";
   @override

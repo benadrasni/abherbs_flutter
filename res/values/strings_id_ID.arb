@@ -294,5 +294,9 @@
   "photo_search_failed": "Pencarian berdasarkan foto gagal. Periksa koneksi internet Anda dan coba lagi.",
   "photo_to_search_by": "Foto yang akan dicari",
   "photo_search_note": "Ini adalah fitur eksperimental yang hanya berfungsi online. Terkadang ia menemukan apa yang Anda cari, terkadang bahkan tidak dekat. Saya sepenuhnya bergantung pada Google di sini karena mereka melakukan semua kerja keras. Seiring berjalannya waktu, itu seharusnya lebih baik dan lebih baik, tetapi itu tidak terutama dibangun untuk pengakuan bunga. Gunakan dengan bijak dan tolong jangan menilai seluruh aplikasi berdasarkan percobaan ini. Untuk tujuan kualitas semua hasil pencarian (bukan foto) akan disimpan.",
-  "photo_search_empty": "Google AI (kecerdasan buatan) tidak mengenali bunga tertentu pada gambar. Coba lagi dengan kondisi sudut, jarak, atau cahaya yang berbeda. Jika Anda sudah melakukannya sepertinya AI tuan tidak akan datang dalam waktu dekat."
+  "photo_search_empty": "Google AI (kecerdasan buatan) tidak mengenali bunga tertentu pada gambar. Coba lagi dengan kondisi sudut, jarak, atau cahaya yang berbeda. Jika Anda sudah melakukannya sepertinya AI tuan tidak akan datang dalam waktu dekat.",
+
+  "favorite_title": "Bunga favorit",
+  "favorite_empty": "Belum ada bunga favorit.",
+  "favorite_no_login": "Daftar bunga favorit hanya tersedia untuk pengguna yang login. Silahkan masuk."
 }
