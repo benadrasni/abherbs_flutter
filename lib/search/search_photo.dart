@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/plant_list.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import 'package:intl/intl.dart';
 class SearchResult {
   double confidence;
   int count;
+  String entityId;
   String labelInLanguage;
   String labelLatin;
   String path;
@@ -32,10 +34,15 @@ class SearchPhoto extends StatefulWidget {
 }
 
 class _SearchPhotoState extends State<SearchPhoto> {
+  FirebaseAnalytics _firebaseAnalytics;
   GlobalKey<ScaffoldState> _key;
   File _image;
   Future<List<SearchResult>> _searchResultF;
   Future<List<dynamic>> _genericLabelsF;
+
+  Future<void> _logPhotoSearchEvent() async {
+    await _firebaseAnalytics.logEvent(name: 'search_photo');
+  }
 
   Future<void> _getImage(GlobalKey<ScaffoldState> _key, ImageSource source, double maxSize) async {
     setState(() {
@@ -46,6 +53,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
     });
     var image = await ImagePicker.pickImage(source: source, maxWidth: maxSize);
     if (image != null) {
+      _logPhotoSearchEvent();
       setState(() {
         _image = image;
         _searchResultF = _getSearchResult(image);
@@ -79,6 +87,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
           results.add(await rootReference.child(firebaseSearchPhoto).child(adjustedLabel.toLowerCase()).once().then((snapshot) {
             var result = SearchResult();
             result.labelLatin = adjustedLabel;
+            result.entityId = label.entityId;
             result.confidence = label.confidence;
             if (snapshot != null) {
               if (snapshot.value != null) {
@@ -126,6 +135,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
             .child(DateTime.now().millisecondsSinceEpoch.toString())
             .set(results.map((searchResult) {
           Map<String, dynamic> labelMap = {};
+          labelMap['entityId'] = searchResult.entityId;
           labelMap['languae'] = widget.myLocale.languageCode;
           labelMap['confidence'] = searchResult.confidence;
           if (searchResult.labelLatin != null) {
@@ -145,6 +155,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
   @override
   void initState() {
     super.initState();
+    _firebaseAnalytics = FirebaseAnalytics();
     _key = new GlobalKey<ScaffoldState>();
     _genericLabelsF = rootReference.child(firebaseSettingsGenericLabels).once().then((snapshot) {
       if (snapshot != null) {

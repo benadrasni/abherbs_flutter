@@ -52,20 +52,26 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
           user = await Auth.signInWithEmail(_email, _password);
           if (!user.isEmailVerified) {
             _showVerifyEmailSentDialog(user).then((value) {
-              Navigator.of(context).pop();
-              Navigator.of(context).pop();
+              if (mounted) {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              }
               Auth.signOut();
             });
           } else {
-            Navigator.pop(context);
-            Navigator.pop(context);
+            if (mounted) {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            }
           }
         } else {
           user = await Auth.signUpWithEmail(_email, _password);
           Auth.sendEmailVerification();
           _showVerifyEmailSentDialog(user).then((value) {
-            Navigator.of(context).pop();
-            Navigator.of(context).pop();
+            if (mounted) {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            }
             Auth.signOut();
           });
         }

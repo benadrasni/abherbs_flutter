@@ -25,6 +25,7 @@ class FirebaseAnimatedIndexList extends StatefulWidget {
     @required this.itemBuilder,
     this.sort,
     this.defaultChild,
+    this.emptyChild,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
     this.controller,
@@ -49,6 +50,10 @@ class FirebaseAnimatedIndexList extends StatefulWidget {
   /// A widget to display while the query is loading. Defaults to an empty
   /// Container().
   final Widget defaultChild;
+
+  /// A widget to display when the query result is empty. Defaults to an empty
+  /// Container().
+  final Widget emptyChild;
 
   /// Called, as needed, to build list item widgets.
   ///
@@ -164,7 +169,7 @@ class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
     _animatedListKey.currentState.insertItem(index, duration: widget.duration);
   }
 
-  void _onValue(DataSnapshot _) {
+  void _onValue(DataSnapshot snapshot) {
     if (mounted) {
       setState(() {
         _loaded = true;
@@ -181,6 +186,9 @@ class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
   Widget build(BuildContext context) {
     if (!_loaded) {
       return widget.defaultChild ?? Container();
+    }
+    if (_model.isEmpty) {
+      return widget.emptyChild ?? Container();
     }
     return AnimatedList(
       key: _animatedListKey,

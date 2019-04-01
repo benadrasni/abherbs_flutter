@@ -79,6 +79,9 @@ class S implements WidgetsLocalizations {
   String get eastern_europe => "Eastern Europe";
   String get enhancements => "Enhancements";
   String get europe => "Europe";
+  String get favorite_empty => "There is no favorite flowers yet.";
+  String get favorite_no_login => "List of favorite flowers is available only for logged users. Please log in.";
+  String get favorite_title => "Favorite flowers";
   String get feedback => "Feedback";
   String get feedback_buy_extended => "You can buy additional functionality like offline mode, search in names or in taxonomy, search by photo, observations and configurable filter.";
   String get feedback_intro => "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:";

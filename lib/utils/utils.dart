@@ -6,6 +6,7 @@ import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/observations/observations.dart';
+import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
@@ -110,11 +111,14 @@ const String firebaseAttributeCount = "count";
 const String firebaseAttributeIOS = "ios";
 const String firebaseAttributeAndroid = "android";
 const String firebaseAttributeLastUpdate = "db_update";
+const String firebaseAttributeName = "name";
+const String firebaseAttributeFamily = "family";
+const String firebaseAttributeUrl = "url";
 const String firebaseAttributeLabel = "label";
 const String firebaseAttributeOrder = "order";
 const String firebaseAttributeStatus = "status";
 const String firebaseAttributeOldVersion = "old version";
-const String firebaseAttributeLifetimeSubscription = "lifetime_subscription";
+const String firebaseAttributeLifetimeSubscription = "lifetime subscription";
 const String firebaseAttributeToken = "token";
 const String firebaseAttributePurchases = "purchases";
 const String firebaseAttributeSearch = "search";
@@ -122,6 +126,7 @@ const String firebaseAttributeSearchByPhoto = "searchByPhoto";
 const String firebaseAttributeObservations = "observations";
 const String firebaseAttributeFrom = "from";
 const String firebaseAttributeTo = "to";
+const String firebaseAttributeFavorite = "favorites";
 
 const String firebaseValuePrivate = "private";
 const String firebaseValueReview = "review";
@@ -475,13 +480,56 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
     },
   ));
 
+
+  // favorites
+  _actions.add(FutureBuilder<int>(
+      future: Future<int>(() {
+        if (currentUser != null) {
+          return usersReference.child(currentUser.uid).child(firebaseAttributeFavorite).once().then((snapshot) {
+            if (snapshot.value != null) {
+              if (snapshot.value is List) {
+                int i = 0;
+                snapshot.value.forEach((value) {
+                  if (value != null) {
+                    i++;
+                  }
+                });
+                return i;
+              } else {
+                return snapshot.value.lenght;
+              }
+            }
+            return 0;
+          });
+        }
+        return 0;
+      }),
+      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+        return IconButton(
+          icon: Icon(Icons.favorite),
+          onPressed: () {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (currentUser != null) {
+                String path = '/' + firebaseUsers + '/' + currentUser.uid + '/' + firebaseAttributeFavorite;
+                Navigator.push(
+                  mainContext,
+                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, snapshot.data.toString(), path)),
+                );
+              } else {
+                favoriteDialog(mainContext, key);
+              }
+            }
+          },
+        );
+      }));
+
   return _actions;
 }
 
 void goToDetail(State state, BuildContext context, Locale myLocale, String name, Function(String) onChangeLanguage,
     Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
   plantsReference.child(name).once().then((DataSnapshot snapshot) {
-    if (snapshot.value != null) {
+    if (snapshot.value != null && snapshot.value['id'] != null) {
       if (state.mounted && context != null) {
         Plant plant = Plant.fromJson(snapshot.key, snapshot.value);
         Navigator.push(

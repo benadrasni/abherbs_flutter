@@ -1,6 +1,5 @@
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/observations/observation_edit.dart';
 import 'package:abherbs_flutter/observations/observation_plant_view.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
@@ -73,32 +72,6 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
               Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
               return ObservationPlantView(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, observation, widget.parentKey);
             }),
-        Positioned(
-          bottom: 20.0,
-          right: 20.0,
-          child: Container(
-          height: 70.0,
-          width: 70.0,
-    child: FittedBox(
-    fit: BoxFit.fill,
-    child: FloatingActionButton(
-            onPressed: () {
-              var observation = Observation(widget.plantName);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, observation)),
-              ).then((value) {
-                if (value != null && value && widget.parentKey.currentState != null) {
-                  widget.parentKey.currentState.showSnackBar(SnackBar(
-                    content: Text(S.of(context).observation_saved),
-                  ));
-                }
-                setState(() {});
-              });
-            },
-            child: Icon(Icons.add),
-          ),),),),
       ],
     );
   }
