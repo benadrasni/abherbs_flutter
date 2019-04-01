@@ -56,6 +56,7 @@ class Auth {
   static Future<FirebaseUser> getCurrentUser() async {
     FirebaseUser user = await firebaseAuth.currentUser().then((user) {
       if (user != null) {
+        usersReference.child(user.uid).keepSynced(true);
         if (Purchases.hasOldVersion == null) {
           usersReference.child(user.uid).child(firebaseAttributeOldVersion).once().then((snapshot) {
             Purchases.hasOldVersion = snapshot.value != null && snapshot.value;

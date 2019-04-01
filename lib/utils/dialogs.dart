@@ -105,6 +105,31 @@ Future<void> photoSearchDialog(BuildContext mainContext, GlobalKey<ScaffoldState
       });
 }
 
+Future<void> favoriteDialog(BuildContext mainContext, GlobalKey<ScaffoldState> key) async {
+  return showDialog(
+      context: mainContext,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(S.of(context).favorite_title),
+          content: Text(S.of(context).favorite_no_login),
+          actions: [
+            FlatButton(
+              child: Text(S.of(context).close.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  )),
+              onPressed: () {
+                Navigator.of(context).pop();
+                key.currentState.openDrawer();
+              },
+            )
+          ],
+        );
+      });
+}
+
+
 Future<bool> deleteDialog(BuildContext mainContext, String title, String content) async {
   return showDialog(
       context: mainContext,

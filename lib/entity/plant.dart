@@ -1,5 +1,6 @@
 class Plant{
   final String key;
+  int id;
   int gbifId;
   int kewId;
   String usdaId;
@@ -18,6 +19,7 @@ class Plant{
   Map<dynamic, dynamic> wikiLinks;
 
   Plant.fromJson(this.key, Map data) {
+    id = data['id'];
     name = data['name'];
     apgIV = data['APGIV'];
     floweringFrom = data['floweringFrom'];

@@ -94,11 +94,17 @@ class _PlantListState extends State<PlantList> {
       drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: FirebaseAnimatedIndexList(
           defaultChild: Center(child: CircularProgressIndicator()),
-          query: listsReference,
+          emptyChild: Container(
+            padding: EdgeInsets.all(5.0),
+            alignment: Alignment.center,
+            child: Text(S.of(context).favorite_empty, style: TextStyle(fontSize: 20.0)),
+          ),
+          query: listsReference.orderByChild(firebaseAttributeName),
           keyQuery: widget.path != null ? rootReference.child(widget.path) : keysReference.child(getFilterKey(widget.filter)),
           itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
-            String name = snapshot.value['name'];
-            String family = snapshot.value['family'];
+            String name = snapshot.value[firebaseAttributeName];
+            String family = snapshot.value[firebaseAttributeFamily];
+            String url = snapshot.value[firebaseAttributeUrl];
 
             Locale myLocale = Localizations.localeOf(context);
             Future<String> nameF = translationCache.containsKey(name)
@@ -152,7 +158,7 @@ class _PlantListState extends State<PlantList> {
                         return Text(familyLocal);
                       }),
                   leading: getImage(
-                      storageFamilies + snapshot.value['family'] + defaultExtension,
+                      storageFamilies + family + defaultExtension,
                       Container(
                         width: 0.0,
                         height: 0.0,
@@ -163,7 +169,7 @@ class _PlantListState extends State<PlantList> {
                     goToDetail(self, context, myLocale, name, widget.onChangeLanguage, widget.onBuyProduct, widget.filter);
                   },
                 ),
-                _getImageButton(context, myLocale, storagePhotos + snapshot.value['url'], name),
+                _getImageButton(context, myLocale, storagePhotos + url, name),
               ]),
             );
           }),
