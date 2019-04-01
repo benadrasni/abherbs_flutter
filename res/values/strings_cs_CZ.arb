@@ -293,5 +293,9 @@
   "photo_search_failed": "Vyhledávání bylo neúspěšné. Zkontrolujte své připojení na internet a skuste znovu.",
   "photo_to_search_by": "Fotka, podle níž se vyhledává",
   "photo_search_note": "Toto je experimentální funkce, která funguje pouze online. Někdy najde přesně to, co hledáte, někdy ani zdaleka. Úplně se v tom spoléhám na Google, protože jde o jejich software. Časem by to mělo být lepší a lepší, ale tato funkce není primárně určena pro rozpoznávání květin. Používejte ji uvážlivě a prosím nehodnoťte celou aplikaci na základě tohoto experimentu. Za účelem zvyšování kvality budou všechny výsledky vyhledávání (ne fotografie) uložené.",
-  "photo_search_empty": "Google UI (umělá inteligence) na obrázku nerozeznala žádnou konkrétní květinu. Zkuste znovu s jiným úhlem, vzdáleností nebo světelnými podmínkami. Pokud jste to již udělali, vypadá to tak, že nový UI vládce nepřijde tak brzy."
+  "photo_search_empty": "Google UI (umělá inteligence) na obrázku nerozeznala žádnou konkrétní květinu. Zkuste znovu s jiným úhlem, vzdáleností nebo světelnými podmínkami. Pokud jste to již udělali, vypadá to tak, že nový UI vládce nepřijde tak brzy.",
+
+  "favorite_title": "Oblíbené květy",
+  "favorite_empty": "Zatím nejsou žádné oblíbené květy.",
+  "favorite_no_login": "Seznam oblíbených květin je dostupný pouze pro přihlášené uživatele. Přihlašte se, prosím."
 }

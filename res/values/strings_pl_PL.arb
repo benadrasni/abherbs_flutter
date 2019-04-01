@@ -294,5 +294,9 @@
   "photo_search_failed": "Wyszukiwanie po zdjęciu nie powiodło się. Sprawdź połączenie internetowe i spróbuj ponownie.",
   "photo_to_search_by": "Wybierz zdjęcie",
   "photo_search_note": "Jest to funkcja eksperymentalna, która działa tylko online. Czasami znajdzie dokładnie to, czego szukasz, czasami w ogóle nie trafi. Całkowicie polegam tutaj na Google, ponieważ jest to ich oprogramowanie. Z czasem powinno być coraz lepiej, ale ta funkcja nie była tworzona z myślą o rozpoznawaniu kwiatów. Używaj jej mądrze i nie oceniaj całej aplikacji na podstawie tego eksperymentu. Aby poprawić jakość, wszystkie wyniki wyszukiwania (nie zdjęcia) będą zapisywane.",
-  "photo_search_empty": "Google SI (sztuczna inteligencja) nie rozpoznaje żadnego konkretnego kwiatu na zdjęciu. Spróbuj ponownie pod różnymi kątami, odległościami lub warunkami oświetlenia. Jeśli już to zrobiłeś, wygląda na to, że władca SI nie pojawi się w najbliższym czasie."
+  "photo_search_empty": "Google SI (sztuczna inteligencja) nie rozpoznaje żadnego konkretnego kwiatu na zdjęciu. Spróbuj ponownie pod różnymi kątami, odległościami lub warunkami oświetlenia. Jeśli już to zrobiłeś, wygląda na to, że władca SI nie pojawi się w najbliższym czasie.",
+
+  "favorite_title": "Ulubione kwiaty",
+  "favorite_empty": "Nie ma jeszcze ulubionych kwiatów.",
+  "favorite_no_login": "Lista ulubionych kwiatów jest dostępna tylko dla zalogowanych użytkowników. Proszę się zalogować."
 }

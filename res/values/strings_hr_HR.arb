@@ -294,5 +294,9 @@
   "photo_search_failed": "Pretraživanje po fotografiji nije uspjelo. Provjerite internetsku vezu i pokušajte ponovno.",
   "photo_to_search_by": "Fotografija za pretraživanje po",
   "photo_search_note": "Ovo je eksperimentalna značajka koja funkcionira samo na mreži. Ponekad pronađe upravo ono što tražite, ponekad čak ni blizu. Ovdje se potpuno oslanjam na Google jer rade sav težak posao. Kako vrijeme prolazi, to bi trebalo biti bolje i bolje, ali nije prvenstveno izgrađeno za prepoznavanje cvijeta. Koristite ga mudro i nemojte prosuđivati cijelu aplikaciju na temelju ovog eksperimenta. U svrhu kvalitete bit će spremljeni svi rezultati pretraživanja (ne fotografije).",
-  "photo_search_empty": "Google UI (umjetna inteligencija) nije prepoznao nijedan određeni cvijet na slici. Pokušajte ponovno s različitim kutovima, udaljenostima ili uvjetima osvjetljenja. Ako ste to već učinili, izgleda da UI vladar neće uskoro doći."
+  "photo_search_empty": "Google UI (umjetna inteligencija) nije prepoznao nijedan određeni cvijet na slici. Pokušajte ponovno s različitim kutovima, udaljenostima ili uvjetima osvjetljenja. Ako ste to već učinili, izgleda da UI vladar neće uskoro doći.",
+
+  "favorite_title": "Omiljeno cvijeće",
+  "favorite_empty": "Još nema omiljenog cvijeća.",
+  "favorite_no_login": "Popis omiljenih cvijeća dostupan je samo za prijavljene korisnike. Molimo prijavite se."
 }
