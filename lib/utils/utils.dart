@@ -496,7 +496,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
                 });
                 return i;
               } else {
-                return snapshot.value.lenght;
+                return snapshot.value.length;
               }
             }
             return 0;
