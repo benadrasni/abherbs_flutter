@@ -47,6 +47,8 @@
   "offline_download_fail": "Atsisiuntimas nepavyko. Patikrinkite interneto ryšį arba laisvą vietą įrenginyje ir bandykite dar kartą.",
   "offline_delete_message": "Ar norite ištrinti neprisijungus duomenis?",
   "offline_download": "Tęsti atsisiuntimą",
+  "scale_down_photos_title": "Sumažinkite stebėjimo nuotraukas",
+  "scale_down_photos_subtitle": "Įjunkite, kai nematote nuotraukų po pasirinkimo.",
 
   "feedback_intro": "Jūs prisidėjote prie šios programos, nes ją įdiegėte savo prietaise. Jei ieškote ko nors daugiau, čia pateikiamos kelios parinktys:",
   "feedback_review": "Galite parašyti teigiamą apžvalgą.",
@@ -54,7 +56,7 @@
   "feedback_translate": "Galite pranešti apie rastą klaidą ar klaidą arba pateikti naują vertimą į savo kalbą.",
   "feedback_submit_translate_data": "Pagerinkite gėlių duomenis",
   "feedback_submit_translate_app": "Pagerinti programos etiketes",
-  "feedback_buy_extended": "Galite įsigyti išplėstinę versiją su papildomomis funkcijomis, pavyzdžiui, neprisijungus, ieškoti vardų, ieškoti taksonomijos, stebėjimų ir konfigūruojamo filtro.",
+  "feedback_buy_extended": "Galite įsigyti papildomų funkcijų, pvz., Neprisijungus, ieškoti vardų arba taksonomijoje, ieškoti pagal nuotrauką, stebėjimus ir konfigūruojamą filtrą.",
   "feedback_run_ads": "Galite rodyti viso ekrano skelbimą arba žiūrėti vaizdo įrašo reklamą, kad palaikytumėte tolesnę plėtrą ir duomenų bazės tobulinimą.",
   "feedback_run_ads_fullscreen": "Rodyti viso ekrano skelbimą",
   "feedback_run_ads_video": "Žiūrėti vaizdo įrašo skelbimą",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Nuoroda, patvirtinanti paskyrą, buvo išsiųsta į jūsų el. pašto adresą.",
   "auth_reset_password_email_title": "Atstatyti slaptažodį",
   "auth_reset_password_email_message": "Jei norite iš naujo nustatyti slaptažodį, vadovaukitės nurodytomis instrukcijomis $_email.",
+  "auth_resend_email": "Išsiųsti el. laišką",
 
   "auth_verify_phone_number": "Patvirtinti telefono numerį",
   "auth_verify_phone_number_title": "Įveskite savo telefono numerį",
@@ -249,7 +252,8 @@
   "observations": "Stebėjimas",
   "observation_note": "Vieta jūsų asmeninei pastabai.",
   "observation_saved": "Stebėjimas buvo išsaugotas.",
-  "observation_not_saved": "Stebėjimas buvo neišsamus, todėl jis nebuvo išsaugotas. Trūksta vietos ar nuotraukos.",
+  "observation_missing_photo": "Stebėjimas buvo neišsamus, todėl jis nebuvo išsaugotas. Trūksta nuotraukos.",
+  "observation_missing_location": "Stebėjimas buvo neišsamus, todėl jis nebuvo išsaugotas. Trūksta vietos.",
   "observation_delete": "Ištrinti stebėjimą",
   "observation_delete_question": "Ar norite ištrinti stebėjimą?",
   "observation_empty": "Dar nėra jokių stebėjimų.",
@@ -283,9 +287,16 @@
   "promotion_title": "Mokama funkcija",
   "promotion_content": "Tai mokama funkcija. Ją galite naudoti nemokamai iki $date",
 
+  "no_connection_title": "Ryšys",
+  "no_connection_content": "Ši funkcija neveikia be interneto ryšio.",
+
   "photo_search_no_login": "Ieškoti pagal nuotrauką galima tik prisijungusiems vartotojams. Prašome prisijungti.",
   "photo_search_failed": "Nepavyko ieškoti pagal nuotrauką. Patikrinkite interneto ryšį ir bandykite dar kartą.",
   "photo_to_search_by": "Nuotraukas ieškoti pagal",
   "photo_search_note": "Tai eksperimentinė funkcija, kuri veikia tik internete. Kartais jis randa tiksliai tai, ko ieškote, kartais net arti. Aš visiškai pasitikiu „Google“, nes jie daro visą sunkų darbą. Laikui bėgant, jis turėtų būti geresnis ir geresnis, tačiau jis nebuvo pastatytas pirmiausia gėlių pripažinimui. Naudokite ją išmintingai ir nediskriminuokite visos paraiškos pagal šį eksperimentą. Kokybės tikslais bus išsaugoti visi paieškos rezultatai (ne nuotraukos).",
-  "photo_search_empty": "„Google“ DI (dirbtinis intelektas) neatpažino jokios konkrečios gėlių ant nuotraukos. Bandykite dar kartą su skirtingais kampais, atstumu arba šviesos sąlygomis. Jei jau tai padarėte, atrodo, kad DI viršininkas netrukus ateis."
+  "photo_search_empty": "„Google“ DI (dirbtinis intelektas) neatpažino jokios konkrečios gėlių ant nuotraukos. Bandykite dar kartą su skirtingais kampais, atstumu arba šviesos sąlygomis. Jei jau tai padarėte, atrodo, kad DI viršininkas netrukus ateis.",
+
+  "favorite_title": "Mėgstamiausios gėlės",
+  "favorite_empty": "Dar nėra mėgstamiausių gėlių.",
+  "favorite_no_login": "Mėgstamiausių gėlių sąrašas galimas tik prisijungusiems vartotojams. Prašome prisijungti."
 }

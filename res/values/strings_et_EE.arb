@@ -47,6 +47,8 @@
   "offline_download_fail": "Allalaadimine ebaõnnestus. Palun kontrollige oma Interneti-ühendust või vaba ruumi seadmes ja proovige uuesti.",
   "offline_delete_message": "Kas soovite offline andmeid kustutada?",
   "offline_download": "Jätka allalaadimist",
+  "scale_down_photos_title": "Vähendage vaatluse fotosid",
+  "scale_down_photos_subtitle": "Lülitage sisse, kui fotosid pärast valimist ei näe.",
 
   "feedback_intro": "Tänu sellele, et olete selle seadmesse installinud, olete sellele rakendusele kaasa aidanud. Kui otsite midagi muud, on siin mõned võimalused:",
   "feedback_review": "Võite kirjutada positiivse ülevaate.",
@@ -54,7 +56,7 @@
   "feedback_translate": "Saate teatada mis tahes leitud veast või veast või esitada uue tõlke oma keelde.",
   "feedback_submit_translate_data": "Parandage lilli andmeid",
   "feedback_submit_translate_app": "Parandage rakenduse sildid",
-  "feedback_buy_extended": "Laiendatud (+) versiooni saate osta täiendava funktsionaalsusega, näiteks offline režiimis, otsida nimesid, otsida taksonoomiast, vaatlustest ja seadistatavast filtrist.",
+  "feedback_buy_extended": "Teil on võimalik osta täiendavaid funktsioone, nagu offline režiim, otsida nimedest või taksonoomiast, otsida fotode, vaatluste ja konfigureeritava filtri järgi.",
   "feedback_run_ads": "Täiendava ekraani reklaami või videoreklaami saate kuvada edasise arengu ja andmebaaside täiustamise toetamiseks.",
   "feedback_run_ads_fullscreen": "Näita täisekraani reklaami",
   "feedback_run_ads_video": "Vaadake videoreklaami",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Kontot kinnitav link on saadetud teie e-posti aadressile.",
   "auth_reset_password_email_title": "Lähtesta parool",
   "auth_reset_password_email_message": "Parooli lähtestamiseks järgige $_email saadetud juhiseid.",
+  "auth_resend_email": "Saada uuesti e-post",
 
   "auth_verify_phone_number": "Kinnitage telefoninumber",
   "auth_verify_phone_number_title": "Sisesta oma telefoninumber",
@@ -89,7 +92,7 @@
   "auth_incorrect_code": "Vale kood. Proovi uuesti.",
   "auth_sms_terms_of_service": "Puudutades \"Kinnita telefoninumber\", võidakse saata SMS. Võib kehtida sõnumi ja andmeedastuskiirus.",
   "auth_enter_confirmation_code": "Sisestage 6-kohaline kood, mille me saatisime aadressile ",
-  "auth_resend_code": "Koodi uuesti saatmine",
+  "auth_resend_code": "Saada kood uuesti",
 
   "rate_question": "See app kasulik?",
   "rate_text": "Selle rakenduse autorit toetab kasutajate positiivne vastus. Palun saatke talle mõned tähed rakenduste poe kaudu.",
@@ -249,7 +252,8 @@
   "observations": "Vaatlused",
   "observation_note": "Koht teie privaatseks märkuseks.",
   "observation_saved": "Vaatlus salvestati.",
-  "observation_not_saved": "Vaatlus oli puudulik, seega ei salvestatud. Asukoht või foto puudub.",
+  "observation_missing_photo": "Vaatlus oli puudulik, seega ei salvestatud. Foto puudub.",
+  "observation_missing_location": "Vaatlus oli puudulik, seega ei salvestatud. Asukoht puudub.",
   "observation_delete": "Kustuta vaatlus",
   "observation_delete_question": "Kas soovite vaatluse kustutada?",
   "observation_empty": "Tähelepanu pole veel.",
@@ -283,9 +287,16 @@
   "promotion_title": "Tasuline funktsioon",
   "promotion_content": "See on tasuline funktsioon. Võite seda kasutada kuni $date",
 
+  "no_connection_title": "Ühendus",
+  "no_connection_content": "See funktsioon ei tööta ilma internetiühenduseta.",
+
   "photo_search_no_login": "Fotode otsing on saadaval ainult logitud kasutajatele. Palun logige sisse.",
   "photo_search_failed": "Otsing foto järgi nurjus. Kontrollige oma Interneti-ühendust ja proovige uuesti.",
   "photo_to_search_by": "Foto otsimiseks",
   "photo_search_note": "See on eksperimentaalne funktsioon, mis töötab ainult võrgus. Mõnikord leiab ta täpselt seda, mida otsite, mõnikord isegi lähedal. Ma olen täiesti Google'ist siin, sest nad teevad kõvasti tööd. Aja möödudes peaks see olema parem ja parem, kuid seda ei ehitatud peamiselt lille tunnustamiseks. Kasutage seda targalt ja ärge hinnake kogu seda rakendust selle katse põhjal. Kvaliteedi eesmärgil salvestatakse kõik otsingutulemused (mitte fotod).",
-  "photo_search_empty": "Google'i AI (tehisintellekt) ei tuvastanud pildil ühtegi konkreetset lille. Proovige uuesti erinevate nurkade, kauguste või valgustingimustega. Kui sa juba tegid, siis näib, et AI ülempreester ei jõua peagi."
+  "photo_search_empty": "Google'i AI (tehisintellekt) ei tuvastanud pildil ühtegi konkreetset lille. Proovige uuesti erinevate nurkade, kauguste või valgustingimustega. Kui sa juba tegid, siis näib, et AI ülempreester ei jõua peagi.",
+
+  "favorite_title": "Lemmik lilled",
+  "favorite_empty": "Veel ei ole lemmik lilli.",
+  "favorite_no_login": "Lemmiklillede nimekiri on saadaval ainult logitud kasutajatele. Palun logige sisse."
 }

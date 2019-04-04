@@ -47,6 +47,8 @@
   "offline_download_fail": "Download failed. Please check your internet connection or free space on device and try again.",
   "offline_delete_message": "Do you want to delete offline data?",
   "offline_download": "Resume download",
+  "scale_down_photos_title": "Scale down observation's photos",
+  "scale_down_photos_subtitle": "Switch on when you don't see your photos after pick.",
 
   "feedback_intro": "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:",
   "feedback_review": "You can write a positive review.",
@@ -54,7 +56,7 @@
   "feedback_translate": "You can report any typo or mistranslation you found or submit new translation for flower's data or application's labels at whatsthatflower.com.",
   "feedback_submit_translate_data": "Improve flower's data",
   "feedback_submit_translate_app": "Improve application's labels",
-  "feedback_buy_extended": "You can buy additional functionality like offline mode, search in names, search in taxonomy, observations and configurable filter.",
+  "feedback_buy_extended": "You can buy additional functionality like offline mode, search in names or in taxonomy, search by photo, observations and configurable filter.",
   "feedback_run_ads": "You can display full screen advertisement or watch video advertisement to support further development and database enhancement.",
   "feedback_run_ads_fullscreen": "Show a fullscreen advertisement",
   "feedback_run_ads_video": "Watch a video advertisement",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Link to verify account has been sent to your email address.",
   "auth_reset_password_email_title": "Reset password",
   "auth_reset_password_email_message": "Follow the instructions sent to $_email to reset your password.",
+  "auth_resend_email": "Resend Email",
 
   "auth_verify_phone_number": "Verify phone number",
   "auth_verify_phone_number_title": "Enter your phone number",
@@ -249,7 +252,8 @@
   "observations": "Observations",
   "observation_note": "Place for your private note.",
   "observation_saved": "Observation was saved.",
-  "observation_not_saved": "Observation was incomplete thus it wasn't saved. Location or photo is missing.",
+  "observation_missing_photo": "Observation was incomplete thus it wasn't saved. Photo is missing.",
+  "observation_missing_location": "Observation was incomplete thus it wasn't saved. Location is missing.",
   "observation_delete": "Delete observation",
   "observation_delete_question": "Do you want to delete the observation?",
   "observation_empty": "There is no observation yet.",
@@ -283,9 +287,16 @@
   "promotion_title": "Paid feature",
   "promotion_content": "This is a paid feature. You can use it for free until $date",
 
+  "no_connection_title": "Connection",
+  "no_connection_content": "This feature doesn't work without Internet connection.",
+
   "photo_search_no_login": "Search by photo is available only for logged users. Please log in.",
   "photo_search_failed": "Search by photo failed. Check your internet connection and try again.",
   "photo_to_search_by": "Photo to search by",
-  "photo_search_note": "This is an experimental feature which works only online. Sometimes it finds exactly what you're looking for, sometimes not even close. I'm totally rely on Google here since they're doing all the hard work. As time goes it should be better and better, but it wasn't primarily built for flower's recognition. Use it wisely and please don't judge the whole application based on this experiment. For quality purposes all search results (not photos) will be saved.",
-  "photo_search_empty": "Google AI (artificial intelligence) didn't recognize any particular flower on the picture. Try again with different angle, distance or light conditions. If you already did it looks like AI overlord won't come anytime soon."
+  "photo_search_note": "This is an experimental feature which works only online. Sometimes it finds exactly what you're looking for, sometimes not even close. I'm totally relying on Google here since they're doing all the hard work. As time goes it should be better and better, but it wasn't primarily built for flower's recognition. Use it wisely and please don't judge the whole application based on this experiment. For quality purposes all search results (not photos) will be saved.",
+  "photo_search_empty": "Google AI (artificial intelligence) didn't recognize any particular flower on the picture. Try again with different angle, distance or light conditions. If you already did it looks like AI overlord won't come anytime soon.",
+
+  "favorite_title": "Favorite flowers",
+  "favorite_empty": "There is no favorite flowers yet.",
+  "favorite_no_login": "List of favorite flowers is available only for logged users. Please log in."
 }

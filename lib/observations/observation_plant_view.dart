@@ -65,7 +65,8 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.observation)),
+                builder: (context) =>
+                    ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.observation)),
           ).then((value) {
             if (value != null && value && widget.parentKey.currentState != null) {
               widget.parentKey.currentState.showSnackBar(SnackBar(
@@ -85,9 +86,9 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
           width: mapWidth,
           height: mapHeight,
           placeholder: (context, url) => Container(
-            width: mapWidth,
-            height: mapHeight,
-          ),
+                width: mapWidth,
+                height: mapHeight,
+              ),
           imageUrl: getMapImageUrl(widget.observation.latitude, widget.observation.longitude, mapWidth, mapHeight),
         ),
         onPressed: () {
@@ -106,31 +107,40 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
       child: PageView.builder(
         itemCount: widget.observation.photoPaths.length,
         itemBuilder: (context, position) {
-          return Stack(children: [
-            getImage(widget.observation.photoPaths[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
-            Container(
-              padding: EdgeInsets.all(5.0),
-              child: Text(
-                (position + 1).toString() + ' / ' + widget.observation.photoPaths.length.toString(),
-                style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+          if (widget.observation.status == firebaseValueReview) {
+            return Center(child: Image(image: AssetImage('res/images/review.png'),));
+          } else {
+            return Stack(children: [
+              getImage(widget.observation.photoPaths[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
+              Container(
+                padding: EdgeInsets.all(5.0),
+                child: Text(
+                  (position + 1).toString() + ' / ' + widget.observation.photoPaths.length.toString(),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-          ]);
+            ]);
+          }
         },
       ),
     ));
 
     if (widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.uid)) {
-      widgets.add(Card(color: Theme.of(context).buttonColor, child:Container(
-        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-        height: 50.0,
-        alignment: Alignment.topLeft,
-        child: Text(widget.observation.note, style: TextStyle(fontSize: 16.0),
-        textAlign: TextAlign.start,),
-      )));
+      widgets.add(Card(
+          color: Theme.of(context).buttonColor,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+            alignment: Alignment.topLeft,
+            child: Text(
+              widget.observation.note,
+              style: TextStyle(fontSize: 16.0),
+              textAlign: TextAlign.start,
+            ),
+          )));
     }
 
     return Card(
-      child: Column(mainAxisSize: MainAxisSize.min, children: widgets),);
+      child: Column(mainAxisSize: MainAxisSize.min, children: widgets),
+    );
   }
 }

@@ -18,7 +18,7 @@
   "product_observations_title": "Pozorování",
   "product_observations_description": "Budete mít možnost uložit si své vlastní pozorování s názvem květu, datem, místem, fotografiemi a poznámkou. Bez předplatného budou fotografie uloženy pouze lokálně.",
   "product_photo_search_title": "Hledat pomocí fotografie",
-  "product_photo_search_description": "Budete mít možnost najít květinu podle fotografie. Tato funkce používá umělé inteligence pro určování objektů na fotografiích od Googlu.",
+  "product_photo_search_description": "Budete mít možnost najít květinu podle fotografie. Tato funkce využívá umělé inteligence pro určování objektů na fotografiích od Googlu.",
   "subscription_monthly_title": "Záloha fotografií z pozorování",
   "subscription_monthly_description": "Možnost sdílet fotografie z pozorování na více zařízeních, přístup k pozorováním ostatních uživatelů - měsíční platba.",
   "subscription_yearly_title": "Záloha fotografií z pozorování",
@@ -47,6 +47,8 @@
   "offline_download_fail": "Stahování souborů selhalo. Prosím zkontrolujte připojení k internetu nebo volný prostor na zařízení a zkuste znovu.",
   "offline_delete_message": "Opravdu chcete vymazat offline data?",
   "offline_download": "Obnovit stahování",
+  "scale_down_photos_title": "Zmenšit fotografie z pozorování",
+  "scale_down_photos_subtitle": "Zapněte, když se vaše fotografie po vyjmutí nezobrazí.",
 
   "feedback_intro": "Tuto aplikaci podporujete odkdy jste si ji nainstalovali na své mobilní zařízení, děkuji. Pokud hledáte jiné formy podpory, zde jsou některé možnosti:",
   "feedback_review": "Můžete napsat pozitivní recenzi.",
@@ -54,7 +56,7 @@
   "feedback_translate": "Můžete upozornit na gramatické a faktické chyby v textu, případně navrhnout lepší překlad jednotlivých květin nebo aplikace samotné na stránce whatsthatflower.com.",
   "feedback_submit_translate_data": "Opravit chyby datech",
   "feedback_submit_translate_app": "Opravit chyby v aplikaci",
-  "feedback_buy_extended": "Můžete si koupit funkce navíc jako například ofline režim, vyhledávání v názvech a v taxonomii, pozorování a nastavitelný filtr.",
+  "feedback_buy_extended": "Můžete si koupit funkce navíc jako například offline režim, vyhledávání v názvech a v taxonomii, vyhledávání pomocí fotografie, pozorování a nastavitelný filtr.",
   "feedback_run_ads": "Můžete si prohlédnout videoreklamu nebo nechat zobrazit reklamu na celou obrazovku a podpořit tak další vývoj a rozšiřování databáze.",
   "feedback_run_ads_fullscreen": "Zobrazit reklamu na celé obrazovce",
   "feedback_run_ads_video": "Spustit video reklamu",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Na vaši adresu byl odeslán přihlašovací e-mail s dalšími pokyny. Dokončete přihlášení podle instrukcí v e-mailu.",
   "auth_reset_password_email_title": "Obnovit heslo",
   "auth_reset_password_email_message": "Postupujte podle pokynů odeslaných na adresu $_email a obnovte heslo.",
+  "auth_resend_email": "Přeposlat e-mail",
 
   "auth_verify_phone_number": "Ověřit telefonní číslo",
   "auth_verify_phone_number_title": "Zadejte své telefonní číslo",
@@ -89,7 +92,7 @@
   "auth_incorrect_code": "Špatný kód. Zkuste to znovu.",
   "auth_sms_terms_of_service": "Po klepnutí na možnost „Ověřit telefonní číslo” může být odeslána SMS. Mohou být účtovány poplatky za zprávy a data.",
   "auth_enter_confirmation_code": "Zadejte šestimístný kód, který jsme vám zaslali na ",
-  "auth_resend_code": "Znovu zaslat kód",
+  "auth_resend_code": "Přeposlat kód",
 
   "rate_question": "Líbí se vám aplikace?",
   "rate_text": "Autora této aplikace motivuje pozitívny ohlas uživatelů. Pošlete mu, prosím, nejaké květiny (nejlépe hvězdníky) přes obchod s aplikacemi.",
@@ -248,7 +251,8 @@
   "observations": "Pozorování",
   "observation_note": "Místo pro vaše soukromé poznámky.",
   "observation_saved": "Pozorování bylo uloženo.",
-  "observation_not_saved": "Pozorování bylo neúplné, takže nebylo uloženo. Chyběla poloha nebo fotka.",
+  "observation_missing_photo": "Pozorování bylo neúplné, takže nebylo uloženo. Chybí fotografie.",
+  "observation_missing_location": "Pozorování bylo neúplné, takže nebylo uloženo. Chybí poloha.",
   "observation_delete": "Zmazat pozorování",
   "observation_delete_question": "Chcete zmazat pozorování?",
   "observation_empty": "Zatím není žádné pozorování.",
@@ -282,9 +286,16 @@
   "promotion_title": "Placená funkce",
   "promotion_content": "Toto je placená funkce. Volně dostupná bude do $date",
 
+  "no_connection_title": "Připojení",
+  "no_connection_content": "Tato funkce bez připojení k Internetu nefunguje.",
+
   "photo_search_no_login": "Vyhledávání podle fotografie je dostupné pouze pro přihlášené uživatele. Přihlaste se, prosím.",
   "photo_search_failed": "Vyhledávání bylo neúspěšné. Zkontrolujte své připojení na internet a skuste znovu.",
   "photo_to_search_by": "Fotka, podle níž se vyhledává",
   "photo_search_note": "Toto je experimentální funkce, která funguje pouze online. Někdy najde přesně to, co hledáte, někdy ani zdaleka. Úplně se v tom spoléhám na Google, protože jde o jejich software. Časem by to mělo být lepší a lepší, ale tato funkce není primárně určena pro rozpoznávání květin. Používejte ji uvážlivě a prosím nehodnoťte celou aplikaci na základě tohoto experimentu. Za účelem zvyšování kvality budou všechny výsledky vyhledávání (ne fotografie) uložené.",
-  "photo_search_empty": "Google UI (umělá inteligence) na obrázku nerozeznala žádnou konkrétní květinu. Zkuste znovu s jiným úhlem, vzdáleností nebo světelnými podmínkami. Pokud jste to již udělali, vypadá to tak, že nový UI vládce nepřijde tak brzy."
+  "photo_search_empty": "Google UI (umělá inteligence) na obrázku nerozeznala žádnou konkrétní květinu. Zkuste znovu s jiným úhlem, vzdáleností nebo světelnými podmínkami. Pokud jste to již udělali, vypadá to tak, že nový UI vládce nepřijde tak brzy.",
+
+  "favorite_title": "Oblíbené květy",
+  "favorite_empty": "Zatím nejsou žádné oblíbené květy.",
+  "favorite_no_login": "Seznam oblíbených květin je dostupný pouze pro přihlášené uživatele. Přihlašte se, prosím."
 }

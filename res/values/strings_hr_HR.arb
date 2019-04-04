@@ -47,6 +47,8 @@
   "offline_download_fail": "Preuzimanje nije uspjelo. Provjerite internetsku vezu ili slobodan prostor na uređaju i pokušajte ponovno.",
   "offline_delete_message": "Želite li izbrisati izvanmrežne podatke?",
   "offline_download": "Nastavi preuzimanje",
+  "scale_down_photos_title": "Smanjite fotografije promatranja",
+  "scale_down_photos_subtitle": "Uključite kada ne vidite svoje fotografije nakon odabira.",
 
   "feedback_intro": "Doprinosili ste ovoj aplikaciji jer ste je instalirali na svom uređaju, hvala. Ako tražite nešto više, evo nekoliko opcija:",
   "feedback_review": "Možete napisati pozitivnu recenziju.",
@@ -54,7 +56,7 @@
   "feedback_translate": "Možete prijaviti svaku pogrešku ili pogrešku koju ste pronašli ili poslati novi prijevod na svoj jezik.",
   "feedback_submit_translate_data": "Poboljšajte podatke o cvijetu",
   "feedback_submit_translate_app": "Poboljšajte oznake programa",
-  "feedback_buy_extended": "Možete kupiti proširenu verziju s dodatnim funkcijama kao što je izvanmrežni način rada, tražiti imena, pretraživati u taksonomiji, promatrati i konfigurirati filtar.",
+  "feedback_buy_extended": "Možete kupiti dodatne funkcionalnosti kao što je izvanmrežni način rada, tražiti imena ili taksonomiju, pretraživati po fotografijama, promatranjima i konfigurirati filtar.",
   "feedback_run_ads": "Možete prikazati oglas preko cijelog zaslona ili gledati video oglas kako biste podržali daljnji razvoj i poboljšanje baze podataka.",
   "feedback_run_ads_fullscreen": "Pokaži oglas preko cijelog zaslona",
   "feedback_run_ads_video": "Pogledajte video oglas",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Veza na potvrdu računa poslana je na vašu adresu e-pošte.",
   "auth_reset_password_email_title": "Resetiranje lozinke",
   "auth_reset_password_email_message": "Slijedite upute poslane na $_email da biste poništili zaporku.",
+  "auth_resend_email": "Ponovi slanje e-pošte",
 
   "auth_verify_phone_number": "Potvrda telefonskog broja",
   "auth_verify_phone_number_title": "Unesite vaš telefonski broj",
@@ -249,7 +252,8 @@
   "observations": "Zapažanja",
   "observation_note": "Mjesto za vašu privatnu bilješku.",
   "observation_saved": "Zapažanje je spremljeno.",
-  "observation_not_saved": "Zapažanje je bilo nepotpuno pa nije bilo spašeno. Nedostaje lokacija ili fotografija.",
+  "observation_missing_photo": "Zapažanje je bilo nepotpuno pa nije bilo spašeno. Nedostaje fotografija.",
+  "observation_missing_location": "Zapažanje je bilo nepotpuno pa nije bilo spašeno. Nedostaje lokacija.",
   "observation_delete": "Izbriši zapažanje",
   "observation_delete_question": "Želite li izbrisati zapažanje?",
   "observation_empty": "Još nema zapažanja.",
@@ -283,9 +287,16 @@
   "promotion_title": "Plaćena značajka",
   "promotion_content": "Ovo je plaćena značajka. Možete ga koristiti besplatno do $date",
 
+  "no_connection_title": "Veza",
+  "no_connection_content": "Ova značajka ne funkcionira bez internetske veze.",
+
   "photo_search_no_login": "Pretraživanje po fotografijama dostupno je samo prijavljenim korisnicima. Molimo prijavite se.",
   "photo_search_failed": "Pretraživanje po fotografiji nije uspjelo. Provjerite internetsku vezu i pokušajte ponovno.",
   "photo_to_search_by": "Fotografija za pretraživanje po",
   "photo_search_note": "Ovo je eksperimentalna značajka koja funkcionira samo na mreži. Ponekad pronađe upravo ono što tražite, ponekad čak ni blizu. Ovdje se potpuno oslanjam na Google jer rade sav težak posao. Kako vrijeme prolazi, to bi trebalo biti bolje i bolje, ali nije prvenstveno izgrađeno za prepoznavanje cvijeta. Koristite ga mudro i nemojte prosuđivati cijelu aplikaciju na temelju ovog eksperimenta. U svrhu kvalitete bit će spremljeni svi rezultati pretraživanja (ne fotografije).",
-  "photo_search_empty": "Google UI (umjetna inteligencija) nije prepoznao nijedan određeni cvijet na slici. Pokušajte ponovno s različitim kutovima, udaljenostima ili uvjetima osvjetljenja. Ako ste to već učinili, izgleda da UI vladar neće uskoro doći."
+  "photo_search_empty": "Google UI (umjetna inteligencija) nije prepoznao nijedan određeni cvijet na slici. Pokušajte ponovno s različitim kutovima, udaljenostima ili uvjetima osvjetljenja. Ako ste to već učinili, izgleda da UI vladar neće uskoro doći.",
+
+  "favorite_title": "Omiljeno cvijeće",
+  "favorite_empty": "Još nema omiljenog cvijeća.",
+  "favorite_no_login": "Popis omiljenih cvijeća dostupan je samo za prijavljene korisnike. Molimo prijavite se."
 }

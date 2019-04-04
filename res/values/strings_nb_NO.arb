@@ -47,6 +47,8 @@
   "offline_download_fail": "Nedlasting mislyktes. Kontroller din internettforbindelse eller ledig plass på enheten, og prøv igjen.",
   "offline_delete_message": "Vil du slette frakoblede data?",
   "offline_download": "Fortsett nedlasting",
+  "scale_down_photos_title": "Skal ned observasjonens bilder",
+  "scale_down_photos_subtitle": "Slå på når du ikke ser bildene dine etter valg.",
 
   "feedback_intro": "Du har bidratt til dette programmet siden du har installert det på enheten, takk. Hvis du leter etter noe mer, er det noen alternativer:",
   "feedback_review": "Du kan skrive en positiv anmeldelse.",
@@ -54,7 +56,7 @@
   "feedback_translate": "Du kan rapportere hvilken som helst skrivefeil eller feil du fant eller sende inn ny oversettelse på ditt språk.",
   "feedback_submit_translate_data": "Forbedre blomstens data",
   "feedback_submit_translate_app": "Forbedre programmets etiketter",
-  "feedback_buy_extended": "Du kan kjøpe utvidet versjon med ekstra funksjonalitet som frakoblet modus, søk i navn, søk i taksonomi, observasjoner og konfigurerbart filter.",
+  "feedback_buy_extended": "Du kan kjøpe tilleggsfunksjoner som frakoblet modus, søk i navn eller i taksonomi, søk etter bilde, observasjoner og konfigurerbart filter.",
   "feedback_run_ads": "Du kan vise fullskjermsannonsering eller se videoannonse for å støtte videreutvikling og databaseforbedring.",
   "feedback_run_ads_fullscreen": "Vis en fullskjerm-annonse",
   "feedback_run_ads_video": "Se en videoannonse",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Link til verifiser konto er sendt til e-postadressen din.",
   "auth_reset_password_email_title": "Tilbakestille passord",
   "auth_reset_password_email_message": "Følg instruksjonene som sendes til $_email for å tilbakestille passordet ditt.",
+  "auth_resend_email": "Send e-post igjen",
 
   "auth_verify_phone_number": "Bekreft telefonnummeret",
   "auth_verify_phone_number_title": "Tast inn ditt telefonnummer",
@@ -249,7 +252,8 @@
   "observations": "Observasjoner",
   "observation_note": "Plasser for ditt private notat.",
   "observation_saved": "Observasjon ble reddet.",
-  "observation_not_saved": "Observasjonen var ufullstendig, slik at den ikke ble frelst. Sted eller bilde mangler.",
+  "observation_missing_photo": "Observasjonen var ufullstendig, slik at den ikke ble frelst. Bilde mangler.",
+  "observation_missing_location": "Observasjonen var ufullstendig, slik at den ikke ble frelst. Sted mangler.",
   "observation_delete": "Slett observasjon",
   "observation_delete_question": "Ønsker du å slette observasjonen?",
   "observation_empty": "Det er ingen observasjon enda.",
@@ -283,9 +287,16 @@
   "promotion_title": "Betalt funksjon",
   "promotion_content": "Dette er en betalt funksjon. Du kan bruke det gratis til $date",
 
+  "no_connection_title": "Forbindelse",
+  "no_connection_content": "Denne funksjonen virker ikke uten Internett-tilkobling.",
+
   "photo_search_no_login": "Søk etter bilde er bare tilgjengelig for loggede brukere. Vennligst Logg inn.",
   "photo_search_failed": "Søk etter bilde mislyktes. Sjekk Internett-tilkoblingen din og prøv igjen.",
   "photo_to_search_by": "Bilde å søke etter",
   "photo_search_note": "Dette er en eksperimentell funksjon som bare fungerer online. Noen ganger finner den akkurat det du leter etter, noen ganger ikke engang i nærheten. Jeg er helt stolt på Google her, siden de gjør alt hardt arbeid. Etter hvert som tiden går, bør det bli bedre og bedre, men det ble ikke primært bygget for blomsters anerkjennelse. Bruk det klokt og vær så snill å ikke dømme hele applikasjonen basert på dette eksperimentet. For kvalitetsmål blir alle søkeresultatene (ikke bilder) lagret.",
-  "photo_search_empty": "Google KI (kunstig intelligens) kjente ikke noen bestemt blomst på bildet. Prøv igjen med forskjellige vinkel-, avstands- eller lysforhold. Hvis du allerede gjorde det, ser det ut som at KI overlord ikke kommer når som helst snart."
+  "photo_search_empty": "Google KI (kunstig intelligens) kjente ikke noen bestemt blomst på bildet. Prøv igjen med forskjellige vinkel-, avstands- eller lysforhold. Hvis du allerede gjorde det, ser det ut som at KI overlord ikke kommer når som helst snart.",
+
+  "favorite_title": "Favorittblomster",
+  "favorite_empty": "Det er ingen favoritt blomster ennå.",
+  "favorite_no_login": "Liste over favorittblomster er bare tilgjengelig for loggede brukere. Vennligst Logg inn."
 }

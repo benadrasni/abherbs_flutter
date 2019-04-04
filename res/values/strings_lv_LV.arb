@@ -47,6 +47,8 @@
   "offline_download_fail": "Lejupielāde neizdevās. Lūdzu, pārbaudiet interneta savienojumu vai brīvo vietu ierīcē un mēģiniet vēlreiz.",
   "offline_delete_message": "Vai vēlaties dzēst bezsaistes datus?",
   "offline_download": "Atsākt lejupielādi",
+  "scale_down_photos_title": "Samaziniet novērošanas fotoattēlus",
+  "scale_down_photos_subtitle": "Ieslēdziet, kad pēc fotoattēlu saņemšanas neredzat fotoattēlus.",
 
   "feedback_intro": "Jūs esat veicinājis šo lietojumprogrammu, jo esat to instalējis savā ierīcē. Ja jūs meklējat kaut ko vairāk, šeit ir dažas iespējas:",
   "feedback_review": "Jūs varat uzrakstīt pozitīvu pārskatu.",
@@ -54,7 +56,7 @@
   "feedback_translate": "Jūs varat ziņot par atrasto kļūdu vai kļūdu vai iesniegt jaunu tulkojumu savā valodā.",
   "feedback_submit_translate_data": "Uzlabojiet ziedu datus",
   "feedback_submit_translate_app": "Uzlabojiet lietojumprogrammas uzlīmes",
-  "feedback_buy_extended": "Jūs varat iegādāties paplašinātu versiju ar papildu funkcionalitāti, piemēram, bezsaistes režīmā, meklēt nosaukumos, meklēt taksonomijā, novērojumos un konfigurējamajā filtrā.",
+  "feedback_buy_extended": "Jūs varat iegādāties papildu funkcionalitāti, piemēram, bezsaistes režīmā, meklēt nosaukumos vai taksonomijā, meklēt pēc fotoattēla, novērojumiem un konfigurējama filtra.",
   "feedback_run_ads": "Jūs varat parādīt pilnekrāna reklāmu vai skatīties video reklāmu, lai atbalstītu turpmāku attīstību un datu bāzes uzlabošanu.",
   "feedback_run_ads_fullscreen": "Rādīt pilnekrāna reklāmu",
   "feedback_run_ads_video": "Skatiet video reklāmu",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Saite, lai pārbaudītu kontu, ir nosūtīta uz jūsu e-pasta adresi.",
   "auth_reset_password_email_title": "Atiestatīt paroli",
   "auth_reset_password_email_message": "Lai atiestatītu paroli, izpildiet norādījumus, kas nosūtīti uz $_email.",
+  "auth_resend_email": "Sūtīt vēlreiz e-pastu",
 
   "auth_verify_phone_number": "Verificēt tālruņa numuru",
   "auth_verify_phone_number_title": "Ievadiet savu tālruņa numuru",
@@ -249,7 +252,8 @@
   "observations": "Novērojumi",
   "observation_note": "Vieta jūsu privātajai piezīmei.",
   "observation_saved": "Novērošana tika saglabāta.",
-  "observation_not_saved": "Novērošana bija nepilnīga, tāpēc tā netika saglabāta. Trūkst vietas vai fotoattēla.",
+  "observation_missing_photo": "Novērošana bija nepilnīga, tāpēc tā netika saglabāta. Trūkst fotoattēla.",
+  "observation_missing_location": "Novērošana bija nepilnīga, tāpēc tā netika saglabāta. Trūkst vietas.",
   "observation_delete": "Dzēst novērojumu",
   "observation_delete_question": "Vai vēlaties dzēst novērojumu?",
   "observation_empty": "Vēl nav novērojumu.",
@@ -283,9 +287,16 @@
   "promotion_title": "Maksas funkcija",
   "promotion_content": "Tā ir maksas funkcija. To var izmantot bez maksas līdz $date",
 
+  "no_connection_title": "Savienojums",
+  "no_connection_content": "Šī funkcija nedarbojas bez interneta pieslēguma.",
+
   "photo_search_no_login": "Meklēšana pēc fotoattēla ir pieejama tikai reģistrētiem lietotājiem. Lūdzu, piesakieties.",
   "photo_search_failed": "Meklēšana pēc fotoattēla neizdevās. Pārbaudiet savu interneta savienojumu un mēģiniet vēlreiz.",
   "photo_to_search_by": "Fotoattēls meklēšanai pēc",
   "photo_search_note": "Šī ir eksperimentāla funkcija, kas darbojas tikai tiešsaistē. Dažreiz tā atrod tieši to, ko meklējat, dažreiz pat ne tuvu. Es esmu pilnīgi paļauties uz Google, jo viņi dara visu smago darbu. Laika gaitā tai vajadzētu būt labākai un labākai, bet tas nebija galvenokārt veidots ziedu atpazīšanai. Izmantojiet to saprātīgi un, neskatoties uz šo eksperimentu, nelietojiet visu pieteikumu. Kvalitātes nolūkos tiks saglabāti visi meklēšanas rezultāti (nevis fotoattēli).",
-  "photo_search_empty": "Google MI (mākslīgais intelekts) neatpazina kādu konkrētu ziedu attēlā. Mēģiniet vēlreiz ar dažādiem leņķa, attāluma vai gaismas apstākļiem. Ja jūs jau to darāt, izskatās, ka MI virsnieks drīzumā nenāks."
+  "photo_search_empty": "Google MI (mākslīgais intelekts) neatpazina kādu konkrētu ziedu attēlā. Mēģiniet vēlreiz ar dažādiem leņķa, attāluma vai gaismas apstākļiem. Ja jūs jau to darāt, izskatās, ka MI virsnieks drīzumā nenāks.",
+
+  "favorite_title": "Mīļākie ziedi",
+  "favorite_empty": "Vēl nav neviena mīļākā zieda.",
+  "favorite_no_login": "Mīļāko ziedu saraksts ir pieejams tikai reģistrētiem lietotājiem. Lūdzu, piesakieties."
 }

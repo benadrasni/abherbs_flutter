@@ -47,6 +47,8 @@
   "offline_download_fail": "Pengunduhan gagal. Silakan periksa koneksi internet Anda atau ruang kosong di perangkat dan coba lagi.",
   "offline_delete_message": "Apakah Anda ingin menghapus data offline?",
   "offline_download": "Lanjutkan unduhan",
+  "scale_down_photos_title": "Perkecil foto pengamatan",
+  "scale_down_photos_subtitle": "Hidupkan ketika Anda tidak melihat foto Anda setelah memilih.",
 
   "feedback_intro": "Anda telah berkontribusi untuk aplikasi ini karena Anda telah menginstalnya di perangkat Anda, terima kasih. Jika Anda mencari sesuatu yang lebih, berikut adalah beberapa opsi:",
   "feedback_review": "Anda dapat menulis ulasan positif.",
@@ -54,7 +56,7 @@
   "feedback_translate": "Anda dapat melaporkan kesalahan ketik atau kesalahan apa pun yang Anda temukan atau kirim terjemahan baru dalam bahasa Anda.",
   "feedback_submit_translate_data": "Perbaiki data bunga",
   "feedback_submit_translate_app": "Tingkatkan label aplikasi",
-  "feedback_buy_extended": "Anda dapat membeli versi lanjutan dengan fungsi tambahan seperti mode offline, pencarian nama, pencarian taksonomi, pengamatan, dan filter yang dapat dikonfigurasi.",
+  "feedback_buy_extended": "Anda dapat membeli fungsionalitas tambahan seperti mode offline, pencarian nama atau taksonomi, pencarian berdasarkan foto, pengamatan dan filter yang dapat dikonfigurasi.",
   "feedback_run_ads": "Anda dapat menampilkan iklan layar penuh atau menonton iklan video untuk mendukung pengembangan lebih lanjut dan peningkatan basis data.",
   "feedback_run_ads_fullscreen": "Tampilkan iklan layar penuh",
   "feedback_run_ads_video": "Tonton iklan video",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Tautan untuk memverifikasi akun telah dikirim ke alamat email Anda.",
   "auth_reset_password_email_title": "Setel Ulang Kata Sandi",
   "auth_reset_password_email_message": "Ikuti instruksi yang dikirim ke $_email untuk mereset kata sandi Anda.",
+  "auth_resend_email": "Kirim ulang email",
 
   "auth_verify_phone_number": "Verifikasi nomor telepon",
   "auth_verify_phone_number_title": "Masukkan nomor telepon",
@@ -249,7 +252,8 @@
   "observations": "Pengamatan",
   "observation_note": "Tempat untuk catatan pribadi Anda.",
   "observation_saved": "Pengamatan disimpan.",
-  "observation_not_saved": "Pengamatan tidak lengkap sehingga tidak disimpan. Lokasi atau foto tidak ada.",
+  "observation_missing_photo": "Pengamatan tidak lengkap sehingga tidak disimpan. Foto tidak ada.",
+  "observation_missing_location": "Pengamatan tidak lengkap sehingga tidak disimpan. Lokasi tidak ada.",
   "observation_delete": "Hapus pengamatan",
   "observation_delete_question": "Apakah Anda ingin menghapus pengamatan?",
   "observation_empty": "Belum ada observasi.",
@@ -283,9 +287,16 @@
   "promotion_title": "Fitur berbayar",
   "promotion_content": "Ini adalah fitur berbayar. Anda dapat menggunakannya secara gratis hingga $date",
 
+  "no_connection_title": "Koneksi",
+  "no_connection_content": "Fitur ini tidak berfungsi tanpa koneksi internet.",
+
   "photo_search_no_login": "Pencarian berdasarkan foto hanya tersedia untuk pengguna yang login. Silahkan masuk.",
   "photo_search_failed": "Pencarian berdasarkan foto gagal. Periksa koneksi internet Anda dan coba lagi.",
   "photo_to_search_by": "Foto yang akan dicari",
   "photo_search_note": "Ini adalah fitur eksperimental yang hanya berfungsi online. Terkadang ia menemukan apa yang Anda cari, terkadang bahkan tidak dekat. Saya sepenuhnya bergantung pada Google di sini karena mereka melakukan semua kerja keras. Seiring berjalannya waktu, itu seharusnya lebih baik dan lebih baik, tetapi itu tidak terutama dibangun untuk pengakuan bunga. Gunakan dengan bijak dan tolong jangan menilai seluruh aplikasi berdasarkan percobaan ini. Untuk tujuan kualitas semua hasil pencarian (bukan foto) akan disimpan.",
-  "photo_search_empty": "Google AI (kecerdasan buatan) tidak mengenali bunga tertentu pada gambar. Coba lagi dengan kondisi sudut, jarak, atau cahaya yang berbeda. Jika Anda sudah melakukannya sepertinya AI tuan tidak akan datang dalam waktu dekat."
+  "photo_search_empty": "Google AI (kecerdasan buatan) tidak mengenali bunga tertentu pada gambar. Coba lagi dengan kondisi sudut, jarak, atau cahaya yang berbeda. Jika Anda sudah melakukannya sepertinya AI tuan tidak akan datang dalam waktu dekat.",
+
+  "favorite_title": "Bunga favorit",
+  "favorite_empty": "Belum ada bunga favorit.",
+  "favorite_no_login": "Daftar bunga favorit hanya tersedia untuk pengguna yang login. Silahkan masuk."
 }

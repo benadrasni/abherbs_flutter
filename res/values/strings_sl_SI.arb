@@ -47,6 +47,8 @@
   "offline_download_fail": "Prenos ni uspel. Preverite internetno povezavo ali pa sprostite prostor na napravi in poskusite znova.",
   "offline_delete_message": "Ali želite izbrisati podatke brez povezave?",
   "offline_download": "Nadaljuj prenos",
+  "scale_down_photos_title": "Prilagodite fotografije opazovanja",
+  "scale_down_photos_subtitle": "Vklopite, ko po izbiri ne vidite fotografij.",
 
   "feedback_intro": "Prispevali ste k tej aplikaciji, ker ste jo namestili v napravo, hvala. Če iščete nekaj več, si oglejte nekaj možnosti:",
   "feedback_review": "Lahko napišete pozitivno mnenje.",
@@ -54,7 +56,7 @@
   "feedback_translate": "Lahko prijavite kakršno koli tipkarsko napako ali napako, ki ste jo našli, ali pošljete nov prevod v vaš jezik.",
   "feedback_submit_translate_data": "Izboljšajte podatke o cvetju",
   "feedback_submit_translate_app": "Izboljšajte oznake aplikacij",
-  "feedback_buy_extended": "Razširjeno različico lahko kupite z dodatnimi funkcijami, kot je način brez povezave, iskanje imen, iskanje v taksonomiji, opazovanje in nastavljiv filter.",
+  "feedback_buy_extended": "Dodatne funkcije, kot je način brez povezave, lahko iščete po imenih ali taksonomiji, iščete po fotografijah, opazovanjih in nastavljivem filtru.",
   "feedback_run_ads": "Lahko prikažete celozaslonski oglas ali si ogledate video oglas, ki podpira nadaljnji razvoj in izboljšavo baze podatkov.",
   "feedback_run_ads_fullscreen": "Pokaži celozaslonski oglas",
   "feedback_run_ads_video": "Oglejte si video oglas",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Povezava za preverjanje računa je bila poslana na vaš e-poštni naslov.",
   "auth_reset_password_email_title": "Ponastavitev gesla",
   "auth_reset_password_email_message": "Sledite navodilom, poslanim $_email, da ponastavite geslo.",
+  "auth_resend_email": "Ponovno pošlji e-pošto",
 
   "auth_verify_phone_number": "Preverjanje telefonske številke",
   "auth_verify_phone_number_title": "Vnesite telefonsko številko",
@@ -249,7 +252,8 @@
   "observations": "Opažanja",
   "observation_note": "Kraj za vašo zasebno noto.",
   "observation_saved": "Opazovanje je bilo shranjeno.",
-  "observation_not_saved": "Opazovanje je bilo nepopolno, zato ni bilo rešeno. Manjka lokacija ali fotografija.",
+  "observation_missing_photo": "Opazovanje je bilo nepopolno, zato ni bilo rešeno. Manjka fotografija.",
+  "observation_missing_location": "Opazovanje je bilo nepopolno, zato ni bilo rešeno. Manjka lokacija.",
   "observation_delete": "Izbriši opazovanje",
   "observation_delete_question": "Ali želite izbrisati opazovanje?",
   "observation_empty": "Opažanja še ni.",
@@ -283,9 +287,16 @@
   "promotion_title": "Plačana funkcija",
   "promotion_content": "To je plačana funkcija. Uporabite ga lahko brezplačno do $date",
 
+  "no_connection_title": "Povezava",
+  "no_connection_content": "Ta funkcija ne deluje brez internetne povezave.",
+
   "photo_search_no_login": "Iskanje po fotografijah je na voljo samo za prijavljene uporabnike. Prijavite se.",
   "photo_search_failed": "Iskanje po fotografiji ni uspelo. Preverite internetno povezavo in poskusite znova.",
   "photo_to_search_by": "Fotografije za iskanje po",
   "photo_search_note": "To je poskusna funkcija, ki deluje samo v spletu. Včasih najde točno to, kar iščete, včasih tudi ne blizu. Tukaj sem popolnoma odvisna od Googla, ker delajo vse trdo delo. Sčasoma mora biti boljše in boljše, vendar ni bilo zgrajeno predvsem zaradi priznanja cvetja. Uporabite ga pametno in prosimo, da ne ocenjujete celotne aplikacije na podlagi tega poskusa. Za kakovostne namene bodo shranjeni vsi rezultati iskanja (ne fotografij).",
-  "photo_search_empty": "Google UI (umetna inteligenca) na sliki ni prepoznal nobene določene rože. Poskusite znova z različnimi koti, razdaljo ali svetlobnimi pogoji. Če si že naredil, izgleda, da UI nadrejeni ne bo kmalu prišel."
+  "photo_search_empty": "Google UI (umetna inteligenca) na sliki ni prepoznal nobene določene rože. Poskusite znova z različnimi koti, razdaljo ali svetlobnimi pogoji. Če si že naredil, izgleda, da UI nadrejeni ne bo kmalu prišel.",
+
+  "favorite_title": "Najljubše cvetja",
+  "favorite_empty": "Še ni najljubšega cvetja.",
+  "favorite_no_login": "Seznam priljubljenih cvetov je na voljo samo za prijavljene uporabnike. Prijavite se."
 }

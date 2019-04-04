@@ -6,12 +6,15 @@ import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/observations/observations.dart';
+import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
+import 'package:abherbs_flutter/search/search_photo.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:exif/exif.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -26,7 +29,7 @@ const String productSearch = "search";
 const String productCustomFilter = "custom_filter";
 const String productOffline = "offline";
 const String productObservations = "observations";
-const String productPhotoSearch = "photo_search";
+const String productPhotoSearch = "search_by_photo";
 const String subscriptionMonthly = "store_photos_monthly";
 const String subscriptionYearly = "store_photos_yearly";
 
@@ -35,6 +38,7 @@ const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
 const String keyAlwaysMyRegion = "always_my_region";
 const String keyOffline = "offline";
+const String keyScaleDownPhotos = "scale_down_photos";
 const String keyOfflinePlant = "offline_plant";
 const String keyOfflineFamily = "offline_family";
 const String keyOfflineDB = "offline_db";
@@ -76,6 +80,7 @@ const String storageObservations = "observations/";
 const String defaultExtension = ".webp";
 const String defaultPhotoExtension = ".jpg";
 const String thumbnailsDir = "/.thumbnails";
+const double imageSize = 512;
 
 const int firebaseCacheSize = 1024 * 1024 * 20;
 const String firebaseCounts = 'counts_4_v2';
@@ -90,7 +95,10 @@ const String firebasePlantsToUpdate = "plants_to_update";
 const String firebaseFamiliesToUpdate = "families_to_update";
 const String firebaseVersions = "versions";
 const String firebaseUsers = "users";
+const String firebaseUsersPhotoSearch = "users_photo_search";
 const String firebasePromotions = "promotions";
+const String firebaseSearchPhoto = 'search_photo';
+const String firebaseSettingsGenericLabels = "settings/generic_labels";
 const String firebaseObservationsPublic = "observations/public";
 const String firebaseObservationsPrivate = "observations/by users";
 const String firebaseObservationsByDate = "by date";
@@ -103,17 +111,22 @@ const String firebaseAttributeCount = "count";
 const String firebaseAttributeIOS = "ios";
 const String firebaseAttributeAndroid = "android";
 const String firebaseAttributeLastUpdate = "db_update";
+const String firebaseAttributeName = "name";
+const String firebaseAttributeFamily = "family";
+const String firebaseAttributeUrl = "url";
 const String firebaseAttributeLabel = "label";
 const String firebaseAttributeOrder = "order";
 const String firebaseAttributeStatus = "status";
 const String firebaseAttributeOldVersion = "old version";
-const String firebaseAttributeLifetimeSubscription = "lifetime_subscription";
+const String firebaseAttributeLifetimeSubscription = "lifetime subscription";
 const String firebaseAttributeToken = "token";
+const String firebaseAttributePurchases = "purchases";
 const String firebaseAttributeSearch = "search";
 const String firebaseAttributeSearchByPhoto = "searchByPhoto";
 const String firebaseAttributeObservations = "observations";
 const String firebaseAttributeFrom = "from";
 const String firebaseAttributeTo = "to";
+const String firebaseAttributeFavorite = "favorites";
 
 const String firebaseValuePrivate = "private";
 const String firebaseValueReview = "review";
@@ -174,22 +187,22 @@ String getMapImageUrl(double latitude, double longitude, double width, double he
 
 double getLatitudeFromExif(IfdTag latitudeRef, IfdTag latitude) {
   if (latitudeRef == null || latitude == null) return null;
-  double latDegrees = latitude.values[0].numerator/latitude.values[0].denominator;
-  double latMinutes = latitude.values[1].numerator/latitude.values[1].denominator;
-  double latSeconds = latitude.values[2].numerator/latitude.values[2].denominator;
+  double latDegrees = latitude.values[0].numerator / latitude.values[0].denominator;
+  double latMinutes = latitude.values[1].numerator / latitude.values[1].denominator;
+  double latSeconds = latitude.values[2].numerator / latitude.values[2].denominator;
 
   int northSouth = latitudeRef.toString() == 'N' ? 1 : -1;
-  return northSouth * (latDegrees + latMinutes/60 + latSeconds/60/60);
+  return northSouth * (latDegrees + latMinutes / 60 + latSeconds / 60 / 60);
 }
 
 double getLongitudeFromExif(IfdTag longitudeRef, IfdTag longitude) {
   if (longitudeRef == null || longitude == null) return null;
-  double longDegrees = longitude.values[0].numerator/longitude.values[0].denominator;
-  double longMinutes = longitude.values[1].numerator/longitude.values[1].denominator;
-  double longSeconds = longitude.values[2].numerator/longitude.values[2].denominator;
+  double longDegrees = longitude.values[0].numerator / longitude.values[0].denominator;
+  double longMinutes = longitude.values[1].numerator / longitude.values[1].denominator;
+  double longSeconds = longitude.values[2].numerator / longitude.values[2].denominator;
 
   int eastWest = longitudeRef.toString() == 'E' ? 1 : -1;
-  return eastWest * (longDegrees + longMinutes/60 + longSeconds/60/60);
+  return eastWest * (longDegrees + longMinutes / 60 + longSeconds / 60 / 60);
 }
 
 DateTime getDateTimeFromExif(IfdTag dateTime) {
@@ -197,7 +210,8 @@ DateTime getDateTimeFromExif(IfdTag dateTime) {
   var dateParts = dateTime.toString().split(' ');
   var datePart = dateParts[0].split(':');
   var timePart = dateParts[1].split(':');
-  return DateTime(int.parse(datePart[0]), int.parse(datePart[1]), int.parse(datePart[2]), int.parse(timePart[0]), int.parse(timePart[1]), int.parse(timePart[2]));
+  return DateTime(
+      int.parse(datePart[0]), int.parse(datePart[1]), int.parse(datePart[2]), int.parse(timePart[0]), int.parse(timePart[1]), int.parse(timePart[2]));
 }
 
 Widget getImage(String url, Widget placeholder, {double width, double height, BoxFit fit}) {
@@ -298,7 +312,7 @@ String getProductTitle(BuildContext context, String productId, String defaultTit
     case productObservations:
       return S.of(context).product_observations_title;
     case productPhotoSearch:
-      return S.of(context).product_observations_title;
+      return S.of(context).product_photo_search_title;
     case subscriptionMonthly:
       return S.of(context).subscription_monthly_title;
     case subscriptionYearly:
@@ -362,33 +376,84 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
     Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
   DateFormat dateFormat = new DateFormat.yMMMMd(Localizations.localeOf(mainContext).toString());
   var _actions = <Widget>[];
+
+  // search by photo
+  _actions.add(IconButton(
+    icon: getIcon(productPhotoSearch),
+    onPressed: () {
+      Connectivity().checkConnectivity().then((result) {
+        if (result == ConnectivityResult.none) {
+          infoDialog(mainContext, S.of(mainContext).no_connection_title, S.of(mainContext).no_connection_content);
+        } else {
+          if (Purchases.isPhotoSearch()) {
+            if (currentUser != null) {
+              Navigator.push(
+                mainContext,
+                MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+              );
+            } else {
+              photoSearchDialog(mainContext, key);
+            }
+          } else if (Purchases.isSearchByPhotoPromotion != null && Purchases.isSearchByPhotoPromotion) {
+            infoDialog(mainContext, S.of(mainContext).promotion_title,
+                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo)))
+                .then((value) {
+              Navigator.push(
+                mainContext,
+                MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+              );
+            });
+          } else {
+            Navigator.push(
+              mainContext,
+              MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+            );
+          }
+        }
+      });
+    },
+  ));
+
+  // observations
   _actions.add(IconButton(
     icon: getIcon(productObservations),
     onPressed: () {
-      if (Purchases.isObservations()) {
-        if (currentUser != null) {
-          Navigator.push(
-            mainContext,
-            MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct, false)),
-          );
+      Connectivity().checkConnectivity().then((result) {
+        if (result == ConnectivityResult.none) {
+          infoDialog(mainContext, S.of(mainContext).no_connection_title, S.of(mainContext).no_connection_content);
         } else {
-          observationDialog(mainContext, key);
+          if (Purchases.isObservations()) {
+            if (currentUser != null) {
+              Navigator.push(
+                mainContext,
+                MaterialPageRoute(
+                    builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct, false)),
+              );
+            } else {
+              observationDialog(mainContext, key);
+            }
+          } else if (Purchases.isObservationPromotion != null && Purchases.isObservationPromotion) {
+            infoDialog(mainContext, S.of(mainContext).promotion_title,
+                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo)))
+                .then((value) {
+              Navigator.push(
+                mainContext,
+                MaterialPageRoute(
+                    builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct, true)),
+              );
+            });
+          } else {
+            Navigator.push(
+              mainContext,
+              MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+            );
+          }
         }
-      } else if (Purchases.isObservationPromotion != null && Purchases.isObservationPromotion) {
-        infoDialog(mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo))).then((value) {
-          Navigator.push(
-            mainContext,
-            MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct, true)),
-          );
-        });
-      } else {
-        Navigator.push(
-          mainContext,
-          MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
-        );
-      }
+      });
     },
   ));
+
+  // search by name or taxonomy
   _actions.add(IconButton(
     icon: getIcon(productSearch),
     onPressed: () {
@@ -398,7 +463,9 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
           MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
         );
       } else if (Purchases.isSearchPromotion != null && Purchases.isSearchPromotion) {
-        infoDialog(mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo))).then((value) {
+        infoDialog(
+                mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo)))
+            .then((value) {
           Navigator.push(
             mainContext,
             MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
@@ -413,14 +480,57 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
     },
   ));
 
+
+  // favorites
+  _actions.add(FutureBuilder<int>(
+      future: Future<int>(() {
+        if (currentUser != null) {
+          return usersReference.child(currentUser.uid).child(firebaseAttributeFavorite).once().then((snapshot) {
+            if (snapshot.value != null) {
+              if (snapshot.value is List) {
+                int i = 0;
+                snapshot.value.forEach((value) {
+                  if (value != null) {
+                    i++;
+                  }
+                });
+                return i;
+              } else {
+                return snapshot.value.length;
+              }
+            }
+            return 0;
+          });
+        }
+        return 0;
+      }),
+      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+        return IconButton(
+          icon: Icon(Icons.favorite),
+          onPressed: () {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (currentUser != null) {
+                String path = '/' + firebaseUsers + '/' + currentUser.uid + '/' + firebaseAttributeFavorite;
+                Navigator.push(
+                  mainContext,
+                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, snapshot.data.toString(), path)),
+                );
+              } else {
+                favoriteDialog(mainContext, key);
+              }
+            }
+          },
+        );
+      }));
+
   return _actions;
 }
 
-void goToDetail(BuildContext context, Locale myLocale, String name, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct,
-    Map<String, String> filter) {
+void goToDetail(State state, BuildContext context, Locale myLocale, String name, Function(String) onChangeLanguage,
+    Function(PurchasedItem) onBuyProduct, Map<String, String> filter) {
   plantsReference.child(name).once().then((DataSnapshot snapshot) {
-    if (snapshot.value != null) {
-      if (context != null) {
+    if (snapshot.value != null && snapshot.value['id'] != null) {
+      if (state.mounted && context != null) {
         Plant plant = Plant.fromJson(snapshot.key, snapshot.value);
         Navigator.push(
           context,

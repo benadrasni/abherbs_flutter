@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/observations/observation_map.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -34,13 +35,58 @@ class ObservationEdit extends StatefulWidget {
 
 class _ObservationEditState extends State<ObservationEdit> {
   GlobalKey<ScaffoldState> _key;
+  Future<bool> _scaleDownPhotosF;
   Observation _observation;
   DateFormat _dateFormat;
   TextEditingController _noteController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
 
+  Future<void> _deleteImage(int position) async {
+    String rootPath = (await getApplicationDocumentsDirectory()).path;
+    var filename = _observation.photoPaths[position];
+    File file = File('$rootPath/$filename');
+    if (await file.exists()) {
+      file.delete();
+    }
+    _observation.photoPaths.removeAt(position);
+
+    setState(() {});
+  }
+
+  Future<bool> _saveObservation(BuildContext context) async {
+    if (_observation.photoPaths.length == 0) {
+      await infoDialog(context, S.of(context).observation, S.of(context).observation_missing_photo);
+      return false;
+    } else if (_observation.latitude == null || _observation.longitude == null) {
+      await infoDialog(context, S.of(context).observation, S.of(context).observation_missing_location);
+      return false;
+    } else {
+      if (_observation.id == null) {
+        _observation.id = widget.currentUser.uid + '_' + _observation.date.millisecondsSinceEpoch.toString();
+      }
+      _observation.order = -1 * _observation.date.millisecondsSinceEpoch;
+      _observation.note = _noteController.text.isNotEmpty ? _noteController.text : null;
+
+      await privateObservationsReference
+          .child(widget.currentUser.uid)
+          .child(firebaseObservationsByDate)
+          .child(firebaseAttributeList)
+          .child(_observation.id)
+          .set(_observation.toJson());
+      await privateObservationsReference
+          .child(widget.currentUser.uid)
+          .child(firebaseObservationsByPlant)
+          .child(_observation.plant)
+          .child(firebaseAttributeList)
+          .child(_observation.id)
+          .set(_observation.toJson());
+      return true;
+    }
+  }
+
   Future<void> _getImage(GlobalKey<ScaffoldState> _key, ImageSource source) async {
-    var image = await ImagePicker.pickImage(source: source);
+    bool scaleDownPhotos = await _scaleDownPhotosF;
+    var image = await ImagePicker.pickImage(source: source, maxWidth: scaleDownPhotos ? imageSize : null);
     if (image != null) {
       Map<String, IfdTag> exifData = await readExifFromBytes(await image.readAsBytes());
       IfdTag dateTime = exifData['Image DateTime'];
@@ -74,50 +120,18 @@ class _ObservationEditState extends State<ObservationEdit> {
 
       // store exif data
       if (exifData != null && exifData.isNotEmpty) {
-        _observation.latitude = getLatitudeFromExif(exifData['GPS GPSLatitudeRef'], exifData['GPS GPSLatitude']);
-        _observation.longitude = getLongitudeFromExif(exifData['GPS GPSLongitudeRef'], exifData['GPS GPSLongitude']);
+        var latitude = getLatitudeFromExif(exifData['GPS GPSLatitudeRef'], exifData['GPS GPSLatitude']);
+        if (latitude != null) {
+          _observation.latitude = latitude;
+        }
+        var longitude = getLongitudeFromExif(exifData['GPS GPSLongitudeRef'], exifData['GPS GPSLongitude']);
+        if (longitude != null) {
+          _observation.longitude = longitude;
+        }
         _observation.date = getDateTimeFromExif(exifData['Image DateTime']) ?? DateTime.now();
         _dateController.text = _dateFormat.format(_observation.date);
       }
       setState(() {});
-    }
-  }
-
-  Future<void> _deleteImage(int position) async {
-    String rootPath = (await getApplicationDocumentsDirectory()).path;
-    var filename = _observation.photoPaths[position];
-    File file = File('$rootPath/$filename');
-    file.delete();
-    _observation.photoPaths.removeAt(position);
-
-    setState(() {});
-  }
-
-  Future<bool> _saveObservation(BuildContext context) async {
-    if (_observation.photoPaths.length > 0 && _observation.latitude != null && _observation.longitude != null) {
-      if (_observation.id == null) {
-        _observation.id = widget.currentUser.uid + '_' + _observation.date.millisecondsSinceEpoch.toString();
-      }
-      _observation.order = -1 * _observation.date.millisecondsSinceEpoch;
-      _observation.note = _noteController.text.isNotEmpty ? _noteController.text : null;
-
-      await privateObservationsReference
-          .child(widget.currentUser.uid)
-          .child(firebaseObservationsByDate)
-          .child(firebaseAttributeList)
-          .child(_observation.id)
-          .set(_observation.toJson());
-      await privateObservationsReference
-          .child(widget.currentUser.uid)
-          .child(firebaseObservationsByPlant)
-          .child(_observation.plant)
-          .child(firebaseAttributeList)
-          .child(_observation.id)
-          .set(_observation.toJson());
-      return true;
-    } else {
-      await infoDialog(context, S.of(context).observation, S.of(context).observation_not_saved);
-      return false;
     }
   }
 
@@ -152,6 +166,7 @@ class _ObservationEditState extends State<ObservationEdit> {
   void initState() {
     super.initState();
     _key = GlobalKey<ScaffoldState>();
+    _scaleDownPhotosF = Prefs.getBoolF(keyScaleDownPhotos, false);
     _observation = Observation.from(widget.observation);
     initializeDateFormatting();
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString()).add_jm();
@@ -245,9 +260,11 @@ class _ObservationEditState extends State<ObservationEdit> {
             context,
             MaterialPageRoute(builder: (context) => ObservationMap(myLocale, _observation, mapModeEdit)),
           ).then((value) {
-            _observation.latitude = value.latitude;
-            _observation.longitude = value.longitude;
-            setState(() {});
+            if (value != null) {
+              _observation.latitude = value.latitude;
+              _observation.longitude = value.longitude;
+              setState(() {});
+            }
           });
         },
       ),
@@ -316,7 +333,8 @@ class _ObservationEditState extends State<ObservationEdit> {
         child: TextField(
           controller: _noteController,
           keyboardType: TextInputType.multiline,
-          maxLines: 3,
+          maxLines: 5,
+          maxLength: 300,
           decoration: InputDecoration(
             hintText: S.of(context).observation_note,
             border: OutlineInputBorder(

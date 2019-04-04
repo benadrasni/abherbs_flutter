@@ -47,6 +47,8 @@
   "offline_download_fail": "Scaricamento fallito. Controlla la tua connessione Internet o lo spazio libero sul dispositivo e riprova.",
   "offline_delete_message": "Vuoi eliminare i dati offline?",
   "offline_download": "Riprendi a scaricare",
+  "scale_down_photos_title": "Riduci le foto dell'osservazione",
+  "scale_down_photos_subtitle": "Accendi quando non vedi le tue foto dopo il ritiro.",
 
   "feedback_intro": "Hai contribuito a questa applicazione scaricandola sul tuo dispositivo, grazie. Se stai cercando qualcos'altro, ecco alcune opzioni:",
   "feedback_review": "Puoi scrivere una recensione positiva.",
@@ -54,7 +56,7 @@
   "feedback_translate": "Puoi segnalare refusi ed errori o inviare una nuova traduzione nella tua lingua.",
   "feedback_submit_translate_data": "Migliorare le informazioni sui fiori",
   "feedback_submit_translate_app": "Migliora le etichette delle applicazioni",
-  "feedback_buy_extended": "È possibile acquistare la versione estesa con funzionalità aggiuntive come la modalità offline, la ricerca nei nomi, la ricerca in tassonomia, le osservazioni e il filtro configurabile.",
+  "feedback_buy_extended": "È possibile acquistare funzionalità aggiuntive come la modalità offline, la ricerca nei nomi o nella tassonomia, la ricerca per foto, le osservazioni e il filtro configurabile.",
   "feedback_run_ads": "È possibile visualizzare pubblicità a schermo intero o guardare annunci video per supportare ulteriori sviluppi e miglioramenti del database.",
   "feedback_run_ads_fullscreen": "Mostra una pubblicità a schermo intero",
   "feedback_run_ads_video": "Guarda un video pubblicitario",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Il link per verificare l'account è stato inviato al tuo indirizzo email.",
   "auth_reset_password_email_title": "Resetta la password",
   "auth_reset_password_email_message": "Seguire le istruzioni inviate a $_email per reimpostare la password.",
+  "auth_resend_email": "Rinvia l'e-mail",
 
   "auth_verify_phone_number": "Verifica numero di telefono",
   "auth_verify_phone_number_title": "Inserisci il tuo numero di telefono",
@@ -249,7 +252,8 @@
   "observations": "Osservazioni",
   "observation_note": "Posto per la tua nota privata.",
   "observation_saved": "Osservazione salvata.",
-  "observation_not_saved": "L'osservazione era incompleta quindi non è stata salvata. Posizione o foto mancanti.",
+  "observation_missing_photo": "L'osservazione era incompleta quindi non è stata salvata. Foto mancanti.",
+  "observation_missing_location": "L'osservazione era incompleta quindi non è stata salvata. Posizione mancanti.",
   "observation_delete": "Cancella osservazione",
   "observation_delete_question": "Vuoi cancellare l'osservazione?",
   "observation_empty": "Non ci sono ancora osservazioni.",
@@ -283,9 +287,16 @@
   "promotion_title": "Caratteristica a pagamento",
   "promotion_content": "Questa è una funzionalità a pagamento. Puoi usarlo gratuitamente fino a $date",
 
+  "no_connection_title": "Connessione",
+  "no_connection_content": "Questa funzione non funziona senza connessione a Internet.",
+
   "photo_search_no_login": "La ricerca per foto è disponibile solo per gli utenti registrati. Accedete, per favore.",
   "photo_search_failed": "Ricerca per foto fallita. Controlla la tua connessione Internet e riprova.",
   "photo_to_search_by": "Foto da cercare",
   "photo_search_note": "Questa è una funzionalità sperimentale che funziona solo online. A volte trova esattamente quello che stai cercando, a volte nemmeno vicino. Sono totalmente dipendente da Google qui poiché stanno facendo tutto il duro lavoro. Col passare del tempo dovrebbe essere sempre meglio, ma non è stato costruito principalmente per il riconoscimento dei fiori. Usalo saggiamente e per favore non giudicare l'intera applicazione basata su questo esperimento. Per motivi di qualità, tutti i risultati della ricerca (non le foto) verranno salvati.",
-  "photo_search_empty": "Google IA (intelligenza artificiale) non ha riconosciuto alcun fiore particolare sull'immagine. Riprovare con diverse angolazioni, distanze o condizioni di luce. Se l'hai già fatto sembra che il signore dell'IA non arriverà presto."
+  "photo_search_empty": "Google IA (intelligenza artificiale) non ha riconosciuto alcun fiore particolare sull'immagine. Riprovare con diverse angolazioni, distanze o condizioni di luce. Se l'hai già fatto sembra che il signore dell'IA non arriverà presto.",
+
+  "favorite_title": "Fiori preferiti",
+  "favorite_empty": "Non ci sono ancora fiori preferiti.",
+  "favorite_no_login": "L'elenco dei fiori preferiti è disponibile solo per gli utenti registrati. Accedete, per favore."
 }

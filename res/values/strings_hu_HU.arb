@@ -47,6 +47,8 @@
   "offline_download_fail": "Sikertelen letöltés. Kérjük ellenőrizze az internetkapcsolatot vagy a szabad hely mennyiségét az eszközön és próbálja újra.",
   "offline_delete_message": "Törli az offline adatokat?",
   "offline_download": "A letöltés folytatása",
+  "scale_down_photos_title": "Mérje le a megfigyelés fotóit",
+  "scale_down_photos_subtitle": "Kapcsolja be, ha nem látja a fényképeket a felvétel után.",
 
   "feedback_intro": "Köszönjük a támogatását, mivel telepítette az alkalmazást. Ha többet szeretne, itt van néhány lehetőség:",
   "feedback_review": "Írhat pozitív értékelést.",
@@ -54,7 +56,7 @@
   "feedback_translate": "Visszajelzést küldhet a whatsthatflower.com című oldal által, hiba, új fordítás vagy az adatbázis bővítése esetén.",
   "feedback_submit_translate_data": "A virágok adatainak bővítése/javítása",
   "feedback_submit_translate_app": "Javítsa az alkalmazás címkéit",
-  "feedback_buy_extended": "A bővített változat megvásárlása további funkciókat eredményez, mint például az offline mód, név általi keresés, taxonómia általi keresés, megfigyelések és konfigurálható szűrő.",
+  "feedback_buy_extended": "Megvásárolhat további funkciókat, mint például az offline mód, név általi keresés, taxonómia általi keresés, megfigyelések és konfigurálható szűrő.",
   "feedback_run_ads": "Megjeleníthet teljes képernyős hirdetést vagy videohirdetést, hogy támogassa az adatbázis és egyébb fejlesztéseket.",
   "feedback_run_ads_fullscreen": "Teljes képernyős hirdetés megjelenítése",
   "feedback_run_ads_video": "Nézze meg a videohirdetést",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "A fiók ellenőrzésére szolgáló linket elküldtük az e-mail címére.",
   "auth_reset_password_email_title": "Jelszó visszaállítása",
   "auth_reset_password_email_message": "A jelszó visszaállításához kövesse a(z) $_email címre küldött utasításokat.",
+  "auth_resend_email": "E-mail újraküldése",
 
   "auth_verify_phone_number": "Telefonszám ellenőrzése",
   "auth_verify_phone_number_title": "Írja be a telefonszámát",
@@ -249,7 +252,8 @@
   "observations": "Megfigyelések",
   "observation_note": "Helyezze el a magánjegyzetet.",
   "observation_saved": "Megfigyelés történt.",
-  "observation_not_saved": "A megfigyelés hiányos volt, így nem lett elmentve. Hiányzik a hely vagy a fénykép.",
+  "observation_missing_photo": "A megfigyelés hiányos volt, így nem lett elmentve. A fotó hiányzik.",
+  "observation_missing_location": "A megfigyelés hiányos volt, így nem lett elmentve. A hely hiányzik.",
   "observation_delete": "A megfigyelés törlése",
   "observation_delete_question": "Törli a megfigyelést?",
   "observation_empty": "Még nincs megfigyelés.",
@@ -283,9 +287,16 @@
   "promotion_title": "Fizetett funkció",
   "promotion_content": "Fizetett funkció. $date -ig ingyenesen használhatja",
 
+  "no_connection_title": "Kapcsolat",
+  "no_connection_content": "Ez a funkció nem működik internetkapcsolat nélkül.",
+
   "photo_search_no_login": "A fénykép általi keresés csak bejelentkezett felhasználók számára lehetséges. Kérjük jelentkezzen be.",
   "photo_search_failed": "A fénykép általi keresés sikertelen lett. Ellenőrizze az internetkapcsolatot és próbálja újra.",
   "photo_to_search_by": "Fénykép a kereséshez",
   "photo_search_note": "Ez egy kísérleti funkció, amely csak online működik. Néha pontos a végeredmény, máskor viszont teljesen megbízhatatlan. Teljesen mértékben a Google-ra támaszkodunk, hiszen a munka lényegét ő végzi. Idővel javulni kéne az eredményeknek, de ezen szolgáltatás nem elsősorban virágok felismerésére készült. Használja elővigyázatosan, és ne ez alapján ítélje meg az alkalmazásunkat. A minőség feljavítása érdekében minden keresési eredmény (nem fotó) mentésre kerül.",
-  "photo_search_empty": "A Google MI (mesterséges intelligencia) nem ismerte fel a képen látható virágot. Próbálkozzon újra különböző szög, távolság vagy fényviszonyokkal. Ha már próbálta, úgy tűnik, hogy az MI overlord hamarosan nem jön."
+  "photo_search_empty": "A Google MI (mesterséges intelligencia) nem ismerte fel a képen látható virágot. Próbálkozzon újra különböző szög, távolság vagy fényviszonyokkal. Ha már próbálta, úgy tűnik, hogy az MI overlord hamarosan nem jön.",
+
+  "favorite_title": "Kedvenc virágok",
+  "favorite_empty": "Még nincs kedvenc virág.",
+  "favorite_no_login": "A kedvenc virágok listája csak a naplózott felhasználók számára érhető el. Kérjük jelentkezzen be."
 }
