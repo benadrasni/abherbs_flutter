@@ -53,6 +53,7 @@ class _AppState extends State<App> {
   FirebaseAnalytics _firebaseAnalytics;
   Map<String, dynamic> _notificationData;
   Future<Locale> _localeF;
+  Future<void> _initializationF;
 
   onChangeLanguage(String language) {
     setState(() {
@@ -146,17 +147,17 @@ class _AppState extends State<App> {
     });
   }
 
-  void _initPlatformState() async {
-    FlutterInappPurchase.initConnection.then((value) {
+  Future<void> _initPlatformState() async {
+    await FlutterInappPurchase.initConnection.then((value) async {
       // TODO check for a fix: when iOS is offline it doesn't return purchased products
       if (Platform.isIOS) {
-        Prefs.getStringListF(keyPurchases, []).then((products) {
+        await Prefs.getStringListF(keyPurchases, []).then((products) {
           Purchases.purchases = products.map((productId) => Purchases.offlineProducts[productId]).toList();
           Offline.initialize();
           _checkPromotions();
         });
       } else if (Platform.isAndroid) {
-        FlutterInappPurchase.getAvailablePurchases().then((value) {
+        await FlutterInappPurchase.getAvailablePurchases().then((value) async {
           Purchases.purchases = value;
           Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
           Offline.initialize();
@@ -167,6 +168,8 @@ class _AppState extends State<App> {
       } else {
         throw PlatformException(code: Platform.operatingSystem, message: "platform not supported");
       }
+    }).catchError((error) {
+      _iapError();
     });
   }
 
@@ -175,7 +178,7 @@ class _AppState extends State<App> {
     super.initState();
     Ads.initialize();
     Prefs.init();
-    _initPlatformState();
+    _initializationF = _initPlatformState();
 
     _firebaseMessaging = FirebaseMessaging();
     _firebaseAnalytics = FirebaseAnalytics();
@@ -254,16 +257,16 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Locale>(
-        future: _localeF,
-        builder: (BuildContext context, AsyncSnapshot<Locale> snapshot) {
+    return FutureBuilder<List<Object>>(
+        future: Future.wait([_localeF, _initializationF]),
+        builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               Map<String, dynamic> notificationData = _notificationData != null ? Map.from(_notificationData) : null;
               _notificationData = null;
               return MaterialApp(
                 localeResolutionCallback: (deviceLocale, supportedLocales) {
-                  return _localeResolutionCallback(snapshot.data, deviceLocale, supportedLocales);
+                  return _localeResolutionCallback(snapshot.data[0], deviceLocale, supportedLocales);
                 },
                 debugShowCheckedModeBanner: false,
                 localizationsDelegates: [

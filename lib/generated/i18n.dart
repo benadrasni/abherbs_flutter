@@ -47,6 +47,7 @@ class S implements WidgetsLocalizations {
   String get auth_phone => "Sign in with phone";
   String get auth_phone_hint => "Phone Number";
   String get auth_resend_code => "Resend Code";
+  String get auth_resend_email => "Resend Email";
   String get auth_reset_password => "Reset Password";
   String get auth_reset_password_email_title => "Reset password";
   String get auth_sign_in => "Sign in";
@@ -78,8 +79,11 @@ class S implements WidgetsLocalizations {
   String get eastern_europe => "Eastern Europe";
   String get enhancements => "Enhancements";
   String get europe => "Europe";
+  String get favorite_empty => "There is no favorite flowers yet.";
+  String get favorite_no_login => "List of favorite flowers is available only for logged users. Please log in.";
+  String get favorite_title => "Favorite flowers";
   String get feedback => "Feedback";
-  String get feedback_buy_extended => "You can buy additional functionality like offline mode, search in names, search in taxonomy, observations and configurable filter.";
+  String get feedback_buy_extended => "You can buy additional functionality like offline mode, search in names or in taxonomy, search by photo, observations and configurable filter.";
   String get feedback_intro => "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:";
   String get feedback_review => "You can write a positive review.";
   String get feedback_run_ads => "You can display full screen advertisement or watch video advertisement to support further development and database enhancement.";
@@ -120,6 +124,8 @@ class S implements WidgetsLocalizations {
   String get new_version => "New version is available, please update.";
   String get new_zealand => "New Zealand";
   String get no => "No";
+  String get no_connection_content => "This feature doesn't work without Internet connection.";
+  String get no_connection_title => "Connection";
   String get north_central_pacific => "North-Central Pacific";
   String get north_central_usa => "North-Central U.S.A.";
   String get northeast_tropical_africa => "Northeast Tropical Africa";
@@ -134,8 +140,9 @@ class S implements WidgetsLocalizations {
   String get observation_delete => "Delete observation";
   String get observation_delete_question => "Do you want to delete the observation?";
   String get observation_empty => "There is no observation yet.";
+  String get observation_missing_location => "Observation was incomplete thus it wasn't saved. Location is missing.";
+  String get observation_missing_photo => "Observation was incomplete thus it wasn't saved. Photo is missing.";
   String get observation_no_login => "Observations are available only for logged users. Please log in.";
-  String get observation_not_saved => "Observation was incomplete thus it wasn't saved. Location or photo is missing.";
   String get observation_note => "Place for your private note.";
   String get observation_photo_delete => "Remove photo";
   String get observation_photo_delete_question => "Do you want to remove photo from the observation?";
@@ -165,7 +172,7 @@ class S implements WidgetsLocalizations {
   String get photo_search_empty => "Google AI (artificial intelligence) didn't recognize any particular flower on the picture. Try again with different angle, distance or light conditions. If you already did it looks like AI overlord won't come anytime soon.";
   String get photo_search_failed => "Search by photo failed. Check your internet connection and try again.";
   String get photo_search_no_login => "Search by photo is available only for logged users. Please log in.";
-  String get photo_search_note => "This is an experimental feature which works only online. Sometimes it finds exactly what you're looking for, sometimes not even close. I'm totally rely on Google here since they're doing all the hard work. As time goes it should be better and better, but it wasn't primarily built for flower's recognition. Use it wisely and please don't judge the whole application based on this experiment. For quality purposes all search results (not photos) will be saved.";
+  String get photo_search_note => "This is an experimental feature which works only online. Sometimes it finds exactly what you're looking for, sometimes not even close. I'm totally relying on Google here since they're doing all the hard work. As time goes it should be better and better, but it wasn't primarily built for flower's recognition. Use it wisely and please don't judge the whole application based on this experiment. For quality purposes all search results (not photos) will be saved.";
   String get photo_to_search_by => "Photo to search by";
   String get plant_flower => "Flower";
   String get plant_flowering_from => "Flowering from";
@@ -214,6 +221,8 @@ class S implements WidgetsLocalizations {
   String get rate_question => "Is this app helpful?";
   String get rate_text => "Author of this application is fueled by positive response from the users. Please send him some starflowers through application store.";
   String get russian_far_east => "Russian Far East";
+  String get scale_down_photos_subtitle => "Switch on when you don't see your photos after pick.";
+  String get scale_down_photos_title => "Scale down observation's photos";
   String get search => "Search...";
   String get search_names => "Search in names";
   String get search_taxonomy => "Search in taxonomy";
@@ -390,11 +399,15 @@ class $it_IT extends S {
   @override
   String get south_central_pacific => "Pacifico centro-meridionale";
   @override
+  String get favorite_empty => "Non ci sono ancora fiori preferiti.";
+  @override
   String get product_custom_filter_description => "Sarai in grado di modificare l'ordine di default e il numero di filtri (colore, habitat, petali, distribuzione).";
   @override
   String get auth_password_hint => "Password";
   @override
   String get habitat_meadow => "prati o pascoli";
+  @override
+  String get observation_missing_photo => "L'osservazione era incompleta quindi non è stata salvata. Foto mancanti.";
   @override
   String get auth_google => "Accedi con Google";
   @override
@@ -403,6 +416,8 @@ class $it_IT extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Ripristinare gli acquisti";
+  @override
+  String get favorite_title => "Fiori preferiti";
   @override
   String get auth_reset_password => "Resetta la password";
   @override
@@ -462,6 +477,8 @@ class $it_IT extends S {
   @override
   String get auth_email => "Accedi con l'indirizzo email";
   @override
+  String get scale_down_photos_subtitle => "Accendi quando non vedi le tue foto dopo il ritiro.";
+  @override
   String get arabian_peninsula => "Penisola arabica";
   @override
   String get search_taxonomy => "Cerca in tassonomia";
@@ -494,8 +511,6 @@ class $it_IT extends S {
   @override
   String get product_search_title => "Cerca nei nomi o nella tassonomia";
   @override
-  String get observation_not_saved => "L'osservazione era incompleta quindi non è stata salvata. Posizione o foto mancanti.";
-  @override
   String get feedback_review => "Puoi scrivere una recensione positiva.";
   @override
   String get yes => "Si";
@@ -507,6 +522,8 @@ class $it_IT extends S {
   String get china => "Cina";
   @override
   String get offline_title => "Modalità offline";
+  @override
+  String get observation_missing_location => "L'osservazione era incompleta quindi non è stata salvata. Posizione mancanti.";
   @override
   String get privacy_policy => "Politica sulla riservatezza";
   @override
@@ -670,6 +687,8 @@ class $it_IT extends S {
   @override
   String get mexico => "Messico";
   @override
+  String get no_connection_content => "Questa funzione non funziona senza connessione a Internet.";
+  @override
   String get snack_publish => "... essere pubblicato più tardi";
   @override
   String get subscription_disclaimer_ios => "Il pagamento verrà addebitato sul tuo account ID Apple dopo la conferma dell'acquisto. L'abbonamento si rinnova automaticamente a meno che non venga annullato almeno 24 ore prima della fine del periodo corrente. Il tuo account verrà addebitato per il rinnovo entro 24 ore prima della fine del periodo corrente. Puoi gestire e annullare le tue iscrizioni andando alle impostazioni del tuo account su App Store dopo l'acquisto.";
@@ -734,13 +753,19 @@ class $it_IT extends S {
   @override
   String get plant_flower => "Fiori";
   @override
+  String get no_connection_title => "Connessione";
+  @override
   String get filter_habitat => "habitat";
+  @override
+  String get scale_down_photos_title => "Riduci le foto dell'osservazione";
   @override
   String get rate_never => "Mai";
   @override
   String get northwestern_pacific => "Pacifico nordoccidentale";
   @override
   String get plant_stem => "Stelo";
+  @override
+  String get auth_resend_email => "Rinvia l'e-mail";
   @override
   String get no => "No";
   @override
@@ -772,11 +797,13 @@ class $it_IT extends S {
   @override
   String get filter_distribution => "distribuzione";
   @override
-  String get feedback_buy_extended => "È possibile acquistare la versione estesa con funzionalità aggiuntive come la modalità offline, la ricerca nei nomi, la ricerca in tassonomia, le osservazioni e il filtro configurabile.";
+  String get feedback_buy_extended => "È possibile acquistare funzionalità aggiuntive come la modalità offline, la ricerca nei nomi o nella tassonomia, la ricerca per foto, le osservazioni e il filtro configurabile.";
   @override
   String get north_central_usa => "Stati Uniti centro-nord";
   @override
   String get improve_translation => "Migliora la traduzione";
+  @override
+  String get favorite_no_login => "L'elenco dei fiori preferiti è disponibile solo per gli utenti registrati. Accedete, per favore.";
   @override
   String get observation_delete_question => "Vuoi cancellare l'osservazione?";
   @override
@@ -922,11 +949,15 @@ class $ru_RU extends S {
   @override
   String get south_central_pacific => "Юго-Центральная часть Тихого океана";
   @override
+  String get favorite_empty => "Там нет любимых цветов еще.";
+  @override
   String get product_custom_filter_description => "Вы сможете изменить порядок по умолчанию и количество фильтров (окраска, ареалы, лепесток, распределение).";
   @override
   String get auth_password_hint => "Пароль";
   @override
   String get habitat_meadow => "луга или пастбища";
+  @override
+  String get observation_missing_photo => "Наблюдение было неполным, поэтому оно не было сохранено. Фотография отсутствует.";
   @override
   String get auth_google => "Войти через аккаунт Google";
   @override
@@ -935,6 +966,8 @@ class $ru_RU extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Восстановить покупки";
+  @override
+  String get favorite_title => "Любимые цветы";
   @override
   String get auth_reset_password => "Сброс пароля";
   @override
@@ -994,6 +1027,8 @@ class $ru_RU extends S {
   @override
   String get auth_email => "Войти по адресу электронной почты";
   @override
+  String get scale_down_photos_subtitle => "Включите, когда вы не видите свои фотографии после выбора.";
+  @override
   String get arabian_peninsula => "Аравийский полуостров";
   @override
   String get search_taxonomy => "Поиск в таксономии";
@@ -1026,8 +1061,6 @@ class $ru_RU extends S {
   @override
   String get product_search_title => "Поиск по именам или таксономии";
   @override
-  String get observation_not_saved => "Наблюдение было неполным, поэтому оно не было сохранено. Местоположение или фотография отсутствует.";
-  @override
   String get feedback_review => "Вы можете написать положительный отзыв.";
   @override
   String get yes => "Да";
@@ -1039,6 +1072,8 @@ class $ru_RU extends S {
   String get china => "Китай";
   @override
   String get offline_title => "Автономный режим";
+  @override
+  String get observation_missing_location => "Наблюдение было неполным, поэтому оно не было сохранено. Местоположение отсутствует.";
   @override
   String get privacy_policy => "Политика конфиденциальности";
   @override
@@ -1202,6 +1237,8 @@ class $ru_RU extends S {
   @override
   String get mexico => "Мексика";
   @override
+  String get no_connection_content => "Эта функция не работает без подключения к Интернету.";
+  @override
   String get snack_publish => "... будет опубликовано позже";
   @override
   String get subscription_disclaimer_ios => "Оплата будет снята с вашей учетной записи Apple ID после подтверждения покупки. Подписка автоматически продлевается, если она не отменена как минимум за 24 часа до окончания текущего периода. С вашего счета будет взиматься плата за продление в течение 24 часов до окончания текущего периода. Вы можете управлять своими подписками и отменять их, перейдя в настройки своей учетной записи в App Store после покупки.";
@@ -1266,13 +1303,19 @@ class $ru_RU extends S {
   @override
   String get plant_flower => "Цветы";
   @override
+  String get no_connection_title => "Подключение";
+  @override
   String get filter_habitat => "ареалы";
+  @override
+  String get scale_down_photos_title => "Уменьшить фотографии наблюдения";
   @override
   String get rate_never => "Никогда";
   @override
   String get northwestern_pacific => "Северо-западная часть Тихого океана";
   @override
   String get plant_stem => "Стебель";
+  @override
+  String get auth_resend_email => "Переслать письмо";
   @override
   String get no => "Нет";
   @override
@@ -1304,11 +1347,13 @@ class $ru_RU extends S {
   @override
   String get filter_distribution => "распределение";
   @override
-  String get feedback_buy_extended => "Вы можете купить расширенную версию с дополнительными функциями, такими как автономный режим, поиск по именам, поиск по таксономии, наблюдения и настраиваемый фильтр.";
+  String get feedback_buy_extended => "Вы можете приобрести дополнительные функции, такие как автономный режим, поиск по именам или таксономии, поиск по фотографиям, наблюдения и настраиваемый фильтр.";
   @override
   String get north_central_usa => "Северо-Центральная часть США";
   @override
   String get improve_translation => "Улучшить перевод";
+  @override
+  String get favorite_no_login => "Список любимых цветов доступен только зарегистрированным пользователям. Пожалуйста, войдите.";
   @override
   String get observation_delete_question => "Вы хотите удалить наблюдение?";
   @override
@@ -1454,11 +1499,15 @@ class $pl_PL extends S {
   @override
   String get south_central_pacific => "Południowo-środkowy Pacyfik";
   @override
+  String get favorite_empty => "Nie ma jeszcze ulubionych kwiatów.";
+  @override
   String get product_custom_filter_description => "Będzie można zmienić domyślną kolejność i liczbę filtrów (kolor, siedlisko, płatek, dystrybucja).";
   @override
   String get auth_password_hint => "Hasło";
   @override
   String get habitat_meadow => "Łąki";
+  @override
+  String get observation_missing_photo => "Okaz nie został zapisany. Brakuje zdjęcia.";
   @override
   String get auth_google => "Zaloguj się za pomocą Google";
   @override
@@ -1467,6 +1516,8 @@ class $pl_PL extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Przywróć zakup";
+  @override
+  String get favorite_title => "Ulubione kwiaty";
   @override
   String get auth_reset_password => "Zresetuj hasło";
   @override
@@ -1526,6 +1577,8 @@ class $pl_PL extends S {
   @override
   String get auth_email => "Zaloguj się za pomocą e-maila";
   @override
+  String get scale_down_photos_subtitle => "Włącz, gdy nie widzisz swoich zdjęć po wybraniu.";
+  @override
   String get arabian_peninsula => "Półwysep Arabski";
   @override
   String get search_taxonomy => "Szukaj w taksonomii";
@@ -1558,8 +1611,6 @@ class $pl_PL extends S {
   @override
   String get product_search_title => "Wyszukaj w nazwach lub taksonomii";
   @override
-  String get observation_not_saved => "Okaz nie został zapisany. Brakuje zdjęcia lub lokalizacji.";
-  @override
   String get feedback_review => "Możesz przyznać aplikacji 5 gwiazdek i napisać pozytywną recenzję.";
   @override
   String get yes => "Tak";
@@ -1571,6 +1622,8 @@ class $pl_PL extends S {
   String get china => "Chiny";
   @override
   String get offline_title => "Tryb offline";
+  @override
+  String get observation_missing_location => "Okaz nie został zapisany. Brakuje lokalizacji.";
   @override
   String get privacy_policy => "Polityka prywatności";
   @override
@@ -1734,6 +1787,8 @@ class $pl_PL extends S {
   @override
   String get mexico => "Meksyk";
   @override
+  String get no_connection_content => "Ta funkcja nie działa bez połączenia z Internetem.";
+  @override
   String get snack_publish => "... do opublikowania później";
   @override
   String get subscription_disclaimer_ios => "Płatność zostanie naliczona na konto Apple ID po potwierdzeniu zakupu. Subskrypcja automatycznie odnawia, chyba że zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu. Twoje konto zostanie obciążone opłatą za przedłużenie w ciągu 24 godzin przed końcem bieżącego okresu. Możesz zarządzać subskrypcjami i je anulować, przechodząc do ustawień konta w App Store po zakupie.";
@@ -1798,13 +1853,19 @@ class $pl_PL extends S {
   @override
   String get plant_flower => "Kwiaty";
   @override
+  String get no_connection_title => "Połączenie";
+  @override
   String get filter_habitat => "Siedlisko";
+  @override
+  String get scale_down_photos_title => "Skaluj zdjęcia obserwacji";
   @override
   String get rate_never => "Nigdy";
   @override
   String get northwestern_pacific => "Północno-Zachodni Pacyfik";
   @override
   String get plant_stem => "Łodyga";
+  @override
+  String get auth_resend_email => "Wyślij e-mail ponownie";
   @override
   String get no => "Nie";
   @override
@@ -1836,11 +1897,13 @@ class $pl_PL extends S {
   @override
   String get filter_distribution => "Dystrybucja";
   @override
-  String get feedback_buy_extended => "Możesz nabyć wersję rozszerzoną, która posiada dodatkowe funkcjonalności, jak np. tryb offline, wyszukiwanie po nazwach czy taksonomii.";
+  String get feedback_buy_extended => "Możesz kupić dodatkowe funkcje, takie jak tryb offline, wyszukiwanie po nazwach czy taksonomii, wyszukiwanie według zdjęć, obserwacje i konfigurowalny filtr.";
   @override
   String get north_central_usa => "Północno-Środkowe USA";
   @override
   String get improve_translation => "Popraw tłumaczenie";
+  @override
+  String get favorite_no_login => "Lista ulubionych kwiatów jest dostępna tylko dla zalogowanych użytkowników. Proszę się zalogować.";
   @override
   String get observation_delete_question => "Czy chcesz usunąć ten okaz?";
   @override
@@ -1986,11 +2049,15 @@ class $ro_RO extends S {
   @override
   String get south_central_pacific => "Sud-central Pacificului";
   @override
+  String get favorite_empty => "Nu există încă flori preferate.";
+  @override
   String get product_custom_filter_description => "Veți putea schimba ordinea implicită și numărul de filtre (culoare, habitatul, petală, distribuție).";
   @override
   String get auth_password_hint => "Parolă";
   @override
   String get habitat_meadow => "câmpie sau fâneață";
+  @override
+  String get observation_missing_photo => "Observația a fost incompletă, astfel încât nu a fost salvată. Fotografia lipsesc.";
   @override
   String get auth_google => "Conectați-vă cu Google";
   @override
@@ -1999,6 +2066,8 @@ class $ro_RO extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Restaurați achizițiile";
+  @override
+  String get favorite_title => "Flori preferate";
   @override
   String get auth_reset_password => "Resetează parola";
   @override
@@ -2058,6 +2127,8 @@ class $ro_RO extends S {
   @override
   String get auth_email => "Conectați-vă cu adresa de e-mail";
   @override
+  String get scale_down_photos_subtitle => "Porniți când nu vedeți fotografiile după alegere.";
+  @override
   String get arabian_peninsula => "Peninsula Arabică";
   @override
   String get search_taxonomy => "Căutați în taxonomie";
@@ -2090,8 +2161,6 @@ class $ro_RO extends S {
   @override
   String get product_search_title => "Căutați în nume sau în taxonomie";
   @override
-  String get observation_not_saved => "Observația a fost incompletă, astfel încât nu a fost salvată. Locația sau fotografia lipsesc.";
-  @override
   String get feedback_review => "Puteți scrie o recenzie pozitivă.";
   @override
   String get yes => "Da";
@@ -2103,6 +2172,8 @@ class $ro_RO extends S {
   String get china => "China";
   @override
   String get offline_title => "Modul offline";
+  @override
+  String get observation_missing_location => "Observația a fost incompletă, astfel încât nu a fost salvată. Locația lipsesc.";
   @override
   String get privacy_policy => "Politica de confidențialitate";
   @override
@@ -2266,6 +2337,8 @@ class $ro_RO extends S {
   @override
   String get mexico => "Mexic";
   @override
+  String get no_connection_content => "Această caracteristică nu funcționează fără conexiune la Internet.";
+  @override
   String get snack_publish => "... care urmează să fie publicată ulterior";
   @override
   String get subscription_disclaimer_ios => "Plata va fi debitată în contul dvs. Apple ID după confirmarea achiziției. Abonamentul se reînnoiește automat, cu excepția cazului în care este anulată cu cel puțin 24 de ore înainte de sfârșitul perioadei curente. Contul dvs. va fi taxat pentru reînnoire cu 24 de ore înainte de sfârșitul perioadei curente. Puteți gestiona și anula abonamentele dvs. accesând setările contului din App Store după cumpărare.";
@@ -2330,13 +2403,19 @@ class $ro_RO extends S {
   @override
   String get plant_flower => "Flori";
   @override
+  String get no_connection_title => "Conexiune";
+  @override
   String get filter_habitat => "habitatul";
+  @override
+  String get scale_down_photos_title => "Scalarea fotografiilor observatorului";
   @override
   String get rate_never => "Niciodată";
   @override
   String get northwestern_pacific => "Nord-vestul Pacificului";
   @override
   String get plant_stem => "Tulpină";
+  @override
+  String get auth_resend_email => "Retrimiteți e-mailul";
   @override
   String get no => "Nu";
   @override
@@ -2368,11 +2447,13 @@ class $ro_RO extends S {
   @override
   String get filter_distribution => "distribuire";
   @override
-  String get feedback_buy_extended => "Puteți cumpăra o versiune extinsă cu funcționalități suplimentare, cum ar fi modul offline, căutarea în nume, căutare în taxonomie, observații și filtru configurabil.";
+  String get feedback_buy_extended => "Puteți cumpăra funcții suplimentare, cum ar fi modul offline, căutarea în nume sau în taxonomie, căutarea după fotografie, observații și filtru configurabil.";
   @override
   String get north_central_usa => "Nord-central SUA";
   @override
   String get improve_translation => "Îmbunătățirea traducere";
+  @override
+  String get favorite_no_login => "Lista florilor preferate este disponibilă numai pentru utilizatorii înregistrați. Va rugam sa va logati.";
   @override
   String get observation_delete_question => "Doriți să ștergeți observația?";
   @override
@@ -2518,11 +2599,15 @@ class $hi_IN extends S {
   @override
   String get south_central_pacific => "दक्षिण-मध्य प्रशांत महासागर";
   @override
+  String get favorite_empty => "अभी तक कोई पसंदीदा फूल नहीं है।";
+  @override
   String get product_custom_filter_description => "आप डिफ़ॉल्ट क्रम और फ़िल्टर की संख्या (रंग, पर्यावास, दल चक्र, वितरण) को बदलने में सक्षम होंगे।";
   @override
   String get auth_password_hint => "पासवर्ड";
   @override
   String get habitat_meadow => "अनुवाद में सुधार करें";
+  @override
+  String get observation_missing_photo => "अवलोकन अपूर्ण था इसलिए इसे बचाया नहीं गया था। फोटो गायब है।";
   @override
   String get auth_google => "Google से प्रवेश करें";
   @override
@@ -2531,6 +2616,8 @@ class $hi_IN extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "खरीदारी वापस लौटाएं";
+  @override
+  String get favorite_title => "पसंदीदा फूल";
   @override
   String get auth_reset_password => "पासवर्ड रीसेट";
   @override
@@ -2590,6 +2677,8 @@ class $hi_IN extends S {
   @override
   String get auth_email => "ईमेल से प्रवेश करें";
   @override
+  String get scale_down_photos_subtitle => "जब आप पिक के बाद अपनी तस्वीरें नहीं देखते हैं, तो स्विच करें।";
+  @override
   String get arabian_peninsula => "अरबी द्वीप";
   @override
   String get search_taxonomy => "टैक्सोनॉमी में खोजें";
@@ -2622,8 +2711,6 @@ class $hi_IN extends S {
   @override
   String get product_search_title => "नामों में खोजें या वर्गीकरण";
   @override
-  String get observation_not_saved => "अवलोकन अपूर्ण था इसलिए इसे बचाया नहीं गया था। स्थान या फोटो गायब है।";
-  @override
   String get feedback_review => "आप एक सकारात्मक समीक्षा लिख सकते हैं।";
   @override
   String get yes => "हाँ";
@@ -2635,6 +2722,8 @@ class $hi_IN extends S {
   String get china => "चीन";
   @override
   String get offline_title => "ऑफ़लाइन मोड";
+  @override
+  String get observation_missing_location => "अवलोकन अपूर्ण था इसलिए इसे बचाया नहीं गया था। स्थान गायब है।";
   @override
   String get privacy_policy => "गोपनीयता नीति";
   @override
@@ -2798,6 +2887,8 @@ class $hi_IN extends S {
   @override
   String get mexico => "मेक्सिको";
   @override
+  String get no_connection_content => "यह सुविधा इंटरनेट कनेक्शन के बिना काम नहीं करती है।";
+  @override
   String get snack_publish => "... बाद में प्रकाशित किया जाना है";
   @override
   String get subscription_disclaimer_ios => "खरीद की पुष्टि के बाद भुगतान आपके Apple ID खाते से किया जाएगा। वर्तमान अवधि की समाप्ति से कम से कम 24 घंटे पहले रद्द होने तक सदस्यता स्वतः नवीनीकृत हो जाती है। वर्तमान अवधि के अंत से पहले 24 घंटों के भीतर आपके खाते को नवीनीकरण के लिए चार्ज किया जाएगा। आप खरीद के बाद App Store पर अपनी खाता सेटिंग में जाकर अपनी सदस्यताएँ प्रबंधित और रद्द कर सकते हैं।";
@@ -2862,13 +2953,19 @@ class $hi_IN extends S {
   @override
   String get plant_flower => "पुष्प";
   @override
+  String get no_connection_title => "संबंध";
+  @override
   String get filter_habitat => "पर्यावास";
+  @override
+  String get scale_down_photos_title => "अवलोकन की तस्वीरों को स्केल करें";
   @override
   String get rate_never => "कभी नहीँ";
   @override
   String get northwestern_pacific => "उत्तर पश्चिमी प्रशांत महासागर";
   @override
   String get plant_stem => "तना";
+  @override
+  String get auth_resend_email => "पुन: ईमेल भेजें";
   @override
   String get no => "नहीं";
   @override
@@ -2900,11 +2997,13 @@ class $hi_IN extends S {
   @override
   String get filter_distribution => "वितरण";
   @override
-  String get feedback_buy_extended => "आप ऑफ़लाइन मोड जैसे अतिरिक्त कार्यक्षमता के साथ विस्तारित संस्करण खरीद सकते हैं, नामों में खोज कर सकते हैं, वर्गीकरण में देख सकते हैं, अवलोकन और कॉन्फ़िगर करने योग्य फ़िल्टर कर सकते हैं।";
+  String get feedback_buy_extended => "आप ऑफ़लाइन मोड, नामों में खोज या वर्गीकरण में अतिरिक्त कार्यक्षमता खरीद सकते हैं, फ़ोटो, टिप्पणियों और कॉन्फ़िगर करने योग्य फ़िल्टर द्वारा खोज कर सकते हैं।";
   @override
   String get north_central_usa => "उत्तरी मध्य यूएसए";
   @override
   String get improve_translation => "अनुवाद में सुधार करें";
+  @override
+  String get favorite_no_login => "पसंदीदा फूलों की सूची केवल लॉग किए गए उपयोगकर्ताओं के लिए उपलब्ध है। कृपया लॉगिन करें।";
   @override
   String get observation_delete_question => "क्या आप अवलोकन हटाना चाहते हैं?";
   @override
@@ -3050,11 +3149,15 @@ class $id_ID extends S {
   @override
   String get south_central_pacific => "Pasifik Tengah Selatan";
   @override
+  String get favorite_empty => "Belum ada bunga favorit.";
+  @override
   String get product_custom_filter_description => "Anda dapat mengubah urutan dan jumlah filter default (warna, habitat, mahkota, distribusi).";
   @override
   String get auth_password_hint => "Kata sandi";
   @override
   String get habitat_meadow => "padang rumput";
+  @override
+  String get observation_missing_photo => "Pengamatan tidak lengkap sehingga tidak disimpan. Foto tidak ada.";
   @override
   String get auth_google => "Masuk dengan Google";
   @override
@@ -3063,6 +3166,8 @@ class $id_ID extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Mengembalikan pembelian";
+  @override
+  String get favorite_title => "Bunga favorit";
   @override
   String get auth_reset_password => "Setel Ulang Kata Sandi";
   @override
@@ -3122,6 +3227,8 @@ class $id_ID extends S {
   @override
   String get auth_email => "Masuk dengan email";
   @override
+  String get scale_down_photos_subtitle => "Hidupkan ketika Anda tidak melihat foto Anda setelah memilih.";
+  @override
   String get arabian_peninsula => "Semenanjung Arab";
   @override
   String get search_taxonomy => "Cari dalam taksonomi";
@@ -3154,8 +3261,6 @@ class $id_ID extends S {
   @override
   String get product_search_title => "Cari nama atau taksonomi";
   @override
-  String get observation_not_saved => "Pengamatan tidak lengkap sehingga tidak disimpan. Lokasi atau foto tidak ada.";
-  @override
   String get feedback_review => "Anda dapat menulis ulasan positif.";
   @override
   String get yes => "iya nih";
@@ -3167,6 +3272,8 @@ class $id_ID extends S {
   String get china => "Cina";
   @override
   String get offline_title => "Mode offline";
+  @override
+  String get observation_missing_location => "Pengamatan tidak lengkap sehingga tidak disimpan. Lokasi tidak ada.";
   @override
   String get privacy_policy => "Rahasia pribadi";
   @override
@@ -3330,6 +3437,8 @@ class $id_ID extends S {
   @override
   String get mexico => "Meksiko";
   @override
+  String get no_connection_content => "Fitur ini tidak berfungsi tanpa koneksi internet.";
+  @override
   String get snack_publish => "... untuk diterbitkan nanti";
   @override
   String get subscription_disclaimer_ios => "Pembayaran akan dibebankan ke akun ID Apple Anda setelah konfirmasi pembelian. Berlangganan secara otomatis memperbarui kecuali dibatalkan setidaknya 24 jam sebelum akhir periode berjalan. Akun Anda akan dikenakan biaya untuk pembaruan dalam waktu 24 jam sebelum akhir periode berjalan. Anda dapat mengelola dan membatalkan langganan Anda dengan masuk ke pengaturan akun Anda di App Store setelah pembelian.";
@@ -3394,13 +3503,19 @@ class $id_ID extends S {
   @override
   String get plant_flower => "Bunga";
   @override
+  String get no_connection_title => "Koneksi";
+  @override
   String get filter_habitat => "habitat";
+  @override
+  String get scale_down_photos_title => "Perkecil foto pengamatan";
   @override
   String get rate_never => "Tak pernah";
   @override
   String get northwestern_pacific => "Pasifik Barat Laut";
   @override
   String get plant_stem => "Batang";
+  @override
+  String get auth_resend_email => "Kirim ulang email";
   @override
   String get no => "Tidak";
   @override
@@ -3432,11 +3547,13 @@ class $id_ID extends S {
   @override
   String get filter_distribution => "distribusi";
   @override
-  String get feedback_buy_extended => "Anda dapat membeli versi lanjutan dengan fungsi tambahan seperti mode offline, pencarian nama, pencarian taksonomi, pengamatan, dan filter yang dapat dikonfigurasi.";
+  String get feedback_buy_extended => "Anda dapat membeli fungsionalitas tambahan seperti mode offline, pencarian nama atau taksonomi, pencarian berdasarkan foto, pengamatan dan filter yang dapat dikonfigurasi.";
   @override
   String get north_central_usa => "Tengah Utara AS";
   @override
   String get improve_translation => "Perbaiki terjemahan";
+  @override
+  String get favorite_no_login => "Daftar bunga favorit hanya tersedia untuk pengguna yang login. Silahkan masuk.";
   @override
   String get observation_delete_question => "Apakah Anda ingin menghapus pengamatan?";
   @override
@@ -3582,11 +3699,15 @@ class $fr_FR extends S {
   @override
   String get south_central_pacific => "Pacifique sud-central";
   @override
+  String get favorite_empty => "Il n'y a pas encore de fleurs préférées.";
+  @override
   String get product_custom_filter_description => "Vous pourrez modifier l'ordre et le nombre de filtres par défaut (couleur, habitat, pétale, distribution).";
   @override
   String get auth_password_hint => "Mot de passe";
   @override
   String get habitat_meadow => "prés ou prairies";
+  @override
+  String get observation_missing_photo => "L'observation était incomplète, donc elle n'a pas été sauvegardée. La photo est manquante.";
   @override
   String get auth_google => "Se connecter avec Google";
   @override
@@ -3595,6 +3716,8 @@ class $fr_FR extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Restaurer les achats";
+  @override
+  String get favorite_title => "Fleurs préférées";
   @override
   String get auth_reset_password => "Réinitialiser le mot de passe";
   @override
@@ -3654,6 +3777,8 @@ class $fr_FR extends S {
   @override
   String get auth_email => "Se connecter avec une adresse e-mail";
   @override
+  String get scale_down_photos_subtitle => "Activez-la lorsque vous ne voyez pas vos photos après la sélection.";
+  @override
   String get arabian_peninsula => "Arabie";
   @override
   String get search_taxonomy => "Chercher en taxonomie";
@@ -3686,8 +3811,6 @@ class $fr_FR extends S {
   @override
   String get product_search_title => "Chercher dans les noms ou la taxonomie";
   @override
-  String get observation_not_saved => "L'observation était incomplète, donc elle n'a pas été sauvegardée. L'emplacement de la photo est manquant.";
-  @override
   String get feedback_review => "Vous pouvez écrire une critique positive.";
   @override
   String get yes => "Oui";
@@ -3699,6 +3822,8 @@ class $fr_FR extends S {
   String get china => "Chine";
   @override
   String get offline_title => "Mode hors-ligne";
+  @override
+  String get observation_missing_location => "L'observation était incomplète, donc elle n'a pas été sauvegardée. L'emplacement est manquant.";
   @override
   String get privacy_policy => "Politique de confidentialité";
   @override
@@ -3862,6 +3987,8 @@ class $fr_FR extends S {
   @override
   String get mexico => "Mexique";
   @override
+  String get no_connection_content => "Cette fonctionnalité ne fonctionne pas sans connexion Internet.";
+  @override
   String get snack_publish => "... à publier plus tard";
   @override
   String get subscription_disclaimer_ios => "Le paiement sera débité de votre compte Apple ID après la confirmation de l'achat. L'abonnement est automatiquement renouvelé sauf s'il est annulé au moins 24 heures avant la fin de la période en cours. Votre compte sera facturé pour le renouvellement dans les 24 heures précédant la fin de la période en cours. Vous pouvez gérer et annuler vos abonnements en accédant aux paramètres de votre compte sur App Store après l'achat.";
@@ -3926,13 +4053,19 @@ class $fr_FR extends S {
   @override
   String get plant_flower => "Fleurs";
   @override
+  String get no_connection_title => "Connexion";
+  @override
   String get filter_habitat => "habitat";
+  @override
+  String get scale_down_photos_title => "Réduisez les photos d'observation";
   @override
   String get rate_never => "Jamais";
   @override
   String get northwestern_pacific => "Pacifique Nord-Ouest";
   @override
   String get plant_stem => "Tige";
+  @override
+  String get auth_resend_email => "Ré-envoyer l'email";
   @override
   String get no => "Non";
   @override
@@ -3964,11 +4097,13 @@ class $fr_FR extends S {
   @override
   String get filter_distribution => "distribution";
   @override
-  String get feedback_buy_extended => "Vous pouvez acheter la version étendue avec des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche dans les noms, la recherche dans la taxonomie, les observations et le filtre configurable.";
+  String get feedback_buy_extended => "Vous pouvez acheter des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche par noms ou par taxonomie, la recherche par photo, les observations et le filtre configurable.";
   @override
   String get north_central_usa => "Nord-Central des États-Unis";
   @override
   String get improve_translation => "Améliorer la traduction";
+  @override
+  String get favorite_no_login => "La liste des fleurs préférées est disponible uniquement pour les utilisateurs connectés. Veuillez vous connecter.";
   @override
   String get observation_delete_question => "Voulez-vous retirer l'observation?";
   @override
@@ -4114,11 +4249,15 @@ class $he_IL extends S {
   @override
   String get south_central_pacific => "דרום מרכז האוקיינוס השקט";
   @override
+  String get favorite_empty => "אין עדיין פרחים מועדפים.";
+  @override
   String get product_custom_filter_description => "תוכל לשנות את סדר ברירת המחדל ואת מספר המסננים (צבע, בתי גידול, עלי כותרת, הפצה).";
   @override
   String get auth_password_hint => "סיסמה";
   @override
   String get habitat_meadow => "כרי דשא או מרעה";
+  @override
+  String get observation_missing_photo => "התצפית לא הושלמה ולכן היא לא נשמרה. התמונה חסרה.";
   @override
   String get auth_google => "היכנס באמצעות Google";
   @override
@@ -4127,6 +4266,8 @@ class $he_IL extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "לשחזר רכישות";
+  @override
+  String get favorite_title => "פרחים מועדפים";
   @override
   String get auth_reset_password => "לאפס את הסיסמה";
   @override
@@ -4186,6 +4327,8 @@ class $he_IL extends S {
   @override
   String get auth_email => "היכנס באמצעות דוא\"ל";
   @override
+  String get scale_down_photos_subtitle => "הפעל כאשר אינך רואה את התמונות שלך לאחר הבחירה.";
+  @override
   String get arabian_peninsula => "חצי האי ערב";
   @override
   String get search_taxonomy => "חפש בטקסונומיה";
@@ -4218,8 +4361,6 @@ class $he_IL extends S {
   @override
   String get product_search_title => "חיפוש בשמות או בטקסונומיה";
   @override
-  String get observation_not_saved => "התצפית לא הושלמה ולכן היא לא נשמרה. המיקום או התמונה חסרים.";
-  @override
   String get feedback_review => "אתה יכול לכתוב ביקורת חיובית.";
   @override
   String get yes => "כן";
@@ -4231,6 +4372,8 @@ class $he_IL extends S {
   String get china => "סין";
   @override
   String get offline_title => "מצב לא מקוון";
+  @override
+  String get observation_missing_location => "התצפית לא הושלמה ולכן היא לא נשמרה. המיקום חסר.";
   @override
   String get privacy_policy => "מדיניות פרטיות";
   @override
@@ -4394,6 +4537,8 @@ class $he_IL extends S {
   @override
   String get mexico => "מקסיקו";
   @override
+  String get no_connection_content => "תכונה זו אינה פועלת ללא חיבור לאינטרנט.";
+  @override
   String get snack_publish => "יפורסם בהמשך";
   @override
   String get subscription_disclaimer_ios => "התשלום יחויב בחשבון Apple ID שלך לאחר אישור הרכישה. המנוי מתחדשת אוטומטית, אלא אם כן הוא מבוטל לפחות 24 שעות לפני תום התקופה הנוכחית. החשבון שלך יחויב לחידוש תוך 24 שעות לפני תום התקופה הנוכחית. תוכל לנהל ולבטל את ההרשמות שלך על ידי מעבר להגדרות החשבון שלך ב- App Store לאחר הרכישה.";
@@ -4458,13 +4603,19 @@ class $he_IL extends S {
   @override
   String get plant_flower => "פרח";
   @override
+  String get no_connection_title => "חיבור";
+  @override
   String get filter_habitat => "בתי גידול";
+  @override
+  String get scale_down_photos_title => "סולם את תצפיות התצלומים";
   @override
   String get rate_never => "לעולם לא";
   @override
   String get northwestern_pacific => "צפון מערב האוקיינוס השקט";
   @override
   String get plant_stem => "גבעול";
+  @override
+  String get auth_resend_email => "שלח אימייל מחדש";
   @override
   String get no => "לא";
   @override
@@ -4496,11 +4647,13 @@ class $he_IL extends S {
   @override
   String get filter_distribution => "הפצה";
   @override
-  String get feedback_buy_extended => "אתה יכול לקנות גרסה מורחבת עם פונקציונליות נוספת כמו במצב לא מקוון, חיפוש בשמות, חיפוש בטקסונומיה, תצפיות ומסנן להגדרה.";
+  String get feedback_buy_extended => "אתה יכול לקנות פונקציונליות נוספת כמו במצב לא מקוון, חיפוש בשמות או בטקסונומיה, חיפוש לפי תמונה, תצפיות ומסנן להגדרה.";
   @override
   String get north_central_usa => "צפון מרכז ארצות הברית";
   @override
   String get improve_translation => "שפר את התרגום";
+  @override
+  String get favorite_no_login => "רשימה של פרחים מועדפים זמין רק עבור משתמשים רשומים. היכנס.";
   @override
   String get observation_delete_question => "האם ברצונך למחוק את התצפית?";
   @override
@@ -4646,11 +4799,15 @@ class $ja_JP extends S {
   @override
   String get south_central_pacific => "中南米";
   @override
+  String get favorite_empty => "好きな花はまだありません。";
+  @override
   String get product_custom_filter_description => "あなたは、デフォルトの順番とフィルタの数（色、生息地、花弁、分布）を変えることができるでしょう。";
   @override
   String get auth_password_hint => "パスワード";
   @override
   String get habitat_meadow => "草地、草原";
+  @override
+  String get observation_missing_photo => "観測は不完全だったので保存されませんでした。 写真がありません。";
   @override
   String get auth_google => "Google でログイン";
   @override
@@ -4659,6 +4816,8 @@ class $ja_JP extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "購入を復元";
+  @override
+  String get favorite_title => "好きな花";
   @override
   String get auth_reset_password => "パスワードを再設定する";
   @override
@@ -4718,6 +4877,8 @@ class $ja_JP extends S {
   @override
   String get auth_email => "メールアドレスでログイン";
   @override
+  String get scale_down_photos_subtitle => "ピック後に写真が見えなくなったら電源を入れます。";
+  @override
   String get arabian_peninsula => "アラビア半島";
   @override
   String get search_taxonomy => "分類法で検索する";
@@ -4750,8 +4911,6 @@ class $ja_JP extends S {
   @override
   String get product_search_title => "名前または分類法で検索する";
   @override
-  String get observation_not_saved => "観測は不完全だったので保存されませんでした。 場所や写真が見つかりません。";
-  @override
   String get feedback_review => "あなたは肯定的なレビューを書くことができます。";
   @override
   String get yes => "はい";
@@ -4763,6 +4922,8 @@ class $ja_JP extends S {
   String get china => "中国";
   @override
   String get offline_title => "オフラインモード";
+  @override
+  String get observation_missing_location => "観測は不完全だったので保存されませんでした。 場所が見つかりません。";
   @override
   String get privacy_policy => "個人情報保護方針";
   @override
@@ -4926,6 +5087,8 @@ class $ja_JP extends S {
   @override
   String get mexico => "メキシコ";
   @override
+  String get no_connection_content => "この機能はインターネットに接続していないと機能しません。";
+  @override
   String get snack_publish => "... 後で公開する";
   @override
   String get subscription_disclaimer_ios => "購入確認後、支払いはApple IDアカウントに請求されます。 現在の期間が終了する少なくとも24時間前にキャンセルされない限り、サブスクリプションは自動的に更新されます。 あなたのアカウントは、現在の期間の終了前に24時間以内に更新のために課金されます。 購入後にApp Storeのアカウント設定にアクセスして、購読を管理およびキャンセルできます。";
@@ -4990,13 +5153,19 @@ class $ja_JP extends S {
   @override
   String get plant_flower => "花";
   @override
+  String get no_connection_title => "接続";
+  @override
   String get filter_habitat => "生息地";
+  @override
+  String get scale_down_photos_title => "観測の写真を縮小する";
   @override
   String get rate_never => "絶対に";
   @override
   String get northwestern_pacific => "北西太平洋";
   @override
   String get plant_stem => "茎";
+  @override
+  String get auth_resend_email => "メールを再送";
   @override
   String get no => "いいえ";
   @override
@@ -5028,11 +5197,13 @@ class $ja_JP extends S {
   @override
   String get filter_distribution => "分布";
   @override
-  String get feedback_buy_extended => "オフラインモード、名前で検索、分類法で検索、観測、設定可能なフィルタなどの追加機能を備えた拡張バージョンを購入できます。";
+  String get feedback_buy_extended => "あなたはオフラインモードのような追加の機能を購入することができます名前または分類法での検索、写真による検索、観察および設定可能なフィルタ。";
   @override
   String get north_central_usa => "アメリカ北西部";
   @override
   String get improve_translation => "翻訳を改善する";
+  @override
+  String get favorite_no_login => "お気に入りの花のリストはログインしたユーザーにのみ利用可能です。 ログインしてください。";
   @override
   String get observation_delete_question => "観測を削除しますか？";
   @override
@@ -5178,11 +5349,15 @@ class $cs_CZ extends S {
   @override
   String get south_central_pacific => "Středojižní Tichomoří";
   @override
+  String get favorite_empty => "Zatím nejsou žádné oblíbené květy.";
+  @override
   String get product_custom_filter_description => "Budete moci změnit výchozí pořadí a počet filtrů (barva, ekologie, okvětní líst, distribuce).";
   @override
   String get auth_password_hint => "Heslo";
   @override
   String get habitat_meadow => "louky a travnaté porosty";
+  @override
+  String get observation_missing_photo => "Pozorování bylo neúplné, takže nebylo uloženo. Chybí fotografie.";
   @override
   String get auth_google => "Přihlásit se přes Google";
   @override
@@ -5191,6 +5366,8 @@ class $cs_CZ extends S {
   String get app_store => "App obchod";
   @override
   String get product_restore_purchases => "Obnovit nákupy";
+  @override
+  String get favorite_title => "Oblíbené květy";
   @override
   String get auth_reset_password => "Obnovit heslo";
   @override
@@ -5250,6 +5427,8 @@ class $cs_CZ extends S {
   @override
   String get auth_email => "Přihlásit se pomocí e-mailu";
   @override
+  String get scale_down_photos_subtitle => "Zapněte, když se vaše fotografie po vyjmutí nezobrazí.";
+  @override
   String get arabian_peninsula => "Arabský poloostrov";
   @override
   String get search_taxonomy => "Hledat v taxonomii";
@@ -5282,8 +5461,6 @@ class $cs_CZ extends S {
   @override
   String get product_search_title => "Hledat v jménech nebo v taxonomii";
   @override
-  String get observation_not_saved => "Pozorování bylo neúplné, takže nebylo uloženo. Chyběla poloha nebo fotka.";
-  @override
   String get feedback_review => "Můžete napsat pozitivní recenzi.";
   @override
   String get yes => "Ano";
@@ -5295,6 +5472,8 @@ class $cs_CZ extends S {
   String get china => "Čína";
   @override
   String get offline_title => "Offline režim";
+  @override
+  String get observation_missing_location => "Pozorování bylo neúplné, takže nebylo uloženo. Chybí poloha.";
   @override
   String get privacy_policy => "Zásady ochrany osobních údajů";
   @override
@@ -5364,7 +5543,7 @@ class $cs_CZ extends S {
   @override
   String get subscription_info => "Sdílené pozorování jsou přístupné pouze uživatelům s předplatným.";
   @override
-  String get product_photo_search_description => "Budete mít možnost najít květinu podle fotografie. Tato funkce používá umělé inteligence pro určování objektů na fotografiích od Googlu.";
+  String get product_photo_search_description => "Budete mít možnost najít květinu podle fotografie. Tato funkce využívá umělé inteligence pro určování objektů na fotografiích od Googlu.";
   @override
   String get auth_phone => "Přihlásit se pomocí telefonu";
   @override
@@ -5458,6 +5637,8 @@ class $cs_CZ extends S {
   @override
   String get mexico => "Mexiko";
   @override
+  String get no_connection_content => "Tato funkce bez připojení k Internetu nefunguje.";
+  @override
   String get subscription_disclaimer_ios => "Platba bude účtována vašemu Apple ID účtu po potvrzení nákupu. Předplatné se automaticky obnovuje, pokud není zrušeno nejméně 24 hodin před koncem aktuálního období. Nové předplatné bude účtováno do 24 hodin před koncem aktuálního období. Své odběry můžete spravovat a zrušit tak, že po zakoupení přejdete do nastavení účtu na App Store.";
   @override
   String get siberia => "Sibiř";
@@ -5520,13 +5701,19 @@ class $cs_CZ extends S {
   @override
   String get plant_flower => "Květ";
   @override
+  String get no_connection_title => "Připojení";
+  @override
   String get filter_habitat => "ekologie";
+  @override
+  String get scale_down_photos_title => "Zmenšit fotografie z pozorování";
   @override
   String get rate_never => "Nikdy";
   @override
   String get northwestern_pacific => "Severozápadní Tichomoří";
   @override
   String get plant_stem => "Lodyha";
+  @override
+  String get auth_resend_email => "Přeposlat e-mail";
   @override
   String get no => "Ne";
   @override
@@ -5540,7 +5727,7 @@ class $cs_CZ extends S {
   @override
   String get taxonomy_tribus => "skupina";
   @override
-  String get auth_resend_code => "Znovu zaslat kód";
+  String get auth_resend_code => "Přeposlat kód";
   @override
   String get rate_later => "Později";
   @override
@@ -5558,11 +5745,13 @@ class $cs_CZ extends S {
   @override
   String get filter_distribution => "distribuce";
   @override
-  String get feedback_buy_extended => "Můžete si koupit funkce navíc jako například ofline režim, vyhledávání v názvech a v taxonomii, pozorování a nastavitelný filtr.";
+  String get feedback_buy_extended => "Můžete si koupit funkce navíc jako například offline režim, vyhledávání v názvech a v taxonomii, vyhledávání pomocí fotografie, pozorování a nastavitelný filtr.";
   @override
   String get north_central_usa => "Středosever USA";
   @override
   String get improve_translation => "Vylepšit překlad";
+  @override
+  String get favorite_no_login => "Seznam oblíbených květin je dostupný pouze pro přihlášené uživatele. Přihlašte se, prosím.";
   @override
   String get observation_delete_question => "Chcete zmazat pozorování?";
   @override
@@ -5708,11 +5897,15 @@ class $de_DE extends S {
   @override
   String get south_central_pacific => "Süd-Zentrales Pazifik";
   @override
+  String get favorite_empty => "Es gibt noch keine Lieblingsblumen.";
+  @override
   String get product_custom_filter_description => "Sie können die Standardreihenfolge und die Anzahl der Filter ändern (Farbe, Habitat, Kronblatt, Vorkommen).";
   @override
   String get auth_password_hint => "Passwort";
   @override
   String get habitat_meadow => "Wiesen oder Grünland";
+  @override
+  String get observation_missing_photo => "Die Beobachtung wurde nicht abgeschlossen, so dass nichts gespeichert wurde. Foto fehlt.";
   @override
   String get auth_google => "Über Google anmelden";
   @override
@@ -5721,6 +5914,8 @@ class $de_DE extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Käufe wiederherstellen";
+  @override
+  String get favorite_title => "Lieblingsblumen";
   @override
   String get auth_reset_password => "Passwort zurücksetzen";
   @override
@@ -5780,6 +5975,8 @@ class $de_DE extends S {
   @override
   String get auth_email => "Mit einer E-Mail-Adresse anmelden";
   @override
+  String get scale_down_photos_subtitle => "Schalten Sie ein, wenn Sie Ihre Fotos nach der Auswahl nicht sehen.";
+  @override
   String get arabian_peninsula => "Arabische Halbinsel";
   @override
   String get search_taxonomy => "Suche in der Taxonomie";
@@ -5812,8 +6009,6 @@ class $de_DE extends S {
   @override
   String get product_search_title => "Suche nach Namen oder Taxonomie";
   @override
-  String get observation_not_saved => "Die Beobachtung wurde nicht abgeschlossen, so dass nichts gespeichert wurde. Ort oder Foto fehlt.";
-  @override
   String get feedback_review => "Sie können eine positive Bewertung schreiben.";
   @override
   String get yes => "Ja";
@@ -5825,6 +6020,8 @@ class $de_DE extends S {
   String get china => "China";
   @override
   String get offline_title => "Offline-Modus";
+  @override
+  String get observation_missing_location => "Die Beobachtung wurde nicht abgeschlossen, so dass nichts gespeichert wurde. Ort fehlt.";
   @override
   String get privacy_policy => "Datenschutz-Bestimmungen";
   @override
@@ -5988,6 +6185,8 @@ class $de_DE extends S {
   @override
   String get mexico => "Mexiko";
   @override
+  String get no_connection_content => "Diese Funktion funktioniert nicht ohne Internetverbindung.";
+  @override
   String get snack_publish => "... wird später veröffentlicht";
   @override
   String get subscription_disclaimer_ios => "Die Zahlung wird Ihrem Apple ID-Konto nach der Kaufbestätigung in Rechnung gestellt. Das Abonnement wird automatisch erneuert, es sei denn, es wird mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums gekündigt. Ihr Konto wird innerhalb von 24 Stunden vor Ablauf des laufenden Zeitraums für die Erneuerung belastet. Sie können Ihre Abonnements verwalten und kündigen, indem Sie nach dem Kauf Ihre Kontoeinstellungen im App Store aufrufen.";
@@ -6052,13 +6251,19 @@ class $de_DE extends S {
   @override
   String get plant_flower => "Blüte";
   @override
+  String get no_connection_title => "Verbindung";
+  @override
   String get filter_habitat => "Habitat";
+  @override
+  String get scale_down_photos_title => "Verkleinern Sie die Beobachtungsfotos";
   @override
   String get rate_never => "Niemals ";
   @override
   String get northwestern_pacific => "Nordwestlicher Pazifik";
   @override
   String get plant_stem => "Stängel";
+  @override
+  String get auth_resend_email => "E-Mail zurücksenden";
   @override
   String get no => "Nein";
   @override
@@ -6090,11 +6295,13 @@ class $de_DE extends S {
   @override
   String get filter_distribution => "Vorkommen";
   @override
-  String get feedback_buy_extended => "Sie können eine erweiterte (+) Version mit zusätzlichen Funktionen wie Offline-Modus, Suche nach Namen, Suche in Taxonomie, Beobachtungen und konfigurierbaren Filter kaufen.";
+  String get feedback_buy_extended => "Sie können zusätzliche Funktionen erwerben, z. B. den Offline-Modus, die Suche in Namen oder in der Taxonomie, die Suche nach Foto, Beobachtungen und konfigurierbare Filter.";
   @override
   String get north_central_usa => "Nord-Zentral U.S.A.";
   @override
   String get improve_translation => "Übersetzung verbessern";
+  @override
+  String get favorite_no_login => "Die Liste der Lieblingsblumen ist nur für angemeldete Benutzer verfügbar. Bitte loggen Sie sich ein.";
   @override
   String get observation_delete_question => "Möchten Sie die Beobachtung löschen?";
   @override
@@ -6240,11 +6447,15 @@ class $hu_HU extends S {
   @override
   String get south_central_pacific => "Dél-Közép Csendes-óceán";
   @override
+  String get favorite_empty => "Még nincs kedvenc virág.";
+  @override
   String get product_custom_filter_description => "Megváltoztathatja az alapértelmezett sorrendet és a szűrők számát (szín, élettér, párta, terjesztés).";
   @override
   String get auth_password_hint => "Jelszó";
   @override
   String get habitat_meadow => "rétek vagy legelők";
+  @override
+  String get observation_missing_photo => "A megfigyelés hiányos volt, így nem lett elmentve. A fotó hiányzik.";
   @override
   String get auth_google => "Bejelentkezés Google azonosítóval";
   @override
@@ -6253,6 +6464,8 @@ class $hu_HU extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Vásárlás visszaállítása";
+  @override
+  String get favorite_title => "Kedvenc virágok";
   @override
   String get auth_reset_password => "Jelszó visszaállítása";
   @override
@@ -6312,6 +6525,8 @@ class $hu_HU extends S {
   @override
   String get auth_email => "Bejelentkezés e-mail azonosítóval";
   @override
+  String get scale_down_photos_subtitle => "Kapcsolja be, ha nem látja a fényképeket a felvétel után.";
+  @override
   String get arabian_peninsula => "Arab félsziget";
   @override
   String get search_taxonomy => "Keresés taxonómiában";
@@ -6344,8 +6559,6 @@ class $hu_HU extends S {
   @override
   String get product_search_title => "Keresés nevekben vagy taxonómiában";
   @override
-  String get observation_not_saved => "A megfigyelés hiányos volt, így nem lett elmentve. Hiányzik a hely vagy a fénykép.";
-  @override
   String get feedback_review => "Írhat pozitív értékelést.";
   @override
   String get yes => "Igen";
@@ -6357,6 +6570,8 @@ class $hu_HU extends S {
   String get china => "Kína";
   @override
   String get offline_title => "Offline módban";
+  @override
+  String get observation_missing_location => "A megfigyelés hiányos volt, így nem lett elmentve. A hely hiányzik.";
   @override
   String get privacy_policy => "Adatvédelmi irányelvek";
   @override
@@ -6520,6 +6735,8 @@ class $hu_HU extends S {
   @override
   String get mexico => "Mexikó";
   @override
+  String get no_connection_content => "Ez a funkció nem működik internetkapcsolat nélkül.";
+  @override
   String get snack_publish => "... később lesz közzétéve";
   @override
   String get subscription_disclaimer_ios => "A kifizetést az Apple ID-fiókja terheli a vásárlás visszaigazolása után. Az előfizetés automatikusan megújul, kivéve, ha legalább 24 órával a jelenlegi időszak vége előtt törlődik. Fiókját a jelenlegi időszak vége előtt 24 órán belül meg kell fizetni a megújításról. A vásárlást követően az App Store fiókbeállításaira irányíthatja és törölheti előfizetését.";
@@ -6584,13 +6801,19 @@ class $hu_HU extends S {
   @override
   String get plant_flower => "Virágok";
   @override
+  String get no_connection_title => "Kapcsolat";
+  @override
   String get filter_habitat => "élettér";
+  @override
+  String get scale_down_photos_title => "Mérje le a megfigyelés fotóit";
   @override
   String get rate_never => "Soha";
   @override
   String get northwestern_pacific => "Északnyugati Csendes-óceán";
   @override
   String get plant_stem => "Szár";
+  @override
+  String get auth_resend_email => "E-mail újraküldése";
   @override
   String get no => "Nem";
   @override
@@ -6622,11 +6845,13 @@ class $hu_HU extends S {
   @override
   String get filter_distribution => "terjesztés";
   @override
-  String get feedback_buy_extended => "A bővített változat megvásárlása további funkciókat eredményez, mint például az offline mód, név általi keresés, taxonómia általi keresés, megfigyelések és konfigurálható szűrő.";
+  String get feedback_buy_extended => "Megvásárolhat további funkciókat, mint például az offline mód, név általi keresés, taxonómia általi keresés, megfigyelések és konfigurálható szűrő.";
   @override
   String get north_central_usa => "Észak-Közép USA";
   @override
   String get improve_translation => "A fordítás javítása";
+  @override
+  String get favorite_no_login => "A kedvenc virágok listája csak a naplózott felhasználók számára érhető el. Kérjük jelentkezzen be.";
   @override
   String get observation_delete_question => "Törli a megfigyelést?";
   @override
@@ -6772,11 +6997,15 @@ class $nb_NO extends S {
   @override
   String get south_central_pacific => "Sør-Sentral Stillehavet";
   @override
+  String get favorite_empty => "Det er ingen favoritt blomster ennå.";
+  @override
   String get product_custom_filter_description => "Du kan endre standard rekkefølge og antall filtre (farge, voksested, kronblader, fordeling).";
   @override
   String get auth_password_hint => "Passord";
   @override
   String get habitat_meadow => "enger eller gressletter";
+  @override
+  String get observation_missing_photo => "Observasjonen var ufullstendig, slik at den ikke ble frelst. Bilde mangler.";
   @override
   String get auth_google => "Logg på med Google";
   @override
@@ -6785,6 +7014,8 @@ class $nb_NO extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Gjenopprette kjøp";
+  @override
+  String get favorite_title => "Favorittblomster";
   @override
   String get auth_reset_password => "Tilbakestille passord";
   @override
@@ -6844,6 +7075,8 @@ class $nb_NO extends S {
   @override
   String get auth_email => "Logg på med e-postadresse";
   @override
+  String get scale_down_photos_subtitle => "Slå på når du ikke ser bildene dine etter valg.";
+  @override
   String get arabian_peninsula => "Den arabiske halvøy";
   @override
   String get search_taxonomy => "Søk i taksonomi";
@@ -6876,8 +7109,6 @@ class $nb_NO extends S {
   @override
   String get product_search_title => "Søk i navn eller taksonomi";
   @override
-  String get observation_not_saved => "Observasjonen var ufullstendig, slik at den ikke ble frelst. Sted eller bilde mangler.";
-  @override
   String get feedback_review => "Du kan skrive en positiv anmeldelse.";
   @override
   String get yes => "Ja";
@@ -6889,6 +7120,8 @@ class $nb_NO extends S {
   String get china => "Kina";
   @override
   String get offline_title => "Frakoblet modus";
+  @override
+  String get observation_missing_location => "Observasjonen var ufullstendig, slik at den ikke ble frelst. Sted mangler.";
   @override
   String get privacy_policy => "Personvernregler";
   @override
@@ -7052,6 +7285,8 @@ class $nb_NO extends S {
   @override
   String get mexico => "Mexico";
   @override
+  String get no_connection_content => "Denne funksjonen virker ikke uten Internett-tilkobling.";
+  @override
   String get snack_publish => "... å bli publisert senere";
   @override
   String get subscription_disclaimer_ios => "Betaling vil bli belastet din Apple ID-konto etter bekreftelse på kjøp. Abonnementet fornyes automatisk med mindre det er kansellert minst 24 timer før slutten av den nåværende perioden. Kontoen din vil bli belastet for fornyelse innen 24 timer før slutten av den nåværende perioden. Du kan administrere og kansellere abonnementene dine ved å gå til kontoinnstillingene dine på App Store etter kjøp.";
@@ -7116,13 +7351,19 @@ class $nb_NO extends S {
   @override
   String get plant_flower => "Blomst";
   @override
+  String get no_connection_title => "Forbindelse";
+  @override
   String get filter_habitat => "voksested";
+  @override
+  String get scale_down_photos_title => "Skal ned observasjonens bilder";
   @override
   String get rate_never => "Aldri";
   @override
   String get northwestern_pacific => "Nordvest Stillehavet";
   @override
   String get plant_stem => "Stengel";
+  @override
+  String get auth_resend_email => "Send e-post igjen";
   @override
   String get no => "Nei";
   @override
@@ -7154,11 +7395,13 @@ class $nb_NO extends S {
   @override
   String get filter_distribution => "fordeling";
   @override
-  String get feedback_buy_extended => "Du kan kjøpe utvidet versjon med ekstra funksjonalitet som frakoblet modus, søk i navn, søk i taksonomi, observasjoner og konfigurerbart filter.";
+  String get feedback_buy_extended => "Du kan kjøpe tilleggsfunksjoner som frakoblet modus, søk i navn eller i taksonomi, søk etter bilde, observasjoner og konfigurerbart filter.";
   @override
   String get north_central_usa => "Nord-Sentral USA";
   @override
   String get improve_translation => "Forbedre oversettelse";
+  @override
+  String get favorite_no_login => "Liste over favorittblomster er bare tilgjengelig for loggede brukere. Vennligst Logg inn.";
   @override
   String get observation_delete_question => "Ønsker du å slette observasjonen?";
   @override
@@ -7304,11 +7547,15 @@ class $sk_SK extends S {
   @override
   String get south_central_pacific => "Stredojužné Tichomorie";
   @override
+  String get favorite_empty => "Zatiaľ nie sú žiadne obľúbené kvety.";
+  @override
   String get product_custom_filter_description => "Budete mať možnosť zmeniť predvolené poradie a počet filtrov (farba, biotop, lupienok, distribúcia).";
   @override
   String get auth_password_hint => "Heslo";
   @override
   String get habitat_meadow => "lúky a trávnaté porasty";
+  @override
+  String get observation_missing_photo => "Pozorovanie nebolo úplné, takže nebolo uložené. Chýba fotografia.";
   @override
   String get auth_google => "Prihlásiť sa cez Google";
   @override
@@ -7317,6 +7564,8 @@ class $sk_SK extends S {
   String get app_store => "App obchod";
   @override
   String get product_restore_purchases => "Obnoviť nákupy";
+  @override
+  String get favorite_title => "Obľúbené kvety";
   @override
   String get auth_reset_password => "Obnoviť heslo";
   @override
@@ -7374,6 +7623,8 @@ class $sk_SK extends S {
   @override
   String get auth_email => "Prihlásiť sa e-mailom";
   @override
+  String get scale_down_photos_subtitle => "Zapnite, keď sa vaše fotografie po vybratí nezobrazia.";
+  @override
   String get arabian_peninsula => "Arabský polostrov";
   @override
   String get search_taxonomy => "Hľadať v taxonómii";
@@ -7406,8 +7657,6 @@ class $sk_SK extends S {
   @override
   String get product_search_title => "Hľadať v názvoch alebo v taxonómii";
   @override
-  String get observation_not_saved => "Pozorovanie nebolo úplné, takže nebolo uložené. Chýbala poloha alebo fotka.";
-  @override
   String get feedback_review => "Môžete napísať pozitívnu recenziu.";
   @override
   String get yes => "Áno";
@@ -7418,7 +7667,9 @@ class $sk_SK extends S {
   @override
   String get china => "Čína";
   @override
-  String get offline_title => "Režm offline";
+  String get offline_title => "Režim offline";
+  @override
+  String get observation_missing_location => "Pozorovanie nebolo úplné, takže nebolo uložené. Chýba poloha.";
   @override
   String get privacy_policy => "Zásady ochrany osobných údajov";
   @override
@@ -7436,7 +7687,7 @@ class $sk_SK extends S {
   @override
   String get subscription_disclaimer_android => "Prvá platba bude účtovaná vášmu Google účtu 30 dní po potvrdení nákupu. Predplatné sa automaticky obnovuje, pokiaľ nie je zrušené najmenej 24 hodín pred koncom aktuálneho obdobia. Nové predplatné bude účtované do 24 hodín pred koncom aktuálneho obdobia. Svoje odbery môžete spravovať a zrušiť tak, že po zakúpení prejdete do nastavenia účtu v Obchode Google Play.";
   @override
-  String get product_offline_title => "Režm offline";
+  String get product_offline_title => "Režim offline";
   @override
   String get feedback_submit_translate_data => "Opraviť chyby v dátach";
   @override
@@ -7488,7 +7739,7 @@ class $sk_SK extends S {
   @override
   String get subscription_info => "Zdieľané pozorovania sú prístupné iba používateľom s predplatným.";
   @override
-  String get product_photo_search_description => "Budete mať možnosť nájsť kvetinu podľa fotografie. Táto funkcia používa umelú inteligencíu na určovanie objektov na fotografiách od Googlu.";
+  String get product_photo_search_description => "Budete mať možnosť nájsť kvetinu podľa fotografie. Táto funkcia využíva umelú inteligencíu na určovanie objektov na fotografiách od Googlu.";
   @override
   String get auth_phone => "Prihlásiť sa telefónom";
   @override
@@ -7582,6 +7833,8 @@ class $sk_SK extends S {
   @override
   String get mexico => "Mexiko";
   @override
+  String get no_connection_content => "Táto funkcia bez pripojenia na Internet nefunguje.";
+  @override
   String get subscription_disclaimer_ios => "Platba bude účtovaná vášmu Apple ID účtu po potvrdení nákupu. Predplatné sa automaticky obnovuje, pokiaľ nie je zrušené najmenej 24 hodín pred koncom aktuálneho obdobia. Nové predplatné bude účtované do 24 hodín pred koncom aktuálneho obdobia. Svoje odbery môžete spravovať a zrušiť tak, že po zakúpení prejdete do nastavenia účtu na App Store.";
   @override
   String get siberia => "Sibír";
@@ -7642,13 +7895,19 @@ class $sk_SK extends S {
   @override
   String get plant_flower => "Kvety";
   @override
+  String get no_connection_title => "Pripojenie";
+  @override
   String get filter_habitat => "biotop";
+  @override
+  String get scale_down_photos_title => "Zmenšiť fotografie z pozorovania";
   @override
   String get rate_never => "Nikdy";
   @override
   String get northwestern_pacific => "Severozápadné Tichomorie";
   @override
   String get plant_stem => "Stonka";
+  @override
+  String get auth_resend_email => "Preposlať email";
   @override
   String get no => "Nie";
   @override
@@ -7662,7 +7921,7 @@ class $sk_SK extends S {
   @override
   String get taxonomy_tribus => "skupina";
   @override
-  String get auth_resend_code => "Znova odoslať kód";
+  String get auth_resend_code => "Preposlať kód";
   @override
   String get rate_later => "Neskôr";
   @override
@@ -7680,11 +7939,13 @@ class $sk_SK extends S {
   @override
   String get filter_distribution => "distribúcia";
   @override
-  String get feedback_buy_extended => "Môžete si kúpiť funkcie navyše ako napríklad ofline režim, vyhľadávanie v názvoch a v taxonómii, pozorovania a nastaviteľný filter.";
+  String get feedback_buy_extended => "Môžete si kúpiť funkcie navyše ako napríklad offline režim, vyhľadávanie v názvoch a v taxonómii, vyhľadávanie pomocou fotografie, pozorovania a nastaviteľný filter.";
   @override
   String get north_central_usa => "Stredosever USA";
   @override
   String get improve_translation => "Vylepšiť preklad";
+  @override
+  String get favorite_no_login => "Zoznam obľúbených kvetov je dostupný len pre prihlásených používateľov. Prihláste sa, prosím .";
   @override
   String get observation_delete_question => "Chcete zmazať pozorovanie?";
   @override
@@ -7830,11 +8091,15 @@ class $es_ES extends S {
   @override
   String get south_central_pacific => "Pacífico Sur-Central";
   @override
+  String get favorite_empty => "No hay flores favoritas todavía.";
+  @override
   String get product_custom_filter_description => "Podrás cambiar el orden predeterminado y la cantidad de filtros (color, localidad, pétalo, distribución).";
   @override
   String get auth_password_hint => "Contraseña";
   @override
   String get habitat_meadow => "prado o pradera";
+  @override
+  String get observation_missing_photo => "La observación fue incompleta por lo que no se salvó. Falta la foto.";
   @override
   String get auth_google => "Iniciar sesión con Google";
   @override
@@ -7843,6 +8108,8 @@ class $es_ES extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Restaurar las compras";
+  @override
+  String get favorite_title => "Flores favoritas";
   @override
   String get auth_reset_password => "Restablecer la contraseña";
   @override
@@ -7902,6 +8169,8 @@ class $es_ES extends S {
   @override
   String get auth_email => "Iniciar sesión con el correo electrónico";
   @override
+  String get scale_down_photos_subtitle => "Encienda cuando no vea sus fotos después de la selección.";
+  @override
   String get arabian_peninsula => "Península Arábica";
   @override
   String get search_taxonomy => "Buscar en taxonomía";
@@ -7934,8 +8203,6 @@ class $es_ES extends S {
   @override
   String get product_search_title => "Búsqueda en nombres o taxonomía";
   @override
-  String get observation_not_saved => "La observación fue incompleta por lo que no se salvó. Falta la ubicación o la foto.";
-  @override
   String get feedback_review => "Puedes escribir una crítica positiva.";
   @override
   String get yes => "Sí";
@@ -7947,6 +8214,8 @@ class $es_ES extends S {
   String get china => "China";
   @override
   String get offline_title => "Modo offline";
+  @override
+  String get observation_missing_location => "La observación fue incompleta por lo que no se salvó. Falta la ubicación.";
   @override
   String get privacy_policy => "Política de privacidad";
   @override
@@ -8110,6 +8379,8 @@ class $es_ES extends S {
   @override
   String get mexico => "Méjico";
   @override
+  String get no_connection_content => "Esta característica no funciona sin conexión a Internet.";
+  @override
   String get snack_publish => "... para ser publicado más tarde";
   @override
   String get subscription_disclaimer_ios => "El pago se cargará a su cuenta de Apple ID después de la confirmación de la compra. La suscripción se renueva automáticamente a menos que se cancele al menos 24 horas antes del final del período actual. Se le cobrará a su cuenta la renovación dentro de las 24 horas anteriores al final del período actual. Puede administrar y cancelar sus suscripciones en la configuración de su cuenta en App Store después de la compra.";
@@ -8174,13 +8445,19 @@ class $es_ES extends S {
   @override
   String get plant_flower => "Flores";
   @override
+  String get no_connection_title => "Conexión";
+  @override
   String get filter_habitat => "localidad";
+  @override
+  String get scale_down_photos_title => "Reducir las fotos de observación";
   @override
   String get rate_never => "Nunca";
   @override
   String get northwestern_pacific => "Noroeste del Pacífico";
   @override
   String get plant_stem => "Tallo";
+  @override
+  String get auth_resend_email => "Reenviar correo electrónico";
   @override
   String get no => "No";
   @override
@@ -8212,11 +8489,13 @@ class $es_ES extends S {
   @override
   String get filter_distribution => "distribución";
   @override
-  String get feedback_buy_extended => "Puede comprar la versión extendida (+) con funcionalidad adicional como el modo fuera de línea, buscar en nombres, buscar en taxonomía, observaciones y filtros configurables.";
+  String get feedback_buy_extended => "Puede comprar funciones adicionales como el modo fuera de línea, buscar en nombres o en taxonomía, buscar por foto, observaciones y filtros configurables.";
   @override
   String get north_central_usa => "Norte central de los Estados Unidos";
   @override
   String get improve_translation => "Mejorar la traducción";
+  @override
+  String get favorite_no_login => "La lista de flores favoritas está disponible solo para usuarios registrados. Por favor Iniciar sesión.";
   @override
   String get observation_delete_question => "¿Quieres borrar la observación?";
   @override
@@ -8362,11 +8641,15 @@ class $nl_NL extends S {
   @override
   String get south_central_pacific => "Zuid-Central Stille Oceaan";
   @override
+  String get favorite_empty => "Er zijn nog geen favoriete bloemen.";
+  @override
   String get product_custom_filter_description => "U kunt de standaardvolgorde en het aantal filters wijzigen (kleur, standplaats, bloemblad, distributie).";
   @override
   String get auth_password_hint => "Wachtwoord";
   @override
   String get habitat_meadow => "weiden of graslanden";
+  @override
+  String get observation_missing_photo => "Observatie was onvolledig dus het werd niet opgeslagen. Foto ontbreekt.";
   @override
   String get auth_google => "Inloggen met Google";
   @override
@@ -8375,6 +8658,8 @@ class $nl_NL extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Herstel aankopen";
+  @override
+  String get favorite_title => "Favoriete bloemen";
   @override
   String get auth_reset_password => "Reset wachtwoord";
   @override
@@ -8434,6 +8719,8 @@ class $nl_NL extends S {
   @override
   String get auth_email => "Inloggen met e-mailadres";
   @override
+  String get scale_down_photos_subtitle => "Schakel in wanneer u uw foto's niet ziet nadat ze zijn gekozen.";
+  @override
   String get arabian_peninsula => "Arabisch Schiereiland";
   @override
   String get search_taxonomy => "Zoeken in taxonomie";
@@ -8466,8 +8753,6 @@ class $nl_NL extends S {
   @override
   String get product_search_title => "Zoeken in namen of taxonomie";
   @override
-  String get observation_not_saved => "Observatie was onvolledig dus het werd niet opgeslagen. Locatie of foto ontbreekt.";
-  @override
   String get feedback_review => "U kunt een positieve beoordeling schrijven.";
   @override
   String get yes => "Ja";
@@ -8479,6 +8764,8 @@ class $nl_NL extends S {
   String get china => "China";
   @override
   String get offline_title => "Offline modus";
+  @override
+  String get observation_missing_location => "Observatie was onvolledig dus het werd niet opgeslagen. Locatie ontbreekt.";
   @override
   String get privacy_policy => "Privacybeleid";
   @override
@@ -8642,6 +8929,8 @@ class $nl_NL extends S {
   @override
   String get mexico => "Mexico";
   @override
+  String get no_connection_content => "Deze functie werkt niet zonder internetverbinding.";
+  @override
   String get snack_publish => "... later worden gepubliceerd";
   @override
   String get subscription_disclaimer_ios => "De betaling wordt na de bevestiging van de aankoop in rekening gebracht op uw Apple ID-account. Abonnement wordt automatisch verlengd, tenzij het ten minste 24 uur voor het einde van de lopende periode wordt geannuleerd. Uw account wordt binnen 24 uur voorafgaand aan het einde van de lopende periode in rekening gebracht voor verlenging. U kunt uw abonnementen beheren en annuleren door na aankoop naar uw accountinstellingen op de App Store te gaan.";
@@ -8706,13 +8995,19 @@ class $nl_NL extends S {
   @override
   String get plant_flower => "Bloemen";
   @override
+  String get no_connection_title => "Verbinding";
+  @override
   String get filter_habitat => "standplaats";
+  @override
+  String get scale_down_photos_title => "Foto's van waarnemingen verkleinen";
   @override
   String get rate_never => "Nooit";
   @override
   String get northwestern_pacific => "Northwestern Stille Oceaan";
   @override
   String get plant_stem => "Stengel";
+  @override
+  String get auth_resend_email => "Email opnieuw verzenden";
   @override
   String get no => "Nee";
   @override
@@ -8744,11 +9039,13 @@ class $nl_NL extends S {
   @override
   String get filter_distribution => "distributie";
   @override
-  String get feedback_buy_extended => "U kunt een uitgebreide versie kopen met extra functionaliteit zoals de offline modus, zoeken in namen, zoeken in taxonomie, observaties en configureerbare filter.";
+  String get feedback_buy_extended => "U kunt extra functies kopen, zoals de offline modus, zoeken in namen of in taxonomie, zoeken op foto, observaties en configureerbare filters.";
   @override
   String get north_central_usa => "Noord-Centraal VS";
   @override
   String get improve_translation => "Verbeter vertaling";
+  @override
+  String get favorite_no_login => "Lijst met favoriete bloemen is alleen beschikbaar voor aangemelde gebruikers. Log alstublieft in.";
   @override
   String get observation_delete_question => "Wilt u de observatie verwijderen?";
   @override
@@ -8894,11 +9191,15 @@ class $pa_IN extends S {
   @override
   String get south_central_pacific => "ਦੱਖਣੀ-ਕੇਂਦਰੀ ਪੈਸੀਫਿਕ";
   @override
+  String get favorite_empty => "ਹਾਲੇ ਤੱਕ ਕੋਈ ਪਸੰਦੀਦਾ ਫੁੱਲ ਨਹੀਂ ਹੈ.";
+  @override
   String get product_custom_filter_description => "ਤੁਸੀਂ ਡਿਫਾਲਟ ਆਰਡਰ ਅਤੇ ਫਿਲਟਰਸ ਦੀ ਗਿਣਤੀ (ਰੰਗ, ਆਵਾਸ, ਪੱਟੇਲ, ਵੰਡ) ਨੂੰ ਬਦਲਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ.";
   @override
   String get auth_password_hint => "ਪਾਸਵਰਡ";
   @override
   String get habitat_meadow => "ਅਨੁਵਾਦ ਸੁਧਾਰੋ";
+  @override
+  String get observation_missing_photo => "ਨਜ਼ਰਅੰਦਾਜ਼ੀ ਅਧੂਰੀ ਸੀ ਇਸ ਲਈ ਇਸ ਨੂੰ ਨਹੀਂ ਬਚਾਇਆ ਗਿਆ ਸੀ. ਫੋਟੋ ਲਾਪਤਾ ਹੈ";
   @override
   String get auth_google => "Google ਦੇ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ";
   @override
@@ -8907,6 +9208,8 @@ class $pa_IN extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "ਖ਼ਰੀਦਾਂ ਨੂੰ ਰੀਸਟੋਰ ਕਰੋ";
+  @override
+  String get favorite_title => "ਪਸੰਦੀਦਾ ਫੁੱਲ";
   @override
   String get auth_reset_password => "ਪਾਸਵਰਡ ਰੀਸੈਟ ਕਰੋ";
   @override
@@ -8966,6 +9269,8 @@ class $pa_IN extends S {
   @override
   String get auth_email => "ਈਮੇਲ ਦੇ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ";
   @override
+  String get scale_down_photos_subtitle => "ਜਦੋਂ ਤੁਸੀਂ ਚੁੱਕਣ ਤੋਂ ਬਾਅਦ ਆਪਣੀਆਂ ਫੋਟੋਆਂ ਨਹੀਂ ਦੇਖਦੇ ਤਾਂ ਇਸਨੂੰ ਚਾਲੂ ਕਰੋ";
+  @override
   String get arabian_peninsula => "ਅਰਬੀ ਪ੍ਰਾਇਦੀਪ";
   @override
   String get search_taxonomy => "ਟੈਕਸੋਨੀਟੀ ਵਿੱਚ ਖੋਜ ਕਰੋ";
@@ -8998,8 +9303,6 @@ class $pa_IN extends S {
   @override
   String get product_search_title => "ਨਾਮਾਂ ਜਾਂ ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਲੱਭੋ";
   @override
-  String get observation_not_saved => "ਨਜ਼ਰਅੰਦਾਜ਼ੀ ਅਧੂਰੀ ਸੀ ਇਸ ਲਈ ਇਸ ਨੂੰ ਨਹੀਂ ਬਚਾਇਆ ਗਿਆ ਸੀ. ਸਥਾਨ ਜਾਂ ਫੋਟੋ ਗੁੰਮ ਹੈ";
-  @override
   String get feedback_review => "ਤੁਸੀਂ ਇੱਕ ਸਕਾਰਾਤਮਕ ਸਮੀਖਿਆ ਲਿਖ ਸਕਦੇ ਹੋ.";
   @override
   String get yes => "ਹਾਂ";
@@ -9011,6 +9314,8 @@ class $pa_IN extends S {
   String get china => "ਚੀਨ";
   @override
   String get offline_title => "ਔਫਲਾਈਨ ਮੋਡ";
+  @override
+  String get observation_missing_location => "ਨਜ਼ਰਅੰਦਾਜ਼ੀ ਅਧੂਰੀ ਸੀ ਇਸ ਲਈ ਇਸ ਨੂੰ ਨਹੀਂ ਬਚਾਇਆ ਗਿਆ ਸੀ. ਸਥਾਨ ਗੁੰਮ ਹੈ";
   @override
   String get privacy_policy => "ਪਰਾਈਵੇਟ ਨੀਤੀ";
   @override
@@ -9174,6 +9479,8 @@ class $pa_IN extends S {
   @override
   String get mexico => "ਮੈਕਸੀਕੋ";
   @override
+  String get no_connection_content => "ਇਹ ਵਿਸ਼ੇਸ਼ਤਾ ਇੰਟਰਨੈਟ ਕਨੈਕਸ਼ਨ ਤੋਂ ਬਿਨਾਂ ਕੰਮ ਨਹੀਂ ਕਰਦਾ.";
+  @override
   String get snack_publish => "... ਬਾਅਦ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤੇ ਜਾਣ ਲਈ";
   @override
   String get subscription_disclaimer_ios => "ਭੁਗਤਾਨ ਦੀ ਪੁਸ਼ਟੀ ਤੋਂ ਬਾਅਦ ਭੁਗਤਾਨ ਨੂੰ ਤੁਹਾਡੇ Apple ID ਖਾਤੇ ਵਿੱਚ ਚਾਰਜ ਕੀਤਾ ਜਾਵੇਗਾ. ਗਾਹਕੀ ਆਪਣੇ ਆਪ ਤਾਜ਼ਾ ਹੋ ਜਾਂਦੀ ਹੈ ਜਦੋਂ ਤਕ ਇਹ ਚਾਲੂ ਮਿਆਦ ਦੇ ਸਮਾਪਤ ਹੋਣ ਤੋਂ ਘੱਟੋ-ਘੱਟ 24 ਘੰਟੇ ਰੱਦ ਨਹੀਂ ਹੁੰਦੀ. ਤੁਹਾਡੇ ਅਕਾਉਂਟ ਨੂੰ ਮੌਜੂਦਾ ਸਮੇਂ ਦੇ ਅੰਤ ਤੋਂ 24 ਘੰਟਿਆਂ ਦੇ ਅੰਦਰ ਅੰਦਰ ਨਵੀਨੀਕਰਨ ਲਈ ਚਾਰਜ ਕੀਤਾ ਜਾਵੇਗਾ. ਤੁਸੀਂ ਖਰੀਦਣ ਤੋਂ ਬਾਅਦ App Store 'ਤੇ ਆਪਣੀ ਖਾਤਾ ਸੈਟਿੰਗਜ਼ ਤੇ ਜਾ ਕੇ ਆਪਣੀ ਗਾਹਕੀ ਦਾ ਪ੍ਰਬੰਧਨ ਅਤੇ ਰੱਦ ਕਰ ਸਕਦੇ ਹੋ.";
@@ -9238,13 +9545,19 @@ class $pa_IN extends S {
   @override
   String get plant_flower => "ਫੁੱਲ";
   @override
+  String get no_connection_title => "ਕੁਨੈਕਸ਼ਨ";
+  @override
   String get filter_habitat => "ਆਵਾਸ";
+  @override
+  String get scale_down_photos_title => "ਨਿਰੀਖਣ ਦੇ ਫੋਟੋਆਂ ਨੂੰ ਸਕੇਲ ਕਰੋ";
   @override
   String get rate_never => "ਕਦੇ ਨਹੀਂ";
   @override
   String get northwestern_pacific => "ਉੱਤਰੀ ਪੱਛਮੀ ਪੈਸੀਫਿਕ";
   @override
   String get plant_stem => "ਸਟੈਮ";
+  @override
+  String get auth_resend_email => "ਈਮੇਲ ਦੁਬਾਰਾ ਭੇਜੋ";
   @override
   String get no => "ਨਹੀਂ";
   @override
@@ -9276,11 +9589,13 @@ class $pa_IN extends S {
   @override
   String get filter_distribution => "ਵੰਡ";
   @override
-  String get feedback_buy_extended => "ਤੁਸੀਂ ਅਤਿਰਿਕਤ ਫੰਕਸ਼ਨ ਜਿਵੇਂ ਐੱਮਲਾਈਨ ਮੋਡ, ਐਕਸਟੈਨਸ਼ਨ, ਨਾਮਾਂ ਦੀ ਖੋਜ, ਟੈਕਸਸੋਨੀਓ ਵਿੱਚ ਖੋਜ, ਨਿਰੀਖਣ ਅਤੇ ਕਨਫ਼ੀਗਰੇਬਲ ਫਿਲਟਰ ਨਾਲ ਐਕਸਟੈਂਡਡ ਵਰਜ਼ਨ ਖਰੀਦ ਸਕਦੇ ਹੋ.";
+  String get feedback_buy_extended => "ਤੁਸੀਂ ਅਤਿਰਿਕਤ ਕਾਰਜਸ਼ੀਲਤਾ ਜਿਵੇਂ ਆਫਲਾਈਨ ਮੋਡ ਖਰੀਦ ਸਕਦੇ ਹੋ, ਨਾਵਾਂ ਜਾਂ ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਖੋਜ ਕਰ ਸਕਦੇ ਹੋ, ਤਸਵੀਰਾਂ, ਨਿਰਣਿਆਂ ਅਤੇ ਸੰਰਚਨਾ ਯੋਗ ਫਿਲਟਰ ਦੁਆਰਾ ਖੋਜ ਕਰ ਸਕਦੇ ਹੋ.";
   @override
   String get north_central_usa => "ਉੱਤਰੀ-ਕੇਂਦਰੀ ਅਮਰੀਕਾ";
   @override
   String get improve_translation => "ਅਨੁਵਾਦ ਸੁਧਾਰੋ";
+  @override
+  String get favorite_no_login => "ਮਨਪਸੰਦ ਫੁੱਲ ਦੀ ਸੂਚੀ ਕੇਵਲ ਲੌਗ ਕੀਤੇ ਉਪਭੋਗਤਾਵਾਂ ਲਈ ਉਪਲਬਧ ਹੈ. ਕਿਰਪਾ ਕਰਕੇ ਲੌਗਇਨ ਕਰੋ.";
   @override
   String get observation_delete_question => "ਕੀ ਤੁਸੀਂ ਨਿਰੀਖਣ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?";
   @override
@@ -9426,11 +9741,15 @@ class $sv_SE extends S {
   @override
   String get south_central_pacific => "Syd centrala Stilla havet";
   @override
+  String get favorite_empty => "Det finns inga favoritblommor än.";
+  @override
   String get product_custom_filter_description => "Du kan ändra standardordning och antal filter (färg, växtplats, kronblad, distribution).";
   @override
   String get auth_password_hint => "Lösenord";
   @override
   String get habitat_meadow => "ängar eller gräsmarker";
+  @override
+  String get observation_missing_photo => "Observationen var ofullständig så att den inte sparades. Foto saknas.";
   @override
   String get auth_google => "Logga in med Google";
   @override
@@ -9439,6 +9758,8 @@ class $sv_SE extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Återställa köp";
+  @override
+  String get favorite_title => "Favoritblommor";
   @override
   String get auth_reset_password => "Återställ lösenord";
   @override
@@ -9498,6 +9819,8 @@ class $sv_SE extends S {
   @override
   String get auth_email => "Logga in med e-post";
   @override
+  String get scale_down_photos_subtitle => "Slå på när du inte ser dina foton efter val.";
+  @override
   String get arabian_peninsula => "Arabiska halvön";
   @override
   String get search_taxonomy => "Sök i taxonomi";
@@ -9530,8 +9853,6 @@ class $sv_SE extends S {
   @override
   String get product_search_title => "Sök i namn eller taxonomi";
   @override
-  String get observation_not_saved => "Observationen var ofullständig så att den inte sparades. Plats eller foto saknas.";
-  @override
   String get feedback_review => "Du kan skriva en positiv recension.";
   @override
   String get yes => "Ja";
@@ -9543,6 +9864,8 @@ class $sv_SE extends S {
   String get china => "Kina";
   @override
   String get offline_title => "Offlineläge";
+  @override
+  String get observation_missing_location => "Observationen var ofullständig så att den inte sparades. Plats saknas.";
   @override
   String get privacy_policy => "Integritetspolicy";
   @override
@@ -9706,6 +10029,8 @@ class $sv_SE extends S {
   @override
   String get mexico => "Mexico";
   @override
+  String get no_connection_content => "Den här funktionen fungerar inte utan Internetanslutning.";
+  @override
   String get snack_publish => "... att publiceras senare";
   @override
   String get subscription_disclaimer_ios => "Betalningen debiteras på ditt Apple ID-konto efter bekräftelse på köp. Prenumerationen förnyas automatiskt om den inte längre är inställd minst 24 timmar före slutet av den aktuella perioden. Ditt konto debiteras för förnyelse inom 24 timmar före slutet av den aktuella perioden. Du kan hantera och avbryta dina prenumerationer genom att gå till dina kontoinställningar på App Store efter inköpet.";
@@ -9770,13 +10095,19 @@ class $sv_SE extends S {
   @override
   String get plant_flower => "Blomma";
   @override
+  String get no_connection_title => "Förbindelse";
+  @override
   String get filter_habitat => "växtplats";
+  @override
+  String get scale_down_photos_title => "Skala ner observationens foton";
   @override
   String get rate_never => "Aldrig";
   @override
   String get northwestern_pacific => "Nordvästra Stilla havet";
   @override
   String get plant_stem => "Stjälk";
+  @override
+  String get auth_resend_email => "Skicka email igen";
   @override
   String get no => "Nej";
   @override
@@ -9808,11 +10139,13 @@ class $sv_SE extends S {
   @override
   String get filter_distribution => "distribution";
   @override
-  String get feedback_buy_extended => "Du kan köpa utökad version med ytterligare funktioner som offline-läge, sök i namn, sök i taxonomi, observationer och konfigurerbart filter.";
+  String get feedback_buy_extended => "Du kan köpa ytterligare funktioner som offline-läge, söka i namn eller i taxonomi, söka efter foto, observationer och konfigurerbart filter.";
   @override
   String get north_central_usa => "Nord-Central USA";
   @override
   String get improve_translation => "Förbättra translation";
+  @override
+  String get favorite_no_login => "Lista över favoritblommor är endast tillgänglig för inloggade användare. Vänligen logga in.";
   @override
   String get observation_delete_question => "Vill du radera observationen?";
   @override
@@ -9958,11 +10291,15 @@ class $da_DK extends S {
   @override
   String get south_central_pacific => "Syd-Central Stillehavet";
   @override
+  String get favorite_empty => "Der er endnu ingen favorit blomster.";
+  @override
   String get product_custom_filter_description => "Du kan ændre standardordre og antal filtre (farve, vækststeder, kronblad, fordeling).";
   @override
   String get auth_password_hint => "Adgangskode";
   @override
   String get habitat_meadow => "enge eller overdrev";
+  @override
+  String get observation_missing_photo => "Observationen var ufuldstændig, så den blev ikke reddet. Foto mangler.";
   @override
   String get auth_google => "Log ind med Google";
   @override
@@ -9971,6 +10308,8 @@ class $da_DK extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Genoprette indkøb";
+  @override
+  String get favorite_title => "Favorit blomster";
   @override
   String get auth_reset_password => "Nulstille kodeord";
   @override
@@ -10030,6 +10369,8 @@ class $da_DK extends S {
   @override
   String get auth_email => "Log ind med mail";
   @override
+  String get scale_down_photos_subtitle => "Tænd, når du ikke kan se dine billeder efter valg.";
+  @override
   String get arabian_peninsula => "Den arabiske halvø";
   @override
   String get search_taxonomy => "Søg i taksonomi";
@@ -10062,8 +10403,6 @@ class $da_DK extends S {
   @override
   String get product_search_title => "Søg i navne eller taksonomi";
   @override
-  String get observation_not_saved => "Observationen var ufuldstændig, så den blev ikke reddet. Placering eller foto mangler.";
-  @override
   String get feedback_review => "Du kan skrive en positiv anmeldelse.";
   @override
   String get yes => "Ja";
@@ -10075,6 +10414,8 @@ class $da_DK extends S {
   String get china => "Kina";
   @override
   String get offline_title => "Offline-tilstand";
+  @override
+  String get observation_missing_location => "Observationen var ufuldstændig, så den blev ikke reddet. Placering mangler.";
   @override
   String get privacy_policy => "Fortrolighedspolitik";
   @override
@@ -10234,6 +10575,8 @@ class $da_DK extends S {
   @override
   String get mexico => "Mexico";
   @override
+  String get no_connection_content => "Denne funktion virker ikke uden internetforbindelse.";
+  @override
   String get snack_publish => "... offentliggøres senere";
   @override
   String get subscription_disclaimer_ios => "Betaling vil blive opkrævet på din Apple ID-konto efter bekræftelse af køb. Abonnementet fornyes automatisk, medmindre det annulleres mindst 24 timer inden udgangen af den aktuelle periode. Din konto vil blive opkrævet for fornyelse inden for 24 timer inden udgangen af den aktuelle periode. Du kan administrere og annullere dine abonnementer ved at gå til dine kontoindstillinger på App Store efter køb.";
@@ -10298,13 +10641,19 @@ class $da_DK extends S {
   @override
   String get plant_flower => "Blomstre";
   @override
+  String get no_connection_title => "Forbindelse";
+  @override
   String get filter_habitat => "vækststeder";
+  @override
+  String get scale_down_photos_title => "Skal ned observationens fotos";
   @override
   String get rate_never => "Aldrig";
   @override
   String get northwestern_pacific => "Nordvestlige Stillehavet";
   @override
   String get plant_stem => "Stængel";
+  @override
+  String get auth_resend_email => "Send e-mail igen";
   @override
   String get no => "Ingen";
   @override
@@ -10336,11 +10685,13 @@ class $da_DK extends S {
   @override
   String get filter_distribution => "fordeling";
   @override
-  String get feedback_buy_extended => "Du kan købe udvidet (+) version med ekstra funktionalitet som offline-tilstand, søge i navne, søge i taksonomi, observationer og konfigurerbart filter.";
+  String get feedback_buy_extended => "Du kan købe yderligere funktioner som offline-tilstand, søge i navne eller i taxonomi, søge efter foto, observationer og konfigurerbart filter.";
   @override
   String get north_central_usa => "Nord-Central USA";
   @override
   String get improve_translation => "Forbedre oversættelse";
+  @override
+  String get favorite_no_login => "Liste over foretrukne blomster er kun tilgængelig for logget brugere. Vær venlig at logge ind.";
   @override
   String get observation_delete_question => "Vil du slette observationen?";
   @override
@@ -10486,11 +10837,15 @@ class $fa_IR extends S {
   @override
   String get south_central_pacific => "جنوب آسیا اقیانوس آرام";
   @override
+  String get favorite_empty => "گل های مورد علاقه هنوز وجود ندارد.";
+  @override
   String get product_custom_filter_description => "شما می توانید سفارش پیش فرض و تعداد فیلترها (رنگ، زیستگاه ها، گلبرگ، توزیع) را تغییر دهید.";
   @override
   String get auth_password_hint => "گذرواژه";
   @override
   String get habitat_meadow => "چمنزارها یا چمنزارها";
+  @override
+  String get observation_missing_photo => "نظارت ناقص بود بنابراین ذخیره نشد. عکس گم شده است";
   @override
   String get auth_google => "ورود به سیستم با Google‎";
   @override
@@ -10499,6 +10854,8 @@ class $fa_IR extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "بازگرداندن خرید";
+  @override
+  String get favorite_title => "گل های مورد علاقه";
   @override
   String get auth_reset_password => "بازنشانی گذرواژه";
   @override
@@ -10556,6 +10913,8 @@ class $fa_IR extends S {
   @override
   String get auth_email => "ورود به سیستم با ایمیل";
   @override
+  String get scale_down_photos_subtitle => "هنگامی که عکس های خود را پس از انتخاب نمی بینید، روشن کنید.";
+  @override
   String get arabian_peninsula => "شبه جزیره عربی";
   @override
   String get search_taxonomy => "جستجو در طبقه بندی";
@@ -10588,8 +10947,6 @@ class $fa_IR extends S {
   @override
   String get product_search_title => "جستجو در نام یا طبقه بندی";
   @override
-  String get observation_not_saved => "نظارت ناقص بود بنابراین ذخیره نشد. مکان یا عکس گم شده است";
-  @override
   String get feedback_review => "شما می توانید یک بررسی مثبت بنویسید.";
   @override
   String get yes => "بله";
@@ -10599,6 +10956,8 @@ class $fa_IR extends S {
   String get china => "چين";
   @override
   String get offline_title => "حالت آفلاین";
+  @override
+  String get observation_missing_location => "نظارت ناقص بود بنابراین ذخیره نشد. مکان از دست رفته است";
   @override
   String get privacy_policy => "سیاست حفظ حریم خصوصی";
   @override
@@ -10762,6 +11121,8 @@ class $fa_IR extends S {
   @override
   String get mexico => "مکزیک";
   @override
+  String get no_connection_content => "این ویژگی بدون اتصال به اینترنت کار نمی کند.";
+  @override
   String get snack_publish => "بعدا منتشر شود";
   @override
   String get subscription_disclaimer_ios => "30پرداخت پس از تأیید خرید به حساب Apple ID پرداخت می شود. اشتراک به صورت خودکار تجدید می شود مگر اینکه آن حداقل 24 ساعت قبل از پایان دوره فعلی لغو شود. حساب شما برای تمدید ظرف 24 ساعت قبل از پایان دوره جاری تادیه خواهد شد. شما می توانید اشتراک خود را با رفتن به تنظیمات حساب کاربری خود در App Store پس از خرید، مدیریت کنید و لغو کنید.";
@@ -10826,13 +11187,19 @@ class $fa_IR extends S {
   @override
   String get plant_flower => "گل ها";
   @override
+  String get no_connection_title => "ارتباط";
+  @override
   String get filter_habitat => "زیستگاه ها";
+  @override
+  String get scale_down_photos_title => "مقیاس عکس های مشاهده";
   @override
   String get rate_never => "هرگز";
   @override
   String get northwestern_pacific => "شمال غرب اقیانوس آرام";
   @override
   String get plant_stem => "ساقه";
+  @override
+  String get auth_resend_email => "ایمیل را دوباره ارسال کن";
   @override
   String get no => "نه";
   @override
@@ -10864,11 +11231,13 @@ class $fa_IR extends S {
   @override
   String get filter_distribution => "توزیع";
   @override
-  String get feedback_buy_extended => "شما می توانید نسخه پیشرفته با قابلیت های اضافی مانند حالت آفلاین، جستجو در اسامی، جستجو در طبقه بندی، مشاهدات و فیلتر قابل تنظیم را خریداری کنید.";
+  String get feedback_buy_extended => "شما می توانید از ویژگی های اضافی مانند حالت آفلاین، جستجو در نام و یا در طبقه بندی، جستجوی عکس، مشاهدات و فیلتر قابل تنظیم کنید.";
   @override
   String get north_central_usa => "مرکزی ایالات متحده آمریکا";
   @override
   String get improve_translation => "بهبود ترجمه";
+  @override
+  String get favorite_no_login => "لیست گل های مورد علاقه تنها برای کاربران وارد شده در دسترس است. لطفا وارد شوید.";
   @override
   String get observation_delete_question => "میخواهید مشاهدات را حذف کنید؟";
   @override
@@ -11014,11 +11383,15 @@ class $sr_RS extends S {
   @override
   String get south_central_pacific => "Јужно-централни Пацифик";
   @override
+  String get favorite_empty => "Још нема омиљено цвеће.";
+  @override
   String get product_custom_filter_description => "Моћи ћете да промените редослед и број филтера (боја, станиште, латица, дистрибуција).";
   @override
   String get auth_password_hint => "Лозинка";
   @override
   String get habitat_meadow => "ливаде или пашњаци";
+  @override
+  String get observation_missing_photo => "Опажање је било непотпуно, тако да није било спашено. Недостаје фотографија.";
   @override
   String get auth_google => "Пријави ме помоћу Google-а";
   @override
@@ -11027,6 +11400,8 @@ class $sr_RS extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Враћање куповине";
+  @override
+  String get favorite_title => "Омиљено цвеће";
   @override
   String get auth_reset_password => "Ресетуј лозинка";
   @override
@@ -11086,6 +11461,8 @@ class $sr_RS extends S {
   @override
   String get auth_email => "Пријави ме помоћу имејла";
   @override
+  String get scale_down_photos_subtitle => "Укључите када не видите своје фотографије након одабира.";
+  @override
   String get arabian_peninsula => "Арабијско полуострво";
   @override
   String get search_taxonomy => "Тражи у таксономији";
@@ -11118,8 +11495,6 @@ class $sr_RS extends S {
   @override
   String get product_search_title => "Претражујте имена или таксономију";
   @override
-  String get observation_not_saved => "Опажање је било непотпуно, тако да није било спашено. Недостаје локација или фотографија.";
-  @override
   String get feedback_review => "Можете написати позитивну рецензију.";
   @override
   String get yes => "Да";
@@ -11131,6 +11506,8 @@ class $sr_RS extends S {
   String get china => "Кина";
   @override
   String get offline_title => "Режим ван мреже";
+  @override
+  String get observation_missing_location => "Опажање је било непотпуно, тако да није било спашено. Недостаје локација.";
   @override
   String get privacy_policy => "Правила о приватности";
   @override
@@ -11294,6 +11671,8 @@ class $sr_RS extends S {
   @override
   String get mexico => "Мексико";
   @override
+  String get no_connection_content => "Ова функција не функционише без везе са Интернетом.";
+  @override
   String get snack_publish => "... да се касније објави";
   @override
   String get subscription_disclaimer_ios => "Плаћање ће бити наплаћено на вашем Аппле ИД рачуну након потврде куповине. Претплата се аутоматски обнавља, осим ако није отказана најмање 24 сата прије краја текућег периода. Ваш рачун ће бити наплаћен за обнављање у року од 24 сата прије краја текућег периода. Можете да управљате и откажете своје претплате тако што ћете након куповине отићи на подешавања налога на Апп Сторе.";
@@ -11358,13 +11737,19 @@ class $sr_RS extends S {
   @override
   String get plant_flower => "Цвеће";
   @override
+  String get no_connection_title => "Цоннецтион";
+  @override
   String get filter_habitat => "станиште";
+  @override
+  String get scale_down_photos_title => "Смањите фотографије посматрања";
   @override
   String get rate_never => "Никад";
   @override
   String get northwestern_pacific => "Северозападни Пацифик";
   @override
   String get plant_stem => "Стабло";
+  @override
+  String get auth_resend_email => "Поново пошаљи е-маил";
   @override
   String get no => "Не";
   @override
@@ -11396,11 +11781,13 @@ class $sr_RS extends S {
   @override
   String get filter_distribution => "дистрибуција";
   @override
-  String get feedback_buy_extended => "Можете купити проширену верзију са додатном функционалношћу као што је оффлине режим, тражити имена, претраживати у таксономији, опажањима и конфигурирати филтер.";
+  String get feedback_buy_extended => "Можете да купите додатне функционалности као што је „оффлине“ начин рада, да тражите у именима или у таксономији, претражујете по фотографијама, посматрањима и филтерима који се могу конфигурисати.";
   @override
   String get north_central_usa => "Северна централна САД";
   @override
   String get improve_translation => "Побољшати транслатион";
+  @override
+  String get favorite_no_login => "Листа омиљених цвећа доступна је само за пријављене кориснике. Молимо вас да се пријавите.";
   @override
   String get observation_delete_question => "Желите ли избрисати опажање?";
   @override
@@ -11451,6 +11838,12 @@ class $en_UK extends S {
 
   @override
   String get color_message => "What's the colour of the flower? Choose the closest one.";
+  @override
+  String get favorite_no_login => "List of favourite flowers is available only for logged users. Please log in.";
+  @override
+  String get favorite_title => "Favourite flowers";
+  @override
+  String get favorite_empty => "There is no favourite flowers yet.";
   @override
   String get filter_color => "colour";
 }
@@ -11562,11 +11955,15 @@ class $fi_FI extends S {
   @override
   String get south_central_pacific => "Etelä Keski-Tyynenmeren";
   @override
+  String get favorite_empty => "Ei ole vielä suosikkikukkia.";
+  @override
   String get product_custom_filter_description => "Voit muuttaa oletusjärjestystä ja suodattimien määrää (väri, kasvupaikka, teriö, jakelu).";
   @override
   String get auth_password_hint => "Salasana";
   @override
   String get habitat_meadow => "niityt";
+  @override
+  String get observation_missing_photo => "Havainto epätäydellinen, joten sitä ei tallennettu. Kuva puuttuu.";
   @override
   String get auth_google => "Kirjaudu Google-tilillä";
   @override
@@ -11575,6 +11972,8 @@ class $fi_FI extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Palauttaa ostot";
+  @override
+  String get favorite_title => "Suosikki kukat";
   @override
   String get auth_reset_password => "Nollaa salasana";
   @override
@@ -11634,6 +12033,8 @@ class $fi_FI extends S {
   @override
   String get auth_email => "Kirjaudu sähköpostilla";
   @override
+  String get scale_down_photos_subtitle => "Kytke päälle, kun et näe valokuvia valinnan jälkeen.";
+  @override
   String get arabian_peninsula => "Arabian niemimaalla";
   @override
   String get search_taxonomy => "Hae taksonomiassa";
@@ -11666,8 +12067,6 @@ class $fi_FI extends S {
   @override
   String get product_search_title => "Hae nimistä tai taksonomiasta";
   @override
-  String get observation_not_saved => "Havainto epätäydellinen, joten sitä ei tallennettu. Sijainti tai valokuva puuttuu.";
-  @override
   String get feedback_review => "Voit kirjoittaa positiivisen tarkistuksen.";
   @override
   String get yes => "Joo";
@@ -11679,6 +12078,8 @@ class $fi_FI extends S {
   String get china => "Kiina";
   @override
   String get offline_title => "Offline-tila";
+  @override
+  String get observation_missing_location => "Havainto epätäydellinen, joten sitä ei tallennettu. Sijainti puuttuu.";
   @override
   String get privacy_policy => "Tietosuojakäytäntö";
   @override
@@ -11842,6 +12243,8 @@ class $fi_FI extends S {
   @override
   String get mexico => "Meksiko";
   @override
+  String get no_connection_content => "Tämä ominaisuus ei toimi ilman Internet-yhteyttä.";
+  @override
   String get snack_publish => "... julkaistaan myöhemmin";
   @override
   String get subscription_disclaimer_ios => "Maksu veloitetaan Apple ID -tiliisi oston vahvistuksen jälkeen. Tilaus uusitaan automaattisesti, ellei sitä peruuteta vähintään 24 tuntia ennen nykyisen kauden päättymistä. Tilisi veloitetaan uusimisesta 24 tunnin kuluessa ennen nykyisen kauden päättymistä. Voit hallita ja peruuttaa tilauksesi siirtymällä App Store-tilisi tiliasetuksiin oston jälkeen.";
@@ -11906,13 +12309,19 @@ class $fi_FI extends S {
   @override
   String get plant_flower => "Kukka";
   @override
+  String get no_connection_title => "Yhteys";
+  @override
   String get filter_habitat => "kasvupaikka";
+  @override
+  String get scale_down_photos_title => "Pienennä havaintojen kuvia";
   @override
   String get rate_never => "Ei ikinä";
   @override
   String get northwestern_pacific => "Luoteis-Tyynenmeren";
   @override
   String get plant_stem => "Varsi";
+  @override
+  String get auth_resend_email => "Lähetä uudelleen sähköposti";
   @override
   String get no => "Ei";
   @override
@@ -11926,7 +12335,7 @@ class $fi_FI extends S {
   @override
   String get taxonomy_tribus => "Tribus";
   @override
-  String get auth_resend_code => "Lähetä koodi uudelleen";
+  String get auth_resend_code => "Lähetä uudelleen koodi";
   @override
   String get rate_later => "Myöhemmin";
   @override
@@ -11944,11 +12353,13 @@ class $fi_FI extends S {
   @override
   String get filter_distribution => "jakelu";
   @override
-  String get feedback_buy_extended => "Voit ostaa laajennettua versiota, jossa on lisätoimintoja, kuten offline-tilassa, etsiä nimiä, etsiä taksonomiassa, havainnoissa ja konfiguroitavissa olevassa suodattimessa.";
+  String get feedback_buy_extended => "Voit ostaa lisätoimintoja, kuten offline-tilassa, etsiä nimissä tai taksonomiassa, etsiä valokuvien, havaintojen ja konfiguroitavan suodattimen avulla.";
   @override
   String get north_central_usa => "Pohjois-Keski-USA";
   @override
   String get improve_translation => "Parantamaan käännösten";
+  @override
+  String get favorite_no_login => "Suosikkikukkien luettelo on käytettävissä vain kirjautuneille käyttäjille. Kirjaudu sisään, ole hyvä.";
   @override
   String get observation_delete_question => "Haluatko poistaa havainnon?";
   @override
@@ -12094,11 +12505,15 @@ class $hr_HR extends S {
   @override
   String get south_central_pacific => "Južno-središnji Tihi ocean";
   @override
+  String get favorite_empty => "Još nema omiljenog cvijeća.";
+  @override
   String get product_custom_filter_description => "Moći ćete promijeniti zadani redoslijed i broj filtara (boja, stanište, latica, distribucija).";
   @override
   String get auth_password_hint => "Zaporka";
   @override
   String get habitat_meadow => "livade ili pašnjaci";
+  @override
+  String get observation_missing_photo => "Zapažanje je bilo nepotpuno pa nije bilo spašeno. Nedostaje fotografija.";
   @override
   String get auth_google => "Prijava putem Googlea";
   @override
@@ -12107,6 +12522,8 @@ class $hr_HR extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Vraćanje kupnje";
+  @override
+  String get favorite_title => "Omiljeno cvijeće";
   @override
   String get auth_reset_password => "Resetiranje lozinke";
   @override
@@ -12166,6 +12583,8 @@ class $hr_HR extends S {
   @override
   String get auth_email => "Prijava putem e-adrese";
   @override
+  String get scale_down_photos_subtitle => "Uključite kada ne vidite svoje fotografije nakon odabira.";
+  @override
   String get arabian_peninsula => "Arapski poluotok";
   @override
   String get search_taxonomy => "Pretražujte taksonomiju";
@@ -12198,8 +12617,6 @@ class $hr_HR extends S {
   @override
   String get product_search_title => "Pretražujte imena ili taksonomiju";
   @override
-  String get observation_not_saved => "Zapažanje je bilo nepotpuno pa nije bilo spašeno. Nedostaje lokacija ili fotografija.";
-  @override
   String get feedback_review => "Možete napisati pozitivnu recenziju.";
   @override
   String get yes => "Da";
@@ -12211,6 +12628,8 @@ class $hr_HR extends S {
   String get china => "Kina";
   @override
   String get offline_title => "Izvanmrežni način";
+  @override
+  String get observation_missing_location => "Zapažanje je bilo nepotpuno pa nije bilo spašeno. Nedostaje lokacija.";
   @override
   String get privacy_policy => "Pravila o privatnosti";
   @override
@@ -12374,6 +12793,8 @@ class $hr_HR extends S {
   @override
   String get mexico => "Meksiko";
   @override
+  String get no_connection_content => "Ova značajka ne funkcionira bez internetske veze.";
+  @override
   String get snack_publish => "... biti objavljen kasnije";
   @override
   String get subscription_disclaimer_ios => "Plaćanje će biti naplaćeno na vašem Apple ID računu nakon potvrde kupnje. Pretplata se automatski obnavlja, osim ako je otkazana najmanje 24 sata prije kraja tekućeg razdoblja. Vaš će račun biti naplaćen u roku od 24 sata prije kraja tekućeg razdoblja. Možete upravljati i otkazati svoje pretplate tako da odete na postavke računa na App Store nakon kupnje.";
@@ -12438,13 +12859,19 @@ class $hr_HR extends S {
   @override
   String get plant_flower => "Cvijeće";
   @override
+  String get no_connection_title => "Veza";
+  @override
   String get filter_habitat => "stanište";
+  @override
+  String get scale_down_photos_title => "Smanjite fotografije promatranja";
   @override
   String get rate_never => "Nikada";
   @override
   String get northwestern_pacific => "Sjeverozapadni Tihi ocean";
   @override
   String get plant_stem => "Stablo";
+  @override
+  String get auth_resend_email => "Ponovi slanje e-pošte";
   @override
   String get no => "Ne";
   @override
@@ -12476,11 +12903,13 @@ class $hr_HR extends S {
   @override
   String get filter_distribution => "distribucija";
   @override
-  String get feedback_buy_extended => "Možete kupiti proširenu verziju s dodatnim funkcijama kao što je izvanmrežni način rada, tražiti imena, pretraživati u taksonomiji, promatrati i konfigurirati filtar.";
+  String get feedback_buy_extended => "Možete kupiti dodatne funkcionalnosti kao što je izvanmrežni način rada, tražiti imena ili taksonomiju, pretraživati po fotografijama, promatranjima i konfigurirati filtar.";
   @override
   String get north_central_usa => "Sjeverno središnje SAD";
   @override
   String get improve_translation => "Poboljšati prevođenje";
+  @override
+  String get favorite_no_login => "Popis omiljenih cvijeća dostupan je samo za prijavljene korisnike. Molimo prijavite se.";
   @override
   String get observation_delete_question => "Želite li izbrisati zapažanje?";
   @override
@@ -12626,11 +13055,15 @@ class $et_EE extends S {
   @override
   String get south_central_pacific => "Vaikse ookeani keskosas";
   @override
+  String get favorite_empty => "Veel ei ole lemmik lilli.";
+  @override
   String get product_custom_filter_description => "Saate muuta vaikimisi järjekorra ja filtrite arvu (värv, elupaikade, kroonleht, levitamine).";
   @override
   String get auth_password_hint => "Parool";
   @override
   String get habitat_meadow => "heinamaad või rohumaade";
+  @override
+  String get observation_missing_photo => "Vaatlus oli puudulik, seega ei salvestatud. Foto puudub.";
   @override
   String get auth_google => "Logige Google'iga sisse";
   @override
@@ -12639,6 +13072,8 @@ class $et_EE extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Ostude taastamine";
+  @override
+  String get favorite_title => "Lemmik lilled";
   @override
   String get auth_reset_password => "Lähtesta parool";
   @override
@@ -12698,6 +13133,8 @@ class $et_EE extends S {
   @override
   String get auth_email => "Logige sisse e-posti teel";
   @override
+  String get scale_down_photos_subtitle => "Lülitage sisse, kui fotosid pärast valimist ei näe.";
+  @override
   String get arabian_peninsula => "Araabia poolsaar";
   @override
   String get search_taxonomy => "Otsi taksonoomias";
@@ -12730,8 +13167,6 @@ class $et_EE extends S {
   @override
   String get product_search_title => "Otsi nimedest või taksonoomiast";
   @override
-  String get observation_not_saved => "Vaatlus oli puudulik, seega ei salvestatud. Asukoht või foto puudub.";
-  @override
   String get feedback_review => "Võite kirjutada positiivse ülevaate.";
   @override
   String get yes => "Jah";
@@ -12743,6 +13178,8 @@ class $et_EE extends S {
   String get china => "Hiina";
   @override
   String get offline_title => "Võrguühenduseta režiim";
+  @override
+  String get observation_missing_location => "Vaatlus oli puudulik, seega ei salvestatud. Asukoht puudub.";
   @override
   String get privacy_policy => "Privaatsuspoliitika";
   @override
@@ -12906,6 +13343,8 @@ class $et_EE extends S {
   @override
   String get mexico => "Mehhiko";
   @override
+  String get no_connection_content => "See funktsioon ei tööta ilma internetiühenduseta.";
+  @override
   String get snack_publish => "... avaldatakse hiljem";
   @override
   String get subscription_disclaimer_ios => "Makse võetakse teie Apple ID kontolt pärast ostu kinnitamist. Tellimus uuendatakse automaatselt, kui seda ei tühistata vähemalt 24 tundi enne jooksva perioodi lõppu. Teie kontot tasutakse uuendamise eest 24 tunni jooksul enne jooksva perioodi lõppu. Saate oma tellimusi hallata ja tühistada, minnes pärast ostmist rakenduse App Store konto seadetele.";
@@ -12970,13 +13409,19 @@ class $et_EE extends S {
   @override
   String get plant_flower => "Õis";
   @override
+  String get no_connection_title => "Ühendus";
+  @override
   String get filter_habitat => "elupaikade";
+  @override
+  String get scale_down_photos_title => "Vähendage vaatluse fotosid";
   @override
   String get rate_never => "Mitte kunagi";
   @override
   String get northwestern_pacific => "Vaikse ookeani loodeosas";
   @override
   String get plant_stem => "Vars";
+  @override
+  String get auth_resend_email => "Saada uuesti e-post";
   @override
   String get no => "Ei";
   @override
@@ -12990,7 +13435,7 @@ class $et_EE extends S {
   @override
   String get taxonomy_tribus => "Triibus";
   @override
-  String get auth_resend_code => "Koodi uuesti saatmine";
+  String get auth_resend_code => "Saada kood uuesti";
   @override
   String get rate_later => "Pärast";
   @override
@@ -13008,11 +13453,13 @@ class $et_EE extends S {
   @override
   String get filter_distribution => "levitamine";
   @override
-  String get feedback_buy_extended => "Laiendatud (+) versiooni saate osta täiendava funktsionaalsusega, näiteks offline režiimis, otsida nimesid, otsida taksonoomiast, vaatlustest ja seadistatavast filtrist.";
+  String get feedback_buy_extended => "Teil on võimalik osta täiendavaid funktsioone, nagu offline režiim, otsida nimedest või taksonoomiast, otsida fotode, vaatluste ja konfigureeritava filtri järgi.";
   @override
   String get north_central_usa => "Põhja-Keskne USA";
   @override
   String get improve_translation => "Parandada tõlge";
+  @override
+  String get favorite_no_login => "Lemmiklillede nimekiri on saadaval ainult logitud kasutajatele. Palun logige sisse.";
   @override
   String get observation_delete_question => "Kas soovite vaatluse kustutada?";
   @override
@@ -13166,11 +13613,15 @@ class $lt_LT extends S {
   @override
   String get south_central_pacific => "Ramiojo vandenyno pietinė dalis";
   @override
+  String get favorite_empty => "Dar nėra mėgstamiausių gėlių.";
+  @override
   String get product_custom_filter_description => "Galėsite pakeisti numatytąjį užsakymų skaičių ir filtrų skaičių (spalva, buveinė, vainiklapis, platinimas).";
   @override
   String get auth_password_hint => "Slaptažodis";
   @override
   String get habitat_meadow => "pievas ar pievos";
+  @override
+  String get observation_missing_photo => "Stebėjimas buvo neišsamus, todėl jis nebuvo išsaugotas. Trūksta nuotraukos.";
   @override
   String get auth_google => "Prisijungti per „Google“";
   @override
@@ -13179,6 +13630,8 @@ class $lt_LT extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Atkurti pirkimus";
+  @override
+  String get favorite_title => "Mėgstamiausios gėlės";
   @override
   String get auth_reset_password => "Atstatyti slaptažodį";
   @override
@@ -13238,6 +13691,8 @@ class $lt_LT extends S {
   @override
   String get auth_email => "Prisijungti nurodant el. pašto adresą";
   @override
+  String get scale_down_photos_subtitle => "Įjunkite, kai nematote nuotraukų po pasirinkimo.";
+  @override
   String get arabian_peninsula => "Arabijos pusiasalis";
   @override
   String get search_taxonomy => "Ieškoti taksonomijoje";
@@ -13270,8 +13725,6 @@ class $lt_LT extends S {
   @override
   String get product_search_title => "Ieškoti vardų arba taksonomijos";
   @override
-  String get observation_not_saved => "Stebėjimas buvo neišsamus, todėl jis nebuvo išsaugotas. Trūksta vietos ar nuotraukos.";
-  @override
   String get feedback_review => "Galite parašyti teigiamą apžvalgą.";
   @override
   String get yes => "Taip";
@@ -13283,6 +13736,8 @@ class $lt_LT extends S {
   String get china => "Kinija";
   @override
   String get offline_title => "Atsijungęs režimas";
+  @override
+  String get observation_missing_location => "Stebėjimas buvo neišsamus, todėl jis nebuvo išsaugotas. Trūksta vietos.";
   @override
   String get privacy_policy => "Privatumo politika";
   @override
@@ -13446,6 +13901,8 @@ class $lt_LT extends S {
   @override
   String get mexico => "Meksika";
   @override
+  String get no_connection_content => "Ši funkcija neveikia be interneto ryšio.";
+  @override
   String get snack_publish => "... bus paskelbta vėliau";
   @override
   String get subscription_disclaimer_ios => "Apmokėjimas bus apmokestintas „Apple ID“ paskyroje po pirkimo patvirtinimo. Prenumerata automatiškai atnaujinama, nebent ji būtų atšaukta likus ne mažiau kaip 24 valandoms iki einamojo laikotarpio pabaigos. Jūsų sąskaita bus apmokėta už atnaujinimą per 24 valandas iki einamojo laikotarpio pabaigos. Po įsigijimo galite tvarkyti ir atšaukti savo prenumeratas naudodami „App Store“ paskyros nustatymus.";
@@ -13510,13 +13967,19 @@ class $lt_LT extends S {
   @override
   String get plant_flower => "Žiedas";
   @override
+  String get no_connection_title => "Ryšys";
+  @override
   String get filter_habitat => "buveinių";
+  @override
+  String get scale_down_photos_title => "Sumažinkite stebėjimo nuotraukas";
   @override
   String get rate_never => "Niekada";
   @override
   String get northwestern_pacific => "Ramiojo vandenyno šiaurės vakarai";
   @override
   String get plant_stem => "Stiebas";
+  @override
+  String get auth_resend_email => "Išsiųsti el. laišką";
   @override
   String get no => "Ne";
   @override
@@ -13548,11 +14011,13 @@ class $lt_LT extends S {
   @override
   String get filter_distribution => "platinimas";
   @override
-  String get feedback_buy_extended => "Galite įsigyti išplėstinę versiją su papildomomis funkcijomis, pavyzdžiui, neprisijungus, ieškoti vardų, ieškoti taksonomijos, stebėjimų ir konfigūruojamo filtro.";
+  String get feedback_buy_extended => "Galite įsigyti papildomų funkcijų, pvz., Neprisijungus, ieškoti vardų arba taksonomijoje, ieškoti pagal nuotrauką, stebėjimus ir konfigūruojamą filtrą.";
   @override
   String get north_central_usa => "Šiaurės-Centrinė JAV";
   @override
   String get improve_translation => "Pagerinti vertimą";
+  @override
+  String get favorite_no_login => "Mėgstamiausių gėlių sąrašas galimas tik prisijungusiems vartotojams. Prašome prisijungti.";
   @override
   String get observation_delete_question => "Ar norite ištrinti stebėjimą?";
   @override
@@ -13698,11 +14163,15 @@ class $lv_LV extends S {
   @override
   String get south_central_pacific => "Klusā okeāna dienvidu daļa";
   @override
+  String get favorite_empty => "Vēl nav neviena mīļākā zieda.";
+  @override
   String get product_custom_filter_description => "Jūs varēsiet mainīt noklusējuma secību un filtru skaitu (krāsa, biotopa, ziedlapiņa, izplatīšana).";
   @override
   String get auth_password_hint => "Parole";
   @override
   String get habitat_meadow => "pievas ar pievos";
+  @override
+  String get observation_missing_photo => "Novērošana bija nepilnīga, tāpēc tā netika saglabāta. Trūkst fotoattēla.";
   @override
   String get auth_google => "Pierakstīties ar Google";
   @override
@@ -13711,6 +14180,8 @@ class $lv_LV extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Atjaunot pirkumus";
+  @override
+  String get favorite_title => "Mīļākie ziedi";
   @override
   String get auth_reset_password => "Atiestatīt paroli";
   @override
@@ -13770,6 +14241,8 @@ class $lv_LV extends S {
   @override
   String get auth_email => "Pierakstīties ar e-pasta adresi";
   @override
+  String get scale_down_photos_subtitle => "Ieslēdziet, kad pēc fotoattēlu saņemšanas neredzat fotoattēlus.";
+  @override
   String get arabian_peninsula => "Arābijas pussala";
   @override
   String get search_taxonomy => "Meklēt taksonomijā";
@@ -13802,8 +14275,6 @@ class $lv_LV extends S {
   @override
   String get product_search_title => "Meklēt nosaukumos vai taksonomijā";
   @override
-  String get observation_not_saved => "Novērošana bija nepilnīga, tāpēc tā netika saglabāta. Trūkst vietas vai fotoattēla.";
-  @override
   String get feedback_review => "Jūs varat uzrakstīt pozitīvu pārskatu.";
   @override
   String get yes => "Jā";
@@ -13815,6 +14286,8 @@ class $lv_LV extends S {
   String get china => "Ķīna";
   @override
   String get offline_title => "Bezsaistes režīms";
+  @override
+  String get observation_missing_location => "Novērošana bija nepilnīga, tāpēc tā netika saglabāta. Trūkst vietas.";
   @override
   String get privacy_policy => "Privātuma politika";
   @override
@@ -13978,6 +14451,8 @@ class $lv_LV extends S {
   @override
   String get mexico => "Meksika";
   @override
+  String get no_connection_content => "Šī funkcija nedarbojas bez interneta pieslēguma.";
+  @override
   String get snack_publish => "... publicēt vēlāk";
   @override
   String get subscription_disclaimer_ios => "Maksājums tiks iekasēts no jūsu Apple ID konta pēc pirkuma apstiprināšanas. Abonēšana tiek automātiski atjaunota, ja tā nav atcelta vismaz 24 stundas pirms kārtējā perioda beigām. Jūsu konts tiks iekasēts par atjaunošanu 24 stundu laikā pirms pašreizējā perioda beigām. Pēc iegādes varat pārvaldīt un atcelt abonementus, dodoties uz sava konta iestatījumiem lietotnē App Store.";
@@ -14042,13 +14517,19 @@ class $lv_LV extends S {
   @override
   String get plant_flower => "Zieds";
   @override
+  String get no_connection_title => "Savienojums";
+  @override
   String get filter_habitat => "biotopi";
+  @override
+  String get scale_down_photos_title => "Samaziniet novērošanas fotoattēlus";
   @override
   String get rate_never => "Nekad";
   @override
   String get northwestern_pacific => "Klusā okeāna ziemeļrietumu daļa";
   @override
   String get plant_stem => "Stumbrs";
+  @override
+  String get auth_resend_email => "Sūtīt vēlreiz e-pastu";
   @override
   String get no => "Nē";
   @override
@@ -14080,11 +14561,13 @@ class $lv_LV extends S {
   @override
   String get filter_distribution => "izplatīšana";
   @override
-  String get feedback_buy_extended => "Jūs varat iegādāties paplašinātu versiju ar papildu funkcionalitāti, piemēram, bezsaistes režīmā, meklēt nosaukumos, meklēt taksonomijā, novērojumos un konfigurējamajā filtrā.";
+  String get feedback_buy_extended => "Jūs varat iegādāties papildu funkcionalitāti, piemēram, bezsaistes režīmā, meklēt nosaukumos vai taksonomijā, meklēt pēc fotoattēla, novērojumiem un konfigurējama filtra.";
   @override
   String get north_central_usa => "Ziemeļu ASV";
   @override
   String get improve_translation => "Uzlabot tulkojumu";
+  @override
+  String get favorite_no_login => "Mīļāko ziedu saraksts ir pieejams tikai reģistrētiem lietotājiem. Lūdzu, piesakieties.";
   @override
   String get observation_delete_question => "Vai vēlaties dzēst novērojumu?";
   @override
@@ -14230,11 +14713,15 @@ class $uk_UA extends S {
   @override
   String get south_central_pacific => "Південно-центральний Тихий океан";
   @override
+  String get favorite_empty => "Улюблених квітів поки немає.";
+  @override
   String get product_custom_filter_description => "Ви зможете змінити стандартний порядок і кількість фільтрів (колір, середовище, пелюстка, розповсюдження).";
   @override
   String get auth_password_hint => "Пароль";
   @override
   String get habitat_meadow => "луки або пасовища";
+  @override
+  String get observation_missing_photo => "Спостереження було неповним, тому його не врятували. Фото відсутні.";
   @override
   String get auth_google => "Увійти через Google";
   @override
@@ -14243,6 +14730,8 @@ class $uk_UA extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Відновити покупки";
+  @override
+  String get favorite_title => "Улюблені квіти";
   @override
   String get auth_reset_password => "Скинути пароль";
   @override
@@ -14302,6 +14791,8 @@ class $uk_UA extends S {
   @override
   String get auth_email => "Увійти, використовуючи електронну адресу";
   @override
+  String get scale_down_photos_subtitle => "Увімкніть, коли фотографії після перегляду не відображаються.";
+  @override
   String get arabian_peninsula => "Аравійський півострів";
   @override
   String get search_taxonomy => "Пошук у таксономії";
@@ -14334,8 +14825,6 @@ class $uk_UA extends S {
   @override
   String get product_search_title => "Пошук по іменах або таксономії";
   @override
-  String get observation_not_saved => "Спостереження було неповним, тому його не врятували. Місцезнаходження чи фото відсутні.";
-  @override
   String get feedback_review => "Можна написати позитивний відгук.";
   @override
   String get yes => "Так";
@@ -14347,6 +14836,8 @@ class $uk_UA extends S {
   String get china => "Китай";
   @override
   String get offline_title => "Автономний режим";
+  @override
+  String get observation_missing_location => "Спостереження було неповним, тому його не врятували. Місцезнаходження відсутні.";
   @override
   String get privacy_policy => "Політика конфіденційності";
   @override
@@ -14510,6 +15001,8 @@ class $uk_UA extends S {
   @override
   String get mexico => "Мексика";
   @override
+  String get no_connection_content => "Ця функція не працює без підключення до Інтернету.";
+  @override
   String get snack_publish => "... буде опубліковано пізніше";
   @override
   String get subscription_disclaimer_ios => "Оплата буде стягнута з вашого облікового запису Apple ID після підтвердження покупки. Підписка автоматично продовжується, якщо вона не буде скасована принаймні за 24 години до закінчення поточного періоду. Ваш обліковий запис буде стягнено за поновлення протягом 24 годин до закінчення поточного періоду. Ви можете керувати та скасувати свої підписки, перейшовши до налаштувань облікового запису в App Store після покупки.";
@@ -14574,13 +15067,19 @@ class $uk_UA extends S {
   @override
   String get plant_flower => "Квіти";
   @override
+  String get no_connection_title => "Підключення";
+  @override
   String get filter_habitat => "середовище";
+  @override
+  String get scale_down_photos_title => "Масштабуйте фотографії спостереження";
   @override
   String get rate_never => "Ніколи";
   @override
   String get northwestern_pacific => "Північно-західний Тихий океан";
   @override
   String get plant_stem => "Стебло";
+  @override
+  String get auth_resend_email => "Повторно надіслати пошту";
   @override
   String get no => "Ні";
   @override
@@ -14612,11 +15111,13 @@ class $uk_UA extends S {
   @override
   String get filter_distribution => "розповсюдження";
   @override
-  String get feedback_buy_extended => "Ви можете придбати розширену версію з додатковими функціональними можливостями, наприклад, автономний режим, пошук по іменах, пошук в таксономії, спостереженнях і налаштованому фільтрі.";
+  String get feedback_buy_extended => "Ви можете придбати додаткові функціональні можливості, такі як автономний режим, пошук по іменах або в таксономії, пошук за фото, спостереження та налаштований фільтр.";
   @override
   String get north_central_usa => "Північ-Центральна США";
   @override
   String get improve_translation => "Поліпшення перекладу";
+  @override
+  String get favorite_no_login => "Список улюблених квітів доступний тільки для зареєстрованих користувачів. Увійдіть у систему.";
   @override
   String get observation_delete_question => "Ви хочете видалити спостереження?";
   @override
@@ -14762,11 +15263,15 @@ class $sl_SI extends S {
   @override
   String get south_central_pacific => "Južni osrednji Pacifik";
   @override
+  String get favorite_empty => "Še ni najljubšega cvetja.";
+  @override
   String get product_custom_filter_description => "Spremenili boste lahko privzeti vrstni red in število filtrov (barve, habitate, petali, distribucija).";
   @override
   String get auth_password_hint => "Geslo";
   @override
   String get habitat_meadow => "travniki ali pašniki";
+  @override
+  String get observation_missing_photo => "Opazovanje je bilo nepopolno, zato ni bilo rešeno. Manjka fotografija.";
   @override
   String get auth_google => "Prijava z računom za Google";
   @override
@@ -14775,6 +15280,8 @@ class $sl_SI extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Obnovi nakup";
+  @override
+  String get favorite_title => "Najljubše cvetja";
   @override
   String get auth_reset_password => "Ponastavitev gesla";
   @override
@@ -14834,6 +15341,8 @@ class $sl_SI extends S {
   @override
   String get auth_email => "Prijava z e-poštnim naslovom";
   @override
+  String get scale_down_photos_subtitle => "Vklopite, ko po izbiri ne vidite fotografij.";
+  @override
   String get arabian_peninsula => "Arabski polotok";
   @override
   String get search_taxonomy => "Išči v taksonomiji";
@@ -14866,8 +15375,6 @@ class $sl_SI extends S {
   @override
   String get product_search_title => "Išči po imenih ali taksonomiji";
   @override
-  String get observation_not_saved => "Opazovanje je bilo nepopolno, zato ni bilo rešeno. Manjka lokacija ali fotografija.";
-  @override
   String get feedback_review => "Lahko napišete pozitivno mnenje.";
   @override
   String get yes => "Ja";
@@ -14879,6 +15386,8 @@ class $sl_SI extends S {
   String get china => "Kitajska";
   @override
   String get offline_title => "Način brez povezave";
+  @override
+  String get observation_missing_location => "Opazovanje je bilo nepopolno, zato ni bilo rešeno. Manjka lokacija.";
   @override
   String get privacy_policy => "Pravilnik o zasebnosti";
   @override
@@ -15042,6 +15551,8 @@ class $sl_SI extends S {
   @override
   String get mexico => "Mehika";
   @override
+  String get no_connection_content => "Ta funkcija ne deluje brez internetne povezave.";
+  @override
   String get snack_publish => "... bo objavljen pozneje";
   @override
   String get subscription_disclaimer_ios => "Plačilo bo zaračunano na vaš račun Apple ID po potrditvi nakupa. Naročnina se samodejno obnovi, razen če je preklicana vsaj 24 ur pred koncem trenutnega obdobja. Vaš račun bo zaračunan za podaljšanje v 24 urah pred koncem trenutnega obdobja. Naročnine lahko upravljate in prekličete tako, da po nakupu obiščete nastavitve računa na App Store.";
@@ -15106,13 +15617,19 @@ class $sl_SI extends S {
   @override
   String get plant_flower => "Cvetje";
   @override
+  String get no_connection_title => "Povezava";
+  @override
   String get filter_habitat => "habitate";
+  @override
+  String get scale_down_photos_title => "Prilagodite fotografije opazovanja";
   @override
   String get rate_never => "Nikoli";
   @override
   String get northwestern_pacific => "Severozahodni Pacifik";
   @override
   String get plant_stem => "Steblo";
+  @override
+  String get auth_resend_email => "Ponovno pošlji e-pošto";
   @override
   String get no => "Ne";
   @override
@@ -15144,11 +15661,13 @@ class $sl_SI extends S {
   @override
   String get filter_distribution => "distribucija";
   @override
-  String get feedback_buy_extended => "Razširjeno različico lahko kupite z dodatnimi funkcijami, kot je način brez povezave, iskanje imen, iskanje v taksonomiji, opazovanje in nastavljiv filter.";
+  String get feedback_buy_extended => "Dodatne funkcije, kot je način brez povezave, lahko iščete po imenih ali taksonomiji, iščete po fotografijah, opazovanjih in nastavljivem filtru.";
   @override
   String get north_central_usa => "Severna osrednja ZDA";
   @override
   String get improve_translation => "Izboljšati prevod";
+  @override
+  String get favorite_no_login => "Seznam priljubljenih cvetov je na voljo samo za prijavljene uporabnike. Prijavite se.";
   @override
   String get observation_delete_question => "Ali želite izbrisati opazovanje?";
   @override
@@ -15294,11 +15813,15 @@ class $ar_EG extends S {
   @override
   String get south_central_pacific => "جنوب وسط المحيط الهادئ";
   @override
+  String get favorite_empty => "لا يوجد زهور مفضلة";
+  @override
   String get product_custom_filter_description => "ستتمكن من تغيير الترتيب الافتراضي وعدد المرشحات (اللون ، موطن ، بتلة ، توزيع).";
   @override
   String get auth_password_hint => "كلمة المرور";
   @override
   String get habitat_meadow => "مروج أو مراعي";
+  @override
+  String get observation_missing_photo => "كانت المراقبة غير مكتملة وبالتالي لم يتم حفظها. الصورة مفقودة.";
   @override
   String get auth_google => "تسجيل الدخول عبر Google";
   @override
@@ -15307,6 +15830,8 @@ class $ar_EG extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "استعادة المشتريات";
+  @override
+  String get favorite_title => "الزهور المفضلة";
   @override
   String get auth_reset_password => "إعادة تعيين كلمة المرور";
   @override
@@ -15366,6 +15891,8 @@ class $ar_EG extends S {
   @override
   String get auth_email => "تسجيل الدخول عبر البريد الإلكتروني";
   @override
+  String get scale_down_photos_subtitle => "قم بتشغيله عندما لا ترى صورك بعد الاختيار.";
+  @override
   String get arabian_peninsula => "شبه الجزيرة العربية";
   @override
   String get search_taxonomy => "البحث في التصنيف";
@@ -15398,8 +15925,6 @@ class $ar_EG extends S {
   @override
   String get product_search_title => "البحث في الأسماء أو التصنيف";
   @override
-  String get observation_not_saved => "كانت الملاحظة غير كاملة وبالتالي لم يتم حفظها. الموقع أو الصورة مفقودة.";
-  @override
   String get feedback_review => "يمكنك كتابة مراجعة إيجابية.";
   @override
   String get yes => "نعم فعلا";
@@ -15411,6 +15936,8 @@ class $ar_EG extends S {
   String get china => "الصين";
   @override
   String get offline_title => "غير متصل بالشبكة";
+  @override
+  String get observation_missing_location => "كانت المراقبة غير مكتملة وبالتالي لم يتم حفظها. الموقع مفقود.";
   @override
   String get privacy_policy => "سياسة خاصة";
   @override
@@ -15574,6 +16101,8 @@ class $ar_EG extends S {
   @override
   String get mexico => "المكسيك";
   @override
+  String get no_connection_content => "هذه الميزة لا تعمل بدون اتصال بالإنترنت.";
+  @override
   String get snack_publish => "ليتم نشرها في وقت لاحق";
   @override
   String get subscription_disclaimer_ios => "سيتم فرض الدفع على حساب Apple ID الخاص بك بعد تأكيد الشراء. يتم تجديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل 24 ساعة على الأقل من نهاية الفترة الحالية. سيتم فرض رسوم على حسابك خلال 24 ساعة قبل نهاية الفترة الحالية. يمكنك إدارة وإلغاء اشتراكاتك عن طريق الانتقال إلى إعدادات حسابك على App Store بعد الشراء.";
@@ -15638,13 +16167,19 @@ class $ar_EG extends S {
   @override
   String get plant_flower => "زهور";
   @override
+  String get no_connection_title => "صلة";
+  @override
   String get filter_habitat => "موطن";
+  @override
+  String get scale_down_photos_title => "تصغير صور الملاحظة";
   @override
   String get rate_never => "أبدا";
   @override
   String get northwestern_pacific => "شمال غرب المحيط الهادئ";
   @override
   String get plant_stem => "ساق نبات";
+  @override
+  String get auth_resend_email => "إعادة إرسال البريد الإلكتروني";
   @override
   String get no => "لا";
   @override
@@ -15676,11 +16211,13 @@ class $ar_EG extends S {
   @override
   String get filter_distribution => "توزيع";
   @override
-  String get feedback_buy_extended => "يمكنك شراء إصدار موسّع (+) مع وظائف إضافية مثل وضع عدم الاتصال ، والبحث في الأسماء ، والبحث في التصنيف ، والملاحظات ، والفلتر القابل للتكوين.";
+  String get feedback_buy_extended => "يمكنك شراء وظائف إضافية مثل الوضع في وضع عدم الاتصال ، والبحث في الأسماء أو في التصنيف ، والبحث بالصور والملاحظات والتصفية القابلة للتكوين.";
   @override
   String get north_central_usa => "شمال وسط الولايات المتحدة";
   @override
   String get improve_translation => "تحسين الترجمة";
+  @override
+  String get favorite_no_login => "قائمة الزهور المفضلة متاحة فقط للمستخدمين المسجلين. الرجاء تسجيل الدخول.";
   @override
   String get observation_delete_question => "هل تريد حذف الملاحظة؟";
   @override
@@ -15826,11 +16363,15 @@ class $pt_PT extends S {
   @override
   String get south_central_pacific => "Pacífico Sul-Central";
   @override
+  String get favorite_empty => "Não há flores favoritas ainda.";
+  @override
   String get product_custom_filter_description => "Você poderá alterar a ordem padrão e o número de filtros (cor, habitat, pétala, distribuição).";
   @override
   String get auth_password_hint => "Senha";
   @override
   String get habitat_meadow => "prados e pastagens";
+  @override
+  String get observation_missing_photo => "A observação estava incompleta, portanto, não foi salva. Foto está faltando.";
   @override
   String get auth_google => "Fazer login com o Google";
   @override
@@ -15839,6 +16380,8 @@ class $pt_PT extends S {
   String get app_store => "App Store";
   @override
   String get product_restore_purchases => "Restaurar compras";
+  @override
+  String get favorite_title => "Flores favoritas";
   @override
   String get auth_reset_password => "Redefinir senha";
   @override
@@ -15898,6 +16441,8 @@ class $pt_PT extends S {
   @override
   String get auth_email => "Fazer login com o e-mail";
   @override
+  String get scale_down_photos_subtitle => "Ligue quando não vir as suas fotos depois de escolher.";
+  @override
   String get arabian_peninsula => "Península Arábica";
   @override
   String get search_taxonomy => "Pesquisa na taxonomia";
@@ -15930,8 +16475,6 @@ class $pt_PT extends S {
   @override
   String get product_search_title => "Pesquisa em nomes ou taxonomia";
   @override
-  String get observation_not_saved => "A observação estava incompleta, portanto, não foi salva. Localização ou foto está faltando.";
-  @override
   String get feedback_review => "Você pode escrever um comentário positivo.";
   @override
   String get yes => "Sim";
@@ -15943,6 +16486,8 @@ class $pt_PT extends S {
   String get china => "China";
   @override
   String get offline_title => "Modo offline";
+  @override
+  String get observation_missing_location => "A observação estava incompleta, portanto, não foi salva. Localização está faltando.";
   @override
   String get privacy_policy => "Política de Privacidade";
   @override
@@ -16102,6 +16647,8 @@ class $pt_PT extends S {
   @override
   String get mexico => "México";
   @override
+  String get no_connection_content => "Este recurso não funciona sem conexão com a Internet.";
+  @override
   String get snack_publish => "... para ser publicado mais tarde";
   @override
   String get subscription_disclaimer_ios => "O pagamento será cobrado em sua conta da Apple ID após a confirmação da compra. A assinatura é renovada automaticamente, a menos que seja cancelada pelo menos 24 horas antes do final do período atual. Sua conta será cobrada para renovação dentro de 24 horas antes do final do período atual. Você pode gerenciar e cancelar suas assinaturas acessando as configurações da sua conta na App Store após a compra.";
@@ -16166,13 +16713,19 @@ class $pt_PT extends S {
   @override
   String get plant_flower => "Flores";
   @override
+  String get no_connection_title => "Conexão";
+  @override
   String get filter_habitat => "habitat";
+  @override
+  String get scale_down_photos_title => "Escalar fotos de observação";
   @override
   String get rate_never => "Nunca";
   @override
   String get northwestern_pacific => "Noroeste do Pacífico";
   @override
   String get plant_stem => "Caule";
+  @override
+  String get auth_resend_email => "Reenviar email";
   @override
   String get no => "Não";
   @override
@@ -16204,11 +16757,13 @@ class $pt_PT extends S {
   @override
   String get filter_distribution => "distribuição";
   @override
-  String get feedback_buy_extended => "Você pode comprar a versão estendida (+) com funcionalidades adicionais, como o modo off-line, pesquisar nomes, pesquisar em taxonomia, observações e filtros configuráveis.";
+  String get feedback_buy_extended => "Você pode comprar funcionalidades adicionais como o modo off-line, pesquisar em nomes ou em taxonomia, pesquisar por foto, observações e filtro configurável.";
   @override
   String get north_central_usa => "EUA do centro-norte";
   @override
   String get improve_translation => "Melhorar a tradução";
+  @override
+  String get favorite_no_login => "A lista de flores favoritas está disponível apenas para usuários registrados. Por favor entre.";
   @override
   String get observation_delete_question => "Você quer apagar a observação?";
   @override

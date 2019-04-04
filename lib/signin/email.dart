@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 
@@ -45,21 +46,34 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
         _errorMessage = "";
         _isLoading = true;
       });
-      String userId = "";
+      FirebaseUser user;
       try {
         if (_formMode == FormMode.LOGIN) {
-          userId = await Auth.signInWithEmail(_email, _password);
-          Navigator.pop(context);
-          Navigator.pop(context);
-          print('Signed in: $userId');
+          user = await Auth.signInWithEmail(_email, _password);
+          if (!user.isEmailVerified) {
+            _showVerifyEmailSentDialog(user).then((value) {
+              if (mounted) {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              }
+              Auth.signOut();
+            });
+          } else {
+            if (mounted) {
+              Navigator.pop(context);
+              Navigator.pop(context);
+            }
+          }
         } else {
-          userId = await Auth.signUpWithEmail(_email, _password);
+          user = await Auth.signUpWithEmail(_email, _password);
           Auth.sendEmailVerification();
-          _showVerifyEmailSentDialog().then((value) {
-            Navigator.of(context).pop();
-            Navigator.of(context).pop();
+          _showVerifyEmailSentDialog(user).then((value) {
+            if (mounted) {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            }
+            Auth.signOut();
           });
-          print('Signed up user: $userId');
         }
         setState(() {
           _isLoading = false;
@@ -125,7 +139,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
     );
   }
 
-  Future<dynamic> _showVerifyEmailSentDialog() {
+  Future<dynamic> _showVerifyEmailSentDialog(FirebaseUser user) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -133,6 +147,15 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
           title: Text(S.of(context).auth_verify_email_title),
           content: Text(S.of(context).auth_verify_email_message),
           actions: <Widget>[
+            FlatButton(
+              child: Text(S.of(context).auth_resend_email),
+              onPressed: () {
+                if (user != null) {
+                  user.sendEmailVerification();
+                }
+                Navigator.of(context).pop();
+              },
+            ),
             FlatButton(
               child: Text(S.of(context).close),
               onPressed: () {

@@ -47,6 +47,8 @@
   "offline_download_fail": "Échec du téléchargement. Vérifiez votre connexion Internet ou l'espace disponible sur votre appareil, puis réessayez.",
   "offline_delete_message": "Voulez-vous supprimer les données hors connexion?",
   "offline_download": "Reprendre le téléchargement",
+  "scale_down_photos_title": "Réduisez les photos d'observation",
+  "scale_down_photos_subtitle": "Activez-la lorsque vous ne voyez pas vos photos après la sélection.",
 
   "feedback_intro": "Vous avez contribué à cette application car vous l'avez installé sur votre appareil, merci. Si vous cherchez quelque chose de plus, voici quelques options:",
   "feedback_review": "Vous pouvez écrire une critique positive.",
@@ -54,7 +56,7 @@
   "feedback_translate": "Vous pouvez signaler toute erreur de frappe ou erreur que vous avez trouvée ou vous envoyer une nouvelle traduction dans votre langue.",
   "feedback_submit_translate_data": "Améliorer les données de la fleur",
   "feedback_submit_translate_app": "Améliorer les étiquettes de l'application",
-  "feedback_buy_extended": "Vous pouvez acheter la version étendue avec des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche dans les noms, la recherche dans la taxonomie, les observations et le filtre configurable.",
+  "feedback_buy_extended": "Vous pouvez acheter des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche par noms ou par taxonomie, la recherche par photo, les observations et le filtre configurable.",
   "feedback_run_ads": "Vous pouvez afficher une publicité en plein écran ou regarder une publicité vidéo pour prendre en charge le développement et l'amélioration de la base de données.",
   "feedback_run_ads_fullscreen": "Afficher une publicité en plein écran",
   "feedback_run_ads_video": "Regarder une publicité vidéo",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Le lien pour vérifier que le compte a bien été envoyé à votre adresse e-mail.",
   "auth_reset_password_email_title": "Réinitialiser le mot de passe",
   "auth_reset_password_email_message": "Suivez les instructions envoyées à $_email pour réinitialiser votre mot de passe.",
+  "auth_resend_email": "Ré-envoyer l'email",
 
   "auth_verify_phone_number": "Valider le numéro de téléphone",
   "auth_verify_phone_number_title": "Entrez votre numéro de téléphone",
@@ -249,7 +252,8 @@
   "observations": "Observations",
   "observation_note": "Place pour votre note privée.",
   "observation_saved": "L'observation a été enregistrée.",
-  "observation_not_saved": "L'observation était incomplète, donc elle n'a pas été sauvegardée. L'emplacement de la photo est manquant.",
+  "observation_missing_photo": "L'observation était incomplète, donc elle n'a pas été sauvegardée. La photo est manquante.",
+  "observation_missing_location": "L'observation était incomplète, donc elle n'a pas été sauvegardée. L'emplacement est manquant.",
   "observation_delete": "Retirer l'observation",
   "observation_delete_question": "Voulez-vous retirer l'observation?",
   "observation_empty": "Il n'y a pas encore d'observation.",
@@ -283,9 +287,16 @@
   "promotion_title": "Fonctionnalité payante",
   "promotion_content": "Ceci est une fonctionnalité payante. Vous pouvez l'utiliser gratuitement jusqu'à $date",
 
+  "no_connection_title": "Connexion",
+  "no_connection_content": "Cette fonctionnalité ne fonctionne pas sans connexion Internet.",
+
   "photo_search_no_login": "La recherche par photo est disponible uniquement pour les utilisateurs connectés. Veuillez vous connecter.",
   "photo_search_failed": "La recherche par photo a échoué. Vérifiez votre connexion Internet et réessayez.",
   "photo_to_search_by": "Photo à rechercher par",
   "photo_search_note": "Ceci est une fonctionnalité expérimentale qui ne fonctionne qu'en ligne. Parfois, il trouve exactement ce que vous cherchez, parfois même pas proche. Je compte totalement sur Google ici car ils font tout le travail. Au fil du temps, il devrait être de mieux en mieux, mais il n'a pas été construit principalement pour la reconnaissance des fleurs. Utilisez-le judicieusement et ne jugez pas l'ensemble de l'application en fonction de cette expérience. Pour des raisons de qualité, tous les résultats de recherche (pas les photos) seront enregistrés.",
-  "photo_search_empty": "Google IA (Intelligence artificielle) n'a reconnu aucune fleur particulière sur la photo. Réessayez avec différents angles, distances ou conditions d'éclairage. Si vous l'avez déjà fait, il semble que le suzerain d'IA ne viendra pas de sitôt."
+  "photo_search_empty": "Google IA (Intelligence artificielle) n'a reconnu aucune fleur particulière sur la photo. Réessayez avec différents angles, distances ou conditions d'éclairage. Si vous l'avez déjà fait, il semble que le suzerain d'IA ne viendra pas de sitôt.",
+
+  "favorite_title": "Fleurs préférées",
+  "favorite_empty": "Il n'y a pas encore de fleurs préférées.",
+  "favorite_no_login": "La liste des fleurs préférées est disponible uniquement pour les utilisateurs connectés. Veuillez vous connecter."
 }

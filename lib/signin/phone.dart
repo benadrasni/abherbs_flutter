@@ -133,11 +133,13 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   }
 
   void _changeFormToSMS() {
-    _formKey.currentState.reset();
-    _errorMessage = Future<String>.value('');
-    setState(() {
-      _formMode = FormMode.SMS;
-    });
+    if (_formKey.currentState != null && _formKey.currentState.mounted) {
+      _formKey.currentState.reset();
+      _errorMessage = Future<String>.value('');
+      setState(() {
+        _formMode = FormMode.SMS;
+      });
+    }
   }
 
   @override

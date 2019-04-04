@@ -47,12 +47,14 @@
   "offline_download_fail": "Download fejlede. Kontroller din internetforbindelse eller ledig plads på enheden, og prøv igen.",
   "offline_delete_message": "Vil du slette offline data?",
   "offline_download": "Genoptag download",
+  "scale_down_photos_title": "Skal ned observationens fotos",
+  "scale_down_photos_subtitle": "Tænd, når du ikke kan se dine billeder efter valg.",
 
   "feedback_intro": "Du har bidraget til denne applikation, da du har installeret den på din enhed, tak. Hvis du leder efter noget mere, her er nogle muligheder:",
   "feedback_review": "Du kan skrive en positiv anmeldelse.",
   "feedback_title": "Hvordan bidrage",
   "feedback_translate": "Du kan rapportere enhver tastatur eller fejl, du har fundet eller indsende ny oversættelse på dit sprog.",
-  "feedback_buy_extended": "Du kan købe udvidet (+) version med ekstra funktionalitet som offline-tilstand, søge i navne, søge i taksonomi, observationer og konfigurerbart filter.",
+  "feedback_buy_extended": "Du kan købe yderligere funktioner som offline-tilstand, søge i navne eller i taxonomi, søge efter foto, observationer og konfigurerbart filter.",
   "feedback_run_ads": "Du kan vise fuldskærmsannonce eller se videoannonce for at understøtte yderligere udvikling og databaseforbedring.",
   "feedback_run_ads_fullscreen": "Vis en fuldscreen reklame",
   "feedback_run_ads_video": "Se en videoannonce",
@@ -77,6 +79,7 @@
   "auth_verify_email_message": "En loginmail med yderligere vejledning er sendt. Tjek din mail for at fuldføre loginprocessen.",
   "auth_reset_password_email_title": "Nulstille kodeord",
   "auth_reset_password_email_message": "Følg instruktionerne sendt til $_email for at nulstille din adgangskode.",
+  "auth_resend_email": "Send e-mail igen",
 
   "auth_verify_phone_number": "Bekræft dit telefonnummer",
   "auth_verify_phone_number_title": "Angiv dit telefonnummer",
@@ -247,7 +250,8 @@
   "observations": "Observationer",
   "observation_note": "Placer til din private note.",
   "observation_saved": "Observation blev reddet.",
-  "observation_not_saved": "Observationen var ufuldstændig, så den blev ikke reddet. Placering eller foto mangler.",
+  "observation_missing_photo": "Observationen var ufuldstændig, så den blev ikke reddet. Foto mangler.",
+  "observation_missing_location": "Observationen var ufuldstændig, så den blev ikke reddet. Placering mangler.",
   "observation_delete": "Slet observation",
   "observation_delete_question": "Vil du slette observationen?",
   "observation_empty": "Der er ingen observation endnu.",
@@ -281,9 +285,16 @@
   "promotion_title": "Betalt funktion",
   "promotion_content": "Dette er en betalt funktion. Du kan bruge det gratis indtil $date",
 
+  "no_connection_title": "Forbindelse",
+  "no_connection_content": "Denne funktion virker ikke uden internetforbindelse.",
+
   "photo_search_no_login": "Søgning efter foto er kun tilgængelig for logget brugere. Vær venlig at logge ind.",
   "photo_search_failed": "Søg efter billede mislykkedes. Tjek din internetforbindelse og prøv igen.",
   "photo_to_search_by": "Foto til søgning efter",
   "photo_search_note": "Dette er en eksperimentel funktion, der kun fungerer online. Nogle gange finder den præcis det, du leder efter, nogle gange ikke engang tæt. Jeg er helt afhængig af Google her, da de laver alt det hårde arbejde. Som tiden går, skal det være bedre og bedre, men det blev ikke primært bygget til blomsters anerkendelse. Brug det klogt og bedøm ikke hele applikationen baseret på dette eksperiment. Til kvalitetsformål bliver alle søgeresultater (ikke fotos) gemt.",
-  "photo_search_empty": "Google KI (kunstig intelligens) genkendte ikke nogen bestemt blomst på billedet. Prøv igen med forskellige vinkel-, afstands- eller lysforhold. Hvis du allerede gjorde det ser ud som KI overlord ikke kommer når som helst snart."
+  "photo_search_empty": "Google KI (kunstig intelligens) genkendte ikke nogen bestemt blomst på billedet. Prøv igen med forskellige vinkel-, afstands- eller lysforhold. Hvis du allerede gjorde det ser ud som KI overlord ikke kommer når som helst snart.",
+
+  "favorite_title": "Favorit blomster",
+  "favorite_empty": "Der er endnu ingen favorit blomster.",
+  "favorite_no_login": "Liste over foretrukne blomster er kun tilgængelig for logget brugere. Vær venlig at logge ind."
 }

@@ -47,6 +47,8 @@
   "offline_download_fail": "ダウンロードに失敗しました。 インターネット接続またはデバイスの空き容量を確認して、もう一度やり直してください。",
   "offline_delete_message": "オフラインデータを削除しますか？",
   "offline_download": "ダウンロードを再開",
+  "scale_down_photos_title": "観測の写真を縮小する",
+  "scale_down_photos_subtitle": "ピック後に写真が見えなくなったら電源を入れます。",
 
   "feedback_intro": "デバイスにインストールしたので、このアプリケーションに貢献しました。ありがとうございます。 あなたがもっと何かを探しているなら、いくつかのオプションがあります：",
   "feedback_review": "あなたは肯定的なレビューを書くことができます。",
@@ -54,7 +56,7 @@
   "feedback_translate": "誤植や誤りを報告したり、新しい翻訳をあなたの言語で提出することができます。",
   "feedback_submit_translate_data": "花のデータを改善する",
   "feedback_submit_translate_app": "アプリケーションのラベルを改善する",
-  "feedback_buy_extended": "オフラインモード、名前で検索、分類法で検索、観測、設定可能なフィルタなどの追加機能を備えた拡張バージョンを購入できます。",
+  "feedback_buy_extended": "あなたはオフラインモードのような追加の機能を購入することができます名前または分類法での検索、写真による検索、観察および設定可能なフィルタ。",
   "feedback_run_ads": "全画面広告を表示したり、ビデオ広告を見たりして、さらなる開発やデータベースの機能強化をサポートできます。",
   "feedback_run_ads_fullscreen": "フルスクリーン広告を表示する",
   "feedback_run_ads_video": "ビデオ広告を見る",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "アカウントを確認するためのリンクがあなたのメールアドレスに送信されました。",
   "auth_reset_password_email_title": "パスワードを再設定する",
   "auth_reset_password_email_message": "パスワードをリセットするには、 $_ email に送信された指示に従ってください。",
+  "auth_resend_email": "メールを再送",
 
   "auth_verify_phone_number": "電話番号を確認",
   "auth_verify_phone_number_title": "あなたの電話番号を入力してください",
@@ -249,7 +252,8 @@
   "observations": "観察",
   "observation_note": "あなたのプライベートメモのための場所。",
   "observation_saved": "観察は助かりました。",
-  "observation_not_saved": "観測は不完全だったので保存されませんでした。 場所や写真が見つかりません。",
+  "observation_missing_photo": "観測は不完全だったので保存されませんでした。 写真がありません。",
+  "observation_missing_location": "観測は不完全だったので保存されませんでした。 場所が見つかりません。",
   "observation_delete": "観測を削除",
   "observation_delete_question": "観測を削除しますか？",
   "observation_empty": "まだ観測はありません。",
@@ -283,9 +287,16 @@
   "promotion_title": "有料機能",
   "promotion_content": "これは有料機能です。$date まで無料で使えます",
 
+  "no_connection_title": "接続",
+  "no_connection_content": "この機能はインターネットに接続していないと機能しません。",
+
   "photo_search_no_login": "写真による検索は、ログインしているユーザーのみが利用できます。 ログインしてください。",
   "photo_search_failed": "写真で検索できませんでした。 インターネット接続を確認してもう一度やり直してください。",
   "photo_to_search_by": "検索する写真",
   "photo_search_note": "これはオンラインでのみ機能する実験的な機能です。 時にはそれはあなたが探しているものを正確に見つけ、時には近くにさえない。 彼らはすべて大変な仕事をしているので、私はここで完全にGoogleに頼っています。 時間が経つにつれてそれはどんどん良くなるはずですが、それは主に花の認識のために構築されていませんでした。 この実験に基づいてアプリケーション全体を判断しないでください。 品質上の理由から、すべての検索結果（写真ではありません）が保存されます。",
-  "photo_search_empty": "グーグルＡＩ（人工知能）は写真上の特定の花を認識しなかった。 角度、距離、光の状態を変えてもう一度試してください。 あなたがすでにやったことがあるならば、AI君主はすぐに来ることはないようです。"
+  "photo_search_empty": "グーグルＡＩ（人工知能）は写真上の特定の花を認識しなかった。 角度、距離、光の状態を変えてもう一度試してください。 あなたがすでにやったことがあるならば、AI君主はすぐに来ることはないようです。",
+
+  "favorite_title": "好きな花",
+  "favorite_empty": "好きな花はまだありません。",
+  "favorite_no_login": "お気に入りの花のリストはログインしたユーザーにのみ利用可能です。 ログインしてください。"
 }

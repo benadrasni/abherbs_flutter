@@ -47,6 +47,8 @@
   "offline_download_fail": "Download mislukt. Controleer uw internetverbinding of vrije ruimte op het apparaat en probeer het opnieuw.",
   "offline_delete_message": "Wilt u offline gegevens verwijderen?",
   "offline_download": "Download doorgaan",
+  "scale_down_photos_title": "Foto's van waarnemingen verkleinen",
+  "scale_down_photos_subtitle": "Schakel in wanneer u uw foto's niet ziet nadat ze zijn gekozen.",
 
   "feedback_intro": "Sinds u de app geïnstalleerd heeft, draagt u bij aan de app. Dank u wel. Als u ons nóg meer wilt helpen, kunt u de volgende opties overwegen:",
   "feedback_review": "U kunt een positieve beoordeling schrijven.",
@@ -54,7 +56,7 @@
   "feedback_translate": "U kunt typefouten of verkeerde vertalingen melden of nieuwer vertalingen toevoegen op whatsthatflower.com",
   "feedback_submit_translate_data": "Verbeter de gegevens over de bloemen",
   "feedback_submit_translate_app": "Verbeter de kopjes in de app",
-  "feedback_buy_extended": "U kunt een uitgebreide versie kopen met extra functionaliteit zoals de offline modus, zoeken in namen, zoeken in taxonomie, observaties en configureerbare filter.",
+  "feedback_buy_extended": "U kunt extra functies kopen, zoals de offline modus, zoeken in namen of in taxonomie, zoeken op foto, observaties en configureerbare filters.",
   "feedback_run_ads": "U kunt advertenties op volledig scherm weergeven of videoadvertenties bekijken om verdere ontwikkeling en databaseverbetering te ondersteunen.",
   "feedback_run_ads_fullscreen": "Laat een advertentie op volledig scherm zien",
   "feedback_run_ads_video": "Bekijk een videoadvertentie",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Link om het account te verifiëren is verzonden naar uw e-mailadres.",
   "auth_reset_password_email_title": "Reset wachtwoord",
   "auth_reset_password_email_message": "Volg de instructies verzonden naar $_email om uw wachtwoord opnieuw in te stellen.",
+  "auth_resend_email": "Email opnieuw verzenden",
 
   "auth_verify_phone_number": "Telefoonnummer verifiëren",
   "auth_verify_phone_number_title": "Vul je telefoonnummer in",
@@ -249,7 +252,8 @@
   "observations": "Observaties",
   "observation_note": "Plaats voor uw persoonlijke notitie.",
   "observation_saved": "Observatie werd opgeslagen.",
-  "observation_not_saved": "Observatie was onvolledig dus het werd niet opgeslagen. Locatie of foto ontbreekt.",
+  "observation_missing_photo": "Observatie was onvolledig dus het werd niet opgeslagen. Foto ontbreekt.",
+  "observation_missing_location": "Observatie was onvolledig dus het werd niet opgeslagen. Locatie ontbreekt.",
   "observation_delete": "Wis observatie",
   "observation_delete_question": "Wilt u de observatie verwijderen?",
   "observation_empty": "Er is nog geen observatie.",
@@ -283,9 +287,16 @@
   "promotion_title": "Betaalde functie",
   "promotion_content": "Dit is een betaalde functie. Je kunt het gratis gebruiken tot $date",
 
+  "no_connection_title": "Verbinding",
+  "no_connection_content": "Deze functie werkt niet zonder internetverbinding.",
+
   "photo_search_no_login": "Zoeken op foto is alleen beschikbaar voor aangemelde gebruikers. Log alstublieft in.",
   "photo_search_failed": "Zoeken op foto is mislukt. Controleer uw internetverbinding en probeer het opnieuw.",
   "photo_to_search_by": "Foto om op te zoeken",
   "photo_search_note": "Dit is een experimentele functie die alleen online werkt. Soms vindt het precies wat u zoekt, soms zelfs niet in de buurt. Ik vertrouw hier volledig op Google omdat ze al het harde werk doen. Naarmate de tijd vordert zou het beter en beter moeten worden, maar het was niet in de eerste plaats gebouwd voor de herkenning van bloemen. Gebruik het verstandig en veroordeel de hele applicatie niet op basis van dit experiment. Voor kwaliteitsdoeleinden worden alle zoekresultaten (niet foto's) opgeslagen.",
-  "photo_search_empty": "Google KI (kunstmatige intelligentie) herkende geen enkele specifieke bloem op de foto. Probeer het opnieuw met verschillende hoeken, afstanden of lichtomstandigheden. Als je het al hebt gedaan, ziet het er naar uit dat KI-oploper niet snel zal komen."
+  "photo_search_empty": "Google KI (kunstmatige intelligentie) herkende geen enkele specifieke bloem op de foto. Probeer het opnieuw met verschillende hoeken, afstanden of lichtomstandigheden. Als je het al hebt gedaan, ziet het er naar uit dat KI-oploper niet snel zal komen.",
+
+  "favorite_title": "Favoriete bloemen",
+  "favorite_empty": "Er zijn nog geen favoriete bloemen.",
+  "favorite_no_login": "Lijst met favoriete bloemen is alleen beschikbaar voor aangemelde gebruikers. Log alstublieft in."
 }

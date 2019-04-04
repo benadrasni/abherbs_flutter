@@ -47,6 +47,8 @@
   "offline_download_fail": "Herunterladen fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung oder den freien Speicherplatz auf dem Gerät und versuchen Sie es erneut.",
   "offline_delete_message": "Möchten Sie Offline-Daten löschen?",
   "offline_download": "Download fortsetzen",
+  "scale_down_photos_title": "Verkleinern Sie die Beobachtungsfotos",
+  "scale_down_photos_subtitle": "Schalten Sie ein, wenn Sie Ihre Fotos nach der Auswahl nicht sehen.",
 
   "feedback_intro": "Sie haben zu dieser Anwendung beigetragen, seit Sie diese auf Ihrem Gerät installiert haben, vielen Dank. Wenn Sie noch mehr tun möchten, haben Sie folgende Möglichkeiten:",
   "feedback_review": "Sie können eine positive Bewertung schreiben.",
@@ -54,7 +56,7 @@
   "feedback_translate": "Sie können Tippfehler oder falsche Übersetzungen melden, oder eine neue Übersetzung in Ihrer Sprache einreichen.",
   "feedback_submit_translate_data": "Verbessere die Daten der Blume",
   "feedback_submit_translate_app": "Verbessere den Text der Anwendung",
-  "feedback_buy_extended": "Sie können eine erweiterte (+) Version mit zusätzlichen Funktionen wie Offline-Modus, Suche nach Namen, Suche in Taxonomie, Beobachtungen und konfigurierbaren Filter kaufen.",
+  "feedback_buy_extended": "Sie können zusätzliche Funktionen erwerben, z. B. den Offline-Modus, die Suche in Namen oder in der Taxonomie, die Suche nach Foto, Beobachtungen und konfigurierbare Filter.",
   "feedback_run_ads": "Sie können Werbung im Vollbildmodus anzeigen oder Videowerbung ansehen, um die Weiterentwicklung und Datenbankverbesserung zu unterstützen.",
   "feedback_run_ads_fullscreen": "Anzeige im Vollbildmodus",
   "feedback_run_ads_video": "Videoanzeige ansehen",
@@ -79,6 +81,7 @@
   "auth_verify_email_message": "Link zur Bestätigung, dass das Konto an Ihre E-Mail-Adresse gesendet wurde.",
   "auth_reset_password_email_title": "Passwort zurücksetzen",
   "auth_reset_password_email_message": "Folgen Sie den Anweisungen, die an $_email gesendet wurden, um Ihr Passwort zurückzusetzen.",
+  "auth_resend_email": "E-Mail zurücksenden",
 
   "auth_verify_phone_number": "Telefonnummer eingeben",
   "auth_verify_phone_number_title": "Telefonnummer bestätigen",
@@ -249,7 +252,8 @@
   "observations": "Beobachtungen",
   "observation_note": "Platz für Ihre private Notiz.",
   "observation_saved": "Beobachtung wurde gespeichert.",
-  "observation_not_saved": "Die Beobachtung wurde nicht abgeschlossen, so dass nichts gespeichert wurde. Ort oder Foto fehlt.",
+  "observation_missing_photo": "Die Beobachtung wurde nicht abgeschlossen, so dass nichts gespeichert wurde. Foto fehlt.",
+  "observation_missing_location": "Die Beobachtung wurde nicht abgeschlossen, so dass nichts gespeichert wurde. Ort fehlt.",
   "observation_delete": "Beobachtung löschen",
   "observation_delete_question": "Möchten Sie die Beobachtung löschen?",
   "observation_empty": "Es gibt noch keine Beobachtung.",
@@ -283,9 +287,16 @@
   "promotion_title": "Bezahlte Funktion",
   "promotion_content": "Dies ist eine kostenpflichtige Funktion. Sie können es bis $date kostenlos nutzen.",
 
+  "no_connection_title": "Verbindung",
+  "no_connection_content": "Diese Funktion funktioniert nicht ohne Internetverbindung.",
+
   "photo_search_no_login": "Die Suche nach Fotos ist nur für angemeldete Benutzer verfügbar. Bitte loggen Sie sich ein.",
   "photo_search_failed": "Suche nach Foto fehlgeschlagen. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
   "photo_to_search_by": "Foto zum Suchen nach",
   "photo_search_note": "Dies ist ein experimentelles Feature, das nur online funktioniert. Manchmal findet es genau das, wonach Sie suchen, manchmal nicht einmal in der Nähe. Ich bin völlig auf Google angewiesen, da sie die ganze harte Arbeit machen. Mit der Zeit sollte es besser und besser werden, aber es wurde nicht in erster Linie für die Anerkennung der Blume gebaut. Verwende es mit Bedacht und beurteile bitte nicht die gesamte Anwendung basierend auf diesem Experiment. Aus Qualitätsgründen werden alle Suchergebnisse (nicht Fotos) gespeichert.",
-  "photo_search_empty": "Google KI (Künstliche Intelligenz) hat keine bestimmte Blume auf dem Bild erkannt. Versuchen Sie es erneut mit anderen Winkeln, Entfernungen oder Lichtverhältnissen. Wenn du es schon getan hast, sieht es so aus, als ob der KI Overlord nicht bald kommen würde."
+  "photo_search_empty": "Google KI (Künstliche Intelligenz) hat keine bestimmte Blume auf dem Bild erkannt. Versuchen Sie es erneut mit anderen Winkeln, Entfernungen oder Lichtverhältnissen. Wenn du es schon getan hast, sieht es so aus, als ob der KI Overlord nicht bald kommen würde.",
+
+  "favorite_title": "Lieblingsblumen",
+  "favorite_empty": "Es gibt noch keine Lieblingsblumen.",
+  "favorite_no_login": "Die Liste der Lieblingsblumen ist nur für angemeldete Benutzer verfügbar. Bitte loggen Sie sich ein."
 }

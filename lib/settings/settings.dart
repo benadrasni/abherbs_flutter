@@ -29,10 +29,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
   FirebaseAnalytics _firebaseAnalytics;
   Future<String> _prefLanguageF;
   String _prefLanguage;
+  bool _downloadFinished;
   Future<String> _myRegionF;
   Future<bool> _alwaysMyRegionF;
   Future<List<String>> _myFilterF;
   Future<bool> _offlineF;
+  Future<bool> _scaleDownPhotosF;
+
+  void onDownloadFinished(bool result) {
+    setState(() {
+      _downloadFinished = result;
+    });
+  }
 
   void _resetPrefLanguage() {
     Prefs.setString(keyPreferredLanguage, null).then((bool success) {
@@ -100,12 +108,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
+  void _setScaleDownPhotos(bool scaleDownPhotos) {
+    setState(() {
+      _scaleDownPhotosF = Prefs.setBool(keyScaleDownPhotos, scaleDownPhotos).then((success) {
+        return scaleDownPhotos;
+      });
+    });
+  }
+
   Future<void> _offlineDownloadDialog() async {
     return showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return SettingOffline();
+        return SettingOffline(this.onDownloadFinished);
       },
     );
   }
@@ -176,6 +192,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _alwaysMyRegionF = Prefs.getBoolF(keyAlwaysMyRegion, false);
     _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes);
     _offlineF = Prefs.getBoolF(keyOffline, false);
+    _downloadFinished = Offline.downloadFinished;
+    _scaleDownPhotosF = Prefs.getBoolF(keyScaleDownPhotos, false);
 
     Ads.hideBannerAd();
   }
@@ -356,7 +374,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           future: _offlineF,
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             return ListTile(
-              title: snapshot.data == null || !snapshot.data || Offline.downloadFinished
+              title: snapshot.data == null || !snapshot.data || _downloadFinished
                   ? Text(
                       S.of(context).offline_title,
                       style: titleTextStyle,
@@ -372,11 +390,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           color: Theme.of(context).accentColor,
                           child: Text(S.of(context).offline_download),
                           onPressed: () {
-                            _offlineDownloadDialog().then((_) {
-                              setState(() {
-                                _offlineF = Prefs.getBoolF(keyOffline, false);
-                              });
-                            });
+                            _offlineDownloadDialog();
                           },
                         ),
                       ],
@@ -394,6 +408,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onTap: () {},
             );
           }));
+    }
+
+    // scale down observation's photos
+    if (Purchases.isObservations()) {
+      widgets.add(ListTile(
+          title: Text(S.of(context).scale_down_photos_title,
+            style: titleTextStyle,
+          ),
+          subtitle: Text(
+            S.of(context).scale_down_photos_subtitle,
+            style: subtitleTextStyle,
+          ),
+          trailing: FutureBuilder<bool>(
+              future: _scaleDownPhotosF,
+              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                bool scaleDownPhotos = false;
+                if (snapshot.connectionState == ConnectionState.done) {
+                  scaleDownPhotos = snapshot.data;
+                }
+                return Switch(
+                  value: scaleDownPhotos,
+                  onChanged: (bool value) {
+                    _setScaleDownPhotos(value);
+                  },
+                );
+              }),
+        )
+      );
     }
 
     return Scaffold(

@@ -79,7 +79,9 @@ class _AppDrawerState extends State<AppDrawer> {
                   context,
                   MaterialPageRoute(builder: (context) => SignInScreen()),
                 ).then((result) {
-                  Navigator.pop(context);
+                  if (mounted) {
+                    Navigator.pop(context);
+                  }
                 });
               } else {
                 Auth.signOut(); //logout
@@ -120,7 +122,9 @@ class _AppDrawerState extends State<AppDrawer> {
           context,
           MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
         ).then((result) {
-          Navigator.pop(context);
+          if (mounted) {
+            Navigator.pop(context);
+          }
         });
       },
     ));
@@ -135,7 +139,9 @@ class _AppDrawerState extends State<AppDrawer> {
           context,
           MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter)),
         ).then((result) {
-          Navigator.pop(context);
+          if (mounted) {
+            Navigator.pop(context);
+          }
           if (widget.settingsCallback != null) {
             widget.settingsCallback();
           }
@@ -153,7 +159,9 @@ class _AppDrawerState extends State<AppDrawer> {
           context,
           MaterialPageRoute(builder: (context) => LegendScreen()),
         ).then((result) {
-          Navigator.pop(context);
+          if (mounted) {
+            Navigator.pop(context);
+          }
         });
       },
     ));
@@ -167,7 +175,9 @@ class _AppDrawerState extends State<AppDrawer> {
           context,
           MaterialPageRoute(builder: (context) => FeedbackScreen(widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
         ).then((result) {
-          Navigator.pop(context);
+          if (mounted) {
+            Navigator.pop(context);
+          }
         });
       },
     ));

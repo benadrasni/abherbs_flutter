@@ -5,11 +5,13 @@ import 'package:abherbs_flutter/detail/plant_detail_gallery.dart';
 import 'package:abherbs_flutter/detail/plant_detail_info.dart';
 import 'package:abherbs_flutter/detail/plant_detail_taxonomy.dart';
 import 'package:abherbs_flutter/drawer.dart';
+import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/entity/translations.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
+import 'package:abherbs_flutter/observations/observation_edit.dart';
 import 'package:abherbs_flutter/observations/observation_plant.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/purchase/subscription.dart';
@@ -24,6 +26,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:http/http.dart' as http;
+import 'package:connectivity/connectivity.dart';
+
+const int galleryIndex = 0;
+const int infoIndex = 1;
+const int taxonomyIndex = 2;
+const int observationIndex = 3;
 
 class PlantDetail extends StatefulWidget {
   final Locale myLocale;
@@ -31,6 +39,7 @@ class PlantDetail extends StatefulWidget {
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final Plant plant;
+
   PlantDetail(this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.filter, this.plant);
 
   @override
@@ -42,6 +51,7 @@ class _PlantDetailState extends State<PlantDetail> {
   FirebaseUser _currentUser;
   FirebaseAnalytics _firebaseAnalytics;
   Future<PlantTranslation> _plantTranslationF;
+  Future<bool> _isFavoriteF;
   int _currentIndex;
   bool _isOriginal;
   GlobalKey<ScaffoldState> _key;
@@ -122,6 +132,17 @@ class _PlantDetailState extends State<PlantDetail> {
     });
   }
 
+  Future<bool> _setFavorite() {
+    return Future<bool>(() {
+      if (_currentUser != null) {
+        return usersReference.child(_currentUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).once().then((snapshot) {
+          return snapshot.value != null && snapshot.value == 1;
+        });
+      }
+      return false;
+    });
+  }
+
   Future<void> _logSelectContentEvent(String contentId) async {
     await _firebaseAnalytics.logSelectContent(
       contentType: 'plant',
@@ -131,14 +152,15 @@ class _PlantDetailState extends State<PlantDetail> {
 
   Widget _getBody(BuildContext context) {
     switch (_currentIndex) {
-      case 0:
+      case galleryIndex:
         return getGallery(context, widget.plant);
-      case 1:
+      case infoIndex:
         return getInfo(context, widget.myLocale, _isOriginal, widget.plant, _plantTranslationF, this.onChangeTranslation, _key);
-      case 2:
+      case taxonomyIndex:
         return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF);
-      case 3:
-        return ObservationsPlant(_currentUser, Localizations.localeOf(context), widget.onChangeLanguage, widget.onBuyProduct, _isPublic, widget.plant.name, _key);
+      case observationIndex:
+        return ObservationsPlant(
+            _currentUser, Localizations.localeOf(context), widget.onChangeLanguage, widget.onBuyProduct, _isPublic, widget.plant.name, _key);
     }
     return null;
   }
@@ -169,6 +191,7 @@ class _PlantDetailState extends State<PlantDetail> {
   void _checkCurrentUser() async {
     _currentUser = await Auth.getCurrentUser();
     _listener = Auth.subscribe(_onAuthStateChanged);
+    _isFavoriteF = _setFavorite();
   }
 
   @override
@@ -206,34 +229,40 @@ class _PlantDetailState extends State<PlantDetail> {
 
     return Scaffold(
       key: _key,
-      appBar: _currentIndex == 3
+      appBar: _currentIndex == observationIndex
           ? AppBar(
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(flex: 3, child: GestureDetector(
-                    child: Text(widget.plant.name),
-                    onLongPress: () {
-                      Clipboard.setData(new ClipboardData(text: widget.plant.name));
-                      _key.currentState.showSnackBar(SnackBar(
-                        content: Text(S.of(context).snack_copy),
-                      ));
-                    },
-                  ),),
-                  Expanded(flex: 2, child: Row(
-                    children: [
-                      Icon(Icons.person),
-                      Switch(
-                        value: _isPublic,
-                        activeColor: Colors.white,
-                        inactiveThumbColor: Colors.white,
-                        onChanged: (bool value) {
-                          _setIsPublic(value);
-                        },
-                      ),
-                      Icon(Icons.people),
-                    ],
-                  ),),
+                  Expanded(
+                    flex: 3,
+                    child: GestureDetector(
+                      child: Text(widget.plant.name),
+                      onLongPress: () {
+                        Clipboard.setData(new ClipboardData(text: widget.plant.name));
+                        _key.currentState.showSnackBar(SnackBar(
+                          content: Text(S.of(context).snack_copy),
+                        ));
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      children: [
+                        Icon(Icons.person),
+                        Switch(
+                          value: _isPublic,
+                          activeColor: Colors.white,
+                          inactiveThumbColor: Colors.white,
+                          onChanged: (bool value) {
+                            _setIsPublic(value);
+                          },
+                        ),
+                        Icon(Icons.people),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             )
@@ -249,19 +278,76 @@ class _PlantDetailState extends State<PlantDetail> {
             )),
       drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
       body: _getBody(context),
+      floatingActionButton: Container(
+        height: 70.0,
+        width: 70.0,
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: FutureBuilder<bool>(
+              future: _isFavoriteF,
+              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                return FloatingActionButton(
+                  onPressed: () {
+                    if (_currentIndex == observationIndex) {
+                      var observation = Observation(widget.plant.name);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ObservationEdit(_currentUser, widget.myLocale, widget.onChangeLanguage, widget.onBuyProduct, observation)),
+                      ).then((value) {
+                        if (value != null && value && _key.currentState != null) {
+                          _key.currentState.showSnackBar(SnackBar(
+                            content: Text(S.of(context).observation_saved),
+                          ));
+                        }
+                        setState(() {});
+                      });
+                    } else {
+                      if (_currentUser != null) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          usersReference.child(_currentUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).set(
+                              snapshot.data ? null : 1).then((value) {
+                            setState(() {
+                              _isFavoriteF = _setFavorite();
+                            });
+                          });
+                        }
+                      } else {
+                        favoriteDialog(context, _key);
+                      }
+                    }
+                  },
+                  child: _currentIndex == observationIndex
+                      ? Icon(Icons.add)
+                      : snapshot.connectionState == ConnectionState.done && snapshot.data ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
+                );
+              }),
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: items,
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.blue,
         onTap: (index) {
-          if (index == 3 && _currentUser == null) {
-            observationDialog(context, _key);
-          } else {
-            setState(() {
-              _currentIndex = index;
-            });
-          }
+          Connectivity().checkConnectivity().then((result) {
+            if (index == observationIndex) {
+              if (result == ConnectivityResult.none) {
+                infoDialog(context, S.of(context).no_connection_title, S.of(context).no_connection_content);
+              } else if (_currentUser == null) {
+                observationDialog(context, _key);
+              } else {
+                setState(() {
+                  _currentIndex = index;
+                });
+              }
+            } else {
+              setState(() {
+                _currentIndex = index;
+              });
+            }
+          });
         },
       ),
     );

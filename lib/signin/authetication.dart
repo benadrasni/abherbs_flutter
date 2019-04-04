@@ -18,16 +18,16 @@ class Auth {
     return user.uid;
   }
 
-  static Future<String> signInWithEmail(String email, String password) async {
+  static Future<FirebaseUser> signInWithEmail(String email, String password) async {
     FirebaseUser user = await firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
-    return user.uid;
+    return user;
   }
 
-  static Future<String> signUpWithEmail(String email, String password) async {
+  static Future<FirebaseUser> signUpWithEmail(String email, String password) async {
     FirebaseUser user = await firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
-    return user.uid;
+    return user;
   }
 
   static Future<void> resetPassword(String email) async {
@@ -56,6 +56,7 @@ class Auth {
   static Future<FirebaseUser> getCurrentUser() async {
     FirebaseUser user = await firebaseAuth.currentUser().then((user) {
       if (user != null) {
+        usersReference.child(user.uid).keepSynced(true);
         if (Purchases.hasOldVersion == null) {
           usersReference.child(user.uid).child(firebaseAttributeOldVersion).once().then((snapshot) {
             Purchases.hasOldVersion = snapshot.value != null && snapshot.value;
@@ -66,6 +67,11 @@ class Auth {
           Prefs.getStringF(keyToken).then((token) {
             if (token.isNotEmpty) {
               usersReference.child(user.uid).child(firebaseAttributeToken).set(token);
+            }
+          });
+          Prefs.getStringListF(keyPurchases, []).then((purchases) {
+            if (purchases.length > 0) {
+              usersReference.child(user.uid).child(firebaseAttributePurchases).set(purchases);
             }
           });
         }
