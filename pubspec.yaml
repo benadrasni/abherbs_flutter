@@ -46,8 +46,7 @@ dependencies:
     path: ../flutter_country_picker
   image_picker:
     path: ../plugins/packages/image_picker
-  firebase_ml_vision:
-    path: ../plugins/packages/firebase_ml_vision
+  firebase_ml_vision: 0.7.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

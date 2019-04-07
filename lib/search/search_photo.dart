@@ -63,22 +63,22 @@ class _SearchPhotoState extends State<SearchPhoto> {
   
   Future<List<SearchResult>> _getSearchResult(File image) {
     final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(image);
-    final CloudLabelDetector labelDetector = FirebaseVision.instance.cloudLabelDetector();
+    final ImageLabeler imageLabeler = FirebaseVision.instance.imageLabeler();
 
-    return Future.wait([labelDetector.detectInImage(visionImage), _genericLabelsF]).then((value) async {
-      List<Label> labels = value[0];
+    return Future.wait([imageLabeler.processImage(visionImage), _genericLabelsF]).then((value) async {
+      List<ImageLabel> labels = value[0];
       List<dynamic> genericLabels = value[1];
-      List<Label> significantLabels = [];
-      for (Label label in labels) {
-        if (!genericLabels.contains(label.label.toLowerCase())) {
+      List<ImageLabel> significantLabels = [];
+      for (ImageLabel label in labels) {
+        if (!genericLabels.contains(label.text.toLowerCase())) {
           significantLabels.add(label);
         }
       }
 
       var results = <SearchResult>[];
       var unique = Set<String>();
-      for (Label label in significantLabels) {
-        var adjustedLabel = label.label;
+      for (ImageLabel label in significantLabels) {
+        var adjustedLabel = label.text;
         if (adjustedLabel.indexOf(' (') >= 0) {
           adjustedLabel = adjustedLabel.substring(0, adjustedLabel.indexOf(' ('));
         }
