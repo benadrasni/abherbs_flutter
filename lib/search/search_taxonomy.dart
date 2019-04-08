@@ -138,7 +138,7 @@ void _buildTaxonomy(List<PlantTaxon> taxons, Map<dynamic, dynamic> dictionary, M
   }
 
   taxonomy.forEach((key, value) {
-    if (firebaseAPGType != key && firebaseAttributeList != key && firebaseAttributeCount != key) {
+    if (firebaseAPGType != key && firebaseAttributeList != key && firebaseAttributeCount != key && firebaseAttributeFreebase != key) {
       _buildTaxonomy(taxons, dictionary, value, offset + 1, path + taxonName + '/', key, searchText);
     }
   });
