@@ -38,7 +38,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
   GlobalKey<ScaffoldState> _key;
   File _image;
   Future<List<SearchResult>> _searchResultF;
-  Future<List<dynamic>> _genericLabelsF;
+  Future<List<dynamic>> _genericEntitiesF;
 
   Future<void> _logPhotoSearchEvent() async {
     await _firebaseAnalytics.logEvent(name: 'search_photo');
@@ -63,70 +63,62 @@ class _SearchPhotoState extends State<SearchPhoto> {
   
   Future<List<SearchResult>> _getSearchResult(File image) {
     final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(image);
-    final ImageLabeler imageLabeler = FirebaseVision.instance.imageLabeler();
+    final ImageLabeler imageLabeler = FirebaseVision.instance.cloudImageLabeler();
 
-    return Future.wait([imageLabeler.processImage(visionImage), _genericLabelsF]).then((value) async {
+    return Future.wait([imageLabeler.processImage(visionImage), _genericEntitiesF]).then((value) async {
       List<ImageLabel> labels = value[0];
-      List<dynamic> genericLabels = value[1];
+      List<dynamic> genericEntities = value[1];
       List<ImageLabel> significantLabels = [];
       for (ImageLabel label in labels) {
-        if (!genericLabels.contains(label.text.toLowerCase())) {
+        if (!genericEntities.contains(label.entityId)) {
           significantLabels.add(label);
         }
       }
 
       var results = <SearchResult>[];
-      var unique = Set<String>();
       for (ImageLabel label in significantLabels) {
-        var adjustedLabel = label.text;
-        if (adjustedLabel.indexOf(' (') >= 0) {
-          adjustedLabel = adjustedLabel.substring(0, adjustedLabel.indexOf(' ('));
-        }
-        if (!unique.contains(adjustedLabel.toLowerCase())) {
-          unique.add(adjustedLabel.toLowerCase());
-          results.add(await rootReference.child(firebaseSearchPhoto).child(adjustedLabel.toLowerCase()).once().then((snapshot) {
-            var result = SearchResult();
-            result.labelLatin = adjustedLabel;
-            result.entityId = label.entityId;
-            result.confidence = label.confidence;
-            if (snapshot != null) {
-              if (snapshot.value != null) {
-                result.count = snapshot.value['count'];
-                result.path = snapshot.value['path'];
-                result.labelInLanguage = '';
-                if (result.path.contains('/')) {
-                  String path = result.path.substring(0, result.path.length - 5);
-                  result.labelLatin = path.substring(path.lastIndexOf('/') + 1);
-                } else {
-                  result.labelLatin = result.path;
-                  return translationsReference.child(widget.myLocale.languageCode).child(result.labelLatin).child(firebaseAttributeLabel)
-                      .once()
-                      .then((snapshot) {
-                    if (snapshot.value != null) {
-                      result.labelInLanguage = snapshot.value;
-                    }
-                    return result;
-                  });
-                }
-                if (translationCache.containsKey(result.labelLatin)) {
-                  result.labelInLanguage = translationCache[result.labelLatin];
+        results.add(await rootReference.child(firebaseSearchPhoto + label.entityId).once().then((snapshot) {
+          var result = SearchResult();
+          result.labelLatin = _adjustLabel(label.text);
+          result.entityId = label.entityId;
+          result.confidence = label.confidence;
+          if (snapshot != null) {
+            if (snapshot.value != null) {
+              result.count = snapshot.value['count'];
+              result.path = snapshot.value['path'];
+              result.labelInLanguage = '';
+              if (result.path.contains('/')) {
+                String path = result.path.substring(0, result.path.length - 5);
+                result.labelLatin = path.substring(path.lastIndexOf('/') + 1);
+              } else {
+                result.labelLatin = result.path;
+                return translationsReference.child(widget.myLocale.languageCode).child(result.labelLatin).child(firebaseAttributeLabel)
+                    .once()
+                    .then((snapshot) {
+                  if (snapshot.value != null) {
+                    result.labelInLanguage = snapshot.value;
+                  }
                   return result;
-                } else {
-                  return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin)
-                      .once()
-                      .then((snapshot) {
-                    if (snapshot.value != null && snapshot.value.length > 0) {
-                      translationCache[result.labelLatin] = snapshot.value[0];
-                      result.labelInLanguage = snapshot.value[0];
-                    }
-                    return result;
-                  });
-                }
+                });
+              }
+              if (translationCache.containsKey(result.labelLatin)) {
+                result.labelInLanguage = translationCache[result.labelLatin];
+                return result;
+              } else {
+                return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin)
+                    .once()
+                    .then((snapshot) {
+                  if (snapshot.value != null && snapshot.value.length > 0) {
+                    translationCache[result.labelLatin] = snapshot.value[0];
+                    result.labelInLanguage = snapshot.value[0];
+                  }
+                  return result;
+                });
               }
             }
-            return result;
-          }));
-        }
+          }
+          return result;
+        }));
       }
       // save labels
       if (results.length > 0) {
@@ -152,12 +144,19 @@ class _SearchPhotoState extends State<SearchPhoto> {
     });
   }
 
+  String _adjustLabel(String label) {
+    if (label.indexOf(' (') >= 0) {
+      return label.substring(0, label.indexOf(' ('));
+    }
+    return label;
+  }
+
   @override
   void initState() {
     super.initState();
     _firebaseAnalytics = FirebaseAnalytics();
     _key = new GlobalKey<ScaffoldState>();
-    _genericLabelsF = rootReference.child(firebaseSettingsGenericLabels).once().then((snapshot) {
+    _genericEntitiesF = rootReference.child(firebaseSettingsGenericEntities).once().then((snapshot) {
       if (snapshot != null) {
         return snapshot.value;
       }
