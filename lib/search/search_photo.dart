@@ -9,6 +9,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_crashlytics/flutter_crashlytics.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -141,6 +142,8 @@ class _SearchPhotoState extends State<SearchPhoto> {
       }
 
       return results;
+    }).catchError((error, stackTrace) {
+      FlutterCrashlytics().reportCrash(error, stackTrace, forceCrash: false);
     });
   }
 
