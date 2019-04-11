@@ -19,24 +19,19 @@ class ObservationMap extends StatefulWidget {
 }
 
 class _ObservationMapState extends State<ObservationMap> {
-  GoogleMapController _mapController;
   DateFormat _dateFormat;
   DateFormat _timeFormat;
   MarkerId _markerId;
   Map<MarkerId, Marker> _markers = <MarkerId, Marker>{};
   Future<String> nameF;
 
-  void _onMapCreated(GoogleMapController controller) {
-    _mapController = controller;
-  }
-
-  void _onAddMarkerButtonPressed() {
+  void _updateMarker(CameraPosition _position) {
     final Marker marker = _markers[_markerId];
     setState(() {
       _markers[_markerId] = marker.copyWith(
         positionParam: LatLng(
-          _mapController.cameraPosition.target.latitude,
-          _mapController.cameraPosition.target.longitude,
+          _position.target.latitude,
+          _position.target.longitude,
         ),
       );
     });
@@ -87,8 +82,7 @@ class _ObservationMapState extends State<ObservationMap> {
   Widget build(BuildContext context) {
     var widgets = <Widget>[];
     widgets.add(GoogleMap(
-      onMapCreated: _onMapCreated,
-      trackCameraPosition: true,
+      onCameraMove: ((_position) => _updateMarker(_position)),
       initialCameraPosition: CameraPosition(
         target: LatLng(widget.observation.latitude ?? 0.0,
             widget.observation.longitude ?? 0.0),
@@ -101,18 +95,6 @@ class _ObservationMapState extends State<ObservationMap> {
     ));
 
     if (widget.mode == mapModeEdit) {
-      widgets.add(Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Align(
-          alignment: Alignment.topRight,
-          child: FloatingActionButton(
-            heroTag: 'add_marker',
-            onPressed: _onAddMarkerButtonPressed,
-            materialTapTargetSize: MaterialTapTargetSize.padded,
-            child: const Icon(Icons.add_location, size: 36.0),
-          ),
-        ),
-      ));
       widgets.add(Padding(
         padding: const EdgeInsets.all(16.0),
         child: Align(
