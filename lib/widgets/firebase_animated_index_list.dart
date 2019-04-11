@@ -166,7 +166,9 @@ class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
     if (!_loaded) {
       return; // AnimatedList is not created yet
     }
-    _animatedListKey.currentState.insertItem(index, duration: widget.duration);
+    if (mounted) {
+      _animatedListKey.currentState.insertItem(index, duration: widget.duration);
+    }
   }
 
   void _onValue(DataSnapshot snapshot) {
