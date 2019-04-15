@@ -154,6 +154,118 @@ class _ColorState extends State<Color> {
         ],
       ),
     ));
+
+    _widgets.add(FutureBuilder<String>(
+        future: _rateStateF,
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.data == rateStateShould) {
+              return Container(
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                decoration: new BoxDecoration(
+                  borderRadius: new BorderRadius.circular(16.0),
+                  color: Theme
+                      .of(context)
+                      .secondaryHeaderColor,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      child: Text(
+                        S
+                            .of(context)
+                            .rate_question,
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        RaisedButton(
+                          child: Text(S
+                              .of(context)
+                              .yes),
+                          onPressed: () {
+                            rateDialog(context).then((_) {
+                              setState(() {
+                                _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
+                              });
+                            });
+                          },
+                        ),
+                        RaisedButton(
+                          child: Text(S
+                              .of(context)
+                              .no),
+                          onPressed: () {
+                            Prefs.setString(keyRateState, rateStateInitial).then((result) {
+                              if (result) {
+                                setState(() {
+                                  _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
+                                });
+                              }
+                            });
+                            Prefs.setString(keyRateCount, rateCountInitial.toString());
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return FutureBuilder<bool>(
+                  future: _isNewVersionF,
+                  builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done && snapshot.data) {
+                      return Container(
+                        padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                        decoration: new BoxDecoration(
+                          borderRadius: new BorderRadius.circular(16.0),
+                          color: Theme.of(context).secondaryHeaderColor,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                              child: Text(
+                                S.of(context).new_version,
+                                style: TextStyle(fontSize: 18.0),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    if (Platform.isAndroid) {
+                                      launchURL(playStore);
+                                    } else {
+                                      launchURL(appStore);
+                                    }
+                                  },
+                                  child: Platform.isAndroid
+                                      ? Image(image: AssetImage('res/images/google_play.png'))
+                                      : Image(image: AssetImage('res/images/app_store.png')),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  });
+            }
+          } else {
+            return Container();
+          }
+        }));
+
     _widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: Row(
@@ -206,108 +318,7 @@ class _ColorState extends State<Color> {
       ),
     ));
 
-    _widgets.add(FutureBuilder<String>(
-        future: _rateStateF,
-        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done && snapshot.data == rateStateShould) {
-            return Container(
-              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-              decoration: new BoxDecoration(
-                borderRadius: new BorderRadius.circular(16.0),
-                color: Theme.of(context).secondaryHeaderColor,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                    child: Text(
-                      S.of(context).rate_question,
-                      style: TextStyle(fontSize: 18.0),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      RaisedButton(
-                        child: Text(S.of(context).yes),
-                        onPressed: () {
-                          rateDialog(context).then((_) {
-                            setState(() {
-                              _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
-                            });
-                          });
-                        },
-                      ),
-                      RaisedButton(
-                        child: Text(S.of(context).no),
-                        onPressed: () {
-                          Prefs.setString(keyRateState, rateStateInitial).then((result) {
-                            if (result) {
-                              setState(() {
-                                _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
-                              });
-                            }
-                          });
-                          Prefs.setString(keyRateCount, rateCountInitial.toString());
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          } else {
-            return Container();
-          }
-        }));
-
     _widgets.add(Container(height: 10.0));
-
-    _widgets.add(FutureBuilder<bool>(
-        future: _isNewVersionF,
-        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done && snapshot.data) {
-            return Container(
-              padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-              decoration: new BoxDecoration(
-                borderRadius: new BorderRadius.circular(16.0),
-                color: Theme.of(context).secondaryHeaderColor,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                    child: Text(
-                      S.of(context).new_version,
-                      style: TextStyle(fontSize: 18.0),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          if (Platform.isAndroid) {
-                            launchURL(playStore);
-                          } else {
-                            launchURL(appStore);
-                          }
-                        },
-                        child: Platform.isAndroid
-                            ? Image(image: AssetImage('res/images/google_play.png'))
-                            : Image(image: AssetImage('res/images/app_store.png')),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            );
-          } else {
-            return Container();
-          }
-        }));
 
     _widgets.add(getAdMobBanner());
 

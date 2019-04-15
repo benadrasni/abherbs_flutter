@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/splash.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
@@ -258,7 +259,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Object>>(
-        future: Future.wait([_localeF, _initializationF]),
+        future: Future.wait([_localeF, _initializationF, Auth.getCurrentUser()]),
         builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:

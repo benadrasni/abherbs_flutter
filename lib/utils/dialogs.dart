@@ -218,3 +218,36 @@ Future<bool> infoDialog(BuildContext mainContext, String title, String content) 
         );
       });
 }
+
+Future<bool> infoBuyDialog(BuildContext mainContext, String title, String content) async {
+  return showDialog(
+      context: mainContext,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(content),
+          actions: [
+            FlatButton(
+              child: Text(S.of(context).product_purchase.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  )),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            ),
+            FlatButton(
+              child: Text(S.of(context).close.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  )),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+          ],
+        );
+      });
+}
