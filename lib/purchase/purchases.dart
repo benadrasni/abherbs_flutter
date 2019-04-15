@@ -50,13 +50,12 @@ class Purchases {
   }
 
   static bool isSearch() {
-//    for (PurchasedItem product in purchases) {
-//      if (product.productId == productSearch) {
-//        return true;
-//      }
-//    }
-//    return hasOldVersion != null && hasOldVersion;
-    return false;
+    for (PurchasedItem product in purchases) {
+      if (product.productId == productSearch) {
+        return true;
+      }
+    }
+    return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isCustomFilter() {
