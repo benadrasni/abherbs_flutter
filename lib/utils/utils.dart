@@ -396,19 +396,33 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
               photoSearchDialog(mainContext, key);
             }
           } else if (Purchases.isSearchByPhotoPromotion != null && Purchases.isSearchByPhotoPromotion) {
-            infoDialog(mainContext, S.of(mainContext).promotion_title,
+            infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
                     S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo)))
                 .then((value) {
-              Navigator.push(
-                mainContext,
-                MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
-              );
+                  if (value) {
+                    Navigator.push(
+                      mainContext,
+                      MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+                    );
+                  } else {
+                    Navigator.push(
+                      mainContext,
+                      MaterialPageRoute(
+                          builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+                    );
+                  }
             });
           } else {
-            Navigator.push(
-              mainContext,
-              MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
-            );
+            infoBuyDialog(mainContext, S.of(mainContext).product_photo_search_title,
+                S.of(mainContext).product_photo_search_description)
+                .then((value) {
+              if (value) {
+                Navigator.push(
+                  mainContext,
+                  MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+                );
+              }
+            });
           }
         }
       });
@@ -434,20 +448,33 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
               observationDialog(mainContext, key);
             }
           } else if (Purchases.isObservationPromotion != null && Purchases.isObservationPromotion) {
-            infoDialog(mainContext, S.of(mainContext).promotion_title,
+            infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
                     S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo)))
                 .then((value) {
-              Navigator.push(
-                mainContext,
-                MaterialPageRoute(
-                    builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct, true)),
-              );
+                  if (value) {
+                    Navigator.push(
+                      mainContext,
+                        MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+                    );
+                  } else {
+                    Navigator.push(
+                      mainContext,
+                      MaterialPageRoute(
+                          builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, onBuyProduct, true)),
+                    );
+                  }
             });
           } else {
-            Navigator.push(
-              mainContext,
-              MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
-            );
+            infoBuyDialog(mainContext, S.of(mainContext).product_observations_title,
+                S.of(mainContext).product_observations_description)
+                .then((value) {
+              if (value) {
+                Navigator.push(
+                  mainContext,
+                  MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+                );
+              }
+            });
           }
         }
       });
@@ -464,65 +491,75 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
           MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
         );
       } else if (Purchases.isSearchPromotion != null && Purchases.isSearchPromotion) {
-        infoDialog(
+        infoBuyDialog(
                 mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo)))
             .then((value) {
-          Navigator.push(
-            mainContext,
-            MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
-          );
+          if (value) {
+            Navigator.push(
+              mainContext,
+              MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+            );
+          } else {
+            Navigator.push(
+              mainContext,
+              MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
+            );
+          }
         });
       } else {
-        Navigator.push(
-          mainContext,
-          MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
-        );
+        infoBuyDialog(mainContext, S.of(mainContext).product_search_title,
+            S.of(mainContext).product_search_description)
+            .then((value) {
+          if (value) {
+            Navigator.push(
+              mainContext,
+              MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+            );
+          }
+        });
       }
     },
   ));
 
-
   // favorites
-  _actions.add(FutureBuilder<int>(
-      future: Future<int>(() {
-        if (currentUser != null) {
-          return usersReference.child(currentUser.uid).child(firebaseAttributeFavorite).once().then((snapshot) {
-            if (snapshot.value != null) {
-              if (snapshot.value is List) {
-                int i = 0;
-                snapshot.value.forEach((value) {
-                  if (value != null) {
-                    i++;
-                  }
-                });
-                return i;
-              } else {
-                return snapshot.value.length;
+  _actions.add(FutureBuilder<int>(future: Future<int>(() {
+    if (currentUser != null) {
+      return usersReference.child(currentUser.uid).child(firebaseAttributeFavorite).once().then((snapshot) {
+        if (snapshot.value != null) {
+          if (snapshot.value is List) {
+            int i = 0;
+            snapshot.value.forEach((value) {
+              if (value != null) {
+                i++;
               }
-            }
-            return 0;
-          });
+            });
+            return i;
+          } else {
+            return snapshot.value.length;
+          }
         }
         return 0;
-      }),
-      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-        return IconButton(
-          icon: Icon(Icons.favorite),
-          onPressed: () {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (currentUser != null) {
-                String path = '/' + firebaseUsers + '/' + currentUser.uid + '/' + firebaseAttributeFavorite;
-                Navigator.push(
-                  mainContext,
-                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, snapshot.data.toString(), path)),
-                );
-              } else {
-                favoriteDialog(mainContext, key);
-              }
-            }
-          },
-        );
-      }));
+      });
+    }
+    return 0;
+  }), builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+    return IconButton(
+      icon: Icon(Icons.favorite),
+      onPressed: () {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (currentUser != null) {
+            String path = '/' + firebaseUsers + '/' + currentUser.uid + '/' + firebaseAttributeFavorite;
+            Navigator.push(
+              mainContext,
+              MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, snapshot.data.toString(), path)),
+            );
+          } else {
+            favoriteDialog(mainContext, key);
+          }
+        }
+      },
+    );
+  }));
 
   return _actions;
 }
