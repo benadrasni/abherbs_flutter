@@ -228,7 +228,7 @@ Future<bool> infoBuyDialog(BuildContext mainContext, String title, String conten
           content: Text(content),
           actions: [
             FlatButton(
-              child: Text(S.of(context).product_purchase.toUpperCase(),
+              child: Text(S.of(context).enhancements.toUpperCase(),
                   style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
