@@ -22,7 +22,7 @@ dependencies:
   firebase_messaging: 4.0.0+1
   firebase_admob: 0.8.0+3
   firebase_analytics: 2.0.3
-  firebase_auth: 0.8.1+4
+  firebase_auth: 0.8.4+3
   firebase_storage: 2.1.0+1
   google_sign_in: 4.0.1+1
   flutter_crashlytics: 0.3.0
@@ -39,7 +39,7 @@ dependencies:
   #image_picker: 0.5.0+3
   exif: 1.0.1
   datetime_picker_formfield: 0.1.8
-  connectivity: 0.4.2
+  connectivity: 0.4.3
   screen:
     path: ../flutter_screen
   flutter_country_picker:
