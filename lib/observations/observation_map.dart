@@ -26,15 +26,17 @@ class _ObservationMapState extends State<ObservationMap> {
   Future<String> nameF;
 
   void _updateMarker(CameraPosition _position) {
-    final Marker marker = _markers[_markerId];
-    setState(() {
-      _markers[_markerId] = marker.copyWith(
-        positionParam: LatLng(
-          _position.target.latitude,
-          _position.target.longitude,
-        ),
-      );
-    });
+    if (widget.mode == mapModeEdit) {
+      final Marker marker = _markers[_markerId];
+      setState(() {
+        _markers[_markerId] = marker.copyWith(
+          positionParam: LatLng(
+            _position.target.latitude,
+            _position.target.longitude,
+          ),
+        );
+      });
+    }
   }
 
   void _onSaveButtonPressed(BuildContext context) {
@@ -46,8 +48,8 @@ class _ObservationMapState extends State<ObservationMap> {
   @override
   void initState() {
     super.initState();
-    _dateFormat = new DateFormat.yMMMMd(widget.myLocale.toString());
-    _timeFormat = new DateFormat.Hms(widget.myLocale.toString());
+    _dateFormat = DateFormat.yMMMMd(widget.myLocale.toString());
+    _timeFormat = DateFormat.Hms(widget.myLocale.toString());
     _markerId = MarkerId(widget.observation.plant);
     _markers = <MarkerId, Marker>{};
     _markers[_markerId] = Marker(
