@@ -16,6 +16,7 @@ import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:exif/exif.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -174,6 +175,12 @@ Future<void> launchURLF(String url) {
     } else {
       throw 'Could not launch $url';
     }
+  });
+}
+
+Future<void> _logPromotionEvent(event) async {
+  await FirebaseAnalytics().logEvent(name: 'promotion', parameters: {
+    'feature': event
   });
 }
 
@@ -405,6 +412,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
                       MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
                     );
                   } else {
+                    _logPromotionEvent('search_by_photo');
                     Navigator.push(
                       mainContext,
                       MaterialPageRoute(
@@ -457,6 +465,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
                         MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
                     );
                   } else {
+                    _logPromotionEvent('observation');
                     Navigator.push(
                       mainContext,
                       MaterialPageRoute(
@@ -500,6 +509,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
               MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
             );
           } else {
+            _logPromotionEvent('search');
             Navigator.push(
               mainContext,
               MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage, onBuyProduct)),
