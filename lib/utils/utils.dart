@@ -129,6 +129,7 @@ const String firebaseAttributeObservations = "observations";
 const String firebaseAttributeFrom = "from";
 const String firebaseAttributeTo = "to";
 const String firebaseAttributeFavorite = "favorites";
+const String firebaseAttributeEntity = "m";
 
 const String firebaseValuePrivate = "private";
 const String firebaseValueReview = "review";
