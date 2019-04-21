@@ -52,7 +52,6 @@ class Auth {
     );
   }
 
-
   static Future<FirebaseUser> getCurrentUser() async {
     FirebaseUser user = await firebaseAuth.currentUser().then((user) {
       if (user != null) {
@@ -74,6 +73,9 @@ class Auth {
               usersReference.child(user.uid).child(firebaseAttributePurchases).set(purchases);
             }
           });
+          if (Purchases.isPhotoSearch()) {
+            rootReference.child(firebaseSearchPhoto).child(firebaseAttributeEntity).keepSynced(true);
+          }
         }
         if (Purchases.hasLifetimeSubscription == null) {
           usersReference.child(user.uid).child(firebaseAttributeLifetimeSubscription).once().then((snapshot) {
