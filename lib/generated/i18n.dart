@@ -14617,7 +14617,7 @@ class $uk_UA extends S {
   @override
   String get legend => "Легенда";
   @override
-  String get about => "Про додатку";
+  String get about => "Про додаток";
   @override
   String get product_no_ads_description => "Програма не покаже рекламний банер внизу екрана.";
   @override
@@ -14625,13 +14625,13 @@ class $uk_UA extends S {
   @override
   String get northern_america => "Північна Америка";
   @override
-  String get product_search_description => "Ви зможете знайти квітку за її українською або латинською назвою або за її таксоном (наприклад ряд, родина, рід).";
+  String get product_search_description => "Ви зможете знайти квітку за її українською або латинською назвою або за її таксономії (наприклад ряд, родина, рід).";
   @override
   String get product_change => "Змінити";
   @override
   String get australasia => "Австралазія";
   @override
-  String get observation_note => "Місце для приватної ноти.";
+  String get observation_note => "Місце для приватного запису.";
   @override
   String get auth_verify_email_title => "Підтвердіть ваш аккаунт";
   @override
@@ -14649,7 +14649,7 @@ class $uk_UA extends S {
   @override
   String get google => "Google";
   @override
-  String get google_translate => "Переклад з Google Translate";
+  String get google_translate => "Перекладено з Google Translate";
   @override
   String get habitat_forest => "ліси";
   @override
@@ -14657,7 +14657,7 @@ class $uk_UA extends S {
   @override
   String get southwestern_pacific => "Південно-Західний Тихий океан";
   @override
-  String get asia_tropical => "Азія-Тропічнаа";
+  String get asia_tropical => "Азія-Тропічна";
   @override
   String get northwestern_usa => "Північно-західна США";
   @override
@@ -14669,7 +14669,7 @@ class $uk_UA extends S {
   @override
   String get observation_empty => "Ще немає спостережень.";
   @override
-  String get habitat_message => "Що навколо тебе? Визначити місце проживання рослин.";
+  String get habitat_message => "Що навколо тебе? Визначте місце проживання рослин.";
   @override
   String get offline_download_fail => "Помилка завантаження. Перевірте підключення до Інтернету або вільний простір на пристрої та повторіть спробу.";
   @override
@@ -14685,7 +14685,7 @@ class $uk_UA extends S {
   @override
   String get search => "Шукати ...";
   @override
-  String get auth_sms_terms_of_service => "Коли ви торкнетесь опції “Підтвердити номер телефону”, вам може надійти SMS-повідомлення. За SMS і використання трафіку може стягуватися плата.";
+  String get auth_sms_terms_of_service => "Коли ви натиснете на опцію “Підтвердити номер телефону”, вам може надійти SMS-повідомлення. За SMS і використання трафіку може стягуватися плата.";
   @override
   String get habitat_rock => "скелі або гори";
   @override
@@ -14705,7 +14705,7 @@ class $uk_UA extends S {
   @override
   String get snack_loading_ad => "Реклама все ще завантажується, знову натисніть кнопку.";
   @override
-  String get petal_message => "Чи квітка зигоморфна? Ні? Тоді скільки пелюсток є?";
+  String get petal_message => "Чи квітка зигоморфна? Ні? Тоді скільки пелюсток?";
   @override
   String get observation_upload_title => "Завантаження спостережень";
   @override
@@ -14715,13 +14715,13 @@ class $uk_UA extends S {
   @override
   String get favorite_empty => "Улюблених квітів поки немає.";
   @override
-  String get product_custom_filter_description => "Ви зможете змінити стандартний порядок і кількість фільтрів (колір, середовище, пелюстка, розповсюдження).";
+  String get product_custom_filter_description => "Ви зможете змінити стандартний порядок і кількість фільтрів (колір, середовище, пелюстки, розповсюдження).";
   @override
   String get auth_password_hint => "Пароль";
   @override
   String get habitat_meadow => "луки або пасовища";
   @override
-  String get observation_missing_photo => "Спостереження було неповним, тому його не врятували. Фото відсутні.";
+  String get observation_missing_photo => "Спостереження було неповним, тому воно не збереглося. Фото відсутні.";
   @override
   String get auth_google => "Увійти через Google";
   @override
@@ -14811,7 +14811,7 @@ class $uk_UA extends S {
   @override
   String get pref_language => "Бажана мова";
   @override
-  String get observation_photo_delete_question => "Видалити фотографію з спостереження?";
+  String get observation_photo_delete_question => "Видалити фотографію зі спостереження?";
   @override
   String get new_zealand => "Нова Зеландія";
   @override
@@ -14825,7 +14825,7 @@ class $uk_UA extends S {
   @override
   String get product_search_title => "Пошук по іменах або таксономії";
   @override
-  String get feedback_review => "Можна написати позитивний відгук.";
+  String get feedback_review => "Ви можете написати позитивний відгук.";
   @override
   String get yes => "Так";
   @override
@@ -14837,7 +14837,7 @@ class $uk_UA extends S {
   @override
   String get offline_title => "Автономний режим";
   @override
-  String get observation_missing_location => "Спостереження було неповним, тому його не врятували. Місцезнаходження відсутні.";
+  String get observation_missing_location => "Спостереження було неповним, тому воно не збереглося. Місцезнаходження відсутнє.";
   @override
   String get privacy_policy => "Політика конфіденційності";
   @override
@@ -14861,7 +14861,7 @@ class $uk_UA extends S {
   @override
   String get snack_copy => "Копіюється в буфер обміну";
   @override
-  String get product_purchase_failed => "Покупку не вдалося";
+  String get product_purchase_failed => "Покупка не вдалася";
   @override
   String get auth_twitter => "Увійти через Twitter";
   @override
@@ -14871,15 +14871,15 @@ class $uk_UA extends S {
   @override
   String get western_indian_ocean => "Західний індійський океан";
   @override
-  String get feedback => "Відповідь";
+  String get feedback => "Відгук";
   @override
   String get subscription_monthly_description => "Збереження фотографій спостережень між пристроями, див. Спільні спостереження - щомісячний платіж.";
   @override
-  String get southwestern_usa => "Південно-західна США";
+  String get southwestern_usa => "Північно-західні США";
   @override
   String get auth_invalid_email_address => "Електронна адреса неправильна";
   @override
-  String get distribution_message => "На яку географічну область ми маємо зосередитися?";
+  String get distribution_message => "На якій географічній області ми маємо зосередитися?";
   @override
   String get caribbean => "Карибський басейн";
   @override
@@ -14887,7 +14887,7 @@ class $uk_UA extends S {
   @override
   String get offline_delete_message => "Видалити дані в автономному режимі?";
   @override
-  String get petal_4 => "4 або менш";
+  String get petal_4 => "4 або менше";
   @override
   String get africa => "Африка";
   @override
@@ -15049,7 +15049,7 @@ class $uk_UA extends S {
   @override
   String get southern_africa => "Південна Африка";
   @override
-  String get always_my_region_title => "Завжди додайте мій регіон до фільтра";
+  String get always_my_region_title => "Завжди додавайте мій регіон до фільтру";
   @override
   String get observation_upload_fail => "Не вдалося завантажити. Перевірте підключення до Інтернету та повторіть спробу.";
   @override
@@ -15107,15 +15107,15 @@ class $uk_UA extends S {
   @override
   String get product_custom_filter_title => "Спеціальний фільтр";
   @override
-  String get feedback_intro => "Ви внесли свій внесок у цю програму з моменту встановлення її на своєму пристрої. Якщо ви шукаєте більше тут, є кілька варіантів:";
+  String get feedback_intro => "Ви внесли свій внесок у цю програму з моменту встановлення її на своєму пристрої, дякуємо! Якщо ви шукаєте чогось більшого, тут є кілька варіантів:";
   @override
   String get filter_distribution => "розповсюдження";
   @override
-  String get feedback_buy_extended => "Ви можете придбати додаткові функціональні можливості, такі як автономний режим, пошук по іменах або в таксономії, пошук за фото, спостереження та налаштований фільтр.";
+  String get feedback_buy_extended => "Ви можете придбати додаткові функціональні можливості, такі як автономний режим, пошук по іменам або в таксономії, пошук за фото, спостереження та налаштовуваний фільтр.";
   @override
-  String get north_central_usa => "Північ-Центральна США";
+  String get north_central_usa => "Північно-Центральна США";
   @override
-  String get improve_translation => "Поліпшення перекладу";
+  String get improve_translation => "Покращити переклад";
   @override
   String get favorite_no_login => "Список улюблених квітів доступний тільки для зареєстрованих користувачів. Увійдіть у систему.";
   @override
@@ -15123,7 +15123,7 @@ class $uk_UA extends S {
   @override
   String get southeastern_usa => "Південно-східна США";
   @override
-  String get product_subscribe_failed => "Покупку не вдалося";
+  String get product_subscribe_failed => "Покупка не вдалася";
   @override
   String get plant_height_from => "Висота:";
   @override
@@ -15143,13 +15143,13 @@ class $uk_UA extends S {
   @override
   String get product_no_ads_title => "Немає небажаної реклами";
   @override
-  String get petal_zygomorphic => "зигоморфной";
+  String get petal_zygomorphic => "зигоморфна";
   @override
-  String get photo_search_empty => "Google AI (штучний інтелект) не визнавав жодної квітки на картинці. Повторіть спробу з різних кутів, відстаней або світла. Якщо ви вже зробили це, схоже, AI повелитель не прийде в будь-який час найближчим часом.";
+  String get photo_search_empty => "Google AI (штучний інтелект) не визначив жодної квітки на картинці. Повторіть спробу з різних кутів, відстаней або освітлення. Якщо ви вже зробили це, схоже, AI володар не прийде найближчим часом.";
   @override
   String get auth_invalid_code => "Введіть дійсний код SMS";
   @override
-  String promotion_content(String date) => "Це платна функція. Ви можете використовувати його безкоштовно до $date";
+  String promotion_content(String date) => "Це платна функція. Ви можете використовувати її безкоштовно до $date";
   @override
   String auth_reset_password_email_message(String _email) => "Виконуйте інструкції, надіслані на адресу $_email, щоб скинути пароль.";
   @override
