@@ -79,15 +79,16 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
           _isLoading = false;
         });
       } catch (e) {
-        print('Error: $e');
-        setState(() {
-          _isWrongPassword = e.code == errorWrongPassword;
-          _isLoading = false;
-          if (Platform.isIOS) {
-            _errorMessage = e.details;
-          } else
-            _errorMessage = e.message;
-        });
+        if (mounted) {
+          setState(() {
+            _isWrongPassword = e.code == errorWrongPassword;
+            _isLoading = false;
+            if (Platform.isIOS) {
+              _errorMessage = e.details;
+            } else
+              _errorMessage = e.message;
+          });
+        }
       }
     }
   }
