@@ -169,6 +169,7 @@ class _AppState extends State<App> {
       } else {
         throw PlatformException(code: Platform.operatingSystem, message: "platform not supported");
       }
+      await Auth.getCurrentUser();
     }).catchError((error) {
       _iapError();
     });
@@ -259,7 +260,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Object>>(
-        future: Future.wait([_localeF, _initializationF, Auth.getCurrentUser()]),
+        future: Future.wait([_localeF, _initializationF]),
         builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
