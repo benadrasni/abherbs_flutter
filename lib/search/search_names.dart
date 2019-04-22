@@ -56,8 +56,9 @@ Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, Function(
 Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText, Map<dynamic, dynamic> nativeNames,
     Map<dynamic, dynamic> latinNames) {
   var filteredNativeNames = <String>[];
+  var searchTextWithoutDiacritics = removeDiacritics(searchText).toLowerCase();
   nativeNames.forEach((key, value) {
-    if (searchText.isEmpty || removeDiacritics(key).toLowerCase().contains(searchText.toLowerCase())) {
+    if (searchText.isEmpty || removeDiacritics(key).toLowerCase().contains(searchTextWithoutDiacritics)) {
       filteredNativeNames.add(key);
     }
   });
@@ -65,7 +66,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
 
   var filteredLatinNames = <String>[];
   latinNames.forEach((key, value) {
-    if (searchText.isEmpty || key.toLowerCase().contains(searchText.toLowerCase())) {
+    if (searchText.isEmpty || key.toLowerCase().contains(searchTextWithoutDiacritics)) {
       filteredLatinNames.add(key);
     }
   });

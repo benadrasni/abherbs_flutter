@@ -114,8 +114,9 @@ Column _getName(PlantTaxon taxon) {
 
 bool _isInNames(List<dynamic> names, String searchText) {
   if (names != null) {
+    var searchTextWithoutDiacritics = removeDiacritics(searchText).toLowerCase();
     for (String name in names) {
-      if (removeDiacritics(name).toLowerCase().contains(searchText.toLowerCase())) {
+      if (removeDiacritics(name).toLowerCase().contains(searchTextWithoutDiacritics)) {
         return true;
       }
     }
