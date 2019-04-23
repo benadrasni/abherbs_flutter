@@ -407,7 +407,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
             infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
                     S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo)))
                 .then((value) {
-                  if (value) {
+                  if (value != null && value) {
                     Navigator.push(
                       mainContext,
                       MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
@@ -425,7 +425,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
             infoBuyDialog(mainContext, S.of(mainContext).product_photo_search_title,
                 S.of(mainContext).product_photo_search_description)
                 .then((value) {
-              if (value) {
+              if (value != null && value) {
                 Navigator.push(
                   mainContext,
                   MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
@@ -460,7 +460,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
             infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
                     S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo)))
                 .then((value) {
-                  if (value) {
+                  if (value != null && value) {
                     Navigator.push(
                       mainContext,
                         MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
@@ -478,7 +478,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
             infoBuyDialog(mainContext, S.of(mainContext).product_observations_title,
                 S.of(mainContext).product_observations_description)
                 .then((value) {
-              if (value) {
+              if (value != null && value) {
                 Navigator.push(
                   mainContext,
                   MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
@@ -504,7 +504,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
         infoBuyDialog(
                 mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo)))
             .then((value) {
-          if (value) {
+          if (value != null && value) {
             Navigator.push(
               mainContext,
               MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
@@ -521,7 +521,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
         infoBuyDialog(mainContext, S.of(mainContext).product_search_title,
             S.of(mainContext).product_search_description)
             .then((value) {
-          if (value) {
+          if (value != null && value) {
             Navigator.push(
               mainContext,
               MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
