@@ -69,9 +69,11 @@ class _PlantListState extends State<PlantList> {
         return int.parse(widget.count);
       });
     } else {
-      _count = countsReference.child(getFilterKey(widget.filter)).once().then((DataSnapshot snapshot) {
+      var filter = getFilterKey(widget.filter);
+      _count = countsReference.child(filter).once().then((DataSnapshot snapshot) {
         return snapshot.value;
       });
+      keysReference.child(filter).keepSynced(true);
     }
 
     Ads.hideBannerAd();
@@ -87,6 +89,7 @@ class _PlantListState extends State<PlantList> {
   Widget build(BuildContext context) {
     var self = this;
     var mainContext = context;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).list_info),
