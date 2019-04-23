@@ -51,7 +51,9 @@ class _ColorState extends State<Color> {
     newFilter.addAll(_filter);
     newFilter[filterColor] = value;
 
-    countsReference.child(getFilterKey(newFilter)).once().then((DataSnapshot snapshot) {
+    var filter = getFilterKey(newFilter);
+    countsReference.child(filter).keepSynced(true);
+    countsReference.child(filter).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
           Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
