@@ -36,7 +36,7 @@ dependencies:
   percent_indicator: 1.0.14
   package_info: 0.4.0+2
   google_maps_flutter: 0.5.6
-  #image_picker: 0.5.0+3
+  image_picker: 0.5.4+3
   exif: 1.0.1
   datetime_picker_formfield: 0.1.8
   connectivity: 0.4.3
@@ -44,8 +44,6 @@ dependencies:
     path: ../flutter_screen
   flutter_country_picker:
     path: ../flutter_country_picker
-  image_picker:
-    path: ../plugins/packages/image_picker
   firebase_ml_vision:
     path: ../plugins/packages/firebase_ml_vision
 
