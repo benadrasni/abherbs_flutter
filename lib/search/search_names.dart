@@ -92,7 +92,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
                 var value = nativeNames[filteredNativeNames[index]];
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, value.length.toString(), path)),
+                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, '', value.length.toString(), path)),
                 );
               },
             );
@@ -121,7 +121,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
               var value = latinNames[filteredLatinNames[index]];
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, value.length.toString(), path)),
+                MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, '', value.length.toString(), path)),
               );
             },
           );

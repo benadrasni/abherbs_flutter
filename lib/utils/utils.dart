@@ -562,7 +562,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
             String path = '/' + firebaseUsers + '/' + currentUser.uid + '/' + firebaseAttributeFavorite;
             Navigator.push(
               mainContext,
-              MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, snapshot.data.toString(), path)),
+              MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, S.of(mainContext).favorite_empty, snapshot.data.toString(), path)),
             );
           } else {
             favoriteDialog(mainContext, key);

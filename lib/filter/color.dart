@@ -191,9 +191,11 @@ class _ColorState extends State<Color> {
                               .yes),
                           onPressed: () {
                             rateDialog(context).then((_) {
-                              setState(() {
-                                _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
-                              });
+                              if (mounted) {
+                                setState(() {
+                                  _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
+                                });
+                              }
                             });
                           },
                         ),
@@ -380,7 +382,7 @@ class _ColorState extends State<Color> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                                builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter, '')),
                           ).then((value) {
                             Ads.showBannerAd(this);
                           });
