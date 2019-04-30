@@ -18,9 +18,10 @@ class PlantList extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
+  final String emptyMessage;
   final String count;
   final String path;
-  PlantList(this.onChangeLanguage, this.onBuyProduct, this.filter, [this.count, this.path]);
+  PlantList(this.onChangeLanguage, this.onBuyProduct, this.filter, this.emptyMessage, [this.count, this.path]);
 
   @override
   _PlantListState createState() => _PlantListState();
@@ -100,7 +101,7 @@ class _PlantListState extends State<PlantList> {
           emptyChild: Container(
             padding: EdgeInsets.all(5.0),
             alignment: Alignment.center,
-            child: Text(S.of(context).favorite_empty, style: TextStyle(fontSize: 20.0)),
+            child: Text(widget.emptyMessage, style: TextStyle(fontSize: 20.0)),
           ),
           query: listsReference.orderByChild(firebaseAttributeName),
           keyQuery: widget.path != null ? rootReference.child(widget.path) : keysReference.child(getFilterKey(widget.filter)),

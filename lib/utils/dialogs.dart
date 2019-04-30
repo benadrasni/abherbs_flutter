@@ -18,32 +18,23 @@ Future<void> rateDialog(BuildContext context) async {
           FlatButton(
             child: Text(S.of(context).rate_never),
             onPressed: () {
-              Prefs.setString(keyRateState, rateStateNever).then((value) {
-                Navigator.of(context).pop();
-              }).catchError((error) {
-                Navigator.of(context).pop();
-              });
+              Prefs.setString(keyRateState, rateStateNever);
+              Navigator.of(context).pop();
             },
           ),
           FlatButton(
             child: Text(S.of(context).rate_later),
             onPressed: () {
               Prefs.setString(keyRateCount, rateCountInitial.toString());
-              Prefs.setString(keyRateState, rateStateInitial).then((value) {
-                Navigator.of(context).pop();
-              }).catchError((error) {
-                Navigator.of(context).pop();
-              });
+              Prefs.setString(keyRateState, rateStateInitial);
+              Navigator.of(context).pop();
             },
           ),
           FlatButton(
             child: Text(S.of(context).rate),
             onPressed: () {
-              Prefs.setString(keyRateState, rateStateDid).then((value) {
-                Navigator.of(context).pop();
-              }).catchError((error) {
-                Navigator.of(context).pop();
-              });
+              Prefs.setString(keyRateState, rateStateDid);
+              Navigator.of(context).pop();
               if (Platform.isAndroid) {
                 launchURL(playStore);
               } else {

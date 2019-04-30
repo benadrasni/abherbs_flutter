@@ -25,7 +25,9 @@ class _SplashState extends State<Splash> {
     var _duration = Duration(milliseconds: timer);
     var firstRoute = await _findFirstRoute();
     return Timer(_duration, () {
-      Navigator.pushReplacement(context, firstRoute);
+      if (mounted) {
+        Navigator.pushReplacement(context, firstRoute);
+      }
     });
   }
 
@@ -72,7 +74,7 @@ class _SplashState extends State<Splash> {
               String path = widget.notificationData['path'];
               if (count != null && path != null) {
                 return _getFirstFilterRoute(MaterialPageRoute(
-                    builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, {}, count, path)));
+                    builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, {}, '', count, path)));
               }
               return _getFirstFilterRoute();
             default:

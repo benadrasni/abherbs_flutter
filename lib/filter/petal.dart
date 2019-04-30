@@ -268,7 +268,7 @@ class _PetalState extends State<Petal> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                                builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter, '')),
                           ).then((value) {
                             Ads.showBannerAd(this);
                           });

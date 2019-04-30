@@ -84,13 +84,15 @@ class _DistributionState extends State<Distribution> {
   }
 
   _setMyRegion() {
-    _myRegion = "";
-    _myRegionF = Prefs.getStringF(keyMyRegion);
-    _myRegionF.then((region) {
-      setState(() {
-        _myRegion = region;
+    if (mounted) {
+      _myRegion = "";
+      _myRegionF = Prefs.getStringF(keyMyRegion);
+      _myRegionF.then((region) {
+        setState(() {
+          _myRegion = region;
+        });
       });
-    });
+    }
   }
 
   Widget _getBody(BuildContext context) {
@@ -306,7 +308,7 @@ class _DistributionState extends State<Distribution> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter)),
+                                builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter, '')),
                           ).then((value) {
                             Ads.showBannerAd(this);
                           });
