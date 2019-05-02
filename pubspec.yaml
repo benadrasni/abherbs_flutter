@@ -36,7 +36,7 @@ dependencies:
   percent_indicator: 1.0.14
   package_info: 0.4.0+2
   google_maps_flutter: 0.5.6
-  image_picker: 0.6.0
+  image_picker: 0.6.0+2
   exif: 1.0.1
   datetime_picker_formfield: 0.1.8
   connectivity: 0.4.3

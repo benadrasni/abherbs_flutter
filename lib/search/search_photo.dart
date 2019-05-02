@@ -123,8 +123,12 @@ class _SearchPhotoState extends State<SearchPhoto> {
       }
       // save labels
       if (results.length > 0) {
+        var userId = firebaseAttributeAnonymous;
+        if (widget.currentUser != null) {
+          userId = widget.currentUser.uid;
+        }
         rootReference.child(firebaseUsersPhotoSearch)
-            .child(widget.currentUser.uid)
+            .child(userId)
             .child(DateTime.now().millisecondsSinceEpoch.toString())
             .set(results.map((searchResult) {
           Map<String, dynamic> labelMap = {};
