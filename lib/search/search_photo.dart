@@ -93,6 +93,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                 result.labelLatin = path.substring(path.lastIndexOf('/') + 1);
               } else {
                 result.labelLatin = result.path;
+                translationsReference.child(widget.myLocale.languageCode).child(result.labelLatin).keepSynced(true);
                 return translationsReference.child(widget.myLocale.languageCode).child(result.labelLatin).child(firebaseAttributeLabel)
                     .once()
                     .then((snapshot) {
@@ -106,6 +107,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                 result.labelInLanguage = translationCache[result.labelLatin];
                 return result;
               } else {
+                translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).keepSynced(true);
                 return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin)
                     .once()
                     .then((snapshot) {
