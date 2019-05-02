@@ -84,12 +84,12 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
                 padding: new EdgeInsets.all(10.0),
                 child: Text(
                   filteredNativeNames[index],
-                  style: TextStyle(fontSize: 16.0),
+                  style: TextStyle(fontSize: 16.0, fontWeight: nativeNames[filteredNativeNames[index]][firebaseAttributeIsLabel] != null ? FontWeight.bold : FontWeight.normal),
                 ),
               ),
               onTap: () {
-                String path = '/' + firebaseSearch + '/' + getLanguageCode(myLocale.languageCode) + '/' + filteredNativeNames[index];
-                var value = nativeNames[filteredNativeNames[index]];
+                String path = '/' + firebaseSearch + '/' + getLanguageCode(myLocale.languageCode) + '/' + filteredNativeNames[index] + '/' + firebaseAttributeList;
+                var value = nativeNames[filteredNativeNames[index]][firebaseAttributeList];
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, '', value.length.toString(), path)),
@@ -113,12 +113,12 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
               padding: new EdgeInsets.all(10.0),
               child: Text(
                 filteredLatinNames[index],
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0, fontWeight: nativeNames[filteredNativeNames[index]][firebaseAttributeIsLabel] != null ? FontWeight.bold : FontWeight.normal),
               ),
             ),
             onTap: () {
-              String path = '/' + firebaseSearch + '/' + languageLatin + '/' + filteredLatinNames[index];
-              var value = latinNames[filteredLatinNames[index]];
+              String path = '/' + firebaseSearch + '/' + languageLatin + '/' + filteredLatinNames[index] + '/' + firebaseAttributeList;
+              var value = latinNames[filteredLatinNames[index]][firebaseAttributeList];
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, '', value.length.toString(), path)),

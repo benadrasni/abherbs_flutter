@@ -87,7 +87,7 @@ const int firebaseCacheSize = 1024 * 1024 * 20;
 const String firebaseCounts = 'counts_4_v2';
 const String firebaseLists = 'lists_4_v2';
 const String firebasePlants = 'plants_v2';
-const String firebaseSearch = 'search_v2';
+const String firebaseSearch = 'search_v3';
 const String firebaseAPGIV = 'APG IV_v3';
 const String firebasePlantHeaders = 'plants_headers';
 const String firebaseTranslations = 'translations';
@@ -131,6 +131,7 @@ const String firebaseAttributeTo = "to";
 const String firebaseAttributeFavorite = "favorites";
 const String firebaseAttributeEntity = "m";
 const String firebaseAttributeAnonymous = "anonymous";
+const String firebaseAttributeIsLabel = "is_label";
 
 const String firebaseValuePrivate = "private";
 const String firebaseValueReview = "review";
