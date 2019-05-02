@@ -62,6 +62,8 @@ class Auth {
             if (Purchases.hasOldVersion) {
               _logOldVersionEvent();
             }
+          }).catchError((error) {
+            Purchases.hasOldVersion = false;
           });
           Prefs.getStringF(keyToken).then((token) {
             if (token.isNotEmpty) {

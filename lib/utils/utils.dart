@@ -124,12 +124,13 @@ const String firebaseAttributeLifetimeSubscription = "lifetime subscription";
 const String firebaseAttributeToken = "token";
 const String firebaseAttributePurchases = "purchases";
 const String firebaseAttributeSearch = "search";
-const String firebaseAttributeSearchByPhoto = "searchByPhoto";
+const String firebaseAttributeSearchByPhoto = "search_by_photo";
 const String firebaseAttributeObservations = "observations";
 const String firebaseAttributeFrom = "from";
 const String firebaseAttributeTo = "to";
 const String firebaseAttributeFavorite = "favorites";
 const String firebaseAttributeEntity = "m";
+const String firebaseAttributeAnonymous = "anonymous";
 
 const String firebaseValuePrivate = "private";
 const String firebaseValueReview = "review";

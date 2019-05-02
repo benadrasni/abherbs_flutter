@@ -321,7 +321,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
   }
 
   Widget _showErrorMessage() {
-    if (_errorMessage.length > 0 && _errorMessage != null) {
+    if (_errorMessage != null && _errorMessage.length > 0) {
       return Container(
         padding: EdgeInsets.all(5.0),
         child: Text(
