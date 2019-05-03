@@ -54,11 +54,13 @@ class _SearchState extends State<Search> {
     switch (_currentIndex) {
       case 0:
         if (_nativeNamesF == null) {
+          searchReference.child(getLanguageCode(widget.myLocale.languageCode)).keepSynced(true);
           _nativeNamesF = searchReference.child(getLanguageCode(widget.myLocale.languageCode)).once().then((DataSnapshot snapshot) {
             return snapshot.value;
           });
         }
         if (_latinNamesF == null) {
+          searchReference.child(languageLatin).keepSynced(true);
           _latinNamesF = searchReference.child(languageLatin).once().then((DataSnapshot snapshot) {
             return snapshot.value;
           });
@@ -66,11 +68,13 @@ class _SearchState extends State<Search> {
         return searchNames(widget.myLocale, widget.onChangeLanguage, widget.onBuyProduct, _searchText, _nativeNamesF, _latinNamesF);
       case 1:
         if (_apgIVF == null) {
+          apgIVReference.keepSynced(true);
           _apgIVF = apgIVReference.once().then((DataSnapshot snapshot) {
             return snapshot.value;
           });
         }
         if (_translationsTaxonomyF == null) {
+          translationsTaxonomyReference.child(getLanguageCode(widget.myLocale.languageCode)).keepSynced(true);
           _translationsTaxonomyF = translationsTaxonomyReference.child(getLanguageCode(widget.myLocale.languageCode)).once().then((DataSnapshot snapshot) {
             return snapshot.value;
           });
