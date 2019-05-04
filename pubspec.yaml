@@ -25,7 +25,7 @@ dependencies:
   firebase_auth: 0.8.4+3
   firebase_storage: 2.1.0+1
   google_sign_in: 4.0.1+1
-  flutter_crashlytics: 0.3.0
+  flutter_crashlytics: 1.0.0
   flutter_inapp_purchase: 0.9.2
   cached_network_image: 0.7.0
   url_launcher: 5.0.2
@@ -35,7 +35,7 @@ dependencies:
   path_provider: 0.5.0+1
   percent_indicator: 1.0.14
   package_info: 0.4.0+2
-  google_maps_flutter: 0.5.6
+  google_maps_flutter: 0.5.12
   image_picker: 0.6.0+2
   exif: 1.0.1
   datetime_picker_formfield: 0.1.8

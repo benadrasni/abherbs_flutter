@@ -94,6 +94,8 @@ class _ObservationMapState extends State<ObservationMap> {
             : 13,
       ),
       markers: Set<Marker>.of(_markers.values),
+      myLocationEnabled: true,
+      myLocationButtonEnabled: true,
     ));
 
     if (widget.mode == mapModeEdit) {
