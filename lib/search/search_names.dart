@@ -113,7 +113,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
               padding: new EdgeInsets.all(10.0),
               child: Text(
                 filteredLatinNames[index],
-                style: TextStyle(fontSize: 16.0, fontWeight: nativeNames[filteredNativeNames[index]][firebaseAttributeIsLabel] != null ? FontWeight.bold : FontWeight.normal),
+                style: TextStyle(fontSize: 16.0, fontWeight: latinNames[filteredLatinNames[index]][firebaseAttributeIsLabel] != null ? FontWeight.bold : FontWeight.normal),
               ),
             ),
             onTap: () {
