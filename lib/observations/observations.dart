@@ -60,6 +60,7 @@ class _ObservationsState extends State<Observations> {
 
   void _setCountUploadF() {
     if (Purchases.isSubscribed()) {
+      privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).keepSynced(true);
       _countUploadF = privateObservationsReference
           .child(widget.currentUser.uid)
           .child(firebaseObservationsByDate)
