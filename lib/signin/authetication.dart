@@ -34,7 +34,7 @@ class Auth {
     return firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
-  static Future<void> signUpWithPhone(Function(FirebaseUser) verificationCompleted,
+  static Future<void> signUpWithPhone(Function(AuthCredential) verificationCompleted,
       Function(AuthException) verificationFailed,
       Function(String, [int]) codeSent,
       Function(String) codeAutoRetrievalTimeout,

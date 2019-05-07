@@ -41,7 +41,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   FormMode _formMode = FormMode.PHONE;
   bool _isLoading;
 
-  // Check if form is valid before perform login or signup
+  // Check if form is valid before perform login or sign up
   bool _validateAndSave() {
     final form = _formKey.currentState;
     if (form.validate()) {
@@ -51,7 +51,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     return false;
   }
 
-  // Perform login or signup
+  // Perform login or sign up
   void _validateAndSubmit() async {
     if (_validateAndSave()) {
       setState(() {
@@ -103,7 +103,8 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     _showResendButton = false;
     _country = Country.findByIsoCode(widget.myLocale.countryCode);
 
-    _verificationCompleted = (FirebaseUser user) {
+    _verificationCompleted = (AuthCredential credential) {
+      Auth.signInWithCredential(credential);
       Navigator.pop(context);
       Navigator.pop(context);
     };
