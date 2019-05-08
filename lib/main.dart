@@ -59,7 +59,6 @@ class _AppState extends State<App> {
   Map<String, dynamic> _notificationData;
   Future<Locale> _localeF;
   Future<void> _initStoreF;
-  Future<void> _initializationF;
 
   onChangeLanguage(String language) {
     setState(() {
@@ -160,33 +159,6 @@ class _AppState extends State<App> {
     });
   }
 
-  Future<void> _initPlatformState() async {
-    await FlutterInappPurchase.initConnection.then((value) async {
-      // TODO check for a fix: when iOS is offline it doesn't return purchased products
-      if (Platform.isIOS) {
-        await Prefs.getStringListF(keyPurchases, []).then((products) {
-          Purchases.purchasesOld = products.map((productId) => Purchases.offlineProducts[productId]).toList();
-          Offline.initialize();
-          _checkPromotions();
-        });
-      } else if (Platform.isAndroid) {
-        await FlutterInappPurchase.getAvailablePurchases().then((value) async {
-          Purchases.purchasesOld = value;
-          Prefs.setStringList(keyPurchases, Purchases.purchasesOld.map((item) => item.productId).toList());
-          Offline.initialize();
-          _checkPromotions();
-        }).catchError((error) {
-          _iapError();
-        });
-      } else {
-        throw PlatformException(code: Platform.operatingSystem, message: "platform not supported");
-      }
-      await Auth.getCurrentUser();
-    }).catchError((error) {
-      _iapError();
-    });
-  }
-
   Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) {
     return Future<bool>.value(true);
   }
@@ -198,14 +170,21 @@ class _AppState extends State<App> {
     }
 
     final QueryPurchaseDetailsResponse purchaseResponse = await _connection.queryPastPurchases();
-    for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
-      if (await _verifyPurchase(purchase)) {
-        Purchases.purchases.add(purchase);
+    if (purchaseResponse.error != null) {
+      var purchases = await Prefs.getStringListF(keyPurchases, []);
+      Purchases.purchases = purchases.map((productId) => Purchases.offlineProducts[productId]).toList();
+    } else {
+      for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
+        if (await _verifyPurchase(purchase)) {
+          Purchases.purchases.add(purchase);
+        }
       }
+      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
     }
 
     Offline.initialize();
     _checkPromotions();
+    await Auth.getCurrentUser();
   }
 
   @override
@@ -222,7 +201,6 @@ class _AppState extends State<App> {
       // handle error here.
     });
     _initStoreF = initStoreInfo();
-    //_initializationF = _initPlatformState();
 
     _localeF = Prefs.getStringF(keyPreferredLanguage).then((String language) {
       var languageCountry = language.split('_');
@@ -293,7 +271,6 @@ class _AppState extends State<App> {
     Prefs.dispose();
     Ads.hideBannerAd();
     _subscription.cancel();
-    FlutterInappPurchase.endConnection;
     super.dispose();
   }
 
