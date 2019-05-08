@@ -16,15 +16,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:package_info/package_info.dart';
 
 class Color extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final MaterialPageRoute<dynamic> redirect;
-  Color(this.onChangeLanguage, this.onBuyProduct, this.filter, this.redirect);
+  Color(this.onChangeLanguage, this.filter, this.redirect);
 
   @override
   _ColorState createState() => _ColorState();
@@ -56,7 +54,7 @@ class _ColorState extends State<Color> {
     countsReference.child(filter).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
+          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter))
               .then((value) {
             Ads.showBannerAd(this);
           });
@@ -330,9 +328,9 @@ class _ColorState extends State<Color> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
-        actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
+        actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.filter),
       ),
-      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
+      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, _filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -353,8 +351,7 @@ class _ColorState extends State<Color> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, index,
-              Preferences.myFilterAttributes.indexOf(filterColor));
+          onBottomNavigationBarTap(context, widget.onChangeLanguage, _filter, index, Preferences.myFilterAttributes.indexOf(filterColor));
         },
       ),
       floatingActionButton: Container(
@@ -382,7 +379,7 @@ class _ColorState extends State<Color> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter, '')),
+                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '')),
                           ).then((value) {
                             Ads.showBannerAd(this);
                           });

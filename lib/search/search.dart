@@ -8,13 +8,11 @@ import 'package:abherbs_flutter/search/search_taxonomy.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class Search extends StatefulWidget {
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
-  Search(this.myLocale, this.onChangeLanguage, this.onBuyProduct);
+  Search(this.myLocale, this.onChangeLanguage);
 
   @override
   _SearchState createState() => _SearchState();
@@ -65,7 +63,7 @@ class _SearchState extends State<Search> {
             return snapshot.value;
           });
         }
-        return searchNames(widget.myLocale, widget.onChangeLanguage, widget.onBuyProduct, _searchText, _nativeNamesF, _latinNamesF);
+        return searchNames(widget.myLocale, widget.onChangeLanguage, _searchText, _nativeNamesF, _latinNamesF);
       case 1:
         if (_apgIVF == null) {
           apgIVReference.keepSynced(true);
@@ -79,7 +77,7 @@ class _SearchState extends State<Search> {
             return snapshot.value;
           });
         }
-        return searchTaxonomy(widget.myLocale, widget.onChangeLanguage, widget.onBuyProduct, _searchText, _apgIVF, _translationsTaxonomyF);
+        return searchTaxonomy(widget.myLocale, widget.onChangeLanguage, _searchText, _apgIVF, _translationsTaxonomyF);
     }
     return null;
   }

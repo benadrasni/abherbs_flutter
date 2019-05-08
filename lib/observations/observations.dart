@@ -13,16 +13,14 @@ import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class Observations extends StatefulWidget {
   final FirebaseUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final bool isPublicOnly;
-  Observations(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.isPublicOnly);
+  Observations(this.currentUser, this.myLocale, this.onChangeLanguage, this.isPublicOnly);
 
   @override
   _ObservationsState createState() => _ObservationsState();
@@ -51,7 +49,7 @@ class _ObservationsState extends State<Observations> {
         if (value != null && value) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Subscription(widget.onBuyProduct)),
+            MaterialPageRoute(builder: (context) => Subscription()),
           );
         }
       });
@@ -156,7 +154,7 @@ class _ObservationsState extends State<Observations> {
           query: _query,
           itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
             Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
-            return ObservationView(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, observation);
+            return ObservationView(widget.currentUser, myLocale, widget.onChangeLanguage, observation);
           }),
       floatingActionButton: FutureBuilder<int>(
           future: _countUploadF,

@@ -9,23 +9,21 @@ import 'package:abherbs_flutter/settings/setting_my_filter.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/purchase/subscription.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 class EnhancementsScreen extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
-  EnhancementsScreen(this.onChangeLanguage, this.onBuyProduct, this.filter);
+  EnhancementsScreen(this.onChangeLanguage, this.filter);
 
   @override
   _EnhancementsScreenState createState() => new _EnhancementsScreenState();
 }
 
 class _EnhancementsScreenState extends State<EnhancementsScreen> {
-  FirebaseAnalytics _firebaseAnalytics;
+  final InAppPurchaseConnection _connection = InAppPurchaseConnection.instance;
   final List<String> _productLists = Platform.isAndroid
       ? [
           productNoAdsAndroid,
@@ -43,38 +41,24 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           productObservations,
           productPhotoSearch,
         ];
-  Future<List<IAPItem>> _productsF;
-
-  Future<void> _logCancelledPurchaseEvent(String productId) async {
-    await _firebaseAnalytics.logEvent(name: 'purchase_canceled', parameters: {'productId': productId});
-  }
+  Future<ProductDetailsResponse> _productsF;
 
   @override
   void initState() {
     super.initState();
-    _firebaseAnalytics = FirebaseAnalytics();
-    _productsF = FlutterInappPurchase.getProducts(_productLists);
+    _productsF = _connection.queryProductDetails(_productLists.toSet());
 
     Ads.hideBannerAd();
   }
 
-  List<Widget> _getButtons(IAPItem product, bool isPurchased, key) {
+  List<Widget> _getButtons(ProductDetails product, bool isPurchased, key) {
     var buttons = <Widget>[];
     buttons.add(
       RaisedButton(
         color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
         onPressed: () {
           if (!isPurchased) {
-            FlutterInappPurchase.buyProduct(product.productId).then((PurchasedItem purchased) {
-              widget.onBuyProduct(purchased);
-            }).catchError((error) {
-              _logCancelledPurchaseEvent(product.productId);
-              if (key.currentState != null && key.currentState.mounted) {
-                key.currentState.showSnackBar(new SnackBar(
-                  content: new Text(S.of(context).product_purchase_failed),
-                ));
-              }
-            });
+            _connection.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: product));
           }
         },
         child: Text(
@@ -85,7 +69,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     );
 
     if (isPurchased) {
-      switch (product.productId) {
+      switch (product.id) {
         case productOffline:
           buttons.add(RaisedButton(
             color: Theme.of(context).accentColor,
@@ -123,7 +107,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Subscription(widget.onBuyProduct)),
+                  MaterialPageRoute(builder: (context) => Subscription()),
                 );
               },
               child: Text(
@@ -149,9 +133,9 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
       appBar: AppBar(
         title: Text(S.of(context).enhancements),
       ),
-      body: FutureBuilder<List<IAPItem>>(
+      body: FutureBuilder<ProductDetailsResponse>(
         future: _productsF,
-        builder: (BuildContext context, AsyncSnapshot<List<IAPItem>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<ProductDetailsResponse> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               var _cards = <Card>[];
@@ -173,14 +157,23 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                   child: Container(
                     padding: EdgeInsets.all(10.0),
                     child: FlatButton(
-                      onPressed: () {
-                        FlutterInappPurchase.getAvailablePurchases().then((purchases) {
-                          Purchases.purchasesOld = purchases;
-                          Prefs.setStringList(keyPurchases, Purchases.purchasesOld.map((item) => item.productId).toList());
-                          if (mounted) {
-                            setState(() {});
+                      onPressed: () async {
+                        final QueryPurchaseDetailsResponse purchaseResponse = await _connection.queryPastPurchases();
+                        if (purchaseResponse.error != null) {
+                          var purchases = await Prefs.getStringListF(keyPurchases, []);
+                          Purchases.purchases = purchases.map((productId) => Purchases.offlineProducts[productId]).toList();
+                        } else {
+                          for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
+                            if (await verifyPurchase(purchase)) {
+                              Purchases.purchases.add(purchase);
+                            }
                           }
-                        });
+                          Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
+                        }
+
+                        if (mounted) {
+                          setState(() {});
+                        }
                       },
                       child: Text(
                         S.of(context).product_restore_purchases,
@@ -189,16 +182,16 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                     ),
                   ),
                 ));
-                _cards.addAll(snapshot.data.map((IAPItem product) {
-                  bool isPurchased = Purchases.isPurchased(product.productId);
+                _cards.addAll(snapshot.data.productDetails.map((ProductDetails product) {
+                  bool isPurchased = Purchases.isPurchased(product.id);
                   return Card(
                     child: Container(
                       padding: EdgeInsets.all(10.0),
                       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                         ListTile(
-                          leading: getProductIcon(context, product.productId),
+                          leading: getProductIcon(context, product.id),
                           title: Text(
-                            getProductTitle(context, product.productId, product.title),
+                            getProductTitle(context, product.id, product.title),
                             style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
@@ -206,7 +199,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                             textAlign: TextAlign.start,
                           ),
                           trailing: Text(
-                            product.localizedPrice,
+                            product.price,
                             style: TextStyle(
                               color: Colors.blue,
                               fontSize: 18.0,
@@ -215,7 +208,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                         ),
                         SizedBox(height: 10.0),
                         Text(
-                          getProductDescription(context, product.productId, product.description),
+                          getProductDescription(context, product.id, product.description),
                           style: TextStyle(
                             fontSize: 16.0,
                           ),

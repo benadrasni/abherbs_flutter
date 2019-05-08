@@ -12,16 +12,14 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class PlantList extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final String emptyMessage;
   final String count;
   final String path;
-  PlantList(this.onChangeLanguage, this.onBuyProduct, this.filter, this.emptyMessage, [this.count, this.path]);
+  PlantList(this.onChangeLanguage, this.filter, this.emptyMessage, [this.count, this.path]);
 
   @override
   _PlantListState createState() => _PlantListState();
@@ -43,7 +41,7 @@ class _PlantListState extends State<PlantList> {
       padding: EdgeInsets.all(10.0),
       child: getImage(url, placeholder),
       onPressed: () {
-        goToDetail(this, context, myLocale, name, widget.onChangeLanguage, widget.onBuyProduct, widget.filter);
+        goToDetail(this, context, myLocale, name, widget.onChangeLanguage, widget.filter);
       },
     );
   }
@@ -95,7 +93,7 @@ class _PlantListState extends State<PlantList> {
       appBar: AppBar(
         title: Text(S.of(context).list_info),
       ),
-      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
+      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.filter, null),
       body: FirebaseAnimatedIndexList(
           defaultChild: Center(child: CircularProgressIndicator()),
           emptyChild: Container(
@@ -170,7 +168,7 @@ class _PlantListState extends State<PlantList> {
                       width: 50.0,
                       height: 50.0),
                   onTap: () {
-                    goToDetail(self, context, myLocale, name, widget.onChangeLanguage, widget.onBuyProduct, widget.filter);
+                    goToDetail(self, context, myLocale, name, widget.onChangeLanguage, widget.filter);
                   },
                 ),
                 _getImageButton(context, myLocale, storagePhotos + url, name),
@@ -200,11 +198,11 @@ class _PlantListState extends State<PlantList> {
                                 filter[filterDistribution] = value;
                               }
                               Navigator.pushReplacement(
-                                  mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, widget.onBuyProduct, filter));
+                                  mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, filter));
                             });
                           } else {
                             Navigator.pushReplacement(
-                                mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, widget.onBuyProduct, filter));
+                                mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, filter));
                           }
                         });
                       },

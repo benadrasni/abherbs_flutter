@@ -24,7 +24,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
 
@@ -36,11 +35,10 @@ const int observationIndex = 3;
 class PlantDetail extends StatefulWidget {
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final Plant plant;
 
-  PlantDetail(this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.filter, this.plant);
+  PlantDetail(this.myLocale, this.onChangeLanguage, this.filter, this.plant);
 
   @override
   _PlantDetailState createState() => _PlantDetailState();
@@ -160,7 +158,7 @@ class _PlantDetailState extends State<PlantDetail> {
         return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF);
       case observationIndex:
         return ObservationsPlant(
-            _currentUser, Localizations.localeOf(context), widget.onChangeLanguage, widget.onBuyProduct, _isPublic, widget.plant.name, _key);
+            _currentUser, Localizations.localeOf(context), widget.onChangeLanguage, _isPublic, widget.plant.name, _key);
     }
     return null;
   }
@@ -175,7 +173,7 @@ class _PlantDetailState extends State<PlantDetail> {
         if (value != null && value) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Subscription(widget.onBuyProduct)),
+            MaterialPageRoute(builder: (context) => Subscription()),
           );
         }
       });
@@ -276,7 +274,7 @@ class _PlantDetailState extends State<PlantDetail> {
                 ));
               },
             )),
-      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
+      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.filter, null),
       body: _getBody(context),
       floatingActionButton: Container(
         height: 70.0,
@@ -294,7 +292,7 @@ class _PlantDetailState extends State<PlantDetail> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                ObservationEdit(_currentUser, widget.myLocale, widget.onChangeLanguage, widget.onBuyProduct, observation)),
+                                ObservationEdit(_currentUser, widget.myLocale, widget.onChangeLanguage, observation)),
                       ).then((value) {
                         if (value != null && value && _key.currentState != null) {
                           _key.currentState.showSnackBar(SnackBar(

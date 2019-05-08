@@ -4,7 +4,6 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 var supportedLanguages = {
   "cs": "Čeština",
@@ -34,14 +33,14 @@ var supportedLanguages = {
   "uk": "Українська"
 };
 
-Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText,
+Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, String searchText,
     Future<Map<dynamic, dynamic>> _nativeNamesF, Future<Map<dynamic, dynamic>> _latinNamesF) {
   return FutureBuilder<List<Object>>(
     future: Future.wait([_nativeNamesF, _latinNamesF]),
     builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
       switch (snapshot.connectionState) {
         case ConnectionState.done:
-          return _getBody(myLocale, onChangeLanguage, onBuyProduct, searchText, snapshot.data[0], snapshot.data[1]);
+          return _getBody(myLocale, onChangeLanguage, searchText, snapshot.data[0], snapshot.data[1]);
         default:
           return Container(
             child: Center(
@@ -53,7 +52,7 @@ Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, Function(
   );
 }
 
-Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText, Map<dynamic, dynamic> nativeNames,
+Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searchText, Map<dynamic, dynamic> nativeNames,
     Map<dynamic, dynamic> latinNames) {
   var filteredNativeNames = <String>[];
   var searchTextWithoutDiacritics = removeDiacritics(searchText).toLowerCase();
@@ -92,7 +91,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
                 var value = nativeNames[filteredNativeNames[index]][firebaseAttributeList];
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, '', value.length.toString(), path)),
+                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', value.length.toString(), path)),
                 );
               },
             );
@@ -121,7 +120,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
               var value = latinNames[filteredLatinNames[index]][firebaseAttributeList];
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, '', value.length.toString(), path)),
+                MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', value.length.toString(), path)),
               );
             },
           );

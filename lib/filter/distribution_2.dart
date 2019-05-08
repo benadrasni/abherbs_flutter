@@ -11,14 +11,12 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class Distribution2 extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final int region;
-  Distribution2(this.onChangeLanguage, this.onBuyProduct, this.filter, this.region);
+  Distribution2(this.onChangeLanguage, this.filter, this.region);
 
   @override
   _Distribution2State createState() => _Distribution2State();
@@ -40,7 +38,7 @@ class _Distribution2State extends State<Distribution2> {
     countsReference.child(filter).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
+          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter))
               .then((value) {
             Ads.showBannerAd(this);
           });
@@ -199,16 +197,16 @@ class _Distribution2State extends State<Distribution2> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_distribution),
-        actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
+        actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.filter),
       ),
-      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, null),
+      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.filter, null),
       body: _getBody(context),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: Preferences.myFilterAttributes.indexOf(filterDistribution),
         items: getBottomNavigationBarItems(context, widget.filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.onBuyProduct, widget.filter, index, -1);
+          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.filter, index, -1);
         },
       ),
       floatingActionButton: new Container(
@@ -237,7 +235,7 @@ class _Distribution2State extends State<Distribution2> {
                           Navigator.pushReplacement(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, widget.filter, '')),
+                                builder: (context) => PlantList(widget.onChangeLanguage, widget.filter, '')),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

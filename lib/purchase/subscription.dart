@@ -6,21 +6,17 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 class Subscription extends StatefulWidget {
-  final void Function(PurchasedItem) onBuyProduct;
-  Subscription(this.onBuyProduct);
-
   @override
   _SubscriptionState createState() => new _SubscriptionState();
 }
 
 class _SubscriptionState extends State<Subscription> {
-  FirebaseAnalytics _firebaseAnalytics;
+  final InAppPurchaseConnection _connection = InAppPurchaseConnection.instance;
   final List<String> _subscriptionLists = Platform.isAndroid
       ? [
           subscriptionMonthly,
@@ -30,11 +26,7 @@ class _SubscriptionState extends State<Subscription> {
           subscriptionMonthly,
           subscriptionYearly,
         ];
-  Future<List<IAPItem>> _subscriptionsF;
-
-  Future<void> _logCanceledSubscriptionEvent(String subscriptionId) async {
-    await _firebaseAnalytics.logEvent(name: 'subscription_canceled', parameters: {'subscriptionId': subscriptionId});
-  }
+  Future<ProductDetailsResponse> _subscriptionsF;
 
   String _getOldSubscription(String productId) {
     switch (productId) {
@@ -49,8 +41,7 @@ class _SubscriptionState extends State<Subscription> {
   @override
   void initState() {
     super.initState();
-    _firebaseAnalytics = FirebaseAnalytics();
-    _subscriptionsF = FlutterInappPurchase.getSubscriptions(_subscriptionLists);
+    _subscriptionsF = _connection.queryProductDetails(_subscriptionLists.toSet());
 
     Ads.hideBannerAd();
   }
@@ -64,9 +55,9 @@ class _SubscriptionState extends State<Subscription> {
       appBar: AppBar(
         title: Text(S.of(context).subscription),
       ),
-      body: FutureBuilder<List<IAPItem>>(
+      body: FutureBuilder<ProductDetailsResponse>(
         future: _subscriptionsF,
-        builder: (BuildContext context, AsyncSnapshot<List<IAPItem>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<ProductDetailsResponse> snapshot) {
           var _cards = <Card>[];
           switch (snapshot.connectionState) {
             case ConnectionState.done:
@@ -96,14 +87,23 @@ class _SubscriptionState extends State<Subscription> {
                 }).toList();
                 texts.add(Container(
                     child: FlatButton(
-                  onPressed: () {
-                    FlutterInappPurchase.getAvailablePurchases().then((purchases) {
-                      Purchases.purchasesOld = purchases;
-                      Prefs.setStringList(keyPurchases, Purchases.purchasesOld.map((item) => item.productId).toList());
-                      if (mounted) {
-                        setState(() {});
+                  onPressed: () async {
+                    final QueryPurchaseDetailsResponse purchaseResponse = await _connection.queryPastPurchases();
+                    if (purchaseResponse.error != null) {
+                      var purchases = await Prefs.getStringListF(keyPurchases, []);
+                      Purchases.purchases = purchases.map((productId) => Purchases.offlineProducts[productId]).toList();
+                    } else {
+                      for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
+                        if (await verifyPurchase(purchase)) {
+                          Purchases.purchases.add(purchase);
+                        }
                       }
-                    });
+                      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
+                    }
+
+                    if (mounted) {
+                      setState(() {});
+                    }
                   },
                   child: Text(
                     S.of(context).product_restore_purchases,
@@ -114,17 +114,17 @@ class _SubscriptionState extends State<Subscription> {
                 _cards.add(Card(
                   child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: texts),
                 ));
-                _cards.addAll(snapshot.data.map((IAPItem subscription) {
-                  bool isPurchased = Purchases.isPurchased(subscription.productId);
-                  String oldSubscription = _getOldSubscription(subscription.productId);
+                _cards.addAll(snapshot.data.productDetails.map((ProductDetails subscription) {
+                  bool isPurchased = Purchases.isPurchased(subscription.id);
+                  String oldSubscription = _getOldSubscription(subscription.id);
                   return Card(
                     child: Container(
                       padding: EdgeInsets.all(10.0),
                       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                         ListTile(
-                          leading: getProductIcon(context, subscription.productId),
+                          leading: getProductIcon(context, subscription.id),
                           title: Text(
-                            getProductTitle(context, subscription.productId, subscription.title),
+                            getProductTitle(context, subscription.id, subscription.title),
                             style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
@@ -132,10 +132,10 @@ class _SubscriptionState extends State<Subscription> {
                             textAlign: TextAlign.start,
                           ),
                           trailing: Text(
-                            subscription.localizedPrice +
+                            subscription.price +
                                 '/' +
                                 getProductPeriod(
-                                    context, Platform.isIOS ? subscription.subscriptionPeriodUnitIOS : subscription.subscriptionPeriodAndroid),
+                                    context, subscription.skuDetail.subscriptionPeriod),
                             style: TextStyle(
                               color: Colors.blue,
                               fontSize: 18.0,
@@ -144,7 +144,7 @@ class _SubscriptionState extends State<Subscription> {
                         ),
                         SizedBox(height: 10.0),
                         Text(
-                          getProductDescription(context, subscription.productId, subscription.description),
+                          getProductDescription(context, subscription.id, subscription.description),
                           style: TextStyle(
                             fontSize: 16.0,
                           ),
@@ -155,16 +155,7 @@ class _SubscriptionState extends State<Subscription> {
                           color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
                           onPressed: () {
                             if (!isPurchased) {
-                              FlutterInappPurchase.buySubscription(subscription.productId, oldSku: oldSubscription).then((PurchasedItem purchased) {
-                                widget.onBuyProduct(purchased);
-                              }).catchError((error) {
-                                _logCanceledSubscriptionEvent(subscription.productId);
-                                if (key.currentState != null && key.currentState.mounted) {
-                                  key.currentState.showSnackBar(new SnackBar(
-                                    content: new Text(S.of(context).product_subscribe_failed),
-                                  ));
-                                }
-                              });
+                              _connection.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: subscription));
                             }
                           },
                           child: Text(

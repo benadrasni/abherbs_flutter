@@ -13,14 +13,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class Habitat extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final MaterialPageRoute<dynamic> redirect;
-  Habitat(this.onChangeLanguage, this.onBuyProduct, this.filter, this.redirect);
+  Habitat(this.onChangeLanguage, this.filter, this.redirect);
 
   @override
   _HabitatState createState() => _HabitatState();
@@ -50,7 +48,7 @@ class _HabitatState extends State<Habitat> {
     countsReference.child(filter).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, newFilter))
+          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter))
               .then((value) {
             Ads.showBannerAd(this);
           });
@@ -118,9 +116,9 @@ class _HabitatState extends State<Habitat> {
       key: _key,
       appBar: new AppBar(
         title: new Text(S.of(context).filter_habitat),
-        actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.onBuyProduct, widget.filter),
+        actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.filter),
       ),
-      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.onBuyProduct, _filter, null),
+      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, _filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -249,8 +247,7 @@ class _HabitatState extends State<Habitat> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, index,
-              Preferences.myFilterAttributes.indexOf(filterHabitat));
+          onBottomNavigationBarTap(context, widget.onChangeLanguage, _filter, index, Preferences.myFilterAttributes.indexOf(filterHabitat));
         },
       ),
       floatingActionButton: new Container(
@@ -278,7 +275,7 @@ class _HabitatState extends State<Habitat> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, _filter, '')),
+                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '')),
                           ).then((value) {
                             Ads.showBannerAd(this);
                           });
