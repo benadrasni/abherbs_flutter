@@ -20,6 +20,7 @@ import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:screen/screen.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 void main() async {
   FlutterError.onError = (FlutterErrorDetails details) {
@@ -50,10 +51,14 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  FirebaseMessaging _firebaseMessaging;
-  FirebaseAnalytics _firebaseAnalytics;
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
+  final InAppPurchaseConnection _connection = InAppPurchaseConnection.instance;
+
+  StreamSubscription<List<PurchaseDetails>> _subscription;
   Map<String, dynamic> _notificationData;
   Future<Locale> _localeF;
+  Future<void> _initStoreF;
   Future<void> _initializationF;
 
   onChangeLanguage(String language) {
@@ -68,8 +73,14 @@ class _AppState extends State<App> {
 
   onBuyProduct(PurchasedItem purchased) {
     setState(() {
-      Purchases.purchases.add(purchased);
-      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
+      Purchases.purchasesOld.add(purchased);
+      Prefs.setStringList(keyPurchases, Purchases.purchasesOld.map((item) => item.productId).toList());
+    });
+  }
+
+  _listenToPurchaseUpdated(List<PurchaseDetails> purchases) {
+    setState(() {
+      Purchases.purchases = purchases;
     });
   }
 
@@ -111,7 +122,8 @@ class _AppState extends State<App> {
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIos: 5);
-    Purchases.purchases = <PurchasedItem>[];
+    Purchases.purchasesOld = <PurchasedItem>[];
+    Purchases.purchases = [];
   }
 
   void _checkPromotions() {
@@ -153,14 +165,14 @@ class _AppState extends State<App> {
       // TODO check for a fix: when iOS is offline it doesn't return purchased products
       if (Platform.isIOS) {
         await Prefs.getStringListF(keyPurchases, []).then((products) {
-          Purchases.purchases = products.map((productId) => Purchases.offlineProducts[productId]).toList();
+          Purchases.purchasesOld = products.map((productId) => Purchases.offlineProducts[productId]).toList();
           Offline.initialize();
           _checkPromotions();
         });
       } else if (Platform.isAndroid) {
         await FlutterInappPurchase.getAvailablePurchases().then((value) async {
-          Purchases.purchases = value;
-          Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
+          Purchases.purchasesOld = value;
+          Prefs.setStringList(keyPurchases, Purchases.purchasesOld.map((item) => item.productId).toList());
           Offline.initialize();
           _checkPromotions();
         }).catchError((error) {
@@ -175,15 +187,42 @@ class _AppState extends State<App> {
     });
   }
 
+  Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) {
+    return Future<bool>.value(true);
+  }
+
+  Future<void> initStoreInfo() async {
+    final bool isAvailable = await _connection.isAvailable();
+    if (!isAvailable) {
+      _iapError();
+    }
+
+    final QueryPurchaseDetailsResponse purchaseResponse = await _connection.queryPastPurchases();
+    for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
+      if (await _verifyPurchase(purchase)) {
+        Purchases.purchases.add(purchase);
+      }
+    }
+
+    Offline.initialize();
+    _checkPromotions();
+  }
+
   @override
   void initState() {
     super.initState();
     Ads.initialize();
     Prefs.init();
-    _initializationF = _initPlatformState();
-
-    _firebaseMessaging = FirebaseMessaging();
-    _firebaseAnalytics = FirebaseAnalytics();
+    Stream purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
+    _subscription = purchaseUpdated.listen((purchaseDetailsList) {
+      _listenToPurchaseUpdated(purchaseDetailsList);
+    }, onDone: () {
+      _subscription.cancel();
+    }, onError: (error) {
+      // handle error here.
+    });
+    _initStoreF = initStoreInfo();
+    //_initializationF = _initPlatformState();
 
     _localeF = Prefs.getStringF(keyPreferredLanguage).then((String language) {
       var languageCountry = language.split('_');
@@ -253,6 +292,7 @@ class _AppState extends State<App> {
   void dispose() {
     Prefs.dispose();
     Ads.hideBannerAd();
+    _subscription.cancel();
     FlutterInappPurchase.endConnection;
     super.dispose();
   }
@@ -260,7 +300,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Object>>(
-        future: Future.wait([_localeF, _initializationF]),
+        future: Future.wait([_localeF, _initStoreF]),
         builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:

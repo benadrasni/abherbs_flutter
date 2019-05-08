@@ -98,8 +98,8 @@ class _SubscriptionState extends State<Subscription> {
                     child: FlatButton(
                   onPressed: () {
                     FlutterInappPurchase.getAvailablePurchases().then((purchases) {
-                      Purchases.purchases = purchases;
-                      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productId).toList());
+                      Purchases.purchasesOld = purchases;
+                      Prefs.setStringList(keyPurchases, Purchases.purchasesOld.map((item) => item.productId).toList());
                       if (mounted) {
                         setState(() {});
                       }
