@@ -1,5 +1,6 @@
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 class Purchases {
   static bool hasOldVersion;
@@ -13,7 +14,8 @@ class Purchases {
   static bool isSearchByPhotoPromotion;
   static DateTime searchByPhotoPromotionFrom;
   static DateTime searchByPhotoPromotionTo;
-  static List<PurchasedItem> purchases = <PurchasedItem>[];
+  static List<PurchasedItem> purchasesOld = <PurchasedItem>[];
+  static List<PurchaseDetails> purchases = [];
   static Map<String, PurchasedItem> offlineProducts = {
     productNoAdsIOS: PurchasedItem.fromJSON({'productId': productNoAdsIOS}),
     productNoAdsAndroid: PurchasedItem.fromJSON({'productId': productNoAdsAndroid}),
@@ -31,7 +33,7 @@ class Purchases {
   }
 
   static bool isPurchased(String productId) {
-    for (var purchase in purchases) {
+    for (var purchase in purchasesOld) {
       if (purchase.productId == productId) {
         return true;
       }
@@ -40,9 +42,9 @@ class Purchases {
   }
 
   static bool isNoAds() {
-    for (PurchasedItem product in purchases) {
-      if (product.productId == productNoAdsAndroid ||
-          product.productId == productNoAdsIOS) {
+    for (PurchaseDetails product in purchases) {
+      if (product.productID == productNoAdsAndroid ||
+          product.productID == productNoAdsIOS) {
         return true;
       }
     }
@@ -50,8 +52,8 @@ class Purchases {
   }
 
   static bool isSearch() {
-    for (PurchasedItem product in purchases) {
-      if (product.productId == productSearch) {
+    for (PurchaseDetails product in purchases) {
+      if (product.productID == productSearch) {
         return true;
       }
     }
@@ -59,8 +61,8 @@ class Purchases {
   }
 
   static bool isCustomFilter() {
-    for (PurchasedItem product in purchases) {
-      if (product.productId == productCustomFilter) {
+    for (PurchaseDetails product in purchases) {
+      if (product.productID == productCustomFilter) {
         return true;
       }
     }
@@ -68,8 +70,8 @@ class Purchases {
   }
 
   static bool isOffline() {
-    for (PurchasedItem product in purchases) {
-      if (product.productId == productOffline) {
+    for (PurchaseDetails product in purchases) {
+      if (product.productID == productOffline) {
         return true;
       }
     }
@@ -77,8 +79,8 @@ class Purchases {
   }
 
   static bool isObservations() {
-    for (PurchasedItem product in purchases) {
-      if (product.productId == productObservations) {
+    for (PurchaseDetails product in purchases) {
+      if (product.productID == productObservations) {
         return true;
       }
     }
@@ -86,8 +88,8 @@ class Purchases {
   }
 
   static bool isPhotoSearch() {
-    for (PurchasedItem product in purchases) {
-      if (product.productId == productPhotoSearch) {
+    for (PurchaseDetails product in purchases) {
+      if (product.productID == productPhotoSearch) {
         return true;
       }
     }
@@ -95,8 +97,8 @@ class Purchases {
   }
 
   static bool isSubscribedMonthly() {
-    for (PurchasedItem product in purchases) {
-      if (product.productId == subscriptionMonthly) {
+    for (PurchaseDetails product in purchases) {
+      if (product.productID == subscriptionMonthly) {
         return true;
       }
     }
@@ -104,8 +106,8 @@ class Purchases {
   }
 
   static bool isSubscribedYearly() {
-    for (PurchasedItem product in purchases) {
-      if (product.productId == subscriptionYearly) {
+    for (PurchaseDetails product in purchases) {
+      if (product.productID == subscriptionYearly) {
         return true;
       }
     }
