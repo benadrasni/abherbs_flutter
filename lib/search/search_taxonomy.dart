@@ -5,16 +5,15 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
-Widget searchTaxonomy(Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText,
+Widget searchTaxonomy(Locale myLocale, Function(String) onChangeLanguage, String searchText,
     Future<Map<dynamic, dynamic>> _apgIVF, Future<Map<dynamic, dynamic>> _translationsTaxonomyF) {
   return FutureBuilder<List<Object>>(
     future: Future.wait([_apgIVF, _translationsTaxonomyF]),
     builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
       switch (snapshot.connectionState) {
         case ConnectionState.done:
-          return _getBody(myLocale, onChangeLanguage, onBuyProduct, searchText, snapshot.data[0], snapshot.data[1]);
+          return _getBody(myLocale, onChangeLanguage, searchText, snapshot.data[0], snapshot.data[1]);
         default:
           return Container(
             child: Center(
@@ -26,7 +25,7 @@ Widget searchTaxonomy(Locale myLocale, Function(String) onChangeLanguage, Functi
   );
 }
 
-Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(PurchasedItem) onBuyProduct, String searchText, Map<dynamic, dynamic> apgIV,
+Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searchText, Map<dynamic, dynamic> apgIV,
     Map<dynamic, dynamic> dictionary) {
   var _taxons = <PlantTaxon>[];
   _buildTaxonomy(_taxons, dictionary, apgIV[firebaseRootTaxon], 0, firebaseAPGIV + '/', firebaseRootTaxon, searchText);
@@ -74,7 +73,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, Function(Pur
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => PlantList(onChangeLanguage, onBuyProduct, {}, '', _taxons[index].count.toString(), _taxons[index].path)),
+                    builder: (context) => PlantList(onChangeLanguage, {}, '', _taxons[index].count.toString(), _taxons[index].path)),
               );
             }
           },

@@ -10,7 +10,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crashlytics/flutter_crashlytics.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
@@ -27,8 +26,7 @@ class SearchPhoto extends StatefulWidget {
   final FirebaseUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
-  SearchPhoto(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct);
+  SearchPhoto(this.currentUser, this.myLocale, this.onChangeLanguage);
 
   @override
   _SearchPhotoState createState() => _SearchPhotoState();
@@ -259,10 +257,10 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  PlantList(widget.onChangeLanguage, widget.onBuyProduct, {}, '', result.count.toString(), result.path)),
+                                                  PlantList(widget.onChangeLanguage, {}, '', result.count.toString(), result.path)),
                                         );
                                       } else {
-                                        goToDetail(self, context, widget.myLocale, result.path, widget.onChangeLanguage, widget.onBuyProduct, {});
+                                        goToDetail(self, context, widget.myLocale, result.path, widget.onChangeLanguage, {});
                                       }
                                     },
                                   );

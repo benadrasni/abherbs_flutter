@@ -7,7 +7,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
@@ -15,10 +14,9 @@ class ObservationView extends StatefulWidget {
   final FirebaseUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final Observation observation;
 
-  ObservationView(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.observation);
+  ObservationView(this.currentUser, this.myLocale, this.onChangeLanguage, this.observation);
 
   @override
   _ObservationViewState createState() => _ObservationViewState();
@@ -94,7 +92,7 @@ class _ObservationViewState extends State<ObservationView> {
                 ],
               ),
               onTap: () {
-                goToDetail(self, mainContext, myLocale, widget.observation.plant, widget.onChangeLanguage, widget.onBuyProduct, {});
+                goToDetail(self, mainContext, myLocale, widget.observation.plant, widget.onChangeLanguage, {});
               },
             );
           }),

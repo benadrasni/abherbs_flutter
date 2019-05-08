@@ -5,13 +5,11 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class FeedbackScreen extends StatelessWidget {
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
-  FeedbackScreen(this.onChangeLanguage, this.onBuyProduct, this.filter);
+  FeedbackScreen(this.onChangeLanguage, this.filter);
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +159,7 @@ class FeedbackScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, onBuyProduct, filter)),
+                    MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, filter)),
                   );
                 },
                 child: Text(

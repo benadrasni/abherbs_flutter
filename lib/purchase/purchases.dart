@@ -1,4 +1,3 @@
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -14,7 +13,6 @@ class Purchases {
   static bool isSearchByPhotoPromotion;
   static DateTime searchByPhotoPromotionFrom;
   static DateTime searchByPhotoPromotionTo;
-  static List<PurchasedItem> purchasesOld = <PurchasedItem>[];
   static List<PurchaseDetails> purchases = [];
   static Map<String, PurchaseDetails> offlineProducts = {
     productNoAdsIOS: PurchaseDetails(purchaseID: '', productID: productNoAdsIOS, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: PurchaseSource.AppStore), transactionDate: ''),
@@ -28,13 +26,9 @@ class Purchases {
     subscriptionYearly: PurchaseDetails(purchaseID: '', productID: subscriptionYearly, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: PurchaseSource.AppStore), transactionDate: ''),
   };
 
-  static void initialize() {
-
-  }
-
   static bool isPurchased(String productId) {
-    for (var purchase in purchasesOld) {
-      if (purchase.productId == productId) {
+    for (var purchase in purchases) {
+      if (purchase.productID == productId) {
         return true;
       }
     }

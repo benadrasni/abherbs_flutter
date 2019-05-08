@@ -6,7 +6,6 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
@@ -14,10 +13,9 @@ class ObservationPlantView extends StatefulWidget {
   final FirebaseUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final Observation observation;
   final GlobalKey<ScaffoldState> parentKey;
-  ObservationPlantView(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.observation, this.parentKey);
+  ObservationPlantView(this.currentUser, this.myLocale, this.onChangeLanguage, this.observation, this.parentKey);
 
   @override
   _ObservationPlantViewState createState() => _ObservationPlantViewState();
@@ -66,7 +64,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, widget.observation)),
+                    ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.observation)),
           ).then((value) {
             if (value != null && value && widget.parentKey.currentState != null) {
               widget.parentKey.currentState.showSnackBar(SnackBar(

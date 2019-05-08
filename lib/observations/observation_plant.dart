@@ -6,18 +6,16 @@ import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class ObservationsPlant extends StatefulWidget {
   final FirebaseUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final bool isPublic;
   final String plantName;
   final GlobalKey<ScaffoldState> parentKey;
-  ObservationsPlant(this.currentUser, this.myLocale, this.onChangeLanguage, this.onBuyProduct, this.isPublic, this.plantName, this.parentKey);
+  ObservationsPlant(this.currentUser, this.myLocale, this.onChangeLanguage, this.isPublic, this.plantName, this.parentKey);
 
   @override
   _ObservationsPlantState createState() => _ObservationsPlantState();
@@ -70,7 +68,7 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
             query: _query,
             itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
               Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
-              return ObservationPlantView(widget.currentUser, myLocale, widget.onChangeLanguage, widget.onBuyProduct, observation, widget.parentKey);
+              return ObservationPlantView(widget.currentUser, myLocale, widget.onChangeLanguage, observation, widget.parentKey);
             }),
       ],
     );

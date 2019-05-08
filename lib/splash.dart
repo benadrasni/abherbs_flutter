@@ -7,13 +7,11 @@ import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class Splash extends StatefulWidget {
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, dynamic> notificationData;
-  Splash(this.onChangeLanguage, this.onBuyProduct, this.notificationData);
+  Splash(this.onChangeLanguage, this.notificationData);
 
   @override
   _SplashState createState() => new _SplashState();
@@ -40,12 +38,12 @@ class _SplashState extends State<Splash> {
             filter[filterDistribution] = myRegionValue;
           }
           return Future<MaterialPageRoute<dynamic>>(() {
-            return getFirstFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, filter, redirect);
+            return getFirstFilterRoute(context, widget.onChangeLanguage, filter, redirect);
           });
         });
       } else {
         return Future<MaterialPageRoute<dynamic>>(() {
-          return getFirstFilterRoute(context, widget.onChangeLanguage, widget.onBuyProduct, filter, redirect);
+          return getFirstFilterRoute(context, widget.onChangeLanguage, filter, redirect);
         });
       }
     });
@@ -74,7 +72,7 @@ class _SplashState extends State<Splash> {
               String path = widget.notificationData['path'];
               if (count != null && path != null) {
                 return _getFirstFilterRoute(MaterialPageRoute(
-                    builder: (context) => PlantList(widget.onChangeLanguage, widget.onBuyProduct, {}, '', count, path)));
+                    builder: (context) => PlantList(widget.onChangeLanguage, {}, '', count, path)));
               }
               return _getFirstFilterRoute();
             default:

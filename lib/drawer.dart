@@ -11,15 +11,13 @@ import 'package:abherbs_flutter/signin/sign_in.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 class AppDrawer extends StatefulWidget {
   final FirebaseUser currentUser;
   final void Function(String) onChangeLanguage;
-  final void Function(PurchasedItem) onBuyProduct;
   final Map<String, String> filter;
   final void Function() settingsCallback;
-  AppDrawer(this.currentUser, this.onChangeLanguage, this.onBuyProduct, this.filter, this.settingsCallback);
+  AppDrawer(this.currentUser, this.onChangeLanguage, this.filter, this.settingsCallback);
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
@@ -103,7 +101,7 @@ class _AppDrawerState extends State<AppDrawer> {
         subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ''),
         onTap: () {
           Navigator.pop(context);
-          onLeftNavigationTap(context, widget.onChangeLanguage, widget.onBuyProduct, _filter, attribute);
+          onLeftNavigationTap(context, widget.onChangeLanguage, _filter, attribute);
         },
       );
     }));
@@ -120,7 +118,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
+          MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.onChangeLanguage, widget.filter)),
         ).then((result) {
           if (mounted) {
             Navigator.pop(context);
@@ -173,7 +171,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => FeedbackScreen(widget.onChangeLanguage, widget.onBuyProduct, widget.filter)),
+          MaterialPageRoute(builder: (context) => FeedbackScreen(widget.onChangeLanguage, widget.filter)),
         ).then((result) {
           if (mounted) {
             Navigator.pop(context);

@@ -16,7 +16,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_crashlytics/flutter_crashlytics.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:screen/screen.dart';
@@ -60,6 +59,10 @@ class _AppState extends State<App> {
   Future<Locale> _localeF;
   Future<void> _initStoreF;
 
+  Future<void> _logFailedPurchaseEvent() async {
+    await _firebaseAnalytics.logEvent(name: 'purchase_failed');
+  }
+
   onChangeLanguage(String language) {
     setState(() {
       translationCache = {};
@@ -70,16 +73,10 @@ class _AppState extends State<App> {
     });
   }
 
-  onBuyProduct(PurchasedItem purchased) {
-    setState(() {
-      Purchases.purchasesOld.add(purchased);
-      Prefs.setStringList(keyPurchases, Purchases.purchasesOld.map((item) => item.productId).toList());
-    });
-  }
-
   _listenToPurchaseUpdated(List<PurchaseDetails> purchases) {
     setState(() {
-      Purchases.purchases = purchases;
+      Purchases.purchases.addAll(purchases);
+      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
     });
   }
 
@@ -121,7 +118,6 @@ class _AppState extends State<App> {
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIos: 5);
-    Purchases.purchasesOld = <PurchasedItem>[];
     Purchases.purchases = [];
   }
 
@@ -159,10 +155,6 @@ class _AppState extends State<App> {
     });
   }
 
-  Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) {
-    return Future<bool>.value(true);
-  }
-
   Future<void> initStoreInfo() async {
     final bool isAvailable = await _connection.isAvailable();
     if (!isAvailable) {
@@ -175,7 +167,7 @@ class _AppState extends State<App> {
       Purchases.purchases = purchases.map((productId) => Purchases.offlineProducts[productId]).toList();
     } else {
       for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
-        if (await _verifyPurchase(purchase)) {
+        if (await verifyPurchase(purchase)) {
           Purchases.purchases.add(purchase);
         }
       }
@@ -198,7 +190,16 @@ class _AppState extends State<App> {
     }, onDone: () {
       _subscription.cancel();
     }, onError: (error) {
-      // handle error here.
+      _logFailedPurchaseEvent();
+      if (mounted) {
+        Fluttertoast.showToast(
+            msg: S
+                .of(context)
+                .product_purchase_failed,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIos: 5);
+      }
     });
     _initStoreF = initStoreInfo();
 
@@ -294,7 +295,7 @@ class _AppState extends State<App> {
                   GlobalWidgetsLocalizations.delegate,
                 ],
                 supportedLocales: S.delegate.supportedLocales,
-                home: Splash(this.onChangeLanguage, this.onBuyProduct, notificationData),
+                home: Splash(this.onChangeLanguage, notificationData),
                 navigatorObservers: [
                   FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
                 ],
