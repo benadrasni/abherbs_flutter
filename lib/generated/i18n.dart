@@ -14329,7 +14329,7 @@ class $lv_LV extends S {
   @override
   String get auth_invalid_email_address => "Šī e-pasta adrese nav pareiza";
   @override
-  String get distribution_message => "Kuram ģeogrāfiskajam apgabalam vajadzētu koncentrēties?";
+  String get distribution_message => "Uz kuru ģeogrāfisko apgabalu vajadzētu koncentrēties?";
   @override
   String get caribbean => "Karību jūras reģions";
   @override
@@ -14417,7 +14417,7 @@ class $lv_LV extends S {
   @override
   String get auth_reset_password_email_title => "Atiestatīt paroli";
   @override
-  String get color_blue => "mėlyna, violetinė";
+  String get color_blue => "zils, violets";
   @override
   String get my_filter => "Mans filtrs";
   @override
@@ -14427,13 +14427,13 @@ class $lv_LV extends S {
   @override
   String get filter_petal => "ziedlapiņa";
   @override
-  String get color_white => "baltas";
+  String get color_white => "balts";
   @override
   String get observation => "Novērošana";
   @override
   String get northeastern_usa => "Ziemeļaustrumu ASV";
   @override
-  String get color_green => "žalia, ruda, juoda";
+  String get color_green => "zaļš, brūns, melns";
   @override
   String get taxonomy_ordo => "Rinda";
   @override
@@ -14491,7 +14491,7 @@ class $lv_LV extends S {
   @override
   String get auth_sign_in => "Pierakstīties";
   @override
-  String get color_red => "raudona, rožinė";
+  String get color_red => "sarkans, rozā";
   @override
   String get north_central_pacific => "Klusā okeāna ziemeļu daļa";
   @override
@@ -14503,7 +14503,7 @@ class $lv_LV extends S {
   @override
   String get observation_upload_fail => "Augšupielāde neizdevās. Lūdzu, pārbaudiet savu interneta savienojumu un mēģiniet vēlreiz.";
   @override
-  String get color_yellow => "geltonas";
+  String get color_yellow => "dzeltens";
   @override
   String get subantarctic_islands => "Subantkartiskas salas";
   @override
@@ -14547,7 +14547,7 @@ class $lv_LV extends S {
   @override
   String get rate_later => "Vēlāk";
   @override
-  String get color_message => "Kas ir krāsa ziedu? Izvēlieties tuvāko.";
+  String get color_message => "Kas ir ziedu krāsa? Izvēlieties tuvāko.";
   @override
   String get northeast_tropical_africa => "Ziemeļaustrumu tropu Āfrika";
   @override
