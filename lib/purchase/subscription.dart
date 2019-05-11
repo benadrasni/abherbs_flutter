@@ -6,6 +6,7 @@ import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -16,6 +17,7 @@ class Subscription extends StatefulWidget {
 }
 
 class _SubscriptionState extends State<Subscription> {
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
   final InAppPurchaseConnection _connection = InAppPurchaseConnection.instance;
   final List<String> _subscriptionLists = Platform.isAndroid
       ? [
@@ -27,6 +29,15 @@ class _SubscriptionState extends State<Subscription> {
           subscriptionYearly,
         ];
   Future<ProductDetailsResponse> _subscriptionsF;
+
+  Future<void> _logCancelledSubscriptionEvent(key, String productId) async {
+    if (key.currentState != null && key.currentState.mounted) {
+      key.currentState.showSnackBar(new SnackBar(
+        content: new Text(S.of(context).product_subscribe_failed),
+      ));
+    }
+    await _firebaseAnalytics.logEvent(name: 'subscription_canceled', parameters: {'productId': productId});
+  }
 
   String _getOldSubscription(String productId) {
     switch (productId) {
@@ -155,7 +166,13 @@ class _SubscriptionState extends State<Subscription> {
                           color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
                           onPressed: () {
                             if (!isPurchased) {
-                              _connection.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: subscription));
+                              _connection.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: subscription)).then((value) {
+                                if (!value) {
+                                  _logCancelledSubscriptionEvent(key, subscription.id);
+                                }
+                              }).catchError((error) {
+                                _logCancelledSubscriptionEvent(key, subscription.id);
+                              });
                             }
                           },
                           child: Text(
