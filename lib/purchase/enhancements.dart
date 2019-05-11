@@ -9,6 +9,7 @@ import 'package:abherbs_flutter/settings/setting_my_filter.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/purchase/subscription.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -23,6 +24,7 @@ class EnhancementsScreen extends StatefulWidget {
 }
 
 class _EnhancementsScreenState extends State<EnhancementsScreen> {
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
   final InAppPurchaseConnection _connection = InAppPurchaseConnection.instance;
   final List<String> _productLists = Platform.isAndroid
       ? [
@@ -43,6 +45,15 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
         ];
   Future<ProductDetailsResponse> _productsF;
 
+  Future<void> _logCancelledPurchaseEvent(key, String productId) async {
+    if (key.currentState != null && key.currentState.mounted) {
+      key.currentState.showSnackBar(new SnackBar(
+        content: new Text(S.of(context).product_purchase_failed),
+      ));
+    }
+    await _firebaseAnalytics.logEvent(name: 'purchase_canceled', parameters: {'productId': productId});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -58,7 +69,13 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
         color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
         onPressed: () {
           if (!isPurchased) {
-            _connection.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: product));
+            _connection.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: product)).then((value) {
+              if (!value) {
+                _logCancelledPurchaseEvent(key, product.id);
+              }
+            }).catchError((error) {
+              _logCancelledPurchaseEvent(key, product.id);
+            });
           }
         },
         child: Text(
@@ -126,7 +143,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final key = new GlobalKey<ScaffoldState>();
+    final key = GlobalKey<ScaffoldState>();
 
     return Scaffold(
       key: key,

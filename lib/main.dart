@@ -74,10 +74,12 @@ class _AppState extends State<App> {
   }
 
   _listenToPurchaseUpdated(List<PurchaseDetails> purchases) {
-    setState(() {
-      Purchases.purchases.addAll(purchases);
-      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
-    });
+    if (purchases.length > 0 && purchases[0].error == null) {
+      setState(() {
+        Purchases.purchases.addAll(purchases);
+        Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
+      });
+    }
   }
 
   void _firebaseCloudMessagingListeners() {
