@@ -64,7 +64,9 @@ Future<void> observationDialog(BuildContext mainContext, GlobalKey<ScaffoldState
                   )),
               onPressed: () {
                 Navigator.of(context).pop();
-                key.currentState.openDrawer();
+                if (key.currentState != null) {
+                  key.currentState.openDrawer();
+                }
               },
             )
           ],
@@ -88,7 +90,9 @@ Future<void> photoSearchDialog(BuildContext mainContext, GlobalKey<ScaffoldState
                   )),
               onPressed: () {
                 Navigator.of(context).pop();
-                key.currentState.openDrawer();
+                if (key.currentState != null) {
+                  key.currentState.openDrawer();
+                }
               },
             )
           ],
@@ -112,14 +116,15 @@ Future<void> favoriteDialog(BuildContext mainContext, GlobalKey<ScaffoldState> k
                   )),
               onPressed: () {
                 Navigator.of(context).pop();
-                key.currentState.openDrawer();
+                if (key.currentState != null) {
+                  key.currentState.openDrawer();
+                }
               },
             )
           ],
         );
       });
 }
-
 
 Future<bool> deleteDialog(BuildContext mainContext, String title, String content) async {
   return showDialog(
