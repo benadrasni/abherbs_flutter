@@ -22,7 +22,7 @@ class _ObservationUploadState extends State<ObservationUpload> {
   int _uploadStatus; // 0: initial, 1: uploading,  2: successful, 3: failed
 
   onObservationUpload() {
-    if (mounted) {
+    if (mounted && _observationsRemain > 0) {
       setState(() {
         _observationsRemain--;
       });
