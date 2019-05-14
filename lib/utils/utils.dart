@@ -614,5 +614,5 @@ double getFABPadding() {
 }
 
 Future<bool> verifyPurchase(PurchaseDetails purchaseDetails) {
-  return Future<bool>.value(purchaseDetails.status == PurchaseStatus.purchased);
+  return Future<bool>.value(purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == null);
 }
