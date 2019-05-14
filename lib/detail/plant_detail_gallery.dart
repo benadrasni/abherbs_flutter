@@ -1,19 +1,28 @@
 import 'package:abherbs_flutter/detail/plant_detail_info.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-Widget _getImageButton(String url) {
+Widget _getImageButton(BuildContext context, String url) {
   var placeholder = Stack(alignment: Alignment.center, children: [
     CircularProgressIndicator(),
     Image(
       image: AssetImage('res/images/placeholder.webp'),
     ),
   ]);
-  return Container(
-    padding: EdgeInsets.all(10.0),
-    child: getImage(url, placeholder),
+  return GestureDetector(
+    child: Container(
+      padding: EdgeInsets.all(10.0),
+      child: getImage(url, placeholder),
+    ),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => FullScreenPage(url)),
+      );
+    },
   );
 }
 
@@ -21,12 +30,12 @@ Widget getGallery(BuildContext context, Plant plant) {
   List<Widget> cards = [];
 
   cards.add(Card(
-    child: _getImageButton(storagePhotos + plant.illustrationUrl),
+    child: _getImageButton(context, storagePhotos + plant.illustrationUrl),
   ));
 
   cards.addAll(plant.photoUrls.map((url) {
     return Card(
-      child: _getImageButton(storagePhotos + url),
+      child: _getImageButton(context, storagePhotos + url),
     );
   }));
 
