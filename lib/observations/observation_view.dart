@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/observations/observation_map.dart';
+import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -128,18 +129,30 @@ class _ObservationViewState extends State<ObservationView> {
         itemCount: widget.observation.photoPaths.length,
         itemBuilder: (context, position) {
           if (widget.observation.status == firebaseValueReview) {
-            return Center(child: Image(image: AssetImage('res/images/review.png'),));
+            return Center(
+                child: Image(
+              image: AssetImage('res/images/review.png'),
+            ));
           } else {
-            return Stack(children: [
-              getImage(widget.observation.photoPaths[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
-              Container(
-                padding: EdgeInsets.all(5.0),
-                child: Text(
-                  (position + 1).toString() + ' / ' + widget.observation.photoPaths.length.toString(),
-                  style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+            return GestureDetector(
+              child: Stack(children: [
+                getImage(widget.observation.photoPaths[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
+                Container(
+                  padding: EdgeInsets.all(5.0),
+                  child: Text(
+                    (position + 1).toString() + ' / ' + widget.observation.photoPaths.length.toString(),
+                    style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-            ]);
+              ]),
+              onTap: () {
+                var newUrl = widget.observation.photoPaths[position].toString().replaceAll(defaultExtension, defaultPhotoExtension);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FullScreenPage(newUrl)),
+                );
+              },
+            );
           }
         },
       ),
