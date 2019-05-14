@@ -36,11 +36,13 @@ void main() async {
 
   runZoned<Future<Null>>(() async {
     Screen.keepOn(true);
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+        .then((_) {
       runApp(App());
     });
   }, onError: (error, stackTrace) async {
-    await FlutterCrashlytics().reportCrash(error, stackTrace, forceCrash: false);
+    await FlutterCrashlytics()
+        .reportCrash(error, stackTrace, forceCrash: false);
   });
 }
 
@@ -68,17 +70,29 @@ class _AppState extends State<App> {
       translationCache = {};
       _localeF = Future<Locale>(() {
         var languageCountry = language?.split('_');
-        return language == null || language.isEmpty ? null : Locale(languageCountry[0], languageCountry[1]);
+        return language == null || language.isEmpty
+            ? null
+            : Locale(languageCountry[0], languageCountry[1]);
       });
     });
   }
 
   _listenToPurchaseUpdated(List<PurchaseDetails> purchases) {
-    if (purchases.length > 0 && purchases[0].error == null) {
-      setState(() {
-        Purchases.purchases.addAll(purchases);
-        Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
-      });
+    var isPurchase = false;
+    for (PurchaseDetails purchase in purchases) {
+      if (purchase.error == null &&
+          purchase.status == PurchaseStatus.purchased) {
+        if (Platform.isIOS) {
+          _connection.completePurchase(purchase);
+        }
+        Purchases.purchases.add(purchase);
+        isPurchase = true;
+      }
+    }
+    if (isPurchase) {
+      Prefs.setStringList(keyPurchases,
+          Purchases.purchases.map((item) => item.productID).toList());
+      setState(() {});
     }
   }
 
@@ -101,15 +115,18 @@ class _AppState extends State<App> {
       },
       onLaunch: (Map<String, dynamic> message) async {
         setState(() {
-          _notificationData = Map.from(Platform.isIOS ? message : message[notificationAttributeData]);
+          _notificationData = Map.from(
+              Platform.isIOS ? message : message[notificationAttributeData]);
         });
       },
     );
   }
 
   void _iOSPermission() {
-    _firebaseMessaging.requestNotificationPermissions(IosNotificationSettings(sound: true, badge: true, alert: true));
-    _firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
+    _firebaseMessaging.requestNotificationPermissions(
+        IosNotificationSettings(sound: true, badge: true, alert: true));
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings) {
       print("Settings registered: $settings");
     });
   }
@@ -124,34 +141,48 @@ class _AppState extends State<App> {
   }
 
   void _checkPromotions() {
-    rootReference.child(firebasePromotions).once().then((DataSnapshot snapshot) {
+    rootReference
+        .child(firebasePromotions)
+        .once()
+        .then((DataSnapshot snapshot) {
       if (snapshot.value != null) {
         if (snapshot.value[firebaseAttributeObservations] != null) {
-          var observationsFrom = DateTime.parse(snapshot.value[firebaseAttributeObservations][firebaseAttributeFrom]);
-          var observationsTo = DateTime.parse(snapshot.value[firebaseAttributeObservations][firebaseAttributeTo]);
+          var observationsFrom = DateTime.parse(snapshot
+              .value[firebaseAttributeObservations][firebaseAttributeFrom]);
+          var observationsTo = DateTime.parse(snapshot
+              .value[firebaseAttributeObservations][firebaseAttributeTo]);
 
           var currentDate = DateTime.now();
           Purchases.observationPromotionFrom = observationsFrom;
           Purchases.observationPromotionTo = observationsTo;
-          Purchases.isObservationPromotion = currentDate.isAfter(observationsFrom) && currentDate.isBefore(observationsTo.add(Duration(days: 1)));
+          Purchases.isObservationPromotion =
+              currentDate.isAfter(observationsFrom) &&
+                  currentDate.isBefore(observationsTo.add(Duration(days: 1)));
         }
         if (snapshot.value[firebaseAttributeSearch] != null) {
-          var searchFrom = DateTime.parse(snapshot.value[firebaseAttributeSearch][firebaseAttributeFrom]);
-          var searchTo = DateTime.parse(snapshot.value[firebaseAttributeSearch][firebaseAttributeTo]);
+          var searchFrom = DateTime.parse(
+              snapshot.value[firebaseAttributeSearch][firebaseAttributeFrom]);
+          var searchTo = DateTime.parse(
+              snapshot.value[firebaseAttributeSearch][firebaseAttributeTo]);
 
           var currentDate = DateTime.now();
           Purchases.searchPromotionFrom = searchFrom;
           Purchases.searchPromotionTo = searchTo;
-          Purchases.isSearchPromotion = currentDate.isAfter(searchFrom) && currentDate.isBefore(searchTo.add(Duration(days: 1)));
+          Purchases.isSearchPromotion = currentDate.isAfter(searchFrom) &&
+              currentDate.isBefore(searchTo.add(Duration(days: 1)));
         }
         if (snapshot.value[firebaseAttributeSearchByPhoto] != null) {
-          var searchByPhotoFrom = DateTime.parse(snapshot.value[firebaseAttributeSearchByPhoto][firebaseAttributeFrom]);
-          var searchByPhotoTo = DateTime.parse(snapshot.value[firebaseAttributeSearchByPhoto][firebaseAttributeTo]);
+          var searchByPhotoFrom = DateTime.parse(snapshot
+              .value[firebaseAttributeSearchByPhoto][firebaseAttributeFrom]);
+          var searchByPhotoTo = DateTime.parse(snapshot
+              .value[firebaseAttributeSearchByPhoto][firebaseAttributeTo]);
 
           var currentDate = DateTime.now();
           Purchases.searchByPhotoPromotionFrom = searchByPhotoFrom;
           Purchases.searchByPhotoPromotionTo = searchByPhotoTo;
-          Purchases.isSearchByPhotoPromotion = currentDate.isAfter(searchByPhotoFrom) && currentDate.isBefore(searchByPhotoTo.add(Duration(days: 1)));
+          Purchases.isSearchByPhotoPromotion =
+              currentDate.isAfter(searchByPhotoFrom) &&
+                  currentDate.isBefore(searchByPhotoTo.add(Duration(days: 1)));
         }
       }
     });
@@ -163,17 +194,25 @@ class _AppState extends State<App> {
       _iapError();
     }
 
-    final QueryPurchaseDetailsResponse purchaseResponse = await _connection.queryPastPurchases();
+    final QueryPurchaseDetailsResponse purchaseResponse =
+        await _connection.queryPastPurchases();
     if (purchaseResponse.error != null) {
       var purchases = await Prefs.getStringListF(keyPurchases, []);
-      Purchases.purchases = purchases.map((productId) => Purchases.offlineProducts[productId]).toList();
+      Purchases.purchases = purchases
+          .map((productId) => Purchases.offlineProducts[productId])
+          .toList();
     } else {
+      Purchases.purchases = [];
       for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
         if (await verifyPurchase(purchase)) {
+          if (Platform.isIOS) {
+            _connection.completePurchase(purchase);
+          }
           Purchases.purchases.add(purchase);
         }
       }
-      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
+      Prefs.setStringList(keyPurchases,
+          Purchases.purchases.map((item) => item.productID).toList());
     }
 
     Offline.initialize();
@@ -186,7 +225,8 @@ class _AppState extends State<App> {
     super.initState();
     Ads.initialize();
     Prefs.init();
-    Stream purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
+    Stream purchaseUpdated =
+        InAppPurchaseConnection.instance.purchaseUpdatedStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
@@ -195,9 +235,7 @@ class _AppState extends State<App> {
       _logFailedPurchaseEvent();
       if (mounted) {
         Fluttertoast.showToast(
-            msg: S
-                .of(context)
-                .product_purchase_failed,
+            msg: S.of(context).product_purchase_failed,
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIos: 5);
@@ -207,7 +245,9 @@ class _AppState extends State<App> {
 
     _localeF = Prefs.getStringF(keyPreferredLanguage).then((String language) {
       var languageCountry = language.split('_');
-      return languageCountry.length < 2 ? null : Locale(languageCountry[0], languageCountry[1]);
+      return languageCountry.length < 2
+          ? null
+          : Locale(languageCountry[0], languageCountry[1]);
     });
 
     Prefs.getStringF(keyRateCount, rateCountInitial.toString()).then((value) {
@@ -228,27 +268,29 @@ class _AppState extends State<App> {
     _firebaseCloudMessagingListeners();
   }
 
-  Locale _localeResolutionCallback(Locale locale, Locale deviceLocale, Iterable<Locale> supportedLocales) {
+  Locale _localeResolutionCallback(
+      Locale locale, Locale deviceLocale, Iterable<Locale> supportedLocales) {
     Locale resultLocale = locale;
     if (resultLocale == null) {
       Map<String, Locale> defaultLocale = {};
       for (Locale locale in supportedLocales) {
-        if ((locale.languageCode == 'en' && locale.countryCode == 'US')
-          || (locale.languageCode == 'ar' && locale.countryCode == 'EG')
-          || (locale.languageCode == 'de' && locale.countryCode == 'DE')
-          || (locale.languageCode == 'es' && locale.countryCode == 'ES')
-          || (locale.languageCode == 'fr' && locale.countryCode == 'FR')
-          || (locale.languageCode == 'pt' && locale.countryCode == 'PT')
-          || (locale.languageCode == 'it' && locale.countryCode == 'IT')
-          || (locale.languageCode == 'ru' && locale.countryCode == 'RU')
-          || (locale.languageCode == 'sr' && locale.countryCode == 'RS')
-          ) {
+        if ((locale.languageCode == 'en' && locale.countryCode == 'US') ||
+            (locale.languageCode == 'ar' && locale.countryCode == 'EG') ||
+            (locale.languageCode == 'de' && locale.countryCode == 'DE') ||
+            (locale.languageCode == 'es' && locale.countryCode == 'ES') ||
+            (locale.languageCode == 'fr' && locale.countryCode == 'FR') ||
+            (locale.languageCode == 'pt' && locale.countryCode == 'PT') ||
+            (locale.languageCode == 'it' && locale.countryCode == 'IT') ||
+            (locale.languageCode == 'ru' && locale.countryCode == 'RU') ||
+            (locale.languageCode == 'sr' && locale.countryCode == 'RS')) {
           defaultLocale[locale.languageCode] = locale;
-        } else if (!['en', 'ar', 'de', 'es', 'fr', 'pt', 'it', 'ru', 'sr'].contains(locale.languageCode)) {
+        } else if (!['en', 'ar', 'de', 'es', 'fr', 'pt', 'it', 'ru', 'sr']
+            .contains(locale.languageCode)) {
           defaultLocale[locale.languageCode] = locale;
         }
 
-        if (locale.languageCode == deviceLocale.languageCode && locale.countryCode == deviceLocale.countryCode) {
+        if (locale.languageCode == deviceLocale.languageCode &&
+            locale.countryCode == deviceLocale.countryCode) {
           resultLocale = locale;
           break;
         }
@@ -265,7 +307,8 @@ class _AppState extends State<App> {
         resultLocale = defaultLocale[languageEnglish];
       }
     }
-    Prefs.setStringList(keyLanguageAndCountry, [resultLocale.languageCode, resultLocale.countryCode]);
+    Prefs.setStringList(keyLanguageAndCountry,
+        [resultLocale.languageCode, resultLocale.countryCode]);
     return resultLocale;
   }
 
@@ -284,11 +327,14 @@ class _AppState extends State<App> {
         builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
-              Map<String, dynamic> notificationData = _notificationData != null ? Map.from(_notificationData) : null;
+              Map<String, dynamic> notificationData = _notificationData != null
+                  ? Map.from(_notificationData)
+                  : null;
               _notificationData = null;
               return MaterialApp(
                 localeResolutionCallback: (deviceLocale, supportedLocales) {
-                  return _localeResolutionCallback(snapshot.data[0], deviceLocale, supportedLocales);
+                  return _localeResolutionCallback(
+                      snapshot.data[0], deviceLocale, supportedLocales);
                 },
                 debugShowCheckedModeBanner: false,
                 localizationsDelegates: [

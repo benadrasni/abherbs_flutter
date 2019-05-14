@@ -180,8 +180,12 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                           var purchases = await Prefs.getStringListF(keyPurchases, []);
                           Purchases.purchases = purchases.map((productId) => Purchases.offlineProducts[productId]).toList();
                         } else {
+                          Purchases.purchases = [];
                           for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
                             if (await verifyPurchase(purchase)) {
+                              if (Platform.isIOS) {
+                                _connection.completePurchase(purchase);
+                              }
                               Purchases.purchases.add(purchase);
                             }
                           }
