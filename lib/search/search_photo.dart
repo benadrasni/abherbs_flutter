@@ -133,7 +133,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
             .set(results.map((searchResult) {
           Map<String, dynamic> labelMap = {};
           labelMap['entityId'] = searchResult.entityId;
-          labelMap['languae'] = widget.myLocale.languageCode;
+          labelMap['language'] = widget.myLocale.languageCode;
           labelMap['confidence'] = searchResult.confidence;
           if (searchResult.labelLatin != null) {
             labelMap['label_latin'] = searchResult.labelLatin;
