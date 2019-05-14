@@ -45,9 +45,9 @@ class PlantDetail extends StatefulWidget {
 }
 
 class _PlantDetailState extends State<PlantDetail> {
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
   StreamSubscription<FirebaseUser> _listener;
   FirebaseUser _currentUser;
-  FirebaseAnalytics _firebaseAnalytics;
   Future<PlantTranslation> _plantTranslationF;
   Future<bool> _isFavoriteF;
   int _currentIndex;
@@ -197,7 +197,6 @@ class _PlantDetailState extends State<PlantDetail> {
     super.initState();
     Offline.setKeepSynced(3, true);
     _checkCurrentUser();
-    _firebaseAnalytics = FirebaseAnalytics();
 
     _plantTranslationF = _getTranslation();
 
