@@ -91,8 +91,8 @@ class _SearchPhotoState extends State<SearchPhoto> {
                 result.labelLatin = path.substring(path.lastIndexOf('/') + 1);
               } else {
                 result.labelLatin = result.path;
-                translationsReference.child(widget.myLocale.languageCode).child(result.labelLatin).keepSynced(true);
-                return translationsReference.child(widget.myLocale.languageCode).child(result.labelLatin).child(firebaseAttributeLabel)
+                translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).keepSynced(true);
+                return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).child(firebaseAttributeLabel)
                     .once()
                     .then((snapshot) {
                   if (snapshot.value != null) {
