@@ -110,7 +110,8 @@ class _AppState extends State<App> {
       },
       onResume: (Map<String, dynamic> message) async {
         setState(() {
-          _notificationData = Map.from(message[notificationAttributeData]);
+          _notificationData = Map.from(
+              Platform.isIOS ? message : message[notificationAttributeData]);
         });
       },
       onLaunch: (Map<String, dynamic> message) async {
@@ -225,8 +226,7 @@ class _AppState extends State<App> {
     super.initState();
     Ads.initialize();
     Prefs.init();
-    Stream purchaseUpdated =
-        InAppPurchaseConnection.instance.purchaseUpdatedStream;
+    Stream purchaseUpdated = _connection.purchaseUpdatedStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
