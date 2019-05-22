@@ -327,6 +327,9 @@ class _AppState extends State<App> {
         builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
+              if (snapshot.hasError) {
+                FlutterCrashlytics().log(snapshot.error.toString());
+              }
               Map<String, dynamic> notificationData = _notificationData != null
                   ? Map.from(_notificationData)
                   : null;
