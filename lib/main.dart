@@ -334,7 +334,7 @@ class _AppState extends State<App> {
               return MaterialApp(
                 localeResolutionCallback: (deviceLocale, supportedLocales) {
                   return _localeResolutionCallback(
-                      snapshot.data[0], deviceLocale, supportedLocales);
+                      snapshot.data == null ? null : snapshot.data[0], deviceLocale, supportedLocales);
                 },
                 debugShowCheckedModeBanner: false,
                 localizationsDelegates: [
