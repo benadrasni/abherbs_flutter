@@ -305,9 +305,11 @@ class _PlantDetailState extends State<PlantDetail> {
                         if (snapshot.connectionState == ConnectionState.done) {
                           usersReference.child(_currentUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).set(
                               snapshot.data ? null : 1).then((value) {
-                            setState(() {
-                              _isFavoriteF = _setFavorite();
-                            });
+                            if (mounted) {
+                              setState(() {
+                                _isFavoriteF = _setFavorite();
+                              });
+                            }
                           });
                         }
                       } else {

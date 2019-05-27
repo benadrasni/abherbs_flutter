@@ -391,7 +391,7 @@ class _ObservationEditState extends State<ObservationEdit> {
           child: FloatingActionButton(
             onPressed: () {
               _saveObservation(context).then((result) {
-                if (result) {
+                if (result && mounted) {
                   Navigator.of(context).pop(true);
                 }
               });
