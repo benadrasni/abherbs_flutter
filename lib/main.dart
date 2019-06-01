@@ -206,7 +206,7 @@ class _AppState extends State<App> {
       Purchases.purchases = [];
       for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
         if (await verifyPurchase(purchase)) {
-          if (Platform.isIOS) {
+          if (Platform.isIOS && purchase.status == PurchaseStatus.purchased) {
             _connection.completePurchase(purchase);
           }
           Purchases.purchases.add(purchase);
