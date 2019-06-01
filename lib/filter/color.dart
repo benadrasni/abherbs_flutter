@@ -17,6 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:package_info/package_info.dart';
 
+import '../ads.dart';
+
 class Color extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
@@ -311,7 +313,7 @@ class _ColorState extends State<Color> {
       ),
     ));
 
-    _widgets.add(Container(height: 10.0));
+    _widgets.add(Container(height: 10.0 + getFABPadding()));
 
     return Scaffold(
       key: _key,
@@ -335,7 +337,7 @@ class _ColorState extends State<Color> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: getAdMobBanner(),
+            child: Ads.getAdMobBanner(),
           ),
         ],
       ),

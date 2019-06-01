@@ -13,6 +13,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '../ads.dart';
+
 class Petal extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
@@ -219,8 +221,12 @@ class _PetalState extends State<Petal> {
                   ),
                 ),
               ),
-              getAdMobBanner(),
+              Container(height: 10.0 + getFABPadding()),
             ],
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Ads.getAdMobBanner(),
           ),
         ],
       ),

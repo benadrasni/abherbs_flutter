@@ -16,6 +16,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '../ads.dart';
+
 class Distribution extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
@@ -200,7 +202,7 @@ class _DistributionState extends State<Distribution> {
           ],
         )));
 
-    regionWidgets.add(getAdMobBanner());
+    regionWidgets.add(Container(height: 10.0 + getFABPadding()));
 
     return ListView(
       padding: EdgeInsets.all(5.0),
@@ -263,6 +265,10 @@ class _DistributionState extends State<Distribution> {
             ),
           ),
           _getBody(context),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Ads.getAdMobBanner(),
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -23,7 +23,6 @@ import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
@@ -589,17 +588,6 @@ void goToDetail(State state, BuildContext context, Locale myLocale, String name,
       }
     }
   });
-}
-
-Widget getAdMobBanner() {
-  return Purchases.isNoAds()
-      ? Container(
-          height: 0.0,
-        )
-      : AdmobBanner(
-          adUnitId: getBannerAdUnitId(),
-          adSize: AdmobBannerSize.BANNER,
-        );
 }
 
 String getLanguageCode(String code) {
