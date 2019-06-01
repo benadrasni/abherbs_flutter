@@ -3,12 +3,14 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/splash.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
-import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -18,8 +20,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_crashlytics/flutter_crashlytics.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:screen/screen.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:screen/screen.dart';
 
 void main() async {
   FlutterError.onError = (FlutterErrorDetails details) {
@@ -33,6 +35,7 @@ void main() async {
   };
 
   await FlutterCrashlytics().initialize();
+  Admob.initialize(getAdAppId());
 
   runZoned<Future<Null>>(() async {
     Screen.keepOn(true);
