@@ -23,7 +23,6 @@ import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
@@ -183,7 +182,9 @@ Future<void> launchURLF(String url) {
 }
 
 Future<void> _logPromotionEvent(event) async {
-  await FirebaseAnalytics().logEvent(name: 'promotion', parameters: {'feature': event});
+  await FirebaseAnalytics().logEvent(name: 'promotion', parameters: {
+    'feature': event
+  });
 }
 
 String getMapImageUrl(double latitude, double longitude, double width, double height) {
@@ -382,8 +383,8 @@ Icon getIcon(String productId) {
   }
 }
 
-List<Widget> getActions(
-    BuildContext mainContext, GlobalKey<ScaffoldState> key, FirebaseUser currentUser, Function(String) onChangeLanguage, Map<String, String> filter) {
+List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, FirebaseUser currentUser, Function(String) onChangeLanguage,
+    Map<String, String> filter) {
   DateFormat dateFormat = new DateFormat.yMMMMd(Localizations.localeOf(mainContext).toString());
   var _actions = <Widget>[];
 
@@ -406,7 +407,7 @@ List<Widget> getActions(
             }
           } else if (Purchases.isSearchByPhotoPromotion != null && Purchases.isSearchByPhotoPromotion) {
             infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
-                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo)))
+                S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo)))
                 .then((value) {
               if (value != null && value) {
                 Navigator.push(
@@ -417,12 +418,14 @@ List<Widget> getActions(
                 _logPromotionEvent('search_by_photo');
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage)),
+                  MaterialPageRoute(
+                      builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage)),
                 );
               }
             });
           } else {
-            infoBuyDialog(mainContext, S.of(mainContext).product_photo_search_title, S.of(mainContext).product_photo_search_description)
+            infoBuyDialog(mainContext, S.of(mainContext).product_photo_search_title,
+                S.of(mainContext).product_photo_search_description)
                 .then((value) {
               if (value != null && value) {
                 Navigator.push(
@@ -449,14 +452,15 @@ List<Widget> getActions(
             if (currentUser != null) {
               Navigator.push(
                 mainContext,
-                MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, false)),
+                MaterialPageRoute(
+                    builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, false)),
               );
             } else {
               observationDialog(mainContext, key);
             }
           } else if (Purchases.isObservationPromotion != null && Purchases.isObservationPromotion) {
             infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
-                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo)))
+                S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo)))
                 .then((value) {
               if (value != null && value) {
                 Navigator.push(
@@ -467,12 +471,14 @@ List<Widget> getActions(
                 _logPromotionEvent('observation');
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, true)),
+                  MaterialPageRoute(
+                      builder: (context) => Observations(currentUser, Localizations.localeOf(context), onChangeLanguage, true)),
                 );
               }
             });
           } else {
-            infoBuyDialog(mainContext, S.of(mainContext).product_observations_title, S.of(mainContext).product_observations_description)
+            infoBuyDialog(mainContext, S.of(mainContext).product_observations_title,
+                S.of(mainContext).product_observations_description)
                 .then((value) {
               if (value != null && value) {
                 Navigator.push(
@@ -498,7 +504,7 @@ List<Widget> getActions(
         );
       } else if (Purchases.isSearchPromotion != null && Purchases.isSearchPromotion) {
         infoBuyDialog(
-                mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo)))
+            mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo)))
             .then((value) {
           if (value != null && value) {
             Navigator.push(
@@ -514,7 +520,9 @@ List<Widget> getActions(
           }
         });
       } else {
-        infoBuyDialog(mainContext, S.of(mainContext).product_search_title, S.of(mainContext).product_search_description).then((value) {
+        infoBuyDialog(mainContext, S.of(mainContext).product_search_title,
+            S.of(mainContext).product_search_description)
+            .then((value) {
           if (value != null && value) {
             Navigator.push(
               mainContext,
@@ -556,8 +564,7 @@ List<Widget> getActions(
             String path = '/' + firebaseUsers + '/' + currentUser.uid + '/' + firebaseAttributeFavorite;
             Navigator.push(
               mainContext,
-              MaterialPageRoute(
-                  builder: (context) => PlantList(onChangeLanguage, {}, S.of(mainContext).favorite_empty, snapshot.data.toString(), path)),
+              MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, S.of(mainContext).favorite_empty, snapshot.data.toString(), path)),
             );
           } else {
             favoriteDialog(mainContext, key);
@@ -570,7 +577,8 @@ List<Widget> getActions(
   return _actions;
 }
 
-void goToDetail(State state, BuildContext context, Locale myLocale, String name, Function(String) onChangeLanguage, Map<String, String> filter) {
+void goToDetail(State state, BuildContext context, Locale myLocale, String name, Function(String) onChangeLanguage,
+    Map<String, String> filter) {
   plantsReference.child(name).once().then((DataSnapshot snapshot) {
     if (snapshot.value != null && snapshot.value['id'] != null) {
       if (state.mounted && context != null) {
@@ -592,14 +600,9 @@ void goToDetail(State state, BuildContext context, Locale myLocale, String name,
 }
 
 Widget getAdMobBanner() {
-  return Purchases.isNoAds()
-      ? Container(
-          height: 0.0,
-        )
-      : AdmobBanner(
-          adUnitId: getBannerAdUnitId(),
-          adSize: AdmobBannerSize.BANNER,
-        );
+  return Container(
+    height: getFABPadding(),
+  );
 }
 
 String getLanguageCode(String code) {
