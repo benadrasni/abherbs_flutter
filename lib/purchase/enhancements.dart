@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
@@ -58,8 +57,6 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
   void initState() {
     super.initState();
     _productsF = _connection.queryProductDetails(_productLists.toSet());
-
-    Ads.hideBannerAd();
   }
 
   List<Widget> _getButtons(ProductDetails product, bool isPurchased, key) {

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/search/search_names.dart';
@@ -44,8 +43,6 @@ class _SearchState extends State<Search> {
 
     _currentIndex = 0;
     _key = new GlobalKey<ScaffoldState>();
-
-    Ads.hideBannerAd();
   }
 
   Widget _getBody() {

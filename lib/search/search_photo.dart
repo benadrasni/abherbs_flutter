@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/plant_list.dart';
@@ -168,8 +167,6 @@ class _SearchPhotoState extends State<SearchPhoto> {
         return snapshot.value;
       }
     });
-
-    Ads.hideBannerAd();
   }
 
   @override

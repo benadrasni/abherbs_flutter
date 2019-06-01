@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_index_list.dart';
@@ -74,8 +73,6 @@ class _PlantListState extends State<PlantList> {
       });
       keysReference.child(filter).keepSynced(true);
     }
-
-    Ads.hideBannerAd();
   }
 
   @override

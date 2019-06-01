@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -194,13 +193,13 @@ class FeedbackScreen extends StatelessWidget {
               ),
               RaisedButton(
                 onPressed: () {
-                  Ads.showInterstitialAd();
+                  //Ads.showInterstitialAd();
                 },
                 child: Text(S.of(context).feedback_run_ads_fullscreen),
               ),
               RaisedButton(
                 onPressed: () {
-                  Ads.showRewardedVideoAd();
+                  //Ads.showRewardedVideoAd();
                 },
                 child: Text(S.of(context).feedback_run_ads_video),
               ),

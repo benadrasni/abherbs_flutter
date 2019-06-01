@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
@@ -194,8 +193,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _offlineF = Prefs.getBoolF(keyOffline, false);
     _downloadFinished = Offline.downloadFinished;
     _scaleDownPhotosF = Prefs.getBoolF(keyScaleDownPhotos, false);
-
-    Ads.hideBannerAd();
   }
 
   @override

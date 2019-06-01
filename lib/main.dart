@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
@@ -227,7 +226,6 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    Ads.initialize();
     Prefs.init();
     Stream purchaseUpdated = _connection.purchaseUpdatedStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
@@ -318,7 +316,6 @@ class _AppState extends State<App> {
   @override
   void dispose() {
     Prefs.dispose();
-    Ads.hideBannerAd();
     _subscription.cancel();
     super.dispose();
   }
