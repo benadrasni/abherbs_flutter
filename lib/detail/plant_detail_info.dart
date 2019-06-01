@@ -83,6 +83,42 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                 ]),
               ),
             ));
+
+            if (snapshot.data.isTranslatedWithGT) {
+              cards.add(Card(
+                child: Container(
+                  padding: EdgeInsets.all(10.0),
+                  decoration: new BoxDecoration(
+                    borderRadius: new BorderRadius.circular(16.0),
+                    color: Theme.of(context).secondaryHeaderColor,
+                  ),
+                  child: Column(
+                    children: [
+                      Text(S.of(context).google_translate),
+                      Container(
+                        width: 300.0,
+                        child: RaisedButton(
+                          onPressed: () {
+                            onChangeTranslation(!isOriginal);
+                          },
+                          child: new Text(isOriginal ? S.of(context).show_translation : S.of(context).show_original),
+                        ),
+                      ),
+                      Container(
+                        width: 300.0,
+                        child: RaisedButton(
+                          onPressed: () {
+                            launchURL(webUrl + 'translate_flower?lang=' + getLanguageCode(myLocale.languageCode) + "&plant=" + plant.name);
+                          },
+                          child: new Text(S.of(context).improve_translation),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ));
+            }
+
             cards.add(Card(
               child: Container(
                 padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
@@ -200,41 +236,6 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                     ),
                     _getRichText(snapshot.data.trivia),
                   ]),
-                ),
-              ));
-            }
-
-            if (snapshot.data.isTranslatedWithGT) {
-              cards.add(Card(
-                child: Container(
-                  padding: EdgeInsets.all(10.0),
-                  decoration: new BoxDecoration(
-                    borderRadius: new BorderRadius.circular(16.0),
-                    color: Theme.of(context).secondaryHeaderColor,
-                  ),
-                  child: Column(
-                    children: [
-                      Text(S.of(context).google_translate),
-                      Container(
-                        width: 300.0,
-                        child: RaisedButton(
-                          onPressed: () {
-                            onChangeTranslation(!isOriginal);
-                          },
-                          child: new Text(isOriginal ? S.of(context).show_translation : S.of(context).show_original),
-                        ),
-                      ),
-                      Container(
-                        width: 300.0,
-                        child: RaisedButton(
-                          onPressed: () {
-                            launchURL(webUrl + 'translate_flower?lang=' + getLanguageCode(myLocale.languageCode) + "&plant=" + plant.name);
-                          },
-                          child: new Text(S.of(context).improve_translation),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ));
             }
