@@ -1,4 +1,3 @@
-import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/feedback.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
@@ -31,8 +30,6 @@ class _AppDrawerState extends State<AppDrawer> {
     super.initState();
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
-
-    Ads.hideBannerAd();
   }
 
   @override

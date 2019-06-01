@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
@@ -38,10 +37,7 @@ class _Distribution2State extends State<Distribution2> {
     countsReference.child(filter).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter))
-              .then((value) {
-            Ads.showBannerAd(this);
-          });
+          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
         } else {
           _key.currentState.showSnackBar(SnackBar(
             content: Text(S.of(context).snack_no_flowers),
@@ -179,8 +175,6 @@ class _Distribution2State extends State<Distribution2> {
     _key = GlobalKey<ScaffoldState>();
 
     _setCount();
-
-    Ads.showBannerAd(this);
   }
 
   @override
