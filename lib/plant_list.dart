@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
@@ -11,6 +12,8 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+
+import 'ads.dart';
 
 class PlantList extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -28,6 +31,7 @@ class _PlantListState extends State<PlantList> {
   StreamSubscription<FirebaseUser> _listener;
   FirebaseUser _currentUser;
   Future<int> _count;
+  Random _random;
 
   Widget _getImageButton(BuildContext context, Locale myLocale, String url, String name) {
     var placeholder = Stack(alignment: Alignment.center, children: [
@@ -36,13 +40,24 @@ class _PlantListState extends State<PlantList> {
         image: AssetImage('res/images/placeholder.webp'),
       ),
     ]);
-    return FlatButton(
+    Widget button = FlatButton(
       padding: EdgeInsets.all(10.0),
       child: getImage(url, placeholder),
       onPressed: () {
         goToDetail(this, context, myLocale, name, widget.onChangeLanguage, widget.filter);
       },
     );
+
+    if (_random.nextInt(100) < Ads.adsFrequency) {
+      return Column(
+        children: [
+          button,
+          Ads.getAdMobBanner(),
+        ],
+      );
+    } else {
+      return button;
+    }
   }
 
   _onAuthStateChanged(FirebaseUser user) {
@@ -61,6 +76,7 @@ class _PlantListState extends State<PlantList> {
     super.initState();
     _checkCurrentUser();
     Offline.setKeepSynced(2, true);
+    _random = Random();
 
     if (widget.count != null) {
       _count = Future<int>(() {

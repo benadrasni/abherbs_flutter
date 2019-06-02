@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
+import '../ads.dart';
+
 const String sourceWikipedia = "wikipedia";
 const String sourceWikimediaCommons = "commons.wikimedia.org";
 const String sourceWikimediaCommonsTitle = "commons";
@@ -239,6 +241,8 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                 ),
               ));
             }
+
+            cards.add(Ads.getAdMobBanner());
 
             cards.add(Card(
               child: Container(
