@@ -1,14 +1,95 @@
 import 'dart:io';
 
 import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 
-class FeedbackScreen extends StatelessWidget {
+class FeedbackScreen extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
+
   FeedbackScreen(this.onChangeLanguage, this.filter);
+
+  @override
+  _FeedbackScreenState createState() => _FeedbackScreenState();
+
+}
+
+class _FeedbackScreenState extends State<FeedbackScreen> {
+  AdmobInterstitial _interstitialAd;
+  AdmobReward _rewardAd;
+  bool _isInterstitialLoading;
+  bool _isRewardLoading;
+
+  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
+    switch (event) {
+      case AdmobAdEvent.loaded:
+        if (adType == 'Interstitial') {
+          _isInterstitialLoading = false;
+        } else if (adType == 'Reward') {
+          _isRewardLoading = false;
+        }
+        break;
+      case AdmobAdEvent.failedToLoad:
+        break;
+      case AdmobAdEvent.clicked:
+        break;
+      case AdmobAdEvent.impression:
+        break;
+      case AdmobAdEvent.opened:
+        break;
+      case AdmobAdEvent.leftApplication:
+        break;
+      case AdmobAdEvent.closed:
+        if (adType == 'Interstitial') {
+          _isInterstitialLoading = true;
+          _interstitialAd.load();
+        } else if (adType == 'Reward') {
+          _isRewardLoading = true;
+          _rewardAd.load();
+        }
+        break;
+      case AdmobAdEvent.completed:
+        break;
+      case AdmobAdEvent.rewarded:
+        break;
+      case AdmobAdEvent.started:
+        break;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _isInterstitialLoading = true;
+    _interstitialAd = AdmobInterstitial(
+      adUnitId: getInterstitialAdUnitId(),
+      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+        handleEvent(event, args, 'Interstitial');
+      },
+    );
+    _interstitialAd.load();
+
+    _isRewardLoading = true;
+    _rewardAd = AdmobReward(
+      adUnitId: getRewardAdUnitId(),
+      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+        handleEvent(event, args, 'Reward');
+      },
+    );
+    _rewardAd.load();
+  }
+
+  @override
+  void dispose() {
+    _interstitialAd.dispose();
+    _rewardAd.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +239,7 @@ class FeedbackScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, filter)),
+                    MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.onChangeLanguage, widget.filter)),
                   );
                 },
                 child: Text(
@@ -192,14 +273,28 @@ class FeedbackScreen extends StatelessWidget {
                 ),
               ),
               RaisedButton(
-                onPressed: () {
-                  //Ads.showInterstitialAd();
+                onPressed: () async {
+                  if (_isInterstitialLoading) {
+                    key.currentState.showSnackBar(SnackBar(
+                      content: Text(S.of(context).snack_loading_ad),
+                      duration: Duration(milliseconds: 1500),
+                    ));
+                  } else {
+                    _interstitialAd.show();
+                  }
                 },
                 child: Text(S.of(context).feedback_run_ads_fullscreen),
               ),
               RaisedButton(
-                onPressed: () {
-                  //Ads.showRewardedVideoAd();
+                onPressed: () async {
+                  if (_isRewardLoading) {
+                    key.currentState.showSnackBar(SnackBar(
+                      content: Text(S.of(context).snack_loading_ad),
+                      duration: Duration(milliseconds: 1500),
+                    ));
+                  } else {
+                    _rewardAd.show();
+                  }
                 },
                 child: Text(S.of(context).feedback_run_ads_video),
               ),
