@@ -4,7 +4,7 @@ import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/cupertino.dart';
 
 class Ads {
-
+  static int adsFrequency = 5;
   static Widget admobBanner;
 
   static void initialize() {
