@@ -15,7 +15,6 @@ class FeedbackScreen extends StatefulWidget {
 
   @override
   _FeedbackScreenState createState() => _FeedbackScreenState();
-
 }
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
@@ -34,6 +33,13 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         }
         break;
       case AdmobAdEvent.failedToLoad:
+        if (adType == 'Interstitial') {
+          _isInterstitialLoading = true;
+          _interstitialAd.load();
+        } else if (adType == 'Reward') {
+          _isRewardLoading = true;
+          _rewardAd.load();
+        }
         break;
       case AdmobAdEvent.clicked:
         break;
