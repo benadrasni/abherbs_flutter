@@ -11,6 +11,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+import '../ads.dart';
+
 class Distribution2 extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
@@ -133,7 +135,7 @@ class _Distribution2State extends State<Distribution2> {
         child: GridView.count(
             crossAxisCount: 2,
             childAspectRatio: 1.0,
-            padding: const EdgeInsets.only(bottom: 50.0),
+            padding: EdgeInsets.only(bottom: getFABPadding()),
             mainAxisSpacing: 3.0,
             crossAxisSpacing: 3.0,
             children: subRegions.map((List<String> items) {
@@ -194,7 +196,22 @@ class _Distribution2State extends State<Distribution2> {
         actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.filter),
       ),
       drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.filter, null),
-      body: _getBody(context),
+      body: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Image.asset(
+              "res/images/app_background.webp",
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.bottomCenter,
+            ),
+          ),
+          _getBody(context),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Ads.getAdMobBanner(),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: Preferences.myFilterAttributes.indexOf(filterDistribution),
         items: getBottomNavigationBarItems(context, widget.filter),
