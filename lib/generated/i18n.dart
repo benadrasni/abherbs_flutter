@@ -9147,7 +9147,7 @@ class $sv_SE extends S {
   @override
   String get observation_empty => "Det finns ingen observation än.";
   @override
-  String get habitat_message => "Vad handlar du om? Identifiera växtens livsmiljö.";
+  String get habitat_message => "Vad finns runt dig? Identifiera växtens livsmiljö.";
   @override
   String get offline_download_fail => "Nedladdning misslyckad. Kontrollera din internetanslutning eller ledigt utrymme på enheten och försök igen.";
   @override
@@ -9199,7 +9199,7 @@ class $sv_SE extends S {
   @override
   String get habitat_meadow => "ängar eller gräsmarker";
   @override
-  String get observation_missing_photo => "Observationen var ofullständig så att den inte sparades. Foto saknas.";
+  String get observation_missing_photo => "Observationen var ofullständig, den sparades inte. Foto saknas.";
   @override
   String get auth_google => "Logga in med Google";
   @override
@@ -9315,7 +9315,7 @@ class $sv_SE extends S {
   @override
   String get offline_title => "Offlineläge";
   @override
-  String get observation_missing_location => "Observationen var ofullständig så att den inte sparades. Plats saknas.";
+  String get observation_missing_location => "Observationen var ofullständig, den sparades inte. Plats saknas.";
   @override
   String get privacy_policy => "Integritetspolicy";
   @override
@@ -9475,7 +9475,7 @@ class $sv_SE extends S {
   @override
   String get filter_color => "färg";
   @override
-  String get help => "Hjäjp";
+  String get help => "Hjälp";
   @override
   String get mexico => "Mexico";
   @override
@@ -9519,7 +9519,7 @@ class $sv_SE extends S {
   @override
   String get auth_sign_in => "Logga in";
   @override
-  String get color_red => "rött, rosa";
+  String get color_red => "röd, rosa";
   @override
   String get north_central_pacific => "Norra centrala Stilla havet";
   @override
@@ -9575,7 +9575,7 @@ class $sv_SE extends S {
   @override
   String get rate_later => "Senare";
   @override
-  String get color_message => "Vad är blommans färg? Välj den närmaste.";
+  String get color_message => "Vad har blomman för färg? Välj den närmaste.";
   @override
   String get northeast_tropical_africa => "Nordöstra tropiska Afrika";
   @override
@@ -9593,7 +9593,7 @@ class $sv_SE extends S {
   @override
   String get north_central_usa => "Nord-Central USA";
   @override
-  String get improve_translation => "Förbättra translation";
+  String get improve_translation => "Förbättra översättning";
   @override
   String get favorite_no_login => "Lista över favoritblommor är endast tillgänglig för inloggade användare. Vänligen logga in.";
   @override
@@ -9609,7 +9609,7 @@ class $sv_SE extends S {
   @override
   String get southeastern_europe => "Sydöstra Europa";
   @override
-  String get auth_empty_password => "Du måste fylla i det här fältet.<";
+  String get auth_empty_password => "Du måste fylla i det här fältet.";
   @override
   String get observation_upload_success => "Observationer har laddats upp.";
   @override
