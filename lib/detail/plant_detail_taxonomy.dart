@@ -39,7 +39,7 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
     ),
   ));
 
-  cards.add(Ads.getAdMobBanner());
+  cards.add(Ads.getAdMobBigBanner());
 
   return ListView(
     shrinkWrap: true,

@@ -242,7 +242,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
               ));
             }
 
-            cards.add(Ads.getAdMobBanner());
+            cards.add(Ads.getAdMobBigBanner());
 
             cards.add(Card(
               child: Container(
