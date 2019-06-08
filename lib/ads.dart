@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 class Ads {
   static int adsFrequency = 5;
   static Widget admobBanner;
+  static Widget admobBigBanner;
 
   static void initialize() {
     Admob.initialize(getAdAppId());
@@ -27,6 +28,25 @@ class Ads {
         );
       }
       return admobBanner;
+    }
+  }
+
+  static Widget getAdMobBigBanner() {
+    if (Purchases.isNoAds())
+      return Container(
+        height: 0.0,
+      );
+    else {
+      if (admobBigBanner == null) {
+        admobBigBanner = Container(
+          margin: EdgeInsets.only(bottom: 5.0),
+          child: AdmobBanner(
+            adUnitId: getBigBannerAdUnitId(),
+            adSize: AdmobBannerSize.LARGE_BANNER,
+          ),
+        );
+      }
+      return admobBigBanner;
     }
   }
 }

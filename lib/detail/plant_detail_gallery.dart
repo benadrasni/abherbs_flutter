@@ -41,7 +41,7 @@ Widget getGallery(BuildContext context, Plant plant) {
     );
   }));
 
-  cards.add(Ads.getAdMobBanner());
+  cards.add(Ads.getAdMobBigBanner());
 
   if (plant.sourceUrls != null) {
     cards.add(Card(

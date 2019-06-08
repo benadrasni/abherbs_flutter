@@ -52,7 +52,7 @@ class _PlantListState extends State<PlantList> {
       return Column(
         children: [
           button,
-          Ads.getAdMobBanner(),
+          Ads.getAdMobBigBanner(),
         ],
       );
     } else {
