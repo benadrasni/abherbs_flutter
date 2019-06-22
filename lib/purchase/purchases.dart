@@ -15,15 +15,15 @@ class Purchases {
   static DateTime searchByPhotoPromotionTo;
   static List<PurchaseDetails> purchases = [];
   static Map<String, PurchaseDetails> offlineProducts = {
-    productNoAdsIOS: PurchaseDetails(purchaseID: '', productID: productNoAdsIOS, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: PurchaseSource.AppStore), transactionDate: ''),
-    productNoAdsAndroid: PurchaseDetails(purchaseID: '', productID: productNoAdsAndroid, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: PurchaseSource.AppStore), transactionDate: ''),
-    productSearch: PurchaseDetails(purchaseID: '', productID: productSearch, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: PurchaseSource.AppStore), transactionDate: ''),
-    productCustomFilter: PurchaseDetails(purchaseID: '', productID: productCustomFilter, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: PurchaseSource.AppStore), transactionDate: ''),
-    productOffline: PurchaseDetails(purchaseID: '', productID: productOffline, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: PurchaseSource.AppStore), transactionDate: ''),
-    productObservations: PurchaseDetails(purchaseID: '', productID: productObservations, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: PurchaseSource.AppStore), transactionDate: ''),
-    productPhotoSearch: PurchaseDetails(purchaseID: '', productID: productPhotoSearch, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: PurchaseSource.AppStore), transactionDate: ''),
-    subscriptionMonthly: PurchaseDetails(purchaseID: '', productID: subscriptionMonthly, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: PurchaseSource.AppStore), transactionDate: ''),
-    subscriptionYearly: PurchaseDetails(purchaseID: '', productID: subscriptionYearly, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: PurchaseSource.AppStore), transactionDate: ''),
+    productNoAdsIOS: PurchaseDetails(purchaseID: '', productID: productNoAdsIOS, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
+    productNoAdsAndroid: PurchaseDetails(purchaseID: '', productID: productNoAdsAndroid, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
+    productSearch: PurchaseDetails(purchaseID: '', productID: productSearch, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
+    productCustomFilter: PurchaseDetails(purchaseID: '', productID: productCustomFilter, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
+    productOffline: PurchaseDetails(purchaseID: '', productID: productOffline, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
+    productObservations: PurchaseDetails(purchaseID: '', productID: productObservations, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
+    productPhotoSearch: PurchaseDetails(purchaseID: '', productID: productPhotoSearch, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
+    subscriptionMonthly: PurchaseDetails(purchaseID: '', productID: subscriptionMonthly, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
+    subscriptionYearly: PurchaseDetails(purchaseID: '', productID: subscriptionYearly, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
   };
 
   static bool isPurchased(String productId) {
