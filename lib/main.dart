@@ -22,7 +22,7 @@ import 'package:screen/screen.dart';
 
 import 'ads.dart';
 
-void main() async {
+void main() {
   FlutterError.onError = (FlutterErrorDetails details) {
     if (isInDebugMode) {
       // In development mode simply print to console.
@@ -33,7 +33,7 @@ void main() async {
     }
   };
 
-  await FlutterCrashlytics().initialize();
+  FlutterCrashlytics().initialize();
   Ads.initialize();
 
   runZoned<Future<Null>>(() async {
