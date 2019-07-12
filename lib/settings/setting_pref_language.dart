@@ -7,7 +7,12 @@ import 'package:flutter/material.dart';
 
 final countsReference = FirebaseDatabase.instance.reference().child(firebaseCounts);
 
-class SettingPrefLanguage extends StatelessWidget {
+class SettingPrefLanguage extends StatefulWidget {
+  @override
+  _SettingPrefLanguageState createState() => _SettingPrefLanguageState();
+}
+
+class _SettingPrefLanguageState extends State<SettingPrefLanguage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +27,9 @@ class SettingPrefLanguage extends StatelessWidget {
             title: Text(languages[key]),
             onTap: () {
               Prefs.setString(keyPreferredLanguage, key).then((result) {
-                Navigator.pop(context);
+                if (mounted) {
+                  Navigator.pop(context);
+                }
               });
             },
           );

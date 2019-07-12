@@ -6,6 +6,8 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
+import '../ads.dart';
+
 final translationsTaxonomyReference = FirebaseDatabase.instance.reference().child(firebaseTranslationsTaxonomy);
 
 Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF) {
@@ -36,6 +38,8 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
       child: _getTaxonomy(context, myLocale, plant),
     ),
   ));
+
+  cards.add(Ads.getAdMobBigBanner());
 
   return ListView(
     shrinkWrap: true,

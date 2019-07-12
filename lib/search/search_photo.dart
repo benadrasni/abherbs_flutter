@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/plant_list.dart';
@@ -38,6 +37,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
   File _image;
   Future<List<SearchResult>> _searchResultF;
   Future<List<dynamic>> _genericEntitiesF;
+  ImageLabeler imageLabeler;
 
   Future<void> _logPhotoSearchEvent() async {
     await _firebaseAnalytics.logEvent(name: 'search_photo');
@@ -62,7 +62,6 @@ class _SearchPhotoState extends State<SearchPhoto> {
   
   Future<List<SearchResult>> _getSearchResult(File image) {
     final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(image);
-    final ImageLabeler imageLabeler = FirebaseVision.instance.cloudImageLabeler();
 
     return Future.wait([imageLabeler.processImage(visionImage), _genericEntitiesF]).then((value) async {
       List<ImageLabel> labels = value[0];
@@ -168,8 +167,13 @@ class _SearchPhotoState extends State<SearchPhoto> {
         return snapshot.value;
       }
     });
+    imageLabeler = FirebaseVision.instance.cloudImageLabeler();
+  }
 
-    Ads.hideBannerAd();
+  @override
+  void dispose() {
+    imageLabeler.close();
+    super.dispose();
   }
 
   @override
