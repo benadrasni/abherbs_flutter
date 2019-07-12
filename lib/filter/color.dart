@@ -1,22 +1,23 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:abherbs_flutter/ads.dart';
-import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
-import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/plant_list.dart';
+import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
-import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/utils/dialogs.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:package_info/package_info.dart';
+
+import '../ads.dart';
 
 class Color extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -54,10 +55,7 @@ class _ColorState extends State<Color> {
     countsReference.child(filter).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter))
-              .then((value) {
-            Ads.showBannerAd(this);
-          });
+          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
         } else {
           _key.currentState.showSnackBar(SnackBar(
             content: Text(S.of(context).snack_no_flowers),
@@ -107,11 +105,6 @@ class _ColorState extends State<Color> {
     });
 
     _setCount();
-
-    if (widget.redirect == null) {
-      Ads.showBannerAd(this);
-    }
-
     SchedulerBinding.instance.addPostFrameCallback((_) => _redirect(context));
   }
 
@@ -320,9 +313,7 @@ class _ColorState extends State<Color> {
       ),
     ));
 
-    _widgets.add(Container(height: 10.0));
-
-    _widgets.add(getAdMobBanner());
+    _widgets.add(Container(height: 10.0 + getFABPadding()));
 
     return Scaffold(
       key: _key,
@@ -343,6 +334,10 @@ class _ColorState extends State<Color> {
           ListView(
             padding: EdgeInsets.all(5.0),
             children: _widgets,
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Ads.getAdMobBanner(),
           ),
         ],
       ),
@@ -380,9 +375,7 @@ class _ColorState extends State<Color> {
                             mainContext,
                             MaterialPageRoute(
                                 builder: (context) => PlantList(widget.onChangeLanguage, _filter, '')),
-                          ).then((value) {
-                            Ads.showBannerAd(this);
-                          });
+                          );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
                       ),

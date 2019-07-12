@@ -6,7 +6,7 @@ import GoogleMaps
 @objc class AppDelegate: FlutterAppDelegate {
   override func application(
     _ application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
   ) -> Bool {
     if let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") {
         let dictRoot = NSDictionary(contentsOfFile: path)

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/observations/observation_upload.dart';
@@ -106,8 +105,6 @@ class _ObservationsState extends State<Observations> {
     }
 
     _setCountUploadF();
-
-    Ads.hideBannerAd();
   }
 
   @override

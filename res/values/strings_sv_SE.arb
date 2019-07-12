@@ -4,7 +4,7 @@
   "settings": "Inställningar",
   "feedback": "Återkoppling",
   "about": "Om ansökan",
-  "help": "Hjäjp",
+  "help": "Hjälp",
 
   "product_restore_purchases": "Återställa köp",
   "product_no_ads_title": "Ingen oönskad annonsering",
@@ -73,7 +73,7 @@
   "auth_email_hint": "E-post",
   "auth_invalid_email_address": "E-postadressen är ogiltig",
   "auth_password_hint": "Lösenord",
-  "auth_empty_password": "Du måste fylla i det här fältet.<",
+  "auth_empty_password": "Du måste fylla i det här fältet.",
   "auth_reset_password": "Återställ lösenord",
   "auth_create_account": "Skapa ett konto",
   "auth_sign_in_text": "Har ett konto? Logga in",
@@ -111,14 +111,14 @@
   "filter_petal": "kronblad",
   "filter_distribution": "distribution",
 
-  "color_message": "Vad är blommans färg? Välj den närmaste.",
-  "habitat_message": "Vad handlar du om? Identifiera växtens livsmiljö.",
+  "color_message": "Vad har blomman för färg? Välj den närmaste.",
+  "habitat_message": "Vad finns runt dig? Identifiera växtens livsmiljö.",
   "petal_message": "Är blomman zygomorf? Nej? Hur många kronblad har det då?",
   "distribution_message": "Vilket geografiskt område ska vi fokusera på?",
 
   "color_white": "vit",
   "color_yellow": "gul",
-  "color_red": "rött, rosa",
+  "color_red": "röd, rosa",
   "color_blue": "blå, lila",
   "color_green": "grön, brun, svart",
 
@@ -204,7 +204,7 @@
 
   "google_translate": "Översatt med Google Translate",
   "show_original": "Visa engelsk text",
-  "improve_translation": "Förbättra translation",
+  "improve_translation": "Förbättra översättning",
   "show_translation": "Visa översatt text",
 
   "plant_height_from": "Höjd",
@@ -252,8 +252,8 @@
   "observations": "Observationer",
   "observation_note": "Placera för din privata anteckning.",
   "observation_saved": "Observationen räddades.",
-  "observation_missing_photo": "Observationen var ofullständig så att den inte sparades. Foto saknas.",
-  "observation_missing_location": "Observationen var ofullständig så att den inte sparades. Plats saknas.",
+  "observation_missing_photo": "Observationen var ofullständig, den sparades inte. Foto saknas.",
+  "observation_missing_location": "Observationen var ofullständig, den sparades inte. Plats saknas.",
   "observation_delete": "Ta bort observation",
   "observation_delete_question": "Vill du radera observationen?",
   "observation_empty": "Det finns ingen observation än.",

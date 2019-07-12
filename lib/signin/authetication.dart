@@ -82,6 +82,8 @@ class Auth {
         if (Purchases.hasLifetimeSubscription == null) {
           usersReference.child(user.uid).child(firebaseAttributeLifetimeSubscription).once().then((snapshot) {
             Purchases.hasLifetimeSubscription = snapshot.value != null && snapshot.value;
+          }).catchError((error) {
+            Purchases.hasLifetimeSubscription = false;
           });
         }
       } else {

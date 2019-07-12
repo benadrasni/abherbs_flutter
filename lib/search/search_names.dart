@@ -56,12 +56,14 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searc
     Map<dynamic, dynamic> latinNames) {
   var filteredNativeNames = <String>[];
   var searchTextWithoutDiacritics = removeDiacritics(searchText).toLowerCase();
-  nativeNames.forEach((key, value) {
-    if (searchText.isEmpty || removeDiacritics(key).toLowerCase().contains(searchTextWithoutDiacritics)) {
-      filteredNativeNames.add(key);
-    }
-  });
-  filteredNativeNames.sort();
+  if (nativeNames != null) {
+    nativeNames.forEach((key, value) {
+      if (searchText.isEmpty || removeDiacritics(key).toLowerCase().contains(searchTextWithoutDiacritics)) {
+        filteredNativeNames.add(key);
+      }
+    });
+    filteredNativeNames.sort();
+  }
 
   var filteredLatinNames = <String>[];
   latinNames.forEach((key, value) {

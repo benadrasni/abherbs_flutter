@@ -5,6 +5,8 @@ import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 
+import '../ads.dart';
+
 Widget _getImageButton(BuildContext context, String url) {
   var placeholder = Stack(alignment: Alignment.center, children: [
     CircularProgressIndicator(),
@@ -38,6 +40,8 @@ Widget getGallery(BuildContext context, Plant plant) {
       child: _getImageButton(context, storagePhotos + url),
     );
   }));
+
+  cards.add(Ads.getAdMobBigBanner());
 
   if (plant.sourceUrls != null) {
     cards.add(Card(

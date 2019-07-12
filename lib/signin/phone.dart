@@ -44,7 +44,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   // Check if form is valid before perform login or sign up
   bool _validateAndSave() {
     final form = _formKey.currentState;
-    if (form.validate()) {
+    if (form != null && form.validate()) {
       form.save();
       return true;
     }

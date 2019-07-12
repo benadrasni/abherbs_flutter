@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:abherbs_flutter/ads.dart';
 import 'package:abherbs_flutter/generated/i18n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
@@ -53,8 +52,6 @@ class _SubscriptionState extends State<Subscription> {
   void initState() {
     super.initState();
     _subscriptionsF = _connection.queryProductDetails(_subscriptionLists.toSet());
-
-    Ads.hideBannerAd();
   }
 
   @override
