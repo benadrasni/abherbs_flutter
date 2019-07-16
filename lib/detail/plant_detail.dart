@@ -319,7 +319,7 @@ class _PlantDetailState extends State<PlantDetail> {
                   },
                   child: _currentIndex == observationIndex
                       ? Icon(Icons.add)
-                      : snapshot.connectionState == ConnectionState.done && snapshot.data ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
+                      : snapshot.connectionState == ConnectionState.done && snapshot.data != null && snapshot.data ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
                 );
               }),
         ),
