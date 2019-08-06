@@ -8489,7 +8489,7 @@ class $es_ES extends S {
   @override
   String get filter_distribution => "distribución";
   @override
-  String get feedback_buy_extended => "Puede comprar funciones adicionales como el modo fuera de línea, buscar en nombres o en taxonomía, buscar por foto, observaciones y filtros configurables.";
+  String get feedback_buy_extended => "Puede comprar funciones adicionales como el modo offline, buscar en nombres o en taxonomía, buscar por foto, observaciones y filtros configurables.";
   @override
   String get north_central_usa => "Norte central de los Estados Unidos";
   @override
@@ -8523,7 +8523,7 @@ class $es_ES extends S {
   @override
   String get petal_zygomorphic => "zigomorfo";
   @override
-  String get photo_search_empty => "Google IA (inteligencia artificial) no reconoció ninguna flor en particular en la imagen. Inténtalo de nuevo con diferentes ángulos, distancias o condiciones de luz. Si ya lo hiciste, parece que IA Overlord no vendrá pronto.";
+  String get photo_search_empty => "Google IA (inteligencia artificial) no reconoció ninguna flor en particular en la imagen. Inténtalo de nuevo con diferentes ángulos, distancias o condiciones de luz. Si ya lo hiciste, parece que IA Overlord no reconoce el objeto.";
   @override
   String get auth_invalid_code => "Introduce un código SMS válido";
   @override
