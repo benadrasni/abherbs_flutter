@@ -54,19 +54,18 @@ Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, String se
 
 Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searchText, Map<dynamic, dynamic> nativeNames,
     Map<dynamic, dynamic> latinNames) {
-  var filteredNativeNames = <String>[];
   var searchTextWithoutDiacritics = removeDiacritics(searchText).toLowerCase();
-  if (nativeNames != null) {
-    nativeNames.forEach((key, value) {
-      if (searchText.isEmpty || removeDiacritics(key).toLowerCase().contains(searchTextWithoutDiacritics)) {
-        filteredNativeNames.add(key);
-      }
-    });
-    filteredNativeNames.sort();
-  }
+
+  var filteredNativeNames = <String>[];
+  nativeNames?.forEach((key, value) {
+    if (searchText.isEmpty || removeDiacritics(key).toLowerCase().contains(searchTextWithoutDiacritics)) {
+      filteredNativeNames.add(key);
+    }
+  });
+  filteredNativeNames.sort();
 
   var filteredLatinNames = <String>[];
-  latinNames.forEach((key, value) {
+  latinNames?.forEach((key, value) {
     if (searchText.isEmpty || key.toLowerCase().contains(searchTextWithoutDiacritics)) {
       filteredLatinNames.add(key);
     }
@@ -91,9 +90,10 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searc
               onTap: () {
                 String path = '/' + firebaseSearch + '/' + getLanguageCode(myLocale.languageCode) + '/' + filteredNativeNames[index] + '/' + firebaseAttributeList;
                 var value = nativeNames[filteredNativeNames[index]][firebaseAttributeList];
+                int length = value is List ? value.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : value.length;
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', value.length.toString(), path)),
+                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', length.toString(), path)),
                 );
               },
             );
@@ -120,9 +120,10 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searc
             onTap: () {
               String path = '/' + firebaseSearch + '/' + languageLatin + '/' + filteredLatinNames[index] + '/' + firebaseAttributeList;
               var value = latinNames[filteredLatinNames[index]][firebaseAttributeList];
+              int length = value is List ? value.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : value.length;
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', value.length.toString(), path)),
+                MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', length.toString(), path)),
               );
             },
           );

@@ -14,20 +14,20 @@ class Auth {
   }
 
   static Future<String> signInWithCredential(AuthCredential credential) async {
-    FirebaseUser user = await firebaseAuth.signInWithCredential(credential);
-    return user.uid;
+    AuthResult result = await firebaseAuth.signInWithCredential(credential);
+    return result.user.uid;
   }
 
   static Future<FirebaseUser> signInWithEmail(String email, String password) async {
-    FirebaseUser user = await firebaseAuth.signInWithEmailAndPassword(
+    AuthResult result = await firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
-    return user;
+    return result.user;
   }
 
   static Future<FirebaseUser> signUpWithEmail(String email, String password) async {
-    FirebaseUser user = await firebaseAuth.createUserWithEmailAndPassword(
+    AuthResult result = await firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
-    return user;
+    return result.user;
   }
 
   static Future<void> resetPassword(String email) async {
@@ -97,16 +97,6 @@ class Auth {
 
   static Future<void> signOut() async {
     return firebaseAuth.signOut();
-  }
-
-  static Future<void> sendEmailVerification() async {
-    FirebaseUser user = await firebaseAuth.currentUser();
-    user.sendEmailVerification();
-  }
-
-  static Future<bool> isEmailVerified() async {
-    FirebaseUser user = await firebaseAuth.currentUser();
-    return user.isEmailVerified;
   }
 
   static StreamSubscription<FirebaseUser> subscribe(Function(FirebaseUser) listener) {

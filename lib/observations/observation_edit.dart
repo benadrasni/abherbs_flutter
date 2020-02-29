@@ -226,11 +226,27 @@ class _ObservationEditState extends State<ObservationEdit> {
                 ),
                 Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: DateTimePickerFormField(
-                    inputType: InputType.both,
+                  child: DateTimeField(
                     format: _dateFormat,
-                    editable: false,
                     controller: _dateController,
+                    onShowPicker: (context, currentValue) async {
+                      final date = await showDatePicker(
+                          context: context,
+                          firstDate: DateTime(1900),
+                          initialDate: currentValue ?? DateTime.now(),
+                          lastDate: DateTime(2100));
+                      if (date != null) {
+                        final time = await showTimePicker(
+                          context: context,
+                          initialTime:
+                          TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                        );
+
+                        return DateTimeField.combine(date, time);
+                      } else {
+                        return currentValue;
+                      }
+                    },
                     onChanged: (dt) => setState(() => _observation.date = dt ?? DateTime.now()),
                   ),
                 ),

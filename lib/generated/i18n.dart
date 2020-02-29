@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 class S implements WidgetsLocalizations {
   const S();
 
+  static S current;
+
   static const GeneratedLocalizationsDelegate delegate =
     GeneratedLocalizationsDelegate();
 
@@ -5841,9 +5843,9 @@ class $de_DE extends S {
   @override
   String get southwestern_pacific => "Südwestlicher Pazifik";
   @override
-  String get asia_tropical => "Asien-Tropisch";
+  String get asia_tropical => "Asien-tropisch";
   @override
-  String get northwestern_usa => "Nordwesten U.S.A.";
+  String get northwestern_usa => "Nordwesten der U.S.A.";
   @override
   String get middle_atlantic_ocean => "Mittlerer Atlantischer Ozean";
   @override
@@ -5865,7 +5867,7 @@ class $de_DE extends S {
   @override
   String get subscription_intro2 => "Sie sind gerade dabei, Ihre Fotos auf allen Ihren Geräten zu synchronisieren und dauerhaft zu speichern. Mit dem Abonnement stimmen Sie zu, Ihre Beobachtungen mit anderen abonnierten Benutzern zu teilen. Sie werden auch die Beobachtungen der anderen Nutzer sehen können. Alle gemeinsamen Beobachtungen sind anonym und ihre Notizen bleiben privat und werden nicht geteilt. Um den Prozess zu vereinfachen, werden Ihre Fotos unter der CC0-Lizenz (Creative Commons Zero) geteilt, also stimmen Sie auch damit zu.";
   @override
-  String get auth_verify_phone_number_title => "Telefonnummer bestätigen";
+  String get auth_verify_phone_number_title => "Telefonnummer eingeben";
   @override
   String get search => "Suche...";
   @override
@@ -5873,7 +5875,7 @@ class $de_DE extends S {
   @override
   String get habitat_rock => "Felsen oder Berge";
   @override
-  String get photo_search_note => "Dies ist ein experimentelles Feature, das nur online funktioniert. Manchmal findet es genau das, wonach Sie suchen, manchmal nicht einmal in der Nähe. Ich bin völlig auf Google angewiesen, da sie die ganze harte Arbeit machen. Mit der Zeit sollte es besser und besser werden, aber es wurde nicht in erster Linie für die Anerkennung der Blume gebaut. Verwende es mit Bedacht und beurteile bitte nicht die gesamte Anwendung basierend auf diesem Experiment. Aus Qualitätsgründen werden alle Suchergebnisse (nicht Fotos) gespeichert.";
+  String get photo_search_note => "Dies ist ein experimentelles Feature, das nur online funktioniert. Manchmal findet es genau das, wonach Sie suchen, manchmal nicht einmal in der Nähe. Ich bin völlig auf Google angewiesen, da sie die ganze harte Arbeit machen. Mit der Zeit sollte es besser und besser werden, aber es wurde nicht in erster Linie für die Erkennung von Blumen gebaut. Verwende es mit Bedacht und beurteile bitte nicht die gesamte Anwendung basierend auf diesem Experiment. Aus Qualitätsgründen werden alle Suchergebnisse (nicht Fotos) gespeichert.";
   @override
   String get taxonomy_subserie => "Unterserie";
   @override
@@ -5889,7 +5891,7 @@ class $de_DE extends S {
   @override
   String get snack_loading_ad => "Werbung wird noch geladen, Taste erneut drücken.";
   @override
-  String get petal_message => "Ist die Blüte spiegelsymmetrisch? Falls nicht, wieviele Blütenblätter hat sie?";
+  String get petal_message => "Ist die Blüte zygomorph / spiegelsymmetrisch? Falls nicht, wieviele Blütenblätter hat sie?";
   @override
   String get observation_upload_title => "Beobachtungen hochladen";
   @override
@@ -5907,7 +5909,7 @@ class $de_DE extends S {
   @override
   String get observation_missing_photo => "Die Beobachtung wurde nicht abgeschlossen, so dass nichts gespeichert wurde. Foto fehlt.";
   @override
-  String get auth_google => "Über Google anmelden";
+  String get auth_google => "Mit Google anmelden";
   @override
   String get plant_herbalism => "Pflanzenheilkunde";
   @override
@@ -5925,7 +5927,7 @@ class $de_DE extends S {
   @override
   String get toxicity1 => "giftige Pflanze";
   @override
-  String get show_translation => "Übersetzter Text";
+  String get show_translation => "Übersetzter Text anzeigen";
   @override
   String get subscription_monthly_title => "Speichern Sie Fotos";
   @override
@@ -5951,7 +5953,7 @@ class $de_DE extends S {
   @override
   String get taxonomy_species => "Art";
   @override
-  String get plant_fruit => "Früchte";
+  String get plant_fruit => "Frucht";
   @override
   String get plant_flowering_to => "-";
   @override
@@ -5989,7 +5991,7 @@ class $de_DE extends S {
   @override
   String get northern_europe => "Nordeuropa";
   @override
-  String get auth_verify_phone_number => "Telefonnummer eingeben";
+  String get auth_verify_phone_number => "Telefonnummer bestätigen";
   @override
   String get rate => "Bewertung";
   @override
@@ -6005,7 +6007,7 @@ class $de_DE extends S {
   @override
   String get western_asia => "West-Asien";
   @override
-  String get subarctic_america => "Subarktistisches Amerika";
+  String get subarctic_america => "Subarktisches Amerika";
   @override
   String get product_search_title => "Suche nach Namen oder Taxonomie";
   @override
@@ -6047,7 +6049,7 @@ class $de_DE extends S {
   @override
   String get product_purchase_failed => "Kauf gescheitert";
   @override
-  String get auth_twitter => "Über Twitter anmelden";
+  String get auth_twitter => "Mit Twitter anmelden";
   @override
   String get auth_create_account => "Ein Konto erstellen";
   @override
@@ -6063,7 +6065,7 @@ class $de_DE extends S {
   @override
   String get auth_invalid_email_address => "Ungültige E-Mail-Adresse";
   @override
-  String get distribution_message => "Auf welches geografische Gebiet sollten Sie sich konzentrieren?";
+  String get distribution_message => "Auf welches geografische Gebiet sollten wir uns konzentrieren?";
   @override
   String get caribbean => "Karibik";
   @override
@@ -6085,7 +6087,7 @@ class $de_DE extends S {
   @override
   String get plant_leaf => "Blätter";
   @override
-  String get auth_facebook => "Über Facebook anmelden";
+  String get auth_facebook => "Mit Facebook anmelden";
   @override
   String get taxonomy_serie => "Serie";
   @override
@@ -6097,7 +6099,7 @@ class $de_DE extends S {
   @override
   String get northern_south_america => "Nördliches Südamerika";
   @override
-  String get show_original => "Englischer Text";
+  String get show_original => "Englischer Text anzeigen";
   @override
   String get offline_download_message => "Sie werden mehr als 300 MB Fotos und Illustrationen herunterladen. Bitte überprüfen Sie, ob Ihr Gerät mit Wi-Fi verbunden ist. Sind Sie zum Download bereit?";
   @override
@@ -6123,13 +6125,13 @@ class $de_DE extends S {
   @override
   String get plant_toxicity => "Toxizität";
   @override
-  String get snack_no_flowers => "Keine Blumen die den Kriterien entsprechen.";
+  String get snack_no_flowers => "Keine Blumen, die den Kriterien entsprechen.";
   @override
   String get observation_saved => "Beobachtung wurde gespeichert.";
   @override
   String get rate_question => "Ist diese Anwendung hilfreich?";
   @override
-  String get plant_taxonomy => "Taxonomy";
+  String get plant_taxonomy => "Taxonomie";
   @override
   String get feedback_run_ads_fullscreen => "Anzeige im Vollbildmodus";
   @override
@@ -6155,7 +6157,7 @@ class $de_DE extends S {
   @override
   String get my_filter => "Mein Filter";
   @override
-  String get auth_sign_in_text => "Ein Konto haben? Anmelden";
+  String get auth_sign_in_text => "Haben Sie ein Konto? Anmelden";
   @override
   String get petal_5 => "5";
   @override
@@ -6165,7 +6167,7 @@ class $de_DE extends S {
   @override
   String get observation => "Beobachtung";
   @override
-  String get northeastern_usa => "Nordöstlich U.S.A.";
+  String get northeastern_usa => "Nordöstliche U.S.A.";
   @override
   String get color_green => "Grün, Braun, Schwarz";
   @override
@@ -6243,7 +6245,7 @@ class $de_DE extends S {
   @override
   String get product_observations_title => "Beobachtungen";
   @override
-  String get new_version => "Eine neue Version ist verfügbar, bitte updaten.";
+  String get new_version => "Eine neue Version ist verfügbar, bitte aktualisieren.";
   @override
   String get taxonomy_subfamilia => "Unterfamilie";
   @override
@@ -6263,11 +6265,11 @@ class $de_DE extends S {
   @override
   String get plant_stem => "Stängel";
   @override
-  String get auth_resend_email => "E-Mail zurücksenden";
+  String get auth_resend_email => "E-Mail erneut senden";
   @override
   String get no => "Nein";
   @override
-  String get rate_text => "Der Autor dieser App wird durch positive Rückmeldungen der Benutzer  beflügelt. Bitte senden Sie ihm doch einen Sterne-Blumenstrauß über den Anwendungsspeicher.";
+  String get rate_text => "Der Autor dieser App wird durch positive Rückmeldungen der Benutzer beflügelt. Bitte senden Sie ihm doch einen Sterne-Blumenstrauß im App-Store.";
   @override
   String get auth_sign_out => "Ausloggen";
   @override
@@ -6295,7 +6297,7 @@ class $de_DE extends S {
   @override
   String get filter_distribution => "Vorkommen";
   @override
-  String get feedback_buy_extended => "Sie können zusätzliche Funktionen erwerben, z. B. den Offline-Modus, die Suche in Namen oder in der Taxonomie, die Suche nach Foto, Beobachtungen und konfigurierbare Filter.";
+  String get feedback_buy_extended => "Sie können zusätzliche Funktionen erwerben, z. B. den Offline-Modus, die Suche nach Namen oder der Taxonomie, die Suche nach Foto, Beobachtungen und konfigurierbare Filter.";
   @override
   String get north_central_usa => "Nord-Zentral U.S.A.";
   @override
@@ -6327,7 +6329,7 @@ class $de_DE extends S {
   @override
   String get product_no_ads_title => "Keine unerwünschte Werbung";
   @override
-  String get petal_zygomorphic => "dorsiventrale";
+  String get petal_zygomorphic => "spiegelsymmetrisch";
   @override
   String get photo_search_empty => "Google KI (Künstliche Intelligenz) hat keine bestimmte Blume auf dem Bild erkannt. Versuchen Sie es erneut mit anderen Winkeln, Entfernungen oder Lichtverhältnissen. Wenn du es schon getan hast, sieht es so aus, als ob der KI Overlord nicht bald kommen würde.";
   @override
@@ -6337,7 +6339,7 @@ class $de_DE extends S {
   @override
   String auth_reset_password_email_message(String _email) => "Folgen Sie den Anweisungen, die an $_email gesendet wurden, um Ihr Passwort zurückzusetzen.";
   @override
-  String observation_upload_message(String param) => "Sie werden $param Beobachtungen hochladen. Bitte überprüfen Sie, ob Ihr Gerät mit Wi-Fi verbunden ist. Bist du bereit für einen Hochladen?";
+  String observation_upload_message(String param) => "Sie werden $param Beobachtungen hochladen. Bitte überprüfen Sie, ob Ihr Gerät mit Wi-Fi verbunden ist. Bist du bereit für ein Hochladen?";
 }
 
 class $hu_HU extends S {
@@ -16314,74 +16316,107 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
     if (lang != null) {
       switch (lang) {
         case "it_IT":
-          return SynchronousFuture<S>(const $it_IT());
+          S.current = const $it_IT();
+          return SynchronousFuture<S>(S.current);
         case "ru_RU":
-          return SynchronousFuture<S>(const $ru_RU());
+          S.current = const $ru_RU();
+          return SynchronousFuture<S>(S.current);
         case "pl_PL":
-          return SynchronousFuture<S>(const $pl_PL());
+          S.current = const $pl_PL();
+          return SynchronousFuture<S>(S.current);
         case "ro_RO":
-          return SynchronousFuture<S>(const $ro_RO());
+          S.current = const $ro_RO();
+          return SynchronousFuture<S>(S.current);
         case "hi_IN":
-          return SynchronousFuture<S>(const $hi_IN());
+          S.current = const $hi_IN();
+          return SynchronousFuture<S>(S.current);
         case "id_ID":
-          return SynchronousFuture<S>(const $id_ID());
+          S.current = const $id_ID();
+          return SynchronousFuture<S>(S.current);
         case "fr_FR":
-          return SynchronousFuture<S>(const $fr_FR());
+          S.current = const $fr_FR();
+          return SynchronousFuture<S>(S.current);
         case "he_IL":
-          return SynchronousFuture<S>(const $he_IL());
+          S.current = const $he_IL();
+          return SynchronousFuture<S>(S.current);
         case "ja_JP":
-          return SynchronousFuture<S>(const $ja_JP());
+          S.current = const $ja_JP();
+          return SynchronousFuture<S>(S.current);
         case "cs_CZ":
-          return SynchronousFuture<S>(const $cs_CZ());
+          S.current = const $cs_CZ();
+          return SynchronousFuture<S>(S.current);
         case "de_DE":
-          return SynchronousFuture<S>(const $de_DE());
+          S.current = const $de_DE();
+          return SynchronousFuture<S>(S.current);
         case "hu_HU":
-          return SynchronousFuture<S>(const $hu_HU());
+          S.current = const $hu_HU();
+          return SynchronousFuture<S>(S.current);
         case "nb_NO":
-          return SynchronousFuture<S>(const $nb_NO());
+          S.current = const $nb_NO();
+          return SynchronousFuture<S>(S.current);
         case "sk_SK":
-          return SynchronousFuture<S>(const $sk_SK());
+          S.current = const $sk_SK();
+          return SynchronousFuture<S>(S.current);
         case "es_ES":
-          return SynchronousFuture<S>(const $es_ES());
+          S.current = const $es_ES();
+          return SynchronousFuture<S>(S.current);
         case "nl_NL":
-          return SynchronousFuture<S>(const $nl_NL());
+          S.current = const $nl_NL();
+          return SynchronousFuture<S>(S.current);
         case "sv_SE":
-          return SynchronousFuture<S>(const $sv_SE());
+          S.current = const $sv_SE();
+          return SynchronousFuture<S>(S.current);
         case "da_DK":
-          return SynchronousFuture<S>(const $da_DK());
+          S.current = const $da_DK();
+          return SynchronousFuture<S>(S.current);
         case "fa_IR":
-          return SynchronousFuture<S>(const $fa_IR());
+          S.current = const $fa_IR();
+          return SynchronousFuture<S>(S.current);
         case "sr_RS":
-          return SynchronousFuture<S>(const $sr_RS());
+          S.current = const $sr_RS();
+          return SynchronousFuture<S>(S.current);
         case "en":
-          return SynchronousFuture<S>(const $en());
+          S.current = const $en();
+          return SynchronousFuture<S>(S.current);
         case "en_UK":
-          return SynchronousFuture<S>(const $en_UK());
+          S.current = const $en_UK();
+          return SynchronousFuture<S>(S.current);
         case "fi_FI":
-          return SynchronousFuture<S>(const $fi_FI());
+          S.current = const $fi_FI();
+          return SynchronousFuture<S>(S.current);
         case "hr_HR":
-          return SynchronousFuture<S>(const $hr_HR());
+          S.current = const $hr_HR();
+          return SynchronousFuture<S>(S.current);
         case "et_EE":
-          return SynchronousFuture<S>(const $et_EE());
+          S.current = const $et_EE();
+          return SynchronousFuture<S>(S.current);
         case "en_US":
-          return SynchronousFuture<S>(const $en_US());
+          S.current = const $en_US();
+          return SynchronousFuture<S>(S.current);
         case "lt_LT":
-          return SynchronousFuture<S>(const $lt_LT());
+          S.current = const $lt_LT();
+          return SynchronousFuture<S>(S.current);
         case "lv_LV":
-          return SynchronousFuture<S>(const $lv_LV());
+          S.current = const $lv_LV();
+          return SynchronousFuture<S>(S.current);
         case "uk_UA":
-          return SynchronousFuture<S>(const $uk_UA());
+          S.current = const $uk_UA();
+          return SynchronousFuture<S>(S.current);
         case "sl_SI":
-          return SynchronousFuture<S>(const $sl_SI());
+          S.current = const $sl_SI();
+          return SynchronousFuture<S>(S.current);
         case "ar_EG":
-          return SynchronousFuture<S>(const $ar_EG());
+          S.current = const $ar_EG();
+          return SynchronousFuture<S>(S.current);
         case "pt_PT":
-          return SynchronousFuture<S>(const $pt_PT());
+          S.current = const $pt_PT();
+          return SynchronousFuture<S>(S.current);
         default:
           // NO-OP.
       }
     }
-    return SynchronousFuture<S>(const S());
+    S.current = const S();
+    return SynchronousFuture<S>(S.current);
   }
 
   @override
