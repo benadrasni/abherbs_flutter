@@ -23,6 +23,7 @@ import 'package:screen/screen.dart';
 import 'ads.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   FlutterError.onError = (FlutterErrorDetails details) {
     if (isInDebugMode) {
       // In development mode simply print to console.

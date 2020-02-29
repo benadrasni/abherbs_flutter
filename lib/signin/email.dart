@@ -66,7 +66,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
           }
         } else {
           user = await Auth.signUpWithEmail(_email, _password);
-          Auth.sendEmailVerification();
+          user.sendEmailVerification();
           _showVerifyEmailSentDialog(user).then((value) {
             if (mounted) {
               Navigator.of(context).pop();
