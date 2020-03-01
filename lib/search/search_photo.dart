@@ -163,9 +163,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
     _firebaseAnalytics = FirebaseAnalytics();
     _key = new GlobalKey<ScaffoldState>();
     _genericEntitiesF = rootReference.child(firebaseSettingsGenericEntities).once().then((snapshot) {
-      if (snapshot != null) {
-        return snapshot.value;
-      }
+      return snapshot?.value ?? [];
     });
     imageLabeler = FirebaseVision.instance.cloudImageLabeler();
   }

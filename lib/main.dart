@@ -34,6 +34,7 @@ void main() {
     }
   };
 
+  InAppPurchaseConnection.enablePendingPurchases();
   FlutterCrashlytics().initialize();
   Ads.initialize();
 
@@ -57,7 +58,6 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
-  final InAppPurchaseConnection _connection = InAppPurchaseConnection.instance;
 
   StreamSubscription<List<PurchaseDetails>> _subscription;
   Map<String, dynamic> _notificationData;
@@ -86,7 +86,7 @@ class _AppState extends State<App> {
       if (purchase.error == null &&
           purchase.status == PurchaseStatus.purchased) {
         if (Platform.isIOS) {
-          _connection.completePurchase(purchase);
+          InAppPurchaseConnection.instance.completePurchase(purchase);
         }
         Purchases.purchases.add(purchase);
         isPurchase = true;
@@ -193,13 +193,13 @@ class _AppState extends State<App> {
   }
 
   Future<void> initStoreInfo() async {
-    final bool isAvailable = await _connection.isAvailable();
+    final bool isAvailable = await InAppPurchaseConnection.instance.isAvailable();
     if (!isAvailable) {
       _iapError();
     }
 
     final QueryPurchaseDetailsResponse purchaseResponse =
-        await _connection.queryPastPurchases();
+        await InAppPurchaseConnection.instance.queryPastPurchases();
     if (purchaseResponse.error != null) {
       var purchases = await Prefs.getStringListF(keyPurchases, []);
       Purchases.purchases = purchases
@@ -210,7 +210,7 @@ class _AppState extends State<App> {
       for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
         if (await verifyPurchase(purchase)) {
           if (Platform.isIOS && purchase.status == PurchaseStatus.purchased) {
-            _connection.completePurchase(purchase);
+            InAppPurchaseConnection.instance.completePurchase(purchase);
           }
           Purchases.purchases.add(purchase);
         }
@@ -228,7 +228,7 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
     Prefs.init();
-    Stream purchaseUpdated = _connection.purchaseUpdatedStream;
+    Stream purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
