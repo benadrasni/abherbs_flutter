@@ -216,10 +216,8 @@ class _SubscriptionState extends State<Subscription> {
                     ),
                   ),
                 ));
-
-                return ListView(shrinkWrap: true, padding: const EdgeInsets.all(10.0), children: _cards);
               }
-              break;
+              return ListView(shrinkWrap: true, padding: const EdgeInsets.all(10.0), children: _cards);
 
             default:
               return Column(
