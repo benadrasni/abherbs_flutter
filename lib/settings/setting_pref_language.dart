@@ -1,5 +1,5 @@
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
 import 'package:firebase_database/firebase_database.dart';

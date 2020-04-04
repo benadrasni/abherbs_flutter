@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:async';
 
-import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:firebase_auth/firebase_auth.dart';

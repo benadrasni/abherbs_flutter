@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
@@ -140,7 +140,7 @@ class _AppState extends State<App> {
         msg: 'IAP not prepared. Check if Platform service is available.',
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIos: 5);
+        timeInSecForIosWeb: 5);
     Purchases.purchases = [];
   }
 
@@ -240,7 +240,7 @@ class _AppState extends State<App> {
             msg: S.of(context).product_purchase_failed,
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
-            timeInSecForIos: 5);
+            timeInSecForIosWeb: 5);
       }
     });
     _initStoreF = initStoreInfo();
@@ -345,6 +345,7 @@ class _AppState extends State<App> {
                   S.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: S.delegate.supportedLocales,
                 home: Splash(this.onChangeLanguage, notificationData),
