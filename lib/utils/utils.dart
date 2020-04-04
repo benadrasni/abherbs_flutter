@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/detail/plant_detail.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
-import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/observations/observations.dart';
 import 'package:abherbs_flutter/plant_list.dart';

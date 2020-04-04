@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/signin/email.dart';
 import 'package:abherbs_flutter/signin/phone.dart';

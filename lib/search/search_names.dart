@@ -15,6 +15,7 @@ var supportedLanguages = {
   "fr": "Français",
   "hr": "Hrvatski",
   "it": "Italiano",
+  "ko": "한국어",
   "lv": "Latviešu",
   "lt": "Lietuvių",
   "hu": "Magyar",
@@ -27,7 +28,7 @@ var supportedLanguages = {
   "ru": "Русский",
   "sk": "Slovenčina",
   "sl": "Slovenščina",
-  "sr": "Српски / srpski",
+  "sr": "Српски",
   "sv": "Svenska",
   "fi": "Suomi",
   "uk": "Українська"

@@ -1,4 +1,4 @@
-import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/settings/setting_my_region_2.dart';
 import 'package:abherbs_flutter/utils/utils.dart';

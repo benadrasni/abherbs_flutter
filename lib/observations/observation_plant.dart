@@ -1,5 +1,5 @@
 import 'package:abherbs_flutter/entity/observation.dart';
-import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/observations/observation_plant_view.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';

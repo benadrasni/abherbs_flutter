@@ -4,7 +4,7 @@ import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
 import 'package:abherbs_flutter/filter/petal.dart';
-import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';

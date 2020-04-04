@@ -1,6 +1,6 @@
 import 'package:abherbs_flutter/feedback.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
-import 'package:abherbs_flutter/generated/i18n.dart';
+import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/legend.dart';
 import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
