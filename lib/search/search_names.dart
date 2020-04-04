@@ -6,6 +6,7 @@ import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 
 var supportedLanguages = {
+  "bg": "Български",
   "cs": "Čeština",
   "da": "Dansk",
   "de": "Deutsch",
