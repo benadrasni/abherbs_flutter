@@ -1,8 +1,0 @@
-{
-  "filter_color": "colour",
-  "color_message": "What's the colour of the flower? Choose the closest one.",
-
-  "favorite_title": "Favourite flowers",
-  "favorite_empty": "There is no favourite flowers yet.",
-  "favorite_no_login": "List of favourite flowers is available only for logged users. Please log in."
-}
