@@ -19,9 +19,9 @@ class PlantList extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
   final String emptyMessage;
-  final String count;
-  final String path;
-  PlantList(this.onChangeLanguage, this.filter, this.emptyMessage, [this.count, this.path]);
+  final DatabaseReference pathToIndex;
+  PlantList(
+      this.onChangeLanguage, this.filter, this.emptyMessage, this.pathToIndex);
 
   @override
   _PlantListState createState() => _PlantListState();
@@ -33,7 +33,8 @@ class _PlantListState extends State<PlantList> {
   Future<int> _count;
   Random _random;
 
-  Widget _getImageButton(BuildContext context, Locale myLocale, String url, String name) {
+  Widget _getImageButton(
+      BuildContext context, Locale myLocale, String url, String name) {
     var placeholder = Stack(alignment: Alignment.center, children: [
       CircularProgressIndicator(),
       Image(
@@ -44,7 +45,8 @@ class _PlantListState extends State<PlantList> {
       padding: EdgeInsets.all(10.0),
       child: getImage(url, placeholder),
       onPressed: () {
-        goToDetail(this, context, myLocale, name, widget.onChangeLanguage, widget.filter);
+        goToDetail(this, context, myLocale, name, widget.onChangeLanguage,
+            widget.filter);
       },
     );
 
@@ -78,17 +80,12 @@ class _PlantListState extends State<PlantList> {
     Offline.setKeepSynced(2, true);
     _random = Random();
 
-    if (widget.count != null) {
-      _count = Future<int>(() {
-        return int.parse(widget.count);
-      });
-    } else {
-      var filter = getFilterKey(widget.filter);
-      _count = countsReference.child(filter).once().then((DataSnapshot snapshot) {
-        return snapshot.value;
-      });
-      keysReference.child(filter).keepSynced(true);
-    }
+    widget.pathToIndex.keepSynced(true);
+    _count = widget.pathToIndex.once().then((DataSnapshot snapshot) {
+      var result = snapshot.value;
+      int length = result is List ? result.length : result.values.length;
+      return length;
+    });
   }
 
   @override
@@ -104,9 +101,10 @@ class _PlantListState extends State<PlantList> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).list_info),
+        title: Text(S.of(mainContext).list_info),
       ),
-      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.filter, null),
+      drawer:
+          AppDrawer(_currentUser, widget.onChangeLanguage, widget.filter, null),
       body: FirebaseAnimatedIndexList(
           defaultChild: Center(child: CircularProgressIndicator()),
           emptyChild: Container(
@@ -115,18 +113,24 @@ class _PlantListState extends State<PlantList> {
             child: Text(widget.emptyMessage, style: TextStyle(fontSize: 20.0)),
           ),
           query: listsReference.orderByChild(firebaseAttributeName),
-          keyQuery: widget.path != null ? rootReference.child(widget.path) : keysReference.child(getFilterKey(widget.filter)),
-          itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
+          keyQuery: widget.pathToIndex,
+          itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation,
+              int index) {
             String name = snapshot.value[firebaseAttributeName];
             String family = snapshot.value[firebaseAttributeFamily];
             String url = snapshot.value[firebaseAttributeUrl];
 
-            Locale myLocale = Localizations.localeOf(context);
+            Locale myLocale = Localizations.localeOf(mainContext);
             Future<String> nameF = translationCache.containsKey(name)
                 ? Future<String>(() {
                     return translationCache[name];
                   })
-                : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(name).child(firebaseAttributeLabel).once().then((DataSnapshot snapshot) {
+                : translationsReference
+                    .child(getLanguageCode(myLocale.languageCode))
+                    .child(name)
+                    .child(firebaseAttributeLabel)
+                    .once()
+                    .then((DataSnapshot snapshot) {
                     if (snapshot.value != null) {
                       translationCache[name] = snapshot.value;
                       return snapshot.value;
@@ -138,7 +142,11 @@ class _PlantListState extends State<PlantList> {
                 ? Future<String>(() {
                     return translationCache[family];
                   })
-                : translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(family).once().then((DataSnapshot snapshot) {
+                : translationsTaxonomyReference
+                    .child(getLanguageCode(myLocale.languageCode))
+                    .child(family)
+                    .once()
+                    .then((DataSnapshot snapshot) {
                     if (snapshot.value != null && snapshot.value.length > 0) {
                       translationCache[family] = snapshot.value[0];
                       return snapshot.value[0];
@@ -152,7 +160,8 @@ class _PlantListState extends State<PlantList> {
                 ListTile(
                   title: FutureBuilder<String>(
                       future: nameF,
-                      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      builder: (BuildContext context,
+                          AsyncSnapshot<String> snapshot) {
                         String labelLocal = name;
                         if (snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.data != null) {
@@ -163,7 +172,8 @@ class _PlantListState extends State<PlantList> {
                       }),
                   subtitle: FutureBuilder<String>(
                       future: familyF,
-                      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      builder: (BuildContext context,
+                          AsyncSnapshot<String> snapshot) {
                         String familyLocal = family;
                         if (snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.data != null) {
@@ -181,10 +191,12 @@ class _PlantListState extends State<PlantList> {
                       width: 50.0,
                       height: 50.0),
                   onTap: () {
-                    goToDetail(self, context, myLocale, name, widget.onChangeLanguage, widget.filter);
+                    goToDetail(self, mainContext, myLocale, name,
+                        widget.onChangeLanguage, widget.filter);
                   },
                 ),
-                _getImageButton(context, myLocale, storagePhotos + url, name),
+                _getImageButton(
+                    mainContext, myLocale, storagePhotos + url, name),
               ]),
             );
           }),
@@ -211,17 +223,23 @@ class _PlantListState extends State<PlantList> {
                                 filter[filterDistribution] = value;
                               }
                               Navigator.pushReplacement(
-                                  mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, filter));
+                                  mainContext,
+                                  getNextFilterRoute(mainContext,
+                                      widget.onChangeLanguage, filter));
                             });
                           } else {
                             Navigator.pushReplacement(
-                                mainContext, getNextFilterRoute(mainContext, widget.onChangeLanguage, filter));
+                                mainContext,
+                                getNextFilterRoute(mainContext,
+                                    widget.onChangeLanguage, filter));
                           }
                         });
                       },
                       child: FloatingActionButton(
                         onPressed: () {},
-                        child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
+                        child: Text(snapshot.data == null
+                            ? ''
+                            : snapshot.data.toString()),
                       ),
                     );
                 }

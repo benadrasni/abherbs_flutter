@@ -91,11 +91,9 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searc
               ),
               onTap: () {
                 String path = '/' + firebaseSearch + '/' + getLanguageCode(myLocale.languageCode) + '/' + filteredNativeNames[index] + '/' + firebaseAttributeList;
-                var value = nativeNames[filteredNativeNames[index]][firebaseAttributeList];
-                int length = value is List ? value.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : value.length;
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', length.toString(), path)),
+                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path))),
                 );
               },
             );
@@ -121,11 +119,9 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searc
             ),
             onTap: () {
               String path = '/' + firebaseSearch + '/' + languageLatin + '/' + filteredLatinNames[index] + '/' + firebaseAttributeList;
-              var value = latinNames[filteredLatinNames[index]][firebaseAttributeList];
-              int length = value is List ? value.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : value.length;
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', length.toString(), path)),
+                MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path))),
               );
             },
           );

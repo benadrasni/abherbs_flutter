@@ -556,7 +556,7 @@ List<Widget> getActions(
             Navigator.push(
               mainContext,
               MaterialPageRoute(
-                  builder: (context) => PlantList(onChangeLanguage, {}, S.of(mainContext).favorite_empty, snapshot.data.toString(), path)),
+                  builder: (context) => PlantList(onChangeLanguage, {}, S.of(mainContext).favorite_empty, rootReference.child(path))),
             );
           } else {
             favoriteDialog(mainContext, key);
