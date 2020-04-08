@@ -374,7 +374,7 @@ class _ColorState extends State<Color> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '')),
+                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(widget.filter)))),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

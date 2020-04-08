@@ -371,7 +371,7 @@ class S {
 
   String get offline_subtitle {
     return Intl.message(
-      'requires 300+ MB additional space.',
+      'requires 500+ MB additional space.',
       name: 'offline_subtitle',
       desc: '',
       args: [],
@@ -380,7 +380,7 @@ class S {
 
   String get offline_download_message {
     return Intl.message(
-      'You\'re going to download 300+ MB of photos and illustrations. Please check if your device is connected to wi-fi. Are you ready for a download?',
+      'You\'re going to download 500+ MB of photos and illustrations. Please check if your device is connected to wi-fi. Are you ready for a download?',
       name: 'offline_download_message',
       desc: '',
       args: [],

@@ -259,7 +259,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  PlantList(widget.onChangeLanguage, {}, '', result.count.toString(), result.path)),
+                                                  PlantList(widget.onChangeLanguage, {}, '',  rootReference.child(result.path))),
                                         );
                                       } else {
                                         goToDetail(self, context, widget.myLocale, result.path, widget.onChangeLanguage, {});

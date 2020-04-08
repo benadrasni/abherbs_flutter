@@ -246,7 +246,7 @@ class _Distribution2State extends State<Distribution2> {
                           Navigator.pushReplacement(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, widget.filter, '')),
+                                builder: (context) => PlantList(widget.onChangeLanguage, widget.filter, '', keysReference.child(getFilterKey(widget.filter)))),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

@@ -337,7 +337,7 @@ MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, void Function(St
       route = MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, filter, redirect));
       break;
     default:
-      route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, filter, ''));
+      route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, filter, '', keysReference.child(getFilterKey(filter))));
   }
   if (filterAttribute != null) {
     if (filterRoutes[filterAttribute] != null && filterRoutes[filterAttribute].isActive && context != null) {

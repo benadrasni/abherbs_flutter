@@ -73,7 +73,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searc
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => PlantList(onChangeLanguage, {}, '', _taxons[index].count.toString(), _taxons[index].path)),
+                    builder: (context) => PlantList(onChangeLanguage, {}, '',  rootReference.child(_taxons[index].path))),
               );
             }
           },

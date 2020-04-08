@@ -68,11 +68,10 @@ class _SplashState extends State<Splash> {
               }
               return _getFirstFilterRoute();
             case 'list':
-              String count = widget.notificationData['count'];
               String path = widget.notificationData['path'];
-              if (count != null && path != null) {
+              if (path != null) {
                 return _getFirstFilterRoute(MaterialPageRoute(
-                    builder: (context) => PlantList(widget.onChangeLanguage, {}, '', count, path)));
+                    builder: (context) => PlantList(widget.onChangeLanguage, {}, '', rootReference.child(path))));
               }
               return _getFirstFilterRoute();
             default:
