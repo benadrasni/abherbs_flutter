@@ -35,6 +35,7 @@ class _PlantListState extends State<PlantList> {
 
   Widget _getImageButton(
       BuildContext context, Locale myLocale, String url, String name) {
+    double screenWidth = MediaQuery.of(context).size.width - 20;
     var placeholder = Stack(alignment: Alignment.center, children: [
       CircularProgressIndicator(),
       Image(
@@ -43,7 +44,11 @@ class _PlantListState extends State<PlantList> {
     ]);
     Widget button = FlatButton(
       padding: EdgeInsets.all(10.0),
-      child: getImage(url, placeholder),
+      child: Container(
+          child:getImage(url, placeholder),
+        width: screenWidth,
+        height: screenWidth,
+      ),
       onPressed: () {
         goToDetail(this, context, myLocale, name, widget.onChangeLanguage,
             widget.filter);
