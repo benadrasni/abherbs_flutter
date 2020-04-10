@@ -2423,7 +2423,7 @@ class S {
 
   String get photo_search_note {
     return Intl.message(
-      'This is an experimental feature which works only online. Sometimes it finds exactly what you\'re looking for, sometimes not even close. I\'m totally relying on Google here since they\'re doing all the hard work. As time goes it should be better and better, but it wasn\'t primarily built for flower\'s recognition. Use it wisely and please don\'t judge the whole application based on this experiment. For quality purposes all search results (not photos) will be saved.',
+      'This is feature works only online. Sometimes it finds exactly what you\'re looking for, sometimes not even close. I\'m totally relying on third party here since they\'re doing all the hard work. As time goes it should be better and better. Use it wisely and please don\'t judge the whole application based on this feature. For quality purposes all search results (not photos) will be saved.',
       name: 'photo_search_note',
       desc: '',
       args: [],
@@ -2432,7 +2432,7 @@ class S {
 
   String get photo_search_empty {
     return Intl.message(
-      'Google AI (artificial intelligence) didn\'t recognize any particular flower on the picture. Try again with different angle, distance or light conditions. If you already did it looks like AI overlord won\'t come anytime soon.',
+      'AI (artificial intelligence) didn\'t recognize any particular flower on the picture. Try again with different angle, distance or light conditions. If you already did it looks like AI overlord won\'t come anytime soon.',
       name: 'photo_search_empty',
       desc: '',
       args: [],
