@@ -72,6 +72,11 @@ const String termsOfUseUrl = "https://storage.googleapis.com/abherbs-resources/m
 const String privacyPolicyUrl = "https://storage.googleapis.com/abherbs-resources/misc/PrivacyPolicyofWhatsthatflower.htm";
 const String googleTranslateEndpoint = "https://translation.googleapis.com/language/translate/v2";
 const String googleMapsEndpoint = "https://maps.googleapis.com/maps/api/staticmap?";
+const String plantIdEndpoint = "https://api.plant.id/v2/identify";
+
+const String plantIdEngine = "plant.id";
+const List<String> plantIdModifiers = ["similar_images"];
+const List<String> plantIdPlantDetails = ["common_names", "url", "wiki_description", "taxonomy"];
 
 const String storageBucket = "gs://abherbs-resources";
 const String storageEndpoint = "https://storage.googleapis.com/abherbs-resources/";
@@ -100,6 +105,7 @@ const String firebaseUsersPhotoSearch = "users_photo_search";
 const String firebasePromotions = "promotions";
 const String firebaseSearchPhoto = 'search_photo';
 const String firebaseSettingsGenericEntities = "settings/generic_entities";
+const String firebaseSettingsEngine = "settings/ai_engine";
 const String firebaseObservationsPublic = "observations/public";
 const String firebaseObservationsPrivate = "observations/by users";
 const String firebaseObservationsByDate = "by date";
@@ -154,6 +160,7 @@ final DatabaseReference apgIVReference = rootReference.child(firebaseAPGIV);
 final DatabaseReference publicObservationsReference = rootReference.child(firebaseObservationsPublic);
 final DatabaseReference privateObservationsReference = rootReference.child(firebaseObservationsPrivate);
 final DatabaseReference usersReference = rootReference.child(firebaseUsers);
+final DatabaseReference settingsReference = rootReference.child(firebaseUsers);
 
 Map<String, String> translationCache = {};
 
