@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:http/http.dart' as http;
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/plant_list.dart';
+import 'package:abherbs_flutter/keys.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
@@ -19,6 +22,8 @@ class SearchResult {
   String labelInLanguage;
   String labelLatin;
   String path;
+  Map<String, dynamic> plantDetails;
+  List<dynamic> similarImages;
 }
 
 class SearchPhoto extends StatefulWidget {
@@ -37,6 +42,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
   File _image;
   Future<List<SearchResult>> _searchResultF;
   Future<List<dynamic>> _genericEntitiesF;
+  Future<String> _engineF;
   ImageLabeler imageLabeler;
 
   Future<void> _logPhotoSearchEvent() async {
@@ -53,35 +59,44 @@ class _SearchPhotoState extends State<SearchPhoto> {
     var image = await ImagePicker.pickImage(source: source, maxWidth: maxSize);
     if (image != null) {
       _logPhotoSearchEvent();
+      var engine = await _engineF;
       setState(() {
         _image = image;
-        _searchResultF = _getSearchResult(image);
+        if (engine == plantIdEngine) {
+          _searchResultF = _getSearchResultPlantId(image);
+        } else {
+          _searchResultF = _getSearchResult(image);
+        }
       });
     }
   }
-  
-  Future<List<SearchResult>> _getSearchResult(File image) {
-    final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(image);
 
-    return Future.wait([imageLabeler.processImage(visionImage), _genericEntitiesF]).then((value) async {
-      List<ImageLabel> labels = value[0];
-      List<dynamic> genericEntities = value[1];
-      List<ImageLabel> significantLabels = [];
-      for (ImageLabel label in labels) {
-        if (!genericEntities.contains(label.entityId)) {
-          significantLabels.add(label);
-        }
-      }
+  Future<List<SearchResult>> _getSearchResultPlantId(File image) {
+    List<int> imageBytes = image.readAsBytesSync();
+    String base64Image = base64Encode(imageBytes);
 
+    Map<String, String> headers = {"Content-type": "application/json", "Api-Key": plantIdKey};
+    var msg = jsonEncode({
+      "images": [base64Image],
+      "modifiers": plantIdModifiers,
+      "plant_language": widget.myLocale.languageCode,
+      "plant_details": plantIdPlantDetails
+    });
+
+    return http.post(plantIdEndpoint, headers: headers, body: msg).then((response) async {
       var results = <SearchResult>[];
-      for (ImageLabel label in significantLabels) {
-        results.add(await rootReference.child(firebaseSearchPhoto + label.entityId).once().then((snapshot) {
-          var result = SearchResult();
-          result.labelLatin = _adjustLabel(label.text);
-          result.entityId = label.entityId;
-          result.confidence = label.confidence;
-          if (snapshot != null) {
-            if (snapshot.value != null) {
+      if (response.statusCode == 200) {
+        Map responseBody = json.decode(response.body);
+        for (var suggestion in responseBody['suggestions'] ) {
+          String plantName = suggestion['plant_name'];
+          results.add(await rootReference.child(firebaseSearchPhoto + '/' + plantName.toLowerCase().replaceAll('.', '')).once().then((snapshot) {
+            var result = SearchResult();
+            result.labelLatin = plantName;
+            result.entityId = suggestion['id'].toString();
+            result.confidence = suggestion['probability'];
+            result.plantDetails = suggestion['plant_details'];
+            result.similarImages = suggestion['similar_images'];
+            if (snapshot != null && snapshot.value != null) {
               result.count = snapshot.value['count'];
               result.path = snapshot.value['path'];
               result.labelInLanguage = '';
@@ -115,6 +130,98 @@ class _SearchPhotoState extends State<SearchPhoto> {
                   return result;
                 });
               }
+            }
+
+            return result;
+          }));
+        }
+      }
+
+      // save labels
+      if (results.length > 0) {
+        var userId = firebaseAttributeAnonymous;
+        if (widget.currentUser != null) {
+          userId = widget.currentUser.uid;
+        }
+        rootReference.child(firebaseUsersPhotoSearch)
+            .child(userId)
+            .child(DateTime.now().millisecondsSinceEpoch.toString())
+            .set(results.map((searchResult) {
+          Map<String, dynamic> labelMap = {};
+          labelMap['entityId'] = searchResult.entityId;
+          labelMap['language'] = widget.myLocale.languageCode;
+          labelMap['confidence'] = searchResult.confidence;
+          labelMap['plantDetails'] = searchResult.plantDetails;
+          labelMap['similarImages'] = searchResult.similarImages;
+          if (searchResult.labelLatin != null) {
+            labelMap['label_latin'] = searchResult.labelLatin;
+          }
+          if (searchResult.labelInLanguage != null) {
+            labelMap['label_language'] = searchResult.labelInLanguage;
+          }
+          return labelMap;
+        }).toList());
+      }
+
+      return results;
+    }).catchError((error, stackTrace) {
+      FlutterCrashlytics().reportCrash(error, stackTrace, forceCrash: false);
+    });
+  }
+
+  Future<List<SearchResult>> _getSearchResult(File image) {
+    final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(image);
+
+    return Future.wait([imageLabeler.processImage(visionImage), _genericEntitiesF]).then((value) async {
+      List<ImageLabel> labels = value[0];
+      List<dynamic> genericEntities = value[1];
+      List<ImageLabel> significantLabels = [];
+      for (ImageLabel label in labels) {
+        if (!genericEntities.contains(label.entityId)) {
+          significantLabels.add(label);
+        }
+      }
+
+      var results = <SearchResult>[];
+      for (ImageLabel label in significantLabels) {
+        results.add(await rootReference.child(firebaseSearchPhoto + label.entityId).once().then((snapshot) {
+          var result = SearchResult();
+          result.labelLatin = _adjustLabel(label.text);
+          result.entityId = label.entityId;
+          result.confidence = label.confidence;
+          if (snapshot != null && snapshot.value != null) {
+            result.count = snapshot.value['count'];
+            result.path = snapshot.value['path'];
+            result.labelInLanguage = '';
+            if (result.path.contains('/')) {
+              String path = result.path.substring(0, result.path.length - 5);
+              result.labelLatin = path.substring(path.lastIndexOf('/') + 1);
+            } else {
+              result.labelLatin = result.path;
+              translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).keepSynced(true);
+              return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).child(firebaseAttributeLabel)
+                  .once()
+                  .then((snapshot) {
+                if (snapshot.value != null) {
+                  result.labelInLanguage = snapshot.value;
+                }
+                return result;
+              });
+            }
+            if (translationCache.containsKey(result.labelLatin)) {
+              result.labelInLanguage = translationCache[result.labelLatin];
+              return result;
+            } else {
+              translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).keepSynced(true);
+              return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin)
+                  .once()
+                  .then((snapshot) {
+                if (snapshot.value != null && snapshot.value.length > 0) {
+                  translationCache[result.labelLatin] = snapshot.value[0];
+                  result.labelInLanguage = snapshot.value[0];
+                }
+                return result;
+              });
             }
           }
           return result;
@@ -164,6 +271,9 @@ class _SearchPhotoState extends State<SearchPhoto> {
     _key = new GlobalKey<ScaffoldState>();
     _genericEntitiesF = rootReference.child(firebaseSettingsGenericEntities).once().then((snapshot) {
       return snapshot?.value ?? [];
+    });
+    _engineF = rootReference.child(firebaseSettingsEngine).once().then((snapshot) {
+      return snapshot?.value ?? "";
     });
     imageLabeler = FirebaseVision.instance.cloudImageLabeler();
   }
