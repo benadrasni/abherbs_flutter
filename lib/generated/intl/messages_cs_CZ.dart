@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Pozorování"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Aplikace poběží i bez připojení k internetu."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Offline režim"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Budete mít možnost najít květinu podle fotografie. Tato funkce využívá umělé inteligence pro určování objektů na fotografiích od Googlu."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Budete mít možnost najít květinu podle fotografie. Tato funkce využívá umělé inteligence pro určování objektů na fotografiích od třetích stran."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Hledat pomocí fotografie"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Koupit"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Nákup selhal"),

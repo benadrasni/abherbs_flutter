@@ -211,7 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Observações"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Você será capaz de executar aplicativos sem conexão com a internet."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Modo offline"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Você poderá encontrar uma flor por foto. Este recurso está usando Inteligência Artificial para rotular fotos do Google."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Você poderá encontrar uma flor por foto. Este recurso está usando Inteligência Artificial para rotular fotos de terceiros."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Pesquisar por foto"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Compra"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("A compra falhou"),

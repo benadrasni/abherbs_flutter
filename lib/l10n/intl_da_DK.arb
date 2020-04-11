@@ -18,7 +18,7 @@
   "product_observations_title": "Observationer",
   "product_observations_description": "Du kan gemme dine egne observationer med blomsternavn, dato, placering, fotos og notat.",
   "product_photo_search_title": "Søg efter billede",
-  "product_photo_search_description": "Du kan finde en blomst efter foto. Denne funktion bruger Artificial Intelligence til at mærke fotos fra Google.",
+  "product_photo_search_description": "Du kan finde en blomst efter foto. Denne funktion bruger kunstig intelligens til mærkning af fotos fra tredjepart.",
   "subscription_monthly_title": "Gem billeder",
   "subscription_monthly_description": "Bevar observationens fotos på tværs af enheder, se delte observationer - månedlig betaling.",
   "subscription_yearly_title": "Gem billeder",

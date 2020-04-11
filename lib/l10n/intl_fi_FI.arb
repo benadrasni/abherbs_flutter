@@ -18,7 +18,7 @@
   "product_observations_title": "Havaintoja",
   "product_observations_description": "Voit tallentaa omia havaintojasi kukkien nimen, päivämäärän, sijainnin, valokuvien ja muistiinpanojen avulla.",
   "product_photo_search_title": "Hae valokuvasta",
-  "product_photo_search_description": "Voit löytää kukkien valokuvan. Tämä ominaisuus käyttää Artificial Intelligence -toimintoa valokuvien merkitsemiseen Googlesta.",
+  "product_photo_search_description": "Voit löytää kukan valokuvan perusteella. Tämä ominaisuus käyttää tekoälyä kolmansien osapuolien valokuvien merkitsemiseen.",
   "subscription_monthly_title": "Tallenna kuvat",
   "subscription_monthly_description": "Säilytä havaintojen valokuvia laitteissa, katso jaetut havainnot - kuukausimaksu.",
   "subscription_yearly_title": "Tallenna kuvat",

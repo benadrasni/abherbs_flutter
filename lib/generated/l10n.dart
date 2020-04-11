@@ -191,7 +191,7 @@ class S {
 
   String get product_photo_search_description {
     return Intl.message(
-      'You\'ll be able to find a flower by photo. This feature is using Artificial Intelligence for labeling photos from Google.',
+      'You\'ll be able to find a flower by photo. This feature is using Artificial Intelligence for labeling photos from third party.',
       name: 'product_photo_search_description',
       desc: '',
       args: [],

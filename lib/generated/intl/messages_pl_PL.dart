@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Zaobserwowane okazy"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Będzie można uruchomić aplikację, nie mając połączenia z Internetem."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Tryb offline"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Będzie można wyszukać kwiat po zdjęciu. Ta funkcja wykorzystuje oznaczanie zdjęć przez sztuczną inteligencję Google."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Będzie można wyszukać kwiat po zdjęciu. Ta funkcja wykorzystuje oznaczanie zdjęć przez sztuczną inteligencję od strony trzeciej."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Wyszukaj według zdjęcia"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Kup"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Zakup nie powiódł się"),

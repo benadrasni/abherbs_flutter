@@ -212,7 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("مشاهدات"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("شما قادر به اجرای برنامه بدون اتصال به اینترنت خواهید بود."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("حالت آفلاین"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("شما قادر به پیدا کردن یک گل توسط عکس خواهید بود. این ویژگی استفاده از هوش مصنوعی برای برچسب زدن عکس از گوگل است."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("شما می توانید یک گل را با عکس پیدا کنید. این ویژگی با استفاده از هوش مصنوعی برای برچسب زدن عکس از شخص ثالث است."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("جستجو بر اساس عکس"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("خرید"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("خرید خراب شد"),

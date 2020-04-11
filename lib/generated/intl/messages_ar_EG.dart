@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("الملاحظات"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("ستتمكن من تشغيل التطبيق دون اتصال بالإنترنت."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("غير متصل بالشبكة"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("ستتمكن من العثور على زهرة من خلال الصورة. تستخدم هذه الميزة الذكاء الاصطناعي لتصنيف الصور من Google."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("ستتمكن من العثور على زهرة بالصور. تستخدم هذه الميزة الذكاء الاصطناعي لتمييز الصور من جهات خارجية."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("البحث بالصور"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("شراء"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("الشراء لم ينجح"),

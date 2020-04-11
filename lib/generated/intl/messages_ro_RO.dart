@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Observaţii"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Veți putea rula aplicația fără conexiune la internet."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Modul offline"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Veți putea găsi o floare prin fotografie. Această caracteristică folosește funcția Inteligență artificială pentru etichetarea fotografiilor de la Google."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Veți putea găsi o floare după fotografie. Această caracteristică utilizează Inteligență artificială pentru etichetarea fotografiilor de la terți."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Căutați după fotografie"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Cumpărare"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Achiziționare eșuată"),

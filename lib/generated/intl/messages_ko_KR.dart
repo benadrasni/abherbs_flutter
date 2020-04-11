@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("관찰"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("인터넷 연결없이 응용 프로그램이 작동합니다."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("오프라인 모드"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("사진으로 꽃을 찾을 수 있습니다. 이 기능은 인공 지능을 사용하여 Google에서 사진을 라벨링합니다."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("사진으로 꽃을 찾을 수 있습니다. 이 기능은 인공 지능을 사용하여 타사의 사진에 레이블을 지정합니다."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("사진으로 검색"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("매수"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("구매 실패"),

@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("תצפיות"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("תוכל להפעיל את היישום ללא חיבור לאינטרנט."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("מצב לא מקוון"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("תוכל למצוא פרח לפי תמונה. תכונה זו משתמשת במודיעין מלאכותי לתיוג תמונות מ- Google."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("תוכל למצוא פרח לפי תמונה. תכונה זו עושה שימוש בבינה מלאכותית לצורך תיוג תמונות מצד שלישי."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("חפש לפי תמונה"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("רכישה"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("הרכישה נכשלה"),

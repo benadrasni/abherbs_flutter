@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Observations"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Application will work without internet connection."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Offline mode"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("You\'ll be able to find a flower by photo. This feature is using Artificial Intelligence for labeling photos from Google."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("You\'ll be able to find a flower by photo. This feature is using Artificial Intelligence for labeling photos from third party."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Search by photo"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Purchase"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Purchase failed"),

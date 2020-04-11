@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Novērojumi"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Jūs varēsiet palaist programmu bez interneta pieslēguma."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Bezsaistes režīms"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Jūs varēsiet atrast ziedu ar fotogrāfiju. Šī funkcija izmanto mākslīgo inteliģenci, lai marķētu fotogrāfijas no Google."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Jūs varēsit atrast ziedu pēc fotoattēla. Šī funkcija izmanto mākslīgo intelektu trešo personu fotoattēlu marķēšanai."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Meklēt pēc fotoattēla"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Pirkt"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Pirkums neizdevās"),

@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Наблюдения"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Вы сможете запустить приложение без подключения к интернету."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Автономный режим"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Вы сможете найти цветок по фотографии. Эта функция использует искусственный интеллект для маркировки фотографий из Google."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Вы сможете найти цветок по фотографии. Эта функция использует искусственный интеллект для маркировки фотографий от третьих лиц."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Поиск по фото"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Покупать"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Покупка не удалась"),

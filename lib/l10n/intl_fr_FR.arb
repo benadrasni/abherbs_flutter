@@ -18,7 +18,7 @@
   "product_observations_title": "Observations",
   "product_observations_description": "Vous pourrez enregistrer vos propres observations avec le nom de la fleur, la date, le lieu, les photos et la note.",
   "product_photo_search_title": "Recherche par photo",
-  "product_photo_search_description": "Vous pourrez trouver une fleur par photo. Cette fonctionnalité utilise l’intelligence artificielle pour marquer les photos de Google.",
+  "product_photo_search_description": "Vous pourrez trouver une fleur par photo. Cette fonctionnalité utilise l'intelligence artificielle pour étiqueter les photos de tiers.",
   "subscription_monthly_title": "Stocker des photos",
   "subscription_monthly_description": "Préservez les photos des observations sur tous les appareils, consultez les observations partagées - paiement mensuel.",
   "subscription_yearly_title": "Stocker des photos",

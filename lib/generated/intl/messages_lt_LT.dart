@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Stebėjimas"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Galėsite paleisti programą be interneto ryšio."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Atsijungęs režimas"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Galite rasti gėlių pagal nuotrauką. Ši funkcija naudojama naudojant dirbtinį intelektą, kad būtų galima žymėti nuotraukas iš „Google“."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Gėlę galėsite rasti pagal nuotrauką. Ši funkcija naudoja dirbtinį intelektą trečiųjų šalių nuotraukoms žymėti."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Ieškoti pagal nuotrauką"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Įsigyti"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Pirkimas nepavyko"),

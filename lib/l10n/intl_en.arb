@@ -18,7 +18,7 @@
   "product_observations_title": "Observations",
   "product_observations_description": "You'll be able to save your observations with flower name, date, location, photos and note.",
   "product_photo_search_title": "Search by photo",
-  "product_photo_search_description": "You'll be able to find a flower by photo. This feature is using Artificial Intelligence for labeling photos from Google.",
+  "product_photo_search_description": "You'll be able to find a flower by photo. This feature is using Artificial Intelligence for labeling photos from third party.",
   "subscription_monthly_title": "Store photos",
   "subscription_monthly_description": "Preserve observation's photos across devices, see shared observations - monthly payment.",
   "subscription_yearly_title": "Store photos",

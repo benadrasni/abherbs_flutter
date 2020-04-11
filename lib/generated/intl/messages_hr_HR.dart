@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Zapažanja"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Moći ćete pokrenuti aplikaciju bez internetske veze."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Izvanmrežni način"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Moći ćete pronaći cvijet po fotografiji. Ova značajka koristi umjetnu inteligenciju za označavanje fotografija s Googlea."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Cvijet ćete moći pronaći po fotografiji. Ova značajka koristi umjetnu inteligenciju za označavanje fotografija treće strane."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Traži po fotografiji"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Kupiti"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Kupnja nije uspjela"),

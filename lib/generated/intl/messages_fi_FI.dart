@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Havaintoja"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Voit suorittaa sovelluksen ilman internet-yhteyttä."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Offline-tila"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Voit löytää kukkien valokuvan. Tämä ominaisuus käyttää Artificial Intelligence -toimintoa valokuvien merkitsemiseen Googlesta."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Voit löytää kukan valokuvan perusteella. Tämä ominaisuus käyttää tekoälyä kolmansien osapuolien valokuvien merkitsemiseen."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Hae valokuvasta"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Ostaa"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Osto epäonnistui"),

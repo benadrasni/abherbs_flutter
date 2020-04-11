@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("टिप्पणियों"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("आप इंटरनेट कनेक्शन के बिना आवेदन चला सकेंगे।"),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("ऑफ़लाइन मोड"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("आप फोटो द्वारा एक फूल खोजने में सक्षम होंगे। यह सुविधा Google से फ़ोटो लेबल करने के लिए आर्टिफिशियल इंटेलिजेंस का उपयोग कर रही है।"),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("आप फोटो द्वारा एक फूल खोजने में सक्षम होंगे। यह फीचर आर्टिफिशियल इंटेलिजेंस को थर्ड पार्टी से फोटो लेबल करने के लिए इस्तेमाल कर रहा है।"),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("फोटो से खोजें"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("खरीद फरोख्त"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("खरीद विफल रही"),

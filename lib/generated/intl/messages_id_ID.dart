@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Pengamatan"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Anda dapat menjalankan aplikasi tanpa koneksi internet."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Mode offline"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Anda akan dapat menemukan bunga dengan foto. Fitur ini menggunakan Kecerdasan Buatan untuk melabeli foto dari Google."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Anda akan dapat menemukan bunga dengan foto. Fitur ini menggunakan Kecerdasan Buatan untuk melabeli foto dari pihak ketiga."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Cari berdasarkan foto"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Membeli"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Pembelian gagal"),

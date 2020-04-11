@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Observaties"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("U kunt de toepassing uitvoeren zonder internetverbinding."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Offline modus"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Je kunt een bloem op foto vinden. Deze functie gebruikt kunstmatige intelligentie voor het labelen van foto\'s van Google."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Je kunt een bloem op foto vinden. Deze functie gebruikt kunstmatige intelligentie voor het labelen van foto\'s van derden."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Zoeken op foto"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Koop"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Aankoop mislukt"),

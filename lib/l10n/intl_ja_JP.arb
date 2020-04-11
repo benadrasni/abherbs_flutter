@@ -18,7 +18,7 @@
   "product_observations_title": "観察",
   "product_observations_description": "花の名前、日付、場所、写真、メモを付けて自分の観察結果を保存することができます。",
   "product_photo_search_title": "写真で探す",
-  "product_photo_search_description": "あなたは写真で花を見つけることができるでしょう。 この機能は、Googleの写真にラベルを付けるために人工知能を使用しています。",
+  "product_photo_search_description": "写真で花を見つけることができます。 この機能は、人工知能を使用してサードパーティの写真にラベルを付けます。",
   "subscription_monthly_title": "写真を保存",
   "subscription_monthly_description": "デバイス間で観測の写真を保存し、共有観測 - 毎月の支払いを参照してください。",
   "subscription_yearly_title": "写真を保存する",
