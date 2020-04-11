@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Observationer"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Du kan köra program utan internetanslutning."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Offlineläge"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Du kommer att kunna hitta en blomma på foto. Den här funktionen använder Artificial Intelligence för att märka foton från Google."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Du kan hitta en blomma efter foto. Denna funktion använder Artificial Intelligence för märkning av foton från tredje part."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Sök på foto"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Köpa"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Köp misslyckades"),

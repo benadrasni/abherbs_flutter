@@ -212,7 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Pozorovania"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Aplikáciu budete môcť spustiť bez pripojenia k internetu."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Režim offline"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Budete mať možnosť nájsť kvetinu podľa fotografie. Táto funkcia využíva umelú inteligencíu na určovanie objektov na fotografiách od Googlu."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Budete mať možnosť nájsť kvetinu podľa fotografie. Táto funkcia využíva umelú inteligencíu na určovanie objektov na fotografiách od tretích strán."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Hľadať pomocou fotografie"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Kúpiť"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Nákup sa neuskutočnil"),

@@ -18,7 +18,7 @@
   "product_observations_title": "Observationer",
   "product_observations_description": "Du kan spara dina egna observationer med blomnamn, datum, plats, foton och anteckning.",
   "product_photo_search_title": "Sök på foto",
-  "product_photo_search_description": "Du kommer att kunna hitta en blomma på foto. Den här funktionen använder Artificial Intelligence för att märka foton från Google.",
+  "product_photo_search_description": "Du kan hitta en blomma efter foto. Denna funktion använder Artificial Intelligence för märkning av foton från tredje part.",
   "subscription_monthly_title": "Spara bilder",
   "subscription_monthly_description": "Bevara observationsbilder över enheter, se delade observationer - månadsbetalning.",
   "subscription_yearly_title": "Spara bilder",

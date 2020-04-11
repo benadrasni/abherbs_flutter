@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Megfigyelések"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Internetes kapcsolat nélkül is futtathatja az alkalmazást."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Offline módban"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Képes lesz fénykép általi virágkikeresésre. Ez a funkció a mesterséges intelligenciát használja a fényképek Google-ból történő címkézésére."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Fényképen fotókat találhat. Ez a szolgáltatás a mesterséges intelligenciát használja harmadik féltől származó fényképek címkézésére."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Keresés fénykép szerint"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Vásárol"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("A vásárlás nem sikerült"),

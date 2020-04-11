@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("観察"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("あなたはインターネットに接続せずにアプリケーションを実行することができるでしょう。"),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("オフラインモード"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("あなたは写真で花を見つけることができるでしょう。 この機能は、Googleの写真にラベルを付けるために人工知能を使用しています。"),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("写真で花を見つけることができます。 この機能は、人工知能を使用してサードパーティの写真にラベルを付けます。"),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("写真で探す"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("買う"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("購入に失敗しました"),

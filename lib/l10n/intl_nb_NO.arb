@@ -18,7 +18,7 @@
   "product_observations_title": "Observasjoner",
   "product_observations_description": "Du kan lagre dine egne observasjoner med blomst navn, dato, sted, bilder og notater.",
   "product_photo_search_title": "Søk etter bilde",
-  "product_photo_search_description": "Du kan finne en blomst på bilde. Denne funksjonen bruker Artificial Intelligence til å merke bilder fra Google.",
+  "product_photo_search_description": "Du kan finne en blomst etter foto. Denne funksjonen bruker kunstig intelligens for merking av bilder fra tredjepart.",
   "subscription_monthly_title": "Lagre bilder",
   "subscription_monthly_description": "Bevar observasjonens bilder på tvers av enheter, se delte observasjoner - månedlig betaling.",
   "subscription_yearly_title": "Lagre bilder",

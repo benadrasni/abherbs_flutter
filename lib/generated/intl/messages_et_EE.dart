@@ -213,7 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "product_observations_title" : MessageLookupByLibrary.simpleMessage("Vaatlused"),
     "product_offline_description" : MessageLookupByLibrary.simpleMessage("Teil on võimalik käivitada rakendust ilma internetiühenduseta."),
     "product_offline_title" : MessageLookupByLibrary.simpleMessage("Võrguühenduseta režiim"),
-    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Sul on võimalik leida lill fotol. See funktsioon kasutab fotode Google\'is märgistamiseks kunstlikku intelligentsust."),
+    "product_photo_search_description" : MessageLookupByLibrary.simpleMessage("Lille leiate foto järgi. See funktsioon kasutab tehisintellekti kolmandate osapoolte fotode sildistamiseks."),
     "product_photo_search_title" : MessageLookupByLibrary.simpleMessage("Otsing foto järgi"),
     "product_purchase" : MessageLookupByLibrary.simpleMessage("Ostmine"),
     "product_purchase_failed" : MessageLookupByLibrary.simpleMessage("Ostmine nurjus"),
