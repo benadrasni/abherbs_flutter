@@ -48,6 +48,23 @@ class _SubscriptionState extends State<Subscription> {
     return null;
   }
 
+  String _getProductPeriod(BuildContext context, ProductDetails subscription) {
+    String period = subscription.skuDetail?.subscriptionPeriod ?? subscription.skProduct?.subscriptionPeriod.unit.toString();
+
+    switch (period) {
+      case 'P1M':
+      case 'MONTH':
+      case 'SKSubscriptionPeriodUnit.month':
+        return S.of(context).subscription_period_month;
+      case 'P1Y':
+      case 'YEAR':
+      case 'SKSubscriptionPeriodUnit.year':
+        return S.of(context).subscription_period_year;
+      default:
+        return '';
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -142,8 +159,7 @@ class _SubscriptionState extends State<Subscription> {
                           trailing: Text(
                             subscription.price +
                                 '/' +
-                                getProductPeriod(
-                                    context, subscription.skuDetail.subscriptionPeriod),
+                                _getProductPeriod(context, subscription),
                             style: TextStyle(
                               color: Colors.blue,
                               fontSize: 18.0,
