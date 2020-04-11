@@ -362,19 +362,6 @@ String getProductDescription(BuildContext context, String productId, String defa
   }
 }
 
-String getProductPeriod(BuildContext context, String productId) {
-  switch (productId) {
-    case 'P1M':
-    case 'MONTH':
-      return S.of(context).subscription_period_month;
-    case 'P1Y':
-    case 'YEAR':
-      return S.of(context).subscription_period_year;
-    default:
-      return '';
-  }
-}
-
 Icon getIcon(String productId) {
   switch (productId) {
     case productSearch:
