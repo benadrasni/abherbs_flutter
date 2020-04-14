@@ -18,6 +18,7 @@ import 'package:abherbs_flutter/purchase/subscription.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -54,6 +55,18 @@ class _PlantDetailState extends State<PlantDetail> {
   bool _isOriginal;
   GlobalKey<ScaffoldState> _key;
   bool _isPublic;
+  double _fontSize;
+
+  onChangeFontSize() {
+    setState(() {
+      if (_fontSize == maxFontSize) {
+        _fontSize = defaultFontSize;
+      } else {
+        _fontSize += 2;
+      }
+      Prefs.setDouble(keyFontSize, _fontSize);
+    });
+  }
 
   onChangeTranslation(bool isOriginal) {
     setState(() {
@@ -153,9 +166,9 @@ class _PlantDetailState extends State<PlantDetail> {
       case galleryIndex:
         return getGallery(context, widget.plant);
       case infoIndex:
-        return getInfo(context, widget.myLocale, _isOriginal, widget.plant, _plantTranslationF, this.onChangeTranslation, _key);
+        return getInfo(context, widget.myLocale, _isOriginal, widget.plant, _plantTranslationF, this.onChangeTranslation, _fontSize, _key);
       case taxonomyIndex:
-        return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF);
+        return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize);
       case observationIndex:
         return ObservationsPlant(
             _currentUser, Localizations.localeOf(context), widget.onChangeLanguage, _isPublic, widget.plant.name, _key);
@@ -204,6 +217,7 @@ class _PlantDetailState extends State<PlantDetail> {
     _isOriginal = false;
     _key = new GlobalKey<ScaffoldState>();
     _isPublic = false;
+    _fontSize = Prefs.getDouble(keyFontSize, defaultFontSize);
 
     _logSelectContentEvent(widget.plant.name);
   }
@@ -262,6 +276,26 @@ class _PlantDetailState extends State<PlantDetail> {
                   ),
                 ],
               ),
+            )
+          : _currentIndex == infoIndex || _currentIndex == taxonomyIndex
+          ? AppBar(
+              title: GestureDetector(
+                child: Text(widget.plant.name),
+                onLongPress: () {
+                  Clipboard.setData(new ClipboardData(text: widget.plant.name));
+                  _key.currentState.showSnackBar(SnackBar(
+                    content: Text(S.of(context).snack_copy),
+                  ));
+                },
+              ),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.font_download),
+                  onPressed: () {
+                    onChangeFontSize();
+                  },
+                ),
+              ],
             )
           : AppBar(
               title: GestureDetector(

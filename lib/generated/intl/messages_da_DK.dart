@@ -243,6 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("Annonce er stadig indlæst, tryk igen på knappen."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("Ingen blomster, der matcher kriterier."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... offentliggøres senere"),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("Tak for dit bidrag."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("Syd-Central Stillehavet"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("Syd-Central USA"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("Syd tropiske Afrika"),

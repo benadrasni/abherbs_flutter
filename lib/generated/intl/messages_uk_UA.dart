@@ -245,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("Реклама все ще завантажується, знову натисніть кнопку."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("Критерії відповідності квітам відсутні."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... буде опубліковано пізніше"),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("Дякуємо за ваш внесок."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("Південно-центральний Тихий океан"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("Південно-Центральна США"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("Південна тропічна Африка"),

@@ -2034,6 +2034,15 @@ class S {
     );
   }
 
+  String get snack_translation {
+    return Intl.message(
+      'Thanks for your contribution.',
+      name: 'snack_translation',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get search {
     return Intl.message(
       'Search...',

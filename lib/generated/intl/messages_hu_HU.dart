@@ -245,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("A hirdetés még mindig betöltődik, nyomja meg újra a gombot."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("Nincsenek virág illeszkedési feltételek."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... később lesz közzétéve"),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("Köszönöm hozzájárulását."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("Dél-Közép Csendes-óceán"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("Dél-Közép USA"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("trópusi Dél-Afrika"),
