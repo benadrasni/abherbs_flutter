@@ -24,6 +24,7 @@ class SearchResult {
   String path;
   Map<String, dynamic> plantDetails;
   List<dynamic> similarImages;
+  String commonName;
 }
 
 class SearchPhoto extends StatefulWidget {
@@ -96,6 +97,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
             result.confidence = suggestion['probability'];
             result.plantDetails = suggestion['plant_details'];
             result.similarImages = suggestion['similar_images'];
+            result.commonName = suggestion['plant_details']['common_names'] != null ? suggestion['plant_details']['common_names'][0] : "";
             if (snapshot != null && snapshot.value != null) {
               result.count = snapshot.value['count'];
               result.path = snapshot.value['path'];
@@ -379,7 +381,8 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                 } else {
                                   return ListTile(
                                     leading: CircleAvatar(child:Text(NumberFormat.percentPattern().format(result.confidence)), backgroundColor: Colors.white,),
-                                    title: Text(result.labelLatin.toLowerCase()),
+                                    title: result.commonName.isNotEmpty ? Text(result.commonName) : Text(result.labelLatin),
+                                    subtitle: result.commonName.isNotEmpty ? Text(result.labelLatin) : null,
                                   );
                                 }
                               }).toList(),
