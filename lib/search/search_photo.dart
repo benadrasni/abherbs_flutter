@@ -88,7 +88,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
       var results = <SearchResult>[];
       if (response.statusCode == 200) {
         Map responseBody = json.decode(response.body);
-        for (var suggestion in responseBody['suggestions'] ) {
+        for (var suggestion in responseBody['suggestions']) {
           String plantName = suggestion['plant_details']['scientific_name'];
           results.add(await rootReference.child(firebaseSearchPhoto + '/' + plantName.toLowerCase().replaceAll('.', '')).once().then((snapshot) {
             var result = SearchResult();
@@ -108,9 +108,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
               } else {
                 result.labelLatin = result.path;
                 translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).keepSynced(true);
-                return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).child(firebaseAttributeLabel)
-                    .once()
-                    .then((snapshot) {
+                return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).child(firebaseAttributeLabel).once().then((snapshot) {
                   if (snapshot.value != null) {
                     result.labelInLanguage = snapshot.value;
                   }
@@ -122,9 +120,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                 return result;
               } else {
                 translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).keepSynced(true);
-                return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin)
-                    .once()
-                    .then((snapshot) {
+                return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).once().then((snapshot) {
                   if (snapshot.value != null && snapshot.value.length > 0) {
                     translationCache[result.labelLatin] = snapshot.value[0];
                     result.labelInLanguage = snapshot.value[0];
@@ -145,24 +141,21 @@ class _SearchPhotoState extends State<SearchPhoto> {
         if (widget.currentUser != null) {
           userId = widget.currentUser.uid;
         }
-        rootReference.child(firebaseUsersPhotoSearch)
-            .child(userId)
-            .child(DateTime.now().millisecondsSinceEpoch.toString())
-            .set(results.map((searchResult) {
-          Map<String, dynamic> labelMap = {};
-          labelMap['entityId'] = searchResult.entityId;
-          labelMap['language'] = widget.myLocale.languageCode;
-          labelMap['confidence'] = searchResult.confidence;
-          labelMap['plantDetails'] = searchResult.plantDetails;
-          labelMap['similarImages'] = searchResult.similarImages;
-          if (searchResult.labelLatin != null) {
-            labelMap['label_latin'] = searchResult.labelLatin;
-          }
-          if (searchResult.labelInLanguage != null) {
-            labelMap['label_language'] = searchResult.labelInLanguage;
-          }
-          return labelMap;
-        }).toList());
+        rootReference.child(firebaseUsersPhotoSearch).child(userId).child(DateTime.now().millisecondsSinceEpoch.toString()).set(results.map((searchResult) {
+              Map<String, dynamic> labelMap = {};
+              labelMap['entityId'] = searchResult.entityId;
+              labelMap['language'] = widget.myLocale.languageCode;
+              labelMap['confidence'] = searchResult.confidence;
+              labelMap['plantDetails'] = searchResult.plantDetails;
+              labelMap['similarImages'] = searchResult.similarImages;
+              if (searchResult.labelLatin != null) {
+                labelMap['label_latin'] = searchResult.labelLatin;
+              }
+              if (searchResult.labelInLanguage != null) {
+                labelMap['label_language'] = searchResult.labelInLanguage;
+              }
+              return labelMap;
+            }).toList());
       }
 
       return results;
@@ -201,9 +194,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
             } else {
               result.labelLatin = result.path;
               translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).keepSynced(true);
-              return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).child(firebaseAttributeLabel)
-                  .once()
-                  .then((snapshot) {
+              return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).child(firebaseAttributeLabel).once().then((snapshot) {
                 if (snapshot.value != null) {
                   result.labelInLanguage = snapshot.value;
                 }
@@ -215,9 +206,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
               return result;
             } else {
               translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).keepSynced(true);
-              return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin)
-                  .once()
-                  .then((snapshot) {
+              return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).once().then((snapshot) {
                 if (snapshot.value != null && snapshot.value.length > 0) {
                   translationCache[result.labelLatin] = snapshot.value[0];
                   result.labelInLanguage = snapshot.value[0];
@@ -235,22 +224,19 @@ class _SearchPhotoState extends State<SearchPhoto> {
         if (widget.currentUser != null) {
           userId = widget.currentUser.uid;
         }
-        rootReference.child(firebaseUsersPhotoSearch)
-            .child(userId)
-            .child(DateTime.now().millisecondsSinceEpoch.toString())
-            .set(results.map((searchResult) {
-          Map<String, dynamic> labelMap = {};
-          labelMap['entityId'] = searchResult.entityId;
-          labelMap['language'] = widget.myLocale.languageCode;
-          labelMap['confidence'] = searchResult.confidence;
-          if (searchResult.labelLatin != null) {
-            labelMap['label_latin'] = searchResult.labelLatin;
-          }
-          if (searchResult.labelInLanguage != null) {
-            labelMap['label_language'] = searchResult.labelInLanguage;
-          }
-          return labelMap;
-        }).toList());
+        rootReference.child(firebaseUsersPhotoSearch).child(userId).child(DateTime.now().millisecondsSinceEpoch.toString()).set(results.map((searchResult) {
+              Map<String, dynamic> labelMap = {};
+              labelMap['entityId'] = searchResult.entityId;
+              labelMap['language'] = widget.myLocale.languageCode;
+              labelMap['confidence'] = searchResult.confidence;
+              if (searchResult.labelLatin != null) {
+                labelMap['label_latin'] = searchResult.labelLatin;
+              }
+              if (searchResult.labelInLanguage != null) {
+                labelMap['label_language'] = searchResult.labelInLanguage;
+              }
+              return labelMap;
+            }).toList());
       }
 
       return results;
@@ -359,28 +345,35 @@ class _SearchPhotoState extends State<SearchPhoto> {
                           } else {
                             return Column(
                               children: results.data.map((result) {
-                                if (result.count != null && result.count > 0) {
-                                  return ListTile(
-                                    leading: CircleAvatar(child:Text(NumberFormat.percentPattern().format(result.confidence), textAlign: TextAlign.center,),),
-                                    title: result.labelInLanguage.isNotEmpty ? Text(result.labelInLanguage) : Text(result.labelLatin),
-                                    subtitle: result.labelInLanguage.isNotEmpty ? Text(result.labelLatin) : null,
-                                    trailing: Text(result.count.toString()),
-                                    onTap: () {
-                                      if (result.path.contains('/')) {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  PlantList(widget.onChangeLanguage, {}, '',  rootReference.child(result.path))),
-                                        );
-                                      } else {
-                                        goToDetail(self, context, widget.myLocale, result.path, widget.onChangeLanguage, {});
-                                      }
-                                    },
-                                  );
+                                if (result.path != null && result.path.isNotEmpty) {
+                                  return Container(
+                                      decoration: BoxDecoration(color: Colors.lightBlueAccent),
+                                      child: ListTile(
+                                        leading: CircleAvatar(
+                                          child: Text(
+                                            NumberFormat.percentPattern().format(result.confidence)),
+                                            backgroundColor: Colors.white,
+                                        ),
+                                        title: result.labelInLanguage.isNotEmpty ? Text(result.labelInLanguage) : Text(result.labelLatin),
+                                        subtitle: result.labelInLanguage.isNotEmpty ? Text(result.labelLatin) : null,
+                                        trailing: Text(result.count.toString()),
+                                        onTap: () {
+                                          if (result.path.contains('/')) {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, '', rootReference.child(result.path))),
+                                            );
+                                          } else {
+                                            goToDetail(self, context, widget.myLocale, result.path, widget.onChangeLanguage, {});
+                                          }
+                                        },
+                                      ));
                                 } else {
                                   return ListTile(
-                                    leading: CircleAvatar(child:Text(NumberFormat.percentPattern().format(result.confidence)), backgroundColor: Colors.white,),
+                                    leading: CircleAvatar(
+                                      child: Text(NumberFormat.percentPattern().format(result.confidence)),
+                                      backgroundColor: Colors.white,
+                                    ),
                                     title: result.commonName.isNotEmpty ? Text(result.commonName) : Text(result.labelLatin),
                                     subtitle: result.commonName.isNotEmpty ? Text(result.labelLatin) : null,
                                   );
