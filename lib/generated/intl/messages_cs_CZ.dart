@@ -244,7 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_copy" : MessageLookupByLibrary.simpleMessage("Zkopírováno do schránky"),
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("Reklama se stále načítá, znovu stiskněte tlačítko."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("Filtru nevyhovují žádné květiny v databázi."),
-    "snack_translation" : MessageLookupByLibrary.simpleMessage("Děkujeme za váš příspěvek."),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("Děkujeme za váš příspěvek. Bude brzy zveřejněn."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("Středojižní Tichomoří"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("Středojih USA"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("Jižní tropická Afrika"),

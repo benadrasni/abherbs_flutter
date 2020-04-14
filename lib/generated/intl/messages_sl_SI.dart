@@ -245,7 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("Oglas se še vedno nalaga, ponovno pritisnite gumb."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("Ni meril za ujemanje cvetja."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... bo objavljen pozneje"),
-    "snack_translation" : MessageLookupByLibrary.simpleMessage("Hvala za vaš prispevek."),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("Hvala za vaš prispevek. Kmalu bo objavljen."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("Južni osrednji Pacifik"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("Južna osrednja ZDA"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("Južna tropska Afrika"),

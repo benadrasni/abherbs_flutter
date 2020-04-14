@@ -245,7 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("Anunțul se încarcă încă, apăsați butonul din nou."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("Nu există criterii de potrivire a florilor."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... care urmează să fie publicată ulterior"),
-    "snack_translation" : MessageLookupByLibrary.simpleMessage("Vă mulțumim pentru contribuție."),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("Vă mulțumim pentru contribuție. Va fi publicat în curând."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("Sud-central Pacificului"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("Sud-central SUA"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("Africa de Sud tropicală"),

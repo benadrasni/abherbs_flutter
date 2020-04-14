@@ -290,7 +290,7 @@ class _PlantDetailState extends State<PlantDetail> {
               ),
               actions: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.font_download),
+                  icon: Icon(Icons.format_size),
                   onPressed: () {
                     onChangeFontSize();
                   },

@@ -245,7 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("광고가 계속로드 중입니다. 버튼을 다시 누르십시오."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("기준과 일치하는 꽃이 없습니다."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... 나중에 출판 될"),
-    "snack_translation" : MessageLookupByLibrary.simpleMessage("당신의 기여에 감사드립니다."),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("당신의 기여에 감사드립니다. 곧 게시 될 예정입니다."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("남태평양"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("사우스 센트럴 미국."),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("남쪽 열대 아프리카"),

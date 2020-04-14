@@ -245,7 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("Advertentie wordt nog steeds geladen, druk opnieuw op de knop."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("Geen bloemen die voldoen aan criteria."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... later worden gepubliceerd"),
-    "snack_translation" : MessageLookupByLibrary.simpleMessage("Bedankt voor je bijdrage."),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("Bedankt voor je bijdrage. Het wordt binnenkort gepubliceerd."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("Zuid-Central Stille Oceaan"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("Zuid-Centraal VS"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("Zuid-tropisch Afrika"),

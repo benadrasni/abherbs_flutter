@@ -245,7 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("Ad is still loading, press button again."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("There are no flowers matching criteria."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... to be published later"),
-    "snack_translation" : MessageLookupByLibrary.simpleMessage("Thanks for your contribution."),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("Thanks for your contribution. It\'ll be published soon."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("South-Central Pacific"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("South-Central U.S.A."),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("South Tropical Africa"),
