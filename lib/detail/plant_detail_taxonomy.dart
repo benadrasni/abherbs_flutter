@@ -10,7 +10,7 @@ import '../ads.dart';
 
 final translationsTaxonomyReference = FirebaseDatabase.instance.reference().child(firebaseTranslationsTaxonomy);
 
-Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF) {
+Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize) {
   List<Widget> cards = [];
 
   cards.add(Card(
@@ -35,7 +35,7 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
   cards.add(Card(
     child: Container(
       padding: EdgeInsets.all(10.0),
-      child: _getTaxonomy(context, myLocale, plant),
+      child: _getTaxonomy(context, myLocale, plant, _fontSize),
     ),
   ));
 
@@ -102,7 +102,7 @@ Widget _getSynonyms(Plant plant) {
   );
 }
 
-Widget _getTaxonomy(BuildContext context, Locale myLocale, Plant plant) {
+Widget _getTaxonomy(BuildContext context, Locale myLocale, Plant plant, double fontSize) {
   var taxonTiles = <Widget>[];
 
   var taxonKeys = <String>[];
@@ -115,10 +115,10 @@ Widget _getTaxonomy(BuildContext context, Locale myLocale, Plant plant) {
         padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Expanded(
-            child: Text(getTaxonLabel(context, taxonKey.substring(taxonKey.indexOf('_') + 1))),
+            child: Text(getTaxonLabel(context, taxonKey.substring(taxonKey.indexOf('_') + 1)), style: TextStyle(fontSize: fontSize)),
             flex: 2,
           ),
-          _getTaxonInLanguage(myLocale, plant.apgIV[taxonKey]),
+          _getTaxonInLanguage(myLocale, plant.apgIV[taxonKey], fontSize),
         ])));
   }
 
@@ -128,7 +128,7 @@ Widget _getTaxonomy(BuildContext context, Locale myLocale, Plant plant) {
   );
 }
 
-Widget _getTaxonInLanguage(Locale myLocale, String taxon) {
+Widget _getTaxonInLanguage(Locale myLocale, String taxon, double fontSize) {
   Future<String> translationF =
       translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(taxon).once().then((DataSnapshot snapshot) {
     if (snapshot.value != null && snapshot.value.length > 0) {
@@ -146,10 +146,10 @@ Widget _getTaxonInLanguage(Locale myLocale, String taxon) {
 
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data != null) {
-              names.add(Text(snapshot.data, style: TextStyle(fontWeight: FontWeight.bold)));
+              names.add(Text(snapshot.data, style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)));
             }
           }
-          names.add(Text(taxon));
+          names.add(Text(taxon, style: TextStyle(fontSize: fontSize),));
 
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,

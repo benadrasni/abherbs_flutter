@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:abherbs_flutter/detail/plant_detail_edit.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
@@ -27,8 +28,15 @@ const String sourceUsda = "plants.usda.gov";
 const String sourceUsfs = "forestryimages.org";
 const String sourceTelaBotanica = "tela-botanica.org";
 
-Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant plant, Future<PlantTranslation> _plantTranslationF,
-    Function(bool) onChangeTranslation, GlobalKey<ScaffoldState> key) {
+Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant plant, Future<PlantTranslation> _plantTranslationF, Function(bool) onChangeTranslation, double _fontSize,
+    GlobalKey<ScaffoldState> key) {
+  String language = Localizations.localeOf(context).languageCode;
+
+  TextStyle _defaultTextStyle = TextStyle(
+    fontSize: _fontSize,
+    color: Colors.black,
+  );
+
   return FutureBuilder<PlantTranslation>(
       future: _plantTranslationF,
       builder: (BuildContext context, AsyncSnapshot<PlantTranslation> snapshot) {
@@ -48,7 +56,79 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                 padding: EdgeInsets.all(10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: _getDescription(context, myLocale, plant, snapshot.data),
+                  children: [
+                    ListTile(
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(children: [
+                            Text(
+                              S.of(context).plant_height_from,
+                              style: _defaultTextStyle,
+                            ),
+                            Text(' '),
+                            Text(
+                              plant.heightFrom.toString(),
+                              style: _defaultTextStyle,
+                            ),
+                            Text(' '),
+                            Text(
+                              S.of(context).plant_height_to,
+                              style: _defaultTextStyle,
+                            ),
+                            Text(' '),
+                            Text(
+                              plant.heightTo.toString(),
+                              style: _defaultTextStyle,
+                            ),
+                            Text(' '),
+                            Text(
+                              heightUnitOfMeasure,
+                              style: _defaultTextStyle,
+                            ),
+                          ]),
+                          Row(children: [
+                            Text(
+                              S.of(context).plant_flowering_from,
+                              style: _defaultTextStyle,
+                            ),
+                            Text(' '),
+                            Text(
+                              DateFormat.MMMM(myLocale.languageCode).format(DateTime(0, plant.floweringFrom)),
+                              style: _defaultTextStyle,
+                            ),
+                            Text(' '),
+                            Text(
+                              S.of(context).plant_flowering_to,
+                              style: _defaultTextStyle,
+                            ),
+                            Text(' '),
+                            Text(
+                              DateFormat.MMMM(myLocale.languageCode).format(DateTime(0, plant.floweringTo)),
+                              style: _defaultTextStyle,
+                            ),
+                          ]),
+                        ],
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PlantDetailEdit(plant.name, language, '', '', 'description', snapshot.data.description, _fontSize),
+                              )).then((value) {
+                            if (value) {
+                              key.currentState.showSnackBar(SnackBar(
+                                content: Text(S.of(context).snack_translation),
+                              ));
+                            }
+                          });
+                        },
+                      ),
+                    ),
+                    _getRichText(snapshot.data.description, _defaultTextStyle),
+                  ],
                 ),
               ),
             ));
@@ -58,130 +138,214 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                 padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   ListTile(
-                    title: Text(S.of(context).plant_inflorescence),
+                    title: Text(
+                      S.of(context).plant_inflorescence,
+                      style: _defaultTextStyle,
+                    ),
                     leading: Image(
                       image: AssetImage('res/images/ic_inflorescence_grey_24dp.png'),
                       width: 24.0,
                       height: 24.0,
                     ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PlantDetailEdit(
+                                  plant.name, language, 'res/images/ic_inflorescence_grey_24dp.png', S.of(context).plant_inflorescence, "inflorescence", snapshot.data.inflorescence, _fontSize),
+                            )).then((value) {
+                          if (value) {
+                            key.currentState.showSnackBar(SnackBar(
+                              content: Text(S.of(context).snack_translation),
+                            ));
+                          }
+                        });
+                      },
+                    ),
                   ),
-                  _getRichText(snapshot.data.inflorescence),
+                  _getRichText(snapshot.data.inflorescence, _defaultTextStyle),
                 ]),
               ),
             ));
+
             cards.add(Card(
               child: Container(
                 padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   ListTile(
-                    title: Text(S.of(context).plant_flower),
+                    title: Text(
+                      S.of(context).plant_flower,
+                      style: _defaultTextStyle,
+                    ),
                     leading: Image(
                       image: AssetImage('res/images/ic_flower_grey_24dp.png'),
                       width: 24.0,
                       height: 24.0,
                     ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_flower_grey_24dp.png', S.of(context).plant_flower, "flower", snapshot.data.flower, _fontSize),
+                            )).then((value) {
+                          if (value) {
+                            key.currentState.showSnackBar(SnackBar(
+                              content: Text(S.of(context).snack_translation),
+                            ));
+                          }
+                        });
+                      },
+                    ),
                   ),
-                  _getRichText(snapshot.data.flower),
+                  _getRichText(snapshot.data.flower, _defaultTextStyle),
                 ]),
               ),
             ));
-
-            if (snapshot.data.isTranslatedWithGT) {
-              cards.add(Card(
-                child: Container(
-                  padding: EdgeInsets.all(10.0),
-                  decoration: new BoxDecoration(
-                    borderRadius: new BorderRadius.circular(16.0),
-                    color: Theme.of(context).secondaryHeaderColor,
-                  ),
-                  child: Column(
-                    children: [
-                      Text(S.of(context).google_translate),
-                      Container(
-                        width: 300.0,
-                        child: RaisedButton(
-                          onPressed: () {
-                            onChangeTranslation(!isOriginal);
-                          },
-                          child: new Text(isOriginal ? S.of(context).show_translation : S.of(context).show_original),
-                        ),
-                      ),
-                      Container(
-                        width: 300.0,
-                        child: RaisedButton(
-                          onPressed: () {
-                            launchURL(webUrl + 'translate_flower?lang=' + getLanguageCode(myLocale.languageCode) + "&plant=" + plant.name);
-                          },
-                          child: new Text(S.of(context).improve_translation),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ));
-            }
 
             cards.add(Card(
               child: Container(
                 padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   ListTile(
-                    title: Text(S.of(context).plant_fruit),
+                    title: Text(
+                      S.of(context).plant_fruit,
+                      style: _defaultTextStyle,
+                    ),
                     leading: Image(
                       image: AssetImage('res/images/ic_fruit_grey_24dp.png'),
                       width: 24.0,
                       height: 24.0,
                     ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_fruit_grey_24dp.png', S.of(context).plant_fruit, "fruit", snapshot.data.fruit, _fontSize),
+                            )).then((value) {
+                          if (value) {
+                            key.currentState.showSnackBar(SnackBar(
+                              content: Text(S.of(context).snack_translation),
+                            ));
+                          }
+                        });
+                      },
+                    ),
                   ),
-                  _getRichText(snapshot.data.fruit),
+                  _getRichText(snapshot.data.fruit, _defaultTextStyle),
                 ]),
               ),
             ));
+
             cards.add(Card(
               child: Container(
                 padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   ListTile(
-                    title: Text(S.of(context).plant_leaf),
+                    title: Text(
+                      S.of(context).plant_leaf,
+                      style: _defaultTextStyle,
+                    ),
                     leading: Image(
                       image: AssetImage('res/images/ic_leaf_grey_24dp.png'),
                       width: 24.0,
                       height: 24.0,
                     ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_leaf_grey_24dp.png', S.of(context).plant_leaf, "leaf", snapshot.data.leaf, _fontSize),
+                            )).then((value) {
+                          if (value) {
+                            key.currentState.showSnackBar(SnackBar(
+                              content: Text(S.of(context).snack_translation),
+                            ));
+                          }
+                        });
+                      },
+                    ),
                   ),
-                  _getRichText(snapshot.data.leaf),
+                  _getRichText(snapshot.data.leaf, _defaultTextStyle),
                 ]),
               ),
             ));
+
             cards.add(Card(
               child: Container(
                 padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   ListTile(
-                    title: Text(S.of(context).plant_stem),
+                    title: Text(
+                      S.of(context).plant_stem,
+                      style: _defaultTextStyle,
+                    ),
                     leading: Image(
                       image: AssetImage('res/images/ic_stem_grey_24dp.png'),
                       width: 24.0,
                       height: 24.0,
                     ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_stem_grey_24dp.png', S.of(context).plant_stem, "stem", snapshot.data.stem, _fontSize),
+                            )).then((value) {
+                          if (value) {
+                            key.currentState.showSnackBar(SnackBar(
+                              content: Text(S.of(context).snack_translation),
+                            ));
+                          }
+                        });
+                      },
+                    ),
                   ),
-                  _getRichText(snapshot.data.stem),
+                  _getRichText(snapshot.data.stem, _defaultTextStyle),
                 ]),
               ),
             ));
+
             cards.add(Card(
               child: Container(
                 padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   ListTile(
-                    title: Text(S.of(context).plant_habitat),
+                    title: Text(
+                      S.of(context).plant_habitat,
+                      style: _defaultTextStyle,
+                    ),
                     leading: Image(
                       image: AssetImage('res/images/ic_home_grey_24dp.png'),
                       width: 24.0,
                       height: 24.0,
                     ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_home_grey_24dp.png', S.of(context).plant_habitat, "habitat", snapshot.data.habitat, _fontSize),
+                            )).then((value) {
+                          if (value) {
+                            key.currentState.showSnackBar(SnackBar(
+                              content: Text(S.of(context).snack_translation),
+                            ));
+                          }
+                        });
+                      },
+                    ),
                   ),
-                  _getRichText(snapshot.data.habitat),
+                  _getRichText(snapshot.data.habitat, _defaultTextStyle),
                 ]),
               ),
             ));
@@ -193,50 +357,112 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                   padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     ListTile(
-                      title: Text(S.of(context).plant_toxicity),
+                      title: Text(
+                        S.of(context).plant_toxicity,
+                        style: _defaultTextStyle,
+                      ),
                       leading: Image(
                         image: AssetImage('res/images/ic_toxicity_grey_24dp.png'),
                         width: 24.0,
                         height: 24.0,
                       ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    PlantDetailEdit(plant.name, language, 'res/images/ic_toxicity_grey_24dp.png', S.of(context).plant_toxicity, "toxicity", snapshot.data.toxicity, _fontSize),
+                              )).then((value) {
+                            if (value) {
+                              key.currentState.showSnackBar(SnackBar(
+                                content: Text(S.of(context).snack_translation),
+                              ));
+                            }
+                          });
+                        },
+                      ),
                     ),
-                    _getRichText(snapshot.data.toxicity),
+                    _getRichText(snapshot.data.toxicity, _defaultTextStyle),
                   ]),
                 ),
               ));
             }
+
             if (snapshot.data.herbalism != null) {
               cards.add(Card(
                 child: Container(
                   padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     ListTile(
-                      title: Text(S.of(context).plant_herbalism),
+                      title: Text(
+                        S.of(context).plant_herbalism,
+                        style: _defaultTextStyle,
+                      ),
                       leading: Image(
                         image: AssetImage('res/images/ic_local_pharmacy_grey_24dp.png'),
                         width: 24.0,
                         height: 24.0,
                       ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    PlantDetailEdit(plant.name, language, 'res/images/ic_local_pharmacy_grey_24dp.png', S.of(context).plant_herbalism, "herbalism", snapshot.data.herbalism, _fontSize),
+                              )).then((value) {
+                            if (value) {
+                              key.currentState.showSnackBar(SnackBar(
+                                content: Text(S.of(context).snack_translation),
+                              ));
+                            }
+                          });
+                        },
+                      ),
                     ),
-                    _getRichText(snapshot.data.herbalism),
+                    _getRichText(snapshot.data.herbalism, _defaultTextStyle),
                   ]),
                 ),
               ));
             }
+
             if (snapshot.data.trivia != null) {
               cards.add(Card(
                 child: Container(
                   padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     ListTile(
-                      title: Text(S.of(context).plant_trivia),
+                      title: Text(
+                        S.of(context).plant_trivia,
+                        style: _defaultTextStyle,
+                      ),
                       leading: Image(
                         image: AssetImage('res/images/ic_question_mark_grey_24dp.png'),
                         width: 24.0,
                         height: 24.0,
                       ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    PlantDetailEdit(plant.name, language, 'res/images/ic_question_mark_grey_24dp.png', S.of(context).plant_trivia, "trivia", snapshot.data.trivia, _fontSize),
+                              )).then((value) {
+                            if (value) {
+                              key.currentState.showSnackBar(SnackBar(
+                                content: Text(S.of(context).snack_translation),
+                              ));
+                            }
+                          });
+                        },
+                      ),
                     ),
-                    _getRichText(snapshot.data.trivia),
+                    _getRichText(snapshot.data.trivia, _defaultTextStyle),
                   ]),
                 ),
               ));
@@ -272,11 +498,6 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
         }
       });
 }
-
-const TextStyle _defaultTextStyle = TextStyle(
-  fontSize: 16.0,
-  color: Colors.black,
-);
 
 Widget _getNames(BuildContext context, Plant plant, PlantTranslation plantTranslation, GlobalKey<ScaffoldState> key) {
   var names = <Widget>[];
@@ -346,63 +567,6 @@ Widget _getNames(BuildContext context, Plant plant, PlantTranslation plantTransl
   }
 
   return result;
-}
-
-List<Widget> _getDescription(BuildContext context, Locale myLocale, Plant plant, PlantTranslation plantTranslation) {
-  var descriptionWidgets = <Widget>[];
-
-  descriptionWidgets.add(Row(children: [
-    Text(
-      S.of(context).plant_height_from,
-      style: _defaultTextStyle,
-    ),
-    Text(' '),
-    Text(
-      plant.heightFrom.toString(),
-      style: _defaultTextStyle,
-    ),
-    Text(' '),
-    Text(
-      S.of(context).plant_height_to,
-      style: _defaultTextStyle,
-    ),
-    Text(' '),
-    Text(
-      plant.heightTo.toString(),
-      style: _defaultTextStyle,
-    ),
-    Text(' '),
-    Text(
-      heightUnitOfMeasure,
-      style: _defaultTextStyle,
-    ),
-  ]));
-
-  descriptionWidgets.add(Row(children: [
-    Text(
-      S.of(context).plant_flowering_from,
-      style: _defaultTextStyle,
-    ),
-    Text(' '),
-    Text(
-      DateFormat.MMMM(myLocale.languageCode).format(DateTime(0, plant.floweringFrom)),
-      style: _defaultTextStyle,
-    ),
-    Text(' '),
-    Text(
-      S.of(context).plant_flowering_to,
-      style: _defaultTextStyle,
-    ),
-    Text(' '),
-    Text(
-      DateFormat.MMMM(myLocale.languageCode).format(DateTime(0, plant.floweringTo)),
-      style: _defaultTextStyle,
-    ),
-  ]));
-
-  descriptionWidgets.add(_getRichText(plantTranslation.description));
-
-  return descriptionWidgets;
 }
 
 List<Widget> _getSources(BuildContext context, Plant plant, PlantTranslation plantTranslation) {
@@ -509,7 +673,7 @@ FlatButton getSourceButton(String url) {
   );
 }
 
-RichText _getRichText(String text) {
+RichText _getRichText(String text, TextStyle textStyle) {
   var sections = <TextSpan>[];
   for (String part in text.split('<b>')) {
     if (part.isNotEmpty) {
@@ -525,7 +689,7 @@ RichText _getRichText(String text) {
 
   return RichText(
     text: TextSpan(
-      style: _defaultTextStyle,
+      style: textStyle,
       children: sections,
     ),
   );

@@ -245,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("Annonsen laddas fortfarande, tryck på knappen igen."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("Inga blommor matchande kriterier."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... att publiceras senare"),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("Tack för ditt bidrag."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("Syd centrala Stilla havet"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("Syd-Central USA"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("Södra tropiska Afrika"),
