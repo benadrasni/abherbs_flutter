@@ -244,7 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("تبلیغات هنوز بارگیری شده است، دوباره دکمه را فشار دهید."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("بدون گل مطابق معیارهای."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("بعدا منتشر شود"),
-    "snack_translation" : MessageLookupByLibrary.simpleMessage("بابت کمک شما"),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("بابت کمک شما به زودی منتشر می شود."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("جنوب آسیا اقیانوس آرام"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("جنوبی مرکزی ایالات متحده آمریکا"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("آفریقای جنوبی گرمسیری"),

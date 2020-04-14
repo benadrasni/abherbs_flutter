@@ -245,7 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("Reklāma joprojām tiek ielādēta, vēlreiz nospiediet pogu."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("Nav ziedu atbilstības kritēriju."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... publicēt vēlāk"),
-    "snack_translation" : MessageLookupByLibrary.simpleMessage("Paldies par jūsu ieguldījumu."),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("Paldies par jūsu ieguldījumu. Tas drīz tiks publicēts."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("Klusā okeāna dienvidu daļa"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("Dienvidu ASV"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("Dienvidu tropu Āfrika"),

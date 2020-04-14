@@ -245,7 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("広告はまだ読み込まれています。もう一度ボタンを押してください。"),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("基準に一致する花はありません。"),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... 後で公開する"),
-    "snack_translation" : MessageLookupByLibrary.simpleMessage("あなたの貢献をありがとう。"),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("あなたの貢献をありがとう。 まもなく公開されます。"),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("中南米"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("中南米"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("南トロピカルアフリカ"),

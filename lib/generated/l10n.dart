@@ -2036,7 +2036,7 @@ class S {
 
   String get snack_translation {
     return Intl.message(
-      'Thanks for your contribution.',
+      'Thanks for your contribution. It\'ll be published soon.',
       name: 'snack_translation',
       desc: '',
       args: [],

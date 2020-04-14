@@ -244,7 +244,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
               color: Colors.grey,
             )),
         validator: (value) =>
-            value.isEmpty || !RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) ? S.of(context).auth_invalid_email_address : null,
+            value.isEmpty || !RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$").hasMatch(value) ? S.of(context).auth_invalid_email_address : null,
         onSaved: (value) => _email = value,
       ),
     );

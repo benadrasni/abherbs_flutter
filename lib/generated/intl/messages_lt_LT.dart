@@ -245,7 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("Reklama vis dar įkeliama, dar kartą paspauskite mygtuką."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("Nėra gėlių atitikimo kriterijų."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... bus paskelbta vėliau"),
-    "snack_translation" : MessageLookupByLibrary.simpleMessage("Ačiū už jūsų indėlį."),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("Ačiū už jūsų indėlį. Jis netrukus bus paskelbtas."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("Ramiojo vandenyno pietinė dalis"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("Pietu-Centrinė JAV"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("Pietų tropinė Afrika"),

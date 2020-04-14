@@ -245,7 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("המודעה עדיין נטענת, לחץ שוב על הלחצן."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("אין קריטריונים תואמים לפרחים."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("יפורסם בהמשך"),
-    "snack_translation" : MessageLookupByLibrary.simpleMessage("תודה על תרומתך."),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("תודה על תרומתך. זה יפורסם בקרוב."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("דרום מרכז האוקיינוס השקט"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("דרום מרכז ארצות הברית"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("דרום אפריקה טרופית"),

@@ -245,7 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "snack_loading_ad" : MessageLookupByLibrary.simpleMessage("Mainos lataa, paina painiketta uudelleen."),
     "snack_no_flowers" : MessageLookupByLibrary.simpleMessage("Ei kukkien yhteensopivuusvaatimuksia."),
     "snack_publish" : MessageLookupByLibrary.simpleMessage("... julkaistaan myöhemmin"),
-    "snack_translation" : MessageLookupByLibrary.simpleMessage("Kiitos panoksestasi."),
+    "snack_translation" : MessageLookupByLibrary.simpleMessage("Kiitos panoksestasi. Se julkaistaan pian."),
     "south_central_pacific" : MessageLookupByLibrary.simpleMessage("Etelä Keski-Tyynenmeren"),
     "south_central_usa" : MessageLookupByLibrary.simpleMessage("Etelä-Keski-USA"),
     "south_tropical_africa" : MessageLookupByLibrary.simpleMessage("Etelä-trooppinen Afrikka"),
