@@ -394,14 +394,10 @@ List<Widget> getActions(
           infoDialog(mainContext, S.of(mainContext).no_connection_title, S.of(mainContext).no_connection_content);
         } else {
           if (Purchases.isPhotoSearch()) {
-            if (currentUser != null) {
-              Navigator.push(
-                mainContext,
-                MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage)),
-              );
-            } else {
-              photoSearchDialog(mainContext, key);
-            }
+            Navigator.push(
+              mainContext,
+              MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage)),
+            );
           } else if (Purchases.isSearchByPhotoPromotion != null && Purchases.isSearchByPhotoPromotion) {
             infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
                     S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo)))
