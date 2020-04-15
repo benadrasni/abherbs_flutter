@@ -61,52 +61,18 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                       title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(children: [
-                            Text(
-                              S.of(context).plant_height_from,
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                            Flexible(child: Text(
+                              [S.of(context).plant_height_from, plant.heightFrom.toString(), S.of(context).plant_height_to, plant.heightTo.toString(), heightUnitOfMeasure].join(' '),
                               style: _defaultTextStyle,
-                            ),
-                            Text(' '),
-                            Text(
-                              plant.heightFrom.toString(),
-                              style: _defaultTextStyle,
-                            ),
-                            Text(' '),
-                            Text(
-                              S.of(context).plant_height_to,
-                              style: _defaultTextStyle,
-                            ),
-                            Text(' '),
-                            Text(
-                              plant.heightTo.toString(),
-                              style: _defaultTextStyle,
-                            ),
-                            Text(' '),
-                            Text(
-                              heightUnitOfMeasure,
-                              style: _defaultTextStyle,
-                            ),
+                            )),
                           ]),
                           Row(children: [
-                            Text(
-                              S.of(context).plant_flowering_from,
+                            Flexible(child: Text(
+                              [S.of(context).plant_flowering_from, DateFormat.MMMM(myLocale.languageCode).format(DateTime(0, plant.floweringFrom)), S.of(context).plant_flowering_to,
+                                DateFormat.MMMM(myLocale.languageCode).format(DateTime(0, plant.floweringTo))].join(' '),
                               style: _defaultTextStyle,
-                            ),
-                            Text(' '),
-                            Text(
-                              DateFormat.MMMM(myLocale.languageCode).format(DateTime(0, plant.floweringFrom)),
-                              style: _defaultTextStyle,
-                            ),
-                            Text(' '),
-                            Text(
-                              S.of(context).plant_flowering_to,
-                              style: _defaultTextStyle,
-                            ),
-                            Text(' '),
-                            Text(
-                              DateFormat.MMMM(myLocale.languageCode).format(DateTime(0, plant.floweringTo)),
-                              style: _defaultTextStyle,
-                            ),
+                            )),
                           ]),
                         ],
                       ),
