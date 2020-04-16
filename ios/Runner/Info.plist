@@ -40,9 +40,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Permission needed to access camera</string>
+	<string>Features "Search by photo" and "Observation" need permission to access camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Permission needed to access photo library</string>
+	<string>Features "Search by photo" and "Observation" need permission to access photo library</string>
 	<key>NSLocationAlwaysUsageDescription</key>
     <string>Permission needed to save current location to the observation</string>
     <key>NSLocationWhenInUseUsageDescription</key>
