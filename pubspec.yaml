@@ -7,7 +7,7 @@ description: Flutter version of abherbs
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 5.8.5+625
+version: 5.8.6+626
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -39,7 +39,7 @@ dependencies:
   datetime_picker_formfield: 1.0.0
   connectivity: 0.4.8+2
   photo_view: 0.9.2
-  admob_flutter: 0.3.4
+  admob_flutter: 1.0.0-beta.2
   screen: 0.0.5
   flutter_country_picker: 0.1.6
 
