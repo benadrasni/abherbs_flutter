@@ -198,6 +198,7 @@ class _AppState extends State<App> {
       _iapError();
     }
 
+
     final QueryPurchaseDetailsResponse purchaseResponse =
         await InAppPurchaseConnection.instance.queryPastPurchases();
     if (purchaseResponse.error != null) {
@@ -209,8 +210,13 @@ class _AppState extends State<App> {
       Purchases.purchases = [];
       for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
         if (await verifyPurchase(purchase)) {
-          if (Platform.isIOS && purchase.status == PurchaseStatus.purchased) {
-            InAppPurchaseConnection.instance.completePurchase(purchase);
+
+          final pending = Platform.isIOS
+              ? purchase.pendingCompletePurchase
+              : !purchase.billingClientPurchase.isAcknowledged;
+
+          if (pending) {
+            await InAppPurchaseConnection.instance.completePurchase(purchase);
           }
           Purchases.purchases.add(purchase);
         }
