@@ -36,6 +36,159 @@ class S {
     );
   }
 
+  String get legend_flower_1 {
+    return Intl.message(
+      'mature flower',
+      name: 'legend_flower_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_2 {
+    return Intl.message(
+      'stigma',
+      name: 'legend_flower_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_3 {
+    return Intl.message(
+      'style',
+      name: 'legend_flower_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_4 {
+    return Intl.message(
+      'filament',
+      name: 'legend_flower_4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_5 {
+    return Intl.message(
+      'floral axis',
+      name: 'legend_flower_5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_6 {
+    return Intl.message(
+      'joint',
+      name: 'legend_flower_6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_7 {
+    return Intl.message(
+      'pedicel',
+      name: 'legend_flower_7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_8 {
+    return Intl.message(
+      'nectary',
+      name: 'legend_flower_8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_9 {
+    return Intl.message(
+      'stamen',
+      name: 'legend_flower_9',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_10 {
+    return Intl.message(
+      'pistil',
+      name: 'legend_flower_10',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_11 {
+    return Intl.message(
+      'ovules',
+      name: 'legend_flower_11',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_12 {
+    return Intl.message(
+      'connective',
+      name: 'legend_flower_12',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_13 {
+    return Intl.message(
+      'microsporangium',
+      name: 'legend_flower_13',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_14 {
+    return Intl.message(
+      'anther',
+      name: 'legend_flower_14',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_15 {
+    return Intl.message(
+      'perianth',
+      name: 'legend_flower_15',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_16 {
+    return Intl.message(
+      'petal/corolla',
+      name: 'legend_flower_16',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get legend_flower_17 {
+    return Intl.message(
+      'sepal/calyx',
+      name: 'legend_flower_17',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get enhancements {
     return Intl.message(
       'Enhancements',

@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/detail/plant_detail_edit.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/legend/flower.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,6 +36,12 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
   TextStyle _defaultTextStyle = TextStyle(
     fontSize: _fontSize,
     color: Colors.black,
+  );
+
+  TextStyle _highlightTextStyle = TextStyle(
+    fontSize: _fontSize,
+    fontWeight: FontWeight.bold,
+    color: Colors.lightBlue,
   );
 
   return FutureBuilder<PlantTranslation>(
@@ -84,7 +91,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                               MaterialPageRoute(
                                 builder: (context) => PlantDetailEdit(plant.name, language, '', '', 'description', snapshot.data.description, _fontSize),
                               )).then((value) {
-                            if (value) {
+                            if (value != null && value) {
                               key.currentState.showSnackBar(SnackBar(
                                 content: Text(S.of(context).snack_translation),
                               ));
@@ -122,7 +129,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                               builder: (context) => PlantDetailEdit(
                                   plant.name, language, 'res/images/ic_inflorescence_grey_24dp.png', S.of(context).plant_inflorescence, "inflorescence", snapshot.data.inflorescence, _fontSize),
                             )).then((value) {
-                          if (value) {
+                          if (value != null && value) {
                             key.currentState.showSnackBar(SnackBar(
                               content: Text(S.of(context).snack_translation),
                             ));
@@ -143,7 +150,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                   ListTile(
                     title: Text(
                       S.of(context).plant_flower,
-                      style: _defaultTextStyle,
+                      style: _highlightTextStyle,
                     ),
                     leading: Image(
                       image: AssetImage('res/images/ic_flower_grey_24dp.png'),
@@ -158,7 +165,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                             MaterialPageRoute(
                               builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_flower_grey_24dp.png', S.of(context).plant_flower, "flower", snapshot.data.flower, _fontSize),
                             )).then((value) {
-                          if (value) {
+                          if (value != null && value) {
                             key.currentState.showSnackBar(SnackBar(
                               content: Text(S.of(context).snack_translation),
                             ));
@@ -166,6 +173,12 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                         });
                       },
                     ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FlowerLegendScreen()),
+                      );
+                    },
                   ),
                   _getRichText(snapshot.data.flower, _defaultTextStyle),
                 ]),
@@ -194,7 +207,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                             MaterialPageRoute(
                               builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_fruit_grey_24dp.png', S.of(context).plant_fruit, "fruit", snapshot.data.fruit, _fontSize),
                             )).then((value) {
-                          if (value) {
+                          if (value != null && value) {
                             key.currentState.showSnackBar(SnackBar(
                               content: Text(S.of(context).snack_translation),
                             ));
@@ -230,7 +243,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                             MaterialPageRoute(
                               builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_leaf_grey_24dp.png', S.of(context).plant_leaf, "leaf", snapshot.data.leaf, _fontSize),
                             )).then((value) {
-                          if (value) {
+                          if (value != null && value) {
                             key.currentState.showSnackBar(SnackBar(
                               content: Text(S.of(context).snack_translation),
                             ));
@@ -266,7 +279,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                             MaterialPageRoute(
                               builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_stem_grey_24dp.png', S.of(context).plant_stem, "stem", snapshot.data.stem, _fontSize),
                             )).then((value) {
-                          if (value) {
+                          if (value != null && value) {
                             key.currentState.showSnackBar(SnackBar(
                               content: Text(S.of(context).snack_translation),
                             ));
@@ -302,7 +315,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                             MaterialPageRoute(
                               builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_home_grey_24dp.png', S.of(context).plant_habitat, "habitat", snapshot.data.habitat, _fontSize),
                             )).then((value) {
-                          if (value) {
+                          if (value != null && value) {
                             key.currentState.showSnackBar(SnackBar(
                               content: Text(S.of(context).snack_translation),
                             ));
@@ -341,7 +354,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                                 builder: (context) =>
                                     PlantDetailEdit(plant.name, language, 'res/images/ic_toxicity_grey_24dp.png', S.of(context).plant_toxicity, "toxicity", snapshot.data.toxicity, _fontSize),
                               )).then((value) {
-                            if (value) {
+                            if (value != null && value) {
                               key.currentState.showSnackBar(SnackBar(
                                 content: Text(S.of(context).snack_translation),
                               ));
@@ -380,7 +393,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                                 builder: (context) =>
                                     PlantDetailEdit(plant.name, language, 'res/images/ic_local_pharmacy_grey_24dp.png', S.of(context).plant_herbalism, "herbalism", snapshot.data.herbalism, _fontSize),
                               )).then((value) {
-                            if (value) {
+                            if (value != null && value) {
                               key.currentState.showSnackBar(SnackBar(
                                 content: Text(S.of(context).snack_translation),
                               ));
@@ -419,7 +432,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                                 builder: (context) =>
                                     PlantDetailEdit(plant.name, language, 'res/images/ic_question_mark_grey_24dp.png', S.of(context).plant_trivia, "trivia", snapshot.data.trivia, _fontSize),
                               )).then((value) {
-                            if (value) {
+                            if (value != null && value) {
                               key.currentState.showSnackBar(SnackBar(
                                 content: Text(S.of(context).snack_translation),
                               ));

@@ -1,12 +1,22 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
+import 'flower.dart';
+
 class LegendScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     TextStyle legendTextStyle = TextStyle(
       fontSize: 18.0,
     );
+
+    TextStyle _highlightLegendTextStyle = TextStyle(
+      fontSize: 18.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.lightBlue,
+    );
+
 
     return Scaffold(
       appBar: AppBar(
@@ -52,14 +62,19 @@ class LegendScreen extends StatelessWidget {
         ListTile(
           title: Text(
             S.of(context).plant_flower,
-            style: legendTextStyle,
+            style: _highlightLegendTextStyle,
           ),
           leading: Container( padding: EdgeInsets.all(13.0), child: Image(
             image: AssetImage('res/images/ic_flower_grey_24dp.png'),
             width: 24.0,
             height: 24.0,
           ),),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FlowerLegendScreen()),
+            );
+          },
         ),
         ListTile(
           title: Text(
