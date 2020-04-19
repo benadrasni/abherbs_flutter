@@ -654,14 +654,16 @@ FlatButton getSourceButton(String url) {
 
 RichText _getRichText(String text, TextStyle textStyle) {
   var sections = <TextSpan>[];
-  for (String part in text.split('<b>')) {
-    if (part.isNotEmpty) {
-      var subParts = part.split('</b>');
-      if (subParts.length == 1) {
-        sections.add(TextSpan(text: subParts[0]));
-      } else {
-        sections.add(TextSpan(text: subParts[0], style: new TextStyle(fontWeight: FontWeight.bold)));
-        sections.add(TextSpan(text: subParts[1]));
+  if (text != null) {
+    for (String part in text.split('<b>')) {
+      if (part.isNotEmpty) {
+        var subParts = part.split('</b>');
+        if (subParts.length == 1) {
+          sections.add(TextSpan(text: subParts[0]));
+        } else {
+          sections.add(TextSpan(text: subParts[0], style: new TextStyle(fontWeight: FontWeight.bold)));
+          sections.add(TextSpan(text: subParts[1]));
+        }
       }
     }
   }
