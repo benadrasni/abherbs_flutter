@@ -83,9 +83,11 @@ class _AppState extends State<App> {
   _listenToPurchaseUpdated(List<PurchaseDetails> purchases) {
     var isPurchase = false;
     for (PurchaseDetails purchase in purchases) {
-      if (purchase.error == null &&
-          purchase.status == PurchaseStatus.purchased) {
-        if (Platform.isIOS) {
+      if (purchase.status == PurchaseStatus.purchased) {
+        final pending = Platform.isIOS
+            ? purchase.pendingCompletePurchase
+            : !purchase.billingClientPurchase.isAcknowledged;
+        if (pending) {
           InAppPurchaseConnection.instance.completePurchase(purchase);
         }
         Purchases.purchases.add(purchase);
@@ -197,7 +199,6 @@ class _AppState extends State<App> {
     if (!isAvailable) {
       _iapError();
     }
-
 
     final QueryPurchaseDetailsResponse purchaseResponse =
         await InAppPurchaseConnection.instance.queryPastPurchases();
