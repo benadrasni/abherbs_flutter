@@ -88,7 +88,7 @@ class _PlantListState extends State<PlantList> {
     widget.pathToIndex.keepSynced(true);
     _count = widget.pathToIndex.once().then((DataSnapshot snapshot) {
       var result = snapshot.value;
-      int length = result is List ? result.length : result.values.length;
+      int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : result.values.length;
       return length;
     });
   }
