@@ -31,5 +31,6 @@ const languages = {
   "sr_RS": "Српски",
   "sv_SE": "Svenska",
   "fi_FI": "Suomi",
-  "uk_UA": "Українська"
+  "uk_UA": "Українська",
+  "zh_TW": "中文"
 };

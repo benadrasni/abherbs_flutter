@@ -291,9 +291,10 @@ class _AppState extends State<App> {
             (locale.languageCode == 'pt' && locale.countryCode == 'PT') ||
             (locale.languageCode == 'it' && locale.countryCode == 'IT') ||
             (locale.languageCode == 'ru' && locale.countryCode == 'RU') ||
-            (locale.languageCode == 'sr' && locale.countryCode == 'RS')) {
+            (locale.languageCode == 'sr' && locale.countryCode == 'RS') ||
+            (locale.languageCode == 'zh' && locale.countryCode == 'TW')) {
           defaultLocale[locale.languageCode] = locale;
-        } else if (!['en', 'ar', 'de', 'es', 'fr', 'pt', 'it', 'ru', 'sr']
+        } else if (!['en', 'ar', 'de', 'es', 'fr', 'pt', 'it', 'ru', 'sr', 'zh']
             .contains(locale.languageCode)) {
           defaultLocale[locale.languageCode] = locale;
         }

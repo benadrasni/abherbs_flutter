@@ -32,7 +32,8 @@ var supportedLanguages = {
   "sr": "Српски",
   "sv": "Svenska",
   "fi": "Suomi",
-  "uk": "Українська"
+  "uk": "Українська",
+  "zh": "中文"
 };
 
 Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, String searchText,
