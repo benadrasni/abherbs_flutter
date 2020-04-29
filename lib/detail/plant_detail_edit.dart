@@ -25,7 +25,7 @@ class _PlantDetailEditState extends State<PlantDetailEdit> {
   TextEditingController _translationController = TextEditingController();
 
   Future<bool> _savePlantDetail(BuildContext context) async {
-    if (_translationController.text.isNotEmpty && _translationController.text != widget.text) {
+    if (_translationController.text.isNotEmpty && _translationController.text.compareTo(widget.text) != 0) {
       await translationsNewReference.child(widget.language).child(widget.plantName).child(widget.section).set(_translationController.text);
     }
 
