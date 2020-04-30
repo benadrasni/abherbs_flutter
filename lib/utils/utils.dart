@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:abherbs_flutter/custom_list.dart';
 import 'package:abherbs_flutter/detail/plant_detail.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
@@ -97,6 +98,7 @@ const String firebaseLists = 'lists_4_v2';
 const String firebasePlants = 'plants_v2';
 const String firebaseSearch = 'search_v3';
 const String firebaseAPGIV = 'APG IV_v3';
+const String firebaseListsCustom = 'lists_custom';
 const String firebasePlantHeaders = 'plants_headers';
 const String firebaseTranslations = 'translations';
 const String firebaseTranslationsNew = 'translations_new';
@@ -155,6 +157,7 @@ const String notificationAttributeData = "data";
 final DatabaseReference rootReference = FirebaseDatabase.instance.reference();
 final DatabaseReference countsReference = rootReference.child(firebaseCounts);
 final DatabaseReference listsReference = rootReference.child(firebasePlantHeaders);
+final DatabaseReference listsCustomReference = rootReference.child(firebaseListsCustom);
 final DatabaseReference keysReference = rootReference.child(firebaseLists);
 final DatabaseReference translationsReference = rootReference.child(firebaseTranslations);
 final DatabaseReference translationsNewReference = rootReference.child(firebaseTranslationsNew);
@@ -521,45 +524,15 @@ List<Widget> getActions(
   ));
 
   // favorites
-  _actions.add(FutureBuilder<int>(future: Future<int>(() {
-    if (currentUser != null) {
-      return usersReference.child(currentUser.uid).child(firebaseAttributeFavorite).once().then((snapshot) {
-        if (snapshot.value != null) {
-          if (snapshot.value is List) {
-            int i = 0;
-            snapshot.value.forEach((value) {
-              if (value != null) {
-                i++;
-              }
-            });
-            return i;
-          } else {
-            return snapshot.value.length;
-          }
-        }
-        return 0;
-      });
-    }
-    return 0;
-  }), builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-    return IconButton(
-      icon: Icon(Icons.favorite),
-      onPressed: () {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (currentUser != null) {
-            String path = '/' + firebaseUsers + '/' + currentUser.uid + '/' + firebaseAttributeFavorite;
-            Navigator.push(
-              mainContext,
-              MaterialPageRoute(
-                  builder: (context) => PlantList(onChangeLanguage, {}, S.of(mainContext).favorite_empty, rootReference.child(path))),
-            );
-          } else {
-            favoriteDialog(mainContext, key);
-          }
-        }
-      },
-    );
-  }));
+  _actions.add(IconButton(
+    icon: Icon(Icons.list),
+    onPressed: () {
+      Navigator.push(
+        mainContext,
+        MaterialPageRoute(builder: (context) => CustomListScreen(Localizations.localeOf(context), onChangeLanguage)),
+      );
+    },
+  ));
 
   return _actions;
 }

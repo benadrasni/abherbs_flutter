@@ -2601,6 +2601,33 @@ class S {
     );
   }
 
+  String get custom_lists {
+    return Intl.message(
+      'Custom lists',
+      name: 'custom_lists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get new_flowers {
+    return Intl.message(
+      'New flowers',
+      name: 'new_flowers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get common_lists {
+    return Intl.message(
+      'Common lists',
+      name: 'common_lists',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get favorite_title {
     return Intl.message(
       'Favorite flowers',
