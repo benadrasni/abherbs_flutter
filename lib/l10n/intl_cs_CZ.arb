@@ -314,6 +314,11 @@
   "photo_search_note": "Toto je funkce, která funguje pouze online. Někdy najde přesně to, co hledáte, někdy ani zdaleka. Úplně se v tom spoléhám na třetí stranu, protože jde o jejich software. Časem by to mělo být lepší a lepší. Používejte ji uvážlivě a prosím nehodnoťte celou aplikaci na základě této funkce. Za účelem zvyšování kvality budou všechny výsledky vyhledávání (ne fotografie) uložené.",
   "photo_search_empty": "UI (umělá inteligence) na obrázku nerozeznala žádnou konkrétní květinu. Zkuste znovu s jiným úhlem, vzdáleností nebo světelnými podmínkami. Pokud jste to již udělali, vypadá to tak, že nový UI vládce nepřijde tak brzy.",
 
+  "custom_lists": "Seznamy květin",
+  "new_flowers": "Nové květy",
+  "common_lists": "Společné seznamy",
+  "my_lists": "Moje seznamy",
+
   "favorite_title": "Oblíbené květy",
   "favorite_empty": "Zatím nejsou žádné oblíbené květy.",
   "favorite_no_login": "Seznam oblíbených květin je dostupný pouze pro přihlášené uživatele. Přihlašte se, prosím."

@@ -315,6 +315,11 @@
   "photo_search_note": "Šī funkcija darbojas tikai tiešsaistē. Dažreiz tas atrod tieši to, ko meklējat, dažreiz pat ne tuvu. Es šeit pilnīgi paļaujos uz trešajām personām, jo viņi visu smago darbu dara visu. Laikam ejot, tam vajadzētu būt arvien labākam. Izmantojiet to saprātīgi un, lūdzu, netiesājiet visu lietojumprogrammu, pamatojoties uz šo funkciju. Kvalitātes nolūkā visi meklēšanas rezultāti (nevis fotoattēli) tiks saglabāti.",
   "photo_search_empty": "MI (mākslīgais intelekts) neatpazina kādu konkrētu ziedu attēlā. Mēģiniet vēlreiz ar dažādiem leņķa, attāluma vai gaismas apstākļiem. Ja jūs jau to darāt, izskatās, ka MI virsnieks drīzumā nenāks.",
 
+  "custom_lists": "Ziedu saraksti",
+  "new_flowers": "Jauni ziedi",
+  "common_lists": "Kopējie saraksti",
+  "my_lists": "Mani saraksti",
+
   "favorite_title": "Mīļākie ziedi",
   "favorite_empty": "Vēl nav neviena mīļākā zieda.",
   "favorite_no_login": "Mīļāko ziedu saraksts ir pieejams tikai reģistrētiem lietotājiem. Lūdzu, piesakieties."

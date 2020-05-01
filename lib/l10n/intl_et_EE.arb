@@ -315,6 +315,11 @@
   "photo_search_note": "See funktsioon töötab ainult veebis. Mõnikord leiab see just seda, mida otsite, mõnikord isegi mitte lähedalt. Ma toetun siin täielikult kolmandatele osapooltele, kuna nad teevad kogu raske töö. Mida aeg edasi, seda parem peaks olema. Kasutage seda arukalt ja ärge otsustage selle funktsiooni põhjal kogu rakendust. Kvaliteedi tagamiseks salvestatakse kõik otsingutulemid (mitte fotod).",
   "photo_search_empty": "AI (tehisintellekt) ei tuvastanud pildil ühtegi konkreetset lille. Proovige uuesti erinevate nurkade, kauguste või valgustingimustega. Kui sa juba tegid, siis näib, et AI ülempreester ei jõua peagi.",
 
+  "custom_lists": "Lillede nimekirjad",
+  "new_flowers": "Uued lilled",
+  "common_lists": "Ühised nimekirjad",
+  "my_lists": "Minu nimekirjad",
+
   "favorite_title": "Lemmik lilled",
   "favorite_empty": "Veel ei ole lemmik lilli.",
   "favorite_no_login": "Lemmiklillede nimekiri on saadaval ainult logitud kasutajatele. Palun logige sisse."

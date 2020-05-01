@@ -315,6 +315,11 @@
   "photo_search_note": "Ta funkcija deluje samo na spletu. Včasih najde točno tisto, kar iščeš, včasih niti blizu. Tu se popolnoma zanašam na tretje osebe, saj se zelo trudijo. S časom mora biti vedno boljše. Uporabljajte ga pametno in prosim ne sodite o celotni aplikaciji na podlagi te funkcije. V kakovostne namene bodo shranjeni vsi rezultati iskanja (ne fotografije).",
   "photo_search_empty": "UI (umetna inteligenca) na sliki ni prepoznal nobene določene rože. Poskusite znova z različnimi koti, razdaljo ali svetlobnimi pogoji. Če si že naredil, izgleda, da UI nadrejeni ne bo kmalu prišel.",
 
+  "custom_lists": "Seznami cvetov",
+  "new_flowers": "Novo cvetje",
+  "common_lists": "Skupni seznami",
+  "my_lists": "Moji seznami",
+
   "favorite_title": "Najljubše cvetja",
   "favorite_empty": "Še ni najljubšega cvetja.",
   "favorite_no_login": "Seznam priljubljenih cvetov je na voljo samo za prijavljene uporabnike. Prijavite se."

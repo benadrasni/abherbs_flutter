@@ -315,6 +315,11 @@
   "photo_search_note": "Diese Funktion funktioniert nur online. Manchmal findet es genau das, wonach Sie suchen, manchmal nicht einmal in der Nähe. Ich verlasse mich hier total auf Dritte, da sie die ganze harte Arbeit machen. Mit der Zeit sollte es immer besser werden. Verwenden Sie es mit Bedacht und beurteilen Sie nicht die gesamte Anwendung anhand dieser Funktion. Aus Qualitätsgründen werden alle Suchergebnisse (keine Fotos) gespeichert.",
   "photo_search_empty": "KI (Künstliche Intelligenz) hat keine bestimmte Blume auf dem Bild erkannt. Versuchen Sie es erneut mit anderen Winkeln, Entfernungen oder Lichtverhältnissen. Wenn du es schon getan hast, sieht es so aus, als ob der KI Overlord nicht bald kommen würde.",
 
+  "custom_lists": "Listen von Blumen",
+  "new_flowers": "Neue Blumen",
+  "common_lists": "Gemeinsame Listen",
+  "my_lists": "Meine Listen",
+
   "favorite_title": "Lieblingsblumen",
   "favorite_empty": "Es gibt noch keine Lieblingsblumen.",
   "favorite_no_login": "Die Liste der Lieblingsblumen ist nur für angemeldete Benutzer verfügbar. Bitte loggen Sie sich ein."

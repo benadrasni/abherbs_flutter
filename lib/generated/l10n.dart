@@ -2603,7 +2603,7 @@ class S {
 
   String get custom_lists {
     return Intl.message(
-      'Custom lists',
+      'Lists of flowers',
       name: 'custom_lists',
       desc: '',
       args: [],
@@ -2623,6 +2623,15 @@ class S {
     return Intl.message(
       'Common lists',
       name: 'common_lists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get my_lists {
+    return Intl.message(
+      'My lists',
+      name: 'my_lists',
       desc: '',
       args: [],
     );

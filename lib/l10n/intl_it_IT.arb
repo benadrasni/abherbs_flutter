@@ -315,6 +315,11 @@
   "photo_search_note": "Questa è una funzionalità che funziona solo online. A volte trova esattamente quello che stai cercando, a volte nemmeno si avvicina. Al momento, l'applicazione dipende da terzo, che gestisce la maggior parte dell'attività. Col passare del tempo, la funzionalità migliorare, ma ricorda che non è nata per il riconoscimento dei fiori. Usala saggiamente e per favore non basare il giudizio dell'applicazione su questo funzione. Per motivi di qualità, tutti i risultati della ricerca (foto escluse) verranno salvati.",
   "photo_search_empty": "IA (intelligenza artificiale) non ha riconosciuto nessun fiore null'immagine. Riprova da diverse angolazioni, distanze o condizioni di luce. Se l'hai già fatto, forse Mr. AI non è ancora pronto.",
 
+  "custom_lists": "Elenchi di fiori",
+  "new_flowers": "Nuovi fiori",
+  "common_lists": "Elenchi comuni",
+  "my_lists": "Le mie liste",
+
   "favorite_title": "Fiori preferiti",
   "favorite_empty": "Non ci sono ancora fiori preferiti.",
   "favorite_no_login": "L'elenco dei fiori preferiti è disponibile solo per gli utenti registrati. Accedi, per favore."
