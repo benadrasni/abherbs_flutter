@@ -313,6 +313,11 @@
   "photo_search_note": "Dette er funktion, der kun fungerer online. Nogle gange finder den nøjagtigt det, du leder efter, nogle gange ikke engang i nærheden. Jeg stoler helt på tredjepart her, da de gør alt det hårde arbejde. Efterhånden som det går skal det være bedre og bedre. Brug det med omhu og bedøm venligst ikke hele applikationen baseret på denne funktion. Af kvalitetsmæssige grunde gemmes alle søgeresultater (ikke fotos).",
   "photo_search_empty": "KI (kunstig intelligens) genkendte ikke nogen bestemt blomst på billedet. Prøv igen med forskellige vinkel-, afstands- eller lysforhold. Hvis du allerede gjorde det ser ud som KI overlord ikke kommer når som helst snart.",
 
+  "custom_lists": "Lister med blomster",
+  "new_flowers": "Nye blomster",
+  "common_lists": "Fælles lister",
+  "my_lists": "Mine lister",
+
   "favorite_title": "Favorit blomster",
   "favorite_empty": "Der er endnu ingen favorit blomster.",
   "favorite_no_login": "Liste over foretrukne blomster er kun tilgængelig for logget brugere. Vær venlig at logge ind."

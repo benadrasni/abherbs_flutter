@@ -315,6 +315,11 @@
   "photo_search_note": "Ez a szolgáltatás csak online működik. Néha pontosan megtalálja azt, amit keres, néha még nem is. Teljesen támaszkodom a harmadik felekre, mivel ők minden kemény munkát végeznek. Az idő múlásával jobbnak és jobbnak kell lennie. Okosan használja, és kérjük, ne ítélje meg a teljes alkalmazást e funkció alapján. Minőségi okokból az összes keresési eredmény (nem fotó) mentésre kerül.",
   "photo_search_empty": "A MI (mesterséges intelligencia) nem ismerte fel a képen látható virágot. Próbálkozzon újra különböző szög, távolság vagy fényviszonyokkal. Ha már próbálta, úgy tűnik, hogy az MI overlord hamarosan nem jön.",
 
+  "custom_lists": "Virágok listája",
+  "new_flowers": "Új virágok",
+  "common_lists": "Közös listák",
+  "my_lists": "Saját listáim",
+
   "favorite_title": "Kedvenc virágok",
   "favorite_empty": "Még nincs kedvenc virág.",
   "favorite_no_login": "A kedvenc virágok listája csak a naplózott felhasználók számára érhető el. Kérjük jelentkezzen be."
