@@ -59,6 +59,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
   @override
   void initState() {
     super.initState();
+    _firebaseAnalytics = FirebaseAnalytics();
     _checkCurrentUser();
     _key = new GlobalKey<ScaffoldState>();
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString());
