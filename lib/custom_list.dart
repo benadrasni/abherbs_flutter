@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -34,10 +35,15 @@ class CustomListScreen extends StatefulWidget {
 }
 
 class _CustomListScreenState extends State<CustomListScreen> {
+  FirebaseAnalytics _firebaseAnalytics;
   GlobalKey<ScaffoldState> _key;
   StreamSubscription<FirebaseUser> _listener;
   FirebaseUser _currentUser;
   DateFormat _dateFormat;
+
+  Future<void> _logCustomListOpenEvent(event) async {
+    await _firebaseAnalytics.logEvent(name: 'custom_list_open', parameters: {"type" : event});
+  }
 
   _onAuthStateChanged(FirebaseUser user) {
     setState(() {
@@ -117,6 +123,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
         ),
         onTap: () {
           if (_currentUser != null) {
+            _logCustomListOpenEvent("favorite");
             String path = '/' + firebaseUsers + '/' + _currentUser.uid + '/' + firebaseAttributeFavorite;
             Navigator.push(
               context,
@@ -188,6 +195,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
                                         height: 50.0),
                                     trailing: Text(count),
                                     onTap: () {
+                                      _logCustomListOpenEvent(widget.myLocale.languageCode + ": " + snapshot.key);
                                       String path = '/' + firebaseListsCustom + '/by language/' + widget.myLocale.languageCode + '/' + snapshot.key + '/' + firebaseAttributeList;
                                       Navigator.push(
                                         context,
@@ -255,6 +263,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
                           return Text(count);
                         }),
                     onTap: () {
+                      _logCustomListOpenEvent("new: " + snapshot.key);
                       String path = '/' + firebaseListsCustom + '/new/' + snapshot.key + '/' + firebaseAttributeList;
                       Navigator.push(
                         context,
