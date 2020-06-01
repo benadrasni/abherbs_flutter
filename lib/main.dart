@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
@@ -51,6 +52,7 @@ void main() {
 }
 
 class App extends StatefulWidget {
+  static BuildContext currentContext;
   @override
   _AppState createState() => _AppState();
 }
@@ -83,15 +85,29 @@ class _AppState extends State<App> {
   _listenToPurchaseUpdated(List<PurchaseDetails> purchases) {
     var isPurchase = false;
     for (PurchaseDetails purchase in purchases) {
-      if (purchase.status == PurchaseStatus.purchased) {
-        final pending = Platform.isIOS
-            ? purchase.pendingCompletePurchase
-            : !purchase.billingClientPurchase.isAcknowledged;
-        if (pending) {
-          InAppPurchaseConnection.instance.completePurchase(purchase);
+      switch (purchase.status) {
+        case PurchaseStatus.purchased: {
+          final pending = Platform.isIOS
+              ? purchase.pendingCompletePurchase
+              : !purchase.billingClientPurchase.isAcknowledged;
+          if (pending) {
+            InAppPurchaseConnection.instance.completePurchase(purchase);
+          }
+          Purchases.purchases.add(purchase);
+          isPurchase = true;
         }
-        Purchases.purchases.add(purchase);
-        isPurchase = true;
+        break;
+
+        case PurchaseStatus.error: {
+          if (Platform.isIOS) {
+            InAppPurchaseConnection.instance.completePurchase(purchase);
+          }
+        }
+        break;
+
+        default: {
+
+        }
       }
     }
     if (isPurchase) {
@@ -111,7 +127,41 @@ class _AppState extends State<App> {
 
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        print(message);
+        String notificationText = Platform.isIOS ? message['title'] : message[notificationAttributeNotification][notificationAttributeBody];
+        Map<String, dynamic> notificationData = Map.from(
+            Platform.isIOS ? message : message[notificationAttributeData]);
+        String action = notificationData[notificationAttributeAction];
+        if (action != null && action == notificationAttributeActionList && App.currentContext != null) {
+          String path = notificationData[notificationAttributePath];
+          rootReference.child(path).keepSynced(true);
+          return showDialog(
+            context: App.currentContext,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(S.of(context).notification),
+                content: Text(notificationText),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(S.of(context).notification_open, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path)),
+                          settings: RouteSettings(name: 'PlantList')));
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(S.of(context).notification_close, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        }
       },
       onResume: (Map<String, dynamic> message) async {
         setState(() {
@@ -210,8 +260,9 @@ class _AppState extends State<App> {
     } else {
       Purchases.purchases = [];
       for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
-        if (await verifyPurchase(purchase)) {
-
+        if (Platform.isIOS && purchase.status == PurchaseStatus.error) {
+          await InAppPurchaseConnection.instance.completePurchase(purchase);
+        } else if (await verifyPurchase(purchase)) {
           final pending = Platform.isIOS
               ? purchase.pendingCompletePurchase
               : !purchase.billingClientPurchase.isAcknowledged;

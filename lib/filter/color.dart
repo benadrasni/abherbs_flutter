@@ -18,6 +18,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:package_info/package_info.dart';
 
 import '../ads.dart';
+import '../main.dart';
 
 class Color extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -116,6 +117,7 @@ class _ColorState extends State<Color> {
 
   @override
   Widget build(BuildContext context) {
+    App.currentContext = context;
     var mainContext = context;
     var _widgets = <Widget>[];
     _widgets.add(Container(
@@ -374,7 +376,8 @@ class _ColorState extends State<Color> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(widget.filter)))),
+                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(widget.filter))),
+                                settings: RouteSettings(name: 'PlantList')),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

@@ -8,6 +8,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import '../main.dart';
+
 class ObservationsPlant extends StatefulWidget {
   final FirebaseUser currentUser;
   final Locale myLocale;
@@ -50,6 +52,7 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
 
   @override
   Widget build(BuildContext context) {
+    App.currentContext = context;
     var myLocale = Localizations.localeOf(context);
 
     _key = widget.isPublic ? _publicKey : _privateKey;

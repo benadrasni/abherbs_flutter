@@ -11,7 +11,7 @@ class SettingMyRegion extends StatefulWidget {
 
 class _SettingMyRegionState extends State<SettingMyRegion> {
   void _openRegion(String region) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingMyRegion2(int.parse(region))));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingMyRegion2(int.parse(region)), settings: RouteSettings(name: 'SettingMyRegion')));
   }
 
   void _setMyRegion(String myRegion) {

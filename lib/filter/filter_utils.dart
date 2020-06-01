@@ -325,19 +325,19 @@ MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, void Function(St
 
   switch (filterAttribute) {
     case filterColor:
-      route = MaterialPageRoute(builder: (context) => Color(onChangeLanguage, filter, redirect));
+      route = MaterialPageRoute(builder: (context) => Color(onChangeLanguage, filter, redirect), settings: RouteSettings(name: 'Color'));
       break;
     case filterHabitat:
-      route = MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, filter, redirect));
+      route = MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, filter, redirect), settings: RouteSettings(name: 'Habitat'));
       break;
     case filterPetal:
-      route = MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, filter, redirect));
+      route = MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, filter, redirect), settings: RouteSettings(name: 'Petal'));
       break;
     case filterDistribution:
-      route = MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, filter, redirect));
+      route = MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, filter, redirect), settings: RouteSettings(name: 'Distribution'));
       break;
     default:
-      route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, filter, '', keysReference.child(getFilterKey(filter))));
+      route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, filter, '', keysReference.child(getFilterKey(filter))), settings: RouteSettings(name: 'PlantList'));
   }
   if (filterAttribute != null) {
     if (filterRoutes[filterAttribute] != null && filterRoutes[filterAttribute].isActive && context != null) {

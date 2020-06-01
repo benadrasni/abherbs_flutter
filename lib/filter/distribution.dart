@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../ads.dart';
+import '../main.dart';
 
 class Distribution extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -46,7 +47,7 @@ class _DistributionState extends State<Distribution> {
 
   void _openRegion(String region) {
     var route = MaterialPageRoute(
-        builder: (context) => Distribution2(widget.onChangeLanguage, widget.filter, int.parse(region)));
+        builder: (context) => Distribution2(widget.onChangeLanguage, widget.filter, int.parse(region)), settings: RouteSettings(name: 'Distribution2'));
     filterRoutes[filterDistribution2] = route;
     Navigator.push(context, route).then((value) {
       filterRoutes[filterDistribution2] = null;
@@ -143,7 +144,7 @@ class _DistributionState extends State<Distribution> {
           } else {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter)),
+              MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Settings')),
             ).then((result) {
               _setMyRegion();
             });
@@ -247,6 +248,7 @@ class _DistributionState extends State<Distribution> {
 
   @override
   Widget build(BuildContext context) {
+    App.currentContext = context;
     var mainContext = context;
     return Scaffold(
       key: _key,
@@ -304,7 +306,8 @@ class _DistributionState extends State<Distribution> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(widget.filter)))),
+                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(widget.filter))),
+                                settings: RouteSettings(name: 'PlantList')),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

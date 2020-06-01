@@ -12,6 +12,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import '../ads.dart';
+import '../main.dart';
 
 class Distribution2 extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -188,6 +189,7 @@ class _Distribution2State extends State<Distribution2> {
 
   @override
   Widget build(BuildContext context) {
+    App.currentContext = context;
     var mainContext = context;
     return Scaffold(
       key: _key,
@@ -246,7 +248,8 @@ class _Distribution2State extends State<Distribution2> {
                           Navigator.pushReplacement(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, widget.filter, '', keysReference.child(getFilterKey(widget.filter)))),
+                                builder: (context) => PlantList(widget.onChangeLanguage, widget.filter, '', keysReference.child(getFilterKey(widget.filter))),
+                                settings: RouteSettings(name: 'PlantList')),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

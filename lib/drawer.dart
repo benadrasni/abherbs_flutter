@@ -72,7 +72,7 @@ class _AppDrawerState extends State<AppDrawer> {
               if (widget.currentUser == null) {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SignInScreen()),
+                  MaterialPageRoute(builder: (context) => SignInScreen(), settings: RouteSettings(name: 'SignIn')),
                 ).then((result) {
                   if (mounted) {
                     Navigator.pop(context);
@@ -115,7 +115,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.onChangeLanguage, widget.filter)),
+          MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Enhancements')),
         ).then((result) {
           if (mounted) {
             Navigator.pop(context);
@@ -132,7 +132,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter)),
+          MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Settings')),
         ).then((result) {
           if (mounted) {
             Navigator.pop(context);
@@ -152,7 +152,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => LegendScreen()),
+          MaterialPageRoute(builder: (context) => LegendScreen(), settings: RouteSettings(name: 'Legend')),
         ).then((result) {
           if (mounted) {
             Navigator.pop(context);
@@ -168,7 +168,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => FeedbackScreen(widget.onChangeLanguage, widget.filter)),
+          MaterialPageRoute(builder: (context) => FeedbackScreen(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Feedback')),
         ).then((result) {
           if (mounted) {
             Navigator.pop(context);

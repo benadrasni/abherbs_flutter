@@ -315,6 +315,10 @@
   "photo_search_note": "This is feature works only online. Sometimes it finds exactly what you're looking for, sometimes not even close. I'm totally relying on third party here since they're doing all the hard work. As time goes it should be better and better. Use it wisely and please don't judge the whole application based on this feature. For quality purposes all search results (not photos) will be saved.",
   "photo_search_empty": "AI (artificial intelligence) didn't recognize any particular flower on the picture. Try again with different angle, distance or light conditions. If you already did it looks like AI overlord won't come anytime soon.",
 
+  "notification": "Notification",
+  "notification_open": "Open",
+  "notification_close": "Close",
+
   "custom_lists": "Lists of flowers",
   "new_flowers": "New flowers",
   "common_lists": "Common lists",

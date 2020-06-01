@@ -15,6 +15,8 @@ import 'package:flutter_crashlytics/flutter_crashlytics.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
+import '../main.dart';
+
 class SearchResult {
   double confidence;
   int count;
@@ -141,7 +143,8 @@ class _SearchPhotoState extends State<SearchPhoto> {
         if (widget.currentUser != null) {
           userId = widget.currentUser.uid;
         }
-        rootReference.child(firebaseUsersPhotoSearch).child(userId).child(DateTime.now().millisecondsSinceEpoch.toString()).set(results.map((searchResult) {
+        rootReference.child(firebaseUsersPhotoSearch).child(widget.myLocale.languageCode).child(userId).child(DateTime.now().millisecondsSinceEpoch.toString())
+            .set(results.map((searchResult) {
               Map<String, dynamic> labelMap = {};
               labelMap['entityId'] = searchResult.entityId;
               labelMap['language'] = widget.myLocale.languageCode;
@@ -274,6 +277,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
 
   @override
   Widget build(BuildContext context) {
+    App.currentContext = context;
     var self = this;
     double maxSize = MediaQuery.of(context).size.width;
 
@@ -361,7 +365,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                           if (result.path.contains('/')) {
                                             Navigator.push(
                                               context,
-                                              MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, '', rootReference.child(result.path))),
+                                              MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, '', rootReference.child(result.path)), settings: RouteSettings(name: 'PlantList')),
                                             );
                                           } else {
                                             goToDetail(self, context, widget.myLocale, result.path, widget.onChangeLanguage, {});
