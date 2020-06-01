@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
+import '../main.dart';
+
 class ObservationPlantView extends StatefulWidget {
   final FirebaseUser currentUser;
   final Locale myLocale;
@@ -36,6 +38,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
 
   @override
   Widget build(BuildContext context) {
+    App.currentContext = context;
     double mapWidth = MediaQuery.of(context).size.width;
     double mapHeight = 100.0;
 
@@ -63,7 +66,8 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
         if (widget.observation.id.startsWith(widget.currentUser.uid)) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.observation)),
+            MaterialPageRoute(builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.observation),
+                settings: RouteSettings(name: 'ObservationEdit')),
           ).then((value) {
             if (value != null && value && widget.parentKey.currentState != null) {
               widget.parentKey.currentState.showSnackBar(SnackBar(
@@ -91,7 +95,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ObservationMap(myLocale, widget.observation, mapModeView)),
+            MaterialPageRoute(builder: (context) => ObservationMap(myLocale, widget.observation, mapModeView), settings: RouteSettings(name: 'ObservationMap')),
           );
         },
       ),
@@ -125,7 +129,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
                 var newUrl = widget.observation.photoPaths[position].toString().replaceAll(defaultExtension, defaultPhotoExtension);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FullScreenPage(newUrl)),
+                  MaterialPageRoute(builder: (context) => FullScreenPage(newUrl), settings: RouteSettings(name: 'FullScreen')),
                 );
               },
             );

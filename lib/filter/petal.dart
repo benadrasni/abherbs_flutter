@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../ads.dart';
+import '../main.dart';
 
 class Petal extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -78,6 +79,7 @@ class _PetalState extends State<Petal> {
 
   @override
   void initState() {
+    App.currentContext = context;
     super.initState();
     Offline.setKeepSynced(1, true);
     _checkCurrentUser();
@@ -263,7 +265,8 @@ class _PetalState extends State<Petal> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(widget.filter)))),
+                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(widget.filter))),
+                                settings: RouteSettings(name: 'PlantList')),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

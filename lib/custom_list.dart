@@ -128,7 +128,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
             String path = '/' + firebaseUsers + '/' + _currentUser.uid + '/' + firebaseAttributeFavorite;
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, S.of(context).favorite_empty, rootReference.child(path))),
+              MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, S.of(context).favorite_empty, rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
             );
           } else {
             favoriteDialog(context, _key);
@@ -200,7 +200,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
                                       String path = '/' + firebaseListsCustom + '/by language/' + widget.myLocale.languageCode + '/' + snapshot.key + '/' + firebaseAttributeList;
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, "", rootReference.child(path))),
+                                        MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, "", rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
                                       );
                                     },
                                   );
@@ -268,7 +268,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
                       String path = '/' + firebaseListsCustom + '/new/' + snapshot.key + '/' + firebaseAttributeList;
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, "", rootReference.child(path))),
+                        MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, "", rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
                       );
                     },
                   );

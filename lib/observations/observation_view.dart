@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
+import '../main.dart';
+
 class ObservationView extends StatefulWidget {
   final FirebaseUser currentUser;
   final Locale myLocale;
@@ -37,6 +39,7 @@ class _ObservationViewState extends State<ObservationView> {
 
   @override
   Widget build(BuildContext context) {
+    App.currentContext = context;
     var self = this;
     var mainContext = context;
     double mapWidth = MediaQuery.of(context).size.width;
@@ -115,7 +118,7 @@ class _ObservationViewState extends State<ObservationView> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ObservationMap(myLocale, widget.observation, mapModeView)),
+            MaterialPageRoute(builder: (context) => ObservationMap(myLocale, widget.observation, mapModeView), settings: RouteSettings(name: 'ObservationMap')),
           );
         },
       ),
@@ -149,7 +152,7 @@ class _ObservationViewState extends State<ObservationView> {
                 var newUrl = widget.observation.photoPaths[position].toString().replaceAll(defaultExtension, defaultPhotoExtension);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FullScreenPage(newUrl)),
+                  MaterialPageRoute(builder: (context) => FullScreenPage(newUrl), settings: RouteSettings(name: 'FullScreen')),
                 );
               },
             );

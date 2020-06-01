@@ -122,7 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "indian_subcontinent" : MessageLookupByLibrary.simpleMessage("Indisk subkontinent"),
     "indochina" : MessageLookupByLibrary.simpleMessage("Indo-Kina"),
     "legend" : MessageLookupByLibrary.simpleMessage("Legende"),
-    "legend_flower_1" : MessageLookupByLibrary.simpleMessage("mature flower"),
+    "legend_flower_1" : MessageLookupByLibrary.simpleMessage("blomst"),
     "legend_flower_10" : MessageLookupByLibrary.simpleMessage("fruktknuten"),
     "legend_flower_11" : MessageLookupByLibrary.simpleMessage("frøemnene"),
     "legend_flower_12" : MessageLookupByLibrary.simpleMessage("connective"),

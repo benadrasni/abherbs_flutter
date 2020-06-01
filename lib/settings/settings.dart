@@ -15,6 +15,8 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 class SettingsScreen extends StatefulWidget {
   final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
@@ -197,6 +199,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    App.currentContext = context;
     TextStyle titleTextStyle = TextStyle(
       fontSize: 18.0,
     );
@@ -236,7 +239,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SettingPrefLanguage()),
+          MaterialPageRoute(builder: (context) => SettingPrefLanguage(), settings: RouteSettings(name: 'SettingPrefLanguage')),
         ).then((result) {
           _getPrefLanguage();
         });
@@ -270,7 +273,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SettingMyRegion()),
+          MaterialPageRoute(builder: (context) => SettingMyRegion(), settings: RouteSettings(name: 'SettingMyRegion')),
         ).then((result) {
           setState(() {
             _myRegionF = Prefs.getStringF(keyMyRegion).then((value) {
@@ -351,7 +354,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter)),
+            MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter), settings: RouteSettings(name: 'SettingMyFilter')),
           ).then((result) {
             setState(() {
               _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {

@@ -94,7 +94,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searc
                 String path = '/' + firebaseSearch + '/' + getLanguageCode(myLocale.languageCode) + '/' + filteredNativeNames[index] + '/' + firebaseAttributeList;
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path))),
+                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
                 );
               },
             );
@@ -122,7 +122,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searc
               String path = '/' + firebaseSearch + '/' + languageLatin + '/' + filteredLatinNames[index] + '/' + firebaseAttributeList;
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path))),
+                MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
               );
             },
           );

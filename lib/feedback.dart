@@ -245,7 +245,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.onChangeLanguage, widget.filter)),
+                    MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Enhancements')),
                   );
                 },
                 child: Text(

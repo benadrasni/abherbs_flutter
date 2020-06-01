@@ -272,7 +272,7 @@ class _ObservationEditState extends State<ObservationEdit> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ObservationMap(myLocale, _observation, mapModeEdit)),
+            MaterialPageRoute(builder: (context) => ObservationMap(myLocale, _observation, mapModeEdit), settings: RouteSettings(name: 'ObservationMap')),
           ).then((value) {
             if (value != null) {
               _observation.latitude = value.latitude;

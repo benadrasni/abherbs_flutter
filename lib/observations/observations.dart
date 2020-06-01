@@ -14,6 +14,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import '../main.dart';
+
 class Observations extends StatefulWidget {
   final FirebaseUser currentUser;
   final Locale myLocale;
@@ -48,7 +50,7 @@ class _ObservationsState extends State<Observations> {
         if (value != null && value) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Subscription()),
+            MaterialPageRoute(builder: (context) => Subscription(), settings: RouteSettings(name: 'Subscription')),
           );
         }
       });
@@ -109,6 +111,7 @@ class _ObservationsState extends State<Observations> {
 
   @override
   Widget build(BuildContext context) {
+    App.currentContext = context;
     var myLocale = Localizations.localeOf(context);
 
     List<Widget> appBarItems = [];

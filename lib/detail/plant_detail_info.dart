@@ -90,6 +90,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                               context,
                               MaterialPageRoute(
                                 builder: (context) => PlantDetailEdit(plant.name, language, '', '', 'description', snapshot.data.description, _fontSize),
+                                settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {
                               key.currentState.showSnackBar(SnackBar(
@@ -126,8 +127,8 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(
-                                  plant.name, language, 'res/images/ic_inflorescence_grey_24dp.png', S.of(context).plant_inflorescence, "inflorescence", snapshot.data.inflorescence, _fontSize),
+                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_inflorescence_grey_24dp.png', S.of(context).plant_inflorescence, "inflorescence", snapshot.data.inflorescence, _fontSize),
+                              settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
                             key.currentState.showSnackBar(SnackBar(
@@ -164,6 +165,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                             context,
                             MaterialPageRoute(
                               builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_flower_grey_24dp.png', S.of(context).plant_flower, "flower", snapshot.data.flower, _fontSize),
+                              settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
                             key.currentState.showSnackBar(SnackBar(
@@ -176,7 +178,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => FlowerLegendScreen()),
+                        MaterialPageRoute(builder: (context) => FlowerLegendScreen(), settings: RouteSettings(name: 'FlowerLegend')),
                       );
                     },
                   ),
@@ -206,6 +208,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                             context,
                             MaterialPageRoute(
                               builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_fruit_grey_24dp.png', S.of(context).plant_fruit, "fruit", snapshot.data.fruit, _fontSize),
+                              settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
                             key.currentState.showSnackBar(SnackBar(
@@ -242,6 +245,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                             context,
                             MaterialPageRoute(
                               builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_leaf_grey_24dp.png', S.of(context).plant_leaf, "leaf", snapshot.data.leaf, _fontSize),
+                              settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
                             key.currentState.showSnackBar(SnackBar(
@@ -278,6 +282,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                             context,
                             MaterialPageRoute(
                               builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_stem_grey_24dp.png', S.of(context).plant_stem, "stem", snapshot.data.stem, _fontSize),
+                              settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
                             key.currentState.showSnackBar(SnackBar(
@@ -314,6 +319,7 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                             context,
                             MaterialPageRoute(
                               builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_home_grey_24dp.png', S.of(context).plant_habitat, "habitat", snapshot.data.habitat, _fontSize),
+                              settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
                             key.currentState.showSnackBar(SnackBar(
@@ -351,8 +357,8 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    PlantDetailEdit(plant.name, language, 'res/images/ic_toxicity_grey_24dp.png', S.of(context).plant_toxicity, "toxicity", snapshot.data.toxicity, _fontSize),
+                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_toxicity_grey_24dp.png', S.of(context).plant_toxicity, "toxicity", snapshot.data.toxicity, _fontSize),
+                                settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {
                               key.currentState.showSnackBar(SnackBar(
@@ -390,8 +396,8 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    PlantDetailEdit(plant.name, language, 'res/images/ic_local_pharmacy_grey_24dp.png', S.of(context).plant_herbalism, "herbalism", snapshot.data.herbalism, _fontSize),
+                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_local_pharmacy_grey_24dp.png', S.of(context).plant_herbalism, "herbalism", snapshot.data.herbalism, _fontSize),
+                                settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {
                               key.currentState.showSnackBar(SnackBar(
@@ -429,8 +435,8 @@ Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant pla
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    PlantDetailEdit(plant.name, language, 'res/images/ic_question_mark_grey_24dp.png', S.of(context).plant_trivia, "trivia", snapshot.data.trivia, _fontSize),
+                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_question_mark_grey_24dp.png', S.of(context).plant_trivia, "trivia", snapshot.data.trivia, _fontSize),
+                                settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {
                               key.currentState.showSnackBar(SnackBar(

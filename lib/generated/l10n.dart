@@ -15,8 +15,8 @@ class S {
     AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final String name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
-    final String localeName = Intl.canonicalizedLocale(name);
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name); 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
       return S();
@@ -2601,6 +2601,33 @@ class S {
     );
   }
 
+  String get notification {
+    return Intl.message(
+      'Notification',
+      name: 'notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get notification_open {
+    return Intl.message(
+      'Open',
+      name: 'notification_open',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get notification_close {
+    return Intl.message(
+      'Close',
+      name: 'notification_close',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get custom_lists {
     return Intl.message(
       'Lists of flowers',
@@ -2717,7 +2744,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   bool _isSupported(Locale locale) {
     if (locale != null) {
-      for (Locale supportedLocale in supportedLocales) {
+      for (var supportedLocale in supportedLocales) {
         if (supportedLocale.languageCode == locale.languageCode) {
           return true;
         }

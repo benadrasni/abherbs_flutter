@@ -5,8 +5,10 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_crashlytics/flutter_crashlytics.dart';
 
 class Splash extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -55,23 +57,35 @@ class _SplashState extends State<Splash> {
       if (widget.notificationData == null) {
         return _getFirstFilterRoute();
       } else {
-        String action = widget.notificationData['action'];
+        String action = widget.notificationData[notificationAttributeAction];
         if (action == null) {
           return _getFirstFilterRoute();
         } else {
           switch (action) {
-            case 'browse':
-              String uri = widget.notificationData['uri'];
+            case notificationAttributeActionBrowse:
+              String uri = widget.notificationData[notificationAttributeUri];
               if (uri != null) {
                 launchURLF(uri);
                 return _getFirstFilterRoute();
               }
               return _getFirstFilterRoute();
-            case 'list':
-              String path = widget.notificationData['path'];
+            case notificationAttributeActionList:
+              String path = widget.notificationData[notificationAttributePath];
               if (path != null) {
-                return _getFirstFilterRoute(MaterialPageRoute(
-                    builder: (context) => PlantList(widget.onChangeLanguage, {}, '', rootReference.child(path))));
+                rootReference.child(path).keepSynced(true);
+                rootReference.child(firebasePlantHeaders).keepSynced(true);
+                return rootReference.child(path).once().then((DataSnapshot snapshot) {
+                  var result = snapshot.value??[];
+                  int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : result.values.length;
+                  if (length == 0) {
+                    rootReference.child(path).child("refreshMock").set("mock").catchError((error) {
+                      FlutterCrashlytics().log("0-length custom list");
+                    });
+                  }
+                  return _getFirstFilterRoute(MaterialPageRoute(
+                      builder: (context) => PlantList(widget.onChangeLanguage, {}, '', rootReference.child(path)),
+                      settings: RouteSettings(name: 'PlantList')));
+                });
               }
               return _getFirstFilterRoute();
             default:

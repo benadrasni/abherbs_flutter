@@ -49,6 +49,7 @@ class _ObservationUploadState extends State<ObservationUpload> {
 
   Future<void> _logObservationUploadEvent(String status) async {
     await _firebaseAnalytics.logEvent(name: 'observation_upload', parameters: {
+      'uid' : widget.currentUser.uid,
       'status': status
     });
   }

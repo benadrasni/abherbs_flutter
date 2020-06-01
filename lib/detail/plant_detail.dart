@@ -28,6 +28,8 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
 
+import '../main.dart';
+
 const int galleryIndex = 0;
 const int infoIndex = 1;
 const int taxonomyIndex = 2;
@@ -186,7 +188,7 @@ class _PlantDetailState extends State<PlantDetail> {
         if (value != null && value) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Subscription()),
+            MaterialPageRoute(builder: (context) => Subscription(), settings: RouteSettings(name: 'Subscription')),
           );
         }
       });
@@ -230,6 +232,7 @@ class _PlantDetailState extends State<PlantDetail> {
 
   @override
   Widget build(BuildContext context) {
+    App.currentContext = context;
     var items = <BottomNavigationBarItem>[];
     items.add(BottomNavigationBarItem(icon: Icon(Icons.photo_library), title: Text(S.of(context).plant_gallery)));
     items.add(BottomNavigationBarItem(icon: Icon(Icons.info), title: Text(S.of(context).plant_info)));
@@ -324,8 +327,8 @@ class _PlantDetailState extends State<PlantDetail> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                ObservationEdit(_currentUser, widget.myLocale, widget.onChangeLanguage, observation)),
+                            builder: (context) => ObservationEdit(_currentUser, widget.myLocale, widget.onChangeLanguage, observation),
+                            settings: RouteSettings(name: 'ObservationEdit')),
                       ).then((value) {
                         if (value != null && value && _key.currentState != null) {
                           _key.currentState.showSnackBar(SnackBar(

@@ -22,7 +22,7 @@ Widget _getImageButton(BuildContext context, String url) {
     onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => FullScreenPage(url)),
+        MaterialPageRoute(builder: (context) => FullScreenPage(url), settings: RouteSettings(name: 'FullScreen')),
       );
     },
   );

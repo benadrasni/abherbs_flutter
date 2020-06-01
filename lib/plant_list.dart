@@ -14,6 +14,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import 'ads.dart';
+import 'main.dart';
 
 class PlantList extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -101,6 +102,7 @@ class _PlantListState extends State<PlantList> {
 
   @override
   Widget build(BuildContext context) {
+    App.currentContext = context;
     var self = this;
     var mainContext = context;
 

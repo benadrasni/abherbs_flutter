@@ -90,7 +90,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter)),
+                MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Settings')),
               );
             },
             child: Text(
@@ -105,7 +105,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter)),
+                MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter), settings: RouteSettings(name: 'SettingMyFilter')),
               );
             },
             child: Text(
@@ -121,7 +121,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Subscription()),
+                  MaterialPageRoute(builder: (context) => Subscription(), settings: RouteSettings(name: 'Subscription')),
                 );
               },
               child: Text(

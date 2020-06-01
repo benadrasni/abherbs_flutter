@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../ads.dart';
+import '../main.dart';
 
 class Habitat extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -100,6 +101,7 @@ class _HabitatState extends State<Habitat> {
 
   @override
   Widget build(BuildContext context) {
+    App.currentContext = context;
     var mainContext = context;
     var _defaultTextStyle = TextStyle(
       fontWeight: FontWeight.bold,
@@ -273,7 +275,8 @@ class _HabitatState extends State<Habitat> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(widget.filter)))),
+                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(widget.filter))),
+                                settings: RouteSettings(name: 'PlantList')),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
