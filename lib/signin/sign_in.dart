@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/signin/email.dart';
 import 'package:abherbs_flutter/signin/phone.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:apple_sign_in/apple_sign_in.dart';
+import 'package:device_info/device_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -17,6 +20,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  Future<bool> supportsAppleSignIn;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<void> _handleGoogleSignIn(GlobalKey<ScaffoldState> key) async {
@@ -43,6 +47,60 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
+  Future<void> _handleAppleSignIn(GlobalKey<ScaffoldState> key) async {
+    try {
+
+      final AuthorizationResult result = await AppleSignIn.performRequests([
+        AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
+      ]);
+
+      switch (result.status) {
+        case AuthorizationStatus.authorized:
+          try {
+            final AppleIdCredential appleIdCredential = result.credential;
+
+            OAuthProvider oAuthProvider = OAuthProvider(providerId: "apple.com");
+            final AuthCredential credential = oAuthProvider.getCredential(
+              idToken: String.fromCharCodes(appleIdCredential.identityToken),
+              accessToken: String.fromCharCodes(appleIdCredential.authorizationCode),
+            );
+
+            String userId = await Auth.signInWithCredential(credential);
+            Navigator.pop(context);
+            print('Signed in: $userId');
+          } catch (e) {
+            if (key.currentState != null && key.currentState.mounted) {
+              key.currentState.showSnackBar(new SnackBar(
+                content: new Text(S.of(context).auth_sign_in_failed),
+              ));
+            }
+          }
+          break;
+        case AuthorizationStatus.error:
+          if (key.currentState != null && key.currentState.mounted) {
+            key.currentState.showSnackBar(new SnackBar(
+              content: new Text(S.of(context).auth_sign_in_failed),
+            ));
+          }
+          break;
+
+        case AuthorizationStatus.cancelled:
+          if (key.currentState != null && key.currentState.mounted) {
+            key.currentState.showSnackBar(new SnackBar(
+              content: new Text(S.of(context).auth_sign_in_failed),
+            ));
+          }
+          break;
+      }
+    } catch (error) {
+      if (key.currentState != null && key.currentState.mounted) {
+        key.currentState.showSnackBar(new SnackBar(
+          content: new Text(S.of(context).auth_sign_in_failed),
+        ));
+      }
+    }
+  }
+
   _handleEmailSignIn() async {
     Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
       return EmailLoginSignUpPage();
@@ -53,6 +111,17 @@ class _SignInScreenState extends State<SignInScreen> {
     Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
       return PhoneLoginSignUpPage(Localizations.localeOf(context));
     }));
+  }
+
+  @override
+  void initState() {
+    if (Platform.isIOS) {
+      supportsAppleSignIn = DeviceInfoPlugin().iosInfo.then((value) {
+        return value.systemVersion.contains('13');
+      });
+    } else {
+      supportsAppleSignIn = Future(() => false);
+    }
   }
 
   @override
@@ -124,6 +193,40 @@ class _SignInScreenState extends State<SignInScreen> {
                     onPressed: () {
                       _handleGoogleSignIn(key);
                     }),
+              ),
+              FutureBuilder<bool>(
+                future: supportsAppleSignIn,
+                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.done:
+                      if (snapshot.data) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
+                          child: RaisedButton(
+                              color: Colors.white,
+                              child: Row(
+                                children: [
+                                  Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/apple-logo.png')),
+                                  Expanded(
+                                    child: Text(
+                                      S.of(context).auth_apple,
+                                      style: new TextStyle(fontSize: 18.0),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              onPressed: () {
+                                _handleAppleSignIn(key);
+                              }),
+                        );
+                      } else {
+                        return Container();
+                      }
+                      break;
+                    default:
+                      return Container();
+                  }
+                }
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),

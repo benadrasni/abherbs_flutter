@@ -84,6 +84,7 @@
   "auth_email": "Logg på med e-postadresse",
   "auth_phone": "Logg på med telefonnummeret ditt",
   "auth_google": "Logg på med Google",
+  "auth_apple": "Logg på med Apple",
   "auth_facebook": "Logg på med Facebook",
   "auth_twitter": "Logg på med Twitter",
   "auth_sign_in_failed": "Logg inn mislyktes. Sjekk forbindelsen og prøv igjen.",

@@ -82,6 +82,7 @@
   "auth_email": "Log ind med mail",
   "auth_phone": "Log ind med telefon",
   "auth_google": "Log ind med Google",
+  "auth_apple": "Log ind med Apple",
   "auth_facebook": "Log ind med Facebook",
   "auth_twitter": "Log ind med Twitter",
   "auth_sign_in_failed": "Log ind mislykkedes. Tjek din forbindelse og prøv igen.",

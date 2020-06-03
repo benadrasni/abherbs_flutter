@@ -84,6 +84,7 @@
   "auth_email": "Se connecter avec une adresse e-mail",
   "auth_phone": "Se connecter avec un téléphone",
   "auth_google": "Se connecter avec Google",
+  "auth_apple": "Se connecter avec Apple",
   "auth_facebook": "Se connecter avec Facebook",
   "auth_twitter": "Se connecter avec Twitter",
   "auth_sign_in_failed": "La connexion a échoué. Vérifiez votre connexion et réessayez.",

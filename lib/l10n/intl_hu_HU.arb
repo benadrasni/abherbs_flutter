@@ -84,6 +84,7 @@
   "auth_email": "Bejelentkezés e-mail azonosítóval",
   "auth_phone": "Bejelentkezés telefonszám általi azonosítóval",
   "auth_google": "Bejelentkezés Google azonosítóval",
+  "auth_apple": "Bejelentkezés Apple azonosítóval",
   "auth_facebook": "Bejelentkezés Facebook azonosítóval",
   "auth_twitter": "Bejelentkezés Twitter azonosítóval",
   "auth_sign_in_failed": "A bejelentkezés sikertelen. Ellenőrizze a kapcsolatot és próbálja újra.",

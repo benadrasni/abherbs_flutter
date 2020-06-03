@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "asia_tropical" : MessageLookupByLibrary.simpleMessage("Asien-Tropical"),
     "australasia" : MessageLookupByLibrary.simpleMessage("Australasien"),
     "australia" : MessageLookupByLibrary.simpleMessage("Australien"),
+    "auth_apple" : MessageLookupByLibrary.simpleMessage("Log ind med Apple"),
     "auth_code_hint" : MessageLookupByLibrary.simpleMessage("SMS kode"),
     "auth_create_account" : MessageLookupByLibrary.simpleMessage("Opret en konto"),
     "auth_email" : MessageLookupByLibrary.simpleMessage("Log ind med mail"),

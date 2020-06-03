@@ -84,6 +84,7 @@
   "auth_email": "Prihlásiť sa e-mailom",
   "auth_phone": "Prihlásiť sa telefónom",
   "auth_google": "Prihlásiť sa cez Google",
+  "auth_apple": "Prihlásiť sa cez Apple",
   "auth_facebook": "Prihlásiť sa cez Facebook",
   "auth_twitter": "Prihlásiť sa cez Twitter",
   "auth_sign_in_failed": "Prihlásenie sa nepodarilo. Skontrolujte pripojenie a skúste to znova.",

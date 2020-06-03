@@ -84,6 +84,7 @@
   "auth_email": "ईमेल से प्रवेश करें",
   "auth_phone": "फ़ोन से प्रवेश करें",
   "auth_google": "Google से प्रवेश करें",
+  "auth_apple": "Apple से प्रवेश करें",
   "auth_facebook": "Facebook से प्रवेश करें",
   "auth_twitter": "Twitter से प्रवेश करें",
   "auth_sign_in_failed": "भाग लेना विफल हुआ। अपना कनेक्शन जांचें और पुन: प्रयास करें।",

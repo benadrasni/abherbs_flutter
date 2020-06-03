@@ -84,6 +84,7 @@
   "auth_email": "Logga in med e-post",
   "auth_phone": "Logga in med telefon",
   "auth_google": "Logga in med Google",
+  "auth_apple": "Logga in med Apple",
   "auth_facebook": "Logga in med Facebook",
   "auth_twitter": "Logga in med Twitter",
   "auth_sign_in_failed": "Inloggning misslyckades. Kontrollera din anslutning och försök igen.",

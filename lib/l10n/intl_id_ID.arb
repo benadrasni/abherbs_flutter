@@ -84,6 +84,7 @@
   "auth_email": "Masuk dengan email",
   "auth_phone": "Masuk dengan telepon",
   "auth_google": "Masuk dengan Google",
+  "auth_apple": "Masuk dengan Apple",
   "auth_facebook": "Masuk dengan Facebook",
   "auth_twitter": "Masuk dengan Twitter",
   "auth_sign_in_failed": "Gagal masuk. Periksa koneksi Anda dan coba lagi.",

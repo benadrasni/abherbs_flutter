@@ -84,6 +84,7 @@
   "auth_email": "Zaloguj się za pomocą e-maila",
   "auth_phone": "Zaloguj się z użyciem numeru telefonu",
   "auth_google": "Zaloguj się za pomocą Google",
+  "auth_apple": "Zaloguj się za pomocą Apple",
   "auth_facebook": "Zaloguj się za pomocą Facebooka",
   "auth_twitter": "Zaloguj się za pomocą Twittera",
   "auth_sign_in_failed": "Logowanie nie powiodło się. Sprawdź połączenie i spróbuj ponownie.",

@@ -84,6 +84,7 @@
   "auth_email": "Prisijungti nurodant el. pašto adresą",
   "auth_phone": "Prisijungti nurodant telefono numerį",
   "auth_google": "Prisijungti per „Google“",
+  "auth_apple": "Prisijungti per „Apple“",
   "auth_facebook": "Prisijungti per „Facebook“",
   "auth_twitter": "Prisijungti per „Twitter“",
   "auth_sign_in_failed": "Prisijungimas nepavyko. Patikrinkite ryšį ir bandykite dar kartą.",

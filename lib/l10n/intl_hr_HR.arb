@@ -84,6 +84,7 @@
   "auth_email": "Prijava putem e-adrese",
   "auth_phone": "Prijava putem telefona",
   "auth_google": "Prijava putem Googlea",
+  "auth_apple": "Prijava putem Applea",
   "auth_facebook": "Prijava putem Facebooka",
   "auth_twitter": "Prijava putem Twittera",
   "auth_sign_in_failed": "Prijava nije uspjela. Provjerite vezu i pokušajte ponovno.",

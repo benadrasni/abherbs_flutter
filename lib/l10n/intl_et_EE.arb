@@ -84,6 +84,7 @@
   "auth_email": "Logige sisse e-posti teel",
   "auth_phone": "Logige sisse telefoni teel",
   "auth_google": "Logige Google'iga sisse",
+  "auth_apple": "Logige Apple'iga sisse",
   "auth_facebook": "Logige Facebook'iga sisse",
   "auth_twitter": "Logige Twitter'iga sisse",
   "auth_sign_in_failed": "Sisselogimine ebaõnnestus. Kontrollige oma ühendust ja proovige uuesti.",

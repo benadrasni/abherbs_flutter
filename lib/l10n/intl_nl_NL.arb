@@ -84,6 +84,7 @@
   "auth_email": "Inloggen met e-mailadres",
   "auth_phone": "Inloggen met telefoon",
   "auth_google": "Inloggen met Google",
+  "auth_apple": "Inloggen met Apple",
   "auth_facebook": "Inloggen met Facebook",
   "auth_twitter": "Inloggen met Twitter",
   "auth_sign_in_failed": "Inloggen mislukt. Controleer uw verbinding en probeer het opnieuw.",

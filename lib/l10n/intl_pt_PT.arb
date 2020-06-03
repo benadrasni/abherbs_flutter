@@ -82,6 +82,7 @@
   "auth_email": "Fazer login com o e-mail",
   "auth_phone": "Fazer login com o telefone",
   "auth_google": "Fazer login com o Google",
+  "auth_apple": "Fazer login com o Apple",
   "auth_facebook": "Fazer login com o Facebook",
   "auth_twitter": "Fazer login com o Twitter",
   "auth_sign_in_failed": "A entrada falhou. Verifique sua conexão e tente novamente.",

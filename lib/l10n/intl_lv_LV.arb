@@ -84,6 +84,7 @@
   "auth_email": "Pierakstīties ar e-pasta adresi",
   "auth_phone": "Pierakstīties ar tālruni",
   "auth_google": "Pierakstīties ar Google",
+  "auth_apple": "Pierakstīties ar Apple",
   "auth_facebook": "Pierakstīties ar Facebook",
   "auth_twitter": "Pierakstīties ar Twitter",
   "auth_sign_in_failed": "Pierakstīšanās neizdevās. Pārbaudiet savienojumu un mēģiniet vēlreiz.",

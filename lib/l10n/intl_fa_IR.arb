@@ -83,6 +83,7 @@
   "auth_email": "ورود به سیستم با ایمیل",
   "auth_phone": "ورود به سیستم با تلفن",
   "auth_google": "ورود به سیستم با Google‎",
+  "auth_apple": "ورود به سیستم با Apple‎",
   "auth_facebook": "ورود به سیستم با Facebook",
   "auth_twitter": "ورود به سیستم با Twitter",
   "auth_sign_in_failed": "ورود به سیستم ناموفق بود اتصال خود را بررسی کنید و دوباره امتحان کنید",

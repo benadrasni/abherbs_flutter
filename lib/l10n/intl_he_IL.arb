@@ -84,6 +84,7 @@
   "auth_email": "היכנס באמצעות דוא\"ל",
   "auth_phone": "היכנס באמצעות הטלפון",
   "auth_google": "היכנס באמצעות Google",
+  "auth_apple": "היכנס באמצעות Apple",
   "auth_facebook": "התחבר עם פייסבוק",
   "auth_twitter": "היכנס באמצעות Twitter",
   "auth_sign_in_failed": "ההרשמה נכשלה. בדוק את החיבור ונסה שוב.",

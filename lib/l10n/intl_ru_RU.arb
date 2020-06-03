@@ -84,6 +84,7 @@
   "auth_email": "Войти по адресу электронной почты",
   "auth_phone": "Войти по номеру телефона",
   "auth_google": "Войти через аккаунт Google",
+  "auth_apple": "Войти через аккаунт Apple",
   "auth_facebook": "Войти через аккаунт Facebook",
   "auth_twitter": "Войти через аккаунт Twitter",
   "auth_sign_in_failed": "Ошибка входа. Проверьте соединение и попробуйте снова.",

@@ -84,6 +84,7 @@
   "auth_email": "用電子郵件登錄",
   "auth_phone": "用手機登錄",
   "auth_google": "使用Google登錄",
+  "auth_apple": "使用Apple登錄",
   "auth_facebook": "使用Facebook登錄",
   "auth_twitter": "使用Twitter登錄",
   "auth_sign_in_failed": "登錄失敗。 檢查您的連接，然後重試。",

@@ -84,6 +84,7 @@
   "auth_email": "メールアドレスでログイン",
   "auth_phone": "電話番号でログイン",
   "auth_google": "Google でログイン",
+  "auth_apple": "Apple でログイン",
   "auth_facebook": "Facebook でログイン",
   "auth_twitter": "Twitter でログイン",
   "auth_sign_in_failed": "サインインできませんでした。 接続を確認してもう一度やり直してください。",

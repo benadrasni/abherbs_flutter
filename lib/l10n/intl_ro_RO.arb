@@ -84,6 +84,7 @@
   "auth_email": "Conectați-vă cu adresa de e-mail",
   "auth_phone": "Conectați-vă cu numărul de telefon",
   "auth_google": "Conectați-vă cu Google",
+  "auth_apple": "Conectați-vă cu Apple",
   "auth_facebook": "Conectați-vă cu Facebook",
   "auth_twitter": "Conectați-vă cu Twitter",
   "auth_sign_in_failed": "Conectarea a eșuat. Verificați conexiunea și încercați din nou.",

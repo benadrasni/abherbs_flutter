@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "asia_tropical" : MessageLookupByLibrary.simpleMessage("아시아 열대"),
     "australasia" : MessageLookupByLibrary.simpleMessage("오스트랄라시아"),
     "australia" : MessageLookupByLibrary.simpleMessage("오스트레일리아"),
+    "auth_apple" : MessageLookupByLibrary.simpleMessage("Apple로 로그인"),
     "auth_code_hint" : MessageLookupByLibrary.simpleMessage("SMS 코드"),
     "auth_create_account" : MessageLookupByLibrary.simpleMessage("계정 만들기"),
     "auth_email" : MessageLookupByLibrary.simpleMessage("이메일로 로그인"),

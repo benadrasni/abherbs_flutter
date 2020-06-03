@@ -84,6 +84,7 @@
   "auth_email": "Пријави ме помоћу имејла",
   "auth_phone": "Пријави ме помоћу телефона",
   "auth_google": "Пријави ме помоћу Google-а",
+  "auth_apple": "Пријави ме помоћу Apple-а",
   "auth_facebook": "Пријави ме помоћу Facebook-а",
   "auth_twitter": "Пријави ме помоћу Twitter-а",
   "auth_sign_in_failed": "Пријава није успела. Проверите везу и покушајте поново.",
