@@ -84,6 +84,7 @@
   "auth_email": "تسجيل الدخول عبر البريد الإلكتروني",
   "auth_phone": "تسجيل الدخول عبر رقم الهاتف",
   "auth_google": "تسجيل الدخول عبر Google",
+  "auth_apple": "تسجيل الدخول عبر Apple",
   "auth_facebook": "تسجيل الدخول عبر Facebook",
   "auth_twitter": "تسجيل الدخول عبر Twitter",
   "auth_sign_in_failed": "فشل تسجيل الدخول. تحقق من الاتصال وحاول مرة أخرى.",

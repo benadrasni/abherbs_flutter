@@ -84,6 +84,7 @@
   "auth_email": "Prijava z e-poštnim naslovom",
   "auth_phone": "Prijava s telefonom",
   "auth_google": "Prijava z računom za Google",
+  "auth_apple": "Prijava z računom za Apple",
   "auth_facebook": "Prijava z računom za Facebook",
   "auth_twitter": "Prijava z računom za Twitter",
   "auth_sign_in_failed": "Prijava ni uspela. Preverite povezavo in poskusite znova.",

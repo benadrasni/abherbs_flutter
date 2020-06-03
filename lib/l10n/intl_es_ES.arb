@@ -84,6 +84,7 @@
   "auth_email": "Iniciar sesión con el correo electrónico",
   "auth_phone": "Iniciar sesión con el teléfono",
   "auth_google": "Iniciar sesión con Google",
+  "auth_apple": "Iniciar sesión con Apple",
   "auth_facebook": "Iniciar sesión con Facebook",
   "auth_twitter": "Iniciar sesión con Twitter",
   "auth_sign_in_failed": "El inico de sesión ha fallado. Revisa tu conexión y vuelve a intentarlo.",

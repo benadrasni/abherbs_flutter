@@ -84,6 +84,7 @@
   "auth_email": "Влезте с имейл",
   "auth_phone": "Влезте с телефон",
   "auth_google": "Влезте с Google",
+  "auth_apple": "Влезте с Apple",
   "auth_facebook": "Влезте с Facebook",
   "auth_twitter": "Влезте с Twitter",
   "auth_sign_in_failed": "Влизането не бе успешно. Проверете връзката си и опитайте отново.",

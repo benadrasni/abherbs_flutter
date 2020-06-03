@@ -84,6 +84,7 @@
   "auth_email": "Mit einer E-Mail-Adresse anmelden",
   "auth_phone": "Mit einer Telefonnummer anmelden",
   "auth_google": "Mit Google anmelden",
+  "auth_apple": "Mit Apple anmelden",
   "auth_facebook": "Mit Facebook anmelden",
   "auth_twitter": "Mit Twitter anmelden",
   "auth_sign_in_failed": "Anmeldung fehlgeschlagen. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",

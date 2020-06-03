@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "asia_tropical" : MessageLookupByLibrary.simpleMessage("Ázsia - trópusi éghajlat"),
     "australasia" : MessageLookupByLibrary.simpleMessage("Ausztrália"),
     "australia" : MessageLookupByLibrary.simpleMessage("Ausztrália"),
+    "auth_apple" : MessageLookupByLibrary.simpleMessage("Bejelentkezés Apple azonosítóval"),
     "auth_code_hint" : MessageLookupByLibrary.simpleMessage("SMS-kód"),
     "auth_create_account" : MessageLookupByLibrary.simpleMessage("Hozzon létre egy fiókot"),
     "auth_email" : MessageLookupByLibrary.simpleMessage("Bejelentkezés e-mail azonosítóval"),

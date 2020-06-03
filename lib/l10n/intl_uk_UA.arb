@@ -84,6 +84,7 @@
   "auth_email": "Увійти, використовуючи електронну адресу",
   "auth_phone": "Увійти, використовуючи телефон",
   "auth_google": "Увійти через Google",
+  "auth_apple": "Увійти через Apple",
   "auth_facebook": "Увійти через Facebook",
   "auth_twitter": "Увійти через Twitter",
   "auth_sign_in_failed": "Помилка входу. Перевірте своє з'єднання та повторіть спробу.",

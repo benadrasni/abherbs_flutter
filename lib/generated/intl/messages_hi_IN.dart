@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "asia_tropical" : MessageLookupByLibrary.simpleMessage("एशिया उष्णकटिबंधीय"),
     "australasia" : MessageLookupByLibrary.simpleMessage("ऑस्ट्रेलेशिया"),
     "australia" : MessageLookupByLibrary.simpleMessage("ऑस्ट्रेलिया"),
+    "auth_apple" : MessageLookupByLibrary.simpleMessage("Apple से प्रवेश करें"),
     "auth_code_hint" : MessageLookupByLibrary.simpleMessage("एसएमएस कोड"),
     "auth_create_account" : MessageLookupByLibrary.simpleMessage("खाता बनाएं"),
     "auth_email" : MessageLookupByLibrary.simpleMessage("ईमेल से प्रवेश करें"),

@@ -84,6 +84,7 @@
   "auth_email": "Sign in with email",
   "auth_phone": "Sign in with phone",
   "auth_google": "Sign in with Google",
+  "auth_apple": "Sign in with Apple",
   "auth_facebook": "Sign in with Facebook",
   "auth_twitter": "Sign in with Twitter",
   "auth_sign_in_failed": "Sign in failed. Check your connection and try again.",

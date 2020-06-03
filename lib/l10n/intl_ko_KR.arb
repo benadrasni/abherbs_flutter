@@ -84,6 +84,7 @@
   "auth_email": "이메일로 로그인",
   "auth_phone": "전화로 로그인",
   "auth_google": "Google로 로그인",
+  "auth_apple": "Apple로 로그인",
   "auth_facebook": "페이스 북으로 로그인",
   "auth_twitter": "트위터로 로그인",
   "auth_sign_in_failed": "로그인하지 못했습니다. 연결을 확인하고 다시 시도하십시오.",

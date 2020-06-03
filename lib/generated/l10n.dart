@@ -738,6 +738,15 @@ class S {
     );
   }
 
+  String get auth_apple {
+    return Intl.message(
+      'Sign in with Apple',
+      name: 'auth_apple',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get auth_facebook {
     return Intl.message(
       'Sign in with Facebook',

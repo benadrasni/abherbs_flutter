@@ -84,6 +84,7 @@
   "auth_email": "Kirjaudu sähköpostilla",
   "auth_phone": "Kirjaudu puhelimella",
   "auth_google": "Kirjaudu Google-tilillä",
+  "auth_apple": "Kirjaudu Apple-tilillä",
   "auth_facebook": "Kirjaudu Facebook-tilillä",
   "auth_twitter": "Kirjaudu Twitter-tilillä",
   "auth_sign_in_failed": "Kirjaudu sisään epäonnistui. Tarkista yhteys ja yritä uudelleen..",

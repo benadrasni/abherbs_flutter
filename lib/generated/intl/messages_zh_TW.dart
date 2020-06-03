@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "asia_tropical" : MessageLookupByLibrary.simpleMessage("亞洲熱帶"),
     "australasia" : MessageLookupByLibrary.simpleMessage("澳大拉西亞"),
     "australia" : MessageLookupByLibrary.simpleMessage("澳大利亚"),
+    "auth_apple" : MessageLookupByLibrary.simpleMessage("使用Apple登錄"),
     "auth_code_hint" : MessageLookupByLibrary.simpleMessage("短信代碼"),
     "auth_create_account" : MessageLookupByLibrary.simpleMessage("創建一個帳戶"),
     "auth_email" : MessageLookupByLibrary.simpleMessage("用電子郵件登錄"),
