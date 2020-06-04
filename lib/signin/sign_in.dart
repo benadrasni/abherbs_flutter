@@ -102,15 +102,15 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   _handleEmailSignIn() async {
-    Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
-      return EmailLoginSignUpPage();
-    }));
+    Navigator.of(context).push(MaterialPageRoute<String>(
+        builder: (BuildContext context) { return EmailLoginSignUpPage(); },
+        settings: RouteSettings(name: 'EmailLoginSignUp')));
   }
 
   _handlePhoneSignIn() async {
-    Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
-      return PhoneLoginSignUpPage(Localizations.localeOf(context));
-    }));
+    Navigator.of(context).push(MaterialPageRoute<String>(
+        builder: (BuildContext context) { return PhoneLoginSignUpPage(Localizations.localeOf(context)); },
+        settings: RouteSettings(name: 'PhoneLoginSignUp')));
   }
 
   @override
