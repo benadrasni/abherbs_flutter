@@ -210,7 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "plant_flowering_from" : MessageLookupByLibrary.simpleMessage("Blütezeit"),
     "plant_flowering_to" : MessageLookupByLibrary.simpleMessage("-"),
     "plant_fruit" : MessageLookupByLibrary.simpleMessage("Frucht"),
-    "plant_gallery" : MessageLookupByLibrary.simpleMessage("Gallerie"),
+    "plant_gallery" : MessageLookupByLibrary.simpleMessage("Galerie"),
     "plant_habitat" : MessageLookupByLibrary.simpleMessage("Habitat"),
     "plant_height_from" : MessageLookupByLibrary.simpleMessage("Höhe"),
     "plant_height_to" : MessageLookupByLibrary.simpleMessage("-"),

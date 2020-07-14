@@ -23,7 +23,8 @@ const families = [ "Acanthaceae", "Acoraceae", "Adoxaceae", "Alismataceae", "Ama
   "Potamogetonaceae", "Primulaceae", "Ranunculaceae", "Resedaceae", "Rhamnaceae", "Rosaceae", "Rubiaceae", "Rutaceae", "Salicaceae", "Santalaceae", "Sapindaceae", "Sarraceniaceae", "Saururaceae",
   "Saxifragaceae", "Scheuchzeriaceae", "Scrophulariaceae", "Solanaceae", "Thymelaeaceae", "Tiliaceae", "Typhaceae", "Ulmaceae", "Urticaceae", "Valerianaceae", "Verbenaceae", "Violaceae", "Vitaceae",
   "Nyctaginaceae", "Paulowniaceae", "Hypoxidaceae", "Myrtaceae", "Mazaceae", "Betulaceae", "Tropaeolaceae", "Hydrangeaceae", "Begoniaceae", "Zingiberaceae", "Alstroemeriaceae", "Asphodelaceae",
-  "Cannaceae", "Platanaceae", "Theaceae", "Gesneriaceae", "Bromeliaceae", "Garryaceae", "Pontederiaceae", "Cyperaceae", "Staphyleaceae" ];
+  "Cannaceae", "Platanaceae", "Theaceae", "Gesneriaceae", "Bromeliaceae", "Garryaceae", "Pontederiaceae", "Cyperaceae", "Staphyleaceae", "Strelitziaceae", "Goodeniaceae", "Buxaceae", "Caricaceae",
+  "Moraceae", "Fagaceae"];
 
 class CustomListScreen extends StatefulWidget {
   final Locale myLocale;

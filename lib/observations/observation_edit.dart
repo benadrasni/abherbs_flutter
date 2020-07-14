@@ -60,7 +60,7 @@ class _ObservationEditState extends State<ObservationEdit> {
       return false;
     } else {
       if (_observation.id == null) {
-        _observation.id = widget.currentUser.uid + '_' + _observation.date.millisecondsSinceEpoch.toString();
+        _observation.id = widget.currentUser.uid + '_' + DateTime.now().millisecondsSinceEpoch.toString();
       }
       _observation.order = -1 * _observation.date.millisecondsSinceEpoch;
       _observation.note = _noteController.text.isNotEmpty ? _noteController.text : null;
