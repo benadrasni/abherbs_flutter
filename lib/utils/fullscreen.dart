@@ -16,15 +16,30 @@ class FullScreenPage extends StatelessWidget {
       ),
     ]);
 
-    return PhotoView.customChild(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: getImage(url, placeholder),
+    return Scaffold(
+      body: PhotoView.customChild(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: getImage(url, placeholder),
+        ),
+        childSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height),
+        minScale: PhotoViewComputedScale.contained * 0.8,
+        maxScale: PhotoViewComputedScale.covered * 4,
       ),
-      childSize: Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height),
-      minScale: PhotoViewComputedScale.contained * 0.8,
-      maxScale: PhotoViewComputedScale.covered * 4,
+      floatingActionButton: Container(
+        height: 50.0,
+        width: 50.0,
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: FloatingActionButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Icon(Icons.close),
+          ),
+        ),
+      ),
     );
   }
 }

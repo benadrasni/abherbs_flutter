@@ -2,10 +2,9 @@ class Plant{
   final String key;
   int id;
   int gbifId;
-  int kewId;
   String usdaId;
+  String ipniId;
   String name;
-  String wikiName;
   Map<dynamic, dynamic> apgIV;
   int floweringFrom;
   int floweringTo;

@@ -143,6 +143,7 @@ const String firebaseAttributeFavorite = "favorites";
 const String firebaseAttributeEntity = "m";
 const String firebaseAttributeAnonymous = "anonymous";
 const String firebaseAttributeIsLabel = "is_label";
+const String firebaseAttributeMock = "refresh_mock";
 
 const String firebaseValuePrivate = "private";
 const String firebaseValueReview = "review";

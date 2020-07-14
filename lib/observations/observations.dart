@@ -59,16 +59,18 @@ class _ObservationsState extends State<Observations> {
 
   void _setCountUploadF() {
     if (Purchases.isSubscribed()) {
-      privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).keepSynced(true);
-      _countUploadF = privateObservationsReference
-          .child(widget.currentUser.uid)
-          .child(firebaseObservationsByDate)
-          .child(firebaseAttributeList)
-          .orderByChild(firebaseAttributeStatus)
-          .equalTo(firebaseValuePrivate)
-          .once()
-          .then((DataSnapshot snapshot) {
-        return snapshot.value?.length ?? 0;
+      privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).keepSynced(true);
+      privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeMock).set("mock").then((value) {
+        _countUploadF = privateObservationsReference
+            .child(widget.currentUser.uid)
+            .child(firebaseObservationsByDate)
+            .child(firebaseAttributeList)
+            .orderByChild(firebaseAttributeStatus)
+            .equalTo(firebaseValuePrivate)
+            .once()
+            .then((DataSnapshot snapshot) {
+          return snapshot.value?.length ?? 0;
+        });
       });
     } else {
       _countUploadF = Future<int>(() {
