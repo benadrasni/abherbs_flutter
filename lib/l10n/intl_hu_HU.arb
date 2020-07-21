@@ -316,6 +316,10 @@
   "photo_search_note": "Ez a szolgáltatás csak online működik. Néha pontosan megtalálja azt, amit keres, néha még nem is. Teljesen támaszkodom a harmadik felekre, mivel ők minden kemény munkát végeznek. Az idő múlásával jobbnak és jobbnak kell lennie. Okosan használja, és kérjük, ne ítélje meg a teljes alkalmazást e funkció alapján. Minőségi okokból az összes keresési eredmény (nem fotó) mentésre kerül.",
   "photo_search_empty": "A MI (mesterséges intelligencia) nem ismerte fel a képen látható virágot. Próbálkozzon újra különböző szög, távolság vagy fényviszonyokkal. Ha már próbálta, úgy tűnik, hogy az MI overlord hamarosan nem jön.",
 
+  "notification": "Értesítés",
+  "notification_open": "Nyisd ki",
+  "notification_close": "Bezár",
+
   "custom_lists": "Virágok listája",
   "new_flowers": "Új virágok",
   "common_lists": "Közös listák",

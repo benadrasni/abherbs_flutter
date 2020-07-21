@@ -10,46 +10,59 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 class Upload {
   static bool uploadPaused = false;
-  static bool _uploadStarted = false;
+  static bool uploadStarted = false;
   static FirebaseStorage storage = FirebaseStorage(storageBucket: storageBucket);
 
   static Future<void> upload(FirebaseUser currentUser,
-      Function() onObservationUpload, Function() onUploadFinish, Function() onUploadFail) async {
-    if (!_uploadStarted) {
-      _uploadStarted = true;
-      privateObservationsReference
-          .child(currentUser.uid)
-          .child(firebaseObservationsByDate)
-          .child(firebaseAttributeList)
-          .orderByChild(firebaseAttributeStatus)
-          .equalTo(firebaseValuePrivate)
-          .once()
-          .then((DataSnapshot snapshot) async {
-        if (snapshot.value != null && snapshot.value.length > 0) {
-          for (var key in snapshot.value.keys) {
-            if (uploadPaused) {
-              break;
-            }
-            Observation observation = Observation.fromJson(key, snapshot.value[key]);
-            if (await _uploadObservation(currentUser, observation)) {
-              onObservationUpload();
-            } else {
-              onUploadFail();
-              _uploadStarted = false;
-              uploadPaused = false;
-              return;
-            }
+      Function() onObservationUpload, Function() onObservationUploadFail, Function() onUploadStart, Function() onUploadFinish, Function() onUploadFail) async {
+    if (uploadStarted) return;
+
+    uploadStarted = true;
+    privateObservationsReference
+        .child(currentUser.uid)
+        .child(firebaseObservationsByDate)
+        .child(firebaseAttributeList)
+        .orderByChild(firebaseAttributeStatus)
+        .equalTo(firebaseValuePrivate)
+        .once()
+        .then((DataSnapshot snapshot) async {
+      if (snapshot.value != null && snapshot.value.length > 0) {
+        onUploadStart();
+        var date = DateTime.now();
+        await logsObservationsReference
+            .child(currentUser.uid)
+            .child(date.millisecondsSinceEpoch.toString())
+            .child(firebaseAttributeTime).set(-1 * date.millisecondsSinceEpoch);
+        for (var key in snapshot.value.keys) {
+          if (uploadPaused) {
+            break;
           }
-          onUploadFinish();
-          _uploadStarted = false;
-          uploadPaused = false;
+          Observation observation = Observation.fromJson(key, snapshot.value[key]);
+          if (await _uploadObservation(currentUser, observation)) {
+            await logsObservationsReference
+                .child(currentUser.uid)
+                .child(date.millisecondsSinceEpoch.toString())
+                .child(observation.id)
+                .child(firebaseAttributeStatus).set(firebaseValueSuccess);
+            onObservationUpload();
+          } else {
+            await logsObservationsReference
+                .child(currentUser.uid)
+                .child(date.millisecondsSinceEpoch.toString())
+                .child(observation.id)
+                .child(firebaseAttributeStatus).set(firebaseValueFailure);
+            onObservationUploadFail();
+          }
         }
-      }).catchError((error) {
-        onUploadFail();
-        _uploadStarted = false;
-        uploadPaused = false;
-      });
-    }
+        onUploadFinish();
+      }
+      uploadStarted = false;
+      uploadPaused = false;
+    }).catchError((error) {
+      onUploadFail();
+      uploadStarted = false;
+      uploadPaused = false;
+    });
   }
 
   static Future<bool> _uploadObservation(FirebaseUser currentUser, Observation observation) async {
@@ -65,13 +78,13 @@ class Upload {
     await publicObservationsReference
         .child(firebaseObservationsByDate)
         .child(firebaseAttributeList)
-        .child(observation.date.millisecondsSinceEpoch.toString())
+        .child(observation.id)
         .set(observation.toJson());
     await publicObservationsReference
         .child(firebaseObservationsByPlant)
         .child(observation.plant)
         .child(firebaseAttributeList)
-        .child(observation.date.millisecondsSinceEpoch.toString())
+        .child(observation.id)
         .set(observation.toJson());
 
     // update private
@@ -94,12 +107,15 @@ class Upload {
   static Future<bool> _uploadFile(String path) async {
     File file = await Offline.getLocalFile(path);
     final StorageReference ref = storage.ref().child(path);
-    final StorageUploadTask uploadTask = ref.putFile(file);
+    if (file != null) {
+      final StorageUploadTask uploadTask = ref.putFile(file);
 
-    return await uploadTask.onComplete.then((StorageTaskSnapshot snapshot) {
-      return true;
-    }).catchError((error) {
-      return false;
-    });
+      return await uploadTask.onComplete.then((StorageTaskSnapshot snapshot) {
+        return true;
+      }).catchError((error) {
+        return false;
+      });
+    }
+    return false;
   }
 }

@@ -8,8 +8,12 @@ import 'intl/messages_all.dart';
 // Made by Localizely
 // **************************************************************************
 
+// ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
+
 class S {
   S();
+  
+  static S current;
   
   static const AppLocalizationDelegate delegate =
     AppLocalizationDelegate();
@@ -19,7 +23,9 @@ class S {
     final localeName = Intl.canonicalizedLocale(name); 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      return S();
+      S.current = S();
+      
+      return S.current;
     });
   } 
 
@@ -27,6 +33,7 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Legend`
   String get legend {
     return Intl.message(
       'Legend',
@@ -36,6 +43,7 @@ class S {
     );
   }
 
+  /// `mature flower`
   String get legend_flower_1 {
     return Intl.message(
       'mature flower',
@@ -45,6 +53,7 @@ class S {
     );
   }
 
+  /// `stigma`
   String get legend_flower_2 {
     return Intl.message(
       'stigma',
@@ -54,6 +63,7 @@ class S {
     );
   }
 
+  /// `style`
   String get legend_flower_3 {
     return Intl.message(
       'style',
@@ -63,6 +73,7 @@ class S {
     );
   }
 
+  /// `filament`
   String get legend_flower_4 {
     return Intl.message(
       'filament',
@@ -72,6 +83,7 @@ class S {
     );
   }
 
+  /// `floral axis`
   String get legend_flower_5 {
     return Intl.message(
       'floral axis',
@@ -81,6 +93,7 @@ class S {
     );
   }
 
+  /// `joint`
   String get legend_flower_6 {
     return Intl.message(
       'joint',
@@ -90,6 +103,7 @@ class S {
     );
   }
 
+  /// `pedicel`
   String get legend_flower_7 {
     return Intl.message(
       'pedicel',
@@ -99,6 +113,7 @@ class S {
     );
   }
 
+  /// `nectary`
   String get legend_flower_8 {
     return Intl.message(
       'nectary',
@@ -108,6 +123,7 @@ class S {
     );
   }
 
+  /// `stamen`
   String get legend_flower_9 {
     return Intl.message(
       'stamen',
@@ -117,6 +133,7 @@ class S {
     );
   }
 
+  /// `pistil`
   String get legend_flower_10 {
     return Intl.message(
       'pistil',
@@ -126,6 +143,7 @@ class S {
     );
   }
 
+  /// `ovules`
   String get legend_flower_11 {
     return Intl.message(
       'ovules',
@@ -135,6 +153,7 @@ class S {
     );
   }
 
+  /// `connective`
   String get legend_flower_12 {
     return Intl.message(
       'connective',
@@ -144,6 +163,7 @@ class S {
     );
   }
 
+  /// `microsporangium`
   String get legend_flower_13 {
     return Intl.message(
       'microsporangium',
@@ -153,6 +173,7 @@ class S {
     );
   }
 
+  /// `anther`
   String get legend_flower_14 {
     return Intl.message(
       'anther',
@@ -162,6 +183,7 @@ class S {
     );
   }
 
+  /// `perianth`
   String get legend_flower_15 {
     return Intl.message(
       'perianth',
@@ -171,6 +193,7 @@ class S {
     );
   }
 
+  /// `petal/corolla`
   String get legend_flower_16 {
     return Intl.message(
       'petal/corolla',
@@ -180,6 +203,7 @@ class S {
     );
   }
 
+  /// `sepal/calyx`
   String get legend_flower_17 {
     return Intl.message(
       'sepal/calyx',
@@ -189,6 +213,7 @@ class S {
     );
   }
 
+  /// `Enhancements`
   String get enhancements {
     return Intl.message(
       'Enhancements',
@@ -198,6 +223,7 @@ class S {
     );
   }
 
+  /// `Settings`
   String get settings {
     return Intl.message(
       'Settings',
@@ -207,6 +233,7 @@ class S {
     );
   }
 
+  /// `Feedback`
   String get feedback {
     return Intl.message(
       'Feedback',
@@ -216,6 +243,7 @@ class S {
     );
   }
 
+  /// `About`
   String get about {
     return Intl.message(
       'About',
@@ -225,6 +253,7 @@ class S {
     );
   }
 
+  /// `Help`
   String get help {
     return Intl.message(
       'Help',
@@ -234,6 +263,7 @@ class S {
     );
   }
 
+  /// `Restore Purchases`
   String get product_restore_purchases {
     return Intl.message(
       'Restore Purchases',
@@ -243,6 +273,7 @@ class S {
     );
   }
 
+  /// `No unwanted advertisement`
   String get product_no_ads_title {
     return Intl.message(
       'No unwanted advertisement',
@@ -252,6 +283,7 @@ class S {
     );
   }
 
+  /// `Application won't show advertisement banner at the bottom of the screen.`
   String get product_no_ads_description {
     return Intl.message(
       'Application won\'t show advertisement banner at the bottom of the screen.',
@@ -261,6 +293,7 @@ class S {
     );
   }
 
+  /// `Search in names or taxonomy`
   String get product_search_title {
     return Intl.message(
       'Search in names or taxonomy',
@@ -270,6 +303,7 @@ class S {
     );
   }
 
+  /// `You'll be able to find a flower by its English or Latin name or by its taxon (e.g. order, family, genus).`
   String get product_search_description {
     return Intl.message(
       'You\'ll be able to find a flower by its English or Latin name or by its taxon (e.g. order, family, genus).',
@@ -279,6 +313,7 @@ class S {
     );
   }
 
+  /// `Custom filter`
   String get product_custom_filter_title {
     return Intl.message(
       'Custom filter',
@@ -288,6 +323,7 @@ class S {
     );
   }
 
+  /// `You'll be able to change default order and number of filters (color, habitat, petal, distribution).`
   String get product_custom_filter_description {
     return Intl.message(
       'You\'ll be able to change default order and number of filters (color, habitat, petal, distribution).',
@@ -297,6 +333,7 @@ class S {
     );
   }
 
+  /// `Offline mode`
   String get product_offline_title {
     return Intl.message(
       'Offline mode',
@@ -306,6 +343,7 @@ class S {
     );
   }
 
+  /// `Application will work without internet connection.`
   String get product_offline_description {
     return Intl.message(
       'Application will work without internet connection.',
@@ -315,6 +353,7 @@ class S {
     );
   }
 
+  /// `Observations`
   String get product_observations_title {
     return Intl.message(
       'Observations',
@@ -324,6 +363,7 @@ class S {
     );
   }
 
+  /// `You'll be able to save your observations with flower name, date, location, photos and note.`
   String get product_observations_description {
     return Intl.message(
       'You\'ll be able to save your observations with flower name, date, location, photos and note.',
@@ -333,6 +373,7 @@ class S {
     );
   }
 
+  /// `Search by photo`
   String get product_photo_search_title {
     return Intl.message(
       'Search by photo',
@@ -342,6 +383,7 @@ class S {
     );
   }
 
+  /// `You'll be able to find a flower by photo. This feature is using Artificial Intelligence for labeling photos from third party.`
   String get product_photo_search_description {
     return Intl.message(
       'You\'ll be able to find a flower by photo. This feature is using Artificial Intelligence for labeling photos from third party.',
@@ -351,6 +393,7 @@ class S {
     );
   }
 
+  /// `Store photos`
   String get subscription_monthly_title {
     return Intl.message(
       'Store photos',
@@ -360,6 +403,7 @@ class S {
     );
   }
 
+  /// `Preserve observation's photos across devices, see shared observations - monthly payment.`
   String get subscription_monthly_description {
     return Intl.message(
       'Preserve observation\'s photos across devices, see shared observations - monthly payment.',
@@ -369,6 +413,7 @@ class S {
     );
   }
 
+  /// `Store photos`
   String get subscription_yearly_title {
     return Intl.message(
       'Store photos',
@@ -378,6 +423,7 @@ class S {
     );
   }
 
+  /// `Preserve observation's photos across devices, see shared observations - yearly payment.`
   String get subscription_yearly_description {
     return Intl.message(
       'Preserve observation\'s photos across devices, see shared observations - yearly payment.',
@@ -387,6 +433,7 @@ class S {
     );
   }
 
+  /// `Subscribe`
   String get product_subscribe {
     return Intl.message(
       'Subscribe',
@@ -396,6 +443,7 @@ class S {
     );
   }
 
+  /// `Subscription failed`
   String get product_subscribe_failed {
     return Intl.message(
       'Subscription failed',
@@ -405,6 +453,7 @@ class S {
     );
   }
 
+  /// `Subscribed`
   String get product_subscribed {
     return Intl.message(
       'Subscribed',
@@ -414,6 +463,7 @@ class S {
     );
   }
 
+  /// `Change`
   String get product_change {
     return Intl.message(
       'Change',
@@ -423,6 +473,7 @@ class S {
     );
   }
 
+  /// `Purchase`
   String get product_purchase {
     return Intl.message(
       'Purchase',
@@ -432,6 +483,7 @@ class S {
     );
   }
 
+  /// `Purchase failed`
   String get product_purchase_failed {
     return Intl.message(
       'Purchase failed',
@@ -441,6 +493,7 @@ class S {
     );
   }
 
+  /// `Purchased`
   String get product_purchased {
     return Intl.message(
       'Purchased',
@@ -450,6 +503,7 @@ class S {
     );
   }
 
+  /// `poisonous plant`
   String get toxicity1 {
     return Intl.message(
       'poisonous plant',
@@ -459,6 +513,7 @@ class S {
     );
   }
 
+  /// `slightly poisonous plant`
   String get toxicity2 {
     return Intl.message(
       'slightly poisonous plant',
@@ -468,6 +523,7 @@ class S {
     );
   }
 
+  /// `Preferred language`
   String get pref_language {
     return Intl.message(
       'Preferred language',
@@ -477,6 +533,7 @@ class S {
     );
   }
 
+  /// `My region`
   String get my_region {
     return Intl.message(
       'My region',
@@ -486,6 +543,7 @@ class S {
     );
   }
 
+  /// `Always add my region to the filter`
   String get always_my_region_title {
     return Intl.message(
       'Always add my region to the filter',
@@ -495,6 +553,7 @@ class S {
     );
   }
 
+  /// `Your region will be pre-set to the filter`
   String get always_my_region_subtitle {
     return Intl.message(
       'Your region will be pre-set to the filter',
@@ -504,6 +563,7 @@ class S {
     );
   }
 
+  /// `My filter`
   String get my_filter {
     return Intl.message(
       'My filter',
@@ -513,6 +573,7 @@ class S {
     );
   }
 
+  /// `Offline mode`
   String get offline_title {
     return Intl.message(
       'Offline mode',
@@ -522,6 +583,7 @@ class S {
     );
   }
 
+  /// `requires 500+ MB additional space.`
   String get offline_subtitle {
     return Intl.message(
       'requires 500+ MB additional space.',
@@ -531,6 +593,7 @@ class S {
     );
   }
 
+  /// `You're going to download 500+ MB of photos and illustrations. Please check if your device is connected to wi-fi. Are you ready for a download?`
   String get offline_download_message {
     return Intl.message(
       'You\'re going to download 500+ MB of photos and illustrations. Please check if your device is connected to wi-fi. Are you ready for a download?',
@@ -540,6 +603,7 @@ class S {
     );
   }
 
+  /// `Downloading photos and illustrations...`
   String get offline_download_progress {
     return Intl.message(
       'Downloading photos and illustrations...',
@@ -549,6 +613,7 @@ class S {
     );
   }
 
+  /// `Photos and illustrations have been successfully downloaded.`
   String get offline_download_success {
     return Intl.message(
       'Photos and illustrations have been successfully downloaded.',
@@ -558,6 +623,7 @@ class S {
     );
   }
 
+  /// `Download failed. Please check your internet connection or free space on device and try again.`
   String get offline_download_fail {
     return Intl.message(
       'Download failed. Please check your internet connection or free space on device and try again.',
@@ -567,6 +633,7 @@ class S {
     );
   }
 
+  /// `Do you want to delete offline data?`
   String get offline_delete_message {
     return Intl.message(
       'Do you want to delete offline data?',
@@ -576,6 +643,7 @@ class S {
     );
   }
 
+  /// `Resume download`
   String get offline_download {
     return Intl.message(
       'Resume download',
@@ -585,6 +653,7 @@ class S {
     );
   }
 
+  /// `Scale down observation's photos`
   String get scale_down_photos_title {
     return Intl.message(
       'Scale down observation\'s photos',
@@ -594,6 +663,7 @@ class S {
     );
   }
 
+  /// `Switch on when you don't see your photos after pick.`
   String get scale_down_photos_subtitle {
     return Intl.message(
       'Switch on when you don\'t see your photos after pick.',
@@ -603,6 +673,7 @@ class S {
     );
   }
 
+  /// `You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:`
   String get feedback_intro {
     return Intl.message(
       'You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:',
@@ -612,6 +683,7 @@ class S {
     );
   }
 
+  /// `You can write a positive review.`
   String get feedback_review {
     return Intl.message(
       'You can write a positive review.',
@@ -621,6 +693,7 @@ class S {
     );
   }
 
+  /// `How to contribute`
   String get feedback_title {
     return Intl.message(
       'How to contribute',
@@ -630,6 +703,7 @@ class S {
     );
   }
 
+  /// `You can report any typo or mistranslation you found or submit new translation for flower's data or application's labels at whatsthatflower.com.`
   String get feedback_translate {
     return Intl.message(
       'You can report any typo or mistranslation you found or submit new translation for flower\'s data or application\'s labels at whatsthatflower.com.',
@@ -639,6 +713,7 @@ class S {
     );
   }
 
+  /// `Improve flower's data`
   String get feedback_submit_translate_data {
     return Intl.message(
       'Improve flower\'s data',
@@ -648,6 +723,7 @@ class S {
     );
   }
 
+  /// `Improve application's labels`
   String get feedback_submit_translate_app {
     return Intl.message(
       'Improve application\'s labels',
@@ -657,6 +733,7 @@ class S {
     );
   }
 
+  /// `You can buy additional functionality like offline mode, search in names or in taxonomy, search by photo, observations and configurable filter.`
   String get feedback_buy_extended {
     return Intl.message(
       'You can buy additional functionality like offline mode, search in names or in taxonomy, search by photo, observations and configurable filter.',
@@ -666,6 +743,7 @@ class S {
     );
   }
 
+  /// `You can display full screen advertisement or watch video advertisement to support further development and database enhancement.`
   String get feedback_run_ads {
     return Intl.message(
       'You can display full screen advertisement or watch video advertisement to support further development and database enhancement.',
@@ -675,6 +753,7 @@ class S {
     );
   }
 
+  /// `Show a fullscreen advertisement`
   String get feedback_run_ads_fullscreen {
     return Intl.message(
       'Show a fullscreen advertisement',
@@ -684,6 +763,7 @@ class S {
     );
   }
 
+  /// `Watch a video advertisement`
   String get feedback_run_ads_video {
     return Intl.message(
       'Watch a video advertisement',
@@ -693,6 +773,7 @@ class S {
     );
   }
 
+  /// `Sign in`
   String get auth_sign_in {
     return Intl.message(
       'Sign in',
@@ -702,6 +783,7 @@ class S {
     );
   }
 
+  /// `Sign out`
   String get auth_sign_out {
     return Intl.message(
       'Sign out',
@@ -711,6 +793,7 @@ class S {
     );
   }
 
+  /// `Sign in with email`
   String get auth_email {
     return Intl.message(
       'Sign in with email',
@@ -720,6 +803,7 @@ class S {
     );
   }
 
+  /// `Sign in with phone`
   String get auth_phone {
     return Intl.message(
       'Sign in with phone',
@@ -729,6 +813,7 @@ class S {
     );
   }
 
+  /// `Sign in with Google`
   String get auth_google {
     return Intl.message(
       'Sign in with Google',
@@ -738,6 +823,7 @@ class S {
     );
   }
 
+  /// `Sign in with Apple`
   String get auth_apple {
     return Intl.message(
       'Sign in with Apple',
@@ -747,6 +833,7 @@ class S {
     );
   }
 
+  /// `Sign in with Facebook`
   String get auth_facebook {
     return Intl.message(
       'Sign in with Facebook',
@@ -756,6 +843,7 @@ class S {
     );
   }
 
+  /// `Sign in with Twitter`
   String get auth_twitter {
     return Intl.message(
       'Sign in with Twitter',
@@ -765,6 +853,7 @@ class S {
     );
   }
 
+  /// `Sign in failed. Check your connection and try again.`
   String get auth_sign_in_failed {
     return Intl.message(
       'Sign in failed. Check your connection and try again.',
@@ -774,6 +863,7 @@ class S {
     );
   }
 
+  /// `Email`
   String get auth_email_hint {
     return Intl.message(
       'Email',
@@ -783,6 +873,7 @@ class S {
     );
   }
 
+  /// `Enter a valid email address`
   String get auth_invalid_email_address {
     return Intl.message(
       'Enter a valid email address',
@@ -792,6 +883,7 @@ class S {
     );
   }
 
+  /// `Password`
   String get auth_password_hint {
     return Intl.message(
       'Password',
@@ -801,6 +893,7 @@ class S {
     );
   }
 
+  /// `Password can't be empty`
   String get auth_empty_password {
     return Intl.message(
       'Password can\'t be empty',
@@ -810,6 +903,7 @@ class S {
     );
   }
 
+  /// `Reset Password`
   String get auth_reset_password {
     return Intl.message(
       'Reset Password',
@@ -819,6 +913,7 @@ class S {
     );
   }
 
+  /// `Create an account`
   String get auth_create_account {
     return Intl.message(
       'Create an account',
@@ -828,6 +923,7 @@ class S {
     );
   }
 
+  /// `Have an account? Sign in`
   String get auth_sign_in_text {
     return Intl.message(
       'Have an account? Sign in',
@@ -837,6 +933,7 @@ class S {
     );
   }
 
+  /// `Verify your account`
   String get auth_verify_email_title {
     return Intl.message(
       'Verify your account',
@@ -846,6 +943,7 @@ class S {
     );
   }
 
+  /// `Link to verify account has been sent to your email address.`
   String get auth_verify_email_message {
     return Intl.message(
       'Link to verify account has been sent to your email address.',
@@ -855,6 +953,7 @@ class S {
     );
   }
 
+  /// `Reset password`
   String get auth_reset_password_email_title {
     return Intl.message(
       'Reset password',
@@ -864,6 +963,7 @@ class S {
     );
   }
 
+  /// `Follow the instructions sent to {email} to reset your password.`
   String auth_reset_password_email_message(Object email) {
     return Intl.message(
       'Follow the instructions sent to $email to reset your password.',
@@ -873,6 +973,7 @@ class S {
     );
   }
 
+  /// `Resend Email`
   String get auth_resend_email {
     return Intl.message(
       'Resend Email',
@@ -882,6 +983,7 @@ class S {
     );
   }
 
+  /// `Verify phone number`
   String get auth_verify_phone_number {
     return Intl.message(
       'Verify phone number',
@@ -891,6 +993,7 @@ class S {
     );
   }
 
+  /// `Enter your phone number`
   String get auth_verify_phone_number_title {
     return Intl.message(
       'Enter your phone number',
@@ -900,6 +1003,7 @@ class S {
     );
   }
 
+  /// `Phone Number`
   String get auth_phone_hint {
     return Intl.message(
       'Phone Number',
@@ -909,6 +1013,7 @@ class S {
     );
   }
 
+  /// `SMS code`
   String get auth_code_hint {
     return Intl.message(
       'SMS code',
@@ -918,6 +1023,7 @@ class S {
     );
   }
 
+  /// `Enter a valid phone number`
   String get auth_invalid_phone_number {
     return Intl.message(
       'Enter a valid phone number',
@@ -927,6 +1033,7 @@ class S {
     );
   }
 
+  /// `Enter a valid SMS code`
   String get auth_invalid_code {
     return Intl.message(
       'Enter a valid SMS code',
@@ -936,6 +1043,7 @@ class S {
     );
   }
 
+  /// `Wrong code. Try again.`
   String get auth_incorrect_code {
     return Intl.message(
       'Wrong code. Try again.',
@@ -945,6 +1053,7 @@ class S {
     );
   }
 
+  /// `By tapping "Verify Phone Number", an SMS may be sent. Message & data rates may apply.`
   String get auth_sms_terms_of_service {
     return Intl.message(
       'By tapping "Verify Phone Number", an SMS may be sent. Message & data rates may apply.',
@@ -954,6 +1063,7 @@ class S {
     );
   }
 
+  /// `Enter the 6-digit code we sent to `
   String get auth_enter_confirmation_code {
     return Intl.message(
       'Enter the 6-digit code we sent to ',
@@ -963,6 +1073,7 @@ class S {
     );
   }
 
+  /// `Resend Code`
   String get auth_resend_code {
     return Intl.message(
       'Resend Code',
@@ -972,6 +1083,7 @@ class S {
     );
   }
 
+  /// `Is this app helpful?`
   String get rate_question {
     return Intl.message(
       'Is this app helpful?',
@@ -981,6 +1093,7 @@ class S {
     );
   }
 
+  /// `Author of this application is fueled by positive response from the users. Please send him some starflowers through application store.`
   String get rate_text {
     return Intl.message(
       'Author of this application is fueled by positive response from the users. Please send him some starflowers through application store.',
@@ -990,6 +1103,7 @@ class S {
     );
   }
 
+  /// `Never`
   String get rate_never {
     return Intl.message(
       'Never',
@@ -999,6 +1113,7 @@ class S {
     );
   }
 
+  /// `Later`
   String get rate_later {
     return Intl.message(
       'Later',
@@ -1008,6 +1123,7 @@ class S {
     );
   }
 
+  /// `Review`
   String get rate {
     return Intl.message(
       'Review',
@@ -1017,6 +1133,7 @@ class S {
     );
   }
 
+  /// `New version is available, please update.`
   String get new_version {
     return Intl.message(
       'New version is available, please update.',
@@ -1026,6 +1143,7 @@ class S {
     );
   }
 
+  /// `Yes`
   String get yes {
     return Intl.message(
       'Yes',
@@ -1035,6 +1153,7 @@ class S {
     );
   }
 
+  /// `No`
   String get no {
     return Intl.message(
       'No',
@@ -1044,6 +1163,7 @@ class S {
     );
   }
 
+  /// `Close`
   String get close {
     return Intl.message(
       'Close',
@@ -1053,6 +1173,7 @@ class S {
     );
   }
 
+  /// `Pause`
   String get pause {
     return Intl.message(
       'Pause',
@@ -1062,6 +1183,7 @@ class S {
     );
   }
 
+  /// `color`
   String get filter_color {
     return Intl.message(
       'color',
@@ -1071,6 +1193,7 @@ class S {
     );
   }
 
+  /// `habitat`
   String get filter_habitat {
     return Intl.message(
       'habitat',
@@ -1080,6 +1203,7 @@ class S {
     );
   }
 
+  /// `petal`
   String get filter_petal {
     return Intl.message(
       'petal',
@@ -1089,6 +1213,7 @@ class S {
     );
   }
 
+  /// `distribution`
   String get filter_distribution {
     return Intl.message(
       'distribution',
@@ -1098,6 +1223,7 @@ class S {
     );
   }
 
+  /// `What's the color of the flower? Choose the closest one.`
   String get color_message {
     return Intl.message(
       'What\'s the color of the flower? Choose the closest one.',
@@ -1107,6 +1233,7 @@ class S {
     );
   }
 
+  /// `What's around you? Identify plant's habitat.`
   String get habitat_message {
     return Intl.message(
       'What\'s around you? Identify plant\'s habitat.',
@@ -1116,6 +1243,7 @@ class S {
     );
   }
 
+  /// `Is the flower zygomorphic? No? Then how many petals does it have?`
   String get petal_message {
     return Intl.message(
       'Is the flower zygomorphic? No? Then how many petals does it have?',
@@ -1125,6 +1253,7 @@ class S {
     );
   }
 
+  /// `Which geographic area should we focus on?`
   String get distribution_message {
     return Intl.message(
       'Which geographic area should we focus on?',
@@ -1134,6 +1263,7 @@ class S {
     );
   }
 
+  /// `white`
   String get color_white {
     return Intl.message(
       'white',
@@ -1143,6 +1273,7 @@ class S {
     );
   }
 
+  /// `yellow`
   String get color_yellow {
     return Intl.message(
       'yellow',
@@ -1152,6 +1283,7 @@ class S {
     );
   }
 
+  /// `red, pink`
   String get color_red {
     return Intl.message(
       'red, pink',
@@ -1161,6 +1293,7 @@ class S {
     );
   }
 
+  /// `blue, purple`
   String get color_blue {
     return Intl.message(
       'blue, purple',
@@ -1170,6 +1303,7 @@ class S {
     );
   }
 
+  /// `green, brown, black`
   String get color_green {
     return Intl.message(
       'green, brown, black',
@@ -1179,6 +1313,7 @@ class S {
     );
   }
 
+  /// `meadows or grasslands`
   String get habitat_meadow {
     return Intl.message(
       'meadows or grasslands',
@@ -1188,6 +1323,7 @@ class S {
     );
   }
 
+  /// `gardens or fields`
   String get habitat_garden {
     return Intl.message(
       'gardens or fields',
@@ -1197,6 +1333,7 @@ class S {
     );
   }
 
+  /// `moorlands or wetlands`
   String get habitat_wetland {
     return Intl.message(
       'moorlands or wetlands',
@@ -1206,6 +1343,7 @@ class S {
     );
   }
 
+  /// `woodlands or forests`
   String get habitat_forest {
     return Intl.message(
       'woodlands or forests',
@@ -1215,6 +1353,7 @@ class S {
     );
   }
 
+  /// `rocks or mountains`
   String get habitat_rock {
     return Intl.message(
       'rocks or mountains',
@@ -1224,6 +1363,7 @@ class S {
     );
   }
 
+  /// `trees or shrubs`
   String get habitat_tree {
     return Intl.message(
       'trees or shrubs',
@@ -1233,6 +1373,7 @@ class S {
     );
   }
 
+  /// `4 or less`
   String get petal_4 {
     return Intl.message(
       '4 or less',
@@ -1242,6 +1383,7 @@ class S {
     );
   }
 
+  /// `5`
   String get petal_5 {
     return Intl.message(
       '5',
@@ -1251,6 +1393,7 @@ class S {
     );
   }
 
+  /// `more than 5`
   String get petal_many {
     return Intl.message(
       'more than 5',
@@ -1260,6 +1403,7 @@ class S {
     );
   }
 
+  /// `zygomorphic`
   String get petal_zygomorphic {
     return Intl.message(
       'zygomorphic',
@@ -1269,6 +1413,7 @@ class S {
     );
   }
 
+  /// `Europe`
   String get europe {
     return Intl.message(
       'Europe',
@@ -1278,6 +1423,7 @@ class S {
     );
   }
 
+  /// `Africa`
   String get africa {
     return Intl.message(
       'Africa',
@@ -1287,6 +1433,7 @@ class S {
     );
   }
 
+  /// `Asia-Temperate`
   String get asia_temperate {
     return Intl.message(
       'Asia-Temperate',
@@ -1296,6 +1443,7 @@ class S {
     );
   }
 
+  /// `Asia-Tropical`
   String get asia_tropical {
     return Intl.message(
       'Asia-Tropical',
@@ -1305,6 +1453,7 @@ class S {
     );
   }
 
+  /// `Australasia`
   String get australasia {
     return Intl.message(
       'Australasia',
@@ -1314,6 +1463,7 @@ class S {
     );
   }
 
+  /// `Pacific`
   String get pacific {
     return Intl.message(
       'Pacific',
@@ -1323,6 +1473,7 @@ class S {
     );
   }
 
+  /// `Northern America`
   String get northern_america {
     return Intl.message(
       'Northern America',
@@ -1332,6 +1483,7 @@ class S {
     );
   }
 
+  /// `Southern America`
   String get southern_america {
     return Intl.message(
       'Southern America',
@@ -1341,6 +1493,7 @@ class S {
     );
   }
 
+  /// `Northern Europe`
   String get northern_europe {
     return Intl.message(
       'Northern Europe',
@@ -1350,6 +1503,7 @@ class S {
     );
   }
 
+  /// `Middle Europe`
   String get middle_europe {
     return Intl.message(
       'Middle Europe',
@@ -1359,6 +1513,7 @@ class S {
     );
   }
 
+  /// `Southwestern Europe`
   String get southwestern_europe {
     return Intl.message(
       'Southwestern Europe',
@@ -1368,6 +1523,7 @@ class S {
     );
   }
 
+  /// `Southeastern Europe`
   String get southeastern_europe {
     return Intl.message(
       'Southeastern Europe',
@@ -1377,6 +1533,7 @@ class S {
     );
   }
 
+  /// `Eastern Europe`
   String get eastern_europe {
     return Intl.message(
       'Eastern Europe',
@@ -1386,6 +1543,7 @@ class S {
     );
   }
 
+  /// `Northern Africa`
   String get northern_africa {
     return Intl.message(
       'Northern Africa',
@@ -1395,6 +1553,7 @@ class S {
     );
   }
 
+  /// `Macaronesia`
   String get macaronesia {
     return Intl.message(
       'Macaronesia',
@@ -1404,6 +1563,7 @@ class S {
     );
   }
 
+  /// `West-Central Tropical Africa`
   String get west_central_tropical_africa {
     return Intl.message(
       'West-Central Tropical Africa',
@@ -1413,6 +1573,7 @@ class S {
     );
   }
 
+  /// `East Tropical Africa`
   String get east_tropical_africa {
     return Intl.message(
       'East Tropical Africa',
@@ -1422,6 +1583,7 @@ class S {
     );
   }
 
+  /// `West Tropical Africa`
   String get west_tropical_africa {
     return Intl.message(
       'West Tropical Africa',
@@ -1431,6 +1593,7 @@ class S {
     );
   }
 
+  /// `Northeast Tropical Africa`
   String get northeast_tropical_africa {
     return Intl.message(
       'Northeast Tropical Africa',
@@ -1440,6 +1603,7 @@ class S {
     );
   }
 
+  /// `South Tropical Africa`
   String get south_tropical_africa {
     return Intl.message(
       'South Tropical Africa',
@@ -1449,6 +1613,7 @@ class S {
     );
   }
 
+  /// `Southern Africa`
   String get southern_africa {
     return Intl.message(
       'Southern Africa',
@@ -1458,6 +1623,7 @@ class S {
     );
   }
 
+  /// `Middle Atlantic Ocean`
   String get middle_atlantic_ocean {
     return Intl.message(
       'Middle Atlantic Ocean',
@@ -1467,6 +1633,7 @@ class S {
     );
   }
 
+  /// `Western Indian Ocean`
   String get western_indian_ocean {
     return Intl.message(
       'Western Indian Ocean',
@@ -1476,6 +1643,7 @@ class S {
     );
   }
 
+  /// `Eastern Asia`
   String get eastern_asia {
     return Intl.message(
       'Eastern Asia',
@@ -1485,6 +1653,7 @@ class S {
     );
   }
 
+  /// `Mongolia`
   String get mongolia {
     return Intl.message(
       'Mongolia',
@@ -1494,6 +1663,7 @@ class S {
     );
   }
 
+  /// `China`
   String get china {
     return Intl.message(
       'China',
@@ -1503,6 +1673,7 @@ class S {
     );
   }
 
+  /// `Arabian Peninsula`
   String get arabian_peninsula {
     return Intl.message(
       'Arabian Peninsula',
@@ -1512,6 +1683,7 @@ class S {
     );
   }
 
+  /// `Western Asia`
   String get western_asia {
     return Intl.message(
       'Western Asia',
@@ -1521,6 +1693,7 @@ class S {
     );
   }
 
+  /// `Caucasus`
   String get caucasus {
     return Intl.message(
       'Caucasus',
@@ -1530,6 +1703,7 @@ class S {
     );
   }
 
+  /// `Middle Asia`
   String get middle_asia {
     return Intl.message(
       'Middle Asia',
@@ -1539,6 +1713,7 @@ class S {
     );
   }
 
+  /// `Russian Far East`
   String get russian_far_east {
     return Intl.message(
       'Russian Far East',
@@ -1548,6 +1723,7 @@ class S {
     );
   }
 
+  /// `Siberia`
   String get siberia {
     return Intl.message(
       'Siberia',
@@ -1557,6 +1733,7 @@ class S {
     );
   }
 
+  /// `Indian Subcontinent`
   String get indian_subcontinent {
     return Intl.message(
       'Indian Subcontinent',
@@ -1566,6 +1743,7 @@ class S {
     );
   }
 
+  /// `Indo-China`
   String get indochina {
     return Intl.message(
       'Indo-China',
@@ -1575,6 +1753,7 @@ class S {
     );
   }
 
+  /// `Malesia`
   String get malesia {
     return Intl.message(
       'Malesia',
@@ -1584,6 +1763,7 @@ class S {
     );
   }
 
+  /// `Papuasia`
   String get papuasia {
     return Intl.message(
       'Papuasia',
@@ -1593,6 +1773,7 @@ class S {
     );
   }
 
+  /// `Australia`
   String get australia {
     return Intl.message(
       'Australia',
@@ -1602,6 +1783,7 @@ class S {
     );
   }
 
+  /// `New Zealand`
   String get new_zealand {
     return Intl.message(
       'New Zealand',
@@ -1611,6 +1793,7 @@ class S {
     );
   }
 
+  /// `Southwestern Pacific`
   String get southwestern_pacific {
     return Intl.message(
       'Southwestern Pacific',
@@ -1620,6 +1803,7 @@ class S {
     );
   }
 
+  /// `South-Central Pacific`
   String get south_central_pacific {
     return Intl.message(
       'South-Central Pacific',
@@ -1629,6 +1813,7 @@ class S {
     );
   }
 
+  /// `Northwestern Pacific`
   String get northwestern_pacific {
     return Intl.message(
       'Northwestern Pacific',
@@ -1638,6 +1823,7 @@ class S {
     );
   }
 
+  /// `North-Central Pacific`
   String get north_central_pacific {
     return Intl.message(
       'North-Central Pacific',
@@ -1647,6 +1833,7 @@ class S {
     );
   }
 
+  /// `Subarctic America`
   String get subarctic_america {
     return Intl.message(
       'Subarctic America',
@@ -1656,6 +1843,7 @@ class S {
     );
   }
 
+  /// `Western Canada`
   String get western_canada {
     return Intl.message(
       'Western Canada',
@@ -1665,6 +1853,7 @@ class S {
     );
   }
 
+  /// `Northwestern U.S.A.`
   String get northwestern_usa {
     return Intl.message(
       'Northwestern U.S.A.',
@@ -1674,6 +1863,7 @@ class S {
     );
   }
 
+  /// `North-Central U.S.A.`
   String get north_central_usa {
     return Intl.message(
       'North-Central U.S.A.',
@@ -1683,6 +1873,7 @@ class S {
     );
   }
 
+  /// `Northeastern U.S.A.`
   String get northeastern_usa {
     return Intl.message(
       'Northeastern U.S.A.',
@@ -1692,6 +1883,7 @@ class S {
     );
   }
 
+  /// `Southwestern U.S.A.`
   String get southwestern_usa {
     return Intl.message(
       'Southwestern U.S.A.',
@@ -1701,6 +1893,7 @@ class S {
     );
   }
 
+  /// `South-Central U.S.A.`
   String get south_central_usa {
     return Intl.message(
       'South-Central U.S.A.',
@@ -1710,6 +1903,7 @@ class S {
     );
   }
 
+  /// `Southeastern U.S.A.`
   String get southeastern_usa {
     return Intl.message(
       'Southeastern U.S.A.',
@@ -1719,6 +1913,7 @@ class S {
     );
   }
 
+  /// `Mexico`
   String get mexico {
     return Intl.message(
       'Mexico',
@@ -1728,6 +1923,7 @@ class S {
     );
   }
 
+  /// `Central America`
   String get central_america {
     return Intl.message(
       'Central America',
@@ -1737,6 +1933,7 @@ class S {
     );
   }
 
+  /// `Caribbean`
   String get caribbean {
     return Intl.message(
       'Caribbean',
@@ -1746,6 +1943,7 @@ class S {
     );
   }
 
+  /// `Northern South America`
   String get northern_south_america {
     return Intl.message(
       'Northern South America',
@@ -1755,6 +1953,7 @@ class S {
     );
   }
 
+  /// `Western South America`
   String get western_south_america {
     return Intl.message(
       'Western South America',
@@ -1764,6 +1963,7 @@ class S {
     );
   }
 
+  /// `Brazil`
   String get brazil {
     return Intl.message(
       'Brazil',
@@ -1773,6 +1973,7 @@ class S {
     );
   }
 
+  /// `Southern South America`
   String get southern_south_america {
     return Intl.message(
       'Southern South America',
@@ -1782,6 +1983,7 @@ class S {
     );
   }
 
+  /// `Eastern Canada`
   String get eastern_canada {
     return Intl.message(
       'Eastern Canada',
@@ -1791,6 +1993,7 @@ class S {
     );
   }
 
+  /// `Subantarctic Islands`
   String get subantarctic_islands {
     return Intl.message(
       'Subantarctic Islands',
@@ -1800,6 +2003,7 @@ class S {
     );
   }
 
+  /// `Antarctic Continent`
   String get antarctic_continent {
     return Intl.message(
       'Antarctic Continent',
@@ -1809,6 +2013,7 @@ class S {
     );
   }
 
+  /// `Pick one`
   String get list_info {
     return Intl.message(
       'Pick one',
@@ -1818,6 +2023,7 @@ class S {
     );
   }
 
+  /// `Info`
   String get plant_info {
     return Intl.message(
       'Info',
@@ -1827,6 +2033,7 @@ class S {
     );
   }
 
+  /// `Gallery`
   String get plant_gallery {
     return Intl.message(
       'Gallery',
@@ -1836,6 +2043,7 @@ class S {
     );
   }
 
+  /// `Taxonomy`
   String get plant_taxonomy {
     return Intl.message(
       'Taxonomy',
@@ -1845,6 +2053,7 @@ class S {
     );
   }
 
+  /// `Sources`
   String get plant_sources {
     return Intl.message(
       'Sources',
@@ -1854,6 +2063,7 @@ class S {
     );
   }
 
+  /// `Translated with Google Translate`
   String get google_translate {
     return Intl.message(
       'Translated with Google Translate',
@@ -1863,6 +2073,7 @@ class S {
     );
   }
 
+  /// `Show English text`
   String get show_original {
     return Intl.message(
       'Show English text',
@@ -1872,6 +2083,7 @@ class S {
     );
   }
 
+  /// `Improve translation`
   String get improve_translation {
     return Intl.message(
       'Improve translation',
@@ -1881,6 +2093,7 @@ class S {
     );
   }
 
+  /// `Show translated text`
   String get show_translation {
     return Intl.message(
       'Show translated text',
@@ -1890,6 +2103,7 @@ class S {
     );
   }
 
+  /// `Height from`
   String get plant_height_from {
     return Intl.message(
       'Height from',
@@ -1899,6 +2113,7 @@ class S {
     );
   }
 
+  /// `to`
   String get plant_height_to {
     return Intl.message(
       'to',
@@ -1908,6 +2123,7 @@ class S {
     );
   }
 
+  /// `Flowering from`
   String get plant_flowering_from {
     return Intl.message(
       'Flowering from',
@@ -1917,6 +2133,7 @@ class S {
     );
   }
 
+  /// `to`
   String get plant_flowering_to {
     return Intl.message(
       'to',
@@ -1926,6 +2143,7 @@ class S {
     );
   }
 
+  /// `Flower`
   String get plant_flower {
     return Intl.message(
       'Flower',
@@ -1935,6 +2153,7 @@ class S {
     );
   }
 
+  /// `Inflorescence`
   String get plant_inflorescence {
     return Intl.message(
       'Inflorescence',
@@ -1944,6 +2163,7 @@ class S {
     );
   }
 
+  /// `Fruit`
   String get plant_fruit {
     return Intl.message(
       'Fruit',
@@ -1953,6 +2173,7 @@ class S {
     );
   }
 
+  /// `Leaf`
   String get plant_leaf {
     return Intl.message(
       'Leaf',
@@ -1962,6 +2183,7 @@ class S {
     );
   }
 
+  /// `Stem`
   String get plant_stem {
     return Intl.message(
       'Stem',
@@ -1971,6 +2193,7 @@ class S {
     );
   }
 
+  /// `Habitat`
   String get plant_habitat {
     return Intl.message(
       'Habitat',
@@ -1980,6 +2203,7 @@ class S {
     );
   }
 
+  /// `Trivia`
   String get plant_trivia {
     return Intl.message(
       'Trivia',
@@ -1989,6 +2213,7 @@ class S {
     );
   }
 
+  /// `Toxicity`
   String get plant_toxicity {
     return Intl.message(
       'Toxicity',
@@ -1998,6 +2223,7 @@ class S {
     );
   }
 
+  /// `Herbalism`
   String get plant_herbalism {
     return Intl.message(
       'Herbalism',
@@ -2007,6 +2233,7 @@ class S {
     );
   }
 
+  /// `Domain`
   String get taxonomy_superregnum {
     return Intl.message(
       'Domain',
@@ -2016,6 +2243,7 @@ class S {
     );
   }
 
+  /// `Kingdom`
   String get taxonomy_regnum {
     return Intl.message(
       'Kingdom',
@@ -2025,6 +2253,7 @@ class S {
     );
   }
 
+  /// `(clade)`
   String get taxonomy_cladus {
     return Intl.message(
       '(clade)',
@@ -2034,6 +2263,7 @@ class S {
     );
   }
 
+  /// `Order`
   String get taxonomy_ordo {
     return Intl.message(
       'Order',
@@ -2043,6 +2273,7 @@ class S {
     );
   }
 
+  /// `Family`
   String get taxonomy_familia {
     return Intl.message(
       'Family',
@@ -2052,6 +2283,7 @@ class S {
     );
   }
 
+  /// `Subfamily`
   String get taxonomy_subfamilia {
     return Intl.message(
       'Subfamily',
@@ -2061,6 +2293,7 @@ class S {
     );
   }
 
+  /// `Tribe`
   String get taxonomy_tribus {
     return Intl.message(
       'Tribe',
@@ -2070,6 +2303,7 @@ class S {
     );
   }
 
+  /// `Subtribe`
   String get taxonomy_subtribus {
     return Intl.message(
       'Subtribe',
@@ -2079,6 +2313,7 @@ class S {
     );
   }
 
+  /// `Genus`
   String get taxonomy_genus {
     return Intl.message(
       'Genus',
@@ -2088,6 +2323,7 @@ class S {
     );
   }
 
+  /// `Subgenus`
   String get taxonomy_subgenus {
     return Intl.message(
       'Subgenus',
@@ -2097,6 +2333,7 @@ class S {
     );
   }
 
+  /// `Supersectio`
   String get taxonomy_supersectio {
     return Intl.message(
       'Supersectio',
@@ -2106,6 +2343,7 @@ class S {
     );
   }
 
+  /// `Sectio`
   String get taxonomy_sectio {
     return Intl.message(
       'Sectio',
@@ -2115,6 +2353,7 @@ class S {
     );
   }
 
+  /// `Subsectio`
   String get taxonomy_subsectio {
     return Intl.message(
       'Subsectio',
@@ -2124,6 +2363,7 @@ class S {
     );
   }
 
+  /// `Serie`
   String get taxonomy_serie {
     return Intl.message(
       'Serie',
@@ -2133,6 +2373,7 @@ class S {
     );
   }
 
+  /// `Subserie`
   String get taxonomy_subserie {
     return Intl.message(
       'Subserie',
@@ -2142,6 +2383,7 @@ class S {
     );
   }
 
+  /// `Species`
   String get taxonomy_species {
     return Intl.message(
       'Species',
@@ -2151,6 +2393,7 @@ class S {
     );
   }
 
+  /// `unknown`
   String get taxonomy_unknown {
     return Intl.message(
       'unknown',
@@ -2160,6 +2403,7 @@ class S {
     );
   }
 
+  /// `There are no flowers matching criteria.`
   String get snack_no_flowers {
     return Intl.message(
       'There are no flowers matching criteria.',
@@ -2169,6 +2413,7 @@ class S {
     );
   }
 
+  /// `Ad is still loading, press button again.`
   String get snack_loading_ad {
     return Intl.message(
       'Ad is still loading, press button again.',
@@ -2178,6 +2423,7 @@ class S {
     );
   }
 
+  /// `Copied to Clipboard`
   String get snack_copy {
     return Intl.message(
       'Copied to Clipboard',
@@ -2187,6 +2433,7 @@ class S {
     );
   }
 
+  /// `... to be published later`
   String get snack_publish {
     return Intl.message(
       '... to be published later',
@@ -2196,6 +2443,7 @@ class S {
     );
   }
 
+  /// `Thanks for your contribution. It'll be published soon.`
   String get snack_translation {
     return Intl.message(
       'Thanks for your contribution. It\'ll be published soon.',
@@ -2205,6 +2453,7 @@ class S {
     );
   }
 
+  /// `Search...`
   String get search {
     return Intl.message(
       'Search...',
@@ -2214,6 +2463,7 @@ class S {
     );
   }
 
+  /// `Search in names`
   String get search_names {
     return Intl.message(
       'Search in names',
@@ -2223,6 +2473,7 @@ class S {
     );
   }
 
+  /// `Search in taxonomy`
   String get search_taxonomy {
     return Intl.message(
       'Search in taxonomy',
@@ -2232,6 +2483,7 @@ class S {
     );
   }
 
+  /// `Observation`
   String get observation {
     return Intl.message(
       'Observation',
@@ -2241,6 +2493,7 @@ class S {
     );
   }
 
+  /// `Observations`
   String get observations {
     return Intl.message(
       'Observations',
@@ -2250,6 +2503,7 @@ class S {
     );
   }
 
+  /// `Place for your private note.`
   String get observation_note {
     return Intl.message(
       'Place for your private note.',
@@ -2259,6 +2513,7 @@ class S {
     );
   }
 
+  /// `Observation was saved.`
   String get observation_saved {
     return Intl.message(
       'Observation was saved.',
@@ -2268,6 +2523,7 @@ class S {
     );
   }
 
+  /// `Observation was incomplete thus it wasn't saved. Photo is missing.`
   String get observation_missing_photo {
     return Intl.message(
       'Observation was incomplete thus it wasn\'t saved. Photo is missing.',
@@ -2277,6 +2533,7 @@ class S {
     );
   }
 
+  /// `Observation was incomplete thus it wasn't saved. Location is missing.`
   String get observation_missing_location {
     return Intl.message(
       'Observation was incomplete thus it wasn\'t saved. Location is missing.',
@@ -2286,6 +2543,7 @@ class S {
     );
   }
 
+  /// `Delete observation`
   String get observation_delete {
     return Intl.message(
       'Delete observation',
@@ -2295,6 +2553,7 @@ class S {
     );
   }
 
+  /// `Do you want to delete the observation?`
   String get observation_delete_question {
     return Intl.message(
       'Do you want to delete the observation?',
@@ -2304,6 +2563,7 @@ class S {
     );
   }
 
+  /// `There is no observation yet.`
   String get observation_empty {
     return Intl.message(
       'There is no observation yet.',
@@ -2313,6 +2573,7 @@ class S {
     );
   }
 
+  /// `Observations are available only for logged users. Please log in.`
   String get observation_no_login {
     return Intl.message(
       'Observations are available only for logged users. Please log in.',
@@ -2322,6 +2583,7 @@ class S {
     );
   }
 
+  /// `Remove photo`
   String get observation_photo_delete {
     return Intl.message(
       'Remove photo',
@@ -2331,6 +2593,7 @@ class S {
     );
   }
 
+  /// `Do you want to remove photo from the observation?`
   String get observation_photo_delete_question {
     return Intl.message(
       'Do you want to remove photo from the observation?',
@@ -2340,6 +2603,7 @@ class S {
     );
   }
 
+  /// `Duplicate photo. Skipped.`
   String get observation_photo_duplicate {
     return Intl.message(
       'Duplicate photo. Skipped.',
@@ -2349,6 +2613,7 @@ class S {
     );
   }
 
+  /// `Upload observations`
   String get observation_upload_title {
     return Intl.message(
       'Upload observations',
@@ -2358,6 +2623,7 @@ class S {
     );
   }
 
+  /// `You're going to upload {param} observations. Please check if your device is connected to wi-fi. Are you ready for an upload?`
   String observation_upload_message(Object param) {
     return Intl.message(
       'You\'re going to upload $param observations. Please check if your device is connected to wi-fi. Are you ready for an upload?',
@@ -2367,6 +2633,7 @@ class S {
     );
   }
 
+  /// `Uploading observations...`
   String get observation_upload_progress {
     return Intl.message(
       'Uploading observations...',
@@ -2376,6 +2643,7 @@ class S {
     );
   }
 
+  /// `Observations have been successfully uploaded.`
   String get observation_upload_success {
     return Intl.message(
       'Observations have been successfully uploaded.',
@@ -2385,6 +2653,7 @@ class S {
     );
   }
 
+  /// `Upload failed. Please check your internet connection and try again.`
   String get observation_upload_fail {
     return Intl.message(
       'Upload failed. Please check your internet connection and try again.',
@@ -2394,6 +2663,17 @@ class S {
     );
   }
 
+  /// `Uploads`
+  String get observation_logs {
+    return Intl.message(
+      'Uploads',
+      name: 'observation_logs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
   String get subscription {
     return Intl.message(
       'Subscription',
@@ -2403,6 +2683,7 @@ class S {
     );
   }
 
+  /// `Shared observations are visible only for subscribed users.`
   String get subscription_info {
     return Intl.message(
       'Shared observations are visible only for subscribed users.',
@@ -2412,6 +2693,7 @@ class S {
     );
   }
 
+  /// `Your observation's date, location and note are saved and persisted across devices without subscription, but photos are stored only locally on the device. You will lose connection to them (even photo itself when you shot it from the application) when you clear data, reinstall or switch device.`
   String get subscription_intro1 {
     return Intl.message(
       'Your observation\'s date, location and note are saved and persisted across devices without subscription, but photos are stored only locally on the device. You will lose connection to them (even photo itself when you shot it from the application) when you clear data, reinstall or switch device.',
@@ -2421,6 +2703,7 @@ class S {
     );
   }
 
+  /// `You are about to subscribe for saving and persisting your photos across all your devices. With subscription you agree to share your observations with other subscribed users. You'll also be able to see their observations. All shared observations are anonymous and its note stays private and won't be shared. To simplify process your photos will be shared under CC0 (Creative Commons Zero) licence, so you also agree with this.`
   String get subscription_intro2 {
     return Intl.message(
       'You are about to subscribe for saving and persisting your photos across all your devices. With subscription you agree to share your observations with other subscribed users. You\'ll also be able to see their observations. All shared observations are anonymous and its note stays private and won\'t be shared. To simplify process your photos will be shared under CC0 (Creative Commons Zero) licence, so you also agree with this.',
@@ -2430,6 +2713,7 @@ class S {
     );
   }
 
+  /// `If you still hesitate to hit the button below, there is a 30 days trial period for both subscriptions.`
   String get subscription_intro3 {
     return Intl.message(
       'If you still hesitate to hit the button below, there is a 30 days trial period for both subscriptions.',
@@ -2439,6 +2723,7 @@ class S {
     );
   }
 
+  /// `month`
   String get subscription_period_month {
     return Intl.message(
       'month',
@@ -2448,6 +2733,7 @@ class S {
     );
   }
 
+  /// `year`
   String get subscription_period_year {
     return Intl.message(
       'year',
@@ -2457,6 +2743,7 @@ class S {
     );
   }
 
+  /// `First payment will be charged to your Google Play account 30 days after the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the Google Play Store after purchase.`
   String get subscription_disclaimer_android {
     return Intl.message(
       'First payment will be charged to your Google Play account 30 days after the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the Google Play Store after purchase.',
@@ -2466,6 +2753,7 @@ class S {
     );
   }
 
+  /// `Payment will be charged to your Apple ID account after the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.`
   String get subscription_disclaimer_ios {
     return Intl.message(
       'Payment will be charged to your Apple ID account after the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.',
@@ -2475,6 +2763,7 @@ class S {
     );
   }
 
+  /// `Terms of use`
   String get terms_of_use {
     return Intl.message(
       'Terms of use',
@@ -2484,6 +2773,7 @@ class S {
     );
   }
 
+  /// `Privacy Policy`
   String get privacy_policy {
     return Intl.message(
       'Privacy Policy',
@@ -2493,6 +2783,7 @@ class S {
     );
   }
 
+  /// `Apple`
   String get apple {
     return Intl.message(
       'Apple',
@@ -2502,6 +2793,7 @@ class S {
     );
   }
 
+  /// `Google`
   String get google {
     return Intl.message(
       'Google',
@@ -2511,6 +2803,7 @@ class S {
     );
   }
 
+  /// `App Store`
   String get app_store {
     return Intl.message(
       'App Store',
@@ -2520,6 +2813,7 @@ class S {
     );
   }
 
+  /// `Google Play Store`
   String get play_store {
     return Intl.message(
       'Google Play Store',
@@ -2529,6 +2823,7 @@ class S {
     );
   }
 
+  /// `Paid feature`
   String get promotion_title {
     return Intl.message(
       'Paid feature',
@@ -2538,6 +2833,7 @@ class S {
     );
   }
 
+  /// `This is a paid feature. You can use it for free until {date}`
   String promotion_content(Object date) {
     return Intl.message(
       'This is a paid feature. You can use it for free until $date',
@@ -2547,6 +2843,7 @@ class S {
     );
   }
 
+  /// `Connection`
   String get no_connection_title {
     return Intl.message(
       'Connection',
@@ -2556,6 +2853,7 @@ class S {
     );
   }
 
+  /// `This feature doesn't work without Internet connection.`
   String get no_connection_content {
     return Intl.message(
       'This feature doesn\'t work without Internet connection.',
@@ -2565,6 +2863,7 @@ class S {
     );
   }
 
+  /// `Search by photo is available only for logged users. Please log in.`
   String get photo_search_no_login {
     return Intl.message(
       'Search by photo is available only for logged users. Please log in.',
@@ -2574,6 +2873,7 @@ class S {
     );
   }
 
+  /// `Search by photo failed. Check your internet connection and try again.`
   String get photo_search_failed {
     return Intl.message(
       'Search by photo failed. Check your internet connection and try again.',
@@ -2583,6 +2883,7 @@ class S {
     );
   }
 
+  /// `Photo to search by`
   String get photo_to_search_by {
     return Intl.message(
       'Photo to search by',
@@ -2592,6 +2893,7 @@ class S {
     );
   }
 
+  /// `This is feature works only online. Sometimes it finds exactly what you're looking for, sometimes not even close. I'm totally relying on third party here since they're doing all the hard work. As time goes it should be better and better. Use it wisely and please don't judge the whole application based on this feature. For quality purposes all search results (not photos) will be saved.`
   String get photo_search_note {
     return Intl.message(
       'This is feature works only online. Sometimes it finds exactly what you\'re looking for, sometimes not even close. I\'m totally relying on third party here since they\'re doing all the hard work. As time goes it should be better and better. Use it wisely and please don\'t judge the whole application based on this feature. For quality purposes all search results (not photos) will be saved.',
@@ -2601,6 +2903,7 @@ class S {
     );
   }
 
+  /// `AI (artificial intelligence) didn't recognize any particular flower on the picture. Try again with different angle, distance or light conditions. If you already did it looks like AI overlord won't come anytime soon.`
   String get photo_search_empty {
     return Intl.message(
       'AI (artificial intelligence) didn\'t recognize any particular flower on the picture. Try again with different angle, distance or light conditions. If you already did it looks like AI overlord won\'t come anytime soon.',
@@ -2610,6 +2913,7 @@ class S {
     );
   }
 
+  /// `Notification`
   String get notification {
     return Intl.message(
       'Notification',
@@ -2619,6 +2923,7 @@ class S {
     );
   }
 
+  /// `Open`
   String get notification_open {
     return Intl.message(
       'Open',
@@ -2628,6 +2933,7 @@ class S {
     );
   }
 
+  /// `Close`
   String get notification_close {
     return Intl.message(
       'Close',
@@ -2637,6 +2943,7 @@ class S {
     );
   }
 
+  /// `Lists of flowers`
   String get custom_lists {
     return Intl.message(
       'Lists of flowers',
@@ -2646,6 +2953,7 @@ class S {
     );
   }
 
+  /// `New flowers`
   String get new_flowers {
     return Intl.message(
       'New flowers',
@@ -2655,6 +2963,7 @@ class S {
     );
   }
 
+  /// `Common lists`
   String get common_lists {
     return Intl.message(
       'Common lists',
@@ -2664,6 +2973,7 @@ class S {
     );
   }
 
+  /// `My lists`
   String get my_lists {
     return Intl.message(
       'My lists',
@@ -2673,6 +2983,7 @@ class S {
     );
   }
 
+  /// `Favorite flowers`
   String get favorite_title {
     return Intl.message(
       'Favorite flowers',
@@ -2682,6 +2993,7 @@ class S {
     );
   }
 
+  /// `There is no favorite flowers yet.`
   String get favorite_empty {
     return Intl.message(
       'There is no favorite flowers yet.',
@@ -2691,6 +3003,7 @@ class S {
     );
   }
 
+  /// `List of favorite flowers is available only for logged users. Please log in.`
   String get favorite_no_login {
     return Intl.message(
       'List of favorite flowers is available only for logged users. Please log in.',

@@ -316,6 +316,10 @@
   "photo_search_note": "Denna funktion fungerar endast online. Ibland hittar den exakt vad du letar efter, ibland inte ens nära. Jag litar helt på tredje part här eftersom de gör allt hårt arbete. Med tiden bör det bli bättre och bättre. Använd det klokt och bedöm inte hela applikationen baserat på den här funktionen. För kvalitetssyften sparas alla sökresultat (inte foton).",
   "photo_search_empty": "AI (artificiell intelligens) kände inte igen någon speciell blomma på bilden. Försök igen med olika vinkel-, distans- eller ljusförhållanden. Om du redan gjorde det ser det ut som AI overlord kommer inte när som helst snart.",
 
+  "notification": "Underrättelse",
+  "notification_open": "Öppna",
+  "notification_close": "Stänga",
+
   "custom_lists": "Listor över blommor",
   "new_flowers": "Nya blommor",
   "common_lists": "Vanliga listor",

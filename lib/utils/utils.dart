@@ -113,6 +113,7 @@ const String firebaseSettingsGenericEntities = "settings/generic_entities";
 const String firebaseSettingsEngine = "settings/ai_engine";
 const String firebaseObservationsPublic = "observations/public";
 const String firebaseObservationsPrivate = "observations/by users";
+const String firebaseObservationsLogs = "observations/logs";
 const String firebaseObservationsByDate = "by date";
 const String firebaseObservationsByPlant = "by plant";
 
@@ -130,6 +131,7 @@ const String firebaseAttributeUrl = "url";
 const String firebaseAttributeLabel = "label";
 const String firebaseAttributeOrder = "order";
 const String firebaseAttributeStatus = "status";
+const String firebaseAttributeTime = "time";
 const String firebaseAttributeOldVersion = "old version";
 const String firebaseAttributeLifetimeSubscription = "lifetime subscription";
 const String firebaseAttributeToken = "token";
@@ -148,6 +150,8 @@ const String firebaseAttributeMock = "refresh_mock";
 const String firebaseValuePrivate = "private";
 const String firebaseValueReview = "review";
 const String firebaseValuePublic = "public";
+const String firebaseValueSuccess = "success";
+const String firebaseValueFailure = "failure";
 
 const String mapModeView = "view";
 const String mapModeEdit = "edit";
@@ -174,6 +178,7 @@ final DatabaseReference searchReference = rootReference.child(firebaseSearch);
 final DatabaseReference apgIVReference = rootReference.child(firebaseAPGIV);
 final DatabaseReference publicObservationsReference = rootReference.child(firebaseObservationsPublic);
 final DatabaseReference privateObservationsReference = rootReference.child(firebaseObservationsPrivate);
+final DatabaseReference logsObservationsReference = rootReference.child(firebaseObservationsLogs);
 final DatabaseReference usersReference = rootReference.child(firebaseUsers);
 final DatabaseReference settingsReference = rootReference.child(firebaseUsers);
 
@@ -259,7 +264,8 @@ Widget getImage(String url, Widget placeholder, {double width, double height, Bo
             width: width,
             height: height,
             placeholder: (context, url) => placeholder,
-            errorWidget: (context, url, error) => Icon(Icons.error, color: Theme.of(context).buttonColor, size: 80.0),
+            errorWidget: (context, url, error) => Container(width: width, height: height,
+                child: Icon(Icons.error, color: Theme.of(context).buttonColor, size: 80.0)),
             imageUrl: storageEndpoint + url,
           );
         } else {

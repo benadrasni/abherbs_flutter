@@ -58,12 +58,7 @@ class _ObservationViewState extends State<ObservationView> {
         ? Future<String>(() {
             return translationCache[widget.observation.plant];
           })
-        : translationsReference
-            .child(getLanguageCode(myLocale.languageCode))
-            .child(widget.observation.plant)
-            .child(firebaseAttributeLabel)
-            .once()
-            .then((DataSnapshot snapshot) {
+        : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(widget.observation.plant).child(firebaseAttributeLabel).once().then((DataSnapshot snapshot) {
             if (snapshot.value != null) {
               translationCache[widget.observation.plant] = snapshot.value;
               return snapshot.value;
@@ -110,9 +105,9 @@ class _ObservationViewState extends State<ObservationView> {
           width: mapWidth,
           height: mapHeight,
           placeholder: (context, url) => Container(
-                width: mapWidth,
-                height: mapHeight,
-              ),
+            width: mapWidth,
+            height: mapHeight,
+          ),
           imageUrl: getMapImageUrl(widget.observation.latitude, widget.observation.longitude, mapWidth, mapHeight),
         ),
         onPressed: () {
@@ -161,10 +156,7 @@ class _ObservationViewState extends State<ObservationView> {
       ),
     ));
 
-    if (widget.currentUser != null &&
-        widget.observation.note != null &&
-        widget.observation.note.isNotEmpty &&
-        widget.observation.id.startsWith(widget.currentUser.uid)) {
+    if (widget.currentUser != null && widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.uid)) {
       widgets.add(Card(
           color: Theme.of(context).buttonColor,
           child: Container(

@@ -316,6 +316,10 @@
   "photo_search_note": "Esta función solo funciona en línea. A veces encuentra exactamente lo que estás buscando, a veces ni siquiera cerca. Estoy confiando totalmente en terceros aquí, ya que están haciendo todo el trabajo duro. A medida que pasa el tiempo, debería ser mejor y mejor. Úselo sabiamente y no juzgue toda la aplicación en función de esta función. Por motivos de calidad, se guardarán todos los resultados de búsqueda (no fotos).",
   "photo_search_empty": "IA (inteligencia artificial) no reconoció ninguna flor en particular en la imagen. Inténtalo de nuevo con diferentes ángulos, distancias o condiciones de luz. Si ya lo hiciste, parece que IA Overlord no reconoce el objeto.",
 
+  "notification": "Notificación",
+  "notification_open": "Abierto",
+  "notification_close": "Cerrar",
+
   "custom_lists": "Listas de flores",
   "new_flowers": "Flores nuevas",
   "common_lists": "Listas comunes",

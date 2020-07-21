@@ -316,6 +316,10 @@
   "photo_search_note": "Ova značajka djeluje samo na mreži. Ponekad se nađe upravo ono što tražite, ponekad čak ni blizu. Ovdje se potpuno oslanjam na treću stranu jer oni rade sve naporan posao. Kako vrijeme prolazi trebalo bi biti sve bolje i bolje. Koristite ga mudro i nemojte suditi o cijeloj aplikaciji na temelju ove značajke. Svi će rezultati pretraživanja (a ne fotografije) biti spremljeni u svrhu kvalitete.",
   "photo_search_empty": "UI (umjetna inteligencija) nije prepoznao nijedan određeni cvijet na slici. Pokušajte ponovno s različitim kutovima, udaljenostima ili uvjetima osvjetljenja. Ako ste to već učinili, izgleda da UI vladar neće uskoro doći.",
 
+  "notification": "Obavijest",
+  "notification_open": "Otvoriti",
+  "notification_close": "Zatvoriti",
+
   "custom_lists": "Popisi cvijeća",
   "new_flowers": "Novo cvijeće",
   "common_lists": "Uobičajeni popisi",
