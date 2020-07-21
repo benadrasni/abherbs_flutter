@@ -316,6 +316,10 @@
   "photo_search_note": "Ini adalah fitur yang hanya berfungsi online. Terkadang ia menemukan apa yang Anda cari, terkadang bahkan tidak dekat. Saya benar-benar mengandalkan pihak ketiga di sini karena mereka melakukan semua kerja keras. Seiring berjalannya waktu itu harus lebih baik dan lebih baik. Gunakan dengan bijak dan jangan menilai keseluruhan aplikasi berdasarkan fitur ini. Untuk tujuan kualitas semua hasil pencarian (bukan foto) akan disimpan.",
   "photo_search_empty": "AI (kecerdasan buatan) tidak mengenali bunga tertentu pada gambar. Coba lagi dengan kondisi sudut, jarak, atau cahaya yang berbeda. Jika Anda sudah melakukannya sepertinya AI tuan tidak akan datang dalam waktu dekat.",
 
+  "notification": "Pemberitahuan",
+  "notification_open": "Buka",
+  "notification_close": "Dekat",
+
   "custom_lists": "Daftar bunga",
   "new_flowers": "Bunga baru",
   "common_lists": "Daftar umum",

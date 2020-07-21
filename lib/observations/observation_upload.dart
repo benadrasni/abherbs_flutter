@@ -29,6 +29,13 @@ class _ObservationUploadState extends State<ObservationUpload> {
     }
   }
 
+  onObservationUploadFail() {
+  }
+
+  onUploadStart() {
+    _logObservationUploadEvent('started');
+  }
+
   onUploadFail() {
     _logObservationUploadEvent('failed');
     if (mounted) {
@@ -77,12 +84,11 @@ class _ObservationUploadState extends State<ObservationUpload> {
         _actions.add(FlatButton(
           child: Text(S.of(context).yes.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
-            _logObservationUploadEvent('started');
             Upload.uploadPaused = false;
             setState(() {
               _uploadStatus = 1;
             });
-            Upload.upload(widget.currentUser, this.onObservationUpload, this.onUploadFinish, this.onUploadFail);
+            Upload.upload(widget.currentUser, this.onObservationUpload, this.onObservationUploadFail, this.onUploadStart, this.onUploadFinish, this.onUploadFail);
           },
         ));
         _actions.add(FlatButton(

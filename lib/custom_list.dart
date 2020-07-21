@@ -24,7 +24,7 @@ const families = [ "Acanthaceae", "Acoraceae", "Adoxaceae", "Alismataceae", "Ama
   "Saxifragaceae", "Scheuchzeriaceae", "Scrophulariaceae", "Solanaceae", "Thymelaeaceae", "Tiliaceae", "Typhaceae", "Ulmaceae", "Urticaceae", "Valerianaceae", "Verbenaceae", "Violaceae", "Vitaceae",
   "Nyctaginaceae", "Paulowniaceae", "Hypoxidaceae", "Myrtaceae", "Mazaceae", "Betulaceae", "Tropaeolaceae", "Hydrangeaceae", "Begoniaceae", "Zingiberaceae", "Alstroemeriaceae", "Asphodelaceae",
   "Cannaceae", "Platanaceae", "Theaceae", "Gesneriaceae", "Bromeliaceae", "Garryaceae", "Pontederiaceae", "Cyperaceae", "Staphyleaceae", "Strelitziaceae", "Goodeniaceae", "Buxaceae", "Caricaceae",
-  "Moraceae", "Fagaceae"];
+  "Moraceae", "Fagaceae", "Nartheciaceae"];
 
 class CustomListScreen extends StatefulWidget {
   final Locale myLocale;

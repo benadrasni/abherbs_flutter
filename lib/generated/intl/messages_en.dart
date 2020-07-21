@@ -174,6 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "observation_delete" : MessageLookupByLibrary.simpleMessage("Delete observation"),
     "observation_delete_question" : MessageLookupByLibrary.simpleMessage("Do you want to delete the observation?"),
     "observation_empty" : MessageLookupByLibrary.simpleMessage("There is no observation yet."),
+    "observation_logs" : MessageLookupByLibrary.simpleMessage("Uploads"),
     "observation_missing_location" : MessageLookupByLibrary.simpleMessage("Observation was incomplete thus it wasn\'t saved. Location is missing."),
     "observation_missing_photo" : MessageLookupByLibrary.simpleMessage("Observation was incomplete thus it wasn\'t saved. Photo is missing."),
     "observation_no_login" : MessageLookupByLibrary.simpleMessage("Observations are available only for logged users. Please log in."),

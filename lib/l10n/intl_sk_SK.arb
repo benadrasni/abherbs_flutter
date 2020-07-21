@@ -313,6 +313,10 @@
   "photo_search_note": "Toto je funkcia, ktorá funguje iba online. Niekedy nájde presne to, čo hľadáte, niekedy sa ani nepriblíži. Úplne sa v tom spolieham na tretiu stranu, keďže ide o ich softvér. Časom by to malo byť lepšie a lepšie. Používajte ju uvážlivo a, prosím, nehodnoťte celú aplikáciu na základe tejto funkcie. Za účelom zvyšovania kvality budú všetky výsledky vyhľadávania (nie fotografie) uložené.",
   "photo_search_empty": "UI (umelá inteligencia) na obrázku nerozoznala žiadnu konkrétnu kvetinu. Skúste znova s iným uhlom, vzdialenosťou alebo svetelnými podmienkami. Ak ste to už urobili, vyzerá to tak, že nový UI vládca nepríde tak skoro.",
 
+  "notification": "Notifikácia",
+  "notification_open": "Otvoriť",
+  "notification_close": "Zatvoriť",
+
   "custom_lists": "Zoznamy kvetov",
   "new_flowers": "Nové kvety",
   "common_lists": "Spoločné zoznamy",

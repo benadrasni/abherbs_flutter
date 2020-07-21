@@ -120,7 +120,7 @@
 
   "yes": "Ja",
   "no": "Ingen",
-  "close": "Tæt",
+  "close": "Lukke",
   "pause": "Pause",
 
   "filter_color": "farve",
@@ -313,6 +313,10 @@
   "photo_to_search_by": "Foto til søgning efter",
   "photo_search_note": "Dette er funktion, der kun fungerer online. Nogle gange finder den nøjagtigt det, du leder efter, nogle gange ikke engang i nærheden. Jeg stoler helt på tredjepart her, da de gør alt det hårde arbejde. Efterhånden som det går skal det være bedre og bedre. Brug det med omhu og bedøm venligst ikke hele applikationen baseret på denne funktion. Af kvalitetsmæssige grunde gemmes alle søgeresultater (ikke fotos).",
   "photo_search_empty": "KI (kunstig intelligens) genkendte ikke nogen bestemt blomst på billedet. Prøv igen med forskellige vinkel-, afstands- eller lysforhold. Hvis du allerede gjorde det ser ud som KI overlord ikke kommer når som helst snart.",
+
+  "notification": "Notifikation",
+  "notification_open": "Åbn",
+  "notification_close": "Lukke",
 
   "custom_lists": "Lister med blomster",
   "new_flowers": "Nye blomster",

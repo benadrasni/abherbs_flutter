@@ -316,6 +316,10 @@
   "photo_search_note": "Jest to funkcja, która działa tylko online. Czasami znajdzie dokładnie to, czego szukasz, czasami w ogóle nie trafi. Całkowicie polegam tutaj na stronie trzeciej, ponieważ jest to ich oprogramowanie. Z czasem powinno być coraz lepiej. Używaj jej mądrze i nie oceniaj całej aplikacji na podstawie tej funkcji. Aby poprawić jakość, wszystkie wyniki wyszukiwania (nie zdjęcia) będą zapisywane.",
   "photo_search_empty": "SI (sztuczna inteligencja) nie rozpoznaje żadnego konkretnego kwiatu na zdjęciu. Spróbuj ponownie pod różnymi kątami, odległościami lub warunkami oświetlenia. Jeśli już to zrobiłeś, wygląda na to, że władca SI nie pojawi się w najbliższym czasie.",
 
+  "notification": "Powiadomienie",
+  "notification_open": "Otwarte",
+  "notification_close": "Zamknij",
+
   "custom_lists": "Listy kwiatów",
   "new_flowers": "Nowe kwiaty",
   "common_lists": "Wspólne listy",

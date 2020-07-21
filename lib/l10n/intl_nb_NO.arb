@@ -316,6 +316,10 @@
   "photo_search_note": "Dette er funksjonen fungerer bare online. Noen ganger finner den nøyaktig hva du leter etter, andre ganger ikke engang i nærheten. Jeg stoler helt på tredjepart her siden de gjør alt det harde arbeidet. Etter hvert som tiden går skal det bli bedre og bedre. Bruk den med omhu og vær så snill, ikke døm hele applikasjonen basert på denne funksjonen. For kvalitetsformål vil alle søkeresultater (ikke bilder) lagres.",
   "photo_search_empty": "KI (kunstig intelligens) kjente ikke noen bestemt blomst på bildet. Prøv igjen med forskjellige vinkel-, avstands- eller lysforhold. Hvis du allerede gjorde det, ser det ut som at KI overlord ikke kommer når som helst snart.",
 
+  "notification": "Melding",
+  "notification_open": "Åpen",
+  "notification_close": "Lukk",
+
   "custom_lists": "Lister over blomster",
   "new_flowers": "Nye blomster",
   "common_lists": "Felles lister",

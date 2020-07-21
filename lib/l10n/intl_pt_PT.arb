@@ -314,6 +314,10 @@
   "photo_search_note": "Esta é uma funcionalidade que funciona apenas online. Às vezes, encontra exatamente o que você está procurando, às vezes nem perto. Estou confiando totalmente em terceiros aqui, pois eles estão fazendo todo o trabalho duro. Conforme o tempo passa, deve ser melhor e melhor. Use-o com sabedoria e, por favor, não julgue o aplicativo inteiro com base nesse funcionalidade. Para fins de qualidade, todos os resultados da pesquisa (não fotos) serão salvos.",
   "photo_search_empty": "O IA (inteligência artificial) não reconheceu nenhuma flor em particular na foto. Tente novamente com diferentes condições de ângulo, distância ou luz. Se você já fez isso, parece que o senhor da IA não virá tão cedo.",
 
+  "notification": "Notificação",
+  "notification_open": "Abrir",
+  "notification_close": "Perto",
+
   "custom_lists": "Listas de flores",
   "new_flowers": "Flores novas",
   "common_lists": "Listas comuns",

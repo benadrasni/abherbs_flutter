@@ -316,6 +316,10 @@
   "photo_search_note": "Tämä ominaisuus toimii vain verkossa. Joskus se löytää juuri etsimäsi, joskus ei edes lähellä. Luotan täysin kolmansiin osapuoliin, koska he tekevät kovaa työtä. Ajan myötä sen pitäisi olla parempi. Käytä sitä viisaasti ja älä arvioi koko sovellusta tämän ominaisuuden perusteella. Laadun kannalta kaikki hakutulokset (ei valokuvia) tallennetaan.",
   "photo_search_empty": "AI (keinotekoinen äly) ei tunnistanut mitään tiettyä kukkaa kuvassa. Yritä uudelleen eri kulma-, etäisyys- tai valo-olosuhteissa. Jos olet jo tehnyt, näyttää siltä, että AI: n ylimies ei tule pian.",
 
+  "notification": "Ilmoitus",
+  "notification_open": "Avata",
+  "notification_close": "Kiinni",
+
   "custom_lists": "Luettelot kukista",
   "new_flowers": "Uudet kukat",
   "common_lists": "Yhteiset luettelot",

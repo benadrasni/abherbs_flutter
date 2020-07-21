@@ -316,6 +316,10 @@
   "photo_search_note": "Aceasta este caracteristica funcționează doar online. Uneori găsește exact ceea ce cauți, alteori nici măcar nu e aproape. Mă bazez total pe terți aici, deoarece fac toată munca grea. Pe măsură ce trece timpul, ar trebui să fie din ce în ce mai bine. Utilizați-l cu înțelepciune și vă rugăm să nu judecați întreaga aplicație pe baza acestei funcții. În scopuri de calitate, toate rezultatele căutării (nu fotografiile) vor fi salvate.",
   "photo_search_empty": "IA (inteligenta artificiala) nu a recunoscut nici o floare particulara in imagine. Încercați din nou cu diferite unghiuri, distanțe sau condiții de lumină. Dacă ați făcut-o deja, arata că IA overlord nu va veni în curând.",
 
+  "notification": "Notificare",
+  "notification_open": "Deschis",
+  "notification_close": "Închide",
+
   "custom_lists": "Liste de flori",
   "new_flowers": "Flori noi",
   "common_lists": "Listele comune",
