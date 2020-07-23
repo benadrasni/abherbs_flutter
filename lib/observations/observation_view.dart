@@ -85,6 +85,7 @@ class _ObservationViewState extends State<ObservationView> {
               ),
               subtitle: labelLocal != widget.observation.plant ? Text(widget.observation.plant) : null,
               trailing: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(_dateFormat.format(widget.observation.date)),
                   Text(_timeFormat.format(widget.observation.date)),

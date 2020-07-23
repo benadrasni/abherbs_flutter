@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -37,35 +35,35 @@ class _ObservationLogsState extends State<ObservationLogs> {
       return FutureBuilder<Observation>(
           future: privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).child(id.toString()).once().then((snapshot) {
             var observation = Observation.fromJson(snapshot.key, snapshot.value);
-            observation.status = observations[firebaseAttributeStatus];
+            observation.uploadStatus = observations[id][firebaseAttributeStatus];
             return observation;
           }),
           builder: (BuildContext context, AsyncSnapshot<Observation> snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.done:
-                return GestureDetector(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(snapshot.data.plant),
-                      Text(_dateFormat.format(snapshot.data.date)),
-                      snapshot.data.status == firebaseValueSuccess ? Icon(Icons.done) : Icon(Icons.error)
-                    ],
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ObservationEdit(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage, snapshot.data),
-                          settings: RouteSettings(name: 'ObservationLogs')),
-                    );
-                  },
-                );
-              default:
-                return Container(
-                  width: 0.0,
-                  height: 0.0,
-                );
+            if (snapshot.data != null) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.done:
+                  return GestureDetector(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(snapshot.data.plant),
+                        Text(_dateFormat.format(snapshot.data.date)),
+                        snapshot.data.uploadStatus == firebaseValueSuccess ? Icon(Icons.done) : Icon(Icons.error)
+                      ],
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ObservationEdit(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage, snapshot.data),
+                            settings: RouteSettings(name: 'ObservationEdit')),
+                      );
+                    },
+                  );
+                default:
+                  return Container(width: 0.0, height: 0.0);
+              }
             }
+            return Container(width: 0.0, height: 0.0);
           });
     }).toList();
 
@@ -78,10 +76,6 @@ class _ObservationLogsState extends State<ObservationLogs> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle listTextStyle = TextStyle(
-      fontSize: 18.0,
-    );
-
     return Scaffold(
       key: _key,
       appBar: AppBar(

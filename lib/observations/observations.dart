@@ -11,7 +11,6 @@ import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -35,50 +34,37 @@ const Key _publicKey = Key('public');
 const Key _privateKey = Key('private');
 
 class _ObservationsState extends State<Observations> {
-  FirebaseAnalytics _firebaseAnalytics;
   Key _key;
   bool _isPublic;
   Query _privateQuery;
   Query _publicQuery;
   Query _query;
-  Future<int> _countUploadF;
   Future<ConnectivityResult> _connectivityResultF;
-  bool _isUpload;
   int _observationsRemain;
 
   onObservationUpload() {
-    if (mounted && _observationsRemain > 0) {
+    if (mounted) {
       setState(() {
-        _observationsRemain--;
+        _observationsRemain = Upload.count;
       });
     }
   }
 
   onObservationUploadFail() {}
-
-  onUploadStart() {
-    _logObservationUploadEvent('started');
-    setState(() {
-      _isUpload = true;
-    });
-  }
-
-  onUploadFail() {
-    _logObservationUploadEvent('failed');
-    setState(() {
-      _isUpload = false;
-    });
-  }
-
+  onUploadStart() {}
   onUploadFinish() {
-    _logObservationUploadEvent('finished');
-    setState(() {
-      _isUpload = false;
-    });
+    if (mounted) {
+      setState(() {
+        _observationsRemain = Upload.count;
+      });
+    }
   }
-
-  Future<void> _logObservationUploadEvent(String status) async {
-    await _firebaseAnalytics.logEvent(name: 'observation_upload', parameters: {'uid': widget.currentUser.uid, 'status': status});
+  onUploadFail() {
+    if (mounted) {
+      setState(() {
+        _observationsRemain = Upload.count;
+      });
+    }
   }
 
   void _setIsPublic(bool isPublic) {
@@ -100,11 +86,11 @@ class _ObservationsState extends State<Observations> {
     }
   }
 
-  Future<int> _setCountUpload() {
+  void _setCountUpload() {
     if (Purchases.isSubscribed()) {
       privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).keepSynced(true);
-      return privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeMock).set("mock").then((value) {
-        _countUploadF = privateObservationsReference
+      privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeMock).set("mock").then((value) {
+        privateObservationsReference
             .child(widget.currentUser.uid)
             .child(firebaseObservationsByDate)
             .child(firebaseAttributeList)
@@ -115,12 +101,7 @@ class _ObservationsState extends State<Observations> {
           setState(() {
             _observationsRemain = snapshot.value?.length ?? 0;
           });
-          return snapshot.value?.length ?? 0;
         });
-      });
-    } else {
-      return Future<int>(() {
-        return 0;
       });
     }
   }
@@ -145,7 +126,6 @@ class _ObservationsState extends State<Observations> {
   void initState() {
     super.initState();
     _key = _privateKey;
-    _firebaseAnalytics = FirebaseAnalytics();
     initializeDateFormatting();
     _connectivityResultF = Connectivity().checkConnectivity();
 
@@ -159,9 +139,8 @@ class _ObservationsState extends State<Observations> {
       _query = _privateQuery;
     }
 
-    _isUpload = false;
     _observationsRemain = 0;
-    _countUploadF = _setCountUpload();
+    _setCountUpload();
     _startUpload();
   }
 
@@ -180,7 +159,7 @@ class _ObservationsState extends State<Observations> {
                 fit: BoxFit.fill,
                 child: Text(_observationsRemain.toString()),
               )),
-              _isUpload
+              Upload.uploadStarted
                   ? CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     )
@@ -240,12 +219,12 @@ class _ObservationsState extends State<Observations> {
             Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
             return ObservationView(widget.currentUser, myLocale, widget.onChangeLanguage, observation);
           }),
-      floatingActionButton: FutureBuilder<List<dynamic>>(
-          future: Future.wait([_countUploadF, _connectivityResultF]),
-          builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+      floatingActionButton: FutureBuilder<ConnectivityResult>(
+          future: _connectivityResultF,
+          builder: (BuildContext context, AsyncSnapshot<ConnectivityResult> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.done:
-                if (snapshot.data[0] > 0) {
+                if (_observationsRemain > 0) {
                   return Container(
                     height: 70.0,
                     width: 70.0,
@@ -253,18 +232,18 @@ class _ObservationsState extends State<Observations> {
                       fit: BoxFit.fill,
                       child: FloatingActionButton(
                         onPressed: () {
-                          snapshot.data[1] == ConnectivityResult.wifi
+                          snapshot.data == ConnectivityResult.wifi
                               ? Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage),
                                       settings: RouteSettings(name: 'ObservationLogs')),
                                 )
-                              : _uploadObservationDialog(snapshot.data[0]).then((value) {
+                              : _uploadObservationDialog(_observationsRemain).then((value) {
                                   _setCountUpload();
                                 });
                         },
-                        child: Icon(snapshot.data[1] == ConnectivityResult.wifi ? Icons.list : Icons.cloud_upload),
+                        child: Icon(snapshot.data == ConnectivityResult.wifi ? Icons.list : Icons.cloud_upload),
                       ),
                     ),
                   );
@@ -279,8 +258,7 @@ class _ObservationsState extends State<Observations> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage),
-                                settings: RouteSettings(name: 'ObservationLogs')),
+                                builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage), settings: RouteSettings(name: 'ObservationLogs')),
                           );
                         },
                         child: Icon(Icons.list),
