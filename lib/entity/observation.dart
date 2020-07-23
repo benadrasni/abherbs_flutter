@@ -23,6 +23,7 @@ class Observation{
   String note;
   List<dynamic> photoPaths;
   String status;
+  String uploadStatus;
   int order;
 
   Observation(String plantName) {

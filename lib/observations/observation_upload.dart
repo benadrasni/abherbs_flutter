@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/observations/upload.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -17,14 +14,13 @@ class ObservationUpload extends StatefulWidget {
 }
 
 class _ObservationUploadState extends State<ObservationUpload> {
-  FirebaseAnalytics _firebaseAnalytics;
   int _observationsRemain;
   int _uploadStatus; // 0: initial, 1: uploading,  2: successful, 3: failed
 
   onObservationUpload() {
     if (mounted && _observationsRemain > 0) {
       setState(() {
-        _observationsRemain--;
+        _observationsRemain = Upload.count;
       });
     }
   }
@@ -33,11 +29,9 @@ class _ObservationUploadState extends State<ObservationUpload> {
   }
 
   onUploadStart() {
-    _logObservationUploadEvent('started');
   }
 
   onUploadFail() {
-    _logObservationUploadEvent('failed');
     if (mounted) {
       setState(() {
         _uploadStatus = 3;
@@ -46,7 +40,6 @@ class _ObservationUploadState extends State<ObservationUpload> {
   }
 
   onUploadFinish() {
-    _logObservationUploadEvent('finished');
     if (mounted) {
       setState(() {
         _uploadStatus = 2;
@@ -54,17 +47,9 @@ class _ObservationUploadState extends State<ObservationUpload> {
     }
   }
 
-  Future<void> _logObservationUploadEvent(String status) async {
-    await _firebaseAnalytics.logEvent(name: 'observation_upload', parameters: {
-      'uid' : widget.currentUser.uid,
-      'status': status
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    _firebaseAnalytics = FirebaseAnalytics();
 
     _uploadStatus = 0;
     _observationsRemain = widget.observationsToUpload;
@@ -113,7 +98,6 @@ class _ObservationUploadState extends State<ObservationUpload> {
         _actions.add(FlatButton(
           child: Text(S.of(context).pause.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
-            _logObservationUploadEvent('paused');
             Upload.uploadPaused = true;
             Navigator.of(context).pop();
           },
