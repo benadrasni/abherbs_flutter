@@ -94,6 +94,7 @@ class Offline {
           break;
         case 3:
           await reference.child(firebasePlants).keepSynced(value);
+          await reference.child(firebaseSynonyms).keepSynced(value);
           var language = await Prefs.getStringListF(keyLanguageAndCountry, ['en', 'US']);
           await reference.child(firebaseTranslations).child(language[0]).keepSynced(value);
           await reference.child(firebaseTranslationsTaxonomy).child(language[0]).keepSynced(value);
