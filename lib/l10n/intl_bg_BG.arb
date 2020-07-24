@@ -239,6 +239,9 @@
   "plant_trivia": "Тривия",
   "plant_toxicity": "Токсичност",
   "plant_herbalism": "Билколечение",
+  "plant_scientific_label": "Научно наименование",
+  "plant_synonyms": "Синоними",
+  "plant_tap_synonyms": "(докоснете, за да видите всички)",
 
   "taxonomy_superregnum": "Империя",
   "taxonomy_regnum": "Царство",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Качване на наблюдения...",
   "observation_upload_success": "Наблюденията бяха качени успешно.",
   "observation_upload_fail": "Качването не бе успешно. Моля, проверете интернет връзката и опитайте отново.",
+  "observation_logs": "Качването",
 
   "subscription": "Абонамент",
   "subscription_info": "Споделените наблюдения са видими само за абонирани потребители.",

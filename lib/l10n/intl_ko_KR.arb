@@ -239,6 +239,9 @@
   "plant_trivia": "잡학",
   "plant_toxicity": "독성도",
   "plant_herbalism": "본초학",
+  "plant_scientific_label": "과학적인 이름",
+  "plant_synonyms": "동의어",
+  "plant_tap_synonyms": "(탭하여 모두보기)",
 
   "taxonomy_superregnum": "역",
   "taxonomy_regnum": "계",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "관측 값 업로드 중 ...",
   "observation_upload_success": "관찰이 성공적으로 업로드되었습니다.",
   "observation_upload_fail": "업로드하지 못했습니다. 인터넷 연결을 확인하고 다시 시도하십시오.",
+  "observation_logs": "업로드",
 
   "subscription": "신청",
   "subscription_info": "공유 관찰은 가입 한 사용자에게만 표시됩니다.",

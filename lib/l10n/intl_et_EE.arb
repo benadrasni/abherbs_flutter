@@ -239,6 +239,9 @@
   "plant_toxicity": "Mürgisus",
   "plant_herbalism": "Raviteaduse",
   "plant_trivia": "Tühiasi",
+  "plant_scientific_label": "Teaduslik nimetus",
+  "plant_synonyms": "Sünonüümid",
+  "plant_tap_synonyms": "(kõigi kuvamiseks puudutage)",
 
   "taxonomy_superregnum": "Domeen",
   "taxonomy_regnum": "Riik",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Vaatluste üleslaadimine...",
   "observation_upload_success": "Vaatlused on edukalt üles laetud.",
   "observation_upload_fail": "Üleslaadimine ebaõnnestus. Palun kontrollige oma Interneti-ühendust ja proovige uuesti.",
+  "observation_logs": "Üleslaadimine",
 
   "subscription": "Tellimus",
   "subscription_info": "Jagatud vaatlused on nähtavad ainult tellitud kasutajatele.",

@@ -239,6 +239,9 @@
   "plant_toxicity": "Giftighet",
   "plant_herbalism": "Medicinalväxt",
   "plant_trivia": "Trivia",
+  "plant_scientific_label": "Vetenskapligt namn",
+  "plant_synonyms": "Synonymer",
+  "plant_tap_synonyms": "(tryck för att se alla)",
 
   "taxonomy_superregnum": "Domän",
   "taxonomy_regnum": "Rike",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Överför observationer...",
   "observation_upload_success": "Observationer har laddats upp.",
   "observation_upload_fail": "Uppladdningen misslyckades. Kontrollera din internetanslutning och försök igen.",
+  "observation_logs": "Uppladdningar",
 
   "subscription": "Prenumeration",
   "subscription_info": "Delade observationer är bara synliga för abonnemangade användare.",

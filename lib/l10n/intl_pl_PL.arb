@@ -239,6 +239,9 @@
   "plant_toxicity": "Toksyczność",
   "plant_herbalism": "Ziołolecznictwo",
   "plant_trivia": "Ciekawostki",
+  "plant_scientific_label": "Nazwa naukowa",
+  "plant_synonyms": "Synonimy",
+  "plant_tap_synonyms": "(stuknij, aby zobaczyć wszystko)",
 
   "taxonomy_superregnum": "Domena",
   "taxonomy_regnum": "Królestwo",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Przesyłanie zaobserwowanych okazów...",
   "observation_upload_success": "Zaobserwowane okazy zostały pomyślnie przesłane.",
   "observation_upload_fail": "Przesyłanie nie powiodło się. Sprawdź połączenie internetowe i spróbuj ponownie.",
+  "observation_logs": "Przesłane",
 
   "subscription": "Subskrypcja",
   "subscription_info": "Udostępnione okazy są widoczne tylko dla subskrybentów.",

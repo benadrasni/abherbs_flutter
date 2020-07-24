@@ -239,6 +239,9 @@
   "plant_toxicity": "Toxiciteit",
   "plant_herbalism": "Geneeskundige toepassingen",
   "plant_trivia": "Weetjes",
+  "plant_scientific_label": "Wetenschappelijke naam",
+  "plant_synonyms": "Synoniemen",
+  "plant_tap_synonyms": "(tik om alles te zien)",
 
   "taxonomy_superregnum": "Domein",
   "taxonomy_regnum": "Rijk",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Observaties uploaden...",
   "observation_upload_success": "Observaties zijn succesvol geüpload.",
   "observation_upload_fail": "Upload mislukt. Controleer uw internetverbinding en probeer het opnieuw.",
+  "observation_logs": "Uploads",
 
   "subscription": "Abonnement",
   "subscription_info": "Gedeelde waarnemingen zijn alleen zichtbaar voor geabonneerde gebruikers.",

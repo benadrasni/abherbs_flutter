@@ -239,6 +239,9 @@
   "plant_toxicity": "Méregtartalom",
   "plant_herbalism": "Gyógynövények",
   "plant_trivia": "Apróságok",
+  "plant_scientific_label": "Tudományos név",
+  "plant_synonyms": "Szinonimák",
+  "plant_tap_synonyms": "(érintse meg az összes megjelenítéséhez)",
 
   "taxonomy_superregnum": "Domén",
   "taxonomy_regnum": "Ország",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Megfigyelések feltöltése...",
   "observation_upload_success": "A megfigyeléseket sikerült feltölteni.",
   "observation_upload_fail": "Feltöltés sikertelen. Kérjük ellenőrizze az internetkapcsolatot és próbálja újra.",
+  "observation_logs": "Feltöltések",
 
   "subscription": "Előfizetés",
   "subscription_info": "A megosztott megfigyelések csak az előfizetett felhasználók számára láthatóak.",

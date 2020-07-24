@@ -239,6 +239,9 @@
   "plant_toxicity": "Toxicita",
   "plant_herbalism": "Bylinářství",
   "plant_trivia": "Zajímavosti",
+  "plant_scientific_label": "Odborný název",
+  "plant_synonyms": "Synonyma",
+  "plant_tap_synonyms": "(klepnutím zobrazíte všechny)",
 
   "taxonomy_superregnum": "doména",
   "taxonomy_regnum": "říše",
@@ -285,6 +288,7 @@
   "observation_upload_progress": "Záloha pozorování...",
   "observation_upload_success": "Pozorování byly úspěšně zálohovány.",
   "observation_upload_fail": "Zálohování selhalo. Zkontrolujte, prosím, vaše připojení na internet a zkuste znovu.",
+  "observation_logs": "Zálohy",
 
   "subscription": "Předplatné",
   "subscription_info": "Sdílené pozorování jsou přístupné pouze uživatelům s předplatným.",

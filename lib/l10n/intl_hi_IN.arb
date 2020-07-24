@@ -239,6 +239,9 @@
   "plant_toxicity": "आविषता",
   "plant_herbalism": "जड़ी-बूटी चिकित्सा",
   "plant_trivia": "सामान्य ज्ञान",
+  "plant_scientific_label": "वैज्ञानिक नाम",
+  "plant_synonyms": "समानार्थक शब्द",
+  "plant_tap_synonyms": "(सभी को देखने के लिए टैप करें)",
 
   "taxonomy_superregnum": "कार्यक्षेत्र",
   "taxonomy_regnum": "राज्य",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "अवलोकन अपलोड करना...",
   "observation_upload_success": "अवलोकन सफलतापूर्वक अपलोड कर दिए गए हैं।",
   "observation_upload_fail": "अपलोड विफल। अपने इंटरनेट कनेक्शन की जाँच करें और पुन: प्रयास करें।",
+  "observation_logs": "अपलोड",
 
   "subscription": "अंशदान",
   "subscription_info": "साझा अवलोकन केवल सब्सक्राइबर उपयोगकर्ताओं के लिए दिखाई दे रहे हैं।",

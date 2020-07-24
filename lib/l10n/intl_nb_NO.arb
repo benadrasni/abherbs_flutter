@@ -239,6 +239,9 @@
   "plant_trivia": "Trivia",
   "plant_toxicity": "Toksisitet",
   "plant_herbalism": "Plantelegemiddel",
+  "plant_scientific_label": "Vitenskapelig navn",
+  "plant_synonyms": "Synonymer",
+  "plant_tap_synonyms": "(trykk for å se alle)",
 
   "taxonomy_superregnum": "Domene",
   "taxonomy_regnum": "Rike",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Laster opp observasjoner...",
   "observation_upload_success": "Observasjoner har blitt lastet opp.",
   "observation_upload_fail": "Opplasting mislyktes. Vennligst sjekk internettforbindelsen din og prøv igjen.",
+  "observation_logs": "Opplastinger",
 
   "subscription": "Abonnement",
   "subscription_info": "Delte observasjoner er bare synlige for abonnenter.",

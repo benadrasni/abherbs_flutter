@@ -237,6 +237,9 @@
   "plant_toxicity": "Toxicita",
   "plant_herbalism": "Bylinkárstvo",
   "plant_trivia": "Zaujímavosti",
+  "plant_scientific_label": "Vedecký názov",
+  "plant_synonyms": "Synonymá",
+  "plant_tap_synonyms": "(klepnutím zobrazíte všetky)",
 
   "taxonomy_superregnum": "doména",
   "taxonomy_regnum": "ríša",
@@ -283,6 +286,7 @@
   "observation_upload_progress": "Zálohujem pozorovania...",
   "observation_upload_success": "Pozorovania boli úspešne zálohované.",
   "observation_upload_fail": "Zálohovanie zlyhalo. Skontrolujte, prosím, vaše pripojenie na internet a skúste znova.",
+  "observation_logs": "Zálohy",
 
   "subscription": "Predplatné",
   "subscription_info": "Zdieľané pozorovania sú prístupné iba používateľom s predplatným.",
