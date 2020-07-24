@@ -239,6 +239,8 @@
   "plant_trivia": "Trivia",
   "plant_toxicity": "Toxicity",
   "plant_herbalism": "Herbalism",
+  "plant_synonyms": "Synonyms",
+  "plant_tap_synonyms": "(tap to see synonyms)",
 
   "taxonomy_superregnum": "Domain",
   "taxonomy_regnum": "Kingdom",
