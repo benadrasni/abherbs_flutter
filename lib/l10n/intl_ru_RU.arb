@@ -239,6 +239,9 @@
   "plant_toxicity": "Токсичность",
   "plant_herbalism": "Травничество",
   "plant_trivia": "Пустяки",
+  "plant_scientific_label": "Научное название",
+  "plant_synonyms": "Синонимы",
+  "plant_tap_synonyms": "(нажмите, чтобы увидеть все)",
 
   "taxonomy_superregnum": "Домен",
   "taxonomy_regnum": "Царство",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Загрузка наблюдений...",
   "observation_upload_success": "Наблюдения были успешно загружены.",
   "observation_upload_fail": "Загрузка не удалась. Пожалуйста, проверьте ваше интернет-соединение и попробуйте снова.",
+  "observation_logs": "Загрузки",
 
   "subscription": "Подписка",
   "subscription_info": "Общие наблюдения видны только для подписавшихся пользователей.",

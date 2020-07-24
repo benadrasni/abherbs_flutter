@@ -239,6 +239,9 @@
   "plant_toxicity": "Toxizität",
   "plant_herbalism": "Pflanzenheilkunde",
   "plant_trivia": "Wissenswertes",
+  "plant_scientific_label": "Wissenschaftlicher Name",
+  "plant_synonyms": "Synonyme",
+  "plant_tap_synonyms": "(tippen Sie auf, um alle anzuzeigen.)",
 
   "taxonomy_superregnum": "Domäne",
   "taxonomy_regnum": "Reich",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Beobachtungen hochladen...",
   "observation_upload_success": "Beobachtungen wurden erfolgreich hochgeladen.",
   "observation_upload_fail": "Hochladen fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
+  "observation_logs": "Uploads",
 
   "subscription": "Abonnement",
   "subscription_info": "Gemeinsame Beobachtungen sind nur für Abonnenten sichtbar.",

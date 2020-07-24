@@ -239,6 +239,9 @@
   "plant_trivia": "معلومات",
   "plant_toxicity": "تأثير سمي",
   "plant_herbalism": "دراسة الأعشاب",
+  "plant_scientific_label": "الاسم العلمي",
+  "plant_synonyms": "المرادفات",
+  "plant_tap_synonyms": "(انقر لرؤية الكل)",
   
   "taxonomy_superregnum": "النطاق",
   "taxonomy_regnum": "المملكة",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "تحميل الملاحظات...",
   "observation_upload_success": "تم تحميل الملاحظات بنجاح.",
   "observation_upload_fail": "التحميل فشل. يرجى التحقق من اتصال الإنترنت الخاص بك وحاول مرة أخرى.",
+  "observation_logs": "التحميلات",
 
   "subscription": "اشتراك",
   "subscription_info": "الملاحظات المشتركة مرئية فقط للمستخدمين المشتركين.",

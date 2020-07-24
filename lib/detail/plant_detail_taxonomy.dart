@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' as ui;
 
 import 'package:abherbs_flutter/detail/plant_detail_synonyms.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
@@ -11,8 +12,13 @@ import 'package:flutter/material.dart';
 import '../ads.dart';
 
 Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize) {
-  Future<int> _countSynonymsF = synonymsReference.child(plant.name).child(firebaseAttributeIPNI).once().then((DataSnapshot snapshot) {
-    return snapshot.value?.length ?? 0;
+  Future<List<String>> _firstSynonymF = synonymsReference.child(plant.name).child(firebaseAttributeIPNI).once().then((DataSnapshot snapshot) {
+    List<String> result = [];
+    if (snapshot.value != null) {
+      result.add([snapshot.value.first['name'], snapshot.value.first['suffix']].join(' '));
+      result.add(snapshot.value.first['author']);
+    }
+    return result;
   });
 
   List<Widget> cards = [];
@@ -33,49 +39,84 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
     child: Column(
       children: [
         Container(
-          padding: EdgeInsets.only(top: 15.0, bottom: 10.0),
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(
-              plant.name,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 22.0,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            Text('  '),
-            Text(
-              plant.author ?? '',
-              style: TextStyle(
-                fontSize: 18.0,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ]),
+          padding: EdgeInsets.only(top: 10.0),
+          child: Text(
+            S.of(context).plant_scientific_label,
+          ),
         ),
-        FutureBuilder<int>(
-          future: _countSynonymsF,
-          builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-            if (snapshot.connectionState == ConnectionState.done && snapshot.data > 0) {
-              return ListTile(
-                title: Center(
-                    child: Text(
-                  S.of(context).plant_tap_synonyms,
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 16.0,
+        Container(
+          padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                plant.name,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22.0,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              Text('  '),
+              Text(
+                plant.author ?? '',
+                style: TextStyle(
+                  fontSize: 18.0,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        FutureBuilder<List<String>>(
+          future: _firstSynonymF,
+          builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done && snapshot.data.length > 0) {
+              return Column(children: [
+                Container(
+                  child: Text(
+                    S.of(context).plant_synonyms,
                   ),
-                )),
-                leading: Icon(Icons.library_books),
-                trailing: Icon(Icons.library_books),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PlantSynonyms(myLocale, plant), settings: RouteSettings(name: 'PlantSynonyms')),
-                  );
-                },
-              );
+                ),
+                ListTile(
+                  title: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        snapshot.data[0],
+                        style: TextStyle(
+                          fontSize: 18.0,
+                        ),
+                      ),
+                      Text(
+                        snapshot.data[1],
+                        style: TextStyle(
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  leading: Icon(Icons.arrow_right),
+                  trailing: Icon(Icons.insert_link),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PlantSynonyms(myLocale, plant), settings: RouteSettings(name: 'PlantSynonyms')),
+                    );
+                  },
+                ),
+                Container(
+                  padding: EdgeInsets.only(bottom: 10.0),
+                  child: Text(
+                    S.of(context).plant_tap_synonyms,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16.0,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+              ]);
             } else {
               return Container();
             }

@@ -239,6 +239,9 @@
   "plant_toxicity": "Toksisitas",
   "plant_herbalism": "Herbalism",
   "plant_trivia": "Trivia",
+  "plant_scientific_label": "Nama ilmiah",
+  "plant_synonyms": "Sinonim",
+  "plant_tap_synonyms": "(ketuk untuk melihat semua)",
 
   "taxonomy_superregnum": "Domain",
   "taxonomy_regnum": "Kingdom",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Mengunggah pengamatan...",
   "observation_upload_success": "Pengamatan telah berhasil diunggah.",
   "observation_upload_fail": "Gagal mengunggah. Silakan periksa koneksi internet Anda dan coba lagi.",
+  "observation_logs": "Unggah",
 
   "subscription": "Berlangganan",
   "subscription_info": "Pengamatan bersama hanya dapat dilihat oleh pengguna yang berlangganan.",

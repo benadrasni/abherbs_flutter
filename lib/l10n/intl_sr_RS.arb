@@ -239,6 +239,9 @@
   "plant_toxicity": "Токсичност",
   "plant_herbalism": "Траварство",
   "plant_trivia": "Тривијалност",
+  "plant_scientific_label": "Научно име",
+  "plant_synonyms": "Синоними",
+  "plant_tap_synonyms": "(тапните да бисте видели све)",
 
   "taxonomy_superregnum": "домен",
   "taxonomy_regnum": "царство",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Учитавање запажања...",
   "observation_upload_success": "Опажања су успешно отпремљена.",
   "observation_upload_fail": "Отпремање није успело. Проверите своју интернет везу и покушајте поново.",
+  "observation_logs": "Отпреме",
 
   "subscription": "Претплата",
   "subscription_info": "Заједничка опажања видљива су само за претплаћене кориснике.",

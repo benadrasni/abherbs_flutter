@@ -239,6 +239,9 @@
   "plant_toxicity": "Toksiškumas",
   "plant_herbalism": "Žolininkystė",
   "plant_trivia": "Obuolys",
+  "plant_scientific_label": "Mokslinis vardas",
+  "plant_synonyms": "Sinonimai",
+  "plant_tap_synonyms": "(bakstelėkite norėdami pamatyti visus)",
 
   "taxonomy_superregnum": "Domenas",
   "taxonomy_regnum": "Karalystė",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Pastabų įkėlimas...",
   "observation_upload_success": "Stebėjimai sėkmingai įkelti.",
   "observation_upload_fail": "Įkelti nepavyko. Patikrinkite interneto ryšį ir bandykite dar kartą.",
+  "observation_logs": "Įkėlimai",
 
   "subscription": "Prenumerata",
   "subscription_info": "Bendros pastabos matomos tik abonentams.",

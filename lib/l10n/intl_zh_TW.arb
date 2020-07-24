@@ -239,6 +239,9 @@
   "plant_trivia": "冷知識",
   "plant_toxicity": "毒性",
   "plant_herbalism": "草藥醫學",
+  "plant_scientific_label": "科學名稱",
+  "plant_synonyms": "同義字",
+  "plant_tap_synonyms": "(點擊查看全部)",
 
   "taxonomy_superregnum": "域",
   "taxonomy_regnum": "界",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "上載觀察...",
   "observation_upload_success": "意見已成功上傳。",
   "observation_upload_fail": "上傳失敗。 請檢查您的互聯網連接，然後重試。",
+  "observation_logs": "上載",
 
   "subscription": "訂閱",
   "subscription_info": "共享的觀察僅對訂閱的用戶可見。",

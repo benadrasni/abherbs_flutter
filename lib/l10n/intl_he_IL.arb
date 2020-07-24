@@ -239,6 +239,9 @@
   "plant_toxicity": "רַעֲלָנוּת",
   "plant_herbalism": "צמחי מרפא",
   "plant_trivia": "דְבָרִים בְּטֵלִים",
+  "plant_scientific_label": "שם מדעי",
+  "plant_synonyms": "מילים נרדפות",
+  "plant_tap_synonyms": "(הקש כדי לראות הכל)",
 
   "taxonomy_superregnum": "על-ממלכה",
   "taxonomy_regnum": "ממלכה",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "העלאת תצפיות...",
   "observation_upload_success": "תצפיות הועלו בהצלחה.",
   "observation_upload_fail": "העלאה נכשלה. בדוק את חיבור האינטרנט שלך ונסה שוב.",
+  "observation_logs": "העלאות",
 
   "subscription": "מנוי",
   "subscription_info": "תצפיות משותפות מוצגות רק עבור משתמשים רשומים.",

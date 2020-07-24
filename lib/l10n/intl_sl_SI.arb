@@ -239,6 +239,9 @@
   "plant_toxicity": "Toksičnost",
   "plant_herbalism": "Zeliščarstvo",
   "plant_trivia": "Trivia",
+  "plant_scientific_label": "Znanstveno ime",
+  "plant_synonyms": "Sinonimi",
+  "plant_tap_synonyms": "(tapnite, da si ogledate vse)",
 
   "taxonomy_superregnum": "Domena",
   "taxonomy_regnum": "Kraljestvo",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Nalaganje opazovanj...",
   "observation_upload_success": "Opažanja so bila uspešno prenesena.",
   "observation_upload_fail": "Nalaganje ni uspelo. Preverite internetno povezavo in poskusite znova.",
+  "observation_logs": "Naloži",
 
   "subscription": "Naročnina",
   "subscription_info": "Opombe v skupni rabi so vidne samo za naročene uporabnike.",

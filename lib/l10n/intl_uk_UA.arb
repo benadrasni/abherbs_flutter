@@ -239,6 +239,9 @@
   "plant_toxicity": "Токсичність",
   "plant_herbalism": "Травнічество",
   "plant_trivia": "Дрібниці",
+  "plant_scientific_label": "Наукова назва",
+  "plant_synonyms": "Синоніми",
+  "plant_tap_synonyms": "(натисніть, щоб побачити все)",
 
   "taxonomy_superregnum": "Домен",
   "taxonomy_regnum": "Царство",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Завантаження спостережень...",
   "observation_upload_success": "Спостереження успішно завантажено.",
   "observation_upload_fail": "Не вдалося завантажити. Перевірте підключення до Інтернету та повторіть спробу.",
+  "observation_logs": "Завантажує",
 
   "subscription": "Підписка",
   "subscription_info": "Спільні спостереження доступні лише для користувачів, які підписалися.",

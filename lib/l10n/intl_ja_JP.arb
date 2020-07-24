@@ -239,6 +239,9 @@
   "plant_toxicity": "毒性",
   "plant_herbalism": "本草学",
   "plant_trivia": "トリビア",
+  "plant_scientific_label": "学名",
+  "plant_synonyms": "同義語",
+  "plant_tap_synonyms": "(タップしてすべてを表示)",
 
   "taxonomy_superregnum": "ドメイン",
   "taxonomy_regnum": "界",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "観測をアップロードする...",
   "observation_upload_success": "観測結果は正常にアップロードされました。",
   "observation_upload_fail": "アップロードに失敗しました。 インターネット接続を確認してもう一度やり直してください。",
+  "observation_logs": "アップロード",
 
   "subscription": "購読",
   "subscription_info": "共有観測は、購読しているユーザーにのみ表示されます。",

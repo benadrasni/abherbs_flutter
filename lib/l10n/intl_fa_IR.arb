@@ -238,6 +238,9 @@
   "plant_toxicity": "سمی بودن",
   "plant_herbalism": "گیاه شناسی",
   "plant_trivia": "چیزهای بی اهمیت",
+  "plant_scientific_label": "نام علمی",
+  "plant_synonyms": "مترادف",
+  "plant_tap_synonyms": "(برای دیدن همه ضربه بزنید)",
 
   "taxonomy_superregnum": "حوزه",
   "taxonomy_regnum": "فرمانرو",
@@ -284,6 +287,7 @@
   "observation_upload_progress": "بارگیری مشاهدات...",
   "observation_upload_success": "مشاهدات با موفقیت آپلود شده اند",
   "observation_upload_fail": "آپلود نشد لطفا اتصال اینترنت خود را بررسی کنید و دوباره امتحان کنید.",
+  "observation_logs": "آپلودها",
 
   "subscription": "اشتراک، ابونمان",
   "subscription_info": "مشاهدات اشتراکی فقط برای کاربران مشترک نمایش داده می شود.",

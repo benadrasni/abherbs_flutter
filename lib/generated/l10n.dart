@@ -2233,6 +2233,16 @@ class S {
     );
   }
 
+  /// `Scientific name`
+  String get plant_scientific_label {
+    return Intl.message(
+      'Scientific name',
+      name: 'plant_scientific_label',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Synonyms`
   String get plant_synonyms {
     return Intl.message(
@@ -2243,10 +2253,10 @@ class S {
     );
   }
 
-  /// `(tap to see synonyms)`
+  /// `(tap to see all)`
   String get plant_tap_synonyms {
     return Intl.message(
-      '(tap to see synonyms)',
+      '(tap to see all)',
       name: 'plant_tap_synonyms',
       desc: '',
       args: [],

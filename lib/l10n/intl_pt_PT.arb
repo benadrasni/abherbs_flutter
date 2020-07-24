@@ -237,6 +237,9 @@
   "plant_toxicity": "Toxicidade",
   "plant_herbalism": "Fitoterapia",
   "plant_trivia": "Curiosidades",
+  "plant_scientific_label": "Nome científico",
+  "plant_synonyms": "Sinônimos",
+  "plant_tap_synonyms": "(toque para ver todos)",
 
   "taxonomy_superregnum": "domínio",
   "taxonomy_regnum": "reino",
@@ -284,6 +287,7 @@
   "observation_upload_progress": "Fazendo upload de observações...",
   "observation_upload_success": "Observações foram enviadas com sucesso.",
   "observation_upload_fail": "Envio falhou. Por favor verifique sua conexão com a internet e tente novamente.",
+  "observation_logs": "Uploads",
 
   "subscription": "Inscrição",
   "subscription_info": "Observações compartilhadas são visíveis apenas para usuários inscritos.",

@@ -239,6 +239,9 @@
   "plant_toxicity": "Toxicitate",
   "plant_herbalism": "Herbalism",
   "plant_trivia": "Trivia",
+  "plant_scientific_label": "Nume stiintific",
+  "plant_synonyms": "Sinonime",
+  "plant_tap_synonyms": "(atingeți pentru a vedea toate)",
 
   "taxonomy_superregnum": "Domeniu",
   "taxonomy_regnum": "Regn",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Încărcarea observațiilor...",
   "observation_upload_success": "Observațiile au fost încărcate cu succes.",
   "observation_upload_fail": "Încărcare eșuată. Verificați conexiunea la internet și încercați din nou.",
+  "observation_logs": "Încărcările",
 
   "subscription": "Abonament",
   "subscription_info": "Observațiile comune sunt vizibile numai pentru utilizatorii abonați.",

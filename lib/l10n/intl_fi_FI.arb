@@ -239,6 +239,9 @@
   "plant_toxicity": "Myrkyllisyys",
   "plant_herbalism": "Herbalismi",
   "plant_trivia": "Trivia",
+  "plant_scientific_label": "Tieteellinen nimi",
+  "plant_synonyms": "Synonyymit",
+  "plant_tap_synonyms": "(napauta nähdäksesi kaikki)",
 
   "taxonomy_superregnum": "Domeeni",
   "taxonomy_regnum": "Kunta",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Havaintojen lataaminen...",
   "observation_upload_success": "Huomautukset on lähetetty onnistuneesti.",
   "observation_upload_fail": "Lähetys epäonnistui. Tarkista Internet-yhteys ja yritä uudelleen.",
+  "observation_logs": "Lisäykset",
 
   "subscription": "Tilaus",
   "subscription_info": "Jaetut havainnot näkyvät vain tilatuille käyttäjille.",

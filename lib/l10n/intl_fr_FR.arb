@@ -239,6 +239,9 @@
   "plant_toxicity": "Toxicité",
   "plant_herbalism": "Herboristerie",
   "plant_trivia": "Bagatelles",
+  "plant_scientific_label": "Nom scientifique",
+  "plant_synonyms": "Synonymes",
+  "plant_tap_synonyms": "(touchez pour tout voir)",
 
   "taxonomy_superregnum": "Domaine",
   "taxonomy_regnum": "Règne",
@@ -286,6 +289,7 @@
   "observation_upload_progress": "Mise en ligne des observations...",
   "observation_upload_success": "Les observations ont été téléchargées avec succès.",
   "observation_upload_fail": "Le téléchargement a échoué. S'il vous plaît, vérifiez votre connexion à internet et réessayez.",
+  "observation_logs": "Téléchargements",
 
   "subscription": "Abonnement",
   "subscription_info": "Les observations partagées sont visibles uniquement pour les utilisateurs abonnés.",
