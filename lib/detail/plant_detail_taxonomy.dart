@@ -72,51 +72,53 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
           future: _firstSynonymF,
           builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
             if (snapshot.connectionState == ConnectionState.done && snapshot.data.length > 0) {
-              return Column(children: [
-                Container(
-                  child: Text(
-                    S.of(context).plant_synonyms,
-                  ),
-                ),
-                ListTile(
-                  title: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        snapshot.data[0],
-                        style: TextStyle(
-                          fontSize: 18.0,
-                        ),
-                      ),
-                      Text(
-                        snapshot.data[1],
-                        style: TextStyle(
-                          fontSize: 18.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                  leading: Icon(Icons.arrow_right),
-                  trailing: Icon(Icons.insert_link),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => PlantSynonyms(myLocale, plant), settings: RouteSettings(name: 'PlantSynonyms')),
-                    );
-                  },
-                ),
-                Container(
-                  padding: EdgeInsets.only(bottom: 10.0),
-                  child: Text(
-                    S.of(context).plant_tap_synonyms,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 16.0,
-                      fontStyle: FontStyle.italic,
+              return GestureDetector(
+                child: Column(children: [
+                  Container(
+                    child: Text(
+                      S.of(context).plant_synonyms,
                     ),
                   ),
-                ),
-              ]);
+                  ListTile(
+                    title: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          snapshot.data[0],
+                          style: TextStyle(
+                            fontSize: 18.0,
+                          ),
+                        ),
+                        Text(
+                          snapshot.data[1],
+                          style: TextStyle(
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    leading: Icon(Icons.arrow_right),
+                    trailing: Icon(Icons.insert_link),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    child: Text(
+                      S.of(context).plant_tap_synonyms,
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16.0,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ),
+                ]),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PlantSynonyms(myLocale, plant), settings: RouteSettings(name: 'PlantSynonyms')),
+                  );
+                },
+              );
             } else {
               return Container();
             }
