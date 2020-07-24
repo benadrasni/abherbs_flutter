@@ -9,7 +9,7 @@ class Ads {
   static Widget admobBigBanner;
 
   static void initialize() {
-    Admob.initialize(getAdAppId());
+    Admob.initialize();
   }
 
   static Widget getAdMobBanner() {
