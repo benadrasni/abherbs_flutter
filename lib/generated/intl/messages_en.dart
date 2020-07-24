@@ -224,6 +224,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "plant_leaf" : MessageLookupByLibrary.simpleMessage("Leaf"),
     "plant_sources" : MessageLookupByLibrary.simpleMessage("Sources"),
     "plant_stem" : MessageLookupByLibrary.simpleMessage("Stem"),
+    "plant_synonyms" : MessageLookupByLibrary.simpleMessage("Synonyms"),
+    "plant_tap_synonyms" : MessageLookupByLibrary.simpleMessage("(tap to see synonyms)"),
     "plant_taxonomy" : MessageLookupByLibrary.simpleMessage("Taxonomy"),
     "plant_toxicity" : MessageLookupByLibrary.simpleMessage("Toxicity"),
     "plant_trivia" : MessageLookupByLibrary.simpleMessage("Trivia"),

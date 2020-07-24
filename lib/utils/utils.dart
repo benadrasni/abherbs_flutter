@@ -106,6 +106,7 @@ const String firebasePlantsToUpdate = "plants_to_update";
 const String firebaseFamiliesToUpdate = "families_to_update";
 const String firebaseVersions = "versions";
 const String firebaseUsers = "users";
+const String firebaseSynonyms = "synonyms";
 const String firebaseUsersPhotoSearch = "users_photo_search";
 const String firebasePromotions = "promotions";
 const String firebaseSearchPhoto = 'search_photo';
@@ -146,6 +147,7 @@ const String firebaseAttributeEntity = "m";
 const String firebaseAttributeAnonymous = "anonymous";
 const String firebaseAttributeIsLabel = "is_label";
 const String firebaseAttributeMock = "refresh_mock";
+const String firebaseAttributeIPNI = "ipni";
 
 const String firebaseValuePrivate = "private";
 const String firebaseValueReview = "review";
@@ -165,6 +167,8 @@ const String notificationAttributeActionBrowse = "browse";
 const String notificationAttributePath = "path";
 const String notificationAttributeUri = "uri";
 
+const String remoteConfigIPNIServer = "ipni_server";
+
 final DatabaseReference rootReference = FirebaseDatabase.instance.reference();
 final DatabaseReference countsReference = rootReference.child(firebaseCounts);
 final DatabaseReference listsReference = rootReference.child(firebasePlantHeaders);
@@ -181,6 +185,7 @@ final DatabaseReference privateObservationsReference = rootReference.child(fireb
 final DatabaseReference logsObservationsReference = rootReference.child(firebaseObservationsLogs);
 final DatabaseReference usersReference = rootReference.child(firebaseUsers);
 final DatabaseReference settingsReference = rootReference.child(firebaseUsers);
+final DatabaseReference synonymsReference = rootReference.child(firebaseSynonyms);
 
 Map<String, String> translationCache = {};
 

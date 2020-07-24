@@ -2233,6 +2233,26 @@ class S {
     );
   }
 
+  /// `Synonyms`
+  String get plant_synonyms {
+    return Intl.message(
+      'Synonyms',
+      name: 'plant_synonyms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(tap to see synonyms)`
+  String get plant_tap_synonyms {
+    return Intl.message(
+      '(tap to see synonyms)',
+      name: 'plant_tap_synonyms',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Domain`
   String get taxonomy_superregnum {
     return Intl.message(
