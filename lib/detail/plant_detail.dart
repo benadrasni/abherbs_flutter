@@ -12,9 +12,9 @@ import 'package:abherbs_flutter/entity/translations.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/observations/observation_edit.dart';
-import 'package:abherbs_flutter/observations/observation_plant.dart';
+import 'package:abherbs_flutter/observations/observation_logs.dart';
+import 'package:abherbs_flutter/observations/observations_plant.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/purchase/subscription.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
@@ -184,14 +184,12 @@ class _PlantDetailState extends State<PlantDetail> {
         _isPublic = isPublic;
       });
     } else {
-      subscriptionDialog(context, S.of(context).subscription, S.of(context).subscription_info).then((value) {
-        if (value != null && value) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Subscription(), settings: RouteSettings(name: 'Subscription')),
-          );
-        }
-      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ObservationLogs(_currentUser, Localizations.localeOf(context), widget.onChangeLanguage),
+            settings: RouteSettings(name: 'ObservationLogs')),
+      );
     }
   }
 

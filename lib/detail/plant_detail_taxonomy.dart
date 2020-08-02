@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui' as ui;
 
 import 'package:abherbs_flutter/detail/plant_detail_synonyms.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
@@ -44,28 +43,21 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
             S.of(context).plant_scientific_label,
           ),
         ),
-        Container(
-          padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                plant.name,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22.0,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              Text('  '),
-              Text(
-                plant.author ?? '',
-                style: TextStyle(
-                  fontSize: 18.0,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+        ListTile(
+          title: Text(
+            plant.name,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 22.0,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          subtitle: Text(
+            plant.author ?? '',
+            style: TextStyle(
+              fontSize: 18.0,
+            ),
+            textAlign: TextAlign.center,
           ),
         ),
         FutureBuilder<List<String>>(
@@ -80,22 +72,19 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
                     ),
                   ),
                   ListTile(
-                    title: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          snapshot.data[0],
-                          style: TextStyle(
-                            fontSize: 18.0,
-                          ),
-                        ),
-                        Text(
-                          snapshot.data[1],
-                          style: TextStyle(
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ],
+                    title: Text(
+                      snapshot.data[0],
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    subtitle: Text(
+                      snapshot.data[1],
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                     leading: Icon(Icons.arrow_right),
                     trailing: Icon(Icons.insert_link),

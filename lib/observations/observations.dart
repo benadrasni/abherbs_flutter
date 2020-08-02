@@ -6,8 +6,6 @@ import 'package:abherbs_flutter/observations/observation_upload.dart';
 import 'package:abherbs_flutter/observations/observation_view.dart';
 import 'package:abherbs_flutter/observations/upload.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/purchase/subscription.dart';
-import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
 import 'package:connectivity/connectivity.dart';
@@ -75,14 +73,12 @@ class _ObservationsState extends State<Observations> {
         _query = _isPublic ? _publicQuery : _privateQuery;
       });
     } else {
-      subscriptionDialog(context, S.of(context).subscription, S.of(context).subscription_info).then((value) {
-        if (value != null && value) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Subscription(), settings: RouteSettings(name: 'Subscription')),
-          );
-        }
-      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage),
+            settings: RouteSettings(name: 'ObservationLogs')),
+      );
     }
   }
 
@@ -222,10 +218,11 @@ class _ObservationsState extends State<Observations> {
       floatingActionButton: FutureBuilder<ConnectivityResult>(
           future: _connectivityResultF,
           builder: (BuildContext context, AsyncSnapshot<ConnectivityResult> snapshot) {
+            Widget result = Container(width: 0.0, height: 0.0);
             switch (snapshot.connectionState) {
               case ConnectionState.done:
                 if (_observationsRemain > 0) {
-                  return Container(
+                  result = Container(
                     height: 70.0,
                     width: 70.0,
                     child: FittedBox(
@@ -247,8 +244,8 @@ class _ObservationsState extends State<Observations> {
                       ),
                     ),
                   );
-                } else if (Purchases.isSubscribed()) {
-                  return Container(
+                } else {
+                  result = Container(
                     height: 70.0,
                     width: 70.0,
                     child: FittedBox(
@@ -266,16 +263,10 @@ class _ObservationsState extends State<Observations> {
                     ),
                   );
                 }
-                return Container(
-                  width: 0.0,
-                  height: 0.0,
-                );
+                break;
               default:
-                return Container(
-                  width: 0.0,
-                  height: 0.0,
-                );
             }
+            return result;
           }),
     );
   }
