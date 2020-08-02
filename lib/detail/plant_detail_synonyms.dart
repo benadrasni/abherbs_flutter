@@ -47,10 +47,8 @@ class _PlantSynonymsState extends State<PlantSynonyms> {
                         ListTile(
                           leading: Icon(Icons.arrow_right),
                           trailing: Icon(Icons.insert_link),
-                          title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                            Text([snapshot.value['name'], snapshot.value['suffix']].join(' ')),
-                            Text(snapshot.value['author']),
-                          ]),
+                          title: Text([snapshot.value['name'], snapshot.value['suffix']].join(' ')),
+                          subtitle: Text(snapshot.value['author']),
                           onTap: () {
                             launchURL(remoteConfig.data.getString(remoteConfigIPNIServer) + snapshot.value['href']);
                           },

@@ -2703,6 +2703,106 @@ class S {
     );
   }
 
+  /// `Statistics`
+  String get observation_stats {
+    return Intl.message(
+      'Statistics',
+      name: 'observation_stats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My observations`
+  String get observation_private {
+    return Intl.message(
+      'My observations',
+      name: 'observation_private',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shared observations`
+  String get observation_public {
+    return Intl.message(
+      'Shared observations',
+      name: 'observation_public',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Count`
+  String get observation_count {
+    return Intl.message(
+      'Count',
+      name: 'observation_count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Distinct flowers`
+  String get observation_distinct_flowers {
+    return Intl.message(
+      'Distinct flowers',
+      name: 'observation_distinct_flowers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First observed`
+  String get observation_first {
+    return Intl.message(
+      'First observed',
+      name: 'observation_first',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last observed`
+  String get observation_last {
+    return Intl.message(
+      'Last observed',
+      name: 'observation_last',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Most observed`
+  String get observation_most {
+    return Intl.message(
+      'Most observed',
+      name: 'observation_most',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rank`
+  String get observation_rank {
+    return Intl.message(
+      'Rank',
+      name: 'observation_rank',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Observers`
+  String get observation_observers {
+    return Intl.message(
+      'Observers',
+      name: 'observation_observers',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Subscription`
   String get subscription {
     return Intl.message(

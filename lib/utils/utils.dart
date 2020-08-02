@@ -89,7 +89,7 @@ const String storageObservations = "observations/";
 const String defaultExtension = ".webp";
 const String defaultPhotoExtension = ".jpg";
 const String thumbnailsDir = "/.thumbnails";
-const double imageSize = 512;
+const double imageSizeScaleDown = 1024;
 
 const int firebaseCacheSize = 1024 * 1024 * 20;
 const String firebaseCounts = 'counts_4_v2';
@@ -117,6 +117,7 @@ const String firebaseObservationsPrivate = "observations/by users";
 const String firebaseObservationsLogs = "observations/logs";
 const String firebaseObservationsByDate = "by date";
 const String firebaseObservationsByPlant = "by plant";
+const String firebaseObservationsStats = "stats";
 
 const String firebaseRootTaxon = 'Eukaryota';
 const String firebaseAPGType = "type";

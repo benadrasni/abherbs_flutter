@@ -32,6 +32,8 @@ class ObservationEdit extends StatefulWidget {
 }
 
 class _ObservationEditState extends State<ObservationEdit> {
+  final ImagePicker _picker = ImagePicker();
+
   GlobalKey<ScaffoldState> _key;
   Future<bool> _scaleDownPhotosF;
   Observation _observation;
@@ -84,14 +86,14 @@ class _ObservationEditState extends State<ObservationEdit> {
 
   Future<void> _getImage(GlobalKey<ScaffoldState> _key, ImageSource source) async {
     bool scaleDownPhotos = await _scaleDownPhotosF;
-    var image = await ImagePicker.pickImage(source: source, maxWidth: scaleDownPhotos ? imageSize : null);
+    var image = await _picker.getImage(source: source, maxWidth: scaleDownPhotos ? imageSizeScaleDown : null);
     if (image != null) {
       Map<String, IfdTag> exifData = await readExifFromBytes(await image.readAsBytes());
-      IfdTag dateTime = exifData['Image DateTime'];
+      IfdTag dateTime = exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime'];
       for (String path in _observation.photoPaths) {
         File file = await Offline.getLocalFile(path);
         Map<String, IfdTag> exifDataFile = await readExifFromBytes(await file.readAsBytes());
-        IfdTag dateTimeFile = exifDataFile['Image DateTime'];
+        IfdTag dateTimeFile = exifDataFile['EXIF DateTimeOriginal'] ?? exifDataFile['Image DateTime'];
         if (dateTime != null && dateTimeFile != null && dateTime.toString() == dateTimeFile.toString()) {
           _key.currentState.showSnackBar(SnackBar(
             content: Text(S.of(context).observation_photo_duplicate),
@@ -113,7 +115,7 @@ class _ObservationEditState extends State<ObservationEdit> {
 
       String rootPath = (await getApplicationDocumentsDirectory()).path;
       await Directory('$rootPath/$dir').create(recursive: true);
-      image.copy('$rootPath/$dir/$filename');
+      File(image.path).copy('$rootPath/$dir/$filename');
       _observation.photoPaths.add('$dir/$filename');
 
       // store exif data
@@ -126,7 +128,7 @@ class _ObservationEditState extends State<ObservationEdit> {
         if (longitude != null) {
           _observation.longitude = longitude;
         }
-        _observation.date = getDateTimeFromExif(exifData['Image DateTime']) ?? DateTime.now();
+        _observation.date = getDateTimeFromExif(exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime']) ?? DateTime.now();
         _dateController.text = _dateFormat.format(_observation.date);
       }
       setState(() {});

@@ -40,6 +40,8 @@ class SearchPhoto extends StatefulWidget {
 }
 
 class _SearchPhotoState extends State<SearchPhoto> {
+  final ImagePicker _picker = ImagePicker();
+
   FirebaseAnalytics _firebaseAnalytics;
   GlobalKey<ScaffoldState> _key;
   File _image;
@@ -59,16 +61,16 @@ class _SearchPhotoState extends State<SearchPhoto> {
         return null;
       });
     });
-    var image = await ImagePicker.pickImage(source: source, maxWidth: maxSize);
+    var image = await _picker.getImage(source: source, maxWidth: maxSize);
     if (image != null) {
       _logPhotoSearchEvent();
       var engine = await _engineF;
       setState(() {
-        _image = image;
+        _image = File(image.path);
         if (engine == plantIdEngine) {
-          _searchResultF = _getSearchResultPlantId(image);
+          _searchResultF = _getSearchResultPlantId(_image);
         } else {
-          _searchResultF = _getSearchResult(image);
+          _searchResultF = _getSearchResult(_image);
         }
       });
     }
