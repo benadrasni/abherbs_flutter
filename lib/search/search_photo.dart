@@ -94,6 +94,9 @@ class _SearchPhotoState extends State<SearchPhoto> {
       if (response.statusCode == 200) {
         Map responseBody = json.decode(response.body);
         for (var suggestion in responseBody['suggestions']) {
+          if (suggestion == null) {
+            continue;
+          }
           String plantName = suggestion['plant_details']['scientific_name'];
           results.add(await rootReference.child(firebaseSearchPhoto + '/' + plantName.toLowerCase().replaceAll('.', '')).once().then((snapshot) {
             var result = SearchResult();
