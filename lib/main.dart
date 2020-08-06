@@ -192,7 +192,8 @@ class _AppState extends State<App> {
         msg: 'IAP not prepared. Check if Platform service is available.',
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 5);
+        timeInSecForIosWeb: 5,
+        backgroundColor: Colors.redAccent);
     Purchases.purchases = [];
   }
 

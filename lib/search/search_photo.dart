@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -373,6 +374,12 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                             goToDetail(self, context, widget.myLocale, result.path, widget.onChangeLanguage, {});
                                           }
                                         },
+                                        onLongPress: () {
+                                          Clipboard.setData(new ClipboardData(text: result.labelLatin));
+                                          _key.currentState.showSnackBar(SnackBar(
+                                            content: Text(S.of(context).snack_copy),
+                                          ));
+                                        },
                                       ));
                                 } else {
                                   return ListTile(
@@ -382,6 +389,12 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                     ),
                                     title: result.commonName.isNotEmpty ? Text(result.commonName) : Text(result.labelLatin),
                                     subtitle: result.commonName.isNotEmpty ? Text(result.labelLatin) : null,
+                                    onLongPress: () {
+                                      Clipboard.setData(new ClipboardData(text: result.labelLatin));
+                                      _key.currentState.showSnackBar(SnackBar(
+                                        content: Text(S.of(context).snack_copy),
+                                      ));
+                                    },
                                   );
                                 }
                               }).toList(),

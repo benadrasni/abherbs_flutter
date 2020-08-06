@@ -306,7 +306,7 @@ class _DistributionState extends State<Distribution> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(widget.filter))),
+                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(_filter))),
                                 settings: RouteSettings(name: 'PlantList')),
                           );
                         },
