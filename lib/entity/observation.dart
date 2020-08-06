@@ -51,8 +51,8 @@ class Observation{
     this.id = data[observationId];
     this.plant = data[observationPlant];
     this.date = DateTime.fromMillisecondsSinceEpoch(data[observationDate][observationTime]);
-    this.longitude = data[observationLongitude];
-    this.latitude = data[observationLatitude];
+    this.longitude = data[observationLongitude].toDouble();
+    this.latitude = data[observationLatitude].toDouble();
     this.note = data[observationNote];
     this.photoPaths = data[observationPhotoPaths];
     this.status = data[observationStatus];
