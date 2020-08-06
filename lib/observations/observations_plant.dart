@@ -70,6 +70,9 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
             ),
             query: _query,
             itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
+              if (snapshot.value == null) {
+                return Container();
+              }
               Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
               return ObservationPlantView(widget.currentUser, myLocale, widget.onChangeLanguage, observation, widget.parentKey);
             }),

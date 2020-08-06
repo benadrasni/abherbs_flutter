@@ -57,7 +57,7 @@ class _ObservationEditState extends State<ObservationEdit> {
     if (_observation.photoPaths.length == 0) {
       await infoDialog(context, S.of(context).observation, S.of(context).observation_missing_photo);
       return false;
-    } else if (_observation.latitude == null || _observation.longitude == null) {
+    } else if (_observation.latitude == null || _observation.longitude == null || (_observation.latitude == 0 && _observation.longitude == 0)) {
       await infoDialog(context, S.of(context).observation, S.of(context).observation_missing_location);
       return false;
     } else {
