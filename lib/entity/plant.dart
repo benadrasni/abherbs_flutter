@@ -23,6 +23,7 @@ class Plant{
     name = data['name'];
     author = data['author'];
     apgIV = data['APGIV'];
+    ipniId = data['ipniId'];
     floweringFrom = data['floweringFrom'];
     floweringTo = data['floweringTo'] ?? 0;
     heightFrom = data['heightFrom'] ?? 0;

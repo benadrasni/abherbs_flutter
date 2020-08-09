@@ -4,8 +4,10 @@ import 'package:abherbs_flutter/detail/plant_detail_synonyms.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 
 import '../ads.dart';
@@ -43,23 +45,36 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
             S.of(context).plant_scientific_label,
           ),
         ),
-        ListTile(
-          title: Text(
-            plant.name,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 22.0,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          subtitle: Text(
-            plant.author ?? '',
-            style: TextStyle(
-              fontSize: 18.0,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
+      FutureBuilder<RemoteConfig>(
+          future: RemoteConfiguration.setupRemoteConfig(),
+          builder: (BuildContext context, AsyncSnapshot<RemoteConfig> remoteConfig) {
+            if (remoteConfig.connectionState == ConnectionState.done) {
+              return ListTile(
+                title: Text(
+                  plant.name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22.0,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                subtitle: Text(
+                  plant.author ?? '',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                onTap:  () {
+                  if (plant.ipniId != null) {
+                    launchURL(remoteConfig.data.getString(remoteConfigIPNIServerWithTaxon) + plant.ipniId);
+                  }
+                },
+              );
+            } else {
+              return Container();
+            }
+          }),
         FutureBuilder<List<String>>(
           future: _firstSynonymF,
           builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
