@@ -8,6 +8,7 @@ class RemoteConfiguration {
     remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: true));
     remoteConfig.setDefaults(<String, dynamic>{
       remoteConfigIPNIServer: 'http://plantsoftheworldonline.org/',
+      remoteConfigIPNIServerWithTaxon: 'http://plantsoftheworldonline.org/taxon/urn:lsid:ipni.org:names:',
     });
     return remoteConfig;
   }

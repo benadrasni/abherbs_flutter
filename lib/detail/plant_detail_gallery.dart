@@ -16,7 +16,7 @@ Widget _getImageButton(BuildContext context, String url) {
   ]);
   return GestureDetector(
     child: Container(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(5.0),
       child: getImage(url, placeholder),
     ),
     onTap: () {
@@ -46,7 +46,7 @@ Widget getGallery(BuildContext context, Plant plant) {
   if (plant.sourceUrls != null) {
     cards.add(Card(
       child: Container(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(5.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: _getSources(context, plant.sourceUrls),

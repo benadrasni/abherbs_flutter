@@ -89,7 +89,7 @@ const String storageObservations = "observations/";
 const String defaultExtension = ".webp";
 const String defaultPhotoExtension = ".jpg";
 const String thumbnailsDir = "/.thumbnails";
-const double imageSizeScaleDown = 1024;
+const double imageSizeScaleDown = 2048;
 
 const int firebaseCacheSize = 1024 * 1024 * 20;
 const String firebaseCounts = 'counts_4_v2';
@@ -169,6 +169,7 @@ const String notificationAttributePath = "path";
 const String notificationAttributeUri = "uri";
 
 const String remoteConfigIPNIServer = "ipni_server";
+const String remoteConfigIPNIServerWithTaxon = "ipni_server_with_taxon";
 
 final DatabaseReference rootReference = FirebaseDatabase.instance.reference();
 final DatabaseReference countsReference = rootReference.child(firebaseCounts);

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
@@ -11,10 +13,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 import '../main.dart';
 import 'observation_edit.dart';
 import 'observations_map.dart';
+
+class ObservationsSum {
+  final DateTime date;
+  final int count;
+
+  ObservationsSum(this.date, this.count);
+}
 
 class ObservationLogs extends StatefulWidget {
   final FirebaseUser currentUser;
@@ -31,6 +41,30 @@ class _ObservationLogsState extends State<ObservationLogs> {
   DateFormat _dateFormat;
   Future<DataSnapshot> _privateStatsF;
   Future<DataSnapshot> _publicStatsF;
+  ScrollController _scrollControllerPrivate = ScrollController();
+  ScrollController _scrollControllerPublic = ScrollController();
+  int _currentIndex = 0;
+
+  _scrollToEnd() async {
+    switch (_currentIndex) {
+      case 0:
+        Timer(Duration(milliseconds: 500), () {
+          _scrollControllerPrivate.animateTo(_scrollControllerPrivate.position.maxScrollExtent, duration: Duration(milliseconds: 400), curve: Curves.ease);
+        });
+        break;
+      case 1:
+        Timer(Duration(milliseconds: 500), () {
+          _scrollControllerPublic.animateTo(_scrollControllerPublic.position.maxScrollExtent, duration: Duration(milliseconds: 400), curve: Curves.ease);
+        });
+        break;
+    }
+  }
+
+  _onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   void initState() {
@@ -92,409 +126,495 @@ class _ObservationLogsState extends State<ObservationLogs> {
     App.currentContext = context;
     var self = this;
     var mainContext = context;
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToEnd());
 
     TextStyle listTextStyle = TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold);
-    double uploadsHeight = MediaQuery.of(context).size.height / 2;
+    double uploadsHeight = MediaQuery.of(context).size.height;
     double mapWidth = MediaQuery.of(context).size.width;
     double mapHeight = 100.0;
 
     var _widgets = <Widget>[];
-    _widgets.add(Card(
-      child: Column(
-        children: [
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text(
-              S.of(context).observation_private,
-              style: listTextStyle,
+    if (_currentIndex == 0) {
+      _widgets.add(Card(
+        child: Column(
+          children: [
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text(
+                S.of(context).observation_private,
+                style: listTextStyle,
+              ),
             ),
-          ),
-          FutureBuilder<DataSnapshot>(
-              future: _privateStatsF,
-              builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.done:
-                    if (snapshot.data.value == null) {
-                      return ListTile(
-                        title: Center(child: Text(S.of(context).observation_empty)),
+            FutureBuilder<DataSnapshot>(
+                future: _privateStatsF,
+                builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.done:
+                      if (snapshot.data.value == null) {
+                        return ListTile(
+                          title: Center(child: Text(S.of(context).observation_empty)),
+                        );
+                      }
+                      return Container(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(S.of(context).observation_count),
+                                  Text(S.of(context).observation_distinct_flowers),
+                                ],
+                              ),
+                              leading: CircleAvatar(
+                                child: Text(snapshot.data.value['count'].toString()),
+                              ),
+                              trailing: CircleAvatar(
+                                child: Text(snapshot.data.value['distinctFlowers'].toString()),
+                              ),
+                            ),
+                            const Divider(
+                              color: Colors.blue,
+                              height: 20,
+                              thickness: 2,
+                              indent: 30,
+                              endIndent: 30,
+                            ),
+                            Container(
+                              child: Text(S.of(context).observation_first),
+                              alignment: Alignment.center,
+                            ),
+                            ListTile(
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(snapshot.data.value['firstFlower']),
+                                  Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch(snapshot.data.value['firstDate']))),
+                                ],
+                              ),
+                              leading: Icon(Icons.local_florist),
+                              onTap: () {
+                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['firstFlower'], widget.onChangeLanguage, {});
+                              },
+                            ),
+                            const Divider(
+                              color: Colors.blue,
+                              height: 20,
+                              thickness: 2,
+                              indent: 30,
+                              endIndent: 30,
+                            ),
+                            Container(
+                              child: Text(S.of(context).observation_last),
+                              alignment: Alignment.center,
+                            ),
+                            ListTile(
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(snapshot.data.value['lastFlower']),
+                                  Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch(snapshot.data.value['lastDate']))),
+                                ],
+                              ),
+                              leading: Icon(Icons.local_florist),
+                              onTap: () {
+                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['lastFlower'], widget.onChangeLanguage, {});
+                              },
+                            ),
+                            const Divider(
+                              color: Colors.blue,
+                              height: 20,
+                              thickness: 2,
+                              indent: 30,
+                              endIndent: 30,
+                            ),
+                            Container(
+                              child: Text(S.of(context).observation_most),
+                              alignment: Alignment.center,
+                            ),
+                            ListTile(
+                              title: Text(snapshot.data.value['mostObserved']),
+                              leading: Icon(Icons.local_florist),
+                              trailing: CircleAvatar(
+                                child: Text(snapshot.data.value['mostObservedCount'].toString()),
+                              ),
+                              onTap: () {
+                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['mostObserved'], widget.onChangeLanguage, {});
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    default:
+                      return Container(width: 0.0, height: 0.0);
+                  }
+                })
+          ],
+        ),
+      ));
+
+      _widgets.add(FutureBuilder<List<dynamic>>(
+          future: privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((snapshot) {
+            List<dynamic> result = [];
+            Map<MarkerId, Marker> markers = {};
+            MarkerId newestMarker;
+            List<ObservationsSum> data = [];
+            int order = 0;
+            if (snapshot.value != null && snapshot.value.keys.length > 0) {
+              for (String item in snapshot.value.keys) {
+                Observation observation = Observation.fromJson(item, snapshot.value[item]);
+                var markerId = MarkerId(observation.id);
+                if (observation.order != null && order > observation.order) {
+                  order = observation.order;
+                  newestMarker = markerId;
+                }
+                markers[markerId] = Marker(
+                  markerId: markerId,
+                  //draggable: true,
+                  position: LatLng(
+                    observation.latitude ?? 0.0,
+                    observation.longitude ?? 0.0,
+                  ),
+                );
+                data.add(ObservationsSum(observation.date, 1));
+              }
+              result.add(newestMarker);
+              result.add(markers);
+              result.add([
+                charts.Series<ObservationsSum, DateTime>(
+                  id: 'Observations',
+                  colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+                  domainFn: (ObservationsSum item, _) => item.date,
+                  measureFn: (ObservationsSum item, _) => item.count,
+                  data: data,
+                )
+              ]);
+            }
+
+            return result;
+          }),
+          builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+            Widget result = Container(width: 0.0, height: 0.0);
+            if (snapshot.connectionState == ConnectionState.done && snapshot.data.isNotEmpty) {
+              result = Column(
+                children: [
+                  FlatButton(
+                    padding: EdgeInsets.all(5.0),
+                    child: CachedNetworkImage(
+                      fit: BoxFit.contain,
+                      width: mapWidth,
+                      height: mapHeight,
+                      placeholder: (context, url) => Container(
+                        width: mapWidth,
+                        height: mapHeight,
+                      ),
+                      imageUrl: getMapImageUrl(snapshot.data[1][snapshot.data[0]].position.latitude, snapshot.data[1][snapshot.data[0]].position.longitude, mapWidth, mapHeight),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ObservationsMap(snapshot.data[0], snapshot.data[1]), settings: RouteSettings(name: 'ObservationsMap')),
+                      );
+                    },
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(5.0),
+                    child: SingleChildScrollView(
+                      controller: _scrollControllerPrivate,
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                        width: mapWidth * 2,
+                        height: mapHeight,
+                        child: charts.TimeSeriesChart(
+                          snapshot.data[2],
+                          animate: true,
+                          defaultRenderer: charts.BarRendererConfig<DateTime>(),
+                          defaultInteractions: false,
+                          primaryMeasureAxis: charts.NumericAxisSpec(renderSpec: charts.NoneRenderSpec()),
+                          behaviors: [
+                            charts.SlidingViewport(),
+                            charts.PanAndZoomBehavior(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }
+            return result;
+          }));
+    }
+
+    if (_currentIndex == 1) {
+      _widgets.add(Card(
+        child: Column(
+          children: [
+            ListTile(
+              leading: Icon(Icons.people),
+              title: Text(
+                S.of(context).observation_public,
+                style: listTextStyle,
+              ),
+            ),
+            Card(
+              child: FutureBuilder<List<DataSnapshot>>(
+                future: Future.wait([_privateStatsF, _publicStatsF]),
+                builder: (BuildContext context, AsyncSnapshot<List<DataSnapshot>> snapshot) {
+                  Widget result = Container(width: 0.0, height: 0.0);
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (Purchases.isSubscribed()) {
+                      if (snapshot.data[0].value != null && snapshot.data[0].value['rank'] > 0) {
+                        result = ListTile(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(S.of(context).observation_rank),
+                              Text(S.of(context).observation_observers),
+                            ],
+                          ),
+                          leading: CircleAvatar(
+                            child: Text(snapshot.data[0].value['rank'].toString()),
+                          ),
+                          trailing: CircleAvatar(
+                            child: Text(snapshot.data[1].value['observers'].toString()),
+                          ),
+                        );
+                      }
+                    } else {
+                      result = ListTile(
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              S.of(context).subscription_info,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                            FlatButton(
+                              color: Colors.lightBlue,
+                              child: Text(S.of(context).product_subscribe.toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => Subscription(), settings: RouteSettings(name: 'Subscription')),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       );
                     }
-                    return Container(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(S.of(context).observation_count),
-                                Text(S.of(context).observation_distinct_flowers),
-                              ],
-                            ),
-                            leading: CircleAvatar(
-                              child: Text(snapshot.data.value['count'].toString()),
-                            ),
-                            trailing: CircleAvatar(
-                              child: Text(snapshot.data.value['distinctFlowers'].toString()),
-                            ),
-                          ),
-                          const Divider(
-                            color: Colors.blue,
-                            height: 20,
-                            thickness: 2,
-                            indent: 30,
-                            endIndent: 30,
-                          ),
-                          Container(
-                            child: Text(S.of(context).observation_first),
-                            alignment: Alignment.center,
-                          ),
-                          ListTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(snapshot.data.value['firstFlower']),
-                                Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch(snapshot.data.value['firstDate']))),
-                              ],
-                            ),
-                            leading: Icon(Icons.local_florist),
-                            onTap: () {
-                              goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['firstFlower'], widget.onChangeLanguage, {});
-                            },
-                          ),
-                          const Divider(
-                            color: Colors.blue,
-                            height: 20,
-                            thickness: 2,
-                            indent: 30,
-                            endIndent: 30,
-                          ),
-                          Container(
-                            child: Text(S.of(context).observation_last),
-                            alignment: Alignment.center,
-                          ),
-                          ListTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(snapshot.data.value['lastFlower']),
-                                Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch(snapshot.data.value['lastDate']))),
-                              ],
-                            ),
-                            leading: Icon(Icons.local_florist),
-                            onTap: () {
-                              goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['lastFlower'], widget.onChangeLanguage, {});
-                            },
-                          ),
-                          const Divider(
-                            color: Colors.blue,
-                            height: 20,
-                            thickness: 2,
-                            indent: 30,
-                            endIndent: 30,
-                          ),
-                          Container(
-                            child: Text(S.of(context).observation_most),
-                            alignment: Alignment.center,
-                          ),
-                          ListTile(
-                            title: Text(snapshot.data.value['mostObserved']),
-                            leading: Icon(Icons.local_florist),
-                            trailing: CircleAvatar(
-                              child: Text(snapshot.data.value['mostObservedCount'].toString()),
-                            ),
-                            onTap: () {
-                              goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['mostObserved'], widget.onChangeLanguage, {});
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  default:
-                    return Container(width: 0.0, height: 0.0);
-                }
-              })
-        ],
-      ),
-    ));
-
-    _widgets.add(FutureBuilder<List<dynamic>>(
-        future: privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((snapshot) {
-          List<dynamic> result = [];
-          Map<MarkerId, Marker> markers = {};
-          MarkerId newestMarker;
-          int order = 0;
-          if (snapshot.value != null && snapshot.value.keys.length > 0) {
-            for (Map<dynamic, dynamic> item in snapshot.value.values) {
-              var markerId = MarkerId(item['id']);
-              if (item['order'] != null && order > item['order']) {
-                order = item['order'];
-                newestMarker = markerId;
-              }
-              markers[markerId] = Marker(
-                markerId: markerId,
-                //draggable: true,
-                position: LatLng(
-                  item['latitude'] ?? 0.0,
-                  item['longitude'] ?? 0.0,
-                ),
-              );
-            }
-            result.add(newestMarker);
-            result.add(markers);
-          }
-
-          return result;
-        }),
-        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-          Widget result = Container(width: 0.0, height: 0.0);
-          if (snapshot.connectionState == ConnectionState.done && snapshot.data.isNotEmpty) {
-            result = FlatButton(
-              padding: EdgeInsets.all(5.0),
-              child: CachedNetworkImage(
-                fit: BoxFit.contain,
-                width: mapWidth,
-                height: mapHeight,
-                placeholder: (context, url) => Container(
-                  width: mapWidth,
-                  height: mapHeight,
-                ),
-                imageUrl: getMapImageUrl(snapshot.data[1][snapshot.data[0]].position.latitude, snapshot.data[1][snapshot.data[0]].position.longitude, mapWidth, mapHeight),
+                  }
+                  return result;
+                },
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ObservationsMap(snapshot.data[0], snapshot.data[1]), settings: RouteSettings(name: 'ObservationsMap')),
-                );
-              },
-            );
-          }
-          return result;
-        }));
-
-    _widgets.add(Card(
-      child: FutureBuilder<List<DataSnapshot>>(
-        future: Future.wait([_privateStatsF, _publicStatsF]),
-        builder: (BuildContext context, AsyncSnapshot<List<DataSnapshot>> snapshot) {
-          Widget result = Container(width: 0.0, height: 0.0);
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (Purchases.isSubscribed()) {
-              if (snapshot.data[0].value != null && snapshot.data[0].value['rank'] > 0) {
-                result = ListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(S.of(context).observation_rank),
-                      Text(S.of(context).observation_observers),
-                    ],
-                  ),
-                  leading: CircleAvatar(
-                    child: Text(snapshot.data[0].value['rank'].toString()),
-                  ),
-                  trailing: CircleAvatar(
-                    child: Text(snapshot.data[1].value['observers'].toString()),
-                  ),
-                );
-              }
-            } else {
-              result = ListTile(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(S.of(context).subscription_info, textAlign: TextAlign.center, style: TextStyle(fontSize: 20,),),
-                    FlatButton(
-                      color: Colors.lightBlue,
-                      child: Text(S.of(context).product_subscribe.toUpperCase(),
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Subscription(), settings: RouteSettings(name: 'Subscription')),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              );
-            }
-          }
-          return result;
-        },
-      ),
-    ));
-
-    _widgets.add(Card(
-      child: Column(
-        children: [
-          ListTile(
-            leading: Icon(Icons.people),
-            title: Text(
-              S.of(context).observation_public,
-              style: listTextStyle,
             ),
-          ),
-          FutureBuilder<DataSnapshot>(
-              future: _publicStatsF,
-              builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.done:
-                    return Container(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(S.of(context).observation_count),
-                                Text(S.of(context).observation_distinct_flowers),
-                              ],
+            FutureBuilder<DataSnapshot>(
+                future: _publicStatsF,
+                builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.done:
+                      return Container(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(S.of(context).observation_count),
+                                  Text(S.of(context).observation_distinct_flowers),
+                                ],
+                              ),
+                              leading: CircleAvatar(
+                                child: Text(snapshot.data.value['count'].toString()),
+                              ),
+                              trailing: CircleAvatar(
+                                child: Text(snapshot.data.value['distinctFlowers'].toString()),
+                              ),
                             ),
-                            leading: CircleAvatar(
-                              child: Text(snapshot.data.value['count'].toString()),
+                            const Divider(
+                              color: Colors.blue,
+                              height: 20,
+                              thickness: 2,
+                              indent: 30,
+                              endIndent: 30,
                             ),
-                            trailing: CircleAvatar(
-                              child: Text(snapshot.data.value['distinctFlowers'].toString()),
+                            Container(
+                              child: Text(S.of(context).observation_first),
+                              alignment: Alignment.center,
                             ),
-                          ),
-                          const Divider(
-                            color: Colors.blue,
-                            height: 20,
-                            thickness: 2,
-                            indent: 30,
-                            endIndent: 30,
-                          ),
-                          Container(
-                            child: Text(S.of(context).observation_first),
-                            alignment: Alignment.center,
-                          ),
-                          ListTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(snapshot.data.value['firstFlower']),
-                                Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch(snapshot.data.value['firstDate']))),
-                              ],
+                            ListTile(
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(snapshot.data.value['firstFlower']),
+                                  Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch(snapshot.data.value['firstDate']))),
+                                ],
+                              ),
+                              leading: Icon(Icons.local_florist),
+                              onTap: () {
+                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['firstFlower'], widget.onChangeLanguage, {});
+                              },
                             ),
-                            leading: Icon(Icons.local_florist),
-                            onTap: () {
-                              goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['firstFlower'], widget.onChangeLanguage, {});
-                            },
-                          ),
-                          const Divider(
-                            color: Colors.blue,
-                            height: 20,
-                            thickness: 2,
-                            indent: 30,
-                            endIndent: 30,
-                          ),
-                          Container(
-                            child: Text(S.of(context).observation_last),
-                            alignment: Alignment.center,
-                          ),
-                          ListTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(snapshot.data.value['lastFlower']),
-                                Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch(snapshot.data.value['lastDate']))),
-                              ],
+                            const Divider(
+                              color: Colors.blue,
+                              height: 20,
+                              thickness: 2,
+                              indent: 30,
+                              endIndent: 30,
                             ),
-                            leading: Icon(Icons.local_florist),
-                            onTap: () {
-                              goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['lastFlower'], widget.onChangeLanguage, {});
-                            },
-                          ),
-                          const Divider(
-                            color: Colors.blue,
-                            height: 20,
-                            thickness: 2,
-                            indent: 30,
-                            endIndent: 30,
-                          ),
-                          Container(
-                            child: Text(S.of(context).observation_most),
-                            alignment: Alignment.center,
-                          ),
-                          ListTile(
-                            title: Text(snapshot.data.value['mostObserved']),
-                            leading: Icon(Icons.local_florist),
-                            trailing: CircleAvatar(
-                              child: Text(snapshot.data.value['mostObservedCount'].toString()),
+                            Container(
+                              child: Text(S.of(context).observation_last),
+                              alignment: Alignment.center,
                             ),
-                            onTap: () {
-                              goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['mostObserved'], widget.onChangeLanguage, {});
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  default:
-                    return Container(width: 0.0, height: 0.0);
-                }
-              })
-        ],
-      ),
-    ));
+                            ListTile(
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(snapshot.data.value['lastFlower']),
+                                  Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch(snapshot.data.value['lastDate']))),
+                                ],
+                              ),
+                              leading: Icon(Icons.local_florist),
+                              onTap: () {
+                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['lastFlower'], widget.onChangeLanguage, {});
+                              },
+                            ),
+                            const Divider(
+                              color: Colors.blue,
+                              height: 20,
+                              thickness: 2,
+                              indent: 30,
+                              endIndent: 30,
+                            ),
+                            Container(
+                              child: Text(S.of(context).observation_most),
+                              alignment: Alignment.center,
+                            ),
+                            ListTile(
+                              title: Text(snapshot.data.value['mostObserved']),
+                              leading: Icon(Icons.local_florist),
+                              trailing: CircleAvatar(
+                                child: Text(snapshot.data.value['mostObservedCount'].toString()),
+                              ),
+                              onTap: () {
+                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['mostObserved'], widget.onChangeLanguage, {});
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    default:
+                      return Container(width: 0.0, height: 0.0);
+                  }
+                })
+          ],
+        ),
+      ));
 
-    _widgets.add(FutureBuilder<List<dynamic>>(
-        future: publicObservationsReference.child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((snapshot) {
-          List<dynamic> result = [];
-          Map<MarkerId, Marker> markers = {};
-          MarkerId newestMarker;
-          int order = 0;
-          if (snapshot.value != null && snapshot.value.keys.length > 0) {
-            for (Map<dynamic, dynamic> item in snapshot.value.values) {
-              var markerId = MarkerId(item['id']);
-              if (item['order'] != null && order > item['order']) {
-                order = item['order'];
-                newestMarker = markerId;
+      _widgets.add(FutureBuilder<List<dynamic>>(
+          future: publicObservationsReference.child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((snapshot) {
+            List<dynamic> result = [];
+            Map<MarkerId, Marker> markers = {};
+            MarkerId newestMarker;
+            List<ObservationsSum> data = [];
+            int order = 0;
+            if (snapshot.value != null && snapshot.value.keys.length > 0) {
+              for (String item in snapshot.value.keys) {
+                Observation observation = Observation.fromJson(item, snapshot.value[item]);
+                var markerId = MarkerId(observation.id);
+                if (observation.order != null && order > observation.order) {
+                  order = observation.order;
+                  newestMarker = markerId;
+                }
+                markers[markerId] = Marker(
+                  markerId: markerId,
+                  icon: observation.id.startsWith(widget.currentUser.uid) ? BitmapDescriptor.defaultMarker : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+                  position: LatLng(
+                    observation.latitude ?? 0.0,
+                    observation.longitude ?? 0.0,
+                  ),
+                );
+                data.add(ObservationsSum(observation.date, 1));
               }
-              markers[markerId] = Marker(
-                markerId: markerId,
-                icon: item['id'].startsWith(widget.currentUser.uid) ? BitmapDescriptor.defaultMarker : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-                position: LatLng(
-                  item['latitude'] ?? 0.0,
-                  item['longitude'] ?? 0.0,
-                ),
+              result.add(newestMarker);
+              result.add(markers);
+              result.add([
+                charts.Series<ObservationsSum, DateTime>(
+                  id: 'Observations',
+                  colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+                  domainFn: (ObservationsSum item, _) => item.date,
+                  measureFn: (ObservationsSum item, _) => item.count,
+                  data: data,
+                )
+              ]);
+            }
+
+            return result;
+          }),
+          builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+            Widget result = Container(width: 0.0, height: 0.0);
+            if (snapshot.connectionState == ConnectionState.done && snapshot.data.isNotEmpty) {
+              result = Column(
+                children: [
+                  FlatButton(
+                    padding: EdgeInsets.all(5.0),
+                    child: CachedNetworkImage(
+                      fit: BoxFit.contain,
+                      width: mapWidth,
+                      height: mapHeight,
+                      placeholder: (context, url) => Container(
+                        width: mapWidth,
+                        height: mapHeight,
+                      ),
+                      imageUrl: getMapImageUrl(snapshot.data[1][snapshot.data[0]].position.latitude, snapshot.data[1][snapshot.data[0]].position.longitude, mapWidth, mapHeight),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ObservationsMap(snapshot.data[0], snapshot.data[1]), settings: RouteSettings(name: 'ObservationsMap')),
+                      );
+                    },
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(5.0),
+                    child: SingleChildScrollView(
+                      controller: _scrollControllerPublic,
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                        width: mapWidth * 2,
+                        height: mapHeight,
+                        child: charts.TimeSeriesChart(
+                          snapshot.data[2],
+                          animate: true,
+                          defaultRenderer: charts.BarRendererConfig<DateTime>(),
+                          defaultInteractions: false,
+                          primaryMeasureAxis: charts.NumericAxisSpec(renderSpec: charts.NoneRenderSpec()),
+                          behaviors: [
+                            charts.SlidingViewport(),
+                            charts.PanAndZoomBehavior(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               );
             }
-            result.add(newestMarker);
-            result.add(markers);
-          }
+            return result;
+          }));
+    }
 
-          return result;
-        }),
-        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-          Widget result = Container(width: 0.0, height: 0.0);
-          if (snapshot.connectionState == ConnectionState.done && snapshot.data.isNotEmpty) {
-            result = FlatButton(
-              padding: EdgeInsets.all(5.0),
-              child: CachedNetworkImage(
-                fit: BoxFit.contain,
-                width: mapWidth,
-                height: mapHeight,
-                placeholder: (context, url) => Container(
-                  width: mapWidth,
-                  height: mapHeight,
-                ),
-                imageUrl: getMapImageUrl(snapshot.data[1][snapshot.data[0]].position.latitude, snapshot.data[1][snapshot.data[0]].position.longitude, mapWidth, mapHeight),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ObservationsMap(snapshot.data[0], snapshot.data[1]), settings: RouteSettings(name: 'ObservationsMap')),
-                );
-              },
-            );
-          }
-          return result;
-        }));
-
-    if (Purchases.isSubscribed()) {
+    if (_currentIndex == 2) {
       _widgets.add(Card(
         child: Column(
           children: <Widget>[
@@ -532,12 +652,30 @@ class _ObservationLogsState extends State<ObservationLogs> {
       ));
     }
 
+    List<BottomNavigationBarItem> bottomNav = [];
+    bottomNav.add(BottomNavigationBarItem(
+      icon: Icon(Icons.person),
+      title: Text(S.of(context).observation_private),
+    ));
+    bottomNav.add(BottomNavigationBarItem(
+      icon: Icon(Icons.people),
+      title: Text(S.of(context).observation_public),
+    ));
+    if (Purchases.isSubscribed()) {
+      bottomNav.add(BottomNavigationBarItem(icon: Icon(Icons.cloud_upload), title: Text(S.of(context).observation_logs)));
+    }
+
     return Scaffold(
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).observation_stats),
       ),
       body: ListView(children: _widgets),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: _onTabTapped,
+        items: bottomNav,
+      ),
     );
   }
 }

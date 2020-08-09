@@ -44,7 +44,7 @@ class _PlantListState extends State<PlantList> {
       ),
     ]);
     Widget button = FlatButton(
-      padding: EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(5.0),
       child: Container(
           child:getImage(url, placeholder),
         width: screenWidth,
