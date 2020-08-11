@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/purchase/subscription.dart';
+import 'package:abherbs_flutter/settings/setting_utils.dart' as settings;
+import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -30,7 +33,8 @@ class ObservationLogs extends StatefulWidget {
   final FirebaseUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
-  ObservationLogs(this.currentUser, this.myLocale, this.onChangeLanguage);
+  final currentIndex;
+  ObservationLogs(this.currentUser, this.myLocale, this.onChangeLanguage, this.currentIndex);
 
   @override
   _ObservationLogsState createState() => _ObservationLogsState();
@@ -43,7 +47,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
   Future<DataSnapshot> _publicStatsF;
   ScrollController _scrollControllerPrivate = ScrollController();
   ScrollController _scrollControllerPublic = ScrollController();
-  int _currentIndex = 0;
+  int _currentIndex;
 
   _scrollToEnd() async {
     switch (_currentIndex) {
@@ -71,6 +75,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
     super.initState();
     _key = new GlobalKey<ScaffoldState>();
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString()).add_jm();
+    _currentIndex = widget.currentIndex;
 
     _privateStatsF = privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsStats).once();
     _publicStatsF = publicObservationsReference.child(firebaseObservationsStats).once();
@@ -121,6 +126,56 @@ class _ObservationLogsState extends State<ObservationLogs> {
     );
   }
 
+  Widget getCountries(Future<DataSnapshot> dataSnapshotF, TextStyle listTextStyle, double countriesHeight) {
+    return Card(
+        child: FutureBuilder<DataSnapshot>(
+            future: dataSnapshotF,
+            builder: (BuildContext context, AsyncSnapshot<DataSnapshot> snapshot) {
+              Widget result = Container(width: 0.0, height: 0.0);
+              if (snapshot.connectionState == ConnectionState.done && snapshot.data.value != null) {
+                var countries = snapshot.data.value['countries'];
+                List<String> sortedKeys = [];
+                for (var key in countries.keys) {
+                  sortedKeys.add(key.toString());
+                }
+                sortedKeys.sort((k1, k2) => countries[k1].compareTo(countries[k2]) * -1);
+                LinkedHashMap sortedMap = LinkedHashMap.fromIterable(sortedKeys, key: (k) => k, value: (k) => countries[k]);
+                var widgets = <Widget>[];
+                for (var entry in sortedMap.entries) {
+                  widgets.add(ListTile(
+                      leading: Image(
+                        image: AssetImage('icons/flags/png/' + entry.key + '.png', package: 'country_icons'),
+                        width: 50.0,
+                        height: 50.0,
+                        fit: BoxFit.fitWidth,
+                      ),
+                      title: Text(settings.countries[widget.myLocale.toString()][entry.key.toUpperCase()] ?? ''),
+                      trailing: CircleAvatar(
+                        child: Text(entry.value.toString()),
+                      )));
+                }
+                result = Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(Icons.people),
+                      title: Text(
+                        S.of(context).observation_countries,
+                        style: listTextStyle,
+                      ),
+                    ),
+                    Container(
+                      height: countriesHeight,
+                      child: ListView(
+                        children: widgets,
+                      ),
+                    ),
+                  ],
+                );
+              }
+              return result;
+            }));
+  }
+
   @override
   Widget build(BuildContext context) {
     App.currentContext = context;
@@ -130,8 +185,27 @@ class _ObservationLogsState extends State<ObservationLogs> {
 
     TextStyle listTextStyle = TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold);
     double uploadsHeight = MediaQuery.of(context).size.height;
+    double countriesHeight = MediaQuery.of(context).size.height / 2;
     double mapWidth = MediaQuery.of(context).size.width;
     double mapHeight = 100.0;
+
+    Widget button = Container();
+    String value = RemoteConfiguration.remoteConfig.getString(remoteConfigObservationsVideo);
+    if (value.isNotEmpty) {
+      button = FlatButton(
+        color: Colors.lightBlueAccent,
+        child: Text(S
+            .of(mainContext)
+            .video,
+            style: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+            )),
+        onPressed: () {
+          launchURL(value);
+        },
+      );
+    }
 
     var _widgets = <Widget>[];
     if (_currentIndex == 0) {
@@ -345,6 +419,8 @@ class _ObservationLogsState extends State<ObservationLogs> {
             }
             return result;
           }));
+
+      _widgets.add(getCountries(_privateStatsF, listTextStyle, countriesHeight));
     }
 
     if (_currentIndex == 1) {
@@ -394,6 +470,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                                 fontSize: 20,
                               ),
                             ),
+                            button,
                             FlatButton(
                               color: Colors.lightBlue,
                               child: Text(S.of(context).product_subscribe.toUpperCase(),
@@ -612,6 +689,8 @@ class _ObservationLogsState extends State<ObservationLogs> {
             }
             return result;
           }));
+
+      _widgets.add(getCountries(_publicStatsF, listTextStyle, countriesHeight));
     }
 
     if (_currentIndex == 2) {

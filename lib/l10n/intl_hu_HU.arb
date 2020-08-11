@@ -23,6 +23,7 @@
   "feedback": "Visszajelzés küldése / Hozzájárulás",
   "about": "Az alkalmazásról",
   "help": "Súgó",
+  "video": "Nézze meg a videót a szolgáltatásról",
 
   "product_restore_purchases": "Vásárlás visszaállítása",
   "product_no_ads_title": "Nem kívánt reklám",
@@ -300,6 +301,7 @@
   "observation_most": "A legtöbb megfigyelt virág",
   "observation_rank": "Rang",
   "observation_observers": "Megfigyelők",
+  "observation_countries": "Megfigyelések országonként",
 
   "subscription": "Előfizetés",
   "subscription_info": "A megosztott megfigyelések csak az előfizetett felhasználók számára láthatóak.",

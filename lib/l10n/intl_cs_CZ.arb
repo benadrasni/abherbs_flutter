@@ -23,6 +23,7 @@
   "feedback": "Připomínky",
   "about": "O aplikaci",
   "help": "Pomoc",
+  "video": "Podívejte se na video o funkci",
 
   "product_restore_purchases": "Obnovit nákupy",
   "product_no_ads_title": "Žádná nežádoucí reklama",
@@ -299,6 +300,7 @@
   "observation_most": "Nejsledovanější květ",
   "observation_rank": "Pořadí",
   "observation_observers": "Pozorovatelů",
+  "observation_countries": "Pozorování podle zemí",
 
   "subscription": "Předplatné",
   "subscription_info": "Sdílené pozorování jsou přístupné pouze uživatelům s předplatným.",

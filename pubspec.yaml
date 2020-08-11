@@ -7,7 +7,7 @@ description: Flutter version of abherbs
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 6.1.1+647
+version: 6.2.0+647
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -47,6 +47,7 @@ dependencies:
   screen: 0.0.5
   flutter_country_picker: 0.1.6
   charts_flutter: 0.9.0
+  country_icons: 1.1.1
 
   firebase_ml_vision:
     path: ../flutterfire/packages/firebase_ml_vision
@@ -60,7 +61,6 @@ dev_dependencies:
     sdk: flutter
 
   intl_translation: ^0.17.9
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

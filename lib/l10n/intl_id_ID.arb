@@ -23,6 +23,7 @@
   "feedback": "Umpan balik / Kontribusi",
   "about": "Tentang",
   "help": "Membantu",
+  "video": "Tonton video tentang fitur",
 
   "product_restore_purchases": "Mengembalikan pembelian",
   "product_no_ads_title": "Tidak ada iklan yang tidak diinginkan",
@@ -300,6 +301,7 @@
   "observation_most": "Bunga yang paling banyak diamati",
   "observation_rank": "Pangkat",
   "observation_observers": "Pengamat",
+  "observation_countries": "Pengamatan menurut negara",
 
   "subscription": "Berlangganan",
   "subscription_info": "Pengamatan bersama hanya dapat dilihat oleh pengguna yang berlangganan.",

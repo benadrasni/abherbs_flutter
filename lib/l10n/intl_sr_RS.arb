@@ -23,6 +23,7 @@
   "feedback": "Повратне информације",
   "about": "О апликацији",
   "help": "Помоћ",
+  "video": "Погледајте видео о функцији",
 
   "product_restore_purchases": "Враћање куповине",
   "product_no_ads_title": "Нема нежељених реклама",
@@ -300,6 +301,7 @@
   "observation_most": "Цвет који се највише посматра",
   "observation_rank": "Ранк",
   "observation_observers": "Посматрачи",
+  "observation_countries": "Посматрања по земљи",
 
   "subscription": "Претплата",
   "subscription_info": "Заједничка опажања видљива су само за претплаћене кориснике.",

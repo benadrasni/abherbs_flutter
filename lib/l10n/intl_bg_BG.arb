@@ -23,6 +23,7 @@
   "feedback": "Обратна връзка",
   "about": "Относно",
   "help": "Помощ",
+  "video": "Гледайте видео за функция",
 
   "product_restore_purchases": "Възстановяване на покупките",
   "product_no_ads_title": "Без нежелана реклама",
@@ -300,6 +301,7 @@
   "observation_most": "Най-наблюдаваното цвете",
   "observation_rank": "Ранг",
   "observation_observers": "Наблюдатели",
+  "observation_countries": "Наблюдения по държави",
 
   "subscription": "Абонамент",
   "subscription_info": "Споделените наблюдения са видими само за абонирани потребители.",

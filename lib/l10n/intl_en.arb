@@ -23,6 +23,7 @@
   "feedback": "Feedback",
   "about": "About",
   "help": "Help",
+  "video": "Watch video about the feature",
 
   "product_restore_purchases": "Restore Purchases",
   "product_no_ads_title": "No unwanted advertisement",
@@ -300,6 +301,7 @@
   "observation_most": "Most observed",
   "observation_rank": "Rank",
   "observation_observers": "Observers",
+  "observation_countries": "Observations by country",
 
   "subscription": "Subscription",
   "subscription_info": "Shared observations are visible only for subscribed users.",

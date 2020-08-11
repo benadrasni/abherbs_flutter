@@ -23,6 +23,7 @@
   "feedback": "Povratne informacije / Prispevek",
   "about": "O aplikaciji",
   "help": "Pomoč",
+  "video": "Oglejte si video o funkciji",
 
   "product_restore_purchases": "Obnovi nakup",
   "product_no_ads_title": "Brez neželenega oglasa",
@@ -300,6 +301,7 @@
   "observation_most": "Najbolj opaženo cvetje",
   "observation_rank": "Uvrstitev",
   "observation_observers": "Opazovalci",
+  "observation_countries": "Opazovanja po državah",
 
   "subscription": "Naročnina",
   "subscription_info": "Opombe v skupni rabi so vidne samo za naročene uporabnike.",

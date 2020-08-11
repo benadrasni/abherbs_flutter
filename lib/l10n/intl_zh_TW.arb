@@ -23,6 +23,7 @@
   "feedback": "反饋",
   "about": "關於",
   "help": "幫幫我",
+  "video": "觀看有關功能的視頻",
 
   "product_restore_purchases": "恢復購買",
   "product_no_ads_title": "沒有多餘的廣告",
@@ -300,6 +301,7 @@
   "observation_most": "觀察最多的花",
   "observation_rank": "秩",
   "observation_observers": "觀察者",
+  "observation_countries": "國家觀察",
 
   "subscription": "訂閱",
   "subscription_info": "共享的觀察僅對訂閱的用戶可見。",

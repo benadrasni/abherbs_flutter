@@ -23,6 +23,7 @@
   "feedback": "משוב / תרומה",
   "about": "על היישום",
   "help": "עֶזרָה",
+  "video": "צפו בסרטון וידאו על תכונה",
 
   "product_restore_purchases": "לשחזר רכישות",
   "product_no_ads_title": "אין פרסומת לא רצויה",
@@ -300,6 +301,7 @@
   "observation_most": "הפרח הנצפה ביותר",
   "observation_rank": "דַרגָה",
   "observation_observers": "משקיפים",
+  "observation_countries": "תצפיות לפי מדינה",
 
   "subscription": "מנוי",
   "subscription_info": "תצפיות משותפות מוצגות רק עבור משתמשים רשומים.",

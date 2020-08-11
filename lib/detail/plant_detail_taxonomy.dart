@@ -45,36 +45,28 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
             S.of(context).plant_scientific_label,
           ),
         ),
-      FutureBuilder<RemoteConfig>(
-          future: RemoteConfiguration.setupRemoteConfig(),
-          builder: (BuildContext context, AsyncSnapshot<RemoteConfig> remoteConfig) {
-            if (remoteConfig.connectionState == ConnectionState.done) {
-              return ListTile(
-                title: Text(
-                  plant.name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22.0,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                subtitle: Text(
-                  plant.author ?? '',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                onTap:  () {
-                  if (plant.ipniId != null) {
-                    launchURL(remoteConfig.data.getString(remoteConfigIPNIServerWithTaxon) + plant.ipniId);
-                  }
-                },
-              );
-            } else {
-              return Container();
+        ListTile(
+          title: Text(
+            plant.name,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 22.0,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          subtitle: Text(
+            plant.author ?? '',
+            style: TextStyle(
+              fontSize: 18.0,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          onTap: () {
+            if (plant.ipniId != null) {
+              launchURL(RemoteConfiguration.remoteConfig.getString(remoteConfigIPNIServerWithTaxon) + plant.ipniId);
             }
-          }),
+          },
+        ),
         FutureBuilder<List<String>>(
           future: _firstSynonymF,
           builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {

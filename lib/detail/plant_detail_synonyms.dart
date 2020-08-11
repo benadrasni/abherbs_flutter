@@ -33,32 +33,24 @@ class _PlantSynonymsState extends State<PlantSynonyms> {
       appBar: AppBar(
         title: Text(S.of(context).plant_synonyms),
       ),
-      body: FutureBuilder<RemoteConfig>(
-          future: RemoteConfiguration.setupRemoteConfig(),
-          builder: (BuildContext context, AsyncSnapshot<RemoteConfig> remoteConfig) {
-            if (remoteConfig.connectionState == ConnectionState.done) {
-              return MyFirebaseAnimatedList(
-                  shrinkWrap: true,
-                  defaultChild: Center(child: CircularProgressIndicator()),
-                  query: synonymsReference.child(widget.plant.name).child(firebaseAttributeIPNI).orderByChild(firebaseAttributeName),
-                  itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
-                    return Card(
-                      child: Column(children: [
-                        ListTile(
-                          leading: Icon(Icons.arrow_right),
-                          trailing: Icon(Icons.insert_link),
-                          title: Text([snapshot.value['name'], snapshot.value['suffix']].join(' ')),
-                          subtitle: Text(snapshot.value['author']),
-                          onTap: () {
-                            launchURL(remoteConfig.data.getString(remoteConfigIPNIServer) + snapshot.value['href']);
-                          },
-                        ),
-                      ]),
-                    );
-                  });
-            } else {
-              return Container();
-            }
+      body: MyFirebaseAnimatedList(
+          shrinkWrap: true,
+          defaultChild: Center(child: CircularProgressIndicator()),
+          query: synonymsReference.child(widget.plant.name).child(firebaseAttributeIPNI).orderByChild(firebaseAttributeName),
+          itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
+            return Card(
+              child: Column(children: [
+                ListTile(
+                  leading: Icon(Icons.arrow_right),
+                  trailing: Icon(Icons.insert_link),
+                  title: Text([snapshot.value['name'], snapshot.value['suffix']].join(' ')),
+                  subtitle: Text(snapshot.value['author']),
+                  onTap: () {
+                    launchURL(RemoteConfiguration.remoteConfig.getString(remoteConfigIPNIServer) + snapshot.value['href']);
+                  },
+                ),
+              ]),
+            );
           }),
     );
   }

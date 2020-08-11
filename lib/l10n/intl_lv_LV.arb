@@ -23,6 +23,7 @@
   "feedback": "Atsauksmes",
   "about": "Par lietojumprogrammu",
   "help": "Palīdzība",
+  "video": "Noskatieties video par funkciju",
 
   "product_restore_purchases": "Atjaunot pirkumus",
   "product_no_ads_title": "Nav nevēlamas reklāmas",
@@ -300,6 +301,7 @@
   "observation_most": "Visvairāk novērotais zieds",
   "observation_rank": "Rank",
   "observation_observers": "Novērotāji",
+  "observation_countries": "Novērojumi pa valstīm",
 
   "subscription": "Abonēšana",
   "subscription_info": "Dalītie novērojumi ir redzami tikai abonētiem lietotājiem.",

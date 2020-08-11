@@ -23,6 +23,7 @@
   "feedback": "Comentários",
   "about": "Sobre a aplicação",
   "help": "Ajuda",
+  "video": "Assista ao vídeo sobre o recurso",
 
   "product_restore_purchases": "Restaurar compras",
   "product_no_ads_title": "Nenhum anúncio indesejado",
@@ -298,6 +299,7 @@
   "observation_most": "Flor mais observada",
   "observation_rank": "Classificação",
   "observation_observers": "Observadoras",
+  "observation_countries": "Observações por país",
 
   "subscription": "Inscrição",
   "subscription_info": "Observações compartilhadas são visíveis apenas para usuários inscritos.",

@@ -23,6 +23,7 @@
   "feedback": "Feedback",
   "about": "Despre",
   "help": "Ajutor",
+  "video": "Vizionați videoclipuri despre caracteristică",
 
   "product_restore_purchases": "Restaurați achizițiile",
   "product_no_ads_title": "Nicio reclama nedorită",
@@ -300,6 +301,7 @@
   "observation_most": "Cea mai observată floare",
   "observation_rank": "Rang",
   "observation_observers": "Observatorii",
+  "observation_countries": "Observații pe țară",
 
   "subscription": "Abonament",
   "subscription_info": "Observațiile comune sunt vizibile numai pentru utilizatorii abonați.",

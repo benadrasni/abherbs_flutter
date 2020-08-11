@@ -23,6 +23,7 @@
   "feedback": "Återkoppling",
   "about": "Om ansökan",
   "help": "Hjälp",
+  "video": "Se video om funktionen",
 
   "product_restore_purchases": "Återställa köp",
   "product_no_ads_title": "Ingen oönskad annonsering",
@@ -300,6 +301,7 @@
   "observation_most": "Mest observerad blomma",
   "observation_rank": "Rang",
   "observation_observers": "Observatörer",
+  "observation_countries": "Observationer per land",
 
   "subscription": "Prenumeration",
   "subscription_info": "Delade observationer är bara synliga för abonnemangade användare.",
