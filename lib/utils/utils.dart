@@ -154,6 +154,7 @@ const String firebaseValuePrivate = "private";
 const String firebaseValueReview = "review";
 const String firebaseValuePublic = "public";
 const String firebaseValueSuccess = "success";
+const String firebaseValueRejection = "rejected";
 const String firebaseValueFailure = "failure";
 
 const String mapModeView = "view";

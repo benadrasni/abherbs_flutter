@@ -49,6 +49,8 @@ dependencies:
   charts_flutter: 0.9.0
   country_icons: 1.1.1
 
+  flutter_localized_countries:
+    path: ../flutter-localized-countries
   firebase_ml_vision:
     path: ../flutterfire/packages/firebase_ml_vision
 

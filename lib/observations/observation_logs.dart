@@ -5,7 +5,6 @@ import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/purchase/subscription.dart';
-import 'package:abherbs_flutter/settings/setting_utils.dart' as settings;
 import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
@@ -14,6 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localized_countries/flutter_localized_countries.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -70,6 +70,10 @@ class _ObservationLogsState extends State<ObservationLogs> {
     });
   }
 
+  String _getUserId() {
+    return widget.currentUser.uid;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -77,14 +81,14 @@ class _ObservationLogsState extends State<ObservationLogs> {
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString()).add_jm();
     _currentIndex = widget.currentIndex;
 
-    _privateStatsF = privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsStats).once();
+    _privateStatsF = privateObservationsReference.child(_getUserId()).child(firebaseObservationsStats).once();
     _publicStatsF = publicObservationsReference.child(firebaseObservationsStats).once();
   }
 
   Widget getItems(Map<dynamic, dynamic> observations) {
     var items = observations.keys.where((x) => x != firebaseAttributeTime).map((id) {
       return FutureBuilder<Observation>(
-          future: privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).child(id.toString()).once().then((snapshot) {
+          future: privateObservationsReference.child(_getUserId()).child(firebaseObservationsByDate).child(firebaseAttributeList).child(id.toString()).once().then((snapshot) {
             var observation = Observation.fromJson(snapshot.key, snapshot.value);
             observation.uploadStatus = observations[id][firebaseAttributeStatus];
             return observation;
@@ -102,7 +106,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                           Text(_dateFormat.format(snapshot.data.date)),
                         ],
                       ),
-                      trailing: snapshot.data.uploadStatus == firebaseValueSuccess ? Icon(Icons.done) : Icon(Icons.error),
+                      trailing: snapshot.data.uploadStatus == firebaseValueSuccess ? Icon(Icons.done) : snapshot.data.uploadStatus == firebaseValueRejection ? Icon(Icons.close) : Icon(Icons.error),
                     ),
                     onTap: () {
                       Navigator.push(
@@ -149,7 +153,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                         height: 50.0,
                         fit: BoxFit.fitWidth,
                       ),
-                      title: Text(settings.countries[widget.myLocale.toString()][entry.key.toUpperCase()] ?? ''),
+                      title: Text(CountryNames.of(context).nameOf(entry.key.toUpperCase()) ?? ''),
                       trailing: CircleAvatar(
                         child: Text(entry.value.toString()),
                       )));
@@ -329,7 +333,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
       ));
 
       _widgets.add(FutureBuilder<List<dynamic>>(
-          future: privateObservationsReference.child(widget.currentUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((snapshot) {
+          future: privateObservationsReference.child(_getUserId()).child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((snapshot) {
             List<dynamic> result = [];
             Map<MarkerId, Marker> markers = {};
             MarkerId newestMarker;
@@ -398,7 +402,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                       controller: _scrollControllerPrivate,
                       scrollDirection: Axis.horizontal,
                       child: Container(
-                        width: mapWidth * 2,
+                        width: mapWidth * (snapshot.data[2][0].data.length ~/ 100 + 1),
                         height: mapHeight,
                         child: charts.TimeSeriesChart(
                           snapshot.data[2],
@@ -615,7 +619,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                 }
                 markers[markerId] = Marker(
                   markerId: markerId,
-                  icon: observation.id.startsWith(widget.currentUser.uid) ? BitmapDescriptor.defaultMarker : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+                  icon: observation.id.startsWith(_getUserId()) ? BitmapDescriptor.defaultMarker : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
                   position: LatLng(
                     observation.latitude ?? 0.0,
                     observation.longitude ?? 0.0,
@@ -712,7 +716,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
               child: MyFirebaseAnimatedList(
                   shrinkWrap: true,
                   defaultChild: Center(child: CircularProgressIndicator()),
-                  query: logsObservationsReference.child(widget.currentUser.uid).orderByChild(firebaseAttributeTime),
+                  query: logsObservationsReference.child(_getUserId()).orderByChild(firebaseAttributeTime),
                   itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
                     return Card(
                       child: Column(children: [
