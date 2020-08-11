@@ -21,6 +21,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:screen/screen.dart';
+import 'package:flutter_localized_countries/flutter_localized_countries.dart';
 
 import 'ads.dart';
 
@@ -407,6 +408,7 @@ class _AppState extends State<App> {
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
+                  CountryNamesLocalizationsDelegate(),
                 ],
                 supportedLocales: S.delegate.supportedLocales,
                 home: Splash(this.onChangeLanguage, notificationData),
