@@ -332,45 +332,39 @@ class _AppState extends State<App> {
   }
 
   Locale _localeResolutionCallback(
-      Locale locale, Locale deviceLocale, Iterable<Locale> supportedLocales) {
-    Locale resultLocale = locale;
-    if (resultLocale == null) {
-      Map<String, Locale> defaultLocale = {};
-      for (Locale locale in supportedLocales) {
-        if ((locale.languageCode == 'en' && locale.countryCode == 'US') ||
-            (locale.languageCode == 'ar' && locale.countryCode == 'EG') ||
-            (locale.languageCode == 'de' && locale.countryCode == 'DE') ||
-            (locale.languageCode == 'es' && locale.countryCode == 'ES') ||
-            (locale.languageCode == 'fr' && locale.countryCode == 'FR') ||
-            (locale.languageCode == 'pt' && locale.countryCode == 'PT') ||
-            (locale.languageCode == 'it' && locale.countryCode == 'IT') ||
-            (locale.languageCode == 'ru' && locale.countryCode == 'RU') ||
-            (locale.languageCode == 'sr' && locale.countryCode == 'RS') ||
-            (locale.languageCode == 'zh' && locale.countryCode == 'TW')) {
-          defaultLocale[locale.languageCode] = locale;
-        } else if (!['en', 'ar', 'de', 'es', 'fr', 'pt', 'it', 'ru', 'sr', 'zh']
-            .contains(locale.languageCode)) {
-          defaultLocale[locale.languageCode] = locale;
-        }
+      Locale savedLocale, Locale deviceLocale, Iterable<Locale> supportedLocales) {
 
-        if (locale.languageCode == deviceLocale.languageCode &&
-            locale.countryCode == deviceLocale.countryCode) {
-          resultLocale = locale;
+    if (savedLocale != null) {
+      return savedLocale;
+    }
+
+    Locale resultLocale;
+    Map<String, Locale> defaultLocale = {};
+    for (Locale locale in supportedLocales) {
+      if (locale.languageCode == deviceLocale.languageCode &&
+          locale.countryCode != null && locale.countryCode == deviceLocale.countryCode) {
+        resultLocale = locale;
+        break;
+      }
+
+      if (locale.languageCode != languageEnglish || locale.countryCode == 'US') {
+        defaultLocale[locale.languageCode] = locale;
+      }
+    }
+
+    if (resultLocale == null) {
+      for (Locale locale in supportedLocales) {
+        if (locale.languageCode == deviceLocale.languageCode) {
+          resultLocale = defaultLocale[locale.languageCode];
           break;
         }
       }
-      if (resultLocale == null) {
-        for (Locale locale in supportedLocales) {
-          if (locale.languageCode == deviceLocale.languageCode) {
-            resultLocale = defaultLocale[locale.languageCode];
-            break;
-          }
-        }
-      }
-      if (resultLocale == null) {
-        resultLocale = defaultLocale[languageEnglish];
-      }
     }
+
+    if (resultLocale == null) {
+      resultLocale = defaultLocale[languageEnglish];
+    }
+
     Prefs.setStringList(keyLanguageAndCountry,
         [resultLocale.languageCode, resultLocale.countryCode]);
     return resultLocale;
