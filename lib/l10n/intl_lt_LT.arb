@@ -23,6 +23,7 @@
   "feedback": "Grįžtamasis ryšys / Indėlis",
   "about": "Apie paraišką",
   "help": "Padėkite",
+  "video": "Žiūrėkite vaizdo įrašą apie funkciją",
 
   "product_restore_purchases": "Atkurti pirkimus",
   "product_no_ads_title": "Nėra nepageidaujamo skelbimo",
@@ -300,6 +301,7 @@
   "observation_most": "Labiausiai stebima gėlė",
   "observation_rank": "Rangas",
   "observation_observers": "Stebėtojai",
+  "observation_countries": "Stebėjimai pagal šalis",
 
   "subscription": "Prenumerata",
   "subscription_info": "Bendros pastabos matomos tik abonentams.",

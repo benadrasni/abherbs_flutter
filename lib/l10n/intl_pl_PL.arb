@@ -23,6 +23,7 @@
   "feedback": "Komentarze",
   "about": "O aplikacji",
   "help": "Pomoc",
+  "video": "Obejrzyj film o funkcji",
 
   "product_restore_purchases": "Przywróć zakup",
   "product_no_ads_title": "Bez niechcianej reklamy",
@@ -300,6 +301,7 @@
   "observation_most": "Najczęściej obserwowany kwiat",
   "observation_rank": "Ranga",
   "observation_observers": "Obserwatorzy",
+  "observation_countries": "Obserwacje według kraju",
 
   "subscription": "Subskrypcja",
   "subscription_info": "Udostępnione okazy są widoczne tylko dla subskrybentów.",

@@ -23,6 +23,7 @@
   "feedback": "Feedback / Beitrag",
   "about": "Über",
   "help": "Hilfe",
+  "video": "Video über die Funktion ansehen",
 
   "product_restore_purchases": "Käufe wiederherstellen",
   "product_no_ads_title": "Keine unerwünschte Werbung",
@@ -300,6 +301,7 @@
   "observation_most": "Am häufigsten beobachtet",
   "observation_rank": "Rang",
   "observation_observers": "Beobachter",
+  "observation_countries": "Beobachtungen nach Ländern",
 
   "subscription": "Abonnement",
   "subscription_info": "Gemeinsame Beobachtungen sind nur für Abonnenten sichtbar.",

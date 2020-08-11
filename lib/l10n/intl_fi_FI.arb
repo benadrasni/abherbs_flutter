@@ -23,6 +23,7 @@
   "feedback": "Palaute / Panos",
   "about": "Tietoja sovellus",
   "help": "Ohje",
+  "video": "Katso video ominaisuudesta",
 
   "product_restore_purchases": "Palauttaa ostot",
   "product_no_ads_title": "Ei ei-toivottua mainosta",
@@ -300,6 +301,7 @@
   "observation_most": "Eniten havaittu kukka",
   "observation_rank": "Arvo",
   "observation_observers": "Tarkkailijat",
+  "observation_countries": "Havainnot maittain",
 
   "subscription": "Tilaus",
   "subscription_info": "Jaetut havainnot näkyvät vain tilatuille käyttäjille.",

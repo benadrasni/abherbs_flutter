@@ -40,6 +40,7 @@ class _ObservationEditState extends State<ObservationEdit> {
   DateFormat _dateFormat;
   TextEditingController _noteController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
+  PageController _pageController = PageController();
 
   Future<void> _deleteImage(int position) async {
     String rootPath = (await getApplicationDocumentsDirectory()).path;
@@ -130,6 +131,9 @@ class _ObservationEditState extends State<ObservationEdit> {
         }
         _observation.date = getDateTimeFromExif(exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime']) ?? DateTime.now();
         _dateController.text = _dateFormat.format(_observation.date);
+      }
+      if (_observation.photoPaths.length > 1) {
+        _pageController.animateToPage(_observation.photoPaths.length - 1, duration: Duration(milliseconds: 400), curve: Curves.ease);
       }
       setState(() {});
     }
@@ -309,6 +313,7 @@ class _ObservationEditState extends State<ObservationEdit> {
               ]),
             )
           : PageView.builder(
+              controller: _pageController,
               itemCount: _observation.photoPaths.length,
               itemBuilder: (context, position) {
                 return Stack(children: [

@@ -23,6 +23,7 @@
   "feedback": "Tagasiside / Panus",
   "about": "Rakenduse kohta",
   "help": "Appi",
+  "video": "Vaadake videot funktsiooni kohta",
 
   "product_restore_purchases": "Ostude taastamine",
   "product_no_ads_title": "Soovimatu reklaam puudub",
@@ -300,6 +301,7 @@
   "observation_most": "Enim täheldatud lill",
   "observation_rank": "Koht",
   "observation_observers": "Vaatlejad",
+  "observation_countries": "Vaatlused riikide kaupa",
 
   "subscription": "Tellimus",
   "subscription_info": "Jagatud vaatlused on nähtavad ainult tellitud kasutajatele.",

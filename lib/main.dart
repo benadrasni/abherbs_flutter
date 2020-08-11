@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
+import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/splash.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
@@ -384,7 +385,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Object>>(
-        future: Future.wait([_localeF, _initStoreF]),
+        future: Future.wait([_localeF, _initStoreF, RemoteConfiguration.setupRemoteConfig()]),
         builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:

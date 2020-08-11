@@ -23,6 +23,7 @@
   "feedback": "Terugkoppeling / Bijdrage",
   "about": "Over de app",
   "help": "Helpen",
+  "video": "Bekijk video over functie",
 
   "product_restore_purchases": "Herstel aankopen",
   "product_no_ads_title": "Geen ongewenste advertenties",
@@ -300,6 +301,7 @@
   "observation_most": "Meest waargenomen bloem",
   "observation_rank": "Rang",
   "observation_observers": "Waarnemers",
+  "observation_countries": "Waarnemingen per land",
 
   "subscription": "Abonnement",
   "subscription_info": "Gedeelde waarnemingen zijn alleen zichtbaar voor geabonneerde gebruikers.",

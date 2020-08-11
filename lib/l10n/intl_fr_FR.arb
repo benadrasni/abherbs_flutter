@@ -23,6 +23,7 @@
   "feedback": "Retour d'information",
   "about": "À propos",
   "help": "Aide",
+  "video": "Regarder la vidéo sur la fonctionnalité",
 
   "product_restore_purchases": "Restaurer les achats",
   "product_no_ads_title": "Pas de publicité indésirable",
@@ -300,6 +301,7 @@
   "observation_most": "Fleur la plus observée",
   "observation_rank": "Rang",
   "observation_observers": "Observateurs",
+  "observation_countries": "Observations par pays",
 
   "subscription": "Abonnement",
   "subscription_info": "Les observations partagées sont visibles uniquement pour les utilisateurs abonnés.",

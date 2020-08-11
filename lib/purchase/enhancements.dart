@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/settings/setting_my_filter.dart';
+import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/purchase/subscription.dart';
@@ -57,6 +58,42 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
   void initState() {
     super.initState();
     _productsF = _connection.queryProductDetails(_productLists.toSet());
+  }
+
+  Widget _getVideoLink(BuildContext context, ProductDetails product) {
+    Widget button = Container();
+    String config = "";
+    switch (product.id) {
+      case productCustomFilter:
+        config = remoteConfigCustomFilterVideo;
+        break;
+      case productObservations:
+        config = remoteConfigObservationsVideo;
+        break;
+      case productSearch:
+        config = remoteConfigSearchByNameVideo;
+        break;
+      case productPhotoSearch:
+        config = remoteConfigSearchByPhotoVideo;
+        break;
+    }
+    String value = RemoteConfiguration.remoteConfig.getString(config);
+    if (value.isNotEmpty) {
+      button = FlatButton(
+        color: Colors.lightBlueAccent,
+        child: Text(S
+            .of(context)
+            .video,
+            style: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+            )),
+        onPressed: () {
+          launchURL(value);
+        },
+      );
+    }
+    return button;
   }
 
   List<Widget> _getButtons(ProductDetails product, bool isPurchased, key) {
@@ -233,6 +270,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(height: 10.0),
+                        _getVideoLink(context, product),
                         Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: _getButtons(product, isPurchased, key)),
                       ]),
                     ),

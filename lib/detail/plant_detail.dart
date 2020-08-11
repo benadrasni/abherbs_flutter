@@ -187,7 +187,7 @@ class _PlantDetailState extends State<PlantDetail> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ObservationLogs(_currentUser, Localizations.localeOf(context), widget.onChangeLanguage),
+            builder: (context) => ObservationLogs(_currentUser, Localizations.localeOf(context), widget.onChangeLanguage, 0),
             settings: RouteSettings(name: 'ObservationLogs')),
       );
     }

@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 
 Future<void> rateDialog(BuildContext context) async {
@@ -215,13 +217,37 @@ Future<bool> infoDialog(BuildContext mainContext, String title, String content) 
       });
 }
 
-Future<bool> infoBuyDialog(BuildContext mainContext, String title, String content) async {
+Future<bool> infoBuyDialog(BuildContext mainContext, String title, String content, String config) async {
+  Widget button = Container();
+  String value = RemoteConfiguration.remoteConfig.getString(config);
+  if (value.isNotEmpty) {
+    button = FlatButton(
+      color: Colors.lightBlueAccent,
+      child: Text(S
+          .of(mainContext)
+          .video,
+          style: TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+          )),
+      onPressed: () {
+        launchURL(value);
+      },
+    );
+  }
+
   return showDialog(
       context: mainContext,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(title),
-          content: Text(content),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(content),
+              button,
+            ],
+          ),
           actions: [
             FlatButton(
               child: Text(S.of(context).enhancements.toUpperCase(),

@@ -23,6 +23,7 @@
   "feedback": "प्रतिक्रिया",
   "about": "के बारे में",
   "help": "मदद",
+  "video": "फीचर के बारे में वीडियो देखें",
 
   "product_restore_purchases": "खरीदारी वापस लौटाएं",
   "product_no_ads_title": "कोई अवांछित विज्ञापन नहीं",
@@ -300,6 +301,7 @@
   "observation_most": "सबसे अधिक देखा गया फूल",
   "observation_rank": "पद",
   "observation_observers": "प्रेक्षकों",
+  "observation_countries": "देश द्वारा अवलोकन",
 
   "subscription": "अंशदान",
   "subscription_info": "साझा अवलोकन केवल सब्सक्राइबर उपयोगकर्ताओं के लिए दिखाई दे रहे हैं।",

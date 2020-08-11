@@ -23,6 +23,7 @@
   "feedback": "تعليق",
   "about": "حول",
   "help": "مساعدة",
+  "video": "مشاهدة الفيديو حول الميزة",
 
   "product_restore_purchases": "استعادة المشتريات",
   "product_no_ads_title": "لا اعلان غير مرغوب فيه",
@@ -300,6 +301,7 @@
   "observation_most": "معظم الزهور الملاحظة",
   "observation_rank": "مرتبة",
   "observation_observers": "المراقبون",
+  "observation_countries": "ملاحظات حسب البلد",
 
   "subscription": "اشتراك",
   "subscription_info": "الملاحظات المشتركة مرئية فقط للمستخدمين المشتركين.",

@@ -23,6 +23,7 @@
   "feedback": "피드백",
   "about": "신청에 대해",
   "help": "도움말",
+  "video": "기능에 대한 동영상보기",
 
   "product_restore_purchases": "구매를 복원",
   "product_no_ads_title": "원치 않는 광고가 없습니다",
@@ -300,6 +301,7 @@
   "observation_most": "가장 많이 관찰 된 꽃",
   "observation_rank": "계급",
   "observation_observers": "관찰자",
+  "observation_countries": "국가 별 관찰",
 
   "subscription": "신청",
   "subscription_info": "공유 관찰은 가입 한 사용자에게만 표시됩니다.",

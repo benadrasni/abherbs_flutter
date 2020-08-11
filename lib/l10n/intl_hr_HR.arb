@@ -23,6 +23,7 @@
   "feedback": "Povratne informacije",
   "about": "O aplikaciji",
   "help": "Pomoć",
+  "video": "Pogledajte videozapis o značajci",
 
   "product_restore_purchases": "Vraćanje kupnje",
   "product_no_ads_title": "Nema neželjenog oglasa",
@@ -300,6 +301,7 @@
   "observation_most": "Najviše promatrani cvijet",
   "observation_rank": "Rang",
   "observation_observers": "Promatrači",
+  "observation_countries": "Promatranja po zemlji",
 
   "subscription": "Pretplata",
   "subscription_info": "Dijeljena opažanja vidljiva su samo korisnicima s pretplatom.",

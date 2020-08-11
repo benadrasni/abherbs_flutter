@@ -23,6 +23,7 @@
   "feedback": "Feedback",
   "about": "Om ansøgning",
   "help": "Hjælp",
+  "video": "Se video om funktion",
 
   "product_restore_purchases": "Genoprette indkøb",
   "product_no_ads_title": "Ingen uønsket reklame",
@@ -298,6 +299,7 @@
   "observation_most": "Mest observeret blomst",
   "observation_rank": "Rang",
   "observation_observers": "Observatører",
+  "observation_countries": "Observationer efter land",
 
   "subscription": "Abonnement",
   "subscription_info": "Delte observationer er kun synlige for abonnenter.",

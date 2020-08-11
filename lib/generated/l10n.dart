@@ -263,6 +263,16 @@ class S {
     );
   }
 
+  /// `Watch video about the feature`
+  String get video {
+    return Intl.message(
+      'Watch video about the feature',
+      name: 'video',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Restore Purchases`
   String get product_restore_purchases {
     return Intl.message(
@@ -2798,6 +2808,16 @@ class S {
     return Intl.message(
       'Observers',
       name: 'observation_observers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Observations by country`
+  String get observation_countries {
+    return Intl.message(
+      'Observations by country',
+      name: 'observation_countries',
       desc: '',
       args: [],
     );

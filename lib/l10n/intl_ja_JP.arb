@@ -23,6 +23,7 @@
   "feedback": "フィードバック",
   "about": "約",
   "help": "ヘルプ",
+  "video": "機能に関するビデオを見る",
 
   "product_restore_purchases": "購入を復元",
   "product_no_ads_title": "迷惑な広告はありません",
@@ -300,6 +301,7 @@
   "observation_most": "最も観察された花",
   "observation_rank": "ランク",
   "observation_observers": "オブザーバー",
+  "observation_countries": "国別の観察",
 
   "subscription": "購読",
   "subscription_info": "共有観測は、購読しているユーザーにのみ表示されます。",

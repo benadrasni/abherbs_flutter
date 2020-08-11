@@ -76,7 +76,7 @@ class _ObservationsState extends State<Observations> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage),
+            builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage, 1),
             settings: RouteSettings(name: 'ObservationLogs')),
       );
     }
@@ -168,7 +168,7 @@ class _ObservationsState extends State<Observations> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage), settings: RouteSettings(name: 'ObservationLogs')),
+                    builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage, 2), settings: RouteSettings(name: 'ObservationLogs')),
               );
             },
           )
@@ -233,7 +233,7 @@ class _ObservationsState extends State<Observations> {
                               ? Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage),
+                                      builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage, 0),
                                       settings: RouteSettings(name: 'ObservationLogs')),
                                 )
                               : _uploadObservationDialog(_observationsRemain).then((value) {
@@ -255,7 +255,7 @@ class _ObservationsState extends State<Observations> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage), settings: RouteSettings(name: 'ObservationLogs')),
+                                builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage, 0), settings: RouteSettings(name: 'ObservationLogs')),
                           );
                         },
                         child: Icon(Icons.list),

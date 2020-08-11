@@ -170,6 +170,10 @@ const String notificationAttributeUri = "uri";
 
 const String remoteConfigIPNIServer = "ipni_server";
 const String remoteConfigIPNIServerWithTaxon = "ipni_server_with_taxon";
+const String remoteConfigSearchByNameVideo = "search_by_name_video";
+const String remoteConfigSearchByPhotoVideo = "search_by_photo_video";
+const String remoteConfigObservationsVideo = "observations_video";
+const String remoteConfigCustomFilterVideo = "custom_filter_video";
 
 final DatabaseReference rootReference = FirebaseDatabase.instance.reference();
 final DatabaseReference countsReference = rootReference.child(firebaseCounts);
@@ -423,7 +427,7 @@ List<Widget> getActions(
             );
           } else if (Purchases.isSearchByPhotoPromotion != null && Purchases.isSearchByPhotoPromotion) {
             infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
-                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo)))
+                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo)), remoteConfigSearchByPhotoVideo)
                 .then((value) {
               if (value != null && value) {
                 Navigator.push(
@@ -439,7 +443,7 @@ List<Widget> getActions(
               }
             });
           } else {
-            infoBuyDialog(mainContext, S.of(mainContext).product_photo_search_title, S.of(mainContext).product_photo_search_description)
+            infoBuyDialog(mainContext, S.of(mainContext).product_photo_search_title, S.of(mainContext).product_photo_search_description, remoteConfigSearchByPhotoVideo)
                 .then((value) {
               if (value != null && value) {
                 Navigator.push(
@@ -473,7 +477,7 @@ List<Widget> getActions(
             }
           } else if (Purchases.isObservationPromotion != null && Purchases.isObservationPromotion) {
             infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
-                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo)))
+                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo)), remoteConfigObservationsVideo)
                 .then((value) {
               if (value != null && value) {
                 Navigator.push(
@@ -489,7 +493,7 @@ List<Widget> getActions(
               }
             });
           } else {
-            infoBuyDialog(mainContext, S.of(mainContext).product_observations_title, S.of(mainContext).product_observations_description)
+            infoBuyDialog(mainContext, S.of(mainContext).product_observations_title, S.of(mainContext).product_observations_description, remoteConfigObservationsVideo)
                 .then((value) {
               if (value != null && value) {
                 Navigator.push(
@@ -515,7 +519,7 @@ List<Widget> getActions(
         );
       } else if (Purchases.isSearchPromotion != null && Purchases.isSearchPromotion) {
         infoBuyDialog(
-                mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo)))
+                mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo)), remoteConfigSearchByNameVideo)
             .then((value) {
           if (value != null && value) {
             Navigator.push(
@@ -531,7 +535,7 @@ List<Widget> getActions(
           }
         });
       } else {
-        infoBuyDialog(mainContext, S.of(mainContext).product_search_title, S.of(mainContext).product_search_description).then((value) {
+        infoBuyDialog(mainContext, S.of(mainContext).product_search_title, S.of(mainContext).product_search_description, remoteConfigSearchByNameVideo).then((value) {
           if (value != null && value) {
             Navigator.push(
               mainContext,

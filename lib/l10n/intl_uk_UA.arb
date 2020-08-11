@@ -23,6 +23,7 @@
   "feedback": "Відгук",
   "about": "Про додаток",
   "help": "Довідка",
+  "video": "Дивіться відео про функцію",
 
   "product_restore_purchases": "Відновити покупки",
   "product_no_ads_title": "Немає небажаної реклами",
@@ -300,6 +301,7 @@
   "observation_most": "Найбільше спостерігається квітка",
   "observation_rank": "Ранг",
   "observation_observers": "Спостерігачі",
+  "observation_countries": "Спостереження по країні",
 
   "subscription": "Підписка",
   "subscription_info": "Спільні спостереження доступні лише для користувачів, які підписалися.",

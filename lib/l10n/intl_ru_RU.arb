@@ -23,6 +23,7 @@
   "feedback": "Отправить отзыв",
   "about": "О приложении",
   "help": "Cправка",
+  "video": "Посмотреть видео о функции",
 
   "product_restore_purchases": "Восстановить покупки",
   "product_no_ads_title": "Без нежелательной рекламы",
@@ -300,6 +301,7 @@
   "observation_most": "Самый наблюдаемый цветок",
   "observation_rank": "Ранг",
   "observation_observers": "Наблюдатели",
+  "observation_countries": "Наблюдения по странам",
 
   "subscription": "Подписка",
   "subscription_info": "Общие наблюдения видны только для подписавшихся пользователей.",

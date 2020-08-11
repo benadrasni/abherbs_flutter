@@ -23,6 +23,7 @@
   "feedback": "Invia un feedback / Contributo",
   "about": "Info sull'applicazione",
   "help": "Aiuto",
+  "video": "Guarda il video sulla funzionalità",
 
   "product_restore_purchases": "Ripristinare gli acquisti",
   "product_no_ads_title": "Nessuna pubblicità indesiderata",
@@ -300,6 +301,7 @@
   "observation_most": "Fiore più osservato",
   "observation_rank": "Rango",
   "observation_observers": "Osservatori",
+  "observation_countries": "Osservazioni per paese",
 
   "subscription": "Iscrizione",
   "subscription_info": "Le osservazioni condivise sono visibili solo agli utenti iscritti.",
