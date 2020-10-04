@@ -177,7 +177,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "observation_distinct_flowers" : MessageLookupByLibrary.simpleMessage("Rôznych kvetov"),
     "observation_empty" : MessageLookupByLibrary.simpleMessage("Zatiaľ nie je žiadne pozorovanie."),
     "observation_first" : MessageLookupByLibrary.simpleMessage("Prvý zaznamený kvet"),
-    "observation_last" : MessageLookupByLibrary.simpleMessage("Ostatný zaznamenaný kvet"),
+    "observation_last" : MessageLookupByLibrary.simpleMessage("Posledný zaznamenaný kvet"),
     "observation_logs" : MessageLookupByLibrary.simpleMessage("Zálohy"),
     "observation_missing_location" : MessageLookupByLibrary.simpleMessage("Pozorovanie nebolo úplné, takže nebolo uložené. Chýba poloha."),
     "observation_missing_photo" : MessageLookupByLibrary.simpleMessage("Pozorovanie nebolo úplné, takže nebolo uložené. Chýba fotografia."),
