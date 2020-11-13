@@ -5,7 +5,7 @@ import 'package:abherbs_flutter/observations/observation_map.dart';
 import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +13,7 @@ import 'package:intl/intl.dart';
 import '../main.dart';
 
 class ObservationPlantView extends StatefulWidget {
-  final FirebaseUser currentUser;
+  final firebase_auth.User currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final Observation observation;

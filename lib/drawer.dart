@@ -8,11 +8,11 @@ import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/signin/sign_in.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatefulWidget {
-  final FirebaseUser currentUser;
+  final firebase_auth.User currentUser;
   final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
   final void Function() settingsCallback;

@@ -21,12 +21,13 @@ import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../main.dart';
 
@@ -49,8 +50,8 @@ class PlantDetail extends StatefulWidget {
 
 class _PlantDetailState extends State<PlantDetail> {
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
-  StreamSubscription<FirebaseUser> _listener;
-  FirebaseUser _currentUser;
+  StreamSubscription<firebase_auth.User> _listener;
+  firebase_auth.User _currentUser;
   Future<PlantTranslation> _plantTranslationF;
   Future<bool> _isFavoriteF;
   int _currentIndex;
@@ -193,14 +194,14 @@ class _PlantDetailState extends State<PlantDetail> {
     }
   }
 
-  _onAuthStateChanged(FirebaseUser user) {
+  _onAuthStateChanged(firebase_auth.User user) {
     setState(() {
       _currentUser = user;
     });
   }
 
-  void _checkCurrentUser() async {
-    _currentUser = await Auth.getCurrentUser();
+  void _checkCurrentUser() {
+    _currentUser = Auth.getCurrentUser();
     _listener = Auth.subscribe(_onAuthStateChanged);
     _isFavoriteF = _setFavorite();
   }
@@ -225,6 +226,9 @@ class _PlantDetailState extends State<PlantDetail> {
   @override
   void dispose() {
     _listener.cancel();
+    for(YoutubePlayerController controller in getYoutubeControllers()) {
+      controller.close();
+    }
     super.dispose();
   }
 
@@ -232,11 +236,11 @@ class _PlantDetailState extends State<PlantDetail> {
   Widget build(BuildContext context) {
     App.currentContext = context;
     var items = <BottomNavigationBarItem>[];
-    items.add(BottomNavigationBarItem(icon: Icon(Icons.photo_library), title: Text(S.of(context).plant_gallery)));
-    items.add(BottomNavigationBarItem(icon: Icon(Icons.info), title: Text(S.of(context).plant_info)));
-    items.add(BottomNavigationBarItem(icon: Icon(Icons.format_list_bulleted), title: Text(S.of(context).plant_taxonomy)));
+    items.add(BottomNavigationBarItem(icon: Icon(Icons.photo_library), label: S.of(context).plant_gallery));
+    items.add(BottomNavigationBarItem(icon: Icon(Icons.info), label: S.of(context).plant_info));
+    items.add(BottomNavigationBarItem(icon: Icon(Icons.format_list_bulleted), label: S.of(context).plant_taxonomy));
     if (Purchases.isObservations()) {
-      items.add(BottomNavigationBarItem(icon: Icon(Icons.remove_red_eye), title: Text(S.of(context).observations)));
+      items.add(BottomNavigationBarItem(icon: Icon(Icons.remove_red_eye), label: S.of(context).observations));
     }
 
     return Scaffold(

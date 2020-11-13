@@ -14,5 +14,6 @@ class RemoteConfiguration {
     });
     await remoteConfig.fetch();
     await remoteConfig.activateFetched();
+    return remoteConfig;
   }
 }

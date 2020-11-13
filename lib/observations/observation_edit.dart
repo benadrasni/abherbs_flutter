@@ -9,7 +9,7 @@ import 'package:abherbs_flutter/observations/observation_map.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -20,7 +20,7 @@ import 'package:exif/exif.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class ObservationEdit extends StatefulWidget {
-  final FirebaseUser currentUser;
+  final firebase_auth.User currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final Observation observation;

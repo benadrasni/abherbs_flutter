@@ -354,7 +354,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter), settings: RouteSettings(name: 'SettingMyFilter')),
+            MaterialPageRoute(builder: (context) => SettingMyFilter(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'SettingMyFilter')),
           ).then((result) {
             setState(() {
               _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {

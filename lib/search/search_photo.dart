@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:abherbs_flutter/generated/l10n.dart';
@@ -9,10 +10,9 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+//import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_crashlytics/flutter_crashlytics.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
@@ -31,7 +31,7 @@ class SearchResult {
 }
 
 class SearchPhoto extends StatefulWidget {
-  final FirebaseUser currentUser;
+  final firebase_auth.User currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   SearchPhoto(this.currentUser, this.myLocale, this.onChangeLanguage);
@@ -49,7 +49,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
   Future<List<SearchResult>> _searchResultF;
   Future<List<dynamic>> _genericEntitiesF;
   Future<String> _engineF;
-  ImageLabeler imageLabeler;
+  //ImageLabeler imageLabeler;
 
   Future<void> _logPhotoSearchEvent() async {
     await _firebaseAnalytics.logEvent(name: 'search_photo');
@@ -68,11 +68,11 @@ class _SearchPhotoState extends State<SearchPhoto> {
       var engine = await _engineF;
       setState(() {
         _image = File(image.path);
-        if (engine == plantIdEngine) {
+        //if (engine == plantIdEngine) {
           _searchResultF = _getSearchResultPlantId(_image);
-        } else {
-          _searchResultF = _getSearchResult(_image);
-        }
+        //} else {
+        //  _searchResultF = _getSearchResult(_image);
+       // }
       });
     }
   }
@@ -169,10 +169,10 @@ class _SearchPhotoState extends State<SearchPhoto> {
 
       return results;
     }).catchError((error, stackTrace) {
-      FlutterCrashlytics().reportCrash(error, stackTrace, forceCrash: false);
+      FirebaseCrashlytics.instance.recordError(error, stackTrace);
     });
   }
-
+/*
   Future<List<SearchResult>> _getSearchResult(File image) {
     final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(image);
 
@@ -250,7 +250,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
 
       return results;
     }).catchError((error, stackTrace) {
-      FlutterCrashlytics().reportCrash(error, stackTrace, forceCrash: false);
+      FirebaseCrashlytics.instance.recordError(error, stackTrace);
     });
   }
 
@@ -260,7 +260,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
     }
     return label;
   }
-
+*/
   @override
   void initState() {
     super.initState();
@@ -272,15 +272,15 @@ class _SearchPhotoState extends State<SearchPhoto> {
     _engineF = rootReference.child(firebaseSettingsEngine).once().then((snapshot) {
       return snapshot?.value ?? "";
     });
-    imageLabeler = FirebaseVision.instance.cloudImageLabeler();
+    //imageLabeler = FirebaseVision.instance.cloudImageLabeler();
   }
-
+/*
   @override
   void dispose() {
     imageLabeler.close();
     super.dispose();
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     App.currentContext = context;

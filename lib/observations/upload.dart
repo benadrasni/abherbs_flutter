@@ -5,9 +5,9 @@ import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class Upload {
   static bool uploadPaused = false;
@@ -18,7 +18,7 @@ class Upload {
   static Function() _onUploadFail;
   static Function() _onObservationUpload;
   static Function() _onObservationUploadFail;
-  static FirebaseStorage _storage = FirebaseStorage(storageBucket: storageBucket);
+  static firebase_storage.FirebaseStorage _storage = firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket);
   static FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
 
   static Future<void> _logObservationUploadEvent(String uid, String status) async {
@@ -26,7 +26,7 @@ class Upload {
   }
 
   static Future<void> upload(
-      FirebaseUser currentUser, Function() onObservationUpload, Function() onObservationUploadFail, Function() onUploadStart, Function() onUploadFinish, Function() onUploadFail) async {
+      firebase_auth.User currentUser, Function() onObservationUpload, Function() onObservationUploadFail, Function() onUploadStart, Function() onUploadFinish, Function() onUploadFail) async {
     _onObservationUpload = onObservationUpload;
     _onObservationUploadFail = onObservationUploadFail;
     _onUploadStart = onUploadStart;
@@ -78,7 +78,7 @@ class Upload {
     });
   }
 
-  static Future<bool> _uploadObservation(FirebaseUser currentUser, Observation observation) async {
+  static Future<bool> _uploadObservation(firebase_auth.User currentUser, Observation observation) async {
     for (var path in observation.photoPaths) {
       if (!await _uploadFile(path)) {
         return false;
@@ -112,11 +112,9 @@ class Upload {
 
   static Future<bool> _uploadFile(String path) async {
     File file = await Offline.getLocalFile(path);
-    final StorageReference ref = _storage.ref().child(path);
+    final firebase_storage.Reference ref = _storage.ref().child(path);
     if (file != null) {
-      final StorageUploadTask uploadTask = ref.putFile(file);
-
-      return await uploadTask.onComplete.then((StorageTaskSnapshot snapshot) {
+      return await ref.putFile(file).then((firebase_storage.TaskSnapshot snapshot) {
         return true;
       }).catchError((error) {
         return false;
