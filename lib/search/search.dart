@@ -99,8 +99,8 @@ class _SearchState extends State<Search> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.search), title: Text(S.of(context).search_names)),
-          BottomNavigationBarItem(icon: Icon(Icons.find_in_page), title: Text(S.of(context).search_taxonomy)),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: S.of(context).search_names),
+          BottomNavigationBarItem(icon: Icon(Icons.find_in_page), label: S.of(context).search_taxonomy),
         ],
         fixedColor: Colors.blue,
         onTap: (index) {

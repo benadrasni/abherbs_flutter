@@ -7,7 +7,7 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -25,8 +25,8 @@ class Distribution2 extends StatefulWidget {
 }
 
 class _Distribution2State extends State<Distribution2> {
-  StreamSubscription<FirebaseUser> _listener;
-  FirebaseUser _currentUser;
+  StreamSubscription<firebase_auth.User> _listener;
+  firebase_auth.User _currentUser;
   Future<int> _countF;
   GlobalKey<ScaffoldState> _key;
 
@@ -160,14 +160,14 @@ class _Distribution2State extends State<Distribution2> {
             }).toList()));
   }
 
-  _onAuthStateChanged(FirebaseUser user) {
+  _onAuthStateChanged(firebase_auth.User user) {
     setState(() {
       _currentUser = user;
     });
   }
 
-  _checkCurrentUser() async {
-    _currentUser = await Auth.getCurrentUser();
+  _checkCurrentUser() {
+    _currentUser = Auth.getCurrentUser();
     _listener = Auth.subscribe(_onAuthStateChanged);
   }
 

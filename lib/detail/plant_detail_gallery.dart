@@ -4,29 +4,11 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../ads.dart';
 
-Widget _getImageButton(BuildContext context, String url) {
-  var placeholder = Stack(alignment: Alignment.center, children: [
-    CircularProgressIndicator(),
-    Image(
-      image: AssetImage('res/images/placeholder.webp'),
-    ),
-  ]);
-  return GestureDetector(
-    child: Container(
-      padding: EdgeInsets.all(5.0),
-      child: getImage(url, placeholder),
-    ),
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => FullScreenPage(url), settings: RouteSettings(name: 'FullScreen')),
-      );
-    },
-  );
-}
+List<YoutubePlayerController> controllers = [];
 
 Widget getGallery(BuildContext context, Plant plant) {
   List<Widget> cards = [];
@@ -34,6 +16,42 @@ Widget getGallery(BuildContext context, Plant plant) {
   cards.add(Card(
     child: _getImageButton(context, storagePhotos + plant.illustrationUrl),
   ));
+
+  if (plant.videoUrls != null && plant.videoUrls.length > 0) {
+    cards.addAll(plant.videoUrls.map((url) {
+      controllers.add(YoutubePlayerController(
+        initialVideoId: YoutubePlayerController.convertUrlToId(url),
+        params: YoutubePlayerParams(
+          autoPlay: false,
+          showControls: false,
+          showFullscreenButton: false,
+          enableCaption: false,
+          desktopMode: true,
+        ),
+      ));
+
+      return Card(
+        child: Stack(children: [
+          YoutubePlayerIFrame(
+            controller: controllers.last,
+            aspectRatio: 16 / 9,
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: FlatButton(
+              minWidth: 100,
+              height: 10,
+              child: Text(''),
+              onPressed: () {
+                launchURL(url);
+              },
+            ),
+          ),
+        ]),
+      );
+    }));
+  }
 
   cards.addAll(plant.photoUrls.map((url) {
     return Card(
@@ -60,6 +78,10 @@ Widget getGallery(BuildContext context, Plant plant) {
     padding: EdgeInsets.all(5.0),
     children: cards,
   );
+}
+
+List<YoutubePlayerController> getYoutubeControllers() {
+  return controllers;
 }
 
 List<Widget> _getSources(BuildContext context, List<dynamic> sourceUrls) {
@@ -93,3 +115,25 @@ List<Widget> _getSources(BuildContext context, List<dynamic> sourceUrls) {
   }
   return rows;
 }
+
+Widget _getImageButton(BuildContext context, String url) {
+  var placeholder = Stack(alignment: Alignment.center, children: [
+    CircularProgressIndicator(),
+    Image(
+      image: AssetImage('res/images/placeholder.webp'),
+    ),
+  ]);
+  return GestureDetector(
+    child: Container(
+      padding: EdgeInsets.all(5.0),
+      child: getImage(url, placeholder),
+    ),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => FullScreenPage(url), settings: RouteSettings(name: 'FullScreen')),
+      );
+    },
+  );
+}
+

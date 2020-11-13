@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 
@@ -46,11 +46,11 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
         _errorMessage = "";
         _isLoading = true;
       });
-      FirebaseUser user;
+      firebase_auth.User user;
       try {
         if (_formMode == FormMode.LOGIN) {
           user = await Auth.signInWithEmail(_email, _password);
-          if (!user.isEmailVerified) {
+          if (!user.emailVerified) {
             _showVerifyEmailSentDialog(user).then((value) {
               if (mounted) {
                 Navigator.of(context).pop();
@@ -140,7 +140,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
     );
   }
 
-  Future<dynamic> _showVerifyEmailSentDialog(FirebaseUser user) {
+  Future<dynamic> _showVerifyEmailSentDialog(firebase_auth.User user) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {

@@ -5,10 +5,10 @@ import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_crashlytics/flutter_crashlytics.dart';
 
 class Splash extends StatefulWidget {
   final void Function(String) onChangeLanguage;
@@ -79,7 +79,7 @@ class _SplashState extends State<Splash> {
                   int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : result.values.length;
                   if (length == 0) {
                     rootReference.child(path).child("refreshMock").set("mock").catchError((error) {
-                      FlutterCrashlytics().log("0-length custom list");
+                      FirebaseCrashlytics.instance.log("0-length custom list");
                     });
                   }
                   return _getFirstFilterRoute(MaterialPageRoute(

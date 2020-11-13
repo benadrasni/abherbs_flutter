@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
@@ -8,15 +6,16 @@ import 'package:abherbs_flutter/settings/setting_utils.dart';
 import 'package:flutter/material.dart';
 
 class SettingMyFilter extends StatefulWidget {
+  final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
-  SettingMyFilter(this.filter);
+  SettingMyFilter(this.onChangeLanguage, this.filter);
 
   @override
   _SettingMyFilterState createState() => _SettingMyFilterState();
 }
 
 class _SettingMyFilterState extends State<SettingMyFilter> {
-  Future<List<String>> _myFilterF;
+  List<String> _myFilter;
 
   Widget _getBody(BuildContext context, List<String> myFilter) {
     const TextStyle filterTextStyle = TextStyle(fontSize: 20.0);
@@ -50,9 +49,7 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
                             }
                           }
                           setState(() {
-                            _myFilterF = Prefs.setStringList(keyMyFilter, newFilter).then((success) {
-                              return newFilter;
-                            });
+                            _myFilter = newFilter;
                           });
                         },
                       ),
@@ -74,9 +71,7 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
                             }
                           }
                           setState(() {
-                            _myFilterF = Prefs.setStringList(keyMyFilter, newFilter).then((success) {
-                              return newFilter;
-                            });
+                            _myFilter = newFilter;
                           });
                         },
                       ),
@@ -94,20 +89,8 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
                             }
                           }
 
-                          // delete filter attribute from the filter
-                          widget.filter.remove(item);
-                          // delete filter attribute from the navigator
-                          if (filterRoutes[item] != null && filterRoutes[item].isActive && context != null) {
-                            Navigator.removeRoute(context, filterRoutes[item]);
-                            if (item == filterDistribution && filterRoutes[filterDistribution2] != null && filterRoutes[filterDistribution2].isActive) {
-                              Navigator.removeRoute(context, filterRoutes[filterDistribution2]);
-                            }
-                          }
-
                           setState(() {
-                            _myFilterF = Prefs.setStringList(keyMyFilter, newFilter).then((success) {
-                              return newFilter;
-                            });
+                            _myFilter = newFilter;
                           });
                         },
                       ),
@@ -136,14 +119,42 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
                   List<String> newFilter = List.from(myFilter);
                   newFilter.add(item);
                   setState(() {
-                    _myFilterF = Prefs.setStringList(keyMyFilter, newFilter).then((success) {
-                      return newFilter;
-                    });
+                    _myFilter = newFilter;
                   });
                 },
               ),
             ])));
     }
+
+    filterWidgets.add(Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      FlatButton(
+        color: Colors.lightBlueAccent,
+        child: Text(S.of(context).apply,
+            style: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+            )),
+        onPressed: () {
+          Prefs.setStringList(keyMyFilter, _myFilter).then((success) {
+            Prefs.getStringF(keyPreferredLanguage).then((language) {
+              widget.onChangeLanguage(language);
+            });
+          });
+          Navigator.pop(context);
+        },
+      ),
+      FlatButton(
+        color: Colors.lightBlueAccent,
+        child: Text(S.of(context).cancel,
+            style: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+            )),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    ]));
 
     return ListView(
       padding: EdgeInsets.all(10.0),
@@ -154,7 +165,11 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
   @override
   void initState() {
     super.initState();
-    _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes);
+    Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
+      setState(() {
+        _myFilter = myFilter;
+      });
+    });
   }
 
   @override
@@ -163,21 +178,7 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
       appBar: new AppBar(
         title: new Text(S.of(context).my_filter),
       ),
-      body: FutureBuilder<List<String>>(
-          future: _myFilterF,
-          builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.done:
-                return _getBody(context, snapshot.data);
-              default:
-                return Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: Center(
-                    child: const CircularProgressIndicator(),
-                  ),
-                );
-            }
-          }),
+      body: _getBody(context, _myFilter),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
@@ -23,13 +24,36 @@ class _SignInScreenState extends State<SignInScreen> {
   Future<bool> supportsAppleSignIn;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
+  String _createNonce(int length) {
+    final random = Random();
+    final charCodes = List<int>.generate(length, (_) {
+      int codeUnit;
+
+      switch (random.nextInt(3)) {
+        case 0:
+          codeUnit = random.nextInt(10) + 48;
+          break;
+        case 1:
+          codeUnit = random.nextInt(26) + 65;
+          break;
+        case 2:
+          codeUnit = random.nextInt(26) + 97;
+          break;
+      }
+
+      return codeUnit;
+    });
+
+    return String.fromCharCodes(charCodes);
+  }
+
   Future<void> _handleGoogleSignIn(GlobalKey<ScaffoldState> key) async {
     try {
       final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
         if (googleAuth.accessToken != null) {
-          final AuthCredential credential = GoogleAuthProvider.getCredential(
+          final AuthCredential credential = GoogleAuthProvider.credential(
             accessToken: googleAuth.accessToken,
             idToken: googleAuth.idToken,
           );
@@ -49,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Future<void> _handleAppleSignIn(GlobalKey<ScaffoldState> key) async {
     try {
-
+      final nonce = _createNonce(32);
       final AuthorizationResult result = await AppleSignIn.performRequests([
         AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
       ]);
@@ -59,10 +83,12 @@ class _SignInScreenState extends State<SignInScreen> {
           try {
             final AppleIdCredential appleIdCredential = result.credential;
 
-            OAuthProvider oAuthProvider = OAuthProvider(providerId: "apple.com");
-            final AuthCredential credential = oAuthProvider.getCredential(
-              idToken: String.fromCharCodes(appleIdCredential.identityToken),
+            OAuthCredential credential = OAuthCredential(
+              providerId: "apple.com",
+              signInMethod: "oauth",
               accessToken: String.fromCharCodes(appleIdCredential.authorizationCode),
+              idToken: String.fromCharCodes(appleIdCredential.identityToken),
+              rawNonce: nonce,
             );
 
             String userId = await Auth.signInWithCredential(credential);
@@ -115,6 +141,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   void initState() {
+    super.initState();
     if (Platform.isIOS) {
       supportsAppleSignIn = DeviceInfoPlugin().iosInfo.then((value) {
         return value.systemVersion.contains('13');

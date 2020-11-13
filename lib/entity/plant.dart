@@ -14,6 +14,7 @@ class Plant{
   int toxicityClass;
   String illustrationUrl;
   List<dynamic> photoUrls;
+  List<dynamic> videoUrls;
   List<dynamic> sourceUrls;
   List<dynamic> synonyms;
   Map<dynamic, dynamic> wikiLinks;
@@ -31,6 +32,7 @@ class Plant{
     toxicityClass = data['toxicityClass'] ?? 0;
     illustrationUrl = data['illustrationUrl'];
     photoUrls = data['photoUrls'];
+    videoUrls = data['videoUrls'];
     sourceUrls = data['sourceUrls'];
     synonyms = data['synonyms'];
     wikiLinks = data['wikilinks'];

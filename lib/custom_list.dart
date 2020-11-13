@@ -8,7 +8,7 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -38,22 +38,22 @@ class CustomListScreen extends StatefulWidget {
 class _CustomListScreenState extends State<CustomListScreen> {
   FirebaseAnalytics _firebaseAnalytics;
   GlobalKey<ScaffoldState> _key;
-  StreamSubscription<FirebaseUser> _listener;
-  FirebaseUser _currentUser;
+  StreamSubscription<firebase_auth.User> _listener;
+  firebase_auth.User _currentUser;
   DateFormat _dateFormat;
 
   Future<void> _logCustomListOpenEvent(event) async {
     await _firebaseAnalytics.logEvent(name: 'custom_list_open', parameters: {"type" : event});
   }
 
-  _onAuthStateChanged(FirebaseUser user) {
+  _onAuthStateChanged(firebase_auth.User user) {
     setState(() {
       _currentUser = user;
     });
   }
 
-  void _checkCurrentUser() async {
-    _currentUser = await Auth.getCurrentUser();
+  void _checkCurrentUser()  {
+    _currentUser = Auth.getCurrentUser();
     _listener = Auth.subscribe(_onAuthStateChanged);
   }
 

@@ -17,7 +17,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:exif/exif.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -409,7 +409,7 @@ Icon getIcon(String productId) {
 }
 
 List<Widget> getActions(
-    BuildContext mainContext, GlobalKey<ScaffoldState> key, FirebaseUser currentUser, Function(String) onChangeLanguage, Map<String, String> filter) {
+    BuildContext mainContext, GlobalKey<ScaffoldState> key, firebase_auth.User currentUser, Function(String) onChangeLanguage, Map<String, String> filter) {
   DateFormat dateFormat = new DateFormat.yMMMMd(Localizations.localeOf(mainContext).toString());
   var _actions = <Widget>[];
 

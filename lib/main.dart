@@ -12,11 +12,12 @@ import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_crashlytics/flutter_crashlytics.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -25,31 +26,25 @@ import 'package:flutter_localized_countries/flutter_localized_countries.dart';
 
 import 'ads.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+
+}
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  FlutterError.onError = (FlutterErrorDetails details) {
-    if (isInDebugMode) {
-      // In development mode simply print to console.
-      FlutterError.dumpErrorToConsole(details);
-    } else {
-      // In production mode report to the application zone to report to Crashlytics.
-      Zone.current.handleUncaughtError(details.exception, details.stack);
-    }
-  };
 
   InAppPurchaseConnection.enablePendingPurchases();
-  FlutterCrashlytics().initialize();
   Ads.initialize();
 
-  runZoned<Future<Null>>(() async {
+  runZonedGuarded(() {
     Screen.keepOn(true);
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
         .then((_) {
       runApp(App());
     });
-  }, onError: (error, stackTrace) async {
-    await FlutterCrashlytics()
-        .reportCrash(error, stackTrace, forceCrash: false);
+  }, (error, stackTrace) {
+    print('runZonedGuarded: Caught error in my root zone.');
+    FirebaseCrashlytics.instance.recordError(error, stackTrace);
   });
 }
 
@@ -60,13 +55,32 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  Future<void> _initializeFlutterFireFuture;
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
 
   StreamSubscription<List<PurchaseDetails>> _subscription;
-  Map<String, dynamic> _notificationData;
+  Map<String, String> _notificationData;
   Future<Locale> _localeF;
   Future<void> _initStoreF;
+
+  // Define an async function to initialize FlutterFire
+  Future<void> _initializeFlutterFire() async {
+    // Wait for Firebase to initialize
+    await Firebase.initializeApp();
+
+    await FirebaseCrashlytics.instance
+        .setCrashlyticsCollectionEnabled(!isInDebugMode);
+
+    // Pass all uncaught errors to Crashlytics.
+    Function originalOnError = FlutterError.onError;
+    FlutterError.onError = (FlutterErrorDetails errorDetails) async {
+      await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+      // Forward to original handler.
+      originalOnError(errorDetails);
+    };
+
+    await _firebaseCloudMessagingListeners();
+  }
 
   Future<void> _logFailedPurchaseEvent() async {
     await _firebaseAnalytics.logEvent(name: 'purchase_failed');
@@ -119,74 +133,70 @@ class _AppState extends State<App> {
     }
   }
 
-  void _firebaseCloudMessagingListeners() {
-    if (Platform.isIOS) _iOSPermission();
+  onRemoteMessage(RemoteMessage message) {
+    String notificationText = message.notification.body;
+    Map<String, String> notificationData = message.data;
+    String action = notificationData[notificationAttributeAction];
+    if (action != null && action == notificationAttributeActionList && App.currentContext != null) {
+      String path = notificationData[notificationAttributePath];
+      rootReference.child(path).keepSynced(true);
+      return showDialog(
+        context: App.currentContext,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(S.of(context).notification),
+            content: Text(notificationText),
+            actions: <Widget>[
+              FlatButton(
+                child: Text(S.of(context).notification_open, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path)),
+                      settings: RouteSettings(name: 'PlantList')));
+                },
+              ),
+              FlatButton(
+                child: Text(S.of(context).notification_close, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
-    _firebaseMessaging.getToken().then((token) {
+  Future<void> _firebaseCloudMessagingListeners() async {
+    if (Platform.isIOS) await FirebaseMessaging.instance.requestPermission();
+
+    FirebaseMessaging.instance.getToken().then((token) {
       Prefs.setString(keyToken, token);
       print('token $token');
     });
 
-    _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        String notificationText = Platform.isIOS ? message['title'] : message[notificationAttributeNotification][notificationAttributeBody];
-        Map<String, dynamic> notificationData = Map.from(
-            Platform.isIOS ? message : message[notificationAttributeData]);
-        String action = notificationData[notificationAttributeAction];
-        if (action != null && action == notificationAttributeActionList && App.currentContext != null) {
-          String path = notificationData[notificationAttributePath];
-          rootReference.child(path).keepSynced(true);
-          return showDialog(
-            context: App.currentContext,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(S.of(context).notification),
-                content: Text(notificationText),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(S.of(context).notification_open, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path)),
-                          settings: RouteSettings(name: 'PlantList')));
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(S.of(context).notification_close, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        }
-      },
-      onResume: (Map<String, dynamic> message) async {
+    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message) {
+      if (message != null) {
         setState(() {
-          _notificationData = Map.from(
-              Platform.isIOS ? message : message[notificationAttributeData]);
+          _notificationData = message.data;
         });
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        setState(() {
-          _notificationData = Map.from(
-              Platform.isIOS ? message : message[notificationAttributeData]);
-        });
-      },
-    );
-  }
-
-  void _iOSPermission() {
-    _firebaseMessaging.requestNotificationPermissions(
-        IosNotificationSettings(sound: true, badge: true, alert: true));
-    _firebaseMessaging.onIosSettingsRegistered
-        .listen((IosNotificationSettings settings) {
-      print("Settings registered: $settings");
+      }
     });
+
+    FirebaseMessaging.onMessage.listen(this.onRemoteMessage);
+
+    FirebaseMessaging.onMessageOpenedApp.listen(this.onRemoteMessage);
+
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
   }
 
   void _iapError() {
@@ -282,12 +292,14 @@ class _AppState extends State<App> {
 
     Offline.initialize();
     _checkPromotions();
-    await Auth.getCurrentUser();
+    Auth.getCurrentUser();
   }
 
   @override
   void initState() {
     super.initState();
+    _initializeFlutterFireFuture = _initializeFlutterFire();
+
     Prefs.init();
     Stream purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
@@ -327,8 +339,6 @@ class _AppState extends State<App> {
       // deal with previous int shared preferences
       Prefs.setString(keyRateCount, rateCountInitial.toString());
     });
-
-    _firebaseCloudMessagingListeners();
   }
 
   Locale _localeResolutionCallback(
@@ -380,12 +390,12 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Object>>(
-        future: Future.wait([_localeF, _initStoreF, RemoteConfiguration.setupRemoteConfig()]),
+        future: Future.wait([_initializeFlutterFireFuture, _localeF, _initStoreF, RemoteConfiguration.setupRemoteConfig()]),
         builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               if (snapshot.hasError) {
-                FlutterCrashlytics().log(snapshot.error.toString());
+                FirebaseCrashlytics.instance.log(snapshot.error.toString());
               }
               Map<String, dynamic> notificationData = _notificationData != null
                   ? Map.from(_notificationData)
@@ -394,7 +404,7 @@ class _AppState extends State<App> {
               return MaterialApp(
                 localeResolutionCallback: (deviceLocale, supportedLocales) {
                   return _localeResolutionCallback(
-                      snapshot.data == null ? null : snapshot.data[0], deviceLocale, supportedLocales);
+                      snapshot.data == null ? null : snapshot.data[1], deviceLocale, supportedLocales);
                 },
                 debugShowCheckedModeBanner: false,
                 localizationsDelegates: [

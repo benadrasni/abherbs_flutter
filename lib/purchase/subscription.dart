@@ -49,7 +49,7 @@ class _SubscriptionState extends State<Subscription> {
   }
 
   String _getProductPeriod(BuildContext context, ProductDetails subscription) {
-    String period = subscription.skuDetail?.subscriptionPeriod ?? subscription.skProduct?.subscriptionPeriod.unit.toString();
+    String period = subscription.skuDetail?.subscriptionPeriod ?? subscription.skProduct?.subscriptionPeriod?.unit?.toString();
 
     switch (period) {
       case 'P1M':

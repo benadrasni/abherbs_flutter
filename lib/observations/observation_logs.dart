@@ -9,7 +9,7 @@ import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class ObservationsSum {
 }
 
 class ObservationLogs extends StatefulWidget {
-  final FirebaseUser currentUser;
+  final firebase_auth.User currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final currentIndex;
@@ -738,14 +738,14 @@ class _ObservationLogsState extends State<ObservationLogs> {
     List<BottomNavigationBarItem> bottomNav = [];
     bottomNav.add(BottomNavigationBarItem(
       icon: Icon(Icons.person),
-      title: Text(S.of(context).observation_private),
+      label: S.of(context).observation_private,
     ));
     bottomNav.add(BottomNavigationBarItem(
       icon: Icon(Icons.people),
-      title: Text(S.of(context).observation_public),
+      label: S.of(context).observation_public,
     ));
     if (Purchases.isSubscribed()) {
-      bottomNav.add(BottomNavigationBarItem(icon: Icon(Icons.cloud_upload), title: Text(S.of(context).observation_logs)));
+      bottomNav.add(BottomNavigationBarItem(icon: Icon(Icons.cloud_upload), label: S.of(context).observation_logs));
     }
 
     return Scaffold(

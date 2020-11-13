@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter_country_picker/flutter_country_picker.dart';
 
 class PhoneLoginSignUpPage extends StatefulWidget {
@@ -24,10 +24,10 @@ const String errorInvalidVerificationCode = 'ERROR_INVALID_VERIFICATION_CODE';
 class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   final _formKey = GlobalKey<FormState>();
   Future<String> _errorMessage;
-  PhoneVerificationCompleted _verificationCompleted;
-  PhoneVerificationFailed _verificationFailed;
-  PhoneCodeSent _codeSent;
-  PhoneCodeAutoRetrievalTimeout _codeAutoRetrievalTimeout;
+  firebase_auth.PhoneVerificationCompleted _verificationCompleted;
+  firebase_auth.PhoneVerificationFailed _verificationFailed;
+  firebase_auth.PhoneCodeSent _codeSent;
+  firebase_auth.PhoneCodeAutoRetrievalTimeout _codeAutoRetrievalTimeout;
 
   Country _country;
   String _phone;
@@ -61,7 +61,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
       String userId = "";
       try {
         if (_formMode == FormMode.SMS) {
-          userId = await Auth.signInWithCredential(PhoneAuthProvider.getCredential(verificationId: _verificationId, smsCode: _code));
+          userId = await Auth.signInWithCredential(firebase_auth.PhoneAuthProvider.credential(verificationId: _verificationId, smsCode: _code));
           Navigator.pop(context);
           Navigator.pop(context);
           print('Signed in: $userId');
@@ -103,13 +103,13 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     _showResendButton = false;
     _country = Country.findByIsoCode(widget.myLocale.countryCode);
 
-    _verificationCompleted = (AuthCredential credential) {
+    _verificationCompleted = (firebase_auth.AuthCredential credential) {
       Auth.signInWithCredential(credential);
       Navigator.pop(context);
       Navigator.pop(context);
     };
 
-    _verificationFailed = (AuthException authException) {
+    _verificationFailed = (firebase_auth.FirebaseAuthException authException) {
       if (authException.code == errorInvalidCredential) {
         _isWrongNumber = true;
         _validateAndSave();

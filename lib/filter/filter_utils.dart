@@ -288,7 +288,7 @@ List<BottomNavigationBarItem> getBottomNavigationBarItems(BuildContext context, 
           width: 25.0,
           height: 25.0,
         ),
-        title: Text(getFilterText(context, filterAttribute)));
+        label: getFilterText(context, filterAttribute));
   }).toList();
 }
 

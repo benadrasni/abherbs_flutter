@@ -125,6 +125,8 @@
   "no": "No",
   "close": "Close",
   "pause": "Pause",
+  "apply": "Apply",
+  "cancel": "Cancel",
 
   "filter_color": "color",
   "filter_habitat": "habitat",
