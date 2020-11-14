@@ -125,6 +125,8 @@
   "no": "Ei",
   "close": "Kiinni",
   "pause": "Tauko",
+  "apply": "Käytä",
+  "cancel": "Peruuttaa",
 
   "filter_color": "väri",
   "filter_habitat": "kasvupaikka",

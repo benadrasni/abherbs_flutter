@@ -123,6 +123,9 @@
   "no": "Não",
   "close": "Perto",
   "pause": "Pausa",
+  "apply": "Aplique",
+  "cancel": "Cancelar",
+
 
   "filter_color": "cor",
   "filter_habitat": "habitat",

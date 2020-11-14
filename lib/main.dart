@@ -29,19 +29,43 @@ import 'ads.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  InAppPurchaseConnection.enablePendingPurchases();
-  Ads.initialize();
-
   runZonedGuarded(() {
-    Screen.keepOn(true);
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-        .then((_) {
-      runApp(App());
+    initializeFlutterFire().then((_) {
+      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+          .then((_) {
+        Screen.keepOn(true);
+        InAppPurchaseConnection.enablePendingPurchases();
+        Ads.initialize();
+        runApp(App());
+      }).catchError((error) {
+        print('setOrientation: Caught error in set orientation.');
+        FirebaseCrashlytics.instance.recordError(error, null);
+      });
+    }).catchError((error) {
+      print('FlutterFire: Caught error in FlutterFire initialization.');
+      FirebaseCrashlytics.instance.recordError(error, null);
     });
   }, (error, stackTrace) {
     print('runZonedGuarded: Caught error in my root zone.');
     FirebaseCrashlytics.instance.recordError(error, stackTrace);
   });
+}
+
+// Define an async function to initialize FlutterFire
+Future<void> initializeFlutterFire() async {
+  // Wait for Firebase to initialize
+  await Firebase.initializeApp();
+
+  await FirebaseCrashlytics.instance
+      .setCrashlyticsCollectionEnabled(!isInDebugMode);
+
+  // Pass all uncaught errors to Crashlytics.
+  Function originalOnError = FlutterError.onError;
+  FlutterError.onError = (FlutterErrorDetails errorDetails) async {
+    await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+    // Forward to original handler.
+    originalOnError(errorDetails);
+  };
 }
 
 class App extends StatefulWidget {
@@ -51,7 +75,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  Future<void> _initializeFlutterFireFuture;
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
 
@@ -60,24 +83,7 @@ class _AppState extends State<App> {
   Future<Locale> _localeF;
   Future<void> _initStoreF;
 
-  // Define an async function to initialize FlutterFire
-  Future<void> _initializeFlutterFire() async {
-    // Wait for Firebase to initialize
-    await Firebase.initializeApp();
 
-    await FirebaseCrashlytics.instance
-        .setCrashlyticsCollectionEnabled(!isInDebugMode);
-
-    // Pass all uncaught errors to Crashlytics.
-    Function originalOnError = FlutterError.onError;
-    FlutterError.onError = (FlutterErrorDetails errorDetails) async {
-      await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
-      // Forward to original handler.
-      originalOnError(errorDetails);
-    };
-
-    _firebaseCloudMessagingListeners();
-  }
 
   Future<void> _logFailedPurchaseEvent() async {
     await _firebaseAnalytics.logEvent(name: 'purchase_failed');
@@ -299,7 +305,6 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    _initializeFlutterFireFuture = _initializeFlutterFire();
 
     Prefs.init();
     Stream purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
@@ -340,6 +345,8 @@ class _AppState extends State<App> {
       // deal with previous int shared preferences
       Prefs.setString(keyRateCount, rateCountInitial.toString());
     });
+
+    _firebaseCloudMessagingListeners();
   }
 
   Locale _localeResolutionCallback(
@@ -391,7 +398,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Object>>(
-        future: Future.wait([_initializeFlutterFireFuture, _localeF, _initStoreF, RemoteConfiguration.setupRemoteConfig()]),
+        future: Future.wait([_localeF, _initStoreF, RemoteConfiguration.setupRemoteConfig()]),
         builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
@@ -405,7 +412,7 @@ class _AppState extends State<App> {
               return MaterialApp(
                 localeResolutionCallback: (deviceLocale, supportedLocales) {
                   return _localeResolutionCallback(
-                      snapshot.data == null ? null : snapshot.data[1], deviceLocale, supportedLocales);
+                      snapshot.data == null ? null : snapshot.data[0], deviceLocale, supportedLocales);
                 },
                 debugShowCheckedModeBanner: false,
                 localizationsDelegates: [

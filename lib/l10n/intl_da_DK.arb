@@ -123,6 +123,9 @@
   "no": "Ingen",
   "close": "Lukke",
   "pause": "Pause",
+  "apply": "Ansøge",
+  "cancel": "Afbestille",
+
 
   "filter_color": "farve",
   "filter_habitat": "vækststeder",

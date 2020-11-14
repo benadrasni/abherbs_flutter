@@ -125,6 +125,9 @@
   "no": "Nee",
   "close": "Dichtbij",
   "pause": "Pauze",
+  "apply": "Van toepassing zijn",
+  "cancel": "Annuleren",
+
 
   "filter_color": "kleur",
   "filter_habitat": "standplaats",

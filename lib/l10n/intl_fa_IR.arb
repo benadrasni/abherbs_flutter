@@ -124,6 +124,9 @@
   "no": "نه",
   "close": "نزدیک",
   "pause": "مکث",
+  "apply": "درخواست دادن",
+  "cancel": "لغو",
+
 
   "filter_color": "رنگ",
   "filter_habitat": "زیستگاه ها",

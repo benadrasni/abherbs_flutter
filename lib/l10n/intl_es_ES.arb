@@ -125,6 +125,9 @@
   "no": "No",
   "close": "Cerrar",
   "pause": "Pausa",
+  "apply": "Aplicar",
+  "cancel": "Cancelar",
+
 
   "filter_color": "color",
   "filter_habitat": "localidad",

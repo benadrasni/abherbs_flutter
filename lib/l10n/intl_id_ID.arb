@@ -125,6 +125,9 @@
   "no": "Tidak",
   "close": "Dekat",
   "pause": "Jeda",
+  "apply": "Menerapkan",
+  "cancel": "Membatalkan",
+
 
   "filter_color": "warna",
   "filter_habitat": "habitat",

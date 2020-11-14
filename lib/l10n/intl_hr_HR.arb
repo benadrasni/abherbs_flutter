@@ -125,6 +125,9 @@
   "no": "Ne",
   "close": "Zatvoriti",
   "pause": "Pauza",
+  "apply": "Aplikovati",
+  "cancel": "Otkazati",
+
 
   "filter_color": "boja",
   "filter_habitat": "stanište",
