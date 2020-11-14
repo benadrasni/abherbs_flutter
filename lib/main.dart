@@ -26,10 +26,6 @@ import 'package:flutter_localized_countries/flutter_localized_countries.dart';
 
 import 'ads.dart';
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-
-}
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -56,10 +52,11 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   Future<void> _initializeFlutterFireFuture;
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
 
   StreamSubscription<List<PurchaseDetails>> _subscription;
-  Map<String, String> _notificationData;
+  Map<String, dynamic> _notificationData;
   Future<Locale> _localeF;
   Future<void> _initStoreF;
 
@@ -79,7 +76,7 @@ class _AppState extends State<App> {
       originalOnError(errorDetails);
     };
 
-    await _firebaseCloudMessagingListeners();
+    _firebaseCloudMessagingListeners();
   }
 
   Future<void> _logFailedPurchaseEvent() async {
@@ -133,70 +130,74 @@ class _AppState extends State<App> {
     }
   }
 
-  onRemoteMessage(RemoteMessage message) {
-    String notificationText = message.notification.body;
-    Map<String, String> notificationData = message.data;
-    String action = notificationData[notificationAttributeAction];
-    if (action != null && action == notificationAttributeActionList && App.currentContext != null) {
-      String path = notificationData[notificationAttributePath];
-      rootReference.child(path).keepSynced(true);
-      return showDialog(
-        context: App.currentContext,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(S.of(context).notification),
-            content: Text(notificationText),
-            actions: <Widget>[
-              FlatButton(
-                child: Text(S.of(context).notification_open, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path)),
-                      settings: RouteSettings(name: 'PlantList')));
-                },
-              ),
-              FlatButton(
-                child: Text(S.of(context).notification_close, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
+  void _firebaseCloudMessagingListeners() {
+    if (Platform.isIOS) _iOSPermission();
 
-  Future<void> _firebaseCloudMessagingListeners() async {
-    if (Platform.isIOS) await FirebaseMessaging.instance.requestPermission();
-
-    FirebaseMessaging.instance.getToken().then((token) {
+    _firebaseMessaging.getToken().then((token) {
       Prefs.setString(keyToken, token);
       print('token $token');
     });
 
-    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message) {
-      if (message != null) {
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        String notificationText = Platform.isIOS ? message['aps']['alert'] : message[notificationAttributeNotification][notificationAttributeBody];
+        Map<String, dynamic> notificationData = Map.from(
+            Platform.isIOS ? message : message[notificationAttributeData]);
+        String action = notificationData[notificationAttributeAction];
+        if (action != null && action == notificationAttributeActionList && App.currentContext != null) {
+          String path = notificationData[notificationAttributePath];
+          rootReference.child(path).keepSynced(true);
+          return showDialog(
+            context: App.currentContext,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(S.of(context).notification),
+                content: Text(notificationText),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text(S.of(context).notification_open, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path)),
+                          settings: RouteSettings(name: 'PlantList')));
+                    },
+                  ),
+                  FlatButton(
+                    child: Text(S.of(context).notification_close, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      },
+      onResume: (Map<String, dynamic> message) async {
         setState(() {
-          _notificationData = message.data;
+          _notificationData = Map.from(
+              Platform.isIOS ? message : message[notificationAttributeData]);
         });
-      }
-    });
-
-    FirebaseMessaging.onMessage.listen(this.onRemoteMessage);
-
-    FirebaseMessaging.onMessageOpenedApp.listen(this.onRemoteMessage);
-
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-      alert: true,
-      badge: true,
-      sound: true,
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        setState(() {
+          _notificationData = Map.from(
+              Platform.isIOS ? message : message[notificationAttributeData]);
+        });
+      },
     );
+  }
+
+  void _iOSPermission() {
+    _firebaseMessaging.requestNotificationPermissions(
+        IosNotificationSettings(sound: true, badge: true, alert: true));
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings) {
+      print("Settings registered: $settings");
+    });
   }
 
   void _iapError() {
