@@ -125,6 +125,9 @@
   "no": "Nu",
   "close": "Închide",
   "pause": "Pauză",
+  "apply": "Aplica",
+  "cancel": "Anulare",
+
 
   "filter_color": "culoare",
   "filter_habitat": "habitatul",

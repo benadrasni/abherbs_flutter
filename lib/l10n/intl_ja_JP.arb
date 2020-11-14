@@ -125,6 +125,9 @@
   "no": "いいえ",
   "close": "閉じる",
   "pause": "一時停止",
+  "apply": "適用する",
+  "cancel": "キャンセル",
+
 
   "filter_color": "色",
   "filter_habitat": "生息地",

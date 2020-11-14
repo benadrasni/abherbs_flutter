@@ -125,6 +125,9 @@
   "no": "Nej",
   "close": "Stänga",
   "pause": "Paus",
+  "apply": "Tillämpa",
+  "cancel": "Annullera",
+
 
   "filter_color": "färg",
   "filter_habitat": "växtplats",

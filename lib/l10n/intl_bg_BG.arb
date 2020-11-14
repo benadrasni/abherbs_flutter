@@ -125,6 +125,9 @@
   "no": "Не",
   "close": "Затвори",
   "pause": "Пауза",
+  "apply": "Приложи",
+  "cancel": "Откази",
+
 
   "filter_color": "цвят",
   "filter_habitat": "местообитание",

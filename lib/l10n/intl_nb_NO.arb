@@ -125,6 +125,9 @@
   "no": "Nei",
   "close": "Lukk",
   "pause": "Pause",
+  "apply": "Søke om",
+  "cancel": "Avbryt",
+
 
   "filter_color": "farge",
   "filter_habitat": "voksested",

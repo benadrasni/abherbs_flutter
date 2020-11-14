@@ -125,6 +125,9 @@
   "no": "नहीं",
   "close": "बंद करे",
   "pause": "ठहराव",
+  "apply": "लागू",
+  "cancel": "रद्द करना",
+
 
   "filter_color": "रंग",
   "filter_habitat": "पर्यावास",

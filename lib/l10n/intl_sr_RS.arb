@@ -125,6 +125,9 @@
   "no": "Не",
   "close": "Близу",
   "pause": "Пауза",
+  "apply": "Применити",
+  "cancel": "Поништити",
+
 
   "filter_color": "боја",
   "filter_habitat": "станиште",

@@ -125,6 +125,9 @@
   "no": "Нет",
   "close": "Закрытие",
   "pause": "Пауза",
+  "apply": "Применять",
+  "cancel": "Отмена",
+
 
   "filter_color": "окраска",
   "filter_habitat": "ареалы",

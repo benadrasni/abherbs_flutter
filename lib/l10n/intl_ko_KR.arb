@@ -125,6 +125,9 @@
   "no": "아니",
   "close": "닫기",
   "pause": "중지",
+  "apply": "대다",
+  "cancel": "취소",
+
 
   "filter_color": "색깔",
   "filter_habitat": "서식지",
