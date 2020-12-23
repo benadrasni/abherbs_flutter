@@ -2,10 +2,10 @@ import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/observations/observation_edit.dart';
 import 'package:abherbs_flutter/observations/observation_map.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +13,7 @@ import 'package:intl/intl.dart';
 import '../main.dart';
 
 class ObservationPlantView extends StatefulWidget {
-  final firebase_auth.User currentUser;
+  final AppUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final Observation observation;
@@ -53,7 +53,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
     Locale myLocale = Localizations.localeOf(context);
     var widgets = <Widget>[];
     widgets.add(ListTile(
-      leading: widget.observation.id.startsWith(widget.currentUser.uid)
+      leading: widget.observation.id.startsWith(widget.currentUser.firebaseUser.uid)
           ? CircleAvatar(
               backgroundColor: Theme.of(context).accentColor,
               child: Icon(
@@ -63,7 +63,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
           : null,
       title: Text(_dateFormat.format(widget.observation.date) + ' ' + _timeFormat.format(widget.observation.date)),
       onTap: () {
-        if (widget.observation.id.startsWith(widget.currentUser.uid)) {
+        if (widget.observation.id.startsWith(widget.currentUser.firebaseUser.uid)) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.observation),
@@ -138,7 +138,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
       ),
     ));
 
-    if (widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.uid)) {
+    if (widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.firebaseUser.uid)) {
       widgets.add(Card(
           color: Theme.of(context).buttonColor,
           child: Container(

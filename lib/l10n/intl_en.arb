@@ -80,6 +80,11 @@
   "feedback_run_ads_fullscreen": "Show a fullscreen advertisement",
   "feedback_run_ads_video": "Watch a video advertisement",
 
+  "credit_login": "Sign in and earn credits for watching advertisement. Use credits to search by photo.",
+  "credit_message": "Earn credits for watching advertisement. Use credits to search by photo.",
+  "credit_count": "Credits: ",
+  "credit_ads_video": "Watch ad and earn credits",
+
   "auth_sign_in": "Sign in",
   "auth_sign_out": "Sign out",
   "auth_email": "Sign in with email",
@@ -283,7 +288,7 @@
   "observation_delete": "Delete observation",
   "observation_delete_question": "Do you want to delete the observation?",
   "observation_empty": "There is no observation yet.",
-  "observation_no_login": "Observations are available only for logged users. Please log in.",
+  "observation_no_login": "Observations are available only for logged users. Please sign in.",
   "observation_photo_delete": "Remove photo",
   "observation_photo_delete_question": "Do you want to remove photo from the observation?",
   "observation_photo_duplicate": "Duplicate photo. Skipped.",
@@ -328,7 +333,7 @@
   "no_connection_title": "Connection",
   "no_connection_content": "This feature doesn't work without Internet connection.",
 
-  "photo_search_no_login": "Search by photo is available only for logged users. Please log in.",
+  "photo_search_no_login": "Search by photo is available only for logged users. Please sign in.",
   "photo_search_failed": "Search by photo failed. Check your internet connection and try again.",
   "photo_to_search_by": "Photo to search by",
   "photo_search_note": "This is feature works only online. Sometimes it finds exactly what you're looking for, sometimes not even close. I'm totally relying on third party here since they're doing all the hard work. As time goes it should be better and better. Use it wisely and please don't judge the whole application based on this feature. For quality purposes all search results (not photos) will be saved.",
@@ -345,5 +350,5 @@
 
   "favorite_title": "Favorite flowers",
   "favorite_empty": "There is no favorite flowers yet.",
-  "favorite_no_login": "List of favorite flowers is available only for logged users. Please log in."
+  "favorite_no_login": "List of favorite flowers is available only for logged users. Please sign in."
 }

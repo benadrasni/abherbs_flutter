@@ -51,7 +51,7 @@ class PlantDetail extends StatefulWidget {
 class _PlantDetailState extends State<PlantDetail> {
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
   StreamSubscription<firebase_auth.User> _listener;
-  firebase_auth.User _currentUser;
+  AppUser _currentUser;
   Future<PlantTranslation> _plantTranslationF;
   Future<bool> _isFavoriteF;
   int _currentIndex;
@@ -149,7 +149,7 @@ class _PlantDetailState extends State<PlantDetail> {
   Future<bool> _setFavorite() {
     return Future<bool>(() {
       if (_currentUser != null) {
-        return usersReference.child(_currentUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).once().then((snapshot) {
+        return usersReference.child(_currentUser.firebaseUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).once().then((snapshot) {
           return snapshot.value != null && snapshot.value == 1;
         });
       }
@@ -196,12 +196,12 @@ class _PlantDetailState extends State<PlantDetail> {
 
   _onAuthStateChanged(firebase_auth.User user) {
     setState(() {
-      _currentUser = user;
+      _currentUser = Auth.getAppUser();
     });
   }
 
   void _checkCurrentUser() {
-    _currentUser = Auth.getCurrentUser();
+    _currentUser = Auth.getAppUser();
     _listener = Auth.subscribe(_onAuthStateChanged);
     _isFavoriteF = _setFavorite();
   }
@@ -342,7 +342,7 @@ class _PlantDetailState extends State<PlantDetail> {
                     } else {
                       if (_currentUser != null) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          usersReference.child(_currentUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).set(
+                          usersReference.child(_currentUser.firebaseUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).set(
                               snapshot.data ? null : 1).then((value) {
                             if (mounted) {
                               setState(() {

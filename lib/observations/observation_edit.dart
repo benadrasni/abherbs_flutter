@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/settings/offline.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
@@ -9,7 +10,6 @@ import 'package:abherbs_flutter/observations/observation_map.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -20,7 +20,7 @@ import 'package:exif/exif.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class ObservationEdit extends StatefulWidget {
-  final firebase_auth.User currentUser;
+  final AppUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final Observation observation;
@@ -63,19 +63,19 @@ class _ObservationEditState extends State<ObservationEdit> {
       return false;
     } else {
       if (_observation.id == null) {
-        _observation.id = widget.currentUser.uid + '_' + DateTime.now().millisecondsSinceEpoch.toString();
+        _observation.id = widget.currentUser.firebaseUser.uid + '_' + DateTime.now().millisecondsSinceEpoch.toString();
       }
       _observation.order = -1 * _observation.date.millisecondsSinceEpoch;
       _observation.note = _noteController.text.isNotEmpty ? _noteController.text : null;
 
       await privateObservationsReference
-          .child(widget.currentUser.uid)
+          .child(widget.currentUser.firebaseUser.uid)
           .child(firebaseObservationsByDate)
           .child(firebaseAttributeList)
           .child(_observation.id)
           .set(_observation.toJson());
       await privateObservationsReference
-          .child(widget.currentUser.uid)
+          .child(widget.currentUser.firebaseUser.uid)
           .child(firebaseObservationsByPlant)
           .child(_observation.plant)
           .child(firebaseAttributeList)
@@ -104,7 +104,7 @@ class _ObservationEditState extends State<ObservationEdit> {
       }
 
       // store file
-      var dir = storageObservations + widget.currentUser.uid + '/' + _observation.plant.replaceAll(' ', '_');
+      var dir = storageObservations + widget.currentUser.firebaseUser.uid + '/' + _observation.plant.replaceAll(' ', '_');
       var prefix = "unknown_";
       var names = _observation.plant.toLowerCase().split(' ');
       if (names.length > 1) {
@@ -151,13 +151,13 @@ class _ObservationEditState extends State<ObservationEdit> {
 
     if (_observation.id != null) {
       await privateObservationsReference
-          .child(widget.currentUser.uid)
+          .child(widget.currentUser.firebaseUser.uid)
           .child(firebaseObservationsByDate)
           .child(firebaseAttributeList)
           .child(_observation.id)
           .remove();
       await privateObservationsReference
-          .child(widget.currentUser.uid)
+          .child(widget.currentUser.firebaseUser.uid)
           .child(firebaseObservationsByPlant)
           .child(_observation.plant)
           .child(firebaseAttributeList)

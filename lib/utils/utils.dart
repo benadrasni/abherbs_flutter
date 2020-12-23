@@ -12,12 +12,12 @@ import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
 import 'package:abherbs_flutter/search/search_photo.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:exif/exif.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -138,6 +138,7 @@ const String firebaseAttributeOldVersion = "old version";
 const String firebaseAttributeLifetimeSubscription = "lifetime subscription";
 const String firebaseAttributeToken = "token";
 const String firebaseAttributePurchases = "purchases";
+const String firebaseAttributeCredits = "credits";
 const String firebaseAttributeSearch = "search";
 const String firebaseAttributeSearchByPhoto = "search_by_photo";
 const String firebaseAttributeObservations = "observations";
@@ -409,7 +410,7 @@ Icon getIcon(String productId) {
 }
 
 List<Widget> getActions(
-    BuildContext mainContext, GlobalKey<ScaffoldState> key, firebase_auth.User currentUser, Function(String) onChangeLanguage, Map<String, String> filter) {
+    BuildContext mainContext, GlobalKey<ScaffoldState> key, AppUser currentUser, Function(String) onChangeLanguage, Map<String, String> filter) {
   DateFormat dateFormat = new DateFormat.yMMMMd(Localizations.localeOf(mainContext).toString());
   var _actions = <Widget>[];
 
@@ -421,39 +422,10 @@ List<Widget> getActions(
         if (result == ConnectivityResult.none) {
           infoDialog(mainContext, S.of(mainContext).no_connection_title, S.of(mainContext).no_connection_content);
         } else {
-          if (Purchases.isPhotoSearch()) {
-            Navigator.push(
-              mainContext,
-              MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage), settings: RouteSettings(name: 'SearchPhoto')),
-            );
-          } else if (Purchases.isSearchByPhotoPromotion != null && Purchases.isSearchByPhotoPromotion) {
-            infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
-                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo)), remoteConfigSearchByPhotoVideo)
-                .then((value) {
-              if (value != null && value) {
-                Navigator.push(
-                  mainContext,
-                  MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, filter), settings: RouteSettings(name: 'Enhancements')),
-                );
-              } else {
-                _logPromotionEvent('search_by_photo');
-                Navigator.push(
-                  mainContext,
-                  MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage), settings: RouteSettings(name: 'SearchPhoto')),
-                );
-              }
-            });
-          } else {
-            infoBuyDialog(mainContext, S.of(mainContext).product_photo_search_title, S.of(mainContext).product_photo_search_description, remoteConfigSearchByPhotoVideo)
-                .then((value) {
-              if (value != null && value) {
-                Navigator.push(
-                  mainContext,
-                  MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, filter), settings: RouteSettings(name: 'Enhancements')),
-                );
-              }
-            });
-          }
+          Navigator.push(
+            mainContext,
+            MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage), settings: RouteSettings(name: 'SearchPhoto')),
+          );
         }
       });
     },

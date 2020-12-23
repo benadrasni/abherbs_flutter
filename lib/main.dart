@@ -299,7 +299,7 @@ class _AppState extends State<App> {
 
     Offline.initialize();
     _checkPromotions();
-    Auth.getCurrentUser();
+    Auth.getAppUser();
   }
 
   @override

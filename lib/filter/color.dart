@@ -33,7 +33,7 @@ class Color extends StatefulWidget {
 class _ColorState extends State<Color> {
   GlobalKey<ScaffoldState> _key;
   StreamSubscription<firebase_auth.User> _listener;
-  firebase_auth.User _currentUser;
+  AppUser _currentUser;
   Future<int> _countF;
   Future<String> _rateStateF;
   Future<bool> _isNewVersionF;
@@ -74,12 +74,12 @@ class _ColorState extends State<Color> {
 
   _onAuthStateChanged(firebase_auth.User user) {
     setState(() {
-      _currentUser = user;
+      _currentUser = Auth.getAppUser();
     });
   }
 
   void _checkCurrentUser() {
-    _currentUser = Auth.getCurrentUser();
+    _currentUser = Auth.getAppUser();
     _listener = Auth.subscribe(_onAuthStateChanged);
   }
 

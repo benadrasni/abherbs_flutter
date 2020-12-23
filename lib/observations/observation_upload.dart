@@ -1,11 +1,11 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/observations/upload.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ObservationUpload extends StatefulWidget {
-  final firebase_auth.User currentUser;
+  final AppUser currentUser;
   final int observationsToUpload;
   ObservationUpload(this.currentUser, this.observationsToUpload);
 

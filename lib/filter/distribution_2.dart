@@ -26,7 +26,7 @@ class Distribution2 extends StatefulWidget {
 
 class _Distribution2State extends State<Distribution2> {
   StreamSubscription<firebase_auth.User> _listener;
-  firebase_auth.User _currentUser;
+  AppUser _currentUser;
   Future<int> _countF;
   GlobalKey<ScaffoldState> _key;
 
@@ -162,12 +162,12 @@ class _Distribution2State extends State<Distribution2> {
 
   _onAuthStateChanged(firebase_auth.User user) {
     setState(() {
-      _currentUser = user;
+      _currentUser = Auth.getAppUser();
     });
   }
 
   _checkCurrentUser() {
-    _currentUser = Auth.getCurrentUser();
+    _currentUser = Auth.getAppUser();
     _listener = Auth.subscribe(_onAuthStateChanged);
   }
 

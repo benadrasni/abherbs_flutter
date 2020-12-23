@@ -1,9 +1,9 @@
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/observations/observation_plant_view.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -11,7 +11,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import '../main.dart';
 
 class ObservationsPlant extends StatefulWidget {
-  final firebase_auth.User currentUser;
+  final AppUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final bool isPublic;
@@ -38,7 +38,7 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
     _key = _privateKey;
     initializeDateFormatting();
     _privateQuery = privateObservationsReference
-        .child(widget.currentUser.uid)
+        .child(widget.currentUser.firebaseUser.uid)
         .child(firebaseObservationsByPlant)
         .child(widget.plantName)
         .child(firebaseAttributeList)

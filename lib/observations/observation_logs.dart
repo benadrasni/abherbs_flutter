@@ -6,10 +6,10 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/purchase/subscription.dart';
 import 'package:abherbs_flutter/settings/settings_remote.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class ObservationsSum {
 }
 
 class ObservationLogs extends StatefulWidget {
-  final firebase_auth.User currentUser;
+  final AppUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final currentIndex;
@@ -70,10 +70,6 @@ class _ObservationLogsState extends State<ObservationLogs> {
     });
   }
 
-  String _getUserId() {
-    return widget.currentUser.uid;
-  }
-
   @override
   void initState() {
     super.initState();
@@ -81,14 +77,14 @@ class _ObservationLogsState extends State<ObservationLogs> {
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString()).add_jm();
     _currentIndex = widget.currentIndex;
 
-    _privateStatsF = privateObservationsReference.child(_getUserId()).child(firebaseObservationsStats).once();
+    _privateStatsF = privateObservationsReference.child(widget.currentUser.firebaseUser.uid).child(firebaseObservationsStats).once();
     _publicStatsF = publicObservationsReference.child(firebaseObservationsStats).once();
   }
 
   Widget getItems(Map<dynamic, dynamic> observations) {
     var items = observations.keys.where((x) => x != firebaseAttributeTime).map((id) {
       return FutureBuilder<Observation>(
-          future: privateObservationsReference.child(_getUserId()).child(firebaseObservationsByDate).child(firebaseAttributeList).child(id.toString()).once().then((snapshot) {
+          future: privateObservationsReference.child(widget.currentUser.firebaseUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).child(id.toString()).once().then((snapshot) {
             var observation = Observation.fromJson(snapshot.key, snapshot.value);
             observation.uploadStatus = observations[id][firebaseAttributeStatus];
             return observation;
@@ -333,7 +329,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
       ));
 
       _widgets.add(FutureBuilder<List<dynamic>>(
-          future: privateObservationsReference.child(_getUserId()).child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((snapshot) {
+          future: privateObservationsReference.child(widget.currentUser.firebaseUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((snapshot) {
             List<dynamic> result = [];
             Map<MarkerId, Marker> markers = {};
             MarkerId newestMarker;
@@ -619,7 +615,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                 }
                 markers[markerId] = Marker(
                   markerId: markerId,
-                  icon: observation.id.startsWith(_getUserId()) ? BitmapDescriptor.defaultMarker : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+                  icon: observation.id.startsWith(widget.currentUser.firebaseUser.uid) ? BitmapDescriptor.defaultMarker : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
                   position: LatLng(
                     observation.latitude ?? 0.0,
                     observation.longitude ?? 0.0,
@@ -716,7 +712,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
               child: MyFirebaseAnimatedList(
                   shrinkWrap: true,
                   defaultChild: Center(child: CircularProgressIndicator()),
-                  query: logsObservationsReference.child(_getUserId()).orderByChild(firebaseAttributeTime),
+                  query: logsObservationsReference.child(widget.currentUser.firebaseUser.uid).orderByChild(firebaseAttributeTime),
                   itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
                     return Card(
                       child: Column(children: [
