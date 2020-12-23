@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/observations/observation_map.dart';
+import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -14,7 +14,7 @@ import 'package:intl/intl.dart';
 import '../main.dart';
 
 class ObservationView extends StatefulWidget {
-  final firebase_auth.User currentUser;
+  final AppUser currentUser;
   final Locale myLocale;
   final void Function(String) onChangeLanguage;
   final Observation observation;
@@ -157,7 +157,7 @@ class _ObservationViewState extends State<ObservationView> {
       ),
     ));
 
-    if (widget.currentUser != null && widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.uid)) {
+    if (widget.currentUser != null && widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.firebaseUser.uid)) {
       widgets.add(Card(
           color: Theme.of(context).buttonColor,
           child: Container(

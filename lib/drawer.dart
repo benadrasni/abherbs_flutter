@@ -8,11 +8,10 @@ import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
 import 'package:abherbs_flutter/signin/sign_in.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatefulWidget {
-  final firebase_auth.User currentUser;
+  final AppUser currentUser;
   final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
   final void Function() settingsCallback;
@@ -50,11 +49,11 @@ class _AppDrawerState extends State<AppDrawer> {
           child: ListTile(
             leading: Icon(Icons.person, color: Colors.white,),
             title: Text(
-              widget.currentUser?.displayName ?? '',
+              widget.currentUser?.firebaseUser?.displayName ?? '',
               style: TextStyle(color: Colors.white),
             ),
             subtitle: Text(
-              widget.currentUser?.email ?? widget.currentUser?.phoneNumber ?? '',
+              widget.currentUser?.firebaseUser?.email ?? widget.currentUser?.firebaseUser?.phoneNumber ?? '',
               style: TextStyle(color: Colors.white70),
             ),
             onTap: () {},
@@ -168,7 +167,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => FeedbackScreen(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Feedback')),
+          MaterialPageRoute(builder: (context) => FeedbackScreen(widget.currentUser, widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Feedback')),
         ).then((result) {
           if (mounted) {
             Navigator.pop(context);

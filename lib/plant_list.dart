@@ -30,7 +30,7 @@ class PlantList extends StatefulWidget {
 
 class _PlantListState extends State<PlantList> {
   StreamSubscription<firebase_auth.User> _listener;
-  firebase_auth.User _currentUser;
+  AppUser _currentUser;
   Future<int> _count;
   Random _random;
 
@@ -70,12 +70,12 @@ class _PlantListState extends State<PlantList> {
 
   _onAuthStateChanged(firebase_auth.User user) {
     setState(() {
-      _currentUser = user;
+      _currentUser = Auth.getAppUser();
     });
   }
 
   void _checkCurrentUser() {
-    _currentUser = Auth.getCurrentUser();
+    _currentUser = Auth.getAppUser();
     _listener = Auth.subscribe(_onAuthStateChanged);
   }
 

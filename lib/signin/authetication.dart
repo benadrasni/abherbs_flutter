@@ -6,8 +6,14 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
+class AppUser {
+  firebase_auth.User firebaseUser;
+  int credits = 0;
+}
+
 class Auth {
   static firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
+  static AppUser appUser;
 
   static Future<void> _logOldVersionEvent() async {
     await FirebaseAnalytics().logEvent(name: 'offline_download');
@@ -52,48 +58,76 @@ class Auth {
     );
   }
 
-  static firebase_auth.User getCurrentUser() {
-    firebase_auth.User user = firebaseAuth.currentUser;
-    if (user != null) {
-      usersReference.child(user.uid).keepSynced(true);
-      if (Purchases.hasOldVersion == null) {
-        usersReference.child(user.uid).child(firebaseAttributeOldVersion).once().then((snapshot) {
-          Purchases.hasOldVersion = snapshot.value != null && snapshot.value;
-          if (Purchases.hasOldVersion) {
-            _logOldVersionEvent();
-          }
-        }).catchError((error) {
-          Purchases.hasOldVersion = false;
-        });
-        Prefs.getStringF(keyToken).then((token) {
-          if (token.isNotEmpty) {
-            usersReference.child(user.uid).child(firebaseAttributeToken).set(token);
-          }
-        });
-        Prefs.getStringListF(keyPurchases, []).then((purchases) {
-          if (purchases.length > 0) {
-            usersReference.child(user.uid).child(firebaseAttributePurchases).set(purchases);
-          }
-        });
+  static AppUser getAppUser() {
+    if (appUser == null) {
+      firebase_auth.User firebaseUser = firebaseAuth.currentUser;
+      if (firebaseUser != null) {
+        appUser = AppUser();
+        appUser.firebaseUser = firebaseUser;
+        usersReference.child(appUser.firebaseUser.uid).keepSynced(true);
+        if (Purchases.hasOldVersion == null) {
+
+          usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeOldVersion).once().then((snapshot) {
+            Purchases.hasOldVersion = snapshot.value != null && snapshot.value;
+            if (Purchases.hasOldVersion) {
+              _logOldVersionEvent();
+            }
+          }).catchError((error) {
+            Purchases.hasOldVersion = false;
+          });
+
+          usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeCredits).once().then((snapshot) {
+            appUser.credits = snapshot.value != null ? snapshot.value : 0;
+          }).catchError((error) {
+            appUser.credits = 0;
+          });
+
+          Prefs.getStringF(keyToken).then((token) {
+            if (token.isNotEmpty) {
+              usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeToken).set(token);
+            }
+          });
+
+          Prefs.getStringListF(keyPurchases, []).then((purchases) {
+            if (purchases.length > 0) {
+              usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributePurchases).set(purchases);
+            }
+          });
+        }
         if (Purchases.isPhotoSearch()) {
           rootReference.child(firebaseSearchPhoto).child(firebaseAttributeEntity).keepSynced(true);
         }
+
+        if (Purchases.hasLifetimeSubscription == null) {
+          usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeLifetimeSubscription).once().then((snapshot) {
+            Purchases.hasLifetimeSubscription = snapshot.value != null && snapshot.value;
+          }).catchError((error) {
+            Purchases.hasLifetimeSubscription = false;
+          });
+        }
+      } else {
+        Purchases.hasOldVersion = null;
+        Purchases.hasLifetimeSubscription = null;
       }
-      if (Purchases.hasLifetimeSubscription == null) {
-        usersReference.child(user.uid).child(firebaseAttributeLifetimeSubscription).once().then((snapshot) {
-          Purchases.hasLifetimeSubscription = snapshot.value != null && snapshot.value;
-        }).catchError((error) {
-          Purchases.hasLifetimeSubscription = false;
-        });
-      }
-    } else {
-      Purchases.hasOldVersion = null;
-      Purchases.hasLifetimeSubscription = null;
     }
-    return user;
+
+    return appUser;
+  }
+
+  static void changeCredits(int credit) async {
+    if (appUser != null) {
+      usersReference.child(appUser.firebaseUser.uid).keepSynced(true);
+      await usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeCredits).once().then((snapshot) {
+        appUser.credits = snapshot.value != null ? snapshot.value + credit : credit;
+      }).catchError((error) {
+        appUser.credits = credit;
+      });
+      usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeCredits).set(appUser.credits);
+    }
   }
 
   static Future<void> signOut() async {
+    appUser = null;
     return firebaseAuth.signOut();
   }
 

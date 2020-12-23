@@ -785,6 +785,46 @@ class S {
     );
   }
 
+  /// `Sign in and earn credits for watching advertisement. Use credits to search by photo.`
+  String get credit_login {
+    return Intl.message(
+      'Sign in and earn credits for watching advertisement. Use credits to search by photo.',
+      name: 'credit_login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Earn credits for watching advertisement. Use credits to search by photo.`
+  String get credit_message {
+    return Intl.message(
+      'Earn credits for watching advertisement. Use credits to search by photo.',
+      name: 'credit_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Credits: `
+  String get credit_count {
+    return Intl.message(
+      'Credits: ',
+      name: 'credit_count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Watch ad and earn credits`
+  String get credit_ads_video {
+    return Intl.message(
+      'Watch ad and earn credits',
+      name: 'credit_ads_video',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign in`
   String get auth_sign_in {
     return Intl.message(
@@ -2635,10 +2675,10 @@ class S {
     );
   }
 
-  /// `Observations are available only for logged users. Please log in.`
+  /// `Observations are available only for logged users. Please sign in.`
   String get observation_no_login {
     return Intl.message(
-      'Observations are available only for logged users. Please log in.',
+      'Observations are available only for logged users. Please sign in.',
       name: 'observation_no_login',
       desc: '',
       args: [],
@@ -3035,10 +3075,10 @@ class S {
     );
   }
 
-  /// `Search by photo is available only for logged users. Please log in.`
+  /// `Search by photo is available only for logged users. Please sign in.`
   String get photo_search_no_login {
     return Intl.message(
-      'Search by photo is available only for logged users. Please log in.',
+      'Search by photo is available only for logged users. Please sign in.',
       name: 'photo_search_no_login',
       desc: '',
       args: [],
@@ -3175,10 +3215,10 @@ class S {
     );
   }
 
-  /// `List of favorite flowers is available only for logged users. Please log in.`
+  /// `List of favorite flowers is available only for logged users. Please sign in.`
   String get favorite_no_login {
     return Intl.message(
-      'List of favorite flowers is available only for logged users. Please log in.',
+      'List of favorite flowers is available only for logged users. Please sign in.',
       name: 'favorite_no_login',
       desc: '',
       args: [],
