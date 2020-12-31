@@ -80,6 +80,11 @@
   "feedback_run_ads_fullscreen": "Rādīt pilnekrāna reklāmu",
   "feedback_run_ads_video": "Skatiet video reklāmu",
 
+  "credit_login": "Pierakstieties un nopelniet kredītus par reklāmas skatīšanos. Izmantojiet kredītus, lai meklētu pēc fotoattēla.",
+  "credit_message": "Nopelniet kredītus par reklāmas skatīšanos. Izmantojiet kredītus, lai meklētu pēc fotoattēla.",
+  "credit_count": "Kredīti: ",
+  "credit_ads_video": "Skatīties reklāmu un nopelnīt kredītus",
+
   "auth_sign_in": "Pierakstīties",
   "auth_sign_out": "Izrakstīties",
   "auth_email": "Pierakstīties ar e-pasta adresi",

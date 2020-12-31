@@ -80,6 +80,11 @@
   "feedback_run_ads_fullscreen": "Mostrar un anuncio en pantalla completa",
   "feedback_run_ads_video": "Ver un video publicitario",
 
+  "credit_login": "Inicie sesión y obtenga créditos por ver anuncios. Utilice créditos para buscar por foto.",
+  "credit_message": "Obtenga créditos por ver publicidad. Utilice créditos para buscar por foto.",
+  "credit_count": "Créditos: ",
+  "credit_ads_video": "Ver anuncios y ganar créditos",
+
   "auth_sign_in": "Iniciar sesión",
   "auth_sign_out": "Cerrar sesión",
   "auth_email": "Iniciar sesión con el correo electrónico",

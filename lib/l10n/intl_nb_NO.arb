@@ -80,6 +80,11 @@
   "feedback_run_ads_fullscreen": "Vis en fullskjerm-annonse",
   "feedback_run_ads_video": "Se en videoannonse",
 
+  "credit_login": "Logg på og tjen kreditter for å se på reklame. Bruk kreditter for å søke etter bilde.",
+  "credit_message": "Tjen kreditter for å se på reklame. Bruk kreditter for å søke etter bilde.",
+  "credit_count": "Kreditter: ",
+  "credit_ads_video": "Se annonse og tjen kreditter",
+
   "auth_sign_in": "Logg på",
   "auth_sign_out": "Logg ut",
   "auth_email": "Logg på med e-postadresse",

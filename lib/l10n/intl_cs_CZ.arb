@@ -80,6 +80,11 @@
   "feedback_run_ads_fullscreen": "Zobrazit reklamu na celé obrazovce",
   "feedback_run_ads_video": "Spustit video reklamu",
 
+  "credit_login": "Přihlaste se a získejte kredity za sledování reklamy. Pomocí kreditů můžete vyhledávat podle fotografií.",
+  "credit_message": "Získejte kredity za sledování reklamy. Pomocí kreditů můžete vyhledávat podle fotografií.",
+  "credit_count": "Kredity: ",
+  "credit_ads_video": "Sledujte reklamu a získávejte kredity",
+
   "auth_sign_in": "Přihlásit se",
   "auth_sign_out": "Odhlásit se",
   "auth_email": "Přihlásit se pomocí e-mailu",

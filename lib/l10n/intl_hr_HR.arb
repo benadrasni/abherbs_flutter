@@ -80,6 +80,11 @@
   "feedback_run_ads_fullscreen": "Pokaži oglas preko cijelog zaslona",
   "feedback_run_ads_video": "Pogledajte video oglas",
 
+  "credit_login": "Prijavite se i zaradite kredite za gledanje oglasa. Koristite bodove za pretraživanje po fotografiji.",
+  "credit_message": "Zaradite kredite za gledanje reklame. Koristite bodove za pretraživanje po fotografiji.",
+  "credit_count": "Kredite: ",
+  "credit_ads_video": "Pogledajte oglas i zaradite kredite",
+
   "auth_sign_in": "Prijava",
   "auth_sign_out": "Odjavi se",
   "auth_email": "Prijava putem e-adrese",

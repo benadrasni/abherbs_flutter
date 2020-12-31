@@ -80,6 +80,11 @@
   "feedback_run_ads_fullscreen": "Teljes képernyős hirdetés megjelenítése",
   "feedback_run_ads_video": "Nézze meg a videohirdetést",
 
+  "credit_login": "Jelentkezzen be és szerezzen krediteket a hirdetések megtekintéséért. Használjon krediteket fotó szerinti kereséshez.",
+  "credit_message": "Keressen krediteket a hirdetések megtekintéséért. Használjon krediteket fotó szerinti kereséshez.",
+  "credit_count": "Krediteket: ",
+  "credit_ads_video": "Nézze meg a hirdetéseket és szerezzen krediteket",
+
   "auth_sign_in": "Bejelentkezés",
   "auth_sign_out": "Kijelentkezés",
   "auth_email": "Bejelentkezés e-mail azonosítóval",

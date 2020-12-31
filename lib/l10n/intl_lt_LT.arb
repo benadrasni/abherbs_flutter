@@ -80,6 +80,11 @@
   "feedback_run_ads_fullscreen": "Rodyti viso ekrano skelbimą",
   "feedback_run_ads_video": "Žiūrėti vaizdo įrašo skelbimą",
 
+  "credit_login": "Prisijunkite ir uždirbkite kreditus žiūrėdami reklamą. Naudokite kreditus ieškodami pagal nuotrauką.",
+  "credit_message": "Uždirbkite kreditus žiūrėdami reklamą. Naudokite kreditus ieškodami pagal nuotrauką.",
+  "credit_count": "Kreditai: ",
+  "credit_ads_video": "Žiūrėkite skelbimą ir uždirbkite kreditus",
+
   "auth_sign_in": "Prisijungti",
   "auth_sign_out": "Atsijungti",
   "auth_email": "Prisijungti nurodant el. pašto adresą",
