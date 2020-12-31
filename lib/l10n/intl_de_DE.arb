@@ -80,6 +80,11 @@
   "feedback_run_ads_fullscreen": "Werbung im Vollbildmodus anzeigen",
   "feedback_run_ads_video": "Videowerbung ansehen",
 
+  "credit_login": "Melden Sie sich an und verdienen Sie Credits für das Ansehen von Werbung. Verwenden Sie Credits, um nach Fotos zu suchen.",
+  "credit_message": "Verdienen Sie Credits für das Ansehen von Werbung. Verwenden Sie Credits, um nach Fotos zu suchen.",
+  "credit_count": "Credits: ",
+  "credit_ads_video": "Anzeige ansehen und Credits verdienen",
+
   "auth_sign_in": "Anmelden",
   "auth_sign_out": "Abmelden",
   "auth_email": "Mit einer E-Mail-Adresse anmelden",

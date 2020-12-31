@@ -138,6 +138,10 @@ class _SearchPhotoState extends State<SearchPhoto> {
     return http.post(plantIdEndpoint, headers: headers, body: msg).then((response) async {
       var results = <SearchResult>[];
       if (response.statusCode == 200) {
+        if (widget.currentUser != null && !Purchases.isPhotoSearch()) {
+            await Auth.changeCredits(-1);
+            setState(() {});
+        }
         Map responseBody = json.decode(response.body);
         for (var suggestion in responseBody['suggestions']) {
           if (suggestion == null) {
@@ -194,9 +198,6 @@ class _SearchPhotoState extends State<SearchPhoto> {
         var userId = firebaseAttributeAnonymous;
         if (widget.currentUser != null) {
           userId = widget.currentUser.firebaseUser.uid;
-          if (!Purchases.isPhotoSearch()) {
-            await Auth.changeCredits(-1);
-          }
         }
 
         rootReference.child(firebaseUsersPhotoSearch).child(widget.myLocale.languageCode).child(userId).child(DateTime.now().millisecondsSinceEpoch.toString())
@@ -322,6 +323,14 @@ class _SearchPhotoState extends State<SearchPhoto> {
     _engineF = rootReference.child(firebaseSettingsEngine).once().then((snapshot) {
       return snapshot?.value ?? "";
     });
+    _isRewardLoading = true;
+    _rewardAd = AdmobReward(
+      adUnitId: getRewardAdUnitId(),
+      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+        handleEvent(event, args, 'Reward');
+      },
+    );
+    _rewardAd.load();
     //imageLabeler = FirebaseVision.instance.cloudImageLabeler();
   }
 /*

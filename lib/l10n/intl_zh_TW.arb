@@ -80,6 +80,11 @@
   "feedback_run_ads_fullscreen": "顯示全屏廣告",
   "feedback_run_ads_video": "觀看視頻廣告",
 
+  "credit_login": "登錄並獲得觀看廣告的積分。 使用積分來搜索照片。",
+  "credit_message": "通過觀看廣告賺取積分。 使用積分來搜索照片。",
+  "credit_count": "學分： ",
+  "credit_ads_video": "觀看廣告並獲得積分",
+
   "auth_sign_in": "登入",
   "auth_sign_out": "登出",
   "auth_email": "用電子郵件登錄",

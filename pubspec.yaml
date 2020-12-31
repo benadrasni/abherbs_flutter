@@ -19,33 +19,33 @@ dependencies:
     sdk: flutter
   shared_preferences: 0.5.12+4
   firebase_messaging: 7.0.3
-  firebase_analytics: 6.2.0
-  firebase_auth: 0.18.3
-  firebase_storage: 5.0.1
-  firebase_database: 4.3.0
-  firebase_remote_config: 0.4.2
-  firebase_crashlytics: 0.2.3
-  firebase_performance: 0.4.2
+  firebase_analytics: 6.3.0
+  firebase_auth: 0.18.4+1
+  firebase_storage: 5.2.0
+  firebase_database: 4.4.0
+  firebase_remote_config: 0.4.3
+  firebase_crashlytics: 0.2.4
+  firebase_performance: 0.4.3
   #firebase_ml_vision: 0.9.9
   google_sign_in: 4.5.6
   apple_sign_in: 0.1.0
   device_info: 1.0.0
   in_app_purchase: 0.3.4+16
-  cached_network_image: 2.3.3
-  url_launcher: 5.5.0
+  cached_network_image: 2.5.0
+  url_launcher: 5.7.10
   http: 0.12.2
-  fluttertoast: 7.0.2
+  fluttertoast: 7.1.6
   diacritic: 0.1.1
   path_provider: 1.6.24
-  percent_indicator: 2.1.8
+  percent_indicator: 2.1.9
   package_info: 0.4.3+2
   google_maps_flutter: 1.0.6
-  image_picker: 0.6.7+14
+  image_picker: 0.6.7+17
   exif: 1.0.3
   datetime_picker_formfield: 1.0.0
-  connectivity: 2.0.1
-  photo_view: 0.10.2
-  youtube_player_iframe: 1.1.0
+  connectivity: 2.0.2
+  photo_view: 0.10.3
+  youtube_player_iframe: 1.2.0+2
   admob_flutter: 1.0.1
   screen: 0.0.5
   flutter_country_picker: 0.1.6

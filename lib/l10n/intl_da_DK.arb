@@ -78,6 +78,11 @@
   "feedback_run_ads_fullscreen": "Vis en fuldscreen reklame",
   "feedback_run_ads_video": "Se en videoannonce",
 
+  "credit_login": "Log ind og optjen kredit for at se reklame. Brug kreditter til at søge efter foto.",
+  "credit_message": "Optjen kreditter for at se reklame. Brug kreditter til at søge efter foto.",
+  "credit_count": "Kreditter: ",
+  "credit_ads_video": "Se annonce og optjen kreditter",
+
   "auth_sign_in": "Log ind",
   "auth_sign_out": "Log ud",
   "auth_email": "Log ind med mail",

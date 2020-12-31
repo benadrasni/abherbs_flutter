@@ -80,6 +80,11 @@
   "feedback_run_ads_fullscreen": "Pokaż reklamę pełnoekranową",
   "feedback_run_ads_video": "Obejrzyj reklamę wideo",
 
+  "credit_login": "Zaloguj się i zdobywaj kredyty za oglądanie reklam. Użyj kredytów, aby wyszukiwać według zdjęcia.",
+  "credit_message": "Zarabiaj kredyty za oglądanie reklam. Użyj kredytów, aby wyszukiwać według zdjęcia.",
+  "credit_count": "Kredyty: ",
+  "credit_ads_video": "Obejrzyj reklamę i zarabiaj kredyty",
+
   "auth_sign_in": "Zaloguj się",
   "auth_sign_out": "Wyloguj się",
   "auth_email": "Zaloguj się za pomocą e-maila",

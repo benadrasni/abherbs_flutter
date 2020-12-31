@@ -80,6 +80,11 @@
   "feedback_run_ads_fullscreen": "Afișați o publicitate pe întregul ecran",
   "feedback_run_ads_video": "Urmăriți o reclamă video",
 
+  "credit_login": "Conectați-vă și câștigați credite pentru vizionarea reclamelor. Folosiți credite pentru a căuta după fotografie.",
+  "credit_message": "Câștigați credite pentru vizionarea reclamei. Folosiți credite pentru a căuta după fotografie.",
+  "credit_count": "Credite: ",
+  "credit_ads_video": "Urmăriți reclama și câștigați credite",
+
   "auth_sign_in": "Conectați-vă",
   "auth_sign_out": "Delogare",
   "auth_email": "Conectați-vă cu adresa de e-mail",
