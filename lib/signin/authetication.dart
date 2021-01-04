@@ -119,6 +119,7 @@ class Auth {
       usersReference.child(appUser.firebaseUser.uid).keepSynced(true);
       await usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeCredits).once().then((snapshot) {
         appUser.credits = snapshot.value != null ? snapshot.value + credit : credit;
+        logsCreditsReference.child(appUser.firebaseUser.uid).child(DateTime.now().millisecondsSinceEpoch.toString()).set(credit);
       }).catchError((error) {
         appUser.credits = credit;
       });
