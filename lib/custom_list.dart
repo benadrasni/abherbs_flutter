@@ -178,33 +178,33 @@ class _CustomListScreenState extends State<CustomListScreen> {
                                 builder: (BuildContext context, AsyncSnapshot<List<String>> localSnapshot) {
                                   String count = "";
                                   String icon = "";
-                                  if (localSnapshot.connectionState == ConnectionState.done) {
-                                    if (localSnapshot.data != null) {
-                                      count = localSnapshot.data[0];
-                                      icon = localSnapshot.data[1];
-                                    }
-                                  }
+                                  if (localSnapshot.connectionState == ConnectionState.done && localSnapshot.data != null) {
+                                    count = localSnapshot.data[0];
+                                    icon = localSnapshot.data[1];
 
-                                  return ListTile(
-                                    title: Text(snapshot.key),
-                                    leading: getImage(
-                                        storageFamilies + icon + defaultExtension,
-                                        Container(
-                                          width: 0.0,
-                                          height: 0.0,
-                                        ),
-                                        width: 50.0,
-                                        height: 50.0),
-                                    trailing: Text(count),
-                                    onTap: () {
-                                      _logCustomListOpenEvent(widget.myLocale.languageCode + ": " + snapshot.key);
-                                      String path = '/' + firebaseListsCustom + '/by language/' + widget.myLocale.languageCode + '/' + snapshot.key + '/' + firebaseAttributeList;
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, "", rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
-                                      );
-                                    },
-                                  );
+                                    return ListTile(
+                                      title: Text(snapshot.key),
+                                      leading: getImage(
+                                          storageFamilies + icon + defaultExtension,
+                                          Container(
+                                            width: 0.0,
+                                            height: 0.0,
+                                          ),
+                                          width: 50.0,
+                                          height: 50.0),
+                                      trailing: Text(count),
+                                      onTap: () {
+                                        _logCustomListOpenEvent(widget.myLocale.languageCode + ": " + snapshot.key);
+                                        String path = '/' + firebaseListsCustom + '/by language/' + widget.myLocale.languageCode + '/' + snapshot.key + '/' + firebaseAttributeList;
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, "", rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
+                                        );
+                                      },
+                                    );
+                                  } else {
+                                    return Container();
+                                  }
                                 });
                           }),
                     ),
