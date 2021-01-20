@@ -80,10 +80,12 @@
   "feedback_run_ads_fullscreen": "Mostra una pubblicità a schermo intero",
   "feedback_run_ads_video": "Guarda un video pubblicitario",
 
-  "credit_login": "Accedi e guadagna crediti guardando la pubblicità. Usa i crediti per cercare per foto.",
-  "credit_message": "Guadagna crediti guardando la pubblicità. Usa i crediti per cercare per foto.",
+  "credit_login": "Accedi e guadagna crediti guardando la pubblicità. Con i crediti puoi utilizzare alcuni miglioramenti.",
+  "credit_message": "Guadagna crediti guardando la pubblicità. Con i crediti puoi utilizzare alcuni miglioramenti.",
   "credit_count": "Crediti: ",
   "credit_ads_video": "Guarda l'annuncio e guadagna crediti",
+  "credit_use_search": "Usa 1 credito",
+  "credit_use_photo_search": "Usa i crediti",
 
   "auth_sign_in": "Accedi",
   "auth_sign_out": "Log out",

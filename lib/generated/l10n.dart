@@ -785,20 +785,20 @@ class S {
     );
   }
 
-  /// `Sign in and earn credits for watching advertisement. Use credits to search by photo.`
+  /// `Sign in and earn credits for watching advertisement. With credits you can use some enhancements.`
   String get credit_login {
     return Intl.message(
-      'Sign in and earn credits for watching advertisement. Use credits to search by photo.',
+      'Sign in and earn credits for watching advertisement. With credits you can use some enhancements.',
       name: 'credit_login',
       desc: '',
       args: [],
     );
   }
 
-  /// `Earn credits for watching advertisement. Use credits to search by photo.`
+  /// `Earn credits for watching advertisement. With credits you can use some enhancements.`
   String get credit_message {
     return Intl.message(
-      'Earn credits for watching advertisement. Use credits to search by photo.',
+      'Earn credits for watching advertisement. With credits you can use some enhancements.',
       name: 'credit_message',
       desc: '',
       args: [],
@@ -820,6 +820,26 @@ class S {
     return Intl.message(
       'Watch ad and earn credits',
       name: 'credit_ads_video',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use 1 credit`
+  String get credit_use_search {
+    return Intl.message(
+      'Use 1 credit',
+      name: 'credit_use_search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use credits`
+  String get credit_use_photo_search {
+    return Intl.message(
+      'Use credits',
+      name: 'credit_use_photo_search',
       desc: '',
       args: [],
     );

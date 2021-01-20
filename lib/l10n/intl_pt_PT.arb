@@ -78,10 +78,12 @@
   "feedback_run_ads_fullscreen": "Mostrar um anúncio em tela cheia",
   "feedback_run_ads_video": "Assista a um anúncio em vídeo",
 
-  "credit_login": "Cadastre-se e ganhe créditos por assistir o anúncio. Use créditos para pesquisar por foto.",
-  "credit_message": "Ganhe créditos por assistir ao anúncio. Use créditos para pesquisar por foto.",
+  "credit_login": "Cadastre-se e ganhe créditos por assistir o anúncio. Com os créditos, você pode usar alguns aprimoramentos.",
+  "credit_message": "Ganhe créditos por assistir ao anúncio. Com os créditos, você pode usar alguns aprimoramentos.",
   "credit_count": "Créditos: ",
   "credit_ads_video": "Assista ao anúncio e ganhe créditos",
+  "credit_use_search": "Use 1 crédito",
+  "credit_use_photo_search": "Use créditos",
 
   "auth_sign_in": "Fazer login",
   "auth_sign_out": "Sair",

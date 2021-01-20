@@ -80,10 +80,12 @@
   "feedback_run_ads_fullscreen": "フルスクリーン広告を表示する",
   "feedback_run_ads_video": "ビデオ広告を見る",
 
-  "credit_login": "サインインして、広告を見るためのクレジットを獲得してください。 写真で検索するにはクレジットを使用します。",
-  "credit_message": "広告を見ることでクレジットを獲得できます。 写真で検索するにはクレジットを使用します。",
+  "credit_login": "サインインして、広告を見るためのクレジットを獲得してください。 クレジットを使用すると、いくつかの拡張機能を使用できます。",
+  "credit_message": "広告を見ることでクレジットを獲得できます。 クレジットを使用すると、いくつかの拡張機能を使用できます。",
   "credit_count": "クレジット： ",
   "credit_ads_video": "広告を見てクレジットを獲得する",
+  "credit_use_search": "1クレジットを使用",
+  "credit_use_photo_search": "クレジットを使用する",
 
   "auth_sign_in": "ログイン",
   "auth_sign_out": "サインアウト",

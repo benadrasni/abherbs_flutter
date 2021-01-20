@@ -80,10 +80,12 @@
   "feedback_run_ads_fullscreen": "Pokaži celozaslonski oglas",
   "feedback_run_ads_video": "Oglejte si video oglas",
 
-  "credit_login": "Prijavite se in si prislužite kredite za ogled oglasov. Uporabite kredite za iskanje po fotografiji.",
-  "credit_message": "Prislužite si kredite za ogled oglasov. Uporabite kredite za iskanje po fotografiji.",
+  "credit_login": "Prijavite se in si prislužite kredite za ogled oglasov. Z kredite lahko uporabite nekatere izboljšave.",
+  "credit_message": "Prislužite si kredite za ogled oglasov. Z kredite lahko uporabite nekatere izboljšave.",
   "credit_count": "Kredite: ",
   "credit_ads_video": "Oglejte si oglas in zaslužite kredite",
+  "credit_use_search": "Uporabite 1 kredite",
+  "credit_use_photo_search": "Uporabite kredite",
 
   "auth_sign_in": "Prijava",
   "auth_sign_out": "Odjava",

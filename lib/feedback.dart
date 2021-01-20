@@ -64,7 +64,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       case AdmobAdEvent.completed:
         break;
       case AdmobAdEvent.rewarded:
-        await Auth.changeCredits(1);
+        await Auth.changeCredits(1, "1");
         setState(() {});
         break;
       case AdmobAdEvent.started:

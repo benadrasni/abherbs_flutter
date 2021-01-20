@@ -79,7 +79,9 @@ class Auth {
           usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeCredits).once().then((snapshot) {
             appUser.credits = snapshot.value != null ? snapshot.value : 0;
           }).catchError((error) {
-            appUser.credits = 0;
+            if(appUser != null) {
+              appUser.credits = 0;
+            }
           });
 
           Prefs.getStringF(keyToken).then((token) {
@@ -114,12 +116,12 @@ class Auth {
     return appUser;
   }
 
-  static void changeCredits(int credit) async {
+  static Future<void> changeCredits(int credit, String feature) async {
     if (appUser != null) {
       usersReference.child(appUser.firebaseUser.uid).keepSynced(true);
       await usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeCredits).once().then((snapshot) {
         appUser.credits = snapshot.value != null ? snapshot.value + credit : credit;
-        logsCreditsReference.child(appUser.firebaseUser.uid).child(DateTime.now().millisecondsSinceEpoch.toString()).set(credit);
+        logsCreditsReference.child(appUser.firebaseUser.uid).child(DateTime.now().millisecondsSinceEpoch.toString()).set(feature);
       }).catchError((error) {
         appUser.credits = credit;
       });

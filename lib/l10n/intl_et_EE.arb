@@ -80,10 +80,12 @@
   "feedback_run_ads_fullscreen": "Näita täisekraani reklaami",
   "feedback_run_ads_video": "Vaadake videoreklaami",
 
-  "credit_login": "Reklaami vaatamiseks logige sisse ja teenige krediiti. Kasutage krediiti foto järgi otsimiseks.",
-  "credit_message": "Teenige reklaami vaatamise eest krediiti. Kasutage krediiti foto järgi otsimiseks.",
+  "credit_login": "Reklaami vaatamiseks logige sisse ja teenige krediiti. Krediitkaardiga saate kasutada mõningaid täiustusi.",
+  "credit_message": "Teenige reklaami vaatamise eest krediiti. Krediitkaardiga saate kasutada mõningaid täiustusi.",
   "credit_count": "Krediiti: ",
   "credit_ads_video": "Vaadake reklaami ja teenige krediiti",
+  "credit_use_search": "Kasutage 1 krediiti",
+  "credit_use_photo_search": "Kasutage krediiti",
 
   "auth_sign_in": "Logi sisse",
   "auth_sign_out": "Logi välja",
