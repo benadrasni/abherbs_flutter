@@ -24,6 +24,8 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../feedback.dart';
+
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
 const String productSearch = "search";
@@ -424,10 +426,51 @@ List<Widget> getActions(
         if (result == ConnectivityResult.none) {
           infoDialog(mainContext, S.of(mainContext).no_connection_title, S.of(mainContext).no_connection_content);
         } else {
-          Navigator.push(
-            mainContext,
-            MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage), settings: RouteSettings(name: 'SearchPhoto')),
-          );
+          if (Purchases.isPhotoSearch()) {
+            Navigator.push(
+              mainContext,
+              MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage), settings: RouteSettings(name: 'SearchPhoto')),
+            );
+          } else if (Purchases.isSearchByPhotoPromotion != null && Purchases.isSearchByPhotoPromotion) {
+            infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
+                S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo)), remoteConfigSearchByPhotoVideo, S.of(mainContext).credit_use_photo_search)
+                .then((value) {
+              if (value != null && value == 1) {
+                Navigator.push(
+                  mainContext,
+                  MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, filter), settings: RouteSettings(name: 'Enhancements')),
+                );
+              } else if (value != null && value == 2) {
+                Navigator.push(
+                  mainContext,
+                  MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage), settings: RouteSettings(name: 'SearchPhoto')),
+                );
+              } else {
+                _logPromotionEvent('search_by_photo');
+                Navigator.push(
+                  mainContext,
+                  MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage), settings: RouteSettings(name: 'SearchPhoto')),
+                );
+              }
+            });
+          } else {
+            infoBuyDialog(mainContext, S.of(mainContext).product_photo_search_title, S.of(mainContext).product_photo_search_description, remoteConfigSearchByPhotoVideo, S.of(mainContext).credit_use_photo_search)
+                .then((value) {
+              if (value != null) {
+                if (value == 1) {
+                  Navigator.push(
+                    mainContext,
+                    MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, filter), settings: RouteSettings(name: 'Enhancements')),
+                  );
+                } else if (value == 2) {
+                  Navigator.push(
+                    mainContext,
+                    MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context), onChangeLanguage), settings: RouteSettings(name: 'SearchPhoto')),
+                  );
+                }
+              }
+            });
+          }
         }
       });
     },
@@ -452,9 +495,9 @@ List<Widget> getActions(
             }
           } else if (Purchases.isObservationPromotion != null && Purchases.isObservationPromotion) {
             infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
-                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo)), remoteConfigObservationsVideo)
+                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo)), remoteConfigObservationsVideo, null)
                 .then((value) {
-              if (value != null && value) {
+              if (value != null && value == 1) {
                 Navigator.push(
                   mainContext,
                   MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, filter), settings: RouteSettings(name: 'Enhancements')),
@@ -468,9 +511,9 @@ List<Widget> getActions(
               }
             });
           } else {
-            infoBuyDialog(mainContext, S.of(mainContext).product_observations_title, S.of(mainContext).product_observations_description, remoteConfigObservationsVideo)
+            infoBuyDialog(mainContext, S.of(mainContext).product_observations_title, S.of(mainContext).product_observations_description, remoteConfigObservationsVideo, null)
                 .then((value) {
-              if (value != null && value) {
+              if (value != null && value == 1) {
                 Navigator.push(
                   mainContext,
                   MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, filter), settings: RouteSettings(name: 'Enhancements')),
@@ -494,13 +537,26 @@ List<Widget> getActions(
         );
       } else if (Purchases.isSearchPromotion != null && Purchases.isSearchPromotion) {
         infoBuyDialog(
-                mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo)), remoteConfigSearchByNameVideo)
+                mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo)), remoteConfigSearchByNameVideo, S.of(mainContext).credit_use_search)
             .then((value) {
-          if (value != null && value) {
+          if (value != null && value == 1) {
             Navigator.push(
               mainContext,
               MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, filter), settings: RouteSettings(name: 'Enhancements')),
             );
+          } else if (value != null && value == 2) {
+            if (currentUser != null && currentUser.credits > 0) {
+              Auth.changeCredits(-1, "search");
+              Navigator.push(
+                mainContext,
+                MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage), settings: RouteSettings(name: 'Search')),
+              );
+            } else {
+              Navigator.push(
+                mainContext,
+                MaterialPageRoute(builder: (context) => FeedbackScreen(currentUser, onChangeLanguage, filter), settings: RouteSettings(name: 'Feedback')),
+              );
+            }
           } else {
             _logPromotionEvent('search');
             Navigator.push(
@@ -510,12 +566,27 @@ List<Widget> getActions(
           }
         });
       } else {
-        infoBuyDialog(mainContext, S.of(mainContext).product_search_title, S.of(mainContext).product_search_description, remoteConfigSearchByNameVideo).then((value) {
-          if (value != null && value) {
-            Navigator.push(
-              mainContext,
-              MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, filter), settings: RouteSettings(name: 'Enhancements')),
-            );
+        infoBuyDialog(mainContext, S.of(mainContext).product_search_title, S.of(mainContext).product_search_description, remoteConfigSearchByNameVideo, S.of(mainContext).credit_use_search).then((value) {
+          if (value != null) {
+            if (value == 1) {
+              Navigator.push(
+                mainContext,
+                MaterialPageRoute(builder: (context) => EnhancementsScreen(onChangeLanguage, filter), settings: RouteSettings(name: 'Enhancements')),
+              );
+            } else if (value == 2) {
+              if (currentUser != null && currentUser.credits > 0) {
+                Auth.changeCredits(-1, "search");
+                Navigator.push(
+                  mainContext,
+                  MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context), onChangeLanguage), settings: RouteSettings(name: 'Search')),
+                );
+              } else {
+                Navigator.push(
+                  mainContext,
+                  MaterialPageRoute(builder: (context) => FeedbackScreen(currentUser, onChangeLanguage, filter), settings: RouteSettings(name: 'Feedback')),
+                );
+              }
+            }
           }
         });
       }

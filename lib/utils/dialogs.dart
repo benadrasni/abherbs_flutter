@@ -216,11 +216,11 @@ Future<bool> infoDialog(BuildContext mainContext, String title, String content) 
       });
 }
 
-Future<bool> infoBuyDialog(BuildContext mainContext, String title, String content, String config) async {
-  Widget button = Container();
+Future<int> infoBuyDialog(BuildContext mainContext, String title, String content, String config, String credit) async {
+  Widget videoButton = Container();
   String value = RemoteConfiguration.remoteConfig.getString(config);
   if (value.isNotEmpty) {
-    button = FlatButton(
+    videoButton = FlatButton(
       color: Colors.lightBlueAccent,
       child: Text(S
           .of(mainContext)
@@ -244,28 +244,38 @@ Future<bool> infoBuyDialog(BuildContext mainContext, String title, String conten
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(content),
-              button,
+              videoButton,
             ],
           ),
           actions: [
-            FlatButton(
-              child: Text(S.of(context).enhancements.toUpperCase(),
+            credit != null ? FlatButton(
+              child: Text(credit,
                   style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                   )),
               onPressed: () {
-                Navigator.of(context).pop(true);
+                Navigator.of(context).pop(2);
+              },
+            ) : Container(),
+            FlatButton(
+              child: Text(S.of(context).enhancements,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  )),
+              onPressed: () {
+                Navigator.of(context).pop(1);
               },
             ),
             FlatButton(
-              child: Text(S.of(context).close.toUpperCase(),
+              child: Text(S.of(context).close,
                   style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                   )),
               onPressed: () {
-                Navigator.of(context).pop(false);
+                Navigator.of(context).pop(0);
               },
             ),
           ],

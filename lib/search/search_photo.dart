@@ -87,7 +87,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
       case AdmobAdEvent.completed:
         break;
       case AdmobAdEvent.rewarded:
-        await Auth.changeCredits(1);
+        await Auth.changeCredits(1, "1");
         setState(() {});
         break;
       case AdmobAdEvent.started:
@@ -139,8 +139,10 @@ class _SearchPhotoState extends State<SearchPhoto> {
       var results = <SearchResult>[];
       if (response.statusCode == 200) {
         if (widget.currentUser != null && !Purchases.isPhotoSearch()) {
-            await Auth.changeCredits(-1);
-            setState(() {});
+            await Auth.changeCredits(-1, "search by photo");
+            if (mounted) {
+              setState(() {});
+            }
         }
         Map responseBody = json.decode(response.body);
         for (var suggestion in responseBody['suggestions']) {

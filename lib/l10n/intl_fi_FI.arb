@@ -80,10 +80,12 @@
   "feedback_run_ads_fullscreen": "Näytä koko näytön mainos",
   "feedback_run_ads_video": "Katso videomainos",
 
-  "credit_login": "Kirjaudu sisään ja ansaitse hyvityksiä mainosten katsomisesta. Käytä hyvityksiä etsiäksesi valokuvan mukaan.",
-  "credit_message": "Ansaitse krediittejä mainosten katsomisesta. Käytä hyvityksiä etsiäksesi valokuvan mukaan.",
+  "credit_login": "Kirjaudu sisään ja ansaitse hyvityksiä mainosten katsomisesta. Luotoilla voit käyttää joitain parannuksia.",
+  "credit_message": "Ansaitse krediittejä mainosten katsomisesta. Luotoilla voit käyttää joitain parannuksia.",
   "credit_count": "Krediittejä: ",
   "credit_ads_video": "Katso mainoksia ja ansaitse krediittejä",
+  "credit_use_search": "Käytä 1 luottoa",
+  "credit_use_photo_search": "Käytä hyvityksiä",
 
   "auth_sign_in": "Kirjaudu sisään",
   "auth_sign_out": "Kirjaudu ulos",

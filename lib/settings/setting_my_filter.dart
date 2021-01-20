@@ -21,82 +21,84 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
     const TextStyle filterTextStyle = TextStyle(fontSize: 20.0);
     var filterWidgets = <Widget>[];
 
-    for (String item in myFilter) {
-      filterWidgets.add(Container(
-          padding: EdgeInsets.all(10.0),
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text(
-              getFilterText(context, item),
-              style: filterTextStyle,
-            ),
-            Row(
-              children: [
-                item == myFilter.first
-                    ? Container(
-                        width: 50.0,
-                      )
-                    : IconButton(
-                        icon: Icon(Icons.arrow_upward),
-                        onPressed: () {
-                          var newFilter = <String>[];
-                          for (var i = 0; i < myFilter.length; i++) {
-                            if (i + 1 == myFilter.indexOf(item)) {
-                              newFilter.add(myFilter[i + 1]);
-                            } else if (i == myFilter.indexOf(item)) {
-                              newFilter.add(myFilter[i - 1]);
-                            } else {
-                              newFilter.add(myFilter[i]);
-                            }
-                          }
-                          setState(() {
-                            _myFilter = newFilter;
-                          });
-                        },
-                      ),
-                item == myFilter.last
-                    ? Container(
-                        width: 50.0,
-                      )
-                    : IconButton(
-                        icon: Icon(Icons.arrow_downward),
-                        onPressed: () {
-                          var newFilter = <String>[];
-                          for (var i = 0; i < myFilter.length; i++) {
-                            if (i == myFilter.indexOf(item)) {
-                              newFilter.add(myFilter[i + 1]);
-                            } else if (i == myFilter.indexOf(item) + 1) {
-                              newFilter.add(myFilter[i - 1]);
-                            } else {
-                              newFilter.add(myFilter[i]);
-                            }
-                          }
-                          setState(() {
-                            _myFilter = newFilter;
-                          });
-                        },
-                      ),
-                myFilter.length == minFilterAttributes
-                    ? Container(
-                        width: 50.0,
-                      )
-                    : IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () {
-                          var newFilter = <String>[];
-                          for (var i = 0; i < myFilter.length; i++) {
-                            if (i != myFilter.indexOf(item)) {
-                              newFilter.add(myFilter[i]);
-                            }
-                          }
+    if (myFilter != null) {
+      for (String item in myFilter) {
+        filterWidgets.add(Container(
+            padding: EdgeInsets.all(10.0),
+            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Text(
+                getFilterText(context, item),
+                style: filterTextStyle,
+              ),
+              Row(
+                children: [
+                  item == myFilter.first
+                      ? Container(
+                    width: 50.0,
+                  )
+                      : IconButton(
+                    icon: Icon(Icons.arrow_upward),
+                    onPressed: () {
+                      var newFilter = <String>[];
+                      for (var i = 0; i < myFilter.length; i++) {
+                        if (i + 1 == myFilter.indexOf(item)) {
+                          newFilter.add(myFilter[i + 1]);
+                        } else if (i == myFilter.indexOf(item)) {
+                          newFilter.add(myFilter[i - 1]);
+                        } else {
+                          newFilter.add(myFilter[i]);
+                        }
+                      }
+                      setState(() {
+                        _myFilter = newFilter;
+                      });
+                    },
+                  ),
+                  item == myFilter.last
+                      ? Container(
+                    width: 50.0,
+                  )
+                      : IconButton(
+                    icon: Icon(Icons.arrow_downward),
+                    onPressed: () {
+                      var newFilter = <String>[];
+                      for (var i = 0; i < myFilter.length; i++) {
+                        if (i == myFilter.indexOf(item)) {
+                          newFilter.add(myFilter[i + 1]);
+                        } else if (i == myFilter.indexOf(item) + 1) {
+                          newFilter.add(myFilter[i - 1]);
+                        } else {
+                          newFilter.add(myFilter[i]);
+                        }
+                      }
+                      setState(() {
+                        _myFilter = newFilter;
+                      });
+                    },
+                  ),
+                  myFilter.length == minFilterAttributes
+                      ? Container(
+                    width: 50.0,
+                  )
+                      : IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {
+                      var newFilter = <String>[];
+                      for (var i = 0; i < myFilter.length; i++) {
+                        if (i != myFilter.indexOf(item)) {
+                          newFilter.add(myFilter[i]);
+                        }
+                      }
 
-                          setState(() {
-                            _myFilter = newFilter;
-                          });
-                        },
-                      ),
-              ],
-            ),
-          ])));
+                      setState(() {
+                        _myFilter = newFilter;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ])));
+      }
     }
 
     filterWidgets.add(Container(

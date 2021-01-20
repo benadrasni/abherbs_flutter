@@ -80,10 +80,12 @@
   "feedback_run_ads_fullscreen": "Laat een advertentie op volledig scherm zien",
   "feedback_run_ads_video": "Bekijk een videoadvertentie",
 
-  "credit_login": "Log in en verdien credits voor het bekijken van advertenties. Gebruik credits om op foto te zoeken.",
-  "credit_message": "Verdien credits voor het bekijken van advertenties. Gebruik credits om op foto te zoeken.",
+  "credit_login": "Log in en verdien credits voor het bekijken van advertenties. Met credits kun je enkele verbeteringen gebruiken.",
+  "credit_message": "Verdien credits voor het bekijken van advertenties. Met credits kun je enkele verbeteringen gebruiken.",
   "credit_count": "Credits: ",
   "credit_ads_video": "Bekijk de advertentie en verdien credits",
+  "credit_use_search": "Gebruik 1 krediet",
+  "credit_use_photo_search": "Gebruik credits",
 
   "auth_sign_in": "Inloggen",
   "auth_sign_out": "Afmelden",

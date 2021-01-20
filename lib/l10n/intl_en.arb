@@ -80,10 +80,12 @@
   "feedback_run_ads_fullscreen": "Show a fullscreen advertisement",
   "feedback_run_ads_video": "Watch a video advertisement",
 
-  "credit_login": "Sign in and earn credits for watching advertisement. Use credits to search by photo.",
-  "credit_message": "Earn credits for watching advertisement. Use credits to search by photo.",
+  "credit_login": "Sign in and earn credits for watching advertisement. With credits you can use some enhancements.",
+  "credit_message": "Earn credits for watching advertisement. With credits you can use some enhancements.",
   "credit_count": "Credits: ",
   "credit_ads_video": "Watch ad and earn credits",
+  "credit_use_search": "Use 1 credit",
+  "credit_use_photo_search": "Use credits",
 
   "auth_sign_in": "Sign in",
   "auth_sign_out": "Sign out",

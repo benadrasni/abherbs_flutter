@@ -80,10 +80,12 @@
   "feedback_run_ads_fullscreen": "Visa en fullskärmsannons",
   "feedback_run_ads_video": "Titta på en videoannons",
 
-  "credit_login": "Logga in och tjäna poäng för att titta på annons. Använd krediter för att söka efter foto.",
-  "credit_message": "Tjäna poäng för att titta på reklam. Använd krediter för att söka efter foto.",
-  "credit_count": "Poäng: ",
+  "credit_login": "Logga in och tjäna kredit för att titta på annons. Med krediter kan du använda några förbättringar.",
+  "credit_message": "Tjäna kredit för att titta på reklam. Med krediter kan du använda några förbättringar.",
+  "credit_count": "Krediter: ",
   "credit_ads_video": "Titta på annons och tjäna krediter",
+  "credit_use_search": "Använd 1 kredit",
+  "credit_use_photo_search": "Använd krediter",
 
   "auth_sign_in": "Logga in",
   "auth_sign_out": "Logga ut",

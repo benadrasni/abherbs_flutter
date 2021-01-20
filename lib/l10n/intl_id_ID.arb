@@ -80,10 +80,12 @@
   "feedback_run_ads_fullscreen": "Tampilkan iklan layar penuh",
   "feedback_run_ads_video": "Tonton iklan video",
 
-  "credit_login": "Sign in and earn credits for watching advertisement. Use credits to search by photo.",
-  "credit_message": "Earn credits for watching advertisement. Use credits to search by photo.",
-  "credit_count": "Credits: ",
-  "credit_ads_video": "Watch ad and earn credits",
+  "credit_login": "Masuk dan dapatkan kredit untuk menonton iklan. Dengan kredit, Anda dapat menggunakan beberapa peningkatan.",
+  "credit_message": "Dapatkan kredit untuk menonton iklan. Dengan kredit, Anda dapat menggunakan beberapa peningkatan.",
+  "credit_count": "Kredit: ",
+  "credit_ads_video": "Tonton iklan dan dapatkan kredit",
+  "credit_use_search": "Gunakan 1 kredit",
+  "credit_use_photo_search": "Gunakan kredit",
 
   "auth_sign_in": "Masuk",
   "auth_sign_out": "Keluar",
