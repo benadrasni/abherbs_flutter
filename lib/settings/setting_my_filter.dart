@@ -107,10 +107,11 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
     ));
 
     for (String item in filterAttributes) {
-      if (myFilter.indexOf(item) == -1)
+      if (myFilter != null && myFilter.indexOf(item) == -1) {
         filterWidgets.add(Container(
             padding: EdgeInsets.all(10.0),
-            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Text(
                 getFilterText(context, item),
                 style: filterTextStyle,
@@ -126,6 +127,7 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
                 },
               ),
             ])));
+      }
     }
 
     filterWidgets.add(Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
