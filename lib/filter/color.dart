@@ -38,13 +38,6 @@ class _ColorState extends State<Color> {
   Future<bool> _isNewVersionF;
   Map<String, String> _filter;
 
-  AssetImage whiteImage;
-  AssetImage yellowImage;
-  AssetImage redImage;
-  AssetImage blueImage;
-  AssetImage greenImage;
-  Image backgroundImage;
-
   _redirect(BuildContext context) {
     // redirect to route from notification
     if (widget.redirect != null) {
@@ -93,16 +86,6 @@ class _ColorState extends State<Color> {
   void initState() {
     super.initState();
 
-    whiteImage = AssetImage('res/images/white.webp');
-    yellowImage = AssetImage('res/images/yellow.webp');
-    redImage = AssetImage('res/images/red.webp');
-    blueImage = AssetImage('res/images/blue.webp');
-    greenImage = AssetImage('res/images/green.webp');
-    backgroundImage = Image.asset("res/images/app_background.webp",
-      fit: BoxFit.fitWidth,
-      alignment: Alignment.bottomCenter,
-    );
-
     _checkCurrentUser();
     Offline.setKeepSynced(1, true);
 
@@ -127,17 +110,6 @@ class _ColorState extends State<Color> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    precacheImage(whiteImage, context);
-    precacheImage(yellowImage, context);
-    precacheImage(redImage, context);
-    precacheImage(blueImage, context);
-    precacheImage(greenImage, context);
-    precacheImage(backgroundImage.image, context);
-  }
-
-  @override
   void dispose() {
     _listener.cancel();
     super.dispose();
@@ -155,7 +127,7 @@ class _ColorState extends State<Color> {
           Expanded(
             child: FlatButton(
               child: Image(
-                image: whiteImage,
+                image: AssetImage('res/images/white.webp'),
               ),
               onPressed: () {
                 _navigate('1');
@@ -166,7 +138,7 @@ class _ColorState extends State<Color> {
           Expanded(
             child: FlatButton(
               child: Image(
-                image: yellowImage,
+                image: AssetImage('res/images/yellow.webp'),
               ),
               onPressed: () {
                 _navigate('2');
@@ -299,7 +271,7 @@ class _ColorState extends State<Color> {
           Expanded(
             child: FlatButton(
               child: Image(
-                image: redImage,
+                image: AssetImage('res/images/red.webp'),
               ),
               onPressed: () {
                 _navigate('3');
@@ -310,7 +282,7 @@ class _ColorState extends State<Color> {
           Expanded(
             child: FlatButton(
               child: Image(
-                image: blueImage,
+                image: AssetImage('res/images/blue.webp'),
               ),
               onPressed: () {
                 _navigate('4');
@@ -325,7 +297,7 @@ class _ColorState extends State<Color> {
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: FlatButton(
         child: Image(
-          image: greenImage,
+          image: AssetImage('res/images/green.webp'),
         ),
         onPressed: () {
           _navigate('5');
@@ -355,7 +327,10 @@ class _ColorState extends State<Color> {
       body: Stack(
         children: <Widget>[
           Positioned.fill(
-            child: backgroundImage,
+            child: Image.asset("res/images/app_background.webp",
+              fit: BoxFit.fitWidth,
+              alignment: Alignment.bottomCenter,
+            ),
           ),
           ListView(
             padding: EdgeInsets.all(5.0),
