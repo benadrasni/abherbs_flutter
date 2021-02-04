@@ -21,10 +21,9 @@ import '../ads.dart';
 import '../main.dart';
 
 class Color extends StatefulWidget {
-  final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
   final MaterialPageRoute<dynamic> redirect;
-  Color(this.onChangeLanguage, this.filter, this.redirect);
+  Color(this.filter, this.redirect);
 
   @override
   _ColorState createState() => _ColorState();
@@ -38,6 +37,13 @@ class _ColorState extends State<Color> {
   Future<String> _rateStateF;
   Future<bool> _isNewVersionF;
   Map<String, String> _filter;
+
+  AssetImage whiteImage;
+  AssetImage yellowImage;
+  AssetImage redImage;
+  AssetImage blueImage;
+  AssetImage greenImage;
+  Image backgroundImage;
 
   _redirect(BuildContext context) {
     // redirect to route from notification
@@ -56,7 +62,7 @@ class _ColorState extends State<Color> {
     countsReference.child(filter).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+          Navigator.push(context, getNextFilterRoute(context, newFilter));
         } else {
           _key.currentState.showSnackBar(SnackBar(
             content: Text(S.of(context).snack_no_flowers),
@@ -86,6 +92,17 @@ class _ColorState extends State<Color> {
   @override
   void initState() {
     super.initState();
+
+    whiteImage = AssetImage('res/images/white.webp');
+    yellowImage = AssetImage('res/images/yellow.webp');
+    redImage = AssetImage('res/images/red.webp');
+    blueImage = AssetImage('res/images/blue.webp');
+    greenImage = AssetImage('res/images/green.webp');
+    backgroundImage = Image.asset("res/images/app_background.webp",
+      fit: BoxFit.fitWidth,
+      alignment: Alignment.bottomCenter,
+    );
+
     _checkCurrentUser();
     Offline.setKeepSynced(1, true);
 
@@ -110,6 +127,17 @@ class _ColorState extends State<Color> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(whiteImage, context);
+    precacheImage(yellowImage, context);
+    precacheImage(redImage, context);
+    precacheImage(blueImage, context);
+    precacheImage(greenImage, context);
+    precacheImage(backgroundImage.image, context);
+  }
+
+  @override
   void dispose() {
     _listener.cancel();
     super.dispose();
@@ -127,7 +155,7 @@ class _ColorState extends State<Color> {
           Expanded(
             child: FlatButton(
               child: Image(
-                image: AssetImage('res/images/white.webp'),
+                image: whiteImage,
               ),
               onPressed: () {
                 _navigate('1');
@@ -138,7 +166,7 @@ class _ColorState extends State<Color> {
           Expanded(
             child: FlatButton(
               child: Image(
-                image: AssetImage('res/images/yellow.webp'),
+                image: yellowImage,
               ),
               onPressed: () {
                 _navigate('2');
@@ -271,7 +299,7 @@ class _ColorState extends State<Color> {
           Expanded(
             child: FlatButton(
               child: Image(
-                image: AssetImage('res/images/red.webp'),
+                image: redImage,
               ),
               onPressed: () {
                 _navigate('3');
@@ -282,7 +310,7 @@ class _ColorState extends State<Color> {
           Expanded(
             child: FlatButton(
               child: Image(
-                image: AssetImage('res/images/blue.webp'),
+                image: blueImage,
               ),
               onPressed: () {
                 _navigate('4');
@@ -297,7 +325,7 @@ class _ColorState extends State<Color> {
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: FlatButton(
         child: Image(
-          image: AssetImage('res/images/green.webp'),
+          image: greenImage,
         ),
         onPressed: () {
           _navigate('5');
@@ -321,17 +349,13 @@ class _ColorState extends State<Color> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
-        actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.filter),
+        actions: getActions(context, _key, _currentUser, widget.filter),
       ),
-      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, _filter, null),
+      drawer: AppDrawer(_currentUser, _filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
-            child: Image.asset(
-              "res/images/app_background.webp",
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.bottomCenter,
-            ),
+            child: backgroundImage,
           ),
           ListView(
             padding: EdgeInsets.all(5.0),
@@ -348,7 +372,7 @@ class _ColorState extends State<Color> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.onChangeLanguage, _filter, index, Preferences.myFilterAttributes.indexOf(filterColor));
+          onBottomNavigationBarTap(context, _filter, index, Preferences.myFilterAttributes.indexOf(filterColor));
         },
       ),
       floatingActionButton: Container(
@@ -376,7 +400,7 @@ class _ColorState extends State<Color> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(_filter))),
+                                builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))),
                                 settings: RouteSettings(name: 'PlantList')),
                           );
                         },

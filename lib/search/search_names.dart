@@ -36,14 +36,14 @@ var supportedLanguages = {
   "zh": "中文"
 };
 
-Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, String searchText,
+Widget searchNames(Locale myLocale, String searchText,
     Future<Map<dynamic, dynamic>> _nativeNamesF, Future<Map<dynamic, dynamic>> _latinNamesF) {
   return FutureBuilder<List<Object>>(
     future: Future.wait([_nativeNamesF, _latinNamesF]),
     builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
       switch (snapshot.connectionState) {
         case ConnectionState.done:
-          return _getBody(myLocale, onChangeLanguage, searchText, snapshot.data[0], snapshot.data[1]);
+          return _getBody(myLocale, searchText, snapshot.data[0], snapshot.data[1]);
         default:
           return Container(
             child: Center(
@@ -55,7 +55,7 @@ Widget searchNames(Locale myLocale, Function(String) onChangeLanguage, String se
   );
 }
 
-Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searchText, Map<dynamic, dynamic> nativeNames,
+Widget _getBody(Locale myLocale, String searchText, Map<dynamic, dynamic> nativeNames,
     Map<dynamic, dynamic> latinNames) {
   var searchTextWithoutDiacritics = searchText == null ? '' : removeDiacritics(searchText).toLowerCase();
 
@@ -94,7 +94,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searc
                 String path = '/' + firebaseSearch + '/' + getLanguageCode(myLocale.languageCode) + '/' + filteredNativeNames[index] + '/' + firebaseAttributeList;
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
+                  MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
                 );
               },
             );
@@ -122,7 +122,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searc
               String path = '/' + firebaseSearch + '/' + languageLatin + '/' + filteredLatinNames[index] + '/' + firebaseAttributeList;
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
+                MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
               );
             },
           );

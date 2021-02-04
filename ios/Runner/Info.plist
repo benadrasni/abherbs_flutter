@@ -71,5 +71,8 @@
 	<true/>
 	<key>FirebaseAppDelegateProxyEnabled</key>
     <false/>
+	<key>UIStatusBarHidden</key>
+	<true/>
+
 </dict>
 </plist>

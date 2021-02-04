@@ -15,9 +15,8 @@ import 'package:flutter/services.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class EnhancementsScreen extends StatefulWidget {
-  final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
-  EnhancementsScreen(this.onChangeLanguage, this.filter);
+  EnhancementsScreen(this.filter);
 
   @override
   _EnhancementsScreenState createState() => new _EnhancementsScreenState();
@@ -127,7 +126,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Settings')),
+                MaterialPageRoute(builder: (context) => SettingsScreen(widget.filter), settings: RouteSettings(name: 'Settings')),
               );
             },
             child: Text(
@@ -142,7 +141,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingMyFilter(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'SettingMyFilter')),
+                MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter), settings: RouteSettings(name: 'SettingMyFilter')),
               );
             },
             child: Text(

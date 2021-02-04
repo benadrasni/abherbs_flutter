@@ -20,10 +20,9 @@ import '../ads.dart';
 import '../main.dart';
 
 class Distribution extends StatefulWidget {
-  final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
   final MaterialPageRoute<dynamic> redirect;
-  Distribution(this.onChangeLanguage, this.filter, this.redirect);
+  Distribution(this.filter, this.redirect);
 
   @override
   _DistributionState createState() => _DistributionState();
@@ -47,7 +46,7 @@ class _DistributionState extends State<Distribution> {
 
   void _openRegion(String region) {
     var route = MaterialPageRoute(
-        builder: (context) => Distribution2(widget.onChangeLanguage, widget.filter, int.parse(region)), settings: RouteSettings(name: 'Distribution2'));
+        builder: (context) => Distribution2(widget.filter, int.parse(region)), settings: RouteSettings(name: 'Distribution2'));
     filterRoutes[filterDistribution2] = route;
     Navigator.push(context, route).then((value) {
       filterRoutes[filterDistribution2] = null;
@@ -64,7 +63,7 @@ class _DistributionState extends State<Distribution> {
     countsReference.child(filter).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+          Navigator.push(context, getNextFilterRoute(context, newFilter));
         } else {
           _key.currentState.showSnackBar(SnackBar(
             content: Text(S.of(context).snack_no_flowers),
@@ -144,7 +143,7 @@ class _DistributionState extends State<Distribution> {
           } else {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Settings')),
+              MaterialPageRoute(builder: (context) => SettingsScreen(widget.filter), settings: RouteSettings(name: 'Settings')),
             ).then((result) {
               _setMyRegion();
             });
@@ -254,9 +253,9 @@ class _DistributionState extends State<Distribution> {
       key: _key,
       appBar: new AppBar(
         title: new Text(S.of(context).filter_distribution),
-        actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.filter),
+        actions: getActions(context, _key, _currentUser, widget.filter),
       ),
-      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, _filter, this._setMyRegion),
+      drawer: AppDrawer(_currentUser, _filter, this._setMyRegion),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -278,7 +277,7 @@ class _DistributionState extends State<Distribution> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.onChangeLanguage, _filter, index, Preferences.myFilterAttributes.indexOf(filterDistribution));
+          onBottomNavigationBarTap(context, _filter, index, Preferences.myFilterAttributes.indexOf(filterDistribution));
         },
       ),
       floatingActionButton: new Container(
@@ -306,7 +305,7 @@ class _DistributionState extends State<Distribution> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(_filter))),
+                                builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))),
                                 settings: RouteSettings(name: 'PlantList')),
                           );
                         },

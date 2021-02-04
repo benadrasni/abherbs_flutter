@@ -14,6 +14,9 @@ import GoogleMaps
             GMSServices.provideAPIKey(dict["MAP_API_KEY"] as! String)
         }
     }
+    var flutter_native_splash = 1
+    UIApplication.shared.isStatusBarHidden = false
+
     GeneratedPluginRegistrant.register(with: self)
 
     if #available(iOS 10.0, *) {
