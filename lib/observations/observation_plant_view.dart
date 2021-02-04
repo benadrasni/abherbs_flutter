@@ -15,10 +15,9 @@ import '../main.dart';
 class ObservationPlantView extends StatefulWidget {
   final AppUser currentUser;
   final Locale myLocale;
-  final void Function(String) onChangeLanguage;
   final Observation observation;
   final GlobalKey<ScaffoldState> parentKey;
-  ObservationPlantView(this.currentUser, this.myLocale, this.onChangeLanguage, this.observation, this.parentKey);
+  ObservationPlantView(this.currentUser, this.myLocale, this.observation, this.parentKey);
 
   @override
   _ObservationPlantViewState createState() => _ObservationPlantViewState();
@@ -66,7 +65,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
         if (widget.observation.id.startsWith(widget.currentUser.firebaseUser.uid)) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.onChangeLanguage, widget.observation),
+            MaterialPageRoute(builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.observation),
                 settings: RouteSettings(name: 'ObservationEdit')),
           ).then((value) {
             if (value != null && value && widget.parentKey.currentState != null) {

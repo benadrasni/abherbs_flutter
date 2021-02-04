@@ -15,10 +15,9 @@ import '../ads.dart';
 import '../main.dart';
 
 class Distribution2 extends StatefulWidget {
-  final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
   final int region;
-  Distribution2(this.onChangeLanguage, this.filter, this.region);
+  Distribution2(this.filter, this.region);
 
   @override
   _Distribution2State createState() => _Distribution2State();
@@ -40,7 +39,7 @@ class _Distribution2State extends State<Distribution2> {
     countsReference.child(filter).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+          Navigator.push(context, getNextFilterRoute(context, newFilter));
         } else {
           _key.currentState.showSnackBar(SnackBar(
             content: Text(S.of(context).snack_no_flowers),
@@ -195,9 +194,9 @@ class _Distribution2State extends State<Distribution2> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_distribution),
-        actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.filter),
+        actions: getActions(context, _key, _currentUser, widget.filter),
       ),
-      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.filter, null),
+      drawer: AppDrawer(_currentUser, widget.filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -219,7 +218,7 @@ class _Distribution2State extends State<Distribution2> {
         items: getBottomNavigationBarItems(context, widget.filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.onChangeLanguage, widget.filter, index, -1);
+          onBottomNavigationBarTap(context, widget.filter, index, -1);
         },
       ),
       floatingActionButton: new Container(
@@ -248,7 +247,7 @@ class _Distribution2State extends State<Distribution2> {
                           Navigator.pushReplacement(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, widget.filter, '', keysReference.child(getFilterKey(widget.filter))),
+                                builder: (context) => PlantList(widget.filter, '', keysReference.child(getFilterKey(widget.filter))),
                                 settings: RouteSettings(name: 'PlantList')),
                           );
                         },

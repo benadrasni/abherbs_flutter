@@ -22,10 +22,9 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 class ObservationEdit extends StatefulWidget {
   final AppUser currentUser;
   final Locale myLocale;
-  final void Function(String) onChangeLanguage;
   final Observation observation;
 
-  ObservationEdit(this.currentUser, this.myLocale, this.onChangeLanguage, this.observation);
+  ObservationEdit(this.currentUser, this.myLocale, this.observation);
 
   @override
   _ObservationEditState createState() => _ObservationEditState();

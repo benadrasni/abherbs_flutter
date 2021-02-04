@@ -18,9 +18,8 @@ import 'package:flutter/material.dart';
 import '../main.dart';
 
 class SettingsScreen extends StatefulWidget {
-  final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
-  SettingsScreen(this.onChangeLanguage, this.filter);
+  SettingsScreen(this.filter);
 
   @override
   _SettingsScreenState createState() => new _SettingsScreenState();
@@ -47,7 +46,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     Prefs.setString(keyPreferredLanguage, null).then((bool success) {
       _logPrefLanguageEvent('default');
       Navigator.pop(context);
-      widget.onChangeLanguage('');
+      App.setLocale(context, '');
     });
   }
 
@@ -58,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         if (language != _prefLanguage) {
           _prefLanguage = language;
           _logPrefLanguageEvent(language);
-          widget.onChangeLanguage(_prefLanguage);
+          App.setLocale(context, _prefLanguage);
         }
         return language;
       });
@@ -354,7 +353,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SettingMyFilter(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'SettingMyFilter')),
+            MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter), settings: RouteSettings(name: 'SettingMyFilter')),
           ).then((result) {
             setState(() {
               _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {

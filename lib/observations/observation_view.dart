@@ -16,10 +16,9 @@ import '../main.dart';
 class ObservationView extends StatefulWidget {
   final AppUser currentUser;
   final Locale myLocale;
-  final void Function(String) onChangeLanguage;
   final Observation observation;
 
-  ObservationView(this.currentUser, this.myLocale, this.onChangeLanguage, this.observation);
+  ObservationView(this.currentUser, this.myLocale, this.observation);
 
   @override
   _ObservationViewState createState() => _ObservationViewState();
@@ -92,7 +91,7 @@ class _ObservationViewState extends State<ObservationView> {
                 ],
               ),
               onTap: () {
-                goToDetail(self, mainContext, myLocale, widget.observation.plant, widget.onChangeLanguage, {});
+                goToDetail(self, mainContext, myLocale, widget.observation.plant, {});
               },
             );
           }),
