@@ -6,14 +6,14 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 
-Widget searchTaxonomy(Locale myLocale, Function(String) onChangeLanguage, String searchText,
+Widget searchTaxonomy(Locale myLocale, String searchText,
     Future<Map<dynamic, dynamic>> _apgIVF, Future<Map<dynamic, dynamic>> _translationsTaxonomyF) {
   return FutureBuilder<List<Object>>(
     future: Future.wait([_apgIVF, _translationsTaxonomyF]),
     builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
       switch (snapshot.connectionState) {
         case ConnectionState.done:
-          return _getBody(myLocale, onChangeLanguage, searchText, snapshot.data[0], snapshot.data[1]);
+          return _getBody(myLocale, searchText, snapshot.data[0], snapshot.data[1]);
         default:
           return Container(
             child: Center(
@@ -25,7 +25,7 @@ Widget searchTaxonomy(Locale myLocale, Function(String) onChangeLanguage, String
   );
 }
 
-Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searchText, Map<dynamic, dynamic> apgIV,
+Widget _getBody(Locale myLocale, String searchText, Map<dynamic, dynamic> apgIV,
     Map<dynamic, dynamic> dictionary) {
   var _taxons = <PlantTaxon>[];
   _buildTaxonomy(_taxons, dictionary, apgIV[firebaseRootTaxon], 0, firebaseAPGIV + '/', firebaseRootTaxon, searchText);
@@ -73,7 +73,7 @@ Widget _getBody(Locale myLocale, Function(String) onChangeLanguage, String searc
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => PlantList(onChangeLanguage, {}, '',  rootReference.child(_taxons[index].path)), settings: RouteSettings(name: 'PlantList')),
+                    builder: (context) => PlantList({}, '',  rootReference.child(_taxons[index].path)), settings: RouteSettings(name: 'PlantList')),
               );
             }
           },

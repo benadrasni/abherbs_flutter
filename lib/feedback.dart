@@ -11,10 +11,9 @@ import 'package:flutter/material.dart';
 
 class FeedbackScreen extends StatefulWidget {
   final AppUser currentUser;
-  final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
 
-  FeedbackScreen(this.currentUser, this.onChangeLanguage, this.filter);
+  FeedbackScreen(this.currentUser, this.filter);
 
   @override
   _FeedbackScreenState createState() => _FeedbackScreenState();
@@ -313,7 +312,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Enhancements')),
+                    MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.filter), settings: RouteSettings(name: 'Enhancements')),
                   );
                 },
                 child: Text(

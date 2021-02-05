@@ -13,11 +13,10 @@ import '../main.dart';
 class ObservationsPlant extends StatefulWidget {
   final AppUser currentUser;
   final Locale myLocale;
-  final void Function(String) onChangeLanguage;
   final bool isPublic;
   final String plantName;
   final GlobalKey<ScaffoldState> parentKey;
-  ObservationsPlant(this.currentUser, this.myLocale, this.onChangeLanguage, this.isPublic, this.plantName, this.parentKey);
+  ObservationsPlant(this.currentUser, this.myLocale, this.isPublic, this.plantName, this.parentKey);
 
   @override
   _ObservationsPlantState createState() => _ObservationsPlantState();
@@ -74,7 +73,7 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
                 return Container();
               }
               Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
-              return ObservationPlantView(widget.currentUser, myLocale, widget.onChangeLanguage, observation, widget.parentKey);
+              return ObservationPlantView(widget.currentUser, myLocale, observation, widget.parentKey);
             }),
       ],
     );

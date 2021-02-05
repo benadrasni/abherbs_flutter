@@ -20,9 +20,8 @@ import 'observation_logs.dart';
 class Observations extends StatefulWidget {
   final AppUser currentUser;
   final Locale myLocale;
-  final void Function(String) onChangeLanguage;
   final bool isPublicOnly;
-  Observations(this.currentUser, this.myLocale, this.onChangeLanguage, this.isPublicOnly);
+  Observations(this.currentUser, this.myLocale, this.isPublicOnly);
 
   @override
   _ObservationsState createState() => _ObservationsState();
@@ -76,7 +75,7 @@ class _ObservationsState extends State<Observations> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage, 1),
+            builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), 1),
             settings: RouteSettings(name: 'ObservationLogs')),
       );
     }
@@ -168,7 +167,7 @@ class _ObservationsState extends State<Observations> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage, 2), settings: RouteSettings(name: 'ObservationLogs')),
+                    builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), 2), settings: RouteSettings(name: 'ObservationLogs')),
               );
             },
           )
@@ -213,7 +212,7 @@ class _ObservationsState extends State<Observations> {
           query: _query,
           itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
             Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
-            return ObservationView(widget.currentUser, myLocale, widget.onChangeLanguage, observation);
+            return ObservationView(widget.currentUser, myLocale, observation);
           }),
       floatingActionButton: FutureBuilder<ConnectivityResult>(
           future: _connectivityResultF,
@@ -233,7 +232,7 @@ class _ObservationsState extends State<Observations> {
                               ? Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage, 0),
+                                      builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), 0),
                                       settings: RouteSettings(name: 'ObservationLogs')),
                                 )
                               : _uploadObservationDialog(_observationsRemain).then((value) {
@@ -255,7 +254,7 @@ class _ObservationsState extends State<Observations> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage, 0), settings: RouteSettings(name: 'ObservationLogs')),
+                                builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), 0), settings: RouteSettings(name: 'ObservationLogs')),
                           );
                         },
                         child: Icon(Icons.list),

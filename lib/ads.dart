@@ -8,10 +8,6 @@ class Ads {
   static Widget admobBanner;
   static Widget admobBigBanner;
 
-  static void initialize() {
-    Admob.initialize();
-  }
-
   static Widget getAdMobBanner() {
     if (Purchases.isNoAds())
       return Container(
