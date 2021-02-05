@@ -236,6 +236,57 @@ class _AppState extends State<App> {
     }
   }
 
+  Future<dynamic> handleMessage(RemoteMessage message) {
+    if (message != null) {
+      String action = message.data[notificationAttributeAction];
+      if (action != null && action == notificationAttributeActionList && App.currentContext != null) {
+        String path = message.data[notificationAttributePath];
+        rootReference.child(path).keepSynced(true);
+        return showDialog(
+          context: App.currentContext,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(S
+                  .of(context)
+                  .notification),
+              content: Text(message.notification.title),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text(S
+                      .of(context)
+                      .notification_open, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => PlantList({}, '', rootReference.child(path)),
+                        settings: RouteSettings(name: 'PlantList')));
+                  },
+                ),
+                FlatButton(
+                  child: Text(S
+                      .of(context)
+                      .notification_close, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        return Future<dynamic>(() {
+          return null;
+        });
+      }
+    } else {
+      return Future<dynamic>(() {
+        return null;
+      });
+    }
+  }
+
   void _firebaseCloudMessagingListeners() async {
     if (Platform.isIOS) {
       await FirebaseMessaging.instance.requestPermission(
@@ -254,57 +305,6 @@ class _AppState extends State<App> {
       print('token $token');
     });
 
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      if (message != null) {
-        String action = message.data[notificationAttributeAction];
-        if (action != null && action == notificationAttributeActionList && App.currentContext != null) {
-          String path = message.data[notificationAttributePath];
-          rootReference.child(path).keepSynced(true);
-          return showDialog(
-            context: App.currentContext,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(S
-                    .of(context)
-                    .notification),
-                content: Text(message.notification.body),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(S
-                        .of(context)
-                        .notification_open, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => PlantList({}, '', rootReference.child(path)),
-                          settings: RouteSettings(name: 'PlantList')));
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(S
-                        .of(context)
-                        .notification_close, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        } else {
-          return Future<dynamic>(() {
-            return null;
-          });
-        }
-      } else {
-        return Future<dynamic>(() {
-          return null;
-        });
-      }
-    });
-
     FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message) async {
       if (message != null) {
         MaterialPageRoute<dynamic> redirect = await findRedirectF(message.data);
@@ -314,13 +314,12 @@ class _AppState extends State<App> {
       }
     });
 
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      handleMessage(message);
+    });
+
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      if (message != null) {
-        MaterialPageRoute<dynamic> redirect = await findRedirectF(message.data);
-        if (redirect != null) {
-          Navigator.push(App.currentContext, redirect);
-        }
-      }
+      handleMessage(message);
     });
   }
 
