@@ -86,8 +86,6 @@ Future<void> initializeFlutterFire() async {
 
   await RemoteConfiguration.setupRemoteConfig();
 
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
   // Pass all uncaught errors to Crashlytics.
   Function originalOnError = FlutterError.onError;
   FlutterError.onError = (FlutterErrorDetails errorDetails) async {
@@ -130,11 +128,6 @@ Future<String> initializeRoute() {
     }
     return initialRoute;
   });
-}
-
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print('Handling a background message ${message.messageId}');
 }
 
 void main() {
