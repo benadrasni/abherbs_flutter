@@ -72,7 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "auth_verify_phone_number" : MessageLookupByLibrary.simpleMessage("Ověřit telefonní číslo"),
     "auth_verify_phone_number_title" : MessageLookupByLibrary.simpleMessage("Zadejte své telefonní číslo"),
     "brazil" : MessageLookupByLibrary.simpleMessage("Brazílie"),
-    "cancel" : MessageLookupByLibrary.simpleMessage("Zrušití"),
+    "cancel" : MessageLookupByLibrary.simpleMessage("Zrušit"),
     "caribbean" : MessageLookupByLibrary.simpleMessage("Karibik"),
     "caucasus" : MessageLookupByLibrary.simpleMessage("Kavkaz"),
     "central_america" : MessageLookupByLibrary.simpleMessage("Střední Amerika"),

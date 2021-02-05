@@ -12,8 +12,7 @@ import '../main.dart';
 
 class Search extends StatefulWidget {
   final Locale myLocale;
-  final void Function(String) onChangeLanguage;
-  Search(this.myLocale, this.onChangeLanguage);
+  Search(this.myLocale);
 
   @override
   _SearchState createState() => _SearchState();
@@ -62,7 +61,7 @@ class _SearchState extends State<Search> {
             return snapshot.value;
           });
         }
-        return searchNames(widget.myLocale, widget.onChangeLanguage, _searchText, _nativeNamesF, _latinNamesF);
+        return searchNames(widget.myLocale, _searchText, _nativeNamesF, _latinNamesF);
       case 1:
         if (_apgIVF == null) {
           apgIVReference.keepSynced(true);
@@ -76,7 +75,7 @@ class _SearchState extends State<Search> {
             return snapshot.value;
           });
         }
-        return searchTaxonomy(widget.myLocale, widget.onChangeLanguage, _searchText, _apgIVF, _translationsTaxonomyF);
+        return searchTaxonomy(widget.myLocale, _searchText, _apgIVF, _translationsTaxonomyF);
     }
     return null;
   }

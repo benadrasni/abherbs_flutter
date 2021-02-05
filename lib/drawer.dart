@@ -12,10 +12,9 @@ import 'package:flutter/material.dart';
 
 class AppDrawer extends StatefulWidget {
   final AppUser currentUser;
-  final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
   final void Function() settingsCallback;
-  AppDrawer(this.currentUser, this.onChangeLanguage, this.filter, this.settingsCallback);
+  AppDrawer(this.currentUser, this.filter, this.settingsCallback);
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
@@ -47,7 +46,10 @@ class _AppDrawerState extends State<AppDrawer> {
         Container(
           padding: EdgeInsets.only(left: 10.0, right: 10.0),
           child: ListTile(
-            leading: Icon(Icons.person, color: Colors.white,),
+            leading: Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
             title: Text(
               widget.currentUser?.firebaseUser?.displayName ?? '',
               style: TextStyle(color: Colors.white),
@@ -78,8 +80,11 @@ class _AppDrawerState extends State<AppDrawer> {
                   }
                 });
               } else {
-                Auth.signOut(); //logout
-                Navigator.pop(context);
+                Auth.signOut().then((result) {
+                  if (mounted) {
+                    Navigator.pop(context);
+                  }
+                });
               }
             },
           ),
@@ -97,7 +102,7 @@ class _AppDrawerState extends State<AppDrawer> {
         subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ''),
         onTap: () {
           Navigator.pop(context);
-          onLeftNavigationTap(context, widget.onChangeLanguage, _filter, attribute);
+          onLeftNavigationTap(context, _filter, attribute);
         },
       );
     }));
@@ -114,7 +119,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Enhancements')),
+          MaterialPageRoute(builder: (context) => EnhancementsScreen(widget.filter), settings: RouteSettings(name: 'Enhancements')),
         ).then((result) {
           if (mounted) {
             Navigator.pop(context);
@@ -131,7 +136,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SettingsScreen(widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Settings')),
+          MaterialPageRoute(builder: (context) => SettingsScreen(widget.filter), settings: RouteSettings(name: 'Settings')),
         ).then((result) {
           if (mounted) {
             Navigator.pop(context);
@@ -167,7 +172,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => FeedbackScreen(widget.currentUser, widget.onChangeLanguage, widget.filter), settings: RouteSettings(name: 'Feedback')),
+          MaterialPageRoute(builder: (context) => FeedbackScreen(widget.currentUser, widget.filter), settings: RouteSettings(name: 'Feedback')),
         ).then((result) {
           if (mounted) {
             Navigator.pop(context);

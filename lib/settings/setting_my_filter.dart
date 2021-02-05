@@ -1,14 +1,14 @@
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
 import 'package:flutter/material.dart';
 
 class SettingMyFilter extends StatefulWidget {
-  final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
-  SettingMyFilter(this.onChangeLanguage, this.filter);
+  SettingMyFilter(this.filter);
 
   @override
   _SettingMyFilterState createState() => _SettingMyFilterState();
@@ -140,11 +140,13 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
             )),
         onPressed: () {
           Prefs.setStringList(keyMyFilter, _myFilter).then((success) {
-            Prefs.getStringF(keyPreferredLanguage).then((language) {
-              widget.onChangeLanguage(language);
-            });
+            String initialRoute = '/' + filterColor;
+            if (_myFilter != null && _myFilter.length > 0) {
+              initialRoute = '/' + _myFilter[0];
+            }
+            Preferences.myFilterAttributes = _myFilter == null ? filterAttributes : _myFilter;
+            Navigator.pushNamedAndRemoveUntil(context, initialRoute, (_) => false);
           });
-          Navigator.pop(context);
         },
       ),
       FlatButton(

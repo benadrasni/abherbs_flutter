@@ -21,10 +21,9 @@ import '../ads.dart';
 import '../main.dart';
 
 class Color extends StatefulWidget {
-  final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
   final MaterialPageRoute<dynamic> redirect;
-  Color(this.onChangeLanguage, this.filter, this.redirect);
+  Color(this.filter, this.redirect);
 
   @override
   _ColorState createState() => _ColorState();
@@ -56,7 +55,7 @@ class _ColorState extends State<Color> {
     countsReference.child(filter).once().then((DataSnapshot snapshot) {
       if (this.mounted) {
         if (snapshot.value != null && snapshot.value > 0) {
-          Navigator.push(context, getNextFilterRoute(context, widget.onChangeLanguage, newFilter));
+          Navigator.push(context, getNextFilterRoute(context, newFilter));
         } else {
           _key.currentState.showSnackBar(SnackBar(
             content: Text(S.of(context).snack_no_flowers),
@@ -86,6 +85,7 @@ class _ColorState extends State<Color> {
   @override
   void initState() {
     super.initState();
+
     _checkCurrentUser();
     Offline.setKeepSynced(1, true);
 
@@ -321,14 +321,13 @@ class _ColorState extends State<Color> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
-        actions: getActions(context, _key, _currentUser, widget.onChangeLanguage, widget.filter),
+        actions: getActions(context, _key, _currentUser, widget.filter),
       ),
-      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, _filter, null),
+      drawer: AppDrawer(_currentUser, _filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
-            child: Image.asset(
-              "res/images/app_background.webp",
+            child: Image.asset("res/images/app_background.webp",
               fit: BoxFit.fitWidth,
               alignment: Alignment.bottomCenter,
             ),
@@ -348,7 +347,7 @@ class _ColorState extends State<Color> {
         items: getBottomNavigationBarItems(context, _filter),
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          onBottomNavigationBarTap(context, widget.onChangeLanguage, _filter, index, Preferences.myFilterAttributes.indexOf(filterColor));
+          onBottomNavigationBarTap(context, _filter, index, Preferences.myFilterAttributes.indexOf(filterColor));
         },
       ),
       floatingActionButton: Container(
@@ -376,7 +375,7 @@ class _ColorState extends State<Color> {
                           Navigator.push(
                             mainContext,
                             MaterialPageRoute(
-                                builder: (context) => PlantList(widget.onChangeLanguage, _filter, '', keysReference.child(getFilterKey(_filter))),
+                                builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))),
                                 settings: RouteSettings(name: 'PlantList')),
                           );
                         },

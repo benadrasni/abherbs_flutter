@@ -36,8 +36,7 @@ class SearchResult {
 class SearchPhoto extends StatefulWidget {
   final AppUser currentUser;
   final Locale myLocale;
-  final void Function(String) onChangeLanguage;
-  SearchPhoto(this.currentUser, this.myLocale, this.onChangeLanguage);
+  SearchPhoto(this.currentUser, this.myLocale);
 
   @override
   _SearchPhotoState createState() => _SearchPhotoState();
@@ -490,10 +489,10 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                       if (result.path.contains('/')) {
                                         Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, '', rootReference.child(result.path)), settings: RouteSettings(name: 'PlantList')),
+                                          MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(result.path)), settings: RouteSettings(name: 'PlantList')),
                                         );
                                       } else {
-                                        goToDetail(self, context, widget.myLocale, result.path, widget.onChangeLanguage, {});
+                                        goToDetail(self, context, widget.myLocale, result.path, {});
                                       }
                                     },
                                     onLongPress: () {

@@ -38,11 +38,10 @@ const int observationIndex = 3;
 
 class PlantDetail extends StatefulWidget {
   final Locale myLocale;
-  final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
   final Plant plant;
 
-  PlantDetail(this.myLocale, this.onChangeLanguage, this.filter, this.plant);
+  PlantDetail(this.myLocale, this.filter, this.plant);
 
   @override
   _PlantDetailState createState() => _PlantDetailState();
@@ -173,8 +172,7 @@ class _PlantDetailState extends State<PlantDetail> {
       case taxonomyIndex:
         return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize);
       case observationIndex:
-        return ObservationsPlant(
-            _currentUser, Localizations.localeOf(context), widget.onChangeLanguage, _isPublic, widget.plant.name, _key);
+        return ObservationsPlant(_currentUser, Localizations.localeOf(context), _isPublic, widget.plant.name, _key);
     }
     return null;
   }
@@ -188,7 +186,7 @@ class _PlantDetailState extends State<PlantDetail> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ObservationLogs(_currentUser, Localizations.localeOf(context), widget.onChangeLanguage, 0),
+            builder: (context) => ObservationLogs(_currentUser, Localizations.localeOf(context), 0),
             settings: RouteSettings(name: 'ObservationLogs')),
       );
     }
@@ -312,7 +310,7 @@ class _PlantDetailState extends State<PlantDetail> {
                 ));
               },
             )),
-      drawer: AppDrawer(_currentUser, widget.onChangeLanguage, widget.filter, null),
+      drawer: AppDrawer(_currentUser, widget.filter, null),
       body: _getBody(context),
       floatingActionButton: Container(
         height: 70.0,
@@ -329,7 +327,7 @@ class _PlantDetailState extends State<PlantDetail> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ObservationEdit(_currentUser, widget.myLocale, widget.onChangeLanguage, observation),
+                            builder: (context) => ObservationEdit(_currentUser, widget.myLocale, observation),
                             settings: RouteSettings(name: 'ObservationEdit')),
                       ).then((value) {
                         if (value != null && value && _key.currentState != null) {

@@ -17,12 +17,10 @@ import 'ads.dart';
 import 'main.dart';
 
 class PlantList extends StatefulWidget {
-  final void Function(String) onChangeLanguage;
   final Map<String, String> filter;
   final String emptyMessage;
   final DatabaseReference pathToIndex;
-  PlantList(
-      this.onChangeLanguage, this.filter, this.emptyMessage, this.pathToIndex);
+  PlantList(this.filter, this.emptyMessage, this.pathToIndex);
 
   @override
   _PlantListState createState() => _PlantListState();
@@ -51,8 +49,7 @@ class _PlantListState extends State<PlantList> {
         height: screenWidth,
       ),
       onPressed: () {
-        goToDetail(this, context, myLocale, name, widget.onChangeLanguage,
-            widget.filter);
+        goToDetail(this, context, myLocale, name, widget.filter);
       },
     );
 
@@ -111,7 +108,7 @@ class _PlantListState extends State<PlantList> {
         title: Text(S.of(mainContext).list_info),
       ),
       drawer:
-          AppDrawer(_currentUser, widget.onChangeLanguage, widget.filter, null),
+          AppDrawer(_currentUser, widget.filter, null),
       body: FirebaseAnimatedIndexList(
           defaultChild: Center(child: CircularProgressIndicator()),
           emptyChild: Container(
@@ -198,8 +195,7 @@ class _PlantListState extends State<PlantList> {
                       width: 50.0,
                       height: 50.0),
                   onTap: () {
-                    goToDetail(self, mainContext, myLocale, name,
-                        widget.onChangeLanguage, widget.filter);
+                    goToDetail(self, mainContext, myLocale, name, widget.filter);
                   },
                 ),
                 _getImageButton(
@@ -231,14 +227,12 @@ class _PlantListState extends State<PlantList> {
                               }
                               Navigator.pushReplacement(
                                   mainContext,
-                                  getNextFilterRoute(mainContext,
-                                      widget.onChangeLanguage, filter));
+                                  getNextFilterRoute(mainContext, filter));
                             });
                           } else {
                             Navigator.pushReplacement(
                                 mainContext,
-                                getNextFilterRoute(mainContext,
-                                    widget.onChangeLanguage, filter));
+                                getNextFilterRoute(mainContext, filter));
                           }
                         });
                       },

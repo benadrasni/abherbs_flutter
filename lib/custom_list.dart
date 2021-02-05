@@ -28,8 +28,7 @@ const families = [ "Acanthaceae", "Acoraceae", "Adoxaceae", "Alismataceae", "Ama
 
 class CustomListScreen extends StatefulWidget {
   final Locale myLocale;
-  final void Function(String) onChangeLanguage;
-  CustomListScreen(this.myLocale, this.onChangeLanguage);
+  CustomListScreen(this.myLocale);
 
   @override
   _CustomListScreenState createState() => _CustomListScreenState();
@@ -129,7 +128,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
             String path = '/' + firebaseUsers + '/' + _currentUser.firebaseUser.uid + '/' + firebaseAttributeFavorite;
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, S.of(context).favorite_empty, rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
+              MaterialPageRoute(builder: (context) => PlantList({}, S.of(context).favorite_empty, rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
             );
           } else {
             favoriteDialog(context, _key);
@@ -198,7 +197,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
                                         String path = '/' + firebaseListsCustom + '/by language/' + widget.myLocale.languageCode + '/' + snapshot.key + '/' + firebaseAttributeList;
                                         Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, "", rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
+                                          MaterialPageRoute(builder: (context) => PlantList({}, "", rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
                                         );
                                       },
                                     );
@@ -269,7 +268,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
                       String path = '/' + firebaseListsCustom + '/new/' + snapshot.key + '/' + firebaseAttributeList;
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PlantList(widget.onChangeLanguage, {}, "", rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
+                        MaterialPageRoute(builder: (context) => PlantList({}, "", rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
                       );
                     },
                   );

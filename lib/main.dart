@@ -5,11 +5,12 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
+import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/signin/authetication.dart';
-import 'package:abherbs_flutter/splash.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,7 +25,110 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:screen/screen.dart';
 import 'package:flutter_localized_countries/flutter_localized_countries.dart';
 
-import 'ads.dart';
+import 'filter/color.dart';
+import 'filter/distribution.dart';
+import 'filter/filter_utils.dart';
+import 'filter/habitat.dart';
+import 'filter/petal.dart';
+
+void _iapError() {
+  Fluttertoast.showToast(
+      msg: 'IAP not prepared. Check if Platform service is available.',
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 5,
+      backgroundColor: Colors.redAccent);
+  Purchases.purchases = [];
+}
+
+Future<void> initializeStore() async {
+  final bool isAvailable = await InAppPurchaseConnection.instance.isAvailable();
+  if (!isAvailable) {
+    _iapError();
+  }
+
+  final QueryPurchaseDetailsResponse purchaseResponse =
+  await InAppPurchaseConnection.instance.queryPastPurchases();
+  if (purchaseResponse.error != null) {
+    var purchases = await Prefs.getStringListF(keyPurchases, []);
+    Purchases.purchases = purchases
+        .map((productId) => Purchases.offlineProducts[productId])
+        .toList();
+  } else {
+    Purchases.purchases = [];
+    for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
+      if (Platform.isIOS && purchase.status == PurchaseStatus.error) {
+        await InAppPurchaseConnection.instance.completePurchase(purchase);
+      } else if (await verifyPurchase(purchase)) {
+        final pending = Platform.isIOS
+            ? purchase.pendingCompletePurchase
+            : !purchase.billingClientPurchase.isAcknowledged;
+
+        if (pending) {
+          await InAppPurchaseConnection.instance.completePurchase(purchase);
+        }
+        Purchases.purchases.add(purchase);
+      }
+    }
+    Prefs.setStringList(keyPurchases,
+        Purchases.purchases.map((item) => item.productID).toList());
+  }
+
+  Offline.initialize();
+  Auth.getAppUser();
+}
+
+Future<void> initializeFlutterFire() async {
+  // Wait for Firebase to initialize
+  await Firebase.initializeApp();
+
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!isInDebugMode);
+
+  await RemoteConfiguration.setupRemoteConfig();
+
+  // Pass all uncaught errors to Crashlytics.
+  Function originalOnError = FlutterError.onError;
+  FlutterError.onError = (FlutterErrorDetails errorDetails) async {
+    await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+    // Forward to original handler.
+    originalOnError(errorDetails);
+  };
+}
+
+Future<Locale> initializeLocale() async {
+  return Prefs.getStringF(keyPreferredLanguage).then((String language) {
+    var languageCountry = language.split('_');
+    return languageCountry.length < 2
+        ? null
+        : Locale(languageCountry[0], languageCountry[1]);
+  });
+}
+
+Future<Map<String, String>> initializeFilter() async {
+  return Prefs.getBoolF(keyAlwaysMyRegion, false).then((alwaysMyRegionValue) {
+    Map<String, String> filter = {};
+    if (alwaysMyRegionValue) {
+      return Prefs.getStringF(keyMyRegion, null).then((myRegionValue) {
+        if (myRegionValue != null) {
+          filter[filterDistribution] = myRegionValue;
+        }
+        return filter;
+      });
+    }
+    return filter;
+  });
+}
+
+Future<String> initializeRoute() {
+  return Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
+    String initialRoute = '/' + filterColor;
+    Preferences.myFilterAttributes = myFilter;
+    if (myFilter != null && myFilter.length > 0) {
+      initialRoute = '/' + myFilter[0];
+    }
+    return initialRoute;
+  });
+}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,11 +136,16 @@ void main() {
   runZonedGuarded(() {
     initializeFlutterFire().then((_) {
       SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-          .then((_) {
+          .then((_) async {
         Screen.keepOn(true);
         InAppPurchaseConnection.enablePendingPurchases();
-        Ads.initialize();
-        runApp(App());
+        await initializeStore();
+        Admob.initialize();
+        await Prefs.init();
+        Locale locale = await initializeLocale();
+        Map<String, String> filter = await initializeFilter();
+        String initialRoute = await initializeRoute();
+        runApp(App(locale, filter, initialRoute));
       }).catchError((error) {
         print('setOrientation: Caught error in set orientation.');
         FirebaseCrashlytics.instance.recordError(error, null);
@@ -51,25 +160,18 @@ void main() {
   });
 }
 
-// Define an async function to initialize FlutterFire
-Future<void> initializeFlutterFire() async {
-  // Wait for Firebase to initialize
-  await Firebase.initializeApp();
-
-  await FirebaseCrashlytics.instance
-      .setCrashlyticsCollectionEnabled(!isInDebugMode);
-
-  // Pass all uncaught errors to Crashlytics.
-  Function originalOnError = FlutterError.onError;
-  FlutterError.onError = (FlutterErrorDetails errorDetails) async {
-    await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
-    // Forward to original handler.
-    originalOnError(errorDetails);
-  };
-}
-
 class App extends StatefulWidget {
   static BuildContext currentContext;
+  final Locale locale;
+  final Map<String, String> filter;
+  final String initialRoute;
+  App(this.locale, this.filter, this.initialRoute);
+
+  static void setLocale(BuildContext context, String language) async {
+    _AppState state = context.findAncestorStateOfType<_AppState>();
+    state.changeLanguage(language);
+  }
+
   @override
   _AppState createState() => _AppState();
 }
@@ -80,24 +182,18 @@ class _AppState extends State<App> {
 
   StreamSubscription<List<PurchaseDetails>> _subscription;
   Map<String, dynamic> _notificationData;
-  Future<Locale> _localeF;
-  Future<void> _initStoreF;
-
-
+  Locale _locale;
+  MaterialPageRoute<dynamic> _redirect;
 
   Future<void> _logFailedPurchaseEvent() async {
     await _firebaseAnalytics.logEvent(name: 'purchase_failed');
   }
 
-  onChangeLanguage(String language) {
+  changeLanguage(String language) {
+    var languageCountry = language?.split('_');
     setState(() {
       translationCache = {};
-      _localeF = Future<Locale>(() {
-        var languageCountry = language?.split('_');
-        return language == null || language.isEmpty
-            ? null
-            : Locale(languageCountry[0], languageCountry[1]);
-      });
+      _locale = language == null || language.isEmpty ? null : Locale(languageCountry[0], languageCountry[1]);
     });
   }
 
@@ -166,7 +262,7 @@ class _AppState extends State<App> {
                     onPressed: () {
                       Navigator.of(context).pop();
                       Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => PlantList(onChangeLanguage, {}, '', rootReference.child(path)),
+                          builder: (context) => PlantList({}, '', rootReference.child(path)),
                           settings: RouteSettings(name: 'PlantList')));
                     },
                   ),
@@ -183,15 +279,17 @@ class _AppState extends State<App> {
         }
       },
       onResume: (Map<String, dynamic> message) async {
-        setState(() {
+        setState(() async {
           _notificationData = Map.from(
               Platform.isIOS ? message : message[notificationAttributeData]);
+          _redirect = await findRedirectF();
         });
       },
       onLaunch: (Map<String, dynamic> message) async {
-        setState(() {
+        setState(() async {
           _notificationData = Map.from(
               Platform.isIOS ? message : message[notificationAttributeData]);
+          _redirect = await findRedirectF();
         });
       },
     );
@@ -206,150 +304,65 @@ class _AppState extends State<App> {
     });
   }
 
-  void _iapError() {
-    Fluttertoast.showToast(
-        msg: 'IAP not prepared. Check if Platform service is available.',
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 5,
-        backgroundColor: Colors.redAccent);
-    Purchases.purchases = [];
-  }
-
-  void _checkPromotions() {
-    rootReference
-        .child(firebasePromotions)
-        .once()
-        .then((DataSnapshot snapshot) {
-      if (snapshot.value != null) {
-        if (snapshot.value[firebaseAttributeObservations] != null) {
-          var observationsFrom = DateTime.parse(snapshot
-              .value[firebaseAttributeObservations][firebaseAttributeFrom]);
-          var observationsTo = DateTime.parse(snapshot
-              .value[firebaseAttributeObservations][firebaseAttributeTo]);
-
-          var currentDate = DateTime.now();
-          Purchases.observationPromotionFrom = observationsFrom;
-          Purchases.observationPromotionTo = observationsTo;
-          Purchases.isObservationPromotion =
-              currentDate.isAfter(observationsFrom) &&
-                  currentDate.isBefore(observationsTo.add(Duration(days: 1)));
-        }
-        if (snapshot.value[firebaseAttributeSearch] != null) {
-          var searchFrom = DateTime.parse(
-              snapshot.value[firebaseAttributeSearch][firebaseAttributeFrom]);
-          var searchTo = DateTime.parse(
-              snapshot.value[firebaseAttributeSearch][firebaseAttributeTo]);
-
-          var currentDate = DateTime.now();
-          Purchases.searchPromotionFrom = searchFrom;
-          Purchases.searchPromotionTo = searchTo;
-          Purchases.isSearchPromotion = currentDate.isAfter(searchFrom) &&
-              currentDate.isBefore(searchTo.add(Duration(days: 1)));
-        }
-        if (snapshot.value[firebaseAttributeSearchByPhoto] != null) {
-          var searchByPhotoFrom = DateTime.parse(snapshot
-              .value[firebaseAttributeSearchByPhoto][firebaseAttributeFrom]);
-          var searchByPhotoTo = DateTime.parse(snapshot
-              .value[firebaseAttributeSearchByPhoto][firebaseAttributeTo]);
-
-          var currentDate = DateTime.now();
-          Purchases.searchByPhotoPromotionFrom = searchByPhotoFrom;
-          Purchases.searchByPhotoPromotionTo = searchByPhotoTo;
-          Purchases.isSearchByPhotoPromotion =
-              currentDate.isAfter(searchByPhotoFrom) &&
-                  currentDate.isBefore(searchByPhotoTo.add(Duration(days: 1)));
-        }
-      }
-    });
-  }
-
-  Future<void> initStoreInfo() async {
-    final bool isAvailable = await InAppPurchaseConnection.instance.isAvailable();
-    if (!isAvailable) {
-      _iapError();
-    }
-
-    final QueryPurchaseDetailsResponse purchaseResponse =
-        await InAppPurchaseConnection.instance.queryPastPurchases();
-    if (purchaseResponse.error != null) {
-      var purchases = await Prefs.getStringListF(keyPurchases, []);
-      Purchases.purchases = purchases
-          .map((productId) => Purchases.offlineProducts[productId])
-          .toList();
+  Future<MaterialPageRoute<dynamic>> findRedirectF() {
+    Map<String, dynamic> notificationData = _notificationData != null ? Map.from(_notificationData) : null;
+    _notificationData = null;
+    if (notificationData == null) {
+      return Future<MaterialPageRoute<dynamic>>(() {
+        return null;
+      });
     } else {
-      Purchases.purchases = [];
-      for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
-        if (Platform.isIOS && purchase.status == PurchaseStatus.error) {
-          await InAppPurchaseConnection.instance.completePurchase(purchase);
-        } else if (await verifyPurchase(purchase)) {
-          final pending = Platform.isIOS
-              ? purchase.pendingCompletePurchase
-              : !purchase.billingClientPurchase.isAcknowledged;
-
-          if (pending) {
-            await InAppPurchaseConnection.instance.completePurchase(purchase);
-          }
-          Purchases.purchases.add(purchase);
-        }
-      }
-      Prefs.setStringList(keyPurchases,
-          Purchases.purchases.map((item) => item.productID).toList());
-    }
-
-    Offline.initialize();
-    _checkPromotions();
-    Auth.getAppUser();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    Prefs.init();
-    Stream purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
-    _subscription = purchaseUpdated.listen((purchaseDetailsList) {
-      _listenToPurchaseUpdated(purchaseDetailsList);
-    }, onDone: () {
-      _subscription.cancel();
-    }, onError: (error) {
-      _logFailedPurchaseEvent();
-      if (mounted) {
-        Fluttertoast.showToast(
-            msg: S.of(context).product_purchase_failed,
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 5);
-      }
-    });
-    _initStoreF = initStoreInfo();
-
-    _localeF = Prefs.getStringF(keyPreferredLanguage).then((String language) {
-      var languageCountry = language.split('_');
-      return languageCountry.length < 2
-          ? null
-          : Locale(languageCountry[0], languageCountry[1]);
-    });
-
-    Prefs.getStringF(keyRateCount, rateCountInitial.toString()).then((value) {
-      if (int.parse(value) < 0) {
-        Prefs.getStringF(keyRateState, rateStateInitial).then((value) {
-          if (value == rateStateInitial) {
-            Prefs.setString(keyRateState, rateStateShould);
-          }
+      String action = notificationData[notificationAttributeAction];
+      if (action == null) {
+        return Future<MaterialPageRoute<dynamic>>(() {
+          return null;
         });
       } else {
-        Prefs.setString(keyRateCount, (int.parse(value) - 1).toString());
+        switch (action) {
+          case notificationAttributeActionBrowse:
+            String uri = notificationData[notificationAttributeUri];
+            if (uri != null) {
+              launchURLF(uri);
+              return Future<MaterialPageRoute<dynamic>>(() {
+                return null;
+              });
+            }
+            return Future<MaterialPageRoute<dynamic>>(() {
+              return null;
+            });
+          case notificationAttributeActionList:
+            String path = notificationData[notificationAttributePath];
+            if (path != null) {
+              rootReference.child(path).keepSynced(true);
+              rootReference.child(firebasePlantHeaders).keepSynced(true);
+              return rootReference.child(path).once().then((DataSnapshot snapshot) {
+                var result = snapshot.value??[];
+                int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : result.values.length;
+                if (length == 0) {
+                  rootReference.child(path).child("refreshMock").set("mock").catchError((error) {
+                    FirebaseCrashlytics.instance.log("0-length custom list");
+                  });
+                }
+                return Future<MaterialPageRoute<dynamic>>(() {
+                  return MaterialPageRoute(
+                      builder: (context) => PlantList({}, '', rootReference.child(path)),
+                      settings: RouteSettings(name: 'PlantList'));
+                });
+              });
+            }
+            return Future<MaterialPageRoute<dynamic>>(() {
+              return null;
+            });
+          default:
+            return Future<MaterialPageRoute<dynamic>>(() {
+              return null;
+            });
+        }
       }
-    }).catchError((_) {
-      // deal with previous int shared preferences
-      Prefs.setString(keyRateCount, rateCountInitial.toString());
-    });
-
-    _firebaseCloudMessagingListeners();
+    }
   }
 
-  Locale _localeResolutionCallback(
+  Locale localeResolution(
       Locale savedLocale, Locale deviceLocale, Iterable<Locale> supportedLocales) {
 
     if (savedLocale != null) {
@@ -388,6 +401,46 @@ class _AppState extends State<App> {
     return resultLocale;
   }
 
+
+  @override
+  void initState() {
+    super.initState();
+
+    _firebaseCloudMessagingListeners();
+    Stream purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
+    _subscription = purchaseUpdated.listen((purchaseDetailsList) {
+      _listenToPurchaseUpdated(purchaseDetailsList);
+    }, onDone: () {
+      _subscription.cancel();
+    }, onError: (error) {
+      _logFailedPurchaseEvent();
+      if (mounted) {
+        Fluttertoast.showToast(
+            msg: S.of(context).product_purchase_failed,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 5);
+      }
+    });
+
+    _locale = widget.locale;
+
+    Prefs.getStringF(keyRateCount, rateCountInitial.toString()).then((value) {
+      if (int.parse(value) < 0) {
+        Prefs.getStringF(keyRateState, rateStateInitial).then((value) {
+          if (value == rateStateInitial) {
+            Prefs.setString(keyRateState, rateStateShould);
+          }
+        });
+      } else {
+        Prefs.setString(keyRateCount, (int.parse(value) - 1).toString());
+      }
+    }).catchError((_) {
+      // deal with previous int shared preferences
+      Prefs.setString(keyRateCount, rateCountInitial.toString());
+    });
+  }
+
   @override
   void dispose() {
     Prefs.dispose();
@@ -397,47 +450,27 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Object>>(
-        future: Future.wait([_localeF, _initStoreF, RemoteConfiguration.setupRemoteConfig()]),
-        builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
-              if (snapshot.hasError) {
-                FirebaseCrashlytics.instance.log(snapshot.error.toString());
-              }
-              Map<String, dynamic> notificationData = _notificationData != null
-                  ? Map.from(_notificationData)
-                  : null;
-              _notificationData = null;
-              return MaterialApp(
-                localeResolutionCallback: (deviceLocale, supportedLocales) {
-                  return _localeResolutionCallback(
-                      snapshot.data == null ? null : snapshot.data[0], deviceLocale, supportedLocales);
-                },
-                debugShowCheckedModeBanner: false,
-                localizationsDelegates: [
-                  S.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                  CountryNamesLocalizationsDelegate(),
-                ],
-                supportedLocales: S.delegate.supportedLocales,
-                home: Splash(this.onChangeLanguage, notificationData),
-                navigatorObservers: [
-                  FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
-                ],
-              );
-            default:
-              return Container(
-                decoration: BoxDecoration(color: Colors.white),
-                child: Center(
-                  child: Image(
-                    image: AssetImage('res/images/home.png'),
-                  ),
-                ),
-              );
-          }
-        });
+    return MaterialApp(
+      locale: localeResolution(_locale, Locale(Platform.localeName), S.delegate.supportedLocales),
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        CountryNamesLocalizationsDelegate(),
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      initialRoute: widget.initialRoute,
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
+      ],
+      routes: {
+        '/filterColor': (context) => Color(widget.filter, _redirect),
+        '/filterHabitat': (context) => Habitat(widget.filter, _redirect),
+        '/filterPetal': (context) => Petal(widget.filter, _redirect),
+        '/filterDistribution': (context) => Distribution(widget.filter, _redirect),
+      },
+    );
   }
 }

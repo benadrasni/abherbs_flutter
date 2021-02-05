@@ -32,9 +32,8 @@ class ObservationsSum {
 class ObservationLogs extends StatefulWidget {
   final AppUser currentUser;
   final Locale myLocale;
-  final void Function(String) onChangeLanguage;
   final currentIndex;
-  ObservationLogs(this.currentUser, this.myLocale, this.onChangeLanguage, this.currentIndex);
+  ObservationLogs(this.currentUser, this.myLocale, this.currentIndex);
 
   @override
   _ObservationLogsState createState() => _ObservationLogsState();
@@ -108,7 +107,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ObservationEdit(widget.currentUser, Localizations.localeOf(context), widget.onChangeLanguage, snapshot.data),
+                            builder: (context) => ObservationEdit(widget.currentUser, Localizations.localeOf(context), snapshot.data),
                             settings: RouteSettings(name: 'ObservationEdit')),
                       );
                     },
@@ -269,7 +268,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                               ),
                               leading: Icon(Icons.local_florist),
                               onTap: () {
-                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['firstFlower'], widget.onChangeLanguage, {});
+                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['firstFlower'], {});
                               },
                             ),
                             const Divider(
@@ -293,7 +292,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                               ),
                               leading: Icon(Icons.local_florist),
                               onTap: () {
-                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['lastFlower'], widget.onChangeLanguage, {});
+                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['lastFlower'], {});
                               },
                             ),
                             const Divider(
@@ -314,7 +313,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                                 child: Text(snapshot.data.value['mostObservedCount'].toString()),
                               ),
                               onTap: () {
-                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['mostObserved'], widget.onChangeLanguage, {});
+                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['mostObserved'], {});
                               },
                             ),
                           ],
@@ -539,7 +538,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                               ),
                               leading: Icon(Icons.local_florist),
                               onTap: () {
-                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['firstFlower'], widget.onChangeLanguage, {});
+                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['firstFlower'], {});
                               },
                             ),
                             const Divider(
@@ -563,7 +562,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                               ),
                               leading: Icon(Icons.local_florist),
                               onTap: () {
-                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['lastFlower'], widget.onChangeLanguage, {});
+                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['lastFlower'], {});
                               },
                             ),
                             const Divider(
@@ -584,7 +583,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                                 child: Text(snapshot.data.value['mostObservedCount'].toString()),
                               ),
                               onTap: () {
-                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['mostObserved'], widget.onChangeLanguage, {});
+                                goToDetail(self, mainContext, widget.myLocale, snapshot.data.value['mostObserved'], {});
                               },
                             ),
                           ],

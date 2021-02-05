@@ -292,52 +292,48 @@ List<BottomNavigationBarItem> getBottomNavigationBarItems(BuildContext context, 
   }).toList();
 }
 
-void onBottomNavigationBarTap(BuildContext context, void Function(String) onChangeLanguage,
-    Map<String, String> filter, int index, int currentIndex) {
+void onBottomNavigationBarTap(BuildContext context, Map<String, String> filter, int index, int currentIndex) {
   if (index != currentIndex) {
     if (currentIndex == -1) {
       Navigator.pushReplacement(
-          context, getFilterRoute(context, onChangeLanguage, filter, Preferences.myFilterAttributes.elementAt(index)));
+          context, getFilterRoute(context, filter, Preferences.myFilterAttributes.elementAt(index)));
     } else {
       Navigator.push(
-          context, getFilterRoute(context, onChangeLanguage, filter, Preferences.myFilterAttributes.elementAt(index)));
+          context, getFilterRoute(context, filter, Preferences.myFilterAttributes.elementAt(index)));
     }
   }
 }
 
-void onLeftNavigationTap(BuildContext context, void Function(String) onChangeLanguage,
-    Map<String, String> filter, String filterAttribute) {
-  Navigator.push(context, getFilterRoute(context, onChangeLanguage, filter, filterAttribute));
+void onLeftNavigationTap(BuildContext context, Map<String, String> filter, String filterAttribute) {
+  Navigator.push(context, getFilterRoute(context, filter, filterAttribute));
 }
 
-MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, void Function(String) onChangeLanguage, Map<String, String> filter) {
-  return getFilterRoute(context, onChangeLanguage, filter, _getNextFilterAttribute(filter));
+MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, Map<String, String> filter) {
+  return getFilterRoute(context, filter, _getNextFilterAttribute(filter));
 }
 
-MaterialPageRoute<dynamic> getFirstFilterRoute(BuildContext context, void Function(String) onChangeLanguage,
-    Map<String, String> filter, MaterialPageRoute<dynamic> redirect) {
-  return getFilterRoute(context, onChangeLanguage, filter, _getNextFilterAttribute(filter), redirect);
+MaterialPageRoute<dynamic> getFirstFilterRoute(BuildContext context, Map<String, String> filter, MaterialPageRoute<dynamic> redirect) {
+  return getFilterRoute(context, filter, _getNextFilterAttribute(filter), redirect);
 }
 
-MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, void Function(String) onChangeLanguage,
-    Map<String, String> filter, String filterAttribute, [MaterialPageRoute<dynamic> redirect]) {
+MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, Map<String, String> filter, String filterAttribute, [MaterialPageRoute<dynamic> redirect]) {
   var route;
 
   switch (filterAttribute) {
     case filterColor:
-      route = MaterialPageRoute(builder: (context) => Color(onChangeLanguage, filter, redirect), settings: RouteSettings(name: 'Color'));
+      route = MaterialPageRoute(builder: (context) => Color(filter, redirect), settings: RouteSettings(name: 'Color'));
       break;
     case filterHabitat:
-      route = MaterialPageRoute(builder: (context) => Habitat(onChangeLanguage, filter, redirect), settings: RouteSettings(name: 'Habitat'));
+      route = MaterialPageRoute(builder: (context) => Habitat(filter, redirect), settings: RouteSettings(name: 'Habitat'));
       break;
     case filterPetal:
-      route = MaterialPageRoute(builder: (context) => Petal(onChangeLanguage, filter, redirect), settings: RouteSettings(name: 'Petal'));
+      route = MaterialPageRoute(builder: (context) => Petal(filter, redirect), settings: RouteSettings(name: 'Petal'));
       break;
     case filterDistribution:
-      route = MaterialPageRoute(builder: (context) => Distribution(onChangeLanguage, filter, redirect), settings: RouteSettings(name: 'Distribution'));
+      route = MaterialPageRoute(builder: (context) => Distribution(filter, redirect), settings: RouteSettings(name: 'Distribution'));
       break;
     default:
-      route = MaterialPageRoute(builder: (context) => PlantList(onChangeLanguage, filter, '', keysReference.child(getFilterKey(filter))), settings: RouteSettings(name: 'PlantList'));
+      route = MaterialPageRoute(builder: (context) => PlantList(filter, '', keysReference.child(getFilterKey(filter))), settings: RouteSettings(name: 'PlantList'));
   }
   if (filterAttribute != null) {
     if (filterRoutes[filterAttribute] != null && filterRoutes[filterAttribute].isActive && context != null) {
