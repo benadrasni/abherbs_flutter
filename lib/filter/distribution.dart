@@ -14,15 +14,13 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 import '../ads.dart';
 import '../main.dart';
 
 class Distribution extends StatefulWidget {
   final Map<String, String> filter;
-  final MaterialPageRoute<dynamic> redirect;
-  Distribution(this.filter, this.redirect);
+  Distribution(this.filter);
 
   @override
   _DistributionState createState() => _DistributionState();
@@ -36,13 +34,6 @@ class _DistributionState extends State<Distribution> {
   Future<String> _myRegionF;
   String _myRegion;
   GlobalKey<ScaffoldState> _key;
-
-  _redirect(BuildContext context) async {
-    // redirect to route from notification
-    if (widget.redirect != null) {
-      Navigator.push(context, widget.redirect);
-    }
-  }
 
   void _openRegion(String region) {
     var route = MaterialPageRoute(
@@ -235,8 +226,6 @@ class _DistributionState extends State<Distribution> {
     _setCount();
 
     _setMyRegion();
-
-    SchedulerBinding.instance.addPostFrameCallback((_) => _redirect(context));
   }
 
   @override
