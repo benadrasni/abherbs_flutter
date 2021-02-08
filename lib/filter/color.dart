@@ -14,7 +14,6 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:package_info/package_info.dart';
 
 import '../ads.dart';
@@ -22,8 +21,7 @@ import '../main.dart';
 
 class Color extends StatefulWidget {
   final Map<String, String> filter;
-  final MaterialPageRoute<dynamic> redirect;
-  Color(this.filter, this.redirect);
+  Color(this.filter);
 
   @override
   _ColorState createState() => _ColorState();
@@ -37,13 +35,6 @@ class _ColorState extends State<Color> {
   Future<String> _rateStateF;
   Future<bool> _isNewVersionF;
   Map<String, String> _filter;
-
-  _redirect(BuildContext context) {
-    // redirect to route from notification
-    if (widget.redirect != null) {
-      Navigator.push(context, widget.redirect);
-    }
-  }
 
   _navigate(String value) {
     var newFilter = new Map<String, String>();
@@ -106,7 +97,6 @@ class _ColorState extends State<Color> {
     });
 
     _setCount();
-    SchedulerBinding.instance.addPostFrameCallback((_) => _redirect(context));
   }
 
   @override

@@ -16,7 +16,6 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -24,6 +23,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:screen/screen.dart';
 import 'package:flutter_localized_countries/flutter_localized_countries.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'filter/color.dart';
 import 'filter/distribution.dart';
@@ -177,13 +177,10 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
 
   StreamSubscription<List<PurchaseDetails>> _subscription;
-  Map<String, dynamic> _notificationData;
   Locale _locale;
-  MaterialPageRoute<dynamic> _redirect;
 
   Future<void> _logFailedPurchaseEvent() async {
     await _firebaseAnalytics.logEvent(name: 'purchase_failed');
@@ -232,81 +229,94 @@ class _AppState extends State<App> {
     }
   }
 
-  void _firebaseCloudMessagingListeners() {
-    if (Platform.isIOS) _iOSPermission();
+  Future<dynamic> handleMessage(RemoteMessage message) {
+    if (message != null) {
+      String action = message.data[notificationAttributeAction];
+      if (action != null && action == notificationAttributeActionList && App.currentContext != null) {
+        String path = message.data[notificationAttributePath];
+        rootReference.child(path).keepSynced(true);
+        return showDialog(
+          context: App.currentContext,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(S
+                  .of(context)
+                  .notification),
+              content: Text(message.notification.title),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text(S
+                      .of(context)
+                      .notification_open, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => PlantList({}, '', rootReference.child(path)),
+                        settings: RouteSettings(name: 'PlantList')));
+                  },
+                ),
+                FlatButton(
+                  child: Text(S
+                      .of(context)
+                      .notification_close, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        return Future<dynamic>(() {
+          return null;
+        });
+      }
+    } else {
+      return Future<dynamic>(() {
+        return null;
+      });
+    }
+  }
 
-    _firebaseMessaging.getToken().then((token) {
+  void _firebaseCloudMessagingListeners() async {
+    if (Platform.isIOS) {
+      await FirebaseMessaging.instance.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true,
+      );
+    }
+
+    FirebaseMessaging.instance.getToken().then((token) {
       Prefs.setString(keyToken, token);
       print('token $token');
     });
 
-    _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        String notificationText = Platform.isIOS ? message['aps']['alert'] : message[notificationAttributeNotification][notificationAttributeBody];
-        Map<String, dynamic> notificationData = Map.from(
-            Platform.isIOS ? message : message[notificationAttributeData]);
-        String action = notificationData[notificationAttributeAction];
-        if (action != null && action == notificationAttributeActionList && App.currentContext != null) {
-          String path = notificationData[notificationAttributePath];
-          rootReference.child(path).keepSynced(true);
-          return showDialog(
-            context: App.currentContext,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(S.of(context).notification),
-                content: Text(notificationText),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(S.of(context).notification_open, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => PlantList({}, '', rootReference.child(path)),
-                          settings: RouteSettings(name: 'PlantList')));
-                    },
-                  ),
-                  FlatButton(
-                    child: Text(S.of(context).notification_close, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
+    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message) async {
+      if (message != null) {
+        MaterialPageRoute<dynamic> redirect = await findRedirectF(message.data);
+        if (redirect != null) {
+          Navigator.push(App.currentContext, redirect);
         }
-      },
-      onResume: (Map<String, dynamic> message) async {
-        setState(() async {
-          _notificationData = Map.from(
-              Platform.isIOS ? message : message[notificationAttributeData]);
-          _redirect = await findRedirectF();
-        });
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        setState(() async {
-          _notificationData = Map.from(
-              Platform.isIOS ? message : message[notificationAttributeData]);
-          _redirect = await findRedirectF();
-        });
-      },
-    );
-  }
+      }
+    });
 
-  void _iOSPermission() {
-    _firebaseMessaging.requestNotificationPermissions(
-        IosNotificationSettings(sound: true, badge: true, alert: true));
-    _firebaseMessaging.onIosSettingsRegistered
-        .listen((IosNotificationSettings settings) {
-      print("Settings registered: $settings");
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      handleMessage(message);
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+      handleMessage(message);
     });
   }
 
-  Future<MaterialPageRoute<dynamic>> findRedirectF() {
-    Map<String, dynamic> notificationData = _notificationData != null ? Map.from(_notificationData) : null;
-    _notificationData = null;
+  Future<MaterialPageRoute<dynamic>> findRedirectF(Map<String, dynamic> notificationData) {
     if (notificationData == null) {
       return Future<MaterialPageRoute<dynamic>>(() {
         return null;
@@ -466,10 +476,10 @@ class _AppState extends State<App> {
         FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
       ],
       routes: {
-        '/filterColor': (context) => Color(widget.filter, _redirect),
-        '/filterHabitat': (context) => Habitat(widget.filter, _redirect),
-        '/filterPetal': (context) => Petal(widget.filter, _redirect),
-        '/filterDistribution': (context) => Distribution(widget.filter, _redirect),
+        '/filterColor': (context) => Color(widget.filter),
+        '/filterHabitat': (context) => Habitat(widget.filter),
+        '/filterPetal': (context) => Petal(widget.filter),
+        '/filterDistribution': (context) => Distribution(widget.filter),
       },
     );
   }

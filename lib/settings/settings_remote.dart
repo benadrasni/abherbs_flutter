@@ -7,7 +7,7 @@ class RemoteConfiguration {
   static Future<RemoteConfig> setupRemoteConfig() async {
     remoteConfig = await RemoteConfig.instance;
     // Enable developer mode to relax fetch throttling
-    remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: true));
+    remoteConfig.setConfigSettings(RemoteConfigSettings());
     remoteConfig.setDefaults(<String, dynamic>{
       remoteConfigIPNIServer: 'http://plantsoftheworldonline.org/',
       remoteConfigIPNIServerWithTaxon: 'http://plantsoftheworldonline.org/taxon/urn:lsid:ipni.org:names:',
