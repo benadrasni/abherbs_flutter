@@ -312,25 +312,25 @@ MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, Map<String, 
   return getFilterRoute(context, filter, _getNextFilterAttribute(filter));
 }
 
-MaterialPageRoute<dynamic> getFirstFilterRoute(BuildContext context, Map<String, String> filter, MaterialPageRoute<dynamic> redirect) {
-  return getFilterRoute(context, filter, _getNextFilterAttribute(filter), redirect);
+MaterialPageRoute<dynamic> getFirstFilterRoute(BuildContext context, Map<String, String> filter) {
+  return getFilterRoute(context, filter, _getNextFilterAttribute(filter));
 }
 
-MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, Map<String, String> filter, String filterAttribute, [MaterialPageRoute<dynamic> redirect]) {
+MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, Map<String, String> filter, String filterAttribute) {
   var route;
 
   switch (filterAttribute) {
     case filterColor:
-      route = MaterialPageRoute(builder: (context) => Color(filter, redirect), settings: RouteSettings(name: 'Color'));
+      route = MaterialPageRoute(builder: (context) => Color(filter), settings: RouteSettings(name: 'Color'));
       break;
     case filterHabitat:
-      route = MaterialPageRoute(builder: (context) => Habitat(filter, redirect), settings: RouteSettings(name: 'Habitat'));
+      route = MaterialPageRoute(builder: (context) => Habitat(filter), settings: RouteSettings(name: 'Habitat'));
       break;
     case filterPetal:
-      route = MaterialPageRoute(builder: (context) => Petal(filter, redirect), settings: RouteSettings(name: 'Petal'));
+      route = MaterialPageRoute(builder: (context) => Petal(filter), settings: RouteSettings(name: 'Petal'));
       break;
     case filterDistribution:
-      route = MaterialPageRoute(builder: (context) => Distribution(filter, redirect), settings: RouteSettings(name: 'Distribution'));
+      route = MaterialPageRoute(builder: (context) => Distribution(filter), settings: RouteSettings(name: 'Distribution'));
       break;
     default:
       route = MaterialPageRoute(builder: (context) => PlantList(filter, '', keysReference.child(getFilterKey(filter))), settings: RouteSettings(name: 'PlantList'));

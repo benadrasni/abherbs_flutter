@@ -11,15 +11,13 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 import '../ads.dart';
 import '../main.dart';
 
 class Petal extends StatefulWidget {
   final Map<String, String> filter;
-  final MaterialPageRoute<dynamic> redirect;
-  Petal(this.filter, this.redirect);
+  Petal(this.filter);
 
   @override
   _PetalState createState() => _PetalState();
@@ -31,13 +29,6 @@ class _PetalState extends State<Petal> {
   Future<int> _countF;
   Map<String, String> _filter;
   GlobalKey<ScaffoldState> _key;
-
-  _redirect(BuildContext context) async {
-    // redirect to route from notification
-    if (widget.redirect != null) {
-      Navigator.push(context, widget.redirect);
-    }
-  }
 
   _navigate(String value) {
     var newFilter = new Map<String, String>();
@@ -89,8 +80,6 @@ class _PetalState extends State<Petal> {
     _key = new GlobalKey<ScaffoldState>();
 
     _setCount();
-
-    SchedulerBinding.instance.addPostFrameCallback((_) => _redirect(context));
   }
 
   @override
