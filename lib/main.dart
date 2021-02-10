@@ -17,7 +17,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -33,11 +32,7 @@ import 'filter/petal.dart';
 
 void _iapError() {
   Fluttertoast.showToast(
-      msg: 'IAP not prepared. Check if Platform service is available.',
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 5,
-      backgroundColor: Colors.redAccent);
+      msg: 'IAP not prepared. Check if Platform service is available.', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 5, backgroundColor: Colors.redAccent);
   Purchases.purchases = [];
 }
 
@@ -47,22 +42,17 @@ Future<void> initializeStore() async {
     _iapError();
   }
 
-  final QueryPurchaseDetailsResponse purchaseResponse =
-  await InAppPurchaseConnection.instance.queryPastPurchases();
+  final QueryPurchaseDetailsResponse purchaseResponse = await InAppPurchaseConnection.instance.queryPastPurchases();
   if (purchaseResponse.error != null) {
     var purchases = await Prefs.getStringListF(keyPurchases, []);
-    Purchases.purchases = purchases
-        .map((productId) => Purchases.offlineProducts[productId])
-        .toList();
+    Purchases.purchases = purchases.map((productId) => Purchases.offlineProducts[productId]).toList();
   } else {
     Purchases.purchases = [];
     for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
       if (Platform.isIOS && purchase.status == PurchaseStatus.error) {
         await InAppPurchaseConnection.instance.completePurchase(purchase);
       } else if (await verifyPurchase(purchase)) {
-        final pending = Platform.isIOS
-            ? purchase.pendingCompletePurchase
-            : !purchase.billingClientPurchase.isAcknowledged;
+        final pending = Platform.isIOS ? purchase.pendingCompletePurchase : !purchase.billingClientPurchase.isAcknowledged;
 
         if (pending) {
           await InAppPurchaseConnection.instance.completePurchase(purchase);
@@ -70,8 +60,7 @@ Future<void> initializeStore() async {
         Purchases.purchases.add(purchase);
       }
     }
-    Prefs.setStringList(keyPurchases,
-        Purchases.purchases.map((item) => item.productID).toList());
+    Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
   }
 
   Offline.initialize();
@@ -98,9 +87,7 @@ Future<void> initializeFlutterFire() async {
 Future<Locale> initializeLocale() async {
   return Prefs.getStringF(keyPreferredLanguage).then((String language) {
     var languageCountry = language.split('_');
-    return languageCountry.length < 2
-        ? null
-        : Locale(languageCountry[0], languageCountry[1]);
+    return languageCountry.length < 2 ? null : Locale(languageCountry[0], languageCountry[1]);
   });
 }
 
@@ -134,22 +121,16 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   runZonedGuarded(() {
-    initializeFlutterFire().then((_) {
-      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-          .then((_) async {
-        Screen.keepOn(true);
-        InAppPurchaseConnection.enablePendingPurchases();
-        await initializeStore();
-        Admob.initialize();
-        await Prefs.init();
-        Locale locale = await initializeLocale();
-        Map<String, String> filter = await initializeFilter();
-        String initialRoute = await initializeRoute();
-        runApp(App(locale, filter, initialRoute));
-      }).catchError((error) {
-        print('setOrientation: Caught error in set orientation.');
-        FirebaseCrashlytics.instance.recordError(error, null);
-      });
+    initializeFlutterFire().then((_) async {
+      Screen.keepOn(true);
+      InAppPurchaseConnection.enablePendingPurchases();
+      await initializeStore();
+      Admob.initialize();
+      await Prefs.init();
+      Locale locale = await initializeLocale();
+      Map<String, String> filter = await initializeFilter();
+      String initialRoute = await initializeRoute();
+      runApp(App(locale, filter, initialRoute));
     }).catchError((error) {
       print('FlutterFire: Caught error in FlutterFire initialization.');
       FirebaseCrashlytics.instance.recordError(error, null);
@@ -198,33 +179,31 @@ class _AppState extends State<App> {
     var isPurchase = false;
     for (PurchaseDetails purchase in purchases) {
       switch (purchase.status) {
-        case PurchaseStatus.purchased: {
-          final pending = Platform.isIOS
-              ? purchase.pendingCompletePurchase
-              : !purchase.billingClientPurchase.isAcknowledged;
-          if (pending) {
-            InAppPurchaseConnection.instance.completePurchase(purchase);
+        case PurchaseStatus.purchased:
+          {
+            final pending = Platform.isIOS ? purchase.pendingCompletePurchase : !purchase.billingClientPurchase.isAcknowledged;
+            if (pending) {
+              InAppPurchaseConnection.instance.completePurchase(purchase);
+            }
+            Purchases.purchases.add(purchase);
+            isPurchase = true;
           }
-          Purchases.purchases.add(purchase);
-          isPurchase = true;
-        }
-        break;
+          break;
 
-        case PurchaseStatus.error: {
-          if (Platform.isIOS) {
-            InAppPurchaseConnection.instance.completePurchase(purchase);
+        case PurchaseStatus.error:
+          {
+            if (Platform.isIOS) {
+              InAppPurchaseConnection.instance.completePurchase(purchase);
+            }
           }
-        }
-        break;
+          break;
 
-        default: {
-
-        }
+        default:
+          {}
       }
     }
     if (isPurchase) {
-      Prefs.setStringList(keyPurchases,
-          Purchases.purchases.map((item) => item.productID).toList());
+      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
       setState(() {});
     }
   }
@@ -240,26 +219,26 @@ class _AppState extends State<App> {
           barrierDismissible: false,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(S
-                  .of(context)
-                  .notification),
+              title: Text(S.of(context).notification),
               content: Text(message.notification.title),
               actions: <Widget>[
                 FlatButton(
-                  child: Text(S
-                      .of(context)
-                      .notification_open, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+                  child: Text(S.of(context).notification_open,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      )),
                   onPressed: () {
                     Navigator.of(context).pop();
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => PlantList({}, '', rootReference.child(path)),
-                        settings: RouteSettings(name: 'PlantList')));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList')));
                   },
                 ),
                 FlatButton(
-                  child: Text(S
-                      .of(context)
-                      .notification_close, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
+                  child: Text(S.of(context).notification_close,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      )),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -346,17 +325,15 @@ class _AppState extends State<App> {
               rootReference.child(path).keepSynced(true);
               rootReference.child(firebasePlantHeaders).keepSynced(true);
               return rootReference.child(path).once().then((DataSnapshot snapshot) {
-                var result = snapshot.value??[];
-                int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : result.values.length;
+                var result = snapshot.value ?? [];
+                int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1)) : result.values.length;
                 if (length == 0) {
                   rootReference.child(path).child("refreshMock").set("mock").catchError((error) {
                     FirebaseCrashlytics.instance.log("0-length custom list");
                   });
                 }
                 return Future<MaterialPageRoute<dynamic>>(() {
-                  return MaterialPageRoute(
-                      builder: (context) => PlantList({}, '', rootReference.child(path)),
-                      settings: RouteSettings(name: 'PlantList'));
+                  return MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList'));
                 });
               });
             }
@@ -372,9 +349,7 @@ class _AppState extends State<App> {
     }
   }
 
-  Locale localeResolution(
-      Locale savedLocale, Locale deviceLocale, Iterable<Locale> supportedLocales) {
-
+  Locale localeResolution(Locale savedLocale, Locale deviceLocale, Iterable<Locale> supportedLocales) {
     if (savedLocale != null) {
       return savedLocale;
     }
@@ -382,8 +357,7 @@ class _AppState extends State<App> {
     Locale resultLocale;
     Map<String, Locale> defaultLocale = {};
     for (Locale locale in supportedLocales) {
-      if (locale.languageCode == deviceLocale.languageCode &&
-          locale.countryCode != null && locale.countryCode == deviceLocale.countryCode) {
+      if (locale.languageCode == deviceLocale.languageCode && locale.countryCode != null && locale.countryCode == deviceLocale.countryCode) {
         resultLocale = locale;
         break;
       }
@@ -406,11 +380,9 @@ class _AppState extends State<App> {
       resultLocale = defaultLocale[languageEnglish];
     }
 
-    Prefs.setStringList(keyLanguageAndCountry,
-        [resultLocale.languageCode, resultLocale.countryCode]);
+    Prefs.setStringList(keyLanguageAndCountry, [resultLocale.languageCode, resultLocale.countryCode]);
     return resultLocale;
   }
-
 
   @override
   void initState() {
@@ -425,11 +397,7 @@ class _AppState extends State<App> {
     }, onError: (error) {
       _logFailedPurchaseEvent();
       if (mounted) {
-        Fluttertoast.showToast(
-            msg: S.of(context).product_purchase_failed,
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 5);
+        Fluttertoast.showToast(msg: S.of(context).product_purchase_failed, toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 5);
       }
     });
 
