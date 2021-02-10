@@ -16,13 +16,13 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localized_countries/flutter_localized_countries.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:screen/screen.dart';
-import 'package:flutter_localized_countries/flutter_localized_countries.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'filter/color.dart';
 import 'filter/distribution.dart';
@@ -428,8 +428,13 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    Locale deviceLocale;
+    List<String> localeHelper = Platform.localeName?.split("_");
+    if (localeHelper != null) {
+      deviceLocale = Locale(localeHelper[0], localeHelper.length > 1 ? localeHelper[1] : null);
+    }
     return MaterialApp(
-      locale: localeResolution(_locale, Locale(Platform.localeName), S.delegate.supportedLocales),
+      locale: localeResolution(_locale, deviceLocale, S.delegate.supportedLocales),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         S.delegate,
