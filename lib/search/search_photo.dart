@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/signin/sign_in.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';

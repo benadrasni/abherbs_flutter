@@ -12,7 +12,7 @@ import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
 import 'package:abherbs_flutter/search/search_photo.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
-import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity/connectivity.dart';

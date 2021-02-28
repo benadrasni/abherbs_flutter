@@ -5,7 +5,7 @@ import 'package:abherbs_flutter/legend/legend.dart';
 import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
-import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/signin/sign_in.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';

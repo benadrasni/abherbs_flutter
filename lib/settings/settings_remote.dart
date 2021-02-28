@@ -11,6 +11,8 @@ class RemoteConfiguration {
     remoteConfig.setDefaults(<String, dynamic>{
       remoteConfigIPNIServer: 'http://plantsoftheworldonline.org/',
       remoteConfigIPNIServerWithTaxon: 'http://plantsoftheworldonline.org/taxon/urn:lsid:ipni.org:names:',
+      remoteConfigSearchByNameVideo: 'https://youtu.be/dapaB7V5Xo0',
+      remoteConfigSearchByPhotoVideo: 'https://youtu.be/UaKBnVXavmU'
     });
     await remoteConfig.fetch();
     await remoteConfig.activateFetched();

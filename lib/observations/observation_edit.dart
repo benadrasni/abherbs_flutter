@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/settings/offline.dart';
-import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';

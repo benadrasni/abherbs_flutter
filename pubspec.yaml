@@ -7,7 +7,7 @@ description: Flutter version of abherbs
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 6.6.3+663
+version: 6.6.4+664
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -20,26 +20,27 @@ dependencies:
   shared_preferences: 0.5.12+4
   firebase_messaging: 8.0.0-dev.14
   firebase_analytics: 7.0.1
-  firebase_auth: 0.20.0+1
+  firebase_auth: 0.20.1
   firebase_storage: 7.0.0
   firebase_database: 6.0.0
   firebase_remote_config: 0.6.0
   firebase_crashlytics: 0.4.0+1
   firebase_performance: 0.5.0+1
   #firebase_ml_vision: 0.9.9
-  google_sign_in: 4.5.6
+  google_sign_in: 4.5.9
   apple_sign_in: 0.1.0
   device_info: 1.0.0
   in_app_purchase: 0.3.5+1
   cached_network_image: 2.5.0
   url_launcher: 5.7.10
   http: 0.12.2
-  fluttertoast: 7.1.6
+  share: 0.6.5+4
+  fluttertoast: 7.1.8
   diacritic: 0.1.1
   path_provider: 1.6.27
   percent_indicator: 2.1.9+1
   package_info: 0.4.3+4
-  google_maps_flutter: 1.1.1
+  google_maps_flutter: 1.2.0
   image_picker: 0.6.7+22
   exif: 1.0.3
   datetime_picker_formfield: 1.0.0

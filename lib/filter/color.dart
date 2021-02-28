@@ -7,7 +7,7 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
-import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
