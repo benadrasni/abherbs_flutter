@@ -16,17 +16,18 @@ import 'package:abherbs_flutter/observations/observation_logs.dart';
 import 'package:abherbs_flutter/observations/observations_plant.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
-import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:connectivity/connectivity.dart';
+import 'package:share/share.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../main.dart';
@@ -54,7 +55,6 @@ class _PlantDetailState extends State<PlantDetail> {
   Future<PlantTranslation> _plantTranslationF;
   Future<bool> _isFavoriteF;
   int _currentIndex;
-  bool _isOriginal;
   GlobalKey<ScaffoldState> _key;
   bool _isPublic;
   double _fontSize;
@@ -70,11 +70,8 @@ class _PlantDetailState extends State<PlantDetail> {
     });
   }
 
-  onChangeTranslation(bool isOriginal) {
-    setState(() {
-      _isOriginal = isOriginal;
-      _plantTranslationF = _getTranslation();
-    });
+  onShare() {
+    Share.share('https://whatsthatflower.com/?plant=' + widget.plant.name + '&lang=' + widget.myLocale.languageCode, subject: widget.plant.name);
   }
 
   Future<PlantTranslation> _getTranslation() {
@@ -84,63 +81,40 @@ class _PlantDetailState extends State<PlantDetail> {
         return plantTranslation;
       } else {
         plantTranslation.isTranslatedWithGT = true;
-        if (_isOriginal) {
-          return translationsReference
-              .child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish)
-              .child(widget.plant.name)
-              .once()
-              .then((DataSnapshot snapshot) {
-            var plantTranslationOriginal = PlantTranslation.fromJson(snapshot.value);
-            return plantTranslation.mergeDataWith(plantTranslationOriginal);
-          });
-        } else {
-          return translationsReference
-              .child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix)
-              .child(widget.plant.name)
-              .once()
-              .then((DataSnapshot snapshot) {
-            var plantTranslationGT = PlantTranslation.copy(plantTranslation);
-            if (snapshot.value != null) {
-              plantTranslationGT = PlantTranslation.fromJson(snapshot.value);
-              plantTranslationGT.mergeWith(plantTranslation);
-            }
-            if (plantTranslationGT.label == null) {
-              plantTranslationGT.label = widget.plant.name;
-            }
-            if (plantTranslationGT.isTranslated()) {
-              plantTranslationGT.isTranslatedWithGT = true;
-              return plantTranslationGT;
-            } else {
-              return translationsReference
-                  .child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish)
-                  .child(widget.plant.name)
-                  .once()
-                  .then((DataSnapshot snapshot) {
-                var plantTranslationOriginal = PlantTranslation.fromJson(snapshot.value);
-                var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
-                uri += '&source=' + (languageCzech == widget.myLocale.languageCode ? languageSlovak : languageEnglish);
-                uri += '&target=' + getLanguageCode(widget.myLocale.languageCode);
-                for (var text in plantTranslation.getTextsToTranslate(plantTranslationOriginal)) {
-                  uri += '&q=' + text;
+        return translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name).once().then((DataSnapshot snapshot) {
+          var plantTranslationGT = PlantTranslation.copy(plantTranslation);
+          if (snapshot.value != null) {
+            plantTranslationGT = PlantTranslation.fromJson(snapshot.value);
+            plantTranslationGT.mergeWith(plantTranslation);
+          }
+          if (plantTranslationGT.label == null) {
+            plantTranslationGT.label = widget.plant.name;
+          }
+          if (plantTranslationGT.isTranslated()) {
+            plantTranslationGT.isTranslatedWithGT = true;
+            return plantTranslationGT;
+          } else {
+            return translationsReference.child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish).child(widget.plant.name).once().then((DataSnapshot snapshot) {
+              var plantTranslationOriginal = PlantTranslation.fromJson(snapshot.value);
+              var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
+              uri += '&source=' + (languageCzech == widget.myLocale.languageCode ? languageSlovak : languageEnglish);
+              uri += '&target=' + getLanguageCode(widget.myLocale.languageCode);
+              for (var text in plantTranslation.getTextsToTranslate(plantTranslationOriginal)) {
+                uri += '&q=' + text;
+              }
+              return http.get(uri).then((response) {
+                if (response.statusCode == 200) {
+                  Translations translations = Translations.fromJson(json.decode(response.body));
+                  PlantTranslation onlyGoogleTranslation = plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
+                  translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name).set(onlyGoogleTranslation.toJson());
+                  return plantTranslation;
+                } else {
+                  return plantTranslation.mergeWith(plantTranslationOriginal);
                 }
-                return http.get(uri).then((response) {
-                  if (response.statusCode == 200) {
-                    Translations translations = Translations.fromJson(json.decode(response.body));
-                    PlantTranslation onlyGoogleTranslation =
-                        plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
-                    translationsReference
-                        .child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix)
-                        .child(widget.plant.name)
-                        .set(onlyGoogleTranslation.toJson());
-                    return plantTranslation;
-                  } else {
-                    return plantTranslation.mergeWith(plantTranslationOriginal);
-                  }
-                });
               });
-            }
-          });
-        }
+            });
+          }
+        });
       }
     });
   }
@@ -168,7 +142,7 @@ class _PlantDetailState extends State<PlantDetail> {
       case galleryIndex:
         return getGallery(context, widget.plant);
       case infoIndex:
-        return getInfo(context, widget.myLocale, _isOriginal, widget.plant, _plantTranslationF, this.onChangeTranslation, _fontSize, _key);
+        return getInfo(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize, _key);
       case taxonomyIndex:
         return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize);
       case observationIndex:
@@ -185,9 +159,7 @@ class _PlantDetailState extends State<PlantDetail> {
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => ObservationLogs(_currentUser, Localizations.localeOf(context), 0),
-            settings: RouteSettings(name: 'ObservationLogs')),
+        MaterialPageRoute(builder: (context) => ObservationLogs(_currentUser, Localizations.localeOf(context), 0), settings: RouteSettings(name: 'ObservationLogs')),
       );
     }
   }
@@ -213,7 +185,6 @@ class _PlantDetailState extends State<PlantDetail> {
     _plantTranslationF = _getTranslation();
 
     _currentIndex = 0;
-    _isOriginal = false;
     _key = new GlobalKey<ScaffoldState>();
     _isPublic = false;
     _fontSize = Prefs.getDouble(keyFontSize, defaultFontSize);
@@ -224,7 +195,7 @@ class _PlantDetailState extends State<PlantDetail> {
   @override
   void dispose() {
     _listener.cancel();
-    for(YoutubePlayerController controller in getYoutubeControllers()) {
+    for (YoutubePlayerController controller in getYoutubeControllers()) {
       controller.close();
     }
     super.dispose();
@@ -281,35 +252,44 @@ class _PlantDetailState extends State<PlantDetail> {
               ),
             )
           : _currentIndex == infoIndex || _currentIndex == taxonomyIndex
-          ? AppBar(
-              title: GestureDetector(
-                child: Text(widget.plant.name),
-                onLongPress: () {
-                  Clipboard.setData(new ClipboardData(text: widget.plant.name));
-                  _key.currentState.showSnackBar(SnackBar(
-                    content: Text(S.of(context).snack_copy),
-                  ));
-                },
-              ),
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.format_size),
-                  onPressed: () {
-                    onChangeFontSize();
-                  },
+              ? AppBar(
+                  title: GestureDetector(
+                    child: Text(widget.plant.name),
+                    onLongPress: () {
+                      Clipboard.setData(new ClipboardData(text: widget.plant.name));
+                      _key.currentState.showSnackBar(SnackBar(
+                        content: Text(S.of(context).snack_copy),
+                      ));
+                    },
+                  ),
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.format_size),
+                      onPressed: () {
+                        onChangeFontSize();
+                      },
+                    ),
+                  ],
+                )
+              : AppBar(
+                  title: GestureDetector(
+                    child: Text(widget.plant.name),
+                    onLongPress: () {
+                      Clipboard.setData(new ClipboardData(text: widget.plant.name));
+                      _key.currentState.showSnackBar(SnackBar(
+                        content: Text(S.of(context).snack_copy),
+                      ));
+                    },
+                  ),
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.share),
+                      onPressed: () {
+                        onShare();
+                      },
+                    ),
+                  ],
                 ),
-              ],
-            )
-          : AppBar(
-              title: GestureDetector(
-              child: Text(widget.plant.name),
-              onLongPress: () {
-                Clipboard.setData(new ClipboardData(text: widget.plant.name));
-                _key.currentState.showSnackBar(SnackBar(
-                  content: Text(S.of(context).snack_copy),
-                ));
-              },
-            )),
       drawer: AppDrawer(_currentUser, widget.filter, null),
       body: _getBody(context),
       floatingActionButton: Container(
@@ -326,9 +306,7 @@ class _PlantDetailState extends State<PlantDetail> {
                       var observation = Observation(widget.plant.name);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => ObservationEdit(_currentUser, widget.myLocale, observation),
-                            settings: RouteSettings(name: 'ObservationEdit')),
+                        MaterialPageRoute(builder: (context) => ObservationEdit(_currentUser, widget.myLocale, observation), settings: RouteSettings(name: 'ObservationEdit')),
                       ).then((value) {
                         if (value != null && value && _key.currentState != null) {
                           _key.currentState.showSnackBar(SnackBar(
@@ -340,8 +318,7 @@ class _PlantDetailState extends State<PlantDetail> {
                     } else {
                       if (_currentUser != null) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          usersReference.child(_currentUser.firebaseUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).set(
-                              snapshot.data ? null : 1).then((value) {
+                          usersReference.child(_currentUser.firebaseUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).set(snapshot.data ? null : 1).then((value) {
                             if (mounted) {
                               setState(() {
                                 _isFavoriteF = _setFavorite();
@@ -356,7 +333,9 @@ class _PlantDetailState extends State<PlantDetail> {
                   },
                   child: _currentIndex == observationIndex
                       ? Icon(Icons.add)
-                      : snapshot.connectionState == ConnectionState.done && snapshot.data != null && snapshot.data ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
+                      : snapshot.connectionState == ConnectionState.done && snapshot.data != null && snapshot.data
+                          ? Icon(Icons.favorite)
+                          : Icon(Icons.favorite_border),
                 );
               }),
         ),

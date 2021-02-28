@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/signin/email.dart';
 import 'package:abherbs_flutter/signin/phone.dart';
 import 'package:abherbs_flutter/utils/utils.dart';

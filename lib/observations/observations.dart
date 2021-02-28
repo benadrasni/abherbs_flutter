@@ -6,7 +6,7 @@ import 'package:abherbs_flutter/observations/observation_upload.dart';
 import 'package:abherbs_flutter/observations/observation_view.dart';
 import 'package:abherbs_flutter/observations/upload.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
 import 'package:connectivity/connectivity.dart';

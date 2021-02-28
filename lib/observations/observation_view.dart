@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/observations/observation_map.dart';
-import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';

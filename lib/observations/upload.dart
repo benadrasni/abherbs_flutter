@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
-import 'package:abherbs_flutter/signin/authetication.dart';
+import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_database/firebase_database.dart';

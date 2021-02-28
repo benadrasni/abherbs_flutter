@@ -29,8 +29,7 @@ const String sourceUsda = "plants.usda.gov";
 const String sourceUsfs = "forestryimages.org";
 const String sourceTelaBotanica = "tela-botanica.org";
 
-Widget getInfo(BuildContext context, Locale myLocale, bool isOriginal, Plant plant, Future<PlantTranslation> _plantTranslationF, Function(bool) onChangeTranslation, double _fontSize,
-    GlobalKey<ScaffoldState> key) {
+Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize, GlobalKey<ScaffoldState> key) {
   String language = Localizations.localeOf(context).languageCode;
 
   TextStyle _defaultTextStyle = TextStyle(
