@@ -71,7 +71,7 @@ class _PlantDetailState extends State<PlantDetail> {
   }
 
   onShare() {
-    Share.share('https://whatsthatflower.com/?plant=' + widget.plant.name + '&lang=' + widget.myLocale.languageCode, subject: widget.plant.name);
+    Share.share(Uri.encodeFull('https://whatsthatflower.com/?plant=' + widget.plant.name + '&lang=' + widget.myLocale.languageCode), subject: widget.plant.name);
   }
 
   Future<PlantTranslation> _getTranslation() {
