@@ -34,7 +34,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-9168609554680870~7838402895</string>
+	<string>ca-app-pub-4417568961191754~9892103015</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
@@ -81,7 +81,13 @@
             <key>SKAdNetworkIdentifier</key>
             <string>n38lu8286q.skadnetwork</string>
         </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>cstr6suwn9.skadnetwork</string>
+        </dict>
     </array>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>This identifier will be used to deliver personalized ads to you.</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
 </dict>
