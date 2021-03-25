@@ -1,4 +1,6 @@
 {
+  "@@locale" : "ru_RU",
+
   "legend": "Легенда",
   "legend_flower_1": "зрелый цветок",
   "legend_flower_2": "рыльце",

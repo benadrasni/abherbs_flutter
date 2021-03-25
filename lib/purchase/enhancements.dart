@@ -46,7 +46,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
 
   Future<void> _logCancelledPurchaseEvent(key, String productId) async {
     if (key.currentState != null && key.currentState.mounted) {
-      key.currentState.showSnackBar(new SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: new Text(S.of(context).product_purchase_failed),
       ));
     }
@@ -78,8 +78,10 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     }
     String value = RemoteConfiguration.remoteConfig.getString(config);
     if (value.isNotEmpty) {
-      button = FlatButton(
-        color: Colors.lightBlueAccent,
+      button = TextButton(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.lightBlueAccent, // background
+        ),
         child: Text(S
             .of(context)
             .video,
@@ -98,8 +100,10 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
   List<Widget> _getButtons(ProductDetails product, bool isPurchased, key) {
     var buttons = <Widget>[];
     buttons.add(
-      RaisedButton(
-        color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor, // background
+        ),
         onPressed: () {
           if (!isPurchased) {
             _connection.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: product)).then((value) {
@@ -121,8 +125,10 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     if (isPurchased) {
       switch (product.id) {
         case productOffline:
-          buttons.add(RaisedButton(
-            color: Theme.of(context).accentColor,
+          buttons.add(ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Theme.of(context).accentColor, // background
+            ),
             onPressed: () {
               Navigator.push(
                 context,
@@ -136,8 +142,10 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           ));
           break;
         case productCustomFilter:
-          buttons.add(RaisedButton(
-            color: Theme.of(context).accentColor,
+          buttons.add(ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Theme.of(context).accentColor, // background
+            ),
             onPressed: () {
               Navigator.push(
                 context,
@@ -152,8 +160,10 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           break;
         case productObservations:
           if (Purchases.hasLifetimeSubscription == null || !Purchases.hasLifetimeSubscription) {
-            buttons.add(RaisedButton(
-              color: Theme.of(context).accentColor,
+            buttons.add(ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Theme.of(context).accentColor, // background
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -206,7 +216,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                 _cards.add(Card(
                   child: Container(
                     padding: EdgeInsets.all(10.0),
-                    child: FlatButton(
+                    child: TextButton(
                       onPressed: () async {
                         final QueryPurchaseDetailsResponse purchaseResponse = await _connection.queryPastPurchases();
                         if (purchaseResponse.error != null) {

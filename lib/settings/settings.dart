@@ -135,7 +135,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           title: Text(S.of(context).offline_title),
           content: Text(S.of(context).offline_delete_message),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).yes.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -147,7 +147,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Offline.delete();
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).no.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -385,8 +385,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           S.of(context).offline_title,
                           style: titleTextStyle,
                         ),
-                        RaisedButton(
-                          color: Theme.of(context).accentColor,
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Theme.of(context).accentColor, // background
+                          ),
                           child: Text(S.of(context).offline_download),
                           onPressed: () {
                             _offlineDownloadDialog();

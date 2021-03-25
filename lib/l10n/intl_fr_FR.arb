@@ -1,4 +1,6 @@
 {
+  "@@locale" : "fr_FR",
+
   "legend": "Légende",
   "legend_flower_1": "fleur épanouie",
   "legend_flower_2": "stigmate",

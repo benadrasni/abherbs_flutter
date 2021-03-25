@@ -1,4 +1,6 @@
 {
+  "@@locale" : "lv_LV",
+
   "legend": "Leģenda",
   "legend_flower_1": "mature flower",
   "legend_flower_2": "stigma",

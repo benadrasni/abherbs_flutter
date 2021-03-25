@@ -98,8 +98,11 @@ class _ObservationViewState extends State<ObservationView> {
     );
 
     widgets.add(
-      FlatButton(
-        padding: EdgeInsets.all(5.0),
+      TextButton(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(
+              EdgeInsets.all(5.0)),
+        ),
         child: CachedNetworkImage(
           fit: BoxFit.contain,
           width: mapWidth,

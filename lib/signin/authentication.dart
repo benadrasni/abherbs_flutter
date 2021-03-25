@@ -72,6 +72,7 @@ class Auth {
             if (Purchases.hasOldVersion) {
               _logOldVersionEvent();
             }
+            Prefs.setBool(keyOldVersion, Purchases.hasOldVersion);
           }).catchError((error) {
             Purchases.hasOldVersion = false;
           });
@@ -103,6 +104,7 @@ class Auth {
         if (Purchases.hasLifetimeSubscription == null) {
           usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeLifetimeSubscription).once().then((snapshot) {
             Purchases.hasLifetimeSubscription = snapshot.value != null && snapshot.value;
+            Prefs.setBool(keyLifetimeSubscription, Purchases.hasLifetimeSubscription);
           }).catchError((error) {
             Purchases.hasLifetimeSubscription = false;
           });

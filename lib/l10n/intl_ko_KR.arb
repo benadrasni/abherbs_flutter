@@ -1,4 +1,6 @@
 {
+  "@@locale" : "ko_KR",
+
   "legend": "전설",
   "legend_flower_1": "mature flower",
   "legend_flower_2": "stigma",

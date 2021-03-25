@@ -64,7 +64,7 @@ class _SignInScreenState extends State<SignInScreen> {
       }
     } catch (e) {
       if (key.currentState != null && key.currentState.mounted) {
-        key.currentState.showSnackBar(new SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: new Text(S.of(context).auth_sign_in_failed),
         ));
       }
@@ -96,7 +96,7 @@ class _SignInScreenState extends State<SignInScreen> {
             print('Signed in: $userId');
           } catch (e) {
             if (key.currentState != null && key.currentState.mounted) {
-              key.currentState.showSnackBar(new SnackBar(
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: new Text(S.of(context).auth_sign_in_failed),
               ));
             }
@@ -104,7 +104,7 @@ class _SignInScreenState extends State<SignInScreen> {
           break;
         case AuthorizationStatus.error:
           if (key.currentState != null && key.currentState.mounted) {
-            key.currentState.showSnackBar(new SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: new Text(S.of(context).auth_sign_in_failed),
             ));
           }
@@ -112,7 +112,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
         case AuthorizationStatus.cancelled:
           if (key.currentState != null && key.currentState.mounted) {
-            key.currentState.showSnackBar(new SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: new Text(S.of(context).auth_sign_in_failed),
             ));
           }
@@ -120,7 +120,7 @@ class _SignInScreenState extends State<SignInScreen> {
       }
     } catch (error) {
       if (key.currentState != null && key.currentState.mounted) {
-        key.currentState.showSnackBar(new SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: new Text(S.of(context).auth_sign_in_failed),
         ));
       }
@@ -172,8 +172,10 @@ class _SignInScreenState extends State<SignInScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
-                child: RaisedButton(
-                    color: Color.fromRGBO(219, 68, 55, 1.0),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromRGBO(219, 68, 55, 1.0), // background
+                    ),
                     child: Row(
                       children: [
                         Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/email-logo.png')),
@@ -191,8 +193,10 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
-                child: RaisedButton(
-                    color: Colors.green,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green, // background
+                    ),
                     child: Row(
                       children: [
                         Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/phone-logo.png')),
@@ -210,8 +214,11 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
-                child: RaisedButton(
-                    color: Colors.white,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white, // background
+                      onPrimary: Colors.black, // foreground
+                    ),
                     child: Row(
                       children: [
                         Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/go-logo.png')),
@@ -235,8 +242,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       if (snapshot.data) {
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
-                          child: RaisedButton(
-                              color: Colors.white,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.white, // background
+                                onPrimary: Colors.black, // foreground
+                              ),
                               child: Row(
                                 children: [
                                   Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/apple-logo.png')),
@@ -264,22 +274,22 @@ class _SignInScreenState extends State<SignInScreen> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                 child: Column(children: [
-                  FlatButton(
+                  ElevatedButton(
                     onPressed: () {
                       launchURL(termsOfUseUrl);
                     },
                     child: Text(
                       S.of(context).terms_of_use,
-                      style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
+                      style: TextStyle(fontSize: 14.0),
                     ),
                   ),
-                  FlatButton(
+                  ElevatedButton(
                     onPressed: () {
                       launchURL(privacyPolicyUrl);
                     },
                     child: Text(
                       S.of(context).privacy_policy,
-                      style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
+                      style: TextStyle(fontSize: 14.0),
                     ),
                   ),
                 ]),

@@ -4,7 +4,7 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_plyr_iframe/youtube_plyr_iframe.dart';
 
 import '../ads.dart';
 
@@ -39,9 +39,10 @@ Widget getGallery(BuildContext context, Plant plant) {
           Positioned(
             bottom: 0,
             right: 0,
-            child: FlatButton(
-              minWidth: 100,
-              height: 10,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                minimumSize: Size(100, 10),
+              ),
               child: Text(''),
               onPressed: () {
                 launchURL(url);

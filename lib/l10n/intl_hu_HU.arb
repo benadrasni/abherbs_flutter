@@ -1,4 +1,6 @@
 {
+  "@@locale" : "hu_HU",
+
   "legend": "Jelmagyarázat",
   "legend_flower_1": "érett virág",
   "legend_flower_2": "bibe",

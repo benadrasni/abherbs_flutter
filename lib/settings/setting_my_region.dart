@@ -21,6 +21,7 @@ class _SettingMyRegionState extends State<SettingMyRegion> {
 
   Widget _getBody(BuildContext context) {
     var _firstLevelTextStyle = TextStyle(
+      color: Colors.black,
       fontWeight: FontWeight.bold,
       fontSize: 22.0,
     );
@@ -37,8 +38,11 @@ class _SettingMyRegionState extends State<SettingMyRegion> {
 
     var regionWidgets = <Widget>[];
     regionWidgets.addAll(regions.map((List<String> items) {
-      return FlatButton(
-        padding: EdgeInsets.only(bottom: 5.0),
+      return TextButton(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(
+              EdgeInsets.only(bottom: 5.0)),
+        ),
         child: Stack(alignment: Alignment.center, children: [
           Image(
             image: AssetImage(items[1]),
@@ -54,8 +58,11 @@ class _SettingMyRegionState extends State<SettingMyRegion> {
       );
     }).toList());
 
-    regionWidgets.add(FlatButton(
-      padding: EdgeInsets.only(bottom: 5.0),
+    regionWidgets.add(TextButton(
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all(
+            EdgeInsets.only(bottom: 5.0)),
+      ),
       child: Stack(alignment: Alignment.center, children: [
         Image(
           image: AssetImage('res/images/wgsrpd_antarctic.webp'),

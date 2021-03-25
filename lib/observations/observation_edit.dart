@@ -95,7 +95,7 @@ class _ObservationEditState extends State<ObservationEdit> {
         Map<String, IfdTag> exifDataFile = await readExifFromBytes(await file.readAsBytes());
         IfdTag dateTimeFile = exifDataFile['EXIF DateTimeOriginal'] ?? exifDataFile['Image DateTime'];
         if (dateTime != null && dateTimeFile != null && dateTime.toString() == dateTimeFile.toString()) {
-          _key.currentState.showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(S.of(context).observation_photo_duplicate),
           ));
           return;
@@ -262,8 +262,10 @@ class _ObservationEditState extends State<ObservationEdit> {
     );
 
     widgets.add(
-      FlatButton(
-        padding: EdgeInsets.all(5.0),
+      TextButton(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(EdgeInsets.all(5.0)),
+        ),
         child: CachedNetworkImage(
           fit: BoxFit.contain,
           width: mapWidth,

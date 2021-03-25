@@ -41,7 +41,7 @@ class _Distribution2State extends State<Distribution2> {
         if (snapshot.value != null && snapshot.value > 0) {
           Navigator.push(context, getNextFilterRoute(context, newFilter));
         } else {
-          _key.currentState.showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(S.of(context).snack_no_flowers),
           ));
         }
@@ -58,6 +58,7 @@ class _Distribution2State extends State<Distribution2> {
   Widget _getBody(BuildContext context) {
     var _secondLevelTextStyle = TextStyle(
       fontSize: 20.0,
+      color: Colors.black,
     );
 
     var subRegions = <List<String>>[];
@@ -140,7 +141,7 @@ class _Distribution2State extends State<Distribution2> {
             crossAxisSpacing: 3.0,
             children: subRegions.map((List<String> items) {
               return GridTile(
-                child: FlatButton(
+                child: TextButton(
                   child: Stack(alignment: Alignment.center, children: [
                     Image(
                       image: AssetImage(items[1]),

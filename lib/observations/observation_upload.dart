@@ -66,7 +66,7 @@ class _ObservationUploadState extends State<ObservationUpload> {
           S.of(context).observation_upload_title
         );
         _content = Text(S.of(context).observation_upload_message(_observationsRemain.toString()));
-        _actions.add(FlatButton(
+        _actions.add(TextButton(
           child: Text(S.of(context).yes.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Upload.uploadPaused = false;
@@ -76,7 +76,7 @@ class _ObservationUploadState extends State<ObservationUpload> {
             Upload.upload(widget.currentUser, this.onObservationUpload, this.onObservationUploadFail, this.onUploadStart, this.onUploadFinish, this.onUploadFail);
           },
         ));
-        _actions.add(FlatButton(
+        _actions.add(TextButton(
           child: Text(S.of(context).no.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Navigator.of(context).pop();
@@ -95,7 +95,7 @@ class _ObservationUploadState extends State<ObservationUpload> {
           backgroundColor: Theme.of(context).buttonColor,
           progressColor: Theme.of(context).accentColor,
         );
-        _actions.add(FlatButton(
+        _actions.add(TextButton(
           child: Text(S.of(context).pause.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Upload.uploadPaused = true;
@@ -108,7 +108,7 @@ class _ObservationUploadState extends State<ObservationUpload> {
           S.of(context).observation_upload_title
         );
         _content = Text(S.of(context).observation_upload_success);
-        _actions.add(FlatButton(
+        _actions.add(TextButton(
           child: Text(S.of(context).close.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Navigator.of(context).pop();
@@ -120,7 +120,7 @@ class _ObservationUploadState extends State<ObservationUpload> {
           S.of(context).observation_upload_title,
         );
         _content = Text(S.of(context).observation_upload_fail);
-        _actions.add(FlatButton(
+        _actions.add(TextButton(
           child: Text(S.of(context).close.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Navigator.of(context).pop();

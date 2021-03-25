@@ -69,7 +69,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
                 settings: RouteSettings(name: 'ObservationEdit')),
           ).then((value) {
             if (value != null && value && widget.parentKey.currentState != null) {
-              widget.parentKey.currentState.showSnackBar(SnackBar(
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text(S.of(context).observation_saved),
               ));
             }
@@ -79,8 +79,11 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
     ));
 
     widgets.add(
-      FlatButton(
-        padding: EdgeInsets.all(5.0),
+      TextButton(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(
+              EdgeInsets.all(5.0)),
+        ),
         child: CachedNetworkImage(
           fit: BoxFit.contain,
           width: mapWidth,

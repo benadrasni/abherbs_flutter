@@ -1,4 +1,6 @@
 {
+  "@@locale" : "en_UK",
+
   "filter_color": "colour",
   "color_message": "What's the colour of the flower? Choose the closest one.",
 

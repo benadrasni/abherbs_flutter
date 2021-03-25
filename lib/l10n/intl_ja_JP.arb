@@ -1,4 +1,6 @@
 {
+  "@@locale" : "ja_JP",
+
   "legend": "伝説",
   "legend_flower_1": "成熟した花",
   "legend_flower_2": "stigma",

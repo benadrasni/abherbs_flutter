@@ -42,7 +42,7 @@ class _HabitatState extends State<Habitat> {
         if (snapshot.value != null && snapshot.value > 0) {
           Navigator.push(context, getNextFilterRoute(context, newFilter));
         } else {
-          _key.currentState.showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(S.of(context).snack_no_flowers),
           ));
         }
@@ -115,8 +115,11 @@ class _HabitatState extends State<Habitat> {
           ListView(
             padding: EdgeInsets.all(5.0),
             children: [
-              FlatButton(
-                padding: EdgeInsets.only(bottom: 5.0),
+              TextButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                      EdgeInsets.only(bottom: 5.0)),
+                ),
                 child: Stack(alignment: Alignment.center, children: [
                   Image(
                     image: AssetImage('res/images/meadow.webp'),
@@ -131,8 +134,11 @@ class _HabitatState extends State<Habitat> {
                   _navigate('1');
                 },
               ),
-              FlatButton(
-                padding: EdgeInsets.only(bottom: 5.0),
+              TextButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                      EdgeInsets.only(bottom: 5.0)),
+                ),
                 child: Stack(alignment: Alignment.center, children: [
                   Image(
                     image: AssetImage('res/images/garden.webp'),
@@ -147,8 +153,11 @@ class _HabitatState extends State<Habitat> {
                   _navigate('2');
                 },
               ),
-              FlatButton(
-                padding: EdgeInsets.only(bottom: 5.0),
+              TextButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                      EdgeInsets.only(bottom: 5.0)),
+                ),
                 child: Stack(alignment: Alignment.center, children: [
                   Image(
                     image: AssetImage('res/images/swamp.webp'),
@@ -163,8 +172,11 @@ class _HabitatState extends State<Habitat> {
                   _navigate('3');
                 },
               ),
-              FlatButton(
-                padding: EdgeInsets.only(bottom: 5.0),
+              TextButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                      EdgeInsets.only(bottom: 5.0)),
+                ),
                 child: Stack(alignment: Alignment.center, children: [
                   Image(
                     image: AssetImage('res/images/forest.webp'),
@@ -179,8 +191,11 @@ class _HabitatState extends State<Habitat> {
                   _navigate('4');
                 },
               ),
-              FlatButton(
-                padding: EdgeInsets.only(bottom: 5.0),
+              TextButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                      EdgeInsets.only(bottom: 5.0)),
+                ),
                 child: Stack(alignment: Alignment.center, children: [
                   Image(
                     image: AssetImage('res/images/mountain.webp'),
@@ -195,8 +210,11 @@ class _HabitatState extends State<Habitat> {
                   _navigate('5');
                 },
               ),
-              FlatButton(
-                padding: EdgeInsets.only(bottom: 5.0),
+              TextButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                      EdgeInsets.only(bottom: 5.0)),
+                ),
                 child: Stack(alignment: Alignment.center, children: [
                   Image(
                     image: AssetImage('res/images/tree.webp'),

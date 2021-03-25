@@ -1,4 +1,6 @@
 {
+  "@@locale" : "zh_TW",
+
   "legend": "說明",
   "legend_flower_1": "成熟花朵",
   "legend_flower_2": "柱头",
