@@ -1,4 +1,6 @@
 {
+  "@@locale" : "nl_NL",
+
   "legend": "Legenda",
   "legend_flower_1": "volgroeide bloem",
   "legend_flower_2": "stempel",

@@ -1,4 +1,6 @@
 {
+  "@@locale" : "de_DE",
+
   "legend": "Legende",
   "legend_flower_1": "Vollentwickelte Blüte",
   "legend_flower_2": "Narbe (Stigma)",

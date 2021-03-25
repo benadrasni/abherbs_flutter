@@ -31,7 +31,7 @@ class _SubscriptionState extends State<Subscription> {
 
   Future<void> _logCancelledSubscriptionEvent(key, String productId) async {
     if (key.currentState != null && key.currentState.mounted) {
-      key.currentState.showSnackBar(new SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: new Text(S.of(context).product_subscribe_failed),
       ));
     }
@@ -111,7 +111,7 @@ class _SubscriptionState extends State<Subscription> {
                       ));
                 }).toList();
                 texts.add(Container(
-                    child: FlatButton(
+                    child: TextButton(
                   onPressed: () async {
                     final QueryPurchaseDetailsResponse purchaseResponse = await _connection.queryPastPurchases();
                     if (purchaseResponse.error != null) {
@@ -175,8 +175,10 @@ class _SubscriptionState extends State<Subscription> {
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(height: 10.0),
-                        RaisedButton(
-                          color: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor,
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor, // background
+                          ),
                           onPressed: () {
                             if (!isPurchased) {
                               _connection.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: subscription)).then((value) {
@@ -210,7 +212,7 @@ class _SubscriptionState extends State<Subscription> {
                           textAlign: TextAlign.justify,
                           style: TextStyle(fontSize: 16.0),
                         ),
-                        FlatButton(
+                        TextButton(
                           onPressed: () {
                             launchURL(termsOfUseUrl);
                           },
@@ -219,7 +221,7 @@ class _SubscriptionState extends State<Subscription> {
                             style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
                           ),
                         ),
-                        FlatButton(
+                        TextButton(
                           onPressed: () {
                             launchURL(privacyPolicyUrl);
                           },

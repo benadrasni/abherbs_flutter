@@ -83,7 +83,6 @@ class _PlantDetailEditState extends State<PlantDetailEdit> {
           )),
         ],
       ),
-      resizeToAvoidBottomPadding: true,
       floatingActionButton: Container(
         height: 70.0,
         width: 70.0,

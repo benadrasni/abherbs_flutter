@@ -1,4 +1,6 @@
 {
+  "@@locale" : "fi_FI",
+
   "legend": "Legenda",
   "legend_flower_1": "mature flower",
   "legend_flower_2": "luotti",

@@ -1,4 +1,6 @@
 {
+  "@@locale" : "sv_SE",
+
   "legend": "Legend",
   "legend_flower_1": "Mogen blomma",
   "legend_flower_2": "Märke",

@@ -1,4 +1,6 @@
 {
+  "@@locale" : "pl_PL",
+
   "legend": "Legenda",
   "legend_flower_1": "dojrzały kwiat",
   "legend_flower_2": "znamię",

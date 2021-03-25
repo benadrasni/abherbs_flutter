@@ -14,7 +14,7 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-//import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -51,7 +51,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
   Future<List<SearchResult>> _searchResultF;
   Future<List<dynamic>> _genericEntitiesF;
   Future<String> _engineF;
-  //ImageLabeler imageLabeler;
+  ImageLabeler imageLabeler;
 
   AdmobReward _rewardAd;
   bool _isRewardLoading;
@@ -112,11 +112,11 @@ class _SearchPhotoState extends State<SearchPhoto> {
         var engine = await _engineF;
         setState(() {
           _image = File(image.path);
-          //if (engine == plantIdEngine) {
-          _searchResultF = _getSearchResultPlantId(_image);
-          //} else {
-          //  _searchResultF = _getSearchResult(_image);
-          // }
+          if (engine == plantIdEngine) {
+            _searchResultF = _getSearchResultPlantId(_image);
+          } else {
+            _searchResultF = _getSearchResult(_image);
+          }
         });
       }
     }
@@ -134,7 +134,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
       "plant_details": plantIdPlantDetails
     });
 
-    return http.post(plantIdEndpoint, headers: headers, body: msg).then((response) async {
+    return http.post(Uri.parse(plantIdEndpoint), headers: headers, body: msg).then((response) async {
       var results = <SearchResult>[];
       if (response.statusCode == 200) {
         if (widget.currentUser != null && !Purchases.isPhotoSearch()) {
@@ -224,7 +224,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
       FirebaseCrashlytics.instance.recordError(error, stackTrace);
     });
   }
-/*
+
   Future<List<SearchResult>> _getSearchResult(File image) {
     final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(image);
 
@@ -283,7 +283,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
       if (results.length > 0) {
         var userId = firebaseAttributeAnonymous;
         if (widget.currentUser != null) {
-          userId = widget.currentUser.uid;
+          userId = widget.currentUser.firebaseUser.uid;
         }
         rootReference.child(firebaseUsersPhotoSearch).child(userId).child(DateTime.now().millisecondsSinceEpoch.toString()).set(results.map((searchResult) {
               Map<String, dynamic> labelMap = {};
@@ -312,7 +312,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
     }
     return label;
   }
-*/
+
   @override
   void initState() {
     super.initState();
@@ -332,15 +332,15 @@ class _SearchPhotoState extends State<SearchPhoto> {
       },
     );
     _rewardAd.load();
-    //imageLabeler = FirebaseVision.instance.cloudImageLabeler();
+    imageLabeler = FirebaseVision.instance.cloudImageLabeler();
   }
-/*
+
   @override
   void dispose() {
     imageLabeler.close();
     super.dispose();
   }
-*/
+
   @override
   Widget build(BuildContext context) {
     App.currentContext = context;
@@ -393,7 +393,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                 style: feedbackTextStyle,
                 textAlign: TextAlign.center,
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -429,10 +429,10 @@ class _SearchPhotoState extends State<SearchPhoto> {
                   ],
                 ),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () async {
                   if (_isRewardLoading) {
-                    _key.currentState.showSnackBar(SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(S.of(context).snack_loading_ad),
                       duration: Duration(milliseconds: 1500),
                     ));
@@ -497,7 +497,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                     },
                                     onLongPress: () {
                                       Clipboard.setData(new ClipboardData(text: result.labelLatin));
-                                      _key.currentState.showSnackBar(SnackBar(
+                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                         content: Text(S.of(context).snack_copy),
                                       ));
                                     },
@@ -508,11 +508,11 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                   child: Text(NumberFormat.percentPattern().format(result.confidence)),
                                   backgroundColor: Colors.white,
                                 ),
-                                title: result.commonName.isNotEmpty ? Text(result.commonName) : Text(result.labelLatin),
-                                subtitle: result.commonName.isNotEmpty ? Text(result.labelLatin) : null,
+                                title: result.commonName != null && result.commonName.isNotEmpty ? Text(result.commonName) : Text(result.labelLatin),
+                                subtitle: result.commonName != null && result.commonName.isNotEmpty ? Text(result.labelLatin) : null,
                                 onLongPress: () {
                                   Clipboard.setData(new ClipboardData(text: result.labelLatin));
-                                  _key.currentState.showSnackBar(SnackBar(
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                     content: Text(S.of(context).snack_copy),
                                   ));
                                 },

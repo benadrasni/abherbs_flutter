@@ -62,9 +62,11 @@ Future<void> initializeStore() async {
     }
     Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
   }
+  Purchases.hasOldVersion = Prefs.getBool(keyOldVersion, false);
+  Purchases.hasLifetimeSubscription = Prefs.getBool(keyLifetimeSubscription, false);
 
-  Offline.initialize();
   Auth.getAppUser();
+  Offline.initialize();
 }
 
 Future<void> initializeFlutterFire() async {
@@ -124,9 +126,9 @@ void main() {
     initializeFlutterFire().then((_) async {
       Screen.keepOn(true);
       InAppPurchaseConnection.enablePendingPurchases();
+      await Prefs.init();
       await initializeStore();
       Admob.initialize();
-      await Prefs.init();
       Locale locale = await initializeLocale();
       Map<String, String> filter = await initializeFilter();
       String initialRoute = await initializeRoute();
@@ -222,7 +224,7 @@ class _AppState extends State<App> {
               title: Text(S.of(context).notification),
               content: Text(message.notification.title),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                   child: Text(S.of(context).notification_open,
                       style: TextStyle(
                         fontSize: 16.0,
@@ -233,7 +235,7 @@ class _AppState extends State<App> {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList')));
                   },
                 ),
-                FlatButton(
+                TextButton(
                   child: Text(S.of(context).notification_close,
                       style: TextStyle(
                         fontSize: 16.0,

@@ -41,8 +41,11 @@ class _PlantListState extends State<PlantList> {
         image: AssetImage('res/images/placeholder.webp'),
       ),
     ]);
-    Widget button = FlatButton(
-      padding: EdgeInsets.all(5.0),
+    Widget button = TextButton(
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all(
+            EdgeInsets.all(5.0)),
+      ),
       child: Container(
           child:getImage(url, placeholder),
         width: screenWidth,

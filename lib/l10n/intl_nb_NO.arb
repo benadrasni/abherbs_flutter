@@ -1,4 +1,6 @@
 {
+  "@@locale" : "nb_NO",
+
   "legend": "Legende",
   "legend_flower_1": "blomst",
   "legend_flower_2": "arr",

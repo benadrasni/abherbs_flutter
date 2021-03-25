@@ -1,4 +1,6 @@
 {
+  "@@locale" : "pt_PT",
+
   "legend": "Legenda",
   "legend_flower_1": "flor matura",
   "legend_flower_2": "estigma",

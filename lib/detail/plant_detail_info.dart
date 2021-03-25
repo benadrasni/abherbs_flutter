@@ -92,7 +92,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                                 settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {
-                              key.currentState.showSnackBar(SnackBar(
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text(S.of(context).snack_translation),
                               ));
                             }
@@ -130,7 +130,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                               settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
-                            key.currentState.showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(S.of(context).snack_translation),
                             ));
                           }
@@ -167,7 +167,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                               settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
-                            key.currentState.showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(S.of(context).snack_translation),
                             ));
                           }
@@ -210,7 +210,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                               settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
-                            key.currentState.showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(S.of(context).snack_translation),
                             ));
                           }
@@ -247,7 +247,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                               settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
-                            key.currentState.showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(S.of(context).snack_translation),
                             ));
                           }
@@ -284,7 +284,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                               settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
-                            key.currentState.showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(S.of(context).snack_translation),
                             ));
                           }
@@ -321,7 +321,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                               settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
-                            key.currentState.showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(S.of(context).snack_translation),
                             ));
                           }
@@ -360,7 +360,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                                 settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {
-                              key.currentState.showSnackBar(SnackBar(
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text(S.of(context).snack_translation),
                               ));
                             }
@@ -399,7 +399,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                                 settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {
-                              key.currentState.showSnackBar(SnackBar(
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text(S.of(context).snack_translation),
                               ));
                             }
@@ -438,7 +438,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                                 settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {
-                              key.currentState.showSnackBar(SnackBar(
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text(S.of(context).snack_translation),
                               ));
                             }
@@ -496,7 +496,7 @@ Widget _getNames(BuildContext context, Plant plant, PlantTranslation plantTransl
     ),
     onLongPress: () {
       Clipboard.setData(new ClipboardData(text: plantTranslation.label));
-      key.currentState.showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(S.of(context).snack_copy),
       ));
     },
@@ -513,7 +513,7 @@ Widget _getNames(BuildContext context, Plant plant, PlantTranslation plantTransl
       ),
       onLongPress: () {
         Clipboard.setData(new ClipboardData(text: plantTranslation.label));
-        key.currentState.showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(S.of(context).snack_copy),
         ));
       },
@@ -591,7 +591,7 @@ List<Widget> _getSources(BuildContext context, Plant plant, PlantTranslation pla
   return rows;
 }
 
-FlatButton getSourceButton(String url) {
+TextButton getSourceButton(String url) {
   assert(url.contains('//') && url.contains('/', url.indexOf('//') + 2));
   String imageSource = 'res/images/internet.png';
   String textSource = url.substring(url.indexOf('//') + 2, url.indexOf('/', url.indexOf('//') + 2));
@@ -637,8 +637,11 @@ FlatButton getSourceButton(String url) {
     textSource = sourceTelaBotanica;
   }
 
-  return FlatButton(
-    padding: EdgeInsets.only(bottom: 5.0),
+  return TextButton(
+    style: ButtonStyle(
+      padding: MaterialStateProperty.all(
+          EdgeInsets.only(bottom: 5.0)),
+    ),
     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Image(
         image: AssetImage(imageSource),

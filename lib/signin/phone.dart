@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:flutter/services.dart';
 import 'package:flutter_country_picker/flutter_country_picker.dart';
 
 class PhoneLoginSignUpPage extends StatefulWidget {
@@ -213,6 +214,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
             Expanded(
               flex: 1,
               child: CountryPicker(
+                showName: false,
                 onChanged: (Country country) {
                   setState(() {
                     _country = country;
@@ -222,7 +224,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 4,
               child: TextFormField(
                 maxLines: 1,
                 keyboardType: TextInputType.phone,
@@ -248,7 +250,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
             ),
             TextFormField(
               maxLength: 6,
-              maxLengthEnforced: true,
+              maxLengthEnforcement: MaxLengthEnforcement.enforced,
               maxLines: 1,
               keyboardType: TextInputType.number,
               autofocus: true,
@@ -269,13 +271,16 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
         padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
         child: SizedBox(
           height: 40.0,
-          child: RaisedButton(
-            elevation: 5.0,
-            shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-            color: Colors.blue,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.blue, // background
+              onPrimary: Colors.white, // foreground
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+            ),
             child: Text(
               _formMode == FormMode.SMS ? S.of(context).auth_sign_in: S.of(context).auth_verify_phone_number,
-              style: TextStyle(fontSize: 20.0, color: Colors.white),
+              style: TextStyle(fontSize: 20.0),
             ),
             onPressed: _validateAndSubmit,
           ),
@@ -286,7 +291,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     if (_formMode == FormMode.SMS && _showResendButton) {
       return Padding(
           padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-          child: FlatButton(
+          child: TextButton(
               child: Text(S.of(context).auth_resend_code,
                 style: TextStyle(fontSize: 20.0, color: Colors.blue),
               ),

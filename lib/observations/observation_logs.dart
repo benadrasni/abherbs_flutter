@@ -191,8 +191,10 @@ class _ObservationLogsState extends State<ObservationLogs> {
     Widget button = Container();
     String value = RemoteConfiguration.remoteConfig.getString(remoteConfigObservationsVideo);
     if (value.isNotEmpty) {
-      button = FlatButton(
-        color: Colors.lightBlueAccent,
+      button = TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.lightBlueAccent,
+        ),
         child: Text(S
             .of(mainContext)
             .video,
@@ -372,8 +374,11 @@ class _ObservationLogsState extends State<ObservationLogs> {
             if (snapshot.connectionState == ConnectionState.done && snapshot.data.isNotEmpty) {
               result = Column(
                 children: [
-                  FlatButton(
-                    padding: EdgeInsets.all(5.0),
+                  TextButton(
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                          EdgeInsets.all(5.0)),
+                    ),
                     child: CachedNetworkImage(
                       fit: BoxFit.contain,
                       width: mapWidth,
@@ -470,8 +475,10 @@ class _ObservationLogsState extends State<ObservationLogs> {
                               ),
                             ),
                             button,
-                            FlatButton(
-                              color: Colors.lightBlue,
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.lightBlue,
+                              ),
                               child: Text(S.of(context).product_subscribe.toUpperCase(),
                                   style: TextStyle(
                                     fontSize: 16.0,
@@ -642,8 +649,11 @@ class _ObservationLogsState extends State<ObservationLogs> {
             if (snapshot.connectionState == ConnectionState.done && snapshot.data.isNotEmpty) {
               result = Column(
                 children: [
-                  FlatButton(
-                    padding: EdgeInsets.all(5.0),
+                  TextButton(
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                          EdgeInsets.all(5.0)),
+                    ),
                     child: CachedNetworkImage(
                       fit: BoxFit.contain,
                       width: mapWidth,

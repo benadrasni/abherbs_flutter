@@ -63,7 +63,7 @@ class _AppDrawerState extends State<AppDrawer> {
         ),
         Container(
           alignment: Alignment(1.0, 1.0),
-          child: FlatButton(
+          child: TextButton(
             child: Text(
               widget.currentUser == null ? S.of(context).auth_sign_in : S.of(context).auth_sign_out,
               textAlign: TextAlign.end,

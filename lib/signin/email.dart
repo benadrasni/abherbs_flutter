@@ -148,7 +148,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
           title: Text(S.of(context).auth_verify_email_title),
           content: Text(S.of(context).auth_verify_email_message),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).auth_resend_email),
               onPressed: () {
                 if (user != null) {
@@ -157,7 +157,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
                 Navigator.of(context).pop();
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).close),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -177,7 +177,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
           title: Text(S.of(context).auth_reset_password_email_title),
           content: Text(S.of(context).auth_reset_password_email_message(_email)),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).close),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -274,10 +274,13 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
         padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
         child: SizedBox(
           height: 40.0,
-          child: RaisedButton(
-            elevation: 5.0,
-            shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-            color: Colors.blue,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.blue, // background
+              onPrimary: Colors.white, // foreground
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+            ),
             child: Text(
               _formMode == FormMode.LOGIN ? S.of(context).auth_sign_in : S.of(context).auth_create_account,
               style: TextStyle(fontSize: 20.0, color: Colors.white),
@@ -290,7 +293,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
   Widget _showSecondaryButton() {
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-      child: FlatButton(
+      child: TextButton(
         child: Text(
           _formMode == FormMode.LOGIN ? S.of(context).auth_create_account : S.of(context).auth_sign_in_text,
           style: TextStyle(fontSize: 20.0, color: Colors.blue),
@@ -304,7 +307,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
     if (_formMode == FormMode.LOGIN && _isWrongPassword) {
       return Padding(
         padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-        child: FlatButton(
+        child: TextButton(
           child: Text(S.of(context).auth_reset_password,
             style: TextStyle(fontSize: 20.0, color: Colors.blue),
           ),

@@ -5,9 +5,8 @@ class RemoteConfiguration {
   static RemoteConfig remoteConfig;
 
   static Future<RemoteConfig> setupRemoteConfig() async {
-    remoteConfig = await RemoteConfig.instance;
-    // Enable developer mode to relax fetch throttling
-    remoteConfig.setConfigSettings(RemoteConfigSettings());
+    remoteConfig = RemoteConfig.instance;
+    remoteConfig.setConfigSettings(RemoteConfigSettings(fetchTimeout:Duration(seconds:30), minimumFetchInterval: Duration(hours: 12)));
     remoteConfig.setDefaults(<String, dynamic>{
       remoteConfigIPNIServer: 'http://plantsoftheworldonline.org/',
       remoteConfigIPNIServerWithTaxon: 'http://plantsoftheworldonline.org/taxon/urn:lsid:ipni.org:names:',
@@ -15,7 +14,7 @@ class RemoteConfiguration {
       remoteConfigSearchByPhotoVideo: 'https://youtu.be/UaKBnVXavmU'
     });
     await remoteConfig.fetch();
-    await remoteConfig.activateFetched();
+    await remoteConfig.activate();
     return remoteConfig;
   }
 }

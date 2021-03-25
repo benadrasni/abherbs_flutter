@@ -42,7 +42,7 @@ class _PetalState extends State<Petal> {
         if (snapshot.value != null && snapshot.value > 0) {
           Navigator.push(context, getNextFilterRoute(context, newFilter));
         } else {
-          _key.currentState.showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(S.of(context).snack_no_flowers),
           ));
         }
@@ -94,6 +94,7 @@ class _PetalState extends State<Petal> {
     var _defaultTextStyle = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 22.0,
+      color: Colors.black,
     );
     return Scaffold(
       key: _key,
@@ -119,8 +120,11 @@ class _PetalState extends State<Petal> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: FlatButton(
-                        padding: EdgeInsets.all(10.0),
+                      child: TextButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.all(10.0)),
+                        ),
                         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                           Text(
                             S.of(context).petal_4,
@@ -137,8 +141,11 @@ class _PetalState extends State<Petal> {
                       flex: 1,
                     ),
                     Expanded(
-                      child: FlatButton(
-                        padding: EdgeInsets.all(10.0),
+                      child: TextButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.all(10.0)),
+                        ),
                         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                           Text(
                             S.of(context).petal_5,
@@ -163,8 +170,11 @@ class _PetalState extends State<Petal> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      child: FlatButton(
-                        padding: EdgeInsets.all(10.0),
+                      child: TextButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.all(10.0)),
+                        ),
                         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                           Text(
                             S.of(context).petal_many,
@@ -181,8 +191,11 @@ class _PetalState extends State<Petal> {
                       flex: 1,
                     ),
                     Expanded(
-                      child: FlatButton(
-                        padding: EdgeInsets.all(10.0),
+                      child: TextButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                              EdgeInsets.all(10.0)),
+                        ),
                         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                           Text(
                             S.of(context).petal_zygomorphic,

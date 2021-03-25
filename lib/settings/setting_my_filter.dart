@@ -131,8 +131,11 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
     }
 
     filterWidgets.add(Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      FlatButton(
-        color: Colors.lightBlueAccent,
+      TextButton(
+        style: TextButton.styleFrom(
+          primary: Colors.black,
+          backgroundColor: Colors.lightBlueAccent,
+        ),
         child: Text(S.of(context).apply,
             style: TextStyle(
               fontSize: 16.0,
@@ -149,8 +152,12 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
           });
         },
       ),
-      FlatButton(
-        color: Colors.lightBlueAccent,
+      TextButton(
+        style: TextButton.styleFrom(
+          primary: Colors.black,
+          backgroundColor: Colors.lightBlueAccent,
+
+        ),
         child: Text(S.of(context).cancel,
             style: TextStyle(
               fontSize: 16.0,

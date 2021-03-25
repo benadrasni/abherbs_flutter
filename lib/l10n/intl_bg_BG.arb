@@ -1,4 +1,6 @@
 {
+  "@@locale" : "bg_BG",
+
   "legend": "Легенда",
   "legend_flower_1": "зрял цвят",
   "legend_flower_2": "близалце",

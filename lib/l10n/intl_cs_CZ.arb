@@ -1,4 +1,6 @@
 {
+  "@@locale" : "cs_CZ",
+
   "legend": "Legenda",
   "legend_flower_1": "vyvinutý květ",
   "legend_flower_2": "blizna",

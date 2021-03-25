@@ -86,7 +86,7 @@ class _SettingOfflineState extends State<SettingOffline> {
           S.of(context).offline_title
         );
         _content = Text(S.of(context).offline_download_message);
-        _actions.add(FlatButton(
+        _actions.add(TextButton(
           child: Text(S.of(context).yes.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             _logOfflineDownloadEvent('started');
@@ -97,7 +97,7 @@ class _SettingOfflineState extends State<SettingOffline> {
             Offline.download(this.onFamilyDownload, this.onPlantDownload, this.onDownloadFinish, this.onDownloadFail);
           },
         ));
-        _actions.add(FlatButton(
+        _actions.add(TextButton(
           child: Text(S.of(context).no.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Navigator.of(context).pop();
@@ -117,7 +117,7 @@ class _SettingOfflineState extends State<SettingOffline> {
           backgroundColor: Theme.of(context).buttonColor,
           progressColor: Theme.of(context).accentColor,
         );
-        _actions.add(FlatButton(
+        _actions.add(TextButton(
           child: Text(S.of(context).pause.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             _logOfflineDownloadEvent('paused');
@@ -132,7 +132,7 @@ class _SettingOfflineState extends State<SettingOffline> {
           S.of(context).offline_title
         );
         _content = Text(S.of(context).offline_download_success);
-        _actions.add(FlatButton(
+        _actions.add(TextButton(
           child: Text(S.of(context).close.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Navigator.of(context).pop();
@@ -145,7 +145,7 @@ class _SettingOfflineState extends State<SettingOffline> {
           S.of(context).offline_title,
         );
         _content = Text(S.of(context).offline_download_fail);
-        _actions.add(FlatButton(
+        _actions.add(TextButton(
           child: Text(S.of(context).close.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
           onPressed: () {
             Navigator.of(context).pop();

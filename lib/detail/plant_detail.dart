@@ -28,7 +28,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_plyr_iframe/youtube_plyr_iframe.dart';
 
 import '../main.dart';
 
@@ -102,7 +102,7 @@ class _PlantDetailState extends State<PlantDetail> {
               for (var text in plantTranslation.getTextsToTranslate(plantTranslationOriginal)) {
                 uri += '&q=' + text;
               }
-              return http.get(uri).then((response) {
+              return http.get(Uri.parse(uri)).then((response) {
                 if (response.statusCode == 200) {
                   Translations translations = Translations.fromJson(json.decode(response.body));
                   PlantTranslation onlyGoogleTranslation = plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
@@ -225,7 +225,7 @@ class _PlantDetailState extends State<PlantDetail> {
                       child: Text(widget.plant.name),
                       onLongPress: () {
                         Clipboard.setData(new ClipboardData(text: widget.plant.name));
-                        _key.currentState.showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(S.of(context).snack_copy),
                         ));
                       },
@@ -257,7 +257,7 @@ class _PlantDetailState extends State<PlantDetail> {
                     child: Text(widget.plant.name),
                     onLongPress: () {
                       Clipboard.setData(new ClipboardData(text: widget.plant.name));
-                      _key.currentState.showSnackBar(SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(S.of(context).snack_copy),
                       ));
                     },
@@ -276,7 +276,7 @@ class _PlantDetailState extends State<PlantDetail> {
                     child: Text(widget.plant.name),
                     onLongPress: () {
                       Clipboard.setData(new ClipboardData(text: widget.plant.name));
-                      _key.currentState.showSnackBar(SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(S.of(context).snack_copy),
                       ));
                     },
@@ -309,7 +309,7 @@ class _PlantDetailState extends State<PlantDetail> {
                         MaterialPageRoute(builder: (context) => ObservationEdit(_currentUser, widget.myLocale, observation), settings: RouteSettings(name: 'ObservationEdit')),
                       ).then((value) {
                         if (value != null && value && _key.currentState != null) {
-                          _key.currentState.showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(S.of(context).observation_saved),
                           ));
                         }

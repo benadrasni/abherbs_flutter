@@ -16,14 +16,14 @@ Future<void> rateDialog(BuildContext context) async {
         title: Text(S.of(context).rate_question),
         content: Text(S.of(context).rate_text),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             child: Text(S.of(context).rate_never),
             onPressed: () {
               Prefs.setString(keyRateState, rateStateNever);
               Navigator.of(context).pop();
             },
           ),
-          FlatButton(
+          TextButton(
             child: Text(S.of(context).rate_later),
             onPressed: () {
               Prefs.setString(keyRateCount, rateCountInitial.toString());
@@ -31,7 +31,7 @@ Future<void> rateDialog(BuildContext context) async {
               Navigator.of(context).pop();
             },
           ),
-          FlatButton(
+          TextButton(
             child: Text(S.of(context).rate),
             onPressed: () {
               Prefs.setString(keyRateState, rateStateDid);
@@ -57,7 +57,7 @@ Future<void> observationDialog(BuildContext mainContext, GlobalKey<ScaffoldState
           title: Text(S.of(context).observations),
           content: Text(S.of(context).observation_no_login),
           actions: [
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).close.toUpperCase(),
                   style: TextStyle(
                     fontSize: 16.0,
@@ -83,7 +83,7 @@ Future<void> photoSearchDialog(BuildContext mainContext, GlobalKey<ScaffoldState
           title: Text(S.of(context).product_photo_search_title),
           content: Text(S.of(context).photo_search_no_login),
           actions: [
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).close.toUpperCase(),
                   style: TextStyle(
                     fontSize: 16.0,
@@ -109,7 +109,7 @@ Future<void> favoriteDialog(BuildContext mainContext, GlobalKey<ScaffoldState> k
           title: Text(S.of(context).favorite_title),
           content: Text(S.of(context).favorite_no_login),
           actions: [
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).close.toUpperCase(),
                   style: TextStyle(
                     fontSize: 16.0,
@@ -135,7 +135,7 @@ Future<bool> deleteDialog(BuildContext mainContext, String title, String content
           title: Text(title),
           content: Text(content),
           actions: [
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).yes.toUpperCase(),
                   style: TextStyle(
                     fontSize: 16.0,
@@ -145,7 +145,7 @@ Future<bool> deleteDialog(BuildContext mainContext, String title, String content
                 Navigator.of(context).pop(true);
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).no.toUpperCase(),
                   style: TextStyle(
                     fontSize: 16.0,
@@ -168,7 +168,7 @@ Future<bool> subscriptionDialog(BuildContext mainContext, String title, String c
           title: Text(title),
           content: Text(content),
           actions: [
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).product_subscribe.toUpperCase(),
                   style: TextStyle(
                     fontSize: 16.0,
@@ -178,7 +178,7 @@ Future<bool> subscriptionDialog(BuildContext mainContext, String title, String c
                 Navigator.of(context).pop(true);
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).close.toUpperCase(),
                   style: TextStyle(
                     fontSize: 16.0,
@@ -201,7 +201,7 @@ Future<bool> infoDialog(BuildContext mainContext, String title, String content) 
           title: Text(title),
           content: Text(content),
           actions: [
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).close.toUpperCase(),
                   style: TextStyle(
                     fontSize: 16.0,
@@ -220,8 +220,10 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
   Widget videoButton = Container();
   String value = RemoteConfiguration.remoteConfig.getString(config);
   if (value.isNotEmpty) {
-    videoButton = FlatButton(
-      color: Colors.lightBlueAccent,
+    videoButton = TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: Colors.lightBlueAccent,
+      ),
       child: Text(S
           .of(mainContext)
           .video,
@@ -248,7 +250,7 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
             ],
           ),
           actions: [
-            credit != null ? FlatButton(
+            credit != null ? TextButton(
               child: Text(credit,
                   style: TextStyle(
                     fontSize: 16.0,
@@ -258,7 +260,7 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
                 Navigator.of(context).pop(2);
               },
             ) : Container(),
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).enhancements,
                   style: TextStyle(
                     fontSize: 16.0,
@@ -268,7 +270,7 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
                 Navigator.of(context).pop(1);
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text(S.of(context).close,
                   style: TextStyle(
                     fontSize: 16.0,

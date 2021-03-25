@@ -48,7 +48,7 @@ class _ColorState extends State<Color> {
         if (snapshot.value != null && snapshot.value > 0) {
           Navigator.push(context, getNextFilterRoute(context, newFilter));
         } else {
-          _key.currentState.showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(S.of(context).snack_no_flowers),
           ));
         }
@@ -115,7 +115,7 @@ class _ColorState extends State<Color> {
       child: Row(
         children: [
           Expanded(
-            child: FlatButton(
+            child: TextButton(
               child: Image(
                 image: AssetImage('res/images/white.webp'),
               ),
@@ -126,7 +126,7 @@ class _ColorState extends State<Color> {
             flex: 1,
           ),
           Expanded(
-            child: FlatButton(
+            child: TextButton(
               child: Image(
                 image: AssetImage('res/images/yellow.webp'),
               ),
@@ -168,7 +168,7 @@ class _ColorState extends State<Color> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        RaisedButton(
+                        ElevatedButton(
                           child: Text(S
                               .of(context)
                               .yes),
@@ -182,7 +182,7 @@ class _ColorState extends State<Color> {
                             });
                           },
                         ),
-                        RaisedButton(
+                        ElevatedButton(
                           child: Text(S
                               .of(context)
                               .no),
@@ -259,7 +259,7 @@ class _ColorState extends State<Color> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Expanded(
-            child: FlatButton(
+            child: TextButton(
               child: Image(
                 image: AssetImage('res/images/red.webp'),
               ),
@@ -270,7 +270,7 @@ class _ColorState extends State<Color> {
             flex: 1,
           ),
           Expanded(
-            child: FlatButton(
+            child: TextButton(
               child: Image(
                 image: AssetImage('res/images/blue.webp'),
               ),
@@ -285,7 +285,7 @@ class _ColorState extends State<Color> {
     ));
     _widgets.add(Container(
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-      child: FlatButton(
+      child: TextButton(
         child: Image(
           image: AssetImage('res/images/green.webp'),
         ),

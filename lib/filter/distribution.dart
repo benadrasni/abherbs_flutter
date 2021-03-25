@@ -36,8 +36,7 @@ class _DistributionState extends State<Distribution> {
   GlobalKey<ScaffoldState> _key;
 
   void _openRegion(String region) {
-    var route = MaterialPageRoute(
-        builder: (context) => Distribution2(widget.filter, int.parse(region)), settings: RouteSettings(name: 'Distribution2'));
+    var route = MaterialPageRoute(builder: (context) => Distribution2(widget.filter, int.parse(region)), settings: RouteSettings(name: 'Distribution2'));
     filterRoutes[filterDistribution2] = route;
     Navigator.push(context, route).then((value) {
       filterRoutes[filterDistribution2] = null;
@@ -56,7 +55,7 @@ class _DistributionState extends State<Distribution> {
         if (snapshot.value != null && snapshot.value > 0) {
           Navigator.push(context, getNextFilterRoute(context, newFilter));
         } else {
-          _key.currentState.showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(S.of(context).snack_no_flowers),
           ));
         }
@@ -86,6 +85,7 @@ class _DistributionState extends State<Distribution> {
     var _firstLevelTextStyle = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 22.0,
+      color: Colors.black,
     );
 
     var regions = <List<String>>[];
@@ -100,8 +100,10 @@ class _DistributionState extends State<Distribution> {
 
     var regionWidgets = <Widget>[];
     regionWidgets.add(
-      FlatButton(
-        padding: EdgeInsets.only(bottom: 5.0),
+      TextButton(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+        ),
         child: Stack(alignment: Alignment.center, children: [
           Image(
             image: AssetImage('res/images/wgsrpd_my_region.webp'),
@@ -143,8 +145,11 @@ class _DistributionState extends State<Distribution> {
       ),
     );
     regionWidgets.addAll(regions.map((List<String> items) {
-      return FlatButton(
-        padding: EdgeInsets.only(bottom: 5.0),
+      return TextButton(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(
+              EdgeInsets.only(bottom: 5.0)),
+        ),
         child: Stack(alignment: Alignment.center, children: [
           Image(
             image: AssetImage(items[1]),
@@ -161,8 +166,11 @@ class _DistributionState extends State<Distribution> {
     }).toList());
 
     regionWidgets.add(
-      FlatButton(
-        padding: EdgeInsets.only(bottom: 5.0),
+      TextButton(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(
+              EdgeInsets.only(bottom: 5.0)),
+        ),
         child: Stack(alignment: Alignment.center, children: [
           Image(
             image: AssetImage('res/images/wgsrpd_antarctic.webp'),
@@ -293,9 +301,7 @@ class _DistributionState extends State<Distribution> {
                         onPressed: () {
                           Navigator.push(
                             mainContext,
-                            MaterialPageRoute(
-                                builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))),
-                                settings: RouteSettings(name: 'PlantList')),
+                            MaterialPageRoute(builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))), settings: RouteSettings(name: 'PlantList')),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

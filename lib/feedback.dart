@@ -141,7 +141,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       style: feedbackTextStyle,
                       textAlign: TextAlign.center,
                     ),
-                    RaisedButton(
+                    ElevatedButton(
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -176,10 +176,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         ],
                       ),
                     ),
-                    RaisedButton(
+                    ElevatedButton(
                       onPressed: () async {
                         if (_isRewardLoading) {
-                          key.currentState.showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(S.of(context).snack_loading_ad),
                             duration: Duration(milliseconds: 1500),
                           ));
@@ -268,13 +268,13 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   ],
                 ),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   launchURL(webUrl + 'translate_app?lang=' + getLanguageCode(myLocale.languageCode));
                 },
                 child: Text(S.of(context).feedback_submit_translate_app),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   launchURL(webUrl + 'translate_flower?lang=' + getLanguageCode(myLocale.languageCode));
                 },
@@ -307,8 +307,11 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 ),
               ),
               SizedBox(height: 10.0),
-              RaisedButton(
-                color: Theme.of(context).accentColor,
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Theme.of(context).accentColor, // background
+                  onPrimary: Colors.white, // foreground
+                ),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -345,10 +348,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   ],
                 ),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () async {
                   if (_isInterstitialLoading) {
-                    key.currentState.showSnackBar(SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(S.of(context).snack_loading_ad),
                       duration: Duration(milliseconds: 1500),
                     ));

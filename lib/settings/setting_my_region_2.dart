@@ -21,6 +21,7 @@ class _SettingMyRegion2State extends State<SettingMyRegion2> {
   Widget _getBody(BuildContext context) {
     var _secondLevelTextStyle = TextStyle(
       fontSize: 20.0,
+      color: Colors.black,
     );
 
     var subRegions = <List<String>>[];
@@ -102,7 +103,7 @@ class _SettingMyRegion2State extends State<SettingMyRegion2> {
             crossAxisSpacing: 3.0,
             children: subRegions.map((List<String> items) {
               return GridTile(
-                child: FlatButton(
+                child: TextButton(
                   child: Stack(alignment: Alignment.center, children: [
                     Image(
                       image: AssetImage(items[1]),
