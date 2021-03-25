@@ -222,7 +222,7 @@ class _AppState extends State<App> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text(S.of(context).notification),
-              content: Text(message.notification.title),
+              content: Text(message.notification.title != null ? message.notification.title : message.notification.body),
               actions: <Widget>[
                 TextButton(
                   child: Text(S.of(context).notification_open,
