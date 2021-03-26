@@ -11,6 +11,7 @@ import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:admob_flutter/admob_flutter.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -128,6 +129,7 @@ void main() {
       InAppPurchaseConnection.enablePendingPurchases();
       await Prefs.init();
       await initializeStore();
+      await AppTrackingTransparency.requestTrackingAuthorization();
       Admob.initialize();
       Locale locale = await initializeLocale();
       Map<String, String> filter = await initializeFilter();
