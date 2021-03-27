@@ -72,6 +72,7 @@ class _PlantDetailState extends State<PlantDetail> {
 
   onShare() {
     Share.share(Uri.encodeFull('https://whatsthatflower.com/?plant=' + widget.plant.name + '&lang=' + widget.myLocale.languageCode), subject: widget.plant.name);
+    _logShareEvent(widget.plant.name);
   }
 
   Future<PlantTranslation> _getTranslation() {
@@ -133,6 +134,13 @@ class _PlantDetailState extends State<PlantDetail> {
   Future<void> _logSelectContentEvent(String contentId) async {
     await _firebaseAnalytics.logSelectContent(
       contentType: 'plant',
+      itemId: contentId,
+    );
+  }
+
+  Future<void> _logShareEvent(String contentId) async {
+    await _firebaseAnalytics.logSelectContent(
+      contentType: 'share',
       itemId: contentId,
     );
   }
