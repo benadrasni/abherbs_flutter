@@ -8,6 +8,7 @@ class RemoteConfiguration {
     remoteConfig = RemoteConfig.instance;
     remoteConfig.setConfigSettings(RemoteConfigSettings(fetchTimeout:Duration(seconds:30), minimumFetchInterval: Duration(hours: 12)));
     remoteConfig.setDefaults(<String, dynamic>{
+      remoteAdsFrequency: 5,
       remoteConfigIPNIServer: 'http://plantsoftheworldonline.org/',
       remoteConfigIPNIServerWithTaxon: 'http://plantsoftheworldonline.org/taxon/urn:lsid:ipni.org:names:',
       remoteConfigSearchByNameVideo: 'https://youtu.be/dapaB7V5Xo0',

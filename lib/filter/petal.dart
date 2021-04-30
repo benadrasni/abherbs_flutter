@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
@@ -11,8 +12,9 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../ads.dart';
+import '../keys.dart';
 import '../main.dart';
 
 class Petal extends StatefulWidget {
@@ -29,6 +31,8 @@ class _PetalState extends State<Petal> {
   Future<int> _countF;
   Map<String, String> _filter;
   GlobalKey<ScaffoldState> _key;
+  BannerAd _ad;
+  bool _showAd;
 
   _navigate(String value) {
     var newFilter = new Map<String, String>();
@@ -74,6 +78,31 @@ class _PetalState extends State<Petal> {
     Offline.setKeepSynced(1, true);
     _checkCurrentUser();
 
+    _showAd = !Purchases.isNoAds();
+
+    if (_showAd) {
+      _ad = BannerAd(
+        adUnitId: getBannerAdUnitId(),
+        size: AdSize.banner,
+        request: AdRequest(),
+        listener: AdListener(
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+          onAdClosed: (Ad ad) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+        ),
+      );
+      _ad.load();
+    }
+
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterPetal);
@@ -85,6 +114,7 @@ class _PetalState extends State<Petal> {
   @override
   void dispose() {
     _listener.cancel();
+    _ad.dispose();
     super.dispose();
   }
 
@@ -122,8 +152,7 @@ class _PetalState extends State<Petal> {
                     Expanded(
                       child: TextButton(
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.all(10.0)),
+                          padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
                         ),
                         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                           Text(
@@ -143,8 +172,7 @@ class _PetalState extends State<Petal> {
                     Expanded(
                       child: TextButton(
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.all(10.0)),
+                          padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
                         ),
                         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                           Text(
@@ -172,8 +200,7 @@ class _PetalState extends State<Petal> {
                     Expanded(
                       child: TextButton(
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.all(10.0)),
+                          padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
                         ),
                         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                           Text(
@@ -193,8 +220,7 @@ class _PetalState extends State<Petal> {
                     Expanded(
                       child: TextButton(
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                              EdgeInsets.all(10.0)),
+                          padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
                         ),
                         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                           Text(
@@ -229,7 +255,17 @@ class _PetalState extends State<Petal> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Ads.getAdMobBanner(),
+            child: _showAd
+                ? Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(bottom: 5.0),
+                    child: AdWidget(ad: _ad),
+                    width: _ad.size.width.toDouble(),
+                    height: _ad.size.height.toDouble(),
+                  )
+                : Container(
+                    height: 0.0,
+                  ),
           ),
         ],
       ),
@@ -265,9 +301,7 @@ class _PetalState extends State<Petal> {
                         onPressed: () {
                           Navigator.push(
                             mainContext,
-                            MaterialPageRoute(
-                                builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))),
-                                settings: RouteSettings(name: 'PlantList')),
+                            MaterialPageRoute(builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))), settings: RouteSettings(name: 'PlantList')),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

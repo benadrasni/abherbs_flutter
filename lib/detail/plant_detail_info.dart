@@ -8,9 +8,8 @@ import 'package:abherbs_flutter/legend/flower.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
-
-import '../ads.dart';
 
 const String sourceWikipedia = "wikipedia";
 const String sourceWikimediaCommons = "commons.wikimedia.org";
@@ -29,7 +28,7 @@ const String sourceUsda = "plants.usda.gov";
 const String sourceUsfs = "forestryimages.org";
 const String sourceTelaBotanica = "tela-botanica.org";
 
-Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize, GlobalKey<ScaffoldState> key) {
+Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize, GlobalKey<ScaffoldState> key, bool showAd, BannerAd ad) {
   String language = Localizations.localeOf(context).languageCode;
 
   TextStyle _defaultTextStyle = TextStyle(
@@ -452,7 +451,15 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
               ));
             }
 
-            cards.add(Ads.getAdMobBigBanner());
+            if (showAd) {
+              cards.add(Container(
+                alignment: Alignment.center,
+                margin: EdgeInsets.only(bottom: 5.0),
+                child: AdWidget(ad: ad),
+                width: ad.size.width.toDouble(),
+                height: ad.size.height.toDouble(),
+              ));
+            }
 
             cards.add(Card(
               child: Container(
@@ -487,7 +494,7 @@ Widget _getNames(BuildContext context, Plant plant, PlantTranslation plantTransl
   var names = <Widget>[];
   names.add(GestureDetector(
     child: Text(
-      plantTranslation.label ?? plant.name,
+      plantTranslation?.label ?? plant.name,
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 22.0,

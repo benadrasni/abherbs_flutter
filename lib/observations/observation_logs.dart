@@ -52,12 +52,16 @@ class _ObservationLogsState extends State<ObservationLogs> {
     switch (_currentIndex) {
       case 0:
         Timer(Duration(milliseconds: 500), () {
-          _scrollControllerPrivate.animateTo(_scrollControllerPrivate.position.maxScrollExtent, duration: Duration(milliseconds: 400), curve: Curves.ease);
+          if (mounted) {
+            _scrollControllerPrivate.animateTo(_scrollControllerPrivate.position.maxScrollExtent, duration: Duration(milliseconds: 400), curve: Curves.ease);
+          }
         });
         break;
       case 1:
         Timer(Duration(milliseconds: 500), () {
-          _scrollControllerPublic.animateTo(_scrollControllerPublic.position.maxScrollExtent, duration: Duration(milliseconds: 400), curve: Curves.ease);
+          if (mounted) {
+            _scrollControllerPublic.animateTo(_scrollControllerPublic.position.maxScrollExtent, duration: Duration(milliseconds: 400), curve: Curves.ease);
+          }
         });
         break;
     }
@@ -134,8 +138,10 @@ class _ObservationLogsState extends State<ObservationLogs> {
               if (snapshot.connectionState == ConnectionState.done && snapshot.data.value != null) {
                 var countries = snapshot.data.value['countries'];
                 List<String> sortedKeys = [];
-                for (var key in countries.keys) {
-                  sortedKeys.add(key.toString());
+                if (countries != null) {
+                  for (var key in countries.keys) {
+                    sortedKeys.add(key.toString());
+                  }
                 }
                 sortedKeys.sort((k1, k2) => countries[k1].compareTo(countries[k2]) * -1);
                 LinkedHashMap sortedMap = LinkedHashMap.fromIterable(sortedKeys, key: (k) => k, value: (k) => countries[k]);

@@ -10,7 +10,6 @@ import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
@@ -22,6 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_localized_countries/flutter_localized_countries.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:screen/screen.dart';
 
@@ -130,7 +130,7 @@ void main() {
       await Prefs.init();
       await initializeStore();
       await AppTrackingTransparency.requestTrackingAuthorization();
-      Admob.initialize();
+      MobileAds.instance.initialize();
       Locale locale = await initializeLocale();
       Map<String, String> filter = await initializeFilter();
       String initialRoute = await initializeRoute();

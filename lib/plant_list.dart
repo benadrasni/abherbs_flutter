@@ -3,6 +3,8 @@ import 'dart:math';
 
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_index_list.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
@@ -12,8 +14,9 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import 'ads.dart';
+import 'keys.dart';
 import 'main.dart';
 
 class PlantList extends StatefulWidget {
@@ -31,9 +34,10 @@ class _PlantListState extends State<PlantList> {
   AppUser _currentUser;
   Future<int> _count;
   Random _random;
+  BannerAd _ad;
+  bool _showAd;
 
-  Widget _getImageButton(
-      BuildContext context, Locale myLocale, String url, String name) {
+  Widget _getImageButton(BuildContext context, Locale myLocale, String url, String name) {
     double screenWidth = MediaQuery.of(context).size.width - 20;
     var placeholder = Stack(alignment: Alignment.center, children: [
       CircularProgressIndicator(),
@@ -43,11 +47,10 @@ class _PlantListState extends State<PlantList> {
     ]);
     Widget button = TextButton(
       style: ButtonStyle(
-        padding: MaterialStateProperty.all(
-            EdgeInsets.all(5.0)),
+        padding: MaterialStateProperty.all(EdgeInsets.all(5.0)),
       ),
       child: Container(
-          child:getImage(url, placeholder),
+        child: getImage(url, placeholder),
         width: screenWidth,
         height: screenWidth,
       ),
@@ -56,11 +59,18 @@ class _PlantListState extends State<PlantList> {
       },
     );
 
-    if (_random.nextInt(100) < Ads.adsFrequency) {
+    if (_showAd && _random.nextInt(100) < RemoteConfiguration.remoteConfig.getInt(remoteAdsFrequency)) {
+      _showAd = false;
       return Column(
         children: [
           button,
-          Ads.getAdMobBigBanner(),
+          Container(
+            alignment: Alignment.center,
+            margin: EdgeInsets.only(bottom: 5.0),
+            child: AdWidget(ad: _ad),
+            width: _ad.size.width.toDouble(),
+            height: _ad.size.height.toDouble(),
+          ),
         ],
       );
     } else {
@@ -86,10 +96,35 @@ class _PlantListState extends State<PlantList> {
     Offline.setKeepSynced(2, true);
     _random = Random();
 
+    _showAd = !Purchases.isNoAds();
+
+    if (_showAd) {
+      _ad = BannerAd(
+        adUnitId: getBannerAdUnitId(),
+        size: AdSize.largeBanner,
+        request: AdRequest(),
+        listener: AdListener(
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+          onAdClosed: (Ad ad) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+        ),
+      );
+      _ad.load();
+    }
+
     widget.pathToIndex.keepSynced(true);
     _count = widget.pathToIndex.once().then((DataSnapshot snapshot) {
-      var result = snapshot.value??[];
-      int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : result.values.length;
+      var result = snapshot.value ?? [];
+      int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1)) : result.values.length;
       return length;
     });
   }
@@ -110,8 +145,7 @@ class _PlantListState extends State<PlantList> {
       appBar: AppBar(
         title: Text(S.of(mainContext).list_info),
       ),
-      drawer:
-          AppDrawer(_currentUser, widget.filter, null),
+      drawer: AppDrawer(_currentUser, widget.filter, null),
       body: FirebaseAnimatedIndexList(
           defaultChild: Center(child: CircularProgressIndicator()),
           emptyChild: Container(
@@ -121,8 +155,7 @@ class _PlantListState extends State<PlantList> {
           ),
           query: listsReference.orderByChild(firebaseAttributeName),
           keyQuery: widget.pathToIndex,
-          itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation,
-              int index) {
+          itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
             String name = snapshot.value[firebaseAttributeName];
             String family = snapshot.value[firebaseAttributeFamily];
             String url = snapshot.value[firebaseAttributeUrl];
@@ -132,12 +165,7 @@ class _PlantListState extends State<PlantList> {
                 ? Future<String>(() {
                     return translationCache[name];
                   })
-                : translationsReference
-                    .child(getLanguageCode(myLocale.languageCode))
-                    .child(name)
-                    .child(firebaseAttributeLabel)
-                    .once()
-                    .then((DataSnapshot snapshot) {
+                : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(name).child(firebaseAttributeLabel).once().then((DataSnapshot snapshot) {
                     if (snapshot.value != null) {
                       translationCache[name] = snapshot.value;
                       return snapshot.value;
@@ -149,11 +177,7 @@ class _PlantListState extends State<PlantList> {
                 ? Future<String>(() {
                     return translationCache[family];
                   })
-                : translationsTaxonomyReference
-                    .child(getLanguageCode(myLocale.languageCode))
-                    .child(family)
-                    .once()
-                    .then((DataSnapshot snapshot) {
+                : translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(family).once().then((DataSnapshot snapshot) {
                     if (snapshot.value != null && snapshot.value.length > 0) {
                       translationCache[family] = snapshot.value[0];
                       return snapshot.value[0];
@@ -167,8 +191,7 @@ class _PlantListState extends State<PlantList> {
                 ListTile(
                   title: FutureBuilder<String>(
                       future: nameF,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<String> snapshot) {
+                      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
                         String labelLocal = name;
                         if (snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.data != null) {
@@ -179,8 +202,7 @@ class _PlantListState extends State<PlantList> {
                       }),
                   subtitle: FutureBuilder<String>(
                       future: familyF,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<String> snapshot) {
+                      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
                         String familyLocal = family;
                         if (snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.data != null) {
@@ -201,8 +223,7 @@ class _PlantListState extends State<PlantList> {
                     goToDetail(self, mainContext, myLocale, name, widget.filter);
                   },
                 ),
-                _getImageButton(
-                    mainContext, myLocale, storagePhotos + url, name),
+                _getImageButton(mainContext, myLocale, storagePhotos + url, name),
               ]),
             );
           }),
@@ -228,22 +249,16 @@ class _PlantListState extends State<PlantList> {
                               if (value != null) {
                                 filter[filterDistribution] = value;
                               }
-                              Navigator.pushReplacement(
-                                  mainContext,
-                                  getNextFilterRoute(mainContext, filter));
+                              Navigator.pushReplacement(mainContext, getNextFilterRoute(mainContext, filter));
                             });
                           } else {
-                            Navigator.pushReplacement(
-                                mainContext,
-                                getNextFilterRoute(mainContext, filter));
+                            Navigator.pushReplacement(mainContext, getNextFilterRoute(mainContext, filter));
                           }
                         });
                       },
                       child: FloatingActionButton(
                         onPressed: () {},
-                        child: Text(snapshot.data == null
-                            ? ''
-                            : snapshot.data.toString()),
+                        child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
                       ),
                     );
                 }

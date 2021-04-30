@@ -175,6 +175,7 @@ const String notificationAttributeActionBrowse = "browse";
 const String notificationAttributePath = "path";
 const String notificationAttributeUri = "uri";
 
+const String remoteAdsFrequency = "ads_frequency";
 const String remoteConfigIPNIServer = "ipni_server";
 const String remoteConfigIPNIServerWithTaxon = "ipni_server_with_taxon";
 const String remoteConfigSearchByNameVideo = "search_by_name_video";
