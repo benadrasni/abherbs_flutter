@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/distribution_2.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
@@ -14,8 +15,9 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../ads.dart';
+import '../keys.dart';
 import '../main.dart';
 
 class Distribution extends StatefulWidget {
@@ -34,6 +36,8 @@ class _DistributionState extends State<Distribution> {
   Future<String> _myRegionF;
   String _myRegion;
   GlobalKey<ScaffoldState> _key;
+  BannerAd _ad;
+  bool _showAd;
 
   void _openRegion(String region) {
     var route = MaterialPageRoute(builder: (context) => Distribution2(widget.filter, int.parse(region)), settings: RouteSettings(name: 'Distribution2'));
@@ -147,8 +151,7 @@ class _DistributionState extends State<Distribution> {
     regionWidgets.addAll(regions.map((List<String> items) {
       return TextButton(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(
-              EdgeInsets.only(bottom: 5.0)),
+          padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
         ),
         child: Stack(alignment: Alignment.center, children: [
           Image(
@@ -168,8 +171,7 @@ class _DistributionState extends State<Distribution> {
     regionWidgets.add(
       TextButton(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(
-              EdgeInsets.only(bottom: 5.0)),
+          padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
         ),
         child: Stack(alignment: Alignment.center, children: [
           Image(
@@ -226,6 +228,31 @@ class _DistributionState extends State<Distribution> {
     Offline.setKeepSynced(1, true);
     _checkCurrentUser();
 
+    _showAd = !Purchases.isNoAds();
+
+    if (_showAd) {
+      _ad = BannerAd(
+        adUnitId: getBannerAdUnitId(),
+        size: AdSize.banner,
+        request: AdRequest(),
+        listener: AdListener(
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+          onAdClosed: (Ad ad) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+        ),
+      );
+      _ad.load();
+    }
+
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterDistribution);
@@ -239,6 +266,7 @@ class _DistributionState extends State<Distribution> {
   @override
   void dispose() {
     _listener.cancel();
+    _ad.dispose();
     super.dispose();
   }
 
@@ -265,7 +293,17 @@ class _DistributionState extends State<Distribution> {
           _getBody(context),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Ads.getAdMobBanner(),
+            child: _showAd
+                ? Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(bottom: 5.0),
+                    child: AdWidget(ad: _ad),
+                    width: _ad.size.width.toDouble(),
+                    height: _ad.size.height.toDouble(),
+                  )
+                : Container(
+                    height: 0.0,
+                  ),
           ),
         ],
       ),

@@ -5,9 +5,9 @@ import 'dart:io';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/signin/sign_in.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -53,46 +53,8 @@ class _SearchPhotoState extends State<SearchPhoto> {
   Future<String> _engineF;
   ImageLabeler imageLabeler;
 
-  AdmobReward _rewardAd;
+  RewardedAd _rewardAd;
   bool _isRewardLoading;
-
-  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) async {
-    switch (event) {
-      case AdmobAdEvent.loaded:
-        if (adType == 'Reward') {
-          _isRewardLoading = false;
-        }
-        break;
-      case AdmobAdEvent.failedToLoad:
-        if (adType == 'Reward') {
-          _isRewardLoading = true;
-          _rewardAd.load();
-        }
-        break;
-      case AdmobAdEvent.clicked:
-        break;
-      case AdmobAdEvent.impression:
-        break;
-      case AdmobAdEvent.opened:
-        break;
-      case AdmobAdEvent.leftApplication:
-        break;
-      case AdmobAdEvent.closed:
-        if (adType == 'Reward') {
-          _isRewardLoading = true;
-          _rewardAd.load();
-        }
-        break;
-      case AdmobAdEvent.completed:
-        break;
-      case AdmobAdEvent.rewarded:
-        await Auth.changeCredits(1, "1");
-        setState(() {});
-        break;
-      case AdmobAdEvent.started:
-        break;
-    }
-  }
 
   Future<void> _logPhotoSearchEvent() async {
     await _firebaseAnalytics.logEvent(name: 'search_photo');
@@ -325,11 +287,30 @@ class _SearchPhotoState extends State<SearchPhoto> {
       return snapshot?.value ?? "";
     });
     _isRewardLoading = true;
-    _rewardAd = AdmobReward(
+    _rewardAd = RewardedAd(
       adUnitId: getRewardAdUnitId(),
-      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
-        handleEvent(event, args, 'Reward');
-      },
+      request: AdRequest(),
+      listener: AdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (Ad ad) => _isRewardLoading = false,
+        // Called when an ad request failed.
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          ad.dispose();
+        },
+        // Called when an ad opens an overlay that covers the screen.
+        onAdOpened: (Ad ad) {},
+        // Called when an ad removes an overlay that covers the screen.
+        onAdClosed: (Ad ad) {
+          ad.dispose();
+        },
+        // Called when an ad is in the process of leaving the application.
+        onApplicationExit: (Ad ad) {},
+        // Called when a RewardedAd triggers a reward.
+        onRewardedAdUserEarnedReward: (RewardedAd ad, RewardItem reward) async {
+          await Auth.changeCredits(1, "1");
+          setState(() {});
+        },
+      ),
     );
     _rewardAd.load();
     imageLabeler = FirebaseVision.instance.cloudImageLabeler();

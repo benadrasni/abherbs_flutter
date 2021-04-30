@@ -6,8 +6,8 @@ import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/signin/sign_in.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class FeedbackScreen extends StatefulWidget {
   final AppUser currentUser;
@@ -20,76 +20,63 @@ class FeedbackScreen extends StatefulWidget {
 }
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
-  AdmobInterstitial _interstitialAd;
-  AdmobReward _rewardAd;
+  InterstitialAd _interstitialAd;
+  RewardedAd _rewardAd;
   bool _isInterstitialLoading;
   bool _isRewardLoading;
-
-  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) async {
-    switch (event) {
-      case AdmobAdEvent.loaded:
-        if (adType == 'Interstitial') {
-          _isInterstitialLoading = false;
-        } else if (adType == 'Reward') {
-          _isRewardLoading = false;
-        }
-        break;
-      case AdmobAdEvent.failedToLoad:
-        if (adType == 'Interstitial') {
-          _isInterstitialLoading = true;
-          _interstitialAd.load();
-        } else if (adType == 'Reward') {
-          _isRewardLoading = true;
-          _rewardAd.load();
-        }
-        break;
-      case AdmobAdEvent.clicked:
-        break;
-      case AdmobAdEvent.impression:
-        break;
-      case AdmobAdEvent.opened:
-        break;
-      case AdmobAdEvent.leftApplication:
-        break;
-      case AdmobAdEvent.closed:
-        if (adType == 'Interstitial') {
-          _isInterstitialLoading = true;
-          _interstitialAd.load();
-        } else if (adType == 'Reward') {
-          _isRewardLoading = true;
-          _rewardAd.load();
-        }
-        break;
-      case AdmobAdEvent.completed:
-        break;
-      case AdmobAdEvent.rewarded:
-        await Auth.changeCredits(1, "1");
-        setState(() {});
-        break;
-      case AdmobAdEvent.started:
-        break;
-    }
-  }
 
   @override
   void initState() {
     super.initState();
 
     _isInterstitialLoading = true;
-    _interstitialAd = AdmobInterstitial(
+    _interstitialAd = InterstitialAd(
       adUnitId: getInterstitialAdUnitId(),
-      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
-        handleEvent(event, args, 'Interstitial');
-      },
+      request: AdRequest(),
+      listener: AdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (Ad ad) => _isInterstitialLoading = false,
+        // Called when an ad request failed.
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          ad.dispose();
+        },
+        // Called when an ad opens an overlay that covers the screen.
+        onAdOpened: (Ad ad) {},
+        // Called when an ad removes an overlay that covers the screen.
+        onAdClosed: (Ad ad) {
+          ad.dispose();
+        },
+        // Called when an ad is in the process of leaving the application.
+        onApplicationExit: (Ad ad) {},
+      ),
     );
     _interstitialAd.load();
 
     _isRewardLoading = true;
-    _rewardAd = AdmobReward(
+    _rewardAd = RewardedAd(
       adUnitId: getRewardAdUnitId(),
-      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
-        handleEvent(event, args, 'Reward');
-      },
+      request: AdRequest(),
+      listener: AdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (Ad ad) => _isRewardLoading = false,
+        // Called when an ad request failed.
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          ad.dispose();
+        },
+        // Called when an ad opens an overlay that covers the screen.
+        onAdOpened: (Ad ad) {},
+        // Called when an ad removes an overlay that covers the screen.
+        onAdClosed: (Ad ad) {
+          ad.dispose();
+        },
+        // Called when an ad is in the process of leaving the application.
+        onApplicationExit: (Ad ad) {},
+        // Called when a RewardedAd triggers a reward.
+        onRewardedAdUserEarnedReward: (RewardedAd ad, RewardItem reward) async {
+          await Auth.changeCredits(1, "1");
+          setState(() {});
+        },
+      ),
     );
     _rewardAd.load();
   }

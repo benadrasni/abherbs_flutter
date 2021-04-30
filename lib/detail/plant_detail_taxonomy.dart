@@ -8,10 +8,9 @@ import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../ads.dart';
-
-Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize) {
+Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize, bool showAd, BannerAd ad) {
   Future<List<String>> _firstSynonymF = synonymsReference.child(plant.name).child(firebaseAttributeIPNI).once().then((DataSnapshot snapshot) {
     List<String> result = [];
     if (snapshot.value != null) {
@@ -130,7 +129,15 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
     ),
   ));
 
-  cards.add(Ads.getAdMobBigBanner());
+  if (showAd) {
+    cards.add(Container(
+      alignment: Alignment.center,
+      margin: EdgeInsets.only(bottom: 5.0),
+      child: AdWidget(ad: ad),
+      width: ad.size.width.toDouble(),
+      height: ad.size.height.toDouble(),
+    ));
+  }
 
   return ListView(
     shrinkWrap: true,
@@ -142,7 +149,7 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
 Widget _getNames(Plant plant, PlantTranslation plantTranslation) {
   var names = <Text>[];
   names.add(Text(
-    plantTranslation.label ?? plant.name,
+    plantTranslation?.label ?? plant.name,
     style: TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 22.0,

@@ -26,6 +26,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
 import 'package:share/share.dart';
 import 'package:youtube_plyr_iframe/youtube_plyr_iframe.dart';
@@ -58,6 +59,10 @@ class _PlantDetailState extends State<PlantDetail> {
   GlobalKey<ScaffoldState> _key;
   bool _isPublic;
   double _fontSize;
+  bool _showAd;
+  BannerAd _adGallery;
+  BannerAd _adInfo;
+  BannerAd _adTaxonomy;
 
   onChangeFontSize() {
     setState(() {
@@ -148,11 +153,11 @@ class _PlantDetailState extends State<PlantDetail> {
   Widget _getBody(BuildContext context) {
     switch (_currentIndex) {
       case galleryIndex:
-        return getGallery(context, widget.plant);
+        return getGallery(context, widget.plant, _showAd, _adGallery);
       case infoIndex:
-        return getInfo(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize, _key);
+        return getInfo(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize, _key, _showAd, _adInfo);
       case taxonomyIndex:
-        return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize);
+        return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize, _showAd, _adTaxonomy);
       case observationIndex:
         return ObservationsPlant(_currentUser, Localizations.localeOf(context), _isPublic, widget.plant.name, _key);
     }
@@ -190,6 +195,73 @@ class _PlantDetailState extends State<PlantDetail> {
     Offline.setKeepSynced(3, true);
     _checkCurrentUser();
 
+    _showAd = !Purchases.isNoAds();
+
+    if (_showAd) {
+      _adGallery = BannerAd(
+        adUnitId: getBannerAdUnitId(),
+        size: AdSize.largeBanner,
+        request: AdRequest(),
+        listener: AdListener(
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+          onAdClosed: (Ad ad) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+        ),
+      );
+      _adGallery.load();
+
+      _adInfo = BannerAd(
+        adUnitId: getBannerAdUnitId(),
+        size: AdSize.largeBanner,
+        request: AdRequest(),
+        listener: AdListener(
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+          onAdClosed: (Ad ad) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+        ),
+      );
+      _adInfo.load();
+
+      _adTaxonomy = BannerAd(
+        adUnitId: getBannerAdUnitId(),
+        size: AdSize.largeBanner,
+        request: AdRequest(),
+        listener: AdListener(
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+          onAdClosed: (Ad ad) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+        ),
+      );
+      _adTaxonomy.load();
+    }
+
     _plantTranslationF = _getTranslation();
 
     _currentIndex = 0;
@@ -203,6 +275,9 @@ class _PlantDetailState extends State<PlantDetail> {
   @override
   void dispose() {
     _listener.cancel();
+    _adGallery.dispose();
+    _adInfo.dispose();
+    _adTaxonomy.dispose();
     for (YoutubePlayerController controller in getYoutubeControllers()) {
       controller.close();
     }

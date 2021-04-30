@@ -4,13 +4,12 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:youtube_plyr_iframe/youtube_plyr_iframe.dart';
-
-import '../ads.dart';
 
 List<YoutubePlayerController> controllers = [];
 
-Widget getGallery(BuildContext context, Plant plant) {
+Widget getGallery(BuildContext context, Plant plant, bool showAd, BannerAd ad) {
   List<Widget> cards = [];
 
   cards.add(Card(
@@ -60,7 +59,15 @@ Widget getGallery(BuildContext context, Plant plant) {
     );
   }));
 
-  cards.add(Ads.getAdMobBigBanner());
+  if (showAd) {
+    cards.add(Container(
+      alignment: Alignment.center,
+      margin: EdgeInsets.only(bottom: 5.0),
+      child: AdWidget(ad: ad),
+      width: ad.size.width.toDouble(),
+      height: ad.size.height.toDouble(),
+    ));
+  }
 
   if (plant.sourceUrls != null) {
     cards.add(Card(

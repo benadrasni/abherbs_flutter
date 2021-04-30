@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
@@ -14,9 +15,10 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:package_info/package_info.dart';
 
-import '../ads.dart';
+import '../keys.dart';
 import '../main.dart';
 
 class Color extends StatefulWidget {
@@ -35,6 +37,8 @@ class _ColorState extends State<Color> {
   Future<String> _rateStateF;
   Future<bool> _isNewVersionF;
   Map<String, String> _filter;
+  BannerAd _ad;
+  bool _showAd;
 
   _navigate(String value) {
     var newFilter = new Map<String, String>();
@@ -80,18 +84,37 @@ class _ColorState extends State<Color> {
     _checkCurrentUser();
     Offline.setKeepSynced(1, true);
 
+    _showAd = !Purchases.isNoAds();
+
+    if (_showAd) {
+      _ad = BannerAd(
+        adUnitId: getBannerAdUnitId(),
+        size: AdSize.banner,
+        request: AdRequest(),
+        listener: AdListener(
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+          onAdClosed: (Ad ad) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+        ),
+      );
+      _ad.load();
+    }
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterColor);
     _key = new GlobalKey<ScaffoldState>();
     _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
     _isNewVersionF = PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-      return FirebaseDatabase.instance
-          .reference()
-          .child(firebaseVersions)
-          .child(Platform.isAndroid ? firebaseAttributeAndroid : firebaseAttributeIOS)
-          .once()
-          .then((DataSnapshot snapshot) {
+      return FirebaseDatabase.instance.reference().child(firebaseVersions).child(Platform.isAndroid ? firebaseAttributeAndroid : firebaseAttributeIOS).once().then((DataSnapshot snapshot) {
         return int.parse(packageInfo.buildNumber) < snapshot.value;
       });
     });
@@ -102,6 +125,7 @@ class _ColorState extends State<Color> {
   @override
   void dispose() {
     _listener.cancel();
+    _ad.dispose();
     super.dispose();
   }
 
@@ -149,9 +173,7 @@ class _ColorState extends State<Color> {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 decoration: new BoxDecoration(
                   borderRadius: new BorderRadius.circular(16.0),
-                  color: Theme
-                      .of(context)
-                      .secondaryHeaderColor,
+                  color: Theme.of(context).secondaryHeaderColor,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -159,9 +181,7 @@ class _ColorState extends State<Color> {
                     Container(
                       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                       child: Text(
-                        S
-                            .of(context)
-                            .rate_question,
+                        S.of(context).rate_question,
                         style: TextStyle(fontSize: 18.0),
                       ),
                     ),
@@ -169,9 +189,7 @@ class _ColorState extends State<Color> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
-                          child: Text(S
-                              .of(context)
-                              .yes),
+                          child: Text(S.of(context).yes),
                           onPressed: () {
                             rateDialog(context).then((_) {
                               if (mounted) {
@@ -183,9 +201,7 @@ class _ColorState extends State<Color> {
                           },
                         ),
                         ElevatedButton(
-                          child: Text(S
-                              .of(context)
-                              .no),
+                          child: Text(S.of(context).no),
                           onPressed: () {
                             Prefs.setString(keyRateState, rateStateInitial).then((result) {
                               if (result) {
@@ -234,9 +250,7 @@ class _ColorState extends State<Color> {
                                       launchURL(appStore);
                                     }
                                   },
-                                  child: Platform.isAndroid
-                                      ? Image(image: AssetImage('res/images/google_play.png'))
-                                      : Image(image: AssetImage('res/images/app_store.png')),
+                                  child: Platform.isAndroid ? Image(image: AssetImage('res/images/google_play.png')) : Image(image: AssetImage('res/images/app_store.png')),
                                 ),
                               ],
                             )
@@ -317,7 +331,8 @@ class _ColorState extends State<Color> {
       body: Stack(
         children: <Widget>[
           Positioned.fill(
-            child: Image.asset("res/images/app_background.webp",
+            child: Image.asset(
+              "res/images/app_background.webp",
               fit: BoxFit.fitWidth,
               alignment: Alignment.bottomCenter,
             ),
@@ -328,7 +343,17 @@ class _ColorState extends State<Color> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Ads.getAdMobBanner(),
+            child: _showAd
+                ? Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(bottom: 5.0),
+                    child: AdWidget(ad: _ad),
+                    width: _ad.size.width.toDouble(),
+                    height: _ad.size.height.toDouble(),
+                  )
+                : Container(
+                    height: 0.0,
+                  ),
           ),
         ],
       ),
@@ -364,9 +389,7 @@ class _ColorState extends State<Color> {
                         onPressed: () {
                           Navigator.push(
                             mainContext,
-                            MaterialPageRoute(
-                                builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))),
-                                settings: RouteSettings(name: 'PlantList')),
+                            MaterialPageRoute(builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))), settings: RouteSettings(name: 'PlantList')),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

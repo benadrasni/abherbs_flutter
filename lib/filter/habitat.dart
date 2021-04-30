@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
@@ -11,8 +12,9 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../ads.dart';
+import '../keys.dart';
 import '../main.dart';
 
 class Habitat extends StatefulWidget {
@@ -29,6 +31,8 @@ class _HabitatState extends State<Habitat> {
   Future<int> _countF;
   Map<String, String> _filter;
   GlobalKey<ScaffoldState> _key;
+  BannerAd _ad;
+  bool _showAd;
 
   _navigate(String value) {
     var newFilter = new Map<String, String>();
@@ -73,6 +77,31 @@ class _HabitatState extends State<Habitat> {
     Offline.setKeepSynced(1, true);
     _checkCurrentUser();
 
+    _showAd = !Purchases.isNoAds();
+
+    if (_showAd) {
+      _ad = BannerAd(
+        adUnitId: getBannerAdUnitId(),
+        size: AdSize.banner,
+        request: AdRequest(),
+        listener: AdListener(
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+          onAdClosed: (Ad ad) {
+            setState(() {
+              _showAd = false;
+            });
+            ad.dispose();
+          },
+        ),
+      );
+      _ad.load();
+    }
+
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterHabitat);
@@ -84,6 +113,7 @@ class _HabitatState extends State<Habitat> {
   @override
   void dispose() {
     _listener.cancel();
+    _ad.dispose();
     super.dispose();
   }
 
@@ -117,8 +147,7 @@ class _HabitatState extends State<Habitat> {
             children: [
               TextButton(
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                      EdgeInsets.only(bottom: 5.0)),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
                 ),
                 child: Stack(alignment: Alignment.center, children: [
                   Image(
@@ -136,8 +165,7 @@ class _HabitatState extends State<Habitat> {
               ),
               TextButton(
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                      EdgeInsets.only(bottom: 5.0)),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
                 ),
                 child: Stack(alignment: Alignment.center, children: [
                   Image(
@@ -155,8 +183,7 @@ class _HabitatState extends State<Habitat> {
               ),
               TextButton(
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                      EdgeInsets.only(bottom: 5.0)),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
                 ),
                 child: Stack(alignment: Alignment.center, children: [
                   Image(
@@ -174,8 +201,7 @@ class _HabitatState extends State<Habitat> {
               ),
               TextButton(
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                      EdgeInsets.only(bottom: 5.0)),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
                 ),
                 child: Stack(alignment: Alignment.center, children: [
                   Image(
@@ -193,8 +219,7 @@ class _HabitatState extends State<Habitat> {
               ),
               TextButton(
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                      EdgeInsets.only(bottom: 5.0)),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
                 ),
                 child: Stack(alignment: Alignment.center, children: [
                   Image(
@@ -212,8 +237,7 @@ class _HabitatState extends State<Habitat> {
               ),
               TextButton(
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                      EdgeInsets.only(bottom: 5.0)),
+                  padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
                 ),
                 child: Stack(alignment: Alignment.center, children: [
                   Image(
@@ -244,7 +268,17 @@ class _HabitatState extends State<Habitat> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Ads.getAdMobBanner(),
+            child: _showAd
+                ? Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(bottom: 5.0),
+                    child: AdWidget(ad: _ad),
+                    width: _ad.size.width.toDouble(),
+                    height: _ad.size.height.toDouble(),
+                  )
+                : Container(
+                    height: 0.0,
+                  ),
           ),
         ],
       ),
@@ -280,9 +314,7 @@ class _HabitatState extends State<Habitat> {
                         onPressed: () {
                           Navigator.push(
                             mainContext,
-                            MaterialPageRoute(
-                                builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))),
-                                settings: RouteSettings(name: 'PlantList')),
+                            MaterialPageRoute(builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))), settings: RouteSettings(name: 'PlantList')),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
