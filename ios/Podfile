@@ -31,6 +31,7 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
+  pod 'Google-Mobile-Ads-SDK'
   pod 'GoogleMobileAdsMediationAppLovin'
   pod 'GoogleMobileAdsMediationFacebook'
   pod 'GoogleMobileAdsMediationMoPub'
