@@ -91,7 +91,7 @@ class _ColorState extends State<Color> {
         adUnitId: getBannerAdUnitId(),
         size: AdSize.banner,
         request: AdRequest(),
-        listener: AdListener(
+        listener: BannerAdListener(
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
             setState(() {
               _showAd = false;
@@ -337,23 +337,28 @@ class _ColorState extends State<Color> {
               alignment: Alignment.bottomCenter,
             ),
           ),
-          ListView(
-            padding: EdgeInsets.all(5.0),
-            children: _widgets,
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: _showAd
-                ? Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(bottom: 5.0),
-                    child: AdWidget(ad: _ad),
-                    width: _ad.size.width.toDouble(),
-                    height: _ad.size.height.toDouble(),
-                  )
-                : Container(
-                    height: 0.0,
-                  ),
+          Column(
+            children: [
+              Expanded(
+                  child: ListView(
+                padding: EdgeInsets.all(5.0),
+                children: _widgets,
+              )),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: _showAd
+                    ? Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
+                        child: AdWidget(ad: _ad),
+                        width: _ad.size.width.toDouble(),
+                        height: _ad.size.height.toDouble(),
+                      )
+                    : Container(
+                        height: 0.0,
+                      ),
+              ),
+            ],
           ),
         ],
       ),

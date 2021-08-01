@@ -23,6 +23,7 @@ import 'package:flutter_localized_countries/flutter_localized_countries.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:screen/screen.dart';
 
 import 'filter/color.dart';
@@ -34,40 +35,6 @@ import 'filter/petal.dart';
 void _iapError() {
   Fluttertoast.showToast(
       msg: 'IAP not prepared. Check if Platform service is available.', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 5, backgroundColor: Colors.redAccent);
-  Purchases.purchases = [];
-}
-
-Future<void> initializeStore() async {
-  final bool isAvailable = await InAppPurchaseConnection.instance.isAvailable();
-  if (!isAvailable) {
-    _iapError();
-  }
-
-  final QueryPurchaseDetailsResponse purchaseResponse = await InAppPurchaseConnection.instance.queryPastPurchases();
-  if (purchaseResponse.error != null) {
-    var purchases = await Prefs.getStringListF(keyPurchases, []);
-    Purchases.purchases = purchases.map((productId) => Purchases.offlineProducts[productId]).toList();
-  } else {
-    Purchases.purchases = [];
-    for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
-      if (Platform.isIOS && purchase.status == PurchaseStatus.error) {
-        await InAppPurchaseConnection.instance.completePurchase(purchase);
-      } else if (await verifyPurchase(purchase)) {
-        final pending = Platform.isIOS ? purchase.pendingCompletePurchase : !purchase.billingClientPurchase.isAcknowledged;
-
-        if (pending) {
-          await InAppPurchaseConnection.instance.completePurchase(purchase);
-        }
-        Purchases.purchases.add(purchase);
-      }
-    }
-    Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
-  }
-  Purchases.hasOldVersion = Prefs.getBool(keyOldVersion, false);
-  Purchases.hasLifetimeSubscription = Prefs.getBool(keyLifetimeSubscription, false);
-
-  Auth.getAppUser();
-  Offline.initialize();
 }
 
 Future<void> initializeFlutterFire() async {
@@ -123,12 +90,14 @@ Future<String> initializeRoute() {
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
+  if (Platform.isAndroid) {
+    InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
+  }
+
   runZonedGuarded(() {
     initializeFlutterFire().then((_) async {
       Screen.keepOn(true);
-      InAppPurchaseConnection.enablePendingPurchases();
       await Prefs.init();
-      await initializeStore();
       await AppTrackingTransparency.requestTrackingAuthorization();
       MobileAds.instance.initialize();
       Locale locale = await initializeLocale();
@@ -163,7 +132,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
-
+  final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   StreamSubscription<List<PurchaseDetails>> _subscription;
   Locale _locale;
 
@@ -179,37 +148,19 @@ class _AppState extends State<App> {
     });
   }
 
-  _listenToPurchaseUpdated(List<PurchaseDetails> purchases) {
-    var isPurchase = false;
-    for (PurchaseDetails purchase in purchases) {
-      switch (purchase.status) {
-        case PurchaseStatus.purchased:
-          {
-            final pending = Platform.isIOS ? purchase.pendingCompletePurchase : !purchase.billingClientPurchase.isAcknowledged;
-            if (pending) {
-              InAppPurchaseConnection.instance.completePurchase(purchase);
-            }
-            Purchases.purchases.add(purchase);
-            isPurchase = true;
-          }
-          break;
-
-        case PurchaseStatus.error:
-          {
-            if (Platform.isIOS) {
-              InAppPurchaseConnection.instance.completePurchase(purchase);
-            }
-          }
-          break;
-
-        default:
-          {}
+  void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
+    purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
+      if (purchaseDetails.status == PurchaseStatus.purchased) {
+        Purchases.purchases[purchaseDetails.productID] = purchaseDetails;
+        if (purchaseDetails.pendingCompletePurchase) {
+          await _inAppPurchase.completePurchase(purchaseDetails);
+        }
+        if (purchaseDetails.productID == productOffline) {
+          Offline.initialize();
+        }
+        setState(() {});
       }
-    }
-    if (isPurchase) {
-      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
-      setState(() {});
-    }
+    });
   }
 
   Future<dynamic> handleMessage(RemoteMessage message) {
@@ -388,12 +339,26 @@ class _AppState extends State<App> {
     return resultLocale;
   }
 
+  Future<void> initStoreInfo() async {
+    final bool isAvailable = await _inAppPurchase.isAvailable();
+    if (!isAvailable) {
+      _iapError();
+      Purchases.purchases = {};
+      setState(() {});
+    } else {
+      _inAppPurchase.restorePurchases();
+    }
+    Purchases.hasOldVersion = Prefs.getBool(keyOldVersion, false);
+    Purchases.hasLifetimeSubscription = Prefs.getBool(keyLifetimeSubscription, false);
+    Auth.getAppUser();
+  }
+
   @override
   void initState() {
     super.initState();
 
     _firebaseCloudMessagingListeners();
-    Stream purchaseUpdated = InAppPurchaseConnection.instance.purchaseUpdatedStream;
+    final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
@@ -404,6 +369,7 @@ class _AppState extends State<App> {
         Fluttertoast.showToast(msg: S.of(context).product_purchase_failed, toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 5);
       }
     });
+    initStoreInfo();
 
     _locale = widget.locale;
 

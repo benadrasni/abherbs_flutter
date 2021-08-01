@@ -13,97 +13,64 @@ class Purchases {
   static bool isSearchByPhotoPromotion;
   static DateTime searchByPhotoPromotionFrom;
   static DateTime searchByPhotoPromotionTo;
-  static List<PurchaseDetails> purchases = [];
-  static Map<String, PurchaseDetails> offlineProducts = {
-    productNoAdsIOS: PurchaseDetails(purchaseID: '', productID: productNoAdsIOS, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
-    productNoAdsAndroid: PurchaseDetails(purchaseID: '', productID: productNoAdsAndroid, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
-    productSearch: PurchaseDetails(purchaseID: '', productID: productSearch, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
-    productCustomFilter: PurchaseDetails(purchaseID: '', productID: productCustomFilter, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
-    productOffline: PurchaseDetails(purchaseID: '', productID: productOffline, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
-    productObservations: PurchaseDetails(purchaseID: '', productID: productObservations, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
-    productPhotoSearch: PurchaseDetails(purchaseID: '', productID: productPhotoSearch, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
-    subscriptionMonthly: PurchaseDetails(purchaseID: '', productID: subscriptionMonthly, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
-    subscriptionYearly: PurchaseDetails(purchaseID: '', productID: subscriptionYearly, verificationData: PurchaseVerificationData(localVerificationData: '', serverVerificationData: '', source: IAPSource.AppStore), transactionDate: ''),
-  };
+  static Map<String, PurchaseDetails> purchases = {};
 
   static bool isPurchased(String productId) {
-    for (var purchase in purchases) {
-      if (purchase.productID == productId) {
-        return true;
-      }
-    }
-    return false;
+    return purchases[productId] != null;
   }
 
   static bool isNoAds() {
-    for (PurchaseDetails product in purchases) {
-      if (product.productID == productNoAdsAndroid ||
-          product.productID == productNoAdsIOS) {
-        return true;
-      }
+    if (purchases[productNoAdsAndroid] != null || purchases[productNoAdsIOS] != null) {
+      return true;
     }
     return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isSearch() {
-    for (PurchaseDetails product in purchases) {
-      if (product.productID == productSearch) {
-        return true;
-      }
+    if (purchases[productSearch] != null) {
+      return true;
     }
     return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isCustomFilter() {
-    for (PurchaseDetails product in purchases) {
-      if (product.productID == productCustomFilter) {
-        return true;
-      }
+    if (purchases[productCustomFilter] != null) {
+      return true;
     }
     return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isOffline() {
-    for (PurchaseDetails product in purchases) {
-      if (product.productID == productOffline) {
-        return true;
-      }
+    if (purchases[productOffline] != null) {
+      return true;
     }
     return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isObservations() {
-    for (PurchaseDetails product in purchases) {
-      if (product.productID == productObservations) {
-        return true;
-      }
+    if (purchases[productObservations] != null) {
+      return true;
     }
     return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isPhotoSearch() {
-    for (PurchaseDetails product in purchases) {
-      if (product.productID == productPhotoSearch) {
-        return true;
-      }
+    if (purchases[productPhotoSearch] != null) {
+      return true;
     }
     return hasOldVersion != null && hasOldVersion;
   }
 
   static bool isSubscribedMonthly() {
-    for (PurchaseDetails product in purchases) {
-      if (product.productID == subscriptionMonthly) {
-        return true;
-      }
+    if (purchases[subscriptionMonthly] != null) {
+      return true;
     }
     return false;
   }
 
   static bool isSubscribedYearly() {
-    for (PurchaseDetails product in purchases) {
-      if (product.productID == subscriptionYearly) {
-        return true;
-      }
+    if (purchases[subscriptionYearly] != null) {
+      return true;
     }
     return false;
   }

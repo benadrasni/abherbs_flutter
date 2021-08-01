@@ -1,10 +1,8 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_index_list.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
@@ -33,7 +31,6 @@ class _PlantListState extends State<PlantList> {
   StreamSubscription<firebase_auth.User> _listener;
   AppUser _currentUser;
   Future<int> _count;
-  Random _random;
   BannerAd _ad;
   bool _showAd;
 
@@ -59,23 +56,7 @@ class _PlantListState extends State<PlantList> {
       },
     );
 
-    if (_showAd && _random.nextInt(100) < RemoteConfiguration.remoteConfig.getInt(remoteAdsFrequency)) {
-      _showAd = false;
-      return Column(
-        children: [
-          button,
-          Container(
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(bottom: 5.0),
-            child: AdWidget(ad: _ad),
-            width: _ad.size.width.toDouble(),
-            height: _ad.size.height.toDouble(),
-          ),
-        ],
-      );
-    } else {
-      return button;
-    }
+    return button;
   }
 
   _onAuthStateChanged(firebase_auth.User user) {
@@ -94,16 +75,15 @@ class _PlantListState extends State<PlantList> {
     super.initState();
     _checkCurrentUser();
     Offline.setKeepSynced(2, true);
-    _random = Random();
 
     _showAd = !Purchases.isNoAds();
 
     if (_showAd) {
       _ad = BannerAd(
         adUnitId: getBannerAdUnitId(),
-        size: AdSize.largeBanner,
+        size: AdSize.banner,
         request: AdRequest(),
-        listener: AdListener(
+        listener: BannerAdListener(
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
             setState(() {
               _showAd = false;
@@ -146,90 +126,111 @@ class _PlantListState extends State<PlantList> {
         title: Text(S.of(mainContext).list_info),
       ),
       drawer: AppDrawer(_currentUser, widget.filter, null),
-      body: FirebaseAnimatedIndexList(
-          defaultChild: Center(child: CircularProgressIndicator()),
-          emptyChild: Container(
-            padding: EdgeInsets.all(5.0),
-            alignment: Alignment.center,
-            child: Text(widget.emptyMessage, style: TextStyle(fontSize: 20.0)),
-          ),
-          query: listsReference.orderByChild(firebaseAttributeName),
-          keyQuery: widget.pathToIndex,
-          itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
-            String name = snapshot.value[firebaseAttributeName];
-            String family = snapshot.value[firebaseAttributeFamily];
-            String url = snapshot.value[firebaseAttributeUrl];
-
-            Locale myLocale = Localizations.localeOf(mainContext);
-            Future<String> nameF = translationCache.containsKey(name)
-                ? Future<String>(() {
-                    return translationCache[name];
-                  })
-                : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(name).child(firebaseAttributeLabel).once().then((DataSnapshot snapshot) {
-                    if (snapshot.value != null) {
-                      translationCache[name] = snapshot.value;
-                      return snapshot.value;
-                    } else {
-                      return null;
-                    }
-                  });
-            Future<String> familyF = translationCache.containsKey(family)
-                ? Future<String>(() {
-                    return translationCache[family];
-                  })
-                : translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(family).once().then((DataSnapshot snapshot) {
-                    if (snapshot.value != null && snapshot.value.length > 0) {
-                      translationCache[family] = snapshot.value[0];
-                      return snapshot.value[0];
-                    } else {
-                      return null;
-                    }
-                  });
-
-            return Card(
-              child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                ListTile(
-                  title: FutureBuilder<String>(
-                      future: nameF,
-                      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                        String labelLocal = name;
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          if (snapshot.data != null) {
-                            labelLocal = snapshot.data + ' / ' + name;
-                          }
-                        }
-                        return Text(labelLocal);
-                      }),
-                  subtitle: FutureBuilder<String>(
-                      future: familyF,
-                      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                        String familyLocal = family;
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          if (snapshot.data != null) {
-                            familyLocal = snapshot.data + ' / ' + family;
-                          }
-                        }
-                        return Text(familyLocal);
-                      }),
-                  leading: getImage(
-                      storageFamilies + family + defaultExtension,
-                      Container(
-                        width: 0.0,
-                        height: 0.0,
-                      ),
-                      width: 50.0,
-                      height: 50.0),
-                  onTap: () {
-                    goToDetail(self, mainContext, myLocale, name, widget.filter);
-                  },
+      body: Column(
+        children: [
+          Expanded(
+            child: FirebaseAnimatedIndexList(
+                defaultChild: Center(child: CircularProgressIndicator()),
+                emptyChild: Container(
+                  padding: EdgeInsets.all(5.0),
+                  alignment: Alignment.center,
+                  child: Text(widget.emptyMessage, style: TextStyle(fontSize: 20.0)),
                 ),
-                _getImageButton(mainContext, myLocale, storagePhotos + url, name),
-              ]),
-            );
-          }),
+                query: listsReference.orderByChild(firebaseAttributeName),
+                keyQuery: widget.pathToIndex,
+                itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
+                  String name = snapshot.value[firebaseAttributeName];
+                  String family = snapshot.value[firebaseAttributeFamily];
+                  String url = snapshot.value[firebaseAttributeUrl];
+
+                  Locale myLocale = Localizations.localeOf(mainContext);
+                  Future<String> nameF = translationCache.containsKey(name)
+                      ? Future<String>(() {
+                          return translationCache[name];
+                        })
+                      : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(name).child(firebaseAttributeLabel).once().then((DataSnapshot snapshot) {
+                          if (snapshot.value != null) {
+                            translationCache[name] = snapshot.value;
+                            return snapshot.value;
+                          } else {
+                            return null;
+                          }
+                        });
+                  Future<String> familyF = translationCache.containsKey(family)
+                      ? Future<String>(() {
+                          return translationCache[family];
+                        })
+                      : translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(family).once().then((DataSnapshot snapshot) {
+                          if (snapshot.value != null && snapshot.value.length > 0) {
+                            translationCache[family] = snapshot.value[0];
+                            return snapshot.value[0];
+                          } else {
+                            return null;
+                          }
+                        });
+
+                  return Card(
+                    child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                      ListTile(
+                        title: FutureBuilder<String>(
+                            future: nameF,
+                            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                              String labelLocal = name;
+                              if (snapshot.connectionState == ConnectionState.done) {
+                                if (snapshot.data != null) {
+                                  labelLocal = snapshot.data + ' / ' + name;
+                                }
+                              }
+                              return Text(labelLocal);
+                            }),
+                        subtitle: FutureBuilder<String>(
+                            future: familyF,
+                            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                              String familyLocal = family;
+                              if (snapshot.connectionState == ConnectionState.done) {
+                                if (snapshot.data != null) {
+                                  familyLocal = snapshot.data + ' / ' + family;
+                                }
+                              }
+                              return Text(familyLocal);
+                            }),
+                        leading: getImage(
+                            storageFamilies + family + defaultExtension,
+                            Container(
+                              width: 0.0,
+                              height: 0.0,
+                            ),
+                            width: 50.0,
+                            height: 50.0),
+                        onTap: () {
+                          goToDetail(self, mainContext, myLocale, name, widget.filter);
+                        },
+                      ),
+                      _getImageButton(mainContext, myLocale, storagePhotos + url, name),
+                    ]),
+                  );
+                }),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: _showAd
+                ? Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
+                    child: AdWidget(ad: _ad),
+                    width: _ad.size.width.toDouble(),
+                    height: _ad.size.height.toDouble(),
+                  )
+                : Container(
+                    height: 0.0,
+                  ),
+          ),
+        ],
+      ),
       floatingActionButton: Container(
-        height: 70.0,
+        height: 70.0 + getFABPadding(),
         width: 70.0,
+        padding: EdgeInsets.only(bottom: getFABPadding()),
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(

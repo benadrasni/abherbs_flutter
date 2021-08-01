@@ -81,7 +81,6 @@ const String googleTranslateEndpoint = "https://translation.googleapis.com/langu
 const String googleMapsEndpoint = "https://maps.googleapis.com/maps/api/staticmap?";
 const String plantIdEndpoint = "https://api.plant.id/v2/identify";
 
-const String plantIdEngine = "plant.id";
 const List<String> plantIdModifiers = ["similar_images"];
 const List<String> plantIdPlantDetails = ["common_names", "url", "wiki_description", "taxonomy"];
 

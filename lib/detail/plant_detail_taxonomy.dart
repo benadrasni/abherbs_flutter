@@ -8,9 +8,8 @@ import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize, bool showAd, BannerAd ad) {
+Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize) {
   Future<List<String>> _firstSynonymF = synonymsReference.child(plant.name).child(firebaseAttributeIPNI).once().then((DataSnapshot snapshot) {
     List<String> result = [];
     if (snapshot.value != null) {
@@ -128,16 +127,6 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
       child: _getTaxonomy(context, myLocale, plant, _fontSize),
     ),
   ));
-
-  if (showAd) {
-    cards.add(Container(
-      alignment: Alignment.center,
-      margin: EdgeInsets.only(bottom: 5.0),
-      child: AdWidget(ad: ad),
-      width: ad.size.width.toDouble(),
-      height: ad.size.height.toDouble(),
-    ));
-  }
 
   return ListView(
     shrinkWrap: true,

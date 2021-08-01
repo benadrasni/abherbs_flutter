@@ -4,12 +4,11 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:youtube_plyr_iframe/youtube_plyr_iframe.dart';
 
 List<YoutubePlayerController> controllers = [];
 
-Widget getGallery(BuildContext context, Plant plant, bool showAd, BannerAd ad) {
+Widget getGallery(BuildContext context, Plant plant) {
   List<Widget> cards = [];
 
   cards.add(Card(
@@ -58,16 +57,6 @@ Widget getGallery(BuildContext context, Plant plant, bool showAd, BannerAd ad) {
       child: _getImageButton(context, storagePhotos + url),
     );
   }));
-
-  if (showAd) {
-    cards.add(Container(
-      alignment: Alignment.center,
-      margin: EdgeInsets.only(bottom: 5.0),
-      child: AdWidget(ad: ad),
-      width: ad.size.width.toDouble(),
-      height: ad.size.height.toDouble(),
-    ));
-  }
 
   if (plant.sourceUrls != null) {
     cards.add(Card(

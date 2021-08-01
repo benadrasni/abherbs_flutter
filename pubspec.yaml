@@ -17,21 +17,20 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  shared_preferences: 2.0.5
-  firebase_messaging: 9.0.1
-  firebase_analytics: 7.1.1
-  firebase_auth: 1.0.1
-  firebase_storage: 8.0.0
-  firebase_database: 6.1.0
-  firebase_remote_config: 0.9.0-dev.0
-  firebase_crashlytics: 2.0.0
-  firebase_performance: 0.6.0
-  firebase_ml_vision: 0.12.0
-  google_mobile_ads: 0.12.1+1
-  google_sign_in: 5.0.1
-  apple_sign_in: 0.1.0
-  device_info: 2.0.0
-  in_app_purchase: 0.5.1
+  shared_preferences: 2.0.6
+  firebase_messaging: 10.0.3
+  firebase_analytics: 8.1.2
+  firebase_auth: 2.0.0
+  firebase_storage: 9.0.0
+  firebase_database: 7.1.1
+  firebase_remote_config: 0.10.0+2
+  firebase_crashlytics: 2.0.7
+  firebase_performance: 0.7.0+6
+  google_mobile_ads: 0.13.2
+  google_sign_in: 5.0.4
+  the_apple_sign_in: 1.1.1
+  device_info: 2.0.2
+  in_app_purchase: 1.0.6
   cached_network_image: 3.0.0-nullsafety
   url_launcher: 6.0.2
   http: 0.13.1

@@ -60,9 +60,7 @@ class _PlantDetailState extends State<PlantDetail> {
   bool _isPublic;
   double _fontSize;
   bool _showAd;
-  BannerAd _adGallery;
-  BannerAd _adInfo;
-  BannerAd _adTaxonomy;
+  BannerAd _ad;
 
   onChangeFontSize() {
     setState(() {
@@ -153,11 +151,11 @@ class _PlantDetailState extends State<PlantDetail> {
   Widget _getBody(BuildContext context) {
     switch (_currentIndex) {
       case galleryIndex:
-        return getGallery(context, widget.plant, _showAd, _adGallery);
+        return getGallery(context, widget.plant);
       case infoIndex:
-        return getInfo(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize, _key, _showAd, _adInfo);
+        return getInfo(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize, _key);
       case taxonomyIndex:
-        return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize, _showAd, _adTaxonomy);
+        return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize);
       case observationIndex:
         return ObservationsPlant(_currentUser, Localizations.localeOf(context), _isPublic, widget.plant.name, _key);
     }
@@ -198,11 +196,11 @@ class _PlantDetailState extends State<PlantDetail> {
     _showAd = !Purchases.isNoAds();
 
     if (_showAd) {
-      _adGallery = BannerAd(
+      _ad = BannerAd(
         adUnitId: getBannerAdUnitId(),
-        size: AdSize.largeBanner,
+        size: AdSize.banner,
         request: AdRequest(),
-        listener: AdListener(
+        listener: BannerAdListener(
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
             setState(() {
               _showAd = false;
@@ -217,49 +215,7 @@ class _PlantDetailState extends State<PlantDetail> {
           },
         ),
       );
-      _adGallery.load();
-
-      _adInfo = BannerAd(
-        adUnitId: getBannerAdUnitId(),
-        size: AdSize.largeBanner,
-        request: AdRequest(),
-        listener: AdListener(
-          onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            setState(() {
-              _showAd = false;
-            });
-            ad.dispose();
-          },
-          onAdClosed: (Ad ad) {
-            setState(() {
-              _showAd = false;
-            });
-            ad.dispose();
-          },
-        ),
-      );
-      _adInfo.load();
-
-      _adTaxonomy = BannerAd(
-        adUnitId: getBannerAdUnitId(),
-        size: AdSize.largeBanner,
-        request: AdRequest(),
-        listener: AdListener(
-          onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            setState(() {
-              _showAd = false;
-            });
-            ad.dispose();
-          },
-          onAdClosed: (Ad ad) {
-            setState(() {
-              _showAd = false;
-            });
-            ad.dispose();
-          },
-        ),
-      );
-      _adTaxonomy.load();
+      _ad.load();
     }
 
     _plantTranslationF = _getTranslation();
@@ -275,9 +231,7 @@ class _PlantDetailState extends State<PlantDetail> {
   @override
   void dispose() {
     _listener.cancel();
-    _adGallery.dispose();
-    _adInfo.dispose();
-    _adTaxonomy.dispose();
+    _ad.dispose();
     for (YoutubePlayerController controller in getYoutubeControllers()) {
       controller.close();
     }
@@ -374,10 +328,31 @@ class _PlantDetailState extends State<PlantDetail> {
                   ],
                 ),
       drawer: AppDrawer(_currentUser, widget.filter, null),
-      body: _getBody(context),
+      body: Column(
+        children: [
+          Expanded(
+            child: _getBody(context),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: _showAd
+                ? Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
+                    child: AdWidget(ad: _ad),
+                    width: _ad.size.width.toDouble(),
+                    height: _ad.size.height.toDouble(),
+                  )
+                : Container(
+                    height: 0.0,
+                  ),
+          ),
+        ],
+      ),
       floatingActionButton: Container(
-        height: 70.0,
+        height: 70.0 + getFABPadding(),
         width: 70.0,
+        padding: EdgeInsets.only(bottom: getFABPadding()),
         child: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<bool>(
