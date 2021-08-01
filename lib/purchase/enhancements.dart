@@ -7,7 +7,6 @@ import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/settings/setting_my_filter.dart';
 import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/purchase/subscription.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,8 @@ class EnhancementsScreen extends StatefulWidget {
 
 class _EnhancementsScreenState extends State<EnhancementsScreen> {
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
-  final InAppPurchaseConnection _connection = InAppPurchaseConnection.instance;
+  final InAppPurchase _inAppPurchase = InAppPurchase.instance;
+  final _key = GlobalKey<ScaffoldState>();
   final List<String> _productLists = Platform.isAndroid
       ? [
           productNoAdsAndroid,
@@ -42,6 +42,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           productObservations,
           productPhotoSearch,
         ];
+  StreamSubscription<List<PurchaseDetails>> _subscription;
   Future<ProductDetailsResponse> _productsF;
 
   Future<void> _logCancelledPurchaseEvent(key, String productId) async {
@@ -53,10 +54,41 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     await _firebaseAnalytics.logEvent(name: 'purchase_canceled', parameters: {'productId': productId});
   }
 
+  void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
+    purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
+      if (purchaseDetails.status == PurchaseStatus.pending) {
+      } else {
+        if (purchaseDetails.status == PurchaseStatus.error) {
+          _logCancelledPurchaseEvent(_key, purchaseDetails.productID);
+        } else if (purchaseDetails.status == PurchaseStatus.purchased) {
+          bool valid = await verifyPurchase(purchaseDetails);
+          if (valid) {
+            Purchases.purchases[purchaseDetails.productID] = purchaseDetails;
+          } else {
+            _logCancelledPurchaseEvent(_key, purchaseDetails.productID);
+            return;
+          }
+        }
+        if (purchaseDetails.pendingCompletePurchase) {
+          await _inAppPurchase.completePurchase(purchaseDetails);
+        }
+        setState(() {});
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    _productsF = _connection.queryProductDetails(_productLists.toSet());
+    _productsF = _inAppPurchase.queryProductDetails(_productLists.toSet());
+    final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
+    _subscription = purchaseUpdated.listen((purchaseDetailsList) {
+      _listenToPurchaseUpdated(purchaseDetailsList);
+    }, onDone: () {
+      _subscription.cancel();
+    }, onError: (error) {
+      // handle error here.
+    });
   }
 
   Widget _getVideoLink(BuildContext context, ProductDetails product) {
@@ -82,9 +114,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
         style: ElevatedButton.styleFrom(
           primary: Colors.lightBlueAccent, // background
         ),
-        child: Text(S
-            .of(context)
-            .video,
+        child: Text(S.of(context).video,
             style: TextStyle(
               fontSize: 16.0,
               fontWeight: FontWeight.bold,
@@ -106,7 +136,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
         ),
         onPressed: () {
           if (!isPurchased) {
-            _connection.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: product)).then((value) {
+            _inAppPurchase.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: product)).then((value) {
               if (!value) {
                 _logCancelledPurchaseEvent(key, product.id);
               }
@@ -186,10 +216,8 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final key = GlobalKey<ScaffoldState>();
-
     return Scaffold(
-      key: key,
+      key: _key,
       appBar: AppBar(
         title: Text(S.of(context).enhancements),
       ),
@@ -218,26 +246,8 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                     padding: EdgeInsets.all(10.0),
                     child: TextButton(
                       onPressed: () async {
-                        final QueryPurchaseDetailsResponse purchaseResponse = await _connection.queryPastPurchases();
-                        if (purchaseResponse.error != null) {
-                          var purchases = await Prefs.getStringListF(keyPurchases, []);
-                          Purchases.purchases = purchases.map((productId) => Purchases.offlineProducts[productId]).toList();
-                        } else {
-                          Purchases.purchases = [];
-                          for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
-                            if (await verifyPurchase(purchase)) {
-                              if (Platform.isIOS) {
-                                _connection.completePurchase(purchase);
-                              }
-                              Purchases.purchases.add(purchase);
-                            }
-                          }
-                          Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
-                        }
-
-                        if (mounted) {
-                          setState(() {});
-                        }
+                        Purchases.purchases = {};
+                        _inAppPurchase.restorePurchases();
                       },
                       child: Text(
                         S.of(context).product_restore_purchases,
@@ -280,7 +290,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                         ),
                         SizedBox(height: 10.0),
                         _getVideoLink(context, product),
-                        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: _getButtons(product, isPurchased, key)),
+                        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: _getButtons(product, isPurchased, _key)),
                       ]),
                     ),
                   );

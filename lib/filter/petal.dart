@@ -85,7 +85,7 @@ class _PetalState extends State<Petal> {
         adUnitId: getBannerAdUnitId(),
         size: AdSize.banner,
         request: AdRequest(),
-        listener: AdListener(
+        listener: BannerAdListener(
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
             setState(() {
               _showAd = false;
@@ -142,130 +142,136 @@ class _PetalState extends State<Petal> {
               alignment: Alignment.bottomCenter,
             ),
           ),
-          ListView(
-            padding: EdgeInsets.all(5.0),
+          Column(
             children: [
-              Container(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                child: Row(
+              Expanded(
+                child: ListView(
+                  padding: EdgeInsets.all(5.0),
                   children: [
-                    Expanded(
-                      child: TextButton(
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
-                        ),
-                        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                          Text(
-                            S.of(context).petal_4,
-                            style: _defaultTextStyle,
+                    Container(
+                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextButton(
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
+                              ),
+                              child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                                Text(
+                                  S.of(context).petal_4,
+                                  style: _defaultTextStyle,
+                                ),
+                                Image(
+                                  image: AssetImage('res/images/nop_4.webp'),
+                                ),
+                              ]),
+                              onPressed: () {
+                                _navigate('1');
+                              },
+                            ),
+                            flex: 1,
                           ),
-                          Image(
-                            image: AssetImage('res/images/nop_4.webp'),
+                          Expanded(
+                            child: TextButton(
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
+                              ),
+                              child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                                Text(
+                                  S.of(context).petal_5,
+                                  style: _defaultTextStyle,
+                                ),
+                                Image(
+                                  image: AssetImage('res/images/nop_5.webp'),
+                                ),
+                              ]),
+                              onPressed: () {
+                                _navigate('2');
+                              },
+                            ),
+                            flex: 1,
                           ),
-                        ]),
-                        onPressed: () {
-                          _navigate('1');
-                        },
+                        ],
                       ),
-                      flex: 1,
                     ),
-                    Expanded(
-                      child: TextButton(
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
-                        ),
-                        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                          Text(
-                            S.of(context).petal_5,
-                            style: _defaultTextStyle,
+                    Container(
+                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: TextButton(
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
+                              ),
+                              child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                                Text(
+                                  S.of(context).petal_many,
+                                  style: _defaultTextStyle,
+                                ),
+                                Image(
+                                  image: AssetImage('res/images/nop_many.webp'),
+                                ),
+                              ]),
+                              onPressed: () {
+                                _navigate('3');
+                              },
+                            ),
+                            flex: 1,
                           ),
-                          Image(
-                            image: AssetImage('res/images/nop_5.webp'),
+                          Expanded(
+                            child: TextButton(
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
+                              ),
+                              child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                                Text(
+                                  S.of(context).petal_zygomorphic,
+                                  style: _defaultTextStyle,
+                                ),
+                                Image(
+                                  image: AssetImage('res/images/nop_zygomorphic.webp'),
+                                ),
+                              ]),
+                              onPressed: () {
+                                _navigate('4');
+                              },
+                            ),
+                            flex: 1,
                           ),
-                        ]),
-                        onPressed: () {
-                          _navigate('2');
-                        },
+                        ],
                       ),
-                      flex: 1,
                     ),
+                    Container(
+                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
+                      child: Text(
+                        S.of(context).petal_message,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
+                    Container(height: 10.0 + getFABPadding()),
                   ],
                 ),
               ),
-              Container(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: TextButton(
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
-                        ),
-                        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                          Text(
-                            S.of(context).petal_many,
-                            style: _defaultTextStyle,
-                          ),
-                          Image(
-                            image: AssetImage('res/images/nop_many.webp'),
-                          ),
-                        ]),
-                        onPressed: () {
-                          _navigate('3');
-                        },
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: _showAd
+                    ? Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
+                        child: AdWidget(ad: _ad),
+                        width: _ad.size.width.toDouble(),
+                        height: _ad.size.height.toDouble(),
+                      )
+                    : Container(
+                        height: 0.0,
                       ),
-                      flex: 1,
-                    ),
-                    Expanded(
-                      child: TextButton(
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
-                        ),
-                        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                          Text(
-                            S.of(context).petal_zygomorphic,
-                            style: _defaultTextStyle,
-                          ),
-                          Image(
-                            image: AssetImage('res/images/nop_zygomorphic.webp'),
-                          ),
-                        ]),
-                        onPressed: () {
-                          _navigate('4');
-                        },
-                      ),
-                      flex: 1,
-                    ),
-                  ],
-                ),
               ),
-              Container(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
-                child: Text(
-                  S.of(context).petal_message,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-              ),
-              Container(height: 10.0 + getFABPadding()),
             ],
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: _showAd
-                ? Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(bottom: 5.0),
-                    child: AdWidget(ad: _ad),
-                    width: _ad.size.width.toDouble(),
-                    height: _ad.size.height.toDouble(),
-                  )
-                : Container(
-                    height: 0.0,
-                  ),
           ),
         ],
       ),

@@ -14,12 +14,13 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../main.dart';
+
+const int maxFailedLoadAttempts = 3;
 
 class SearchResult {
   double confidence;
@@ -44,20 +45,62 @@ class SearchPhoto extends StatefulWidget {
 
 class _SearchPhotoState extends State<SearchPhoto> {
   final ImagePicker _picker = ImagePicker();
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
-  FirebaseAnalytics _firebaseAnalytics;
-  GlobalKey<ScaffoldState> _key;
   File _image;
   Future<List<SearchResult>> _searchResultF;
-  Future<List<dynamic>> _genericEntitiesF;
-  Future<String> _engineF;
-  ImageLabeler imageLabeler;
 
-  RewardedAd _rewardAd;
-  bool _isRewardLoading;
+  RewardedAd _rewardedAd;
+  int _numRewardedLoadAttempts = 0;
 
   Future<void> _logPhotoSearchEvent() async {
     await _firebaseAnalytics.logEvent(name: 'search_photo');
+  }
+
+  void _createRewardedAd() {
+    RewardedAd.load(
+        adUnitId: getRewardAdUnitId(),
+        request: AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+          onAdLoaded: (RewardedAd ad) {
+            print('$ad loaded.');
+            _rewardedAd = ad;
+            _numRewardedLoadAttempts = 0;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('RewardedAd failed to load: $error');
+            _rewardedAd = null;
+            _numRewardedLoadAttempts += 1;
+            if (_numRewardedLoadAttempts <= maxFailedLoadAttempts) {
+              _createRewardedAd();
+            }
+          },
+        ));
+  }
+
+  void _showRewardedAd() {
+    if (_rewardedAd == null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(S.of(context).snack_loading_ad),
+        duration: Duration(milliseconds: 1500),
+      ));
+      return;
+    }
+    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (RewardedAd ad) {
+        ad.dispose();
+        _createRewardedAd();
+      },
+      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+        ad.dispose();
+        _createRewardedAd();
+      },
+    );
+
+    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+    });
+    _rewardedAd = null;
   }
 
   Future<void> _getImage(GlobalKey<ScaffoldState> _key, ImageSource source, double maxSize) async {
@@ -71,14 +114,9 @@ class _SearchPhotoState extends State<SearchPhoto> {
       var image = await _picker.getImage(source: source, maxWidth: maxSize);
       if (image != null) {
         _logPhotoSearchEvent();
-        var engine = await _engineF;
         setState(() {
           _image = File(image.path);
-          if (engine == plantIdEngine) {
-            _searchResultF = _getSearchResultPlantId(_image);
-          } else {
-            _searchResultF = _getSearchResult(_image);
-          }
+          _searchResultF = _getSearchResultPlantId(_image);
         });
       }
     }
@@ -187,138 +225,17 @@ class _SearchPhotoState extends State<SearchPhoto> {
     });
   }
 
-  Future<List<SearchResult>> _getSearchResult(File image) {
-    final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(image);
-
-    return Future.wait([imageLabeler.processImage(visionImage), _genericEntitiesF]).then((value) async {
-      List<ImageLabel> labels = value[0];
-      List<dynamic> genericEntities = value[1];
-      List<ImageLabel> significantLabels = [];
-      for (ImageLabel label in labels) {
-        if (!genericEntities.contains(label.entityId)) {
-          significantLabels.add(label);
-        }
-      }
-
-      var results = <SearchResult>[];
-      for (ImageLabel label in significantLabels) {
-        results.add(await rootReference.child(firebaseSearchPhoto + label.entityId).once().then((snapshot) {
-          var result = SearchResult();
-          result.labelLatin = _adjustLabel(label.text);
-          result.entityId = label.entityId;
-          result.confidence = label.confidence;
-          if (snapshot != null && snapshot.value != null) {
-            result.count = snapshot.value['count'];
-            result.path = snapshot.value['path'];
-            result.labelInLanguage = '';
-            if (result.path.contains('/')) {
-              String path = result.path.substring(0, result.path.length - 5);
-              result.labelLatin = path.substring(path.lastIndexOf('/') + 1);
-            } else {
-              result.labelLatin = result.path;
-              translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).keepSynced(true);
-              return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).child(firebaseAttributeLabel).once().then((snapshot) {
-                if (snapshot.value != null) {
-                  result.labelInLanguage = snapshot.value;
-                }
-                return result;
-              });
-            }
-            if (translationCache.containsKey(result.labelLatin)) {
-              result.labelInLanguage = translationCache[result.labelLatin];
-              return result;
-            } else {
-              translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).keepSynced(true);
-              return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).once().then((snapshot) {
-                if (snapshot.value != null && snapshot.value.length > 0) {
-                  translationCache[result.labelLatin] = snapshot.value[0];
-                  result.labelInLanguage = snapshot.value[0];
-                }
-                return result;
-              });
-            }
-          }
-          return result;
-        }));
-      }
-      // save labels
-      if (results.length > 0) {
-        var userId = firebaseAttributeAnonymous;
-        if (widget.currentUser != null) {
-          userId = widget.currentUser.firebaseUser.uid;
-        }
-        rootReference.child(firebaseUsersPhotoSearch).child(userId).child(DateTime.now().millisecondsSinceEpoch.toString()).set(results.map((searchResult) {
-              Map<String, dynamic> labelMap = {};
-              labelMap['entityId'] = searchResult.entityId;
-              labelMap['language'] = widget.myLocale.languageCode;
-              labelMap['confidence'] = searchResult.confidence;
-              if (searchResult.labelLatin != null) {
-                labelMap['label_latin'] = searchResult.labelLatin;
-              }
-              if (searchResult.labelInLanguage != null) {
-                labelMap['label_language'] = searchResult.labelInLanguage;
-              }
-              return labelMap;
-            }).toList());
-      }
-
-      return results;
-    }).catchError((error, stackTrace) {
-      FirebaseCrashlytics.instance.recordError(error, stackTrace);
-    });
-  }
-
-  String _adjustLabel(String label) {
-    if (label.indexOf(' (') >= 0) {
-      return label.substring(0, label.indexOf(' ('));
-    }
-    return label;
-  }
-
   @override
   void initState() {
     super.initState();
-    _firebaseAnalytics = FirebaseAnalytics();
-    _key = new GlobalKey<ScaffoldState>();
-    _genericEntitiesF = rootReference.child(firebaseSettingsGenericEntities).once().then((snapshot) {
-      return snapshot?.value ?? [];
-    });
-    _engineF = rootReference.child(firebaseSettingsEngine).once().then((snapshot) {
-      return snapshot?.value ?? "";
-    });
-    _isRewardLoading = true;
-    _rewardAd = RewardedAd(
-      adUnitId: getRewardAdUnitId(),
-      request: AdRequest(),
-      listener: AdListener(
-        // Called when an ad is successfully received.
-        onAdLoaded: (Ad ad) => _isRewardLoading = false,
-        // Called when an ad request failed.
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          ad.dispose();
-        },
-        // Called when an ad opens an overlay that covers the screen.
-        onAdOpened: (Ad ad) {},
-        // Called when an ad removes an overlay that covers the screen.
-        onAdClosed: (Ad ad) {
-          ad.dispose();
-        },
-        // Called when an ad is in the process of leaving the application.
-        onApplicationExit: (Ad ad) {},
-        // Called when a RewardedAd triggers a reward.
-        onRewardedAdUserEarnedReward: (RewardedAd ad, RewardItem reward) async {
-          await Auth.changeCredits(1, "1");
-          setState(() {});
-        },
-      ),
-    );
-    _rewardAd.load();
-    imageLabeler = FirebaseVision.instance.cloudImageLabeler();
+    if (!Purchases.isPhotoSearch()) {
+      _createRewardedAd();
+    }
   }
 
   @override
   void dispose() {
-    imageLabeler.close();
+    _rewardedAd?.dispose();
     super.dispose();
   }
 
@@ -412,14 +329,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  if (_isRewardLoading) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(S.of(context).snack_loading_ad),
-                      duration: Duration(milliseconds: 1500),
-                    ));
-                  } else {
-                    _rewardAd.show();
-                  }
+                  _showRewardedAd();
                 },
                 child: Text(S.of(context).credit_ads_video),
               ),

@@ -3,12 +3,13 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 
 class Subscription extends StatefulWidget {
   @override
@@ -17,7 +18,8 @@ class Subscription extends StatefulWidget {
 
 class _SubscriptionState extends State<Subscription> {
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
-  final InAppPurchaseConnection _connection = InAppPurchaseConnection.instance;
+  final InAppPurchase _inAppPurchase = InAppPurchase.instance;
+  final _key = GlobalKey<ScaffoldState>();
   final List<String> _subscriptionLists = Platform.isAndroid
       ? [
           subscriptionMonthly,
@@ -27,6 +29,7 @@ class _SubscriptionState extends State<Subscription> {
           subscriptionMonthly,
           subscriptionYearly,
         ];
+  StreamSubscription<List<PurchaseDetails>> _subscription;
   Future<ProductDetailsResponse> _subscriptionsF;
 
   Future<void> _logCancelledSubscriptionEvent(key, String productId) async {
@@ -38,37 +41,61 @@ class _SubscriptionState extends State<Subscription> {
     await _firebaseAnalytics.logEvent(name: 'subscription_canceled', parameters: {'productId': productId});
   }
 
-  String _getOldSubscription(String productId) {
-    switch (productId) {
-      case subscriptionMonthly:
-        return Purchases.isPurchased(subscriptionYearly) ? subscriptionYearly : null;
-      case subscriptionYearly:
-        return Purchases.isPurchased(subscriptionMonthly) ? subscriptionMonthly : null;
+  void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
+    purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
+      if (purchaseDetails.status == PurchaseStatus.pending) {
+      } else {
+        if (purchaseDetails.status == PurchaseStatus.error) {
+          _logCancelledSubscriptionEvent(_key, purchaseDetails.productID);
+        } else if (purchaseDetails.status == PurchaseStatus.purchased) {
+          bool valid = await verifyPurchase(purchaseDetails);
+          if (valid) {
+            Purchases.purchases[purchaseDetails.productID] = purchaseDetails;
+          } else {
+            _logCancelledSubscriptionEvent(_key, purchaseDetails.productID);
+            return;
+          }
+        }
+        if (purchaseDetails.pendingCompletePurchase) {
+          await _inAppPurchase.completePurchase(purchaseDetails);
+        }
+        setState(() {});
+      }
+    });
+  }
+
+  GooglePlayPurchaseDetails _getOldSubscription(ProductDetails productDetails, Map<String, PurchaseDetails> purchases) {
+    GooglePlayPurchaseDetails oldSubscription;
+    if (productDetails.id == subscriptionMonthly &&  purchases[subscriptionYearly] != null) {
+      oldSubscription = purchases[subscriptionYearly] as GooglePlayPurchaseDetails;
+    } else if (productDetails.id == subscriptionYearly && purchases[subscriptionMonthly] != null) {
+      oldSubscription = purchases[subscriptionMonthly] as GooglePlayPurchaseDetails;
     }
-    return null;
+    return oldSubscription;
   }
 
   String _getProductPeriod(BuildContext context, ProductDetails subscription) {
-    String period = subscription.skuDetail?.subscriptionPeriod ?? subscription.skProduct?.subscriptionPeriod?.unit?.toString();
-
-    switch (period) {
-      case 'P1M':
-      case 'MONTH':
-      case 'SKSubscriptionPeriodUnit.month':
-        return S.of(context).subscription_period_month;
-      case 'P1Y':
-      case 'YEAR':
-      case 'SKSubscriptionPeriodUnit.year':
-        return S.of(context).subscription_period_year;
-      default:
-        return '';
+    if (subscription.id == subscriptionMonthly) {
+      return S.of(context).subscription_period_month;
+    } else if (subscription.id == subscriptionYearly) {
+      return S.of(context).subscription_period_year;
+    } else {
+      return '';
     }
-  }
+ }
 
   @override
   void initState() {
     super.initState();
-    _subscriptionsF = _connection.queryProductDetails(_subscriptionLists.toSet());
+    _subscriptionsF = _inAppPurchase.queryProductDetails(_subscriptionLists.toSet());
+    final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
+    _subscription = purchaseUpdated.listen((purchaseDetailsList) {
+      _listenToPurchaseUpdated(purchaseDetailsList);
+    }, onDone: () {
+      _subscription.cancel();
+    }, onError: (error) {
+      // handle error here.
+    });
   }
 
   @override
@@ -113,22 +140,8 @@ class _SubscriptionState extends State<Subscription> {
                 texts.add(Container(
                     child: TextButton(
                   onPressed: () async {
-                    final QueryPurchaseDetailsResponse purchaseResponse = await _connection.queryPastPurchases();
-                    if (purchaseResponse.error != null) {
-                      var purchases = await Prefs.getStringListF(keyPurchases, []);
-                      Purchases.purchases = purchases.map((productId) => Purchases.offlineProducts[productId]).toList();
-                    } else {
-                      for (PurchaseDetails purchase in purchaseResponse.pastPurchases) {
-                        if (await verifyPurchase(purchase)) {
-                          Purchases.purchases.add(purchase);
-                        }
-                      }
-                      Prefs.setStringList(keyPurchases, Purchases.purchases.map((item) => item.productID).toList());
-                    }
-
-                    if (mounted) {
-                      setState(() {});
-                    }
+                    Purchases.purchases = {};
+                    _inAppPurchase.restorePurchases();
                   },
                   child: Text(
                     S.of(context).product_restore_purchases,
@@ -141,7 +154,7 @@ class _SubscriptionState extends State<Subscription> {
                 ));
                 _cards.addAll(snapshot.data.productDetails.map((ProductDetails subscription) {
                   bool isPurchased = Purchases.isPurchased(subscription.id);
-                  String oldSubscription = _getOldSubscription(subscription.id);
+                  PurchaseDetails oldSubscription = _getOldSubscription(subscription, Purchases.purchases);
                   return Card(
                     child: Container(
                       padding: EdgeInsets.all(10.0),
@@ -181,7 +194,28 @@ class _SubscriptionState extends State<Subscription> {
                           ),
                           onPressed: () {
                             if (!isPurchased) {
-                              _connection.buyNonConsumable(purchaseParam: PurchaseParam(productDetails: subscription)).then((value) {
+                              PurchaseParam purchaseParam;
+                              if (Platform.isAndroid) {
+                                final oldSubscription = _getOldSubscription(subscription, Purchases.purchases);
+
+                                purchaseParam = GooglePlayPurchaseParam(
+                                    productDetails: subscription,
+                                    applicationUserName: null,
+                                    changeSubscriptionParam: (oldSubscription != null)
+                                        ? ChangeSubscriptionParam(
+                                      oldPurchaseDetails: oldSubscription,
+                                      prorationMode: ProrationMode
+                                          .immediateWithTimeProration,
+                                    )
+                                        : null);
+                              } else {
+                                purchaseParam = PurchaseParam(
+                                  productDetails: subscription,
+                                  applicationUserName: null,
+                                );
+                              }
+
+                              _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam).then((value) {
                                 if (!value) {
                                   _logCancelledSubscriptionEvent(key, subscription.id);
                                 }

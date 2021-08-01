@@ -7,11 +7,11 @@ import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/signin/email.dart';
 import 'package:abherbs_flutter/signin/phone.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:device_info/device_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
 class SignInScreen extends StatefulWidget {
   SignInScreen();
@@ -74,7 +74,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Future<void> _handleAppleSignIn(GlobalKey<ScaffoldState> key) async {
     try {
       final nonce = _createNonce(32);
-      final AuthorizationResult result = await AppleSignIn.performRequests([
+      final AuthorizationResult result = await TheAppleSignIn.performRequests([
         AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
       ]);
 

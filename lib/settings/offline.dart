@@ -25,44 +25,42 @@ class Offline {
       _rootPath = dir.path;
     });
 
-    if (Purchases.isOffline()) {
-      FirebaseDatabase.instance.setPersistenceEnabled(true);
-      FirebaseDatabase.instance.setPersistenceCacheSizeBytes(firebaseCacheSize);
+    FirebaseDatabase.instance.setPersistenceEnabled(true);
+    FirebaseDatabase.instance.setPersistenceCacheSizeBytes(firebaseCacheSize);
 
-      Prefs.getBoolF(keyOffline, false).then((value) {
-        _offline = value;
-        if (value) {
-          Prefs.getStringF(keyOfflinePlant, '0').then((value) {
+    Prefs.getBoolF(keyOffline, false).then((value) {
+      _offline = value;
+      if (value) {
+        Prefs.getStringF(keyOfflinePlant, '0').then((value) {
+          rootReference.child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((DataSnapshot snapshot) {
+            downloadFinished = snapshot.value == null || int.parse(value) >= snapshot.value;
+          });
+        }).catchError((_) {
+          // deal with previous int shared preferences
+          Prefs.getIntF(keyOfflinePlant, 0).then((value) {
+            Prefs.setString(keyOfflinePlant, value.toString());
             rootReference.child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((DataSnapshot snapshot) {
-              downloadFinished = snapshot.value == null || int.parse(value) >= snapshot.value;
-            });
-          }).catchError((_) {
-            // deal with previous int shared preferences
-            Prefs.getIntF(keyOfflinePlant, 0).then((value) {
-              Prefs.setString(keyOfflinePlant, value.toString());
-              rootReference.child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((DataSnapshot snapshot) {
-                downloadFinished = snapshot.value == null || value >= snapshot.value;
-              });
-            });
-            Prefs.getIntF(keyOfflineFamily, 0).then((value) {
-              Prefs.setString(keyOfflineFamily, value.toString());
+              downloadFinished = snapshot.value == null || value >= snapshot.value;
             });
           });
-          rootReference.child(firebaseVersions).child(firebaseAttributeLastUpdate).once().then((DataSnapshot snapshot) {
-            if (snapshot.value != null) {
-              Prefs.getStringF(keyOfflineDB, '').then((value) {
-                _downloadDBDate = snapshot.value;
-                DateTime dbUpdate = DateTime.parse(_downloadDBDate);
-                _downloadDB = value.isEmpty || dbUpdate.isAfter(DateTime.parse(value));
-              });
-            }
+          Prefs.getIntF(keyOfflineFamily, 0).then((value) {
+            Prefs.setString(keyOfflineFamily, value.toString());
           });
-        } else {
-          downloadFinished = false;
-          _downloadDB = false;
-        }
-      });
-    }
+        });
+        rootReference.child(firebaseVersions).child(firebaseAttributeLastUpdate).once().then((DataSnapshot snapshot) {
+          if (snapshot.value != null) {
+            Prefs.getStringF(keyOfflineDB, '').then((value) {
+              _downloadDBDate = snapshot.value;
+              DateTime dbUpdate = DateTime.parse(_downloadDBDate);
+              _downloadDB = value.isEmpty || dbUpdate.isAfter(DateTime.parse(value));
+            });
+          }
+        });
+      } else {
+        downloadFinished = false;
+        _downloadDB = false;
+      }
+    });
   }
 
   static onChange(bool offline) {

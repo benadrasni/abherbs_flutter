@@ -8,7 +8,6 @@ import 'package:abherbs_flutter/legend/flower.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 
 const String sourceWikipedia = "wikipedia";
@@ -28,7 +27,7 @@ const String sourceUsda = "plants.usda.gov";
 const String sourceUsfs = "forestryimages.org";
 const String sourceTelaBotanica = "tela-botanica.org";
 
-Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize, GlobalKey<ScaffoldState> key, bool showAd, BannerAd ad) {
+Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize, GlobalKey<ScaffoldState> key) {
   String language = Localizations.localeOf(context).languageCode;
 
   TextStyle _defaultTextStyle = TextStyle(
@@ -448,16 +447,6 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                     _getRichText(snapshot.data.trivia, _defaultTextStyle),
                   ]),
                 ),
-              ));
-            }
-
-            if (showAd) {
-              cards.add(Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.only(bottom: 5.0),
-                child: AdWidget(ad: ad),
-                width: ad.size.width.toDouble(),
-                height: ad.size.height.toDouble(),
               ));
             }
 

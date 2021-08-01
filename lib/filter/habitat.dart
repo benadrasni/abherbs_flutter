@@ -84,7 +84,7 @@ class _HabitatState extends State<Habitat> {
         adUnitId: getBannerAdUnitId(),
         size: AdSize.banner,
         request: AdRequest(),
-        listener: AdListener(
+        listener: BannerAdListener(
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
             setState(() {
               _showAd = false;
@@ -142,143 +142,149 @@ class _HabitatState extends State<Habitat> {
               alignment: Alignment.bottomCenter,
             ),
           ),
-          ListView(
-            padding: EdgeInsets.all(5.0),
+          Column(
             children: [
-              TextButton(
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+              Expanded(
+                child: ListView(
+                  padding: EdgeInsets.all(5.0),
+                  children: [
+                    TextButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+                      ),
+                      child: Stack(alignment: Alignment.center, children: [
+                        Image(
+                          image: AssetImage('res/images/meadow.webp'),
+                        ),
+                        Text(
+                          S.of(context).habitat_meadow,
+                          style: _defaultTextStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ]),
+                      onPressed: () {
+                        _navigate('1');
+                      },
+                    ),
+                    TextButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+                      ),
+                      child: Stack(alignment: Alignment.center, children: [
+                        Image(
+                          image: AssetImage('res/images/garden.webp'),
+                        ),
+                        Text(
+                          S.of(context).habitat_garden,
+                          style: _defaultTextStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ]),
+                      onPressed: () {
+                        _navigate('2');
+                      },
+                    ),
+                    TextButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+                      ),
+                      child: Stack(alignment: Alignment.center, children: [
+                        Image(
+                          image: AssetImage('res/images/swamp.webp'),
+                        ),
+                        Text(
+                          S.of(context).habitat_wetland,
+                          style: _defaultTextStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ]),
+                      onPressed: () {
+                        _navigate('3');
+                      },
+                    ),
+                    TextButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+                      ),
+                      child: Stack(alignment: Alignment.center, children: [
+                        Image(
+                          image: AssetImage('res/images/forest.webp'),
+                        ),
+                        Text(
+                          S.of(context).habitat_forest,
+                          style: _defaultTextStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ]),
+                      onPressed: () {
+                        _navigate('4');
+                      },
+                    ),
+                    TextButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+                      ),
+                      child: Stack(alignment: Alignment.center, children: [
+                        Image(
+                          image: AssetImage('res/images/mountain.webp'),
+                        ),
+                        Text(
+                          S.of(context).habitat_rock,
+                          style: _defaultTextStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ]),
+                      onPressed: () {
+                        _navigate('5');
+                      },
+                    ),
+                    TextButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+                      ),
+                      child: Stack(alignment: Alignment.center, children: [
+                        Image(
+                          image: AssetImage('res/images/tree.webp'),
+                        ),
+                        Text(
+                          S.of(context).habitat_tree,
+                          style: _defaultTextStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ]),
+                      onPressed: () {
+                        _navigate('6');
+                      },
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
+                      child: Text(
+                        S.of(context).habitat_message,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
+                    Container(height: 10.0 + getFABPadding()),
+                  ],
                 ),
-                child: Stack(alignment: Alignment.center, children: [
-                  Image(
-                    image: AssetImage('res/images/meadow.webp'),
-                  ),
-                  Text(
-                    S.of(context).habitat_meadow,
-                    style: _defaultTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ]),
-                onPressed: () {
-                  _navigate('1');
-                },
               ),
-              TextButton(
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
-                ),
-                child: Stack(alignment: Alignment.center, children: [
-                  Image(
-                    image: AssetImage('res/images/garden.webp'),
-                  ),
-                  Text(
-                    S.of(context).habitat_garden,
-                    style: _defaultTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ]),
-                onPressed: () {
-                  _navigate('2');
-                },
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: _showAd
+                    ? Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
+                        child: AdWidget(ad: _ad),
+                        width: _ad.size.width.toDouble(),
+                        height: _ad.size.height.toDouble(),
+                      )
+                    : Container(
+                        height: 0.0,
+                      ),
               ),
-              TextButton(
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
-                ),
-                child: Stack(alignment: Alignment.center, children: [
-                  Image(
-                    image: AssetImage('res/images/swamp.webp'),
-                  ),
-                  Text(
-                    S.of(context).habitat_wetland,
-                    style: _defaultTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ]),
-                onPressed: () {
-                  _navigate('3');
-                },
-              ),
-              TextButton(
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
-                ),
-                child: Stack(alignment: Alignment.center, children: [
-                  Image(
-                    image: AssetImage('res/images/forest.webp'),
-                  ),
-                  Text(
-                    S.of(context).habitat_forest,
-                    style: _defaultTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ]),
-                onPressed: () {
-                  _navigate('4');
-                },
-              ),
-              TextButton(
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
-                ),
-                child: Stack(alignment: Alignment.center, children: [
-                  Image(
-                    image: AssetImage('res/images/mountain.webp'),
-                  ),
-                  Text(
-                    S.of(context).habitat_rock,
-                    style: _defaultTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ]),
-                onPressed: () {
-                  _navigate('5');
-                },
-              ),
-              TextButton(
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
-                ),
-                child: Stack(alignment: Alignment.center, children: [
-                  Image(
-                    image: AssetImage('res/images/tree.webp'),
-                  ),
-                  Text(
-                    S.of(context).habitat_tree,
-                    style: _defaultTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ]),
-                onPressed: () {
-                  _navigate('6');
-                },
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
-                child: Text(
-                  S.of(context).habitat_message,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-              ),
-              Container(height: 10.0 + getFABPadding()),
             ],
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: _showAd
-                ? Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(bottom: 5.0),
-                    child: AdWidget(ad: _ad),
-                    width: _ad.size.width.toDouble(),
-                    height: _ad.size.height.toDouble(),
-                  )
-                : Container(
-                    height: 0.0,
-                  ),
           ),
         ],
       ),

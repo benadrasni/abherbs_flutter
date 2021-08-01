@@ -188,7 +188,7 @@ class _Distribution2State extends State<Distribution2> {
         adUnitId: getBannerAdUnitId(),
         size: AdSize.banner,
         request: AdRequest(),
-        listener: AdListener(
+        listener: BannerAdListener(
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
             setState(() {
               _showAd = false;
@@ -237,20 +237,26 @@ class _Distribution2State extends State<Distribution2> {
               alignment: Alignment.bottomCenter,
             ),
           ),
-          _getBody(context),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: _showAd
-                ? Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: 5.0),
-              child: AdWidget(ad: _ad),
-              width: _ad.size.width.toDouble(),
-              height: _ad.size.height.toDouble(),
-            )
-                : Container(
-              height: 0.0,
-            ),
+          Column(
+            children: [
+              Expanded(
+                child: _getBody(context),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: _showAd
+                    ? Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
+                        child: AdWidget(ad: _ad),
+                        width: _ad.size.width.toDouble(),
+                        height: _ad.size.height.toDouble(),
+                      )
+                    : Container(
+                        height: 0.0,
+                      ),
+              ),
+            ],
           ),
         ],
       ),
@@ -287,9 +293,7 @@ class _Distribution2State extends State<Distribution2> {
                           filterRoutes[filterDistribution2] = null;
                           Navigator.pushReplacement(
                             mainContext,
-                            MaterialPageRoute(
-                                builder: (context) => PlantList(widget.filter, '', keysReference.child(getFilterKey(widget.filter))),
-                                settings: RouteSettings(name: 'PlantList')),
+                            MaterialPageRoute(builder: (context) => PlantList(widget.filter, '', keysReference.child(getFilterKey(widget.filter))), settings: RouteSettings(name: 'PlantList')),
                           );
                         },
                         child: Text(snapshot.data == null ? '' : snapshot.data.toString()),

@@ -9,6 +9,8 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+const int maxFailedLoadAttempts = 3;
+
 class FeedbackScreen extends StatefulWidget {
   final AppUser currentUser;
   final Map<String, String> filter;
@@ -21,70 +23,109 @@ class FeedbackScreen extends StatefulWidget {
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
   InterstitialAd _interstitialAd;
-  RewardedAd _rewardAd;
-  bool _isInterstitialLoading;
-  bool _isRewardLoading;
+  int _numInterstitialLoadAttempts = 0;
+
+  RewardedAd _rewardedAd;
+  int _numRewardedLoadAttempts = 0;
+
+  void _createInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: getInterstitialAdUnitId(),
+        request: AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            _interstitialAd = ad;
+            _numInterstitialLoadAttempts = 0;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            _numInterstitialLoadAttempts += 1;
+            _interstitialAd = null;
+            if (_numInterstitialLoadAttempts <= maxFailedLoadAttempts) {
+              _createInterstitialAd();
+            }
+          },
+        ));
+  }
+
+  void _showInterstitialAd() {
+    if (_interstitialAd == null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(S.of(context).snack_loading_ad),
+        duration: Duration(milliseconds: 1500),
+      ));
+      return;
+    }
+    _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        ad.dispose();
+        _createInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        ad.dispose();
+        _createInterstitialAd();
+      },
+    );
+    _interstitialAd.show();
+    _interstitialAd = null;
+  }
+
+  void _createRewardedAd() {
+    RewardedAd.load(
+        adUnitId: getRewardAdUnitId(),
+        request: AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+          onAdLoaded: (RewardedAd ad) {
+            print('$ad loaded.');
+            _rewardedAd = ad;
+            _numRewardedLoadAttempts = 0;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('RewardedAd failed to load: $error');
+            _rewardedAd = null;
+            _numRewardedLoadAttempts += 1;
+            if (_numRewardedLoadAttempts <= maxFailedLoadAttempts) {
+              _createRewardedAd();
+            }
+          },
+        ));
+  }
+
+  void _showRewardedAd() {
+    if (_rewardedAd == null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(S.of(context).snack_loading_ad),
+        duration: Duration(milliseconds: 1500),
+      ));
+      return;
+    }
+    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (RewardedAd ad) {
+        ad.dispose();
+        _createRewardedAd();
+      },
+      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+        ad.dispose();
+        _createRewardedAd();
+      },
+    );
+
+    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+    });
+    _rewardedAd = null;
+  }
+
 
   @override
   void initState() {
     super.initState();
-
-    _isInterstitialLoading = true;
-    _interstitialAd = InterstitialAd(
-      adUnitId: getInterstitialAdUnitId(),
-      request: AdRequest(),
-      listener: AdListener(
-        // Called when an ad is successfully received.
-        onAdLoaded: (Ad ad) => _isInterstitialLoading = false,
-        // Called when an ad request failed.
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          ad.dispose();
-        },
-        // Called when an ad opens an overlay that covers the screen.
-        onAdOpened: (Ad ad) {},
-        // Called when an ad removes an overlay that covers the screen.
-        onAdClosed: (Ad ad) {
-          ad.dispose();
-        },
-        // Called when an ad is in the process of leaving the application.
-        onApplicationExit: (Ad ad) {},
-      ),
-    );
-    _interstitialAd.load();
-
-    _isRewardLoading = true;
-    _rewardAd = RewardedAd(
-      adUnitId: getRewardAdUnitId(),
-      request: AdRequest(),
-      listener: AdListener(
-        // Called when an ad is successfully received.
-        onAdLoaded: (Ad ad) => _isRewardLoading = false,
-        // Called when an ad request failed.
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          ad.dispose();
-        },
-        // Called when an ad opens an overlay that covers the screen.
-        onAdOpened: (Ad ad) {},
-        // Called when an ad removes an overlay that covers the screen.
-        onAdClosed: (Ad ad) {
-          ad.dispose();
-        },
-        // Called when an ad is in the process of leaving the application.
-        onApplicationExit: (Ad ad) {},
-        // Called when a RewardedAd triggers a reward.
-        onRewardedAdUserEarnedReward: (RewardedAd ad, RewardItem reward) async {
-          await Auth.changeCredits(1, "1");
-          setState(() {});
-        },
-      ),
-    );
-    _rewardAd.load();
+    _createInterstitialAd();
+    _createRewardedAd();
   }
 
   @override
   void dispose() {
-    _interstitialAd.dispose();
-    _rewardAd.dispose();
+    _interstitialAd?.dispose();
+    _rewardedAd?.dispose();
     super.dispose();
   }
 
@@ -165,14 +206,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        if (_isRewardLoading) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(S.of(context).snack_loading_ad),
-                            duration: Duration(milliseconds: 1500),
-                          ));
-                        } else {
-                          _rewardAd.show();
-                        }
+                        _showRewardedAd();
                       },
                       child: Text(S.of(context).credit_ads_video),
                     ),
@@ -337,14 +371,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  if (_isInterstitialLoading) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(S.of(context).snack_loading_ad),
-                      duration: Duration(milliseconds: 1500),
-                    ));
-                  } else {
-                    _interstitialAd.show();
-                  }
+                  _showInterstitialAd();
                 },
                 child: Text(S.of(context).feedback_run_ads_fullscreen),
               ),
