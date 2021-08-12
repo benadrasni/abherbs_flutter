@@ -32,7 +32,6 @@ class _PlantListState extends State<PlantList> {
   AppUser _currentUser;
   Future<int> _count;
   BannerAd _ad;
-  bool _showAd;
 
   Widget _getImageButton(BuildContext context, Locale myLocale, String url, String name) {
     double screenWidth = MediaQuery.of(context).size.width - 20;
@@ -76,24 +75,16 @@ class _PlantListState extends State<PlantList> {
     _checkCurrentUser();
     Offline.setKeepSynced(2, true);
 
-    _showAd = !Purchases.isNoAds();
-
-    if (_showAd) {
+    if (!Purchases.isNoAds()) {
       _ad = BannerAd(
         adUnitId: getBannerAdUnitId(),
         size: AdSize.banner,
         request: AdRequest(),
         listener: BannerAdListener(
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            setState(() {
-              _showAd = false;
-            });
             ad.dispose();
           },
           onAdClosed: (Ad ad) {
-            setState(() {
-              _showAd = false;
-            });
             ad.dispose();
           },
         ),
@@ -112,6 +103,7 @@ class _PlantListState extends State<PlantList> {
   @override
   void dispose() {
     _listener.cancel();
+    _ad?.dispose();
     super.dispose();
   }
 
@@ -213,7 +205,7 @@ class _PlantListState extends State<PlantList> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: _showAd
+            child: !Purchases.isNoAds()
                 ? Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(bottom: 5.0, top: 5.0),

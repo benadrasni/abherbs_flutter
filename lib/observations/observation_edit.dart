@@ -86,7 +86,7 @@ class _ObservationEditState extends State<ObservationEdit> {
 
   Future<void> _getImage(GlobalKey<ScaffoldState> _key, ImageSource source) async {
     bool scaleDownPhotos = await _scaleDownPhotosF;
-    var image = await _picker.getImage(source: source, maxWidth: scaleDownPhotos ? imageSizeScaleDown : null);
+    var image = await _picker.pickImage(source: source, maxWidth: scaleDownPhotos ? imageSizeScaleDown : null);
     if (image != null) {
       Map<String, IfdTag> exifData = await readExifFromBytes(await image.readAsBytes());
       IfdTag dateTime = exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime'];

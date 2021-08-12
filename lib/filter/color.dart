@@ -38,7 +38,6 @@ class _ColorState extends State<Color> {
   Future<bool> _isNewVersionF;
   Map<String, String> _filter;
   BannerAd _ad;
-  bool _showAd;
 
   _navigate(String value) {
     var newFilter = new Map<String, String>();
@@ -84,24 +83,16 @@ class _ColorState extends State<Color> {
     _checkCurrentUser();
     Offline.setKeepSynced(1, true);
 
-    _showAd = !Purchases.isNoAds();
-
-    if (_showAd) {
+    if (!Purchases.isNoAds()) {
       _ad = BannerAd(
         adUnitId: getBannerAdUnitId(),
         size: AdSize.banner,
         request: AdRequest(),
         listener: BannerAdListener(
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            setState(() {
-              _showAd = false;
-            });
             ad.dispose();
           },
           onAdClosed: (Ad ad) {
-            setState(() {
-              _showAd = false;
-            });
             ad.dispose();
           },
         ),
@@ -125,7 +116,7 @@ class _ColorState extends State<Color> {
   @override
   void dispose() {
     _listener.cancel();
-    _ad.dispose();
+    _ad?.dispose();
     super.dispose();
   }
 
@@ -346,7 +337,7 @@ class _ColorState extends State<Color> {
               )),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: _showAd
+                child: !Purchases.isNoAds()
                     ? Container(
                         alignment: Alignment.center,
                         margin: EdgeInsets.only(bottom: 5.0, top: 5.0),

@@ -242,9 +242,9 @@ String getMapImageUrl(double latitude, double longitude, double width, double he
 
 double getLatitudeFromExif(IfdTag latitudeRef, IfdTag latitude) {
   if (latitudeRef == null || latitude == null) return null;
-  double latDegrees = latitude.values[0].numerator / latitude.values[0].denominator;
-  double latMinutes = latitude.values[1].numerator / latitude.values[1].denominator;
-  double latSeconds = latitude.values[2].numerator / latitude.values[2].denominator;
+  double latDegrees = latitude.values.toList()[0].numerator / latitude.values.toList()[0].denominator;
+  double latMinutes = latitude.values.toList()[1].numerator / latitude.values.toList()[1].denominator;
+  double latSeconds = latitude.values.toList()[2].numerator / latitude.values.toList()[2].denominator;
 
   int northSouth = latitudeRef.toString() == 'N' ? 1 : -1;
   return northSouth * (latDegrees + latMinutes / 60 + latSeconds / 60 / 60);
@@ -252,9 +252,9 @@ double getLatitudeFromExif(IfdTag latitudeRef, IfdTag latitude) {
 
 double getLongitudeFromExif(IfdTag longitudeRef, IfdTag longitude) {
   if (longitudeRef == null || longitude == null) return null;
-  double longDegrees = longitude.values[0].numerator / longitude.values[0].denominator;
-  double longMinutes = longitude.values[1].numerator / longitude.values[1].denominator;
-  double longSeconds = longitude.values[2].numerator / longitude.values[2].denominator;
+  double longDegrees = longitude.values.toList()[0].numerator / longitude.values.toList()[0].denominator;
+  double longMinutes = longitude.values.toList()[1].numerator / longitude.values.toList()[1].denominator;
+  double longSeconds = longitude.values.toList()[2].numerator / longitude.values.toList()[2].denominator;
 
   int eastWest = longitudeRef.toString() == 'E' ? 1 : -1;
   return eastWest * (longDegrees + longMinutes / 60 + longSeconds / 60 / 60);
