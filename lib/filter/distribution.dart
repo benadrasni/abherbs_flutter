@@ -37,7 +37,6 @@ class _DistributionState extends State<Distribution> {
   String _myRegion;
   GlobalKey<ScaffoldState> _key;
   BannerAd _ad;
-  bool _showAd;
 
   void _openRegion(String region) {
     var route = MaterialPageRoute(builder: (context) => Distribution2(widget.filter, int.parse(region)), settings: RouteSettings(name: 'Distribution2'));
@@ -228,24 +227,16 @@ class _DistributionState extends State<Distribution> {
     Offline.setKeepSynced(1, true);
     _checkCurrentUser();
 
-    _showAd = !Purchases.isNoAds();
-
-    if (_showAd) {
+    if (!Purchases.isNoAds()) {
       _ad = BannerAd(
         adUnitId: getBannerAdUnitId(),
         size: AdSize.banner,
         request: AdRequest(),
         listener: BannerAdListener(
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            setState(() {
-              _showAd = false;
-            });
             ad.dispose();
           },
           onAdClosed: (Ad ad) {
-            setState(() {
-              _showAd = false;
-            });
             ad.dispose();
           },
         ),
@@ -266,7 +257,7 @@ class _DistributionState extends State<Distribution> {
   @override
   void dispose() {
     _listener.cancel();
-    _ad.dispose();
+    _ad?.dispose();
     super.dispose();
   }
 
@@ -297,7 +288,7 @@ class _DistributionState extends State<Distribution> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: _showAd
+                child: !Purchases.isNoAds()
                     ? Container(
                         alignment: Alignment.center,
                         margin: EdgeInsets.only(bottom: 5.0, top: 5.0),

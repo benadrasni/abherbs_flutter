@@ -31,7 +31,6 @@ class _Distribution2State extends State<Distribution2> {
   Future<int> _countF;
   GlobalKey<ScaffoldState> _key;
   BannerAd _ad;
-  bool _showAd;
 
   void _navigate(String value) {
     var newFilter = new Map<String, String>();
@@ -181,24 +180,16 @@ class _Distribution2State extends State<Distribution2> {
     _checkCurrentUser();
     _key = GlobalKey<ScaffoldState>();
 
-    _showAd = !Purchases.isNoAds();
-
-    if (_showAd) {
+    if (!Purchases.isNoAds()) {
       _ad = BannerAd(
         adUnitId: getBannerAdUnitId(),
         size: AdSize.banner,
         request: AdRequest(),
         listener: BannerAdListener(
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            setState(() {
-              _showAd = false;
-            });
             ad.dispose();
           },
           onAdClosed: (Ad ad) {
-            setState(() {
-              _showAd = false;
-            });
             ad.dispose();
           },
         ),
@@ -213,7 +204,7 @@ class _Distribution2State extends State<Distribution2> {
   void dispose() {
     filterRoutes[filterDistribution2] = null;
     _listener.cancel();
-    _ad.dispose();
+    _ad?.dispose();
     super.dispose();
   }
 
@@ -244,7 +235,7 @@ class _Distribution2State extends State<Distribution2> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: _showAd
+                child: !Purchases.isNoAds()
                     ? Container(
                         alignment: Alignment.center,
                         margin: EdgeInsets.only(bottom: 5.0, top: 5.0),

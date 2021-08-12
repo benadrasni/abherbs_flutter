@@ -150,7 +150,7 @@ class _AppState extends State<App> {
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
-      if (purchaseDetails.status == PurchaseStatus.purchased) {
+      if (purchaseDetails.status == PurchaseStatus.restored) {
         Purchases.purchases[purchaseDetails.productID] = purchaseDetails;
         if (purchaseDetails.pendingCompletePurchase) {
           await _inAppPurchase.completePurchase(purchaseDetails);
@@ -158,7 +158,9 @@ class _AppState extends State<App> {
         if (purchaseDetails.productID == productOffline) {
           Offline.initialize();
         }
-        setState(() {});
+        if (mounted && (purchaseDetails.productID == productNoAdsAndroid || purchaseDetails.productID == productNoAdsIOS)) {
+          setState(() {});
+        }
       }
     });
   }

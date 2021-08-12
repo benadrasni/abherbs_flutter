@@ -111,7 +111,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
           return null;
         });
       });
-      var image = await _picker.getImage(source: source, maxWidth: maxSize);
+      var image = await _picker.pickImage(source: source, maxWidth: maxSize);
       if (image != null) {
         _logPhotoSearchEvent();
         setState(() {

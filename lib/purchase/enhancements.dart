@@ -68,11 +68,15 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
             _logCancelledPurchaseEvent(_key, purchaseDetails.productID);
             return;
           }
+        } else if (purchaseDetails.status == PurchaseStatus.restored) {
+          Purchases.purchases[purchaseDetails.productID] = purchaseDetails;
         }
         if (purchaseDetails.pendingCompletePurchase) {
           await _inAppPurchase.completePurchase(purchaseDetails);
         }
-        setState(() {});
+        if (mounted) {
+          setState(() {});
+        }
       }
     });
   }

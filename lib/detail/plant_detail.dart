@@ -59,7 +59,6 @@ class _PlantDetailState extends State<PlantDetail> {
   GlobalKey<ScaffoldState> _key;
   bool _isPublic;
   double _fontSize;
-  bool _showAd;
   BannerAd _ad;
 
   onChangeFontSize() {
@@ -193,24 +192,16 @@ class _PlantDetailState extends State<PlantDetail> {
     Offline.setKeepSynced(3, true);
     _checkCurrentUser();
 
-    _showAd = !Purchases.isNoAds();
-
-    if (_showAd) {
+    if (!Purchases.isNoAds()) {
       _ad = BannerAd(
         adUnitId: getBannerAdUnitId(),
         size: AdSize.banner,
         request: AdRequest(),
         listener: BannerAdListener(
           onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            setState(() {
-              _showAd = false;
-            });
             ad.dispose();
           },
           onAdClosed: (Ad ad) {
-            setState(() {
-              _showAd = false;
-            });
             ad.dispose();
           },
         ),
@@ -231,7 +222,7 @@ class _PlantDetailState extends State<PlantDetail> {
   @override
   void dispose() {
     _listener.cancel();
-    _ad.dispose();
+    _ad?.dispose();
     for (YoutubePlayerController controller in getYoutubeControllers()) {
       controller.close();
     }
@@ -335,7 +326,7 @@ class _PlantDetailState extends State<PlantDetail> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: _showAd
+            child: !Purchases.isNoAds()
                 ? Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
