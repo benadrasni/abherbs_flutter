@@ -25,9 +25,6 @@ class Offline {
       _rootPath = dir.path;
     });
 
-    FirebaseDatabase.instance.setPersistenceEnabled(true);
-    FirebaseDatabase.instance.setPersistenceCacheSizeBytes(firebaseCacheSize);
-
     Prefs.getBoolF(keyOffline, false).then((value) {
       _offline = value;
       if (value) {

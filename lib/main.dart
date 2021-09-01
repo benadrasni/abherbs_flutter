@@ -40,6 +40,8 @@ void _iapError() {
 Future<void> initializeFlutterFire() async {
   // Wait for Firebase to initialize
   await Firebase.initializeApp();
+  FirebaseDatabase.instance.setPersistenceEnabled(true);
+  FirebaseDatabase.instance.setPersistenceCacheSizeBytes(firebaseCacheSize);
 
   await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!isInDebugMode);
 
@@ -154,9 +156,6 @@ class _AppState extends State<App> {
         Purchases.purchases[purchaseDetails.productID] = purchaseDetails;
         if (purchaseDetails.pendingCompletePurchase) {
           await _inAppPurchase.completePurchase(purchaseDetails);
-        }
-        if (purchaseDetails.productID == productOffline) {
-          Offline.initialize();
         }
         if (mounted && (purchaseDetails.productID == productNoAdsAndroid || purchaseDetails.productID == productNoAdsIOS)) {
           setState(() {});
@@ -353,6 +352,7 @@ class _AppState extends State<App> {
     Purchases.hasOldVersion = Prefs.getBool(keyOldVersion, false);
     Purchases.hasLifetimeSubscription = Prefs.getBool(keyLifetimeSubscription, false);
     Auth.getAppUser();
+    Offline.initialize();
   }
 
   @override
