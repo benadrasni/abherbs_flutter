@@ -65,25 +65,15 @@ class Auth {
         appUser = AppUser();
         appUser.firebaseUser = firebaseUser;
         usersReference.child(appUser.firebaseUser.uid).keepSynced(true);
-        if (Purchases.hasOldVersion == null) {
 
-          usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeOldVersion).once().then((snapshot) {
-            Purchases.hasOldVersion = snapshot.value != null && snapshot.value;
-            if (Purchases.hasOldVersion) {
-              _logOldVersionEvent();
-            }
-            Prefs.setBool(keyOldVersion, Purchases.hasOldVersion);
-          }).catchError((error) {
-            Purchases.hasOldVersion = false;
-          });
+        usersReference.child(appUser.firebaseUser.uid).once().then((snapshot) {
+          Purchases.hasOldVersion = snapshot.value != null && snapshot.value[firebaseAttributeOldVersion] != null && snapshot.value[firebaseAttributeOldVersion];
+          if (Purchases.hasOldVersion) {
+            _logOldVersionEvent();
+          }
+          Prefs.setBool(keyOldVersion, Purchases.hasOldVersion);
 
-          usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeCredits).once().then((snapshot) {
-            appUser.credits = snapshot.value != null ? snapshot.value : 0;
-          }).catchError((error) {
-            if(appUser != null) {
-              appUser.credits = 0;
-            }
-          });
+          appUser.credits = snapshot.value != null && snapshot.value[firebaseAttributeCredits] != null ? snapshot.value[firebaseAttributeCredits] : 0;
 
           Prefs.getStringF(keyToken).then((token) {
             if (token.isNotEmpty) {
@@ -96,7 +86,13 @@ class Auth {
               usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributePurchases).set(purchases);
             }
           });
-        }
+        }).catchError((error) {
+          Purchases.hasOldVersion = false;
+          if(appUser != null) {
+            appUser.credits = 0;
+          }
+        });
+
         if (Purchases.isPhotoSearch()) {
           rootReference.child(firebaseSearchPhoto).child(firebaseAttributeEntity).keepSynced(true);
         }

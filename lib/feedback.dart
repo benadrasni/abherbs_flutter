@@ -109,7 +109,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       },
     );
 
-    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) async {
+      await Auth.changeCredits(1, "1");
+      setState(() {});
     });
     _rewardedAd = null;
   }
