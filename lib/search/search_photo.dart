@@ -98,7 +98,9 @@ class _SearchPhotoState extends State<SearchPhoto> {
       },
     );
 
-    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) async {
+      await Auth.changeCredits(1, "1");
+      setState(() {});
     });
     _rewardedAd = null;
   }
