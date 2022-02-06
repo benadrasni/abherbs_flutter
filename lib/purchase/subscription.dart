@@ -145,7 +145,7 @@ class _SubscriptionState extends State<Subscription> {
                   },
                   child: Text(
                     S.of(context).product_restore_purchases,
-                    style: TextStyle(color: Theme.of(context).accentColor, fontSize: 18.0),
+                    style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 18.0),
                   ),
                 )));
 
@@ -190,7 +190,7 @@ class _SubscriptionState extends State<Subscription> {
                         SizedBox(height: 10.0),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor, // background
+                            primary: isPurchased ? Theme.of(context).secondaryHeaderColor : Theme.of(context).primaryColor, // background
                           ),
                           onPressed: () {
                             if (!isPurchased) {
@@ -252,7 +252,7 @@ class _SubscriptionState extends State<Subscription> {
                           },
                           child: Text(
                             S.of(context).terms_of_use,
-                            style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
+                            style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 14.0),
                           ),
                         ),
                         TextButton(
@@ -261,7 +261,7 @@ class _SubscriptionState extends State<Subscription> {
                           },
                           child: Text(
                             S.of(context).privacy_policy,
-                            style: TextStyle(color: Theme.of(context).accentColor, fontSize: 14.0),
+                            style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 14.0),
                           ),
                         ),
                       ],

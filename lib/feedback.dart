@@ -331,10 +331,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               ),
               SizedBox(height: 10.0),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Theme.of(context).accentColor, // background
-                  onPrimary: Colors.white, // foreground
-                ),
                 onPressed: () {
                   Navigator.push(
                     context,

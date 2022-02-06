@@ -114,8 +114,8 @@ class _SettingOfflineState extends State<SettingOffline> {
           width: MediaQuery.of(context).size.width - 150,
           lineHeight: 20.0,
           percent: (_familiesDownloaded + _plantsDownloaded) / (_familiesTotal + _plantsTotal),
-          backgroundColor: Theme.of(context).buttonColor,
-          progressColor: Theme.of(context).accentColor,
+          backgroundColor: Theme.of(context).backgroundColor,
+          progressColor: Theme.of(context).primaryColor,
         );
         _actions.add(TextButton(
           child: Text(S.of(context).pause.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),

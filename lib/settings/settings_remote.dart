@@ -3,10 +3,10 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/services.dart';
 
 class RemoteConfiguration {
-  static RemoteConfig remoteConfig;
+  static FirebaseRemoteConfig remoteConfig;
 
-  static Future<RemoteConfig> setupRemoteConfig() async {
-    remoteConfig = RemoteConfig.instance;
+  static Future<FirebaseRemoteConfig> setupRemoteConfig() async {
+    remoteConfig = FirebaseRemoteConfig.instance;
     try {
       await remoteConfig.setConfigSettings(RemoteConfigSettings(
           fetchTimeout: Duration(seconds: 30),

@@ -387,7 +387,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).accentColor, // background
+                            primary: Theme.of(context).primaryColor, // background
                           ),
                           child: Text(S.of(context).offline_download),
                           onPressed: () {

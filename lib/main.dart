@@ -13,7 +13,6 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -24,7 +23,6 @@ import 'package:flutter_localized_countries/flutter_localized_countries.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:wakelock/wakelock.dart';
 
 import 'filter/color.dart';
@@ -92,10 +90,6 @@ Future<String> initializeRoute() {
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  if (Platform.isAndroid) {
-    InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
-  }
 
   runZonedGuarded(() {
     initializeFlutterFire().then((_) async {

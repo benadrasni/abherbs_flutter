@@ -6,7 +6,6 @@ import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -161,7 +160,6 @@ class _ObservationViewState extends State<ObservationView> {
 
     if (widget.currentUser != null && widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.firebaseUser.uid)) {
       widgets.add(Card(
-          color: Theme.of(context).buttonColor,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
             alignment: Alignment.topLeft,
