@@ -183,7 +183,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    _firebaseAnalytics = FirebaseAnalytics();
+    _firebaseAnalytics = FirebaseAnalytics.instance;
     _prefLanguageF = Prefs.getStringF(keyPreferredLanguage);
     _prefLanguageF.then((language) {
       _prefLanguage = language;

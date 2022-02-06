@@ -17,7 +17,7 @@ class Subscription extends StatefulWidget {
 }
 
 class _SubscriptionState extends State<Subscription> {
-  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   final _key = GlobalKey<ScaffoldState>();
   final List<String> _subscriptionLists = Platform.isAndroid

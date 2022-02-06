@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:intl/intl.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 
@@ -70,10 +69,10 @@ class _ObservationMapState extends State<ObservationMap> {
             .child(widget.observation.plant)
             .child(firebaseAttributeLabel)
             .once()
-            .then((DataSnapshot snapshot) {
-            if (snapshot.value != null) {
-              translationCache[widget.observation.plant] = snapshot.value;
-              return snapshot.value;
+            .then((event) {
+            if (event.snapshot.value != null) {
+              translationCache[widget.observation.plant] = event.snapshot.value;
+              return event.snapshot.value;
             } else {
               return null;
             }

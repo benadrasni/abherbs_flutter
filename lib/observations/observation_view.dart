@@ -57,10 +57,10 @@ class _ObservationViewState extends State<ObservationView> {
         ? Future<String>(() {
             return translationCache[widget.observation.plant];
           })
-        : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(widget.observation.plant).child(firebaseAttributeLabel).once().then((DataSnapshot snapshot) {
-            if (snapshot.value != null) {
-              translationCache[widget.observation.plant] = snapshot.value;
-              return snapshot.value;
+        : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(widget.observation.plant).child(firebaseAttributeLabel).once().then((event) {
+            if (event.snapshot.value != null) {
+              translationCache[widget.observation.plant] = event.snapshot.value;
+              return event.snapshot.value;
             } else {
               return null;
             }

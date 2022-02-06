@@ -16,7 +16,7 @@ class Auth {
   static AppUser appUser;
 
   static Future<void> _logOldVersionEvent() async {
-    await FirebaseAnalytics().logEvent(name: 'offline_download');
+    await FirebaseAnalytics.instance.logEvent(name: 'offline_download');
   }
 
   static Future<String> signInWithCredential(firebase_auth.AuthCredential credential) async {
@@ -66,14 +66,14 @@ class Auth {
         appUser.firebaseUser = firebaseUser;
         usersReference.child(appUser.firebaseUser.uid).keepSynced(true);
 
-        usersReference.child(appUser.firebaseUser.uid).once().then((snapshot) {
-          Purchases.hasOldVersion = snapshot.value != null && snapshot.value[firebaseAttributeOldVersion] != null && snapshot.value[firebaseAttributeOldVersion];
+        usersReference.child(appUser.firebaseUser.uid).once().then((event) {
+          Purchases.hasOldVersion = event.snapshot.value != null && (event.snapshot.value as Map)[firebaseAttributeOldVersion] != null && (event.snapshot.value as Map)[firebaseAttributeOldVersion];
           if (Purchases.hasOldVersion) {
             _logOldVersionEvent();
           }
           Prefs.setBool(keyOldVersion, Purchases.hasOldVersion);
 
-          appUser.credits = snapshot.value != null && snapshot.value[firebaseAttributeCredits] != null ? snapshot.value[firebaseAttributeCredits] : 0;
+          appUser.credits = event.snapshot.value != null && (event.snapshot.value as Map)[firebaseAttributeCredits] != null ? (event.snapshot.value as Map)[firebaseAttributeCredits] : 0;
 
           Prefs.getStringF(keyToken).then((token) {
             if (token.isNotEmpty) {
@@ -98,8 +98,8 @@ class Auth {
         }
 
         if (Purchases.hasLifetimeSubscription == null) {
-          usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeLifetimeSubscription).once().then((snapshot) {
-            Purchases.hasLifetimeSubscription = snapshot.value != null && snapshot.value;
+          usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeLifetimeSubscription).once().then((event) {
+            Purchases.hasLifetimeSubscription = event.snapshot.value != null && event.snapshot.value;
             Prefs.setBool(keyLifetimeSubscription, Purchases.hasLifetimeSubscription);
           }).catchError((error) {
             Purchases.hasLifetimeSubscription = false;
@@ -117,8 +117,8 @@ class Auth {
   static Future<void> changeCredits(int credit, String feature) async {
     if (appUser != null) {
       usersReference.child(appUser.firebaseUser.uid).keepSynced(true);
-      await usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeCredits).once().then((snapshot) {
-        appUser.credits = snapshot.value != null ? snapshot.value + credit : credit;
+      await usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeCredits).once().then((event) {
+        appUser.credits = event.snapshot.value != null ? (event.snapshot.value as int) + credit : credit;
         logsCreditsReference.child(appUser.firebaseUser.uid).child(DateTime.now().millisecondsSinceEpoch.toString()).set(feature);
       }).catchError((error) {
         appUser.credits = credit;

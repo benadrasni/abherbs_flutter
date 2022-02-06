@@ -7,7 +7,7 @@ description: Flutter version of abherbs
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 7.1.4+714
+version: 7.1.5+715
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -17,41 +17,41 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  shared_preferences: 2.0.7
-  firebase_messaging: 10.0.6
-  firebase_analytics: 8.3.1
-  firebase_auth: 3.1.0
-  firebase_storage: 10.0.3
-  firebase_database: 7.2.1
-  firebase_remote_config: 0.10.0+5
-  firebase_crashlytics: 2.2.1
-  firebase_performance: 0.7.0+9
-  google_mobile_ads: 0.13.4
-  google_sign_in: 5.0.7
+  shared_preferences: 2.0.13
+  firebase_messaging: 11.2.6
+  firebase_analytics: 9.1.0
+  firebase_auth: 3.3.6
+  firebase_storage: 10.2.6
+  firebase_database: 9.0.6
+  firebase_remote_config: 2.0.0
+  firebase_crashlytics: 2.5.0
+  firebase_performance: 0.8.0+5
+  google_mobile_ads: 1.0.1
+  google_sign_in: 5.2.3
   the_apple_sign_in: 1.1.1
-  device_info: 2.0.2
-  in_app_purchase: 1.0.8
-  cached_network_image: 3.1.0
-  url_launcher: 6.0.10
-  http: 0.13.3
-  share: 2.0.4
+  device_info_plus: 3.2.1
+  in_app_purchase: 2.0.1
+  cached_network_image: 3.2.0
+  url_launcher: 6.0.18
+  http: 0.13.4
+  share_plus: 3.0.4
   fluttertoast: 8.0.8
   diacritic: 0.1.3
-  path_provider: 2.0.3
-  percent_indicator: 3.3.0-nullsafety.1
-  package_info: 2.0.2
-  google_maps_flutter: 2.0.8
-  image_picker: 0.8.4
-  exif: 3.0.0
+  path_provider: 2.0.8
+  percent_indicator: 4.0.0
+  package_info_plus: 1.3.0
+  google_maps_flutter: 2.1.1
+  image_picker: 0.8.4+6
+  exif: 3.1.1
   datetime_picker_formfield: 2.0.0
-  connectivity: 3.0.6
-  photo_view: 0.12.0
+  connectivity_plus: 2.2.0
+  photo_view: 0.13.0
   youtube_plyr_iframe: 2.0.7
-  app_tracking_transparency: 2.0.1
-  screen: 0.0.5
-  flutter_country_picker: 0.1.6
-  charts_flutter: 0.11.0
+  app_tracking_transparency: 2.0.2+1
+  country_picker: 2.0.11
+  charts_flutter: 0.12.0
   country_icons: 2.0.2
+  wakelock: 0.6.1+1
 
   flutter_localized_countries:
     path: ../flutter-localized-countries

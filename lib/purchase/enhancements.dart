@@ -22,7 +22,7 @@ class EnhancementsScreen extends StatefulWidget {
 }
 
 class _EnhancementsScreenState extends State<EnhancementsScreen> {
-  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   final _key = GlobalKey<ScaffoldState>();
   final List<String> _productLists = Platform.isAndroid

@@ -10,7 +10,6 @@ import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -40,9 +39,9 @@ class _HabitatState extends State<Habitat> {
 
     var filter = getFilterKey(newFilter);
     countsReference.child(filter).keepSynced(true);
-    countsReference.child(filter).once().then((DataSnapshot snapshot) {
+    countsReference.child(filter).once().then((event) {
       if (this.mounted) {
-        if (snapshot.value != null && snapshot.value > 0) {
+        if (event.snapshot.value != null && (event.snapshot.value as int) > 0) {
           Navigator.push(context, getNextFilterRoute(context, newFilter));
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -54,8 +53,8 @@ class _HabitatState extends State<Habitat> {
   }
 
   _setCount() {
-    _countF = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
-      return snapshot.value;
+    _countF = countsReference.child(getFilterKey(_filter)).once().then((event) {
+      return event.snapshot.value;
     });
   }
 

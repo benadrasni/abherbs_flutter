@@ -16,7 +16,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../keys.dart';
 import '../main.dart';
@@ -46,9 +46,9 @@ class _ColorState extends State<Color> {
 
     var filter = getFilterKey(newFilter);
     countsReference.child(filter).keepSynced(true);
-    countsReference.child(filter).once().then((DataSnapshot snapshot) {
+    countsReference.child(filter).once().then((event) {
       if (this.mounted) {
-        if (snapshot.value != null && snapshot.value > 0) {
+        if (event.snapshot.value != null && (event.snapshot.value as int) > 0) {
           Navigator.push(context, getNextFilterRoute(context, newFilter));
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -60,8 +60,8 @@ class _ColorState extends State<Color> {
   }
 
   _setCount() {
-    _countF = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
-      return snapshot.value;
+    _countF = countsReference.child(getFilterKey(_filter)).once().then((event) {
+      return event.snapshot.value;
     });
   }
 
@@ -105,8 +105,8 @@ class _ColorState extends State<Color> {
     _key = new GlobalKey<ScaffoldState>();
     _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
     _isNewVersionF = PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-      return FirebaseDatabase.instance.reference().child(firebaseVersions).child(Platform.isAndroid ? firebaseAttributeAndroid : firebaseAttributeIOS).once().then((DataSnapshot snapshot) {
-        return int.parse(packageInfo.buildNumber) < snapshot.value;
+      return FirebaseDatabase.instance.reference().child(firebaseVersions).child(Platform.isAndroid ? firebaseAttributeAndroid : firebaseAttributeIOS).once().then((event) {
+        return int.parse(packageInfo.buildNumber) < (event.snapshot.value as int);
       });
     });
 

@@ -93,9 +93,9 @@ class _PlantListState extends State<PlantList> {
     }
 
     widget.pathToIndex.keepSynced(true);
-    _count = widget.pathToIndex.once().then((DataSnapshot snapshot) {
-      var result = snapshot.value ?? [];
-      int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1)) : result.values.length;
+    _count = widget.pathToIndex.once().then((event) {
+      var result = event.snapshot.value ?? [];
+      int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1)) : (result as Map).values.length;
       return length;
     });
   }
@@ -131,19 +131,19 @@ class _PlantListState extends State<PlantList> {
                 query: listsReference.orderByChild(firebaseAttributeName),
                 keyQuery: widget.pathToIndex,
                 itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
-                  String name = snapshot.value[firebaseAttributeName];
-                  String family = snapshot.value[firebaseAttributeFamily];
-                  String url = snapshot.value[firebaseAttributeUrl];
+                  String name = (snapshot.value as Map)[firebaseAttributeName];
+                  String family = (snapshot.value as Map)[firebaseAttributeFamily];
+                  String url = (snapshot.value as Map)[firebaseAttributeUrl];
 
                   Locale myLocale = Localizations.localeOf(mainContext);
                   Future<String> nameF = translationCache.containsKey(name)
                       ? Future<String>(() {
                           return translationCache[name];
                         })
-                      : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(name).child(firebaseAttributeLabel).once().then((DataSnapshot snapshot) {
-                          if (snapshot.value != null) {
-                            translationCache[name] = snapshot.value;
-                            return snapshot.value;
+                      : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(name).child(firebaseAttributeLabel).once().then((event) {
+                          if (event.snapshot.value != null) {
+                            translationCache[name] = event.snapshot.value;
+                            return event.snapshot.value;
                           } else {
                             return null;
                           }
@@ -152,10 +152,10 @@ class _PlantListState extends State<PlantList> {
                       ? Future<String>(() {
                           return translationCache[family];
                         })
-                      : translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(family).once().then((DataSnapshot snapshot) {
-                          if (snapshot.value != null && snapshot.value.length > 0) {
-                            translationCache[family] = snapshot.value[0];
-                            return snapshot.value[0];
+                      : translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(family).once().then((event) {
+                          if (event.snapshot.value != null && (event.snapshot.value as List).length > 0) {
+                            translationCache[family] = (event.snapshot.value as List)[0];
+                            return (event.snapshot.value as List)[0];
                           } else {
                             return null;
                           }

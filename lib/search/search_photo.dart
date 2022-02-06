@@ -45,7 +45,7 @@ class SearchPhoto extends StatefulWidget {
 
 class _SearchPhotoState extends State<SearchPhoto> {
   final ImagePicker _picker = ImagePicker();
-  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   File _image;
@@ -151,7 +151,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
             continue;
           }
           String plantName = suggestion['plant_details']['scientific_name'];
-          results.add(await rootReference.child(firebaseSearchPhoto + '/' + plantName.toLowerCase().replaceAll('.', '')).once().then((snapshot) {
+          results.add(await rootReference.child(firebaseSearchPhoto + '/' + plantName.toLowerCase().replaceAll('.', '')).once().then((event) {
             var result = SearchResult();
             result.labelLatin = plantName;
             result.entityId = suggestion['id'].toString();
@@ -159,9 +159,9 @@ class _SearchPhotoState extends State<SearchPhoto> {
             result.plantDetails = suggestion['plant_details'];
             result.similarImages = suggestion['similar_images'];
             result.commonName = suggestion['plant_details']['common_names'] != null ? suggestion['plant_details']['common_names'][0] : "";
-            if (snapshot != null && snapshot.value != null) {
-              result.count = snapshot.value['count'];
-              result.path = snapshot.value['path'];
+            if (event.snapshot != null && event.snapshot.value != null) {
+              result.count = (event.snapshot.value as Map)['count'];
+              result.path = (event.snapshot.value as Map)['path'];
               result.labelInLanguage = '';
               if (result.path.contains('/')) {
                 String path = result.path.substring(0, result.path.length - 5);
@@ -169,9 +169,9 @@ class _SearchPhotoState extends State<SearchPhoto> {
               } else {
                 result.labelLatin = result.path;
                 translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).keepSynced(true);
-                return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).child(firebaseAttributeLabel).once().then((snapshot) {
-                  if (snapshot.value != null) {
-                    result.labelInLanguage = snapshot.value;
+                return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).child(firebaseAttributeLabel).once().then((event) {
+                  if (event.snapshot.value != null) {
+                    result.labelInLanguage = event.snapshot.value;
                   }
                   return result;
                 });
@@ -181,10 +181,10 @@ class _SearchPhotoState extends State<SearchPhoto> {
                 return result;
               } else {
                 translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).keepSynced(true);
-                return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).once().then((snapshot) {
-                  if (snapshot.value != null && snapshot.value.length > 0) {
-                    translationCache[result.labelLatin] = snapshot.value[0];
-                    result.labelInLanguage = snapshot.value[0];
+                return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).once().then((event) {
+                  if (event.snapshot.value != null && (event.snapshot.value as List).length > 0) {
+                    translationCache[result.labelLatin] = (event.snapshot.value as List)[0];
+                    result.labelInLanguage = (event.snapshot.value as List)[0];
                   }
                   return result;
                 });

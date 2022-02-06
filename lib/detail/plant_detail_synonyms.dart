@@ -42,10 +42,10 @@ class _PlantSynonymsState extends State<PlantSynonyms> {
                 ListTile(
                   leading: Icon(Icons.arrow_right),
                   trailing: Icon(Icons.insert_link),
-                  title: Text([snapshot.value['name'], snapshot.value['suffix']].join(' ')),
-                  subtitle: Text(snapshot.value['author']),
+                  title: Text([(snapshot.value as Map)['name'], (snapshot.value as Map)['suffix']].join(' ')),
+                  subtitle: Text((snapshot.value as Map)['author']),
                   onTap: () {
-                    launchURL(RemoteConfiguration.remoteConfig.getString(remoteConfigIPNIServer) + snapshot.value['href']);
+                    launchURL(RemoteConfiguration.remoteConfig.getString(remoteConfigIPNIServer) + (snapshot.value as Map)['href']);
                   },
                 ),
               ]),

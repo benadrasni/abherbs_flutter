@@ -66,7 +66,7 @@ class _SettingOfflineState extends State<SettingOffline> {
   @override
   void initState() {
     super.initState();
-    _firebaseAnalytics = FirebaseAnalytics();
+    _firebaseAnalytics = FirebaseAnalytics.instance;
 
     _downloadStatus = 0;
     _familiesDownloaded = 0;

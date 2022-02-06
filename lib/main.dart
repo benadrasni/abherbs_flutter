@@ -11,6 +11,7 @@ import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,7 +25,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-import 'package:screen/screen.dart';
+import 'package:wakelock/wakelock.dart';
 
 import 'filter/color.dart';
 import 'filter/distribution.dart';
@@ -98,7 +99,7 @@ void main() {
 
   runZonedGuarded(() {
     initializeFlutterFire().then((_) async {
-      Screen.keepOn(true);
+      Wakelock.enable();
       await Prefs.init();
       await AppTrackingTransparency.requestTrackingAuthorization();
       MobileAds.instance.initialize();
@@ -133,7 +134,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   StreamSubscription<List<PurchaseDetails>> _subscription;
   Locale _locale;
@@ -280,9 +281,9 @@ class _AppState extends State<App> {
             if (path != null) {
               rootReference.child(path).keepSynced(true);
               rootReference.child(firebasePlantHeaders).keepSynced(true);
-              return rootReference.child(path).once().then((DataSnapshot snapshot) {
-                var result = snapshot.value ?? [];
-                int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1)) : result.values.length;
+              return rootReference.child(path).once().then((event) {
+                var result = event.snapshot.value ?? [];
+                int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1)) : (result as Map).values.length;
                 if (length == 0) {
                   rootReference.child(path).child("refreshMock").set("mock").catchError((error) {
                     FirebaseCrashlytics.instance.log("0-length custom list");
@@ -414,6 +415,7 @@ class _AppState extends State<App> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
         CountryNamesLocalizationsDelegate(),
+        CountryLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
       initialRoute: widget.initialRoute,

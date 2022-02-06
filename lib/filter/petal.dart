@@ -40,9 +40,9 @@ class _PetalState extends State<Petal> {
 
     var filter = getFilterKey(newFilter);
     countsReference.child(filter).keepSynced(true);
-    countsReference.child(filter).once().then((DataSnapshot snapshot) {
+    countsReference.child(filter).once().then((event) {
       if (this.mounted) {
-        if (snapshot.value != null && snapshot.value > 0) {
+        if (event.snapshot.value != null && (event.snapshot.value as int) > 0) {
           Navigator.push(context, getNextFilterRoute(context, newFilter));
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -54,8 +54,8 @@ class _PetalState extends State<Petal> {
   }
 
   _setCount() {
-    _countF = countsReference.child(getFilterKey(_filter)).once().then((DataSnapshot snapshot) {
-      return snapshot.value;
+    _countF = countsReference.child(getFilterKey(_filter)).once().then((event) {
+      return event.snapshot.value;
     });
   }
 

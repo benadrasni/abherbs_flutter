@@ -5,7 +5,6 @@ import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/search/search_names.dart';
 import 'package:abherbs_flutter/search/search_taxonomy.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -51,28 +50,28 @@ class _SearchState extends State<Search> {
       case 0:
         if (_nativeNamesF == null) {
           searchReference.child(getLanguageCode(widget.myLocale.languageCode)).keepSynced(true);
-          _nativeNamesF = searchReference.child(getLanguageCode(widget.myLocale.languageCode)).once().then((DataSnapshot snapshot) {
-            return snapshot.value;
+          _nativeNamesF = searchReference.child(getLanguageCode(widget.myLocale.languageCode)).once().then((event) {
+            return event.snapshot.value;
           });
         }
         if (_latinNamesF == null) {
           searchReference.child(languageLatin).keepSynced(true);
-          _latinNamesF = searchReference.child(languageLatin).once().then((DataSnapshot snapshot) {
-            return snapshot.value;
+          _latinNamesF = searchReference.child(languageLatin).once().then((event) {
+            return event.snapshot.value;
           });
         }
         return searchNames(widget.myLocale, _searchText, _nativeNamesF, _latinNamesF);
       case 1:
         if (_apgIVF == null) {
           apgIVReference.keepSynced(true);
-          _apgIVF = apgIVReference.once().then((DataSnapshot snapshot) {
-            return snapshot.value;
+          _apgIVF = apgIVReference.once().then((event) {
+            return event.snapshot.value;
           });
         }
         if (_translationsTaxonomyF == null) {
           translationsTaxonomyReference.child(getLanguageCode(widget.myLocale.languageCode)).keepSynced(true);
-          _translationsTaxonomyF = translationsTaxonomyReference.child(getLanguageCode(widget.myLocale.languageCode)).once().then((DataSnapshot snapshot) {
-            return snapshot.value;
+          _translationsTaxonomyF = translationsTaxonomyReference.child(getLanguageCode(widget.myLocale.languageCode)).once().then((event) {
+            return event.snapshot.value;
           });
         }
         return searchTaxonomy(widget.myLocale, _searchText, _apgIVF, _translationsTaxonomyF);

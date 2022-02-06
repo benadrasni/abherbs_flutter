@@ -9,7 +9,7 @@ import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -92,9 +92,9 @@ class _ObservationsState extends State<Observations> {
             .orderByChild(firebaseAttributeStatus)
             .equalTo(firebaseValuePrivate)
             .once()
-            .then((DataSnapshot snapshot) {
+            .then((event) {
           setState(() {
-            _observationsRemain = snapshot.value?.length ?? 0;
+            _observationsRemain = (event.snapshot.value as List)?.length ?? 0;
           });
         });
       });
