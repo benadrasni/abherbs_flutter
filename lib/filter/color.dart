@@ -105,7 +105,7 @@ class _ColorState extends State<Color> {
     _key = new GlobalKey<ScaffoldState>();
     _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
     _isNewVersionF = PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-      return FirebaseDatabase.instance.reference().child(firebaseVersions).child(Platform.isAndroid ? firebaseAttributeAndroid : firebaseAttributeIOS).once().then((event) {
+      return FirebaseDatabase.instance.ref().child(firebaseVersions).child(Platform.isAndroid ? firebaseAttributeAndroid : firebaseAttributeIOS).once().then((event) {
         return int.parse(packageInfo.buildNumber) < (event.snapshot.value as int);
       });
     });

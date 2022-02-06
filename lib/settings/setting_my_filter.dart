@@ -103,7 +103,7 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
 
     filterWidgets.add(Container(
       height: 5.0,
-      color: Theme.of(context).buttonColor,
+      color: Theme.of(context).secondaryHeaderColor,
     ));
 
     for (String item in filterAttributes) {

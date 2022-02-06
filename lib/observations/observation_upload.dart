@@ -92,8 +92,8 @@ class _ObservationUploadState extends State<ObservationUpload> {
           width: MediaQuery.of(context).size.width - 150,
           lineHeight: 20.0,
           percent: (widget.observationsToUpload - _observationsRemain) / widget.observationsToUpload,
-          backgroundColor: Theme.of(context).buttonColor,
-          progressColor: Theme.of(context).accentColor,
+          backgroundColor: Theme.of(context).backgroundColor,
+          progressColor: Theme.of(context).primaryColor,
         );
         _actions.add(TextButton(
           child: Text(S.of(context).pause.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),

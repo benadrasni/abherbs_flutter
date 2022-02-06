@@ -10,7 +10,6 @@ import 'package:abherbs_flutter/observations/observation_map.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -299,14 +298,14 @@ class _ObservationEditState extends State<ObservationEdit> {
           ? Center(
               child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 GestureDetector(
-                  child: Icon(Icons.add_a_photo, color: Theme.of(context).buttonColor, size: 80.0),
+                  child: Icon(Icons.add_a_photo, size: 80.0),
                   onTap: () {
                     _getImage(_key, ImageSource.camera);
                   },
                 ),
                 SizedBox(width: 80.0),
                 GestureDetector(
-                  child: Icon(Icons.add_photo_alternate, color: Theme.of(context).buttonColor, size: 80.0),
+                  child: Icon(Icons.add_photo_alternate, size: 80.0),
                   onTap: () {
                     _getImage(_key, ImageSource.gallery);
                   },
@@ -331,7 +330,7 @@ class _ObservationEditState extends State<ObservationEdit> {
                         IconButton(
                           icon: Icon(
                             Icons.delete,
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).primaryColor,
                           ),
                           onPressed: () {
                             deleteDialog(context, S.of(context).observation_photo_delete, S.of(context).observation_photo_delete_question)

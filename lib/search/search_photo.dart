@@ -264,14 +264,14 @@ class _SearchPhotoState extends State<SearchPhoto> {
             ? Center(
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             GestureDetector(
-              child: Icon(Icons.add_a_photo, color: Theme.of(context).buttonColor, size: 80.0),
+              child: Icon(Icons.add_a_photo, color: Theme.of(context).secondaryHeaderColor, size: 80.0),
               onTap: () {
                 _getImage(_key, ImageSource.camera, maxSize);
               },
             ),
             SizedBox(width: 80.0),
             GestureDetector(
-              child: Icon(Icons.add_photo_alternate, color: Theme.of(context).buttonColor, size: 80.0),
+              child: Icon(Icons.add_photo_alternate, color: Theme.of(context).secondaryHeaderColor, size: 80.0),
               onTap: () {
                 _getImage(_key, ImageSource.gallery, maxSize);
               },

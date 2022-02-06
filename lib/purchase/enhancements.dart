@@ -136,7 +136,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     buttons.add(
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: isPurchased ? Theme.of(context).buttonColor : Theme.of(context).accentColor, // background
+          primary: isPurchased ? Theme.of(context).secondaryHeaderColor : Theme.of(context).primaryColor, // background
         ),
         onPressed: () {
           if (!isPurchased) {
@@ -161,7 +161,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
         case productOffline:
           buttons.add(ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).accentColor, // background
+              primary: Theme.of(context).primaryColor, // background
             ),
             onPressed: () {
               Navigator.push(
@@ -178,7 +178,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
         case productCustomFilter:
           buttons.add(ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).accentColor, // background
+              primary: Theme.of(context).primaryColor, // background
             ),
             onPressed: () {
               Navigator.push(
@@ -196,7 +196,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           if (Purchases.hasLifetimeSubscription == null || !Purchases.hasLifetimeSubscription) {
             buttons.add(ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).accentColor, // background
+                primary: Theme.of(context).primaryColor, // background
               ),
               onPressed: () {
                 Navigator.push(
@@ -255,7 +255,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                       },
                       child: Text(
                         S.of(context).product_restore_purchases,
-                        style: TextStyle(color: Theme.of(context).accentColor, fontSize: 18.0),
+                        style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 18.0),
                       ),
                     ),
                   ),

@@ -182,7 +182,7 @@ const String remoteConfigSearchByPhotoVideo = "search_by_photo_video";
 const String remoteConfigObservationsVideo = "observations_video";
 const String remoteConfigCustomFilterVideo = "custom_filter_video";
 
-final DatabaseReference rootReference = FirebaseDatabase.instance.reference();
+final DatabaseReference rootReference = FirebaseDatabase.instance.ref();
 final DatabaseReference countsReference = rootReference.child(firebaseCounts);
 final DatabaseReference listsReference = rootReference.child(firebasePlantHeaders);
 final DatabaseReference listsCustomReference = rootReference.child(firebaseListsCustom);
@@ -284,7 +284,7 @@ Widget getImage(String url, Widget placeholder, {double width, double height, Bo
             height: height,
             placeholder: (context, url) => placeholder,
             errorWidget: (context, url, error) => Container(width: width, height: height,
-                child: Icon(Icons.error, color: Theme.of(context).buttonColor, size: 80.0)),
+                child: Icon(Icons.error, color: Theme.of(context).secondaryHeaderColor, size: 80.0)),
             imageUrl: storageEndpoint + url,
           );
         } else {

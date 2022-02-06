@@ -54,7 +54,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
     widgets.add(ListTile(
       leading: widget.observation.id.startsWith(widget.currentUser.firebaseUser.uid)
           ? CircleAvatar(
-              backgroundColor: Theme.of(context).accentColor,
+              backgroundColor: Theme.of(context).primaryColor,
               child: Icon(
                 Icons.edit,
                 color: Colors.white,
@@ -142,7 +142,6 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
 
     if (widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.firebaseUser.uid)) {
       widgets.add(Card(
-          color: Theme.of(context).buttonColor,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
             alignment: Alignment.topLeft,

@@ -40,7 +40,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
     listItems.add(Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).primaryColor,
       ),
       child: Column(children: [
         Container(
@@ -108,7 +108,7 @@ class _AppDrawerState extends State<AppDrawer> {
     }));
     listItems.add(Container(
       height: 5.0,
-      color: Theme.of(context).buttonColor,
+      color: Theme.of(context).highlightColor,
     ));
     listItems.add(ListTile(
       dense: true,

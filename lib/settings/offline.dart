@@ -76,7 +76,7 @@ class Offline {
 
   static Future<void> setKeepSynced(int section, bool value) async {
     if (!value || (_offline && _downloadDB && !_keepSynced[section - 1])) {
-      var reference = FirebaseDatabase.instance.reference();
+      var reference = FirebaseDatabase.instance.ref();
       switch (section) {
         case 1:
           await reference.child(firebaseCounts).keepSynced(value);
@@ -139,7 +139,7 @@ class Offline {
   static Future<bool> downloadFamilies(Function(int, int) onFamilyDownload) async {
     int position = int.parse(await Prefs.getStringF(keyOfflineFamily, '0'));
     int familyTotal = await FirebaseDatabase.instance
-        .reference()
+        .ref()
         .child(firebaseFamiliesToUpdate)
         .child(firebaseAttributeCount)
         .once()
@@ -164,7 +164,7 @@ class Offline {
 
   static Future<bool> _downloadFamilyIcon(int position) async {
     String family = await FirebaseDatabase.instance
-        .reference()
+        .ref()
         .child(firebaseFamiliesToUpdate)
         .child(firebaseAttributeList)
         .child(position.toString())
@@ -187,7 +187,7 @@ class Offline {
   static Future<bool> _downloadPlants(Function(int, int) onPlantDownload) async {
     int position = int.parse(await Prefs.getStringF(keyOfflinePlant, '0'));
     int plantTotal =
-        await FirebaseDatabase.instance.reference().child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((event) {
+        await FirebaseDatabase.instance.ref().child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((event) {
       return event.snapshot.value ?? 0;
     });
     while (position < plantTotal) {
@@ -210,12 +210,12 @@ class Offline {
   static Future<bool> _downloadPlantPhotos(int position) async {
     String url;
     String plantName =
-        await FirebaseDatabase.instance.reference().child(firebasePlantHeaders).child(position.toString()).once().then((event) {
+        await FirebaseDatabase.instance.ref().child(firebasePlantHeaders).child(position.toString()).once().then((event) {
       url = event.snapshot.value == null ? null : (event.snapshot.value as Map)['url'];
       return event.snapshot.value == null ? null : (event.snapshot.value as Map)['name'];
     });
     if (plantName != null) {
-      Plant plant = await FirebaseDatabase.instance.reference().child(firebasePlants).child(plantName).once().then((event) {
+      Plant plant = await FirebaseDatabase.instance.ref().child(firebasePlants).child(plantName).once().then((event) {
         return Plant.fromJson(event.snapshot.key, event.snapshot.value);
       });
       if (plant != null) {

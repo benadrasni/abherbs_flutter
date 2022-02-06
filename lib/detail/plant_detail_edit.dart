@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PlantDetailEdit extends StatefulWidget {
