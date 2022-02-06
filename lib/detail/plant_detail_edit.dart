@@ -33,9 +33,9 @@ class _PlantDetailEditState extends State<PlantDetailEdit> {
   }
 
   _setText() async {
-    _translationController.text = await translationsNewReference.child(widget.language).child(widget.plantName).child(widget.section).once().then((snapshot) {
-      if (snapshot != null && snapshot.value != null) {
-        return snapshot.value;
+    _translationController.text = await translationsNewReference.child(widget.language).child(widget.plantName).child(widget.section).once().then((event) {
+      if (event.snapshot != null && event.snapshot.value != null) {
+        return event.snapshot.value;
       }
       return widget.text;
     });

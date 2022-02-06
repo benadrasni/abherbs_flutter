@@ -200,10 +200,10 @@ class _ObservationEditState extends State<ObservationEdit> {
             .child(_observation.plant)
             .child(firebaseAttributeLabel)
             .once()
-            .then((DataSnapshot snapshot) {
-            if (snapshot.value != null) {
-              translationCache[_observation.plant] = snapshot.value;
-              return snapshot.value;
+            .then((event) {
+            if (event.snapshot.value != null) {
+              translationCache[_observation.plant] = event.snapshot.value;
+              return event.snapshot.value;
             } else {
               return null;
             }

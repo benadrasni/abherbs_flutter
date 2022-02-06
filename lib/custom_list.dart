@@ -59,7 +59,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
   @override
   void initState() {
     super.initState();
-    _firebaseAnalytics = FirebaseAnalytics();
+    _firebaseAnalytics = FirebaseAnalytics.instance;
     _checkCurrentUser();
     _key = new GlobalKey<ScaffoldState>();
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString());
@@ -94,18 +94,18 @@ class _CustomListScreenState extends State<CustomListScreen> {
           fit: BoxFit.fill,
           child: FutureBuilder<int>(future: Future<int>(() {
             if (_currentUser != null) {
-              return usersReference.child(_currentUser.firebaseUser.uid).child(firebaseAttributeFavorite).once().then((snapshot) {
-                if (snapshot.value != null) {
-                  if (snapshot.value is List) {
+              return usersReference.child(_currentUser.firebaseUser.uid).child(firebaseAttributeFavorite).once().then((event) {
+                if (event.snapshot.value != null) {
+                  if (event.snapshot.value is List) {
                     int i = 0;
-                    snapshot.value.forEach((value) {
+                    (event.snapshot.value as List).forEach((value) {
                       if (value != null) {
                         i++;
                       }
                     });
                     return i;
                   } else {
-                    return snapshot.value.length;
+                    return (event.snapshot.value as List).length;
                   }
                 }
                 return 0;
@@ -138,8 +138,8 @@ class _CustomListScreenState extends State<CustomListScreen> {
     ));
 
     _widgets.add(FutureBuilder<int>(
-        future: listsCustomReference.child("by language").child(widget.myLocale.languageCode).once().then((DataSnapshot snapshot) {
-          return snapshot.value == null ? 0 : 1;
+        future: listsCustomReference.child("by language").child(widget.myLocale.languageCode).once().then((event) {
+          return event.snapshot.value == null ? 0 : 1;
         }),
         builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
@@ -167,10 +167,10 @@ class _CustomListScreenState extends State<CustomListScreen> {
                             Random random = Random();
 
                             return FutureBuilder<List<String>>(
-                                future: listsCustomReference.child("by language").child(widget.myLocale.languageCode).child(snapshot.key).once().then((DataSnapshot snapshot) {
-                                  var result = snapshot.value[firebaseAttributeList]??[];
+                                future: listsCustomReference.child("by language").child(widget.myLocale.languageCode).child(snapshot.key).once().then((event) {
+                                  var result = (event.snapshot.value as Map)[firebaseAttributeList]??[];
                                   int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : result.values.length;
-                                  String icon = snapshot.value["icon"]??families[random.nextInt(families.length-1)];
+                                  String icon = (event.snapshot.value as Map)["icon"]??families[random.nextInt(families.length-1)];
 
                                   return [length.toString(), icon];
                                 }),
@@ -249,9 +249,9 @@ class _CustomListScreenState extends State<CustomListScreen> {
                         width: 50.0,
                         height: 50.0),
                     trailing: FutureBuilder<int>(
-                        future: listsCustomReference.child("new").child(snapshot.key).child(firebaseAttributeList).once().then((DataSnapshot snapshot) {
-                          var result = snapshot.value??[];
-                          int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : result.values.length;
+                        future: listsCustomReference.child("new").child(snapshot.key).child(firebaseAttributeList).once().then((event) {
+                          var result = event.snapshot.value??[];
+                          int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : (result as Map).values.length;
                           return length;
                         }),
                         builder: (BuildContext context, AsyncSnapshot<int> snapshot) {

@@ -6,15 +6,14 @@ import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize) {
-  Future<List<String>> _firstSynonymF = synonymsReference.child(plant.name).child(firebaseAttributeIPNI).once().then((DataSnapshot snapshot) {
+  Future<List<String>> _firstSynonymF = synonymsReference.child(plant.name).child(firebaseAttributeIPNI).once().then((event) {
     List<String> result = [];
-    if (snapshot.value != null) {
-      result.add([snapshot.value.first['name'], snapshot.value.first['suffix']].join(' '));
-      result.add(snapshot.value.first['author']);
+    if (event.snapshot.value != null) {
+      result.add([(event.snapshot.value as List).first['name'], (event.snapshot.value as List).first['suffix']].join(' '));
+      result.add((event.snapshot.value as List).first['author']);
     }
     return result;
   });
@@ -189,9 +188,9 @@ Widget _getTaxonomy(BuildContext context, Locale myLocale, Plant plant, double f
 }
 
 Widget _getTaxonInLanguage(Locale myLocale, String taxon, double fontSize) {
-  Future<String> translationF = translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(taxon).once().then((DataSnapshot snapshot) {
-    if (snapshot.value != null && snapshot.value.length > 0) {
-      return snapshot.value.join(', ');
+  Future<String> translationF = translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(taxon).once().then((event) {
+    if (event.snapshot.value != null && (event.snapshot.value as List).length > 0) {
+      return (event.snapshot.value as List).join(', ');
     } else {
       return null;
     }

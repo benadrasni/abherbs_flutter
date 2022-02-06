@@ -9,14 +9,12 @@ import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
 import 'package:flutter/foundation.dart';
 
 typedef void ChildCallback(int index, DataSnapshot snapshot);
-typedef void ChildMovedCallback(
-    int fromIndex, int toIndex, DataSnapshot snapshot);
+typedef void ChildMovedCallback(int fromIndex, int toIndex, DataSnapshot snapshot);
 typedef void ValueCallback(DataSnapshot snapshot);
-typedef void ErrorCallback(DatabaseError error);
+typedef void ErrorCallback(Object error);
 
 /// Sorts the results of `query` on the client side using `DataSnapshot.key`.
-class FirebaseIndexList extends ListBase<DataSnapshot>
-    with StreamSubscriberMixin<Event> {
+class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixin<DatabaseEvent> {
   FirebaseIndexList({
     @required this.query,
     @required this.keyQuery,
@@ -27,18 +25,18 @@ class FirebaseIndexList extends ListBase<DataSnapshot>
     assert(query != null);
     assert(keyQuery != null);
 
-    keyQuery.once().then((DataSnapshot snapshot) {
-      if (snapshot.value != null) {
-        if (snapshot.value is List) {
+    keyQuery.once().then((event) {
+      if (event.snapshot.value != null) {
+        if (event.snapshot.value is List) {
           int i = 0;
-          snapshot.value.forEach((value) {
+          (event.snapshot.value as List).forEach((value) {
             if (value != null) {
               _keys[i.toString()] = value;
             }
             i++;
           });
         } else {
-          snapshot.value.forEach((key, value) {
+          (event.snapshot.value as Map).forEach((key, value) {
             _keys[key] = value;
           });
         }
@@ -92,19 +90,18 @@ class FirebaseIndexList extends ListBase<DataSnapshot>
     // Do not call super.clear(), it will set the length, it's unsupported.
   }
 
-  void _onChildAdded(Event event) {
+  void _onChildAdded(DatabaseEvent event) {
     if (_keys[event.snapshot.key] != null) {
       _snapshots.add(event.snapshot);
       onChildAdded(_snapshots.length - 1, event.snapshot);
     }
   }
 
-  void _onValue(Event event) {
+  void _onValue(DatabaseEvent event) {
     onValue(event.snapshot);
   }
 
   void _onError(Object o) {
-    final DatabaseError error = o;
-    onError?.call(error);
+    onError?.call(o);
   }
 }

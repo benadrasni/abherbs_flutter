@@ -20,15 +20,14 @@ import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:youtube_plyr_iframe/youtube_plyr_iframe.dart';
 
 import '../main.dart';
@@ -50,7 +49,7 @@ class PlantDetail extends StatefulWidget {
 }
 
 class _PlantDetailState extends State<PlantDetail> {
-  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
+  final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   StreamSubscription<firebase_auth.User> _listener;
   AppUser _currentUser;
   Future<PlantTranslation> _plantTranslationF;
@@ -78,16 +77,16 @@ class _PlantDetailState extends State<PlantDetail> {
   }
 
   Future<PlantTranslation> _getTranslation() {
-    return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(widget.plant.name).once().then((DataSnapshot snapshot) {
-      var plantTranslation = snapshot.value == null ? PlantTranslation() : PlantTranslation.fromJson(snapshot.value);
+    return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(widget.plant.name).once().then((event) {
+      var plantTranslation = event.snapshot.value == null ? PlantTranslation() : PlantTranslation.fromJson(event.snapshot.value);
       if (plantTranslation.isTranslated()) {
         return plantTranslation;
       } else {
         plantTranslation.isTranslatedWithGT = true;
-        return translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name).once().then((DataSnapshot snapshot) {
+        return translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name).once().then((event) {
           var plantTranslationGT = PlantTranslation.copy(plantTranslation);
-          if (snapshot.value != null) {
-            plantTranslationGT = PlantTranslation.fromJson(snapshot.value);
+          if (event.snapshot.value != null) {
+            plantTranslationGT = PlantTranslation.fromJson(event.snapshot.value);
             plantTranslationGT.mergeWith(plantTranslation);
           }
           if (plantTranslationGT.label == null) {
@@ -97,8 +96,8 @@ class _PlantDetailState extends State<PlantDetail> {
             plantTranslationGT.isTranslatedWithGT = true;
             return plantTranslationGT;
           } else {
-            return translationsReference.child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish).child(widget.plant.name).once().then((DataSnapshot snapshot) {
-              var plantTranslationOriginal = PlantTranslation.fromJson(snapshot.value);
+            return translationsReference.child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish).child(widget.plant.name).once().then((event) {
+              var plantTranslationOriginal = PlantTranslation.fromJson(event.snapshot.value);
               var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
               uri += '&source=' + (languageCzech == widget.myLocale.languageCode ? languageSlovak : languageEnglish);
               uri += '&target=' + getLanguageCode(widget.myLocale.languageCode);
@@ -125,8 +124,8 @@ class _PlantDetailState extends State<PlantDetail> {
   Future<bool> _setFavorite() {
     return Future<bool>(() {
       if (_currentUser != null) {
-        return usersReference.child(_currentUser.firebaseUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).once().then((snapshot) {
-          return snapshot.value != null && snapshot.value == 1;
+        return usersReference.child(_currentUser.firebaseUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).once().then((event) {
+          return event.snapshot.value != null && event.snapshot.value == 1;
         });
       }
       return false;

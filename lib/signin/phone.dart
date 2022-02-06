@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/services.dart';
-import 'package:flutter_country_picker/flutter_country_picker.dart';
+import 'package:country_picker/country_picker.dart';
 
 class PhoneLoginSignUpPage extends StatefulWidget {
   final Locale myLocale;
@@ -102,7 +102,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     _isLoading = false;
     _isWrongNumber = false;
     _showResendButton = false;
-    _country = Country.findByIsoCode(widget.myLocale.countryCode);
+    _country = Country.parse(widget.myLocale.countryCode);
 
     _verificationCompleted = (firebase_auth.AuthCredential credential) {
       Auth.signInWithCredential(credential);
@@ -213,14 +213,19 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
           children: [
             Expanded(
               flex: 1,
-              child: CountryPicker(
-                showName: false,
-                onChanged: (Country country) {
-                  setState(() {
-                    _country = country;
-                  });
+              child: TextButton(
+                onPressed: () {
+                  showCountryPicker(
+                    context: context,
+                    showPhoneCode: true,
+                    onSelect: (Country country) {
+                      setState(() {
+                        _country = country;
+                      });
+                    },
+                  );
                 },
-                selectedCountry: _country,
+                child: Text('+' + _country.phoneCode),
               ),
             ),
             Expanded(
@@ -233,7 +238,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
                   hintText: S.of(context).auth_phone_hint,
                 ),
                 validator: (value) => value.isEmpty || _isWrongNumber ? S.of(context).auth_invalid_phone_number : null,
-                onSaved: (value) => _phone = '+' + _country.dialingCode + value,
+                onSaved: (value) => _phone = '+' + _country.phoneCode + value,
               ),
             ),
           ],

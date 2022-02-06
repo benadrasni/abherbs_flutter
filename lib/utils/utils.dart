@@ -15,7 +15,7 @@ import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:exif/exif.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -228,7 +228,7 @@ Future<void> launchURLF(String url) {
 }
 
 Future<void> _logPromotionEvent(event) async {
-  await FirebaseAnalytics().logEvent(name: 'promotion', parameters: {'feature': event});
+  await FirebaseAnalytics.instance.logEvent(name: 'promotion', parameters: {'feature': event});
 }
 
 String getMapImageUrl(double latitude, double longitude, double width, double height) {
@@ -609,10 +609,10 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
 }
 
 void goToDetail(State state, BuildContext context, Locale myLocale, String name, Map<String, String> filter) {
-  plantsReference.child(name).once().then((DataSnapshot snapshot) {
-    if (snapshot.value != null && snapshot.value['id'] != null) {
+  plantsReference.child(name).once().then((event) {
+    if (event.snapshot.value != null && (event.snapshot.value as Map)['id'] != null) {
       if (state.mounted && context != null) {
-        Plant plant = Plant.fromJson(snapshot.key, snapshot.value);
+        Plant plant = Plant.fromJson(event.snapshot.key, event.snapshot.value);
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => PlantDetail(myLocale, filter, plant), settings: RouteSettings(name: 'PlantDetail')),

@@ -6,7 +6,6 @@ import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class Upload {
@@ -19,7 +18,7 @@ class Upload {
   static Function() _onObservationUpload;
   static Function() _onObservationUploadFail;
   static firebase_storage.FirebaseStorage _storage = firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket);
-  static FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics();
+  static FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
 
   static Future<void> _logObservationUploadEvent(String uid, String status) async {
     await _firebaseAnalytics.logEvent(name: 'observation_upload', parameters: {'uid': uid, 'status': status});
@@ -43,19 +42,19 @@ class Upload {
         .orderByChild(firebaseAttributeStatus)
         .equalTo(firebaseValuePrivate)
         .once()
-        .then((DataSnapshot snapshot) async {
-      count = snapshot.value?.length ?? 0;
+        .then((event) async {
+      count = (event.snapshot.value as Map)?.length ?? 0;
       if (count > 0) {
         _onUploadStart();
         _logObservationUploadEvent(currentUser.firebaseUser.uid, 'started');
         var date = DateTime.now();
         await logsObservationsReference.child(currentUser.firebaseUser.uid).child(date.millisecondsSinceEpoch.toString()).child(firebaseAttributeTime).set(-1 * date.millisecondsSinceEpoch);
-        for (var key in snapshot.value.keys) {
+        for (var key in (event.snapshot.value as Map).keys) {
           if (uploadPaused) {
             _logObservationUploadEvent(currentUser.firebaseUser.uid, 'paused');
             break;
           }
-          Observation observation = Observation.fromJson(key, snapshot.value[key]);
+          Observation observation = Observation.fromJson(key, (event.snapshot.value as Map)[key]);
           if (await _uploadObservation(currentUser, observation)) {
             await logsObservationsReference.child(currentUser.firebaseUser.uid).child(date.millisecondsSinceEpoch.toString()).child(observation.id).child(firebaseAttributeStatus).set(firebaseValueSuccess);
             count--;

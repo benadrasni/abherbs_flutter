@@ -29,25 +29,25 @@ class Offline {
       _offline = value;
       if (value) {
         Prefs.getStringF(keyOfflinePlant, '0').then((value) {
-          rootReference.child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((DataSnapshot snapshot) {
-            downloadFinished = snapshot.value == null || int.parse(value) >= snapshot.value;
+          rootReference.child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((event) {
+            downloadFinished = event.snapshot.value == null || int.parse(value) >= (event.snapshot.value as int);
           });
         }).catchError((_) {
           // deal with previous int shared preferences
           Prefs.getIntF(keyOfflinePlant, 0).then((value) {
             Prefs.setString(keyOfflinePlant, value.toString());
-            rootReference.child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((DataSnapshot snapshot) {
-              downloadFinished = snapshot.value == null || value >= snapshot.value;
+            rootReference.child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((event) {
+              downloadFinished = event.snapshot.value == null || value >= (event.snapshot.value as int);
             });
           });
           Prefs.getIntF(keyOfflineFamily, 0).then((value) {
             Prefs.setString(keyOfflineFamily, value.toString());
           });
         });
-        rootReference.child(firebaseVersions).child(firebaseAttributeLastUpdate).once().then((DataSnapshot snapshot) {
-          if (snapshot.value != null) {
+        rootReference.child(firebaseVersions).child(firebaseAttributeLastUpdate).once().then((event) {
+          if (event.snapshot.value != null) {
             Prefs.getStringF(keyOfflineDB, '').then((value) {
-              _downloadDBDate = snapshot.value;
+              _downloadDBDate = event.snapshot.value;
               DateTime dbUpdate = DateTime.parse(_downloadDBDate);
               _downloadDB = value.isEmpty || dbUpdate.isAfter(DateTime.parse(value));
             });
@@ -143,8 +143,8 @@ class Offline {
         .child(firebaseFamiliesToUpdate)
         .child(firebaseAttributeCount)
         .once()
-        .then((DataSnapshot snapshot) {
-      return snapshot.value ?? 0;
+        .then((event) {
+      return event.snapshot.value ?? 0;
     });
     while (position < familyTotal) {
       if (await _downloadFamilyIcon(position)) {
@@ -169,8 +169,8 @@ class Offline {
         .child(firebaseAttributeList)
         .child(position.toString())
         .once()
-        .then((DataSnapshot snapshot) {
-      return snapshot.value;
+        .then((event) {
+      return event.snapshot.value;
     });
     if (family != null) {
       var errors = 0;
@@ -187,8 +187,8 @@ class Offline {
   static Future<bool> _downloadPlants(Function(int, int) onPlantDownload) async {
     int position = int.parse(await Prefs.getStringF(keyOfflinePlant, '0'));
     int plantTotal =
-        await FirebaseDatabase.instance.reference().child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((DataSnapshot snapshot) {
-      return snapshot.value ?? 0;
+        await FirebaseDatabase.instance.reference().child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((event) {
+      return event.snapshot.value ?? 0;
     });
     while (position < plantTotal) {
       if (await _downloadPlantPhotos(position)) {
@@ -210,13 +210,13 @@ class Offline {
   static Future<bool> _downloadPlantPhotos(int position) async {
     String url;
     String plantName =
-        await FirebaseDatabase.instance.reference().child(firebasePlantHeaders).child(position.toString()).once().then((DataSnapshot snapshot) {
-      url = snapshot.value == null ? null : snapshot.value['url'];
-      return snapshot.value == null ? null : snapshot.value['name'];
+        await FirebaseDatabase.instance.reference().child(firebasePlantHeaders).child(position.toString()).once().then((event) {
+      url = event.snapshot.value == null ? null : (event.snapshot.value as Map)['url'];
+      return event.snapshot.value == null ? null : (event.snapshot.value as Map)['name'];
     });
     if (plantName != null) {
-      Plant plant = await FirebaseDatabase.instance.reference().child(firebasePlants).child(plantName).once().then((DataSnapshot snapshot) {
-        return Plant.fromJson(snapshot.key, snapshot.value);
+      Plant plant = await FirebaseDatabase.instance.reference().child(firebasePlants).child(plantName).once().then((event) {
+        return Plant.fromJson(event.snapshot.key, event.snapshot.value);
       });
       if (plant != null) {
         var errors = 0;
