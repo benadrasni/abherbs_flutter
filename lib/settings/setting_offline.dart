@@ -24,10 +24,12 @@ class _SettingOfflineState extends State<SettingOffline> {
   int _downloadStatus; // 0: initial, 1: downloading,  2: successful, 3: failed
 
   onFamilyDownload(int position, int total) {
-    setState(() {
-      _familiesTotal = total;
-      _familiesDownloaded = position;
-    });
+    if (mounted) {
+      setState(() {
+        _familiesTotal = total;
+        _familiesDownloaded = position;
+      });
+    }
   }
 
   onPlantDownload(int position, int total) {
@@ -111,10 +113,8 @@ class _SettingOfflineState extends State<SettingOffline> {
           textAlign: TextAlign.center,
         );
         _content = LinearPercentIndicator(
-          width: MediaQuery.of(context).size.width - 150,
           lineHeight: 20.0,
           percent: (_familiesDownloaded + _plantsDownloaded) / (_familiesTotal + _plantsTotal),
-          backgroundColor: Theme.of(context).backgroundColor,
           progressColor: Theme.of(context).primaryColor,
         );
         _actions.add(TextButton(
