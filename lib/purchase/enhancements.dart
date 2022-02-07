@@ -116,7 +116,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     if (value.isNotEmpty) {
       button = TextButton(
         style: ElevatedButton.styleFrom(
-          primary: Colors.lightBlueAccent, // background
+          primary: Theme.of(context).secondaryHeaderColor, // background
         ),
         child: Text(S.of(context).video,
             style: TextStyle(
@@ -279,7 +279,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                           trailing: Text(
                             product.price,
                             style: TextStyle(
-                              color: Colors.blue,
+                              color: Theme.of(context).primaryColor,
                               fontSize: 18.0,
                             ),
                           ),
