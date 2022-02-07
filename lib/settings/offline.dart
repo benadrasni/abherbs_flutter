@@ -261,7 +261,7 @@ class Offline {
     }
     Prefs.setString(keyOfflineFamily, '0');
     Prefs.setString(keyOfflinePlant, '0');
-    Prefs.setString(keyOfflineDB, null);
+    Prefs.remove(keyOfflineDB);
   }
 
   static Future<File> _downloadFile(String url, String dir, String filename) async {

@@ -140,7 +140,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onPressed: () {
                 Navigator.of(context).pop();
                 setState(() {
-                  _offlineF = Prefs.setBool(keyOffline, false).then((success) {
+                  _offlineF = Prefs.remove(keyOffline).then((success) {
                     return false;
                   });
                 });
