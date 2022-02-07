@@ -43,7 +43,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _resetPrefLanguage() {
-    Prefs.setString(keyPreferredLanguage, null).then((bool success) {
+    Prefs.remove(keyPreferredLanguage).then((bool success) {
       _logPrefLanguageEvent('default');
       Navigator.pop(context);
       App.setLocale(context, '');
