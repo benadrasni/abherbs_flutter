@@ -137,8 +137,7 @@ class FirebaseAnimatedIndexList extends StatefulWidget {
 }
 
 class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
-  final GlobalKey<AnimatedListState> _animatedListKey =
-  GlobalKey<AnimatedListState>();
+  final GlobalKey<AnimatedListState> _animatedListKey = GlobalKey<AnimatedListState>();
   List<DataSnapshot> _model;
   bool _loaded = false;
 
@@ -147,7 +146,6 @@ class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
     _model = FirebaseIndexList(
       query: widget.query,
       keyQuery: widget.keyQuery,
-      onChildAdded: _onChildAdded,
       onValue: _onValue,
     );
     super.didChangeDependencies();
@@ -159,15 +157,6 @@ class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
     _model.clear();
 
     super.dispose();
-  }
-
-  void _onChildAdded(int index, DataSnapshot snapshot) {
-    if (!_loaded) {
-      return; // AnimatedList is not created yet
-    }
-    if (mounted && _animatedListKey.currentState != null) {
-      _animatedListKey.currentState.insertItem(index, duration: widget.duration);
-    }
   }
 
   void _onValue(DataSnapshot snapshot) {

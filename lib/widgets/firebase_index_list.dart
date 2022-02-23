@@ -4,6 +4,7 @@
 
 import 'dart:collection';
 
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
 import 'package:flutter/foundation.dart';
@@ -18,7 +19,6 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
   FirebaseIndexList({
     @required this.query,
     @required this.keyQuery,
-    this.onChildAdded,
     this.onValue,
     this.onError,
   }) {
@@ -42,7 +42,6 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
         }
       }
 
-      listen(query.onChildAdded, _onChildAdded, onError: _onError);
       listen(query.onValue, _onValue, onError: _onError);
     });
   }
@@ -52,9 +51,6 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
 
 
   final Query keyQuery;
-
-  /// Called when the child has been added
-  final ChildCallback onChildAdded;
 
   /// Called when the data of the list has finished loading
   final ValueCallback onValue;
@@ -90,14 +86,11 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
     // Do not call super.clear(), it will set the length, it's unsupported.
   }
 
-  void _onChildAdded(DatabaseEvent event) {
-    if (_keys[event.snapshot.key] != null) {
-      _snapshots.add(event.snapshot);
-      onChildAdded(_snapshots.length - 1, event.snapshot);
-    }
-  }
-
   void _onValue(DatabaseEvent event) {
+    _keys.forEach((key, value) {
+      _snapshots.add(event.snapshot.children.elementAt(int.parse(key)));
+    });
+    _snapshots.sort((a, b) => (a.value as Map)[firebaseAttributeName].compareTo((b.value as Map)[firebaseAttributeName]));
     onValue(event.snapshot);
   }
 
