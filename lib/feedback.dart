@@ -109,10 +109,12 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       },
     );
 
-    _rewardedAd.show(onUserEarnedReward: (RewardedAd ad, RewardItem reward) async {
-      await Auth.changeCredits(1, "1");
-      setState(() {});
-    });
+    _rewardedAd.setImmersiveMode(true);
+    _rewardedAd.show(
+        onUserEarnedReward: (AdWithoutView ad, RewardItem reward) async {
+          await Auth.changeCredits(1, "1");
+          setState(() {});
+        });
     _rewardedAd = null;
   }
 

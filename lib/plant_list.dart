@@ -128,7 +128,7 @@ class _PlantListState extends State<PlantList> {
                   alignment: Alignment.center,
                   child: Text(widget.emptyMessage, style: TextStyle(fontSize: 20.0)),
                 ),
-                query: listsReference.orderByChild(firebaseAttributeName),
+                query: listsReference,
                 keyQuery: widget.pathToIndex,
                 itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
                   String name = (snapshot.value as Map)[firebaseAttributeName];
