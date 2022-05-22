@@ -26,7 +26,6 @@ class Habitat extends StatefulWidget {
 
 class _HabitatState extends State<Habitat> {
   StreamSubscription<firebase_auth.User> _listener;
-  AppUser _currentUser;
   Future<int> _countF;
   Map<String, String> _filter;
   GlobalKey<ScaffoldState> _key;
@@ -58,22 +57,12 @@ class _HabitatState extends State<Habitat> {
     });
   }
 
-  _onAuthStateChanged(firebase_auth.User user) {
-    setState(() {
-      _currentUser = Auth.getAppUser();
-    });
-  }
-
-  void _checkCurrentUser() {
-    _currentUser = Auth.getAppUser();
-    _listener = Auth.subscribe(_onAuthStateChanged);
-  }
-
   @override
   void initState() {
     super.initState();
+
+    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {}));
     Offline.setKeepSynced(1, true);
-    _checkCurrentUser();
 
     if (!Purchases.isNoAds()) {
       _ad = BannerAd(
@@ -120,9 +109,9 @@ class _HabitatState extends State<Habitat> {
       key: _key,
       appBar: new AppBar(
         title: new Text(S.of(context).filter_habitat),
-        actions: getActions(context, _key, _currentUser, widget.filter),
+        actions: getActions(context, _key, widget.filter),
       ),
-      drawer: AppDrawer(_currentUser, _filter, null),
+      drawer: AppDrawer(_filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(

@@ -19,11 +19,10 @@ import 'package:exif/exif.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class ObservationEdit extends StatefulWidget {
-  final AppUser currentUser;
   final Locale myLocale;
   final Observation observation;
 
-  ObservationEdit(this.currentUser, this.myLocale, this.observation);
+  ObservationEdit(this.myLocale, this.observation);
 
   @override
   _ObservationEditState createState() => _ObservationEditState();
@@ -61,19 +60,19 @@ class _ObservationEditState extends State<ObservationEdit> {
       return false;
     } else {
       if (_observation.id == null) {
-        _observation.id = widget.currentUser.firebaseUser.uid + '_' + DateTime.now().millisecondsSinceEpoch.toString();
+        _observation.id = Auth.appUser.uid + '_' + DateTime.now().millisecondsSinceEpoch.toString();
       }
       _observation.order = -1 * _observation.date.millisecondsSinceEpoch;
       _observation.note = _noteController.text.isNotEmpty ? _noteController.text : null;
 
       await privateObservationsReference
-          .child(widget.currentUser.firebaseUser.uid)
+          .child(Auth.appUser.uid)
           .child(firebaseObservationsByDate)
           .child(firebaseAttributeList)
           .child(_observation.id)
           .set(_observation.toJson());
       await privateObservationsReference
-          .child(widget.currentUser.firebaseUser.uid)
+          .child(Auth.appUser.uid)
           .child(firebaseObservationsByPlant)
           .child(_observation.plant)
           .child(firebaseAttributeList)
@@ -102,7 +101,7 @@ class _ObservationEditState extends State<ObservationEdit> {
       }
 
       // store file
-      var dir = storageObservations + widget.currentUser.firebaseUser.uid + '/' + _observation.plant.replaceAll(' ', '_');
+      var dir = storageObservations + Auth.appUser.uid + '/' + _observation.plant.replaceAll(' ', '_');
       var prefix = "unknown_";
       var names = _observation.plant.toLowerCase().split(' ');
       if (names.length > 1) {
@@ -149,13 +148,13 @@ class _ObservationEditState extends State<ObservationEdit> {
 
     if (_observation.id != null) {
       await privateObservationsReference
-          .child(widget.currentUser.firebaseUser.uid)
+          .child(Auth.appUser.uid)
           .child(firebaseObservationsByDate)
           .child(firebaseAttributeList)
           .child(_observation.id)
           .remove();
       await privateObservationsReference
-          .child(widget.currentUser.firebaseUser.uid)
+          .child(Auth.appUser.uid)
           .child(firebaseObservationsByPlant)
           .child(_observation.plant)
           .child(firebaseAttributeList)

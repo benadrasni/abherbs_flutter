@@ -29,7 +29,6 @@ class PlantList extends StatefulWidget {
 
 class _PlantListState extends State<PlantList> {
   StreamSubscription<firebase_auth.User> _listener;
-  AppUser _currentUser;
   Future<int> _count;
   BannerAd _ad;
 
@@ -58,21 +57,11 @@ class _PlantListState extends State<PlantList> {
     return button;
   }
 
-  _onAuthStateChanged(firebase_auth.User user) {
-    setState(() {
-      _currentUser = Auth.getAppUser();
-    });
-  }
-
-  void _checkCurrentUser() {
-    _currentUser = Auth.getAppUser();
-    _listener = Auth.subscribe(_onAuthStateChanged);
-  }
-
   @override
   void initState() {
     super.initState();
-    _checkCurrentUser();
+
+    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {}));
     Offline.setKeepSynced(2, true);
 
     if (!Purchases.isNoAds()) {
@@ -117,7 +106,7 @@ class _PlantListState extends State<PlantList> {
       appBar: AppBar(
         title: Text(S.of(mainContext).list_info),
       ),
-      drawer: AppDrawer(_currentUser, widget.filter, null),
+      drawer: AppDrawer(widget.filter, null),
       body: Column(
         children: [
           Expanded(

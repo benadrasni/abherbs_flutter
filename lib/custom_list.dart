@@ -35,39 +35,26 @@ class CustomListScreen extends StatefulWidget {
 }
 
 class _CustomListScreenState extends State<CustomListScreen> {
-  FirebaseAnalytics _firebaseAnalytics;
-  GlobalKey<ScaffoldState> _key;
+  FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   StreamSubscription<firebase_auth.User> _listener;
-  AppUser _currentUser;
   DateFormat _dateFormat;
 
   Future<void> _logCustomListOpenEvent(event) async {
     await _firebaseAnalytics.logEvent(name: 'custom_list_open', parameters: {"type" : event});
   }
 
-  _onAuthStateChanged(firebase_auth.User user) {
-    setState(() {
-      _currentUser = Auth.getAppUser();
-    });
-  }
-
-  void _checkCurrentUser()  {
-    _currentUser = Auth.getAppUser();
-    _listener = Auth.subscribe(_onAuthStateChanged);
-  }
-
   @override
   void initState() {
     super.initState();
-    _firebaseAnalytics = FirebaseAnalytics.instance;
-    _checkCurrentUser();
-    _key = new GlobalKey<ScaffoldState>();
+
+    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {}));
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString());
   }
 
   @override
   void dispose() {
-    _listener.cancel();
+    _listener?.cancel();
     super.dispose();
   }
 
@@ -93,8 +80,8 @@ class _CustomListScreenState extends State<CustomListScreen> {
         trailing: FittedBox(
           fit: BoxFit.fill,
           child: FutureBuilder<int>(future: Future<int>(() {
-            if (_currentUser != null) {
-              return usersReference.child(_currentUser.firebaseUser.uid).child(firebaseAttributeFavorite).once().then((event) {
+            if (Auth.appUser != null) {
+              return usersReference.child(Auth.appUser.uid).child(firebaseAttributeFavorite).once().then((event) {
                 if (event.snapshot.value != null) {
                   if (event.snapshot.value is List) {
                     int i = 0;
@@ -123,9 +110,9 @@ class _CustomListScreenState extends State<CustomListScreen> {
           }),
         ),
         onTap: () {
-          if (_currentUser != null) {
+          if (Auth.appUser != null) {
             _logCustomListOpenEvent("favorite");
-            String path = '/' + firebaseUsers + '/' + _currentUser.firebaseUser.uid + '/' + firebaseAttributeFavorite;
+            String path = '/' + firebaseUsers + '/' + Auth.appUser.uid + '/' + firebaseAttributeFavorite;
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => PlantList({}, S.of(context).favorite_empty, rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),

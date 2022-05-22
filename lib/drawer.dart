@@ -11,10 +11,9 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatefulWidget {
-  final AppUser currentUser;
   final Map<String, String> filter;
   final void Function() settingsCallback;
-  AppDrawer(this.currentUser, this.filter, this.settingsCallback);
+  AppDrawer(this.filter, this.settingsCallback);
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
@@ -51,11 +50,11 @@ class _AppDrawerState extends State<AppDrawer> {
               color: Colors.white,
             ),
             title: Text(
-              widget.currentUser?.firebaseUser?.displayName ?? '',
+              Auth.appUser?.displayName ?? '',
               style: TextStyle(color: Colors.white),
             ),
             subtitle: Text(
-              widget.currentUser?.firebaseUser?.email ?? widget.currentUser?.firebaseUser?.phoneNumber ?? '',
+              Auth.appUser?.email ?? Auth.appUser?.phoneNumber ?? '',
               style: TextStyle(color: Colors.white70),
             ),
             onTap: () {},
@@ -65,12 +64,12 @@ class _AppDrawerState extends State<AppDrawer> {
           alignment: Alignment(1.0, 1.0),
           child: TextButton(
             child: Text(
-              widget.currentUser == null ? S.of(context).auth_sign_in : S.of(context).auth_sign_out,
+              Auth.appUser == null ? S.of(context).auth_sign_in : S.of(context).auth_sign_out,
               textAlign: TextAlign.end,
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () {
-              if (widget.currentUser == null) {
+              if (Auth.appUser == null) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SignInScreen(), settings: RouteSettings(name: 'SignIn')),
@@ -172,7 +171,7 @@ class _AppDrawerState extends State<AppDrawer> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => FeedbackScreen(widget.currentUser, widget.filter), settings: RouteSettings(name: 'Feedback')),
+          MaterialPageRoute(builder: (context) => FeedbackScreen(widget.filter), settings: RouteSettings(name: 'Feedback')),
         ).then((result) {
           if (mounted) {
             Navigator.pop(context);

@@ -13,11 +13,10 @@ import 'package:intl/intl.dart';
 import '../main.dart';
 
 class ObservationView extends StatefulWidget {
-  final AppUser currentUser;
   final Locale myLocale;
   final Observation observation;
 
-  ObservationView(this.currentUser, this.myLocale, this.observation);
+  ObservationView(this.myLocale, this.observation);
 
   @override
   _ObservationViewState createState() => _ObservationViewState();
@@ -158,7 +157,7 @@ class _ObservationViewState extends State<ObservationView> {
       ),
     ));
 
-    if (widget.currentUser != null && widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.firebaseUser.uid)) {
+    if (Auth.appUser != null && widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(Auth.appUser.uid)) {
       widgets.add(Card(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),

@@ -11,12 +11,11 @@ import 'package:intl/date_symbol_data_local.dart';
 import '../main.dart';
 
 class ObservationsPlant extends StatefulWidget {
-  final AppUser currentUser;
   final Locale myLocale;
   final bool isPublic;
   final String plantName;
   final GlobalKey<ScaffoldState> parentKey;
-  ObservationsPlant(this.currentUser, this.myLocale, this.isPublic, this.plantName, this.parentKey);
+  ObservationsPlant(this.myLocale, this.isPublic, this.plantName, this.parentKey);
 
   @override
   _ObservationsPlantState createState() => _ObservationsPlantState();
@@ -37,7 +36,7 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
     _key = _privateKey;
     initializeDateFormatting();
     _privateQuery = privateObservationsReference
-        .child(widget.currentUser.firebaseUser.uid)
+        .child(Auth.appUser.uid)
         .child(firebaseObservationsByPlant)
         .child(widget.plantName)
         .child(firebaseAttributeList)
@@ -73,7 +72,7 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
                 return Container();
               }
               Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
-              return ObservationPlantView(widget.currentUser, myLocale, observation, widget.parentKey);
+              return ObservationPlantView(myLocale, observation, widget.parentKey);
             }),
       ],
     );

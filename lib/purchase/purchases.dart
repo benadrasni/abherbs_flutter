@@ -2,77 +2,53 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class Purchases {
-  static bool hasOldVersion;
-  static bool hasLifetimeSubscription;
-  static bool isSearchPromotion;
-  static DateTime searchPromotionFrom;
-  static DateTime searchPromotionTo;
-  static bool isObservationPromotion;
-  static DateTime observationPromotionFrom;
-  static DateTime observationPromotionTo;
-  static bool isSearchByPhotoPromotion;
-  static DateTime searchByPhotoPromotionFrom;
-  static DateTime searchByPhotoPromotionTo;
+  static bool hasOldVersion = false;
+  static bool hasLifetimeSubscription = false;
+  static bool isSearchPromotion = false;
+  static DateTime searchPromotionFrom = DateTime.now();
+  static DateTime searchPromotionTo = DateTime.now();
+  static bool isObservationPromotion = false;
+  static DateTime observationPromotionFrom = DateTime.now();
+  static DateTime observationPromotionTo = DateTime.now();
+  static bool isSearchByPhotoPromotion = false;
+  static DateTime searchByPhotoPromotionFrom = DateTime.now();
+  static DateTime searchByPhotoPromotionTo = DateTime.now();
   static Map<String, PurchaseDetails> purchases = {};
 
   static bool isPurchased(String productId) {
-    return purchases[productId] != null;
+    return purchases.containsKey(productId);
   }
 
   static bool isNoAds() {
-    if (purchases[productNoAdsAndroid] != null || purchases[productNoAdsIOS] != null) {
-      return true;
-    }
-    return hasOldVersion != null && hasOldVersion;
+    return hasOldVersion || purchases.containsKey(productNoAdsAndroid) || purchases.containsKey(productNoAdsIOS);
   }
 
   static bool isSearch() {
-    if (purchases[productSearch] != null) {
-      return true;
-    }
-    return hasOldVersion != null && hasOldVersion;
+    return hasOldVersion || purchases.containsKey(productSearch);
   }
 
   static bool isCustomFilter() {
-    if (purchases[productCustomFilter] != null) {
-      return true;
-    }
-    return hasOldVersion != null && hasOldVersion;
+    return hasOldVersion || purchases.containsKey(productCustomFilter);
   }
 
   static bool isOffline() {
-    if (purchases[productOffline] != null) {
-      return true;
-    }
-    return hasOldVersion != null && hasOldVersion;
+    return hasOldVersion || purchases.containsKey(productOffline);
   }
 
   static bool isObservations() {
-    if (purchases[productObservations] != null) {
-      return true;
-    }
-    return hasOldVersion != null && hasOldVersion;
+    return hasOldVersion || purchases.containsKey(productObservations);
   }
 
   static bool isPhotoSearch() {
-    if (purchases[productPhotoSearch] != null) {
-      return true;
-    }
-    return hasOldVersion != null && hasOldVersion;
+    return hasOldVersion || purchases.containsKey(productPhotoSearch);
   }
 
   static bool isSubscribedMonthly() {
-    if (purchases[subscriptionMonthly] != null) {
-      return true;
-    }
-    return false;
+    return purchases.containsKey(subscriptionMonthly);
   }
 
   static bool isSubscribedYearly() {
-    if (purchases[subscriptionYearly] != null) {
-      return true;
-    }
-    return false;
+    return purchases.containsKey(subscriptionYearly);
   }
 
   static bool isSignNeeded() {
@@ -80,7 +56,7 @@ class Purchases {
   }
 
   static bool isSubscribed() {
-    return isSubscribedMonthly() || isSubscribedYearly() || (hasLifetimeSubscription != null && hasLifetimeSubscription);
+    return hasLifetimeSubscription || isSubscribedMonthly() || isSubscribedYearly();
   }
 
 }

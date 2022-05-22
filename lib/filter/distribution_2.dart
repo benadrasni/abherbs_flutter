@@ -25,10 +25,9 @@ class Distribution2 extends StatefulWidget {
 }
 
 class _Distribution2State extends State<Distribution2> {
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   StreamSubscription<firebase_auth.User> _listener;
-  AppUser _currentUser;
   Future<int> _countF;
-  GlobalKey<ScaffoldState> _key;
   BannerAd _ad;
 
   void _navigate(String value) {
@@ -162,22 +161,11 @@ class _Distribution2State extends State<Distribution2> {
             }).toList()));
   }
 
-  _onAuthStateChanged(firebase_auth.User user) {
-    setState(() {
-      _currentUser = Auth.getAppUser();
-    });
-  }
-
-  _checkCurrentUser() {
-    _currentUser = Auth.getAppUser();
-    _listener = Auth.subscribe(_onAuthStateChanged);
-  }
-
   @override
   void initState() {
     super.initState();
-    _checkCurrentUser();
-    _key = GlobalKey<ScaffoldState>();
+
+    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {}));
 
     if (!Purchases.isNoAds()) {
       _ad = BannerAd(
@@ -215,9 +203,9 @@ class _Distribution2State extends State<Distribution2> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_distribution),
-        actions: getActions(context, _key, _currentUser, widget.filter),
+        actions: getActions(context, _key, widget.filter),
       ),
-      drawer: AppDrawer(_currentUser, widget.filter, null),
+      drawer: AppDrawer(widget.filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(

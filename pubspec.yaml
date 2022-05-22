@@ -7,48 +7,48 @@ description: Flutter version of abherbs
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 7.1.6+716
+version: 7.1.7+717
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.1.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  shared_preferences: 2.0.13
-  firebase_messaging: 11.2.11
-  firebase_analytics: 9.1.2
-  firebase_auth: 3.3.11
-  firebase_storage: 10.2.9
-  firebase_database: 9.0.8
-  firebase_remote_config: 2.0.2
-  firebase_crashlytics: 2.5.3
-  firebase_performance: 0.8.0+7
-  google_mobile_ads: 1.1.0
-  google_sign_in: 5.2.4
+  shared_preferences: 2.0.15
+  firebase_messaging: 11.4.0
+  firebase_analytics: 9.1.8
+  firebase_auth: 3.3.18
+  firebase_storage: 10.2.16
+  firebase_database: 9.0.14
+  firebase_remote_config: 2.0.7
+  firebase_crashlytics: 2.8.0
+  firebase_performance: 0.8.0+12
+  google_maps_flutter: 2.1.5
+  google_mobile_ads: 1.2.0
+  google_sign_in: 5.3.1
   the_apple_sign_in: 1.1.1
-  device_info_plus: 3.2.2
-  in_app_purchase: 3.0.2
-  cached_network_image: 3.2.0
-  url_launcher: 6.0.20
+  device_info_plus: 3.2.3
+  in_app_purchase: 3.0.4
+  cached_network_image: 3.2.1
+  url_launcher: 6.1.2
   http: 0.13.4
-  share_plus: 3.1.0
+  share_plus: 4.0.4
   fluttertoast: 8.0.9
   diacritic: 0.1.3
-  path_provider: 2.0.9
-  percent_indicator: 4.0.0
-  package_info_plus: 1.4.0
-  google_maps_flutter: 2.1.2
-  image_picker: 0.8.4+11
+  path_provider: 2.0.10
+  percent_indicator: 4.2.2
+  package_info_plus: 1.4.2
+  image_picker: 0.8.5+3
   exif: 3.1.1
   datetime_picker_formfield: 2.0.0
-  connectivity_plus: 2.2.1
+  connectivity_plus: 2.3.0
   photo_view: 0.13.0
   youtube_plyr_iframe: 2.0.7
-  app_tracking_transparency: 2.0.2+1
-  country_picker: 2.0.12
+  app_tracking_transparency: 2.0.2+4
+  country_picker: 2.0.15
   charts_flutter: 0.12.0
   country_icons: 2.0.2
   wakelock: 0.6.1+2
@@ -56,6 +56,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.4
+  intl_utils: ^2.6.1
 
 dev_dependencies:
   flutter_test:

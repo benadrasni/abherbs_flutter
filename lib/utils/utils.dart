@@ -209,18 +209,20 @@ bool get isInDebugMode {
   return inDebugMode;
 }
 
-void launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
+void launchURL(String path) async {
+  Uri url = Uri(path:path);
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
   } else {
     throw 'Could not launch $url';
   }
 }
 
-Future<void> launchURLF(String url) {
-  return canLaunch(url).then((value) {
+Future<void> launchURLF(String path) {
+  Uri url = Uri(path:path);
+  return canLaunchUrl(url).then((value) {
     if (value) {
-      return launch(url);
+      return launchUrl(url);
     } else {
       throw 'Could not launch $url';
     }
@@ -415,7 +417,7 @@ Icon getIcon(String productId) {
   }
 }
 
-List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, AppUser currentUser, Map<String, String> filter) {
+List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, Map<String, String> filter) {
   DateFormat dateFormat = new DateFormat.yMMMMd(Localizations.localeOf(mainContext).toString());
   var _actions = <Widget>[];
 
@@ -430,7 +432,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
           if (Purchases.isPhotoSearch()) {
             Navigator.push(
               mainContext,
-              MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context)), settings: RouteSettings(name: 'SearchPhoto')),
+              MaterialPageRoute(builder: (context) => SearchPhoto(Localizations.localeOf(context)), settings: RouteSettings(name: 'SearchPhoto')),
             );
           } else if (Purchases.isSearchByPhotoPromotion != null && Purchases.isSearchByPhotoPromotion) {
             infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
@@ -444,13 +446,13 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
               } else if (value != null && value == 2) {
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context)), settings: RouteSettings(name: 'SearchPhoto')),
+                  MaterialPageRoute(builder: (context) => SearchPhoto(Localizations.localeOf(context)), settings: RouteSettings(name: 'SearchPhoto')),
                 );
               } else {
                 _logPromotionEvent('search_by_photo');
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context)), settings: RouteSettings(name: 'SearchPhoto')),
+                  MaterialPageRoute(builder: (context) => SearchPhoto(Localizations.localeOf(context)), settings: RouteSettings(name: 'SearchPhoto')),
                 );
               }
             });
@@ -466,7 +468,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
                 } else if (value == 2) {
                   Navigator.push(
                     mainContext,
-                    MaterialPageRoute(builder: (context) => SearchPhoto(currentUser, Localizations.localeOf(context)), settings: RouteSettings(name: 'SearchPhoto')),
+                    MaterialPageRoute(builder: (context) => SearchPhoto(Localizations.localeOf(context)), settings: RouteSettings(name: 'SearchPhoto')),
                   );
                 }
               }
@@ -486,10 +488,10 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
           infoDialog(mainContext, S.of(mainContext).no_connection_title, S.of(mainContext).no_connection_content);
         } else {
           if (Purchases.isObservations()) {
-            if (currentUser != null) {
+            if (Auth.appUser != null) {
               Navigator.push(
                 mainContext,
-                MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), false), settings: RouteSettings(name: 'Observations')),
+                MaterialPageRoute(builder: (context) => Observations(Localizations.localeOf(context), false), settings: RouteSettings(name: 'Observations')),
               );
             } else {
               observationDialog(mainContext, key);
@@ -507,7 +509,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
                 _logPromotionEvent('observation');
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => Observations(currentUser, Localizations.localeOf(context), true), settings: RouteSettings(name: 'Observations')),
+                  MaterialPageRoute(builder: (context) => Observations(Localizations.localeOf(context), true), settings: RouteSettings(name: 'Observations')),
                 );
               }
             });
@@ -546,7 +548,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
               MaterialPageRoute(builder: (context) => EnhancementsScreen(filter), settings: RouteSettings(name: 'Enhancements')),
             );
           } else if (value != null && value == 2) {
-            if (currentUser != null && currentUser.credits > 0) {
+            if (Auth.appUser != null && Auth.credits > 0) {
               Auth.changeCredits(-1, "search");
               Navigator.push(
                 mainContext,
@@ -555,7 +557,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
             } else {
               Navigator.push(
                 mainContext,
-                MaterialPageRoute(builder: (context) => FeedbackScreen(currentUser, filter), settings: RouteSettings(name: 'Feedback')),
+                MaterialPageRoute(builder: (context) => FeedbackScreen(filter), settings: RouteSettings(name: 'Feedback')),
               );
             }
           } else {
@@ -575,7 +577,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
                 MaterialPageRoute(builder: (context) => EnhancementsScreen(filter), settings: RouteSettings(name: 'Enhancements')),
               );
             } else if (value == 2) {
-              if (currentUser != null && currentUser.credits > 0) {
+              if (Auth.appUser != null && Auth.credits > 0) {
                 Auth.changeCredits(-1, "search");
                 Navigator.push(
                   mainContext,
@@ -584,7 +586,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
               } else {
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => FeedbackScreen(currentUser, filter), settings: RouteSettings(name: 'Feedback')),
+                  MaterialPageRoute(builder: (context) => FeedbackScreen(filter), settings: RouteSettings(name: 'Feedback')),
                 );
               }
             }

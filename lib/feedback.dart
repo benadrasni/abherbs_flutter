@@ -12,10 +12,9 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 const int maxFailedLoadAttempts = 3;
 
 class FeedbackScreen extends StatefulWidget {
-  final AppUser currentUser;
   final Map<String, String> filter;
 
-  FeedbackScreen(this.currentUser, this.filter);
+  FeedbackScreen(this.filter);
 
   @override
   _FeedbackScreenState createState() => _FeedbackScreenState();
@@ -163,7 +162,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ]),
           ),
         ),
-        widget.currentUser == null
+        Auth.appUser == null
             ? Card(
                 child: Container(
                   padding: EdgeInsets.all(10.0),
@@ -204,7 +203,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(S.of(context).credit_count, style: creditsTextStyle,),
-                          Text(widget.currentUser.credits.toString(), style: creditsTextStyle,),
+                          Text(Auth.credits.toString(), style: creditsTextStyle,),
                         ],
                       ),
                     ),

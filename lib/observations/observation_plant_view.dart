@@ -13,11 +13,10 @@ import 'package:intl/intl.dart';
 import '../main.dart';
 
 class ObservationPlantView extends StatefulWidget {
-  final AppUser currentUser;
   final Locale myLocale;
   final Observation observation;
   final GlobalKey<ScaffoldState> parentKey;
-  ObservationPlantView(this.currentUser, this.myLocale, this.observation, this.parentKey);
+  ObservationPlantView(this.myLocale, this.observation, this.parentKey);
 
   @override
   _ObservationPlantViewState createState() => _ObservationPlantViewState();
@@ -52,7 +51,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
     Locale myLocale = Localizations.localeOf(context);
     var widgets = <Widget>[];
     widgets.add(ListTile(
-      leading: widget.observation.id.startsWith(widget.currentUser.firebaseUser.uid)
+      leading: widget.observation.id.startsWith(Auth.appUser.uid)
           ? CircleAvatar(
               backgroundColor: Theme.of(context).primaryColor,
               child: Icon(
@@ -62,10 +61,10 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
           : null,
       title: Text(_dateFormat.format(widget.observation.date) + ' ' + _timeFormat.format(widget.observation.date)),
       onTap: () {
-        if (widget.observation.id.startsWith(widget.currentUser.firebaseUser.uid)) {
+        if (widget.observation.id.startsWith(Auth.appUser.uid)) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ObservationEdit(widget.currentUser, myLocale, widget.observation),
+            MaterialPageRoute(builder: (context) => ObservationEdit(myLocale, widget.observation),
                 settings: RouteSettings(name: 'ObservationEdit')),
           ).then((value) {
             if (value != null && value && widget.parentKey.currentState != null) {
@@ -140,7 +139,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
       ),
     ));
 
-    if (widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(widget.currentUser.firebaseUser.uid)) {
+    if (widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(Auth.appUser.uid)) {
       widgets.add(Card(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),

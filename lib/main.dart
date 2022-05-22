@@ -226,7 +226,7 @@ class _AppState extends State<App> {
     FirebaseMessaging.instance.getToken().then((token) {
       Prefs.setString(keyToken, token);
       print('token $token');
-    });
+    }).onError((error, stackTrace) => null);
 
     FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message) async {
       if (message != null) {
@@ -346,7 +346,7 @@ class _AppState extends State<App> {
     }
     Purchases.hasOldVersion = Prefs.getBool(keyOldVersion, false);
     Purchases.hasLifetimeSubscription = Prefs.getBool(keyLifetimeSubscription, false);
-    Auth.getAppUser();
+    Auth.setUser();
     Offline.initialize();
   }
 

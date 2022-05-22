@@ -59,13 +59,11 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
         _errorMessage = Future<String>.value('');
         _isLoading = true;
       });
-      String userId = "";
       try {
         if (_formMode == FormMode.SMS) {
-          userId = await Auth.signInWithCredential(firebase_auth.PhoneAuthProvider.credential(verificationId: _verificationId, smsCode: _code));
+          await Auth.signInWithCredential(firebase_auth.PhoneAuthProvider.credential(verificationId: _verificationId, smsCode: _code));
           Navigator.pop(context);
           Navigator.pop(context);
-          print('Signed in: $userId');
         } else {
           Auth.signUpWithPhone(_verificationCompleted, _verificationFailed, _codeSent, _codeAutoRetrievalTimeout, _phone);
         }
@@ -122,7 +120,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
       }
     };
 
-    _codeSent = (String verificationId, [int forceResendingToken]) async {
+    _codeSent = (String verificationId, int forceResendingToken) async {
       _verificationId = verificationId;
       _token = forceResendingToken;
       _changeFormToSMS();
