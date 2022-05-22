@@ -29,10 +29,9 @@ class ObservationsSum {
 }
 
 class ObservationLogs extends StatefulWidget {
-  final AppUser currentUser;
   final Locale myLocale;
   final currentIndex;
-  ObservationLogs(this.currentUser, this.myLocale, this.currentIndex);
+  ObservationLogs(this.myLocale, this.currentIndex);
 
   @override
   _ObservationLogsState createState() => _ObservationLogsState();
@@ -79,14 +78,14 @@ class _ObservationLogsState extends State<ObservationLogs> {
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString()).add_jm();
     _currentIndex = widget.currentIndex;
 
-    _privateStatsF = privateObservationsReference.child(widget.currentUser.firebaseUser.uid).child(firebaseObservationsStats).once();
+    _privateStatsF = privateObservationsReference.child(Auth.appUser.uid).child(firebaseObservationsStats).once();
     _publicStatsF = publicObservationsReference.child(firebaseObservationsStats).once();
   }
 
   Widget getItems(Map<dynamic, dynamic> observations) {
     var items = observations.keys.where((x) => x != firebaseAttributeTime).map((id) {
       return FutureBuilder<Observation>(
-          future: privateObservationsReference.child(widget.currentUser.firebaseUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).child(id.toString()).once().then((event) {
+          future: privateObservationsReference.child(Auth.appUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).child(id.toString()).once().then((event) {
             var observation = Observation.fromJson(event.snapshot.key, event.snapshot.value);
             observation.uploadStatus = observations[id][firebaseAttributeStatus];
             return observation;
@@ -110,7 +109,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ObservationEdit(widget.currentUser, Localizations.localeOf(context), snapshot.data),
+                            builder: (context) => ObservationEdit(Localizations.localeOf(context), snapshot.data),
                             settings: RouteSettings(name: 'ObservationEdit')),
                       );
                     },
@@ -335,7 +334,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
       ));
 
       _widgets.add(FutureBuilder<List<dynamic>>(
-          future: privateObservationsReference.child(widget.currentUser.firebaseUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((event) {
+          future: privateObservationsReference.child(Auth.appUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((event) {
             List<dynamic> result = [];
             Map<MarkerId, Marker> markers = {};
             MarkerId newestMarker;
@@ -626,7 +625,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                 }
                 markers[markerId] = Marker(
                   markerId: markerId,
-                  icon: observation.id.startsWith(widget.currentUser.firebaseUser.uid) ? BitmapDescriptor.defaultMarker : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+                  icon: observation.id.startsWith(Auth.appUser.uid) ? BitmapDescriptor.defaultMarker : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
                   position: LatLng(
                     observation.latitude ?? 0.0,
                     observation.longitude ?? 0.0,
@@ -726,7 +725,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
               child: MyFirebaseAnimatedList(
                   shrinkWrap: true,
                   defaultChild: Center(child: CircularProgressIndicator()),
-                  query: logsObservationsReference.child(widget.currentUser.firebaseUser.uid).orderByChild(firebaseAttributeTime),
+                  query: logsObservationsReference.child(Auth.appUser.uid).orderByChild(firebaseAttributeTime),
                   itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
                     return Card(
                       child: Column(children: [

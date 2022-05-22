@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ObservationUpload extends StatefulWidget {
-  final AppUser currentUser;
   final int observationsToUpload;
-  ObservationUpload(this.currentUser, this.observationsToUpload);
+  ObservationUpload(this.observationsToUpload);
 
   @override
   _ObservationUploadState createState() => _ObservationUploadState();
@@ -73,7 +72,7 @@ class _ObservationUploadState extends State<ObservationUpload> {
             setState(() {
               _uploadStatus = 1;
             });
-            Upload.upload(widget.currentUser, this.onObservationUpload, this.onObservationUploadFail, this.onUploadStart, this.onUploadFinish, this.onUploadFail);
+            Upload.upload(this.onObservationUpload, this.onObservationUploadFail, this.onUploadStart, this.onUploadFinish, this.onUploadFail);
           },
         ));
         _actions.add(TextButton(

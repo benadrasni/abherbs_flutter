@@ -59,7 +59,9 @@ class _SubscriptionState extends State<Subscription> {
         if (purchaseDetails.pendingCompletePurchase) {
           await _inAppPurchase.completePurchase(purchaseDetails);
         }
-        setState(() {});
+        if (mounted) {
+          setState(() {});
+        }
       }
     });
   }

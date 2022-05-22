@@ -51,7 +51,6 @@ class PlantDetail extends StatefulWidget {
 class _PlantDetailState extends State<PlantDetail> {
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   StreamSubscription<firebase_auth.User> _listener;
-  AppUser _currentUser;
   Future<PlantTranslation> _plantTranslationF;
   Future<bool> _isFavoriteF;
   int _currentIndex;
@@ -123,8 +122,8 @@ class _PlantDetailState extends State<PlantDetail> {
 
   Future<bool> _setFavorite() {
     return Future<bool>(() {
-      if (_currentUser != null) {
-        return usersReference.child(_currentUser.firebaseUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).once().then((event) {
+      if (Auth.appUser != null) {
+        return usersReference.child(Auth.appUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).once().then((event) {
           return event.snapshot.value != null && event.snapshot.value == 1;
         });
       }
@@ -155,7 +154,7 @@ class _PlantDetailState extends State<PlantDetail> {
       case taxonomyIndex:
         return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize);
       case observationIndex:
-        return ObservationsPlant(_currentUser, Localizations.localeOf(context), _isPublic, widget.plant.name, _key);
+        return ObservationsPlant(Localizations.localeOf(context), _isPublic, widget.plant.name, _key);
     }
     return null;
   }
@@ -168,28 +167,18 @@ class _PlantDetailState extends State<PlantDetail> {
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ObservationLogs(_currentUser, Localizations.localeOf(context), 0), settings: RouteSettings(name: 'ObservationLogs')),
+        MaterialPageRoute(builder: (context) => ObservationLogs(Localizations.localeOf(context), 0), settings: RouteSettings(name: 'ObservationLogs')),
       );
     }
-  }
-
-  _onAuthStateChanged(firebase_auth.User user) {
-    setState(() {
-      _currentUser = Auth.getAppUser();
-    });
-  }
-
-  void _checkCurrentUser() {
-    _currentUser = Auth.getAppUser();
-    _listener = Auth.subscribe(_onAuthStateChanged);
-    _isFavoriteF = _setFavorite();
   }
 
   @override
   void initState() {
     super.initState();
+
+    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {_isFavoriteF = _setFavorite();}));
+    _isFavoriteF = _setFavorite();
     Offline.setKeepSynced(3, true);
-    _checkCurrentUser();
 
     if (!Purchases.isNoAds()) {
       _ad = BannerAd(
@@ -317,7 +306,7 @@ class _PlantDetailState extends State<PlantDetail> {
                     ),
                   ],
                 ),
-      drawer: AppDrawer(_currentUser, widget.filter, null),
+      drawer: AppDrawer(widget.filter, null),
       body: Column(
         children: [
           Expanded(
@@ -354,7 +343,7 @@ class _PlantDetailState extends State<PlantDetail> {
                       var observation = Observation(widget.plant.name);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ObservationEdit(_currentUser, widget.myLocale, observation), settings: RouteSettings(name: 'ObservationEdit')),
+                        MaterialPageRoute(builder: (context) => ObservationEdit(widget.myLocale, observation), settings: RouteSettings(name: 'ObservationEdit')),
                       ).then((value) {
                         if (value != null && value && _key.currentState != null) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -364,9 +353,9 @@ class _PlantDetailState extends State<PlantDetail> {
                         setState(() {});
                       });
                     } else {
-                      if (_currentUser != null) {
+                      if (Auth.appUser != null) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          usersReference.child(_currentUser.firebaseUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).set(snapshot.data ? null : 1).then((value) {
+                          usersReference.child(Auth.appUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).set(snapshot.data ? null : 1).then((value) {
                             if (mounted) {
                               setState(() {
                                 _isFavoriteF = _setFavorite();
@@ -398,7 +387,7 @@ class _PlantDetailState extends State<PlantDetail> {
             if (index == observationIndex) {
               if (result == ConnectivityResult.none) {
                 infoDialog(context, S.of(context).no_connection_title, S.of(context).no_connection_content);
-              } else if (_currentUser == null) {
+              } else if (Auth.appUser == null) {
                 observationDialog(context, _key);
               } else {
                 setState(() {

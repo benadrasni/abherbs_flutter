@@ -35,9 +35,8 @@ class SearchResult {
 }
 
 class SearchPhoto extends StatefulWidget {
-  final AppUser currentUser;
   final Locale myLocale;
-  SearchPhoto(this.currentUser, this.myLocale);
+  SearchPhoto(this.myLocale);
 
   @override
   _SearchPhotoState createState() => _SearchPhotoState();
@@ -108,7 +107,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
   }
 
   Future<void> _getImage(GlobalKey<ScaffoldState> _key, ImageSource source, double maxSize) async {
-    if (Purchases.isPhotoSearch() || widget.currentUser.credits > 0) {
+    if (Purchases.isPhotoSearch() || Auth.credits > 0) {
       setState(() {
         _image = null;
         _searchResultF = Future<List<SearchResult>>(() {
@@ -141,7 +140,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
     return http.post(Uri.parse(plantIdEndpoint), headers: headers, body: msg).then((response) async {
       var results = <SearchResult>[];
       if (response.statusCode == 200) {
-        if (widget.currentUser != null && !Purchases.isPhotoSearch()) {
+        if (Auth.appUser != null && !Purchases.isPhotoSearch()) {
             await Auth.changeCredits(-1, "search by photo");
             if (mounted) {
               setState(() {});
@@ -201,8 +200,8 @@ class _SearchPhotoState extends State<SearchPhoto> {
       // save labels
       if (results.length > 0) {
         var userId = firebaseAttributeAnonymous;
-        if (widget.currentUser != null) {
-          userId = widget.currentUser.firebaseUser.uid;
+        if (Auth.appUser != null) {
+          userId = Auth.appUser.uid;
         }
 
         rootReference.child(firebaseUsersPhotoSearch).child(widget.myLocale.languageCode).child(userId).child(DateTime.now().millisecondsSinceEpoch.toString())
@@ -285,7 +284,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
     ));
 
     if (!Purchases.isPhotoSearch()) {
-      if (widget.currentUser == null) {
+      if (Auth.appUser == null) {
         _widgets.add(Card(
           child: Container(
             padding: EdgeInsets.all(10.0),
@@ -327,7 +326,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(S.of(context).credit_count, style: creditsTextStyle,),
-                    Text(widget.currentUser.credits.toString(), style: creditsTextStyle,),
+                    Text(Auth.credits.toString(), style: creditsTextStyle,),
                   ],
                 ),
               ),

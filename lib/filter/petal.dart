@@ -26,7 +26,6 @@ class Petal extends StatefulWidget {
 
 class _PetalState extends State<Petal> {
   StreamSubscription<firebase_auth.User> _listener;
-  AppUser _currentUser;
   Future<int> _countF;
   Map<String, String> _filter;
   GlobalKey<ScaffoldState> _key;
@@ -58,23 +57,13 @@ class _PetalState extends State<Petal> {
     });
   }
 
-  _onAuthStateChanged(firebase_auth.User user) {
-    setState(() {
-      _currentUser = Auth.getAppUser();
-    });
-  }
-
-  void _checkCurrentUser() {
-    _currentUser = Auth.getAppUser();
-    _listener = Auth.subscribe(_onAuthStateChanged);
-  }
-
   @override
   void initState() {
     App.currentContext = context;
     super.initState();
+
+    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {}));
     Offline.setKeepSynced(1, true);
-    _checkCurrentUser();
 
     if (!Purchases.isNoAds()) {
       _ad = BannerAd(
@@ -120,9 +109,9 @@ class _PetalState extends State<Petal> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_petal),
-        actions: getActions(context, _key, _currentUser, widget.filter),
+        actions: getActions(context, _key, widget.filter),
       ),
-      drawer: AppDrawer(_currentUser, _filter, null),
+      drawer: AppDrawer(_filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(

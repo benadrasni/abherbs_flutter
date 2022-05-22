@@ -57,9 +57,8 @@ class _SignInScreenState extends State<SignInScreen> {
             accessToken: googleAuth.accessToken,
             idToken: googleAuth.idToken,
           );
-          String userId = await Auth.signInWithCredential(credential);
+          await Auth.signInWithCredential(credential);
           Navigator.pop(context);
-          print('Signed in: $userId');
         }
       }
     } catch (e) {
@@ -91,9 +90,8 @@ class _SignInScreenState extends State<SignInScreen> {
               rawNonce: nonce,
             );
 
-            String userId = await Auth.signInWithCredential(credential);
+            await Auth.signInWithCredential(credential);
             Navigator.pop(context);
-            print('Signed in: $userId');
           } catch (e) {
             if (key.currentState != null && key.currentState.mounted) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(

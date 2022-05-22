@@ -18,10 +18,9 @@ import '../main.dart';
 import 'observation_logs.dart';
 
 class Observations extends StatefulWidget {
-  final AppUser currentUser;
   final Locale myLocale;
   final bool isPublicOnly;
-  Observations(this.currentUser, this.myLocale, this.isPublicOnly);
+  Observations(this.myLocale, this.isPublicOnly);
 
   @override
   _ObservationsState createState() => _ObservationsState();
@@ -75,7 +74,7 @@ class _ObservationsState extends State<Observations> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), 1),
+            builder: (context) => ObservationLogs(Localizations.localeOf(context), 1),
             settings: RouteSettings(name: 'ObservationLogs')),
       );
     }
@@ -83,10 +82,10 @@ class _ObservationsState extends State<Observations> {
 
   void _setCountUpload() {
     if (Purchases.isSubscribed()) {
-      privateObservationsReference.child(widget.currentUser.firebaseUser.uid).child(firebaseObservationsByDate).keepSynced(true);
-      privateObservationsReference.child(widget.currentUser.firebaseUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeMock).set("mock").then((value) {
+      privateObservationsReference.child(Auth.appUser.uid).child(firebaseObservationsByDate).keepSynced(true);
+      privateObservationsReference.child(Auth.appUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeMock).set("mock").then((value) {
         privateObservationsReference
-            .child(widget.currentUser.firebaseUser.uid)
+            .child(Auth.appUser.uid)
             .child(firebaseObservationsByDate)
             .child(firebaseAttributeList)
             .orderByChild(firebaseAttributeStatus)
@@ -103,7 +102,7 @@ class _ObservationsState extends State<Observations> {
 
   void _startUpload() async {
     if (await _connectivityResultF == ConnectivityResult.wifi) {
-      Upload.upload(widget.currentUser, this.onObservationUpload, this.onObservationUploadFail, this.onUploadStart, this.onUploadFinish, this.onUploadFail);
+      Upload.upload(this.onObservationUpload, this.onObservationUploadFail, this.onUploadStart, this.onUploadFinish, this.onUploadFail);
     }
   }
 
@@ -112,7 +111,7 @@ class _ObservationsState extends State<Observations> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return ObservationUpload(widget.currentUser, observationsToUpload);
+        return ObservationUpload(observationsToUpload);
       },
     );
   }
@@ -130,7 +129,7 @@ class _ObservationsState extends State<Observations> {
       _query = _publicQuery;
     } else {
       _isPublic = false;
-      _privateQuery = privateObservationsReference.child(widget.currentUser.firebaseUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).orderByChild(firebaseAttributeOrder);
+      _privateQuery = privateObservationsReference.child(Auth.appUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).orderByChild(firebaseAttributeOrder);
       _query = _privateQuery;
     }
 
@@ -167,7 +166,7 @@ class _ObservationsState extends State<Observations> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), 2), settings: RouteSettings(name: 'ObservationLogs')),
+                    builder: (context) => ObservationLogs(Localizations.localeOf(context), 2), settings: RouteSettings(name: 'ObservationLogs')),
               );
             },
           )
@@ -212,7 +211,7 @@ class _ObservationsState extends State<Observations> {
           query: _query,
           itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
             Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
-            return ObservationView(widget.currentUser, myLocale, observation);
+            return ObservationView(myLocale, observation);
           }),
       floatingActionButton: FutureBuilder<ConnectivityResult>(
           future: _connectivityResultF,
@@ -232,7 +231,7 @@ class _ObservationsState extends State<Observations> {
                               ? Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), 0),
+                                      builder: (context) => ObservationLogs(Localizations.localeOf(context), 0),
                                       settings: RouteSettings(name: 'ObservationLogs')),
                                 )
                               : _uploadObservationDialog(_observationsRemain).then((value) {
@@ -254,7 +253,7 @@ class _ObservationsState extends State<Observations> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ObservationLogs(widget.currentUser, Localizations.localeOf(context), 0), settings: RouteSettings(name: 'ObservationLogs')),
+                                builder: (context) => ObservationLogs(Localizations.localeOf(context), 0), settings: RouteSettings(name: 'ObservationLogs')),
                           );
                         },
                         child: Icon(Icons.list),

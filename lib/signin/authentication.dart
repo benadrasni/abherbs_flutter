@@ -4,35 +4,31 @@ import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-
-class AppUser {
-  firebase_auth.User firebaseUser;
-  int credits = 0;
-}
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Auth {
-  static firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
-  static AppUser appUser;
+  static FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  static User appUser = firebaseAuth.currentUser;
+  static int credits = 0;
 
   static Future<void> _logOldVersionEvent() async {
     await FirebaseAnalytics.instance.logEvent(name: 'offline_download');
   }
 
-  static Future<String> signInWithCredential(firebase_auth.AuthCredential credential) async {
-    firebase_auth.UserCredential result = await firebaseAuth.signInWithCredential(credential);
-    return result.user.uid;
+  static Future<void> signInWithCredential(AuthCredential credential) async {
+    await firebaseAuth.signInWithCredential(credential);
+    setUser();
   }
 
-  static Future<firebase_auth.User> signInWithEmail(String email, String password) async {
-    firebase_auth.UserCredential result = await firebaseAuth.signInWithEmailAndPassword(
-        email: email, password: password);
+  static Future<User> signInWithEmail(String email, String password) async {
+    UserCredential result = await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+    setUser();
     return result.user;
   }
 
-  static Future<firebase_auth.User> signUpWithEmail(String email, String password) async {
-    firebase_auth.UserCredential result = await firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password);
+  static Future<User> signUpWithEmail(String email, String password) async {
+    UserCredential result = await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+    setUser();
     return result.user;
   }
 
@@ -40,11 +36,12 @@ class Auth {
     return firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
-  static Future<void> signUpWithPhone(Function(firebase_auth.AuthCredential) verificationCompleted,
-      Function(firebase_auth.FirebaseAuthException) verificationFailed,
-      Function(String, [int]) codeSent,
+  static Future<void> signUpWithPhone(Function(AuthCredential) verificationCompleted,
+      Function(FirebaseAuthException) verificationFailed,
+      Function(String, int) codeSent,
       Function(String) codeAutoRetrievalTimeout,
-      String phoneNumber, [int token]) async {
+      String phoneNumber,
+      [int token]) async {
 
 
     await firebaseAuth.verifyPhoneNumber(
@@ -58,72 +55,62 @@ class Auth {
     );
   }
 
-  static AppUser getAppUser() {
-    if (appUser == null) {
-      firebase_auth.User firebaseUser = firebaseAuth.currentUser;
-      if (firebaseUser != null) {
-        appUser = AppUser();
-        appUser.firebaseUser = firebaseUser;
-        usersReference.child(appUser.firebaseUser.uid).keepSynced(true);
+  static void setUser() {
+    appUser = firebaseAuth.currentUser;
+    if (appUser != null) {
+      usersReference.child(appUser.uid).keepSynced(true);
 
-        usersReference.child(appUser.firebaseUser.uid).once().then((event) {
-          Purchases.hasOldVersion = event.snapshot.value != null && (event.snapshot.value as Map)[firebaseAttributeOldVersion] != null && (event.snapshot.value as Map)[firebaseAttributeOldVersion];
-          if (Purchases.hasOldVersion) {
-            _logOldVersionEvent();
-          }
-          Prefs.setBool(keyOldVersion, Purchases.hasOldVersion);
+      usersReference.child(appUser.uid).once().then((event) {
+        Purchases.hasOldVersion = event.snapshot.value != null && (event.snapshot.value as Map)[firebaseAttributeOldVersion] != null && (event.snapshot.value as Map)[firebaseAttributeOldVersion];
+        if (Purchases.hasOldVersion) {
+          _logOldVersionEvent();
+        }
+        Prefs.setBool(keyOldVersion, Purchases.hasOldVersion);
 
-          appUser.credits = event.snapshot.value != null && (event.snapshot.value as Map)[firebaseAttributeCredits] != null ? (event.snapshot.value as Map)[firebaseAttributeCredits] : 0;
+        credits = event.snapshot.value != null && (event.snapshot.value as Map)[firebaseAttributeCredits] != null ? (event.snapshot.value as Map)[firebaseAttributeCredits] : 0;
 
-          Prefs.getStringF(keyToken).then((token) {
-            if (token.isNotEmpty) {
-              usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeToken).set(token);
-            }
-          });
-
-          Prefs.getStringListF(keyPurchases, []).then((purchases) {
-            if (purchases.length > 0) {
-              usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributePurchases).set(purchases);
-            }
-          });
-        }).catchError((error) {
-          Purchases.hasOldVersion = false;
-          if(appUser != null) {
-            appUser.credits = 0;
+        Prefs.getStringF(keyToken).then((token) {
+          if (token.isNotEmpty) {
+            usersReference.child(appUser.uid).child(firebaseAttributeToken).set(token);
           }
         });
 
-        if (Purchases.isPhotoSearch()) {
-          rootReference.child(firebaseSearchPhoto).child(firebaseAttributeEntity).keepSynced(true);
-        }
+        Prefs.getStringListF(keyPurchases, []).then((purchases) {
+          if (purchases.length > 0) {
+            usersReference.child(appUser.uid).child(firebaseAttributePurchases).set(purchases);
+          }
+        });
+      }).catchError((error) {
+        Purchases.hasOldVersion = false;
+        credits = 0;
+      });
 
-        if (Purchases.hasLifetimeSubscription == null) {
-          usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeLifetimeSubscription).once().then((event) {
-            Purchases.hasLifetimeSubscription = event.snapshot.value != null && event.snapshot.value;
-            Prefs.setBool(keyLifetimeSubscription, Purchases.hasLifetimeSubscription);
-          }).catchError((error) {
-            Purchases.hasLifetimeSubscription = false;
-          });
-        }
-      } else {
-        Purchases.hasOldVersion = null;
-        Purchases.hasLifetimeSubscription = null;
+      if (Purchases.isPhotoSearch()) {
+        rootReference.child(firebaseSearchPhoto).child(firebaseAttributeEntity).keepSynced(true);
       }
-    }
 
-    return appUser;
+      usersReference.child(appUser.uid).child(firebaseAttributeLifetimeSubscription).once().then((event) {
+        Purchases.hasLifetimeSubscription = event.snapshot.value != null && (event.snapshot.value as bool);
+        Prefs.setBool(keyLifetimeSubscription, Purchases.hasLifetimeSubscription);
+      }).catchError((error) {
+        Purchases.hasLifetimeSubscription = false;
+      });
+    } else {
+      Purchases.hasOldVersion = false;
+      Purchases.hasLifetimeSubscription = false;
+    }
   }
 
   static Future<void> changeCredits(int credit, String feature) async {
     if (appUser != null) {
-      usersReference.child(appUser.firebaseUser.uid).keepSynced(true);
-      await usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeCredits).once().then((event) {
-        appUser.credits = event.snapshot.value != null ? (event.snapshot.value as int) + credit : credit;
-        logsCreditsReference.child(appUser.firebaseUser.uid).child(DateTime.now().millisecondsSinceEpoch.toString()).set(feature);
+      usersReference.child(appUser.uid).keepSynced(true);
+      await usersReference.child(appUser.uid).child(firebaseAttributeCredits).once().then((event) {
+        credits = event.snapshot.value != null ? (event.snapshot.value as int) + credit : credit;
+        logsCreditsReference.child(appUser.uid).child(DateTime.now().millisecondsSinceEpoch.toString()).set(feature);
       }).catchError((error) {
-        appUser.credits = credit;
+        credits = credit;
       });
-      usersReference.child(appUser.firebaseUser.uid).child(firebaseAttributeCredits).set(appUser.credits);
+      usersReference.child(appUser.uid).child(firebaseAttributeCredits).set(credits);
     }
   }
 
@@ -132,7 +119,7 @@ class Auth {
     return firebaseAuth.signOut();
   }
 
-  static StreamSubscription<firebase_auth.User> subscribe(Function(firebase_auth.User) listener) {
+  static StreamSubscription<User> subscribe(Function(User) listener) {
     return firebaseAuth.authStateChanges().listen(listener);
   }
 }

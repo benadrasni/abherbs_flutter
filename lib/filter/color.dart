@@ -30,9 +30,8 @@ class Color extends StatefulWidget {
 }
 
 class _ColorState extends State<Color> {
-  GlobalKey<ScaffoldState> _key;
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   StreamSubscription<firebase_auth.User> _listener;
-  AppUser _currentUser;
   Future<int> _countF;
   Future<String> _rateStateF;
   Future<bool> _isNewVersionF;
@@ -61,26 +60,15 @@ class _ColorState extends State<Color> {
 
   _setCount() {
     _countF = countsReference.child(getFilterKey(_filter)).once().then((event) {
-      return event.snapshot.value;
+      return event.snapshot.value as int;
     });
-  }
-
-  _onAuthStateChanged(firebase_auth.User user) {
-    setState(() {
-      _currentUser = Auth.getAppUser();
-    });
-  }
-
-  void _checkCurrentUser() {
-    _currentUser = Auth.getAppUser();
-    _listener = Auth.subscribe(_onAuthStateChanged);
   }
 
   @override
   void initState() {
     super.initState();
 
-    _checkCurrentUser();
+    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {}));
     Offline.setKeepSynced(1, true);
 
     if (!Purchases.isNoAds()) {
@@ -102,7 +90,6 @@ class _ColorState extends State<Color> {
     _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterColor);
-    _key = new GlobalKey<ScaffoldState>();
     _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
     _isNewVersionF = PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       return FirebaseDatabase.instance.ref().child(firebaseVersions).child(Platform.isAndroid ? firebaseAttributeAndroid : firebaseAttributeIOS).once().then((event) {
@@ -213,7 +200,7 @@ class _ColorState extends State<Color> {
               return FutureBuilder<bool>(
                   future: _isNewVersionF,
                   builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done && snapshot.data) {
+                    if (snapshot.connectionState == ConnectionState.done && (snapshot.data as bool)) {
                       return Container(
                         padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                         decoration: new BoxDecoration(
@@ -316,9 +303,9 @@ class _ColorState extends State<Color> {
       key: _key,
       appBar: AppBar(
         title: Text(S.of(context).filter_color),
-        actions: getActions(context, _key, _currentUser, widget.filter),
+        actions: getActions(context, _key, widget.filter),
       ),
-      drawer: AppDrawer(_currentUser, _filter, null),
+      drawer: AppDrawer(_filter, null),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
