@@ -47,12 +47,7 @@ Future<void> initializeFlutterFire() async {
   await RemoteConfiguration.setupRemoteConfig();
 
   // Pass all uncaught errors to Crashlytics.
-  Function originalOnError = FlutterError.onError;
-  FlutterError.onError = (FlutterErrorDetails errorDetails) async {
-    await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
-    // Forward to original handler.
-    originalOnError(errorDetails);
-  };
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 }
 
 Future<Locale> initializeLocale() async {

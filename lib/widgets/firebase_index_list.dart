@@ -88,7 +88,10 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
 
   void _onValue(DatabaseEvent event) {
     _keys.forEach((key, value) {
-      _snapshots.add(event.snapshot.children.elementAt(int.parse(key)));
+      int k = int.parse(key);
+      if (k < event.snapshot.children.length) {
+        _snapshots.add(event.snapshot.children.elementAt(k));
+      }
     });
     _snapshots.sort((a, b) => (a.value as Map)[firebaseAttributeName].compareTo((b.value as Map)[firebaseAttributeName]));
     onValue(event.snapshot);
