@@ -39,7 +39,7 @@ class _ColorState extends State<Color> {
   BannerAd _ad;
 
   _navigate(String value) {
-    var newFilter = new Map<String, String>();
+    var newFilter = Map<String, String>();
     newFilter.addAll(_filter);
     newFilter[filterColor] = value;
 
@@ -200,7 +200,7 @@ class _ColorState extends State<Color> {
               return FutureBuilder<bool>(
                   future: _isNewVersionF,
                   builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done && (snapshot.data as bool)) {
+                    if (snapshot.connectionState == ConnectionState.done && snapshot.data) {
                       return Container(
                         padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                         decoration: new BoxDecoration(

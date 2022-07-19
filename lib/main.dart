@@ -25,6 +25,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:wakelock/wakelock.dart';
 
+import 'detail/plant_detail.dart';
+import 'entity/plant.dart';
 import 'filter/color.dart';
 import 'filter/distribution.dart';
 import 'filter/filter_utils.dart';
@@ -157,42 +159,92 @@ class _AppState extends State<App> {
   Future<dynamic> handleMessage(RemoteMessage message) {
     if (message != null) {
       String action = message.data[notificationAttributeAction];
-      if (action != null && action == notificationAttributeActionList && App.currentContext != null) {
-        String path = message.data[notificationAttributePath];
-        rootReference.child(path).keepSynced(true);
-        return showDialog(
-          context: App.currentContext,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text(S.of(context).notification),
-              content: Text(message.notification.title != null ? message.notification.title : message.notification.body),
-              actions: <Widget>[
-                TextButton(
-                  child: Text(S.of(context).notification_open,
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      )),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList')));
-                  },
-                ),
-                TextButton(
-                  child: Text(S.of(context).notification_close,
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      )),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
+      if (action != null && App.currentContext != null) {
+        switch (action) {
+          case notificationAttributeActionList:
+            String path = message.data[notificationAttributePath];
+            rootReference.child(path).keepSynced(true);
+            return showDialog(
+              context: App.currentContext,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(S
+                      .of(context)
+                      .notification),
+                  content: Text(message.notification.title != null ? message.notification.title : message.notification.body),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text(S
+                          .of(context)
+                          .notification_open,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList')));
+                      },
+                    ),
+                    TextButton(
+                      child: Text(S
+                          .of(context)
+                          .notification_close,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
             );
-          },
-        );
+          case notificationAttributeActionPlant:
+            String name = message.data[notificationAttributeName];
+            return showDialog(
+              context: App.currentContext,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(S
+                      .of(context)
+                      .notification),
+                  content: Text(message.notification.title != null ? message.notification.title : message.notification.body),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text(S
+                          .of(context)
+                          .notification_open,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        goToDetail(this, context, Localizations.localeOf(context), name, widget.filter);
+                      },
+                    ),
+                    TextButton(
+                      child: Text(S
+                          .of(context)
+                          .notification_close,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+        }
       } else {
         return Future<dynamic>(() {
           return null;
@@ -280,6 +332,25 @@ class _AppState extends State<App> {
                 }
                 return Future<MaterialPageRoute<dynamic>>(() {
                   return MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList'));
+                });
+              });
+            }
+            return Future<MaterialPageRoute<dynamic>>(() {
+              return null;
+            });
+          case notificationAttributeActionPlant:
+            String name = notificationData[notificationAttributeName];
+            if (name != null) {
+              rootReference.child(firebasePlants).keepSynced(true);
+              return plantsReference.child(name).once().then((event) {
+                if (event.snapshot.value != null && (event.snapshot.value as Map)['id'] != null) {
+                  Plant plant = Plant.fromJson(event.snapshot.key, event.snapshot.value);
+                  return Future<MaterialPageRoute<dynamic>>(() {
+                    return MaterialPageRoute(builder: (context) => PlantDetail(Localizations.localeOf(context), Map<String, String>(), plant), settings: RouteSettings(name: 'PlantDetail'));
+                  });
+                }
+                return Future<MaterialPageRoute<dynamic>>(() {
+                  return null;
                 });
               });
             }
