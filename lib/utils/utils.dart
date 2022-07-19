@@ -171,8 +171,10 @@ const String notificationAttributeData = "data";
 const String notificationAttributeAction = "action";
 const String notificationAttributeActionList = "list";
 const String notificationAttributeActionBrowse = "browse";
+const String notificationAttributeActionPlant = "plant";
 const String notificationAttributePath = "path";
 const String notificationAttributeUri = "uri";
+const String notificationAttributeName = "name";
 
 const String remoteAdsFrequency = "ads_frequency";
 const String remoteConfigIPNIServer = "ipni_server";
