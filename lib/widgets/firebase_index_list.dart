@@ -43,7 +43,7 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
       }
 
       listen(query.onValue, _onValue, onError: _onError);
-    });
+    }).onError((error, stackTrace) => null);
   }
 
   /// Database query used to populate the list
