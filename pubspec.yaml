@@ -7,7 +7,7 @@ description: Flutter version of abherbs
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 7.1.9+719
+version: 7.2.0+720
 
 environment:
   sdk: ">=2.1.0 <4.0.0"
@@ -20,7 +20,8 @@ dependencies:
   shared_preferences: 2.0.15
   firebase_messaging: 12.0.1
   firebase_analytics: 9.3.0
-  firebase_auth: 3.5.1
+  firebase_auth: 3.4.2
+  firebase_auth_platform_interface: 6.3.2
   firebase_storage: 10.3.3
   firebase_database: 9.0.20
   firebase_remote_config: 2.0.13

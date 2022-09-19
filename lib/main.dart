@@ -250,11 +250,11 @@ class _AppState extends State<App> {
           return null;
         });
       }
-    } else {
-      return Future<dynamic>(() {
-        return null;
-      });
     }
+
+    return Future<dynamic>(() {
+      return null;
+    });
   }
 
   void _firebaseCloudMessagingListeners() async {
