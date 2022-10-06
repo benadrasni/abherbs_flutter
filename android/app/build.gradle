@@ -43,7 +43,7 @@ android {
         }
     }
 
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -56,7 +56,7 @@ android {
     defaultConfig {
         applicationId "sk.ab.herbs"
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -82,7 +82,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.google.ads.mediation:applovin:11.4.4.0'
+    implementation 'com.google.ads.mediation:applovin:11.5.1.0'
     implementation 'com.google.ads.mediation:facebook:6.11.0.0'
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

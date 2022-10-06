@@ -13,8 +13,8 @@ class RemoteConfiguration {
           minimumFetchInterval: Duration(hours: 12)));
       await remoteConfig.setDefaults(<String, dynamic>{
         remoteAdsFrequency: 5,
-        remoteConfigIPNIServer: 'http://plantsoftheworldonline.org/',
-        remoteConfigIPNIServerWithTaxon: 'http://plantsoftheworldonline.org/taxon/urn:lsid:ipni.org:names:',
+        remoteConfigIPNIServer: 'https://powo.science.kew.org/',
+        remoteConfigIPNIServerWithTaxon: 'https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:',
         remoteConfigSearchByNameVideo: 'https://youtu.be/dapaB7V5Xo0',
         remoteConfigSearchByPhotoVideo: 'https://youtu.be/UaKBnVXavmU'
       });
