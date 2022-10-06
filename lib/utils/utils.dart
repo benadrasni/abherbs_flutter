@@ -212,10 +212,8 @@ bool get isInDebugMode {
 }
 
 void launchURL(String path) async {
-  Uri url = Uri(path:path);
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
+  Uri url = Uri.parse(path);
+  if (!await launchUrl(url)) {
     throw 'Could not launch $url';
   }
 }
