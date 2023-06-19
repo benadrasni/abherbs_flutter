@@ -1,23 +1,23 @@
 class Plant{
   final String key;
-  int id;
-  int gbifId;
-  String usdaId;
-  String ipniId;
-  String name;
-  String author;
-  Map<dynamic, dynamic> apgIV;
-  int floweringFrom;
-  int floweringTo;
-  int heightFrom;
-  int heightTo;
-  int toxicityClass;
-  String illustrationUrl;
-  List<dynamic> photoUrls;
-  List<dynamic> videoUrls;
-  List<dynamic> sourceUrls;
-  List<dynamic> synonyms;
-  Map<dynamic, dynamic> wikiLinks;
+  int id = 0;
+  int? gbifId;
+  String? usdaId;
+  String? ipniId;
+  String name = "";
+  String? author;
+  Map<dynamic, dynamic> apgIV = {};
+  int floweringFrom = 1;
+  int floweringTo = 12;
+  int heightFrom = 0;
+  int heightTo = 0;
+  int toxicityClass = 0;
+  String? illustrationUrl;
+  List<dynamic> photoUrls = [];
+  List<dynamic> videoUrls = [];
+  List<dynamic> sourceUrls = [];
+  List<dynamic> synonyms = [];
+  Map<dynamic, dynamic> wikiLinks = {};
 
   Plant.fromJson(this.key, Map data) {
     id = data['id'];

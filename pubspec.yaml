@@ -10,7 +10,7 @@ description: Flutter version of abherbs
 version: 8.0.0+800
 
 environment:
-  sdk: ">=2.1.0 <4.0.0"
+  sdk: ">=2.12.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -18,20 +18,20 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   shared_preferences: 2.0.15
-  firebase_messaging: 13.1.0
-  firebase_analytics: 9.3.8
-  firebase_auth: 3.11.2
-  firebase_auth_platform_interface: 6.10.1
-  firebase_storage: 10.3.11
-  firebase_database: 9.1.7
-  firebase_remote_config: 2.0.20
-  firebase_crashlytics: 2.8.13
-  firebase_performance: 0.8.3+3
+  firebase_messaging: 14.5.0
+  firebase_analytics: 10.3.0
+  firebase_auth: 4.5.0
+  firebase_auth_platform_interface: 6.14.0
+  firebase_storage: 11.1.2
+  firebase_database: 10.1.2
+  firebase_remote_config: 4.1.0
+  firebase_crashlytics: 3.2.0
+  firebase_performance: 0.9.1+2
   google_maps_flutter: 2.2.1
   google_mobile_ads: 2.0.1
-  google_sign_in: 5.4.2
-  the_apple_sign_in: 1.1.1
-  device_info_plus: 5.0.5
+  google_sign_in: 6.1.0
+  sign_in_with_apple: 4.3.0
+  device_info_plus: 8.2.2
   in_app_purchase: 3.0.7
   cached_network_image: 3.2.2
   url_launcher: 6.1.6
@@ -49,7 +49,7 @@ dependencies:
   photo_view: 0.14.0
   youtube_plyr_iframe: 2.0.7
   app_tracking_transparency: 2.0.2+4
-  country_picker: 2.0.16
+  country_picker: 2.0.20
   charts_flutter: 0.12.0
   country_icons: 2.0.2
   wakelock: 0.6.2
@@ -57,7 +57,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
-  intl_utils: ^2.7.0
+  intl_utils: ^2.8.2
 
 dev_dependencies:
   flutter_test:

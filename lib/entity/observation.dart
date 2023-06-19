@@ -14,23 +14,20 @@ const String observationStatusPrivate = "private";
 const String observationStatusPublic = "public";
 
 class Observation{
-  String key;
-  String id;
-  String plant;
-  DateTime date;
-  double longitude;
-  double latitude;
-  String note;
-  List<dynamic> photoPaths;
-  String status;
-  String uploadStatus;
-  int order;
+  String? key;
+  String? id;
+  String? plant;
+  DateTime date = DateTime.now();
+  double? longitude;
+  double? latitude;
+  String? note;
+  List<dynamic> photoPaths = [];
+  String? status;
+  String uploadStatus = observationStatusPrivate;
+  int? order;
 
   Observation(String plantName) {
     this.plant = plantName;
-    this.date = DateTime.now();
-    this.photoPaths = [];
-    this.status = observationStatusPrivate;
   }
 
   Observation.from(Observation observation) {

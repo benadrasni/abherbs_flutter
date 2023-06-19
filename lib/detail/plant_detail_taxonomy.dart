@@ -25,7 +25,7 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
     future: _plantTranslationF,
     builder: (BuildContext context, AsyncSnapshot<PlantTranslation> plantTranslationSnapshot) {
       if (plantTranslationSnapshot.connectionState == ConnectionState.done) {
-        return Container(padding: EdgeInsets.only(top: 15.0, bottom: 15.0), child: _getNames(plant, plantTranslationSnapshot.data));
+        return Container(padding: EdgeInsets.only(top: 15.0, bottom: 15.0), child: _getNames(plant, plantTranslationSnapshot.data!));
       } else {
         return Container();
       }
@@ -59,14 +59,14 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
           ),
           onTap: () {
             if (plant.ipniId != null) {
-              launchURL(RemoteConfiguration.remoteConfig.getString(remoteConfigIPNIServerWithTaxon) + plant.ipniId);
+              launchURL(RemoteConfiguration.remoteConfig.getString(remoteConfigIPNIServerWithTaxon) + plant.ipniId!);
             }
           },
         ),
         FutureBuilder<List<String>>(
           future: _firstSynonymF,
           builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.done && snapshot.data.length > 0) {
+            if (snapshot.connectionState == ConnectionState.done && snapshot.data!.length > 0) {
               return GestureDetector(
                 child: Column(children: [
                   Container(
@@ -76,14 +76,14 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
                   ),
                   ListTile(
                     title: Text(
-                      snapshot.data[0],
+                      snapshot.data![0],
                       style: TextStyle(
                         fontSize: 18.0,
                       ),
                       textAlign: TextAlign.center,
                     ),
                     subtitle: Text(
-                      snapshot.data[1],
+                      snapshot.data![1],
                       style: TextStyle(
                         fontSize: 16.0,
                       ),
@@ -137,23 +137,21 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
 Widget _getNames(Plant plant, PlantTranslation plantTranslation) {
   var names = <Text>[];
   names.add(Text(
-    plantTranslation?.label ?? plant.name,
+    plantTranslation.label ?? plant.name,
     style: TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 22.0,
     ),
     textAlign: TextAlign.center,
   ));
-  if (plantTranslation.names != null) {
-    names.add(Text(
-      plantTranslation.names.join(', '),
-      style: TextStyle(
-        fontStyle: FontStyle.italic,
-        fontSize: 14.0,
-      ),
-      textAlign: TextAlign.center,
-    ));
-  }
+  names.add(Text(
+    plantTranslation.names.join(', '),
+    style: TextStyle(
+      fontStyle: FontStyle.italic,
+      fontSize: 14.0,
+    ),
+    textAlign: TextAlign.center,
+  ));
 
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -192,7 +190,7 @@ Widget _getTaxonInLanguage(Locale myLocale, String taxon, double fontSize) {
     if (event.snapshot.value != null && (event.snapshot.value as List).length > 0) {
       return (event.snapshot.value as List).join(', ');
     } else {
-      return null;
+      return "";
     }
   });
 
@@ -204,7 +202,7 @@ Widget _getTaxonInLanguage(Locale myLocale, String taxon, double fontSize) {
 
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data != null) {
-              names.add(Text(snapshot.data, style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)));
+              names.add(Text(snapshot.data!, style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)));
             }
           }
           names.add(Text(

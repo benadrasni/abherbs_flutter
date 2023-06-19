@@ -21,10 +21,10 @@ class FeedbackScreen extends StatefulWidget {
 }
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
-  InterstitialAd _interstitialAd;
+  InterstitialAd? _interstitialAd;
   int _numInterstitialLoadAttempts = 0;
 
-  RewardedAd _rewardedAd;
+  RewardedAd? _rewardedAd;
   int _numRewardedLoadAttempts = 0;
 
   void _createInterstitialAd() {
@@ -54,7 +54,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       ));
       return;
     }
-    _interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+    _interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
         ad.dispose();
         _createInterstitialAd();
@@ -64,7 +64,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         _createInterstitialAd();
       },
     );
-    _interstitialAd.show();
+    _interstitialAd?.show();
     _interstitialAd = null;
   }
 
@@ -97,7 +97,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       ));
       return;
     }
-    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedAd?.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (RewardedAd ad) {
         ad.dispose();
         _createRewardedAd();
@@ -108,8 +108,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       },
     );
 
-    _rewardedAd.setImmersiveMode(true);
-    _rewardedAd.show(
+    _rewardedAd?.setImmersiveMode(true);
+    _rewardedAd?.show(
         onUserEarnedReward: (AdWithoutView ad, RewardItem reward) async {
           await Auth.changeCredits(1, "1");
           setState(() {});

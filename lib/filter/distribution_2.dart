@@ -26,12 +26,12 @@ class Distribution2 extends StatefulWidget {
 
 class _Distribution2State extends State<Distribution2> {
   GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-  StreamSubscription<firebase_auth.User> _listener;
-  Future<int> _countF;
-  BannerAd _ad;
+  late StreamSubscription<firebase_auth.User?> _listener;
+  Future<int>? _countF;
+  BannerAd? _ad;
 
   void _navigate(String value) {
-    var newFilter = new Map<String, String>();
+    var newFilter = Map<String, String>();
     newFilter.addAll(widget.filter);
     newFilter[filterDistribution] = value;
 
@@ -52,7 +52,7 @@ class _Distribution2State extends State<Distribution2> {
 
   _setCount() {
     _countF = countsReference.child(getFilterKey(widget.filter)).once().then((event) {
-      return event.snapshot.value;
+      return event.snapshot.value as int;
     });
   }
 
@@ -165,7 +165,7 @@ class _Distribution2State extends State<Distribution2> {
   void initState() {
     super.initState();
 
-    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {}));
+    _listener = Auth.subscribe((firebase_auth.User? user) => setState(() {}));
 
     if (!Purchases.isNoAds()) {
       _ad = BannerAd(
@@ -181,7 +181,7 @@ class _Distribution2State extends State<Distribution2> {
           },
         ),
       );
-      _ad.load();
+      _ad?.load();
     }
 
     _setCount();
@@ -189,7 +189,7 @@ class _Distribution2State extends State<Distribution2> {
 
   @override
   void dispose() {
-    filterRoutes[filterDistribution2] = null;
+    filterRoutes.remove(filterDistribution2);
     _listener.cancel();
     _ad?.dispose();
     super.dispose();
@@ -205,7 +205,7 @@ class _Distribution2State extends State<Distribution2> {
         title: Text(S.of(context).filter_distribution),
         actions: getActions(context, _key, widget.filter),
       ),
-      drawer: AppDrawer(widget.filter, null),
+      drawer: AppDrawer(widget.filter, () => {}),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -222,13 +222,13 @@ class _Distribution2State extends State<Distribution2> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: !Purchases.isNoAds()
+                child: !Purchases.isNoAds() && _ad != null
                     ? Container(
                         alignment: Alignment.center,
                         margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
-                        child: AdWidget(ad: _ad),
-                        width: _ad.size.width.toDouble(),
-                        height: _ad.size.height.toDouble(),
+                        child: AdWidget(ad: _ad!),
+                        width: _ad!.size.width.toDouble(),
+                        height: _ad!.size.height.toDouble(),
                       )
                     : Container(
                         height: 0.0,
@@ -268,7 +268,7 @@ class _Distribution2State extends State<Distribution2> {
                       },
                       child: FloatingActionButton(
                         onPressed: () {
-                          filterRoutes[filterDistribution2] = null;
+                          filterRoutes.remove(filterDistribution2);
                           Navigator.pushReplacement(
                             mainContext,
                             MaterialPageRoute(builder: (context) => PlantList(widget.filter, '', keysReference.child(getFilterKey(widget.filter))), settings: RouteSettings(name: 'PlantList')),

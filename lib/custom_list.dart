@@ -37,8 +37,8 @@ class CustomListScreen extends StatefulWidget {
 class _CustomListScreenState extends State<CustomListScreen> {
   FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-  StreamSubscription<firebase_auth.User> _listener;
-  DateFormat _dateFormat;
+  late StreamSubscription<firebase_auth.User?> _listener;
+  late DateFormat _dateFormat;
 
   Future<void> _logCustomListOpenEvent(event) async {
     await _firebaseAnalytics.logEvent(name: 'custom_list_open', parameters: {"type" : event});
@@ -48,13 +48,13 @@ class _CustomListScreenState extends State<CustomListScreen> {
   void initState() {
     super.initState();
 
-    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {}));
+    _listener = Auth.subscribe((firebase_auth.User? user) => setState(() {}));
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString());
   }
 
   @override
   void dispose() {
-    _listener?.cancel();
+    _listener.cancel();
     super.dispose();
   }
 
@@ -81,7 +81,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
           fit: BoxFit.fill,
           child: FutureBuilder<int>(future: Future<int>(() {
             if (Auth.appUser != null) {
-              return usersReference.child(Auth.appUser.uid).child(firebaseAttributeFavorite).once().then((event) {
+              return usersReference.child(Auth.appUser!.uid).child(firebaseAttributeFavorite).once().then((event) {
                 if (event.snapshot.value != null) {
                   if (event.snapshot.value is List) {
                     int i = 0;
@@ -112,7 +112,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
         onTap: () {
           if (Auth.appUser != null) {
             _logCustomListOpenEvent("favorite");
-            String path = '/' + firebaseUsers + '/' + Auth.appUser.uid + '/' + firebaseAttributeFavorite;
+            String path = '/' + firebaseUsers + '/' + Auth.appUser!.uid + '/' + firebaseAttributeFavorite;
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => PlantList({}, S.of(context).favorite_empty, rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
@@ -154,7 +154,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
                             Random random = Random();
 
                             return FutureBuilder<List<String>>(
-                                future: listsCustomReference.child("by language").child(widget.myLocale.languageCode).child(snapshot.key).once().then((event) {
+                                future: listsCustomReference.child("by language").child(widget.myLocale.languageCode).child(snapshot.key!).once().then((event) {
                                   var result = (event.snapshot.value as Map)[firebaseAttributeList]??[];
                                   int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : result.values.length;
                                   String icon = (event.snapshot.value as Map)["icon"]??families[random.nextInt(families.length-1)];
@@ -165,11 +165,11 @@ class _CustomListScreenState extends State<CustomListScreen> {
                                   String count = "";
                                   String icon = "";
                                   if (localSnapshot.connectionState == ConnectionState.done && localSnapshot.data != null) {
-                                    count = localSnapshot.data[0];
-                                    icon = localSnapshot.data[1];
+                                    count = localSnapshot.data![0];
+                                    icon = localSnapshot.data![1];
 
                                     return ListTile(
-                                      title: Text(snapshot.key),
+                                      title: Text(snapshot.key!),
                                       leading: getImage(
                                           storageFamilies + icon + defaultExtension,
                                           Container(
@@ -180,8 +180,8 @@ class _CustomListScreenState extends State<CustomListScreen> {
                                           height: 50.0),
                                       trailing: Text(count),
                                       onTap: () {
-                                        _logCustomListOpenEvent(widget.myLocale.languageCode + ": " + snapshot.key);
-                                        String path = '/' + firebaseListsCustom + '/by language/' + widget.myLocale.languageCode + '/' + snapshot.key + '/' + firebaseAttributeList;
+                                        _logCustomListOpenEvent(widget.myLocale.languageCode + ": " + snapshot.key!);
+                                        String path = '/' + firebaseListsCustom + '/by language/' + widget.myLocale.languageCode + '/' + snapshot.key! + '/' + firebaseAttributeList;
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(builder: (context) => PlantList({}, "", rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
@@ -226,7 +226,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
                   Random random = Random();
 
                   return ListTile(
-                    title: Text(_dateFormat.format(DateTime.parse(snapshot.key))),
+                    title: Text(_dateFormat.format(DateTime.parse(snapshot.key!))),
                     leading: getImage(
                         storageFamilies + families[random.nextInt(families.length-1)] + defaultExtension,
                         Container(
@@ -236,7 +236,7 @@ class _CustomListScreenState extends State<CustomListScreen> {
                         width: 50.0,
                         height: 50.0),
                     trailing: FutureBuilder<int>(
-                        future: listsCustomReference.child("new").child(snapshot.key).child(firebaseAttributeList).once().then((event) {
+                        future: listsCustomReference.child("new").child(snapshot.key!).child(firebaseAttributeList).once().then((event) {
                           var result = event.snapshot.value??[];
                           int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1) ) : (result as Map).values.length;
                           return length;
@@ -251,8 +251,8 @@ class _CustomListScreenState extends State<CustomListScreen> {
                           return Text(count);
                         }),
                     onTap: () {
-                      _logCustomListOpenEvent("new: " + snapshot.key);
-                      String path = '/' + firebaseListsCustom + '/new/' + snapshot.key + '/' + firebaseAttributeList;
+                      _logCustomListOpenEvent("new: " + snapshot.key!);
+                      String path = '/' + firebaseListsCustom + '/new/' + snapshot.key! + '/' + firebaseAttributeList;
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => PlantList({}, "", rootReference.child(path)), settings: RouteSettings(name: 'PlantList')),
