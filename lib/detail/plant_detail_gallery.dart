@@ -12,13 +12,13 @@ Widget getGallery(BuildContext context, Plant plant) {
   List<Widget> cards = [];
 
   cards.add(Card(
-    child: _getImageButton(context, storagePhotos + plant.illustrationUrl),
+    child: _getImageButton(context, storagePhotos + plant.illustrationUrl!),
   ));
 
   if (plant.videoUrls != null && plant.videoUrls.length > 0) {
     cards.addAll(plant.videoUrls.map((url) {
       controllers.add(YoutubePlayerController(
-        initialVideoId: YoutubePlayerController.convertUrlToId(url),
+        initialVideoId: YoutubePlayerController.convertUrlToId(url)!,
         params: YoutubePlayerParams(
           autoPlay: false,
           showControls: false,

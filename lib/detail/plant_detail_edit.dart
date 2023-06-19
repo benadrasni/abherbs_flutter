@@ -20,7 +20,7 @@ class PlantDetailEdit extends StatefulWidget {
 }
 
 class _PlantDetailEditState extends State<PlantDetailEdit> {
-  GlobalKey<ScaffoldState> _key;
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   TextEditingController _translationController = TextEditingController();
 
   Future<bool> _savePlantDetail(BuildContext context) async {
@@ -33,8 +33,8 @@ class _PlantDetailEditState extends State<PlantDetailEdit> {
 
   _setText() async {
     _translationController.text = await translationsNewReference.child(widget.language).child(widget.plantName).child(widget.section).once().then((event) {
-      if (event.snapshot != null && event.snapshot.value != null) {
-        return event.snapshot.value;
+      if (event.snapshot.value != null) {
+        return event.snapshot.value as String;
       }
       return widget.text;
     });
@@ -43,7 +43,6 @@ class _PlantDetailEditState extends State<PlantDetailEdit> {
   @override
   void initState() {
     super.initState();
-    _key = GlobalKey<ScaffoldState>();
     _setText();
   }
 

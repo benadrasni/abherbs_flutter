@@ -66,7 +66,7 @@ Future<void> observationDialog(BuildContext mainContext, GlobalKey<ScaffoldState
               onPressed: () {
                 Navigator.of(context).pop();
                 if (key.currentState != null) {
-                  key.currentState.openDrawer();
+                  key.currentState!.openDrawer();
                 }
               },
             )
@@ -92,7 +92,7 @@ Future<void> photoSearchDialog(BuildContext mainContext, GlobalKey<ScaffoldState
               onPressed: () {
                 Navigator.of(context).pop();
                 if (key.currentState != null) {
-                  key.currentState.openDrawer();
+                  key.currentState!.openDrawer();
                 }
               },
             )
@@ -118,7 +118,7 @@ Future<void> favoriteDialog(BuildContext mainContext, GlobalKey<ScaffoldState> k
               onPressed: () {
                 Navigator.of(context).pop();
                 if (key.currentState != null) {
-                  key.currentState.openDrawer();
+                  key.currentState!.openDrawer();
                 }
               },
             )
@@ -157,7 +157,7 @@ Future<bool> deleteDialog(BuildContext mainContext, String title, String content
             )
           ],
         );
-      });
+      }) as bool;
 }
 
 Future<bool> subscriptionDialog(BuildContext mainContext, String title, String content) async {
@@ -190,7 +190,7 @@ Future<bool> subscriptionDialog(BuildContext mainContext, String title, String c
             )
           ],
         );
-      });
+      }) as bool;
 }
 
 Future<bool> infoDialog(BuildContext mainContext, String title, String content) async {
@@ -213,7 +213,7 @@ Future<bool> infoDialog(BuildContext mainContext, String title, String content) 
             ),
           ],
         );
-      });
+      }) as bool;
 }
 
 Future<int> infoBuyDialog(BuildContext mainContext, String title, String content, String config, String credit) async {
@@ -250,7 +250,7 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
             ],
           ),
           actions: [
-            credit != null ? TextButton(
+            TextButton(
               child: Text(credit,
                   style: TextStyle(
                     fontSize: 16.0,
@@ -259,7 +259,7 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
               onPressed: () {
                 Navigator.of(context).pop(2);
               },
-            ) : Container(),
+            ),
             TextButton(
               child: Text(S.of(context).enhancements,
                   style: TextStyle(
@@ -282,5 +282,5 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
             ),
           ],
         );
-      });
+      }) as int;
 }

@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 
@@ -20,19 +20,19 @@ const String errorWrongPassword = 'ERROR_WRONG_PASSWORD';
 class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
   final _formKey = new GlobalKey<FormState>();
 
-  String _email;
-  String _password;
-  String _errorMessage;
-  bool _isWrongPassword;
+  String? _email;
+  String? _password;
+  String? _errorMessage;
+  bool _isWrongPassword = false;
 
   // Initial form is login form
   FormMode _formMode = FormMode.LOGIN;
-  bool _isLoading;
+  bool _isLoading = false;
 
   // Check if form is valid before perform login or signup
   bool _validateAndSave() {
     final form = _formKey.currentState;
-    if (form.validate()) {
+    if (form != null && form.validate()) {
       form.save();
       return true;
     }
@@ -46,11 +46,11 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
         _errorMessage = "";
         _isLoading = true;
       });
-      firebase_auth.User user;
+      firebase_auth.User? user;
       try {
         if (_formMode == FormMode.LOGIN) {
-          user = await Auth.signInWithEmail(_email, _password);
-          if (!user.emailVerified) {
+          user = await Auth.signInWithEmail(_email!, _password!);
+          if (user != null && !user.emailVerified) {
             _showVerifyEmailSentDialog(user).then((value) {
               if (mounted) {
                 Navigator.of(context).pop();
@@ -65,8 +65,8 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
             }
           }
         } else {
-          user = await Auth.signUpWithEmail(_email, _password);
-          user.sendEmailVerification();
+          user = await Auth.signUpWithEmail(_email!, _password!);
+          user?.sendEmailVerification();
           _showVerifyEmailSentDialog(user).then((value) {
             if (mounted) {
               Navigator.of(context).pop();
@@ -78,15 +78,12 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
         setState(() {
           _isLoading = false;
         });
-      } catch (e) {
+      } on FirebaseAuthException catch (e) {
         if (mounted) {
           setState(() {
             _isWrongPassword = e.code == errorWrongPassword;
             _isLoading = false;
-            if (Platform.isIOS) {
-              _errorMessage = e.details;
-            } else
-              _errorMessage = e.message;
+            _errorMessage = e.message;
           });
         }
       }
@@ -102,7 +99,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
   }
 
   void _changeFormToSignUp() {
-    _formKey.currentState.reset();
+    _formKey.currentState?.reset();
     _errorMessage = "";
     setState(() {
       _formMode = FormMode.SIGNUP;
@@ -110,7 +107,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
   }
 
   void _changeFormToLogin() {
-    _formKey.currentState.reset();
+    _formKey.currentState?.reset();
     _errorMessage = "";
     setState(() {
       _formMode = FormMode.LOGIN;
@@ -140,7 +137,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
     );
   }
 
-  Future<dynamic> _showVerifyEmailSentDialog(firebase_auth.User user) {
+  Future<dynamic> _showVerifyEmailSentDialog(firebase_auth.User? user) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -175,7 +172,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(S.of(context).auth_reset_password_email_title),
-          content: Text(S.of(context).auth_reset_password_email_message(_email)),
+          content: Text(S.of(context).auth_reset_password_email_message(_email!)),
           actions: <Widget>[
             TextButton(
               child: Text(S.of(context).close),
@@ -244,7 +241,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
               color: Colors.grey,
             )),
         validator: (value) =>
-            value.isEmpty || !RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$").hasMatch(value) ? S.of(context).auth_invalid_email_address : null,
+        value == null || value.isEmpty || !RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$").hasMatch(value) ? S.of(context).auth_invalid_email_address : "",
         onSaved: (value) => _email = value,
       ),
     );
@@ -263,7 +260,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
               Icons.lock,
               color: Colors.grey,
             )),
-        validator: (value) => value.isEmpty ? S.of(context).auth_empty_password : null,
+        validator: (value) => value == null || value.isEmpty ? S.of(context).auth_empty_password : "",
         onSaved: (value) => _password = value,
       ),
     );
@@ -312,7 +309,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
             style: TextStyle(fontSize: 20.0, color: Colors.blue),
           ),
           onPressed: () {
-            Auth.resetPassword(_email);
+            Auth.resetPassword(_email!);
             _showResetPasswordEmailSentDialog();
           },
         ),);
@@ -324,11 +321,11 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
   }
 
   Widget _showErrorMessage() {
-    if (_errorMessage != null && _errorMessage.length > 0) {
+    if (_errorMessage != null && _errorMessage!.length > 0) {
       return Container(
         padding: EdgeInsets.all(5.0),
         child: Text(
-          _errorMessage,
+          _errorMessage!,
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 14.0, color: Colors.red, height: 1.0),
         ),

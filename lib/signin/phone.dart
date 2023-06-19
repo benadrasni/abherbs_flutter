@@ -1,10 +1,9 @@
-import 'dart:io';
 import 'dart:async';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:country_picker/country_picker.dart';
 
@@ -24,23 +23,23 @@ const String errorInvalidVerificationCode = 'ERROR_INVALID_VERIFICATION_CODE';
 
 class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   final _formKey = GlobalKey<FormState>();
-  Future<String> _errorMessage;
-  firebase_auth.PhoneVerificationCompleted _verificationCompleted;
-  firebase_auth.PhoneVerificationFailed _verificationFailed;
-  firebase_auth.PhoneCodeSent _codeSent;
-  firebase_auth.PhoneCodeAutoRetrievalTimeout _codeAutoRetrievalTimeout;
+  Future<String>? _errorMessage;
+  late PhoneVerificationCompleted _verificationCompleted;
+  late PhoneVerificationFailed _verificationFailed;
+  late PhoneCodeSent _codeSent;
+  late PhoneCodeAutoRetrievalTimeout _codeAutoRetrievalTimeout;
 
-  Country _country;
-  String _phone;
-  bool _isWrongNumber;
-  bool _showResendButton;
-  String _verificationId;
-  String _code;
-  int _token;
+  Country? _country;
+  String? _phone;
+  String? _verificationId;
+  String? _code;
+  int? _token;
 
   // Initial form is login form
   FormMode _formMode = FormMode.PHONE;
-  bool _isLoading;
+  bool _isLoading = false;
+  bool _isWrongNumber = false;
+  bool _showResendButton = false;
 
   // Check if form is valid before perform login or sign up
   bool _validateAndSave() {
@@ -61,16 +60,16 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
       });
       try {
         if (_formMode == FormMode.SMS) {
-          await Auth.signInWithCredential(firebase_auth.PhoneAuthProvider.credential(verificationId: _verificationId, smsCode: _code));
+          await Auth.signInWithCredential(PhoneAuthProvider.credential(verificationId: _verificationId!, smsCode: _code!));
           Navigator.pop(context);
           Navigator.pop(context);
         } else {
-          Auth.signUpWithPhone(_verificationCompleted, _verificationFailed, _codeSent, _codeAutoRetrievalTimeout, _phone);
+          Auth.signUpWithPhone(_verificationCompleted, _verificationFailed, _codeSent, _codeAutoRetrievalTimeout, _phone!);
         }
         setState(() {
           _isLoading = false;
         });
-      } catch (e) {
+      } on FirebaseAuthException catch (e) {
         if (e.code == errorInvalidVerificationCode) {
           _isWrongNumber = true;
           _validateAndSave();
@@ -82,11 +81,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
         } else {
           setState(() {
             _isLoading = false;
-            if (Platform.isIOS) {
-              _errorMessage = Future<String>.value(e.details);
-            } else {
-              _errorMessage = Future<String>.value(e.message);
-            }
+            _errorMessage = Future<String>.value(e.message);
           });
         }
       }
@@ -100,15 +95,15 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     _isLoading = false;
     _isWrongNumber = false;
     _showResendButton = false;
-    _country = Country.parse(widget.myLocale.countryCode);
+    _country = Country.parse(widget.myLocale.countryCode!);
 
-    _verificationCompleted = (firebase_auth.AuthCredential credential) {
+    _verificationCompleted = (AuthCredential credential) {
       Auth.signInWithCredential(credential);
       Navigator.pop(context);
       Navigator.pop(context);
     };
 
-    _verificationFailed = (firebase_auth.FirebaseAuthException authException) {
+    _verificationFailed = (FirebaseAuthException authException) {
       if (authException.code == errorInvalidCredential) {
         _isWrongNumber = true;
         _validateAndSave();
@@ -120,7 +115,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
       }
     };
 
-    _codeSent = (String verificationId, int forceResendingToken) async {
+    _codeSent = (String verificationId, int? forceResendingToken) {
       _verificationId = verificationId;
       _token = forceResendingToken;
       _changeFormToSMS();
@@ -133,8 +128,8 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   }
 
   void _changeFormToSMS() {
-    if (_formKey.currentState != null && _formKey.currentState.mounted) {
-      _formKey.currentState.reset();
+    if (_formKey.currentState != null && _formKey.currentState!.mounted) {
+      _formKey.currentState!.reset();
       _errorMessage = Future<String>.value('');
       setState(() {
         _formMode = FormMode.SMS;
@@ -223,7 +218,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
                     },
                   );
                 },
-                child: Text('+' + _country.phoneCode),
+                child: Text('+' + _country!.phoneCode),
               ),
             ),
             Expanded(
@@ -235,8 +230,8 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
                 decoration: InputDecoration(
                   hintText: S.of(context).auth_phone_hint,
                 ),
-                validator: (value) => value.isEmpty || _isWrongNumber ? S.of(context).auth_invalid_phone_number : null,
-                onSaved: (value) => _phone = '+' + _country.phoneCode + value,
+                validator: (value) => value == null || value.isEmpty || _isWrongNumber ? S.of(context).auth_invalid_phone_number : null,
+                onSaved: (value) => _phone = '+' + _country!.phoneCode + value!,
               ),
             ),
           ],
@@ -260,7 +255,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
               decoration: InputDecoration(
                 hintText: S.of(context).auth_code_hint,
               ),
-              validator: (value) => value.length != 6 ? S.of(context).auth_invalid_code : _isWrongNumber ? S.of(context).auth_invalid_code : null,
+              validator: (value) => value == null || value.length != 6 ? S.of(context).auth_invalid_code : _isWrongNumber ? S.of(context).auth_invalid_code : null,
               onSaved: (value) => _code = value,
             ),
           ],
@@ -276,8 +271,8 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
           height: 40.0,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Colors.blue, // background
-              onPrimary: Colors.white, // foreground
+              backgroundColor: Colors.blue, // background
+              foregroundColor: Colors.white, // foreground
               elevation: 5.0,
               shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
             ),
@@ -299,7 +294,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
                 style: TextStyle(fontSize: 20.0, color: Colors.blue),
               ),
               onPressed: () {
-                Auth.signUpWithPhone(_verificationCompleted, _verificationFailed, _codeSent, _codeAutoRetrievalTimeout, _phone, _token);
+                Auth.signUpWithPhone(_verificationCompleted, _verificationFailed, _codeSent, _codeAutoRetrievalTimeout, _phone!, _token);
               },
             ),);
     }

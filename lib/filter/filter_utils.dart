@@ -18,13 +18,7 @@ const String filterDistribution = 'filterDistribution';
 const String filterDistribution2 = 'filterDistribution2';
 
 const filterAttributes = [filterColor, filterHabitat, filterPetal, filterDistribution];
-var filterRoutes = <String, MaterialPageRoute<dynamic>>{
-  filterColor: null,
-  filterHabitat: null,
-  filterPetal: null,
-  filterDistribution: null,
-  filterDistribution2: null
-};
+var filterRoutes = <String, MaterialPageRoute<dynamic>>{};
 
 String getFilterKey(Map<String, String> filter) {
   return filterAttributes.map((attribute) {
@@ -52,14 +46,12 @@ Image getFilterLeading(context, filterAttribute) {
         width: 50.0,
         height: 50.0,
       );
-    case filterDistribution:
+    default: // filterDistribution:
       return Image(
         image: AssetImage('res/images/distribution.png'),
         width: 50.0,
         height: 50.0,
       );
-    default:
-      return null;
   }
 }
 
@@ -71,10 +63,8 @@ String getFilterText(context, filterAttribute) {
       return S.of(context).filter_habitat;
     case filterPetal:
       return S.of(context).filter_petal;
-    case filterDistribution:
+    default: // filterDistribution:
       return S.of(context).filter_distribution;
-    default:
-      return "";
   }
 }
 
@@ -86,10 +76,8 @@ String getFilterSubtitle(context, filterAttribute, filterValue) {
       return getFilterHabitatValue(context, filterValue);
     case filterPetal:
       return getFilterPetalValue(context, filterValue);
-    case filterDistribution:
+    default: // filterDistribution:
       return getFilterDistributionValue(context, filterValue);
-    default:
-      return null;
   }
 }
 
@@ -103,10 +91,8 @@ String getFilterColorValue(context, filterValue) {
       return S.of(context).color_red;
     case '4':
       return S.of(context).color_blue;
-    case '5':
+    default: // '5':
       return S.of(context).color_green;
-    default:
-      return null;
   }
 }
 
@@ -122,10 +108,8 @@ String getFilterHabitatValue(context, filterValue) {
       return S.of(context).habitat_forest;
     case '5':
       return S.of(context).habitat_rock;
-    case '6':
+    default: // '6':
       return S.of(context).habitat_tree;
-    default:
-      return null;
   }
 }
 
@@ -257,7 +241,7 @@ getFilterDistributionValue(context, filterValue) {
 }
 
 String _getNextFilterAttribute(Map<String, String> filter) {
-  return Preferences.myFilterAttributes.firstWhere((attribute) => filter[attribute] == null, orElse: () => null);
+  return Preferences.myFilterAttributes.firstWhere((attribute) => filter.containsKey(attribute), orElse: () => "");
 }
 
 Future<bool> clearFilter(Map<String, String> filter, Function() func) {
@@ -283,8 +267,8 @@ List<BottomNavigationBarItem> getBottomNavigationBarItems(BuildContext context, 
     return BottomNavigationBarItem(
         icon: Image(
           image: AssetImage(filter[filterAttribute] == null
-              ? 'res/images/' + attrToAsset[filterAttribute] + '_50.png'
-              : 'res/images/' + attrToAsset[filterAttribute] + '.png'),
+              ? 'res/images/' + attrToAsset[filterAttribute]! + '_50.png'
+              : 'res/images/' + attrToAsset[filterAttribute]! + '.png'),
           width: 25.0,
           height: 25.0,
         ),
@@ -336,8 +320,8 @@ MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, Map<String, Stri
       route = MaterialPageRoute(builder: (context) => PlantList(filter, '', keysReference.child(getFilterKey(filter))), settings: RouteSettings(name: 'PlantList'));
   }
   if (filterAttribute != null) {
-    if (filterRoutes[filterAttribute] != null && filterRoutes[filterAttribute].isActive && context != null) {
-      Navigator.removeRoute(context, filterRoutes[filterAttribute]);
+    if (filterRoutes[filterAttribute] != null && filterRoutes[filterAttribute]!.isActive) {
+      Navigator.removeRoute(context, filterRoutes[filterAttribute]!);
     }
     filterRoutes[filterAttribute] = route;
   }

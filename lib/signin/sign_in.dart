@@ -11,7 +11,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:the_apple_sign_in/the_apple_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class SignInScreen extends StatefulWidget {
   SignInScreen();
@@ -21,13 +21,13 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  Future<bool> supportsAppleSignIn;
+  late Future<bool> supportsAppleSignIn;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   String _createNonce(int length) {
     final random = Random();
     final charCodes = List<int>.generate(length, (_) {
-      int codeUnit;
+      int codeUnit = 0;
 
       switch (random.nextInt(3)) {
         case 0:
@@ -49,7 +49,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Future<void> _handleGoogleSignIn(GlobalKey<ScaffoldState> key) async {
     try {
-      final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser != null) {
         final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
         if (googleAuth.accessToken != null) {
@@ -62,7 +62,7 @@ class _SignInScreenState extends State<SignInScreen> {
         }
       }
     } catch (e) {
-      if (key.currentState != null && key.currentState.mounted) {
+      if (key.currentState != null && key.currentState!.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: new Text(S.of(context).auth_sign_in_failed),
         ));
@@ -70,54 +70,22 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
-  Future<void> _handleAppleSignIn(GlobalKey<ScaffoldState> key) async {
+  Future<void> _handleAppleSignIn(GlobalKey<ScaffoldState> key, AuthorizationCredentialAppleID appleCredential) async {
     try {
       final nonce = _createNonce(32);
-      final AuthorizationResult result = await TheAppleSignIn.performRequests([
-        AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
-      ]);
 
-      switch (result.status) {
-        case AuthorizationStatus.authorized:
-          try {
-            final AppleIdCredential appleIdCredential = result.credential;
+      OAuthCredential credential = OAuthCredential(
+        providerId: "apple.com",
+        signInMethod: "oauth",
+        accessToken: appleCredential.authorizationCode,
+        idToken: appleCredential.identityToken,
+        rawNonce: nonce,
+      );
 
-            OAuthCredential credential = OAuthCredential(
-              providerId: "apple.com",
-              signInMethod: "oauth",
-              accessToken: String.fromCharCodes(appleIdCredential.authorizationCode),
-              idToken: String.fromCharCodes(appleIdCredential.identityToken),
-              rawNonce: nonce,
-            );
-
-            await Auth.signInWithCredential(credential);
-            Navigator.pop(context);
-          } catch (e) {
-            if (key.currentState != null && key.currentState.mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: new Text(S.of(context).auth_sign_in_failed),
-              ));
-            }
-          }
-          break;
-        case AuthorizationStatus.error:
-          if (key.currentState != null && key.currentState.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: new Text(S.of(context).auth_sign_in_failed),
-            ));
-          }
-          break;
-
-        case AuthorizationStatus.cancelled:
-          if (key.currentState != null && key.currentState.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: new Text(S.of(context).auth_sign_in_failed),
-            ));
-          }
-          break;
-      }
+      await Auth.signInWithCredential(credential);
+      Navigator.pop(context);
     } catch (error) {
-      if (key.currentState != null && key.currentState.mounted) {
+      if (key.currentState != null && key.currentState!.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: new Text(S.of(context).auth_sign_in_failed),
         ));
@@ -144,7 +112,7 @@ class _SignInScreenState extends State<SignInScreen> {
       supportsAppleSignIn = DeviceInfoPlugin().iosInfo.then((value) {
         int version = 0;
         try {
-          version = int.parse(value.systemVersion.split('.')[0]);
+          version = int.parse(value.systemVersion!.split('.')[0]);
         } catch(e) {
           print(e);
         }
@@ -172,7 +140,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(219, 68, 55, 1.0), // background
+                      backgroundColor: Color.fromRGBO(219, 68, 55, 1.0), // background
                     ),
                     child: Row(
                       children: [
@@ -193,7 +161,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.green, // background
+                      backgroundColor: Colors.green, // background
                     ),
                     child: Row(
                       children: [
@@ -214,8 +182,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white, // background
-                      onPrimary: Colors.black, // foreground
+                      backgroundColor: Colors.white, // background
+                      foregroundColor: Colors.black, // foreground
                     ),
                     child: Row(
                       children: [
@@ -237,33 +205,23 @@ class _SignInScreenState extends State<SignInScreen> {
                 builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.done:
-                      if (snapshot.data) {
+                      if (snapshot.data != null) {
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.white, // background
-                                onPrimary: Colors.black, // foreground
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(padding: const EdgeInsets.fromLTRB(16.0, 16.0, 32.0, 16.0), child: Image.asset('res/images/apple-logo.png')),
-                                  Expanded(
-                                    child: Text(
-                                      S.of(context).auth_apple,
-                                      style: new TextStyle(fontSize: 18.0),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              onPressed: () {
-                                _handleAppleSignIn(key);
-                              }),
-                        );
+                          child: SignInWithAppleButton(
+                              onPressed: () async {
+                                final credential = await SignInWithApple.getAppleIDCredential(
+                                  scopes: [
+                                    AppleIDAuthorizationScopes.email,
+                                    AppleIDAuthorizationScopes.fullName,
+                                  ],
+                                );
+                                _handleAppleSignIn(key, credential);
+                              }
+                        ));
                       } else {
                         return Container();
                       }
-                      break;
                     default:
                       return Container();
                   }
