@@ -36,14 +36,13 @@ var supportedLanguages = {
   "zh": "中文"
 };
 
-Widget searchNames(Locale myLocale, String searchText,
-    Future<Map<dynamic, dynamic>> _nativeNamesF, Future<Map<dynamic, dynamic>> _latinNamesF) {
+Widget searchNames(Locale myLocale, String searchText, Future<Map<dynamic, dynamic>> _nativeNamesF, Future<Map<dynamic, dynamic>> _latinNamesF) {
   return FutureBuilder<List<Object>>(
     future: Future.wait([_nativeNamesF, _latinNamesF]),
     builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
       switch (snapshot.connectionState) {
         case ConnectionState.done:
-          return _getBody(myLocale, searchText, snapshot.data[0], snapshot.data[1]);
+          return _getBody(myLocale, searchText, snapshot.data?[0] as Map, snapshot.data?[1] as Map);
         default:
           return Container(
             child: Center(

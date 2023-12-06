@@ -16,12 +16,12 @@ class SettingOffline extends StatefulWidget {
 }
 
 class _SettingOfflineState extends State<SettingOffline> {
-  FirebaseAnalytics _firebaseAnalytics;
-  int _familiesTotal;
-  int _familiesDownloaded;
-  int _plantsTotal;
-  int _plantsDownloaded;
-  int _downloadStatus; // 0: initial, 1: downloading,  2: successful, 3: failed
+  FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
+  int _familiesDownloaded = 0;
+  int _familiesTotal = 1000;
+  int _plantsDownloaded = 0;
+  int _plantsTotal = 1000;
+  int _downloadStatus = 0; // 0: initial, 1: downloading,  2: successful, 3: failed
 
   onFamilyDownload(int position, int total) {
     if (mounted) {
@@ -63,18 +63,6 @@ class _SettingOfflineState extends State<SettingOffline> {
     await _firebaseAnalytics.logEvent(name: 'offline_download', parameters: {
       'status': status
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _firebaseAnalytics = FirebaseAnalytics.instance;
-
-    _downloadStatus = 0;
-    _familiesDownloaded = 0;
-    _plantsDownloaded = 0;
-    _familiesTotal = 1000;
-    _plantsTotal = 1000;
   }
 
   @override

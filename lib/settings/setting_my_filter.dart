@@ -15,90 +15,88 @@ class SettingMyFilter extends StatefulWidget {
 }
 
 class _SettingMyFilterState extends State<SettingMyFilter> {
-  List<String> _myFilter;
+  List<String> _myFilter = <String>[];
 
   Widget _getBody(BuildContext context, List<String> myFilter) {
     const TextStyle filterTextStyle = TextStyle(fontSize: 20.0);
     var filterWidgets = <Widget>[];
 
-    if (myFilter != null) {
-      for (String item in myFilter) {
-        filterWidgets.add(Container(
-            padding: EdgeInsets.all(10.0),
-            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text(
-                getFilterText(context, item),
-                style: filterTextStyle,
-              ),
-              Row(
-                children: [
-                  item == myFilter.first
-                      ? Container(
-                    width: 50.0,
-                  )
-                      : IconButton(
-                    icon: Icon(Icons.arrow_upward),
-                    onPressed: () {
-                      var newFilter = <String>[];
-                      for (var i = 0; i < myFilter.length; i++) {
-                        if (i + 1 == myFilter.indexOf(item)) {
-                          newFilter.add(myFilter[i + 1]);
-                        } else if (i == myFilter.indexOf(item)) {
-                          newFilter.add(myFilter[i - 1]);
-                        } else {
-                          newFilter.add(myFilter[i]);
-                        }
+    for (String item in myFilter) {
+      filterWidgets.add(Container(
+          padding: EdgeInsets.all(10.0),
+          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Text(
+              getFilterText(context, item),
+              style: filterTextStyle,
+            ),
+            Row(
+              children: [
+                item == myFilter.first
+                    ? Container(
+                  width: 50.0,
+                )
+                    : IconButton(
+                  icon: Icon(Icons.arrow_upward),
+                  onPressed: () {
+                    var newFilter = <String>[];
+                    for (var i = 0; i < myFilter.length; i++) {
+                      if (i + 1 == myFilter.indexOf(item)) {
+                        newFilter.add(myFilter[i + 1]);
+                      } else if (i == myFilter.indexOf(item)) {
+                        newFilter.add(myFilter[i - 1]);
+                      } else {
+                        newFilter.add(myFilter[i]);
                       }
-                      setState(() {
-                        _myFilter = newFilter;
-                      });
-                    },
-                  ),
-                  item == myFilter.last
-                      ? Container(
-                    width: 50.0,
-                  )
-                      : IconButton(
-                    icon: Icon(Icons.arrow_downward),
-                    onPressed: () {
-                      var newFilter = <String>[];
-                      for (var i = 0; i < myFilter.length; i++) {
-                        if (i == myFilter.indexOf(item)) {
-                          newFilter.add(myFilter[i + 1]);
-                        } else if (i == myFilter.indexOf(item) + 1) {
-                          newFilter.add(myFilter[i - 1]);
-                        } else {
-                          newFilter.add(myFilter[i]);
-                        }
+                    }
+                    setState(() {
+                      _myFilter = newFilter;
+                    });
+                  },
+                ),
+                item == myFilter.last
+                    ? Container(
+                  width: 50.0,
+                )
+                    : IconButton(
+                  icon: Icon(Icons.arrow_downward),
+                  onPressed: () {
+                    var newFilter = <String>[];
+                    for (var i = 0; i < myFilter.length; i++) {
+                      if (i == myFilter.indexOf(item)) {
+                        newFilter.add(myFilter[i + 1]);
+                      } else if (i == myFilter.indexOf(item) + 1) {
+                        newFilter.add(myFilter[i - 1]);
+                      } else {
+                        newFilter.add(myFilter[i]);
                       }
-                      setState(() {
-                        _myFilter = newFilter;
-                      });
-                    },
-                  ),
-                  myFilter.length == minFilterAttributes
-                      ? Container(
-                    width: 50.0,
-                  )
-                      : IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      var newFilter = <String>[];
-                      for (var i = 0; i < myFilter.length; i++) {
-                        if (i != myFilter.indexOf(item)) {
-                          newFilter.add(myFilter[i]);
-                        }
+                    }
+                    setState(() {
+                      _myFilter = newFilter;
+                    });
+                  },
+                ),
+                myFilter.length == minFilterAttributes
+                    ? Container(
+                  width: 50.0,
+                )
+                    : IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () {
+                    var newFilter = <String>[];
+                    for (var i = 0; i < myFilter.length; i++) {
+                      if (i != myFilter.indexOf(item)) {
+                        newFilter.add(myFilter[i]);
                       }
+                    }
 
-                      setState(() {
-                        _myFilter = newFilter;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ])));
-      }
+                    setState(() {
+                      _myFilter = newFilter;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ])));
     }
 
     filterWidgets.add(Container(
@@ -107,7 +105,7 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
     ));
 
     for (String item in filterAttributes) {
-      if (myFilter != null && myFilter.indexOf(item) == -1) {
+      if (myFilter.indexOf(item) == -1) {
         filterWidgets.add(Container(
             padding: EdgeInsets.all(10.0),
             child: Row(
@@ -133,7 +131,7 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
     filterWidgets.add(Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
       TextButton(
         style: TextButton.styleFrom(
-          primary: Colors.black,
+          foregroundColor: Colors.black,
           backgroundColor: Colors.lightBlueAccent,
         ),
         child: Text(S.of(context).apply,
@@ -144,17 +142,17 @@ class _SettingMyFilterState extends State<SettingMyFilter> {
         onPressed: () {
           Prefs.setStringList(keyMyFilter, _myFilter).then((success) {
             String initialRoute = '/' + filterColor;
-            if (_myFilter != null && _myFilter.length > 0) {
+            if (_myFilter.length > 0) {
               initialRoute = '/' + _myFilter[0];
             }
-            Preferences.myFilterAttributes = _myFilter == null ? filterAttributes : _myFilter;
+            Preferences.myFilterAttributes = _myFilter.isEmpty ? filterAttributes : _myFilter;
             Navigator.pushNamedAndRemoveUntil(context, initialRoute, (_) => false);
           });
         },
       ),
       TextButton(
         style: TextButton.styleFrom(
-          primary: Colors.black,
+          foregroundColor: Colors.black,
           backgroundColor: Colors.lightBlueAccent,
 
         ),

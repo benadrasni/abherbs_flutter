@@ -42,8 +42,8 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           productObservations,
           productPhotoSearch,
         ];
-  StreamSubscription<List<PurchaseDetails>> _subscription;
-  Future<ProductDetailsResponse> _productsF;
+  late StreamSubscription<List<PurchaseDetails>> _subscription;
+  late Future<ProductDetailsResponse> _productsF;
 
   Future<void> _logCancelledPurchaseEvent(key, String productId) async {
     if (key.currentState != null && key.currentState.mounted) {
@@ -116,7 +116,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     if (value.isNotEmpty) {
       button = TextButton(
         style: ElevatedButton.styleFrom(
-          primary: Theme.of(context).secondaryHeaderColor, // background
+          backgroundColor: Theme.of(context).secondaryHeaderColor, // background
         ),
         child: Text(S.of(context).video,
             style: TextStyle(
@@ -136,7 +136,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     buttons.add(
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: isPurchased ? Theme.of(context).secondaryHeaderColor : Theme.of(context).primaryColor, // background
+          backgroundColor: isPurchased ? Theme.of(context).secondaryHeaderColor : Theme.of(context).primaryColor, // background
         ),
         onPressed: () {
           if (!isPurchased) {
@@ -161,7 +161,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
         case productOffline:
           buttons.add(ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).primaryColor, // background
+              backgroundColor: Theme.of(context).primaryColor, // background
             ),
             onPressed: () {
               Navigator.push(
@@ -178,7 +178,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
         case productCustomFilter:
           buttons.add(ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).primaryColor, // background
+              backgroundColor: Theme.of(context).primaryColor, // background
             ),
             onPressed: () {
               Navigator.push(
@@ -193,10 +193,10 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           ));
           break;
         case productObservations:
-          if (Purchases.hasLifetimeSubscription == null || !Purchases.hasLifetimeSubscription) {
+          if (!Purchases.hasLifetimeSubscription) {
             buttons.add(ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).primaryColor, // background
+                backgroundColor: Theme.of(context).primaryColor, // background
               ),
               onPressed: () {
                 Navigator.push(
@@ -237,7 +237,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                     child: Container(
                       padding: EdgeInsets.all(10.0),
                       child: Text(
-                        snapshot.error is PlatformException ? (snapshot.error as PlatformException).message : snapshot.error.toString(),
+                        (snapshot.error is PlatformException ? (snapshot.error as PlatformException).message : snapshot.error?.toString()) ?? "",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 16.0),
                       ),
@@ -260,7 +260,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                     ),
                   ),
                 ));
-                _cards.addAll(snapshot.data.productDetails.map((ProductDetails product) {
+                _cards.addAll(snapshot.data?.productDetails.map((ProductDetails product) {
                   bool isPurchased = Purchases.isPurchased(product.id);
                   return Card(
                     child: Container(
@@ -298,7 +298,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
                       ]),
                     ),
                   );
-                }).toList());
+                }) as Iterable<Card>);
               }
 
               return ListView(

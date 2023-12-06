@@ -13,7 +13,7 @@ Widget searchTaxonomy(Locale myLocale, String searchText,
     builder: (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
       switch (snapshot.connectionState) {
         case ConnectionState.done:
-          return _getBody(myLocale, searchText, snapshot.data[0], snapshot.data[1]);
+          return _getBody(myLocale, searchText, snapshot.data?[0] as Map, snapshot.data?[1] as Map);
         default:
           return Container(
             child: Center(
@@ -34,7 +34,7 @@ Widget _getBody(Locale myLocale, String searchText, Map<dynamic, dynamic> apgIV,
     child: ListView.builder(
       itemCount: _taxons.length,
       itemBuilder: (BuildContext context, int index) {
-        int offsetInt = _taxons[index].offset * 2;
+        int offsetInt = _taxons[index].offset! * 2;
         double offset = offsetInt.toDouble();
         return GestureDetector(
           child: Container(
@@ -58,7 +58,7 @@ Widget _getBody(Locale myLocale, String searchText, Map<dynamic, dynamic> apgIV,
                 ),
                 Expanded(
                   child: Text(
-                    getTaxonLabel(context, _taxons[index].type),
+                    getTaxonLabel(context, _taxons[index].type!),
                     style: TextStyle(
                       fontSize: 16.0,
                     ),
@@ -73,7 +73,7 @@ Widget _getBody(Locale myLocale, String searchText, Map<dynamic, dynamic> apgIV,
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => PlantList({}, '',  rootReference.child(_taxons[index].path)), settings: RouteSettings(name: 'PlantList')),
+                    builder: (context) => PlantList({}, '',  rootReference.child(_taxons[index].path!)), settings: RouteSettings(name: 'PlantList')),
               );
             }
           },
@@ -84,7 +84,7 @@ Widget _getBody(Locale myLocale, String searchText, Map<dynamic, dynamic> apgIV,
 }
 
 Column _getName(PlantTaxon taxon) {
-  if (taxon.names != null && taxon.names.length > 0) {
+  if (taxon.names.length > 0) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -93,7 +93,7 @@ Column _getName(PlantTaxon taxon) {
           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
         ),
         Text(
-          taxon.latinName,
+          taxon.latinName!,
           style: TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
         ),
       ],
@@ -103,7 +103,7 @@ Column _getName(PlantTaxon taxon) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          taxon.latinName,
+          taxon.latinName!,
           style: TextStyle(fontSize: 16.0),
         )
       ],
@@ -112,12 +112,10 @@ Column _getName(PlantTaxon taxon) {
 }
 
 bool _isInNames(List<dynamic> names, String searchText) {
-  if (names != null && searchText != null) {
-    var searchTextWithoutDiacritics = removeDiacritics(searchText).toLowerCase();
-    for (String name in names) {
-      if (removeDiacritics(name).toLowerCase().contains(searchTextWithoutDiacritics)) {
-        return true;
-      }
+  var searchTextWithoutDiacritics = removeDiacritics(searchText).toLowerCase();
+  for (String name in names) {
+    if (removeDiacritics(name).toLowerCase().contains(searchTextWithoutDiacritics)) {
+      return true;
     }
   }
   return false;
