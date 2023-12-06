@@ -344,7 +344,7 @@ class _AppState extends State<App> {
               rootReference.child(firebasePlants).keepSynced(true);
               return plantsReference.child(name).once().then((event) {
                 if (event.snapshot.value != null && (event.snapshot.value as Map)['id'] != null) {
-                  Plant plant = Plant.fromJson(event.snapshot.key, event.snapshot.value);
+                  Plant plant = Plant.fromJson(event.snapshot.key ?? '', event.snapshot.value as Map);
                   return Future<MaterialPageRoute<dynamic>>(() {
                     return MaterialPageRoute(builder: (context) => PlantDetail(Localizations.localeOf(context), Map<String, String>(), plant), settings: RouteSettings(name: 'PlantDetail'));
                   });

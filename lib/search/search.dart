@@ -18,12 +18,12 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  int _currentIndex;
-  GlobalKey<ScaffoldState> _key;
-  Future<Map<dynamic, dynamic>> _nativeNamesF;
-  Future<Map<dynamic, dynamic>> _latinNamesF;
-  Future<Map<dynamic, dynamic>> _apgIVF;
-  Future<Map<dynamic, dynamic>> _translationsTaxonomyF;
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+  int _currentIndex = 0;
+  Future<Map<dynamic, dynamic>>? _nativeNamesF;
+  Future<Map<dynamic, dynamic>>? _latinNamesF;
+  Future<Map<dynamic, dynamic>>? _apgIVF;
+  Future<Map<dynamic, dynamic>>? _translationsTaxonomyF;
 
   final TextEditingController _filter = TextEditingController();
   String _searchText = '';
@@ -40,9 +40,6 @@ class _SearchState extends State<Search> {
   void initState() {
     super.initState();
     Offline.setKeepSynced(4, true);
-
-    _currentIndex = 0;
-    _key = new GlobalKey<ScaffoldState>();
   }
 
   Widget _getBody() {
@@ -51,32 +48,34 @@ class _SearchState extends State<Search> {
         if (_nativeNamesF == null) {
           searchReference.child(getLanguageCode(widget.myLocale.languageCode)).keepSynced(true);
           _nativeNamesF = searchReference.child(getLanguageCode(widget.myLocale.languageCode)).once().then((event) {
-            return event.snapshot.value;
+            return event.snapshot.value as Map;
           });
         }
         if (_latinNamesF == null) {
           searchReference.child(languageLatin).keepSynced(true);
           _latinNamesF = searchReference.child(languageLatin).once().then((event) {
-            return event.snapshot.value;
+            return event.snapshot.value as Map;
           });
         }
-        return searchNames(widget.myLocale, _searchText, _nativeNamesF, _latinNamesF);
+        return searchNames(widget.myLocale, _searchText, _nativeNamesF!, _latinNamesF!);
       case 1:
         if (_apgIVF == null) {
           apgIVReference.keepSynced(true);
           _apgIVF = apgIVReference.once().then((event) {
-            return event.snapshot.value;
+            return event.snapshot.value as Map;
           });
         }
         if (_translationsTaxonomyF == null) {
           translationsTaxonomyReference.child(getLanguageCode(widget.myLocale.languageCode)).keepSynced(true);
           _translationsTaxonomyF = translationsTaxonomyReference.child(getLanguageCode(widget.myLocale.languageCode)).once().then((event) {
-            return event.snapshot.value;
+            return event.snapshot.value as Map;
           });
         }
-        return searchTaxonomy(widget.myLocale, _searchText, _apgIVF, _translationsTaxonomyF);
+        return searchTaxonomy(widget.myLocale, _searchText, _apgIVF!, _translationsTaxonomyF!);
     }
-    return null;
+    return Column(
+      children: <Widget>[],
+    );
   }
 
   @override

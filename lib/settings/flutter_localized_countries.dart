@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class CountryNames {
-  static CountryNames of(BuildContext context) {
+  static CountryNames? of(BuildContext context) {
     return Localizations.of<CountryNames>(context, CountryNames);
   }
 
@@ -13,7 +13,7 @@ class CountryNames {
   final Map<String, String> data;
   CountryNames(this.locale, this.data);
 
-  String nameOf(String code) => data[code];
+  String nameOf(String code) => data[code]!;
 
   List<MapEntry<String, String>> get sortedByCode {
     return data.entries.toList()..sort((a, b) => a.key.compareTo(b.key));
@@ -26,7 +26,7 @@ class CountryNames {
 
 class CountryNamesLocalizationsDelegate extends LocalizationsDelegate<CountryNames> {
   final AssetBundle bundle;
-  const CountryNamesLocalizationsDelegate({this.bundle});
+  const CountryNamesLocalizationsDelegate({required this.bundle});
 
   Future<List<String>> locales() async {
     return List<String>.from(await _loadJSON('data/languages.json') as List<dynamic>);
@@ -48,7 +48,7 @@ class CountryNamesLocalizationsDelegate extends LocalizationsDelegate<CountryNam
       onFailure: (_) => 'en'
     );
     if (availableLocale == null) {
-      return null;
+      availableLocale = 'en';
     }
 
     final data = Map<String, String>.from(await _loadJSON('data/$availableLocale.json') as Map<dynamic, dynamic>);

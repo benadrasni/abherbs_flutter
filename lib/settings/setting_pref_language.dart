@@ -24,7 +24,7 @@ class _SettingPrefLanguageState extends State<SettingPrefLanguage> {
         itemBuilder: (context, index) {
           String key = languages.keys.elementAt(index);
           return ListTile(
-            title: Text(languages[key]),
+            title: Text(languages[key] ?? ''),
             onTap: () {
               Prefs.setString(keyPreferredLanguage, key).then((result) {
                 if (mounted) {

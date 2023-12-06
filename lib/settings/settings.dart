@@ -26,15 +26,15 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  FirebaseAnalytics _firebaseAnalytics;
-  Future<String> _prefLanguageF;
-  String _prefLanguage;
-  bool _downloadFinished;
-  Future<String> _myRegionF;
-  Future<bool> _alwaysMyRegionF;
-  Future<List<String>> _myFilterF;
-  Future<bool> _offlineF;
-  Future<bool> _scaleDownPhotosF;
+  FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
+  late Future<String> _prefLanguageF;
+  late String _prefLanguage;
+  late bool _downloadFinished;
+  late Future<String> _myRegionF;
+  late Future<bool> _alwaysMyRegionF;
+  late Future<List<String>> _myFilterF;
+  late Future<bool> _offlineF;
+  late Future<bool> _scaleDownPhotosF;
 
   void onDownloadFinished(bool result) {
     setState(() {
@@ -66,10 +66,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void _setMyRegion(String region) {
     setState(() {
-      _myRegionF = Prefs.setString(keyMyRegion, region).then((success) {
-        return region == null ? "" : region;
-      });
-      if (region == null) {
+      if (region.isEmpty) {
+        Prefs.remove(keyMyRegion);
+      } else {
+        _myRegionF = Prefs.setString(keyMyRegion, region).then((success) {
+          return region;
+        });
         _alwaysMyRegionF = Prefs.setBool(keyAlwaysMyRegion, false).then((success) {
           return false;
         });
@@ -102,7 +104,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _setMyFilter(List<String> filter) {
     setState(() {
       _myFilterF = Prefs.setStringList(keyMyFilter, filter).then((success) {
-        Preferences.myFilterAttributes = filter == null ? filterAttributes : filter;
+        Preferences.myFilterAttributes = filter.isEmpty ? filterAttributes : filter;
         return Preferences.myFilterAttributes;
       });
     });
@@ -161,7 +163,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Future<void> _logPrefLanguageEvent(String language) async {
     await _firebaseAnalytics.logEvent(name: 'setting', parameters: {
-      'type': 'preffered_language',
+      'type': 'preferred_language',
       'language': language
     });
   }
@@ -183,7 +185,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    _firebaseAnalytics = FirebaseAnalytics.instance;
     _prefLanguageF = Prefs.getStringF(keyPreferredLanguage);
     _prefLanguageF.then((language) {
       _prefLanguage = language;
@@ -218,8 +219,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           future: _prefLanguageF,
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
             var value = "";
-            if (snapshot.connectionState == ConnectionState.done) {
-              value = snapshot.data.isNotEmpty ? languages[snapshot.data] : "";
+            if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
+              value = languages[snapshot.data] as String;
             }
 
             return Text(
@@ -255,8 +256,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           future: _myRegionF,
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
             var value = "";
-            if (snapshot.connectionState == ConnectionState.done) {
-              value = snapshot.data.isNotEmpty ? getFilterDistributionValue(context, snapshot.data) : "";
+            if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
+              value = getFilterDistributionValue(context, snapshot.data);
             }
             return Text(
               value,
@@ -266,7 +267,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       trailing: IconButton(
         icon: Icon(Icons.delete),
         onPressed: () {
-          _setMyRegion(null);
+          _setMyRegion('');
         },
       ),
       onTap: () {
@@ -288,7 +289,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     widgets.add(FutureBuilder<String>(
         future: _myRegionF,
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done && snapshot.data.isNotEmpty) {
+          if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
             return ListTile(
               title: Text(
                 S.of(context).always_my_region_title,
@@ -303,7 +304,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
                     bool alwaysMyRegion = false;
                     if (snapshot.connectionState == ConnectionState.done) {
-                      alwaysMyRegion = snapshot.data;
+                      alwaysMyRegion = snapshot.data as bool;
                     }
                     return Switch(
                       value: alwaysMyRegion,
@@ -331,8 +332,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             future: _myFilterF,
             builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
               var value = "";
-              if (snapshot.connectionState == ConnectionState.done) {
-                value = snapshot.data
+              if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
+                value = snapshot.data!
                     .map((item) {
                       return getFilterText(context, item);
                     })
@@ -347,7 +348,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         trailing: IconButton(
           icon: Icon(Icons.delete),
           onPressed: () {
-            _setMyFilter(null);
+            _setMyFilter([]);
           },
         ),
         onTap: () {
@@ -373,7 +374,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           future: _offlineF,
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             return ListTile(
-              title: snapshot.data == null || !snapshot.data || _downloadFinished
+              title: snapshot.data == null || _downloadFinished
                   ? Text(
                       S.of(context).offline_title,
                       style: titleTextStyle,
@@ -387,7 +388,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).primaryColor, // background
+                            backgroundColor: Theme.of(context).primaryColor,
                           ),
                           child: Text(S.of(context).offline_download),
                           onPressed: () {
@@ -425,8 +426,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               future: _scaleDownPhotosF,
               builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
                 bool scaleDownPhotos = false;
-                if (snapshot.connectionState == ConnectionState.done) {
-                  scaleDownPhotos = snapshot.data;
+                if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
+                  scaleDownPhotos = snapshot.data as bool;
                 }
                 return Switch(
                   value: scaleDownPhotos,

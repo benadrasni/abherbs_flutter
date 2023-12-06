@@ -29,8 +29,8 @@ class _SubscriptionState extends State<Subscription> {
           subscriptionMonthly,
           subscriptionYearly,
         ];
-  StreamSubscription<List<PurchaseDetails>> _subscription;
-  Future<ProductDetailsResponse> _subscriptionsF;
+  late StreamSubscription<List<PurchaseDetails>> _subscription;
+  late Future<ProductDetailsResponse> _subscriptionsF;
 
   Future<void> _logCancelledSubscriptionEvent(key, String productId) async {
     if (key.currentState != null && key.currentState.mounted) {
@@ -66,8 +66,8 @@ class _SubscriptionState extends State<Subscription> {
     });
   }
 
-  GooglePlayPurchaseDetails _getOldSubscription(ProductDetails productDetails, Map<String, PurchaseDetails> purchases) {
-    GooglePlayPurchaseDetails oldSubscription;
+  GooglePlayPurchaseDetails? _getOldSubscription(ProductDetails productDetails, Map<String, PurchaseDetails> purchases) {
+    GooglePlayPurchaseDetails? oldSubscription;
     if (productDetails.id == subscriptionMonthly &&  purchases[subscriptionYearly] != null) {
       oldSubscription = purchases[subscriptionYearly] as GooglePlayPurchaseDetails;
     } else if (productDetails.id == subscriptionYearly && purchases[subscriptionMonthly] != null) {
@@ -120,7 +120,7 @@ class _SubscriptionState extends State<Subscription> {
                   child: Container(
                     padding: EdgeInsets.all(10.0),
                     child: Text(
-                      snapshot.error is PlatformException ? (snapshot.error as PlatformException).message : snapshot.error.toString(),
+                      (snapshot.error is PlatformException ? (snapshot.error as PlatformException).message : snapshot.error?.toString()) ?? "",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16.0),
                     ),
@@ -154,9 +154,9 @@ class _SubscriptionState extends State<Subscription> {
                 _cards.add(Card(
                   child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: texts),
                 ));
-                _cards.addAll(snapshot.data.productDetails.map((ProductDetails subscription) {
+                _cards.addAll(snapshot.data?.productDetails.map((ProductDetails subscription) {
                   bool isPurchased = Purchases.isPurchased(subscription.id);
-                  PurchaseDetails oldSubscription = _getOldSubscription(subscription, Purchases.purchases);
+                  PurchaseDetails? oldSubscription = _getOldSubscription(subscription, Purchases.purchases);
                   return Card(
                     child: Container(
                       padding: EdgeInsets.all(10.0),
@@ -192,7 +192,7 @@ class _SubscriptionState extends State<Subscription> {
                         SizedBox(height: 10.0),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: isPurchased ? Theme.of(context).secondaryHeaderColor : Theme.of(context).primaryColor, // background
+                            backgroundColor: isPurchased ? Theme.of(context).secondaryHeaderColor : Theme.of(context).primaryColor, // background
                           ),
                           onPressed: () {
                             if (!isPurchased) {
@@ -236,7 +236,7 @@ class _SubscriptionState extends State<Subscription> {
                       ]),
                     ),
                   );
-                }).toList());
+                }) as Iterable<Card>);
 
                 _cards.add(Card(
                   child: Container(
