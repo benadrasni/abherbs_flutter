@@ -31,10 +31,10 @@ class Plant{
     heightTo = data['heightTo'] ?? 0;
     toxicityClass = data['toxicityClass'] ?? 0;
     illustrationUrl = data['illustrationUrl'];
-    photoUrls = data['photoUrls'];
-    videoUrls = data['videoUrls'];
-    sourceUrls = data['sourceUrls'];
-    synonyms = data['synonyms'];
-    wikiLinks = data['wikilinks'];
+    photoUrls = data['photoUrls'] ?? [];
+    videoUrls = data['videoUrls'] ?? [];
+    sourceUrls = data['sourceUrls'] ?? [];
+    synonyms = data['synonyms'] ?? [];
+    wikiLinks = data['wikilinks'] ?? [];
   }
 }

@@ -481,9 +481,10 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
 
 Widget _getNames(BuildContext context, Plant plant, PlantTranslation? plantTranslation, GlobalKey<ScaffoldState> key) {
   var names = <Widget>[];
+  var label = plantTranslation?.label ?? plant.name;
   names.add(GestureDetector(
     child: Text(
-      plantTranslation?.label ?? plant.name,
+      label,
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 22.0,
@@ -491,7 +492,7 @@ Widget _getNames(BuildContext context, Plant plant, PlantTranslation? plantTrans
       textAlign: TextAlign.center,
     ),
     onLongPress: () {
-      Clipboard.setData(new ClipboardData(text: plantTranslation?.label));
+      Clipboard.setData(new ClipboardData(text: label));
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(S.of(context).snack_copy),
       ));
@@ -508,7 +509,7 @@ Widget _getNames(BuildContext context, Plant plant, PlantTranslation? plantTrans
         textAlign: TextAlign.center,
       ),
       onLongPress: () {
-        Clipboard.setData(new ClipboardData(text: plantTranslation.label));
+        Clipboard.setData(new ClipboardData(text: label));
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(S.of(context).snack_copy),
         ));

@@ -273,8 +273,8 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
           height: 40.0,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Colors.blue, // background
-              onPrimary: Colors.white, // foreground
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
               elevation: 5.0,
               shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
             ),

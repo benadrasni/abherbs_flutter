@@ -33,9 +33,9 @@ class _ColorState extends State<Color> {
   GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   Map<String, String> _filter = Map<String, String>();
   late StreamSubscription<firebase_auth.User?> _listener;
+  Future<bool> _isNewVersionF =  Future.value(false);
   Future<int>? _countF;
   Future<String>? _rateStateF;
-  Future<bool>? _isNewVersionF;
   BannerAd? _ad;
 
   _navigate(String value) {
@@ -93,7 +93,7 @@ class _ColorState extends State<Color> {
     _isNewVersionF = PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       return FirebaseDatabase.instance.ref().child(firebaseVersions).child(Platform.isAndroid ? firebaseAttributeAndroid : firebaseAttributeIOS).once().then((event) {
         return int.parse(packageInfo.buildNumber) < (event.snapshot.value as int);
-      });
+      }).onError((error, stackTrace) => false);
     });
 
     _setCount();
@@ -199,7 +199,7 @@ class _ColorState extends State<Color> {
               return FutureBuilder<bool>(
                   future: _isNewVersionF,
                   builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
+                    if (snapshot.connectionState == ConnectionState.done && snapshot.hasData && snapshot.data!) {
                       return Container(
                         padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                         decoration: new BoxDecoration(

@@ -23,8 +23,8 @@ class ObservationView extends StatefulWidget {
 }
 
 class _ObservationViewState extends State<ObservationView> {
-  DateFormat _dateFormat;
-  DateFormat _timeFormat;
+  late DateFormat _dateFormat;
+  late DateFormat _timeFormat;
 
   @override
   void initState() {
@@ -53,14 +53,14 @@ class _ObservationViewState extends State<ObservationView> {
     Locale myLocale = Localizations.localeOf(context);
     Future<String> nameF = translationCache.containsKey(widget.observation.plant)
         ? Future<String>(() {
-            return translationCache[widget.observation.plant];
+            return translationCache[widget.observation.plant]!;
           })
         : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(widget.observation.plant).child(firebaseAttributeLabel).once().then((event) {
             if (event.snapshot.value != null) {
-              translationCache[widget.observation.plant] = event.snapshot.value;
-              return event.snapshot.value;
+              translationCache[widget.observation.plant] = event.snapshot.value as String;
+              return event.snapshot.value as String;
             } else {
-              return null;
+              return widget.observation.plant;
             }
           });
 
@@ -72,7 +72,7 @@ class _ObservationViewState extends State<ObservationView> {
             String labelLocal = widget.observation.plant;
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.data != null) {
-                labelLocal = snapshot.data;
+                labelLocal = snapshot.data!;
               }
             }
             return ListTile(
@@ -109,7 +109,7 @@ class _ObservationViewState extends State<ObservationView> {
             width: mapWidth,
             height: mapHeight,
           ),
-          imageUrl: getMapImageUrl(widget.observation.latitude, widget.observation.longitude, mapWidth, mapHeight),
+          imageUrl: getMapImageUrl(widget.observation.latitude!, widget.observation.longitude!, mapWidth, mapHeight),
         ),
         onPressed: () {
           Navigator.push(
@@ -157,13 +157,13 @@ class _ObservationViewState extends State<ObservationView> {
       ),
     ));
 
-    if (Auth.appUser != null && widget.observation.note != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(Auth.appUser.uid)) {
+    if (Auth.appUser != null && widget.observation.note != null && widget.observation.note!.isNotEmpty && widget.observation.id!.startsWith(Auth.appUser!.uid)) {
       widgets.add(Card(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
             alignment: Alignment.topLeft,
             child: Text(
-              widget.observation.note,
+              widget.observation.note!,
               style: TextStyle(fontSize: 16.0),
               textAlign: TextAlign.start,
             ),

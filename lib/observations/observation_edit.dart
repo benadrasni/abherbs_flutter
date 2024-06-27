@@ -10,13 +10,13 @@ import 'package:abherbs_flutter/observations/observation_map.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:datetime_picker_formfield_new/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:exif/exif.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class ObservationEdit extends StatefulWidget {
   final Locale myLocale;
@@ -31,10 +31,10 @@ class ObservationEdit extends StatefulWidget {
 class _ObservationEditState extends State<ObservationEdit> {
   final ImagePicker _picker = ImagePicker();
 
-  GlobalKey<ScaffoldState> _key;
-  Future<bool> _scaleDownPhotosF;
-  Observation _observation;
-  DateFormat _dateFormat;
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+  late Future<bool> _scaleDownPhotosF;
+  late Observation _observation;
+  late DateFormat _dateFormat;
   TextEditingController _noteController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
   PageController _pageController = PageController();
@@ -60,23 +60,23 @@ class _ObservationEditState extends State<ObservationEdit> {
       return false;
     } else {
       if (_observation.id == null) {
-        _observation.id = Auth.appUser.uid + '_' + DateTime.now().millisecondsSinceEpoch.toString();
+        _observation.id = Auth.appUser!.uid + '_' + DateTime.now().millisecondsSinceEpoch.toString();
       }
       _observation.order = -1 * _observation.date.millisecondsSinceEpoch;
       _observation.note = _noteController.text.isNotEmpty ? _noteController.text : null;
 
       await privateObservationsReference
-          .child(Auth.appUser.uid)
+          .child(Auth.appUser!.uid)
           .child(firebaseObservationsByDate)
           .child(firebaseAttributeList)
-          .child(_observation.id)
+          .child(_observation.id!)
           .set(_observation.toJson());
       await privateObservationsReference
-          .child(Auth.appUser.uid)
+          .child(Auth.appUser!.uid)
           .child(firebaseObservationsByPlant)
-          .child(_observation.plant)
+          .child(_observation.plant!)
           .child(firebaseAttributeList)
-          .child(_observation.id)
+          .child(_observation.id!)
           .set(_observation.toJson());
       return true;
     }
@@ -87,23 +87,27 @@ class _ObservationEditState extends State<ObservationEdit> {
     var image = await _picker.pickImage(source: source, maxWidth: scaleDownPhotos ? imageSizeScaleDown : null);
     if (image != null) {
       Map<String, IfdTag> exifData = await readExifFromBytes(await image.readAsBytes());
-      IfdTag dateTime = exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime'];
+      IfdTag? dateTime = exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime'];
       for (String path in _observation.photoPaths) {
-        File file = await Offline.getLocalFile(path);
-        Map<String, IfdTag> exifDataFile = await readExifFromBytes(await file.readAsBytes());
-        IfdTag dateTimeFile = exifDataFile['EXIF DateTimeOriginal'] ?? exifDataFile['Image DateTime'];
-        if (dateTime != null && dateTimeFile != null && dateTime.toString() == dateTimeFile.toString()) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(S.of(context).observation_photo_duplicate),
-          ));
-          return;
+        File? file = await Offline.getLocalFile(path);
+        if (file != null) {
+          Map<String, IfdTag> exifDataFile = await readExifFromBytes(await file.readAsBytes());
+          IfdTag? dateTimeFile = exifDataFile['EXIF DateTimeOriginal'] ?? exifDataFile['Image DateTime'];
+          if (dateTime != null && dateTimeFile != null && dateTime.toString() == dateTimeFile.toString()) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(S
+                  .of(context)
+                  .observation_photo_duplicate),
+            ));
+            return;
+          }
         }
       }
 
       // store file
-      var dir = storageObservations + Auth.appUser.uid + '/' + _observation.plant.replaceAll(' ', '_');
+      var dir = storageObservations + Auth.appUser!.uid + '/' + _observation.plant!.replaceAll(' ', '_');
       var prefix = "unknown_";
-      var names = _observation.plant.toLowerCase().split(' ');
+      var names = _observation.plant!.toLowerCase().split(' ');
       if (names.length > 1) {
         prefix = names[0].substring(0, 1) + names[1].substring(0, 1) + '_';
       }
@@ -117,16 +121,16 @@ class _ObservationEditState extends State<ObservationEdit> {
       _observation.photoPaths.add('$dir/$filename');
 
       // store exif data
-      if (exifData != null && exifData.isNotEmpty) {
+      if (exifData.isNotEmpty) {
         var latitude = getLatitudeFromExif(exifData['GPS GPSLatitudeRef'], exifData['GPS GPSLatitude']);
-        if (latitude != null) {
+        if (latitude != 0.0) {
           _observation.latitude = latitude;
         }
         var longitude = getLongitudeFromExif(exifData['GPS GPSLongitudeRef'], exifData['GPS GPSLongitude']);
-        if (longitude != null) {
+        if (longitude != 0.0) {
           _observation.longitude = longitude;
         }
-        _observation.date = getDateTimeFromExif(exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime']) ?? DateTime.now();
+        _observation.date = getDateTimeFromExif(exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime']);
         _dateController.text = _dateFormat.format(_observation.date);
       }
       if (_observation.photoPaths.length > 1) {
@@ -148,17 +152,17 @@ class _ObservationEditState extends State<ObservationEdit> {
 
     if (_observation.id != null) {
       await privateObservationsReference
-          .child(Auth.appUser.uid)
+          .child(Auth.appUser!.uid)
           .child(firebaseObservationsByDate)
           .child(firebaseAttributeList)
-          .child(_observation.id)
+          .child(_observation.id!)
           .remove();
       await privateObservationsReference
-          .child(Auth.appUser.uid)
+          .child(Auth.appUser!.uid)
           .child(firebaseObservationsByPlant)
-          .child(_observation.plant)
+          .child(_observation.plant!)
           .child(firebaseAttributeList)
-          .child(_observation.id)
+          .child(_observation.id!)
           .remove();
     }
   }
@@ -166,12 +170,11 @@ class _ObservationEditState extends State<ObservationEdit> {
   @override
   void initState() {
     super.initState();
-    _key = GlobalKey<ScaffoldState>();
     _scaleDownPhotosF = Prefs.getBoolF(keyScaleDownPhotos, false);
     _observation = Observation.from(widget.observation);
     initializeDateFormatting();
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString()).add_jm();
-    _noteController.text = _observation.note;
+    _noteController.text = _observation.note!;
     _dateController.text = _dateFormat.format(_observation.date);
   }
 
@@ -191,19 +194,19 @@ class _ObservationEditState extends State<ObservationEdit> {
     Locale myLocale = Localizations.localeOf(context);
     Future<String> nameF = translationCache.containsKey(_observation.plant)
         ? Future<String>(() {
-            return translationCache[_observation.plant];
+            return translationCache[_observation.plant]!;
           })
         : translationsReference
             .child(getLanguageCode(myLocale.languageCode))
-            .child(_observation.plant)
+            .child(_observation.plant!)
             .child(firebaseAttributeLabel)
             .once()
             .then((event) {
             if (event.snapshot.value != null) {
-              translationCache[_observation.plant] = event.snapshot.value;
-              return event.snapshot.value;
+              translationCache[_observation.plant!] = event.snapshot.value as String;
+              return event.snapshot.value as String;
             } else {
-              return null;
+              return _observation.plant!;
             }
           });
 
@@ -212,10 +215,10 @@ class _ObservationEditState extends State<ObservationEdit> {
       FutureBuilder<String>(
           future: nameF,
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-            String labelLocal = _observation.plant;
+            String labelLocal = _observation.plant!;
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.data != null) {
-                labelLocal = snapshot.data;
+                labelLocal = snapshot.data!;
               }
             }
             return Column(
@@ -225,7 +228,7 @@ class _ObservationEditState extends State<ObservationEdit> {
                     labelLocal,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
-                  subtitle: labelLocal != _observation.plant ? Text(_observation.plant) : null,
+                  subtitle: labelLocal != _observation.plant ? Text(_observation.plant!) : null,
                 ),
                 Padding(
                   padding: EdgeInsets.all(10.0),
@@ -272,7 +275,7 @@ class _ObservationEditState extends State<ObservationEdit> {
                 width: mapWidth,
                 height: mapHeight,
               ),
-          imageUrl: getMapImageUrl(_observation.latitude, _observation.longitude, mapWidth, mapHeight),
+          imageUrl: getMapImageUrl(_observation.latitude!, _observation.longitude!, mapWidth, mapHeight),
         ),
         onPressed: () {
           Navigator.push(
