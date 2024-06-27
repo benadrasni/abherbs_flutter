@@ -30,13 +30,13 @@ const Key _publicKey = Key('public');
 const Key _privateKey = Key('private');
 
 class _ObservationsState extends State<Observations> {
-  Key _key;
-  bool _isPublic;
-  Query _privateQuery;
-  Query _publicQuery;
-  Query _query;
-  Future<ConnectivityResult> _connectivityResultF;
-  int _observationsRemain;
+  Key _key = _privateKey;
+  late bool _isPublic;
+  late Query _privateQuery;
+  late Query _publicQuery;
+  late Query _query;
+  late Future<ConnectivityResult> _connectivityResultF;
+  int _observationsRemain = 0;
 
   onObservationUpload() {
     if (mounted) {
@@ -82,10 +82,10 @@ class _ObservationsState extends State<Observations> {
 
   void _setCountUpload() {
     if (Purchases.isSubscribed()) {
-      privateObservationsReference.child(Auth.appUser.uid).child(firebaseObservationsByDate).keepSynced(true);
-      privateObservationsReference.child(Auth.appUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeMock).set("mock").then((value) {
+      privateObservationsReference.child(Auth.appUser!.uid).child(firebaseObservationsByDate).keepSynced(true);
+      privateObservationsReference.child(Auth.appUser!.uid).child(firebaseObservationsByDate).child(firebaseAttributeMock).set("mock").then((value) {
         privateObservationsReference
-            .child(Auth.appUser.uid)
+            .child(Auth.appUser!.uid)
             .child(firebaseObservationsByDate)
             .child(firebaseAttributeList)
             .orderByChild(firebaseAttributeStatus)
@@ -93,7 +93,7 @@ class _ObservationsState extends State<Observations> {
             .once()
             .then((event) {
           setState(() {
-            _observationsRemain = (event.snapshot.value as List)?.length ?? 0;
+            _observationsRemain = (event.snapshot.value as List).length;
           });
         });
       });
@@ -119,7 +119,6 @@ class _ObservationsState extends State<Observations> {
   @override
   void initState() {
     super.initState();
-    _key = _privateKey;
     initializeDateFormatting();
     _connectivityResultF = Connectivity().checkConnectivity();
 
@@ -129,11 +128,10 @@ class _ObservationsState extends State<Observations> {
       _query = _publicQuery;
     } else {
       _isPublic = false;
-      _privateQuery = privateObservationsReference.child(Auth.appUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).orderByChild(firebaseAttributeOrder);
+      _privateQuery = privateObservationsReference.child(Auth.appUser!.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).orderByChild(firebaseAttributeOrder);
       _query = _privateQuery;
     }
 
-    _observationsRemain = 0;
     _setCountUpload();
     _startUpload();
   }
@@ -210,7 +208,7 @@ class _ObservationsState extends State<Observations> {
           ),
           query: _query,
           itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
-            Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
+            Observation observation = Observation.fromJson(snapshot.key, snapshot.value as Map);
             return ObservationView(myLocale, observation);
           }),
       floatingActionButton: FutureBuilder<ConnectivityResult>(

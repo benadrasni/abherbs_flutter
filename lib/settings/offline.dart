@@ -277,11 +277,13 @@ class Offline {
     return file;
   }
 
-  static Future<File> getLocalFile(String filename) async {
+  static Future<File?> getLocalFile(String filename) async {
     if (_rootPath.isEmpty) {
       _rootPath = (await getApplicationDocumentsDirectory()).path;
     }
-    File file = File('$_rootPath/$filename');
-    return file;
+    final File file = File('$_rootPath/$filename');
+    return file.exists().then((exists) {
+      return exists ? file : null;
+    });
   }
 }

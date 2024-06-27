@@ -19,7 +19,7 @@ class _ObservationsMapState extends State<ObservationsMap> {
     return Scaffold(
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
-          target: LatLng(widget.markers[widget.newestMarker].position.latitude, widget.markers[widget.newestMarker].position.longitude),
+          target: LatLng(widget.markers[widget.newestMarker]!.position.latitude, widget.markers[widget.newestMarker]!.position.longitude),
           zoom: 3,
         ),
         markers: Set<Marker>.of(widget.markers.values),

@@ -25,18 +25,17 @@ const Key _publicKey = Key('public');
 const Key _privateKey = Key('private');
 
 class _ObservationsPlantState extends State<ObservationsPlant> {
-  Key _key;
-  Query _privateQuery;
-  Query _publicQuery;
-  Query _query;
+  Key _key = _privateKey;
+  late Query _privateQuery;
+  late Query _publicQuery;
+  late Query _query;
 
   @override
   void initState() {
     super.initState();
-    _key = _privateKey;
     initializeDateFormatting();
     _privateQuery = privateObservationsReference
-        .child(Auth.appUser.uid)
+        .child(Auth.appUser!.uid)
         .child(firebaseObservationsByPlant)
         .child(widget.plantName)
         .child(firebaseAttributeList)
@@ -71,7 +70,7 @@ class _ObservationsPlantState extends State<ObservationsPlant> {
               if (snapshot.value == null) {
                 return Container();
               }
-              Observation observation = Observation.fromJson(snapshot.key, snapshot.value);
+              Observation observation = Observation.fromJson(snapshot.key, snapshot.value as Map);
               return ObservationPlantView(myLocale, observation, widget.parentKey);
             }),
       ],

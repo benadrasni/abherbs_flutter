@@ -368,6 +368,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                         return Column(
                           children: results.data!.map((result) {
                             if (result.path != null && result.path!.isNotEmpty) {
+                              var title = result.labelInLanguage!.isNotEmpty ? result.labelInLanguage! : result.labelLatin!;
                               return Container(
                                   decoration: BoxDecoration(color: Colors.lightBlueAccent),
                                   child: ListTile(
@@ -376,7 +377,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                           NumberFormat.percentPattern().format(result.confidence)),
                                       backgroundColor: Colors.white,
                                     ),
-                                    title: result.labelInLanguage!.isNotEmpty ? Text(result.labelInLanguage!) : Text(result.labelLatin!),
+                                    title: Text(title),
                                     subtitle: result.labelInLanguage!.isNotEmpty ? Text(result.labelLatin!) : null,
                                     trailing: Text(result.count.toString()),
                                     onTap: () {
@@ -390,7 +391,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                       }
                                     },
                                     onLongPress: () {
-                                      Clipboard.setData(new ClipboardData(text: result.labelLatin));
+                                      Clipboard.setData(new ClipboardData(text: title));
                                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                         content: Text(S.of(context).snack_copy),
                                       ));
@@ -405,7 +406,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                 title: result.commonName != null && result.commonName!.isNotEmpty ? Text(result.commonName!) : Text(result.labelLatin!),
                                 subtitle: result.commonName != null && result.commonName!.isNotEmpty ? Text(result.labelLatin!) : null,
                                 onLongPress: () {
-                                  Clipboard.setData(new ClipboardData(text: result.labelLatin));
+                                  Clipboard.setData(new ClipboardData(text: result.labelLatin!));
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                     content: Text(S.of(context).snack_copy),
                                   ));

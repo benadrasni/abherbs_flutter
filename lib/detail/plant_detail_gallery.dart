@@ -58,7 +58,7 @@ Widget getGallery(BuildContext context, Plant plant) {
     );
   }));
 
-  if (plant.sourceUrls != null) {
+  if (plant.sourceUrls.isNotEmpty) {
     cards.add(Card(
       child: Container(
         padding: EdgeInsets.all(5.0),
@@ -114,6 +114,7 @@ List<Widget> _getSources(BuildContext context, List<dynamic> sourceUrls) {
 }
 
 Widget _getImageButton(BuildContext context, String url) {
+  double screenWidth = MediaQuery.of(context).size.width - 20;
   var placeholder = Stack(alignment: Alignment.center, children: [
     CircularProgressIndicator(),
     Image(
@@ -124,6 +125,8 @@ Widget _getImageButton(BuildContext context, String url) {
     child: Container(
       padding: EdgeInsets.all(5.0),
       child: getImage(url, placeholder),
+      width: screenWidth,
+      height: screenWidth,
     ),
     onTap: () {
       Navigator.push(

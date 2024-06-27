@@ -241,7 +241,7 @@ getFilterDistributionValue(context, filterValue) {
 }
 
 String _getNextFilterAttribute(Map<String, String> filter) {
-  return Preferences.myFilterAttributes.firstWhere((attribute) => filter.containsKey(attribute), orElse: () => "");
+  return Preferences.myFilterAttributes.firstWhere((attribute) => !filter.containsKey(attribute), orElse: () => "");
 }
 
 Future<bool> clearFilter(Map<String, String> filter, Function() func) {
@@ -319,8 +319,8 @@ MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, Map<String, Stri
     default:
       route = MaterialPageRoute(builder: (context) => PlantList(filter, '', keysReference.child(getFilterKey(filter))), settings: RouteSettings(name: 'PlantList'));
   }
-  if (filterAttribute != null) {
-    if (filterRoutes[filterAttribute] != null && filterRoutes[filterAttribute]!.isActive) {
+  if (filterAttribute.isEmpty) {
+    if (filterRoutes.containsKey(filterAttribute) && filterRoutes[filterAttribute]!.isActive) {
       Navigator.removeRoute(context, filterRoutes[filterAttribute]!);
     }
     filterRoutes[filterAttribute] = route;

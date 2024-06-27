@@ -12,8 +12,8 @@ class ObservationUpload extends StatefulWidget {
 }
 
 class _ObservationUploadState extends State<ObservationUpload> {
-  int _observationsRemain;
-  int _uploadStatus; // 0: initial, 1: uploading,  2: successful, 3: failed
+  int _uploadStatus = 0; // 0: initial, 1: uploading,  2: successful, 3: failed
+  late int _observationsRemain;
 
   onObservationUpload() {
     if (mounted && _observationsRemain > 0) {
@@ -49,7 +49,6 @@ class _ObservationUploadState extends State<ObservationUpload> {
   void initState() {
     super.initState();
 
-    _uploadStatus = 0;
     _observationsRemain = widget.observationsToUpload;
   }
 

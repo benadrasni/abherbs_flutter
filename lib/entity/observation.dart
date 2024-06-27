@@ -16,7 +16,7 @@ const String observationStatusPublic = "public";
 class Observation{
   String? key;
   String? id;
-  String? plant;
+  String plant = "";
   DateTime date = DateTime.now();
   double? longitude;
   double? latitude;
