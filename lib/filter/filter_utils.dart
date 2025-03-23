@@ -236,7 +236,7 @@ getFilterDistributionValue(context, filterValue) {
       return S.of(context).antarctic_continent;
 
     default:
-      return null;
+      return "";
   }
 }
 

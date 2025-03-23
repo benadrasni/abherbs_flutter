@@ -19,8 +19,8 @@ class PlantTranslation {
 
   PlantTranslation.fromJson(Map data) {
     label = data['label'];
-    names = data['names'];
-    sourceUrls = data['sourceUrls'];
+    names = (data['names'] as List<dynamic>?) ?? [];
+    sourceUrls = (data['sourceUrls'] as List<dynamic>?) ?? [];
     wikipedia = data['wikipedia'];
     description = data['description'];
     flower = data['flower'];
