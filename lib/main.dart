@@ -52,10 +52,24 @@ Future<void> initializeFlutterFire() async {
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 }
 
-Future<Locale?> initializeLocale() async {
+Locale getDeviceLocale() {
+  // device locale could be "en", "en_US" or "en_US.UTF-8"
+  List<String> localeHelper = Platform.localeName.split(".")[0].split("_");
+  if (localeHelper.length > 1) {
+    return Locale(localeHelper[0], localeHelper[1]);
+  } else {
+    return Locale(localeHelper[0]);
+  }
+}
+
+Future<Locale> initializeLocale() async {
   return Prefs.getStringF(keyPreferredLanguage).then((String language) {
     var languageCountry = language.split('_');
-    return languageCountry.length < 2 ? null : Locale(languageCountry[0], languageCountry[1]);
+    if (languageCountry.length < 2) {
+      return getDeviceLocale();
+    } else {
+      return Locale(languageCountry[0], languageCountry[1]);
+    }
   });
 }
 
@@ -94,7 +108,7 @@ void main() {
       await Prefs.init();
       await AppTrackingTransparency.requestTrackingAuthorization();
       MobileAds.instance.initialize();
-      Locale? locale = await initializeLocale();
+      Locale locale = await initializeLocale();
       Map<String, String> filter = await initializeFilter();
       String initialRoute = await initializeRoute();
       runApp(App(locale, filter, initialRoute));
@@ -110,7 +124,7 @@ void main() {
 
 class App extends StatefulWidget {
   static BuildContext? currentContext;
-  final Locale? locale;
+  final Locale locale;
   final Map<String, String> filter;
   final String initialRoute;
   App(this.locale, this.filter, this.initialRoute);
@@ -128,18 +142,22 @@ class _AppState extends State<App> {
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
-  Locale? _locale;
+  late Locale _locale;
 
   Future<void> _logFailedPurchaseEvent() async {
     await _firebaseAnalytics.logEvent(name: 'purchase_failed');
   }
 
   changeLanguage(String language) {
-    var languageCountry = language.split('_');
-    setState(() {
-      translationCache = {};
-      _locale = language == null || language.isEmpty ? null : Locale(languageCountry![0], languageCountry![1]);
-    });
+    if (language.isEmpty) {
+      _locale = getDeviceLocale();
+    } else {
+      var languageCountry = language.split('_');
+      setState(() {
+        translationCache = {};
+        _locale = Locale(languageCountry[0], languageCountry[1]);
+      });
+    }
   }
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
@@ -352,15 +370,11 @@ class _AppState extends State<App> {
     }
   }
 
-  Locale localeResolution(Locale? savedLocale, Locale deviceLocale, Iterable<Locale> supportedLocales) {
-    if (savedLocale != null) {
-      return savedLocale;
-    }
-
+  Locale localeResolution(Locale savedLocale, Iterable<Locale> supportedLocales) {
     Locale? resultLocale;
     Map<String, Locale> defaultLocale = {};
     for (Locale locale in supportedLocales) {
-      if (locale.languageCode == deviceLocale.languageCode && locale.countryCode != null && locale.countryCode == deviceLocale.countryCode) {
+      if (locale.languageCode == savedLocale.languageCode && locale.countryCode == savedLocale.countryCode) {
         resultLocale = locale;
         break;
       }
@@ -372,7 +386,7 @@ class _AppState extends State<App> {
 
     if (resultLocale == null) {
       for (Locale locale in supportedLocales) {
-        if (locale.languageCode == deviceLocale.languageCode) {
+        if (locale.languageCode == savedLocale.languageCode) {
           resultLocale = defaultLocale[locale.languageCode];
           break;
         }
@@ -447,11 +461,8 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    Locale deviceLocale;
-    List<String> localeHelper = Platform.localeName.split("_");
-    deviceLocale = Locale(localeHelper[0], localeHelper.length > 1 ? localeHelper[1] : null);
     return MaterialApp(
-      locale: localeResolution(_locale, deviceLocale, S.delegate.supportedLocales),
+      locale: localeResolution(_locale, S.delegate.supportedLocales),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         S.delegate,

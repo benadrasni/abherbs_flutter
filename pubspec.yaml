@@ -42,7 +42,7 @@ dependencies:
   diacritic: 0.1.5
   path_provider: 2.1.2
   percent_indicator: 4.2.3
-  package_info_plus: 4.2.0
+  package_info_plus: 8.0.0
   image_picker: 1.0.7
   exif: 3.3.0
   datetime_picker_formfield_new: 2.1.0
@@ -51,9 +51,9 @@ dependencies:
   youtube_plyr_iframe: 2.0.7
   app_tracking_transparency: 2.0.4
   country_picker: 2.0.25
-  charts_flutter_updated: 0.13.0
+  community_charts_flutter: 1.0.4
   country_icons: 3.0.0
-  wakelock_plus: 1.1.2
+  wakelock_plus: 1.2.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

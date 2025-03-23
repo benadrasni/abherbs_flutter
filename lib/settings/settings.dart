@@ -219,8 +219,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           future: _prefLanguageF,
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
             var value = "";
-            if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
-              value = languages[snapshot.data] as String;
+            if (snapshot.connectionState == ConnectionState.done) {
+              value = snapshot.data!.isEmpty ? "" : languages[snapshot.data] as String;
             }
 
             return Text(

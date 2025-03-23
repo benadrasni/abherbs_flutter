@@ -71,18 +71,18 @@ class _PlantDetailState extends State<PlantDetail> {
   }
 
   onShare() {
-    Share.share(Uri.encodeFull('https://whatsthatflower.com/?plant=' + widget.plant.name! + '&lang=' + widget.myLocale.languageCode), subject: widget.plant.name);
+    Share.share(Uri.encodeFull('https://whatsthatflower.com/?plant=' + widget.plant.name + '&lang=' + widget.myLocale.languageCode), subject: widget.plant.name);
     _logShareEvent(widget.plant.name!);
   }
 
   Future<PlantTranslation> _getTranslation() {
-    return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(widget.plant.name!).once().then((event) {
+    return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(widget.plant.name).once().then((event) {
       PlantTranslation plantTranslation = event.snapshot.value == null ? PlantTranslation() : PlantTranslation.fromJson(event.snapshot.value as Map);
       if (plantTranslation.isTranslated()) {
         return plantTranslation;
       } else {
         plantTranslation.isTranslatedWithGT = true;
-        return translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name!).once().then((event) {
+        return translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name).once().then((event) {
           var plantTranslationGT = PlantTranslation.copy(plantTranslation);
           if (event.snapshot.value != null) {
             plantTranslationGT = PlantTranslation.fromJson(event.snapshot.value as Map);
