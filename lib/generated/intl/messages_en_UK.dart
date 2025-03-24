@@ -22,14 +22,16 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "color_message": MessageLookupByLibrary.simpleMessage(
-            "What\'s the colour of the flower? Choose the closest one."),
-        "favorite_empty": MessageLookupByLibrary.simpleMessage(
-            "There is no favourite flowers yet."),
-        "favorite_no_login": MessageLookupByLibrary.simpleMessage(
-            "List of favourite flowers is available only for logged users. Please log in."),
-        "favorite_title":
-            MessageLookupByLibrary.simpleMessage("Favourite flowers"),
-        "filter_color": MessageLookupByLibrary.simpleMessage("colour")
-      };
+    "color_message": MessageLookupByLibrary.simpleMessage(
+      "What\'s the colour of the flower? Choose the closest one.",
+    ),
+    "favorite_empty": MessageLookupByLibrary.simpleMessage(
+      "There is no favourite flowers yet.",
+    ),
+    "favorite_no_login": MessageLookupByLibrary.simpleMessage(
+      "List of favourite flowers is available only for logged users. Please log in.",
+    ),
+    "favorite_title": MessageLookupByLibrary.simpleMessage("Favourite flowers"),
+    "filter_color": MessageLookupByLibrary.simpleMessage("colour"),
+  };
 }

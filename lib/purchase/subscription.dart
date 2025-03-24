@@ -206,8 +206,7 @@ class _SubscriptionState extends State<Subscription> {
                                     changeSubscriptionParam: (oldSubscription != null)
                                         ? ChangeSubscriptionParam(
                                       oldPurchaseDetails: oldSubscription,
-                                      prorationMode: ProrationMode
-                                          .immediateWithTimeProration,
+                                      replacementMode: ReplacementMode.withTimeProration,
                                     )
                                         : null);
                               } else {
