@@ -91,8 +91,10 @@ String getFilterColorValue(context, filterValue) {
       return S.of(context).color_red;
     case '4':
       return S.of(context).color_blue;
-    default: // '5':
+    case '5':
       return S.of(context).color_green;
+    default:
+      return "";
   }
 }
 
@@ -108,8 +110,10 @@ String getFilterHabitatValue(context, filterValue) {
       return S.of(context).habitat_forest;
     case '5':
       return S.of(context).habitat_rock;
-    default: // '6':
+    case '6':
       return S.of(context).habitat_tree;
+    default:
+      return "";
   }
 }
 
@@ -124,7 +128,7 @@ getFilterPetalValue(context, filterValue) {
     case '4':
       return S.of(context).petal_zygomorphic;
     default:
-      return null;
+      return "";
   }
 }
 
