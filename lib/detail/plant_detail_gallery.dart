@@ -4,7 +4,7 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:youtube_plyr_iframe/youtube_plyr_iframe.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 List<YoutubePlayerController> controllers = [];
 
@@ -15,22 +15,21 @@ Widget getGallery(BuildContext context, Plant plant) {
     child: _getImageButton(context, storagePhotos + plant.illustrationUrl!),
   ));
 
-  if (plant.videoUrls != null && plant.videoUrls.length > 0) {
+  if (plant.videoUrls.length > 0) {
     cards.addAll(plant.videoUrls.map((url) {
-      controllers.add(YoutubePlayerController(
-        initialVideoId: YoutubePlayerController.convertUrlToId(url)!,
+      controllers.add(YoutubePlayerController.fromVideoId(
+        videoId: YoutubePlayerController.convertUrlToId(url)!,
+        autoPlay: false,
         params: YoutubePlayerParams(
-          autoPlay: false,
           showControls: false,
           showFullscreenButton: false,
           enableCaption: false,
-          desktopMode: true,
         ),
       ));
 
       return Card(
         child: Stack(children: [
-          YoutubePlayerIFrame(
+          YoutubePlayer(
             controller: controllers.last,
             aspectRatio: 16 / 9,
           ),
