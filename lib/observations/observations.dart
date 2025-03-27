@@ -31,7 +31,6 @@ const Key _privateKey = Key('private');
 
 class _ObservationsState extends State<Observations> {
   Key _key = _privateKey;
-  final Connectivity _connectivity = Connectivity();
   late bool _isPublic;
   late Query _privateQuery;
   late Query _publicQuery;
