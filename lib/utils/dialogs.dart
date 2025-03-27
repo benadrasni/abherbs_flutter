@@ -7,6 +7,8 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:flutter/material.dart';
 
+import '../purchase/enhancements.dart';
+
 Future<void> rateDialog(BuildContext context) async {
   return showDialog(
     context: context,
@@ -267,7 +269,12 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
                     fontWeight: FontWeight.bold,
                   )),
               onPressed: () {
-                Navigator.of(context).pop(1);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EnhancementsScreen({}), settings: RouteSettings(name: 'Enhancements')),
+                ).then((result) {
+                  Navigator.pop(context);
+                });
               },
             ),
             TextButton(
@@ -277,7 +284,7 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
                     fontWeight: FontWeight.bold,
                   )),
               onPressed: () {
-                Navigator.of(context).pop(0);
+                Navigator.pop(context);
               },
             ),
           ],

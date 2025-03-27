@@ -31,11 +31,12 @@ const Key _privateKey = Key('private');
 
 class _ObservationsState extends State<Observations> {
   Key _key = _privateKey;
+  final Connectivity _connectivity = Connectivity();
   late bool _isPublic;
   late Query _privateQuery;
   late Query _publicQuery;
   late Query _query;
-  late Future<ConnectivityResult> _connectivityResultF;
+  late Future<List<ConnectivityResult>> _connectivityResultF;
   int _observationsRemain = 0;
 
   onObservationUpload() {
@@ -101,7 +102,7 @@ class _ObservationsState extends State<Observations> {
   }
 
   void _startUpload() async {
-    if (await _connectivityResultF == ConnectivityResult.wifi) {
+    if ((await _connectivityResultF).contains(ConnectivityResult.wifi)) {
       Upload.upload(this.onObservationUpload, this.onObservationUploadFail, this.onUploadStart, this.onUploadFinish, this.onUploadFail);
     }
   }
@@ -211,9 +212,9 @@ class _ObservationsState extends State<Observations> {
             Observation observation = Observation.fromJson(snapshot.key, snapshot.value as Map);
             return ObservationView(myLocale, observation);
           }),
-      floatingActionButton: FutureBuilder<ConnectivityResult>(
+      floatingActionButton: FutureBuilder<List<ConnectivityResult>>(
           future: _connectivityResultF,
-          builder: (BuildContext context, AsyncSnapshot<ConnectivityResult> snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<List<ConnectivityResult>> snapshot) {
             Widget result = Container(width: 0.0, height: 0.0);
             switch (snapshot.connectionState) {
               case ConnectionState.done:
@@ -225,7 +226,7 @@ class _ObservationsState extends State<Observations> {
                       fit: BoxFit.fill,
                       child: FloatingActionButton(
                         onPressed: () {
-                          snapshot.data == ConnectivityResult.wifi
+                          snapshot.data!.contains(ConnectivityResult.wifi)
                               ? Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -236,7 +237,7 @@ class _ObservationsState extends State<Observations> {
                                   _setCountUpload();
                                 });
                         },
-                        child: Icon(snapshot.data == ConnectivityResult.wifi ? Icons.list : Icons.cloud_upload),
+                        child: Icon(snapshot.data!.contains(ConnectivityResult.wifi) ? Icons.list : Icons.cloud_upload),
                       ),
                     ),
                   );

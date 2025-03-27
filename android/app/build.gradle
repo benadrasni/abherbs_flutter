@@ -33,6 +33,17 @@ if (flutterVersionName == null) {
 }
 
 android {
+    namespace = "sk.ab.herbs"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
     signingConfigs {
         config {
             keyAlias keystoreProperties['keyAlias']
@@ -42,7 +53,7 @@ android {
         }
     }
 
-    compileSdkVersion 34
+    compileSdkVersion 35
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -54,8 +65,8 @@ android {
 
     defaultConfig {
         applicationId "sk.ab.herbs"
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdkVersion 23
+        targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -80,7 +91,7 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.10"
     implementation 'com.google.ads.mediation:applovin:12.3.0.0'
     implementation 'com.google.ads.mediation:facebook:6.16.0.0'
     testImplementation 'junit:junit:4.13.2'
