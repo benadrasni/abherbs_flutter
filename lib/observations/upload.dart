@@ -55,11 +55,11 @@ class Upload {
           }
           Observation observation = Observation.fromJson(key, (event.snapshot.value as Map)[key]);
           if (await _uploadObservation(observation)) {
-            await logsObservationsReference.child(Auth.appUser!.uid).child(date.millisecondsSinceEpoch.toString()).child(observation.id!).child(firebaseAttributeStatus).set(firebaseValueSuccess);
+            await logsObservationsReference.child(Auth.appUser!.uid).child(date.millisecondsSinceEpoch.toString()).child(observation.id).child(firebaseAttributeStatus).set(firebaseValueSuccess);
             count--;
             _onObservationUpload!();
           } else {
-            await logsObservationsReference.child(Auth.appUser!.uid).child(date.millisecondsSinceEpoch.toString()).child(observation.id!).child(firebaseAttributeStatus).set(firebaseValueFailure);
+            await logsObservationsReference.child(Auth.appUser!.uid).child(date.millisecondsSinceEpoch.toString()).child(observation.id).child(firebaseAttributeStatus).set(firebaseValueFailure);
             _onObservationUploadFail!();
           }
         }
@@ -86,15 +86,15 @@ class Upload {
     observation.status = firebaseValueReview;
 
     // save to public
-    await publicObservationsReference.child(firebaseObservationsByDate).child(firebaseAttributeList).child(observation.id!).set(observation.toJson());
-    await publicObservationsReference.child(firebaseObservationsByPlant).child(observation.plant).child(firebaseAttributeList).child(observation.id!).set(observation.toJson());
+    await publicObservationsReference.child(firebaseObservationsByDate).child(firebaseAttributeList).child(observation.id).set(observation.toJson());
+    await publicObservationsReference.child(firebaseObservationsByPlant).child(observation.plant).child(firebaseAttributeList).child(observation.id).set(observation.toJson());
 
     // update private
     await privateObservationsReference
         .child(Auth.appUser!.uid)
         .child(firebaseObservationsByDate)
         .child(firebaseAttributeList)
-        .child(observation.id!)
+        .child(observation.id)
         .child(firebaseAttributeStatus)
         .set(firebaseValuePublic);
     await privateObservationsReference
@@ -102,7 +102,7 @@ class Upload {
         .child(firebaseObservationsByPlant)
         .child(observation.plant)
         .child(firebaseAttributeList)
-        .child(observation.id!)
+        .child(observation.id)
         .child(firebaseAttributeStatus)
         .set(firebaseValuePublic);
     return true;
