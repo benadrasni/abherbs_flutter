@@ -103,10 +103,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void _setMyFilter(List<String> filter) {
     setState(() {
-      _myFilterF = Prefs.setStringList(keyMyFilter, filter).then((success) {
-        Preferences.myFilterAttributes = filter.isEmpty ? filterAttributes : filter;
-        return Preferences.myFilterAttributes;
-      });
+      if (filter.isEmpty) {
+        _myFilterF = Prefs.remove(keyMyFilter).then((success) {
+          Preferences.myFilterAttributes = filterAttributes;
+          return Preferences.myFilterAttributes;
+        });
+      } else {
+        _myFilterF = Prefs.setStringList(keyMyFilter, filter).then((success) {
+          Preferences.myFilterAttributes = filter;
+          return Preferences.myFilterAttributes;
+        });
+      }
     });
   }
 

@@ -77,8 +77,8 @@ Future<Map<String, String>> initializeFilter() async {
   return Prefs.getBoolF(keyAlwaysMyRegion, false).then((alwaysMyRegionValue) {
     Map<String, String> filter = {};
     if (alwaysMyRegionValue) {
-      return Prefs.getStringF(keyMyRegion, null).then((myRegionValue) {
-        if (myRegionValue != null) {
+      return Prefs.getStringF(keyMyRegion, '').then((myRegionValue) {
+        if (myRegionValue.isNotEmpty) {
           filter[filterDistribution] = myRegionValue;
         }
         return filter;
@@ -90,12 +90,8 @@ Future<Map<String, String>> initializeFilter() async {
 
 Future<String> initializeRoute() {
   return Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
-    String initialRoute = '/' + filterColor;
     Preferences.myFilterAttributes = myFilter;
-    if (myFilter != null && myFilter.length > 0) {
-      initialRoute = '/' + myFilter[0];
-    }
-    return initialRoute;
+    return '/' + myFilter[0];
   });
 }
 
