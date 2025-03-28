@@ -129,8 +129,8 @@ Future<void> favoriteDialog(BuildContext mainContext, GlobalKey<ScaffoldState> k
       });
 }
 
-Future<bool> deleteDialog(BuildContext mainContext, String title, String content) async {
-  return showDialog(
+Future<dynamic> deleteDialog(BuildContext mainContext, String title, String content) async {
+  return showDialog<bool>(
       context: mainContext,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -159,11 +159,11 @@ Future<bool> deleteDialog(BuildContext mainContext, String title, String content
             )
           ],
         );
-      }) as bool;
+      });
 }
 
-Future<bool> subscriptionDialog(BuildContext mainContext, String title, String content) async {
-  return showDialog(
+Future<dynamic> subscriptionDialog(BuildContext mainContext, String title, String content) async {
+  return showDialog<bool>(
       context: mainContext,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -195,7 +195,7 @@ Future<bool> subscriptionDialog(BuildContext mainContext, String title, String c
       }) as bool;
 }
 
-Future<bool> infoDialog(BuildContext mainContext, String title, String content) async {
+Future<void> infoDialog(BuildContext mainContext, String title, String content) async {
   return showDialog(
       context: mainContext,
       builder: (BuildContext context) {
@@ -215,7 +215,7 @@ Future<bool> infoDialog(BuildContext mainContext, String title, String content) 
             ),
           ],
         );
-      }) as bool;
+      });
 }
 
 Future<int> infoBuyDialog(BuildContext mainContext, String title, String content, String config, String credit) async {

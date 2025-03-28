@@ -55,6 +55,7 @@ class _ObservationsState extends State<Observations> {
       });
     }
   }
+
   onUploadFail() {
     if (mounted) {
       setState(() {
@@ -74,7 +75,8 @@ class _ObservationsState extends State<Observations> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ObservationLogs(Localizations.localeOf(context), 1),
+            builder: (context) =>
+                ObservationLogs(Localizations.localeOf(context), 1),
             settings: RouteSettings(name: 'ObservationLogs')),
       );
     }
@@ -82,8 +84,16 @@ class _ObservationsState extends State<Observations> {
 
   void _setCountUpload() {
     if (Purchases.isSubscribed()) {
-      privateObservationsReference.child(Auth.appUser!.uid).child(firebaseObservationsByDate).keepSynced(true);
-      privateObservationsReference.child(Auth.appUser!.uid).child(firebaseObservationsByDate).child(firebaseAttributeMock).set("mock").then((value) {
+      privateObservationsReference
+          .child(Auth.appUser!.uid)
+          .child(firebaseObservationsByDate)
+          .keepSynced(true);
+      privateObservationsReference
+          .child(Auth.appUser!.uid)
+          .child(firebaseObservationsByDate)
+          .child(firebaseAttributeMock)
+          .set("mock")
+          .then((value) {
         privateObservationsReference
             .child(Auth.appUser!.uid)
             .child(firebaseObservationsByDate)
@@ -93,7 +103,8 @@ class _ObservationsState extends State<Observations> {
             .once()
             .then((event) {
           setState(() {
-            _observationsRemain = (event.snapshot.value as List).length;
+            Map result = event.snapshot.value != null ? event.snapshot.value as Map : {};
+            _observationsRemain = result.length;
           });
         });
       });
@@ -102,7 +113,8 @@ class _ObservationsState extends State<Observations> {
 
   void _startUpload() async {
     if ((await _connectivityResultF).contains(ConnectivityResult.wifi)) {
-      Upload.upload(this.onObservationUpload, this.onObservationUploadFail, this.onUploadStart, this.onUploadFinish, this.onUploadFail);
+      Upload.upload(this.onObservationUpload, this.onObservationUploadFail,
+          this.onUploadStart, this.onUploadFinish, this.onUploadFail);
     }
   }
 
@@ -122,13 +134,20 @@ class _ObservationsState extends State<Observations> {
     initializeDateFormatting();
     _connectivityResultF = Connectivity().checkConnectivity();
 
-    _publicQuery = publicObservationsReference.child(firebaseObservationsByDate).child(firebaseAttributeList).orderByChild(firebaseAttributeOrder);
+    _publicQuery = publicObservationsReference
+        .child(firebaseObservationsByDate)
+        .child(firebaseAttributeList)
+        .orderByChild(firebaseAttributeOrder);
     if (widget.isPublicOnly) {
       _isPublic = true;
       _query = _publicQuery;
     } else {
       _isPublic = false;
-      _privateQuery = privateObservationsReference.child(Auth.appUser!.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).orderByChild(firebaseAttributeOrder);
+      _privateQuery = privateObservationsReference
+          .child(Auth.appUser!.uid)
+          .child(firebaseObservationsByDate)
+          .child(firebaseAttributeList)
+          .orderByChild(firebaseAttributeOrder);
       _query = _privateQuery;
     }
 
@@ -164,7 +183,9 @@ class _ObservationsState extends State<Observations> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ObservationLogs(Localizations.localeOf(context), 2), settings: RouteSettings(name: 'ObservationLogs')),
+                    builder: (context) =>
+                        ObservationLogs(Localizations.localeOf(context), 2),
+                    settings: RouteSettings(name: 'ObservationLogs')),
               );
             },
           )
@@ -204,16 +225,20 @@ class _ObservationsState extends State<Observations> {
           emptyChild: Container(
             padding: EdgeInsets.all(5.0),
             alignment: Alignment.center,
-            child: Text(S.of(context).observation_empty, style: TextStyle(fontSize: 20.0)),
+            child: Text(S.of(context).observation_empty,
+                style: TextStyle(fontSize: 20.0)),
           ),
           query: _query,
-          itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
-            Observation observation = Observation.fromJson(snapshot.key, snapshot.value as Map);
+          itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation,
+              int index) {
+            Observation observation =
+                Observation.fromJson(snapshot.key, snapshot.value as Map);
             return ObservationView(myLocale, observation);
           }),
       floatingActionButton: FutureBuilder<List<ConnectivityResult>>(
           future: _connectivityResultF,
-          builder: (BuildContext context, AsyncSnapshot<List<ConnectivityResult>> snapshot) {
+          builder: (BuildContext context,
+              AsyncSnapshot<List<ConnectivityResult>> snapshot) {
             Widget result = Container(width: 0.0, height: 0.0);
             switch (snapshot.connectionState) {
               case ConnectionState.done:
@@ -229,14 +254,20 @@ class _ObservationsState extends State<Observations> {
                               ? Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ObservationLogs(Localizations.localeOf(context), 0),
-                                      settings: RouteSettings(name: 'ObservationLogs')),
+                                      builder: (context) => ObservationLogs(
+                                          Localizations.localeOf(context), 0),
+                                      settings: RouteSettings(
+                                          name: 'ObservationLogs')),
                                 )
-                              : _uploadObservationDialog(_observationsRemain).then((value) {
+                              : _uploadObservationDialog(_observationsRemain)
+                                  .then((value) {
                                   _setCountUpload();
                                 });
                         },
-                        child: Icon(snapshot.data!.contains(ConnectivityResult.wifi) ? Icons.list : Icons.cloud_upload),
+                        child: Icon(
+                            snapshot.data!.contains(ConnectivityResult.wifi)
+                                ? Icons.list
+                                : Icons.cloud_upload),
                       ),
                     ),
                   );
@@ -251,7 +282,10 @@ class _ObservationsState extends State<Observations> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ObservationLogs(Localizations.localeOf(context), 0), settings: RouteSettings(name: 'ObservationLogs')),
+                                builder: (context) => ObservationLogs(
+                                    Localizations.localeOf(context), 0),
+                                settings:
+                                    RouteSettings(name: 'ObservationLogs')),
                           );
                         },
                         child: Icon(Icons.list),

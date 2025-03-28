@@ -85,10 +85,14 @@ class _ObservationUploadState extends State<ObservationUpload> {
           S.of(context).observation_upload_progress,
           textAlign: TextAlign.center,
         );
-        _content = LinearPercentIndicator(
-          lineHeight: 20.0,
-          percent: (widget.observationsToUpload - _observationsRemain) / widget.observationsToUpload,
-          progressColor: Theme.of(context).primaryColor,
+        _content = Container(
+          width: MediaQuery.of(context).size.width * 0.8, // Explicit width constraint
+          padding: EdgeInsets.symmetric(vertical: 10.0), // Optional padding for spacing
+          child: LinearPercentIndicator(
+            lineHeight: 20.0,
+            percent: (widget.observationsToUpload - _observationsRemain) / widget.observationsToUpload,
+            progressColor: Theme.of(context).primaryColor,
+          ),
         );
         _actions.add(TextButton(
           child: Text(S.of(context).pause.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
@@ -124,8 +128,7 @@ class _ObservationUploadState extends State<ObservationUpload> {
         break;
     }
 
-    return WillPopScope(
-        onWillPop: () async => false,
+    return PopScope(
         child: AlertDialog(
           title: _title,
           content: _content,

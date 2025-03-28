@@ -100,9 +100,8 @@ Future<String> initializeRoute() {
 }
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-
   runZonedGuarded(() {
+    WidgetsFlutterBinding.ensureInitialized();
     initializeFlutterFire().then((_) async {
       WakelockPlus.enable();
       await Prefs.init();
