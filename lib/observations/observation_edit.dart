@@ -17,6 +17,7 @@ import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:exif/exif.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ObservationEdit extends StatefulWidget {
   final Locale myLocale;
@@ -55,28 +56,28 @@ class _ObservationEditState extends State<ObservationEdit> {
     if (_observation.photoPaths.length == 0) {
       await infoDialog(context, S.of(context).observation, S.of(context).observation_missing_photo);
       return false;
-    } else if (_observation.latitude == null || _observation.longitude == null || (_observation.latitude == 0 && _observation.longitude == 0)) {
+    } else if (_observation.latitude == 0 && _observation.longitude == 0) {
       await infoDialog(context, S.of(context).observation, S.of(context).observation_missing_location);
       return false;
     } else {
-      if (_observation.id == null) {
+      if (_observation.id.isEmpty) {
         _observation.id = Auth.appUser!.uid + '_' + DateTime.now().millisecondsSinceEpoch.toString();
       }
       _observation.order = -1 * _observation.date.millisecondsSinceEpoch;
-      _observation.note = _noteController.text.isNotEmpty ? _noteController.text : null;
+      _observation.note = _noteController.text.isNotEmpty ? _noteController.text : "";
 
       await privateObservationsReference
           .child(Auth.appUser!.uid)
           .child(firebaseObservationsByDate)
           .child(firebaseAttributeList)
-          .child(_observation.id!)
+          .child(_observation.id)
           .set(_observation.toJson());
       await privateObservationsReference
           .child(Auth.appUser!.uid)
           .child(firebaseObservationsByPlant)
-          .child(_observation.plant!)
+          .child(_observation.plant)
           .child(firebaseAttributeList)
-          .child(_observation.id!)
+          .child(_observation.id)
           .set(_observation.toJson());
       return true;
     }
@@ -84,6 +85,10 @@ class _ObservationEditState extends State<ObservationEdit> {
 
   Future<void> _getImage(GlobalKey<ScaffoldState> _key, ImageSource source) async {
     bool scaleDownPhotos = await _scaleDownPhotosF;
+    var status = await Permission.accessMediaLocation.status;
+    if (!status.isGranted) {
+      await Permission.accessMediaLocation.request();
+    }
     var image = await _picker.pickImage(source: source, maxWidth: scaleDownPhotos ? imageSizeScaleDown : null);
     if (image != null) {
       Map<String, IfdTag> exifData = await readExifFromBytes(await image.readAsBytes());
@@ -105,9 +110,9 @@ class _ObservationEditState extends State<ObservationEdit> {
       }
 
       // store file
-      var dir = storageObservations + Auth.appUser!.uid + '/' + _observation.plant!.replaceAll(' ', '_');
+      var dir = storageObservations + Auth.appUser!.uid + '/' + _observation.plant.replaceAll(' ', '_');
       var prefix = "unknown_";
-      var names = _observation.plant!.toLowerCase().split(' ');
+      var names = _observation.plant.toLowerCase().split(' ');
       if (names.length > 1) {
         prefix = names[0].substring(0, 1) + names[1].substring(0, 1) + '_';
       }
@@ -150,19 +155,19 @@ class _ObservationEditState extends State<ObservationEdit> {
       }
     }
 
-    if (_observation.id != null) {
+    if (_observation.id.isNotEmpty) {
       await privateObservationsReference
           .child(Auth.appUser!.uid)
           .child(firebaseObservationsByDate)
           .child(firebaseAttributeList)
-          .child(_observation.id!)
+          .child(_observation.id)
           .remove();
       await privateObservationsReference
           .child(Auth.appUser!.uid)
           .child(firebaseObservationsByPlant)
-          .child(_observation.plant!)
+          .child(_observation.plant)
           .child(firebaseAttributeList)
-          .child(_observation.id!)
+          .child(_observation.id)
           .remove();
     }
   }
@@ -174,7 +179,7 @@ class _ObservationEditState extends State<ObservationEdit> {
     _observation = Observation.from(widget.observation);
     initializeDateFormatting();
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString()).add_jm();
-    _noteController.text = _observation.note!;
+    _noteController.text = _observation.note;
     _dateController.text = _dateFormat.format(_observation.date);
   }
 
@@ -198,15 +203,15 @@ class _ObservationEditState extends State<ObservationEdit> {
           })
         : translationsReference
             .child(getLanguageCode(myLocale.languageCode))
-            .child(_observation.plant!)
+            .child(_observation.plant)
             .child(firebaseAttributeLabel)
             .once()
             .then((event) {
             if (event.snapshot.value != null) {
-              translationCache[_observation.plant!] = event.snapshot.value as String;
+              translationCache[_observation.plant] = event.snapshot.value as String;
               return event.snapshot.value as String;
             } else {
-              return _observation.plant!;
+              return _observation.plant;
             }
           });
 
@@ -215,7 +220,7 @@ class _ObservationEditState extends State<ObservationEdit> {
       FutureBuilder<String>(
           future: nameF,
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-            String labelLocal = _observation.plant!;
+            String labelLocal = _observation.plant;
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.data != null) {
                 labelLocal = snapshot.data!;
@@ -228,7 +233,7 @@ class _ObservationEditState extends State<ObservationEdit> {
                     labelLocal,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
-                  subtitle: labelLocal != _observation.plant ? Text(_observation.plant!) : null,
+                  subtitle: labelLocal != _observation.plant ? Text(_observation.plant) : Text(""),
                 ),
                 Padding(
                   padding: EdgeInsets.all(10.0),
@@ -265,7 +270,7 @@ class _ObservationEditState extends State<ObservationEdit> {
     widgets.add(
       TextButton(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(EdgeInsets.all(5.0)),
+          padding: WidgetStateProperty.all(EdgeInsets.all(5.0)),
         ),
         child: CachedNetworkImage(
           fit: BoxFit.contain,
@@ -275,7 +280,7 @@ class _ObservationEditState extends State<ObservationEdit> {
                 width: mapWidth,
                 height: mapHeight,
               ),
-          imageUrl: getMapImageUrl(_observation.latitude!, _observation.longitude!, mapWidth, mapHeight),
+          imageUrl: getMapImageUrl(_observation.latitude, _observation.longitude, mapWidth, mapHeight),
         ),
         onPressed: () {
           Navigator.push(
