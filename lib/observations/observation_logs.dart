@@ -5,17 +5,17 @@ import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/purchase/subscription.dart';
-import 'package:abherbs_flutter/settings/flutter_localized_countries.dart';
 import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:community_charts_flutter/community_charts_flutter.dart' as charts;
 
 import '../main.dart';
 import 'observation_edit.dart';
@@ -38,13 +38,13 @@ class ObservationLogs extends StatefulWidget {
 }
 
 class _ObservationLogsState extends State<ObservationLogs> {
-  GlobalKey<ScaffoldState> _key;
-  DateFormat _dateFormat;
-  Future<DatabaseEvent> _privateStatsF;
-  Future<DatabaseEvent> _publicStatsF;
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+  late DateFormat _dateFormat;
+  late Future<DatabaseEvent> _privateStatsF;
+  late Future<DatabaseEvent> _publicStatsF;
   ScrollController _scrollControllerPrivate = ScrollController();
   ScrollController _scrollControllerPublic = ScrollController();
-  int _currentIndex;
+  late int _currentIndex;
 
   _scrollToEnd() async {
     switch (_currentIndex) {
@@ -74,19 +74,18 @@ class _ObservationLogsState extends State<ObservationLogs> {
   @override
   void initState() {
     super.initState();
-    _key = new GlobalKey<ScaffoldState>();
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString()).add_jm();
     _currentIndex = widget.currentIndex;
 
-    _privateStatsF = privateObservationsReference.child(Auth.appUser.uid).child(firebaseObservationsStats).once();
+    _privateStatsF = privateObservationsReference.child(Auth.appUser!.uid).child(firebaseObservationsStats).once();
     _publicStatsF = publicObservationsReference.child(firebaseObservationsStats).once();
   }
 
   Widget getItems(Map<dynamic, dynamic> observations) {
     var items = observations.keys.where((x) => x != firebaseAttributeTime).map((id) {
       return FutureBuilder<Observation>(
-          future: privateObservationsReference.child(Auth.appUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).child(id.toString()).once().then((event) {
-            var observation = Observation.fromJson(event.snapshot.key, event.snapshot.value);
+          future: privateObservationsReference.child(Auth.appUser!.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).child(id.toString()).once().then((event) {
+            var observation = Observation.fromJson(event.snapshot.key, event.snapshot.value as Map);
             observation.uploadStatus = observations[id][firebaseAttributeStatus];
             return observation;
           }),
@@ -99,17 +98,17 @@ class _ObservationLogsState extends State<ObservationLogs> {
                       title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(snapshot.data.plant),
-                          Text(_dateFormat.format(snapshot.data.date)),
+                          Text(snapshot.data!.plant),
+                          Text(_dateFormat.format(snapshot.data!.date)),
                         ],
                       ),
-                      trailing: snapshot.data.uploadStatus == firebaseValueSuccess ? Icon(Icons.done) : snapshot.data.uploadStatus == firebaseValueRejection ? Icon(Icons.close) : Icon(Icons.error),
+                      trailing: snapshot.data!.uploadStatus == firebaseValueSuccess ? Icon(Icons.done) : snapshot.data!.uploadStatus == firebaseValueRejection ? Icon(Icons.close) : Icon(Icons.error),
                     ),
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ObservationEdit(Localizations.localeOf(context), snapshot.data),
+                            builder: (context) => ObservationEdit(Localizations.localeOf(context), snapshot.data!),
                             settings: RouteSettings(name: 'ObservationEdit')),
                       );
                     },
@@ -133,8 +132,8 @@ class _ObservationLogsState extends State<ObservationLogs> {
             future: databaseEventF,
             builder: (BuildContext context, AsyncSnapshot<DatabaseEvent> event) {
               Widget result = Container(width: 0.0, height: 0.0);
-              if (event.connectionState == ConnectionState.done && event.data.snapshot.value != null) {
-                var countries = (event.data.snapshot.value as Map)['countries'];
+              if (event.connectionState == ConnectionState.done && event.data!.snapshot.value != null) {
+                var countries = (event.data!.snapshot.value as Map)['countries'];
                 List<String> sortedKeys = [];
                 if (countries != null) {
                   for (var key in countries.keys) {
@@ -152,7 +151,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                         height: 50.0,
                         fit: BoxFit.fitWidth,
                       ),
-                      title: Text(CountryNames.of(context).nameOf(entry.key.toUpperCase()) ?? ''),
+                      title: Text(CountryLocalizations.of(context)?.countryName(countryCode: entry.key.toUpperCase()) ?? ''),
                       trailing: CircleAvatar(
                         child: Text(entry.value.toString()),
                       )));
@@ -229,7 +228,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                 builder: (BuildContext context, AsyncSnapshot<DatabaseEvent> event) {
                   switch (event.connectionState) {
                     case ConnectionState.done:
-                      if (event.data.snapshot.value == null) {
+                      if (event.data!.snapshot.value == null) {
                         return ListTile(
                           title: Center(child: Text(S.of(context).observation_empty)),
                         );
@@ -247,10 +246,10 @@ class _ObservationLogsState extends State<ObservationLogs> {
                                 ],
                               ),
                               leading: CircleAvatar(
-                                child: Text((event.data.snapshot.value as Map)['count'].toString()),
+                                child: Text((event.data!.snapshot.value as Map)['count'].toString()),
                               ),
                               trailing: CircleAvatar(
-                                child: Text((event.data.snapshot.value as Map)['distinctFlowers'].toString()),
+                                child: Text((event.data!.snapshot.value as Map)['distinctFlowers'].toString()),
                               ),
                             ),
                             const Divider(
@@ -268,13 +267,13 @@ class _ObservationLogsState extends State<ObservationLogs> {
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text((event.data.snapshot.value as Map)['firstFlower']),
-                                  Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch((event.data.snapshot.value as Map)['firstDate']))),
+                                  Text((event.data!.snapshot.value as Map)['firstFlower']),
+                                  Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch((event.data!.snapshot.value as Map)['firstDate']))),
                                 ],
                               ),
                               leading: Icon(Icons.local_florist),
                               onTap: () {
-                                goToDetail(self, mainContext, widget.myLocale, (event.data.snapshot.value as Map)['firstFlower'], {});
+                                goToDetail(self, mainContext, widget.myLocale, (event.data!.snapshot.value as Map)['firstFlower'], {});
                               },
                             ),
                             const Divider(
@@ -292,13 +291,13 @@ class _ObservationLogsState extends State<ObservationLogs> {
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text((event.data.snapshot.value as Map)['lastFlower']),
-                                  Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch((event.data.snapshot.value as Map)['lastDate']))),
+                                  Text((event.data!.snapshot.value as Map)['lastFlower']),
+                                  Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch((event.data!.snapshot.value as Map)['lastDate']))),
                                 ],
                               ),
                               leading: Icon(Icons.local_florist),
                               onTap: () {
-                                goToDetail(self, mainContext, widget.myLocale, (event.data.snapshot.value as Map)['lastFlower'], {});
+                                goToDetail(self, mainContext, widget.myLocale, (event.data!.snapshot.value as Map)['lastFlower'], {});
                               },
                             ),
                             const Divider(
@@ -313,13 +312,13 @@ class _ObservationLogsState extends State<ObservationLogs> {
                               alignment: Alignment.center,
                             ),
                             ListTile(
-                              title: Text((event.data.snapshot.value as Map)['mostObserved']),
+                              title: Text((event.data!.snapshot.value as Map)['mostObserved']),
                               leading: Icon(Icons.local_florist),
                               trailing: CircleAvatar(
-                                child: Text((event.data.snapshot.value as Map)['mostObservedCount'].toString()),
+                                child: Text((event.data!.snapshot.value as Map)['mostObservedCount'].toString()),
                               ),
                               onTap: () {
-                                goToDetail(self, mainContext, widget.myLocale, (event.data.snapshot.value as Map)['mostObserved'], {});
+                                goToDetail(self, mainContext, widget.myLocale, (event.data!.snapshot.value as Map)['mostObserved'], {});
                               },
                             ),
                           ],
@@ -334,18 +333,18 @@ class _ObservationLogsState extends State<ObservationLogs> {
       ));
 
       _widgets.add(FutureBuilder<List<dynamic>>(
-          future: privateObservationsReference.child(Auth.appUser.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((event) {
+          future: privateObservationsReference.child(Auth.appUser!.uid).child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((event) {
             List<dynamic> result = [];
             Map<MarkerId, Marker> markers = {};
-            MarkerId newestMarker;
+            MarkerId? newestMarker;
             List<ObservationsSum> data = [];
             int order = 0;
             if (event.snapshot.value != null && (event.snapshot.value as Map).keys.length > 0) {
               for (String item in (event.snapshot.value as Map).keys) {
                 Observation observation = Observation.fromJson(item, (event.snapshot.value as Map)[item]);
-                var markerId = MarkerId(observation.id);
-                if (observation.order != null && order > observation.order) {
-                  order = observation.order;
+                var markerId = MarkerId(observation.id!);
+                if (observation.order != null && order > observation.order!) {
+                  order = observation.order!;
                   newestMarker = markerId;
                 }
                 markers[markerId] = Marker(
@@ -358,7 +357,9 @@ class _ObservationLogsState extends State<ObservationLogs> {
                 );
                 data.add(ObservationsSum(observation.date, 1));
               }
-              result.add(newestMarker);
+              if (newestMarker != null) {
+                result.add(newestMarker);
+              }
               result.add(markers);
               result.add([
                 charts.Series<ObservationsSum, DateTime>(
@@ -375,7 +376,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
           }),
           builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
             Widget result = Container(width: 0.0, height: 0.0);
-            if (snapshot.connectionState == ConnectionState.done && snapshot.data.isNotEmpty) {
+            if (snapshot.connectionState == ConnectionState.done && snapshot.data!.isNotEmpty) {
               result = Column(
                 children: [
                   TextButton(
@@ -391,12 +392,12 @@ class _ObservationLogsState extends State<ObservationLogs> {
                         width: mapWidth,
                         height: mapHeight,
                       ),
-                      imageUrl: getMapImageUrl(snapshot.data[1][snapshot.data[0]].position.latitude, snapshot.data[1][snapshot.data[0]].position.longitude, mapWidth, mapHeight),
+                      imageUrl: getMapImageUrl(snapshot.data![1][snapshot.data![0]].position.latitude, snapshot.data![1][snapshot.data![0]].position.longitude, mapWidth, mapHeight),
                     ),
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ObservationsMap(snapshot.data[0], snapshot.data[1]), settings: RouteSettings(name: 'ObservationsMap')),
+                        MaterialPageRoute(builder: (context) => ObservationsMap(snapshot.data![0], snapshot.data![1]), settings: RouteSettings(name: 'ObservationsMap')),
                       );
                     },
                   ),
@@ -406,10 +407,10 @@ class _ObservationLogsState extends State<ObservationLogs> {
                       controller: _scrollControllerPrivate,
                       scrollDirection: Axis.horizontal,
                       child: Container(
-                        width: mapWidth * (snapshot.data[2][0].data.length ~/ 100 + 1),
+                        width: mapWidth * (snapshot.data![2][0].data.length ~/ 100 + 1),
                         height: mapHeight,
                         child: charts.TimeSeriesChart(
-                          snapshot.data[2],
+                          snapshot.data![2],
                           animate: true,
                           defaultRenderer: charts.BarRendererConfig<DateTime>(),
                           defaultInteractions: false,
@@ -449,7 +450,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                   Widget result = Container(width: 0.0, height: 0.0);
                   if (events.connectionState == ConnectionState.done) {
                     if (Purchases.isSubscribed()) {
-                      if (events.data[0].snapshot.value != null && (events.data[0].snapshot.value as Map)['rank'] > 0) {
+                      if (events.data![0].snapshot.value != null && (events.data![0].snapshot.value as Map)['rank'] > 0) {
                         result = ListTile(
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -459,10 +460,10 @@ class _ObservationLogsState extends State<ObservationLogs> {
                             ],
                           ),
                           leading: CircleAvatar(
-                            child: Text((events.data[0].snapshot.value as Map)['rank'].toString()),
+                            child: Text((events.data![0].snapshot.value as Map)['rank'].toString()),
                           ),
                           trailing: CircleAvatar(
-                            child: Text((events.data[1].snapshot.value as Map)['observers'].toString()),
+                            child: Text((events.data![1].snapshot.value as Map)['observers'].toString()),
                           ),
                         );
                       }
@@ -522,10 +523,10 @@ class _ObservationLogsState extends State<ObservationLogs> {
                                 ],
                               ),
                               leading: CircleAvatar(
-                                child: Text((event.data.snapshot.value as Map)['count'].toString()),
+                                child: Text((event.data!.snapshot.value as Map)['count'].toString()),
                               ),
                               trailing: CircleAvatar(
-                                child: Text((event.data.snapshot.value as Map)['distinctFlowers'].toString()),
+                                child: Text((event.data!.snapshot.value as Map)['distinctFlowers'].toString()),
                               ),
                             ),
                             const Divider(
@@ -543,13 +544,13 @@ class _ObservationLogsState extends State<ObservationLogs> {
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text((event.data.snapshot.value as Map)['firstFlower']),
-                                  Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch((event.data.snapshot.value as Map)['firstDate']))),
+                                  Text((event.data!.snapshot.value as Map)['firstFlower']),
+                                  Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch((event.data!.snapshot.value as Map)['firstDate']))),
                                 ],
                               ),
                               leading: Icon(Icons.local_florist),
                               onTap: () {
-                                goToDetail(self, mainContext, widget.myLocale, (event.data.snapshot.value as Map)['firstFlower'], {});
+                                goToDetail(self, mainContext, widget.myLocale, (event.data!.snapshot.value as Map)['firstFlower'], {});
                               },
                             ),
                             const Divider(
@@ -567,13 +568,13 @@ class _ObservationLogsState extends State<ObservationLogs> {
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text((event.data.snapshot.value as Map)['lastFlower']),
-                                  Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch((event.data.snapshot.value as Map)['lastDate']))),
+                                  Text((event.data!.snapshot.value as Map)['lastFlower']),
+                                  Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch((event.data!.snapshot.value as Map)['lastDate']))),
                                 ],
                               ),
                               leading: Icon(Icons.local_florist),
                               onTap: () {
-                                goToDetail(self, mainContext, widget.myLocale, (event.data.snapshot.value as Map)['lastFlower'], {});
+                                goToDetail(self, mainContext, widget.myLocale, (event.data!.snapshot.value as Map)['lastFlower'], {});
                               },
                             ),
                             const Divider(
@@ -588,13 +589,13 @@ class _ObservationLogsState extends State<ObservationLogs> {
                               alignment: Alignment.center,
                             ),
                             ListTile(
-                              title: Text((event.data.snapshot.value as Map)['mostObserved']),
+                              title: Text((event.data!.snapshot.value as Map)['mostObserved']),
                               leading: Icon(Icons.local_florist),
                               trailing: CircleAvatar(
-                                child: Text((event.data.snapshot.value as Map)['mostObservedCount'].toString()),
+                                child: Text((event.data!.snapshot.value as Map)['mostObservedCount'].toString()),
                               ),
                               onTap: () {
-                                goToDetail(self, mainContext, widget.myLocale, (event.data.snapshot.value as Map)['mostObserved'], {});
+                                goToDetail(self, mainContext, widget.myLocale, (event.data!.snapshot.value as Map)['mostObserved'], {});
                               },
                             ),
                           ],
@@ -612,20 +613,20 @@ class _ObservationLogsState extends State<ObservationLogs> {
           future: publicObservationsReference.child(firebaseObservationsByDate).child(firebaseAttributeList).once().then((event) {
             List<dynamic> result = [];
             Map<MarkerId, Marker> markers = {};
-            MarkerId newestMarker;
+            MarkerId? newestMarker;
             List<ObservationsSum> data = [];
             int order = 0;
             if (event.snapshot.value != null && (event.snapshot.value as Map).keys.length > 0) {
               for (String item in (event.snapshot.value as Map).keys) {
                 Observation observation = Observation.fromJson(item, (event.snapshot.value as Map)[item]);
-                var markerId = MarkerId(observation.id);
-                if (observation.order != null && order > observation.order) {
-                  order = observation.order;
+                var markerId = MarkerId(observation.id!);
+                if (observation.order != null && order > observation.order!) {
+                  order = observation.order!;
                   newestMarker = markerId;
                 }
                 markers[markerId] = Marker(
                   markerId: markerId,
-                  icon: observation.id.startsWith(Auth.appUser.uid) ? BitmapDescriptor.defaultMarker : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+                  icon: observation.id!.startsWith(Auth.appUser!.uid) ? BitmapDescriptor.defaultMarker : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
                   position: LatLng(
                     observation.latitude ?? 0.0,
                     observation.longitude ?? 0.0,
@@ -633,7 +634,9 @@ class _ObservationLogsState extends State<ObservationLogs> {
                 );
                 data.add(ObservationsSum(observation.date, 1));
               }
-              result.add(newestMarker);
+              if (newestMarker != null) {
+                result.add(newestMarker);
+              }
               result.add(markers);
               result.add([
                 charts.Series<ObservationsSum, DateTime>(
@@ -650,7 +653,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
           }),
           builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
             Widget result = Container(width: 0.0, height: 0.0);
-            if (snapshot.connectionState == ConnectionState.done && snapshot.data.isNotEmpty) {
+            if (snapshot.connectionState == ConnectionState.done && snapshot.data!.isNotEmpty) {
               result = Column(
                 children: [
                   TextButton(
@@ -666,12 +669,12 @@ class _ObservationLogsState extends State<ObservationLogs> {
                         width: mapWidth,
                         height: mapHeight,
                       ),
-                      imageUrl: getMapImageUrl(snapshot.data[1][snapshot.data[0]].position.latitude, snapshot.data[1][snapshot.data[0]].position.longitude, mapWidth, mapHeight),
+                      imageUrl: getMapImageUrl(snapshot.data![1][snapshot.data![0]].position.latitude, snapshot.data![1][snapshot.data![0]].position.longitude, mapWidth, mapHeight),
                     ),
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ObservationsMap(snapshot.data[0], snapshot.data[1]), settings: RouteSettings(name: 'ObservationsMap')),
+                        MaterialPageRoute(builder: (context) => ObservationsMap(snapshot.data![0], snapshot.data![1]), settings: RouteSettings(name: 'ObservationsMap')),
                       );
                     },
                   ),
@@ -684,7 +687,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                         width: mapWidth * 2,
                         height: mapHeight,
                         child: charts.TimeSeriesChart(
-                          snapshot.data[2],
+                          snapshot.data![2],
                           animate: true,
                           defaultRenderer: charts.BarRendererConfig<DateTime>(),
                           defaultInteractions: false,
@@ -725,16 +728,16 @@ class _ObservationLogsState extends State<ObservationLogs> {
               child: MyFirebaseAnimatedList(
                   shrinkWrap: true,
                   defaultChild: Center(child: CircularProgressIndicator()),
-                  query: logsObservationsReference.child(Auth.appUser.uid).orderByChild(firebaseAttributeTime),
+                  query: logsObservationsReference.child(Auth.appUser!.uid).orderByChild(firebaseAttributeTime),
                   itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
                     return Card(
                       child: Column(children: [
                         ListTile(
-                          title: Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch(int.parse(snapshot.key)))),
+                          title: Text(_dateFormat.format(DateTime.fromMillisecondsSinceEpoch(int.parse(snapshot.key!)))),
                           leading: Icon(Icons.date_range),
                           onTap: () {},
                         ),
-                        getItems(snapshot.value),
+                        getItems(snapshot.value as Map),
                       ]),
                     );
                   }),

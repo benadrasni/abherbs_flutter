@@ -7,7 +7,6 @@ import 'dart:collection';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
-import 'package:flutter/foundation.dart';
 
 typedef void ChildCallback(int index, DataSnapshot snapshot);
 typedef void ChildMovedCallback(int fromIndex, int toIndex, DataSnapshot snapshot);
@@ -17,14 +16,11 @@ typedef void ErrorCallback(Object error);
 /// Sorts the results of `query` on the client side using `DataSnapshot.key`.
 class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixin<DatabaseEvent> {
   FirebaseIndexList({
-    @required this.query,
-    @required this.keyQuery,
+    required this.query,
+    required this.keyQuery,
     this.onValue,
     this.onError,
   }) {
-    assert(query != null);
-    assert(keyQuery != null);
-
     keyQuery.once().then((event) {
       if (event.snapshot.value != null) {
         if (event.snapshot.value is List) {
@@ -53,10 +49,10 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
   final Query keyQuery;
 
   /// Called when the data of the list has finished loading
-  final ValueCallback onValue;
+  final ValueCallback? onValue;
 
   /// Called when an error is reported (e.g. permission denied)
-  final ErrorCallback onError;
+  final ErrorCallback? onError;
 
   // ListBase implementation
   final List<DataSnapshot> _snapshots = <DataSnapshot>[];
@@ -94,7 +90,7 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
       }
     });
     _snapshots.sort((a, b) => (a.value as Map)[firebaseAttributeName].compareTo((b.value as Map)[firebaseAttributeName]));
-    onValue(event.snapshot);
+    onValue?.call(event.snapshot);
   }
 
   void _onError(Object o) {

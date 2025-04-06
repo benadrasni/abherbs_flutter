@@ -28,7 +28,7 @@ import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
-import 'package:youtube_plyr_iframe/youtube_plyr_iframe.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../main.dart';
 
@@ -49,15 +49,15 @@ class PlantDetail extends StatefulWidget {
 }
 
 class _PlantDetailState extends State<PlantDetail> {
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
-  StreamSubscription<firebase_auth.User> _listener;
-  Future<PlantTranslation> _plantTranslationF;
-  Future<bool> _isFavoriteF;
-  int _currentIndex;
-  GlobalKey<ScaffoldState> _key;
-  bool _isPublic;
-  double _fontSize;
-  BannerAd _ad;
+  int _currentIndex = 0;
+  bool _isPublic = false;
+  late StreamSubscription<firebase_auth.User?> _listener;
+  late Future<PlantTranslation> _plantTranslationF;
+  late Future<bool> _isFavoriteF;
+  late double _fontSize;
+  BannerAd? _ad;
 
   onChangeFontSize() {
     setState(() {
@@ -72,12 +72,12 @@ class _PlantDetailState extends State<PlantDetail> {
 
   onShare() {
     Share.share(Uri.encodeFull('https://whatsthatflower.com/?plant=' + widget.plant.name + '&lang=' + widget.myLocale.languageCode), subject: widget.plant.name);
-    _logShareEvent(widget.plant.name);
+    _logShareEvent(widget.plant.name!);
   }
 
   Future<PlantTranslation> _getTranslation() {
     return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(widget.plant.name).once().then((event) {
-      var plantTranslation = event.snapshot.value == null ? PlantTranslation() : PlantTranslation.fromJson(event.snapshot.value);
+      PlantTranslation plantTranslation = event.snapshot.value == null ? PlantTranslation() : PlantTranslation.fromJson(event.snapshot.value as Map);
       if (plantTranslation.isTranslated()) {
         return plantTranslation;
       } else {
@@ -85,7 +85,7 @@ class _PlantDetailState extends State<PlantDetail> {
         return translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name).once().then((event) {
           var plantTranslationGT = PlantTranslation.copy(plantTranslation);
           if (event.snapshot.value != null) {
-            plantTranslationGT = PlantTranslation.fromJson(event.snapshot.value);
+            plantTranslationGT = PlantTranslation.fromJson(event.snapshot.value as Map);
             plantTranslationGT.mergeWith(plantTranslation);
           }
           if (plantTranslationGT.label == null) {
@@ -95,8 +95,8 @@ class _PlantDetailState extends State<PlantDetail> {
             plantTranslationGT.isTranslatedWithGT = true;
             return plantTranslationGT;
           } else {
-            return translationsReference.child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish).child(widget.plant.name).once().then((event) {
-              var plantTranslationOriginal = PlantTranslation.fromJson(event.snapshot.value);
+            return translationsReference.child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish).child(widget.plant.name!).once().then((event) {
+              var plantTranslationOriginal = PlantTranslation.fromJson(event.snapshot.value as Map);
               var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
               uri += '&source=' + (languageCzech == widget.myLocale.languageCode ? languageSlovak : languageEnglish);
               uri += '&target=' + getLanguageCode(widget.myLocale.languageCode);
@@ -107,7 +107,7 @@ class _PlantDetailState extends State<PlantDetail> {
                 if (response.statusCode == 200) {
                   Translations translations = Translations.fromJson(json.decode(response.body));
                   PlantTranslation onlyGoogleTranslation = plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
-                  translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name).set(onlyGoogleTranslation.toJson());
+                  translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name!).set(onlyGoogleTranslation.toJson());
                   return plantTranslation;
                 } else {
                   return plantTranslation.mergeWith(plantTranslationOriginal);
@@ -123,7 +123,7 @@ class _PlantDetailState extends State<PlantDetail> {
   Future<bool> _setFavorite() {
     return Future<bool>(() {
       if (Auth.appUser != null) {
-        return usersReference.child(Auth.appUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).once().then((event) {
+        return usersReference.child(Auth.appUser!.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).once().then((event) {
           return event.snapshot.value != null && event.snapshot.value == 1;
         });
       }
@@ -147,16 +147,15 @@ class _PlantDetailState extends State<PlantDetail> {
 
   Widget _getBody(BuildContext context) {
     switch (_currentIndex) {
-      case galleryIndex:
-        return getGallery(context, widget.plant);
       case infoIndex:
         return getInfo(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize, _key);
       case taxonomyIndex:
         return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize);
       case observationIndex:
-        return ObservationsPlant(Localizations.localeOf(context), _isPublic, widget.plant.name, _key);
+        return ObservationsPlant(Localizations.localeOf(context), _isPublic, widget.plant.name!, _key);
+      default: // galleryIndex
+        return getGallery(context, widget.plant);
     }
-    return null;
   }
 
   void _setIsPublic(bool isPublic) {
@@ -176,7 +175,7 @@ class _PlantDetailState extends State<PlantDetail> {
   void initState() {
     super.initState();
 
-    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {_isFavoriteF = _setFavorite();}));
+    _listener = Auth.subscribe((firebase_auth.User? user) => setState(() {_isFavoriteF = _setFavorite();}));
     _isFavoriteF = _setFavorite();
     Offline.setKeepSynced(3, true);
 
@@ -194,17 +193,13 @@ class _PlantDetailState extends State<PlantDetail> {
           },
         ),
       );
-      _ad.load();
+      _ad?.load();
     }
 
     _plantTranslationF = _getTranslation();
-
-    _currentIndex = 0;
-    _key = new GlobalKey<ScaffoldState>();
-    _isPublic = false;
     _fontSize = Prefs.getDouble(keyFontSize, defaultFontSize);
 
-    _logSelectContentEvent(widget.plant.name);
+    _logSelectContentEvent(widget.plant.name!);
   }
 
   @override
@@ -238,7 +233,7 @@ class _PlantDetailState extends State<PlantDetail> {
                   Expanded(
                     flex: 3,
                     child: GestureDetector(
-                      child: Text(widget.plant.name),
+                      child: Text(widget.plant.name!),
                       onLongPress: () {
                         Clipboard.setData(new ClipboardData(text: widget.plant.name));
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -270,7 +265,7 @@ class _PlantDetailState extends State<PlantDetail> {
           : _currentIndex == infoIndex || _currentIndex == taxonomyIndex
               ? AppBar(
                   title: GestureDetector(
-                    child: Text(widget.plant.name),
+                    child: Text(widget.plant.name!),
                     onLongPress: () {
                       Clipboard.setData(new ClipboardData(text: widget.plant.name));
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -289,7 +284,7 @@ class _PlantDetailState extends State<PlantDetail> {
                 )
               : AppBar(
                   title: GestureDetector(
-                    child: Text(widget.plant.name),
+                    child: Text(widget.plant.name!),
                     onLongPress: () {
                       Clipboard.setData(new ClipboardData(text: widget.plant.name));
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -306,7 +301,7 @@ class _PlantDetailState extends State<PlantDetail> {
                     ),
                   ],
                 ),
-      drawer: AppDrawer(widget.filter, null),
+      drawer: AppDrawer(widget.filter, () => {}),
       body: Column(
         children: [
           Expanded(
@@ -314,13 +309,13 @@ class _PlantDetailState extends State<PlantDetail> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: !Purchases.isNoAds()
+            child: !Purchases.isNoAds() && _ad != null
                 ? Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
-                    child: AdWidget(ad: _ad),
-                    width: _ad.size.width.toDouble(),
-                    height: _ad.size.height.toDouble(),
+                    child: AdWidget(ad: _ad!),
+                    width: _ad!.size.width.toDouble(),
+                    height: _ad!.size.height.toDouble(),
                   )
                 : Container(
                     height: 0.0,
@@ -340,7 +335,7 @@ class _PlantDetailState extends State<PlantDetail> {
                 return FloatingActionButton(
                   onPressed: () {
                     if (_currentIndex == observationIndex) {
-                      var observation = Observation(widget.plant.name);
+                      var observation = Observation(widget.plant.name!);
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => ObservationEdit(widget.myLocale, observation), settings: RouteSettings(name: 'ObservationEdit')),
@@ -355,7 +350,7 @@ class _PlantDetailState extends State<PlantDetail> {
                     } else {
                       if (Auth.appUser != null) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          usersReference.child(Auth.appUser.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).set(snapshot.data ? null : 1).then((value) {
+                          usersReference.child(Auth.appUser!.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).set(snapshot.data == null ? null : 1).then((value) {
                             if (mounted) {
                               setState(() {
                                 _isFavoriteF = _setFavorite();
@@ -370,7 +365,7 @@ class _PlantDetailState extends State<PlantDetail> {
                   },
                   child: _currentIndex == observationIndex
                       ? Icon(Icons.add)
-                      : snapshot.connectionState == ConnectionState.done && snapshot.data != null && snapshot.data
+                      : snapshot.connectionState == ConnectionState.done && snapshot.data != null
                           ? Icon(Icons.favorite)
                           : Icon(Icons.favorite_border),
                 );

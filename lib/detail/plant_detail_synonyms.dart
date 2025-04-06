@@ -17,13 +17,7 @@ class PlantSynonyms extends StatefulWidget {
 }
 
 class _PlantSynonymsState extends State<PlantSynonyms> {
-  GlobalKey<ScaffoldState> _key;
-
-  @override
-  void initState() {
-    super.initState();
-    _key = new GlobalKey<ScaffoldState>();
-  }
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {

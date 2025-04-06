@@ -4,7 +4,7 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:youtube_plyr_iframe/youtube_plyr_iframe.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 List<YoutubePlayerController> controllers = [];
 
@@ -12,25 +12,24 @@ Widget getGallery(BuildContext context, Plant plant) {
   List<Widget> cards = [];
 
   cards.add(Card(
-    child: _getImageButton(context, storagePhotos + plant.illustrationUrl),
+    child: _getImageButton(context, storagePhotos + plant.illustrationUrl!),
   ));
 
-  if (plant.videoUrls != null && plant.videoUrls.length > 0) {
+  if (plant.videoUrls.length > 0) {
     cards.addAll(plant.videoUrls.map((url) {
-      controllers.add(YoutubePlayerController(
-        initialVideoId: YoutubePlayerController.convertUrlToId(url),
+      controllers.add(YoutubePlayerController.fromVideoId(
+        videoId: YoutubePlayerController.convertUrlToId(url)!,
+        autoPlay: false,
         params: YoutubePlayerParams(
-          autoPlay: false,
           showControls: false,
           showFullscreenButton: false,
           enableCaption: false,
-          desktopMode: true,
         ),
       ));
 
       return Card(
         child: Stack(children: [
-          YoutubePlayerIFrame(
+          YoutubePlayer(
             controller: controllers.last,
             aspectRatio: 16 / 9,
           ),
@@ -58,7 +57,7 @@ Widget getGallery(BuildContext context, Plant plant) {
     );
   }));
 
-  if (plant.sourceUrls != null) {
+  if (plant.sourceUrls.isNotEmpty) {
     cards.add(Card(
       child: Container(
         padding: EdgeInsets.all(5.0),
@@ -114,6 +113,7 @@ List<Widget> _getSources(BuildContext context, List<dynamic> sourceUrls) {
 }
 
 Widget _getImageButton(BuildContext context, String url) {
+  double screenWidth = MediaQuery.of(context).size.width - 20;
   var placeholder = Stack(alignment: Alignment.center, children: [
     CircularProgressIndicator(),
     Image(
@@ -124,6 +124,8 @@ Widget _getImageButton(BuildContext context, String url) {
     child: Container(
       padding: EdgeInsets.all(5.0),
       child: getImage(url, placeholder),
+      width: screenWidth,
+      height: screenWidth,
     ),
     onTap: () {
       Navigator.push(

@@ -10,39 +10,54 @@ import 'intl/messages_all.dart';
 
 // ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
 // ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
-// ignore_for_file: avoid_redundant_argument_values
+// ignore_for_file: avoid_redundant_argument_values, avoid_escaping_inner_quotes
 
 class S {
   S();
-  
-  static S current;
-  
-  static const AppLocalizationDelegate delegate =
-    AppLocalizationDelegate();
+
+  static S? _current;
+
+  static S get current {
+    assert(
+      _current != null,
+      'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.',
+    );
+    return _current!;
+  }
+
+  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
-    final localeName = Intl.canonicalizedLocale(name); 
+    final name =
+        (locale.countryCode?.isEmpty ?? false)
+            ? locale.languageCode
+            : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      S.current = S();
-      
-      return S.current;
+      final instance = S();
+      S._current = instance;
+
+      return instance;
     });
-  } 
+  }
 
   static S of(BuildContext context) {
+    final instance = S.maybeOf(context);
+    assert(
+      instance != null,
+      'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?',
+    );
+    return instance!;
+  }
+
+  static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
 
   /// `Legend`
   String get legend {
-    return Intl.message(
-      'Legend',
-      name: 'legend',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Legend', name: 'legend', desc: '', args: []);
   }
 
   /// `mature flower`
@@ -57,22 +72,12 @@ class S {
 
   /// `stigma`
   String get legend_flower_2 {
-    return Intl.message(
-      'stigma',
-      name: 'legend_flower_2',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('stigma', name: 'legend_flower_2', desc: '', args: []);
   }
 
   /// `style`
   String get legend_flower_3 {
-    return Intl.message(
-      'style',
-      name: 'legend_flower_3',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('style', name: 'legend_flower_3', desc: '', args: []);
   }
 
   /// `filament`
@@ -97,62 +102,32 @@ class S {
 
   /// `joint`
   String get legend_flower_6 {
-    return Intl.message(
-      'joint',
-      name: 'legend_flower_6',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('joint', name: 'legend_flower_6', desc: '', args: []);
   }
 
   /// `pedicel`
   String get legend_flower_7 {
-    return Intl.message(
-      'pedicel',
-      name: 'legend_flower_7',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('pedicel', name: 'legend_flower_7', desc: '', args: []);
   }
 
   /// `nectary`
   String get legend_flower_8 {
-    return Intl.message(
-      'nectary',
-      name: 'legend_flower_8',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('nectary', name: 'legend_flower_8', desc: '', args: []);
   }
 
   /// `stamen`
   String get legend_flower_9 {
-    return Intl.message(
-      'stamen',
-      name: 'legend_flower_9',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('stamen', name: 'legend_flower_9', desc: '', args: []);
   }
 
   /// `pistil`
   String get legend_flower_10 {
-    return Intl.message(
-      'pistil',
-      name: 'legend_flower_10',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('pistil', name: 'legend_flower_10', desc: '', args: []);
   }
 
   /// `ovules`
   String get legend_flower_11 {
-    return Intl.message(
-      'ovules',
-      name: 'legend_flower_11',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('ovules', name: 'legend_flower_11', desc: '', args: []);
   }
 
   /// `connective`
@@ -177,12 +152,7 @@ class S {
 
   /// `anther`
   String get legend_flower_14 {
-    return Intl.message(
-      'anther',
-      name: 'legend_flower_14',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('anther', name: 'legend_flower_14', desc: '', args: []);
   }
 
   /// `perianth`
@@ -227,42 +197,22 @@ class S {
 
   /// `Settings`
   String get settings {
-    return Intl.message(
-      'Settings',
-      name: 'settings',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Settings', name: 'settings', desc: '', args: []);
   }
 
   /// `Feedback`
   String get feedback {
-    return Intl.message(
-      'Feedback',
-      name: 'feedback',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Feedback', name: 'feedback', desc: '', args: []);
   }
 
   /// `About`
   String get about {
-    return Intl.message(
-      'About',
-      name: 'about',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('About', name: 'about', desc: '', args: []);
   }
 
   /// `Help`
   String get help {
-    return Intl.message(
-      'Help',
-      name: 'help',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Help', name: 'help', desc: '', args: []);
   }
 
   /// `Watch video about the feature`
@@ -477,12 +427,7 @@ class S {
 
   /// `Change`
   String get product_change {
-    return Intl.message(
-      'Change',
-      name: 'product_change',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Change', name: 'product_change', desc: '', args: []);
   }
 
   /// `Purchase`
@@ -547,12 +492,7 @@ class S {
 
   /// `My region`
   String get my_region {
-    return Intl.message(
-      'My region',
-      name: 'my_region',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('My region', name: 'my_region', desc: '', args: []);
   }
 
   /// `Always add my region to the filter`
@@ -577,12 +517,7 @@ class S {
 
   /// `My filter`
   String get my_filter {
-    return Intl.message(
-      'My filter',
-      name: 'my_filter',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('My filter', name: 'my_filter', desc: '', args: []);
   }
 
   /// `Offline mode`
@@ -807,12 +742,7 @@ class S {
 
   /// `Credits: `
   String get credit_count {
-    return Intl.message(
-      'Credits: ',
-      name: 'credit_count',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Credits: ', name: 'credit_count', desc: '', args: []);
   }
 
   /// `Watch ad and earn credits`
@@ -847,22 +777,12 @@ class S {
 
   /// `Sign in`
   String get auth_sign_in {
-    return Intl.message(
-      'Sign in',
-      name: 'auth_sign_in',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Sign in', name: 'auth_sign_in', desc: '', args: []);
   }
 
   /// `Sign out`
   String get auth_sign_out {
-    return Intl.message(
-      'Sign out',
-      name: 'auth_sign_out',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Sign out', name: 'auth_sign_out', desc: '', args: []);
   }
 
   /// `Sign in with email`
@@ -937,12 +857,7 @@ class S {
 
   /// `Email`
   String get auth_email_hint {
-    return Intl.message(
-      'Email',
-      name: 'auth_email_hint',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Email', name: 'auth_email_hint', desc: '', args: []);
   }
 
   /// `Enter a valid email address`
@@ -1087,12 +1002,7 @@ class S {
 
   /// `SMS code`
   String get auth_code_hint {
-    return Intl.message(
-      'SMS code',
-      name: 'auth_code_hint',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('SMS code', name: 'auth_code_hint', desc: '', args: []);
   }
 
   /// `Enter a valid phone number`
@@ -1177,32 +1087,17 @@ class S {
 
   /// `Never`
   String get rate_never {
-    return Intl.message(
-      'Never',
-      name: 'rate_never',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Never', name: 'rate_never', desc: '', args: []);
   }
 
   /// `Later`
   String get rate_later {
-    return Intl.message(
-      'Later',
-      name: 'rate_later',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Later', name: 'rate_later', desc: '', args: []);
   }
 
   /// `Review`
   String get rate {
-    return Intl.message(
-      'Review',
-      name: 'rate',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Review', name: 'rate', desc: '', args: []);
   }
 
   /// `New version is available, please update.`
@@ -1217,92 +1112,47 @@ class S {
 
   /// `Yes`
   String get yes {
-    return Intl.message(
-      'Yes',
-      name: 'yes',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Yes', name: 'yes', desc: '', args: []);
   }
 
   /// `No`
   String get no {
-    return Intl.message(
-      'No',
-      name: 'no',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('No', name: 'no', desc: '', args: []);
   }
 
   /// `Close`
   String get close {
-    return Intl.message(
-      'Close',
-      name: 'close',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Close', name: 'close', desc: '', args: []);
   }
 
   /// `Pause`
   String get pause {
-    return Intl.message(
-      'Pause',
-      name: 'pause',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Pause', name: 'pause', desc: '', args: []);
   }
 
   /// `Apply`
   String get apply {
-    return Intl.message(
-      'Apply',
-      name: 'apply',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Apply', name: 'apply', desc: '', args: []);
   }
 
   /// `Cancel`
   String get cancel {
-    return Intl.message(
-      'Cancel',
-      name: 'cancel',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
   }
 
   /// `color`
   String get filter_color {
-    return Intl.message(
-      'color',
-      name: 'filter_color',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('color', name: 'filter_color', desc: '', args: []);
   }
 
   /// `habitat`
   String get filter_habitat {
-    return Intl.message(
-      'habitat',
-      name: 'filter_habitat',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('habitat', name: 'filter_habitat', desc: '', args: []);
   }
 
   /// `petal`
   String get filter_petal {
-    return Intl.message(
-      'petal',
-      name: 'filter_petal',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('petal', name: 'filter_petal', desc: '', args: []);
   }
 
   /// `distribution`
@@ -1357,42 +1207,22 @@ class S {
 
   /// `white`
   String get color_white {
-    return Intl.message(
-      'white',
-      name: 'color_white',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('white', name: 'color_white', desc: '', args: []);
   }
 
   /// `yellow`
   String get color_yellow {
-    return Intl.message(
-      'yellow',
-      name: 'color_yellow',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('yellow', name: 'color_yellow', desc: '', args: []);
   }
 
   /// `red, pink`
   String get color_red {
-    return Intl.message(
-      'red, pink',
-      name: 'color_red',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('red, pink', name: 'color_red', desc: '', args: []);
   }
 
   /// `blue, purple`
   String get color_blue {
-    return Intl.message(
-      'blue, purple',
-      name: 'color_blue',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('blue, purple', name: 'color_blue', desc: '', args: []);
   }
 
   /// `green, brown, black`
@@ -1467,32 +1297,17 @@ class S {
 
   /// `4 or less`
   String get petal_4 {
-    return Intl.message(
-      '4 or less',
-      name: 'petal_4',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('4 or less', name: 'petal_4', desc: '', args: []);
   }
 
   /// `5`
   String get petal_5 {
-    return Intl.message(
-      '5',
-      name: 'petal_5',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('5', name: 'petal_5', desc: '', args: []);
   }
 
   /// `more than 5`
   String get petal_many {
-    return Intl.message(
-      'more than 5',
-      name: 'petal_many',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('more than 5', name: 'petal_many', desc: '', args: []);
   }
 
   /// `zygomorphic`
@@ -1507,22 +1322,12 @@ class S {
 
   /// `Europe`
   String get europe {
-    return Intl.message(
-      'Europe',
-      name: 'europe',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Europe', name: 'europe', desc: '', args: []);
   }
 
   /// `Africa`
   String get africa {
-    return Intl.message(
-      'Africa',
-      name: 'africa',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Africa', name: 'africa', desc: '', args: []);
   }
 
   /// `Asia-Temperate`
@@ -1547,22 +1352,12 @@ class S {
 
   /// `Australasia`
   String get australasia {
-    return Intl.message(
-      'Australasia',
-      name: 'australasia',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Australasia', name: 'australasia', desc: '', args: []);
   }
 
   /// `Pacific`
   String get pacific {
-    return Intl.message(
-      'Pacific',
-      name: 'pacific',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Pacific', name: 'pacific', desc: '', args: []);
   }
 
   /// `Northern America`
@@ -1647,12 +1442,7 @@ class S {
 
   /// `Macaronesia`
   String get macaronesia {
-    return Intl.message(
-      'Macaronesia',
-      name: 'macaronesia',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Macaronesia', name: 'macaronesia', desc: '', args: []);
   }
 
   /// `West-Central Tropical Africa`
@@ -1747,22 +1537,12 @@ class S {
 
   /// `Mongolia`
   String get mongolia {
-    return Intl.message(
-      'Mongolia',
-      name: 'mongolia',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Mongolia', name: 'mongolia', desc: '', args: []);
   }
 
   /// `China`
   String get china {
-    return Intl.message(
-      'China',
-      name: 'china',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('China', name: 'china', desc: '', args: []);
   }
 
   /// `Arabian Peninsula`
@@ -1787,22 +1567,12 @@ class S {
 
   /// `Caucasus`
   String get caucasus {
-    return Intl.message(
-      'Caucasus',
-      name: 'caucasus',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Caucasus', name: 'caucasus', desc: '', args: []);
   }
 
   /// `Middle Asia`
   String get middle_asia {
-    return Intl.message(
-      'Middle Asia',
-      name: 'middle_asia',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Middle Asia', name: 'middle_asia', desc: '', args: []);
   }
 
   /// `Russian Far East`
@@ -1817,12 +1587,7 @@ class S {
 
   /// `Siberia`
   String get siberia {
-    return Intl.message(
-      'Siberia',
-      name: 'siberia',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Siberia', name: 'siberia', desc: '', args: []);
   }
 
   /// `Indian Subcontinent`
@@ -1837,52 +1602,27 @@ class S {
 
   /// `Indo-China`
   String get indochina {
-    return Intl.message(
-      'Indo-China',
-      name: 'indochina',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Indo-China', name: 'indochina', desc: '', args: []);
   }
 
   /// `Malesia`
   String get malesia {
-    return Intl.message(
-      'Malesia',
-      name: 'malesia',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Malesia', name: 'malesia', desc: '', args: []);
   }
 
   /// `Papuasia`
   String get papuasia {
-    return Intl.message(
-      'Papuasia',
-      name: 'papuasia',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Papuasia', name: 'papuasia', desc: '', args: []);
   }
 
   /// `Australia`
   String get australia {
-    return Intl.message(
-      'Australia',
-      name: 'australia',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Australia', name: 'australia', desc: '', args: []);
   }
 
   /// `New Zealand`
   String get new_zealand {
-    return Intl.message(
-      'New Zealand',
-      name: 'new_zealand',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('New Zealand', name: 'new_zealand', desc: '', args: []);
   }
 
   /// `Southwestern Pacific`
@@ -2007,12 +1747,7 @@ class S {
 
   /// `Mexico`
   String get mexico {
-    return Intl.message(
-      'Mexico',
-      name: 'mexico',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Mexico', name: 'mexico', desc: '', args: []);
   }
 
   /// `Central America`
@@ -2027,12 +1762,7 @@ class S {
 
   /// `Caribbean`
   String get caribbean {
-    return Intl.message(
-      'Caribbean',
-      name: 'caribbean',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Caribbean', name: 'caribbean', desc: '', args: []);
   }
 
   /// `Northern South America`
@@ -2057,12 +1787,7 @@ class S {
 
   /// `Brazil`
   String get brazil {
-    return Intl.message(
-      'Brazil',
-      name: 'brazil',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Brazil', name: 'brazil', desc: '', args: []);
   }
 
   /// `Southern South America`
@@ -2107,52 +1832,27 @@ class S {
 
   /// `Pick one`
   String get list_info {
-    return Intl.message(
-      'Pick one',
-      name: 'list_info',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Pick one', name: 'list_info', desc: '', args: []);
   }
 
   /// `Info`
   String get plant_info {
-    return Intl.message(
-      'Info',
-      name: 'plant_info',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Info', name: 'plant_info', desc: '', args: []);
   }
 
   /// `Gallery`
   String get plant_gallery {
-    return Intl.message(
-      'Gallery',
-      name: 'plant_gallery',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Gallery', name: 'plant_gallery', desc: '', args: []);
   }
 
   /// `Taxonomy`
   String get plant_taxonomy {
-    return Intl.message(
-      'Taxonomy',
-      name: 'plant_taxonomy',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Taxonomy', name: 'plant_taxonomy', desc: '', args: []);
   }
 
   /// `Sources`
   String get plant_sources {
-    return Intl.message(
-      'Sources',
-      name: 'plant_sources',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Sources', name: 'plant_sources', desc: '', args: []);
   }
 
   /// `Translated with Google Translate`
@@ -2207,12 +1907,7 @@ class S {
 
   /// `to`
   String get plant_height_to {
-    return Intl.message(
-      'to',
-      name: 'plant_height_to',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('to', name: 'plant_height_to', desc: '', args: []);
   }
 
   /// `Flowering from`
@@ -2227,22 +1922,12 @@ class S {
 
   /// `to`
   String get plant_flowering_to {
-    return Intl.message(
-      'to',
-      name: 'plant_flowering_to',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('to', name: 'plant_flowering_to', desc: '', args: []);
   }
 
   /// `Flower`
   String get plant_flower {
-    return Intl.message(
-      'Flower',
-      name: 'plant_flower',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Flower', name: 'plant_flower', desc: '', args: []);
   }
 
   /// `Inflorescence`
@@ -2257,62 +1942,32 @@ class S {
 
   /// `Fruit`
   String get plant_fruit {
-    return Intl.message(
-      'Fruit',
-      name: 'plant_fruit',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Fruit', name: 'plant_fruit', desc: '', args: []);
   }
 
   /// `Leaf`
   String get plant_leaf {
-    return Intl.message(
-      'Leaf',
-      name: 'plant_leaf',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Leaf', name: 'plant_leaf', desc: '', args: []);
   }
 
   /// `Stem`
   String get plant_stem {
-    return Intl.message(
-      'Stem',
-      name: 'plant_stem',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Stem', name: 'plant_stem', desc: '', args: []);
   }
 
   /// `Habitat`
   String get plant_habitat {
-    return Intl.message(
-      'Habitat',
-      name: 'plant_habitat',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Habitat', name: 'plant_habitat', desc: '', args: []);
   }
 
   /// `Trivia`
   String get plant_trivia {
-    return Intl.message(
-      'Trivia',
-      name: 'plant_trivia',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Trivia', name: 'plant_trivia', desc: '', args: []);
   }
 
   /// `Toxicity`
   String get plant_toxicity {
-    return Intl.message(
-      'Toxicity',
-      name: 'plant_toxicity',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Toxicity', name: 'plant_toxicity', desc: '', args: []);
   }
 
   /// `Herbalism`
@@ -2337,12 +1992,7 @@ class S {
 
   /// `Synonyms`
   String get plant_synonyms {
-    return Intl.message(
-      'Synonyms',
-      name: 'plant_synonyms',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Synonyms', name: 'plant_synonyms', desc: '', args: []);
   }
 
   /// `(tap to see all)`
@@ -2367,42 +2017,22 @@ class S {
 
   /// `Kingdom`
   String get taxonomy_regnum {
-    return Intl.message(
-      'Kingdom',
-      name: 'taxonomy_regnum',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Kingdom', name: 'taxonomy_regnum', desc: '', args: []);
   }
 
   /// `(clade)`
   String get taxonomy_cladus {
-    return Intl.message(
-      '(clade)',
-      name: 'taxonomy_cladus',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('(clade)', name: 'taxonomy_cladus', desc: '', args: []);
   }
 
   /// `Order`
   String get taxonomy_ordo {
-    return Intl.message(
-      'Order',
-      name: 'taxonomy_ordo',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Order', name: 'taxonomy_ordo', desc: '', args: []);
   }
 
   /// `Family`
   String get taxonomy_familia {
-    return Intl.message(
-      'Family',
-      name: 'taxonomy_familia',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Family', name: 'taxonomy_familia', desc: '', args: []);
   }
 
   /// `Subfamily`
@@ -2417,12 +2047,7 @@ class S {
 
   /// `Tribe`
   String get taxonomy_tribus {
-    return Intl.message(
-      'Tribe',
-      name: 'taxonomy_tribus',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Tribe', name: 'taxonomy_tribus', desc: '', args: []);
   }
 
   /// `Subtribe`
@@ -2437,12 +2062,7 @@ class S {
 
   /// `Genus`
   String get taxonomy_genus {
-    return Intl.message(
-      'Genus',
-      name: 'taxonomy_genus',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Genus', name: 'taxonomy_genus', desc: '', args: []);
   }
 
   /// `Subgenus`
@@ -2467,12 +2087,7 @@ class S {
 
   /// `Sectio`
   String get taxonomy_sectio {
-    return Intl.message(
-      'Sectio',
-      name: 'taxonomy_sectio',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Sectio', name: 'taxonomy_sectio', desc: '', args: []);
   }
 
   /// `Subsectio`
@@ -2487,12 +2102,7 @@ class S {
 
   /// `Serie`
   String get taxonomy_serie {
-    return Intl.message(
-      'Serie',
-      name: 'taxonomy_serie',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Serie', name: 'taxonomy_serie', desc: '', args: []);
   }
 
   /// `Subserie`
@@ -2577,12 +2187,7 @@ class S {
 
   /// `Search...`
   String get search {
-    return Intl.message(
-      'Search...',
-      name: 'search',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Search...', name: 'search', desc: '', args: []);
   }
 
   /// `Search in names`
@@ -2607,12 +2212,7 @@ class S {
 
   /// `Observation`
   String get observation {
-    return Intl.message(
-      'Observation',
-      name: 'observation',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Observation', name: 'observation', desc: '', args: []);
   }
 
   /// `Observations`
@@ -2827,12 +2427,7 @@ class S {
 
   /// `Count`
   String get observation_count {
-    return Intl.message(
-      'Count',
-      name: 'observation_count',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Count', name: 'observation_count', desc: '', args: []);
   }
 
   /// `Distinct flowers`
@@ -2877,12 +2472,7 @@ class S {
 
   /// `Rank`
   String get observation_rank {
-    return Intl.message(
-      'Rank',
-      name: 'observation_rank',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Rank', name: 'observation_rank', desc: '', args: []);
   }
 
   /// `Observers`
@@ -3017,32 +2607,17 @@ class S {
 
   /// `Apple`
   String get apple {
-    return Intl.message(
-      'Apple',
-      name: 'apple',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Apple', name: 'apple', desc: '', args: []);
   }
 
   /// `Google`
   String get google {
-    return Intl.message(
-      'Google',
-      name: 'google',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Google', name: 'google', desc: '', args: []);
   }
 
   /// `App Store`
   String get app_store {
-    return Intl.message(
-      'App Store',
-      name: 'app_store',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('App Store', name: 'app_store', desc: '', args: []);
   }
 
   /// `Google Play Store`
@@ -3157,12 +2732,7 @@ class S {
 
   /// `Open`
   String get notification_open {
-    return Intl.message(
-      'Open',
-      name: 'notification_open',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Open', name: 'notification_open', desc: '', args: []);
   }
 
   /// `Close`
@@ -3187,12 +2757,7 @@ class S {
 
   /// `New flowers`
   String get new_flowers {
-    return Intl.message(
-      'New flowers',
-      name: 'new_flowers',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('New flowers', name: 'new_flowers', desc: '', args: []);
   }
 
   /// `Common lists`
@@ -3207,12 +2772,7 @@ class S {
 
   /// `My lists`
   String get my_lists {
-    return Intl.message(
-      'My lists',
-      name: 'my_lists',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('My lists', name: 'my_lists', desc: '', args: []);
   }
 
   /// `Favorite flowers`
@@ -3297,11 +2857,9 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   bool shouldReload(AppLocalizationDelegate old) => false;
 
   bool _isSupported(Locale locale) {
-    if (locale != null) {
-      for (var supportedLocale in supportedLocales) {
-        if (supportedLocale.languageCode == locale.languageCode) {
-          return true;
-        }
+    for (var supportedLocale in supportedLocales) {
+      if (supportedLocale.languageCode == locale.languageCode) {
+        return true;
       }
     }
     return false;

@@ -23,15 +23,15 @@ import '../main.dart';
 const int maxFailedLoadAttempts = 3;
 
 class SearchResult {
-  double confidence;
-  int count;
-  String entityId;
-  String labelInLanguage;
-  String labelLatin;
-  String path;
-  Map<String, dynamic> plantDetails;
-  List<dynamic> similarImages;
-  String commonName;
+  double? confidence;
+  int? count;
+  String? entityId;
+  String? labelInLanguage;
+  String? labelLatin;
+  String? path;
+  Map<String, dynamic>? plantDetails;
+  List<dynamic>? similarImages;
+  String? commonName;
 }
 
 class SearchPhoto extends StatefulWidget {
@@ -47,10 +47,10 @@ class _SearchPhotoState extends State<SearchPhoto> {
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
-  File _image;
-  Future<List<SearchResult>> _searchResultF;
+  File? _image;
+  Future<List<SearchResult>>? _searchResultF;
 
-  RewardedAd _rewardedAd;
+  RewardedAd? _rewardedAd;
   int _numRewardedLoadAttempts = 0;
 
   Future<void> _logPhotoSearchEvent() async {
@@ -86,7 +86,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
       ));
       return;
     }
-    _rewardedAd.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedAd?.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (RewardedAd ad) {
         ad.dispose();
         _createRewardedAd();
@@ -97,8 +97,8 @@ class _SearchPhotoState extends State<SearchPhoto> {
       },
     );
 
-    _rewardedAd.setImmersiveMode(true);
-    _rewardedAd.show(
+    _rewardedAd?.setImmersiveMode(true);
+    _rewardedAd?.show(
         onUserEarnedReward: (AdWithoutView ad, RewardItem reward) async {
           await Auth.changeCredits(1, "1");
           setState(() {});
@@ -111,7 +111,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
       setState(() {
         _image = null;
         _searchResultF = Future<List<SearchResult>>(() {
-          return null;
+          return <SearchResult>[];
         });
       });
       var image = await _picker.pickImage(source: source, maxWidth: maxSize);
@@ -119,7 +119,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
         _logPhotoSearchEvent();
         setState(() {
           _image = File(image.path);
-          _searchResultF = _getSearchResultPlantId(_image);
+          _searchResultF = _getSearchResultPlantId(_image!);
         });
       }
     }
@@ -164,15 +164,15 @@ class _SearchPhotoState extends State<SearchPhoto> {
               result.count = (event.snapshot.value as Map)['count'];
               result.path = (event.snapshot.value as Map)['path'];
               result.labelInLanguage = '';
-              if (result.path.contains('/')) {
-                String path = result.path.substring(0, result.path.length - 5);
+              if (result.path!.contains('/')) {
+                String path = result.path!.substring(0, result.path!.length - 5);
                 result.labelLatin = path.substring(path.lastIndexOf('/') + 1);
               } else {
                 result.labelLatin = result.path;
-                translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).keepSynced(true);
-                return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin).child(firebaseAttributeLabel).once().then((event) {
+                translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin!).keepSynced(true);
+                return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin!).child(firebaseAttributeLabel).once().then((event) {
                   if (event.snapshot.value != null) {
-                    result.labelInLanguage = event.snapshot.value;
+                    result.labelInLanguage = event.snapshot.value as String;
                   }
                   return result;
                 });
@@ -181,10 +181,10 @@ class _SearchPhotoState extends State<SearchPhoto> {
                 result.labelInLanguage = translationCache[result.labelLatin];
                 return result;
               } else {
-                translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).keepSynced(true);
-                return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin).once().then((event) {
+                translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin!).keepSynced(true);
+                return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin!).once().then((event) {
                   if (event.snapshot.value != null && (event.snapshot.value as List).length > 0) {
-                    translationCache[result.labelLatin] = (event.snapshot.value as List)[0];
+                    translationCache[result.labelLatin!] = (event.snapshot.value as List)[0];
                     result.labelInLanguage = (event.snapshot.value as List)[0];
                   }
                   return result;
@@ -201,7 +201,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
       if (results.length > 0) {
         var userId = firebaseAttributeAnonymous;
         if (Auth.appUser != null) {
-          userId = Auth.appUser.uid;
+          userId = Auth.appUser!.uid;
         }
 
         rootReference.child(firebaseUsersPhotoSearch).child(widget.myLocale.languageCode).child(userId).child(DateTime.now().millisecondsSinceEpoch.toString())
@@ -279,7 +279,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
             )
           ]),
         )
-            : Image.file(_image, fit: BoxFit.cover, width: maxSize, height: maxSize),
+            : Image.file(_image!, fit: BoxFit.cover, width: maxSize, height: maxSize),
       ),
     ));
 
@@ -359,15 +359,16 @@ class _SearchPhotoState extends State<SearchPhoto> {
                 builder: (BuildContext context, AsyncSnapshot<List<SearchResult>> results) {
                   switch (results.connectionState) {
                     case ConnectionState.done:
-                      if (results.data == null || results.data.isEmpty) {
+                      if (results.data == null || results.data!.isEmpty) {
                         return Text(
                           S.of(context).photo_search_empty,
                           style: TextStyle(fontSize: 18.0),
                         );
                       } else {
                         return Column(
-                          children: results.data.map((result) {
-                            if (result.path != null && result.path.isNotEmpty) {
+                          children: results.data!.map((result) {
+                            if (result.path != null && result.path!.isNotEmpty) {
+                              var title = result.labelInLanguage!.isNotEmpty ? result.labelInLanguage! : result.labelLatin!;
                               return Container(
                                   decoration: BoxDecoration(color: Colors.lightBlueAccent),
                                   child: ListTile(
@@ -376,21 +377,21 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                           NumberFormat.percentPattern().format(result.confidence)),
                                       backgroundColor: Colors.white,
                                     ),
-                                    title: result.labelInLanguage.isNotEmpty ? Text(result.labelInLanguage) : Text(result.labelLatin),
-                                    subtitle: result.labelInLanguage.isNotEmpty ? Text(result.labelLatin) : null,
+                                    title: Text(title),
+                                    subtitle: result.labelInLanguage!.isNotEmpty ? Text(result.labelLatin!) : null,
                                     trailing: Text(result.count.toString()),
                                     onTap: () {
-                                      if (result.path.contains('/')) {
+                                      if (result.path!.contains('/')) {
                                         Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(result.path)), settings: RouteSettings(name: 'PlantList')),
+                                          MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(result.path!)), settings: RouteSettings(name: 'PlantList')),
                                         );
                                       } else {
-                                        goToDetail(self, context, widget.myLocale, result.path, {});
+                                        goToDetail(self, context, widget.myLocale, result.path!, {});
                                       }
                                     },
                                     onLongPress: () {
-                                      Clipboard.setData(new ClipboardData(text: result.labelLatin));
+                                      Clipboard.setData(new ClipboardData(text: title));
                                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                         content: Text(S.of(context).snack_copy),
                                       ));
@@ -402,10 +403,10 @@ class _SearchPhotoState extends State<SearchPhoto> {
                                   child: Text(NumberFormat.percentPattern().format(result.confidence)),
                                   backgroundColor: Colors.white,
                                 ),
-                                title: result.commonName != null && result.commonName.isNotEmpty ? Text(result.commonName) : Text(result.labelLatin),
-                                subtitle: result.commonName != null && result.commonName.isNotEmpty ? Text(result.labelLatin) : null,
+                                title: result.commonName != null && result.commonName!.isNotEmpty ? Text(result.commonName!) : Text(result.labelLatin!),
+                                subtitle: result.commonName != null && result.commonName!.isNotEmpty ? Text(result.labelLatin!) : null,
                                 onLongPress: () {
-                                  Clipboard.setData(new ClipboardData(text: result.labelLatin));
+                                  Clipboard.setData(new ClipboardData(text: result.labelLatin!));
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                     content: Text(S.of(context).snack_copy),
                                   ));
@@ -415,7 +416,6 @@ class _SearchPhotoState extends State<SearchPhoto> {
                           }).toList(),
                         );
                       }
-                      break;
                     default:
                       return Center(
                         child: const CircularProgressIndicator(),

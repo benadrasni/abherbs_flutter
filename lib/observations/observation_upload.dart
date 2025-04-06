@@ -12,8 +12,8 @@ class ObservationUpload extends StatefulWidget {
 }
 
 class _ObservationUploadState extends State<ObservationUpload> {
-  int _observationsRemain;
-  int _uploadStatus; // 0: initial, 1: uploading,  2: successful, 3: failed
+  int _uploadStatus = 0; // 0: initial, 1: uploading,  2: successful, 3: failed
+  late int _observationsRemain;
 
   onObservationUpload() {
     if (mounted && _observationsRemain > 0) {
@@ -49,7 +49,6 @@ class _ObservationUploadState extends State<ObservationUpload> {
   void initState() {
     super.initState();
 
-    _uploadStatus = 0;
     _observationsRemain = widget.observationsToUpload;
   }
 
@@ -86,10 +85,14 @@ class _ObservationUploadState extends State<ObservationUpload> {
           S.of(context).observation_upload_progress,
           textAlign: TextAlign.center,
         );
-        _content = LinearPercentIndicator(
-          lineHeight: 20.0,
-          percent: (widget.observationsToUpload - _observationsRemain) / widget.observationsToUpload,
-          progressColor: Theme.of(context).primaryColor,
+        _content = Container(
+          width: MediaQuery.of(context).size.width * 0.8, // Explicit width constraint
+          padding: EdgeInsets.symmetric(vertical: 10.0), // Optional padding for spacing
+          child: LinearPercentIndicator(
+            lineHeight: 20.0,
+            percent: (widget.observationsToUpload - _observationsRemain) / widget.observationsToUpload,
+            progressColor: Theme.of(context).primaryColor,
+          ),
         );
         _actions.add(TextButton(
           child: Text(S.of(context).pause.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),
@@ -125,8 +128,7 @@ class _ObservationUploadState extends State<ObservationUpload> {
         break;
     }
 
-    return WillPopScope(
-        onWillPop: () async => false,
+    return PopScope(
         child: AlertDialog(
           title: _title,
           content: _content,

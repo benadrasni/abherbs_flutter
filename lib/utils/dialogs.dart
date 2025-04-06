@@ -7,6 +7,8 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:flutter/material.dart';
 
+import '../purchase/enhancements.dart';
+
 Future<void> rateDialog(BuildContext context) async {
   return showDialog(
     context: context,
@@ -66,7 +68,7 @@ Future<void> observationDialog(BuildContext mainContext, GlobalKey<ScaffoldState
               onPressed: () {
                 Navigator.of(context).pop();
                 if (key.currentState != null) {
-                  key.currentState.openDrawer();
+                  key.currentState!.openDrawer();
                 }
               },
             )
@@ -92,7 +94,7 @@ Future<void> photoSearchDialog(BuildContext mainContext, GlobalKey<ScaffoldState
               onPressed: () {
                 Navigator.of(context).pop();
                 if (key.currentState != null) {
-                  key.currentState.openDrawer();
+                  key.currentState!.openDrawer();
                 }
               },
             )
@@ -118,7 +120,7 @@ Future<void> favoriteDialog(BuildContext mainContext, GlobalKey<ScaffoldState> k
               onPressed: () {
                 Navigator.of(context).pop();
                 if (key.currentState != null) {
-                  key.currentState.openDrawer();
+                  key.currentState!.openDrawer();
                 }
               },
             )
@@ -127,8 +129,8 @@ Future<void> favoriteDialog(BuildContext mainContext, GlobalKey<ScaffoldState> k
       });
 }
 
-Future<bool> deleteDialog(BuildContext mainContext, String title, String content) async {
-  return showDialog(
+Future<dynamic> deleteDialog(BuildContext mainContext, String title, String content) async {
+  return showDialog<bool>(
       context: mainContext,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -160,8 +162,8 @@ Future<bool> deleteDialog(BuildContext mainContext, String title, String content
       });
 }
 
-Future<bool> subscriptionDialog(BuildContext mainContext, String title, String content) async {
-  return showDialog(
+Future<dynamic> subscriptionDialog(BuildContext mainContext, String title, String content) async {
+  return showDialog<bool>(
       context: mainContext,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -190,10 +192,10 @@ Future<bool> subscriptionDialog(BuildContext mainContext, String title, String c
             )
           ],
         );
-      });
+      }) as bool;
 }
 
-Future<bool> infoDialog(BuildContext mainContext, String title, String content) async {
+Future<void> infoDialog(BuildContext mainContext, String title, String content) async {
   return showDialog(
       context: mainContext,
       builder: (BuildContext context) {
@@ -250,7 +252,7 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
             ],
           ),
           actions: [
-            credit != null ? TextButton(
+            TextButton(
               child: Text(credit,
                   style: TextStyle(
                     fontSize: 16.0,
@@ -259,7 +261,7 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
               onPressed: () {
                 Navigator.of(context).pop(2);
               },
-            ) : Container(),
+            ),
             TextButton(
               child: Text(S.of(context).enhancements,
                   style: TextStyle(
@@ -267,7 +269,12 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
                     fontWeight: FontWeight.bold,
                   )),
               onPressed: () {
-                Navigator.of(context).pop(1);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EnhancementsScreen({}), settings: RouteSettings(name: 'Enhancements')),
+                ).then((result) {
+                  Navigator.pop(context);
+                });
               },
             ),
             TextButton(
@@ -277,10 +284,10 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
                     fontWeight: FontWeight.bold,
                   )),
               onPressed: () {
-                Navigator.of(context).pop(0);
+                Navigator.pop(context);
               },
             ),
           ],
         );
-      });
+      }) as int;
 }

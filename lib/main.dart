@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/settings/flutter_localized_countries.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/settings/settings_remote.dart';
@@ -23,7 +22,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import 'detail/plant_detail.dart';
 import 'entity/plant.dart';
@@ -32,6 +31,7 @@ import 'filter/distribution.dart';
 import 'filter/filter_utils.dart';
 import 'filter/habitat.dart';
 import 'filter/petal.dart';
+import 'firebase_options.dart';
 
 void _iapError() {
   Fluttertoast.showToast(
@@ -40,7 +40,7 @@ void _iapError() {
 
 Future<void> initializeFlutterFire() async {
   // Wait for Firebase to initialize
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
   FirebaseDatabase.instance.setPersistenceEnabled(true);
   FirebaseDatabase.instance.setPersistenceCacheSizeBytes(firebaseCacheSize);
 
@@ -52,10 +52,24 @@ Future<void> initializeFlutterFire() async {
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 }
 
+Locale getDeviceLocale() {
+  // device locale could be "en", "en_US" or "en_US.UTF-8"
+  List<String> localeHelper = Platform.localeName.split(".")[0].split("_");
+  if (localeHelper.length > 1) {
+    return Locale(localeHelper[0], localeHelper[1]);
+  } else {
+    return Locale(localeHelper[0]);
+  }
+}
+
 Future<Locale> initializeLocale() async {
   return Prefs.getStringF(keyPreferredLanguage).then((String language) {
     var languageCountry = language.split('_');
-    return languageCountry.length < 2 ? null : Locale(languageCountry[0], languageCountry[1]);
+    if (languageCountry.length < 2) {
+      return getDeviceLocale();
+    } else {
+      return Locale(languageCountry[0], languageCountry[1]);
+    }
   });
 }
 
@@ -63,8 +77,8 @@ Future<Map<String, String>> initializeFilter() async {
   return Prefs.getBoolF(keyAlwaysMyRegion, false).then((alwaysMyRegionValue) {
     Map<String, String> filter = {};
     if (alwaysMyRegionValue) {
-      return Prefs.getStringF(keyMyRegion, null).then((myRegionValue) {
-        if (myRegionValue != null) {
+      return Prefs.getStringF(keyMyRegion, '').then((myRegionValue) {
+        if (myRegionValue.isNotEmpty) {
           filter[filterDistribution] = myRegionValue;
         }
         return filter;
@@ -76,21 +90,16 @@ Future<Map<String, String>> initializeFilter() async {
 
 Future<String> initializeRoute() {
   return Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
-    String initialRoute = '/' + filterColor;
     Preferences.myFilterAttributes = myFilter;
-    if (myFilter != null && myFilter.length > 0) {
-      initialRoute = '/' + myFilter[0];
-    }
-    return initialRoute;
+    return '/' + myFilter[0];
   });
 }
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-
   runZonedGuarded(() {
+    WidgetsFlutterBinding.ensureInitialized();
     initializeFlutterFire().then((_) async {
-      Wakelock.enable();
+      WakelockPlus.enable();
       await Prefs.init();
       await AppTrackingTransparency.requestTrackingAuthorization();
       MobileAds.instance.initialize();
@@ -109,14 +118,14 @@ void main() {
 }
 
 class App extends StatefulWidget {
-  static BuildContext currentContext;
+  static BuildContext? currentContext;
   final Locale locale;
   final Map<String, String> filter;
   final String initialRoute;
   App(this.locale, this.filter, this.initialRoute);
 
   static void setLocale(BuildContext context, String language) async {
-    _AppState state = context.findAncestorStateOfType<_AppState>();
+    _AppState state = context.findAncestorStateOfType<_AppState>()!;
     state.changeLanguage(language);
   }
 
@@ -127,19 +136,23 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
-  StreamSubscription<List<PurchaseDetails>> _subscription;
-  Locale _locale;
+  late StreamSubscription<List<PurchaseDetails>> _subscription;
+  late Locale _locale;
 
   Future<void> _logFailedPurchaseEvent() async {
     await _firebaseAnalytics.logEvent(name: 'purchase_failed');
   }
 
   changeLanguage(String language) {
-    var languageCountry = language?.split('_');
-    setState(() {
-      translationCache = {};
-      _locale = language == null || language.isEmpty ? null : Locale(languageCountry[0], languageCountry[1]);
-    });
+    if (language.isEmpty) {
+      _locale = getDeviceLocale();
+    } else {
+      var languageCountry = language.split('_');
+      setState(() {
+        translationCache = {};
+        _locale = Locale(languageCountry[0], languageCountry[1]);
+      });
+    }
   }
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
@@ -163,16 +176,17 @@ class _AppState extends State<App> {
         switch (action) {
           case notificationAttributeActionList:
             String path = message.data[notificationAttributePath];
+            String? content = message.notification?.title != null ? message.notification?.title : message.notification?.body;
             rootReference.child(path).keepSynced(true);
             return showDialog(
-              context: App.currentContext,
+              context: App.currentContext!,
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Text(S
                       .of(context)
                       .notification),
-                  content: Text(message.notification.title != null ? message.notification.title : message.notification.body),
+                  content: Text(content ?? ''),
                   actions: <Widget>[
                     TextButton(
                       child: Text(S
@@ -205,15 +219,16 @@ class _AppState extends State<App> {
             );
           case notificationAttributeActionPlant:
             String name = message.data[notificationAttributeName];
+            String? content = message.notification?.title != null ? message.notification?.title : message.notification?.body;
             return showDialog(
-              context: App.currentContext,
+              context: App.currentContext!,
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return AlertDialog(
                   title: Text(S
                       .of(context)
                       .notification),
-                  content: Text(message.notification.title != null ? message.notification.title : message.notification.body),
+                  content: Text(content ?? ''),
                   actions: <Widget>[
                     TextButton(
                       child: Text(S
@@ -275,11 +290,11 @@ class _AppState extends State<App> {
       print('token $token');
     }).onError((error, stackTrace) => null);
 
-    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message) async {
-      if (message != null) {
-        MaterialPageRoute<dynamic> redirect = await findRedirectF(message.data);
+    FirebaseMessaging.instance.getInitialMessage().then((value) async {
+      if (value?.data != null) {
+        MaterialPageRoute<dynamic>? redirect = await findRedirectF(value!.data);
         if (redirect != null) {
-          Navigator.push(App.currentContext, redirect);
+          Navigator.push(App.currentContext!, redirect);
         }
       }
     });
@@ -293,33 +308,25 @@ class _AppState extends State<App> {
     });
   }
 
-  Future<MaterialPageRoute<dynamic>> findRedirectF(Map<String, dynamic> notificationData) {
-    if (notificationData == null) {
-      return Future<MaterialPageRoute<dynamic>>(() {
-        return null;
-      });
+  Future<MaterialPageRoute<dynamic>>? findRedirectF(Map<String, dynamic> notificationData) {
+    if (notificationData.isEmpty) {
+      return null;
     } else {
       String action = notificationData[notificationAttributeAction];
-      if (action == null) {
-        return Future<MaterialPageRoute<dynamic>>(() {
-          return null;
-        });
+      if (action.isEmpty) {
+        return null;
       } else {
         switch (action) {
           case notificationAttributeActionBrowse:
             String uri = notificationData[notificationAttributeUri];
-            if (uri != null) {
+            if (uri.isNotEmpty) {
               launchURLF(uri);
-              return Future<MaterialPageRoute<dynamic>>(() {
-                return null;
-              });
-            }
-            return Future<MaterialPageRoute<dynamic>>(() {
               return null;
-            });
+            }
+            return null;
           case notificationAttributeActionList:
             String path = notificationData[notificationAttributePath];
-            if (path != null) {
+            if (path.isNotEmpty) {
               rootReference.child(path).keepSynced(true);
               rootReference.child(firebasePlantHeaders).keepSynced(true);
               return rootReference.child(path).once().then((event) {
@@ -335,46 +342,34 @@ class _AppState extends State<App> {
                 });
               });
             }
-            return Future<MaterialPageRoute<dynamic>>(() {
-              return null;
-            });
+            return null;
           case notificationAttributeActionPlant:
             String name = notificationData[notificationAttributeName];
-            if (name != null) {
+            if (name.isNotEmpty) {
               rootReference.child(firebasePlants).keepSynced(true);
               return plantsReference.child(name).once().then((event) {
                 if (event.snapshot.value != null && (event.snapshot.value as Map)['id'] != null) {
-                  Plant plant = Plant.fromJson(event.snapshot.key, event.snapshot.value);
+                  Plant plant = Plant.fromJson(event.snapshot.key ?? '', event.snapshot.value as Map);
                   return Future<MaterialPageRoute<dynamic>>(() {
                     return MaterialPageRoute(builder: (context) => PlantDetail(Localizations.localeOf(context), Map<String, String>(), plant), settings: RouteSettings(name: 'PlantDetail'));
                   });
                 }
-                return Future<MaterialPageRoute<dynamic>>(() {
-                  return null;
-                });
+                return Future.value(null);
               });
             }
-            return Future<MaterialPageRoute<dynamic>>(() {
-              return null;
-            });
+            return null;
           default:
-            return Future<MaterialPageRoute<dynamic>>(() {
-              return null;
-            });
+            return null;
         }
       }
     }
   }
 
-  Locale localeResolution(Locale savedLocale, Locale deviceLocale, Iterable<Locale> supportedLocales) {
-    if (savedLocale != null) {
-      return savedLocale;
-    }
-
-    Locale resultLocale;
+  Locale localeResolution(Locale savedLocale, Iterable<Locale> supportedLocales) {
+    Locale? resultLocale;
     Map<String, Locale> defaultLocale = {};
     for (Locale locale in supportedLocales) {
-      if (locale.languageCode == deviceLocale.languageCode && locale.countryCode != null && locale.countryCode == deviceLocale.countryCode) {
+      if (locale.languageCode == savedLocale.languageCode && locale.countryCode == savedLocale.countryCode) {
         resultLocale = locale;
         break;
       }
@@ -386,7 +381,7 @@ class _AppState extends State<App> {
 
     if (resultLocale == null) {
       for (Locale locale in supportedLocales) {
-        if (locale.languageCode == deviceLocale.languageCode) {
+        if (locale.languageCode == savedLocale.languageCode) {
           resultLocale = defaultLocale[locale.languageCode];
           break;
         }
@@ -397,7 +392,7 @@ class _AppState extends State<App> {
       resultLocale = defaultLocale[languageEnglish];
     }
 
-    Prefs.setStringList(keyLanguageAndCountry, [resultLocale.languageCode, resultLocale.countryCode]);
+    Prefs.setStringList(keyLanguageAndCountry, [resultLocale!.languageCode, resultLocale.countryCode!]);
     return resultLocale;
   }
 
@@ -461,20 +456,14 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    Locale deviceLocale;
-    List<String> localeHelper = Platform.localeName?.split("_");
-    if (localeHelper != null) {
-      deviceLocale = Locale(localeHelper[0], localeHelper.length > 1 ? localeHelper[1] : null);
-    }
     return MaterialApp(
-      locale: localeResolution(_locale, deviceLocale, S.delegate.supportedLocales),
+      locale: localeResolution(_locale, S.delegate.supportedLocales),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
-        CountryNamesLocalizationsDelegate(),
         CountryLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,

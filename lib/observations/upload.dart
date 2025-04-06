@@ -12,11 +12,11 @@ class Upload {
   static bool uploadPaused = false;
   static bool uploadStarted = false;
   static int count = 0;
-  static Function() _onUploadStart;
-  static Function() _onUploadFinish;
-  static Function() _onUploadFail;
-  static Function() _onObservationUpload;
-  static Function() _onObservationUploadFail;
+  static Function()? _onUploadStart;
+  static Function()? _onUploadFinish;
+  static Function()? _onUploadFail;
+  static Function()? _onObservationUpload;
+  static Function()? _onObservationUploadFail;
   static firebase_storage.FirebaseStorage _storage = firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket);
   static FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
 
@@ -35,44 +35,44 @@ class Upload {
 
     uploadStarted = true;
     privateObservationsReference
-        .child(Auth.appUser.uid)
+        .child(Auth.appUser!.uid)
         .child(firebaseObservationsByDate)
         .child(firebaseAttributeList)
         .orderByChild(firebaseAttributeStatus)
         .equalTo(firebaseValuePrivate)
         .once()
         .then((event) async {
-      count = (event.snapshot.value as Map)?.length ?? 0;
+      count = (event.snapshot.value as Map).length;
       if (count > 0) {
-        _onUploadStart();
-        _logObservationUploadEvent(Auth.appUser.uid, 'started');
+        _onUploadStart!();
+        _logObservationUploadEvent(Auth.appUser!.uid, 'started');
         var date = DateTime.now();
-        await logsObservationsReference.child(Auth.appUser.uid).child(date.millisecondsSinceEpoch.toString()).child(firebaseAttributeTime).set(-1 * date.millisecondsSinceEpoch);
+        await logsObservationsReference.child(Auth.appUser!.uid).child(date.millisecondsSinceEpoch.toString()).child(firebaseAttributeTime).set(-1 * date.millisecondsSinceEpoch);
         for (var key in (event.snapshot.value as Map).keys) {
           if (uploadPaused) {
-            _logObservationUploadEvent(Auth.appUser.uid, 'paused');
+            _logObservationUploadEvent(Auth.appUser!.uid, 'paused');
             break;
           }
           Observation observation = Observation.fromJson(key, (event.snapshot.value as Map)[key]);
           if (await _uploadObservation(observation)) {
-            await logsObservationsReference.child(Auth.appUser.uid).child(date.millisecondsSinceEpoch.toString()).child(observation.id).child(firebaseAttributeStatus).set(firebaseValueSuccess);
+            await logsObservationsReference.child(Auth.appUser!.uid).child(date.millisecondsSinceEpoch.toString()).child(observation.id).child(firebaseAttributeStatus).set(firebaseValueSuccess);
             count--;
-            _onObservationUpload();
+            _onObservationUpload!();
           } else {
-            await logsObservationsReference.child(Auth.appUser.uid).child(date.millisecondsSinceEpoch.toString()).child(observation.id).child(firebaseAttributeStatus).set(firebaseValueFailure);
-            _onObservationUploadFail();
+            await logsObservationsReference.child(Auth.appUser!.uid).child(date.millisecondsSinceEpoch.toString()).child(observation.id).child(firebaseAttributeStatus).set(firebaseValueFailure);
+            _onObservationUploadFail!();
           }
         }
-        _logObservationUploadEvent(Auth.appUser.uid, 'finished');
-        _onUploadFinish();
+        _logObservationUploadEvent(Auth.appUser!.uid, 'finished');
+        _onUploadFinish!();
       }
       uploadStarted = false;
       uploadPaused = false;
     }).catchError((error) {
-      _logObservationUploadEvent(Auth.appUser.uid, 'failed');
+      _logObservationUploadEvent(Auth.appUser!.uid, 'failed');
       uploadStarted = false;
       uploadPaused = false;
-      _onUploadFail();
+      _onUploadFail!();
     });
   }
 
@@ -91,14 +91,14 @@ class Upload {
 
     // update private
     await privateObservationsReference
-        .child(Auth.appUser.uid)
+        .child(Auth.appUser!.uid)
         .child(firebaseObservationsByDate)
         .child(firebaseAttributeList)
         .child(observation.id)
         .child(firebaseAttributeStatus)
         .set(firebaseValuePublic);
     await privateObservationsReference
-        .child(Auth.appUser.uid)
+        .child(Auth.appUser!.uid)
         .child(firebaseObservationsByPlant)
         .child(observation.plant)
         .child(firebaseAttributeList)
@@ -109,7 +109,7 @@ class Upload {
   }
 
   static Future<bool> _uploadFile(String path) async {
-    File file = await Offline.getLocalFile(path);
+    File? file = await Offline.getLocalFile(path);
     final firebase_storage.Reference ref = _storage.ref().child(path);
     if (file != null) {
       return await ref.putFile(file).then((firebase_storage.TaskSnapshot snapshot) {

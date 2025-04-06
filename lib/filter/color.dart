@@ -31,12 +31,12 @@ class Color extends StatefulWidget {
 
 class _ColorState extends State<Color> {
   GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-  StreamSubscription<firebase_auth.User> _listener;
-  Future<int> _countF;
-  Future<String> _rateStateF;
-  Future<bool> _isNewVersionF;
-  Map<String, String> _filter;
-  BannerAd _ad;
+  Map<String, String> _filter = Map<String, String>();
+  late StreamSubscription<firebase_auth.User?> _listener;
+  Future<bool> _isNewVersionF =  Future.value(false);
+  Future<int>? _countF;
+  Future<String>? _rateStateF;
+  BannerAd? _ad;
 
   _navigate(String value) {
     var newFilter = Map<String, String>();
@@ -68,7 +68,7 @@ class _ColorState extends State<Color> {
   void initState() {
     super.initState();
 
-    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {}));
+    _listener = Auth.subscribe((firebase_auth.User? user) => setState(() {}));
     Offline.setKeepSynced(1, true);
 
     if (!Purchases.isNoAds()) {
@@ -85,16 +85,15 @@ class _ColorState extends State<Color> {
           },
         ),
       );
-      _ad.load();
+      _ad?.load();
     }
-    _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterColor);
     _rateStateF = Prefs.getStringF(keyRateState, rateStateInitial);
     _isNewVersionF = PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       return FirebaseDatabase.instance.ref().child(firebaseVersions).child(Platform.isAndroid ? firebaseAttributeAndroid : firebaseAttributeIOS).once().then((event) {
         return int.parse(packageInfo.buildNumber) < (event.snapshot.value as int);
-      });
+      }).onError((error, stackTrace) => false);
     });
 
     _setCount();
@@ -200,7 +199,7 @@ class _ColorState extends State<Color> {
               return FutureBuilder<bool>(
                   future: _isNewVersionF,
                   builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done && snapshot.data) {
+                    if (snapshot.connectionState == ConnectionState.done && snapshot.hasData && snapshot.data!) {
                       return Container(
                         padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                         decoration: new BoxDecoration(
@@ -305,7 +304,7 @@ class _ColorState extends State<Color> {
         title: Text(S.of(context).filter_color),
         actions: getActions(context, _key, widget.filter),
       ),
-      drawer: AppDrawer(_filter, null),
+      drawer: AppDrawer(_filter, () => {}),
       body: Stack(
         children: <Widget>[
           Positioned.fill(
@@ -319,22 +318,22 @@ class _ColorState extends State<Color> {
             children: [
               Expanded(
                   child: ListView(
-                padding: EdgeInsets.all(5.0),
-                children: _widgets,
-              )),
+                    padding: EdgeInsets.all(5.0),
+                    children: _widgets,
+                  )),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: !Purchases.isNoAds()
+                child: !Purchases.isNoAds() && _ad != null
                     ? Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
-                        child: AdWidget(ad: _ad),
-                        width: _ad.size.width.toDouble(),
-                        height: _ad.size.height.toDouble(),
-                      )
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
+                  child: AdWidget(ad: _ad!),
+                  width: _ad!.size.width.toDouble(),
+                  height: _ad!.size.height.toDouble(),
+                )
                     : Container(
-                        height: 0.0,
-                      ),
+                  height: 0.0,
+                ),
               ),
             ],
           ),

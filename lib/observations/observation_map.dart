@@ -18,15 +18,15 @@ class ObservationMap extends StatefulWidget {
 }
 
 class _ObservationMapState extends State<ObservationMap> {
-  DateFormat _dateFormat;
-  DateFormat _timeFormat;
-  MarkerId _markerId;
+  late DateFormat _dateFormat;
+  late DateFormat _timeFormat;
+  late MarkerId _markerId;
   Map<MarkerId, Marker> _markers = <MarkerId, Marker>{};
-  Future<String> nameF;
+  late Future<String> nameF;
 
   void _updateMarker(CameraPosition _position) {
     if (widget.mode == mapModeEdit) {
-      final Marker marker = _markers[_markerId];
+      final Marker marker = _markers[_markerId]!;
       setState(() {
         _markers[_markerId] = marker.copyWith(
           positionParam: LatLng(
@@ -39,7 +39,7 @@ class _ObservationMapState extends State<ObservationMap> {
   }
 
   void _onSaveButtonPressed(BuildContext context) {
-    Marker marker = _markers[_markerId];
+    Marker marker = _markers[_markerId]!;
     Navigator.pop(
         context, LatLng(marker.position.latitude, marker.position.longitude));
   }
@@ -62,7 +62,7 @@ class _ObservationMapState extends State<ObservationMap> {
 
     nameF = translationCache.containsKey(widget.observation.plant)
         ? Future<String>(() {
-            return translationCache[widget.observation.plant];
+            return translationCache[widget.observation.plant]!;
           })
         : translationsReference
             .child(getLanguageCode(widget.myLocale.languageCode))
@@ -71,10 +71,10 @@ class _ObservationMapState extends State<ObservationMap> {
             .once()
             .then((event) {
             if (event.snapshot.value != null) {
-              translationCache[widget.observation.plant] = event.snapshot.value;
-              return event.snapshot.value;
+              translationCache[widget.observation.plant] = event.snapshot.value as String;
+              return event.snapshot.value as String;
             } else {
-              return null;
+              return widget.observation.plant;
             }
           });
   }
@@ -124,7 +124,7 @@ class _ObservationMapState extends State<ObservationMap> {
                 String labelLocal = widget.observation.plant;
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.data != null) {
-                    labelLocal = snapshot.data;
+                    labelLocal = snapshot.data!;
                   }
                 }
                 return ListTile(

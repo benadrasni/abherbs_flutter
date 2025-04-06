@@ -1,26 +1,26 @@
 class PlantTranslation {
-  String label;
-  List<dynamic> names;
-  List<dynamic> sourceUrls;
-  String wikipedia;
-  String description;
-  String flower;
-  String inflorescence;
-  String fruit;
-  String leaf;
-  String stem;
-  String habitat;
-  String toxicity;
-  String herbalism;
-  String trivia;
+  String? label;
+  List<dynamic> names = [];
+  List<dynamic> sourceUrls = [];
+  String? wikipedia;
+  String? description;
+  String? flower;
+  String? inflorescence;
+  String? fruit;
+  String? leaf;
+  String? stem;
+  String? habitat;
+  String? toxicity;
+  String? herbalism;
+  String? trivia;
   bool isTranslatedWithGT = false;
 
   PlantTranslation();
 
   PlantTranslation.fromJson(Map data) {
     label = data['label'];
-    names = data['names'];
-    sourceUrls = data['sourceUrls'];
+    names = (data['names'] as List<dynamic>?) ?? [];
+    sourceUrls = (data['sourceUrls'] as List<dynamic>?) ?? [];
     wikipedia = data['wikipedia'];
     description = data['description'];
     flower = data['flower'];
@@ -53,8 +53,8 @@ class PlantTranslation {
 
   PlantTranslation mergeWith(PlantTranslation plantTranslation) {
     label = plantTranslation.label ?? label;
-    names = plantTranslation.names ?? names;
-    sourceUrls = plantTranslation.sourceUrls ?? sourceUrls;
+    names = plantTranslation.names;
+    sourceUrls = plantTranslation.sourceUrls;
     wikipedia = plantTranslation.wikipedia ?? wikipedia;
     description = plantTranslation.description ?? description;
     flower = plantTranslation.flower ?? flower;
@@ -90,12 +90,8 @@ class PlantTranslation {
     if (label != null) {
       result['label'] = label;
     }
-    if (names != null) {
-      result['names'] = names;
-    }
-    if (sourceUrls != null) {
-      result['sourceUrls'] = sourceUrls;
-    }
+    result['names'] = names;
+    result['sourceUrls'] = sourceUrls;
     if (wikipedia != null) {
       result['wikipedia'] = wikipedia;
     }

@@ -1,3 +1,3 @@
 class Preferences {
-  static List<String> myFilterAttributes;
+  static List<String> myFilterAttributes = [];
 }

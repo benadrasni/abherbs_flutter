@@ -1,5 +1,7 @@
 import 'package:abherbs_flutter/entity/serializer.dart';
 
+import '../utils/utils.dart';
+
 const String observationId = "id";
 const String observationPlant = "plant";
 const String observationLatitude = "latitude";
@@ -14,23 +16,20 @@ const String observationStatusPrivate = "private";
 const String observationStatusPublic = "public";
 
 class Observation{
-  String key;
-  String id;
-  String plant;
-  DateTime date;
-  double longitude;
-  double latitude;
-  String note;
-  List<dynamic> photoPaths;
-  String status;
-  String uploadStatus;
-  int order;
+  String key = "";
+  String id = "";
+  String plant = "";
+  DateTime date = DateTime.now();
+  double longitude = 0.0;
+  double latitude = 0.0;
+  String note = "";
+  List<dynamic> photoPaths = [];
+  String status = observationStatusPrivate;
+  String uploadStatus = firebaseValuePrivate;
+  int order = 0;
 
   Observation(String plantName) {
     this.plant = plantName;
-    this.date = DateTime.now();
-    this.photoPaths = [];
-    this.status = observationStatusPrivate;
   }
 
   Observation.from(Observation observation) {
@@ -53,7 +52,7 @@ class Observation{
     this.date = DateTime.fromMillisecondsSinceEpoch(data[observationDate][observationTime]);
     this.longitude = data[observationLongitude].toDouble();
     this.latitude = data[observationLatitude].toDouble();
-    this.note = data[observationNote];
+    this.note = data[observationNote] ?? "";
     this.photoPaths = data[observationPhotoPaths];
     this.status = data[observationStatus];
     this.order = data[observationOrder];

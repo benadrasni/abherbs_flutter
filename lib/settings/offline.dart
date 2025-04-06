@@ -13,11 +13,11 @@ class Offline {
   static bool downloadFinished = false;
   static bool downloadPaused = false;
 
-  static var _httpClient = new HttpClient();
-  static String _rootPath;
+  static var _httpClient = HttpClient();
+  static String _rootPath = '';
   static bool _offline = false;
   static bool _downloadDB = false;
-  static String _downloadDBDate;
+  static String _downloadDBDate = '';
   static List<bool> _keepSynced = [false, false, false, false];
 
   static void initialize() {
@@ -47,7 +47,7 @@ class Offline {
         rootReference.child(firebaseVersions).child(firebaseAttributeLastUpdate).once().then((event) {
           if (event.snapshot.value != null) {
             Prefs.getStringF(keyOfflineDB, '').then((value) {
-              _downloadDBDate = event.snapshot.value;
+              _downloadDBDate = event.snapshot.value as String;
               DateTime dbUpdate = DateTime.parse(_downloadDBDate);
               _downloadDB = value.isEmpty || dbUpdate.isAfter(DateTime.parse(value));
             });
@@ -144,7 +144,7 @@ class Offline {
         .child(firebaseAttributeCount)
         .once()
         .then((event) {
-      return event.snapshot.value ?? 0;
+      return event.snapshot.value as int ?? 0;
     });
     while (position < familyTotal) {
       if (await _downloadFamilyIcon(position)) {
@@ -170,7 +170,7 @@ class Offline {
         .child(position.toString())
         .once()
         .then((event) {
-      return event.snapshot.value;
+      return event.snapshot.value as String;
     });
     if (family != null) {
       var errors = 0;
@@ -188,7 +188,7 @@ class Offline {
     int position = int.parse(await Prefs.getStringF(keyOfflinePlant, '0'));
     int plantTotal =
         await FirebaseDatabase.instance.ref().child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((event) {
-      return event.snapshot.value ?? 0;
+      return event.snapshot.value as int ?? 0;
     });
     while (position < plantTotal) {
       if (await _downloadPlantPhotos(position)) {
@@ -208,7 +208,7 @@ class Offline {
   }
 
   static Future<bool> _downloadPlantPhotos(int position) async {
-    String url;
+    late String url;
     String plantName =
         await FirebaseDatabase.instance.ref().child(firebasePlantHeaders).child(position.toString()).once().then((event) {
       url = event.snapshot.value == null ? null : (event.snapshot.value as Map)['url'];
@@ -216,13 +216,13 @@ class Offline {
     });
     if (plantName != null) {
       Plant plant = await FirebaseDatabase.instance.ref().child(firebasePlants).child(plantName).once().then((event) {
-        return Plant.fromJson(event.snapshot.key, event.snapshot.value);
+        return Plant.fromJson(event.snapshot.key ?? '', event.snapshot.value as Map);
       });
       if (plant != null) {
         var errors = 0;
         var urls = <String>[];
         urls.addAll(plant.photoUrls.map((url) => url as String));
-        urls.add(plant.illustrationUrl);
+        urls.add(plant.illustrationUrl!);
         if (url != plant.photoUrls[0]) {
           urls.add(url);
         }
@@ -277,11 +277,11 @@ class Offline {
     return file;
   }
 
-  static Future<File> getLocalFile(String filename) async {
-    if (_rootPath == null) {
+  static Future<File?> getLocalFile(String filename) async {
+    if (_rootPath.isEmpty) {
       _rootPath = (await getApplicationDocumentsDirectory()).path;
     }
-    File file = new File('$_rootPath/$filename');
+    final File file = File('$_rootPath/$filename');
     return file.exists().then((exists) {
       return exists ? file : null;
     });

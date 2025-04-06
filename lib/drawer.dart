@@ -20,12 +20,11 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  Map<String, String> _filter;
+  Map<String, String> _filter = new Map<String, String>();
 
   @override
   void initState() {
     super.initState();
-    _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
   }
 
@@ -98,7 +97,7 @@ class _AppDrawerState extends State<AppDrawer> {
           getFilterText(context, attribute),
           style: drawerTextStyle,
         ),
-        subtitle: Text(getFilterSubtitle(context, attribute, _filter[attribute]) ?? ''),
+        subtitle: Text(getFilterSubtitle(context, attribute, _filter.containsKey(attribute) ? _filter[attribute] : '')),
         onTap: () {
           Navigator.pop(context);
           onLeftNavigationTap(context, _filter, attribute);
@@ -140,9 +139,7 @@ class _AppDrawerState extends State<AppDrawer> {
           if (mounted) {
             Navigator.pop(context);
           }
-          if (widget.settingsCallback != null) {
-            widget.settingsCallback();
-          }
+          widget.settingsCallback();
         });
       },
     ));

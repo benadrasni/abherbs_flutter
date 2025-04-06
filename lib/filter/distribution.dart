@@ -28,19 +28,19 @@ class Distribution extends StatefulWidget {
 }
 
 class _DistributionState extends State<Distribution> {
-  StreamSubscription<firebase_auth.User> _listener;
-  Future<int> _countF;
-  Map<String, String> _filter;
-  Future<String> _myRegionF;
-  String _myRegion;
-  GlobalKey<ScaffoldState> _key;
-  BannerAd _ad;
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+  Map<String, String> _filter = Map<String, String>();
+  String _myRegion = "";
+  late StreamSubscription<firebase_auth.User?> _listener;
+  Future<int>? _countF;
+  Future<String>? _myRegionF;
+  BannerAd? _ad;
 
   void _openRegion(String region) {
     var route = MaterialPageRoute(builder: (context) => Distribution2(widget.filter, int.parse(region)), settings: RouteSettings(name: 'Distribution2'));
     filterRoutes[filterDistribution2] = route;
     Navigator.push(context, route).then((value) {
-      filterRoutes[filterDistribution2] = null;
+      filterRoutes.remove(filterDistribution2);
     });
   }
 
@@ -66,15 +66,14 @@ class _DistributionState extends State<Distribution> {
 
   _setCount() {
     _countF = countsReference.child(getFilterKey(_filter)).once().then((event) {
-      return event.snapshot.value;
+      return event.snapshot.value as int;
     });
   }
 
   _setMyRegion() {
     if (mounted) {
-      _myRegion = "";
       _myRegionF = Prefs.getStringF(keyMyRegion);
-      _myRegionF.then((region) {
+      _myRegionF?.then((region) {
         setState(() {
           _myRegion = region;
         });
@@ -117,9 +116,9 @@ class _DistributionState extends State<Distribution> {
             FutureBuilder<String>(
                 future: _myRegionF,
                 builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                  var value = "";
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    value = snapshot.data.isNotEmpty ? getFilterDistributionValue(context, snapshot.data) : "";
+                  String value = "";
+                  if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
+                    value = snapshot.data!.isNotEmpty ? getFilterDistributionValue(context, snapshot.data) : "";
                   }
                   return Text(
                     value,
@@ -212,7 +211,7 @@ class _DistributionState extends State<Distribution> {
   void initState() {
     super.initState();
 
-    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {}));
+    _listener = Auth.subscribe((firebase_auth.User? user) => setState(() {}));
     Offline.setKeepSynced(1, true);
 
     if (!Purchases.isNoAds()) {
@@ -229,13 +228,11 @@ class _DistributionState extends State<Distribution> {
           },
         ),
       );
-      _ad.load();
+      _ad?.load();
     }
 
-    _filter = new Map<String, String>();
     _filter.addAll(widget.filter);
     _filter.remove(filterDistribution);
-    _key = new GlobalKey<ScaffoldState>();
 
     _setCount();
 
@@ -276,13 +273,13 @@ class _DistributionState extends State<Distribution> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: !Purchases.isNoAds()
+                child: !Purchases.isNoAds() && _ad != null
                     ? Container(
                         alignment: Alignment.center,
                         margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
-                        child: AdWidget(ad: _ad),
-                        width: _ad.size.width.toDouble(),
-                        height: _ad.size.height.toDouble(),
+                        child: AdWidget(ad: _ad!),
+                        width: _ad!.size.width.toDouble(),
+                        height: _ad!.size.height.toDouble(),
                       )
                     : Container(
                         height: 0.0,

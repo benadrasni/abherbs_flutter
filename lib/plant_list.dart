@@ -28,9 +28,9 @@ class PlantList extends StatefulWidget {
 }
 
 class _PlantListState extends State<PlantList> {
-  StreamSubscription<firebase_auth.User> _listener;
-  Future<int> _count;
-  BannerAd _ad;
+  late StreamSubscription<firebase_auth.User?> _listener;
+  late Future<int> _count;
+  BannerAd? _ad;
 
   Widget _getImageButton(BuildContext context, Locale myLocale, String url, String name) {
     double screenWidth = MediaQuery.of(context).size.width - 20;
@@ -61,7 +61,7 @@ class _PlantListState extends State<PlantList> {
   void initState() {
     super.initState();
 
-    _listener = Auth.subscribe((firebase_auth.User user) => setState(() {}));
+    _listener = Auth.subscribe((firebase_auth.User? user) => setState(() {}));
     Offline.setKeepSynced(2, true);
 
     if (!Purchases.isNoAds()) {
@@ -78,7 +78,7 @@ class _PlantListState extends State<PlantList> {
           },
         ),
       );
-      _ad.load();
+      _ad?.load();
     }
 
     widget.pathToIndex.keepSynced(true);
@@ -106,7 +106,7 @@ class _PlantListState extends State<PlantList> {
       appBar: AppBar(
         title: Text(S.of(mainContext).list_info),
       ),
-      drawer: AppDrawer(widget.filter, null),
+      drawer: AppDrawer(widget.filter, () => {}),
       body: Column(
         children: [
           Expanded(
@@ -127,26 +127,26 @@ class _PlantListState extends State<PlantList> {
                   Locale myLocale = Localizations.localeOf(mainContext);
                   Future<String> nameF = translationCache.containsKey(name)
                       ? Future<String>(() {
-                          return translationCache[name];
+                          return translationCache[name]!;
                         })
                       : translationsReference.child(getLanguageCode(myLocale.languageCode)).child(name).child(firebaseAttributeLabel).once().then((event) {
                           if (event.snapshot.value != null) {
-                            translationCache[name] = event.snapshot.value;
-                            return event.snapshot.value;
+                            translationCache[name] = event.snapshot.value as String;
+                            return translationCache[name]!;
                           } else {
-                            return null;
+                            return "";
                           }
                         });
                   Future<String> familyF = translationCache.containsKey(family)
                       ? Future<String>(() {
-                          return translationCache[family];
+                          return translationCache[family]!;
                         })
                       : translationsTaxonomyReference.child(getLanguageCode(myLocale.languageCode)).child(family).once().then((event) {
                           if (event.snapshot.value != null && (event.snapshot.value as List).length > 0) {
                             translationCache[family] = (event.snapshot.value as List)[0];
                             return (event.snapshot.value as List)[0];
                           } else {
-                            return null;
+                            return "";
                           }
                         });
 
@@ -159,7 +159,7 @@ class _PlantListState extends State<PlantList> {
                               String labelLocal = name;
                               if (snapshot.connectionState == ConnectionState.done) {
                                 if (snapshot.data != null) {
-                                  labelLocal = snapshot.data + ' / ' + name;
+                                  labelLocal = snapshot.data! + ' / ' + name;
                                 }
                               }
                               return Text(labelLocal);
@@ -170,7 +170,7 @@ class _PlantListState extends State<PlantList> {
                               String familyLocal = family;
                               if (snapshot.connectionState == ConnectionState.done) {
                                 if (snapshot.data != null) {
-                                  familyLocal = snapshot.data + ' / ' + family;
+                                  familyLocal = snapshot.data! + ' / ' + family;
                                 }
                               }
                               return Text(familyLocal);
@@ -194,13 +194,13 @@ class _PlantListState extends State<PlantList> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: !Purchases.isNoAds()
+            child: !Purchases.isNoAds() && _ad != null
                 ? Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
-                    child: AdWidget(ad: _ad),
-                    width: _ad.size.width.toDouble(),
-                    height: _ad.size.height.toDouble(),
+                    child: AdWidget(ad: _ad!),
+                    width: _ad!.size.width.toDouble(),
+                    height: _ad!.size.height.toDouble(),
                   )
                 : Container(
                     height: 0.0,
@@ -227,8 +227,8 @@ class _PlantListState extends State<PlantList> {
                         Prefs.getBoolF(keyAlwaysMyRegion, false).then((value) {
                           Map<String, String> filter = {};
                           if (value) {
-                            Prefs.getStringF(keyMyRegion, null).then((value) {
-                              if (value != null) {
+                            Prefs.getStringF(keyMyRegion, "").then((value) {
+                              if (value.isNotEmpty) {
                                 filter[filterDistribution] = value;
                               }
                               Navigator.pushReplacement(mainContext, getNextFilterRoute(mainContext, filter));
