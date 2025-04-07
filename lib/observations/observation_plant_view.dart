@@ -51,7 +51,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
     Locale myLocale = Localizations.localeOf(context);
     var widgets = <Widget>[];
     widgets.add(ListTile(
-      leading: widget.observation.id!.startsWith(Auth.appUser!.uid)
+      leading: widget.observation.id.startsWith(Auth.appUser!.uid)
           ? CircleAvatar(
               backgroundColor: Theme.of(context).primaryColor,
               child: Icon(
@@ -61,7 +61,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
           : null,
       title: Text(_dateFormat.format(widget.observation.date) + ' ' + _timeFormat.format(widget.observation.date)),
       onTap: () {
-        if (widget.observation.id!.startsWith(Auth.appUser!.uid)) {
+        if (widget.observation.id.startsWith(Auth.appUser!.uid)) {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => ObservationEdit(myLocale, widget.observation),
@@ -80,7 +80,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
     widgets.add(
       TextButton(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(
+          padding: WidgetStateProperty.all(
               EdgeInsets.all(5.0)),
         ),
         child: CachedNetworkImage(
@@ -91,7 +91,7 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
                 width: mapWidth,
                 height: mapHeight,
               ),
-          imageUrl: getMapImageUrl(widget.observation.latitude!, widget.observation.longitude!, mapWidth, mapHeight),
+          imageUrl: getMapImageUrl(widget.observation.latitude, widget.observation.longitude, mapWidth, mapHeight),
         ),
         onPressed: () {
           Navigator.push(
@@ -139,13 +139,13 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
       ),
     ));
 
-    if (widget.observation.note != null && widget.observation.note!.isNotEmpty && widget.observation.id!.startsWith(Auth.appUser!.uid)) {
+    if (widget.observation.note.isNotEmpty && widget.observation.id.startsWith(Auth.appUser!.uid)) {
       widgets.add(Card(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
             alignment: Alignment.topLeft,
             child: Text(
-              widget.observation.note!,
+              widget.observation.note,
               style: TextStyle(fontSize: 16.0),
               textAlign: TextAlign.start,
             ),

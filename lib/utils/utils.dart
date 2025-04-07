@@ -244,9 +244,9 @@ String getMapImageUrl(double latitude, double longitude, double width, double he
 
 double getLatitudeFromExif(IfdTag? latitudeRef, IfdTag? latitude) {
   if (latitude != null) {
-    double latDegrees = latitude!.values.toList()[0].numerator / latitude.values.toList()[0].denominator;
-    double latMinutes = latitude!.values.toList()[1].numerator / latitude.values.toList()[1].denominator;
-    double latSeconds = latitude!.values.toList()[2].numerator / latitude.values.toList()[2].denominator;
+    double latDegrees = latitude.values.toList()[0].numerator / latitude.values.toList()[0].denominator;
+    double latMinutes = latitude.values.toList()[1].numerator / latitude.values.toList()[1].denominator;
+    double latSeconds = latitude.values.toList()[2].numerator / latitude.values.toList()[2].denominator;
 
     int northSouth = latitudeRef.toString() == 'N' ? 1 : -1;
     return northSouth * (latDegrees + latMinutes / 60 + latSeconds / 60 / 60);

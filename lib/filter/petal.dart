@@ -132,7 +132,7 @@ class _PetalState extends State<Petal> {
                           Expanded(
                             child: TextButton(
                               style: ButtonStyle(
-                                padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
+                                padding: WidgetStateProperty.all(EdgeInsets.all(10.0)),
                               ),
                               child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                                 Text(
@@ -152,7 +152,7 @@ class _PetalState extends State<Petal> {
                           Expanded(
                             child: TextButton(
                               style: ButtonStyle(
-                                padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
+                                padding: WidgetStateProperty.all(EdgeInsets.all(10.0)),
                               ),
                               child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                                 Text(
@@ -180,7 +180,7 @@ class _PetalState extends State<Petal> {
                           Expanded(
                             child: TextButton(
                               style: ButtonStyle(
-                                padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
+                                padding: WidgetStateProperty.all(EdgeInsets.all(10.0)),
                               ),
                               child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                                 Text(
@@ -200,7 +200,7 @@ class _PetalState extends State<Petal> {
                           Expanded(
                             child: TextButton(
                               style: ButtonStyle(
-                                padding: MaterialStateProperty.all(EdgeInsets.all(10.0)),
+                                padding: WidgetStateProperty.all(EdgeInsets.all(10.0)),
                               ),
                               child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                                 Text(

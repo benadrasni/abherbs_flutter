@@ -84,10 +84,10 @@ List<Widget> _getSources(BuildContext context, List<dynamic> sourceUrls) {
   var rows = <Widget>[];
 
   var sources = [];
-  if (sourceUrls != null) {
+  if (sourceUrls.isNotEmpty) {
     sources.addAll(sourceUrls);
   }
-  if (sources != null) {
+  if (sources.isNotEmpty) {
     rows.add(Text(
       S.of(context).plant_sources,
       style: TextStyle(

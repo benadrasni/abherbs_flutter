@@ -102,7 +102,7 @@ class _DistributionState extends State<Distribution> {
     regionWidgets.add(
       TextButton(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+          padding: WidgetStateProperty.all(EdgeInsets.only(bottom: 5.0)),
         ),
         child: Stack(alignment: Alignment.center, children: [
           Image(
@@ -147,7 +147,7 @@ class _DistributionState extends State<Distribution> {
     regionWidgets.addAll(regions.map((List<String> items) {
       return TextButton(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+          padding: WidgetStateProperty.all(EdgeInsets.only(bottom: 5.0)),
         ),
         child: Stack(alignment: Alignment.center, children: [
           Image(
@@ -167,7 +167,7 @@ class _DistributionState extends State<Distribution> {
     regionWidgets.add(
       TextButton(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+          padding: WidgetStateProperty.all(EdgeInsets.only(bottom: 5.0)),
         ),
         child: Stack(alignment: Alignment.center, children: [
           Image(

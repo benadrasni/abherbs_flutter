@@ -42,7 +42,7 @@ class _PlantListState extends State<PlantList> {
     ]);
     Widget button = TextButton(
       style: ButtonStyle(
-        padding: MaterialStateProperty.all(EdgeInsets.all(5.0)),
+        padding: WidgetStateProperty.all(EdgeInsets.all(5.0)),
       ),
       child: Container(
         child: getImage(url, placeholder),

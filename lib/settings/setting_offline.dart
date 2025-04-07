@@ -143,8 +143,7 @@ class _SettingOfflineState extends State<SettingOffline> {
         break;
     }
 
-    return WillPopScope(
-        onWillPop: () async => false,
+    return PopScope(
         child: AlertDialog(
           title: _title,
           content: _content,

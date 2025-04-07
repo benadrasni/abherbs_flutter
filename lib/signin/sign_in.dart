@@ -112,7 +112,7 @@ class _SignInScreenState extends State<SignInScreen> {
       supportsAppleSignIn = DeviceInfoPlugin().iosInfo.then((value) {
         int version = 0;
         try {
-          version = int.parse(value.systemVersion!.split('.')[0]);
+          version = int.parse(value.systemVersion.split('.')[0]);
         } catch(e) {
           print(e);
         }

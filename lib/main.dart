@@ -172,7 +172,7 @@ class _AppState extends State<App> {
   Future<dynamic> handleMessage(RemoteMessage message) {
     if (message != null) {
       String action = message.data[notificationAttributeAction];
-      if (action != null && App.currentContext != null) {
+      if (action.isNotEmpty && App.currentContext != null) {
         switch (action) {
           case notificationAttributeActionList:
             String path = message.data[notificationAttributePath];
@@ -354,7 +354,9 @@ class _AppState extends State<App> {
                     return MaterialPageRoute(builder: (context) => PlantDetail(Localizations.localeOf(context), Map<String, String>(), plant), settings: RouteSettings(name: 'PlantDetail'));
                   });
                 }
-                return Future.value(null);
+                return Future<MaterialPageRoute<dynamic>>(() {
+                  return MaterialPageRoute(builder: (context) => Color(Map<String, String>()), settings: RouteSettings(name: 'Color'));
+                });
               });
             }
             return null;

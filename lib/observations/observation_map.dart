@@ -55,8 +55,8 @@ class _ObservationMapState extends State<ObservationMap> {
       markerId: _markerId,
       //draggable: true,
       position: LatLng(
-        widget.observation.latitude ?? 0.0,
-        widget.observation.longitude ?? 0.0,
+        widget.observation.latitude,
+        widget.observation.longitude,
       ),
     );
 
@@ -85,12 +85,9 @@ class _ObservationMapState extends State<ObservationMap> {
     widgets.add(GoogleMap(
       onCameraMove: ((_position) => _updateMarker(_position)),
       initialCameraPosition: CameraPosition(
-        target: LatLng(widget.observation.latitude ?? 0.0,
-            widget.observation.longitude ?? 0.0),
-        zoom: widget.observation.latitude == null ||
-                widget.observation.longitude == null
-            ? 1
-            : 13,
+        target: LatLng(widget.observation.latitude,
+            widget.observation.longitude),
+        zoom: 13,
       ),
       markers: Set<Marker>.of(_markers.values),
     ));

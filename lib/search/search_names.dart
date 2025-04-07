@@ -56,19 +56,19 @@ Widget searchNames(Locale myLocale, String searchText, Future<Map<dynamic, dynam
 
 Widget _getBody(Locale myLocale, String searchText, Map<dynamic, dynamic> nativeNames,
     Map<dynamic, dynamic> latinNames) {
-  var searchTextWithoutDiacritics = searchText == null ? '' : removeDiacritics(searchText).toLowerCase();
+  var searchTextWithoutDiacritics = searchText.isEmpty ? '' : removeDiacritics(searchText).toLowerCase();
 
   var filteredNativeNames = <String>[];
-  nativeNames?.forEach((key, value) {
-    if (searchText == null || searchText.isEmpty || removeDiacritics(key).toLowerCase().contains(searchTextWithoutDiacritics)) {
+  nativeNames.forEach((key, value) {
+    if (searchText.isEmpty || removeDiacritics(key).toLowerCase().contains(searchTextWithoutDiacritics)) {
       filteredNativeNames.add(key);
     }
   });
   filteredNativeNames.sort();
 
   var filteredLatinNames = <String>[];
-  latinNames?.forEach((key, value) {
-    if (searchText == null || searchText.isEmpty || key.toLowerCase().contains(searchTextWithoutDiacritics)) {
+  latinNames.forEach((key, value) {
+    if (searchText.isEmpty || key.toLowerCase().contains(searchTextWithoutDiacritics)) {
       filteredLatinNames.add(key);
     }
   });

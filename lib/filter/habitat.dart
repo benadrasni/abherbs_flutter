@@ -127,7 +127,7 @@ class _HabitatState extends State<Habitat> {
                   children: [
                     TextButton(
                       style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+                        padding: WidgetStateProperty.all(EdgeInsets.only(bottom: 5.0)),
                       ),
                       child: Stack(alignment: Alignment.center, children: [
                         Image(
@@ -145,7 +145,7 @@ class _HabitatState extends State<Habitat> {
                     ),
                     TextButton(
                       style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+                        padding: WidgetStateProperty.all(EdgeInsets.only(bottom: 5.0)),
                       ),
                       child: Stack(alignment: Alignment.center, children: [
                         Image(
@@ -163,7 +163,7 @@ class _HabitatState extends State<Habitat> {
                     ),
                     TextButton(
                       style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+                        padding: WidgetStateProperty.all(EdgeInsets.only(bottom: 5.0)),
                       ),
                       child: Stack(alignment: Alignment.center, children: [
                         Image(
@@ -181,7 +181,7 @@ class _HabitatState extends State<Habitat> {
                     ),
                     TextButton(
                       style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+                        padding: WidgetStateProperty.all(EdgeInsets.only(bottom: 5.0)),
                       ),
                       child: Stack(alignment: Alignment.center, children: [
                         Image(
@@ -199,7 +199,7 @@ class _HabitatState extends State<Habitat> {
                     ),
                     TextButton(
                       style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+                        padding: WidgetStateProperty.all(EdgeInsets.only(bottom: 5.0)),
                       ),
                       child: Stack(alignment: Alignment.center, children: [
                         Image(
@@ -217,7 +217,7 @@ class _HabitatState extends State<Habitat> {
                     ),
                     TextButton(
                       style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.only(bottom: 5.0)),
+                        padding: WidgetStateProperty.all(EdgeInsets.only(bottom: 5.0)),
                       ),
                       child: Stack(alignment: Alignment.center, children: [
                         Image(

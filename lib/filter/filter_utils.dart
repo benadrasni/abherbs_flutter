@@ -253,7 +253,7 @@ Future<bool> clearFilter(Map<String, String> filter, Function() func) {
   return Prefs.getBoolF(keyAlwaysMyRegion, false).then((value) {
     if (value) {
       Prefs.getStringF(keyMyRegion).then((value) {
-        if (value != null) {
+        if (value.isNotEmpty) {
           filter[filterDistribution] = value;
         }
         func();

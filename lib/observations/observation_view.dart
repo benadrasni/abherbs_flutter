@@ -98,7 +98,7 @@ class _ObservationViewState extends State<ObservationView> {
     widgets.add(
       TextButton(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(
+          padding: WidgetStateProperty.all(
               EdgeInsets.all(5.0)),
         ),
         child: CachedNetworkImage(
@@ -109,7 +109,7 @@ class _ObservationViewState extends State<ObservationView> {
             width: mapWidth,
             height: mapHeight,
           ),
-          imageUrl: getMapImageUrl(widget.observation.latitude!, widget.observation.longitude!, mapWidth, mapHeight),
+          imageUrl: getMapImageUrl(widget.observation.latitude, widget.observation.longitude, mapWidth, mapHeight),
         ),
         onPressed: () {
           Navigator.push(
@@ -157,13 +157,13 @@ class _ObservationViewState extends State<ObservationView> {
       ),
     ));
 
-    if (Auth.appUser != null && widget.observation.note != null && widget.observation.note!.isNotEmpty && widget.observation.id!.startsWith(Auth.appUser!.uid)) {
+    if (Auth.appUser != null && widget.observation.note.isNotEmpty && widget.observation.id.startsWith(Auth.appUser!.uid)) {
       widgets.add(Card(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
             alignment: Alignment.topLeft,
             child: Text(
-              widget.observation.note!,
+              widget.observation.note,
               style: TextStyle(fontSize: 16.0),
               textAlign: TextAlign.start,
             ),

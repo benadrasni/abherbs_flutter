@@ -144,7 +144,7 @@ class Offline {
         .child(firebaseAttributeCount)
         .once()
         .then((event) {
-      return event.snapshot.value as int ?? 0;
+      return event.snapshot.value as int;
     });
     while (position < familyTotal) {
       if (await _downloadFamilyIcon(position)) {
@@ -172,7 +172,7 @@ class Offline {
         .then((event) {
       return event.snapshot.value as String;
     });
-    if (family != null) {
+    if (family.isNotEmpty) {
       var errors = 0;
       await _downloadFile(storageEndpoint + storageFamilies + family + defaultExtension, storageFamilies, family + defaultExtension)
           .catchError((error) {
@@ -188,7 +188,7 @@ class Offline {
     int position = int.parse(await Prefs.getStringF(keyOfflinePlant, '0'));
     int plantTotal =
         await FirebaseDatabase.instance.ref().child(firebasePlantsToUpdate).child(firebaseAttributeCount).once().then((event) {
-      return event.snapshot.value as int ?? 0;
+      return event.snapshot.value as int;
     });
     while (position < plantTotal) {
       if (await _downloadPlantPhotos(position)) {
@@ -214,11 +214,11 @@ class Offline {
       url = event.snapshot.value == null ? null : (event.snapshot.value as Map)['url'];
       return event.snapshot.value == null ? null : (event.snapshot.value as Map)['name'];
     });
-    if (plantName != null) {
+    if (plantName.isNotEmpty) {
       Plant plant = await FirebaseDatabase.instance.ref().child(firebasePlants).child(plantName).once().then((event) {
         return Plant.fromJson(event.snapshot.key ?? '', event.snapshot.value as Map);
       });
-      if (plant != null) {
+      if (plant.name.isNotEmpty) {
         var errors = 0;
         var urls = <String>[];
         urls.addAll(plant.photoUrls.map((url) => url as String));
@@ -248,7 +248,7 @@ class Offline {
     setKeepSynced(2, false);
     setKeepSynced(3, false);
     setKeepSynced(4, false);
-    if (_rootPath == null) {
+    if (_rootPath.isEmpty) {
       _rootPath = (await getApplicationDocumentsDirectory()).path;
     }
     var familiesDir = Directory('$_rootPath/$storageFamilies');
@@ -268,7 +268,7 @@ class Offline {
     var request = await _httpClient.getUrl(Uri.parse(url));
     var response = await request.close();
     var bytes = await consolidateHttpClientResponseBytes(response);
-    if (_rootPath == null) {
+    if (_rootPath.isEmpty) {
       _rootPath = (await getApplicationDocumentsDirectory()).path;
     }
     await Directory('$_rootPath/$dir').create(recursive: true);

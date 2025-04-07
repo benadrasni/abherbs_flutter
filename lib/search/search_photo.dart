@@ -160,7 +160,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
             result.plantDetails = suggestion['plant_details'];
             result.similarImages = suggestion['similar_images'];
             result.commonName = suggestion['plant_details']['common_names'] != null ? suggestion['plant_details']['common_names'][0] : "";
-            if (event.snapshot != null && event.snapshot.value != null) {
+            if (event.snapshot.exists && event.snapshot.value != null) {
               result.count = (event.snapshot.value as Map)['count'];
               result.path = (event.snapshot.value as Map)['path'];
               result.labelInLanguage = '';
@@ -198,7 +198,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
       }
 
       // save labels
-      if (results.length > 0) {
+      if (results.isNotEmpty) {
         var userId = firebaseAttributeAnonymous;
         if (Auth.appUser != null) {
           userId = Auth.appUser!.uid;

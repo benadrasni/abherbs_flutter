@@ -40,7 +40,7 @@ class _SettingMyRegionState extends State<SettingMyRegion> {
     regionWidgets.addAll(regions.map((List<String> items) {
       return TextButton(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(
+          padding: WidgetStateProperty.all(
               EdgeInsets.only(bottom: 5.0)),
         ),
         child: Stack(alignment: Alignment.center, children: [
@@ -60,7 +60,7 @@ class _SettingMyRegionState extends State<SettingMyRegion> {
 
     regionWidgets.add(TextButton(
       style: ButtonStyle(
-        padding: MaterialStateProperty.all(
+        padding: WidgetStateProperty.all(
             EdgeInsets.only(bottom: 5.0)),
       ),
       child: Stack(alignment: Alignment.center, children: [

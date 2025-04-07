@@ -342,17 +342,17 @@ class _ObservationLogsState extends State<ObservationLogs> {
             if (event.snapshot.value != null && (event.snapshot.value as Map).keys.length > 0) {
               for (String item in (event.snapshot.value as Map).keys) {
                 Observation observation = Observation.fromJson(item, (event.snapshot.value as Map)[item]);
-                var markerId = MarkerId(observation.id!);
-                if (observation.order != null && order > observation.order!) {
-                  order = observation.order!;
+                var markerId = MarkerId(observation.id);
+                if (order > observation.order) {
+                  order = observation.order;
                   newestMarker = markerId;
                 }
                 markers[markerId] = Marker(
                   markerId: markerId,
                   //draggable: true,
                   position: LatLng(
-                    observation.latitude ?? 0.0,
-                    observation.longitude ?? 0.0,
+                    observation.latitude,
+                    observation.longitude,
                   ),
                 );
                 data.add(ObservationsSum(observation.date, 1));
@@ -381,7 +381,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                 children: [
                   TextButton(
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(
+                      padding: WidgetStateProperty.all(
                           EdgeInsets.all(5.0)),
                     ),
                     child: CachedNetworkImage(
@@ -619,17 +619,17 @@ class _ObservationLogsState extends State<ObservationLogs> {
             if (event.snapshot.value != null && (event.snapshot.value as Map).keys.length > 0) {
               for (String item in (event.snapshot.value as Map).keys) {
                 Observation observation = Observation.fromJson(item, (event.snapshot.value as Map)[item]);
-                var markerId = MarkerId(observation.id!);
-                if (observation.order != null && order > observation.order!) {
-                  order = observation.order!;
+                var markerId = MarkerId(observation.id);
+                if (order > observation.order) {
+                  order = observation.order;
                   newestMarker = markerId;
                 }
                 markers[markerId] = Marker(
                   markerId: markerId,
-                  icon: observation.id!.startsWith(Auth.appUser!.uid) ? BitmapDescriptor.defaultMarker : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+                  icon: observation.id.startsWith(Auth.appUser!.uid) ? BitmapDescriptor.defaultMarker : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
                   position: LatLng(
-                    observation.latitude ?? 0.0,
-                    observation.longitude ?? 0.0,
+                    observation.latitude,
+                    observation.longitude,
                   ),
                 );
                 data.add(ObservationsSum(observation.date, 1));
@@ -658,7 +658,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                 children: [
                   TextButton(
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(
+                      padding: WidgetStateProperty.all(
                           EdgeInsets.all(5.0)),
                     ),
                     child: CachedNetworkImage(

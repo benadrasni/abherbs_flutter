@@ -631,7 +631,7 @@ TextButton getSourceButton(String url) {
 
   return TextButton(
     style: ButtonStyle(
-      padding: MaterialStateProperty.all(
+      padding: WidgetStateProperty.all(
           EdgeInsets.only(bottom: 5.0)),
     ),
     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [

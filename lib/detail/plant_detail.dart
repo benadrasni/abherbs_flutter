@@ -72,7 +72,7 @@ class _PlantDetailState extends State<PlantDetail> {
 
   onShare() {
     Share.share(Uri.encodeFull('https://whatsthatflower.com/?plant=' + widget.plant.name + '&lang=' + widget.myLocale.languageCode), subject: widget.plant.name);
-    _logShareEvent(widget.plant.name!);
+    _logShareEvent(widget.plant.name);
   }
 
   Future<PlantTranslation> _getTranslation() {
@@ -95,7 +95,7 @@ class _PlantDetailState extends State<PlantDetail> {
             plantTranslationGT.isTranslatedWithGT = true;
             return plantTranslationGT;
           } else {
-            return translationsReference.child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish).child(widget.plant.name!).once().then((event) {
+            return translationsReference.child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish).child(widget.plant.name).once().then((event) {
               var plantTranslationOriginal = PlantTranslation.fromJson(event.snapshot.value as Map);
               var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
               uri += '&source=' + (languageCzech == widget.myLocale.languageCode ? languageSlovak : languageEnglish);
@@ -107,7 +107,7 @@ class _PlantDetailState extends State<PlantDetail> {
                 if (response.statusCode == 200) {
                   Translations translations = Translations.fromJson(json.decode(response.body));
                   PlantTranslation onlyGoogleTranslation = plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
-                  translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name!).set(onlyGoogleTranslation.toJson());
+                  translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name).set(onlyGoogleTranslation.toJson());
                   return plantTranslation;
                 } else {
                   return plantTranslation.mergeWith(plantTranslationOriginal);
@@ -152,7 +152,7 @@ class _PlantDetailState extends State<PlantDetail> {
       case taxonomyIndex:
         return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize);
       case observationIndex:
-        return ObservationsPlant(Localizations.localeOf(context), _isPublic, widget.plant.name!, _key);
+        return ObservationsPlant(Localizations.localeOf(context), _isPublic, widget.plant.name, _key);
       default: // galleryIndex
         return getGallery(context, widget.plant);
     }
@@ -199,7 +199,7 @@ class _PlantDetailState extends State<PlantDetail> {
     _plantTranslationF = _getTranslation();
     _fontSize = Prefs.getDouble(keyFontSize, defaultFontSize);
 
-    _logSelectContentEvent(widget.plant.name!);
+    _logSelectContentEvent(widget.plant.name);
   }
 
   @override
@@ -233,7 +233,7 @@ class _PlantDetailState extends State<PlantDetail> {
                   Expanded(
                     flex: 3,
                     child: GestureDetector(
-                      child: Text(widget.plant.name!),
+                      child: Text(widget.plant.name),
                       onLongPress: () {
                         Clipboard.setData(new ClipboardData(text: widget.plant.name));
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -265,7 +265,7 @@ class _PlantDetailState extends State<PlantDetail> {
           : _currentIndex == infoIndex || _currentIndex == taxonomyIndex
               ? AppBar(
                   title: GestureDetector(
-                    child: Text(widget.plant.name!),
+                    child: Text(widget.plant.name),
                     onLongPress: () {
                       Clipboard.setData(new ClipboardData(text: widget.plant.name));
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -284,7 +284,7 @@ class _PlantDetailState extends State<PlantDetail> {
                 )
               : AppBar(
                   title: GestureDetector(
-                    child: Text(widget.plant.name!),
+                    child: Text(widget.plant.name),
                     onLongPress: () {
                       Clipboard.setData(new ClipboardData(text: widget.plant.name));
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -335,7 +335,7 @@ class _PlantDetailState extends State<PlantDetail> {
                 return FloatingActionButton(
                   onPressed: () {
                     if (_currentIndex == observationIndex) {
-                      var observation = Observation(widget.plant.name!);
+                      var observation = Observation(widget.plant.name);
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => ObservationEdit(widget.myLocale, observation), settings: RouteSettings(name: 'ObservationEdit')),
