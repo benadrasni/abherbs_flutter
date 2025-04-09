@@ -65,7 +65,8 @@ const double maxFontSize = 22;
 
 const String playStore = "market://details?id=sk.ab.herbs";
 const String playStorePlus = "market://details?id=sk.ab.herbsplus";
-const String appStore = "https://itunes.apple.com/us/app/whats-that-flower/id1449982118?mt=8&action=write-review";
+const String appStore =
+    "https://itunes.apple.com/us/app/whats-that-flower/id1449982118?mt=8&action=write-review";
 
 const String languageLatin = "la";
 const String languageEnglish = "en";
@@ -75,17 +76,27 @@ const String languageGTSuffix = "-GT";
 const String heightUnitOfMeasure = "cm";
 
 const String webUrl = "https://whatsthatflower.com/";
-const String termsOfUseUrl = "https://storage.googleapis.com/abherbs-resources/misc/TermsOfServiceofWhatsthatflower.htm";
-const String privacyPolicyUrl = "https://storage.googleapis.com/abherbs-resources/misc/PrivacyPolicyofWhatsthatflower.htm";
-const String googleTranslateEndpoint = "https://translation.googleapis.com/language/translate/v2";
-const String googleMapsEndpoint = "https://maps.googleapis.com/maps/api/staticmap?";
+const String termsOfUseUrl =
+    "https://storage.googleapis.com/abherbs-resources/misc/TermsOfServiceofWhatsthatflower.htm";
+const String privacyPolicyUrl =
+    "https://storage.googleapis.com/abherbs-resources/misc/PrivacyPolicyofWhatsthatflower.htm";
+const String googleTranslateEndpoint =
+    "https://translation.googleapis.com/language/translate/v2";
+const String googleMapsEndpoint =
+    "https://maps.googleapis.com/maps/api/staticmap?";
 const String plantIdEndpoint = "https://api.plant.id/v2/identify";
 
 const List<String> plantIdModifiers = ["similar_images"];
-const List<String> plantIdPlantDetails = ["common_names", "url", "wiki_description", "taxonomy"];
+const List<String> plantIdPlantDetails = [
+  "common_names",
+  "url",
+  "wiki_description",
+  "taxonomy"
+];
 
 const String storageBucket = "gs://abherbs-resources";
-const String storageEndpoint = "https://storage.googleapis.com/abherbs-resources/";
+const String storageEndpoint =
+    "https://storage.googleapis.com/abherbs-resources/";
 const String storageFamilies = "families/";
 const String storagePhotos = "photos/";
 const String storageObservations = "observations/";
@@ -186,22 +197,32 @@ const String remoteConfigCustomFilterVideo = "custom_filter_video";
 
 final DatabaseReference rootReference = FirebaseDatabase.instance.ref();
 final DatabaseReference countsReference = rootReference.child(firebaseCounts);
-final DatabaseReference listsReference = rootReference.child(firebasePlantHeaders);
-final DatabaseReference listsCustomReference = rootReference.child(firebaseListsCustom);
+final DatabaseReference listsReference =
+    rootReference.child(firebasePlantHeaders);
+final DatabaseReference listsCustomReference =
+    rootReference.child(firebaseListsCustom);
 final DatabaseReference keysReference = rootReference.child(firebaseLists);
-final DatabaseReference translationsReference = rootReference.child(firebaseTranslations);
-final DatabaseReference translationsNewReference = rootReference.child(firebaseTranslationsNew);
-final DatabaseReference translationsTaxonomyReference = rootReference.child(firebaseTranslationsTaxonomy);
+final DatabaseReference translationsReference =
+    rootReference.child(firebaseTranslations);
+final DatabaseReference translationsNewReference =
+    rootReference.child(firebaseTranslationsNew);
+final DatabaseReference translationsTaxonomyReference =
+    rootReference.child(firebaseTranslationsTaxonomy);
 final DatabaseReference plantsReference = rootReference.child(firebasePlants);
 final DatabaseReference searchReference = rootReference.child(firebaseSearch);
 final DatabaseReference apgIVReference = rootReference.child(firebaseAPGIV);
-final DatabaseReference publicObservationsReference = rootReference.child(firebaseObservationsPublic);
-final DatabaseReference privateObservationsReference = rootReference.child(firebaseObservationsPrivate);
-final DatabaseReference logsObservationsReference = rootReference.child(firebaseObservationsLogs);
-final DatabaseReference logsCreditsReference = rootReference.child(firebaseCreditsLogs);
+final DatabaseReference publicObservationsReference =
+    rootReference.child(firebaseObservationsPublic);
+final DatabaseReference privateObservationsReference =
+    rootReference.child(firebaseObservationsPrivate);
+final DatabaseReference logsObservationsReference =
+    rootReference.child(firebaseObservationsLogs);
+final DatabaseReference logsCreditsReference =
+    rootReference.child(firebaseCreditsLogs);
 final DatabaseReference usersReference = rootReference.child(firebaseUsers);
 final DatabaseReference settingsReference = rootReference.child(firebaseUsers);
-final DatabaseReference synonymsReference = rootReference.child(firebaseSynonyms);
+final DatabaseReference synonymsReference =
+    rootReference.child(firebaseSynonyms);
 
 Map<String, String> translationCache = {};
 
@@ -219,7 +240,7 @@ void launchURL(String path) async {
 }
 
 Future<void> launchURLF(String path) {
-  Uri url = Uri(path:path);
+  Uri url = Uri(path: path);
   return canLaunchUrl(url).then((value) {
     if (value) {
       return launchUrl(url);
@@ -230,23 +251,29 @@ Future<void> launchURLF(String path) {
 }
 
 Future<void> _logPromotionEvent(event) async {
-  await FirebaseAnalytics.instance.logEvent(name: 'promotion', parameters: {'feature': event});
+  await FirebaseAnalytics.instance
+      .logEvent(name: 'promotion', parameters: {'feature': event});
 }
 
-String getMapImageUrl(double latitude, double longitude, double width, double height) {
+String getMapImageUrl(
+    double latitude, double longitude, double width, double height) {
   String url = googleMapsEndpoint;
   url += 'zoom=11';
   url += '&size=' + width.round().toString() + 'x' + height.round().toString();
-  url += '&markers=color:red|' + latitude.toString() + ',' + longitude.toString();
+  url +=
+      '&markers=color:red|' + latitude.toString() + ',' + longitude.toString();
   url += '&key=' + mapsAPIKey;
   return url;
 }
 
 double getLatitudeFromExif(IfdTag? latitudeRef, IfdTag? latitude) {
   if (latitude != null) {
-    double latDegrees = latitude.values.toList()[0].numerator / latitude.values.toList()[0].denominator;
-    double latMinutes = latitude.values.toList()[1].numerator / latitude.values.toList()[1].denominator;
-    double latSeconds = latitude.values.toList()[2].numerator / latitude.values.toList()[2].denominator;
+    double latDegrees = latitude.values.toList()[0].numerator /
+        latitude.values.toList()[0].denominator;
+    double latMinutes = latitude.values.toList()[1].numerator /
+        latitude.values.toList()[1].denominator;
+    double latSeconds = latitude.values.toList()[2].numerator /
+        latitude.values.toList()[2].denominator;
 
     int northSouth = latitudeRef.toString() == 'N' ? 1 : -1;
     return northSouth * (latDegrees + latMinutes / 60 + latSeconds / 60 / 60);
@@ -257,9 +284,12 @@ double getLatitudeFromExif(IfdTag? latitudeRef, IfdTag? latitude) {
 
 double getLongitudeFromExif(IfdTag? longitudeRef, IfdTag? longitude) {
   if (longitude != null) {
-    double longDegrees = longitude.values.toList()[0].numerator / longitude.values.toList()[0].denominator;
-    double longMinutes = longitude.values.toList()[1].numerator / longitude.values.toList()[1].denominator;
-    double longSeconds = longitude.values.toList()[2].numerator / longitude.values.toList()[2].denominator;
+    double longDegrees = longitude.values.toList()[0].numerator /
+        longitude.values.toList()[0].denominator;
+    double longMinutes = longitude.values.toList()[1].numerator /
+        longitude.values.toList()[1].denominator;
+    double longSeconds = longitude.values.toList()[2].numerator /
+        longitude.values.toList()[2].denominator;
 
     int eastWest = longitudeRef.toString() == 'E' ? 1 : -1;
     return eastWest * (longDegrees + longMinutes / 60 + longSeconds / 60 / 60);
@@ -274,19 +304,41 @@ DateTime getDateTimeFromExif(IfdTag? dateTime) {
     var datePart = dateParts[0].split(':');
     var timePart = dateParts[1].split(':');
     return DateTime(
-        int.parse(datePart[0]), int.parse(datePart[1]), int.parse(datePart[2]), int.parse(timePart[0]), int.parse(timePart[1]), int.parse(timePart[2]));
+        int.parse(datePart[0]),
+        int.parse(datePart[1]),
+        int.parse(datePart[2]),
+        int.parse(timePart[0]),
+        int.parse(timePart[1]),
+        int.parse(timePart[2]));
   } else {
     return DateTime.now();
   }
 }
 
-Widget getImage(String url, Widget placeholder, {double width = 50.0, double height = 50.0, BoxFit fit = BoxFit.contain}) {
+Widget getImage(String url, Widget placeholder,
+    {double width = 50.0, double height = 50.0, BoxFit fit = BoxFit.contain}) {
   return FutureBuilder<File?>(
       future: Offline.getLocalFile(url),
       builder: (BuildContext context, AsyncSnapshot<File?> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data != null) {
-            return Image.file(snapshot.data as File, fit: fit, width: width, height: height);
+            return Image.file(
+              snapshot.data as File,
+              fit: fit,
+              width: width,
+              height: height,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  width: width,
+                  height: height,
+                  child: Icon(
+                    Icons.error,
+                    color: Theme.of(context).secondaryHeaderColor,
+                    size: 80.0,
+                  ),
+                );
+              },
+            );
           }
 
           return CachedNetworkImage(
@@ -294,8 +346,11 @@ Widget getImage(String url, Widget placeholder, {double width = 50.0, double hei
             width: width,
             height: height,
             placeholder: (context, url) => placeholder,
-            errorWidget: (context, url, error) => Container(width: width, height: height,
-                child: Icon(Icons.error, color: Theme.of(context).secondaryHeaderColor, size: 80.0)),
+            errorWidget: (context, url, error) => Container(
+                width: width,
+                height: height,
+                child: Icon(Icons.error,
+                    color: Theme.of(context).secondaryHeaderColor, size: 80.0)),
             imageUrl: storageEndpoint + url,
           );
         } else {
@@ -363,7 +418,8 @@ Widget getProductIcon(BuildContext context, String productId) {
   }
 }
 
-String getProductTitle(BuildContext context, String productId, String defaultTitle) {
+String getProductTitle(
+    BuildContext context, String productId, String defaultTitle) {
   switch (productId) {
     case productNoAdsAndroid:
     case productNoAdsIOS:
@@ -387,7 +443,8 @@ String getProductTitle(BuildContext context, String productId, String defaultTit
   }
 }
 
-String getProductDescription(BuildContext context, String productId, String defaultDescription) {
+String getProductDescription(
+    BuildContext context, String productId, String defaultDescription) {
   switch (productId) {
     case productNoAdsAndroid:
     case productNoAdsIOS:
@@ -424,8 +481,10 @@ Icon getIcon(String productId) {
   }
 }
 
-List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, Map<String, String> filter) {
-  DateFormat dateFormat = new DateFormat.yMMMMd(Localizations.localeOf(mainContext).toString());
+List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
+    Map<String, String> filter) {
+  DateFormat dateFormat =
+      new DateFormat.yMMMMd(Localizations.localeOf(mainContext).toString());
   var _actions = <Widget>[];
 
   // search by photo
@@ -434,47 +493,74 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
     onPressed: () {
       Connectivity().checkConnectivity().then((result) {
         if (result == ConnectivityResult.none) {
-          infoDialog(mainContext, S.of(mainContext).no_connection_title, S.of(mainContext).no_connection_content);
+          infoDialog(mainContext, S.of(mainContext).no_connection_title,
+              S.of(mainContext).no_connection_content);
         } else {
           if (Purchases.isPhotoSearch()) {
             Navigator.push(
               mainContext,
-              MaterialPageRoute(builder: (context) => SearchPhoto(Localizations.localeOf(context)), settings: RouteSettings(name: 'SearchPhoto')),
+              MaterialPageRoute(
+                  builder: (context) =>
+                      SearchPhoto(Localizations.localeOf(context)),
+                  settings: RouteSettings(name: 'SearchPhoto')),
             );
           } else if (Purchases.isSearchByPhotoPromotion) {
-            infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
-                S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchByPhotoPromotionTo)), remoteConfigSearchByPhotoVideo, S.of(mainContext).credit_use_photo_search)
+            infoBuyDialog(
+                    mainContext,
+                    S.of(mainContext).promotion_title,
+                    S.of(mainContext).promotion_content(
+                        dateFormat.format(Purchases.searchByPhotoPromotionTo)),
+                    remoteConfigSearchByPhotoVideo,
+                    S.of(mainContext).credit_use_photo_search)
                 .then((value) {
               if (value == 1) {
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => EnhancementsScreen(filter), settings: RouteSettings(name: 'Enhancements')),
+                  MaterialPageRoute(
+                      builder: (context) => EnhancementsScreen(filter),
+                      settings: RouteSettings(name: 'Enhancements')),
                 );
               } else if (value == 2) {
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => SearchPhoto(Localizations.localeOf(context)), settings: RouteSettings(name: 'SearchPhoto')),
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          SearchPhoto(Localizations.localeOf(context)),
+                      settings: RouteSettings(name: 'SearchPhoto')),
                 );
               } else {
                 _logPromotionEvent('search_by_photo');
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => SearchPhoto(Localizations.localeOf(context)), settings: RouteSettings(name: 'SearchPhoto')),
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          SearchPhoto(Localizations.localeOf(context)),
+                      settings: RouteSettings(name: 'SearchPhoto')),
                 );
               }
             });
           } else {
-            infoBuyDialog(mainContext, S.of(mainContext).product_photo_search_title, S.of(mainContext).product_photo_search_description, remoteConfigSearchByPhotoVideo, S.of(mainContext).credit_use_photo_search)
+            infoBuyDialog(
+                    mainContext,
+                    S.of(mainContext).product_photo_search_title,
+                    S.of(mainContext).product_photo_search_description,
+                    remoteConfigSearchByPhotoVideo,
+                    S.of(mainContext).credit_use_photo_search)
                 .then((value) {
               if (value == 1) {
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => EnhancementsScreen(filter), settings: RouteSettings(name: 'Enhancements')),
+                  MaterialPageRoute(
+                      builder: (context) => EnhancementsScreen(filter),
+                      settings: RouteSettings(name: 'Enhancements')),
                 );
               } else if (value == 2) {
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => SearchPhoto(Localizations.localeOf(context)), settings: RouteSettings(name: 'SearchPhoto')),
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          SearchPhoto(Localizations.localeOf(context)),
+                      settings: RouteSettings(name: 'SearchPhoto')),
                 );
               }
             });
@@ -490,41 +576,62 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
     onPressed: () {
       Connectivity().checkConnectivity().then((result) {
         if (result == ConnectivityResult.none) {
-          infoDialog(mainContext, S.of(mainContext).no_connection_title, S.of(mainContext).no_connection_content);
+          infoDialog(mainContext, S.of(mainContext).no_connection_title,
+              S.of(mainContext).no_connection_content);
         } else {
           if (Purchases.isObservations()) {
             if (Auth.appUser != null) {
               Navigator.push(
                 mainContext,
-                MaterialPageRoute(builder: (context) => Observations(Localizations.localeOf(context), false), settings: RouteSettings(name: 'Observations')),
+                MaterialPageRoute(
+                    builder: (context) =>
+                        Observations(Localizations.localeOf(context), false),
+                    settings: RouteSettings(name: 'Observations')),
               );
             } else {
               observationDialog(mainContext, key);
             }
           } else if (Purchases.isObservationPromotion) {
-            infoBuyDialog(mainContext, S.of(mainContext).promotion_title,
-                    S.of(mainContext).promotion_content(dateFormat.format(Purchases.observationPromotionTo)), remoteConfigObservationsVideo, '')
+            infoBuyDialog(
+                    mainContext,
+                    S.of(mainContext).promotion_title,
+                    S.of(mainContext).promotion_content(
+                        dateFormat.format(Purchases.observationPromotionTo)),
+                    remoteConfigObservationsVideo,
+                    '')
                 .then((value) {
               if (value == 1) {
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => EnhancementsScreen(filter), settings: RouteSettings(name: 'Enhancements')),
+                  MaterialPageRoute(
+                      builder: (context) => EnhancementsScreen(filter),
+                      settings: RouteSettings(name: 'Enhancements')),
                 );
               } else {
                 _logPromotionEvent('observation');
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => Observations(Localizations.localeOf(context), true), settings: RouteSettings(name: 'Observations')),
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Observations(Localizations.localeOf(context), true),
+                      settings: RouteSettings(name: 'Observations')),
                 );
               }
             });
           } else {
-            infoBuyDialog(mainContext, S.of(mainContext).product_observations_title, S.of(mainContext).product_observations_description, remoteConfigObservationsVideo, '')
+            infoBuyDialog(
+                    mainContext,
+                    S.of(mainContext).product_observations_title,
+                    S.of(mainContext).product_observations_description,
+                    remoteConfigObservationsVideo,
+                    '')
                 .then((value) {
               if (value == 1) {
                 Navigator.push(
                   mainContext,
-                  MaterialPageRoute(builder: (context) => EnhancementsScreen(filter), settings: RouteSettings(name: 'Enhancements')),
+                  MaterialPageRoute(
+                      builder: (context) => EnhancementsScreen(filter),
+                      settings: RouteSettings(name: 'Enhancements')),
                 );
               }
             });
@@ -541,56 +648,85 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
       if (Purchases.isSearch()) {
         Navigator.push(
           mainContext,
-          MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context)), settings: RouteSettings(name: 'Search')),
+          MaterialPageRoute(
+              builder: (context) => Search(Localizations.localeOf(context)),
+              settings: RouteSettings(name: 'Search')),
         );
       } else if (Purchases.isSearchPromotion) {
         infoBuyDialog(
-                mainContext, S.of(mainContext).promotion_title, S.of(mainContext).promotion_content(dateFormat.format(Purchases.searchPromotionTo)), remoteConfigSearchByNameVideo, S.of(mainContext).credit_use_search)
+                mainContext,
+                S.of(mainContext).promotion_title,
+                S.of(mainContext).promotion_content(
+                    dateFormat.format(Purchases.searchPromotionTo)),
+                remoteConfigSearchByNameVideo,
+                S.of(mainContext).credit_use_search)
             .then((value) {
           if (value == 1) {
             Navigator.push(
               mainContext,
-              MaterialPageRoute(builder: (context) => EnhancementsScreen(filter), settings: RouteSettings(name: 'Enhancements')),
+              MaterialPageRoute(
+                  builder: (context) => EnhancementsScreen(filter),
+                  settings: RouteSettings(name: 'Enhancements')),
             );
           } else if (value == 2) {
             if (Auth.appUser != null && Auth.credits > 0) {
               Auth.changeCredits(-1, "search");
               Navigator.push(
                 mainContext,
-                MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context)), settings: RouteSettings(name: 'Search')),
+                MaterialPageRoute(
+                    builder: (context) =>
+                        Search(Localizations.localeOf(context)),
+                    settings: RouteSettings(name: 'Search')),
               );
             } else {
               Navigator.push(
                 mainContext,
-                MaterialPageRoute(builder: (context) => FeedbackScreen(filter), settings: RouteSettings(name: 'Feedback')),
+                MaterialPageRoute(
+                    builder: (context) => FeedbackScreen(filter),
+                    settings: RouteSettings(name: 'Feedback')),
               );
             }
           } else {
             _logPromotionEvent('search');
             Navigator.push(
               mainContext,
-              MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context)), settings: RouteSettings(name: 'Search')),
+              MaterialPageRoute(
+                  builder: (context) => Search(Localizations.localeOf(context)),
+                  settings: RouteSettings(name: 'Search')),
             );
           }
         });
       } else {
-        infoBuyDialog(mainContext, S.of(mainContext).product_search_title, S.of(mainContext).product_search_description, remoteConfigSearchByNameVideo, S.of(mainContext).credit_use_search).then((value) {
+        infoBuyDialog(
+                mainContext,
+                S.of(mainContext).product_search_title,
+                S.of(mainContext).product_search_description,
+                remoteConfigSearchByNameVideo,
+                S.of(mainContext).credit_use_search)
+            .then((value) {
           if (value == 1) {
             Navigator.push(
               mainContext,
-              MaterialPageRoute(builder: (context) => EnhancementsScreen(filter), settings: RouteSettings(name: 'Enhancements')),
+              MaterialPageRoute(
+                  builder: (context) => EnhancementsScreen(filter),
+                  settings: RouteSettings(name: 'Enhancements')),
             );
           } else if (value == 2) {
             if (Auth.appUser != null && Auth.credits > 0) {
               Auth.changeCredits(-1, "search");
               Navigator.push(
                 mainContext,
-                MaterialPageRoute(builder: (context) => Search(Localizations.localeOf(context)), settings: RouteSettings(name: 'Search')),
+                MaterialPageRoute(
+                    builder: (context) =>
+                        Search(Localizations.localeOf(context)),
+                    settings: RouteSettings(name: 'Search')),
               );
             } else {
               Navigator.push(
                 mainContext,
-                MaterialPageRoute(builder: (context) => FeedbackScreen(filter), settings: RouteSettings(name: 'Feedback')),
+                MaterialPageRoute(
+                    builder: (context) => FeedbackScreen(filter),
+                    settings: RouteSettings(name: 'Feedback')),
               );
             }
           }
@@ -605,7 +741,10 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
     onPressed: () {
       Navigator.push(
         mainContext,
-        MaterialPageRoute(builder: (context) => CustomListScreen(Localizations.localeOf(context)), settings: RouteSettings(name: 'CustomList')),
+        MaterialPageRoute(
+            builder: (context) =>
+                CustomListScreen(Localizations.localeOf(context)),
+            settings: RouteSettings(name: 'CustomList')),
       );
     },
   ));
@@ -613,22 +752,36 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key, 
   return _actions;
 }
 
-void goToDetail(State state, BuildContext context, Locale myLocale, String name, Map<String, String> filter) {
+void goToDetail(State state, BuildContext context, Locale myLocale, String name,
+    Map<String, String> filter) {
   plantsReference.child(name).once().then((event) {
-    if (event.snapshot.value != null && (event.snapshot.value as Map)['id'] != null) {
+    if (event.snapshot.value != null &&
+        (event.snapshot.value as Map)['id'] != null) {
       if (state.mounted) {
-        Plant plant = Plant.fromJson(event.snapshot.key ?? '', event.snapshot.value as Map);
+        Plant plant = Plant.fromJson(
+            event.snapshot.key ?? '', event.snapshot.value as Map);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PlantDetail(myLocale, filter, plant), settings: RouteSettings(name: 'PlantDetail')),
+          MaterialPageRoute(
+              builder: (context) => PlantDetail(myLocale, filter, plant),
+              settings: RouteSettings(name: 'PlantDetail')),
         );
       }
     } else {
       plantsReference.child(name).keepSynced(true);
-      translationsReference.child(myLocale.languageCode).child(name).keepSynced(true);
+      translationsReference
+          .child(myLocale.languageCode)
+          .child(name)
+          .keepSynced(true);
       if (myLocale.languageCode != languageEnglish) {
-        translationsReference.child(languageEnglish).child(name).keepSynced(true);
-        translationsReference.child(myLocale.languageCode + languageGTSuffix).child(name).keepSynced(true);
+        translationsReference
+            .child(languageEnglish)
+            .child(name)
+            .keepSynced(true);
+        translationsReference
+            .child(myLocale.languageCode + languageGTSuffix)
+            .child(name)
+            .keepSynced(true);
       }
     }
   });

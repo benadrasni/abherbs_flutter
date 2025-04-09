@@ -83,6 +83,9 @@ android {
             firebaseCrashlytics {
                 mappingFileUploadEnabled true
             }
+            ndk {
+                debugSymbolLevel SYMBOL_TABLE
+            }
         }
         debug {
             signingConfig signingConfigs.config
