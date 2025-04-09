@@ -153,7 +153,6 @@ class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
   void dispose() {
     // Cancel the Firebase stream subscriptions
     _model.clear();
-
     super.dispose();
   }
 

@@ -2,6 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -38,14 +39,15 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
         }
       }
 
-      listen(query.onValue, _onValue, onError: _onError);
-    }).onError((error, stackTrace) => null);
+      _subscription = query.onValue.listen(_onValue, onError: _onError);
+    }).onError((error, stackTrace) {
+      print('Error: $error');
+      return null;
+    });
   }
 
   /// Database query used to populate the list
   final Query query;
-
-
   final Query keyQuery;
 
   /// Called when the data of the list has finished loading
@@ -56,8 +58,9 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
 
   // ListBase implementation
   final List<DataSnapshot> _snapshots = <DataSnapshot>[];
-
   final Map<String, int> _keys = <String, int>{};
+
+  StreamSubscription<DatabaseEvent>? _subscription;
 
   @override
   int get length => _snapshots.length;
@@ -77,12 +80,17 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
 
   @override
   void clear() {
+    _snapshots.clear();
+    _keys.clear();
+    _subscription?.cancel();
+    _subscription = null;
     cancelSubscriptions();
 
     // Do not call super.clear(), it will set the length, it's unsupported.
   }
 
   void _onValue(DatabaseEvent event) {
+    _snapshots.clear();
     _keys.forEach((key, value) {
       int k = int.parse(key);
       if (k < event.snapshot.children.length) {
