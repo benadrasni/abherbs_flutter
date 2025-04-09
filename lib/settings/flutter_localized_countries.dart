@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class CountryNames {
@@ -62,7 +61,7 @@ class CountryNamesLocalizationsDelegate extends LocalizationsDelegate<CountryNam
 
   Future<dynamic> _loadJSON(key) {
     Future<dynamic> parser(String data) async => jsonDecode(data);
-    final bundle = this.bundle ?? rootBundle;
+    final bundle = this.bundle;
     return bundle.loadStructuredData(key, parser);
   }
 }

@@ -26,8 +26,8 @@ class Distribution2 extends StatefulWidget {
 
 class _Distribution2State extends State<Distribution2> {
   GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+  int _count = -1;
   late StreamSubscription<firebase_auth.User?> _listener;
-  Future<int>? _countF;
   BannerAd? _ad;
 
   void _navigate(String value) {
@@ -50,10 +50,14 @@ class _Distribution2State extends State<Distribution2> {
     });
   }
 
-  _setCount() {
-    _countF = countsReference.child(getFilterKey(widget.filter)).once().then((event) {
-      return event.snapshot.value as int;
-    });
+  Future<void> _setCount() async {
+    final event = await countsReference.child(getFilterKey(widget.filter)).once();
+    int count = event.snapshot.value as int? ?? 0;
+    if (this.mounted) {
+      setState(() {
+        _count = count;
+      });
+    }
   }
 
   Widget _getBody(BuildContext context) {
@@ -246,39 +250,26 @@ class _Distribution2State extends State<Distribution2> {
           onBottomNavigationBarTap(context, widget.filter, index, -1);
         },
       ),
-      floatingActionButton: new Container(
+      floatingActionButton: Container(
         height: 70.0 + getFABPadding(),
         width: 70.0,
         padding: EdgeInsets.only(bottom: getFABPadding()),
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: FutureBuilder<int>(
-              future: _countF,
-              builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.active:
-                  case ConnectionState.waiting:
-                    return const CircularProgressIndicator();
-                  default:
-                    return GestureDetector(
-                      onLongPress: () {
-                        setState(() {
-                          clearFilter(widget.filter, _setCount);
-                        });
-                      },
-                      child: FloatingActionButton(
-                        onPressed: () {
-                          filterRoutes.remove(filterDistribution2);
-                          Navigator.pushReplacement(
-                            mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(widget.filter, '', keysReference.child(getFilterKey(widget.filter))), settings: RouteSettings(name: 'PlantList')),
-                          );
-                        },
-                        child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
-                      ),
-                    );
-                }
-              }),
+        child: GestureDetector(
+          onLongPress: () {
+            setState(() {
+              clearFilter(widget.filter, _setCount);
+            });
+          },
+          child: FloatingActionButton(
+            onPressed: () {
+              filterRoutes.remove(filterDistribution2);
+              Navigator.pushReplacement(
+                mainContext,
+                MaterialPageRoute(builder: (context) => PlantList(widget.filter, '', keysReference.child(getFilterKey(widget.filter))), settings: RouteSettings(name: 'PlantList')),
+              );
+            },
+            child: _count == -1 ? CircularProgressIndicator() : Text('$_count'),
+          ),
         ),
       ),
     );

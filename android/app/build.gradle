@@ -80,6 +80,9 @@ android {
         release {
             signingConfig signingConfigs.config
             proguardFiles 'proguard-rules.pro'
+            firebaseCrashlytics {
+                mappingFileUploadEnabled true
+            }
         }
         debug {
             signingConfig signingConfigs.config
@@ -95,6 +98,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.10"
     implementation 'com.google.ads.mediation:applovin:13.1.0.1'
     implementation 'com.google.ads.mediation:facebook:6.19.0.1'
+    implementation 'com.google.firebase:firebase-crashlytics:19.4.2'
+    implementation 'com.google.firebase:firebase-analytics:22.4.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

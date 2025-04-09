@@ -123,7 +123,7 @@ bool _isInNames(List<dynamic> names, String searchText) {
 
 void _buildTaxonomy(List<PlantTaxon> taxons, Map<dynamic, dynamic> dictionary, Map<dynamic, dynamic> taxonomy, int offset, String path,
     String taxonName, String searchText) {
-  List<dynamic> names = dictionary[taxonName];
+  List<dynamic> names = dictionary[taxonName] ?? [];
   if (searchText.isEmpty || taxonName.toLowerCase().contains(searchText.toLowerCase()) || _isInNames(names, searchText)) {
     PlantTaxon taxon = PlantTaxon();
     taxon.path = path + taxonName + '/' + firebaseAttributeList;

@@ -27,8 +27,8 @@ class Petal extends StatefulWidget {
 class _PetalState extends State<Petal> {
   GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   Map<String, String> _filter = Map<String, String>();
+  int _count = -1;
   late StreamSubscription<firebase_auth.User?> _listener;
-  Future<int>? _countF;
   BannerAd? _ad;
 
   _navigate(String value) {
@@ -51,10 +51,14 @@ class _PetalState extends State<Petal> {
     });
   }
 
-  _setCount() {
-    _countF = countsReference.child(getFilterKey(_filter)).once().then((event) {
-      return event.snapshot.value as int;
-    });
+  Future<void> _setCount() async {
+    final event = await countsReference.child(getFilterKey(_filter)).once();
+    int count = event.snapshot.value as int? ?? 0;
+    if (this.mounted) {
+      setState(() {
+        _count = count;
+      });
+    }
   }
 
   @override
@@ -260,38 +264,28 @@ class _PetalState extends State<Petal> {
           onBottomNavigationBarTap(context, _filter, index, Preferences.myFilterAttributes.indexOf(filterPetal));
         },
       ),
-      floatingActionButton: new Container(
+      floatingActionButton: Container(
         height: 70.0 + getFABPadding(),
         width: 70.0,
         padding: EdgeInsets.only(bottom: getFABPadding()),
         child: FittedBox(
           fit: BoxFit.fill,
-          child: FutureBuilder<int>(
-              future: _countF,
-              builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.active:
-                  case ConnectionState.waiting:
-                    return const CircularProgressIndicator();
-                  default:
-                    return GestureDetector(
-                      onLongPress: () {
-                        setState(() {
-                          clearFilter(_filter, _setCount);
-                        });
-                      },
-                      child: FloatingActionButton(
-                        onPressed: () {
-                          Navigator.push(
-                            mainContext,
-                            MaterialPageRoute(builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))), settings: RouteSettings(name: 'PlantList')),
-                          );
-                        },
-                        child: Text(snapshot.data == null ? '' : snapshot.data.toString()),
-                      ),
-                    );
-                }
-              }),
+          child: GestureDetector(
+            onLongPress: () {
+              setState(() {
+                clearFilter(_filter, _setCount);
+              });
+            },
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  mainContext,
+                  MaterialPageRoute(builder: (context) => PlantList(_filter, '', keysReference.child(getFilterKey(_filter))), settings: RouteSettings(name: 'PlantList')),
+                );
+              },
+              child: _count == -1 ? CircularProgressIndicator() : Text('$_count'),
+            ),
+          ),
         ),
       ),
     );
