@@ -146,7 +146,7 @@ class _ObservationLogsState extends State<ObservationLogs> {
                 for (var entry in sortedMap.entries) {
                   widgets.add(ListTile(
                       leading: Image(
-                        image: AssetImage('icons/flags/png/' + entry.key + '.png', package: 'country_icons'),
+                        image: AssetImage('icons/flags/png100px/' + entry.key + '.png', package: 'country_icons'),
                         width: 50.0,
                         height: 50.0,
                         fit: BoxFit.fitWidth,
