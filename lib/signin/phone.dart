@@ -29,7 +29,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   late PhoneCodeSent _codeSent;
   late PhoneCodeAutoRetrievalTimeout _codeAutoRetrievalTimeout;
 
-  Country? _country;
+  Country _country = Country.parse('US');
   String? _phone;
   String? _verificationId;
   String? _code;
@@ -95,7 +95,9 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     _isLoading = false;
     _isWrongNumber = false;
     _showResendButton = false;
-    _country = Country.parse(widget.myLocale.countryCode!);
+    if (widget.myLocale.countryCode != null && widget.myLocale.countryCode!.isNotEmpty) {
+      _country = Country.parse(widget.myLocale.countryCode!);
+    }
 
     _verificationCompleted = (AuthCredential credential) {
       Auth.signInWithCredential(credential);

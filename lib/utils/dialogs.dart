@@ -218,7 +218,7 @@ Future<void> infoDialog(BuildContext mainContext, String title, String content) 
       });
 }
 
-Future<int> infoBuyDialog(BuildContext mainContext, String title, String content, String config, String credit) async {
+Future<dynamic> infoBuyDialog(BuildContext mainContext, String title, String content, String config, String credit) async {
   Widget videoButton = Container();
   String value = RemoteConfiguration.remoteConfig.getString(config);
   if (value.isNotEmpty) {
@@ -289,5 +289,5 @@ Future<int> infoBuyDialog(BuildContext mainContext, String title, String content
             ),
           ],
         );
-      }) as int;
+      });
 }
