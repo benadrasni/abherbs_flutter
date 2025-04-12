@@ -53,9 +53,9 @@ class _PlantDetailState extends State<PlantDetail> {
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   int _currentIndex = 0;
   bool _isPublic = false;
+  bool _isFavorite = false;
   late StreamSubscription<firebase_auth.User?> _listener;
   late Future<PlantTranslation> _plantTranslationF;
-  late Future<bool> _isFavoriteF;
   late double _fontSize;
   BannerAd? _ad;
 
@@ -71,18 +71,30 @@ class _PlantDetailState extends State<PlantDetail> {
   }
 
   onShare() {
-    Share.share(Uri.encodeFull('https://whatsthatflower.com/?plant=' + widget.plant.name + '&lang=' + widget.myLocale.languageCode), subject: widget.plant.name);
+    Share.share(
+        Uri.encodeFull(
+            'https://whatsthatflower.com/?plant=' + widget.plant.name + '&lang=' + widget.myLocale.languageCode),
+        subject: widget.plant.name);
     _logShareEvent(widget.plant.name);
   }
 
   Future<PlantTranslation> _getTranslation() {
-    return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(widget.plant.name).once().then((event) {
-      PlantTranslation plantTranslation = event.snapshot.value == null ? PlantTranslation() : PlantTranslation.fromJson(event.snapshot.value as Map);
+    return translationsReference
+        .child(getLanguageCode(widget.myLocale.languageCode))
+        .child(widget.plant.name)
+        .once()
+        .then((event) {
+      PlantTranslation plantTranslation =
+          event.snapshot.value == null ? PlantTranslation() : PlantTranslation.fromJson(event.snapshot.value as Map);
       if (plantTranslation.isTranslated()) {
         return plantTranslation;
       } else {
         plantTranslation.isTranslatedWithGT = true;
-        return translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name).once().then((event) {
+        return translationsReference
+            .child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix)
+            .child(widget.plant.name)
+            .once()
+            .then((event) {
           var plantTranslationGT = PlantTranslation.copy(plantTranslation);
           if (event.snapshot.value != null) {
             plantTranslationGT = PlantTranslation.fromJson(event.snapshot.value as Map);
@@ -95,7 +107,11 @@ class _PlantDetailState extends State<PlantDetail> {
             plantTranslationGT.isTranslatedWithGT = true;
             return plantTranslationGT;
           } else {
-            return translationsReference.child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish).child(widget.plant.name).once().then((event) {
+            return translationsReference
+                .child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish)
+                .child(widget.plant.name)
+                .once()
+                .then((event) {
               var plantTranslationOriginal = PlantTranslation.fromJson(event.snapshot.value as Map);
               var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
               uri += '&source=' + (languageCzech == widget.myLocale.languageCode ? languageSlovak : languageEnglish);
@@ -106,8 +122,12 @@ class _PlantDetailState extends State<PlantDetail> {
               return http.get(Uri.parse(uri)).then((response) {
                 if (response.statusCode == 200) {
                   Translations translations = Translations.fromJson(json.decode(response.body));
-                  PlantTranslation onlyGoogleTranslation = plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
-                  translationsReference.child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix).child(widget.plant.name).set(onlyGoogleTranslation.toJson());
+                  PlantTranslation onlyGoogleTranslation =
+                      plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
+                  translationsReference
+                      .child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix)
+                      .child(widget.plant.name)
+                      .set(onlyGoogleTranslation.toJson());
                   return plantTranslation;
                 } else {
                   return plantTranslation.mergeWith(plantTranslationOriginal);
@@ -120,15 +140,23 @@ class _PlantDetailState extends State<PlantDetail> {
     });
   }
 
-  Future<bool> _setFavorite() {
-    return Future<bool>(() {
-      if (Auth.appUser != null) {
-        return usersReference.child(Auth.appUser!.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).once().then((event) {
-          return event.snapshot.value != null && event.snapshot.value == 1;
+  void _setFavorite() {
+    if (Auth.appUser != null) {
+      usersReference
+          .child(Auth.appUser!.uid)
+          .child(firebaseAttributeFavorite)
+          .child(widget.plant.id.toString())
+          .once()
+          .then((event) {
+        setState(() {
+          _isFavorite = event.snapshot.value != null && event.snapshot.value == 1;
         });
-      }
-      return false;
-    });
+      });
+    } else {
+      setState(() {
+        _isFavorite = false;
+      });
+    }
   }
 
   Future<void> _logSelectContentEvent(String contentId) async {
@@ -166,7 +194,9 @@ class _PlantDetailState extends State<PlantDetail> {
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => ObservationLogs(Localizations.localeOf(context), 0), settings: RouteSettings(name: 'ObservationLogs')),
+        MaterialPageRoute(
+            builder: (context) => ObservationLogs(Localizations.localeOf(context), 0),
+            settings: RouteSettings(name: 'ObservationLogs')),
       );
     }
   }
@@ -175,8 +205,10 @@ class _PlantDetailState extends State<PlantDetail> {
   void initState() {
     super.initState();
 
-    _listener = Auth.subscribe((firebase_auth.User? user) => setState(() {_isFavoriteF = _setFavorite();}));
-    _isFavoriteF = _setFavorite();
+    _listener = Auth.subscribe((firebase_auth.User? user) => setState(() {
+          _setFavorite();
+        }));
+    _setFavorite();
     Offline.setKeepSynced(3, true);
 
     if (!Purchases.isNoAds()) {
@@ -329,47 +361,47 @@ class _PlantDetailState extends State<PlantDetail> {
         padding: EdgeInsets.only(bottom: getFABPadding()),
         child: FittedBox(
           fit: BoxFit.fill,
-          child: FutureBuilder<bool>(
-              future: _isFavoriteF,
-              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                return FloatingActionButton(
+          child: _currentIndex == observationIndex
+              ? FloatingActionButton(
                   onPressed: () {
-                    if (_currentIndex == observationIndex) {
-                      var observation = Observation(widget.plant.name);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ObservationEdit(widget.myLocale, observation), settings: RouteSettings(name: 'ObservationEdit')),
-                      ).then((value) {
-                        if (value != null && value && _key.currentState != null) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(S.of(context).observation_saved),
-                          ));
-                        }
-                        setState(() {});
-                      });
-                    } else {
-                      if (Auth.appUser != null) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          usersReference.child(Auth.appUser!.uid).child(firebaseAttributeFavorite).child(widget.plant.id.toString()).set(snapshot.data == null ? null : 1).then((value) {
-                            if (mounted) {
-                              setState(() {
-                                _isFavoriteF = _setFavorite();
-                              });
-                            }
+                    var observation = Observation(widget.plant.name);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ObservationEdit(widget.myLocale, observation),
+                          settings: RouteSettings(name: 'ObservationEdit')),
+                    ).then((value) {
+                      if (value != null && value && _key.currentState != null) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(S.of(context).observation_saved),
+                        ));
+                      }
+                      setState(() {});
+                    });
+                  },
+                  child: Icon(Icons.add),
+                )
+              : FloatingActionButton(
+                  onPressed: () {
+                    if (Auth.appUser != null) {
+                      usersReference
+                          .child(Auth.appUser!.uid)
+                          .child(firebaseAttributeFavorite)
+                          .child(widget.plant.id.toString())
+                          .set(_isFavorite ? null : 1)
+                          .then((value) {
+                        if (mounted) {
+                          setState(() {
+                            _isFavorite = !_isFavorite;
                           });
                         }
-                      } else {
-                        favoriteDialog(context, _key);
-                      }
+                      });
+                    } else {
+                      favoriteDialog(context, _key);
                     }
                   },
-                  child: _currentIndex == observationIndex
-                      ? Icon(Icons.add)
-                      : snapshot.connectionState == ConnectionState.done && snapshot.data != null
-                          ? Icon(Icons.favorite)
-                          : Icon(Icons.favorite_border),
-                );
-              }),
+                  child: _isFavorite ? Icon(Icons.favorite) : Icon(Icons.favorite_border),
+                ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
