@@ -145,7 +145,10 @@ class _AppState extends State<App> {
 
   changeLanguage(String language) {
     if (language.isEmpty) {
-      _locale = getDeviceLocale();
+      setState(() {
+        translationCache = {};
+        _locale = getDeviceLocale();
+      });
     } else {
       var languageCountry = language.split('_');
       setState(() {
@@ -394,7 +397,7 @@ class _AppState extends State<App> {
       resultLocale = defaultLocale[languageEnglish];
     }
 
-    Prefs.setStringList(keyLanguageAndCountry, [resultLocale!.languageCode, resultLocale.countryCode!]);
+    Prefs.setStringList(keyLanguageAndCountry, [resultLocale!.languageCode, resultLocale.countryCode ?? '']);
     return resultLocale;
   }
 
