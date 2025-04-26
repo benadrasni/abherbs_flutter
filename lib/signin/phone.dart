@@ -220,7 +220,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
                     },
                   );
                 },
-                child: Text('+' + _country!.phoneCode),
+                child: Text('+' + _country.phoneCode),
               ),
             ),
             Expanded(
@@ -233,7 +233,7 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
                   hintText: S.of(context).auth_phone_hint,
                 ),
                 validator: (value) => value == null || value.isEmpty || _isWrongNumber ? S.of(context).auth_invalid_phone_number : null,
-                onSaved: (value) => _phone = '+' + _country!.phoneCode + value!,
+                onSaved: (value) => _phone = '+' + _country.phoneCode + value!,
               ),
             ),
           ],

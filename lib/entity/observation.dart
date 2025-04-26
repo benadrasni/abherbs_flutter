@@ -11,6 +11,7 @@ const String observationNote = "note";
 const String observationDate = "date";
 const String observationTime = "time";
 const String observationOrder = "order";
+const String observationIndoors = "indoors";
 const String observationStatus = "status";
 const String observationStatusPrivate = "private";
 const String observationStatusPublic = "public";
@@ -27,6 +28,7 @@ class Observation{
   String status = observationStatusPrivate;
   String uploadStatus = firebaseValuePrivate;
   int order = 0;
+  bool indoors = false;
 
   Observation(String plantName) {
     this.plant = plantName;
@@ -43,6 +45,7 @@ class Observation{
     this.photoPaths = List.from(observation.photoPaths);
     this.status = observation.status;
     this.order = observation.order;
+    this.indoors = observation.indoors;
   }
 
   Observation.fromJson(key, Map data) {
@@ -56,6 +59,7 @@ class Observation{
     this.photoPaths = data[observationPhotoPaths];
     this.status = data[observationStatus];
     this.order = data[observationOrder];
+    this.indoors = data[observationIndoors] ?? false;
   }
 
   Map<String, dynamic> toJson() {
@@ -69,6 +73,7 @@ class Observation{
     result[observationPhotoPaths] = this.photoPaths;
     result[observationStatus] = this.status;
     result[observationOrder] = this.order;
+    result[observationIndoors] = this.indoors;
     return result;
   }
 }

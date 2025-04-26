@@ -24,7 +24,7 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
       child: FutureBuilder<PlantTranslation>(
     future: _plantTranslationF,
     builder: (BuildContext context, AsyncSnapshot<PlantTranslation> plantTranslationSnapshot) {
-      if (plantTranslationSnapshot.connectionState == ConnectionState.done) {
+      if (plantTranslationSnapshot.connectionState == ConnectionState.done && plantTranslationSnapshot.data != null) {
         return Container(padding: EdgeInsets.only(top: 15.0, bottom: 15.0), child: _getNames(plant, plantTranslationSnapshot.data!));
       } else {
         return Container();

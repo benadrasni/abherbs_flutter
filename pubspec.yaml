@@ -7,7 +7,7 @@ description: Flutter version of abherbs
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 8.0.5+805
+version: 8.0.6+806
 
 environment:
   sdk: ">=2.12.0 <4.0.0"
@@ -17,45 +17,45 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  shared_preferences: 2.5.2
-  firebase_core: 3.12.1
-  firebase_messaging: 15.2.4
-  firebase_analytics: 11.4.4
-  firebase_auth: 5.5.1
-  firebase_auth_platform_interface: 7.6.1
-  firebase_storage: 12.4.4
-  firebase_database: 11.3.4
-  firebase_remote_config: 5.4.2
-  firebase_crashlytics: 4.3.4
-  firebase_performance: 0.10.1+4
-  google_maps_flutter: 2.12.0
-  google_mobile_ads: 5.3.1
+  shared_preferences: 2.5.3
+  firebase_core: 3.13.0
+  firebase_messaging: 15.2.5
+  firebase_analytics: 11.4.5
+  firebase_auth: 5.5.2
+  firebase_auth_platform_interface: 7.6.2
+  firebase_storage: 12.4.5
+  firebase_database: 11.3.5
+  firebase_remote_config: 5.4.3
+  firebase_crashlytics: 4.3.5
+  firebase_performance: 0.10.1+5
+  google_maps_flutter: 2.12.1
+  google_mobile_ads: 6.0.0
   google_sign_in: 6.3.0
-  sign_in_with_apple: 6.1.4
+  sign_in_with_apple: 7.0.1
   device_info_plus: 9.1.2
   in_app_purchase: 3.2.1
   cached_network_image: 3.4.1
   url_launcher: 6.3.1
-  url_launcher_ios: 6.3.2
+  url_launcher_ios: 6.3.3
   http: 1.3.0
   share_plus: 7.2.2
   fluttertoast: 8.2.12
   diacritic: 0.1.6
   path_provider: 2.1.5
-  percent_indicator: 4.2.4
+  percent_indicator: 4.2.5
   package_info_plus: 8.3.0
   image_picker: 1.1.2
   exif: 3.3.0
-  permission_handler: 11.4.0
+  permission_handler: 12.0.0+1
   datetime_picker_formfield_new: 2.1.0
-  connectivity_plus: 6.1.3
+  connectivity_plus: 6.1.4
   photo_view: 0.15.0
   youtube_player_iframe: 5.2.1
   app_tracking_transparency: 2.0.6+1
   country_picker: 2.0.27
   community_charts_flutter: 1.0.4
   country_icons: 3.0.0
-  wakelock_plus: 1.2.11
+  wakelock_plus: 1.3.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
