@@ -68,11 +68,14 @@ class _PlantDetailState extends State<PlantDetail> {
     });
   }
 
-  onShare() {
-    Share.share(
-        Uri.encodeFull(
+  onShare() async {
+    await SharePlus.instance.share(
+      ShareParams(
+        text: Uri.encodeFull(
             'https://whatsthatflower.com/?plant=' + widget.plant.name + '&lang=' + widget.myLocale.languageCode),
-        subject: widget.plant.name);
+        subject: widget.plant.name,
+      ),
+    );
     _logShareEvent(widget.plant.name);
   }
 
