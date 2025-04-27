@@ -14,7 +14,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import '../main.dart';
 import 'observation_logs.dart';
 
 class Observations extends StatefulWidget {
@@ -157,7 +156,6 @@ class _ObservationsState extends State<Observations> {
 
   @override
   Widget build(BuildContext context) {
-    App.currentContext = context;
     var myLocale = Localizations.localeOf(context);
 
     List<Widget> appBarItems = [];

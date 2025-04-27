@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
-import '../main.dart';
-
 class ObservationView extends StatefulWidget {
   final Locale myLocale;
   final Observation observation;
@@ -36,7 +34,6 @@ class _ObservationViewState extends State<ObservationView> {
 
   @override
   Widget build(BuildContext context) {
-    App.currentContext = context;
     var self = this;
     var mainContext = context;
     double mapWidth = MediaQuery.of(context).size.width;

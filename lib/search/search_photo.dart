@@ -18,8 +18,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-import '../main.dart';
-
 const int maxFailedLoadAttempts = 3;
 
 class SearchResult {
@@ -244,7 +242,6 @@ class _SearchPhotoState extends State<SearchPhoto> {
 
   @override
   Widget build(BuildContext context) {
-    App.currentContext = context;
     var self = this;
     double maxSize = MediaQuery.of(context).size.width;
     TextStyle feedbackTextStyle = TextStyle(

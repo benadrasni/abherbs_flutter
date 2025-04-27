@@ -1,14 +1,12 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
-import '../main.dart';
 import 'flower.dart';
 
 class LegendScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    App.currentContext = context;
     TextStyle legendTextStyle = TextStyle(
       fontSize: 18.0,
     );

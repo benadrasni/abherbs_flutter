@@ -15,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'keys.dart';
-import 'main.dart';
 
 class PlantList extends StatefulWidget {
   final Map<String, String> filter;
@@ -98,7 +97,6 @@ class _PlantListState extends State<PlantList> {
 
   @override
   Widget build(BuildContext context) {
-    App.currentContext = context;
     var self = this;
     var mainContext = context;
 

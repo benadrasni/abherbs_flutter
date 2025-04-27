@@ -118,7 +118,6 @@ void main() {
 }
 
 class App extends StatefulWidget {
-  static BuildContext? currentContext;
   final Locale locale;
   final Map<String, String> filter;
   final String initialRoute;
@@ -134,13 +133,33 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
   late Locale _locale;
+  String? _currentTopic;
 
   Future<void> _logFailedPurchaseEvent() async {
     await _firebaseAnalytics.logEvent(name: 'purchase_failed');
+  }
+
+  void _subscribeToLanguageTopic(String languageCode) {
+    final topic = 'notifications-$languageCode';
+    FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
+      print('Subscribed to $topic');
+      _currentTopic = topic;
+    }).catchError((error) {
+      print('Failed to subscribe to $topic: $error');
+    });
+  }
+
+  void _unsubscribeFromTopic(String topic) {
+    FirebaseMessaging.instance.unsubscribeFromTopic(topic).then((_) {
+      print('Unsubscribed from $topic');
+    }).catchError((error) {
+      print('Failed to unsubscribe from $topic: $error');
+    });
   }
 
   changeLanguage(String language) {
@@ -156,6 +175,12 @@ class _AppState extends State<App> {
         _locale = Locale(languageCountry[0], languageCountry[1]);
       });
     }
+
+    if (_currentTopic != null) {
+      _unsubscribeFromTopic(_currentTopic!);
+    }
+
+    _subscribeToLanguageTopic(_locale.languageCode);
   }
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
@@ -175,14 +200,14 @@ class _AppState extends State<App> {
   Future<dynamic> handleMessage(RemoteMessage message) {
     if (message != null) {
       String action = message.data[notificationAttributeAction];
-      if (action.isNotEmpty && App.currentContext != null) {
+      if (action.isNotEmpty && _navigatorKey.currentContext != null) {
         switch (action) {
           case notificationAttributeActionList:
             String path = message.data[notificationAttributePath];
             String? content = message.notification?.title != null ? message.notification?.title : message.notification?.body;
             rootReference.child(path).keepSynced(true);
             return showDialog(
-              context: App.currentContext!,
+              context: _navigatorKey.currentContext!,
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return AlertDialog(
@@ -224,7 +249,7 @@ class _AppState extends State<App> {
             String name = message.data[notificationAttributeName];
             String? content = message.notification?.title != null ? message.notification?.title : message.notification?.body;
             return showDialog(
-              context: App.currentContext!,
+              context: _navigatorKey.currentContext!,
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return AlertDialog(
@@ -297,7 +322,7 @@ class _AppState extends State<App> {
       if (value?.data != null) {
         MaterialPageRoute<dynamic>? redirect = await findRedirectF(value!.data);
         if (redirect != null) {
-          Navigator.push(App.currentContext!, redirect);
+          Navigator.push(_navigatorKey.currentContext!, redirect);
         }
       }
     });
@@ -435,6 +460,7 @@ class _AppState extends State<App> {
     initStoreInfo();
 
     _locale = widget.locale;
+    _subscribeToLanguageTopic(_locale.languageCode);
 
     Prefs.getStringF(keyRateCount, rateCountInitial.toString()).then((value) {
       if (int.parse(value) < 0) {
@@ -462,6 +488,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: _navigatorKey,
       locale: localeResolution(_locale, S.delegate.supportedLocales),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [

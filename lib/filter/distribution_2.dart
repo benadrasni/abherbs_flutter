@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../keys.dart';
-import '../main.dart';
 
 class Distribution2 extends StatefulWidget {
   final Map<String, String> filter;
@@ -201,7 +200,6 @@ class _Distribution2State extends State<Distribution2> {
 
   @override
   Widget build(BuildContext context) {
-    App.currentContext = context;
     var mainContext = context;
     return Scaffold(
       key: _key,

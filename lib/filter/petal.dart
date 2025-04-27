@@ -14,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../keys.dart';
-import '../main.dart';
 
 class Petal extends StatefulWidget {
   final Map<String, String> filter;
@@ -63,7 +62,6 @@ class _PetalState extends State<Petal> {
 
   @override
   void initState() {
-    App.currentContext = context;
     super.initState();
 
     _listener = Auth.subscribe((firebase_auth.User? user) => setState(() {}));

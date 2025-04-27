@@ -30,8 +30,6 @@ import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import '../main.dart';
-
 const int galleryIndex = 0;
 const int infoIndex = 1;
 const int taxonomyIndex = 2;
@@ -246,7 +244,6 @@ class _PlantDetailState extends State<PlantDetail> {
 
   @override
   Widget build(BuildContext context) {
-    App.currentContext = context;
     var items = <BottomNavigationBarItem>[];
     items.add(BottomNavigationBarItem(icon: Icon(Icons.photo_library), label: S.of(context).plant_gallery));
     items.add(BottomNavigationBarItem(icon: Icon(Icons.info), label: S.of(context).plant_info));

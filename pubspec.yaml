@@ -32,13 +32,13 @@ dependencies:
   google_mobile_ads: 6.0.0
   google_sign_in: 6.3.0
   sign_in_with_apple: 7.0.1
-  device_info_plus: 9.1.2
+  device_info_plus: 11.4.0
   in_app_purchase: 3.2.1
   cached_network_image: 3.4.1
   url_launcher: 6.3.1
   url_launcher_ios: 6.3.3
   http: 1.3.0
-  share_plus: 7.2.2
+  share_plus: 11.0.0
   fluttertoast: 8.2.12
   diacritic: 0.1.6
   path_provider: 2.1.5

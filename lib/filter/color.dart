@@ -19,7 +19,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../keys.dart';
-import '../main.dart';
 
 class Color extends StatefulWidget {
   final Map<String, String> filter;
@@ -112,7 +111,6 @@ class _ColorState extends State<Color> {
 
   @override
   Widget build(BuildContext context) {
-    App.currentContext = context;
     var mainContext = context;
     var _widgets = <Widget>[];
     _widgets.add(Container(

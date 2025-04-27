@@ -17,7 +17,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:community_charts_flutter/community_charts_flutter.dart' as charts;
 
-import '../main.dart';
 import 'observation_edit.dart';
 import 'observations_map.dart';
 
@@ -180,7 +179,6 @@ class _ObservationLogsState extends State<ObservationLogs> {
 
   @override
   Widget build(BuildContext context) {
-    App.currentContext = context;
     var self = this;
     var mainContext = context;
     WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToEnd());

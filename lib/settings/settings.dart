@@ -206,7 +206,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    App.currentContext = context;
     TextStyle titleTextStyle = TextStyle(
       fontSize: 18.0,
     );

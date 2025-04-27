@@ -7,8 +7,6 @@ import 'package:abherbs_flutter/search/search_taxonomy.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../main.dart';
-
 class Search extends StatefulWidget {
   final Locale myLocale;
   Search(this.myLocale);
@@ -80,7 +78,6 @@ class _SearchState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    App.currentContext = context;
     return Scaffold(
       key: _key,
       appBar: AppBar(
