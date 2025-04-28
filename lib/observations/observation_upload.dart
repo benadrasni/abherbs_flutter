@@ -86,8 +86,8 @@ class _ObservationUploadState extends State<ObservationUpload> {
           textAlign: TextAlign.center,
         );
         _content = Container(
-          width: MediaQuery.of(context).size.width * 0.8, // Explicit width constraint
-          padding: EdgeInsets.symmetric(vertical: 10.0), // Optional padding for spacing
+          width: MediaQuery.of(context).size.width * 0.8,
+          padding: EdgeInsets.symmetric(vertical: 10.0),
           child: LinearPercentIndicator(
             lineHeight: 20.0,
             percent: (widget.observationsToUpload - _observationsRemain) / widget.observationsToUpload,

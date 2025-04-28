@@ -100,10 +100,14 @@ class _SettingOfflineState extends State<SettingOffline> {
           S.of(context).offline_download_progress,
           textAlign: TextAlign.center,
         );
-        _content = LinearPercentIndicator(
-          lineHeight: 20.0,
-          percent: (_familiesDownloaded + _plantsDownloaded) / (_familiesTotal + _plantsTotal),
-          progressColor: Theme.of(context).primaryColor,
+        _content = Container(
+          width: MediaQuery.of(context).size.width * 0.8,
+          padding: EdgeInsets.symmetric(vertical: 10.0),
+          child: LinearPercentIndicator(
+            lineHeight: 20.0,
+            percent: (_familiesDownloaded + _plantsDownloaded) / (_familiesTotal + _plantsTotal),
+            progressColor: Theme.of(context).primaryColor,
+          ),
         );
         _actions.add(TextButton(
           child: Text(S.of(context).pause.toUpperCase(), style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold,)),

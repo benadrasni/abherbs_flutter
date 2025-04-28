@@ -223,6 +223,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
       return results;
     }).catchError((error, stackTrace) {
       FirebaseCrashlytics.instance.recordError(error, stackTrace);
+      return <SearchResult>[];
     });
   }
 

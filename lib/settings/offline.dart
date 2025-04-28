@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
@@ -173,15 +174,18 @@ class Offline {
       return event.snapshot.value as String;
     });
     if (family.isNotEmpty) {
-      var errors = 0;
-      await _downloadFile(storageEndpoint + storageFamilies + family + defaultExtension, storageFamilies, family + defaultExtension)
-          .catchError((error) {
-        errors++;
-      });
-      return errors == 0;
-    } else {
-      return false;
+      try {
+        await _downloadFile(
+          storageEndpoint + storageFamilies + family + defaultExtension,
+          storageFamilies,
+          family + defaultExtension,
+        );
+        return true;
+      } catch (e) {
+        FirebaseCrashlytics.instance.recordError(e, null, reason: 'Failed to download family icon $family');
+      }
     }
+    return false;
   }
 
   static Future<bool> _downloadPlants(Function(int, int) onPlantDownload) async {
@@ -226,13 +230,20 @@ class Offline {
         if (url != plant.photoUrls[0]) {
           urls.add(url);
         }
-        await Future.wait(urls.map((String url) {
-          return _downloadFile(storageEndpoint + storagePhotos + url, storagePhotos + url.substring(0, url.lastIndexOf('/')),
-                  url.substring(url.lastIndexOf('/') + 1))
-              .catchError((error) {
-            errors++;
-          });
+        var results = await Future.wait(urls.map((String url) async {
+          try {
+            await _downloadFile(
+              storageEndpoint + storagePhotos + url,
+              storagePhotos + url.substring(0, url.lastIndexOf('/')),
+              url.substring(url.lastIndexOf('/') + 1),
+            );
+            return 0;
+          } catch (e) {
+            FirebaseCrashlytics.instance.recordError(e, null, reason: 'Failed to download photo $url');
+            return 1;
+          }
         }));
+        errors += results.fold(0, (sum, count) => sum + count);
 
         return errors == 0;
       } else {

@@ -35,12 +35,18 @@ import 'firebase_options.dart';
 
 void _iapError() {
   Fluttertoast.showToast(
-      msg: 'IAP not prepared. Check if Platform service is available.', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 5, backgroundColor: Colors.redAccent);
+      msg: 'IAP not prepared. Check if Platform service is available.',
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 5,
+      backgroundColor: Colors.redAccent);
 }
 
 Future<void> initializeFlutterFire() async {
   // Wait for Firebase to initialize
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   FirebaseDatabase.instance.setPersistenceEnabled(true);
   FirebaseDatabase.instance.setPersistenceCacheSizeBytes(firebaseCacheSize);
 
@@ -121,6 +127,7 @@ class App extends StatefulWidget {
   final Locale locale;
   final Map<String, String> filter;
   final String initialRoute;
+
   App(this.locale, this.filter, this.initialRoute);
 
   static void setLocale(BuildContext context, String language) async {
@@ -190,7 +197,8 @@ class _AppState extends State<App> {
         if (purchaseDetails.pendingCompletePurchase) {
           await _inAppPurchase.completePurchase(purchaseDetails);
         }
-        if (mounted && (purchaseDetails.productID == productNoAdsAndroid || purchaseDetails.productID == productNoAdsIOS)) {
+        if (mounted &&
+            (purchaseDetails.productID == productNoAdsAndroid || purchaseDetails.productID == productNoAdsIOS)) {
           setState(() {});
         }
       }
@@ -198,41 +206,40 @@ class _AppState extends State<App> {
   }
 
   Future<dynamic> handleMessage(RemoteMessage message) {
-    if (message != null) {
+    if (message.data.isNotEmpty) {
       String action = message.data[notificationAttributeAction];
       if (action.isNotEmpty && _navigatorKey.currentContext != null) {
         switch (action) {
           case notificationAttributeActionList:
             String path = message.data[notificationAttributePath];
-            String? content = message.notification?.title != null ? message.notification?.title : message.notification?.body;
+            String? content =
+                message.notification?.title != null ? message.notification?.title : message.notification?.body;
             rootReference.child(path).keepSynced(true);
             return showDialog(
               context: _navigatorKey.currentContext!,
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text(S
-                      .of(context)
-                      .notification),
+                  title: Text(S.of(context).notification),
                   content: Text(content ?? ''),
                   actions: <Widget>[
                     TextButton(
-                      child: Text(S
-                          .of(context)
-                          .notification_open,
+                      child: Text(S.of(context).notification_open,
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
                           )),
                       onPressed: () {
                         Navigator.of(context).pop();
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList')));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PlantList({}, '', rootReference.child(path)),
+                                settings: RouteSettings(name: 'PlantList')));
                       },
                     ),
                     TextButton(
-                      child: Text(S
-                          .of(context)
-                          .notification_close,
+                      child: Text(S.of(context).notification_close,
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
@@ -247,21 +254,18 @@ class _AppState extends State<App> {
             );
           case notificationAttributeActionPlant:
             String name = message.data[notificationAttributeName];
-            String? content = message.notification?.title != null ? message.notification?.title : message.notification?.body;
+            String? content =
+                message.notification?.title != null ? message.notification?.title : message.notification?.body;
             return showDialog(
               context: _navigatorKey.currentContext!,
               barrierDismissible: false,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text(S
-                      .of(context)
-                      .notification),
+                  title: Text(S.of(context).notification),
                   content: Text(content ?? ''),
                   actions: <Widget>[
                     TextButton(
-                      child: Text(S
-                          .of(context)
-                          .notification_open,
+                      child: Text(S.of(context).notification_open,
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
@@ -272,9 +276,7 @@ class _AppState extends State<App> {
                       },
                     ),
                     TextButton(
-                      child: Text(S
-                          .of(context)
-                          .notification_close,
+                      child: Text(S.of(context).notification_close,
                           style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.bold,
@@ -288,16 +290,9 @@ class _AppState extends State<App> {
               },
             );
         }
-      } else {
-        return Future<dynamic>(() {
-          return null;
-        });
       }
     }
-
-    return Future<dynamic>(() {
-      return null;
-    });
+    return Future.value(null);
   }
 
   void _firebaseCloudMessagingListeners() async {
@@ -359,14 +354,18 @@ class _AppState extends State<App> {
               rootReference.child(firebasePlantHeaders).keepSynced(true);
               return rootReference.child(path).once().then((event) {
                 var result = event.snapshot.value ?? [];
-                int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1)) : (result as Map).values.length;
+                int length = result is List
+                    ? result.fold(0, (t, value) => t + (value == null ? 0 : 1))
+                    : (result as Map).values.length;
                 if (length == 0) {
                   rootReference.child(path).child("refreshMock").set("mock").catchError((error) {
                     FirebaseCrashlytics.instance.log("0-length custom list");
                   });
                 }
                 return Future<MaterialPageRoute<dynamic>>(() {
-                  return MaterialPageRoute(builder: (context) => PlantList({}, '', rootReference.child(path)), settings: RouteSettings(name: 'PlantList'));
+                  return MaterialPageRoute(
+                      builder: (context) => PlantList({}, '', rootReference.child(path)),
+                      settings: RouteSettings(name: 'PlantList'));
                 });
               });
             }
@@ -379,11 +378,15 @@ class _AppState extends State<App> {
                 if (event.snapshot.value != null && (event.snapshot.value as Map)['id'] != null) {
                   Plant plant = Plant.fromJson(event.snapshot.key ?? '', event.snapshot.value as Map);
                   return Future<MaterialPageRoute<dynamic>>(() {
-                    return MaterialPageRoute(builder: (context) => PlantDetail(Localizations.localeOf(context), Map<String, String>(), plant), settings: RouteSettings(name: 'PlantDetail'));
+                    return MaterialPageRoute(
+                        builder: (context) =>
+                            PlantDetail(Localizations.localeOf(context), Map<String, String>(), plant),
+                        settings: RouteSettings(name: 'PlantDetail'));
                   });
                 }
                 return Future<MaterialPageRoute<dynamic>>(() {
-                  return MaterialPageRoute(builder: (context) => Color(Map<String, String>()), settings: RouteSettings(name: 'Color'));
+                  return MaterialPageRoute(
+                      builder: (context) => Color(Map<String, String>()), settings: RouteSettings(name: 'Color'));
                 });
               });
             }
@@ -454,7 +457,11 @@ class _AppState extends State<App> {
     }, onError: (error) {
       _logFailedPurchaseEvent();
       if (mounted) {
-        Fluttertoast.showToast(msg: S.of(context).product_purchase_failed, toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.BOTTOM, timeInSecForIosWeb: 5);
+        Fluttertoast.showToast(
+            msg: S.of(context).product_purchase_failed,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 5);
       }
     });
     initStoreInfo();
