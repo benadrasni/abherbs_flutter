@@ -1,0 +1,15 @@
+{
+  "database": {
+    "rules": "firebase/database.rules.phase1.json"
+  },
+  "storage": [
+    {
+      "bucket": "abherbs-resources",
+      "rules": "firebase/storage.abherbs-resources.rules"
+    },
+    {
+      "bucket": "abherbs-backend.appspot.com",
+      "rules": "firebase/storage.default.rules"
+    }
+  ]
+}

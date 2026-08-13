@@ -1,0 +1,34 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /photos/{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /families/{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /offline/{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /misc/{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Client path: observations/{uid}/{Plant_name}/{file}.jpg
+    match /observations/{uid}/{allPaths=**} {
+      allow read: if true;
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "rules": {
+    "counts": { ".read": true, ".write": false },
+    "counts_4": { ".read": true, ".write": false },
+    "counts_4_v2": { ".read": true, ".write": false },
+    "counts_new": { ".read": true, ".write": false },
+
+    "lists": { ".read": true, ".write": false },
+    "lists_4": { ".read": true, ".write": false },
+    "lists_4_v2": { ".read": true, ".write": false },
+    "lists_new": { ".read": true, ".write": false },
+    "lists_custom": { ".read": true, ".write": false },
+
+    "plants": { ".read": true, ".write": false },
+    "plants_v2": { ".read": true, ".write": false },
+    "plants_headers": {
+      ".read": true,
+      ".write": false,
+      ".indexOn": "name"
+    },
+    "plants_to_update": { ".read": true, ".write": false },
+    "plants_new": { ".read": true, ".write": false },
+    "families_to_update": { ".read": true, ".write": false },
+
+    "translations": { ".read": true, ".write": false },
+    "translations_taxonomy": { ".read": true, ".write": false },
+    "translations_new": {
+      ".read": true,
+      "$lang": {
+        "$plant": {
+          ".write": true,
+          "$field": {
+            ".validate": "newData.isString() && newData.val().length <= 8000 || newData.hasChildren()"
+          }
+        }
+      }
+    },
+    "translations_app": { ".read": true, ".write": false },
+    "translations_app_new": {
+      ".read": true,
+      "$app": {
+        "$key": {
+          ".write": true,
+          "$field": {
+            ".validate": "newData.isString() && newData.val().length <= 8000 || newData.hasChildren()"
+          }
+        }
+      }
+    },
+
+    "search": { ".read": true, ".write": false },
+    "search_v2": { ".read": true, ".write": false },
+    "search_v3": { ".read": true, ".write": false },
+    "search_new": { ".read": true, ".write": false },
+    "search_photo": { ".read": true, ".write": false },
+    "search_photo_new": { ".read": true, ".write": false },
+
+    "APG III": { ".read": true, ".write": false },
+    "APG IV": { ".read": true, ".write": false },
+    "APG IV_v2": { ".read": true, ".write": false },
+    "APG IV_v3": { ".read": true, ".write": false },
+
+    "offline": { ".read": true, ".write": false },
+    "messages": { ".read": true, ".write": false },
+    "synonyms": { ".read": true, ".write": false },
+    "versions": { ".read": true, ".write": false },
+    "promotions": { ".read": true, ".write": false },
+    "web": { ".read": true, ".write": false },
+    "settings": { ".read": true, ".write": false },
+
+    "observations": {
+      "by users": {
+        "$uid": {
+          ".read": "auth != null && auth.uid == $uid",
+          ".write": "auth != null && auth.uid == $uid",
+          "by date": {
+            "list": {
+              ".indexOn": ["status", "order"]
+            }
+          }
+        }
+      },
+      "public": {
+        ".read": true,
+        "by date": {
+          "list": {
+            ".indexOn": "status",
+            "$id": {
+              ".write": "auth != null && $id.beginsWith(auth.uid + '_') && (!newData.exists() || (newData.child('id').val() == $id && newData.child('status').val() == 'review')) && (!data.exists() || data.child('status').val() == 'review')"
+            }
+          }
+        },
+        "by plant": {
+          "$plant": {
+            "list": {
+              "$id": {
+                ".write": "auth != null && $id.beginsWith(auth.uid + '_') && (!newData.exists() || (newData.child('id').val() == $id && newData.child('status').val() == 'review')) && (!data.exists() || data.child('status').val() == 'review')"
+              }
+            }
+          }
+        }
+      },
+      "logs": {
+        "$uid": {
+          ".read": "auth != null && auth.uid == $uid",
+          ".write": "auth != null && auth.uid == $uid",
+          ".indexOn": "time"
+        }
+      }
+    },
+
+    "credits": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid",
+        "$ts": {
+          ".validate": "newData.isString() && newData.val().length <= 64"
+        }
+      }
+    },
+
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        "token": {
+          ".write": "auth != null && auth.uid == $uid",
+          ".validate": "newData.isString() && newData.val().length <= 4096"
+        },
+        "favorites": {
+          ".write": "auth != null && auth.uid == $uid"
+        },
+        "purchases": {
+          ".write": "auth != null && auth.uid == $uid"
+        },
+        "credits": {
+          ".write": "auth != null && auth.uid == $uid",
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10000"
+        }
+      }
+    },
+
+    "users_photo_search": {
+      "$lang": {
+        "$uid": {
+          ".read": "auth != null && auth.uid == $uid",
+          ".write": "auth != null && auth.uid == $uid"
+        }
+      }
+    }
+  }
+}

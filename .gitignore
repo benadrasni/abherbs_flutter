@@ -80,3 +80,12 @@ build/
 **/lib/keys.dart
 **/lib/firebase_options.dart
 **/lib/generated/
+
+# Firebase CLI cache
+.firebase/
+
+# Flutter generated (Xcode / SPM)
+**/ios/Flutter/ephemeral/
+
+# Local access notes (Admin JSON path, App Store key id, team emails)
+docs/ACCESS.md
