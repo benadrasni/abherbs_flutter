@@ -7,7 +7,7 @@ description: Flutter version of abherbs
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 8.0.6+806
+version: 8.0.7+807
 
 environment:
   sdk: ">=2.12.0 <4.0.0"
@@ -21,7 +21,7 @@ dependencies:
   firebase_core: 3.13.0
   firebase_messaging: 15.2.5
   firebase_analytics: 11.4.5
-  firebase_auth: 5.5.2
+  firebase_auth: 5.5.3
   firebase_auth_platform_interface: 7.6.2
   firebase_storage: 12.4.5
   firebase_database: 11.3.5
@@ -71,6 +71,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  config:
+    enable-swift-package-manager: false
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
