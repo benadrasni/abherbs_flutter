@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
+import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
@@ -58,11 +59,12 @@ Future<void> initializeFlutterFire() async {
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 }
 
-String? notificationText(RemoteMessage message) {
-  return message.notification?.title ??
-      message.data['title'] ??
-      message.notification?.body ??
-      message.data['body'];
+String? notificationTitle(RemoteMessage message) {
+  return message.notification?.title ?? message.data['title'];
+}
+
+String? notificationBody(RemoteMessage message) {
+  return message.notification?.body ?? message.data['body'];
 }
 
 Locale getDeviceLocale() {
@@ -219,81 +221,33 @@ class _AppState extends State<App> {
         switch (action) {
           case notificationAttributeActionList:
             String path = message.data[notificationAttributePath];
-            String? content = notificationText(message);
             rootReference.child(path).keepSynced(true);
-            return showDialog(
-              context: _navigatorKey.currentContext!,
-              barrierDismissible: false,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(S.of(context).notification),
-                  content: Text(content ?? ''),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text(S.of(context).notification_open,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PlantList({}, '', rootReference.child(path)),
-                                settings: RouteSettings(name: 'PlantList')));
-                      },
-                    ),
-                    TextButton(
-                      child: Text(S.of(context).notification_close,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
+            return notificationPopup(
+              _navigatorKey.currentContext!,
+              notificationTitle(message),
+              notificationBody(message),
+            ).then((open) {
+              final context = _navigatorKey.currentContext;
+              if (open && context != null) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PlantList({}, '', rootReference.child(path)),
+                        settings: RouteSettings(name: 'PlantList')));
+              }
+            });
           case notificationAttributeActionPlant:
             String name = message.data[notificationAttributeName];
-            String? content = notificationText(message);
-            return showDialog(
-              context: _navigatorKey.currentContext!,
-              barrierDismissible: false,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text(S.of(context).notification),
-                  content: Text(content ?? ''),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text(S.of(context).notification_open,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        goToDetail(this, context, Localizations.localeOf(context), name, widget.filter);
-                      },
-                    ),
-                    TextButton(
-                      child: Text(S.of(context).notification_close,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
+            return notificationPopup(
+              _navigatorKey.currentContext!,
+              notificationTitle(message),
+              notificationBody(message),
+            ).then((open) {
+              final context = _navigatorKey.currentContext;
+              if (open && context != null) {
+                goToDetail(this, context, Localizations.localeOf(context), name, widget.filter);
+              }
+            });
         }
       }
     }
@@ -333,11 +287,8 @@ class _AppState extends State<App> {
     FirebaseMessaging.instance.onTokenRefresh.listen(_persistFcmToken);
 
     FirebaseMessaging.instance.getInitialMessage().then((value) async {
-      if (value?.data != null) {
-        MaterialPageRoute<dynamic>? redirect = await findRedirectF(value!.data);
-        if (redirect != null) {
-          Navigator.push(_navigatorKey.currentContext!, redirect);
-        }
+      if (value != null) {
+        await _openFromNotification(value);
       }
     });
 
@@ -346,8 +297,18 @@ class _AppState extends State<App> {
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      handleMessage(message);
+      await _openFromNotification(message);
     });
+  }
+
+  Future<void> _openFromNotification(RemoteMessage message) async {
+    if (message.data.isEmpty || _navigatorKey.currentContext == null) {
+      return;
+    }
+    MaterialPageRoute<dynamic>? redirect = await findRedirectF(message.data);
+    if (redirect != null && _navigatorKey.currentContext != null) {
+      Navigator.push(_navigatorKey.currentContext!, redirect);
+    }
   }
 
   Future<MaterialPageRoute<dynamic>>? findRedirectF(Map<String, dynamic> notificationData) {
