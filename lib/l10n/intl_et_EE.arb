@@ -22,6 +22,7 @@
 
   "enhancements": "Täiendused",
   "settings": "Reguleerimine",
+  "version": "Versioon",
   "feedback": "Tagasiside / Panus",
   "about": "Rakenduse kohta",
   "help": "Appi",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Allalaadimine ebaõnnestus. Palun kontrollige oma Interneti-ühendust või vaba ruumi seadmes ja proovige uuesti.",
   "offline_delete_message": "Kas soovite offline andmeid kustutada?",
   "offline_download": "Jätka allalaadimist",
-  "scale_down_photos_title": "Vähendage vaatluse fotosid",
-  "scale_down_photos_subtitle": "Lülitage sisse, kui fotosid pärast valimist ei näe.",
 
   "feedback_intro": "Tänu sellele, et olete selle seadmesse installinud, olete sellele rakendusele kaasa aidanud. Kui otsite midagi muud, on siin mõned võimalused:",
   "feedback_review": "Võite kirjutada positiivse ülevaate.",

@@ -22,6 +22,7 @@
 
   "enhancements": "Vylepšení",
   "settings": "Nastavení",
+  "version": "Verze",
   "feedback": "Připomínky",
   "about": "O aplikaci",
   "help": "Pomoc",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Stahování souborů selhalo. Prosím zkontrolujte připojení k internetu nebo volný prostor na zařízení a zkuste znovu.",
   "offline_delete_message": "Opravdu chcete vymazat offline data?",
   "offline_download": "Obnovit stahování",
-  "scale_down_photos_title": "Zmenšit fotografie z pozorování",
-  "scale_down_photos_subtitle": "Zapněte, když se vaše fotografie po vyjmutí nezobrazí.",
 
   "feedback_intro": "Tuto aplikaci podporujete odkdy jste si ji nainstalovali na své mobilní zařízení, děkuji. Pokud hledáte jiné formy podpory, zde jsou některé možnosti:",
   "feedback_review": "Můžete napsat pozitivní recenzi.",

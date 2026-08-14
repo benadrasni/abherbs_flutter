@@ -8,7 +8,6 @@ import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/observations/observation_map.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:datetime_picker_formfield_new/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,6 @@ class _ObservationEditState extends State<ObservationEdit> {
   final ImagePicker _picker = ImagePicker();
 
   GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-  late Future<bool> _scaleDownPhotosF;
   late Observation _observation;
   late DateFormat _dateFormat;
   TextEditingController _noteController = TextEditingController();
@@ -84,12 +82,11 @@ class _ObservationEditState extends State<ObservationEdit> {
   }
 
   Future<void> _getImage(GlobalKey<ScaffoldState> _key, ImageSource source) async {
-    bool scaleDownPhotos = await _scaleDownPhotosF;
     var status = await Permission.accessMediaLocation.status;
     if (!status.isGranted) {
       await Permission.accessMediaLocation.request();
     }
-    var image = await _picker.pickImage(source: source, maxWidth: scaleDownPhotos ? imageSizeScaleDown : null);
+    var image = await _picker.pickImage(source: source, maxWidth: imageSizeScaleDown);
     if (image != null) {
       Map<String, IfdTag> exifData = await readExifFromBytes(await image.readAsBytes());
       IfdTag? dateTime = exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime'];
@@ -175,7 +172,6 @@ class _ObservationEditState extends State<ObservationEdit> {
   @override
   void initState() {
     super.initState();
-    _scaleDownPhotosF = Prefs.getBoolF(keyScaleDownPhotos, false);
     _observation = Observation.from(widget.observation);
     initializeDateFormatting();
     _dateFormat = DateFormat.yMMMMEEEEd(widget.myLocale.toString()).add_jm();

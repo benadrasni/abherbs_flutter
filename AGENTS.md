@@ -10,8 +10,11 @@ Read `README.md` and `docs/` before changing architecture or data shape.
 - App: this repo (`~/StudioProjects/abherbs_flutter`, also `~/whatsthatflower/app`)
 - Ingest / indexes: `~/PycharmProjects/abherbs-auto` (`~/whatsthatflower/ingest`)
 - Web: `~/WebstormProjects/abherbs-web` (`~/whatsthatflower/web`)
-- Secrets and keystore: `~/Development/Keystore/`
-- Photo staging: `~/Development/Plants`, `~/Development/Storage/photos`
+- Secrets and keystore: `~/Development/Keystore/` (stays outside the workspace)
+- Incoming plants / job packets: `~/whatsthatflower/plants`
+- Prepared photos: `~/whatsthatflower/storage/photos`
+- Observation review downloads: `~/whatsthatflower/observations`
+- WCVP cache: `~/whatsthatflower/wcvp`
 
 The old native Android + Java indexer tree at `~/WebstormProjects/abherbs` is **not part of this project**. Leave it on disk for reference; do not treat it as a sibling to change or run.
 
@@ -27,13 +30,15 @@ Git remote: `https://github.com/benadrasni/abherbs_flutter`.
 
 ## Conventions
 
-- Flutter 3.47 / Dart 3.13. Match the existing style: `StatefulWidget`, Firebase `once()` / `keepSynced`, no extra state library. Swift Package Manager is off in `pubspec.yaml` because several plugins (Ads, Maps, IAP) are still CocoaPods-only.
+- Flutter 3.47 / Dart 3.13. Match the existing style: `StatefulWidget`, Firebase `once()` / `keepSynced`, no extra state library. iOS uses Swift Package Manager (`enable-swift-package-manager: true`). Maps is `google_maps_flutter_ios_sdk10` (Maps SDK 10.x via SPM), not the default CocoaPods `google_maps_flutter_ios`.
 - iOS uses the UIScene lifecycle (`FlutterSceneDelegate` in `Info.plist`; plugin registration in `AppDelegate.didInitializeImplicitFlutterEngine`).
 - Version is `pubspec.yaml` `version: X.Y.Z+XYZ` (build number = version without dots). Bump both together for a store build.
 - UI strings: edit `lib/l10n/intl_*.arb`, then `flutter pub run intl_utils:generate`.
 - Filter key format: `color_habitat_petal_distribution` with empty slots allowed. Vocabulary is in `lib/filter/filter_utils.dart`.
 - Plant photos are public HTTPS under `https://storage.googleapis.com/abherbs-resources/photos/`.
 - English is the translation fallback except Czech → Slovak.
+- Species English sources: `ingest/data/botanical_sources.json`. Reliable floras include Wikipedia, PFAF, RHS, Luontoportti, Missouri Plants, and BOTANY.cz. When a web flora is useful, add it there for later plants.
+- Never translate an English common name into another language. Vernacular `label` / `names` must come from a source in that language (Wikidata, that Wikipedia title, EPPO Global Database https://gd.eppo.int/, or a flora such as BOTANY.cz). If none exists, omit `label` and keep the Latin name.
 
 ## Firebase
 

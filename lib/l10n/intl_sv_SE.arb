@@ -22,6 +22,7 @@
 
   "enhancements": "Förbättringar",
   "settings": "Inställningar",
+  "version": "Version",
   "feedback": "Återkoppling",
   "about": "Om ansökan",
   "help": "Hjälp",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Nedladdning misslyckad. Kontrollera din internetanslutning eller ledigt utrymme på enheten och försök igen.",
   "offline_delete_message": "Vill du radera offline-data?",
   "offline_download": "Återuppta nedladdning",
-  "scale_down_photos_title": "Skala ner observationens foton",
-  "scale_down_photos_subtitle": "Slå på när du inte ser dina foton efter val.",
 
   "feedback_intro": "Du har bidragit till den här applikationen eftersom du har installerat den på din enhet, tack. Om du letar efter något mer, här är några alternativ:",
   "feedback_review": "Du kan skriva en positiv recension.",

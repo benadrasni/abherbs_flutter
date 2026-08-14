@@ -22,6 +22,7 @@
 
   "enhancements": "Priedai",
   "settings": "Nustatymai",
+  "version": "Versija",
   "feedback": "Grįžtamasis ryšys / Indėlis",
   "about": "Apie paraišką",
   "help": "Padėkite",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Atsisiuntimas nepavyko. Patikrinkite interneto ryšį arba laisvą vietą įrenginyje ir bandykite dar kartą.",
   "offline_delete_message": "Ar norite ištrinti neprisijungus duomenis?",
   "offline_download": "Tęsti atsisiuntimą",
-  "scale_down_photos_title": "Sumažinkite stebėjimo nuotraukas",
-  "scale_down_photos_subtitle": "Įjunkite, kai nematote nuotraukų po pasirinkimo.",
 
   "feedback_intro": "Jūs prisidėjote prie šios programos, nes ją įdiegėte savo prietaise. Jei ieškote ko nors daugiau, čia pateikiamos kelios parinktys:",
   "feedback_review": "Galite parašyti teigiamą apžvalgą.",

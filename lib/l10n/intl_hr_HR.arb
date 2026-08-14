@@ -22,6 +22,7 @@
 
   "enhancements": "Poboljšanja",
   "settings": "Postavke",
+  "version": "Verzija",
   "feedback": "Povratne informacije",
   "about": "O aplikaciji",
   "help": "Pomoć",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Preuzimanje nije uspjelo. Provjerite internetsku vezu ili slobodan prostor na uređaju i pokušajte ponovno.",
   "offline_delete_message": "Želite li izbrisati izvanmrežne podatke?",
   "offline_download": "Nastavi preuzimanje",
-  "scale_down_photos_title": "Smanjite fotografije promatranja",
-  "scale_down_photos_subtitle": "Uključite kada ne vidite svoje fotografije nakon odabira.",
 
   "feedback_intro": "Doprinosili ste ovoj aplikaciji jer ste je instalirali na svom uređaju, hvala. Ako tražite nešto više, evo nekoliko opcija:",
   "feedback_review": "Možete napisati pozitivnu recenziju.",

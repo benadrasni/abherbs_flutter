@@ -22,6 +22,7 @@
 
   "enhancements": "Ulepszenia",
   "settings": "Ustawienia",
+  "version": "Wersja",
   "feedback": "Komentarze",
   "about": "O aplikacji",
   "help": "Pomoc",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Pobieranie się nie powiodło. Sprawdź stan połączenia internetowego lub ilość wolnego miejsca na urządzeniu i spróbuj ponownie.",
   "offline_delete_message": "Czy chcesz usunąć dane offline?",
   "offline_download": "Wznów pobieranie",
-  "scale_down_photos_title": "Skaluj zdjęcia obserwacji",
-  "scale_down_photos_subtitle": "Włącz, gdy nie widzisz swoich zdjęć po wybraniu.",
 
   "feedback_intro": "Jeśli chcesz dać coś od siebie i przyczynić się do rozwoju aplikacji, masz kilka opcji do wyboru:",
   "feedback_review": "Możesz przyznać aplikacji 5 gwiazdek i napisać pozytywną recenzję.",

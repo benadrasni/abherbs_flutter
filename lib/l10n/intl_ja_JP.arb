@@ -22,6 +22,7 @@
 
   "enhancements": "機能強化",
   "settings": "設定",
+  "version": "バージョン",
   "feedback": "フィードバック",
   "about": "約",
   "help": "ヘルプ",
@@ -68,8 +69,6 @@
   "offline_download_fail": "ダウンロードに失敗しました。 インターネット接続またはデバイスの空き容量を確認して、もう一度やり直してください。",
   "offline_delete_message": "オフラインデータを削除しますか？",
   "offline_download": "ダウンロードを再開",
-  "scale_down_photos_title": "観測の写真を縮小する",
-  "scale_down_photos_subtitle": "ピック後に写真が見えなくなったら電源を入れます。",
 
   "feedback_intro": "デバイスにインストールしたので、このアプリケーションに貢献しました。ありがとうございます。 あなたがもっと何かを探しているなら、いくつかのオプションがあります：",
   "feedback_review": "あなたは肯定的なレビューを書くことができます。",

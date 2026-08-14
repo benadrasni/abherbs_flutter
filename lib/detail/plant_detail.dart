@@ -25,7 +25,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
 import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -55,7 +55,7 @@ class _PlantDetailState extends State<PlantDetail> {
   late StreamSubscription<firebase_auth.User?> _listener;
   late Future<PlantTranslation> _plantTranslationF;
   late double _fontSize;
-  BannerAd? _ad;
+
 
   onChangeFontSize() {
     setState(() {
@@ -212,23 +212,6 @@ class _PlantDetailState extends State<PlantDetail> {
     _setFavorite();
     Offline.setKeepSynced(3, true);
 
-    if (!Purchases.isNoAds()) {
-      _ad = BannerAd(
-        adUnitId: getBannerAdUnitId(),
-        size: AdSize.banner,
-        request: AdRequest(),
-        listener: BannerAdListener(
-          onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            ad.dispose();
-          },
-          onAdClosed: (Ad ad) {
-            ad.dispose();
-          },
-        ),
-      );
-      _ad?.load();
-    }
-
     _plantTranslationF = _getTranslation();
     _fontSize = Prefs.getDouble(keyFontSize, defaultFontSize);
 
@@ -238,7 +221,6 @@ class _PlantDetailState extends State<PlantDetail> {
   @override
   void dispose() {
     _listener.cancel();
-    _ad?.dispose();
     for (YoutubePlayerController controller in getYoutubeControllers()) {
       controller.close();
     }
@@ -341,17 +323,7 @@ class _PlantDetailState extends State<PlantDetail> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: !Purchases.isNoAds() && _ad != null
-                ? Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
-                    child: AdWidget(ad: _ad!),
-                    width: _ad!.size.width.toDouble(),
-                    height: _ad!.size.height.toDouble(),
-                  )
-                : Container(
-                    height: 0.0,
-                  ),
+            child: AppBannerAd(),
           ),
         ],
       ),
@@ -412,7 +384,7 @@ class _PlantDetailState extends State<PlantDetail> {
         onTap: (index) {
           Connectivity().checkConnectivity().then((result) {
             if (index == observationIndex) {
-              if (result == ConnectivityResult.none) {
+              if (result.contains(ConnectivityResult.none)) {
                 infoDialog(context, S.of(context).no_connection_title, S.of(context).no_connection_content);
               } else if (Auth.appUser == null) {
                 observationDialog(context, _key);

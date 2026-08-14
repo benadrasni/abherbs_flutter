@@ -138,8 +138,8 @@ Client: `lib/filter/filter_utils.dart`.
 
 | Field | Meaning |
 |---|---|
-| `label` | Common name |
-| `names` | Extra common names |
+| `label` | Common name from a source in that language (Wikidata label/alias, that Wikipedia title, EPPO Global Database, or a flora). Never a translation of the English name. If no source, omit; the app shows the Latin name. |
+| `names` | Extra sourced common names |
 | `wikipedia` | Language Wikipedia URL |
 | `description`, `flower`, `inflorescence`, `fruit`, `leaf`, `stem`, `habitat` | Required for "fully translated" |
 | `toxicity`, `herbalism`, `trivia` | Optional |
@@ -203,9 +203,10 @@ Firebase Storage: `photos/`, `families/`, `offline/`, `misc/` are public-read, c
 
 Local staging on this machine (from `abherbs-auto/constants.py`):
 
-- Source plants: `~/Development/Plants/{Family}/{Name}/`
-- Prepared photos: `~/Development/Storage/photos/{Order}/{Family}/{Genus_species}/`
-- Observation review: `~/Development/Observations/`
+- Source plants: `~/whatsthatflower/plants/{Family}/{Name}/`
+- Prepared photos: `~/whatsthatflower/storage/photos/{Order}/{Family}/{Genus_species}/`
+- Observation review: `~/whatsthatflower/observations/`
+- WCVP cache: `~/whatsthatflower/wcvp/`
 
 Photo file names are `{first letter of genus}{first letter of species}{n}.webp` (`ac1.webp` for *Acer campestre*).
 

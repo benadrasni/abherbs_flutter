@@ -22,6 +22,7 @@
 
   "enhancements": "Fejlesztések",
   "settings": "Beállítások",
+  "version": "Verzió",
   "feedback": "Visszajelzés küldése / Hozzájárulás",
   "about": "Az alkalmazásról",
   "help": "Súgó",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Sikertelen letöltés. Kérjük ellenőrizze az internetkapcsolatot vagy a szabad hely mennyiségét az eszközön és próbálja újra.",
   "offline_delete_message": "Törli az offline adatokat?",
   "offline_download": "A letöltés folytatása",
-  "scale_down_photos_title": "Mérje le a megfigyelés fotóit",
-  "scale_down_photos_subtitle": "Kapcsolja be, ha nem látja a fényképeket a felvétel után.",
 
   "feedback_intro": "Köszönjük a támogatását, mivel telepítette az alkalmazást. Ha többet szeretne, itt van néhány lehetőség:",
   "feedback_review": "Írhat pozitív értékelést.",

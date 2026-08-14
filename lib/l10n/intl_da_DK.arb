@@ -22,6 +22,7 @@
 
   "enhancements": "Forbedringer",
   "settings": "Indstillinger",
+  "version": "Version",
   "feedback": "Feedback",
   "about": "Om ansøgning",
   "help": "Hjælp",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Download fejlede. Kontroller din internetforbindelse eller ledig plads på enheden, og prøv igen.",
   "offline_delete_message": "Vil du slette offline data?",
   "offline_download": "Genoptag download",
-  "scale_down_photos_title": "Skal ned observationens fotos",
-  "scale_down_photos_subtitle": "Tænd, når du ikke kan se dine billeder efter valg.",
 
   "feedback_intro": "Du har bidraget til denne applikation, da du har installeret den på din enhed, tak. Hvis du leder efter noget mere, her er nogle muligheder:",
   "feedback_review": "Du kan skrive en positiv anmeldelse.",

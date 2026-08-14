@@ -22,6 +22,7 @@
 
   "enhancements": "Îmbunătățiri",
   "settings": "Setări",
+  "version": "Versiune",
   "feedback": "Feedback",
   "about": "Despre",
   "help": "Ajutor",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Descarcare esuata. Verificați conexiunea la internet sau spațiul liber pe dispozitiv și încercați din nou.",
   "offline_delete_message": "Doriți să ștergeți datele offline?",
   "offline_download": "Reia descărcarea",
-  "scale_down_photos_title": "Scalarea fotografiilor observatorului",
-  "scale_down_photos_subtitle": "Porniți când nu vedeți fotografiile după alegere.",
 
   "feedback_intro": "Ați contribuit la această aplicație de când ați instalat-o pe dispozitiv, mulțumiri. Dacă sunteți în căutarea pentru ceva mai mult, iată câteva opțiuni:",
   "feedback_review": "Puteți scrie o recenzie pozitivă.",

@@ -22,6 +22,7 @@
 
   "enhancements": "Erweiterungen",
   "settings": "Einstellungen",
+  "version": "Version",
   "feedback": "Feedback / Beitrag",
   "about": "Über",
   "help": "Hilfe",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Herunterladen fehlgeschlagen. Bitte überprüfen Sie Ihre Internetverbindung oder den freien Speicherplatz auf dem Gerät und versuchen Sie es erneut.",
   "offline_delete_message": "Möchten Sie Offline-Daten löschen?",
   "offline_download": "Download fortsetzen",
-  "scale_down_photos_title": "Beobachtungsfotos verkleinern",
-  "scale_down_photos_subtitle": "Einschalten, wenn Sie Ihre Fotos nach der Auswahl nicht sehen.",
 
   "feedback_intro": "Sie haben zu dieser Anwendung beigetragen, seit Sie diese auf Ihrem Gerät installiert haben, vielen Dank. Wenn Sie noch mehr tun möchten, haben Sie folgende Möglichkeiten:",
   "feedback_review": "Sie können eine positive Bewertung schreiben.",

@@ -58,6 +58,13 @@ Future<void> initializeFlutterFire() async {
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 }
 
+String? notificationText(RemoteMessage message) {
+  return message.notification?.title ??
+      message.data['title'] ??
+      message.notification?.body ??
+      message.data['body'];
+}
+
 Locale getDeviceLocale() {
   // device locale could be "en", "en_US" or "en_US.UTF-8"
   List<String> localeHelper = Platform.localeName.split(".")[0].split("_");
@@ -108,7 +115,7 @@ void main() {
       WakelockPlus.enable();
       await Prefs.init();
       await AppTrackingTransparency.requestTrackingAuthorization();
-      MobileAds.instance.initialize();
+      await MobileAds.instance.initialize();
       Locale locale = await initializeLocale();
       Map<String, String> filter = await initializeFilter();
       String initialRoute = await initializeRoute();
@@ -212,8 +219,7 @@ class _AppState extends State<App> {
         switch (action) {
           case notificationAttributeActionList:
             String path = message.data[notificationAttributePath];
-            String? content =
-                message.notification?.title != null ? message.notification?.title : message.notification?.body;
+            String? content = notificationText(message);
             rootReference.child(path).keepSynced(true);
             return showDialog(
               context: _navigatorKey.currentContext!,
@@ -254,8 +260,7 @@ class _AppState extends State<App> {
             );
           case notificationAttributeActionPlant:
             String name = message.data[notificationAttributeName];
-            String? content =
-                message.notification?.title != null ? message.notification?.title : message.notification?.body;
+            String? content = notificationText(message);
             return showDialog(
               context: _navigatorKey.currentContext!,
               barrierDismissible: false,
@@ -295,23 +300,37 @@ class _AppState extends State<App> {
     return Future.value(null);
   }
 
-  void _firebaseCloudMessagingListeners() async {
-    if (Platform.isIOS) {
-      await FirebaseMessaging.instance.requestPermission(
-        alert: true,
-        announcement: false,
-        badge: true,
-        carPlay: false,
-        criticalAlert: false,
-        provisional: false,
-        sound: true,
-      );
+  void _persistFcmToken(String? token) {
+    if (token == null || token.isEmpty) {
+      return;
     }
+    Prefs.setString(keyToken, token);
+    if (Auth.appUser != null) {
+      usersReference.child(Auth.appUser!.uid).child(firebaseAttributeToken).set(token);
+    }
+  }
+
+  void _firebaseCloudMessagingListeners() async {
+    await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
 
     FirebaseMessaging.instance.getToken().then((token) {
-      Prefs.setString(keyToken, token);
       print('token $token');
+      _persistFcmToken(token);
     }).onError((error, stackTrace) => null);
+    FirebaseMessaging.instance.onTokenRefresh.listen(_persistFcmToken);
 
     FirebaseMessaging.instance.getInitialMessage().then((value) async {
       if (value?.data != null) {

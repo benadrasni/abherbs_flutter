@@ -22,6 +22,7 @@
 
   "enhancements": "Verbeteringen",
   "settings": "Instellingen",
+  "version": "Versie",
   "feedback": "Terugkoppeling / Bijdrage",
   "about": "Over de app",
   "help": "Helpen",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Download mislukt. Controleer uw internetverbinding of vrije ruimte op het apparaat en probeer het opnieuw.",
   "offline_delete_message": "Wilt u offline gegevens verwijderen?",
   "offline_download": "Download doorgaan",
-  "scale_down_photos_title": "Foto's van waarnemingen verkleinen",
-  "scale_down_photos_subtitle": "Schakel in wanneer u uw foto's niet ziet nadat ze zijn gekozen.",
 
   "feedback_intro": "Sinds u de app geïnstalleerd heeft, draagt u bij aan de app. Dank u wel. Als u ons nóg meer wilt helpen, kunt u de volgende opties overwegen:",
   "feedback_review": "U kunt een positieve beoordeling schrijven.",

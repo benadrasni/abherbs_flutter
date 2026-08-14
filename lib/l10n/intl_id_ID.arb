@@ -22,6 +22,7 @@
 
   "enhancements": "Perangkat tambahan",
   "settings": "Pengaturan",
+  "version": "Versi",
   "feedback": "Umpan balik / Kontribusi",
   "about": "Tentang",
   "help": "Membantu",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Pengunduhan gagal. Silakan periksa koneksi internet Anda atau ruang kosong di perangkat dan coba lagi.",
   "offline_delete_message": "Apakah Anda ingin menghapus data offline?",
   "offline_download": "Lanjutkan unduhan",
-  "scale_down_photos_title": "Perkecil foto pengamatan",
-  "scale_down_photos_subtitle": "Hidupkan ketika Anda tidak melihat foto Anda setelah memilih.",
 
   "feedback_intro": "Anda telah berkontribusi untuk aplikasi ini karena Anda telah menginstalnya di perangkat Anda, terima kasih. Jika Anda mencari sesuatu yang lebih, berikut adalah beberapa opsi:",
   "feedback_review": "Anda dapat menulis ulasan positif.",

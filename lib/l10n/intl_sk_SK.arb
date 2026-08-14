@@ -22,6 +22,7 @@
 
   "enhancements": "Vylepšenia",
   "settings": "Nastavenia",
+  "version": "Verzia",
   "feedback": "Pripomienky",
   "about": "O aplikácii",
   "help": "Pomoc",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Sťahovanie súborov zlyhalo. Prosím skontrolujte pripojenie k internetu alebo voľný priestor na zariadení a skúste znova.",
   "offline_delete_message": "Naozaj chcete zmazať offline dáta?",
   "offline_download": "Pokračovať v sťahovaní",
-  "scale_down_photos_title": "Zmenšiť fotografie z pozorovania",
-  "scale_down_photos_subtitle": "Zapnite, keď sa vaše fotografie po vybratí nezobrazia.",
 
   "feedback_intro": "Túto aplikáciu podporujete odkedy ste si ju nainštalovali na svoje mobilné zariadenie, ďakujem. Ak hľadáte iné formy podpory, tu sú niektoré možnosti:",
   "feedback_review": "Môžete napísať pozitívnu recenziu.",

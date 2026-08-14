@@ -22,6 +22,7 @@
 
   "enhancements": "Miglioramenti",
   "settings": "Impostazioni",
+  "version": "Versione",
   "feedback": "Invia un feedback / Contributo",
   "about": "Info sull'applicazione",
   "help": "Aiuto",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Download fallito. Controlla la tua connessione Internet o lo spazio libero sul dispositivo e riprova.",
   "offline_delete_message": "Vuoi eliminare i dati offline?",
   "offline_download": "Riprendi a scaricare",
-  "scale_down_photos_title": "Riduci le foto dell'osservazione",
-  "scale_down_photos_subtitle": "Accendi quando non vedi le tue foto dopo il ritiro.",
 
   "feedback_intro": "Hai contribuito a questa applicazione scaricandola sul tuo dispositivo, grazie! Ecco cosa puoi fare ora:",
   "feedback_review": "Puoi scrivere una recensione positiva.",

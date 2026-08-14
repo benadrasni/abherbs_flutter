@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
@@ -11,9 +10,7 @@ import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-import '../keys.dart';
+import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
 
 class Petal extends StatefulWidget {
   final Map<String, String> filter;
@@ -28,7 +25,6 @@ class _PetalState extends State<Petal> {
   Map<String, String> _filter = Map<String, String>();
   int _count = -1;
   late StreamSubscription<firebase_auth.User?> _listener;
-  BannerAd? _ad;
 
   _navigate(String value) {
     var newFilter = new Map<String, String>();
@@ -67,23 +63,6 @@ class _PetalState extends State<Petal> {
     _listener = Auth.subscribe((firebase_auth.User? user) => setState(() {}));
     Offline.setKeepSynced(1, true);
 
-    if (!Purchases.isNoAds()) {
-      _ad = BannerAd(
-        adUnitId: getBannerAdUnitId(),
-        size: AdSize.banner,
-        request: AdRequest(),
-        listener: BannerAdListener(
-          onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            ad.dispose();
-          },
-          onAdClosed: (Ad ad) {
-            ad.dispose();
-          },
-        ),
-      );
-      _ad?.load();
-    }
-
     _filter.addAll(widget.filter);
     _filter.remove(filterPetal);
 
@@ -93,7 +72,6 @@ class _PetalState extends State<Petal> {
   @override
   void dispose() {
     _listener.cancel();
-    _ad?.dispose();
     super.dispose();
   }
 
@@ -238,17 +216,7 @@ class _PetalState extends State<Petal> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: !Purchases.isNoAds() && _ad != null
-                    ? Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
-                        child: AdWidget(ad: _ad!),
-                        width: _ad!.size.width.toDouble(),
-                        height: _ad!.size.height.toDouble(),
-                      )
-                    : Container(
-                        height: 0.0,
-                      ),
+                child: AppBannerAd(),
               ),
             ],
           ),

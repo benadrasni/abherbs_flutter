@@ -7,10 +7,11 @@ Three local projects share one Firebase backend. They are grouped as **`~/whatst
 ~/whatsthatflower/app              →  ~/StudioProjects/abherbs_flutter
 ~/whatsthatflower/ingest           →  ~/PycharmProjects/abherbs-auto
 ~/whatsthatflower/web              →  ~/WebstormProjects/abherbs-web
-~/Development/Plants                  incoming plant folders
-~/Development/Storage/photos          prepared WebP tree
-~/Development/Observations            observation review downloads
-~/Development/Keystore                Android keystore + Firebase admin JSON
+~/whatsthatflower/plants              incoming plant folders + `_jobs/`
+~/whatsthatflower/storage/photos      prepared WebP tree
+~/whatsthatflower/observations        observation review downloads
+~/whatsthatflower/wcvp                Kew WCVP zip + sqlite
+~/Development/Keystore                Android keystore + Firebase admin JSON (secrets; not in the workspace)
 ```
 
 Editor: `~/whatsthatflower/whatsthatflower.code-workspace`.

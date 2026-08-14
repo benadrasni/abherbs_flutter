@@ -41,7 +41,6 @@ const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
 const String keyAlwaysMyRegion = "always_my_region";
 const String keyOffline = "offline";
-const String keyScaleDownPhotos = "scale_down_photos";
 const String keyOfflinePlant = "offline_plant";
 const String keyOfflineFamily = "offline_family";
 const String keyOfflineDB = "offline_db";
@@ -492,7 +491,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
     icon: getIcon(productPhotoSearch),
     onPressed: () {
       Connectivity().checkConnectivity().then((result) {
-        if (result == ConnectivityResult.none) {
+        if (result.contains(ConnectivityResult.none)) {
           infoDialog(mainContext, S.of(mainContext).no_connection_title,
               S.of(mainContext).no_connection_content);
         } else {
@@ -575,7 +574,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
     icon: getIcon(productObservations),
     onPressed: () {
       Connectivity().checkConnectivity().then((result) {
-        if (result == ConnectivityResult.none) {
+        if (result.contains(ConnectivityResult.none)) {
           infoDialog(mainContext, S.of(mainContext).no_connection_title,
               S.of(mainContext).no_connection_content);
         } else {

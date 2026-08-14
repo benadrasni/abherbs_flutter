@@ -22,6 +22,7 @@
 
   "enhancements": "增強功能",
   "settings": "設定值",
+  "version": "版本",
   "feedback": "反饋",
   "about": "關於",
   "help": "幫幫我",
@@ -68,8 +69,6 @@
   "offline_download_fail": "下載失敗。 請檢查您的互聯網連接或設備上的可用空間，然後重試。",
   "offline_delete_message": "您要刪除離線數據嗎？",
   "offline_download": "簡歷下載",
-  "scale_down_photos_title": "縮小觀察的照片",
-  "scale_down_photos_subtitle": "選擇後看不到照片時打開。",
 
   "feedback_intro": "由於您已經在設備上安裝了該應用程序，因此您一直在為該應用程序做出貢獻。 如果您正在尋找更多東西，這裡有一些選擇：",
   "feedback_review": "您可以寫一個積極的評價。",

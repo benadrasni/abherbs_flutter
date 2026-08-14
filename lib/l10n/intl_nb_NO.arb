@@ -22,6 +22,7 @@
 
   "enhancements": "Forbedringer",
   "settings": "Innstillinger",
+  "version": "Versjon",
   "feedback": "Tilbakemelding",
   "about": "Om apper",
   "help": "Hjelp",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Nedlasting mislyktes. Kontroller din internettforbindelse eller ledig plass på enheten, og prøv igjen.",
   "offline_delete_message": "Vil du slette frakoblede data?",
   "offline_download": "Fortsett nedlasting",
-  "scale_down_photos_title": "Skal ned observasjonens bilder",
-  "scale_down_photos_subtitle": "Slå på når du ikke ser bildene dine etter valg.",
 
   "feedback_intro": "Du har bidratt til dette programmet siden du har installert det på enheten, takk. Hvis du leter etter noe mer, er det noen alternativer:",
   "feedback_review": "Du kan skrive en positiv anmeldelse.",

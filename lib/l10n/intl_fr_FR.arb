@@ -22,6 +22,7 @@
 
   "enhancements": "Améliorations",
   "settings": "Paramètres",
+  "version": "Version",
   "feedback": "Retour d'information",
   "about": "À propos",
   "help": "Aide",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Échec du téléchargement. Vérifiez votre connexion Internet ou l'espace disponible sur votre appareil, puis réessayez.",
   "offline_delete_message": "Voulez-vous supprimer les données hors connexion?",
   "offline_download": "Reprendre le téléchargement",
-  "scale_down_photos_title": "Réduisez les photos d'observation",
-  "scale_down_photos_subtitle": "Activez-la lorsque vous ne voyez pas vos photos après la sélection.",
 
   "feedback_intro": "Vous avez contribué à cette application car vous l'avez installé sur votre appareil, merci. Si vous cherchez quelque chose de plus, voici quelques options:",
   "feedback_review": "Vous pouvez écrire une critique positive.",

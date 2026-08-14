@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
-import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/widgets/firebase_animated_index_list.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
@@ -12,9 +11,7 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-import 'keys.dart';
+import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
 
 class PlantList extends StatefulWidget {
   final Map<String, String> filter;
@@ -29,7 +26,6 @@ class PlantList extends StatefulWidget {
 class _PlantListState extends State<PlantList> {
   late StreamSubscription<firebase_auth.User?> _listener;
   late Future<int> _count;
-  BannerAd? _ad;
 
   Widget _getImageButton(BuildContext context, Locale myLocale, String url, String name) {
     double screenWidth = MediaQuery.of(context).size.width - 20;
@@ -63,23 +59,6 @@ class _PlantListState extends State<PlantList> {
     _listener = Auth.subscribe((firebase_auth.User? user) => setState(() {}));
     Offline.setKeepSynced(2, true);
 
-    if (!Purchases.isNoAds()) {
-      _ad = BannerAd(
-        adUnitId: getBannerAdUnitId(),
-        size: AdSize.banner,
-        request: AdRequest(),
-        listener: BannerAdListener(
-          onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            ad.dispose();
-          },
-          onAdClosed: (Ad ad) {
-            ad.dispose();
-          },
-        ),
-      );
-      _ad?.load();
-    }
-
     widget.pathToIndex.keepSynced(true);
     _count = widget.pathToIndex.once().then((event) {
       var result = event.snapshot.value ?? [];
@@ -91,7 +70,6 @@ class _PlantListState extends State<PlantList> {
   @override
   void dispose() {
     _listener.cancel();
-    _ad?.dispose();
     super.dispose();
   }
 
@@ -192,17 +170,7 @@ class _PlantListState extends State<PlantList> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: !Purchases.isNoAds() && _ad != null
-                ? Container(
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(bottom: 5.0, top: 5.0),
-                    child: AdWidget(ad: _ad!),
-                    width: _ad!.size.width.toDouble(),
-                    height: _ad!.size.height.toDouble(),
-                  )
-                : Container(
-                    height: 0.0,
-                  ),
+            child: AppBannerAd(),
           ),
         ],
       ),

@@ -14,6 +14,7 @@ import 'package:abherbs_flutter/settings/setting_utils.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../main.dart';
 
@@ -34,7 +35,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late Future<bool> _alwaysMyRegionF;
   late Future<List<String>> _myFilterF;
   late Future<bool> _offlineF;
-  late Future<bool> _scaleDownPhotosF;
+  late Future<PackageInfo> _packageInfoF;
 
   void onDownloadFinished(bool result) {
     setState(() {
@@ -117,14 +118,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
-  void _setScaleDownPhotos(bool scaleDownPhotos) {
-    setState(() {
-      _scaleDownPhotosF = Prefs.setBool(keyScaleDownPhotos, scaleDownPhotos).then((success) {
-        return scaleDownPhotos;
-      });
-    });
-  }
-
   Future<void> _offlineDownloadDialog() async {
     return showDialog(
       context: context,
@@ -201,7 +194,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes);
     _offlineF = Prefs.getBoolF(keyOffline, false);
     _downloadFinished = Offline.downloadFinished;
-    _scaleDownPhotosF = Prefs.getBoolF(keyScaleDownPhotos, false);
+    _packageInfoF = PackageInfo.fromPlatform();
   }
 
   @override
@@ -418,33 +411,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
           }));
     }
 
-    // scale down observation's photos
-    if (Purchases.isObservations()) {
-      widgets.add(ListTile(
-          title: Text(S.of(context).scale_down_photos_title,
-            style: titleTextStyle,
-          ),
-          subtitle: Text(
-            S.of(context).scale_down_photos_subtitle,
-            style: subtitleTextStyle,
-          ),
-          trailing: FutureBuilder<bool>(
-              future: _scaleDownPhotosF,
-              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                bool scaleDownPhotos = false;
-                if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
-                  scaleDownPhotos = snapshot.data as bool;
-                }
-                return Switch(
-                  value: scaleDownPhotos,
-                  onChanged: (bool value) {
-                    _setScaleDownPhotos(value);
-                  },
-                );
-              }),
-        )
-      );
-    }
+    widgets.add(ListTile(
+      title: Text(
+        S.of(context).version,
+        style: titleTextStyle,
+      ),
+      subtitle: FutureBuilder<PackageInfo>(
+          future: _packageInfoF,
+          builder: (BuildContext context, AsyncSnapshot<PackageInfo> snapshot) {
+            var value = '';
+            if (snapshot.connectionState == ConnectionState.done && snapshot.data != null) {
+              value = '${snapshot.data!.version} (${snapshot.data!.buildNumber})';
+            }
+            return Text(
+              value,
+              style: subtitleTextStyle,
+            );
+          }),
+    ));
 
     return Scaffold(
       appBar: AppBar(

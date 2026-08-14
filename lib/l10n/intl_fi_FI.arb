@@ -22,6 +22,7 @@
 
   "enhancements": "Parannukset",
   "settings": "Asetukset",
+  "version": "Versio",
   "feedback": "Palaute / Panos",
   "about": "Tietoja sovellus",
   "help": "Ohje",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Lataus epäonnistui. Tarkista Internet-yhteys tai vapaa tila laitteessa ja yritä uudelleen.",
   "offline_delete_message": "Haluatko poistaa offline-tietoja?",
   "offline_download": "Jatka lataamista",
-  "scale_down_photos_title": "Pienennä havaintojen kuvia",
-  "scale_down_photos_subtitle": "Kytke päälle, kun et näe valokuvia valinnan jälkeen.",
 
   "feedback_intro": "Olet osallistunut tähän sovellukseen, koska olet asentanut sen laitteeseen, kiitos. Jos etsit jotain muuta, tässä on muutamia vaihtoehtoja:",
   "feedback_review": "Voit kirjoittaa positiivisen tarkistuksen.",

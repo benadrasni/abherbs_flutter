@@ -22,6 +22,7 @@
 
   "enhancements": "Uzlabojumi",
   "settings": "Iestatījumi",
+  "version": "Versija",
   "feedback": "Atsauksmes",
   "about": "Par lietojumprogrammu",
   "help": "Palīdzība",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Lejupielāde neizdevās. Lūdzu, pārbaudiet interneta savienojumu vai brīvo vietu ierīcē un mēģiniet vēlreiz.",
   "offline_delete_message": "Vai vēlaties dzēst bezsaistes datus?",
   "offline_download": "Atsākt lejupielādi",
-  "scale_down_photos_title": "Samaziniet novērošanas fotoattēlus",
-  "scale_down_photos_subtitle": "Ieslēdziet, kad pēc fotoattēlu saņemšanas neredzat fotoattēlus.",
 
   "feedback_intro": "Jūs esat veicinājis šo lietojumprogrammu, jo esat to instalējis savā ierīcē. Ja jūs meklējat kaut ko vairāk, šeit ir dažas iespējas:",
   "feedback_review": "Jūs varat uzrakstīt pozitīvu pārskatu.",

@@ -22,6 +22,7 @@
 
   "enhancements": "Mejoras",
   "settings": "Configuración",
+  "version": "Versión",
   "feedback": "Sugerencias / Contribución",
   "about": "Información",
   "help": "Ayuda",
@@ -68,8 +69,6 @@
   "offline_download_fail": "Descarga fracasó. Verifique su conexión a Internet o espacio libre en el dispositivo e intente nuevamente.",
   "offline_delete_message": "¿Desea borrar los datos fuera de línea?",
   "offline_download": "Descarga hoja de vida",
-  "scale_down_photos_title": "Reducir las fotos de observación",
-  "scale_down_photos_subtitle": "Encienda cuando no vea sus fotos después de la selección.",
 
   "feedback_intro": "Ha estado contribuyendo a esta aplicación desde que la ha instalado en su dispositivo, gracias. Si está buscando algo más, aquí hay algunas opciones:",
   "feedback_review": "Puedes escribir una crítica positiva.",

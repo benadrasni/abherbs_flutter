@@ -22,7 +22,7 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   late Future<bool> supportsAppleSignIn;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  late final Future<void> _googleSignInReady;
 
   String _createNonce(int length) {
     final random = Random();
@@ -49,17 +49,25 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Future<void> _handleGoogleSignIn(GlobalKey<ScaffoldState> key) async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser != null) {
-        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-        if (googleAuth.accessToken != null) {
-          final AuthCredential credential = GoogleAuthProvider.credential(
-            accessToken: googleAuth.accessToken,
-            idToken: googleAuth.idToken,
-          );
-          await Auth.signInWithCredential(credential);
-          Navigator.pop(context);
-        }
+      await _googleSignInReady;
+      final GoogleSignInAccount googleUser =
+          await GoogleSignIn.instance.authenticate();
+      final String? idToken = googleUser.authentication.idToken;
+      if (idToken != null) {
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: idToken,
+        );
+        await Auth.signInWithCredential(credential);
+        Navigator.pop(context);
+      }
+    } on GoogleSignInException catch (e) {
+      if (e.code == GoogleSignInExceptionCode.canceled) {
+        return;
+      }
+      if (key.currentState != null && key.currentState!.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: new Text(S.of(context).auth_sign_in_failed),
+        ));
       }
     } catch (e) {
       if (key.currentState != null && key.currentState!.mounted) {
@@ -108,6 +116,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     super.initState();
+    _googleSignInReady = GoogleSignIn.instance.initialize();
     if (Platform.isIOS) {
       supportsAppleSignIn = DeviceInfoPlugin().iosInfo.then((value) {
         int version = 0;
