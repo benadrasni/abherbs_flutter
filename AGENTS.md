@@ -37,8 +37,9 @@ Git remote: `https://github.com/benadrasni/abherbs_flutter`.
 - Filter key format: `color_habitat_petal_distribution` with empty slots allowed. Vocabulary is in `lib/filter/filter_utils.dart`.
 - Plant photos are public HTTPS under `https://storage.googleapis.com/abherbs-resources/photos/`.
 - English is the translation fallback except Czech → Slovak.
-- Species English sources: `ingest/data/botanical_sources.json`. Reliable floras include Wikipedia, PFAF, RHS, Luontoportti, Missouri Plants, and BOTANY.cz. When a web flora is useful, add it there for later plants.
+- Species English sources: `ingest/data/botanical_sources.json`. Reliable floras include Wikipedia, PFAF, RHS, Luontoportti, Missouri Plants, BOTANY.cz, and EPPO for names. When a web flora is useful, add it there for later plants.
 - Never translate an English common name into another language. Vernacular `label` / `names` must come from a source in that language (Wikidata, that Wikipedia title, EPPO Global Database https://gd.eppo.int/, or a flora such as BOTANY.cz). If none exists, omit `label` and keep the Latin name.
+- Adding a species: follow `ingest/ADD_PLANT.md`. Dry-run first; incremental live publish only when asked to add it to the database. Do not full-promote indexes for one plant. If no illustration id is given, look at available botanicalillustrations.org plates and pick the best representation of the plant.
 
 ## Firebase
 
@@ -47,6 +48,7 @@ Git remote: `https://github.com/benadrasni/abherbs_flutter`.
 - Admin JSON (local only): `~/Development/Keystore/abherbs-backend-firebase-adminsdk-l5787-839f896846.json`.
 - CLI: `firebase-tools` via nvm Node. Use `GOOGLE_APPLICATION_CREDENTIALS` pointing at the Admin JSON. `.firebaserc` selects `abherbs-backend`. Live rules snapshot: `firebase/database.rules.json`.
 - Do not write production RTDB/Storage unless the user asked for a data change.
+- Website Hosting deploy: `web/AGENTS.md` (only when asked).
 - Play releases are option B: build a signed AAB here; the user uploads in Play Console.
 - App Store Connect key `4AKYKM6RAW` may be used (Admin-level). Live iOS is 8.0.6. Do not upload a binary unless asked.
 

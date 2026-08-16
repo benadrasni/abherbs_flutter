@@ -51,7 +51,9 @@ The app still writes Google Translate output to `translations/{lang}-GT`; that p
 | `observations/public` | Shared observations (subscription) |
 | `observations/logs` | Review / publish log |
 | `credits` | Credit spend/earn log |
-| `web/{lang}` | Website UI strings |
+| `web/{lang}` | Legacy About/Help and old-site chrome. The current website does not read this; chrome lives in `web/src/locales.json`. |
+| `web/catalog/{id}` | Slim website plant row (`id`, `name`, `family`, `url`, `illustrationUrl`). Written with each incremental add. |
+| `web/labels/{lang}/{id}` | Sourced vernacular for that plant, or omitted. Not inverted from `search_v3`. |
 
 Live sizes (public REST, 2026-03-26):
 
@@ -118,6 +120,30 @@ Keyed by Latin binomial, e.g. `plants_v2/Acer campestre`.
 ```
 
 A plant can belong to **multiple** values of one filter (green *and* yellow). Ingest writes the union; list generation fans the plant into every combination.
+
+The Flutter app keeps reading this node, including the filter arrays. The public website does **not** use those filters. It reads `web/catalog` (explicit `id` + `illustrationUrl`) and `web/labels/{lang}` once the catalog covers `plants_to_update/count`. Until a full rebuild has been published, the site falls back to `plants_headers` plus per-card `translations` / `plants_v2` fetches.
+
+Rebuild locally with `refresh_indexes.py --only web` (`web_catalog_new.json`, `web_labels_new/`). That does not write Firebase.
+
+## Website catalog (`web/catalog/{id}`)
+
+```json
+{
+  "id": 0,
+  "name": "Acer campestre",
+  "family": "Sapindaceae",
+  "url": "Sapindales/Sapindaceae/Acer_campestre/ac1.webp",
+  "illustrationUrl": "Sapindales/Sapindaceae/Acer_campestre/Acer_campestre.webp"
+}
+```
+
+`id` is the `plants_to_update` list index (same as `plants_headers/{id}` and search). `illustrationUrl` is copied from `plants_v2`. Do not invent it from `url` at publish time except as a fallback when `plants_v2` has none. Labels live next door:
+
+```json
+"web/labels/en/0": "common maple"
+```
+
+Empty / missing means show the Latin name. Later-language publishes (`publish_new_plant_translations.py` and the same helper) must write `web/labels/{lang}/{id}` when they set a sourced `label`.
 
 ## Filter vocabulary
 

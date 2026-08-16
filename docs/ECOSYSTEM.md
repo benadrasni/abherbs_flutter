@@ -31,7 +31,7 @@ Python 3 scripts, Firebase Admin SDK, BeautifulSoup, Pillow, Tkinter. Credential
 | `add_synonyms.py` | Backfill IPNI id + author + synonym list |
 | `rename_plant.py` | Copy plant + synonyms + translations to a new Latin key |
 | `add_flower_with_video.py` | Append a plant id to every language's "Flowers with video" custom list |
-| `catalog_indexes.py` / `refresh_indexes.py` | Rebuild counts/lists/search/photo JSON from a catalog dump. Does not write Firebase. |
+| `catalog_indexes.py` / `refresh_indexes.py` | Rebuild counts/lists/search/photo plus `web_catalog_new` / `web_labels_new` from a catalog dump. Does not write Firebase. |
 | `integrity_check.py` | Missing English sections, empty taxonomy names, broken observations |
 | `review_observations.py` | Tkinter accept / reject / skip for pending public photos |
 | `observation_stats.py` | Recompute `observations/public/stats` (Nominatim for country) |
