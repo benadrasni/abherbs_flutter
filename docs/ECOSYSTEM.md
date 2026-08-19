@@ -22,21 +22,26 @@ Editor: `~/whatsthatflower/whatsthatflower.code-workspace`.
 
 Python 3 scripts, Firebase Admin SDK, BeautifulSoup, Pillow, Tkinter. Credentials path is hardcoded in `constants.py` to the local admin JSON.
 
-| Script | Job |
+| Path | Job |
 |---|---|
-| `process_plant.py` | Tkinter UI: crop incoming photos to 512 / 128 WebP, then `add_plant` + `upload_plant` |
-| `add_plant.py` | Write `plants_v2`, `plants_headers`, `synonyms`, `translations` from Wikidata + POWO |
-| `upload_plant.py` | Upload a prepared folder to `abherbs-resources/photos/...` and make objects public |
+| `add_species.py` | Dry-run job packet; `--publish` for incremental live write |
+| `plant/` | Resolve, assemble, draft, media, validate |
+| `catalog/` | Filter indexes, APG tree, website catalog, publish, promote |
+| `sources/` | WCVP, Wikidata, floras, Commons, GBIF |
+| `storage/` | GCS upload and public ACL |
+| `scripts/process_plant.py` | Tkinter UI: crop incoming photos to 512 / 128 WebP, then `add_plant` + `upload_plant` |
+| `scripts/add_plant.py` | Write `plants_v2`, `plants_headers`, `synonyms`, `translations` from Wikidata + POWO |
+| `scripts/upload_plant.py` | Upload a prepared folder to `abherbs-resources/photos/...` and make objects public |
 | `plants_to_upload.txt` | Batch lines: `order;family;plant;wikidata;flowerFrom;flowerTo;hFrom;hTo;color;habitat;petal` |
-| `add_synonyms.py` | Backfill IPNI id + author + synonym list |
-| `rename_plant.py` | Copy plant + synonyms + translations to a new Latin key |
-| `add_flower_with_video.py` | Append a plant id to every language's "Flowers with video" custom list |
-| `catalog_indexes.py` / `refresh_indexes.py` | Rebuild counts/lists/search/photo plus `web_catalog_new` / `web_labels_new` from a catalog dump. Does not write Firebase. |
-| `integrity_check.py` | Missing English sections, empty taxonomy names, broken observations |
-| `review_observations.py` | Tkinter accept / reject / skip for pending public photos |
-| `observation_stats.py` | Recompute `observations/public/stats` (Nominatim for country) |
-| `send_notifications.py` | Per-language FCM via `deep_translator` |
-| `storage_upload_file.py` / `storage_make_public.py` | GCS helpers |
+| `scripts/add_synonyms.py` | Backfill IPNI id + author + synonym list |
+| `scripts/rename_plant.py` | Copy plant + synonyms + translations to a new Latin key |
+| `scripts/add_flower_with_video.py` | Append a plant id to every language's "Flowers with video" custom list |
+| `catalog/catalog_indexes.py` / `catalog/refresh.py` | Rebuild counts/lists/search/photo plus `web_catalog_new` / `web_labels_new` from a catalog dump. Does not write Firebase. |
+| `scripts/integrity_check.py` | Missing English sections, empty taxonomy names, broken observations |
+| `scripts/review_observations.py` | Tkinter accept / reject / skip for pending public photos |
+| `scripts/observation_stats.py` | Recompute `observations/public/stats` (Nominatim for country) |
+| `scripts/send_notifications.py` | Per-language FCM via `deep_translator` |
+| `storage/upload.py` / `storage/public.py` | GCS helpers |
 | `tdwg.csv` | TDWG geography used to turn POWO region names into filter codes |
 
 Ingest sources:

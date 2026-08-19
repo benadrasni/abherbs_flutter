@@ -123,7 +123,7 @@ A plant can belong to **multiple** values of one filter (green *and* yellow). In
 
 The Flutter app keeps reading this node, including the filter arrays. The public website does **not** use those filters. It reads `web/catalog` (explicit `id` + `illustrationUrl`) and `web/labels/{lang}` once the catalog covers `plants_to_update/count`. Until a full rebuild has been published, the site falls back to `plants_headers` plus per-card `translations` / `plants_v2` fetches.
 
-Rebuild locally with `refresh_indexes.py --only web` (`web_catalog_new.json`, `web_labels_new/`). That does not write Firebase.
+Rebuild locally with `python -m catalog.refresh --only web` (`web_catalog_new.json`, `web_labels_new/`). That does not write Firebase.
 
 ## Website catalog (`web/catalog/{id}`)
 
@@ -219,7 +219,8 @@ gs://abherbs-resources/
   photos/{Order}/{Family}/{Genus_species}/
     ac1.webp                square 512
     .thumbnails/ac1.webp    128
-    Acer_campestre.webp     illustration
+    Acer_campestre@1600.webp  illustration 1600×2400 (legacy: Acer_campestre.webp)
+    Acer_campestre@400.webp   illustration 400×600
   families/
   observations/{uid}/{Plant_name}/{file}.jpg
   misc/                     terms, privacy
@@ -247,7 +248,7 @@ Photo file names are `{first letter of genus}{first letter of species}{n}.webp` 
 
 ## How lists and counts are rebuilt
 
-The 4-axis indexes are not maintained by the Flutter app. After plants or headers change, `abherbs-auto/refresh_indexes.py` rebuilds them locally:
+The 4-axis indexes are not maintained by the Flutter app. After plants or headers change, `abherbs-auto` `python -m catalog.refresh` rebuilds them locally:
 
 1. Generates every combination of color × habitat × petal × TDWG region (including empty “not selected”).
 2. For each plant header, increments `counts_new/{key}` and adds the numeric plant id to `lists_new/{key}` when all selected slots match (a plant with several colors matches every one of those color slots).
