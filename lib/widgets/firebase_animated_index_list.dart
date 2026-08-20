@@ -140,18 +140,32 @@ class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
   bool _loaded = false;
 
   @override
-  void didChangeDependencies() {
+  void initState() {
+    super.initState();
+    _connect();
+  }
+
+  @override
+  void didUpdateWidget(FirebaseAnimatedIndexList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.query.path != widget.query.path ||
+        oldWidget.keyQuery.path != widget.keyQuery.path) {
+      _model.clear();
+      _loaded = false;
+      _connect();
+    }
+  }
+
+  void _connect() {
     _model = FirebaseIndexList(
       query: widget.query,
       keyQuery: widget.keyQuery,
       onValue: _onValue,
     );
-    super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    // Cancel the Firebase stream subscriptions
     _model.clear();
     super.dispose();
   }
@@ -166,6 +180,9 @@ class FirebaseAnimatedIndexListState extends State<FirebaseAnimatedIndexList> {
 
   Widget _buildItem(
       BuildContext context, int index, Animation<double> animation) {
+    if (index < 0 || index >= _model.length) {
+      return const SizedBox.shrink();
+    }
     return widget.itemBuilder(context, _model[index], animation, index);
   }
 

@@ -26,6 +26,12 @@ const String sourceHortipedia = "hortipedia.com";
 const String sourceUsda = "plants.usda.gov";
 const String sourceUsfs = "forestryimages.org";
 const String sourceTelaBotanica = "tela-botanica.org";
+const String sourceInfoflora = "infoflora.ch";
+const String sourcePladias = "pladias.cz";
+const String sourceGoBotany = "nativeplanttrust.org";
+const String sourceBsbi = "bsbi.org";
+const String sourceBurke = "burkeherbarium.org";
+const String sourceBurkeWashington = "burke.washington.edu";
 
 Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize, GlobalKey<ScaffoldState> key) {
   String language = Localizations.localeOf(context).languageCode;
@@ -46,12 +52,23 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
       builder: (BuildContext context, AsyncSnapshot<PlantTranslation> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
+            final t = snapshot.data;
+            if (t == null) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              );
+            }
+            String body(String? value) => value ?? '';
             List<Widget> cards = [];
 
             cards.add(Card(
               child: Container(
                 padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                child: _getNames(context, plant, snapshot.data, key),
+                child: _getNames(context, plant, t, key),
               ),
             ));
 
@@ -86,7 +103,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PlantDetailEdit(plant.name, language, '', '', 'description', snapshot.data!.description!, _fontSize),
+                                builder: (context) => PlantDetailEdit(plant.name, language, '', '', 'description', body(t.description), _fontSize),
                                 settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {
@@ -98,7 +115,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         },
                       ),
                     ),
-                    _getRichText(snapshot.data!.description!, _defaultTextStyle),
+                    _getRichText(body(t.description), _defaultTextStyle),
                   ],
                 ),
               ),
@@ -124,7 +141,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_inflorescence_grey_24dp.png', S.of(context).plant_inflorescence, "inflorescence", snapshot.data!.inflorescence!, _fontSize),
+                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_inflorescence_grey_24dp.png', S.of(context).plant_inflorescence, "inflorescence", body(t.inflorescence), _fontSize),
                               settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
@@ -136,7 +153,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                       },
                     ),
                   ),
-                  _getRichText(snapshot.data!.inflorescence!, _defaultTextStyle),
+                  _getRichText(body(t.inflorescence), _defaultTextStyle),
                 ]),
               ),
             ));
@@ -161,7 +178,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_flower_grey_24dp.png', S.of(context).plant_flower, "flower", snapshot.data!.flower!, _fontSize),
+                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_flower_grey_24dp.png', S.of(context).plant_flower, "flower", body(t.flower), _fontSize),
                               settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
@@ -179,7 +196,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                       );
                     },
                   ),
-                  _getRichText(snapshot.data!.flower!, _defaultTextStyle),
+                  _getRichText(body(t.flower), _defaultTextStyle),
                 ]),
               ),
             ));
@@ -204,7 +221,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_fruit_grey_24dp.png', S.of(context).plant_fruit, "fruit", snapshot.data!.fruit!, _fontSize),
+                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_fruit_grey_24dp.png', S.of(context).plant_fruit, "fruit", body(t.fruit), _fontSize),
                               settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
@@ -216,7 +233,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                       },
                     ),
                   ),
-                  _getRichText(snapshot.data!.fruit!, _defaultTextStyle),
+                  _getRichText(body(t.fruit), _defaultTextStyle),
                 ]),
               ),
             ));
@@ -241,7 +258,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_leaf_grey_24dp.png', S.of(context).plant_leaf, "leaf", snapshot.data!.leaf!, _fontSize),
+                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_leaf_grey_24dp.png', S.of(context).plant_leaf, "leaf", body(t.leaf), _fontSize),
                               settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
@@ -253,7 +270,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                       },
                     ),
                   ),
-                  _getRichText(snapshot.data!.leaf!, _defaultTextStyle),
+                  _getRichText(body(t.leaf), _defaultTextStyle),
                 ]),
               ),
             ));
@@ -278,7 +295,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_stem_grey_24dp.png', S.of(context).plant_stem, "stem", snapshot.data!.stem!, _fontSize),
+                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_stem_grey_24dp.png', S.of(context).plant_stem, "stem", body(t.stem), _fontSize),
                               settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
@@ -290,7 +307,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                       },
                     ),
                   ),
-                  _getRichText(snapshot.data!.stem!, _defaultTextStyle),
+                  _getRichText(body(t.stem), _defaultTextStyle),
                 ]),
               ),
             ));
@@ -315,7 +332,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_home_grey_24dp.png', S.of(context).plant_habitat, "habitat", snapshot.data!.habitat!, _fontSize),
+                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_home_grey_24dp.png', S.of(context).plant_habitat, "habitat", body(t.habitat), _fontSize),
                               settings: RouteSettings(name: 'PlantDetailEdit')
                             )).then((value) {
                           if (value != null && value) {
@@ -327,13 +344,13 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                       },
                     ),
                   ),
-                  _getRichText(snapshot.data!.habitat!, _defaultTextStyle),
+                  _getRichText(body(t.habitat), _defaultTextStyle),
                 ]),
               ),
             ));
 
             // optional attributes
-            if (snapshot.data!.toxicity != null) {
+            if (t.toxicity != null) {
               cards.add(Card(
                 child: Container(
                   padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
@@ -354,7 +371,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_toxicity_grey_24dp.png', S.of(context).plant_toxicity, "toxicity", snapshot.data!.toxicity!, _fontSize),
+                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_toxicity_grey_24dp.png', S.of(context).plant_toxicity, "toxicity", body(t.toxicity), _fontSize),
                                 settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {
@@ -366,13 +383,13 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         },
                       ),
                     ),
-                    _getRichText(snapshot.data!.toxicity!, _defaultTextStyle),
+                    _getRichText(body(t.toxicity), _defaultTextStyle),
                   ]),
                 ),
               ));
             }
 
-            if (snapshot.data!.herbalism != null) {
+            if (t.herbalism != null) {
               cards.add(Card(
                 child: Container(
                   padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
@@ -393,7 +410,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_local_pharmacy_grey_24dp.png', S.of(context).plant_herbalism, "herbalism", snapshot.data!.herbalism!, _fontSize),
+                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_local_pharmacy_grey_24dp.png', S.of(context).plant_herbalism, "herbalism", body(t.herbalism), _fontSize),
                                 settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {
@@ -405,13 +422,13 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         },
                       ),
                     ),
-                    _getRichText(snapshot.data!.herbalism!, _defaultTextStyle),
+                    _getRichText(body(t.herbalism), _defaultTextStyle),
                   ]),
                 ),
               ));
             }
 
-            if (snapshot.data!.trivia != null) {
+            if (t.trivia != null) {
               cards.add(Card(
                 child: Container(
                   padding: EdgeInsets.only(left: 10.0, bottom: 10.0, right: 10.0),
@@ -432,7 +449,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_question_mark_grey_24dp.png', S.of(context).plant_trivia, "trivia", snapshot.data!.trivia!, _fontSize),
+                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_question_mark_grey_24dp.png', S.of(context).plant_trivia, "trivia", body(t.trivia), _fontSize),
                                 settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {
@@ -444,7 +461,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         },
                       ),
                     ),
-                    _getRichText(snapshot.data!.trivia!, _defaultTextStyle),
+                    _getRichText(body(t.trivia), _defaultTextStyle),
                   ]),
                 ),
               ));
@@ -454,9 +471,9 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
               child: Container(
                 padding: EdgeInsets.all(10.0),
                 child: PlantSourcesSection([
-                  if (snapshot.data!.wikipedia != null) snapshot.data!.wikipedia,
+                  if (t.wikipedia != null) t.wikipedia,
                   ...plant.wikiLinks.values,
-                  ...snapshot.data!.sourceUrls,
+                  ...t.sourceUrls,
                 ]),
               ),
             ));
@@ -641,50 +658,70 @@ class _PlantSourcesSectionState extends State<PlantSourcesSection> {
   }
 }
 
-TextButton getSourceButton(String url) {
-  String imageSource = 'res/images/internet.png';
-  String textSource = sourceHost(url);
+({String image, String label}) sourceButtonLook(String url) {
+  String image = 'res/images/internet.png';
+  String label = sourceHost(url);
 
   if (url.contains(sourceWikipedia)) {
-    imageSource = 'res/images/wikipedia.png';
-    textSource = sourceWikipedia;
+    image = 'res/images/wikipedia.png';
+    label = sourceWikipedia;
   } else if (url.contains(sourceWikimediaCommons)) {
-    imageSource = 'res/images/commons.png';
-    textSource = sourceWikimediaCommonsTitle;
+    image = 'res/images/commons.png';
+    label = sourceWikimediaCommonsTitle;
   } else if (url.contains(sourceWikimediaData)) {
-    imageSource = 'res/images/wikidata.png';
-    textSource = sourceWikimediaDataTitle;
+    image = 'res/images/wikidata.png';
+    label = sourceWikimediaDataTitle;
   } else if (url.contains(sourceWikimediaSpecies)) {
-    imageSource = 'res/images/species.png';
-    textSource = sourceWikimediaSpeciesTitle;
+    image = 'res/images/species.png';
+    label = sourceWikimediaSpeciesTitle;
   } else if (url.contains(sourceLuontoportii)) {
-    imageSource = 'res/images/luontoportti.png';
-    textSource = sourceLuontoportii;
+    image = 'res/images/luontoportti.png';
+    label = sourceLuontoportii;
   } else if (url.contains(sourceBotany)) {
-    imageSource = 'res/images/botany.png';
-    textSource = sourceBotany;
+    image = 'res/images/botany.png';
+    label = sourceBotany;
   } else if (url.contains(sourceFloraNordica)) {
-    imageSource = 'res/images/floranordica.png';
-    textSource = sourceFloraNordica;
+    image = 'res/images/floranordica.png';
+    label = sourceFloraNordica;
   } else if (url.contains(sourceEflora)) {
-    imageSource = 'res/images/eflora.png';
-    textSource = sourceEflora;
+    image = 'res/images/eflora.png';
+    label = sourceEflora;
   } else if (url.contains(sourceBerkeley)) {
-    imageSource = 'res/images/berkeley.png';
-    textSource = sourceBerkeley;
+    image = 'res/images/berkeley.png';
+    label = sourceBerkeley;
   } else if (url.contains(sourceHortipedia)) {
-    imageSource = 'res/images/hortipedia.png';
-    textSource = sourceHortipedia;
+    image = 'res/images/hortipedia.png';
+    label = sourceHortipedia;
   } else if (url.contains(sourceUsda)) {
-    imageSource = 'res/images/usda.png';
-    textSource = sourceUsda;
+    image = 'res/images/usda.png';
+    label = sourceUsda;
   } else if (url.contains(sourceUsfs)) {
-    imageSource = 'res/images/usfs.png';
-    textSource = sourceUsfs;
+    image = 'res/images/usfs.png';
+    label = sourceUsfs;
   } else if (url.contains(sourceTelaBotanica)) {
-    imageSource = 'res/images/tela_botanica.png';
-    textSource = sourceTelaBotanica;
+    image = 'res/images/tela_botanica.png';
+    label = sourceTelaBotanica;
+  } else if (url.contains(sourceInfoflora)) {
+    image = 'res/images/infoflora.png';
+    label = sourceInfoflora;
+  } else if (url.contains(sourcePladias)) {
+    image = 'res/images/pladias.png';
+    label = sourcePladias;
+  } else if (url.contains(sourceGoBotany)) {
+    image = 'res/images/gobotany.png';
+    label = 'gobotany';
+  } else if (url.contains(sourceBsbi)) {
+    image = 'res/images/bsbi.png';
+    label = sourceBsbi;
+  } else if (url.contains(sourceBurke) || url.contains(sourceBurkeWashington)) {
+    image = 'res/images/burke.png';
+    label = 'burke';
   }
+  return (image: image, label: label);
+}
+
+TextButton getSourceButton(String url) {
+  final look = sourceButtonLook(url);
 
   return TextButton(
     style: ButtonStyle(
@@ -697,12 +734,12 @@ TextButton getSourceButton(String url) {
     },
     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Image(
-        image: AssetImage(imageSource),
+        image: AssetImage(look.image),
         width: 50.0,
         height: 50.0,
       ),
       Text(
-        textSource,
+        look.label,
         textAlign: TextAlign.center,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,

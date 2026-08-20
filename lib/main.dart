@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui' show PlatformDispatcher;
 
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/plant_list.dart';
@@ -55,8 +56,19 @@ Future<void> initializeFlutterFire() async {
 
   await RemoteConfiguration.setupRemoteConfig();
 
-  // Pass all uncaught errors to Crashlytics.
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  FlutterError.onError = (details) {
+    if (isIgnorableFlutterError(details)) {
+      return;
+    }
+    FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    if (isIgnorableNonFatalError(error)) {
+      return true;
+    }
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 }
 
 String? notificationTitle(RemoteMessage message) {
@@ -128,6 +140,9 @@ void main() {
     });
   }, (error, stackTrace) {
     print('runZonedGuarded: Caught error in my root zone.');
+    if (isIgnorableNonFatalError(error)) {
+      return;
+    }
     FirebaseCrashlytics.instance.recordError(error, stackTrace);
   });
 }

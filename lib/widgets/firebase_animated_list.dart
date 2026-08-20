@@ -142,7 +142,23 @@ class MyFirebaseAnimatedListState extends State<MyFirebaseAnimatedList> {
   bool _empty = false;
 
   @override
-  void didChangeDependencies() {
+  void initState() {
+    super.initState();
+    _connect();
+  }
+
+  @override
+  void didUpdateWidget(MyFirebaseAnimatedList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.query.path != widget.query.path) {
+      _model.clear();
+      _loaded = false;
+      _empty = false;
+      _connect();
+    }
+  }
+
+  void _connect() {
     if (widget.sort != null) {
       _model = FirebaseSortedList(
         query: widget.query,
@@ -162,14 +178,11 @@ class MyFirebaseAnimatedListState extends State<MyFirebaseAnimatedList> {
         onValue: _onValue,
       );
     }
-    super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    // Cancel the Firebase stream subscriptions
     _model.clear();
-
     super.dispose();
   }
 
@@ -177,36 +190,43 @@ class MyFirebaseAnimatedListState extends State<MyFirebaseAnimatedList> {
     if (!_loaded) {
       return; // AnimatedList is not created yet
     }
-    if (_animatedListKey.currentState != null) {
-      _animatedListKey.currentState!.insertItem(index, duration: widget.duration);
-    }
+    _animatedListKey.currentState?.insertItem(index, duration: widget.duration);
   }
 
   void _onChildRemoved(int index, DataSnapshot snapshot) {
-    // The child should have already been removed from the model by now
-    assert(index >= _model.length || _model[index].key != snapshot.key);
-    if (_animatedListKey.currentState != null) {
-      _animatedListKey.currentState!.removeItem(
-        index,
-            (BuildContext context, Animation<double> animation) {
-          return widget.itemBuilder(context, snapshot, animation, index);
-        },
-        duration: widget.duration,
-      );
+    _animatedListKey.currentState?.removeItem(
+      index,
+      (BuildContext context, Animation<double> animation) {
+        return widget.itemBuilder(context, snapshot, animation, index);
+      },
+      duration: widget.duration,
+    );
+  }
+
+  void _onChildChanged(int index, DataSnapshot snapshot) {
+    if (mounted) {
+      setState(() {});
     }
   }
 
-  // No animation, just update contents
-  void _onChildChanged(int index, DataSnapshot snapshot) {
-    setState(() {});
-  }
-
-  // No animation, just update contents
   void _onChildMoved(int fromIndex, int toIndex, DataSnapshot snapshot) {
-    setState(() {});
+    final state = _animatedListKey.currentState;
+    if (state == null || !_loaded) {
+      return;
+    }
+    state.removeItem(
+      fromIndex,
+      (BuildContext context, Animation<double> animation) =>
+          const SizedBox.shrink(),
+      duration: Duration.zero,
+    );
+    state.insertItem(toIndex, duration: Duration.zero);
   }
 
   void _onValue(DataSnapshot snapshot) {
+    if (!mounted) {
+      return;
+    }
     setState(() {
       _loaded = true;
       _empty = snapshot.value == null;
@@ -215,6 +235,9 @@ class MyFirebaseAnimatedListState extends State<MyFirebaseAnimatedList> {
 
   Widget _buildItem(
       BuildContext context, int index, Animation<double> animation) {
+    if (index < 0 || index >= _model.length) {
+      return const SizedBox.shrink();
+    }
     return widget.itemBuilder(context, _model[index], animation, index);
   }
 

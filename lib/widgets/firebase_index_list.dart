@@ -23,6 +23,9 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
     this.onError,
   }) {
     keyQuery.once().then((event) {
+      if (_cleared) {
+        return;
+      }
       if (event.snapshot.value != null) {
         if (event.snapshot.value is List) {
           int i = 0;
@@ -61,6 +64,7 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
   final Map<String, int> _keys = <String, int>{};
 
   StreamSubscription<DatabaseEvent>? _subscription;
+  bool _cleared = false;
 
   @override
   int get length => _snapshots.length;
@@ -80,10 +84,14 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
 
   @override
   void clear() {
+    _cleared = true;
     _snapshots.clear();
     _keys.clear();
-    _subscription?.cancel();
+    final subscription = _subscription;
     _subscription = null;
+    if (subscription != null) {
+      unawaited(subscription.cancel().catchError((Object _) {}));
+    }
     cancelSubscriptions();
 
     // Do not call super.clear(), it will set the length, it's unsupported.

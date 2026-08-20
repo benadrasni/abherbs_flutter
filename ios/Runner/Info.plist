@@ -41,6 +41,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Features "Search by photo" and "Observation" need permission to access camera</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Permission needed to save current location to the observation</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Permission needed to save current location to the observation</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

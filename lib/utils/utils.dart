@@ -231,6 +231,51 @@ bool get isInDebugMode {
   return inDebugMode;
 }
 
+/// DNS / offline / TLS failures while loading a photo. Not an app bug.
+bool isTransientNetworkError(Object error) {
+  if (error is SocketException ||
+      error is HandshakeException ||
+      error is HttpException ||
+      error is TlsException ||
+      error is TimeoutException) {
+    return true;
+  }
+  final type = error.runtimeType.toString();
+  if (type.contains('ClientException') ||
+      type.contains('SocketException') ||
+      type.contains('HttpException') ||
+      type.contains('HandshakeException')) {
+    return true;
+  }
+  final text = error.toString();
+  return text.contains('Failed host lookup') ||
+      text.contains('No address associated with hostname') ||
+      text.contains('Network is unreachable') ||
+      text.contains('Connection refused') ||
+      text.contains('Connection reset') ||
+      text.contains('Connection closed') ||
+      text.contains('Connection timed out') ||
+      text.contains('Software caused connection abort') ||
+      text.contains('ClientException');
+}
+
+/// EventChannel `cancel` after the engine/plugin is already gone (screen pop, process death).
+bool isIgnorablePluginTeardown(Object error) {
+  final text = error.toString();
+  return text.contains('MissingPluginException') && text.contains('method cancel');
+}
+
+bool isIgnorableNonFatalError(Object error) {
+  return isTransientNetworkError(error) || isIgnorablePluginTeardown(error);
+}
+
+bool isIgnorableFlutterError(FlutterErrorDetails details) {
+  if (details.library == 'image resource service') {
+    return true;
+  }
+  return isIgnorableNonFatalError(details.exception);
+}
+
 void launchURL(String path) async {
   Uri url = Uri.parse(path);
   if (!await launchUrl(url)) {
