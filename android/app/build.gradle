@@ -76,6 +76,12 @@ android {
         }
     }
 
+    packaging {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
+
     buildTypes {
         release {
             signingConfig signingConfigs.config
@@ -96,8 +102,9 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:2.4.0"
-    implementation 'com.google.ads.mediation:applovin:13.6.3.0'
     implementation 'com.google.ads.mediation:facebook:6.21.0.4'
+    // play-services-ads-api still asks for WorkManager 2.7; that crashes on 16 KB page-size devices.
+    implementation 'androidx.work:work-runtime:2.10.2'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

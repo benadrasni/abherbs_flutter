@@ -126,7 +126,7 @@ Paid. `lib/settings/offline.dart` keeps selected RTDB subtrees synced and downlo
 | Google Translate v2 | plant detail | On-demand body text |
 | Google Maps Static | observations | Map thumbnails |
 | POWO / IPNI | Remote Config + taxonomy | Species page links |
-| AdMob (AppLovin + Facebook mediation on Android) | banners, interstitial, rewarded | Ads |
+| AdMob (Facebook mediation on Android) | banners, interstitial, rewarded | Ads |
 
 API keys live in gitignored `lib/keys.dart`.
 
