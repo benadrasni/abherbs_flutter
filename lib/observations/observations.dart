@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'observation_logs.dart';
+import 'observation_scope_switch.dart';
 
 class Observations extends StatefulWidget {
   final Locale myLocale;
@@ -158,65 +159,52 @@ class _ObservationsState extends State<Observations> {
   Widget build(BuildContext context) {
     var myLocale = Localizations.localeOf(context);
 
-    List<Widget> appBarItems = [];
-    appBarItems.add(Text(S.of(context).observations));
-    appBarItems.add(_observationsRemain > 0
-        ? GestureDetector(
-            child: Stack(alignment: AlignmentDirectional.center, children: [
-              Container(
-                  child: FittedBox(
-                fit: BoxFit.fill,
-                child: Text(_observationsRemain.toString()),
-              )),
-              Upload.uploadStarted
-                  ? CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                    )
-                  : Container(
-                      width: 0.0,
-                      height: 0.0,
-                    )
-            ]),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        ObservationLogs(Localizations.localeOf(context), 2),
-                    settings: RouteSettings(name: 'ObservationLogs')),
-              );
-            },
-          )
-        : Container(
-            width: 0.0,
-            height: 0.0,
-          ));
-    if (widget.isPublicOnly) {
-      appBarItems.add(Icon(Icons.people));
-    } else {
-      appBarItems.add(Row(
-        children: [
-          Icon(Icons.person),
-          Switch(
-            value: _isPublic,
-            activeColor: Colors.white,
-            inactiveThumbColor: Colors.white,
-            onChanged: (bool value) {
-              _setIsPublic(value);
-            },
+    List<Widget> actions = [];
+    if (_observationsRemain > 0) {
+      actions.add(IconButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    ObservationLogs(Localizations.localeOf(context), 2),
+                settings: RouteSettings(name: 'ObservationLogs')),
+          );
+        },
+        icon: Stack(alignment: AlignmentDirectional.center, children: [
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(_observationsRemain.toString()),
           ),
-          Icon(Icons.people),
-        ],
+          if (Upload.uploadStarted)
+            const CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
+        ]),
+      ));
+    }
+    if (widget.isPublicOnly) {
+      actions.add(const Padding(
+        padding: EdgeInsets.only(right: 12.0),
+        child: Icon(Icons.people),
+      ));
+    } else {
+      actions.add(Padding(
+        padding: const EdgeInsets.only(right: 8.0),
+        child: Center(
+          child: ObservationScopeSwitch(
+            isPublic: _isPublic,
+            onChanged: _setIsPublic,
+          ),
+        ),
       ));
     }
 
     return Scaffold(
       key: _key,
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: appBarItems,
-        ),
+        title: Text(S.of(context).observations),
+        actions: actions,
       ),
       body: MyFirebaseAnimatedList(
           defaultChild: Center(child: CircularProgressIndicator()),

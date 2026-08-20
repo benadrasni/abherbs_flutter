@@ -227,6 +227,9 @@ class Offline {
         var urls = <String>[];
         urls.addAll(plant.photoUrls.map((url) => url as String));
         urls.add(plant.illustrationUrl!);
+        if (plant.illustrationUrl!.contains('@1600.')) {
+          urls.add(plant.illustrationUrl!.replaceFirst('@1600.', '@400.'));
+        }
         if (url != plant.photoUrls[0]) {
           urls.add(url);
         }

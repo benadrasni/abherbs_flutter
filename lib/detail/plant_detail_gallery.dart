@@ -1,6 +1,5 @@
 import 'package:abherbs_flutter/detail/plant_detail_info.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
-import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,12 @@ Widget getGallery(BuildContext context, Plant plant) {
   List<Widget> cards = [];
 
   cards.add(Card(
-    child: _getImageButton(context, storagePhotos + plant.illustrationUrl!),
+    color: const Color(0xFFF4EFE4),
+    child: _getImageButton(
+      context,
+      storagePhotos + plant.illustrationUrl!,
+      aspectRatio: 2 / 3,
+    ),
   ));
 
   if (plant.videoUrls.length > 0) {
@@ -61,10 +65,7 @@ Widget getGallery(BuildContext context, Plant plant) {
     cards.add(Card(
       child: Container(
         padding: EdgeInsets.all(5.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: _getSources(context, plant.sourceUrls),
-        ),
+        child: PlantSourcesSection(plant.sourceUrls),
       ),
     ));
   }
@@ -80,40 +81,9 @@ List<YoutubePlayerController> getYoutubeControllers() {
   return controllers;
 }
 
-List<Widget> _getSources(BuildContext context, List<dynamic> sourceUrls) {
-  var rows = <Widget>[];
-
-  var sources = [];
-  if (sourceUrls.isNotEmpty) {
-    sources.addAll(sourceUrls);
-  }
-  if (sources.isNotEmpty) {
-    rows.add(Text(
-      S.of(context).plant_sources,
-      style: TextStyle(
-        fontSize: 22.0,
-      ),
-      textAlign: TextAlign.center,
-    ));
-
-    for (int i = 0; i < sources.length; i += 3) {
-      var sourceButtons = <Widget>[];
-      for (int j = 0; j < 3; j++) {
-        if (i + j < sources.length) {
-          sourceButtons.add(getSourceButton(sources[i + j]));
-        }
-      }
-      rows.add(Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: sourceButtons,
-      ));
-    }
-  }
-  return rows;
-}
-
-Widget _getImageButton(BuildContext context, String url) {
+Widget _getImageButton(BuildContext context, String url, {double aspectRatio = 1}) {
   double screenWidth = MediaQuery.of(context).size.width - 20;
+  double height = screenWidth / aspectRatio;
   var placeholder = Stack(alignment: Alignment.center, children: [
     CircularProgressIndicator(),
     Image(
@@ -123,9 +93,9 @@ Widget _getImageButton(BuildContext context, String url) {
   return GestureDetector(
     child: Container(
       padding: EdgeInsets.all(5.0),
-      child: getImage(url, placeholder),
+      child: getImage(url, placeholder, width: screenWidth, height: height, fit: BoxFit.contain),
       width: screenWidth,
-      height: screenWidth,
+      height: height,
     ),
     onTap: () {
       Navigator.push(

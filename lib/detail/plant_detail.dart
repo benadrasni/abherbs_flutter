@@ -13,6 +13,7 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/observations/observation_edit.dart';
 import 'package:abherbs_flutter/observations/observation_logs.dart';
+import 'package:abherbs_flutter/observations/observation_scope_switch.dart';
 import 'package:abherbs_flutter/observations/observations_plant.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
@@ -241,40 +242,26 @@ class _PlantDetailState extends State<PlantDetail> {
       key: _key,
       appBar: _currentIndex == observationIndex
           ? AppBar(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: GestureDetector(
-                      child: Text(widget.plant.name),
-                      onLongPress: () {
-                        Clipboard.setData(new ClipboardData(text: widget.plant.name));
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(S.of(context).snack_copy),
-                        ));
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        Icon(Icons.person),
-                        Switch(
-                          value: _isPublic,
-                          activeColor: Colors.white,
-                          inactiveThumbColor: Colors.white,
-                          onChanged: (bool value) {
-                            _setIsPublic(value);
-                          },
-                        ),
-                        Icon(Icons.people),
-                      ],
-                    ),
-                  ),
-                ],
+              title: GestureDetector(
+                child: Text(widget.plant.name),
+                onLongPress: () {
+                  Clipboard.setData(new ClipboardData(text: widget.plant.name));
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(S.of(context).snack_copy),
+                  ));
+                },
               ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Center(
+                    child: ObservationScopeSwitch(
+                      isPublic: _isPublic,
+                      onChanged: _setIsPublic,
+                    ),
+                  ),
+                ),
+              ],
             )
           : _currentIndex == infoIndex || _currentIndex == taxonomyIndex
               ? AppBar(

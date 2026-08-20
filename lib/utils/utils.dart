@@ -238,17 +238,6 @@ void launchURL(String path) async {
   }
 }
 
-Future<void> launchURLF(String path) {
-  Uri url = Uri(path: path);
-  return canLaunchUrl(url).then((value) {
-    if (value) {
-      return launchUrl(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  });
-}
-
 Future<void> _logPromotionEvent(event) async {
   await FirebaseAnalytics.instance
       .logEvent(name: 'promotion', parameters: {'feature': event});

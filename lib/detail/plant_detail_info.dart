@@ -453,10 +453,11 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
             cards.add(Card(
               child: Container(
                 padding: EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: _getSources(context, plant, snapshot.data!),
-                ),
+                child: PlantSourcesSection([
+                  if (snapshot.data!.wikipedia != null) snapshot.data!.wikipedia,
+                  ...plant.wikiLinks.values,
+                  ...snapshot.data!.sourceUrls,
+                ]),
               ),
             ));
 
@@ -550,43 +551,99 @@ Widget _getNames(BuildContext context, Plant plant, PlantTranslation? plantTrans
   return result;
 }
 
-List<Widget> _getSources(BuildContext context, Plant plant, PlantTranslation plantTranslation) {
-  var rows = <Widget>[];
+const int collapsedSourceCount = 6;
 
-  var sources = [];
-  if (plantTranslation.wikipedia != null) {
-    sources.add(plantTranslation.wikipedia);
+String sourceHost(String url) {
+  final uri = Uri.tryParse(url);
+  var host = uri != null && uri.host.isNotEmpty ? uri.host : url;
+  host = host.toLowerCase();
+  if (host.startsWith('www.')) {
+    host = host.substring(4);
   }
-  sources.addAll(plant.wikiLinks.values);
-  sources.addAll(plantTranslation.sourceUrls);
+  return host;
+}
 
-  rows.add(Text(
-    S.of(context).plant_sources,
-    style: TextStyle(
-      fontSize: 22.0,
-    ),
-    textAlign: TextAlign.center,
-  ));
-
-  for (int i = 0; i < sources.length; i += 3) {
-    var sourceButtons = <Widget>[];
-    for (int j = 0; j < 3; j++) {
-      if (i + j < sources.length) {
-        sourceButtons.add(getSourceButton(sources[i + j]));
-      }
+List<String> uniqueSourceUrls(Iterable<dynamic> urls) {
+  final seen = <String>{};
+  final out = <String>[];
+  for (final raw in urls) {
+    if (raw == null) {
+      continue;
     }
-    rows.add(Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: sourceButtons,
-    ));
+    final url = raw.toString().trim();
+    if (url.isEmpty) {
+      continue;
+    }
+    if (!seen.add(sourceHost(url))) {
+      continue;
+    }
+    out.add(url);
   }
-  return rows;
+  return out;
+}
+
+class PlantSourcesSection extends StatefulWidget {
+  final Iterable<dynamic> urls;
+
+  const PlantSourcesSection(this.urls, {super.key});
+
+  @override
+  State<PlantSourcesSection> createState() => _PlantSourcesSectionState();
+}
+
+class _PlantSourcesSectionState extends State<PlantSourcesSection> {
+  bool _expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final sources = uniqueSourceUrls(widget.urls);
+    if (sources.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    final hidden = sources.length - collapsedSourceCount;
+    final visible = _expanded || hidden <= 0 ? sources : sources.take(collapsedSourceCount).toList();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          S.of(context).plant_sources,
+          style: const TextStyle(fontSize: 22.0),
+          textAlign: TextAlign.center,
+        ),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: visible.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisExtent: 92,
+          ),
+          itemBuilder: (context, index) => getSourceButton(visible[index]),
+        ),
+        if (hidden > 0)
+          TextButton(
+            onPressed: () {
+              setState(() {
+                _expanded = !_expanded;
+              });
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(_expanded ? Icons.expand_less : Icons.expand_more),
+                if (!_expanded) Text('+$hidden'),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
 }
 
 TextButton getSourceButton(String url) {
-  assert(url.contains('//') && url.contains('/', url.indexOf('//') + 2));
   String imageSource = 'res/images/internet.png';
-  String textSource = url.substring(url.indexOf('//') + 2, url.indexOf('/', url.indexOf('//') + 2));
+  String textSource = sourceHost(url);
 
   if (url.contains(sourceWikipedia)) {
     imageSource = 'res/images/wikipedia.png';
@@ -631,9 +688,13 @@ TextButton getSourceButton(String url) {
 
   return TextButton(
     style: ButtonStyle(
-      padding: WidgetStateProperty.all(
-          EdgeInsets.only(bottom: 5.0)),
+      padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0)),
+      minimumSize: WidgetStateProperty.all(Size.zero),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
+    onPressed: () {
+      launchURL(url);
+    },
     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Image(
         image: AssetImage(imageSource),
@@ -643,12 +704,11 @@ TextButton getSourceButton(String url) {
       Text(
         textSource,
         textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 12.0),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(fontSize: 11.0),
       ),
     ]),
-    onPressed: () {
-      launchURL(url);
-    },
   );
 }
 

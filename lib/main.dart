@@ -248,6 +248,17 @@ class _AppState extends State<App> {
                 goToDetail(this, context, Localizations.localeOf(context), name, widget.filter);
               }
             });
+          case notificationAttributeActionBrowse:
+            String uri = message.data[notificationAttributeUri];
+            return notificationPopup(
+              _navigatorKey.currentContext!,
+              notificationTitle(message),
+              notificationBody(message),
+            ).then((open) {
+              if (open && uri.isNotEmpty) {
+                launchURL(uri);
+              }
+            });
         }
       }
     }
@@ -323,7 +334,7 @@ class _AppState extends State<App> {
           case notificationAttributeActionBrowse:
             String uri = notificationData[notificationAttributeUri];
             if (uri.isNotEmpty) {
-              launchURLF(uri);
+              launchURL(uri);
               return null;
             }
             return null;
