@@ -78,7 +78,12 @@ android {
 
     packaging {
         jniLibs {
-            useLegacyPackaging = false
+            // AGP 9 defaults this to false (extractNativeLibs=false). Play then
+            // keeps libflutter.so in ABI config splits; ReLinker 1.4.5 cannot
+            // find it and crashes with MissingLibraryException (only found: []).
+            // ELF LOAD alignment is already 16 KB, so extracting at install is
+            // 16 KB-compliant.
+            useLegacyPackaging = true
         }
     }
 
