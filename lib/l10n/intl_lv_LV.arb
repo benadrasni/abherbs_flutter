@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Pieskaroties pogai Verificēt tālruņa numuru, var tikt nosūtīta īsziņa. Var tikt piemērota maksa par ziņojumiem un datu pārsūtīšanu.",
   "auth_enter_confirmation_code": "Ievadiet 6 ciparu kodu, ko nosūtījām ",
   "auth_resend_code": "Vēlreiz nosūtīt kodu",
+  "auth_delete_account": "Dzēst kontu",
+  "auth_delete_account_message": "Tas neatgriezeniski izdzēš kontu, novērojumus, fotoattēlus un profila datus. Pirkumi paliek pie šī Apple ID, un tos var atjaunot vēlāk. Atceliet fotoattēlu glabāšanas abonementu iOS iestatījumos, ja vairs nevēlaties maksāt. Šo darbību nevar atsaukt.",
+  "auth_delete_account_confirm": "Dzēst",
+  "auth_delete_account_success": "Konts ir dzēsts",
+  "auth_delete_account_failed": "Kontu neizdevās dzēst. Pārbaudiet savienojumu un mēģiniet vēlreiz.",
+  "auth_delete_account_reauth": "Pierakstieties vēlreiz, lai dzēstu kontu.",
 
   "rate_question": "Vai šī app noderīga?",
   "rate_text": "Šī pieteikuma autors ir motivēts ar pozitīvu lietotāju atbildi. Lūdzu, sūtiet viņam dažas zvaigznes, izmantojot lietojumprogrammu veikalu.",

@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Se tocchi “Verifica numero di telefono”, riceverai un SMS. Potrebbero essere applicate le tariffe per l'invio dei messaggi e il traffico dati.",
   "auth_enter_confirmation_code": "Inserisci il codice a 6 cifre che abbiamo inviato a",
   "auth_resend_code": "Invia di nuovo il codice",
+  "auth_delete_account": "Elimina account",
+  "auth_delete_account_message": "Questo elimina in modo permanente l'account, le osservazioni, le foto e i dati del profilo. Gli acquisti restano sull'Apple ID e possono essere ripristinati in seguito. Annulla l'abbonamento per l'archiviazione delle foto in Impostazioni iOS se non vuoi più essere addebitato. L'operazione non può essere annullata.",
+  "auth_delete_account_confirm": "Elimina",
+  "auth_delete_account_success": "Account eliminato",
+  "auth_delete_account_failed": "Impossibile eliminare l'account. Controlla la connessione e riprova.",
+  "auth_delete_account_reauth": "Accedi di nuovo per eliminare l'account.",
 
   "rate_question": "Trovi utile questa applicazione?",
   "rate_text": "L'autore di questa applicazione è entusiasta di ricevere feedback da parte degli utenti. Ti preghiamo di inviargli qualche stella (alpina) nello store.",

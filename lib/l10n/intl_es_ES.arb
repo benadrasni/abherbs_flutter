@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Al tocar \"Verificar número de teléfono\", podría enviarse un SMS. Es posible que se apliquen cargos de mensajería y de uso de datos.",
   "auth_enter_confirmation_code": "Introduce el código de seis dígitos que hemos enviado a ",
   "auth_resend_code": "Reenviar código",
+  "auth_delete_account": "Eliminar cuenta",
+  "auth_delete_account_message": "Esto elimina de forma permanente tu cuenta, observaciones, fotos y datos de perfil. Las compras permanecen en este Apple ID y se pueden restaurar más tarde. Cancela la suscripción de almacenamiento de fotos en Ajustes de iOS si ya no quieres que te cobren. Esta acción no se puede deshacer.",
+  "auth_delete_account_confirm": "Eliminar",
+  "auth_delete_account_success": "Cuenta eliminada",
+  "auth_delete_account_failed": "No se pudo eliminar la cuenta. Comprueba la conexión e inténtalo de nuevo.",
+  "auth_delete_account_reauth": "Inicia sesión de nuevo para eliminar tu cuenta.",
 
   "rate_question": "¿Es útil esta aplicación?",
   "rate_never": "Nunca",

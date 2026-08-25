@@ -119,6 +119,12 @@
   "auth_sms_terms_of_service": "Se você tocar em “Confirmar número de telefone”, um SMS poderá ser enviado e tarifas de mensagens e de dados serão cobradas.",
   "auth_enter_confirmation_code": "Insira o código de 6 dígitos enviado para ",
   "auth_resend_code": "Reenviar código",
+  "auth_delete_account": "Eliminar conta",
+  "auth_delete_account_message": "Isto elimina definitivamente a conta, as observações, as fotografias e os dados de perfil. As compras permanecem neste Apple ID e podem ser restauradas mais tarde. Cancele a subscrição de armazenamento de fotografias nas Definições do iOS se já não quiser ser cobrado. Esta ação não pode ser anulada.",
+  "auth_delete_account_confirm": "Eliminar",
+  "auth_delete_account_success": "Conta eliminada",
+  "auth_delete_account_failed": "Não foi possível eliminar a conta. Verifique a ligação e tente novamente.",
+  "auth_delete_account_reauth": "Faça login novamente para eliminar a conta.",
 
   "rate_question": "Esta aplicação é útil?",
   "rate_text": "Autor desta aplicação é motivada pela resposta positiva dos usuários. Por favor, envie-lhe algumas estrelas através da loja de aplicativos.",

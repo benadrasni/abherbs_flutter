@@ -241,7 +241,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
               color: Colors.grey,
             )),
         validator: (value) =>
-        value == null || value.isEmpty || !RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$").hasMatch(value) ? S.of(context).auth_invalid_email_address : "",
+        value == null || value.isEmpty || !RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$").hasMatch(value) ? S.of(context).auth_invalid_email_address : null,
         onSaved: (value) => _email = value,
       ),
     );
@@ -260,7 +260,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
               Icons.lock,
               color: Colors.grey,
             )),
-        validator: (value) => value == null || value.isEmpty ? S.of(context).auth_empty_password : "",
+        validator: (value) => value == null || value.isEmpty ? S.of(context).auth_empty_password : null,
         onSaved: (value) => _password = value,
       ),
     );

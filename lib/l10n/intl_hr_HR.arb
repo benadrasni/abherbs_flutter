@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Dodirivanje gumba “Potvrda telefonskog broja” može dovesti do slanja SMS poruke. Mogu se primijeniti naknade za slanje poruka i podatkovni promet.",
   "auth_enter_confirmation_code": "Unesite 6-znamenkasti kôd koji smo poslali na broj ",
   "auth_resend_code": "Ponovo pošalji kôd",
+  "auth_delete_account": "Izbriši račun",
+  "auth_delete_account_message": "Time se trajno brišu račun, opažanja, fotografije i podaci profila. Kupnje ostaju na ovom Apple ID-u i kasnije se mogu vratiti. Otkažite pretplatu za pohranu fotografija u iOS postavkama ako više ne želite biti naplaćivani. Ovo se ne može poništiti.",
+  "auth_delete_account_confirm": "Izbriši",
+  "auth_delete_account_success": "Račun je izbrisan",
+  "auth_delete_account_failed": "Račun nije moguće izbrisati. Provjerite vezu i pokušajte ponovno.",
+  "auth_delete_account_reauth": "Prijavite se ponovno da biste izbrisali račun.",
 
   "rate_question": "Je li ova aplikacija korisna?",
   "rate_text": "Autor ove aplikacije motiviran je pozitivnim odgovorom korisnika. Molim vas, pošaljite mu neke zvijezde kroz prodavaonicu aplikacija.",

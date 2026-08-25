@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "通過點擊“驗證電話號碼”，可以發送短信。 信息和數據速率可能適用。",
   "auth_enter_confirmation_code": "輸入我們發送給的6位代碼 ",
   "auth_resend_code": "重新發送驗證碼",
+  "auth_delete_account": "刪除帳號",
+  "auth_delete_account_message": "這會永久刪除你的帳號、觀察記錄、照片和個人資料。購買項目會留在這個 Apple ID，之後可以恢復。若不想再被收費，請在 iOS 設定中取消照片儲存訂閱。此操作無法復原。",
+  "auth_delete_account_confirm": "刪除",
+  "auth_delete_account_success": "已刪除帳號",
+  "auth_delete_account_failed": "無法刪除帳號。請檢查連線後再試一次。",
+  "auth_delete_account_reauth": "請重新登入以刪除帳號。",
 
   "rate_question": "該應用程序對您有幫助嗎？",
   "rate_text": "用戶的積極響應推動了該應用程序的作者。 請通過應用商店向他發送一些花。",

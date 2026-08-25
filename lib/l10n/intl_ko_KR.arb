@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "'전화 번호 확인'을 누르면 SMS가 전송 될 수 있습니다. 메시지 및 데이터 요금이 적용될 수 있습니다.",
   "auth_enter_confirmation_code": "우리가 보낸 6 자리 코드를 입력하십시오 ",
   "auth_resend_code": "코드 재전송",
+  "auth_delete_account": "계정 삭제",
+  "auth_delete_account_message": "계정, 관찰 기록, 사진, 프로필 데이터가 영구적으로 삭제됩니다. 구입 항목은 이 Apple ID에 남아 있으며 나중에 복원할 수 있습니다. 더 이상 요금이 청구되지 않게 하려면 iOS 설정에서 사진 저장 구독을 취소하세요. 이 작업은 되돌릴 수 없습니다.",
+  "auth_delete_account_confirm": "삭제",
+  "auth_delete_account_success": "계정이 삭제됨",
+  "auth_delete_account_failed": "계정을 삭제할 수 없습니다. 연결을 확인하고 다시 시도하세요.",
+  "auth_delete_account_reauth": "계정을 삭제하려면 다시 로그인하세요.",
 
   "rate_question": "이 앱이 도움이 되셨습니까?",
   "rate_text": "이 응용 프로그램의 작성자는 사용자의 긍정적 인 반응에 힘입습니다. 응용 프로그램 저장소를 통해 스타 플라워를 보내주십시오.",

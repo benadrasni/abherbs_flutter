@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Če se dotaknete možnosti »Preverjanje telefonske številke«, bo morda poslano sporočilo SMS. Pošiljanje sporočila in prenos podatkov boste morda morali plačati.",
   "auth_enter_confirmation_code": "Vnesite 6-mestno kodo, ki smo jo poslali na številko ",
   "auth_resend_code": "Ponovno pošlji kodo",
+  "auth_delete_account": "Izbriši račun",
+  "auth_delete_account_message": "S tem trajno izbrišete račun, opazovanja, fotografije in podatke profila. Nakupi ostanejo na tem Apple ID-ju in jih lahko pozneje obnovite. Naročnino za shranjevanje fotografij prekličite v nastavitvah iOS, če ne želite več plačevati. Tega ni mogoče razveljaviti.",
+  "auth_delete_account_confirm": "Izbriši",
+  "auth_delete_account_success": "Račun je izbrisan",
+  "auth_delete_account_failed": "Računa ni bilo mogoče izbrisati. Preverite povezavo in poskusite znova.",
+  "auth_delete_account_reauth": "Prijavite se znova, da izbrišete račun.",
 
   "rate_question": "Je ta aplikacija v pomoč?",
   "rate_text": "Avtor te aplikacije je motiviran s pozitivnim odzivom uporabnikov. Prosim, pošljite mu nekaj zvezd skozi trgovino z aplikacijami.",

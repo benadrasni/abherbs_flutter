@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "[電話番号を確認] をタップすると、SMS が送信されます。データ通信料がかかることがあります。",
   "auth_enter_confirmation_code": "送信された 6 桁のコードを入力してください ",
   "auth_resend_code": "コードを再送信",
+  "auth_delete_account": "アカウントを削除",
+  "auth_delete_account_message": "アカウント、観察記録、写真、プロフィールデータが完全に削除されます。購入は Apple ID に残り、後で復元できます。写真保存のサブスクリプションを解約する場合は iOS の設定から行ってください。この操作は取り消せません。",
+  "auth_delete_account_confirm": "削除",
+  "auth_delete_account_success": "アカウントを削除しました",
+  "auth_delete_account_failed": "アカウントを削除できませんでした。接続を確認してもう一度お試しください。",
+  "auth_delete_account_reauth": "アカウントを削除するには、もう一度サインインしてください。",
 
   "rate_question": "このアプリケーションは役に立ちましたか？",
   "rate_text": "このアプリケーションの作者は、ユーザーからの良い反応によって動機づけられています。 アプリケーションストアを通じて彼にいくつかの星を送ってください。",

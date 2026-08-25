@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Po klepnutí na možnost „Ověřit telefonní číslo” může být odeslána SMS. Mohou být účtovány poplatky za zprávy a data.",
   "auth_enter_confirmation_code": "Zadejte šestimístný kód, který jsme vám zaslali na ",
   "auth_resend_code": "Přeposlat kód",
+  "auth_delete_account": "Smazat účet",
+  "auth_delete_account_message": "Tímto natrvalo smažete účet, pozorování, fotografie a údaje profilu. Nákupy zůstanou na Apple ID a později je můžete obnovit. Předplatné ukládání fotek zrušte v nastavení iOS, pokud už nechcete platit. Tuto akci nelze vrátit zpět.",
+  "auth_delete_account_confirm": "Smazat",
+  "auth_delete_account_success": "Účet byl smazán",
+  "auth_delete_account_failed": "Účet se nepodařilo smazat. Zkontrolujte připojení a zkuste to znovu.",
+  "auth_delete_account_reauth": "Pro smazání účtu se přihlaste znovu.",
 
   "rate_question": "Líbí se vám aplikace?",
   "rate_text": "Autora této aplikace motivuje pozitívny ohlas uživatelů. Pošlete mu, prosím, nejaké květiny (nejlépe hvězdníky) přes obchod s aplikacemi.",

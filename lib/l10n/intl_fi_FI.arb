@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Kun napautat „Vahvista puhelinnumero”, tekstiviesti voidaan lähettää. Datan ja viestien käyttö voi olla maksullista.",
   "auth_enter_confirmation_code": "Anna 6 merkin pituinen koodi, jonka lähetimme numeroon ",
   "auth_resend_code": "Lähetä uudelleen koodi",
+  "auth_delete_account": "Poista tili",
+  "auth_delete_account_message": "Tämä poistaa tilin, havainnot, valokuvat ja profiilitiedot pysyvästi. Ostokset jäävät tälle Apple ID:lle, ja ne voidaan palauttaa myöhemmin. Peruuta valokuvien tallennustilaus iOS-asetuksista, jos et enää halua maksaa. Tätä ei voi perua.",
+  "auth_delete_account_confirm": "Poista",
+  "auth_delete_account_success": "Tili poistettu",
+  "auth_delete_account_failed": "Tiliä ei voitu poistaa. Tarkista yhteys ja yritä uudelleen.",
+  "auth_delete_account_reauth": "Kirjaudu sisään uudelleen poistaaksesi tilin.",
 
   "rate_question": "Onko tämä sovellus hyödyllinen?",
   "rate_text": "Tämän sovelluksen laatijaa tukee käyttäjien positiivinen vastaus. Lähetä hänelle joitakin tähtiä sovellusvaraston kautta.",

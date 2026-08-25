@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Gdy klikniesz „Zweryfikuj numer telefonu”, może zostać wysłany SMS. Może to skutkować pobraniem opłaty za przesłanie wiadomości i danych.",
   "auth_enter_confirmation_code": "Wpisz sześciocyfrowy kod, który wysłaliśmy na numer ",
   "auth_resend_code": "Wyślij kod ponownie",
+  "auth_delete_account": "Usuń konto",
+  "auth_delete_account_message": "Spowoduje to trwałe usunięcie konta, obserwacji, zdjęć i danych profilu. Zakupy pozostają przy tym Apple ID i można je później przywrócić. Anuluj subskrypcję przechowywania zdjęć w ustawieniach iOS, jeśli nie chcesz już płacić. Tej czynności nie można cofnąć.",
+  "auth_delete_account_confirm": "Usuń",
+  "auth_delete_account_success": "Konto usunięte",
+  "auth_delete_account_failed": "Nie udało się usunąć konta. Sprawdź połączenie i spróbuj ponownie.",
+  "auth_delete_account_reauth": "Zaloguj się ponownie, aby usunąć konto.",
 
   "rate_question": "Czy uważasz, że aplikacja jest pomocna?",
   "rate_text": "Wyrażając swoją opinię, dajesz Autorowi aplikacji chęć i motywację do jej dalszego rozwijania. Napisz proszę kilka miłych słów w Sklepie Play.",

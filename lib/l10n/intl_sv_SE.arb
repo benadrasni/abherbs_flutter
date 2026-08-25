@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Genom att trycka på „Verifiera telefonnummer“ skickas ett sms. Meddelande- och dataavgifter kan tillkomma.",
   "auth_enter_confirmation_code": "Ange den sexsiffriga koden vi skickade till ",
   "auth_resend_code": "Skicka koden igen",
+  "auth_delete_account": "Radera konto",
+  "auth_delete_account_message": "Detta raderar ditt konto, dina observationer, foton och profildata permanent. Köp finns kvar på detta Apple-ID och kan återställas senare. Avsluta en prenumeration på fotolagring i iOS-inställningar om du inte längre vill bli debiterad. Detta går inte att ångra.",
+  "auth_delete_account_confirm": "Radera",
+  "auth_delete_account_success": "Kontot raderades",
+  "auth_delete_account_failed": "Det gick inte att radera kontot. Kontrollera anslutningen och försök igen.",
+  "auth_delete_account_reauth": "Logga in igen för att radera ditt konto.",
 
   "rate_question": "Är det här programmet användbart?",
   "rate_text": "Författaren till denna ansökan motiveras av positivt svar från användarna. Vänligen skicka honom några stjärnor genom applikationsbutiken.",

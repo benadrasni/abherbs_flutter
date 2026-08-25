@@ -6,5 +6,12 @@
 
   "favorite_title": "Favourite flowers",
   "favorite_empty": "There is no favourite flowers yet.",
-  "favorite_no_login": "List of favourite flowers is available only for logged users. Please log in."
+  "favorite_no_login": "List of favourite flowers is available only for logged users. Please log in.",
+
+  "auth_delete_account": "Delete account",
+  "auth_delete_account_message": "This permanently deletes your account, observations, photos, and profile data. Purchases stay on this Apple ID and can be restored later. Cancel a photo-storage subscription in iOS Settings if you no longer want to be billed. This cannot be undone.",
+  "auth_delete_account_confirm": "Delete",
+  "auth_delete_account_success": "Account deleted",
+  "auth_delete_account_failed": "Could not delete the account. Check your connection and try again.",
+  "auth_delete_account_reauth": "Sign in again to delete your account."
 }

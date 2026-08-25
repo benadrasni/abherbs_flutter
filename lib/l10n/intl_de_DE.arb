@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Wenn Sie auf “Telefonnummer bestätigen” tippen, erhalten Sie eine SMS. Für die Datenübertragung können Gebühren anfallen.",
   "auth_enter_confirmation_code": "Geben Sie den 6-stelligen Code ein, der gesendet wurde an ",
   "auth_resend_code": "Code erneut senden",
+  "auth_delete_account": "Konto löschen",
+  "auth_delete_account_message": "Damit werden dein Konto, Beobachtungen, Fotos und Profildaten dauerhaft gelöscht. Käufe bleiben bei dieser Apple-ID und können später wiederhergestellt werden. Ein Abo für die Fotospeicherung kündigst du in den iOS-Einstellungen, wenn du nicht weiter zahlen willst. Das kann nicht rückgängig gemacht werden.",
+  "auth_delete_account_confirm": "Löschen",
+  "auth_delete_account_success": "Konto gelöscht",
+  "auth_delete_account_failed": "Das Konto konnte nicht gelöscht werden. Prüfe die Verbindung und versuche es erneut.",
+  "auth_delete_account_reauth": "Melde dich erneut an, um dein Konto zu löschen.",
 
   "rate_question": "Ist diese Anwendung hilfreich?",
   "rate_never": "Niemals ",

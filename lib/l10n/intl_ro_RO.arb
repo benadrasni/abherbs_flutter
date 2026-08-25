@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Dacă atingeți „Confirmați numărul de telefon”, poate fi trimis un SMS. Se pot aplica tarife pentru mesaje și date.",
   "auth_enter_confirmation_code": "Introduceți codul din 6 cifre pe care l-am trimis la ",
   "auth_resend_code": "Retrimiteți codul",
+  "auth_delete_account": "Șterge contul",
+  "auth_delete_account_message": "Aceasta șterge definitiv contul, observațiile, fotografiile și datele de profil. Achizițiile rămân pe acest Apple ID și pot fi restaurate ulterior. Anulați abonamentul de stocare a fotografiilor din Setări iOS dacă nu mai doriți să fiți facturat. Această acțiune nu poate fi anulată.",
+  "auth_delete_account_confirm": "Șterge",
+  "auth_delete_account_success": "Cont șters",
+  "auth_delete_account_failed": "Contul nu a putut fi șters. Verificați conexiunea și încercați din nou.",
+  "auth_delete_account_reauth": "Conectați-vă din nou pentru a șterge contul.",
 
   "rate_question": "Este această aplicație utilă?",
   "rate_text": "Autor al acestei aplicații este motivată de răspunsul pozitiv din partea utilizatorilor. Trimiteți-i câteva stele prin magazinul de aplicații.",

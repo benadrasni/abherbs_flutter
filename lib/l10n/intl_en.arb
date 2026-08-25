@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "By tapping \"Verify Phone Number\", an SMS may be sent. Message & data rates may apply.",
   "auth_enter_confirmation_code": "Enter the 6-digit code we sent to ",
   "auth_resend_code": "Resend Code",
+  "auth_delete_account": "Delete account",
+  "auth_delete_account_message": "This permanently deletes your account, observations, photos, and profile data. Purchases stay on this Apple ID and can be restored later. Cancel a photo-storage subscription in iOS Settings if you no longer want to be billed. This cannot be undone.",
+  "auth_delete_account_confirm": "Delete",
+  "auth_delete_account_success": "Account deleted",
+  "auth_delete_account_failed": "Could not delete the account. Check your connection and try again.",
+  "auth_delete_account_reauth": "Sign in again to delete your account.",
 
   "rate_question": "Is this app helpful?",
   "rate_text": "Author of this application is fueled by positive response from the users. Please send him some starflowers through application store.",

@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Ha a „Telefonszám általi azonosítás” lehetőséget választja, a rendszer SMS-t küldhet Önnek. A szolgáltató ezért üzenet- és adatforgalmi díjat számíthat fel.",
   "auth_enter_confirmation_code": "Adja meg a telefonszámára elküldött 6 számjegyű kódot.",
   "auth_resend_code": "Kód újraküldése",
+  "auth_delete_account": "Fiók törlése",
+  "auth_delete_account_message": "Ezzel véglegesen törlődik a fiók, a megfigyelések, a fényképek és a profiladatok. A vásárlások ennél az Apple ID-nál maradnak, és később visszaállíthatók. Mondja le a fényképtárolási előfizetést az iOS Beállításaiban, ha már nem szeretne fizetni. Ezt nem lehet visszavonni.",
+  "auth_delete_account_confirm": "Törlés",
+  "auth_delete_account_success": "A fiók törölve",
+  "auth_delete_account_failed": "A fiókot nem sikerült törölni. Ellenőrizze a kapcsolatot, és próbálja újra.",
+  "auth_delete_account_reauth": "Jelentkezzen be újra a fiók törléséhez.",
 
   "rate_question": "Hasznos az alkalmazás?",
   "rate_text": "A szerző a pozitív visszajelzésekből dolgozik. A alkalmazás tárolón keresztül csillagzással értékelheti/támogathatja a munkáját.",

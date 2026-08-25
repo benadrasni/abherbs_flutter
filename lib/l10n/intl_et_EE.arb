@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Puudutades \"Kinnita telefoninumber\", võidakse saata SMS. Võib kehtida sõnumi ja andmeedastuskiirus.",
   "auth_enter_confirmation_code": "Sisestage 6-kohaline kood, mille me saatisime aadressile ",
   "auth_resend_code": "Saada kood uuesti",
+  "auth_delete_account": "Kustuta konto",
+  "auth_delete_account_message": "See kustutab konto, vaatlused, fotod ja profiiliandmed jäädavalt. Ostud jäävad sellele Apple ID-le ja neid saab hiljem taastada. Tühista fotode salvestamise tellimus iOS-i sätetes, kui sa ei taha enam maksta. Seda ei saa tagasi võtta.",
+  "auth_delete_account_confirm": "Kustuta",
+  "auth_delete_account_success": "Konto kustutatud",
+  "auth_delete_account_failed": "Kontot ei õnnestunud kustutada. Kontrolli ühendust ja proovi uuesti.",
+  "auth_delete_account_reauth": "Logi sisse uuesti, et konto kustutada.",
 
   "rate_question": "See app kasulik?",
   "rate_text": "Selle rakenduse autorit toetab kasutajate positiivne vastus. Palun saatke talle mõned tähed rakenduste poe kaudu.",

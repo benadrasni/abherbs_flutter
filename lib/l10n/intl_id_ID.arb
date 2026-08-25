@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Dengan mengetuk \"Verifikasi Nomor Telepon\", SMS dapat dikirim. Tarif pesan & data mungkin berlaku.",
   "auth_enter_confirmation_code": "Masukkan kode 6 digit yang kami kirim ke ",
   "auth_resend_code": "Kirim ulang kode",
+  "auth_delete_account": "Hapus akun",
+  "auth_delete_account_message": "Ini menghapus akun, pengamatan, foto, dan data profil secara permanen. Pembelian tetap di Apple ID ini dan dapat dipulihkan nanti. Batalkan langganan penyimpanan foto di Pengaturan iOS jika Anda tidak ingin ditagih lagi. Tindakan ini tidak dapat dibatalkan.",
+  "auth_delete_account_confirm": "Hapus",
+  "auth_delete_account_success": "Akun dihapus",
+  "auth_delete_account_failed": "Akun tidak dapat dihapus. Periksa koneksi Anda dan coba lagi.",
+  "auth_delete_account_reauth": "Masuk lagi untuk menghapus akun.",
 
   "rate_question": "Apakah aplikasi ini bermanfaat?",
   "rate_text": "Penulis aplikasi ini dimotivasi oleh respon positif dari pengguna. Tolong kirimkan dia beberapa bintang melalui toko aplikasi.",

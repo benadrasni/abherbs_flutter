@@ -11,6 +11,8 @@ import 'package:abherbs_flutter/settings/setting_my_region.dart';
 import 'package:abherbs_flutter/settings/setting_offline.dart';
 import 'package:abherbs_flutter/settings/setting_pref_language.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
+import 'package:abherbs_flutter/signin/account_deletion.dart';
+import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -429,6 +431,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
             );
           }),
     ));
+
+    if (Auth.appUser != null) {
+      widgets.add(ListTile(
+        title: Text(
+          S.of(context).auth_delete_account,
+          style: titleTextStyle.copyWith(color: Colors.red),
+        ),
+        onTap: () async {
+          final result = await confirmAndDeleteAccount(context);
+          if (!context.mounted) {
+            return;
+          }
+          showDeleteAccountResult(context, result);
+          if (result == DeleteAccountResult.success) {
+            Navigator.of(context).pop();
+          }
+        },
+      ));
+    }
 
     return Scaffold(
       appBar: AppBar(

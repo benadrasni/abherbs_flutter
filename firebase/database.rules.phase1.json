@@ -86,7 +86,7 @@
           "list": {
             ".indexOn": "status",
             "$id": {
-              ".write": "auth != null && $id.beginsWith(auth.uid + '_') && (!newData.exists() || (newData.child('id').val() == $id && newData.child('status').val() == 'review')) && (!data.exists() || data.child('status').val() == 'review')"
+              ".write": "auth != null && $id.beginsWith(auth.uid + '_') && (!newData.exists() || (newData.child('id').val() == $id && newData.child('status').val() == 'review' && (!data.exists() || data.child('status').val() == 'review')))"
             }
           }
         },
@@ -94,7 +94,7 @@
           "$plant": {
             "list": {
               "$id": {
-                ".write": "auth != null && $id.beginsWith(auth.uid + '_') && (!newData.exists() || (newData.child('id').val() == $id && newData.child('status').val() == 'review')) && (!data.exists() || data.child('status').val() == 'review')"
+                ".write": "auth != null && $id.beginsWith(auth.uid + '_') && (!newData.exists() || (newData.child('id').val() == $id && newData.child('status').val() == 'review' && (!data.exists() || data.child('status').val() == 'review')))"
               }
             }
           }
@@ -122,6 +122,7 @@
     "users": {
       "$uid": {
         ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid && !newData.exists()",
         "token": {
           ".write": "auth != null && auth.uid == $uid",
           ".validate": "newData.isString() && newData.val().length <= 4096"

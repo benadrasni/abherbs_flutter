@@ -121,6 +121,12 @@
   "auth_sms_terms_of_service": "Als u op “Telefoonnummer verifiëren” tikt, ontvangt u mogelijk een sms. Er kunnen sms- en datakosten in rekening worden gebracht.",
   "auth_enter_confirmation_code": "Voer de zescijferige code in die we hebben verzonden naar ",
   "auth_resend_code": "Code opnieuw verzenden",
+  "auth_delete_account": "Account verwijderen",
+  "auth_delete_account_message": "Dit verwijdert je account, waarnemingen, foto's en profielgegevens definitief. Aankopen blijven op deze Apple ID en kunnen later worden hersteld. Zeg een abonnement voor foto-opslag op in de iOS-instellingen als je niet meer wilt betalen. Dit kan niet ongedaan worden gemaakt.",
+  "auth_delete_account_confirm": "Verwijderen",
+  "auth_delete_account_success": "Account verwijderd",
+  "auth_delete_account_failed": "Het account kon niet worden verwijderd. Controleer je verbinding en probeer het opnieuw.",
+  "auth_delete_account_reauth": "Log opnieuw in om je account te verwijderen.",
 
   "rate_question": "Is deze applicatie handig?",
   "rate_text": "Auteur van deze applicatie wordt gemotiveerd door positieve reactie van de gebruikers. Stuur hem alsjeblieft enkele sterren via de applicatiewinkel.",

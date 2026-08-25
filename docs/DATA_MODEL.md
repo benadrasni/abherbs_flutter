@@ -12,11 +12,11 @@ Most catalog trees are world-readable (the website fetches them with unauthentic
 | Staging indexes (`*_new` except volunteer queues) | read | read |
 | `translations_new/{lang}/{plant}` | read; write one plant/field (8k cap). Root wipe denied. | same |
 | `translations_app_new/{app}/{key}` | same pattern as `translations_new` | same |
-| `users/{uid}` | denied | owner read. Client may write `token`, `favorites`, `purchases`, `credits` (0–10000). Not `old version` or `lifetime subscription`. |
+| `users/{uid}` | denied | owner read. Client may write `token`, `favorites`, `purchases`, `credits` (0–10000). Owner may delete the whole node. Not `old version` or `lifetime subscription` except via that delete. |
 | `users_photo_search/{lang}/{uid}` | denied | owner read/write |
 | `credits/{uid}` | denied | owner read/write (string log, 64 chars) |
 | `observations/by users/{uid}` | denied | owner read/write |
-| `observations/public` | read | create/update own id (`{uid}_…`) only while `status == review`. Cannot change or delete a row already `public`. `stats` is Admin-only. |
+| `observations/public` | read | create/update own id (`{uid}_…`) only while `status == review`. Owner may delete own id in any status. `stats` is Admin-only. |
 | `observations/logs/{uid}` | denied | owner read/write |
 
 Admin SDK bypasses these rules (ingest, observation reviewer).

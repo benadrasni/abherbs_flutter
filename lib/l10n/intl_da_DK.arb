@@ -119,6 +119,12 @@
   "auth_sms_terms_of_service": "Når du trykker på “Bekræft dit telefonnummer”, sendes der måske en sms. Der opkræves muligvis gebyrer for beskeder og data.",
   "auth_enter_confirmation_code": "Angiv den 6-cifrede kode, vi sendte til ",
   "auth_resend_code": "Send koden igen",
+  "auth_delete_account": "Slet konto",
+  "auth_delete_account_message": "Dette sletter din konto, observationer, fotos og profildata permanent. Køb bliver på dette Apple-id og kan gendannes senere. Opsig et abonnement på fotolagring i iOS-indstillinger, hvis du ikke længere vil betale. Det kan ikke fortrydes.",
+  "auth_delete_account_confirm": "Slet",
+  "auth_delete_account_success": "Konto slettet",
+  "auth_delete_account_failed": "Kontoen kunne ikke slettes. Tjek din forbindelse, og prøv igen.",
+  "auth_delete_account_reauth": "Log ind igen for at slette din konto.",
 
   "rate_question": "Er denne app hjælpsom?",
   "rate_text": "Forfatteren af denne ansøgning er drevet af et positivt svar fra brugerne. Venligst send ham nogle stjerner gennem applikationsbutikken.",
