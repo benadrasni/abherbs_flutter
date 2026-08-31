@@ -30,7 +30,7 @@ Git remote: `https://github.com/benadrasni/abherbs_flutter`.
 
 ## Conventions
 
-- Flutter 3.47 / Dart 3.13. Match the existing style: `StatefulWidget`, Firebase `once()` / `keepSynced`, no extra state library. iOS uses Swift Package Manager (`enable-swift-package-manager: true`). Maps is `google_maps_flutter_ios_sdk10` (Maps SDK 10.x via SPM), not the default CocoaPods `google_maps_flutter_ios`.
+- Flutter 3.47.2 / Dart 3.13.2. Match the existing style: `StatefulWidget`, Firebase `once()` / `keepSynced`, no extra state library. iOS uses Swift Package Manager (`enable-swift-package-manager: true`). Maps is `google_maps_flutter_ios_sdk10` (Maps SDK 10.x via SPM), not the default CocoaPods `google_maps_flutter_ios`.
 - iOS uses the UIScene lifecycle (`FlutterSceneDelegate` in `Info.plist`; plugin registration in `AppDelegate.didInitializeImplicitFlutterEngine`).
 - Version is `pubspec.yaml` `version: X.Y.Z+XYZ` (build number = version without dots). Bump both together for a store build.
 - UI strings: edit `lib/l10n/intl_*.arb`, then `flutter pub run intl_utils:generate`.

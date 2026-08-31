@@ -105,11 +105,24 @@ flutter {
     source '../..'
 }
 
+// Firebase / Play Ads may request a newer work-runtime. Newer than 2.9.1
+// reintroduces JobScheduler.forNamespace() and the OEM startup crash.
+configurations.configureEach {
+    resolutionStrategy {
+        force 'androidx.work:work-runtime:2.9.1'
+        force 'androidx.work:work-runtime-ktx:2.9.1'
+    }
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:2.4.0"
-    implementation 'com.google.ads.mediation:facebook:6.21.0.4'
-    // play-services-ads-api still asks for WorkManager 2.7; that crashes on 16 KB page-size devices.
-    implementation 'androidx.work:work-runtime:2.10.2'
+    implementation 'com.google.ads.mediation:facebook:6.22.0.0'
+    // AdMob still asks for WorkManager 2.7 (Room 2.2 / sqlite 2.1 crash on 16 KB
+    // devices). 2.10+ calls JobScheduler.forNamespace() from InitializationProvider
+    // whenever SDK_INT >= 34. That method is missing on some OEM Android 14
+    // frameworks and kills the process before Application.onCreate. 2.9.1 is the
+    // last release without namespaces and still ships Room 2.5 / sqlite 2.3.
+    implementation 'androidx.work:work-runtime:2.9.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

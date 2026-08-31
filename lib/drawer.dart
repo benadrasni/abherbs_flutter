@@ -36,10 +36,8 @@ class _AppDrawerState extends State<AppDrawer> {
     Locale myLocale = Localizations.localeOf(context);
     var listItems = <Widget>[];
 
-    listItems.add(Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-      ),
+    listItems.add(Material(
+      color: Theme.of(context).primaryColor,
       child: Column(children: [
         Container(
           padding: EdgeInsets.only(left: 10.0, right: 10.0),

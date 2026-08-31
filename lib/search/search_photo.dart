@@ -367,8 +367,8 @@ class _SearchPhotoState extends State<SearchPhoto> {
                           children: results.data!.map((result) {
                             if (result.path != null && result.path!.isNotEmpty) {
                               var title = result.labelInLanguage!.isNotEmpty ? result.labelInLanguage! : result.labelLatin!;
-                              return Container(
-                                  decoration: BoxDecoration(color: Colors.lightBlueAccent),
+                              return Material(
+                                  color: Colors.lightBlueAccent,
                                   child: ListTile(
                                     leading: CircleAvatar(
                                       child: Text(
