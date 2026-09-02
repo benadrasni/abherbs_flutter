@@ -49,13 +49,13 @@ Git remote: `https://github.com/benadrasni/abherbs_flutter`.
 - CLI: `firebase-tools` via nvm Node. Use `GOOGLE_APPLICATION_CREDENTIALS` pointing at the Admin JSON. `.firebaserc` selects `abherbs-backend`. Live rules snapshot: `firebase/database.rules.json`.
 - Do not write production RTDB/Storage unless the user asked for a data change.
 - Website Hosting deploy: `web/AGENTS.md` (only when asked).
-- Play releases are option B: build a signed AAB here; the user uploads in Play Console.
+- Play releases are option A: build a signed AAB and upload with `~/Development/Keystore/play-publisher.json` (Play Developer API). Do not ship unless asked. Details: `docs/ACCESS.md`.
 - App Store Connect key `4AKYKM6RAW` may be used (Admin-level). Live iOS is 8.0.6. Do not upload a binary unless asked.
 
 ## Stores
 
 - Android applicationId / iOS bundle id: `sk.ab.herbs`.
-- Play: 1M+ installs. Local version may be ahead of the store.
+- Play: 1M+ installs. Live production **8.2.1 (821)** as of 2026-09-01.
 - iOS metadata and an App Store Connect API key live under gitignored `ios/fastlane/`.
 
 ## Tests
