@@ -168,7 +168,9 @@ Client: `lib/filter/filter_utils.dart`.
 | `names` | Extra sourced common names |
 | `wikipedia` | Language Wikipedia URL |
 | `description`, `flower`, `inflorescence`, `fruit`, `leaf`, `stem`, `habitat` | Required for "fully translated" |
-| `toxicity`, `herbalism`, `trivia` | Optional |
+| `toxicity` | Optional poison notes (contact rash, ingestion). Distinct from `plants_v2.toxicityClass`. |
+| `herbalism` | Optional culinary and traditional-use paragraph. UI heading is **Uses**, with a “not medical advice” disclaimer. `/update-plant` leaves live English unchanged (same as `trivia`). |
+| `trivia` | Optional. `/update-plant` leaves live English unchanged. |
 | `sourceUrls` | Localized sources |
 
 Wikidata ingest creates a huge set of language codes (Wikipedia sitelinks). The app only *requests* the device / preferred language, with GT fallback.

@@ -399,8 +399,15 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         S.of(context).plant_herbalism,
                         style: _defaultTextStyle,
                       ),
+                      subtitle: Text(
+                        S.of(context).plant_herbalism_disclaimer,
+                        style: TextStyle(
+                          fontSize: _fontSize * 0.75,
+                          color: Colors.black54,
+                        ),
+                      ),
                       leading: Image(
-                        image: AssetImage('res/images/ic_local_pharmacy_grey_24dp.png'),
+                        image: AssetImage('res/images/ic_uses_grey_24dp.png'),
                         width: 24.0,
                         height: 24.0,
                       ),
@@ -410,7 +417,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_local_pharmacy_grey_24dp.png', S.of(context).plant_herbalism, "herbalism", body(t.herbalism), _fontSize),
+                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_uses_grey_24dp.png', S.of(context).plant_herbalism, "herbalism", body(t.herbalism), _fontSize),
                                 settings: RouteSettings(name: 'PlantDetailEdit')
                               )).then((value) {
                             if (value != null && value) {

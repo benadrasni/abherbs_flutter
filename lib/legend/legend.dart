@@ -142,7 +142,7 @@ class LegendScreen extends StatelessWidget {
             style: legendTextStyle,
           ),
           leading: Container( padding: EdgeInsets.all(13.0), child: Image(
-            image: AssetImage('res/images/ic_local_pharmacy_grey_24dp.png'),
+            image: AssetImage('res/images/ic_uses_grey_24dp.png'),
             width: 24.0,
             height: 24.0,
           ),),

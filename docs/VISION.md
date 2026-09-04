@@ -10,7 +10,7 @@ The shipping product is already a real step toward that: a multilingual flower i
 
 - **1,413** curated flowering plants, each with photos, filter attributes, and a species page.
 - Identification by **four human-visible traits**: color, habitat, petal type, TDWG level-2 region.
-- Species pages with height, flowering months, toxicity class, APG IV path, IPNI / GBIF / USDA / Wikidata links, and sectioned text (description, flower, inflorescence, fruit, leaf, stem, habitat, toxicity, herbalism, trivia).
+- Species pages with height, flowering months, toxicity class, APG IV path, IPNI / GBIF / USDA / Wikidata links, and sectioned text (description, flower, inflorescence, fruit, leaf, stem, habitat, toxicity, uses/`herbalism`, trivia).
 - **35** app UI languages; plant common names scraped from Wikidata into hundreds of language codes; missing body text filled by Google Translate and cached under `translations/{lang}-GT`.
 - Community observations (1,509 public, last public stat date 2022) and photo search via Plant.id.
 - A volunteer translation UI on whatsthatflower.com.
