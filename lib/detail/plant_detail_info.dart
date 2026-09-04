@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/legend/flower.dart';
+import 'package:abherbs_flutter/legend/inflorescence.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -128,7 +129,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                   ListTile(
                     title: Text(
                       S.of(context).plant_inflorescence,
-                      style: _defaultTextStyle,
+                      style: _highlightTextStyle,
                     ),
                     leading: Image(
                       image: AssetImage('res/images/ic_inflorescence_grey_24dp.png'),
@@ -152,6 +153,12 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         });
                       },
                     ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => InflorescenceLegendScreen(), settings: RouteSettings(name: 'InflorescenceLegend')),
+                      );
+                    },
                   ),
                   _getRichText(body(t.inflorescence), _defaultTextStyle),
                 ]),

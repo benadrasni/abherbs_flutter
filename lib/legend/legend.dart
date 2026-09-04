@@ -2,6 +2,7 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import 'flower.dart';
+import 'inflorescence.dart';
 
 class LegendScreen extends StatelessWidget {
 
@@ -50,14 +51,19 @@ class LegendScreen extends StatelessWidget {
         ListTile(
           title: Text(
             S.of(context).plant_inflorescence,
-            style: legendTextStyle,
+            style: _highlightLegendTextStyle,
           ),
           leading: Container( padding: EdgeInsets.all(13.0), child: Image(
             image: AssetImage('res/images/ic_inflorescence_grey_24dp.png'),
             width: 24.0,
             height: 24.0,
           ),),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => InflorescenceLegendScreen(), settings: RouteSettings(name: 'InflorescenceLegend')),
+            );
+          },
         ),
         ListTile(
           title: Text(
