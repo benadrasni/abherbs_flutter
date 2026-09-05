@@ -41,7 +41,7 @@ The catalog is flower-first (color, habitat, petal shape, TDWG region). That is 
 3. The resulting plant list opens; a tap loads the species page (photos, description, taxonomy, observations).
 4. Paid add-ons unlock name/taxonomy search, photo ID (Plant.id), offline photos, custom filter order, and field observations.
 
-More detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and [docs/DATA_MODEL.md](docs/DATA_MODEL.md).
+More detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/DATA_MODEL.md](docs/DATA_MODEL.md), [docs/VISION.md](docs/VISION.md). Retiring Google Translate: [docs/TRANSLATIONS.md](docs/TRANSLATIONS.md).
 
 ## Repository layout
 

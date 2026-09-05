@@ -36,7 +36,7 @@ Git remote: `https://github.com/benadrasni/abherbs_flutter`.
 - UI strings: edit `lib/l10n/intl_*.arb`, then `flutter pub run intl_utils:generate`.
 - Filter key format: `color_habitat_petal_distribution` with empty slots allowed. Vocabulary is in `lib/filter/filter_utils.dart`.
 - Plant photos are public HTTPS under `https://storage.googleapis.com/abherbs-resources/photos/`.
-- English is the translation fallback except Czech → Slovak.
+- English is the translation fallback except Czech → Slovak. Long-term: real body text in every UI language, then remove Google Translate and `{lang}-GT`. Plan: `docs/TRANSLATIONS.md`. Do not copy GT cache into official translations.
 - Species English sources: `ingest/data/botanical_sources.json`. Reliable floras include Wikipedia, PFAF, RHS, Luontoportti, Missouri Plants, BOTANY.cz, and EPPO for names. When a web flora is useful, add it there for later plants.
 - Never translate an English common name into another language. Vernacular `label` / `names` must come from a source in that language (Wikidata, that Wikipedia title, EPPO Global Database https://gd.eppo.int/, or a flora such as BOTANY.cz). If none exists, omit `label` and keep the Latin name.
 - Adding a species: follow `ingest/ADD_PLANT.md`. Dry-run first; incremental live publish only when asked to add it to the database. Do not full-promote indexes for one plant. If no illustration id is given, look at available botanicalillustrations.org plates and pick the best representation of the plant.

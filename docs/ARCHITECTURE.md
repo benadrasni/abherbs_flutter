@@ -79,6 +79,8 @@ Long-press on a text section opens `PlantDetailEdit`, which writes the volunteer
 
 Missing sections are filled at read time: local language → `{lang}-GT` cache → English (or Slovak when the UI language is Czech) → Google Translate API → write back to `{lang}-GT`.
 
+Long-term that GT path goes away: stored seven-field text in every UI language, then no Translate API. [TRANSLATIONS.md](TRANSLATIONS.md).
+
 ### Monetization
 
 Free core: 4-step filter, plant pages, ads.

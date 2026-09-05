@@ -89,7 +89,7 @@ Shared plant URLs from the app land here. Website copy for ~34 languages is stor
 | POWO / IPNI / Kew | Accepted name, synonyms, distribution, species URL |
 | GBIF, USDA PLANTS | Crosswalk ids |
 | Plant.id | Photo identification |
-| Google Translate | On-read and notification translation |
+| Google Translate | On-read plant body and FCM/list titles (to be removed; [TRANSLATIONS.md](TRANSLATIONS.md)) |
 | Google Maps | Observation maps |
 | AdMob + mediation | Ads |
 | Play Billing / StoreKit | IAP + subscriptions |
