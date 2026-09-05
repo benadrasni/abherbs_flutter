@@ -156,7 +156,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => InflorescenceLegendScreen(), settings: RouteSettings(name: 'InflorescenceLegend')),
+                        MaterialPageRoute(builder: (context) => InflorescenceLegendScreen(highlighted: plant.inflorescenceType), settings: RouteSettings(name: 'InflorescenceLegend')),
                       );
                     },
                   ),

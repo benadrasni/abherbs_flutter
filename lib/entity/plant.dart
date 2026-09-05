@@ -17,6 +17,7 @@ class Plant{
   List<dynamic> videoUrls = [];
   List<dynamic> sourceUrls = [];
   List<dynamic> synonyms = [];
+  List<String> inflorescenceType = [];
   Map<dynamic, dynamic> wikiLinks = {};
 
   Plant.fromJson(this.key, Map data) {
@@ -35,6 +36,22 @@ class Plant{
     videoUrls = data['videoUrls'] ?? [];
     sourceUrls = data['sourceUrls'] ?? [];
     synonyms = data['synonyms'] ?? [];
+    inflorescenceType = _stringList(data['inflorescenceType']);
     wikiLinks = data['wikilinks'] ?? [];
   }
+}
+
+List<String> _stringList(dynamic raw) {
+  if (raw is List) {
+    return raw.map((item) => item.toString()).where((item) => item.isNotEmpty).toList();
+  }
+  if (raw is Map) {
+    final keys = raw.keys.toList()
+      ..sort((a, b) => (int.tryParse(a.toString()) ?? 0).compareTo(int.tryParse(b.toString()) ?? 0));
+    return keys
+        .map((key) => raw[key].toString())
+        .where((item) => item.isNotEmpty)
+        .toList();
+  }
+  return [];
 }

@@ -78,6 +78,7 @@ Keyed by Latin binomial, e.g. `plants_v2/Acer campestre`.
   "heightFrom": 300,
   "heightTo": 2000,
   "toxicityClass": 0,
+  "inflorescenceType": ["raceme"],
   "illustrationUrl": "Sapindales/Sapindaceae/Acer_campestre/Acer_campestre.webp",
   "photoUrls": ["Sapindales/Sapindaceae/Acer_campestre/ac1.webp", "..."],
   "videoUrls": [],
@@ -100,6 +101,8 @@ Keyed by Latin binomial, e.g. `plants_v2/Acer campestre`.
   }
 }
 ```
+
+`inflorescenceType` is an array of the 17 legend keys (`raceme`, `spike`, `spadix`, `corymb`, `umbel`, `compound_umbel`, `capitulum`, `head`, `panicle`, `compound_spike`, `cyme`, `helicoid`, `rhipidium`, `scorpioid`, `scorpioid_thyrse`, `dichasial_thyrse`, `double_scorpioid_thyrse`). Primary type is first. Empty means none of those diagrams apply (solitary flower, catkin, unnamed cluster). Filled from the English `inflorescence` paragraph; the app and website highlight those cells in the inflorescence legend. Language-independent — not a translations field.
 
 `lib/entity/plant.dart` also mentions `synonyms` and `videoUrls` on the client object; synonyms in production live mainly under `synonyms/{name}/ipni`.
 
@@ -176,6 +179,8 @@ Client: `lib/filter/filter_utils.dart`.
 Wikidata ingest creates a huge set of language codes (Wikipedia sitelinks). The app only *requests* the device / preferred language, with GT fallback.
 
 `isTranslated()` in `plant_translation.dart` requires the seven body fields above. Until they exist, the client may call Translate. Caching under `{lang}-GT` is Admin-only now; the official UI still shows the in-memory result for that session.
+
+**Long-term:** fill those seven fields in every UI language and delete `{lang}-GT`. Do not copy the GT cache into official translations. Plan: [TRANSLATIONS.md](TRANSLATIONS.md).
 
 Volunteer improvements go to `translations_new` (app long-press or the website PATCH). Live `translations` is read-only for clients.
 
