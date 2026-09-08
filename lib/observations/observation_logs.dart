@@ -340,6 +340,9 @@ class _ObservationLogsState extends State<ObservationLogs> {
             if (event.snapshot.value != null && (event.snapshot.value as Map).keys.length > 0) {
               for (String item in (event.snapshot.value as Map).keys) {
                 Observation observation = Observation.fromJson(item, (event.snapshot.value as Map)[item]);
+                if (observation.indoors) {
+                  continue;
+                }
                 var markerId = MarkerId(observation.id);
                 if (order > observation.order) {
                   order = observation.order;
@@ -357,17 +360,17 @@ class _ObservationLogsState extends State<ObservationLogs> {
               }
               if (newestMarker != null) {
                 result.add(newestMarker);
+                result.add(markers);
+                result.add([
+                  charts.Series<ObservationsSum, DateTime>(
+                    id: 'Observations',
+                    colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+                    domainFn: (ObservationsSum item, _) => item.date,
+                    measureFn: (ObservationsSum item, _) => item.count,
+                    data: data,
+                  )
+                ]);
               }
-              result.add(markers);
-              result.add([
-                charts.Series<ObservationsSum, DateTime>(
-                  id: 'Observations',
-                  colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-                  domainFn: (ObservationsSum item, _) => item.date,
-                  measureFn: (ObservationsSum item, _) => item.count,
-                  data: data,
-                )
-              ]);
             }
 
             return result;
@@ -617,6 +620,9 @@ class _ObservationLogsState extends State<ObservationLogs> {
             if (event.snapshot.value != null && (event.snapshot.value as Map).keys.length > 0) {
               for (String item in (event.snapshot.value as Map).keys) {
                 Observation observation = Observation.fromJson(item, (event.snapshot.value as Map)[item]);
+                if (observation.indoors) {
+                  continue;
+                }
                 var markerId = MarkerId(observation.id);
                 if (order > observation.order) {
                   order = observation.order;
@@ -634,17 +640,17 @@ class _ObservationLogsState extends State<ObservationLogs> {
               }
               if (newestMarker != null) {
                 result.add(newestMarker);
+                result.add(markers);
+                result.add([
+                  charts.Series<ObservationsSum, DateTime>(
+                    id: 'Observations',
+                    colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+                    domainFn: (ObservationsSum item, _) => item.date,
+                    measureFn: (ObservationsSum item, _) => item.count,
+                    data: data,
+                  )
+                ]);
               }
-              result.add(markers);
-              result.add([
-                charts.Series<ObservationsSum, DateTime>(
-                  id: 'Observations',
-                  colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-                  domainFn: (ObservationsSum item, _) => item.date,
-                  measureFn: (ObservationsSum item, _) => item.count,
-                  data: data,
-                )
-              ]);
             }
 
             return result;

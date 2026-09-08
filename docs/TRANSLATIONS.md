@@ -52,13 +52,13 @@ Taxonomy names (`translations_taxonomy`) are Wikidata, not GT. They stay sourced
 
 ## Rules that do not change
 
-1. **Never translate an English common name.** `label` and `names` only from a source in that language (Wikidata label/alias, that Wikipedia title, EPPO, or a flora). If none, omit `label`; the UI shows Latin.
+1. **Never translate an English common name.** `label` and `names` only from a source in that language (Wikidata label/alias, that Wikipedia title, EPPO, GBIF vernacular names, or a flora). If none, omit `label`; the UI shows Latin.
 2. **Do not invent facts.** Body text is the curated English seven fields, rewritten in the target language. Prefer a page in that language when it actually covers the plant (`translations/{lang}/sourceUrls` = pages used, not a copy of English URLs).
 3. **Do not copy `{lang}-GT` into `translations/{lang}`.** GT is what we are removing. Volunteer `translations_new` may be reviewed in; the GT cache may not.
 4. **English remains the identification source.** `/update-plant` rewrites English first. Other languages follow that English (and any language-specific flora), they do not drift on old wording.
 5. **Live identifier and filters stay untouched.**
 
-Slovak today is the template: sourced vernaculars, then the same seven fields written in Slovak from those facts. Long-term every UI language gets that treatment.
+Slovak today is the template: sourced vernaculars, then the same seven fields written in Slovak from those facts (`/translate-sk`). Long-term every UI language gets that treatment.
 
 ## Target state
 
@@ -96,7 +96,7 @@ Coverage table: per UI language, count of plants with full seven fields vs catal
 
 Do not interleave 33 incomplete languages. Order by how close official text already is, then by how many people hit GT:
 
-1. `de` (already ~1,068 / 1,413)
+1. `de` (already ~1,068 / 1,413) — working pipeline `/translate-de`: seven fields and herbalism from live English; trivia recurate for Germany/Austria. Style: `.grok/skills/translate-de/references/STYLE.md`.
 2. `fr`
 3. `cs` (today GT-from-Slovak; deserves real Czech)
 4. High-use remainder: `pl ru es it ja nl pt uk` …
@@ -157,3 +157,4 @@ Wikidata label coverage is already good for most of these languages; the work is
 - Website: `web/src/api.js`
 - Ingest: `scripts/send_notifications.py`, `scripts/add_flower_with_video.py`, `catalog/web_catalog.py` (already skips `*-GT`)
 - Data: `translations/{lang}`, `translations/{lang}-GT`, `translations_new`, `translations_taxonomy`, `search_v3/{lang}`, `web/labels/{lang}`
+- Skills: `/translate-de`, `/translate-sk` (copies in `ingest/skills/`)

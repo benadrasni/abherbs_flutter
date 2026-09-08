@@ -150,13 +150,15 @@ Empty / missing means show the Latin name. Later-language publishes (`publish_ne
 
 ## Filter vocabulary
 
-Order in a key is always `color_habitat_petal_distribution`. Empty slot = not selected. Example: `1_1_1_` = white + meadow + 4 petals + any region.
+Order in a key is always `color_habitat_petal_distribution`. Empty slot = not selected. Example: `1_1_1_` = white + meadow + 4 or less + any region.
 
 | Attribute | Codes |
 |---|---|
 | Color | 1 white, 2 yellow, 3 red, 4 blue, 5 green |
 | Habitat | 1 meadow, 2 garden, 3 wetland, 4 forest, 5 rock, 6 tree |
-| Petal | 1 four, 2 five, 3 many, 4 zygomorphic |
+| Petal | 1 four or less, 2 five, 3 many, 4 zygomorphic |
+
+`filterPetal` is never empty. Three petals and apetalous flowers use **1**.
 | Distribution | TDWG level-2 numeric codes (10 Northern Europe … 91 Antarctic). Mapped from POWO distribution text via `abherbs-auto/tdwg.csv`. |
 
 Client: `lib/filter/filter_utils.dart`.
@@ -167,7 +169,7 @@ Client: `lib/filter/filter_utils.dart`.
 
 | Field | Meaning |
 |---|---|
-| `label` | Common name from a source in that language (Wikidata label/alias, that Wikipedia title, EPPO Global Database, or a flora). Never a translation of the English name. If no source, omit; the app shows the Latin name. |
+| `label` | Common name from a source in that language (Wikidata label/alias, that Wikipedia title, EPPO Global Database, GBIF vernacular names, or a flora). Never a translation of the English name. If no source, omit; the app shows the Latin name. |
 | `names` | Extra sourced common names |
 | `wikipedia` | Language Wikipedia URL |
 | `description`, `flower`, `inflorescence`, `fruit`, `leaf`, `stem`, `habitat` | Required for "fully translated" |

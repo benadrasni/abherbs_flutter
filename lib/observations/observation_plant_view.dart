@@ -74,30 +74,32 @@ class _ObservationPlantViewState extends State<ObservationPlantView> {
       },
     ));
 
-    widgets.add(
-      TextButton(
-        style: ButtonStyle(
-          padding: WidgetStateProperty.all(
-              EdgeInsets.all(5.0)),
+    if (!widget.observation.indoors) {
+      widgets.add(
+        TextButton(
+          style: ButtonStyle(
+            padding: WidgetStateProperty.all(
+                EdgeInsets.all(5.0)),
+          ),
+          child: CachedNetworkImage(
+            fit: BoxFit.contain,
+            width: mapWidth,
+            height: mapHeight,
+            placeholder: (context, url) => Container(
+                  width: mapWidth,
+                  height: mapHeight,
+                ),
+            imageUrl: getMapImageUrl(widget.observation.latitude, widget.observation.longitude, mapWidth, mapHeight),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ObservationMap(myLocale, widget.observation, mapModeView), settings: RouteSettings(name: 'ObservationMap')),
+            );
+          },
         ),
-        child: CachedNetworkImage(
-          fit: BoxFit.contain,
-          width: mapWidth,
-          height: mapHeight,
-          placeholder: (context, url) => Container(
-                width: mapWidth,
-                height: mapHeight,
-              ),
-          imageUrl: getMapImageUrl(widget.observation.latitude, widget.observation.longitude, mapWidth, mapHeight),
-        ),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ObservationMap(myLocale, widget.observation, mapModeView), settings: RouteSettings(name: 'ObservationMap')),
-          );
-        },
-      ),
-    );
+      );
+    }
 
     widgets.add(Container(
       padding: EdgeInsets.all(5.0),
