@@ -94,7 +94,7 @@ class Offline {
           var language = await Prefs.getStringListF(keyLanguageAndCountry, ['en', 'US']);
           await reference.child(firebaseTranslations).child(language[0]).keepSynced(value);
           await reference.child(firebaseTranslationsTaxonomy).child(language[0]).keepSynced(value);
-          if (language[0] != languageEnglish && language[0] != languageSlovak) {
+          if (languageUsesGoogleTranslate(language[0])) {
             await reference.child(firebaseTranslations).child(languageEnglish).keepSynced(value);
             await reference.child(firebaseTranslations).child(language[0] + languageGTSuffix).keepSynced(value);
           }

@@ -70,6 +70,7 @@ const String appStore =
 const String languageLatin = "la";
 const String languageEnglish = "en";
 const String languageSlovak = "sk";
+const String languageGerman = "de";
 const String languageCzech = "cs";
 const String languageGTSuffix = "-GT";
 const String heightUnitOfMeasure = "cm";
@@ -811,10 +812,12 @@ void goToDetail(State state, BuildContext context, Locale myLocale, String name,
             .child(languageEnglish)
             .child(name)
             .keepSynced(true);
-        translationsReference
-            .child(myLocale.languageCode + languageGTSuffix)
-            .child(name)
-            .keepSynced(true);
+        if (languageUsesGoogleTranslate(myLocale.languageCode)) {
+          translationsReference
+              .child(myLocale.languageCode + languageGTSuffix)
+              .child(name)
+              .keepSynced(true);
+        }
       }
     }
   });
@@ -822,6 +825,13 @@ void goToDetail(State state, BuildContext context, Locale myLocale, String name,
 
 String getLanguageCode(String code) {
   return code == 'nb' ? 'no' : code;
+}
+
+bool languageUsesGoogleTranslate(String languageCode) {
+  var code = getLanguageCode(languageCode);
+  return code != languageEnglish &&
+      code != languageSlovak &&
+      code != languageGerman;
 }
 
 double getFABPadding() {

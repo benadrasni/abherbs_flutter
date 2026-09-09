@@ -90,6 +90,24 @@ class _PlantDetailState extends State<PlantDetail> {
           event.snapshot.value == null ? PlantTranslation() : PlantTranslation.fromJson(event.snapshot.value as Map);
       if (plantTranslation.isTranslated()) {
         return plantTranslation;
+      } else if (!languageUsesGoogleTranslate(widget.myLocale.languageCode)) {
+        return translationsReference
+            .child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish)
+            .child(widget.plant.name)
+            .once()
+            .then((event) {
+          if (event.snapshot.value == null) {
+            if (plantTranslation.label == null) {
+              plantTranslation.label = widget.plant.name;
+            }
+            return plantTranslation;
+          }
+          var plantTranslationOriginal = PlantTranslation.fromJson(event.snapshot.value as Map);
+          if (plantTranslation.label == null) {
+            plantTranslation.label = widget.plant.name;
+          }
+          return plantTranslation.mergeWith(plantTranslationOriginal);
+        });
       } else {
         plantTranslation.isTranslatedWithGT = true;
         return translationsReference
