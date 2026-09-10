@@ -182,7 +182,7 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       onTap: () {
         Navigator.pop(context);
-        launchURL(webUrl + 'help?lang=' + getLanguageCode(myLocale.languageCode));
+        launchURL(webPageUrl('help', myLocale.languageCode));
       },
     ));
     listItems.add(ListTile(
@@ -193,7 +193,7 @@ class _AppDrawerState extends State<AppDrawer> {
       ),
       onTap: () {
         Navigator.pop(context);
-        launchURL(webUrl + 'about?lang=' + getLanguageCode(myLocale.languageCode));
+        launchURL(webPageUrl('about', myLocale.languageCode));
       },
     ));
 

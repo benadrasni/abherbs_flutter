@@ -72,8 +72,7 @@ class _PlantDetailState extends State<PlantDetail> {
   onShare() async {
     await SharePlus.instance.share(
       ShareParams(
-        text: Uri.encodeFull(
-            'https://whatsthatflower.com/?plant=' + widget.plant.name + '&lang=' + widget.myLocale.languageCode),
+        text: webPlantUrl(widget.plant.name, widget.myLocale.languageCode),
         subject: widget.plant.name,
       ),
     );

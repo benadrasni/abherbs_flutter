@@ -77,6 +77,14 @@ const String languageGTSuffix = "-GT";
 const String heightUnitOfMeasure = "cm";
 
 const String webUrl = "https://whatsthatflower.com/";
+
+/// Website path prefixes (English is unprefixed). Keep in sync with web/src/lib.js INDEXED_LANGS.
+const List<String> webPathLanguages = [
+  languageSlovak,
+  languageGerman,
+  languageFrench,
+  languageCzech,
+];
 const String termsOfUseUrl =
     "https://storage.googleapis.com/abherbs-resources/misc/TermsOfServiceofWhatsthatflower.htm";
 const String privacyPolicyUrl =
@@ -826,6 +834,34 @@ void goToDetail(State state, BuildContext context, Locale myLocale, String name,
 
 String getLanguageCode(String code) {
   return code == 'nb' ? 'no' : code;
+}
+
+/// Encyclopedia URL for [path] in [languageCode]. Indexed languages use /de/…;
+/// English is unprefixed; other UI languages keep ?lang=.
+String webPageUrl(String path, String languageCode) {
+  final lang = getLanguageCode(languageCode);
+  var pathname = path.startsWith('/') ? path : '/$path';
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    pathname = pathname.substring(0, pathname.length - 1);
+  }
+  String body;
+  if (webPathLanguages.contains(lang)) {
+    body = pathname == '/' ? '/$lang' : '/$lang$pathname';
+  } else {
+    body = pathname;
+  }
+  if (!body.endsWith('/')) {
+    body = '$body/';
+  }
+  final origin = webUrl.substring(0, webUrl.length - 1);
+  if (lang != languageEnglish && !webPathLanguages.contains(lang)) {
+    return '$origin$body?lang=$lang';
+  }
+  return '$origin$body';
+}
+
+String webPlantUrl(String latinName, String languageCode) {
+  return webPageUrl('plant/${Uri.encodeComponent(latinName)}', languageCode);
 }
 
 bool languageUsesGoogleTranslate(String languageCode) {

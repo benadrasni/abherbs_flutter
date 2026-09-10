@@ -294,13 +294,13 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  launchURL(webUrl + 'translate_app?lang=' + getLanguageCode(myLocale.languageCode));
+                  launchURL(webPageUrl('/', myLocale.languageCode));
                 },
                 child: Text(S.of(context).feedback_submit_translate_app),
               ),
               ElevatedButton(
                 onPressed: () {
-                  launchURL(webUrl + 'translate_flower?lang=' + getLanguageCode(myLocale.languageCode));
+                  launchURL(webPageUrl('/', myLocale.languageCode));
                 },
                 child: new Text(S.of(context).feedback_submit_translate_data),
               ),

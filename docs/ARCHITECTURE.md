@@ -64,7 +64,7 @@ Deep links from FCM:
 | `list` | `PlantList` on a DB path (used for "new plants" / "flowers with video") |
 | `browse` | External URL |
 
-Species pages are also shared as `https://whatsthatflower.com/?plant={Name}&lang={code}`.
+Species pages are shared as `https://whatsthatflower.com/plant/{Name}/` (English) or `https://whatsthatflower.com/{lang}/plant/{Name}/` for sk/de/fr/cs. Other UI languages keep `?lang=`.
 
 ### Plant page
 
