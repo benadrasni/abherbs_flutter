@@ -62,8 +62,6 @@ Routes (`src/Main.js`):
 | Path | Page |
 |---|---|
 | `/` | Random or `?plant=` species page + store badges |
-| `/translate_flower` | Volunteer plant-text editor |
-| `/translate_app` | Volunteer UI-string editor |
 | `/help`, `/about` | Static copy from `web/{lang}` |
 
 The homepage loads:

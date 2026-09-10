@@ -1,6 +1,3 @@
-import 'dart:async';
-
-import 'package:abherbs_flutter/detail/plant_detail_edit.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
@@ -35,8 +32,6 @@ const String sourceBurke = "burkeherbarium.org";
 const String sourceBurkeWashington = "burke.washington.edu";
 
 Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize, GlobalKey<ScaffoldState> key) {
-  String language = Localizations.localeOf(context).languageCode;
-
   TextStyle _defaultTextStyle = TextStyle(
     fontSize: _fontSize,
     color: Colors.black,
@@ -98,23 +93,6 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                           ]),
                         ],
                       ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PlantDetailEdit(plant.name, language, '', '', 'description', body(t.description), _fontSize),
-                                settings: RouteSettings(name: 'PlantDetailEdit')
-                              )).then((value) {
-                            if (value != null && value) {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text(S.of(context).snack_translation),
-                              ));
-                            }
-                          });
-                        },
-                      ),
                     ),
                     _getRichText(body(t.description), _defaultTextStyle),
                   ],
@@ -135,23 +113,6 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                       image: AssetImage('res/images/ic_inflorescence_grey_24dp.png'),
                       width: 24.0,
                       height: 24.0,
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_inflorescence_grey_24dp.png', S.of(context).plant_inflorescence, "inflorescence", body(t.inflorescence), _fontSize),
-                              settings: RouteSettings(name: 'PlantDetailEdit')
-                            )).then((value) {
-                          if (value != null && value) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(S.of(context).snack_translation),
-                            ));
-                          }
-                        });
-                      },
                     ),
                     onTap: () {
                       Navigator.push(
@@ -179,23 +140,6 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                       width: 24.0,
                       height: 24.0,
                     ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_flower_grey_24dp.png', S.of(context).plant_flower, "flower", body(t.flower), _fontSize),
-                              settings: RouteSettings(name: 'PlantDetailEdit')
-                            )).then((value) {
-                          if (value != null && value) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(S.of(context).snack_translation),
-                            ));
-                          }
-                        });
-                      },
-                    ),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -222,23 +166,6 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                       width: 24.0,
                       height: 24.0,
                     ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_fruit_grey_24dp.png', S.of(context).plant_fruit, "fruit", body(t.fruit), _fontSize),
-                              settings: RouteSettings(name: 'PlantDetailEdit')
-                            )).then((value) {
-                          if (value != null && value) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(S.of(context).snack_translation),
-                            ));
-                          }
-                        });
-                      },
-                    ),
                   ),
                   _getRichText(body(t.fruit), _defaultTextStyle),
                 ]),
@@ -258,23 +185,6 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                       image: AssetImage('res/images/ic_leaf_grey_24dp.png'),
                       width: 24.0,
                       height: 24.0,
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_leaf_grey_24dp.png', S.of(context).plant_leaf, "leaf", body(t.leaf), _fontSize),
-                              settings: RouteSettings(name: 'PlantDetailEdit')
-                            )).then((value) {
-                          if (value != null && value) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(S.of(context).snack_translation),
-                            ));
-                          }
-                        });
-                      },
                     ),
                   ),
                   _getRichText(body(t.leaf), _defaultTextStyle),
@@ -296,23 +206,6 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                       width: 24.0,
                       height: 24.0,
                     ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_stem_grey_24dp.png', S.of(context).plant_stem, "stem", body(t.stem), _fontSize),
-                              settings: RouteSettings(name: 'PlantDetailEdit')
-                            )).then((value) {
-                          if (value != null && value) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(S.of(context).snack_translation),
-                            ));
-                          }
-                        });
-                      },
-                    ),
                   ),
                   _getRichText(body(t.stem), _defaultTextStyle),
                 ]),
@@ -332,23 +225,6 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                       image: AssetImage('res/images/ic_home_grey_24dp.png'),
                       width: 24.0,
                       height: 24.0,
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_home_grey_24dp.png', S.of(context).plant_habitat, "habitat", body(t.habitat), _fontSize),
-                              settings: RouteSettings(name: 'PlantDetailEdit')
-                            )).then((value) {
-                          if (value != null && value) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(S.of(context).snack_translation),
-                            ));
-                          }
-                        });
-                      },
                     ),
                   ),
                   _getRichText(body(t.habitat), _defaultTextStyle),
@@ -371,23 +247,6 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         image: AssetImage('res/images/ic_toxicity_grey_24dp.png'),
                         width: 24.0,
                         height: 24.0,
-                      ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_toxicity_grey_24dp.png', S.of(context).plant_toxicity, "toxicity", body(t.toxicity), _fontSize),
-                                settings: RouteSettings(name: 'PlantDetailEdit')
-                              )).then((value) {
-                            if (value != null && value) {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text(S.of(context).snack_translation),
-                              ));
-                            }
-                          });
-                        },
                       ),
                     ),
                     _getRichText(body(t.toxicity), _defaultTextStyle),
@@ -418,23 +277,6 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         width: 24.0,
                         height: 24.0,
                       ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_uses_grey_24dp.png', S.of(context).plant_herbalism, "herbalism", body(t.herbalism), _fontSize),
-                                settings: RouteSettings(name: 'PlantDetailEdit')
-                              )).then((value) {
-                            if (value != null && value) {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text(S.of(context).snack_translation),
-                              ));
-                            }
-                          });
-                        },
-                      ),
                     ),
                     _getRichText(body(t.herbalism), _defaultTextStyle),
                   ]),
@@ -456,23 +298,6 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
                         image: AssetImage('res/images/ic_question_mark_grey_24dp.png'),
                         width: 24.0,
                         height: 24.0,
-                      ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PlantDetailEdit(plant.name, language, 'res/images/ic_question_mark_grey_24dp.png', S.of(context).plant_trivia, "trivia", body(t.trivia), _fontSize),
-                                settings: RouteSettings(name: 'PlantDetailEdit')
-                              )).then((value) {
-                            if (value != null && value) {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text(S.of(context).snack_translation),
-                              ));
-                            }
-                          });
-                        },
                       ),
                     ),
                     _getRichText(body(t.trivia), _defaultTextStyle),

@@ -54,7 +54,7 @@ Taxonomy names (`translations_taxonomy`) are Wikidata, not GT. They stay sourced
 
 1. **Never translate an English common name.** `label` and `names` only from a source in that language (Wikidata label/alias, that Wikipedia title, EPPO, GBIF vernacular names, or a flora). If none, omit `label`; the UI shows Latin.
 2. **Do not invent facts.** Body text is the curated English seven fields, rewritten in the target language. Prefer a page in that language when it actually covers the plant (`translations/{lang}/sourceUrls` = pages used, not a copy of English URLs).
-3. **Do not copy `{lang}-GT` into `translations/{lang}`.** GT is what we are removing. Volunteer `translations_new` may be reviewed in; the GT cache may not.
+3. **Do not copy `{lang}-GT` into `translations/{lang}`.** GT is what we are removing. The GT cache may not be promoted.
 4. **English remains the identification source.** `/update-plant` rewrites English first. Other languages follow that English (and any language-specific flora), they do not drift on old wording.
 5. **Live identifier and filters stay untouched.**
 
@@ -69,8 +69,6 @@ For each UI language `L` and each catalog plant:
 - `isTranslated()` is true, so the client never reaches the GT branch.
 - `translations/L-GT` does not exist.
 - App, website, offline, and notification scripts have no Translate API / `GoogleTranslator` dependency.
-
-Volunteer edit (`translations_new`, `/translate_flower`) can stay. It improves official text; it is not a substitute for finishing the catalog.
 
 ## Why not “just translate on ingest with Google”?
 
@@ -99,8 +97,10 @@ Do not interleave 33 incomplete languages. Order by how close official text alre
 1. `de` (already ~1,068 / 1,413) — working pipeline `/translate-de`: seven fields and herbalism from live English; trivia recurate for Germany/Austria. Style: `.grok/skills/translate-de/references/STYLE.md`.
 2. `fr` — pipeline `/translate-fr`: seven fields and herbalism from live English; trivia recurate for France. Style: `.grok/skills/translate-fr/references/STYLE.md`. Do not start a full-catalog pass until German is complete, unless asked.
 3. `cs` — pipeline `/translate-cs`: seven fields and herbalism from live English; trivia recurate for Czechia (ČBS Rostlina roku, lípa as national tree). Style: `.grok/skills/translate-cs/references/STYLE.md`. Do not start a full-catalog pass until asked.
-4. High-use remainder: `pl ru es it ja nl pt uk` …
-5. The rest of the UI set
+4. `pl` — pipeline `/translate-pl`: seven fields and herbalism from live English; trivia recurate for Poland (Czerwone maki spod Monte Cassino). Style: `.grok/skills/translate-pl/references/STYLE.md`. Morphological terms: Atlas roślin Polski English–Polish glossary (`atlas_roslin_glossary`). Do not start a full-catalog pass until asked.
+5. `ru` — pipeline `/translate-ru`: seven fields and herbalism from live English; trivia recurate for Russia (иван-чай / копорский чай). Style: `.grok/skills/translate-ru/references/STYLE.md`. Morphological terms: Korovkin dictionary (`korovkin_slovar`). Do not start a full-catalog pass until asked.
+6. High-use remainder: `es it ja nl pt uk` …
+7. The rest of the UI set
 
 For each language:
 
@@ -134,7 +134,6 @@ Ship that client only when the catalog side is done. An app that cannot GT and a
 
 - `/add-plant` and `/update-plant` write every UI language in the same publish as English.
 - Coverage check in ingest (`integrity_check` or similar): catalog plant × UI language × seven fields.
-- Volunteers still patch via `translations_new`.
 
 ## Scale
 
@@ -148,7 +147,6 @@ Wikidata label coverage is already good for most of these languages; the work is
 - Machine-translating taxonomy (`translations_taxonomy` stays sourced).
 - Filling Wikidata-only languages (hundreds of codes) with body text.
 - Changing filter indexes or English source rules.
-- Promoting `translations_new` in bulk without review.
 - Deploying rule or catalog writes.
 
 ## Related files
@@ -156,5 +154,5 @@ Wikidata label coverage is already good for most of these languages; the work is
 - Client: `lib/detail/plant_detail.dart`, `lib/entity/plant_translation.dart`, `lib/settings/offline.dart`, `lib/utils/utils.dart`
 - Website: `web/src/api.js`
 - Ingest: `scripts/send_notifications.py`, `scripts/add_flower_with_video.py`, `catalog/web_catalog.py` (already skips `*-GT`)
-- Data: `translations/{lang}`, `translations/{lang}-GT`, `translations_new`, `translations_taxonomy`, `search_v3/{lang}`, `web/labels/{lang}`
-- Skills: `/translate-de`, `/translate-sk`, `/translate-fr`, `/translate-cs` (copies in `ingest/skills/`)
+- Data: `translations/{lang}`, `translations/{lang}-GT`, `translations_taxonomy`, `search_v3/{lang}`, `web/labels/{lang}`
+- Skills: `/translate-de`, `/translate-sk`, `/translate-fr`, `/translate-cs`, `/translate-pl`, `/translate-ru` (copies in `ingest/skills/`)

@@ -2,16 +2,14 @@
 
 Source of truth is **Firebase Realtime Database** `abherbs-backend`. Photos are **public objects** in GCS bucket `abherbs-resources`.
 
-Most catalog trees are world-readable (the website fetches them with unauthenticated REST). Live rules are snapshotted in `firebase/database.rules.json` (phase 1, deployed 2026-08-13). Storage rules live in `firebase/storage.abherbs-resources.rules` and `firebase/storage.default.rules`. The next tightening is `firebase/database.rules.target.json` (needs a publish/credits backend). Do not deploy rule changes without an explicit ask.
+Most catalog trees are world-readable (the website fetches them with unauthenticated REST). Live rules are snapshotted in `firebase/database.rules.json`. Storage rules live in `firebase/storage.abherbs-resources.rules` and `firebase/storage.default.rules`. The next tightening is `firebase/database.rules.target.json` (needs a publish/credits backend). Do not deploy rule changes without an explicit ask.
 
-### Access (phase 1)
+### Access (live)
 
 | Path | Unauthenticated | Signed-in client |
 |---|---|---|
 | Catalog (`plants_v2`, `lists_4_v2`, `counts_4_v2`, `search_v3`, `search_photo`, `translations`, `translations_taxonomy`, `web`, …) | read | read |
-| Staging indexes (`*_new` except volunteer queues) | read | read |
-| `translations_new/{lang}/{plant}` | read; write one plant/field (8k cap). Root wipe denied. | same |
-| `translations_app_new/{app}/{key}` | same pattern as `translations_new` | same |
+| Staging indexes (`*_new`) | read | read |
 | `users/{uid}` | denied | owner read. Client may write `token`, `favorites`, `purchases`, `credits` (0–10000). Owner may delete the whole node. Not `old version` or `lifetime subscription` except via that delete. |
 | `users_photo_search/{lang}/{uid}` | denied | owner read/write |
 | `credits/{uid}` | denied | owner read/write (string log, 64 chars) |
@@ -36,7 +34,6 @@ The app still writes Google Translate output to `translations/{lang}-GT`; that p
 | `APG IV_v3` | Taxonomy tree for browse/search |
 | `translations/{lang}/{latinName}` | Human (or Wikidata) plant text |
 | `translations/{lang}-GT/{latinName}` | Google Translate cache |
-| `translations_new/{lang}/{latinName}` | Volunteer edits from app or website |
 | `translations_taxonomy/{lang}/{taxon}` | Localized taxon names |
 | `synonyms/{latinName}` | IPNI synonym list |
 | `lists_custom` | Editorial lists ("new", "by language", dated drops) |
@@ -184,7 +181,7 @@ Wikidata ingest creates a huge set of language codes (Wikipedia sitelinks). The 
 
 **Long-term:** fill those seven fields in every UI language and delete `{lang}-GT`. Do not copy the GT cache into official translations. Plan: [TRANSLATIONS.md](TRANSLATIONS.md).
 
-Volunteer improvements go to `translations_new` (app long-press or the website PATCH). Live `translations` is read-only for clients.
+Live `translations` is read-only for clients. The app and website no longer collect volunteer translation edits.
 
 ## Observations
 

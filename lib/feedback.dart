@@ -143,7 +143,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       fontWeight: FontWeight.bold,
     );
 
-    Locale myLocale = Localizations.localeOf(context);
     return Scaffold(
       key: key,
       appBar: AppBar(
@@ -266,43 +265,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   }
                 },
                 child: Platform.isAndroid ? Image(image: AssetImage('res/images/google_play.png')) : Image(image: AssetImage('res/images/app_store.png')),
-              ),
-            ]),
-          ),
-        ),
-        Card(
-          child: Container(
-            padding: EdgeInsets.all(10.0),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              Text(
-                S.of(context).feedback_translate,
-                style: feedbackTextStyle,
-                textAlign: TextAlign.center,
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Image(
-                      image: AssetImage('res/images/translate.png'),
-                      width: 50.0,
-                      height: 50.0,
-                    ),
-                  ],
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  launchURL(webPageUrl('/', myLocale.languageCode));
-                },
-                child: Text(S.of(context).feedback_submit_translate_app),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  launchURL(webPageUrl('/', myLocale.languageCode));
-                },
-                child: new Text(S.of(context).feedback_submit_translate_data),
               ),
             ]),
           ),

@@ -24,29 +24,7 @@
 
     "translations": { ".read": true, ".write": false },
     "translations_taxonomy": { ".read": true, ".write": false },
-    "translations_new": {
-      ".read": true,
-      "$lang": {
-        "$plant": {
-          ".write": "auth != null",
-          "$field": {
-            ".validate": "newData.isString() && newData.val().length <= 8000 || newData.hasChildren()"
-          }
-        }
-      }
-    },
     "translations_app": { ".read": true, ".write": false },
-    "translations_app_new": {
-      ".read": true,
-      "$app": {
-        "$key": {
-          ".write": "auth != null",
-          "$field": {
-            ".validate": "newData.isString() && newData.val().length <= 8000 || newData.hasChildren()"
-          }
-        }
-      }
-    },
 
     "search": { ".read": true, ".write": false },
     "search_v2": { ".read": true, ".write": false },

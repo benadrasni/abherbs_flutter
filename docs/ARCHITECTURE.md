@@ -6,8 +6,7 @@
                     ┌─────────────────────────────┐
                     │   whatsthatflower.com       │
                     │   (abherbs-web, React 15)   │
-                    │   public plant pages,       │
-                    │   volunteer translations    │
+                    │   public plant pages        │
                     └──────────────┬──────────────┘
                                    │ REST
                                    ▼
@@ -74,8 +73,6 @@ Tabs in `lib/detail/`:
 - Info (names, height, flowering, sectioned text, sources)
 - Taxonomy (APG IV path, IPNI synonyms, POWO link)
 - Observations for that plant (paid)
-
-Long-press on a text section opens `PlantDetailEdit`, which writes the volunteer improvement to `translations_new/{lang}/{plant}/{section}`.
 
 Missing sections are filled at read time: local language → `{lang}-GT` cache → English (or Slovak when the UI language is Czech) → Google Translate API → write back to `{lang}-GT`.
 

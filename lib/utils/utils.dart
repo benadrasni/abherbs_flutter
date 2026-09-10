@@ -123,7 +123,6 @@ const String firebaseAPGIV = 'APG IV_v3';
 const String firebaseListsCustom = 'lists_custom';
 const String firebasePlantHeaders = 'plants_headers';
 const String firebaseTranslations = 'translations';
-const String firebaseTranslationsNew = 'translations_new';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
 const String firebasePlantsToUpdate = "plants_to_update";
 const String firebaseFamiliesToUpdate = "families_to_update";
@@ -213,8 +212,6 @@ final DatabaseReference listsCustomReference =
 final DatabaseReference keysReference = rootReference.child(firebaseLists);
 final DatabaseReference translationsReference =
     rootReference.child(firebaseTranslations);
-final DatabaseReference translationsNewReference =
-    rootReference.child(firebaseTranslationsNew);
 final DatabaseReference translationsTaxonomyReference =
     rootReference.child(firebaseTranslationsTaxonomy);
 final DatabaseReference plantsReference = rootReference.child(firebasePlants);

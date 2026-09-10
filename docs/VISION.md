@@ -13,7 +13,6 @@ The shipping product is already a real step toward that: a multilingual flower i
 - Species pages with height, flowering months, toxicity class, APG IV path, IPNI / GBIF / USDA / Wikidata links, and sectioned text (description, flower, inflorescence, fruit, leaf, stem, habitat, toxicity, uses/`herbalism`, trivia).
 - **35** app UI languages (33 catalog codes). English and Slovak body text are complete; German is the next-fullest (~1,068 / 1,413). Other languages have sourced Wikidata names and almost no official body text. Missing sections are filled by Google Translate and cached under `translations/{lang}-GT`. **Goal: replace that with stored translations, then delete GT.**
 - Community observations (1,509 public, last public stat date 2022) and photo search via Plant.id.
-- A volunteer translation UI on whatsthatflower.com.
 
 That is a hobby-scale, high-touch catalog. Adding a plant today means a local folder of photos, a Tkinter crop tool, a Wikidata/POWO scrape, and a Firebase write.
 
