@@ -97,8 +97,8 @@ Coverage table: per UI language, count of plants with full seven fields vs catal
 Do not interleave 33 incomplete languages. Order by how close official text already is, then by how many people hit GT:
 
 1. `de` (already ~1,068 / 1,413) — working pipeline `/translate-de`: seven fields and herbalism from live English; trivia recurate for Germany/Austria. Style: `.grok/skills/translate-de/references/STYLE.md`.
-2. `fr`
-3. `cs` (today GT-from-Slovak; deserves real Czech)
+2. `fr` — pipeline `/translate-fr`: seven fields and herbalism from live English; trivia recurate for France. Style: `.grok/skills/translate-fr/references/STYLE.md`. Do not start a full-catalog pass until German is complete, unless asked.
+3. `cs` — pipeline `/translate-cs`: seven fields and herbalism from live English; trivia recurate for Czechia (ČBS Rostlina roku, lípa as national tree). Style: `.grok/skills/translate-cs/references/STYLE.md`. Do not start a full-catalog pass until asked.
 4. High-use remainder: `pl ru es it ja nl pt uk` …
 5. The rest of the UI set
 
@@ -157,4 +157,4 @@ Wikidata label coverage is already good for most of these languages; the work is
 - Website: `web/src/api.js`
 - Ingest: `scripts/send_notifications.py`, `scripts/add_flower_with_video.py`, `catalog/web_catalog.py` (already skips `*-GT`)
 - Data: `translations/{lang}`, `translations/{lang}-GT`, `translations_new`, `translations_taxonomy`, `search_v3/{lang}`, `web/labels/{lang}`
-- Skills: `/translate-de`, `/translate-sk` (copies in `ingest/skills/`)
+- Skills: `/translate-de`, `/translate-sk`, `/translate-fr`, `/translate-cs` (copies in `ingest/skills/`)
