@@ -73,6 +73,8 @@ const String languageSlovak = "sk";
 const String languageGerman = "de";
 const String languageFrench = "fr";
 const String languageCzech = "cs";
+const String languagePolish = "pl";
+const String languageRussian = "ru";
 const String languageGTSuffix = "-GT";
 const String heightUnitOfMeasure = "cm";
 
@@ -867,7 +869,9 @@ bool languageUsesGoogleTranslate(String languageCode) {
       code != languageSlovak &&
       code != languageGerman &&
       code != languageFrench &&
-      code != languageCzech;
+      code != languageCzech &&
+      code != languagePolish &&
+      code != languageRussian;
 }
 
 double getFABPadding() {

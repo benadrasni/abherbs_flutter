@@ -36,7 +36,9 @@ A plant is “fully translated” when the seven identification fields exist: `d
 | `es` `it` `pl` `ru` `cs` | tens to low hundreds | Mostly labels | hundreds–1,200 |
 | Other UI languages | ~0–20 | Wikidata `label` / `names` / `wikipedia` | ~400–1,375 |
 
-Almost every non-English, non-Slovak reader who opens a species page is reading Google Translate of English (Czech: of Slovak), either from `{lang}-GT` or live from the Translate API. Client writes to `{lang}-GT` now fail the rules; in-session translate still works. Offline still `keepSynced`s the GT tree. The website still fetches `{lang}-GT`.
+Almost every remaining non-complete-language reader who opens a species page is reading Google Translate of English (Czech: of Slovak), either from `{lang}-GT` or live from the Translate API. Client writes to `{lang}-GT` now fail the rules; in-session translate still works. Offline still `keepSynced`s the GT tree for languages that still use Translate. The website still fetches `{lang}-GT` except for languages in `LANGUAGES_WITHOUT_GT`.
+
+Retired `{lang}-GT` (official catalog is full-7; do not recreate): `de-GT` (2026-09-09), `pl-GT` and `ru-GT` (2026-09-10). App `languageUsesGoogleTranslate` and website `LANGUAGES_WITHOUT_GT` skip `en sk de fr cs pl ru`.
 
 Other Google Translate call sites:
 
@@ -153,6 +155,6 @@ Wikidata label coverage is already good for most of these languages; the work is
 
 - Client: `lib/detail/plant_detail.dart`, `lib/entity/plant_translation.dart`, `lib/settings/offline.dart`, `lib/utils/utils.dart`
 - Website: `web/src/api.js`
-- Ingest: `scripts/send_notifications.py`, `scripts/add_flower_with_video.py`, `catalog/web_catalog.py` (already skips `*-GT`)
+- Ingest: `scripts/send_notifications.py`, `scripts/add_flower_with_video.py`, `catalog/web_catalog.py` (already skips `*-GT`), `scripts/delete_gt_translations.py`
 - Data: `translations/{lang}`, `translations/{lang}-GT`, `translations_taxonomy`, `search_v3/{lang}`, `web/labels/{lang}`
 - Skills: `/translate-de`, `/translate-sk`, `/translate-fr`, `/translate-cs`, `/translate-pl`, `/translate-ru` (copies in `ingest/skills/`)
