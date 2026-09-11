@@ -86,6 +86,8 @@ const List<String> webPathLanguages = [
   languageGerman,
   languageFrench,
   languageCzech,
+  languagePolish,
+  languageRussian,
 ];
 const String termsOfUseUrl =
     "https://storage.googleapis.com/abherbs-resources/misc/TermsOfServiceofWhatsthatflower.htm";
@@ -836,7 +838,8 @@ String getLanguageCode(String code) {
 }
 
 /// Encyclopedia URL for [path] in [languageCode]. Indexed languages use /de/…;
-/// English is unprefixed; other UI languages keep ?lang=.
+/// English is unprefixed; other UI languages keep ?lang=. Keep in sync with
+/// web/src/lib.js INDEXED_LANGS.
 String webPageUrl(String path, String languageCode) {
   final lang = getLanguageCode(languageCode);
   var pathname = path.startsWith('/') ? path : '/$path';
