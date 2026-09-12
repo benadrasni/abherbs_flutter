@@ -90,13 +90,9 @@
   "feedback_intro": "Hai contribuito a questa applicazione scaricandola sul tuo dispositivo, grazie! Ecco cosa puoi fare ora:",
   "feedback_review": "Puoi scrivere una recensione positiva.",
   "feedback_title": "Come contribuire",
-  "feedback_translate": "Puoi segnalare refusi ed errori o inviare una nuova traduzione per i fiori o le etichette dell'applicazione su whatsthatflower.com.",
-  "feedback_submit_translate_data": "Migliora le informazioni sui fiori",
-  "feedback_submit_translate_app": "Migliora le etichette dell'applicazione",
   "feedback_buy_extended": "Puoi acquistare funzionalità aggiuntive come la modalità offline, la ricerca nei nomi o nella tassonomia, la ricerca per foto, le osservazioni e il filtro configurabile.",
   "feedback_run_ads": "È possibile visualizzare pubblicità a schermo intero o guardare annunci video per supportare ulteriori sviluppi e miglioramenti del database.",
   "feedback_run_ads_fullscreen": "Mostra una pubblicità a schermo intero",
-  "feedback_run_ads_video": "Guarda un video pubblicitario",
 
   "credit_login": "Accedi e guadagna crediti guardando la pubblicità. Con i crediti puoi utilizzare alcuni miglioramenti.",
   "credit_message": "Guadagna crediti guardando la pubblicità. Con i crediti puoi utilizzare alcuni miglioramenti.",
@@ -110,9 +106,6 @@
   "auth_email": "Accedi con l'indirizzo email",
   "auth_phone": "Accedi con il telefono",
   "auth_google": "Accedi con Google",
-  "auth_apple": "Accedi con Apple",
-  "auth_facebook": "Accedi con Facebook",
-  "auth_twitter": "Accedi con Twitter",
   "auth_sign_in_failed": "Accesso fallito. Controlla la tua connessione e riprova.",
 
   "auth_email_hint": "Indirizzo email",
@@ -158,7 +151,6 @@
   "pause": "Pausa",
   "apply": "Applicare",
   "cancel": "Annulla",
-
 
   "filter_color": "colore",
   "filter_habitat": "habitat",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "Tassonomia",
   "plant_sources": "Bibliografia",
 
-  "google_translate": "Tradotto con Google Translate",
-  "show_original": "Mostra il testo in inglese",
-  "improve_translation": "Migliora la traduzione",
-  "show_translation": "Mostra il testo tradotto",
-
   "plant_height_from": "Altezza da",
   "plant_height_to": "a",
   "plant_flowering_from": "Fioritura da",
@@ -294,14 +281,11 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Sottoserie",
   "taxonomy_supersectio": "Supersezione",
-  "taxonomy_species": "Specie",
   "taxonomy_unknown": "sconosciuto",
 
   "snack_no_flowers": "Nessun fiore corrisponde alla ricerca.",
   "snack_loading_ad": "La pubblicità è ancora in fase di caricamento, primi di nuovo il pulsante.",
   "snack_copy": "Copiato negli appunti",
-  "snack_publish": "... essere pubblicato più tardi",
-  "snack_translation": "Grazie per il tuo contributo! Presto sarà pubblicato.",
 
   "search": "Ricerca...",
   "search_names": "Cerca nei nomi",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "Condizioni d'uso",
   "privacy_policy": "Privacy",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play Store",
 
   "promotion_title": "Feature a pagamento",
   "promotion_content": "Questa è una funzionalità a pagamento. Puoi usarlo gratuitamente fino a {date}",
@@ -362,8 +342,6 @@
   "no_connection_content": "Questa funzione richiede una connessione Internet.",
 
   "photo_search_no_login": "La ricerca per foto è disponibile solo agli utenti registrati. Accedi, per favore.",
-  "photo_search_failed": "Ricerca per foto fallita. Controlla la tua connessione Internet e riprova.",
-  "photo_to_search_by": "Foto da cercare",
   "photo_search_note": "Questa è una funzionalità che funziona solo online. A volte trova esattamente quello che stai cercando, a volte nemmeno si avvicina. Al momento, l'applicazione dipende da terzo, che gestisce la maggior parte dell'attività. Col passare del tempo, la funzionalità migliorare, ma ricorda che non è nata per il riconoscimento dei fiori. Usala saggiamente e per favore non basare il giudizio dell'applicazione su questo funzione. Per motivi di qualità, tutti i risultati della ricerca (foto escluse) verranno salvati.",
   "photo_search_empty": "IA (intelligenza artificiale) non ha riconosciuto nessun fiore null'immagine. Riprova da diverse angolazioni, distanze o condizioni di luce. Se l'hai già fatto, forse Mr. AI non è ancora pronto.",
 
@@ -374,7 +352,6 @@
   "custom_lists": "Elenchi di fiori",
   "new_flowers": "Nuovi fiori",
   "common_lists": "Elenchi comuni",
-  "my_lists": "Le mie liste",
 
   "favorite_title": "Fiori preferiti",
   "favorite_empty": "Non ci sono ancora fiori preferiti.",

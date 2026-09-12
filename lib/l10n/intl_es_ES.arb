@@ -90,13 +90,9 @@
   "feedback_intro": "Ha estado contribuyendo a esta aplicación desde que la ha instalado en su dispositivo, gracias. Si está buscando algo más, aquí hay algunas opciones:",
   "feedback_review": "Puedes escribir una crítica positiva.",
   "feedback_title": "Cómo contribuir",
-  "feedback_translate": "Puede reportar cualquier error tipográfico o error que encontró o enviar una nueva traducción en su idioma.",
-  "feedback_submit_translate_data": "Mejorar los datos de la flor.",
-  "feedback_submit_translate_app": "Mejorar las etiquetas de la aplicación.",
   "feedback_buy_extended": "Puede comprar funciones adicionales como el modo offline, buscar en nombres o en taxonomía, buscar por foto, observaciones y filtros configurables.",
   "feedback_run_ads": "Puede mostrar anuncios a pantalla completa o ver anuncios de videos para respaldar el desarrollo adicional y la mejora de la base de datos.",
   "feedback_run_ads_fullscreen": "Mostrar un anuncio en pantalla completa",
-  "feedback_run_ads_video": "Ver un video publicitario",
 
   "credit_login": "Inicie sesión y obtenga créditos por ver anuncios. Con los créditos puede utilizar algunas mejoras.",
   "credit_message": "Obtenga créditos por ver publicidad. Con los créditos puede utilizar algunas mejoras.",
@@ -110,9 +106,6 @@
   "auth_email": "Iniciar sesión con el correo electrónico",
   "auth_phone": "Iniciar sesión con el teléfono",
   "auth_google": "Iniciar sesión con Google",
-  "auth_apple": "Iniciar sesión con Apple",
-  "auth_facebook": "Iniciar sesión con Facebook",
-  "auth_twitter": "Iniciar sesión con Twitter",
   "auth_sign_in_failed": "El inico de sesión ha fallado. Revisa tu conexión y vuelve a intentarlo.",
 
   "auth_email_hint": "Correo electrónico",
@@ -158,7 +151,6 @@
   "pause": "Pausa",
   "apply": "Aplicar",
   "cancel": "Cancelar",
-
 
   "filter_color": "color",
   "filter_habitat": "localidad",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "Taxonomía",
   "plant_sources": "Fuentes",
 
-  "google_translate": "Traducido con Google Traductor",
-  "show_original": "Mostrar texto en inglés",
-  "improve_translation": "Mejorar la traducción",
-  "show_translation": "Mostrar texto traducido",
-
   "plant_height_from": "Altura desde",
   "plant_height_to": "hasta",
   "plant_flowering_from": "Floración desde",
@@ -294,14 +281,11 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",
-  "taxonomy_species": "especie",
   "taxonomy_unknown": "desconocido",
 
   "snack_no_flowers": "No hay criterios de correspondencia de flores.",
   "snack_loading_ad": "El anuncio todavía se está cargando, presione el botón otra vez.",
   "snack_copy": "Copiado al portapapeles",
-  "snack_publish": "... para ser publicado más tarde",
-  "snack_translation": "Gracias por tu aporte. Será publicado pronto.",
 
   "search": "Buscar...",
   "search_names": "Buscar en nombres",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "Términos de Uso",
   "privacy_policy": "Política de privacidad",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play Store",
 
   "promotion_title": "Característica de pago",
   "promotion_content": "Esta es una característica de pago. Puedes usarlo gratis hasta {date}",
@@ -362,8 +342,6 @@
   "no_connection_content": "Esta característica no funciona sin conexión a Internet.",
 
   "photo_search_no_login": "La búsqueda por foto está disponible solo para usuarios registrados. Por favor Iniciar sesión.",
-  "photo_search_failed": "La búsqueda por foto falló. Verifique su conexión a Internet y vuelva a intentarlo.",
-  "photo_to_search_by": "Foto para buscar por",
   "photo_search_note": "Esta función solo funciona en línea. A veces encuentra exactamente lo que estás buscando, a veces ni siquiera cerca. Estoy confiando totalmente en terceros aquí, ya que están haciendo todo el trabajo duro. A medida que pasa el tiempo, debería ser mejor y mejor. Úselo sabiamente y no juzgue toda la aplicación en función de esta función. Por motivos de calidad, se guardarán todos los resultados de búsqueda (no fotos).",
   "photo_search_empty": "IA (inteligencia artificial) no reconoció ninguna flor en particular en la imagen. Inténtalo de nuevo con diferentes ángulos, distancias o condiciones de luz. Si ya lo hiciste, parece que IA Overlord no reconoce el objeto.",
 
@@ -374,7 +352,6 @@
   "custom_lists": "Listas de flores",
   "new_flowers": "Flores nuevas",
   "common_lists": "Listas comunes",
-  "my_lists": "Mis listas",
 
   "favorite_title": "Flores favoritas",
   "favorite_empty": "No hay flores favoritas todavía.",

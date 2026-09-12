@@ -90,13 +90,9 @@
   "feedback_intro": "Jūs prisidėjote prie šios programos, nes ją įdiegėte savo prietaise. Jei ieškote ko nors daugiau, čia pateikiamos kelios parinktys:",
   "feedback_review": "Galite parašyti teigiamą apžvalgą.",
   "feedback_title": "Kaip prisidėti",
-  "feedback_translate": "Galite pranešti apie rastą klaidą ar klaidą arba pateikti naują vertimą į savo kalbą.",
-  "feedback_submit_translate_data": "Pagerinkite gėlių duomenis",
-  "feedback_submit_translate_app": "Pagerinti programos etiketes",
   "feedback_buy_extended": "Galite įsigyti papildomų funkcijų, pvz., Neprisijungus, ieškoti vardų arba taksonomijoje, ieškoti pagal nuotrauką, stebėjimus ir konfigūruojamą filtrą.",
   "feedback_run_ads": "Galite rodyti viso ekrano skelbimą arba žiūrėti vaizdo įrašo reklamą, kad palaikytumėte tolesnę plėtrą ir duomenų bazės tobulinimą.",
   "feedback_run_ads_fullscreen": "Rodyti viso ekrano skelbimą",
-  "feedback_run_ads_video": "Žiūrėti vaizdo įrašo skelbimą",
 
   "credit_login": "Prisijunkite ir uždirbkite kreditus žiūrėdami reklamą. Turėdami kreditus galite naudoti kai kuriuos patobulinimus.",
   "credit_message": "Uždirbkite kreditus žiūrėdami reklamą. Turėdami kreditus galite naudoti kai kuriuos patobulinimus.",
@@ -110,9 +106,6 @@
   "auth_email": "Prisijungti nurodant el. pašto adresą",
   "auth_phone": "Prisijungti nurodant telefono numerį",
   "auth_google": "Prisijungti per „Google“",
-  "auth_apple": "Prisijungti per „Apple“",
-  "auth_facebook": "Prisijungti per „Facebook“",
-  "auth_twitter": "Prisijungti per „Twitter“",
   "auth_sign_in_failed": "Prisijungimas nepavyko. Patikrinkite ryšį ir bandykite dar kartą.",
 
   "auth_email_hint": "El. pašto adresas",
@@ -158,7 +151,6 @@
   "pause": "Pauzė",
   "apply": "Taikyti",
   "cancel": "Atšaukti",
-
 
   "filter_color": "spalva",
   "filter_habitat": "buveinių",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "Taksonomija",
   "plant_sources": "Šaltiniai",
 
-  "google_translate": "Išvertus su Google Translate",
-  "show_original": "Rodyti tekstas anglų kalba",
-  "improve_translation": "Pagerinti vertimą",
-  "show_translation": "Rodyti išverstas tekstas",
-
   "plant_height_from": "Aukštis",
   "plant_height_to": "-",
   "plant_flowering_from": "Žydėjimas nuo",
@@ -294,14 +281,11 @@
   "taxonomy_serie": "Serija",
   "taxonomy_subserie": "Subserija",
   "taxonomy_supersectio": "Supersekcija",
-  "taxonomy_species": "Rūšis",
   "taxonomy_unknown": "nežinomas",
 
   "snack_no_flowers": "Nėra gėlių atitikimo kriterijų.",
   "snack_loading_ad": "Reklama vis dar įkeliama, dar kartą paspauskite mygtuką.",
   "snack_copy": "Kopijuojama į iškarpinę",
-  "snack_publish": "... bus paskelbta vėliau",
-  "snack_translation": "Ačiū už jūsų indėlį. Jis netrukus bus paskelbtas.",
 
   "search": "Paieška...",
   "search_names": "Ieškoti vardų",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "Naudojimo sąlygos",
   "privacy_policy": "Privatumo politika",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play Store",
 
   "promotion_title": "Mokama funkcija",
   "promotion_content": "Tai mokama funkcija. Ją galite naudoti nemokamai iki {date}",
@@ -362,8 +342,6 @@
   "no_connection_content": "Ši funkcija neveikia be interneto ryšio.",
 
   "photo_search_no_login": "Ieškoti pagal nuotrauką galima tik prisijungusiems vartotojams. Prašome prisijungti.",
-  "photo_search_failed": "Nepavyko ieškoti pagal nuotrauką. Patikrinkite interneto ryšį ir bandykite dar kartą.",
-  "photo_to_search_by": "Nuotraukas ieškoti pagal",
   "photo_search_note": "Ši funkcija veikia tik internetu. Kartais ji randa tai, ko ieškote, kartais net nėra artima. Aš visiškai pasitikiu trečiosiomis šalimis, nes jos dirba sunkų darbą. Laikui bėgant turėtų būti ir geriau. Naudokite tai protingai ir, nevertinkite visos programos pagal šią funkciją. Kokybės tikslais visi paieškos rezultatai (ne nuotraukos) bus išsaugoti.",
   "photo_search_empty": "DI (dirbtinis intelektas) neatpažino jokios konkrečios gėlių ant nuotraukos. Bandykite dar kartą su skirtingais kampais, atstumu arba šviesos sąlygomis. Jei jau tai padarėte, atrodo, kad DI viršininkas netrukus ateis.",
 
@@ -374,7 +352,6 @@
   "custom_lists": "Gėlių sąrašai",
   "new_flowers": "Naujos gėlės",
   "common_lists": "Bendrieji sąrašai",
-  "my_lists": "Bendrieji sąrašai",
 
   "favorite_title": "Mėgstamiausios gėlės",
   "favorite_empty": "Dar nėra mėgstamiausių gėlių.",

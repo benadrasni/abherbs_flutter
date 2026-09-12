@@ -90,13 +90,9 @@
   "feedback_intro": "Sinds u de app geïnstalleerd heeft, draagt u bij aan de app. Dank u wel. Als u ons nóg meer wilt helpen, kunt u de volgende opties overwegen:",
   "feedback_review": "U kunt een positieve beoordeling schrijven.",
   "feedback_title": "Hoe u kunt bijdragen",
-  "feedback_translate": "U kunt typefouten of verkeerde vertalingen melden of nieuwer vertalingen toevoegen op whatsthatflower.com",
-  "feedback_submit_translate_data": "Verbeter de gegevens over de bloemen",
-  "feedback_submit_translate_app": "Verbeter de kopjes in de app",
   "feedback_buy_extended": "U kunt extra functies kopen, zoals de offline modus, zoeken in namen of in taxonomie, zoeken op foto, observaties en configureerbare filters.",
   "feedback_run_ads": "U kunt advertenties op volledig scherm weergeven of videoadvertenties bekijken om verdere ontwikkeling en databaseverbetering te ondersteunen.",
   "feedback_run_ads_fullscreen": "Laat een advertentie op volledig scherm zien",
-  "feedback_run_ads_video": "Bekijk een videoadvertentie",
 
   "credit_login": "Log in en verdien credits voor het bekijken van advertenties. Met credits kun je enkele verbeteringen gebruiken.",
   "credit_message": "Verdien credits voor het bekijken van advertenties. Met credits kun je enkele verbeteringen gebruiken.",
@@ -110,9 +106,6 @@
   "auth_email": "Inloggen met e-mailadres",
   "auth_phone": "Inloggen met telefoon",
   "auth_google": "Inloggen met Google",
-  "auth_apple": "Inloggen met Apple",
-  "auth_facebook": "Inloggen met Facebook",
-  "auth_twitter": "Inloggen met Twitter",
   "auth_sign_in_failed": "Inloggen mislukt. Controleer uw verbinding en probeer het opnieuw.",
 
   "auth_email_hint": "E-mail",
@@ -158,7 +151,6 @@
   "pause": "Pauze",
   "apply": "Van toepassing zijn",
   "cancel": "Annuleren",
-
 
   "filter_color": "kleur",
   "filter_habitat": "standplaats",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "Taxonomie",
   "plant_sources": "Bronnen",
 
-  "google_translate": "Vertaald met Google Translate",
-  "show_original": "Toon Engels tekst",
-  "improve_translation": "Verbeter vertaling",
-  "show_translation": "Toon vertaalde tekst",
-
   "plant_height_from": "Hoogte van",
   "plant_height_to": "tot",
   "plant_flowering_from": "Bloeit van",
@@ -294,14 +281,11 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
-  "taxonomy_species": "Soort",
   "taxonomy_unknown": "onbekend",
 
   "snack_no_flowers": "Geen bloemen die voldoen aan criteria.",
   "snack_loading_ad": "Advertentie wordt nog steeds geladen, druk opnieuw op de knop.",
   "snack_copy": "Gekopieerd naar het klembord",
-  "snack_publish": "... later worden gepubliceerd",
-  "snack_translation": "Bedankt voor je bijdrage. Het wordt binnenkort gepubliceerd.",
 
   "search": "Zoeken...",
   "search_names": "Zoeken in namen",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "Gebruiksvoorwaarden",
   "privacy_policy": "Privacybeleid",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play Store",
 
   "promotion_title": "Betaalde functie",
   "promotion_content": "Dit is een betaalde functie. Je kunt het gratis gebruiken tot {date}",
@@ -362,8 +342,6 @@
   "no_connection_content": "Deze functie werkt niet zonder internetverbinding.",
 
   "photo_search_no_login": "Zoeken op foto is alleen beschikbaar voor aangemelde gebruikers. Log alstublieft in.",
-  "photo_search_failed": "Zoeken op foto is mislukt. Controleer uw internetverbinding en probeer het opnieuw.",
-  "photo_to_search_by": "Foto om op te zoeken",
   "photo_search_note": "Deze functie werkt alleen online. Soms vindt het precies wat u zoekt, soms zelfs niet in de buurt. Ik vertrouw hier volledig op derden, omdat ze al het harde werk doen. Naarmate de tijd verstrijkt, moet het steeds beter worden. Gebruik het verstandig en beoordeel alsjeblieft niet de hele applicatie op basis van deze functie. Voor kwaliteitsdoeleinden worden alle zoekresultaten (geen foto's) opgeslagen.",
   "photo_search_empty": "KI (kunstmatige intelligentie) herkende geen enkele specifieke bloem op de foto. Probeer het opnieuw met verschillende hoeken, afstanden of lichtomstandigheden. Als je het al hebt gedaan, ziet het er naar uit dat KI-oploper niet snel zal komen.",
 
@@ -374,7 +352,6 @@
   "custom_lists": "Lijsten van bloemen",
   "new_flowers": "Nieuwe bloemen",
   "common_lists": "Gemeenschappelijke lijsten",
-  "my_lists": "Mijn lijsten",
 
   "favorite_title": "Favoriete bloemen",
   "favorite_empty": "Er zijn nog geen favoriete bloemen.",

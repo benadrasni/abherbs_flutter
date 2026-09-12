@@ -90,13 +90,9 @@
   "feedback_intro": "Doprinosili ste ovoj aplikaciji jer ste je instalirali na svom uređaju, hvala. Ako tražite nešto više, evo nekoliko opcija:",
   "feedback_review": "Možete napisati pozitivnu recenziju.",
   "feedback_title": "Kako pridonijeti",
-  "feedback_translate": "Možete prijaviti svaku pogrešku ili pogrešku koju ste pronašli ili poslati novi prijevod na svoj jezik.",
-  "feedback_submit_translate_data": "Poboljšajte podatke o cvijetu",
-  "feedback_submit_translate_app": "Poboljšajte oznake programa",
   "feedback_buy_extended": "Možete kupiti dodatne funkcionalnosti kao što je izvanmrežni način rada, tražiti imena ili taksonomiju, pretraživati po fotografijama, promatranjima i konfigurirati filtar.",
   "feedback_run_ads": "Možete prikazati oglas preko cijelog zaslona ili gledati video oglas kako biste podržali daljnji razvoj i poboljšanje baze podataka.",
   "feedback_run_ads_fullscreen": "Pokaži oglas preko cijelog zaslona",
-  "feedback_run_ads_video": "Pogledajte video oglas",
 
   "credit_login": "Prijavite se i zaradite kredite za gledanje oglasa. Pomoću kredita možete koristiti neka poboljšanja.",
   "credit_message": "Zaradite kredite za gledanje reklame. Pomoću kredita možete koristiti neka poboljšanja.",
@@ -110,9 +106,6 @@
   "auth_email": "Prijava putem e-adrese",
   "auth_phone": "Prijava putem telefona",
   "auth_google": "Prijava putem Googlea",
-  "auth_apple": "Prijava putem Applea",
-  "auth_facebook": "Prijava putem Facebooka",
-  "auth_twitter": "Prijava putem Twittera",
   "auth_sign_in_failed": "Prijava nije uspjela. Provjerite vezu i pokušajte ponovno.",
 
   "auth_email_hint": "E-adresa",
@@ -158,7 +151,6 @@
   "pause": "Pauza",
   "apply": "Aplikovati",
   "cancel": "Otkazati",
-
 
   "filter_color": "boja",
   "filter_habitat": "stanište",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "Taksonomija",
   "plant_sources": "Izvori",
 
-  "google_translate": "Prevedeno s Google prevoditelj",
-  "show_original": "Prikaži engleski tekst",
-  "improve_translation": "Poboljšati prevođenje",
-  "show_translation": "Prikaži prevedeni tekst",
-
   "plant_height_from": "Visina:",
   "plant_height_to": "-",
   "plant_flowering_from": "Cvatnje:",
@@ -294,14 +281,11 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
-  "taxonomy_species": "Vrsta",
   "taxonomy_unknown": "nepoznat",
 
   "snack_no_flowers": "Nema kriterija za podudaranje.",
   "snack_loading_ad": "Oglas se još uvijek učitava, ponovno pritisnite gumb.",
   "snack_copy": "Kopirano u međuspremnik",
-  "snack_publish": "... biti objavljen kasnije",
-  "snack_translation": "Hvala na vašem doprinosu. Bit će objavljeno uskoro.",
 
   "search": "Traži...",
   "search_names": "Pretražujte imena",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "Uvjeti korištenja",
   "privacy_policy": "Pravila o privatnosti",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Trgovini Google Play",
 
   "promotion_title": "Plaćena značajka",
   "promotion_content": "Ovo je plaćena značajka. Možete ga koristiti besplatno do {date}",
@@ -362,8 +342,6 @@
   "no_connection_content": "Ova značajka ne funkcionira bez internetske veze.",
 
   "photo_search_no_login": "Pretraživanje po fotografijama dostupno je samo prijavljenim korisnicima. Molimo prijavite se.",
-  "photo_search_failed": "Pretraživanje po fotografiji nije uspjelo. Provjerite internetsku vezu i pokušajte ponovno.",
-  "photo_to_search_by": "Fotografija za pretraživanje po",
   "photo_search_note": "Ova značajka djeluje samo na mreži. Ponekad se nađe upravo ono što tražite, ponekad čak ni blizu. Ovdje se potpuno oslanjam na treću stranu jer oni rade sve naporan posao. Kako vrijeme prolazi trebalo bi biti sve bolje i bolje. Koristite ga mudro i nemojte suditi o cijeloj aplikaciji na temelju ove značajke. Svi će rezultati pretraživanja (a ne fotografije) biti spremljeni u svrhu kvalitete.",
   "photo_search_empty": "UI (umjetna inteligencija) nije prepoznao nijedan određeni cvijet na slici. Pokušajte ponovno s različitim kutovima, udaljenostima ili uvjetima osvjetljenja. Ako ste to već učinili, izgleda da UI vladar neće uskoro doći.",
 
@@ -374,7 +352,6 @@
   "custom_lists": "Popisi cvijeća",
   "new_flowers": "Novo cvijeće",
   "common_lists": "Uobičajeni popisi",
-  "my_lists": "Moji popisi",
 
   "favorite_title": "Omiljeno cvijeće",
   "favorite_empty": "Još nema omiljenog cvijeća.",

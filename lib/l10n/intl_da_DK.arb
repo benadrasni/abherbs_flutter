@@ -90,11 +90,9 @@
   "feedback_intro": "Du har bidraget til denne applikation, da du har installeret den på din enhed, tak. Hvis du leder efter noget mere, her er nogle muligheder:",
   "feedback_review": "Du kan skrive en positiv anmeldelse.",
   "feedback_title": "Hvordan bidrage",
-  "feedback_translate": "Du kan rapportere enhver tastatur eller fejl, du har fundet eller indsende ny oversættelse på dit sprog.",
   "feedback_buy_extended": "Du kan købe yderligere funktioner som offline-tilstand, søge i navne eller i taxonomi, søge efter foto, observationer og konfigurerbart filter.",
   "feedback_run_ads": "Du kan vise fuldskærmsannonce eller se videoannonce for at understøtte yderligere udvikling og databaseforbedring.",
   "feedback_run_ads_fullscreen": "Vis en fuldscreen reklame",
-  "feedback_run_ads_video": "Se en videoannonce",
 
   "credit_login": "Log ind og optjen kredit for at se reklame. Med kreditter kan du bruge nogle forbedringer.",
   "credit_message": "Optjen kreditter for at se reklame. Med kreditter kan du bruge nogle forbedringer.",
@@ -108,9 +106,6 @@
   "auth_email": "Log ind med mail",
   "auth_phone": "Log ind med telefon",
   "auth_google": "Log ind med Google",
-  "auth_apple": "Log ind med Apple",
-  "auth_facebook": "Log ind med Facebook",
-  "auth_twitter": "Log ind med Twitter",
   "auth_sign_in_failed": "Log ind mislykkedes. Tjek din forbindelse og prøv igen.",
 
   "auth_email_hint": "Mail",
@@ -156,7 +151,6 @@
   "pause": "Pause",
   "apply": "Ansøge",
   "cancel": "Afbestille",
-
 
   "filter_color": "farve",
   "filter_habitat": "vækststeder",
@@ -254,10 +248,6 @@
   "plant_taxonomy": "Taksonomi",
   "plant_sources": "Kilder",
 
-  "google_translate": "Oversat med Google Translate",
-  "show_original": "Vis engelske tekst",
-  "improve_translation": "Forbedre oversættelse",
-  "show_translation": "Vis oversatte tekst",
   
   "plant_height_from": "Højde",
   "plant_height_to": "-",
@@ -292,14 +282,11 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Underserie",
   "taxonomy_supersectio": "Supersektion",
-  "taxonomy_species": "Art",
   "taxonomy_unknown": "ukendt",
 
   "snack_no_flowers": "Ingen blomster, der matcher kriterier.",
   "snack_loading_ad": "Annonce er stadig indlæst, tryk igen på knappen.",
   "snack_copy": "Kopieret til udklipsholderen",
-  "snack_publish": "... offentliggøres senere",
-  "snack_translation": "Tak for dit bidrag. Det offentliggøres snart.",
 
   "search": "Søg...",
   "search_names": "Søg i navne",
@@ -348,10 +335,6 @@
 
   "terms_of_use": "Vilkår for brug",
   "privacy_policy": "Fortrolighedspolitik",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play Butik",
 
   "promotion_title": "Betalt funktion",
   "promotion_content": "Dette er en betalt funktion. Du kan bruge det gratis indtil {date}",
@@ -360,8 +343,6 @@
   "no_connection_content": "Denne funktion virker ikke uden internetforbindelse.",
 
   "photo_search_no_login": "Søgning efter foto er kun tilgængelig for logget brugere. Vær venlig at logge ind.",
-  "photo_search_failed": "Søg efter billede mislykkedes. Tjek din internetforbindelse og prøv igen.",
-  "photo_to_search_by": "Foto til søgning efter",
   "photo_search_note": "Dette er funktion, der kun fungerer online. Nogle gange finder den nøjagtigt det, du leder efter, nogle gange ikke engang i nærheden. Jeg stoler helt på tredjepart her, da de gør alt det hårde arbejde. Efterhånden som det går skal det være bedre og bedre. Brug det med omhu og bedøm venligst ikke hele applikationen baseret på denne funktion. Af kvalitetsmæssige grunde gemmes alle søgeresultater (ikke fotos).",
   "photo_search_empty": "KI (kunstig intelligens) genkendte ikke nogen bestemt blomst på billedet. Prøv igen med forskellige vinkel-, afstands- eller lysforhold. Hvis du allerede gjorde det ser ud som KI overlord ikke kommer når som helst snart.",
 
@@ -372,7 +353,6 @@
   "custom_lists": "Lister med blomster",
   "new_flowers": "Nye blomster",
   "common_lists": "Fælles lister",
-  "my_lists": "Mine lister",
 
   "favorite_title": "Favorit blomster",
   "favorite_empty": "Der er endnu ingen favorit blomster.",

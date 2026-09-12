@@ -90,13 +90,9 @@
   "feedback_intro": "Anda telah berkontribusi untuk aplikasi ini karena Anda telah menginstalnya di perangkat Anda, terima kasih. Jika Anda mencari sesuatu yang lebih, berikut adalah beberapa opsi:",
   "feedback_review": "Anda dapat menulis ulasan positif.",
   "feedback_title": "Bagaimana cara berkontribusi",
-  "feedback_translate": "Anda dapat melaporkan kesalahan ketik atau kesalahan apa pun yang Anda temukan atau kirim terjemahan baru dalam bahasa Anda.",
-  "feedback_submit_translate_data": "Perbaiki data bunga",
-  "feedback_submit_translate_app": "Tingkatkan label aplikasi",
   "feedback_buy_extended": "Anda dapat membeli fungsionalitas tambahan seperti mode offline, pencarian nama atau taksonomi, pencarian berdasarkan foto, pengamatan dan filter yang dapat dikonfigurasi.",
   "feedback_run_ads": "Anda dapat menampilkan iklan layar penuh atau menonton iklan video untuk mendukung pengembangan lebih lanjut dan peningkatan basis data.",
   "feedback_run_ads_fullscreen": "Tampilkan iklan layar penuh",
-  "feedback_run_ads_video": "Tonton iklan video",
 
   "credit_login": "Masuk dan dapatkan kredit untuk menonton iklan. Dengan kredit, Anda dapat menggunakan beberapa peningkatan.",
   "credit_message": "Dapatkan kredit untuk menonton iklan. Dengan kredit, Anda dapat menggunakan beberapa peningkatan.",
@@ -110,9 +106,6 @@
   "auth_email": "Masuk dengan email",
   "auth_phone": "Masuk dengan telepon",
   "auth_google": "Masuk dengan Google",
-  "auth_apple": "Masuk dengan Apple",
-  "auth_facebook": "Masuk dengan Facebook",
-  "auth_twitter": "Masuk dengan Twitter",
   "auth_sign_in_failed": "Gagal masuk. Periksa koneksi Anda dan coba lagi.",
 
   "auth_email_hint": "E-mail",
@@ -158,7 +151,6 @@
   "pause": "Jeda",
   "apply": "Menerapkan",
   "cancel": "Membatalkan",
-
 
   "filter_color": "warna",
   "filter_habitat": "habitat",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "Taksonomi",
   "plant_sources": "Sumber",
 
-  "google_translate": "Diterjemahkan dengan Google Terjemahan",
-  "show_original": "Tampilkan teks bahasa Inggris",
-  "improve_translation": "Perbaiki terjemahan",
-  "show_translation": "Tampilkan teks terjemahan",
-
   "plant_height_from": "Tinggi dari",
   "plant_height_to": "sampai",
   "plant_flowering_from": "Berbunga dari",
@@ -294,14 +281,11 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
-  "taxonomy_species": "Jenis",
   "taxonomy_unknown": "tidak diketahui",
 
   "snack_no_flowers": "Tidak ada kriteria pencocokan bunga.",
   "snack_loading_ad": "Iklan masih memuat, tekan tombol lagi.",
   "snack_copy": "Disalin ke Clipboard",
-  "snack_publish": "... untuk diterbitkan nanti",
-  "snack_translation": "Terima kasih atas kontribusi Anda. Ini akan segera diterbitkan.",
 
   "search": "Mencari...",
   "search_names": "Cari nama",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "Syarat Penggunaan",
   "privacy_policy": "Rahasia pribadi",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play Store",
 
   "promotion_title": "Fitur berbayar",
   "promotion_content": "Ini adalah fitur berbayar. Anda dapat menggunakannya secara gratis hingga {date}",
@@ -362,8 +342,6 @@
   "no_connection_content": "Fitur ini tidak berfungsi tanpa koneksi internet.",
 
   "photo_search_no_login": "Pencarian berdasarkan foto hanya tersedia untuk pengguna yang login. Silahkan masuk.",
-  "photo_search_failed": "Pencarian berdasarkan foto gagal. Periksa koneksi internet Anda dan coba lagi.",
-  "photo_to_search_by": "Foto yang akan dicari",
   "photo_search_note": "Ini adalah fitur yang hanya berfungsi online. Terkadang ia menemukan apa yang Anda cari, terkadang bahkan tidak dekat. Saya benar-benar mengandalkan pihak ketiga di sini karena mereka melakukan semua kerja keras. Seiring berjalannya waktu itu harus lebih baik dan lebih baik. Gunakan dengan bijak dan jangan menilai keseluruhan aplikasi berdasarkan fitur ini. Untuk tujuan kualitas semua hasil pencarian (bukan foto) akan disimpan.",
   "photo_search_empty": "AI (kecerdasan buatan) tidak mengenali bunga tertentu pada gambar. Coba lagi dengan kondisi sudut, jarak, atau cahaya yang berbeda. Jika Anda sudah melakukannya sepertinya AI tuan tidak akan datang dalam waktu dekat.",
 
@@ -374,7 +352,6 @@
   "custom_lists": "Daftar bunga",
   "new_flowers": "Bunga baru",
   "common_lists": "Daftar umum",
-  "my_lists": "Daftar saya",
 
   "favorite_title": "Bunga favorit",
   "favorite_empty": "Belum ada bunga favorit.",

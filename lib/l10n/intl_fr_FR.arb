@@ -90,13 +90,9 @@
   "feedback_intro": "Vous avez contribué à cette application car vous l'avez installé sur votre appareil, merci. Si vous cherchez quelque chose de plus, voici quelques options:",
   "feedback_review": "Vous pouvez écrire une critique positive.",
   "feedback_title": "Contribution",
-  "feedback_translate": "Vous pouvez signaler toute erreur de frappe ou erreur que vous avez trouvée ou vous envoyer une nouvelle traduction dans votre langue.",
-  "feedback_submit_translate_data": "Améliorer les données de la fleur",
-  "feedback_submit_translate_app": "Améliorer les étiquettes de l'application",
   "feedback_buy_extended": "Vous pouvez acheter des fonctionnalités supplémentaires telles que le mode hors connexion, la recherche par noms ou par taxonomie, la recherche par photo, les observations et le filtre configurable.",
   "feedback_run_ads": "Vous pouvez afficher une publicité en plein écran ou regarder une publicité vidéo pour prendre en charge le développement et l'amélioration de la base de données.",
   "feedback_run_ads_fullscreen": "Afficher une publicité en plein écran",
-  "feedback_run_ads_video": "Regarder une publicité vidéo",
 
   "credit_login": "Connectez-vous et gagnez des crédits en regardant la publicité. Avec des crédits, vous pouvez utiliser certaines améliorations.",
   "credit_message": "Gagnez des crédits pour regarder la publicité. Avec des crédits, vous pouvez utiliser certaines améliorations.",
@@ -110,9 +106,6 @@
   "auth_email": "Se connecter avec une adresse e-mail",
   "auth_phone": "Se connecter avec un téléphone",
   "auth_google": "Se connecter avec Google",
-  "auth_apple": "Se connecter avec Apple",
-  "auth_facebook": "Se connecter avec Facebook",
-  "auth_twitter": "Se connecter avec Twitter",
   "auth_sign_in_failed": "La connexion a échoué. Vérifiez votre connexion et réessayez.",
 
   "auth_email_hint": "E-mail",
@@ -158,7 +151,6 @@
   "pause": "Pause",
   "apply": "Appliquer",
   "cancel": "Annuler",
-
 
   "filter_color": "couleur",
   "filter_habitat": "habitat",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "Taxonomie",
   "plant_sources": "Sources",
 
-  "google_translate": "Traduit avec Google Translate",
-  "show_original": "Afficher le texte en anglais",
-  "improve_translation": "Améliorer la traduction",
-  "show_translation": "Afficher le texte traduit",
-
   "plant_height_from": "Hauteur entre",
   "plant_height_to": "et",
   "plant_flowering_from": "Floraison de",
@@ -294,14 +281,11 @@
   "taxonomy_serie": "Série",
   "taxonomy_subserie": "Sous-série",
   "taxonomy_supersectio": "Super-section",
-  "taxonomy_species": "Espèce",
   "taxonomy_unknown": "inconnu",
 
   "snack_no_flowers": "Aucune fleur ne correspond aux critères.",
   "snack_loading_ad": "L’annonce est toujours en cours de chargement, appuyez à nouveau sur le bouton.",
   "snack_copy": "Copié dans le presse-papier",
-  "snack_publish": "... à publier plus tard",
-  "snack_translation": "Merci pour votre contribution. Il sera publié bientôt.",
 
   "search": "Chercher...",
   "search_names": "Chercher dans les noms",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "Conditions d'utilisation",
   "privacy_policy": "Politique de confidentialité",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play Store",
 
   "promotion_title": "Fonctionnalité payante",
   "promotion_content": "Ceci est une fonctionnalité payante. Vous pouvez l'utiliser gratuitement jusqu'à {date}",
@@ -362,8 +342,6 @@
   "no_connection_content": "Cette fonctionnalité ne fonctionne pas sans connexion Internet.",
 
   "photo_search_no_login": "La recherche par photo est disponible uniquement pour les utilisateurs connectés. Veuillez vous connecter.",
-  "photo_search_failed": "La recherche par photo a échoué. Vérifiez votre connexion Internet et réessayez.",
-  "photo_to_search_by": "Photo à rechercher par",
   "photo_search_note": "Cette fonctionnalité ne fonctionne qu'en ligne. Parfois, il trouve exactement ce que vous cherchez, parfois même pas à proximité. Je compte totalement sur des tiers ici car ils font tout le travail acharné. Au fil du temps, cela devrait être de mieux en mieux. Utilisez-le à bon escient et ne jugez pas toute l'application sur la base de cette fonctionnalité. Pour des raisons de qualité, tous les résultats de recherche (pas les photos) seront enregistrés.",
   "photo_search_empty": "IA (Intelligence artificielle) n'a reconnu aucune fleur particulière sur la photo. Réessayez avec différents angles, distances ou conditions d'éclairage. Si vous l'avez déjà fait, il semble que le suzerain d'IA ne viendra pas de sitôt.",
 
@@ -374,7 +352,6 @@
   "custom_lists": "Listes de fleurs",
   "new_flowers": "De nouvelles fleurs",
   "common_lists": "Listes communes",
-  "my_lists": "Mes listes",
 
   "favorite_title": "Fleurs préférées",
   "favorite_empty": "Il n'y a pas encore de fleurs préférées.",

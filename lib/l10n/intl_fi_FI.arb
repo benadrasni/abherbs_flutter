@@ -90,13 +90,9 @@
   "feedback_intro": "Olet osallistunut tähän sovellukseen, koska olet asentanut sen laitteeseen, kiitos. Jos etsit jotain muuta, tässä on muutamia vaihtoehtoja:",
   "feedback_review": "Voit kirjoittaa positiivisen tarkistuksen.",
   "feedback_title": "Miten osallistua",
-  "feedback_translate": "Voit ilmoittaa havaitusta virheestä tai virheestä tai lähettää uuden käännöksen omalle kielellesi.",
-  "feedback_submit_translate_data": "Paranna kukkien tietoja",
-  "feedback_submit_translate_app": "Paranna sovelluksen tarroja",
   "feedback_buy_extended": "Voit ostaa lisätoimintoja, kuten offline-tilassa, etsiä nimissä tai taksonomiassa, etsiä valokuvien, havaintojen ja konfiguroitavan suodattimen avulla.",
   "feedback_run_ads": "Voit näyttää koko näytön mainoksen tai katsella videomainosta tukemaan edelleen kehitystä ja tietokannan parantamista.",
   "feedback_run_ads_fullscreen": "Näytä koko näytön mainos",
-  "feedback_run_ads_video": "Katso videomainos",
 
   "credit_login": "Kirjaudu sisään ja ansaitse hyvityksiä mainosten katsomisesta. Luotoilla voit käyttää joitain parannuksia.",
   "credit_message": "Ansaitse krediittejä mainosten katsomisesta. Luotoilla voit käyttää joitain parannuksia.",
@@ -110,9 +106,6 @@
   "auth_email": "Kirjaudu sähköpostilla",
   "auth_phone": "Kirjaudu puhelimella",
   "auth_google": "Kirjaudu Google-tilillä",
-  "auth_apple": "Kirjaudu Apple-tilillä",
-  "auth_facebook": "Kirjaudu Facebook-tilillä",
-  "auth_twitter": "Kirjaudu Twitter-tilillä",
   "auth_sign_in_failed": "Kirjaudu sisään epäonnistui. Tarkista yhteys ja yritä uudelleen..",
 
   "auth_email_hint": "Sähköposti",
@@ -255,11 +248,6 @@
   "plant_taxonomy": "Taksonomia",
   "plant_sources": "Lähteet",
 
-  "google_translate": "Käännetty Google Translate",
-  "show_original": "Näytä Englanti teksti",
-  "improve_translation": "Parantamaan käännösten",
-  "show_translation": "Näytä käännetty teksti",
-
   "plant_height_from": "Korkeus",
   "plant_height_to": "-",
   "plant_flowering_from": "Kukinta",
@@ -293,14 +281,11 @@
   "taxonomy_serie": "Sarja",
   "taxonomy_subserie": "Alasarja",
   "taxonomy_supersectio": "Supersektio",
-  "taxonomy_species": "Laji",
   "taxonomy_unknown": "tuntematon",
 
   "snack_no_flowers": "Ei kukkien yhteensopivuusvaatimuksia.",
   "snack_loading_ad": "Mainos lataa, paina painiketta uudelleen.",
   "snack_copy": "Kopioitu leikepöydälle",
-  "snack_publish": "... julkaistaan myöhemmin",
-  "snack_translation": "Kiitos panoksestasi. Se julkaistaan pian.",
 
   "search": "Hae...",
   "search_names": "Hae nimistä",
@@ -349,10 +334,6 @@
 
   "terms_of_use": "Käyttöehdot",
   "privacy_policy": "Tietosuojakäytäntö",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play Kauppa",
 
   "promotion_title": "Maksettu ominaisuus",
   "promotion_content": "Tämä on maksullinen ominaisuus. Voit käyttää sitä ilmaiseksi, kunnes {date}",
@@ -361,8 +342,6 @@
   "no_connection_content": "Tämä ominaisuus ei toimi ilman Internet-yhteyttä.",
 
   "photo_search_no_login": "Valokuvien haku on käytettävissä vain kirjautuneille käyttäjille. Kirjaudu sisään, ole hyvä.",
-  "photo_search_failed": "Haku valokuvan mukaan epäonnistui. Tarkista Internet-yhteys ja yritä uudelleen.",
-  "photo_to_search_by": "Kuva, jonka haluat etsiä",
   "photo_search_note": "Tämä ominaisuus toimii vain verkossa. Joskus se löytää juuri etsimäsi, joskus ei edes lähellä. Luotan täysin kolmansiin osapuoliin, koska he tekevät kovaa työtä. Ajan myötä sen pitäisi olla parempi. Käytä sitä viisaasti ja älä arvioi koko sovellusta tämän ominaisuuden perusteella. Laadun kannalta kaikki hakutulokset (ei valokuvia) tallennetaan.",
   "photo_search_empty": "AI (keinotekoinen äly) ei tunnistanut mitään tiettyä kukkaa kuvassa. Yritä uudelleen eri kulma-, etäisyys- tai valo-olosuhteissa. Jos olet jo tehnyt, näyttää siltä, että AI: n ylimies ei tule pian.",
 
@@ -373,7 +352,6 @@
   "custom_lists": "Luettelot kukista",
   "new_flowers": "Uudet kukat",
   "common_lists": "Yhteiset luettelot",
-  "my_lists": "Minun luetteloni",
 
   "favorite_title": "Suosikki kukat",
   "favorite_empty": "Ei ole vielä suosikkikukkia.",

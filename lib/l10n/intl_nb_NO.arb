@@ -90,13 +90,9 @@
   "feedback_intro": "Du har bidratt til dette programmet siden du har installert det på enheten, takk. Hvis du leter etter noe mer, er det noen alternativer:",
   "feedback_review": "Du kan skrive en positiv anmeldelse.",
   "feedback_title": "Hvordan bidra",
-  "feedback_translate": "Du kan rapportere hvilken som helst skrivefeil eller feil du fant eller sende inn ny oversettelse på ditt språk.",
-  "feedback_submit_translate_data": "Forbedre blomstens data",
-  "feedback_submit_translate_app": "Forbedre programmets etiketter",
   "feedback_buy_extended": "Du kan kjøpe tilleggsfunksjoner som frakoblet modus, søk i navn eller i taksonomi, søk etter bilde, observasjoner og konfigurerbart filter.",
   "feedback_run_ads": "Du kan vise fullskjermsannonsering eller se videoannonse for å støtte videreutvikling og databaseforbedring.",
   "feedback_run_ads_fullscreen": "Vis en fullskjerm-annonse",
-  "feedback_run_ads_video": "Se en videoannonse",
 
   "credit_login": "Logg på og tjen kreditter for å se på reklame. Med kreditter kan du bruke noen forbedringer.",
   "credit_message": "Tjen kreditter for å se på reklame. Med kreditter kan du bruke noen forbedringer.",
@@ -110,9 +106,6 @@
   "auth_email": "Logg på med e-postadresse",
   "auth_phone": "Logg på med telefonnummeret ditt",
   "auth_google": "Logg på med Google",
-  "auth_apple": "Logg på med Apple",
-  "auth_facebook": "Logg på med Facebook",
-  "auth_twitter": "Logg på med Twitter",
   "auth_sign_in_failed": "Logg inn mislyktes. Sjekk forbindelsen og prøv igjen.",
 
   "auth_email_hint": "E-post",
@@ -158,7 +151,6 @@
   "pause": "Pause",
   "apply": "Søke om",
   "cancel": "Avbryt",
-
 
   "filter_color": "farge",
   "filter_habitat": "voksested",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "Taksonomi",
   "plant_sources": "Referanser",
 
-  "google_translate": "Oversatt med Google Trans",
-  "show_original": "Vis engelsk tekst",
-  "improve_translation": "Forbedre oversettelse",
-  "show_translation": "Vis oversatt tekst",
-
   "plant_height_from": "Høyde",
   "plant_height_to": "-",
   "plant_flowering_from": "Blomstringstid",
@@ -294,14 +281,11 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
-  "taxonomy_species": "Art",
   "taxonomy_unknown": "ukjent",
 
   "snack_no_flowers": "Ingen blomster som samsvarer med kriterier.",
   "snack_loading_ad": "Annonsen er fortsatt lasting, trykk på knappen igjen.",
   "snack_copy": "Kopiert til utklippstavlen",
-  "snack_publish": "... å bli publisert senere",
-  "snack_translation": "Takk for ditt bidrag. Den publiseres snart.",
 
   "search": "Søke...",
   "search_names": "Søk i navn",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "Vilkår for bruk",
   "privacy_policy": "Personvernregler",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play Butikk",
 
   "promotion_title": "Betalt funksjon",
   "promotion_content": "Dette er en betalt funksjon. Du kan bruke det gratis til {date}",
@@ -362,8 +342,6 @@
   "no_connection_content": "Denne funksjonen virker ikke uten Internett-tilkobling.",
 
   "photo_search_no_login": "Søk etter bilde er bare tilgjengelig for loggede brukere. Vennligst Logg inn.",
-  "photo_search_failed": "Søk etter bilde mislyktes. Sjekk Internett-tilkoblingen din og prøv igjen.",
-  "photo_to_search_by": "Bilde å søke etter",
   "photo_search_note": "Dette er funksjonen fungerer bare online. Noen ganger finner den nøyaktig hva du leter etter, andre ganger ikke engang i nærheten. Jeg stoler helt på tredjepart her siden de gjør alt det harde arbeidet. Etter hvert som tiden går skal det bli bedre og bedre. Bruk den med omhu og vær så snill, ikke døm hele applikasjonen basert på denne funksjonen. For kvalitetsformål vil alle søkeresultater (ikke bilder) lagres.",
   "photo_search_empty": "KI (kunstig intelligens) kjente ikke noen bestemt blomst på bildet. Prøv igjen med forskjellige vinkel-, avstands- eller lysforhold. Hvis du allerede gjorde det, ser det ut som at KI overlord ikke kommer når som helst snart.",
 
@@ -374,7 +352,6 @@
   "custom_lists": "Lister over blomster",
   "new_flowers": "Nye blomster",
   "common_lists": "Felles lister",
-  "my_lists": "Listene mine",
 
   "favorite_title": "Favorittblomster",
   "favorite_empty": "Det er ingen favoritt blomster ennå.",

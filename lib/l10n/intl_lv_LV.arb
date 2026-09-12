@@ -90,13 +90,9 @@
   "feedback_intro": "Jūs esat veicinājis šo lietojumprogrammu, jo esat to instalējis savā ierīcē. Ja jūs meklējat kaut ko vairāk, šeit ir dažas iespējas:",
   "feedback_review": "Jūs varat uzrakstīt pozitīvu pārskatu.",
   "feedback_title": "Kā piedalīties",
-  "feedback_translate": "Jūs varat ziņot par atrasto kļūdu vai kļūdu vai iesniegt jaunu tulkojumu savā valodā.",
-  "feedback_submit_translate_data": "Uzlabojiet ziedu datus",
-  "feedback_submit_translate_app": "Uzlabojiet lietojumprogrammas uzlīmes",
   "feedback_buy_extended": "Jūs varat iegādāties papildu funkcionalitāti, piemēram, bezsaistes režīmā, meklēt nosaukumos vai taksonomijā, meklēt pēc fotoattēla, novērojumiem un konfigurējama filtra.",
   "feedback_run_ads": "Jūs varat parādīt pilnekrāna reklāmu vai skatīties video reklāmu, lai atbalstītu turpmāku attīstību un datu bāzes uzlabošanu.",
   "feedback_run_ads_fullscreen": "Rādīt pilnekrāna reklāmu",
-  "feedback_run_ads_video": "Skatiet video reklāmu",
 
   "credit_login": "Pierakstieties un nopelniet kredītus par reklāmas skatīšanos. Izmantojot kredītus, varat izmantot dažus uzlabojumus.",
   "credit_message": "Nopelniet kredītus par reklāmas skatīšanos. Izmantojot kredītus, varat izmantot dažus uzlabojumus.",
@@ -110,9 +106,6 @@
   "auth_email": "Pierakstīties ar e-pasta adresi",
   "auth_phone": "Pierakstīties ar tālruni",
   "auth_google": "Pierakstīties ar Google",
-  "auth_apple": "Pierakstīties ar Apple",
-  "auth_facebook": "Pierakstīties ar Facebook",
-  "auth_twitter": "Pierakstīties ar Twitter",
   "auth_sign_in_failed": "Pierakstīšanās neizdevās. Pārbaudiet savienojumu un mēģiniet vēlreiz.",
 
   "auth_email_hint": "E-pasts",
@@ -158,7 +151,6 @@
   "pause": "Pauze",
   "apply": "Piesakies",
   "cancel": "Atcelt",
-
 
   "filter_color": "krāsa",
   "filter_habitat": "biotopi",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "Taksonomija",
   "plant_sources": "Pirmsākums",
 
-  "google_translate": "Tulkots ar Google Translate",
-  "show_original": "Rādīt angļu valodā",
-  "improve_translation": "Uzlabot tulkojumu",
-  "show_translation": "Rādīt tulkoto tekstu",
-
   "plant_height_from": "Augstums",
   "plant_height_to": "-",
   "plant_flowering_from": "Ziedēšanas no",
@@ -294,14 +281,11 @@
   "taxonomy_serie": "Sērija",
   "taxonomy_subserie": "Apakšsērija",
   "taxonomy_supersectio": "Virssekcija",
-  "taxonomy_species": "Suga",
   "taxonomy_unknown": "nezināms",
 
   "snack_no_flowers": "Nav ziedu atbilstības kritēriju.",
   "snack_loading_ad": "Reklāma joprojām tiek ielādēta, vēlreiz nospiediet pogu.",
   "snack_copy": "Kopēts uz starpliktuvi",
-  "snack_publish": "... publicēt vēlāk",
-  "snack_translation": "Paldies par jūsu ieguldījumu. Tas drīz tiks publicēts.",
 
   "search": "Meklēt...",
   "search_names": "Meklēt vārdos",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "Lietošanas noteikumi",
   "privacy_policy": "Privātuma politika",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play veikals",
 
   "promotion_title": "Maksas funkcija",
   "promotion_content": "Tā ir maksas funkcija. To var izmantot bez maksas līdz {date}",
@@ -362,8 +342,6 @@
   "no_connection_content": "Šī funkcija nedarbojas bez interneta pieslēguma.",
 
   "photo_search_no_login": "Meklēšana pēc fotoattēla ir pieejama tikai reģistrētiem lietotājiem. Lūdzu, piesakieties.",
-  "photo_search_failed": "Meklēšana pēc fotoattēla neizdevās. Pārbaudiet savu interneta savienojumu un mēģiniet vēlreiz.",
-  "photo_to_search_by": "Fotoattēls meklēšanai pēc",
   "photo_search_note": "Šī funkcija darbojas tikai tiešsaistē. Dažreiz tas atrod tieši to, ko meklējat, dažreiz pat ne tuvu. Es šeit pilnīgi paļaujos uz trešajām personām, jo viņi visu smago darbu dara visu. Laikam ejot, tam vajadzētu būt arvien labākam. Izmantojiet to saprātīgi un, lūdzu, netiesājiet visu lietojumprogrammu, pamatojoties uz šo funkciju. Kvalitātes nolūkā visi meklēšanas rezultāti (nevis fotoattēli) tiks saglabāti.",
   "photo_search_empty": "MI (mākslīgais intelekts) neatpazina kādu konkrētu ziedu attēlā. Mēģiniet vēlreiz ar dažādiem leņķa, attāluma vai gaismas apstākļiem. Ja jūs jau to darāt, izskatās, ka MI virsnieks drīzumā nenāks.",
 
@@ -374,7 +352,6 @@
   "custom_lists": "Ziedu saraksti",
   "new_flowers": "Jauni ziedi",
   "common_lists": "Kopējie saraksti",
-  "my_lists": "Mani saraksti",
 
   "favorite_title": "Mīļākie ziedi",
   "favorite_empty": "Vēl nav neviena mīļākā zieda.",

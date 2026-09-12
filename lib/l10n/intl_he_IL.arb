@@ -90,13 +90,9 @@
   "feedback_intro": "אתה כבר תורם ליישום זה מאז התקנת את זה על המכשיר שלך, תודה. אם אתה מחפש משהו נוסף, הנה כמה אפשרויות:",
   "feedback_review": "אתה יכול לכתוב ביקורת חיובית.",
   "feedback_title": "כיצד לתרום",
-  "feedback_translate": "תוכל לדווח על שגיאת הקלדה או השגיאה שמצאת או שלח תרגום חדש בשפה שלך",
-  "feedback_submit_translate_data": "שפר את נתוני הפרחים",
-  "feedback_submit_translate_app": "שפר את תוויות היישום",
   "feedback_buy_extended": "אתה יכול לקנות פונקציונליות נוספת כמו במצב לא מקוון, חיפוש בשמות או בטקסונומיה, חיפוש לפי תמונה, תצפיות ומסנן להגדרה.",
   "feedback_run_ads": "ניתן להציג פרסומת במסך מלא או לצפות בפרסומת וידאו כדי לתמוך בפיתוח ובשיפור נתונים נוספים.",
   "feedback_run_ads_fullscreen": "הצג פרסומת במסך מלא",
-  "feedback_run_ads_video": "צפה בפרסומת וידאו",
 
   "credit_login": "היכנס והרוויח זיכויים לצפייה בפרסומת. באמצעות זיכויים תוכלו להשתמש בשיפורים מסוימים.",
   "credit_message": "צברו נקודות זכות לצפייה בפרסומת. באמצעות זיכויים תוכלו להשתמש בשיפורים מסוימים.",
@@ -110,9 +106,6 @@
   "auth_email": "היכנס באמצעות דוא\"ל",
   "auth_phone": "היכנס באמצעות הטלפון",
   "auth_google": "היכנס באמצעות Google",
-  "auth_apple": "היכנס באמצעות Apple",
-  "auth_facebook": "התחבר עם פייסבוק",
-  "auth_twitter": "היכנס באמצעות Twitter",
   "auth_sign_in_failed": "ההרשמה נכשלה. בדוק את החיבור ונסה שוב.",
 
   "auth_email_hint": "דוא\"ל",
@@ -158,7 +151,6 @@
   "pause": "השהה",
   "apply": "להגיש מועמדות",
   "cancel": "לְבַטֵל",
-
 
   "filter_color": "צבע",
   "filter_habitat": "בתי גידול",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "טקסונומיה",
   "plant_sources": "מקורות",
 
-  "google_translate": "תורגם עם גוגל תרגום",
-  "show_original": "הצג טקסט באנגלית",
-  "improve_translation": "שפר את התרגום",
-  "show_translation": "הצג טקסט מתורגם",
-
   "plant_height_from": "גובה מ",
   "plant_height_to": "עד",
   "plant_flowering_from": "פריחה מ",
@@ -294,14 +281,11 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
-  "taxonomy_species": "מין",
   "taxonomy_unknown": "לא ידוע",
 
   "snack_no_flowers": "אין קריטריונים תואמים לפרחים.",
   "snack_loading_ad": "המודעה עדיין נטענת, לחץ שוב על הלחצן.",
   "snack_copy": "הועתק ללוח",
-  "snack_publish": "יפורסם בהמשך",
-  "snack_translation": "תודה על תרומתך. זה יפורסם בקרוב.",
 
   "search": "לחפש...",
   "search_names": "חפש בשמות",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "תנאי שימוש",
   "privacy_policy": "מדיניות פרטיות",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play Store",
 
   "promotion_title": "תכונה בתשלום",
   "promotion_content": "זוהי תכונה בתשלום. אתה יכול להשתמש בו בחינם עד {date}",
@@ -362,8 +342,6 @@
   "no_connection_content": "תכונה זו אינה פועלת ללא חיבור לאינטרנט.",
 
   "photo_search_no_login": "חיפוש לפי תמונה זמין רק עבור משתמשים רשומים. היכנס.",
-  "photo_search_failed": "החיפוש לפי תמונות נכשל. בדוק את חיבור האינטרנט שלך ונסה שוב.",
-  "photo_to_search_by": "צילום לחיפוש לפי",
   "photo_search_note": "תכונה זו פועלת באופן מקוון בלבד. לפעמים זה מוצא בדיוק את מה שאתה מחפש, לפעמים אפילו לא קרוב. אני סומך לחלוטין על צד ג 'כאן מכיוון שהם עושים את כל העבודה הקשה. ככל שעובר הזמן זה צריך להיות טוב יותר ויותר. השתמש בזה בחוכמה בבקשה אל תשפט את היישום כולו על סמך תכונה זו. למטרות איכות כל תוצאות החיפוש (לא תמונות) יישמרו.",
   "photo_search_empty": "AI (בינה מלאכותית) לא זיהה פרח מסוים בתמונה. נסה שוב עם תנאי זווית, מרחק או אור שונים. אם כבר עשית זה נראה כאילו אדון AI לא יגיע בקרוב.",
 
@@ -374,7 +352,6 @@
   "custom_lists": "רשימות פרחים",
   "new_flowers": "פרחים חדשים",
   "common_lists": "רשימות נפוצות",
-  "my_lists": "הרשימות שלי",
 
   "favorite_title": "פרחים מועדפים",
   "favorite_empty": "אין עדיין פרחים מועדפים.",

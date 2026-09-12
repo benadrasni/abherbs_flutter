@@ -90,11 +90,9 @@
   "feedback_intro": "Você tem contribuído para este aplicativo desde que você o instalou no seu dispositivo, obrigado. Se você está procurando algo mais, aqui estão algumas opções:",
   "feedback_review": "Você pode escrever um comentário positivo.",
   "feedback_title": "Como contribuir",
-  "feedback_translate": "Você pode denunciar qualquer erro ou erro encontrado ou enviar uma nova tradução para o seu idioma.",
   "feedback_buy_extended": "Você pode comprar funcionalidades adicionais como o modo off-line, pesquisar em nomes ou em taxonomia, pesquisar por foto, observações e filtro configurável.",
   "feedback_run_ads": "Você pode exibir anúncios em tela cheia ou assistir a anúncios em vídeo para dar suporte a mais desenvolvimento e aprimoramento do banco de dados.",
   "feedback_run_ads_fullscreen": "Mostrar um anúncio em tela cheia",
-  "feedback_run_ads_video": "Assista a um anúncio em vídeo",
 
   "credit_login": "Cadastre-se e ganhe créditos por assistir o anúncio. Com os créditos, você pode usar alguns aprimoramentos.",
   "credit_message": "Ganhe créditos por assistir ao anúncio. Com os créditos, você pode usar alguns aprimoramentos.",
@@ -108,9 +106,6 @@
   "auth_email": "Fazer login com o e-mail",
   "auth_phone": "Fazer login com o telefone",
   "auth_google": "Fazer login com o Google",
-  "auth_apple": "Fazer login com o Apple",
-  "auth_facebook": "Fazer login com o Facebook",
-  "auth_twitter": "Fazer login com o Twitter",
   "auth_sign_in_failed": "A entrada falhou. Verifique sua conexão e tente novamente.",
 
   "auth_email_hint": "E-mail",
@@ -156,7 +151,6 @@
   "pause": "Pausa",
   "apply": "Aplique",
   "cancel": "Cancelar",
-
 
   "filter_color": "cor",
   "filter_habitat": "habitat",
@@ -254,11 +248,6 @@
   "plant_taxonomy": "Taxinomia",
   "plant_sources": "Fontes",
 
-  "google_translate": "Traduzido com Google Tradutor",
-  "show_original": "Mostrar texto em inglês",
-  "improve_translation": "Melhorar a tradução",
-  "show_translation": "Mostrar texto traduzido",
-
   "plant_height_from": "altura de",
   "plant_height_to": "a",
   "plant_flowering_from": "Floresce de",
@@ -292,14 +281,11 @@
   "taxonomy_serie": "série",
   "taxonomy_subserie": "subsérie",
   "taxonomy_supersectio": "superseção",
-  "taxonomy_species": "espécie",
   "taxonomy_unknown": "desconhecido",
 
   "snack_no_flowers": "Não há critérios de correspondência de flores.",
   "snack_loading_ad": "O anúncio ainda está carregando, pressione o botão novamente.",
   "snack_copy": "Copiado para a área de transferência",
-  "snack_publish": "... para ser publicado mais tarde",
-  "snack_translation": "Obrigado pela sua contribuição. Será publicado em breve.",
 
   "search": "Procurar...",
   "search_names": "Pesquisa nos nomes",
@@ -348,10 +334,6 @@
 
   "terms_of_use": "Termos de uso",
   "privacy_policy": "Política de Privacidade",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play Store",
 
   "promotion_title": "Recurso pago",
   "promotion_content": "Este é um recurso pago. Você pode usá-lo gratuitamente até {date}",
@@ -360,8 +342,6 @@
   "no_connection_content": "Este recurso não funciona sem conexão com a Internet.",
 
   "photo_search_no_login": "A pesquisa por foto está disponível apenas para usuários registrados. Por favor entre.",
-  "photo_search_failed": "Pesquisa por foto falhou. Verifique sua conexão com a Internet e tente novamente.",
-  "photo_to_search_by": "Foto para pesquisar por",
   "photo_search_note": "Esta é uma funcionalidade que funciona apenas online. Às vezes, encontra exatamente o que você está procurando, às vezes nem perto. Estou confiando totalmente em terceiros aqui, pois eles estão fazendo todo o trabalho duro. Conforme o tempo passa, deve ser melhor e melhor. Use-o com sabedoria e, por favor, não julgue o aplicativo inteiro com base nesse funcionalidade. Para fins de qualidade, todos os resultados da pesquisa (não fotos) serão salvos.",
   "photo_search_empty": "O IA (inteligência artificial) não reconheceu nenhuma flor em particular na foto. Tente novamente com diferentes condições de ângulo, distância ou luz. Se você já fez isso, parece que o senhor da IA não virá tão cedo.",
 
@@ -372,7 +352,6 @@
   "custom_lists": "Listas de flores",
   "new_flowers": "Flores novas",
   "common_lists": "Listas comuns",
-  "my_lists": "Minhas listas",
 
   "favorite_title": "Flores favoritas",
   "favorite_empty": "Não há flores favoritas ainda.",

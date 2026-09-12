@@ -90,13 +90,9 @@
   "feedback_intro": "Tuto aplikaci podporujete odkdy jste si ji nainstalovali na své mobilní zařízení, děkuji. Pokud hledáte jiné formy podpory, zde jsou některé možnosti:",
   "feedback_review": "Můžete napsat pozitivní recenzi.",
   "feedback_title": "Jak přispět",
-  "feedback_translate": "Můžete upozornit na gramatické a faktické chyby v textu, případně navrhnout lepší překlad jednotlivých květin nebo aplikace samotné na stránce whatsthatflower.com.",
-  "feedback_submit_translate_data": "Opravit chyby datech",
-  "feedback_submit_translate_app": "Opravit chyby v aplikaci",
   "feedback_buy_extended": "Můžete si koupit funkce navíc jako například offline režim, vyhledávání v názvech a v taxonomii, vyhledávání pomocí fotografie, pozorování a nastavitelný filtr.",
   "feedback_run_ads": "Můžete si prohlédnout videoreklamu nebo nechat zobrazit reklamu na celou obrazovku a podpořit tak další vývoj a rozšiřování databáze.",
   "feedback_run_ads_fullscreen": "Zobrazit reklamu na celé obrazovce",
-  "feedback_run_ads_video": "Spustit video reklamu",
 
   "credit_login": "Přihlaste se a získejte kredity za sledování reklamy. S kredity můžete použít některá vylepšení.",
   "credit_message": "Získejte kredity za sledování reklamy. S kredity můžete použít některá vylepšení.",
@@ -110,9 +106,6 @@
   "auth_email": "Přihlásit se pomocí e-mailu",
   "auth_phone": "Přihlásit se pomocí telefonu",
   "auth_google": "Přihlásit se přes Google",
-  "auth_apple": "Přihlásit se přes Apple",
-  "auth_facebook": "Přihlásit se přes Facebook",
-  "auth_twitter": "Přihlásit se přes Twitter",
   "auth_sign_in_failed": "Přihlášení se nezdařilo. Zkontrolujte připojení a zkuste to znovu.",
 
   "auth_email_hint": "E-mail",
@@ -158,7 +151,6 @@
   "pause": "Pozastavit",
   "apply": "Aplikovat",
   "cancel": "Zrušit",
-
 
   "filter_color": "barva",
   "filter_habitat": "ekologie",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "Taxonomie",
   "plant_sources": "Zdroje",
 
-  "google_translate": "Přeloženo pomocí Google překladače",
-  "show_original": "Zobraz slovenský text",
-  "improve_translation": "Vylepšit překlad",
-  "show_translation": "Zobraz přeložený text",
-
   "plant_height_from": "Výška:",
   "plant_height_to": "-",
   "plant_flowering_from": "Kvete:",
@@ -294,13 +281,11 @@
   "taxonomy_serie": "série",
   "taxonomy_subserie": "podsérie",
   "taxonomy_supersectio": "nadsekce",
-  "taxonomy_species": "druh",
   "taxonomy_unknown": "neznámý",
 
   "snack_no_flowers": "Filtru nevyhovují žádné květiny v databázi.",
   "snack_loading_ad": "Reklama se stále načítá, znovu stiskněte tlačítko.",
   "snack_copy": "Zkopírováno do schránky",
-  "snack_translation": "Děkujeme za váš příspěvek. Bude brzy zveřejněn.",
 
   "search": "Hledat...",
   "search_names": "Hledat v jménech",
@@ -349,10 +334,6 @@
 
   "terms_of_use": "Podmínky použití",
   "privacy_policy": "Zásady ochrany osobních údajů",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App obchod",
-  "play_store": "Obchod Google Play",
 
   "promotion_title": "Placená funkce",
   "promotion_content": "Toto je placená funkce. Volně dostupná bude do {date}",
@@ -361,8 +342,6 @@
   "no_connection_content": "Tato funkce bez připojení k Internetu nefunguje.",
 
   "photo_search_no_login": "Vyhledávání podle fotografie je dostupné pouze pro přihlášené uživatele. Přihlaste se, prosím.",
-  "photo_search_failed": "Vyhledávání bylo neúspěšné. Zkontrolujte své připojení na internet a skuste znovu.",
-  "photo_to_search_by": "Fotka, podle níž se vyhledává",
   "photo_search_note": "Toto je funkce, která funguje pouze online. Někdy najde přesně to, co hledáte, někdy ani zdaleka. Úplně se v tom spoléhám na třetí stranu, protože jde o jejich software. Časem by to mělo být lepší a lepší. Používejte ji uvážlivě a prosím nehodnoťte celou aplikaci na základě této funkce. Za účelem zvyšování kvality budou všechny výsledky vyhledávání (ne fotografie) uložené.",
   "photo_search_empty": "UI (umělá inteligence) na obrázku nerozeznala žádnou konkrétní květinu. Zkuste znovu s jiným úhlem, vzdáleností nebo světelnými podmínkami. Pokud jste to již udělali, vypadá to tak, že nový UI vládce nepřijde tak brzy.",
 
@@ -373,7 +352,6 @@
   "custom_lists": "Seznamy květin",
   "new_flowers": "Nové květy",
   "common_lists": "Společné seznamy",
-  "my_lists": "Moje seznamy",
 
   "favorite_title": "Oblíbené květy",
   "favorite_empty": "Zatím nejsou žádné oblíbené květy.",

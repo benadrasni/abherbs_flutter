@@ -90,13 +90,9 @@
   "feedback_intro": "기기에 설치 한 이후이 애플리케이션에 기여하고 있습니다. 감사합니다. 더 많은 것을 찾고 있다면 다음과 같은 옵션이 있습니다.",
   "feedback_review": "긍정적 인 리뷰를 쓸 수 있습니다.",
   "feedback_title": "기여하는 방법",
-  "feedback_translate": "발견 한 오타 나 오역을보고하거나 꽃 데이터 또는 응용 프로그램 레이블에 대한 새 번역을 제출할 수 있습니다. (whatsthatflower.com)",
-  "feedback_submit_translate_data": "꽃의 데이터 개선",
-  "feedback_submit_translate_app": "응용 프로그램 레이블 개선",
   "feedback_buy_extended": "오프라인 모드, 이름 또는 분류로 검색, 사진으로 검색, 관찰 및 구성 가능한 필터와 같은 추가 기능을 구입할 수 있습니다.",
   "feedback_run_ads": "추가 개발 및 데이터베이스 향상을 지원하기 위해 전체 화면 광고를 표시하거나 비디오 광고를 볼 수 있습니다.",
   "feedback_run_ads_fullscreen": "전체 화면 광고 표시",
-  "feedback_run_ads_video": "비디오 광고 시청",
 
   "credit_login": "로그인하고 광고 시청 크레딧을 받으세요. 크레딧으로 몇 가지 개선 사항을 사용할 수 있습니다.",
   "credit_message": "광고를보고 크레딧을 받으세요. 크레딧으로 몇 가지 개선 사항을 사용할 수 있습니다.",
@@ -110,9 +106,6 @@
   "auth_email": "이메일로 로그인",
   "auth_phone": "전화로 로그인",
   "auth_google": "Google로 로그인",
-  "auth_apple": "Apple로 로그인",
-  "auth_facebook": "페이스 북으로 로그인",
-  "auth_twitter": "트위터로 로그인",
   "auth_sign_in_failed": "로그인하지 못했습니다. 연결을 확인하고 다시 시도하십시오.",
 
   "auth_email_hint": "이메일",
@@ -158,7 +151,6 @@
   "pause": "중지",
   "apply": "대다",
   "cancel": "취소",
-
 
   "filter_color": "색깔",
   "filter_habitat": "서식지",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "분류",
   "plant_sources": "출처",
 
-  "google_translate": "Google 번역으로 번역",
-  "show_original": "영어 텍스트 표시",
-  "improve_translation": "번역 개선",
-  "show_translation": "번역 된 텍스트 표시",
-
   "plant_height_from": "높이",
   "plant_height_to": "에",
   "plant_flowering_from": "개화",
@@ -294,14 +281,11 @@
   "taxonomy_subsectio": "Subsectio",
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
-  "taxonomy_species": "종",
   "taxonomy_unknown": "unknown",
 
   "snack_no_flowers": "기준과 일치하는 꽃이 없습니다.",
   "snack_loading_ad": "광고가 계속로드 중입니다. 버튼을 다시 누르십시오.",
   "snack_copy": "클립 보드에 복사",
-  "snack_publish": "... 나중에 출판 될",
-  "snack_translation": "당신의 기여에 감사드립니다. 곧 게시 될 예정입니다.",
 
   "search": "검색...",
   "search_names": "이름으로 검색",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "이용 약관",
   "privacy_policy": "개인 정보 정책",
-  "apple": "애플",
-  "google": "구글",
-  "app_store": "앱 스토어",
-  "play_store": "구글 플레이",
 
   "promotion_title": "유료 기능",
   "promotion_content": "유료 기능입니다. {date}까지 무료로 사용할 수 있습니다",
@@ -362,8 +342,6 @@
   "no_connection_content": "인터넷에 연결되어 있지 않으면이 기능이 작동하지 않습니다.",
 
   "photo_search_no_login": "사진으로 검색은 로그인 한 사용자 만 사용할 수 있습니다. 로그인 해주세요.",
-  "photo_search_failed": "사진으로 검색하지 못했습니다. 인터넷 연결을 확인하고 다시 시도하십시오.",
-  "photo_to_search_by": "검색 할 사진",
   "photo_search_note": "이 기능은 온라인에서만 작동합니다. 때로는 원하는 것을 정확하게 찾고 때로는 가깝지 않은 경우도 있습니다. 나는 그들이 최선을 다하고 있기 때문에 제 3 자에 전적으로 의존하고 있습니다. 시간이 지날수록 더 좋아질 것입니다. 현명하게 사용하고이 기능을 기반으로 전체 응용 프로그램을 판단하지 마십시오. 품질을 위해 모든 검색 결과 (사진이 아님)가 저장됩니다.",
   "photo_search_empty": "AI (인공 지능)는 그림의 특정 꽃을 인식하지 못했습니다. 다른 각도, 거리 또는 조명 조건으로 다시 시도하십시오. 이미 AI 대군 주가 곧 오지 않을 것 같습니다.",
 
@@ -374,7 +352,6 @@
   "custom_lists": "꽃의 목록",
   "new_flowers": "새로운 꽃",
   "common_lists": "공통 목록",
-  "my_lists": "내 목록",
 
   "favorite_title": "좋아하는 꽃",
   "favorite_empty": "좋아하는 꽃은 아직 없습니다.",

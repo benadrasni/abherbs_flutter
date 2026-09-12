@@ -90,13 +90,9 @@
   "feedback_intro": "デバイスにインストールしたので、このアプリケーションに貢献しました。ありがとうございます。 あなたがもっと何かを探しているなら、いくつかのオプションがあります：",
   "feedback_review": "あなたは肯定的なレビューを書くことができます。",
   "feedback_title": "貢献する方法",
-  "feedback_translate": "誤植や誤りを報告したり、新しい翻訳をあなたの言語で提出することができます。",
-  "feedback_submit_translate_data": "花のデータを改善する",
-  "feedback_submit_translate_app": "アプリケーションのラベルを改善する",
   "feedback_buy_extended": "あなたはオフラインモードのような追加の機能を購入することができます名前または分類法での検索、写真による検索、観察および設定可能なフィルタ。",
   "feedback_run_ads": "全画面広告を表示したり、ビデオ広告を見たりして、さらなる開発やデータベースの機能強化をサポートできます。",
   "feedback_run_ads_fullscreen": "フルスクリーン広告を表示する",
-  "feedback_run_ads_video": "ビデオ広告を見る",
 
   "credit_login": "サインインして、広告を見るためのクレジットを獲得してください。 クレジットを使用すると、いくつかの拡張機能を使用できます。",
   "credit_message": "広告を見ることでクレジットを獲得できます。 クレジットを使用すると、いくつかの拡張機能を使用できます。",
@@ -110,9 +106,6 @@
   "auth_email": "メールアドレスでログイン",
   "auth_phone": "電話番号でログイン",
   "auth_google": "Google でログイン",
-  "auth_apple": "Apple でログイン",
-  "auth_facebook": "Facebook でログイン",
-  "auth_twitter": "Twitter でログイン",
   "auth_sign_in_failed": "サインインできませんでした。 接続を確認してもう一度やり直してください。",
 
   "auth_email_hint": "メールアドレス",
@@ -158,7 +151,6 @@
   "pause": "一時停止",
   "apply": "適用する",
   "cancel": "キャンセル",
-
 
   "filter_color": "色",
   "filter_habitat": "生息地",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "分類学",
   "plant_sources": "出典",
 
-  "google_translate": "Google翻訳で翻訳された",
-  "show_original": "英語のテキストを表示する",
-  "improve_translation": "翻訳を改善する",
-  "show_translation": "翻訳されたテキストを表示する",
-
   "plant_height_from": "高さ",
   "plant_height_to": "-",
   "plant_flowering_from": "開花",
@@ -294,14 +281,11 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",  
-  "taxonomy_species": "種",
   "taxonomy_unknown": "未知の",
 
   "snack_no_flowers": "基準に一致する花はありません。",
   "snack_loading_ad": "広告はまだ読み込まれています。もう一度ボタンを押してください。",
   "snack_copy": "クリップボードにコピー",
-  "snack_publish": "... 後で公開する",
-  "snack_translation": "あなたの貢献をありがとう。 まもなく公開されます。",
 
   "search": "サーチ...",
   "search_names": "名前で検索",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "利用規約",
   "privacy_policy": "個人情報保護方針",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play ストア",
 
   "promotion_title": "有料機能",
   "promotion_content": "これは有料機能です。{date} まで無料で使えます",
@@ -362,8 +342,6 @@
   "no_connection_content": "この機能はインターネットに接続していないと機能しません。",
 
   "photo_search_no_login": "写真による検索は、ログインしているユーザーのみが利用できます。 ログインしてください。",
-  "photo_search_failed": "写真で検索できませんでした。 インターネット接続を確認してもう一度やり直してください。",
-  "photo_to_search_by": "検索する写真",
   "photo_search_note": "これはオンラインでのみ機能する機能です。 探しているものを正確に見つける場合もあれば、近くにない場合もあります。 彼らがすべての大変な仕事をしているので、私はここでサードパーティに完全に依存しています。 時間が経つにつれ、それはどんどん良くなるはずです。 賢くそれを使用し、この機能に基づいてアプリケーション全体を判断しないでください。 品質を保つため、すべての検索結果（写真ではない）が保存されます。",
   "photo_search_empty": "AI（人工知能）は、画像上の特定の花を認識しませんでした。 角度、距離、光の条件を変えてもう一度お試しください。 あなたがすでにやったのなら、AIオーバーロードはすぐには来ないようです。",
 
@@ -374,7 +352,6 @@
   "custom_lists": "花のリスト",
   "new_flowers": "新しい花",
   "common_lists": "一般的なリスト",
-  "my_lists": "내 목록...",
 
   "favorite_title": "好きな花",
   "favorite_empty": "好きな花はまだありません。",

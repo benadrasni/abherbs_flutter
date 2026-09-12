@@ -90,13 +90,9 @@
   "feedback_intro": "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:",
   "feedback_review": "You can write a positive review.",
   "feedback_title": "How to contribute",
-  "feedback_translate": "You can report any typo or mistranslation you found or submit new translation for flower's data or application's labels at whatsthatflower.com.",
-  "feedback_submit_translate_data": "Improve flower's data",
-  "feedback_submit_translate_app": "Improve application's labels",
   "feedback_buy_extended": "You can buy additional functionality like offline mode, search in names or in taxonomy, search by photo, observations and configurable filter.",
   "feedback_run_ads": "You can display full screen advertisement or watch video advertisement to support further development and database enhancement.",
   "feedback_run_ads_fullscreen": "Show a fullscreen advertisement",
-  "feedback_run_ads_video": "Watch a video advertisement",
 
   "credit_login": "Sign in and earn credits for watching advertisement. With credits you can use some enhancements.",
   "credit_message": "Earn credits for watching advertisement. With credits you can use some enhancements.",
@@ -110,9 +106,6 @@
   "auth_email": "Sign in with email",
   "auth_phone": "Sign in with phone",
   "auth_google": "Sign in with Google",
-  "auth_apple": "Sign in with Apple",
-  "auth_facebook": "Sign in with Facebook",
-  "auth_twitter": "Sign in with Twitter",
   "auth_sign_in_failed": "Sign in failed. Check your connection and try again.",
 
   "auth_email_hint": "Email",
@@ -255,11 +248,6 @@
   "plant_taxonomy": "Taxonomy",
   "plant_sources": "Sources",
 
-  "google_translate": "Translated with Google Translate",
-  "show_original": "Show English text",
-  "improve_translation": "Improve translation",
-  "show_translation": "Show translated text",
-
   "plant_height_from": "Height from",
   "plant_height_to": "to",
   "plant_flowering_from": "Flowering from",
@@ -293,14 +281,11 @@
   "taxonomy_subsectio": "Subsectio",
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
-  "taxonomy_species": "Species",
   "taxonomy_unknown": "unknown",
 
   "snack_no_flowers": "There are no flowers matching criteria.",
   "snack_loading_ad": "Ad is still loading, press button again.",
   "snack_copy": "Copied to Clipboard",
-  "snack_publish": "... to be published later",
-  "snack_translation": "Thanks for your contribution. It'll be published soon.",
 
   "search": "Search...",
   "search_names": "Search in names",
@@ -349,10 +334,6 @@
 
   "terms_of_use": "Terms of use",
   "privacy_policy": "Privacy Policy",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Google Play Store",
 
   "promotion_title": "Paid feature",
   "promotion_content": "This is a paid feature. You can use it for free until {date}",
@@ -361,8 +342,6 @@
   "no_connection_content": "This feature doesn't work without Internet connection.",
 
   "photo_search_no_login": "Search by photo is available only for logged users. Please sign in.",
-  "photo_search_failed": "Search by photo failed. Check your internet connection and try again.",
-  "photo_to_search_by": "Photo to search by",
   "photo_search_note": "This is feature works only online. Sometimes it finds exactly what you're looking for, sometimes not even close. I'm totally relying on third party here since they're doing all the hard work. As time goes it should be better and better. Use it wisely and please don't judge the whole application based on this feature. For quality purposes all search results (not photos) will be saved.",
   "photo_search_empty": "AI (artificial intelligence) didn't recognize any particular flower on the picture. Try again with different angle, distance or light conditions. If you already did it looks like AI overlord won't come anytime soon.",
 
@@ -373,7 +352,6 @@
   "custom_lists": "Lists of flowers",
   "new_flowers": "New flowers",
   "common_lists": "Common lists",
-  "my_lists": "My lists",
 
   "favorite_title": "Favorite flowers",
   "favorite_empty": "There is no favorite flowers yet.",

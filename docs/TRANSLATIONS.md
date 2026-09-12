@@ -101,8 +101,10 @@ Do not interleave 33 incomplete languages. Order by how close official text alre
 3. `cs` — pipeline `/translate-cs`: seven fields and herbalism from live English; trivia recurate for Czechia (ČBS Rostlina roku, lípa as national tree). Style: `.grok/skills/translate-cs/references/STYLE.md`. Do not start a full-catalog pass until asked.
 4. `pl` — pipeline `/translate-pl`: seven fields and herbalism from live English; trivia recurate for Poland (Czerwone maki spod Monte Cassino). Style: `.grok/skills/translate-pl/references/STYLE.md`. Morphological terms: Atlas roślin Polski English–Polish glossary (`atlas_roslin_glossary`). Do not start a full-catalog pass until asked.
 5. `ru` — pipeline `/translate-ru`: seven fields and herbalism from live English; trivia recurate for Russia (иван-чай / копорский чай). Style: `.grok/skills/translate-ru/references/STYLE.md`. Morphological terms: Korovkin dictionary (`korovkin_slovar`). Do not start a full-catalog pass until asked.
-6. High-use remainder: `es it ja nl pt uk` …
-7. The rest of the UI set
+6. `es` — pipeline `/translate-es`: seven fields and herbalism from live English; trivia recurate for Spain (clavel as flor nacional). Style: `.grok/skills/translate-es/references/STYLE.md`. Morphological terms: Flora Mesoamericana glossary (`flora_mesoamericana_glossary`). Iberian plants: Flora Iberica (`flora_iberica`). Do not start a full-catalog pass until asked.
+7. `pt` — pipeline `/translate-pt`: seven fields and herbalism from live English; trivia recurate for Portugal (cravo and Revolução dos Cravos; sobreiro as árvore nacional). Style: `.grok/skills/translate-pt/references/STYLE.md`. Morphological terms: Árvores e Arbustos de Portugal glossary (`arvoresearbustos_glossary`). Portuguese plants: Flora-On (`flora_on`). European Portuguese, not Brazilian. Do not start a full-catalog pass until asked.
+8. High-use remainder: `it ja nl uk` …
+9. The rest of the UI set
 
 For each language:
 
@@ -157,4 +159,4 @@ Wikidata label coverage is already good for most of these languages; the work is
 - Website: `web/src/api.js`
 - Ingest: `scripts/send_notifications.py`, `scripts/add_flower_with_video.py`, `catalog/web_catalog.py` (already skips `*-GT`), `scripts/delete_gt_translations.py`
 - Data: `translations/{lang}`, `translations/{lang}-GT`, `translations_taxonomy`, `search_v3/{lang}`, `web/labels/{lang}`
-- Skills: `/translate-de`, `/translate-sk`, `/translate-fr`, `/translate-cs`, `/translate-pl`, `/translate-ru` (copies in `ingest/skills/`)
+- Skills: `/translate-de`, `/translate-sk`, `/translate-fr`, `/translate-cs`, `/translate-pl`, `/translate-ru`, `/translate-es`, `/translate-pt` (copies in `ingest/skills/`)

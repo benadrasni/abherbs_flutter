@@ -90,13 +90,9 @@
   "feedback_intro": "Prispevali ste k tej aplikaciji, ker ste jo namestili v napravo, hvala. Če iščete nekaj več, si oglejte nekaj možnosti:",
   "feedback_review": "Lahko napišete pozitivno mnenje.",
   "feedback_title": "Kako prispevati",
-  "feedback_translate": "Lahko prijavite kakršno koli tipkarsko napako ali napako, ki ste jo našli, ali pošljete nov prevod v vaš jezik.",
-  "feedback_submit_translate_data": "Izboljšajte podatke o cvetju",
-  "feedback_submit_translate_app": "Izboljšajte oznake aplikacij",
   "feedback_buy_extended": "Dodatne funkcije, kot je način brez povezave, lahko iščete po imenih ali taksonomiji, iščete po fotografijah, opazovanjih in nastavljivem filtru.",
   "feedback_run_ads": "Lahko prikažete celozaslonski oglas ali si ogledate video oglas, ki podpira nadaljnji razvoj in izboljšavo baze podatkov.",
   "feedback_run_ads_fullscreen": "Pokaži celozaslonski oglas",
-  "feedback_run_ads_video": "Oglejte si video oglas",
 
   "credit_login": "Prijavite se in si prislužite kredite za ogled oglasov. Z kredite lahko uporabite nekatere izboljšave.",
   "credit_message": "Prislužite si kredite za ogled oglasov. Z kredite lahko uporabite nekatere izboljšave.",
@@ -110,9 +106,6 @@
   "auth_email": "Prijava z e-poštnim naslovom",
   "auth_phone": "Prijava s telefonom",
   "auth_google": "Prijava z računom za Google",
-  "auth_apple": "Prijava z računom za Apple",
-  "auth_facebook": "Prijava z računom za Facebook",
-  "auth_twitter": "Prijava z računom za Twitter",
   "auth_sign_in_failed": "Prijava ni uspela. Preverite povezavo in poskusite znova.",
 
   "auth_email_hint": "E-pošta",
@@ -158,7 +151,6 @@
   "pause": "Pavza",
   "apply": "Uporabiti",
   "cancel": "Prekliči",
-
 
   "filter_color": "Barve",
   "filter_habitat": "Habitati",
@@ -256,11 +248,6 @@
   "plant_taxonomy": "Taksonomija",
   "plant_sources": "Viri",
 
-  "google_translate": "Prevedeno z Google Translate",
-  "show_original": "Prikaži angleško besedilo",
-  "improve_translation": "Izboljšati prevod",
-  "show_translation": "Pokaži prevedeno besedilo",
-
   "plant_height_from": "Višina",
   "plant_height_to": "-",
   "plant_flowering_from": "Cvetoče:",
@@ -294,14 +281,11 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
   "taxonomy_supersectio": "Supersectio",
-  "taxonomy_species": "Vrsta",
   "taxonomy_unknown": "neznano",
 
   "snack_no_flowers": "Ni meril za ujemanje cvetja.",
   "snack_loading_ad": "Oglas se še vedno nalaga, ponovno pritisnite gumb.",
   "snack_copy": "Kopirano v odložišče",
-  "snack_publish": "... bo objavljen pozneje",
-  "snack_translation": "Hvala za vaš prispevek. Kmalu bo objavljen.",
 
   "search": "Iskati...",
   "search_names": "Išči po imenih",
@@ -350,10 +334,6 @@
 
   "terms_of_use": "Pogoji uporabe",
   "privacy_policy": "Pravilnik o zasebnosti",
-  "apple": "Apple",
-  "google": "Google",
-  "app_store": "App Store",
-  "play_store": "Trgovina Google Play",
 
   "promotion_title": "Plačana funkcija",
   "promotion_content": "To je plačana funkcija. Uporabite ga lahko brezplačno do {date}",
@@ -362,8 +342,6 @@
   "no_connection_content": "Ta funkcija ne deluje brez internetne povezave.",
 
   "photo_search_no_login": "Iskanje po fotografijah je na voljo samo za prijavljene uporabnike. Prijavite se.",
-  "photo_search_failed": "Iskanje po fotografiji ni uspelo. Preverite internetno povezavo in poskusite znova.",
-  "photo_to_search_by": "Fotografije za iskanje po",
   "photo_search_note": "Ta funkcija deluje samo na spletu. Včasih najde točno tisto, kar iščeš, včasih niti blizu. Tu se popolnoma zanašam na tretje osebe, saj se zelo trudijo. S časom mora biti vedno boljše. Uporabljajte ga pametno in prosim ne sodite o celotni aplikaciji na podlagi te funkcije. V kakovostne namene bodo shranjeni vsi rezultati iskanja (ne fotografije).",
   "photo_search_empty": "UI (umetna inteligenca) na sliki ni prepoznal nobene določene rože. Poskusite znova z različnimi koti, razdaljo ali svetlobnimi pogoji. Če si že naredil, izgleda, da UI nadrejeni ne bo kmalu prišel.",
 
@@ -374,7 +352,6 @@
   "custom_lists": "Seznami cvetov",
   "new_flowers": "Novo cvetje",
   "common_lists": "Skupni seznami",
-  "my_lists": "Moji seznami",
 
   "favorite_title": "Najljubše cvetja",
   "favorite_empty": "Še ni najljubšega cvetja.",
