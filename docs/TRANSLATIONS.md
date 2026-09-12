@@ -38,7 +38,7 @@ A plant is “fully translated” when the seven identification fields exist: `d
 
 Almost every remaining non-complete-language reader who opens a species page is reading Google Translate of English (Czech: of Slovak), either from `{lang}-GT` or live from the Translate API. Client writes to `{lang}-GT` now fail the rules; in-session translate still works. Offline still `keepSynced`s the GT tree for languages that still use Translate. The website still fetches `{lang}-GT` except for languages in `LANGUAGES_WITHOUT_GT`.
 
-Retired `{lang}-GT` (official catalog is full-7; do not recreate): `de-GT` (2026-09-09), `pl-GT` and `ru-GT` (2026-09-10). App `languageUsesGoogleTranslate` and website `LANGUAGES_WITHOUT_GT` skip `en sk de fr cs pl ru`.
+Retired `{lang}-GT` (official catalog is full-7; do not recreate): `de-GT` (2026-09-09), `pl-GT` and `ru-GT` (2026-09-10), `es-GT` and `pt-GT` (2026-09-12). App `languageUsesGoogleTranslate` and website `LANGUAGES_WITHOUT_GT` skip `en sk de fr cs pl ru es pt`.
 
 Other Google Translate call sites:
 
