@@ -103,8 +103,9 @@ Do not interleave 33 incomplete languages. Order by how close official text alre
 5. `ru` — pipeline `/translate-ru`: seven fields and herbalism from live English; trivia recurate for Russia (иван-чай / копорский чай). Style: `.grok/skills/translate-ru/references/STYLE.md`. Morphological terms: Korovkin dictionary (`korovkin_slovar`). Do not start a full-catalog pass until asked.
 6. `es` — pipeline `/translate-es`: seven fields and herbalism from live English; trivia recurate for Spain (clavel as flor nacional). Style: `.grok/skills/translate-es/references/STYLE.md`. Morphological terms: Flora Mesoamericana glossary (`flora_mesoamericana_glossary`). Iberian plants: Flora Iberica (`flora_iberica`). Do not start a full-catalog pass until asked.
 7. `pt` — pipeline `/translate-pt`: seven fields and herbalism from live English; trivia recurate for Portugal (cravo and Revolução dos Cravos; sobreiro as árvore nacional). Style: `.grok/skills/translate-pt/references/STYLE.md`. Morphological terms: Árvores e Arbustos de Portugal glossary (`arvoresearbustos_glossary`). Portuguese plants: Flora-On (`flora_on`). European Portuguese, not Brazilian. Do not start a full-catalog pass until asked.
-8. High-use remainder: `it ja nl uk` …
-9. The rest of the UI set
+8. `ja` — pipeline `/translate-ja`: seven fields and herbalism from live English; trivia recurate for Japan (桐紋 on *Paulownia tomentosa*; 大和撫子 on *Dianthus superbus*; drop prefecture and city flowers). Style: `.grok/skills/translate-ja/references/STYLE.md`. Morphological terms: デジタル大辞泉 via コトバンク (`daijisen_glossary`). Japanese vernaculars: YList (`ylist`). Do not start a full-catalog pass until asked.
+9. High-use remainder: `it nl uk` …
+10. The rest of the UI set
 
 For each language:
 
