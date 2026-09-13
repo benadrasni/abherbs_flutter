@@ -1,6 +1,6 @@
 # Java backend → Python (abherbs-auto)
 
-Destination is `~/PycharmProjects/abherbs-auto`, not a new repo. The Flutter app keeps reading the same Firebase nodes.
+Destination is `~/whatsthatflower/ingest` (`abherbs-auto`), not a new repo. The Flutter app keeps reading the same Firebase nodes.
 
 **Status:** Index rebuild lives in `abherbs-auto` (`catalog_indexes.py` / `refresh_indexes.py`). Local JSON only: no Admin SDK, no Firebase write path. A promote step is not written yet.
 
@@ -71,7 +71,7 @@ Do not add a web framework, queue, or extra state library. These stay CLI tools 
 Local run (no Firebase):
 
 ```
-cd ~/PycharmProjects/abherbs-auto
+cd ~/whatsthatflower/ingest
 python3 -m unittest test_catalog_indexes.py
 python3 refresh_indexes.py --input-dir /path/to/dump --output-dir ./index_out
 ```

@@ -1,18 +1,20 @@
 # Ecosystem
 
-Three local projects share one Firebase backend. They are grouped as **`~/whatsthatflower`** (`app`, `ingest`, `web` symlinks; remotes stay put).
+Three local projects share one Firebase backend. They live under **`~/whatsthatflower`** as `app`, `ingest`, and `web` (not a monorepo).
 
 ```
 ~/whatsthatflower                     workspace (not a git repo)
-~/whatsthatflower/app              →  ~/StudioProjects/abherbs_flutter
-~/whatsthatflower/ingest           →  ~/PycharmProjects/abherbs-auto
-~/whatsthatflower/web              →  ~/WebstormProjects/abherbs-web
+~/whatsthatflower/app                 Flutter client
+~/whatsthatflower/ingest              catalog tools
+~/whatsthatflower/web                 whatsthatflower.com
 ~/whatsthatflower/plants              incoming plant folders + `_jobs/`
 ~/whatsthatflower/storage/photos      prepared WebP tree
 ~/whatsthatflower/observations        observation review downloads
 ~/whatsthatflower/wcvp                Kew WCVP zip + sqlite
 ~/Development/Keystore                Android keystore + Firebase admin JSON (secrets; not in the workspace)
 ```
+
+Old IDE paths (`~/StudioProjects/abherbs_flutter`, `~/PycharmProjects/abherbs-auto`, `~/WebstormProjects/abherbs-web`) are compatibility symlinks to those folders.
 
 Editor: `~/whatsthatflower/whatsthatflower.code-workspace`.
 

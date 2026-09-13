@@ -8,13 +8,13 @@ The live product is **What's that flower?** (`sk.ab.herbs`).
 - [App Store](https://apps.apple.com/us/app/whats-that-flower/id1449982118)
 - [whatsthatflower.com](https://whatsthatflower.com/)
 
-This repository is the Flutter client. Plant data lives in Firebase. The three live projects open together as **`~/whatsthatflower`**:
+This repository is the Flutter client. Plant data lives in Firebase. The three live projects live under **`~/whatsthatflower`**:
 
-| Project | Path | Workspace link |
-|---|---|---|
-| Flutter app | `~/StudioProjects/abherbs_flutter` | `~/whatsthatflower/app` |
-| Data tools | `~/PycharmProjects/abherbs-auto` | `~/whatsthatflower/ingest` |
-| Website | `~/WebstormProjects/abherbs-web` | `~/whatsthatflower/web` |
+| Project | Path |
+|---|---|
+| Flutter app | `~/whatsthatflower/app` |
+| Data tools | `~/whatsthatflower/ingest` |
+| Website | `~/whatsthatflower/web` |
 
 ```bash
 open ~/whatsthatflower/whatsthatflower.code-workspace
@@ -67,7 +67,7 @@ docs/                       project documentation
 ## Run locally
 
 ```bash
-cd ~/StudioProjects/abherbs_flutter
+cd ~/whatsthatflower/app
 flutter pub get
 flutter run
 ```

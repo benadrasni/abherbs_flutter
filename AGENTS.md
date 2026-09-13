@@ -6,10 +6,10 @@ Read `README.md` and `docs/` before changing architecture or data shape.
 
 ## Repos and paths
 
-- Workspace: `~/whatsthatflower` (`app`, `ingest`, `web` symlinks; `whatsthatflower.code-workspace`)
-- App: this repo (`~/StudioProjects/abherbs_flutter`, also `~/whatsthatflower/app`)
-- Ingest / indexes: `~/PycharmProjects/abherbs-auto` (`~/whatsthatflower/ingest`)
-- Web: `~/WebstormProjects/abherbs-web` (`~/whatsthatflower/web`)
+- Workspace: `~/whatsthatflower` (`app`, `ingest`, `web`; `whatsthatflower.code-workspace`)
+- App: this repo (`~/whatsthatflower/app`)
+- Ingest / indexes: `~/whatsthatflower/ingest`
+- Web: `~/whatsthatflower/web`
 - Secrets and keystore: `~/Development/Keystore/` (stays outside the workspace)
 - Incoming plants / job packets: `~/whatsthatflower/plants`
 - Prepared photos: `~/whatsthatflower/storage/photos`
