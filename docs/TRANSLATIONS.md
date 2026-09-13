@@ -38,7 +38,7 @@ A plant is “fully translated” when the seven identification fields exist: `d
 
 Almost every remaining non-complete-language reader who opens a species page is reading Google Translate of English (Czech: of Slovak), either from `{lang}-GT` or live from the Translate API. Client writes to `{lang}-GT` now fail the rules; in-session translate still works. Offline still `keepSynced`s the GT tree for languages that still use Translate. The website still fetches `{lang}-GT` except for languages in `LANGUAGES_WITHOUT_GT`.
 
-Retired `{lang}-GT` (official catalog is full-7; do not recreate): `de-GT` (2026-09-09), `pl-GT` and `ru-GT` (2026-09-10), `es-GT` and `pt-GT` (2026-09-12). App `languageUsesGoogleTranslate` and website `LANGUAGES_WITHOUT_GT` skip `en sk de fr cs pl ru es pt`.
+Retired `{lang}-GT` (official catalog is full-7; do not recreate): `de-GT` (2026-09-09), `pl-GT` and `ru-GT` (2026-09-10), `es-GT` and `pt-GT` (2026-09-12), `ja-GT` (2026-09-13). App `languageUsesGoogleTranslate` and website `LANGUAGES_WITHOUT_GT` skip `en sk de fr cs pl ru es pt ja`.
 
 Other Google Translate call sites:
 
@@ -104,8 +104,9 @@ Do not interleave 33 incomplete languages. Order by how close official text alre
 6. `es` — pipeline `/translate-es`: seven fields and herbalism from live English; trivia recurate for Spain (clavel as flor nacional). Style: `.grok/skills/translate-es/references/STYLE.md`. Morphological terms: Flora Mesoamericana glossary (`flora_mesoamericana_glossary`). Iberian plants: Flora Iberica (`flora_iberica`). Do not start a full-catalog pass until asked.
 7. `pt` — pipeline `/translate-pt`: seven fields and herbalism from live English; trivia recurate for Portugal (cravo and Revolução dos Cravos; sobreiro as árvore nacional). Style: `.grok/skills/translate-pt/references/STYLE.md`. Morphological terms: Árvores e Arbustos de Portugal glossary (`arvoresearbustos_glossary`). Portuguese plants: Flora-On (`flora_on`). European Portuguese, not Brazilian. Do not start a full-catalog pass until asked.
 8. `ja` — pipeline `/translate-ja`: seven fields and herbalism from live English; trivia recurate for Japan (桐紋 on *Paulownia tomentosa*; 大和撫子 on *Dianthus superbus*; drop prefecture and city flowers). Style: `.grok/skills/translate-ja/references/STYLE.md`. Morphological terms: デジタル大辞泉 via コトバンク (`daijisen_glossary`). Japanese vernaculars: YList (`ylist`). Do not start a full-catalog pass until asked.
-9. High-use remainder: `it nl uk` …
-10. The rest of the UI set
+9. `it` — pipeline `/translate-it`: seven fields and herbalism from live English; trivia recurate for Italy (drop UK county / US state / Italian city or regional flowers; Italy has no official national flower). Style: `.grok/skills/translate-it/references/STYLE.md`. Morphological terms: Acta Plantarum Dizionario botanico (`acta_plantarum_glossary`). Italian plants: Acta Plantarum (`acta_plantarum`). Do not start a full-catalog pass until Japanese is complete, unless asked.
+10. High-use remainder: `nl uk` …
+11. The rest of the UI set
 
 For each language:
 
@@ -160,4 +161,4 @@ Wikidata label coverage is already good for most of these languages; the work is
 - Website: `web/src/api.js`
 - Ingest: `scripts/send_notifications.py`, `scripts/add_flower_with_video.py`, `catalog/web_catalog.py` (already skips `*-GT`), `scripts/delete_gt_translations.py`
 - Data: `translations/{lang}`, `translations/{lang}-GT`, `translations_taxonomy`, `search_v3/{lang}`, `web/labels/{lang}`
-- Skills: `/translate-de`, `/translate-sk`, `/translate-fr`, `/translate-cs`, `/translate-pl`, `/translate-ru`, `/translate-es`, `/translate-pt` (copies in `ingest/skills/`)
+- Skills: `/translate-de`, `/translate-sk`, `/translate-fr`, `/translate-cs`, `/translate-pl`, `/translate-ru`, `/translate-es`, `/translate-pt`, `/translate-ja`, `/translate-it` (copies in `ingest/skills/`)

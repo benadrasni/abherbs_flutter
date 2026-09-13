@@ -77,6 +77,7 @@ const String languagePolish = "pl";
 const String languageRussian = "ru";
 const String languageSpanish = "es";
 const String languagePortuguese = "pt";
+const String languageJapanese = "ja";
 const String languageGTSuffix = "-GT";
 const String heightUnitOfMeasure = "cm";
 
@@ -92,6 +93,7 @@ const List<String> webPathLanguages = [
   languageRussian,
   languageSpanish,
   languagePortuguese,
+  languageJapanese,
 ];
 const String termsOfUseUrl =
     "https://storage.googleapis.com/abherbs-resources/misc/TermsOfServiceofWhatsthatflower.htm";
@@ -880,7 +882,8 @@ bool languageUsesGoogleTranslate(String languageCode) {
       code != languagePolish &&
       code != languageRussian &&
       code != languageSpanish &&
-      code != languagePortuguese;
+      code != languagePortuguese &&
+      code != languageJapanese;
 }
 
 double getFABPadding() {
