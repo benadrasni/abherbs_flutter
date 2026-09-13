@@ -105,8 +105,9 @@ Do not interleave 33 incomplete languages. Order by how close official text alre
 7. `pt` — pipeline `/translate-pt`: seven fields and herbalism from live English; trivia recurate for Portugal (cravo and Revolução dos Cravos; sobreiro as árvore nacional). Style: `.grok/skills/translate-pt/references/STYLE.md`. Morphological terms: Árvores e Arbustos de Portugal glossary (`arvoresearbustos_glossary`). Portuguese plants: Flora-On (`flora_on`). European Portuguese, not Brazilian. Do not start a full-catalog pass until asked.
 8. `ja` — pipeline `/translate-ja`: seven fields and herbalism from live English; trivia recurate for Japan (桐紋 on *Paulownia tomentosa*; 大和撫子 on *Dianthus superbus*; drop prefecture and city flowers). Style: `.grok/skills/translate-ja/references/STYLE.md`. Morphological terms: デジタル大辞泉 via コトバンク (`daijisen_glossary`). Japanese vernaculars: YList (`ylist`). Do not start a full-catalog pass until asked.
 9. `it` — pipeline `/translate-it`: seven fields and herbalism from live English; trivia recurate for Italy (drop UK county / US state / Italian city or regional flowers; Italy has no official national flower). Style: `.grok/skills/translate-it/references/STYLE.md`. Morphological terms: Acta Plantarum Dizionario botanico (`acta_plantarum_glossary`). Italian plants: Acta Plantarum (`acta_plantarum`). Do not start a full-catalog pass until Japanese is complete, unless asked.
-10. High-use remainder: `nl uk` …
-11. The rest of the UI set
+10. `nl` — pipeline `/translate-nl`: seven fields and herbalism from live English; trivia recurate for the Netherlands and Flanders. Style: `.grok/skills/translate-nl/references/STYLE.md`. Morphological terms: Wikipedia Lijst van botanische begrippen (`nl_wikipedia_glossary`). Dutch vernaculars: NDFF Verspreidingsatlas (`verspreidingsatlas`), Flora van Nederland (`flora_van_nederland`). Do not start a full-catalog pass until Italian is complete, unless asked.
+11. High-use remainder: `uk` …
+12. The rest of the UI set
 
 For each language:
 
