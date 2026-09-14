@@ -172,7 +172,12 @@ Widget _getTaxonomy(BuildContext context, Locale myLocale, Plant plant, double f
         padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Expanded(
-            child: Text(getTaxonLabel(context, taxonKey.substring(taxonKey.indexOf('_') + 1)), style: TextStyle(fontSize: fontSize)),
+            child: Text(
+              getTaxonLabel(context, taxonKey.substring(taxonKey.indexOf('_') + 1)),
+              style: TextStyle(fontSize: fontSize),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
             flex: 2,
           ),
           _getTaxonInLanguage(myLocale, plant.apgIV[taxonKey], fontSize),
@@ -198,16 +203,29 @@ Widget _getTaxonInLanguage(Locale myLocale, String taxon, double fontSize) {
     child: FutureBuilder<String>(
         future: translationF,
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-          var names = <Text>[];
+          var names = <Widget>[];
 
           if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.data != null) {
-              names.add(Text(snapshot.data!, style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize)));
+            if (snapshot.data != null && snapshot.data!.isNotEmpty) {
+              names.add(FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  snapshot.data!,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
+                  maxLines: 1,
+                ),
+              ));
             }
           }
-          names.add(Text(
-            taxon,
-            style: TextStyle(fontSize: fontSize),
+          names.add(FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              taxon,
+              style: TextStyle(fontSize: fontSize),
+              maxLines: 1,
+            ),
           ));
 
           return Column(

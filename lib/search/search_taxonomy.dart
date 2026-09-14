@@ -91,10 +91,14 @@ Column _getName(PlantTaxon taxon) {
         Text(
           taxon.names.join(', '),
           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
         Text(
           taxon.latinName!,
           style: TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );
@@ -105,6 +109,8 @@ Column _getName(PlantTaxon taxon) {
         Text(
           taxon.latinName!,
           style: TextStyle(fontSize: 16.0),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         )
       ],
     );

@@ -138,7 +138,11 @@ class _PlantListState extends State<PlantList> {
                                   labelLocal = snapshot.data! + ' / ' + name;
                                 }
                               }
-                              return Text(labelLocal);
+                              return Text(
+                                labelLocal,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              );
                             }),
                         subtitle: FutureBuilder<String>(
                             future: familyF,
@@ -149,7 +153,11 @@ class _PlantListState extends State<PlantList> {
                                   familyLocal = snapshot.data! + ' / ' + family;
                                 }
                               }
-                              return Text(familyLocal);
+                              return Text(
+                                familyLocal,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              );
                             }),
                         leading: getImage(
                             storageFamilies + family + defaultExtension,
