@@ -31,13 +31,13 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
           int i = 0;
           (event.snapshot.value as List).forEach((value) {
             if (value != null) {
-              _keys[i.toString()] = value;
+              _storeIndex(i.toString(), value);
             }
             i++;
           });
         } else {
           (event.snapshot.value as Map).forEach((key, value) {
-            _keys[key] = value;
+            _storeIndex(key.toString(), value);
           });
         }
       }
@@ -97,6 +97,16 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
     // Do not call super.clear(), it will set the length, it's unsupported.
   }
 
+  void _storeIndex(String key, dynamic value) {
+    if (value is int) {
+      _keys[key] = value;
+    } else if (value is num) {
+      _keys[key] = value.toInt();
+    } else if (value != null) {
+      _keys[key] = 1;
+    }
+  }
+
   void _onValue(DatabaseEvent event) {
     _snapshots.clear();
     _keys.forEach((key, value) {
@@ -105,7 +115,17 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
         _snapshots.add(event.snapshot.children.elementAt(k));
       }
     });
-    _snapshots.sort((a, b) => (a.value as Map)[firebaseAttributeName].compareTo((b.value as Map)[firebaseAttributeName]));
+    final byYear = _keys.values.any((value) => customListYear(value) != null);
+    _snapshots.sort((a, b) {
+      if (byYear) {
+        final ya = _keys[a.key] ?? 0;
+        final yb = _keys[b.key] ?? 0;
+        final c = yb.compareTo(ya);
+        if (c != 0) return c;
+      }
+      return (a.value as Map)[firebaseAttributeName]
+          .compareTo((b.value as Map)[firebaseAttributeName]);
+    });
     onValue?.call(event.snapshot);
   }
 

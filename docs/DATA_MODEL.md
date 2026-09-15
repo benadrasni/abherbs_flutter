@@ -36,7 +36,7 @@ The app still writes Google Translate output to `translations/{lang}-GT`; that p
 | `translations/{lang}-GT/{latinName}` | Google Translate cache |
 | `translations_taxonomy/{lang}/{taxon}` | Localized taxon names |
 | `synonyms/{latinName}` | IPNI synonym list |
-| `lists_custom` | Editorial lists ("new", "by language", dated drops) |
+| `lists_custom` | Editorial lists ("new", "by language", dated drops). Language lists: `list/{plantId}` is `1` (presence) or a designation year 1900–2100. Old app 8.2.1 reads only the keys. |
 | `plants_to_update` | `{count, list[]}` of Latin names in the live catalog |
 | `families_to_update` | Same idea for family illustration packs |
 | `versions` | Store version codes + `db_update` |
@@ -144,6 +144,17 @@ Rebuild locally with `python -m catalog.refresh --only web` (`web_catalog_new.js
 ```
 
 Empty / missing means show the Latin name. Later-language publishes (`publish_new_plant_translations.py` and the same helper) must write `web/labels/{lang}/{id}` when they set a sourced `label`.
+
+## Editorial lists (`lists_custom/by language/{lang}/{name}`)
+
+```json
+{
+  "icon": "Orchidaceae",
+  "list": { "157": 2020, "424": 2025 }
+}
+```
+
+`list` keys are `plants_headers` ids. Values are `1` (membership only) or a year `1900–2100` for campaigns such as Blume / Baum / Orchidee des Jahres. Shipped app 8.2.1 counts keys and looks up headers; it does not read the number, so year-valued lists stay compatible. Current app and website sort those lists newest year first and show the year. A plant named in two years appears once, with the later year.
 
 ## Filter vocabulary
 

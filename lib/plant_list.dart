@@ -26,6 +26,7 @@ class PlantList extends StatefulWidget {
 class _PlantListState extends State<PlantList> {
   late StreamSubscription<firebase_auth.User?> _listener;
   late Future<int> _count;
+  Map<String, int> _years = {};
 
   Widget _getImageButton(BuildContext context, Locale myLocale, String url, String name) {
     double screenWidth = MediaQuery.of(context).size.width - 20;
@@ -62,7 +63,34 @@ class _PlantListState extends State<PlantList> {
     widget.pathToIndex.keepSynced(true);
     _count = widget.pathToIndex.once().then((event) {
       var result = event.snapshot.value ?? [];
-      int length = result is List ? result.fold(0, (t, value) => t + (value == null ? 0 : 1)) : (result as Map).values.length;
+      final years = <String, int>{};
+      int length;
+      if (result is List) {
+        length = 0;
+        for (var i = 0; i < result.length; i++) {
+          var value = result[i];
+          if (value == null) continue;
+          length++;
+          var year = customListYear(value);
+          if (year != null) {
+            years[i.toString()] = year;
+          }
+        }
+      } else {
+        var map = result as Map;
+        length = map.length;
+        map.forEach((key, value) {
+          var year = customListYear(value);
+          if (year != null) {
+            years[key.toString()] = year;
+          }
+        });
+      }
+      if (mounted && years.isNotEmpty) {
+        setState(() {
+          _years = years;
+        });
+      }
       return length;
     });
   }
@@ -99,6 +127,7 @@ class _PlantListState extends State<PlantList> {
                   String name = (snapshot.value as Map)[firebaseAttributeName];
                   String family = (snapshot.value as Map)[firebaseAttributeFamily];
                   String url = (snapshot.value as Map)[firebaseAttributeUrl];
+                  int? year = snapshot.key == null ? null : _years[snapshot.key];
 
                   Locale myLocale = Localizations.localeOf(mainContext);
                   Future<String> nameF = translationCache.containsKey(name)
@@ -167,6 +196,12 @@ class _PlantListState extends State<PlantList> {
                             ),
                             width: 50.0,
                             height: 50.0),
+                        trailing: year == null
+                            ? null
+                            : Text(
+                                year.toString(),
+                                style: TextStyle(fontSize: 16.0),
+                              ),
                         onTap: () {
                           goToDetail(self, mainContext, myLocale, name, widget.filter);
                         },

@@ -137,6 +137,25 @@ const String firebasePlants = 'plants_v2';
 const String firebaseSearch = 'search_v3';
 const String firebaseAPGIV = 'APG IV_v3';
 const String firebaseListsCustom = 'lists_custom';
+
+/// Custom-list `list/{id}` values of 1900–2100 are designation years
+/// (Blume / Baum / Orchidee des Jahres). Presence-only lists still use `1`.
+/// Old clients ignore the number and only read the plant-id keys.
+const int customListYearMin = 1900;
+const int customListYearMax = 2100;
+
+int? customListYear(dynamic value) {
+  int? n;
+  if (value is int) {
+    n = value;
+  } else if (value is num) {
+    n = value.toInt();
+  }
+  if (n == null || n < customListYearMin || n > customListYearMax) {
+    return null;
+  }
+  return n;
+}
 const String firebasePlantHeaders = 'plants_headers';
 const String firebaseTranslations = 'translations';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
