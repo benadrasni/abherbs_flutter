@@ -137,6 +137,7 @@ const String firebasePlants = 'plants_v2';
 const String firebaseSearch = 'search_v3';
 const String firebaseAPGIV = 'APG IV_v3';
 const String firebaseListsCustom = 'lists_custom';
+const String firebaseAttributeSourceUrl = 'sourceUrl';
 
 /// Custom-list `list/{id}` values of 1900–2100 are designation years
 /// (Blume / Baum / Orchidee des Jahres). Presence-only lists still use `1`.

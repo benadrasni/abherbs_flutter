@@ -27,6 +27,22 @@ class _PlantListState extends State<PlantList> {
   late StreamSubscription<firebase_auth.User?> _listener;
   late Future<int> _count;
   Map<String, int> _years = {};
+  String? _sourceUrl;
+
+  static const Map<String, String> _sourceLabels = {
+    'loki-schmidt-stiftung.de': 'Loki Schmidt Stiftung',
+    'baum-des-jahres.de': 'Dr. Silvius Wodarz Stiftung',
+    'orchideen-deutschlands.de': 'Arbeitskreise Heimische Orchideen',
+  };
+
+  String _sourceHost(String url) {
+    final uri = Uri.tryParse(url);
+    var host = uri != null && uri.host.isNotEmpty ? uri.host : url;
+    if (host.startsWith('www.')) {
+      host = host.substring(4);
+    }
+    return _sourceLabels[host] ?? host;
+  }
 
   Widget _getImageButton(BuildContext context, Locale myLocale, String url, String name) {
     double screenWidth = MediaQuery.of(context).size.width - 20;
@@ -61,6 +77,14 @@ class _PlantListState extends State<PlantList> {
     Offline.setKeepSynced(2, true);
 
     widget.pathToIndex.keepSynced(true);
+    widget.pathToIndex.parent?.child(firebaseAttributeSourceUrl).once().then((event) {
+      var value = event.snapshot.value;
+      if (value is String && value.isNotEmpty && mounted) {
+        setState(() {
+          _sourceUrl = value;
+        });
+      }
+    });
     _count = widget.pathToIndex.once().then((event) {
       var result = event.snapshot.value ?? [];
       final years = <String, int>{};
@@ -113,6 +137,31 @@ class _PlantListState extends State<PlantList> {
       drawer: AppDrawer(widget.filter, () => {}),
       body: Column(
         children: [
+          if (_sourceUrl != null)
+            Material(
+              child: InkWell(
+                onTap: () {
+                  launchURL(_sourceUrl!);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.open_in_new, size: 18.0),
+                      const SizedBox(width: 8.0),
+                      Expanded(
+                        child: Text(
+                          _sourceHost(_sourceUrl!),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontSize: 14.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           Expanded(
             child: FirebaseAnimatedIndexList(
                 defaultChild: Center(child: CircularProgressIndicator()),
