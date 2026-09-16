@@ -107,7 +107,8 @@ Do not interleave 33 incomplete languages. Order by how close official text alre
 9. `it` — pipeline `/translate-it`: seven fields and herbalism from live English; trivia recurate for Italy (drop UK county / US state / Italian city or regional flowers; Italy has no official national flower). Style: `.grok/skills/translate-it/references/STYLE.md`. Morphological terms: Acta Plantarum Dizionario botanico (`acta_plantarum_glossary`). Italian plants: Acta Plantarum (`acta_plantarum`). Catalog full-7; `it-GT` deleted 2026-09-14.
 10. `nl` — pipeline `/translate-nl`: seven fields and herbalism from live English; trivia recurate for the Netherlands and Flanders. Style: `.grok/skills/translate-nl/references/STYLE.md`. Morphological terms: Wikipedia Lijst van botanische begrippen (`nl_wikipedia_glossary`). Dutch vernaculars: NDFF Verspreidingsatlas (`verspreidingsatlas`), Flora van Nederland (`flora_van_nederland`). Catalog full-7; `nl-GT` deleted 2026-09-14.
 11. `uk` — pipeline `/translate-uk`: seven fields and herbalism from live English; trivia recurate for Ukraine (калина on *Viburnum opulus*; unofficial sunflower on *Helianthus annuus*; drop UK county / US state / oblast or city flowers). Style: `.grok/skills/translate-uk/references/STYLE.md`. Morphological terms: Wikipedia Суцвіття (`uk_wikipedia_glossary`). Do not copy Russian body into Ukrainian. Catalog full-7; `uk-GT` deleted 2026-09-14.
-12. The rest of the UI set
+12. `hu` — pipeline `/translate-hu`: seven fields and herbalism from live English; trivia recurate for Hungary (Év fája, Év vadvirága; drop UK county / US state / Hungarian megye or city flowers; Hungary has no official national flower). Style: `.grok/skills/translate-hu/references/STYLE.md`. Morphological terms: Wikipedia Virágzat (`hu_wikipedia_glossary`). Do not copy Slovak, Czech, German, or Polish body. Catalog full-7 (verified 2026-09-16); language pass `_hu_lang_pass_1420` applied 2026-09-16. `hu-GT` still live.
+13. The rest of the UI set
 
 For each language:
 
@@ -162,4 +163,4 @@ Wikidata label coverage is already good for most of these languages; the work is
 - Website: `web/src/api.js`
 - Ingest: `scripts/send_notifications.py`, `scripts/add_flower_with_video.py`, `catalog/web_catalog.py` (already skips `*-GT`), `scripts/delete_gt_translations.py`
 - Data: `translations/{lang}`, `translations/{lang}-GT`, `translations_taxonomy`, `search_v3/{lang}`, `web/labels/{lang}`
-- Skills: `/translate-de`, `/translate-sk`, `/translate-fr`, `/translate-cs`, `/translate-pl`, `/translate-ru`, `/translate-es`, `/translate-pt`, `/translate-ja`, `/translate-it` (copies in `ingest/skills/`)
+- Skills: `/translate-de`, `/translate-sk`, `/translate-fr`, `/translate-cs`, `/translate-pl`, `/translate-ru`, `/translate-es`, `/translate-pt`, `/translate-ja`, `/translate-it`, `/translate-nl`, `/translate-uk`, `/translate-hu` (copies in `ingest/skills/`)
