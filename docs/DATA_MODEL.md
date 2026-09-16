@@ -155,7 +155,7 @@ Empty / missing means show the Latin name. Later-language publishes (`publish_ne
 }
 ```
 
-`list` keys are `plants_headers` ids. Values are `1` (membership only) or a year `1900–2100` for campaigns such as Blume / Baum / Orchidee des Jahres. Optional `sourceUrl` is the campaign’s official page. Shipped app 8.2.1 reads only `list` and `icon`, so extra children stay compatible. Current app and website sort year-lists newest first, show the year, and link `sourceUrl` on the list screen. A plant named in two years appears once, with the later year.
+`list` keys are `plants_headers` ids. Values are `1` (membership only) or a year `1900–2100` for campaigns such as Blume / Baum / Orchidee des Jahres. Optional `sourceUrl` is the campaign’s official page. Shipped app 8.2.1 reads only `list` and `icon`, so extra children stay compatible. Current app and website put language lists that have a `sourceUrl` first, then sort by name; year-lists sort newest first, show the year, and link `sourceUrl` on the list screen. A plant named in two years appears once, with the later year.
 
 ## Filter vocabulary
 

@@ -26,6 +26,15 @@ const families = [ "Acanthaceae", "Acoraceae", "Adoxaceae", "Alismataceae", "Ama
   "Cannaceae", "Platanaceae", "Theaceae", "Gesneriaceae", "Bromeliaceae", "Garryaceae", "Pontederiaceae", "Cyperaceae", "Staphyleaceae", "Strelitziaceae", "Goodeniaceae", "Buxaceae", "Caricaceae",
   "Moraceae", "Fagaceae", "Nartheciaceae", "Simaroubaceae", "Juglandaceae", "Cleomaceae", "Aizoaceae", "Nepenthaceae", "Linderniaceae", "Juncaceae", "Zygophyllaceae", "Pittosporaceae", "Clethraceae"];
 
+bool _listHasSource(DataSnapshot snapshot) {
+  final value = snapshot.value;
+  if (value is Map) {
+    final url = value[firebaseAttributeSourceUrl];
+    return url is String && url.isNotEmpty;
+  }
+  return false;
+}
+
 class CustomListScreen extends StatefulWidget {
   final Locale myLocale;
   CustomListScreen(this.myLocale);
@@ -150,6 +159,12 @@ class _CustomListScreenState extends State<CustomListScreen> {
                           shrinkWrap: true,
                           defaultChild: Center(child: CircularProgressIndicator()),
                           query: listsCustomReference.child("by language").child(widget.myLocale.languageCode),
+                          sort: (a, b) {
+                            final aRef = _listHasSource(a);
+                            final bRef = _listHasSource(b);
+                            if (aRef != bRef) return aRef ? -1 : 1;
+                            return (a.key ?? '').compareTo(b.key ?? '');
+                          },
                           itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation, int index) {
                             Random random = Random();
 
