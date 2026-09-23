@@ -89,6 +89,8 @@ const String languageFinnish = "fi";
 const String languageEstonian = "et";
 const String languageLatvian = "lv";
 const String languageLithuanian = "lt";
+const String languageCroatian = "hr";
+const String languageSlovenian = "sl";
 const String languageGTSuffix = "-GT";
 const String heightUnitOfMeasure = "cm";
 
@@ -116,6 +118,8 @@ const List<String> webPathLanguages = [
   languageEstonian,
   languageLatvian,
   languageLithuanian,
+  languageCroatian,
+  languageSlovenian,
 ];
 const String termsOfUseUrl =
     "https://storage.googleapis.com/abherbs-resources/misc/TermsOfServiceofWhatsthatflower.htm";
@@ -936,7 +940,9 @@ bool languageUsesGoogleTranslate(String languageCode) {
       code != languageFinnish &&
       code != languageEstonian &&
       code != languageLatvian &&
-      code != languageLithuanian;
+      code != languageLithuanian &&
+      code != languageCroatian &&
+      code != languageSlovenian;
 }
 
 double getFABPadding() {
