@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field guide — mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;0,9..144,560;1,9..144,460&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f3eee4;
+    --paper-2: #e9e2d3;
+    --ink: #1a1612;
+    --ink-2: #5a5248;
+    --ink-3: #6e6659;
+    --rule: #d0c6b2;
+    --madder: #8e3b2a;
+    --moss: #3e5344;
+    --gold: #85603c;
+    --cream: #fffdf8;
+    --photo: https://storage.googleapis.com/abherbs-resources/photos/;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    background: #e4dccb;
+    color: var(--ink);
+    font-family: "Source Sans 3", "Source Sans Pro", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  button, input { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  :focus { outline: none; }
+  :focus-visible { outline: 2px solid var(--moss); outline-offset: 2px; }
+  .kicker {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .latin { font-family: Fraunces, Georgia, serif; font-style: italic; font-weight: 460; }
+  .common { font-family: Fraunces, Georgia, serif; font-weight: 520; letter-spacing: -0.02em; }
+
+  .stage {
+    display: grid;
+    grid-template-columns: 220px 390px;
+    gap: 36px;
+    justify-content: center;
+    align-items: start;
+    padding: 28px 20px 48px;
+  }
+  .index h1 {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 520;
+    font-size: 28px;
+    letter-spacing: -0.03em;
+    margin: 0 0 6px;
+  }
+  .index .lede { margin: 0 0 18px; color: var(--ink-2); font-size: 14px; line-height: 1.4; }
+  .index button {
+    display: block;
+    width: 100%;
+    text-align: start;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    padding: 8px 0;
+    color: var(--ink-2);
+    font-size: 15px;
+  }
+  .index button.on { color: var(--ink); border-bottom-color: var(--rule); }
+
+  .phone {
+    width: 390px;
+    height: min(844px, calc(100vh - 40px));
+    background: var(--paper);
+    border-radius: 36px;
+    box-shadow: 0 30px 70px rgba(26, 22, 18, 0.18);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid #cfc4ae;
+  }
+  .status {
+    height: 28px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 22px 2px;
+    font-size: 12px;
+    font-weight: 600;
+    flex: none;
+  }
+  .status span { letter-spacing: 0.04em; color: var(--ink-2); font-weight: 400; }
+  .screens { flex: 1; min-height: 0; position: relative; overflow: hidden; }
+  .screen { display: none; flex-direction: column; position: absolute; inset: 0; min-height: 0; }
+  .screen.on { display: flex; }
+  .scroll { flex: 1; min-height: 0; overflow: auto; padding: 4px 20px 20px; }
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 4px 20px 0;
+    flex: none;
+  }
+  .mark {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 22px;
+    font-weight: 520;
+    letter-spacing: -0.03em;
+    background: none;
+    border: 0;
+    padding: 6px 0;
+  }
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+    background: var(--cream);
+    display: grid;
+    place-items: center;
+  }
+  .back {
+    background: none;
+    border: 0;
+    padding: 8px 0;
+    color: var(--ink-2);
+    font-size: 15px;
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0 14px;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 11px 14px;
+    color: var(--ink-3);
+  }
+  .search input {
+    border: 0;
+    background: transparent;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+  }
+  .search input::placeholder { color: var(--ink-3); }
+
+  .camera {
+    width: 100%;
+    text-align: start;
+    border: 0;
+    background: var(--moss);
+    color: var(--cream);
+    border-radius: 18px;
+    padding: 16px 18px 14px;
+    min-height: 112px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .camera .kicker { color: #e7d7c0; }
+  .camera h2 { margin: 6px 0 0; font-size: 28px; line-height: 1; color: var(--cream); }
+  .camera p { margin: 8px 0 0; color: #e7e1d4; font-size: 14px; }
+
+  .step-label { margin: 16px 0 8px; }
+  .colors { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .swatch {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    text-align: center;
+  }
+  .swatch i {
+    display: block;
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid var(--rule);
+  }
+  .swatch span { display: block; margin-top: 6px; font-size: 11px; color: var(--ink-2); line-height: 1.15; min-height: 2.3em; }
+  .swatch:active i, .choice:active { transform: translateY(1px); }
+  .hint { margin: 14px 0 0; color: var(--ink-2); font-size: 14px; }
+  .chip {
+    margin-top: 14px;
+    border: 1px solid var(--rule);
+    background: var(--cream);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  .recent { margin-top: 14px; }
+  .strip { display: flex; gap: 8px; margin-top: 8px; }
+  .strip button { border: 0; padding: 0; background: none; width: 64px; }
+  .strip img, .thumb {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: var(--paper-2);
+    display: block;
+  }
+  .strip span { display: block; margin-top: 4px; font-size: 12px; color: var(--ink-2); }
+
+  .choices { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+  .choice {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    text-align: start;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 12px 14px;
+    min-height: 64px;
+  }
+  .choice svg { flex: none; }
+  .choice b { display: block; font-weight: 600; }
+  .choice small { color: var(--ink-2); }
+  .crumbs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+  .crumbs span, .pill {
+    border: 1px solid var(--rule);
+    background: var(--cream);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  h2.ask {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 520;
+    font-size: 34px;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin: 12px 0 0;
+  }
+
+  .filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .count { margin: 14px 0 8px; color: var(--ink-2); }
+  .plant {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+    text-align: start;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 0;
+  }
+  .plant img { width: 64px; height: 64px; object-fit: cover; border-radius: 12px; background: var(--paper-2); }
+  .plant .common { display: block; font-size: 20px; line-height: 1.1; }
+  .plant .latin { display: block; color: var(--ink-2); font-size: 14px; }
+  .plant .meta { color: var(--ink-3); font-size: 13px; margin-top: 2px; }
+  .more { color: var(--ink-3); font-size: 14px; padding: 14px 0 8px; }
+  .region-panel { margin-top: 8px; border: 1px solid var(--rule); background: var(--cream); border-radius: 16px; overflow: hidden; }
+  .region-panel button {
+    display: block;
+    width: 100%;
+    text-align: start;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 14px;
+  }
+  .region-panel button:last-child { border-bottom: 0; }
+  .region-panel button small { display: block; color: var(--ink-3); }
+
+  .banner {
+    margin: 0 20px 10px;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-inline-start: 3px solid var(--gold);
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+  }
+  .banner.confirmed { border-inline-start-color: var(--moss); }
+  .banner .kicker { display: block; margin-bottom: 2px; }
+  .banner p { margin: 0; font-size: 14px; }
+  .banner .acts { display: flex; gap: 6px; }
+  .text-btn {
+    background: none;
+    border: 0;
+    padding: 6px;
+    color: var(--moss);
+    font-weight: 600;
+  }
+  .hero { width: 100%; height: 280px; object-fit: cover; background: var(--paper-2); display: block; }
+  .copy { padding: 16px 20px 28px; }
+  .copy h2 { font-size: 40px; margin: 4px 0 0; line-height: 1; }
+  .binomen { margin: 6px 0 0; color: var(--ink-2); font-size: 18px; }
+  .facts { display: flex; gap: 18px; margin: 16px 0; padding: 12px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .facts .k { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+  .facts .v { margin-top: 2px; }
+  .lede { font-size: 17px; line-height: 1.45; margin: 0; }
+  .sec { margin-top: 16px; }
+  .sec .k { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--moss); }
+  .plate-row { display: flex; gap: 12px; align-items: center; margin-top: 8px; }
+  .plate-row img { width: 84px; height: 126px; object-fit: cover; border-radius: 8px; background: var(--cream); border: 1px solid var(--rule); }
+
+  .confidence { margin: 12px 0 0; font-size: 15px; color: var(--moss); font-weight: 600; }
+  .alt {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+    text-align: start;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 12px;
+    margin-top: 8px;
+  }
+  .alt .latin { display: block; }
+  .tag { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+
+  .seen-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    text-align: start;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 0;
+    align-items: center;
+  }
+  .seen-row img { width: 64px; height: 64px; object-fit: cover; border-radius: 12px; background: var(--paper-2); }
+  .flag { display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+  .seen-row .common { display: block; }
+  .flag.ok { color: var(--moss); }
+
+  .family {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+    text-align: start;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    padding: 8px 0;
+  }
+  .family img { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; background: var(--paper-2); }
+  .family .latin { font-size: 18px; }
+
+  .tabs {
+    flex: none;
+    height: 64px;
+    display: flex;
+    border-top: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .phone.no-tabs .tabs { display: none; }
+  .tabs button {
+    flex: 1;
+    border: 0;
+    background: none;
+    color: var(--ink-3);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+  }
+  .tabs button.on { color: var(--ink); }
+
+  .sheet {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 22, 18, 0.35);
+    z-index: 6;
+    display: flex;
+    align-items: flex-end;
+  }
+  .sheet[hidden] { display: none; }
+  .sheet .card {
+    background: var(--paper);
+    width: 100%;
+    border-radius: 22px 22px 0 0;
+    padding: 12px 20px 28px;
+  }
+  .grab { width: 40px; height: 4px; border-radius: 4px; background: var(--rule); margin: 4px auto 14px; }
+  .sheet h2 { font-family: Fraunces, Georgia, serif; font-weight: 520; font-size: 30px; margin: 6px 0 8px; letter-spacing: -0.03em; }
+  .offer {
+    width: 100%;
+    text-align: start;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 14px;
+    margin-top: 10px;
+  }
+  .offer strong { display: block; font-size: 17px; }
+  .offer span { color: var(--ink-2); font-size: 14px; }
+  .offer.primary { background: var(--moss); color: var(--cream); border-color: var(--moss); }
+  .offer.primary span { color: #e7e1d4; }
+  .guide-list { margin: 8px 0 0; padding: 0; list-style: none; }
+  .guide-list li { padding: 8px 0; border-bottom: 1px solid var(--rule); }
+  .price { color: var(--ink-2); margin-top: 16px; }
+
+  @media (max-width: 760px) {
+    .stage { grid-template-columns: minmax(0, 1fr); justify-content: stretch; padding: 0; gap: 0; width: 100%; }
+    .index { order: 2; padding: 8px 16px 20px; }
+    .phone { width: 100%; max-width: 100%; min-width: 0; height: 100vh; border-radius: 0; border: 0; box-shadow: none; }
+    .index-nav { display: flex; gap: 14px; overflow: auto; }
+    .index button { width: auto; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <aside class="index">
+    <h1>Field guide</h1>
+    <p class="lede">Click through the agreed screens. Names, counts, and catalog photos are live.</p>
+    <nav class="index-nav" id="index"></nav>
+  </aside>
+
+  <div class="phone" id="phone">
+    <div class="status">9:41 <span></span></div>
+    <div class="screens">
+
+      <section class="screen on" id="find" data-tab="find">
+        <div class="topbar">
+          <div class="mark">What’s that flower?</div>
+          <button class="icon-btn" data-go="guide" aria-label="Account">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1a1612" stroke-width="1.4"><circle cx="9" cy="6" r="2.4"/><path d="M3.5 15.2c.8-2.6 2.8-3.8 5.5-3.8s4.7 1.2 5.5 3.8"/></svg>
+          </button>
+        </div>
+        <div class="scroll">
+          <label class="search">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#6e6659" stroke-width="1.4"><circle cx="7" cy="7" r="4.2"/><path d="M10.4 10.4 14 14"/></svg>
+            <input placeholder="Name, Latin, family" aria-label="Search the book">
+          </label>
+          <button class="camera" data-go="species">
+            <div>
+              <div class="kicker">4 of 5 this month</div>
+              <h2 class="common">Name this plant</h2>
+            </div>
+            <p>A photo of any plant. In the book, you get the full page.</p>
+          </button>
+          <div class="kicker step-label">Color</div>
+          <div class="colors" id="colors"></div>
+          <p class="hint">Then habitat, then petals.</p>
+          <button class="chip" data-go="results">Any region</button>
+          <div class="recent">
+            <div class="kicker">Seen recently</div>
+            <div class="strip" id="recent"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="habitat" data-tab="">
+        <div class="topbar"><button class="back" data-go="find">← Find</button></div>
+        <div class="scroll">
+          <div class="kicker">Step 2 of 3</div>
+          <div class="crumbs"><span>White</span></div>
+          <h2 class="ask">What’s around you?</h2>
+          <div class="choices" id="habitats"></div>
+        </div>
+      </section>
+
+      <section class="screen" id="petal" data-tab="">
+        <div class="topbar"><button class="back" data-go="habitat">← Habitat</button></div>
+        <div class="scroll">
+          <div class="kicker">Step 3 of 3</div>
+          <div class="crumbs"><span>White</span><span>Meadow</span></div>
+          <h2 class="ask">How many petals?</h2>
+          <div class="choices" id="petals"></div>
+        </div>
+      </section>
+
+      <section class="screen" id="results" data-tab="find">
+        <div class="topbar"><button class="back" data-go="petal">← Petals</button></div>
+        <div class="scroll">
+          <div class="kicker">In the book</div>
+          <h2 class="ask" style="font-size:30px;line-height:1.05">White · meadow<br>more than 5</h2>
+          <div class="filters" style="margin-top:12px">
+            <button class="chip" id="region-btn" style="margin-top:0">Any region</button>
+          </div>
+          <div class="region-panel" id="region-panel" hidden>
+            <button type="button" data-region="any">Any region<small>93 plants</small></button>
+            <button type="button" data-region="me">Middle Europe<small>This phone’s location · 67 plants</small></button>
+            <button type="button" data-region="ne">Northern Europe<small>58 plants</small></button>
+          </div>
+          <p class="count" id="result-count">93 plants</p>
+          <div id="result-list"></div>
+          <p class="more" id="result-more">and 87 more</p>
+        </div>
+      </section>
+
+      <section class="screen" id="species" data-tab="">
+        <div class="topbar"><button class="back" data-go="results">← Results</button></div>
+        <div class="banner" id="seen-bar">
+          <div>
+            <span class="kicker" id="seen-kicker">Seen just now</span>
+            <p id="seen-state">Name unconfirmed</p>
+          </div>
+          <div class="acts" id="seen-acts">
+            <button class="text-btn" id="confirm">Confirm</button>
+            <button class="text-btn" data-go="results">Another</button>
+          </div>
+        </div>
+        <div class="scroll" style="padding:0 0 24px">
+          <img class="hero" alt="Daisy in flower" src="https://storage.googleapis.com/abherbs-resources/photos/Asterales/Asteraceae/Bellis_perennis/bp1.webp">
+          <div class="copy">
+            <div class="kicker">Asteraceae · daisy family</div>
+            <h2 class="common">Daisy</h2>
+            <p class="binomen latin">Bellis perennis</p>
+            <div class="facts">
+              <div><div class="k">Height</div><div class="v">5–20 cm</div></div>
+              <div><div class="k">Flowering</div><div class="v">March–September</div></div>
+              <div><div class="k">Petals</div><div class="v">More than 5</div></div>
+            </div>
+            <p class="lede">A perennial scapose herb with a basal leaf rosette, typically 5–20 cm tall. Native through most of Europe to North Africa and Madeira, and east to the Caucasus and western and Central Asia. Introduced in Finland, Iceland, the Azores, the Russian Far East, Korea, the Indian Subcontinent, Australia, New Zealand, Hawaii and widely in the Americas.</p>
+            <div class="sec">
+              <div class="k">Flower</div>
+              <p class="lede">Many white ray florets, often pink-tinged at the tips, with ligules usually 4–8 mm long. Disc florets yellow, tubular, about 1.5–2 mm. Involucral bracts in two rows of almost equal length.</p>
+            </div>
+            <div class="sec">
+              <div class="k">Plate</div>
+              <div class="plate-row">
+                <img alt="Botanical plate of Bellis perennis" src="https://storage.googleapis.com/abherbs-resources/photos/Asterales/Asteraceae/Bellis_perennis/Bellis_perennis@400.webp">
+                <span class="latin" style="color:var(--ink-2)">Bellis perennis</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="outside" data-tab="">
+        <div class="topbar"><button class="back" data-go="seen">← Seen</button></div>
+        <div class="scroll" style="padding-top:0">
+          <img class="hero" alt="Photo just taken of a variegated houseplant" src="pothos.jpg" style="border-radius:18px;height:220px;margin-top:8px">
+          <div class="copy" style="padding:16px 0 0">
+            <div class="kicker">Not in the guide yet</div>
+            <p class="confidence">Likely</p>
+            <h2 class="common latin" style="font-size:32px;margin-top:4px">Epipremnum aureum</h2>
+            <p class="hint">The name is already in Seen, unconfirmed.</p>
+            <div class="kicker" style="margin-top:22px">Also possible</div>
+            <div class="alt">
+              <span><span class="latin">Monstera deliciosa</span><span class="meta" style="color:var(--ink-2);font-size:14px">Swiss cheese plant</span></span>
+              <span class="tag">In the guide</span>
+            </div>
+            <div class="alt" style="cursor:default">
+              <span class="latin">Epipremnum pinnatum</span>
+              <span class="tag">Outside</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="seen" data-tab="seen">
+        <div class="topbar"><div class="mark">Seen</div></div>
+        <div class="scroll">
+          <p class="hint" style="margin-top:0">On this phone. Field Guide keeps it on your other devices.</p>
+          <div id="seen-list"></div>
+        </div>
+      </section>
+
+      <section class="screen" id="book" data-tab="book">
+        <div class="topbar"><div class="mark">Book</div></div>
+        <div class="scroll">
+          <label class="search">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#6e6659" stroke-width="1.4"><circle cx="7" cy="7" r="4.2"/><path d="M10.4 10.4 14 14"/></svg>
+            <input placeholder="Family or genus" aria-label="Search families">
+          </label>
+          <div class="kicker">Families</div>
+          <div id="families"></div>
+        </div>
+      </section>
+
+      <section class="screen" id="guide" data-tab="">
+        <div class="topbar"><button class="back" data-go="find">← Find</button></div>
+        <div class="scroll">
+          <div class="kicker">Subscription · 7-day trial</div>
+          <h2 class="ask">Field Guide</h2>
+          <p class="lede" style="margin-top:12px">The book stays free. The subscription is how you carry it.</p>
+          <div class="kicker" style="margin-top:18px">Free</div>
+          <ul class="guide-list">
+            <li>The key, every species page, search, and families</li>
+            <li>5 photo identifications a month, plus up to 5 from ads</li>
+            <li>Seen, on this phone</li>
+          </ul>
+          <div class="kicker" style="margin-top:18px">Field Guide adds</div>
+          <ul class="guide-list">
+            <li>Unlimited photo identification</li>
+            <li>No ads</li>
+            <li>Seen on your other devices, including the photos</li>
+            <li>Offline packs of the book</li>
+          </ul>
+          <button class="offer primary" type="button">
+            <strong>Start the 7-day trial</strong>
+            <span>Monthly or yearly. The price is the store price.</span>
+          </button>
+          <p class="price">Restore purchases. Photo search, offline, and no-ads stay with the people who already bought them.</p>
+        </div>
+      </section>
+    </div>
+
+    <nav class="tabs" id="tabs">
+      <button type="button" data-go="find" data-tabbtn="find">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="4.5"/><path d="M11.5 11.5 16 16"/></svg>
+        Find
+      </button>
+      <button type="button" data-go="book" data-tabbtn="book">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 3.5h5.2A2.3 2.3 0 0 1 10.5 5.8V15a2 2 0 0 0-2-.8H3zM15 3.5H9.8A2.3 2.3 0 0 0 7.5 5.8V15a2 2 0 0 1 2-.8H15z"/></svg>
+        Book
+      </button>
+      <button type="button" data-go="seen" data-tabbtn="seen">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 2.5c2.6 0 4.5 2 4.5 4.6 0 3.4-4.5 8.4-4.5 8.4S4.5 10.5 4.5 7.1C4.5 4.5 6.4 2.5 9 2.5z"/><circle cx="9" cy="7" r="1.5"/></svg>
+        Seen
+      </button>
+    </nav>
+
+    <div class="sheet" id="quota" hidden>
+      <div class="card">
+        <div class="grab"></div>
+        <div class="kicker">This month</div>
+        <h2>5 of 5 used</h2>
+        <button class="offer" type="button" data-go="species">
+          <strong>Watch an ad for one more</strong>
+          <span>5 more available from ads this month</span>
+        </button>
+        <button class="offer primary" type="button" data-go="guide">
+          <strong>Field Guide</strong>
+          <span>7-day trial, then the store price. Unlimited names.</span>
+        </button>
+        <button class="offer" type="button" id="close-quota">
+          <strong>Use the key</strong>
+          <span>Color, habitat, and petals stay open</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const PHOTO = "https://storage.googleapis.com/abherbs-resources/photos/";
+const FAM = "https://storage.googleapis.com/abherbs-resources/families/";
+
+const INDEX = [
+  ["find", "Find"],
+  ["habitat", "Habitat"],
+  ["petal", "Petals"],
+  ["results", "Results"],
+  ["species", "Species, in the book"],
+  ["outside", "Outside the book"],
+  ["seen", "Seen"],
+  ["book", "Book"],
+  ["quota", "At the limit"],
+  ["guide", "Field Guide"]
+];
+
+const COLORS = [
+  ["#f7f4ee", "White"],
+  ["#e2b340", "Yellow"],
+  ["#c45b6a", "Red, pink"],
+  ["#6d6a9a", "Blue, purple"],
+  ["#6e7a4e", "Green, brown, black"]
+];
+
+const HABITATS = [
+  ["Meadow", "Grassland"],
+  ["Garden", "Or a field"],
+  ["Wetland", "Moor or water"],
+  ["Woodland", "Forest"],
+  ["Rock", "Or mountain"],
+  ["Tree", "Or shrub"]
+];
+
+function petals(kind) {
+  const s = "none";
+  const c = "#3e5344";
+  if (kind === "4") return `<svg width="42" height="42" viewBox="0 0 42 42"><g fill="${s}" stroke="${c}" stroke-width="1.3"><circle cx="21" cy="21" r="3"/><ellipse cx="21" cy="8" rx="4" ry="6.5"/><ellipse cx="21" cy="34" rx="4" ry="6.5"/><ellipse cx="8" cy="21" rx="6.5" ry="4"/><ellipse cx="34" cy="21" rx="6.5" ry="4"/></g></svg>`;
+  if (kind === "5") return `<svg width="42" height="42" viewBox="0 0 42 42"><g fill="${s}" stroke="${c}" stroke-width="1.3" transform="translate(21 21)"><circle r="3"/>${[0,72,144,216,288].map(a => `<ellipse rx="3.6" ry="7" transform="rotate(${a}) translate(0 -11)"/>`).join("")}</g></svg>`;
+  if (kind === "many") return `<svg width="42" height="42" viewBox="0 0 42 42"><g fill="${s}" stroke="${c}" stroke-width="1.2" transform="translate(21 21)"><circle r="4"/>${Array.from({length:12}, (_,i)=>`<ellipse rx="2.2" ry="6" transform="rotate(${i*30}) translate(0 -12)"/>`).join("")}</g></svg>`;
+  return `<svg width="42" height="42" viewBox="0 0 42 42"><g fill="${s}" stroke="${c}" stroke-width="1.3"><path d="M21 8c6 4 10 8 10 14 0 5-4 8-10 8s-10-3-10-8c0-6 4-10 10-14z"/><path d="M21 18c4 2 6 4 6 7 0 2-2 4-6 4"/><path d="M14 30c2 3 5 4 7 4s5-1 7-4"/></g></svg>`;
+}
+
+const PETALS = [
+  ["4", "4 or fewer", ""],
+  ["5", "5", ""],
+  ["many", "More than 5", ""],
+  ["zyg", "Zygomorphic", "One plane of symmetry"]
+];
+
+const RESULTS = [
+  ["daisy", "Bellis perennis", "Asteraceae", "Asterales/Asteraceae/Bellis_perennis/bp1.webp", "species"],
+  ["yarrow", "Achillea millefolium", "Asteraceae", "Asterales/Asteraceae/Achillea_millefolium/am1.webp", "species"],
+  ["wood anemone", "Anemone nemorosa", "Ranunculaceae", "Ranunculales/Ranunculaceae/Anemone_nemorosa/an1.webp", "species"],
+  ["corn chamomile", "Anthemis arvensis", "Asteraceae", "Asterales/Asteraceae/Anthemis_arvensis/aa1.webp", "species"],
+  ["mountain everlasting", "Antennaria dioica", "Asteraceae", "Asterales/Asteraceae/Antennaria_dioica/ad1.webp", "species"],
+  ["lily-of-the-valley", "Convallaria majalis", "Asparagaceae", "Asparagales/Asparagaceae/Convallaria_majalis/cm1.webp", "species"]
+];
+
+const FAMILIES = [
+  ["Asteraceae", "daisy family"],
+  ["Ranunculaceae", "buttercup family"],
+  ["Rosaceae", "rose family"],
+  ["Lamiaceae", "mint family"],
+  ["Papaveraceae", "poppy family"],
+  ["Fabaceae", "pea family"],
+  ["Araceae", "arum family"]
+];
+
+const indexEl = document.getElementById("index");
+INDEX.forEach(([id, label]) => {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.textContent = label;
+  b.dataset.go = id;
+  b.dataset.index = id;
+  indexEl.appendChild(b);
+});
+
+const colorsEl = document.getElementById("colors");
+COLORS.forEach(([hex, name], i) => {
+  const b = document.createElement("button");
+  b.className = "swatch";
+  b.type = "button";
+  if (i === 0) b.dataset.go = "habitat";
+  b.innerHTML = `<i style="background:${hex}"></i><span>${name}</span>`;
+  colorsEl.appendChild(b);
+});
+
+document.getElementById("habitats").innerHTML = HABITATS.map(([name, sub], i) =>
+  `<button class="choice" type="button" ${i === 0 ? 'data-go="petal"' : ""}><svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#3e5344" stroke-width="1.3"><path d="M4 26h28M8 26c2-8 4-12 6-14M18 26V12M26 26c-1-7-2-10-5-12"/></svg><span><b>${name}</b><small>${sub}</small></span></button>`
+).join("");
+
+document.getElementById("petals").innerHTML = PETALS.map(([kind, name, sub]) =>
+  `<button class="choice" type="button" ${kind === "many" ? 'data-go="results"' : ""}>${petals(kind)}<span><b>${name}</b>${sub ? `<small>${sub}</small>` : ""}</span></button>`
+).join("");
+
+document.getElementById("result-list").innerHTML = RESULTS.map(([common, latin, family, file]) => {
+  const go = latin === "Bellis perennis";
+  const tag = go ? "button" : "div";
+  return `<${tag} class="plant" ${go ? 'type="button" data-go="species"' : ""}><img alt="" src="${PHOTO}${file}"><span><span class="common">${common}</span><span class="latin">${latin}</span><div class="meta">${family}</div></span></${tag}>`;
+}).join("");
+
+document.getElementById("recent").innerHTML = [
+  ["Daisy", PHOTO + "Asterales/Asteraceae/Bellis_perennis/bp1.webp", "species"],
+  ["Dandelion", PHOTO + "Asterales/Asteraceae/Taraxacum_officinale/to1.webp", "seen"],
+  ["Poppy", PHOTO + "Ranunculales/Papaveraceae/Papaver_rhoeas/pr1.webp", "seen"]
+].map(([name, src, go]) =>
+  `<button type="button" data-go="${go}"><img alt="${name}" src="${src}"><span>${name}</span></button>`
+).join("");
+
+document.getElementById("seen-list").innerHTML = [
+  ["pothos.jpg", "Epipremnum aureum", "Just now · outside the book", "Unconfirmed", "outside", false],
+  [PHOTO + "Asterales/Asteraceae/Bellis_perennis/bp1.webp", "Daisy", "Just now · Bellis perennis", "Unconfirmed", "species", false],
+  [PHOTO + "Asterales/Asteraceae/Taraxacum_officinale/to1.webp", "Dandelion", "Yesterday · Taraxacum officinale", "Confirmed", "book", true],
+  [PHOTO + "Ranunculales/Papaveraceae/Papaver_rhoeas/pr1.webp", "Common poppy", "12 May · Papaver rhoeas", "Confirmed", "book", true]
+].map(([src, title, sub, flag, go, ok]) =>
+  `<button class="seen-row" type="button" ${go === "book" ? "" : `data-go="${go}"`}><img alt="" src="${src}"><span><span class="flag ${ok ? "ok" : ""}">${flag}</span><span class="common" style="font-size:20px">${title}</span><div class="meta" style="color:var(--ink-2);font-size:14px">${sub}</div></span></button>`
+).join("");
+
+document.getElementById("families").innerHTML = FAMILIES.map(([latin, common]) =>
+  `<div class="family"><img alt="" src="${FAM}${latin}.webp"><span><span class="latin">${latin}</span><div class="meta" style="color:var(--ink-2)">${common}</div></span></div>`
+).join("");
+
+const TAB_SCREENS = new Set(["find", "results", "book", "seen"]);
+const phone = document.getElementById("phone");
+
+function show(id) {
+  const screenId = id === "quota" ? "find" : id;
+  document.querySelectorAll(".screen").forEach(el => el.classList.toggle("on", el.id === screenId));
+  document.querySelectorAll("[data-index]").forEach(el => el.classList.toggle("on", el.dataset.index === id));
+  document.getElementById("quota").hidden = id !== "quota";
+  const meter = document.querySelector(".camera .kicker");
+  if (meter) meter.textContent = id === "quota" ? "None left this month" : "4 of 5 this month";
+  phone.classList.toggle("no-tabs", !TAB_SCREENS.has(screenId) || id === "quota");
+  const tab = document.getElementById(screenId)?.dataset.tab || "";
+  document.querySelectorAll("[data-tabbtn]").forEach(el => el.classList.toggle("on", el.dataset.tabbtn === tab));
+  document.querySelector(".screens").scrollTop = 0;
+  document.querySelectorAll(".screen.on .scroll").forEach(el => { el.scrollTop = 0; });
+}
+
+document.body.addEventListener("click", (event) => {
+  const go = event.target.closest("[data-go]");
+  if (go) show(go.dataset.go);
+});
+
+document.getElementById("close-quota").addEventListener("click", () => show("find"));
+
+document.getElementById("region-btn").addEventListener("click", () => {
+  const panel = document.getElementById("region-panel");
+  panel.hidden = !panel.hidden;
+});
+
+const COUNTS = {
+  any: ["Any region", "93 plants", "and 87 more"],
+  me: ["Middle Europe", "67 plants", "and 61 more"],
+  ne: ["Northern Europe", "58 plants", "and 52 more"]
+};
+document.getElementById("region-panel").addEventListener("click", (event) => {
+  const btn = event.target.closest("[data-region]");
+  if (!btn) return;
+  const [label, count, more] = COUNTS[btn.dataset.region];
+  document.getElementById("region-btn").textContent = label;
+  document.getElementById("result-count").textContent = count;
+  document.getElementById("result-more").textContent = more;
+  document.getElementById("region-panel").hidden = true;
+});
+
+document.getElementById("confirm").addEventListener("click", () => {
+  document.getElementById("seen-bar").classList.add("confirmed");
+  document.getElementById("seen-kicker").textContent = "Seen";
+  document.getElementById("seen-state").textContent = "Daisy confirmed";
+  document.getElementById("seen-acts").hidden = true;
+});
+
+show("find");
+</script>
+</body>
+</html>
