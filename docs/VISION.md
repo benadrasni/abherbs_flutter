@@ -4,14 +4,14 @@
 
 A comprehensive encyclopedia-like application for **all plants in the world**: species pages that a person can trust, find, and contribute to, on a phone, **in every language the app already supports**.
 
-The shipping product is already a real step toward that: a multilingual flower identifier with curated photos, botanical text, APG IV taxonomy, synonyms, and user observations. It is not yet an encyclopedia of plants. It is a **flower identification key** with a few thousand carefully prepared angiosperms. Missing species text is still filled by Google Translate. A near-term product goal on the way to the encyclopedia is to **retire that**: real body text in all UI languages, then no Translate API and no `{lang}-GT` cache. Plan: [TRANSLATIONS.md](TRANSLATIONS.md).
+The shipping product is already a real step toward that: a multilingual flower identifier with curated photos, botanical text, APG IV taxonomy, synonyms, and user observations. It is not yet an encyclopedia of plants. It is a **flower identification key** with a few thousand carefully prepared angiosperms. Missing species body text falls back to English. Vernacular names stay in the language that has them. The Translate API and the `{lang}-GT` cache are gone. Official body text in every UI language is still the goal. Plan: [TRANSLATIONS.md](TRANSLATIONS.md).
 
 ## What exists today
 
 - **1,413** curated flowering plants, each with photos, filter attributes, and a species page.
 - Identification by **four human-visible traits**: color, habitat, petal type, TDWG level-2 region.
 - Species pages with height, flowering months, toxicity class, APG IV path, IPNI / GBIF / USDA / Wikidata links, and sectioned text (description, flower, inflorescence, fruit, leaf, stem, habitat, toxicity, uses/`herbalism`, trivia).
-- **35** app UI languages (33 catalog codes). English and Slovak body text are complete; German is the next-fullest (~1,068 / 1,413). Other languages have sourced Wikidata names and almost no official body text. Missing sections are filled by Google Translate and cached under `translations/{lang}-GT`. **Goal: replace that with stored translations, then delete GT.**
+- **35** app UI languages (33 catalog codes). Many languages have full seven-field body text. The rest show English body text, with that language's vernacular `label` and `names` when a source recorded them. There is no Google Translate cache.
 - Community observations (1,509 public, last public stat date 2022) and photo search via Plant.id.
 
 That is a hobby-scale, high-touch catalog. Adding a plant today means a local folder of photos, a Tkinter crop tool, a Wikidata/POWO scrape, and a Firebase write.
@@ -25,7 +25,7 @@ That is a hobby-scale, high-touch catalog. Adding a plant today means a local fo
 | Identity | Latin binomial as Firebase key | Stable taxon IDs (IPNI, POWO, WFO, GBIF) |
 | Discovery | Precomputed 4-axis lists | Search, geography, taxonomy, image, traits |
 | Ingest | Manual, one plant at a time | Automated, source-backed, reviewable |
-| Text | English + Slovak editorial; other UI languages mostly Google Translate on read | Seven fields in every UI language, sourced names, no Translate API |
+| Text | English body, plus official text where a language is full-7; other UI languages fall back to English and keep their vernacular names | Seven fields in every UI language, sourced names |
 | Media | Locally prepared WebP squares | Rights-aware media pipeline |
 | Backend | One Realtime Database tree | Will not stay this shape at encyclopedia scale |
 
@@ -44,7 +44,7 @@ The current filter indexes (`lists_4_v2` ≈ 9.7k keys, `counts_4_v2` ≈ 11k ke
 
 1. **Stabilize the present.** Docs, access to stores and Firebase, ship 8.0.7, understand data quality.
 2. **Measure the catalog.** Coverage by family, region, language, missing sections, leftover `plants_v2` keys, observation health.
-3. **Retire Google Translate.** Full seven-field text in every UI language, then remove the Translate API, website GT fallback, notification `GoogleTranslator`, and `{lang}-GT` nodes. [TRANSLATIONS.md](TRANSLATIONS.md).
+3. **Finish official body text.** The Translate API and `{lang}-GT` nodes are already gone. Remaining work is seven-field text in every UI language. [TRANSLATIONS.md](TRANSLATIONS.md). Notification copy in ingest still uses `GoogleTranslator` until that script is switched to stored strings.
 4. **Harden identity.** Introduce a durable taxon id next to the Latin display name; stop treating rename as a multi-node copy.
 5. **Grow ingest.** Replace one-off scripts with a repeatable plant job: fetch, normalize, review, publish — including every UI language in the same publish as English.
 6. **Widen the product.** Trees, grasses, ferns, and plants without a flower key need different discovery than color/petals.

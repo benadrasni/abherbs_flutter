@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:abherbs_flutter/detail/plant_detail_gallery.dart';
 import 'package:abherbs_flutter/detail/plant_detail_info.dart';
@@ -8,9 +7,7 @@ import 'package:abherbs_flutter/drawer.dart';
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
-import 'package:abherbs_flutter/entity/translations.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/observations/observation_edit.dart';
 import 'package:abherbs_flutter/observations/observation_logs.dart';
 import 'package:abherbs_flutter/observations/observation_scope_switch.dart';
@@ -27,7 +24,6 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
-import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -79,83 +75,29 @@ class _PlantDetailState extends State<PlantDetail> {
     _logShareEvent(widget.plant.name);
   }
 
+  PlantTranslation _withLatinTitle(PlantTranslation translation) {
+    final label = translation.label;
+    if (label == null || label.trim().isEmpty) {
+      translation.label = widget.plant.name;
+    }
+    return translation;
+  }
+
   Future<PlantTranslation> _getTranslation() {
-    return translationsReference
-        .child(getLanguageCode(widget.myLocale.languageCode))
-        .child(widget.plant.name)
-        .once()
-        .then((event) {
-      PlantTranslation plantTranslation =
-          event.snapshot.value == null ? PlantTranslation() : PlantTranslation.fromJson(event.snapshot.value as Map);
-      if (plantTranslation.isTranslated()) {
-        return plantTranslation;
-      } else if (!languageUsesGoogleTranslate(widget.myLocale.languageCode)) {
-        return translationsReference
-            .child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish)
-            .child(widget.plant.name)
-            .once()
-            .then((event) {
-          if (event.snapshot.value == null) {
-            if (plantTranslation.label == null) {
-              plantTranslation.label = widget.plant.name;
-            }
-            return plantTranslation;
-          }
-          var plantTranslationOriginal = PlantTranslation.fromJson(event.snapshot.value as Map);
-          if (plantTranslation.label == null) {
-            plantTranslation.label = widget.plant.name;
-          }
-          return plantTranslation.mergeWith(plantTranslationOriginal);
-        });
-      } else {
-        plantTranslation.isTranslatedWithGT = true;
-        return translationsReference
-            .child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix)
-            .child(widget.plant.name)
-            .once()
-            .then((event) {
-          var plantTranslationGT = PlantTranslation.copy(plantTranslation);
-          if (event.snapshot.value != null) {
-            plantTranslationGT = PlantTranslation.fromJson(event.snapshot.value as Map);
-            plantTranslationGT.mergeWith(plantTranslation);
-          }
-          if (plantTranslationGT.label == null) {
-            plantTranslationGT.label = widget.plant.name;
-          }
-          if (plantTranslationGT.isTranslated()) {
-            plantTranslationGT.isTranslatedWithGT = true;
-            return plantTranslationGT;
-          } else {
-            return translationsReference
-                .child(widget.myLocale.languageCode == languageCzech ? languageSlovak : languageEnglish)
-                .child(widget.plant.name)
-                .once()
-                .then((event) {
-              var plantTranslationOriginal = PlantTranslation.fromJson(event.snapshot.value as Map);
-              var uri = googleTranslateEndpoint + '?key=' + translateAPIKey;
-              uri += '&source=' + (languageCzech == widget.myLocale.languageCode ? languageSlovak : languageEnglish);
-              uri += '&target=' + getLanguageCode(widget.myLocale.languageCode);
-              for (var text in plantTranslation.getTextsToTranslate(plantTranslationOriginal)) {
-                uri += '&q=' + text;
-              }
-              return http.get(Uri.parse(uri)).then((response) {
-                if (response.statusCode == 200) {
-                  Translations translations = Translations.fromJson(json.decode(response.body));
-                  PlantTranslation onlyGoogleTranslation =
-                      plantTranslation.fillTranslations(translations.translatedTexts, plantTranslationOriginal);
-                  translationsReference
-                      .child(getLanguageCode(widget.myLocale.languageCode) + languageGTSuffix)
-                      .child(widget.plant.name)
-                      .set(onlyGoogleTranslation.toJson());
-                  return plantTranslation;
-                } else {
-                  return plantTranslation.mergeWith(plantTranslationOriginal);
-                }
-              });
-            });
-          }
-        });
+    final code = getLanguageCode(widget.myLocale.languageCode);
+    return translationsReference.child(code).child(widget.plant.name).once().then((event) {
+      final local = event.snapshot.value == null
+          ? PlantTranslation()
+          : PlantTranslation.fromJson(event.snapshot.value as Map);
+      if (code == languageEnglish || local.isTranslated()) {
+        return _withLatinTitle(local);
       }
+      return translationsReference.child(languageEnglish).child(widget.plant.name).once().then((englishEvent) {
+        if (englishEvent.snapshot.value != null) {
+          local.fillMissingFrom(PlantTranslation.fromJson(englishEvent.snapshot.value as Map));
+        }
+        return _withLatinTitle(local);
+      });
     });
   }
 

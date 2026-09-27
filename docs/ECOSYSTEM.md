@@ -70,7 +70,7 @@ The homepage loads:
 
 1. `plants_to_update/list.json` — catalog names
 2. `plants_v2/{name}.json`
-3. `translations/{lang}`, `{lang}-GT`, `en`
+3. `translations/{lang}`, then English when that language has no body text
 
 Shared plant URLs from the app land here. Website copy for ~34 languages is stored in Firebase `web/`, not in the React repo.
 

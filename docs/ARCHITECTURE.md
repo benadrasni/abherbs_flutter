@@ -74,9 +74,7 @@ Tabs in `lib/detail/`:
 - Taxonomy (APG IV path, IPNI synonyms, POWO link)
 - Observations for that plant (paid)
 
-Missing sections are filled at read time: local language → `{lang}-GT` cache → English (or Slovak when the UI language is Czech) → Google Translate API → write back to `{lang}-GT`.
-
-Long-term that GT path goes away: stored seven-field text in every UI language, then no Translate API. [TRANSLATIONS.md](TRANSLATIONS.md).
+Missing body text is filled from English. The language's own vernacular `label` and `names` stay when that language has them; otherwise the title is the Latin name. There is no Translate API and no `{lang}-GT` cache. [TRANSLATIONS.md](TRANSLATIONS.md).
 
 ### Monetization
 

@@ -19,7 +19,7 @@ Most catalog trees are world-readable (the website fetches them with unauthentic
 
 Admin SDK bypasses these rules (ingest, observation reviewer).
 
-The app still writes Google Translate output to `translations/{lang}-GT`; that persist now fails (in-session translate still works). Signed-out photo-search logs under `anonymous` also fail.
+Signed-out photo-search logs under `anonymous` fail. The app does not write translations.
 
 ## Root nodes
 
@@ -32,8 +32,7 @@ The app still writes Google Translate output to `translations/{lang}-GT`; that p
 | `search_v3/{lang}` | Name search index (`la` = Latin) |
 | `search_photo/{normalizedName}` | Maps Plant.id scientific name → in-catalog path |
 | `APG IV_v3` | Taxonomy tree for browse/search |
-| `translations/{lang}/{latinName}` | Human (or Wikidata) plant text |
-| `translations/{lang}-GT/{latinName}` | Google Translate cache |
+| `translations/{lang}/{latinName}` | Plant text in that language. Missing body falls back to English in the client. `label` and `names` are that language's vernaculars only. |
 | `translations_taxonomy/{lang}/{taxon}` | Localized taxon names |
 | `synonyms/{latinName}` | IPNI synonym list |
 | `lists_custom` | Editorial lists ("new", "by language", dated drops). Language lists: `list/{plantId}` is `1` (presence) or a designation year 1900–2100. Old app 8.2.1 reads only the keys. |
@@ -187,11 +186,9 @@ Client: `lib/filter/filter_utils.dart`.
 | `trivia` | Optional. `/update-plant` leaves live English unchanged. |
 | `sourceUrls` | Localized sources |
 
-Wikidata ingest creates a huge set of language codes (Wikipedia sitelinks). The app only *requests* the device / preferred language, with GT fallback.
+Wikidata ingest creates a huge set of language codes (Wikipedia sitelinks). The app requests the device language. When the seven body fields are missing, the app and website show English for the empty body fields and keep the language's own `label` and `names`.
 
-`isTranslated()` in `plant_translation.dart` requires the seven body fields above. Until they exist, the client may call Translate. Caching under `{lang}-GT` is Admin-only now; the official UI still shows the in-memory result for that session.
-
-**Long-term:** fill those seven fields in every UI language and delete `{lang}-GT`. Do not copy the GT cache into official translations. Plan: [TRANSLATIONS.md](TRANSLATIONS.md).
+`isTranslated()` in `plant_translation.dart` requires the seven body fields above. Do not recreate `translations/{lang}-GT`. Plan: [TRANSLATIONS.md](TRANSLATIONS.md).
 
 Live `translations` is read-only for clients. The app and website no longer collect volunteer translation edits.
 

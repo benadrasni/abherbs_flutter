@@ -1,10 +1,12 @@
-# Translations — retire Google Translate
+# Translations
 
-Long-term goal: **every supported UI language has real plant text in the catalog**, so the app and website never call Google Translate and Firebase no longer stores `translations/{lang}-GT`.
+**Status (2026-09-27).** Google Translate is retired. The app and the website do not call the Translation API and do not read `translations/{lang}-GT`. Every `{lang}-GT` node is deleted. Do not recreate one, and do not copy GT text into `translations/{lang}`.
 
-This sits beside the encyclopedia vision. The identifier stays; the on-read machine translation goes.
+Missing body text falls back to English. That is the seven identification fields plus `toxicity`, `herbalism`, and `trivia` when the language row is not full-7. A full-7 row stands on its own. The language's own `label` and `names` are shown whenever that language has them. If it has no vernacular, the UI shows the Latin name, not the English common name.
 
-Do not start a full-catalog language pass, write Firebase, or ship a client that drops the Translate API until that language (or the whole set) is actually complete. This file is the plan.
+Official body text in every UI language is still the catalog goal. Until a language is full-7, its pages show English body text beside the vernacular name.
+
+The sections below are the plan that led here. Where they still say to keep Google Translate or a `{lang}-GT` node, this status wins.
 
 ## What “supported languages” means
 
@@ -38,7 +40,7 @@ A plant is “fully translated” when the seven identification fields exist: `d
 
 Almost every remaining non-complete-language reader who opens a species page is reading Google Translate of English (Czech: of Slovak), either from `{lang}-GT` or live from the Translate API. Client writes to `{lang}-GT` now fail the rules; in-session translate still works. Offline still `keepSynced`s the GT tree for languages that still use Translate. The website still fetches `{lang}-GT` except for languages in `LANGUAGES_WITHOUT_GT`.
 
-Retired `{lang}-GT` (official catalog is full-7; do not recreate): `de-GT` (2026-09-09), `pl-GT` and `ru-GT` (2026-09-10), `es-GT` and `pt-GT` (2026-09-12), `ja-GT` (2026-09-13), `it-GT`, `nl-GT` and `uk-GT` (2026-09-14), `hu-GT` and `da-GT` (2026-09-17), `sv-GT` (2026-09-17), `no-GT` and `fi-GT` (2026-09-18), `et-GT`, `lv-GT` and `lt-GT` (2026-09-20), `hr-GT` and `sl-GT` (2026-09-23), `sr-GT` (2026-09-25), `bg-GT` and `ro-GT` (2026-09-26), `hi-GT` and `ko-GT` (2026-09-27). App `languageUsesGoogleTranslate` and website `LANGUAGES_WITHOUT_GT` skip `en sk de fr cs pl ru es pt ja it nl uk hu da sv no fi et lv lt hr sl sr bg ro hi ko`. The website indexes `/sr/`, `/bg/`, `/ro/`, `/hi/`, and `/ko/`. Hindi (`hi`) official body is full-7 (1,421/1,421). `hi-GT` was deleted 2026-09-27 (708 keys). Do not recreate it. Devanagari. The rewrite skill is `/translate-hi`. Korean (`ko`) official body is full-7 (1,421/1,421). `ko-GT` was deleted 2026-09-27 (1,229 keys). Do not recreate it. Hangul. The rewrite skill is `/translate-ko`. Chinese (`zh`) stays on Google Translate until official `translations/zh` is full-7. The rewrite skill is `/translate-zh` (not started; next index 0, *Acer campestre*). Traditional Chinese (正體中文); the app locale is `zh_TW` and the catalog key is `zh`. Do not delete `zh-GT` before that. Hebrew (`he`) stays on Google Translate until official `translations/he` is full-7. The rewrite skill is `/translate-he` (not started; next index 0, *Acer campestre*). Hebrew script, unpointed. The app locale is `he_IL` and the catalog key is `he`. Do not delete `he-GT` before that. Persian (`fa`) stays on Google Translate until official `translations/fa` is full-7. The rewrite skill is `/translate-fa` (not started; next index 0, *Acer campestre*). Persian script. The app locale is `fa_IR` and the catalog key is `fa`. Do not delete `fa-GT` before that.
+Retired `{lang}-GT` (official catalog is full-7; do not recreate): `de-GT` (2026-09-09), `pl-GT` and `ru-GT` (2026-09-10), `es-GT` and `pt-GT` (2026-09-12), `ja-GT` (2026-09-13), `it-GT`, `nl-GT` and `uk-GT` (2026-09-14), `hu-GT` and `da-GT` (2026-09-17), `sv-GT` (2026-09-17), `no-GT` and `fi-GT` (2026-09-18), `et-GT`, `lv-GT` and `lt-GT` (2026-09-20), `hr-GT` and `sl-GT` (2026-09-23), `sr-GT` (2026-09-25), `bg-GT` and `ro-GT` (2026-09-26), `hi-GT` and `ko-GT` (2026-09-27). App `languageUsesGoogleTranslate` and website `LANGUAGES_WITHOUT_GT` skip `en sk de fr cs pl ru es pt ja it nl uk hu da sv no fi et lv lt hr sl sr bg ro hi ko`. The website indexes `/sr/`, `/bg/`, `/ro/`, `/hi/`, and `/ko/`. Hindi (`hi`) official body is full-7 (1,421/1,421). `hi-GT` was deleted 2026-09-27 (708 keys). Do not recreate it. Devanagari. The rewrite skill is `/translate-hi`. Korean (`ko`) official body is full-7 (1,421/1,421). `ko-GT` was deleted 2026-09-27 (1,229 keys). Do not recreate it. Hangul. The rewrite skill is `/translate-ko`. Chinese (`zh`) no longer uses Google Translate. The rewrite skill is `/translate-zh` (not started; next index 0, *Acer campestre*). Traditional Chinese (正體中文); the app locale is `zh_TW` and the catalog key is `zh`. `zh-GT` was deleted 2026-09-27. Do not recreate it. Hebrew (`he`) no longer uses Google Translate. The rewrite skill is `/translate-he` (not started; next index 0, *Acer campestre*). Hebrew script, unpointed. The app locale is `he_IL` and the catalog key is `he`. `he-GT` was deleted 2026-09-27. Do not recreate it. Persian (`fa`) no longer uses Google Translate. The rewrite skill is `/translate-fa` (not started; next index 0, *Acer campestre*). Persian script. The app locale is `fa_IR` and the catalog key is `fa`. `fa-GT` was deleted 2026-09-27. Do not recreate it.
 
 Other Google Translate call sites:
 
@@ -126,7 +128,7 @@ For each language:
 - Write the seven fields (and optionals when English has them) into `translations/{lang}`, with `sourceUrls` for that language.
 - Rebuild `search_v3/{lang}` if labels changed.
 - Write `web/labels/{lang}/{id}` only when `label` is sourced.
-- Do **not** delete `{lang}-GT` until that language is complete for the whole catalog. Incomplete official text plus leftover GT is how the client works today (`isTranslated()` short-circuits). Partial official + leftover GT for the same plant is OK: official fields win via merge.
+- `{lang}-GT` is already deleted for every language. Incomplete official text falls back to English body text. The language's own `label` and `names` stay. Do not recreate `{lang}-GT`.
 
 A language is **complete** when every `plants_to_update` name has the seven fields in `translations/{lang}`. Then:
 

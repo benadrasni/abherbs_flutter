@@ -96,7 +96,6 @@ const String languageBulgarian = "bg";
 const String languageRomanian = "ro";
 const String languageHindi = "hi";
 const String languageKorean = "ko";
-const String languageGTSuffix = "-GT";
 const String heightUnitOfMeasure = "cm";
 
 const String webUrl = "https://whatsthatflower.com/";
@@ -135,8 +134,6 @@ const String termsOfUseUrl =
     "https://storage.googleapis.com/abherbs-resources/misc/TermsOfServiceofWhatsthatflower.htm";
 const String privacyPolicyUrl =
     "https://storage.googleapis.com/abherbs-resources/misc/PrivacyPolicyofWhatsthatflower.htm";
-const String googleTranslateEndpoint =
-    "https://translation.googleapis.com/language/translate/v2";
 const String googleMapsEndpoint =
     "https://maps.googleapis.com/maps/api/staticmap?";
 const String plantIdEndpoint = "https://api.plant.id/v2/identify";
@@ -875,21 +872,10 @@ void goToDetail(State state, BuildContext context, Locale myLocale, String name,
       }
     } else {
       plantsReference.child(name).keepSynced(true);
-      translationsReference
-          .child(myLocale.languageCode)
-          .child(name)
-          .keepSynced(true);
-      if (myLocale.languageCode != languageEnglish) {
-        translationsReference
-            .child(languageEnglish)
-            .child(name)
-            .keepSynced(true);
-        if (languageUsesGoogleTranslate(myLocale.languageCode)) {
-          translationsReference
-              .child(myLocale.languageCode + languageGTSuffix)
-              .child(name)
-              .keepSynced(true);
-        }
+      final code = getLanguageCode(myLocale.languageCode);
+      translationsReference.child(code).child(name).keepSynced(true);
+      if (code != languageEnglish) {
+        translationsReference.child(languageEnglish).child(name).keepSynced(true);
       }
     }
   });
@@ -926,38 +912,6 @@ String webPageUrl(String path, String languageCode) {
 
 String webPlantUrl(String latinName, String languageCode) {
   return webPageUrl('plant/${Uri.encodeComponent(latinName)}', languageCode);
-}
-
-bool languageUsesGoogleTranslate(String languageCode) {
-  var code = getLanguageCode(languageCode);
-  return code != languageEnglish &&
-      code != languageSlovak &&
-      code != languageGerman &&
-      code != languageFrench &&
-      code != languageCzech &&
-      code != languagePolish &&
-      code != languageRussian &&
-      code != languageSpanish &&
-      code != languagePortuguese &&
-      code != languageJapanese &&
-      code != languageItalian &&
-      code != languageDutch &&
-      code != languageUkrainian &&
-      code != languageHungarian &&
-      code != languageDanish &&
-      code != languageSwedish &&
-      code != languageNorwegian &&
-      code != languageFinnish &&
-      code != languageEstonian &&
-      code != languageLatvian &&
-      code != languageLithuanian &&
-      code != languageCroatian &&
-      code != languageSlovenian &&
-      code != languageSerbian &&
-      code != languageBulgarian &&
-      code != languageRomanian &&
-      code != languageHindi &&
-      code != languageKorean;
 }
 
 double getFABPadding() {
