@@ -50,12 +50,12 @@ Git remote: `https://github.com/benadrasni/abherbs_flutter`.
 - Do not write production RTDB/Storage unless the user asked for a data change.
 - Website Hosting deploy: `web/AGENTS.md` (only when asked).
 - Play releases are option A: build a signed AAB and upload with `~/Development/Keystore/play-publisher.json` (Play Developer API). Do not ship unless asked. Details: `docs/ACCESS.md`.
-- App Store Connect key `4AKYKM6RAW` may be used (Admin-level). Live iOS is 8.0.6. Do not upload a binary unless asked.
+- App Store Connect key `4AKYKM6RAW` may be used (Admin-level). 8.3.0 (830) is waiting for review as of 2026-09-27. Release type is manual, same as 8.2.1. Do not upload a binary unless asked.
 
 ## Stores
 
 - Android applicationId / iOS bundle id: `sk.ab.herbs`.
-- Play: 1M+ installs. Live production **8.2.1 (821)** as of 2026-09-01.
+- Play: 1M+ installs. Production **8.3.0 (830)** submitted 2026-09-27, full rollout. Previous production release was 8.2.1 (821).
 - iOS metadata and an App Store Connect API key live under gitignored `ios/fastlane/`.
 
 ## Tests
