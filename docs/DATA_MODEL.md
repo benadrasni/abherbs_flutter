@@ -214,7 +214,7 @@ Upload statuses used when publishing: `private`, `review`, `public`, `success`, 
 
 `abherbs-auto/review_observations.py` is a Tkinter reviewer: download photos from the bucket, accept / reject / skip.
 
-Public stats at last read: 1,509 observations, 49 observers, 572 species, heaviest countries SK / SI / GB / US. `lastDate` is 2022-09-24 — the public feed looks quiet.
+Public stats at last read (2026-09-27): 1,778 observations, 56 observers, 630 species, heaviest countries SK / SI / GB / CH. The latest public observation is from September 2026. Private: 2,654 records in 172 accounts (1,958 uploaded and published, 609 with photos only on the phone, 87 rejected).
 
 ## Users
 
