@@ -20,14 +20,14 @@ This repository is the Flutter client. Plant data lives in Firebase. The three l
 open ~/whatsthatflower/whatsthatflower.code-workspace
 ```
 
-## Current snapshot (2026-03-26)
+## Current snapshot (2026-09-28)
 
 | Item | Value |
 |---|---|
-| App version in this repo | `8.3.0+830` (Play production 8.3.0 submitted 2026-09-27; App Store 8.3.0 waiting for review) |
-| Plants in catalog | **1,413** headers (`plants_to_update/count`) |
-| Records in `plants_v2` | 1,419 (a few leftover / renamed keys) |
-| Public observations | 1,509 from 49 observers, 572 species |
+| App version in this repo | `9.0.0+900` (Play and App Store are still 8.3.0) |
+| Plants in catalog | **1,421** headers (`plants_to_update/count`, ids 0–1420) |
+| Records in `plants_v2` | 1,421 |
+| Public observations | 1,778 from 56 observers, 630 species |
 | App UI languages | 35 `.arb` files |
 | Firebase project | `abherbs-backend` |
 | Photo bucket | `gs://abherbs-resources` |

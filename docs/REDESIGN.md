@@ -104,9 +104,13 @@ The site stays the public reading room. Same species pages, same families and ge
 
 New interface strings go into `lib/l10n/intl_*.arb`, then `flutter pub run intl_utils:generate`, then the website locale generator.
 
-## Left alone
+## How we build it
 
-The Realtime Database trees stay. A Cloud Function is the new piece, not a new catalog store. The 4-step indexes stay in place and keep accepting an empty region. Catalog growth stays on its own track. Trees, grasses, and ferns are not part of this shell. Health assessment is not part of the camera.
+New screens, not edits to the ones that ship today. Find, Book, Seen, the species page, the three-step key, the region chip, search, the camera result, and Field Guide are new pages. The live screens stay: the color, habitat, petal, and region steps, the result list, plant detail, search, the drawer, settings, purchases, and observations. The root can open the new shell. Those old pages are not rewritten to become it.
+
+Reuse the current Firebase reads and helpers when a new page can call them as they are: `lists_4_v2`, `lists_custom`, `translations`, `translations_taxonomy`, `observations`, `filter_utils`, and the prefs and language helpers. A new page gets its own helper or API only when nothing suitable already returns what it needs.
+
+Database additions and changes are allowed when a new page needs a field or node the current trees do not have. The Seen fields (`confirmed`, `source`, candidates) are that kind of addition. The 4-step indexes stay in place and keep accepting an empty region. Catalog growth stays on its own track. Trees, grasses, and ferns are not part of this shell. Health assessment is not part of the camera. The Plant.id key stays on a Cloud Function.
 
 ## Build order
 

@@ -51,11 +51,14 @@ Signed-out photo-search logs under `anonymous` fail. The app does not write tran
 | `web/catalog/{id}` | Slim website plant row (`id`, `name`, `family`, `url`, `illustrationUrl`). Written with each incremental add. |
 | `web/labels/{lang}/{id}` | Sourced vernacular for that plant, or omitted. Not inverted from `search_v3`. |
 
-Live sizes (public REST, 2026-03-26):
+Live sizes (public REST, 2026-09-28):
 
-- `plants_headers`: 1,413
-- `plants_v2`: 1,419
-- `plants_to_update/count`: 1,413
+- `plants_headers`: 1,421 (ids 0–1420, no gaps)
+- `plants_v2`: 1,421
+- `plants_to_update/count`: 1,421
+
+Index sizes below were last counted on 2026-03-26:
+
 - `lists_4_v2`: 9,731 keys
 - `counts_4_v2`: 11,130 keys
 - `search_photo`: 8,529 name mappings
@@ -214,7 +217,7 @@ Upload statuses used when publishing: `private`, `review`, `public`, `success`, 
 
 `abherbs-auto/review_observations.py` is a Tkinter reviewer: download photos from the bucket, accept / reject / skip.
 
-Public stats at last read (2026-09-27): 1,778 observations, 56 observers, 630 species, heaviest countries SK / SI / GB / CH. The latest public observation is from September 2026. Private: 2,654 records in 172 accounts (1,958 uploaded and published, 609 with photos only on the phone, 87 rejected).
+Public stats recounted 2026-09-28 from `observations/public/by date/list`: 1,778 outdoor observations with status `public`, 56 observers, 630 species. The same list also holds 260 indoor observations and 2 outdoor rows still in `review`; those are not in the 1,778. Heaviest countries on the stored stats remain SK / SI / GB / CH. The latest public observation is *Dahlia pinnata*, 18 September 2026. Private: 2,654 records in 172 accounts (1,958 uploaded and published, 609 with photos only on the phone, 87 rejected).
 
 ## Users
 

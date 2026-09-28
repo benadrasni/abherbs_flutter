@@ -25,6 +25,13 @@ UI chrome is already translated: ARB files, `web/src/locales.json`, `data/*.json
 
 Name search (`search_v3`) currently indexes a slightly smaller set (no `ar fa he hi id`). Filling body text does not by itself add those search trees.
 
+## Later
+
+Agreed 2026-09-28. Not started.
+
+- **Indonesian (`id`).** Add it to the website and to the catalog. The app already has `id_ID`. The website does not list it. `translations/id` has 135 plants, names only, not official body text.
+- **Turkish (`tr`).** New app and website language, and a catalog language. It is not in the app language list or on the website. `translations/tr` already has 791 Wikidata name rows (for example *Bellis perennis*, Koyungözü). Those names are not official body text.
+
 ## What exists today (backup 2026-08-20)
 
 A plant is “fully translated” when the seven identification fields exist: `description`, `flower`, `inflorescence`, `fruit`, `leaf`, `stem`, `habitat`. Optional: `toxicity`, `herbalism`, `trivia`.
