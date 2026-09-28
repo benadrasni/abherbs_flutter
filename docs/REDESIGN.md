@@ -1,6 +1,6 @@
 # Field guide redesign
 
-Agreed 2026-09-27. Clickable phone mockups: [redesign/index.html](redesign/index.html). Open that file in a browser. Catalog photos and English names in the mockups are the live ones. The houseplant picture is a stand-in for a photo the person took, because that species is not in the book.
+Agreed 2026-09-27. Clickable phone mockup: [redesign/index.html](redesign/index.html). Open that file in a browser. Catalog photos, plates, names, and counts are the live ones. The photo of *Tanacetum corymbosum* is a stand-in for a photo the person took, because that species is not in the book.
 
 The website is already the public reading room: paper `#f3eee4`, ink `#1a1612`, moss `#3e5344`, madder `#8e3b2a`, gold `#85603c`, Fraunces for names, Source Sans for text. The app becomes the field guide for that same book.
 
@@ -118,16 +118,24 @@ The Realtime Database trees stay. A Cloud Function is the new piece, not a new c
 
 ## Mockups
 
-[redesign/index.html](redesign/index.html) is a clickable phone prototype of the agreed screens, in the website’s colors and type. [redesign/opus/index.html](redesign/opus/index.html) is a second take on the same plan, with lists of flowers (including German year campaigns) and the additions above.
+[redesign/index.html](redesign/index.html) is the clickable phone prototype of the agreed screens, in the website’s colors and type. Lists of flowers include the German year campaigns. The side notes switch signed-in, in-book, not-a-plant, quota, Field Guide, and German lists.
 
 | Screen | What it shows |
 |---|---|
-| Find | Search, camera with 4 of 5 left, color already tappable, Any region, recent finds |
-| Habitat, Petals | Steps 2 and 3. Petals uses the live four choices |
-| Results | White, meadow, more than 5 petals. 93 plants, or 67 in Middle Europe. Real species from `lists_4_v2/1_1_3_` |
-| Species | Daisy, with the unconfirmed Seen bar. Height and months are the live record |
-| Outside the book | *Epipremnum aureum*, which is not in the catalog, with *Monstera deliciosa* offered because it is |
-| Seen | Unconfirmed finds first, then confirmed ones |
-| Book | Families with the English vernaculars already in `translations_taxonomy` |
+| Find | Search, camera with its meter, and step 1 of the key already open |
+| Search | Plants, families, and genera in one list |
+| Key · habitat, Key · petals | Steps 2 and 3. Every habitat choice shows how many plants remain. Petals uses the live four choices |
+| Results | White, meadow, more than 5 petals. 93 plants, or fewer once a region is set. Photos or plates |
+| Region chip | Any region, a floristic region, or this phone’s location |
+| Camera | Location asked once, at the first photo |
+| Not a plant | Probably not a plant. Nothing saved, and the name is not used |
+| Outside the book | *Tanacetum corymbosum*, with oxeye daisy and feverfew offered as full pages |
+| Species from camera | Oxeye daisy, with the unconfirmed Seen bar |
+| Species page | Same sections as the website. No ads |
+| Seen | To confirm first, then the notebook by month |
+| Share a find | CC0 consent, then review, then a public Sighting |
+| Book | Families, genera, lists of flowers |
+| List of flowers | A custom list. Year campaigns run newest first; New in the book by date |
 | At the limit | Ad, Field Guide, or the key |
 | Field Guide | What stays free, what the subscription adds, 7-day trial, restore |
+| Person | Account, allowance, restore, language |

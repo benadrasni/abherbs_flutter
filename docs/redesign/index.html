@@ -1,831 +1,938 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Field guide — mockups</title>
+<title>What's that flower — field guide mockups</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;0,9..144,560;1,9..144,460&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,520;1,9..144,420&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script src="data.js"></script>
 <style>
-  :root {
-    --paper: #f3eee4;
-    --paper-2: #e9e2d3;
-    --ink: #1a1612;
-    --ink-2: #5a5248;
-    --ink-3: #6e6659;
-    --rule: #d0c6b2;
-    --madder: #8e3b2a;
-    --moss: #3e5344;
-    --gold: #85603c;
-    --cream: #fffdf8;
-    --photo: https://storage.googleapis.com/abherbs-resources/photos/;
-  }
-  * { box-sizing: border-box; }
-  [hidden] { display: none !important; }
-  html, body { margin: 0; min-height: 100%; }
-  body {
-    background: #e4dccb;
-    color: var(--ink);
-    font-family: "Source Sans 3", "Source Sans Pro", sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  button, input { font: inherit; color: inherit; }
-  button { cursor: pointer; }
-  :focus { outline: none; }
-  :focus-visible { outline: 2px solid var(--moss); outline-offset: 2px; }
-  .kicker {
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .latin { font-family: Fraunces, Georgia, serif; font-style: italic; font-weight: 460; }
-  .common { font-family: Fraunces, Georgia, serif; font-weight: 520; letter-spacing: -0.02em; }
+:root{
+  --paper:#f3eee4;--paper-2:#e9e2d3;--ink:#1a1612;--ink-2:#5a5248;--ink-3:#6e6659;--rule:#d0c6b2;
+  --madder:#8e3b2a;--moss:#3e5344;--gold:#85603c;--cream:#fffdf8;
+  --serif:Fraunces,Georgia,serif;--sans:"Source Sans 3","Source Sans Pro",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#dcd4c3;color:var(--ink);font-family:var(--sans);font-size:15px}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:inherit}
+a{color:var(--moss)}
+.latin{font-family:var(--serif);font-style:italic;font-weight:420}
+.common{font-family:var(--serif);font-weight:520;letter-spacing:-.02em}
 
-  .stage {
-    display: grid;
-    grid-template-columns: 220px 390px;
-    gap: 36px;
-    justify-content: center;
-    align-items: start;
-    padding: 28px 20px 48px;
-  }
-  .index h1 {
-    font-family: Fraunces, Georgia, serif;
-    font-weight: 520;
-    font-size: 28px;
-    letter-spacing: -0.03em;
-    margin: 0 0 6px;
-  }
-  .index .lede { margin: 0 0 18px; color: var(--ink-2); font-size: 14px; line-height: 1.4; }
-  .index button {
-    display: block;
-    width: 100%;
-    text-align: start;
-    background: transparent;
-    border: 0;
-    border-bottom: 1px solid transparent;
-    padding: 8px 0;
-    color: var(--ink-2);
-    font-size: 15px;
-  }
-  .index button.on { color: var(--ink); border-bottom-color: var(--rule); }
+/* Desk */
+.desk{display:grid;grid-template-columns:minmax(260px,340px) auto;gap:40px;justify-content:center;padding:32px 24px;min-height:100vh}
+.notes{max-width:340px}
+.notes h1{font-family:var(--serif);font-weight:520;font-size:26px;line-height:1.1;margin:0 0 6px}
+.notes .lede{color:var(--ink-2);margin:0 0 18px;line-height:1.45}
+.notes ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.notes li button{display:block;width:100%;padding:9px 8px;border-bottom:1px solid var(--rule)}
+.notes li button b{font-weight:600;display:block}
+.notes li button span{color:var(--ink-3);font-size:13px;line-height:1.35;display:block;margin-top:2px}
+.notes li button.on{background:var(--cream)}
+.notes li button.on b{color:var(--madder)}
+.notes h3{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:22px 0 8px}
+.toggles label{display:flex;gap:8px;align-items:center;margin:6px 0;font-size:14px}
+.notes .fine{font-size:12px;color:var(--ink-3);line-height:1.4;margin-top:18px}
 
-  .phone {
-    width: 390px;
-    height: min(844px, calc(100vh - 40px));
-    background: var(--paper);
-    border-radius: 36px;
-    box-shadow: 0 30px 70px rgba(26, 22, 18, 0.18);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    border: 1px solid #cfc4ae;
-  }
-  .status {
-    height: 28px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    padding: 0 22px 2px;
-    font-size: 12px;
-    font-weight: 600;
-    flex: none;
-  }
-  .status span { letter-spacing: 0.04em; color: var(--ink-2); font-weight: 400; }
-  .screens { flex: 1; min-height: 0; position: relative; overflow: hidden; }
-  .screen { display: none; flex-direction: column; position: absolute; inset: 0; min-height: 0; }
-  .screen.on { display: flex; }
-  .scroll { flex: 1; min-height: 0; overflow: auto; padding: 4px 20px 20px; }
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 4px 20px 0;
-    flex: none;
-  }
-  .mark {
-    font-family: Fraunces, Georgia, serif;
-    font-size: 22px;
-    font-weight: 520;
-    letter-spacing: -0.03em;
-    background: none;
-    border: 0;
-    padding: 6px 0;
-  }
-  .icon-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 1px solid var(--rule);
-    background: var(--cream);
-    display: grid;
-    place-items: center;
-  }
-  .back {
-    background: none;
-    border: 0;
-    padding: 8px 0;
-    color: var(--ink-2);
-    font-size: 15px;
-  }
+/* Phone */
+.phone{width:390px;height:844px;border-radius:52px;background:#111;padding:12px;box-shadow:0 30px 60px rgba(40,30,10,.25);position:sticky;top:24px}
+.glass{position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;background:var(--paper);display:flex;flex-direction:column}
+.status{height:44px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 28px;font-weight:600;font-size:14px}
+.status.dark{background:#0d0c0a;color:#fff}
+.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:118px;height:32px;border-radius:20px;background:#000;z-index:50}
+.screen{flex:1;overflow-y:auto;overflow-x:hidden;position:relative;scrollbar-width:none}
+.screen::-webkit-scrollbar{display:none}
+.tabs{flex:none;height:78px;display:flex;border-top:1px solid var(--rule);background:var(--cream);padding-bottom:18px}
+.tabs button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12px;color:var(--ink-3)}
+.tabs button.on{color:var(--moss);font-weight:600}
+.tabs svg{width:24px;height:24px}
+.badge{position:absolute;margin-left:18px;margin-top:-26px;background:var(--madder);color:#fff;font-size:10px;font-weight:600;border-radius:8px;padding:0 5px;line-height:16px}
 
-  .search {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 12px 0 14px;
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    border-radius: 999px;
-    padding: 11px 14px;
-    color: var(--ink-3);
-  }
-  .search input {
-    border: 0;
-    background: transparent;
-    width: 100%;
-    min-width: 0;
-    padding: 0;
-  }
-  .search input::placeholder { color: var(--ink-3); }
+/* Common bits */
+.pad{padding:0 20px}
+.top{display:flex;align-items:center;justify-content:space-between;padding:6px 20px 12px}
+.wm{font-family:var(--serif);font-weight:520;font-size:21px;letter-spacing:-.02em}
+.wm i{font-weight:420;color:var(--madder)}
+.iconbtn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--rule);background:var(--cream)}
+.iconbtn svg{width:20px;height:20px}
+.back{display:flex;align-items:center;gap:8px;padding:4px 16px 8px;color:var(--moss);font-weight:500}
+.back svg{width:20px;height:20px}
+.eyebrow{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;letter-spacing:-.02em;margin:4px 0 14px}
+.rule{height:1px;background:var(--rule);margin:18px 20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:44px;padding:0 18px;border-radius:22px;font-weight:600}
+.btn.primary{background:var(--moss);color:#fff}
+.btn.madder{background:var(--madder);color:#fff}
+.btn.ghost{border:1px solid var(--rule);background:var(--cream)}
+.btn.small{height:34px;padding:0 13px;font-size:14px;border-radius:17px}
+.pill{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 12px;border-radius:15px;border:1px solid var(--rule);background:var(--cream);font-size:13px;font-weight:500;white-space:nowrap}
+.pill.set{background:var(--moss);border-color:var(--moss);color:#fff}
+.pill svg{width:14px;height:14px}
+.ad{margin:18px 20px;height:56px;border:1px dashed #b9ae98;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:12px;background:repeating-linear-gradient(135deg,transparent 0 8px,rgba(0,0,0,.025) 8px 16px)}
+.toast{position:absolute;left:20px;right:20px;bottom:96px;background:var(--ink);color:#fff;border-radius:12px;padding:11px 14px;font-size:14px;z-index:40;opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
 
-  .camera {
-    width: 100%;
-    text-align: start;
-    border: 0;
-    background: var(--moss);
-    color: var(--cream);
-    border-radius: 18px;
-    padding: 16px 18px 14px;
-    min-height: 112px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .camera .kicker { color: #e7d7c0; }
-  .camera h2 { margin: 6px 0 0; font-size: 28px; line-height: 1; color: var(--cream); }
-  .camera p { margin: 8px 0 0; color: #e7e1d4; font-size: 14px; }
+/* Find */
+.search{display:flex;align-items:center;gap:10px;margin:0 20px;height:48px;border-radius:24px;background:var(--cream);border:1px solid var(--rule);padding:0 16px;color:var(--ink-3);width:calc(100% - 40px)}
+.search svg{width:20px;height:20px;flex:none}
+.cam{margin:14px 20px 0;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;width:calc(100% - 40px);padding:16px 16px 16px 18px;border-radius:18px;background:var(--moss);color:#f3eee4;position:relative;overflow:hidden}
+.cam .t{font-family:var(--serif);font-weight:520;font-size:21px;line-height:1.1}
+.cam .s{font-size:13px;opacity:.82;margin-top:4px}
+.cam .lens{width:58px;height:58px;border-radius:50%;background:#f3eee4;display:grid;place-items:center;color:var(--moss)}
+.cam .lens svg{width:28px;height:28px}
+.meter{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;opacity:.9}
+.dots{display:flex;gap:4px}
+.dots i{width:9px;height:9px;border-radius:50%;border:1.5px solid currentColor;display:block}
+.dots i.full{background:currentColor}
+.dots i.extra{border-style:dotted}
+.keycard{margin:22px 20px 0}
+.keyhead{display:flex;align-items:baseline;justify-content:space-between}
+.stepper{display:flex;gap:4px;margin:8px 0 0}
+.stepper i{height:3px;flex:1;background:var(--rule);border-radius:2px}
+.stepper i.on{background:var(--madder)}
+.swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.sw{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 2px 8px;border-radius:14px;border:1px solid transparent}
+.sw:hover{background:var(--cream);border-color:var(--rule)}
+.sw .dot{width:46px;height:46px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.sw .l{font-size:12px;line-height:1.15;text-align:center;min-height:42px}
+.sw .n{font-size:11px;color:var(--ink-3)}
+.hint{font-size:13px;color:var(--ink-3);margin:10px 0 0;line-height:1.4}
+.strip{display:flex;gap:10px;overflow-x:auto;padding:0 20px 4px;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.strip{align-items:flex-start}
+.find-card{flex:none;width:118px;display:flex;flex-direction:column}
+.find-card .img{width:118px;height:118px;border-radius:12px;background:#ccc center/cover;position:relative}
+.find-card .img .u{position:absolute;left:6px;top:6px;background:var(--madder);color:#fff;font-size:10px;font-weight:600;border-radius:8px;padding:1px 6px}
+.find-card .nm{font-size:13px;font-weight:600;margin-top:6px;line-height:1.2}
+.find-card .when{font-size:11px;color:var(--ink-3)}
+.sechead{display:flex;justify-content:space-between;align-items:baseline;padding:0 20px;margin:24px 0 10px}
+.sechead h3{font-family:var(--serif);font-weight:520;font-size:18px;margin:0}
+.sechead button{color:var(--moss);font-size:14px;font-weight:500}
 
-  .step-label { margin: 16px 0 8px; }
-  .colors { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-  .swatch {
-    border: 0;
-    background: transparent;
-    padding: 0;
-    text-align: center;
-  }
-  .swatch i {
-    display: block;
-    height: 44px;
-    border-radius: 14px;
-    border: 1px solid var(--rule);
-  }
-  .swatch span { display: block; margin-top: 6px; font-size: 11px; color: var(--ink-2); line-height: 1.15; min-height: 2.3em; }
-  .swatch:active i, .choice:active { transform: translateY(1px); }
-  .hint { margin: 14px 0 0; color: var(--ink-2); font-size: 14px; }
-  .chip {
-    margin-top: 14px;
-    border: 1px solid var(--rule);
-    background: var(--cream);
-    border-radius: 999px;
-    padding: 8px 12px;
-    font-size: 14px;
-  }
-  .recent { margin-top: 14px; }
-  .strip { display: flex; gap: 8px; margin-top: 8px; }
-  .strip button { border: 0; padding: 0; background: none; width: 64px; }
-  .strip img, .thumb {
-    width: 64px;
-    height: 64px;
-    object-fit: cover;
-    border-radius: 12px;
-    background: var(--paper-2);
-    display: block;
-  }
-  .strip span { display: block; margin-top: 4px; font-size: 12px; color: var(--ink-2); }
+/* Search */
+.sfield{display:flex;align-items:center;gap:10px;margin:4px 20px 12px;height:48px;border-radius:24px;background:var(--cream);border:1.5px solid var(--moss);padding:0 16px}
+.sfield input{flex:1;border:0;background:none;font:inherit;font-size:16px;outline:none}
+.sfield svg{width:20px;height:20px;color:var(--ink-3)}
+.srow{display:flex;align-items:center;gap:12px;padding:9px 20px;width:100%}
+.srow .th{width:44px;height:44px;border-radius:8px;background:#ddd center/cover;flex:none}
+.srow .th.fam{background-color:var(--cream);background-size:contain;background-repeat:no-repeat;border:1px solid var(--rule)}
+.srow .tx{flex:1;min-width:0}
+.srow .tx b{display:block;font-weight:600}
+.srow .tx span{font-size:13px;color:var(--ink-3)}
+.srow .k{font-size:12px;color:var(--ink-3)}
+.slabel{padding:10px 20px 2px}
 
-  .choices { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
-  .choice {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    width: 100%;
-    text-align: start;
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    border-radius: 16px;
-    padding: 12px 14px;
-    min-height: 64px;
-  }
-  .choice svg { flex: none; }
-  .choice b { display: block; font-weight: 600; }
-  .choice small { color: var(--ink-2); }
-  .crumbs { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
-  .crumbs span, .pill {
-    border: 1px solid var(--rule);
-    background: var(--cream);
-    border-radius: 999px;
-    padding: 4px 10px;
-    font-size: 13px;
-    color: var(--ink-2);
-  }
-  h2.ask {
-    font-family: Fraunces, Georgia, serif;
-    font-weight: 520;
-    font-size: 34px;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
-    margin: 12px 0 0;
-  }
+/* Key steps */
+.trail{display:flex;gap:6px;flex-wrap:wrap;padding:0 20px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;padding:12px 14px;border-radius:14px;background:var(--cream);border:1px solid var(--rule);margin-bottom:8px}
+.opt:hover{border-color:var(--moss)}
+.opt .g{width:44px;height:44px;flex:none;color:var(--moss)}
+.opt .l{flex:1;font-size:16px;font-weight:500}
+.opt .n{font-size:13px;color:var(--ink-3)}
+.petals{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.petal{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 8px 12px;border-radius:16px;background:var(--cream);border:1px solid var(--rule)}
+.petal:hover{border-color:var(--moss)}
+.petal svg{width:72px;height:72px}
+.petal .l{font-weight:600}
+.petal .n{font-size:12px;color:var(--ink-3)}
+.skip{display:block;margin:14px auto 0;color:var(--moss);font-weight:500;font-size:14px}
 
-  .filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  .count { margin: 14px 0 8px; color: var(--ink-2); }
-  .plant {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    width: 100%;
-    text-align: start;
-    background: none;
-    border: 0;
-    border-bottom: 1px solid var(--rule);
-    padding: 12px 0;
-  }
-  .plant img { width: 64px; height: 64px; object-fit: cover; border-radius: 12px; background: var(--paper-2); }
-  .plant .common { display: block; font-size: 20px; line-height: 1.1; }
-  .plant .latin { display: block; color: var(--ink-2); font-size: 14px; }
-  .plant .meta { color: var(--ink-3); font-size: 13px; margin-top: 2px; }
-  .more { color: var(--ink-3); font-size: 14px; padding: 14px 0 8px; }
-  .region-panel { margin-top: 8px; border: 1px solid var(--rule); background: var(--cream); border-radius: 16px; overflow: hidden; }
-  .region-panel button {
-    display: block;
-    width: 100%;
-    text-align: start;
-    background: none;
-    border: 0;
-    border-bottom: 1px solid var(--rule);
-    padding: 12px 14px;
-  }
-  .region-panel button:last-child { border-bottom: 0; }
-  .region-panel button small { display: block; color: var(--ink-3); }
+/* Results */
+.reshead{padding:0 20px}
+.count{font-family:var(--serif);font-weight:520;font-size:30px;letter-spacing:-.02em;line-height:1}
+.count small{font-family:var(--sans);font-size:14px;font-weight:400;color:var(--ink-3);letter-spacing:0}
+.filterbar{display:flex;gap:8px;align-items:center;padding:12px 20px;position:sticky;top:0;background:var(--paper);z-index:5;border-bottom:1px solid transparent}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:15px;overflow:hidden;margin-left:auto;background:var(--cream)}
+.seg button{height:28px;padding:0 11px;font-size:13px;font-weight:500;color:var(--ink-3)}
+.seg button.on{background:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px;padding:4px 20px 0}
+.grid{align-items:start}
+.cell{display:flex;flex-direction:column;justify-content:flex-start}
+.cell .img{border-radius:10px;background:#d9d2c3 center/cover;aspect-ratio:1/1}
+.cell .img.plate{aspect-ratio:2/3;background-color:#f1e8d6;background-size:contain;background-repeat:no-repeat}
+.cell .nm{font-family:var(--serif);font-weight:520;font-size:16px;line-height:1.15;margin-top:7px}
+.cell .la{font-size:13px;color:var(--ink-3)}
+.cell .mo{font-size:11px;color:var(--gold);margin-top:2px}
+.gridad{grid-column:1/-1;margin:2px 0}
+.seenmark{display:inline-block;margin-top:3px;font-size:11px;font-weight:600;color:var(--moss)}
+.seenby{display:flex;align-items:center;gap:10px;margin:12px 20px 0;padding:10px 12px;border-radius:12px;background:var(--cream);border:1px solid var(--rule);font-size:14px;width:calc(100% - 40px)}
+.seenby .th{width:36px;height:36px;border-radius:8px;background:#ccc center/cover;flex:none}
+.seenby b{color:var(--moss)}
+.gridad .ad{margin:0}
 
-  .banner {
-    margin: 0 20px 10px;
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    border-inline-start: 3px solid var(--gold);
-    border-radius: 12px;
-    padding: 10px 12px;
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    align-items: center;
-  }
-  .banner.confirmed { border-inline-start-color: var(--moss); }
-  .banner .kicker { display: block; margin-bottom: 2px; }
-  .banner p { margin: 0; font-size: 14px; }
-  .banner .acts { display: flex; gap: 6px; }
-  .text-btn {
-    background: none;
-    border: 0;
-    padding: 6px;
-    color: var(--moss);
-    font-weight: 600;
-  }
-  .hero { width: 100%; height: 280px; object-fit: cover; background: var(--paper-2); display: block; }
-  .copy { padding: 16px 20px 28px; }
-  .copy h2 { font-size: 40px; margin: 4px 0 0; line-height: 1; }
-  .binomen { margin: 6px 0 0; color: var(--ink-2); font-size: 18px; }
-  .facts { display: flex; gap: 18px; margin: 16px 0; padding: 12px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-  .facts .k { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
-  .facts .v { margin-top: 2px; }
-  .lede { font-size: 17px; line-height: 1.45; margin: 0; }
-  .sec { margin-top: 16px; }
-  .sec .k { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--moss); }
-  .plate-row { display: flex; gap: 12px; align-items: center; margin-top: 8px; }
-  .plate-row img { width: 84px; height: 126px; object-fit: cover; border-radius: 8px; background: var(--cream); border: 1px solid var(--rule); }
+/* Sheet */
+.scrim{position:absolute;inset:0;background:rgba(26,22,18,.42);z-index:30;display:flex;align-items:flex-end}
+.sheet{width:100%;max-height:86%;overflow-y:auto;background:var(--paper);border-radius:22px 22px 0 0;padding:10px 20px 34px}
+.grab{width:40px;height:5px;border-radius:3px;background:var(--rule);margin:0 auto 14px}
+.sheet h2{font-family:var(--serif);font-weight:520;font-size:23px;line-height:1.12;margin:0 0 6px;letter-spacing:-.01em}
+.sheet p{color:var(--ink-2);margin:0 0 14px;line-height:1.4}
+.radio{display:flex;align-items:center;gap:12px;width:100%;padding:11px 2px;border-bottom:1px solid var(--rule)}
+.radio .c{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--ink-3);flex:none}
+.radio.on .c{border:6px solid var(--moss)}
+.radio .l{flex:1}
+.radio .n{color:var(--ink-3);font-size:13px}
+.locbtn{display:flex;align-items:center;gap:12px;width:100%;padding:13px 14px;border-radius:14px;background:var(--cream);border:1px solid var(--rule);margin-bottom:8px}
+.locbtn svg{width:22px;height:22px;color:var(--moss)}
+.locbtn b{display:block}
+.locbtn span{font-size:13px;color:var(--ink-3)}
+.choice{display:flex;gap:14px;align-items:flex-start;width:100%;padding:14px;border-radius:16px;border:1px solid var(--rule);background:var(--cream);margin-bottom:10px}
+.choice .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none}
+.choice .ic svg{width:22px;height:22px}
+.choice b{display:block;font-size:16px}
+.choice span{display:block;font-size:13px;color:var(--ink-3);margin-top:2px;line-height:1.35}
+.choice.fg{border-color:var(--moss);border-width:1.5px}
 
-  .confidence { margin: 12px 0 0; font-size: 15px; color: var(--moss); font-weight: 600; }
-  .alt {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    align-items: center;
-    width: 100%;
-    text-align: start;
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    border-radius: 14px;
-    padding: 12px;
-    margin-top: 8px;
-  }
-  .alt .latin { display: block; }
-  .tag { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+/* Species */
+.gal{position:relative;height:420px;background:#e6dfcf}
+.gal .track{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.gal .track::-webkit-scrollbar{display:none}
+.gal .slide{flex:none;width:100%;height:100%;scroll-snap-align:start;background:#ccc center/cover}
+.gal .slide.plate{background-color:#efe6d3;background-size:contain;background-repeat:no-repeat}
+.gal .over{position:absolute;top:10px;left:12px;right:12px;display:flex;justify-content:space-between}
+.gal .over .iconbtn{background:rgba(255,253,248,.92);border:0}
+.gal .ctr{position:absolute;bottom:12px;left:12px;display:flex;gap:6px}
+.gal .ctr .pill{background:rgba(255,253,248,.92);border:0}
+.namebox{padding:16px 20px 0}
+.namebox h1{font-family:var(--serif);font-weight:520;font-size:34px;letter-spacing:-.025em;line-height:1;margin:0}
+.namebox .la{font-size:18px;margin-top:6px}
+.namebox .au{font-family:var(--sans);font-style:normal;font-size:14px;color:var(--ink-3)}
+.namebox .aka{font-size:14px;color:var(--ink-2);margin-top:8px;line-height:1.4}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:16px 0 0}
+.facts>div{background:var(--paper);padding:11px 20px}
+.facts .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.facts .v{font-family:var(--serif);font-size:18px;font-weight:520;margin-top:2px}
+.facts .wide{grid-column:1/-1}
+.months{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:6px}
+.months i{height:22px;border-radius:4px;background:var(--paper-2);font-style:normal;font-size:10px;display:grid;place-items:center;color:var(--ink-3)}
+.months i.on{background:var(--moss);color:#fff}
+.months i.now{outline:1.5px solid var(--madder);outline-offset:1px}
+.jump{display:flex;gap:6px;overflow-x:auto;padding:12px 20px;position:sticky;top:0;background:var(--paper);z-index:4;scrollbar-width:none;border-bottom:1px solid var(--rule)}
+.jump::-webkit-scrollbar{display:none}
+.sec{padding:16px 20px 4px}
+.sec h3{font-family:var(--serif);font-weight:520;font-size:19px;margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.sec h3 small{font-family:var(--sans);font-size:12px;color:var(--ink-3);font-weight:500}
+.sec p{margin:0;line-height:1.5;color:#2c261f}
+.sec.warn p{border-left:3px solid var(--madder);padding-left:10px}
+.lead{padding:16px 20px 0;line-height:1.5;color:var(--ink-2);font-size:15px}
+.taxo{font-size:14px;line-height:1.7}
+.taxo span{color:var(--ink-3)}
+.map{width:100%;border-radius:8px;border:1px solid var(--rule);margin-top:4px;background:#fff}
+.srcs{font-size:13px;line-height:1.6;word-break:break-all}
+.seenbar{position:sticky;bottom:0;margin:0;background:var(--ink);color:#f3eee4;padding:12px 16px 14px;display:flex;align-items:center;gap:12px;z-index:6}
+.seenbar .th{width:44px;height:44px;border-radius:8px;background:#555 center/cover;flex:none}
+.seenbar .tx{flex:1;font-size:13px;line-height:1.3}
+.seenbar .tx b{display:block;font-size:14px}
+.seenbar .btn{height:36px;padding:0 14px;font-size:14px}
+.seenbar.ok{background:var(--moss)}
 
-  .seen-row {
-    display: flex;
-    gap: 12px;
-    width: 100%;
-    text-align: start;
-    background: none;
-    border: 0;
-    border-bottom: 1px solid var(--rule);
-    padding: 12px 0;
-    align-items: center;
-  }
-  .seen-row img { width: 64px; height: 64px; object-fit: cover; border-radius: 12px; background: var(--paper-2); }
-  .flag { display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
-  .seen-row .common { display: block; }
-  .flag.ok { color: var(--moss); }
+/* Camera */
+.vf{position:absolute;inset:0;background:#0d0c0a center/cover;color:#fff}
+.vf .shade{position:absolute;inset:0;background:linear-gradient(#0008,#0000 22%,#0000 64%,#000b)}
+.vf .frame{position:absolute;left:44px;right:44px;top:230px;height:300px}
+.vf .frame i{position:absolute;width:34px;height:34px;border:3px solid #fff}
+.vf .frame i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0;border-radius:10px 0 0 0}
+.vf .frame i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0;border-radius:0 10px 0 0}
+.vf .frame i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0;border-radius:0 0 0 10px}
+.vf .frame i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0;border-radius:0 0 10px 0}
+.vf .topbar{position:absolute;top:8px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center}
+.vf .topbar .iconbtn{background:#0006;border:0;color:#fff}
+.vf .left{background:#0006;border-radius:16px;padding:6px 12px;font-size:13px;display:flex;gap:8px;align-items:center}
+.vf .tip{position:absolute;top:546px;left:0;right:0;text-align:center;font-size:14px;opacity:.9}
+.vf .ctrl{position:absolute;bottom:34px;left:0;right:0;display:flex;align-items:center;justify-content:space-around}
+.shutter{width:76px;height:76px;border-radius:50%;border:4px solid #fff;display:grid;place-items:center}
+.shutter i{width:60px;height:60px;border-radius:50%;background:#fff;display:block}
+.vf .roll{width:46px;height:46px;border-radius:10px;background:#333 center/cover;border:2px solid #fff}
+.vf .key{width:46px;height:46px;border-radius:50%;background:#0006;display:grid;place-items:center;color:#fff}
+.vf .key svg{width:22px;height:22px}
+.askloc{position:absolute;z-index:3;left:14px;right:14px;top:62px;background:var(--paper);color:var(--ink);border-radius:18px;padding:14px 16px;box-shadow:0 10px 30px #0006}
+.askloc b{display:block;font-size:16px}
+.askloc p{margin:4px 0 12px;font-size:13px;color:var(--ink-2);line-height:1.4}
+.askloc .row{display:flex;gap:8px}
+.naming{position:absolute;inset:0;background:#0009;display:grid;place-items:center;color:#fff;text-align:center;z-index:5}
+.spin{width:44px;height:44px;border-radius:50%;border:3px solid #fff4;border-top-color:#fff;animation:sp 0.9s linear infinite;margin:0 auto 12px}
+@keyframes sp{to{transform:rotate(360deg)}}
 
-  .family {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    width: 100%;
-    text-align: start;
-    background: none;
-    border: 0;
-    border-bottom: 1px solid var(--rule);
-    padding: 8px 0;
-  }
-  .family img { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; background: var(--paper-2); }
-  .family .latin { font-size: 18px; }
+/* Outside the book */
+.shot{height:300px;background:#333 center/cover;position:relative}
+.shot .meta{position:absolute;bottom:10px;left:12px;display:flex;gap:6px}
+.shot .meta .pill{background:rgba(255,253,248,.92);border:0}
+.shot .credit{position:absolute;right:8px;bottom:6px;font-size:10px;color:#fff;opacity:.8}
+.conf{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.conf i{display:flex;gap:2px}
+.conf i b{width:6px;height:12px;border-radius:1px;background:var(--rule);display:block}
+.conf.likely{color:var(--moss)} .conf.likely i b{background:var(--moss)}
+.conf.possible{color:var(--gold)} .conf.possible i b:nth-child(-n+2){background:var(--gold)}
+.conf.uncertain{color:var(--ink-3)} .conf.uncertain i b:nth-child(1){background:var(--ink-3)}
+.notbook{margin:14px 20px 0;padding:12px 14px;border-radius:12px;background:var(--paper-2);font-size:14px;color:var(--ink-2);line-height:1.4}
+.cand{display:flex;gap:12px;align-items:center;width:calc(100% - 40px);margin:0 20px 10px;padding:10px;border-radius:14px;background:var(--cream);border:1px solid var(--rule)}
+.cand .th{width:64px;height:64px;border-radius:10px;background:#ccc center/cover;flex:none}
+.cand .tx{flex:1}
+.cand .tx b{font-family:var(--serif);font-weight:520;font-size:17px;display:block}
+.cand .tx .latin{font-size:13px;color:var(--ink-3)}
+.cand .go{color:var(--moss);font-size:13px;font-weight:600;white-space:nowrap}
+.saved{margin:16px 20px 24px;padding:14px;border-radius:16px;border:1.5px dashed var(--madder)}
+.saved b{color:var(--madder)}
+.saved .row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 
-  .tabs {
-    flex: none;
-    height: 64px;
-    display: flex;
-    border-top: 1px solid var(--rule);
-    background: var(--paper);
-  }
-  .phone.no-tabs .tabs { display: none; }
-  .tabs button {
-    flex: 1;
-    border: 0;
-    background: none;
-    color: var(--ink-3);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-  }
-  .tabs button.on { color: var(--ink); }
+/* Seen */
+.tbc{margin:0 20px 10px;border-radius:16px;background:var(--cream);border:1px solid var(--rule);overflow:hidden}
+.tbc .top2{display:flex;gap:12px;padding:12px}
+.tbc .th{width:74px;height:74px;border-radius:10px;background:#ccc center/cover;flex:none}
+.tbc .nm{font-family:var(--serif);font-weight:520;font-size:18px;line-height:1.1}
+.tbc .nm.lat{font-style:italic;font-weight:420}
+.tbc .when{font-size:12px;color:var(--ink-3);margin-top:3px}
+.tbc .acts{display:flex;border-top:1px solid var(--rule)}
+.tbc .acts button{flex:1;height:42px;font-size:14px;font-weight:600;color:var(--moss);border-right:1px solid var(--rule);text-align:center}
+.tbc .acts button:last-child{border-right:0;color:var(--madder);flex:.5}
+.month{padding:18px 20px 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--ink-3)}
+.srow .ok{color:var(--moss);font-size:12px;font-weight:600}
+.shst{font-size:12px;font-weight:600;color:var(--ink-3);white-space:nowrap;padding:4px 9px;border-radius:12px;background:var(--paper-2)}
+.shst.ok{color:#fff;background:var(--moss)}
+.shst.rev{color:var(--gold);background:#f1e6d4}
+.shst.no{color:var(--madder);background:#f3e1dc}
+.sightings{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.sightings div{aspect-ratio:1;border-radius:8px;background:#ccc center/cover;position:relative}
+.sightings div span{position:absolute;left:4px;bottom:4px;background:rgba(255,253,248,.92);border-radius:6px;font-size:10px;font-weight:600;padding:1px 5px}
+.addseen{margin:10px 20px 0}
+.consent{display:flex;gap:10px;align-items:flex-start;padding:12px;border-radius:12px;background:var(--cream);border:1px solid var(--rule);margin-bottom:12px;font-size:14px;line-height:1.4}
+.consent .box{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--ink-3);flex:none;display:grid;place-items:center;color:#fff}
+.consent.on .box{background:var(--moss);border-color:var(--moss)}
+.facts-list{margin:0 0 14px;padding-left:18px;color:var(--ink-2);font-size:14px;line-height:1.5}
+.upsell{margin:20px;padding:16px;border-radius:16px;background:var(--moss);color:#f3eee4}
+.upsell b{font-family:var(--serif);font-weight:520;font-size:18px;display:block}
+.upsell p{margin:4px 0 12px;font-size:14px;opacity:.88;line-height:1.4}
+.upsell .btn{background:#f3eee4;color:var(--moss)}
 
-  .sheet {
-    position: absolute;
-    inset: 0;
-    background: rgba(26, 22, 18, 0.35);
-    z-index: 6;
-    display: flex;
-    align-items: flex-end;
-  }
-  .sheet[hidden] { display: none; }
-  .sheet .card {
-    background: var(--paper);
-    width: 100%;
-    border-radius: 22px 22px 0 0;
-    padding: 12px 20px 28px;
-  }
-  .grab { width: 40px; height: 4px; border-radius: 4px; background: var(--rule); margin: 4px auto 14px; }
-  .sheet h2 { font-family: Fraunces, Georgia, serif; font-weight: 520; font-size: 30px; margin: 6px 0 8px; letter-spacing: -0.03em; }
-  .offer {
-    width: 100%;
-    text-align: start;
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    border-radius: 16px;
-    padding: 14px;
-    margin-top: 10px;
-  }
-  .offer strong { display: block; font-size: 17px; }
-  .offer span { color: var(--ink-2); font-size: 14px; }
-  .offer.primary { background: var(--moss); color: var(--cream); border-color: var(--moss); }
-  .offer.primary span { color: #e7e1d4; }
-  .guide-list { margin: 8px 0 0; padding: 0; list-style: none; }
-  .guide-list li { padding: 8px 0; border-bottom: 1px solid var(--rule); }
-  .price { color: var(--ink-2); margin-top: 16px; }
+/* Book */
+.segwide{display:flex;margin:0 20px 8px;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--cream)}
+.segwide button{flex:1;height:36px;font-weight:500;font-size:14px;text-align:center;color:var(--ink-3)}
+.segwide button.on{background:var(--ink);color:#fff}
+.lists{display:grid;grid-template-columns:1fr;gap:12px;padding:6px 20px}
+.lcard{border-radius:16px;background:var(--cream);border:1px solid var(--rule);padding:12px;width:100%}
+.lcard .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:10px}
+.lcard .thumbs i{aspect-ratio:1;border-radius:8px;background:#ccc center/cover;display:block}
+.lcard b{font-family:var(--serif);font-weight:520;font-size:18px}
+.lcard span{color:var(--ink-3);font-size:13px;margin-left:6px}
+.lcard.new{border-color:var(--gold);border-width:1.5px}
+.lstrip .lc{flex:none;width:150px;text-align:left}
+.lstrip .lc .cover{width:150px;height:96px;border-radius:12px;background:#ccc center/cover;position:relative;overflow:hidden}
+.lstrip .lc .cover i{position:absolute;inset:0;background:linear-gradient(transparent 45%,#0009)}
+.lstrip .lc .cover b{position:absolute;left:9px;right:9px;bottom:7px;color:#fff;font-family:var(--serif);font-weight:520;font-size:15px;line-height:1.1}
+.lstrip .lc .k{font-size:12px;color:var(--ink-3);margin-top:5px}
+.lstrip .lc.new .cover{outline:2px solid var(--gold);outline-offset:-2px}
+.lhead{padding:0 20px 4px}
+.lhead h1{font-family:var(--serif);font-weight:520;font-size:30px;letter-spacing:-.02em;line-height:1.05;margin:4px 0 6px}
+.lhead .meta{font-size:14px;color:var(--ink-3)}
+.lhead .meta a{font-weight:600}
+.yrow{display:grid;grid-template-columns:58px 64px 1fr;gap:12px;align-items:center;width:100%;padding:8px 20px;border-bottom:1px solid var(--rule)}
+.yrow .yr{font-family:var(--serif);font-weight:520;font-size:20px;color:var(--madder)}
+.yrow .th{width:64px;height:64px;border-radius:10px;background:#ccc center/cover}
+.yrow .th.plate{height:96px;background-color:#f1e8d6;background-size:contain;background-repeat:no-repeat}
+.yrow b{font-family:var(--serif);font-weight:520;font-size:17px;display:block;line-height:1.15}
+.yrow .latin{font-size:13px;color:var(--ink-3)}
+.yrow.now .yr::after{content:"this year";display:block;font-family:var(--sans);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--madder)}
 
-  @media (max-width: 760px) {
-    .stage { grid-template-columns: minmax(0, 1fr); justify-content: stretch; padding: 0; gap: 0; width: 100%; }
-    .index { order: 2; padding: 8px 16px 20px; }
-    .phone { width: 100%; max-width: 100%; min-width: 0; height: 100vh; border-radius: 0; border: 0; box-shadow: none; }
-    .index-nav { display: flex; gap: 14px; overflow: auto; }
-    .index button { width: auto; white-space: nowrap; }
-  }
+/* Field Guide */
+.fghero{height:250px;background:#efe6d3 center 30%/cover;position:relative}
+.fghero::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,var(--paper))}
+.fg h1{font-family:var(--serif);font-weight:520;font-size:34px;margin:-30px 20px 6px;position:relative;z-index:1;letter-spacing:-.02em}
+.fg .sub{padding:0 20px;color:var(--ink-2);line-height:1.45}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px 20px 0}
+.cols>div{border-radius:14px;padding:12px;background:var(--cream);border:1px solid var(--rule);font-size:13px;line-height:1.35}
+.cols>div.add{border-color:var(--moss);border-width:1.5px}
+.cols h4{margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.cols .add h4{color:var(--moss)}
+.cols ul{margin:0;padding-left:16px}
+.cols li{margin:3px 0}
+.plans{padding:16px 20px 0}
+.plan{display:flex;align-items:center;gap:12px;width:100%;padding:13px 14px;border-radius:14px;border:1px solid var(--rule);background:var(--cream);margin-bottom:8px}
+.plan.on{border:2px solid var(--moss)}
+.plan .l{flex:1}
+.plan .l b{display:block}
+.plan .l span{font-size:13px;color:var(--ink-3)}
+.plan .p{font-weight:600;color:var(--ink-2);font-size:14px}
+.fine{font-size:12px;color:var(--ink-3);line-height:1.45;padding:10px 20px 24px}
+
+/* Me */
+.acct{display:flex;align-items:center;gap:14px;padding:6px 20px 14px}
+.avatar{width:54px;height:54px;border-radius:50%;background:var(--gold);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-size:24px}
+.card{margin:0 20px 12px;padding:14px;border-radius:16px;background:var(--cream);border:1px solid var(--rule)}
+.card .k{font-size:12px;color:var(--ink-3)}
+.bar{height:8px;border-radius:4px;background:var(--paper-2);overflow:hidden;display:flex;margin:10px 0 6px}
+.bar i{display:block;background:var(--moss)}
+.bar i.x{background:var(--gold)}
+.menu .srow{border-bottom:1px solid var(--rule)}
+.menu .srow svg{width:22px;height:22px;color:var(--moss)}
+@media (max-width:820px){.desk{grid-template-columns:1fr;justify-items:center}.phone{position:relative;top:0}}
 </style>
 </head>
 <body>
-<div class="stage">
-  <aside class="index">
+<div class="desk">
+  <aside class="notes">
     <h1>Field guide</h1>
-    <p class="lede">Click through the agreed screens. Names, counts, and catalog photos are live.</p>
-    <nav class="index-nav" id="index"></nav>
+    <p class="lede">Mockups of <code>docs/REDESIGN.md</code>. Everything on screen is a tap target. Plant names, photos, plates, counts and text are from the live catalog.</p>
+    <ol id="index"></ol>
+    <h3>Try states</h3>
+    <div class="toggles">
+      <label><input type="checkbox" id="tSigned" checked> Signed in</label>
+      <label><input type="checkbox" id="tBook"> Camera result is in the book</label>
+      <label><input type="checkbox" id="tNot"> Next photo isn’t a plant</label>
+      <label><input type="checkbox" id="tTen"> All ten names used this month</label>
+      <label><input type="checkbox" id="tFG"> Field Guide subscriber</label>
+      <label><input type="checkbox" id="tDe"> Lists in German (year campaigns)</label>
+    </div>
+    <p class="fine">The person's photo of <i>Tanacetum corymbosum</i> is a stand-in from <a href="https://commons.wikimedia.org/wiki/File:Tanacetum_corymbosum_(7334981392).jpg" target="_blank">Wikimedia Commons</a>; that species is not in the book. Other "your photo" thumbnails reuse catalog photos. Search in this prototype covers the 93 plants of the demo key plus all families and top genera.</p>
   </aside>
-
-  <div class="phone" id="phone">
-    <div class="status">9:41 <span></span></div>
-    <div class="screens">
-
-      <section class="screen on" id="find" data-tab="find">
-        <div class="topbar">
-          <div class="mark">What’s that flower?</div>
-          <button class="icon-btn" data-go="guide" aria-label="Account">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1a1612" stroke-width="1.4"><circle cx="9" cy="6" r="2.4"/><path d="M3.5 15.2c.8-2.6 2.8-3.8 5.5-3.8s4.7 1.2 5.5 3.8"/></svg>
-          </button>
-        </div>
-        <div class="scroll">
-          <label class="search">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#6e6659" stroke-width="1.4"><circle cx="7" cy="7" r="4.2"/><path d="M10.4 10.4 14 14"/></svg>
-            <input placeholder="Name, Latin, family" aria-label="Search the book">
-          </label>
-          <button class="camera" data-go="species">
-            <div>
-              <div class="kicker">4 of 5 this month</div>
-              <h2 class="common">Name this plant</h2>
-            </div>
-            <p>A photo of any plant. In the book, you get the full page.</p>
-          </button>
-          <div class="kicker step-label">Color</div>
-          <div class="colors" id="colors"></div>
-          <p class="hint">Then habitat, then petals.</p>
-          <button class="chip" data-go="results">Any region</button>
-          <div class="recent">
-            <div class="kicker">Seen recently</div>
-            <div class="strip" id="recent"></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="screen" id="habitat" data-tab="">
-        <div class="topbar"><button class="back" data-go="find">← Find</button></div>
-        <div class="scroll">
-          <div class="kicker">Step 2 of 3</div>
-          <div class="crumbs"><span>White</span></div>
-          <h2 class="ask">What’s around you?</h2>
-          <div class="choices" id="habitats"></div>
-        </div>
-      </section>
-
-      <section class="screen" id="petal" data-tab="">
-        <div class="topbar"><button class="back" data-go="habitat">← Habitat</button></div>
-        <div class="scroll">
-          <div class="kicker">Step 3 of 3</div>
-          <div class="crumbs"><span>White</span><span>Meadow</span></div>
-          <h2 class="ask">How many petals?</h2>
-          <div class="choices" id="petals"></div>
-        </div>
-      </section>
-
-      <section class="screen" id="results" data-tab="find">
-        <div class="topbar"><button class="back" data-go="petal">← Petals</button></div>
-        <div class="scroll">
-          <div class="kicker">In the book</div>
-          <h2 class="ask" style="font-size:30px;line-height:1.05">White · meadow<br>more than 5</h2>
-          <div class="filters" style="margin-top:12px">
-            <button class="chip" id="region-btn" style="margin-top:0">Any region</button>
-          </div>
-          <div class="region-panel" id="region-panel" hidden>
-            <button type="button" data-region="any">Any region<small>93 plants</small></button>
-            <button type="button" data-region="me">Middle Europe<small>This phone’s location · 67 plants</small></button>
-            <button type="button" data-region="ne">Northern Europe<small>58 plants</small></button>
-          </div>
-          <p class="count" id="result-count">93 plants</p>
-          <div id="result-list"></div>
-          <p class="more" id="result-more">and 87 more</p>
-        </div>
-      </section>
-
-      <section class="screen" id="species" data-tab="">
-        <div class="topbar"><button class="back" data-go="results">← Results</button></div>
-        <div class="banner" id="seen-bar">
-          <div>
-            <span class="kicker" id="seen-kicker">Seen just now</span>
-            <p id="seen-state">Name unconfirmed</p>
-          </div>
-          <div class="acts" id="seen-acts">
-            <button class="text-btn" id="confirm">Confirm</button>
-            <button class="text-btn" data-go="results">Another</button>
-          </div>
-        </div>
-        <div class="scroll" style="padding:0 0 24px">
-          <img class="hero" alt="Daisy in flower" src="https://storage.googleapis.com/abherbs-resources/photos/Asterales/Asteraceae/Bellis_perennis/bp1.webp">
-          <div class="copy">
-            <div class="kicker">Asteraceae · daisy family</div>
-            <h2 class="common">Daisy</h2>
-            <p class="binomen latin">Bellis perennis</p>
-            <div class="facts">
-              <div><div class="k">Height</div><div class="v">5–20 cm</div></div>
-              <div><div class="k">Flowering</div><div class="v">March–September</div></div>
-              <div><div class="k">Petals</div><div class="v">More than 5</div></div>
-            </div>
-            <p class="lede">A perennial scapose herb with a basal leaf rosette, typically 5–20 cm tall. Native through most of Europe to North Africa and Madeira, and east to the Caucasus and western and Central Asia. Introduced in Finland, Iceland, the Azores, the Russian Far East, Korea, the Indian Subcontinent, Australia, New Zealand, Hawaii and widely in the Americas.</p>
-            <div class="sec">
-              <div class="k">Flower</div>
-              <p class="lede">Many white ray florets, often pink-tinged at the tips, with ligules usually 4–8 mm long. Disc florets yellow, tubular, about 1.5–2 mm. Involucral bracts in two rows of almost equal length.</p>
-            </div>
-            <div class="sec">
-              <div class="k">Plate</div>
-              <div class="plate-row">
-                <img alt="Botanical plate of Bellis perennis" src="https://storage.googleapis.com/abherbs-resources/photos/Asterales/Asteraceae/Bellis_perennis/Bellis_perennis@400.webp">
-                <span class="latin" style="color:var(--ink-2)">Bellis perennis</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="screen" id="outside" data-tab="">
-        <div class="topbar"><button class="back" data-go="seen">← Seen</button></div>
-        <div class="scroll" style="padding-top:0">
-          <img class="hero" alt="Photo just taken of a variegated houseplant" src="pothos.jpg" style="border-radius:18px;height:220px;margin-top:8px">
-          <div class="copy" style="padding:16px 0 0">
-            <div class="kicker">Not in the guide yet</div>
-            <p class="confidence">Likely</p>
-            <h2 class="common latin" style="font-size:32px;margin-top:4px">Epipremnum aureum</h2>
-            <p class="hint">The name is already in Seen, unconfirmed.</p>
-            <div class="kicker" style="margin-top:22px">Also possible</div>
-            <div class="alt">
-              <span><span class="latin">Monstera deliciosa</span><span class="meta" style="color:var(--ink-2);font-size:14px">Swiss cheese plant</span></span>
-              <span class="tag">In the guide</span>
-            </div>
-            <div class="alt" style="cursor:default">
-              <span class="latin">Epipremnum pinnatum</span>
-              <span class="tag">Outside</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="screen" id="seen" data-tab="seen">
-        <div class="topbar"><div class="mark">Seen</div></div>
-        <div class="scroll">
-          <p class="hint" style="margin-top:0">On this phone. Field Guide keeps it on your other devices.</p>
-          <div id="seen-list"></div>
-        </div>
-      </section>
-
-      <section class="screen" id="book" data-tab="book">
-        <div class="topbar"><div class="mark">Book</div></div>
-        <div class="scroll">
-          <label class="search">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#6e6659" stroke-width="1.4"><circle cx="7" cy="7" r="4.2"/><path d="M10.4 10.4 14 14"/></svg>
-            <input placeholder="Family or genus" aria-label="Search families">
-          </label>
-          <div class="kicker">Families</div>
-          <div id="families"></div>
-        </div>
-      </section>
-
-      <section class="screen" id="guide" data-tab="">
-        <div class="topbar"><button class="back" data-go="find">← Find</button></div>
-        <div class="scroll">
-          <div class="kicker">Subscription · 7-day trial</div>
-          <h2 class="ask">Field Guide</h2>
-          <p class="lede" style="margin-top:12px">The book stays free. The subscription is how you carry it.</p>
-          <div class="kicker" style="margin-top:18px">Free</div>
-          <ul class="guide-list">
-            <li>The key, every species page, search, and families</li>
-            <li>5 photo identifications a month, plus up to 5 from ads</li>
-            <li>Seen, on this phone</li>
-          </ul>
-          <div class="kicker" style="margin-top:18px">Field Guide adds</div>
-          <ul class="guide-list">
-            <li>Unlimited photo identification</li>
-            <li>No ads</li>
-            <li>Seen on your other devices, including the photos</li>
-            <li>Offline packs of the book</li>
-          </ul>
-          <button class="offer primary" type="button">
-            <strong>Start the 7-day trial</strong>
-            <span>Monthly or yearly. The price is the store price.</span>
-          </button>
-          <p class="price">Restore purchases. Photo search, offline, and no-ads stay with the people who already bought them.</p>
-        </div>
-      </section>
-    </div>
-
-    <nav class="tabs" id="tabs">
-      <button type="button" data-go="find" data-tabbtn="find">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="4.5"/><path d="M11.5 11.5 16 16"/></svg>
-        Find
-      </button>
-      <button type="button" data-go="book" data-tabbtn="book">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 3.5h5.2A2.3 2.3 0 0 1 10.5 5.8V15a2 2 0 0 0-2-.8H3zM15 3.5H9.8A2.3 2.3 0 0 0 7.5 5.8V15a2 2 0 0 1 2-.8H15z"/></svg>
-        Book
-      </button>
-      <button type="button" data-go="seen" data-tabbtn="seen">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 2.5c2.6 0 4.5 2 4.5 4.6 0 3.4-4.5 8.4-4.5 8.4S4.5 10.5 4.5 7.1C4.5 4.5 6.4 2.5 9 2.5z"/><circle cx="9" cy="7" r="1.5"/></svg>
-        Seen
-      </button>
-    </nav>
-
-    <div class="sheet" id="quota" hidden>
-      <div class="card">
-        <div class="grab"></div>
-        <div class="kicker">This month</div>
-        <h2>5 of 5 used</h2>
-        <button class="offer" type="button" data-go="species">
-          <strong>Watch an ad for one more</strong>
-          <span>5 more available from ads this month</span>
-        </button>
-        <button class="offer primary" type="button" data-go="guide">
-          <strong>Field Guide</strong>
-          <span>7-day trial, then the store price. Unlimited names.</span>
-        </button>
-        <button class="offer" type="button" id="close-quota">
-          <strong>Use the key</strong>
-          <span>Color, habitat, and petals stay open</span>
-        </button>
-      </div>
-    </div>
-  </div>
+  <div class="phone"><div class="glass">
+    <div class="island"></div>
+    <div class="status" id="status"><span>14:32</span><span>●●● ▮</span></div>
+    <div class="screen" id="screen"></div>
+    <nav class="tabs" id="tabs"></nav>
+    <div id="overlay"></div>
+    <div class="toast" id="toast"></div>
+  </div></div>
 </div>
 
 <script>
-const PHOTO = "https://storage.googleapis.com/abherbs-resources/photos/";
-const FAM = "https://storage.googleapis.com/abherbs-resources/families/";
+const S='https://storage.googleapis.com/abherbs-resources/';
+const PH=r=>S+'photos/'+r;
+const PLATE=r=>PH(r.replace(/\.webp$/,'@400.webp'));
+const PLATE_L=r=>PH(r.replace(/\.webp$/,'@1600.webp'));
+const MAP=r=>PH(r.replace(/\.webp$/,'_distribution.webp'));
+const FAMI=f=>S+'families/'+encodeURIComponent(f)+'.webp';
+const USERSHOT='https://commons.wikimedia.org/wiki/Special:FilePath/Tanacetum_corymbosum_(7334981392).jpg?width=900';
+const MON=['J','F','M','A','M','J','J','A','S','O','N','D'];
+const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const NOW_MONTH=9;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cap=s=>s?s[0].toUpperCase()+s.slice(1):s;
+const fmt=n=>n.toLocaleString('en');
 
-const INDEX = [
-  ["find", "Find"],
-  ["habitat", "Habitat"],
-  ["petal", "Petals"],
-  ["results", "Results"],
-  ["species", "Species, in the book"],
-  ["outside", "Outside the book"],
-  ["seen", "Seen"],
-  ["book", "Book"],
-  ["quota", "At the limit"],
-  ["guide", "Field Guide"]
-];
-
-const COLORS = [
-  ["#f7f4ee", "White"],
-  ["#e2b340", "Yellow"],
-  ["#c45b6a", "Red, pink"],
-  ["#6d6a9a", "Blue, purple"],
-  ["#6e7a4e", "Green, brown, black"]
-];
-
-const HABITATS = [
-  ["Meadow", "Grassland"],
-  ["Garden", "Or a field"],
-  ["Wetland", "Moor or water"],
-  ["Woodland", "Forest"],
-  ["Rock", "Or mountain"],
-  ["Tree", "Or shrub"]
-];
-
-function petals(kind) {
-  const s = "none";
-  const c = "#3e5344";
-  if (kind === "4") return `<svg width="42" height="42" viewBox="0 0 42 42"><g fill="${s}" stroke="${c}" stroke-width="1.3"><circle cx="21" cy="21" r="3"/><ellipse cx="21" cy="8" rx="4" ry="6.5"/><ellipse cx="21" cy="34" rx="4" ry="6.5"/><ellipse cx="8" cy="21" rx="6.5" ry="4"/><ellipse cx="34" cy="21" rx="6.5" ry="4"/></g></svg>`;
-  if (kind === "5") return `<svg width="42" height="42" viewBox="0 0 42 42"><g fill="${s}" stroke="${c}" stroke-width="1.3" transform="translate(21 21)"><circle r="3"/>${[0,72,144,216,288].map(a => `<ellipse rx="3.6" ry="7" transform="rotate(${a}) translate(0 -11)"/>`).join("")}</g></svg>`;
-  if (kind === "many") return `<svg width="42" height="42" viewBox="0 0 42 42"><g fill="${s}" stroke="${c}" stroke-width="1.2" transform="translate(21 21)"><circle r="4"/>${Array.from({length:12}, (_,i)=>`<ellipse rx="2.2" ry="6" transform="rotate(${i*30}) translate(0 -12)"/>`).join("")}</g></svg>`;
-  return `<svg width="42" height="42" viewBox="0 0 42 42"><g fill="${s}" stroke="${c}" stroke-width="1.3"><path d="M21 8c6 4 10 8 10 14 0 5-4 8-10 8s-10-3-10-8c0-6 4-10 10-14z"/><path d="M21 18c4 2 6 4 6 7 0 2-2 4-6 4"/><path d="M14 30c2 3 5 4 7 4s5-1 7-4"/></g></svg>`;
-}
-
-const PETALS = [
-  ["4", "4 or fewer", ""],
-  ["5", "5", ""],
-  ["many", "More than 5", ""],
-  ["zyg", "Zygomorphic", "One plane of symmetry"]
-];
-
-const RESULTS = [
-  ["daisy", "Bellis perennis", "Asteraceae", "Asterales/Asteraceae/Bellis_perennis/bp1.webp", "species"],
-  ["yarrow", "Achillea millefolium", "Asteraceae", "Asterales/Asteraceae/Achillea_millefolium/am1.webp", "species"],
-  ["wood anemone", "Anemone nemorosa", "Ranunculaceae", "Ranunculales/Ranunculaceae/Anemone_nemorosa/an1.webp", "species"],
-  ["corn chamomile", "Anthemis arvensis", "Asteraceae", "Asterales/Asteraceae/Anthemis_arvensis/aa1.webp", "species"],
-  ["mountain everlasting", "Antennaria dioica", "Asteraceae", "Asterales/Asteraceae/Antennaria_dioica/ad1.webp", "species"],
-  ["lily-of-the-valley", "Convallaria majalis", "Asparagaceae", "Asparagales/Asparagaceae/Convallaria_majalis/cm1.webp", "species"]
-];
-
-const FAMILIES = [
-  ["Asteraceae", "daisy family"],
-  ["Ranunculaceae", "buttercup family"],
-  ["Rosaceae", "rose family"],
-  ["Lamiaceae", "mint family"],
-  ["Papaveraceae", "poppy family"],
-  ["Fabaceae", "pea family"],
-  ["Araceae", "arum family"]
-];
-
-const indexEl = document.getElementById("index");
-INDEX.forEach(([id, label]) => {
-  const b = document.createElement("button");
-  b.type = "button";
-  b.textContent = label;
-  b.dataset.go = id;
-  b.dataset.index = id;
-  indexEl.appendChild(b);
-});
-
-const colorsEl = document.getElementById("colors");
-COLORS.forEach(([hex, name], i) => {
-  const b = document.createElement("button");
-  b.className = "swatch";
-  b.type = "button";
-  if (i === 0) b.dataset.go = "habitat";
-  b.innerHTML = `<i style="background:${hex}"></i><span>${name}</span>`;
-  colorsEl.appendChild(b);
-});
-
-document.getElementById("habitats").innerHTML = HABITATS.map(([name, sub], i) =>
-  `<button class="choice" type="button" ${i === 0 ? 'data-go="petal"' : ""}><svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#3e5344" stroke-width="1.3"><path d="M4 26h28M8 26c2-8 4-12 6-14M18 26V12M26 26c-1-7-2-10-5-12"/></svg><span><b>${name}</b><small>${sub}</small></span></button>`
-).join("");
-
-document.getElementById("petals").innerHTML = PETALS.map(([kind, name, sub]) =>
-  `<button class="choice" type="button" ${kind === "many" ? 'data-go="results"' : ""}>${petals(kind)}<span><b>${name}</b>${sub ? `<small>${sub}</small>` : ""}</span></button>`
-).join("");
-
-document.getElementById("result-list").innerHTML = RESULTS.map(([common, latin, family, file]) => {
-  const go = latin === "Bellis perennis";
-  const tag = go ? "button" : "div";
-  return `<${tag} class="plant" ${go ? 'type="button" data-go="species"' : ""}><img alt="" src="${PHOTO}${file}"><span><span class="common">${common}</span><span class="latin">${latin}</span><div class="meta">${family}</div></span></${tag}>`;
-}).join("");
-
-document.getElementById("recent").innerHTML = [
-  ["Daisy", PHOTO + "Asterales/Asteraceae/Bellis_perennis/bp1.webp", "species"],
-  ["Dandelion", PHOTO + "Asterales/Asteraceae/Taraxacum_officinale/to1.webp", "seen"],
-  ["Poppy", PHOTO + "Ranunculales/Papaveraceae/Papaver_rhoeas/pr1.webp", "seen"]
-].map(([name, src, go]) =>
-  `<button type="button" data-go="${go}"><img alt="${name}" src="${src}"><span>${name}</span></button>`
-).join("");
-
-document.getElementById("seen-list").innerHTML = [
-  ["pothos.jpg", "Epipremnum aureum", "Just now · outside the book", "Unconfirmed", "outside", false],
-  [PHOTO + "Asterales/Asteraceae/Bellis_perennis/bp1.webp", "Daisy", "Just now · Bellis perennis", "Unconfirmed", "species", false],
-  [PHOTO + "Asterales/Asteraceae/Taraxacum_officinale/to1.webp", "Dandelion", "Yesterday · Taraxacum officinale", "Confirmed", "book", true],
-  [PHOTO + "Ranunculales/Papaveraceae/Papaver_rhoeas/pr1.webp", "Common poppy", "12 May · Papaver rhoeas", "Confirmed", "book", true]
-].map(([src, title, sub, flag, go, ok]) =>
-  `<button class="seen-row" type="button" ${go === "book" ? "" : `data-go="${go}"`}><img alt="" src="${src}"><span><span class="flag ${ok ? "ok" : ""}">${flag}</span><span class="common" style="font-size:20px">${title}</span><div class="meta" style="color:var(--ink-2);font-size:14px">${sub}</div></span></button>`
-).join("");
-
-document.getElementById("families").innerHTML = FAMILIES.map(([latin, common]) =>
-  `<div class="family"><img alt="" src="${FAM}${latin}.webp"><span><span class="latin">${latin}</span><div class="meta" style="color:var(--ink-2)">${common}</div></span></div>`
-).join("");
-
-const TAB_SCREENS = new Set(["find", "results", "book", "seen"]);
-const phone = document.getElementById("phone");
-
-function show(id) {
-  const screenId = id === "quota" ? "find" : id;
-  document.querySelectorAll(".screen").forEach(el => el.classList.toggle("on", el.id === screenId));
-  document.querySelectorAll("[data-index]").forEach(el => el.classList.toggle("on", el.dataset.index === id));
-  document.getElementById("quota").hidden = id !== "quota";
-  const meter = document.querySelector(".camera .kicker");
-  if (meter) meter.textContent = id === "quota" ? "None left this month" : "4 of 5 this month";
-  phone.classList.toggle("no-tabs", !TAB_SCREENS.has(screenId) || id === "quota");
-  const tab = document.getElementById(screenId)?.dataset.tab || "";
-  document.querySelectorAll("[data-tabbtn]").forEach(el => el.classList.toggle("on", el.dataset.tabbtn === tab));
-  document.querySelector(".screens").scrollTop = 0;
-  document.querySelectorAll(".screen.on .scroll").forEach(el => { el.scrollTop = 0; });
-}
-
-document.body.addEventListener("click", (event) => {
-  const go = event.target.closest("[data-go]");
-  if (go) show(go.dataset.go);
-});
-
-document.getElementById("close-quota").addEventListener("click", () => show("find"));
-
-document.getElementById("region-btn").addEventListener("click", () => {
-  const panel = document.getElementById("region-panel");
-  panel.hidden = !panel.hidden;
-});
-
-const COUNTS = {
-  any: ["Any region", "93 plants", "and 87 more"],
-  me: ["Middle Europe", "67 plants", "and 61 more"],
-  ne: ["Northern Europe", "58 plants", "and 52 more"]
+const I={
+  search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>',
+  cam:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+  person:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-6 8-6s7 1.5 8 6"/></svg>',
+  back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 5-7 7 7 7"/></svg>',
+  close:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+  down:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>',
+  find:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="8"/></svg>',
+  book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5c3-1 6-1 8 1 2-2 5-2 8-1v14c-3-1-6-1-8 1-2-2-5-2-8-1z"/><path d="M12 6v14"/></svg>',
+  seen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>',
+  key:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="2.5"/><path d="M12 9.5C12 6 9 4 7 5s-1 5 3 6M14.5 12c3.5 0 5.5-3 4.5-5s-5-1-6 3M12 14.5c0 3.5 3 5.5 5 4.5s1-5-3-6M9.5 12C6 12 4 15 5 17s5 1 6-3"/></svg>',
+  ad:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></svg>',
+  leaf:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 19C5 10 10 5 20 4c-1 10-6 15-15 15z"/><path d="M5 19 13 11"/></svg>',
+  restore:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4"/></svg>',
+  globe:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>',
+  cloud:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 9a4.5 4.5 0 0 1 0 9z"/></svg>',
 };
-document.getElementById("region-panel").addEventListener("click", (event) => {
-  const btn = event.target.closest("[data-region]");
-  if (!btn) return;
-  const [label, count, more] = COUNTS[btn.dataset.region];
-  document.getElementById("region-btn").textContent = label;
-  document.getElementById("result-count").textContent = count;
-  document.getElementById("result-more").textContent = more;
-  document.getElementById("region-panel").hidden = true;
-});
+const HAB_G={
+  1:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 36h36"/><path d="M9 36c0-6 1-10 3-14M13 36c0-5-1-9-4-12M20 36c0-8 2-13 5-17M26 36c0-6-2-10-5-13M33 36c0-6 1-9 3-12M36 36c-1-5-3-7-6-9"/><circle cx="25" cy="17" r="2.5"/><circle cx="12" cy="20" r="2"/></svg>',
+  2:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 36h36M6 30h32M9 24h26"/><path d="M12 24v-5M18 24v-6M24 24v-5M30 24v-6"/><circle cx="12" cy="17" r="2"/><circle cx="18" cy="16" r="2"/><circle cx="24" cy="17" r="2"/><circle cx="30" cy="16" r="2"/></svg>',
+  3:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 30c4-3 8 3 12 0s8 3 12 0 8 3 12 0M4 37c4-3 8 3 12 0s8 3 12 0 8 3 12 0"/><path d="M14 28V12M20 28V8M26 28V13"/><rect x="18.5" y="8" width="3" height="7" rx="1.5" fill="currentColor"/></svg>',
+  4:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M14 6 6 20h5l-6 10h18l-6-10h5z"/><path d="M14 30v8M30 10l-7 12h4l-5 9h16l-5-9h4z"/><path d="M30 31v7M4 38h36"/></svg>',
+  5:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 38 15 14l6 9 5-7 15 22z"/><path d="M12 20l3-6 3 5"/></svg>',
+  6:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="22" cy="15" r="10"/><path d="M22 25v13M22 31l-5-4M22 29l5-4M4 38h36"/></svg>',
+};
+function petalSvg(kind){
+  const p=(n,rx,ry,off)=>Array.from({length:n},(_,i)=>`<ellipse cx="36" cy="${36-off}" rx="${rx}" ry="${ry}" transform="rotate(${i*360/n} 36 36)" fill="#fffdf8" stroke="#3e5344" stroke-width="1.5"/>`).join('');
+  const c='<circle cx="36" cy="36" r="6" fill="#e0b340" stroke="#85603c" stroke-width="1.2"/>';
+  if(kind==1) return `<svg viewBox="0 0 72 72">${p(4,10,14,15)}${c}</svg>`;
+  if(kind==2) return `<svg viewBox="0 0 72 72">${p(5,9,14,15)}${c}</svg>`;
+  if(kind==3) return `<svg viewBox="0 0 72 72">${p(16,3.6,14,17)}${c}</svg>`;
+  return `<svg viewBox="0 0 72 72" fill="#fffdf8" stroke="#3e5344" stroke-width="1.5"><path d="M36 38c-12-2-22-10-18-22 6-4 14 2 18 12 4-10 12-16 18-12 4 12-6 20-18 22z"/><path d="M36 40c-8 2-16 8-16 20 8 4 16-2 16-10 0 8 8 14 16 10 0-12-8-18-16-20z"/><path d="M36 30v12" stroke="#85603c"/></svg>`;
+}
+const COLORS=[['1','white','#f8f5ee'],['2','yellow','#e4bb3b'],['3','red, pink','#c4566b'],['4','blue, purple','#5b62a8'],['5','green, brown, black','#6f7d4c']];
+const HABS=[['1','meadows or grasslands'],['2','gardens or fields'],['3','moorlands or wetlands'],['4','woodlands or forests'],['5','rocks or mountains'],['6','trees or shrubs']];
+const PETS=[['1','4 or less'],['2','5'],['3','more than 5'],['4','zygomorphic']];
 
-document.getElementById("confirm").addEventListener("click", () => {
-  document.getElementById("seen-bar").classList.add("confirmed");
-  document.getElementById("seen-kicker").textContent = "Seen";
-  document.getElementById("seen-state").textContent = "Daisy confirmed";
-  document.getElementById("seen-acts").hidden = true;
-});
+const st={
+  screen:'find',tab:'find',color:null,habitat:null,petal:null,region:null,regionFromLoc:false,view:'photo',
+  loc:null,prev:null,sp:null,fromCamera:false,bookSeg:'fam',q:'dais',listLang:'en',list:null,
+  used:1,ads:0,signed:true,fg:false,inBook:false,
+  seen:[
+    {id:'t1',n:'Tanacetum corymbosum',l:null,ph:USERSHOT,when:'Today, 14:31',where:'Middle Europe',u:true,alts:['Leucanthemum vulgare','Tanacetum parthenium']},
+    {id:'t2',n:'Leucanthemum vulgare',l:'oxeye daisy',ph:PH('Asterales/Asteraceae/Leucanthemum_vulgare/lv2.webp'),when:'Yesterday, 17:05',where:'No place',u:true,alts:['Bellis perennis','Anthemis arvensis']},
+    {id:'c1',n:'Achillea millefolium',l:'yarrow',ph:PH('Asterales/Asteraceae/Achillea_millefolium/am1.webp'),when:'12 Sep',where:'Middle Europe',m:'September 2026',sh:'review'},
+    {id:'c2',n:'Matricaria chamomilla',l:'chamomile',ph:PH('Asterales/Asteraceae/Matricaria_chamomilla/mc1.webp'),when:'3 Sep',where:'Middle Europe',m:'September 2026'},
+    {id:'c3',n:'Bellis perennis',l:'daisy',ph:PH('Asterales/Asteraceae/Bellis_perennis/bp2.webp'),when:'28 Aug',where:'Middle Europe',m:'August 2026',sh:'shared'},
+    {id:'c4',n:'Anemone nemorosa',l:'wood anemone',ph:PH('Ranunculales/Ranunculaceae/Anemone_nemorosa/an1.webp'),when:'14 Apr',where:'Middle Europe',m:'April 2026',sh:'rejected'},
+    {id:'c5',n:'Galanthus nivalis',l:'snowdrop',ph:PH('Asparagales/Amaryllidaceae/Galanthus_nivalis/gn1.webp'),when:'2 Mar 2021',where:'Middle Europe',m:'Imported from Observations',src:'import',sh:'shared'},
+  ],
+};
+const SCREENS=[
+  ['find','Find','Search, camera with its meter, and step 1 of the key already open.'],
+  ['search','Search','Free. Plants, families and genera in one list.'],
+  ['habitat','Key · habitat','Step 2. Every choice shows how many plants remain.'],
+  ['petal','Key · petals','Step 3. The four live choices, drawn.'],
+  ['results','Results','93 plants. Region is a chip, not a step. Photos or plates.'],
+  ['regionSheet','Region chip','Any region, a floristic region, or this phone’s location.'],
+  ['camera','Camera','Location asked here, once, at the first photo.'],
+  ['notplant','Not a plant','Plant.id says it’s probably not a plant. Nothing saved, the name isn’t used.'],
+  ['outside','Outside the book','Likely name, two candidates, curated look-alikes open full pages.'],
+  ['speciesCam','Species from camera','Oxeye daisy, with the unconfirmed Seen bar.'],
+  ['species','Species page','Same sections as the website. No ads.'],
+  ['seen','Seen','To confirm first, then the notebook by month.'],
+  ['share','Share a find','Private until shared. CC0 consent each time, then review, then a public Sighting.'],
+  ['book','Book','Families, genera, lists of flowers.'],
+  ['list','List of flowers','A custom list. Year campaigns run newest first; “New in the book” by date.'],
+  ['limit','At the limit','Ad, Field Guide, or the key. The key never closes.'],
+  ['fieldguide','Field Guide','Free vs. added, 7-day trial, restore.'],
+  ['me','Person','Account, allowance, restore, language.'],
+];
 
-show("find");
+const $=id=>document.getElementById(id);
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),2200)}
+
+/* ---------- meter ---------- */
+function allowance(){
+  if(st.fg) return {left:Infinity,label:'Unlimited with Field Guide'};
+  if(!st.signed){const left=Math.max(0,1-Math.min(st.used,1));return {left,label:left?'1 free name before sign-in':'Sign in for 5 names a month'}}
+  const included=Math.max(0,5-st.used);
+  if(included) return {left:included,label:`${included} of 5 left in September`};
+  const extra=Math.max(0,st.ads-(st.used-5));
+  return {left:extra,label:extra?`${extra} extra from an ad`:'This month’s names are used'};
+}
+function meterDots(){
+  if(st.fg) return '';
+  if(!st.signed) return `<div class="dots"><i class="${st.used>=1?'':'full'}"></i></div>`;
+  let d='';for(let i=0;i<5;i++) d+=`<i class="${i>=st.used?'full':''}"></i>`;
+  return `<div class="dots">${d}</div>`;
+}
+
+/* ---------- lists of flowers ---------- */
+function newList(){
+  const items=[];D.lists_new.forEach(b=>b.items.forEach(e=>items.push({...e,d:b.d})));
+  return {key:'new',t:st.listLang=='de'?'Neu im Buch':'New in the book',items,isNew:true};
+}
+function allLists(){
+  const src=st.listLang=='de'?D.lists_de:D.lists_en;
+  return [newList(),...src.map((l,i)=>({...l,key:st.listLang+i}))];
+}
+function findList(k){return allLists().find(l=>l.key==k)}
+const isYearList=l=>l.items.some(e=>e.y);
+function fmtDate(d){const [y,m,dd]=d.split('-');return `${+dd} ${MONTH_NAMES[+m-1]} ${y}`}
+function listStrip(){
+  return `<div class="strip lstrip">${allLists().map(l=>{
+    const e=l.items[0];
+    const k=l.isNew?`Latest ${fmtDate(D.lists_new[0].d)}`:isYearList(l)?`${l.items.length} years · ${e.y}`:`${l.items.length} plants`;
+    return `<button class="lc ${l.isNew?'new':''}" data-list="${l.key}"><div class="cover" style="background-image:url('${PH(e.ph)}')"><i></i><b>${esc(l.t)}</b></div><div class="k">${esc(k)}</div></button>`}).join('')}</div>`;
+}
+function listScreen(){
+  const l=findList(st.list)||allLists()[0];
+  const year=isYearList(l), thisYear=2026;
+  const nm=e=>e.l?esc(cap(e.l)):`<span class="latin">${esc(e.n)}</span>`;
+  const img=e=>st.view=='plate'?`<span class="th plate" style="background-image:url('${PLATE(e.pl)}')"></span>`:`<span class="th" style="background-image:url('${PH(e.ph)}')"></span>`;
+  let body='';
+  if(year){
+    body=l.items.map(e=>`<button class="yrow ${e.y==thisYear?'now':''}" data-sp="${esc(e.n)}"><span class="yr">${e.y}</span>${img(e)}<span>${`<b>${nm(e)}</b>`}<span class="latin">${esc(e.n)}</span><br>${seenMark(e.n)}</span></button>`).join('');
+  } else if(l.isNew){
+    const days=[...new Set(l.items.map(e=>e.d))];
+    body=days.map(d=>`<div class="month">${fmtDate(d)}</div><div class="grid">${l.items.filter(e=>e.d==d).map(cell).join('')}</div>`).join('');
+  } else body=`<div class="grid">${l.items.map(cell).join('')}</div>`;
+  function cell(e){
+    const im=st.view=='plate'?`<div class="img plate" style="background-image:url('${PLATE(e.pl)}')"></div>`:`<div class="img" style="background-image:url('${PH(e.ph)}')"></div>`;
+    return `<button class="cell" data-sp="${esc(e.n)}">${im}<div class="nm">${nm(e)}</div>${e.l?`<div class="la latin">${esc(e.n)}</div>`:''}${seenMark(e.n)}</button>`;
+  }
+  const src=l.src?` · <a href="${esc(l.src)}" target="_blank">${esc(l.src.replace(/^https?:\/\/(www\.)?/,'').split('/')[0])} ↗</a>`:'';
+  const seenN=l.items.filter(e=>seenNames().has(e.n)).length;
+  const sub=(year?`${l.items.length} years, newest first${src}`:l.isNew?`The last ${l.items.length} plants added to the book${src}`:`${l.items.length} plants${src}`)+(seenN?` · you’ve seen ${seenN}`:'');
+  return `<div class="back" data-go="${st.listBack||'find'}">${I.back}${st.listBack=='book'?'Book':'Find'}</div>
+  <div class="lhead"><span class="eyebrow">${st.listLang=='de'?'Blumenlisten':'Lists of flowers'}</span><h1>${esc(l.t)}</h1><div class="meta">${sub}</div></div>
+  <div class="filterbar"><div class="seg" style="margin-left:0"><button class="${st.view=='photo'?'on':''}" data-view="photo">Photos</button><button class="${st.view=='plate'?'on':''}" data-view="plate">Plates</button></div></div>
+  ${body}${st.fg?'':'<div class="ad">Banner ad · free accounts only</div>'}<div style="height:10px"></div>`;
+}
+
+/* ---------- screens ---------- */
+function vName(p){return p.l?cap(p.l):null}
+function findScreen(){
+  const a=allowance();
+  const recent=st.seen.slice(0,5).map(r=>`<button class="find-card" data-seen="${r.id}"><div class="img" style="background-image:url('${r.ph}')">${r.u?'<span class="u">To confirm</span>':''}</div><div class="nm">${r.l?esc(cap(r.l)):`<span class="latin">${esc(r.n)}</span>`}</div><div class="when">${esc(r.when)}</div></button>`).join('');
+  return `
+  <div class="top"><div class="wm">What’s that <i>flower</i></div><button class="iconbtn" data-go="me" aria-label="Account">${I.person}</button></div>
+  <button class="search" data-go="search">${I.search}<span>Search ${fmt(D.total)} plants, families, genera</span></button>
+  <button class="cam" data-go="camera">
+    <div><div class="t">Name it from a photo</div><div class="s">Any plant, wild or potted. Pages open when it’s in the book.</div>
+      <div class="meter">${meterDots()}<span>${esc(a.label)}</span></div></div>
+    <div class="lens">${I.cam}</div>
+  </button>
+  <section class="keycard">
+    <div class="keyhead"><span class="eyebrow">Key it out · 1 of 3</span><span class="eyebrow" style="color:var(--moss)">Always free</span></div>
+    <div class="stepper"><i class="on"></i><i></i><i></i></div>
+    <h2 class="q" style="margin-top:12px">What color is the flower?</h2>
+    <div class="swatches">${COLORS.map(([k,l,c])=>`<button class="sw" data-color="${k}"><span class="dot" style="background:${c}"></span><span class="l">${esc(cap(l))}</span><span class="n">${D.counts.color[k]}</span></button>`).join('')}</div>
+    <p class="hint">Then habitat, then petals. Region is set on the list, not asked here.</p>
+  </section>
+  <div class="sechead"><h3>Seen lately</h3><button data-tab="seen">All finds</button></div>
+  <div class="strip">${recent}</div>
+  <div class="sechead"><h3>${st.listLang=='de'?'Blumenlisten':'Lists of flowers'}</h3><button data-booklists="1">All lists</button></div>
+  ${listStrip()}
+  ${st.fg?'':'<div class="ad">Banner ad · free accounts only</div>'}
+  <div style="height:16px"></div>`;
+}
+function searchScreen(){
+  const q=st.q.trim().toLowerCase();
+  let plants=[],fams=[],gens=[];
+  if(q){
+    plants=D.plants.filter(p=>(p.l||'').toLowerCase().includes(q)||p.n.toLowerCase().includes(q)).slice(0,8);
+    fams=D.fams.filter(f=>f.f.toLowerCase().includes(q)||(f.v||'').toLowerCase().includes(q)).slice(0,4);
+    gens=D.genera.filter(g=>g.g.toLowerCase().includes(q)||(g.v||'').toLowerCase().includes(q)).slice(0,4);
+  }
+  const row=p=>`<button class="srow" data-sp="${esc(p.n)}"><span class="th" style="background-image:url('${PH(p.ph)}')"></span><span class="tx"><b>${esc(vName(p)||'')}</b><span class="latin">${esc(p.n)}</span></span></button>`;
+  const frow=f=>`<button class="srow" data-toast="Family page: ${esc(f.f)}"><span class="th fam" style="background-image:url('${FAMI(f.f)}')"></span><span class="tx"><b>${esc(cap(f.v||f.f))}</b><span class="latin">${esc(f.f)}</span></span><span class="k">${f.k}</span></button>`;
+  const grow=g=>`<button class="srow" data-toast="Genus page: ${esc(g.g)}"><span class="th fam" style="background-image:url('${FAMI(g.f)}')"></span><span class="tx"><b>${esc(cap(g.v||g.g))}</b><span class="latin">${esc(g.g)}</span></span><span class="k">${g.k}</span></button>`;
+  const none=q&&!plants.length&&!fams.length&&!gens.length;
+  return `<div class="back" data-go="find">${I.back}Find</div>
+  <label class="sfield">${I.search}<input id="q" value="${esc(st.q)}" placeholder="Name, Latin, family, genus" autocomplete="off"></label>
+  ${plants.length?`<div class="slabel eyebrow">Plants</div>${plants.map(row).join('')}`:''}
+  ${gens.length?`<div class="slabel eyebrow">Genera</div>${gens.map(grow).join('')}`:''}
+  ${fams.length?`<div class="slabel eyebrow">Families</div>${fams.map(frow).join('')}`:''}
+  ${none?`<div class="notbook">Nothing in the book by that name. <button style="color:var(--moss);font-weight:600" data-go="camera">Try a photo</button> or <button style="color:var(--moss);font-weight:600" data-go="find">key it out</button>.</div>`:''}
+  <div style="height:20px"></div>`;
+}
+function trail(upto){
+  const c=COLORS.find(x=>x[0]==st.color), h=HABS.find(x=>x[0]==st.habitat), p=PETS.find(x=>x[0]==st.petal);
+  const parts=[];
+  if(c) parts.push(`<button class="pill set" data-go="find"><span class="dot" style="width:10px;height:10px;border-radius:50%;background:${c[2]};display:inline-block;border:1px solid #fff8"></span>${esc(cap(c[1]))} ${I.close}</button>`);
+  if(h&&upto>2) parts.push(`<button class="pill set" data-go="habitat">${esc(cap(h[1]))} ${I.close}</button>`);
+  if(p&&upto>3) parts.push(`<button class="pill set" data-go="petal">${p[0]=='4'?'Zygomorphic':esc(cap(p[1]))+' petals'} ${I.close}</button>`);
+  return `<div class="trail">${parts.join('')}</div>`;
+}
+function habitatScreen(){
+  return `<div class="back" data-go="find">${I.back}Color</div>
+  ${trail(2)}
+  <div class="pad" style="margin-top:14px"><span class="eyebrow">Key it out · 2 of 3</span><div class="stepper"><i class="on"></i><i class="on"></i><i></i></div>
+  <h2 class="q" style="margin-top:12px">Where is it growing?</h2>
+  ${HABS.map(([k,l])=>`<button class="opt" data-habitat="${k}"><span class="g">${HAB_G[k]}</span><span class="l">${esc(cap(l))}</span><span class="n">${D.counts.habitat[k]}</span></button>`).join('')}
+  <button class="skip" data-toast="Would list all ${D.counts.color[1]} white flowers (key 1___)">Skip and show all ${D.counts.color[1]} white flowers</button></div><div style="height:20px"></div>`;
+}
+function petalScreen(){
+  return `<div class="back" data-go="habitat">${I.back}Habitat</div>
+  ${trail(3)}
+  <div class="pad" style="margin-top:14px"><span class="eyebrow">Key it out · 3 of 3</span><div class="stepper"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+  <h2 class="q" style="margin-top:12px">How many petals?</h2>
+  <p class="hint" style="margin:-6px 0 14px">Two-lipped or one-sided flowers are zygomorphic, whatever the count.</p>
+  <div class="petals">${PETS.map(([k,l])=>`<button class="petal" data-petal="${k}">${petalSvg(k)}<span class="l">${esc(cap(l))}</span><span class="n">${D.counts.petal[k]} plants</span></button>`).join('')}</div></div><div style="height:20px"></div>`;
+}
+const inFlower=p=>p.fl[0]&&p.fl[0]<=NOW_MONTH&&p.fl[1]>=NOW_MONTH;
+function seenNames(){return new Set(st.seen.filter(r=>!r.u).map(r=>r.n))}
+const seenMark=n=>seenNames().has(n)?'<span class="seenmark" title="Seen by you">✓ Seen</span>':'';
+function currentList(){
+  const l=st.region?D.plants.filter(p=>p.r.map(String).includes(st.region)):D.plants;
+  return [...l.filter(inFlower),...l.filter(p=>!inFlower(p))];
+}
+function resultsScreen(){
+  const list=currentList();
+  const reg=st.region?D.regions[st.region][0]:'Any region';
+  const cells=[], nowCount=list.filter(inFlower).length, seen=seenNames();
+  list.forEach((p,i)=>{
+    if(i==0&&nowCount) cells.push(`<div class="gridad month" style="padding:0">In flower now · ${nowCount}</div>`);
+    if(i==nowCount&&nowCount) cells.push(`<div class="gridad month" style="padding:8px 0 0">Other months · ${list.length-nowCount}</div>`);
+    const img=st.view=='plate'?`<div class="img plate" style="background-image:url('${PLATE(p.pl)}')"></div>`:`<div class="img" style="background-image:url('${PH(p.ph)}')"></div>`;
+    cells.push(`<button class="cell" data-sp="${esc(p.n)}">${img}<div class="nm">${esc(vName(p)||p.n)}</div><div class="la latin">${esc(p.n)}</div>${seenMark(p.n)}</button>`);
+    if(i==5&&!st.fg) cells.push('<div class="gridad"><div class="ad">Banner ad · free accounts only</div></div>');
+  });
+  const seenIn=list.filter(p=>seen.has(p.n)).length;
+  return `<div class="back" data-go="petal">${I.back}Petals</div>
+  ${trail(4)}
+  <div class="reshead" style="margin-top:14px"><div class="count">${list.length} <small>plants${st.region?` in ${esc(reg)}`:''}</small></div>${seenIn?`<div class="hint" style="margin-top:6px">You’ve seen ${seenIn} of these</div>`:''}</div>
+  <div class="filterbar"><button class="pill ${st.region?'set':''}" data-sheet="region">${st.regionFromLoc?I.pin:''}${esc(reg)} ${I.down}</button>
+    <div class="seg"><button class="${st.view=='photo'?'on':''}" data-view="photo">Photos</button><button class="${st.view=='plate'?'on':''}" data-view="plate">Plates</button></div></div>
+  <div class="grid">${cells.join('')}</div>
+  <p class="hint pad" style="margin:20px 0">Not here? <button style="color:var(--moss);font-weight:600" data-go="camera">Try a photo</button></p>`;
+}
+function regionSheet(){
+  const r=Object.entries(D.regions);
+  return `<div class="scrim" data-close="1"><div class="sheet" data-stop="1"><div class="grab"></div>
+  <h2>Where are you looking?</h2><p>Narrows these ${D.plants.length} plants to those native or naturalized there.</p>
+  <button class="locbtn" data-loc="1">${I.pin}<div><b>Use this phone’s location</b><span>${st.loc===false?'Location was refused. Change it in Settings.':'Asked once, now. Only the region is kept.'}</span></div></button>
+  <button class="radio ${!st.region?'on':''}" data-region=""><span class="c"></span><span class="l">Any region</span><span class="n">${D.plants.length}</span></button>
+  ${r.map(([k,[n,c]])=>`<button class="radio ${st.region==k?'on':''}" data-region="${k}"><span class="c"></span><span class="l">${esc(n)}</span><span class="n">${c}</span></button>`).join('')}
+  <button class="radio" data-toast="Full list of WCVP level-2 regions"><span class="c" style="border-style:dashed"></span><span class="l" style="color:var(--moss)">All regions…</span></button>
+  </div></div>`;
+}
+function cameraScreen(){
+  const a=allowance();
+  const ask=st.loc===null?`<div class="askloc"><b>Add where you took it?</b><p>The place helps name the plant and goes into your Seen record. You’re asked once. Without it, the photo still works.</p><div class="row"><button class="btn primary small" data-loc="cam">Allow</button><button class="btn ghost small" data-loc="no">Not now</button></div></div>`:'';
+  return `<div class="vf" style="background-image:url('${USERSHOT}')"><div class="shade"></div>
+    <div class="topbar"><button class="iconbtn" data-go="find">${I.close}</button>
+      <span class="left">${st.fg?'Field Guide · unlimited':(meterDots()+esc(a.label))}</span>
+      <span style="width:38px"></span></div>
+    ${ask}
+    <div class="frame"><i></i><i></i><i></i><i></i></div>
+    <div class="tip">Flower and a leaf, in focus</div>
+    <div class="ctrl"><button class="roll" style="background-image:url('${PH('Asterales/Asteraceae/Leucanthemum_vulgare/lv2.webp')}')" data-toast="Pick from photos"></button>
+      <button class="shutter" data-shoot="1" aria-label="Take photo"><i></i></button>
+      <button class="key" data-go="find" aria-label="Key it out instead">${I.key}</button></div>
+  </div>`;
+}
+function outsideScreen(){
+  const ox=D.sp['Leucanthemum vulgare'], fe=D.sp['Tanacetum parthenium'];
+  const where=st.loc?'Middle Europe':'No place';
+  return `<div class="shot" style="background-image:url('${USERSHOT}')">
+    <button class="iconbtn" style="position:absolute;top:10px;left:12px;background:rgba(255,253,248,.92);border:0" data-go="find">${I.close}</button>
+    <div class="meta"><span class="pill">Just now</span><span class="pill">${I.pin}${where}</span></div>
+    <a class="credit" href="https://commons.wikimedia.org/wiki/File:Tanacetum_corymbosum_(7334981392).jpg" target="_blank">stand-in photo · Commons</a></div>
+  <div class="namebox">
+    <span class="conf likely"><i><b></b><b></b><b></b></i>Likely</span>
+    <h1 class="latin" style="font-size:30px;margin-top:6px">Tanacetum corymbosum</h1>
+    <div class="aka">Daisy family · <span class="latin">Asteraceae</span></div>
+  </div>
+  <div class="notbook">We can name this one, but its page isn’t written yet. It’s in your Seen notebook either way.</div>
+  <div class="sechead"><h3>In the book, and close</h3></div>
+  <button class="cand" data-sp="Leucanthemum vulgare" data-cam="1"><span class="th" style="background-image:url('${PH(ox.ph[0])}')"></span><span class="tx"><span class="conf possible"><i><b></b><b></b><b></b></i>Possible</span><b>Oxeye daisy</b><span class="latin">Leucanthemum vulgare</span></span><span class="go">Full page ›</span></button>
+  <button class="cand" data-sp="Tanacetum parthenium" data-cam="1"><span class="th" style="background-image:url('${PH(fe.ph[0])}')"></span><span class="tx"><span class="conf uncertain"><i><b></b><b></b><b></b></i>Uncertain</span><b>Feverfew</b><span class="latin">Tanacetum parthenium</span></span><span class="go">Full page ›</span></button>
+  <div class="saved"><b>Saved to Seen · unconfirmed</b><div class="hint" style="margin-top:4px">Photo, 14:31, ${where}.</div>
+    <div class="row"><button class="btn primary small" data-confirm="t1">Keep this name</button><button class="btn ghost small" data-sheet="other">It’s another one</button><button class="btn ghost small" style="color:var(--madder)" data-del="t1">Delete</button></div></div>`;
+}
+function speciesScreen(){
+  const s=D.sp[st.sp]||D.sp['Leucanthemum vulgare'];
+  const slides=s.ph.map(u=>`<div class="slide" style="background-image:url('${PH(u)}')"></div>`).join('')+`<div class="slide plate" style="background-image:url('${PLATE_L(s.pl)}')"></div>`;
+  const fam=s.apg['04_Familia']||s.apg['03_Familia'], famV=(D.fams.find(f=>f.f==fam)||{}).v;
+  const months=MON.map((m,i)=>`<i class="${i+1>=s.fl[0]&&i+1<=s.fl[1]?'on':''} ${i+1==NOW_MONTH?'now':''}">${m}</i>`).join('');
+  const T=s.t, secs=[['flower','Flower'],['inflorescence','Inflorescence'],['fruit','Fruit'],['leaf','Leaf'],['stem','Stem'],['habitat','Habitat'],['toxicity','Toxicity'],['herbalism','Uses'],['trivia','Trivia']].filter(([k])=>T[k]&&T[k]!=='None');
+  const apg=Object.entries(s.apg).sort().filter(([k])=>!/Regnum|Superregnum/.test(k)).slice(0,7).map(([k,v])=>`<span>${k.replace(/^\d+_/,'')}</span> <i class="latin" style="font-style:italic">${esc(v)}</i>`).join('<br>');
+  const cam=st.fromCamera, rec=st.seen.find(r=>r.n==s.n)||null;
+  const bar=cam?(rec&&!rec.u?`<div class="seenbar ok"><span class="th" style="background-image:url('${USERSHOT}')"></span><span class="tx"><b>In Seen as ${esc(cap(s.l||s.n))}</b>Confirmed · today 14:31</span><button class="btn ghost small" style="background:none;color:#fff;border-color:#fff6" data-undo="1">Undo</button></div>`
+     :`<div class="seenbar"><span class="th" style="background-image:url('${st.inBook?PH(s.ph[1]):USERSHOT}')"></span><span class="tx"><b>Your photo · unconfirmed</b>Today 14:31 · ${st.loc?'Middle Europe':'no place'}</span><button class="btn madder" data-confirmsp="1">It’s this</button><button class="btn" style="color:#fff;border:1px solid #fff5" data-sheet="other">Not it</button></div>`):'';
+  return `<div class="gal"><div class="track" id="track">${slides}</div>
+    <div class="over"><button class="iconbtn" data-goback="1">${I.back}</button><button class="iconbtn" data-toast="Share: whatsthatflower.org page">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 8l5-5 5 5M5 14v6h14v-6"/></svg>'}</button></div>
+    <div class="ctr"><button class="pill" data-slide="0">${s.ph.length} photos</button><button class="pill" data-slide="${s.ph.length}">Plate</button></div></div>
+  <div class="namebox"><h1>${esc(cap(s.l||s.n))}</h1><div class="la latin">${esc(s.n)} <span class="au">${esc(s.a||'')}</span></div>
+    ${s.names&&s.names.length?`<div class="aka">Also ${s.names.map(esc).join(', ')}</div>`:''}</div>
+  ${(()=>{const rs=st.seen.filter(r=>!r.u&&r.n==s.n);if(cam)return '';return (rs.length?`<button class="seenby" data-tab="seen"><span class="th" style="background-image:url('${rs[0].ph}')"></span><span><b>Seen by you</b> · ${rs.length==1?'once':rs.length+' times'}, last ${esc(rs[0].when)}</span></button>`:'')+`<div class="addseen"><button class="btn ghost small" data-addseen="${esc(s.n)}">+ Add to Seen</button><span class="hint" style="margin-left:8px">From your photos. Free.</span></div>`})()}
+  <div class="facts"><div><div class="k">Height</div><div class="v">${s.h[0]}–${s.h[1]} cm</div></div><div><div class="k">Family</div><div class="v">${esc(cap(famV||fam))}</div></div>
+    <div class="wide"><div class="k">Flowers ${MONTH_NAMES[s.fl[0]-1]}–${MONTH_NAMES[s.fl[1]-1]}</div><div class="months">${months}</div></div></div>
+  <div class="jump">${secs.map(([k,l])=>`<button class="pill" data-jump="${k}">${l}</button>`).join('')}<button class="pill" data-jump="taxonomy">Taxonomy</button><button class="pill" data-jump="dist">Distribution</button><button class="pill" data-jump="sightings">Sightings</button></div>
+  <p class="lead">${esc(T.description)}</p>
+  ${secs.map(([k,l])=>`<div class="sec ${k=='toxicity'?'warn':''}" id="s-${k}"><h3>${l}</h3><p>${esc(T[k])}</p></div>`).join('')}
+  <div class="sec" id="s-taxonomy"><h3>Taxonomy <small>APG IV</small></h3><div class="taxo">${apg}</div></div>
+  <div class="sec" id="s-dist"><h3>Distribution <small>WCVP · native green, introduced brown</small></h3><img class="map" src="${MAP(s.pl)}" alt="Distribution map"></div>
+  ${(()=>{const sg=(D.sightings||{})[s.n];if(!sg)return `<div class="sec" id="s-sightings"><h3>Sightings</h3><p class="hint" style="margin:0">No public sightings yet. Share one from Seen.</p></div>`;
+    return `<div class="sec" id="s-sightings"><h3>Sightings <small>${sg.count} shared by app users</small></h3><div class="sightings">${sg.items.map(i=>{const d=new Date(i.t);return `<div style="background-image:url('${S+i.ph}')"><span>${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCFullYear()}</span></div>`}).join('')}</div><p class="hint">Country and month only. Photos under CC0, reviewed before they appear.</p></div>`})()}
+  <div class="sec"><h3>Sources</h3><div class="srcs">${(s.src||[]).slice(0,5).map(u=>`<a href="${esc(u)}" target="_blank">${esc(u.replace(/^https?:\/\/(www\.)?/,'').split('/')[0])}</a>`).join(' · ')}</div></div>
+  <div style="height:24px"></div>${bar}`;
+}
+function seenScreen(){
+  const u=st.seen.filter(r=>r.u), c=st.seen.filter(r=>!r.u);
+  const months=[...new Set(c.map(r=>r.m||'September 2026'))];
+  const card=r=>`<div class="tbc"><div class="top2"><span class="th" style="background-image:url('${r.ph}')"></span><div style="flex:1"><span class="conf likely"><i><b></b><b></b><b></b></i>Likely</span><div class="nm ${r.l?'':'lat'}">${esc(r.l?cap(r.l):r.n)}</div>${r.l?`<div class="latin" style="font-size:13px;color:var(--ink-3)">${esc(r.n)}</div>`:''}<div class="when">${esc(r.when)} · ${esc(r.where)}</div></div></div>
+    <div class="acts"><button data-confirm="${r.id}">Confirm</button><button data-sheet="other" data-rec="${r.id}">Another</button><button data-del="${r.id}">Delete</button></div></div>`;
+  const inBook=n=>D.plants.some(p=>p.n==n)||!!D.sp[n];
+  const shareBit=r=>r.sh=='shared'?`<button class="shst ok" data-shsheet="${r.id}">Shared</button>`:r.sh=='review'?`<span class="shst rev">In review</span>`:r.sh=='rejected'?`<span class="shst no">Not accepted</span>`:inBook(r.n)?`<button class="pill" data-share="${r.id}">Share</button>`:`<span class="shst">Not in the book</span>`;
+  const row=r=>`<div class="srow"><button class="th" style="background-image:url('${r.ph}')" data-sp="${esc(r.n)}"></button><button class="tx" data-sp="${esc(r.n)}"><b>${esc(r.l?cap(r.l):'')}${r.l?'':`<span class="latin" style="font-weight:420">${esc(r.n)}</span>`}</b><span>${esc(r.when)} · ${esc(r.where)}</span></button>${shareBit(r)}</div>`;
+  return `<div class="top"><div><div class="wm">Seen</div><div class="hint" style="margin:2px 0 0">${st.seen.length} finds · ${st.signed?(st.fg?'photos on all your devices':'saved to your account'):'on this phone until you sign in'}</div></div><button class="iconbtn" data-go="camera">${I.cam}</button></div>
+  ${u.length?`<div class="month" style="padding-top:4px;color:var(--madder)">To confirm · ${u.length}</div>${u.map(card).join('')}`:''}
+  ${months.map(m=>`<div class="month">${m}</div>${c.filter(r=>(r.m||'September 2026')==m).map(row).join('')}`).join('')}
+  ${st.fg?'':`<div class="upsell"><b>Keep your photos on every phone</b><p>Your finds already follow your account. Field Guide adds the photos, including names outside the book.</p><button class="btn" data-go="fieldguide">See Field Guide</button></div>`}
+  <div style="height:10px"></div>`;
+}
+function bookScreen(){
+  const seg=st.bookSeg;
+  let body='';
+  if(seg=='fam') body=D.fams.slice(0,30).map(f=>`<button class="srow" data-toast="Family page: ${esc(f.f)}"><span class="th fam" style="background-image:url('${FAMI(f.f)}')"></span><span class="tx"><b>${esc(cap(f.v||f.f))}</b><span class="latin">${esc(f.f)}</span></span><span class="k">${f.k}</span></button>`).join('');
+  if(seg=='gen') body=D.genera.slice(0,30).map(g=>`<button class="srow" data-toast="Genus page: ${esc(g.g)}"><span class="th fam" style="background-image:url('${FAMI(g.f)}')"></span><span class="tx"><b>${esc(cap(g.v||g.g))}</b><span class="latin">${esc(g.g)}</span></span><span class="k">${g.k}</span></button>`).join('');
+  if(seg=='lists') body=`<div class="lists">${allLists().map(l=>`<button class="lcard ${l.isNew?'new':''}" data-list="${l.key}"><div class="thumbs">${l.items.slice(0,4).map(e=>`<i style="background-image:url('${PH(e.ph)}')"></i>`).join('')}</div><b>${esc(l.t)}</b><span>${l.isNew?`${l.items.length} plants · latest ${fmtDate(D.lists_new[0].d)}`:isYearList(l)?`${l.items.length} years · ${l.items[l.items.length-1].y}–${l.items[0].y}`:`${l.items.length} plants`}</span></button>`).join('')}</div>`;
+  return `<div class="top"><div><div class="wm">Book</div><div class="hint" style="margin:2px 0 0">${fmt(D.total)} plants · ${D.fams.length} families</div></div><button class="iconbtn" data-go="search">${I.search}</button></div>
+  <div class="segwide"><button class="${seg=='fam'?'on':''}" data-seg="fam">Families</button><button class="${seg=='gen'?'on':''}" data-seg="gen">Genera</button><button class="${seg=='lists'?'on':''}" data-seg="lists">Lists</button></div>
+  ${body}${st.fg?'':'<div class="ad">Banner ad · free accounts only</div>'}`;
+}
+function limitSheet(){
+  const ten=st.used>=10||st.ads>=5;
+  return `<div class="scrim" data-close="1"><div class="sheet" data-stop="1"><div class="grab"></div>
+    <div class="dots" style="color:var(--moss);margin-bottom:10px">${'<i></i>'.repeat(5)}${ten?'<i class="extra"></i>'.repeat(5):''}</div>
+    <h2>${ten?'All ten names are used this month':'This month’s five names are used'}</h2>
+    <p>${ten?'Names come back on 1 October. The key and the book stay open.':'You can still get a name today.'}</p>
+    ${ten?'':`<button class="choice" data-ad="1"><span class="ic" style="background:var(--paper-2);color:var(--ink)">${I.ad}</span><span><b>Watch a short ad</b><span>One more name. ${5-st.ads} of 5 extra left this month.</span></span></button>`}
+    <button class="choice fg" data-go="fieldguide"><span class="ic" style="background:var(--moss);color:#fff">${I.leaf}</span><span><b>Field Guide · 7 days free</b><span>Unlimited names, no ads, Seen on all devices, the book offline.</span></span></button>
+    <button class="choice" data-go="find"><span class="ic" style="background:var(--paper-2);color:var(--madder)">${I.key}</span><span><b>Key it out</b><span>Color, habitat, petals. Free, always.</span></span></button>
+  </div></div>`;
+}
+function shareSheet(){
+  const r=st.seen.find(x=>x.id==st.shareId); if(!r) return '';
+  return `<div class="scrim" data-close="1"><div class="sheet" data-stop="1"><div class="grab"></div>
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px"><span class="th" style="width:64px;height:64px;border-radius:10px;background:#ccc url('${r.ph}') center/cover;flex:none"></span><div><h2 style="margin:0">Share ${esc(cap(r.l||r.n))}</h2><div class="latin" style="color:var(--ink-3)">${esc(r.n)} · ${esc(r.when)}</div></div></div>
+    <ul class="facts-list"><li>It’s reviewed before it appears as a Sighting on the species page, here and on the website.</li><li>The place is shown as country and month, not a pin.</li><li>Your note stays private.</li><li>You can withdraw it at any time.</li></ul>
+    <button class="consent ${st.consent?'on':''}" data-consent="1"><span class="box">${st.consent?'✓':''}</span><span>I publish this photo under CC0 (public domain).</span></button>
+    <button class="btn primary" style="width:100%;${st.consent?'':'opacity:.45;pointer-events:none'}" data-sendshare="${r.id}">Send for review</button></div></div>`;
+}
+function withdrawSheet(){
+  const r=st.seen.find(x=>x.id==st.shareId); if(!r) return '';
+  return `<div class="scrim" data-close="1"><div class="sheet" data-stop="1"><div class="grab"></div>
+    <h2>${esc(cap(r.l||r.n))} is a Sighting</h2><p>Shared under CC0 and shown on the species page. Withdrawing removes it from Sightings; it stays in your Seen.</p>
+    <button class="btn ghost" style="width:100%;color:var(--madder)" data-withdraw="${r.id}">Withdraw from Sightings</button></div></div>`;
+}
+function notPlantSheet(){
+  const a=allowance();
+  return `<div class="scrim" data-close="1"><div class="sheet" data-stop="1"><div class="grab"></div>
+    <h2>That doesn’t look like a plant</h2>
+    <p>Try again closer, with a flower and a leaf in focus and the plant filling the frame. This photo didn’t count${st.fg?'':`: ${esc(a.label.toLowerCase())}`}.</p>
+    <button class="btn primary" style="width:100%" data-go="camera">Try again</button>
+    <button class="btn" style="width:100%;color:var(--moss);margin-top:4px" data-go="find">Key it out instead</button></div></div>`;
+}
+function otherSheet(){
+  const c=[['Leucanthemum vulgare','Oxeye daisy','possible'],['Tanacetum parthenium','Feverfew','uncertain']];
+  return `<div class="scrim" data-close="1"><div class="sheet" data-stop="1"><div class="grab"></div>
+    <h2>Which one is it?</h2><p>Plant.id’s other candidates for this photo.</p>
+    ${c.map(([n,l,k])=>`<button class="cand" style="width:100%;margin:0 0 10px" data-pick="${n}"><span class="th" style="background-image:url('${PH(D.sp[n].ph[0])}')"></span><span class="tx"><span class="conf ${k}"><i><b></b><b></b><b></b></i>${cap(k)}</span><b>${l}</b><span class="latin">${n}</span></span><span class="go">Choose</span></button>`).join('')}
+    <button class="btn ghost" style="width:100%" data-go="search">Search the book instead</button></div></div>`;
+}
+function fgScreen(){
+  return `<div class="fg"><div class="fghero" style="background-image:url('${PLATE_L('Asterales/Asteraceae/Leucanthemum_vulgare/Leucanthemum_vulgare.webp')}')"><div class="over" style="position:absolute;top:10px;left:12px;z-index:2"><button class="iconbtn" data-goback="1">${I.back}</button></div></div>
+  <h1>Field Guide</h1>
+  <p class="sub">For people who carry the book outdoors. Everything that is free stays free.</p>
+  <div class="cols"><div><h4>Free</h4><ul><li>Search</li><li>The three-step key</li><li>Every species page</li><li>Seen on this phone</li><li>5 names a month, plus up to 5 from ads</li></ul></div>
+  <div class="add"><h4>Field Guide adds</h4><ul><li>Unlimited names from photos</li><li>No ads</li><li>Seen on all your devices, with photos</li><li>The book offline, one region at a time</li></ul></div></div>
+  <div class="plans"><button class="plan on" data-toast="Store sheet would open"><span class="radio on" style="border:0;padding:0;width:auto"><span class="c"></span></span><span class="l"><b>Yearly</b><span>7 days free, then yearly</span></span><span class="p">Store price</span></button>
+    <button class="plan" data-toast="Store sheet would open"><span class="radio" style="border:0;padding:0;width:auto"><span class="c"></span></span><span class="l"><b>Monthly</b><span>7 days free, then monthly</span></span><span class="p">Store price</span></button>
+    <button class="btn primary" style="width:100%;margin-top:6px" data-fg="1">Start 7 days free</button>
+    <button class="btn" style="width:100%;color:var(--moss)" data-toast="Restoring from the store…">Restore purchases</button></div>
+  <p class="fine">Already bought Remove ads, Photo search, Offline or the old paid app? Restore keeps what you paid for. A photo-storage plan counts as Field Guide.</p></div>`;
+}
+function meScreen(){
+  const used=Math.min(st.used,5), ex=Math.max(0,st.used-5);
+  const allowanceCard=st.fg?`<div class="card"><b>Field Guide</b><div class="k">Unlimited names · no ads · Seen synced</div></div>`:
+    st.signed?`<div class="card"><div style="display:flex;justify-content:space-between"><b>Names this month</b><span class="k">Resets 1 Oct</span></div><div class="bar"><i style="width:${used*10}%"></i><i class="x" style="width:${ex*10}%"></i></div><div class="k">${used} of 5 included used${ex?`, ${ex} from ads`:''}. Up to 5 more from ads.</div></div>`:
+    `<div class="card"><b>One free name before you sign in</b><div class="k" style="margin:4px 0 10px">Sign in for 5 names every month. Your first find and what you’ve used come with you. Reinstalling doesn’t reset it.</div><button class="btn primary small" data-sign="1">Sign in</button></div>`;
+  return `<div class="back" data-goback="1">${I.back}Back</div>
+  ${st.signed?`<div class="acct"><div class="avatar">A</div><div><b style="font-size:17px">Your account</b><div class="hint" style="margin:0">Signed in with Google</div></div></div>`:''}
+  ${allowanceCard}
+  <div class="menu">
+    ${st.fg?'':`<button class="srow" data-go="fieldguide">${I.leaf}<span class="tx"><b>Field Guide</b><span>7 days free</span></span></button>`}
+    <button class="srow" data-toast="Restoring from the store…">${I.restore}<span class="tx"><b>Restore purchases</b><span>Remove ads, Photo search, Offline, old paid app</span></span></button>
+    <button class="srow" data-toast="Language list">${I.globe}<span class="tx"><b>Language</b><span>English</span></span></button>
+    ${st.fg?`<button class="srow" data-toast="Other regions: Northern Europe, Southeastern Europe…">${I.cloud}<span class="tx"><b>Offline book</b><span>Middle Europe downloaded · add a region</span></span></button>`:''}
+    ${st.signed?`<button class="srow" data-sign="0">${I.person}<span class="tx"><b>Sign out</b><span>Seen stays on this phone</span></span></button>`:''}
+  </div>`;
+}
+
+/* ---------- render ---------- */
+const TABS=[['find','Find',I.find],['book','Book',I.book],['seen','Seen',I.seen]];
+function render(){
+  const scr=st.screen, sc=$('screen');
+  const map={find:findScreen,search:searchScreen,habitat:habitatScreen,petal:petalScreen,results:resultsScreen,camera:cameraScreen,outside:outsideScreen,species:speciesScreen,seen:seenScreen,book:bookScreen,list:listScreen,fieldguide:fgScreen,me:meScreen};
+  sc.innerHTML=(map[scr]||findScreen)();
+  const dark=scr=='camera';
+  $('status').className='status'+(dark?' dark':'');
+  const showTabs=!['camera','outside','species','fieldguide','search'].includes(scr);
+  const u=st.seen.filter(r=>r.u).length;
+  $('tabs').style.display=showTabs?'flex':'none';
+  $('tabs').innerHTML=TABS.map(([k,l,ic])=>`<button class="${st.tab==k?'on':''}" data-tab="${k}">${ic}${k=='seen'&&u?`<span class="badge">${u}</span>`:''}<span>${l}</span></button>`).join('');
+  const ov=$('overlay');
+  ov.innerHTML=st.sheet=='region'?regionSheet():st.sheet=='limit'?limitSheet():st.sheet=='other'?otherSheet():st.sheet=='notplant'?notPlantSheet():st.sheet=='share'?shareSheet():st.sheet=='withdraw'?withdrawSheet():'';
+  const idx=st.sheet=='region'?'regionSheet':st.sheet=='limit'?'limit':st.sheet=='notplant'?'notplant':st.sheet=='share'?'share':(scr=='species'&&st.fromCamera)?'speciesCam':scr;
+  $('index').innerHTML=SCREENS.map(([k,t,d])=>`<li><button class="${idx==k?'on':''}" data-demo="${k}"><b>${t}</b><span>${d}</span></button></li>`).join('');
+  if(scr=='search'){const q=$('q');q.focus();q.setSelectionRange(q.value.length,q.value.length);q.oninput=e=>{st.q=e.target.value;render()}}
+  $('tDe').checked=st.listLang=='de';
+  $('tSigned').checked=st.signed;$('tBook').checked=st.inBook;$('tTen').checked=st.used>=10;$('tFG').checked=st.fg;
+}
+function go(s,opts={}){
+  if(!['me','fieldguide','species','search'].includes(st.screen)) st.prev=st.screen;
+  st.screen=s;st.sheet=null;
+  if(['find','habitat','petal','results','search','camera','outside'].includes(s)) st.tab='find';
+  if(s=='seen'||s=='book') st.tab=s;
+  Object.assign(st,opts);
+  render();$('screen').scrollTop=0;
+}
+function shoot(){
+  if(!st.fg){
+    const cap=st.signed?5+st.ads:1;
+    if(st.used>=cap){st.sheet='limit';render();return}
+  }
+  const n=document.createElement('div');n.className='naming';n.innerHTML='<div><div class="spin"></div>Naming…</div>';
+  $('screen').appendChild(n);
+  setTimeout(()=>{
+    if(st.notPlant){n.remove();st.sheet='notplant';render();return}
+    st.used++;
+    if(st.inBook){
+      const r=st.seen.find(x=>x.id=='t2');if(r){r.u=true}
+      go('species',{sp:'Leucanthemum vulgare',fromCamera:true});
+    } else {
+      const r=st.seen.find(x=>x.id=='t1');if(r){r.u=true;r.when='Today, 14:31';r.where=st.loc?'Middle Europe':'No place'}
+      go('outside');
+    }
+  },1100);
+}
+function demo(k){
+  st.sheet=null;
+  const key=()=>{st.color='1';st.habitat='1';st.petal='3'};
+  switch(k){
+    case 'find':go('find');break;
+    case 'search':st.q='dais';go('search');break;
+    case 'habitat':st.color='1';go('habitat');break;
+    case 'petal':st.color='1';st.habitat='1';go('petal');break;
+    case 'results':key();go('results');break;
+    case 'regionSheet':key();go('results');st.sheet='region';render();break;
+    case 'camera':st.loc=null;if(!st.fg&&st.signed&&st.used>=5+st.ads)st.used=1;go('camera');break;
+    case 'notplant':st.loc=true;if(!st.fg&&st.signed&&st.used>=5+st.ads)st.used=1;go('camera');st.sheet='notplant';render();break;
+    case 'outside':st.loc=true;st.inBook=false;go('outside');break;
+    case 'speciesCam':st.loc=true;st.seen.find(x=>x.id=='t2').u=true;go('species',{sp:'Leucanthemum vulgare',fromCamera:true,inBook:true});break;
+    case 'species':go('species',{sp:'Leucanthemum vulgare',fromCamera:false});break;
+    case 'seen':go('seen');break;
+    case 'share':{const r=st.seen.find(x=>x.id=='c2');r.sh=undefined;go('seen');st.shareId='c2';st.consent=false;st.sheet='share';render();break}
+    case 'book':go('book');break;
+    case 'list':{const ls=allLists();const l=ls.find(isYearList)||ls[1];st.listBack='book';st.bookSeg='lists';st.tab='book';go('list',{list:l.key});break}
+    case 'limit':st.fg=false;st.signed=true;if(st.used<5)st.used=5;if(st.used<10)st.ads=0;go('camera');st.loc=true;st.sheet='limit';render();break;
+    case 'fieldguide':go('fieldguide');break;
+    case 'me':go('me');break;
+  }
+}
+
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-demo],[data-go],[data-tab],[data-color],[data-habitat],[data-petal],[data-sp],[data-sheet],[data-region],[data-view],[data-loc],[data-shoot],[data-confirm],[data-confirmsp],[data-del],[data-pick],[data-undo],[data-seg],[data-ad],[data-fg],[data-sign],[data-slide],[data-jump],[data-goback],[data-seen],[data-share],[data-shsheet],[data-consent],[data-sendshare],[data-withdraw],[data-addseen],[data-list],[data-booklists],[data-toast],[data-close]');
+  if(!t) return;
+  if(t.dataset.close&&e.target.closest('[data-stop]')) return;
+  const d=t.dataset;
+  if(d.demo) return demo(d.demo);
+  if(d.close){st.sheet=null;render();return}
+  if(d.goback) return go(st.prev||'find',{fromCamera:st.screen=='species'?false:st.fromCamera});
+  if(d.go){ if(d.go=='find'){st.color=null;st.habitat=null;st.petal=null} return go(d.go) }
+  if(d.tab) return go(d.tab);
+  if(d.color){ if(d.color!=='1') return toast('The prototype follows white → meadows → more than 5.'); st.color='1';return go('habitat') }
+  if(d.habitat){ if(d.habitat!=='1') return toast('The prototype follows meadows or grasslands.'); st.habitat='1';return go('petal') }
+  if(d.petal){ if(d.petal!=='3') return toast('The prototype follows more than 5 petals (key 1_1_3_).'); st.petal='3';st.region=st.loc?'11':null;st.regionFromLoc=!!st.loc;return go('results') }
+  if(d.sp){ if(!D.sp[d.sp]) return toast(`${d.sp}: full page in the app. Try oxeye daisy, daisy, yarrow, chamomile.`); return go('species',{sp:d.sp,fromCamera:!!d.cam}) }
+  if(d.seen){ const r=st.seen.find(x=>x.id==d.seen); if(r.u) return go('seen'); return D.sp[r.n]?go('species',{sp:r.n,fromCamera:false}):toast(r.n) }
+  if(d.sheet){st.sheet=d.sheet;return render()}
+  if(d.region!==undefined){st.region=d.region||null;st.regionFromLoc=false;st.sheet=null;render();return}
+  if(d.view){st.view=d.view;return render()}
+  if(d.loc){
+    if(d.loc=='cam'){st.loc=true;return render()}
+    if(d.loc=='no'){st.loc=false;return render()}
+    if(st.loc===false) return toast('Location is off for this app. Change it in Settings.');
+    st.loc=true;st.region='11';st.regionFromLoc=true;st.sheet=null;render();return toast('Your location is in Middle Europe.');
+  }
+  if(d.shoot) return shoot();
+  if(d.confirm){const r=st.seen.find(x=>x.id==d.confirm);if(r){r.u=false;r.m='September 2026';r.when=r.when.replace(/^Today, |^Yesterday, /,m=>m.startsWith('T')?'27 Sep · ':'26 Sep · ')}toast('Confirmed. In Seen for September.');return st.screen=='outside'?go('seen'):render()}
+  if(d.confirmsp){const r=st.seen.find(x=>x.n==st.sp);if(r){r.u=false;r.m='September 2026'}toast('Confirmed.');return render()}
+  if(d.undo){const r=st.seen.find(x=>x.n==st.sp);if(r)r.u=true;return render()}
+  if(d.del){st.seen=st.seen.filter(x=>x.id!=d.del);toast('Deleted from Seen.');return st.screen=='outside'?go('seen'):render()}
+  if(d.pick){const r=st.seen.find(x=>x.u);if(r){const s=D.sp[d.pick];r.n=d.pick;r.l=s.l;r.u=false;r.m='September 2026'}st.sheet=null;toast('Changed and confirmed.');return go('species',{sp:d.pick,fromCamera:false})}
+  if(d.seg){st.bookSeg=d.seg;return render()}
+  if(d.share){st.shareId=d.share;st.consent=false;st.sheet='share';return render()}
+  if(d.shsheet){st.shareId=d.shsheet;st.sheet='withdraw';return render()}
+  if(d.consent){st.consent=!st.consent;return render()}
+  if(d.sendshare){const r=st.seen.find(x=>x.id==d.sendshare);r.sh='review';st.sheet=null;render();return toast('Sent for review. You’ll see it in Seen.')}
+  if(d.withdraw){const r=st.seen.find(x=>x.id==d.withdraw);r.sh=undefined;st.sheet=null;render();return toast('Withdrawn from Sightings.')}
+  if(d.addseen){const s=D.sp[d.addseen];st.seen.unshift({id:'m'+Date.now(),n:s.n,l:s.l,ph:PH(s.ph[1]||s.ph[0]),when:'27 Sep',where:'Middle Europe (from photo)',m:'September 2026',src:'manual'});render();return toast('Added to Seen. Date and place from the photo.')}
+  if(d.list){st.listBack=st.screen=='book'?'book':'find';return go('list',{list:d.list})}
+  if(d.booklists){st.bookSeg='lists';return go('book')}
+  if(d.ad){st.ads++;st.sheet=null;render();toast('Ad verified by the store. One more name.');return}
+  if(d.fg){st.fg=true;toast('Trial started. 7 days free.');return go(st.prev||'find')}
+  if(d.sign){st.signed=d.sign=='1';if(st.signed&&st.used<1)st.used=1;return render()}
+  if(d.slide){const tr=$('track');tr.scrollTo({left:tr.clientWidth*+d.slide,behavior:'smooth'});return}
+  if(d.jump){const el=$('s-'+d.jump);if(el)$('screen').scrollTo({top:el.offsetTop-56,behavior:'smooth'});return}
+  if(d.toast) return toast(d.toast);
+});
+$('tSigned').onchange=e=>{st.signed=e.target.checked;if(!st.signed){st.used=0;st.ads=0}else st.used=1;render()};
+$('tBook').onchange=e=>{st.inBook=e.target.checked;render()};
+$('tTen').onchange=e=>{if(e.target.checked){st.used=10;st.ads=5;st.signed=true;st.fg=false}else{st.used=1;st.ads=0}render()};
+$('tFG').onchange=e=>{st.fg=e.target.checked;render()};
+$('tNot').onchange=e=>{st.notPlant=e.target.checked};
+$('tDe').onchange=e=>{st.listLang=e.target.checked?'de':'en';if(st.screen=='list')st.list=(allLists().find(isYearList)||allLists()[0]).key;render()};
+render();
 </script>
 </body>
 </html>
