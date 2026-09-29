@@ -150,8 +150,8 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .reshead{padding:0 20px}
 .count{font-family:var(--serif);font-weight:520;font-size:30px;letter-spacing:-.02em;line-height:1}
 .count small{font-family:var(--sans);font-size:14px;font-weight:400;color:var(--ink-3);letter-spacing:0}
-.filterbar{display:flex;gap:8px;align-items:center;padding:12px 20px;position:sticky;top:0;background:var(--paper);z-index:5;border-bottom:1px solid transparent}
-.seg{display:inline-flex;border:1px solid var(--rule);border-radius:15px;overflow:hidden;margin-left:auto;background:var(--cream)}
+.filterbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 20px;position:sticky;top:0;background:var(--paper);z-index:5;border-bottom:1px solid transparent}
+.seg{display:inline-flex;flex-shrink:0;border:1px solid var(--rule);border-radius:15px;overflow:hidden;margin-left:auto;background:var(--cream)}
 .seg button{height:28px;padding:0 11px;font-size:13px;font-weight:500;color:var(--ink-3)}
 .seg button.on{background:var(--ink);color:#fff}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px;padding:4px 20px 0}
@@ -168,6 +168,8 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .seenby .th{width:36px;height:36px;border-radius:8px;background:#ccc center/cover;flex:none}
 .seenby b{color:var(--moss)}
 .gridad .ad{margin:0}
+.monthrow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.monthrow .seg{margin:0;text-transform:none;letter-spacing:0}
 
 /* Sheet */
 .scrim{position:absolute;inset:0;background:rgba(26,22,18,.42);z-index:30;display:flex;align-items:flex-end}
@@ -647,8 +649,9 @@ function resultsScreen(){
   const list=currentList();
   const reg=st.region?D.regions[st.region][0]:'Any region';
   const cells=[], nowCount=list.filter(inFlower).length, seen=seenNames();
+  const seg=`<div class="seg"><button class="${st.view=='photo'?'on':''}" data-view="photo">Photos</button><button class="${st.view=='plate'?'on':''}" data-view="plate">Plates</button></div>`;
   list.forEach((p,i)=>{
-    if(i==0&&nowCount) cells.push(`<div class="gridad month" style="padding:0">In flower now · ${nowCount}</div>`);
+    if(i==0) cells.push(`<div class="gridad month monthrow" style="padding:0"><span>${nowCount?`In flower now · ${nowCount}`:''}</span>${seg}</div>`);
     if(i==nowCount&&nowCount) cells.push(`<div class="gridad month" style="padding:8px 0 0">Other months · ${list.length-nowCount}</div>`);
     const img=st.view=='plate'?`<div class="img plate" style="background-image:url('${PLATE(p.pl)}')"></div>`:`<div class="img" style="background-image:url('${PH(p.ph)}')"></div>`;
     cells.push(`<button class="cell" data-sp="${esc(p.n)}">${img}<div class="nm">${esc(vName(p)||p.n)}</div><div class="la latin">${esc(p.n)}</div>${seenMark(p.n)}</button>`);
@@ -657,10 +660,9 @@ function resultsScreen(){
   const seenIn=list.filter(p=>seen.has(p.n)).length;
   return `<div class="back" data-go="petal">${I.back}Petals</div>
   ${trail(4)}
-  <div class="reshead" style="margin-top:14px"><div class="count">${list.length} <small>plants${st.region?` in ${esc(reg)}`:''}</small></div>${seenIn?`<div class="hint" style="margin-top:6px">You’ve seen ${seenIn} of these</div>`:''}</div>
+  <div class="reshead" style="margin-top:14px"><div class="count">${list.length} <small>plants${st.region?` in ${esc(reg)}`:''}${seenIn?` · you’ve seen ${seenIn}`:''}</small></div></div>
   <div class="filterbar"><button class="pill ${st.region?'set':''}" data-sheet="region">${st.regionFromLoc?I.pin:''}${esc(reg)} ${I.down}</button>
-    <button class="pill ${st.wild?'set':''}" data-wild="1">${st.wild?'Wild only':'Wild and garden'}</button>
-    <div class="seg"><button class="${st.view=='photo'?'on':''}" data-view="photo">Photos</button><button class="${st.view=='plate'?'on':''}" data-view="plate">Plates</button></div></div>
+    <button class="pill ${st.wild?'set':''}" data-wild="1">${st.wild?'Wild only':'Wild and garden'}</button></div>
   <div class="grid">${cells.join('')}</div>
   <p class="hint pad" style="margin:20px 0">Not here? <button style="color:var(--moss);font-weight:600" data-go="camera">Try a photo</button></p>`;
 }

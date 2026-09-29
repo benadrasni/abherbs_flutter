@@ -1,9 +1,11 @@
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
+import 'package:abherbs_flutter/guide/guide_results.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 class GuideListCover {
   final String title;
@@ -41,6 +43,24 @@ class GuideFind {
 
 const guideHabitatRouteName = 'GuideHabitat';
 const guidePetalRouteName = 'GuidePetal';
+const guideResultsRouteName = 'GuideResults';
+
+bool guideIsKeyRoute(String? name) {
+  return name == guideHabitatRouteName ||
+      name == guidePetalRouteName ||
+      name == guideResultsRouteName;
+}
+
+void popGuideKeyToFind(BuildContext context) {
+  Navigator.popUntil(context, (route) => !guideIsKeyRoute(route.settings.name));
+}
+
+void popGuideKeyToHabitat(BuildContext context) {
+  Navigator.popUntil(context, (route) {
+    final name = route.settings.name;
+    return name != guidePetalRouteName && name != guideResultsRouteName;
+  });
+}
 
 /// v3 habitat codes, in the order the key shows them.
 const guideHabitatIds = ['4', '1', '7', '8', '3', '9', '5', '10'];
@@ -110,6 +130,144 @@ Future<Map<String, int>> loadPetalCounts(
           )] ??
           0,
   };
+}
+
+Future<List<GuideResultPlant>> loadGuideResults({
+  required String colorId,
+  String? habitatId,
+  required String petalId,
+  String? regionId,
+  required String languageCode,
+}) async {
+  final key = guideFilterKey(
+    colorId: colorId,
+    habitatId: habitatId,
+    petalId: petalId,
+    regionId: regionId,
+  );
+  final event = await listsV3Reference.child(key).once();
+  final ids = guideResultIds(event.snapshot.value);
+  if (ids.isEmpty) return [];
+  final lang = getLanguageCode(languageCode);
+  final plants = await Future.wait(
+    ids.map((id) => _guideResultPlant(id, lang)),
+  );
+  return plants.whereType<GuideResultPlant>().toList();
+}
+
+Future<GuideResultPlant?> _guideResultPlant(String id, String language) async {
+  try {
+    final event = await headersV3Reference.child(id).once();
+    final value = event.snapshot.value;
+    if (value is! Map) return null;
+    final name = value[firebaseAttributeName];
+    if (name is! String || name.isEmpty) return null;
+    final label = await _resultLabel(language, name);
+    final plate = await _resultPlate(name);
+    return readGuideResultHeader(id, value, label: label, platePath: plate);
+  } catch (error) {
+    debugPrint('guide result $id: $error');
+    return null;
+  }
+}
+
+Future<String?> _resultLabel(String language, String name) async {
+  final cached = translationCache[name];
+  if (cached != null && cached.isNotEmpty) return cached;
+  try {
+    final event = await translationsReference
+        .child(language)
+        .child(name)
+        .child(firebaseAttributeLabel)
+        .once();
+    final value = event.snapshot.value;
+    if (value is String && value.isNotEmpty) {
+      translationCache[name] = value;
+      return value;
+    }
+  } catch (error) {
+    debugPrint('guide result label $name: $error');
+  }
+  return null;
+}
+
+Future<String?> _resultPlate(String name) async {
+  try {
+    final event =
+        await plantsReference.child(name).child('illustrationUrl').once();
+    final value = event.snapshot.value;
+    if (value is String && value.isNotEmpty) return value;
+  } catch (error) {
+    debugPrint('guide result plate $name: $error');
+  }
+  return null;
+}
+
+Future<Set<String>> loadGuideSeenNames() async {
+  final user = Auth.appUser;
+  if (user == null) return {};
+  try {
+    final event = await privateObservationsReference
+        .child(user.uid)
+        .child(firebaseObservationsByPlant)
+        .once();
+    final value = event.snapshot.value;
+    if (value is! Map) return {};
+    return value.keys.map((key) => key.toString()).toSet();
+  } catch (error) {
+    debugPrint('guide seen names: $error');
+    return {};
+  }
+}
+
+Future<Map<String, int>> loadGuideRegionCounts({
+  required String colorId,
+  String? habitatId,
+  required String petalId,
+}) async {
+  final ids = ['', ...guideAllRegionIds];
+  final entries = await Future.wait(ids.map((id) async {
+    final key = guideFilterKey(
+      colorId: colorId,
+      habitatId: habitatId,
+      petalId: petalId,
+      regionId: id.isEmpty ? null : id,
+    );
+    try {
+      final event = await countsV3Reference.child(key).once();
+      return MapEntry(id, guideResultInt(event.snapshot.value));
+    } catch (error) {
+      debugPrint('guide region count $key: $error');
+      return MapEntry(id, 0);
+    }
+  }));
+  return Map.fromEntries(entries);
+}
+
+Future<GuideResultPrefs> loadGuideResultPrefs() async {
+  final region = await Prefs.getStringF(keyGuideRegion, '');
+  final fromLocation = await Prefs.getBoolF(keyGuideRegionFromLocation, false);
+  final wildOnly = await Prefs.getBoolF(keyGuideWildOnly, false);
+  final refused = await Prefs.getBoolF(keyGuideLocationRefused, false);
+  final regionId = region.isEmpty ? null : region;
+  return GuideResultPrefs(
+    regionId: regionId,
+    fromLocation: fromLocation && regionId != null,
+    wildOnly: wildOnly,
+    locationRefused: refused,
+  );
+}
+
+Future<void> saveGuideResultPrefs(GuideResultPrefs prefs) async {
+  final regionId = prefs.regionId;
+  if (regionId == null || regionId.isEmpty) {
+    await Prefs.remove(keyGuideRegion);
+  } else {
+    await Prefs.setString(keyGuideRegion, regionId);
+  }
+  await Prefs.setBool(keyGuideRegionFromLocation, prefs.fromLocation);
+  await Prefs.setBool(keyGuideWildOnly, prefs.wildOnly);
+  await Prefs.setBool(keyGuideLocationRefused, prefs.locationRefused);
 }
 
 Future<Map<String, int>> _loadV3Counts(List<String> keys) async {

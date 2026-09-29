@@ -22,6 +22,12 @@ String guidePetalName(S strings, String id) {
   }
 }
 
+String guidePetalTrailLabel(S strings, String id) {
+  final name = guideCap(guidePetalName(strings, id));
+  if (id == '4') return name;
+  return strings.guide_petal_trail(name);
+}
+
 class GuidePetalPage extends StatefulWidget {
   final String colorId;
   final String? habitatId;
@@ -99,10 +105,7 @@ class _GuidePetalPageState extends State<GuidePetalPage> {
   }
 
   void _backToFind() {
-    Navigator.popUntil(context, (route) {
-      final name = route.settings.name;
-      return name != guideHabitatRouteName && name != guidePetalRouteName;
-    });
+    popGuideKeyToFind(context);
   }
 
   @override
@@ -239,10 +242,12 @@ class _PetalRow extends StatelessWidget {
       child: InkWell(
         onTap: () => onPick(id),
         child: Stack(
+          alignment: Alignment.topCenter,
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(8, 16, 8, 12),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   GuidePetalGlyph(id: id),
                   const SizedBox(height: 6),

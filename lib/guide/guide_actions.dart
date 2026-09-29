@@ -1,7 +1,9 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
+import 'package:abherbs_flutter/guide/guide_location.dart';
 import 'package:abherbs_flutter/guide/habitat_page.dart';
 import 'package:abherbs_flutter/guide/petal_page.dart';
+import 'package:abherbs_flutter/guide/results_page.dart';
 import 'package:abherbs_flutter/guide/search_page.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
@@ -87,6 +89,50 @@ void openGuidePetals(
       builder: (context) => GuidePetalPage(
         colorId: colorId,
         habitatId: habitatId,
+        onContinue: (petalId) => openGuideResults(
+          context,
+          colorId: colorId,
+          habitatId: habitatId,
+          petalId: petalId,
+        ),
+      ),
+    ),
+  );
+}
+
+void openGuideResults(
+  BuildContext context, {
+  required String colorId,
+  String? habitatId,
+  required String petalId,
+}) {
+  final language = Localizations.localeOf(context).languageCode;
+  Navigator.push(
+    context,
+    MaterialPageRoute<void>(
+      settings: const RouteSettings(name: guideResultsRouteName),
+      builder: (context) => GuideResultsPage(
+        colorId: colorId,
+        habitatId: habitatId,
+        petalId: petalId,
+        loadResults: (regionId) => loadGuideResults(
+          colorId: colorId,
+          habitatId: habitatId,
+          petalId: petalId,
+          regionId: regionId,
+          languageCode: language,
+        ),
+        loadPrefs: loadGuideResultPrefs,
+        savePrefs: saveGuideResultPrefs,
+        loadSeen: loadGuideSeenNames,
+        loadRegionCounts: () => loadGuideRegionCounts(
+          colorId: colorId,
+          habitatId: habitatId,
+          petalId: petalId,
+        ),
+        locate: locateGuideRegion,
+        onOpenPlant: openGuidePlant,
+        onTryPhoto: openGuideCamera,
       ),
     ),
   );

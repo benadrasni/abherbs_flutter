@@ -47,6 +47,8 @@ dependencies:
   image_picker: 1.2.3
   exif: 3.3.0
   permission_handler: 13.0.2
+  geolocator: 14.0.3
+  geocoding: 5.0.0
   datetime_picker_formfield_new: 2.1.0
   connectivity_plus: 7.3.1
   photo_view: 0.15.0

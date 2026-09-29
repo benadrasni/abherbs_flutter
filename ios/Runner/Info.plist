@@ -48,7 +48,7 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Permission needed to save current location to the observation</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Permission needed to save current location to the observation</string>
+	<string>Permission needed to save a find’s place, and to set the floristic region on a plant list. The list keeps only the region.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Features "Search by photo" and "Observation" need permission to access photo library</string>
 	<key>NSUserTrackingUsageDescription</key>
