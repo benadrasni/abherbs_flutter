@@ -30,6 +30,7 @@ const languages = {
   "sl_SI": "Slovenščina",
   "sr_RS": "Српски",
   "sv_SE": "Svenska",
+  "tr_TR": "Türkçe",
   "fi_FI": "Suomi",
   "uk_UA": "Українська",
   "zh_TW": "中文"

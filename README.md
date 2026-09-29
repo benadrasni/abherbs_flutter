@@ -28,7 +28,7 @@ open ~/whatsthatflower/whatsthatflower.code-workspace
 | Plants in catalog | **1,413** headers (`plants_to_update/count`) |
 | Records in `plants_v2` | 1,419 (a few leftover / renamed keys) |
 | Public observations | 1,509 from 49 observers, 572 species |
-| App UI languages | 35 `.arb` files |
+| App UI languages | 36 `.arb` files |
 | Firebase project | `abherbs-backend` |
 | Photo bucket | `gs://abherbs-resources` |
 
