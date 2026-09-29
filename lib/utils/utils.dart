@@ -100,6 +100,8 @@ const String languageChinese = "zh";
 const String languagePersian = "fa";
 const String languageHebrew = "he";
 const String languageArabic = "ar";
+const String languageIndonesian = "id";
+const String languageTurkish = "tr";
 const String heightUnitOfMeasure = "cm";
 
 const String webUrl = "https://whatsthatflower.com/";
@@ -137,6 +139,8 @@ const List<String> webPathLanguages = [
   languagePersian,
   languageHebrew,
   languageArabic,
+  languageIndonesian,
+  languageTurkish,
 ];
 const String termsOfUseUrl =
     "https://storage.googleapis.com/abherbs-resources/misc/TermsOfServiceofWhatsthatflower.htm";
