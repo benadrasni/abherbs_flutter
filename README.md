@@ -24,7 +24,7 @@ open ~/whatsthatflower/whatsthatflower.code-workspace
 
 | Item | Value |
 |---|---|
-| App version in this repo | `8.3.0+830` (Play production 8.3.0 submitted 2026-09-27; App Store 8.3.0 waiting for review) |
+| App version in this repo | `8.3.1+831` (Play production 8.3.0 submitted 2026-09-27; App Store 8.3.0 waiting for review) |
 | Plants in catalog | **1,413** headers (`plants_to_update/count`) |
 | Records in `plants_v2` | 1,419 (a few leftover / renamed keys) |
 | Public observations | 1,509 from 49 observers, 572 species |
