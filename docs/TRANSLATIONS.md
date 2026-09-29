@@ -12,9 +12,9 @@ The sections below are the plan that led here. Where they still say to keep Goog
 
 The **app UI languages** in `lib/l10n/intl_*.arb` / `lib/settings/setting_utils.dart`. Content keys are the Firebase language codes (`nb` → `no`; `zh_TW` → `zh`):
 
-`ar bg cs da de en es et fa fi fr he hi hr hu id it ja ko lt lv no nl pl pt ro ru sk sl sr sv uk zh`
+`ar bg cs da de en es et fa fi fr he hi hr hu id it ja ko lt lv no nl pl pt ro ru sk sl sr sv tr uk zh`
 
-That is 33 catalog languages (35 ARB files: `en`, `en_US`, `en_UK` share `en`).
+That is 34 catalog languages (36 ARB files: `en`, `en_US`, `en_UK` share `en`). Turkish locale is `tr_TR`.
 
 Not in scope for full body text:
 

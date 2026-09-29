@@ -31,6 +31,7 @@ var supportedLanguages = {
   "sl": "Slovenščina",
   "sr": "Српски",
   "sv": "Svenska",
+  "tr": "Türkçe",
   "fi": "Suomi",
   "uk": "Українська",
   "zh": "中文"
