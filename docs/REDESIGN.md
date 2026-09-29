@@ -14,6 +14,8 @@ The app opens on **Find**, with three ways to a plant.
 
 **The key** is three steps, and the first step is already on Find. Color, then habitat, then petals. The four petal choices stay: 4 or fewer, 5, more than 5, zygomorphic. Distribution is no longer a step. It is a chip on the result list, labeled **Any region** until the person changes it. The chip can take a floristic region from the existing list, or from this phone’s location. The filter index already allows an empty region (`color_habitat_petal_`), so this does not need a new catalog index. White + meadow + more than 5 petals is `1_1_3_` and currently matches 93 plants. The same key with Middle Europe (`11`) matches 67. Those counts are the live lists.
 
+Habitat asks where the plant is growing, and offers eight places as a 2×4 grid of tiles, each with a short line of examples: forest (woods, edges, clearings), meadow (pastures, hay meadows, lawns), dry and sunny (steppe, garrigue, dry slopes), fields and roadsides (weeds, paths, waste ground), water and wetland (ponds, banks, marshes), heath and bog (heather, peat, moorland), rocks and mountains (cliffs, scree, walls, alpine), coast (dunes, beaches, salt marsh). The codes that keep their meaning stay: 1 meadow, 3 wetland, 4 forest, 5 rocks. The new places take 7 dry and sunny, 8 fields and roadsides, 9 heath and bog, 10 coast. 2 garden and 6 tree are retired, so an old app never reads a reused code with a new meaning. Tree is what a plant is, not where it grows. Garden becomes a chip on the result list, **Wild and garden** until the person picks **Wild only**, which hides plants that are mainly grown in gardens. The choice is remembered like the region and applies only to the key's result list. Search and Book always show every plant, with a **Garden plant** tag on cultivated ones. A plant carries two or three habitats: where it is typically found, not everywhere it can grow. Every plant needs new habitat tags before this ships. Tagging rules, the `cultivated` flag, and the generated `plants_headers_v3` / `counts_4_v3` / `lists_4_v3` are in `HABITATS.md`. The counts on the mockup tiles are estimates for white flowers from the English habitat text, not live lists.
+
 The result list puts plants in flower this month first (`floweringFrom`–`floweringTo`), then the rest, each group alphabetical. A plant can carry more than one color, so a plain alphabetical list of white flowers can open on purple ones. The sort needs no new index.
 
 Location is asked when they take a photo, or when they tap the region chip. It is not asked at launch. Plant.id receives coordinates only after that permission. If they refuse, the identification and the record have no place.
@@ -128,8 +130,8 @@ Database additions and changes are allowed when a new page needs a field or node
 |---|---|
 | Find | Search, camera with its meter, and step 1 of the key already open |
 | Search | Plants, families, and genera in one list |
-| Key · habitat, Key · petals | Steps 2 and 3. Every habitat choice shows how many plants remain. Petals uses the live four choices |
-| Results | White, meadow, more than 5 petals. 93 plants, or fewer once a region is set. Photos or plates |
+| Key · habitat, Key · petals | Steps 2 and 3. Eight habitat tiles with examples and estimated counts. Petals uses the live four choices |
+| Results | White, meadow, more than 5 petals. 93 plants, or fewer once a region is set or Wild only is on. Photos or plates |
 | Region chip | Any region, a floristic region, or this phone’s location |
 | Camera | Location asked once, at the first photo |
 | Not a plant | Probably not a plant. Nothing saved, and the name is not used |

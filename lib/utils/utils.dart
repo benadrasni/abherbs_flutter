@@ -172,6 +172,8 @@ const double imageSizeScaleDown = 2048;
 const int firebaseCacheSize = 1024 * 1024 * 20;
 const String firebaseCounts = 'counts_4_v2';
 const String firebaseLists = 'lists_4_v2';
+const String firebaseCountsV3 = 'counts_4_v3';
+const String firebaseListsV3 = 'lists_4_v3';
 const String firebasePlants = 'plants_v2';
 const String firebaseSearch = 'search_v3';
 const String firebaseAPGIV = 'APG IV_v3';
@@ -197,6 +199,7 @@ int? customListYear(dynamic value) {
   return n;
 }
 const String firebasePlantHeaders = 'plants_headers';
+const String firebasePlantHeadersV3 = 'plants_headers_v3';
 const String firebaseTranslations = 'translations';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
 const String firebasePlantsToUpdate = "plants_to_update";

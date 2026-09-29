@@ -87,6 +87,7 @@ Keyed by Latin binomial, e.g. `plants_v2/Acer campestre`.
   "usdaId": "ACCA5",
   "freebaseId": "/m/028j7f",
   "wikiName": "Acer campestre",
+  "habitats": [4, 7, 8],
   "wikilinks": {
     "data": "https://www.wikidata.org/wiki/Q157810",
     "commons": "...",
@@ -100,6 +101,8 @@ Keyed by Latin binomial, e.g. `plants_v2/Acer campestre`.
   }
 }
 ```
+
+`habitats` is the redesign key: 1–3 codes from 1 meadow, 3 water and wetland, 4 forest, 5 rocks and mountains, 7 dry and sunny, 8 fields and roadsides, 9 heath and bog, 10 coast. Primary code first. An empty array is allowed only with `cultivated: true`. Realtime Database drops an empty array, so those plants have no `habitats` key and no `filterHabitat` on the v3 header. `cultivated` is omitted when the plant is wild. Rules and the generated nodes are in `HABITATS.md`.
 
 `inflorescenceType` is an array of the 17 legend keys (`raceme`, `spike`, `spadix`, `corymb`, `umbel`, `compound_umbel`, `capitulum`, `head`, `panicle`, `compound_spike`, `cyme`, `helicoid`, `rhipidium`, `scorpioid`, `scorpioid_thyrse`, `dichasial_thyrse`, `double_scorpioid_thyrse`). Primary type is first. Empty means none of those diagrams apply (solitary flower, catkin, unnamed cluster). Filled from the English `inflorescence` paragraph; the app and website highlight those cells in the inflorescence legend. Language-independent — not a translations field.
 
@@ -166,13 +169,16 @@ Order in a key is always `color_habitat_petal_distribution`. Empty slot = not se
 | Attribute | Codes |
 |---|---|
 | Color | 1 white, 2 yellow, 3 red, 4 blue, 5 green |
-| Habitat | 1 meadow, 2 garden, 3 wetland, 4 forest, 5 rock, 6 tree |
+| Habitat (v2, shipped filter) | 1 meadow, 2 garden, 3 wetland, 4 forest, 5 rock, 6 tree |
+| Habitat (v3, redesign key) | 1 meadow, 3 water and wetland, 4 forest, 5 rocks and mountains, 7 dry and sunny, 8 fields and roadsides, 9 heath and bog, 10 coast |
 | Petal | 1 four or less, 2 five, 3 many, 4 zygomorphic |
 
 `filterPetal` is never empty. Three petals and apetalous flowers use **1**.
 | Distribution | TDWG level-2 numeric codes (10 Northern Europe … 91 Antarctic). Mapped from POWO distribution text via `abherbs-auto/tdwg.csv`. |
 
-Client: `lib/filter/filter_utils.dart`.
+The shipped app reads v2 (`counts_4_v2`, `lists_4_v2`, `plants_headers`). The redesign key reads `plants_headers_v3`, `counts_4_v3` and `lists_4_v3`, built from `plants_v2.habitats`. Those three nodes are world-readable and not client-writable. v3 has 14,310 count keys. Codes 2 and 6 are not reused. The all-empty key is `___`.
+
+Client: `lib/filter/filter_utils.dart` (v2). v3 paths: `firebasePlantHeadersV3`, `firebaseCountsV3`, `firebaseListsV3` in `lib/utils/utils.dart`.
 
 ## Translations
 

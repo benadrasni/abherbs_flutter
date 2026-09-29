@@ -3,17 +3,24 @@
     "counts": { ".read": true, ".write": false },
     "counts_4": { ".read": true, ".write": false },
     "counts_4_v2": { ".read": true, ".write": false },
+    "counts_4_v3": { ".read": true, ".write": false },
     "counts_new": { ".read": true, ".write": false },
 
     "lists": { ".read": true, ".write": false },
     "lists_4": { ".read": true, ".write": false },
     "lists_4_v2": { ".read": true, ".write": false },
+    "lists_4_v3": { ".read": true, ".write": false },
     "lists_new": { ".read": true, ".write": false },
     "lists_custom": { ".read": true, ".write": false },
 
     "plants": { ".read": true, ".write": false },
     "plants_v2": { ".read": true, ".write": false },
     "plants_headers": {
+      ".read": true,
+      ".write": false,
+      ".indexOn": "name"
+    },
+    "plants_headers_v3": {
       ".read": true,
       ".write": false,
       ".indexOn": "name"

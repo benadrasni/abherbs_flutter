@@ -131,6 +131,13 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .opt .g{width:44px;height:44px;flex:none;color:var(--moss)}
 .opt .l{flex:1;font-size:16px;font-weight:500}
 .opt .n{font-size:13px;color:var(--ink-3)}
+.habs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.hab{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:10px 12px 12px;border-radius:14px;background:var(--cream);border:1px solid var(--rule);text-align:left}
+.hab:hover{border-color:var(--moss)}
+.hab .g{width:36px;height:36px;color:var(--moss);margin-bottom:4px}
+.hab .l{font-weight:600;font-size:15px;line-height:1.2}
+.hab .e{font-size:12px;color:var(--ink-3);line-height:1.3}
+.hab .n{position:absolute;top:10px;right:12px;font-size:12px;color:var(--ink-3)}
 .petals{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .petal{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 8px 12px;border-radius:16px;background:var(--cream);border:1px solid var(--rule)}
 .petal:hover{border-color:var(--moss)}
@@ -430,11 +437,13 @@ const I={
 };
 const HAB_G={
   1:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 36h36"/><path d="M9 36c0-6 1-10 3-14M13 36c0-5-1-9-4-12M20 36c0-8 2-13 5-17M26 36c0-6-2-10-5-13M33 36c0-6 1-9 3-12M36 36c-1-5-3-7-6-9"/><circle cx="25" cy="17" r="2.5"/><circle cx="12" cy="20" r="2"/></svg>',
-  2:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 36h36M6 30h32M9 24h26"/><path d="M12 24v-5M18 24v-6M24 24v-5M30 24v-6"/><circle cx="12" cy="17" r="2"/><circle cx="18" cy="16" r="2"/><circle cx="24" cy="17" r="2"/><circle cx="30" cy="16" r="2"/></svg>',
   3:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 30c4-3 8 3 12 0s8 3 12 0 8 3 12 0M4 37c4-3 8 3 12 0s8 3 12 0 8 3 12 0"/><path d="M14 28V12M20 28V8M26 28V13"/><rect x="18.5" y="8" width="3" height="7" rx="1.5" fill="currentColor"/></svg>',
   4:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M14 6 6 20h5l-6 10h18l-6-10h5z"/><path d="M14 30v8M30 10l-7 12h4l-5 9h16l-5-9h4z"/><path d="M30 31v7M4 38h36"/></svg>',
   5:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 38 15 14l6 9 5-7 15 22z"/><path d="M12 20l3-6 3 5"/></svg>',
-  6:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="22" cy="15" r="10"/><path d="M22 25v13M22 31l-5-4M22 29l5-4M4 38h36"/></svg>',
+  7:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="31" cy="12" r="4.5"/><path d="M31 3.5v2M31 18.5v2M22.5 12h2M37.5 12h2M25 6l1.4 1.4M35.6 16.6 37 18M25 18l1.4-1.4M35.6 7.4 37 6"/><path d="M4 36h36"/><path d="M12 36c-1-5-3-8-6-10M14 36c0-6 1-10 3-13M16 36c1-4 3-7 6-8M28 36c0-3 1-6 3-7M30 36c-1-3-2-5-4-6"/></svg>',
+  8:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 22h36"/><path d="M17 38 21 22M29 38 23 22"/><path d="M23 38l-.5-3M22.3 31.5l-.3-2.5M21.9 26.5l-.1-1.5"/><path d="M9 38v-9M9 34c-2-1-3-2-3-4"/><circle cx="9" cy="27" r="2.5"/><path d="M35 38v-7M38 38v-5"/><circle cx="35" cy="29.5" r="1.8"/></svg>',
+  9:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><ellipse cx="29" cy="35" rx="11" ry="3"/><path d="M4 38h11"/><path d="M10 38V19M10 23l-4-3M10 28l4-3M10 33l-4-3"/><circle cx="6" cy="20" r="1.2" fill="currentColor"/><circle cx="14" cy="25" r="1.2" fill="currentColor"/><circle cx="6" cy="30" r="1.2" fill="currentColor"/><circle cx="10" cy="17.5" r="1.2" fill="currentColor"/><path d="M26 32V18M32 32V21"/><circle cx="26" cy="16" r="2.6"/><circle cx="32" cy="19" r="2.6"/></svg>',
+  10:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="33" cy="10" r="4"/><path d="M4 27c5-9 13-11 20-5 3 2 5 3 8 3"/><path d="M13 21v-5M13 18l-2-2M13 18l2-3"/><path d="M4 33c4-3 8 3 12 0s8 3 12 0 8 3 12 0M4 39c4-3 8 3 12 0s8 3 12 0 8 3 12 0"/></svg>',
 };
 function petalSvg(kind){
   const p=(n,rx,ry,off)=>Array.from({length:n},(_,i)=>`<ellipse cx="36" cy="${36-off}" rx="${rx}" ry="${ry}" transform="rotate(${i*360/n} 36 36)" fill="#fffdf8" stroke="#3e5344" stroke-width="1.5"/>`).join('');
@@ -445,11 +454,21 @@ function petalSvg(kind){
   return `<svg viewBox="0 0 72 72" fill="#fffdf8" stroke="#3e5344" stroke-width="1.5"><path d="M36 38c-12-2-22-10-18-22 6-4 14 2 18 12 4-10 12-16 18-12 4 12-6 20-18 22z"/><path d="M36 40c-8 2-16 8-16 20 8 4 16-2 16-10 0 8 8 14 16 10 0-12-8-18-16-20z"/><path d="M36 30v12" stroke="#85603c"/></svg>`;
 }
 const COLORS=[['1','white','#f8f5ee'],['2','yellow','#e4bb3b'],['3','red, pink','#c4566b'],['4','blue, purple','#5b62a8'],['5','green, brown, black','#6f7d4c']];
-const HABS=[['1','meadows or grasslands'],['2','gardens or fields'],['3','moorlands or wetlands'],['4','woodlands or forests'],['5','rocks or mountains'],['6','trees or shrubs']];
+const HABS=[
+  ['4','forest','woods, edges, clearings',461],
+  ['1','meadow','pastures, hay meadows, lawns',368],
+  ['7','dry and sunny','steppe, garrigue, dry slopes',119],
+  ['8','fields and roadsides','weeds, paths, waste ground',365],
+  ['3','water and wetland','ponds, banks, marshes',303],
+  ['9','heath and bog','heather, peat, moorland',141],
+  ['5','rocks and mountains','cliffs, scree, walls, alpine',331],
+  ['10','coast','dunes, beaches, salt marsh',126],
+];
+const GARDEN=new Set(['Agapanthus praecox','Ageratum houstonianum','Amaryllis belladonna','Callistephus chinensis','Camellia sasanqua','Cosmos bipinnatus','Dahlia pinnata','Dianthus caryophyllus','Dimorphotheca ecklonis','Gerbera jamesonii','Hibiscus syriacus','Lagerstroemia indica','Paeonia lactiflora','Rheum rhabarbarum','Stevia rebaudiana','Tanacetum parthenium','Zinnia elegans']);
 const PETS=[['1','4 or less'],['2','5'],['3','more than 5'],['4','zygomorphic']];
 
 const st={
-  screen:'find',tab:'find',color:null,habitat:null,petal:null,region:null,regionFromLoc:false,view:'photo',
+  screen:'find',tab:'find',color:null,habitat:null,petal:null,region:null,regionFromLoc:false,wild:false,view:'photo',
   loc:null,prev:null,sp:null,fromCamera:false,bookSeg:'fam',q:'dais',listLang:'en',list:null,
   used:1,ads:0,signed:true,fg:false,inBook:false,
   seen:[
@@ -465,9 +484,9 @@ const st={
 const SCREENS=[
   ['find','Find','Search, camera with its meter, and step 1 of the key already open.'],
   ['search','Search','Free. Plants, families and genera in one list.'],
-  ['habitat','Key · habitat','Step 2. Every choice shows how many plants remain.'],
+  ['habitat','Key · habitat','Step 2. Eight places, each with examples and how many plants remain.'],
   ['petal','Key · petals','Step 3. The four live choices, drawn.'],
-  ['results','Results','93 plants. Region is a chip, not a step. Photos or plates.'],
+  ['results','Results','93 plants. Region and wild or garden are chips, not steps. Photos or plates.'],
   ['regionSheet','Region chip','Any region, a floristic region, or this phone’s location.'],
   ['camera','Camera','Location asked here, once, at the first photo.'],
   ['notplant','Not a plant','Plant.id says it’s probably not a plant. Nothing saved, the name isn’t used.'],
@@ -605,8 +624,8 @@ function habitatScreen(){
   ${trail(2)}
   <div class="pad" style="margin-top:14px"><span class="eyebrow">Key it out · 2 of 3</span><div class="stepper"><i class="on"></i><i class="on"></i><i></i></div>
   <h2 class="q" style="margin-top:12px">Where is it growing?</h2>
-  ${HABS.map(([k,l])=>`<button class="opt" data-habitat="${k}"><span class="g">${HAB_G[k]}</span><span class="l">${esc(cap(l))}</span><span class="n">${D.counts.habitat[k]}</span></button>`).join('')}
-  <button class="skip" data-toast="Would list all ${D.counts.color[1]} white flowers (key 1___)">Skip and show all ${D.counts.color[1]} white flowers</button></div><div style="height:20px"></div>`;
+  <div class="habs">${HABS.map(([k,l,ex,n])=>`<button class="hab" data-habitat="${k}"><span class="g">${HAB_G[k]}</span><span class="l">${esc(cap(l))}</span><span class="e">${esc(ex)}</span><span class="n">${n}</span></button>`).join('')}</div>
+  <button class="skip" data-toast="Would list all ${D.counts.color[1]} white flowers (key 1___)">In a garden, or not sure? Show all ${D.counts.color[1]} white flowers</button></div><div style="height:20px"></div>`;
 }
 function petalScreen(){
   return `<div class="back" data-go="habitat">${I.back}Habitat</div>
@@ -620,7 +639,8 @@ const inFlower=p=>p.fl[0]&&p.fl[0]<=NOW_MONTH&&p.fl[1]>=NOW_MONTH;
 function seenNames(){return new Set(st.seen.filter(r=>!r.u).map(r=>r.n))}
 const seenMark=n=>seenNames().has(n)?'<span class="seenmark" title="Seen by you">✓ Seen</span>':'';
 function currentList(){
-  const l=st.region?D.plants.filter(p=>p.r.map(String).includes(st.region)):D.plants;
+  let l=st.region?D.plants.filter(p=>p.r.map(String).includes(st.region)):D.plants;
+  if(st.wild) l=l.filter(p=>!GARDEN.has(p.n));
   return [...l.filter(inFlower),...l.filter(p=>!inFlower(p))];
 }
 function resultsScreen(){
@@ -639,6 +659,7 @@ function resultsScreen(){
   ${trail(4)}
   <div class="reshead" style="margin-top:14px"><div class="count">${list.length} <small>plants${st.region?` in ${esc(reg)}`:''}</small></div>${seenIn?`<div class="hint" style="margin-top:6px">You’ve seen ${seenIn} of these</div>`:''}</div>
   <div class="filterbar"><button class="pill ${st.region?'set':''}" data-sheet="region">${st.regionFromLoc?I.pin:''}${esc(reg)} ${I.down}</button>
+    <button class="pill ${st.wild?'set':''}" data-wild="1">${st.wild?'Wild only':'Wild and garden'}</button>
     <div class="seg"><button class="${st.view=='photo'?'on':''}" data-view="photo">Photos</button><button class="${st.view=='plate'?'on':''}" data-view="plate">Plates</button></div></div>
   <div class="grid">${cells.join('')}</div>
   <p class="hint pad" style="margin:20px 0">Not here? <button style="color:var(--moss);font-weight:600" data-go="camera">Try a photo</button></p>`;
@@ -881,7 +902,7 @@ function demo(k){
 }
 
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-demo],[data-go],[data-tab],[data-color],[data-habitat],[data-petal],[data-sp],[data-sheet],[data-region],[data-view],[data-loc],[data-shoot],[data-confirm],[data-confirmsp],[data-del],[data-pick],[data-undo],[data-seg],[data-ad],[data-fg],[data-sign],[data-slide],[data-jump],[data-goback],[data-seen],[data-share],[data-shsheet],[data-consent],[data-sendshare],[data-withdraw],[data-addseen],[data-list],[data-booklists],[data-toast],[data-close]');
+  const t=e.target.closest('[data-demo],[data-go],[data-tab],[data-color],[data-habitat],[data-petal],[data-sp],[data-sheet],[data-region],[data-wild],[data-view],[data-loc],[data-shoot],[data-confirm],[data-confirmsp],[data-del],[data-pick],[data-undo],[data-seg],[data-ad],[data-fg],[data-sign],[data-slide],[data-jump],[data-goback],[data-seen],[data-share],[data-shsheet],[data-consent],[data-sendshare],[data-withdraw],[data-addseen],[data-list],[data-booklists],[data-toast],[data-close]');
   if(!t) return;
   if(t.dataset.close&&e.target.closest('[data-stop]')) return;
   const d=t.dataset;
@@ -891,12 +912,13 @@ document.addEventListener('click',e=>{
   if(d.go){ if(d.go=='find'){st.color=null;st.habitat=null;st.petal=null} return go(d.go) }
   if(d.tab) return go(d.tab);
   if(d.color){ if(d.color!=='1') return toast('The prototype follows white → meadows → more than 5.'); st.color='1';return go('habitat') }
-  if(d.habitat){ if(d.habitat!=='1') return toast('The prototype follows meadows or grasslands.'); st.habitat='1';return go('petal') }
+  if(d.habitat){ if(d.habitat!=='1') return toast('The prototype follows Meadow.'); st.habitat='1';return go('petal') }
   if(d.petal){ if(d.petal!=='3') return toast('The prototype follows more than 5 petals (key 1_1_3_).'); st.petal='3';st.region=st.loc?'11':null;st.regionFromLoc=!!st.loc;return go('results') }
   if(d.sp){ if(!D.sp[d.sp]) return toast(`${d.sp}: full page in the app. Try oxeye daisy, daisy, yarrow, chamomile.`); return go('species',{sp:d.sp,fromCamera:!!d.cam}) }
   if(d.seen){ const r=st.seen.find(x=>x.id==d.seen); if(r.u) return go('seen'); return D.sp[r.n]?go('species',{sp:r.n,fromCamera:false}):toast(r.n) }
   if(d.sheet){st.sheet=d.sheet;return render()}
   if(d.region!==undefined){st.region=d.region||null;st.regionFromLoc=false;st.sheet=null;render();return}
+  if(d.wild){st.wild=!st.wild;return render()}
   if(d.view){st.view=d.view;return render()}
   if(d.loc){
     if(d.loc=='cam'){st.loc=true;return render()}
