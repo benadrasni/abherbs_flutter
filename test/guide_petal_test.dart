@@ -56,6 +56,14 @@ void main() {
       tester.getTopRight(find.text('41')).dx,
       greaterThan(tester.getTopRight(find.text('4 or less')).dx),
     );
+    final glyph = tester.getCenter(find.byType(GuidePetalGlyph).first);
+    final tile = tester.getRect(
+      find.ancestor(
+        of: find.byType(GuidePetalGlyph).first,
+        matching: find.byType(InkWell),
+      ).first,
+    );
+    expect(glyph.dx, closeTo(tile.center.dx, 1));
 
     await tester.tap(find.text('More than 5'));
     await tester.pump();
