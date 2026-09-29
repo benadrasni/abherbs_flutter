@@ -78,6 +78,16 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  fonts:
+    - family: Source Sans 3
+      fonts:
+        - asset: fonts/SourceSans3.ttf
+    - family: Fraunces
+      fonts:
+        - asset: fonts/Fraunces.ttf
+        - asset: fonts/Fraunces-Italic.ttf
+          style: italic
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

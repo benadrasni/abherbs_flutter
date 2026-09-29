@@ -1,0 +1,284 @@
+import 'package:abherbs_flutter/entity/observation.dart';
+import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/guide/find_page.dart';
+import 'package:abherbs_flutter/guide/guide_data.dart';
+import 'package:abherbs_flutter/guide/guide_theme.dart';
+import 'package:abherbs_flutter/guide/guide_widgets.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core_platform_interface/test.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUpAll(() async {
+    setupFirebaseCoreMocks();
+    await Firebase.initializeApp();
+  });
+
+  setUp(() {
+    Purchases.hasOldVersion = false;
+    Purchases.purchases = {};
+  });
+
+  tearDown(() {
+    Purchases.hasOldVersion = false;
+    Purchases.purchases = {};
+  });
+
+  test('the cover is the newest year in the list', () {
+    expect(readGuideList(null).count, 0);
+    expect(readGuideList('meadow').count, 0);
+
+    final plain = readGuideList([null, '69', null]);
+    expect(plain.count, 1);
+    expect(plain.coverId, '1');
+    expect(plain.year, isNull);
+
+    final ordered = readGuideList({'10': 1, '2': 1});
+    expect(ordered.coverId, '2');
+    expect(ordered.year, isNull);
+
+    final years = readGuideList({'5': 1, '9': 2024, '3': 2019});
+    expect(years.count, 3);
+    expect(years.coverId, '9');
+    expect(years.year, 2024);
+
+    final tied = readGuideList({'1': 2020, '2': 2020});
+    expect(tied.coverId, '1');
+    expect(tied.year, 2020);
+
+    final edge = readGuideList({'1': 1899, '2': 2100, '4': 2101, '8': '2024'});
+    expect(edge.count, 4);
+    expect(edge.coverId, '2');
+    expect(edge.year, 2100);
+
+    final words = readGuideList({'b': 1, 'a': 2020.0, 'm': null});
+    expect(words.count, 2);
+    expect(words.coverId, 'a');
+    expect(words.year, 2020);
+  });
+
+  test('new lists come first, then year lists, then titles', () {
+    final covers = [
+      _cover(title: 'meadows', count: 3),
+      _cover(title: 'Alpine', count: 6, year: 2024),
+      _cover(title: 'zzzz', count: 2, isNew: true),
+      _cover(title: 'beeches', count: 2, year: 2020),
+    ];
+    covers.sort(compareGuideLists);
+    expect(
+      covers.map((cover) => cover.title),
+      ['zzzz', 'Alpine', 'beeches', 'meadows'],
+    );
+    expect(guideListRank(covers.first), 0);
+    expect(guideListRank(covers[1]), 1);
+    expect(guideListRank(covers.last), 2);
+  });
+
+  test('a find keeps its own time and first photo', () {
+    final when = guideFindWhen({
+      observationDate: {observationTime: 1500.9},
+    });
+    expect(when, DateTime.fromMillisecondsSinceEpoch(1500));
+    expect(guideFindWhen({}), DateTime.fromMillisecondsSinceEpoch(0));
+    expect(
+      guideFindWhen({
+        observationDate: {observationTime: 'soon'}
+      }),
+      DateTime.fromMillisecondsSinceEpoch(0),
+    );
+
+    expect(guideFirstText([null, '', 'a.jpg', 'b.jpg']), 'a.jpg');
+    expect(guideFirstText({'2': 'b.jpg', '10': 'c.jpg', '1': ''}), 'c.jpg');
+    expect(guideFirstText(null), isNull);
+  });
+
+  testWidgets('shows the key, the first five finds, and the list covers',
+      (tester) async {
+    Purchases.hasOldVersion = true;
+    var seen = 0;
+    var book = 0;
+    final when = DateTime(2026, 9, 29, 15, 4);
+    final latest = DateTime(2026, 9, 1);
+    final finds = [
+      GuideFind(
+        name: 'Bellis perennis',
+        label: 'oxeye',
+        when: when,
+        photoPath: null,
+      ),
+      for (var n = 2; n <= 6; n++)
+        GuideFind(
+          name: 'Find $n',
+          label: null,
+          when: when,
+          photoPath: null,
+        ),
+    ];
+
+    await _pump(
+      tester,
+      _page(
+        colorCounts: const {'1': 12, '2': 0, '4': 7},
+        finds: finds,
+        lists: [
+          _cover(title: '', count: 2, isNew: true, latest: latest),
+          _cover(title: 'Alpine flowers', count: 6, year: 2024),
+          _cover(title: 'Meadows', count: 11),
+        ],
+        onOpenSeen: () => seen++,
+        onOpenBook: () => book++,
+      ),
+    );
+
+    expect(find.text('What’s that flower'), findsOneWidget);
+    expect(find.text('Search plants, families, genera'), findsOneWidget);
+    expect(find.text('Name it from a photo'), findsOneWidget);
+    expect(find.text('Unlimited'), findsOneWidget);
+    expect(find.text('KEY IT OUT · 1 OF 3'), findsOneWidget);
+    expect(find.text('ALWAYS FREE'), findsOneWidget);
+    expect(find.text('What color is the flower?'), findsOneWidget);
+    expect(find.text('White'), findsOneWidget);
+    expect(find.text('Red, pink'), findsOneWidget);
+    expect(find.text('Blue, purple'), findsOneWidget);
+    expect(find.text('12'), findsOneWidget);
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('7'), findsOneWidget);
+    expect(
+      tester.getTopLeft(find.text('12')).dy,
+      lessThan(tester.getTopLeft(find.text('White')).dy),
+    );
+    expect(
+      tester.getTopRight(find.text('12')).dx,
+      greaterThan(tester.getTopRight(find.text('White')).dx),
+    );
+    expect(find.text('null'), findsNothing);
+
+    expect(find.text('Oxeye'), findsOneWidget);
+    expect(find.text('Bellis perennis'), findsNothing);
+    expect(find.text('Find 5'), findsOneWidget);
+    expect(find.text('Find 6'), findsNothing);
+    final context = tester.element(find.text('Seen lately'));
+    expect(find.text(guideWhen(context, when)), findsNWidgets(5));
+
+    expect(find.text('New in the book'), findsOneWidget);
+    final date = MaterialLocalizations.of(context).formatMediumDate(latest);
+    expect(find.text('Latest $date'), findsOneWidget);
+    expect(find.text('6 years · 2024'), findsOneWidget);
+    expect(find.text('11 plants'), findsOneWidget);
+    expect(
+      find.byWidgetPredicate((widget) {
+        if (widget is! DecoratedBox) return false;
+        final decoration = widget.decoration;
+        if (decoration is! BoxDecoration) return false;
+        final border = decoration.border;
+        return border is Border &&
+            border.top.color == GuidePalette.gold &&
+            border.top.width == 2;
+      }),
+      findsOneWidget,
+    );
+
+    await tester.tap(find.text('All finds'));
+    await tester.tap(find.text('All lists'));
+    await tester.pump();
+    expect(seen, 1);
+    expect(book, 1);
+  });
+
+  testWidgets('hides finds and covers that are not ready', (tester) async {
+    Purchases.hasOldVersion = true;
+    await _pump(tester, _page(finds: null, lists: null));
+    expect(find.text('Seen lately'), findsNothing);
+    expect(find.text('Lists of flowers'), findsOneWidget);
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+
+    await _pump(tester, _page(finds: const [], lists: const []));
+    expect(find.text('Seen lately'), findsNothing);
+    expect(find.text('All lists'), findsOneWidget);
+    expect(find.byType(CircularProgressIndicator), findsNothing);
+  });
+
+  testWidgets('asks a signed-out reader to sign in', (tester) async {
+    Purchases.purchases = {_noAds().productID: _noAds()};
+    await _pump(tester, _page(finds: const [], lists: const []));
+    expect(find.text('Sign in to name a photo'), findsOneWidget);
+    expect(find.text('Unlimited'), findsNothing);
+  });
+}
+
+GuideListCover _cover({
+  required String title,
+  required int count,
+  bool isNew = false,
+  int? year,
+  DateTime? latest,
+}) {
+  return GuideListCover(
+    title: title,
+    photoPath: null,
+    path: FirebaseDatabase.instance.ref('lists'),
+    isNew: isNew,
+    count: count,
+    year: year,
+    latest: latest,
+  );
+}
+
+PurchaseDetails _noAds() {
+  return PurchaseDetails(
+    productID: productNoAdsIOS,
+    verificationData: PurchaseVerificationData(
+      localVerificationData: 'local',
+      serverVerificationData: 'server',
+      source: 'test',
+    ),
+    transactionDate: '0',
+    status: PurchaseStatus.purchased,
+  );
+}
+
+Widget _page({
+  Map<String, int>? colorCounts = const {},
+  List<GuideFind>? finds = const [],
+  List<GuideListCover>? lists = const [],
+  VoidCallback? onOpenBook,
+  VoidCallback? onOpenSeen,
+}) {
+  return MaterialApp(
+    locale: const Locale('en'),
+    localizationsDelegates: const [
+      S.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
+    supportedLocales: S.delegate.supportedLocales,
+    home: Scaffold(
+      body: FindPage(
+        colorCounts: colorCounts,
+        lists: lists,
+        finds: finds,
+        credits: 2,
+        onOpenBook: onOpenBook ?? () {},
+        onOpenSeen: onOpenSeen ?? () {},
+      ),
+    ),
+  );
+}
+
+Future<void> _pump(WidgetTester tester, Widget page) async {
+  tester.view.physicalSize = const Size(800, 2400);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+  await tester.pumpWidget(page);
+  await tester.pump();
+}

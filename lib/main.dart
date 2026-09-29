@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:ui' show PlatformDispatcher;
 
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/guide/guide_shell.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
@@ -118,7 +119,7 @@ Future<Map<String, String>> initializeFilter() async {
 Future<String> initializeRoute() {
   return Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
     Preferences.myFilterAttributes = myFilter;
-    return '/' + myFilter[0];
+    return '/guide';
   });
 }
 
@@ -517,6 +518,7 @@ class _AppState extends State<App> {
         FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
       ],
       routes: {
+        '/guide': (context) => const GuideShell(),
         '/filterColor': (context) => Color(widget.filter),
         '/filterHabitat': (context) => Habitat(widget.filter),
         '/filterPetal': (context) => Petal(widget.filter),

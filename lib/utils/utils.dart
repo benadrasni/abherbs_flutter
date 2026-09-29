@@ -198,6 +198,7 @@ int? customListYear(dynamic value) {
   }
   return n;
 }
+
 const String firebasePlantHeaders = 'plants_headers';
 const String firebasePlantHeadersV3 = 'plants_headers_v3';
 const String firebaseTranslations = 'translations';
@@ -283,6 +284,8 @@ const String remoteConfigCustomFilterVideo = "custom_filter_video";
 
 final DatabaseReference rootReference = FirebaseDatabase.instance.ref();
 final DatabaseReference countsReference = rootReference.child(firebaseCounts);
+final DatabaseReference countsV3Reference =
+    rootReference.child(firebaseCountsV3);
 final DatabaseReference listsReference =
     rootReference.child(firebasePlantHeaders);
 final DatabaseReference listsCustomReference =
@@ -347,7 +350,8 @@ bool isTransientNetworkError(Object error) {
 /// EventChannel `cancel` after the engine/plugin is already gone (screen pop, process death).
 bool isIgnorablePluginTeardown(Object error) {
   final text = error.toString();
-  return text.contains('MissingPluginException') && text.contains('method cancel');
+  return text.contains('MissingPluginException') &&
+      text.contains('method cancel');
 }
 
 bool isIgnorableNonFatalError(Object error) {
@@ -890,7 +894,10 @@ void goToDetail(State state, BuildContext context, Locale myLocale, String name,
       final code = getLanguageCode(myLocale.languageCode);
       translationsReference.child(code).child(name).keepSynced(true);
       if (code != languageEnglish) {
-        translationsReference.child(languageEnglish).child(name).keepSynced(true);
+        translationsReference
+            .child(languageEnglish)
+            .child(name)
+            .keepSynced(true);
       }
     }
   });
