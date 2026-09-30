@@ -56,7 +56,7 @@ class Observation{
     this.longitude = data[observationLongitude].toDouble();
     this.latitude = data[observationLatitude].toDouble();
     this.note = data[observationNote] ?? "";
-    this.photoPaths = data[observationPhotoPaths];
+    this.photoPaths = data[observationPhotoPaths] ?? [];
     this.status = data[observationStatus];
     this.order = data[observationOrder];
     this.indoors = data[observationIndoors] ?? false;

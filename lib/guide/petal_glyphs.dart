@@ -11,48 +11,56 @@ class GuidePetalGlyph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return SizedBox(
       width: 72,
       height: 72,
-      child: CustomPaint(painter: _PetalPainter(id)),
+      child: CustomPaint(
+        painter: _PetalPainter(id, colors.moss, colors.cream),
+      ),
     );
   }
 }
 
 class _PetalPainter extends CustomPainter {
   final String id;
+  final Color moss;
+  final Color cream;
 
-  _PetalPainter(this.id);
+  _PetalPainter(this.id, this.moss, this.cream);
 
   @override
   void paint(Canvas canvas, Size size) {
     canvas.save();
     canvas.scale(size.width / 72, size.height / 72);
     if (id == '4') {
-      _zygomorphic(canvas);
+      _zygomorphic(canvas, moss, cream);
     } else {
-      _radial(canvas, id);
+      _radial(canvas, id, moss, cream);
     }
     canvas.restore();
   }
 
   @override
-  bool shouldRepaint(_PetalPainter oldDelegate) => oldDelegate.id != id;
+  bool shouldRepaint(_PetalPainter oldDelegate) =>
+      oldDelegate.id != id ||
+      oldDelegate.moss != moss ||
+      oldDelegate.cream != cream;
 }
 
-const _petalFill = Color(0xFFFFFDF8);
 const _centerFill = Color(0xFFE0B340);
+const _centerStroke = Color(0xFF85603C);
 
-void _radial(Canvas canvas, String id) {
+void _radial(Canvas canvas, String id, Color moss, Color cream) {
   final count = id == '1' ? 4 : (id == '2' ? 5 : 16);
   final rx = id == '1' ? 10.0 : (id == '2' ? 9.0 : 3.6);
   final offset = id == '3' ? 17.0 : 15.0;
   final paint = Paint()
-    ..color = GuidePalette.moss
+    ..color = moss
     ..style = PaintingStyle.stroke
     ..strokeWidth = 1.5;
   final fill = Paint()
-    ..color = _petalFill
+    ..color = cream
     ..style = PaintingStyle.fill;
   for (var i = 0; i < count; i++) {
     canvas.save();
@@ -79,18 +87,18 @@ void _radial(Canvas canvas, String id) {
     const Offset(36, 36),
     6,
     Paint()
-      ..color = GuidePalette.gold
+      ..color = _centerStroke
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.2,
   );
 }
 
-void _zygomorphic(Canvas canvas) {
+void _zygomorphic(Canvas canvas, Color moss, Color cream) {
   final fill = Paint()
-    ..color = _petalFill
+    ..color = cream
     ..style = PaintingStyle.fill;
   final stroke = Paint()
-    ..color = GuidePalette.moss
+    ..color = moss
     ..style = PaintingStyle.stroke
     ..strokeWidth = 1.5
     ..strokeCap = StrokeCap.round
@@ -106,7 +114,7 @@ void _zygomorphic(Canvas canvas) {
   canvas.drawPath(
     parseGuidePath('M36 30v12'),
     Paint()
-      ..color = GuidePalette.gold
+      ..color = _centerStroke
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5
       ..strokeCap = StrokeCap.round,

@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/entity/observation.dart';
+import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/guide/guide_results.dart';
+import 'package:abherbs_flutter/guide/guide_species.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -44,6 +48,23 @@ class GuideFind {
 const guideHabitatRouteName = 'GuideHabitat';
 const guidePetalRouteName = 'GuidePetal';
 const guideResultsRouteName = 'GuideResults';
+const guideSpeciesRouteName = 'GuideSpecies';
+const guidePersonRouteName = 'GuidePerson';
+
+/// Tab actions for the field-guide shell. A pushed page cannot see the
+/// shell's inherited widgets, so it calls these.
+class GuideTabs {
+  static void Function(int index)? show;
+  static VoidCallback? showSeen;
+  static VoidCallback? refreshSeen;
+}
+
+/// Leaves the key and opens a shell tab. Find stays selected while the key
+/// is open; tapping Find, Book, or Seen returns to that tab.
+void leaveGuideKeyForTab(BuildContext context, int index) {
+  GuideTabs.show?.call(index);
+  popGuideKeyToFind(context);
+}
 
 bool guideIsKeyRoute(String? name) {
   return name == guideHabitatRouteName ||
@@ -587,4 +608,155 @@ int _asInt(dynamic value) {
   if (value is int) return value;
   if (value is num) return value.toInt();
   return 0;
+}
+
+Future<GuideSpecies?> loadGuideSpecies(String name, String languageCode) async {
+  final lang = getLanguageCode(languageCode);
+  final event = await plantsReference.child(name).once();
+  final raw = event.snapshot.value;
+  if (!guidePlantRecord(raw)) {
+    _keepSpeciesSynced(name, lang);
+    return null;
+  }
+  final plant = Map<dynamic, dynamic>.from(raw as Map);
+  final translation = await _guideTranslation(lang, name);
+  final family = guideFamilyLatin(plant['APGIV']);
+  final latins = <String>{
+    if (family != null) family,
+    for (final rank in guideSpeciesRanks(plant['APGIV'], const {})) rank.latin,
+  };
+  final vernaculars = await _guideVernaculars(lang, latins);
+  final sightings = await _guideSightings(name);
+  final seen = await _guideSpeciesSeen(name);
+  return assembleGuideSpecies(
+    name: name,
+    plant: plant,
+    translation: translation,
+    vernaculars: vernaculars,
+    sightings: sightings,
+    seen: seen,
+  );
+}
+
+Future<void> saveGuideSeen(GuideSeenDraft draft) async {
+  final user = Auth.appUser;
+  if (user == null) {
+    throw StateError('sign in to save a find');
+  }
+  final millis = DateTime.now().millisecondsSinceEpoch;
+  final observation = Observation(draft.plant);
+  observation.id = '${user.uid}_$millis';
+  observation.date = draft.when;
+  observation.latitude = draft.latitude;
+  observation.longitude = draft.longitude;
+  observation.note = '';
+  observation.photoPaths = [
+    if (draft.photoPath != null && draft.photoPath!.isNotEmpty)
+      draft.photoPath!,
+  ];
+  observation.status = observationStatusPrivate;
+  observation.order = -draft.when.millisecondsSinceEpoch;
+  final json = observation.toJson();
+  final root = privateObservationsReference.child(user.uid);
+  await root
+      .child(firebaseObservationsByDate)
+      .child(firebaseAttributeList)
+      .child(observation.id)
+      .set(json);
+  await root
+      .child(firebaseObservationsByPlant)
+      .child(draft.plant)
+      .child(firebaseAttributeList)
+      .child(observation.id)
+      .set(json);
+}
+
+Future<PlantTranslation> _guideTranslation(String lang, String name) async {
+  final event = await translationsReference.child(lang).child(name).once();
+  final raw = event.snapshot.value;
+  final local = raw is Map
+      ? PlantTranslation.fromJson(Map<dynamic, dynamic>.from(raw))
+      : PlantTranslation();
+  if (lang == languageEnglish || local.isTranslated()) return local;
+  try {
+    final english =
+        await translationsReference.child(languageEnglish).child(name).once();
+    final fallback = english.snapshot.value;
+    if (fallback is Map) {
+      local.fillMissingFrom(
+        PlantTranslation.fromJson(Map<dynamic, dynamic>.from(fallback)),
+      );
+    }
+  } catch (error) {
+    debugPrint('guide species english $name: $error');
+  }
+  return local;
+}
+
+Future<Map<String, String>> _guideVernaculars(
+  String lang,
+  Set<String> latins,
+) async {
+  final vernaculars = <String, String>{};
+  await Future.wait(latins.map((latin) async {
+    try {
+      final event =
+          await translationsTaxonomyReference.child(lang).child(latin).once();
+      final name = guideTaxonVernacular(event.snapshot.value, latin);
+      if (name != null) vernaculars[latin] = name;
+    } catch (error) {
+      debugPrint('guide species taxon $latin: $error');
+    }
+  }));
+  return vernaculars;
+}
+
+Future<List<GuideSighting>> _guideSightings(String name) async {
+  try {
+    final event = await publicObservationsReference
+        .child(firebaseObservationsByPlant)
+        .child(name)
+        .child(firebaseAttributeList)
+        .once();
+    return guideSightings(event.snapshot.value);
+  } catch (error) {
+    debugPrint('guide species sightings $name: $error');
+    return const [];
+  }
+}
+
+Future<GuideSpeciesSeen?> _guideSpeciesSeen(String name) async {
+  final user = Auth.appUser;
+  if (user == null) return null;
+  try {
+    final event = await privateObservationsReference
+        .child(user.uid)
+        .child(firebaseObservationsByPlant)
+        .child(name)
+        .child(firebaseAttributeList)
+        .once();
+    final value = event.snapshot.value;
+    final Iterable<dynamic> rows;
+    if (value is List) {
+      rows = value;
+    } else if (value is Map) {
+      rows = value.values;
+    } else {
+      rows = const [];
+    }
+    return guideSpeciesSeen(rows);
+  } catch (error) {
+    debugPrint('guide species seen $name: $error');
+    return null;
+  }
+}
+
+void _keepSpeciesSynced(String name, String lang) {
+  unawaited(plantsReference.child(name).keepSynced(true));
+  unawaited(translationsReference.child(lang).child(name).keepSynced(true));
+  if (lang != languageEnglish) {
+    unawaited(
+      translationsReference.child(languageEnglish).child(name).keepSynced(true),
+    );
+  }
 }

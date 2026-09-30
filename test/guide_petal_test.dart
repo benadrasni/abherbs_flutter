@@ -2,11 +2,23 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/petal_glyphs.dart';
 import 'package:abherbs_flutter/guide/petal_page.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  setUp(() {
+    Purchases.hasOldVersion = true;
+    Purchases.purchases = {};
+  });
+
+  tearDown(() {
+    Purchases.hasOldVersion = false;
+    Purchases.purchases = {};
+  });
+
   testWidgets('draws the four petal choices', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -33,6 +45,8 @@ void main() {
 
     expect(find.text('KEY IT OUT · 3 OF 3'), findsOneWidget);
     expect(find.text('How many petals?'), findsOneWidget);
+    expect(find.text('Find'), findsOneWidget);
+    expect(find.byType(AppBannerAd), findsOneWidget);
     expect(
       find.text(
         'Two-lipped or one-sided flowers are zygomorphic, whatever the count.',

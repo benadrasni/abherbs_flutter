@@ -24,7 +24,7 @@ Once location is allowed, the phone keeps its floristic region, and the region c
 
 The other tabs are **Book** and **Seen**. Book is families, genera, and the lists of flowers (`lists_custom/by language/{lang}`), using the same vernaculars as `translations_taxonomy`.
 
-**Lists of flowers** also appear on Find as a row of cover cards under the recent finds. A list opens on its own page with the same Photos / Plates switch as the result list. Year campaigns (for example *Blume des Jahres*, ČBS *Rostlina roku*) run as a timeline, newest year first, with the source linked. Other lists are a grid. The first card is **New in the book**: the last 20 plants from `lists_custom/new`, grouped by the date they were added. A language without its own lists shows the English ones. The species page uses the same sections as the site: gallery and plate, names, flower, inflorescence, fruit, leaf, stem, habitat, toxicity, uses, trivia, taxonomy, distribution. The person icon holds the account, restore, language, and Field Guide.
+**Lists of flowers** also appear on Find as a row of cover cards under the recent finds. A list opens on its own page with the same Photos / Plates switch as the result list. Year campaigns (for example *Blume des Jahres*, ČBS *Rostlina roku*) run as a timeline, newest year first, with the source linked. Other lists are a grid. The first card is **New in the book**: the last 20 plants from `lists_custom/new`, grouped by the date they were added. A language without its own lists shows the English ones. The species page uses the same sections as the site: gallery and plate, names, flower, inflorescence, fruit, leaf, stem, habitat, toxicity, uses, trivia, taxonomy, distribution. The person icon holds the account, restore, language, theme, and Field Guide. Theme is Light, Dark, or System; System is the default and follows the phone.
 
 ## The meter
 
@@ -40,13 +40,17 @@ Photo identifications belong to an account.
 
 The app signs in anonymously with Firebase at first launch, so the Cloud Function counts the first identification like any other. Signing in links the anonymous account (`linkWithCredential`), so the first record and its allowance carry over. Reinstalling does not refresh the allowance.
 
+The sign-in screen keeps today's four providers. Apple and Google come first as full-width buttons in their own brand styles; email and phone sit under them and open a short form. Above the buttons, three lines say what an account adds: 5 names a month, Seen on a new phone, and sharing finds. The screen also says the key and the book stay free without one. Terms of use and the privacy policy are linked under the buttons. Closing it returns to where it was opened.
+
+On Person, the account header shows who is signed in. The first line is the display name from the provider. With no name, it shows the email; with no email, the phone number. The second line says how the person signed in, for example "anna.novak@gmail.com · Google", or "Email hidden by Apple" when Apple relays the address.
+
 The allowance drops when Plant.id returns a result, whether or not they keep the name. The exception is a photo that is probably not a plant: when Plant.id’s `is_plant` probability is below the threshold, the result says to try again closer, nothing is added to Seen, and the allowance stays. The daily ceiling still counts these calls. The threshold is a Cloud Function setting, not an app constant.
 
 At zero included identifications, the sheet offers a verified rewarded ad (one more name, up to five in the month), Field Guide with a 7-day trial, and the key. The key never closes. At ten, the ad option is gone.
 
 A free account that uses the full ten costs about €0.10–0.50 in Plant.id credits that month (about €0.01–0.05 a credit). The daily ceiling is what keeps a trial, or a script, from running an open bill. It is not shown in the interface.
 
-Ads for free accounts are a banner on Find and on lists. The species page, the key steps, and the photo result stay clear. People who bought Remove ads, and Field Guide subscribers, see none. The rewarded ad is used only on the quota sheet, and only after the store’s server-side verification.
+Ads for free accounts are a banner on Find and on lists. On Find and the habitat and petal steps of the key, the banner is pinned above the tab bar. The species page and the photo result stay clear. People who bought Remove ads, and Field Guide subscribers, see none. The rewarded ad is used only on the quota sheet, and only after the store’s server-side verification.
 
 The Plant.id key lives on a Cloud Function in the existing Firebase project. The app never holds it. The function checks App Check, the account, the month’s allowance, the ad verification, and the store receipt, then calls Kindwise.
 
@@ -144,4 +148,4 @@ Database additions and changes are allowed when a new page needs a field or node
 | List of flowers | A custom list. Year campaigns run newest first; New in the book by date |
 | At the limit | Ad, Field Guide, or the key |
 | Field Guide | What stays free, what the subscription adds, 7-day trial, restore |
-| Person | Account, allowance, restore, language |
+| Person | Account, allowance, restore, language, theme |

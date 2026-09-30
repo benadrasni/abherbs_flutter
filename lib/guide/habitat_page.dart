@@ -136,9 +136,11 @@ class _GuideHabitatPageState extends State<GuideHabitatPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final strings = S.of(context);
     final colorName = getFilterColorValue(context, widget.colorId);
     return GuideKeyScaffold(
+      withTabs: true,
       child: ListView(
         padding: const EdgeInsets.only(bottom: 20),
         children: [
@@ -165,14 +167,14 @@ class _GuideHabitatPageState extends State<GuideHabitatPage> {
               children: [
                 Text(
                   strings.guide_key_step_habitat.toUpperCase(),
-                  style: GuideType.eyebrow,
+                  style: GuideType.eyebrow(colors),
                 ),
                 const SizedBox(height: 8),
                 const GuideKeyStepper(filled: 2),
                 const SizedBox(height: 12),
                 Text(
                   strings.guide_habitat_question,
-                  style: GuideType.question,
+                  style: GuideType.question(colors),
                 ),
                 const SizedBox(height: 14),
                 for (var i = 0; i < guideHabitatIds.length; i += 2) ...[
@@ -190,7 +192,7 @@ class _GuideHabitatPageState extends State<GuideHabitatPage> {
                   child: TextButton(
                     onPressed: _skip,
                     style: TextButton.styleFrom(
-                      foregroundColor: GuidePalette.moss,
+                      foregroundColor: colors.moss,
                       textStyle: const TextStyle(
                         fontFamily: GuideType.sans,
                         fontSize: 14,
@@ -265,15 +267,16 @@ class _HabitatRow extends StatelessWidget {
   }
 
   Widget _tile(BuildContext context, String id) {
+    final colors = GuideColors.of(context);
     final strings = S.of(context);
     final name = guideCap(guideHabitatName(strings, id));
     final examples = guideHabitatExamples(strings, id);
     final remaining = counts?.byHabitat[id];
     return Material(
-      color: GuidePalette.cream,
+      color: colors.cream,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(14),
-        side: const BorderSide(color: GuidePalette.rule),
+        side: BorderSide(color: colors.rule),
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -290,9 +293,9 @@ class _HabitatRow extends StatelessWidget {
                   const Spacer(),
                   Text(
                     remaining == null ? ' ' : '$remaining',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: GuidePalette.ink3,
+                      color: colors.ink3,
                     ),
                   ),
                 ],
@@ -308,10 +311,10 @@ class _HabitatRow extends StatelessWidget {
               ),
               Text(
                 examples,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
                   height: 1.3,
-                  color: GuidePalette.ink3,
+                  color: colors.ink3,
                 ),
               ),
             ],

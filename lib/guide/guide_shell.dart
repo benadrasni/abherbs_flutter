@@ -1,17 +1,18 @@
 import 'dart:async';
 
-import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/book_page.dart';
 import 'package:abherbs_flutter/guide/find_page.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
+import 'package:abherbs_flutter/guide/guide_widgets.dart';
 import 'package:abherbs_flutter/guide/seen_page.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 class GuideShell extends StatefulWidget {
   const GuideShell({super.key});
@@ -30,18 +31,30 @@ class _GuideShellState extends State<GuideShell> {
   List<GuideListCover>? _lists;
   List<GuideFind>? _finds;
   int _credits = Auth.credits;
+  int _accountTicket = 0;
   StreamSubscription<User?>? _authSub;
   StreamSubscription<DatabaseEvent>? _creditsSub;
+  StreamSubscription<List<PurchaseDetails>>? _purchaseSub;
 
   @override
   void initState() {
     super.initState();
-    _authSub = Auth.subscribe((_) {
-      _watchCredits();
-      _loadFinds();
+    GuideAppearanceController.instance.apply(storedGuideAppearance());
+    _authSub = Auth.subscribe((user) {
+      unawaited(_onAccount(user));
     });
     _watchCredits();
     _loadColors();
+    _purchaseSub = InAppPurchase.instance.purchaseStream.listen(
+      (purchases) {
+        final owned = purchases.any((purchase) {
+          return purchase.status == PurchaseStatus.restored ||
+              purchase.status == PurchaseStatus.purchased;
+        });
+        if (owned && mounted) setState(() {});
+      },
+      onError: (Object error) => debugPrint('guide purchases: $error'),
+    );
   }
 
   @override
@@ -56,8 +69,12 @@ class _GuideShellState extends State<GuideShell> {
 
   @override
   void dispose() {
+    GuideTabs.show = null;
+    GuideTabs.showSeen = null;
+    GuideTabs.refreshSeen = null;
     _authSub?.cancel();
     _creditsSub?.cancel();
+    _purchaseSub?.cancel();
     super.dispose();
   }
 
@@ -67,6 +84,29 @@ class _GuideShellState extends State<GuideShell> {
       _index = index;
     });
     if (index == 2) _loadFinds();
+  }
+
+  /// Sign-in finishes after Find has drawn. Reload finds, then the account's
+  /// credits and purchases, and draw those on the camera card.
+  Future<void> _onAccount(User? user) async {
+    final ticket = ++_accountTicket;
+    _watchCredits();
+    if (mounted) {
+      setState(() {
+        if (user == null) _credits = 0;
+      });
+    }
+    final finds = _loadFinds();
+    if (user != null) {
+      try {
+        await Auth.setUser();
+      } catch (error) {
+        debugPrint('guide account: $error');
+      }
+    }
+    await finds;
+    if (!mounted || ticket != _accountTicket || user == null) return;
+    setState(() => _credits = Auth.credits);
   }
 
   void _watchCredits() {
@@ -134,105 +174,45 @@ class _GuideShellState extends State<GuideShell> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark.copyWith(
-        statusBarColor: Colors.transparent,
-        systemNavigationBarColor: GuidePalette.cream,
-      ),
-      child: Theme(
-        data: guideTheme(),
-        child: Scaffold(
-          backgroundColor: GuidePalette.paper,
-          body: SafeArea(
-            bottom: false,
-            child: IndexedStack(
-              index: _index,
-              sizing: StackFit.expand,
-              children: [
-                FindPage(
-                  colorCounts: _colorCounts,
-                  lists: _lists,
-                  finds: _finds,
-                  credits: _credits,
-                  onOpenBook: () => _go(1),
-                  onOpenSeen: () => _go(2),
-                ),
-                _opened.contains(1)
-                    ? BookPage(lists: _lists, onOpenFind: () => _go(0))
-                    : const SizedBox.shrink(),
-                _opened.contains(2)
-                    ? SeenPage(finds: _finds)
-                    : const SizedBox.shrink(),
-              ],
-            ),
-          ),
-          bottomNavigationBar: _Tabs(
+    GuideTabs.show = (index) {
+      if (mounted) _go(index);
+    };
+    GuideTabs.showSeen = () {
+      if (mounted) _go(2);
+    };
+    GuideTabs.refreshSeen = () {
+      if (mounted) _loadFinds();
+    };
+    return GuideTheme(
+      navigationColor: (colors) => colors.cream,
+      child: Scaffold(
+        body: SafeArea(
+          bottom: false,
+          child: IndexedStack(
             index: _index,
-            onSelect: _go,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _Tabs extends StatelessWidget {
-  final int index;
-  final ValueChanged<int> onSelect;
-
-  const _Tabs({required this.index, required this.onSelect});
-
-  @override
-  Widget build(BuildContext context) {
-    final bottom = MediaQuery.paddingOf(context).bottom;
-    final items = [
-      (S.of(context).guide_tab_find, Icons.center_focus_weak),
-      (S.of(context).guide_tab_book, Icons.menu_book_outlined),
-      (S.of(context).guide_tab_seen, Icons.article_outlined),
-    ];
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: GuidePalette.cream,
-        border: Border(top: BorderSide(color: GuidePalette.rule)),
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(bottom: bottom),
-        child: SizedBox(
-          height: 60,
-          child: Row(
+            sizing: StackFit.expand,
             children: [
-              for (var i = 0; i < items.length; i++)
-                Expanded(
-                  child: InkWell(
-                    onTap: () => onSelect(i),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          items[i].$2,
-                          size: 24,
-                          color: i == index
-                              ? GuidePalette.moss
-                              : GuidePalette.ink3,
-                        ),
-                        const SizedBox(height: 3),
-                        Text(
-                          items[i].$1,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight:
-                                i == index ? FontWeight.w600 : FontWeight.w400,
-                            color: i == index
-                                ? GuidePalette.moss
-                                : GuidePalette.ink3,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              FindPage(
+                colorCounts: _colorCounts,
+                lists: _lists,
+                finds: _finds,
+                credits: _credits,
+                onOpenBook: () => _go(1),
+                onOpenSeen: () => _go(2),
+              ),
+              _opened.contains(1)
+                  ? BookPage(lists: _lists, onOpenFind: () => _go(0))
+                  : const SizedBox.shrink(),
+              _opened.contains(2)
+                  ? SeenPage(finds: _finds)
+                  : const SizedBox.shrink(),
             ],
           ),
+        ),
+        bottomNavigationBar: GuideBottomBar(
+          index: _index,
+          showAd: _index == 0 && Purchases.showsAds(),
+          onSelect: _go,
         ),
       ),
     );

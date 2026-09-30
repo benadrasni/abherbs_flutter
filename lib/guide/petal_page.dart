@@ -110,6 +110,7 @@ class _GuidePetalPageState extends State<GuidePetalPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final strings = S.of(context);
     final colorName = guideCap(
       getFilterColorValue(context, widget.colorId),
@@ -118,6 +119,7 @@ class _GuidePetalPageState extends State<GuidePetalPage> {
     final habitatName =
         habitatId == null ? '' : guideCap(guideHabitatName(strings, habitatId));
     return GuideKeyScaffold(
+      withTabs: true,
       child: ListView(
         padding: const EdgeInsets.only(bottom: 20),
         children: [
@@ -149,19 +151,20 @@ class _GuidePetalPageState extends State<GuidePetalPage> {
               children: [
                 Text(
                   strings.guide_key_step_petal.toUpperCase(),
-                  style: GuideType.eyebrow,
+                  style: GuideType.eyebrow(colors),
                 ),
                 const SizedBox(height: 8),
                 const GuideKeyStepper(filled: 3),
                 const SizedBox(height: 12),
-                Text(strings.guide_petal_question, style: GuideType.question),
+                Text(strings.guide_petal_question,
+                    style: GuideType.question(colors)),
                 const SizedBox(height: 6),
                 Text(
                   strings.guide_petal_hint,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 13,
                     height: 1.4,
-                    color: GuidePalette.ink3,
+                    color: colors.ink3,
                   ),
                 ),
                 const SizedBox(height: 14),
@@ -230,13 +233,14 @@ class _PetalRow extends StatelessWidget {
   }
 
   Widget _tile(BuildContext context, String id) {
+    final colors = GuideColors.of(context);
     final strings = S.of(context);
     final remaining = counts?[id];
     return Material(
-      color: GuidePalette.cream,
+      color: colors.cream,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: const BorderSide(color: GuidePalette.rule),
+        side: BorderSide(color: colors.rule),
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -265,9 +269,9 @@ class _PetalRow extends StatelessWidget {
                 end: 12,
                 child: Text(
                   '$remaining',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
-                    color: GuidePalette.ink3,
+                    color: colors.ink3,
                   ),
                 ),
               ),

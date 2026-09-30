@@ -90,7 +90,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
     }
   }
 
-  bool get _showAd => widget.showAd ?? !Purchases.isNoAds();
+  bool get _showAd => widget.showAd ?? Purchases.showsAds();
 
   int get _month => widget.month ?? DateTime.now().month;
 
@@ -234,40 +234,42 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
       backgroundColor: Colors.transparent,
       builder: (sheetContext) {
         var showAll = false;
-        return StatefulBuilder(
-          builder: (context, setSheetState) {
-            final anyCount = _regionCounts[''];
-            return _RegionSheet(
-              title: strings.guide_region_title,
-              body: anyCount == null
-                  ? strings.guide_region_body_plain
-                  : strings.guide_region_body(anyCount),
-              locationTitle: strings.guide_use_location,
-              locationBody: _prefs.locationRefused
-                  ? strings.guide_location_refused
-                  : strings.guide_location_kept,
-              anyRegion: strings.guide_any_region,
-              allRegions: strings.guide_all_regions,
-              selectedId: _prefs.regionId,
-              counts: _regionCounts,
-              showAll: showAll,
-              regionName: (id) => getFilterDistributionValue(context, id),
-              groupName: (index) => _groupName(strings, index),
-              onLocation: () async {
-                await _useLocation(sheetContext);
-                if (sheetContext.mounted) setSheetState(() {});
-              },
-              onAny: () {
-                Navigator.pop(sheetContext);
-                _setRegion(null, fromLocation: false);
-              },
-              onRegion: (id) {
-                Navigator.pop(sheetContext);
-                _setRegion(id, fromLocation: false);
-              },
-              onShowAll: () => setSheetState(() => showAll = true),
-            );
-          },
+        return GuideTheme(
+          child: StatefulBuilder(
+            builder: (context, setSheetState) {
+              final anyCount = _regionCounts[''];
+              return _RegionSheet(
+                title: strings.guide_region_title,
+                body: anyCount == null
+                    ? strings.guide_region_body_plain
+                    : strings.guide_region_body(anyCount),
+                locationTitle: strings.guide_use_location,
+                locationBody: _prefs.locationRefused
+                    ? strings.guide_location_refused
+                    : strings.guide_location_kept,
+                anyRegion: strings.guide_any_region,
+                allRegions: strings.guide_all_regions,
+                selectedId: _prefs.regionId,
+                counts: _regionCounts,
+                showAll: showAll,
+                regionName: (id) => getFilterDistributionValue(context, id),
+                groupName: (index) => _groupName(strings, index),
+                onLocation: () async {
+                  await _useLocation(sheetContext);
+                  if (sheetContext.mounted) setSheetState(() {});
+                },
+                onAny: () {
+                  Navigator.pop(sheetContext);
+                  _setRegion(null, fromLocation: false);
+                },
+                onRegion: (id) {
+                  Navigator.pop(sheetContext);
+                  _setRegion(id, fromLocation: false);
+                },
+                onShowAll: () => setSheetState(() => showAll = true),
+              );
+            },
+          ),
         );
       },
     );
@@ -275,6 +277,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final strings = S.of(context);
     final arranged = _arranged;
     final seenCount = guideSeenInList(arranged.plants, _seen);
@@ -352,11 +355,11 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
             sliver: SliverList(
               delegate: SliverChildListDelegate([
                 if (_plants == null && _loading)
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(vertical: 48),
                     child: Center(
                       child: CircularProgressIndicator(
-                        color: GuidePalette.moss,
+                        color: colors.moss,
                       ),
                     ),
                   )
@@ -416,6 +419,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
   }
 
   Widget _monthRow(S strings, GuideMonthSlot slot) {
+    final colors = GuideColors.of(context);
     final label = !slot.inFlower
         ? strings.guide_other_months(slot.count)
         : slot.count > 0
@@ -428,21 +432,22 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
           Expanded(
             child: Text(
               label.toUpperCase(),
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
                 letterSpacing: 1,
                 fontWeight: FontWeight.w600,
-                color: GuidePalette.ink3,
+                color: colors.ink3,
               ),
             ),
           ),
-          if (slot.controls) _ViewSwitch(
-            photos: strings.guide_photos,
-            plates: strings.guide_plates,
-            platesOn: _plates,
-            onPhotos: () => setState(() => _plates = false),
-            onPlates: () => setState(() => _plates = true),
-          ),
+          if (slot.controls)
+            _ViewSwitch(
+              photos: strings.guide_photos,
+              plates: strings.guide_plates,
+              platesOn: _plates,
+              onPhotos: () => setState(() => _plates = false),
+              onPlates: () => setState(() => _plates = true),
+            ),
         ],
       ),
     );
@@ -463,6 +468,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
   }
 
   Widget _cell(GuideResultPlant plant) {
+    final colors = GuideColors.of(context);
     final seen = _seen.contains(plant.name);
     final path = _plates ? plant.platePath : plant.photoPath;
     return InkWell(
@@ -480,9 +486,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
                   height: constraints.maxHeight,
                   radius: 10,
                   fit: _plates ? BoxFit.contain : BoxFit.cover,
-                  background: _plates
-                      ? const Color(0xFFF1E8D6)
-                      : GuidePalette.paper2,
+                  background: _plates ? const Color(0xFFF1E8D6) : colors.paper2,
                 );
               },
             ),
@@ -492,22 +496,22 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
             plant.shownName,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: GuideType.serif,
               fontWeight: FontWeight.w500,
               fontSize: 16,
               height: 1.15,
-              color: GuidePalette.ink,
+              color: colors.ink,
             ),
           ),
           Text(
             plant.name,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: GuideType.latin.copyWith(
+            style: GuideType.latin(colors).copyWith(
               fontSize: 13,
               height: 1.2,
-              color: GuidePalette.ink3,
+              color: colors.ink3,
             ),
           ),
           if (seen)
@@ -515,10 +519,10 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
               padding: const EdgeInsets.only(top: 3),
               child: Text(
                 S.of(context).guide_seen_mark,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: GuidePalette.moss,
+                  color: colors.moss,
                 ),
               ),
             ),
@@ -528,14 +532,15 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
   }
 
   Widget _footer(S strings) {
+    final colors = GuideColors.of(context);
     return Padding(
       padding: const EdgeInsets.only(top: 6, bottom: 8),
       child: Text.rich(
         TextSpan(
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 13,
             height: 1.4,
-            color: GuidePalette.ink3,
+            color: colors.ink3,
           ),
           children: [
             TextSpan(text: strings.guide_results_missing),
@@ -547,11 +552,11 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
                 onTap: () => widget.onTryPhoto(context),
                 child: Text(
                   strings.guide_search_try_photo,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 13,
                     height: 1.4,
                     fontWeight: FontWeight.w600,
-                    color: GuidePalette.moss,
+                    color: colors.moss,
                   ),
                 ),
               ),
@@ -594,27 +599,28 @@ class _CountLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Text.rich(
       TextSpan(
         text: '$count',
-        style: const TextStyle(
+        style: TextStyle(
           fontFamily: GuideType.serif,
           fontWeight: FontWeight.w500,
           fontSize: 30,
           letterSpacing: -0.6,
           height: 1,
-          color: GuidePalette.ink,
+          color: colors.ink,
         ),
         children: [
           TextSpan(
             text: ' $caption',
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: GuideType.sans,
               fontWeight: FontWeight.w400,
               fontSize: 14,
               letterSpacing: 0,
               height: 1.3,
-              color: GuidePalette.ink3,
+              color: colors.ink3,
             ),
           ),
         ],
@@ -644,8 +650,9 @@ class _FilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return ColoredBox(
-      color: GuidePalette.paper,
+      color: colors.paper,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         child: SingleChildScrollView(
@@ -690,12 +697,13 @@ class _ChoiceChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final foreground = selected ? Colors.white : GuidePalette.ink;
+    final colors = GuideColors.of(context);
+    final foreground = selected ? Colors.white : colors.ink;
     return Material(
-      color: selected ? GuidePalette.moss : GuidePalette.cream,
+      color: selected ? colors.mossFill : colors.cream,
       shape: StadiumBorder(
         side: BorderSide(
-          color: selected ? GuidePalette.moss : GuidePalette.rule,
+          color: selected ? colors.mossFill : colors.rule,
         ),
       ),
       clipBehavior: Clip.antiAlias,
@@ -750,25 +758,32 @@ class _ViewSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: GuidePalette.cream,
+        color: colors.cream,
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: GuidePalette.rule),
+        border: Border.all(color: colors.rule),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _segment(photos, !platesOn, onPhotos),
-          _segment(plates, platesOn, onPlates),
+          _segment(context, photos, !platesOn, onPhotos),
+          _segment(context, plates, platesOn, onPlates),
         ],
       ),
     );
   }
 
-  Widget _segment(String label, bool on, VoidCallback onPressed) {
+  Widget _segment(
+    BuildContext context,
+    String label,
+    bool on,
+    VoidCallback onPressed,
+  ) {
+    final colors = GuideColors.of(context);
     return Material(
-      color: on ? GuidePalette.ink : Colors.transparent,
+      color: on ? colors.ink : Colors.transparent,
       borderRadius: BorderRadius.circular(14),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -783,7 +798,7 @@ class _ViewSwitch extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
-                  color: on ? Colors.white : GuidePalette.ink3,
+                  color: on ? colors.onInk : colors.ink3,
                 ),
               ),
             ),
@@ -825,6 +840,7 @@ class _Retry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final strings = S.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 32),
@@ -832,7 +848,7 @@ class _Retry extends StatelessWidget {
         children: [
           Text(
             strings.guide_results_failed,
-            style: const TextStyle(color: GuidePalette.ink2),
+            style: TextStyle(color: colors.ink2),
           ),
           const SizedBox(height: 8),
           TextButton(
@@ -901,11 +917,12 @@ class _RegionSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final height = MediaQuery.sizeOf(context).height * 0.86;
     return Align(
       alignment: Alignment.bottomCenter,
       child: Material(
-        color: GuidePalette.paper,
+        color: colors.paper,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(22)),
         clipBehavior: Clip.antiAlias,
         child: ConstrainedBox(
@@ -914,10 +931,10 @@ class _RegionSheet extends StatelessWidget {
             shrinkWrap: true,
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 34),
             children: [
-              const Center(
+              Center(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color: GuidePalette.rule,
+                    color: colors.rule,
                     borderRadius: BorderRadius.all(Radius.circular(3)),
                   ),
                   child: SizedBox(width: 40, height: 5),
@@ -926,20 +943,20 @@ class _RegionSheet extends StatelessWidget {
               const SizedBox(height: 14),
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: GuideType.serif,
                   fontWeight: FontWeight.w500,
                   fontSize: 23,
                   height: 1.12,
                   letterSpacing: -0.2,
-                  color: GuidePalette.ink,
+                  color: colors.ink,
                 ),
               ),
               const SizedBox(height: 6),
               Text(
                 body,
-                style: const TextStyle(
-                  color: GuidePalette.ink2,
+                style: TextStyle(
+                  color: colors.ink2,
                   height: 1.4,
                 ),
               ),
@@ -969,8 +986,8 @@ class _RegionSheet extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 11),
                     child: Text(
                       allRegions,
-                      style: const TextStyle(
-                        color: GuidePalette.moss,
+                      style: TextStyle(
+                        color: colors.moss,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -982,7 +999,7 @@ class _RegionSheet extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 14, bottom: 2),
                     child: Text(
                       groupName(i).toUpperCase(),
-                      style: GuideType.eyebrow,
+                      style: GuideType.eyebrow(colors),
                     ),
                   ),
                   for (final id in guideRegionGroups[i])
@@ -1014,13 +1031,14 @@ class _LocationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Material(
-        color: GuidePalette.cream,
+        color: colors.cream,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14),
-          side: const BorderSide(color: GuidePalette.rule),
+          side: BorderSide(color: colors.rule),
         ),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -1029,7 +1047,7 @@ class _LocationButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
             child: Row(
               children: [
-                const Icon(Icons.place, color: GuidePalette.moss, size: 22),
+                Icon(Icons.place, color: colors.moss, size: 22),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -1042,9 +1060,9 @@ class _LocationButton extends StatelessWidget {
                       const SizedBox(height: 2),
                       Text(
                         body,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 13,
-                          color: GuidePalette.ink3,
+                          color: colors.ink3,
                         ),
                       ),
                     ],
@@ -1074,11 +1092,12 @@ class _RadioRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return InkWell(
       onTap: onPressed,
       child: DecoratedBox(
-        decoration: const BoxDecoration(
-          border: Border(bottom: BorderSide(color: GuidePalette.rule)),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: colors.rule)),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 11),
@@ -1090,7 +1109,7 @@ class _RadioRow extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: selected ? GuidePalette.moss : GuidePalette.ink3,
+                    color: selected ? colors.moss : colors.ink3,
                     width: selected ? 6 : 1.5,
                   ),
                 ),
@@ -1100,9 +1119,9 @@ class _RadioRow extends StatelessWidget {
               if (count != null)
                 Text(
                   '$count',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 13,
-                    color: GuidePalette.ink3,
+                    color: colors.ink3,
                   ),
                 ),
             ],

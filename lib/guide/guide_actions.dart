@@ -1,19 +1,30 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_location.dart';
 import 'package:abherbs_flutter/guide/habitat_page.dart';
+import 'package:abherbs_flutter/guide/person_page.dart';
 import 'package:abherbs_flutter/guide/petal_page.dart';
 import 'package:abherbs_flutter/guide/results_page.dart';
 import 'package:abherbs_flutter/guide/search_page.dart';
+import 'package:abherbs_flutter/guide/sign_in_page.dart';
+import 'package:abherbs_flutter/guide/species_page.dart';
 import 'package:abherbs_flutter/plant_list.dart';
+import 'package:abherbs_flutter/main.dart';
+import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/search/search_photo.dart';
+import 'package:abherbs_flutter/settings/setting_pref_language.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
+import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:intl/intl.dart';
 
 void openGuideSearch(
@@ -52,6 +63,76 @@ void openGuideTaxon(BuildContext context, String listPath) {
 
 void openGuideAccount(BuildContext context) {
   Navigator.push(
+    context,
+    MaterialPageRoute<void>(
+      settings: const RouteSettings(name: guidePersonRouteName),
+      builder: (context) => GuidePersonPage(
+        onSignIn: openGuideSignIn,
+        onSignOut: guideSignOut,
+        onRestore: guideRestorePurchases,
+        onLanguage: openGuideLanguage,
+        onFieldGuide: openGuideFieldGuide,
+        onOffline: openGuideOffline,
+      ),
+    ),
+  );
+}
+
+Future<void> guideSignOut(BuildContext context) {
+  return Auth.signOut();
+}
+
+Future<void> guideRestorePurchases(BuildContext context) async {
+  final store = InAppPurchase.instance;
+  final available = await store.isAvailable();
+  if (!context.mounted) return;
+  if (!available) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(S.of(context).product_purchase_failed)),
+    );
+    return;
+  }
+  Purchases.purchases = {};
+  await store.restorePurchases();
+  if (!context.mounted) return;
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(S.of(context).guide_person_restoring)),
+  );
+}
+
+Future<void> openGuideLanguage(BuildContext context) async {
+  await Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => SettingPrefLanguage(),
+      settings: const RouteSettings(name: 'SettingPrefLanguage'),
+    ),
+  );
+  if (!context.mounted) return;
+  final language = await Prefs.getStringF(keyPreferredLanguage);
+  if (!context.mounted) return;
+  App.setLocale(context, language);
+  await FirebaseAnalytics.instance.logEvent(
+    name: 'setting',
+    parameters: {
+      'type': 'preferred_language',
+      'language': language.isEmpty ? 'default' : language,
+    },
+  );
+}
+
+Future<void> openGuideFieldGuide(BuildContext context) {
+  return Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => EnhancementsScreen(const <String, String>{}),
+      settings: const RouteSettings(name: 'Enhancements'),
+    ),
+  );
+}
+
+Future<void> openGuideOffline(BuildContext context) {
+  return Navigator.push(
     context,
     MaterialPageRoute(
       builder: (context) => SettingsScreen(const <String, String>{}),
@@ -149,9 +230,22 @@ void openGuideList(BuildContext context, GuideListCover cover) {
 }
 
 void openGuidePlant(BuildContext context, String name) {
-  final state = context.findAncestorStateOfType<State>();
-  if (state == null) return;
-  goToDetail(state, context, Localizations.localeOf(context), name, const {});
+  unawaited(
+    FirebaseAnalytics.instance
+        .logSelectContent(contentType: 'plant', itemId: name)
+        .catchError((Object error) => debugPrint('guide species: $error')),
+  );
+  Navigator.push(
+    context,
+    MaterialPageRoute<void>(
+      settings: const RouteSettings(name: guideSpeciesRouteName),
+      builder: (context) => GuideSpeciesPage(
+        name: name,
+        load: (languageCode) => loadGuideSpecies(name, languageCode),
+        onShowSeen: GuideTabs.showSeen,
+      ),
+    ),
+  );
 }
 
 Future<void> openGuideCamera(BuildContext context) async {

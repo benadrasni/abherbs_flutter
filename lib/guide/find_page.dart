@@ -5,7 +5,6 @@ import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
-import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 
 class FindPage extends StatelessWidget {
@@ -62,7 +61,6 @@ class FindPage extends StatelessWidget {
           )
         else if (flowerLists.isNotEmpty)
           _ListStrip(lists: flowerLists),
-        AppBannerAd(),
       ],
     );
   }
@@ -73,13 +71,14 @@ class _SearchButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Padding(
       padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
       child: Material(
-        color: GuidePalette.cream,
+        color: colors.cream,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
-          side: const BorderSide(color: GuidePalette.rule),
+          side: BorderSide(color: colors.rule),
         ),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -89,15 +88,14 @@ class _SearchButton extends StatelessWidget {
             child: Row(
               children: [
                 const SizedBox(width: 16),
-                const Icon(Icons.search, size: 20, color: GuidePalette.ink3),
+                Icon(Icons.search, size: 20, color: colors.ink3),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     S.of(context).guide_search,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style:
-                        const TextStyle(fontSize: 15, color: GuidePalette.ink3),
+                    style: TextStyle(fontSize: 15, color: colors.ink3),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -117,10 +115,11 @@ class _CameraCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(20, 14, 20, 0),
       child: Material(
-        color: GuidePalette.moss,
+        color: colors.mossFill,
         borderRadius: BorderRadius.circular(18),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -135,12 +134,12 @@ class _CameraCard extends StatelessWidget {
                     children: [
                       Text(
                         S.of(context).guide_camera_title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: GuideType.serif,
                           fontWeight: FontWeight.w500,
                           fontSize: 21,
                           height: 1.1,
-                          color: GuidePalette.paper,
+                          color: colors.onMoss,
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -149,7 +148,7 @@ class _CameraCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 13,
                           height: 1.3,
-                          color: GuidePalette.paper.withValues(alpha: 0.82),
+                          color: colors.onMoss.withValues(alpha: 0.82),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -158,16 +157,16 @@ class _CameraCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                const DecoratedBox(
+                DecoratedBox(
                   decoration: BoxDecoration(
-                    color: GuidePalette.paper,
+                    color: colors.onMoss,
                     shape: BoxShape.circle,
                   ),
                   child: SizedBox(
                     width: 58,
                     height: 58,
                     child: Icon(Icons.photo_camera_outlined,
-                        color: GuidePalette.moss, size: 28),
+                        color: colors.mossFill, size: 28),
                   ),
                 ),
               ],
@@ -186,10 +185,11 @@ class _Meter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final style = TextStyle(
       fontSize: 12,
       height: 1.2,
-      color: GuidePalette.paper.withValues(alpha: 0.9),
+      color: colors.onMoss.withValues(alpha: 0.9),
     );
     if (Purchases.isPhotoSearch()) {
       return Text(S.of(context).guide_meter_unlimited, style: style);
@@ -226,13 +226,14 @@ class _Dot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Container(
       width: 9,
       height: 9,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: filled ? GuidePalette.paper : Colors.transparent,
-        border: Border.all(color: GuidePalette.paper, width: 1.5),
+        color: filled ? colors.onMoss : Colors.transparent,
+        border: Border.all(color: colors.onMoss, width: 1.5),
       ),
     );
   }
@@ -245,6 +246,7 @@ class _KeyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final s = S.of(context);
     final swatches = [
       ('1', s.color_white),
@@ -260,18 +262,19 @@ class _KeyCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(s.guide_key_step.toUpperCase(), style: GuideType.eyebrow),
+              Text(s.guide_key_step.toUpperCase(),
+                  style: GuideType.eyebrow(colors)),
               const Spacer(),
               Text(
                 s.guide_always_free.toUpperCase(),
-                style: GuideType.eyebrow.copyWith(color: GuidePalette.moss),
+                style: GuideType.eyebrow(colors).copyWith(color: colors.moss),
               ),
             ],
           ),
           const SizedBox(height: 8),
           const GuideKeyStepper(filled: 1),
           const SizedBox(height: 12),
-          Text(s.guide_color_question, style: GuideType.question),
+          Text(s.guide_color_question, style: GuideType.question(colors)),
           const SizedBox(height: 14),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -290,8 +293,7 @@ class _KeyCard extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             s.guide_key_hint,
-            style: const TextStyle(
-                fontSize: 13, height: 1.4, color: GuidePalette.ink3),
+            style: TextStyle(fontSize: 13, height: 1.4, color: colors.ink3),
           ),
         ],
       ),
@@ -314,6 +316,7 @@ class _Swatch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 3),
       child: Material(
@@ -352,9 +355,9 @@ class _Swatch extends StatelessWidget {
                   end: 6,
                   child: Text(
                     '$count',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 11,
-                      color: GuidePalette.ink3,
+                      color: colors.ink3,
                     ),
                   ),
                 ),
@@ -373,6 +376,7 @@ class _FindStrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return SizedBox(
       height: 180,
       child: ListView.separated(
@@ -397,8 +401,7 @@ class _FindStrip extends StatelessWidget {
                     guideWhen(context, find.when),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style:
-                        const TextStyle(fontSize: 11, color: GuidePalette.ink3),
+                    style: TextStyle(fontSize: 11, color: colors.ink3),
                   ),
                 ],
               ),
@@ -417,6 +420,7 @@ class _ListStrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return SizedBox(
       height: 148,
       child: ListView.separated(
@@ -438,7 +442,7 @@ class _ListStrip extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       border: cover.isNew
-                          ? Border.all(color: GuidePalette.gold, width: 2)
+                          ? Border.all(color: colors.gold, width: 2)
                           : null,
                     ),
                     child: ClipRRect(
@@ -495,8 +499,8 @@ class _ListStrip extends StatelessWidget {
                     guideListSubtitle(context, cover),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontSize: 12, height: 1.25, color: GuidePalette.ink3),
+                    style: TextStyle(
+                        fontSize: 12, height: 1.25, color: colors.ink3),
                   ),
                 ],
               ),

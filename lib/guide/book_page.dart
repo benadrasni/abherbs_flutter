@@ -17,12 +17,14 @@ class BookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final flowerLists = lists;
     return ListView(
       padding: const EdgeInsets.only(bottom: 24),
       children: [
         GuideTitleBar(
-          title: Text(S.of(context).guide_tab_book, style: GuideType.wordmark),
+          title: Text(S.of(context).guide_tab_book,
+              style: GuideType.wordmark(colors)),
           actionLabel: S.of(context).guide_search,
           icon: Icons.search,
           onAction: () => openGuideSearch(
@@ -35,7 +37,7 @@ class BookPage extends StatelessWidget {
           padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 14),
           child: Text(
             S.of(context).custom_lists,
-            style: GuideType.section,
+            style: GuideType.section(colors),
           ),
         ),
         if (flowerLists == null)
@@ -57,6 +59,7 @@ class _ListRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return InkWell(
       onTap: () => openGuideList(context, cover),
       child: Padding(
@@ -67,7 +70,7 @@ class _ListRow extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 border: cover.isNew
-                    ? Border.all(color: GuidePalette.gold, width: 2)
+                    ? Border.all(color: colors.gold, width: 2)
                     : null,
               ),
               child: GuidePhoto(path: cover.photoPath, width: 96, height: 72),
@@ -89,8 +92,7 @@ class _ListRow extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     guideListSubtitle(context, cover),
-                    style:
-                        const TextStyle(fontSize: 13, color: GuidePalette.ink3),
+                    style: TextStyle(fontSize: 13, color: colors.ink3),
                   ),
                 ],
               ),

@@ -20,7 +20,15 @@ class Purchases {
   }
 
   static bool isNoAds() {
-    return hasOldVersion || purchases.containsKey(productNoAdsAndroid) || purchases.containsKey(productNoAdsIOS);
+    return hasOldVersion ||
+        purchases.containsKey(productNoAdsAndroid) ||
+        purchases.containsKey(productNoAdsIOS);
+  }
+
+  /// Free accounts see banners. Remove ads, the old paid app, and a Field
+  /// Guide plan (including photo storage) do not.
+  static bool showsAds() {
+    return !isNoAds() && !isSubscribed();
   }
 
   static bool isSearch() {
@@ -56,7 +64,8 @@ class Purchases {
   }
 
   static bool isSubscribed() {
-    return hasLifetimeSubscription || isSubscribedMonthly() || isSubscribedYearly();
+    return hasLifetimeSubscription ||
+        isSubscribedMonthly() ||
+        isSubscribedYearly();
   }
-
 }

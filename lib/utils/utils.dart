@@ -44,6 +44,7 @@ const String keyGuideRegion = "guide_region";
 const String keyGuideRegionFromLocation = "guide_region_from_location";
 const String keyGuideWildOnly = "guide_wild_only";
 const String keyGuideLocationRefused = "guide_location_refused";
+const String keyGuideTheme = "guide_theme";
 const String keyOffline = "offline";
 const String keyOfflinePlant = "offline_plant";
 const String keyOfflineFamily = "offline_family";
@@ -290,8 +291,7 @@ final DatabaseReference rootReference = FirebaseDatabase.instance.ref();
 final DatabaseReference countsReference = rootReference.child(firebaseCounts);
 final DatabaseReference countsV3Reference =
     rootReference.child(firebaseCountsV3);
-final DatabaseReference listsV3Reference =
-    rootReference.child(firebaseListsV3);
+final DatabaseReference listsV3Reference = rootReference.child(firebaseListsV3);
 final DatabaseReference headersV3Reference =
     rootReference.child(firebasePlantHeadersV3);
 final DatabaseReference listsReference =

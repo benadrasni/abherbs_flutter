@@ -4,7 +4,6 @@ import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class GuideSearchPage extends StatefulWidget {
   final bool fromBook;
@@ -164,22 +163,15 @@ class _GuideSearchPageState extends State<GuideSearchPage> {
     final backLabel = widget.fromBook
         ? S.of(context).guide_tab_book
         : S.of(context).guide_tab_find;
-    return Theme(
-      data: guideTheme(),
-      child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.dark.copyWith(
-          statusBarColor: Colors.transparent,
-        ),
-        child: Scaffold(
-          backgroundColor: GuidePalette.paper,
-          body: SafeArea(
-            child: Column(
-              children: [
-                _BackButton(label: backLabel),
-                _QueryField(controller: _controller),
-                Expanded(child: _body()),
-              ],
-            ),
+    return GuideTheme(
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              _BackButton(label: backLabel),
+              _QueryField(controller: _controller),
+              Expanded(child: _body()),
+            ],
           ),
         ),
       ),
@@ -256,6 +248,7 @@ class _BackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Align(
       alignment: AlignmentDirectional.centerStart,
       child: InkWell(
@@ -266,15 +259,15 @@ class _BackButton extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const IconTheme(
-                data: IconThemeData(color: GuidePalette.moss, size: 20),
+              IconTheme(
+                data: IconThemeData(color: colors.moss, size: 20),
                 child: BackButtonIcon(),
               ),
               const SizedBox(width: 8),
               Text(
                 label,
-                style: const TextStyle(
-                  color: GuidePalette.moss,
+                style: TextStyle(
+                  color: colors.moss,
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
                 ),
@@ -294,36 +287,37 @@ class _QueryField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(20, 4, 20, 12),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: GuidePalette.cream,
+          color: colors.cream,
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: GuidePalette.moss, width: 1.5),
+          border: Border.all(color: colors.moss, width: 1.5),
         ),
         child: SizedBox(
           height: 48,
           child: Row(
             children: [
               const SizedBox(width: 16),
-              const Icon(Icons.search, size: 20, color: GuidePalette.ink3),
+              Icon(Icons.search, size: 20, color: colors.ink3),
               const SizedBox(width: 10),
               Expanded(
                 child: TextField(
                   controller: controller,
                   autofocus: true,
-                  cursorColor: GuidePalette.moss,
+                  cursorColor: colors.moss,
                   textInputAction: TextInputAction.search,
                   textAlignVertical: TextAlignVertical.center,
-                  style: const TextStyle(fontSize: 16, color: GuidePalette.ink),
+                  style: TextStyle(fontSize: 16, color: colors.ink),
                   decoration: InputDecoration(
                     isCollapsed: true,
                     border: InputBorder.none,
                     hintText: S.of(context).guide_search_hint,
-                    hintStyle: const TextStyle(
+                    hintStyle: TextStyle(
                       fontSize: 16,
-                      color: GuidePalette.ink3,
+                      color: colors.ink3,
                     ),
                   ),
                 ),
@@ -344,9 +338,10 @@ class _SectionLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(20, 10, 20, 2),
-      child: Text(title.toUpperCase(), style: GuideType.eyebrow),
+      child: Text(title.toUpperCase(), style: GuideType.eyebrow(colors)),
     );
   }
 }
@@ -370,6 +365,7 @@ class _ResultRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final named = title != null && title!.isNotEmpty;
     final showLatin = latin != null && latin!.isNotEmpty && latin != title;
     return InkWell(
@@ -400,10 +396,10 @@ class _ResultRow extends StatelessWidget {
                       latin!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: GuideType.latin.copyWith(
+                      style: GuideType.latin(colors).copyWith(
                         fontSize: named ? 13 : 16,
                         height: 1.2,
-                        color: named ? GuidePalette.ink3 : GuidePalette.ink,
+                        color: named ? colors.ink3 : colors.ink,
                       ),
                     ),
                 ],
@@ -413,7 +409,7 @@ class _ResultRow extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 '$count',
-                style: const TextStyle(fontSize: 12, color: GuidePalette.ink3),
+                style: TextStyle(fontSize: 12, color: colors.ink3),
               ),
             ],
           ],
@@ -431,19 +427,20 @@ class _Thumb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final photo = GuidePhoto(
       path: path,
       width: 44,
       height: 44,
       radius: 8,
       fit: plate ? BoxFit.contain : BoxFit.cover,
-      background: plate ? GuidePalette.cream : GuidePalette.paper2,
+      background: plate ? colors.cream : colors.paper2,
     );
     if (!plate) return photo;
     return Container(
       foregroundDecoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: GuidePalette.rule),
+        border: Border.all(color: colors.rule),
       ),
       child: photo,
     );
@@ -458,6 +455,7 @@ class _Empty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final photo = S.of(context).guide_search_try_photo;
     final key = S.of(context).guide_search_key;
     final sentence = S.of(context).guide_search_empty(photo, key);
@@ -467,15 +465,15 @@ class _Empty extends StatelessWidget {
         margin: const EdgeInsetsDirectional.fromSTEB(20, 14, 20, 0),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(
-          color: GuidePalette.paper2,
+          color: colors.paper2,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text.rich(
           TextSpan(
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
               height: 1.4,
-              color: GuidePalette.ink2,
+              color: colors.ink2,
             ),
             children: _spans(sentence, photo, key),
           ),
@@ -522,12 +520,13 @@ class _Link extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return GestureDetector(
       onTap: onTap,
       child: Text(
         text,
-        style: const TextStyle(
-          color: GuidePalette.moss,
+        style: TextStyle(
+          color: colors.moss,
           fontWeight: FontWeight.w600,
           fontSize: 14,
           height: 1.4,
@@ -544,12 +543,13 @@ class _IndexError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
         TextButton(
           onPressed: onRetry,
-          style: TextButton.styleFrom(foregroundColor: GuidePalette.ink2),
+          style: TextButton.styleFrom(foregroundColor: colors.ink2),
           child: Text(
             S.of(context).no_connection_content,
             textAlign: TextAlign.center,

@@ -12,40 +12,42 @@ class GuideHabitatGlyph extends StatelessWidget {
     return SizedBox(
       width: 36,
       height: 36,
-      child: CustomPaint(painter: _HabitatPainter(id)),
+      child: CustomPaint(
+        painter: _HabitatPainter(id, GuideColors.of(context).moss),
+      ),
     );
   }
 }
 
 class _HabitatPainter extends CustomPainter {
   final String id;
+  final Color color;
 
-  _HabitatPainter(this.id);
+  _HabitatPainter(this.id, this.color);
 
   @override
   void paint(Canvas canvas, Size size) {
     final draw = _drawers[id];
     if (draw == null) return;
+    final stroke = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.6
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round;
+    final fill = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
     canvas.save();
     canvas.scale(size.width / 44, size.height / 44);
-    draw(canvas, _stroke, _fill);
+    draw(canvas, stroke, fill);
     canvas.restore();
   }
 
   @override
-  bool shouldRepaint(_HabitatPainter oldDelegate) => oldDelegate.id != id;
+  bool shouldRepaint(_HabitatPainter oldDelegate) =>
+      oldDelegate.id != id || oldDelegate.color != color;
 }
-
-final Paint _stroke = Paint()
-  ..color = GuidePalette.moss
-  ..style = PaintingStyle.stroke
-  ..strokeWidth = 1.6
-  ..strokeCap = StrokeCap.round
-  ..strokeJoin = StrokeJoin.round;
-
-final Paint _fill = Paint()
-  ..color = GuidePalette.moss
-  ..style = PaintingStyle.fill;
 
 void _path(Canvas canvas, Paint paint, String data) {
   canvas.drawPath(parseGuidePath(data), paint);

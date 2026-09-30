@@ -5,11 +5,24 @@ import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_path.dart';
 import 'package:abherbs_flutter/guide/habitat_glyphs.dart';
 import 'package:abherbs_flutter/guide/habitat_page.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  setUp(() {
+    Purchases.hasOldVersion = true;
+    Purchases.purchases = {};
+  });
+
+  tearDown(() {
+    Purchases.hasOldVersion = false;
+    Purchases.purchases = {};
+    GuideTabs.show = null;
+  });
+
   test('the key keeps the eight v3 places in grid order', () {
     expect(guideHabitatIds, ['4', '1', '7', '8', '3', '9', '5', '10']);
     expect(guideFilterKey(colorId: '1'), '1___');
@@ -154,6 +167,25 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Where is it growing?'), findsNothing);
   });
+
+  testWidgets('pins the banner above the Find tabs', (tester) async {
+    var tab = -1;
+    GuideTabs.show = (index) => tab = index;
+    await _pump(tester, _named());
+
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+    expect(find.text('Find'), findsOneWidget);
+    expect(find.text('Book'), findsOneWidget);
+    expect(find.text('Seen'), findsOneWidget);
+    expect(find.byType(AppBannerAd), findsOneWidget);
+
+    await tester.tap(find.text('Book'));
+    await tester.pumpAndSettle();
+    expect(tab, 1);
+    expect(find.text('Where is it growing?'), findsNothing);
+    expect(find.text('open'), findsOneWidget);
+  });
 }
 
 GuideHabitatCounts _counts({int coast = 88}) {
@@ -205,6 +237,10 @@ Widget _page({
 }
 
 Widget _open() {
+  return _named();
+}
+
+Widget _named() {
   return _app(
     Builder(
       builder: (context) => TextButton(
@@ -212,6 +248,7 @@ Widget _open() {
           Navigator.push(
             context,
             MaterialPageRoute<void>(
+              settings: const RouteSettings(name: guideHabitatRouteName),
               builder: (context) => GuideHabitatPage(
                 colorId: '1',
                 counts: _counts(),

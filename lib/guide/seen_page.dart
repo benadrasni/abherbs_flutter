@@ -12,12 +12,14 @@ class SeenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final saved = finds;
     return ListView(
       padding: const EdgeInsets.only(bottom: 24),
       children: [
         GuideTitleBar(
-          title: Text(S.of(context).guide_tab_seen, style: GuideType.wordmark),
+          title: Text(S.of(context).guide_tab_seen,
+              style: GuideType.wordmark(colors)),
           actionLabel: S.of(context).guide_camera_title,
           icon: Icons.photo_camera_outlined,
           onAction: () => openGuideCamera(context),
@@ -35,8 +37,7 @@ class SeenPage extends StatelessWidget {
                 )
               : Text(
                   saved.isEmpty ? S.of(context).guide_seen_empty : '',
-                  style:
-                      const TextStyle(fontSize: 13, color: GuidePalette.ink3),
+                  style: TextStyle(fontSize: 13, color: colors.ink3),
                 ),
         ),
         if (saved != null)
@@ -68,15 +69,14 @@ class SeenPage extends StatelessWidget {
                               find.name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: GuideType.latin.copyWith(
-                                  fontSize: 13, color: GuidePalette.ink3),
+                              style: GuideType.latin(colors)
+                                  .copyWith(fontSize: 13, color: colors.ink3),
                             ),
                           ],
                           const SizedBox(height: 3),
                           Text(
                             guideWhen(context, find.when),
-                            style: const TextStyle(
-                                fontSize: 12, color: GuidePalette.ink3),
+                            style: TextStyle(fontSize: 12, color: colors.ink3),
                           ),
                         ],
                       ),

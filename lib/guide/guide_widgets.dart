@@ -2,8 +2,8 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class GuideTitleBar extends StatelessWidget {
   final Widget title;
@@ -21,6 +21,7 @@ class GuideTitleBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(20, 6, 20, 12),
       child: Row(
@@ -30,9 +31,9 @@ class GuideTitleBar extends StatelessWidget {
           Tooltip(
             message: actionLabel,
             child: Material(
-              color: GuidePalette.cream,
-              shape: const CircleBorder(
-                side: BorderSide(color: GuidePalette.rule),
+              color: colors.cream,
+              shape: CircleBorder(
+                side: BorderSide(color: colors.rule),
               ),
               clipBehavior: Clip.antiAlias,
               child: InkWell(
@@ -41,7 +42,7 @@ class GuideTitleBar extends StatelessWidget {
                 child: SizedBox(
                   width: 38,
                   height: 38,
-                  child: Icon(icon, size: 20, color: GuidePalette.ink),
+                  child: Icon(icon, size: 20, color: colors.ink),
                 ),
               ),
             ),
@@ -57,17 +58,18 @@ class GuideWordmark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Text.rich(
       TextSpan(
-        style: GuideType.wordmark,
+        style: GuideType.wordmark(colors),
         children: [
           TextSpan(text: S.of(context).guide_brand_lead),
           TextSpan(
             text: S.of(context).guide_brand_name,
-            style: const TextStyle(
+            style: TextStyle(
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.w400,
-              color: GuidePalette.madder,
+              color: colors.madder,
             ),
           ),
         ],
@@ -90,15 +92,16 @@ class GuideSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(20, 24, 12, 10),
       child: Row(
         children: [
-          Expanded(child: Text(title, style: GuideType.section)),
+          Expanded(child: Text(title, style: GuideType.section(colors))),
           TextButton(
             onPressed: onAction,
             style: TextButton.styleFrom(
-              foregroundColor: GuidePalette.moss,
+              foregroundColor: colors.moss,
               textStyle: const TextStyle(
                 fontFamily: GuideType.sans,
                 fontSize: 14,
@@ -119,7 +122,7 @@ class GuidePhoto extends StatelessWidget {
   final double height;
   final double radius;
   final BoxFit fit;
-  final Color background;
+  final Color? background;
 
   const GuidePhoto({
     super.key,
@@ -128,12 +131,14 @@ class GuidePhoto extends StatelessWidget {
     required this.height,
     this.radius = 12,
     this.fit = BoxFit.cover,
-    this.background = GuidePalette.paper2,
+    this.background,
   });
 
   @override
   Widget build(BuildContext context) {
-    final placeholder = ColoredBox(color: background);
+    final placeholder = ColoredBox(
+      color: background ?? GuideColors.of(context).paper2,
+    );
     return ClipRRect(
       borderRadius: BorderRadius.circular(radius),
       child: SizedBox(
@@ -194,6 +199,7 @@ class GuideName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     final named = label != null && label!.isNotEmpty;
     return Text(
       named ? guideCap(label!) : latinName,
@@ -205,9 +211,9 @@ class GuideName extends StatelessWidget {
               fontWeight: FontWeight.w600,
               fontSize: size,
               height: 1.2,
-              color: GuidePalette.ink,
+              color: colors.ink,
             )
-          : GuideType.latin.copyWith(fontSize: size, height: 1.2),
+          : GuideType.latin(colors).copyWith(fontSize: size, height: 1.2),
     );
   }
 }
@@ -215,19 +221,113 @@ class GuideName extends StatelessWidget {
 class GuideKeyScaffold extends StatelessWidget {
   final Widget child;
 
-  const GuideKeyScaffold({super.key, required this.child});
+  /// Habitat and petal keep the Find, Book, and Seen bar, with the banner
+  /// pinned above it. The result list does not.
+  final bool withTabs;
+
+  const GuideKeyScaffold({
+    super.key,
+    required this.child,
+    this.withTabs = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: guideTheme(),
-      child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.dark.copyWith(
-          statusBarColor: Colors.transparent,
-        ),
-        child: Scaffold(
-          backgroundColor: GuidePalette.paper,
-          body: SafeArea(child: child),
+    return GuideTheme(
+      navigationColor: (colors) => withTabs ? colors.cream : colors.paper,
+      child: Scaffold(
+        body: SafeArea(bottom: !withTabs, child: child),
+        bottomNavigationBar: withTabs
+            ? GuideBottomBar(
+                index: 0,
+                showAd: true,
+                onSelect: (index) => leaveGuideKeyForTab(context, index),
+              )
+            : null,
+      ),
+    );
+  }
+}
+
+/// Find, Book, and Seen. [showAd] pins the free-account banner above the tabs.
+class GuideBottomBar extends StatelessWidget {
+  final int index;
+  final ValueChanged<int> onSelect;
+  final bool showAd;
+
+  const GuideBottomBar({
+    super.key,
+    required this.index,
+    required this.onSelect,
+    this.showAd = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (showAd) const AppBannerAd(pinned: true),
+        GuideTabBar(index: index, onSelect: onSelect),
+      ],
+    );
+  }
+}
+
+class GuideTabBar extends StatelessWidget {
+  final int index;
+  final ValueChanged<int> onSelect;
+
+  const GuideTabBar({super.key, required this.index, required this.onSelect});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final bottom = MediaQuery.paddingOf(context).bottom;
+    final items = [
+      (S.of(context).guide_tab_find, Icons.center_focus_weak),
+      (S.of(context).guide_tab_book, Icons.menu_book_outlined),
+      (S.of(context).guide_tab_seen, Icons.article_outlined),
+    ];
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: colors.cream,
+        border: Border(top: BorderSide(color: colors.rule)),
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(bottom: bottom),
+        child: SizedBox(
+          height: 60,
+          child: Row(
+            children: [
+              for (var i = 0; i < items.length; i++)
+                Expanded(
+                  child: InkWell(
+                    onTap: () => onSelect(i),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          items[i].$2,
+                          size: 24,
+                          color: i == index ? colors.moss : colors.ink3,
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          items[i].$1,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight:
+                                i == index ? FontWeight.w600 : FontWeight.w400,
+                            color: i == index ? colors.moss : colors.ink3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
@@ -242,6 +342,7 @@ class GuideBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Align(
       alignment: AlignmentDirectional.centerStart,
       child: InkWell(
@@ -252,15 +353,15 @@ class GuideBackButton extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const IconTheme(
-                data: IconThemeData(color: GuidePalette.moss, size: 20),
+              IconTheme(
+                data: IconThemeData(color: colors.moss, size: 20),
                 child: BackButtonIcon(),
               ),
               const SizedBox(width: 8),
               Text(
                 label,
-                style: const TextStyle(
-                  color: GuidePalette.moss,
+                style: TextStyle(
+                  color: colors.moss,
                   fontWeight: FontWeight.w500,
                   fontSize: 15,
                 ),
@@ -280,6 +381,7 @@ class GuideKeyStepper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Row(
       children: [
         for (var i = 0; i < 3; i++) ...[
@@ -287,7 +389,7 @@ class GuideKeyStepper extends StatelessWidget {
           Expanded(
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: i < filled ? GuidePalette.madder : GuidePalette.rule,
+                color: i < filled ? colors.madderFill : colors.rule,
                 borderRadius: BorderRadius.circular(2),
               ),
               child: const SizedBox(height: 3),
@@ -313,8 +415,9 @@ class GuideFilterPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Material(
-      color: GuidePalette.moss,
+      color: colors.mossFill,
       borderRadius: BorderRadius.circular(15),
       clipBehavior: Clip.antiAlias,
       child: InkWell(

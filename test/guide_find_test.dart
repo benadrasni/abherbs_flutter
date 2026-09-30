@@ -6,6 +6,7 @@ import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_platform_interface/test.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -100,6 +101,41 @@ void main() {
     expect(guideFirstText(null), isNull);
   });
 
+  testWidgets('pins the banner above Find and leaves Book clear',
+      (tester) async {
+    Purchases.hasOldVersion = true;
+    var index = 0;
+    Widget bar() {
+      return MaterialApp(
+        locale: const Locale('en'),
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
+        home: Scaffold(
+          body: const SizedBox.shrink(),
+          bottomNavigationBar: GuideBottomBar(
+            index: index,
+            showAd: index == 0,
+            onSelect: (next) => index = next,
+          ),
+        ),
+      );
+    }
+
+    await tester.pumpWidget(bar());
+    expect(find.byType(AppBannerAd), findsOneWidget);
+    expect(find.text('Find'), findsOneWidget);
+
+    index = 1;
+    await tester.pumpWidget(bar());
+    expect(find.byType(AppBannerAd), findsNothing);
+    expect(find.text('Book'), findsOneWidget);
+  });
+
   testWidgets('shows the key, the first five finds, and the list covers',
       (tester) async {
     Purchases.hasOldVersion = true;
@@ -138,6 +174,7 @@ void main() {
       ),
     );
 
+    expect(find.byType(AppBannerAd), findsNothing);
     expect(find.text('What’s that flower'), findsOneWidget);
     expect(find.text('Search plants, families, genera'), findsOneWidget);
     expect(find.text('Name it from a photo'), findsOneWidget);
@@ -204,6 +241,52 @@ void main() {
     expect(find.text('Seen lately'), findsNothing);
     expect(find.text('All lists'), findsOneWidget);
     expect(find.byType(CircularProgressIndicator), findsNothing);
+  });
+
+  test('Remove ads and Field Guide hide banners', () {
+    Purchases.hasOldVersion = false;
+    Purchases.hasLifetimeSubscription = false;
+    Purchases.purchases = {};
+    expect(Purchases.showsAds(), isTrue);
+
+    Purchases.purchases = {_noAds().productID: _noAds()};
+    expect(Purchases.showsAds(), isFalse);
+
+    Purchases.purchases = {};
+    Purchases.hasOldVersion = true;
+    expect(Purchases.showsAds(), isFalse);
+
+    Purchases.hasOldVersion = false;
+    Purchases.hasLifetimeSubscription = true;
+    expect(Purchases.showsAds(), isFalse);
+    Purchases.hasLifetimeSubscription = false;
+  });
+
+  testWidgets('a no-ads purchase leaves Find without a banner', (tester) async {
+    Purchases.hasOldVersion = false;
+    Purchases.hasLifetimeSubscription = false;
+    Purchases.purchases = {_noAds().productID: _noAds()};
+    await tester.pumpWidget(MaterialApp(
+      locale: const Locale('en'),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      home: Scaffold(
+        body: const SizedBox.shrink(),
+        bottomNavigationBar: GuideBottomBar(
+          index: 0,
+          showAd: Purchases.showsAds(),
+          onSelect: (_) {},
+        ),
+      ),
+    ));
+    expect(find.byType(AppBannerAd), findsNothing);
+    expect(find.text('Find'), findsOneWidget);
+    Purchases.hasLifetimeSubscription = false;
   });
 
   testWidgets('asks a signed-out reader to sign in', (tester) async {

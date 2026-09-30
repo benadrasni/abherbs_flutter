@@ -1,0 +1,517 @@
+import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/guide/guide_person.dart';
+import 'package:abherbs_flutter/guide/guide_theme.dart';
+import 'package:abherbs_flutter/guide/person_page.dart';
+import 'package:abherbs_flutter/settings/setting_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+void main() {
+  setUp(() {
+    GuideAppearanceController.instance.resetForTest();
+  });
+
+  tearDown(() {
+    GuideAppearanceController.instance.resetForTest();
+  });
+
+  test('a name, address, or number supplies the avatar letter', () {
+    expect(guideAccountInitial(name: 'ada'), 'A');
+    expect(guideAccountInitial(name: '  ', email: 'bea@example.com'), 'B');
+    expect(guideAccountInitial(phone: '+421900'), '+');
+    expect(guideAccountInitial(), '');
+    expect(
+      guideAccountProvider(['password', 'google.com']),
+      GuideAccountProvider.google,
+    );
+    expect(guideAccountProvider(['phone']), GuideAccountProvider.phone);
+    expect(guideAccountProvider(['apple.com']), GuideAccountProvider.apple);
+    expect(guideAccountFrom(signedIn: false), isNull);
+    expect(
+      guideAccountFrom(
+        signedIn: true,
+        displayName: ' Ada ',
+        email: 'ada@example.com',
+        providerIds: const ['google.com'],
+      ),
+      isA<GuidePersonAccount>()
+          .having((account) => account.name, 'name', 'Ada')
+          .having((account) => account.email, 'email', 'ada@example.com')
+          .having(
+            (account) => account.provider,
+            'provider',
+            GuideAccountProvider.google,
+          ),
+    );
+  });
+
+  test('the account header shows the name, then the address, then the phone',
+      () {
+    const copy = (
+      yourAccount: 'Your account',
+      signedIn: 'Signed in',
+      google: 'Google',
+      apple: 'Apple',
+      emailPassword: 'Email and password',
+      phoneLabel: 'Phone',
+      appleHidden: 'Email hidden by Apple',
+    );
+
+    final google = guideAccountLines(
+      name: 'Anna Novák',
+      email: 'anna.novak@gmail.com',
+      provider: GuideAccountProvider.google,
+      yourAccount: copy.yourAccount,
+      signedIn: copy.signedIn,
+      google: copy.google,
+      apple: copy.apple,
+      emailPassword: copy.emailPassword,
+      phoneLabel: copy.phoneLabel,
+      appleHidden: copy.appleHidden,
+    );
+    expect(google.title, 'Anna Novák');
+    expect(google.detail, 'anna.novak@gmail.com · Google');
+    expect(google.initial, 'A');
+    expect(google.phoneAvatar, isFalse);
+
+    final apple = guideAccountLines(
+      name: 'Anna Novák',
+      email: 'abc@privaterelay.appleid.com',
+      provider: GuideAccountProvider.apple,
+      yourAccount: copy.yourAccount,
+      signedIn: copy.signedIn,
+      google: copy.google,
+      apple: copy.apple,
+      emailPassword: copy.emailPassword,
+      phoneLabel: copy.phoneLabel,
+      appleHidden: copy.appleHidden,
+    );
+    expect(apple.detail, 'Email hidden by Apple');
+
+    final appleMail = guideAccountLines(
+      name: 'Anna Novák',
+      email: 'anna@icloud.com',
+      provider: GuideAccountProvider.apple,
+      yourAccount: copy.yourAccount,
+      signedIn: copy.signedIn,
+      google: copy.google,
+      apple: copy.apple,
+      emailPassword: copy.emailPassword,
+      phoneLabel: copy.phoneLabel,
+      appleHidden: copy.appleHidden,
+    );
+    expect(appleMail.detail, 'anna@icloud.com · Apple');
+
+    final email = guideAccountLines(
+      email: 'anna.novak@example.com',
+      provider: GuideAccountProvider.email,
+      yourAccount: copy.yourAccount,
+      signedIn: copy.signedIn,
+      google: copy.google,
+      apple: copy.apple,
+      emailPassword: copy.emailPassword,
+      phoneLabel: copy.phoneLabel,
+      appleHidden: copy.appleHidden,
+    );
+    expect(email.title, 'anna.novak@example.com');
+    expect(email.detail, 'Email and password');
+    expect(email.initial, 'A');
+
+    final phone = guideAccountLines(
+      phone: '+421905123456',
+      provider: GuideAccountProvider.phone,
+      yourAccount: copy.yourAccount,
+      signedIn: copy.signedIn,
+      google: copy.google,
+      apple: copy.apple,
+      emailPassword: copy.emailPassword,
+      phoneLabel: copy.phoneLabel,
+      appleHidden: copy.appleHidden,
+    );
+    expect(phone.title, '+421905123456');
+    expect(phone.detail, 'Phone');
+    expect(phone.phoneAvatar, isTrue);
+    expect(phone.initial, isEmpty);
+
+    final all = guideAccountLines(
+      name: 'Anna Novák',
+      email: 'anna.novak@gmail.com',
+      phone: '+421905123456',
+      provider: GuideAccountProvider.google,
+      yourAccount: copy.yourAccount,
+      signedIn: copy.signedIn,
+      google: copy.google,
+      apple: copy.apple,
+      emailPassword: copy.emailPassword,
+      phoneLabel: copy.phoneLabel,
+      appleHidden: copy.appleHidden,
+    );
+    expect(all.detail, 'anna.novak@gmail.com · +421905123456 · Google');
+  });
+
+  test('language follows the saved choice, then this phone', () {
+    expect(
+      guideLanguageName(languages, 'de_DE', const Locale('en', 'US')),
+      'Deutsch',
+    );
+    expect(
+      guideLanguageName(languages, '', const Locale('en', 'US')),
+      'English',
+    );
+    expect(guideLanguageName(languages, '', const Locale('nn')), 'Norsk');
+    expect(guideLanguageName(languages, '', const Locale('zh')), '中文');
+  });
+
+  test('the month bar counts five included names and five from ads', () {
+    final month = GuideAllowance.month(
+      used: 6,
+      fromAds: 1,
+      now: DateTime(2026, 9, 30),
+    );
+    expect(month.includedUsed, 5);
+    expect(month.extraUsed, 1);
+    expect(month.resetsOn, DateTime(2026, 10, 1));
+    expect(guideAllowanceBarShares(month), (included: 5, extra: 1, rest: 4));
+
+    final december = GuideAllowance.month(
+      used: 2,
+      fromAds: 0,
+      now: DateTime(2026, 12, 15),
+    );
+    expect(december.resetsOn, DateTime(2027, 1, 1));
+    expect(
+      guideAllowanceBarShares(december),
+      (included: 2, extra: 0, rest: 8),
+    );
+
+    final credits = GuideAllowance.credits(3);
+    expect(guideAllowanceBarShares(credits), (included: 3, extra: 0, rest: 2));
+    expect(
+      guideAllowanceBarShares(GuideAllowance.credits(12)),
+      (included: 5, extra: 0, rest: 0),
+    );
+  });
+
+  test('a photo-storage plan is Field Guide and credits stay names left', () {
+    final subscribed = guideLiveAllowance(
+      signedIn: true,
+      subscribed: true,
+      unlimitedNames: true,
+      noAds: true,
+      seenSynced: true,
+      credits: 2,
+      now: DateTime(2026, 9, 30),
+    );
+    expect(subscribed.kind, GuideAllowanceKind.unlimited);
+    expect(subscribed.fieldGuide, isTrue);
+    expect(
+      guideFieldGuideDetail(
+        unlimitedNames: true,
+        noAds: true,
+        seenSynced: true,
+        unlimited: 'Unlimited names',
+        noAdsLabel: 'no ads',
+        seenSyncedLabel: 'Seen synced',
+      ),
+      'Unlimited names · no ads · Seen synced',
+    );
+
+    final names = guideLiveAllowance(
+      signedIn: true,
+      subscribed: false,
+      unlimitedNames: true,
+      noAds: false,
+      seenSynced: false,
+      credits: 4,
+      now: DateTime(2026, 9, 30),
+    );
+    expect(names.fieldGuide, isFalse);
+    expect(names.unlimitedNames, isTrue);
+
+    final left = guideLiveAllowance(
+      signedIn: true,
+      subscribed: false,
+      unlimitedNames: false,
+      noAds: false,
+      seenSynced: false,
+      credits: 4,
+      now: DateTime(2026, 9, 30),
+    );
+    expect(left.kind, GuideAllowanceKind.credits);
+    expect(left.namesLeft, 4);
+
+    final guest = guideLiveAllowance(
+      signedIn: false,
+      subscribed: false,
+      unlimitedNames: false,
+      noAds: false,
+      seenSynced: false,
+      credits: 0,
+      now: DateTime(2026, 9, 30),
+    );
+    expect(guest.kind, GuideAllowanceKind.guest);
+
+    final kept = guideLiveAllowance(
+      signedIn: false,
+      subscribed: true,
+      unlimitedNames: true,
+      noAds: true,
+      seenSynced: true,
+      credits: 2,
+      now: DateTime(2026, 9, 30),
+    );
+    expect(kept.kind, GuideAllowanceKind.unlimited);
+    expect(kept.fieldGuide, isTrue);
+
+    final counted = guideLiveAllowance(
+      signedIn: true,
+      subscribed: false,
+      unlimitedNames: false,
+      noAds: false,
+      seenSynced: false,
+      credits: 4,
+      usedThisMonth: 2,
+      extraFromAds: 1,
+      now: DateTime(2026, 9, 30),
+    );
+    expect(counted.kind, GuideAllowanceKind.month);
+    expect(counted.includedUsed, 2);
+    expect(counted.extraUsed, 1);
+  });
+
+  test('theme words follow the choice and the phone', () {
+    expect(
+      guideThemeDetail(
+        appearance: GuideAppearance.system,
+        platform: Brightness.dark,
+        alwaysLight: 'Always light',
+        alwaysDark: 'Always dark',
+        likePhoneLight: 'Light, like the phone',
+        likePhoneDark: 'Dark, like the phone',
+      ),
+      'Dark, like the phone',
+    );
+    expect(
+      guideResolvedBrightness(GuideAppearance.light, Brightness.dark),
+      Brightness.light,
+    );
+    expect(guideAppearanceFromStore('dark'), GuideAppearance.dark);
+    expect(guideAppearanceFromStore(''), GuideAppearance.system);
+    expect(guideAppearanceStoreValue(GuideAppearance.system), isNull);
+  });
+
+  testWidgets('a signed-out person can sign in', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(390, 844));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    var signed = 0;
+    var guide = 0;
+    await tester.pumpWidget(_app(_page(
+      view: _guest(),
+      onSignIn: (_) async => signed++,
+      onFieldGuide: (_) async => guide++,
+    )));
+
+    expect(find.text('Sign in to name a photo'), findsOneWidget);
+    expect(find.text('Your account'), findsNothing);
+    expect(find.text('7 days free'), findsOneWidget);
+    await tester.tap(find.text('Sign in'));
+    await tester.tap(find.text('Field Guide'));
+    expect(signed, 1);
+    expect(guide, 1);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a signed-in person sees the month, language, and theme',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(390, 844));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    tester.platformDispatcher.platformBrightnessTestValue = Brightness.light;
+    addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
+
+    GuideAppearance? chosen;
+    var restored = 0;
+    var language = 0;
+    var tab = -1;
+    await tester.pumpWidget(_app(_page(
+      view: _month(),
+      onAppearance: (appearance) => chosen = appearance,
+      onRestore: (_) async => restored++,
+      onLanguage: (_) async => language++,
+      onSelectTab: (index) => tab = index,
+    )));
+
+    expect(find.text('Anna Novák'), findsOneWidget);
+    expect(find.text('A'), findsOneWidget);
+    expect(find.text('anna.novak@gmail.com · Google'), findsOneWidget);
+    expect(find.text('Your account'), findsNothing);
+    expect(find.text('Names this month'), findsOneWidget);
+    expect(find.text('Resets Oct 1'), findsOneWidget);
+    expect(
+      find.text('2 of 5 included used, 1 from ads. Up to 5 more from ads.'),
+      findsOneWidget,
+    );
+    expect(find.text('English'), findsOneWidget);
+    expect(find.text('Light, like the phone'), findsOneWidget);
+    expect(find.text('Downloaded'), findsOneWidget);
+
+    await tester.tap(find.text('Dark'));
+    await tester.pump();
+    expect(chosen, GuideAppearance.dark);
+    expect(find.text('Always dark'), findsOneWidget);
+    expect(
+      Theme.of(tester.element(find.text('Theme'))).scaffoldBackgroundColor,
+      GuideColors.dark.paper,
+    );
+
+    await tester.tap(find.text('Restore purchases'));
+    await tester.tap(find.text('Language'));
+    await tester.tap(find.text('Book'));
+    expect(restored, 1);
+    expect(language, 1);
+    expect(tab, 1);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Field Guide hides the trial row and can sign out',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(390, 844));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    var signedOut = 0;
+    await tester.pumpWidget(_app(_page(
+      view: _fieldGuide(),
+      onSignOut: (_) async => signedOut++,
+    )));
+
+    expect(find.text('Field Guide'), findsOneWidget);
+    expect(
+      find.text('Unlimited names · no ads · Seen synced'),
+      findsOneWidget,
+    );
+    expect(find.text('7 days free'), findsNothing);
+    expect(find.text('Finds stay on your account'), findsOneWidget);
+    await tester.tap(find.text('Sign out'));
+    expect(signedOut, 1);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a purchase kept after sign-out still offers Sign in',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(390, 844));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    var signed = 0;
+    await tester.pumpWidget(_app(_page(
+      view: const GuidePersonView(
+        account: null,
+        allowance: GuideAllowance.unlimited(
+          fieldGuide: true,
+          unlimitedNames: true,
+          noAds: true,
+          seenSynced: true,
+        ),
+        languageName: 'English',
+        appearance: GuideAppearance.system,
+        showFieldGuide: false,
+        showOffline: false,
+        offlineOn: false,
+      ),
+      onSignIn: (_) async => signed++,
+    )));
+
+    expect(find.text('Field Guide'), findsOneWidget);
+    expect(find.text('Sign out'), findsNothing);
+    expect(find.text('Sign in'), findsOneWidget);
+    await tester.tap(find.text('Sign in'));
+    expect(signed, 1);
+    expect(tester.takeException(), isNull);
+  });
+}
+
+GuidePersonView _guest() {
+  return const GuidePersonView(
+    account: null,
+    allowance: GuideAllowance.guest(),
+    languageName: 'English',
+    appearance: GuideAppearance.system,
+    showFieldGuide: true,
+    showOffline: false,
+    offlineOn: false,
+  );
+}
+
+GuidePersonView _month() {
+  return GuidePersonView(
+    account: const GuidePersonAccount(
+      name: 'Anna Novák',
+      email: 'anna.novak@gmail.com',
+      provider: GuideAccountProvider.google,
+    ),
+    allowance: GuideAllowance.month(
+      used: 2,
+      fromAds: 1,
+      now: DateTime(2026, 9, 30),
+    ),
+    languageName: 'English',
+    appearance: GuideAppearance.system,
+    showFieldGuide: true,
+    showOffline: true,
+    offlineOn: true,
+  );
+}
+
+GuidePersonView _fieldGuide() {
+  return const GuidePersonView(
+    account: GuidePersonAccount(
+      name: 'Anna Novák',
+      email: 'anna.novak@gmail.com',
+      provider: GuideAccountProvider.google,
+    ),
+    allowance: GuideAllowance.unlimited(
+      fieldGuide: true,
+      unlimitedNames: true,
+      noAds: true,
+      seenSynced: true,
+    ),
+    languageName: 'English',
+    appearance: GuideAppearance.system,
+    showFieldGuide: false,
+    showOffline: false,
+    offlineOn: false,
+  );
+}
+
+Widget _page({
+  required GuidePersonView view,
+  Future<void> Function(BuildContext context)? onSignIn,
+  Future<void> Function(BuildContext context)? onSignOut,
+  Future<void> Function(BuildContext context)? onRestore,
+  Future<void> Function(BuildContext context)? onLanguage,
+  Future<void> Function(BuildContext context)? onFieldGuide,
+  ValueChanged<GuideAppearance>? onAppearance,
+  ValueChanged<int>? onSelectTab,
+}) {
+  return GuidePersonPage(
+    view: view,
+    onSignIn: onSignIn,
+    onSignOut: onSignOut,
+    onRestore: onRestore,
+    onLanguage: onLanguage,
+    onFieldGuide: onFieldGuide,
+    onAppearance: onAppearance,
+    onSelectTab: onSelectTab,
+  );
+}
+
+Widget _app(Widget home) {
+  return MaterialApp(
+    locale: const Locale('en'),
+    localizationsDelegates: const [
+      S.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
+    supportedLocales: S.delegate.supportedLocales,
+    home: home,
+  );
+}
