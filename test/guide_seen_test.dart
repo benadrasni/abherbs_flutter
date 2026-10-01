@@ -3,6 +3,8 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_camera.dart';
 import 'package:abherbs_flutter/guide/guide_seen.dart';
 import 'package:abherbs_flutter/guide/seen_page.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -123,6 +125,30 @@ void main() {
     ]);
     expect(notebook.months.first.finds.map((find) => find.id), ['d', 'a']);
     expect(notebook.months.last.finds.single.id, 'b');
+  });
+
+  test('hiding shared skips only confirmed public finds', () {
+    final shared = _find(id: 's', share: GuideSeenShare.shared);
+    final review = _find(id: 'r', share: GuideSeenShare.review);
+    final rejected = _find(id: 'n', share: GuideSeenShare.rejected);
+    final open = _find(id: 'o');
+    final pending = _find(
+      id: 'u',
+      confirmed: false,
+      share: GuideSeenShare.shared,
+    );
+    final all = [shared, review, rejected, open, pending];
+    expect(guideSeenSharedCount(all), 1);
+    expect(
+      guideSeenHidingShared(all).map((find) => find.id),
+      ['r', 'n', 'o', 'u'],
+    );
+    final notebook = arrangeGuideSeen(guideSeenHidingShared(all));
+    expect(notebook.unconfirmed.map((find) => find.id), ['u']);
+    expect(
+      notebook.months.single.finds.map((find) => find.id),
+      isNot(contains('s')),
+    );
   });
 
   test('share is only for a confirmed catalog species with a photo', () {
@@ -266,6 +292,7 @@ void main() {
     expect(find.text('Finds you save will show up here.'), findsOneWidget);
     expect(find.text('See Field Guide'), findsOneWidget);
     expect(find.text('To confirm · 0'), findsNothing);
+    expect(find.byKey(const Key('guide-seen-hide-shared')), findsNothing);
   });
 
   testWidgets('shows a spinner until the notebook arrives', (tester) async {
@@ -393,6 +420,152 @@ void main() {
     expect(next, 'Leucanthemum vulgare from new');
     expect(find.text('Changed and confirmed.'), findsOneWidget);
   });
+
+  testWidgets('hide shared sits under to confirm and drops public finds',
+      (tester) async {
+    await _pump(
+      tester,
+      _page(
+        finds: [
+          _find(
+            id: 'new',
+            name: 'Tanacetum corymbosum',
+            when: DateTime(2026, 9, 27, 14),
+            confirmed: false,
+          ),
+          _find(
+            id: 'review',
+            name: 'Achillea millefolium',
+            label: 'yarrow',
+            when: DateTime(2026, 9, 12),
+            share: GuideSeenShare.review,
+            inBook: true,
+          ),
+          _find(
+            id: 'open',
+            name: 'Matricaria chamomilla',
+            label: 'chamomile',
+            when: DateTime(2026, 9, 3),
+            ownPhoto: true,
+            inBook: true,
+          ),
+          _find(
+            id: 'no',
+            name: 'Anemone nemorosa',
+            label: 'wood anemone',
+            when: DateTime(2026, 4, 14),
+            share: GuideSeenShare.rejected,
+            inBook: true,
+          ),
+          _find(
+            id: 'pub',
+            name: 'Galanthus nivalis',
+            label: 'snowdrop',
+            when: DateTime(2026, 3, 2),
+            share: GuideSeenShare.shared,
+            inBook: true,
+          ),
+        ],
+      ),
+    );
+
+    expect(find.text('5 finds · on this phone until you sign in'), findsOneWidget);
+    expect(find.text('TO CONFIRM · 1'), findsOneWidget);
+    expect(find.text('Hide shared · 1'), findsOneWidget);
+    expect(find.text('Snowdrop'), findsOneWidget);
+    expect(find.text('MARCH 2026'), findsOneWidget);
+    expect(find.text('Yarrow'), findsOneWidget);
+    expect(find.text('In review'), findsOneWidget);
+    expect(find.text('Not accepted'), findsOneWidget);
+
+    final chip = find.byKey(const Key('guide-seen-hide-shared'));
+    final chipRect = tester.getRect(chip);
+    final listRect = tester.getRect(find.byType(ListView));
+    final confirm = tester.getRect(
+      find.byKey(const Key('guide-seen-confirm-new')),
+    );
+    expect(chipRect.right, closeTo(listRect.right - 20, 1));
+    expect(chipRect.left, greaterThan(listRect.center.dx));
+    expect(chipRect.top, greaterThan(confirm.bottom));
+
+    await tester.tap(chip);
+    await tester.pump();
+    expect(find.text('Shared hidden · 1'), findsOneWidget);
+    expect(
+      find.text('4 finds · 1 shared hidden · on this phone until you sign in'),
+      findsOneWidget,
+    );
+    expect(find.text('Snowdrop'), findsNothing);
+    expect(find.text('MARCH 2026'), findsNothing);
+    expect(find.text('Yarrow'), findsOneWidget);
+    expect(find.text('Chamomile'), findsOneWidget);
+    expect(find.text('Wood anemone'), findsOneWidget);
+    expect(find.text('Tanacetum corymbosum'), findsOneWidget);
+    final hiddenChip = tester.getRect(find.byKey(const Key('guide-seen-hide-shared')));
+    final hiddenConfirm = tester.getRect(
+      find.byKey(const Key('guide-seen-confirm-new')),
+    );
+    expect(hiddenChip.right, closeTo(listRect.right - 20, 1));
+    expect(hiddenChip.top, greaterThan(hiddenConfirm.bottom));
+
+    await tester.tap(find.byKey(const Key('guide-seen-hide-shared')));
+    await tester.pump();
+    expect(find.text('Hide shared · 1'), findsOneWidget);
+    expect(find.text('Snowdrop'), findsOneWidget);
+    expect(find.text('5 finds · on this phone until you sign in'), findsOneWidget);
+  });
+
+  testWidgets('hiding every confirmed find leaves the chip and a note',
+      (tester) async {
+    await _pump(
+      tester,
+      _page(
+        finds: [
+          _find(
+            id: 'pub',
+            name: 'Galanthus nivalis',
+            label: 'snowdrop',
+            share: GuideSeenShare.shared,
+          ),
+        ],
+        hideShared: true,
+      ),
+    );
+    expect(find.text('Shared hidden · 1'), findsOneWidget);
+    expect(
+      find.text('0 finds · 1 shared hidden · on this phone until you sign in'),
+      findsOneWidget,
+    );
+    expect(find.text('Snowdrop'), findsNothing);
+    expect(
+      find.text(
+        'Nothing else in the notebook. Shared finds are still on the species pages.',
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('hide shared is remembered on the phone', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await Prefs.init();
+    addTearDown(() => Prefs.remove(keyGuideSeenHideShared));
+    final finds = [
+      _find(
+        id: 'pub',
+        name: 'Galanthus nivalis',
+        label: 'snowdrop',
+        share: GuideSeenShare.shared,
+      ),
+    ];
+    await _pump(tester, _page(finds: finds));
+    await tester.tap(find.byKey(const Key('guide-seen-hide-shared')));
+    await tester.pumpAndSettle();
+    expect(Prefs.getBool(keyGuideSeenHideShared, false), isTrue);
+
+    await _pump(tester, _page(finds: finds));
+    expect(find.text('Shared hidden · 1'), findsOneWidget);
+    expect(find.text('Snowdrop'), findsNothing);
+  });
 }
 
 GuideSeenFind _find({
@@ -437,6 +610,7 @@ Widget _page({
   void Function(BuildContext context)? onFieldGuide,
   void Function(BuildContext context)? onSearch,
   Future<void> Function(BuildContext context)? onSignIn,
+  bool? hideShared,
 }) {
   return MaterialApp(
     locale: const Locale('en'),
@@ -461,6 +635,7 @@ Widget _page({
         onFieldGuide: onFieldGuide,
         onSearch: onSearch,
         onSignIn: onSignIn,
+        hideShared: hideShared,
         onCamera: (_) {},
       ),
     ),

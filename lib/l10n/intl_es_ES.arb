@@ -355,5 +355,8 @@
 
   "favorite_title": "Flores favoritas",
   "favorite_empty": "No hay flores favoritas todavía.",
-  "favorite_no_login": "La lista de flores favoritas está disponible solo para usuarios registrados. Por favor Iniciar sesión."
+  "favorite_no_login": "La lista de flores favoritas está disponible solo para usuarios registrados. Por favor Iniciar sesión.",
+
+  "guide_new_today": "Hoy",
+  "guide_new_yesterday": "Ayer"
 }

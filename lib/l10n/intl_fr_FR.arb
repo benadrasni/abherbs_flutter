@@ -355,5 +355,8 @@
 
   "favorite_title": "Fleurs préférées",
   "favorite_empty": "Il n'y a pas encore de fleurs préférées.",
-  "favorite_no_login": "La liste des fleurs préférées est disponible uniquement pour les utilisateurs connectés. Veuillez vous connecter."
+  "favorite_no_login": "La liste des fleurs préférées est disponible uniquement pour les utilisateurs connectés. Veuillez vous connecter.",
+
+  "guide_new_today": "Aujourd’hui",
+  "guide_new_yesterday": "Hier"
 }

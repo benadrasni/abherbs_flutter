@@ -22,7 +22,7 @@ class GuideShell extends StatefulWidget {
   State<GuideShell> createState() => _GuideShellState();
 }
 
-class _GuideShellState extends State<GuideShell> {
+class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   final Set<int> _opened = {0};
   int _index = 0;
   String? _languageCode;
@@ -41,16 +41,22 @@ class _GuideShellState extends State<GuideShell> {
   int _accountTicket = 0;
   StreamSubscription<User?>? _authSub;
   StreamSubscription<DatabaseEvent>? _creditsSub;
+  StreamSubscription<DatabaseEvent>? _seenRemote;
   StreamSubscription<List<PurchaseDetails>>? _purchaseSub;
+  String? _seenWatchUid;
+  bool _seenLoadActive = false;
+  bool _seenReloadQueued = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     GuideAppearanceController.instance.apply(storedGuideAppearance());
     _authSub = Auth.subscribe((user) {
       unawaited(_onAccount(user));
     });
     _watchCredits();
+    _watchSeenRemote();
     _loadColors();
     _purchaseSub = InAppPurchase.instance.purchaseStream.listen(
       (purchases) {
@@ -81,14 +87,43 @@ class _GuideShellState extends State<GuideShell> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     GuideTabs.show = null;
     GuideTabs.showSeen = null;
     GuideTabs.refreshSeen = null;
     GuideTabs.unconfirmed.value = 0;
     _authSub?.cancel();
     _creditsSub?.cancel();
+    _seenRemote?.cancel();
     _purchaseSub?.cancel();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed) return;
+    if (_opened.contains(2)) unawaited(_loadSeen());
+  }
+
+  /// Keeps the signed-in notebook synced. An active listener is what writes
+  /// a review's new status into the on-disk copy.
+  void _watchSeenRemote() {
+    final uid = guideNotebookUser()?.uid;
+    if (uid == _seenWatchUid && _seenRemote != null) return;
+    _seenRemote?.cancel();
+    _seenRemote = null;
+    _seenWatchUid = uid;
+    if (uid == null) return;
+    _seenRemote = privateObservationsReference
+        .child(uid)
+        .child(firebaseObservationsByDate)
+        .child(firebaseAttributeList)
+        .onValue
+        .listen((_) {
+      if (_opened.contains(2)) unawaited(_loadSeen());
+    }, onError: (Object error) {
+      debugPrint('guide seen: $error');
+    });
   }
 
   void _go(int index) {
@@ -116,6 +151,7 @@ class _GuideShellState extends State<GuideShell> {
   Future<void> _onAccount(User? user) async {
     final ticket = ++_accountTicket;
     _watchCredits();
+    _watchSeenRemote();
     _resetSeenForUser();
     if (mounted) {
       setState(() {
@@ -231,6 +267,24 @@ class _GuideShellState extends State<GuideShell> {
   }
 
   Future<void> _loadSeen() async {
+    if (_seenLoadActive) {
+      _seenReloadQueued = true;
+      return;
+    }
+    _seenLoadActive = true;
+    try {
+      var spins = 0;
+      do {
+        _seenReloadQueued = false;
+        await _loadSeenBody();
+        spins++;
+      } while (_seenReloadQueued && spins < 3);
+    } finally {
+      _seenLoadActive = false;
+    }
+  }
+
+  Future<void> _loadSeenBody() async {
     final code = _languageCode;
     if (code == null) return;
     _seenUid = guideNotebookUser()?.uid;

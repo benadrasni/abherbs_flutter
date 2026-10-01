@@ -355,5 +355,8 @@
 
   "favorite_title": "Kedvenc virágok",
   "favorite_empty": "Még nincs kedvenc virág.",
-  "favorite_no_login": "A kedvenc virágok listája csak a naplózott felhasználók számára érhető el. Kérjük jelentkezzen be."
+  "favorite_no_login": "A kedvenc virágok listája csak a naplózott felhasználók számára érhető el. Kérjük jelentkezzen be.",
+
+  "guide_new_today": "Ma",
+  "guide_new_yesterday": "Tegnap"
 }

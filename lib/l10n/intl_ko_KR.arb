@@ -355,5 +355,8 @@
 
   "favorite_title": "좋아하는 꽃",
   "favorite_empty": "좋아하는 꽃은 아직 없습니다.",
-  "favorite_no_login": "즐겨 찾는 꽃 목록은 로그 된 사용자 만 사용할 수 있습니다. 로그인 해주세요."
+  "favorite_no_login": "즐겨 찾는 꽃 목록은 로그 된 사용자 만 사용할 수 있습니다. 로그인 해주세요.",
+
+  "guide_new_today": "오늘",
+  "guide_new_yesterday": "어제"
 }

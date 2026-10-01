@@ -258,10 +258,12 @@ Future<String?> loadGuideTaxonTitle(String latin, String languageCode) async {
   }
 }
 
+/// Header for one catalog id. [Query.get] so a plant added after
+/// `plants_headers_v3` was cached on disk is not read back as missing.
 Future<GuideResultPlant?> _guideResultPlant(String id, String language) async {
   try {
-    final event = await headersV3Reference.child(id).once();
-    final value = event.snapshot.value;
+    final snapshot = await headersV3Reference.child(id).get();
+    final value = snapshot.value;
     if (value is! Map) return null;
     final name = value[firebaseAttributeName];
     if (name is! String || name.isEmpty) return null;
@@ -276,8 +278,8 @@ Future<GuideResultPlant?> _guideResultPlant(String id, String language) async {
 
 Future<GuideResultPlant?> _guideHeaderPlant(String id, String language) async {
   try {
-    final event = await listsReference.child(id).once();
-    final value = event.snapshot.value;
+    final snapshot = await listsReference.child(id).get();
+    final value = snapshot.value;
     if (value is! Map) return null;
     final name = value[firebaseAttributeName];
     if (name is! String || name.isEmpty) return null;
@@ -564,15 +566,19 @@ Future<List<GuideFind>> loadRecentFinds(String languageCode,
 }
 
 /// Every private find for the Seen notebook, newest first.
+///
+/// Reads with [Query.get] so disk persistence cannot keep a row on
+/// "In review" after the server status is `public`. [Query.once] completes
+/// from the on-disk copy and then stops listening.
 Future<List<GuideSeenFind>> loadGuideSeen(String languageCode) async {
   final user = guideNotebookUser();
   if (user == null) return [];
-  final event = await privateObservationsReference
+  final snapshot = await privateObservationsReference
       .child(user.uid)
       .child(firebaseObservationsByDate)
       .child(firebaseAttributeList)
-      .once();
-  final value = event.snapshot.value;
+      .get();
+  final value = snapshot.value;
   if (value is! Map) return [];
   final rows = <GuideSeenFind>[];
   value.forEach((key, raw) {
@@ -908,12 +914,7 @@ String guideSourceHost(String url) {
 }
 
 Future<_Newest?> _newestAddition() async {
-  final event = await listsCustomReference
-      .child('new')
-      .orderByKey()
-      .limitToLast(guideNewPlantMax)
-      .once();
-  final drops = selectGuideNewDrops(readGuideNewDrops(event.snapshot.value));
+  final drops = await _selectedNewDrops();
   if (drops.isEmpty) return null;
   final ids = [for (final drop in drops) ...drop.ids];
   final newest = drops.first;
@@ -926,13 +927,22 @@ Future<_Newest?> _newestAddition() async {
   );
 }
 
-Future<List<GuideNewDay>> loadGuideNewDays(String languageCode) async {
-  final event = await listsCustomReference
+/// Newest days of `lists_custom/new` inside the 15 to 25 plant window.
+///
+/// [Query.get] reads the server while online. [Query.once] finishes from
+/// the on-disk copy and then stops, so a plant published after the last
+/// open of this list never appears. Disk persistence is on in `main`.
+Future<List<GuideNewDrop>> _selectedNewDrops() async {
+  final snapshot = await listsCustomReference
       .child('new')
       .orderByKey()
       .limitToLast(guideNewPlantMax)
-      .once();
-  final drops = selectGuideNewDrops(readGuideNewDrops(event.snapshot.value));
+      .get();
+  return selectGuideNewDrops(readGuideNewDrops(snapshot.value));
+}
+
+Future<List<GuideNewDay>> loadGuideNewDays(String languageCode) async {
+  final drops = await _selectedNewDrops();
   if (drops.isEmpty) return const [];
   final lang = getLanguageCode(languageCode);
   final days = <GuideNewDay>[];
@@ -1011,9 +1021,9 @@ Future<Map<String, String>> _headerPhotos(Set<String> ids) async {
   final photos = <String, String>{};
   await Future.wait(ids.map((id) async {
     try {
-      final event =
-          await listsReference.child(id).child(firebaseAttributeUrl).once();
-      final url = event.snapshot.value;
+      final snapshot =
+          await listsReference.child(id).child(firebaseAttributeUrl).get();
+      final url = snapshot.value;
       if (url is String && url.isNotEmpty) {
         photos[id] = storagePhotos + url;
       }
@@ -1226,12 +1236,12 @@ Future<Map<String, String>> _guideVernaculars(
 
 Future<List<GuideSighting>> _guideSightings(String name) async {
   try {
-    final event = await publicObservationsReference
+    final snapshot = await publicObservationsReference
         .child(firebaseObservationsByPlant)
         .child(name)
         .child(firebaseAttributeList)
-        .once();
-    return guideSightings(event.snapshot.value);
+        .get();
+    return guideSightings(snapshot.value);
   } catch (error) {
     debugPrint('guide species sightings $name: $error');
     return const [];

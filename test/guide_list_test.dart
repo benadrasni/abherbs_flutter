@@ -19,6 +19,27 @@ void main() {
     await Firebase.initializeApp();
   });
 
+  test('new in the book says today and yesterday', () {
+    final now = DateTime(2026, 10, 1, 23, 30);
+    expect(
+      guideNewDayLabel('en', DateTime.parse('2026-10-01'), now: now),
+      'Today',
+    );
+    expect(
+      guideNewDayLabel('en', DateTime.parse('2026-09-30'), now: now),
+      'Yesterday',
+    );
+    expect(
+      guideNewDayLabel('en_US', DateTime.parse('2026-09-27'), now: now),
+      'September 27, 2026',
+    );
+    final newYear = DateTime(2026, 1, 1, 0, 30);
+    expect(
+      guideNewDayLabel('en', DateTime.parse('2025-12-31'), now: newYear),
+      'Yesterday',
+    );
+  });
+
   test('new in the book keeps whole days inside 15 to 25', () {
     final window = selectGuideNewDrops([
       _drop('2026-09-27', 6, start: 100),
@@ -202,6 +223,42 @@ void main() {
 
     await tester.tap(find.text('Daisy'));
     expect(opened, 'Bellis perennis');
+  });
+
+  testWidgets('New in the book labels today and yesterday', (tester) async {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = DateTime(now.year, now.month, now.day - 1);
+    await _pump(
+      tester,
+      GuideNewPage(
+        backLabel: 'Book',
+        showAd: false,
+        initialDays: [
+          GuideNewDay(
+            dateKey: 'today',
+            date: today,
+            plants: [_plant('1', 'Bellis perennis', label: 'daisy')],
+          ),
+          GuideNewDay(
+            dateKey: 'yesterday',
+            date: yesterday,
+            plants: [_plant('2', 'Galanthus nivalis', label: 'snowdrop')],
+          ),
+        ],
+        initialSeen: const {},
+        loadDays: () async => const [],
+        loadSeen: () async => const {},
+        onOpenPlant: (_, __) {},
+      ),
+    );
+
+    expect(find.text('TODAY'), findsOneWidget);
+    expect(find.text('YESTERDAY'), findsOneWidget);
+    expect(
+      tester.getTopLeft(find.text('TODAY')).dy,
+      lessThan(tester.getTopLeft(find.text('YESTERDAY')).dy),
+    );
   });
 
   testWidgets('a year list is a timeline, newest first', (tester) async {

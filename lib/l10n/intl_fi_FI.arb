@@ -355,5 +355,8 @@
 
   "favorite_title": "Suosikki kukat",
   "favorite_empty": "Ei ole vielä suosikkikukkia.",
-  "favorite_no_login": "Suosikkikukkien luettelo on käytettävissä vain kirjautuneille käyttäjille. Kirjaudu sisään, ole hyvä."
+  "favorite_no_login": "Suosikkikukkien luettelo on käytettävissä vain kirjautuneille käyttäjille. Kirjaudu sisään, ole hyvä.",
+
+  "guide_new_today": "Tänään",
+  "guide_new_yesterday": "Eilen"
 }

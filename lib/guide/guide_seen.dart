@@ -162,6 +162,24 @@ String guideSeenDetail(String when, String? place) {
   return '$when · $where';
 }
 
+/// A confirmed find already published as a Sighting.
+bool guideSeenIsShared(GuideSeenFind find) {
+  return find.confirmed && find.share == GuideSeenShare.shared;
+}
+
+int guideSeenSharedCount(Iterable<GuideSeenFind> finds) {
+  var count = 0;
+  for (final find in finds) {
+    if (guideSeenIsShared(find)) count++;
+  }
+  return count;
+}
+
+/// Drops confirmed public finds. To confirm, in review, and not accepted stay.
+Iterable<GuideSeenFind> guideSeenHidingShared(Iterable<GuideSeenFind> finds) {
+  return finds.where((find) => !guideSeenIsShared(find));
+}
+
 /// Unconfirmed finds stay at the top. Confirmed finds group by month,
 /// newest month first.
 GuideSeenNotebook arrangeGuideSeen(Iterable<GuideSeenFind> finds) {

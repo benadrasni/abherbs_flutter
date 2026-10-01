@@ -355,5 +355,8 @@
 
   "favorite_title": "Lieblingsblumen",
   "favorite_empty": "Es gibt noch keine Lieblingsblumen.",
-  "favorite_no_login": "Die Liste der Lieblingsblumen steht nur angemeldeten Benutzern zur Verfügung. Bitte anmelden."
+  "favorite_no_login": "Die Liste der Lieblingsblumen steht nur angemeldeten Benutzern zur Verfügung. Bitte anmelden.",
+
+  "guide_new_today": "Heute",
+  "guide_new_yesterday": "Gestern"
 }

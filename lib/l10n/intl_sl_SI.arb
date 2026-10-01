@@ -355,5 +355,8 @@
 
   "favorite_title": "Najljubše cvetja",
   "favorite_empty": "Še ni najljubšega cvetja.",
-  "favorite_no_login": "Seznam priljubljenih cvetov je na voljo samo za prijavljene uporabnike. Prijavite se."
+  "favorite_no_login": "Seznam priljubljenih cvetov je na voljo samo za prijavljene uporabnike. Prijavite se.",
+
+  "guide_new_today": "Danes",
+  "guide_new_yesterday": "Včeraj"
 }

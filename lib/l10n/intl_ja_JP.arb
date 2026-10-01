@@ -355,5 +355,8 @@
 
   "favorite_title": "好きな花",
   "favorite_empty": "好きな花はまだありません。",
-  "favorite_no_login": "お気に入りの花のリストはログインしたユーザーにのみ利用可能です。 ログインしてください。"
+  "favorite_no_login": "お気に入りの花のリストはログインしたユーザーにのみ利用可能です。 ログインしてください。",
+
+  "guide_new_today": "今日",
+  "guide_new_yesterday": "昨日"
 }

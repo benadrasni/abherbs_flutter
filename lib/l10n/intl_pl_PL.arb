@@ -355,5 +355,8 @@
 
   "favorite_title": "Ulubione kwiaty",
   "favorite_empty": "Nie ma jeszcze ulubionych kwiatów.",
-  "favorite_no_login": "Lista ulubionych kwiatów jest dostępna tylko dla zalogowanych użytkowników. Proszę się zalogować."
+  "favorite_no_login": "Lista ulubionych kwiatów jest dostępna tylko dla zalogowanych użytkowników. Proszę się zalogować.",
+
+  "guide_new_today": "Dzisiaj",
+  "guide_new_yesterday": "Wczoraj"
 }

@@ -355,5 +355,8 @@
 
   "favorite_title": "Mėgstamiausios gėlės",
   "favorite_empty": "Dar nėra mėgstamiausių gėlių.",
-  "favorite_no_login": "Mėgstamiausių gėlių sąrašas galimas tik prisijungusiems vartotojams. Prašome prisijungti."
+  "favorite_no_login": "Mėgstamiausių gėlių sąrašas galimas tik prisijungusiems vartotojams. Prašome prisijungti.",
+
+  "guide_new_today": "Šiandien",
+  "guide_new_yesterday": "Vakar"
 }

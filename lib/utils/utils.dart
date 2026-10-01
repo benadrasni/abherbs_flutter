@@ -43,6 +43,7 @@ const String keyAlwaysMyRegion = "always_my_region";
 const String keyGuideRegion = "guide_region";
 const String keyGuideRegionFromLocation = "guide_region_from_location";
 const String keyGuideWildOnly = "guide_wild_only";
+const String keyGuideSeenHideShared = "guide_seen_hide_shared";
 const String keyGuideLocationRefused = "guide_location_refused";
 const String keyGuideLocationAllowed = "guide_location_allowed";
 const String keyGuideTheme = "guide_theme";

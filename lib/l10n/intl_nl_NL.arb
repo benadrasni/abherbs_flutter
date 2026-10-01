@@ -355,5 +355,8 @@
 
   "favorite_title": "Favoriete bloemen",
   "favorite_empty": "Er zijn nog geen favoriete bloemen.",
-  "favorite_no_login": "Lijst met favoriete bloemen is alleen beschikbaar voor aangemelde gebruikers. Log alstublieft in."
+  "favorite_no_login": "Lijst met favoriete bloemen is alleen beschikbaar voor aangemelde gebruikers. Log alstublieft in.",
+
+  "guide_new_today": "Vandaag",
+  "guide_new_yesterday": "Gisteren"
 }

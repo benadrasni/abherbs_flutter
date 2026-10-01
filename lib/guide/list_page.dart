@@ -9,9 +9,27 @@ import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-/// Day heading for New in the book, with the year, in the phone's locale.
-String guideNewDayLabel(String locale, DateTime date) {
-  return DateFormat.yMMMMd(locale).format(date);
+/// Day heading for New in the book: Today, Yesterday, or the date with the year.
+///
+/// [date] keeps the calendar day of a date-only `lists_custom/new` key.
+String guideNewDayLabel(
+  String locale,
+  DateTime date, {
+  DateTime? now,
+  String todayLabel = 'Today',
+  String yesterdayLabel = 'Yesterday',
+}) {
+  final clock = now ?? DateTime.now();
+  if (_sameCalendarDay(date, clock)) return todayLabel;
+  final yesterday = DateTime(clock.year, clock.month, clock.day - 1);
+  if (_sameCalendarDay(date, yesterday)) return yesterdayLabel;
+  return DateFormat.yMMMMd(locale).format(
+    DateTime(date.year, date.month, date.day),
+  );
+}
+
+bool _sameCalendarDay(DateTime a, DateTime b) {
+  return a.year == b.year && a.month == b.month && a.day == b.day;
 }
 
 const _plateGround = Color(0xFFF1E8D6);
@@ -507,10 +525,16 @@ class _DateHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
+    final strings = S.of(context);
     final date = day.date;
     final label = date == null
         ? day.dateKey
-        : guideNewDayLabel(Localizations.localeOf(context).toString(), date);
+        : guideNewDayLabel(
+            Localizations.localeOf(context).toString(),
+            date,
+            todayLabel: strings.guide_new_today,
+            yesterdayLabel: strings.guide_new_yesterday,
+          );
     return Padding(
       padding: EdgeInsets.only(top: first ? 4 : 10, bottom: 8),
       child: Text(

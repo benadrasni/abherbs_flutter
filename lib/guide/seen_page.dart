@@ -8,6 +8,8 @@ import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
 import 'package:abherbs_flutter/guide/outside_page.dart';
 import 'package:abherbs_flutter/guide/sign_in_page.dart';
+import 'package:abherbs_flutter/utils/prefs.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -26,6 +28,9 @@ class SeenPage extends StatefulWidget {
   final void Function(BuildContext context)? onSearch;
   final Future<void> Function(BuildContext context)? onSignIn;
 
+  /// Overrides the phone preference when set.
+  final bool? hideShared;
+
   const SeenPage({
     super.key,
     required this.finds,
@@ -41,6 +46,7 @@ class SeenPage extends StatefulWidget {
     this.onFieldGuide,
     this.onSearch,
     this.onSignIn,
+    this.hideShared,
   });
 
   @override
@@ -49,13 +55,36 @@ class SeenPage extends StatefulWidget {
 
 class _SeenPageState extends State<SeenPage> {
   final Set<String> _busy = {};
+  bool? _hideShared;
+
+  bool get _hidingShared {
+    final chosen = _hideShared;
+    if (chosen != null) return chosen;
+    final given = widget.hideShared;
+    if (given != null) return given;
+    if (!Prefs.ready()) return false;
+    return Prefs.getBool(keyGuideSeenHideShared, false);
+  }
+
+  void _toggleHideShared() {
+    final next = !_hidingShared;
+    setState(() => _hideShared = next);
+    if (Prefs.ready()) {
+      Prefs.setBool(keyGuideSeenHideShared, next);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final finds = widget.finds;
-    final notebook = finds == null ? null : arrangeGuideSeen(finds);
+    final sharedCount = finds == null ? 0 : guideSeenSharedCount(finds);
+    final hiding = _hidingShared && sharedCount > 0;
+    final visible = finds == null
+        ? null
+        : (hiding ? guideSeenHidingShared(finds).toList() : finds);
+    final notebook = visible == null ? null : arrangeGuideSeen(visible);
     return ListView(
       padding: const EdgeInsets.only(bottom: 24),
       children: [
@@ -67,7 +96,11 @@ class _SeenPageState extends State<SeenPage> {
               if (finds != null) ...[
                 const SizedBox(height: 2),
                 Text(
-                  _subtitle(strings, finds.length),
+                  _subtitle(
+                    strings,
+                    visible!.length,
+                    hiding ? sharedCount : 0,
+                  ),
                   style: TextStyle(
                     fontSize: 13,
                     height: 1.3,
@@ -125,6 +158,31 @@ class _SeenPageState extends State<SeenPage> {
                 onDelete: () => _delete(find),
               ),
           ],
+          if (sharedCount > 0)
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(20, 6, 20, 0),
+              child: Align(
+                alignment: AlignmentDirectional.centerEnd,
+                child: _Pill(
+                  key: const Key('guide-seen-hide-shared'),
+                  label: hiding
+                      ? strings.guide_seen_shared_hidden(sharedCount)
+                      : strings.guide_seen_hide_shared(sharedCount),
+                  onPressed: _toggleHideShared,
+                  foreground: hiding ? Colors.white : colors.ink,
+                  background: hiding ? colors.mossFill : colors.cream,
+                  border: hiding ? null : colors.rule,
+                ),
+              ),
+            ),
+          if (hiding && visible!.isEmpty)
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(20, 8, 20, 8),
+              child: Text(
+                strings.guide_seen_only_shared,
+                style: TextStyle(fontSize: 13, color: colors.ink3),
+              ),
+            ),
           for (final month in notebook.months) ...[
             _MonthLabel(
               text: DateFormat.yMMMM(
@@ -155,13 +213,17 @@ class _SeenPageState extends State<SeenPage> {
     );
   }
 
-  String _subtitle(S strings, int count) {
+  String _subtitle(S strings, int count, int hidden) {
     final where = widget.signedIn
         ? (widget.fieldGuide
             ? strings.guide_seen_on_devices
             : strings.guide_seen_on_account)
         : strings.guide_seen_on_phone;
-    return '${strings.guide_seen_finds(count)} · $where';
+    final finds = strings.guide_seen_finds(count);
+    if (hidden > 0) {
+      return '$finds · ${strings.guide_seen_shared_hidden_count(hidden)} · $where';
+    }
+    return '$finds · $where';
   }
 
   void _open(GuideSeenFind find) {

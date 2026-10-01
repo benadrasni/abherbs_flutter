@@ -355,5 +355,8 @@
 
   "favorite_title": "Bunga favorit",
   "favorite_empty": "Belum ada bunga favorit.",
-  "favorite_no_login": "Daftar bunga favorit hanya tersedia untuk pengguna yang login. Silahkan masuk."
+  "favorite_no_login": "Daftar bunga favorit hanya tersedia untuk pengguna yang login. Silahkan masuk.",
+
+  "guide_new_today": "Hari ini",
+  "guide_new_yesterday": "Kemarin"
 }

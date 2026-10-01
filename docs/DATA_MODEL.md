@@ -195,8 +195,8 @@ Client: `lib/filter/filter_utils.dart` (v2). v3 paths: `firebasePlantHeadersV3`,
 | `wikipedia` | Language Wikipedia URL |
 | `description`, `flower`, `inflorescence`, `fruit`, `leaf`, `stem`, `habitat` | Required for "fully translated" |
 | `toxicity` | Optional poison notes (contact rash, ingestion). Distinct from `plants_v2.toxicityClass`. |
-| `herbalism` | Optional culinary and traditional-use paragraph. UI heading is **Uses**, with a “not medical advice” disclaimer. `/update-plant` leaves live English unchanged (same as `trivia`). |
-| `trivia` | Optional. `/update-plant` leaves live English unchanged. |
+| `herbalism` | Optional culinary and traditional-use paragraph. UI heading is **Uses**, with a “not medical advice” disclaimer. `/add-plant` and `/update-plant` fill it from a sourced use. |
+| `trivia` | Optional. UI heading is **Notes**. Cultural history, etymology, folklore. Written only when a page that covers this species has a real hook. |
 | `sourceUrls` | Localized sources |
 
 Wikidata ingest creates a huge set of language codes (Wikipedia sitelinks). The app requests the device language. When the seven body fields are missing, the app and website show English for the empty body fields and keep the language's own `label` and `names`.

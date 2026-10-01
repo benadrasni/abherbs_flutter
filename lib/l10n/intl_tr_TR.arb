@@ -322,5 +322,8 @@
   "common_lists" : "Ortak listeler",
   "favorite_title" : "Favori çiçekler",
   "favorite_empty" : "Henüz favori çiçek yok.",
-  "favorite_no_login" : "Favori çiçek listesi yalnızca oturum açmış kullanıcılara açıktır. Lütfen oturum açın."
+  "favorite_no_login" : "Favori çiçek listesi yalnızca oturum açmış kullanıcılara açıktır. Lütfen oturum açın.",
+
+  "guide_new_today": "Bugün",
+  "guide_new_yesterday": "Dün"
 }

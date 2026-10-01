@@ -355,5 +355,8 @@
 
   "favorite_title": "Favorittblomster",
   "favorite_empty": "Det er ingen favoritt blomster ennå.",
-  "favorite_no_login": "Liste over favorittblomster er bare tilgjengelig for loggede brukere. Vennligst Logg inn."
+  "favorite_no_login": "Liste over favorittblomster er bare tilgjengelig for loggede brukere. Vennligst Logg inn.",
+
+  "guide_new_today": "I dag",
+  "guide_new_yesterday": "I går"
 }

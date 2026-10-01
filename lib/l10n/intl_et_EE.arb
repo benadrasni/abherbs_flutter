@@ -355,5 +355,8 @@
 
   "favorite_title": "Lemmik lilled",
   "favorite_empty": "Veel ei ole lemmik lilli.",
-  "favorite_no_login": "Lemmiklillede nimekiri on saadaval ainult logitud kasutajatele. Palun logige sisse."
+  "favorite_no_login": "Lemmiklillede nimekiri on saadaval ainult logitud kasutajatele. Palun logige sisse.",
+
+  "guide_new_today": "Täna",
+  "guide_new_yesterday": "Eile"
 }

@@ -355,5 +355,8 @@
 
   "favorite_title": "Flori preferate",
   "favorite_empty": "Nu există încă flori preferate.",
-  "favorite_no_login": "Lista florilor preferate este disponibilă numai pentru utilizatorii înregistrați. Va rugam sa va logati."
+  "favorite_no_login": "Lista florilor preferate este disponibilă numai pentru utilizatorii înregistrați. Va rugam sa va logati.",
+
+  "guide_new_today": "Azi",
+  "guide_new_yesterday": "Ieri"
 }
