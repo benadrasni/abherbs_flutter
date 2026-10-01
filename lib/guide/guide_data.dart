@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/guide/guide_results.dart';
+import 'package:abherbs_flutter/guide/guide_search.dart';
 import 'package:abherbs_flutter/guide/guide_seen.dart';
 import 'package:abherbs_flutter/guide/guide_species.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
@@ -46,11 +47,16 @@ class GuideFind {
   final DateTime when;
   final String? photoPath;
 
+  /// False while a photo name is still waiting on Seen. A missing flag on
+  /// an older row counts as confirmed.
+  final bool confirmed;
+
   GuideFind({
     required this.name,
     required this.label,
     required this.when,
     required this.photoPath,
+    this.confirmed = true,
   });
 }
 
@@ -316,6 +322,36 @@ Future<String?> _resultPlate(String name) async {
   return null;
 }
 
+Map<String, GuideHeaderBloom>? _headerBlooms;
+
+/// In flower this month, and seen, for each genus. Flowering months are cached.
+/// Seen is read again on every call.
+Future<Map<String, GuideGenusNote>> loadGuideGenusNotes(
+  List<GuideSearchTaxon> genera, {
+  int? month,
+}) async {
+  if (genera.isEmpty) return {};
+  final blooms = _headerBlooms ?? await _loadHeaderBlooms();
+  final seen = await loadGuideSeenNames();
+  final now = month ?? DateTime.now().month;
+  return {
+    for (final genus in genera)
+      genus.latinName: countGuideGenusNote(
+        plantIds: genus.plantIds,
+        blooms: blooms,
+        seen: seen,
+        month: now,
+      ),
+  };
+}
+
+Future<Map<String, GuideHeaderBloom>> _loadHeaderBlooms() async {
+  final event = await headersV3Reference.once();
+  final blooms = readGuideHeaderBlooms(event.snapshot.value);
+  _headerBlooms = blooms;
+  return blooms;
+}
+
 Future<Set<String>> loadGuideSeenNames() async {
   final user = Auth.appUser;
   if (user == null) return {};
@@ -491,6 +527,10 @@ User? guideNotebookUser() {
   }
 }
 
+/// Newest private finds for the Seen lately strip.
+///
+/// `order` is a negative timestamp, so an ascending `orderByChild` lists
+/// newest first. [limit] has to read the start of that index.
 Future<List<GuideFind>> loadRecentFinds(String languageCode,
     {int limit = 5}) async {
   final user = guideNotebookUser();
@@ -500,7 +540,7 @@ Future<List<GuideFind>> loadRecentFinds(String languageCode,
       .child(firebaseObservationsByDate)
       .child(firebaseAttributeList)
       .orderByChild(firebaseAttributeOrder)
-      .limitToLast(limit)
+      .limitToFirst(limit)
       .once();
   final value = event.snapshot.value;
   if (value is! Map) return [];
@@ -510,7 +550,12 @@ Future<List<GuideFind>> loadRecentFinds(String languageCode,
     if (raw is! Map) return;
     final name = raw[observationPlant];
     if (name is! String || name.isEmpty) return;
-    rawFinds.add(_RawFind(name, guideFindWhen(raw), _ownPhoto(raw)));
+    rawFinds.add(_RawFind(
+      name,
+      guideFindWhen(raw),
+      _ownPhoto(raw),
+      confirmed: guideFindConfirmed(raw),
+    ));
   });
   rawFinds.sort((a, b) => b.when.compareTo(a.when));
 
@@ -983,8 +1028,17 @@ class _RawFind {
   final String name;
   final DateTime when;
   final String? photoPath;
+  final bool confirmed;
 
-  _RawFind(this.name, this.when, this.photoPath);
+  _RawFind(this.name, this.when, this.photoPath, {this.confirmed = true});
+}
+
+/// Missing [observationConfirmed] counts as confirmed, matching older rows
+/// in the Seen notebook.
+@visibleForTesting
+bool guideFindConfirmed(Map raw) {
+  final value = raw[observationConfirmed];
+  return value is bool ? value : true;
 }
 
 Future<GuideFind> _decorateFind(_RawFind raw, String languageCode) async {
@@ -1026,6 +1080,7 @@ Future<GuideFind> _decorateFind(_RawFind raw, String languageCode) async {
     label: label,
     when: raw.when,
     photoPath: photo,
+    confirmed: raw.confirmed,
   );
 }
 

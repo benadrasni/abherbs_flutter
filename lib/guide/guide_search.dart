@@ -1,3 +1,4 @@
+import 'package:abherbs_flutter/guide/guide_results.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/foundation.dart';
@@ -21,12 +22,16 @@ class GuideSearchTaxon {
   final String listPath;
   final String illustrationFamily;
 
+  /// Catalog ids on a genus list. Empty for families.
+  final List<String> plantIds;
+
   const GuideSearchTaxon({
     required this.latinName,
     required this.vernaculars,
     required this.count,
     required this.listPath,
     required this.illustrationFamily,
+    this.plantIds = const [],
   });
 }
 
@@ -282,6 +287,9 @@ void _walkTaxon(
       count: count,
       listPath: '$path$name/$firebaseAttributeList',
       illustrationFamily: nextFamily ?? '',
+      plantIds: type == 'Genus'
+          ? guideResultIds(node[firebaseAttributeList])
+          : const [],
     );
     if (type == 'Familia') {
       families.add(taxon);

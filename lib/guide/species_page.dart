@@ -950,8 +950,7 @@ class _PendingBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
-    final time = MaterialLocalizations.of(context)
-        .formatTimeOfDay(TimeOfDay.fromDateTime(pending.when));
+    final time = guidePhotoMoment(context, pending.when);
     final name =
         species.hasVernacular ? guideCap(species.label!.trim()) : species.name;
     final file = pending.photoPath;

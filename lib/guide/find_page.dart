@@ -47,7 +47,7 @@ class FindPage extends StatelessWidget {
             action: S.of(context).guide_all_finds,
             onAction: onOpenSeen,
           ),
-          _FindStrip(finds: recent),
+          _FindStrip(finds: recent, onOpenSeen: onOpenSeen),
         ],
         GuideSectionHeader(
           title: S.of(context).custom_lists,
@@ -369,10 +369,14 @@ class _Swatch extends StatelessWidget {
   }
 }
 
+/// Madder pill on an unconfirmed photo in Seen lately. Mockup `.find-card .u`.
+const guideFindToConfirmKey = Key('guide-find-to-confirm');
+
 class _FindStrip extends StatelessWidget {
   final List<GuideFind> finds;
+  final VoidCallback onOpenSeen;
 
-  const _FindStrip({required this.finds});
+  const _FindStrip({required this.finds, required this.onOpenSeen});
 
   @override
   Widget build(BuildContext context) {
@@ -389,11 +393,32 @@ class _FindStrip extends StatelessWidget {
           return SizedBox(
             width: 118,
             child: InkWell(
-              onTap: () => openGuidePlant(context, find.name),
+              onTap: () {
+                // A name still waiting opens Seen, where it can be confirmed.
+                if (!find.confirmed) {
+                  onOpenSeen();
+                  return;
+                }
+                openGuidePlant(context, find.name);
+              },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GuidePhoto(path: find.photoPath, width: 118, height: 118),
+                  Stack(
+                    children: [
+                      GuidePhoto(
+                        path: find.photoPath,
+                        width: 118,
+                        height: 118,
+                      ),
+                      if (!find.confirmed)
+                        const PositionedDirectional(
+                          start: 6,
+                          top: 6,
+                          child: _ToConfirmBadge(),
+                        ),
+                    ],
+                  ),
                   const SizedBox(height: 6),
                   GuideName(label: find.label, latinName: find.name),
                   const SizedBox(height: 2),
@@ -408,6 +433,33 @@ class _FindStrip extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class _ToConfirmBadge extends StatelessWidget {
+  const _ToConfirmBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      key: guideFindToConfirmKey,
+      decoration: BoxDecoration(
+        color: GuideColors.of(context).madderFill,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+        child: Text(
+          S.of(context).guide_find_to_confirm,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 10,
+            fontWeight: FontWeight.w600,
+            height: 1.2,
+          ),
+        ),
       ),
     );
   }

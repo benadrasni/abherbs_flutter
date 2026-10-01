@@ -29,6 +29,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 const _well = Color(0xFF0D0C0A);
 const _scrim = Color(0x66000000);
@@ -48,6 +49,10 @@ class GuideCameraPage extends StatefulWidget {
   final Future<GuideCameraPlace> Function()? onDecline;
   final Future<String?> Function(GuideCameraSource source)? pickPhoto;
   final Future<GuideCameraOutcome> Function(String path)? identify;
+
+  /// When set, this reads the date of a roll photo. Production leaves it
+  /// empty and reads the date from the photo.
+  final Future<DateTime?> Function(String path)? photoTakenAt;
   final Future<void> Function()? onWatchAd;
   final Future<void> Function()? onSignIn;
   final Future<void> Function()? onFieldGuide;
@@ -69,6 +74,7 @@ class GuideCameraPage extends StatefulWidget {
     this.onDecline,
     this.pickPhoto,
     this.identify,
+    this.photoTakenAt,
     this.onWatchAd,
     this.onSignIn,
     this.onFieldGuide,
@@ -91,6 +97,10 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   bool _busy = false;
   bool _naming = false;
   String? _shotPath;
+
+  /// EXIF date of a photo chosen from the roll. A shutter photo leaves this
+  /// empty and the find uses the current time.
+  DateTime? _shotWhen;
   _Sheet? _sheet;
   bool _notPlantCounted = false;
   RewardedAd? _rewardedAd;
@@ -214,6 +224,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     setState(() {
       _sheet = null;
       _shotPath = null;
+      _shotWhen = null;
     });
     unawaited(_resumePreview());
   }
@@ -410,6 +421,12 @@ class _GuideCameraPageState extends State<GuideCameraPage>
         return shot;
       }
     }
+    if (source == GuideCameraSource.gallery) {
+      final access = await Permission.accessMediaLocation.status;
+      if (!access.isGranted) {
+        await Permission.accessMediaLocation.request();
+      }
+    }
     final image = await ImagePicker().pickImage(
       source: source == GuideCameraSource.camera
           ? ImageSource.camera
@@ -575,7 +592,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
 
   Future<void> _pushOutside(GuideCameraOutcome outcome) async {
     final shot = _shotPath;
-    final when = DateTime.now();
+    final when = _shotWhen ?? DateTime.now();
     final place = await _placeLabel();
     if (!mounted) return;
     final plant = _outsidePlant(outcome);
@@ -643,7 +660,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     double? probability,
   }) async {
     final shot = _shotPath;
-    final when = DateTime.now();
+    final when = _shotWhen ?? DateTime.now();
     final place = await _placeLabel();
     if (!mounted) return;
     final id = await saveGuideCameraFind(GuideCameraDraft(
@@ -752,7 +769,10 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     await _stopPreview();
     await push();
     if (!mounted) return;
-    setState(() => _shotPath = null);
+    setState(() {
+      _shotPath = null;
+      _shotWhen = null;
+    });
     await _startPreview();
   }
 
@@ -774,8 +794,14 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       setState(() {
         _naming = true;
         _shotPath = path;
+        _shotWhen = null;
         _sheet = null;
       });
+      if (source == GuideCameraSource.gallery) {
+        final read = widget.photoTakenAt ?? guideCameraPhotoTakenAt;
+        _shotWhen = await read(path);
+        if (!mounted) return;
+      }
       final identify = widget.identify ?? _identifyDefault;
       final outcome = await identify(path);
       if (!mounted) return;

@@ -1,6 +1,7 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_actions.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
+import 'package:abherbs_flutter/guide/guide_results.dart';
 import 'package:abherbs_flutter/guide/guide_search.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
@@ -19,6 +20,8 @@ class BookPage extends StatefulWidget {
   final ValueChanged<GuideBookSegment> onSegment;
   final VoidCallback onOpenFind;
   final Future<GuideBookTaxa> Function(String languageCode) loadTaxa;
+  final Future<Map<String, GuideGenusNote>> Function(
+      List<GuideSearchTaxon> genera) loadGenusNotes;
   final void Function(BuildContext context, String listPath)? onOpenTaxon;
   final void Function(BuildContext context, GuideListCover cover)? onOpenList;
   final VoidCallback? onSearch;
@@ -30,6 +33,7 @@ class BookPage extends StatefulWidget {
     required this.onSegment,
     required this.onOpenFind,
     this.loadTaxa = loadGuideBookTaxa,
+    this.loadGenusNotes = loadGuideGenusNotes,
     this.onOpenTaxon,
     this.onOpenList,
     this.onSearch,
@@ -43,8 +47,10 @@ class _BookPageState extends State<BookPage> {
   final ScrollController _scroll = ScrollController();
   String? _languageCode;
   GuideBookTaxa? _taxa;
+  Map<String, GuideGenusNote> _genusNotes = {};
   bool _error = false;
   int _ticket = 0;
+  int _noteTicket = 0;
 
   @override
   void didChangeDependencies() {
@@ -53,6 +59,7 @@ class _BookPageState extends State<BookPage> {
     if (_languageCode == code) return;
     _languageCode = code;
     _taxa = null;
+    _genusNotes = {};
     _error = false;
     _load();
   }
@@ -62,6 +69,7 @@ class _BookPageState extends State<BookPage> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.segment == widget.segment) return;
     if (_scroll.hasClients) _scroll.jumpTo(0);
+    if (widget.segment == GuideBookSegment.genera) _loadNotes();
   }
 
   @override
@@ -81,6 +89,7 @@ class _BookPageState extends State<BookPage> {
         _taxa = taxa;
         _error = false;
       });
+      _loadNotes();
     } catch (error) {
       debugPrint('guide book: $error');
       if (!mounted || ticket != _ticket) return;
@@ -92,8 +101,27 @@ class _BookPageState extends State<BookPage> {
     setState(() {
       _error = false;
       _taxa = null;
+      _genusNotes = {};
     });
     _load();
+  }
+
+  Future<void> _loadNotes() async {
+    final genera = _taxa?.genera;
+    if (genera == null) return;
+    final ticket = ++_noteTicket;
+    try {
+      final notes = await widget.loadGenusNotes(genera);
+      if (!mounted || ticket != _noteTicket) return;
+      setState(() => _genusNotes = notes);
+    } catch (error) {
+      debugPrint('guide genus notes: $error');
+    }
+  }
+
+  String? _genusNote(GuideSearchTaxon taxon) {
+    if (widget.segment != GuideBookSegment.genera) return null;
+    return guideGenusNoteText(S.of(context), _genusNotes[taxon.latinName]);
   }
 
   void _search() {
@@ -195,6 +223,7 @@ class _BookPageState extends State<BookPage> {
             final taxon = rows[index];
             return _TaxonRow(
               taxon: taxon,
+              note: _genusNote(taxon),
               onTap: () => _openTaxon(context, taxon),
             );
           },
@@ -349,6 +378,17 @@ class _Segment extends StatelessWidget {
   }
 }
 
+/// One line under a genus: in flower this month, and how many you’ve seen.
+String? guideGenusNoteText(S strings, GuideGenusNote? note) {
+  if (note == null || note.isEmpty) return null;
+  final parts = <String>[
+    if (note.inFlower > 0) strings.guide_in_flower_now(note.inFlower),
+    if (note.seen > 0) strings.guide_you_have_seen(note.seen),
+  ];
+  if (parts.isEmpty) return null;
+  return parts.join(' · ');
+}
+
 String _taxonHeading(GuideSearchTaxon taxon) {
   final raw = guideTaxonTitle(taxon);
   final vernacular = raw == taxon.latinName ? null : guideCap(raw);
@@ -359,9 +399,11 @@ String _taxonHeading(GuideSearchTaxon taxon) {
 
 class _TaxonRow extends StatelessWidget {
   final GuideSearchTaxon taxon;
+  final String? note;
   final VoidCallback onTap;
 
-  const _TaxonRow({required this.taxon, required this.onTap});
+  const _TaxonRow(
+      {required this.taxon, required this.note, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -408,6 +450,19 @@ class _TaxonRow extends StatelessWidget {
                         color: colors.ink3,
                       ),
                     ),
+                  if (note != null) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      note!,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 12,
+                        height: 1.25,
+                        color: colors.ink3,
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),

@@ -154,153 +154,157 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final leading = _leading;
-    final time = MaterialLocalizations.of(context)
-        .formatTimeOfDay(TimeOfDay.fromDateTime(widget.when));
+    final time = guidePhotoMoment(context, widget.when);
     return Scaffold(
-        key: const Key('guide-outside-page'),
-        backgroundColor: colors.paper,
-        body: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            _Shot(
-              path: widget.photoPath,
-              place: widget.place,
-              onClose: () => Navigator.pop(
-                context,
-                const GuideOutsideResult.find(),
+      key: const Key('guide-outside-page'),
+      backgroundColor: colors.paper,
+      body: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          _Shot(
+            path: widget.photoPath,
+            place: widget.place,
+            whenLabel: guidePhotoDay(
+              context,
+              widget.when,
+              todayLabel: strings.guide_outside_just_now,
+            ),
+            onClose: () => Navigator.pop(
+              context,
+              const GuideOutsideResult.find(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GuideConfidenceMark(probability: leading?.probability),
+                const SizedBox(height: 6),
+                Text(
+                  leading?.latin ?? '',
+                  style: TextStyle(
+                    fontFamily: GuideType.serif,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 30,
+                    height: 1.1,
+                    color: colors.ink,
+                  ),
+                ),
+                if (leading?.vernacular != null &&
+                    leading!.vernacular!.trim().isNotEmpty) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    guideCap(leading.vernacular!.trim()),
+                    style: TextStyle(fontSize: 15, color: colors.ink3),
+                  ),
+                ],
+                if (_family(leading, colors) != null) ...[
+                  const SizedBox(height: 8),
+                  _family(leading, colors)!,
+                ],
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(20, 14, 20, 0),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: colors.paper2,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Text(
+                  strings.guide_camera_outside,
+                  style: TextStyle(
+                    fontSize: 14,
+                    height: 1.4,
+                    color: colors.ink2,
+                  ),
+                ),
               ),
             ),
+          ),
+          if (widget.outcome.candidates.isNotEmpty) ...[
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GuideConfidenceMark(probability: leading?.probability),
-                  const SizedBox(height: 6),
-                  Text(
-                    leading?.latin ?? '',
-                    style: TextStyle(
-                      fontFamily: GuideType.serif,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 30,
-                      height: 1.1,
-                      color: colors.ink,
+              padding: const EdgeInsetsDirectional.fromSTEB(20, 24, 20, 10),
+              child: Text(
+                strings.guide_camera_in_book,
+                style: GuideType.section(colors),
+              ),
+            ),
+            for (final hit in widget.outcome.candidates)
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
+                child: _Candidate(
+                  hit: hit,
+                  onOpen: widget.onOpenSpecies,
+                ),
+              ),
+          ],
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(20, 16, 20, 24),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: colors.madder, width: 1.5),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      strings.guide_outside_saved,
+                      style: TextStyle(
+                        color: colors.madder,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15,
+                      ),
                     ),
-                  ),
-                  if (leading?.vernacular != null &&
-                      leading!.vernacular!.trim().isNotEmpty) ...[
                     const SizedBox(height: 4),
                     Text(
-                      guideCap(leading.vernacular!.trim()),
-                      style: TextStyle(fontSize: 15, color: colors.ink3),
+                      strings.guide_outside_saved_detail(time, widget.place),
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: colors.ink3,
+                        height: 1.4,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        _Action(
+                          key: const Key('guide-outside-keep'),
+                          label: strings.guide_outside_keep,
+                          filled: true,
+                          onPressed: _busy ? null : _keep,
+                        ),
+                        _Action(
+                          key: const Key('guide-outside-another'),
+                          label: strings.guide_outside_another,
+                          onPressed: _busy ? null : _another,
+                        ),
+                        _Action(
+                          key: const Key('guide-outside-delete'),
+                          label: strings.guide_outside_delete,
+                          foreground: colors.madder,
+                          onPressed: _busy ? null : _delete,
+                        ),
+                      ],
                     ),
                   ],
-                  if (_family(leading, colors) != null) ...[
-                    const SizedBox(height: 8),
-                    _family(leading, colors)!,
-                  ],
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20, 14, 20, 0),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: colors.paper2,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Text(
-                    strings.guide_camera_outside,
-                    style: TextStyle(
-                      fontSize: 14,
-                      height: 1.4,
-                      color: colors.ink2,
-                    ),
-                  ),
                 ),
               ),
             ),
-            if (widget.outcome.candidates.isNotEmpty) ...[
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20, 24, 20, 10),
-                child: Text(
-                  strings.guide_camera_in_book,
-                  style: GuideType.section(colors),
-                ),
-              ),
-              for (final hit in widget.outcome.candidates)
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
-                  child: _Candidate(
-                    hit: hit,
-                    onOpen: widget.onOpenSpecies,
-                  ),
-                ),
-            ],
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20, 16, 20, 24),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: colors.madder, width: 1.5),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(14),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        strings.guide_outside_saved,
-                        style: TextStyle(
-                          color: colors.madder,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 15,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        strings.guide_outside_saved_detail(time, widget.place),
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: colors.ink3,
-                          height: 1.4,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: [
-                          _Action(
-                            key: const Key('guide-outside-keep'),
-                            label: strings.guide_outside_keep,
-                            filled: true,
-                            onPressed: _busy ? null : _keep,
-                          ),
-                          _Action(
-                            key: const Key('guide-outside-another'),
-                            label: strings.guide_outside_another,
-                            onPressed: _busy ? null : _another,
-                          ),
-                          _Action(
-                            key: const Key('guide-outside-delete'),
-                            label: strings.guide_outside_delete,
-                            foreground: colors.madder,
-                            onPressed: _busy ? null : _delete,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
   }
 
   Widget? _family(GuideCameraHit? hit, GuideColors colors) {
@@ -328,11 +332,13 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
 class _Shot extends StatelessWidget {
   final String? path;
   final String place;
+  final String whenLabel;
   final VoidCallback onClose;
 
   const _Shot({
     required this.path,
     required this.place,
+    required this.whenLabel,
     required this.onClose,
   });
 
@@ -374,7 +380,7 @@ class _Shot extends StatelessWidget {
             bottom: 10,
             child: Row(
               children: [
-                _MetaPill(label: strings.guide_outside_just_now),
+                _MetaPill(label: whenLabel),
                 const SizedBox(width: 6),
                 _MetaPill(
                   label: place,
@@ -454,7 +460,8 @@ class _Candidate extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: species == null || onOpen == null ? null : () => onOpen!(species),
+        onTap:
+            species == null || onOpen == null ? null : () => onOpen!(species),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(

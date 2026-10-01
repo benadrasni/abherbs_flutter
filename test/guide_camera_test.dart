@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/camera_page.dart';
@@ -219,7 +221,8 @@ void main() {
     expect(
       guideCameraOutcome(const [
         GuideCameraHit(latin: 'Cystinarius', probability: 0.08),
-      ], isPlant: false).kind,
+      ], isPlant: false)
+          .kind,
       GuideCameraOutcomeKind.notPlant,
     );
 
@@ -241,7 +244,8 @@ void main() {
       GuideCameraHit(latin: 'Rare plant', probability: 0.8),
       GuideCameraHit(latin: 'Bellis perennis', path: 'Bellis perennis'),
       GuideCameraHit(latin: 'Leucanthemum', path: 'Asteraceae/Leucanthemum/'),
-      GuideCameraHit(latin: 'Matricaria chamomilla', path: 'Matricaria chamomilla'),
+      GuideCameraHit(
+          latin: 'Matricaria chamomilla', path: 'Matricaria chamomilla'),
       GuideCameraHit(latin: 'Tanacetum vulgare', path: 'Tanacetum vulgare'),
     ]);
     expect(outside.kind, GuideCameraOutcomeKind.outside);
@@ -323,11 +327,13 @@ void main() {
       const Color(0xFF0D0C0A),
     );
 
-    final shutter = tester.getSize(find.byKey(const Key('guide-camera-shutter')));
+    final shutter =
+        tester.getSize(find.byKey(const Key('guide-camera-shutter')));
     expect(shutter, const Size(76, 76));
   });
 
-  testWidgets('credits show five dots and the names still left', (tester) async {
+  testWidgets('credits show five dots and the names still left',
+      (tester) async {
     await _show(tester, _page(allowance: GuideAllowance.credits(3)));
 
     expect(find.text('3 names left'), findsOneWidget);
@@ -529,6 +535,99 @@ void main() {
     expect(find.text('Naming…'), findsNothing);
   });
 
+  test('a photo date is the EXIF clock, or nothing', () async {
+    expect(
+      guideCameraExifDate('2024:06:12 14:31:05'),
+      DateTime(2024, 6, 12, 14, 31, 5),
+    );
+    expect(guideCameraExifDate('2024:06:12 14:31:05.12'),
+        DateTime(2024, 6, 12, 14, 31, 5));
+    expect(guideCameraExifDate(null), isNull);
+    expect(guideCameraExifDate('not a date'), isNull);
+    expect(guideCameraExifDate('2024:06:12'), isNull);
+
+    final dir = await Directory.systemTemp.createTemp('wtf-photo-date');
+    addTearDown(() => dir.delete(recursive: true));
+    final dated = File('${dir.path}/dated.jpg');
+    await dated.writeAsBytes(base64Decode(_datedJpeg));
+    expect(
+      await guideCameraPhotoTakenAt(dated.path),
+      DateTime(2024, 6, 12, 14, 31, 5),
+    );
+    final plain = File('${dir.path}/plain.jpg');
+    await plain.writeAsBytes(base64Decode(_plainJpeg));
+    expect(await guideCameraPhotoTakenAt(plain.path), isNull);
+    expect(await guideCameraPhotoTakenAt('${dir.path}/missing.jpg'), isNull);
+  });
+
+  testWidgets('naming a photo from the roll uses the photo date',
+      (tester) async {
+    await _show(
+      tester,
+      _page(
+        allowance: GuideAllowance.credits(3),
+        pickPhoto: (source) async {
+          expect(source, GuideCameraSource.gallery);
+          return '/tmp/roll.jpg';
+        },
+        photoTakenAt: (_) async => DateTime(2024, 6, 12, 14, 31, 5),
+        identify: (_) async => const GuideCameraOutcome.outside(
+          GuideCameraHit(latin: 'Rare plant', probability: 0.8),
+          [],
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(const Key('guide-camera-roll')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Jun 12, 2024'), findsOneWidget);
+    expect(find.textContaining('Jun 12, 2024, 2:31 PM'), findsOneWidget);
+    expect(find.text('Just now'), findsNothing);
+  });
+
+  testWidgets('a shutter photo uses the current time', (tester) async {
+    await _show(
+      tester,
+      _page(
+        allowance: GuideAllowance.credits(3),
+        pickPhoto: (_) async => '/tmp/shot.jpg',
+        photoTakenAt: (_) async => DateTime(2024, 6, 12, 14, 31, 5),
+        identify: (_) async => const GuideCameraOutcome.outside(
+          GuideCameraHit(latin: 'Rare plant', probability: 0.8),
+          [],
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(const Key('guide-camera-shutter')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Just now'), findsOneWidget);
+    expect(find.text('Jun 12, 2024'), findsNothing);
+  });
+
+  testWidgets('a roll photo with no date uses the current time',
+      (tester) async {
+    await _show(
+      tester,
+      _page(
+        allowance: GuideAllowance.credits(3),
+        pickPhoto: (_) async => '/tmp/roll.jpg',
+        photoTakenAt: (_) async => null,
+        identify: (_) async => const GuideCameraOutcome.outside(
+          GuideCameraHit(latin: 'Rare plant', probability: 0.8),
+          [],
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(const Key('guide-camera-roll')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Just now'), findsOneWidget);
+  });
+
   testWidgets('the photo roll opens a family list', (tester) async {
     String? opened;
     await _show(
@@ -539,6 +638,7 @@ void main() {
           expect(source, GuideCameraSource.gallery);
           return '/tmp/roll.jpg';
         },
+        photoTakenAt: (_) async => null,
         identify: (_) async =>
             const GuideCameraOutcome.list('Asteraceae/Bellis/'),
         onOpenList: (path) => opened = path,
@@ -926,7 +1026,8 @@ void main() {
 
     expect(find.text('Tanacetum corymbosum'), findsOneWidget);
     expect(find.text('Daisy family · Asteraceae'), findsOneWidget);
-    expect(find.text('Just now'), findsOneWidget);
+    expect(find.text('Sep 30, 2026'), findsOneWidget);
+    expect(find.textContaining('Sep 30, 2026, 2:31 PM'), findsOneWidget);
     expect(find.text('Middle Europe'), findsWidgets);
     expect(find.text('Saved to Seen · unconfirmed'), findsOneWidget);
     expect(find.textContaining('Photo,'), findsOneWidget);
@@ -1143,6 +1244,7 @@ GuideCameraPage _page({
   Future<GuideCameraPlace> Function()? onDecline,
   Future<String?> Function(GuideCameraSource source)? pickPhoto,
   Future<GuideCameraOutcome> Function(String path)? identify,
+  Future<DateTime?> Function(String path)? photoTakenAt,
   Future<void> Function()? onWatchAd,
   Future<void> Function()? onSignIn,
   Future<void> Function()? onFieldGuide,
@@ -1159,6 +1261,7 @@ GuideCameraPage _page({
     onDecline: onDecline,
     pickPhoto: pickPhoto,
     identify: identify,
+    photoTakenAt: photoTakenAt,
     onWatchAd: onWatchAd ?? () async {},
     onSignIn: onSignIn,
     onFieldGuide: onFieldGuide,
@@ -1169,6 +1272,19 @@ GuideCameraPage _page({
     livePreview: livePreview,
   );
 }
+
+Future<File> _writeJpeg(String encoded) async {
+  final dir = await Directory.systemTemp.createTemp('wtf-photo-date');
+  final file = File('${dir.path}/shot.jpg');
+  await file.writeAsBytes(base64Decode(encoded));
+  return file;
+}
+
+const _datedJpeg =
+    '/9j/4AAQSkZJRgABAQAAAQABAAD/4QBoRXhpZgAATU0AKgAAAAgAAgEyAAIAAAAUAAAAJodpAAQAAAABAAAAOgAAAAAyMDI0OjA2OjEyIDE0OjMxOjA1AAABkAMAAgAAABQAAABMAAAAADIwMjQ6MDY6MTIgMTQ6MzE6MDUA/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8AAEQgAEAAQAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A56iiivNPkD//2Q==';
+
+const _plainJpeg =
+    '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAQABADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDxOiiigD//2Q==';
 
 Widget _standInPreview(BuildContext context) {
   return const ColoredBox(

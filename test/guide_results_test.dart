@@ -14,8 +14,8 @@ void main() {
         _plant('2', 'Achillea millefolium', label: 'Yarrow', from: 6, to: 9),
         _plant('3', 'Galanthus nivalis', label: 'Snowdrop', from: 1, to: 3),
         _plant('4', 'Rosa canina', label: 'Églantine', from: 5, to: 7),
-        _plant('5', 'Tulipa gesneriana', label: 'Tulip', from: 4, to: 5,
-            cultivated: true),
+        _plant('5', 'Tulipa gesneriana',
+            label: 'Tulip', from: 4, to: 5, cultivated: true),
       ],
       month: 7,
       wildOnly: false,
@@ -28,12 +28,48 @@ void main() {
     );
   });
 
+  test('a genus counts species in flower and species already seen', () {
+    final blooms = readGuideHeaderBlooms({
+      '69': {
+        'name': 'Bellis perennis',
+        'floweringFrom': 3,
+        'floweringTo': 10,
+      },
+      '70': {
+        'name': 'Bellis sylvestris',
+        'floweringFrom': 1,
+        'floweringTo': 3,
+      },
+      '71': 'skip',
+    });
+    expect(blooms['69']?.name, 'Bellis perennis');
+    expect(blooms.containsKey('71'), isFalse);
+
+    final note = countGuideGenusNote(
+      plantIds: ['69', '70', '71'],
+      blooms: blooms,
+      seen: {'Bellis perennis'},
+      month: 10,
+    );
+    expect(note.inFlower, 1);
+    expect(note.seen, 1);
+    expect(note.isEmpty, isFalse);
+
+    final quiet = countGuideGenusNote(
+      plantIds: ['70'],
+      blooms: blooms,
+      seen: {},
+      month: 10,
+    );
+    expect(quiet.isEmpty, isTrue);
+  });
+
   test('wild only hides cultivated plants', () {
     final list = arrangeGuideResults(
       [
         _plant('1', 'Bellis perennis', label: 'Daisy', from: 3, to: 10),
-        _plant('2', 'Tulipa gesneriana', label: 'Tulip', from: 4, to: 5,
-            cultivated: true),
+        _plant('2', 'Tulipa gesneriana',
+            label: 'Tulip', from: 4, to: 5, cultivated: true),
       ],
       month: 7,
       wildOnly: true,
@@ -50,8 +86,7 @@ void main() {
 
   test('the banner follows the sixth plant', () {
     final plants = [
-      for (var i = 0; i < 7; i++)
-        _plant('$i', 'Plant $i', from: 1, to: 12),
+      for (var i = 0; i < 7; i++) _plant('$i', 'Plant $i', from: 1, to: 12),
     ];
     final slots = guideResultSlots(
       arrangeGuideResults(plants, month: 7, wildOnly: false),
@@ -676,26 +711,26 @@ Widget _results({
   Future<void> Function(BuildContext context)? onTryPhoto,
 }) {
   return GuideResultsPage(
-      colorId: '1',
-      habitatId: '1',
-      petalId: '3',
-      month: 7,
-      showAd: showAd,
-      adBuilder: adBuilder,
-      initialPlants: plants,
-      initialPrefs: plants == null ? null : const GuideResultPrefs(),
-      initialSeen: seen,
-      initialRegionCounts: counts,
-      loadResults: loadResults ?? (_) async => plants ?? const [],
-      loadPrefs: () async => const GuideResultPrefs(),
-      savePrefs: (_) async {},
-      loadSeen: () async => seen,
-      loadRegionCounts: () async => counts,
-      locate: locate ?? () async => null,
-      openLocationSettings: openLocationSettings ?? () async {},
-      onOpenPlant: onOpenPlant ?? (_, __) {},
-      onTryPhoto: onTryPhoto ?? (_) async {},
-    );
+    colorId: '1',
+    habitatId: '1',
+    petalId: '3',
+    month: 7,
+    showAd: showAd,
+    adBuilder: adBuilder,
+    initialPlants: plants,
+    initialPrefs: plants == null ? null : const GuideResultPrefs(),
+    initialSeen: seen,
+    initialRegionCounts: counts,
+    loadResults: loadResults ?? (_) async => plants ?? const [],
+    loadPrefs: () async => const GuideResultPrefs(),
+    savePrefs: (_) async {},
+    loadSeen: () async => seen,
+    loadRegionCounts: () async => counts,
+    locate: locate ?? () async => null,
+    openLocationSettings: openLocationSettings ?? () async {},
+    onOpenPlant: onOpenPlant ?? (_, __) {},
+    onTryPhoto: onTryPhoto ?? (_) async {},
+  );
 }
 
 Widget _stack() {

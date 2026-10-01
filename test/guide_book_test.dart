@@ -1,6 +1,7 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/book_page.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
+import 'package:abherbs_flutter/guide/guide_results.dart';
 import 'package:abherbs_flutter/guide/guide_search.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
@@ -84,6 +85,35 @@ void main() {
     expect(book.genera.map((taxon) => taxon.latinName), ['Bellis', 'Rosa']);
     expect(guideFamilyIllustration('Asteraceae'), 'families/Asteraceae.webp');
     expect(guideFamilyIllustration(''), isNull);
+
+    final listed = GuideSearchIndex.parse(
+      vernacular: const {},
+      latin: const {},
+      apg: {
+        firebaseRootTaxon: {
+          firebaseAPGType: 'Regnum',
+          'Asterales': {
+            firebaseAPGType: 'Ordo',
+            'Asteraceae': {
+              firebaseAPGType: 'Familia',
+              firebaseAttributeCount: 2,
+              firebaseAttributeList: {'1': 1, '2': 1},
+              'Bellis': {
+                firebaseAPGType: 'Genus',
+                firebaseAttributeCount: 2,
+                firebaseAttributeList: {'70': 1, '69': 1},
+              },
+            },
+          },
+        },
+      },
+      taxonomyNames: const {},
+    );
+    expect(
+      listed.genera.single.plantIds,
+      ['69', '70'],
+    );
+    expect(listed.families.single.plantIds, isEmpty);
 
     final accented = guideBookTaxa(const [], [
       GuideSearchTaxon(
@@ -195,6 +225,36 @@ void main() {
     expect(openedList?.title, 'Alpine flowers');
   });
 
+  testWidgets('genera show what is in flower and what you have seen',
+      (tester) async {
+    await _pump(
+      tester,
+      _Host(
+        loadTaxa: (_) async => guideBookTaxa(index.families, index.genera),
+        loadGenusNotes: (_) async => {
+          'Bellis': const GuideGenusNote(inFlower: 2, seen: 1),
+          'Rosa': const GuideGenusNote(inFlower: 0, seen: 0),
+        },
+        lists: const [],
+      ),
+    );
+
+    expect(find.text('In flower now · 2 · you’ve seen 1'), findsNothing);
+
+    await tester.tap(find.byKey(guideBookGeneraKey));
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.text('English daisy'), findsOneWidget);
+    expect(
+      find.text('In flower now · 2 · you’ve seen 1'),
+      findsOneWidget,
+    );
+    expect(find.text('Rosa'), findsOneWidget);
+    expect(find.text('you’ve seen 0'), findsNothing);
+    expect(find.text('In flower now · 0'), findsNothing);
+  });
+
   testWidgets('a failed family load can be tried again', (tester) async {
     var fails = true;
     await _pump(
@@ -281,6 +341,8 @@ void main() {
 class _Host extends StatefulWidget {
   final GuideBookSegment start;
   final Future<GuideBookTaxa> Function(String languageCode) loadTaxa;
+  final Future<Map<String, GuideGenusNote>> Function(
+      List<GuideSearchTaxon> genera) loadGenusNotes;
   final List<GuideListCover>? lists;
   final void Function(BuildContext context, String listPath)? onOpenTaxon;
   final void Function(BuildContext context, GuideListCover cover)? onOpenList;
@@ -288,6 +350,7 @@ class _Host extends StatefulWidget {
   const _Host({
     this.start = GuideBookSegment.families,
     required this.loadTaxa,
+    this.loadGenusNotes = _noGenusNotes,
     required this.lists,
     this.onOpenTaxon,
     this.onOpenList,
@@ -320,6 +383,7 @@ class _HostState extends State<_Host> {
             onSegment: (segment) => setState(() => _segment = segment),
             onOpenFind: () {},
             loadTaxa: widget.loadTaxa,
+            loadGenusNotes: widget.loadGenusNotes,
             onOpenTaxon: widget.onOpenTaxon,
             onOpenList: widget.onOpenList,
             onSearch: () {},
@@ -328,6 +392,12 @@ class _HostState extends State<_Host> {
       ),
     );
   }
+}
+
+Future<Map<String, GuideGenusNote>> _noGenusNotes(
+  List<GuideSearchTaxon> genera,
+) async {
+  return {};
 }
 
 Future<void> _pump(WidgetTester tester, Widget page) async {

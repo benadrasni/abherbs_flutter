@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:exif/exif.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -459,6 +460,51 @@ GuideCameraOutcome guideCameraOutcome(
   final list = guideCameraListPath(lead);
   if (list != null) return GuideCameraOutcome.list(list);
   return GuideCameraOutcome.outside(lead, candidates);
+}
+
+/// When this photo was taken, from its EXIF date. Null when the file has
+/// no date, or the date cannot be read. A shutter photo does not use this.
+Future<DateTime?> guideCameraPhotoTakenAt(String path) async {
+  try {
+    final file = File(path);
+    if (!await file.exists()) return null;
+    final tags = await readExifFromBytes(await file.readAsBytes());
+    final tag = tags['EXIF DateTimeOriginal'] ?? tags['Image DateTime'];
+    if (tag == null) return null;
+    return guideCameraExifDate(tag.toString());
+  } catch (error) {
+    debugPrint('guide camera photo date: $error');
+    return null;
+  }
+}
+
+/// `yyyy:MM:dd HH:mm:ss` as written in EXIF. The clock is the photo's own
+/// local time. Null when the text is not that shape.
+DateTime? guideCameraExifDate(String? raw) {
+  if (raw == null) return null;
+  final cleaned = raw.replaceAll('\u0000', '').trim();
+  final parts = cleaned.split(' ');
+  if (parts.length < 2) return null;
+  final date = parts[0].split(':');
+  final clock = parts[1].split(':');
+  if (date.length < 3 || clock.length < 3) return null;
+  final year = int.tryParse(date[0]);
+  final month = int.tryParse(date[1]);
+  final day = int.tryParse(date[2]);
+  final hour = int.tryParse(clock[0].split('.').first);
+  final minute = int.tryParse(clock[1].split('.').first);
+  final second = int.tryParse(clock[2].split('.').first);
+  if (year == null ||
+      month == null ||
+      day == null ||
+      hour == null ||
+      minute == null ||
+      second == null) {
+    return null;
+  }
+  if (month < 1 || month > 12 || day < 1 || day > 31) return null;
+  if (hour > 23 || minute > 59 || second > 59) return null;
+  return DateTime(year, month, day, hour, minute, second);
 }
 
 /// Writes the camera's leading name to Seen, unconfirmed. Returns the

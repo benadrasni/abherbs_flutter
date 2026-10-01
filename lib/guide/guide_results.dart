@@ -263,6 +263,68 @@ int guideResultInt(dynamic value) {
   return 0;
 }
 
+/// Flowering months and the Latin name for one catalog id.
+class GuideHeaderBloom {
+  final String name;
+  final int floweringFrom;
+  final int floweringTo;
+
+  const GuideHeaderBloom(this.name, this.floweringFrom, this.floweringTo);
+}
+
+/// How many species in a genus are in flower, and how many the person has seen.
+class GuideGenusNote {
+  final int inFlower;
+  final int seen;
+
+  const GuideGenusNote({required this.inFlower, required this.seen});
+
+  bool get isEmpty => inFlower <= 0 && seen <= 0;
+}
+
+/// `plants_headers_v3` as a list or a map, keyed by catalog id.
+Map<String, GuideHeaderBloom> readGuideHeaderBlooms(dynamic raw) {
+  final blooms = <String, GuideHeaderBloom>{};
+  void add(String id, dynamic value) {
+    if (value is! Map) return;
+    final name = value[firebaseAttributeName];
+    if (name is! String || name.isEmpty) return;
+    blooms[id] = GuideHeaderBloom(
+      name,
+      guideResultInt(value['floweringFrom']),
+      guideResultInt(value['floweringTo']),
+    );
+  }
+
+  if (raw is List) {
+    for (var i = 0; i < raw.length; i++) {
+      add('$i', raw[i]);
+    }
+  } else if (raw is Map) {
+    raw.forEach((key, value) => add(key.toString(), value));
+  }
+  return blooms;
+}
+
+GuideGenusNote countGuideGenusNote({
+  required Iterable<String> plantIds,
+  required Map<String, GuideHeaderBloom> blooms,
+  required Set<String> seen,
+  required int month,
+}) {
+  var inFlower = 0;
+  var seenCount = 0;
+  for (final id in plantIds) {
+    final bloom = blooms[id];
+    if (bloom == null) continue;
+    if (guideInFlower(bloom.floweringFrom, bloom.floweringTo, month)) {
+      inFlower++;
+    }
+    if (seen.contains(bloom.name)) seenCount++;
+  }
+  return GuideGenusNote(inFlower: inFlower, seen: seenCount);
+}
+
 int guideSeenInList(Iterable<GuideResultPlant> plants, Set<String> seen) {
   var count = 0;
   for (final plant in plants) {

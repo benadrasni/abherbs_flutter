@@ -201,6 +201,31 @@ String guideWhen(BuildContext context, DateTime when) {
   return '$date, $time';
 }
 
+bool _sameDay(DateTime when, DateTime now) {
+  return when.year == now.year &&
+      when.month == now.month &&
+      when.day == now.day;
+}
+
+/// [todayLabel] on the same calendar day. The date otherwise.
+String guidePhotoDay(
+  BuildContext context,
+  DateTime when, {
+  DateTime? now,
+  required String todayLabel,
+}) {
+  if (_sameDay(when, now ?? DateTime.now())) return todayLabel;
+  return MaterialLocalizations.of(context).formatShortDate(when);
+}
+
+/// Clock time on the same calendar day. Date and clock time otherwise.
+String guidePhotoMoment(BuildContext context, DateTime when, {DateTime? now}) {
+  final localizations = MaterialLocalizations.of(context);
+  final time = localizations.formatTimeOfDay(TimeOfDay.fromDateTime(when));
+  if (_sameDay(when, now ?? DateTime.now())) return time;
+  return '${localizations.formatShortDate(when)}, $time';
+}
+
 class GuideName extends StatelessWidget {
   final String? label;
   final String latinName;

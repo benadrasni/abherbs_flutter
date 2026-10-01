@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/guide/find_page.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
+import 'package:abherbs_flutter/guide/species_page.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
@@ -127,6 +128,13 @@ void main() {
     expect(guideFirstText(null), isNull);
   });
 
+  test('a missing confirmed flag counts as confirmed', () {
+    expect(guideFindConfirmed({}), isTrue);
+    expect(guideFindConfirmed({observationConfirmed: true}), isTrue);
+    expect(guideFindConfirmed({observationConfirmed: false}), isFalse);
+    expect(guideFindConfirmed({observationConfirmed: 'false'}), isTrue);
+  });
+
   testWidgets('pins the banner above Find and leaves Book clear',
       (tester) async {
     Purchases.hasOldVersion = true;
@@ -225,6 +233,7 @@ void main() {
     expect(find.text('null'), findsNothing);
 
     expect(find.text('Oxeye'), findsOneWidget);
+    expect(find.text('To confirm'), findsNothing);
     expect(find.text('Bellis perennis'), findsNothing);
     expect(find.text('Find 5'), findsOneWidget);
     expect(find.text('Find 6'), findsNothing);
@@ -346,6 +355,66 @@ void main() {
     await tester.pump();
     expect(find.byKey(guideUnconfirmedBadgeKey), findsNothing);
     expect(find.byIcon(Icons.article_outlined), findsOneWidget);
+  });
+
+  testWidgets('an unconfirmed find wears To confirm and opens Seen',
+      (tester) async {
+    Purchases.hasOldVersion = true;
+    var seen = 0;
+    final when = DateTime(2026, 9, 29, 15, 4);
+    await _pump(
+      tester,
+      _page(
+        finds: [
+          GuideFind(
+            name: 'Bellis perennis',
+            label: 'oxeye',
+            when: when,
+            photoPath: null,
+            confirmed: false,
+          ),
+          GuideFind(
+            name: 'Leucanthemum vulgare',
+            label: 'daisy',
+            when: when,
+            photoPath: null,
+          ),
+        ],
+        lists: const [],
+        onOpenSeen: () => seen++,
+      ),
+    );
+
+    expect(find.text('To confirm'), findsOneWidget);
+    final photo = tester.getRect(find.byType(GuidePhoto).first);
+    final badge = tester.getRect(find.byKey(guideFindToConfirmKey));
+    expect(badge.top, closeTo(photo.top + 6, 0.5));
+    expect(badge.left, closeTo(photo.left + 6, 0.5));
+    final paint = tester.widget<DecoratedBox>(
+      find.byKey(guideFindToConfirmKey),
+    );
+    expect(
+      (paint.decoration as BoxDecoration).color,
+      GuideColors.light.madderFill,
+    );
+
+    await tester.tap(find.text('To confirm'));
+    await tester.pump();
+    expect(seen, 1);
+    expect(find.byType(GuideSpeciesPage), findsNothing);
+
+    await tester.tap(find.text('Daisy'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(seen, 1);
+    expect(
+      tester
+          .widget<GuideSpeciesPage>(
+            find.byType(GuideSpeciesPage, skipOffstage: false),
+          )
+          .name,
+      'Leucanthemum vulgare',
+    );
   });
 
   testWidgets('asks a signed-out reader to sign in', (tester) async {
