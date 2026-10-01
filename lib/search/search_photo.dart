@@ -108,7 +108,7 @@ class _SearchPhotoState extends State<SearchPhoto> {
           _image = File(image.path);
           _searchResultF = identifyPlantPhoto(
             image: _image!,
-            languageCode: widget.myLocale.languageCode,
+            languageCode: plantIdLanguageTag(widget.myLocale),
             onCreditsChanged: () {
               if (mounted) setState(() {});
             },

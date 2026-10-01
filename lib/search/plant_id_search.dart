@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui' show Locale;
 
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -56,6 +57,14 @@ class PhotoIdentification {
     this.charged = false,
     this.guestFreeUsed = false,
   });
+}
+
+/// `language` for `identifyPlant`. The region stays on the tag so Traditional
+/// Chinese (`zh-TW`) and Portuguese can be mapped to Plant.id's codes.
+String plantIdLanguageTag(Locale locale) {
+  final country = locale.countryCode;
+  if (country == null || country.isEmpty) return locale.languageCode;
+  return '${locale.languageCode}-$country';
 }
 
 /// Names a photo through the `identifyPlant` Cloud Function, which holds the

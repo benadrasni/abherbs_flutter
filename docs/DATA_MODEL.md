@@ -267,7 +267,7 @@ Photo file names are `{first letter of genus}{first letter of species}{n}.webp` 
 
 ## Search by photo
 
-1. Client posts the image to Plant.id v2.
+1. The app sends the image to `identifyPlant`, which posts it to Plant.id v3.
 2. Each suggestion's scientific name is looked up in `search_photo/{lowercase name without dots}`.
 3. A hit contains `count` + `path` into the catalog (species or higher taxon).
 4. Results are logged under `users_photo_search/{lang}/{uid}/{ts}` when the user is signed in. Anonymous logs are denied.

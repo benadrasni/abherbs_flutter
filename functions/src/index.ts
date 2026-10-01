@@ -19,6 +19,7 @@ import {
   type QuotaState,
   type Refusal,
 } from './quota';
+import { plantIdBody, plantIdFinished, plantIdLanguage, plantIdSuggestions, plantIdUrl } from './plantid';
 
 initializeApp();
 
@@ -31,8 +32,6 @@ const adGrantsPerMonth = defineInt('AD_GRANTS_PER_MONTH', { default: 5 });
 const anonymousLifetimeCalls = defineInt('ANONYMOUS_LIFETIME_CALLS', { default: 3 });
 const anonymousDailyCeiling = defineInt('ANONYMOUS_DAILY_CEILING', { default: 300 });
 
-const plantIdEndpoint = 'https://api.plant.id/v2/identify';
-const plantIdDetails = ['common_names', 'url', 'wiki_description', 'taxonomy'];
 const maxImageChars = 8 * 1024 * 1024;
 const cooldownMs = 5_000;
 const repeatWindowMs = 24 * 60 * 60 * 1000;
@@ -151,19 +150,18 @@ export const identifyPlant = onCall(
 
     let body: Record<string, unknown>;
     try {
-      const response = await fetch(plantIdEndpoint, {
+      const response = await fetch(plantIdUrl(plantIdLanguage(language)), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Api-Key': plantIdKey.value() },
-        body: JSON.stringify({
-          images: [image],
-          modifiers: ['similar_images'],
-          plant_language: language,
-          plant_details: plantIdDetails,
-        }),
+        body: JSON.stringify(plantIdBody(image)),
         signal: AbortSignal.timeout(30_000),
       });
-      if (!response.ok) throw new Error(`Plant.id ${response.status}`);
+      if (!response.ok) {
+        const detail = (await response.text()).slice(0, 300);
+        throw new Error(`Plant.id ${response.status} ${detail}`);
+      }
       body = (await response.json()) as Record<string, unknown>;
+      if (!plantIdFinished(body)) throw new Error('Plant.id incomplete');
     } catch (error) {
       logger.error('identifyPlant: Plant.id failed', { uid, error: String(error) });
       if (paid) {
@@ -178,8 +176,7 @@ export const identifyPlant = onCall(
       rememberPhoto(current, Date.now(), hash),
     );
 
-    const plant = isPlant(body, isPlantThresholdPercent.value());
-    const suggestions = plant && Array.isArray(body.suggestions) ? body.suggestions : [];
+    const suggestions = isPlant(body, isPlantThresholdPercent.value()) ? plantIdSuggestions(body) : [];
 
     let charged = paid;
     if (suggestions.length === 0 && paid) {

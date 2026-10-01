@@ -457,7 +457,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   Future<GuideCameraOutcome> _identifyDefault(String path) async {
     final identification = await identifyPlantPhoto(
       image: File(path),
-      languageCode: Localizations.localeOf(context).languageCode,
+      languageCode: plantIdLanguageTag(Localizations.localeOf(context)),
       onCreditsChanged: () {
         if (!mounted) return;
         _readAllowance();
