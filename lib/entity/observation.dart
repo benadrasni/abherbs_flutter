@@ -15,6 +15,11 @@ const String observationIndoors = "indoors";
 const String observationStatus = "status";
 const String observationStatusPrivate = "private";
 const String observationStatusPublic = "public";
+const String observationConfirmed = "confirmed";
+const String observationSource = "source";
+const String observationCandidates = "candidates";
+const String observationSourceCamera = "camera";
+const String observationSourceManual = "manual";
 
 class Observation{
   String key = "";
@@ -29,6 +34,11 @@ class Observation{
   String uploadStatus = firebaseValuePrivate;
   int order = 0;
   bool indoors = false;
+
+  /// Missing on older records, which are already confirmed finds.
+  bool confirmed = true;
+  String source = "";
+  List<dynamic> candidates = [];
 
   Observation(String plantName) {
     this.plant = plantName;
@@ -46,6 +56,9 @@ class Observation{
     this.status = observation.status;
     this.order = observation.order;
     this.indoors = observation.indoors;
+    this.confirmed = observation.confirmed;
+    this.source = observation.source;
+    this.candidates = List.from(observation.candidates);
   }
 
   Observation.fromJson(key, Map data) {
@@ -60,6 +73,13 @@ class Observation{
     this.status = data[observationStatus];
     this.order = data[observationOrder];
     this.indoors = data[observationIndoors] ?? false;
+    final confirmedValue = data[observationConfirmed];
+    this.confirmed = confirmedValue is bool ? confirmedValue : true;
+    final sourceValue = data[observationSource];
+    this.source = sourceValue is String ? sourceValue : "";
+    final candidateValue = data[observationCandidates];
+    this.candidates =
+        candidateValue is List ? List<dynamic>.from(candidateValue) : [];
   }
 
   Map<String, dynamic> toJson() {
@@ -74,6 +94,11 @@ class Observation{
     result[observationStatus] = this.status;
     result[observationOrder] = this.order;
     result[observationIndoors] = this.indoors;
+    result[observationConfirmed] = this.confirmed;
+    if (this.source.isNotEmpty) result[observationSource] = this.source;
+    if (this.candidates.isNotEmpty) {
+      result[observationCandidates] = this.candidates;
+    }
     return result;
   }
 }

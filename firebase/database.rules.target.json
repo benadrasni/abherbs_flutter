@@ -89,6 +89,16 @@
       }
     },
 
+    "photo_quota": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": false
+      }
+    },
+
+    "ad_rewards": { ".read": false, ".write": false },
+    "anonymous_daily": { ".read": false, ".write": false },
+
     "users": {
       "$uid": {
         ".read": "auth != null && auth.uid == $uid",

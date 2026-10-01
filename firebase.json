@@ -1,5 +1,14 @@
 {
   "database": {
     "rules": "firebase/database.rules.json"
-  }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "runtime": "nodejs22",
+      "ignore": ["node_modules", "src", "*.test.*", ".git"],
+      "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run build"]
+    }
+  ]
 }

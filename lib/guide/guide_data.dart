@@ -4,20 +4,27 @@ import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/guide/guide_results.dart';
+import 'package:abherbs_flutter/guide/guide_seen.dart';
 import 'package:abherbs_flutter/guide/guide_species.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/widgets.dart';
+
+/// Families opens first. All lists on Find switches to [lists].
+enum GuideBookSegment { families, genera, lists }
 
 class GuideListCover {
   final String title;
   final String? photoPath;
+  final List<String> thumbs;
   final DatabaseReference path;
   final bool isNew;
   final int count;
   final int? year;
+  final int? yearFrom;
   final DateTime? latest;
 
   GuideListCover({
@@ -26,7 +33,9 @@ class GuideListCover {
     required this.path,
     required this.isNew,
     required this.count,
+    this.thumbs = const [],
     this.year,
+    this.yearFrom,
     this.latest,
   });
 }
@@ -48,8 +57,29 @@ class GuideFind {
 const guideHabitatRouteName = 'GuideHabitat';
 const guidePetalRouteName = 'GuidePetal';
 const guideResultsRouteName = 'GuideResults';
+const guideListRouteName = 'GuideList';
 const guideSpeciesRouteName = 'GuideSpecies';
 const guidePersonRouteName = 'GuidePerson';
+const guideSearchRouteName = 'GuideSearch';
+const guideCameraRouteName = 'GuideCamera';
+const guideOutsideRouteName = 'GuideOutside';
+const guideCustomRouteName = 'GuideCustom';
+
+/// How a custom list opens. Year values use the timeline. New in the book
+/// groups recent additions by date. Everything else uses the result grid.
+enum GuideCustomLayout { fresh, grid, years }
+
+GuideCustomLayout guideCustomLayout(GuideListCover cover) {
+  if (cover.isNew) return GuideCustomLayout.fresh;
+  if (cover.year != null) return GuideCustomLayout.years;
+  return GuideCustomLayout.grid;
+}
+
+/// Newest days of `lists_custom/new`, kept whole while the plant count
+/// stays inside this band. A day is shortened only when leaving it whole
+/// would pass the maximum before the minimum is met.
+const guideNewPlantMin = 15;
+const guideNewPlantMax = 25;
 
 /// Tab actions for the field-guide shell. A pushed page cannot see the
 /// shell's inherited widgets, so it calls these.
@@ -57,6 +87,10 @@ class GuideTabs {
   static void Function(int index)? show;
   static VoidCallback? showSeen;
   static VoidCallback? refreshSeen;
+
+  /// Unconfirmed finds waiting on Seen. The shell writes this. Every bottom
+  /// bar reads it, including bars on pages pushed over the shell.
+  static final ValueNotifier<int> unconfirmed = ValueNotifier(0);
 }
 
 /// Leaves the key and opens a shell tab. Find stays selected while the key
@@ -74,6 +108,19 @@ bool guideIsKeyRoute(String? name) {
 
 void popGuideKeyToFind(BuildContext context) {
   Navigator.popUntil(context, (route) => !guideIsKeyRoute(route.settings.name));
+}
+
+/// The key on the camera returns to Find, including when search or the key
+/// is still underneath.
+void leaveGuideCameraForFind(BuildContext context) {
+  GuideTabs.show?.call(0);
+  Navigator.popUntil(context, (route) {
+    final name = route.settings.name;
+    return name != guideCameraRouteName &&
+        name != guideOutsideRouteName &&
+        name != guideSearchRouteName &&
+        !guideIsKeyRoute(name);
+  });
 }
 
 void popGuideKeyToHabitat(BuildContext context) {
@@ -176,6 +223,35 @@ Future<List<GuideResultPlant>> loadGuideResults({
   return plants.whereType<GuideResultPlant>().toList();
 }
 
+/// Plants on a family or genus list. Same headers as the key's result list.
+Future<List<GuideResultPlant>> loadGuideListedPlants(
+  DatabaseReference path,
+  String languageCode,
+) async {
+  final event = await path.once();
+  final ids = guideResultIds(event.snapshot.value);
+  if (ids.isEmpty) return const [];
+  final lang = getLanguageCode(languageCode);
+  final plants = await Future.wait(ids.map((id) async {
+    return await _guideResultPlant(id, lang) ??
+        await _guideHeaderPlant(id, lang);
+  }));
+  return plants.whereType<GuideResultPlant>().toList();
+}
+
+Future<String?> loadGuideTaxonTitle(String latin, String languageCode) async {
+  if (latin.isEmpty) return null;
+  final lang = getLanguageCode(languageCode);
+  try {
+    final event =
+        await translationsTaxonomyReference.child(lang).child(latin).once();
+    return guideTaxonVernacular(event.snapshot.value, latin);
+  } catch (error) {
+    debugPrint('guide list title $latin: $error');
+    return null;
+  }
+}
+
 Future<GuideResultPlant?> _guideResultPlant(String id, String language) async {
   try {
     final event = await headersV3Reference.child(id).once();
@@ -188,6 +264,22 @@ Future<GuideResultPlant?> _guideResultPlant(String id, String language) async {
     return readGuideResultHeader(id, value, label: label, platePath: plate);
   } catch (error) {
     debugPrint('guide result $id: $error');
+    return null;
+  }
+}
+
+Future<GuideResultPlant?> _guideHeaderPlant(String id, String language) async {
+  try {
+    final event = await listsReference.child(id).once();
+    final value = event.snapshot.value;
+    if (value is! Map) return null;
+    final name = value[firebaseAttributeName];
+    if (name is! String || name.isEmpty) return null;
+    final label = await _resultLabel(language, name);
+    final plate = await _resultPlate(name);
+    return readGuideResultHeader(id, value, label: label, platePath: plate);
+  } catch (error) {
+    debugPrint('guide list header $id: $error');
     return null;
   }
 }
@@ -309,6 +401,7 @@ Future<List<GuideListCover>> loadGuideLists(String languageCode) async {
     if (body.count == 0) return;
     pending.add(_PendingCover(
       coverId: body.coverId,
+      thumbIds: body.thumbIds,
       cover: GuideListCover(
         title: key.toString(),
         photoPath: null,
@@ -320,6 +413,7 @@ Future<List<GuideListCover>> loadGuideLists(String languageCode) async {
         isNew: false,
         count: body.count,
         year: body.year,
+        yearFrom: body.yearFrom,
       ),
     ));
   });
@@ -328,6 +422,7 @@ Future<List<GuideListCover>> loadGuideLists(String languageCode) async {
   if (newest != null) {
     pending.add(_PendingCover(
       coverId: newest.coverId,
+      thumbIds: newest.thumbIds,
       cover: GuideListCover(
         title: '',
         photoPath: null,
@@ -342,19 +437,28 @@ Future<List<GuideListCover>> loadGuideLists(String languageCode) async {
     ));
   }
 
-  final photos = await _headerPhotos(
-    pending.map((item) => item.coverId).whereType<String>().toSet(),
-  );
+  final photoIds = <String>{
+    for (final item in pending) ...item.thumbIds,
+    for (final item in pending)
+      if (item.coverId != null) item.coverId!,
+  };
+  final photos = await _headerPhotos(photoIds);
   final covers = pending.map((item) {
     final cover = item.cover;
     final photo = item.coverId == null ? null : photos[item.coverId];
+    final thumbs = [
+      for (final id in item.thumbIds)
+        if (photos[id] != null) photos[id]!,
+    ];
     return GuideListCover(
       title: cover.title,
       photoPath: photo,
+      thumbs: thumbs,
       path: cover.path,
       isNew: cover.isNew,
       count: cover.count,
       year: cover.year,
+      yearFrom: cover.yearFrom,
       latest: cover.latest,
     );
   }).toList();
@@ -365,14 +469,31 @@ Future<List<GuideListCover>> loadGuideLists(String languageCode) async {
 
 class _PendingCover {
   final String? coverId;
+  final List<String> thumbIds;
   final GuideListCover cover;
 
-  _PendingCover({required this.coverId, required this.cover});
+  _PendingCover({
+    required this.coverId,
+    required this.thumbIds,
+    required this.cover,
+  });
+}
+
+/// The signed-in account, or the anonymous guest while that is the only
+/// account. A missing Firebase app yields null.
+User? guideNotebookUser() {
+  final signedIn = Auth.appUser;
+  if (signedIn != null) return signedIn;
+  try {
+    return Auth.guestUser;
+  } catch (_) {
+    return null;
+  }
 }
 
 Future<List<GuideFind>> loadRecentFinds(String languageCode,
     {int limit = 5}) async {
-  final user = Auth.appUser;
+  final user = guideNotebookUser();
   if (user == null) return [];
   final event = await privateObservationsReference
       .child(user.uid)
@@ -397,6 +518,121 @@ Future<List<GuideFind>> loadRecentFinds(String languageCode,
   return Future.wait(rawFinds.map((raw) => _decorateFind(raw, lang)));
 }
 
+/// Every private find for the Seen notebook, newest first.
+Future<List<GuideSeenFind>> loadGuideSeen(String languageCode) async {
+  final user = guideNotebookUser();
+  if (user == null) return [];
+  final event = await privateObservationsReference
+      .child(user.uid)
+      .child(firebaseObservationsByDate)
+      .child(firebaseAttributeList)
+      .once();
+  final value = event.snapshot.value;
+  if (value is! Map) return [];
+  final rows = <GuideSeenFind>[];
+  value.forEach((key, raw) {
+    final row = readGuideSeenRow(key, raw);
+    if (row != null) rows.add(row);
+  });
+  final lang = getLanguageCode(languageCode);
+  final faces = <String, _SeenFace>{};
+  await Future.wait(rows.map((row) => row.name).toSet().map((name) async {
+    final needsPhoto = rows.any((row) => row.name == name && !row.ownPhoto);
+    faces[name] = await _seenFace(name, lang, needsPhoto: needsPhoto);
+  }));
+  final decorated = [
+    for (final row in rows)
+      row.withCatalog(
+        label: faces[row.name]?.label,
+        catalogPhoto: faces[row.name]?.photo,
+        inBook: faces[row.name]?.inBook ?? false,
+      ),
+  ];
+  decorated.sort((a, b) {
+    final byWhen = b.when.compareTo(a.when);
+    if (byWhen != 0) return byWhen;
+    return a.id.compareTo(b.id);
+  });
+  return decorated;
+}
+
+/// How many private finds are still unconfirmed. Used for the Seen tab badge
+/// before the notebook itself is loaded.
+Future<int> loadGuideUnconfirmedCount() async {
+  final user = guideNotebookUser();
+  if (user == null) return 0;
+  final event = await privateObservationsReference
+      .child(user.uid)
+      .child(firebaseObservationsByDate)
+      .child(firebaseAttributeList)
+      .once();
+  final value = event.snapshot.value;
+  if (value is! Map) return 0;
+  return countGuideUnconfirmedRows(value);
+}
+
+class _SeenFace {
+  final String? label;
+  final String? photo;
+  final bool inBook;
+
+  _SeenFace(this.label, this.photo, this.inBook);
+}
+
+Future<_SeenFace> _seenFace(
+  String name,
+  String languageCode, {
+  required bool needsPhoto,
+}) async {
+  final label = await _seenLabel(name, languageCode);
+  final photo = needsPhoto ? await _catalogPhoto(name) : null;
+  final inBook = await _plantInBook(name);
+  return _SeenFace(label, photo, inBook);
+}
+
+Future<String?> _seenLabel(String name, String languageCode) async {
+  final cached = translationCache[name];
+  if (cached != null && cached.isNotEmpty) return cached;
+  try {
+    final event = await translationsReference
+        .child(languageCode)
+        .child(name)
+        .child(firebaseAttributeLabel)
+        .once();
+    final value = event.snapshot.value;
+    if (value is String && value.isNotEmpty) {
+      translationCache[name] = value;
+      return value;
+    }
+  } catch (error) {
+    debugPrint('guide seen label $name: $error');
+  }
+  return null;
+}
+
+Future<String?> _catalogPhoto(String name) async {
+  try {
+    final event = await plantsReference.child(name).child('photoUrls').once();
+    final url = guideFirstText(event.snapshot.value);
+    if (url == null) return null;
+    return storagePhotos + url;
+  } catch (error) {
+    debugPrint('guide seen photo $name: $error');
+    return null;
+  }
+}
+
+Future<bool> _plantInBook(String name) async {
+  try {
+    final event = await plantsReference.child(name).child('id').once();
+    final value = event.snapshot.value;
+    return value != null && value.toString().isNotEmpty;
+  } catch (error) {
+    debugPrint('guide seen plant $name: $error');
+    return false;
+  }
+}
+
 @visibleForTesting
 int guideListRank(GuideListCover cover) {
   if (cover.isNew) return 0;
@@ -416,8 +652,16 @@ class GuideListBody {
   final int count;
   final String? coverId;
   final int? year;
+  final int? yearFrom;
+  final List<String> thumbIds;
 
-  GuideListBody(this.count, this.coverId, this.year);
+  GuideListBody(
+    this.count,
+    this.coverId,
+    this.year, {
+    this.yearFrom,
+    this.thumbIds = const [],
+  });
 }
 
 @visibleForTesting
@@ -441,15 +685,37 @@ GuideListBody readGuideList(dynamic list) {
 
   String? coverId;
   int? latestYear;
+  int? oldestYear;
+  final dated = <MapEntry<String, int>>[];
   for (final entry in entries) {
     coverId ??= entry.key;
     final year = customListYear(entry.value);
-    if (year != null && (latestYear == null || year > latestYear)) {
+    if (year == null) continue;
+    dated.add(MapEntry(entry.key, year));
+    if (latestYear == null || year > latestYear) {
       latestYear = year;
       coverId = entry.key;
     }
+    if (oldestYear == null || year < oldestYear) oldestYear = year;
   }
-  return GuideListBody(entries.length, coverId, latestYear);
+  final order = <String, int>{
+    for (var i = 0; i < entries.length; i++) entries[i].key: i,
+  };
+  dated.sort((a, b) {
+    final byYear = b.value.compareTo(a.value);
+    if (byYear != 0) return byYear;
+    return order[a.key]!.compareTo(order[b.key]!);
+  });
+  final source = dated.isEmpty
+      ? entries.map((entry) => entry.key)
+      : dated.map((entry) => entry.key);
+  return GuideListBody(
+    entries.length,
+    coverId,
+    latestYear,
+    yearFrom: oldestYear,
+    thumbIds: source.take(4).toList(),
+  );
 }
 
 class _Newest {
@@ -457,29 +723,219 @@ class _Newest {
   final DateTime? date;
   final int count;
   final String? coverId;
+  final List<String> thumbIds;
 
-  _Newest(this.dateKey, this.date, this.count, this.coverId);
+  _Newest(
+    this.dateKey,
+    this.date,
+    this.count,
+    this.coverId,
+    this.thumbIds,
+  );
+}
+
+/// One dated drop under `lists_custom/new`, before the plants are loaded.
+class GuideNewDrop {
+  final String dateKey;
+  final DateTime? date;
+  final List<String> ids;
+
+  const GuideNewDrop(this.dateKey, this.date, this.ids);
+}
+
+/// Plants added on one day, newest day first on the New in the book page.
+class GuideNewDay {
+  final String dateKey;
+  final DateTime? date;
+  final List<GuideResultPlant> plants;
+
+  const GuideNewDay({
+    required this.dateKey,
+    required this.date,
+    required this.plants,
+  });
+}
+
+/// A year-list row. One plant keeps the later year when the list names it once.
+class GuideYearEntry {
+  final int year;
+  final GuideResultPlant plant;
+
+  const GuideYearEntry({required this.year, required this.plant});
+}
+
+class GuideYearList {
+  final List<GuideYearEntry> entries;
+  final String? sourceUrl;
+
+  const GuideYearList({required this.entries, required this.sourceUrl});
+}
+
+class GuideYearId {
+  final String id;
+  final int year;
+
+  const GuideYearId(this.id, this.year);
+}
+
+@visibleForTesting
+List<GuideNewDrop> readGuideNewDrops(dynamic value) {
+  if (value is! Map) return const [];
+  final drops = <GuideNewDrop>[];
+  value.forEach((key, raw) {
+    if (raw is! Map) return;
+    final dateKey = key.toString();
+    DateTime? date;
+    try {
+      date = DateTime.parse(dateKey);
+    } catch (_) {
+      return;
+    }
+    final ids = guideResultIds(raw[firebaseAttributeList]);
+    if (ids.isEmpty) return;
+    drops.add(GuideNewDrop(dateKey, date, ids));
+  });
+  drops.sort((a, b) => b.dateKey.compareTo(a.dateKey));
+  return drops;
+}
+
+@visibleForTesting
+List<GuideNewDrop> selectGuideNewDrops(List<GuideNewDrop> newestFirst) {
+  final chosen = <GuideNewDrop>[];
+  var count = 0;
+  for (final drop in newestFirst) {
+    final next = count + drop.ids.length;
+    if (count >= guideNewPlantMin && next > guideNewPlantMax) break;
+    if (next <= guideNewPlantMax) {
+      chosen.add(drop);
+      count = next;
+      continue;
+    }
+    final room = guideNewPlantMax - count;
+    final ids = drop.ids.length <= room
+        ? drop.ids
+        : drop.ids.sublist(drop.ids.length - room);
+    chosen.add(GuideNewDrop(drop.dateKey, drop.date, ids));
+    break;
+  }
+  return chosen;
+}
+
+@visibleForTesting
+List<GuideYearId> readGuideYearIds(dynamic list) {
+  final entries = <MapEntry<String, dynamic>>[];
+  if (list is List) {
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] != null) entries.add(MapEntry(i.toString(), list[i]));
+    }
+  } else if (list is Map) {
+    list.forEach((key, value) {
+      if (value != null) entries.add(MapEntry(key.toString(), value));
+    });
+  }
+  entries.sort((a, b) {
+    final na = int.tryParse(a.key);
+    final nb = int.tryParse(b.key);
+    if (na != null && nb != null) return na.compareTo(nb);
+    return a.key.compareTo(b.key);
+  });
+  final dated = <GuideYearId>[];
+  for (final entry in entries) {
+    final year = customListYear(entry.value);
+    if (year == null) continue;
+    dated.add(GuideYearId(entry.key, year));
+  }
+  final order = {for (var i = 0; i < dated.length; i++) dated[i].id: i};
+  dated.sort((a, b) {
+    final byYear = b.year.compareTo(a.year);
+    if (byYear != 0) return byYear;
+    return order[a.id]!.compareTo(order[b.id]!);
+  });
+  return dated;
+}
+
+/// Host shown next to a year list, without the scheme.
+String guideSourceHost(String url) {
+  final uri = Uri.tryParse(url.trim());
+  var host = (uri == null || uri.host.isEmpty) ? url.trim() : uri.host;
+  if (host.startsWith('www.')) host = host.substring(4);
+  return host;
 }
 
 Future<_Newest?> _newestAddition() async {
   final event = await listsCustomReference
       .child('new')
       .orderByKey()
-      .limitToLast(1)
+      .limitToLast(guideNewPlantMax)
       .once();
-  final value = event.snapshot.value;
-  if (value is! Map || value.isEmpty) return null;
-  final dateKey = value.keys.first.toString();
-  final node = value.values.first;
-  if (node is! Map) return null;
-  final body = readGuideList(node[firebaseAttributeList]);
-  DateTime? date;
-  try {
-    date = DateTime.parse(dateKey);
-  } catch (_) {
-    date = null;
+  final drops = selectGuideNewDrops(readGuideNewDrops(event.snapshot.value));
+  if (drops.isEmpty) return null;
+  final ids = [for (final drop in drops) ...drop.ids];
+  final newest = drops.first;
+  return _Newest(
+    newest.dateKey,
+    newest.date,
+    ids.length,
+    ids.isEmpty ? null : ids.first,
+    ids.take(4).toList(),
+  );
+}
+
+Future<List<GuideNewDay>> loadGuideNewDays(String languageCode) async {
+  final event = await listsCustomReference
+      .child('new')
+      .orderByKey()
+      .limitToLast(guideNewPlantMax)
+      .once();
+  final drops = selectGuideNewDrops(readGuideNewDrops(event.snapshot.value));
+  if (drops.isEmpty) return const [];
+  final lang = getLanguageCode(languageCode);
+  final days = <GuideNewDay>[];
+  for (final drop in drops) {
+    final plants = await Future.wait(drop.ids.map((id) async {
+      return await _guideResultPlant(id, lang) ??
+          await _guideHeaderPlant(id, lang);
+    }));
+    days.add(GuideNewDay(
+      dateKey: drop.dateKey,
+      date: drop.date,
+      plants: plants.whereType<GuideResultPlant>().toList(),
+    ));
   }
-  return _Newest(dateKey, date, body.count, body.coverId);
+  return days;
+}
+
+Future<GuideYearList> loadGuideYearList(
+  DatabaseReference path,
+  String languageCode,
+) async {
+  final event = await path.once();
+  final rows = readGuideYearIds(event.snapshot.value);
+  String? sourceUrl;
+  final parent = path.parent;
+  if (parent != null) {
+    try {
+      final source = await parent.child(firebaseAttributeSourceUrl).once();
+      final value = source.snapshot.value;
+      if (value is String && value.isNotEmpty) sourceUrl = value;
+    } catch (error) {
+      debugPrint('guide year source: $error');
+    }
+  }
+  if (rows.isEmpty) {
+    return GuideYearList(entries: const [], sourceUrl: sourceUrl);
+  }
+  final lang = getLanguageCode(languageCode);
+  final entries = await Future.wait(rows.map((row) async {
+    final plant = await _guideResultPlant(row.id, lang) ??
+        await _guideHeaderPlant(row.id, lang);
+    if (plant == null) return null;
+    return GuideYearEntry(year: row.year, plant: plant);
+  }));
+  return GuideYearList(
+    entries: entries.whereType<GuideYearEntry>().toList(),
+    sourceUrl: sourceUrl,
+  );
 }
 
 class _LanguageLists {
@@ -656,6 +1112,8 @@ Future<void> saveGuideSeen(GuideSeenDraft draft) async {
   ];
   observation.status = observationStatusPrivate;
   observation.order = -draft.when.millisecondsSinceEpoch;
+  observation.confirmed = true;
+  observation.source = observationSourceManual;
   final json = observation.toJson();
   final root = privateObservationsReference.child(user.uid);
   await root
@@ -726,7 +1184,7 @@ Future<List<GuideSighting>> _guideSightings(String name) async {
 }
 
 Future<GuideSpeciesSeen?> _guideSpeciesSeen(String name) async {
-  final user = Auth.appUser;
+  final user = guideNotebookUser();
   if (user == null) return null;
   try {
     final event = await privateObservationsReference

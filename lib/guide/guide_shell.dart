@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:abherbs_flutter/guide/book_page.dart';
 import 'package:abherbs_flutter/guide/find_page.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
+import 'package:abherbs_flutter/guide/guide_seen.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
 import 'package:abherbs_flutter/guide/seen_page.dart';
@@ -27,9 +28,15 @@ class _GuideShellState extends State<GuideShell> {
   String? _languageCode;
   int _listTicket = 0;
   int _findTicket = 0;
+  int _seenTicket = 0;
+  int _unconfirmedTicket = 0;
+  String? _seenUid;
+  bool _unconfirmedLoaded = false;
   Map<String, int>? _colorCounts;
   List<GuideListCover>? _lists;
+  GuideBookSegment _bookSegment = GuideBookSegment.families;
   List<GuideFind>? _finds;
+  List<GuideSeenFind>? _notebook;
   int _credits = Auth.credits;
   int _accountTicket = 0;
   StreamSubscription<User?>? _authSub;
@@ -65,6 +72,11 @@ class _GuideShellState extends State<GuideShell> {
     _languageCode = code;
     _loadLists();
     _loadFinds();
+    if (_opened.contains(2)) {
+      _loadSeen();
+    } else {
+      _loadUnconfirmed();
+    }
   }
 
   @override
@@ -72,6 +84,7 @@ class _GuideShellState extends State<GuideShell> {
     GuideTabs.show = null;
     GuideTabs.showSeen = null;
     GuideTabs.refreshSeen = null;
+    GuideTabs.unconfirmed.value = 0;
     _authSub?.cancel();
     _creditsSub?.cancel();
     _purchaseSub?.cancel();
@@ -83,7 +96,19 @@ class _GuideShellState extends State<GuideShell> {
       _opened.add(index);
       _index = index;
     });
-    if (index == 2) _loadFinds();
+    if (index == 2) {
+      _loadFinds();
+      _loadSeen();
+    }
+  }
+
+  /// Find’s All lists opens Book on the lists of flowers.
+  void _openLists() {
+    setState(() {
+      _bookSegment = GuideBookSegment.lists;
+      _opened.add(1);
+      _index = 1;
+    });
   }
 
   /// Sign-in finishes after Find has drawn. Reload finds, then the account's
@@ -91,12 +116,14 @@ class _GuideShellState extends State<GuideShell> {
   Future<void> _onAccount(User? user) async {
     final ticket = ++_accountTicket;
     _watchCredits();
+    _resetSeenForUser();
     if (mounted) {
       setState(() {
         if (user == null) _credits = 0;
       });
     }
     final finds = _loadFinds();
+    final seen = _opened.contains(2) ? _loadSeen() : _loadUnconfirmed();
     if (user != null) {
       try {
         await Auth.setUser();
@@ -105,6 +132,7 @@ class _GuideShellState extends State<GuideShell> {
       }
     }
     await finds;
+    await seen;
     if (!mounted || ticket != _accountTicket || user == null) return;
     setState(() => _credits = Auth.credits);
   }
@@ -172,6 +200,57 @@ class _GuideShellState extends State<GuideShell> {
     }
   }
 
+  void _resetSeenForUser() {
+    final uid = guideNotebookUser()?.uid;
+    if (uid == _seenUid) return;
+    _seenUid = uid;
+    _unconfirmedLoaded = false;
+    ++_unconfirmedTicket;
+    GuideTabs.unconfirmed.value = 0;
+    if (_notebook == null) return;
+    _notebook = null;
+    if (mounted) setState(() {});
+  }
+
+  Future<void> _loadUnconfirmed() async {
+    if (_notebook != null || _unconfirmedLoaded) return;
+    final uid = guideNotebookUser()?.uid;
+    _seenUid = uid;
+    final ticket = ++_unconfirmedTicket;
+    try {
+      final count = await loadGuideUnconfirmedCount();
+      if (!mounted || ticket != _unconfirmedTicket || _notebook != null) {
+        return;
+      }
+      if (guideNotebookUser()?.uid != uid) return;
+      _unconfirmedLoaded = true;
+      GuideTabs.unconfirmed.value = count;
+    } catch (error) {
+      debugPrint('guide unconfirmed: $error');
+    }
+  }
+
+  Future<void> _loadSeen() async {
+    final code = _languageCode;
+    if (code == null) return;
+    _seenUid = guideNotebookUser()?.uid;
+    final ticket = ++_seenTicket;
+    ++_unconfirmedTicket;
+    try {
+      final finds = await loadGuideSeen(code);
+      if (!mounted || ticket != _seenTicket) return;
+      setState(() => _notebook = finds);
+      GuideTabs.unconfirmed.value = guideUnconfirmedTotal(finds);
+    } catch (error) {
+      debugPrint('guide seen: $error');
+      if (!mounted || ticket != _seenTicket) return;
+      if (_notebook == null) {
+        setState(() => _notebook = []);
+        GuideTabs.unconfirmed.value = 0;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     GuideTabs.show = (index) {
@@ -181,7 +260,9 @@ class _GuideShellState extends State<GuideShell> {
       if (mounted) _go(2);
     };
     GuideTabs.refreshSeen = () {
-      if (mounted) _loadFinds();
+      if (!mounted) return;
+      _loadFinds();
+      _loadSeen();
     };
     return GuideTheme(
       navigationColor: (colors) => colors.cream,
@@ -197,14 +278,26 @@ class _GuideShellState extends State<GuideShell> {
                 lists: _lists,
                 finds: _finds,
                 credits: _credits,
-                onOpenBook: () => _go(1),
+                onOpenBook: _openLists,
                 onOpenSeen: () => _go(2),
               ),
               _opened.contains(1)
-                  ? BookPage(lists: _lists, onOpenFind: () => _go(0))
+                  ? BookPage(
+                      lists: _lists,
+                      segment: _bookSegment,
+                      onSegment: (segment) {
+                        if (_bookSegment == segment) return;
+                        setState(() => _bookSegment = segment);
+                      },
+                      onOpenFind: () => _go(0),
+                    )
                   : const SizedBox.shrink(),
               _opened.contains(2)
-                  ? SeenPage(finds: _finds)
+                  ? SeenPage(
+                      finds: _notebook,
+                      signedIn: Auth.appUser != null,
+                      fieldGuide: Purchases.isSubscribed(),
+                    )
                   : const SizedBox.shrink(),
             ],
           ),

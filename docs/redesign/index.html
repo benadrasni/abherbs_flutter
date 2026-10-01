@@ -301,9 +301,9 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .tbc .nm{font-family:var(--serif);font-weight:520;font-size:18px;line-height:1.1}
 .tbc .nm.lat{font-style:italic;font-weight:420}
 .tbc .when{font-size:12px;color:var(--ink-3);margin-top:3px}
-.tbc .acts{display:flex;border-top:1px solid var(--rule)}
-.tbc .acts button{flex:1;height:42px;font-size:14px;font-weight:600;color:var(--moss);border-right:1px solid var(--rule);text-align:center}
-.tbc .acts button:last-child{border-right:0;color:var(--madder);flex:.5}
+.tbc .acts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--rule)}
+.tbc .acts button{height:42px;font-size:14px;font-weight:600;color:var(--moss);border-right:1px solid var(--rule);text-align:center}
+.tbc .acts button:last-child{border-right:0;color:var(--madder)}
 .month{padding:18px 20px 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--ink-3)}
 .srow .ok{color:var(--moss);font-size:12px;font-weight:600}
 .shst{font-size:12px;font-weight:600;color:var(--ink-3);white-space:nowrap;padding:4px 9px;border-radius:12px;background:var(--paper-2)}
@@ -404,6 +404,28 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .bar i.x{background:var(--gold)}
 .menu .srow{border-bottom:1px solid var(--rule)}
 .menu .srow svg{width:22px;height:22px;color:var(--moss)}
+
+/* Flower schema and inflorescences */
+.schema-top{position:sticky;top:0;z-index:6;background:var(--paper);padding-bottom:10px}
+.schema-top .q{margin-bottom:0}
+.schema-top .markline,.schema-top .hint{margin:8px 0 0}
+.schema-link{font:inherit;color:var(--moss);border-bottom:1px dotted currentColor;display:inline-flex;align-items:center;gap:1px}
+.schema-link svg{width:16px;height:16px;flex:none}
+.ffig{margin:2px 20px 0;background:#f3eee4;border-radius:16px;overflow:hidden;display:flex;justify-content:center}
+.glass.dk .ffig{background:transparent}
+.ffig img{width:100%;max-height:280px;object-fit:contain;display:block}
+.flist{list-style:none;margin:8px 20px 28px;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(9,auto);grid-auto-flow:column;column-gap:16px}
+.flist li{display:grid;grid-template-columns:1.7rem 1fr;gap:6px;padding:7px 0;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.25;min-width:0}
+.flist li span:last-child{min-width:0}
+.flist .n{font-variant-numeric:tabular-nums;color:var(--gold);font-weight:600}
+.markline{margin:0 20px 12px;font-size:14px;color:var(--moss);font-weight:600}
+.ifgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:0 16px 28px}
+.ifcell{margin:0;background:#fff;color:#1a1612;border:1px solid #e6e0d4;border-radius:12px;padding:8px 6px 7px;display:flex;flex-direction:column;min-width:0}
+.ifcell img{width:100%;height:96px;object-fit:contain;display:block}
+.ifcell .name{margin-top:6px;text-align:center;font-size:12px;line-height:1.2;min-height:2.4em}
+.ifcell.on{border-color:#3e5344;box-shadow:0 0 0 1px #3e5344}
+.ifcell.pri{box-shadow:0 0 0 2px #3e5344}
+.ifcell.on .name{font-weight:600;color:#3e5344}
 @media (max-width:820px){.desk{grid-template-columns:1fr;justify-items:center}.phone{position:relative;top:0}}
 </style>
 </head>
@@ -444,6 +466,16 @@ const PLATE_L=r=>PH(r.replace(/\.webp$/,'@1600.webp'));
 const MAP=r=>PH(r.replace(/\.webp$/,'_distribution.webp'));
 const FAMI=f=>S+'families/'+encodeURIComponent(f)+'.webp';
 const USERSHOT='https://commons.wikimedia.org/wiki/Special:FilePath/Tanacetum_corymbosum_(7334981392).jpg?width=900';
+const LEGEND='../../res/images/';
+const FLOWER_PARTS=['mature flower','stigma','style','filament','floral axis','joint','pedicel','nectary','stamen','pistil','ovules','connective','microsporangium','anther','perianth','petal/corolla','sepal/calyx'];
+const INFLO=[['raceme','raceme'],['spike','spike'],['spadix','spadix'],['corymb','corymb'],['umbel','umbel'],['compound_umbel','compound umbel'],['capitulum','capitulum'],['head','head'],['panicle','panicle'],['compound_spike','compound spike'],['cyme','cyme'],['helicoid','helicoid cyme'],['rhipidium','rhipidium'],['scorpioid','scorpioid cyme'],['scorpioid_thyrse','scorpioid thyrse'],['dichasial_thyrse','dichasial thyrse'],['double_scorpioid_thyrse','double scorpioid thyrse']];
+const INFLO_OF={
+  'Leucanthemum vulgare':['head'],
+  'Tanacetum parthenium':['capitulum','corymb'],
+  'Bellis perennis':['capitulum'],
+  'Achillea millefolium':['capitulum','corymb'],
+  'Matricaria chamomilla':['corymb','head'],
+};
 const MON=['J','F','M','A','M','J','J','A','S','O','N','D'];
 const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const NOW_MONTH=9;
@@ -532,7 +564,9 @@ const SCREENS=[
   ['notplant','Not a plant','Plant.id says it’s probably not a plant. Nothing saved, the name isn’t used.'],
   ['outside','Outside the book','Likely name, two candidates, curated look-alikes open full pages.'],
   ['speciesCam','Species from camera','Oxeye daisy, with the unconfirmed Seen bar.'],
-  ['species','Species page','Same sections as the website. No ads.'],
+  ['species','Species page','Same sections as the website. Flower and Inflorescence open the diagrams. No ads.'],
+  ['flower','Flower schema','A typical complete flower. The numbers on the plate match the list.'],
+  ['inflorescence','Inflorescences','Seventeen types. Opened from oxeye daisy, head is marked.'],
   ['seen','Seen','To confirm first, then the notebook by month.'],
   ['share','Share a find','Private until shared. CC0 consent each time, then review, then a public Sighting.'],
   ['book','Book','Families, genera, lists of flowers.'],
@@ -754,6 +788,7 @@ function speciesScreen(){
   const fam=s.apg['04_Familia']||s.apg['03_Familia'], famV=(D.fams.find(f=>f.f==fam)||{}).v;
   const months=MON.map((m,i)=>`<i class="${i+1>=s.fl[0]&&i+1<=s.fl[1]?'on':''} ${i+1==NOW_MONTH?'now':''}">${m}</i>`).join('');
   const T=s.t, secs=[['flower','Flower'],['inflorescence','Inflorescence'],['fruit','Fruit'],['leaf','Leaf'],['stem','Stem'],['habitat','Habitat'],['toxicity','Toxicity'],['herbalism','Uses'],['trivia','Trivia']].filter(([k])=>T[k]&&T[k]!=='None');
+  const secHead=(k,l)=>(k==='flower'||k==='inflorescence')?`<button class="schema-link" data-schema="${k}">${l}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>`:l;
   const apg=Object.entries(s.apg).sort().filter(([k])=>!/Regnum|Superregnum/.test(k)).slice(0,7).map(([k,v])=>`<span>${k.replace(/^\d+_/,'')}</span> <i class="latin" style="font-style:italic">${esc(v)}</i>`).join('<br>');
   const cam=st.fromCamera, rec=st.seen.find(r=>r.n==s.n)||null;
   const bar=cam?(rec&&!rec.u?`<div class="seenbar ok"><span class="th" style="background-image:url('${USERSHOT}')"></span><span class="tx"><b>In Seen as ${esc(cap(s.l||s.n))}</b>Confirmed · today 14:31</span><button class="btn ghost small" style="background:none;color:#fff;border-color:#fff6" data-undo="1">Undo</button></div>`
@@ -768,13 +803,46 @@ function speciesScreen(){
     <div class="wide"><div class="k">Flowers ${MONTH_NAMES[s.fl[0]-1]}–${MONTH_NAMES[s.fl[1]-1]}</div><div class="months">${months}</div></div></div>
   <div class="jump">${secs.map(([k,l])=>`<button class="pill" data-jump="${k}">${l}</button>`).join('')}<button class="pill" data-jump="taxonomy">Taxonomy</button><button class="pill" data-jump="dist">Distribution</button><button class="pill" data-jump="sightings">Sightings</button></div>
   <p class="lead">${esc(T.description)}</p>
-  ${secs.map(([k,l])=>`<div class="sec ${k=='toxicity'?'warn':''}" id="s-${k}"><h3>${l}</h3><p>${esc(T[k])}</p></div>`).join('')}
+  ${secs.map(([k,l])=>`<div class="sec ${k=='toxicity'?'warn':''}" id="s-${k}"><h3>${secHead(k,l)}</h3><p>${esc(T[k])}</p></div>`).join('')}
   <div class="sec" id="s-taxonomy"><h3>Taxonomy <small>APG IV</small></h3><div class="taxo">${apg}</div></div>
   <div class="sec" id="s-dist"><h3>Distribution <small>WCVP · native green, introduced brown</small></h3><img class="map" src="${MAP(s.pl)}" alt="Distribution map"></div>
   ${(()=>{const sg=(D.sightings||{})[s.n];if(!sg)return `<div class="sec" id="s-sightings"><h3>Sightings</h3><p class="hint" style="margin:0">No public sightings yet. Share one from Seen.</p></div>`;
     return `<div class="sec" id="s-sightings"><h3>Sightings <small>${sg.count} shared by app users</small></h3><div class="sightings">${sg.items.map(i=>{const d=new Date(i.t);return `<div style="background-image:url('${S+i.ph}')"><span>${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCFullYear()}</span></div>`}).join('')}</div><p class="hint">Country and month only. Photos under CC0, reviewed before they appear.</p></div>`})()}
   <div class="sec"><h3>Sources</h3><div class="srcs">${(s.src||[]).slice(0,5).map(u=>`<a href="${esc(u)}" target="_blank">${esc(u.replace(/^https?:\/\/(www\.)?/,'').split('/')[0])}</a>`).join(' · ')}</div></div>
   <div style="height:24px"></div>${bar}`;
+}
+function schemaBackName(){
+  if(st.schemaBack!=='species') return 'Back';
+  const s=D.sp[st.sp];
+  return s?cap(s.l||s.n):'Species';
+}
+function schemaHead(eyebrow, title, note, noteClass){
+  return `<div class="schema-top"><div class="back" data-schemaback="1">${I.back}${esc(schemaBackName())}</div>
+  <div class="pad"><div class="eyebrow">${eyebrow}</div><h2 class="q">${title}</h2>
+  ${note?`<div class="${noteClass||'markline'}">${esc(note)}</div>`:''}</div></div>`;
+}
+function flowerDark(){
+  return st.theme=='dark'||(st.theme=='system'&&st.phoneDark);
+}
+function flowerScreen(){
+  const rows=FLOWER_PARTS.map((label,i)=>`<li><span class="n">${i+1}</span><span>${label}</span></li>`).join('');
+  const src=flowerDark()?'Mature_flower_numbered_dark.svg':'Mature_flower_numbered.svg';
+  return `${schemaHead('Flower','Parts of a flower','A typical complete flower. The numbers match the list.','hint')}
+  <figure class="ffig"><img src="${src}" alt=""></figure>
+  <ol class="flist">${rows}</ol>`;
+}
+function inflorescenceScreen(){
+  const s=st.schemaBack==='species'?(D.sp[st.sp]||null):null;
+  const keys=s?(INFLO_OF[s.n]||[]):[];
+  const primary=keys[0]||'';
+  const labels=keys.map(k=>(INFLO.find(x=>x[0]===k)||[])[1]).filter(Boolean);
+  const note=s?(labels.length?`${cap(s.l||s.n)} · ${labels[0]}${labels.length>1?', also '+labels.slice(1).join(', '):''}`:`${cap(s.l||s.n)} · a solitary flower, so nothing here is marked`):'';
+  const cells=INFLO.map(([key,label])=>{
+    const on=keys.includes(key), pri=key===primary;
+    return `<figure class="ifcell${on?' on':''}${pri?' pri':''}"><img src="${LEGEND}inflorescence_${key}.webp" alt=""><figcaption class="name">${label}</figcaption></figure>`;
+  }).join('');
+  return `${schemaHead('Inflorescence','Types of inflorescence',note)}
+  <div class="ifgrid">${cells}</div>`;
 }
 function seenScreen(){
   const u=st.seen.filter(r=>r.u), c=st.seen.filter(r=>!r.u);
@@ -905,12 +973,12 @@ function meScreen(){
 const TABS=[['find','Find',I.find],['book','Book',I.book],['seen','Seen',I.seen]];
 function render(){
   const scr=st.screen, sc=$('screen');
-  const map={find:findScreen,search:searchScreen,habitat:habitatScreen,petal:petalScreen,results:resultsScreen,camera:cameraScreen,outside:outsideScreen,species:speciesScreen,seen:seenScreen,book:bookScreen,list:listScreen,fieldguide:fgScreen,me:meScreen,signin:signinScreen};
+  const map={find:findScreen,search:searchScreen,habitat:habitatScreen,petal:petalScreen,results:resultsScreen,camera:cameraScreen,outside:outsideScreen,species:speciesScreen,flower:flowerScreen,inflorescence:inflorescenceScreen,seen:seenScreen,book:bookScreen,list:listScreen,fieldguide:fgScreen,me:meScreen,signin:signinScreen};
   sc.innerHTML=(map[scr]||findScreen)();
   document.querySelector('.glass').classList.toggle('dk',st.theme=='dark'||(st.theme=='system'&&st.phoneDark));
   const dark=scr=='camera';
   $('status').className='status'+(dark?' dark':'');
-  const showTabs=!['camera','outside','species','fieldguide','search','signin'].includes(scr);
+  const showTabs=!['camera','outside','species','fieldguide','search','signin','flower','inflorescence'].includes(scr);
   const u=st.seen.filter(r=>r.u).length;
   $('tabs').style.display=showTabs?'flex':'none';
   $('adbar').style.display=!st.fg&&['find','habitat','petal'].includes(scr)?'block':'none';
@@ -924,7 +992,8 @@ function render(){
   $('tSigned').checked=st.signed;$('tBook').checked=st.inBook;$('tTen').checked=st.used>=10;$('tFG').checked=st.fg;
 }
 function go(s,opts={}){
-  if(!['me','fieldguide','species','search','signin'].includes(st.screen)) st.prev=st.screen;
+  if((s==='flower'||s==='inflorescence') && !['flower','inflorescence'].includes(st.screen)) st.schemaBack=st.screen;
+  if(!['me','fieldguide','species','search','signin','flower','inflorescence'].includes(st.screen)) st.prev=st.screen;
   st.screen=s;st.sheet=null;
   if(['find','habitat','petal','results','search','camera','outside'].includes(s)) st.tab='find';
   if(s=='seen'||s=='book') st.tab=s;
@@ -965,6 +1034,8 @@ function demo(k){
     case 'outside':st.loc=true;st.inBook=false;go('outside');break;
     case 'speciesCam':st.loc=true;st.seen.find(x=>x.id=='t2').u=true;go('species',{sp:'Leucanthemum vulgare',fromCamera:true,inBook:true});break;
     case 'species':go('species',{sp:'Leucanthemum vulgare',fromCamera:false});break;
+    case 'flower':st.sp='Leucanthemum vulgare';st.fromCamera=false;st.screen='species';go('flower');break;
+    case 'inflorescence':st.sp='Leucanthemum vulgare';st.fromCamera=false;st.screen='species';go('inflorescence');break;
     case 'seen':go('seen');break;
     case 'share':{const r=st.seen.find(x=>x.id=='c2');r.sh=undefined;go('seen');st.shareId='c2';st.consent=false;st.sheet='share';render();break}
     case 'book':go('book');break;
@@ -977,7 +1048,7 @@ function demo(k){
 }
 
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-demo],[data-go],[data-tab],[data-color],[data-habitat],[data-petal],[data-sp],[data-sheet],[data-region],[data-wild],[data-view],[data-loc],[data-shoot],[data-confirm],[data-confirmsp],[data-del],[data-pick],[data-undo],[data-seg],[data-ad],[data-fg],[data-sign],[data-slide],[data-jump],[data-goback],[data-seen],[data-share],[data-shsheet],[data-consent],[data-sendshare],[data-withdraw],[data-addseen],[data-list],[data-booklists],[data-toast],[data-close],[data-theme],[data-signstep],[data-signclose],[data-signwith]');
+  const t=e.target.closest('[data-demo],[data-go],[data-tab],[data-color],[data-habitat],[data-petal],[data-sp],[data-sheet],[data-region],[data-wild],[data-view],[data-loc],[data-shoot],[data-confirm],[data-confirmsp],[data-del],[data-pick],[data-undo],[data-seg],[data-ad],[data-fg],[data-sign],[data-slide],[data-jump],[data-goback],[data-schemaback],[data-schema],[data-seen],[data-share],[data-shsheet],[data-consent],[data-sendshare],[data-withdraw],[data-addseen],[data-list],[data-booklists],[data-toast],[data-close],[data-theme],[data-signstep],[data-signclose],[data-signwith]');
   if(!t) return;
   if(t.dataset.close&&e.target.closest('[data-stop]')) return;
   const d=t.dataset;
@@ -985,6 +1056,8 @@ document.addEventListener('click',e=>{
   if(d.close){st.sheet=null;render();return}
   if(d.theme){st.theme=d.theme;return render()}
   if(d.goback) return go(st.prev||'find',{fromCamera:st.screen=='species'?false:st.fromCamera});
+  if(d.schemaback) return go(st.schemaBack||'species');
+  if(d.schema) return go(d.schema);
   if(d.go){ if(d.go=='find'){st.color=null;st.habitat=null;st.petal=null} return go(d.go) }
   if(d.tab) return go(d.tab);
   if(d.color){ if(d.color!=='1') return toast('The prototype follows white → meadows → more than 5.'); st.color='1';return go('habitat') }

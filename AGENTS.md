@@ -48,6 +48,7 @@ Git remote: `https://github.com/benadrasni/abherbs_flutter`.
 - Admin JSON (local only): `~/Development/Keystore/abherbs-backend-firebase-adminsdk-l5787-839f896846.json`.
 - CLI: `firebase-tools` via nvm Node. Use `GOOGLE_APPLICATION_CREDENTIALS` pointing at the Admin JSON. `.firebaserc` selects `abherbs-backend`. Live rules snapshot: `firebase/database.rules.json`.
 - Do not write production RTDB/Storage unless the user asked for a data change.
+- Photo names ("Name it from a photo"): the app calls the Cloud Function `identifyPlant`, never Plant.id. Guests get one free name on an anonymous account; allowance, rules, rollout order, and open items are in `docs/PHOTO_NAMES.md`. Functions live in `functions/`; deploy with `firebase deploy --only functions`, never a bare `firebase deploy`.
 - Website Hosting deploy: `web/AGENTS.md` (only when asked).
 - Play releases are option A: build a signed AAB and upload with `~/Development/Keystore/play-publisher.json` (Play Developer API). Do not ship unless asked. Details: `docs/ACCESS.md`.
 - App Store Connect key `4AKYKM6RAW` may be used (Admin-level). 8.3.0 (830) is waiting for review as of 2026-09-27. Release type is manual, same as 8.2.1. Do not upload a binary unless asked.

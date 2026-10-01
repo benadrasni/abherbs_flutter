@@ -44,6 +44,7 @@ const String keyGuideRegion = "guide_region";
 const String keyGuideRegionFromLocation = "guide_region_from_location";
 const String keyGuideWildOnly = "guide_wild_only";
 const String keyGuideLocationRefused = "guide_location_refused";
+const String keyGuideLocationAllowed = "guide_location_allowed";
 const String keyGuideTheme = "guide_theme";
 const String keyOffline = "offline";
 const String keyOfflinePlant = "offline_plant";
@@ -56,6 +57,8 @@ const String keyPurchases = "purchases";
 const String keyToken = "token";
 const String keyOldVersion = "old_version";
 const String keyLifetimeSubscription = "lifetime_subscription";
+const String keyGuestCreated = "guest_created";
+const String keyGuestFreeUsed = "guest_free_used";
 const String keyFontSize = "font_size";
 const int rateCountInitial = 5;
 const String rateStateInitial = "";
@@ -153,16 +156,6 @@ const String privacyPolicyUrl =
     "https://storage.googleapis.com/abherbs-resources/misc/PrivacyPolicyofWhatsthatflower.htm";
 const String googleMapsEndpoint =
     "https://maps.googleapis.com/maps/api/staticmap?";
-const String plantIdEndpoint = "https://api.plant.id/v2/identify";
-
-const List<String> plantIdModifiers = ["similar_images"];
-const List<String> plantIdPlantDetails = [
-  "common_names",
-  "url",
-  "wiki_description",
-  "taxonomy"
-];
-
 const String storageBucket = "gs://abherbs-resources";
 const String storageEndpoint =
     "https://storage.googleapis.com/abherbs-resources/";
@@ -214,6 +207,8 @@ const String firebaseVersions = "versions";
 const String firebaseUsers = "users";
 const String firebaseSynonyms = "synonyms";
 const String firebaseUsersPhotoSearch = "users_photo_search";
+const String firebasePhotoQuota = "photo_quota";
+const String firebaseAttributeAnonymousFreeUsed = "anonymousFreeUsed";
 const String firebasePromotions = "promotions";
 const String firebaseSearchPhoto = 'search_photo';
 const String firebaseSettingsGenericEntities = "settings/generic_entities";
@@ -800,7 +795,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
             );
           } else if (value == 2) {
             if (Auth.appUser != null && Auth.credits > 0) {
-              Auth.changeCredits(-1, "search");
+              Auth.spendCredit("search");
               Navigator.push(
                 mainContext,
                 MaterialPageRoute(
@@ -843,7 +838,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
             );
           } else if (value == 2) {
             if (Auth.appUser != null && Auth.credits > 0) {
-              Auth.changeCredits(-1, "search");
+              Auth.spendCredit("search");
               Navigator.push(
                 mainContext,
                 MaterialPageRoute(

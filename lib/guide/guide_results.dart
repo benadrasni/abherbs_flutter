@@ -216,6 +216,19 @@ List<String> guideResultIds(dynamic value) {
   return ids;
 }
 
+/// Latin name at the end of an APG list path (`…/Bellis/list`).
+String guideListLatin(String listPath) {
+  final parts = [
+    for (final part in listPath.split('/'))
+      if (part.isNotEmpty) part,
+  ];
+  if (parts.isEmpty) return '';
+  if (parts.last == firebaseAttributeList && parts.length >= 2) {
+    return parts[parts.length - 2];
+  }
+  return parts.last;
+}
+
 GuideResultPlant? readGuideResultHeader(
   String id,
   dynamic value, {

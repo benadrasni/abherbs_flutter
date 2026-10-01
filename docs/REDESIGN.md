@@ -24,7 +24,7 @@ Once location is allowed, the phone keeps its floristic region, and the region c
 
 The other tabs are **Book** and **Seen**. Book is families, genera, and the lists of flowers (`lists_custom/by language/{lang}`), using the same vernaculars as `translations_taxonomy`.
 
-**Lists of flowers** also appear on Find as a row of cover cards under the recent finds. A list opens on its own page with the same Photos / Plates switch as the result list. Year campaigns (for example *Blume des Jahres*, ČBS *Rostlina roku*) run as a timeline, newest year first, with the source linked. Other lists are a grid. The first card is **New in the book**: the last 20 plants from `lists_custom/new`, grouped by the date they were added. A language without its own lists shows the English ones. The species page uses the same sections as the site: gallery and plate, names, flower, inflorescence, fruit, leaf, stem, habitat, toxicity, uses, trivia, taxonomy, distribution. The person icon holds the account, restore, language, theme, and Field Guide. Theme is Light, Dark, or System; System is the default and follows the phone.
+**Lists of flowers** also appear on Find as a row of cover cards under the recent finds. A list opens on its own page with the same Photos / Plates switch as the result list. Year campaigns (for example *Blume des Jahres*, ČBS *Rostlina roku*) run as a timeline, newest year first, with the source linked. Other lists, such as vegetables and spices, use the result grid: in flower this month first. The first card is **New in the book**: the last 15 to 25 plants from `lists_custom/new`, grouped by the date they were added. Book cards show four thumbnails from that list. A language without its own lists shows the English ones. The species page uses the same sections as the site: gallery and plate, names, flower, inflorescence, fruit, leaf, stem, habitat, toxicity, uses, trivia, taxonomy, distribution. The person icon holds the account, restore, language, theme, and Field Guide. Theme is Light, Dark, or System; System is the default and follows the phone.
 
 ## The meter
 
@@ -141,11 +141,13 @@ Database additions and changes are allowed when a new page needs a field or node
 | Not a plant | Probably not a plant. Nothing saved, and the name is not used |
 | Outside the book | *Tanacetum corymbosum*, with oxeye daisy and feverfew offered as full pages |
 | Species from camera | Oxeye daisy, with the unconfirmed Seen bar |
-| Species page | Same sections as the website. No ads |
+| Species page | Same sections as the website. Flower and Inflorescence open the diagrams. No ads |
+| Flower schema | Numbered plate of a complete flower, and the seventeen part names |
+| Inflorescences | The seventeen types. Opened from a species page, that plant’s stored type is marked; the first is the primary |
 | Seen | To confirm first, then the notebook by month |
 | Share a find | CC0 consent, then review, then a public Sighting |
 | Book | Families, genera, lists of flowers |
-| List of flowers | A custom list. Year campaigns run newest first; New in the book by date |
+| List of flowers | New in the book by date (last 15 to 25). Year campaigns newest first. Other lists use the result grid |
 | At the limit | Ad, Field Guide, or the key |
 | Field Guide | What stays free, what the subscription adds, 7-day trial, restore |
 | Person | Account, allowance, restore, language, theme |

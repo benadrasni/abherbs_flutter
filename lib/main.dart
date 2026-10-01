@@ -16,6 +16,7 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -49,6 +50,14 @@ Future<void> initializeFlutterFire() async {
   // Wait for Firebase to initialize
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseAppCheck.instance.activate(
+    providerAndroid: isInDebugMode
+        ? const AndroidDebugProvider()
+        : const AndroidPlayIntegrityProvider(),
+    providerApple: isInDebugMode
+        ? const AppleDebugProvider()
+        : const AppleDeviceCheckProvider(),
   );
   FirebaseDatabase.instance.setPersistenceEnabled(true);
   FirebaseDatabase.instance.setPersistenceCacheSizeBytes(firebaseCacheSize);
@@ -129,6 +138,7 @@ void main() {
     initializeFlutterFire().then((_) async {
       WakelockPlus.enable();
       await Prefs.init();
+      unawaited(Auth.startGuest());
       await AppTrackingTransparency.requestTrackingAuthorization();
       await MobileAds.instance.initialize();
       Locale locale = await initializeLocale();

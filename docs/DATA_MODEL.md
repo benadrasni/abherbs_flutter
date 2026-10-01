@@ -16,8 +16,9 @@ Most catalog trees are world-readable (the website fetches them with unauthentic
 | `observations/by users/{uid}` | denied | owner read/write |
 | `observations/public` | read | create/update own id (`{uid}_…`) only while `status == review`. Owner may delete own id in any status. `stats` is Admin-only. |
 | `observations/logs/{uid}` | denied | owner read/write |
+| `photo_quota/{uid}` | denied | owner read (written by the photo Cloud Functions) |
 
-Admin SDK bypasses these rules (ingest, observation reviewer).
+Admin SDK bypasses these rules (ingest, observation reviewer, Cloud Functions). The photo lock-down of `credits` and `purchases` is staged in `firebase/database.rules.photo.json`; see `PHOTO_NAMES.md`.
 
 Signed-out photo-search logs under `anonymous` fail. The app does not write translations.
 
@@ -47,6 +48,9 @@ Signed-out photo-search logs under `anonymous` fail. The app does not write tran
 | `observations/public` | Shared observations (subscription) |
 | `observations/logs` | Review / publish log |
 | `credits` | Credit spend/earn log |
+| `photo_quota/{uid}` | Photo-name allowance counters (`identifyPlant`) |
+| `ad_rewards/{transactionId}` | Rewarded-ad callbacks already credited (`admobReward`) |
+| `anonymous_daily/{day}` | Plant.id calls by guest accounts that day |
 | `web/{lang}` | Legacy About/Help and old-site chrome. The current website does not read this; chrome lives in `web/src/locales.json`. |
 | `web/catalog/{id}` | Slim website plant row (`id`, `name`, `family`, `url`, `illustrationUrl`). Written with each incremental add. |
 | `web/labels/{lang}/{id}` | Sourced vernacular for that plant, or omitted. Not inverted from `search_v3`. |

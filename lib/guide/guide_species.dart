@@ -106,6 +106,54 @@ class GuideSeenDraft {
   });
 }
 
+/// The seventeen inflorescence diagrams, in legend order.
+const guideInflorescenceKeys = [
+  'raceme',
+  'spike',
+  'spadix',
+  'corymb',
+  'umbel',
+  'compound_umbel',
+  'capitulum',
+  'head',
+  'panicle',
+  'compound_spike',
+  'cyme',
+  'helicoid',
+  'rhipidium',
+  'scorpioid',
+  'scorpioid_thyrse',
+  'dichasial_thyrse',
+  'double_scorpioid_thyrse',
+];
+
+/// Known diagram keys from `plants_v2.inflorescenceType`, primary first.
+/// An empty list is a solitary flower: nothing on the legend is marked.
+List<String> guideInflorescenceTypes(dynamic raw) {
+  final values = <String>[];
+  if (raw is List) {
+    for (final item in raw) {
+      final key = item?.toString() ?? '';
+      if (key.isNotEmpty) values.add(key);
+    }
+  } else if (raw is Map) {
+    final keys = raw.keys.map((key) => key.toString()).toList()
+      ..sort((a, b) {
+        return (int.tryParse(a) ?? 0).compareTo(int.tryParse(b) ?? 0);
+      });
+    for (final key in keys) {
+      final value = raw[key]?.toString() ?? '';
+      if (value.isNotEmpty) values.add(value);
+    }
+  }
+  final known = guideInflorescenceKeys.toSet();
+  final seen = <String>{};
+  return [
+    for (final key in values)
+      if (known.contains(key) && seen.add(key)) key,
+  ];
+}
+
 class GuideSpecies {
   final String name;
   final String? author;
@@ -113,6 +161,7 @@ class GuideSpecies {
   final List<String> names;
   final String? description;
   final List<GuideSpeciesSection> sections;
+  final List<String> inflorescenceTypes;
   final int heightFrom;
   final int heightTo;
   final int floweringFrom;
@@ -134,6 +183,7 @@ class GuideSpecies {
     required this.names,
     required this.description,
     required this.sections,
+    required this.inflorescenceTypes,
     required this.heightFrom,
     required this.heightTo,
     required this.floweringFrom,
@@ -174,6 +224,7 @@ GuideSpecies? assembleGuideSpecies({
     names: guideAlsoNames(translation, latin),
     description: guideBodyText(translation.description),
     sections: guideSpeciesSections(translation),
+    inflorescenceTypes: guideInflorescenceTypes(plant['inflorescenceType']),
     heightFrom: _int(plant['heightFrom']),
     heightTo: _int(plant['heightTo']),
     floweringFrom: _int(plant['floweringFrom']),

@@ -7,9 +7,52 @@ import 'package:abherbs_flutter/guide/guide_widgets.dart';
 import 'package:abherbs_flutter/guide/habitat_page.dart';
 import 'package:abherbs_flutter/guide/petal_page.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+/// A family or genus, on the same page as the key's result list.
+void openGuideTaxonList(
+  BuildContext context, {
+  required String listPath,
+  required String backLabel,
+  String? title,
+  required void Function(BuildContext context, String name) onOpenPlant,
+  required Future<void> Function(BuildContext context) onTryPhoto,
+}) {
+  final latin = guideListLatin(listPath);
+  final given = title?.trim() ?? '';
+  final language = Localizations.localeOf(context).languageCode;
+  Navigator.push(
+    context,
+    MaterialPageRoute<void>(
+      settings: const RouteSettings(name: guideListRouteName),
+      builder: (context) => GuideResultsPage(
+        colorId: '',
+        habitatId: null,
+        petalId: '',
+        listTitle: given.isEmpty ? latin : given,
+        listBackLabel: backLabel,
+        listLatin: latin.isEmpty ? null : latin,
+        loadListTitle: given.isEmpty
+            ? () => loadGuideTaxonTitle(latin, language)
+            : null,
+        loadResults: (_) => loadGuideListedPlants(
+          rootReference.child(listPath),
+          language,
+        ),
+        loadPrefs: () async => const GuideResultPrefs(),
+        savePrefs: (_) async {},
+        loadSeen: loadGuideSeenNames,
+        loadRegionCounts: () async => const {},
+        locate: () async => null,
+        onOpenPlant: onOpenPlant,
+        onTryPhoto: onTryPhoto,
+      ),
+    ),
+  );
+}
 
 Future<void> guideOpenLocationSettings() async {
   await openAppSettings();
@@ -36,6 +79,12 @@ class GuideResultsPage extends StatefulWidget {
   final void Function(BuildContext context, String name) onOpenPlant;
   final Future<void> Function(BuildContext context) onTryPhoto;
 
+  /// Set for a family or genus. The key's pills, region, and wild chip stay off.
+  final String? listTitle;
+  final String? listBackLabel;
+  final String? listLatin;
+  final Future<String?> Function()? loadListTitle;
+
   const GuideResultsPage({
     super.key,
     required this.colorId,
@@ -57,6 +106,10 @@ class GuideResultsPage extends StatefulWidget {
     this.showAd,
     this.adBuilder,
     this.month,
+    this.listTitle,
+    this.listBackLabel,
+    this.listLatin,
+    this.loadListTitle,
   });
 
   @override
@@ -73,10 +126,14 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
   bool _failed = false;
   bool _prefsReady = false;
   int _ticket = 0;
+  String? _listTitle;
+
+  bool get _isList => widget.listTitle != null;
 
   @override
   void initState() {
     super.initState();
+    _listTitle = widget.listTitle;
     final plants = widget.initialPlants;
     final prefs = widget.initialPrefs;
     if (plants != null && prefs != null) {
@@ -88,6 +145,18 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
     } else {
       _load();
     }
+    _refineTitle();
+  }
+
+  void _refineTitle() {
+    final load = widget.loadListTitle;
+    if (load == null) return;
+    load().then((name) {
+      if (!mounted || name == null) return;
+      final shown = guideCap(name.trim());
+      if (shown.isEmpty || shown == _listTitle) return;
+      setState(() => _listTitle = shown);
+    });
   }
 
   bool get _showAd => widget.showAd ?? Purchases.showsAds();
@@ -98,12 +167,20 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
     return arrangeGuideResults(
       _plants ?? const [],
       month: _month,
-      wildOnly: _prefs.wildOnly,
+      wildOnly: _isList ? false : _prefs.wildOnly,
     );
   }
 
   Future<void> _load() async {
     final ticket = ++_ticket;
+    if (_isList) {
+      if (mounted) setState(() => _prefsReady = true);
+      await Future.wait([
+        _loadList(null, ticket),
+        _loadSeen(ticket),
+      ]);
+      return;
+    }
     try {
       final prefs = widget.initialPrefs ?? await widget.loadPrefs();
       if (!mounted || ticket != _ticket) return;
@@ -291,47 +368,51 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GuideBackButton(label: strings.guide_back_petals),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Wrap(
-                    spacing: 6,
-                    runSpacing: 6,
-                    children: [
-                      GuideFilterPill(
-                        label: guideCap(
-                          getFilterColorValue(context, widget.colorId),
-                        ),
-                        leading: _ColorDot(colorId: widget.colorId),
-                        onPressed: () => popGuideKeyToFind(context),
-                      ),
-                      if (widget.habitatId != null)
-                        GuideFilterPill(
-                          label: guideCap(
-                            guideHabitatName(strings, widget.habitatId!),
-                          ),
-                          onPressed: () => popGuideKeyToHabitat(context),
-                        ),
-                      GuideFilterPill(
-                        label: guidePetalTrailLabel(strings, widget.petalId),
-                        onPressed: () => Navigator.maybePop(context),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 14),
-                if (_prefsReady)
+                if (_isList)
+                  _listHead(strings, arranged.plants.length, seenCount)
+                else ...[
+                  GuideBackButton(label: strings.guide_back_petals),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: _CountLine(
-                      count: arranged.plants.length,
-                      caption: _caption(strings, regionName, seenCount),
+                    child: Wrap(
+                      spacing: 6,
+                      runSpacing: 6,
+                      children: [
+                        GuideFilterPill(
+                          label: guideCap(
+                            getFilterColorValue(context, widget.colorId),
+                          ),
+                          leading: _ColorDot(colorId: widget.colorId),
+                          onPressed: () => popGuideKeyToFind(context),
+                        ),
+                        if (widget.habitatId != null)
+                          GuideFilterPill(
+                            label: guideCap(
+                              guideHabitatName(strings, widget.habitatId!),
+                            ),
+                            onPressed: () => popGuideKeyToHabitat(context),
+                          ),
+                        GuideFilterPill(
+                          label: guidePetalTrailLabel(strings, widget.petalId),
+                          onPressed: () => Navigator.maybePop(context),
+                        ),
+                      ],
                     ),
                   ),
+                  const SizedBox(height: 14),
+                  if (_prefsReady)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: _CountLine(
+                        count: arranged.plants.length,
+                        caption: _caption(strings, regionName, seenCount),
+                      ),
+                    ),
+                ],
               ],
             ),
           ),
-          if (_prefsReady)
+          if (_prefsReady && !_isList)
             SliverPersistentHeader(
               pinned: true,
               delegate: _FilterBarDelegate(
@@ -373,6 +454,57 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _listHead(S strings, int count, int seenCount) {
+    final colors = GuideColors.of(context);
+    final title = _listTitle ?? widget.listTitle ?? '';
+    final latin = widget.listLatin;
+    final showLatin = latin != null &&
+        latin.isNotEmpty &&
+        latin.toLowerCase() != title.toLowerCase();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        GuideBackButton(
+          label: widget.listBackLabel ?? strings.guide_back,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontFamily: GuideType.serif,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 28,
+                  height: 1.1,
+                  color: colors.ink,
+                ),
+              ),
+              if (showLatin)
+                Text(
+                  latin,
+                  style: GuideType.latin(colors).copyWith(
+                    fontSize: 15,
+                    height: 1.3,
+                    color: colors.ink3,
+                  ),
+                ),
+              if (_prefsReady) ...[
+                const SizedBox(height: 10),
+                _CountLine(
+                  count: count,
+                  caption: _caption(strings, null, seenCount),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -441,7 +573,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
             ),
           ),
           if (slot.controls)
-            _ViewSwitch(
+            GuideViewSwitch(
               photos: strings.guide_photos,
               plates: strings.guide_plates,
               platesOn: _plates,
@@ -733,74 +865,6 @@ class _ChoiceChip extends StatelessWidget {
                   Icon(Icons.expand_more, size: 16, color: foreground),
                 ],
               ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ViewSwitch extends StatelessWidget {
-  final String photos;
-  final String plates;
-  final bool platesOn;
-  final VoidCallback onPhotos;
-  final VoidCallback onPlates;
-
-  const _ViewSwitch({
-    required this.photos,
-    required this.plates,
-    required this.platesOn,
-    required this.onPhotos,
-    required this.onPlates,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = GuideColors.of(context);
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: colors.cream,
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: colors.rule),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _segment(context, photos, !platesOn, onPhotos),
-          _segment(context, plates, platesOn, onPlates),
-        ],
-      ),
-    );
-  }
-
-  Widget _segment(
-    BuildContext context,
-    String label,
-    bool on,
-    VoidCallback onPressed,
-  ) {
-    final colors = GuideColors.of(context);
-    return Material(
-      color: on ? colors.ink : Colors.transparent,
-      borderRadius: BorderRadius.circular(14),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: onPressed,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 11),
-          child: SizedBox(
-            height: 28,
-            child: Center(
-              child: Text(
-                label,
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                  color: on ? colors.onInk : colors.ink3,
-                ),
-              ),
             ),
           ),
         ),

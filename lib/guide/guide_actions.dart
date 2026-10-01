@@ -1,20 +1,19 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/guide/camera_page.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_location.dart';
+import 'package:abherbs_flutter/guide/guide_results.dart';
 import 'package:abherbs_flutter/guide/habitat_page.dart';
+import 'package:abherbs_flutter/guide/list_page.dart';
 import 'package:abherbs_flutter/guide/person_page.dart';
 import 'package:abherbs_flutter/guide/petal_page.dart';
 import 'package:abherbs_flutter/guide/results_page.dart';
 import 'package:abherbs_flutter/guide/search_page.dart';
 import 'package:abherbs_flutter/guide/sign_in_page.dart';
 import 'package:abherbs_flutter/guide/species_page.dart';
-import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/search/search_photo.dart';
 import 'package:abherbs_flutter/settings/setting_pref_language.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
@@ -25,7 +24,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:intl/intl.dart';
+export 'package:abherbs_flutter/guide/species_page.dart' show openGuidePlant;
 
 void openGuideSearch(
   BuildContext context, {
@@ -39,25 +38,31 @@ void openGuideSearch(
         fromBook: fromBook,
         onShowFind: onShowFind,
         onOpenPlant: openGuidePlant,
-        onOpenTaxon: openGuideTaxon,
+        onOpenTaxon: (context, path) => openGuideTaxon(
+          context,
+          path,
+          backLabel: S.of(context).guide_back_search,
+        ),
         onOpenCamera: openGuideCamera,
       ),
-      settings: const RouteSettings(name: 'GuideSearch'),
+      settings: const RouteSettings(name: guideSearchRouteName),
     ),
   );
 }
 
-void openGuideTaxon(BuildContext context, String listPath) {
-  Navigator.push(
+void openGuideTaxon(
+  BuildContext context,
+  String listPath, {
+  String? title,
+  String? backLabel,
+}) {
+  openGuideTaxonList(
     context,
-    MaterialPageRoute(
-      builder: (context) => PlantList(
-        const <String, String>{},
-        '',
-        rootReference.child(listPath),
-      ),
-      settings: const RouteSettings(name: 'PlantList'),
-    ),
+    listPath: listPath,
+    title: title,
+    backLabel: backLabel ?? S.of(context).guide_back,
+    onOpenPlant: openGuidePlant,
+    onTryPhoto: openGuideCamera,
   );
 }
 
@@ -219,33 +224,64 @@ void openGuideResults(
   );
 }
 
-void openGuideList(BuildContext context, GuideListCover cover) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => PlantList(const <String, String>{}, '', cover.path),
-      settings: const RouteSettings(name: 'PlantList'),
-    ),
-  );
-}
-
-void openGuidePlant(BuildContext context, String name) {
-  unawaited(
-    FirebaseAnalytics.instance
-        .logSelectContent(contentType: 'plant', itemId: name)
-        .catchError((Object error) => debugPrint('guide species: $error')),
-  );
-  Navigator.push(
-    context,
-    MaterialPageRoute<void>(
-      settings: const RouteSettings(name: guideSpeciesRouteName),
-      builder: (context) => GuideSpeciesPage(
-        name: name,
-        load: (languageCode) => loadGuideSpecies(name, languageCode),
-        onShowSeen: GuideTabs.showSeen,
-      ),
-    ),
-  );
+void openGuideList(
+  BuildContext context,
+  GuideListCover cover, {
+  String? backLabel,
+}) {
+  final back = backLabel ?? S.of(context).guide_back;
+  final language = Localizations.localeOf(context).languageCode;
+  switch (guideCustomLayout(cover)) {
+    case GuideCustomLayout.fresh:
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          settings: const RouteSettings(name: guideCustomRouteName),
+          builder: (context) => GuideNewPage(
+            backLabel: back,
+            loadDays: () => loadGuideNewDays(language),
+            loadSeen: loadGuideSeenNames,
+            onOpenPlant: openGuidePlant,
+          ),
+        ),
+      );
+    case GuideCustomLayout.years:
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          settings: const RouteSettings(name: guideCustomRouteName),
+          builder: (context) => GuideYearPage(
+            title: cover.title,
+            backLabel: back,
+            loadList: () => loadGuideYearList(cover.path, language),
+            loadSeen: loadGuideSeenNames,
+            onOpenPlant: openGuidePlant,
+          ),
+        ),
+      );
+    case GuideCustomLayout.grid:
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          settings: const RouteSettings(name: guideCustomRouteName),
+          builder: (context) => GuideResultsPage(
+            colorId: '',
+            habitatId: null,
+            petalId: '',
+            listTitle: cover.title,
+            listBackLabel: back,
+            loadResults: (_) => loadGuideListedPlants(cover.path, language),
+            loadPrefs: () async => const GuideResultPrefs(),
+            savePrefs: (_) async {},
+            loadSeen: loadGuideSeenNames,
+            loadRegionCounts: () async => const {},
+            locate: () async => null,
+            onOpenPlant: openGuidePlant,
+            onTryPhoto: openGuideCamera,
+          ),
+        ),
+      );
+  }
 }
 
 Future<void> openGuideCamera(BuildContext context) async {
@@ -259,48 +295,15 @@ Future<void> openGuideCamera(BuildContext context) async {
     );
     return;
   }
-  if (Purchases.isPhotoSearch()) {
-    _pushPhoto(context);
-    return;
-  }
-
-  final duringPromotion = Purchases.isSearchByPhotoPromotion;
-  final content = duringPromotion
-      ? S.of(context).promotion_content(
-            DateFormat.yMMMMd(Localizations.localeOf(context).toString())
-                .format(Purchases.searchByPhotoPromotionTo),
-          )
-      : S.of(context).product_photo_search_description;
-  final title = duringPromotion
-      ? S.of(context).promotion_title
-      : S.of(context).product_photo_search_title;
-  final value = await infoBuyDialog(
-    context,
-    title,
-    content,
-    remoteConfigSearchByPhotoVideo,
-    S.of(context).credit_use_photo_search,
-  );
-  if (!context.mounted || value != 2) {
-    if (duringPromotion && value != 2 && context.mounted) {
-      await FirebaseAnalytics.instance.logEvent(
-        name: 'promotion',
-        parameters: {'feature': 'search_by_photo'},
-      );
-      if (!context.mounted) return;
-      _pushPhoto(context);
-    }
-    return;
-  }
-  _pushPhoto(context);
+  _pushCamera(context);
 }
 
-void _pushPhoto(BuildContext context) {
+void _pushCamera(BuildContext context) {
   Navigator.push(
     context,
-    MaterialPageRoute(
-      builder: (context) => SearchPhoto(Localizations.localeOf(context)),
-      settings: const RouteSettings(name: 'SearchPhoto'),
+    MaterialPageRoute<void>(
+      settings: const RouteSettings(name: guideCameraRouteName),
+      builder: (context) => const GuideCameraPage(),
     ),
   );
 }

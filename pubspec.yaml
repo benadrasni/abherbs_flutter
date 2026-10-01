@@ -27,6 +27,8 @@ dependencies:
   firebase_remote_config: 6.7.0
   firebase_crashlytics: 5.4.0
   firebase_performance: 0.11.6
+  firebase_app_check: 0.4.8
+  cloud_functions: 6.5.0
   google_maps_flutter: 2.18.2
   google_maps_flutter_ios_sdk10: 2.19.0
   google_mobile_ads: 9.1.0
@@ -45,6 +47,7 @@ dependencies:
   percent_indicator: 4.2.5
   package_info_plus: 10.2.1
   image_picker: 1.2.3
+  camera: 0.12.1
   exif: 3.3.0
   permission_handler: 13.0.2
   geolocator: 14.0.3

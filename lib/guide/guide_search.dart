@@ -1,5 +1,6 @@
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:diacritic/diacritic.dart';
+import 'package:flutter/foundation.dart';
 
 const int guideSearchPlantLimit = 8;
 const int guideSearchTaxonLimit = 4;
@@ -308,6 +309,98 @@ void _walkTaxon(
       );
     }
   });
+}
+
+class GuideBookTaxa {
+  final List<GuideSearchTaxon> families;
+  final List<GuideSearchTaxon> genera;
+
+  const GuideBookTaxa({required this.families, required this.genera});
+
+  int get plants {
+    var total = 0;
+    for (final family in families) {
+      total += family.count;
+    }
+    return total;
+  }
+}
+
+/// The name a row shows: the first vernacular, or the Latin name.
+String guideTaxonTitle(GuideSearchTaxon taxon) {
+  for (final name in taxon.vernaculars) {
+    final trimmed = name.trim();
+    if (trimmed.isNotEmpty) return trimmed;
+  }
+  return taxon.latinName;
+}
+
+@visibleForTesting
+int compareGuideBookTaxa(GuideSearchTaxon a, GuideSearchTaxon b) {
+  final byName = foldSearch(guideTaxonTitle(a)).compareTo(
+    foldSearch(guideTaxonTitle(b)),
+  );
+  if (byName != 0) return byName;
+  final byLatin = foldSearch(a.latinName).compareTo(foldSearch(b.latinName));
+  if (byLatin != 0) return byLatin;
+  return a.latinName.compareTo(b.latinName);
+}
+
+GuideBookTaxa guideBookTaxa(
+  List<GuideSearchTaxon> families,
+  List<GuideSearchTaxon> genera,
+) {
+  return GuideBookTaxa(
+    families: [...families]..sort(compareGuideBookTaxa),
+    genera: [...genera]..sort(compareGuideBookTaxa),
+  );
+}
+
+String? guideFamilyIllustration(String family) {
+  if (family.isEmpty) return null;
+  return storageFamilies + family + defaultExtension;
+}
+
+final Map<String, GuideBookTaxa> _bookTaxa = {};
+final Map<String, Future<GuideBookTaxa>> _bookLoads = {};
+
+Future<GuideBookTaxa> loadGuideBookTaxa(String languageCode) {
+  final lang = getLanguageCode(languageCode);
+  final ready = _bookTaxa[lang];
+  if (ready != null) return Future.value(ready);
+  final pending = _bookLoads[lang];
+  if (pending != null) return pending;
+  final load = _fetchGuideBookTaxa(lang).then((taxa) {
+    _bookTaxa[lang] = taxa;
+    return taxa;
+  });
+  _bookLoads[lang] = load;
+  return load.whenComplete(() {
+    if (identical(_bookLoads[lang], load)) _bookLoads.remove(lang);
+  });
+}
+
+Future<GuideBookTaxa> _fetchGuideBookTaxa(String lang) async {
+  final cached = peekGuideSearchIndex(lang);
+  if (cached != null) return guideBookTaxa(cached.families, cached.genera);
+  final taxonomyRef = translationsTaxonomyReference.child(lang);
+  await Future.wait([
+    apgIVReference.keepSynced(true),
+    taxonomyRef.keepSynced(true),
+  ]);
+  final events = await Future.wait([
+    apgIVReference.once(),
+    taxonomyRef.once(),
+  ]);
+  final families = <GuideSearchTaxon>[];
+  final genera = <GuideSearchTaxon>[];
+  _readTaxa(
+    events[0].snapshot.value,
+    events[1].snapshot.value,
+    families,
+    genera,
+  );
+  return guideBookTaxa(families, genera);
 }
 
 List<String> _vernaculars(dynamic dictionary, String taxon) {

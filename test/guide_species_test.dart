@@ -1,5 +1,6 @@
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/guide/guide_camera.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_species.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
@@ -470,6 +471,71 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Oxeye daisy'), findsNothing);
     expect(find.text('open'), findsOneWidget);
+  });
+
+  testWidgets('a camera find stays unconfirmed until it is kept',
+      (tester) async {
+    var confirmed = 0;
+    var undone = 0;
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+        pending: GuideCameraPending(
+          plant: 'Leucanthemum vulgare',
+          when: DateTime(2026, 9, 30, 14, 31),
+          place: 'Middle Europe',
+          others: const [
+            GuideCameraHit(
+              latin: 'Bellis perennis',
+              vernacular: 'daisy',
+              probability: 0.3,
+              path: 'Bellis perennis',
+            ),
+          ],
+        ),
+        onConfirmPending: () async => confirmed += 1,
+        onUndoPending: () async => undone += 1,
+      )),
+    );
+
+    expect(find.text('Your photo · unconfirmed'), findsOneWidget);
+    expect(find.textContaining('Middle Europe'), findsOneWidget);
+    expect(find.text('+ Add to Seen'), findsNothing);
+    expect(find.textContaining('Seen by you'), findsNothing);
+    expect(find.byTooltip('Share'), findsNothing);
+
+    await tester.tap(find.text('It’s this'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(confirmed, 1);
+    expect(find.text('In Seen as Oxeye daisy'), findsOneWidget);
+    expect(find.text('Confirmed.'), findsOneWidget);
+    expect(find.text('Your photo · unconfirmed'), findsNothing);
+    expect(find.byTooltip('Share'), findsOneWidget);
+    ScaffoldMessenger.of(tester.element(find.byType(GuideSpeciesPage)))
+        .removeCurrentSnackBar();
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Undo'));
+    await tester.pumpAndSettle();
+    expect(undone, 1);
+    expect(find.text('Your photo · unconfirmed'), findsOneWidget);
+    expect(find.byTooltip('Share'), findsNothing);
+
+    await tester.tap(find.text('Not it'));
+    await tester.pumpAndSettle();
+    expect(find.text('Which one is it?'), findsOneWidget);
+    expect(
+      find.text('Plant.id’s other candidates for this photo.'),
+      findsOneWidget,
+    );
+    expect(find.text('Choose'), findsOneWidget);
   });
 }
 

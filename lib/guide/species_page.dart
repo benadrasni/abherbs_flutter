@@ -1,11 +1,15 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/guide/guide_camera.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_results.dart';
 import 'package:abherbs_flutter/guide/guide_species.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
+import 'package:abherbs_flutter/guide/schema_page.dart';
+import 'package:abherbs_flutter/guide/outside_page.dart';
 import 'package:abherbs_flutter/guide/sign_in_page.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
@@ -13,6 +17,7 @@ import 'package:abherbs_flutter/utils/fullscreen.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:exif/exif.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -44,6 +49,38 @@ Widget guideSpeciesImage(
   );
 }
 
+Future<void> openGuidePlant(
+  BuildContext context,
+  String name, {
+  GuideCameraPending? pending,
+  Future<void> Function()? onConfirmPending,
+  Future<void> Function()? onUndoPending,
+  Future<void> Function(String name)? onRetargetPending,
+  VoidCallback? onSearchBook,
+}) {
+  unawaited(
+    FirebaseAnalytics.instance
+        .logSelectContent(contentType: 'plant', itemId: name)
+        .catchError((Object error) => debugPrint('guide species: $error')),
+  );
+  return Navigator.push(
+    context,
+    MaterialPageRoute<void>(
+      settings: const RouteSettings(name: guideSpeciesRouteName),
+      builder: (context) => GuideSpeciesPage(
+        name: name,
+        pending: pending,
+        load: (languageCode) => loadGuideSpecies(name, languageCode),
+        onShowSeen: GuideTabs.showSeen,
+        onConfirmPending: onConfirmPending,
+        onUndoPending: onUndoPending,
+        onRetargetPending: onRetargetPending,
+        onSearchBook: onSearchBook,
+      ),
+    ),
+  );
+}
+
 class GuideSpeciesPage extends StatefulWidget {
   final String name;
   final GuideSpecies? initial;
@@ -55,6 +92,11 @@ class GuideSpeciesPage extends StatefulWidget {
   final VoidCallback? onShowSeen;
   final GuideImageBuilder? imageBuilder;
   final int? month;
+  final GuideCameraPending? pending;
+  final Future<void> Function()? onConfirmPending;
+  final Future<void> Function()? onUndoPending;
+  final Future<void> Function(String name)? onRetargetPending;
+  final VoidCallback? onSearchBook;
 
   const GuideSpeciesPage({
     super.key,
@@ -68,6 +110,11 @@ class GuideSpeciesPage extends StatefulWidget {
     this.onShowSeen,
     this.imageBuilder,
     this.month,
+    this.pending,
+    this.onConfirmPending,
+    this.onUndoPending,
+    this.onRetargetPending,
+    this.onSearchBook,
   });
 
   @override
@@ -83,6 +130,8 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
   bool _missing = false;
   bool _failed = false;
   bool _saving = false;
+  bool _kept = false;
+  bool _pendingBusy = false;
   int _ticket = 0;
 
   @override
@@ -254,6 +303,87 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
     show();
   }
 
+  Future<void> _keepPending() async {
+    if (_pendingBusy || _kept || widget.pending == null) return;
+    setState(() => _pendingBusy = true);
+    try {
+      await widget.onConfirmPending?.call();
+      if (!mounted) return;
+      setState(() => _kept = true);
+      GuideTabs.refreshSeen?.call();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(S.of(context).guide_camera_confirmed)),
+      );
+    } finally {
+      if (mounted) setState(() => _pendingBusy = false);
+    }
+  }
+
+  Future<void> _undoPending() async {
+    if (_pendingBusy || !_kept) return;
+    setState(() => _pendingBusy = true);
+    try {
+      await widget.onUndoPending?.call();
+      if (!mounted) return;
+      setState(() => _kept = false);
+      GuideTabs.refreshSeen?.call();
+    } finally {
+      if (mounted) setState(() => _pendingBusy = false);
+    }
+  }
+
+  Future<void> _notThis() async {
+    final pending = widget.pending;
+    if (_pendingBusy || pending == null || _kept) return;
+    final chosen = await showGuideOtherNames(
+      context: context,
+      candidates: pending.others,
+      onSearch: widget.onSearchBook,
+    );
+    if (!mounted || chosen == null) return;
+    final name = guideCameraSpeciesName(chosen);
+    if (name == null) return;
+    setState(() => _pendingBusy = true);
+    try {
+      await widget.onRetargetPending?.call(name);
+      if (!mounted) return;
+      unawaited(
+        FirebaseAnalytics.instance
+            .logSelectContent(contentType: 'plant', itemId: name)
+            .catchError((Object error) => debugPrint('guide species: $error')),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(S.of(context).guide_outside_changed)),
+      );
+      final showSeen = widget.onShowSeen;
+      final imageBuilder = widget.imageBuilder;
+      final month = widget.month;
+      final signedIn = widget.isSignedIn;
+      final signIn = widget.onSignIn;
+      final saveSeen = widget.saveSeen;
+      final pickPhoto = widget.pickPhoto;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute<void>(
+          settings: const RouteSettings(name: guideSpeciesRouteName),
+          builder: (context) => GuideSpeciesPage(
+            name: name,
+            load: (languageCode) => loadGuideSpecies(name, languageCode),
+            onShowSeen: showSeen,
+            imageBuilder: imageBuilder,
+            month: month,
+            isSignedIn: signedIn,
+            onSignIn: signIn,
+            saveSeen: saveSeen,
+            pickPhoto: pickPhoto,
+          ),
+        ),
+      );
+    } finally {
+      if (mounted) setState(() => _pendingBusy = false);
+    }
+  }
+
   Future<void> _share(GuideSpecies species) async {
     final title =
         species.hasVernacular ? guideCap(species.label!.trim()) : species.name;
@@ -332,7 +462,22 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
         ),
       );
     }
-    return _content(context, _species!);
+    final page = _content(context, _species!);
+    final pending = widget.pending;
+    if (pending == null) return page;
+    return Column(
+      children: [
+        Expanded(child: page),
+        _PendingBar(
+          pending: pending,
+          species: _species!,
+          kept: _kept,
+          onKeep: _pendingBusy ? null : _keepPending,
+          onNotIt: _pendingBusy ? null : _notThis,
+          onUndo: _pendingBusy ? null : _undoPending,
+        ),
+      ],
+    );
   }
 
   Widget _content(BuildContext context, GuideSpecies species) {
@@ -358,12 +503,13 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
             species: species,
             image: _image,
             onBack: () => Navigator.maybePop(context),
-            onShare: () => _share(species),
+            onShare:
+                widget.pending == null || _kept ? () => _share(species) : null,
             onOpen: _openPhoto,
           ),
         ),
         SliverToBoxAdapter(child: _NameBlock(species: species)),
-        if (_seen != null)
+        if (widget.pending == null && _seen != null)
           SliverToBoxAdapter(
             child: _SeenByYou(
               seen: _seen!,
@@ -372,9 +518,10 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
               image: _image,
             ),
           ),
-        SliverToBoxAdapter(
-          child: _AddSeenButton(saving: _saving, onPressed: _addSeen),
-        ),
+        if (widget.pending == null)
+          SliverToBoxAdapter(
+            child: _AddSeenButton(saving: _saving, onPressed: _addSeen),
+          ),
         SliverToBoxAdapter(
           child: _Facts(
             species: species,
@@ -399,6 +546,14 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
               note: section.id == 'herbalism'
                   ? strings.plant_herbalism_disclaimer
                   : null,
+              onOpen: section.id == 'flower' || section.id == 'inflorescence'
+                  ? () => _openSchema(context, species, section.id)
+                  : null,
+              linkKey: section.id == 'flower'
+                  ? guideSchemaFlowerKey
+                  : section.id == 'inflorescence'
+                      ? guideSchemaInflorescenceKey
+                      : null,
             ),
           ),
         SliverToBoxAdapter(
@@ -439,6 +594,26 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
 
 Future<void> _openSignIn(BuildContext context) {
   return openGuideSignIn(context);
+}
+
+void _openSchema(BuildContext context, GuideSpecies species, String id) {
+  final back =
+      species.hasVernacular ? guideCap(species.label!.trim()) : species.name;
+  final flower = id == 'flower';
+  Navigator.push(
+    context,
+    MaterialPageRoute<void>(
+      settings: RouteSettings(
+        name: flower ? guideFlowerSchemaRouteName : guideInflorescenceRouteName,
+      ),
+      builder: (context) => flower
+          ? GuideFlowerSchemaPage(backLabel: back)
+          : GuideInflorescencePage(
+              backLabel: back,
+              types: species.inflorescenceTypes,
+            ),
+    ),
+  );
 }
 
 String _sectionTitle(S strings, String id) {
@@ -517,7 +692,7 @@ class _Gallery extends StatefulWidget {
   final GuideSpecies species;
   final GuideImageBuilder image;
   final VoidCallback onBack;
-  final VoidCallback onShare;
+  final VoidCallback? onShare;
   final ValueChanged<String> onOpen;
 
   const _Gallery({
@@ -592,11 +767,12 @@ class _GalleryState extends State<_Gallery> {
                   onPressed: widget.onBack,
                   icon: const BackButtonIcon(),
                 ),
-                _OverlayButton(
-                  label: strings.guide_share,
-                  onPressed: widget.onShare,
-                  icon: const Icon(Icons.ios_share, size: 20),
-                ),
+                if (widget.onShare != null)
+                  _OverlayButton(
+                    label: strings.guide_share,
+                    onPressed: widget.onShare!,
+                    icon: const Icon(Icons.ios_share, size: 20),
+                  ),
               ],
             ),
           ),
@@ -749,6 +925,151 @@ class _NameBlock extends StatelessWidget {
           ],
         ],
       ),
+    );
+  }
+}
+
+class _PendingBar extends StatelessWidget {
+  final GuideCameraPending pending;
+  final GuideSpecies species;
+  final bool kept;
+  final VoidCallback? onKeep;
+  final VoidCallback? onNotIt;
+  final VoidCallback? onUndo;
+
+  const _PendingBar({
+    required this.pending,
+    required this.species,
+    required this.kept,
+    required this.onKeep,
+    required this.onNotIt,
+    required this.onUndo,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final strings = S.of(context);
+    final time = MaterialLocalizations.of(context)
+        .formatTimeOfDay(TimeOfDay.fromDateTime(pending.when));
+    final name =
+        species.hasVernacular ? guideCap(species.label!.trim()) : species.name;
+    final file = pending.photoPath;
+    final hasFile = file != null && file.isNotEmpty && File(file).existsSync();
+    final ground = kept ? colors.mossFill : colors.ink;
+    final foreground = kept ? Colors.white : colors.onInk;
+    return ColoredBox(
+      color: ground,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          16,
+          12,
+          16,
+          14 + MediaQuery.paddingOf(context).bottom,
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: SizedBox(
+                width: 44,
+                height: 44,
+                child: hasFile
+                    ? Image.file(File(file), fit: BoxFit.cover)
+                    : const ColoredBox(color: Color(0xFF555555)),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    kept
+                        ? strings.guide_camera_in_seen_as(name)
+                        : strings.guide_camera_your_photo,
+                    style: TextStyle(
+                      color: foreground,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Text(
+                    kept
+                        ? strings.guide_camera_confirmed_line(time)
+                        : strings.guide_camera_pending_line(
+                            time, pending.place),
+                    style: TextStyle(
+                      color: foreground,
+                      fontSize: 13,
+                      height: 1.3,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            if (kept)
+              _PendingButton(
+                label: strings.guide_camera_undo,
+                onPressed: onUndo,
+                foreground: foreground,
+                border: foreground.withValues(alpha: 0.4),
+              )
+            else ...[
+              _PendingButton(
+                label: strings.guide_camera_its_this,
+                onPressed: onKeep,
+                background: colors.madderFill,
+                foreground: Colors.white,
+              ),
+              const SizedBox(width: 6),
+              _PendingButton(
+                label: strings.guide_camera_not_it,
+                onPressed: onNotIt,
+                foreground: foreground,
+                border: foreground.withValues(alpha: 0.35),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PendingButton extends StatelessWidget {
+  final String label;
+  final VoidCallback? onPressed;
+  final Color? background;
+  final Color foreground;
+  final Color? border;
+
+  const _PendingButton({
+    required this.label,
+    required this.onPressed,
+    required this.foreground,
+    this.background,
+    this.border,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onPressed,
+      style: TextButton.styleFrom(
+        minimumSize: const Size(0, 36),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        backgroundColor: background,
+        foregroundColor: foreground,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18),
+          side: border == null ? BorderSide.none : BorderSide(color: border!),
+        ),
+        textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+      ),
+      child: Text(label),
     );
   }
 }
@@ -1164,6 +1485,8 @@ class _Section extends StatelessWidget {
   final String text;
   final bool warn;
   final String? note;
+  final VoidCallback? onOpen;
+  final Key? linkKey;
 
   const _Section({
     super.key,
@@ -1171,6 +1494,8 @@ class _Section extends StatelessWidget {
     required this.text,
     required this.warn,
     this.note,
+    this.onOpen,
+    this.linkKey,
   });
 
   @override
@@ -1189,15 +1514,22 @@ class _Section extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontFamily: GuideType.serif,
-              fontWeight: FontWeight.w500,
-              fontSize: 19,
-              color: colors.ink,
+          if (onOpen != null)
+            GuideSchemaLink(
+              key: linkKey,
+              label: title,
+              onPressed: onOpen!,
+            )
+          else
+            Text(
+              title,
+              style: TextStyle(
+                fontFamily: GuideType.serif,
+                fontWeight: FontWeight.w500,
+                fontSize: 19,
+                color: colors.ink,
+              ),
             ),
-          ),
           if (note != null) ...[
             const SizedBox(height: 4),
             Text(

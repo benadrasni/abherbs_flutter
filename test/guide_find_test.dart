@@ -26,6 +26,7 @@ void main() {
   setUp(() {
     Purchases.hasOldVersion = false;
     Purchases.purchases = {};
+    GuideTabs.unconfirmed.value = 0;
   });
 
   tearDown(() {
@@ -64,6 +65,31 @@ void main() {
     expect(words.count, 2);
     expect(words.coverId, 'a');
     expect(words.year, 2020);
+
+    expect(plain.thumbIds, ['1']);
+    expect(plain.yearFrom, isNull);
+    expect(ordered.thumbIds, ['2', '10']);
+    expect(years.thumbIds, ['9', '3']);
+    expect(years.yearFrom, 2019);
+    expect(tied.thumbIds, ['1', '2']);
+    expect(tied.yearFrom, 2020);
+    expect(edge.thumbIds, ['2']);
+    expect(edge.yearFrom, 2100);
+    expect(words.thumbIds, ['a']);
+    expect(words.yearFrom, 2020);
+
+    final span = readGuideList({
+      '1': 2018,
+      '2': 2020,
+      '3': 2019,
+      '4': 2022,
+      '5': 2021,
+      '6': 2017,
+    });
+    expect(span.coverId, '4');
+    expect(span.year, 2022);
+    expect(span.yearFrom, 2017);
+    expect(span.thumbIds, ['4', '5', '2', '3']);
   });
 
   test('new lists come first, then year lists, then titles', () {
@@ -289,12 +315,62 @@ void main() {
     Purchases.hasLifetimeSubscription = false;
   });
 
+  testWidgets('shows the unconfirmed count on the Seen icon', (tester) async {
+    GuideTabs.unconfirmed.value = 3;
+    await tester.pumpWidget(_tabs());
+    expect(find.text('3'), findsOneWidget);
+    expect(find.byKey(guideUnconfirmedBadgeKey), findsOneWidget);
+
+    final icon = tester.getRect(find.byIcon(Icons.article_outlined));
+    final badge = tester.getRect(find.byKey(guideUnconfirmedBadgeKey));
+    final bar = tester.getRect(find.byType(GuideTabBar));
+    expect(badge.top, closeTo(icon.top + 1, 0.5));
+    expect(badge.center.dy, lessThan(icon.center.dy));
+    expect(badge.center.dx, greaterThan(icon.center.dx));
+    expect(badge.top, greaterThanOrEqualTo(bar.top));
+    expect(badge.right, lessThanOrEqualTo(bar.right));
+
+    final paint = tester.widget<DecoratedBox>(
+      find.byKey(guideUnconfirmedBadgeKey),
+    );
+    expect(
+      (paint.decoration as BoxDecoration).color,
+      GuideColors.light.madderFill,
+    );
+
+    GuideTabs.unconfirmed.value = 120;
+    await tester.pump();
+    expect(find.text('99+'), findsOneWidget);
+
+    GuideTabs.unconfirmed.value = 0;
+    await tester.pump();
+    expect(find.byKey(guideUnconfirmedBadgeKey), findsNothing);
+    expect(find.byIcon(Icons.article_outlined), findsOneWidget);
+  });
+
   testWidgets('asks a signed-out reader to sign in', (tester) async {
     Purchases.purchases = {_noAds().productID: _noAds()};
     await _pump(tester, _page(finds: const [], lists: const []));
     expect(find.text('Sign in to name a photo'), findsOneWidget);
     expect(find.text('Unlimited'), findsNothing);
   });
+}
+
+Widget _tabs() {
+  return MaterialApp(
+    locale: const Locale('en'),
+    localizationsDelegates: const [
+      S.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
+    supportedLocales: S.delegate.supportedLocales,
+    home: Scaffold(
+      body: const SizedBox.shrink(),
+      bottomNavigationBar: GuideBottomBar(index: 0, onSelect: (_) {}),
+    ),
+  );
 }
 
 GuideListCover _cover({

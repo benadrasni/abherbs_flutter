@@ -434,7 +434,11 @@ class _ListStrip extends StatelessWidget {
           return SizedBox(
             width: 150,
             child: InkWell(
-              onTap: () => openGuideList(context, cover),
+              onTap: () => openGuideList(
+                context,
+                cover,
+                backLabel: S.of(context).guide_tab_find,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

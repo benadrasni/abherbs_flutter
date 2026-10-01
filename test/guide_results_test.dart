@@ -328,6 +328,56 @@ void main() {
     );
   });
 
+  test('reads the Latin name from a family or genus path', () {
+    expect(
+      guideListLatin('APG IV_v3/Eukaryota/Plantae/Asteraceae/list'),
+      'Asteraceae',
+    );
+    expect(guideListLatin('/Bellis/list'), 'Bellis');
+    expect(guideListLatin(''), '');
+  });
+
+  testWidgets('a family list uses the result grid without the key chips',
+      (tester) async {
+    await _pump(
+      tester,
+      _app(
+        GuideResultsPage(
+          colorId: '',
+          habitatId: null,
+          petalId: '',
+          listTitle: 'Daisy family',
+          listBackLabel: 'Book',
+          listLatin: 'Asteraceae',
+          initialPlants: _sample,
+          initialPrefs: const GuideResultPrefs(),
+          initialSeen: const {'Bellis perennis'},
+          loadResults: (_) async => _sample,
+          loadPrefs: () async => const GuideResultPrefs(),
+          savePrefs: (_) async {},
+          loadSeen: () async => const {},
+          loadRegionCounts: () async => const {},
+          locate: () async => null,
+          onOpenPlant: (_, __) {},
+          onTryPhoto: (_) async {},
+        ),
+      ),
+    );
+
+    expect(find.text('Daisy family'), findsOneWidget);
+    expect(find.text('Asteraceae'), findsOneWidget);
+    expect(find.text('Book'), findsOneWidget);
+    expect(find.text('Daisy'), findsOneWidget);
+    expect(find.text('✓ Seen'), findsWidgets);
+    expect(find.text('Any region'), findsNothing);
+    expect(find.text('Wild and garden'), findsNothing);
+    expect(find.text('Photos'), findsOneWidget);
+    expect(
+      tester.getTopLeft(find.text('Daisy')).dy,
+      lessThan(tester.getTopLeft(find.text('Snowdrop')).dy),
+    );
+  });
+
   testWidgets('a region chip reloads that floristic list', (tester) async {
     String? asked;
     final regions = <String?, List<GuideResultPlant>>{

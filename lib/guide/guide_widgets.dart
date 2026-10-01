@@ -176,6 +176,24 @@ String guideListSubtitle(BuildContext context, GuideListCover cover) {
   return S.of(context).guide_plants(cover.count);
 }
 
+/// Book cards name the whole span. Find covers keep the newest year only.
+String guideBookListSubtitle(BuildContext context, GuideListCover cover) {
+  if (cover.isNew) {
+    final latest = cover.latest;
+    if (latest == null) return S.of(context).guide_plants(cover.count);
+    return S.of(context).guide_new_span(
+          cover.count,
+          MaterialLocalizations.of(context).formatMediumDate(latest),
+        );
+  }
+  final from = cover.yearFrom;
+  final to = cover.year;
+  if (from != null && to != null && from != to) {
+    return S.of(context).guide_year_span(cover.count, from, to);
+  }
+  return guideListSubtitle(context, cover);
+}
+
 String guideWhen(BuildContext context, DateTime when) {
   final localizations = MaterialLocalizations.of(context);
   final date = localizations.formatMediumDate(when);
@@ -274,6 +292,8 @@ class GuideBottomBar extends StatelessWidget {
   }
 }
 
+const guideUnconfirmedBadgeKey = Key('guide-seen-unconfirmed');
+
 class GuideTabBar extends StatelessWidget {
   final int index;
   final ValueChanged<int> onSelect;
@@ -282,51 +302,122 @@ class GuideTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = GuideColors.of(context);
-    final bottom = MediaQuery.paddingOf(context).bottom;
-    final items = [
-      (S.of(context).guide_tab_find, Icons.center_focus_weak),
-      (S.of(context).guide_tab_book, Icons.menu_book_outlined),
-      (S.of(context).guide_tab_seen, Icons.article_outlined),
-    ];
+    return ValueListenableBuilder<int>(
+      valueListenable: GuideTabs.unconfirmed,
+      builder: (context, unconfirmed, _) {
+        final colors = GuideColors.of(context);
+        final bottom = MediaQuery.paddingOf(context).bottom;
+        final items = [
+          (S.of(context).guide_tab_find, Icons.center_focus_weak),
+          (S.of(context).guide_tab_book, Icons.menu_book_outlined),
+          (S.of(context).guide_tab_seen, Icons.article_outlined),
+        ];
+        return DecoratedBox(
+          decoration: BoxDecoration(
+            color: colors.cream,
+            border: Border(top: BorderSide(color: colors.rule)),
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(bottom: bottom),
+            child: SizedBox(
+              height: 60,
+              child: Row(
+                children: [
+                  for (var i = 0; i < items.length; i++)
+                    Expanded(
+                      child: InkWell(
+                        onTap: () => onSelect(i),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _TabIcon(
+                              icon: items[i].$2,
+                              color: i == index ? colors.moss : colors.ink3,
+                              unconfirmed: i == 2 ? unconfirmed : 0,
+                            ),
+                            const SizedBox(height: 3),
+                            Text(
+                              items[i].$1,
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: i == index
+                                    ? FontWeight.w600
+                                    : FontWeight.w400,
+                                color: i == index ? colors.moss : colors.ink3,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _TabIcon extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final int unconfirmed;
+
+  const _TabIcon({
+    required this.icon,
+    required this.color,
+    required this.unconfirmed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final glyph = Icon(icon, size: 24, color: color);
+    if (unconfirmed <= 0) return glyph;
+    return SizedBox(
+      width: 24,
+      height: 24,
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          glyph,
+          PositionedDirectional(
+            top: 1,
+            end: -8,
+            child: _UnconfirmedBadge(count: unconfirmed),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _UnconfirmedBadge extends StatelessWidget {
+  final int count;
+
+  const _UnconfirmedBadge({required this.count});
+
+  @override
+  Widget build(BuildContext context) {
+    final label = count > 99 ? '99+' : '$count';
     return DecoratedBox(
+      key: guideUnconfirmedBadgeKey,
       decoration: BoxDecoration(
-        color: colors.cream,
-        border: Border(top: BorderSide(color: colors.rule)),
+        color: GuideColors.of(context).madderFill,
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Padding(
-        padding: EdgeInsets.only(bottom: bottom),
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            children: [
-              for (var i = 0; i < items.length; i++)
-                Expanded(
-                  child: InkWell(
-                    onTap: () => onSelect(i),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          items[i].$2,
-                          size: 24,
-                          color: i == index ? colors.moss : colors.ink3,
-                        ),
-                        const SizedBox(height: 3),
-                        Text(
-                          items[i].$1,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight:
-                                i == index ? FontWeight.w600 : FontWeight.w400,
-                            color: i == index ? colors.moss : colors.ink3,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-            ],
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 10,
+            fontWeight: FontWeight.w600,
+            height: 1.6,
           ),
         ),
       ),
@@ -456,4 +547,73 @@ void guideNoFlowers(BuildContext context) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(content: Text(S.of(context).snack_no_flowers)),
   );
+}
+
+class GuideViewSwitch extends StatelessWidget {
+  final String photos;
+  final String plates;
+  final bool platesOn;
+  final VoidCallback onPhotos;
+  final VoidCallback onPlates;
+
+  const GuideViewSwitch({
+    super.key,
+    required this.photos,
+    required this.plates,
+    required this.platesOn,
+    required this.onPhotos,
+    required this.onPlates,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: colors.cream,
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: colors.rule),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _segment(context, photos, !platesOn, onPhotos),
+          _segment(context, plates, platesOn, onPlates),
+        ],
+      ),
+    );
+  }
+
+  Widget _segment(
+    BuildContext context,
+    String label,
+    bool on,
+    VoidCallback onPressed,
+  ) {
+    final colors = GuideColors.of(context);
+    return Material(
+      color: on ? colors.ink : Colors.transparent,
+      borderRadius: BorderRadius.circular(14),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onPressed,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 11),
+          child: SizedBox(
+            height: 28,
+            child: Center(
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: on ? colors.onInk : colors.ink3,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }

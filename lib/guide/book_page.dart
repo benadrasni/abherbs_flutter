@@ -1,79 +1,381 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_actions.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
+import 'package:abherbs_flutter/guide/guide_search.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class BookPage extends StatelessWidget {
+const guideBookFamiliesKey = Key('guide-book-families');
+const guideBookGeneraKey = Key('guide-book-genera');
+const guideBookListsKey = Key('guide-book-lists');
+
+class BookPage extends StatefulWidget {
   final List<GuideListCover>? lists;
+  final GuideBookSegment segment;
+  final ValueChanged<GuideBookSegment> onSegment;
   final VoidCallback onOpenFind;
+  final Future<GuideBookTaxa> Function(String languageCode) loadTaxa;
+  final void Function(BuildContext context, String listPath)? onOpenTaxon;
+  final void Function(BuildContext context, GuideListCover cover)? onOpenList;
+  final VoidCallback? onSearch;
 
   const BookPage({
     super.key,
     required this.lists,
+    required this.segment,
+    required this.onSegment,
     required this.onOpenFind,
+    this.loadTaxa = loadGuideBookTaxa,
+    this.onOpenTaxon,
+    this.onOpenList,
+    this.onSearch,
+  });
+
+  @override
+  State<BookPage> createState() => _BookPageState();
+}
+
+class _BookPageState extends State<BookPage> {
+  final ScrollController _scroll = ScrollController();
+  String? _languageCode;
+  GuideBookTaxa? _taxa;
+  bool _error = false;
+  int _ticket = 0;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final code = Localizations.localeOf(context).languageCode;
+    if (_languageCode == code) return;
+    _languageCode = code;
+    _taxa = null;
+    _error = false;
+    _load();
+  }
+
+  @override
+  void didUpdateWidget(BookPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.segment == widget.segment) return;
+    if (_scroll.hasClients) _scroll.jumpTo(0);
+  }
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  Future<void> _load() async {
+    final code = _languageCode;
+    if (code == null) return;
+    final ticket = ++_ticket;
+    try {
+      final taxa = await widget.loadTaxa(code);
+      if (!mounted || ticket != _ticket) return;
+      setState(() {
+        _taxa = taxa;
+        _error = false;
+      });
+    } catch (error) {
+      debugPrint('guide book: $error');
+      if (!mounted || ticket != _ticket) return;
+      setState(() => _error = true);
+    }
+  }
+
+  void _retry() {
+    setState(() {
+      _error = false;
+      _taxa = null;
+    });
+    _load();
+  }
+
+  void _search() {
+    final search = widget.onSearch;
+    if (search != null) {
+      search();
+      return;
+    }
+    openGuideSearch(context, fromBook: true, onShowFind: widget.onOpenFind);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final counts = _counts(context);
+    return CustomScrollView(
+      controller: _scroll,
+      slivers: [
+        SliverToBoxAdapter(
+          child: GuideTitleBar(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  S.of(context).guide_tab_book,
+                  style: GuideType.wordmark(colors),
+                ),
+                if (counts != null) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    counts,
+                    style: TextStyle(
+                      fontSize: 13,
+                      height: 1.3,
+                      color: colors.ink3,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+            actionLabel: S.of(context).guide_search,
+            icon: Icons.search,
+            onAction: _search,
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: _Segments(
+            segment: widget.segment,
+            onChanged: widget.onSegment,
+          ),
+        ),
+        _body(),
+        if (Purchases.showsAds())
+          const SliverToBoxAdapter(child: AppBannerAd()),
+        const SliverPadding(padding: EdgeInsets.only(bottom: 24)),
+      ],
+    );
+  }
+
+  String? _counts(BuildContext context) {
+    final taxa = _taxa;
+    if (taxa == null) return null;
+    final format = NumberFormat.decimalPattern(
+      Localizations.localeOf(context).toString(),
+    );
+    return S.of(context).guide_book_counts(
+          format.format(taxa.plants),
+          format.format(taxa.families.length),
+        );
+  }
+
+  void _openTaxon(BuildContext context, GuideSearchTaxon taxon) {
+    final custom = widget.onOpenTaxon;
+    if (custom != null) {
+      custom(context, taxon.listPath);
+      return;
+    }
+    openGuideTaxon(
+      context,
+      taxon.listPath,
+      title: _taxonHeading(taxon),
+      backLabel: S.of(context).guide_tab_book,
+    );
+  }
+
+  Widget _body() {
+    switch (widget.segment) {
+      case GuideBookSegment.families:
+      case GuideBookSegment.genera:
+        if (_error) return _message(_retry);
+        final taxa = _taxa;
+        if (taxa == null) return _waiting();
+        final rows = widget.segment == GuideBookSegment.families
+            ? taxa.families
+            : taxa.genera;
+        return SliverList.builder(
+          itemCount: rows.length,
+          itemBuilder: (context, index) {
+            final taxon = rows[index];
+            return _TaxonRow(
+              taxon: taxon,
+              onTap: () => _openTaxon(context, taxon),
+            );
+          },
+        );
+      case GuideBookSegment.lists:
+        final lists = widget.lists;
+        if (lists == null) return _waiting();
+        return SliverPadding(
+          padding: const EdgeInsets.only(top: 6),
+          sliver: SliverList.builder(
+            itemCount: lists.length,
+            itemBuilder: (context, index) {
+              final cover = lists[index];
+              return _ListCard(
+                cover: cover,
+                onTap: () {
+                  final open = widget.onOpenList;
+                  if (open != null) {
+                    open(context, cover);
+                    return;
+                  }
+                  openGuideList(
+                    context,
+                    cover,
+                    backLabel: S.of(context).guide_tab_book,
+                  );
+                },
+              );
+            },
+          ),
+        );
+    }
+  }
+
+  Widget _waiting() {
+    return const SliverFillRemaining(
+      hasScrollBody: false,
+      child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+    );
+  }
+
+  Widget _message(VoidCallback onRetry) {
+    final colors = GuideColors.of(context);
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: TextButton(
+          onPressed: onRetry,
+          style: TextButton.styleFrom(foregroundColor: colors.ink2),
+          child: Text(
+            S.of(context).no_connection_content,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 14, height: 1.4),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Segments extends StatelessWidget {
+  final GuideBookSegment segment;
+  final ValueChanged<GuideBookSegment> onChanged;
+
+  const _Segments({required this.segment, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final items = [
+      (
+        GuideBookSegment.families,
+        S.of(context).guide_search_families,
+        guideBookFamiliesKey,
+      ),
+      (
+        GuideBookSegment.genera,
+        S.of(context).guide_search_genera,
+        guideBookGeneraKey,
+      ),
+      (
+        GuideBookSegment.lists,
+        S.of(context).guide_book_lists,
+        guideBookListsKey,
+      ),
+    ];
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: colors.cream,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: colors.rule),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(11),
+          child: Row(
+            children: [
+              for (final item in items)
+                Expanded(
+                  child: _Segment(
+                    label: item.$2,
+                    selected: segment == item.$1,
+                    buttonKey: item.$3,
+                    onTap: () => onChanged(item.$1),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Segment extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final Key buttonKey;
+  final VoidCallback onTap;
+
+  const _Segment({
+    required this.label,
+    required this.selected,
+    required this.buttonKey,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
-    final flowerLists = lists;
-    return ListView(
-      padding: const EdgeInsets.only(bottom: 24),
-      children: [
-        GuideTitleBar(
-          title: Text(S.of(context).guide_tab_book,
-              style: GuideType.wordmark(colors)),
-          actionLabel: S.of(context).guide_search,
-          icon: Icons.search,
-          onAction: () => openGuideSearch(
-            context,
-            fromBook: true,
-            onShowFind: onOpenFind,
+    return Material(
+      key: buttonKey,
+      color: selected ? colors.ink : Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        child: SizedBox(
+          height: 36,
+          child: Center(
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: selected ? colors.onInk : colors.ink3,
+              ),
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 14),
-          child: Text(
-            S.of(context).custom_lists,
-            style: GuideType.section(colors),
-          ),
-        ),
-        if (flowerLists == null)
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 32),
-            child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
-          )
-        else
-          for (final cover in flowerLists) _ListRow(cover: cover),
-      ],
+      ),
     );
   }
 }
 
-class _ListRow extends StatelessWidget {
-  final GuideListCover cover;
+String _taxonHeading(GuideSearchTaxon taxon) {
+  final raw = guideTaxonTitle(taxon);
+  final vernacular = raw == taxon.latinName ? null : guideCap(raw);
+  final distinct = vernacular != null &&
+      foldSearch(vernacular) != foldSearch(taxon.latinName);
+  return distinct ? vernacular! : taxon.latinName;
+}
 
-  const _ListRow({required this.cover});
+class _TaxonRow extends StatelessWidget {
+  final GuideSearchTaxon taxon;
+  final VoidCallback onTap;
+
+  const _TaxonRow({required this.taxon, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
+    final title = _taxonHeading(taxon);
+    final distinct = title != taxon.latinName;
     return InkWell(
-      onTap: () => openGuideList(context, cover),
+      onTap: onTap,
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 14),
+        padding: const EdgeInsetsDirectional.fromSTEB(20, 9, 20, 9),
         child: Row(
           children: [
-            DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                border: cover.isNew
-                    ? Border.all(color: colors.gold, width: 2)
-                    : null,
-              ),
-              child: GuidePhoto(path: cover.photoPath, width: 96, height: 72),
+            _Plate(
+              path: guideFamilyIllustration(taxon.illustrationFamily),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -81,25 +383,165 @@ class _ListRow extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    guideListTitle(context, cover),
-                    style: const TextStyle(
-                      fontFamily: GuideType.serif,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                      height: 1.15,
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: distinct
+                        ? const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                            height: 1.2,
+                          )
+                        : GuideType.latin(colors).copyWith(
+                            fontSize: 16,
+                            height: 1.2,
+                          ),
+                  ),
+                  if (distinct)
+                    Text(
+                      taxon.latinName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GuideType.latin(colors).copyWith(
+                        fontSize: 13,
+                        height: 1.2,
+                        color: colors.ink3,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    guideListSubtitle(context, cover),
-                    style: TextStyle(fontSize: 13, color: colors.ink3),
-                  ),
                 ],
               ),
+            ),
+            const SizedBox(width: 8),
+            Text(
+              '${taxon.count}',
+              style: TextStyle(fontSize: 12, color: colors.ink3),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _Plate extends StatelessWidget {
+  final String? path;
+
+  const _Plate({required this.path});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    return Container(
+      foregroundDecoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: colors.rule),
+      ),
+      child: GuidePhoto(
+        path: path,
+        width: 44,
+        height: 44,
+        radius: 8,
+        fit: BoxFit.contain,
+        background: colors.cream,
+      ),
+    );
+  }
+}
+
+class _ListCard extends StatelessWidget {
+  final GuideListCover cover;
+  final VoidCallback onTap;
+
+  const _ListCard({required this.cover, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final photos = cover.thumbs.isNotEmpty
+        ? cover.thumbs.take(4).toList()
+        : (cover.photoPath == null ? const <String>[] : [cover.photoPath!]);
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 12),
+      child: Material(
+        color: colors.cream,
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(
+            color: cover.isNew ? colors.gold : colors.rule,
+            width: cover.isNew ? 1.5 : 1,
+          ),
+        ),
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (photos.isNotEmpty) ...[
+                  _Thumbs(photos: photos),
+                  const SizedBox(height: 10),
+                ],
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  spacing: 6,
+                  children: [
+                    Text(
+                      guideListTitle(context, cover),
+                      style: const TextStyle(
+                        fontFamily: GuideType.serif,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                        height: 1.15,
+                      ),
+                    ),
+                    Text(
+                      guideBookListSubtitle(context, cover),
+                      style: TextStyle(fontSize: 13, color: colors.ink3),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Thumbs extends StatelessWidget {
+  final List<String> photos;
+
+  const _Thumbs({required this.photos});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        for (var i = 0; i < 4; i++) ...[
+          if (i > 0) const SizedBox(width: 4),
+          Expanded(
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: i < photos.length
+                  ? LayoutBuilder(
+                      builder: (context, constraints) {
+                        final side = constraints.maxWidth;
+                        return GuidePhoto(
+                          path: photos[i],
+                          width: side,
+                          height: side,
+                          radius: 8,
+                        );
+                      },
+                    )
+                  : const SizedBox.shrink(),
+            ),
+          ),
+        ],
+      ],
     );
   }
 }

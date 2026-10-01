@@ -51,11 +51,12 @@ class GuideAllowance {
   final bool noAds;
   final bool seenSynced;
 
-  const GuideAllowance.guest()
+  /// [free] is the guest account's one identification before sign-in.
+  const GuideAllowance.guest({bool free = false})
       : kind = GuideAllowanceKind.guest,
         includedUsed = 0,
         extraUsed = 0,
-        namesLeft = 0,
+        namesLeft = free ? 1 : 0,
         resetsOn = null,
         fieldGuide = false,
         unlimitedNames = false,
@@ -136,6 +137,7 @@ GuideAllowance guideLiveAllowance({
   required int credits,
   int? usedThisMonth,
   int extraFromAds = 0,
+  bool guestFree = false,
   required DateTime now,
 }) {
   if (subscribed || unlimitedNames) {
@@ -146,7 +148,7 @@ GuideAllowance guideLiveAllowance({
       seenSynced: seenSynced,
     );
   }
-  if (!signedIn) return const GuideAllowance.guest();
+  if (!signedIn) return GuideAllowance.guest(free: guestFree);
   if (usedThisMonth != null) {
     return GuideAllowance.month(
       used: usedThisMonth,
