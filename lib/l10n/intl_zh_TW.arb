@@ -358,5 +358,7 @@
   "favorite_no_login": "收藏的花朵列表僅適用於登錄用戶。 請登錄。",
 
   "guide_new_today": "今天",
-  "guide_new_yesterday": "昨天"
+  "guide_new_yesterday": "昨天",
+  "guide_notes": "冷知識",
+  "guide_toxicity_none": "無紀錄"
 }

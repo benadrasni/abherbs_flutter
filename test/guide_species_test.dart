@@ -20,6 +20,52 @@ void main() {
     expect(guideHeightText(0, 0), isEmpty);
   });
 
+  test('toxicity class is poisonous, slight, or none recorded', () {
+    expect(guideToxicityClass(1), 1);
+    expect(guideToxicityClass(2.0), 2);
+    expect(guideToxicityClass(null), 0);
+    expect(guideToxicityClass('1'), 0);
+    expect(
+      guideToxicityClassLabel(
+        toxicityClass: 1,
+        poisonous: 'poisonous plant',
+        slight: 'slightly poisonous plant',
+        none: 'None recorded',
+      ),
+      'poisonous plant',
+    );
+    expect(
+      guideToxicityClassLabel(
+        toxicityClass: 2,
+        poisonous: 'poisonous plant',
+        slight: 'slightly poisonous plant',
+        none: 'None recorded',
+      ),
+      'slightly poisonous plant',
+    );
+    expect(
+      guideToxicityClassLabel(
+        toxicityClass: 0,
+        poisonous: 'poisonous plant',
+        slight: 'slightly poisonous plant',
+        none: 'None recorded',
+      ),
+      'None recorded',
+    );
+    final species = assembleGuideSpecies(
+      name: 'Anemone nemorosa',
+      plant: {
+        'id': 1,
+        'name': 'Anemone nemorosa',
+        'toxicityClass': 1,
+      },
+      translation: PlantTranslation(),
+      vernaculars: const {},
+      sightings: const [],
+    );
+    expect(species!.toxicityClass, 1);
+  });
+
   test('body sections skip empty text and None', () {
     final translation = PlantTranslation()
       ..flower = 'White rays.'
@@ -73,6 +119,57 @@ void main() {
       'Asteraceae',
     );
     expect(guideFamilyLatin({'03_Subfamilia': 'Asteroideae'}), isNull);
+    expect(
+      guideOrderLatin({
+        '04_Subordo': 'Asteranae',
+        '05_Ordo': 'Asterales',
+      }),
+      'Asterales',
+    );
+    expect(guideOrderLatin({'05_Subordo': 'Asteranae'}), isNull);
+  });
+
+  test('order and family sit above the name, in the language', () {
+    expect(
+      guideOrderFamilyLine(
+        orderLabel: 'aster order',
+        orderLatin: 'Asterales',
+        familyLabel: 'daisy family',
+        familyLatin: 'Asteraceae',
+      ),
+      'Aster order · Daisy family',
+    );
+    expect(
+      guideOrderFamilyLine(
+        orderLatin: 'Asterales',
+        familyLatin: 'Asteraceae',
+      ),
+      'Asterales · Asteraceae',
+    );
+    expect(
+      guideOrderFamilyLine(familyLabel: 'daisy family'),
+      'Daisy family',
+    );
+    expect(guideOrderFamilyLine(), isEmpty);
+
+    final apg = {
+      '00_Sectio': 'A',
+      '01_Subgenus': 'B',
+      '02_Genus': 'C',
+      '03_Subtribus': 'D',
+      '04_Tribus': 'E',
+      '05_Subfamilia': 'F',
+      '06_Familia': 'Asteraceae',
+      '07_Ordo': 'Asterales',
+    };
+    expect(
+      guideSpeciesRanks(apg, const {}).map((rank) => rank.latin),
+      isNot(contains('Asterales')),
+    );
+    expect(
+      guideSpeciesTaxonLatins(apg),
+      containsAll(['Asteraceae', 'Asterales']),
+    );
   });
 
   test('a one-plant notification opens the guide species page', () {
@@ -195,7 +292,8 @@ void main() {
       'https://wikipedia.org/wiki/B',
       'https://en.wikipedia.org/wiki/C',
     ]);
-    expect(links.map((link) => link.label), ['wikipedia.org', 'en.wikipedia.org']);
+    expect(
+        links.map((link) => link.label), ['wikipedia.org', 'en.wikipedia.org']);
   });
 
   test('the distribution image sits beside the plate name', () {
@@ -224,19 +322,55 @@ void main() {
         imageBuilder: _swatch,
         month: 7,
       )),
+      size: const Size(390, 4200),
     );
 
+    expect(find.text('Aster order · Daisy family'), findsOneWidget);
+    expect(
+      tester.getTopLeft(find.text('Aster order · Daisy family')).dy,
+      lessThan(tester.getTopLeft(find.text('Oxeye daisy')).dy),
+    );
     expect(find.text('Oxeye daisy'), findsOneWidget);
     expect(find.textContaining('Leucanthemum vulgare'), findsWidgets);
     expect(find.textContaining('Lam.'), findsOneWidget);
     expect(find.text('Also moon daisy, bruisewort'), findsOneWidget);
     expect(find.text('20–80 cm'), findsOneWidget);
-    expect(find.text('Daisy family'), findsOneWidget);
     expect(find.text('Flowers May–October'), findsOneWidget);
     expect(find.text('A daisy of lawns.'), findsOneWidget);
     expect(find.text('Skin irritant'), findsOneWidget);
     expect(find.text('Fruit'), findsNothing);
     expect(find.text('None'), findsNothing);
+    expect(find.text('Trivia'), findsNothing);
+    expect(find.text('None recorded'), findsOneWidget);
+    expect(find.text('NOTES'), findsOneWidget);
+    expect(find.text('Notes'), findsOneWidget);
+    expect(find.text('USES'), findsOneWidget);
+    expect(
+      find.text('Traditional or culinary notes, not medical advice.'),
+      findsOneWidget,
+    );
+    final toxicity =
+        tester.widget<Text>(find.byKey(const Key('guide-toxicity-value')));
+    expect(toxicity.data, 'None recorded');
+    expect(toxicity.style!.color, GuidePalette.ink);
+    final notesBorder = _asideBorder(tester, const Key('guide-aside-trivia'));
+    expect(notesBorder.color, GuidePalette.gold);
+    expect(notesBorder.width, 3);
+    final usesBorder = _asideBorder(tester, const Key('guide-aside-herbalism'));
+    expect(usesBorder.color, GuidePalette.moss);
+    expect(usesBorder.width, 3);
+    double y(String text) => tester.getTopLeft(find.text(text)).dy;
+    expect(
+      (y('None recorded') - y('20–80 cm')).abs(),
+      lessThan(8),
+    );
+    expect(y('None recorded'), lessThan(y('Flowers May–October')));
+    expect(y('None recorded'), lessThan(y('A daisy of lawns.')));
+    expect(y('Notes'), lessThan(y('A daisy of lawns.')));
+    expect(y('A daisy of lawns.'), lessThan(y('NOTES')));
+    expect(y('NOTES'), lessThan(y('White rays around a yellow disc.')));
+    expect(y('Skin irritant'), lessThan(y('USES')));
+    expect(y('USES'), lessThan(y('A bitter tea.')));
     expect(find.text('3 photos'), findsOneWidget);
     expect(find.text('Plate'), findsOneWidget);
     expect(
@@ -253,6 +387,53 @@ void main() {
     expect((july.border! as Border).top.color, GuidePalette.madder);
     expect(january.color, GuidePalette.paper2);
     expect((january.border! as Border).top.color, Colors.transparent);
+  });
+
+  testWidgets('a poisonous plant warns, and missing notes are left out',
+      (tester) async {
+    final translation = PlantTranslation()
+      ..description = 'A woodland anemone.'
+      ..flower = 'Six white tepals.'
+      ..toxicity = 'None'
+      ..herbalism = 'None'
+      ..trivia = '';
+    final species = assembleGuideSpecies(
+      name: 'Anemone nemorosa',
+      plant: {
+        'id': 1,
+        'name': 'Anemone nemorosa',
+        'toxicityClass': 1,
+        'heightFrom': 10,
+        'heightTo': 25,
+      },
+      translation: translation,
+      vernaculars: const {},
+      sightings: const [],
+    )!;
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Anemone nemorosa',
+        initial: species,
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 4,
+      )),
+    );
+
+    final value =
+        tester.widget<Text>(find.byKey(const Key('guide-toxicity-value')));
+    expect(value.data, 'Poisonous');
+    expect(value.style!.color, GuidePalette.madder);
+    expect(find.text('NOTES'), findsNothing);
+    expect(find.text('USES'), findsNothing);
+    expect(
+      find.text('Traditional or culinary notes, not medical advice.'),
+      findsNothing,
+    );
+    expect(find.text('None'), findsNothing);
+    expect(find.text('Toxicity'), findsOneWidget);
+    expect(find.text('Six white tepals.'), findsOneWidget);
   });
 
   testWidgets('a taxonomy chip scrolls the entry', (tester) async {
@@ -297,7 +478,8 @@ void main() {
       ),
     );
     await tester.pump();
-    expect(tester.getTopLeft(find.text('Taxonomy')).dx, inInclusiveRange(0, 300));
+    expect(
+        tester.getTopLeft(find.text('Taxonomy')).dx, inInclusiveRange(0, 300));
     final before = position.pixels;
     await tester.tap(find.text('Taxonomy'));
     await tester.pumpAndSettle();
@@ -581,13 +763,17 @@ GuideSpecies _daisy() {
       'APGIV': {
         '00_Genus': 'Leucanthemum',
         '01_Familia': 'Asteraceae',
+        '02_Ordo': 'Asterales',
         '11_Regnum': 'Plantae',
       },
       'photoUrls': ['a.jpg', 'b.jpg', 'c.jpg'],
       'illustrationUrl': 'plates/leucanthemum_vulgare',
     },
     translation: translation,
-    vernaculars: const {'Asteraceae': 'daisy family'},
+    vernaculars: const {
+      'Asteraceae': 'daisy family',
+      'Asterales': 'aster order',
+    },
     sightings: [
       GuideSighting(
         id: 's1',
@@ -602,8 +788,15 @@ Widget _swatch(String path, BoxFit fit, double width, double height) {
   return const ColoredBox(color: Color(0xFF88AA77));
 }
 
+BorderSide _asideBorder(WidgetTester tester, Key key) {
+  final decoration =
+      tester.widget<DecoratedBox>(find.byKey(key)).decoration as BoxDecoration;
+  return (decoration.border! as BorderDirectional).start;
+}
+
 BoxDecoration _monthDecoration(WidgetTester tester, int month) {
-  final box = tester.widget<Container>(find.byKey(ValueKey('guide-month-$month')));
+  final box =
+      tester.widget<Container>(find.byKey(ValueKey('guide-month-$month')));
   return box.decoration! as BoxDecoration;
 }
 

@@ -358,5 +358,7 @@
   "favorite_no_login": "Lista över favoritblommor är endast tillgänglig för inloggade användare. Vänligen logga in.",
 
   "guide_new_today": "Idag",
-  "guide_new_yesterday": "Igår"
+  "guide_new_yesterday": "Igår",
+  "guide_notes": "Notiser",
+  "guide_toxicity_none": "Ingen uppgift"
 }

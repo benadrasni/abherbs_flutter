@@ -356,5 +356,7 @@
   "favorite_no_login": "Zoznam obľúbených kvetov je dostupný len pre prihlásených používateľov. Prihláste sa, prosím .",
 
   "guide_new_today": "Dnes",
-  "guide_new_yesterday": "Včera"
+  "guide_new_yesterday": "Včera",
+  "guide_notes": "Zaujímavosti",
+  "guide_toxicity_none": "Nezaznamenaná"
 }

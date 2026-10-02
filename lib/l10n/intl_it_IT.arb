@@ -358,5 +358,7 @@
   "favorite_no_login": "L'elenco dei fiori preferiti è disponibile solo per gli utenti registrati. Accedi, per favore.",
 
   "guide_new_today": "Oggi",
-  "guide_new_yesterday": "Ieri"
+  "guide_new_yesterday": "Ieri",
+  "guide_notes": "Curiosità",
+  "guide_toxicity_none": "Non segnalata"
 }

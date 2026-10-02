@@ -358,5 +358,7 @@
   "favorite_no_login": "Seznam priljubljenih cvetov je na voljo samo za prijavljene uporabnike. Prijavite se.",
 
   "guide_new_today": "Danes",
-  "guide_new_yesterday": "Včeraj"
+  "guide_new_yesterday": "Včeraj",
+  "guide_notes": "Zanimivosti",
+  "guide_toxicity_none": "Ni zabeležena"
 }

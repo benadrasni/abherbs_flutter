@@ -358,5 +358,7 @@
   "favorite_no_login": "Список любимых цветов доступен только зарегистрированным пользователям. Пожалуйста, войдите.",
 
   "guide_new_today": "Сегодня",
-  "guide_new_yesterday": "Вчера"
+  "guide_new_yesterday": "Вчера",
+  "guide_notes": "Интересно",
+  "guide_toxicity_none": "Не отмечена"
 }

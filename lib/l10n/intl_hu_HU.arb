@@ -358,5 +358,7 @@
   "favorite_no_login": "A kedvenc virágok listája csak a naplózott felhasználók számára érhető el. Kérjük jelentkezzen be.",
 
   "guide_new_today": "Ma",
-  "guide_new_yesterday": "Tegnap"
+  "guide_new_yesterday": "Tegnap",
+  "guide_notes": "Érdekességek",
+  "guide_toxicity_none": "Nincs adat"
 }

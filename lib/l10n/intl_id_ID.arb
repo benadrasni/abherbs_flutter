@@ -358,5 +358,7 @@
   "favorite_no_login": "Daftar bunga favorit hanya tersedia untuk pengguna yang login. Silahkan masuk.",
 
   "guide_new_today": "Hari ini",
-  "guide_new_yesterday": "Kemarin"
+  "guide_new_yesterday": "Kemarin",
+  "guide_notes": "Catatan",
+  "guide_toxicity_none": "Tidak tercatat"
 }

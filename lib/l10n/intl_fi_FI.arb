@@ -358,5 +358,7 @@
   "favorite_no_login": "Suosikkikukkien luettelo on käytettävissä vain kirjautuneille käyttäjille. Kirjaudu sisään, ole hyvä.",
 
   "guide_new_today": "Tänään",
-  "guide_new_yesterday": "Eilen"
+  "guide_new_yesterday": "Eilen",
+  "guide_notes": "Huomioita",
+  "guide_toxicity_none": "Ei merkitty"
 }

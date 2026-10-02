@@ -358,5 +358,7 @@
   "favorite_no_login": "Lijst met favoriete bloemen is alleen beschikbaar voor aangemelde gebruikers. Log alstublieft in.",
 
   "guide_new_today": "Vandaag",
-  "guide_new_yesterday": "Gisteren"
+  "guide_new_yesterday": "Gisteren",
+  "guide_notes": "Weetjes",
+  "guide_toxicity_none": "Niet vermeld"
 }

@@ -508,10 +508,16 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
 
   Widget _content(BuildContext context, GuideSpecies species) {
     final strings = S.of(context);
+    final colors = GuideColors.of(context);
     final locale = Localizations.localeOf(context).toString();
-    final chips = [
+    final notes = species.sectionById('trivia');
+    final uses = species.sectionById('herbalism');
+    final chips = <({String id, String label})>[
+      if (notes != null) (id: 'trivia', label: strings.guide_notes),
       for (final section in species.sections)
-        (id: section.id, label: _sectionTitle(strings, section.id)),
+        if (section.id != 'trivia' && section.id != 'herbalism')
+          (id: section.id, label: _sectionTitle(strings, section.id)),
+      if (uses != null) (id: 'herbalism', label: strings.plant_herbalism),
       (id: 'taxonomy', label: strings.guide_taxonomy),
       (id: 'distribution', label: strings.guide_distribution),
       (id: 'sightings', label: strings.guide_sightings),
@@ -562,24 +568,45 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
         ),
         if (species.description != null)
           SliverToBoxAdapter(child: _Lead(text: species.description!)),
-        for (final section in species.sections)
+        if (notes != null)
           SliverToBoxAdapter(
-            child: _Section(
-              key: _sectionKeys[section.id],
-              title: _sectionTitle(strings, section.id),
-              text: section.text,
-              warn: section.id == 'toxicity',
-              note: section.id == 'herbalism'
-                  ? strings.plant_herbalism_disclaimer
-                  : null,
-              onOpen: section.id == 'flower' || section.id == 'inflorescence'
-                  ? () => _openSchema(context, species, section.id)
-                  : null,
-              linkKey: section.id == 'flower'
-                  ? guideSchemaFlowerKey
-                  : section.id == 'inflorescence'
-                      ? guideSchemaInflorescenceKey
-                      : null,
+            child: _Aside(
+              key: _sectionKeys['trivia'],
+              boxKey: const Key('guide-aside-trivia'),
+              title: strings.guide_notes,
+              text: notes.text,
+              accent: colors.gold,
+              top: 14,
+            ),
+          ),
+        for (final section in species.sections)
+          if (section.id != 'trivia' && section.id != 'herbalism')
+            SliverToBoxAdapter(
+              child: _Section(
+                key: _sectionKeys[section.id],
+                title: _sectionTitle(strings, section.id),
+                text: section.text,
+                warn: section.id == 'toxicity',
+                onOpen: section.id == 'flower' || section.id == 'inflorescence'
+                    ? () => _openSchema(context, species, section.id)
+                    : null,
+                linkKey: section.id == 'flower'
+                    ? guideSchemaFlowerKey
+                    : section.id == 'inflorescence'
+                        ? guideSchemaInflorescenceKey
+                        : null,
+              ),
+            ),
+        if (uses != null)
+          SliverToBoxAdapter(
+            child: _Aside(
+              key: _sectionKeys['herbalism'],
+              boxKey: const Key('guide-aside-herbalism'),
+              title: strings.plant_herbalism,
+              text: uses.text,
+              disclaimer: strings.plant_herbalism_disclaimer,
+              accent: colors.moss,
+              top: 16,
             ),
           ),
         SliverToBoxAdapter(
@@ -661,7 +688,7 @@ String _sectionTitle(S strings, String id) {
     case 'herbalism':
       return strings.plant_herbalism;
     case 'trivia':
-      return strings.plant_trivia;
+      return strings.guide_notes;
     default:
       return id;
   }
@@ -895,11 +922,29 @@ class _NameBlock extends StatelessWidget {
     final colors = GuideColors.of(context);
     final named = species.hasVernacular;
     final title = named ? guideCap(species.label!.trim()) : species.name;
+    final ranks = guideOrderFamilyLine(
+      orderLabel: species.orderLabel,
+      orderLatin: species.orderLatin,
+      familyLabel: species.familyLabel,
+      familyLatin: species.familyLatin,
+    );
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (ranks.isNotEmpty) ...[
+            Text(
+              ranks,
+              key: const Key('guide-order-family'),
+              style: TextStyle(
+                fontSize: 14,
+                height: 1.35,
+                color: colors.ink2,
+              ),
+            ),
+            const SizedBox(height: 6),
+          ],
           Text(
             title,
             style: named
@@ -1234,7 +1279,13 @@ class _Facts extends StatelessWidget {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final height = guideHeightText(species.heightFrom, species.heightTo);
-    final family = species.familyLabel ?? species.familyLatin;
+    final toxicity = guideCap(guideToxicityClassLabel(
+      toxicityClass: species.toxicityClass,
+      poisonous: strings.toxicity1,
+      slight: strings.toxicity2,
+      none: strings.guide_toxicity_none,
+    ));
+    final warn = species.toxicityClass == 1 || species.toxicityClass == 2;
     return Padding(
       padding: const EdgeInsets.only(top: 16),
       child: DecoratedBox(
@@ -1251,6 +1302,7 @@ class _Facts extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
+                    flex: 2,
                     child: _Fact(
                       label: strings.guide_height,
                       value: height.isEmpty ? '—' : height,
@@ -1258,11 +1310,12 @@ class _Facts extends StatelessWidget {
                   ),
                   const SizedBox(width: 1),
                   Expanded(
+                    flex: 3,
                     child: _Fact(
-                      label: strings.taxonomy_familia,
-                      value: family == null || family.isEmpty
-                          ? '—'
-                          : guideCap(family),
+                      label: strings.plant_toxicity,
+                      value: toxicity,
+                      valueColor: warn ? colors.madder : null,
+                      valueKey: const Key('guide-toxicity-value'),
                     ),
                   ),
                 ],
@@ -1316,8 +1369,17 @@ class _Facts extends StatelessWidget {
 class _Fact extends StatelessWidget {
   final String label;
   final String value;
+  final Color? valueColor;
+  final Key? valueKey;
+  final EdgeInsetsGeometry padding;
 
-  const _Fact({required this.label, required this.value});
+  const _Fact({
+    required this.label,
+    required this.value,
+    this.valueColor,
+    this.valueKey,
+    this.padding = const EdgeInsetsDirectional.fromSTEB(20, 11, 12, 11),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1325,7 +1387,7 @@ class _Fact extends StatelessWidget {
     return ColoredBox(
       color: colors.paper,
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(20, 11, 12, 11),
+        padding: padding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1333,11 +1395,12 @@ class _Fact extends StatelessWidget {
             const SizedBox(height: 2),
             Text(
               value,
+              key: valueKey,
               style: TextStyle(
                 fontFamily: GuideType.serif,
                 fontWeight: FontWeight.w500,
                 fontSize: 18,
-                color: colors.ink,
+                color: valueColor ?? colors.ink,
               ),
             ),
           ],
@@ -1505,11 +1568,90 @@ class _Lead extends StatelessWidget {
   }
 }
 
+class _Aside extends StatelessWidget {
+  final String title;
+  final String text;
+  final String? disclaimer;
+  final Color accent;
+  final double top;
+  final Key? boxKey;
+
+  const _Aside({
+    super.key,
+    required this.title,
+    required this.text,
+    required this.accent,
+    required this.top,
+    this.disclaimer,
+    this.boxKey,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final rule = BorderSide(color: colors.rule);
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(20, top, 20, 2),
+      child: DecoratedBox(
+        key: boxKey,
+        decoration: BoxDecoration(
+          color: colors.cream,
+          border: BorderDirectional(
+            top: rule,
+            end: rule,
+            bottom: rule,
+            start: BorderSide(color: accent, width: 3),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(14, 12, 14, 13),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title.toUpperCase(),
+                style: TextStyle(
+                  fontFamily: GuideType.sans,
+                  fontSize: 11,
+                  letterSpacing: 1.5,
+                  fontWeight: FontWeight.w600,
+                  color: accent,
+                ),
+              ),
+              if (disclaimer != null) ...[
+                const SizedBox(height: 6),
+                Text(
+                  disclaimer!,
+                  style: TextStyle(
+                    fontSize: 12,
+                    height: 1.4,
+                    fontStyle: FontStyle.italic,
+                    color: colors.ink3,
+                  ),
+                ),
+                const SizedBox(height: 8),
+              ] else
+                const SizedBox(height: 6),
+              _RichPlantText(
+                text: text,
+                style: TextStyle(
+                  fontSize: 15,
+                  height: 1.5,
+                  color: colors.body,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _Section extends StatelessWidget {
   final String title;
   final String text;
   final bool warn;
-  final String? note;
   final VoidCallback? onOpen;
   final Key? linkKey;
 
@@ -1518,7 +1660,6 @@ class _Section extends StatelessWidget {
     required this.title,
     required this.text,
     required this.warn,
-    this.note,
     this.onOpen,
     this.linkKey,
   });
@@ -1555,13 +1696,6 @@ class _Section extends StatelessWidget {
                 color: colors.ink,
               ),
             ),
-          if (note != null) ...[
-            const SizedBox(height: 4),
-            Text(
-              note!,
-              style: TextStyle(fontSize: 13, color: colors.ink3),
-            ),
-          ],
           const SizedBox(height: 6),
           if (warn)
             DecoratedBox(

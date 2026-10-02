@@ -358,5 +358,7 @@
   "favorite_no_login": "Popis omiljenih cvijeća dostupan je samo za prijavljene korisnike. Molimo prijavite se.",
 
   "guide_new_today": "Danas",
-  "guide_new_yesterday": "Jučer"
+  "guide_new_yesterday": "Jučer",
+  "guide_notes": "Zanimljivosti",
+  "guide_toxicity_none": "Nije zabilježena"
 }

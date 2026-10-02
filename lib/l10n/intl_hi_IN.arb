@@ -358,5 +358,7 @@
   "favorite_no_login": "पसंदीदा फूलों की सूची केवल लॉग किए गए उपयोगकर्ताओं के लिए उपलब्ध है। कृपया लॉगिन करें।",
 
   "guide_new_today": "आज",
-  "guide_new_yesterday": "कल"
+  "guide_new_yesterday": "कल",
+  "guide_notes": "रोचक तथ्य",
+  "guide_toxicity_none": "कोई रिकॉर्ड नहीं"
 }

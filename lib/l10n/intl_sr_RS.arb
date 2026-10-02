@@ -358,5 +358,7 @@
   "favorite_no_login": "Листа омиљених цвећа доступна је само за пријављене кориснике. Молимо вас да се пријавите.",
 
   "guide_new_today": "Данас",
-  "guide_new_yesterday": "Јуче"
+  "guide_new_yesterday": "Јуче",
+  "guide_notes": "Занимљивости",
+  "guide_toxicity_none": "Није забележена"
 }

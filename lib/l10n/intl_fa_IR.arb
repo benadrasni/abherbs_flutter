@@ -357,5 +357,7 @@
   "favorite_no_login": "لیست گل های مورد علاقه تنها برای کاربران وارد شده در دسترس است. لطفا وارد شوید.",
 
   "guide_new_today": "امروز",
-  "guide_new_yesterday": "دیروز"
+  "guide_new_yesterday": "دیروز",
+  "guide_notes": "دانستنی‌ها",
+  "guide_toxicity_none": "ثبت نشده"
 }

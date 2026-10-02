@@ -70,8 +70,8 @@
   "product_purchase_failed": "Purchase failed",
   "product_purchased": "Purchased",
 
-  "toxicity1": "poisonous plant",
-  "toxicity2": "slightly poisonous plant",
+  "toxicity1": "poisonous",
+  "toxicity2": "slightly poisonous",
 
   "pref_language": "Preferred language",
   "my_region": "My region",
@@ -666,5 +666,8 @@
   "guide_field_guide_included_photos": "Your photo-storage plan counts as Field Guide.",
   "guide_field_guide_unavailable": "The store doesn’t have these plans yet.",
   "guide_field_guide_disclaimer_android": "Payment is charged to your Google Play account. The subscription renews unless you cancel at least 24 hours before the period ends. Manage or cancel it in Google Play.",
-  "guide_field_guide_disclaimer_ios": "Payment is charged to your Apple ID. The subscription renews unless you cancel at least 24 hours before the period ends. Manage or cancel it in the App Store."
+  "guide_field_guide_disclaimer_ios": "Payment is charged to your Apple ID. The subscription renews unless you cancel at least 24 hours before the period ends. Manage or cancel it in the App Store.",
+
+  "guide_notes": "Notes",
+  "guide_toxicity_none": "None recorded"
 }

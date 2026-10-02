@@ -358,5 +358,7 @@
   "favorite_no_login": "Die Liste der Lieblingsblumen steht nur angemeldeten Benutzern zur Verfügung. Bitte anmelden.",
 
   "guide_new_today": "Heute",
-  "guide_new_yesterday": "Gestern"
+  "guide_new_yesterday": "Gestern",
+  "guide_notes": "Wissenswertes",
+  "guide_toxicity_none": "Keine Angabe"
 }

@@ -1143,11 +1143,7 @@ Future<GuideSpecies?> loadGuideSpecies(String name, String languageCode) async {
   }
   final plant = Map<dynamic, dynamic>.from(raw as Map);
   final translation = await _guideTranslation(lang, name);
-  final family = guideFamilyLatin(plant['APGIV']);
-  final latins = <String>{
-    if (family != null) family,
-    for (final rank in guideSpeciesRanks(plant['APGIV'], const {})) rank.latin,
-  };
+  final latins = guideSpeciesTaxonLatins(plant['APGIV']);
   final vernaculars = await _guideVernaculars(lang, latins);
   final sightings = await _guideSightings(name);
   final seen = await _guideSpeciesSeen(name);

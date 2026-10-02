@@ -213,11 +213,12 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .gal .ctr{position:absolute;bottom:12px;left:12px;display:flex;gap:6px}
 .gal .ctr .pill{background:var(--wash);border:0}
 .namebox{padding:16px 20px 0}
+.namebox .ranks{font-size:14px;line-height:1.35;color:var(--ink-2);margin:0 0 6px}
 .namebox h1{font-family:var(--serif);font-weight:520;font-size:34px;letter-spacing:-.025em;line-height:1;margin:0}
 .namebox .la{font-size:18px;margin-top:6px}
 .namebox .au{font-family:var(--sans);font-style:normal;font-size:14px;color:var(--ink-3)}
 .namebox .aka{font-size:14px;color:var(--ink-2);margin-top:8px;line-height:1.4}
-.facts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:16px 0 0}
+.facts{display:grid;grid-template-columns:2fr 3fr;gap:1px;background:var(--rule);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:16px 0 0}
 .facts>div{background:var(--paper);padding:11px 20px}
 .facts .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
 .facts .v{font-family:var(--serif);font-size:18px;font-weight:520;margin-top:2px}
@@ -233,6 +234,13 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .sec h3 small{font-family:var(--sans);font-size:12px;color:var(--ink-3);font-weight:500}
 .sec p{margin:0;line-height:1.5;color:var(--body)}
 .sec.warn p{border-left:3px solid var(--madder);padding-left:10px}
+.facts .v.warn{color:var(--madder)}
+.note{margin:14px 20px 2px;padding:12px 14px 13px;background:var(--cream);border:1px solid var(--rule);border-left:3px solid var(--gold)}
+.note .k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 6px}
+.note p{margin:0;line-height:1.5;color:var(--body);font-size:15px}
+.note .disclaimer{font-size:12px;line-height:1.4;color:var(--ink-3);font-style:italic;margin:0 0 8px}
+.note.uses{margin-top:16px;border-left-color:var(--moss)}
+.note.uses .k{color:var(--moss)}
 .lead{padding:16px 20px 0;line-height:1.5;color:var(--ink-2);font-size:15px}
 .taxo{font-size:14px;line-height:1.7}
 .taxo span{color:var(--ink-3)}
@@ -477,6 +485,8 @@ const INFLO_OF={
   'Achillea millefolium':['capitulum','corymb'],
   'Matricaria chamomilla':['corymb','head'],
 };
+// First English name in translations_taxonomy. A missing order stays Latin.
+const ORDERS={Asterales:'aster order',Asparagales:'asparagus order',Ranunculales:'buttercup order'};
 const MON=['J','F','M','A','M','J','J','A','S','O','N','D'];
 const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const NOW_MONTH=9;
@@ -565,7 +575,7 @@ const SCREENS=[
   ['notplant','Not a plant','Plant.id says it’s probably not a plant. Nothing saved, the name isn’t used.'],
   ['outside','Outside the book','Likely name, two candidates, curated look-alikes open full pages.'],
   ['speciesCam','Species from camera','Oxeye daisy, with the unconfirmed Seen bar.'],
-  ['species','Species page','Same sections as the website. Flower and Inflorescence open the diagrams. No ads.'],
+  ['species','Species page','Order and family, in English, above the name. Toxicity sits with height, above the flowering months. Notes after the description, Uses after the morphology. Flower and Inflorescence open the diagrams. No ads.'],
   ['flower','Flower schema','A typical complete flower. The numbers on the plate match the list.'],
   ['inflorescence','Inflorescences','Seventeen types. Opened from oxeye daisy, head is marked.'],
   ['seen','Seen','To confirm first, then the notebook by month. Hide shared drops accepted Sightings from this list.'],
@@ -787,10 +797,19 @@ function outsideScreen(){
 function speciesScreen(){
   const s=D.sp[st.sp]||D.sp['Leucanthemum vulgare'];
   const slides=s.ph.map(u=>`<div class="slide" style="background-image:url('${PH(u)}')"></div>`).join('')+`<div class="slide plate" style="background-image:url('${PLATE_L(s.pl)}')"></div>`;
-  const fam=s.apg['04_Familia']||s.apg['03_Familia'], famV=(D.fams.find(f=>f.f==fam)||{}).v;
+  const rankLat=suffix=>((Object.entries(s.apg).find(([k])=>k.endsWith('_'+suffix))||[])[1])||'';
+  const fam=rankLat('Familia'), orderLat=rankLat('Ordo');
+  const famV=(D.fams.find(f=>f.f==fam)||{}).v;
+  const ranks=[orderLat?cap(ORDERS[orderLat]||orderLat):'',fam?cap(famV||fam):''].filter(Boolean);
   const months=MON.map((m,i)=>`<i class="${i+1>=s.fl[0]&&i+1<=s.fl[1]?'on':''} ${i+1==NOW_MONTH?'now':''}">${m}</i>`).join('');
-  const T=s.t, secs=[['flower','Flower'],['inflorescence','Inflorescence'],['fruit','Fruit'],['leaf','Leaf'],['stem','Stem'],['habitat','Habitat'],['toxicity','Toxicity'],['herbalism','Uses'],['trivia','Trivia']].filter(([k])=>T[k]&&T[k]!=='None');
+  const T=s.t, has=k=>T[k]&&T[k]!=='None';
+  const morph=[['flower','Flower'],['inflorescence','Inflorescence'],['fruit','Fruit'],['leaf','Leaf'],['stem','Stem'],['habitat','Habitat'],['toxicity','Toxicity']].filter(([k])=>has(k));
+  const jumps=[...(has('trivia')?[['trivia','Notes']]:[]),...morph.map(([k,l])=>[k,l]),...(has('herbalism')?[['herbalism','Uses']]:[])];
   const secHead=(k,l)=>(k==='flower'||k==='inflorescence')?`<button class="schema-link" data-schema="${k}">${l}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>`:l;
+  const toxClass={'Anemone nemorosa':1,'Achillea millefolium':2,'Galanthus nivalis':2}[s.n]||0;
+  const toxLabel=toxClass===1?'Poisonous':toxClass===2?'Slightly poisonous':'None recorded';
+  const notes=has('trivia')?`<aside class="note" id="s-trivia"><div class="k">Notes</div><p>${esc(T.trivia)}</p></aside>`:'';
+  const uses=has('herbalism')?`<aside class="note uses" id="s-herbalism"><div class="k">Uses</div><p class="disclaimer">Traditional or culinary notes, not medical advice.</p><p>${esc(T.herbalism)}</p></aside>`:'';
   const apg=Object.entries(s.apg).sort().filter(([k])=>!/Regnum|Superregnum/.test(k)).slice(0,7).map(([k,v])=>`<span>${k.replace(/^\d+_/,'')}</span> <i class="latin" style="font-style:italic">${esc(v)}</i>`).join('<br>');
   const cam=st.fromCamera, rec=st.seen.find(r=>r.n==s.n)||null;
   const bar=cam?(rec&&!rec.u?`<div class="seenbar ok"><span class="th" style="background-image:url('${USERSHOT}')"></span><span class="tx"><b>In Seen as ${esc(cap(s.l||s.n))}</b>Confirmed · today 14:31</span><button class="btn ghost small" style="background:none;color:#fff;border-color:#fff6" data-undo="1">Undo</button></div>`
@@ -798,14 +817,16 @@ function speciesScreen(){
   return `<div class="gal"><div class="track" id="track">${slides}</div>
     <div class="over"><button class="iconbtn" data-goback="1">${I.back}</button><button class="iconbtn" data-toast="Share: whatsthatflower.org page">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 8l5-5 5 5M5 14v6h14v-6"/></svg>'}</button></div>
     <div class="ctr"><button class="pill" data-slide="0">${s.ph.length} photos</button><button class="pill" data-slide="${s.ph.length}">Plate</button></div></div>
-  <div class="namebox"><h1>${esc(cap(s.l||s.n))}</h1><div class="la latin">${esc(s.n)} <span class="au">${esc(s.a||'')}</span></div>
+  <div class="namebox">${ranks.length?`<div class="ranks">${ranks.map(esc).join(' · ')}</div>`:''}<h1>${esc(cap(s.l||s.n))}</h1><div class="la latin">${esc(s.n)} <span class="au">${esc(s.a||'')}</span></div>
     ${s.names&&s.names.length?`<div class="aka">Also ${s.names.map(esc).join(', ')}</div>`:''}</div>
   ${(()=>{const rs=st.seen.filter(r=>!r.u&&r.n==s.n);if(cam)return '';return (rs.length?`<button class="seenby" data-tab="seen"><span class="th" style="background-image:url('${rs[0].ph}')"></span><span><b>Seen by you</b> · ${rs.length==1?'once':rs.length+' times'}, last ${esc(rs[0].when)}</span></button>`:'')+`<div class="addseen"><button class="btn ghost small" data-addseen="${esc(s.n)}">+ Add to Seen</button><span class="hint" style="margin-left:8px">From your photos. Free.</span></div>`})()}
-  <div class="facts"><div><div class="k">Height</div><div class="v">${s.h[0]}–${s.h[1]} cm</div></div><div><div class="k">Family</div><div class="v">${esc(cap(famV||fam))}</div></div>
+  <div class="facts"><div><div class="k">Height</div><div class="v">${s.h[0]}–${s.h[1]} cm</div></div><div><div class="k">Toxicity</div><div class="v${toxClass?' warn':''}">${toxLabel}</div></div>
     <div class="wide"><div class="k">Flowers ${MONTH_NAMES[s.fl[0]-1]}–${MONTH_NAMES[s.fl[1]-1]}</div><div class="months">${months}</div></div></div>
-  <div class="jump">${secs.map(([k,l])=>`<button class="pill" data-jump="${k}">${l}</button>`).join('')}<button class="pill" data-jump="taxonomy">Taxonomy</button><button class="pill" data-jump="dist">Distribution</button><button class="pill" data-jump="sightings">Sightings</button></div>
+  <div class="jump">${jumps.map(([k,l])=>`<button class="pill" data-jump="${k}">${l}</button>`).join('')}<button class="pill" data-jump="taxonomy">Taxonomy</button><button class="pill" data-jump="dist">Distribution</button><button class="pill" data-jump="sightings">Sightings</button></div>
   <p class="lead">${esc(T.description)}</p>
-  ${secs.map(([k,l])=>`<div class="sec ${k=='toxicity'?'warn':''}" id="s-${k}"><h3>${secHead(k,l)}</h3><p>${esc(T[k])}</p></div>`).join('')}
+  ${notes}
+  ${morph.map(([k,l])=>`<div class="sec ${k=='toxicity'?'warn':''}" id="s-${k}"><h3>${secHead(k,l)}</h3><p>${esc(T[k])}</p></div>`).join('')}
+  ${uses}
   <div class="sec" id="s-taxonomy"><h3>Taxonomy <small>APG IV</small></h3><div class="taxo">${apg}</div></div>
   <div class="sec" id="s-dist"><h3>Distribution <small>WCVP · native green, introduced brown</small></h3><img class="map" src="${MAP(s.pl)}" alt="Distribution map"></div>
   ${(()=>{const sg=(D.sightings||{})[s.n];if(!sg)return `<div class="sec" id="s-sightings"><h3>Sightings</h3><p class="hint" style="margin:0">No public sightings yet. Share one from Seen.</p></div>`;

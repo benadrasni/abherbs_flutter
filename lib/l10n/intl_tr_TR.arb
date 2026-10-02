@@ -325,5 +325,7 @@
   "favorite_no_login" : "Favori çiçek listesi yalnızca oturum açmış kullanıcılara açıktır. Lütfen oturum açın.",
 
   "guide_new_today": "Bugün",
-  "guide_new_yesterday": "Dün"
+  "guide_new_yesterday": "Dün",
+  "guide_notes": "Notlar",
+  "guide_toxicity_none": "Kayıt yok"
 }

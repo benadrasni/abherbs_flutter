@@ -358,5 +358,7 @@
   "favorite_no_login": "Lista ulubionych kwiatów jest dostępna tylko dla zalogowanych użytkowników. Proszę się zalogować.",
 
   "guide_new_today": "Dzisiaj",
-  "guide_new_yesterday": "Wczoraj"
+  "guide_new_yesterday": "Wczoraj",
+  "guide_notes": "Ciekawostki",
+  "guide_toxicity_none": "Nie odnotowano"
 }

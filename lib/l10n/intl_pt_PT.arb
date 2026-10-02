@@ -358,5 +358,7 @@
   "favorite_no_login": "A lista de flores favoritas está disponível apenas para usuários registrados. Por favor entre.",
 
   "guide_new_today": "Hoje",
-  "guide_new_yesterday": "Ontem"
+  "guide_new_yesterday": "Ontem",
+  "guide_notes": "Curiosidades",
+  "guide_toxicity_none": "Não registada"
 }

@@ -358,5 +358,7 @@
   "favorite_no_login": "Lista florilor preferate este disponibilă numai pentru utilizatorii înregistrați. Va rugam sa va logati.",
 
   "guide_new_today": "Azi",
-  "guide_new_yesterday": "Ieri"
+  "guide_new_yesterday": "Ieri",
+  "guide_notes": "Curiozități",
+  "guide_toxicity_none": "Nespecificată"
 }

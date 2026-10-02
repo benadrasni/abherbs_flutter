@@ -358,5 +358,7 @@
   "favorite_no_login": "Список улюблених квітів доступний тільки для зареєстрованих користувачів. Увійдіть у систему.",
 
   "guide_new_today": "Сьогодні",
-  "guide_new_yesterday": "Вчора"
+  "guide_new_yesterday": "Вчора",
+  "guide_notes": "Цікаве",
+  "guide_toxicity_none": "Не зазначена"
 }

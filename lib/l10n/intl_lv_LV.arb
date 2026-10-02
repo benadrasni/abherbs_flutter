@@ -358,5 +358,7 @@
   "favorite_no_login": "Mīļāko ziedu saraksts ir pieejams tikai reģistrētiem lietotājiem. Lūdzu, piesakieties.",
 
   "guide_new_today": "Šodien",
-  "guide_new_yesterday": "Vakar"
+  "guide_new_yesterday": "Vakar",
+  "guide_notes": "Piezīmes",
+  "guide_toxicity_none": "Nav norādīta"
 }

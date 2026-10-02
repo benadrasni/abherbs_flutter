@@ -358,5 +358,7 @@
   "favorite_no_login": "Mėgstamiausių gėlių sąrašas galimas tik prisijungusiems vartotojams. Prašome prisijungti.",
 
   "guide_new_today": "Šiandien",
-  "guide_new_yesterday": "Vakar"
+  "guide_new_yesterday": "Vakar",
+  "guide_notes": "Įdomybės",
+  "guide_toxicity_none": "Nenurodyta"
 }

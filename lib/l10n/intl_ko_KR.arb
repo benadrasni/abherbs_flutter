@@ -358,5 +358,7 @@
   "favorite_no_login": "즐겨 찾는 꽃 목록은 로그 된 사용자 만 사용할 수 있습니다. 로그인 해주세요.",
 
   "guide_new_today": "오늘",
-  "guide_new_yesterday": "어제"
+  "guide_new_yesterday": "어제",
+  "guide_notes": "여담",
+  "guide_toxicity_none": "기록 없음"
 }

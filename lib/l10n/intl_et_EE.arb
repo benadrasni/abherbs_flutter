@@ -358,5 +358,7 @@
   "favorite_no_login": "Lemmiklillede nimekiri on saadaval ainult logitud kasutajatele. Palun logige sisse.",
 
   "guide_new_today": "Täna",
-  "guide_new_yesterday": "Eile"
+  "guide_new_yesterday": "Eile",
+  "guide_notes": "Huvitavat",
+  "guide_toxicity_none": "Märkimata"
 }

@@ -166,6 +166,9 @@ class GuideSpecies {
   final int heightTo;
   final int floweringFrom;
   final int floweringTo;
+  final int toxicityClass;
+  final String? orderLatin;
+  final String? orderLabel;
   final String? familyLatin;
   final String? familyLabel;
   final List<GuideSpeciesRank> ranks;
@@ -188,6 +191,9 @@ class GuideSpecies {
     required this.heightTo,
     required this.floweringFrom,
     required this.floweringTo,
+    this.toxicityClass = 0,
+    required this.orderLatin,
+    required this.orderLabel,
     required this.familyLatin,
     required this.familyLabel,
     required this.ranks,
@@ -204,6 +210,13 @@ class GuideSpecies {
     if (value == null || value.isEmpty) return false;
     return value.toLowerCase() != name.toLowerCase();
   }
+
+  GuideSpeciesSection? sectionById(String id) {
+    for (final section in sections) {
+      if (section.id == id) return section;
+    }
+    return null;
+  }
 }
 
 GuideSpecies? assembleGuideSpecies({
@@ -217,6 +230,7 @@ GuideSpecies? assembleGuideSpecies({
   final latin = _text(plant['name']) ?? name;
   if (latin.isEmpty) return null;
   final family = guideFamilyLatin(plant['APGIV']);
+  final order = guideOrderLatin(plant['APGIV']);
   return GuideSpecies(
     name: latin,
     author: _text(plant['author']),
@@ -229,6 +243,9 @@ GuideSpecies? assembleGuideSpecies({
     heightTo: _int(plant['heightTo']),
     floweringFrom: _int(plant['floweringFrom']),
     floweringTo: _int(plant['floweringTo']),
+    toxicityClass: guideToxicityClass(plant['toxicityClass']),
+    orderLatin: order,
+    orderLabel: order == null ? null : vernaculars[order],
     familyLatin: family,
     familyLabel: family == null ? null : vernaculars[family],
     ranks: guideSpeciesRanks(plant['APGIV'], vernaculars),
@@ -258,6 +275,24 @@ List<GuideSpeciesSection> guideSpeciesSections(PlantTranslation translation) {
       if (guideBodyText(values[id]) != null)
         GuideSpeciesSection(id: id, text: guideBodyText(values[id])!),
   ];
+}
+
+int guideToxicityClass(dynamic raw) {
+  if (raw is int) return raw;
+  if (raw is num) return raw.toInt();
+  return 0;
+}
+
+/// Facts-row label. Class 1 is poisonous, class 2 is slightly poisonous.
+String guideToxicityClassLabel({
+  required int toxicityClass,
+  required String poisonous,
+  required String slight,
+  required String none,
+}) {
+  if (toxicityClass == 1) return poisonous;
+  if (toxicityClass == 2) return slight;
+  return none;
 }
 
 String? guideBodyText(String? value) {
@@ -317,11 +352,53 @@ bool guidePlantRecord(dynamic raw) {
 }
 
 String? guideFamilyLatin(dynamic apg) {
+  return _rankLatin(apg, 'Familia');
+}
+
+String? guideOrderLatin(dynamic apg) {
+  return _rankLatin(apg, 'Ordo');
+}
+
+/// Order, then family. A vernacular wins; otherwise the Latin name.
+/// The first letter is capital, matching the name above it.
+String guideOrderFamilyLine({
+  String? orderLabel,
+  String? orderLatin,
+  String? familyLabel,
+  String? familyLatin,
+}) {
+  String? shown(String? label, String? latin) {
+    final preferred = label?.trim();
+    final raw =
+        (preferred != null && preferred.isNotEmpty) ? preferred : latin?.trim();
+    if (raw == null || raw.isEmpty) return null;
+    return raw[0].toUpperCase() + raw.substring(1);
+  }
+
+  return [
+    shown(orderLabel, orderLatin),
+    shown(familyLabel, familyLatin),
+  ].whereType<String>().join(' · ');
+}
+
+/// Latins whose vernaculars the species page needs, including an order
+/// or family that sits past the seven-rank slice.
+Set<String> guideSpeciesTaxonLatins(dynamic apg) {
+  final family = guideFamilyLatin(apg);
+  final order = guideOrderLatin(apg);
+  return {
+    if (family != null) family,
+    if (order != null) order,
+    for (final rank in guideSpeciesRanks(apg, const {})) rank.latin,
+  };
+}
+
+String? _rankLatin(dynamic apg, String wanted) {
   if (apg is! Map) return null;
   for (final entry in apg.entries) {
     final key = entry.key.toString();
     final rank = key.contains('_') ? key.substring(key.indexOf('_') + 1) : key;
-    if (rank == 'Familia') return _text(entry.value);
+    if (rank == wanted) return _text(entry.value);
   }
   return null;
 }

@@ -358,5 +358,7 @@
   "favorite_no_login": "Списък с любимите цветя е достъпен само за регистрирани потребители. Моля влезте.",
 
   "guide_new_today": "Днес",
-  "guide_new_yesterday": "Вчера"
+  "guide_new_yesterday": "Вчера",
+  "guide_notes": "Любопитно",
+  "guide_toxicity_none": "Не е отбелязана"
 }

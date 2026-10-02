@@ -358,5 +358,7 @@
   "favorite_no_login": "רשימה של פרחים מועדפים זמין רק עבור משתמשים רשומים. היכנס.",
 
   "guide_new_today": "היום",
-  "guide_new_yesterday": "אתמול"
+  "guide_new_yesterday": "אתמול",
+  "guide_notes": "הערות",
+  "guide_toxicity_none": "לא נרשמה"
 }

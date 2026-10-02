@@ -358,5 +358,7 @@
   "favorite_no_login": "La liste des fleurs préférées est disponible uniquement pour les utilisateurs connectés. Veuillez vous connecter.",
 
   "guide_new_today": "Aujourd’hui",
-  "guide_new_yesterday": "Hier"
+  "guide_new_yesterday": "Hier",
+  "guide_notes": "Notes",
+  "guide_toxicity_none": "Non indiquée"
 }

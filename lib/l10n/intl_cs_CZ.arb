@@ -358,5 +358,7 @@
   "favorite_no_login": "Seznam oblíbených květin je dostupný pouze pro přihlášené uživatele. Přihlašte se, prosím.",
 
   "guide_new_today": "Dnes",
-  "guide_new_yesterday": "Včera"
+  "guide_new_yesterday": "Včera",
+  "guide_notes": "Zajímavosti",
+  "guide_toxicity_none": "Nezaznamenána"
 }

@@ -358,5 +358,7 @@
   "favorite_no_login": "お気に入りの花のリストはログインしたユーザーにのみ利用可能です。 ログインしてください。",
 
   "guide_new_today": "今日",
-  "guide_new_yesterday": "昨日"
+  "guide_new_yesterday": "昨日",
+  "guide_notes": "豆知識",
+  "guide_toxicity_none": "記録なし"
 }
