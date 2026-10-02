@@ -191,6 +191,10 @@ void main() {
       guideAllowanceBarShares(GuideAllowance.credits(12)),
       (included: 5, extra: 0, rest: 0),
     );
+    expect(
+      guideAllowanceBarShares(const GuideAllowance.guest(free: true)),
+      (included: 1, extra: 0, rest: 0),
+    );
   });
 
   test('a photo-storage plan is Field Guide and credits stay names left', () {
@@ -313,12 +317,35 @@ void main() {
     )));
 
     expect(find.text('Sign in to name a photo'), findsOneWidget);
+    expect(find.text('1 name left'), findsNothing);
     expect(find.text('Your account'), findsNothing);
     expect(find.text('7 days free'), findsOneWidget);
     await tester.tap(find.text('Sign in'));
     await tester.tap(find.text('Field Guide'));
     expect(signed, 1);
     expect(guide, 1);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a first open shows the one free photo name', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(390, 844));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(_app(_page(
+      view: const GuidePersonView(
+        account: null,
+        allowance: GuideAllowance.guest(free: true),
+        languageName: 'English',
+        appearance: GuideAppearance.system,
+        showFieldGuide: true,
+        showOffline: false,
+        offlineOn: false,
+      ),
+    )));
+
+    expect(find.text('Names left'), findsOneWidget);
+    expect(find.text('1 name left'), findsOneWidget);
+    expect(find.text('Sign in to name a photo'), findsNothing);
+    expect(find.text('Sign in'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 

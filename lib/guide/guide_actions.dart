@@ -1,9 +1,12 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/camera_page.dart';
+import 'package:abherbs_flutter/guide/field_guide_page.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_location.dart';
+import 'package:abherbs_flutter/guide/guide_person.dart';
 import 'package:abherbs_flutter/guide/guide_results.dart';
 import 'package:abherbs_flutter/guide/habitat_page.dart';
+import 'package:abherbs_flutter/guide/language_page.dart';
 import 'package:abherbs_flutter/guide/list_page.dart';
 import 'package:abherbs_flutter/guide/person_page.dart';
 import 'package:abherbs_flutter/guide/petal_page.dart';
@@ -12,9 +15,8 @@ import 'package:abherbs_flutter/guide/search_page.dart';
 import 'package:abherbs_flutter/guide/sign_in_page.dart';
 import 'package:abherbs_flutter/guide/species_page.dart';
 import 'package:abherbs_flutter/main.dart';
-import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/settings/setting_pref_language.dart';
+import 'package:abherbs_flutter/settings/setting_utils.dart';
 import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
@@ -24,6 +26,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+export 'package:abherbs_flutter/guide/field_guide_page.dart'
+    show openGuideFieldGuide;
 export 'package:abherbs_flutter/guide/species_page.dart' show openGuidePlant;
 
 void openGuideSearch(
@@ -106,11 +110,19 @@ Future<void> guideRestorePurchases(BuildContext context) async {
 }
 
 Future<void> openGuideLanguage(BuildContext context) async {
+  final saved = await Prefs.getStringF(keyPreferredLanguage);
+  if (!context.mounted) return;
   await Navigator.push(
     context,
-    MaterialPageRoute(
-      builder: (context) => SettingPrefLanguage(),
-      settings: const RouteSettings(name: 'SettingPrefLanguage'),
+    MaterialPageRoute<void>(
+      settings: const RouteSettings(name: guideLanguageRouteName),
+      builder: (context) => GuideLanguagePage(
+        selectedKey: saved,
+        // The phone's language, not the language currently on screen.
+        phoneName: guideLanguageName(languages, '', getDeviceLocale()),
+        options: guideLanguageOptions(languages),
+        onChoose: _storeGuideLanguage,
+      ),
     ),
   );
   if (!context.mounted) return;
@@ -126,14 +138,12 @@ Future<void> openGuideLanguage(BuildContext context) async {
   );
 }
 
-Future<void> openGuideFieldGuide(BuildContext context) {
-  return Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => EnhancementsScreen(const <String, String>{}),
-      settings: const RouteSettings(name: 'Enhancements'),
-    ),
-  );
+Future<void> _storeGuideLanguage(String key) async {
+  if (key.isEmpty) {
+    await Prefs.remove(keyPreferredLanguage);
+    return;
+  }
+  await Prefs.setString(keyPreferredLanguage, key);
 }
 
 Future<void> openGuideOffline(BuildContext context) {

@@ -4,6 +4,7 @@ import 'dart:ui' show PlatformDispatcher;
 
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_shell.dart';
+import 'package:abherbs_flutter/guide/list_page.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
@@ -247,7 +248,10 @@ class _AppState extends State<App> {
         switch (action) {
           case notificationAttributeActionList:
             String path = message.data[notificationAttributePath];
-            rootReference.child(path).keepSynced(true);
+            final openNew = notificationPathOpensNewInBook(path);
+            if (!openNew) {
+              rootReference.child(path).keepSynced(true);
+            }
             return notificationPopup(
               _navigatorKey.currentContext!,
               notificationTitle(message),
@@ -256,10 +260,14 @@ class _AppState extends State<App> {
               final context = _navigatorKey.currentContext;
               if (open && context != null) {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PlantList({}, '', rootReference.child(path)),
-                        settings: RouteSettings(name: 'PlantList')));
+                  context,
+                  openNew
+                      ? guideNewInBookRoute()
+                      : MaterialPageRoute(
+                          builder: (context) => PlantList({}, '', rootReference.child(path)),
+                          settings: RouteSettings(name: 'PlantList'),
+                        ),
+                );
               }
             });
           case notificationAttributeActionPlant:
@@ -366,6 +374,9 @@ class _AppState extends State<App> {
             return null;
           case notificationAttributeActionList:
             String path = notificationData[notificationAttributePath];
+            if (path.isNotEmpty && notificationPathOpensNewInBook(path)) {
+              return Future<MaterialPageRoute<dynamic>>.value(guideNewInBookRoute());
+            }
             if (path.isNotEmpty) {
               rootReference.child(path).keepSynced(true);
               rootReference.child(firebasePlantHeaders).keepSynced(true);

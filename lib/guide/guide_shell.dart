@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:abherbs_flutter/guide/book_page.dart';
 import 'package:abherbs_flutter/guide/find_page.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
+import 'package:abherbs_flutter/guide/guide_person.dart';
 import 'package:abherbs_flutter/guide/guide_seen.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
@@ -52,6 +53,9 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     GuideAppearanceController.instance.apply(storedGuideAppearance());
+    guideGuestFreeRemaining.value = guideGuestFreeRemembered();
+    guideGuestFreeRemaining.addListener(_onGuestFree);
+    unawaited(guideGuestHasFreeName());
     _authSub = Auth.subscribe((user) {
       unawaited(_onAccount(user));
     });
@@ -92,6 +96,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     GuideTabs.showSeen = null;
     GuideTabs.refreshSeen = null;
     GuideTabs.unconfirmed.value = 0;
+    guideGuestFreeRemaining.removeListener(_onGuestFree);
     _authSub?.cancel();
     _creditsSub?.cancel();
     _seenRemote?.cancel();
@@ -146,6 +151,10 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     });
   }
 
+  void _onGuestFree() {
+    if (mounted) setState(() {});
+  }
+
   /// Sign-in finishes after Find has drawn. Reload finds, then the account's
   /// credits and purchases, and draw those on the camera card.
   Future<void> _onAccount(User? user) async {
@@ -169,6 +178,8 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     }
     await finds;
     await seen;
+    if (!mounted || ticket != _accountTicket) return;
+    await guideGuestHasFreeName();
     if (!mounted || ticket != _accountTicket || user == null) return;
     setState(() => _credits = Auth.credits);
   }
@@ -332,6 +343,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
                 lists: _lists,
                 finds: _finds,
                 credits: _credits,
+                guestFree: guideGuestFreeRemaining.value,
                 onOpenBook: _openLists,
                 onOpenSeen: () => _go(2),
               ),
@@ -350,7 +362,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
                   ? SeenPage(
                       finds: _notebook,
                       signedIn: Auth.appUser != null,
-                      fieldGuide: Purchases.isSubscribed(),
+                      fieldGuide: Purchases.hasFieldGuide(),
                     )
                   : const SizedBox.shrink(),
             ],

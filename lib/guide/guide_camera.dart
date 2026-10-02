@@ -169,37 +169,18 @@ bool guideCameraNamesExhausted(GuideAllowance allowance) {
 }
 
 GuideAllowance guideCameraLiveAllowance({bool guestFree = false}) {
+  final fieldGuide = Purchases.hasFieldGuide();
   return guideLiveAllowance(
     signedIn: Auth.appUser != null,
-    subscribed: Purchases.isSubscribed(),
-    unlimitedNames: Purchases.isPhotoSearch(),
-    noAds: Purchases.isNoAds(),
-    seenSynced: Purchases.isSubscribed(),
+    subscribed: fieldGuide,
+    unlimitedNames:
+        Purchases.isPhotoSearch() || Purchases.hasLifetimeSubscription,
+    noAds: Purchases.isNoAds() || fieldGuide,
+    seenSynced: fieldGuide,
     credits: Auth.credits,
     guestFree: guestFree,
     now: DateTime.now(),
   );
-}
-
-/// Whether the guest account still has its one free identification. The
-/// `identifyPlant` function keeps that flag in `photo_quota/{uid}`; the
-/// install also remembers it, since there is one guest account per install.
-Future<bool> guideGuestHasFreeName() async {
-  if (Auth.appUser != null) return false;
-  if (Prefs.getBool(keyGuestFreeUsed, false)) return false;
-  if (Auth.firebaseAuth.currentUser == null) await Auth.startGuest();
-  final guest = Auth.guestUser;
-  if (guest == null) return false;
-  try {
-    final event = await rootReference
-        .child(firebasePhotoQuota)
-        .child(guest.uid)
-        .child(firebaseAttributeAnonymousFreeUsed)
-        .get();
-    return event.value != true;
-  } catch (_) {
-    return true;
-  }
 }
 
 /// Plain words for a Plant.id probability.

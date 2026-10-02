@@ -12,6 +12,9 @@ class FindPage extends StatelessWidget {
   final List<GuideListCover>? lists;
   final List<GuideFind>? finds;
   final int credits;
+
+  /// The guest's one free photo name, before anyone is signed in.
+  final bool guestFree;
   final VoidCallback onOpenBook;
   final VoidCallback onOpenSeen;
 
@@ -21,6 +24,7 @@ class FindPage extends StatelessWidget {
     required this.lists,
     required this.finds,
     required this.credits,
+    this.guestFree = false,
     required this.onOpenBook,
     required this.onOpenSeen,
   });
@@ -39,7 +43,7 @@ class FindPage extends StatelessWidget {
           onAction: () => openGuideAccount(context),
         ),
         const _SearchButton(),
-        _CameraCard(credits: credits),
+        _CameraCard(credits: credits, guestFree: guestFree),
         _KeyCard(colorCounts: colorCounts),
         if (recent.isNotEmpty) ...[
           GuideSectionHeader(
@@ -110,8 +114,9 @@ class _SearchButton extends StatelessWidget {
 
 class _CameraCard extends StatelessWidget {
   final int credits;
+  final bool guestFree;
 
-  const _CameraCard({required this.credits});
+  const _CameraCard({required this.credits, required this.guestFree});
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +157,7 @@ class _CameraCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      _Meter(credits: credits),
+                      _Meter(credits: credits, guestFree: guestFree),
                     ],
                   ),
                 ),
@@ -180,8 +185,9 @@ class _CameraCard extends StatelessWidget {
 
 class _Meter extends StatelessWidget {
   final int credits;
+  final bool guestFree;
 
-  const _Meter({required this.credits});
+  const _Meter({required this.credits, required this.guestFree});
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +201,23 @@ class _Meter extends StatelessWidget {
       return Text(S.of(context).guide_meter_unlimited, style: style);
     }
     if (Auth.appUser == null) {
-      return Text(S.of(context).guide_meter_sign_in, style: style);
+      if (!guestFree) {
+        return Text(S.of(context).guide_meter_sign_in, style: style);
+      }
+      return Row(
+        children: [
+          const _Dot(filled: true),
+          const SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              S.of(context).guide_meter_left(1),
+              style: style,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      );
     }
     final left = credits;
     final filled = left.clamp(0, 5);

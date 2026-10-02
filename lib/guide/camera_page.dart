@@ -5,6 +5,7 @@ import 'dart:math' as math;
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:camera/camera.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
+import 'package:abherbs_flutter/guide/field_guide_page.dart';
 import 'package:abherbs_flutter/guide/guide_camera.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_location.dart';
@@ -19,7 +20,6 @@ import 'package:abherbs_flutter/guide/species_page.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/plant_list.dart';
-import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/purchase/rewarded_ad.dart';
 import 'package:abherbs_flutter/search/plant_id_search.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
@@ -117,6 +117,9 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _place = widget.place;
+    if (widget.allowance == null) {
+      _guestFree = guideGuestFreeRemembered();
+    }
     _readAllowance();
     if (widget.place == null) unawaited(_loadPlace());
     final kind = _allowance.kind;
@@ -337,15 +340,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   }
 
   Future<void> _fieldGuide() async {
-    final action = widget.onFieldGuide ??
-        () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    EnhancementsScreen(const <String, String>{}),
-                settings: const RouteSettings(name: 'Enhancements'),
-              ),
-            );
+    final action = widget.onFieldGuide ?? () => openGuideFieldGuide(context);
     await action();
     if (!mounted) return;
     _readAllowance();
@@ -468,7 +463,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
         Auth.appUser == null &&
         (identification.guestFreeUsed ||
             identification.refusal == PhotoRefusal.signIn)) {
-      unawaited(Prefs.setBool(keyGuestFreeUsed, true));
+      guideMarkGuestFreeUsed();
       setState(() {
         _guestFree = false;
         _liveAllowance = guideCameraLiveAllowance();

@@ -3,6 +3,7 @@ import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_results.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
+import 'package:abherbs_flutter/guide/species_page.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
@@ -30,6 +31,29 @@ String guideNewDayLabel(
 
 bool _sameCalendarDay(DateTime a, DateTime b) {
   return a.year == b.year && a.month == b.month && a.day == b.day;
+}
+
+/// A new-plants notification opens New in the book, whichever day the payload names.
+bool notificationPathOpensNewInBook(String path) {
+  var value = path.trim();
+  if (value.startsWith('/')) value = value.substring(1);
+  return value == '$firebaseListsCustom/new' || value.startsWith('$firebaseListsCustom/new/');
+}
+
+/// The Book list a new-plants notification opens.
+MaterialPageRoute<dynamic> guideNewInBookRoute() {
+  return MaterialPageRoute<dynamic>(
+    settings: const RouteSettings(name: guideCustomRouteName),
+    builder: (context) {
+      final language = Localizations.localeOf(context).languageCode;
+      return GuideNewPage(
+        backLabel: S.of(context).guide_back,
+        loadDays: () => loadGuideNewDays(language),
+        loadSeen: loadGuideSeenNames,
+        onOpenPlant: openGuidePlant,
+      );
+    },
+  );
 }
 
 const _plateGround = Color(0xFFF1E8D6);

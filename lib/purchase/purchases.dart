@@ -59,13 +59,20 @@ class Purchases {
     return purchases.containsKey(subscriptionYearly);
   }
 
+  /// Photo storage and the Field Guide plans. A lifetime purchase is not
+  /// this plan: sync of Seen stays on Field Guide.
+  static bool hasFieldGuide() {
+    return isSubscribedMonthly() ||
+        isSubscribedYearly() ||
+        purchases.containsKey(fieldGuideMonthly) ||
+        purchases.containsKey(fieldGuideYearly);
+  }
+
   static bool isSignNeeded() {
     return isObservations() || isPhotoSearch();
   }
 
   static bool isSubscribed() {
-    return hasLifetimeSubscription ||
-        isSubscribedMonthly() ||
-        isSubscribedYearly();
+    return hasLifetimeSubscription || hasFieldGuide();
   }
 }

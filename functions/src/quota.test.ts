@@ -109,5 +109,7 @@ test('hasUnlimitedNames reads server flags and the product list', () => {
   assert.equal(hasUnlimitedNames({ 'lifetime subscription': true }), true);
   assert.equal(hasUnlimitedNames({ purchases: ['no_ads', 'search_by_photo'] }), true);
   assert.equal(hasUnlimitedNames({ purchases: { 0: 'store_photos_yearly' } }), true);
+  assert.equal(hasUnlimitedNames({ purchases: ['field_guide_monthly'] }), true);
+  assert.equal(hasUnlimitedNames({ purchases: { 0: 'field_guide_yearly' } }), true);
   assert.equal(hasUnlimitedNames({ purchases: ['no_ads'] }), false);
 });

@@ -19,6 +19,13 @@ void main() {
     await Firebase.initializeApp();
   });
 
+  test('a new-plants notification opens New in the book', () {
+    expect(notificationPathOpensNewInBook('lists_custom/new/2026-10-01/list'), isTrue);
+    expect(notificationPathOpensNewInBook('/lists_custom/new'), isTrue);
+    expect(notificationPathOpensNewInBook('lists_custom/by language/en/Spices/list'), isFalse);
+    expect(notificationPathOpensNewInBook(''), isFalse);
+  });
+
   test('new in the book says today and yesterday', () {
     final now = DateTime(2026, 10, 1, 23, 30);
     expect(

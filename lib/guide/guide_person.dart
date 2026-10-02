@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
@@ -106,6 +108,62 @@ int _clampCount(int value, int max) {
   return value;
 }
 
+/// Find and the camera listen so using the free name updates the card.
+final ValueNotifier<bool> guideGuestFreeRemaining = ValueNotifier<bool>(false);
+
+/// This install has not recorded that the guest used their one free name.
+/// A signed-out install whose guest account is already gone has none.
+bool guideGuestFreeRemembered() {
+  if (Auth.appUser != null) return false;
+  if (Prefs.getBool(keyGuestFreeUsed, false)) return false;
+  if (Auth.guestUser == null &&
+      Auth.firebaseAuth.currentUser == null &&
+      Prefs.getBool(keyGuestCreated, false)) {
+    return false;
+  }
+  return true;
+}
+
+/// Whether the guest still has its one free identification. `identifyPlant`
+/// keeps that flag in `photo_quota/{uid}`; the install also remembers it.
+Future<bool> guideGuestHasFreeName() async {
+  if (!guideGuestFreeRemembered()) {
+    _publishGuestFree(false);
+    return false;
+  }
+  if (Auth.firebaseAuth.currentUser == null) await Auth.startGuest();
+  final guest = Auth.guestUser;
+  if (guest == null) {
+    final free = !Prefs.getBool(keyGuestCreated, false);
+    _publishGuestFree(free);
+    return free;
+  }
+  try {
+    final event = await rootReference
+        .child(firebasePhotoQuota)
+        .child(guest.uid)
+        .child(firebaseAttributeAnonymousFreeUsed)
+        .get();
+    final free = event.value != true;
+    if (!free) unawaited(Prefs.setBool(keyGuestFreeUsed, true));
+    _publishGuestFree(free);
+    return free;
+  } catch (_) {
+    _publishGuestFree(true);
+    return true;
+  }
+}
+
+void guideMarkGuestFreeUsed() {
+  _publishGuestFree(false);
+  unawaited(Prefs.setBool(keyGuestFreeUsed, true));
+}
+
+void _publishGuestFree(bool free) {
+  if (guideGuestFreeRemaining.value == free) return;
+  guideGuestFreeRemaining.value = free;
+}
+
 /// Shares of the allowance bar. A month is ten parts (five included, five
 /// from ads). Credits fill up to five parts with the names still left.
 ({int included, int extra, int rest}) guideAllowanceBarShares(
@@ -122,6 +180,9 @@ int _clampCount(int value, int max) {
       extra: allowance.extraUsed,
       rest: rest,
     );
+  }
+  if (allowance.kind == GuideAllowanceKind.guest && allowance.namesLeft > 0) {
+    return (included: 1, extra: 0, rest: 0);
   }
   return (included: 0, extra: 0, rest: 1);
 }
@@ -362,8 +423,9 @@ Future<GuidePersonView> loadGuidePerson(Locale locale) async {
   final offlineOwned = Purchases.isOffline();
   final offlineOn =
       offlineOwned ? await Prefs.getBoolF(keyOffline, false) : false;
-  final subscribed = Purchases.isSubscribed();
-  final unlimitedNames = Purchases.isPhotoSearch();
+  final fieldGuide = Purchases.hasFieldGuide();
+  final unlimitedNames =
+      Purchases.isPhotoSearch() || Purchases.hasLifetimeSubscription;
   return GuidePersonView(
     account: guideAccountFrom(
       signedIn: signedIn,
@@ -383,16 +445,17 @@ Future<GuidePersonView> loadGuidePerson(Locale locale) async {
     ),
     allowance: guideLiveAllowance(
       signedIn: signedIn,
-      subscribed: subscribed,
+      subscribed: fieldGuide,
       unlimitedNames: unlimitedNames,
-      noAds: Purchases.isNoAds(),
-      seenSynced: subscribed,
+      noAds: Purchases.isNoAds() || fieldGuide,
+      seenSynced: fieldGuide,
       credits: Auth.credits,
+      guestFree: signedIn ? false : await guideGuestHasFreeName(),
       now: DateTime.now(),
     ),
     languageName: guideLanguageName(languages, pref, locale),
     appearance: storedGuideAppearance(),
-    showFieldGuide: !subscribed,
+    showFieldGuide: !fieldGuide,
     showOffline: offlineOwned,
     offlineOn: offlineOn,
   );

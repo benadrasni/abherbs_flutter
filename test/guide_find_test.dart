@@ -423,6 +423,15 @@ void main() {
     expect(find.text('Sign in to name a photo'), findsOneWidget);
     expect(find.text('Unlimited'), findsNothing);
   });
+
+  testWidgets('a first open has one free photo name', (tester) async {
+    await _pump(
+      tester,
+      _page(finds: const [], lists: const [], guestFree: true),
+    );
+    expect(find.text('1 name left'), findsOneWidget);
+    expect(find.text('Sign in to name a photo'), findsNothing);
+  });
 }
 
 Widget _tabs() {
@@ -477,6 +486,7 @@ Widget _page({
   Map<String, int>? colorCounts = const {},
   List<GuideFind>? finds = const [],
   List<GuideListCover>? lists = const [],
+  bool guestFree = false,
   VoidCallback? onOpenBook,
   VoidCallback? onOpenSeen,
 }) {
@@ -495,6 +505,7 @@ Widget _page({
         lists: lists,
         finds: finds,
         credits: 2,
+        guestFree: guestFree,
         onOpenBook: onOpenBook ?? () {},
         onOpenSeen: onOpenSeen ?? () {},
       ),

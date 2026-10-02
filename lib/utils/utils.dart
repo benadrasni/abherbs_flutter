@@ -35,6 +35,8 @@ const String productObservations = "observations";
 const String productPhotoSearch = "search_by_photo";
 const String subscriptionMonthly = "store_photos_monthly";
 const String subscriptionYearly = "store_photos_yearly";
+const String fieldGuideMonthly = "field_guide_monthly";
+const String fieldGuideYearly = "field_guide_yearly";
 
 const String keyLanguageAndCountry = "language_country";
 const String keyPreferredLanguage = "pref_language";

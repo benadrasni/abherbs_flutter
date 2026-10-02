@@ -10,7 +10,7 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 
 class GuidePersonPage extends StatefulWidget {
   final GuidePersonView? view;
@@ -324,10 +324,8 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
           onPressed:
               widget.onRestore == null ? null : () => _act(widget.onRestore),
         ),
-        _MenuRow(
-          icon: Icons.language,
-          title: strings.guide_person_language,
-          subtitle: view.languageName,
+        _LanguageRow(
+          name: view.languageName,
           onPressed:
               widget.onLanguage == null ? null : () => _act(widget.onLanguage),
         ),
@@ -454,22 +452,40 @@ class _AllowanceCard extends StatelessWidget {
 
   Widget _cardBody(BuildContext context, S strings, GuideColors colors) {
     final body = switch (allowance.kind) {
-      GuideAllowanceKind.guest => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              strings.guide_meter_sign_in,
-              style: _title(colors),
+      GuideAllowanceKind.guest => allowance.namesLeft > 0
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(strings.guide_person_names_left, style: _title(colors)),
+                const SizedBox(height: 10),
+                _AllowanceBar(allowance: allowance),
+                const SizedBox(height: 6),
+                Text(
+                  strings.guide_meter_left(allowance.namesLeft),
+                  style: _note(colors),
+                ),
+                const SizedBox(height: 4),
+                Text(strings.guide_person_guest_body, style: _note(colors)),
+                const SizedBox(height: 10),
+                _SignInButton(onPressed: onSignIn),
+              ],
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  strings.guide_meter_sign_in,
+                  style: _title(colors),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  strings.guide_person_guest_body,
+                  style: _note(colors),
+                ),
+                const SizedBox(height: 10),
+                _SignInButton(onPressed: onSignIn),
+              ],
             ),
-            const SizedBox(height: 4),
-            Text(
-              strings.guide_person_guest_body,
-              style: _note(colors),
-            ),
-            const SizedBox(height: 10),
-            _SignInButton(onPressed: onSignIn),
-          ],
-        ),
       GuideAllowanceKind.month => _month(context, strings, colors),
       GuideAllowanceKind.credits => _credits(strings, colors),
       GuideAllowanceKind.unlimited => _unlimited(strings, colors),
@@ -703,6 +719,71 @@ class _MenuRow extends StatelessWidget {
                   ],
                 ),
               ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _LanguageRow extends StatelessWidget {
+  final String name;
+  final VoidCallback? onPressed;
+
+  const _LanguageRow({required this.name, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final strings = S.of(context);
+    final forward = Directionality.of(context) == TextDirection.rtl
+        ? Icons.chevron_left
+        : Icons.chevron_right;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: colors.rule)),
+      ),
+      child: InkWell(
+        onTap: onPressed,
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 14, 8, 14),
+          child: Row(
+            children: [
+              Icon(Icons.language, size: 22, color: colors.moss),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  strings.guide_person_language,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: colors.ink,
+                    height: 1.2,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.end,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: colors.ink2,
+                    height: 1.2,
+                  ),
+                ),
+              ),
+              if (onPressed != null) ...[
+                const SizedBox(width: 2),
+                Icon(forward, size: 22, color: colors.ink3),
+              ],
             ],
           ),
         ),

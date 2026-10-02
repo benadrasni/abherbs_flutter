@@ -164,7 +164,13 @@ export function isPlant(body: unknown, thresholdPercent: number): boolean {
   return true;
 }
 
-const unlimitedProducts = ['search_by_photo', 'store_photos_monthly', 'store_photos_yearly'];
+const unlimitedProducts = [
+  'search_by_photo',
+  'store_photos_monthly',
+  'store_photos_yearly',
+  'field_guide_monthly',
+  'field_guide_yearly',
+];
 
 /**
  * `old version` and `lifetime subscription` are server-set. `purchases` is a
