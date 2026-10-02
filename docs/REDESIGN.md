@@ -84,7 +84,17 @@ On the first launch after the update, existing observations become confirmed fin
 
 ## Field Guide
 
-One new subscription, monthly and yearly (`field_guide_monthly`, `field_guide_yearly`), with a 7-day trial. It includes unlimited photo identification, no ads, sync of Seen, and offline packs of the book. An offline pack is one floristic region, the same regions as the region chip, so a walk in Middle Europe downloads Middle Europe rather than all 1,421 species. The phone’s own region is offered first. The price is the store price. This plan does not set a number.
+One new subscription, monthly and yearly (`field_guide_monthly`, `field_guide_yearly`), with a 7-day trial. It includes unlimited photo identification, no ads, sync of Seen, and offline copies of the book. Offline is the whole book, or a floristic region. The regions are the ones the filter already uses: eight parts of the world, each opening the same level-2 regions as the region chip. The phone’s own region is offered first. A plant that grows in two selected regions is stored once. Antarctic is not a pack: the continent has no species, and every subantarctic species is also recorded somewhere else. Sizes on the screen are the pictures (photos, both plates, and the range map). From a 36-species sample that averages 0.73 MB, the 1,433 species in `plants_headers` are about 1.0 GB. Middle Europe alone is about 810 MB, because 1,105 of the 1,433 species occur there. The price is the store price. This plan does not set a number.
+
+### Offline updates
+
+After a pack is on the phone, later catalog changes arrive as one update. The Offline screen shows it under what is already stored, with its size. Person shows the same size. Nothing is downloaded until the person taps Update. The download uses Wi-Fi and can be paused, the same way as the first download.
+
+A new plant is part of the update when it occurs in a pack already on the phone. A plant recorded only in a region they did not download is not. Everything includes every new plant. A new photo, plate, or map on a plant already stored fetches only the changed files. A picture removed from the plant is deleted from the phone. Several plants fold into that one line. A plant that leaves their region stays until they remove the pack. The words for the plants in the update come with it and barely change the size.
+
+Two records make the line. The phone stores the last change it applied, and a stamp for each plant it has. The stamp covers that plant’s photos, plate, and map. The catalog keeps a change list. Publishing a species, or replacing a photo, plate, or map, appends one entry: the plant id, whether the plant was added or its pictures changed, and the new stamp. The Offline screen reads the entries after the phone’s mark, keeps the ones that fall in a stored pack, and adds up their size. After the download, the mark moves forward and the new stamps are stored.
+
+`plants_to_update` stays the ordered list of the book. Its count shows that new names were appended. It does not record that an older plant received a new plate. The change list does.
 
 The current photo-storage plans stay in the stores so existing subscribers and Restore keep working. An active `store_photos_monthly` or `store_photos_yearly` plan is treated as Field Guide. When it lapses, the account returns to the free allowance.
 
@@ -123,7 +133,7 @@ Database additions and changes are allowed when a new page needs a field or node
 1. **Shell.** Find, Book, and Seen, the type and color, the species page, the three-step key, the region chip (with the remembered region), results in flower now first, lists of flowers, Seen by you, and free search. Seen replaces Observations here: the import, Add to Seen, Share with review, and Sightings on species pages. The current camera and purchases keep working underneath, so this can ship on its own.
 2. **Field Guide.** The new subscription, the grandfather map, banners off the species page, the 7-day trial, and the allowance shown on the camera.
 3. **Camera.** The Cloud Function, anonymous accounts at launch, the account allowance, no charge for a photo that is not a plant, verified ad grants, the tally of names outside the book, Plant.id for any plant, the full page or the short card, and the unconfirmed record in Seen.
-4. **Carry.** Sync of Seen, offline packs by region, and a map of the person’s own finds.
+4. **Carry.** Sync of Seen, offline packs (the whole book or a floristic region, with the size of each), the change list for plants added or given new pictures after a pack is stored, and a map of the person’s own finds.
 5. **The key on the website.** The three steps on `/identify`, ending on the species page.
 
 ## Mockups
@@ -150,4 +160,7 @@ Database additions and changes are allowed when a new page needs a field or node
 | List of flowers | New in the book by date (last 15 to 25). Year campaigns newest first. Other lists use the result grid |
 | At the limit | Ad, Field Guide, or the key |
 | Field Guide | What stays free, what the subscription adds, 7-day trial, restore |
+| Offline | The whole book, or a floristic region. Each row shows the plants and the space the pictures take. The phone’s region is offered first |
+| Offline · downloading | Middle Europe, about halfway, in megabytes |
+| Offline · add a region | Middle Europe is already stored. Adding the Northeast shows only the plants that are not |
 | Person | Account, allowance, restore, language, theme |

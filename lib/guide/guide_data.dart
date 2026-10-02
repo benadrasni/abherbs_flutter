@@ -68,6 +68,7 @@ const guideSpeciesRouteName = 'GuideSpecies';
 const guidePersonRouteName = 'GuidePerson';
 const guideLanguageRouteName = 'GuideLanguage';
 const guideFieldGuideRouteName = 'GuideFieldGuide';
+const guideOfflineRouteName = 'GuideOffline';
 const guideSearchRouteName = 'GuideSearch';
 const guideCameraRouteName = 'GuideCamera';
 const guideOutsideRouteName = 'GuideOutside';

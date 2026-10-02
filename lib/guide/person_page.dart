@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_person.dart';
+import 'package:abherbs_flutter/guide/offline_page.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
@@ -336,10 +337,14 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
         if (view.showOffline)
           _MenuRow(
             icon: Icons.cloud_outlined,
-            title: strings.offline_title,
-            subtitle: view.offlineOn
-                ? strings.guide_person_offline_on
-                : strings.offline_subtitle,
+            title: view.offlineHold == null
+                ? strings.offline_title
+                : strings.guide_offline_title,
+            subtitle: view.offlineHold == null
+                ? (view.offlineOn
+                    ? strings.guide_person_offline_on
+                    : strings.offline_subtitle)
+                : guideOfflineMenuText(context, view.offlineHold),
             onPressed:
                 widget.onOffline == null ? null : () => _act(widget.onOffline),
           ),

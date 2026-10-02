@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/guide/guide_results.dart';
 import 'package:abherbs_flutter/guide/habitat_page.dart';
 import 'package:abherbs_flutter/guide/language_page.dart';
 import 'package:abherbs_flutter/guide/list_page.dart';
+import 'package:abherbs_flutter/guide/offline_page.dart';
 import 'package:abherbs_flutter/guide/person_page.dart';
 import 'package:abherbs_flutter/guide/petal_page.dart';
 import 'package:abherbs_flutter/guide/results_page.dart';
@@ -17,7 +18,6 @@ import 'package:abherbs_flutter/guide/species_page.dart';
 import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
-import 'package:abherbs_flutter/settings/settings.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
@@ -150,8 +150,10 @@ Future<void> openGuideOffline(BuildContext context) {
   return Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => SettingsScreen(const <String, String>{}),
-      settings: const RouteSettings(name: 'Settings'),
+      settings: const RouteSettings(name: guideOfflineRouteName),
+      builder: (context) => GuideOfflinePage(
+        onFieldGuide: () => openGuideFieldGuide(context),
+      ),
     ),
   );
 }

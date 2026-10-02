@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:abherbs_flutter/guide/guide_offline.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
@@ -403,6 +404,7 @@ class GuidePersonView {
   final bool showFieldGuide;
   final bool showOffline;
   final bool offlineOn;
+  final GuideOfflineHold? offlineHold;
 
   const GuidePersonView({
     required this.account,
@@ -412,6 +414,7 @@ class GuidePersonView {
     required this.showFieldGuide,
     required this.showOffline,
     required this.offlineOn,
+    this.offlineHold,
   });
 }
 
@@ -456,7 +459,8 @@ Future<GuidePersonView> loadGuidePerson(Locale locale) async {
     languageName: guideLanguageName(languages, pref, locale),
     appearance: storedGuideAppearance(),
     showFieldGuide: !fieldGuide,
-    showOffline: offlineOwned,
+    showOffline: true,
     offlineOn: offlineOn,
+    offlineHold: await loadGuideOfflineHold(),
   );
 }
