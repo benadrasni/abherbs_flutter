@@ -8,12 +8,15 @@ import { verifyAdmobCallback } from './admob';
 import {
   hasUnlimitedNames,
   isPlant,
+  meterCounts,
   releaseAnonymousFree,
+  releaseName,
   rememberPhoto,
   reserveCall,
   takeAdGrant,
   takeAnonymousFree,
   takeFreeNotPlant,
+  takeName,
   takeSharedSlot,
   utcDay,
   utcMonth,
@@ -55,21 +58,6 @@ async function addCredit(uid: string, feature: string): Promise<void> {
     .ref(`users/${uid}/credits`)
     .transaction((current) => (typeof current === 'number' ? current : 0) + 1);
   await logCredit(uid, feature);
-}
-
-/** Spends one credit if the balance has one. The handler may first see null. */
-async function spendCredit(uid: string): Promise<{ paid: boolean; left: number }> {
-  let paid = false;
-  const result = await getDatabase()
-    .ref(`users/${uid}/credits`)
-    .transaction((current) => {
-      paid = false;
-      if (typeof current !== 'number' || current <= 0) return current;
-      paid = true;
-      return current - 1;
-    });
-  const left = result.snapshot.val();
-  return { paid: paid && result.committed, left: typeof left === 'number' ? left : 0 };
 }
 
 async function updateQuota<T>(
@@ -145,15 +133,16 @@ export const identifyPlant = onCall(
       }
     }
 
-    let paid = false;
-    let credits: number | undefined;
+    let held = false;
     if (!unlimited && !anonymous) {
-      const spent = await spendCredit(uid);
-      if (!spent.paid) {
-        throw new HttpsError('resource-exhausted', 'no-credits', { reason: 'no-credits' });
+      const taken = await updateQuota<boolean>(quotaRef, (current) => {
+        const result = takeName(current, Date.now());
+        return { state: result.state, value: result.taken };
+      });
+      if (!taken) {
+        throw new HttpsError('resource-exhausted', 'no-names', { reason: 'no-names' });
       }
-      paid = true;
-      credits = spent.left;
+      held = true;
     }
 
     let body: Record<string, unknown>;
@@ -172,9 +161,8 @@ export const identifyPlant = onCall(
       if (!plantIdFinished(body)) throw new Error('Plant.id incomplete');
     } catch (error) {
       logger.error('identifyPlant: Plant.id failed', { uid, error: String(error) });
-      if (paid) {
-        await addCredit(uid, 'refund: search by photo failed');
-        credits = (credits ?? 0) + 1;
+      if (held) {
+        await quotaRef.transaction((current: QuotaState | null) => releaseName(current));
       }
       if (anonymous) await releaseFree();
       throw new HttpsError('unavailable', 'identify-failed');
@@ -186,19 +174,17 @@ export const identifyPlant = onCall(
 
     const suggestions = isPlant(body, isPlantThresholdPercent.value()) ? plantIdSuggestions(body) : [];
 
-    let charged = paid;
-    if (suggestions.length === 0 && paid) {
+    let charged = held;
+    if (suggestions.length === 0 && held) {
       const free = await updateQuota<boolean>(quotaRef, (current) => {
         const taken = takeFreeNotPlant(current, Date.now(), freeNotPlantPerMonth.value());
         return { state: taken.state, value: taken.free };
       });
       if (free) {
-        await addCredit(uid, 'refund: not a plant');
-        credits = (credits ?? 0) + 1;
+        await quotaRef.transaction((current: QuotaState | null) => releaseName(current));
         charged = false;
       }
     }
-    if (charged) await logCredit(uid, 'search by photo');
     if (anonymous && suggestions.length === 0) await releaseFree();
 
     try {
@@ -207,10 +193,12 @@ export const identifyPlant = onCall(
       logger.error('identifyPlant: name tally failed', { error: String(error) });
     }
 
+    const meter = meterCounts((await quotaRef.get()).val() as QuotaState | null, Date.now());
     return {
       isPlant: suggestions.length > 0,
       charged,
-      credits,
+      namesUsed: meter.namesUsed,
+      adGrants: meter.adGrants,
       anonymousFreeUsed: anonymous && suggestions.length > 0,
       suggestions,
     };

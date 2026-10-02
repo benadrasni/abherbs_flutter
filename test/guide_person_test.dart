@@ -197,14 +197,13 @@ void main() {
     );
   });
 
-  test('a photo-storage plan is Field Guide and credits stay names left', () {
+  test('a photo-storage plan is Field Guide and a free account has five names', () {
     final subscribed = guideLiveAllowance(
       signedIn: true,
       subscribed: true,
       unlimitedNames: true,
       noAds: true,
       seenSynced: true,
-      credits: 2,
       now: DateTime(2026, 9, 30),
     );
     expect(subscribed.kind, GuideAllowanceKind.unlimited);
@@ -227,7 +226,6 @@ void main() {
       unlimitedNames: true,
       noAds: false,
       seenSynced: false,
-      credits: 4,
       now: DateTime(2026, 9, 30),
     );
     expect(names.fieldGuide, isFalse);
@@ -239,11 +237,24 @@ void main() {
       unlimitedNames: false,
       noAds: false,
       seenSynced: false,
-      credits: 4,
       now: DateTime(2026, 9, 30),
     );
-    expect(left.kind, GuideAllowanceKind.credits);
-    expect(left.namesLeft, 4);
+    expect(left.kind, GuideAllowanceKind.month);
+    expect(left.includedUsed, 0);
+    expect(left.namesLeft, 5);
+
+    final banked = guideLiveAllowance(
+      signedIn: true,
+      subscribed: false,
+      unlimitedNames: false,
+      noAds: false,
+      seenSynced: false,
+      usedThisMonth: 5,
+      extraFromAds: 1,
+      now: DateTime(2026, 9, 30),
+    );
+    expect(banked.namesLeft, 1);
+    expect(banked.includedUsed, 5);
 
     final guest = guideLiveAllowance(
       signedIn: false,
@@ -251,7 +262,6 @@ void main() {
       unlimitedNames: false,
       noAds: false,
       seenSynced: false,
-      credits: 0,
       now: DateTime(2026, 9, 30),
     );
     expect(guest.kind, GuideAllowanceKind.guest);
@@ -262,7 +272,6 @@ void main() {
       unlimitedNames: true,
       noAds: true,
       seenSynced: true,
-      credits: 2,
       now: DateTime(2026, 9, 30),
     );
     expect(kept.kind, GuideAllowanceKind.unlimited);
@@ -274,7 +283,6 @@ void main() {
       unlimitedNames: false,
       noAds: false,
       seenSynced: false,
-      credits: 4,
       usedThisMonth: 2,
       extraFromAds: 1,
       now: DateTime(2026, 9, 30),
@@ -282,6 +290,23 @@ void main() {
     expect(counted.kind, GuideAllowanceKind.month);
     expect(counted.includedUsed, 2);
     expect(counted.extraUsed, 1);
+    expect(counted.namesLeft, 4);
+  });
+
+  test('a stored month that is not this month counts as unused', () {
+    final stale = guideMonthCountFrom(
+      {'month': '2026-09', 'namesUsed': 5, 'adGrants': 2},
+      DateTime.utc(2026, 10, 2),
+    );
+    expect(stale, GuideMonthCount.empty);
+
+    final current = guideMonthCountFrom(
+      {'month': '2026-10', 'namesUsed': 3, 'adGrants': 1},
+      DateTime.utc(2026, 10, 2, 23),
+    );
+    expect(current.namesUsed, 3);
+    expect(current.adGrants, 1);
+    expect(guideQuotaMonth(DateTime.utc(2026, 10, 2, 23)), '2026-10');
   });
 
   test('theme words follow the choice and the phone', () {

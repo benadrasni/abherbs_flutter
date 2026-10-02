@@ -3,12 +3,16 @@ import { test } from 'node:test';
 import {
   hasUnlimitedNames,
   isPlant,
+  meterCounts,
+  namesRemaining,
   releaseAnonymousFree,
+  releaseName,
   rememberPhoto,
   reserveCall,
   takeAdGrant,
   takeAnonymousFree,
   takeFreeNotPlant,
+  takeName,
   takeSharedSlot,
   type QuotaState,
 } from './quota';
@@ -57,6 +61,43 @@ test('free not-a-plant answers stop at the month cap and reset next month', () =
   }
   assert.deepEqual(frees, [true, true, true, false]);
   assert.equal(takeFreeNotPlant(state, Date.parse('2026-10-01T00:00:00Z'), 3).free, true);
+});
+
+test('a signed-in account has five names, then one more for each ad', () => {
+  let state: QuotaState | null = null;
+  for (let i = 0; i < 5; i++) {
+    const taken = takeName(state, noon);
+    assert.equal(taken.taken, true);
+    state = taken.state;
+  }
+  assert.equal(takeName(state, noon).taken, false);
+  assert.equal(namesRemaining(state, noon), 0);
+
+  const granted = takeAdGrant(state, noon, 5);
+  assert.equal(granted.granted, true);
+  const extra = takeName(granted.state, noon);
+  assert.equal(extra.taken, true);
+  assert.equal(extra.state.namesUsed, 6);
+  assert.equal(namesRemaining(extra.state, noon), 0);
+  assert.equal(takeName(extra.state, noon).taken, false);
+});
+
+test('a failed call or a free not-a-plant gives the name back', () => {
+  const held = takeName(null, noon);
+  assert.equal(releaseName(held.state).namesUsed, 0);
+  assert.equal(releaseName(null).namesUsed, undefined);
+});
+
+test('names and ad grants reset on a new UTC month', () => {
+  const full: QuotaState = {
+    month: '2026-09',
+    namesUsed: 5,
+    adGrants: 2,
+    notPlantFree: 3,
+  };
+  const next = meterCounts(full, Date.parse('2026-10-01T00:00:00Z'));
+  assert.deepEqual(next, { namesUsed: 0, adGrants: 0 });
+  assert.equal(takeName(full, Date.parse('2026-10-01T00:00:00Z')).taken, true);
 });
 
 test('ad grants stop at the month cap', () => {

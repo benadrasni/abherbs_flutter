@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:abherbs_flutter/guide/book_page.dart';
 import 'package:abherbs_flutter/guide/find_page.dart';
+import 'package:abherbs_flutter/guide/guide_camera.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_person.dart';
 import 'package:abherbs_flutter/guide/guide_seen.dart';
@@ -38,10 +39,9 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   GuideBookSegment _bookSegment = GuideBookSegment.families;
   List<GuideFind>? _finds;
   List<GuideSeenFind>? _notebook;
-  int _credits = Auth.credits;
   int _accountTicket = 0;
   StreamSubscription<User?>? _authSub;
-  StreamSubscription<DatabaseEvent>? _creditsSub;
+  StreamSubscription<DatabaseEvent>? _quotaSub;
   StreamSubscription<DatabaseEvent>? _seenRemote;
   StreamSubscription<List<PurchaseDetails>>? _purchaseSub;
   String? _seenWatchUid;
@@ -59,7 +59,8 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     _authSub = Auth.subscribe((user) {
       unawaited(_onAccount(user));
     });
-    _watchCredits();
+    guideMonthCount.addListener(_onMonth);
+    _watchQuota();
     _watchSeenRemote();
     _loadColors();
     _purchaseSub = InAppPurchase.instance.purchaseStream.listen(
@@ -97,8 +98,9 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     GuideTabs.refreshSeen = null;
     GuideTabs.unconfirmed.value = 0;
     guideGuestFreeRemaining.removeListener(_onGuestFree);
+    guideMonthCount.removeListener(_onMonth);
     _authSub?.cancel();
-    _creditsSub?.cancel();
+    _quotaSub?.cancel();
     _seenRemote?.cancel();
     _purchaseSub?.cancel();
     super.dispose();
@@ -155,18 +157,19 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     if (mounted) setState(() {});
   }
 
+  void _onMonth() {
+    if (mounted) setState(() {});
+  }
+
   /// Sign-in finishes after Find has drawn. Reload finds, then the account's
-  /// credits and purchases, and draw those on the camera card.
+  /// photo-name meter, and draw that on the camera card.
   Future<void> _onAccount(User? user) async {
     final ticket = ++_accountTicket;
-    _watchCredits();
+    _watchQuota();
     _watchSeenRemote();
     _resetSeenForUser();
-    if (mounted) {
-      setState(() {
-        if (user == null) _credits = 0;
-      });
-    }
+    if (user == null) guideMonthCount.value = GuideMonthCount.empty;
+    if (mounted) setState(() {});
     final finds = _loadFinds();
     final seen = _opened.contains(2) ? _loadSeen() : _loadUnconfirmed();
     if (user != null) {
@@ -180,30 +183,34 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     await seen;
     if (!mounted || ticket != _accountTicket) return;
     await guideGuestHasFreeName();
-    if (!mounted || ticket != _accountTicket || user == null) return;
-    setState(() => _credits = Auth.credits);
+    if (!mounted || ticket != _accountTicket) return;
+    if (user != null) {
+      final count = await loadGuideMonthCount();
+      if (!mounted || ticket != _accountTicket) return;
+      if (guideMonthCount.value != count) guideMonthCount.value = count;
+    }
+    setState(() {});
   }
 
-  void _watchCredits() {
-    _creditsSub?.cancel();
-    _creditsSub = null;
+  void _watchQuota() {
+    _quotaSub?.cancel();
+    _quotaSub = null;
     final uid = Auth.appUser?.uid;
     if (uid == null) {
-      if (mounted) setState(() => _credits = 0);
+      guideMonthCount.value = GuideMonthCount.empty;
       return;
     }
-    _creditsSub = usersReference
+    _quotaSub = rootReference
+        .child(firebasePhotoQuota)
         .child(uid)
-        .child(firebaseAttributeCredits)
         .onValue
         .listen(
       (event) {
-        final value = event.snapshot.value;
-        final next = value is int ? value : (value is num ? value.toInt() : 0);
-        if (!mounted) return;
-        setState(() => _credits = next);
+        final next = guideMonthCountFrom(event.snapshot.value, DateTime.now());
+        if (guideMonthCount.value == next) return;
+        guideMonthCount.value = next;
       },
-      onError: (Object error) => debugPrint('guide credits: $error'),
+      onError: (Object error) => debugPrint('guide month: $error'),
     );
   }
 
@@ -342,8 +349,9 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
                 colorCounts: _colorCounts,
                 lists: _lists,
                 finds: _finds,
-                credits: _credits,
-                guestFree: guideGuestFreeRemaining.value,
+                allowance: guideCameraLiveAllowance(
+                  guestFree: guideGuestFreeRemaining.value,
+                ),
                 onOpenBook: _openLists,
                 onOpenSeen: () => _go(2),
               ),

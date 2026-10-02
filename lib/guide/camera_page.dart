@@ -120,6 +120,8 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       _guestFree = guideGuestFreeRemembered();
     }
     _readAllowance();
+    guideMonthCount.addListener(_onMonth);
+    if (widget.allowance == null) unawaited(_loadMonth());
     if (widget.place == null) unawaited(_loadPlace());
     final kind = _allowance.kind;
     if (widget.onWatchAd == null &&
@@ -132,6 +134,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
 
   @override
   void dispose() {
+    guideMonthCount.removeListener(_onMonth);
     WidgetsBinding.instance.removeObserver(this);
     _previewEpoch++;
     _camera?.dispose();
@@ -231,6 +234,18 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     unawaited(_resumePreview());
   }
 
+  void _onMonth() {
+    if (!mounted || widget.allowance != null) return;
+    _readAllowance();
+    setState(() {});
+  }
+
+  Future<void> _loadMonth() async {
+    final count = await loadGuideMonthCount();
+    if (!mounted || widget.allowance != null) return;
+    if (guideMonthCount.value != count) guideMonthCount.value = count;
+  }
+
   void _readAllowance() {
     if (widget.allowance != null) return;
     _liveAllowance = guideCameraLiveAllowance(guestFree: _guestFree);
@@ -288,7 +303,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     }
     final done = Completer<void>();
     var earned = false;
-    final before = Auth.credits;
+    final before = guideMonthCount.value.adGrants;
     ad.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (ad) {
         ad.dispose();
@@ -309,7 +324,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       },
     );
     await done.future;
-    if (earned) await Auth.waitForAdReward(before);
+    if (earned) await waitForNameGrant(before);
   }
 
   void _close() {
@@ -473,6 +488,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       case PhotoRefusal.signIn:
         return const GuideCameraOutcome.refused(GuideCameraOutcomeKind.signIn);
       case PhotoRefusal.noCredits:
+      case PhotoRefusal.noNames:
         return const GuideCameraOutcome.refused(GuideCameraOutcomeKind.limit);
       case PhotoRefusal.cooldown:
         return const GuideCameraOutcome.refused(GuideCameraOutcomeKind.tooSoon);

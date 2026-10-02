@@ -1,20 +1,17 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_actions.dart';
+import 'package:abherbs_flutter/guide/guide_camera.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
+import 'package:abherbs_flutter/guide/guide_person.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
-import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:flutter/material.dart';
 
 class FindPage extends StatelessWidget {
   final Map<String, int>? colorCounts;
   final List<GuideListCover>? lists;
   final List<GuideFind>? finds;
-  final int credits;
-
-  /// The guest's one free photo name, before anyone is signed in.
-  final bool guestFree;
+  final GuideAllowance allowance;
   final VoidCallback onOpenBook;
   final VoidCallback onOpenSeen;
 
@@ -23,8 +20,7 @@ class FindPage extends StatelessWidget {
     required this.colorCounts,
     required this.lists,
     required this.finds,
-    required this.credits,
-    this.guestFree = false,
+    this.allowance = const GuideAllowance.guest(),
     required this.onOpenBook,
     required this.onOpenSeen,
   });
@@ -43,7 +39,7 @@ class FindPage extends StatelessWidget {
           onAction: () => openGuideAccount(context),
         ),
         const _SearchButton(),
-        _CameraCard(credits: credits, guestFree: guestFree),
+        _CameraCard(allowance: allowance),
         _KeyCard(colorCounts: colorCounts),
         if (recent.isNotEmpty) ...[
           GuideSectionHeader(
@@ -113,10 +109,9 @@ class _SearchButton extends StatelessWidget {
 }
 
 class _CameraCard extends StatelessWidget {
-  final int credits;
-  final bool guestFree;
+  final GuideAllowance allowance;
 
-  const _CameraCard({required this.credits, required this.guestFree});
+  const _CameraCard({required this.allowance});
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +152,7 @@ class _CameraCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      _Meter(credits: credits, guestFree: guestFree),
+                      _Meter(allowance: allowance),
                     ],
                   ),
                 ),
@@ -184,10 +179,9 @@ class _CameraCard extends StatelessWidget {
 }
 
 class _Meter extends StatelessWidget {
-  final int credits;
-  final bool guestFree;
+  final GuideAllowance allowance;
 
-  const _Meter({required this.credits, required this.guestFree});
+  const _Meter({required this.allowance});
 
   @override
   Widget build(BuildContext context) {
@@ -197,47 +191,32 @@ class _Meter extends StatelessWidget {
       height: 1.2,
       color: colors.onMoss.withValues(alpha: 0.9),
     );
-    if (Purchases.isPhotoSearch()) {
-      return Text(S.of(context).guide_meter_unlimited, style: style);
-    }
-    if (Auth.appUser == null) {
-      if (!guestFree) {
+    final meter = guideCameraMeter(allowance);
+    switch (meter.kind) {
+      case GuideCameraMeterKind.fieldGuide:
+      case GuideCameraMeterKind.unlimited:
+        return Text(S.of(context).guide_meter_unlimited, style: style);
+      case GuideCameraMeterKind.signIn:
         return Text(S.of(context).guide_meter_sign_in, style: style);
-      }
-      return Row(
-        children: [
-          const _Dot(filled: true),
-          const SizedBox(width: 8),
-          Flexible(
-            child: Text(
-              S.of(context).guide_meter_left(1),
-              style: style,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+      case GuideCameraMeterKind.namesLeft:
+        return Row(
+          children: [
+            for (var i = 0; i < meter.dotCount; i++) ...[
+              if (i > 0) const SizedBox(width: 4),
+              _Dot(filled: i < meter.filledDots),
+            ],
+            if (meter.dotCount > 0) const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                S.of(context).guide_meter_left(meter.namesLeft),
+                style: style,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-          ),
-        ],
-      );
+          ],
+        );
     }
-    final left = credits;
-    final filled = left.clamp(0, 5);
-    return Row(
-      children: [
-        for (var i = 0; i < 5; i++) ...[
-          if (i > 0) const SizedBox(width: 4),
-          _Dot(filled: i < filled),
-        ],
-        const SizedBox(width: 8),
-        Flexible(
-          child: Text(
-            S.of(context).guide_meter_left(left),
-            style: style,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      ],
-    );
   }
 }
 

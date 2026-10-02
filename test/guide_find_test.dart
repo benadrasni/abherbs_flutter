@@ -2,6 +2,7 @@ import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/find_page.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
+import 'package:abherbs_flutter/guide/guide_person.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
 import 'package:abherbs_flutter/guide/species_page.dart';
@@ -198,6 +199,12 @@ void main() {
       _page(
         colorCounts: const {'1': 12, '2': 0, '4': 7},
         finds: finds,
+        allowance: const GuideAllowance.unlimited(
+          fieldGuide: false,
+          unlimitedNames: true,
+          noAds: true,
+          seenSynced: false,
+        ),
         lists: [
           _cover(title: '', count: 2, isNew: true, latest: latest),
           _cover(title: 'Alpine flowers', count: 6, year: 2024),
@@ -427,9 +434,30 @@ void main() {
   testWidgets('a first open has one free photo name', (tester) async {
     await _pump(
       tester,
-      _page(finds: const [], lists: const [], guestFree: true),
+      _page(
+        finds: const [],
+        lists: const [],
+        allowance: const GuideAllowance.guest(free: true),
+      ),
     );
     expect(find.text('1 name left'), findsOneWidget);
+    expect(find.text('Sign in to name a photo'), findsNothing);
+  });
+
+  testWidgets('a signed-in month shows the names still left', (tester) async {
+    await _pump(
+      tester,
+      _page(
+        finds: const [],
+        lists: const [],
+        allowance: GuideAllowance.month(
+          used: 2,
+          fromAds: 0,
+          now: DateTime(2026, 9, 30),
+        ),
+      ),
+    );
+    expect(find.text('3 names left'), findsOneWidget);
     expect(find.text('Sign in to name a photo'), findsNothing);
   });
 }
@@ -486,7 +514,7 @@ Widget _page({
   Map<String, int>? colorCounts = const {},
   List<GuideFind>? finds = const [],
   List<GuideListCover>? lists = const [],
-  bool guestFree = false,
+  GuideAllowance allowance = const GuideAllowance.guest(),
   VoidCallback? onOpenBook,
   VoidCallback? onOpenSeen,
 }) {
@@ -504,8 +532,7 @@ Widget _page({
         colorCounts: colorCounts,
         lists: lists,
         finds: finds,
-        credits: 2,
-        guestFree: guestFree,
+        allowance: allowance,
         onOpenBook: onOpenBook ?? () {},
         onOpenSeen: onOpenSeen ?? () {},
       ),

@@ -77,6 +77,8 @@ class GuideAllowance {
         namesLeft = 0,
         resetsOn = null;
 
+  /// [used] is names charged this month. [fromAds] is ad grants earned.
+  /// A grant that has not been spent still counts as a name left.
   GuideAllowance.month({
     required int used,
     required int fromAds,
@@ -84,7 +86,7 @@ class GuideAllowance {
   })  : kind = GuideAllowanceKind.month,
         includedUsed = _clampCount(used, 5),
         extraUsed = _clampCount(fromAds, 5),
-        namesLeft = 0,
+        namesLeft = _namesRemaining(used, fromAds),
         resetsOn = DateTime(now.year, now.month + 1, 1),
         fieldGuide = false,
         unlimitedNames = false,
@@ -107,6 +109,89 @@ int _clampCount(int value, int max) {
   if (value < 0) return 0;
   if (value > max) return max;
   return value;
+}
+
+/// Five included names, plus ad grants, minus names already charged.
+int _namesRemaining(int used, int grants) {
+  final spent = used < 0 ? 0 : used;
+  final left = 5 + _clampCount(grants, 5) - spent;
+  return left < 0 ? 0 : left;
+}
+
+/// `photo_quota/{uid}` for the signed-in month. Find, the camera, and Person
+/// read this. The server is what actually allows the next name.
+class GuideMonthCount {
+  final int namesUsed;
+  final int adGrants;
+
+  const GuideMonthCount({this.namesUsed = 0, this.adGrants = 0});
+
+  static const empty = GuideMonthCount();
+
+  @override
+  bool operator ==(Object other) =>
+      other is GuideMonthCount &&
+      other.namesUsed == namesUsed &&
+      other.adGrants == adGrants;
+
+  @override
+  int get hashCode => Object.hash(namesUsed, adGrants);
+}
+
+final ValueNotifier<GuideMonthCount> guideMonthCount =
+    ValueNotifier<GuideMonthCount>(GuideMonthCount.empty);
+
+/// UTC `yyyy-mm`, matching `photo_quota.month`.
+String guideQuotaMonth(DateTime now) {
+  final utc = now.toUtc();
+  final month = utc.month.toString().padLeft(2, '0');
+  return '${utc.year}-$month';
+}
+
+GuideMonthCount guideMonthCountFrom(Object? raw, DateTime now) {
+  if (raw is! Map) return GuideMonthCount.empty;
+  final month = raw['month'];
+  if (month is! String || month != guideQuotaMonth(now)) {
+    return GuideMonthCount.empty;
+  }
+  return GuideMonthCount(
+    namesUsed: _quotaCount(raw['namesUsed']),
+    adGrants: _quotaCount(raw['adGrants']),
+  );
+}
+
+int _quotaCount(Object? value) {
+  if (value is int) return value < 0 ? 0 : value;
+  if (value is num) return value < 0 ? 0 : value.toInt();
+  return 0;
+}
+
+Future<GuideMonthCount> loadGuideMonthCount() async {
+  final user = Auth.appUser;
+  if (user == null) return GuideMonthCount.empty;
+  try {
+    final event = await rootReference
+        .child(firebasePhotoQuota)
+        .child(user.uid)
+        .get();
+    return guideMonthCountFrom(event.value, DateTime.now());
+  } catch (error) {
+    debugPrint('guide month: $error');
+    return guideMonthCount.value;
+  }
+}
+
+/// AdMob calls `admobReward` a moment after the ad closes. The meter moves
+/// when `adGrants` does.
+Future<void> waitForNameGrant(int grantsBefore) async {
+  for (var i = 0; i < 6; i++) {
+    await Future<void>.delayed(const Duration(seconds: 1));
+    final next = await loadGuideMonthCount();
+    if (next.adGrants != grantsBefore) {
+      guideMonthCount.value = next;
+      return;
+    }
+  }
 }
 
 /// Find and the camera listen so using the free name updates the card.
@@ -188,16 +273,15 @@ void _publishGuestFree(bool free) {
   return (included: 0, extra: 0, rest: 1);
 }
 
-/// The monthly counter is not stored yet. A signed-in account shows the
-/// names it can still use. Pass [usedThisMonth] once that counter exists.
+/// A signed-in free account has five names a month, plus ad grants.
+/// [usedThisMonth] and [extraFromAds] come from `photo_quota`.
 GuideAllowance guideLiveAllowance({
   required bool signedIn,
   required bool subscribed,
   required bool unlimitedNames,
   required bool noAds,
   required bool seenSynced,
-  required int credits,
-  int? usedThisMonth,
+  int usedThisMonth = 0,
   int extraFromAds = 0,
   bool guestFree = false,
   required DateTime now,
@@ -211,14 +295,11 @@ GuideAllowance guideLiveAllowance({
     );
   }
   if (!signedIn) return GuideAllowance.guest(free: guestFree);
-  if (usedThisMonth != null) {
-    return GuideAllowance.month(
-      used: usedThisMonth,
-      fromAds: extraFromAds,
-      now: now,
-    );
-  }
-  return GuideAllowance.credits(credits);
+  return GuideAllowance.month(
+    used: usedThisMonth,
+    fromAds: extraFromAds,
+    now: now,
+  );
 }
 
 String guideFieldGuideDetail({
@@ -429,6 +510,10 @@ Future<GuidePersonView> loadGuidePerson(Locale locale) async {
   final fieldGuide = Purchases.hasFieldGuide();
   final unlimitedNames =
       Purchases.isPhotoSearch() || Purchases.hasLifetimeSubscription;
+  final count = signedIn ? await loadGuideMonthCount() : GuideMonthCount.empty;
+  if (signedIn && guideMonthCount.value != count) {
+    guideMonthCount.value = count;
+  }
   return GuidePersonView(
     account: guideAccountFrom(
       signedIn: signedIn,
@@ -452,7 +537,8 @@ Future<GuidePersonView> loadGuidePerson(Locale locale) async {
       unlimitedNames: unlimitedNames,
       noAds: Purchases.isNoAds() || fieldGuide,
       seenSynced: fieldGuide,
-      credits: Auth.credits,
+      usedThisMonth: count.namesUsed,
+      extraFromAds: count.adGrants,
       guestFree: signedIn ? false : await guideGuestHasFreeName(),
       now: DateTime.now(),
     ),

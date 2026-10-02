@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' show Locale;
 
+import 'package:abherbs_flutter/guide/guide_person.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:cloud_functions/cloud_functions.dart';
@@ -20,7 +21,14 @@ class SearchResult {
 }
 
 /// Why `identifyPlant` did not call Plant.id.
-enum PhotoRefusal { signIn, noCredits, dailyCeiling, cooldown, repeatPhoto }
+enum PhotoRefusal {
+  signIn,
+  noCredits,
+  noNames,
+  dailyCeiling,
+  cooldown,
+  repeatPhoto
+}
 
 PhotoRefusal? _refusal(String? reason) {
   switch (reason) {
@@ -28,6 +36,8 @@ PhotoRefusal? _refusal(String? reason) {
       return PhotoRefusal.signIn;
     case 'no-credits':
       return PhotoRefusal.noCredits;
+    case 'no-names':
+      return PhotoRefusal.noNames;
     case 'daily-ceiling':
       return PhotoRefusal.dailyCeiling;
     case 'cooldown':
@@ -43,9 +53,15 @@ class PhotoIdentification {
   final PhotoRefusal? refusal;
   final bool failed;
 
-  /// A credit was spent. A photo that is not a plant is free only for the
-  /// first few each month.
+  /// A monthly name was used. A photo that is not a plant is free only for
+  /// the first few each month.
   final bool charged;
+
+  /// Names charged this UTC month, when the server sent the meter.
+  final int? namesUsed;
+
+  /// Ad grants earned this UTC month.
+  final int? adGrants;
 
   /// The guest account spent its one free identification on this photo.
   final bool guestFreeUsed;
@@ -56,6 +72,8 @@ class PhotoIdentification {
     this.failed = false,
     this.charged = false,
     this.guestFreeUsed = false,
+    this.namesUsed,
+    this.adGrants,
   });
 }
 
@@ -88,11 +106,8 @@ Future<PhotoIdentification> identifyPlantPhoto({
     )
         .call({'image': base64Encode(bytes), 'language': languageCode});
     final data = jsonDecode(jsonEncode(response.data)) as Map<String, dynamic>;
-    final credits = data['credits'];
-    if (credits is int && Auth.appUser != null) {
-      Auth.credits = credits;
-      onCreditsChanged?.call();
-    }
+    _applyMeter(data);
+    onCreditsChanged?.call();
     final results = <SearchResult>[];
     final suggestions = data['suggestions'];
     if (suggestions is List) {
@@ -108,12 +123,19 @@ Future<PhotoIdentification> identifyPlantPhoto({
       results,
       charged: data['charged'] == true,
       guestFreeUsed: data['anonymousFreeUsed'] == true,
+      namesUsed: _meterInt(data['namesUsed']),
+      adGrants: _meterInt(data['adGrants']),
     );
   } on FirebaseFunctionsException catch (error, stackTrace) {
     final details = error.details;
     final refusal =
         _refusal(details is Map ? details['reason'] : error.message);
     if (error.code == 'resource-exhausted' && refusal != null) {
+      if (refusal == PhotoRefusal.noNames) {
+        final count = await loadGuideMonthCount();
+        guideMonthCount.value = count;
+        onCreditsChanged?.call();
+      }
       return PhotoIdentification(const [], refusal: refusal);
     }
     FirebaseCrashlytics.instance.recordError(error, stackTrace);
@@ -122,6 +144,20 @@ Future<PhotoIdentification> identifyPlantPhoto({
     FirebaseCrashlytics.instance.recordError(error, stackTrace);
     return const PhotoIdentification([], failed: true);
   }
+}
+
+void _applyMeter(Map<String, dynamic> data) {
+  if (Auth.appUser == null) return;
+  final used = _meterInt(data['namesUsed']);
+  final grants = _meterInt(data['adGrants']);
+  if (used == null || grants == null) return;
+  guideMonthCount.value = GuideMonthCount(namesUsed: used, adGrants: grants);
+}
+
+int? _meterInt(Object? value) {
+  if (value is int) return value;
+  if (value is num) return value.toInt();
+  return null;
 }
 
 Future<SearchResult> _readSuggestion(

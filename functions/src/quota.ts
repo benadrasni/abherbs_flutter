@@ -5,6 +5,8 @@ export interface QuotaState {
   month?: string;
   notPlantFree?: number;
   adGrants?: number;
+  /** Plant results, and not-a-plant answers past the free ones, this UTC month. */
+  namesUsed?: number;
   lastCallAt?: number;
   lastHash?: string;
   lastHashAt?: number;
@@ -43,8 +45,50 @@ export function rollOver(state: QuotaState | null, now: number): QuotaState {
     next.month = month;
     next.notPlantFree = 0;
     next.adGrants = 0;
+    next.namesUsed = 0;
   }
   return next;
+}
+
+/** Included photo names each UTC month. Ad grants add up to five more. */
+export const includedNamesPerMonth = 5;
+
+/** Names still available: five included, plus ad grants, minus names already used. */
+export function namesRemaining(state: QuotaState | null, now: number): number {
+  const next = rollOver(state, now);
+  const left = includedNamesPerMonth + (next.adGrants ?? 0) - (next.namesUsed ?? 0);
+  return left > 0 ? left : 0;
+}
+
+/**
+ * Reserves one name before Plant.id. Released when the call fails or the
+ * photo is one of the month's free not-a-plant answers.
+ */
+export function takeName(
+  state: QuotaState | null,
+  now: number,
+): { state: QuotaState; taken: boolean } {
+  const next = rollOver(state, now);
+  const cap = includedNamesPerMonth + (next.adGrants ?? 0);
+  if ((next.namesUsed ?? 0) >= cap) return { state: next, taken: false };
+  next.namesUsed = (next.namesUsed ?? 0) + 1;
+  return { state: next, taken: true };
+}
+
+export function releaseName(state: QuotaState | null): QuotaState {
+  const next: QuotaState = { ...(state ?? {}) };
+  const used = next.namesUsed ?? 0;
+  if (used > 0) next.namesUsed = used - 1;
+  return next;
+}
+
+/** The counters the meter shows, after the UTC month rolls over. */
+export function meterCounts(
+  state: QuotaState | null,
+  now: number,
+): { namesUsed: number; adGrants: number } {
+  const next = rollOver(state, now);
+  return { namesUsed: next.namesUsed ?? 0, adGrants: next.adGrants ?? 0 };
 }
 
 /**

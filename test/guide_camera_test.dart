@@ -179,8 +179,26 @@ void main() {
     expect(guideCameraOffersAd(GuideAllowance.credits(2)), isFalse);
     expect(guideCameraOffersAd(const GuideAllowance.guest()), isFalse);
     expect(
+      guideCameraCanCapture(
+        GuideAllowance.month(used: 5, fromAds: 1, now: DateTime(2026, 9)),
+      ),
+      isTrue,
+    );
+    expect(
+      guideCameraMeter(
+        GuideAllowance.month(used: 5, fromAds: 1, now: DateTime(2026, 9)),
+      ).namesLeft,
+      1,
+    );
+    expect(
       guideCameraOffersAd(
-        GuideAllowance.month(used: 5, fromAds: 4, now: DateTime(2026, 9)),
+        GuideAllowance.month(used: 5, fromAds: 1, now: DateTime(2026, 9)),
+      ),
+      isFalse,
+    );
+    expect(
+      guideCameraOffersAd(
+        GuideAllowance.month(used: 9, fromAds: 4, now: DateTime(2026, 9)),
       ),
       isTrue,
     );
@@ -192,9 +210,15 @@ void main() {
     );
     expect(
       guideCameraNamesExhausted(
-        GuideAllowance.month(used: 5, fromAds: 5, now: DateTime(2026, 9)),
+        GuideAllowance.month(used: 10, fromAds: 5, now: DateTime(2026, 9)),
       ),
       isTrue,
+    );
+    expect(
+      guideCameraNamesExhausted(
+        GuideAllowance.month(used: 5, fromAds: 5, now: DateTime(2026, 9)),
+      ),
+      isFalse,
     );
     expect(
       guideCameraNamesExhausted(
@@ -481,7 +505,7 @@ void main() {
       tester,
       _page(
         allowance: GuideAllowance.month(
-          used: 5,
+          used: 10,
           fromAds: 5,
           now: DateTime(2026, 9),
         ),
@@ -817,7 +841,6 @@ void main() {
       unlimitedNames: false,
       noAds: false,
       seenSynced: false,
-      credits: 0,
       guestFree: true,
       now: DateTime(2026, 9, 30),
     );

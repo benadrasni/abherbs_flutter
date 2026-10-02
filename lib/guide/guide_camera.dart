@@ -126,10 +126,10 @@ GuideCameraMeter guideCameraMeter(GuideAllowance allowance) {
         namesLeft: left,
       );
     case GuideAllowanceKind.month:
-      final left = 5 - allowance.includedUsed;
+      final left = allowance.namesLeft;
       return GuideCameraMeter(
         dotCount: 5,
-        filledDots: left,
+        filledDots: left > 5 ? 5 : left,
         kind: GuideCameraMeterKind.namesLeft,
         namesLeft: left,
       );
@@ -144,7 +144,7 @@ bool guideCameraCanCapture(GuideAllowance allowance) {
     case GuideAllowanceKind.credits:
       return allowance.namesLeft > 0;
     case GuideAllowanceKind.month:
-      return allowance.includedUsed < 5;
+      return allowance.namesLeft > 0;
   }
 }
 
@@ -155,7 +155,7 @@ bool guideCameraOffersAd(GuideAllowance allowance) {
     case GuideAllowanceKind.credits:
       return allowance.namesLeft <= 0;
     case GuideAllowanceKind.month:
-      return allowance.includedUsed >= 5 && allowance.extraUsed < 5;
+      return allowance.namesLeft <= 0 && allowance.extraUsed < 5;
     case GuideAllowanceKind.guest:
     case GuideAllowanceKind.unlimited:
       return false;
@@ -164,20 +164,23 @@ bool guideCameraOffersAd(GuideAllowance allowance) {
 
 bool guideCameraNamesExhausted(GuideAllowance allowance) {
   return allowance.kind == GuideAllowanceKind.month &&
-      allowance.includedUsed >= 5 &&
+      allowance.namesLeft <= 0 &&
       allowance.extraUsed >= 5;
 }
 
 GuideAllowance guideCameraLiveAllowance({bool guestFree = false}) {
   final fieldGuide = Purchases.hasFieldGuide();
+  final signedIn = Auth.appUser != null;
+  final count = guideMonthCount.value;
   return guideLiveAllowance(
-    signedIn: Auth.appUser != null,
+    signedIn: signedIn,
     subscribed: fieldGuide,
     unlimitedNames:
         Purchases.isPhotoSearch() || Purchases.hasLifetimeSubscription,
     noAds: Purchases.isNoAds() || fieldGuide,
     seenSynced: fieldGuide,
-    credits: Auth.credits,
+    usedThisMonth: signedIn ? count.namesUsed : 0,
+    extraFromAds: signedIn ? count.adGrants : 0,
     guestFree: guestFree,
     now: DateTime.now(),
   );
