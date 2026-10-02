@@ -16,10 +16,18 @@ import {
   takeFreeNotPlant,
   takeSharedSlot,
   utcDay,
+  utcMonth,
   type QuotaState,
   type Refusal,
 } from './quota';
 import { plantIdBody, plantIdFinished, plantIdLanguage, plantIdSuggestions, plantIdUrl } from './plantid';
+import {
+  leadingScientificName,
+  nameOutsideBook,
+  nextNameTally,
+  photoLookupKey,
+  photoNameTallyPath,
+} from './tally';
 
 initializeApp();
 
@@ -193,6 +201,12 @@ export const identifyPlant = onCall(
     if (charged) await logCredit(uid, 'search by photo');
     if (anonymous && suggestions.length === 0) await releaseFree();
 
+    try {
+      await tallyOutsideName(suggestions);
+    } catch (error) {
+      logger.error('identifyPlant: name tally failed', { error: String(error) });
+    }
+
     return {
       isPlant: suggestions.length > 0,
       charged,
@@ -202,6 +216,24 @@ export const identifyPlant = onCall(
     };
   },
 );
+
+/**
+ * Counts the leading Plant.id name when `search_photo` has no catalog path.
+ * A species or a higher-taxon list is already in the book. The node is
+ * `photo_name_tally/{yyyy-mm}/{key}` with the Latin name and the month's count.
+ * No photo, place, or account is stored.
+ */
+async function tallyOutsideName(suggestions: Record<string, unknown>[]): Promise<void> {
+  const name = leadingScientificName(suggestions);
+  const key = name === null ? null : photoLookupKey(name);
+  if (name === null || key === null) return;
+  const db = getDatabase();
+  const entry = (await db.ref(`search_photo/${key}`).get()).val();
+  if (!nameOutsideBook(entry)) return;
+  await db.ref(`${photoNameTallyPath}/${utcMonth(Date.now())}/${key}`).transaction((current) =>
+    nextNameTally(current, name),
+  );
+}
 
 /**
  * AdMob rewarded-ad server-side verification callback. The app sets

@@ -19,7 +19,6 @@ import 'package:abherbs_flutter/guide/sign_in_page.dart';
 import 'package:abherbs_flutter/guide/species_page.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/keys.dart';
-import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/purchase/rewarded_ad.dart';
 import 'package:abherbs_flutter/search/plant_id_search.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
@@ -37,8 +36,8 @@ const _scrim = Color(0x66000000);
 enum _Sheet { limit, notPlant }
 
 /// The field-guide camera. Location is asked once. A name in the book opens
-/// that species page. A name outside the book opens Outside the book.
-/// The shipping photo search stays on the drawer.
+/// that species page. A genus or family opens that list. A name outside the
+/// book opens Outside the book.
 class GuideCameraPage extends StatefulWidget {
   final GuideAllowance? allowance;
   final GuideCameraPlace? place;
@@ -739,16 +738,17 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       return;
     }
     unawaited(_openThenPreview(() {
-      return Navigator.push<void>(
+      return openGuideTaxonList(
         context,
-        MaterialPageRoute(
-          builder: (context) => PlantList(
-            const <String, String>{},
-            '',
-            rootReference.child(path),
-          ),
-          settings: const RouteSettings(name: 'PlantList'),
-        ),
+        listPath: path,
+        backLabel: S.of(context).guide_back,
+        onOpenPlant: openGuidePlant,
+        onTryPhoto: (listContext) async {
+          Navigator.of(listContext).popUntil(
+            (route) =>
+                route.settings.name == guideCameraRouteName || route.isFirst,
+          );
+        },
       );
     }));
   }

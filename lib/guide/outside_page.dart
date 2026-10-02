@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/guide/guide_camera.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
+import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -21,6 +22,13 @@ class GuideOutsidePage extends StatefulWidget {
   final void Function(String name)? onOpenSpecies;
   final VoidCallback? onSearch;
 
+  /// Set when Seen opens a find that is already written. The page does not
+  /// save it again.
+  final String? observationId;
+
+  /// A confirmed find keeps Delete and It’s another one, and hides Keep.
+  final bool confirmed;
+
   const GuideOutsidePage({
     super.key,
     required this.outcome,
@@ -33,6 +41,8 @@ class GuideOutsidePage extends StatefulWidget {
     this.onRetarget,
     this.onOpenSpecies,
     this.onSearch,
+    this.observationId,
+    this.confirmed = false,
   });
 
   @override
@@ -55,6 +65,12 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
   @override
   void initState() {
     super.initState();
+    final existing = widget.observationId?.trim() ?? '';
+    if (existing.isNotEmpty) {
+      _id = existing;
+      _saved = Future<void>.value();
+      return;
+    }
     _saved = _save();
   }
 
@@ -257,7 +273,9 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      strings.guide_outside_saved,
+                      widget.confirmed
+                          ? strings.guide_camera_confirmed_line(time)
+                          : strings.guide_outside_saved,
                       style: TextStyle(
                         color: colors.madder,
                         fontWeight: FontWeight.w700,
@@ -278,12 +296,13 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
                       spacing: 8,
                       runSpacing: 8,
                       children: [
-                        _Action(
-                          key: const Key('guide-outside-keep'),
-                          label: strings.guide_outside_keep,
-                          filled: true,
-                          onPressed: _busy ? null : _keep,
-                        ),
+                        if (!widget.confirmed)
+                          _Action(
+                            key: const Key('guide-outside-keep'),
+                            label: strings.guide_outside_keep,
+                            filled: true,
+                            onPressed: _busy ? null : _keep,
+                          ),
                         _Action(
                           key: const Key('guide-outside-another'),
                           label: strings.guide_outside_another,
@@ -329,6 +348,24 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
   }
 }
 
+/// A shutter path is an absolute file. A Seen photo is a path under the
+/// app documents directory, or a catalog storage path.
+Widget _shotPhoto(String? path, double width) {
+  if (path == null || path.isEmpty) return const SizedBox.expand();
+  final direct = File(path);
+  if (direct.existsSync()) {
+    return Image.file(direct, fit: BoxFit.cover, width: width, height: 300);
+  }
+  if (path.startsWith('/')) return const SizedBox.expand();
+  return getImage(
+    path,
+    const SizedBox.expand(),
+    width: width,
+    height: 300,
+    fit: BoxFit.cover,
+  );
+}
+
 class _Shot extends StatelessWidget {
   final String? path;
   final String place;
@@ -347,8 +384,7 @@ class _Shot extends StatelessWidget {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final top = MediaQuery.paddingOf(context).top;
-    final file = path;
-    final hasFile = file != null && file.isNotEmpty && File(file).existsSync();
+    final width = MediaQuery.sizeOf(context).width;
     return SizedBox(
       height: 300,
       child: Stack(
@@ -356,9 +392,7 @@ class _Shot extends StatelessWidget {
         children: [
           ColoredBox(
             color: const Color(0xFF333333),
-            child: hasFile
-                ? Image.file(File(file), fit: BoxFit.cover)
-                : const SizedBox.expand(),
+            child: _shotPhoto(path, width),
           ),
           PositionedDirectional(
             top: top + 10,

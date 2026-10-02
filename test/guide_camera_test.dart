@@ -9,6 +9,7 @@ import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_person.dart';
 import 'package:abherbs_flutter/guide/guide_results.dart';
 import 'package:abherbs_flutter/guide/outside_page.dart';
+import 'package:abherbs_flutter/guide/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -649,6 +650,28 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(opened, 'Asteraceae/Bellis/');
+  });
+
+  testWidgets('a genus or family result opens the guide list', (tester) async {
+    await _show(
+      tester,
+      _page(
+        allowance: GuideAllowance.credits(3),
+        pickPhoto: (_) async => '/tmp/roll.jpg',
+        photoTakenAt: (_) async => null,
+        identify: (_) async =>
+            const GuideCameraOutcome.list('Asteraceae/Bellis/'),
+      ),
+    );
+
+    await tester.tap(find.byKey(const Key('guide-camera-roll')));
+    await tester.pump();
+    await tester.pump();
+
+    expect(find.byType(GuideResultsPage), findsOneWidget);
+    expect(find.text('Bellis'), findsOneWidget);
+    final route = ModalRoute.of(tester.element(find.text('Bellis')));
+    expect(route?.settings.name, guideListRouteName);
   });
 
   testWidgets('a plant outside the book opens its page', (tester) async {

@@ -5,6 +5,7 @@ import 'dart:ui' show PlatformDispatcher;
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_shell.dart';
 import 'package:abherbs_flutter/guide/list_page.dart';
+import 'package:abherbs_flutter/guide/species_page.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
@@ -29,8 +30,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
-import 'detail/plant_detail.dart';
-import 'entity/plant.dart';
 import 'filter/color.dart';
 import 'filter/distribution.dart';
 import 'filter/filter_utils.dart';
@@ -271,15 +270,17 @@ class _AppState extends State<App> {
               }
             });
           case notificationAttributeActionPlant:
-            String name = message.data[notificationAttributeName];
             return notificationPopup(
               _navigatorKey.currentContext!,
               notificationTitle(message),
               notificationBody(message),
             ).then((open) {
               final context = _navigatorKey.currentContext;
-              if (open && context != null) {
-                goToDetail(this, context, Localizations.localeOf(context), name, widget.filter);
+              final route = guideNotificationPlantRoute(
+                message.data[notificationAttributeName],
+              );
+              if (open && context != null && route != null) {
+                Navigator.push(context, route);
               }
             });
           case notificationAttributeActionBrowse:
@@ -399,26 +400,11 @@ class _AppState extends State<App> {
             }
             return null;
           case notificationAttributeActionPlant:
-            String name = notificationData[notificationAttributeName];
-            if (name.isNotEmpty) {
-              rootReference.child(firebasePlants).keepSynced(true);
-              return plantsReference.child(name).once().then((event) {
-                if (event.snapshot.value != null && (event.snapshot.value as Map)['id'] != null) {
-                  Plant plant = Plant.fromJson(event.snapshot.key ?? '', event.snapshot.value as Map);
-                  return Future<MaterialPageRoute<dynamic>>(() {
-                    return MaterialPageRoute(
-                        builder: (context) =>
-                            PlantDetail(Localizations.localeOf(context), Map<String, String>(), plant),
-                        settings: RouteSettings(name: 'PlantDetail'));
-                  });
-                }
-                return Future<MaterialPageRoute<dynamic>>(() {
-                  return MaterialPageRoute(
-                      builder: (context) => Color(Map<String, String>()), settings: RouteSettings(name: 'Color'));
-                });
-              });
-            }
-            return null;
+            final route = guideNotificationPlantRoute(
+              notificationData[notificationAttributeName]?.toString(),
+            );
+            if (route == null) return null;
+            return Future<MaterialPageRoute<dynamic>>.value(route);
           default:
             return null;
         }

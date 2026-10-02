@@ -98,6 +98,7 @@
 
     "ad_rewards": { ".read": false, ".write": false },
     "anonymous_daily": { ".read": false, ".write": false },
+    "photo_name_tally": { ".read": false, ".write": false },
 
     "users": {
       "$uid": {

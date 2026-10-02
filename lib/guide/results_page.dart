@@ -13,7 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 /// A family or genus, on the same page as the key's result list.
-void openGuideTaxonList(
+/// The future completes when that page is closed.
+Future<void> openGuideTaxonList(
   BuildContext context, {
   required String listPath,
   required String backLabel,
@@ -24,7 +25,7 @@ void openGuideTaxonList(
   final latin = guideListLatin(listPath);
   final given = title?.trim() ?? '';
   final language = Localizations.localeOf(context).languageCode;
-  Navigator.push(
+  return Navigator.push(
     context,
     MaterialPageRoute<void>(
       settings: const RouteSettings(name: guideListRouteName),

@@ -2,6 +2,7 @@ import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_camera.dart';
 import 'package:abherbs_flutter/guide/guide_seen.dart';
+import 'package:abherbs_flutter/guide/outside_page.dart';
 import 'package:abherbs_flutter/guide/seen_page.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -543,6 +544,111 @@ void main() {
       ),
       findsOneWidget,
     );
+  });
+
+  testWidgets('an unconfirmed name outside the book opens its page',
+      (tester) async {
+    final opened = <String>[];
+    await _pump(
+      tester,
+      _page(
+        finds: [
+          _find(
+            id: 'out',
+            name: 'Tanacetum corymbosum',
+            when: DateTime(2026, 9, 27, 14, 31),
+            confirmed: false,
+            probability: 0.8,
+            place: 'Middle Europe',
+            others: const [
+              GuideSeenCandidate(
+                latin: 'Leucanthemum vulgare',
+                vernacular: 'oxeye daisy',
+                probability: 0.4,
+                path: 'Leucanthemum vulgare',
+              ),
+            ],
+          ),
+          _find(
+            id: 'book',
+            name: 'Bellis perennis',
+            label: 'daisy',
+            confirmed: false,
+            inBook: true,
+          ),
+        ],
+        onOpen: (_, find) => opened.add(find.id),
+      ),
+    );
+
+    await tester.tap(find.text('Daisy'));
+    await tester.pump();
+    expect(opened, ['book']);
+    expect(find.byKey(const Key('guide-outside-page')), findsNothing);
+
+    await tester.tap(find.text('Tanacetum corymbosum'));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('guide-outside-page')), findsOneWidget);
+    expect(find.text('Saved to Seen · unconfirmed'), findsOneWidget);
+    expect(find.text('Oxeye daisy'), findsOneWidget);
+    expect(find.byKey(const Key('guide-outside-keep')), findsOneWidget);
+    final page = tester.widget<GuideOutsidePage>(find.byType(GuideOutsidePage));
+    expect(page.observationId, 'out');
+    expect(page.confirmed, isFalse);
+    expect(page.onSave, isNull);
+
+    await tester.tap(find.byKey(const Key('guide-outside-close')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('guide-outside-page')), findsNothing);
+    expect(find.text('TO CONFIRM · 2'), findsOneWidget);
+  });
+
+  testWidgets('Not in the book opens Outside the book', (tester) async {
+    final opened = <String>[];
+    await _pump(
+      tester,
+      _page(
+        finds: [
+          _find(
+            id: 'kept',
+            name: 'Tanacetum corymbosum',
+            when: DateTime(2026, 8, 1, 14, 31),
+            place: 'Middle Europe',
+          ),
+          _find(
+            id: 'rose',
+            name: 'Rosa canina',
+            label: 'dog rose',
+            inBook: true,
+          ),
+        ],
+        onOpen: (_, find) => opened.add(find.id),
+      ),
+    );
+
+    await tester.tap(find.byKey(const Key('guide-seen-outside')));
+    await tester.pumpAndSettle();
+
+    expect(opened, isEmpty);
+    expect(find.byKey(const Key('guide-outside-page')), findsOneWidget);
+    expect(find.text('Tanacetum corymbosum'), findsWidgets);
+    expect(find.text('Saved to Seen · unconfirmed'), findsNothing);
+    expect(find.textContaining('Confirmed ·'), findsOneWidget);
+    expect(find.byKey(const Key('guide-outside-keep')), findsNothing);
+    expect(find.byKey(const Key('guide-outside-delete')), findsOneWidget);
+    final page = tester.widget<GuideOutsidePage>(find.byType(GuideOutsidePage));
+    expect(page.observationId, 'kept');
+    expect(page.confirmed, isTrue);
+
+    await tester.tap(find.byKey(const Key('guide-outside-close')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('guide-outside-page')), findsNothing);
+
+    await tester.tap(find.text('Tanacetum corymbosum'));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('guide-outside-page')), findsOneWidget);
+    expect(opened, isEmpty);
   });
 
   testWidgets('hide shared is remembered on the phone', (tester) async {

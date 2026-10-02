@@ -49,6 +49,37 @@ Widget guideSpeciesImage(
   );
 }
 
+/// The guide species page. A one-plant notification uses this route.
+MaterialPageRoute<void> guideSpeciesRoute(
+  String name, {
+  GuideCameraPending? pending,
+  Future<void> Function()? onConfirmPending,
+  Future<void> Function()? onUndoPending,
+  Future<void> Function(String name)? onRetargetPending,
+  VoidCallback? onSearchBook,
+}) {
+  return MaterialPageRoute<void>(
+    settings: const RouteSettings(name: guideSpeciesRouteName),
+    builder: (context) => GuideSpeciesPage(
+      name: name,
+      pending: pending,
+      load: (languageCode) => loadGuideSpecies(name, languageCode),
+      onShowSeen: GuideTabs.showSeen,
+      onConfirmPending: onConfirmPending,
+      onUndoPending: onUndoPending,
+      onRetargetPending: onRetargetPending,
+      onSearchBook: onSearchBook,
+    ),
+  );
+}
+
+/// A notification for one plant. An empty name opens nothing.
+MaterialPageRoute<void>? guideNotificationPlantRoute(String? name) {
+  final trimmed = name?.trim() ?? '';
+  if (trimmed.isEmpty) return null;
+  return guideSpeciesRoute(trimmed);
+}
+
 Future<void> openGuidePlant(
   BuildContext context,
   String name, {
@@ -65,18 +96,13 @@ Future<void> openGuidePlant(
   );
   return Navigator.push(
     context,
-    MaterialPageRoute<void>(
-      settings: const RouteSettings(name: guideSpeciesRouteName),
-      builder: (context) => GuideSpeciesPage(
-        name: name,
-        pending: pending,
-        load: (languageCode) => loadGuideSpecies(name, languageCode),
-        onShowSeen: GuideTabs.showSeen,
-        onConfirmPending: onConfirmPending,
-        onUndoPending: onUndoPending,
-        onRetargetPending: onRetargetPending,
-        onSearchBook: onSearchBook,
-      ),
+    guideSpeciesRoute(
+      name,
+      pending: pending,
+      onConfirmPending: onConfirmPending,
+      onUndoPending: onUndoPending,
+      onRetargetPending: onRetargetPending,
+      onSearchBook: onSearchBook,
     ),
   );
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_actions.dart';
 import 'package:abherbs_flutter/guide/guide_camera.dart';
@@ -23,6 +25,7 @@ class SeenPage extends StatefulWidget {
   final Future<bool> Function(GuideSeenFind find)? onShare;
   final Future<bool> Function(GuideSeenFind find)? onWithdraw;
   final void Function(BuildContext context, GuideSeenFind find)? onOpen;
+  final void Function(BuildContext context, GuideSeenFind find)? onOpenOutside;
   final void Function(BuildContext context)? onCamera;
   final void Function(BuildContext context)? onFieldGuide;
   final void Function(BuildContext context)? onSearch;
@@ -42,6 +45,7 @@ class SeenPage extends StatefulWidget {
     this.onShare,
     this.onWithdraw,
     this.onOpen,
+    this.onOpenOutside,
     this.onCamera,
     this.onFieldGuide,
     this.onSearch,
@@ -227,12 +231,87 @@ class _SeenPageState extends State<SeenPage> {
   }
 
   void _open(GuideSeenFind find) {
+    if (!find.inBook) {
+      final outside = widget.onOpenOutside;
+      if (outside != null) {
+        outside(context, find);
+        return;
+      }
+      unawaited(_openOutside(find));
+      return;
+    }
     final open = widget.onOpen;
     if (open != null) {
       open(context, find);
     } else {
       openGuidePlant(context, find.name);
     }
+  }
+
+  Future<void> _openOutside(GuideSeenFind find) async {
+    final place = find.place?.trim() ?? '';
+    final result = await Navigator.push<GuideOutsideResult>(
+      context,
+      MaterialPageRoute(
+        settings: const RouteSettings(name: guideOutsideRouteName),
+        builder: (routeContext) => GuideOutsidePage(
+          outcome: GuideCameraOutcome.outside(
+            GuideCameraHit(
+              latin: find.name,
+              vernacular: find.label,
+              probability: find.probability,
+            ),
+            [
+              for (final other in find.others)
+                GuideCameraHit(
+                  latin: other.latin,
+                  vernacular: other.vernacular,
+                  probability: other.probability,
+                  path: other.path,
+                ),
+            ],
+          ),
+          photoPath: find.photoPath,
+          when: find.when,
+          place: place.isEmpty
+              ? S.of(context).guide_outside_no_place
+              : place,
+          observationId: find.id,
+          confirmed: find.confirmed,
+          onConfirm: (id) => setGuideCameraConfirmed(
+            id: id,
+            plant: find.name,
+            confirmed: true,
+          ),
+          onDelete: (id) => deleteGuideCameraFind(id: id, plant: find.name),
+          onRetarget: (id, from, to) => retargetGuideCameraFind(
+            id: id,
+            from: from,
+            to: to,
+          ),
+          onOpenSpecies: (name) => openGuidePlant(context, name),
+          onSearch: () {
+            final search = widget.onSearch;
+            if (search != null) {
+              search(context);
+            } else {
+              openGuideSearch(context);
+            }
+          },
+        ),
+      ),
+    );
+    if (!mounted || result == null || result.find) return;
+    final message = result.message;
+    if (message != null && message.isNotEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message)),
+      );
+    }
+    GuideTabs.refreshSeen?.call();
+    final species = result.openSpecies;
+    if (species == null) return;
+    await openGuidePlant(context, species);
   }
 
   Future<void> _confirm(GuideSeenFind find) async {
@@ -698,7 +777,12 @@ class _FindRow extends StatelessWidget {
           ),
           if (chip != null) ...[
             const SizedBox(width: 8),
-            _ShareChip(chip: chip, onShare: onShare, onWithdraw: onWithdraw),
+            _ShareChip(
+              chip: chip,
+              onShare: onShare,
+              onWithdraw: onWithdraw,
+              onOutside: onOpen,
+            ),
           ],
         ],
       ),
@@ -710,11 +794,13 @@ class _ShareChip extends StatelessWidget {
   final GuideSeenChip chip;
   final VoidCallback onShare;
   final VoidCallback onWithdraw;
+  final VoidCallback onOutside;
 
   const _ShareChip({
     required this.chip,
     required this.onShare,
     required this.onWithdraw,
+    required this.onOutside,
   });
 
   @override
@@ -760,10 +846,18 @@ class _ShareChip extends StatelessWidget {
           ),
         );
       case GuideSeenChip.outside:
-        return _Status(
-          label: strings.guide_seen_not_in_book,
-          foreground: colors.ink3,
-          background: colors.paper2,
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
+            key: const Key('guide-seen-outside'),
+            onTap: onOutside,
+            borderRadius: BorderRadius.circular(12),
+            child: _Status(
+              label: strings.guide_seen_not_in_book,
+              foreground: colors.ink3,
+              background: colors.paper2,
+            ),
+          ),
         );
     }
   }

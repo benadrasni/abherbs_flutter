@@ -75,6 +75,14 @@ void main() {
     expect(guideFamilyLatin({'03_Subfamilia': 'Asteroideae'}), isNull);
   });
 
+  test('a one-plant notification opens the guide species page', () {
+    final route = guideNotificationPlantRoute(' Bellis perennis ');
+    expect(route?.settings.name, guideSpeciesRouteName);
+    expect(guideNotificationPlantRoute(''), isNull);
+    expect(guideNotificationPlantRoute('   '), isNull);
+    expect(guideNotificationPlantRoute(null), isNull);
+  });
+
   test('a plant id of zero is still a catalog row', () {
     expect(guidePlantRecord({'id': 0, 'name': 'Acer campestre'}), isTrue);
     expect(guidePlantRecord({'name': 'Missing'}), isFalse);

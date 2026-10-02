@@ -1,6 +1,6 @@
 # Name it from a photo
 
-The camera on Find (`guide_camera_title`, "Name it from a photo") names any plant from a photo with Plant.id (Kindwise). A name in the book opens its species page or list. A name outside the book opens the Outside the book page: the photo just taken, the Latin name, a plain confidence (likely, possible, uncertain), and up to two catalog species as full pages. That find is saved to Seen unconfirmed. Confirm, choose another candidate, and delete are on the page. A catalog species opened from the camera shows the same unconfirmed bar until it is kept.
+The camera on Find (`guide_camera_title`, "Name it from a photo") names any plant from a photo with Plant.id (Kindwise). A name in the book opens its species page or list. A name outside the book opens the Outside the book page: the photo just taken, the Latin name, a plain confidence (likely, possible, uncertain), and up to two catalog species as full pages. That find is saved to Seen unconfirmed. Confirm, choose another candidate, and delete are on the page. Seen opens the same page for an unconfirmed name that is not in the book, and for a confirmed find marked Not in the book. That find is already saved, so the page does not write it again. A catalog species opened from the camera shows the same unconfirmed bar until it is kept.
 
 Since 2026-09-30 the app never calls Plant.id itself. The Cloud Function `identifyPlant` holds the key, checks App Check and the account, counts the allowance, and calls Plant.id. Design background: `REDESIGN.md` (Camera).
 
@@ -47,10 +47,13 @@ TypeScript, Node 22, firebase-functions 7, us-central1. `npm --prefix functions 
 | `photo_quota/{uid}` | `identifyPlant`, `admobReward` | owner read |
 | `ad_rewards/{transactionId}` | `admobReward` | none |
 | `anonymous_daily/{yyyy-mm-dd}` | `identifyPlant` | none |
+| `photo_name_tally/{yyyy-mm}/{key}` | `identifyPlant` | none |
 | `users/{uid}/credits` | functions (grants, refunds); app spends 1 for text search | see rules below |
 | `credits/{uid}/{ts}` | functions and app | owner read; new entries |
 
 `photo_quota/{uid}`: `day`, `dayCalls`, `month`, `notPlantFree`, `adGrants`, `lastCallAt`, `lastHash`, `lastHashAt`, `totalCalls`, `anonymousFreeUsed`. Days and months are UTC.
+
+`photo_name_tally/{yyyy-mm}/{key}` counts leading Plant.id names that are not in the book, for `/add-plant`. `{key}` is the scientific name in lower case with dots removed, the same key as `search_photo`. The value is `{ name, count }`: `name` is the Latin spelling from Plant.id, and `count` is how many photos named it that UTC month. A `search_photo` hit with a species path or a higher-taxon list is already in the book and is not counted. A photo that is not a plant is not counted. The node stores no photo, place, or account. The explicit deny is in the rules files; it is not deployed yet. Until that deploy, the path has no client grant, so clients cannot read or write it. The Cloud Function writes it with the Admin SDK.
 
 Rules files:
 
@@ -61,7 +64,7 @@ Rules files:
 ## App
 
 - `lib/search/plant_id_search.dart`: `identifyPlantPhoto` calls the function and returns `PhotoIdentification` (results, `refusal`, `failed`, `charged`, `guestFreeUsed`). The old drawer screen `lib/search/search_photo.dart` uses only the results.
-- `lib/guide/camera_page.dart`, `lib/guide/guide_camera.dart`, `lib/guide/outside_page.dart`: outcomes `species`, `list`, `outside`, `notPlant` (with `counted`), and the refusals `signIn`, `limit`, `tooSoon`, `samePhoto`, `pausedToday`. `outside` pushes Outside the book (`GuideOutside`). A catalog species from the camera opens `GuideSpeciesPage` with an unconfirmed bar. `openGuideCamera` opens the camera directly; the old purchase dialog and the photo-search promotion are gone from this path. Camera finds are private observations with `confirmed: false`, `source: camera`, and the Plant.id candidates. A photo from the roll keeps the date written in the photo (`DateTimeOriginal`, otherwise `DateTime`); a roll photo with no date, and a shutter photo, use the current time. Close on Outside the book returns to Find. Keep and Delete open Seen.
+- `lib/guide/camera_page.dart`, `lib/guide/guide_camera.dart`, `lib/guide/outside_page.dart`: outcomes `species`, `list`, `outside`, `notPlant` (with `counted`), and the refusals `signIn`, `limit`, `tooSoon`, `samePhoto`, `pausedToday`. `outside` pushes Outside the book (`GuideOutside`). A catalog species from the camera opens `GuideSpeciesPage` with an unconfirmed bar. `openGuideCamera` opens the camera directly; the old purchase dialog and the photo-search promotion are gone from this path. Camera finds are private observations with `confirmed: false`, `source: camera`, and the Plant.id candidates. A photo from the roll keeps the date written in the photo (`DateTimeOriginal`, otherwise `DateTime`); a roll photo with no date, and a shutter photo, use the current time. Close on Outside the book returns to Find when the camera opened it, and back to Seen when Seen opened it. Keep and Delete from the camera open Seen. A name already in Seen is not saved again.
 - `lib/guide/guide_person.dart`: `GuideAllowance.guest(free:)`.
 - `lib/purchase/rewarded_ad.dart`: `tieRewardedAd`. `Auth.waitForAdReward` re-reads credits for a few seconds after the ad.
 - `lib/main.dart`: App Check with Play Integrity and DeviceCheck in release, debug providers in debug builds. App Attest needs the capability on the App ID first.
@@ -89,6 +92,5 @@ Open:
 - Store receipt verification. New buyers of photo search or Field Guide are charged credits until the server can verify purchases.
 - Anonymous accounts pass `auth != null` rules (favorites, public observations). Exclude them with `auth.token.firebase.sign_in_provider != 'anonymous'` where needed.
 - Account deletion leaves `photo_quota/{uid}`.
-- The tally of leading names not in the book (candidates for `/add-plant`) from `REDESIGN.md` is not built.
 - The monthly allowance of 5 from `REDESIGN.md` is not built; signed-in free accounts use credits.
 - Photo-search promotions would need a server setting.

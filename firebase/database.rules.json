@@ -111,6 +111,8 @@
       }
     },
 
+    "photo_name_tally": { ".read": false, ".write": false },
+
     "users": {
       "$uid": {
         ".read": "auth != null && auth.uid == $uid",
