@@ -14,6 +14,7 @@ import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
+import 'package:abherbs_flutter/utils/safe_focus_traversal.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:country_picker/country_picker.dart';
@@ -512,6 +513,12 @@ class _AppState extends State<App> {
       navigatorKey: _navigatorKey,
       locale: localeResolution(_locale, S.delegate.supportedLocales),
       debugShowCheckedModeBanner: false,
+      builder: (BuildContext context, Widget? child) {
+        return FocusTraversalGroup(
+          policy: safeReadingOrderTraversalPolicy,
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
       localizationsDelegates: [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
