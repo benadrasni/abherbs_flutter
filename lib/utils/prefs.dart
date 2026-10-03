@@ -19,8 +19,6 @@
 ///
 library prefs;
 
-import 'dart:async' show Future;
-
 import 'package:shared_preferences/shared_preferences.dart'
     show SharedPreferences;
 
@@ -43,87 +41,10 @@ class Prefs {
     return _prefsInstance!;
   }
 
-  static bool initCalled() => _initCalled;
-
   static bool ready() => _prefsInstance != null;
 
   static void dispose() {
     _prefsInstance = null;
-  }
-
-  static Set<String> getKeys() {
-    assert(_initCalled,
-    'Prefs.init() must be called first in an initState() preferably!');
-    assert(_prefsInstance != null,
-    'Maybe call Prefs.getKeysF() instead. SharedPreferences not ready yet!');
-    return _prefsInstance?.getKeys() ?? {};
-  }
-
-  static Future<Set<String>> getKeysF() async {
-    Set<String> value;
-    if (_prefsInstance == null) {
-      final prefs = await instance;
-      value = prefs.getKeys();
-    } else {
-      // SharedPreferences is available. Ignore init() function.
-      _initCalled = true;
-      value = getKeys();
-    }
-    return value;
-  }
-
-  static bool containsKey(String? key) {
-    if (key == null) {
-      return false;
-    }
-    assert(_initCalled,
-    'Prefs.init() must be called first in an initState() preferably!');
-    assert(_prefsInstance != null,
-    'Maybe call Prefs.containsKeyF() instead. SharedPreferences not ready yet!');
-    return _prefsInstance?.containsKey(key) ?? false;
-  }
-
-  static Future<bool> containsKeyF(String? key) async {
-    bool contains;
-    if (key == null) {
-      return false;
-    }
-    if (_prefsInstance == null) {
-      final prefs = await instance;
-      contains = prefs.containsKey(key);
-    } else {
-      // SharedPreferences is available. Ignore init() function.
-      _initCalled = true;
-      contains = _prefsInstance!.containsKey(key);
-    }
-    return contains;
-  }
-
-  static Object? get(String? key) {
-    if (key == null) {
-      return null;
-    }
-    assert(_initCalled,
-    'Prefs.init() must be called first in an initState() preferably!');
-    assert(_prefsInstance != null,
-    'Maybe call Prefs.getF(key) instead. SharedPreferences not ready yet!');
-    return _prefsInstance?.get(key);
-  }
-
-  static Future<Object?> getF(String? key) async {
-    Object? value;
-    if (key == null) {
-      return null;
-    }
-    if (_prefsInstance == null) {
-      final prefs = await instance;
-      value = prefs.get(key);
-    } else {
-      // SharedPreferences is available. Ignore init() function.
-      _initCalled = true;
-      value = get(key);
-    }
-    return value;
   }
 
   // ignore: avoid_positional_boolean_parameters
@@ -155,17 +76,6 @@ class Prefs {
     return value;
   }
 
-  static int getInt(String? key, [int? defValue]) {
-    if (key == null) {
-      return 0;
-    }
-    assert(_initCalled,
-    'Prefs.init() must be called first in an initState() preferably!');
-    assert(_prefsInstance != null,
-    'Maybe call Prefs.getIntF(key) instead. SharedPreferences not ready yet!');
-    return _prefsInstance?.getInt(key) ?? defValue ?? 0;
-  }
-
   static Future<int> getIntF(String? key, [int? defValue]) async {
     int value;
     if (key == null) {
@@ -177,7 +87,7 @@ class Prefs {
     } else {
       // SharedPreferences is available. Ignore init() function.
       _initCalled = true;
-      value = getInt(key, defValue);
+      value = _prefsInstance?.getInt(key) ?? defValue ?? 0;
     }
     return value;
   }
@@ -273,14 +183,6 @@ class Prefs {
     return prefs.setBool(key, value);
   }
 
-  static Future<bool> setInt(String? key, int? value) async {
-    if (key == null || value == null) {
-      return false;
-    }
-    final prefs = await instance;
-    return prefs.setInt(key, value);
-  }
-
   /// Android doesn't support storing doubles, so it will be stored as a float.
   static Future<bool> setDouble(String? key, double? value) async {
     if (key == null || value == null) {
@@ -306,32 +208,11 @@ class Prefs {
     return prefs.setStringList(key, value);
   }
 
-  /// Use this method to observe modifications that were made in native code
-  /// (without using the plugin) while the app is running.
-  static Future<void> reload() async {
-    final prefs = await instance;
-    return prefs.reload();
-  }
-
   static Future<bool> remove(String? key) async {
     if (key == null) {
       return false;
     }
     final prefs = await instance;
     return prefs.remove(key);
-  }
-
-  static Future<bool> clear() async {
-    final prefs = await instance;
-    return prefs.clear();
-  }
-
-  static bool setPrefix(String prefix, {Set<String>? allowList}) {
-    // setPrefix cannot be called after getInstance
-    final set = !ready();
-    if (set) {
-      SharedPreferences.setPrefix(prefix, allowList: allowList);
-    }
-    return set;
   }
 }

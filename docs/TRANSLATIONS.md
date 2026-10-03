@@ -21,7 +21,7 @@ Not in scope for full body text:
 - The hundreds of Wikidata sitelink codes under `translations/` (labels and Wikipedia URLs only).
 - `*-GT` trees. Those are a cache to delete, not a source to promote.
 
-UI chrome is already translated: ARB files, `web/src/locales.json`, `data/*.json` country names. The gap is **species body text**.
+UI chrome is already translated: ARB files, `web/src/locales.json`. The gap is **species body text**.
 
 Name search (`search_v3`) currently indexes a slightly smaller set (no `ar fa he hi id`). Filling body text does not by itself add those search trees.
 

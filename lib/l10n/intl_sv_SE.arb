@@ -482,6 +482,7 @@
   "guide_person_system": "System",
   "guide_person_offline_on": "Hämtad",
   "guide_person_sign_out_note": "Fynd stannar på ditt konto",
+  "guide_person_delete_note": "Tar bort kontot, fynden och fotona",
   "guide_person_failed": "Kunde inte läsa in ditt konto",
   "guide_sign_in_not_now": "Inte nu",
   "guide_sign_in_free": "Nyckeln och atlasen förblir gratis utan konto.",

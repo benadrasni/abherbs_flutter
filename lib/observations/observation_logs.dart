@@ -37,7 +37,6 @@ class ObservationLogs extends StatefulWidget {
 }
 
 class _ObservationLogsState extends State<ObservationLogs> {
-  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   late DateFormat _dateFormat;
   late Future<DatabaseEvent> _privateStatsF;
   late Future<DatabaseEvent> _publicStatsF;
@@ -764,7 +763,6 @@ class _ObservationLogsState extends State<ObservationLogs> {
     }
 
     return Scaffold(
-      key: _key,
       appBar: AppBar(
         title: Text(S.of(context).observation_stats),
       ),

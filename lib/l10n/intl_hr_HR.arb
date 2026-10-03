@@ -482,6 +482,7 @@
   "guide_person_system": "Sustav",
   "guide_person_offline_on": "Preuzeto",
   "guide_person_sign_out_note": "Nalazi ostaju na vašem računu",
+  "guide_person_delete_note": "Uklanja račun, nalaze i fotografije",
   "guide_person_failed": "Vaš račun nije se učitao",
   "guide_sign_in_not_now": "Ne sada",
   "guide_sign_in_free": "Ključ i atlas ostaju besplatni i bez računa.",

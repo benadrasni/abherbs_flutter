@@ -482,6 +482,7 @@
   "guide_person_system": "Sistēma",
   "guide_person_offline_on": "Lejupielādēts",
   "guide_person_sign_out_note": "Atradumi paliek kontā",
+  "guide_person_delete_note": "Noņem kontu, atradumus un fotoattēlus",
   "guide_person_failed": "Neizdevās ielādēt jūsu kontu",
   "guide_sign_in_not_now": "Ne tagad",
   "guide_sign_in_free": "Noteicējs un atlants paliek bez maksas arī bez konta.",

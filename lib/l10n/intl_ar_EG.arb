@@ -482,6 +482,7 @@
   "guide_person_system": "النظام",
   "guide_person_offline_on": "تم التنزيل",
   "guide_person_sign_out_note": "يبقى العثور في حسابك",
+  "guide_person_delete_note": "يحذف الحساب والعثور والصور",
   "guide_person_failed": "تعذر تحميل حسابك",
   "guide_sign_in_not_now": "ليس الآن",
   "guide_sign_in_free": "يبقى المفتاح والكتاب مجانيين بلا حساب.",

@@ -18,6 +18,7 @@ import 'package:abherbs_flutter/guide/species_page.dart';
 import 'package:abherbs_flutter/main.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
+import 'package:abherbs_flutter/signin/account_deletion.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
@@ -78,6 +79,7 @@ void openGuideAccount(BuildContext context) {
       builder: (context) => GuidePersonPage(
         onSignIn: openGuideSignIn,
         onSignOut: guideSignOut,
+        onDeleteAccount: guideDeleteAccount,
         onRestore: guideRestorePurchases,
         onLanguage: openGuideLanguage,
         onFieldGuide: openGuideFieldGuide,
@@ -89,6 +91,17 @@ void openGuideAccount(BuildContext context) {
 
 Future<void> guideSignOut(BuildContext context) {
   return Auth.signOut();
+}
+
+Future<void> guideDeleteAccount(BuildContext context) async {
+  final result = await confirmAndDeleteAccount(context);
+  if (!context.mounted) {
+    return;
+  }
+  showDeleteAccountResult(context, result);
+  if (result == DeleteAccountResult.success) {
+    Navigator.of(context).pop();
+  }
 }
 
 Future<void> guideRestorePurchases(BuildContext context) async {

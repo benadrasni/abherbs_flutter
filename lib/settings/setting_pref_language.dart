@@ -2,10 +2,7 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/settings/setting_utils.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-
-final countsReference = FirebaseDatabase.instance.ref().child(firebaseCounts);
 
 class SettingPrefLanguage extends StatefulWidget {
   @override

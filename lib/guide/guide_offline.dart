@@ -13,9 +13,6 @@ import 'package:flutter/foundation.dart';
 /// treats 1,000 MB as 1 GB.
 const guideOfflineMbPerPlant = 0.66;
 
-/// Species in that catalog. The whole book prints as about 950 MB.
-const guideOfflineBookPlants = 1433;
-
 class GuideOfflineGroup {
   final String id;
   final List<String> codes;

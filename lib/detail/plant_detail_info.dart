@@ -31,7 +31,7 @@ const String sourceBsbi = "bsbi.org";
 const String sourceBurke = "burkeherbarium.org";
 const String sourceBurkeWashington = "burke.washington.edu";
 
-Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize, GlobalKey<ScaffoldState> key) {
+Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantTranslation> _plantTranslationF, double _fontSize) {
   TextStyle _defaultTextStyle = TextStyle(
     fontSize: _fontSize,
     color: Colors.black,
@@ -64,7 +64,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
             cards.add(Card(
               child: Container(
                 padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                child: _getNames(context, plant, t, key),
+                child: _getNames(context, plant, t),
               ),
             ));
 
@@ -335,7 +335,7 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
       });
 }
 
-Widget _getNames(BuildContext context, Plant plant, PlantTranslation? plantTranslation, GlobalKey<ScaffoldState> key) {
+Widget _getNames(BuildContext context, Plant plant, PlantTranslation? plantTranslation) {
   var names = <Widget>[];
   var label = plantTranslation?.label ?? plant.name;
   names.add(GestureDetector(

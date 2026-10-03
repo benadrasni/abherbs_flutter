@@ -69,7 +69,6 @@ android {
         targetSdk 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
@@ -123,8 +122,5 @@ dependencies {
     // frameworks and kills the process before Application.onCreate. 2.9.1 is the
     // last release without namespaces and still ships Room 2.5 / sqlite 2.3.
     implementation 'androidx.work:work-runtime:2.9.1'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 

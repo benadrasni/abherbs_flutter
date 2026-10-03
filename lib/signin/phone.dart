@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
@@ -18,8 +16,8 @@ class PhoneLoginSignUpPage extends StatefulWidget {
 
 enum FormMode { PHONE, SMS }
 
-const String errorInvalidCredential = 'invalidCredential';
-const String errorInvalidVerificationCode = 'ERROR_INVALID_VERIFICATION_CODE';
+const String errorInvalidCredential = 'invalid-phone-number';
+const String errorInvalidVerificationCode = 'invalid-verification-code';
 
 class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   final _formKey = GlobalKey<FormState>();

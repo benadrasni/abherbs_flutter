@@ -137,7 +137,7 @@ class _PlantDetailState extends State<PlantDetail> {
   Widget _getBody(BuildContext context) {
     switch (_currentIndex) {
       case infoIndex:
-        return getInfo(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize, _key);
+        return getInfo(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize);
       case taxonomyIndex:
         return getTaxonomy(context, widget.myLocale, widget.plant, _plantTranslationF, _fontSize);
       case observationIndex:

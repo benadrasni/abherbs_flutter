@@ -9,8 +9,6 @@ import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
 
-typedef void ChildCallback(int index, DataSnapshot snapshot);
-typedef void ChildMovedCallback(int fromIndex, int toIndex, DataSnapshot snapshot);
 typedef void ValueCallback(DataSnapshot snapshot);
 typedef void ErrorCallback(Object error);
 

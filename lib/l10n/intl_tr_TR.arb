@@ -482,6 +482,7 @@
   "guide_person_system": "Sistem",
   "guide_person_offline_on": "İndirildi",
   "guide_person_sign_out_note": "Kayıtlar hesabınızda kalır",
+  "guide_person_delete_note": "Hesabı, kayıtları ve fotoğrafları siler",
   "guide_person_failed": "Hesabınız yüklenemedi",
   "guide_sign_in_not_now": "Şimdi değil",
   "guide_sign_in_free": "Anahtar ve kitap, hesap olmadan da ücretsiz kalır.",

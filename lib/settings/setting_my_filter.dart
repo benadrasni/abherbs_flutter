@@ -7,9 +7,6 @@ import 'package:abherbs_flutter/settings/setting_utils.dart';
 import 'package:flutter/material.dart';
 
 class SettingMyFilter extends StatefulWidget {
-  final Map<String, String> filter;
-  SettingMyFilter(this.filter);
-
   @override
   _SettingMyFilterState createState() => _SettingMyFilterState();
 }

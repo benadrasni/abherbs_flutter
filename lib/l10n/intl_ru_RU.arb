@@ -482,6 +482,7 @@
   "guide_person_system": "Система",
   "guide_person_offline_on": "Загружено",
   "guide_person_sign_out_note": "Находки остаются в аккаунте",
+  "guide_person_delete_note": "Удаляет аккаунт, находки и фотографии",
   "guide_person_failed": "Не удалось загрузить аккаунт",
   "guide_sign_in_not_now": "Не сейчас",
   "guide_sign_in_free": "Ключ и атлас остаются бесплатными без аккаунта.",

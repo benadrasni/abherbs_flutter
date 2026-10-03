@@ -482,6 +482,7 @@
   "guide_person_system": "System",
   "guide_person_offline_on": "Downloadet",
   "guide_person_sign_out_note": "Fund bliver på din konto",
+  "guide_person_delete_note": "Fjerner kontoen, fundene og fotos",
   "guide_person_failed": "Kunne ikke indlæse din konto",
   "guide_sign_in_not_now": "Ikke nu",
   "guide_sign_in_free": "Nøglen og atlasset forbliver gratis uden en konto.",

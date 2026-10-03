@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/detail/plant_detail_synonyms.dart';
 import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
@@ -107,7 +105,7 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PlantSynonyms(myLocale, plant), settings: RouteSettings(name: 'PlantSynonyms')),
+                    MaterialPageRoute(builder: (context) => PlantSynonyms(plant), settings: RouteSettings(name: 'PlantSynonyms')),
                   );
                 },
               );

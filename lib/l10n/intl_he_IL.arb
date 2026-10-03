@@ -482,6 +482,7 @@
   "guide_person_system": "מערכת",
   "guide_person_offline_on": "הורד",
   "guide_person_sign_out_note": "המציאות נשארות בחשבון",
+  "guide_person_delete_note": "מוחק את החשבון, המציאות והתמונות",
   "guide_person_failed": "לא ניתן לטעון את החשבון",
   "guide_sign_in_not_now": "לא עכשיו",
   "guide_sign_in_free": "המפתח והספר נשארים חינם בלי חשבון.",

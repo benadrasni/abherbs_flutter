@@ -1,8 +1,6 @@
 class Plant{
   final String key;
   int id = 0;
-  int? gbifId;
-  String? usdaId;
   String? ipniId;
   String name = "";
   String? author;
@@ -16,7 +14,6 @@ class Plant{
   List<dynamic> photoUrls = [];
   List<dynamic> videoUrls = [];
   List<dynamic> sourceUrls = [];
-  List<dynamic> synonyms = [];
   List<String> inflorescenceType = [];
   Map<dynamic, dynamic> wikiLinks = {};
 
@@ -35,7 +32,6 @@ class Plant{
     photoUrls = data['photoUrls'] ?? [];
     videoUrls = data['videoUrls'] ?? [];
     sourceUrls = data['sourceUrls'] ?? [];
-    synonyms = data['synonyms'] ?? [];
     inflorescenceType = _stringList(data['inflorescenceType']);
     wikiLinks = data['wikilinks'] ?? [];
   }

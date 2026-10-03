@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/search/search_names.dart';

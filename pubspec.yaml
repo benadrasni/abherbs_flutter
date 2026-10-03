@@ -33,7 +33,6 @@ dependencies:
   cached_network_image: 4.0.2
   url_launcher: 6.3.2
   url_launcher_ios: 6.4.2
-  http: 1.6.0
   share_plus: 13.3.0
   fluttertoast: 10.0.0
   diacritic: 0.1.6
@@ -56,8 +55,6 @@ dependencies:
   community_charts_flutter: 1.0.4
   country_icons: 3.0.0
   wakelock_plus: 1.8.0
-
-  cupertino_icons: 1.0.9
   intl_utils: 2.8.16
 
 dev_dependencies:
@@ -81,7 +78,6 @@ flutter:
 
   assets:
     - res/images/
-    - data/
 
 flutter_intl:
   enabled: true
