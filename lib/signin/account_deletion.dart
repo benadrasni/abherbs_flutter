@@ -96,6 +96,14 @@ Future<DeleteAccountResult> confirmAndDeleteAccount(
     return DeleteAccountResult.canceled;
   }
 
+  final reauthed = await reauthenticateCurrentUser(context);
+  if (!reauthed) {
+    return DeleteAccountResult.canceled;
+  }
+  if (!context.mounted) {
+    return DeleteAccountResult.canceled;
+  }
+
   showDialog<void>(
     context: context,
     barrierDismissible: false,
