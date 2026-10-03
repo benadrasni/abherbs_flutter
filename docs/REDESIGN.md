@@ -44,6 +44,8 @@ The sign-in screen keeps today's four providers. Apple and Google come first as 
 
 On Person, the account header shows who is signed in. The first line is the display name from the provider. With no name, it shows the email; with no email, the phone number. The second line says how the person signed in, for example "anna.novak@gmail.com · Google", or "Email hidden by Apple" when Apple relays the address.
 
+A signed-in Person has **Delete account**. It asks first. Confirming removes the account, observations, photos, and profile data. Purchases stay on the Apple ID and can be restored. A photo-storage subscription is cancelled in iOS Settings if they no longer want to be billed. The phone returns signed out. A guest does not see the row.
+
 The allowance drops when Plant.id returns a result, whether or not they keep the name. The exception is a photo that is probably not a plant: when Plant.id’s `is_plant` probability is below the threshold, the result says to try again closer, nothing is added to Seen, and the allowance stays. The daily ceiling still counts these calls. The threshold is a Cloud Function setting, not an app constant.
 
 At zero included identifications, the sheet offers a verified rewarded ad (one more name, up to five in the month), Field Guide with a 7-day trial, and the key. The key never closes. At ten, the ad option is gone.
@@ -165,4 +167,5 @@ Database additions and changes are allowed when a new page needs a field or node
 | Offline | The whole book, or a floristic region. Each row shows the plants and the space the pictures take. The phone’s region is offered first |
 | Offline · downloading | Middle Europe, about halfway, in megabytes |
 | Offline · add a region | Middle Europe is already stored. Adding the Northeast shows only the plants that are not |
-| Person | Account, allowance, restore, language, theme |
+| Person | Account, allowance, restore, language, theme. Delete account asks first |
+| Person · delete account | The account, observations, photos, and profile go. Purchases stay and can be restored |
