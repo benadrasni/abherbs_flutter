@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:diacritic/diacritic.dart';
