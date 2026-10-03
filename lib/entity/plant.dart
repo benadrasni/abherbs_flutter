@@ -33,7 +33,7 @@ class Plant{
     videoUrls = data['videoUrls'] ?? [];
     sourceUrls = data['sourceUrls'] ?? [];
     inflorescenceType = _stringList(data['inflorescenceType']);
-    wikiLinks = data['wikilinks'] ?? [];
+    wikiLinks = data['wikilinks'] ?? {};
   }
 }
 
