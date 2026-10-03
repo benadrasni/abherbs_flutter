@@ -51,51 +51,6 @@ class PlantTranslation {
     }
   }
 
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> result = {};
-    if (label != null) {
-      result['label'] = label;
-    }
-    result['names'] = names;
-    result['sourceUrls'] = sourceUrls;
-    if (wikipedia != null) {
-      result['wikipedia'] = wikipedia;
-    }
-
-    if (description != null) {
-      result['description'] = description;
-    }
-    if (flower != null) {
-      result['flower'] = flower;
-    }
-    if (inflorescence != null) {
-      result['inflorescence'] = inflorescence;
-    }
-    if (fruit != null) {
-      result['fruit'] = fruit;
-    }
-    if (leaf != null) {
-      result['leaf'] = leaf;
-    }
-    if (stem != null) {
-      result['stem'] = stem;
-    }
-    if (habitat != null) {
-      result['habitat'] = habitat;
-    }
-    if (toxicity != null) {
-      result['toxicity'] = toxicity;
-    }
-    if (herbalism != null) {
-      result['herbalism'] = herbalism;
-    }
-    if (trivia != null) {
-      result['trivia'] = trivia;
-    }
-
-    return result;
-  }
-
   bool isTranslated() {
     return _keepText(description, null) != null &&
         _keepText(flower, null) != null &&

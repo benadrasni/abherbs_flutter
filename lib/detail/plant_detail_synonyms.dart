@@ -7,22 +7,18 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class PlantSynonyms extends StatefulWidget {
-  final Locale myLocale;
   final Plant plant;
 
-  PlantSynonyms(this.myLocale, this.plant);
+  PlantSynonyms(this.plant);
 
   @override
   _PlantSynonymsState createState() => _PlantSynonymsState();
 }
 
 class _PlantSynonymsState extends State<PlantSynonyms> {
-  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _key,
       appBar: AppBar(
         title: Text(S.of(context).plant_synonyms),
       ),

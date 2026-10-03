@@ -14,7 +14,6 @@ const String observationOrder = "order";
 const String observationIndoors = "indoors";
 const String observationStatus = "status";
 const String observationStatusPrivate = "private";
-const String observationStatusPublic = "public";
 const String observationConfirmed = "confirmed";
 const String observationSource = "source";
 const String observationCandidates = "candidates";

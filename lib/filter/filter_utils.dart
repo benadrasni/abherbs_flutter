@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/filter/color.dart';
 import 'package:abherbs_flutter/filter/distribution.dart';
 import 'package:abherbs_flutter/filter/habitat.dart';
@@ -15,7 +13,6 @@ const String filterColor = 'filterColor';
 const String filterHabitat = 'filterHabitat';
 const String filterPetal = 'filterPetal';
 const String filterDistribution = 'filterDistribution';
-const String filterDistribution2 = 'filterDistribution2';
 
 const filterAttributes = [filterColor, filterHabitat, filterPetal, filterDistribution];
 var filterRoutes = <String, MaterialPageRoute<dynamic>>{};
@@ -297,10 +294,6 @@ void onLeftNavigationTap(BuildContext context, Map<String, String> filter, Strin
 }
 
 MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, Map<String, String> filter) {
-  return getFilterRoute(context, filter, _getNextFilterAttribute(filter));
-}
-
-MaterialPageRoute<dynamic> getFirstFilterRoute(BuildContext context, Map<String, String> filter) {
   return getFilterRoute(context, filter, _getNextFilterAttribute(filter));
 }
 

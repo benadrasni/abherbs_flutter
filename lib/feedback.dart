@@ -75,12 +75,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         request: AdRequest(),
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
-            print('$ad loaded.');
             _rewardedAd = ad;
             _numRewardedLoadAttempts = 0;
           },
           onAdFailedToLoad: (LoadAdError error) {
-            print('RewardedAd failed to load: $error');
             _rewardedAd = null;
             _numRewardedLoadAttempts += 1;
             if (_numRewardedLoadAttempts <= maxFailedLoadAttempts) {
@@ -137,7 +135,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final key = new GlobalKey<ScaffoldState>();
     TextStyle feedbackTextStyle = TextStyle(
       fontSize: 18.0,
     );
@@ -147,7 +144,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     );
 
     return Scaffold(
-      key: key,
       appBar: AppBar(
         title: Text(S.of(context).feedback_title),
       ),

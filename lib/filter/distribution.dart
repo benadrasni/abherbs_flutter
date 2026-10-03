@@ -33,10 +33,7 @@ class _DistributionState extends State<Distribution> {
 
   void _openRegion(String region) {
     var route = MaterialPageRoute(builder: (context) => Distribution2(widget.filter, int.parse(region)), settings: RouteSettings(name: 'Distribution2'));
-    filterRoutes[filterDistribution2] = route;
-    Navigator.push(context, route).then((value) {
-      filterRoutes.remove(filterDistribution2);
-    });
+    Navigator.push(context, route);
   }
 
   void _navigate(String value) {
@@ -185,17 +182,12 @@ class _DistributionState extends State<Distribution> {
 
     regionWidgets.add(Container(
         padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 70.0, right: 70.0),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Text(
-              S.of(context).distribution_message,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          ],
+        child: Text(
+          S.of(context).distribution_message,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontStyle: FontStyle.italic,
+          ),
         )));
 
     regionWidgets.add(Container(height: 10.0 + getFABPadding()));
