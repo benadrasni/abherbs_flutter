@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_field_guide.dart';
+import 'package:abherbs_flutter/guide/guide_private_photos.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
@@ -113,6 +114,7 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
       }
     }
     if (!changed && finish.isEmpty) return;
+    if (changed) unawaited(syncGuidePrivatePhotos());
     _applyOwned();
     if (mounted) setState(() {});
     if (finish.isNotEmpty) unawaited(_finish(finish));

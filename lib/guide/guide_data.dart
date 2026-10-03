@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/entity/plant_translation.dart';
 import 'package:abherbs_flutter/filter/filter_utils.dart';
+import 'package:abherbs_flutter/guide/guide_private_photos.dart';
 import 'package:abherbs_flutter/guide/guide_results.dart';
 import 'package:abherbs_flutter/guide/guide_search.dart';
 import 'package:abherbs_flutter/guide/guide_seen.dart';
@@ -1191,6 +1192,7 @@ Future<void> saveGuideSeen(GuideSeenDraft draft) async {
       .child(firebaseAttributeList)
       .child(observation.id)
       .set(json);
+  unawaited(syncGuidePrivatePhotos(onlyId: observation.id));
 }
 
 Future<PlantTranslation> _guideTranslation(String lang, String name) async {

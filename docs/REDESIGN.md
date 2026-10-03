@@ -64,9 +64,9 @@ Confirmed finds show in the book too. A species page has a **Seen by you** line 
 
 A find can also be added without the camera: **Add to Seen** on a species page, with a photo from the gallery or none. Date and place come from the photo’s EXIF when it has them. This is free and does not touch the allowance, because it does not call Plant.id. A place is optional; the old observation form required one.
 
-Seen replaces Observations. Records live where observation records live today, in `observations/by users/{uid}`, for every signed-in account, so a new phone keeps the notebook. Photos stay on the phone. Field Guide adds the photos to the cloud, including those of names that are not in the book. Nothing already in Storage is deleted when a plan lapses; only new photos stop syncing.
+Seen replaces Observations. Records live where observation records live today, in `observations/by users/{uid}`, for every signed-in account, so a new phone keeps the notebook. Photos stay on the phone. While Field Guide is active the app copies each local photo to `private/{uid}/…` in Storage, including a Latin name that is not in the book. That prefix is readable only by the account. The object key mirrors `observations/{uid}/…`. Shared Sightings stay on the public `observations/{uid}/…` path. A second phone saves the file into its documents directory, including after the plan lapses. Nothing already in Storage is deleted when a plan lapses; only new photos stop syncing. Deleting a find, or the account, deletes its private objects.
 
-A Seen record keeps every observation field (`plant`, `date`, `latitude`, `longitude`, `note`, `photoPaths`, `indoors`) and adds `confirmed`, `source` (`camera`, `manual`, `import`), and for camera finds the Plant.id candidates with their likelihood. `plant` may be a Latin name that is not in the book; readers keyed on catalog names (the per-plant index, stats, the reviewer) skip those.
+A Seen record keeps every observation field (`plant`, `date`, `latitude`, `longitude`, `note`, `photoPaths`, `indoors`) and adds `confirmed`, `source` (`camera`, `manual`, `import`), and for camera finds the Plant.id candidates with their likelihood. After every photo of that find is in `private/{uid}/`, the private row also has `photoCloud: true`. Share does not copy that flag. A full save that rewrites the row omits it until the next upload. `plant` may be a Latin name that is not in the book; readers keyed on catalog names (the per-plant index, stats, the reviewer) skip those.
 
 ### Sharing
 
@@ -133,7 +133,7 @@ Database additions and changes are allowed when a new page needs a field or node
 1. **Shell.** Find, Book, and Seen, the type and color, the species page, the three-step key, the region chip (with the remembered region), results in flower now first, lists of flowers, Seen by you, and free search. Seen replaces Observations here: the import, Add to Seen, Share with review, and Sightings on species pages. The current camera and purchases keep working underneath, so this can ship on its own.
 2. **Field Guide.** The new subscription, the grandfather map, banners off the species page, the 7-day trial, and the allowance shown on the camera.
 3. **Camera.** The Cloud Function, anonymous accounts at launch, the account allowance, no charge for a photo that is not a plant, verified ad grants, the tally of names outside the book, Plant.id for any plant, the full page or the short card, and the unconfirmed record in Seen.
-4. **Carry.** Sync of Seen, offline packs (the whole book or a floristic region, with the size of each), the change list for plants added or given new pictures after a pack is stored, and a map of the person’s own finds.
+4. **Carry.** Private Seen photos, including names outside the book, copy to `private/{uid}/` while Field Guide is active. Still to build: floristic-region packs, the change list for plants added or given new pictures after a pack is stored, and a map of the person’s own finds. The whole-book download is already in the app.
 5. **The key on the website.** The three steps on `/identify`, ending on the species page.
 
 ## Mockups

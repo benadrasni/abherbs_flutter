@@ -1,5 +1,6 @@
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/guide/guide_camera.dart';
+import 'package:abherbs_flutter/guide/guide_private_photos.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -142,13 +143,31 @@ List<String> _photoPaths(dynamic raw) {
 }
 
 Future<bool> _uploadPhoto(String path) async {
-  final file = await Offline.getLocalFile(path);
-  if (file == null) return path.startsWith(storageObservations);
+  var file = await Offline.getLocalFile(path);
+  file ??= await fetchGuidePrivatePhoto(path);
+  if (file == null) return _publicObjectExists(path);
   try {
-    final ref = firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket)
-        .ref()
-        .child(path);
+    final ref =
+        firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket)
+            .ref()
+            .child(path);
     await ref.putFile(file);
+    return true;
+  } catch (error) {
+    debugPrint('guide seen photo $path: $error');
+    return false;
+  }
+}
+
+/// A photo already published has no local file on a second phone. Sharing
+/// again can keep that object. A path outside Storage is not one.
+Future<bool> _publicObjectExists(String path) async {
+  if (!path.startsWith(storageObservations)) return false;
+  try {
+    await firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket)
+        .ref()
+        .child(path)
+        .getMetadata();
     return true;
   } catch (error) {
     debugPrint('guide seen photo $path: $error');

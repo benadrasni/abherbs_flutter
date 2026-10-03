@@ -21,7 +21,12 @@ const String observationCandidates = "candidates";
 const String observationSourceCamera = "camera";
 const String observationSourceManual = "manual";
 
-class Observation{
+/// Private row only, set after every photo of that find is in
+/// `private/{uid}/`. A full [Observation.toJson] save omits it, and Share
+/// must not copy it onto a public Sighting.
+const String observationPhotoCloud = "photoCloud";
+
+class Observation {
   String key = "";
   String id = "";
   String plant = "";
@@ -65,7 +70,8 @@ class Observation{
     this.key = key;
     this.id = data[observationId];
     this.plant = data[observationPlant];
-    this.date = DateTime.fromMillisecondsSinceEpoch(data[observationDate][observationTime]);
+    this.date = DateTime.fromMillisecondsSinceEpoch(
+        data[observationDate][observationTime]);
     this.longitude = data[observationLongitude].toDouble();
     this.latitude = data[observationLatitude].toDouble();
     this.note = data[observationNote] ?? "";

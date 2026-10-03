@@ -219,7 +219,7 @@ observations/
   logs/
 ```
 
-Observation fields (`lib/entity/observation.dart`): `id`, `plant`, `date` (legacy Java-style map + `time` millis), `latitude`, `longitude`, `note`, `photoPaths`, `status` (`private` / `public`), `order` (negative timestamp for newest-first), `indoors`.
+Observation fields (`lib/entity/observation.dart`): `id`, `plant`, `date` (legacy Java-style map + `time` millis), `latitude`, `longitude`, `note`, `photoPaths`, `status` (`private` / `public`), `order` (negative timestamp for newest-first), `indoors`. Guide rows also use `confirmed`, `source` (`camera`, `manual`, `import`), and `candidates`. A private row can carry `photoCloud: true` after its photos are in `private/{uid}/`. That flag is not part of `toJson`, so a Share payload and a full rewrite omit it.
 
 `id` is `{uid}_{millis}`. Private rows are owner-only. Publish writes the same payload to `observations/public` with `status: review`; the reviewer (`review_observations.py`) sets `public` or `rejected` via Admin SDK.
 
@@ -251,10 +251,11 @@ gs://abherbs-resources/
     Acer_campestre@400.webp   illustration 400×600
   families/
   observations/{uid}/{Plant_name}/{file}.jpg
+  private/{uid}/{Plant_name}/{file}.jpg
   misc/                     terms, privacy
 ```
 
-Firebase Storage: `photos/`, `families/`, `offline/`, `misc/` are public-read, client-write denied. `observations/{uid}/**` write is that uid only (image, 10 MB). The default bucket `abherbs-backend.appspot.com` is deny-all. Public **listing** of the GCS bucket is IAM, not these rules.
+Firebase Storage: `photos/`, `families/`, `offline/`, `misc/` are public-read, client-write denied. `observations/{uid}/**` is public-read and owner-write (image, 10 MB); shared Sightings use it. `private/{uid}/**` is owner-read and owner-write (image, 10 MB). Field Guide copies a Seen photo there, including a name outside the book. The object key mirrors the `observations/` path. The rule is in `firebase/storage.abherbs-resources.rules`. Deploy that file before a device can read or write `private/`. The default bucket `abherbs-backend.appspot.com` is deny-all. Public **listing** of the GCS bucket is IAM, not these rules.
 
 Local staging on this machine (from `abherbs-auto/constants.py`):
 

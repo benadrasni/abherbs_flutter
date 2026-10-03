@@ -168,6 +168,10 @@ const String storageEndpoint =
 const String storageFamilies = "families/";
 const String storagePhotos = "photos/";
 const String storageObservations = "observations/";
+
+/// Owner-only copies of Seen photos. Shared Sightings stay under
+/// [storageObservations].
+const String storagePrivate = "private/";
 const String defaultExtension = ".webp";
 const String defaultPhotoExtension = ".jpg";
 const String thumbnailsDir = "/.thumbnails";
@@ -446,10 +450,42 @@ DateTime getDateTimeFromExif(IfdTag? dateTime) {
   }
 }
 
+/// Reads a missing local Seen photo from the owner's private Storage
+/// prefix. The field guide sets this. Left unset, [getImage] uses the
+/// public URL, which is how Sightings already load.
+typedef GuidePrivatePhotoFetch = Future<File?> Function(String path);
+
+GuidePrivatePhotoFetch? guidePrivatePhotoFetch;
+
+/// Uploads Seen photos for a Field Guide account. The old observation editor
+/// calls this without importing the guide library.
+typedef GuidePrivatePhotoSync = Future<void> Function({String? onlyId});
+
+GuidePrivatePhotoSync? guideSyncPrivatePhotos;
+
+typedef GuidePrivatePhotoDelete = Future<void> Function(Iterable<String> paths);
+
+GuidePrivatePhotoDelete? guideDeletePrivatePhotos;
+
+void Function(String id)? guideSkipPrivatePhoto;
+
+Future<File?> _localImage(String url) async {
+  final local = await Offline.getLocalFile(url);
+  if (local != null) return local;
+  final fetch = guidePrivatePhotoFetch;
+  if (fetch == null) return null;
+  try {
+    return await fetch(url);
+  } catch (error) {
+    debugPrint('private photo $url: $error');
+    return null;
+  }
+}
+
 Widget getImage(String url, Widget placeholder,
     {double width = 50.0, double height = 50.0, BoxFit fit = BoxFit.contain}) {
   return FutureBuilder<File?>(
-      future: Offline.getLocalFile(url),
+      future: _localImage(url),
       builder: (BuildContext context, AsyncSnapshot<File?> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data != null) {

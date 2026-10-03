@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_person.dart';
+import 'package:abherbs_flutter/guide/guide_private_photos.dart';
 import 'package:abherbs_flutter/guide/guide_results.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
@@ -526,6 +528,7 @@ Future<String?> saveGuideCameraFind(GuideCameraDraft draft) async {
         .child(firebaseAttributeList)
         .child(observation.id)
         .set(json);
+    unawaited(syncGuidePrivatePhotos(onlyId: observation.id));
     return observation.id;
   } catch (error) {
     debugPrint('guide camera save: $error');
@@ -566,6 +569,7 @@ Future<void> deleteGuideCameraFind({
   try {
     final user = guideNotebookUser();
     if (user == null || id.isEmpty) return;
+    skipGuidePrivatePhoto(id);
     final root = privateObservationsReference.child(user.uid);
     final dateRef = root
         .child(firebaseObservationsByDate)
@@ -664,4 +668,5 @@ Future<void> _deleteObservationPhotos(dynamic raw) async {
     final file = File('$root/$path');
     if (await file.exists()) await file.delete();
   }
+  await deleteGuidePrivatePhotos(paths);
 }

@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/guide/find_page.dart';
 import 'package:abherbs_flutter/guide/guide_camera.dart';
 import 'package:abherbs_flutter/guide/guide_data.dart';
 import 'package:abherbs_flutter/guide/guide_person.dart';
+import 'package:abherbs_flutter/guide/guide_private_photos.dart';
 import 'package:abherbs_flutter/guide/guide_seen.dart';
 import 'package:abherbs_flutter/guide/guide_theme.dart';
 import 'package:abherbs_flutter/guide/guide_widgets.dart';
@@ -52,6 +53,10 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    guidePrivatePhotoFetch = fetchGuidePrivatePhoto;
+    guideSyncPrivatePhotos = syncGuidePrivatePhotos;
+    guideDeletePrivatePhotos = deleteGuidePrivatePhotos;
+    guideSkipPrivatePhoto = skipGuidePrivatePhoto;
     GuideAppearanceController.instance.apply(storedGuideAppearance());
     guideGuestFreeRemaining.value = guideGuestFreeRemembered();
     guideGuestFreeRemaining.addListener(_onGuestFree);
@@ -69,7 +74,10 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
           return purchase.status == PurchaseStatus.restored ||
               purchase.status == PurchaseStatus.purchased;
         });
-        if (owned && mounted) setState(() {});
+        if (owned && mounted) {
+          setState(() {});
+          unawaited(syncGuidePrivatePhotos());
+        }
       },
       onError: (Object error) => debugPrint('guide purchases: $error'),
     );
@@ -109,6 +117,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state != AppLifecycleState.resumed) return;
+    unawaited(syncGuidePrivatePhotos());
     if (_opened.contains(2)) unawaited(_loadSeen());
   }
 
@@ -127,6 +136,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
         .child(firebaseAttributeList)
         .onValue
         .listen((_) {
+      guidePrivatePhotosChanged();
       if (_opened.contains(2)) unawaited(_loadSeen());
     }, onError: (Object error) {
       debugPrint('guide seen: $error');
@@ -185,6 +195,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     await guideGuestHasFreeName();
     if (!mounted || ticket != _accountTicket) return;
     if (user != null) {
+      unawaited(syncGuidePrivatePhotos());
       final count = await loadGuideMonthCount();
       if (!mounted || ticket != _accountTicket) return;
       if (guideMonthCount.value != count) guideMonthCount.value = count;
@@ -200,11 +211,8 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
       guideMonthCount.value = GuideMonthCount.empty;
       return;
     }
-    _quotaSub = rootReference
-        .child(firebasePhotoQuota)
-        .child(uid)
-        .onValue
-        .listen(
+    _quotaSub =
+        rootReference.child(firebasePhotoQuota).child(uid).onValue.listen(
       (event) {
         final next = guideMonthCountFrom(event.snapshot.value, DateTime.now());
         if (guideMonthCount.value == next) return;
