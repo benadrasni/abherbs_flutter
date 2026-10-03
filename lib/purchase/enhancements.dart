@@ -183,7 +183,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter), settings: RouteSettings(name: 'SettingMyFilter')),
+                MaterialPageRoute(builder: (context) => SettingMyFilter(), settings: RouteSettings(name: 'SettingMyFilter')),
               );
             },
             child: Text(

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';

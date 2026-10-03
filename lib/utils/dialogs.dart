@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
@@ -77,32 +76,6 @@ Future<void> observationDialog(BuildContext mainContext, GlobalKey<ScaffoldState
       });
 }
 
-Future<void> photoSearchDialog(BuildContext mainContext, GlobalKey<ScaffoldState> key) async {
-  return showDialog(
-      context: mainContext,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(S.of(context).product_photo_search_title),
-          content: Text(S.of(context).photo_search_no_login),
-          actions: [
-            TextButton(
-              child: Text(S.of(context).close.toUpperCase(),
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                  )),
-              onPressed: () {
-                Navigator.of(context).pop();
-                if (key.currentState != null) {
-                  key.currentState!.openDrawer();
-                }
-              },
-            )
-          ],
-        );
-      });
-}
-
 Future<void> favoriteDialog(BuildContext mainContext, GlobalKey<ScaffoldState> key) async {
   return showDialog(
       context: mainContext,
@@ -160,39 +133,6 @@ Future<dynamic> deleteDialog(BuildContext mainContext, String title, String cont
           ],
         );
       });
-}
-
-Future<dynamic> subscriptionDialog(BuildContext mainContext, String title, String content) async {
-  return showDialog<bool>(
-      context: mainContext,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title),
-          content: Text(content),
-          actions: [
-            TextButton(
-              child: Text(S.of(context).product_subscribe.toUpperCase(),
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                  )),
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-            ),
-            TextButton(
-              child: Text(S.of(context).close.toUpperCase(),
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                  )),
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-            )
-          ],
-        );
-      }) as bool;
 }
 
 Future<void> infoDialog(BuildContext mainContext, String title, String content) async {

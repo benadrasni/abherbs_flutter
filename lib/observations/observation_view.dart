@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/observations/observation_map.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/observations/observation_upload.dart';

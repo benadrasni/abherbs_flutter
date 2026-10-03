@@ -31,7 +31,6 @@ class ObservationEdit extends StatefulWidget {
 class _ObservationEditState extends State<ObservationEdit> {
   final ImagePicker _picker = ImagePicker();
 
-  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   late Observation _observation;
   late DateFormat _dateFormat;
   TextEditingController _noteController = TextEditingController();
@@ -92,8 +91,7 @@ class _ObservationEditState extends State<ObservationEdit> {
     }
   }
 
-  Future<void> _getImage(
-      GlobalKey<ScaffoldState> _key, ImageSource source) async {
+  Future<void> _getImage(ImageSource source) async {
     var status = await Permission.accessMediaLocation.status;
     if (!status.isGranted) {
       await Permission.accessMediaLocation.request();
@@ -347,14 +345,14 @@ class _ObservationEditState extends State<ObservationEdit> {
                 GestureDetector(
                   child: Icon(Icons.add_a_photo, size: 80.0),
                   onTap: () {
-                    _getImage(_key, ImageSource.camera);
+                    _getImage(ImageSource.camera);
                   },
                 ),
                 SizedBox(width: 80.0),
                 GestureDetector(
                   child: Icon(Icons.add_photo_alternate, size: 80.0),
                   onTap: () {
-                    _getImage(_key, ImageSource.gallery);
+                    _getImage(ImageSource.gallery);
                   },
                 )
               ]),
@@ -429,20 +427,19 @@ class _ObservationEditState extends State<ObservationEdit> {
         )));
 
     return Scaffold(
-      key: _key,
       appBar: AppBar(
         title: Text(S.of(context).observation),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add_a_photo),
             onPressed: () {
-              _getImage(_key, ImageSource.camera);
+              _getImage(ImageSource.camera);
             },
           ),
           IconButton(
             icon: Icon(Icons.add_photo_alternate),
             onPressed: () {
-              _getImage(_key, ImageSource.gallery);
+              _getImage(ImageSource.gallery);
             },
           ),
           IconButton(
