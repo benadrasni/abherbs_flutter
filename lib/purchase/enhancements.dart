@@ -58,6 +58,11 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
       if (purchaseDetails.status == PurchaseStatus.pending) {
       } else {
+        bool complete = purchaseDetails.pendingCompletePurchase &&
+            purchaseDetails.status != PurchaseStatus.restored;
+        if (complete) {
+          purchaseDetails.pendingCompletePurchase = false;
+        }
         if (purchaseDetails.status == PurchaseStatus.error) {
           _logCancelledPurchaseEvent(_key, purchaseDetails.productID);
         } else if (purchaseDetails.status == PurchaseStatus.purchased) {
@@ -71,7 +76,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
         } else if (purchaseDetails.status == PurchaseStatus.restored) {
           Purchases.purchases[purchaseDetails.productID] = purchaseDetails;
         }
-        if (purchaseDetails.pendingCompletePurchase) {
+        if (complete) {
           await _inAppPurchase.completePurchase(purchaseDetails);
         }
         if (mounted) {
@@ -93,6 +98,12 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     }, onError: (error) {
       // handle error here.
     });
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
   }
 
   Widget _getVideoLink(BuildContext context, ProductDetails product) {

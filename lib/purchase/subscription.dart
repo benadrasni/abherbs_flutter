@@ -45,6 +45,11 @@ class _SubscriptionState extends State<Subscription> {
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
       if (purchaseDetails.status == PurchaseStatus.pending) {
       } else {
+        bool complete = purchaseDetails.pendingCompletePurchase &&
+            purchaseDetails.status != PurchaseStatus.restored;
+        if (complete) {
+          purchaseDetails.pendingCompletePurchase = false;
+        }
         if (purchaseDetails.status == PurchaseStatus.error) {
           _logCancelledSubscriptionEvent(_key, purchaseDetails.productID);
         } else if (purchaseDetails.status == PurchaseStatus.purchased) {
@@ -56,7 +61,7 @@ class _SubscriptionState extends State<Subscription> {
             return;
           }
         }
-        if (purchaseDetails.pendingCompletePurchase) {
+        if (complete) {
           await _inAppPurchase.completePurchase(purchaseDetails);
         }
         if (mounted) {
@@ -98,6 +103,12 @@ class _SubscriptionState extends State<Subscription> {
     }, onError: (error) {
       // handle error here.
     });
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
   }
 
   @override
