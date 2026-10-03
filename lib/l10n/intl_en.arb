@@ -1,6 +1,5 @@
 {
-  "@@locale" : "en",
-
+  "@@locale": "en",
   "legend": "Legend",
   "legend_flower_1": "mature flower",
   "legend_flower_2": "stigma",
@@ -36,7 +35,6 @@
   "legend_inflorescence_scorpioid_thyrse": "scorpioid thyrse",
   "legend_inflorescence_dichasial_thyrse": "dichasial thyrse",
   "legend_inflorescence_double_scorpioid_thyrse": "double scorpioid thyrse",
-
   "enhancements": "Enhancements",
   "settings": "Settings",
   "version": "Version",
@@ -44,7 +42,6 @@
   "about": "About",
   "help": "Help",
   "video": "Watch video about the feature",
-
   "product_restore_purchases": "Restore Purchases",
   "product_no_ads_title": "No unwanted advertisement",
   "product_no_ads_description": "Application won't show advertisement banner at the bottom of the screen.",
@@ -69,10 +66,8 @@
   "product_purchase": "Purchase",
   "product_purchase_failed": "Purchase failed",
   "product_purchased": "Purchased",
-
   "toxicity1": "poisonous",
   "toxicity2": "slightly poisonous",
-
   "pref_language": "Preferred language",
   "my_region": "My region",
   "always_my_region_title": "Always add my region to the filter",
@@ -86,28 +81,24 @@
   "offline_download_fail": "Download failed. Please check your internet connection or free space on device and try again.",
   "offline_delete_message": "Do you want to delete offline data?",
   "offline_download": "Resume download",
-
   "feedback_intro": "You have been contributing to this application since you have installed it on your device, thanks. If you are looking for something more, here are some options:",
   "feedback_review": "You can write a positive review.",
   "feedback_title": "How to contribute",
   "feedback_buy_extended": "You can buy additional functionality like offline mode, search in names or in taxonomy, search by photo, observations and configurable filter.",
   "feedback_run_ads": "You can display full screen advertisement or watch video advertisement to support further development and database enhancement.",
   "feedback_run_ads_fullscreen": "Show a fullscreen advertisement",
-
   "credit_login": "Sign in and earn credits for watching advertisement. With credits you can use some enhancements.",
   "credit_message": "Earn credits for watching advertisement. With credits you can use some enhancements.",
   "credit_count": "Credits: ",
   "credit_ads_video": "Watch ad and earn credits",
   "credit_use_search": "Use 1 credit",
   "credit_use_photo_search": "Use credits",
-
   "auth_sign_in": "Sign in",
   "auth_sign_out": "Sign out",
   "auth_email": "Sign in with email",
   "auth_phone": "Sign in with phone",
   "auth_google": "Sign in with Google",
   "auth_sign_in_failed": "Sign in failed. Check your connection and try again.",
-
   "auth_email_hint": "Email",
   "auth_invalid_email_address": "Enter a valid email address",
   "auth_password_hint": "Password",
@@ -120,7 +111,6 @@
   "auth_reset_password_email_title": "Reset password",
   "auth_reset_password_email_message": "Follow the instructions sent to {email} to reset your password.",
   "auth_resend_email": "Resend Email",
-
   "auth_verify_phone_number": "Verify phone number",
   "auth_verify_phone_number_title": "Enter your phone number",
   "auth_phone_hint": "Phone Number",
@@ -137,49 +127,41 @@
   "auth_delete_account_success": "Account deleted",
   "auth_delete_account_failed": "Could not delete the account. Check your connection and try again.",
   "auth_delete_account_reauth": "Sign in again to delete your account.",
-
   "rate_question": "Is this app helpful?",
   "rate_text": "Author of this application is fueled by positive response from the users. Please send him some starflowers through application store.",
   "rate_never": "Never",
   "rate_later": "Later",
   "rate": "Review",
   "new_version": "New version is available, please update.",
-
   "yes": "Yes",
   "no": "No",
   "close": "Close",
   "pause": "Pause",
   "apply": "Apply",
   "cancel": "Cancel",
-
   "filter_color": "color",
   "filter_habitat": "habitat",
   "filter_petal": "petal",
   "filter_distribution": "distribution",
-
   "color_message": "What's the color of the flower? Choose the closest one.",
   "habitat_message": "What's around you? Identify plant's habitat.",
   "petal_message": "Is the flower zygomorphic? No? Then how many petals does it have?",
   "distribution_message": "Which geographic area should we focus on?",
-
   "color_white": "white",
   "color_yellow": "yellow",
   "color_red": "red, pink",
   "color_blue": "blue, purple",
   "color_green": "green, brown, black",
-
   "habitat_meadow": "meadows or grasslands",
   "habitat_garden": "gardens or fields",
   "habitat_wetland": "moorlands or wetlands",
   "habitat_forest": "woodlands or forests",
   "habitat_rock": "rocks or mountains",
   "habitat_tree": "trees or shrubs",
-
   "petal_4": "4 or less",
   "petal_5": "5",
   "petal_many": "more than 5",
   "petal_zygomorphic": "zygomorphic",
-
   "europe": "Europe",
   "africa": "Africa",
   "asia_temperate": "Asia-Temperate",
@@ -240,14 +222,11 @@
   "eastern_canada": "Eastern Canada",
   "subantarctic_islands": "Subantarctic Islands",
   "antarctic_continent": "Antarctic Continent",
-
   "list_info": "Pick one",
-
   "plant_info": "Info",
   "plant_gallery": "Gallery",
   "plant_taxonomy": "Taxonomy",
   "plant_sources": "Sources",
-
   "plant_height_from": "Height from",
   "plant_height_to": "to",
   "plant_flowering_from": "Flowering from",
@@ -265,7 +244,6 @@
   "plant_scientific_label": "Scientific name",
   "plant_synonyms": "Synonyms",
   "plant_tap_synonyms": "(tap to see all)",
-
   "taxonomy_superregnum": "Domain",
   "taxonomy_regnum": "Kingdom",
   "taxonomy_cladus": "(clade)",
@@ -282,15 +260,12 @@
   "taxonomy_serie": "Serie",
   "taxonomy_subserie": "Subserie",
   "taxonomy_unknown": "unknown",
-
   "snack_no_flowers": "There are no flowers matching criteria.",
   "snack_loading_ad": "Ad is still loading, press button again.",
   "snack_copy": "Copied to Clipboard",
-
   "search": "Search...",
   "search_names": "Search in names",
   "search_taxonomy": "Search in taxonomy",
-
   "observation": "Observation",
   "observations": "Observations",
   "observation_note": "Place for your private note.",
@@ -321,7 +296,6 @@
   "observation_rank": "Rank",
   "observation_observers": "Observers",
   "observation_countries": "Observations by country",
-
   "subscription": "Subscription",
   "subscription_info": "Shared observations are visible only for subscribed users.",
   "subscription_intro1": "Your observation's date, location and note are saved and persisted across devices without subscription, but photos are stored only locally on the device. You will lose connection to them (even photo itself when you shot it from the application) when you clear data, reinstall or switch device.",
@@ -331,32 +305,24 @@
   "subscription_period_year": "year",
   "subscription_disclaimer_android": "First payment will be charged to your Google Play account 30 days after the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the Google Play Store after purchase.",
   "subscription_disclaimer_ios": "Payment will be charged to your Apple ID account after the confirmation of purchase. Subscription automatically renews unless it is canceled at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.",
-
   "terms_of_use": "Terms of use",
   "privacy_policy": "Privacy Policy",
-
   "promotion_title": "Paid feature",
   "promotion_content": "This is a paid feature. You can use it for free until {date}",
-
   "no_connection_title": "Connection",
   "no_connection_content": "This feature doesn't work without Internet connection.",
-
   "photo_search_no_login": "Search by photo is available only for logged users. Please sign in.",
   "photo_search_note": "This is feature works only online. Sometimes it finds exactly what you're looking for, sometimes not even close. I'm totally relying on third party here since they're doing all the hard work. As time goes it should be better and better. Use it wisely and please don't judge the whole application based on this feature. For quality purposes all search results (not photos) will be saved.",
   "photo_search_empty": "AI (artificial intelligence) didn't recognize any particular flower on the picture. Try again with different angle, distance or light conditions. If you already did it looks like AI overlord won't come anytime soon.",
-
   "notification": "Notification",
   "notification_open": "Open",
   "notification_close": "Close",
-
   "custom_lists": "Lists of flowers",
   "new_flowers": "New flowers",
   "common_lists": "Common lists",
-
   "favorite_title": "Favorite flowers",
-  "favorite_empty": "There is no favorite flowers yet.",
+  "favorite_empty": "There are no favorite flowers yet.",
   "favorite_no_login": "List of favorite flowers is available only for logged users. Please sign in.",
-
   "guide_brand_lead": "What’s that ",
   "guide_brand_name": "flower",
   "guide_search": "Search plants, families, genera",
@@ -477,7 +443,6 @@
   "guide_sightings_hint": "Country and month only. Photos under CC0, reviewed before they appear.",
   "guide_species_missing": "This plant isn’t in the book.",
   "guide_species_failed": "Couldn’t load this plant",
-
   "guide_person_your_account": "Your account",
   "guide_person_signed_in": "Signed in",
   "guide_person_google": "Google",
@@ -516,7 +481,6 @@
   "guide_person_offline_on": "Downloaded",
   "guide_person_sign_out_note": "Finds stay on your account",
   "guide_person_failed": "Couldn’t load your account",
-
   "guide_sign_in_not_now": "Not now",
   "guide_sign_in_free": "The key and the book stay free without an account.",
   "guide_sign_in_names": "5 names from photos every month",
@@ -543,7 +507,6 @@
   "guide_sign_in_resend": "Resend code",
   "guide_sign_in_wrong_password": "That password doesn’t match. Reset it, or try another way.",
   "guide_sign_in_short_password": "Use at least 6 characters.",
-
   "guide_camera_close": "Close",
   "guide_camera_field_guide": "Field Guide · unlimited",
   "guide_camera_where": "Add where you took it?",
@@ -647,7 +610,6 @@
   "guide_inflorescence_marked": "{name} · {type}",
   "guide_inflorescence_also": "{name} · {type}, also {others}",
   "guide_inflorescence_solitary": "{name} · a solitary flower, so nothing here is marked",
-
   "guide_field_guide_sub": "For people who carry the book outdoors. Everything that is free stays free.",
   "guide_field_guide_free": "Free",
   "guide_field_guide_adds": "Field Guide adds",
@@ -672,7 +634,6 @@
   "guide_field_guide_unavailable": "The store doesn’t have these plans yet.",
   "guide_field_guide_disclaimer_android": "Payment is charged to your Google Play account. The subscription renews unless you cancel at least 24 hours before the period ends. Manage or cancel it in Google Play.",
   "guide_field_guide_disclaimer_ios": "Payment is charged to your Apple ID. The subscription renews unless you cancel at least 24 hours before the period ends. Manage or cancel it in the App Store.",
-
   "guide_offline_title": "Offline",
   "guide_offline_back": "Person",
   "guide_offline_intro": "Photos, plates and range maps, kept on this phone. The words come with them. A plant that grows in two regions is saved once, so two packs take less room than the sum. Downloads use Wi-Fi.",
