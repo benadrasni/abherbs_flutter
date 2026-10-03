@@ -33,13 +33,11 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
   String? _code;
   int? _token;
 
-  // Initial form is login form
   FormMode _formMode = FormMode.PHONE;
   bool _isLoading = false;
   bool _isWrongNumber = false;
   bool _showResendButton = false;
 
-  // Check if form is valid before perform login or sign up
   bool _validateAndSave() {
     final form = _formKey.currentState;
     if (form != null && form.validate()) {
@@ -49,7 +47,6 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
     return false;
   }
 
-  // Perform login or sign up
   void _validateAndSubmit() async {
     if (_validateAndSave()) {
       setState(() {
@@ -271,8 +268,8 @@ class _PhoneLoginSignUpPageState extends State<PhoneLoginSignUpPage> {
           height: 40.0,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue, // background
-              foregroundColor: Colors.white, // foreground
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
               elevation: 5.0,
               shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
             ),

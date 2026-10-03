@@ -12,7 +12,6 @@ import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
 typedef void ValueCallback(DataSnapshot snapshot);
 typedef void ErrorCallback(Object error);
 
-/// Sorts the results of `query` on the client side using `DataSnapshot.key`.
 class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixin<DatabaseEvent> {
   FirebaseIndexList({
     required this.query,
@@ -47,17 +46,13 @@ class FirebaseIndexList extends ListBase<DataSnapshot> with StreamSubscriberMixi
     });
   }
 
-  /// Database query used to populate the list
   final Query query;
   final Query keyQuery;
 
-  /// Called when the data of the list has finished loading
   final ValueCallback? onValue;
 
-  /// Called when an error is reported (e.g. permission denied)
   final ErrorCallback? onError;
 
-  // ListBase implementation
   final List<DataSnapshot> _snapshots = <DataSnapshot>[];
   final Map<String, int> _keys = <String, int>{};
 
