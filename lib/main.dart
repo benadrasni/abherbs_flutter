@@ -3,14 +3,13 @@ import 'dart:io';
 import 'dart:ui' show PlatformDispatcher;
 
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/guide/guide_actions.dart';
 import 'package:abherbs_flutter/guide/guide_shell.dart';
 import 'package:abherbs_flutter/guide/list_page.dart';
 import 'package:abherbs_flutter/guide/species_page.dart';
-import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/purchase/owned_purchases.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
-import 'package:abherbs_flutter/settings/preferences.dart';
 import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
@@ -32,11 +31,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
-import 'filter/color.dart';
-import 'filter/distribution.dart';
-import 'filter/filter_utils.dart';
-import 'filter/habitat.dart';
-import 'filter/petal.dart';
 import 'firebase_options.dart';
 
 void _iapError() {
@@ -113,28 +107,6 @@ Future<Locale> initializeLocale() async {
   });
 }
 
-Future<Map<String, String>> initializeFilter() async {
-  return Prefs.getBoolF(keyAlwaysMyRegion, false).then((alwaysMyRegionValue) {
-    Map<String, String> filter = {};
-    if (alwaysMyRegionValue) {
-      return Prefs.getStringF(keyMyRegion, '').then((myRegionValue) {
-        if (myRegionValue.isNotEmpty) {
-          filter[filterDistribution] = myRegionValue;
-        }
-        return filter;
-      });
-    }
-    return filter;
-  });
-}
-
-Future<String> initializeRoute() {
-  return Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
-    Preferences.myFilterAttributes = myFilter;
-    return '/guide';
-  });
-}
-
 void main() {
   runZonedGuarded(() {
     WidgetsFlutterBinding.ensureInitialized();
@@ -145,9 +117,7 @@ void main() {
       await AppTrackingTransparency.requestTrackingAuthorization();
       await MobileAds.instance.initialize();
       Locale locale = await initializeLocale();
-      Map<String, String> filter = await initializeFilter();
-      String initialRoute = await initializeRoute();
-      runApp(App(locale, filter, initialRoute));
+      runApp(App(locale));
     }).catchError((error) {
       print('FlutterFire: Caught error in FlutterFire initialization.');
       FirebaseCrashlytics.instance.recordError(error, null);
@@ -163,10 +133,8 @@ void main() {
 
 class App extends StatefulWidget {
   final Locale locale;
-  final Map<String, String> filter;
-  final String initialRoute;
 
-  App(this.locale, this.filter, this.initialRoute);
+  App(this.locale);
 
   static void setLocale(BuildContext context, String language) async {
     _AppState state = context.findAncestorStateOfType<_AppState>()!;
@@ -275,10 +243,9 @@ class _AppState extends State<App> {
                   context,
                   openNew
                       ? guideNewInBookRoute()
-                      : MaterialPageRoute(
-                          builder: (context) =>
-                              PlantList({}, '', rootReference.child(path)),
-                          settings: RouteSettings(name: 'PlantList'),
+                      : guideNotificationListRoute(
+                          path,
+                          title: notificationTitle(message),
                         ),
                 );
               }
@@ -400,28 +367,12 @@ class _AppState extends State<App> {
             }
             if (path.isNotEmpty) {
               rootReference.child(path).keepSynced(true);
-              rootReference.child(firebasePlantHeaders).keepSynced(true);
-              return rootReference.child(path).once().then((event) {
-                var result = event.snapshot.value ?? [];
-                int length = result is List
-                    ? result.fold(0, (t, value) => t + (value == null ? 0 : 1))
-                    : (result as Map).values.length;
-                if (length == 0) {
-                  rootReference
-                      .child(path)
-                      .child("refreshMock")
-                      .set("mock")
-                      .catchError((error) {
-                    FirebaseCrashlytics.instance.log("0-length custom list");
-                  });
-                }
-                return Future<MaterialPageRoute<dynamic>>(() {
-                  return MaterialPageRoute(
-                      builder: (context) =>
-                          PlantList({}, '', rootReference.child(path)),
-                      settings: RouteSettings(name: 'PlantList'));
-                });
-              });
+              return Future<MaterialPageRoute<dynamic>>.value(
+                guideNotificationListRoute(
+                  path,
+                  title: notificationData['title']?.toString(),
+                ),
+              );
             }
             return null;
           case notificationAttributeActionPlant:
@@ -513,21 +464,6 @@ class _AppState extends State<App> {
 
     _locale = widget.locale;
     _subscribeToLanguageTopic(_locale.languageCode);
-
-    Prefs.getStringF(keyRateCount, rateCountInitial.toString()).then((value) {
-      if (int.parse(value) < 0) {
-        Prefs.getStringF(keyRateState, rateStateInitial).then((value) {
-          if (value == rateStateInitial) {
-            Prefs.setString(keyRateState, rateStateShould);
-          }
-        });
-      } else {
-        Prefs.setString(keyRateCount, (int.parse(value) - 1).toString());
-      }
-    }).catchError((_) {
-      // deal with previous int shared preferences
-      Prefs.setString(keyRateCount, rateCountInitial.toString());
-    });
   }
 
   @override
@@ -557,16 +493,12 @@ class _AppState extends State<App> {
         CountryLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      initialRoute: widget.initialRoute,
+      initialRoute: '/guide',
       navigatorObservers: [
         FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
       ],
       routes: {
         '/guide': (context) => const GuideShell(),
-        '/filterColor': (context) => Color(widget.filter),
-        '/filterHabitat': (context) => Habitat(widget.filter),
-        '/filterPetal': (context) => Petal(widget.filter),
-        '/filterDistribution': (context) => Distribution(widget.filter),
       },
     );
   }

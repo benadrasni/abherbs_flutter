@@ -249,6 +249,40 @@ void openGuideResults(
   );
 }
 
+/// A list notification opens the field-guide list for that database path.
+MaterialPageRoute<dynamic> guideNotificationListRoute(
+  String path, {
+  String? title,
+}) {
+  var value = path.trim();
+  if (value.startsWith('/')) value = value.substring(1);
+  final given = title?.trim() ?? '';
+  final parts = value.split('/').where((part) => part.isNotEmpty).toList();
+  final fallback = parts.isEmpty ? '' : parts.last;
+  return MaterialPageRoute<dynamic>(
+    settings: const RouteSettings(name: guideCustomRouteName),
+    builder: (context) {
+      final language = Localizations.localeOf(context).languageCode;
+      return GuideResultsPage(
+        colorId: '',
+        habitatId: null,
+        petalId: '',
+        listTitle: given.isEmpty ? fallback : given,
+        listBackLabel: S.of(context).guide_back,
+        loadResults: (_) =>
+            loadGuideListedPlants(rootReference.child(value), language),
+        loadPrefs: () async => const GuideResultPrefs(),
+        savePrefs: (_) async {},
+        loadSeen: loadGuideSeenNames,
+        loadRegionCounts: () async => const {},
+        locate: () async => null,
+        onOpenPlant: openGuidePlant,
+        onTryPhoto: openGuideCamera,
+      );
+    },
+  );
+}
+
 void openGuideList(
   BuildContext context,
   GuideListCover cover, {

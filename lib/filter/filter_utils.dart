@@ -1,13 +1,4 @@
-import 'package:abherbs_flutter/filter/color.dart';
-import 'package:abherbs_flutter/filter/distribution.dart';
-import 'package:abherbs_flutter/filter/habitat.dart';
-import 'package:abherbs_flutter/filter/petal.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/plant_list.dart';
-import 'package:abherbs_flutter/settings/preferences.dart';
-import 'package:abherbs_flutter/utils/prefs.dart';
-import 'package:abherbs_flutter/utils/utils.dart';
-import 'package:flutter/material.dart';
 
 const String filterColor = 'filterColor';
 const String filterHabitat = 'filterHabitat';
@@ -15,67 +6,11 @@ const String filterPetal = 'filterPetal';
 const String filterDistribution = 'filterDistribution';
 
 const filterAttributes = [filterColor, filterHabitat, filterPetal, filterDistribution];
-var filterRoutes = <String, MaterialPageRoute<dynamic>>{};
 
 String getFilterKey(Map<String, String> filter) {
   return filterAttributes.map((attribute) {
     return filter[attribute] ?? "";
   }).join("_");
-}
-
-Image getFilterLeading(context, filterAttribute) {
-  switch (filterAttribute) {
-    case filterColor:
-      return Image(
-        image: AssetImage('res/images/color.png'),
-        width: 50.0,
-        height: 50.0,
-      );
-    case filterHabitat:
-      return Image(
-        image: AssetImage('res/images/habitat.png'),
-        width: 50.0,
-        height: 50.0,
-      );
-    case filterPetal:
-      return Image(
-        image: AssetImage('res/images/petal.png'),
-        width: 50.0,
-        height: 50.0,
-      );
-    default: // filterDistribution:
-      return Image(
-        image: AssetImage('res/images/distribution.png'),
-        width: 50.0,
-        height: 50.0,
-      );
-  }
-}
-
-String getFilterText(context, filterAttribute) {
-  switch (filterAttribute) {
-    case filterColor:
-      return S.of(context).filter_color;
-    case filterHabitat:
-      return S.of(context).filter_habitat;
-    case filterPetal:
-      return S.of(context).filter_petal;
-    default: // filterDistribution:
-      return S.of(context).filter_distribution;
-  }
-}
-
-String getFilterSubtitle(context, filterAttribute, filterValue) {
-  switch (filterAttribute) {
-    case filterColor:
-      return getFilterColorValue(context, filterValue);
-    case filterHabitat:
-      return getFilterHabitatValue(context, filterValue);
-    case filterPetal:
-      return getFilterPetalValue(context, filterValue);
-    default: // filterDistribution:
-      return getFilterDistributionValue(context, filterValue);
-  }
 }
 
 String getFilterColorValue(context, filterValue) {
@@ -95,41 +30,7 @@ String getFilterColorValue(context, filterValue) {
   }
 }
 
-String getFilterHabitatValue(context, filterValue) {
-  switch (filterValue) {
-    case '1':
-      return S.of(context).habitat_meadow;
-    case '2':
-      return S.of(context).habitat_garden;
-    case '3':
-      return S.of(context).habitat_wetland;
-    case '4':
-      return S.of(context).habitat_forest;
-    case '5':
-      return S.of(context).habitat_rock;
-    case '6':
-      return S.of(context).habitat_tree;
-    default:
-      return "";
-  }
-}
-
-getFilterPetalValue(context, filterValue) {
-  switch (filterValue) {
-    case '1':
-      return S.of(context).petal_4;
-    case '2':
-      return S.of(context).petal_5;
-    case '3':
-      return S.of(context).petal_many;
-    case '4':
-      return S.of(context).petal_zygomorphic;
-    default:
-      return "";
-  }
-}
-
-getFilterDistributionValue(context, filterValue) {
+String getFilterDistributionValue(context, filterValue) {
   switch (filterValue) {
     case '10':
       return S.of(context).northern_europe;
@@ -239,88 +140,4 @@ getFilterDistributionValue(context, filterValue) {
     default:
       return "";
   }
-}
-
-String _getNextFilterAttribute(Map<String, String> filter) {
-  return Preferences.myFilterAttributes.firstWhere((attribute) => !filter.containsKey(attribute), orElse: () => "");
-}
-
-Future<bool> clearFilter(Map<String, String> filter, Function() func) {
-  filter.clear();
-  return Prefs.getBoolF(keyAlwaysMyRegion, false).then((value) {
-    if (value) {
-      Prefs.getStringF(keyMyRegion).then((value) {
-        if (value.isNotEmpty) {
-          filter[filterDistribution] = value;
-        }
-        func();
-      });
-    } else {
-      func();
-    }
-    return true;
-  });
-}
-
-List<BottomNavigationBarItem> getBottomNavigationBarItems(BuildContext context, Map<String, String> filter) {
-  var attrToAsset = {filterColor: 'color', filterHabitat: 'habitat', filterPetal: 'petal', filterDistribution: 'distribution'};
-  return Preferences.myFilterAttributes.map((filterAttribute) {
-    return BottomNavigationBarItem(
-        icon: Image(
-          image: AssetImage(filter[filterAttribute] == null
-              ? 'res/images/' + attrToAsset[filterAttribute]! + '_50.png'
-              : 'res/images/' + attrToAsset[filterAttribute]! + '.png'),
-          width: 25.0,
-          height: 25.0,
-        ),
-        label: getFilterText(context, filterAttribute));
-  }).toList();
-}
-
-void onBottomNavigationBarTap(BuildContext context, Map<String, String> filter, int index, int currentIndex) {
-  if (index != currentIndex) {
-    if (currentIndex == -1) {
-      Navigator.pushReplacement(
-          context, getFilterRoute(context, filter, Preferences.myFilterAttributes.elementAt(index)));
-    } else {
-      Navigator.push(
-          context, getFilterRoute(context, filter, Preferences.myFilterAttributes.elementAt(index)));
-    }
-  }
-}
-
-void onLeftNavigationTap(BuildContext context, Map<String, String> filter, String filterAttribute) {
-  Navigator.push(context, getFilterRoute(context, filter, filterAttribute));
-}
-
-MaterialPageRoute<dynamic> getNextFilterRoute(BuildContext context, Map<String, String> filter) {
-  return getFilterRoute(context, filter, _getNextFilterAttribute(filter));
-}
-
-MaterialPageRoute<dynamic> getFilterRoute(BuildContext context, Map<String, String> filter, String filterAttribute) {
-  var route;
-
-  switch (filterAttribute) {
-    case filterColor:
-      route = MaterialPageRoute(builder: (context) => Color(filter), settings: RouteSettings(name: 'Color'));
-      break;
-    case filterHabitat:
-      route = MaterialPageRoute(builder: (context) => Habitat(filter), settings: RouteSettings(name: 'Habitat'));
-      break;
-    case filterPetal:
-      route = MaterialPageRoute(builder: (context) => Petal(filter), settings: RouteSettings(name: 'Petal'));
-      break;
-    case filterDistribution:
-      route = MaterialPageRoute(builder: (context) => Distribution(filter), settings: RouteSettings(name: 'Distribution'));
-      break;
-    default:
-      route = MaterialPageRoute(builder: (context) => PlantList(filter, '', keysReference.child(getFilterKey(filter))), settings: RouteSettings(name: 'PlantList'));
-  }
-  if (filterAttribute.isEmpty) {
-    if (filterRoutes.containsKey(filterAttribute) && filterRoutes[filterAttribute]!.isActive) {
-      Navigator.removeRoute(context, filterRoutes[filterAttribute]!);
-    }
-    filterRoutes[filterAttribute] = route;
-  }
-  return route;
 }

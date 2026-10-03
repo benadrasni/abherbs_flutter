@@ -1,27 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:abherbs_flutter/custom_list.dart';
-import 'package:abherbs_flutter/detail/plant_detail.dart';
-import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/keys.dart';
-import 'package:abherbs_flutter/observations/observations.dart';
-import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/search/search.dart';
-import 'package:abherbs_flutter/search/search_photo.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
-import 'package:abherbs_flutter/signin/authentication.dart';
-import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:exif/exif.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../feedback.dart';
 
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
@@ -157,8 +144,6 @@ const String termsOfUseUrl =
     "https://storage.googleapis.com/abherbs-resources/misc/TermsOfServiceofWhatsthatflower.htm";
 const String privacyPolicyUrl =
     "https://storage.googleapis.com/abherbs-resources/misc/PrivacyPolicyofWhatsthatflower.htm";
-const String googleMapsEndpoint =
-    "https://maps.googleapis.com/maps/api/staticmap?";
 const String storageBucket = "gs://abherbs-resources";
 const String storageEndpoint =
     "https://storage.googleapis.com/abherbs-resources/";
@@ -381,17 +366,6 @@ void launchURL(String path) async {
   }
 }
 
-String getMapImageUrl(
-    double latitude, double longitude, double width, double height) {
-  String url = googleMapsEndpoint;
-  url += 'zoom=11';
-  url += '&size=' + width.round().toString() + 'x' + height.round().toString();
-  url +=
-      '&markers=color:red|' + latitude.toString() + ',' + longitude.toString();
-  url += '&key=' + mapsAPIKey;
-  return url;
-}
-
 double getLatitudeFromExif(IfdTag? latitudeRef, IfdTag? latitude) {
   if (latitude != null) {
     double latDegrees = latitude.values.toList()[0].numerator /
@@ -554,259 +528,6 @@ String getTaxonLabel(BuildContext context, String taxon) {
   }
 }
 
-Widget getProductIcon(BuildContext context, String productId) {
-  switch (productId) {
-    case productSearch:
-      return Icon(Icons.search);
-    case productCustomFilter:
-      return Icon(Icons.search);
-    case productOffline:
-      return Icon(Icons.signal_wifi_off);
-    case productObservations:
-      return Icon(Icons.remove_red_eye);
-    case productPhotoSearch:
-      return Icon(Icons.photo_camera);
-    case subscriptionMonthly:
-      return Icon(Icons.calendar_today);
-    case subscriptionYearly:
-      return Icon(Icons.calendar_today);
-    default:
-      // productNoAdsAndroid, productNoAdsIOS
-      return Icon(Icons.remove_shopping_cart);
-  }
-}
-
-String getProductTitle(
-    BuildContext context, String productId, String defaultTitle) {
-  switch (productId) {
-    case productNoAdsAndroid:
-    case productNoAdsIOS:
-      return S.of(context).product_no_ads_title;
-    case productSearch:
-      return S.of(context).product_search_title;
-    case productCustomFilter:
-      return S.of(context).product_custom_filter_title;
-    case productOffline:
-      return S.of(context).product_offline_title;
-    case productObservations:
-      return S.of(context).product_observations_title;
-    case productPhotoSearch:
-      return S.of(context).product_photo_search_title;
-    case subscriptionMonthly:
-      return S.of(context).subscription_monthly_title;
-    case subscriptionYearly:
-      return S.of(context).subscription_yearly_title;
-    default:
-      return defaultTitle;
-  }
-}
-
-String getProductDescription(
-    BuildContext context, String productId, String defaultDescription) {
-  switch (productId) {
-    case productNoAdsAndroid:
-    case productNoAdsIOS:
-      return S.of(context).product_no_ads_description;
-    case productSearch:
-      return S.of(context).product_search_description;
-    case productCustomFilter:
-      return S.of(context).product_custom_filter_description;
-    case productOffline:
-      return S.of(context).product_offline_description;
-    case productObservations:
-      return S.of(context).product_observations_description;
-    case productPhotoSearch:
-      return S.of(context).product_photo_search_description;
-    case subscriptionMonthly:
-      return S.of(context).subscription_monthly_description;
-    case subscriptionYearly:
-      return S.of(context).subscription_yearly_description;
-    default:
-      return defaultDescription;
-  }
-}
-
-Icon getIcon(String productId) {
-  switch (productId) {
-    case productSearch:
-      return Icon(Icons.search);
-    case productObservations:
-      return Icon(Icons.remove_red_eye);
-    case productPhotoSearch:
-      return Icon(Icons.photo_camera);
-    default:
-      return Icon(Icons.mood_bad);
-  }
-}
-
-List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
-    Map<String, String> filter) {
-  var _actions = <Widget>[];
-
-  // search by photo
-  _actions.add(IconButton(
-    icon: getIcon(productPhotoSearch),
-    onPressed: () {
-      Connectivity().checkConnectivity().then((result) {
-        if (result.contains(ConnectivityResult.none)) {
-          infoDialog(mainContext, S.of(mainContext).no_connection_title,
-              S.of(mainContext).no_connection_content);
-        } else {
-          if (Purchases.isPhotoSearch()) {
-            Navigator.push(
-              mainContext,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      SearchPhoto(Localizations.localeOf(context)),
-                  settings: RouteSettings(name: 'SearchPhoto')),
-            );
-          } else {
-            infoBuyDialog(
-                    mainContext,
-                    S.of(mainContext).product_photo_search_title,
-                    S.of(mainContext).product_photo_search_description,
-                    remoteConfigSearchByPhotoVideo,
-                    S.of(mainContext).credit_use_photo_search)
-                .then((value) {
-              if (value == 2) {
-                Navigator.push(
-                  mainContext,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          SearchPhoto(Localizations.localeOf(context)),
-                      settings: RouteSettings(name: 'SearchPhoto')),
-                );
-              }
-            });
-          }
-        }
-      });
-    },
-  ));
-
-  // observations
-  _actions.add(IconButton(
-    icon: getIcon(productObservations),
-    onPressed: () {
-      Connectivity().checkConnectivity().then((result) {
-        if (result.contains(ConnectivityResult.none)) {
-          infoDialog(mainContext, S.of(mainContext).no_connection_title,
-              S.of(mainContext).no_connection_content);
-        } else {
-          if (Purchases.isObservations()) {
-            if (Auth.appUser != null) {
-              Navigator.push(
-                mainContext,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        Observations(Localizations.localeOf(context), false),
-                    settings: RouteSettings(name: 'Observations')),
-              );
-            } else {
-              observationDialog(mainContext, key);
-            }
-          } else {
-            infoBuyDialog(
-                mainContext,
-                S.of(mainContext).product_observations_title,
-                S.of(mainContext).product_observations_description,
-                remoteConfigObservationsVideo,
-                '');
-          }
-        }
-      });
-    },
-  ));
-
-  // search by name or taxonomy
-  _actions.add(IconButton(
-    icon: getIcon(productSearch),
-    onPressed: () {
-      if (Purchases.isSearch()) {
-        Navigator.push(
-          mainContext,
-          MaterialPageRoute(
-              builder: (context) => Search(Localizations.localeOf(context)),
-              settings: RouteSettings(name: 'Search')),
-        );
-      } else {
-        infoBuyDialog(
-                mainContext,
-                S.of(mainContext).product_search_title,
-                S.of(mainContext).product_search_description,
-                remoteConfigSearchByNameVideo,
-                S.of(mainContext).credit_use_search)
-            .then((value) {
-          if (value == 2) {
-            if (Auth.appUser != null && Auth.credits > 0) {
-              Auth.spendCredit("search");
-              Navigator.push(
-                mainContext,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        Search(Localizations.localeOf(context)),
-                    settings: RouteSettings(name: 'Search')),
-              );
-            } else {
-              Navigator.push(
-                mainContext,
-                MaterialPageRoute(
-                    builder: (context) => FeedbackScreen(filter),
-                    settings: RouteSettings(name: 'Feedback')),
-              );
-            }
-          }
-        });
-      }
-    },
-  ));
-
-  // favorites
-  _actions.add(IconButton(
-    icon: Icon(Icons.list),
-    onPressed: () {
-      Navigator.push(
-        mainContext,
-        MaterialPageRoute(
-            builder: (context) =>
-                CustomListScreen(Localizations.localeOf(context)),
-            settings: RouteSettings(name: 'CustomList')),
-      );
-    },
-  ));
-
-  return _actions;
-}
-
-void goToDetail(State state, BuildContext context, Locale myLocale, String name,
-    Map<String, String> filter) {
-  plantsReference.child(name).once().then((event) {
-    if (event.snapshot.value != null &&
-        (event.snapshot.value as Map)['id'] != null) {
-      if (state.mounted) {
-        Plant plant = Plant.fromJson(
-            event.snapshot.key ?? '', event.snapshot.value as Map);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => PlantDetail(myLocale, filter, plant),
-              settings: RouteSettings(name: 'PlantDetail')),
-        );
-      }
-    } else {
-      plantsReference.child(name).keepSynced(true);
-      final code = getLanguageCode(myLocale.languageCode);
-      translationsReference.child(code).child(name).keepSynced(true);
-      if (code != languageEnglish) {
-        translationsReference
-            .child(languageEnglish)
-            .child(name)
-            .keepSynced(true);
-      }
-    }
-  });
-}
-
 String getLanguageCode(String code) {
   return code == 'nb' ? 'no' : code;
 }
@@ -838,10 +559,6 @@ String webPageUrl(String path, String languageCode) {
 
 String webPlantUrl(String latinName, String languageCode) {
   return webPageUrl('plant/${Uri.encodeComponent(latinName)}', languageCode);
-}
-
-double getFABPadding() {
-  return Purchases.isNoAds() ? 0.0 : 50.0;
 }
 
 Future<bool> verifyPurchase(PurchaseDetails purchaseDetails) {
