@@ -91,7 +91,6 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     }, onDone: () {
       _subscription.cancel();
     }, onError: (error) {
-      // handle error here.
     });
   }
 
@@ -116,7 +115,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     if (value.isNotEmpty) {
       button = TextButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Theme.of(context).secondaryHeaderColor, // background
+          backgroundColor: Theme.of(context).secondaryHeaderColor,
         ),
         child: Text(S.of(context).video,
             style: TextStyle(
@@ -136,7 +135,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
     buttons.add(
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: isPurchased ? Theme.of(context).secondaryHeaderColor : Theme.of(context).primaryColor, // background
+          backgroundColor: isPurchased ? Theme.of(context).secondaryHeaderColor : Theme.of(context).primaryColor,
         ),
         onPressed: () {
           if (!isPurchased) {
@@ -161,7 +160,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
         case productOffline:
           buttons.add(ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).primaryColor, // background
+              backgroundColor: Theme.of(context).primaryColor,
             ),
             onPressed: () {
               Navigator.push(
@@ -178,7 +177,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
         case productCustomFilter:
           buttons.add(ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).primaryColor, // background
+              backgroundColor: Theme.of(context).primaryColor,
             ),
             onPressed: () {
               Navigator.push(
@@ -196,7 +195,7 @@ class _EnhancementsScreenState extends State<EnhancementsScreen> {
           if (!Purchases.hasLifetimeSubscription) {
             buttons.add(ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).primaryColor, // background
+                backgroundColor: Theme.of(context).primaryColor,
               ),
               onPressed: () {
                 Navigator.push(

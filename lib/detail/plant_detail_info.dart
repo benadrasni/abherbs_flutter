@@ -232,7 +232,6 @@ Widget getInfo(BuildContext context, Locale myLocale, Plant plant, Future<PlantT
               ),
             ));
 
-            // optional attributes
             if (t.toxicity != null) {
               cards.add(Card(
                 child: Container(

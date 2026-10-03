@@ -123,7 +123,6 @@ class _ObservationEditState extends State<ObservationEdit> {
         }
       }
 
-      // store file
       var dir = storageObservations +
           Auth.appUser!.uid +
           '/' +
@@ -144,7 +143,6 @@ class _ObservationEditState extends State<ObservationEdit> {
       File(image.path).copy('$rootPath/$dir/$filename');
       _observation.photoPaths.add('$dir/$filename');
 
-      // store exif data
       if (exifData.isNotEmpty) {
         var latitude = getLatitudeFromExif(
             exifData['GPS GPSLatitudeRef'], exifData['GPS GPSLatitude']);
@@ -296,7 +294,6 @@ class _ObservationEditState extends State<ObservationEdit> {
                         () => _observation.date = dt ?? DateTime.now()),
                   ),
                 ),
-                //Text(_timeFormat.format(_observation.date)),
               ],
             );
           }),

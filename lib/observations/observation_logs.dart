@@ -350,7 +350,6 @@ class _ObservationLogsState extends State<ObservationLogs> {
                 }
                 markers[markerId] = Marker(
                   markerId: markerId,
-                  //draggable: true,
                   position: LatLng(
                     observation.latitude,
                     observation.longitude,

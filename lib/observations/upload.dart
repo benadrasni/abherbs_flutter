@@ -85,11 +85,9 @@ class Upload {
 
     observation.status = firebaseValueReview;
 
-    // save to public
     await publicObservationsReference.child(firebaseObservationsByDate).child(firebaseAttributeList).child(observation.id).set(observation.toJson());
     await publicObservationsReference.child(firebaseObservationsByPlant).child(observation.plant).child(firebaseAttributeList).child(observation.id).set(observation.toJson());
 
-    // update private
     await privateObservationsReference
         .child(Auth.appUser!.uid)
         .child(firebaseObservationsByDate)

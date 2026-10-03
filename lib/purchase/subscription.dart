@@ -96,7 +96,6 @@ class _SubscriptionState extends State<Subscription> {
     }, onDone: () {
       _subscription.cancel();
     }, onError: (error) {
-      // handle error here.
     });
   }
 
@@ -192,7 +191,7 @@ class _SubscriptionState extends State<Subscription> {
                         SizedBox(height: 10.0),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: isPurchased ? Theme.of(context).secondaryHeaderColor : Theme.of(context).primaryColor, // background
+                            backgroundColor: isPurchased ? Theme.of(context).secondaryHeaderColor : Theme.of(context).primaryColor,
                           ),
                           onPressed: () {
                             if (!isPurchased) {

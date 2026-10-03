@@ -21,7 +21,6 @@ library prefs;
 
 import 'dart:async' show Future;
 
-/// https://pub.dartlang.org/packages/shared_preferences/
 import 'package:shared_preferences/shared_preferences.dart'
     show SharedPreferences;
 
@@ -30,36 +29,28 @@ export 'package:shared_preferences/shared_preferences.dart'
     show SharedPreferences;
 
 // ignore: avoid_classes_with_only_static_members
-/// The App's Preferences.
 class Prefs {
-  /// Loads and parses the [SharedPreferences] for this app from disk.
   static Future<SharedPreferences> get instance async =>
       _prefsInstance ??= await SharedPreferences.getInstance();
 
   static SharedPreferences? _prefsInstance;
 
-  /// In case the developer does not explicitly call the init() function.
   static bool _initCalled = false;
 
-  /// Initialize the SharedPreferences object in the State object's iniState() function.
   static Future<SharedPreferences> init() async {
     _initCalled = true;
     _prefsInstance ??= await instance;
     return _prefsInstance!;
   }
 
-  /// Determine if init was called
   static bool initCalled() => _initCalled;
 
-  /// Indicate if Preferences is ready
   static bool ready() => _prefsInstance != null;
 
-  /// Best to clean up by calling this function in the State object's dispose() function.
   static void dispose() {
     _prefsInstance = null;
   }
 
-  /// Returns all keys in the persistent storage.
   static Set<String> getKeys() {
     assert(_initCalled,
     'Prefs.init() must be called first in an initState() preferably!');
@@ -68,7 +59,6 @@ class Prefs {
     return _prefsInstance?.getKeys() ?? {};
   }
 
-  /// Returns a Future.
   static Future<Set<String>> getKeysF() async {
     Set<String> value;
     if (_prefsInstance == null) {
@@ -82,8 +72,6 @@ class Prefs {
     return value;
   }
 
-  /// Returns true if persistent storage the contains the given [key].
-  /// Return null if key is null
   static bool containsKey(String? key) {
     if (key == null) {
       return false;
@@ -95,8 +83,6 @@ class Prefs {
     return _prefsInstance?.containsKey(key) ?? false;
   }
 
-  /// Returns true if persistent storage the contains the given [key].
-  /// Return null if key is null
   static Future<bool> containsKeyF(String? key) async {
     bool contains;
     if (key == null) {
@@ -113,8 +99,6 @@ class Prefs {
     return contains;
   }
 
-  /// Reads a value of any type from persistent storage.
-  /// Return null if key is null.
   static Object? get(String? key) {
     if (key == null) {
       return null;
@@ -126,8 +110,6 @@ class Prefs {
     return _prefsInstance?.get(key);
   }
 
-  /// Returns a Future.
-  /// Return null if key is null
   static Future<Object?> getF(String? key) async {
     Object? value;
     if (key == null) {
@@ -144,7 +126,6 @@ class Prefs {
     return value;
   }
 
-  /// Return false if key is null
   // ignore: avoid_positional_boolean_parameters
   static bool getBool(String? key, [bool? defValue]) {
     if (key == null) {
@@ -157,8 +138,6 @@ class Prefs {
     return _prefsInstance?.getBool(key) ?? defValue ?? false;
   }
 
-  /// Returns a Future.
-  /// Returns false if key is null.
   // ignore: avoid_positional_boolean_parameters
   static Future<bool> getBoolF(String? key, [bool? defValue]) async {
     if (key == null) {
@@ -176,7 +155,6 @@ class Prefs {
     return value;
   }
 
-  /// Returns 0 if key is null.
   static int getInt(String? key, [int? defValue]) {
     if (key == null) {
       return 0;
@@ -188,8 +166,6 @@ class Prefs {
     return _prefsInstance?.getInt(key) ?? defValue ?? 0;
   }
 
-  /// Returns a Future.
-  /// Returns 0 if key is null.
   static Future<int> getIntF(String? key, [int? defValue]) async {
     int value;
     if (key == null) {
@@ -206,7 +182,6 @@ class Prefs {
     return value;
   }
 
-  /// Returns 0 if key is null.
   static double getDouble(String? key, [double? defValue]) {
     if (key == null) {
       return 0;
@@ -218,8 +193,6 @@ class Prefs {
     return _prefsInstance?.getDouble(key) ?? defValue ?? 0.0;
   }
 
-  /// Returns a Future.
-  /// Returns 0 if key is null.
   static Future<double> getDoubleF(String? key, [double? defValue]) async {
     double value;
     if (key == null) {
@@ -236,7 +209,6 @@ class Prefs {
     return value;
   }
 
-  /// Returns '' if key is null.
   static String getString(String? key, [String? defValue]) {
     if (key == null) {
       return '';
@@ -248,8 +220,6 @@ class Prefs {
     return _prefsInstance?.getString(key) ?? defValue ?? '';
   }
 
-  /// Returns a Future.
-  /// Returns '' if key is null.
   static Future<String> getStringF(String? key, [String? defValue]) async {
     String value;
     if (key == null) {
@@ -266,7 +236,6 @@ class Prefs {
     return value;
   }
 
-  /// Returns empty List if key is null.
   static List<String> getStringList(String? key, [List<String>? defValue]) {
     if (key == null) {
       return [''];
@@ -278,8 +247,6 @@ class Prefs {
     return _prefsInstance?.getStringList(key) ?? defValue ?? [''];
   }
 
-  /// Returns a Future.
-  /// Returns empty List if key is null.
   static Future<List<String>> getStringListF(String? key,
       [List<String>? defValue]) async {
     List<String> value;
@@ -297,8 +264,6 @@ class Prefs {
     return value;
   }
 
-  /// Saves a boolean [value] to persistent storage in the background.
-  /// Returns false if key is null.
   // ignore: avoid_positional_boolean_parameters
   static Future<bool> setBool(String? key, bool? value) async {
     if (key == null || value == null) {
@@ -308,8 +273,6 @@ class Prefs {
     return prefs.setBool(key, value);
   }
 
-  /// Saves an integer [value] to persistent storage in the background.
-  /// Returns null if key is null.
   static Future<bool> setInt(String? key, int? value) async {
     if (key == null || value == null) {
       return false;
@@ -318,9 +281,7 @@ class Prefs {
     return prefs.setInt(key, value);
   }
 
-  /// Saves a double [value] to persistent storage in the background.
   /// Android doesn't support storing doubles, so it will be stored as a float.
-  /// Returns false if key is null.
   static Future<bool> setDouble(String? key, double? value) async {
     if (key == null || value == null) {
       return false;
@@ -329,8 +290,6 @@ class Prefs {
     return prefs.setDouble(key, value);
   }
 
-  /// Saves a string [value] to persistent storage in the background.
-  /// Returns false if key is null.
   static Future<bool> setString(String? key, String? value) async {
     if (key == null || value == null) {
       return false;
@@ -339,8 +298,6 @@ class Prefs {
     return prefs.setString(key, value);
   }
 
-  /// Saves a list of strings [value] to persistent storage in the background.
-  /// Returns false if key is null.
   static Future<bool> setStringList(String? key, List<String>? value) async {
     if (key == null || value == null) {
       return false;
@@ -349,7 +306,6 @@ class Prefs {
     return prefs.setStringList(key, value);
   }
 
-  /// Fetches the latest values from the host platform.
   /// Use this method to observe modifications that were made in native code
   /// (without using the plugin) while the app is running.
   static Future<void> reload() async {
@@ -357,8 +313,6 @@ class Prefs {
     return prefs.reload();
   }
 
-  /// Removes an entry from persistent storage.
-  /// Returns false if key is null.
   static Future<bool> remove(String? key) async {
     if (key == null) {
       return false;
@@ -367,14 +321,11 @@ class Prefs {
     return prefs.remove(key);
   }
 
-  /// Completes with true once the user preferences for the app has been cleared.
   static Future<bool> clear() async {
     final prefs = await instance;
     return prefs.clear();
   }
 
-  /// Sets the prefix that is attached to all keys for all shared preferences.
-  /// Return false if called after SharedPreferences was instantiated.
   static bool setPrefix(String prefix, {Set<String>? allowList}) {
     // setPrefix cannot be called after getInstance
     final set = !ready();

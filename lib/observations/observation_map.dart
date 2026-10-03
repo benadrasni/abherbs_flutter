@@ -53,7 +53,6 @@ class _ObservationMapState extends State<ObservationMap> {
     _markers = <MarkerId, Marker>{};
     _markers[_markerId] = Marker(
       markerId: _markerId,
-      //draggable: true,
       position: LatLng(
         widget.observation.latitude,
         widget.observation.longitude,

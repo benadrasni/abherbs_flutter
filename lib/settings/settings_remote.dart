@@ -19,7 +19,6 @@ class RemoteConfiguration {
       });
       await remoteConfig.fetchAndActivate();
     } on PlatformException catch (exception) {
-      // Fetch exception.
       print(exception);
     } catch (exception) {
       print('Unable to fetch remote config. Cached or default values will be used');

@@ -149,7 +149,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(219, 68, 55, 1.0), // background
+                      backgroundColor: Color.fromRGBO(219, 68, 55, 1.0),
                     ),
                     child: Row(
                       children: [
@@ -170,7 +170,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green, // background
+                      backgroundColor: Colors.green,
                     ),
                     child: Row(
                       children: [
@@ -191,8 +191,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white, // background
-                      foregroundColor: Colors.black, // foreground
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
                     ),
                     child: Row(
                       children: [

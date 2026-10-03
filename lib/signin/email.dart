@@ -25,11 +25,9 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
   String? _errorMessage;
   bool _isWrongPassword = false;
 
-  // Initial form is login form
   FormMode _formMode = FormMode.LOGIN;
   bool _isLoading = false;
 
-  // Check if form is valid before perform login or signup
   bool _validateAndSave() {
     final form = _formKey.currentState;
     if (form != null && form.validate()) {
@@ -39,7 +37,6 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
     return false;
   }
 
-  // Perform login or sign up
   void _validateAndSubmit() async {
     if (_validateAndSave()) {
       setState(() {
