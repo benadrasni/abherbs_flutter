@@ -337,9 +337,7 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
               if (job != null)
                 _JobCard(
                   job: job,
-                  plants: NumberFormat.decimalPattern(
-                    Localizations.localeOf(context).toString(),
-                  ).format(job.plants),
+                  plants: _count(context, job.plants),
                   onPause: _pause,
                 ),
               if (haveCount > 0)
@@ -542,13 +540,7 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
 }
 
 String _count(BuildContext context, int count) {
-  final formatted = NumberFormat.decimalPattern(
-    Localizations.localeOf(context).toString(),
-  ).format(count);
-  return S.of(context).guide_offline_plants(count).replaceFirst(
-        '$count',
-        formatted,
-      );
+  return guidePlantPhrase(context, count);
 }
 
 int _mb(int bytes) {

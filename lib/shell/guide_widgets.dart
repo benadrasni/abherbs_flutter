@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class GuideTitleBar extends StatelessWidget {
   final Widget title;
@@ -162,6 +163,14 @@ String guideListTitle(BuildContext context, GuideListCover cover) {
   return cover.isNew ? S.of(context).guide_new_in_book : cover.title;
 }
 
+/// "1 plant", "2 plants", and the matching form in each language.
+String guidePlantPhrase(BuildContext context, int count) {
+  final formatted = NumberFormat.decimalPattern(
+    Localizations.localeOf(context).toString(),
+  ).format(count);
+  return S.of(context).guide_plants(count).replaceFirst('$count', formatted);
+}
+
 String guideListSubtitle(BuildContext context, GuideListCover cover) {
   if (cover.isNew) {
     final latest = cover.latest;
@@ -173,16 +182,16 @@ String guideListSubtitle(BuildContext context, GuideListCover cover) {
   if (cover.year != null) {
     return S.of(context).guide_years(cover.count, cover.year!);
   }
-  return S.of(context).guide_plants(cover.count);
+  return guidePlantPhrase(context, cover.count);
 }
 
 /// Book cards name the whole span. Find covers keep the newest year only.
 String guideBookListSubtitle(BuildContext context, GuideListCover cover) {
   if (cover.isNew) {
     final latest = cover.latest;
-    if (latest == null) return S.of(context).guide_plants(cover.count);
+    if (latest == null) return guidePlantPhrase(context, cover.count);
     return S.of(context).guide_new_span(
-          cover.count,
+          guidePlantPhrase(context, cover.count),
           MaterialLocalizations.of(context).formatMediumDate(latest),
         );
   }

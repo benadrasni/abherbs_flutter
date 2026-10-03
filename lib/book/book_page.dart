@@ -188,7 +188,7 @@ class _BookPageState extends State<BookPage> {
       Localizations.localeOf(context).toString(),
     );
     return S.of(context).guide_book_counts(
-          format.format(taxa.plants),
+          guidePlantPhrase(context, taxa.plants),
           format.format(taxa.families.length),
         );
   }

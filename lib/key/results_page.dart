@@ -320,7 +320,9 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
                 title: strings.guide_region_title,
                 body: anyCount == null
                     ? strings.guide_region_body_plain
-                    : strings.guide_region_body(anyCount),
+                    : strings.guide_region_body(
+                        guidePlantPhrase(context, anyCount),
+                      ),
                 locationTitle: strings.guide_use_location,
                 locationBody: _prefs.locationRefused
                     ? strings.guide_location_refused
@@ -406,7 +408,12 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: _CountLine(
                         count: arranged.plants.length,
-                        caption: _caption(strings, regionName, seenCount),
+                        caption: _caption(
+                          strings,
+                          arranged.plants.length,
+                          regionName,
+                          seenCount,
+                        ),
                       ),
                     ),
                 ],
@@ -499,7 +506,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
                 const SizedBox(height: 10),
                 _CountLine(
                   count: count,
-                  caption: _caption(strings, null, seenCount),
+                  caption: _caption(strings, count, null, seenCount),
                 ),
               ],
             ],
@@ -509,10 +516,15 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
     );
   }
 
-  String _caption(S strings, String? regionName, int seenCount) {
+  String _caption(
+    S strings,
+    int plantCount,
+    String? regionName,
+    int seenCount,
+  ) {
     final plants = regionName == null || regionName.isEmpty
-        ? strings.guide_results_plants
-        : strings.guide_results_plants_in(regionName);
+        ? strings.guide_results_plants(plantCount)
+        : strings.guide_results_plants_in(plantCount, regionName);
     if (seenCount <= 0) return plants;
     return strings.guide_results_seen_suffix(plants, seenCount);
   }
