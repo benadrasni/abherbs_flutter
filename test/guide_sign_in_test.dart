@@ -296,7 +296,8 @@ void main() {
     await tester.tap(find.text('Phone'));
     await tester.pumpAndSettle();
     final phone = tester.getSize(find.byKey(const Key('guideSignInPhone')));
-    final code = tester.getSize(find.byKey(const Key('guideSignInCallingCode')));
+    final code =
+        tester.getSize(find.byKey(const Key('guideSignInCallingCode')));
     final send = tester.getSize(
       find
           .ancestor(
@@ -308,6 +309,24 @@ void main() {
     expect(phone.height, 48);
     expect(code.height, 48);
     expect(phone.width + code.width + 8, send.width);
+
+    final phoneField =
+        tester.widget<TextField>(find.byKey(const Key('guideSignInPhone')));
+    expect(phoneField.keyboardType, TextInputType.number);
+    await tester.enterText(
+      find.byKey(const Key('guideSignInPhone')),
+      '12a 3-4',
+    );
+    expect(phoneField.controller?.text, '1234');
+
+    await tester.tap(find.byKey(const Key('guideSignInCallingCode')));
+    await tester.pumpAndSettle();
+    final longCode = tester.getSize(find.text('+1684'));
+    expect(longCode.height, lessThan(24));
+    expect(longCode.width, greaterThan(48));
+    final codeText = tester.widget<Text>(find.text('+1684'));
+    expect(codeText.maxLines, 1);
+    expect(codeText.softWrap, isFalse);
   });
 
   testWidgets('a new email asks the person to verify, and stays here',

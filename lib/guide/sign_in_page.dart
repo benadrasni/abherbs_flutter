@@ -13,6 +13,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
@@ -419,26 +420,17 @@ class _GuideSignInPageState extends State<GuideSignInPage> {
   }
 
   Future<void> _pickCountry() async {
-    final colors = GuideColors.of(context);
-    final strings = S.of(context);
-    showCountryPicker(
+    final selected = await showModalBottomSheet<Country>(
       context: context,
-      showPhoneCode: true,
-      countryListTheme: CountryListThemeData(
-        backgroundColor: colors.paper,
-        textStyle: TextStyle(color: colors.ink, fontSize: 16),
-        searchTextStyle: TextStyle(color: colors.ink, fontSize: 16),
-        inputDecoration: InputDecoration(
-          hintText: strings.auth_phone_hint,
-          hintStyle: TextStyle(color: colors.ink3),
-          prefixIcon: Icon(Icons.search, color: colors.ink3),
-        ),
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => GuideTheme(
+        appearance: widget.appearance,
+        child: const _CallingCodeSheet(),
       ),
-      onSelect: (country) {
-        if (!mounted) return;
-        setState(() => _country = country);
-      },
     );
+    if (!mounted || selected == null) return;
+    setState(() => _country = selected);
   }
 
   @override
@@ -765,7 +757,8 @@ class _GuideSignInPageState extends State<GuideSignInPage> {
                     fieldKey: const Key('guideSignInPhone'),
                     controller: _phone,
                     hint: strings.auth_phone_hint,
-                    keyboard: TextInputType.phone,
+                    keyboard: TextInputType.number,
+                    formatters: [FilteringTextInputFormatter.digitsOnly],
                     autofill: const [AutofillHints.telephoneNumber],
                     gap: false,
                   ),
@@ -1186,6 +1179,7 @@ class _Field extends StatelessWidget {
     required this.hint,
     this.fieldKey,
     this.keyboard,
+    this.formatters,
     this.obscure = false,
     this.autofill,
     this.maxLength,
@@ -1196,6 +1190,7 @@ class _Field extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
   final TextInputType? keyboard;
+  final List<TextInputFormatter>? formatters;
   final bool obscure;
   final List<String>? autofill;
   final int? maxLength;
@@ -1216,6 +1211,7 @@ class _Field extends StatelessWidget {
           key: fieldKey,
           controller: controller,
           keyboardType: keyboard,
+          inputFormatters: formatters,
           obscureText: obscure,
           autofillHints: autofill,
           maxLength: maxLength,
@@ -1268,10 +1264,16 @@ class _CallingCode extends StatelessWidget {
         child: SizedBox(
           width: 84,
           height: 48,
-          child: Center(
-            child: Text(
-              code,
-              style: TextStyle(color: colors.ink, fontSize: 16),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6),
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                code,
+                maxLines: 1,
+                softWrap: false,
+                style: TextStyle(color: colors.ink, fontSize: 16),
+              ),
             ),
           ),
         ),
@@ -1433,4 +1435,167 @@ class _ApplePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_ApplePainter oldDelegate) => oldDelegate.color != color;
+}
+
+/// Calling-code list. Each code stays on one line. The stock picker locks
+/// the code to 45px, which wraps +1684.
+class _CallingCodeSheet extends StatefulWidget {
+  const _CallingCodeSheet();
+
+  @override
+  State<_CallingCodeSheet> createState() => _CallingCodeSheetState();
+}
+
+class _CallingCodeSheetState extends State<_CallingCodeSheet> {
+  final TextEditingController _query = TextEditingController();
+  final List<Country> _all = CountryService().getAll();
+
+  @override
+  void initState() {
+    super.initState();
+    _query.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _query.dispose();
+    super.dispose();
+  }
+
+  String _name(Country country) {
+    final translated = country.getTranslatedName(context)?.trim();
+    if (translated == null || translated.isEmpty) return country.name;
+    return translated.replaceAll(RegExp(r'\s+'), ' ');
+  }
+
+  List<Country> _visible() {
+    final query = _query.text.trim().toLowerCase();
+    final digits = query.replaceAll(RegExp(r'\D'), '');
+    final rows = <Country>[
+      for (final country in _all)
+        if (query.isEmpty ||
+            _name(country).toLowerCase().contains(query) ||
+            country.countryCode.toLowerCase().startsWith(query) ||
+            (digits.isNotEmpty && country.phoneCode.startsWith(digits)))
+          country,
+    ];
+    rows.sort((a, b) {
+      final byName = _name(a).toLowerCase().compareTo(_name(b).toLowerCase());
+      if (byName != 0) return byName;
+      return a.countryCode.compareTo(b.countryCode);
+    });
+    return rows;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final strings = S.of(context);
+    final media = MediaQuery.of(context);
+    final border = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(color: colors.rule),
+    );
+    final rows = _visible();
+    return Padding(
+      padding: EdgeInsets.only(
+        top: media.padding.top + 8,
+        bottom: media.viewInsets.bottom,
+      ),
+      child: Material(
+        color: colors.paper,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        clipBehavior: Clip.antiAlias,
+        child: SizedBox(
+          height: media.size.height -
+              media.padding.top -
+              media.viewInsets.bottom -
+              8,
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              Container(
+                width: 36,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: colors.rule,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 12, 20, 8),
+                child: SizedBox(
+                  height: 48,
+                  child: TextField(
+                    controller: _query,
+                    cursorColor: colors.moss,
+                    style: TextStyle(color: colors.ink, fontSize: 16),
+                    textAlignVertical: TextAlignVertical.center,
+                    decoration: InputDecoration(
+                      hintText: strings.search,
+                      hintStyle: TextStyle(color: colors.ink3, fontSize: 16),
+                      filled: true,
+                      fillColor: colors.cream,
+                      isDense: false,
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 14),
+                      border: border,
+                      enabledBorder: border,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: colors.moss, width: 1.5),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  padding: EdgeInsets.only(bottom: media.padding.bottom + 12),
+                  itemCount: rows.length,
+                  itemBuilder: (context, index) {
+                    final country = rows[index];
+                    return InkWell(
+                      onTap: () => Navigator.pop(context, country),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 12,
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              country.flagEmoji,
+                              style: const TextStyle(fontSize: 22),
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                              '+${country.phoneCode}',
+                              maxLines: 1,
+                              softWrap: false,
+                              style: TextStyle(color: colors.ink, fontSize: 16),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                _name(country),
+                                style: TextStyle(
+                                  color: colors.ink,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
