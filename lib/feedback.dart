@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/purchase/enhancements.dart';
+import 'package:abherbs_flutter/purchase/rewarded_ad.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/signin/sign_in.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -89,15 +90,17 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         ));
   }
 
-  void _showRewardedAd() {
-    if (_rewardedAd == null) {
+  Future<void> _showRewardedAd() async {
+    final ad = _rewardedAd;
+    if (ad == null) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(S.of(context).snack_loading_ad),
         duration: Duration(milliseconds: 1500),
       ));
       return;
     }
-    _rewardedAd?.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedAd = null;
+    ad.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (RewardedAd ad) {
         ad.dispose();
         _createRewardedAd();
@@ -108,13 +111,13 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       },
     );
 
-    _rewardedAd?.setImmersiveMode(true);
-    _rewardedAd?.show(
+    ad.setImmersiveMode(true);
+    await tieRewardedAd(ad);
+    ad.show(
         onUserEarnedReward: (AdWithoutView ad, RewardItem reward) async {
-          await Auth.changeCredits(1, "1");
-          setState(() {});
+          await Auth.waitForAdReward(Auth.credits);
+          if (mounted) setState(() {});
         });
-    _rewardedAd = null;
   }
 
 

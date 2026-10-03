@@ -53,7 +53,8 @@ const _photoSearchLangs = [
 
 enum DeleteAccountResult { success, canceled, failed }
 
-Future<DeleteAccountResult> confirmAndDeleteAccount(BuildContext context) async {
+Future<DeleteAccountResult> confirmAndDeleteAccount(
+    BuildContext context) async {
   final confirmed = await showDialog<bool>(
     context: context,
     builder: (dialogContext) {
@@ -64,7 +65,8 @@ Future<DeleteAccountResult> confirmAndDeleteAccount(BuildContext context) async 
           TextButton(
             child: Text(
               S.of(dialogContext).cancel.toUpperCase(),
-              style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+              style:
+                  const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
             onPressed: () {
               Navigator.of(dialogContext).pop(false);
@@ -196,6 +198,8 @@ Future<void> _deleteUserData(String uid) async {
         continue;
       }
       final id = observation.id.isNotEmpty ? observation.id : key.toString();
+      final skip = guideSkipPrivatePhoto;
+      if (skip != null) skip(id);
       await publicObservationsReference
           .child(firebaseObservationsByDate)
           .child(firebaseAttributeList)
@@ -209,16 +213,21 @@ Future<void> _deleteUserData(String uid) async {
             .child(id)
             .remove();
       }
+      final privatePaths = <String>[];
       for (final path in observation.photoPaths) {
         if (path is String && path.isNotEmpty) {
+          privatePaths.add(path);
           try {
-            await firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket)
+            await firebase_storage.FirebaseStorage.instanceFor(
+                    bucket: storageBucket)
                 .ref()
                 .child(path)
                 .delete();
           } catch (_) {}
         }
       }
+      final removePrivate = guideDeletePrivatePhotos;
+      if (removePrivate != null) await removePrivate(privatePaths);
     }
   }
 
@@ -227,7 +236,11 @@ Future<void> _deleteUserData(String uid) async {
   await logsCreditsReference.child(uid).remove();
 
   for (final lang in _photoSearchLangs) {
-    await rootReference.child(firebaseUsersPhotoSearch).child(lang).child(uid).remove();
+    await rootReference
+        .child(firebaseUsersPhotoSearch)
+        .child(lang)
+        .child(uid)
+        .remove();
   }
 
   try {
@@ -235,6 +248,14 @@ Future<void> _deleteUserData(String uid) async {
       firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket)
           .ref()
           .child('observations/$uid'),
+    );
+  } catch (_) {}
+
+  try {
+    await _deleteStorageFolder(
+      firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket)
+          .ref()
+          .child('private/$uid'),
     );
   } catch (_) {}
 
@@ -391,7 +412,8 @@ Future<String?> _askPassword(BuildContext context) async {
   return result;
 }
 
-Future<bool> _reauthenticatePhone(BuildContext context, User user, String phoneNumber) async {
+Future<bool> _reauthenticatePhone(
+    BuildContext context, User user, String phoneNumber) async {
   final result = await showDialog<bool>(
     context: context,
     barrierDismissible: false,
@@ -489,7 +511,8 @@ class _PhoneReauthDialogState extends State<_PhoneReauthDialog> {
     });
     try {
       await widget.user.reauthenticateWithCredential(
-        PhoneAuthProvider.credential(verificationId: verificationId, smsCode: code),
+        PhoneAuthProvider.credential(
+            verificationId: verificationId, smsCode: code),
       );
       if (mounted) {
         Navigator.of(context).pop(true);

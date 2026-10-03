@@ -15,8 +15,18 @@ const String observationIndoors = "indoors";
 const String observationStatus = "status";
 const String observationStatusPrivate = "private";
 const String observationStatusPublic = "public";
+const String observationConfirmed = "confirmed";
+const String observationSource = "source";
+const String observationCandidates = "candidates";
+const String observationSourceCamera = "camera";
+const String observationSourceManual = "manual";
 
-class Observation{
+/// Private row only, set after every photo of that find is in
+/// `private/{uid}/`. A full [Observation.toJson] save omits it, and Share
+/// must not copy it onto a public Sighting.
+const String observationPhotoCloud = "photoCloud";
+
+class Observation {
   String key = "";
   String id = "";
   String plant = "";
@@ -29,6 +39,11 @@ class Observation{
   String uploadStatus = firebaseValuePrivate;
   int order = 0;
   bool indoors = false;
+
+  /// Missing on older records, which are already confirmed finds.
+  bool confirmed = true;
+  String source = "";
+  List<dynamic> candidates = [];
 
   Observation(String plantName) {
     this.plant = plantName;
@@ -46,20 +61,31 @@ class Observation{
     this.status = observation.status;
     this.order = observation.order;
     this.indoors = observation.indoors;
+    this.confirmed = observation.confirmed;
+    this.source = observation.source;
+    this.candidates = List.from(observation.candidates);
   }
 
   Observation.fromJson(key, Map data) {
     this.key = key;
     this.id = data[observationId];
     this.plant = data[observationPlant];
-    this.date = DateTime.fromMillisecondsSinceEpoch(data[observationDate][observationTime]);
+    this.date = DateTime.fromMillisecondsSinceEpoch(
+        data[observationDate][observationTime]);
     this.longitude = data[observationLongitude].toDouble();
     this.latitude = data[observationLatitude].toDouble();
     this.note = data[observationNote] ?? "";
-    this.photoPaths = data[observationPhotoPaths];
+    this.photoPaths = data[observationPhotoPaths] ?? [];
     this.status = data[observationStatus];
     this.order = data[observationOrder];
     this.indoors = data[observationIndoors] ?? false;
+    final confirmedValue = data[observationConfirmed];
+    this.confirmed = confirmedValue is bool ? confirmedValue : true;
+    final sourceValue = data[observationSource];
+    this.source = sourceValue is String ? sourceValue : "";
+    final candidateValue = data[observationCandidates];
+    this.candidates =
+        candidateValue is List ? List<dynamic>.from(candidateValue) : [];
   }
 
   Map<String, dynamic> toJson() {
@@ -74,6 +100,11 @@ class Observation{
     result[observationStatus] = this.status;
     result[observationOrder] = this.order;
     result[observationIndoors] = this.indoors;
+    result[observationConfirmed] = this.confirmed;
+    if (this.source.isNotEmpty) result[observationSource] = this.source;
+    if (this.candidates.isNotEmpty) {
+      result[observationCandidates] = this.candidates;
+    }
     return result;
   }
 }

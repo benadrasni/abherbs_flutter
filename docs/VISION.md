@@ -8,11 +8,11 @@ The shipping product is already a real step toward that: a multilingual flower i
 
 ## What exists today
 
-- **1,413** curated flowering plants, each with photos, filter attributes, and a species page.
+- **1,421** curated flowering plants, each with photos, filter attributes, and a species page.
 - Identification by **four human-visible traits**: color, habitat, petal type, TDWG level-2 region.
 - Species pages with height, flowering months, toxicity class, APG IV path, IPNI / GBIF / USDA / Wikidata links, and sectioned text (description, flower, inflorescence, fruit, leaf, stem, habitat, toxicity, uses/`herbalism`, trivia).
 - **36** app UI languages (34 catalog codes). Many languages have full seven-field body text. The rest show English body text, with that language's vernacular `label` and `names` when a source recorded them. There is no Google Translate cache.
-- Community observations (1,509 public, last public stat date 2022) and photo search via Plant.id.
+- Community observations (1,778 public outdoor, from 56 observers, 630 species; the latest is 18 September 2026) and photo search via Plant.id.
 
 That is a hobby-scale, high-touch catalog. Adding a plant today means a local folder of photos, a Tkinter crop tool, a Wikidata/POWO scrape, and a Firebase write.
 

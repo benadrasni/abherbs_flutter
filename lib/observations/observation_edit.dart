@@ -45,6 +45,10 @@ class _ObservationEditState extends State<ObservationEdit> {
     if (await file.exists()) {
       file.delete();
     }
+    if (filename is String && filename.isNotEmpty) {
+      final remove = guideDeletePrivatePhotos;
+      if (remove != null) await remove([filename]);
+    }
     _observation.photoPaths.removeAt(position);
 
     setState(() {});
@@ -52,17 +56,22 @@ class _ObservationEditState extends State<ObservationEdit> {
 
   Future<bool> _saveObservation(BuildContext context) async {
     if (_observation.photoPaths.length == 0) {
-      await infoDialog(context, S.of(context).observation, S.of(context).observation_missing_photo);
+      await infoDialog(context, S.of(context).observation,
+          S.of(context).observation_missing_photo);
       return false;
     } else if (_observation.latitude == 0 && _observation.longitude == 0) {
-      await infoDialog(context, S.of(context).observation, S.of(context).observation_missing_location);
+      await infoDialog(context, S.of(context).observation,
+          S.of(context).observation_missing_location);
       return false;
     } else {
       if (_observation.id.isEmpty) {
-        _observation.id = Auth.appUser!.uid + '_' + DateTime.now().millisecondsSinceEpoch.toString();
+        _observation.id = Auth.appUser!.uid +
+            '_' +
+            DateTime.now().millisecondsSinceEpoch.toString();
       }
       _observation.order = -1 * _observation.date.millisecondsSinceEpoch;
-      _observation.note = _noteController.text.isNotEmpty ? _noteController.text : "";
+      _observation.note =
+          _noteController.text.isNotEmpty ? _noteController.text : "";
 
       await privateObservationsReference
           .child(Auth.appUser!.uid)
@@ -77,29 +86,37 @@ class _ObservationEditState extends State<ObservationEdit> {
           .child(firebaseAttributeList)
           .child(_observation.id)
           .set(_observation.toJson());
+      final sync = guideSyncPrivatePhotos;
+      if (sync != null) unawaited(sync(onlyId: _observation.id));
       return true;
     }
   }
 
-  Future<void> _getImage(GlobalKey<ScaffoldState> _key, ImageSource source) async {
+  Future<void> _getImage(
+      GlobalKey<ScaffoldState> _key, ImageSource source) async {
     var status = await Permission.accessMediaLocation.status;
     if (!status.isGranted) {
       await Permission.accessMediaLocation.request();
     }
-    var image = await _picker.pickImage(source: source, maxWidth: imageSizeScaleDown);
+    var image =
+        await _picker.pickImage(source: source, maxWidth: imageSizeScaleDown);
     if (image != null) {
-      Map<String, IfdTag> exifData = await readExifFromBytes(await image.readAsBytes());
-      IfdTag? dateTime = exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime'];
+      Map<String, IfdTag> exifData =
+          await readExifFromBytes(await image.readAsBytes());
+      IfdTag? dateTime =
+          exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime'];
       for (String path in _observation.photoPaths) {
         File? file = await Offline.getLocalFile(path);
         if (file != null) {
-          Map<String, IfdTag> exifDataFile = await readExifFromBytes(await file.readAsBytes());
-          IfdTag? dateTimeFile = exifDataFile['EXIF DateTimeOriginal'] ?? exifDataFile['Image DateTime'];
-          if (dateTime != null && dateTimeFile != null && dateTime.toString() == dateTimeFile.toString()) {
+          Map<String, IfdTag> exifDataFile =
+              await readExifFromBytes(await file.readAsBytes());
+          IfdTag? dateTimeFile = exifDataFile['EXIF DateTimeOriginal'] ??
+              exifDataFile['Image DateTime'];
+          if (dateTime != null &&
+              dateTimeFile != null &&
+              dateTime.toString() == dateTimeFile.toString()) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(S
-                  .of(context)
-                  .observation_photo_duplicate),
+              content: Text(S.of(context).observation_photo_duplicate),
             ));
             return;
           }
@@ -107,15 +124,20 @@ class _ObservationEditState extends State<ObservationEdit> {
       }
 
       // store file
-      var dir = storageObservations + Auth.appUser!.uid + '/' + _observation.plant.replaceAll(' ', '_');
+      var dir = storageObservations +
+          Auth.appUser!.uid +
+          '/' +
+          _observation.plant.replaceAll(' ', '_');
       var prefix = "unknown_";
       var names = _observation.plant.toLowerCase().split(' ');
       if (names.length > 1) {
         prefix = names[0].substring(0, 1) + names[1].substring(0, 1) + '_';
       }
-      var suffix =
-          image.path.indexOf('.', image.path.lastIndexOf('/')) > -1 ? image.path.substring(image.path.lastIndexOf('.')) : defaultPhotoExtension;
-      var filename = prefix + DateTime.now().millisecondsSinceEpoch.toString() + suffix;
+      var suffix = image.path.indexOf('.', image.path.lastIndexOf('/')) > -1
+          ? image.path.substring(image.path.lastIndexOf('.'))
+          : defaultPhotoExtension;
+      var filename =
+          prefix + DateTime.now().millisecondsSinceEpoch.toString() + suffix;
 
       String rootPath = (await getApplicationDocumentsDirectory()).path;
       await Directory('$rootPath/$dir').create(recursive: true);
@@ -124,33 +146,45 @@ class _ObservationEditState extends State<ObservationEdit> {
 
       // store exif data
       if (exifData.isNotEmpty) {
-        var latitude = getLatitudeFromExif(exifData['GPS GPSLatitudeRef'], exifData['GPS GPSLatitude']);
+        var latitude = getLatitudeFromExif(
+            exifData['GPS GPSLatitudeRef'], exifData['GPS GPSLatitude']);
         if (latitude != 0.0) {
           _observation.latitude = latitude;
         }
-        var longitude = getLongitudeFromExif(exifData['GPS GPSLongitudeRef'], exifData['GPS GPSLongitude']);
+        var longitude = getLongitudeFromExif(
+            exifData['GPS GPSLongitudeRef'], exifData['GPS GPSLongitude']);
         if (longitude != 0.0) {
           _observation.longitude = longitude;
         }
-        _observation.date = getDateTimeFromExif(exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime']);
+        _observation.date = getDateTimeFromExif(
+            exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime']);
         _dateController.text = _dateFormat.format(_observation.date);
       }
       if (_observation.photoPaths.length > 1) {
-        _pageController.animateToPage(_observation.photoPaths.length - 1, duration: Duration(milliseconds: 400), curve: Curves.ease);
+        _pageController.animateToPage(_observation.photoPaths.length - 1,
+            duration: Duration(milliseconds: 400), curve: Curves.ease);
       }
       setState(() {});
     }
   }
 
   Future<void> _deleteObservation() async {
+    final skip = guideSkipPrivatePhoto;
+    if (skip != null && _observation.id.isNotEmpty) skip(_observation.id);
     String rootPath = (await getApplicationDocumentsDirectory()).path;
-    for (int position = 0; position < _observation.photoPaths.length; position++) {
+    final paths = <String>[];
+    for (int position = 0;
+        position < _observation.photoPaths.length;
+        position++) {
       var path = _observation.photoPaths[position];
       File file = File('$rootPath/$path');
       if (await file.exists()) {
         await file.delete();
       }
+      if (path is String && path.isNotEmpty) paths.add(path);
     }
+    final remove = guideDeletePrivatePhotos;
+    if (remove != null) await remove(paths);
 
     if (_observation.id.isNotEmpty) {
       await privateObservationsReference
@@ -204,7 +238,8 @@ class _ObservationEditState extends State<ObservationEdit> {
             .once()
             .then((event) {
             if (event.snapshot.value != null) {
-              translationCache[_observation.plant] = event.snapshot.value as String;
+              translationCache[_observation.plant] =
+                  event.snapshot.value as String;
               return event.snapshot.value as String;
             } else {
               return _observation.plant;
@@ -227,9 +262,12 @@ class _ObservationEditState extends State<ObservationEdit> {
                 ListTile(
                   title: Text(
                     labelLocal,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                   ),
-                  subtitle: labelLocal != _observation.plant ? Text(_observation.plant) : Text(""),
+                  subtitle: labelLocal != _observation.plant
+                      ? Text(_observation.plant)
+                      : Text(""),
                 ),
                 Padding(
                   padding: EdgeInsets.all(10.0),
@@ -245,8 +283,8 @@ class _ObservationEditState extends State<ObservationEdit> {
                       if (date != null) {
                         final time = await showTimePicker(
                           context: context,
-                          initialTime:
-                          TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                          initialTime: TimeOfDay.fromDateTime(
+                              currentValue ?? DateTime.now()),
                         );
 
                         return DateTimeField.combine(date, time);
@@ -254,7 +292,8 @@ class _ObservationEditState extends State<ObservationEdit> {
                         return currentValue;
                       }
                     },
-                    onChanged: (dt) => setState(() => _observation.date = dt ?? DateTime.now()),
+                    onChanged: (dt) => setState(
+                        () => _observation.date = dt ?? DateTime.now()),
                   ),
                 ),
                 //Text(_timeFormat.format(_observation.date)),
@@ -273,15 +312,19 @@ class _ObservationEditState extends State<ObservationEdit> {
           width: mapWidth,
           height: mapHeight,
           placeholder: (context, url) => Container(
-                width: mapWidth,
-                height: mapHeight,
-              ),
-          imageUrl: getMapImageUrl(_observation.latitude, _observation.longitude, mapWidth, mapHeight),
+            width: mapWidth,
+            height: mapHeight,
+          ),
+          imageUrl: getMapImageUrl(_observation.latitude,
+              _observation.longitude, mapWidth, mapHeight),
         ),
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ObservationMap(myLocale, _observation, mapModeEdit), settings: RouteSettings(name: 'ObservationMap')),
+            MaterialPageRoute(
+                builder: (context) =>
+                    ObservationMap(myLocale, _observation, mapModeEdit),
+                settings: RouteSettings(name: 'ObservationMap')),
           ).then((value) {
             if (value != null) {
               _observation.latitude = value.latitude;
@@ -299,7 +342,8 @@ class _ObservationEditState extends State<ObservationEdit> {
       height: mapWidth,
       child: _observation.photoPaths.length == 0
           ? Center(
-              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 GestureDetector(
                   child: Icon(Icons.add_a_photo, size: 80.0),
                   onTap: () {
@@ -320,15 +364,21 @@ class _ObservationEditState extends State<ObservationEdit> {
               itemCount: _observation.photoPaths.length,
               itemBuilder: (context, position) {
                 return Stack(children: [
-                  getImage(_observation.photoPaths[position], placeholder, width: mapWidth, height: mapWidth, fit: BoxFit.cover),
+                  getImage(_observation.photoPaths[position], placeholder,
+                      width: mapWidth, height: mapWidth, fit: BoxFit.cover),
                   Container(
                     padding: EdgeInsets.all(5.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          (position + 1).toString() + ' / ' + _observation.photoPaths.length.toString(),
-                          style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+                          (position + 1).toString() +
+                              ' / ' +
+                              _observation.photoPaths.length.toString(),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold),
                         ),
                         IconButton(
                           icon: Icon(
@@ -336,7 +386,12 @@ class _ObservationEditState extends State<ObservationEdit> {
                             color: Theme.of(context).primaryColor,
                           ),
                           onPressed: () {
-                            deleteDialog(context, S.of(context).observation_photo_delete, S.of(context).observation_photo_delete_question)
+                            deleteDialog(
+                                    context,
+                                    S.of(context).observation_photo_delete,
+                                    S
+                                        .of(context)
+                                        .observation_photo_delete_question)
                                 .then((value) {
                               if (value) {
                                 _deleteImage(position);
@@ -393,7 +448,9 @@ class _ObservationEditState extends State<ObservationEdit> {
           IconButton(
             icon: Icon(Icons.delete),
             onPressed: () {
-              deleteDialog(context, S.of(context).observation_delete, S.of(context).observation_delete_question).then((value) {
+              deleteDialog(context, S.of(context).observation_delete,
+                      S.of(context).observation_delete_question)
+                  .then((value) {
                 if (value) {
                   _deleteObservation().then((_) => Navigator.of(context).pop());
                 }

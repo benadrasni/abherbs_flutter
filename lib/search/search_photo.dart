@@ -1,14 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/purchase/rewarded_ad.dart';
+import 'package:abherbs_flutter/search/plant_id_search.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/signin/sign_in.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:http/http.dart' as http;
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:abherbs_flutter/plant_list.dart';
@@ -19,18 +18,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 const int maxFailedLoadAttempts = 3;
-
-class SearchResult {
-  double? confidence;
-  int? count;
-  String? entityId;
-  String? labelInLanguage;
-  String? labelLatin;
-  String? path;
-  Map<String, dynamic>? plantDetails;
-  List<dynamic>? similarImages;
-  String? commonName;
-}
 
 class SearchPhoto extends StatefulWidget {
   final Locale myLocale;
@@ -76,15 +63,17 @@ class _SearchPhotoState extends State<SearchPhoto> {
         ));
   }
 
-  void _showRewardedAd() {
-    if (_rewardedAd == null) {
+  Future<void> _showRewardedAd() async {
+    final ad = _rewardedAd;
+    if (ad == null) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(S.of(context).snack_loading_ad),
         duration: Duration(milliseconds: 1500),
       ));
       return;
     }
-    _rewardedAd?.fullScreenContentCallback = FullScreenContentCallback(
+    _rewardedAd = null;
+    ad.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (RewardedAd ad) {
         ad.dispose();
         _createRewardedAd();
@@ -95,13 +84,13 @@ class _SearchPhotoState extends State<SearchPhoto> {
       },
     );
 
-    _rewardedAd?.setImmersiveMode(true);
-    _rewardedAd?.show(
+    ad.setImmersiveMode(true);
+    await tieRewardedAd(ad);
+    ad.show(
         onUserEarnedReward: (AdWithoutView ad, RewardItem reward) async {
-          await Auth.changeCredits(1, "1");
-          setState(() {});
+          await Auth.waitForAdReward(Auth.credits);
+          if (mounted) setState(() {});
         });
-    _rewardedAd = null;
   }
 
   Future<void> _getImage(GlobalKey<ScaffoldState> _key, ImageSource source, double maxSize) async {
@@ -117,114 +106,16 @@ class _SearchPhotoState extends State<SearchPhoto> {
         _logPhotoSearchEvent();
         setState(() {
           _image = File(image.path);
-          _searchResultF = _getSearchResultPlantId(_image!);
+          _searchResultF = identifyPlantPhoto(
+            image: _image!,
+            languageCode: plantIdLanguageTag(widget.myLocale),
+            onCreditsChanged: () {
+              if (mounted) setState(() {});
+            },
+          ).then((identification) => identification.results);
         });
       }
     }
-  }
-
-  Future<List<SearchResult>> _getSearchResultPlantId(File image) {
-    List<int> imageBytes = image.readAsBytesSync();
-    String base64Image = base64Encode(imageBytes);
-
-    Map<String, String> headers = {"Content-type": "application/json", "Api-Key": plantIdKey};
-    var msg = jsonEncode({
-      "images": [base64Image],
-      "modifiers": plantIdModifiers,
-      "plant_language": widget.myLocale.languageCode,
-      "plant_details": plantIdPlantDetails
-    });
-
-    return http.post(Uri.parse(plantIdEndpoint), headers: headers, body: msg).then((response) async {
-      var results = <SearchResult>[];
-      if (response.statusCode == 200) {
-        if (Auth.appUser != null && !Purchases.isPhotoSearch()) {
-            await Auth.changeCredits(-1, "search by photo");
-            if (mounted) {
-              setState(() {});
-            }
-        }
-        Map responseBody = json.decode(response.body);
-        for (var suggestion in responseBody['suggestions']) {
-          if (suggestion == null) {
-            continue;
-          }
-          String plantName = suggestion['plant_details']['scientific_name'];
-          results.add(await rootReference.child(firebaseSearchPhoto + '/' + plantName.toLowerCase().replaceAll('.', '')).once().then((event) {
-            var result = SearchResult();
-            result.labelLatin = plantName;
-            result.entityId = suggestion['id'].toString();
-            result.confidence = suggestion['probability'];
-            result.plantDetails = suggestion['plant_details'];
-            result.similarImages = suggestion['similar_images'];
-            result.commonName = suggestion['plant_details']['common_names'] != null ? suggestion['plant_details']['common_names'][0] : "";
-            if (event.snapshot.exists && event.snapshot.value != null) {
-              result.count = (event.snapshot.value as Map)['count'];
-              result.path = (event.snapshot.value as Map)['path'];
-              result.labelInLanguage = '';
-              if (result.path!.contains('/')) {
-                String path = result.path!.substring(0, result.path!.length - 5);
-                result.labelLatin = path.substring(path.lastIndexOf('/') + 1);
-              } else {
-                result.labelLatin = result.path;
-                translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin!).keepSynced(true);
-                return translationsReference.child(getLanguageCode(widget.myLocale.languageCode)).child(result.labelLatin!).child(firebaseAttributeLabel).once().then((event) {
-                  if (event.snapshot.value != null) {
-                    result.labelInLanguage = event.snapshot.value as String;
-                  }
-                  return result;
-                });
-              }
-              if (translationCache.containsKey(result.labelLatin)) {
-                result.labelInLanguage = translationCache[result.labelLatin];
-                return result;
-              } else {
-                translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin!).keepSynced(true);
-                return translationsTaxonomyReference.child(widget.myLocale.languageCode).child(result.labelLatin!).once().then((event) {
-                  if (event.snapshot.value != null && (event.snapshot.value as List).length > 0) {
-                    translationCache[result.labelLatin!] = (event.snapshot.value as List)[0];
-                    result.labelInLanguage = (event.snapshot.value as List)[0];
-                  }
-                  return result;
-                });
-              }
-            }
-
-            return result;
-          }));
-        }
-      }
-
-      // save labels
-      if (results.isNotEmpty) {
-        var userId = firebaseAttributeAnonymous;
-        if (Auth.appUser != null) {
-          userId = Auth.appUser!.uid;
-        }
-
-        rootReference.child(firebaseUsersPhotoSearch).child(widget.myLocale.languageCode).child(userId).child(DateTime.now().millisecondsSinceEpoch.toString())
-            .set(results.map((searchResult) {
-              Map<String, dynamic> labelMap = {};
-              labelMap['entityId'] = searchResult.entityId;
-              labelMap['language'] = widget.myLocale.languageCode;
-              labelMap['confidence'] = searchResult.confidence;
-              labelMap['plantDetails'] = searchResult.plantDetails;
-              labelMap['similarImages'] = searchResult.similarImages;
-              if (searchResult.labelLatin != null) {
-                labelMap['label_latin'] = searchResult.labelLatin;
-              }
-              if (searchResult.labelInLanguage != null) {
-                labelMap['label_language'] = searchResult.labelInLanguage;
-              }
-              return labelMap;
-            }).toList());
-      }
-
-      return results;
-    }).catchError((error, stackTrace) {
-      FirebaseCrashlytics.instance.recordError(error, stackTrace);
-      return <SearchResult>[];
-    });
   }
 
   @override

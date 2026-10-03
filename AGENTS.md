@@ -1,6 +1,6 @@
 # Agent notes — What's that flower?
 
-Hobby Flutter app (`sk.ab.herbs`) plus Firebase catalog. Destination is a plant encyclopedia; the live product is a 4-step flower identifier with 1,413 species.
+Hobby Flutter app (`sk.ab.herbs`) plus Firebase catalog. Destination is a plant encyclopedia; the live product is a 4-step flower identifier with 1,421 species.
 
 Read `README.md` and `docs/` before changing architecture or data shape.
 
@@ -30,7 +30,7 @@ Git remote: `https://github.com/benadrasni/abherbs_flutter`.
 
 ## Conventions
 
-- Flutter 3.47.2 / Dart 3.13.2. Match the existing style: `StatefulWidget`, Firebase `once()` / `keepSynced`, no extra state library. iOS uses Swift Package Manager (`enable-swift-package-manager: true`). Maps is `google_maps_flutter_ios_sdk10` (Maps SDK 10.x via SPM), not the default CocoaPods `google_maps_flutter_ios`.
+- Flutter 3.47.5 / Dart 3.13.4. Match the existing style: `StatefulWidget`, Firebase `once()` / `keepSynced`, no extra state library. iOS uses Swift Package Manager (`enable-swift-package-manager: true`). Maps is `google_maps_flutter_ios_sdk10` (Maps SDK 10.x via SPM), not the default CocoaPods `google_maps_flutter_ios`.
 - iOS uses the UIScene lifecycle (`FlutterSceneDelegate` in `Info.plist`; plugin registration in `AppDelegate.didInitializeImplicitFlutterEngine`).
 - Version is `pubspec.yaml` `version: X.Y.Z+XYZ` (build number = version without dots). Bump both together for a store build.
 - UI strings: edit `lib/l10n/intl_*.arb`, then `flutter pub run intl_utils:generate`.
@@ -48,6 +48,7 @@ Git remote: `https://github.com/benadrasni/abherbs_flutter`.
 - Admin JSON (local only): `~/Development/Keystore/abherbs-backend-firebase-adminsdk-l5787-839f896846.json`.
 - CLI: `firebase-tools` via nvm Node. Use `GOOGLE_APPLICATION_CREDENTIALS` pointing at the Admin JSON. `.firebaserc` selects `abherbs-backend`. Live rules snapshot: `firebase/database.rules.json`.
 - Do not write production RTDB/Storage unless the user asked for a data change.
+- Photo names ("Name it from a photo"): the app calls the Cloud Function `identifyPlant`, never Plant.id. Guests get one free name on an anonymous account; allowance, rules, rollout order, and open items are in `docs/PHOTO_NAMES.md`. Functions live in `functions/`; deploy with `firebase deploy --only functions`, never a bare `firebase deploy`.
 - Website Hosting deploy: `web/AGENTS.md` (only when asked).
 - Play releases are option A: build a signed AAB and upload with `~/Development/Keystore/play-publisher.json` (Play Developer API). Do not ship unless asked. Details: `docs/ACCESS.md`.
 - App Store Connect key `4AKYKM6RAW` may be used (Admin-level). 8.3.0 (830) is waiting for review as of 2026-09-27. Release type is manual, same as 8.2.1. Do not upload a binary unless asked.

@@ -16,8 +16,9 @@ Most catalog trees are world-readable (the website fetches them with unauthentic
 | `observations/by users/{uid}` | denied | owner read/write |
 | `observations/public` | read | create/update own id (`{uid}_…`) only while `status == review`. Owner may delete own id in any status. `stats` is Admin-only. |
 | `observations/logs/{uid}` | denied | owner read/write |
+| `photo_quota/{uid}` | denied | owner read (written by the photo Cloud Functions) |
 
-Admin SDK bypasses these rules (ingest, observation reviewer).
+Admin SDK bypasses these rules (ingest, observation reviewer, Cloud Functions). The photo lock-down of `credits` and `purchases` is staged in `firebase/database.rules.photo.json`; see `PHOTO_NAMES.md`.
 
 Signed-out photo-search logs under `anonymous` fail. The app does not write translations.
 
@@ -37,6 +38,7 @@ Signed-out photo-search logs under `anonymous` fail. The app does not write tran
 | `synonyms/{latinName}` | IPNI synonym list |
 | `lists_custom` | Editorial lists ("new", "by language", dated drops). Language lists: `list/{plantId}` is `1` (presence) or a designation year 1900–2100. Old app 8.2.1 reads only the keys. |
 | `plants_to_update` | `{count, list[]}` of Latin names in the live catalog |
+| `catalog_changes` | Append-only offline update log. `{count, list/{n}}`. Each entry is `id`, `kind` (`added` or `pictures`), and `stamp` (photos, unsuffixed plate, range map: `u` path, `b` bytes, `h` md5). `plants_to_update` does not record a new plate on an older plant. |
 | `families_to_update` | Same idea for family illustration packs |
 | `versions` | Store version codes + `db_update` |
 | `settings` | `ai_engine`, generic Plant.id labels to ignore |
@@ -47,15 +49,21 @@ Signed-out photo-search logs under `anonymous` fail. The app does not write tran
 | `observations/public` | Shared observations (subscription) |
 | `observations/logs` | Review / publish log |
 | `credits` | Credit spend/earn log |
+| `photo_quota/{uid}` | Photo-name allowance counters (`identifyPlant`) |
+| `ad_rewards/{transactionId}` | Rewarded-ad callbacks already credited (`admobReward`) |
+| `anonymous_daily/{day}` | Plant.id calls by guest accounts that day |
 | `web/{lang}` | Legacy About/Help and old-site chrome. The current website does not read this; chrome lives in `web/src/locales.json`. |
 | `web/catalog/{id}` | Slim website plant row (`id`, `name`, `family`, `url`, `illustrationUrl`). Written with each incremental add. |
 | `web/labels/{lang}/{id}` | Sourced vernacular for that plant, or omitted. Not inverted from `search_v3`. |
 
-Live sizes (public REST, 2026-03-26):
+Live sizes (public REST, 2026-09-28):
 
-- `plants_headers`: 1,413
-- `plants_v2`: 1,419
-- `plants_to_update/count`: 1,413
+- `plants_headers`: 1,421 (ids 0–1420, no gaps)
+- `plants_v2`: 1,421
+- `plants_to_update/count`: 1,421
+
+Index sizes below were last counted on 2026-03-26:
+
 - `lists_4_v2`: 9,731 keys
 - `counts_4_v2`: 11,130 keys
 - `search_photo`: 8,529 name mappings
@@ -84,6 +92,7 @@ Keyed by Latin binomial, e.g. `plants_v2/Acer campestre`.
   "usdaId": "ACCA5",
   "freebaseId": "/m/028j7f",
   "wikiName": "Acer campestre",
+  "habitats": [4, 7, 8],
   "wikilinks": {
     "data": "https://www.wikidata.org/wiki/Q157810",
     "commons": "...",
@@ -97,6 +106,8 @@ Keyed by Latin binomial, e.g. `plants_v2/Acer campestre`.
   }
 }
 ```
+
+`habitats` is the redesign key: 1–3 codes from 1 meadow, 3 water and wetland, 4 forest, 5 rocks and mountains, 7 dry and sunny, 8 fields and roadsides, 9 heath and bog, 10 coast. Primary code first. An empty array is allowed only with `cultivated: true`. Realtime Database drops an empty array, so those plants have no `habitats` key and no `filterHabitat` on the v3 header. `cultivated` is omitted when the plant is wild. Rules and the generated nodes are in `HABITATS.md`.
 
 `inflorescenceType` is an array of the 17 legend keys (`raceme`, `spike`, `spadix`, `corymb`, `umbel`, `compound_umbel`, `capitulum`, `head`, `panicle`, `compound_spike`, `cyme`, `helicoid`, `rhipidium`, `scorpioid`, `scorpioid_thyrse`, `dichasial_thyrse`, `double_scorpioid_thyrse`). Primary type is first. Empty means none of those diagrams apply (solitary flower, catkin, unnamed cluster). Filled from the English `inflorescence` paragraph; the app and website highlight those cells in the inflorescence legend. Language-independent — not a translations field.
 
@@ -163,13 +174,16 @@ Order in a key is always `color_habitat_petal_distribution`. Empty slot = not se
 | Attribute | Codes |
 |---|---|
 | Color | 1 white, 2 yellow, 3 red, 4 blue, 5 green |
-| Habitat | 1 meadow, 2 garden, 3 wetland, 4 forest, 5 rock, 6 tree |
+| Habitat (v2, shipped filter) | 1 meadow, 2 garden, 3 wetland, 4 forest, 5 rock, 6 tree |
+| Habitat (v3, redesign key) | 1 meadow, 3 water and wetland, 4 forest, 5 rocks and mountains, 7 dry and sunny, 8 fields and roadsides, 9 heath and bog, 10 coast |
 | Petal | 1 four or less, 2 five, 3 many, 4 zygomorphic |
 
 `filterPetal` is never empty. Three petals and apetalous flowers use **1**.
 | Distribution | TDWG level-2 numeric codes (10 Northern Europe … 91 Antarctic). Mapped from POWO distribution text via `abherbs-auto/tdwg.csv`. |
 
-Client: `lib/filter/filter_utils.dart`.
+The shipped app reads v2 (`counts_4_v2`, `lists_4_v2`, `plants_headers`). The redesign key reads `plants_headers_v3`, `counts_4_v3` and `lists_4_v3`, built from `plants_v2.habitats`. Those three nodes are world-readable and not client-writable. v3 has 14,310 count keys. Codes 2 and 6 are not reused. The all-empty key is `___`.
+
+Client: `lib/filter/filter_utils.dart` (v2). v3 paths: `firebasePlantHeadersV3`, `firebaseCountsV3`, `firebaseListsV3` in `lib/utils/utils.dart`.
 
 ## Translations
 
@@ -182,8 +196,8 @@ Client: `lib/filter/filter_utils.dart`.
 | `wikipedia` | Language Wikipedia URL |
 | `description`, `flower`, `inflorescence`, `fruit`, `leaf`, `stem`, `habitat` | Required for "fully translated" |
 | `toxicity` | Optional poison notes (contact rash, ingestion). Distinct from `plants_v2.toxicityClass`. |
-| `herbalism` | Optional culinary and traditional-use paragraph. UI heading is **Uses**, with a “not medical advice” disclaimer. `/update-plant` leaves live English unchanged (same as `trivia`). |
-| `trivia` | Optional. `/update-plant` leaves live English unchanged. |
+| `herbalism` | Optional culinary and traditional-use paragraph. UI heading is **Uses**, with a “not medical advice” disclaimer. `/add-plant` and `/update-plant` fill it from a sourced use. |
+| `trivia` | Optional. UI heading is **Notes**. Cultural history, etymology, folklore. Written only when a page that covers this species has a real hook. |
 | `sourceUrls` | Localized sources |
 
 Wikidata ingest creates a huge set of language codes (Wikipedia sitelinks). The app requests the device language. When the seven body fields are missing, the app and website show English for the empty body fields and keep the language's own `label` and `names`.
@@ -206,7 +220,7 @@ observations/
   logs/
 ```
 
-Observation fields (`lib/entity/observation.dart`): `id`, `plant`, `date` (legacy Java-style map + `time` millis), `latitude`, `longitude`, `note`, `photoPaths`, `status` (`private` / `public`), `order` (negative timestamp for newest-first), `indoors`.
+Observation fields (`lib/entity/observation.dart`): `id`, `plant`, `date` (legacy Java-style map + `time` millis), `latitude`, `longitude`, `note`, `photoPaths`, `status` (`private` / `public`), `order` (negative timestamp for newest-first), `indoors`. Guide rows also use `confirmed`, `source` (`camera`, `manual`, `import`), and `candidates`. A private row can carry `photoCloud: true` after its photos are in `private/{uid}/`. That flag is not part of `toJson`, so a Share payload and a full rewrite omit it.
 
 `id` is `{uid}_{millis}`. Private rows are owner-only. Publish writes the same payload to `observations/public` with `status: review`; the reviewer (`review_observations.py`) sets `public` or `rejected` via Admin SDK.
 
@@ -214,7 +228,7 @@ Upload statuses used when publishing: `private`, `review`, `public`, `success`, 
 
 `abherbs-auto/review_observations.py` is a Tkinter reviewer: download photos from the bucket, accept / reject / skip.
 
-Public stats at last read: 1,509 observations, 49 observers, 572 species, heaviest countries SK / SI / GB / US. `lastDate` is 2022-09-24 — the public feed looks quiet.
+Public stats recounted 2026-09-28 from `observations/public/by date/list`: 1,778 outdoor observations with status `public`, 56 observers, 630 species. The same list also holds 260 indoor observations and 2 outdoor rows still in `review`; those are not in the 1,778. Heaviest countries on the stored stats remain SK / SI / GB / CH. The latest public observation is *Dahlia pinnata*, 18 September 2026. Private: 2,654 records in 172 accounts (1,958 uploaded and published, 609 with photos only on the phone, 87 rejected).
 
 ## Users
 
@@ -224,7 +238,7 @@ Read by the app after sign-in (`lib/signin/authentication.dart`). Client-writabl
 - `lifetime subscription` — same
 - `credits` — rewarded-ad balance (client can still set its own number)
 - `token` — FCM
-- `purchases` — product id list (not used as the IAP gate)
+- `purchases` — product id list. The phone still gates features from the store. A purchase or restore merges the product id into this list. `identifyPlant` treats `search_by_photo`, `store_photos_monthly`, `store_photos_yearly`, `field_guide_monthly`, and `field_guide_yearly` as unlimited names. The receipt is not checked.
 - `favorites/{plantId}`
 
 ## Photo storage layout
@@ -238,10 +252,11 @@ gs://abherbs-resources/
     Acer_campestre@400.webp   illustration 400×600
   families/
   observations/{uid}/{Plant_name}/{file}.jpg
+  private/{uid}/{Plant_name}/{file}.jpg
   misc/                     terms, privacy
 ```
 
-Firebase Storage: `photos/`, `families/`, `offline/`, `misc/` are public-read, client-write denied. `observations/{uid}/**` write is that uid only (image, 10 MB). The default bucket `abherbs-backend.appspot.com` is deny-all. Public **listing** of the GCS bucket is IAM, not these rules.
+Firebase Storage: `photos/`, `families/`, `offline/`, `misc/` are public-read, client-write denied. `observations/{uid}/**` is public-read and owner-write (image, 10 MB); shared Sightings use it. `private/{uid}/**` is owner-read and owner-write (image, 10 MB). Field Guide copies a Seen photo there, including a name outside the book. The object key mirrors the `observations/` path. The rule file `firebase/storage.abherbs-resources.rules` was released to `abherbs-resources` on 2026-10-03 (`firebase.storage/abherbs-resources`). A signed-in owner can read and write `private/`. The default bucket `abherbs-backend.appspot.com` is deny-all. `firebase.json` has no Storage target, so a database or functions deploy does not publish these rules. Public **listing** of the GCS bucket is IAM, not these rules.
 
 Local staging on this machine (from `abherbs-auto/constants.py`):
 
@@ -254,7 +269,7 @@ Photo file names are `{first letter of genus}{first letter of species}{n}.webp` 
 
 ## Search by photo
 
-1. Client posts the image to Plant.id v2.
+1. The app sends the image to `identifyPlant`, which posts it to Plant.id v3.
 2. Each suggestion's scientific name is looked up in `search_photo/{lowercase name without dots}`.
 3. A hit contains `count` + `path` into the catalog (species or higher taxon).
 4. Results are logged under `users_photo_search/{lang}/{uid}/{ts}` when the user is signed in. Anonymous logs are denied.

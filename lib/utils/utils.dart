@@ -35,11 +35,25 @@ const String productObservations = "observations";
 const String productPhotoSearch = "search_by_photo";
 const String subscriptionMonthly = "store_photos_monthly";
 const String subscriptionYearly = "store_photos_yearly";
+const String fieldGuideMonthly = "field_guide_monthly";
+const String fieldGuideYearly = "field_guide_yearly";
 
 const String keyLanguageAndCountry = "language_country";
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
 const String keyAlwaysMyRegion = "always_my_region";
+const String keyGuideRegion = "guide_region";
+const String keyGuideRegionFromLocation = "guide_region_from_location";
+const String keyGuideWildOnly = "guide_wild_only";
+const String keyGuideSeenHideShared = "guide_seen_hide_shared";
+const String keyGuideLocationRefused = "guide_location_refused";
+const String keyGuideLocationAllowed = "guide_location_allowed";
+const String keyGuideTheme = "guide_theme";
+const String keyGuideOfflinePacks = "guide_offline_packs";
+const String keyGuideOfflineTotal = "guide_offline_total";
+const String keyGuideOfflineStoredPlants = "guide_offline_stored_plants";
+const String keyGuideOfflineDone = "guide_offline_done";
+const String keyGuideOfflineChange = "guide_offline_change";
 const String keyOffline = "offline";
 const String keyOfflinePlant = "offline_plant";
 const String keyOfflineFamily = "offline_family";
@@ -51,6 +65,8 @@ const String keyPurchases = "purchases";
 const String keyToken = "token";
 const String keyOldVersion = "old_version";
 const String keyLifetimeSubscription = "lifetime_subscription";
+const String keyGuestCreated = "guest_created";
+const String keyGuestFreeUsed = "guest_free_used";
 const String keyFontSize = "font_size";
 const int rateCountInitial = 5;
 const String rateStateInitial = "";
@@ -148,22 +164,16 @@ const String privacyPolicyUrl =
     "https://storage.googleapis.com/abherbs-resources/misc/PrivacyPolicyofWhatsthatflower.htm";
 const String googleMapsEndpoint =
     "https://maps.googleapis.com/maps/api/staticmap?";
-const String plantIdEndpoint = "https://api.plant.id/v2/identify";
-
-const List<String> plantIdModifiers = ["similar_images"];
-const List<String> plantIdPlantDetails = [
-  "common_names",
-  "url",
-  "wiki_description",
-  "taxonomy"
-];
-
 const String storageBucket = "gs://abherbs-resources";
 const String storageEndpoint =
     "https://storage.googleapis.com/abherbs-resources/";
 const String storageFamilies = "families/";
 const String storagePhotos = "photos/";
 const String storageObservations = "observations/";
+
+/// Owner-only copies of Seen photos. Shared Sightings stay under
+/// [storageObservations].
+const String storagePrivate = "private/";
 const String defaultExtension = ".webp";
 const String defaultPhotoExtension = ".jpg";
 const String thumbnailsDir = "/.thumbnails";
@@ -172,6 +182,8 @@ const double imageSizeScaleDown = 2048;
 const int firebaseCacheSize = 1024 * 1024 * 20;
 const String firebaseCounts = 'counts_4_v2';
 const String firebaseLists = 'lists_4_v2';
+const String firebaseCountsV3 = 'counts_4_v3';
+const String firebaseListsV3 = 'lists_4_v3';
 const String firebasePlants = 'plants_v2';
 const String firebaseSearch = 'search_v3';
 const String firebaseAPGIV = 'APG IV_v3';
@@ -196,15 +208,20 @@ int? customListYear(dynamic value) {
   }
   return n;
 }
+
 const String firebasePlantHeaders = 'plants_headers';
+const String firebasePlantHeadersV3 = 'plants_headers_v3';
 const String firebaseTranslations = 'translations';
 const String firebaseTranslationsTaxonomy = 'translations_taxonomy';
 const String firebasePlantsToUpdate = "plants_to_update";
+const String firebaseCatalogChanges = "catalog_changes";
 const String firebaseFamiliesToUpdate = "families_to_update";
 const String firebaseVersions = "versions";
 const String firebaseUsers = "users";
 const String firebaseSynonyms = "synonyms";
 const String firebaseUsersPhotoSearch = "users_photo_search";
+const String firebasePhotoQuota = "photo_quota";
+const String firebaseAttributeAnonymousFreeUsed = "anonymousFreeUsed";
 const String firebasePromotions = "promotions";
 const String firebaseSearchPhoto = 'search_photo';
 const String firebaseSettingsGenericEntities = "settings/generic_entities";
@@ -280,6 +297,11 @@ const String remoteConfigCustomFilterVideo = "custom_filter_video";
 
 final DatabaseReference rootReference = FirebaseDatabase.instance.ref();
 final DatabaseReference countsReference = rootReference.child(firebaseCounts);
+final DatabaseReference countsV3Reference =
+    rootReference.child(firebaseCountsV3);
+final DatabaseReference listsV3Reference = rootReference.child(firebaseListsV3);
+final DatabaseReference headersV3Reference =
+    rootReference.child(firebasePlantHeadersV3);
 final DatabaseReference listsReference =
     rootReference.child(firebasePlantHeaders);
 final DatabaseReference listsCustomReference =
@@ -344,7 +366,8 @@ bool isTransientNetworkError(Object error) {
 /// EventChannel `cancel` after the engine/plugin is already gone (screen pop, process death).
 bool isIgnorablePluginTeardown(Object error) {
   final text = error.toString();
-  return text.contains('MissingPluginException') && text.contains('method cancel');
+  return text.contains('MissingPluginException') &&
+      text.contains('method cancel');
 }
 
 bool isIgnorableNonFatalError(Object error) {
@@ -430,10 +453,42 @@ DateTime getDateTimeFromExif(IfdTag? dateTime) {
   }
 }
 
+/// Reads a missing local Seen photo from the owner's private Storage
+/// prefix. The field guide sets this. Left unset, [getImage] uses the
+/// public URL, which is how Sightings already load.
+typedef GuidePrivatePhotoFetch = Future<File?> Function(String path);
+
+GuidePrivatePhotoFetch? guidePrivatePhotoFetch;
+
+/// Uploads Seen photos for a Field Guide account. The old observation editor
+/// calls this without importing the guide library.
+typedef GuidePrivatePhotoSync = Future<void> Function({String? onlyId});
+
+GuidePrivatePhotoSync? guideSyncPrivatePhotos;
+
+typedef GuidePrivatePhotoDelete = Future<void> Function(Iterable<String> paths);
+
+GuidePrivatePhotoDelete? guideDeletePrivatePhotos;
+
+void Function(String id)? guideSkipPrivatePhoto;
+
+Future<File?> _localImage(String url) async {
+  final local = await Offline.getLocalFile(url);
+  if (local != null) return local;
+  final fetch = guidePrivatePhotoFetch;
+  if (fetch == null) return null;
+  try {
+    return await fetch(url);
+  } catch (error) {
+    debugPrint('private photo $url: $error');
+    return null;
+  }
+}
+
 Widget getImage(String url, Widget placeholder,
     {double width = 50.0, double height = 50.0, BoxFit fit = BoxFit.contain}) {
   return FutureBuilder<File?>(
-      future: Offline.getLocalFile(url),
+      future: _localImage(url),
       builder: (BuildContext context, AsyncSnapshot<File?> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data != null) {
@@ -785,7 +840,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
             );
           } else if (value == 2) {
             if (Auth.appUser != null && Auth.credits > 0) {
-              Auth.changeCredits(-1, "search");
+              Auth.spendCredit("search");
               Navigator.push(
                 mainContext,
                 MaterialPageRoute(
@@ -828,7 +883,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
             );
           } else if (value == 2) {
             if (Auth.appUser != null && Auth.credits > 0) {
-              Auth.changeCredits(-1, "search");
+              Auth.spendCredit("search");
               Navigator.push(
                 mainContext,
                 MaterialPageRoute(
@@ -887,7 +942,10 @@ void goToDetail(State state, BuildContext context, Locale myLocale, String name,
       final code = getLanguageCode(myLocale.languageCode);
       translationsReference.child(code).child(name).keepSynced(true);
       if (code != languageEnglish) {
-        translationsReference.child(languageEnglish).child(name).keepSynced(true);
+        translationsReference
+            .child(languageEnglish)
+            .child(name)
+            .keepSynced(true);
       }
     }
   });

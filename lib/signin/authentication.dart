@@ -1,33 +1,86 @@
 import 'dart:async';
 
+import 'package:abherbs_flutter/purchase/owned_purchases.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 class Auth {
   static FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  static User? appUser = firebaseAuth.currentUser;
+
+  /// The signed-in account. The anonymous guest account is not one.
+  static User? appUser = _signedIn(firebaseAuth.currentUser);
   static int credits = 0;
+  static int _accountGen = 0;
+  static Future<void>? _loadingAccount;
+
+  static User? _signedIn(User? user) =>
+      user == null || user.isAnonymous ? null : user;
+
+  /// The anonymous account created at first launch, while no one is signed in.
+  static User? get guestUser {
+    final user = firebaseAuth.currentUser;
+    return user != null && user.isAnonymous ? user : null;
+  }
 
   static Future<void> _logOldVersionEvent() async {
     await FirebaseAnalytics.instance.logEvent(name: 'offline_download');
   }
 
+  /// Creates the guest account once per install. Signing out does not create
+  /// another, so its one free identification is not handed out again.
+  static Future<void> startGuest() async {
+    if (firebaseAuth.currentUser != null) return;
+    if (Prefs.getBool(keyGuestCreated, false)) return;
+    try {
+      await firebaseAuth.signInAnonymously();
+      await Prefs.setBool(keyGuestCreated, true);
+    } catch (error) {
+      debugPrint('guest account: $error');
+    }
+  }
+
+  /// Links the guest account so its uid, and the identification it used,
+  /// carry over. A credential that already has an account signs in to it.
+  static Future<UserCredential> _linkOrSignIn(AuthCredential credential) async {
+    final guest = guestUser;
+    if (guest != null) {
+      try {
+        return await guest.linkWithCredential(credential);
+      } on FirebaseAuthException catch (error) {
+        if (error.code != 'credential-already-in-use' &&
+            error.code != 'email-already-in-use') {
+          rethrow;
+        }
+        return firebaseAuth
+            .signInWithCredential(error.credential ?? credential);
+      }
+    }
+    return firebaseAuth.signInWithCredential(credential);
+  }
+
   static Future<void> signInWithCredential(AuthCredential credential) async {
-    await firebaseAuth.signInWithCredential(credential);
+    await _linkOrSignIn(credential);
     setUser();
   }
 
   static Future<User?> signInWithEmail(String email, String password) async {
-    UserCredential result = await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+    UserCredential result = await firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password);
     setUser();
     return result.user;
   }
 
   static Future<User?> signUpWithEmail(String email, String password) async {
-    UserCredential result = await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+    final guest = guestUser;
+    UserCredential result = guest != null
+        ? await guest.linkWithCredential(
+            EmailAuthProvider.credential(email: email, password: password))
+        : await firebaseAuth.createUserWithEmailAndPassword(
+            email: email, password: password);
     setUser();
     return result.user;
   }
@@ -36,14 +89,13 @@ class Auth {
     return firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
-  static Future<void> signUpWithPhone(PhoneVerificationCompleted verificationCompleted,
+  static Future<void> signUpWithPhone(
+      PhoneVerificationCompleted verificationCompleted,
       PhoneVerificationFailed verificationFailed,
       PhoneCodeSent codeSent,
       PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout,
       String phoneNumber,
       [int? token]) async {
-
-
     await firebaseAuth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       timeout: const Duration(seconds: 5),
@@ -55,71 +107,153 @@ class Auth {
     );
   }
 
-  static void setUser() {
-    appUser = firebaseAuth.currentUser;
-    if (appUser != null) {
-      usersReference.child(appUser!.uid).keepSynced(true);
+  /// Reads the signed-in account. Callers share one read until it finishes,
+  /// so Find can wait for credits and purchased features before it redraws.
+  static Future<void> setUser() {
+    final pending = _loadingAccount;
+    if (pending != null) return pending;
+    late final Future<void> run;
+    run = _readAccount().whenComplete(() {
+      if (identical(_loadingAccount, run)) _loadingAccount = null;
+    });
+    _loadingAccount = run;
+    return run;
+  }
 
-      usersReference.child(appUser!.uid).once().then((event) {
-        Purchases.hasOldVersion = event.snapshot.value != null && (event.snapshot.value as Map)[firebaseAttributeOldVersion] != null && (event.snapshot.value as Map)[firebaseAttributeOldVersion];
-        if (Purchases.hasOldVersion) {
-          _logOldVersionEvent();
-        }
-        Prefs.setBool(keyOldVersion, Purchases.hasOldVersion);
-
-        credits = event.snapshot.value != null && (event.snapshot.value as Map)[firebaseAttributeCredits] != null ? (event.snapshot.value as Map)[firebaseAttributeCredits] : 0;
-
-        Prefs.getStringF(keyToken).then((token) {
-          if (token.isNotEmpty) {
-            usersReference.child(appUser!.uid).child(firebaseAttributeToken).set(token);
-          }
-        });
-
-        Prefs.getStringListF(keyPurchases, []).then((purchases) {
-          if (purchases.length > 0) {
-            usersReference.child(appUser!.uid).child(firebaseAttributePurchases).set(purchases);
-          }
-        });
-      }).catchError((error) {
+  static Future<void> _readAccount() async {
+    final gen = _accountGen;
+    final user = _signedIn(firebaseAuth.currentUser);
+    if (gen != _accountGen) return;
+    appUser = user;
+    if (user == null) {
+      credits = 0;
+      Purchases.hasOldVersion = false;
+      Purchases.hasLifetimeSubscription = false;
+      return;
+    }
+    final uid = user.uid;
+    usersReference.child(uid).keepSynced(true);
+    try {
+      final event = await usersReference.child(uid).once();
+      if (gen != _accountGen) return;
+      final value = event.snapshot.value;
+      if (value is Map) {
+        final old = value[firebaseAttributeOldVersion];
+        Purchases.hasOldVersion = old == true;
+        final rawCredits = value[firebaseAttributeCredits];
+        credits = rawCredits is int ? rawCredits : 0;
+      } else {
         Purchases.hasOldVersion = false;
         credits = 0;
-      });
-
-      if (Purchases.isPhotoSearch()) {
-        rootReference.child(firebaseSearchPhoto).child(firebaseAttributeEntity).keepSynced(true);
       }
-
-      usersReference.child(appUser!.uid).child(firebaseAttributeLifetimeSubscription).once().then((event) {
-        Purchases.hasLifetimeSubscription = event.snapshot.value != null && (event.snapshot.value as bool);
-        Prefs.setBool(keyLifetimeSubscription, Purchases.hasLifetimeSubscription);
-      }).catchError((error) {
-        Purchases.hasLifetimeSubscription = false;
-      });
-    } else {
+      if (Purchases.hasOldVersion) {
+        unawaited(_logOldVersionEvent());
+      }
+      unawaited(Prefs.setBool(keyOldVersion, Purchases.hasOldVersion));
+      unawaited(Prefs.getStringF(keyToken).then((token) {
+        if (gen != _accountGen || token.isEmpty || appUser?.uid != uid) return;
+        usersReference.child(uid).child(firebaseAttributeToken).set(token);
+      }));
+      unawaited(Prefs.getStringListF(keyPurchases, []).then((purchases) {
+        if (gen != _accountGen || purchases.isEmpty || appUser?.uid != uid) {
+          return Future<void>.value();
+        }
+        return rememberStorePurchases(purchases);
+      }));
+    } catch (error) {
+      if (gen != _accountGen) return;
       Purchases.hasOldVersion = false;
+      credits = 0;
+    }
+
+    if (Purchases.isPhotoSearch()) {
+      rootReference
+          .child(firebaseSearchPhoto)
+          .child(firebaseAttributeEntity)
+          .keepSynced(true);
+    }
+
+    try {
+      final event = await usersReference
+          .child(uid)
+          .child(firebaseAttributeLifetimeSubscription)
+          .once();
+      if (gen != _accountGen) return;
+      final value = event.snapshot.value;
+      Purchases.hasLifetimeSubscription = value == true;
+      unawaited(Prefs.setBool(
+        keyLifetimeSubscription,
+        Purchases.hasLifetimeSubscription,
+      ));
+    } catch (error) {
+      if (gen != _accountGen) return;
       Purchases.hasLifetimeSubscription = false;
     }
   }
 
-  static Future<void> changeCredits(int credit, String feature) async {
-    if (appUser != null) {
-      usersReference.child(appUser!.uid).keepSynced(true);
-      await usersReference.child(appUser!.uid).child(firebaseAttributeCredits).once().then((event) {
-        credits = event.snapshot.value != null ? (event.snapshot.value as int) + credit : credit;
-        logsCreditsReference.child(appUser!.uid).child(DateTime.now().millisecondsSinceEpoch.toString()).set(feature);
-      }).catchError((error) {
-        credits = credit;
-      });
-      usersReference.child(appUser!.uid).child(firebaseAttributeCredits).set(credits);
+  /// Spends one credit. The rules let the app only lower the balance by one;
+  /// photo identifications and ad rewards are counted by the Cloud Functions.
+  static Future<void> spendCredit(String feature) async {
+    final user = appUser;
+    if (user == null) return;
+    final ref = usersReference.child(user.uid).child(firebaseAttributeCredits);
+    try {
+      final event = await ref.get();
+      final current = event.value;
+      if (current is! int || current <= 0) return;
+      await ref.set(current - 1);
+      credits = current - 1;
+      await logsCreditsReference
+          .child(user.uid)
+          .child(DateTime.now().millisecondsSinceEpoch.toString())
+          .set(feature);
+    } catch (error) {
+      debugPrint('spend credit: $error');
+    }
+  }
+
+  /// Reads the balance again after a Cloud Function changed it.
+  static Future<void> reloadCredits() async {
+    final user = appUser;
+    if (user == null) return;
+    try {
+      final event = await usersReference
+          .child(user.uid)
+          .child(firebaseAttributeCredits)
+          .get();
+      final value = event.value;
+      credits = value is int ? value : 0;
+    } catch (error) {
+      debugPrint('reload credits: $error');
+    }
+  }
+
+  /// The AdMob callback reaches [admobReward] a moment after the ad closes,
+  /// so the balance is read until it moves or a few seconds pass.
+  static Future<void> waitForAdReward(int before) async {
+    for (var i = 0; i < 6; i++) {
+      await Future<void>.delayed(const Duration(seconds: 1));
+      await reloadCredits();
+      if (credits != before) return;
     }
   }
 
   static Future<void> signOut() async {
+    _accountGen++;
+    _loadingAccount = null;
     appUser = null;
+    credits = 0;
     return firebaseAuth.signOut();
   }
 
-  static StreamSubscription<User?> subscribe(Function(User?) listener) {
-    return firebaseAuth.authStateChanges().listen(listener);
+  /// Linking the guest account keeps the same user, so `authStateChanges`
+  /// stays quiet; `userChanges` reports it. Listeners see the guest as null.
+  static StreamSubscription<User?> subscribe(void Function(User?) listener) {
+    return firebaseAuth.userChanges().listen((user) {
+      final signedIn = _signedIn(user);
+      appUser = signedIn;
+      if (signedIn == null) credits = 0;
+      listener(signedIn);
+    });
   }
 }

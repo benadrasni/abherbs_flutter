@@ -3,7 +3,11 @@ import 'dart:io';
 import 'dart:ui' show PlatformDispatcher;
 
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/guide/guide_shell.dart';
+import 'package:abherbs_flutter/guide/list_page.dart';
+import 'package:abherbs_flutter/guide/species_page.dart';
 import 'package:abherbs_flutter/plant_list.dart';
+import 'package:abherbs_flutter/purchase/owned_purchases.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/settings/preferences.dart';
@@ -11,10 +15,12 @@ import 'package:abherbs_flutter/settings/settings_remote.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
+import 'package:abherbs_flutter/utils/safe_focus_traversal.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -26,8 +32,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
-import 'detail/plant_detail.dart';
-import 'entity/plant.dart';
 import 'filter/color.dart';
 import 'filter/distribution.dart';
 import 'filter/filter_utils.dart';
@@ -49,10 +53,19 @@ Future<void> initializeFlutterFire() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseAppCheck.instance.activate(
+    providerAndroid: isInDebugMode
+        ? const AndroidDebugProvider()
+        : const AndroidPlayIntegrityProvider(),
+    providerApple: isInDebugMode
+        ? const AppleDebugProvider()
+        : const AppleDeviceCheckProvider(),
+  );
   FirebaseDatabase.instance.setPersistenceEnabled(true);
   FirebaseDatabase.instance.setPersistenceCacheSizeBytes(firebaseCacheSize);
 
-  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!isInDebugMode);
+  await FirebaseCrashlytics.instance
+      .setCrashlyticsCollectionEnabled(!isInDebugMode);
 
   await RemoteConfiguration.setupRemoteConfig();
 
@@ -118,7 +131,7 @@ Future<Map<String, String>> initializeFilter() async {
 Future<String> initializeRoute() {
   return Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {
     Preferences.myFilterAttributes = myFilter;
-    return '/' + myFilter[0];
+    return '/guide';
   });
 }
 
@@ -128,6 +141,7 @@ void main() {
     initializeFlutterFire().then((_) async {
       WakelockPlus.enable();
       await Prefs.init();
+      unawaited(Auth.startGuest());
       await AppTrackingTransparency.requestTrackingAuthorization();
       await MobileAds.instance.initialize();
       Locale locale = await initializeLocale();
@@ -215,6 +229,15 @@ class _AppState extends State<App> {
   }
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
+    final remembered = <String>[
+      for (final purchase in purchaseDetailsList)
+        if (purchase.status == PurchaseStatus.purchased ||
+            purchase.status == PurchaseStatus.restored)
+          purchase.productID,
+    ];
+    if (remembered.isNotEmpty) {
+      unawaited(rememberStorePurchases(remembered));
+    }
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
       if (purchaseDetails.status == PurchaseStatus.restored) {
         Purchases.purchases[purchaseDetails.productID] = purchaseDetails;
@@ -222,7 +245,8 @@ class _AppState extends State<App> {
           await _inAppPurchase.completePurchase(purchaseDetails);
         }
         if (mounted &&
-            (purchaseDetails.productID == productNoAdsAndroid || purchaseDetails.productID == productNoAdsIOS)) {
+            (purchaseDetails.productID == productNoAdsAndroid ||
+                purchaseDetails.productID == productNoAdsIOS)) {
           setState(() {});
         }
       }
@@ -236,7 +260,10 @@ class _AppState extends State<App> {
         switch (action) {
           case notificationAttributeActionList:
             String path = message.data[notificationAttributePath];
-            rootReference.child(path).keepSynced(true);
+            final openNew = notificationPathOpensNewInBook(path);
+            if (!openNew) {
+              rootReference.child(path).keepSynced(true);
+            }
             return notificationPopup(
               _navigatorKey.currentContext!,
               notificationTitle(message),
@@ -245,22 +272,29 @@ class _AppState extends State<App> {
               final context = _navigatorKey.currentContext;
               if (open && context != null) {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PlantList({}, '', rootReference.child(path)),
-                        settings: RouteSettings(name: 'PlantList')));
+                  context,
+                  openNew
+                      ? guideNewInBookRoute()
+                      : MaterialPageRoute(
+                          builder: (context) =>
+                              PlantList({}, '', rootReference.child(path)),
+                          settings: RouteSettings(name: 'PlantList'),
+                        ),
+                );
               }
             });
           case notificationAttributeActionPlant:
-            String name = message.data[notificationAttributeName];
             return notificationPopup(
               _navigatorKey.currentContext!,
               notificationTitle(message),
               notificationBody(message),
             ).then((open) {
               final context = _navigatorKey.currentContext;
-              if (open && context != null) {
-                goToDetail(this, context, Localizations.localeOf(context), name, widget.filter);
+              final route = guideNotificationPlantRoute(
+                message.data[notificationAttributeName],
+              );
+              if (open && context != null && route != null) {
+                Navigator.push(context, route);
               }
             });
           case notificationAttributeActionBrowse:
@@ -286,7 +320,10 @@ class _AppState extends State<App> {
     }
     Prefs.setString(keyToken, token);
     if (Auth.appUser != null) {
-      usersReference.child(Auth.appUser!.uid).child(firebaseAttributeToken).set(token);
+      usersReference
+          .child(Auth.appUser!.uid)
+          .child(firebaseAttributeToken)
+          .set(token);
     }
   }
 
@@ -300,7 +337,8 @@ class _AppState extends State<App> {
       provisional: false,
       sound: true,
     );
-    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,
@@ -337,7 +375,8 @@ class _AppState extends State<App> {
     }
   }
 
-  Future<MaterialPageRoute<dynamic>>? findRedirectF(Map<String, dynamic> notificationData) {
+  Future<MaterialPageRoute<dynamic>>? findRedirectF(
+      Map<String, dynamic> notificationData) {
     if (notificationData.isEmpty) {
       return null;
     } else {
@@ -355,6 +394,10 @@ class _AppState extends State<App> {
             return null;
           case notificationAttributeActionList:
             String path = notificationData[notificationAttributePath];
+            if (path.isNotEmpty && notificationPathOpensNewInBook(path)) {
+              return Future<MaterialPageRoute<dynamic>>.value(
+                  guideNewInBookRoute());
+            }
             if (path.isNotEmpty) {
               rootReference.child(path).keepSynced(true);
               rootReference.child(firebasePlantHeaders).keepSynced(true);
@@ -364,39 +407,29 @@ class _AppState extends State<App> {
                     ? result.fold(0, (t, value) => t + (value == null ? 0 : 1))
                     : (result as Map).values.length;
                 if (length == 0) {
-                  rootReference.child(path).child("refreshMock").set("mock").catchError((error) {
+                  rootReference
+                      .child(path)
+                      .child("refreshMock")
+                      .set("mock")
+                      .catchError((error) {
                     FirebaseCrashlytics.instance.log("0-length custom list");
                   });
                 }
                 return Future<MaterialPageRoute<dynamic>>(() {
                   return MaterialPageRoute(
-                      builder: (context) => PlantList({}, '', rootReference.child(path)),
+                      builder: (context) =>
+                          PlantList({}, '', rootReference.child(path)),
                       settings: RouteSettings(name: 'PlantList'));
                 });
               });
             }
             return null;
           case notificationAttributeActionPlant:
-            String name = notificationData[notificationAttributeName];
-            if (name.isNotEmpty) {
-              rootReference.child(firebasePlants).keepSynced(true);
-              return plantsReference.child(name).once().then((event) {
-                if (event.snapshot.value != null && (event.snapshot.value as Map)['id'] != null) {
-                  Plant plant = Plant.fromJson(event.snapshot.key ?? '', event.snapshot.value as Map);
-                  return Future<MaterialPageRoute<dynamic>>(() {
-                    return MaterialPageRoute(
-                        builder: (context) =>
-                            PlantDetail(Localizations.localeOf(context), Map<String, String>(), plant),
-                        settings: RouteSettings(name: 'PlantDetail'));
-                  });
-                }
-                return Future<MaterialPageRoute<dynamic>>(() {
-                  return MaterialPageRoute(
-                      builder: (context) => Color(Map<String, String>()), settings: RouteSettings(name: 'Color'));
-                });
-              });
-            }
-            return null;
+            final route = guideNotificationPlantRoute(
+              notificationData[notificationAttributeName]?.toString(),
+            );
+            if (route == null) return null;
+            return Future<MaterialPageRoute<dynamic>>.value(route);
           default:
             return null;
         }
@@ -404,16 +437,19 @@ class _AppState extends State<App> {
     }
   }
 
-  Locale localeResolution(Locale savedLocale, Iterable<Locale> supportedLocales) {
+  Locale localeResolution(
+      Locale savedLocale, Iterable<Locale> supportedLocales) {
     Locale? resultLocale;
     Map<String, Locale> defaultLocale = {};
     for (Locale locale in supportedLocales) {
-      if (locale.languageCode == savedLocale.languageCode && locale.countryCode == savedLocale.countryCode) {
+      if (locale.languageCode == savedLocale.languageCode &&
+          locale.countryCode == savedLocale.countryCode) {
         resultLocale = locale;
         break;
       }
 
-      if (locale.languageCode != languageEnglish || locale.countryCode == 'US') {
+      if (locale.languageCode != languageEnglish ||
+          locale.countryCode == 'US') {
         defaultLocale[locale.languageCode] = locale;
       }
     }
@@ -431,7 +467,8 @@ class _AppState extends State<App> {
       resultLocale = defaultLocale[languageEnglish];
     }
 
-    Prefs.setStringList(keyLanguageAndCountry, [resultLocale!.languageCode, resultLocale.countryCode ?? '']);
+    Prefs.setStringList(keyLanguageAndCountry,
+        [resultLocale!.languageCode, resultLocale.countryCode ?? '']);
     return resultLocale;
   }
 
@@ -445,7 +482,8 @@ class _AppState extends State<App> {
       _inAppPurchase.restorePurchases();
     }
     Purchases.hasOldVersion = Prefs.getBool(keyOldVersion, false);
-    Purchases.hasLifetimeSubscription = Prefs.getBool(keyLifetimeSubscription, false);
+    Purchases.hasLifetimeSubscription =
+        Prefs.getBool(keyLifetimeSubscription, false);
     Auth.setUser();
     Offline.initialize();
   }
@@ -455,7 +493,8 @@ class _AppState extends State<App> {
     super.initState();
 
     _firebaseCloudMessagingListeners();
-    final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
+    final Stream<List<PurchaseDetails>> purchaseUpdated =
+        _inAppPurchase.purchaseStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
@@ -504,6 +543,12 @@ class _AppState extends State<App> {
       navigatorKey: _navigatorKey,
       locale: localeResolution(_locale, S.delegate.supportedLocales),
       debugShowCheckedModeBanner: false,
+      builder: (BuildContext context, Widget? child) {
+        return FocusTraversalGroup(
+          policy: safeReadingOrderTraversalPolicy,
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
       localizationsDelegates: [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -517,6 +562,7 @@ class _AppState extends State<App> {
         FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
       ],
       routes: {
+        '/guide': (context) => const GuideShell(),
         '/filterColor': (context) => Color(widget.filter),
         '/filterHabitat': (context) => Habitat(widget.filter),
         '/filterPetal': (context) => Petal(widget.filter),

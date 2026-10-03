@@ -119,7 +119,7 @@ Paid. `lib/settings/offline.dart` keeps selected RTDB subtrees synced and downlo
 
 | Service | Where | Purpose |
 |---|---|---|
-| Plant.id v2 `api.plant.id/v2/identify` | `search_photo.dart` | Photo identification |
+| Plant.id v3 `https://plant.id/api/v3/identification` | `functions/src/index.ts` | Photo identification |
 | Google Translate v2 | plant detail | On-demand body text |
 | Google Maps Static | observations | Map thumbnails |
 | POWO / IPNI | Remote Config + taxonomy | Species page links |

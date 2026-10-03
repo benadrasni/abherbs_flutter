@@ -7,7 +7,7 @@ description: Flutter version of abherbs
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 8.3.1+831
+version: 9.0.0+900
 
 environment:
   sdk: ">=3.6.0 <4.0.0"
@@ -18,23 +18,25 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   shared_preferences: 2.5.5
-  firebase_core: 4.14.0
-  firebase_messaging: 16.6.0
-  firebase_analytics: 12.5.0
-  firebase_auth: 6.6.1
-  firebase_storage: 13.5.0
-  firebase_database: 12.5.0
-  firebase_remote_config: 6.6.0
-  firebase_crashlytics: 5.3.0
-  firebase_performance: 0.11.5
-  google_maps_flutter: 2.18.0
-  google_maps_flutter_ios_sdk10: 2.18.11
+  firebase_core: 4.15.0
+  firebase_messaging: 16.7.0
+  firebase_analytics: 12.6.0
+  firebase_auth: 6.7.0
+  firebase_storage: 13.6.0
+  firebase_database: 12.6.0
+  firebase_remote_config: 6.7.0
+  firebase_crashlytics: 5.4.0
+  firebase_performance: 0.11.6
+  firebase_app_check: 0.4.8
+  cloud_functions: 6.5.0
+  google_maps_flutter: 2.18.2
+  google_maps_flutter_ios_sdk10: 2.19.0
   google_mobile_ads: 9.1.0
   google_sign_in: 7.2.0
   sign_in_with_apple: 8.2.0
   device_info_plus: 13.2.0
-  in_app_purchase: 3.3.0
-  cached_network_image: 3.4.1
+  in_app_purchase: 3.3.1
+  cached_network_image: 4.0.2
   url_launcher: 6.3.2
   url_launcher_ios: 6.4.2
   http: 1.6.0
@@ -45,10 +47,14 @@ dependencies:
   percent_indicator: 4.2.5
   package_info_plus: 10.2.1
   image_picker: 1.2.3
+  camera: 0.12.1
   exif: 3.3.0
   permission_handler: 13.0.2
+  geolocator: 14.0.3
+  geocoding: 5.0.0
   datetime_picker_formfield_new: 2.1.0
   connectivity_plus: 7.3.1
+  crypto: 3.0.7
   photo_view: 0.15.0
   youtube_player_iframe: 6.0.2
   app_tracking_transparency: 2.0.7
@@ -77,6 +83,16 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  fonts:
+    - family: Source Sans 3
+      fonts:
+        - asset: fonts/SourceSans3.ttf
+    - family: Fraunces
+      fonts:
+        - asset: fonts/Fraunces.ttf
+        - asset: fonts/Fraunces-Italic.ttf
+          style: italic
 
   # To add assets to your application, add an assets section, like this:
   # assets:
