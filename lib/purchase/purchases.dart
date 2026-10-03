@@ -39,8 +39,11 @@ class Purchases {
     return hasOldVersion || purchases.containsKey(productCustomFilter);
   }
 
+  /// The offline product, the old paid app, and a lifetime purchase.
   static bool isOffline() {
-    return hasOldVersion || purchases.containsKey(productOffline);
+    return hasOldVersion ||
+        hasLifetimeSubscription ||
+        purchases.containsKey(productOffline);
   }
 
   static bool isObservations() {
@@ -59,13 +62,19 @@ class Purchases {
     return purchases.containsKey(subscriptionYearly);
   }
 
-  /// Photo storage and the Field Guide plans. A lifetime purchase is not
-  /// this plan: sync of Seen stays on Field Guide.
+  /// Photo storage and the Field Guide plans. The old paid app and a lifetime
+  /// purchase are not this plan, and the Field Guide row stays available.
   static bool hasFieldGuide() {
     return isSubscribedMonthly() ||
         isSubscribedYearly() ||
         purchases.containsKey(fieldGuideMonthly) ||
         purchases.containsKey(fieldGuideYearly);
+  }
+
+  /// Copies Seen photos to the account. Field Guide, the old paid app, and a
+  /// lifetime purchase.
+  static bool syncsSeenPhotos() {
+    return hasFieldGuide() || hasOldVersion || hasLifetimeSubscription;
   }
 
   static bool isSignNeeded() {

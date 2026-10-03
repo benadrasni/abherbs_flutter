@@ -180,7 +180,7 @@ GuideAllowance guideCameraLiveAllowance({bool guestFree = false}) {
     unlimitedNames:
         Purchases.isPhotoSearch() || Purchases.hasLifetimeSubscription,
     noAds: Purchases.isNoAds() || fieldGuide,
-    seenSynced: fieldGuide,
+    seenSynced: Purchases.syncsSeenPhotos(),
     usedThisMonth: signedIn ? count.namesUsed : 0,
     extraFromAds: signedIn ? count.adGrants : 0,
     guestFree: guestFree,

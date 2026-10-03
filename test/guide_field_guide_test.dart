@@ -85,7 +85,29 @@ void main() {
     Purchases.hasLifetimeSubscription = true;
     expect(Purchases.isSubscribed(), isTrue);
     expect(Purchases.hasFieldGuide(), isFalse);
+    expect(Purchases.syncsSeenPhotos(), isTrue);
+    expect(Purchases.isOffline(), isTrue);
     expect(Purchases.showsAds(), isFalse);
+
+    Purchases.hasLifetimeSubscription = false;
+    Purchases.hasOldVersion = true;
+    expect(Purchases.hasFieldGuide(), isFalse);
+    expect(Purchases.syncsSeenPhotos(), isTrue);
+    expect(Purchases.isOffline(), isTrue);
+    expect(Purchases.showsAds(), isFalse);
+
+    Purchases.hasOldVersion = false;
+    Purchases.purchases = {productPhotoSearch: _purchase(productPhotoSearch)};
+    expect(Purchases.syncsSeenPhotos(), isFalse);
+    expect(Purchases.isOffline(), isFalse);
+
+    Purchases.purchases = {productOffline: _purchase(productOffline)};
+    expect(Purchases.syncsSeenPhotos(), isFalse);
+    expect(Purchases.isOffline(), isTrue);
+
+    Purchases.purchases = {};
+    expect(Purchases.syncsSeenPhotos(), isFalse);
+    expect(Purchases.isOffline(), isFalse);
 
     Purchases.hasLifetimeSubscription = false;
     Purchases.purchases = {fieldGuideMonthly: _purchase(fieldGuideMonthly)};

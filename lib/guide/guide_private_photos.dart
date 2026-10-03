@@ -202,11 +202,11 @@ Future<File?> _fetch(String path, String object) async {
   }
 }
 
-/// Uploads this account's local Seen photos while Field Guide is active.
+/// Uploads this account's local Seen photos while those photos sync.
 /// [onlyId] limits the pass to one find. A pass already running is followed
 /// by another, so a save during the catch-up is not missed.
 Future<void> syncGuidePrivatePhotos({String? onlyId}) async {
-  if (!Purchases.hasFieldGuide()) return;
+  if (!Purchases.syncsSeenPhotos()) return;
   final uid = _notebookUser()?.uid;
   if (uid == null) return;
   _pending.add(onlyId);
@@ -214,7 +214,7 @@ Future<void> syncGuidePrivatePhotos({String? onlyId}) async {
   _running = true;
   try {
     while (_pending.isNotEmpty) {
-      if (!Purchases.hasFieldGuide()) return;
+      if (!Purchases.syncsSeenPhotos()) return;
       final ids = Set<String?>.of(_pending);
       _pending.clear();
       try {
@@ -258,7 +258,7 @@ Future<void> _syncOne(String uid, String id) async {
 }
 
 Future<void> _syncRow(String uid, String id, dynamic raw) async {
-  if (!Purchases.hasFieldGuide() || _skipped.contains(id) || raw is! Map) {
+  if (!Purchases.syncsSeenPhotos() || _skipped.contains(id) || raw is! Map) {
     return;
   }
   try {

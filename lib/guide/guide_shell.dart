@@ -378,7 +378,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
                   ? SeenPage(
                       finds: _notebook,
                       signedIn: Auth.appUser != null,
-                      fieldGuide: Purchases.hasFieldGuide(),
+                      fieldGuide: Purchases.syncsSeenPhotos(),
                     )
                   : const SizedBox.shrink(),
             ],

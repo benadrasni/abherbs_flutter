@@ -108,9 +108,10 @@ People who already paid keep what they paid for:
 | Observations | their observations, imported into Seen — Seen is now free for everyone |
 | Offline | offline packs |
 | Custom filter order | nothing to configure — the three-step key and the region chip are the default for everyone |
-| Old paid app (`herbsplus`, `old version`) | no ads, unlimited identification, offline |
+| Old paid app (`herbsplus`, `old version`) | no ads, unlimited identification, offline, Seen photos on every phone |
+| Lifetime purchase | no ads, unlimited identification, offline, Seen photos on every phone |
 
-Sync remains Field Guide, including for those lifetime purchases. The old one-time products stay available to Restore and are no longer the way to buy.
+The old paid app and a lifetime purchase are not Field Guide, and that row stays available to them. Seen photos and the offline book are already included. The old one-time products stay available to Restore and are no longer the way to buy.
 
 ## The website
 

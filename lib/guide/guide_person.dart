@@ -536,7 +536,7 @@ Future<GuidePersonView> loadGuidePerson(Locale locale) async {
       subscribed: fieldGuide,
       unlimitedNames: unlimitedNames,
       noAds: Purchases.isNoAds() || fieldGuide,
-      seenSynced: fieldGuide,
+      seenSynced: Purchases.syncsSeenPhotos(),
       usedThisMonth: count.namesUsed,
       extraFromAds: count.adGrants,
       guestFree: signedIn ? false : await guideGuestHasFreeName(),
