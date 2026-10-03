@@ -171,7 +171,6 @@ class _Distribution2State extends State<Distribution2> {
 
   @override
   void dispose() {
-    filterRoutes.remove(filterDistribution2);
     _listener.cancel();
     super.dispose();
   }
@@ -228,7 +227,6 @@ class _Distribution2State extends State<Distribution2> {
           },
           child: FloatingActionButton(
             onPressed: () {
-              filterRoutes.remove(filterDistribution2);
               Navigator.pushReplacement(
                 mainContext,
                 MaterialPageRoute(builder: (context) => PlantList(widget.filter, '', keysReference.child(getFilterKey(widget.filter))), settings: RouteSettings(name: 'PlantList')),

@@ -54,7 +54,6 @@ class _AppDrawerState extends State<AppDrawer> {
               Auth.appUser?.email ?? Auth.appUser?.phoneNumber ?? '',
               style: TextStyle(color: Colors.white70),
             ),
-            onTap: () {},
           ),
         ),
         Container(

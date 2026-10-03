@@ -105,7 +105,7 @@ Widget getTaxonomy(BuildContext context, Locale myLocale, Plant plant, Future<Pl
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PlantSynonyms(myLocale, plant), settings: RouteSettings(name: 'PlantSynonyms')),
+                    MaterialPageRoute(builder: (context) => PlantSynonyms(plant), settings: RouteSettings(name: 'PlantSynonyms')),
                   );
                 },
               );

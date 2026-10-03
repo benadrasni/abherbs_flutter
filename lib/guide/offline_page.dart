@@ -579,7 +579,7 @@ String _byteSize(BuildContext context, int bytes) {
 
 String _size(BuildContext context, int plants) {
   final strings = S.of(context);
-  if (plants <= 0 && plants == 0) {
+  if (plants == 0) {
     return strings.guide_offline_about_mb('0');
   }
   final size = GuideOfflineSize.of(plants);
