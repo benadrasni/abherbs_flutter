@@ -54,6 +54,7 @@ dependencies:
   geocoding: 5.0.0
   datetime_picker_formfield_new: 2.1.0
   connectivity_plus: 7.3.1
+  crypto: 3.0.7
   photo_view: 0.15.0
   youtube_player_iframe: 6.0.2
   app_tracking_transparency: 2.0.7

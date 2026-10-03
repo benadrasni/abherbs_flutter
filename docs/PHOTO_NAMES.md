@@ -38,7 +38,7 @@ TypeScript, Node 22, firebase-functions 7, us-central1. `npm --prefix functions 
 - `admobReward` (HTTPS): AdMob rewarded-ad server-side verification callback, `https://us-central1-abherbs-backend.cloudfunctions.net/admobReward`. Verifies the ECDSA signature against Google's verifier keys, ignores repeated `transaction_id`s, and adds one ad grant (`adGrants`, up to 5 a month). That grant is one more photo name. It also adds 1 credit, which the old feedback and photo-search screens still read. The guide meter waits on `adGrants`. The app sets `ServerSideVerificationOptions(userId: uid)` before showing the ad.
 - `src/quota.ts` is the pure allowance logic, tested in `src/quota.test.ts`; `src/admob.ts` is the signature check.
 - Secret `PLANT_ID_KEY` (Secret Manager). Limits in `functions/.env.abherbs-backend`: `IS_PLANT_THRESHOLD_PERCENT`, `FREE_NOT_PLANT_PER_MONTH`, `DAILY_CEILING_FREE`, `DAILY_CEILING_UNLIMITED`, `AD_GRANTS_PER_MONTH`, `ANONYMOUS_LIFETIME_CALLS`, `ANONYMOUS_DAILY_CEILING`. Change the file and redeploy.
-- Unlimited is read from `users/{uid}`: `old version`, `lifetime subscription`, or `purchases` containing `search_by_photo`, `store_photos_monthly`, `store_photos_yearly`. `purchases` was written by old app versions and is not verified.
+- Unlimited is read from `users/{uid}`: `old version`, `lifetime subscription`, or `purchases` containing `search_by_photo`, `store_photos_monthly`, `store_photos_yearly`, `field_guide_monthly`, or `field_guide_yearly`. A purchase or restore merges that product id into `purchases`. The list is not checked against the store receipt.
 
 ## Database
 
@@ -89,7 +89,7 @@ Release order:
 
 Open:
 
-- Store receipt verification. New buyers of photo search or Field Guide are charged credits until the server can verify purchases.
+- Store receipt verification. A new Field Guide or photo-search purchase writes its product id, so `identifyPlant` unlocks names. The server does not check the receipt. A lapsed plan stays on `purchases` until that check can remove it.
 - Anonymous accounts pass `auth != null` rules (favorites, public observations). Exclude them with `auth.token.firebase.sign_in_provider != 'anonymous'` where needed.
 - Account deletion leaves `photo_quota/{uid}`.
 - The guide meter reads `namesUsed` and `adGrants`. `identifyPlant` was deployed on 2026-10-02. A signed-in phone on this build uses the monthly allowance. The app itself is still unreleased.

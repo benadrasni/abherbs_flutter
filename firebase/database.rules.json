@@ -26,6 +26,7 @@
       ".indexOn": "name"
     },
     "plants_to_update": { ".read": true, ".write": false },
+    "catalog_changes": { ".read": true, ".write": false },
     "plants_new": { ".read": true, ".write": false },
     "families_to_update": { ".read": true, ".write": false },
 

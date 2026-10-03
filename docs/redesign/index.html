@@ -489,7 +489,7 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
       <label><input type="checkbox" id="tDark"> Phone in dark mode</label>
     </div>
     <p class="fine">The person's photo of <i>Tanacetum corymbosum</i> is a stand-in from <a href="https://commons.wikimedia.org/wiki/File:Tanacetum_corymbosum_(7334981392).jpg" target="_blank">Wikimedia Commons</a>; that species is not in the book. Other "your photo" thumbnails reuse catalog photos. Search in this prototype covers the 93 plants of the demo key plus all families and top genera.</p>
-    <p class="fine">Offline sizes are the pictures only. A sample of 36 species averaged 0.73 MB for its photos, both plates, and the range map, so 1,433 plants is about 1.0 GB. A plant in two regions is stored once: Middle Europe plus the Northeast is about 80 MB more, not another 630 MB. Antarctic is left out. No species lives only there. The regions are the floristic ones already on each plant.</p>
+    <p class="fine">Offline sizes are the pictures only. Photos, the plate, and the range map average 0.66 MB a species, so 1,433 plants is about 950 MB. A plant in two regions is stored once: Middle Europe plus the Northeast is about 70 MB more, not another 570 MB. Antarctic is left out. No species lives only there. The regions are the floristic ones already on each plant.</p>
   </aside>
   <div class="phone"><div class="glass">
     <div class="island"></div>
@@ -1073,12 +1073,12 @@ function offTitle(codes){
 }
 function offBox(on, mid){return `<span class="box ${on?'on':''} ${mid&&!on?'mid':''}">${on?'✓':mid?'–':''}</span>`}
 function offMenuLine(){
-  if(!st.fg) return 'With Field Guide · about 1.0 GB, or a region';
+  if(!st.fg) return `With Field Guide · ${offMbText(OFF.total)}, or a region`;
   if(st.offJob) return `Downloading ${st.offJob.title} · ${st.offJob.done} MB of ${st.offJob.total} MB`;
   const have=offHave();
-  if(have===null) return 'The whole book · about 1.0 GB';
+  if(have===null) return `The whole book · ${offMbText(OFF.total)}`;
   if(have.size) return `${offTitle(have)} · ${offMbText(offMatch(have))}`;
-  return 'Everything, or one region · about 1.0 GB for all';
+  return `Everything, or one region · ${offMbText(OFF.total)} for all`;
 }
 function offlineScreen(){
   const have=offHave(), sel=offSel();
@@ -1205,7 +1205,7 @@ function demo(k){
     case 'limit':st.fg=false;st.signed=true;if(st.used<5)st.used=5;if(st.used<10)st.ads=0;go('camera');st.loc=true;st.sheet='limit';render();break;
     case 'fieldguide':go('fieldguide');break;
     case 'offline':st.fg=true;st.offOpen='1';st.offAll=false;st.offSel=[];st.offHave=[];st.offJob=null;go('offline');break;
-    case 'offlineDl':st.fg=true;st.offOpen='1';st.offAll=false;st.offSel=['11'];st.offHave=[];st.offJob={title:'Middle Europe',plants:1105,done:420,total:810};go('offline');break;
+    case 'offlineDl':st.fg=true;st.offOpen='1';st.offAll=false;st.offSel=['11'];st.offHave=[];st.offJob={title:'Middle Europe',plants:1105,done:380,total:730};go('offline');break;
     case 'offlineHave':st.fg=true;st.offOpen='7';st.offAll=false;st.offSel=['75'];st.offHave=['11'];st.offJob=null;go('offline');break;
     case 'me':go('me');break;
     case 'signin':st.signed=false;st.signBack='me';st.signStep='';go('signin');break;

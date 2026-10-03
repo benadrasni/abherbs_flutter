@@ -18,6 +18,7 @@ const guideOfflinePauseKey = Key('guide-offline-pause');
 Key guideOfflineGroupKey(String id) => Key('guide-offline-group-$id');
 Key guideOfflineRegionKey(String code) => Key('guide-offline-region-$code');
 const guideOfflinePhoneKey = Key('guide-offline-phone');
+const guideOfflineUpdateKey = Key('guide-offline-update');
 
 /// Offline packs: the whole book, or a floristic region. Each row is the
 /// plants and the space the pictures take. The phone's region is offered first.
@@ -27,6 +28,7 @@ class GuideOfflinePage extends StatefulWidget {
   final GuideOfflineJob? job;
   final Future<void> Function()? onFieldGuide;
   final Future<void> Function(GuideOfflineRequest request)? onDownload;
+  final Future<void> Function()? onUpdate;
   final Future<void> Function()? onRemove;
   final Future<void> Function()? onPause;
 
@@ -37,6 +39,7 @@ class GuideOfflinePage extends StatefulWidget {
     this.job,
     this.onFieldGuide,
     this.onDownload,
+    this.onUpdate,
     this.onRemove,
     this.onPause,
   });
@@ -102,9 +105,13 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
       await custom(request);
       return;
     }
+    final view = _view;
+    if (view == null) return;
     final size = GuideOfflineSize.of(request.added);
+    var finished = false;
     final started = await startGuideOfflineDownload(
       request: request,
+      catalog: view.catalog,
       onProgress: (done, total) {
         if (!mounted || total <= 0) return;
         setState(() {
@@ -117,17 +124,19 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
         });
       },
       onFinished: () {
+        finished = true;
         if (!mounted) return;
         setState(() {
           _job = null;
           _pick = const GuideOfflinePick();
-          final view = _view;
-          if (view != null) {
+          final current = _view;
+          if (current != null) {
             _view = GuideOfflineView(
-              catalog: view.catalog,
+              catalog: current.catalog,
               canDownload: true,
-              stored: const GuideOfflineStored.everything(),
-              phoneRegionId: view.phoneRegionId,
+              stored: guideOfflineStore(current.stored, request),
+              phoneRegionId: current.phoneRegionId,
+              update: current.update,
             );
           }
         });
@@ -140,14 +149,14 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
         );
       },
     );
-    if (!mounted) return;
+    if (!mounted || finished) return;
     if (started == GuideOfflineStart.needsWifi) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).guide_offline_wifi)),
       );
       return;
     }
-    if (started == GuideOfflineStart.started) {
+    if (started == GuideOfflineStart.started && _job == null) {
       setState(() {
         _job = GuideOfflineJob(
           title: request.title,
@@ -343,6 +352,17 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
                   ),
                   onRemove: _remove,
                 ),
+              if (view.update.hasWork && job == null)
+                _UpdateCard(
+                  detail: strings.guide_offline_add(
+                    _count(context, view.update.plants.length),
+                    _byteSize(context, view.update.bytes),
+                  ),
+                  label: view.canDownload
+                      ? strings.guide_offline_update
+                      : strings.guide_person_field_guide,
+                  onPressed: () => _onUpdate(context, view),
+                ),
               _Pack(
                 key: guideOfflineEverythingKey,
                 on: _pick.everything,
@@ -455,6 +475,70 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
       title: _label(context, guideOfflineLabel(codes)),
     ));
   }
+
+  Future<void> _onUpdate(BuildContext context, GuideOfflineView view) async {
+    final update = view.update;
+    if (!update.hasWork || _job != null) return;
+    if (!view.canDownload) {
+      await widget.onFieldGuide?.call();
+      return;
+    }
+    final custom = widget.onUpdate;
+    if (custom != null) {
+      await custom();
+      return;
+    }
+    final title = S.of(context).guide_offline_update;
+    var finished = false;
+    final started = await startGuideOfflineUpdate(
+      update: update,
+      onProgress: (done, total) {
+        if (!mounted) return;
+        setState(() {
+          _job = GuideOfflineJob(
+            title: title,
+            plants: update.plants.length,
+            doneMb: _mb(done),
+            totalMb: _mb(total),
+            doneText: _progressMb(done),
+            totalText: _progressMb(total),
+          );
+        });
+      },
+      onFinished: () {
+        finished = true;
+        if (!mounted) return;
+        setState(() => _job = null);
+        _load();
+      },
+      onFailed: () {
+        if (!mounted) return;
+        setState(() => _job = null);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(S.of(context).offline_download_fail)),
+        );
+      },
+    );
+    if (!mounted || finished) return;
+    if (started == GuideOfflineStart.needsWifi) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(S.of(context).guide_offline_wifi)),
+      );
+      return;
+    }
+    if (started == GuideOfflineStart.started && _job == null) {
+      setState(() {
+        _job = GuideOfflineJob(
+          title: title,
+          plants: update.plants.length,
+          doneMb: 0,
+          totalMb: _mb(update.bytes),
+          doneText: _progressMb(0),
+          totalText: _progressMb(update.bytes),
+        );
+      });
+    }
+  }
 }
 
 String _count(BuildContext context, int count) {
@@ -465,6 +549,32 @@ String _count(BuildContext context, int count) {
         '$count',
         formatted,
       );
+}
+
+int _mb(int bytes) {
+  if (bytes <= 0) return 0;
+  final mb = bytes / 1000000;
+  if (mb < 1) return 1;
+  return mb.round();
+}
+
+/// Megabytes for the progress line, which always says MB. The update card
+/// uses [GuideOfflineBytes], so a large update can still read as gigabytes.
+String _progressMb(int bytes) {
+  if (bytes <= 0) return '0';
+  final mb = bytes / 1000000;
+  if (mb >= 1) return '${mb.round()}';
+  final tenths = (mb * 10).round();
+  final shown = tenths <= 0 ? 1 : tenths;
+  return (shown / 10).toStringAsFixed(1);
+}
+
+String _byteSize(BuildContext context, int bytes) {
+  final strings = S.of(context);
+  final size = GuideOfflineBytes.of(bytes);
+  return size.gigabytes
+      ? strings.guide_offline_about_gb(size.amount)
+      : strings.guide_offline_about_mb(size.amount);
 }
 
 String _size(BuildContext context, int plants) {
@@ -529,8 +639,14 @@ String guideOfflineMenuText(BuildContext context, GuideOfflineHold? hold) {
       final plants = hold?.storedPlants ?? 0;
       final total = hold?.totalPlants ?? 0;
       final count = plants > 0 ? plants : total;
-      if (count <= 0) return strings.guide_person_offline_on;
-      return strings.guide_offline_menu_book(_size(context, count));
+      if (count <= 0) {
+        return _withUpdate(context, strings.guide_person_offline_on, hold);
+      }
+      return _withUpdate(
+        context,
+        strings.guide_offline_menu_book(_size(context, count)),
+        hold,
+      );
     case GuideOfflineMenuKind.stored:
       final current = hold;
       if (current == null) return strings.guide_person_offline_on;
@@ -541,9 +657,21 @@ String guideOfflineMenuText(BuildContext context, GuideOfflineHold? hold) {
               guideOfflineLabel(current.regionIds.toSet()),
             );
       final count = current.storedPlants;
-      if (count <= 0) return title;
-      return strings.guide_offline_menu_stored(title, _size(context, count));
+      if (count <= 0) return _withUpdate(context, title, hold);
+      return _withUpdate(
+        context,
+        strings.guide_offline_menu_stored(title, _size(context, count)),
+        hold,
+      );
   }
+}
+
+String _withUpdate(BuildContext context, String line, GuideOfflineHold? hold) {
+  if (hold == null || hold.updatePlants <= 0) return line;
+  final strings = S.of(context);
+  final size = _byteSize(context, hold.updateBytes);
+  if (line.isEmpty) return strings.guide_offline_update_size(size);
+  return strings.guide_offline_menu_update(line, size);
 }
 
 String _menuSize(BuildContext context, GuideOfflineHold? hold) {
@@ -659,8 +787,8 @@ class _JobCard extends StatelessWidget {
               ),
               Text(
                 strings.guide_offline_progress(
-                  '${job.doneMb}',
-                  '${job.totalMb}',
+                  job.doneText ?? '${job.doneMb}',
+                  job.totalText ?? '${job.totalMb}',
                   plants,
                 ),
                 style: TextStyle(fontSize: 13, color: colors.ink3),
@@ -738,6 +866,74 @@ class _KeptCard extends StatelessWidget {
                 style: TextButton.styleFrom(foregroundColor: colors.madder),
                 child: Text(
                   strings.guide_offline_remove,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _UpdateCard extends StatelessWidget {
+  final String detail;
+  final String label;
+  final Future<void> Function() onPressed;
+
+  const _UpdateCard({
+    required this.detail,
+    required this.label,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final strings = S.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: colors.cream,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: colors.rule),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(14, 12, 8, 12),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      strings.guide_offline_update,
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      detail,
+                      style: TextStyle(fontSize: 13, color: colors.ink3),
+                    ),
+                  ],
+                ),
+              ),
+              TextButton(
+                key: guideOfflineUpdateKey,
+                onPressed: onPressed,
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: colors.mossFill,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
+                ),
+                child: Text(
+                  label,
                   style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
               ),

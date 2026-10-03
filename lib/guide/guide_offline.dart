@@ -1,15 +1,19 @@
+import 'package:abherbs_flutter/guide/guide_media.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 
-/// Pictures per species: photos, the large plate, the small plate, and the
-/// range map. Measured on a 36-species sample.
-const guideOfflineMbPerPlant = 0.73;
+/// Decimal megabytes of pictures per species: photos, the unsuffixed plate
+/// the app opens, and the range map. Mean of all 1,433 species in the
+/// 2 Oct 2026 catalog (0.662 MB; one range map was missing). The page
+/// treats 1,000 MB as 1 GB.
+const guideOfflineMbPerPlant = 0.66;
 
-/// A whole book of this many species is the "about 1.0 GB" line.
+/// Species in that catalog. The whole book prints as about 950 MB.
 const guideOfflineBookPlants = 1433;
 
 class GuideOfflineGroup {
@@ -42,30 +46,54 @@ final Set<String> guideOfflinePackCodes = {
 class GuideOfflineCatalog {
   final List<Set<String>> plants;
 
-  const GuideOfflineCatalog(this.plants);
+  /// Catalog id for each [plants] entry. Empty means the list index is the id.
+  final List<int> ids;
+
+  const GuideOfflineCatalog(this.plants, {this.ids = const []});
 
   int get total => plants.length;
+
+  int idAt(int index) => ids.isEmpty ? index : ids[index];
+
+  /// Level-2 codes for a catalog id. Null when the headers do not have it.
+  Set<String>? regionsFor(int id) {
+    for (var index = 0; index < plants.length; index++) {
+      if (idAt(index) == id) return plants[index];
+    }
+    return null;
+  }
 
   static const empty = GuideOfflineCatalog([]);
 }
 
 GuideOfflineCatalog readGuideOfflineCatalog(dynamic raw) {
   final plants = <Set<String>>[];
-  void add(dynamic value) {
+  final ids = <int>[];
+  void add(int id, dynamic value) {
     if (value is! Map) return;
     final name = value[firebaseAttributeName];
     if (name is! String || name.isEmpty) return;
     plants.add(_codes(value['filterDistribution']));
+    ids.add(id);
   }
 
   if (raw is List) {
-    for (final value in raw) {
-      add(value);
+    for (var index = 0; index < raw.length; index++) {
+      add(index, raw[index]);
     }
   } else if (raw is Map) {
-    raw.forEach((_, value) => add(value));
+    final entries = <MapEntry<int, dynamic>>[];
+    raw.forEach((key, value) {
+      final id = int.tryParse(key.toString());
+      if (id == null) return;
+      entries.add(MapEntry(id, value));
+    });
+    entries.sort((a, b) => a.key.compareTo(b.key));
+    for (final entry in entries) {
+      add(entry.key, entry.value);
+    }
   }
-  return GuideOfflineCatalog(plants);
+  return GuideOfflineCatalog(plants, ids: ids);
 }
 
 Set<String> _codes(dynamic raw) {
@@ -135,6 +163,28 @@ class GuideOfflineSize {
   int get barMb {
     if (!gigabytes) return int.parse(amount);
     return (double.parse(amount) * 1000).round();
+  }
+}
+
+/// Picture bytes for one update. Small updates stay in tenths of a megabyte
+/// so a new plate does not round down to nothing.
+class GuideOfflineBytes {
+  final bool gigabytes;
+  final String amount;
+
+  const GuideOfflineBytes._(this.gigabytes, this.amount);
+
+  static GuideOfflineBytes of(int bytes) {
+    if (bytes <= 0) return const GuideOfflineBytes._(false, '0');
+    final mb = bytes / 1000000;
+    if (mb >= 1000) {
+      final tenths = (mb / 100).round();
+      return GuideOfflineBytes._(true, (tenths / 10).toStringAsFixed(1));
+    }
+    if (mb >= 1) return GuideOfflineBytes._(false, '${mb.round()}');
+    final tenths = (mb * 10).round();
+    final shown = tenths <= 0 ? 1 : tenths;
+    return GuideOfflineBytes._(false, (shown / 10).toStringAsFixed(1));
   }
 }
 
@@ -269,12 +319,87 @@ GuideOfflineStored guideOfflineStoredFrom(
   String packs, {
   required bool classic,
 }) {
-  if (classic || packs == 'all') return const GuideOfflineStored.everything();
+  if (packs == 'all') return const GuideOfflineStored.everything();
   final regions = <String>{
     for (final part in packs.split(','))
       if (guideOfflinePackCodes.contains(part)) part,
   };
-  return GuideOfflineStored(regions: regions);
+  if (regions.isNotEmpty) return GuideOfflineStored(regions: regions);
+  if (classic) return const GuideOfflineStored.everything();
+  return const GuideOfflineStored();
+}
+
+/// Plants this download still has to fetch. A plant in two selected regions
+/// is one row. Plants already covered by a stored pack, or already fetched,
+/// are left out. [requestCodes] null is the whole book. [storedCodes] null
+/// means the whole book is already stored.
+class GuideOfflineJobPlan {
+  final Set<String>? codes;
+  final List<int> pending;
+  final int alreadyDone;
+  final int total;
+
+  const GuideOfflineJobPlan({
+    required this.codes,
+    required this.pending,
+    required this.alreadyDone,
+    required this.total,
+  });
+}
+
+bool guideOfflineInPack(Set<String> plant, Set<String>? codes) {
+  if (codes == null) return true;
+  for (final code in plant) {
+    if (codes.contains(code)) return true;
+  }
+  return false;
+}
+
+GuideOfflineJobPlan guideOfflinePlan({
+  required GuideOfflineCatalog catalog,
+  required Set<String>? requestCodes,
+  required Set<String>? storedCodes,
+  required Set<int> done,
+}) {
+  if (storedCodes == null) {
+    return GuideOfflineJobPlan(
+      codes: requestCodes,
+      pending: const [],
+      alreadyDone: 0,
+      total: 0,
+    );
+  }
+  final pending = <int>[];
+  var alreadyDone = 0;
+  for (var index = 0; index < catalog.plants.length; index++) {
+    final plant = catalog.plants[index];
+    if (!guideOfflineInPack(plant, requestCodes)) continue;
+    if (storedCodes.isNotEmpty && guideOfflineInPack(plant, storedCodes)) {
+      continue;
+    }
+    final id = catalog.idAt(index);
+    if (done.contains(id)) {
+      alreadyDone++;
+      continue;
+    }
+    pending.add(id);
+  }
+  return GuideOfflineJobPlan(
+    codes: requestCodes,
+    pending: pending,
+    alreadyDone: alreadyDone,
+    total: alreadyDone + pending.length,
+  );
+}
+
+GuideOfflineStored guideOfflineStore(
+  GuideOfflineStored current,
+  GuideOfflineRequest request,
+) {
+  if (current.everything || request.everything) {
+    return const GuideOfflineStored.everything();
+  }
+  return GuideOfflineStored(regions: {...current.regions, ...request.regions});
 }
 
 String guideOfflinePacksValue(GuideOfflineStored stored) {
@@ -302,12 +427,16 @@ class GuideOfflineJob {
   final int plants;
   final int doneMb;
   final int totalMb;
+  final String? doneText;
+  final String? totalText;
 
   const GuideOfflineJob({
     required this.title,
     required this.plants,
     required this.doneMb,
     required this.totalMb,
+    this.doneText,
+    this.totalText,
   });
 
   double get fraction {
@@ -324,6 +453,8 @@ class GuideOfflineHold {
   final int storedPlants;
   final int totalPlants;
   final List<String> regionIds;
+  final int updateBytes;
+  final int updatePlants;
 
   const GuideOfflineHold({
     required this.canDownload,
@@ -331,6 +462,8 @@ class GuideOfflineHold {
     required this.storedPlants,
     required this.totalPlants,
     this.regionIds = const [],
+    this.updateBytes = 0,
+    this.updatePlants = 0,
   });
 }
 
@@ -344,17 +477,105 @@ GuideOfflineMenuKind guideOfflineMenuKind(GuideOfflineHold? hold) {
   return GuideOfflineMenuKind.empty;
 }
 
+/// Plants still to fetch after the phone's mark, folded into one update.
+/// [resumeMark] is the change-list count once every pending entry was
+/// decided. It stays at [mark] when a new plant is not in the headers yet.
+class GuideOfflineUpdate {
+  final int mark;
+  final int resumeMark;
+  final List<GuideMediaJob> plants;
+
+  const GuideOfflineUpdate({
+    required this.mark,
+    required this.resumeMark,
+    this.plants = const [],
+  });
+
+  static const empty = GuideOfflineUpdate(mark: 0, resumeMark: 0);
+
+  bool get hasWork => plants.isNotEmpty;
+
+  int get bytes {
+    var total = 0;
+    for (final plant in plants) {
+      total += plant.bytes;
+    }
+    return total;
+  }
+}
+
+/// Entries at and after [mark]. A new plant is kept when it occurs in a
+/// stored pack. Everything keeps every new plant. A picture change is kept
+/// when that plant is already stored and still falls in the pack. The latest
+/// stamp wins, so two edits of one plant download the net difference.
+GuideOfflineUpdate guideOfflineUpdate({
+  required GuideChangeLog log,
+  required int mark,
+  required GuideOfflineCatalog catalog,
+  required Set<String>? storedCodes,
+  required Map<int, GuideMediaStamp> stamps,
+}) {
+  if (storedCodes != null && storedCodes.isEmpty) {
+    return GuideOfflineUpdate(mark: mark, resumeMark: mark);
+  }
+  final pending = [
+    for (final change in log.changes)
+      if (change.index >= mark && change.index < log.count) change,
+  ];
+  if (pending.isEmpty) {
+    final resume = log.count < mark ? mark : log.count;
+    return GuideOfflineUpdate(mark: mark, resumeMark: resume);
+  }
+  final latest = <int, GuideCatalogChange>{};
+  for (final change in pending) {
+    latest[change.plantId] = change;
+  }
+  var blocked = false;
+  final plants = <GuideMediaJob>[];
+  for (final change in latest.values) {
+    final regions = catalog.regionsFor(change.plantId);
+    final stored = stamps.containsKey(change.plantId);
+    if (regions == null && storedCodes != null && !stored) {
+      blocked = true;
+      continue;
+    }
+    final inPack = storedCodes == null ||
+        (regions != null &&
+            regions.any((code) => storedCodes.contains(code)));
+    if (!inPack) continue;
+    final diff = guideMediaDiff(stamps[change.plantId], change.stamp);
+    if (diff.isEmpty) continue;
+    plants.add(
+      GuideMediaJob(
+        id: change.plantId,
+        added: !stored,
+        stamp: change.stamp,
+        download: diff.download,
+        remove: diff.remove,
+      ),
+    );
+  }
+  plants.sort((a, b) => a.id.compareTo(b.id));
+  return GuideOfflineUpdate(
+    mark: mark,
+    resumeMark: blocked ? mark : log.count,
+    plants: plants,
+  );
+}
+
 class GuideOfflineView {
   final GuideOfflineCatalog catalog;
   final bool canDownload;
   final GuideOfflineStored stored;
   final String? phoneRegionId;
+  final GuideOfflineUpdate update;
 
   const GuideOfflineView({
     required this.catalog,
     required this.canDownload,
     required this.stored,
     required this.phoneRegionId,
+    this.update = GuideOfflineUpdate.empty,
   });
 }
 
@@ -377,12 +598,62 @@ Future<GuideOfflineView> loadGuideOffline() async {
     );
     await Prefs.setString(keyGuideOfflineStoredPlants, '$plants');
   }
+  final update = await loadGuideOfflineUpdate(catalog, stored);
   return GuideOfflineView(
     catalog: catalog,
     canDownload: Purchases.hasFieldGuide() || Purchases.isOffline(),
     stored: stored,
     phoneRegionId: phone,
+    update: update.hasWork ? update : GuideOfflineUpdate.empty,
   );
+}
+
+/// Change-list entries after the phone's mark, for the packs already stored.
+/// A denied or missing node leaves the line empty so Offline still opens.
+Future<GuideOfflineUpdate> loadGuideOfflineUpdate(
+  GuideOfflineCatalog catalog,
+  GuideOfflineStored stored,
+) async {
+  if (stored.isEmpty) return GuideOfflineUpdate.empty;
+  dynamic raw;
+  try {
+    raw = (await rootReference.child(firebaseCatalogChanges).get()).value;
+  } catch (error) {
+    debugPrint('catalog changes: $error');
+    return GuideOfflineUpdate.empty;
+  }
+  final log = readGuideChangeLog(raw);
+  final mark =
+      int.tryParse(await Prefs.getStringF(keyGuideOfflineChange, '')) ?? 0;
+  final stamps = await Offline.readStamps();
+  final latest = <int, GuideMediaStamp>{};
+  for (final change in log.changes) {
+    if (change.index < mark || change.index >= log.count) continue;
+    latest[change.plantId] = change.stamp;
+  }
+  for (final entry in latest.entries) {
+    if (stamps.containsKey(entry.key)) continue;
+    final disk = await Offline.stampFromDisk(entry.value);
+    if (disk.files.isEmpty) continue;
+    final diff = guideMediaDiff(disk, entry.value);
+    if (diff.isEmpty) {
+      await Offline.writeStamp(entry.key, entry.value);
+      stamps[entry.key] = entry.value;
+    } else {
+      stamps[entry.key] = disk;
+    }
+  }
+  final update = guideOfflineUpdate(
+    log: log,
+    mark: mark,
+    catalog: catalog,
+    storedCodes: stored.asCodes,
+    stamps: stamps,
+  );
+  if (!update.hasWork && update.resumeMark > update.mark) {
+    await Prefs.setString(keyGuideOfflineChange, '${update.resumeMark}');
+  }
+  return update;
 }
 
 Future<GuideOfflineHold> loadGuideOfflineHold() async {
@@ -398,45 +669,141 @@ Future<GuideOfflineHold> loadGuideOfflineHold() async {
       ? (storedPlants > 0 ? storedPlants : total)
       : storedPlants;
   final regions = stored.regions.toList()..sort();
+  var updateBytes = 0;
+  var updatePlants = 0;
+  if (!stored.isEmpty) {
+    try {
+      final snapshot = await headersV3Reference.get();
+      final catalog = readGuideOfflineCatalog(snapshot.value);
+      final update = await loadGuideOfflineUpdate(catalog, stored);
+      updateBytes = update.bytes;
+      updatePlants = update.plants.length;
+    } catch (error) {
+      debugPrint('catalog changes: $error');
+    }
+  }
   return GuideOfflineHold(
     canDownload: Purchases.hasFieldGuide() || Purchases.isOffline(),
     everything: stored.everything,
     storedPlants: plants,
     totalPlants: total,
     regionIds: regions,
+    updateBytes: updateBytes,
+    updatePlants: updatePlants,
   );
 }
 
 enum GuideOfflineStart { started, needsWifi, skipped }
 
-/// Starts the whole-book picture download. A floristic region is not started:
-/// the downloader stores every plant, so a region tap must not use it.
+/// Starts the picture download for the whole book or for the regions in
+/// [request]. A plant that already belongs to a stored pack is not fetched
+/// again. Wi-Fi is required, and the pack is remembered only when the
+/// download finishes.
 Future<GuideOfflineStart> startGuideOfflineDownload({
   required GuideOfflineRequest request,
+  required GuideOfflineCatalog catalog,
   required void Function(int done, int total) onProgress,
   required void Function() onFinished,
   required void Function() onFailed,
   Future<List<ConnectivityResult>> Function()? connectivity,
+  GuideOfflineStored? stored,
+  Set<int>? done,
+  void Function(GuideOfflineJobPlan plan)? run,
 }) async {
-  if (!request.everything) return GuideOfflineStart.skipped;
+  if (request.added <= 0) return GuideOfflineStart.skipped;
+  final storedState = stored ??
+      guideOfflineStoredFrom(
+        await Prefs.getStringF(keyGuideOfflinePacks, ''),
+        classic: await Prefs.getBoolF(keyOffline, false),
+      );
+  final doneIds =
+      done ?? offlineDoneParse(await Prefs.getStringF(keyGuideOfflineDone, ''));
+  final plan = guideOfflinePlan(
+    catalog: catalog,
+    requestCodes: request.everything ? null : request.regions,
+    storedCodes: storedState.asCodes,
+    done: doneIds,
+  );
+  if (plan.total == 0) return GuideOfflineStart.skipped;
+  if (plan.pending.isEmpty) {
+    await _savePack(storedState, request, catalog);
+    onFinished();
+    return GuideOfflineStart.started;
+  }
   final result = await (connectivity ?? Connectivity().checkConnectivity)();
   if (!result.contains(ConnectivityResult.wifi)) {
     return GuideOfflineStart.needsWifi;
   }
   Offline.downloadPaused = false;
-  Offline.onChange(true);
-  await Prefs.setBool(keyOffline, true);
-  await Prefs.setString(keyGuideOfflinePacks, 'all');
-  Offline.download(
-    (_, __) {},
-    onProgress,
-    () {
-      Prefs.setString(keyGuideOfflineStoredPlants, '${request.added}');
-      onFinished();
-    },
-    onFailed,
-  );
+  final starter = run ??
+      (GuideOfflineJobPlan plan) {
+        Offline.downloadPack(
+          plantIds: plan.pending,
+          alreadyDone: plan.alreadyDone,
+          total: plan.total,
+          onPlant: onProgress,
+          onFinish: () {
+            _savePack(storedState, request, catalog).then((_) {
+              onFinished();
+            }).catchError((_) {
+              onFailed();
+            });
+          },
+          onFail: onFailed,
+        );
+      };
+  starter(plan);
   return GuideOfflineStart.started;
+}
+
+/// Downloads one folded update. Wi-Fi is required. The mark moves forward
+/// only when the download finishes. Pausing keeps the stamps of plants that
+/// already finished, so the next open fetches the rest.
+Future<GuideOfflineStart> startGuideOfflineUpdate({
+  required GuideOfflineUpdate update,
+  required void Function(int doneBytes, int totalBytes) onProgress,
+  required void Function() onFinished,
+  required void Function() onFailed,
+  Future<List<ConnectivityResult>> Function()? connectivity,
+  void Function()? run,
+}) async {
+  if (!update.hasWork) return GuideOfflineStart.skipped;
+  final result = await (connectivity ?? Connectivity().checkConnectivity)();
+  if (!result.contains(ConnectivityResult.wifi)) {
+    return GuideOfflineStart.needsWifi;
+  }
+  Offline.downloadPaused = false;
+  final starter = run ??
+      () {
+        Offline.downloadChanges(
+          plants: update.plants,
+          onProgress: onProgress,
+          onFinish: () {
+            Prefs.setString(keyGuideOfflineChange, '${update.resumeMark}')
+                .then((_) {
+              onFinished();
+            }).catchError((_) {
+              onFailed();
+            });
+          },
+          onFail: onFailed,
+        );
+      };
+  starter();
+  return GuideOfflineStart.started;
+}
+
+Future<void> _savePack(
+  GuideOfflineStored current,
+  GuideOfflineRequest request,
+  GuideOfflineCatalog catalog,
+) async {
+  final next = guideOfflineStore(current, request);
+  await Prefs.setString(keyGuideOfflinePacks, guideOfflinePacksValue(next));
+  await Prefs.setBool(keyOffline, true);
+  final plants = guideOfflineMatch(catalog, next.asCodes);
+  await Prefs.setString(keyGuideOfflineStoredPlants, '$plants');
+  Offline.downloadFinished = true;
 }
 
 Future<void> clearGuideOfflinePack() async {

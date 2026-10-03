@@ -38,6 +38,7 @@ Signed-out photo-search logs under `anonymous` fail. The app does not write tran
 | `synonyms/{latinName}` | IPNI synonym list |
 | `lists_custom` | Editorial lists ("new", "by language", dated drops). Language lists: `list/{plantId}` is `1` (presence) or a designation year 1900–2100. Old app 8.2.1 reads only the keys. |
 | `plants_to_update` | `{count, list[]}` of Latin names in the live catalog |
+| `catalog_changes` | Append-only offline update log. `{count, list/{n}}`. Each entry is `id`, `kind` (`added` or `pictures`), and `stamp` (photos, unsuffixed plate, range map: `u` path, `b` bytes, `h` md5). `plants_to_update` does not record a new plate on an older plant. |
 | `families_to_update` | Same idea for family illustration packs |
 | `versions` | Store version codes + `db_update` |
 | `settings` | `ai_engine`, generic Plant.id labels to ignore |
@@ -237,7 +238,7 @@ Read by the app after sign-in (`lib/signin/authentication.dart`). Client-writabl
 - `lifetime subscription` — same
 - `credits` — rewarded-ad balance (client can still set its own number)
 - `token` — FCM
-- `purchases` — product id list (not used as the IAP gate)
+- `purchases` — product id list. The phone still gates features from the store. A purchase or restore merges the product id into this list. `identifyPlant` treats `search_by_photo`, `store_photos_monthly`, `store_photos_yearly`, `field_guide_monthly`, and `field_guide_yearly` as unlimited names. The receipt is not checked.
 - `favorites/{plantId}`
 
 ## Photo storage layout
@@ -255,7 +256,7 @@ gs://abherbs-resources/
   misc/                     terms, privacy
 ```
 
-Firebase Storage: `photos/`, `families/`, `offline/`, `misc/` are public-read, client-write denied. `observations/{uid}/**` is public-read and owner-write (image, 10 MB); shared Sightings use it. `private/{uid}/**` is owner-read and owner-write (image, 10 MB). Field Guide copies a Seen photo there, including a name outside the book. The object key mirrors the `observations/` path. The rule is in `firebase/storage.abherbs-resources.rules`. Deploy that file before a device can read or write `private/`. The default bucket `abherbs-backend.appspot.com` is deny-all. Public **listing** of the GCS bucket is IAM, not these rules.
+Firebase Storage: `photos/`, `families/`, `offline/`, `misc/` are public-read, client-write denied. `observations/{uid}/**` is public-read and owner-write (image, 10 MB); shared Sightings use it. `private/{uid}/**` is owner-read and owner-write (image, 10 MB). Field Guide copies a Seen photo there, including a name outside the book. The object key mirrors the `observations/` path. The rule file `firebase/storage.abherbs-resources.rules` was released to `abherbs-resources` on 2026-10-03 (`firebase.storage/abherbs-resources`). A signed-in owner can read and write `private/`. The default bucket `abherbs-backend.appspot.com` is deny-all. `firebase.json` has no Storage target, so a database or functions deploy does not publish these rules. Public **listing** of the GCS bucket is IAM, not these rules.
 
 Local staging on this machine (from `abherbs-auto/constants.py`):
 

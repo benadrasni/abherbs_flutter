@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:abherbs_flutter/purchase/owned_purchases.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -155,12 +156,9 @@ class Auth {
       }));
       unawaited(Prefs.getStringListF(keyPurchases, []).then((purchases) {
         if (gen != _accountGen || purchases.isEmpty || appUser?.uid != uid) {
-          return;
+          return Future<void>.value();
         }
-        usersReference
-            .child(uid)
-            .child(firebaseAttributePurchases)
-            .set(purchases);
+        return rememberStorePurchases(purchases);
       }));
     } catch (error) {
       if (gen != _accountGen) return;
