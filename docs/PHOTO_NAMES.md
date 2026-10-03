@@ -63,12 +63,12 @@ Rules files:
 
 ## App
 
-- `lib/search/plant_id_search.dart`: `identifyPlantPhoto` calls the function and returns `PhotoIdentification` (results, `refusal`, `failed`, `charged`, `guestFreeUsed`). The old drawer screen `lib/search/search_photo.dart` uses only the results.
-- `lib/guide/camera_page.dart`, `lib/guide/guide_camera.dart`, `lib/guide/outside_page.dart`: outcomes `species`, `list`, `outside`, `notPlant` (with `counted`), and the refusals `signIn`, `limit`, `tooSoon`, `samePhoto`, `pausedToday`. `outside` pushes Outside the book (`GuideOutside`). A catalog species from the camera opens `GuideSpeciesPage` with an unconfirmed bar. `openGuideCamera` opens the camera directly; the old purchase dialog and the photo-search promotion are gone from this path. Camera finds are private observations with `confirmed: false`, `source: camera`, and the Plant.id candidates. A photo from the roll keeps the date written in the photo (`DateTimeOriginal`, otherwise `DateTime`); a roll photo with no date, and a shutter photo, use the current time. Close on Outside the book returns to Find when the camera opened it, and back to Seen when Seen opened it. Keep and Delete from the camera open Seen. A name already in Seen is not saved again.
-- `lib/guide/guide_person.dart`: `GuideAllowance.guest(free:)`.
+- `lib/camera/plant_id_search.dart`: `identifyPlantPhoto` calls the function and returns `PhotoIdentification` (results, `refusal`, `failed`, `charged`, `guestFreeUsed`). The old drawer screen `lib/search/search_photo.dart` uses only the results.
+- `lib/camera/camera_page.dart`, `lib/camera/guide_camera.dart`, `lib/camera/outside_page.dart`: outcomes `species`, `list`, `outside`, `notPlant` (with `counted`), and the refusals `signIn`, `limit`, `tooSoon`, `samePhoto`, `pausedToday`. `outside` pushes Outside the book (`GuideOutside`). A catalog species from the camera opens `GuideSpeciesPage` with an unconfirmed bar. `openGuideCamera` opens the camera directly; the old purchase dialog and the photo-search promotion are gone from this path. Camera finds are private observations with `confirmed: false`, `source: camera`, and the Plant.id candidates. A photo from the roll keeps the date written in the photo (`DateTimeOriginal`, otherwise `DateTime`); a roll photo with no date, and a shutter photo, use the current time. Close on Outside the book returns to Find when the camera opened it, and back to Seen when Seen opened it. Keep and Delete from the camera open Seen. A name already in Seen is not saved again.
+- `lib/person/guide_person.dart`: `GuideAllowance.guest(free:)`.
 - `lib/purchase/rewarded_ad.dart`: `tieRewardedAd`. The guide camera calls `waitForNameGrant`, which re-reads `photo_quota` until `adGrants` moves. `Auth.waitForAdReward` still re-reads credits for the old screens.
 - `lib/main.dart`: App Check with Play Integrity and DeviceCheck in release, debug providers in debug builds. App Attest needs the capability on the App ID first.
-- `lib/guide/guide_location.dart`: the camera's location lookup times out (15 s position, 10 s address) instead of hanging without a fix.
+- `lib/data/guide_location.dart`: the camera's location lookup times out (15 s position, 10 s address) instead of hanging without a fix.
 
 ## Development
 

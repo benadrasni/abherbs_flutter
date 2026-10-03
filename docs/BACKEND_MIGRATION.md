@@ -24,7 +24,7 @@ Python already owns ingest (`add_plant`, `upload_plant`, `process_plant`), renam
 
 The shipping identifier is the 4-step filter. Do not “improve” keys, vocab, or list encoding.
 
-- Filter key: `color_habitat_petal_distribution` with **empty slots allowed** (same as `lib/filter/filter_utils.dart` `getFilterKey`).
+- Filter key: `color_habitat_petal_distribution` with **empty slots allowed** (same as `lib/key/filter_utils.dart` `getFilterKey`).
 - Vocab (must match `Refresher.java`, not Checker):
   - color: `1`–`5` (white, yellow, red, blue, green)
   - habitat: `1`–`6` (meadow, garden, wetland, forest, rock, tree)

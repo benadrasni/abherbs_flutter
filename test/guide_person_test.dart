@@ -1,8 +1,8 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/guide/guide_person.dart';
-import 'package:abherbs_flutter/guide/guide_theme.dart';
-import 'package:abherbs_flutter/guide/person_page.dart';
-import 'package:abherbs_flutter/settings/setting_utils.dart';
+import 'package:abherbs_flutter/person/guide_person.dart';
+import 'package:abherbs_flutter/shell/guide_theme.dart';
+import 'package:abherbs_flutter/person/person_page.dart';
+import 'package:abherbs_flutter/person/setting_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';

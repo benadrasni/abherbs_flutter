@@ -1,4 +1,4 @@
-import 'package:abherbs_flutter/entity/plant.dart';
+import 'package:abherbs_flutter/data/plant.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

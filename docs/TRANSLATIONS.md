@@ -10,7 +10,7 @@ The sections below are the plan that led here. Where they still say to keep Goog
 
 ## What “supported languages” means
 
-The **app UI languages** in `lib/l10n/intl_*.arb` / `lib/settings/setting_utils.dart`. Content keys are the Firebase language codes (`nb` → `no`; `zh_TW` → `zh`):
+The **app UI languages** in `lib/l10n/intl_*.arb` / `lib/person/setting_utils.dart`. Content keys are the Firebase language codes (`nb` → `no`; `zh_TW` → `zh`):
 
 `ar bg cs da de en es et fa fi fr he hi hr hu id it ja ko lt lv no nl pl pt ro ru sk sl sr sv tr uk zh`
 
@@ -47,7 +47,7 @@ Other Google Translate call sites:
 | Surface | Where |
 |---|---|
 | Plant body on read | `app/lib/detail/plant_detail.dart` |
-| Offline DB sync | `app/lib/settings/offline.dart` |
+| Offline DB sync | `app/lib/offline/offline.dart` |
 | Website plant page | `web/src/api.js` `loadPlantText` |
 | FCM title/body | `ingest/scripts/send_notifications.py` (`deep_translator.GoogleTranslator`) |
 | “Flowers with video” list titles | `ingest/scripts/add_flower_with_video.py` |
@@ -171,7 +171,7 @@ Wikidata label coverage is already good for most of these languages; the work is
 
 ## Related files
 
-- Client: `lib/detail/plant_detail.dart`, `lib/entity/plant_translation.dart`, `lib/settings/offline.dart`, `lib/utils/utils.dart`
+- Client: `lib/detail/plant_detail.dart`, `lib/data/plant_translation.dart`, `lib/offline/offline.dart`, `lib/data/utils.dart`
 - Website: `web/src/api.js`
 - Ingest: `scripts/send_notifications.py`, `scripts/add_flower_with_video.py`, `catalog/web_catalog.py` (already skips `*-GT`), `scripts/delete_gt_translations.py`
 - Data: `translations/{lang}`, `translations/{lang}-GT`, `translations_taxonomy`, `search_v3/{lang}`, `web/labels/{lang}`

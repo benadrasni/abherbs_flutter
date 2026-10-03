@@ -1,10 +1,10 @@
-import 'package:abherbs_flutter/entity/plant_translation.dart';
+import 'package:abherbs_flutter/data/plant_translation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/guide/guide_species.dart';
-import 'package:abherbs_flutter/guide/guide_theme.dart';
-import 'package:abherbs_flutter/guide/guide_widgets.dart';
-import 'package:abherbs_flutter/guide/schema_page.dart';
-import 'package:abherbs_flutter/guide/species_page.dart';
+import 'package:abherbs_flutter/species/guide_species.dart';
+import 'package:abherbs_flutter/shell/guide_theme.dart';
+import 'package:abherbs_flutter/shell/guide_widgets.dart';
+import 'package:abherbs_flutter/species/schema_page.dart';
+import 'package:abherbs_flutter/species/species_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';

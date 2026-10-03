@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/guide/guide_search.dart';
-import 'package:abherbs_flutter/guide/search_page.dart';
-import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:abherbs_flutter/search/guide_search.dart';
+import 'package:abherbs_flutter/search/search_page.dart';
+import 'package:abherbs_flutter/data/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';

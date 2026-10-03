@@ -111,7 +111,7 @@ Keyed by Latin binomial, e.g. `plants_v2/Acer campestre`.
 
 `inflorescenceType` is an array of the 17 legend keys (`raceme`, `spike`, `spadix`, `corymb`, `umbel`, `compound_umbel`, `capitulum`, `head`, `panicle`, `compound_spike`, `cyme`, `helicoid`, `rhipidium`, `scorpioid`, `scorpioid_thyrse`, `dichasial_thyrse`, `double_scorpioid_thyrse`). Primary type is first. Empty means none of those diagrams apply (solitary flower, catkin, unnamed cluster). Filled from the English `inflorescence` paragraph; the app and website highlight those cells in the inflorescence legend. Language-independent — not a translations field.
 
-`lib/entity/plant.dart` also mentions `synonyms` and `videoUrls` on the client object; synonyms in production live mainly under `synonyms/{name}/ipni`.
+`lib/data/plant.dart` also mentions `synonyms` and `videoUrls` on the client object; synonyms in production live mainly under `synonyms/{name}/ipni`.
 
 **Identity problem:** the primary key is the display name. `rename_plant.py` must copy `plants_v2`, `synonyms`, and every `translations/{lang}` child.
 
@@ -183,7 +183,7 @@ Order in a key is always `color_habitat_petal_distribution`. Empty slot = not se
 
 The shipped app reads v2 (`counts_4_v2`, `lists_4_v2`, `plants_headers`). The redesign key reads `plants_headers_v3`, `counts_4_v3` and `lists_4_v3`, built from `plants_v2.habitats`. Those three nodes are world-readable and not client-writable. v3 has 14,310 count keys. Codes 2 and 6 are not reused. The all-empty key is `___`.
 
-Client: `lib/filter/filter_utils.dart` (v2). v3 paths: `firebasePlantHeadersV3`, `firebaseCountsV3`, `firebaseListsV3` in `lib/utils/utils.dart`.
+Client: `lib/key/filter_utils.dart` (v2). v3 paths: `firebasePlantHeadersV3`, `firebaseCountsV3`, `firebaseListsV3` in `lib/data/utils.dart`.
 
 ## Translations
 
@@ -220,7 +220,7 @@ observations/
   logs/
 ```
 
-Observation fields (`lib/entity/observation.dart`): `id`, `plant`, `date` (legacy Java-style map + `time` millis), `latitude`, `longitude`, `note`, `photoPaths`, `status` (`private` / `public`), `order` (negative timestamp for newest-first), `indoors`. Guide rows also use `confirmed`, `source` (`camera`, `manual`, `import`), and `candidates`. A private row can carry `photoCloud: true` after its photos are in `private/{uid}/`. That flag is not part of `toJson`, so a Share payload and a full rewrite omit it.
+Observation fields (`lib/seen/observation.dart`): `id`, `plant`, `date` (legacy Java-style map + `time` millis), `latitude`, `longitude`, `note`, `photoPaths`, `status` (`private` / `public`), `order` (negative timestamp for newest-first), `indoors`. Guide rows also use `confirmed`, `source` (`camera`, `manual`, `import`), and `candidates`. A private row can carry `photoCloud: true` after its photos are in `private/{uid}/`. That flag is not part of `toJson`, so a Share payload and a full rewrite omit it.
 
 `id` is `{uid}_{millis}`. Private rows are owner-only. Publish writes the same payload to `observations/public` with `status: review`; the reviewer (`review_observations.py`) sets `public` or `rejected` via Admin SDK.
 
@@ -232,7 +232,7 @@ Public stats recounted 2026-09-28 from `observations/public/by date/list`: 1,778
 
 ## Users
 
-Read by the app after sign-in (`lib/signin/authentication.dart`). Client-writable fields are only `token`, `favorites/{plantId}`, `purchases`, and `credits` (number 0–10000).
+Read by the app after sign-in (`lib/person/authentication.dart`). Client-writable fields are only `token`, `favorites/{plantId}`, `purchases`, and `credits` (number 0–10000).
 
 - `old version` — former plus-app entitlement (Admin / existing value only)
 - `lifetime subscription` — same

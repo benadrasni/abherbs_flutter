@@ -1,6 +1,6 @@
-import 'package:abherbs_flutter/entity/observation.dart';
-import 'package:abherbs_flutter/guide/guide_camera.dart';
-import 'package:abherbs_flutter/guide/guide_private_photos.dart';
+import 'package:abherbs_flutter/seen/observation.dart';
+import 'package:abherbs_flutter/camera/guide_camera.dart';
+import 'package:abherbs_flutter/seen/guide_private_photos.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

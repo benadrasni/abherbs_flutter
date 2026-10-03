@@ -39,7 +39,7 @@ Two storage names appear in code:
 
 ## Flutter client
 
-Stateful Flutter app, Material, portrait-first. No separate state library. Screens talk to Firebase Realtime Database through `DatabaseReference` helpers in `lib/utils/utils.dart`.
+Stateful Flutter app, Material, portrait-first. No separate state library. Screens talk to Firebase Realtime Database through `DatabaseReference` helpers in `lib/data/utils.dart`.
 
 ### Startup (`lib/main.dart`)
 
@@ -107,7 +107,7 @@ Firebase Auth: email/password, Google, Apple, phone. Observations and photo sear
 
 ### Offline
 
-Paid. `lib/settings/offline.dart` keeps selected RTDB subtrees synced and downloads family/plant WebP files from `abherbs-resources` into the app documents directory. Progress is compared to `plants_to_update/count` and `families_to_update`. `versions/db_update` is the last catalog refresh date (`2022-06-06` at last read — that field is stale relative to later plant adds).
+Paid. `lib/offline/offline.dart` keeps selected RTDB subtrees synced and downloads family/plant WebP files from `abherbs-resources` into the app documents directory. Progress is compared to `plants_to_update/count` and `families_to_update`. `versions/db_update` is the last catalog refresh date (`2022-06-06` at last read — that field is stale relative to later plant adds).
 
 ### Internationalization
 

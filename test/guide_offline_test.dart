@@ -1,8 +1,8 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/guide/guide_media.dart';
-import 'package:abherbs_flutter/guide/guide_offline.dart';
-import 'package:abherbs_flutter/guide/offline_page.dart';
-import 'package:abherbs_flutter/settings/offline.dart';
+import 'package:abherbs_flutter/offline/guide_media.dart';
+import 'package:abherbs_flutter/offline/guide_offline.dart';
+import 'package:abherbs_flutter/offline/offline_page.dart';
+import 'package:abherbs_flutter/offline/offline.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

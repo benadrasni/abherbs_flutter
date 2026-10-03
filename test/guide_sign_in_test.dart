@@ -1,7 +1,7 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/guide/guide_sign_in.dart';
-import 'package:abherbs_flutter/guide/guide_theme.dart';
-import 'package:abherbs_flutter/guide/sign_in_page.dart';
+import 'package:abherbs_flutter/person/guide_sign_in.dart';
+import 'package:abherbs_flutter/shell/guide_theme.dart';
+import 'package:abherbs_flutter/person/sign_in_page.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

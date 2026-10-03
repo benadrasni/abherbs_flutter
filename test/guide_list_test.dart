@@ -1,9 +1,9 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/guide/guide_data.dart';
-import 'package:abherbs_flutter/guide/guide_results.dart';
-import 'package:abherbs_flutter/guide/guide_theme.dart';
-import 'package:abherbs_flutter/guide/guide_widgets.dart';
-import 'package:abherbs_flutter/guide/list_page.dart';
+import 'package:abherbs_flutter/data/guide_data.dart';
+import 'package:abherbs_flutter/data/guide_results.dart';
+import 'package:abherbs_flutter/shell/guide_theme.dart';
+import 'package:abherbs_flutter/shell/guide_widgets.dart';
+import 'package:abherbs_flutter/book/list_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_platform_interface/test.dart';
 import 'package:firebase_database/firebase_database.dart';

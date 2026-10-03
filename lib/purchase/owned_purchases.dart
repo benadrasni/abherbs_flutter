@@ -1,6 +1,6 @@
-import 'package:abherbs_flutter/signin/authentication.dart';
-import 'package:abherbs_flutter/utils/prefs.dart';
-import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:abherbs_flutter/person/authentication.dart';
+import 'package:abherbs_flutter/data/prefs.dart';
+import 'package:abherbs_flutter/data/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 

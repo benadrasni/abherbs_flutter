@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/guide/guide_data.dart';
-import 'package:abherbs_flutter/guide/guide_path.dart';
-import 'package:abherbs_flutter/guide/habitat_glyphs.dart';
-import 'package:abherbs_flutter/guide/habitat_page.dart';
+import 'package:abherbs_flutter/data/guide_data.dart';
+import 'package:abherbs_flutter/key/guide_path.dart';
+import 'package:abherbs_flutter/key/habitat_glyphs.dart';
+import 'package:abherbs_flutter/key/habitat_page.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/widgets/app_banner_ad.dart';
+import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';

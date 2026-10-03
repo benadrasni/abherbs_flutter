@@ -1,4 +1,4 @@
-import 'package:abherbs_flutter/utils/safe_focus_traversal.dart';
+import 'package:abherbs_flutter/shell/safe_focus_traversal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';

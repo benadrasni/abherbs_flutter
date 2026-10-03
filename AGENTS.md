@@ -34,7 +34,7 @@ Git remote: `https://github.com/benadrasni/abherbs_flutter`.
 - iOS uses the UIScene lifecycle (`FlutterSceneDelegate` in `Info.plist`; plugin registration in `AppDelegate.didInitializeImplicitFlutterEngine`).
 - Version is `pubspec.yaml` `version: X.Y.Z+XYZ` (build number = version without dots). Bump both together for a store build.
 - UI strings: edit `lib/l10n/intl_*.arb`, then `flutter pub run intl_utils:generate`.
-- Filter key format: `color_habitat_petal_distribution` with empty slots allowed. Vocabulary is in `lib/filter/filter_utils.dart`.
+- Filter key format: `color_habitat_petal_distribution` with empty slots allowed. Vocabulary is in `lib/key/filter_utils.dart`.
 - Plant photos are public HTTPS under `https://storage.googleapis.com/abherbs-resources/photos/`.
 - Missing body text falls back to English. A language's own vernacular `label` and `names` are shown when that language has them; otherwise the UI shows the Latin name. Google Translate and `{lang}-GT` are removed. Do not recreate a GT tree or copy GT text into official translations. Plan: `docs/TRANSLATIONS.md`.
 - Species English sources: `ingest/data/botanical_sources.json`. Reliable floras include Wikipedia, PFAF, RHS, Luontoportti, Missouri Plants, BOTANY.cz, and EPPO for names. When a web flora is useful, add it there for later plants.

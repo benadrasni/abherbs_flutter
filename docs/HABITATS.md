@@ -183,7 +183,7 @@ Until v2 is retired, every catalog change updates both sets:
 
 ### 7. App
 
-- `lib/utils/utils.dart`: add `firebasePlantHeadersV3`, `firebaseCountsV3` and `firebaseListsV3`.
+- `lib/data/utils.dart`: add `firebasePlantHeadersV3`, `firebaseCountsV3` and `firebaseListsV3`.
 - The new key screen and result list read only these three nodes. The shipped filter screens stay on v2.
 - The result list sorts by `floweringFrom`–`floweringTo` and filters on `cultivated` for the Wild only chip, both from `plants_headers_v3`. The chip choice is saved in prefs next to the region.
 - Search results and Book rows (families, genera, lists) show a **Garden plant** tag when `cultivated` is set. They never hide a plant.

@@ -1,4 +1,4 @@
-import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:abherbs_flutter/data/utils.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class Purchases {

@@ -1,6 +1,6 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/guide/language_page.dart';
-import 'package:abherbs_flutter/settings/setting_utils.dart';
+import 'package:abherbs_flutter/person/language_page.dart';
+import 'package:abherbs_flutter/person/setting_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
