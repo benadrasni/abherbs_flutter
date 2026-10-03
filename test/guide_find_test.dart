@@ -239,7 +239,7 @@ void main() {
     );
     expect(find.text('null'), findsNothing);
 
-    expect(find.text('Oxeye'), findsOneWidget);
+    expect(find.text('oxeye'), findsOneWidget);
     expect(find.text('To confirm'), findsNothing);
     expect(find.text('Bellis perennis'), findsNothing);
     expect(find.text('Find 5'), findsOneWidget);
@@ -410,7 +410,7 @@ void main() {
     expect(seen, 1);
     expect(find.byType(GuideSpeciesPage), findsNothing);
 
-    await tester.tap(find.text('Daisy'));
+    await tester.tap(find.text('daisy'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
     expect(seen, 1);

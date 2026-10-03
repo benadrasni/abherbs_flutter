@@ -360,7 +360,7 @@ String? guideOrderLatin(dynamic apg) {
 }
 
 /// Order, then family. A vernacular wins; otherwise the Latin name.
-/// The first letter is capital, matching the name above it.
+/// A vernacular is shown as stored.
 String guideOrderFamilyLine({
   String? orderLabel,
   String? orderLatin,
@@ -372,7 +372,7 @@ String guideOrderFamilyLine({
     final raw =
         (preferred != null && preferred.isNotEmpty) ? preferred : latin?.trim();
     if (raw == null || raw.isEmpty) return null;
-    return raw[0].toUpperCase() + raw.substring(1);
+    return raw;
   }
 
   return [

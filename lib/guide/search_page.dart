@@ -120,10 +120,10 @@ class _GuideSearchPageState extends State<GuideSearchPage> {
 
   String? _label(GuideSearchPlant plant) {
     final fetched = _cardFor(plant)?.label;
-    if (fetched != null && fetched.isNotEmpty) return guideCap(fetched);
+    if (fetched != null && fetched.isNotEmpty) return fetched;
     final key = plant.labelKey;
     if (key == null || key.isEmpty) return null;
-    return guideCap(key);
+    return key;
   }
 
   String _latin(GuideSearchPlant plant) {
@@ -224,13 +224,13 @@ class _GuideSearchPageState extends State<GuideSearchPage> {
   }
 
   Widget _taxonRow(GuideSearchTaxon taxon) {
-    final vernacular =
-        taxon.vernaculars.isEmpty ? null : guideCap(taxon.vernaculars.first);
-    final same = vernacular != null &&
-        foldSearch(vernacular) == foldSearch(taxon.latinName);
+    final raw = taxon.vernaculars.isEmpty ? '' : taxon.vernaculars.first.trim();
+    final same =
+        raw.isNotEmpty && foldSearch(raw) == foldSearch(taxon.latinName);
+    final vernacular = raw.isEmpty || same ? null : raw;
     return _ResultRow(
       title: vernacular ?? taxon.latinName,
-      latin: same ? null : taxon.latinName,
+      latin: vernacular == null ? null : taxon.latinName,
       photoPath: taxon.illustrationFamily.isEmpty
           ? null
           : storageFamilies + taxon.illustrationFamily + defaultExtension,

@@ -154,7 +154,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
     if (load == null) return;
     load().then((name) {
       if (!mounted || name == null) return;
-      final shown = guideCap(name.trim());
+      final shown = name.trim();
       if (shown.isEmpty || shown == _listTitle) return;
       setState(() => _listTitle = shown);
     });

@@ -180,27 +180,27 @@ void main() {
 
     expect(find.text('Book'), findsOneWidget);
     expect(find.text('105 plants · 2 families'), findsOneWidget);
-    expect(find.text('Daisy family'), findsOneWidget);
+    expect(find.text('daisy family'), findsOneWidget);
     expect(find.text('Asteraceae'), findsOneWidget);
     expect(find.text('93'), findsOneWidget);
-    expect(find.text('Rose family'), findsOneWidget);
-    expect(find.text('English daisy'), findsNothing);
+    expect(find.text('rose family'), findsOneWidget);
+    expect(find.text('english daisy'), findsNothing);
     expect(find.byType(AppBannerAd), findsNothing);
 
     final families = tester.widget<Material>(find.byKey(guideBookFamiliesKey));
     expect(families.color, GuideColors.light.ink);
 
-    await tester.tap(find.text('Daisy family'));
+    await tester.tap(find.text('daisy family'));
     await tester.pump();
     expect(opened, 'APG IV_v3/Eukaryota/Asterales/Asteraceae/list');
 
     await tester.tap(find.byKey(guideBookGeneraKey));
     await tester.pump();
-    expect(find.text('English daisy'), findsOneWidget);
+    expect(find.text('english daisy'), findsOneWidget);
     expect(find.text('Bellis'), findsOneWidget);
     expect(find.text('Rosa'), findsOneWidget);
     expect(find.text('rosa'), findsNothing);
-    expect(find.text('Daisy family'), findsNothing);
+    expect(find.text('daisy family'), findsNothing);
 
     await tester.tap(find.byKey(guideBookListsKey));
     await tester.pump();
@@ -245,7 +245,7 @@ void main() {
     await tester.pump();
     await tester.pump();
 
-    expect(find.text('English daisy'), findsOneWidget);
+    expect(find.text('english daisy'), findsOneWidget);
     expect(
       find.text('In flower now · 2 · you’ve seen 1'),
       findsOneWidget,
@@ -280,7 +280,7 @@ void main() {
     );
     await tester.pump();
     await tester.pump();
-    expect(find.text('Daisy family'), findsOneWidget);
+    expect(find.text('daisy family'), findsOneWidget);
   });
 
   testWidgets('All lists opens on the lists segment', (tester) async {
@@ -303,7 +303,7 @@ void main() {
 
     expect(find.text('Meadows'), findsOneWidget);
     expect(find.text('11 plants'), findsOneWidget);
-    expect(find.text('Daisy family'), findsNothing);
+    expect(find.text('daisy family'), findsNothing);
     final lists = tester.widget<Material>(find.byKey(guideBookListsKey));
     expect(lists.color, GuideColors.light.ink);
   });

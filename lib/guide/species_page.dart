@@ -411,8 +411,7 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
   }
 
   Future<void> _share(GuideSpecies species) async {
-    final title =
-        species.hasVernacular ? guideCap(species.label!.trim()) : species.name;
+    final title = species.hasVernacular ? species.label!.trim() : species.name;
     await SharePlus.instance.share(ShareParams(
       text: webPlantUrl(
         species.name,
@@ -650,8 +649,7 @@ Future<void> _openSignIn(BuildContext context) {
 }
 
 void _openSchema(BuildContext context, GuideSpecies species, String id) {
-  final back =
-      species.hasVernacular ? guideCap(species.label!.trim()) : species.name;
+  final back = species.hasVernacular ? species.label!.trim() : species.name;
   final flower = id == 'flower';
   Navigator.push(
     context,
@@ -921,7 +919,7 @@ class _NameBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
     final named = species.hasVernacular;
-    final title = named ? guideCap(species.label!.trim()) : species.name;
+    final title = named ? species.label!.trim() : species.name;
     final ranks = guideOrderFamilyLine(
       orderLabel: species.orderLabel,
       orderLatin: species.orderLatin,
@@ -1022,8 +1020,7 @@ class _PendingBar extends StatelessWidget {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final time = guidePhotoMoment(context, pending.when);
-    final name =
-        species.hasVernacular ? guideCap(species.label!.trim()) : species.name;
+    final name = species.hasVernacular ? species.label!.trim() : species.name;
     final file = pending.photoPath;
     final hasFile = file != null && file.isNotEmpty && File(file).existsSync();
     final ground = kept ? colors.mossFill : colors.ink;

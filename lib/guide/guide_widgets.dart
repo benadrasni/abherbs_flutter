@@ -245,7 +245,7 @@ class GuideName extends StatelessWidget {
     final colors = GuideColors.of(context);
     final named = label != null && label!.isNotEmpty;
     return Text(
-      named ? guideCap(label!) : latinName,
+      named ? label! : latinName,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
       style: named

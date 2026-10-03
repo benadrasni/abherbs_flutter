@@ -212,7 +212,7 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
                     leading!.vernacular!.trim().isNotEmpty) ...[
                   const SizedBox(height: 4),
                   Text(
-                    guideCap(leading.vernacular!.trim()),
+                    leading.vernacular!.trim(),
                     style: TextStyle(fontSize: 15, color: colors.ink3),
                   ),
                 ],
@@ -333,7 +333,7 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
     return Text.rich(TextSpan(
       style: TextStyle(fontSize: 14, height: 1.4, color: colors.ink2),
       children: [
-        if (label.isNotEmpty) TextSpan(text: guideCap(label)),
+        if (label.isNotEmpty) TextSpan(text: label),
         if (label.isNotEmpty && latin.isNotEmpty) const TextSpan(text: ' · '),
         if (latin.isNotEmpty)
           TextSpan(
@@ -484,7 +484,7 @@ class _Candidate extends StatelessWidget {
     final strings = S.of(context);
     final species = guideCameraSpeciesName(hit);
     final vernacular = hit.vernacular?.trim() ?? '';
-    final title = vernacular.isNotEmpty ? guideCap(vernacular) : hit.latin;
+    final title = vernacular.isNotEmpty ? vernacular : hit.latin;
     final showLatin = title.toLowerCase() != hit.latin.toLowerCase();
     return Material(
       color: colors.cream,

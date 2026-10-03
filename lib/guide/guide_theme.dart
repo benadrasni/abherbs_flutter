@@ -486,6 +486,8 @@ class GuideTheme extends StatelessWidget {
   }
 }
 
+/// First letter of an interface word, such as a color, a habitat, or a petal.
+/// A vernacular name is shown as stored, so do not pass one here.
 String guideCap(String value) {
   if (value.isEmpty) return value;
   return value[0].toUpperCase() + value.substring(1);

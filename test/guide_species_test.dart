@@ -137,7 +137,7 @@ void main() {
         familyLabel: 'daisy family',
         familyLatin: 'Asteraceae',
       ),
-      'Aster order · Daisy family',
+      'aster order · daisy family',
     );
     expect(
       guideOrderFamilyLine(
@@ -148,7 +148,7 @@ void main() {
     );
     expect(
       guideOrderFamilyLine(familyLabel: 'daisy family'),
-      'Daisy family',
+      'daisy family',
     );
     expect(guideOrderFamilyLine(), isEmpty);
 
@@ -325,12 +325,12 @@ void main() {
       size: const Size(390, 4200),
     );
 
-    expect(find.text('Aster order · Daisy family'), findsOneWidget);
+    expect(find.text('aster order · daisy family'), findsOneWidget);
     expect(
-      tester.getTopLeft(find.text('Aster order · Daisy family')).dy,
-      lessThan(tester.getTopLeft(find.text('Oxeye daisy')).dy),
+      tester.getTopLeft(find.text('aster order · daisy family')).dy,
+      lessThan(tester.getTopLeft(find.text('oxeye daisy')).dy),
     );
-    expect(find.text('Oxeye daisy'), findsOneWidget);
+    expect(find.text('oxeye daisy'), findsOneWidget);
     expect(find.textContaining('Leucanthemum vulgare'), findsWidgets);
     expect(find.textContaining('Lam.'), findsOneWidget);
     expect(find.text('Also moon daisy, bruisewort'), findsOneWidget);
@@ -622,7 +622,7 @@ void main() {
     await tester.tap(find.text('Try again'));
     await tester.pump();
     await tester.pump();
-    expect(find.text('Oxeye daisy'), findsOneWidget);
+    expect(find.text('oxeye daisy'), findsOneWidget);
     expect(calls, 2);
   });
 
@@ -655,11 +655,11 @@ void main() {
     await tester.tap(find.text('open'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
-    expect(find.text('Oxeye daisy'), findsOneWidget);
+    expect(find.text('oxeye daisy'), findsOneWidget);
 
     await tester.tap(find.byTooltip('Back'));
     await tester.pumpAndSettle();
-    expect(find.text('Oxeye daisy'), findsNothing);
+    expect(find.text('oxeye daisy'), findsNothing);
     expect(find.text('open'), findsOneWidget);
   });
 
@@ -704,7 +704,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 300));
 
     expect(confirmed, 1);
-    expect(find.text('In Seen as Oxeye daisy'), findsOneWidget);
+    expect(find.text('In Seen as oxeye daisy'), findsOneWidget);
     expect(find.text('Confirmed.'), findsOneWidget);
     expect(find.text('Your photo · unconfirmed'), findsNothing);
     expect(find.byTooltip('Share'), findsOneWidget);

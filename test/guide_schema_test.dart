@@ -196,11 +196,11 @@ void main() {
     await tester.tap(flower);
     await tester.pumpAndSettle();
     expect(find.text('Parts of a flower'), findsOneWidget);
-    expect(find.widgetWithText(GuideBackButton, 'Oxeye daisy'), findsOneWidget);
+    expect(find.widgetWithText(GuideBackButton, 'oxeye daisy'), findsOneWidget);
 
     await tester.tap(find.descendant(
       of: find.byType(GuideBackButton),
-      matching: find.text('Oxeye daisy'),
+      matching: find.text('oxeye daisy'),
     ));
     await tester.pumpAndSettle();
     expect(find.text('Parts of a flower'), findsNothing);
@@ -214,7 +214,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(inflorescence);
     await tester.pumpAndSettle();
-    expect(find.text('Oxeye daisy · head'), findsOneWidget);
+    expect(find.text('oxeye daisy · head'), findsOneWidget);
     expect(_border(_cell(tester, 'head')).width, 3);
     expect(_border(_cell(tester, 'capitulum')).width, 1);
   });

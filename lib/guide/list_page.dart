@@ -236,7 +236,7 @@ class _GuideNewPageState extends State<GuideNewPage> {
           ),
           const SizedBox(height: 7),
           Text(
-            named ? guideCap(label) : plant.name,
+            named ? label : plant.name,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: named
@@ -651,7 +651,7 @@ class _YearRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      named ? guideCap(label) : plant.name,
+                      named ? label : plant.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: named

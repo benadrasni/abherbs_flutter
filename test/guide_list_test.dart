@@ -211,8 +211,8 @@ void main() {
       lessThan(tester.getTopLeft(find.text(olderLabel)).dy),
     );
     expect(
-      tester.getTopLeft(find.text('Daisy')).dy,
-      lessThan(tester.getTopLeft(find.text('Snowdrop')).dy),
+      tester.getTopLeft(find.text('daisy')).dy,
+      lessThan(tester.getTopLeft(find.text('snowdrop')).dy),
     );
     expect(find.text('✓ Seen'), findsOneWidget);
     expect(find.text('In flower now · 2'), findsNothing);
@@ -228,7 +228,7 @@ void main() {
       closeTo(2 / 3, 0.01),
     );
 
-    await tester.tap(find.text('Daisy'));
+    await tester.tap(find.text('daisy'));
     expect(opened, 'Bellis perennis');
   });
 
@@ -317,7 +317,7 @@ void main() {
     await tester.pump();
     expect(tester.getSize(find.byType(GuidePhoto).first).height, 96);
 
-    await tester.tap(find.text('Field maple'));
+    await tester.tap(find.text('field maple'));
     expect(opened, 'Acer campestre');
     expect(find.text('In flower now · 2'), findsNothing);
     expect(find.text('Any region'), findsNothing);

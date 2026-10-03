@@ -276,10 +276,10 @@ void main() {
 
     expect(find.text('Oxeye daisy'), findsOneWidget);
     expect(find.text('Leucanthemum vulgare'), findsOneWidget);
-    expect(find.text('Daisy'), findsOneWidget);
-    expect(find.text('English daisy'), findsOneWidget);
+    expect(find.text('daisy'), findsOneWidget);
+    expect(find.text('english daisy'), findsOneWidget);
     expect(find.text('Bellis'), findsOneWidget);
-    expect(find.text('Daisy family'), findsOneWidget);
+    expect(find.text('daisy family'), findsOneWidget);
     expect(find.text('Asteraceae'), findsOneWidget);
     expect(find.text('93'), findsOneWidget);
     expect(
@@ -345,15 +345,15 @@ void main() {
     await tester.pump();
     await tester.enterText(find.byType(TextField), 'leucanthemum vulgare');
     await tester.pump();
-    expect(find.text('Oxeye daisy'), findsOneWidget);
+    expect(find.text('oxeye daisy'), findsOneWidget);
     expect(find.text('Leucanthemum vulgare'), findsOneWidget);
 
     card.complete(const GuidePlantCard(label: 'moon daisy', latinName: ''));
     await tester.pump();
-    expect(find.text('Moon daisy'), findsOneWidget);
-    expect(find.text('Oxeye daisy'), findsNothing);
+    expect(find.text('moon daisy'), findsOneWidget);
+    expect(find.text('oxeye daisy'), findsNothing);
 
-    await tester.tap(find.text('Moon daisy'));
+    await tester.tap(find.text('moon daisy'));
     await tester.pump();
     expect(opened, 'Leucanthemum vulgare');
   });
@@ -378,7 +378,10 @@ void main() {
     await tester.pump();
     expect(attempts, 2);
     expect(find.text('PLANTS'), findsOneWidget);
-    expect(find.text('Daisy'), findsOneWidget);
+    expect(
+      find.descendant(of: find.byType(ListView), matching: find.text('daisy')),
+      findsOneWidget,
+    );
   });
 
   testWidgets('search waits for the index', (tester) async {

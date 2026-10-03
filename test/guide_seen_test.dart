@@ -233,7 +233,7 @@ void main() {
     expect(find.text('4 finds · on this phone until you sign in'), findsOneWidget);
     expect(find.text('TO CONFIRM · 1'), findsOneWidget);
     expect(find.text('LIKELY'), findsOneWidget);
-    expect(find.text('Daisy'), findsOneWidget);
+    expect(find.text('daisy'), findsOneWidget);
     expect(find.text('Bellis perennis'), findsOneWidget);
     expect(find.text('Sep 27 · Middle Europe'), findsOneWidget);
     expect(find.text('Confirm'), findsOneWidget);
@@ -245,7 +245,7 @@ void main() {
     expect(confirm.width, closeTo(another.width, 0.5));
     expect(another.width, closeTo(delete.width, 0.5));
     expect(find.text('SEPTEMBER 2026'), findsOneWidget);
-    expect(find.text('Dog rose'), findsOneWidget);
+    expect(find.text('dog rose'), findsOneWidget);
     expect(find.text('Share'), findsOneWidget);
     expect(find.text('AUGUST 2026'), findsOneWidget);
     expect(find.text('Achillea millefolium'), findsOneWidget);
@@ -263,7 +263,7 @@ void main() {
     await tester.pump();
     expect(removed, ['new']);
 
-    await tester.tap(find.text('Dog rose'));
+    await tester.tap(find.text('dog rose'));
     expect(opened, ['kept']);
 
     await tester.ensureVisible(find.byKey(const Key('guide-seen-upsell')));
@@ -347,7 +347,7 @@ void main() {
     );
     await tester.tap(find.text('Share'));
     await tester.pumpAndSettle();
-    expect(find.text('Share Dog rose'), findsOneWidget);
+    expect(find.text('Share dog rose'), findsOneWidget);
     expect(find.text('Your note stays private.'), findsOneWidget);
     final send = tester.widget<FilledButton>(find.byKey(const Key('guide-seen-send')));
     expect(send.onPressed, isNull);
@@ -383,7 +383,7 @@ void main() {
     );
     await tester.tap(find.text('Shared'));
     await tester.pumpAndSettle();
-    expect(find.text('Dog rose is a Sighting'), findsOneWidget);
+    expect(find.text('dog rose is a Sighting'), findsOneWidget);
     await tester.tap(find.byKey(const Key('guide-seen-withdraw')));
     await tester.pumpAndSettle();
     expect(withdrawn, ['pub']);
@@ -473,9 +473,9 @@ void main() {
     expect(find.text('5 finds · on this phone until you sign in'), findsOneWidget);
     expect(find.text('TO CONFIRM · 1'), findsOneWidget);
     expect(find.text('Hide shared · 1'), findsOneWidget);
-    expect(find.text('Snowdrop'), findsOneWidget);
+    expect(find.text('snowdrop'), findsOneWidget);
     expect(find.text('MARCH 2026'), findsOneWidget);
-    expect(find.text('Yarrow'), findsOneWidget);
+    expect(find.text('yarrow'), findsOneWidget);
     expect(find.text('In review'), findsOneWidget);
     expect(find.text('Not accepted'), findsOneWidget);
 
@@ -496,11 +496,11 @@ void main() {
       find.text('4 finds · 1 shared hidden · on this phone until you sign in'),
       findsOneWidget,
     );
-    expect(find.text('Snowdrop'), findsNothing);
+    expect(find.text('snowdrop'), findsNothing);
     expect(find.text('MARCH 2026'), findsNothing);
-    expect(find.text('Yarrow'), findsOneWidget);
-    expect(find.text('Chamomile'), findsOneWidget);
-    expect(find.text('Wood anemone'), findsOneWidget);
+    expect(find.text('yarrow'), findsOneWidget);
+    expect(find.text('chamomile'), findsOneWidget);
+    expect(find.text('wood anemone'), findsOneWidget);
     expect(find.text('Tanacetum corymbosum'), findsOneWidget);
     final hiddenChip = tester.getRect(find.byKey(const Key('guide-seen-hide-shared')));
     final hiddenConfirm = tester.getRect(
@@ -512,7 +512,7 @@ void main() {
     await tester.tap(find.byKey(const Key('guide-seen-hide-shared')));
     await tester.pump();
     expect(find.text('Hide shared · 1'), findsOneWidget);
-    expect(find.text('Snowdrop'), findsOneWidget);
+    expect(find.text('snowdrop'), findsOneWidget);
     expect(find.text('5 finds · on this phone until you sign in'), findsOneWidget);
   });
 
@@ -537,7 +537,7 @@ void main() {
       find.text('0 finds · 1 shared hidden · on this phone until you sign in'),
       findsOneWidget,
     );
-    expect(find.text('Snowdrop'), findsNothing);
+    expect(find.text('snowdrop'), findsNothing);
     expect(
       find.text(
         'Nothing else in the notebook. Shared finds are still on the species pages.',
@@ -581,7 +581,7 @@ void main() {
       ),
     );
 
-    await tester.tap(find.text('Daisy'));
+    await tester.tap(find.text('daisy'));
     await tester.pump();
     expect(opened, ['book']);
     expect(find.byKey(const Key('guide-outside-page')), findsNothing);
@@ -591,7 +591,7 @@ void main() {
 
     expect(find.byKey(const Key('guide-outside-page')), findsOneWidget);
     expect(find.text('Saved to Seen · unconfirmed'), findsOneWidget);
-    expect(find.text('Oxeye daisy'), findsOneWidget);
+    expect(find.text('oxeye daisy'), findsOneWidget);
     expect(find.byKey(const Key('guide-outside-keep')), findsOneWidget);
     final page = tester.widget<GuideOutsidePage>(find.byType(GuideOutsidePage));
     expect(page.observationId, 'out');
@@ -670,7 +670,7 @@ void main() {
 
     await _pump(tester, _page(finds: finds));
     expect(find.text('Shared hidden · 1'), findsOneWidget);
-    expect(find.text('Snowdrop'), findsNothing);
+    expect(find.text('snowdrop'), findsNothing);
   });
 }
 

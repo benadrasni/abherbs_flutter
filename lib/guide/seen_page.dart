@@ -414,7 +414,7 @@ class _SeenPageState extends State<SeenPage> {
       return;
     }
     final title = find.label != null && find.label!.trim().isNotEmpty
-        ? guideCap(find.label!.trim())
+        ? find.label!.trim()
         : find.name;
     if (!mounted) return;
     await showModalBottomSheet<void>(
@@ -453,7 +453,7 @@ class _SeenPageState extends State<SeenPage> {
 
   Future<void> _withdraw(GuideSeenFind find) async {
     final title = find.label != null && find.label!.trim().isNotEmpty
-        ? guideCap(find.label!.trim())
+        ? find.label!.trim()
         : find.name;
     final review = find.share == GuideSeenShare.review;
     await showModalBottomSheet<void>(
@@ -578,7 +578,7 @@ class _ConfirmCard extends StatelessWidget {
                               const SizedBox(height: 4),
                             ],
                             Text(
-                              named ? guideCap(find.label!.trim()) : find.name,
+                              named ? find.label!.trim() : find.name,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: named
@@ -753,7 +753,7 @@ class _FindRow extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    named ? guideCap(find.label!.trim()) : find.name,
+                    named ? find.label!.trim() : find.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: named

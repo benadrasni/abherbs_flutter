@@ -729,7 +729,7 @@ void main() {
 
     expect(find.byKey(const Key('guide-outside-page')), findsOneWidget);
     expect(find.text('Rare plant'), findsOneWidget);
-    expect(find.text('Rare daisy'), findsOneWidget);
+    expect(find.text('rare daisy'), findsOneWidget);
     expect(find.text('LIKELY'), findsOneWidget);
     expect(
       find.text(
@@ -739,7 +739,7 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('In the book, and close'), findsOneWidget);
-    expect(find.text('Daisy'), findsOneWidget);
+    expect(find.text('daisy'), findsOneWidget);
     expect(find.text('POSSIBLE'), findsOneWidget);
     expect(find.text('No place'), findsWidgets);
     expect(find.text('Saved to Seen · unconfirmed'), findsOneWidget);
@@ -1071,7 +1071,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Tanacetum corymbosum'), findsOneWidget);
-    expect(find.text('Daisy family · Asteraceae'), findsOneWidget);
+    expect(find.text('daisy family · Asteraceae'), findsOneWidget);
     expect(find.text('Sep 30, 2026'), findsOneWidget);
     expect(find.textContaining('Sep 30, 2026, 2:31 PM'), findsOneWidget);
     expect(find.text('Middle Europe'), findsWidgets);

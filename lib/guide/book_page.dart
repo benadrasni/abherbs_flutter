@@ -391,7 +391,7 @@ String? guideGenusNoteText(S strings, GuideGenusNote? note) {
 
 String _taxonHeading(GuideSearchTaxon taxon) {
   final raw = guideTaxonTitle(taxon);
-  final vernacular = raw == taxon.latinName ? null : guideCap(raw);
+  final vernacular = raw == taxon.latinName ? null : raw;
   final distinct = vernacular != null &&
       foldSearch(vernacular) != foldSearch(taxon.latinName);
   return distinct ? vernacular! : taxon.latinName;
