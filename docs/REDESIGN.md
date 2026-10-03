@@ -74,7 +74,7 @@ A find is private until the person shares it. Any confirmed find of a species in
 
 The share sheet asks for consent every time: the photo is published under CC0, the note stays private, and the place is shown as country and month, not a pin. Sharing uploads the photo to `observations/{uid}/…` and writes the record to `observations/public` with status `review`, the same path uploads take today. Review stays as it is (`/review-observations`, Admin SDK sets `public` or `rejected`).
 
-In Seen a shared find shows **In review**, **Shared**, or **Not accepted**. The person can withdraw a shared find at any time, which removes it from `observations/public`, as account deletion already does.
+In Seen a shared find shows **In review**, **Shared**, or **Not accepted**. The person can withdraw a shared find at any time, which removes it from `observations/public`, as account deletion already does. Every confirmed row also has **Delete**, and that sheet asks first. A private find leaves Seen. A Sighting leaves Seen and Sightings, including the public photo. A find in review, or one that was not accepted, leaves Seen and the copy that was sent. Withdrawing stays separate: the find remains in Seen and only the public record goes.
 
 Accepted finds are **Sightings**: public, on species pages in the app and on the website, where public observations show today. The 1,778 accepted observations are Sightings already and carry over unchanged. **Seen** always means the person’s own notebook; **Sightings** always means what is public.
 
@@ -155,8 +155,9 @@ Database additions and changes are allowed when a new page needs a field or node
 | Species page | Same sections as the website. Flower and Inflorescence open the diagrams. No ads |
 | Flower schema | Numbered plate of a complete flower, and the seventeen part names |
 | Inflorescences | The seventeen types. Opened from a species page, that plant’s stored type is marked; the first is the primary |
-| Seen | To confirm first, then the notebook by month |
+| Seen | To confirm first, then the notebook by month. Delete on a confirmed find asks first |
 | Share a find | CC0 consent, then review, then a public Sighting |
+| Seen · delete a Sighting | A public find leaves Seen and Sightings. In review or not accepted, the copy you sent goes too |
 | Book | Families, genera, lists of flowers |
 | List of flowers | New in the book by date (last 15 to 25). Year campaigns newest first. Other lists use the result grid |
 | At the limit | Ad, Field Guide, or the key |

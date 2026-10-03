@@ -132,6 +132,8 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .srow .tx b{display:block;font-weight:600}
 .srow .tx span{font-size:13px;color:var(--ink-3)}
 .srow .k{font-size:12px;color:var(--ink-3)}
+.srow .end{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex:none}
+.srow .del{font-size:13px;font-weight:600;color:var(--madder);padding:2px 4px;line-height:1.2}
 .slabel{padding:10px 20px 2px}
 
 /* Key steps */
@@ -614,9 +616,10 @@ const SCREENS=[
   ['species','Species page','Order and family, in English, above the name. Toxicity sits with height, above the flowering months. Notes after the description, Uses after the morphology. Flower and Inflorescence open the diagrams. No ads.'],
   ['flower','Flower schema','A typical complete flower. The numbers on the plate match the list.'],
   ['inflorescence','Inflorescences','Seventeen types. Opened from oxeye daisy, head is marked.'],
-  ['seen','Seen','To confirm first, then the notebook by month. Hide shared drops accepted Sightings from this list.'],
+  ['seen','Seen','To confirm first, then the notebook by month. Delete on a confirmed find asks first. Hide shared drops accepted Sightings from this list.'],
   ['seenHide','Seen · shared hidden','Remembered on the phone. After the notebook loads, rows already public are skipped. In review, Not accepted, and To confirm stay. Find and the species page are unchanged.'],
   ['share','Share a find','Private until shared. CC0 consent each time, then review, then a public Sighting.'],
+  ['seenDelete','Seen · delete a Sighting','Delete asks first. A public find leaves Seen and Sightings. In review or not accepted, the copy you sent goes too.'],
   ['book','Book','Families, genera, lists of flowers.'],
   ['list','List of flowers','A custom list. Year campaigns run newest first; “New in the book” by date.'],
   ['limit','At the limit','Ad, Field Guide, or the key. The key never closes.'],
@@ -915,7 +918,7 @@ function seenScreen(){
     <div class="acts"><button data-confirm="${r.id}">Confirm</button><button data-sheet="other" data-rec="${r.id}">Another</button><button data-del="${r.id}">Delete</button></div></div>`;
   const inBook=n=>D.plants.some(p=>p.n==n)||!!D.sp[n];
   const shareBit=r=>r.sh=='shared'?`<button class="shst ok" data-shsheet="${r.id}">Shared</button>`:r.sh=='review'?`<span class="shst rev">In review</span>`:r.sh=='rejected'?`<span class="shst no">Not accepted</span>`:inBook(r.n)?`<button class="pill" data-share="${r.id}">Share</button>`:`<span class="shst">Not in the book</span>`;
-  const row=r=>`<div class="srow"><button class="th" style="background-image:url('${r.ph}')" data-sp="${esc(r.n)}"></button><button class="tx" data-sp="${esc(r.n)}"><b>${esc(r.l?cap(r.l):'')}${r.l?'':`<span class="latin" style="font-weight:420">${esc(r.n)}</span>`}</b><span>${esc(r.when)} · ${esc(r.where)}</span></button>${shareBit(r)}</div>`;
+  const row=r=>`<div class="srow"><button class="th" style="background-image:url('${r.ph}')" data-sp="${esc(r.n)}"></button><button class="tx" data-sp="${esc(r.n)}"><b>${esc(r.l?cap(r.l):'')}${r.l?'':`<span class="latin" style="font-weight:420">${esc(r.n)}</span>`}</b><span>${esc(r.when)} · ${esc(r.where)}</span></button><span class="end">${shareBit(r)}<button class="del" data-askdel="${r.id}">Delete</button></span></div>`;
   const where=st.signed?(st.fg?'photos on all your devices':'saved to your account'):'on this phone until you sign in';
   const shown=u.length+c.length;
   const countLine=st.hideShared&&sharedN?`${shown} finds · ${sharedN} shared hidden · ${where}`:`${st.seen.length} finds · ${where}`;
@@ -963,6 +966,17 @@ function withdrawSheet(){
   return `<div class="scrim" data-close="1"><div class="sheet" data-stop="1"><div class="grab"></div>
     <h2>${esc(cap(r.l||r.n))} is a Sighting</h2><p>Shared under CC0 and shown on the species page. Withdrawing removes it from Sightings; it stays in your Seen.</p>
     <button class="btn ghost" style="width:100%;color:var(--madder)" data-withdraw="${r.id}">Withdraw from Sightings</button></div></div>`;
+}
+function deleteBody(r){
+  if(r.sh=='shared') return 'It leaves your Seen and Sightings.';
+  if(r.sh=='review'||r.sh=='rejected') return 'It leaves your Seen. The copy you sent goes too.';
+  return 'It leaves your Seen.';
+}
+function deleteSheet(){
+  const r=st.seen.find(x=>x.id==st.shareId); if(!r) return '';
+  return `<div class="scrim" data-close="1"><div class="sheet" data-stop="1"><div class="grab"></div>
+    <h2>Delete this find?</h2><p>${deleteBody(r)}</p>
+    <button class="btn ghost" style="width:100%;color:var(--madder)" data-del="${r.id}">Delete</button></div></div>`;
 }
 function notPlantSheet(){
   const a=allowance();
@@ -1145,8 +1159,8 @@ function render(){
   $('adbar').style.display=!st.fg&&['find','habitat','petal'].includes(scr)?'block':'none';
   $('tabs').innerHTML=TABS.map(([k,l,ic])=>`<button class="${st.tab==k?'on':''}" data-tab="${k}">${ic}${k=='seen'&&u?`<span class="badge">${u}</span>`:''}<span>${l}</span></button>`).join('');
   const ov=$('overlay');
-  ov.innerHTML=st.sheet=='region'?regionSheet():st.sheet=='limit'?limitSheet():st.sheet=='other'?otherSheet():st.sheet=='notplant'?notPlantSheet():st.sheet=='share'?shareSheet():st.sheet=='withdraw'?withdrawSheet():'';
-  const idx=st.sheet=='region'?'regionSheet':st.sheet=='limit'?'limit':st.sheet=='notplant'?'notplant':st.sheet=='share'?'share':(scr=='species'&&st.fromCamera)?'speciesCam':(scr=='seen'&&st.hideShared)?'seenHide':scr;
+  ov.innerHTML=st.sheet=='region'?regionSheet():st.sheet=='limit'?limitSheet():st.sheet=='other'?otherSheet():st.sheet=='notplant'?notPlantSheet():st.sheet=='share'?shareSheet():st.sheet=='withdraw'?withdrawSheet():st.sheet=='delete'?deleteSheet():'';
+  const idx=st.sheet=='region'?'regionSheet':st.sheet=='limit'?'limit':st.sheet=='notplant'?'notplant':st.sheet=='share'?'share':st.sheet=='delete'?'seenDelete':(scr=='species'&&st.fromCamera)?'speciesCam':(scr=='seen'&&st.hideShared)?'seenHide':scr;
   $('index').innerHTML=SCREENS.map(([k,t,d])=>`<li><button class="${idx==k?'on':''}" data-demo="${k}"><b>${t}</b><span>${d}</span></button></li>`).join('');
   if(scr=='search'){const q=$('q');q.focus();q.setSelectionRange(q.value.length,q.value.length);q.oninput=e=>{st.q=e.target.value;render()}}
   $('tDe').checked=st.listLang=='de';
@@ -1200,6 +1214,11 @@ function demo(k){
     case 'seen':st.hideShared=false;go('seen');break;
     case 'seenHide':st.hideShared=true;go('seen');break;
     case 'share':{const r=st.seen.find(x=>x.id=='c2');r.sh=undefined;go('seen');st.shareId='c2';st.consent=false;st.sheet='share';render();break}
+    case 'seenDelete':{
+      const sample={id:'c3',n:'Bellis perennis',l:'daisy',ph:PH('Asterales/Asteraceae/Bellis_perennis/bp2.webp'),when:'28 Aug',where:'Middle Europe',m:'August 2026',sh:'shared'};
+      const r=st.seen.find(x=>x.id=='c3');
+      if(r) r.sh='shared'; else st.seen.push(sample);
+      st.hideShared=false;go('seen');st.shareId='c3';st.sheet='delete';render();break}
     case 'book':go('book');break;
     case 'list':{const ls=allLists();const l=ls.find(isYearList)||ls[1];st.listBack='book';st.bookSeg='lists';st.tab='book';go('list',{list:l.key});break}
     case 'limit':st.fg=false;st.signed=true;if(st.used<5)st.used=5;if(st.used<10)st.ads=0;go('camera');st.loc=true;st.sheet='limit';render();break;
@@ -1213,7 +1232,7 @@ function demo(k){
 }
 
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-demo],[data-go],[data-tab],[data-color],[data-habitat],[data-petal],[data-sp],[data-sheet],[data-region],[data-wild],[data-hideshared],[data-view],[data-loc],[data-shoot],[data-confirm],[data-confirmsp],[data-del],[data-pick],[data-undo],[data-seg],[data-ad],[data-fg],[data-sign],[data-slide],[data-jump],[data-goback],[data-schemaback],[data-schema],[data-seen],[data-share],[data-shsheet],[data-consent],[data-sendshare],[data-withdraw],[data-addseen],[data-list],[data-booklists],[data-toast],[data-close],[data-theme],[data-signstep],[data-signclose],[data-signwith],[data-off]');
+  const t=e.target.closest('[data-demo],[data-go],[data-tab],[data-color],[data-habitat],[data-petal],[data-sp],[data-sheet],[data-region],[data-wild],[data-hideshared],[data-view],[data-loc],[data-shoot],[data-confirm],[data-confirmsp],[data-del],[data-askdel],[data-pick],[data-undo],[data-seg],[data-ad],[data-fg],[data-sign],[data-slide],[data-jump],[data-goback],[data-schemaback],[data-schema],[data-seen],[data-share],[data-shsheet],[data-consent],[data-sendshare],[data-withdraw],[data-addseen],[data-list],[data-booklists],[data-toast],[data-close],[data-theme],[data-signstep],[data-signclose],[data-signwith],[data-off]');
   if(!t) return;
   if(t.dataset.close&&e.target.closest('[data-stop]')) return;
   const d=t.dataset;
@@ -1245,7 +1264,8 @@ document.addEventListener('click',e=>{
   if(d.confirm){const r=st.seen.find(x=>x.id==d.confirm);if(r){r.u=false;r.m='September 2026';r.when=r.when.replace(/^Today, |^Yesterday, /,m=>m.startsWith('T')?'27 Sep · ':'26 Sep · ')}toast('Confirmed. In Seen for September.');return st.screen=='outside'?go('seen'):render()}
   if(d.confirmsp){const r=st.seen.find(x=>x.n==st.sp);if(r){r.u=false;r.m='September 2026'}toast('Confirmed.');return render()}
   if(d.undo){const r=st.seen.find(x=>x.n==st.sp);if(r)r.u=true;return render()}
-  if(d.del){st.seen=st.seen.filter(x=>x.id!=d.del);toast('Deleted from Seen.');return st.screen=='outside'?go('seen'):render()}
+  if(d.askdel){st.shareId=d.askdel;st.sheet='delete';return render()}
+  if(d.del){st.seen=st.seen.filter(x=>x.id!=d.del);st.sheet=null;toast('Deleted from Seen.');return st.screen=='outside'?go('seen'):render()}
   if(d.pick){const r=st.seen.find(x=>x.u);if(r){const s=D.sp[d.pick];r.n=d.pick;r.l=s.l;r.u=false;r.m='September 2026'}st.sheet=null;toast('Changed and confirmed.');return go('species',{sp:d.pick,fromCamera:false})}
   if(d.seg){st.bookSeg=d.seg;return render()}
   if(d.share){st.shareId=d.share;st.consent=false;st.sheet='share';return render()}
