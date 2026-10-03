@@ -15,7 +15,8 @@ class EmailLoginSignUpPage extends StatefulWidget {
 
 enum FormMode { LOGIN, SIGNUP }
 
-const String errorWrongPassword = 'ERROR_WRONG_PASSWORD';
+const String errorWrongPassword = 'wrong-password';
+const String errorInvalidLoginCredential = 'invalid-credential';
 
 class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
   final _formKey = new GlobalKey<FormState>();
@@ -81,7 +82,7 @@ class _EmailLoginSignUpPageState extends State<EmailLoginSignUpPage> {
       } on FirebaseAuthException catch (e) {
         if (mounted) {
           setState(() {
-            _isWrongPassword = e.code == errorWrongPassword;
+            _isWrongPassword = e.code == errorWrongPassword || e.code == errorInvalidLoginCredential;
             _isLoading = false;
             _errorMessage = e.message;
           });
