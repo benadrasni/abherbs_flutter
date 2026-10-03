@@ -482,6 +482,7 @@
   "guide_person_system": "Systeem",
   "guide_person_offline_on": "Gedownload",
   "guide_person_sign_out_note": "Vondsten blijven op je account",
+  "guide_person_delete_note": "Verwijdert het account, de vondsten en de foto's",
   "guide_person_failed": "Je account kon niet geladen worden",
   "guide_sign_in_not_now": "Niet nu",
   "guide_sign_in_free": "De sleutel en de atlas blijven gratis zonder account.",

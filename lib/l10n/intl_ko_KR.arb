@@ -482,6 +482,7 @@
   "guide_person_system": "시스템",
   "guide_person_offline_on": "다운로드됨",
   "guide_person_sign_out_note": "기록은 계정에 남아요",
+  "guide_person_delete_note": "계정, 기록, 사진을 삭제해요",
   "guide_person_failed": "계정을 불러오지 못했어요",
   "guide_sign_in_not_now": "지금은 아니에요",
   "guide_sign_in_free": "검색표와 도감은 계정 없이도 무료예요.",

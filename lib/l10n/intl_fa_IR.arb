@@ -481,6 +481,7 @@
   "guide_person_system": "سیستم",
   "guide_person_offline_on": "بارگیری شد",
   "guide_person_sign_out_note": "یافته‌ها در حساب شما می‌مانند",
+  "guide_person_delete_note": "حساب، یافته‌ها و عکس‌ها را حذف می‌کند",
   "guide_person_failed": "حساب شما بار نشد",
   "guide_sign_in_not_now": "حالا نه",
   "guide_sign_in_free": "کلید و کتاب بدون حساب هم رایگان می‌مانند.",

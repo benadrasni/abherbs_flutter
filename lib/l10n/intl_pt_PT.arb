@@ -482,6 +482,7 @@
   "guide_person_system": "Sistema",
   "guide_person_offline_on": "Descarregado",
   "guide_person_sign_out_note": "Os achados ficam na sua conta",
+  "guide_person_delete_note": "Remove a conta, os achados e as fotografias",
   "guide_person_failed": "Não foi possível carregar a sua conta",
   "guide_sign_in_not_now": "Agora não",
   "guide_sign_in_free": "A chave e o atlas continuam gratuitos sem conta.",

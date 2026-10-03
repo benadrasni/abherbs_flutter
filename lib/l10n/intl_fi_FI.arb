@@ -482,6 +482,7 @@
   "guide_person_system": "Järjestelmä",
   "guide_person_offline_on": "Ladattu",
   "guide_person_sign_out_note": "Löydöt jäävät tilillesi",
+  "guide_person_delete_note": "Poistaa tilin, löydöt ja valokuvat",
   "guide_person_failed": "Tiliä ei saatu ladattua",
   "guide_sign_in_not_now": "Ei nyt",
   "guide_sign_in_free": "Tunnistusavain ja atlas pysyvät ilmaisina ilman tiliäkin.",

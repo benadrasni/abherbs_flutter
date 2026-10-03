@@ -482,6 +482,7 @@
   "guide_person_system": "System",
   "guide_person_offline_on": "Pobrane",
   "guide_person_sign_out_note": "Znaleziska zostaną na koncie",
+  "guide_person_delete_note": "Usuwa konto, znaleziska i zdjęcia",
   "guide_person_failed": "Nie udało się wczytać konta",
   "guide_sign_in_not_now": "Nie teraz",
   "guide_sign_in_free": "Klucz i atlas zostają za darmo nawet bez konta.",

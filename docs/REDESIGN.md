@@ -44,6 +44,8 @@ The sign-in screen keeps today's four providers. Apple and Google come first as 
 
 On Person, the account header shows who is signed in. The first line is the display name from the provider. With no name, it shows the email; with no email, the phone number. The second line says how the person signed in, for example "anna.novak@gmail.com · Google", or "Email hidden by Apple" when Apple relays the address.
 
+A signed-in Person has **Delete account**. It asks first. Confirming removes the account, observations, photos, and profile data. Purchases stay on the Apple ID and can be restored. A photo-storage subscription is cancelled in iOS Settings if they no longer want to be billed. The phone returns signed out. A guest does not see the row.
+
 The allowance drops when Plant.id returns a result, whether or not they keep the name. The exception is a photo that is probably not a plant: when Plant.id’s `is_plant` probability is below the threshold, the result says to try again closer, nothing is added to Seen, and the allowance stays. The daily ceiling still counts these calls. The threshold is a Cloud Function setting, not an app constant.
 
 At zero included identifications, the sheet offers a verified rewarded ad (one more name, up to five in the month), Field Guide with a 7-day trial, and the key. The key never closes. At ten, the ad option is gone.
@@ -74,7 +76,7 @@ A find is private until the person shares it. Any confirmed find of a species in
 
 The share sheet asks for consent every time: the photo is published under CC0, the note stays private, and the place is shown as country and month, not a pin. Sharing uploads the photo to `observations/{uid}/…` and writes the record to `observations/public` with status `review`, the same path uploads take today. Review stays as it is (`/review-observations`, Admin SDK sets `public` or `rejected`).
 
-In Seen a shared find shows **In review**, **Shared**, or **Not accepted**. The person can withdraw a shared find at any time, which removes it from `observations/public`, as account deletion already does.
+In Seen a shared find shows **In review**, **Shared**, or **Not accepted**. The person can withdraw a shared find at any time, which removes it from `observations/public`, as account deletion already does. Every confirmed row also has **Delete**, and that sheet asks first. A private find leaves Seen. A Sighting leaves Seen and Sightings, including the public photo. A find in review, or one that was not accepted, leaves Seen and the copy that was sent. Withdrawing stays separate: the find remains in Seen and only the public record goes.
 
 Accepted finds are **Sightings**: public, on species pages in the app and on the website, where public observations show today. The 1,778 accepted observations are Sightings already and carry over unchanged. **Seen** always means the person’s own notebook; **Sightings** always means what is public.
 
@@ -155,8 +157,9 @@ Database additions and changes are allowed when a new page needs a field or node
 | Species page | Same sections as the website. Flower and Inflorescence open the diagrams. No ads |
 | Flower schema | Numbered plate of a complete flower, and the seventeen part names |
 | Inflorescences | The seventeen types. Opened from a species page, that plant’s stored type is marked; the first is the primary |
-| Seen | To confirm first, then the notebook by month |
+| Seen | To confirm first, then the notebook by month. Delete on a confirmed find asks first |
 | Share a find | CC0 consent, then review, then a public Sighting |
+| Seen · delete a Sighting | A public find leaves Seen and Sightings. In review or not accepted, the copy you sent goes too |
 | Book | Families, genera, lists of flowers |
 | List of flowers | New in the book by date (last 15 to 25). Year campaigns newest first. Other lists use the result grid |
 | At the limit | Ad, Field Guide, or the key |
@@ -164,4 +167,5 @@ Database additions and changes are allowed when a new page needs a field or node
 | Offline | The whole book, or a floristic region. Each row shows the plants and the space the pictures take. The phone’s region is offered first |
 | Offline · downloading | Middle Europe, about halfway, in megabytes |
 | Offline · add a region | Middle Europe is already stored. Adding the Northeast shows only the plants that are not |
-| Person | Account, allowance, restore, language, theme |
+| Person | Account, allowance, restore, language, theme. Delete account asks first |
+| Person · delete account | The account, observations, photos, and profile go. Purchases stay and can be restored |

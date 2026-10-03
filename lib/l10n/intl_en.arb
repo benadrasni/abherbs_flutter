@@ -480,6 +480,7 @@
   "guide_person_system": "System",
   "guide_person_offline_on": "Downloaded",
   "guide_person_sign_out_note": "Finds stay on your account",
+  "guide_person_delete_note": "Removes the account, finds, and photos",
   "guide_person_failed": "Couldn’t load your account",
   "guide_sign_in_not_now": "Not now",
   "guide_sign_in_free": "The key and the book stay free without an account.",

@@ -482,6 +482,7 @@
   "guide_person_system": "システム",
   "guide_person_offline_on": "ダウンロード済み",
   "guide_person_sign_out_note": "記録はアカウントに残ります",
+  "guide_person_delete_note": "アカウント、記録、写真を削除します",
   "guide_person_failed": "アカウントを読み込めませんでした",
   "guide_sign_in_not_now": "今はしない",
   "guide_sign_in_free": "検索表と図鑑は、アカウントなしでも無料のままです。",

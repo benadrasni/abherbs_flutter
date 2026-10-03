@@ -7,7 +7,6 @@ import 'package:abherbs_flutter/entity/plant.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/keys.dart';
 import 'package:abherbs_flutter/observations/observations.dart';
-import 'package:abherbs_flutter/purchase/enhancements.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/search/search.dart';
 import 'package:abherbs_flutter/search/search_photo.dart';
@@ -17,11 +16,9 @@ import 'package:abherbs_flutter/utils/dialogs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:exif/exif.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../feedback.dart';
@@ -74,12 +71,10 @@ const String rateStateNever = "never";
 const String rateStateShould = "should";
 const String rateStateDid = "did";
 
-const int timer = 300;
 const double defaultFontSize = 16;
 const double maxFontSize = 22;
 
 const String playStore = "market://details?id=sk.ab.herbs";
-const String playStorePlus = "market://details?id=sk.ab.herbsplus";
 const String appStore =
     "https://itunes.apple.com/us/app/whats-that-flower/id1449982118?mt=8&action=write-review";
 
@@ -222,7 +217,6 @@ const String firebaseSynonyms = "synonyms";
 const String firebaseUsersPhotoSearch = "users_photo_search";
 const String firebasePhotoQuota = "photo_quota";
 const String firebaseAttributeAnonymousFreeUsed = "anonymousFreeUsed";
-const String firebasePromotions = "promotions";
 const String firebaseSearchPhoto = 'search_photo';
 const String firebaseSettingsGenericEntities = "settings/generic_entities";
 const String firebaseSettingsEngine = "settings/ai_engine";
@@ -323,7 +317,6 @@ final DatabaseReference logsObservationsReference =
 final DatabaseReference logsCreditsReference =
     rootReference.child(firebaseCreditsLogs);
 final DatabaseReference usersReference = rootReference.child(firebaseUsers);
-final DatabaseReference settingsReference = rootReference.child(firebaseUsers);
 final DatabaseReference synonymsReference =
     rootReference.child(firebaseSynonyms);
 
@@ -386,11 +379,6 @@ void launchURL(String path) async {
   if (!await launchUrl(url)) {
     throw 'Could not launch $url';
   }
-}
-
-Future<void> _logPromotionEvent(event) async {
-  await FirebaseAnalytics.instance
-      .logEvent(name: 'promotion', parameters: {'feature': event});
 }
 
 String getMapImageUrl(
@@ -653,8 +641,6 @@ Icon getIcon(String productId) {
 
 List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
     Map<String, String> filter) {
-  DateFormat dateFormat =
-      new DateFormat.yMMMMd(Localizations.localeOf(mainContext).toString());
   var _actions = <Widget>[];
 
   // search by photo
@@ -674,41 +660,6 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
                       SearchPhoto(Localizations.localeOf(context)),
                   settings: RouteSettings(name: 'SearchPhoto')),
             );
-          } else if (Purchases.isSearchByPhotoPromotion) {
-            infoBuyDialog(
-                    mainContext,
-                    S.of(mainContext).promotion_title,
-                    S.of(mainContext).promotion_content(
-                        dateFormat.format(Purchases.searchByPhotoPromotionTo)),
-                    remoteConfigSearchByPhotoVideo,
-                    S.of(mainContext).credit_use_photo_search)
-                .then((value) {
-              if (value == 1) {
-                Navigator.push(
-                  mainContext,
-                  MaterialPageRoute(
-                      builder: (context) => EnhancementsScreen(filter),
-                      settings: RouteSettings(name: 'Enhancements')),
-                );
-              } else if (value == 2) {
-                Navigator.push(
-                  mainContext,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          SearchPhoto(Localizations.localeOf(context)),
-                      settings: RouteSettings(name: 'SearchPhoto')),
-                );
-              } else {
-                _logPromotionEvent('search_by_photo');
-                Navigator.push(
-                  mainContext,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          SearchPhoto(Localizations.localeOf(context)),
-                      settings: RouteSettings(name: 'SearchPhoto')),
-                );
-              }
-            });
           } else {
             infoBuyDialog(
                     mainContext,
@@ -717,14 +668,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
                     remoteConfigSearchByPhotoVideo,
                     S.of(mainContext).credit_use_photo_search)
                 .then((value) {
-              if (value == 1) {
-                Navigator.push(
-                  mainContext,
-                  MaterialPageRoute(
-                      builder: (context) => EnhancementsScreen(filter),
-                      settings: RouteSettings(name: 'Enhancements')),
-                );
-              } else if (value == 2) {
+              if (value == 2) {
                 Navigator.push(
                   mainContext,
                   MaterialPageRoute(
@@ -761,50 +705,13 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
             } else {
               observationDialog(mainContext, key);
             }
-          } else if (Purchases.isObservationPromotion) {
-            infoBuyDialog(
-                    mainContext,
-                    S.of(mainContext).promotion_title,
-                    S.of(mainContext).promotion_content(
-                        dateFormat.format(Purchases.observationPromotionTo)),
-                    remoteConfigObservationsVideo,
-                    '')
-                .then((value) {
-              if (value == 1) {
-                Navigator.push(
-                  mainContext,
-                  MaterialPageRoute(
-                      builder: (context) => EnhancementsScreen(filter),
-                      settings: RouteSettings(name: 'Enhancements')),
-                );
-              } else {
-                _logPromotionEvent('observation');
-                Navigator.push(
-                  mainContext,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          Observations(Localizations.localeOf(context), true),
-                      settings: RouteSettings(name: 'Observations')),
-                );
-              }
-            });
           } else {
             infoBuyDialog(
-                    mainContext,
-                    S.of(mainContext).product_observations_title,
-                    S.of(mainContext).product_observations_description,
-                    remoteConfigObservationsVideo,
-                    '')
-                .then((value) {
-              if (value == 1) {
-                Navigator.push(
-                  mainContext,
-                  MaterialPageRoute(
-                      builder: (context) => EnhancementsScreen(filter),
-                      settings: RouteSettings(name: 'Enhancements')),
-                );
-              }
-            });
+                mainContext,
+                S.of(mainContext).product_observations_title,
+                S.of(mainContext).product_observations_description,
+                remoteConfigObservationsVideo,
+                '');
           }
         }
       });
@@ -822,50 +729,6 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
               builder: (context) => Search(Localizations.localeOf(context)),
               settings: RouteSettings(name: 'Search')),
         );
-      } else if (Purchases.isSearchPromotion) {
-        infoBuyDialog(
-                mainContext,
-                S.of(mainContext).promotion_title,
-                S.of(mainContext).promotion_content(
-                    dateFormat.format(Purchases.searchPromotionTo)),
-                remoteConfigSearchByNameVideo,
-                S.of(mainContext).credit_use_search)
-            .then((value) {
-          if (value == 1) {
-            Navigator.push(
-              mainContext,
-              MaterialPageRoute(
-                  builder: (context) => EnhancementsScreen(filter),
-                  settings: RouteSettings(name: 'Enhancements')),
-            );
-          } else if (value == 2) {
-            if (Auth.appUser != null && Auth.credits > 0) {
-              Auth.spendCredit("search");
-              Navigator.push(
-                mainContext,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        Search(Localizations.localeOf(context)),
-                    settings: RouteSettings(name: 'Search')),
-              );
-            } else {
-              Navigator.push(
-                mainContext,
-                MaterialPageRoute(
-                    builder: (context) => FeedbackScreen(filter),
-                    settings: RouteSettings(name: 'Feedback')),
-              );
-            }
-          } else {
-            _logPromotionEvent('search');
-            Navigator.push(
-              mainContext,
-              MaterialPageRoute(
-                  builder: (context) => Search(Localizations.localeOf(context)),
-                  settings: RouteSettings(name: 'Search')),
-            );
-          }
-        });
       } else {
         infoBuyDialog(
                 mainContext,
@@ -874,14 +737,7 @@ List<Widget> getActions(BuildContext mainContext, GlobalKey<ScaffoldState> key,
                 remoteConfigSearchByNameVideo,
                 S.of(mainContext).credit_use_search)
             .then((value) {
-          if (value == 1) {
-            Navigator.push(
-              mainContext,
-              MaterialPageRoute(
-                  builder: (context) => EnhancementsScreen(filter),
-                  settings: RouteSettings(name: 'Enhancements')),
-            );
-          } else if (value == 2) {
+          if (value == 2) {
             if (Auth.appUser != null && Auth.credits > 0) {
               Auth.spendCredit("search");
               Navigator.push(

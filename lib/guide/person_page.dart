@@ -19,6 +19,7 @@ class GuidePersonPage extends StatefulWidget {
   final ValueChanged<GuideAppearance>? onAppearance;
   final Future<void> Function(BuildContext context)? onSignIn;
   final Future<void> Function(BuildContext context)? onSignOut;
+  final Future<void> Function(BuildContext context)? onDeleteAccount;
   final Future<void> Function(BuildContext context)? onRestore;
   final Future<void> Function(BuildContext context)? onLanguage;
   final Future<void> Function(BuildContext context)? onFieldGuide;
@@ -32,6 +33,7 @@ class GuidePersonPage extends StatefulWidget {
     this.onAppearance,
     this.onSignIn,
     this.onSignOut,
+    this.onDeleteAccount,
     this.onRestore,
     this.onLanguage,
     this.onFieldGuide,
@@ -348,7 +350,7 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
             onPressed:
                 widget.onOffline == null ? null : () => _act(widget.onOffline),
           ),
-        if (account != null)
+        if (account != null) ...[
           _MenuRow(
             icon: Icons.person_outline,
             title: strings.auth_sign_out,
@@ -356,6 +358,16 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
             onPressed:
                 widget.onSignOut == null ? null : () => _act(widget.onSignOut),
           ),
+          _MenuRow(
+            icon: Icons.delete_outline,
+            title: strings.auth_delete_account,
+            subtitle: strings.guide_person_delete_note,
+            danger: true,
+            onPressed: widget.onDeleteAccount == null
+                ? null
+                : () => _act(widget.onDeleteAccount),
+          ),
+        ],
       ],
     );
   }
@@ -677,17 +689,21 @@ class _MenuRow extends StatelessWidget {
   final String title;
   final String subtitle;
   final VoidCallback? onPressed;
+  final bool danger;
 
   const _MenuRow({
     required this.icon,
     required this.title,
     required this.subtitle,
     required this.onPressed,
+    this.danger = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
+    final tone = danger ? colors.madder : colors.moss;
+    final titleColor = danger ? colors.madder : colors.ink;
     return DecoratedBox(
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: colors.rule)),
@@ -698,7 +714,7 @@ class _MenuRow extends StatelessWidget {
           padding: const EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
           child: Row(
             children: [
-              Icon(icon, size: 22, color: colors.moss),
+              Icon(icon, size: 22, color: tone),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -709,7 +725,7 @@ class _MenuRow extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: colors.ink,
+                        color: titleColor,
                         height: 1.2,
                       ),
                     ),

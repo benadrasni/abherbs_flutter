@@ -482,6 +482,7 @@
   "guide_person_system": "System",
   "guide_person_offline_on": "Lastet ned",
   "guide_person_sign_out_note": "Funn blir på kontoen din",
+  "guide_person_delete_note": "Fjerner kontoen, funnene og bildene",
   "guide_person_failed": "Kunne ikke laste inn kontoen din",
   "guide_sign_in_not_now": "Ikke nå",
   "guide_sign_in_free": "Nøkkelen og atlaset forblir gratis uten konto.",

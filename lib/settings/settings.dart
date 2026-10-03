@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/filter/filter_utils.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
@@ -355,7 +353,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SettingMyFilter(widget.filter), settings: RouteSettings(name: 'SettingMyFilter')),
+            MaterialPageRoute(builder: (context) => SettingMyFilter(), settings: RouteSettings(name: 'SettingMyFilter')),
           ).then((result) {
             setState(() {
               _myFilterF = Prefs.getStringListF(keyMyFilter, filterAttributes).then((myFilter) {

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:abherbs_flutter/entity/plant_taxon.dart';
 import 'package:abherbs_flutter/plant_list.dart';
 import 'package:abherbs_flutter/utils/utils.dart';

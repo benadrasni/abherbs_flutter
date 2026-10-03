@@ -112,7 +112,6 @@ Paid. `lib/settings/offline.dart` keeps selected RTDB subtrees synced and downlo
 ### Internationalization
 
 - UI: `lib/l10n/intl_*.arb` via `intl_utils` → `lib/generated/`.
-- Country names: `data/*.json`.
 - Plant content: Firebase `translations` / `translations_taxonomy`.
 
 ### External APIs

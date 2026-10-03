@@ -482,6 +482,7 @@
   "guide_person_system": "Sistem",
   "guide_person_offline_on": "Preneseno",
   "guide_person_sign_out_note": "Najdbe ostanejo na vašem računu",
+  "guide_person_delete_note": "Odstrani račun, najdbe in fotografije",
   "guide_person_failed": "Vašega računa ni bilo mogoče naložiti",
   "guide_sign_in_not_now": "Ne zdaj",
   "guide_sign_in_free": "Ključ in atlas ostaneta brezplačna tudi brez računa.",

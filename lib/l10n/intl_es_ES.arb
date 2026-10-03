@@ -482,6 +482,7 @@
   "guide_person_system": "Sistema",
   "guide_person_offline_on": "Descargado",
   "guide_person_sign_out_note": "Los hallazgos se quedan en tu cuenta",
+  "guide_person_delete_note": "Elimina la cuenta, los hallazgos y las fotos",
   "guide_person_failed": "No se ha podido cargar tu cuenta",
   "guide_sign_in_not_now": "Ahora no",
   "guide_sign_in_free": "La clave y el atlas siguen siendo gratuitos sin cuenta.",

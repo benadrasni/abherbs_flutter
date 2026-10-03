@@ -19,8 +19,6 @@
 ///
 library prefs;
 
-import 'dart:async' show Future;
-
 /// https://pub.dartlang.org/packages/shared_preferences/
 import 'package:shared_preferences/shared_preferences.dart'
     show SharedPreferences;
@@ -48,100 +46,12 @@ class Prefs {
     return _prefsInstance!;
   }
 
-  /// Determine if init was called
-  static bool initCalled() => _initCalled;
-
   /// Indicate if Preferences is ready
   static bool ready() => _prefsInstance != null;
 
   /// Best to clean up by calling this function in the State object's dispose() function.
   static void dispose() {
     _prefsInstance = null;
-  }
-
-  /// Returns all keys in the persistent storage.
-  static Set<String> getKeys() {
-    assert(_initCalled,
-    'Prefs.init() must be called first in an initState() preferably!');
-    assert(_prefsInstance != null,
-    'Maybe call Prefs.getKeysF() instead. SharedPreferences not ready yet!');
-    return _prefsInstance?.getKeys() ?? {};
-  }
-
-  /// Returns a Future.
-  static Future<Set<String>> getKeysF() async {
-    Set<String> value;
-    if (_prefsInstance == null) {
-      final prefs = await instance;
-      value = prefs.getKeys();
-    } else {
-      // SharedPreferences is available. Ignore init() function.
-      _initCalled = true;
-      value = getKeys();
-    }
-    return value;
-  }
-
-  /// Returns true if persistent storage the contains the given [key].
-  /// Return null if key is null
-  static bool containsKey(String? key) {
-    if (key == null) {
-      return false;
-    }
-    assert(_initCalled,
-    'Prefs.init() must be called first in an initState() preferably!');
-    assert(_prefsInstance != null,
-    'Maybe call Prefs.containsKeyF() instead. SharedPreferences not ready yet!');
-    return _prefsInstance?.containsKey(key) ?? false;
-  }
-
-  /// Returns true if persistent storage the contains the given [key].
-  /// Return null if key is null
-  static Future<bool> containsKeyF(String? key) async {
-    bool contains;
-    if (key == null) {
-      return false;
-    }
-    if (_prefsInstance == null) {
-      final prefs = await instance;
-      contains = prefs.containsKey(key);
-    } else {
-      // SharedPreferences is available. Ignore init() function.
-      _initCalled = true;
-      contains = _prefsInstance!.containsKey(key);
-    }
-    return contains;
-  }
-
-  /// Reads a value of any type from persistent storage.
-  /// Return null if key is null.
-  static Object? get(String? key) {
-    if (key == null) {
-      return null;
-    }
-    assert(_initCalled,
-    'Prefs.init() must be called first in an initState() preferably!');
-    assert(_prefsInstance != null,
-    'Maybe call Prefs.getF(key) instead. SharedPreferences not ready yet!');
-    return _prefsInstance?.get(key);
-  }
-
-  /// Returns a Future.
-  /// Return null if key is null
-  static Future<Object?> getF(String? key) async {
-    Object? value;
-    if (key == null) {
-      return null;
-    }
-    if (_prefsInstance == null) {
-      final prefs = await instance;
-      value = prefs.get(key);
-    } else {
-      // SharedPreferences is available. Ignore init() function.
-      _initCalled = true;
-      value = get(key);
-    }
-    return value;
   }
 
   /// Return false if key is null
@@ -176,18 +86,6 @@ class Prefs {
     return value;
   }
 
-  /// Returns 0 if key is null.
-  static int getInt(String? key, [int? defValue]) {
-    if (key == null) {
-      return 0;
-    }
-    assert(_initCalled,
-    'Prefs.init() must be called first in an initState() preferably!');
-    assert(_prefsInstance != null,
-    'Maybe call Prefs.getIntF(key) instead. SharedPreferences not ready yet!');
-    return _prefsInstance?.getInt(key) ?? defValue ?? 0;
-  }
-
   /// Returns a Future.
   /// Returns 0 if key is null.
   static Future<int> getIntF(String? key, [int? defValue]) async {
@@ -201,7 +99,7 @@ class Prefs {
     } else {
       // SharedPreferences is available. Ignore init() function.
       _initCalled = true;
-      value = getInt(key, defValue);
+      value = _prefsInstance?.getInt(key) ?? defValue ?? 0;
     }
     return value;
   }
@@ -308,16 +206,6 @@ class Prefs {
     return prefs.setBool(key, value);
   }
 
-  /// Saves an integer [value] to persistent storage in the background.
-  /// Returns null if key is null.
-  static Future<bool> setInt(String? key, int? value) async {
-    if (key == null || value == null) {
-      return false;
-    }
-    final prefs = await instance;
-    return prefs.setInt(key, value);
-  }
-
   /// Saves a double [value] to persistent storage in the background.
   /// Android doesn't support storing doubles, so it will be stored as a float.
   /// Returns false if key is null.
@@ -349,14 +237,6 @@ class Prefs {
     return prefs.setStringList(key, value);
   }
 
-  /// Fetches the latest values from the host platform.
-  /// Use this method to observe modifications that were made in native code
-  /// (without using the plugin) while the app is running.
-  static Future<void> reload() async {
-    final prefs = await instance;
-    return prefs.reload();
-  }
-
   /// Removes an entry from persistent storage.
   /// Returns false if key is null.
   static Future<bool> remove(String? key) async {
@@ -365,22 +245,5 @@ class Prefs {
     }
     final prefs = await instance;
     return prefs.remove(key);
-  }
-
-  /// Completes with true once the user preferences for the app has been cleared.
-  static Future<bool> clear() async {
-    final prefs = await instance;
-    return prefs.clear();
-  }
-
-  /// Sets the prefix that is attached to all keys for all shared preferences.
-  /// Return false if called after SharedPreferences was instantiated.
-  static bool setPrefix(String prefix, {Set<String>? allowList}) {
-    // setPrefix cannot be called after getInstance
-    final set = !ready();
-    if (set) {
-      SharedPreferences.setPrefix(prefix, allowList: allowList);
-    }
-    return set;
   }
 }
