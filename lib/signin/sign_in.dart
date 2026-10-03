@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -6,6 +7,7 @@ import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/signin/email.dart';
 import 'package:abherbs_flutter/signin/phone.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:crypto/crypto.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +25,12 @@ class _SignInScreenState extends State<SignInScreen> {
   late Future<bool> supportsAppleSignIn;
   late final Future<void> _googleSignInReady;
 
+  String _sha256ofString(String input) {
+    return sha256.convert(utf8.encode(input)).toString();
+  }
+
   String _createNonce(int length) {
-    final random = Random();
+    final random = Random.secure();
     final charCodes = List<int>.generate(length, (_) {
       int codeUnit = 0;
 
@@ -77,16 +83,14 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
-  Future<void> _handleAppleSignIn(GlobalKey<ScaffoldState> key, AuthorizationCredentialAppleID appleCredential) async {
+  Future<void> _handleAppleSignIn(GlobalKey<ScaffoldState> key, AuthorizationCredentialAppleID appleCredential, String rawNonce) async {
     try {
-      final nonce = _createNonce(32);
-
       OAuthCredential credential = OAuthCredential(
         providerId: "apple.com",
         signInMethod: "oauth",
         accessToken: appleCredential.authorizationCode,
         idToken: appleCredential.identityToken,
-        rawNonce: nonce,
+        rawNonce: rawNonce,
       );
 
       await Auth.signInWithCredential(credential);
@@ -218,13 +222,15 @@ class _SignInScreenState extends State<SignInScreen> {
                           padding: const EdgeInsets.fromLTRB(50.0, 5.0, 50.0, 5.0),
                           child: SignInWithAppleButton(
                               onPressed: () async {
+                                final rawNonce = _createNonce(32);
                                 final credential = await SignInWithApple.getAppleIDCredential(
                                   scopes: [
                                     AppleIDAuthorizationScopes.email,
                                     AppleIDAuthorizationScopes.fullName,
                                   ],
+                                  nonce: _sha256ofString(rawNonce),
                                 );
-                                _handleAppleSignIn(key, credential);
+                                _handleAppleSignIn(key, credential, rawNonce);
                               }
                         ));
                       } else {

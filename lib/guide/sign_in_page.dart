@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -11,6 +12,7 @@ import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:country_picker/country_picker.dart';
+import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -142,18 +144,20 @@ class _GuideSignInPageState extends State<GuideSignInPage> {
         return;
       }
       try {
+        final rawNonce = _createNonce(32);
         final appleCredential = await SignInWithApple.getAppleIDCredential(
           scopes: [
             AppleIDAuthorizationScopes.email,
             AppleIDAuthorizationScopes.fullName,
           ],
+          nonce: _sha256ofString(rawNonce),
         );
         final credential = OAuthCredential(
           providerId: 'apple.com',
           signInMethod: 'oauth',
           accessToken: appleCredential.authorizationCode,
           idToken: appleCredential.identityToken,
-          rawNonce: _createNonce(32),
+          rawNonce: rawNonce,
         );
         await Auth.signInWithCredential(credential);
         _leave();
@@ -832,8 +836,12 @@ Future<void> openGuideSignIn(BuildContext context) {
   );
 }
 
+String _sha256ofString(String input) {
+  return sha256.convert(utf8.encode(input)).toString();
+}
+
 String _createNonce(int length) {
-  final random = Random();
+  final random = Random.secure();
   final codes = List<int>.generate(length, (_) {
     switch (random.nextInt(3)) {
       case 0:

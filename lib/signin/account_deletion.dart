@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -6,6 +7,7 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
+import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
@@ -315,19 +317,20 @@ Future<bool> reauthenticateCurrentUser(BuildContext context) async {
       return true;
     }
     if (providers.contains('apple.com')) {
-      final nonce = _createNonce(32);
+      final rawNonce = _createNonce(32);
       final appleCredential = await SignInWithApple.getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],
+        nonce: _sha256ofString(rawNonce),
       );
       final credential = OAuthCredential(
         providerId: 'apple.com',
         signInMethod: 'oauth',
         accessToken: appleCredential.authorizationCode,
         idToken: appleCredential.identityToken,
-        rawNonce: nonce,
+        rawNonce: rawNonce,
       );
       await user.reauthenticateWithCredential(credential);
       return true;
@@ -369,8 +372,12 @@ Future<bool> reauthenticateCurrentUser(BuildContext context) async {
   return false;
 }
 
+String _sha256ofString(String input) {
+  return sha256.convert(utf8.encode(input)).toString();
+}
+
 String _createNonce(int length) {
-  final random = Random();
+  final random = Random.secure();
   final charCodes = List<int>.generate(length, (_) {
     switch (random.nextInt(3)) {
       case 0:
