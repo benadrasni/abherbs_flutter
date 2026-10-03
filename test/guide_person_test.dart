@@ -345,6 +345,7 @@ void main() {
     expect(find.text('1 name left'), findsNothing);
     expect(find.text('Your account'), findsNothing);
     expect(find.text('7 days free'), findsOneWidget);
+    expect(find.text('Delete account'), findsNothing);
     await tester.tap(find.text('Sign in'));
     await tester.tap(find.text('Field Guide'));
     expect(signed, 1);
@@ -430,9 +431,11 @@ void main() {
     await tester.binding.setSurfaceSize(const Size(390, 844));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     var signedOut = 0;
+    var deleted = 0;
     await tester.pumpWidget(_app(_page(
       view: _fieldGuide(),
       onSignOut: (_) async => signedOut++,
+      onDeleteAccount: (_) async => deleted++,
     )));
 
     expect(find.text('Field Guide'), findsOneWidget);
@@ -442,8 +445,20 @@ void main() {
     );
     expect(find.text('7 days free'), findsNothing);
     expect(find.text('Finds stay on your account'), findsOneWidget);
+    expect(find.text('Delete account'), findsOneWidget);
+    expect(
+      find.text('Removes the account, finds, and photos'),
+      findsOneWidget,
+    );
+    expect(
+      tester.widget<Text>(find.text('Delete account')).style?.color,
+      GuideColors.light.madder,
+    );
     await tester.tap(find.text('Sign out'));
+    await tester.ensureVisible(find.text('Delete account'));
+    await tester.tap(find.text('Delete account'));
     expect(signedOut, 1);
+    expect(deleted, 1);
     expect(tester.takeException(), isNull);
   });
 
@@ -472,6 +487,7 @@ void main() {
 
     expect(find.text('Field Guide'), findsOneWidget);
     expect(find.text('Sign out'), findsNothing);
+    expect(find.text('Delete account'), findsNothing);
     expect(find.text('Sign in'), findsOneWidget);
     await tester.tap(find.text('Sign in'));
     expect(signed, 1);
@@ -536,6 +552,7 @@ Widget _page({
   required GuidePersonView view,
   Future<void> Function(BuildContext context)? onSignIn,
   Future<void> Function(BuildContext context)? onSignOut,
+  Future<void> Function(BuildContext context)? onDeleteAccount,
   Future<void> Function(BuildContext context)? onRestore,
   Future<void> Function(BuildContext context)? onLanguage,
   Future<void> Function(BuildContext context)? onFieldGuide,
@@ -546,6 +563,7 @@ Widget _page({
     view: view,
     onSignIn: onSignIn,
     onSignOut: onSignOut,
+    onDeleteAccount: onDeleteAccount,
     onRestore: onRestore,
     onLanguage: onLanguage,
     onFieldGuide: onFieldGuide,

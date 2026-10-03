@@ -482,6 +482,7 @@
   "guide_person_system": "System",
   "guide_person_offline_on": "Heruntergeladen",
   "guide_person_sign_out_note": "Funde bleiben auf deinem Konto",
+  "guide_person_delete_note": "Entfernt das Konto, die Funde und die Fotos",
   "guide_person_failed": "Dein Konto konnte nicht geladen werden",
   "guide_sign_in_not_now": "Nicht jetzt",
   "guide_sign_in_free": "Bestimmungsschlüssel und Atlas bleiben auch ohne Konto kostenlos.",

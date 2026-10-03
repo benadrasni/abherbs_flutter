@@ -482,6 +482,7 @@
   "guide_person_system": "Sistema",
   "guide_person_offline_on": "Scaricato",
   "guide_person_sign_out_note": "I ritrovamenti restano sull'account",
+  "guide_person_delete_note": "Rimuove l'account, i ritrovamenti e le foto",
   "guide_person_failed": "Impossibile caricare il tuo account",
   "guide_sign_in_not_now": "Non ora",
   "guide_sign_in_free": "La chiave e l'atlante restano gratuiti senza account.",

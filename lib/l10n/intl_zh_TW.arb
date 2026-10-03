@@ -482,6 +482,7 @@
   "guide_person_system": "系統",
   "guide_person_offline_on": "已下載",
   "guide_person_sign_out_note": "紀錄留在帳戶裡",
+  "guide_person_delete_note": "刪除帳號、紀錄和照片",
   "guide_person_failed": "無法載入你的帳戶",
   "guide_sign_in_not_now": "現在不要",
   "guide_sign_in_free": "沒有帳戶，檢索表和圖鑑仍然免費。",

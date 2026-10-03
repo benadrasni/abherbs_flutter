@@ -482,6 +482,7 @@
   "guide_person_system": "Süsteem",
   "guide_person_offline_on": "Allalaaditud",
   "guide_person_sign_out_note": "Leiud jäävad sinu kontole",
+  "guide_person_delete_note": "Eemaldab konto, leiud ja fotod",
   "guide_person_failed": "Kontot ei õnnestunud laadida",
   "guide_sign_in_not_now": "Mitte praegu",
   "guide_sign_in_free": "Määraja ja atlas jäävad tasuta ka ilma kontota.",

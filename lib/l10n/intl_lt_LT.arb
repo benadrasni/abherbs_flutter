@@ -482,6 +482,7 @@
   "guide_person_system": "Sistema",
   "guide_person_offline_on": "Atsisiųsta",
   "guide_person_sign_out_note": "Radiniai lieka paskyroje",
+  "guide_person_delete_note": "Pašalina paskyrą, radinius ir nuotraukas",
   "guide_person_failed": "Nepavyko įkelti jūsų paskyros",
   "guide_sign_in_not_now": "Ne dabar",
   "guide_sign_in_free": "Raktas ir atlasas lieka nemokami ir be paskyros.",

@@ -516,6 +516,7 @@
   "guide_person_system": "Systém",
   "guide_person_offline_on": "Stiahnuté",
   "guide_person_sign_out_note": "Nálezy ostanú na účte",
+  "guide_person_delete_note": "Odstráni účet, nálezy a fotografie",
   "guide_person_failed": "Účet sa nepodarilo načítať",
   "guide_sign_in_not_now": "Teraz nie",
   "guide_sign_in_free": "Kľúč aj atlas zostávajú zadarmo aj bez účtu.",

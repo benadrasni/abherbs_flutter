@@ -482,6 +482,7 @@
   "guide_person_system": "Système",
   "guide_person_offline_on": "Téléchargé",
   "guide_person_sign_out_note": "Les observations restent sur votre compte",
+  "guide_person_delete_note": "Supprime le compte, les observations et les photos",
   "guide_person_failed": "Impossible de charger votre compte",
   "guide_sign_in_not_now": "Pas maintenant",
   "guide_sign_in_free": "La clé et l'atlas restent gratuits même sans compte.",

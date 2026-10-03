@@ -416,6 +416,7 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .bar i.x{background:var(--gold)}
 .menu .srow{border-bottom:1px solid var(--rule)}
 .menu .srow svg{width:22px;height:22px;color:var(--moss)}
+.menu .srow.danger svg,.menu .srow.danger b{color:var(--madder)}
 
 /* Offline */
 .pack{display:flex;align-items:flex-start;gap:12px;width:calc(100% - 40px);margin:0 20px 10px;padding:14px;border-radius:16px;background:var(--cream);border:1px solid var(--rule);text-align:left}
@@ -535,6 +536,7 @@ const I={
   search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>',
   cam:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',
   person:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-6 8-6s7 1.5 8 6"/></svg>',
+  trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M9 7V5h6v2M7 7l1 13h8l1-13"/></svg>',
   back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 5-7 7 7 7"/></svg>',
   close:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>',
   check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
@@ -1050,7 +1052,8 @@ function meScreen(){
     <div class="srow">${I.theme}<span class="tx"><b>Theme</b><span>${st.theme=='system'?(st.phoneDark?'Dark, like the phone':'Light, like the phone'):st.theme=='dark'?'Always dark':'Always light'}</span></span>
       <div class="seg">${[['light','Light'],['dark','Dark'],['system','System']].map(([k,l])=>`<button class="${st.theme==k?'on':''}" data-theme="${k}">${l}</button>`).join('')}</div></div>
     <button class="srow" data-go="offline">${I.cloud}<span class="tx"><b>Offline</b><span>${esc(offMenuLine())}</span></span></button>
-    ${st.signed?`<button class="srow" data-sign="0">${I.person}<span class="tx"><b>Sign out</b><span>Seen stays on this phone</span></span></button>`:''}
+    ${st.signed?`<button class="srow" data-sign="0">${I.person}<span class="tx"><b>Sign out</b><span>Seen stays on this phone</span></span></button>
+    <button class="srow danger" data-delaccount="1">${I.trash}<span class="tx"><b>Delete account</b><span>Removes the account, finds, and photos</span></span></button>`:''}
   </div>`;
 }
 
@@ -1232,7 +1235,7 @@ function demo(k){
 }
 
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-demo],[data-go],[data-tab],[data-color],[data-habitat],[data-petal],[data-sp],[data-sheet],[data-region],[data-wild],[data-hideshared],[data-view],[data-loc],[data-shoot],[data-confirm],[data-confirmsp],[data-del],[data-askdel],[data-pick],[data-undo],[data-seg],[data-ad],[data-fg],[data-sign],[data-slide],[data-jump],[data-goback],[data-schemaback],[data-schema],[data-seen],[data-share],[data-shsheet],[data-consent],[data-sendshare],[data-withdraw],[data-addseen],[data-list],[data-booklists],[data-toast],[data-close],[data-theme],[data-signstep],[data-signclose],[data-signwith],[data-off]');
+  const t=e.target.closest('[data-demo],[data-go],[data-tab],[data-color],[data-habitat],[data-petal],[data-sp],[data-sheet],[data-region],[data-wild],[data-hideshared],[data-view],[data-loc],[data-shoot],[data-confirm],[data-confirmsp],[data-del],[data-askdel],[data-delaccount],[data-pick],[data-undo],[data-seg],[data-ad],[data-fg],[data-sign],[data-slide],[data-jump],[data-goback],[data-schemaback],[data-schema],[data-seen],[data-share],[data-shsheet],[data-consent],[data-sendshare],[data-withdraw],[data-addseen],[data-list],[data-booklists],[data-toast],[data-close],[data-theme],[data-signstep],[data-signclose],[data-signwith],[data-off]');
   if(!t) return;
   if(t.dataset.close&&e.target.closest('[data-stop]')) return;
   const d=t.dataset;
@@ -1279,6 +1282,7 @@ document.addEventListener('click',e=>{
   if(d.ad){st.ads++;st.sheet=null;render();toast('Ad verified by the store. One more name.');return}
   if(d.fg){st.fg=true;toast('Trial started. 7 days free.');return go(st.prev||'find')}
   if(d.sign){ if(d.sign=='1'){st.signBack=st.screen;st.signStep='';return go('signin')} st.signed=false;return render() }
+  if(d.delaccount){ if(!confirm('This permanently deletes the account, finds, and photos. This cannot be undone.')) return; st.signed=false; toast('Account deleted'); return render() }
   if(d.signstep!==undefined){st.signStep=d.signstep;return render()}
   if(d.signclose) return go(st.signBack||'find');
   if(d.signwith){st.signed=true;st.signWith=cap(d.signwith);if(st.used<1)st.used=1;toast(`Signed in with ${st.signWith}. Your first find came along.`);return go(st.signBack||'me')}

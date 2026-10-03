@@ -482,6 +482,7 @@
   "guide_person_system": "Система",
   "guide_person_offline_on": "Изтеглено",
   "guide_person_sign_out_note": "Находките остават в акаунта ви",
+  "guide_person_delete_note": "Премахва акаунта, находките и снимките",
   "guide_person_failed": "Акаунтът ви не се зареди",
   "guide_sign_in_not_now": "Не сега",
   "guide_sign_in_free": "Ключът и атласът остават безплатни и без акаунт.",
