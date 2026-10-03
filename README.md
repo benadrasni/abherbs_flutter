@@ -59,7 +59,6 @@ lib/
   l10n/                     UI strings (intl_utils)
 android/                    applicationId sk.ab.herbs
 ios/                        bundle id sk.ab.herbs, fastlane metadata
-data/                       localized country names
 res/images/                 filter icons and placeholders
 docs/                       project documentation
 ```
