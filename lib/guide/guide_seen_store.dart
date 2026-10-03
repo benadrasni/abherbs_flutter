@@ -1,6 +1,7 @@
 import 'package:abherbs_flutter/entity/observation.dart';
 import 'package:abherbs_flutter/guide/guide_camera.dart';
 import 'package:abherbs_flutter/guide/guide_private_photos.dart';
+import 'package:abherbs_flutter/guide/guide_seen.dart';
 import 'package:abherbs_flutter/settings/offline.dart';
 import 'package:abherbs_flutter/signin/authentication.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
@@ -52,6 +53,43 @@ Future<bool> shareGuideFind(String id) async {
     return true;
   } catch (error) {
     debugPrint('guide seen share: $error');
+    return false;
+  }
+}
+
+/// Removes a find from Seen, including its photo on this phone and in
+/// private storage. A find that was sent (in review, shared, or not
+/// accepted) also leaves the public record and its public photo.
+Future<bool> deleteGuideSeenFind({
+  required String id,
+  required String plant,
+  required GuideSeenShare share,
+}) async {
+  try {
+    if (share != GuideSeenShare.none) {
+      final user = Auth.appUser;
+      if (user == null || id.isEmpty) return false;
+      final event = await privateObservationsReference
+          .child(user.uid)
+          .child(firebaseObservationsByDate)
+          .child(firebaseAttributeList)
+          .child(id)
+          .once();
+      final raw = event.snapshot.value;
+      if (raw is Map) {
+        await _deletePublicPhotos(_photoPaths(raw[observationPhotoPaths]));
+      }
+      await publicObservationsReference
+          .child(firebaseObservationsByDate)
+          .child(firebaseAttributeList)
+          .child(id)
+          .remove();
+      await _removePublicPlant(plant, id);
+    }
+    await deleteGuideCameraFind(id: id, plant: plant);
+    return true;
+  } catch (error) {
+    debugPrint('guide seen delete: $error');
     return false;
   }
 }
@@ -120,6 +158,24 @@ Future<void> _removePublicPlant(String plant, String id) async {
         .child(firebaseAttributeList)
         .child(id)
         .remove();
+  }
+}
+
+Future<void> _deletePublicPhotos(List<String> paths) async {
+  for (final path in paths) {
+    if (!path.startsWith(storageObservations)) continue;
+    try {
+      await firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket)
+          .ref()
+          .child(path)
+          .delete();
+    } on firebase_storage.FirebaseException catch (error) {
+      if (error.code != 'object-not-found') {
+        debugPrint('guide seen public photo $path: $error');
+      }
+    } catch (error) {
+      debugPrint('guide seen public photo $path: $error');
+    }
   }
 }
 

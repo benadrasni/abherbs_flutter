@@ -33,13 +33,19 @@ void main() {
     final row = readGuideSeenRow('key-1', {
       observationId: 'uid_1',
       observationPlant: 'Bellis perennis',
-      observationDate: {observationTime: DateTime(2026, 9, 27, 14, 31).millisecondsSinceEpoch},
+      observationDate: {
+        observationTime: DateTime(2026, 9, 27, 14, 31).millisecondsSinceEpoch
+      },
       observationLatitude: 48.1,
       observationLongitude: 17.1,
       observationPhotoPaths: ['observations/uid/bellis.jpg'],
       observationStatus: 'public',
       observationCandidates: [
-        {'latin': 'Bellis perennis', 'probability': 0.82, 'path': 'Bellis perennis'},
+        {
+          'latin': 'Bellis perennis',
+          'probability': 0.82,
+          'path': 'Bellis perennis'
+        },
         {
           'latin': 'Leucanthemum vulgare',
           'vernacular': 'oxeye daisy',
@@ -77,7 +83,8 @@ void main() {
       readGuideSeenRow('x', {
         observationPlant: 'Taraxacum officinale',
         observationStatus: 'rejected',
-      })!.share,
+      })!
+          .share,
       GuideSeenShare.rejected,
     );
     expect(readGuideSeenRow('x', {'note': 'no plant'}), isNull);
@@ -153,7 +160,10 @@ void main() {
   });
 
   test('share is only for a confirmed catalog species with a photo', () {
-    expect(guideSeenChip(_find(id: '1', confirmed: false, ownPhoto: true, inBook: true)), isNull);
+    expect(
+        guideSeenChip(
+            _find(id: '1', confirmed: false, ownPhoto: true, inBook: true)),
+        isNull);
     expect(
       guideSeenChip(_find(id: '1', ownPhoto: true, inBook: true)),
       GuideSeenChip.share,
@@ -175,10 +185,12 @@ void main() {
       GuideSeenChip.shared,
     );
     expect(
-      guideSeenChip(_find(id: '1', share: GuideSeenShare.rejected, inBook: true)),
+      guideSeenChip(
+          _find(id: '1', share: GuideSeenShare.rejected, inBook: true)),
       GuideSeenChip.rejected,
     );
-    expect(guideSeenDetail('Sep 27', 'Middle Europe'), 'Sep 27 · Middle Europe');
+    expect(
+        guideSeenDetail('Sep 27', 'Middle Europe'), 'Sep 27 · Middle Europe');
     expect(guideSeenDetail('Sep 27', '  '), 'Sep 27');
   });
 
@@ -230,7 +242,8 @@ void main() {
     );
 
     expect(find.text('Seen'), findsOneWidget);
-    expect(find.text('4 finds · on this phone until you sign in'), findsOneWidget);
+    expect(
+        find.text('4 finds · on this phone until you sign in'), findsOneWidget);
     expect(find.text('TO CONFIRM · 1'), findsOneWidget);
     expect(find.text('LIKELY'), findsOneWidget);
     expect(find.text('daisy'), findsOneWidget);
@@ -238,10 +251,13 @@ void main() {
     expect(find.text('Sep 27 · Middle Europe'), findsOneWidget);
     expect(find.text('Confirm'), findsOneWidget);
     expect(find.text('Another'), findsOneWidget);
-    expect(find.text('Delete'), findsOneWidget);
-    final confirm = tester.getSize(find.byKey(const Key('guide-seen-confirm-new')));
-    final another = tester.getSize(find.byKey(const Key('guide-seen-another-new')));
-    final delete = tester.getSize(find.byKey(const Key('guide-seen-delete-new')));
+    expect(find.text('Delete'), findsNWidgets(4));
+    final confirm =
+        tester.getSize(find.byKey(const Key('guide-seen-confirm-new')));
+    final another =
+        tester.getSize(find.byKey(const Key('guide-seen-another-new')));
+    final delete =
+        tester.getSize(find.byKey(const Key('guide-seen-delete-new')));
     expect(confirm.width, closeTo(another.width, 0.5));
     expect(another.width, closeTo(delete.width, 0.5));
     expect(find.text('SEPTEMBER 2026'), findsOneWidget);
@@ -259,7 +275,7 @@ void main() {
     expect(confirmed, ['new']);
     expect(find.text('Confirmed.'), findsOneWidget);
 
-    await tester.tap(find.text('Delete'));
+    await tester.tap(find.byKey(const Key('guide-seen-delete-new')));
     await tester.pump();
     expect(removed, ['new']);
 
@@ -275,7 +291,9 @@ void main() {
     await _pump(
       tester,
       _page(
-        finds: [_find(id: '1', name: 'Rosa canina', ownPhoto: true, inBook: true)],
+        finds: [
+          _find(id: '1', name: 'Rosa canina', ownPhoto: true, inBook: true)
+        ],
         signedIn: true,
         fieldGuide: true,
       ),
@@ -289,7 +307,8 @@ void main() {
       (tester) async {
     await _pump(tester, _page(finds: const []));
     expect(find.text('0 finds · saved to your account'), findsNothing);
-    expect(find.text('0 finds · on this phone until you sign in'), findsOneWidget);
+    expect(
+        find.text('0 finds · on this phone until you sign in'), findsOneWidget);
     expect(find.text('Finds you save will show up here.'), findsOneWidget);
     expect(find.text('See Field Guide'), findsOneWidget);
     expect(find.text('To confirm · 0'), findsNothing);
@@ -349,7 +368,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Share dog rose'), findsOneWidget);
     expect(find.text('Your note stays private.'), findsOneWidget);
-    final send = tester.widget<FilledButton>(find.byKey(const Key('guide-seen-send')));
+    final send =
+        tester.widget<FilledButton>(find.byKey(const Key('guide-seen-send')));
     expect(send.onPressed, isNull);
 
     await tester.tap(find.byKey(const Key('guide-seen-consent')));
@@ -358,6 +378,98 @@ void main() {
     await tester.pumpAndSettle();
     expect(shared, ['kept']);
     expect(find.text('Sent for review.'), findsOneWidget);
+  });
+
+  testWidgets('a confirmed find can be deleted', (tester) async {
+    Future<void> check(GuideSeenFind row, String body) async {
+      final removed = <String>[];
+      await _pump(
+        tester,
+        _page(
+          finds: [row],
+          onDelete: (find) async => removed.add(find.id),
+        ),
+      );
+      final button = find.byKey(Key('guide-seen-row-delete-${row.id}'));
+      await tester.tap(button);
+      await tester.pumpAndSettle();
+      expect(find.text('Delete this find?'), findsOneWidget);
+      expect(find.text(body), findsOneWidget);
+      await tester.tapAt(const Offset(20, 20));
+      await tester.pumpAndSettle();
+      expect(removed, isEmpty);
+
+      await tester.tap(button);
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('guide-seen-delete-confirm')));
+      await tester.pumpAndSettle();
+      expect(removed, [row.id]);
+      expect(find.text('Deleted from Seen.'), findsOneWidget);
+    }
+
+    await check(
+      _find(id: 'out', name: 'Tanacetum corymbosum'),
+      'It leaves your Seen.',
+    );
+    await check(
+      _find(
+        id: 'kept',
+        name: 'Rosa canina',
+        label: 'dog rose',
+        ownPhoto: true,
+        inBook: true,
+      ),
+      'It leaves your Seen.',
+    );
+    await check(
+      _find(
+        id: 'pub',
+        name: 'Galanthus nivalis',
+        label: 'snowdrop',
+        share: GuideSeenShare.shared,
+        ownPhoto: true,
+        inBook: true,
+      ),
+      'It leaves your Seen and Sightings.',
+    );
+    await check(
+      _find(
+        id: 'wait',
+        name: 'Achillea millefolium',
+        share: GuideSeenShare.review,
+        inBook: true,
+      ),
+      'It leaves your Seen. The copy you sent goes too.',
+    );
+    await check(
+      _find(
+        id: 'no',
+        name: 'Anemone nemorosa',
+        share: GuideSeenShare.rejected,
+        inBook: true,
+      ),
+      'It leaves your Seen. The copy you sent goes too.',
+    );
+  });
+
+  testWidgets('a confirmed row fits a phone width', (tester) async {
+    await _pump(
+      tester,
+      _page(
+        finds: [
+          _find(
+            id: 'out',
+            name: 'Pseudofumaria alba',
+            when: DateTime(2026, 9, 2),
+            place: 'Middle Europe',
+          ),
+        ],
+      ),
+      size: const Size(360, 640),
+    );
+    expect(find.byKey(const Key('guide-seen-row-delete-out')), findsOneWidget);
+    expect(find.text('Not in the book'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('a shared find can be withdrawn', (tester) async {
@@ -470,7 +582,8 @@ void main() {
       ),
     );
 
-    expect(find.text('5 finds · on this phone until you sign in'), findsOneWidget);
+    expect(
+        find.text('5 finds · on this phone until you sign in'), findsOneWidget);
     expect(find.text('TO CONFIRM · 1'), findsOneWidget);
     expect(find.text('Hide shared · 1'), findsOneWidget);
     expect(find.text('snowdrop'), findsOneWidget);
@@ -502,7 +615,8 @@ void main() {
     expect(find.text('chamomile'), findsOneWidget);
     expect(find.text('wood anemone'), findsOneWidget);
     expect(find.text('Tanacetum corymbosum'), findsOneWidget);
-    final hiddenChip = tester.getRect(find.byKey(const Key('guide-seen-hide-shared')));
+    final hiddenChip =
+        tester.getRect(find.byKey(const Key('guide-seen-hide-shared')));
     final hiddenConfirm = tester.getRect(
       find.byKey(const Key('guide-seen-confirm-new')),
     );
@@ -513,7 +627,8 @@ void main() {
     await tester.pump();
     expect(find.text('Hide shared · 1'), findsOneWidget);
     expect(find.text('snowdrop'), findsOneWidget);
-    expect(find.text('5 finds · on this phone until you sign in'), findsOneWidget);
+    expect(
+        find.text('5 finds · on this phone until you sign in'), findsOneWidget);
   });
 
   testWidgets('hiding every confirmed find leaves the chip and a note',
@@ -748,8 +863,12 @@ Widget _page({
   );
 }
 
-Future<void> _pump(WidgetTester tester, Widget page) async {
-  tester.view.physicalSize = const Size(800, 1600);
+Future<void> _pump(
+  WidgetTester tester,
+  Widget page, {
+  Size size = const Size(800, 1600),
+}) async {
+  tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
   addTearDown(tester.view.resetDevicePixelRatio);

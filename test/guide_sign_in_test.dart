@@ -254,6 +254,62 @@ void main() {
     expect(find.text('open'), findsOneWidget);
   });
 
+  testWidgets('email, password, and phone boxes fill the form', (tester) async {
+    await _open(tester, _page(initialCountry: Country.parse('SK')));
+
+    await tester.tap(find.text('Email'));
+    await tester.pumpAndSettle();
+    final email = tester.getSize(find.byKey(const Key('guideSignInEmail')));
+    final password =
+        tester.getSize(find.byKey(const Key('guideSignInPassword')));
+    final button = tester.getSize(
+      find
+          .ancestor(
+            of: find.text('Continue'),
+            matching: find.byType(Material),
+          )
+          .first,
+    );
+    expect(email.height, 48);
+    expect(password.height, 48);
+    expect(email.width, button.width);
+    expect(password.width, button.width);
+    final emailField =
+        tester.widget<TextField>(find.byKey(const Key('guideSignInEmail')));
+    expect(emailField.decoration?.isDense, isFalse);
+    var outline = 0.0;
+    for (final element in find
+        .descendant(
+          of: find.byKey(const Key('guideSignInEmail')),
+          matching: find.byType(CustomPaint),
+        )
+        .evaluate()) {
+      final box = element.renderObject;
+      if (box is RenderBox && box.hasSize && box.size.height > outline) {
+        outline = box.size.height;
+      }
+    }
+    expect(outline, 48);
+
+    await tester.tap(find.text('Sign in'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Phone'));
+    await tester.pumpAndSettle();
+    final phone = tester.getSize(find.byKey(const Key('guideSignInPhone')));
+    final code = tester.getSize(find.byKey(const Key('guideSignInCallingCode')));
+    final send = tester.getSize(
+      find
+          .ancestor(
+            of: find.text('Send code'),
+            matching: find.byType(Material),
+          )
+          .first,
+    );
+    expect(phone.height, 48);
+    expect(code.height, 48);
+    expect(phone.width + code.width + 8, send.width);
+  });
+
   testWidgets('a new email asks the person to verify, and stays here',
       (tester) async {
     await _open(

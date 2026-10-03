@@ -113,6 +113,9 @@ class GuideSpeciesPage extends StatefulWidget {
   final Future<GuideSpecies?> Function(String languageCode) load;
   final Future<void> Function(GuideSeenDraft draft)? saveSeen;
   final Future<GuideSeenPhoto?> Function(String plant)? pickPhoto;
+
+  /// Replaces the notebook check in tests. True is a signed-in account or
+  /// the anonymous guest. False opens sign-in and does not create a guest.
   final bool Function()? isSignedIn;
   final Future<void> Function(BuildContext context)? onSignIn;
   final VoidCallback? onShowSeen;
@@ -234,38 +237,25 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
     );
   }
 
-  bool _signedIn() {
+  bool _hasNotebook() {
     final check = widget.isSignedIn;
     if (check != null) return check();
-    return Auth.appUser != null;
+    return guideNotebookUser() != null;
   }
 
   Future<void> _addSeen() async {
     if (_saving) return;
-    if (!_signedIn()) {
-      final signIn = widget.onSignIn ?? _openSignIn;
-      await signIn(context);
-      if (!mounted || !_signedIn()) return;
+    if (!_hasNotebook()) {
+      if (widget.isSignedIn == null) await Auth.startGuest();
+      if (!mounted) return;
+      if (!_hasNotebook()) {
+        final signIn = widget.onSignIn ?? _openSignIn;
+        await signIn(context);
+        if (!mounted || !_hasNotebook()) return;
+      }
     }
     if (!mounted) return;
-    await showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (sheetContext) {
-        return GuideTheme(
-          child: _AddSeenSheet(
-            onPhoto: () {
-              Navigator.pop(sheetContext);
-              _addPhoto();
-            },
-            onNone: () {
-              Navigator.pop(sheetContext);
-              _commit(null);
-            },
-          ),
-        );
-      },
-    );
+    await _addPhoto();
   }
 
   Future<void> _addPhoto() async {
@@ -273,7 +263,7 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
     try {
       final pick = widget.pickPhoto ?? pickGuideSeenPhoto;
       final photo = await pick(widget.name);
-      if (!mounted || photo == null) return;
+      if (!mounted || photo == null || photo.relativePath.isEmpty) return;
       await _commit(photo, alreadySaving: true);
     } catch (error) {
       debugPrint('guide add seen ${widget.name}: $error');
@@ -283,16 +273,19 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
     }
   }
 
-  Future<void> _commit(GuideSeenPhoto? photo,
-      {bool alreadySaving = false}) async {
+  Future<void> _commit(
+    GuideSeenPhoto photo, {
+    bool alreadySaving = false,
+  }) async {
+    if (photo.relativePath.isEmpty) return;
     if (!alreadySaving) setState(() => _saving = true);
     final draft = GuideSeenDraft(
       plant: _species?.name ?? widget.name,
-      when: photo?.when ?? DateTime.now(),
-      latitude: photo?.latitude ?? 0,
-      longitude: photo?.longitude ?? 0,
-      photoPath: photo?.relativePath,
-      fromPhoto: photo?.fromPhoto ?? false,
+      when: photo.when,
+      latitude: photo.latitude,
+      longitude: photo.longitude,
+      photoPath: photo.relativePath,
+      fromPhoto: photo.fromPhoto,
     );
     try {
       final save = widget.saveSeen ?? saveGuideSeen;
@@ -693,7 +686,7 @@ String _sectionTitle(S strings, String id) {
 }
 
 Future<GuideSeenPhoto?> pickGuideSeenPhoto(String plant) async {
-  final user = Auth.appUser;
+  final user = await guideNotebookUserReady();
   if (user == null) return null;
   final access = await Permission.accessMediaLocation.status;
   if (!access.isGranted) {
@@ -2059,75 +2052,5 @@ class _Heading extends StatelessWidget {
           ),
       ],
     ));
-  }
-}
-
-class _AddSeenSheet extends StatelessWidget {
-  final VoidCallback onPhoto;
-  final VoidCallback onNone;
-
-  const _AddSeenSheet({required this.onPhoto, required this.onNone});
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = GuideColors.of(context);
-    final strings = S.of(context);
-    final bottom = MediaQuery.paddingOf(context).bottom;
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: colors.paper,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
-      ),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(20, 10, 20, 16 + bottom),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Center(
-              child: Container(
-                width: 36,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: colors.rule,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
-            const SizedBox(height: 14),
-            Text(strings.guide_add_seen, style: GuideType.section(colors)),
-            const SizedBox(height: 6),
-            Text(
-              strings.guide_add_seen_body,
-              style: TextStyle(
-                fontSize: 14,
-                height: 1.4,
-                color: colors.ink2,
-              ),
-            ),
-            const SizedBox(height: 14),
-            FilledButton(
-              onPressed: onPhoto,
-              style: FilledButton.styleFrom(
-                backgroundColor: colors.mossFill,
-                foregroundColor: Colors.white,
-                minimumSize: const Size.fromHeight(44),
-              ),
-              child: Text(strings.guide_add_seen_photo),
-            ),
-            const SizedBox(height: 8),
-            OutlinedButton(
-              onPressed: onNone,
-              style: OutlinedButton.styleFrom(
-                foregroundColor: colors.ink,
-                side: BorderSide(color: colors.rule),
-                minimumSize: const Size.fromHeight(44),
-              ),
-              child: Text(strings.guide_add_seen_none),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

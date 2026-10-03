@@ -13,7 +13,7 @@ import 'package:abherbs_flutter/guide/sign_in_page.dart';
 import 'package:abherbs_flutter/utils/prefs.dart';
 import 'package:abherbs_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 
 class SeenPage extends StatefulWidget {
   final List<GuideSeenFind>? finds;
@@ -196,9 +196,11 @@ class _SeenPageState extends State<SeenPage> {
             for (final find in month.finds)
               _FindRow(
                 find: find,
+                busy: _busy.contains(find.id),
                 onOpen: () => _open(find),
                 onShare: () => _share(find),
                 onWithdraw: () => _withdraw(find),
+                onDelete: () => _askDelete(find),
               ),
           ],
           if (!widget.fieldGuide)
@@ -273,9 +275,7 @@ class _SeenPageState extends State<SeenPage> {
           ),
           photoPath: find.photoPath,
           when: find.when,
-          place: place.isEmpty
-              ? S.of(context).guide_outside_no_place
-              : place,
+          place: place.isEmpty ? S.of(context).guide_outside_no_place : place,
           observationId: find.id,
           confirmed: find.confirmed,
           onConfirm: (id) => setGuideCameraConfirmed(
@@ -338,20 +338,65 @@ class _SeenPageState extends State<SeenPage> {
     }
   }
 
+  Future<void> _askDelete(GuideSeenFind find) async {
+    if (_busy.contains(find.id)) return;
+    final strings = S.of(context);
+    final String body;
+    switch (find.share) {
+      case GuideSeenShare.shared:
+        body = strings.guide_seen_delete_shared_body;
+        break;
+      case GuideSeenShare.review:
+      case GuideSeenShare.rejected:
+        body = strings.guide_seen_delete_sent_body;
+        break;
+      case GuideSeenShare.none:
+        body = strings.guide_seen_delete_body;
+        break;
+    }
+    await showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (sheetContext) {
+        return GuideTheme(
+          child: _DeleteSheet(
+            title: strings.guide_seen_delete_title,
+            body: body,
+            onDelete: () {
+              Navigator.pop(sheetContext);
+              unawaited(_delete(find));
+            },
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> _delete(GuideSeenFind find) async {
     if (!_busy.add(find.id)) return;
     setState(() {});
     try {
       final action = widget.onDelete;
+      var ok = true;
       if (action != null) {
         await action(find);
       } else {
-        await deleteGuideCameraFind(id: find.id, plant: find.name);
-        GuideTabs.refreshSeen?.call();
+        ok = await deleteGuideSeenFind(
+          id: find.id,
+          plant: find.name,
+          share: find.share,
+        );
+        if (ok) GuideTabs.refreshSeen?.call();
       }
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(S.of(context).guide_outside_deleted)),
+        SnackBar(
+          content: Text(
+            ok
+                ? S.of(context).guide_outside_deleted
+                : S.of(context).guide_seen_delete_failed,
+          ),
+        ),
       );
     } finally {
       if (mounted) setState(() => _busy.remove(find.id));
@@ -437,7 +482,8 @@ class _SeenPageState extends State<SeenPage> {
   Future<void> _sendShare(BuildContext sheetContext, GuideSeenFind find) async {
     Navigator.pop(sheetContext);
     final action = widget.onShare;
-    final ok = action != null ? await action(find) : await shareGuideFind(find.id);
+    final ok =
+        action != null ? await action(find) : await shareGuideFind(find.id);
     if (!mounted) return;
     if (ok) GuideTabs.refreshSeen?.call();
     ScaffoldMessenger.of(context).showSnackBar(
@@ -574,7 +620,8 @@ class _ConfirmCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             if (find.probability != null) ...[
-                              GuideConfidenceMark(probability: find.probability),
+                              GuideConfidenceMark(
+                                  probability: find.probability),
                               const SizedBox(height: 4),
                             ],
                             Text(
@@ -609,7 +656,8 @@ class _ConfirmCard extends StatelessWidget {
                             const SizedBox(height: 3),
                             Text(
                               _detailOf(context, find),
-                              style: TextStyle(fontSize: 12, color: colors.ink3),
+                              style:
+                                  TextStyle(fontSize: 12, color: colors.ink3),
                             ),
                           ],
                         ),
@@ -713,22 +761,30 @@ class _CardAction extends StatelessWidget {
 
 class _FindRow extends StatelessWidget {
   final GuideSeenFind find;
+  final bool busy;
   final VoidCallback onOpen;
   final VoidCallback onShare;
   final VoidCallback onWithdraw;
+  final VoidCallback onDelete;
 
   const _FindRow({
     required this.find,
+    required this.busy,
     required this.onOpen,
     required this.onShare,
     required this.onWithdraw,
+    required this.onDelete,
   });
 
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
+    final strings = S.of(context);
     final named = find.label != null && find.label!.trim().isNotEmpty;
     final chip = guideSeenChip(find);
+    final trailing = Directionality.of(context) == TextDirection.rtl
+        ? CrossAxisAlignment.start
+        : CrossAxisAlignment.end;
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(20, 9, 20, 9),
       child: Row(
@@ -775,15 +831,36 @@ class _FindRow extends StatelessWidget {
               ),
             ),
           ),
-          if (chip != null) ...[
-            const SizedBox(width: 8),
-            _ShareChip(
-              chip: chip,
-              onShare: onShare,
-              onWithdraw: onWithdraw,
-              onOutside: onOpen,
-            ),
-          ],
+          const SizedBox(width: 8),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: trailing,
+            children: [
+              if (chip != null)
+                _ShareChip(
+                  chip: chip,
+                  onShare: onShare,
+                  onWithdraw: onWithdraw,
+                  onOutside: onOpen,
+                ),
+              TextButton(
+                key: Key('guide-seen-row-delete-${find.id}'),
+                onPressed: busy ? null : onDelete,
+                style: TextButton.styleFrom(
+                  foregroundColor: colors.madder,
+                  minimumSize: Size.zero,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  textStyle: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                child: Text(strings.guide_outside_delete),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -891,9 +968,7 @@ class _Pill extends StatelessWidget {
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
-          side: border == null
-              ? BorderSide.none
-              : BorderSide(color: border!),
+          side: border == null ? BorderSide.none : BorderSide(color: border!),
         ),
         textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
       ),
@@ -1104,7 +1179,8 @@ class _ShareSheetState extends State<_ShareSheet> {
                     children: [
                       DecoratedBox(
                         decoration: BoxDecoration(
-                          color: _consent ? colors.mossFill : Colors.transparent,
+                          color:
+                              _consent ? colors.mossFill : Colors.transparent,
                           borderRadius: BorderRadius.circular(6),
                           border: Border.all(
                             color: _consent ? colors.mossFill : colors.ink3,
@@ -1115,7 +1191,8 @@ class _ShareSheetState extends State<_ShareSheet> {
                           width: 22,
                           height: 22,
                           child: _consent
-                              ? const Icon(Icons.check, size: 16, color: Colors.white)
+                              ? const Icon(Icons.check,
+                                  size: 16, color: Colors.white)
                               : null,
                         ),
                       ),
@@ -1142,7 +1219,8 @@ class _ShareSheetState extends State<_ShareSheet> {
               style: FilledButton.styleFrom(
                 backgroundColor: colors.mossFill,
                 foregroundColor: Colors.white,
-                disabledBackgroundColor: colors.mossFill.withValues(alpha: 0.45),
+                disabledBackgroundColor:
+                    colors.mossFill.withValues(alpha: 0.45),
                 disabledForegroundColor: Colors.white,
                 minimumSize: const Size.fromHeight(44),
               ),
@@ -1168,6 +1246,68 @@ class _Fact extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(fontSize: 14, height: 1.45, color: colors.ink2),
+      ),
+    );
+  }
+}
+
+class _DeleteSheet extends StatelessWidget {
+  final String title;
+  final String body;
+  final VoidCallback onDelete;
+
+  const _DeleteSheet({
+    required this.title,
+    required this.body,
+    required this.onDelete,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final strings = S.of(context);
+    final bottom = MediaQuery.paddingOf(context).bottom;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: colors.paper,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+      ),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(20, 10, 20, 16 + bottom),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Container(
+                width: 36,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: colors.rule,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            const SizedBox(height: 14),
+            Text(title, style: GuideType.question(colors)),
+            const SizedBox(height: 8),
+            Text(
+              body,
+              style: TextStyle(fontSize: 15, height: 1.4, color: colors.ink2),
+            ),
+            const SizedBox(height: 16),
+            OutlinedButton(
+              key: const Key('guide-seen-delete-confirm'),
+              onPressed: onDelete,
+              style: OutlinedButton.styleFrom(
+                foregroundColor: colors.madder,
+                side: BorderSide(color: colors.rule),
+                minimumSize: const Size.fromHeight(44),
+              ),
+              child: Text(strings.guide_outside_delete),
+            ),
+          ],
+        ),
       ),
     );
   }

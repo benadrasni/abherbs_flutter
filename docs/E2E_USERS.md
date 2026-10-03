@@ -52,7 +52,7 @@ A guest is an anonymous Firebase account created once per install. The app treat
 2. Search a Latin name and a vernacular. Open the species page. Order and family sit above the name. Notes, morphology, and Uses open when the plant has them.
 3. Walk the key to a result grid. Open one plant.
 4. Open Book, then New in the book, a family, and a genus.
-5. On a species page, Add to Seen with no photo. Seen shows the find. The camera meter does not move.
+5. On a species page, Add to Seen and choose a photo from this phone. Seen shows the find and that photo. Cancelling the picker saves nothing. The camera meter does not move.
 6. Turn on airplane mode after a species page has loaded once. The page still opens from what this phone already has. Offline packs are a separate check.
 
 ## G1 — New guest
@@ -67,7 +67,7 @@ Setup: delete the app, install, do not sign in.
 6. Confirm the first find if it is in the book. Share is not offered to this account, or the share stops because there is no signed-in account.
 7. Open Offline. The screen offers Field Guide and does not start a download.
 
-Pass: one name, then a sign-in wall. Search and the book never asked for an account.
+Pass: one name, then a sign-in wall on the camera. Search, the book, and Add to Seen never asked for an account.
 
 ## G2 — Guest, photo that is not a plant
 
@@ -110,7 +110,7 @@ Setup: a new email, or G3 before any purchase.
 2. The outside card opens Outside the book, stays unconfirmed, and cannot be shared. Keep, It’s another one, and Delete work. Delete removes it from Seen.
 3. Confirm an in-book find and share it. The sheet asks for CC0 every time. The note is not published. Seen shows In review.
 4. Person still shows Field Guide. Offline offers Field Guide. Find shows a banner.
-5. On a second phone, sign into the same account. The shared and private rows appear. A photo taken on the first phone does not download. Add to Seen with no photo has no picture on either phone, which is expected.
+5. On a second phone, sign into the same account. The shared and private rows appear. A photo taken on the first phone does not download. Add to Seen on either phone saves only after a photo is chosen on that phone.
 6. Spend the 5 included names. The camera offers a rewarded ad. Watch one. The meter gains one name (`adGrants` increases, up to 5). Spend that name.
 7. After 5 included and 5 ad names, the camera offers Field Guide and no further ad. Search and the key still open.
 8. Photograph the same plant again within a few seconds. The sheet says it is too soon. Send the same image again inside 24 hours. The sheet says it already saw that photo. Neither call spends a name.

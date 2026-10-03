@@ -486,7 +486,7 @@ void main() {
     expect(position.pixels, greaterThan(before));
   });
 
-  testWidgets('adding without a photo records a find', (tester) async {
+  testWidgets('cancelling the photo picker saves nothing', (tester) async {
     final saved = <GuideSeenDraft>[];
     var refreshed = 0;
     GuideTabs.refreshSeen = () => refreshed++;
@@ -501,7 +501,7 @@ void main() {
         imageBuilder: _swatch,
         month: 7,
         isSignedIn: () => true,
-        pickPhoto: (_) async => throw StateError('no photo'),
+        pickPhoto: (_) async => null,
         saveSeen: (draft) async => saved.add(draft),
       )),
     );
@@ -509,17 +509,45 @@ void main() {
     await tester.tap(find.text('+ Add to Seen'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
-    await tester.tap(find.text('Without a photo'));
+
+    expect(saved, isEmpty);
+    expect(refreshed, 0);
+    expect(find.text('Without a photo'), findsNothing);
+    expect(find.text('From your photos'), findsNothing);
+    expect(find.text('Added to Seen.'), findsNothing);
+    expect(find.textContaining('Seen by you'), findsNothing);
+  });
+
+  testWidgets('a guest adds a photo without signing in', (tester) async {
+    final saved = <GuideSeenDraft>[];
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+        isSignedIn: () => true,
+        onSignIn: (_) async => fail('guest was sent to sign in'),
+        pickPhoto: (_) async => GuideSeenPhoto(
+          relativePath: 'observations/guest/lv_1.jpg',
+          when: DateTime(2026, 7, 4),
+          latitude: 48.1,
+          longitude: 17.1,
+          fromPhoto: true,
+        ),
+        saveSeen: (draft) async => saved.add(draft),
+      )),
+    );
+
+    await tester.tap(find.text('+ Add to Seen'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
 
     expect(saved, hasLength(1));
-    expect(saved.single.plant, 'Leucanthemum vulgare');
-    expect(saved.single.photoPath, isNull);
-    expect(saved.single.fromPhoto, isFalse);
-    expect(find.text('Added to Seen.'), findsOneWidget);
+    expect(saved.single.photoPath, 'observations/guest/lv_1.jpg');
     expect(find.textContaining('Seen by you'), findsOneWidget);
-    expect(refreshed, 1);
     await _clearSnackBar(tester);
   });
 
@@ -546,9 +574,6 @@ void main() {
     );
 
     await tester.tap(find.text('+ Add to Seen'));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 400));
-    await tester.tap(find.text('From your photos'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
 
@@ -585,7 +610,7 @@ void main() {
     await tester.pump();
     expect(prompted, 1);
     expect(find.text('Without a photo'), findsNothing);
-    expect(find.text('Add to Seen'), findsNothing);
+    expect(find.text('From your photos'), findsNothing);
   });
 
   testWidgets('a missing plant is an empty page', (tester) async {

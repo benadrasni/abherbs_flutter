@@ -1229,7 +1229,8 @@ class _Field extends StatelessWidget {
             hintStyle: TextStyle(color: colors.ink3, fontSize: 16),
             filled: true,
             fillColor: colors.cream,
-            isDense: true,
+            // A dense outline hugs the text line and leaves this box empty.
+            isDense: false,
             counterText: '',
             contentPadding: const EdgeInsets.symmetric(horizontal: 14),
             border: border,

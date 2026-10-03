@@ -359,7 +359,7 @@ Future<Map<String, GuideHeaderBloom>> _loadHeaderBlooms() async {
 }
 
 Future<Set<String>> loadGuideSeenNames() async {
-  final user = Auth.appUser;
+  final user = guideNotebookUser();
   if (user == null) return {};
   try {
     final event = await privateObservationsReference
@@ -531,6 +531,15 @@ User? guideNotebookUser() {
   } catch (_) {
     return null;
   }
+}
+
+/// The notebook account, creating the anonymous guest when this install
+/// does not have one yet. Signing out does not create another guest.
+Future<User?> guideNotebookUserReady() async {
+  final current = guideNotebookUser();
+  if (current != null) return current;
+  await Auth.startGuest();
+  return guideNotebookUser();
 }
 
 /// Newest private finds for the Seen lately strip.
@@ -1160,9 +1169,13 @@ Future<GuideSpecies?> loadGuideSpecies(String name, String languageCode) async {
 }
 
 Future<void> saveGuideSeen(GuideSeenDraft draft) async {
-  final user = Auth.appUser;
+  final user = await guideNotebookUserReady();
   if (user == null) {
     throw StateError('sign in to save a find');
+  }
+  final photoPath = draft.photoPath;
+  if (photoPath == null || photoPath.isEmpty) {
+    throw StateError('a find needs a photo from this device');
   }
   final millis = DateTime.now().millisecondsSinceEpoch;
   final observation = Observation(draft.plant);
@@ -1171,10 +1184,7 @@ Future<void> saveGuideSeen(GuideSeenDraft draft) async {
   observation.latitude = draft.latitude;
   observation.longitude = draft.longitude;
   observation.note = '';
-  observation.photoPaths = [
-    if (draft.photoPath != null && draft.photoPath!.isNotEmpty)
-      draft.photoPath!,
-  ];
+  observation.photoPaths = [photoPath];
   observation.status = observationStatusPrivate;
   observation.order = -draft.when.millisecondsSinceEpoch;
   observation.confirmed = true;
