@@ -160,6 +160,8 @@ Database additions and changes are allowed when a new page needs a field or node
 | Seen | To confirm first, then the notebook by month. Delete on a confirmed find asks first |
 | Share a find | CC0 consent, then review, then a public Sighting |
 | Seen · delete a Sighting | A public find leaves Seen and Sightings. In review or not accepted, the copy you sent goes too |
+| Statistics · your finds | Counts, first and last, years, and countries with flags. Finds in Middle Europe are shown as Slovakia. Indoor finds are left out |
+| Statistics · Sightings | The same page for accepted finds. 1,778 sightings, 630 plants, 56 people. Years, and every country with its flag. Country, not a pin |
 | Book | Families, genera, lists of flowers |
 | List of flowers | New in the book by date (last 15 to 25). Year campaigns newest first. Other lists use the result grid |
 | At the limit | Ad, Field Guide, or the key |

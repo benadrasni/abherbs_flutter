@@ -40,6 +40,12 @@ class GuideSeenFind {
   final double latitude;
   final double longitude;
 
+  /// Indoor finds stay in Seen and are left out of statistics.
+  final bool indoors;
+
+  /// Lowercase ISO country code, when the row has one.
+  final String? country;
+
   const GuideSeenFind({
     required this.id,
     required this.name,
@@ -55,6 +61,8 @@ class GuideSeenFind {
     this.place,
     this.latitude = 0,
     this.longitude = 0,
+    this.indoors = false,
+    this.country,
   });
 
   GuideSeenFind withCatalog({
@@ -77,6 +85,8 @@ class GuideSeenFind {
       place: place,
       latitude: latitude,
       longitude: longitude,
+      indoors: indoors,
+      country: country,
     );
   }
 }
@@ -257,7 +267,35 @@ GuideSeenFind? readGuideSeenRow(Object? key, dynamic raw) {
     others: guideSeenOthers(name, hits),
     latitude: _asDouble(raw[observationLatitude]),
     longitude: _asDouble(raw[observationLongitude]),
+    indoors: guideRowIndoors(raw[observationIndoors]),
+    country: guideRowCountry(raw[observationCountry]),
   );
+}
+
+/// Missing or unrecognised means outdoor. Matches the statistics recount.
+bool guideRowIndoors(dynamic value) {
+  if (value is bool) return value;
+  if (value is num) return value != 0;
+  if (value is String) {
+    switch (value.trim().toLowerCase()) {
+      case '1':
+      case 'true':
+      case 'yes':
+        return true;
+    }
+  }
+  return false;
+}
+
+/// A two-letter ISO code, lowercased. Anything else is no country.
+String? guideRowCountry(dynamic value) {
+  if (value is! String) return null;
+  final code = value.trim().toLowerCase();
+  if (code.length != 2) return null;
+  for (final unit in code.codeUnits) {
+    if (unit < 0x61 || unit > 0x7a) return null;
+  }
+  return code;
 }
 
 List<GuideSeenCandidate> _candidates(dynamic raw) {

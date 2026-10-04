@@ -114,6 +114,15 @@ class _SeenPageState extends State<SeenPage> {
               ],
             ],
           ),
+          leadingLabel: strings.observation_stats,
+          leadingIcon: Icons.bar_chart_outlined,
+          onLeading: () {
+            openGuideStatistics(
+              context,
+              finds: finds,
+              backLabel: strings.guide_tab_seen,
+            );
+          },
           actionLabel: strings.guide_camera_title,
           icon: Icons.photo_camera_outlined,
           onAction: () {

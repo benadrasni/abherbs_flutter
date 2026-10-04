@@ -1264,6 +1264,15 @@ class _PendingButton extends StatelessWidget {
   }
 }
 
+/// Month and day. A find from another year also shows the year.
+String guideSeenDate(DateTime when, String locale, {DateTime? now}) {
+  final today = now ?? DateTime.now();
+  final format = when.year == today.year
+      ? DateFormat.MMMd(locale)
+      : DateFormat.yMMMd(locale);
+  return format.format(when);
+}
+
 class _SeenByYou extends StatelessWidget {
   final GuideSpeciesSeen seen;
   final String locale;
@@ -1282,7 +1291,7 @@ class _SeenByYou extends StatelessWidget {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final last = seen.last;
-    final when = last == null ? '' : DateFormat.MMMd(locale).format(last);
+    final when = last == null ? '' : guideSeenDate(last, locale);
     final detail = last == null
         ? ''
         : seen.count == 1

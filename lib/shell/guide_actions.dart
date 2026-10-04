@@ -10,6 +10,8 @@ import 'package:abherbs_flutter/person/language_page.dart';
 import 'package:abherbs_flutter/book/list_page.dart';
 import 'package:abherbs_flutter/offline/offline_page.dart';
 import 'package:abherbs_flutter/person/person_page.dart';
+import 'package:abherbs_flutter/seen/guide_seen.dart';
+import 'package:abherbs_flutter/seen/stats_page.dart';
 import 'package:abherbs_flutter/key/petal_page.dart';
 import 'package:abherbs_flutter/key/results_page.dart';
 import 'package:abherbs_flutter/search/search_page.dart';
@@ -84,6 +86,7 @@ void openGuideAccount(BuildContext context) {
         onLanguage: openGuideLanguage,
         onFieldGuide: openGuideFieldGuide,
         onOffline: openGuideOffline,
+        onStatistics: openGuideStatistics,
       ),
     ),
   );
@@ -157,6 +160,25 @@ Future<void> _storeGuideLanguage(String key) async {
     return;
   }
   await Prefs.setString(keyPreferredLanguage, key);
+}
+
+Future<void> openGuideStatistics(
+  BuildContext context, {
+  List<GuideSeenFind>? finds,
+  bool sightings = false,
+  String? backLabel,
+}) {
+  return Navigator.push(
+    context,
+    MaterialPageRoute(
+      settings: const RouteSettings(name: guideStatsRouteName),
+      builder: (context) => GuideStatsPage(
+        finds: finds,
+        sightings: sightings,
+        backLabel: backLabel ?? S.of(context).guide_back,
+      ),
+    ),
+  );
 }
 
 Future<void> openGuideOffline(BuildContext context) {

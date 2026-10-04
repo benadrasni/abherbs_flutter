@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/seen/guide_private_photos.dart';
 import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/search/guide_search.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
+import 'package:abherbs_flutter/seen/guide_stats.dart';
 import 'package:abherbs_flutter/species/guide_species.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
@@ -70,6 +71,7 @@ const guidePersonRouteName = 'GuidePerson';
 const guideLanguageRouteName = 'GuideLanguage';
 const guideFieldGuideRouteName = 'GuideFieldGuide';
 const guideOfflineRouteName = 'GuideOffline';
+const guideStatsRouteName = 'GuideStats';
 const guideSearchRouteName = 'GuideSearch';
 const guideCameraRouteName = 'GuideCamera';
 const guideOutsideRouteName = 'GuideOutside';
@@ -684,6 +686,39 @@ Future<String?> _catalogPhoto(String name) async {
     debugPrint('guide seen photo $name: $error');
     return null;
   }
+}
+
+/// Public Sightings: the stored aggregate, and years from the outdoor list.
+///
+/// The stats node is the headline. When it is missing, the same outdoor rows
+/// supply the counts. Indoor rows are left out of the year chart either way.
+Future<GuideSightingsLoad> loadGuideSightings() async {
+  final stats = publicObservationsReference.child(firebaseObservationsStats).get();
+  final list = publicObservationsReference
+      .child(firebaseObservationsByDate)
+      .child(firebaseAttributeList)
+      .get();
+  final statsSnap = await stats;
+  final listSnap = await list;
+  final stored = guideSightingHeadline(statsSnap.value);
+  return GuideSightingsLoad(
+    headline: stored ?? guideSightingHeadlineFromRows(listSnap.value),
+    years: guideSightingYears(listSnap.value),
+  );
+}
+
+/// Vernacular, catalog photo, and whether the species is in the book.
+Future<GuideStatFace> loadGuidePlantCard(
+  String name,
+  String languageCode,
+) async {
+  final lang = getLanguageCode(languageCode);
+  final face = await _seenFace(name, lang, needsPhoto: true);
+  return GuideStatFace(
+    label: face.label,
+    photoPath: face.photo,
+    inBook: face.inBook,
+  );
 }
 
 Future<bool> _plantInBook(String name) async {

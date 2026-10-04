@@ -11,6 +11,7 @@ const String observationDate = "date";
 const String observationTime = "time";
 const String observationOrder = "order";
 const String observationIndoors = "indoors";
+const String observationCountry = "country";
 const String observationStatus = "status";
 const String observationStatusPrivate = "private";
 const String observationConfirmed = "confirmed";

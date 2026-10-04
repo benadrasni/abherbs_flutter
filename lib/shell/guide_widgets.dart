@@ -11,6 +11,9 @@ class GuideTitleBar extends StatelessWidget {
   final String actionLabel;
   final IconData icon;
   final VoidCallback onAction;
+  final String? leadingLabel;
+  final IconData? leadingIcon;
+  final VoidCallback? onLeading;
 
   const GuideTitleBar({
     super.key,
@@ -18,37 +21,70 @@ class GuideTitleBar extends StatelessWidget {
     required this.actionLabel,
     required this.icon,
     required this.onAction,
+    this.leadingLabel,
+    this.leadingIcon,
+    this.onLeading,
   });
 
   @override
   Widget build(BuildContext context) {
-    final colors = GuideColors.of(context);
+    final leading = onLeading;
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(20, 6, 20, 12),
       child: Row(
         children: [
           Expanded(child: title),
           const SizedBox(width: 12),
-          Tooltip(
-            message: actionLabel,
-            child: Material(
-              color: colors.cream,
-              shape: CircleBorder(
-                side: BorderSide(color: colors.rule),
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: InkWell(
-                onTap: onAction,
-                customBorder: const CircleBorder(),
-                child: SizedBox(
-                  width: 38,
-                  height: 38,
-                  child: Icon(icon, size: 20, color: colors.ink),
-                ),
-              ),
+          if (leading != null && leadingIcon != null) ...[
+            _TitleAction(
+              label: leadingLabel ?? '',
+              icon: leadingIcon!,
+              onPressed: leading,
             ),
+            const SizedBox(width: 8),
+          ],
+          _TitleAction(
+            label: actionLabel,
+            icon: icon,
+            onPressed: onAction,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _TitleAction extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final VoidCallback onPressed;
+
+  const _TitleAction({
+    required this.label,
+    required this.icon,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    return Tooltip(
+      message: label,
+      child: Material(
+        color: colors.cream,
+        shape: CircleBorder(
+          side: BorderSide(color: colors.rule),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onPressed,
+          customBorder: const CircleBorder(),
+          child: SizedBox(
+            width: 38,
+            height: 38,
+            child: Icon(icon, size: 20, color: colors.ink),
+          ),
+        ),
       ),
     );
   }

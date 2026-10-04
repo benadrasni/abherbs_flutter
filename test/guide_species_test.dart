@@ -10,6 +10,7 @@ import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
 void main() {
@@ -252,6 +253,13 @@ void main() {
     expect(sightings.map((sighting) => sighting.id), ['new', 'old', 'epoch']);
     expect(sightings.last.when, isNull);
     expect(sightings.first.photoPath, '${storagePhotos}new.jpg');
+  });
+
+  test('a seen date from another year includes the year', () async {
+    await initializeDateFormatting('en');
+    final now = DateTime(2026, 10, 4);
+    expect(guideSeenDate(DateTime(2026, 9, 7), 'en', now: now), 'Sep 7');
+    expect(guideSeenDate(DateTime(2021, 3, 2), 'en', now: now), 'Mar 2, 2021');
   });
 
   test('seen summary uses the latest real date', () {

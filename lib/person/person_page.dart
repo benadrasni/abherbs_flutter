@@ -24,6 +24,7 @@ class GuidePersonPage extends StatefulWidget {
   final Future<void> Function(BuildContext context)? onLanguage;
   final Future<void> Function(BuildContext context)? onFieldGuide;
   final Future<void> Function(BuildContext context)? onOffline;
+  final Future<void> Function(BuildContext context)? onStatistics;
   final ValueChanged<int>? onSelectTab;
 
   const GuidePersonPage({
@@ -38,6 +39,7 @@ class GuidePersonPage extends StatefulWidget {
     this.onLanguage,
     this.onFieldGuide,
     this.onOffline,
+    this.onStatistics,
     this.onSelectTab,
   });
 
@@ -350,6 +352,14 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
             onPressed:
                 widget.onOffline == null ? null : () => _act(widget.onOffline),
           ),
+        _MenuRow(
+          icon: Icons.bar_chart_outlined,
+          title: strings.observation_stats,
+          subtitle: strings.guide_stats_menu,
+          onPressed: widget.onStatistics == null
+              ? null
+              : () => _act(widget.onStatistics),
+        ),
         if (account != null) ...[
           _MenuRow(
             icon: Icons.person_outline,
