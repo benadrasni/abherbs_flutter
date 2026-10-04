@@ -22,6 +22,9 @@ void main() {
   test('a new-plants notification opens New in the book', () {
     expect(notificationPathOpensNewInBook('lists_custom/new/2026-10-01/list'), isTrue);
     expect(notificationPathOpensNewInBook('/lists_custom/new'), isTrue);
+    expect(notificationPathOpensNewInBook('lists_custom/2026-10-01/list'), isTrue);
+    expect(notificationPathOpensNewInBook('/lists_custom/2026-10-01'), isTrue);
+    expect(notificationPathOpensNewInBook('lists_custom/2026-10-01/time'), isFalse);
     expect(notificationPathOpensNewInBook('lists_custom/by language/en/Spices/list'), isFalse);
     expect(notificationPathOpensNewInBook(''), isFalse);
   });

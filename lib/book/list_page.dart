@@ -33,11 +33,19 @@ bool _sameCalendarDay(DateTime a, DateTime b) {
   return a.year == b.year && a.month == b.month && a.day == b.day;
 }
 
+final _datedListPath = RegExp(r'^lists_custom/\d{4}-\d{2}-\d{2}(/list)?$');
+
 /// A new-plants notification opens New in the book, whichever day the payload names.
+///
+/// Store app 8.3 opens `lists_custom/DATE/list`. The book also keeps
+/// `lists_custom/new/DATE`.
 bool notificationPathOpensNewInBook(String path) {
   var value = path.trim();
   if (value.startsWith('/')) value = value.substring(1);
-  return value == '$firebaseListsCustom/new' || value.startsWith('$firebaseListsCustom/new/');
+  if (value == '$firebaseListsCustom/new' || value.startsWith('$firebaseListsCustom/new/')) {
+    return true;
+  }
+  return _datedListPath.hasMatch(value);
 }
 
 /// The Book list a new-plants notification opens.
