@@ -421,6 +421,7 @@
   "guide_plate": "도판",
   "guide_photo_one": "사진 1장",
   "guide_photo_count": "사진 {count}장",
+  "guide_video": "동영상",
   "guide_height": "높이",
   "guide_flowers": "개화 {range}",
   "guide_also": "다른 이름 {names}",

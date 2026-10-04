@@ -421,6 +421,7 @@
   "guide_plate": "चित्र",
   "guide_photo_one": "1 फ़ोटो",
   "guide_photo_count": "{count} फ़ोटो",
+  "guide_video": "वीडियो",
   "guide_height": "ऊँचाई",
   "guide_flowers": "फूल {range}",
   "guide_also": "और {names}",

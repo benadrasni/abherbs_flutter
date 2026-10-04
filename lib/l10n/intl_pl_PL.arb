@@ -421,6 +421,7 @@
   "guide_plate": "Tablica",
   "guide_photo_one": "1 zdjęcie",
   "guide_photo_count": "{count} zdjęć",
+  "guide_video": "Wideo",
   "guide_height": "Wysokość",
   "guide_flowers": "Kwitnie {range}",
   "guide_also": "Także {names}",

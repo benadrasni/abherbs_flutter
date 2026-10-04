@@ -421,6 +421,7 @@
   "guide_plate": "Pelat",
   "guide_photo_one": "1 foto",
   "guide_photo_count": "{count} foto",
+  "guide_video": "Video",
   "guide_height": "Tinggi",
   "guide_flowers": "Bunga {range}",
   "guide_also": "Juga {names}",

@@ -421,6 +421,7 @@
   "guide_plate": "Tafel",
   "guide_photo_one": "1 Foto",
   "guide_photo_count": "{count} Fotos",
+  "guide_video": "Video",
   "guide_height": "Höhe",
   "guide_flowers": "Blüte {range}",
   "guide_also": "Auch {names}",

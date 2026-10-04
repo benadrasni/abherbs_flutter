@@ -421,6 +421,7 @@
   "guide_plate": "Iliustracija",
   "guide_photo_one": "1 nuotrauka",
   "guide_photo_count": "nuotraukos: {count}",
+  "guide_video": "Vaizdo įrašas",
   "guide_height": "Aukštis",
   "guide_flowers": "Žydėjimas {range}",
   "guide_also": "Taip pat {names}",

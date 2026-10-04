@@ -13,6 +13,25 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
 
 void main() {
+  test('a youtube link on the plant becomes one video', () {
+    final videos = guideYoutubeVideos([
+      'https://youtu.be/0RiaQCqVKaU',
+      'https://www.youtube.com/watch?v=0RiaQCqVKaU',
+      'https://youtu.be/not-an-id',
+    ]);
+    expect(videos, hasLength(1));
+    expect(videos.single.id, '0RiaQCqVKaU');
+    expect(videos.single.url, 'https://youtu.be/0RiaQCqVKaU');
+    expect(
+      guideYoutubeVideos({
+        '1': 'https://www.youtube.com/shorts/abcdefghijk',
+        '0': 'https://youtu.be/0RiaQCqVKaU?t=12',
+      }).map((video) => video.id),
+      ['0RiaQCqVKaU', 'abcdefghijk'],
+    );
+    expect(guideYoutubeVideos(null), isEmpty);
+  });
+
   test('height uses centimetres under a metre and metres above', () {
     expect(guideHeightText(20, 80), '20–80 cm');
     expect(guideHeightText(300, 2000), '3–20 m');
@@ -751,6 +770,60 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Choose'), findsOneWidget);
+  });
+
+  testWidgets('a plant video is the gallery page after the plate',
+      (tester) async {
+    final species = assembleGuideSpecies(
+      name: 'Achillea millefolium',
+      plant: {
+        'id': 3,
+        'name': 'Achillea millefolium',
+        'photoUrls': ['a.jpg'],
+        'illustrationUrl': 'plates/achillea_millefolium',
+        'videoUrls': ['https://youtu.be/0RiaQCqVKaU'],
+      },
+      translation: PlantTranslation()..label = 'yarrow',
+      vernaculars: const {},
+      sightings: const [],
+    )!;
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Achillea millefolium',
+        initial: species,
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        videoBuilder: (video) => SizedBox(
+          key: Key('guide-video-${video.id}'),
+          height: 180,
+        ),
+        month: 7,
+      )),
+      size: const Size(390, 500),
+    );
+
+    expect(
+      tester.getTopLeft(find.text('1 photo')).dx,
+      lessThan(tester.getTopLeft(find.text('Plate')).dx),
+    );
+    expect(
+      tester.getTopLeft(find.text('Plate')).dx,
+      lessThan(tester.getTopLeft(find.text('Video')).dx),
+    );
+    expect(find.byKey(const Key('guide-video-0RiaQCqVKaU')), findsNothing);
+    await tester.tap(find.text('Plate'));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('guide-video-0RiaQCqVKaU')), findsNothing);
+    await tester.tap(find.byKey(const Key('guide-video-pill')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('guide-video-0RiaQCqVKaU')), findsOneWidget);
+    final videoBottom = tester
+        .getBottomLeft(find.byKey(const Key('guide-video-0RiaQCqVKaU')))
+        .dy;
+    final pillTop =
+        tester.getTopLeft(find.byKey(const Key('guide-video-pill'))).dy;
+    expect(pillTop - videoBottom, 8);
   });
 }
 

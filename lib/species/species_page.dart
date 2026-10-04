@@ -18,12 +18,15 @@ import 'package:abherbs_flutter/data/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:exif/exif.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 typedef GuideImageBuilder = Widget Function(
   String path,
@@ -31,6 +34,8 @@ typedef GuideImageBuilder = Widget Function(
   double width,
   double height,
 );
+
+typedef GuideVideoBuilder = Widget Function(GuideVideo video);
 
 Widget guideSpeciesImage(
   String path,
@@ -120,6 +125,7 @@ class GuideSpeciesPage extends StatefulWidget {
   final Future<void> Function(BuildContext context)? onSignIn;
   final VoidCallback? onShowSeen;
   final GuideImageBuilder? imageBuilder;
+  final GuideVideoBuilder? videoBuilder;
   final int? month;
   final GuideCameraPending? pending;
   final Future<void> Function()? onConfirmPending;
@@ -138,6 +144,7 @@ class GuideSpeciesPage extends StatefulWidget {
     this.onSignIn,
     this.onShowSeen,
     this.imageBuilder,
+    this.videoBuilder,
     this.month,
     this.pending,
     this.onConfirmPending,
@@ -376,6 +383,7 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
       );
       final showSeen = widget.onShowSeen;
       final imageBuilder = widget.imageBuilder;
+      final videoBuilder = widget.videoBuilder;
       final month = widget.month;
       final signedIn = widget.isSignedIn;
       final signIn = widget.onSignIn;
@@ -390,6 +398,7 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
             load: (languageCode) => loadGuideSpecies(name, languageCode),
             onShowSeen: showSeen,
             imageBuilder: imageBuilder,
+            videoBuilder: videoBuilder,
             month: month,
             isSignedIn: signedIn,
             onSignIn: signIn,
@@ -530,6 +539,7 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
             onShare:
                 widget.pending == null || _kept ? () => _share(species) : null,
             onOpen: _openPhoto,
+            videoBuilder: widget.videoBuilder,
           ),
         ),
         SliverToBoxAdapter(child: _NameBlock(species: species)),
@@ -738,6 +748,7 @@ class _Gallery extends StatefulWidget {
   final VoidCallback onBack;
   final VoidCallback? onShare;
   final ValueChanged<String> onOpen;
+  final GuideVideoBuilder? videoBuilder;
 
   const _Gallery({
     required this.species,
@@ -745,6 +756,7 @@ class _Gallery extends StatefulWidget {
     required this.onBack,
     required this.onShare,
     required this.onOpen,
+    required this.videoBuilder,
   });
 
   @override
@@ -766,11 +778,16 @@ class _GalleryState extends State<_Gallery> {
     final strings = S.of(context);
     final species = widget.species;
     final slides = <_Slide>[
-      for (final path in species.photoPaths) _Slide(path: path, plate: false),
-      if (species.platePath != null)
-        _Slide(path: species.platePath!, plate: true),
+      for (final path in species.photoPaths) _Slide.photo(path),
+      if (species.platePath != null) _Slide.plate(species.platePath!),
+      for (final video in species.videos) _Slide.video(video),
     ];
-    if (slides.isEmpty) slides.add(const _Slide(path: null, plate: false));
+    if (slides.isEmpty) slides.add(const _Slide.photo(null));
+    final plateIndex =
+        species.platePath == null ? -1 : species.photoPaths.length;
+    final videoIndex = species.videos.isEmpty
+        ? -1
+        : species.photoPaths.length + (species.platePath == null ? 0 : 1);
     final top = MediaQuery.paddingOf(context).top + 10;
     final width = MediaQuery.sizeOf(context).width;
     return SizedBox(
@@ -781,22 +798,44 @@ class _GalleryState extends State<_Gallery> {
             controller: _page,
             children: [
               for (final slide in slides)
-                GestureDetector(
-                  onTap: slide.path == null
-                      ? null
-                      : () => widget.onOpen(slide.path!),
-                  child: ColoredBox(
-                    color: slide.plate ? colors.plateWell : colors.photoWell,
-                    child: slide.path == null
-                        ? const SizedBox.expand()
-                        : widget.image(
-                            slide.path!,
-                            slide.plate ? BoxFit.contain : BoxFit.cover,
-                            width,
-                            420,
+                slide.video == null
+                    ? GestureDetector(
+                        onTap: slide.path == null
+                            ? null
+                            : () => widget.onOpen(slide.path!),
+                        child: ColoredBox(
+                          color:
+                              slide.plate ? colors.plateWell : colors.photoWell,
+                          child: slide.path == null
+                              ? const SizedBox.expand()
+                              : widget.image(
+                                  slide.path!,
+                                  slide.plate ? BoxFit.contain : BoxFit.cover,
+                                  width,
+                                  420,
+                                ),
+                        ),
+                      )
+                    : ColoredBox(
+                        color: colors.photoWell,
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.only(
+                              bottom: _galleryPillInset +
+                                  _galleryPillHeight +
+                                  _galleryVideoGap,
+                            ),
+                            child: widget.videoBuilder?.call(slide.video!) ??
+                                _YoutubePlantVideo(
+                                  key: ValueKey(
+                                    'guide-video-${slide.video!.id}',
+                                  ),
+                                  video: slide.video!,
+                                ),
                           ),
-                  ),
-                ),
+                        ),
+                      ),
             ],
           ),
           PositionedDirectional(
@@ -822,25 +861,17 @@ class _GalleryState extends State<_Gallery> {
           ),
           PositionedDirectional(
             start: 12,
-            bottom: 12,
+            bottom: _galleryPillInset,
             child: Row(
               children: [
-                if (species.photoPaths.isNotEmpty)
-                  _Pill(
-                    label: species.photoPaths.length == 1
-                        ? strings.guide_photo_one
-                        : strings.guide_photo_count(species.photoPaths.length),
-                    filled: false,
-                    onPressed: () => _go(0),
-                  ),
-                if (species.photoPaths.isNotEmpty && species.platePath != null)
-                  const SizedBox(width: 6),
-                if (species.platePath != null)
-                  _Pill(
-                    label: strings.guide_plate,
-                    filled: false,
-                    onPressed: () => _go(slides.length - 1),
-                  ),
+                for (final pill in _galleryPills(
+                  species: species,
+                  strings: strings,
+                  plateIndex: plateIndex,
+                  videoIndex: videoIndex,
+                  go: _go,
+                ))
+                  pill,
               ],
             ),
           ),
@@ -859,11 +890,66 @@ class _GalleryState extends State<_Gallery> {
   }
 }
 
+const double _galleryPillInset = 12;
+const double _galleryPillHeight = 30;
+const double _galleryVideoGap = 8;
+
 class _Slide {
   final String? path;
   final bool plate;
+  final GuideVideo? video;
 
-  const _Slide({required this.path, required this.plate});
+  const _Slide.photo(this.path)
+      : plate = false,
+        video = null;
+
+  const _Slide.plate(this.path)
+      : plate = true,
+        video = null;
+
+  const _Slide.video(this.video)
+      : path = null,
+        plate = false;
+}
+
+List<Widget> _galleryPills({
+  required GuideSpecies species,
+  required S strings,
+  required int plateIndex,
+  required int videoIndex,
+  required void Function(int index) go,
+}) {
+  final pills = <Widget>[];
+  void add(Widget pill) {
+    if (pills.isNotEmpty) pills.add(const SizedBox(width: 6));
+    pills.add(pill);
+  }
+
+  if (species.photoPaths.isNotEmpty) {
+    add(_Pill(
+      label: species.photoPaths.length == 1
+          ? strings.guide_photo_one
+          : strings.guide_photo_count(species.photoPaths.length),
+      filled: false,
+      onPressed: () => go(0),
+    ));
+  }
+  if (plateIndex >= 0) {
+    add(_Pill(
+      label: strings.guide_plate,
+      filled: false,
+      onPressed: () => go(plateIndex),
+    ));
+  }
+  if (videoIndex >= 0) {
+    add(_Pill(
+      key: const Key('guide-video-pill'),
+      label: strings.guide_video,
+      filled: false,
+      onPressed: () => go(videoIndex),
+    ));
+  }
+  return pills;
 }
 
 class _OverlayButton extends StatelessWidget {
@@ -899,6 +985,50 @@ class _OverlayButton extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _YoutubePlantVideo extends StatefulWidget {
+  final GuideVideo video;
+
+  const _YoutubePlantVideo({super.key, required this.video});
+
+  @override
+  State<_YoutubePlantVideo> createState() => _YoutubePlantVideoState();
+}
+
+class _YoutubePlantVideoState extends State<_YoutubePlantVideo> {
+  late final YoutubePlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = YoutubePlayerController.fromVideoId(
+      videoId: widget.video.id,
+      autoPlay: false,
+      params: const YoutubePlayerParams(
+        showFullscreenButton: true,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    unawaited(_controller.close().catchError((Object error) {
+      debugPrint('guide video: $error');
+    }));
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return YoutubePlayer(
+      controller: _controller,
+      aspectRatio: 16 / 9,
+      autoFullScreen: false,
+      enableFullScreenOnVerticalDrag: false,
+      gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
     );
   }
 }
@@ -1500,6 +1630,7 @@ class _Pill extends StatelessWidget {
   final VoidCallback onPressed;
 
   const _Pill({
+    super.key,
     required this.label,
     required this.filled,
     required this.onPressed,
@@ -1515,7 +1646,7 @@ class _Pill extends StatelessWidget {
       child: InkWell(
         onTap: onPressed,
         child: Container(
-          height: 30,
+          height: _galleryPillHeight,
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(

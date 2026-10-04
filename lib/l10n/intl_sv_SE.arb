@@ -421,6 +421,7 @@
   "guide_plate": "Plansch",
   "guide_photo_one": "1 foto",
   "guide_photo_count": "{count} foton",
+  "guide_video": "Video",
   "guide_height": "Höjd",
   "guide_flowers": "Blomning {range}",
   "guide_also": "Även {names}",

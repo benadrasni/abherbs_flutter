@@ -419,6 +419,7 @@
   "guide_plate": "Plate",
   "guide_photo_one": "1 photo",
   "guide_photo_count": "{count} photos",
+  "guide_video": "Video",
   "guide_height": "Height",
   "guide_flowers": "Flowers {range}",
   "guide_also": "Also {names}",

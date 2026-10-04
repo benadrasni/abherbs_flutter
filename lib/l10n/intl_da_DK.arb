@@ -421,6 +421,7 @@
   "guide_plate": "Tavle",
   "guide_photo_one": "1 foto",
   "guide_photo_count": "{count} fotos",
+  "guide_video": "Video",
   "guide_height": "Højde",
   "guide_flowers": "Blomstring {range}",
   "guide_also": "Også {names}",

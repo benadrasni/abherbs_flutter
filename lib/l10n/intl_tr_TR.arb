@@ -421,6 +421,7 @@
   "guide_plate": "Resimli levha",
   "guide_photo_one": "1 fotoğraf",
   "guide_photo_count": "{count} fotoğraf",
+  "guide_video": "Video",
   "guide_height": "Boy",
   "guide_flowers": "Çiçek {range}",
   "guide_also": "Ayrıca {names}",

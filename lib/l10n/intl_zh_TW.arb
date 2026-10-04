@@ -421,6 +421,7 @@
   "guide_plate": "圖版",
   "guide_photo_one": "1張照片",
   "guide_photo_count": "{count}張照片",
+  "guide_video": "影片",
   "guide_height": "高度",
   "guide_flowers": "花期 {range}",
   "guide_also": "又名 {names}",

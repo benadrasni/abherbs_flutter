@@ -421,6 +421,7 @@
   "guide_plate": "図版",
   "guide_photo_one": "写真1枚",
   "guide_photo_count": "写真{count}枚",
+  "guide_video": "動画",
   "guide_height": "高さ",
   "guide_flowers": "開花 {range}",
   "guide_also": "別名 {names}",

@@ -421,6 +421,7 @@
   "guide_plate": "لوحة",
   "guide_photo_one": "صورة واحدة",
   "guide_photo_count": "{count} من الصور",
+  "guide_video": "فيديو",
   "guide_height": "الارتفاع",
   "guide_flowers": "الأزهار {range}",
   "guide_also": "أيضا {names}",

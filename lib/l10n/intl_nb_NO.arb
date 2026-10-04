@@ -421,6 +421,7 @@
   "guide_plate": "Plansje",
   "guide_photo_one": "1 bilde",
   "guide_photo_count": "{count} bilder",
+  "guide_video": "Video",
   "guide_height": "Høyde",
   "guide_flowers": "Blomstring {range}",
   "guide_also": "Også {names}",

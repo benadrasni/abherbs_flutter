@@ -421,6 +421,7 @@
   "guide_plate": "Tabule",
   "guide_photo_one": "1 fotografie",
   "guide_photo_count": "{count} fotografií",
+  "guide_video": "Video",
   "guide_height": "Výška",
   "guide_flowers": "Kvete {range}",
   "guide_also": "Také {names}",

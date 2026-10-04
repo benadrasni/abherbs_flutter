@@ -421,6 +421,7 @@
   "guide_plate": "Plaat",
   "guide_photo_one": "1 foto",
   "guide_photo_count": "{count} foto’s",
+  "guide_video": "Video",
   "guide_height": "Hoogte",
   "guide_flowers": "Bloei {range}",
   "guide_also": "Ook {names}",

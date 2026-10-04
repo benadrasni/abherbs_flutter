@@ -72,6 +72,13 @@ class GuideSourceLink {
   const GuideSourceLink({required this.label, required this.url});
 }
 
+class GuideVideo {
+  final String id;
+  final String url;
+
+  const GuideVideo({required this.id, required this.url});
+}
+
 class GuideSeenPhoto {
   final String relativePath;
   final DateTime when;
@@ -174,6 +181,7 @@ class GuideSpecies {
   final List<GuideSpeciesRank> ranks;
   final List<String> photoPaths;
   final String? platePath;
+  final List<GuideVideo> videos;
   final String? mapPath;
   final List<GuideSourceLink> sources;
   final List<GuideSighting> sightings;
@@ -199,6 +207,7 @@ class GuideSpecies {
     required this.ranks,
     required this.photoPaths,
     required this.platePath,
+    this.videos = const [],
     required this.mapPath,
     required this.sources,
     required this.sightings,
@@ -251,6 +260,7 @@ GuideSpecies? assembleGuideSpecies({
     ranks: guideSpeciesRanks(plant['APGIV'], vernaculars),
     photoPaths: guidePhotoPaths(plant['photoUrls']),
     platePath: guideStoragePhoto(plant['illustrationUrl']),
+    videos: guideYoutubeVideos(plant['videoUrls']),
     mapPath: guideDistributionPath(_text(plant['illustrationUrl'])),
     sources: guideSourceLinks(_sourceUrls(translation, plant)),
     sightings: sightings,
@@ -551,6 +561,60 @@ String? guideDistributionPath(String? illustrationUrl) {
       file.substring(0, dot) +
       '_distribution' +
       file.substring(dot);
+}
+
+final _youtubeId = RegExp(r'^[A-Za-z0-9_-]{11}$');
+
+/// YouTube id from a watch, embed, shorts, or youtu.be URL.
+String? guideYoutubeId(String raw) {
+  final url = raw.trim();
+  if (url.isEmpty) return null;
+  if (!url.contains('http') && _youtubeId.hasMatch(url)) return url;
+  final patterns = [
+    RegExp(
+      r'^https?:\/\/(?:www\.|m\.)?youtube\.com\/watch\?(?:.*&)?v=([A-Za-z0-9_-]{11})',
+    ),
+    RegExp(
+      r'^https?:\/\/(?:www\.|m\.)?youtube(?:-nocookie)?\.com\/embed\/([A-Za-z0-9_-]{11})',
+    ),
+    RegExp(r'^https?:\/\/youtu\.be\/([A-Za-z0-9_-]{11})'),
+    RegExp(
+      r'^https?:\/\/(?:www\.|m\.)?youtube\.com\/shorts\/([A-Za-z0-9_-]{11})',
+    ),
+    RegExp(
+      r'^https?:\/\/(?:music\.)?youtube\.com\/watch\?(?:.*&)?v=([A-Za-z0-9_-]{11})',
+    ),
+  ];
+  for (final pattern in patterns) {
+    final match = pattern.firstMatch(url);
+    final id = match?.group(1);
+    if (id != null) return id;
+  }
+  return null;
+}
+
+/// `plants_v2.videoUrls`, as a list or a numeric map. Duplicate ids are dropped.
+List<GuideVideo> guideYoutubeVideos(dynamic raw) {
+  final values = <dynamic>[];
+  if (raw is List) {
+    values.addAll(raw);
+  } else if (raw is Map) {
+    final keys = raw.keys.map((key) => key.toString()).toList()..sort();
+    for (final key in keys) {
+      values.add(raw[key]);
+    }
+  } else if (raw is String) {
+    values.add(raw);
+  }
+  final seen = <String>{};
+  final videos = <GuideVideo>[];
+  for (final value in values) {
+    if (value is! String) continue;
+    final id = guideYoutubeId(value);
+    if (id == null || !seen.add(id)) continue;
+    videos.add(GuideVideo(id: id, url: value.trim()));
+  }
+  return videos;
 }
 
 List<String> guidePhotoPaths(dynamic raw) {

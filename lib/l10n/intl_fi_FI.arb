@@ -421,6 +421,7 @@
   "guide_plate": "Kasvitaulu",
   "guide_photo_one": "1 kuva",
   "guide_photo_count": "kuvia: {count}",
+  "guide_video": "Video",
   "guide_height": "Korkeus",
   "guide_flowers": "Kukat {range}",
   "guide_also": "Myös {names}",

@@ -421,6 +421,7 @@
   "guide_plate": "Tavola",
   "guide_photo_one": "1 foto",
   "guide_photo_count": "{count} foto",
+  "guide_video": "Video",
   "guide_height": "Altezza",
   "guide_flowers": "Fiori {range}",
   "guide_also": "Anche {names}",

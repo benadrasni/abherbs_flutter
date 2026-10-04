@@ -421,6 +421,7 @@
   "guide_plate": "Tabla",
   "guide_photo_one": "1 fotografija",
   "guide_photo_count": "fotografija: {count}",
+  "guide_video": "Video",
   "guide_height": "Visina",
   "guide_flowers": "Cvate {range}",
   "guide_also": "I {names}",

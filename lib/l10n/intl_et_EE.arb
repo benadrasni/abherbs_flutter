@@ -421,6 +421,7 @@
   "guide_plate": "Illustratsioon",
   "guide_photo_one": "1 foto",
   "guide_photo_count": "fotot: {count}",
+  "guide_video": "Video",
   "guide_height": "Kõrgus",
   "guide_flowers": "Õied {range}",
   "guide_also": "Ka {names}",

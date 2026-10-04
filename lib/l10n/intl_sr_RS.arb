@@ -421,6 +421,7 @@
   "guide_plate": "Табла",
   "guide_photo_one": "1 фотографија",
   "guide_photo_count": "фотографија: {count}",
+  "guide_video": "Видео",
   "guide_height": "Висина",
   "guide_flowers": "Цвета {range}",
   "guide_also": "И {names}",

@@ -421,6 +421,7 @@
   "guide_plate": "Tabla",
   "guide_photo_one": "1 fotografija",
   "guide_photo_count": "fotografij: {count}",
+  "guide_video": "Video",
   "guide_height": "Višina",
   "guide_flowers": "Cveti {range}",
   "guide_also": "Tudi {names}",

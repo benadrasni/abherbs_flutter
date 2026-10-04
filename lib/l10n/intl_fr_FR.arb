@@ -421,6 +421,7 @@
   "guide_plate": "Planche",
   "guide_photo_one": "1 photo",
   "guide_photo_count": "{count} photos",
+  "guide_video": "Vidéo",
   "guide_height": "Hauteur",
   "guide_flowers": "Fleurs {range}",
   "guide_also": "Aussi {names}",
