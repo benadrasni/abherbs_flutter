@@ -1,6 +1,5 @@
 {
-  "@@locale" : "sk_SK",
-
+  "@@locale": "sk_SK",
   "legend": "Legenda",
   "legend_flower_1": "vyvinutý kvet",
   "legend_flower_2": "blizna",
@@ -36,7 +35,6 @@
   "legend_inflorescence_scorpioid_thyrse": "thyrsus",
   "legend_inflorescence_dichasial_thyrse": "thyrsoid",
   "legend_inflorescence_double_scorpioid_thyrse": "dvojzávitok",
-
   "enhancements": "Vylepšenia",
   "settings": "Nastavenia",
   "version": "Verzia",
@@ -44,7 +42,6 @@
   "about": "O aplikácii",
   "help": "Pomoc",
   "video": "Pozrite si video o funkcii",
-
   "product_restore_purchases": "Obnoviť nákupy",
   "product_no_ads_title": "Žiadna nežiaduca reklama",
   "product_no_ads_description": "Aplikácia nezobrazí reklamný banner v spodnej časti obrazovky.",
@@ -69,10 +66,8 @@
   "product_purchase": "Kúpiť",
   "product_purchase_failed": "Nákup sa neuskutočnil",
   "product_purchased": "Kúpené",
-
-  "toxicity1": "jedovatá rastlina",
-  "toxicity2": "mierne jedovatá rastlina",
-
+  "toxicity1": "jedovatá",
+  "toxicity2": "mierne jedovatá",
   "pref_language": "Preferovaný jazyk",
   "my_region": "Moja oblasť",
   "always_my_region_title": "Vždy pridať moju oblasť do filtra",
@@ -86,28 +81,24 @@
   "offline_download_fail": "Sťahovanie súborov zlyhalo. Skontrolujte, prosím, pripojenie na internet alebo voľné miesto v zariadení a skúste to znova.",
   "offline_delete_message": "Naozaj chcete zmazať offline dáta?",
   "offline_download": "Pokračovať v sťahovaní",
-
   "feedback_intro": "Túto aplikáciu podporujete odkedy ste si ju nainštalovali na svoje mobilné zariadenie – ďakujem. Ak hľadáte iné formy podpory, tu sú niektoré možnosti:",
   "feedback_review": "Môžete napísať pozitívnu recenziu.",
   "feedback_title": "Ako prispieť",
   "feedback_buy_extended": "Môžete si kúpiť funkcie navyše, ako napríklad režim offline, vyhľadávanie v názvoch a v taxonómii, vyhľadávanie pomocou fotografie, pozorovania a nastaviteľný filter.",
   "feedback_run_ads": "Môžete si pozrieť videoreklamu alebo nechať zobraziť reklamu na celú obrazovku a podporiť tak ďalší vývoj a rozširovanie databázy.",
   "feedback_run_ads_fullscreen": "Zobraziť reklamu na celej obrazovke",
-
   "credit_login": "Prihláste sa a získajte kredity za sledovanie reklamy. S kreditmi môžete použiť niektoré vylepšenia.",
   "credit_message": "Získajte kredity za sledovanie reklamy. S kreditmi môžete použiť niektoré vylepšenia.",
   "credit_count": "Kredity: ",
   "credit_ads_video": "Pozrite si reklamu a získajte kredity",
   "credit_use_search": "Použiť 1 kredit",
   "credit_use_photo_search": "Použiť kredity",
-
   "auth_sign_in": "Prihlásiť sa",
   "auth_sign_out": "Odhlásiť sa",
   "auth_email": "Prihlásiť sa e-mailom",
   "auth_phone": "Prihlásiť sa telefónom",
   "auth_google": "Prihlásiť sa cez Google",
   "auth_sign_in_failed": "Prihlásenie sa nepodarilo. Skontrolujte pripojenie a skúste to znova.",
-
   "auth_email_hint": "E-mail",
   "auth_invalid_email_address": "Zadajte platnú e-mailovú adresu",
   "auth_password_hint": "Heslo",
@@ -120,7 +111,6 @@
   "auth_reset_password_email_title": "Obnoviť heslo",
   "auth_reset_password_email_message": "Postupujte podľa pokynov odoslaných na adresu {email}, aby ste obnovili svoje heslo.",
   "auth_resend_email": "Znova odoslať e-mail",
-
   "auth_verify_phone_number": "Overiť telefónne číslo",
   "auth_verify_phone_number_title": "Zadajte telefónne číslo",
   "auth_phone_hint": "Telefónne číslo",
@@ -137,49 +127,41 @@
   "auth_delete_account_success": "Účet bol vymazaný",
   "auth_delete_account_failed": "Účet sa nepodarilo vymazať. Skontrolujte pripojenie a skúste to znova.",
   "auth_delete_account_reauth": "Na vymazanie účtu sa prihláste znova.",
-
   "rate_question": "Je táto aplikácia užitočná?",
   "rate_text": "Autora tejto aplikácie motivuje pozitívny ohlas používateľov. Pošlite mu, prosím, nejaké kvetiny (najlepšie hviezdičky) cez obchod s aplikáciami.",
   "rate_never": "Nikdy",
   "rate_later": "Neskôr",
   "rate": "Recenzia",
   "new_version": "K dispozícii je nová verzia, prosím, nainštalujte si ju.",
-
   "yes": "Áno",
   "no": "Nie",
   "close": "Zavrieť",
   "pause": "Prerušiť",
   "apply": "Použiť",
   "cancel": "Zrušiť",
-
   "filter_color": "farba",
   "filter_habitat": "biotop",
   "filter_petal": "okvetie",
   "filter_distribution": "rozšírenie",
-
   "color_message": "Akej farby je kvet? Vyber tú najbližšiu. Vždy sa môžeš vrátiť a vybrať inú.",
   "habitat_message": "Kde rastie? Vyber biotop.",
   "petal_message": "Je kvet nepravidelný? Nie? Tak koľko má okvetných lístkov?",
   "distribution_message": "Na ktorú geografickú oblasť zamerať pozornosť?",
-
   "color_white": "biela",
   "color_yellow": "žltá",
   "color_red": "červená, ružová",
   "color_blue": "modrá, fialová",
   "color_green": "zelená, hnedá, čierna",
-
   "habitat_meadow": "lúky a trávnaté porasty",
   "habitat_garden": "polia a záhrady",
   "habitat_wetland": "mokrade a močiare",
   "habitat_forest": "lesy",
   "habitat_rock": "vrcholy hôr a skaly",
   "habitat_tree": "stromy a kry",
-
   "petal_4": "4 alebo menej",
   "petal_5": "5",
   "petal_many": "viac ako 5",
   "petal_zygomorphic": "nepravidelný",
-
   "europe": "Európa",
   "africa": "Afrika",
   "asia_temperate": "Mierne pásmo Ázie",
@@ -240,14 +222,11 @@
   "eastern_canada": "Východná Kanada",
   "subantarctic_islands": "Subantarktické ostrovy",
   "antarctic_continent": "Antarktický kontinent",
-
   "list_info": "Vyber si jednu",
-
   "plant_info": "Info",
   "plant_gallery": "Galéria",
   "plant_taxonomy": "Taxonómia",
   "plant_sources": "Zdroje",
-
   "plant_height_from": "Výška:",
   "plant_height_to": "-",
   "plant_flowering_from": "Kvitne:",
@@ -265,7 +244,6 @@
   "plant_scientific_label": "Vedecký názov",
   "plant_synonyms": "Synonymá",
   "plant_tap_synonyms": "(klepnutím zobrazíte všetky)",
-
   "taxonomy_superregnum": "doména",
   "taxonomy_regnum": "ríša",
   "taxonomy_cladus": "klád",
@@ -280,17 +258,14 @@
   "taxonomy_subsectio": "podsekcia",
   "taxonomy_serie": "séria",
   "taxonomy_subserie": "podséria",
-  "taxonomy_supersectio": "nadsekcia",  
+  "taxonomy_supersectio": "nadsekcia",
   "taxonomy_unknown": "neznámy",
-
   "snack_no_flowers": "Filtru nevyhovujú žiadne kvety v databáze.",
   "snack_loading_ad": "Reklama sa stále načítava, stlačte tlačidlo znova.",
   "snack_copy": "Skopírované do schránky",
-
   "search": "Hľadať...",
   "search_names": "Hľadať v názvoch",
   "search_taxonomy": "Hľadať v taxonómii",
-
   "observation": "Pozorovanie",
   "observations": "Pozorovania",
   "observation_note": "Miesto pre vaše súkromné poznámky.",
@@ -321,7 +296,6 @@
   "observation_rank": "Poradie",
   "observation_observers": "Pozorovatelia",
   "observation_countries": "Pozorovania podľa krajín",
-
   "subscription": "Predplatné",
   "subscription_info": "Zdieľané pozorovania sú prístupné iba používateľom s predplatným.",
   "subscription_intro1": "Dátum, miesto a poznámka k pozorovaniu sa automaticky ukladajú a sú dostupné na všetkých zariadeniach bez predplatného. Na druhej strane fotografie sú uložené iba lokálne. Po vymazaní dát, preinštalovaní aplikácie alebo výmene mobilu sa fotografie pri pozorovaniach ďalej nezobrazujú (tie, ktoré boli odfotené priamo v aplikácii, sa dokonca vymažú).",
@@ -331,32 +305,24 @@
   "subscription_period_year": "rok",
   "subscription_disclaimer_android": "Prvá platba bude zaúčtovaná na váš účet Google 30 dní po potvrdení nákupu. Predplatné sa automaticky obnovuje, pokiaľ nie je zrušené najmenej 24 hodín pred koncom aktuálneho obdobia. Nové predplatné bude zúčtované do 24 hodín pred koncom aktuálneho obdobia. Svoje predplatné môžete spravovať a zrušiť v nastaveniach účtu v obchode Google Play.",
   "subscription_disclaimer_ios": "Platba bude zaúčtovaná na váš účet Apple ID po potvrdení nákupu. Predplatné sa automaticky obnovuje, pokiaľ nie je zrušené najmenej 24 hodín pred koncom aktuálneho obdobia. Nové predplatné bude zúčtované do 24 hodín pred koncom aktuálneho obdobia. Svoje predplatné môžete spravovať a zrušiť v nastaveniach účtu v App Store.",
-
   "terms_of_use": "Podmienky používania",
   "privacy_policy": "Zásady ochrany osobných údajov",
-
   "promotion_title": "Platená funkcia",
   "promotion_content": "Toto je platená funkcia. Voľne dostupná bude do {date}.",
-
   "no_connection_title": "Pripojenie",
   "no_connection_content": "Táto funkcia bez pripojenia na internet nefunguje.",
-
   "photo_search_no_login": "Vyhľadávanie podľa fotografie je dostupné iba pre prihlásených používateľov. Prihláste sa, prosím.",
   "photo_search_note": "Toto je funkcia, ktorá funguje iba online. Niekedy nájde presne to, čo hľadáte, niekedy sa ani nepriblíži. Úplne sa v tom spolieham na tretiu stranu, keďže ide o jej softvér. Časom by sa to malo zlepšovať. Používajte ju uvážlivo a, prosím, nehodnoťte celú aplikáciu na základe tejto funkcie. S cieľom zvyšovať kvalitu budú všetky výsledky vyhľadávania (nie fotografie) uložené.",
   "photo_search_empty": "Umelá inteligencia na obrázku nerozoznala žiadnu konkrétnu kvetinu. Skúste to znova z iného uhla, vzdialenosti alebo za iných svetelných podmienok. Ak ste to už urobili, vyzerá to tak, že nadvláda umelej inteligencie tak skoro nepríde.",
-
   "notification": "Notifikácia",
   "notification_open": "Otvoriť",
   "notification_close": "Zatvoriť",
-
   "custom_lists": "Zoznamy kvetov",
   "new_flowers": "Nové kvety",
   "common_lists": "Spoločné zoznamy",
-
   "favorite_title": "Obľúbené kvety",
   "favorite_empty": "Zatiaľ nemáte žiadne obľúbené kvety.",
   "favorite_no_login": "Zoznam obľúbených kvetov je dostupný len pre prihlásených používateľov. Prihláste sa, prosím.",
-
   "guide_new_today": "Dnes",
   "guide_new_yesterday": "Včera",
   "guide_notes": "Zaujímavosti",
@@ -433,7 +399,7 @@
   "guide_in_flower_now": "Kvitne teraz · {count}",
   "guide_other_months": "Iné mesiace · {count}",
   "guide_photos": "Fotografie",
-  "guide_plates": "Tabule",
+  "guide_plates": "Ilustrácie",
   "guide_seen_mark": "✓ Nájdené",
   "guide_results_missing": "Nie je tu?",
   "guide_region_title": "Kde hľadáš?",
@@ -452,7 +418,7 @@
   "guide_region_antarctic": "Antarktída",
   "guide_back": "Späť",
   "guide_share": "Zdieľať",
-  "guide_plate": "Tabuľa",
+  "guide_plate": "Ilustrácia",
   "guide_photo_one": "1 fotografia",
   "guide_photo_count": "{count} fotografií",
   "guide_video": "Video",
@@ -674,14 +640,14 @@
   "guide_field_guide_disclaimer_ios": "Platba sa zaúčtuje na tvoje Apple ID. Predplatné sa automaticky obnovuje, pokiaľ ho nezrušíš aspoň 24 hodín pred koncom obdobia. Spravovať alebo zrušiť ho môžeš v App Store.",
   "guide_offline_title": "Režim offline",
   "guide_offline_back": "Účet",
-  "guide_offline_intro": "Fotografie, tabule a mapy rozšírenia uložené v tomto telefóne. Texty sa stiahnu spolu s nimi. Druh, ktorý rastie vo viacerých oblastiach, sa uloží iba raz, takže dva balíky zaberú menej miesta než ich súčet. Sťahovanie prebieha cez Wi-Fi.",
+  "guide_offline_intro": "Fotografie, ilustrácie a mapy rozšírenia uložené v tomto telefóne. Texty sa stiahnu spolu s nimi. Druh, ktorý rastie vo viacerých oblastiach, sa uloží iba raz, takže dva balíky zaberú menej miesta než ich súčet. Sťahovanie prebieha cez Wi-Fi.",
   "guide_offline_upsell_title": "Terénny sprievodca uchová atlas offline",
   "guide_offline_upsell_body": "Hľadanie, kľúč a každá stránka druhu zostávajú zadarmo, pokiaľ máš pripojenie na internet.",
   "guide_offline_see": "Pozrieť Terénneho sprievodcu",
   "guide_offline_downloading": "Sťahuje sa {name}",
   "guide_offline_pause": "Prerušiť",
   "guide_offline_progress": "{done} MB z asi {total} MB · {plants}",
-  "guide_offline_progress_note": "Fotografie, tabule a mapy. Túto obrazovku môžeš opustiť.",
+  "guide_offline_progress_note": "Fotografie, ilustrácie a mapy. Túto obrazovku môžeš opustiť.",
   "guide_offline_on_phone": "V tomto telefóne",
   "guide_offline_kept": "{title} · {plants} · {size}",
   "guide_offline_remove": "Odstrániť",

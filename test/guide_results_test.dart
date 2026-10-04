@@ -436,7 +436,7 @@ void main() {
     expect(find.text('Where are you looking?'), findsOneWidget);
     expect(
       find.text(
-        'Narrows these 4 plants to those native or naturalized there.',
+        'Narrows 4 plants to those native or naturalized there.',
       ),
       findsOneWidget,
     );
@@ -467,7 +467,7 @@ void main() {
     expect(find.text('Daisy'), findsOneWidget);
     expect(find.text('Yarrow'), findsNothing);
     expect(
-      find.text('1 plants in Middle Europe', findRichText: true),
+      find.text('1 plant in Middle Europe', findRichText: true),
       findsOneWidget,
     );
   });
