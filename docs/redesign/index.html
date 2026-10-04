@@ -176,9 +176,9 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .cell .mo{font-size:11px;color:var(--gold);margin-top:2px}
 .gridad{grid-column:1/-1;margin:2px 0}
 .seenmark{display:inline-block;margin-top:3px;font-size:11px;font-weight:600;color:var(--moss)}
-.seenby{display:flex;align-items:center;gap:10px;margin:12px 20px 0;padding:10px 12px;border-radius:12px;background:var(--cream);border:1px solid var(--rule);font-size:14px;width:calc(100% - 40px)}
+.seenby{display:flex;align-items:center;gap:10px;margin:12px 20px 0;padding:10px 12px;border-radius:12px;background:var(--cream);border:1px solid var(--rule);font-size:14px;line-height:1.2;width:calc(100% - 40px);text-align:start}
 .seenby .th{width:36px;height:36px;border-radius:8px;background:var(--ph) center/cover;flex:none}
-.seenby b{color:var(--moss)}
+.seenby b{display:block;color:var(--moss)}
 .gridad .ad{margin:0}
 .monthrow{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .monthrow .seg{margin:0;text-transform:none;letter-spacing:0}
@@ -211,6 +211,8 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .gal .track::-webkit-scrollbar{display:none}
 .gal .slide{flex:none;width:100%;height:100%;scroll-snap-align:start;background:var(--ph) center/cover}
 .gal .slide.plate{background-color:var(--plate);background-size:contain;background-repeat:no-repeat}
+.gal .slide.video{display:flex;align-items:flex-end;background:var(--paper-2);padding:0 0 50px}
+.gal .slide.video iframe{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
 .gal .over{position:absolute;top:10px;left:12px;right:12px;display:flex;justify-content:space-between}
 .gal .over .iconbtn{background:var(--wash);border:0}
 .gal .ctr{position:absolute;bottom:12px;left:12px;display:flex;gap:6px}
@@ -531,6 +533,7 @@ const NOW_MONTH=9;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const cap=s=>s?s[0].toUpperCase()+s.slice(1):s;
 const fmt=n=>n.toLocaleString('en');
+const plantPhrase=n=>`${fmt(n)} ${n===1?'plant':'plants'}`;
 
 const I={
   search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>',
@@ -615,7 +618,7 @@ const SCREENS=[
   ['notplant','Not a plant','Plant.id says it’s probably not a plant. Nothing saved, the name isn’t used.'],
   ['outside','Outside the book','Likely name, two candidates, curated look-alikes open full pages.'],
   ['speciesCam','Species from camera','Oxeye daisy, with the unconfirmed Seen bar.'],
-  ['species','Species page','Order and family, in English, above the name. Toxicity sits with height, above the flowering months. Notes after the description, Uses after the morphology. Flower and Inflorescence open the diagrams. No ads.'],
+  ['species','Species page','Order and family, in English, above the name. Seen by you is two lines. The gallery is photos, then the plate, then Video when the plant has one. Toxicity sits with height, above the flowering months. Notes after the description, Uses after the morphology. Flower and Inflorescence open the diagrams. No ads.'],
   ['flower','Flower schema','A typical complete flower. The numbers on the plate match the list.'],
   ['inflorescence','Inflorescences','Seventeen types. Opened from oxeye daisy, head is marked.'],
   ['seen','Seen','To confirm first, then the notebook by month. Delete on a confirmed find asks first. Hide shared drops accepted Sightings from this list.'],
@@ -668,7 +671,7 @@ function fmtDate(d){const [y,m,dd]=d.split('-');return `${+dd} ${MONTH_NAMES[+m-
 function listStrip(){
   return `<div class="strip lstrip">${allLists().map(l=>{
     const e=l.items[0];
-    const k=l.isNew?`Latest ${fmtDate(D.lists_new[0].d)}`:isYearList(l)?`${l.items.length} years · ${e.y}`:`${l.items.length} plants`;
+    const k=l.isNew?`Latest ${fmtDate(D.lists_new[0].d)}`:isYearList(l)?`${l.items.length} years · ${e.y}`:plantPhrase(l.items.length);
     return `<button class="lc ${l.isNew?'new':''}" data-list="${l.key}"><div class="cover" style="background-image:url('${PH(e.ph)}')"><i></i><b>${esc(l.t)}</b></div><div class="k">${esc(k)}</div></button>`}).join('')}</div>`;
 }
 function listScreen(){
@@ -689,7 +692,7 @@ function listScreen(){
   }
   const src=l.src?` · <a href="${esc(l.src)}" target="_blank">${esc(l.src.replace(/^https?:\/\/(www\.)?/,'').split('/')[0])} ↗</a>`:'';
   const seenN=l.items.filter(e=>seenNames().has(e.n)).length;
-  const sub=(year?`${l.items.length} years, newest first${src}`:l.isNew?`The last ${l.items.length} plants added to the book${src}`:`${l.items.length} plants${src}`)+(seenN?` · you’ve seen ${seenN}`:'');
+  const sub=(year?`${l.items.length===1?'1 year, newest first':l.items.length+' years, newest first'}${src}`:l.isNew?`The last ${plantPhrase(l.items.length)} added to the book${src}`:`${plantPhrase(l.items.length)}${src}`)+(seenN?` · you’ve seen ${seenN}`:'');
   return `<div class="back" data-go="${st.listBack||'find'}">${I.back}${st.listBack=='book'?'Book':'Find'}</div>
   <div class="lhead"><span class="eyebrow">${st.listLang=='de'?'Blumenlisten':'Lists of flowers'}</span><h1>${esc(l.t)}</h1><div class="meta">${sub}</div></div>
   <div class="filterbar"><div class="seg" style="margin-left:0"><button class="${st.view=='photo'?'on':''}" data-view="photo">Photos</button><button class="${st.view=='plate'?'on':''}" data-view="plate">Plates</button></div></div>
@@ -789,7 +792,7 @@ function resultsScreen(){
   const seenIn=list.filter(p=>seen.has(p.n)).length;
   return `<div class="back" data-go="petal">${I.back}Petals</div>
   ${trail(4)}
-  <div class="reshead" style="margin-top:14px"><div class="count">${list.length} <small>plants${st.region?` in ${esc(reg)}`:''}${seenIn?` · you’ve seen ${seenIn}`:''}</small></div></div>
+  <div class="reshead" style="margin-top:14px"><div class="count">${list.length} <small>${list.length===1?'plant':'plants'}${st.region?` in ${esc(reg)}`:''}${seenIn?` · you’ve seen ${seenIn}`:''}</small></div></div>
   <div class="filterbar"><button class="pill ${st.region?'set':''}" data-sheet="region">${st.regionFromLoc?I.pin:''}${esc(reg)} ${I.down}</button>
     <button class="pill ${st.wild?'set':''}" data-wild="1">${st.wild?'Wild only':'Wild and garden'}</button></div>
   <div class="grid">${cells.join('')}</div>
@@ -798,7 +801,7 @@ function resultsScreen(){
 function regionSheet(){
   const r=Object.entries(D.regions);
   return `<div class="scrim" data-close="1"><div class="sheet" data-stop="1"><div class="grab"></div>
-  <h2>Where are you looking?</h2><p>Narrows these ${D.plants.length} plants to those native or naturalized there.</p>
+  <h2>Where are you looking?</h2><p>Narrows ${plantPhrase(D.plants.length)} to those native or naturalized there.</p>
   <button class="locbtn" data-loc="1">${I.pin}<div><b>Use this phone’s location</b><span>${st.loc===false?'Location was refused. Change it in Settings.':'Asked once, now. Only the region is kept.'}</span></div></button>
   <button class="radio ${!st.region?'on':''}" data-region=""><span class="c"></span><span class="l">Any region</span><span class="n">${D.plants.length}</span></button>
   ${r.map(([k,[n,c]])=>`<button class="radio ${st.region==k?'on':''}" data-region="${k}"><span class="c"></span><span class="l">${esc(n)}</span><span class="n">${c}</span></button>`).join('')}
@@ -841,7 +844,8 @@ function outsideScreen(){
 }
 function speciesScreen(){
   const s=D.sp[st.sp]||D.sp['Leucanthemum vulgare'];
-  const slides=s.ph.map(u=>`<div class="slide" style="background-image:url('${PH(u)}')"></div>`).join('')+`<div class="slide plate" style="background-image:url('${PLATE_L(s.pl)}')"></div>`;
+  const vids=s.vid||[];
+  const slides=s.ph.map(u=>`<div class="slide" style="background-image:url('${PH(u)}')"></div>`).join('')+`<div class="slide plate" style="background-image:url('${PLATE_L(s.pl)}')"></div>`+vids.map(id=>`<div class="slide video"><iframe src="https://www.youtube-nocookie.com/embed/${esc(id)}" title="Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`).join('');
   const rankLat=suffix=>((Object.entries(s.apg).find(([k])=>k.endsWith('_'+suffix))||[])[1])||'';
   const fam=rankLat('Familia'), orderLat=rankLat('Ordo');
   const famV=(D.fams.find(f=>f.f==fam)||{}).v;
@@ -861,10 +865,10 @@ function speciesScreen(){
      :`<div class="seenbar"><span class="th" style="background-image:url('${st.inBook?PH(s.ph[1]):USERSHOT}')"></span><span class="tx"><b>Your photo · unconfirmed</b>Today 14:31 · ${st.loc?'Middle Europe':'no place'}</span><button class="btn madder" data-confirmsp="1">It’s this</button><button class="btn" style="color:#fff;border:1px solid #fff5" data-sheet="other">Not it</button></div>`):'';
   return `<div class="gal"><div class="track" id="track">${slides}</div>
     <div class="over"><button class="iconbtn" data-goback="1">${I.back}</button><button class="iconbtn" data-toast="Share: whatsthatflower.org page">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 8l5-5 5 5M5 14v6h14v-6"/></svg>'}</button></div>
-    <div class="ctr"><button class="pill" data-slide="0">${s.ph.length} photos</button><button class="pill" data-slide="${s.ph.length}">Plate</button></div></div>
+    <div class="ctr"><button class="pill" data-slide="0">${s.ph.length===1?'1 photo':s.ph.length+' photos'}</button><button class="pill" data-slide="${s.ph.length}">Plate</button>${vids.length?`<button class="pill" data-slide="${s.ph.length+1}">Video</button>`:''}</div></div>
   <div class="namebox">${ranks.length?`<div class="ranks">${ranks.map(esc).join(' · ')}</div>`:''}<h1>${esc(cap(s.l||s.n))}</h1><div class="la latin">${esc(s.n)} <span class="au">${esc(s.a||'')}</span></div>
     ${s.names&&s.names.length?`<div class="aka">Also ${s.names.map(esc).join(', ')}</div>`:''}</div>
-  ${(()=>{const rs=st.seen.filter(r=>!r.u&&r.n==s.n);if(cam)return '';return (rs.length?`<button class="seenby" data-tab="seen"><span class="th" style="background-image:url('${rs[0].ph}')"></span><span><b>Seen by you</b> · ${rs.length==1?'once':rs.length+' times'}, last ${esc(rs[0].when)}</span></button>`:'')+`<div class="addseen"><button class="btn ghost small" data-addseen="${esc(s.n)}">+ Add to Seen</button><span class="hint" style="margin-left:8px">From your photos. Free.</span></div>`})()}
+  ${(()=>{const rs=st.seen.filter(r=>!r.u&&r.n==s.n);if(cam)return '';return (rs.length?`<button class="seenby" data-tab="seen"><span class="th" style="background-image:url('${rs[0].ph}')"></span><span><b>Seen by you</b>${rs.length==1?'once':rs.length+' times'}, last ${esc(rs[0].when)}</span></button>`:'')+`<div class="addseen"><button class="btn ghost small" data-addseen="${esc(s.n)}">+ Add to Seen</button><span class="hint" style="margin-left:8px">From your photos. Free.</span></div>`})()}
   <div class="facts"><div><div class="k">Height</div><div class="v">${s.h[0]}–${s.h[1]} cm</div></div><div><div class="k">Toxicity</div><div class="v${toxClass?' warn':''}">${toxLabel}</div></div>
     <div class="wide"><div class="k">Flowers ${MONTH_NAMES[s.fl[0]-1]}–${MONTH_NAMES[s.fl[1]-1]}</div><div class="months">${months}</div></div></div>
   <div class="jump">${jumps.map(([k,l])=>`<button class="pill" data-jump="${k}">${l}</button>`).join('')}<button class="pill" data-jump="taxonomy">Taxonomy</button><button class="pill" data-jump="dist">Distribution</button><button class="pill" data-jump="sightings">Sightings</button></div>
@@ -940,7 +944,7 @@ function bookScreen(){
   let body='';
   if(seg=='fam') body=D.fams.slice(0,30).map(f=>`<button class="srow" data-toast="Family page: ${esc(f.f)}"><span class="th fam" style="background-image:url('${FAMI(f.f)}')"></span><span class="tx"><b>${esc(cap(f.v||f.f))}</b><span class="latin">${esc(f.f)}</span></span><span class="k">${f.k}</span></button>`).join('');
   if(seg=='gen') body=D.genera.slice(0,30).map(g=>`<button class="srow" data-toast="Genus page: ${esc(g.g)}"><span class="th fam" style="background-image:url('${FAMI(g.f)}')"></span><span class="tx"><b>${esc(cap(g.v||g.g))}</b><span class="latin">${esc(g.g)}</span></span><span class="k">${g.k}</span></button>`).join('');
-  if(seg=='lists') body=`<div class="lists">${allLists().map(l=>`<button class="lcard ${l.isNew?'new':''}" data-list="${l.key}"><div class="thumbs">${l.items.slice(0,4).map(e=>`<i style="background-image:url('${PH(e.ph)}')"></i>`).join('')}</div><b>${esc(l.t)}</b><span>${l.isNew?`${l.items.length} plants · latest ${fmtDate(D.lists_new[0].d)}`:isYearList(l)?`${l.items.length} years · ${l.items[l.items.length-1].y}–${l.items[0].y}`:`${l.items.length} plants`}</span></button>`).join('')}</div>`;
+  if(seg=='lists') body=`<div class="lists">${allLists().map(l=>`<button class="lcard ${l.isNew?'new':''}" data-list="${l.key}"><div class="thumbs">${l.items.slice(0,4).map(e=>`<i style="background-image:url('${PH(e.ph)}')"></i>`).join('')}</div><b>${esc(l.t)}</b><span>${l.isNew?`${plantPhrase(l.items.length)} · latest ${fmtDate(D.lists_new[0].d)}`:isYearList(l)?`${l.items.length} years · ${l.items[l.items.length-1].y}–${l.items[0].y}`:plantPhrase(l.items.length)}</span></button>`).join('')}</div>`;
   return `<div class="top"><div><div class="wm">Book</div><div class="hint" style="margin:2px 0 0">${fmt(D.total)} plants · ${D.fams.length} families</div></div><button class="iconbtn" data-go="search">${I.search}</button></div>
   <div class="segwide"><button class="${seg=='fam'?'on':''}" data-seg="fam">Families</button><button class="${seg=='gen'?'on':''}" data-seg="gen">Genera</button><button class="${seg=='lists'?'on':''}" data-seg="lists">Lists</button></div>
   ${body}${st.fg?'':'<div class="ad">Banner ad · free accounts only</div>'}`;

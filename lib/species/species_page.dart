@@ -1316,19 +1316,30 @@ class _SeenByYou extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: Text.rich(TextSpan(
-                    style: TextStyle(fontSize: 14, color: colors.ink),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      TextSpan(
-                        text: strings.guide_seen_by_you,
+                      Text(
+                        strings.guide_seen_by_you,
                         style: TextStyle(
+                          fontSize: 14,
+                          height: 1.2,
                           color: colors.moss,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      if (detail.isNotEmpty) TextSpan(text: ' · $detail'),
+                      if (detail.isNotEmpty)
+                        Text(
+                          detail,
+                          style: TextStyle(
+                            fontSize: 14,
+                            height: 1.2,
+                            color: colors.ink,
+                          ),
+                        ),
                     ],
-                  )),
+                  ),
                 ),
               ],
             ),
