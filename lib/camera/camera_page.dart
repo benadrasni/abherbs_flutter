@@ -52,6 +52,12 @@ class GuideCameraPage extends StatefulWidget {
   /// When set, this reads the date of a roll photo. Production leaves it
   /// empty and reads the date from the photo.
   final Future<DateTime?> Function(String path)? photoTakenAt;
+
+  /// When set, this reads the EXIF GPS of a roll photo.
+  final Future<GuidePhotoPosition?> Function(String path)? photoPosition;
+
+  /// When set, this reads the phone's position for a shutter photo.
+  final Future<GuidePhotoPosition?> Function()? phonePosition;
   final Future<void> Function()? onWatchAd;
   final Future<void> Function()? onSignIn;
   final Future<void> Function()? onFieldGuide;
@@ -74,6 +80,8 @@ class GuideCameraPage extends StatefulWidget {
     this.pickPhoto,
     this.identify,
     this.photoTakenAt,
+    this.photoPosition,
+    this.phonePosition,
     this.onWatchAd,
     this.onSignIn,
     this.onFieldGuide,
@@ -100,6 +108,10 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   /// EXIF date of a photo chosen from the roll. A shutter photo leaves this
   /// empty and the find uses the current time.
   DateTime? _shotWhen;
+
+  /// EXIF GPS of the photo. A shutter photo without GPS falls back to the
+  /// phone's position.
+  GuidePhotoPosition? _shotPosition;
   _Sheet? _sheet;
   bool _notPlantCounted = false;
   RewardedAd? _rewardedAd;
@@ -230,6 +242,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       _sheet = null;
       _shotPath = null;
       _shotWhen = null;
+      _shotPosition = null;
     });
     unawaited(_resumePreview());
   }
@@ -447,6 +460,12 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     return image.path;
   }
 
+  Future<GuidePhotoPosition?> _phonePosition() async {
+    final position = await locateGuidePhone();
+    if (position == null) return null;
+    return guidePhotoPosition(position.latitude, position.longitude);
+  }
+
   Future<String?> _takePreviewPicture() async {
     final camera = _camera;
     if (camera == null ||
@@ -603,6 +622,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   Future<void> _pushOutside(GuideCameraOutcome outcome) async {
     final shot = _shotPath;
     final when = _shotWhen ?? DateTime.now();
+    final position = _shotPosition;
     final place = await _placeLabel();
     if (!mounted) return;
     final plant = _outsidePlant(outcome);
@@ -615,6 +635,8 @@ class _GuideCameraPageState extends State<GuideCameraPage>
           photoPath: shot,
           when: when,
           place: place,
+          latitude: position?.latitude ?? 0,
+          longitude: position?.longitude ?? 0,
           onSave: saveGuideCameraFind,
           onConfirm: (id) => setGuideCameraConfirmed(
             id: id,
@@ -671,12 +693,15 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   }) async {
     final shot = _shotPath;
     final when = _shotWhen ?? DateTime.now();
+    final position = _shotPosition;
     final place = await _placeLabel();
     if (!mounted) return;
     final id = await saveGuideCameraFind(GuideCameraDraft(
       plant: name,
       when: when,
       shotPath: shot,
+      latitude: position?.latitude ?? 0,
+      longitude: position?.longitude ?? 0,
       candidates: guideCameraCandidateMaps([
         GuideCameraHit(
           latin: name,
@@ -783,6 +808,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     setState(() {
       _shotPath = null;
       _shotWhen = null;
+      _shotPosition = null;
     });
     await _startPreview();
   }
@@ -806,16 +832,28 @@ class _GuideCameraPageState extends State<GuideCameraPage>
         _naming = true;
         _shotPath = path;
         _shotWhen = null;
+        _shotPosition = null;
         _sheet = null;
       });
+      final phone = source == GuideCameraSource.camera &&
+              _place != GuideCameraPlace.declined
+          ? (widget.phonePosition ?? _phonePosition)()
+          : null;
       if (source == GuideCameraSource.gallery) {
         final read = widget.photoTakenAt ?? guideCameraPhotoTakenAt;
         _shotWhen = await read(path);
         if (!mounted) return;
       }
+      final locate = widget.photoPosition ?? guideCameraPhotoPosition;
+      _shotPosition = await locate(path);
+      if (!mounted) return;
       final identify = widget.identify ?? _identifyDefault;
       final outcome = await identify(path);
       if (!mounted) return;
+      if (_shotPosition == null && phone != null) {
+        _shotPosition = await phone;
+        if (!mounted) return;
+      }
       setState(() => _naming = false);
       switch (outcome.kind) {
         case GuideCameraOutcomeKind.species:

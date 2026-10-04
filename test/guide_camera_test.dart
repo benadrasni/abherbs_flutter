@@ -585,6 +585,24 @@ void main() {
     expect(await guideCameraPhotoTakenAt('${dir.path}/missing.jpg'), isNull);
   });
 
+  test('a photo position is its EXIF GPS, or nothing', () async {
+    expect(guidePhotoPosition(48.15, 17.11),
+        (latitude: 48.15, longitude: 17.11));
+    expect(guidePhotoPosition(-33.9, -70.6),
+        (latitude: -33.9, longitude: -70.6));
+    expect(guidePhotoPosition(0, 0), isNull);
+    expect(guidePhotoPosition(double.nan, 17.11), isNull);
+    expect(guidePhotoPosition(91, 17.11), isNull);
+    expect(guidePhotoPosition(48.15, 181), isNull);
+
+    final dir = await Directory.systemTemp.createTemp('wtf-photo-position');
+    addTearDown(() => dir.delete(recursive: true));
+    final dated = File('${dir.path}/dated.jpg');
+    await dated.writeAsBytes(base64Decode(_datedJpeg));
+    expect(await guideCameraPhotoPosition(dated.path), isNull);
+    expect(await guideCameraPhotoPosition('${dir.path}/missing.jpg'), isNull);
+  });
+
   testWidgets('naming a photo from the roll uses the photo date',
       (tester) async {
     await _show(
@@ -630,6 +648,85 @@ void main() {
 
     expect(find.text('Just now'), findsOneWidget);
     expect(find.text('Jun 12, 2024'), findsNothing);
+  });
+
+  group('the place saved with a photo', () {
+    const photoGps = (latitude: 48.15, longitude: 17.11);
+    const phoneGps = (latitude: 50.08, longitude: 14.42);
+
+    Future<GuideOutsidePage> nameIt(
+      WidgetTester tester, {
+      required Key button,
+      GuideCameraPlace place = GuideCameraPlace.allowed,
+      GuidePhotoPosition? fromPhoto,
+      void Function()? onPhone,
+    }) async {
+      await _show(
+        tester,
+        _page(
+          allowance: GuideAllowance.credits(3),
+          place: place,
+          pickPhoto: (_) async => '/tmp/shot.jpg',
+          photoTakenAt: (_) async => null,
+          photoPosition: (_) async => fromPhoto,
+          phonePosition: () async {
+            onPhone?.call();
+            return phoneGps;
+          },
+          identify: (_) async => const GuideCameraOutcome.outside(
+            GuideCameraHit(latin: 'Rare plant', probability: 0.8),
+            [],
+          ),
+        ),
+      );
+      await tester.tap(find.byKey(button));
+      await tester.pumpAndSettle();
+      return tester.widget<GuideOutsidePage>(find.byType(GuideOutsidePage));
+    }
+
+    testWidgets('a shutter photo without GPS uses the phone', (tester) async {
+      final page = await nameIt(
+        tester,
+        button: const Key('guide-camera-shutter'),
+      );
+      expect(page.latitude, phoneGps.latitude);
+      expect(page.longitude, phoneGps.longitude);
+    });
+
+    testWidgets('a shutter photo with GPS keeps its own', (tester) async {
+      final page = await nameIt(
+        tester,
+        button: const Key('guide-camera-shutter'),
+        fromPhoto: photoGps,
+      );
+      expect(page.latitude, photoGps.latitude);
+      expect(page.longitude, photoGps.longitude);
+    });
+
+    testWidgets('a declined place never reads the phone', (tester) async {
+      var asked = 0;
+      final page = await nameIt(
+        tester,
+        button: const Key('guide-camera-shutter'),
+        place: GuideCameraPlace.declined,
+        onPhone: () => asked++,
+      );
+      expect(asked, 0);
+      expect(page.latitude, 0);
+      expect(page.longitude, 0);
+    });
+
+    testWidgets('a roll photo never uses the phone', (tester) async {
+      var asked = 0;
+      final page = await nameIt(
+        tester,
+        button: const Key('guide-camera-roll'),
+        onPhone: () => asked++,
+      );
+      expect(asked, 0);
+      expect(page.latitude, 0);
+      expect(page.longitude, 0);
+    });
   });
 
   testWidgets('a roll photo with no date uses the current time',
@@ -1021,6 +1118,7 @@ void main() {
       (tester) async {
     var searched = 0;
     String? saved;
+    GuideCameraDraft? draft;
     await _show(
       tester,
       Builder(
@@ -1051,8 +1149,11 @@ void main() {
                       ),
                       when: DateTime(2026, 9, 30, 14, 31),
                       place: 'Middle Europe',
-                      onSave: (draft) async {
-                        saved = draft.plant;
+                      latitude: 48.15,
+                      longitude: 17.11,
+                      onSave: (value) async {
+                        saved = value.plant;
+                        draft = value;
                         return 'obs-1';
                       },
                       onSearch: () => searched += 1,
@@ -1078,6 +1179,8 @@ void main() {
     expect(find.text('Saved to Seen · unconfirmed'), findsOneWidget);
     expect(find.textContaining('Photo,'), findsOneWidget);
     expect(saved, 'Tanacetum corymbosum');
+    expect(draft?.latitude, 48.15);
+    expect(draft?.longitude, 17.11);
 
     await tester.scrollUntilVisible(
       find.byKey(const Key('guide-outside-another')),
@@ -1291,6 +1394,8 @@ GuideCameraPage _page({
   Future<String?> Function(GuideCameraSource source)? pickPhoto,
   Future<GuideCameraOutcome> Function(String path)? identify,
   Future<DateTime?> Function(String path)? photoTakenAt,
+  Future<GuidePhotoPosition?> Function(String path)? photoPosition,
+  Future<GuidePhotoPosition?> Function()? phonePosition,
   Future<void> Function()? onWatchAd,
   Future<void> Function()? onSignIn,
   Future<void> Function()? onFieldGuide,
@@ -1308,6 +1413,8 @@ GuideCameraPage _page({
     pickPhoto: pickPhoto,
     identify: identify,
     photoTakenAt: photoTakenAt,
+    photoPosition: photoPosition ?? (_) async => null,
+    phonePosition: phonePosition ?? () async => null,
     onWatchAd: onWatchAd ?? () async {},
     onSignIn: onSignIn,
     onFieldGuide: onFieldGuide,

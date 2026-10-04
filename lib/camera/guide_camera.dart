@@ -258,11 +258,17 @@ class GuideCameraDraft {
   final String? shotPath;
   final List<Map<String, dynamic>> candidates;
 
+  /// From the photo's EXIF GPS. 0 and 0 means no place.
+  final double latitude;
+  final double longitude;
+
   const GuideCameraDraft({
     required this.plant,
     required this.when,
     required this.candidates,
     this.shotPath,
+    this.latitude = 0,
+    this.longitude = 0,
   });
 }
 
@@ -464,6 +470,38 @@ Future<DateTime?> guideCameraPhotoTakenAt(String path) async {
   }
 }
 
+typedef GuidePhotoPosition = ({double latitude, double longitude});
+
+/// Where this photo was taken, from its EXIF GPS. Null when the file has
+/// no position, or the position cannot be read.
+Future<GuidePhotoPosition?> guideCameraPhotoPosition(String path) async {
+  try {
+    final file = File(path);
+    if (!await file.exists()) return null;
+    final tags = await readExifFromBytes(await file.readAsBytes());
+    final latitude = getLatitudeFromExif(
+      tags['GPS GPSLatitudeRef'],
+      tags['GPS GPSLatitude'],
+    );
+    final longitude = getLongitudeFromExif(
+      tags['GPS GPSLongitudeRef'],
+      tags['GPS GPSLongitude'],
+    );
+    return guidePhotoPosition(latitude, longitude);
+  } catch (error) {
+    debugPrint('guide camera photo position: $error');
+    return null;
+  }
+}
+
+/// Null for 0, 0 (no GPS) and for values off the globe.
+GuidePhotoPosition? guidePhotoPosition(double latitude, double longitude) {
+  if (!latitude.isFinite || !longitude.isFinite) return null;
+  if (latitude == 0 && longitude == 0) return null;
+  if (latitude.abs() > 90 || longitude.abs() > 180) return null;
+  return (latitude: latitude, longitude: longitude);
+}
+
 /// `yyyy:MM:dd HH:mm:ss` as written in EXIF. The clock is the photo's own
 /// local time. Null when the text is not that shape.
 DateTime? guideCameraExifDate(String? raw) {
@@ -505,6 +543,8 @@ Future<String?> saveGuideCameraFind(GuideCameraDraft draft) async {
     final observation = Observation(draft.plant);
     observation.id = '${user.uid}_$millis';
     observation.date = draft.when;
+    observation.latitude = draft.latitude;
+    observation.longitude = draft.longitude;
     observation.note = '';
     observation.photoPaths = [
       if (relative != null) relative,

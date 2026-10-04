@@ -15,6 +15,10 @@ class GuideOutsidePage extends StatefulWidget {
   final String? photoPath;
   final DateTime when;
   final String place;
+
+  /// From the photo's EXIF GPS. 0 and 0 means no place.
+  final double latitude;
+  final double longitude;
   final Future<String?> Function(GuideCameraDraft draft)? onSave;
   final Future<void> Function(String id)? onConfirm;
   final Future<void> Function(String id)? onDelete;
@@ -35,6 +39,8 @@ class GuideOutsidePage extends StatefulWidget {
     required this.when,
     required this.place,
     this.photoPath,
+    this.latitude = 0,
+    this.longitude = 0,
     this.onSave,
     this.onConfirm,
     this.onDelete,
@@ -82,6 +88,8 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
       plant: _plant,
       when: widget.when,
       shotPath: widget.photoPath,
+      latitude: widget.latitude,
+      longitude: widget.longitude,
       candidates: guideCameraCandidateMaps([
         if (leading != null) leading,
         ...widget.outcome.candidates,
