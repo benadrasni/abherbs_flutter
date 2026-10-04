@@ -23,12 +23,9 @@ dependencies:
   firebase_performance: 0.11.6
   firebase_app_check: 0.4.8
   cloud_functions: 6.5.0
-  google_maps_flutter: 2.18.2
-  google_maps_flutter_ios_sdk10: 2.19.0
   google_mobile_ads: 9.1.0
   google_sign_in: 7.2.0
   sign_in_with_apple: 8.2.0
-  device_info_plus: 13.2.0
   in_app_purchase: 3.3.1
   in_app_update: 5.0.0
   cached_network_image: 4.0.2
@@ -38,23 +35,17 @@ dependencies:
   fluttertoast: 10.0.0
   diacritic: 0.1.6
   path_provider: 2.1.6
-  percent_indicator: 4.2.5
-  package_info_plus: 10.2.1
   image_picker: 1.2.3
   camera: 0.12.1
   exif: 3.3.0
   permission_handler: 13.0.2
   geolocator: 14.0.3
   geocoding: 5.0.0
-  datetime_picker_formfield_new: 2.1.0
   connectivity_plus: 7.3.1
   crypto: 3.0.7
   photo_view: 0.15.0
-  youtube_player_iframe: 6.0.2
   app_tracking_transparency: 2.0.7
   country_picker: 2.0.28
-  community_charts_flutter: 1.0.4
-  country_icons: 3.0.0
   wakelock_plus: 1.8.0
   intl_utils: 2.8.16
 
