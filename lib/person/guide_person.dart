@@ -477,6 +477,20 @@ String guideThemeDetail({
   }
 }
 
+/// `Version 9.0.0 (900)`. An empty name or build is left out.
+String guideVersionLine({
+  required String label,
+  required String version,
+  required String build,
+}) {
+  final name = version.trim();
+  final number = build.trim();
+  if (name.isEmpty && number.isEmpty) return '';
+  if (number.isEmpty) return '$label $name';
+  if (name.isEmpty) return '$label $number';
+  return '$label $name ($number)';
+}
+
 class GuidePersonView {
   final GuidePersonAccount? account;
   final GuideAllowance allowance;

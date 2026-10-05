@@ -53,9 +53,9 @@ class Prefs {
       return false;
     }
     assert(_initCalled,
-    'Prefs.init() must be called first in an initState() preferably!');
+        'Prefs.init() must be called first in an initState() preferably!');
     assert(_prefsInstance != null,
-    'Maybe call Prefs.getBoolF(key) instead. SharedPreferences not ready yet!');
+        'Maybe call Prefs.getBoolF(key) instead. SharedPreferences not ready yet!');
     return _prefsInstance?.getBool(key) ?? defValue ?? false;
   }
 
@@ -97,9 +97,9 @@ class Prefs {
       return 0;
     }
     assert(_initCalled,
-    'Prefs.init() must be called first in an initState() preferably!');
+        'Prefs.init() must be called first in an initState() preferably!');
     assert(_prefsInstance != null,
-    'Maybe call Prefs.getDoubleF(key) instead. SharedPreferences not ready yet!');
+        'Maybe call Prefs.getDoubleF(key) instead. SharedPreferences not ready yet!');
     return _prefsInstance?.getDouble(key) ?? defValue ?? 0.0;
   }
 
@@ -124,9 +124,9 @@ class Prefs {
       return '';
     }
     assert(_initCalled,
-    'Prefs.init() must be called first in an initState() preferably!');
+        'Prefs.init() must be called first in an initState() preferably!');
     assert(_prefsInstance != null,
-    'Maybe call Prefs.getStringF(key)instead. SharedPreferences not ready yet!');
+        'Maybe call Prefs.getStringF(key)instead. SharedPreferences not ready yet!');
     return _prefsInstance?.getString(key) ?? defValue ?? '';
   }
 
@@ -151,9 +151,9 @@ class Prefs {
       return [''];
     }
     assert(_initCalled,
-    'Prefs.init() must be called first in an initState() preferably!');
+        'Prefs.init() must be called first in an initState() preferably!');
     assert(_prefsInstance != null,
-    'Maybe call Prefs.getStringListF(key) instead. SharedPreferences not ready yet!');
+        'Maybe call Prefs.getStringListF(key) instead. SharedPreferences not ready yet!');
     return _prefsInstance?.getStringList(key) ?? defValue ?? [''];
   }
 
@@ -190,6 +190,14 @@ class Prefs {
     }
     final prefs = await instance;
     return prefs.setDouble(key, value);
+  }
+
+  static Future<bool> setInt(String? key, int? value) async {
+    if (key == null || value == null) {
+      return false;
+    }
+    final prefs = await instance;
+    return prefs.setInt(key, value);
   }
 
   static Future<bool> setString(String? key, String? value) async {

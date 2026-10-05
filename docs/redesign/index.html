@@ -445,6 +445,7 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .menu .srow{border-bottom:1px solid var(--rule)}
 .menu .srow svg{width:22px;height:22px;color:var(--moss)}
 .menu .srow.danger svg,.menu .srow.danger b{color:var(--madder)}
+.ver{display:block;width:100%;margin:8px 0 12px;padding:14px 20px 4px;border:0;background:none;font:inherit;font-size:12px;color:var(--ink-3);text-align:center}
 
 /* Offline */
 .pack{display:flex;align-items:flex-start;gap:12px;width:calc(100% - 40px);margin:0 20px 10px;padding:14px;border-radius:16px;background:var(--cream);border:1px solid var(--rule);text-align:left}
@@ -662,7 +663,7 @@ const SCREENS=[
   ['offlineDl','Offline · downloading','Middle Europe, about halfway. The bar is megabytes.'],
   ['offlineHave','Offline · add a region','Middle Europe is kept. The Northeast is ticked, and the bar is only the plants not already stored.'],
   ['signin','Sign in','Apple, Google, email or phone. The first find comes along.'],
-  ['me','Person','Account, allowance, restore, language, theme. Delete account asks first. A guest does not see it.'],
+  ['me','Person','Account, allowance, restore, language, theme. The version sits at the bottom; a tap copies it. Delete account asks first. A guest does not see it.'],
   ['deleteAccount','Person · delete account','The account, observations, photos, and profile go. Purchases stay on this Apple ID and can be restored.'],
 ];
 
@@ -1095,7 +1096,8 @@ function meScreen(){
     <button class="srow" data-go="stats" data-scope="private">${I.chart}<span class="tx"><b>Statistics</b><span>Your finds, and Sightings</span></span></button>
     ${st.signed?`<button class="srow" data-sign="0">${I.person}<span class="tx"><b>Sign out</b><span>Seen stays on this phone</span></span></button>
     <button class="srow danger" data-askdelaccount="1">${I.trash}<span class="tx"><b>Delete account</b><span>Removes the account, finds, and photos</span></span></button>`:''}
-  </div>`;
+  </div>
+  <button class="ver" data-toast="Copied">Version 9.0.0 (900)</button>`;
 }
 
 /* ---------- offline ---------- */

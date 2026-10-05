@@ -133,6 +133,7 @@
   "rate_later": "Later",
   "rate": "Review",
   "new_version": "New version is available, please update.",
+  "version_required": "This version no longer works. Update to keep using the guide.",
   "yes": "Yes",
   "no": "No",
   "close": "Close",

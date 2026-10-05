@@ -133,6 +133,7 @@
   "rate_later": "Plus tard",
   "rate": "Noter",
   "new_version": "Une nouvelle version est disponible, veuillez mettre à jour l'application.",
+  "version_required": "Cette version ne fonctionne plus. Mettez à jour pour continuer à utiliser le guide.",
   "yes": "Oui",
   "no": "Non",
   "close": "Fermer",

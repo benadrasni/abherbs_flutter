@@ -10,7 +10,10 @@ import 'package:abherbs_flutter/species/species_page.dart';
 import 'package:abherbs_flutter/purchase/owned_purchases.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
+import 'package:abherbs_flutter/shell/app_version.dart';
+import 'package:abherbs_flutter/shell/app_version_check.dart';
 import 'package:abherbs_flutter/shell/settings_remote.dart';
+import 'package:abherbs_flutter/shell/version_gate.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/shell/dialogs.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
@@ -113,6 +116,7 @@ void main() {
     initializeFlutterFire().then((_) async {
       WakelockPlus.enable();
       await Prefs.init();
+      await applyRememberedVersionBlock();
       unawaited(Auth.startGuest());
       await AppTrackingTransparency.requestTrackingAuthorization();
       await MobileAds.instance.initialize();
@@ -482,7 +486,34 @@ class _AppState extends State<App> {
       builder: (BuildContext context, Widget? child) {
         return FocusTraversalGroup(
           policy: safeReadingOrderTraversalPolicy,
-          child: child ?? const SizedBox.shrink(),
+          child: ListenableBuilder(
+            listenable: VersionGateController.instance,
+            builder: (context, navigator) {
+              final blocked =
+                  VersionGateController.instance.prompt == VersionPrompt.block;
+              return Stack(
+                children: [
+                  IgnorePointer(
+                    ignoring: blocked,
+                    child: ExcludeFocus(
+                      excluding: blocked,
+                      child: ExcludeSemantics(
+                        excluding: blocked,
+                        child: navigator ?? const SizedBox.shrink(),
+                      ),
+                    ),
+                  ),
+                  if (blocked)
+                    Positioned.fill(
+                      child: VersionRequiredPage(
+                        onUpdate: () => openAppUpdate(requiredUpdate: true),
+                      ),
+                    ),
+                ],
+              );
+            },
+            child: child,
+          ),
         );
       },
       localizationsDelegates: [

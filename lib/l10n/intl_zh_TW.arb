@@ -133,6 +133,7 @@
   "rate_later": "稍後",
   "rate": "評分",
   "new_version": "有新版本可用，請更新。",
+  "version_required": "此版本已無法使用。請更新以繼續使用圖鑑。",
   "yes": "是",
   "no": "不",
   "close": "關閉",

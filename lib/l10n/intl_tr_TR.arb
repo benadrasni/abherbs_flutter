@@ -133,6 +133,7 @@
   "rate_later": "Daha sonra",
   "rate": "Değerlendir",
   "new_version": "Yeni sürüm var, lütfen güncelleyin.",
+  "version_required": "Bu sürüm artık çalışmıyor. Rehberi kullanmaya devam etmek için güncelleyin.",
   "yes": "Evet",
   "no": "Hayır",
   "close": "Kapat",

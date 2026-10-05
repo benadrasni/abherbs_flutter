@@ -133,6 +133,7 @@
   "rate_later": "Myöhemmin",
   "rate": "Arvostele",
   "new_version": "Uusi versio on saatavilla, päivitä.",
+  "version_required": "Tämä versio ei enää toimi. Päivitä, jotta voit jatkaa oppaan käyttöä.",
   "yes": "Joo",
   "no": "Ei",
   "close": "Sulje",

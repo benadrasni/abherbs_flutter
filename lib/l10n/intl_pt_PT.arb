@@ -133,6 +133,7 @@
   "rate_later": "Mais tarde",
   "rate": "Avaliar",
   "new_version": "Está disponível uma nova versão. Por favor, atualize a aplicação.",
+  "version_required": "Esta versão já não funciona. Atualize para continuar a usar o guia.",
   "yes": "Sim",
   "no": "Não",
   "close": "Fechar",

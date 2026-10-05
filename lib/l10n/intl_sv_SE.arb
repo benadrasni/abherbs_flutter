@@ -133,6 +133,7 @@
   "rate_later": "Senare",
   "rate": "Betygsätt",
   "new_version": "Ny version finns tillgänglig, uppdatera.",
+  "version_required": "Den här versionen fungerar inte längre. Uppdatera för att fortsätta använda guiden.",
   "yes": "Ja",
   "no": "Nej",
   "close": "Stäng",

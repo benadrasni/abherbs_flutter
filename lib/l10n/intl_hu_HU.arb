@@ -133,6 +133,7 @@
   "rate_later": "Később",
   "rate": "Értékelés",
   "new_version": "Új verzió elérhető, kérjük, frissítse.",
+  "version_required": "Ez a verzió már nem működik. Frissítsen, hogy tovább használhassa az útmutatót.",
   "yes": "Igen",
   "no": "Nem",
   "close": "Bezár",

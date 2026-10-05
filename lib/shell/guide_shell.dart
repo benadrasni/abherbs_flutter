@@ -7,8 +7,12 @@ import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/seen/guide_private_photos.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
+import 'package:abherbs_flutter/data/prefs.dart';
+import 'package:abherbs_flutter/shell/app_version.dart';
+import 'package:abherbs_flutter/shell/app_version_check.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
+import 'package:abherbs_flutter/shell/version_gate.dart';
 import 'package:abherbs_flutter/seen/seen_page.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
@@ -48,6 +52,10 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   String? _seenWatchUid;
   bool _seenLoadActive = false;
   bool _seenReloadQueued = false;
+  VersionPrompt _versionPrompt = VersionPrompt.none;
+  int? _storeBuild;
+  int _dismissedStore = 0;
+  bool _versionBusy = false;
 
   @override
   void initState() {
@@ -69,6 +77,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     _watchQuota();
     _watchSeenRemote();
     _loadColors();
+    unawaited(_checkVersion());
     _purchaseSub = InAppPurchase.instance.purchaseStream.listen(
       (purchases) {
         final owned = purchases.any((purchase) {
@@ -120,7 +129,53 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state != AppLifecycleState.resumed) return;
     unawaited(syncGuidePrivatePhotos());
+    unawaited(_checkVersion());
     if (_opened.contains(2)) unawaited(_loadSeen());
+  }
+
+  /// A failed fetch keeps a remembered floor closed. The shell only shows
+  /// the soft banner. The hard page is drawn over the navigator.
+  Future<void> _checkVersion() async {
+    if (_versionBusy) return;
+    _versionBusy = true;
+    try {
+      final build = await readAppBuildNumber();
+      if (!mounted) return;
+      final fresh = decideVersion(await readFreshVersionFacts(build));
+      await persistVersionDecision(fresh);
+      VersionGateController.instance.apply(
+        fresh.prompt == VersionPrompt.block
+            ? VersionPrompt.block
+            : VersionPrompt.none,
+      );
+      if (!mounted) return;
+      var prompt = fresh.prompt == VersionPrompt.block
+          ? VersionPrompt.none
+          : fresh.prompt;
+      final store = fresh.storeBuild;
+      if (prompt == VersionPrompt.banner &&
+          store != null &&
+          store == _dismissedStore) {
+        prompt = VersionPrompt.none;
+      }
+      setState(() {
+        _versionPrompt = prompt;
+        _storeBuild = store;
+      });
+    } catch (error) {
+      debugPrint('version check: $error');
+    } finally {
+      _versionBusy = false;
+    }
+  }
+
+  void _dismissVersionBanner() {
+    final store = _storeBuild;
+    if (store != null) {
+      _dismissedStore = store;
+      unawaited(Prefs.setInt(keyVersionBannerDismissed, store));
+    }
+    setState(() => _versionPrompt = VersionPrompt.none);
   }
 
   /// Keeps the signed-in notebook synced. An active listener is what writes
@@ -352,43 +407,55 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
       _loadFinds();
       _loadSeen();
     };
+    final prompt = _versionPrompt;
     return GuideTheme(
       navigationColor: (colors) => colors.cream,
       child: Scaffold(
         body: SafeArea(
           bottom: false,
-          child: IndexedStack(
-            index: _index,
-            sizing: StackFit.expand,
+          child: Column(
             children: [
-              FindPage(
-                colorCounts: _colorCounts,
-                lists: _lists,
-                finds: _finds,
-                allowance: guideCameraLiveAllowance(
-                  guestFree: guideGuestFreeRemaining.value,
+              if (prompt == VersionPrompt.banner)
+                VersionBanner(
+                  onUpdate: () => openAppUpdate(requiredUpdate: false),
+                  onDismiss: _dismissVersionBanner,
                 ),
-                onOpenBook: _openLists,
-                onOpenSeen: () => _go(2),
-              ),
-              _opened.contains(1)
-                  ? BookPage(
+              Expanded(
+                child: IndexedStack(
+                  index: _index,
+                  sizing: StackFit.expand,
+                  children: [
+                    FindPage(
+                      colorCounts: _colorCounts,
                       lists: _lists,
-                      segment: _bookSegment,
-                      onSegment: (segment) {
-                        if (_bookSegment == segment) return;
-                        setState(() => _bookSegment = segment);
-                      },
-                      onOpenFind: () => _go(0),
-                    )
-                  : const SizedBox.shrink(),
-              _opened.contains(2)
-                  ? SeenPage(
-                      finds: _notebook,
-                      signedIn: Auth.appUser != null,
-                      fieldGuide: Purchases.syncsSeenPhotos(),
-                    )
-                  : const SizedBox.shrink(),
+                      finds: _finds,
+                      allowance: guideCameraLiveAllowance(
+                        guestFree: guideGuestFreeRemaining.value,
+                      ),
+                      onOpenBook: _openLists,
+                      onOpenSeen: () => _go(2),
+                    ),
+                    _opened.contains(1)
+                        ? BookPage(
+                            lists: _lists,
+                            segment: _bookSegment,
+                            onSegment: (segment) {
+                              if (_bookSegment == segment) return;
+                              setState(() => _bookSegment = segment);
+                            },
+                            onOpenFind: () => _go(0),
+                          )
+                        : const SizedBox.shrink(),
+                    _opened.contains(2)
+                        ? SeenPage(
+                            finds: _notebook,
+                            signedIn: Auth.appUser != null,
+                            fieldGuide: Purchases.syncsSeenPhotos(),
+                          )
+                        : const SizedBox.shrink(),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

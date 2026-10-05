@@ -133,6 +133,7 @@
   "rate_later": "Senere",
   "rate": "Bedøm",
   "new_version": "Ny version er tilgængelig, opdater venligst.",
+  "version_required": "Denne version virker ikke længere. Opdater for at blive ved med at bruge guiden.",
   "yes": "Ja",
   "no": "Nej",
   "close": "Luk",

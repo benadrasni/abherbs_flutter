@@ -133,6 +133,7 @@
   "rate_later": "Pärast",
   "rate": "Hinda",
   "new_version": "Uus versioon on saadaval, värskendage.",
+  "version_required": "See versioon enam ei tööta. Uuenda, et juhendit edasi kasutada.",
   "yes": "Jah",
   "no": "Ei",
   "close": "Sulge",

@@ -133,6 +133,7 @@
   "rate_later": "Seinere",
   "rate": "Vurder",
   "new_version": "Ny versjon er tilgjengelig, vennligst oppdater.",
+  "version_required": "Denne versjonen virker ikke lenger. Oppdater for å fortsette å bruke guiden.",
   "yes": "Ja",
   "no": "Nei",
   "close": "Lukk",

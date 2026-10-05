@@ -10,7 +10,9 @@ import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 class GuidePersonPage extends StatefulWidget {
@@ -27,6 +29,11 @@ class GuidePersonPage extends StatefulWidget {
   final Future<void> Function(BuildContext context)? onStatistics;
   final ValueChanged<int>? onSelectTab;
 
+  /// When set, the page shows this build instead of reading the package.
+  final String? versionName;
+  final String? buildNumber;
+  final Future<void> Function(String line)? onCopyVersion;
+
   const GuidePersonPage({
     super.key,
     this.view,
@@ -41,6 +48,9 @@ class GuidePersonPage extends StatefulWidget {
     this.onOffline,
     this.onStatistics,
     this.onSelectTab,
+    this.versionName,
+    this.buildNumber,
+    this.onCopyVersion,
   });
 
   @override
@@ -58,10 +68,17 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
   StreamSubscription<dynamic>? _authSub;
   StreamSubscription<DatabaseEvent>? _creditsSub;
   StreamSubscription<List<PurchaseDetails>>? _purchaseSub;
+  String? _versionName;
+  String? _buildNumber;
 
   @override
   void initState() {
     super.initState();
+    _versionName = widget.versionName;
+    _buildNumber = widget.buildNumber;
+    if (widget.versionName == null && widget.buildNumber == null) {
+      unawaited(_loadAppVersion());
+    }
     final initial = widget.view;
     if (initial != null) {
       _view = initial;
@@ -109,6 +126,66 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
       _failed = false;
       GuideAppearanceController.instance.apply(view.appearance);
     }
+    if (widget.versionName != oldWidget.versionName ||
+        widget.buildNumber != oldWidget.buildNumber) {
+      _versionName = widget.versionName;
+      _buildNumber = widget.buildNumber;
+    }
+  }
+
+  Future<void> _loadAppVersion() async {
+    try {
+      final info = await PackageInfo.fromPlatform();
+      if (!mounted) return;
+      setState(() {
+        _versionName = info.version;
+        _buildNumber = info.buildNumber;
+      });
+    } catch (error) {
+      debugPrint('guide version: $error');
+    }
+  }
+
+  Future<void> _copyVersion(String line) async {
+    final copy = widget.onCopyVersion;
+    if (copy != null) {
+      await copy(line);
+      return;
+    }
+    await Clipboard.setData(ClipboardData(text: line));
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(line)));
+  }
+
+  Widget? _versionFooter(BuildContext context) {
+    final line = guideVersionLine(
+      label: S.of(context).version,
+      version: _versionName ?? '',
+      build: _buildNumber ?? '',
+    );
+    if (line.isEmpty) return null;
+    final colors = GuideColors.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 18, 20, 8),
+      child: Center(
+        child: TextButton(
+          key: const Key('guide-version'),
+          onPressed: () => unawaited(_copyVersion(line)),
+          style: TextButton.styleFrom(
+            foregroundColor: colors.ink3,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            minimumSize: Size.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            textStyle: const TextStyle(
+              fontFamily: GuideType.sans,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          child: Text(line),
+        ),
+      ),
+    );
   }
 
   @override
@@ -255,6 +332,7 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
       );
     }
     if (_failed || _view == null) {
+      final version = _versionFooter(context);
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -277,6 +355,7 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
               ),
             ),
           ),
+          if (version != null) version,
         ],
       );
     }
@@ -286,6 +365,7 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
   Widget _content(BuildContext context, GuidePersonView view) {
     final strings = S.of(context);
     final account = view.account;
+    final version = _versionFooter(context);
     return ListView(
       padding: const EdgeInsets.only(bottom: 16),
       children: [
@@ -378,6 +458,7 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
                 : () => _act(widget.onDeleteAccount),
           ),
         ],
+        if (version != null) version,
       ],
     );
   }

@@ -33,6 +33,8 @@ const String keyGuideSeenHideShared = "guide_seen_hide_shared";
 const String keyGuideLocationRefused = "guide_location_refused";
 const String keyGuideLocationAllowed = "guide_location_allowed";
 const String keyGuideTheme = "guide_theme";
+const String keyVersionBlockFloor = "version_block_floor";
+const String keyVersionBannerDismissed = "version_banner_dismissed";
 const String keyGuideOfflinePacks = "guide_offline_packs";
 const String keyGuideOfflineTotal = "guide_offline_total";
 const String keyGuideOfflineStoredPlants = "guide_offline_stored_plants";
@@ -64,6 +66,7 @@ const double maxFontSize = 22;
 const String playStore = "market://details?id=sk.ab.herbs";
 const String appStore =
     "https://itunes.apple.com/us/app/whats-that-flower/id1449982118?mt=8&action=write-review";
+const String appStoreListing = "https://apps.apple.com/app/id1449982118";
 
 const String languageLatin = "la";
 const String languageEnglish = "en";
@@ -267,6 +270,8 @@ const String notificationAttributeUri = "uri";
 const String notificationAttributeName = "name";
 
 const String remoteAdsFrequency = "ads_frequency";
+const String remoteMinAndroidBuild = "min_android_build";
+const String remoteMinIosBuild = "min_ios_build";
 const String remoteConfigIPNIServer = "ipni_server";
 const String remoteConfigIPNIServerWithTaxon = "ipni_server_with_taxon";
 const String remoteConfigSearchByNameVideo = "search_by_name_video";

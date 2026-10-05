@@ -133,6 +133,7 @@
   "rate_later": "Kasneje",
   "rate": "Oceni",
   "new_version": "Na voljo je nova različica, posodobite.",
+  "version_required": "Ta različica ne deluje več. Posodobite, da boste vodnik lahko uporabljali naprej.",
   "yes": "Da",
   "no": "Ne",
   "close": "Zapri",

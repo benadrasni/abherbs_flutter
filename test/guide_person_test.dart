@@ -16,6 +16,25 @@ void main() {
     GuideAppearanceController.instance.resetForTest();
   });
 
+  test('the version line keeps the name and the build number', () {
+    expect(
+      guideVersionLine(label: 'Version', version: '9.0.0', build: '900'),
+      'Version 9.0.0 (900)',
+    );
+    expect(
+      guideVersionLine(label: 'Verzia', version: ' 9.0.0 ', build: '900'),
+      'Verzia 9.0.0 (900)',
+    );
+    expect(
+      guideVersionLine(label: 'Version', version: '9.0.0', build: ''),
+      'Version 9.0.0',
+    );
+    expect(
+      guideVersionLine(label: 'Version', version: '', build: ''),
+      '',
+    );
+  });
+
   test('a name, address, or number supplies the avatar letter', () {
     expect(guideAccountInitial(name: 'ada'), 'A');
     expect(guideAccountInitial(name: '  ', email: 'bea@example.com'), 'B');
@@ -423,6 +442,12 @@ void main() {
     expect(restored, 1);
     expect(language, 1);
     expect(tab, 1);
+
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('guide-version')),
+      80,
+    );
+    expect(find.text('Version 9.0.0 (900)'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 
@@ -493,6 +518,21 @@ void main() {
     expect(signed, 1);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('tapping the version copies the line', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(390, 844));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    String? copied;
+    await tester.pumpWidget(_app(_page(
+      view: _guest(),
+      onCopyVersion: (line) async => copied = line,
+    )));
+
+    await tester.ensureVisible(find.byKey(const Key('guide-version')));
+    await tester.tap(find.byKey(const Key('guide-version')));
+    expect(copied, 'Version 9.0.0 (900)');
+    expect(tester.takeException(), isNull);
+  });
 }
 
 GuidePersonView _guest() {
@@ -558,6 +598,7 @@ Widget _page({
   Future<void> Function(BuildContext context)? onFieldGuide,
   ValueChanged<GuideAppearance>? onAppearance,
   ValueChanged<int>? onSelectTab,
+  Future<void> Function(String line)? onCopyVersion,
 }) {
   return GuidePersonPage(
     view: view,
@@ -569,6 +610,9 @@ Widget _page({
     onFieldGuide: onFieldGuide,
     onAppearance: onAppearance,
     onSelectTab: onSelectTab,
+    onCopyVersion: onCopyVersion,
+    versionName: '9.0.0',
+    buildNumber: '900',
   );
 }
 
