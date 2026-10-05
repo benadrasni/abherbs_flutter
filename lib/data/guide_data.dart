@@ -9,11 +9,13 @@ import 'package:abherbs_flutter/search/guide_search.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
 import 'package:abherbs_flutter/seen/guide_stats.dart';
 import 'package:abherbs_flutter/species/guide_species.dart';
+import 'package:abherbs_flutter/offline/offline.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/widgets.dart';
 
 /// Families opens first. All lists on Find switches to [lists].
@@ -596,22 +598,35 @@ Future<List<GuideSeenFind>> loadGuideSeen(String languageCode) async {
   final value = snapshot.value;
   if (value is! Map) return [];
   final rows = <GuideSeenFind>[];
+  final clouds = <String, bool>{};
   value.forEach((key, raw) {
     final row = readGuideSeenRow(key, raw);
-    if (row != null) rows.add(row);
+    if (row == null) return;
+    rows.add(row);
+    clouds[row.id] = raw is Map && raw[observationPhotoCloud] == true;
   });
   final lang = getLanguageCode(languageCode);
   final faces = <String, _SeenFace>{};
-  await Future.wait(rows.map((row) => row.name).toSet().map((name) async {
-    final needsPhoto = rows.any((row) => row.name == name && !row.ownPhoto);
-    faces[name] = await _seenFace(name, lang, needsPhoto: needsPhoto);
-  }));
+  final attached = <String, bool>{};
+  await Future.wait([
+    ...rows.map((row) => row.name).toSet().map((name) async {
+      final needsPhoto = rows.any((row) => row.name == name && !row.ownPhoto);
+      faces[name] = await _seenFace(name, lang, needsPhoto: needsPhoto);
+    }),
+    ...rows.map((row) async {
+      attached[row.id] = await _photoAttached(
+        row,
+        cloud: clouds[row.id] ?? false,
+      );
+    }),
+  ]);
   final decorated = [
     for (final row in rows)
       row.withCatalog(
         label: faces[row.name]?.label,
         catalogPhoto: faces[row.name]?.photo,
         inBook: faces[row.name]?.inBook ?? false,
+        photoAttached: attached[row.id] ?? false,
       ),
   ];
   decorated.sort((a, b) {
@@ -1144,6 +1159,47 @@ Future<GuideFind> _decorateFind(_RawFind raw, String languageCode) async {
 
 String? _ownPhoto(Map raw) {
   return guideFirstText(raw[observationPhotoPaths]);
+}
+
+/// A stored path is not a photo on a new phone. The file has to be here,
+/// already in private Storage, or already published.
+Future<bool> _photoAttached(GuideSeenFind row, {required bool cloud}) async {
+  if (!row.ownPhoto) return false;
+  final path = row.photoPath;
+  if (path == null || path.isEmpty) return false;
+  final local = await Offline.getLocalFile(path) != null;
+  if (local || cloud) {
+    return guideSeenPhotoAttached(local: local, cloud: cloud, published: false);
+  }
+  return guideSeenPhotoAttached(
+    local: false,
+    cloud: false,
+    published: await _publishedObservationPhoto(path),
+  );
+}
+
+final Map<String, bool> _publishedPhoto = {};
+
+Future<bool> _publishedObservationPhoto(String path) async {
+  if (!path.startsWith(storageObservations)) return false;
+  final known = _publishedPhoto[path];
+  if (known != null) return known;
+  try {
+    await firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket)
+        .ref()
+        .child(path)
+        .getMetadata();
+    return _publishedPhoto[path] = true;
+  } on firebase_storage.FirebaseException catch (error) {
+    if (error.code == 'object-not-found') {
+      return _publishedPhoto[path] = false;
+    }
+    debugPrint('guide seen photo $path: $error');
+    return false;
+  } catch (error) {
+    debugPrint('guide seen photo $path: $error');
+    return false;
+  }
 }
 
 @visibleForTesting

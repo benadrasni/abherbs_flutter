@@ -171,14 +171,13 @@ bool guideCameraNamesExhausted(GuideAllowance allowance) {
 }
 
 GuideAllowance guideCameraLiveAllowance({bool guestFree = false}) {
-  final fieldGuide = Purchases.hasFieldGuide();
+  final fieldGuide = Purchases.namesFieldGuide;
   final signedIn = Auth.appUser != null;
   final count = guideMonthCount.value;
   return guideLiveAllowance(
     signedIn: signedIn,
     subscribed: fieldGuide,
-    unlimitedNames:
-        Purchases.isPhotoSearch() || Purchases.hasLifetimeSubscription,
+    unlimitedNames: Purchases.namesUnlimited,
     noAds: Purchases.isNoAds() || fieldGuide,
     seenSynced: Purchases.syncsSeenPhotos(),
     usedThisMonth: signedIn ? count.namesUsed : 0,

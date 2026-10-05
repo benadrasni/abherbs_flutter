@@ -72,7 +72,7 @@ A Seen record keeps every observation field (`plant`, `date`, `latitude`, `longi
 
 ### Sharing
 
-A find is private until the person shares it. Any confirmed find of a species in the book has **Share**; a subscription is not needed. Unconfirmed finds and names outside the book cannot be shared, because there is no settled name and no species page to show them on.
+A find is private until the person shares it. A confirmed find of a species in the book has **Share** when its photo is on this phone, in private Storage, or already published. A path left on the row after a fresh install is not a photo, and that row has no Share. A subscription is not needed. Unconfirmed finds and names outside the book cannot be shared, because there is no settled name and no species page to show them on.
 
 The share sheet asks for consent every time: the photo is published under CC0, the note stays private, and the place is shown as country and month, not a pin. Sharing uploads the photo to `observations/{uid}/…` and writes the record to `observations/public` with status `review`, the same path uploads take today. Review stays as it is (`/review-observations`, Admin SDK sets `public` or `rejected`).
 

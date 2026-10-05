@@ -60,6 +60,7 @@ void main() {
     expect(row.confirmed, isTrue);
     expect(row.share, GuideSeenShare.shared);
     expect(row.ownPhoto, isTrue);
+    expect(row.photoAttached, isFalse);
     expect(row.probability, 0.82);
     expect(row.others.map((hit) => hit.latin), ['Leucanthemum vulgare']);
     expect(row.latitude, 48.1);
@@ -171,6 +172,28 @@ void main() {
     expect(
       guideSeenChip(_find(id: '1', inBook: true)),
       isNull,
+    );
+    expect(
+      guideSeenChip(
+        _find(id: '1', ownPhoto: true, inBook: true, photoAttached: false),
+      ),
+      isNull,
+    );
+    expect(
+      guideSeenPhotoAttached(local: false, cloud: false, published: false),
+      isFalse,
+    );
+    expect(
+      guideSeenPhotoAttached(local: true, cloud: false, published: false),
+      isTrue,
+    );
+    expect(
+      guideSeenPhotoAttached(local: false, cloud: true, published: false),
+      isTrue,
+    );
+    expect(
+      guideSeenPhotoAttached(local: false, cloud: false, published: true),
+      isTrue,
     );
     expect(
       guideSeenChip(_find(id: '1', ownPhoto: true)),
@@ -285,6 +308,28 @@ void main() {
     await tester.ensureVisible(find.byKey(const Key('guide-seen-upsell')));
     await tester.tap(find.byKey(const Key('guide-seen-upsell')));
     expect(fieldGuide, 1);
+  });
+
+  testWidgets('a find with no photo file has no Share', (tester) async {
+    await _pump(
+      tester,
+      _page(
+        finds: [
+          _find(
+            id: 'kept',
+            name: 'Rosa canina',
+            label: 'dog rose',
+            ownPhoto: true,
+            inBook: true,
+            photoAttached: false,
+          ),
+        ],
+        signedIn: true,
+      ),
+    );
+    expect(find.text('Share'), findsNothing);
+    expect(find.byKey(const Key('guide-seen-row-delete-kept')), findsOneWidget);
+    expect(find.text('dog rose'), findsOneWidget);
   });
 
   testWidgets('a signed-in Field Guide hides the upsell', (tester) async {
@@ -797,6 +842,7 @@ GuideSeenFind _find({
   bool confirmed = true,
   bool ownPhoto = false,
   bool inBook = false,
+  bool photoAttached = true,
   GuideSeenShare share = GuideSeenShare.none,
   double? probability,
   String? place,
@@ -809,6 +855,7 @@ GuideSeenFind _find({
     when: when ?? DateTime(2026, 9, 27),
     photoPath: ownPhoto ? 'observations/uid/$id.jpg' : null,
     ownPhoto: ownPhoto,
+    photoAttached: photoAttached,
     confirmed: confirmed,
     share: share,
     inBook: inBook,

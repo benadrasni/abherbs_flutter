@@ -507,9 +507,8 @@ Future<GuidePersonView> loadGuidePerson(Locale locale) async {
   final offlineOwned = Purchases.isOffline();
   final offlineOn =
       offlineOwned ? await Prefs.getBoolF(keyOffline, false) : false;
-  final fieldGuide = Purchases.hasFieldGuide();
-  final unlimitedNames =
-      Purchases.isPhotoSearch() || Purchases.hasLifetimeSubscription;
+  final fieldGuide = Purchases.namesFieldGuide;
+  final unlimitedNames = Purchases.namesUnlimited;
   final count = signedIn ? await loadGuideMonthCount() : GuideMonthCount.empty;
   if (signedIn && guideMonthCount.value != count) {
     guideMonthCount.value = count;

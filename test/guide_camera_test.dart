@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/camera/camera_page.dart';
 import 'package:abherbs_flutter/camera/guide_camera.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/camera/outside_page.dart';
 import 'package:abherbs_flutter/key/results_page.dart';
@@ -943,6 +944,24 @@ void main() {
     );
     expect(live.kind, GuideAllowanceKind.guest);
     expect(live.namesLeft, 1);
+  });
+
+  test('a reinstall does not keep the previous phone unlimited', () {
+    Purchases.namesReady = false;
+    Purchases.hasOldVersion = true;
+    Purchases.hasLifetimeSubscription = true;
+    expect(Purchases.namesUnlimited, isFalse);
+    expect(Purchases.namesFieldGuide, isFalse);
+    Purchases.holdNamesFor('account');
+    expect(Purchases.namesReady, isFalse);
+    Purchases.finishNames();
+    expect(Purchases.namesUnlimited, isTrue);
+    Purchases.holdNamesFor('account');
+    expect(Purchases.namesReady, isTrue);
+    Purchases.hasOldVersion = false;
+    Purchases.hasLifetimeSubscription = false;
+    Purchases.holdNamesFor(null);
+    Purchases.namesReady = false;
   });
 
   testWidgets('a guest names one photo, then the server asks for sign-in',

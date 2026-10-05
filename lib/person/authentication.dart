@@ -129,6 +129,7 @@ class Auth {
       credits = 0;
       Purchases.hasOldVersion = false;
       Purchases.hasLifetimeSubscription = false;
+      if (gen == _accountGen) Purchases.finishNames();
       return;
     }
     final uid = user.uid;
@@ -189,6 +190,7 @@ class Auth {
       if (gen != _accountGen) return;
       Purchases.hasLifetimeSubscription = false;
     }
+    if (gen == _accountGen) Purchases.finishNames();
   }
 
   /// Spends one credit. The rules let the app only lower the balance by one;
@@ -253,6 +255,7 @@ class Auth {
       final signedIn = _signedIn(user);
       appUser = signedIn;
       if (signedIn == null) credits = 0;
+      Purchases.holdNamesFor(signedIn?.uid);
       listener(signedIn);
     });
   }

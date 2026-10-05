@@ -60,6 +60,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     GuideAppearanceController.instance.apply(storedGuideAppearance());
     guideGuestFreeRemaining.value = guideGuestFreeRemembered();
     guideGuestFreeRemaining.addListener(_onGuestFree);
+    Purchases.namesRevision.addListener(_onNames);
     unawaited(guideGuestHasFreeName());
     _authSub = Auth.subscribe((user) {
       unawaited(_onAccount(user));
@@ -106,6 +107,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     GuideTabs.refreshSeen = null;
     GuideTabs.unconfirmed.value = 0;
     guideGuestFreeRemaining.removeListener(_onGuestFree);
+    Purchases.namesRevision.removeListener(_onNames);
     guideMonthCount.removeListener(_onMonth);
     _authSub?.cancel();
     _quotaSub?.cancel();
@@ -171,8 +173,12 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     if (mounted) setState(() {});
   }
 
-  /// Sign-in finishes after Find has drawn. Reload finds, then the account's
-  /// photo-name meter, and draw that on the camera card.
+  void _onNames() {
+    if (mounted) setState(() {});
+  }
+
+  /// Sign-in finishes after Find has drawn. The name meter follows the
+  /// account record at once. The find list and the notebook load after that.
   Future<void> _onAccount(User? user) async {
     final ticket = ++_accountTicket;
     _watchQuota();
@@ -189,6 +195,8 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
         debugPrint('guide account: $error');
       }
     }
+    if (!mounted || ticket != _accountTicket) return;
+    setState(() {});
     await finds;
     await seen;
     if (!mounted || ticket != _accountTicket) return;

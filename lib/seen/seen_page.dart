@@ -458,6 +458,7 @@ class _SeenPageState extends State<SeenPage> {
   }
 
   Future<void> _share(GuideSeenFind find) async {
+    if (!find.ownPhoto || !find.photoAttached) return;
     if (!widget.signedIn) {
       final signIn = widget.onSignIn;
       if (signIn != null) {

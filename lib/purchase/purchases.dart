@@ -1,10 +1,45 @@
 import 'package:abherbs_flutter/data/utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class Purchases {
   static bool hasOldVersion = false;
   static bool hasLifetimeSubscription = false;
   static Map<String, PurchaseDetails> purchases = {};
+
+  /// Photo-name entitlements from the last account read. Device prefs can
+  /// still say the old paid app or a lifetime purchase after a reinstall,
+  /// and Find must not treat those as this account until [namesReady].
+  static bool namesReady = false;
+  static String? _namesUid;
+  static final ValueNotifier<int> namesRevision = ValueNotifier(0);
+
+  /// The signed-in account changed. Keep the monthly meter until its record
+  /// is read. The same account refreshing its token does not flash.
+  static void holdNamesFor(String? uid) {
+    if (_namesUid == uid) return;
+    _namesUid = uid;
+    namesReady = false;
+    namesRevision.value++;
+  }
+
+  /// The account record has been applied. Find and Person both listen.
+  static void finishNames() {
+    namesReady = true;
+    namesRevision.value++;
+  }
+
+  /// Unlimited photo names for the meter. False until [finishNames].
+  static bool get namesUnlimited {
+    if (!namesReady) return false;
+    return isPhotoSearch() || hasLifetimeSubscription;
+  }
+
+  /// Field Guide for the meter. False until [finishNames].
+  static bool get namesFieldGuide {
+    if (!namesReady) return false;
+    return hasFieldGuide();
+  }
 
   static bool isPurchased(String productId) {
     return purchases.containsKey(productId);

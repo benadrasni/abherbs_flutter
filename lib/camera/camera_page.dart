@@ -19,6 +19,7 @@ import 'package:abherbs_flutter/person/sign_in_page.dart';
 import 'package:abherbs_flutter/species/species_page.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/keys.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/purchase/rewarded_ad.dart';
 import 'package:abherbs_flutter/camera/plant_id_search.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
@@ -133,6 +134,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     }
     _readAllowance();
     guideMonthCount.addListener(_onMonth);
+    Purchases.namesRevision.addListener(_onNames);
     if (widget.allowance == null) unawaited(_loadMonth());
     if (widget.place == null) unawaited(_loadPlace());
     final kind = _allowance.kind;
@@ -147,6 +149,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   @override
   void dispose() {
     guideMonthCount.removeListener(_onMonth);
+    Purchases.namesRevision.removeListener(_onNames);
     WidgetsBinding.instance.removeObserver(this);
     _previewEpoch++;
     _camera?.dispose();
@@ -248,6 +251,12 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   }
 
   void _onMonth() {
+    if (!mounted || widget.allowance != null) return;
+    _readAllowance();
+    setState(() {});
+  }
+
+  void _onNames() {
     if (!mounted || widget.allowance != null) return;
     _readAllowance();
     setState(() {});

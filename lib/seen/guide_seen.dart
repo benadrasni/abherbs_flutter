@@ -46,6 +46,11 @@ class GuideSeenFind {
   /// Lowercase ISO country code, when the row has one.
   final String? country;
 
+  /// The person's photo can be published. A path stored on the row is not
+  /// enough: a new phone keeps the path and loses a file that was never
+  /// copied to Storage. Hand-built rows default to attached.
+  final bool photoAttached;
+
   const GuideSeenFind({
     required this.id,
     required this.name,
@@ -63,12 +68,14 @@ class GuideSeenFind {
     this.longitude = 0,
     this.indoors = false,
     this.country,
+    this.photoAttached = true,
   });
 
   GuideSeenFind withCatalog({
     String? label,
     String? catalogPhoto,
     required bool inBook,
+    bool? photoAttached,
   }) {
     return GuideSeenFind(
       id: id,
@@ -87,6 +94,7 @@ class GuideSeenFind {
       longitude: longitude,
       indoors: indoors,
       country: country,
+      photoAttached: photoAttached ?? this.photoAttached,
     );
   }
 }
@@ -121,7 +129,7 @@ GuideSeenShare guideSeenShare(String? status) {
   }
 }
 
-/// Share needs a confirmed catalog species and the person's own photo.
+/// Share needs a confirmed catalog species and a photo that can be published.
 /// A name outside the book, or one already sent, shows its state instead.
 GuideSeenChip? guideSeenChip(GuideSeenFind find) {
   if (!find.confirmed) return null;
@@ -134,9 +142,19 @@ GuideSeenChip? guideSeenChip(GuideSeenFind find) {
       return GuideSeenChip.rejected;
     case GuideSeenShare.none:
       if (!find.inBook) return GuideSeenChip.outside;
-      if (!find.ownPhoto) return null;
+      if (!find.ownPhoto || !find.photoAttached) return null;
       return GuideSeenChip.share;
   }
+}
+
+/// The file is on this phone, in private Storage, or already published.
+/// Any one of those can be sent. A bare path cannot.
+bool guideSeenPhotoAttached({
+  required bool local,
+  required bool cloud,
+  required bool published,
+}) {
+  return local || cloud || published;
 }
 
 /// The leading name's probability, when the saved candidates include it.
@@ -261,6 +279,7 @@ GuideSeenFind? readGuideSeenRow(Object? key, dynamic raw) {
     when: _when(raw),
     photoPath: photo,
     ownPhoto: photo != null,
+    photoAttached: false,
     confirmed: confirmed,
     share: guideSeenShare(status is String ? status : null),
     probability: guideSeenLeadProbability(name, hits),
