@@ -595,17 +595,20 @@ class Offline {
     if (_rootPath.isEmpty) {
       _rootPath = (await getApplicationDocumentsDirectory()).path;
     }
-    var familiesDir = Directory('$_rootPath/$storageFamilies');
-    if (await familiesDir.exists()) {
-      familiesDir.delete(recursive: true);
+    Future<void> removeDirectory(String name) async {
+      final directory = Directory('$_rootPath/$name');
+      if (await directory.exists()) {
+        await directory.delete(recursive: true);
+      }
     }
-    var photosDir = Directory('$_rootPath/$storagePhotos');
-    if (await photosDir.exists()) {
-      photosDir.delete(recursive: true);
-    }
-    Prefs.setString(keyOfflineFamily, '0');
-    Prefs.setString(keyOfflinePlant, '0');
-    Prefs.remove(keyOfflineDB);
+
+    await Future.wait([
+      removeDirectory(storageFamilies),
+      removeDirectory(storagePhotos),
+    ]);
+    await Prefs.setString(keyOfflineFamily, '0');
+    await Prefs.setString(keyOfflinePlant, '0');
+    await Prefs.remove(keyOfflineDB);
     await Prefs.remove(keyGuideOfflineChange);
     await clearDone();
     await clearStamps();

@@ -14,7 +14,7 @@ The **app UI languages** in `lib/l10n/intl_*.arb` / `lib/person/setting_utils.da
 
 `ar bg cs da de en es et fa fi fr he hi hr hu id it ja ko lt lv no nl pl pt ro ru sk sl sr sv tr uk zh`
 
-That is 34 catalog languages (36 ARB files: `en`, `en_US`, `en_UK` share `en`). Turkish locale is `tr_TR`.
+That is 34 catalog languages (36 ARB files: `en`, `en_US`, `en_GB` share `en`). Turkish locale is `tr_TR`. British phones report `en_GB`. A saved `en_UK` preference is read as `en_GB`.
 
 Not in scope for full body text:
 

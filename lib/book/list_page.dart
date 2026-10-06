@@ -213,8 +213,7 @@ class _GuideNewPageState extends State<GuideNewPage> {
 
   Widget _cell(GuideResultPlant plant) {
     final colors = GuideColors.of(context);
-    final label = plant.label;
-    final named = label != null && label.isNotEmpty;
+    final vernacular = distinctVernacular(plant.label, plant.name);
     final path = _plates ? plant.platePath : plant.photoPath;
     return InkWell(
       onTap: () => widget.onOpenPlant(context, plant.name),
@@ -238,10 +237,10 @@ class _GuideNewPageState extends State<GuideNewPage> {
           ),
           const SizedBox(height: 7),
           Text(
-            named ? label : plant.name,
+            vernacular ?? plant.name,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
-            style: named
+            style: vernacular != null
                 ? TextStyle(
                     fontFamily: GuideType.serif,
                     fontWeight: FontWeight.w500,
@@ -251,7 +250,7 @@ class _GuideNewPageState extends State<GuideNewPage> {
                   )
                 : GuideType.latin(colors).copyWith(fontSize: 16, height: 1.15),
           ),
-          if (named)
+          if (vernacular != null)
             Text(
               plant.name,
               maxLines: 2,
@@ -589,8 +588,7 @@ class _YearRow extends StatelessWidget {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final plant = entry.plant;
-    final label = plant.label;
-    final named = label != null && label.isNotEmpty;
+    final vernacular = distinctVernacular(plant.label, plant.name);
     final path = plates ? plant.platePath : plant.photoPath;
     final side = plates ? 96.0 : 64.0;
     return InkWell(
@@ -646,10 +644,10 @@ class _YearRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      named ? label : plant.name,
+                      vernacular ?? plant.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: named
+                      style: vernacular != null
                           ? TextStyle(
                               fontFamily: GuideType.serif,
                               fontWeight: FontWeight.w500,
@@ -662,7 +660,7 @@ class _YearRow extends StatelessWidget {
                               height: 1.15,
                             ),
                     ),
-                    if (named)
+                    if (vernacular != null)
                       Text(
                         plant.name,
                         maxLines: 1,

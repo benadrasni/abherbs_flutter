@@ -124,14 +124,16 @@ Future<void> guideRestorePurchases(BuildContext context) async {
 }
 
 Future<void> openGuideLanguage(BuildContext context) async {
-  final saved = await Prefs.getStringF(keyPreferredLanguage);
+  final saved = await preferredLanguageTag();
   if (!context.mounted) return;
   await Navigator.push(
     context,
     MaterialPageRoute<void>(
       settings: const RouteSettings(name: guideLanguageRouteName),
       builder: (context) => GuideLanguagePage(
-        selectedKey: saved,
+        selectedKey: saved.isEmpty
+            ? ''
+            : (languageListKey(languages, saved) ?? saved),
         // The phone's language, not the language currently on screen.
         phoneName: guideLanguageName(languages, '', getDeviceLocale()),
         options: guideLanguageOptions(languages),
@@ -140,7 +142,7 @@ Future<void> openGuideLanguage(BuildContext context) async {
     ),
   );
   if (!context.mounted) return;
-  final language = await Prefs.getStringF(keyPreferredLanguage);
+  final language = await preferredLanguageTag();
   if (!context.mounted) return;
   App.setLocale(context, language);
   await FirebaseAnalytics.instance.logEvent(

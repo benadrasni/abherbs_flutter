@@ -440,7 +440,8 @@ String? guideProfileValue(String? direct, Iterable<String?> provided) {
 String guideLanguageName(
     Map<String, String> names, String pref, Locale locale) {
   if (pref.isNotEmpty) {
-    final saved = names[pref];
+    final key = languageListKey(names, pref);
+    final saved = key == null ? null : names[key];
     if (saved != null && saved.isNotEmpty) return saved;
   }
   final code = locale.languageCode;
@@ -450,8 +451,9 @@ String guideLanguageName(
   }
   final country = locale.countryCode;
   if (country != null && country.isNotEmpty) {
-    final exact = names['${code}_$country'];
-    if (exact != null) return exact;
+    final key = languageListKey(names, '${code}_$country');
+    final exact = key == null ? null : names[key];
+    if (exact != null && exact.isNotEmpty) return exact;
   }
   for (final entry in names.entries) {
     if (entry.key.startsWith('${code}_')) return entry.value;
@@ -517,7 +519,7 @@ Future<GuidePersonView> loadGuidePerson(Locale locale) async {
   final user = Auth.appUser;
   final signedIn = user != null;
   final profiles = user?.providerData;
-  final pref = await Prefs.getStringF(keyPreferredLanguage);
+  final pref = await preferredLanguageTag();
   final offlineOwned = Purchases.isOffline();
   final offlineOn =
       offlineOwned ? await Prefs.getBoolF(keyOffline, false) : false;

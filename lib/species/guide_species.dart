@@ -1,3 +1,4 @@
+import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/data/plant_translation.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 
@@ -214,11 +215,7 @@ class GuideSpecies {
     required this.seen,
   });
 
-  bool get hasVernacular {
-    final value = label?.trim();
-    if (value == null || value.isEmpty) return false;
-    return value.toLowerCase() != name.toLowerCase();
-  }
+  bool get hasVernacular => distinctVernacular(label, name) != null;
 
   GuideSpeciesSection? sectionById(String id) {
     for (final section in sections) {

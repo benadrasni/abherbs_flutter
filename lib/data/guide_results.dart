@@ -6,6 +6,14 @@ class GuideLocationRefused implements Exception {
   const GuideLocationRefused();
 }
 
+/// A vernacular title, or null when [label] is missing or is the Latin name.
+String? distinctVernacular(String? label, String latin) {
+  final value = label?.trim();
+  if (value == null || value.isEmpty) return null;
+  if (value.toLowerCase() == latin.toLowerCase()) return null;
+  return value;
+}
+
 /// A plant on the key's result list, before flowering order is applied.
 class GuideResultPlant {
   final String id;
@@ -28,11 +36,7 @@ class GuideResultPlant {
     required this.cultivated,
   });
 
-  String get shownName {
-    final vernacular = label;
-    if (vernacular != null && vernacular.isNotEmpty) return vernacular;
-    return name;
-  }
+  String get shownName => distinctVernacular(label, name) ?? name;
 }
 
 class GuideResultList {
