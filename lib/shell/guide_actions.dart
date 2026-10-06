@@ -124,7 +124,9 @@ Future<void> guideRestorePurchases(BuildContext context) async {
 }
 
 Future<void> openGuideLanguage(BuildContext context) async {
-  final saved = await Prefs.getStringF(keyPreferredLanguage);
+  final saved = canonicalLanguageTag(
+    await Prefs.getStringF(keyPreferredLanguage),
+  );
   if (!context.mounted) return;
   await Navigator.push(
     context,
@@ -140,7 +142,9 @@ Future<void> openGuideLanguage(BuildContext context) async {
     ),
   );
   if (!context.mounted) return;
-  final language = await Prefs.getStringF(keyPreferredLanguage);
+  final language = canonicalLanguageTag(
+    await Prefs.getStringF(keyPreferredLanguage),
+  );
   if (!context.mounted) return;
   App.setLocale(context, language);
   await FirebaseAnalytics.instance.logEvent(

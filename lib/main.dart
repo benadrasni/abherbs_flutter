@@ -3,6 +3,8 @@ import 'dart:io';
 import 'dart:ui' show PlatformDispatcher;
 
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/l10n/app_locale.dart';
+import 'package:abherbs_flutter/person/setting_utils.dart';
 import 'package:abherbs_flutter/shell/guide_actions.dart';
 import 'package:abherbs_flutter/shell/guide_shell.dart';
 import 'package:abherbs_flutter/book/list_page.dart';
@@ -101,14 +103,16 @@ Locale getDeviceLocale() {
 }
 
 Future<Locale> initializeLocale() async {
-  return Prefs.getStringF(keyPreferredLanguage).then((String language) {
-    var languageCountry = language.split('_');
-    if (languageCountry.length < 2) {
-      return getDeviceLocale();
-    } else {
-      return Locale(languageCountry[0], languageCountry[1]);
-    }
-  });
+  final stored = await Prefs.getStringF(keyPreferredLanguage);
+  final language = canonicalLanguageTag(stored);
+  if (language != stored) {
+    await Prefs.setString(keyPreferredLanguage, language);
+  }
+  final languageCountry = language.split('_');
+  if (languageCountry.length < 2) {
+    return getDeviceLocale();
+  }
+  return Locale(languageCountry[0], languageCountry[1]);
 }
 
 void main() {
@@ -178,13 +182,14 @@ class _AppState extends State<App> {
   }
 
   changeLanguage(String language) {
-    if (language.isEmpty) {
+    final canonical = canonicalLanguageTag(language);
+    if (canonical.isEmpty) {
       setState(() {
         translationCache = {};
         _locale = getDeviceLocale();
       });
     } else {
-      var languageCountry = language.split('_');
+      var languageCountry = canonical.split('_');
       setState(() {
         translationCache = {};
         _locale = Locale(languageCountry[0], languageCountry[1]);
@@ -401,36 +406,11 @@ class _AppState extends State<App> {
 
   Locale localeResolution(
       Locale savedLocale, Iterable<Locale> supportedLocales) {
-    Locale? resultLocale;
-    Map<String, Locale> defaultLocale = {};
-    for (Locale locale in supportedLocales) {
-      if (locale.languageCode == savedLocale.languageCode &&
-          locale.countryCode == savedLocale.countryCode) {
-        resultLocale = locale;
-        break;
-      }
-
-      if (locale.languageCode != languageEnglish ||
-          locale.countryCode == 'US') {
-        defaultLocale[locale.languageCode] = locale;
-      }
-    }
-
-    if (resultLocale == null) {
-      for (Locale locale in supportedLocales) {
-        if (locale.languageCode == savedLocale.languageCode) {
-          resultLocale = defaultLocale[locale.languageCode];
-          break;
-        }
-      }
-    }
-
-    if (resultLocale == null) {
-      resultLocale = defaultLocale[languageEnglish];
-    }
-
-    Prefs.setStringList(keyLanguageAndCountry,
-        [resultLocale!.languageCode, resultLocale.countryCode ?? '']);
+    final resultLocale = resolveAppLocale(savedLocale, supportedLocales);
+    Prefs.setStringList(keyLanguageAndCountry, [
+      resultLocale.languageCode,
+      resultLocale.countryCode ?? '',
+    ]);
     return resultLocale;
   }
 
