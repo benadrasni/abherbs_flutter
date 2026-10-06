@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/data/plant.dart';
 import 'package:abherbs_flutter/offline/guide_media.dart';
-import 'package:abherbs_flutter/offline/offline_dirs.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/data/utils.dart';
@@ -596,13 +595,20 @@ class Offline {
     if (_rootPath.isEmpty) {
       _rootPath = (await getApplicationDocumentsDirectory()).path;
     }
-    await deleteOfflineDirectories(
-      families: Directory('$_rootPath/$storageFamilies'),
-      photos: Directory('$_rootPath/$storagePhotos'),
-    );
-    Prefs.setString(keyOfflineFamily, '0');
-    Prefs.setString(keyOfflinePlant, '0');
-    Prefs.remove(keyOfflineDB);
+    Future<void> removeDirectory(String name) async {
+      final directory = Directory('$_rootPath/$name');
+      if (await directory.exists()) {
+        await directory.delete(recursive: true);
+      }
+    }
+
+    await Future.wait([
+      removeDirectory(storageFamilies),
+      removeDirectory(storagePhotos),
+    ]);
+    await Prefs.setString(keyOfflineFamily, '0');
+    await Prefs.setString(keyOfflinePlant, '0');
+    await Prefs.remove(keyOfflineDB);
     await Prefs.remove(keyGuideOfflineChange);
     await clearDone();
     await clearStamps();

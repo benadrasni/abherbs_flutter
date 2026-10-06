@@ -15,17 +15,19 @@ void main() {
     );
   }
 
-  test('the Latin line is only for a vernacular title', () {
-    final daisy = plant('Bellis perennis', label: 'Daisy');
-    expect(daisy.hasVernacular, isTrue);
-    expect(daisy.shownName, 'Daisy');
+  test('a label that repeats the Latin name is not a vernacular', () {
+    expect(distinctVernacular('Daisy', 'Bellis perennis'), 'Daisy');
+    expect(distinctVernacular('  Daisy ', 'Bellis perennis'), 'Daisy');
+    expect(distinctVernacular('Bellis perennis', 'Bellis perennis'), isNull);
+    expect(distinctVernacular('  bellis perennis ', 'Bellis perennis'), isNull);
+    expect(distinctVernacular(null, 'Bellis perennis'), isNull);
+    expect(distinctVernacular('  ', 'Bellis perennis'), isNull);
 
-    final latin = plant('Bellis perennis');
-    expect(latin.hasVernacular, isFalse);
-    expect(latin.shownName, 'Bellis perennis');
-
-    final blank = plant('Bellis perennis', label: '');
-    expect(blank.hasVernacular, isFalse);
-    expect(blank.shownName, 'Bellis perennis');
+    expect(plant('Bellis perennis', label: 'Daisy').shownName, 'Daisy');
+    expect(
+      plant('Bellis perennis', label: 'Bellis perennis').shownName,
+      'Bellis perennis',
+    );
+    expect(plant('Bellis perennis').shownName, 'Bellis perennis');
   });
 }

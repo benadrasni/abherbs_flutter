@@ -617,7 +617,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
     final colors = GuideColors.of(context);
     final seen = _seen.contains(plant.name);
     final path = _plates ? plant.platePath : plant.photoPath;
-    final named = plant.hasVernacular;
+    final vernacular = distinctVernacular(plant.label, plant.name);
     return InkWell(
       onTap: () => widget.onOpenPlant(context, plant.name),
       child: Column(
@@ -640,10 +640,10 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
           ),
           const SizedBox(height: 7),
           Text(
-            plant.shownName,
+            vernacular ?? plant.name,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
-            style: named
+            style: vernacular != null
                 ? TextStyle(
                     fontFamily: GuideType.serif,
                     fontWeight: FontWeight.w500,
@@ -653,7 +653,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
                   )
                 : GuideType.latin(colors).copyWith(fontSize: 16, height: 1.15),
           ),
-          if (named)
+          if (vernacular != null)
             Text(
               plant.name,
               maxLines: 2,

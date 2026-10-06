@@ -20,7 +20,6 @@ import 'package:abherbs_flutter/shell/settings_remote.dart';
 import 'package:abherbs_flutter/shell/version_gate.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/shell/dialogs.dart';
-import 'package:abherbs_flutter/data/notification_action.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/shell/safe_focus_traversal.dart';
 import 'package:abherbs_flutter/data/utils.dart';
@@ -104,11 +103,7 @@ Locale getDeviceLocale() {
 }
 
 Future<Locale> initializeLocale() async {
-  final stored = await Prefs.getStringF(keyPreferredLanguage);
-  final language = canonicalLanguageTag(stored);
-  if (language != stored) {
-    await Prefs.setString(keyPreferredLanguage, language);
-  }
+  final language = await preferredLanguageTag();
   final languageCountry = language.split('_');
   if (languageCountry.length < 2) {
     return getDeviceLocale();
@@ -183,14 +178,13 @@ class _AppState extends State<App> {
   }
 
   changeLanguage(String language) {
-    final canonical = canonicalLanguageTag(language);
-    if (canonical.isEmpty) {
+    if (language.isEmpty) {
       setState(() {
         translationCache = {};
         _locale = getDeviceLocale();
       });
     } else {
-      var languageCountry = canonical.split('_');
+      var languageCountry = language.split('_');
       setState(() {
         translationCache = {};
         _locale = Locale(languageCountry[0], languageCountry[1]);
@@ -241,8 +235,8 @@ class _AppState extends State<App> {
 
   Future<dynamic> handleMessage(RemoteMessage message) {
     if (message.data.isNotEmpty) {
-      String action =
-          notificationActionValue(message.data[notificationAttributeAction]);
+      final raw = message.data[notificationAttributeAction];
+      final action = raw is String ? raw : '';
       if (action.isNotEmpty && _navigatorKey.currentContext != null) {
         switch (action) {
           case notificationAttributeActionList:
@@ -365,8 +359,8 @@ class _AppState extends State<App> {
     if (notificationData.isEmpty) {
       return null;
     } else {
-      String action =
-          notificationActionValue(notificationData[notificationAttributeAction]);
+      final raw = notificationData[notificationAttributeAction];
+      final action = raw is String ? raw : '';
       if (action.isEmpty) {
         return null;
       } else {

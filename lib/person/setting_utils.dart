@@ -1,7 +1,20 @@
+import 'package:abherbs_flutter/data/prefs.dart';
+import 'package:abherbs_flutter/data/utils.dart';
+
 /// `en_UK` was the old British ARB tag. Phones and `intl_en_GB.arb` use `en_GB`.
 String canonicalLanguageTag(String language) {
   if (language == 'en_UK') return 'en_GB';
   return language;
+}
+
+/// Reads the saved language, stores `en_GB` in place of `en_UK`, and returns it.
+Future<String> preferredLanguageTag() async {
+  final stored = await Prefs.getStringF(keyPreferredLanguage);
+  final canonical = canonicalLanguageTag(stored);
+  if (canonical != stored) {
+    await Prefs.setString(keyPreferredLanguage, canonical);
+  }
+  return canonical;
 }
 
 /// Row in [names] for a saved tag or a `language_COUNTRY` locale tag.

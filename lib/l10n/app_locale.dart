@@ -1,40 +1,40 @@
+import 'package:abherbs_flutter/person/setting_utils.dart';
 import 'package:flutter/widgets.dart';
-
-const _english = 'en';
 
 /// Picks the UI locale for [saved].
 ///
-/// A British phone reports `en_GB`. Older builds stored `en_UK`, which never
-/// matched that, so those devices received `en_US`. `en_US` stays the English
-/// locale when the country is anything else.
+/// `en_UK` is read as `en_GB`. An exact language and country match wins.
+/// Otherwise the last supported locale of that language is used. English
+/// without an exact match uses the `en_US` entry, not the last English
+/// locale. A country-less `en` matches the `en` arb and stays country-less.
+/// Any other language with no supported locale falls back to `en_US`.
 Locale resolveAppLocale(Locale saved, Iterable<Locale> supportedLocales) {
-  final wanted = saved.languageCode == _english && saved.countryCode == 'UK'
-      ? const Locale(_english, 'GB')
-      : saved;
+  final country = saved.countryCode;
+  final tag = country == null || country.isEmpty
+      ? saved.languageCode
+      : canonicalLanguageTag('${saved.languageCode}_$country');
+  final parts = tag.split('_');
+  final wanted =
+      parts.length < 2 ? Locale(parts[0]) : Locale(parts[0], parts[1]);
 
-  Locale? resultLocale;
-  final defaultLocale = <String, Locale>{};
+  Locale? exact;
+  Locale? lastOfLanguage;
+  Locale? englishUs;
   for (final locale in supportedLocales) {
     if (locale.languageCode == wanted.languageCode &&
         locale.countryCode == wanted.countryCode) {
-      resultLocale = locale;
-      break;
+      exact ??= locale;
     }
-
-    if (locale.languageCode != _english || locale.countryCode == 'US') {
-      defaultLocale[locale.languageCode] = locale;
+    if (locale.languageCode == wanted.languageCode) {
+      lastOfLanguage = locale;
     }
-  }
-
-  if (resultLocale == null) {
-    for (final locale in supportedLocales) {
-      if (locale.languageCode == wanted.languageCode) {
-        resultLocale = defaultLocale[locale.languageCode];
-        break;
-      }
+    if (locale.languageCode == 'en' && locale.countryCode == 'US') {
+      englishUs = locale;
     }
   }
-
-  resultLocale ??= defaultLocale[_english];
-  return resultLocale!;
+  if (exact != null) return exact;
+  if (wanted.languageCode == 'en') {
+    return englishUs ?? const Locale('en', 'US');
+  }
+  return lastOfLanguage ?? englishUs ?? const Locale('en', 'US');
 }

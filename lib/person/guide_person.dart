@@ -449,8 +449,7 @@ String guideLanguageName(
     final norsk = names['nb_NO'];
     if (norsk != null) return norsk;
   }
-  var country = locale.countryCode;
-  if (code == 'en' && country == 'UK') country = 'GB';
+  final country = locale.countryCode;
   if (country != null && country.isNotEmpty) {
     final key = languageListKey(names, '${code}_$country');
     final exact = key == null ? null : names[key];
@@ -520,9 +519,7 @@ Future<GuidePersonView> loadGuidePerson(Locale locale) async {
   final user = Auth.appUser;
   final signedIn = user != null;
   final profiles = user?.providerData;
-  final pref = canonicalLanguageTag(
-    await Prefs.getStringF(keyPreferredLanguage),
-  );
+  final pref = await preferredLanguageTag();
   final offlineOwned = Purchases.isOffline();
   final offlineOn =
       offlineOwned ? await Prefs.getBoolF(keyOffline, false) : false;
