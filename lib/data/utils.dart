@@ -255,9 +255,6 @@ const String firebaseValueSuccess = "success";
 const String firebaseValueRejection = "rejected";
 const String firebaseValueFailure = "failure";
 
-const String mapModeView = "view";
-const String mapModeEdit = "edit";
-
 const String notificationAttributeNotification = "notification";
 const String notificationAttributeBody = "body";
 const String notificationAttributeData = "data";
