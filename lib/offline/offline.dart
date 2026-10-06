@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:abherbs_flutter/data/plant.dart';
 import 'package:abherbs_flutter/offline/guide_media.dart';
+import 'package:abherbs_flutter/offline/offline_dirs.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/data/utils.dart';
@@ -595,14 +596,10 @@ class Offline {
     if (_rootPath.isEmpty) {
       _rootPath = (await getApplicationDocumentsDirectory()).path;
     }
-    var familiesDir = Directory('$_rootPath/$storageFamilies');
-    if (await familiesDir.exists()) {
-      familiesDir.delete(recursive: true);
-    }
-    var photosDir = Directory('$_rootPath/$storagePhotos');
-    if (await photosDir.exists()) {
-      photosDir.delete(recursive: true);
-    }
+    await deleteOfflineDirectories(
+      families: Directory('$_rootPath/$storageFamilies'),
+      photos: Directory('$_rootPath/$storagePhotos'),
+    );
     Prefs.setString(keyOfflineFamily, '0');
     Prefs.setString(keyOfflinePlant, '0');
     Prefs.remove(keyOfflineDB);
