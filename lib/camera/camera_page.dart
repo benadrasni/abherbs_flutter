@@ -462,6 +462,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   }
 
   Future<String?> _pickDefault(GuideCameraSource source) async {
+    final maxWidth = MediaQuery.sizeOf(context).width;
     if (source == GuideCameraSource.camera) {
       final shot = await _takePreviewPicture();
       if (shot != null) {
@@ -479,7 +480,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       source: source == GuideCameraSource.camera
           ? ImageSource.camera
           : ImageSource.gallery,
-      maxWidth: MediaQuery.sizeOf(context).width,
+      maxWidth: maxWidth,
     );
     if (image == null) return null;
     unawaited(FirebaseAnalytics.instance.logEvent(name: 'search_photo'));
