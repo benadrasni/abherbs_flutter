@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/offline/offline_page.dart';
+import 'package:abherbs_flutter/shell/ad_consent.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
@@ -70,10 +71,12 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
   StreamSubscription<List<PurchaseDetails>>? _purchaseSub;
   String? _versionName;
   String? _buildNumber;
+  bool _adPrivacy = false;
 
   @override
   void initState() {
     super.initState();
+    unawaited(_loadAdPrivacy());
     _versionName = widget.versionName;
     _buildNumber = widget.buildNumber;
     if (widget.versionName == null && widget.buildNumber == null) {
@@ -131,6 +134,12 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
       _versionName = widget.versionName;
       _buildNumber = widget.buildNumber;
     }
+  }
+
+  Future<void> _loadAdPrivacy() async {
+    final show = await adPrivacyOptionsRequired();
+    if (!mounted || !show || _adPrivacy) return;
+    setState(() => _adPrivacy = true);
   }
 
   Future<void> _loadAppVersion() async {
@@ -418,6 +427,13 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
           appearance: _appearance,
           onChoose: _choose,
         ),
+        if (_adPrivacy)
+          _MenuRow(
+            icon: Icons.privacy_tip_outlined,
+            title: strings.guide_ad_privacy,
+            subtitle: strings.guide_ad_privacy_note,
+            onPressed: () => unawaited(showAdPrivacyOptions()),
+          ),
         if (view.showOffline)
           _MenuRow(
             icon: Icons.cloud_outlined,

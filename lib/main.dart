@@ -10,6 +10,7 @@ import 'package:abherbs_flutter/species/species_page.dart';
 import 'package:abherbs_flutter/purchase/owned_purchases.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
+import 'package:abherbs_flutter/shell/ad_consent.dart';
 import 'package:abherbs_flutter/shell/app_version.dart';
 import 'package:abherbs_flutter/shell/app_version_check.dart';
 import 'package:abherbs_flutter/shell/settings_remote.dart';
@@ -117,6 +118,7 @@ void main() {
       await Prefs.init();
       await applyRememberedVersionBlock();
       unawaited(Auth.startGuest());
+      await gatherAdConsent();
       await AppTrackingTransparency.requestTrackingAuthorization();
       await MobileAds.instance.initialize();
       Locale locale = await initializeLocale();

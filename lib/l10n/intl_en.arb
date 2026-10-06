@@ -182,6 +182,8 @@
   "observation_stats": "Statistics",
   "terms_of_use": "Terms of use",
   "privacy_policy": "Privacy Policy",
+  "guide_ad_privacy": "Ad privacy choices",
+  "guide_ad_privacy_note": "Manage or withdraw consent for ads",
   "no_connection_title": "Connection",
   "no_connection_content": "This feature doesn't work without Internet connection.",
   "notification": "Notification",
