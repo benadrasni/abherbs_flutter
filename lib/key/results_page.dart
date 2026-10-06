@@ -617,6 +617,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
     final colors = GuideColors.of(context);
     final seen = _seen.contains(plant.name);
     final path = _plates ? plant.platePath : plant.photoPath;
+    final named = plant.hasVernacular;
     return InkWell(
       onTap: () => widget.onOpenPlant(context, plant.name),
       child: Column(
@@ -642,24 +643,27 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
             plant.shownName,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontFamily: GuideType.serif,
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-              height: 1.15,
-              color: colors.ink,
-            ),
+            style: named
+                ? TextStyle(
+                    fontFamily: GuideType.serif,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    height: 1.15,
+                    color: colors.ink,
+                  )
+                : GuideType.latin(colors).copyWith(fontSize: 16, height: 1.15),
           ),
-          Text(
-            plant.name,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: GuideType.latin(colors).copyWith(
-              fontSize: 13,
-              height: 1.2,
-              color: colors.ink3,
+          if (named)
+            Text(
+              plant.name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: GuideType.latin(colors).copyWith(
+                fontSize: 13,
+                height: 1.2,
+                color: colors.ink3,
+              ),
             ),
-          ),
           if (seen)
             Padding(
               padding: const EdgeInsets.only(top: 3),

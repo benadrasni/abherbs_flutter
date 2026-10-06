@@ -28,10 +28,15 @@ class GuideResultPlant {
     required this.cultivated,
   });
 
+  bool get hasVernacular {
+    final vernacular = label;
+    return vernacular != null && vernacular.isNotEmpty;
+  }
+
   String get shownName {
     final vernacular = label;
-    if (vernacular != null && vernacular.isNotEmpty) return vernacular;
-    return name;
+    if (vernacular == null || vernacular.isEmpty) return name;
+    return vernacular;
   }
 }
 
