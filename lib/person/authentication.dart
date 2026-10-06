@@ -193,53 +193,6 @@ class Auth {
     if (gen == _accountGen) Purchases.finishNames();
   }
 
-  /// Spends one credit. The rules let the app only lower the balance by one;
-  /// photo identifications and ad rewards are counted by the Cloud Functions.
-  static Future<void> spendCredit(String feature) async {
-    final user = appUser;
-    if (user == null) return;
-    final ref = usersReference.child(user.uid).child(firebaseAttributeCredits);
-    try {
-      final event = await ref.get();
-      final current = event.value;
-      if (current is! int || current <= 0) return;
-      await ref.set(current - 1);
-      credits = current - 1;
-      await logsCreditsReference
-          .child(user.uid)
-          .child(DateTime.now().millisecondsSinceEpoch.toString())
-          .set(feature);
-    } catch (error) {
-      debugPrint('spend credit: $error');
-    }
-  }
-
-  /// Reads the balance again after a Cloud Function changed it.
-  static Future<void> reloadCredits() async {
-    final user = appUser;
-    if (user == null) return;
-    try {
-      final event = await usersReference
-          .child(user.uid)
-          .child(firebaseAttributeCredits)
-          .get();
-      final value = event.value;
-      credits = value is int ? value : 0;
-    } catch (error) {
-      debugPrint('reload credits: $error');
-    }
-  }
-
-  /// The AdMob callback reaches [admobReward] a moment after the ad closes,
-  /// so the balance is read until it moves or a few seconds pass.
-  static Future<void> waitForAdReward(int before) async {
-    for (var i = 0; i < 6; i++) {
-      await Future<void>.delayed(const Duration(seconds: 1));
-      await reloadCredits();
-      if (credits != before) return;
-    }
-  }
-
   static Future<void> signOut() async {
     _accountGen++;
     _loadingAccount = null;

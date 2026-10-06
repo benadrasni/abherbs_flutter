@@ -1,4 +1,3 @@
-const int minFilterAttributes = 2;
 const languages = {
   "ar_EG": "العربية",
   "bg_BG": "Български",
