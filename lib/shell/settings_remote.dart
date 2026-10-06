@@ -16,7 +16,7 @@ class RemoteConfiguration {
         remoteMinIosBuild: 0,
       });
       await remoteConfig.fetchAndActivate();
-    } on PlatformException catch (exception) {
+    } on PlatformException {
     } catch (exception) {
     }
     return remoteConfig;
