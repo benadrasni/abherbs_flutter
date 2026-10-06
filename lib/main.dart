@@ -20,6 +20,7 @@ import 'package:abherbs_flutter/shell/settings_remote.dart';
 import 'package:abherbs_flutter/shell/version_gate.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/shell/dialogs.dart';
+import 'package:abherbs_flutter/data/notification_action.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/shell/safe_focus_traversal.dart';
 import 'package:abherbs_flutter/data/utils.dart';
@@ -240,7 +241,8 @@ class _AppState extends State<App> {
 
   Future<dynamic> handleMessage(RemoteMessage message) {
     if (message.data.isNotEmpty) {
-      String action = message.data[notificationAttributeAction];
+      String action =
+          notificationActionValue(message.data[notificationAttributeAction]);
       if (action.isNotEmpty && _navigatorKey.currentContext != null) {
         switch (action) {
           case notificationAttributeActionList:
@@ -363,7 +365,8 @@ class _AppState extends State<App> {
     if (notificationData.isEmpty) {
       return null;
     } else {
-      String action = notificationData[notificationAttributeAction];
+      String action =
+          notificationActionValue(notificationData[notificationAttributeAction]);
       if (action.isEmpty) {
         return null;
       } else {
