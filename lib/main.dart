@@ -11,6 +11,7 @@ import 'package:abherbs_flutter/purchase/owned_purchases.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
 import 'package:abherbs_flutter/shell/ad_consent.dart';
+import 'package:abherbs_flutter/shell/meta_ads.dart';
 import 'package:abherbs_flutter/shell/app_version.dart';
 import 'package:abherbs_flutter/shell/app_version_check.dart';
 import 'package:abherbs_flutter/shell/settings_remote.dart';
@@ -119,7 +120,9 @@ void main() {
       await applyRememberedVersionBlock();
       unawaited(Auth.startGuest());
       await gatherAdConsent();
-      await AppTrackingTransparency.requestTrackingAuthorization();
+      final tracking =
+          await AppTrackingTransparency.requestTrackingAuthorization();
+      await setMetaAdvertiserTracking(tracking == TrackingStatus.authorized);
       await MobileAds.instance.initialize();
       Locale locale = await initializeLocale();
       runApp(App(locale));
@@ -164,14 +167,14 @@ class _AppState extends State<App> {
     final topic = 'notifications-$languageCode';
     FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
       _currentTopic = topic;
-    }).catchError((error) {
-    });
+    }).catchError((error) {});
   }
 
   void _unsubscribeFromTopic(String topic) {
-    FirebaseMessaging.instance.unsubscribeFromTopic(topic).then((_) {
-    }).catchError((error) {
-    });
+    FirebaseMessaging.instance
+        .unsubscribeFromTopic(topic)
+        .then((_) {})
+        .catchError((error) {});
   }
 
   changeLanguage(String language) {

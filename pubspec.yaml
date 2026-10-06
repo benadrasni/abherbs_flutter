@@ -24,6 +24,7 @@ dependencies:
   firebase_app_check: 0.4.8
   cloud_functions: 6.5.0
   google_mobile_ads: 9.1.0
+  gma_mediation_meta: 1.7.1
   google_sign_in: 7.2.0
   sign_in_with_apple: 8.2.0
   in_app_purchase: 3.3.1
