@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/camera/camera_page.dart';
 import 'package:abherbs_flutter/camera/guide_camera.dart';
+import 'package:abherbs_flutter/camera/plant_id_search.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
@@ -18,6 +19,15 @@ import 'package:intl/intl.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  test('a Plant.id tag uses the catalog language', () {
+    expect(catalogLanguageCode('en-US'), 'en');
+    expect(catalogLanguageCode('sk_SK'), 'sk');
+    expect(catalogLanguageCode('nb-NO'), 'no');
+    expect(catalogLanguageCode('zh-TW'), 'zh');
+    expect(catalogLanguageCode('pt-BR'), 'pt');
+    expect(catalogLanguageCode('pt'), 'pt');
+  });
 
   test('location is asked once, then remembered', () async {
     expect(

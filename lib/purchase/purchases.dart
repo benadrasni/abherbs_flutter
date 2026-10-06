@@ -95,3 +95,18 @@ class Purchases {
     return hasLifetimeSubscription || hasFieldGuide();
   }
 }
+
+/// The person dismissed the store sheet. That is not a failed purchase, and
+/// it must not drop a plan this phone already owns.
+bool storePurchaseCanceled(PurchaseDetails purchase) {
+  if (purchase.status == PurchaseStatus.canceled) return true;
+  final code = purchase.error?.code.toLowerCase() ?? '';
+  if (code.isEmpty) return false;
+  return code == '2' ||
+      code == '15' ||
+      code == 'paymentcancelled' ||
+      code == 'skerrorpaymentcancelled' ||
+      code == 'skerroroverlaycancelled' ||
+      code.contains('user_cancell') ||
+      code.contains('usercancell');
+}

@@ -85,6 +85,12 @@ String plantIdLanguageTag(Locale locale) {
   return '${locale.languageCode}-$country';
 }
 
+/// Catalog language for a Plant.id tag. `en-US` is `en`, and Bokmål is `no`.
+String catalogLanguageCode(String tag) {
+  final base = tag.split(RegExp(r'[-_]')).first;
+  return getLanguageCode(base);
+}
+
 /// Names a photo through the `identifyPlant` Cloud Function, which holds the
 /// Plant.id key and counts the allowance. No results with no refusal means
 /// Plant.id found no plant.
@@ -111,9 +117,10 @@ Future<PhotoIdentification> identifyPlantPhoto({
     final results = <SearchResult>[];
     final suggestions = data['suggestions'];
     if (suggestions is List) {
+      final catalog = catalogLanguageCode(languageCode);
       for (final suggestion in suggestions) {
         if (suggestion == null) continue;
-        results.add(await _readSuggestion(suggestion, languageCode));
+        results.add(await _readSuggestion(suggestion, catalog));
       }
     }
     if (results.isNotEmpty) {
@@ -160,6 +167,12 @@ int? _meterInt(Object? value) {
   return null;
 }
 
+double? _asDouble(Object? value) {
+  if (value is double) return value;
+  if (value is num) return value.toDouble();
+  return null;
+}
+
 Future<SearchResult> _readSuggestion(
   dynamic suggestion,
   String languageCode,
@@ -173,11 +186,11 @@ Future<SearchResult> _readSuggestion(
   final result = SearchResult();
   result.labelLatin = plantName;
   result.entityId = suggestion['id'].toString();
-  result.confidence = suggestion['probability'];
+  result.confidence = _asDouble(suggestion['probability']);
   result.plantDetails = suggestion['plant_details'];
   result.similarImages = suggestion['similar_images'];
   final names = suggestion['plant_details']['common_names'];
-  result.commonName = names != null ? names[0] : "";
+  result.commonName = names is List && names.isNotEmpty ? names[0] : "";
   if (event.snapshot.exists && event.snapshot.value != null) {
     final value = event.snapshot.value as Map;
     result.count = value['count'];
@@ -216,7 +229,7 @@ Future<SearchResult> _readSuggestion(
         .child(result.labelLatin!)
         .once();
     final taxon = taxonEvent.snapshot.value;
-    if (taxon != null && (taxon as List).isNotEmpty) {
+    if (taxon is List && taxon.isNotEmpty) {
       translationCache[result.labelLatin!] = taxon[0];
       result.labelInLanguage = taxon[0];
     }

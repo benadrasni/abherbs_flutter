@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/offline/guide_offline.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
@@ -174,8 +175,26 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
       await custom();
       return;
     }
-    Offline.downloadPaused = true;
+    Offline.pauseDownload();
     if (mounted) setState(() => _job = null);
+  }
+
+  /// The sales page has closed. Unlock Download when the phone now owns a
+  /// plan. The download itself waits for another tap.
+  void _applyDownloadRight() {
+    final view = _view;
+    if (!mounted || view == null) return;
+    final allowed = Purchases.hasFieldGuide() || Purchases.isOffline();
+    if (allowed == view.canDownload) return;
+    setState(() {
+      _view = GuideOfflineView(
+        catalog: view.catalog,
+        canDownload: allowed,
+        stored: view.stored,
+        phoneRegionId: view.phoneRegionId,
+        update: view.update,
+      );
+    });
   }
 
   Future<void> _remove() async {
@@ -463,6 +482,7 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
     if (!_pick.chosen || added <= 0) return;
     if (!view.canDownload) {
       await widget.onFieldGuide?.call();
+      _applyDownloadRight();
       return;
     }
     final codes = _pick.asCodes;
@@ -479,6 +499,7 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
     if (!update.hasWork || _job != null) return;
     if (!view.canDownload) {
       await widget.onFieldGuide?.call();
+      _applyDownloadRight();
       return;
     }
     final custom = widget.onUpdate;

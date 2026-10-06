@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/data/plant.dart';
@@ -66,6 +67,25 @@ String offlineDoneFormat(Set<int> ids) {
 class Offline {
   static bool downloadFinished = false;
   static bool downloadPaused = false;
+  static int _generation = 0;
+
+  /// Starts one download. An older job no longer owns its callbacks, so a
+  /// second download does not resume the one that was paused.
+  static int claimDownload() {
+    _generation++;
+    downloadPaused = false;
+    return _generation;
+  }
+
+  /// Stops the current download. Its finish callback must not save the pack.
+  static void pauseDownload() {
+    _generation++;
+    downloadPaused = true;
+  }
+
+  static bool ownsDownload(int generation) {
+    return generation == _generation && !downloadPaused;
+  }
 
   static var _httpClient = HttpClient();
   static String _rootPath = '';
@@ -203,6 +223,8 @@ class Offline {
 
   /// Pictures for [plantIds] only. [alreadyDone] plants in this pack are
   /// already on the phone, and [total] is the pack size the progress bar uses.
+  /// [generation] is the job from [claimDownload]. A pause or a newer download
+  /// drops this job's callbacks.
   static void downloadPack({
     required List<int> plantIds,
     required int alreadyDone,
@@ -210,34 +232,60 @@ class Offline {
     required void Function(int done, int total) onPlant,
     required void Function() onFinish,
     required void Function() onFail,
+    required int generation,
   }) {
+    if (!ownsDownload(generation)) return;
+    unawaited(_runDownloadPack(
+      plantIds: plantIds,
+      alreadyDone: alreadyDone,
+      total: total,
+      onPlant: onPlant,
+      onFinish: onFinish,
+      onFail: onFail,
+      generation: generation,
+    ));
+  }
+
+  static Future<void> _runDownloadPack({
+    required List<int> plantIds,
+    required int alreadyDone,
+    required int total,
+    required void Function(int done, int total) onPlant,
+    required void Function() onFinish,
+    required void Function() onFail,
+    required int generation,
+  }) async {
+    if (!ownsDownload(generation)) return;
     onChange(true);
     for (var i = 1; i <= 4; i++) {
       setKeepSynced(i, true);
     }
+    if (!ownsDownload(generation)) return;
     if (alreadyDone > 0 && total > 0) onPlant(alreadyDone, total);
-    Future.wait([
-      downloadFamilies((_, __) {}),
-      _downloadPlantIds(plantIds, alreadyDone, total, onPlant),
-    ]).then((List<bool> results) {
-      if (downloadPaused) {
-        downloadFinished = false;
+    try {
+      final results = await Future.wait([
+        downloadFamilies((_, __) {}, generation),
+        _downloadPlantIds(plantIds, alreadyDone, total, onPlant, generation),
+      ]);
+      if (!ownsDownload(generation)) return;
+      downloadFinished = results.every((item) => item);
+      if (downloadFinished) {
+        onFinish();
       } else {
-        downloadFinished = results.every((item) => item);
-        if (downloadFinished) {
-          onFinish();
-        } else {
-          onFail();
-        }
+        onFail();
       }
-    }).catchError((error) {
-      onFail();
-    });
+    } catch (error) {
+      debugPrint('offline pack: $error');
+      if (ownsDownload(generation)) onFail();
+    }
   }
 
   static Future<bool> downloadFamilies(
-      Function(int, int) onFamilyDownload) async {
+    Function(int, int) onFamilyDownload,
+    int generation,
+  ) async {
     int position = int.parse(await Prefs.getStringF(keyOfflineFamily, '0'));
+    if (!ownsDownload(generation)) return true;
     int familyTotal = await FirebaseDatabase.instance
         .ref()
         .child(firebaseFamiliesToUpdate)
@@ -247,17 +295,18 @@ class Offline {
       return event.snapshot.value as int;
     });
     while (position < familyTotal) {
+      if (!ownsDownload(generation)) return true;
       if (await _downloadFamilyIcon(position)) {
+        if (!ownsDownload(generation)) return true;
         position++;
         Prefs.setString(keyOfflineFamily, position.toString());
         onFamilyDownload(position, familyTotal);
-        if (downloadPaused) {
-          break;
-        }
       } else {
+        if (!ownsDownload(generation)) return true;
         return false;
       }
     }
+    if (!ownsDownload(generation)) return true;
     onFamilyDownload(position, familyTotal);
     return true;
   }
@@ -293,16 +342,22 @@ class Offline {
     int alreadyDone,
     int total,
     void Function(int done, int total) onPlant,
+    int generation,
   ) async {
     var finished = alreadyDone;
     for (final id in plantIds) {
-      if (downloadPaused) break;
-      if (!await _downloadPlantPhotos(id)) return false;
+      if (!ownsDownload(generation)) return true;
+      if (!await _downloadPlantPhotos(id)) {
+        if (!ownsDownload(generation)) return true;
+        return false;
+      }
+      if (!ownsDownload(generation)) return true;
       finished++;
       await _rememberPlant(id);
+      if (!ownsDownload(generation)) return true;
       onPlant(finished, total);
-      if (downloadPaused) break;
     }
+    if (!ownsDownload(generation)) return true;
     onPlant(finished, total);
     return true;
   }
@@ -386,7 +441,26 @@ class Offline {
     required void Function(int doneBytes, int totalBytes) onProgress,
     required void Function() onFinish,
     required void Function() onFail,
+    required int generation,
   }) {
+    if (!ownsDownload(generation)) return;
+    unawaited(_runDownloadChanges(
+      plants: plants,
+      onProgress: onProgress,
+      onFinish: onFinish,
+      onFail: onFail,
+      generation: generation,
+    ));
+  }
+
+  static Future<void> _runDownloadChanges({
+    required List<GuideMediaJob> plants,
+    required void Function(int doneBytes, int totalBytes) onProgress,
+    required void Function() onFinish,
+    required void Function() onFail,
+    required int generation,
+  }) async {
+    if (!ownsDownload(generation)) return;
     onChange(true);
     for (var section = 1; section <= 4; section++) {
       setKeepSynced(section, true);
@@ -395,34 +469,37 @@ class Offline {
     for (final plant in plants) {
       total += plant.bytes;
     }
+    if (!ownsDownload(generation)) return;
     onProgress(0, total);
-    _downloadChanges(plants, total, onProgress).then((ok) {
-      if (downloadPaused) {
-        downloadFinished = false;
-      } else if (ok) {
+    try {
+      final ok = await _downloadChanges(plants, total, onProgress, generation);
+      if (!ownsDownload(generation)) return;
+      if (ok) {
         downloadFinished = true;
         onFinish();
       } else {
         downloadFinished = false;
         onFail();
       }
-    }).catchError((error) {
-      onFail();
-    });
+    } catch (error) {
+      debugPrint('offline changes: $error');
+      if (ownsDownload(generation)) onFail();
+    }
   }
 
   static Future<bool> _downloadChanges(
     List<GuideMediaJob> plants,
     int total,
     void Function(int doneBytes, int totalBytes) onProgress,
+    int generation,
   ) async {
     var done = 0;
     for (final plant in plants) {
-      if (downloadPaused) return true;
+      if (!ownsDownload(generation)) return true;
       final saved = <GuideMediaFile>[];
       final fetching = {for (final file in plant.download) file.url};
       for (final file in plant.stamp.files) {
-        if (downloadPaused) return true;
+        if (!ownsDownload(generation)) return true;
         if (!fetching.contains(file.url)) {
           saved.add(file);
           continue;
@@ -433,6 +510,7 @@ class Offline {
             _photoDir(file.url),
             _photoName(file.url),
           );
+          if (!ownsDownload(generation)) return true;
           saved.add(
             GuideMediaFile(
               url: file.url,
@@ -443,6 +521,7 @@ class Offline {
           done += file.bytes;
           onProgress(done, total);
         } catch (e) {
+          if (!ownsDownload(generation)) return true;
           if (file.url.contains('_distribution.')) {
             debugPrint('offline map missing ${file.url}');
             continue;
@@ -455,14 +534,17 @@ class Offline {
           return false;
         }
       }
+      if (!ownsDownload(generation)) return true;
       for (final url in plant.remove) {
         await _deleteUrl(url);
       }
+      if (!ownsDownload(generation)) return true;
       await writeStamp(
         plant.id,
         guideMediaStampFromFiles(saved, plateUrl: plant.stamp.plate?.url),
       );
     }
+    if (!ownsDownload(generation)) return true;
     onProgress(total, total);
     return true;
   }

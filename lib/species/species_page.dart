@@ -15,6 +15,8 @@ import 'package:abherbs_flutter/offline/offline.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/species/fullscreen.dart';
 import 'package:abherbs_flutter/data/utils.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:exif/exif.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -611,6 +613,8 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
               top: 16,
             ),
           ),
+        if (Purchases.showsAds())
+          const SliverToBoxAdapter(child: AppBannerAd()),
         SliverToBoxAdapter(
           child: _Taxonomy(
             key: _sectionKeys['taxonomy'],

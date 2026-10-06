@@ -36,9 +36,8 @@ Future<void> openGuideTaxonList(
         listTitle: given.isEmpty ? latin : given,
         listBackLabel: backLabel,
         listLatin: latin.isEmpty ? null : latin,
-        loadListTitle: given.isEmpty
-            ? () => loadGuideTaxonTitle(latin, language)
-            : null,
+        loadListTitle:
+            given.isEmpty ? () => loadGuideTaxonTitle(latin, language) : null,
         loadResults: (_) => loadGuideListedPlants(
           rootReference.child(listPath),
           language,
@@ -160,7 +159,9 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
     });
   }
 
-  bool get _showAd => widget.showAd ?? Purchases.showsAds();
+  /// Family, genus, and editorial lists stay clear. The key's result list
+  /// keeps one banner after the sixth plant.
+  bool get _showAd => !_isList && (widget.showAd ?? Purchases.showsAds());
 
   int get _month => widget.month ?? DateTime.now().month;
 

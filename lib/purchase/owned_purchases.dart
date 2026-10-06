@@ -1,8 +1,10 @@
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 /// Product ids stored for an account. A list and the Realtime Database map
 /// form of that list are both accepted. Values that are not product ids are
@@ -38,6 +40,35 @@ bool samePurchaseIds(Iterable<String> a, Iterable<String> b) {
   if (a.length != b.length) return false;
   final other = b.toSet();
   return a.every(other.contains);
+}
+
+PurchaseDetails _rememberedPurchase(String productId) {
+  return PurchaseDetails(
+    productID: productId,
+    verificationData: PurchaseVerificationData(
+      localVerificationData: '',
+      serverVerificationData: '',
+      source: 'remembered',
+    ),
+    transactionDate: null,
+    status: PurchaseStatus.restored,
+  );
+}
+
+/// Puts saved product ids into [Purchases.purchases] so a launch without a
+/// store answer still unlocks what this phone already bought. A row the store
+/// has already delivered is left as it is.
+void keepRememberedPurchases(Iterable<String> productIds) {
+  for (final id in productIds) {
+    if (id.isEmpty) continue;
+    Purchases.purchases.putIfAbsent(id, () => _rememberedPurchase(id));
+  }
+}
+
+Future<void> loadRememberedPurchases() async {
+  keepRememberedPurchases(
+    await Prefs.getStringListF(keyPurchases, const <String>[]),
+  );
 }
 
 Future<void>? _pending;

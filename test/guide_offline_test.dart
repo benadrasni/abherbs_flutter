@@ -3,8 +3,11 @@ import 'package:abherbs_flutter/offline/guide_media.dart';
 import 'package:abherbs_flutter/offline/guide_offline.dart';
 import 'package:abherbs_flutter/offline/offline_page.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/data/utils.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -400,6 +403,36 @@ void main() {
     expect(plan!.total, 2);
   });
 
+  test('pause drops that download, and the next one is a new job', () {
+    final first = Offline.claimDownload();
+    expect(Offline.ownsDownload(first), isTrue);
+    Offline.pauseDownload();
+    expect(Offline.ownsDownload(first), isFalse);
+    expect(Offline.downloadPaused, isTrue);
+    var plants = 0;
+    var finished = 0;
+    var failed = 0;
+    Offline.downloadPack(
+      plantIds: const [1],
+      alreadyDone: 0,
+      total: 1,
+      generation: first,
+      onPlant: (_, __) => plants++,
+      onFinish: () => finished++,
+      onFail: () => failed++,
+    );
+    expect(plants, 0);
+    expect(finished, 0);
+    expect(failed, 0);
+    final second = Offline.claimDownload();
+    expect(second, isNot(first));
+    expect(Offline.ownsDownload(first), isFalse);
+    expect(Offline.ownsDownload(second), isTrue);
+    expect(Offline.downloadPaused, isFalse);
+    Offline.pauseDownload();
+    Offline.downloadPaused = false;
+  });
+
   test('mobile data does not start a pack', () async {
     var ran = false;
     final result = await startGuideOfflineDownload(
@@ -486,6 +519,47 @@ void main() {
     await tester.pump();
     expect(opened, 1);
     expect(request, isNull);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('buying Field Guide on this screen unlocks Download',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(390, 844));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    addTearDown(() => Purchases.purchases.clear());
+    Purchases.purchases.clear();
+    GuideOfflineRequest? request;
+    await tester.pumpWidget(_app(GuideOfflinePage(
+      view: _view(canDownload: false),
+      onFieldGuide: () async {
+        Purchases.purchases[fieldGuideYearly] = PurchaseDetails(
+          productID: fieldGuideYearly,
+          verificationData: PurchaseVerificationData(
+            localVerificationData: '',
+            serverVerificationData: '',
+            source: 'test',
+          ),
+          transactionDate: '0',
+          status: PurchaseStatus.purchased,
+        );
+      },
+      onDownload: (value) async => request = value,
+    )));
+
+    await tester.tap(find.byKey(guideOfflineEverythingKey));
+    await tester.pump();
+    await tester.ensureVisible(find.byKey(guideOfflineDownloadKey));
+    await tester.tap(find.byKey(guideOfflineDownloadKey));
+    await tester.pump();
+
+    expect(request, isNull);
+    expect(
+      find.descendant(
+        of: find.byKey(guideOfflineDownloadKey),
+        matching: find.text('Download'),
+      ),
+      findsOneWidget,
+    );
     expect(tester.takeException(), isNull);
   });
 

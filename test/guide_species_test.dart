@@ -6,6 +6,7 @@ import 'package:abherbs_flutter/species/guide_species.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/species/species_page.dart';
 import 'package:abherbs_flutter/data/utils.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -340,6 +341,14 @@ void main() {
   });
 
   testWidgets('the species page shows the oxeye daisy entry', (tester) async {
+    Purchases.hasOldVersion = false;
+    Purchases.hasLifetimeSubscription = false;
+    Purchases.purchases = {};
+    addTearDown(() {
+      Purchases.hasOldVersion = false;
+      Purchases.hasLifetimeSubscription = false;
+      Purchases.purchases = {};
+    });
     await _pump(
       tester,
       _app(GuideSpeciesPage(
@@ -406,7 +415,13 @@ void main() {
     );
     expect(find.textContaining('1 shared by app users'), findsOneWidget);
     expect(find.text('wikipedia.org'), findsOneWidget);
-    expect(find.byType(AppBannerAd), findsNothing);
+    expect(Purchases.showsAds(), isTrue);
+    final order = tester.allWidgets
+        .map((widget) => widget.runtimeType.toString())
+        .where((type) =>
+            type == '_Aside' || type == 'AppBannerAd' || type == '_Taxonomy')
+        .toList();
+    expect(order, ['_Aside', '_Aside', 'AppBannerAd', '_Taxonomy']);
 
     final july = _monthDecoration(tester, 7);
     final january = _monthDecoration(tester, 1);

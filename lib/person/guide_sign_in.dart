@@ -17,8 +17,12 @@ const guideSignInRouteName = 'GuideSignIn';
 const guideSignInPlatePath =
     'photos/Zingiberales/Strelitziaceae/Strelitzia_reginae/Strelitzia_reginae@1600.webp';
 
+/// A blank or broken address stays on the form. `+` and a long ending such
+/// as `.online` are allowed; Firebase still rejects an address it cannot use.
 final RegExp _emailPattern = RegExp(
-  r'^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$',
+  r"^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@"
+  r'[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?'
+  r'(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$',
 );
 
 bool guideEmailLooksValid(String value) {
@@ -26,10 +30,23 @@ bool guideEmailLooksValid(String value) {
 }
 
 /// E.164 number from a calling code and whatever the person typed.
+///
+/// A national trunk `0`, a typed `00`, and the calling code typed again are
+/// not part of the number Firebase dials.
 String guidePhoneNumber(String callingCode, String local) {
   final code = callingCode.replaceAll(RegExp(r'\D'), '');
-  final digits = local.replaceAll(RegExp(r'\D'), '');
+  var digits = local.replaceAll(RegExp(r'\D'), '');
   if (code.isEmpty || digits.isEmpty) return '';
+  if (digits.startsWith('00')) {
+    digits = digits.substring(2);
+  }
+  if (digits.startsWith(code) && digits.length > code.length) {
+    digits = digits.substring(code.length);
+  }
+  while (digits.startsWith('0')) {
+    digits = digits.substring(1);
+  }
+  if (digits.isEmpty) return '';
   return '+$code$digits';
 }
 

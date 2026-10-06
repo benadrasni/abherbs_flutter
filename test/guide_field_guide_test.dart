@@ -16,6 +16,21 @@ void main() {
     Purchases.hasOldVersion = false;
   });
 
+  test('dismissing the store sheet is not a failed purchase', () {
+    final canceled = PurchaseDetails(
+      productID: fieldGuideYearly,
+      verificationData: PurchaseVerificationData(
+        localVerificationData: '',
+        serverVerificationData: '',
+        source: 'test',
+      ),
+      transactionDate: '0',
+      status: PurchaseStatus.canceled,
+    );
+    expect(storePurchaseCanceled(canceled), isTrue);
+    expect(storePurchaseCanceled(_purchase(fieldGuideYearly)), isFalse);
+  });
+
   test('yearly is the offer to show, and a free phase is the one to buy', () {
     final choice = guideFieldGuideOfferChoice(const [
       (price: r'$0.00', rawPrice: 0),

@@ -731,22 +731,33 @@ Future<GuideOfflineStart> startGuideOfflineDownload({
   if (!result.contains(ConnectivityResult.wifi)) {
     return GuideOfflineStart.needsWifi;
   }
-  Offline.downloadPaused = false;
+  // After the Wi-Fi check, so a refused start does not unpause an older job.
+  final generation = Offline.claimDownload();
   final starter = run ??
       (GuideOfflineJobPlan plan) {
         Offline.downloadPack(
           plantIds: plan.pending,
           alreadyDone: plan.alreadyDone,
           total: plan.total,
-          onPlant: onProgress,
+          generation: generation,
+          onPlant: (done, total) {
+            if (!Offline.ownsDownload(generation)) return;
+            onProgress(done, total);
+          },
           onFinish: () {
-            _savePack(storedState, request, catalog).then((_) {
+            if (!Offline.ownsDownload(generation)) return;
+            _savePack(storedState, request, catalog, generation: generation)
+                .then((_) {
+              if (!Offline.ownsDownload(generation)) return;
               onFinished();
-            }).catchError((_) {
-              onFailed();
+            }).catchError((Object _) {
+              if (Offline.ownsDownload(generation)) onFailed();
             });
           },
-          onFail: onFailed,
+          onFail: () {
+            if (!Offline.ownsDownload(generation)) return;
+            onFailed();
+          },
         );
       };
   starter(plan);
@@ -769,21 +780,30 @@ Future<GuideOfflineStart> startGuideOfflineUpdate({
   if (!result.contains(ConnectivityResult.wifi)) {
     return GuideOfflineStart.needsWifi;
   }
-  Offline.downloadPaused = false;
+  final generation = Offline.claimDownload();
   final starter = run ??
       () {
         Offline.downloadChanges(
           plants: update.plants,
-          onProgress: onProgress,
+          generation: generation,
+          onProgress: (done, total) {
+            if (!Offline.ownsDownload(generation)) return;
+            onProgress(done, total);
+          },
           onFinish: () {
+            if (!Offline.ownsDownload(generation)) return;
             Prefs.setString(keyGuideOfflineChange, '${update.resumeMark}')
                 .then((_) {
+              if (!Offline.ownsDownload(generation)) return;
               onFinished();
-            }).catchError((_) {
-              onFailed();
+            }).catchError((Object _) {
+              if (Offline.ownsDownload(generation)) onFailed();
             });
           },
-          onFail: onFailed,
+          onFail: () {
+            if (!Offline.ownsDownload(generation)) return;
+            onFailed();
+          },
         );
       };
   starter();
@@ -793,17 +813,26 @@ Future<GuideOfflineStart> startGuideOfflineUpdate({
 Future<void> _savePack(
   GuideOfflineStored current,
   GuideOfflineRequest request,
-  GuideOfflineCatalog catalog,
-) async {
+  GuideOfflineCatalog catalog, {
+  int? generation,
+}) async {
+  bool live() => generation == null || Offline.ownsDownload(generation);
+  if (!live()) return;
   final next = guideOfflineStore(current, request);
+  if (!live()) return;
   await Prefs.setString(keyGuideOfflinePacks, guideOfflinePacksValue(next));
+  if (!live()) return;
   await Prefs.setBool(keyOffline, true);
+  if (!live()) return;
   final plants = guideOfflineMatch(catalog, next.asCodes);
+  if (!live()) return;
   await Prefs.setString(keyGuideOfflineStoredPlants, '$plants');
+  if (!live()) return;
   Offline.downloadFinished = true;
 }
 
 Future<void> clearGuideOfflinePack() async {
+  Offline.pauseDownload();
   await Prefs.remove(keyOffline);
   await Prefs.remove(keyGuideOfflinePacks);
   await Prefs.remove(keyGuideOfflineStoredPlants);

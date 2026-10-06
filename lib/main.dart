@@ -199,28 +199,38 @@ class _AppState extends State<App> {
   }
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
-    final remembered = <String>[
-      for (final purchase in purchaseDetailsList)
-        if (purchase.status == PurchaseStatus.purchased ||
-            purchase.status == PurchaseStatus.restored)
-          purchase.productID,
-    ];
+    final remembered = <String>[];
+    var hideAds = false;
+    for (final purchase in purchaseDetailsList) {
+      final id = purchase.productID;
+      if (id.isEmpty) continue;
+      final owned = purchase.status == PurchaseStatus.purchased ||
+          purchase.status == PurchaseStatus.restored;
+      if (owned) {
+        Purchases.purchases[id] = purchase;
+        remembered.add(id);
+        if (id == productNoAdsAndroid || id == productNoAdsIOS) {
+          hideAds = true;
+        }
+      }
+      // Finish here, not on the sales page. A purchase that arrives after
+      // that page has closed still has to be acknowledged.
+      if (purchase.pendingCompletePurchase) {
+        unawaited(_completePurchase(purchase));
+      }
+    }
     if (remembered.isNotEmpty) {
       unawaited(rememberStorePurchases(remembered));
     }
-    purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
-      if (purchaseDetails.status == PurchaseStatus.restored) {
-        Purchases.purchases[purchaseDetails.productID] = purchaseDetails;
-        if (purchaseDetails.pendingCompletePurchase) {
-          await _inAppPurchase.completePurchase(purchaseDetails);
-        }
-        if (mounted &&
-            (purchaseDetails.productID == productNoAdsAndroid ||
-                purchaseDetails.productID == productNoAdsIOS)) {
-          setState(() {});
-        }
-      }
-    });
+    if (hideAds && mounted) setState(() {});
+  }
+
+  Future<void> _completePurchase(PurchaseDetails purchase) async {
+    try {
+      await _inAppPurchase.completePurchase(purchase);
+    } catch (error) {
+      debugPrint('purchase finish: $error');
+    }
   }
 
   Future<dynamic> handleMessage(RemoteMessage message) {
@@ -425,14 +435,16 @@ class _AppState extends State<App> {
   }
 
   Future<void> initStoreInfo() async {
+    await loadRememberedPurchases();
     final bool isAvailable = await _inAppPurchase.isAvailable();
     if (!isAvailable) {
       _iapError();
-      Purchases.purchases = {};
-      setState(() {});
     } else {
-      _inAppPurchase.restorePurchases();
+      unawaited(_inAppPurchase.restorePurchases().catchError((Object error) {
+        debugPrint('restore: $error');
+      }));
     }
+    if (mounted) setState(() {});
     Purchases.hasOldVersion = Prefs.getBool(keyOldVersion, false);
     Purchases.hasLifetimeSubscription =
         Prefs.getBool(keyLifetimeSubscription, false);

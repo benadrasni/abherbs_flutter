@@ -461,7 +461,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
         ),
         bottomNavigationBar: GuideBottomBar(
           index: _index,
-          showAd: _index == 0 && Purchases.showsAds(),
+          showAd: (_index == 0 || _index == 1) && Purchases.showsAds(),
           onSelect: _go,
         ),
       ),

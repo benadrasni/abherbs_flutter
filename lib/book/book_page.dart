@@ -5,8 +5,6 @@ import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/search/guide_search.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
-import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -174,8 +172,6 @@ class _BookPageState extends State<BookPage> {
           ),
         ),
         _body(),
-        if (Purchases.showsAds())
-          const SliverToBoxAdapter(child: AppBannerAd()),
         const SliverPadding(padding: EdgeInsets.only(bottom: 24)),
       ],
     );

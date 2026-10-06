@@ -20,12 +20,18 @@ void main() {
   });
 
   test('a new-plants notification opens New in the book', () {
-    expect(notificationPathOpensNewInBook('lists_custom/new/2026-10-01/list'), isTrue);
+    expect(notificationPathOpensNewInBook('lists_custom/new/2026-10-01/list'),
+        isTrue);
     expect(notificationPathOpensNewInBook('/lists_custom/new'), isTrue);
-    expect(notificationPathOpensNewInBook('lists_custom/2026-10-01/list'), isTrue);
+    expect(
+        notificationPathOpensNewInBook('lists_custom/2026-10-01/list'), isTrue);
     expect(notificationPathOpensNewInBook('/lists_custom/2026-10-01'), isTrue);
-    expect(notificationPathOpensNewInBook('lists_custom/2026-10-01/time'), isFalse);
-    expect(notificationPathOpensNewInBook('lists_custom/by language/en/Spices/list'), isFalse);
+    expect(notificationPathOpensNewInBook('lists_custom/2026-10-01/time'),
+        isFalse);
+    expect(
+        notificationPathOpensNewInBook(
+            'lists_custom/by language/en/Spices/list'),
+        isFalse);
     expect(notificationPathOpensNewInBook(''), isFalse);
   });
 
@@ -111,7 +117,9 @@ void main() {
       '2026-08-01': {
         'list': {'1': 1, '2': 1},
       },
-      'notes': {'list': {'9': 1}},
+      'notes': {
+        'list': {'9': 1}
+      },
       '2026-09-01': {
         'list': {'4': 1},
       },
@@ -163,11 +171,13 @@ void main() {
     expect(guideCustomLayout(fresh), GuideCustomLayout.fresh);
     expect(guideCustomLayout(years), GuideCustomLayout.years);
     expect(guideCustomLayout(spices), GuideCustomLayout.grid);
-    expect(guideSourceHost('https://www.baum-des-jahres.de/'), 'baum-des-jahres.de');
+    expect(guideSourceHost('https://www.baum-des-jahres.de/'),
+        'baum-des-jahres.de');
     expect(guideSourceHost('baum-des-jahres.de'), 'baum-des-jahres.de');
   });
 
-  testWidgets('New in the book groups the latest plants by date', (tester) async {
+  testWidgets('New in the book groups the latest plants by date',
+      (tester) async {
     String? opened;
     final newer = DateTime(2026, 9, 27);
     final older = DateTime(2026, 8, 14);
@@ -175,7 +185,6 @@ void main() {
       tester,
       GuideNewPage(
         backLabel: 'Book',
-        showAd: false,
         initialDays: [
           GuideNewDay(
             dateKey: '2026-09-27',
@@ -243,7 +252,6 @@ void main() {
       tester,
       GuideNewPage(
         backLabel: 'Book',
-        showAd: false,
         initialDays: [
           GuideNewDay(
             dateKey: 'today',
@@ -279,7 +287,6 @@ void main() {
         title: 'Baum des Jahres',
         backLabel: 'Find',
         sourceUrl: 'https://baum-des-jahres.de/',
-        showAd: false,
         now: () => DateTime(2026, 9, 30),
         initialEntries: [
           GuideYearEntry(

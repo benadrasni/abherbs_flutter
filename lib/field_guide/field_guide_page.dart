@@ -100,16 +100,17 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
       final id = purchase.productID;
       final fieldGuide = id == fieldGuideMonthly || id == fieldGuideYearly;
       final photos = id == subscriptionMonthly || id == subscriptionYearly;
-      if (!fieldGuide && !photos) continue;
+      if (id.isEmpty || (!fieldGuide && !photos)) continue;
       if (purchase.status == PurchaseStatus.purchased ||
           purchase.status == PurchaseStatus.restored) {
         Purchases.purchases[id] = purchase;
         changed = true;
-        // Photo-storage restores are completed by the app listener.
-        if (fieldGuide) finish.add(purchase);
+        if (fieldGuide && purchase.status == PurchaseStatus.purchased) {
+          finish.add(purchase);
+        }
       } else if (fieldGuide &&
-          (purchase.status == PurchaseStatus.error ||
-              purchase.status == PurchaseStatus.canceled)) {
+          purchase.status == PurchaseStatus.error &&
+          !storePurchaseCanceled(purchase)) {
         finish.add(purchase);
       }
     }
@@ -131,28 +132,26 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
 
   Future<void> _finish(List<PurchaseDetails> purchases) async {
     for (final purchase in purchases) {
-      if (purchase.status == PurchaseStatus.pending) continue;
-      if (purchase.status == PurchaseStatus.error ||
-          purchase.status == PurchaseStatus.canceled) {
-        Purchases.purchases.remove(purchase.productID);
+      if (purchase.productID.isEmpty ||
+          purchase.status == PurchaseStatus.pending ||
+          storePurchaseCanceled(purchase)) {
+        continue;
+      }
+      if (purchase.status == PurchaseStatus.error) {
         if (!mounted) return;
-        _applyOwned();
         setState(() {
           _error = S.of(context).product_subscribe_failed;
           _busy = false;
         });
-      } else if (purchase.status == PurchaseStatus.purchased) {
-        final valid = await verifyPurchase(purchase);
-        if (!valid) {
-          Purchases.purchases.remove(purchase.productID);
-          if (!mounted) return;
-          _applyOwned();
-          setState(() => _error = S.of(context).product_subscribe_failed);
-        }
+        continue;
       }
-      if (purchase.pendingCompletePurchase) {
-        await InAppPurchase.instance.completePurchase(purchase);
-      }
+      if (purchase.status != PurchaseStatus.purchased) continue;
+      final valid = await verifyPurchase(purchase);
+      if (valid) continue;
+      Purchases.purchases.remove(purchase.productID);
+      if (!mounted) return;
+      _applyOwned();
+      setState(() => _error = S.of(context).product_subscribe_failed);
     }
   }
 
@@ -211,17 +210,7 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
       setState(() => _error = S.of(context).product_purchase_failed);
       return;
     }
-    Purchases.purchases = {};
-    final loaded = _loaded;
-    setState(() {
-      _error = null;
-      if (loaded != null) {
-        _loaded = GuideFieldGuideLoaded(
-          catalog: loaded.catalog.withOwnership(const {}),
-          products: loaded.products,
-        );
-      }
-    });
+    setState(() => _error = null);
     await store.restorePurchases();
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(

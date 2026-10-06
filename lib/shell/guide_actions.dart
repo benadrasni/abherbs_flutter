@@ -18,7 +18,6 @@ import 'package:abherbs_flutter/search/search_page.dart';
 import 'package:abherbs_flutter/person/sign_in_page.dart';
 import 'package:abherbs_flutter/species/species_page.dart';
 import 'package:abherbs_flutter/main.dart';
-import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/person/setting_utils.dart';
 import 'package:abherbs_flutter/person/account_deletion.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
@@ -117,7 +116,6 @@ Future<void> guideRestorePurchases(BuildContext context) async {
     );
     return;
   }
-  Purchases.purchases = {};
   await store.restorePurchases();
   if (!context.mounted) return;
   ScaffoldMessenger.of(context).showSnackBar(

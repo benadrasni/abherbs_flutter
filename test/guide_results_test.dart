@@ -2,6 +2,7 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/key/results_page.dart';
+import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -407,10 +408,45 @@ void main() {
     expect(find.text('Any region'), findsNothing);
     expect(find.text('Wild and garden'), findsNothing);
     expect(find.text('Photos'), findsOneWidget);
+    expect(find.byType(AppBannerAd), findsNothing);
     expect(
       tester.getTopLeft(find.text('Daisy')).dy,
       lessThan(tester.getTopLeft(find.text('Snowdrop')).dy),
     );
+  });
+
+  testWidgets('a long family list stays free of the result banner',
+      (tester) async {
+    final plants = [
+      for (var i = 0; i < 7; i++)
+        _plant('$i', 'Species $i', label: 'Flower $i', from: 6, to: 8),
+    ];
+    await _pump(
+      tester,
+      _app(
+        GuideResultsPage(
+          colorId: '',
+          habitatId: null,
+          petalId: '',
+          listTitle: 'Daisy family',
+          listBackLabel: 'Book',
+          showAd: true,
+          adBuilder: (_) => const Text('banner'),
+          initialPlants: plants,
+          initialPrefs: const GuideResultPrefs(),
+          loadResults: (_) async => plants,
+          loadPrefs: () async => const GuideResultPrefs(),
+          savePrefs: (_) async {},
+          loadSeen: () async => const {},
+          loadRegionCounts: () async => const {},
+          locate: () async => null,
+          onOpenPlant: (_, __) {},
+          onTryPhoto: (_) async {},
+        ),
+      ),
+    );
+    expect(find.text('Flower 0'), findsOneWidget);
+    expect(find.text('banner'), findsNothing);
   });
 
   testWidgets('a region chip reloads that floristic list', (tester) async {

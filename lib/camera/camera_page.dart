@@ -120,6 +120,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   CameraController? _camera;
   int _previewEpoch = 0;
   bool _previewStarting = false;
+  bool _adLoading = false;
 
   GuideAllowance get _allowance =>
       widget.allowance ?? _liveAllowance ?? const GuideAllowance.guest();
@@ -137,12 +138,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     Purchases.namesRevision.addListener(_onNames);
     if (widget.allowance == null) unawaited(_loadMonth());
     if (widget.place == null) unawaited(_loadPlace());
-    final kind = _allowance.kind;
-    if (widget.onWatchAd == null &&
-        (kind == GuideAllowanceKind.credits ||
-            kind == GuideAllowanceKind.month)) {
-      _loadAd();
-    }
+    _ensureAd();
     unawaited(_startPreview());
   }
 
@@ -242,6 +238,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
 
   void _clearShot() {
     setState(() {
+      _naming = false;
       _sheet = null;
       _shotPath = null;
       _shotWhen = null;
@@ -271,8 +268,20 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   void _readAllowance() {
     if (widget.allowance != null) return;
     _liveAllowance = guideCameraLiveAllowance(guestFree: _guestFree);
+    _ensureAd();
     if (_liveAllowance!.kind == GuideAllowanceKind.guest) {
       unawaited(_readGuestFree());
+    }
+  }
+
+  /// A guest who signs in on this screen was not on the monthly allowance
+  /// when the camera opened, so the ad has to load then.
+  void _ensureAd() {
+    if (widget.onWatchAd != null || _rewardedAd != null || _adLoading) return;
+    final kind = _allowance.kind;
+    if (kind == GuideAllowanceKind.credits ||
+        kind == GuideAllowanceKind.month) {
+      _loadAd();
     }
   }
 
@@ -296,16 +305,20 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   }
 
   void _loadAd() {
+    if (widget.onWatchAd != null || _rewardedAd != null || _adLoading) return;
+    _adLoading = true;
     RewardedAd.load(
       adUnitId: getRewardAdUnitId(),
       request: const AdRequest(),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (ad) {
+          _adLoading = false;
           _rewardedAd = ad;
           _adAttempts = 0;
         },
         onAdFailedToLoad: (error) {
           debugPrint('guide camera ad: $error');
+          _adLoading = false;
           _rewardedAd = null;
           _adAttempts += 1;
           if (_adAttempts <= 3) _loadAd();
@@ -317,6 +330,8 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   Future<void> _showRewardedAd() async {
     final ad = _rewardedAd;
     if (ad == null) {
+      _adAttempts = 0;
+      _loadAd();
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).snack_loading_ad)),
@@ -329,11 +344,13 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     ad.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (ad) {
         ad.dispose();
+        if (_rewardedAd == ad) _rewardedAd = null;
         _loadAd();
         if (!done.isCompleted) done.complete();
       },
       onAdFailedToShowFullScreenContent: (ad, error) {
         ad.dispose();
+        if (_rewardedAd == ad) _rewardedAd = null;
         _loadAd();
         if (!done.isCompleted) done.complete();
       },
@@ -603,6 +620,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   Future<String> _placeLabel() async {
     final given = widget.placeName;
     if (given != null && given.isNotEmpty) return given;
+    if (!mounted) return '';
     final none = S.of(context).guide_outside_no_place;
     if (widget.place != null) return none;
     try {
@@ -610,6 +628,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
         loadPrefs: loadGuideResultPrefs,
         loadAllowed: () => Prefs.getBoolF(keyGuideLocationAllowed, false),
         regionName: (id) {
+          if (!mounted) return '';
           final name = getFilterDistributionValue(context, id);
           if (name is! String) return '';
           return name;
@@ -704,7 +723,6 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     final when = _shotWhen ?? DateTime.now();
     final position = _shotPosition;
     final place = await _placeLabel();
-    if (!mounted) return;
     final id = await saveGuideCameraFind(GuideCameraDraft(
       plant: name,
       when: when,
@@ -781,13 +799,14 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     );
   }
 
-  void _openList(String path) {
+  Future<void> _openList(String path) {
     final action = widget.onOpenList;
     if (action != null) {
       action(path);
-      return;
+      _endNaming();
+      return Future<void>.value();
     }
-    unawaited(_openThenPreview(() {
+    return _openThenPreview(() {
       return openGuideTaxonList(
         context,
         listPath: path,
@@ -800,7 +819,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
           );
         },
       );
-    }));
+    });
   }
 
   void _refused(String message) {
@@ -810,11 +829,17 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     );
   }
 
+  void _endNaming() {
+    if (!mounted || !_naming) return;
+    setState(() => _naming = false);
+  }
+
   Future<void> _openThenPreview(Future<void> Function() push) async {
     await _stopPreview();
     await push();
     if (!mounted) return;
     setState(() {
+      _naming = false;
       _shotPath = null;
       _shotWhen = null;
       _shotPosition = null;
@@ -863,35 +888,48 @@ class _GuideCameraPageState extends State<GuideCameraPage>
         _shotPosition = await phone;
         if (!mounted) return;
       }
-      setState(() => _naming = false);
+      // The naming cover stays up until the find is saved and the next page
+      // is open, so Close cannot drop a name that was already spent.
       switch (outcome.kind) {
         case GuideCameraOutcomeKind.species:
           final name = outcome.speciesName;
-          if (name != null) {
-            if (widget.onOpenSpecies != null) {
-              widget.onOpenSpecies!(name);
-            } else {
-              unawaited(_openThenPreview(
-                () => _pushSpecies(
-                  name,
-                  outcome.candidates,
-                  probability: outcome.leadProbability,
-                ),
-              ));
-            }
+          final open = widget.onOpenSpecies;
+          if (name == null) {
+            _endNaming();
+          } else if (open != null) {
+            open(name);
+            _endNaming();
+          } else {
+            await _openThenPreview(
+              () => _pushSpecies(
+                name,
+                outcome.candidates,
+                probability: outcome.leadProbability,
+              ),
+            );
           }
         case GuideCameraOutcomeKind.list:
           final list = outcome.listPath;
-          if (list != null) _openList(list);
+          if (list == null) {
+            _endNaming();
+          } else {
+            await _openList(list);
+          }
         case GuideCameraOutcomeKind.outside:
-          unawaited(_openThenPreview(() => _pushOutside(outcome)));
+          await _openThenPreview(() => _pushOutside(outcome));
         case GuideCameraOutcomeKind.notPlant:
+          if (!mounted) return;
           setState(() {
+            _naming = false;
             _notPlantCounted = outcome.counted;
             _sheet = _Sheet.notPlant;
           });
         case GuideCameraOutcomeKind.limit:
-          setState(() => _sheet = _Sheet.limit);
+          if (!mounted) return;
+          setState(() {
+            _naming = false;
+            _sheet = _Sheet.limit;
+          });
         case GuideCameraOutcomeKind.signIn:
           _clearShot();
           await _signIn();

@@ -13,7 +13,10 @@ void main() {
   test('email follow-up creates a missing account and keeps a wrong password',
       () {
     expect(guideEmailLooksValid('ada@example.com'), isTrue);
+    expect(guideEmailLooksValid('ada+flower@gmail.com'), isTrue);
+    expect(guideEmailLooksValid('ada@example.online'), isTrue);
     expect(guideEmailLooksValid('ada'), isFalse);
+    expect(guideEmailLooksValid('ada@example'), isFalse);
     expect(
       guideEmailFollowUp(creating: false, code: null),
       GuideEmailFollowUp.signedIn,
@@ -52,8 +55,12 @@ void main() {
     );
 
     expect(guidePhoneNumber('421', '905 123 456'), '+421905123456');
+    expect(guidePhoneNumber('421', '0905 123 456'), '+421905123456');
+    expect(guidePhoneNumber('421', '+421 905 123 456'), '+421905123456');
+    expect(guidePhoneNumber('421', '00421905123456'), '+421905123456');
     expect(guidePhoneNumber('+1', '(905)'), '+1905');
     expect(guidePhoneNumber('421', '   '), '');
+    expect(guidePhoneNumber('421', '0'), '');
     expect(
       guidePhoneFailure('invalid-phone-number'),
       GuidePhoneFailure.invalidNumber,

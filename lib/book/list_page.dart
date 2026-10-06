@@ -4,9 +4,7 @@ import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
 import 'package:abherbs_flutter/species/species_page.dart';
-import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/data/utils.dart';
-import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -42,7 +40,8 @@ final _datedListPath = RegExp(r'^lists_custom/\d{4}-\d{2}-\d{2}(/list)?$');
 bool notificationPathOpensNewInBook(String path) {
   var value = path.trim();
   if (value.startsWith('/')) value = value.substring(1);
-  if (value == '$firebaseListsCustom/new' || value.startsWith('$firebaseListsCustom/new/')) {
+  if (value == '$firebaseListsCustom/new' ||
+      value.startsWith('$firebaseListsCustom/new/')) {
     return true;
   }
   return _datedListPath.hasMatch(value);
@@ -71,7 +70,6 @@ class GuideNewPage extends StatefulWidget {
   final String backLabel;
   final List<GuideNewDay>? initialDays;
   final Set<String>? initialSeen;
-  final bool? showAd;
   final Future<List<GuideNewDay>> Function() loadDays;
   final Future<Set<String>> Function() loadSeen;
   final void Function(BuildContext context, String name) onOpenPlant;
@@ -84,7 +82,6 @@ class GuideNewPage extends StatefulWidget {
     required this.onOpenPlant,
     this.initialDays,
     this.initialSeen,
-    this.showAd,
   });
 
   @override
@@ -110,8 +107,6 @@ class _GuideNewPageState extends State<GuideNewPage> {
       _load();
     }
   }
-
-  bool get _showAd => widget.showAd ?? Purchases.showsAds();
 
   int get _count {
     final days = _days;
@@ -167,7 +162,6 @@ class _GuideNewPageState extends State<GuideNewPage> {
       showSwitch: days != null,
       onPhotos: () => setState(() => _plates = false),
       onPlates: () => setState(() => _plates = true),
-      showAd: _showAd && days != null,
       body: _body(days),
     );
   }
@@ -293,7 +287,6 @@ class GuideYearPage extends StatefulWidget {
   final String? sourceUrl;
   final List<GuideYearEntry>? initialEntries;
   final Set<String>? initialSeen;
-  final bool? showAd;
   final DateTime Function() now;
   final Future<GuideYearList> Function() loadList;
   final Future<Set<String>> Function() loadSeen;
@@ -309,7 +302,6 @@ class GuideYearPage extends StatefulWidget {
     this.sourceUrl,
     this.initialEntries,
     this.initialSeen,
-    this.showAd,
     this.now = DateTime.now,
   });
 
@@ -338,8 +330,6 @@ class _GuideYearPageState extends State<GuideYearPage> {
       _load();
     }
   }
-
-  bool get _showAd => widget.showAd ?? Purchases.showsAds();
 
   Future<void> _load() async {
     final ticket = ++_ticket;
@@ -384,7 +374,6 @@ class _GuideYearPageState extends State<GuideYearPage> {
       showSwitch: entries != null,
       onPhotos: () => setState(() => _plates = false),
       onPlates: () => setState(() => _plates = true),
-      showAd: _showAd && entries != null,
       padded: false,
       body: _body(entries),
     );
@@ -418,7 +407,6 @@ class _ListChrome extends StatelessWidget {
   final bool showSwitch;
   final VoidCallback onPhotos;
   final VoidCallback onPlates;
-  final bool showAd;
   final bool padded;
   final List<Widget> body;
 
@@ -431,7 +419,6 @@ class _ListChrome extends StatelessWidget {
     required this.showSwitch,
     required this.onPhotos,
     required this.onPlates,
-    required this.showAd,
     required this.body,
     this.sourceUrl,
     this.padded = true,
@@ -535,12 +522,12 @@ class _ListChrome extends StatelessWidget {
               ),
             ),
           SliverPadding(
-            padding: EdgeInsets.fromLTRB(padded ? 20 : 0, 8, padded ? 20 : 0, 8),
+            padding:
+                EdgeInsets.fromLTRB(padded ? 20 : 0, 8, padded ? 20 : 0, 8),
             sliver: SliverList(
               delegate: SliverChildListDelegate(body),
             ),
           ),
-          if (showAd) const SliverToBoxAdapter(child: AppBannerAd()),
           const SliverPadding(padding: EdgeInsets.only(bottom: 16)),
         ],
       ),

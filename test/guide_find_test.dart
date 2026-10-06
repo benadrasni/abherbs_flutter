@@ -136,7 +136,7 @@ void main() {
     expect(guideFindConfirmed({observationConfirmed: 'false'}), isTrue);
   });
 
-  testWidgets('pins the banner above Find and leaves Book clear',
+  testWidgets('pins the banner above Find and Book, and leaves Seen clear',
       (tester) async {
     Purchases.hasOldVersion = true;
     var index = 0;
@@ -154,7 +154,7 @@ void main() {
           body: const SizedBox.shrink(),
           bottomNavigationBar: GuideBottomBar(
             index: index,
-            showAd: index == 0,
+            showAd: index == 0 || index == 1,
             onSelect: (next) => index = next,
           ),
         ),
@@ -167,8 +167,13 @@ void main() {
 
     index = 1;
     await tester.pumpWidget(bar());
-    expect(find.byType(AppBannerAd), findsNothing);
+    expect(find.byType(AppBannerAd), findsOneWidget);
     expect(find.text('Book'), findsOneWidget);
+
+    index = 2;
+    await tester.pumpWidget(bar());
+    expect(find.byType(AppBannerAd), findsNothing);
+    expect(find.text('Seen'), findsOneWidget);
   });
 
   testWidgets('shows the key, the first five finds, and the list covers',
