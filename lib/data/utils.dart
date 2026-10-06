@@ -13,9 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
 const String productSearch = "search";
-const String productCustomFilter = "custom_filter";
 const String productOffline = "offline";
-const String productObservations = "observations";
 const String productPhotoSearch = "search_by_photo";
 const String subscriptionMonthly = "store_photos_monthly";
 const String subscriptionYearly = "store_photos_yearly";
@@ -25,7 +23,6 @@ const String fieldGuideYearly = "field_guide_yearly";
 const String keyLanguageAndCountry = "language_country";
 const String keyPreferredLanguage = "pref_language";
 const String keyMyRegion = "my_region";
-const String keyAlwaysMyRegion = "always_my_region";
 const String keyGuideRegion = "guide_region";
 const String keyGuideRegionFromLocation = "guide_region_from_location";
 const String keyGuideWildOnly = "guide_wild_only";
@@ -44,28 +41,14 @@ const String keyOffline = "offline";
 const String keyOfflinePlant = "offline_plant";
 const String keyOfflineFamily = "offline_family";
 const String keyOfflineDB = "offline_db";
-const String keyRateState = "rate_state";
-const String keyRateCount = "rate_count";
-const String keyMyFilter = "my_filter";
 const String keyPurchases = "purchases";
 const String keyToken = "token";
 const String keyOldVersion = "old_version";
 const String keyLifetimeSubscription = "lifetime_subscription";
 const String keyGuestCreated = "guest_created";
 const String keyGuestFreeUsed = "guest_free_used";
-const String keyFontSize = "font_size";
-const int rateCountInitial = 5;
-const String rateStateInitial = "";
-const String rateStateNever = "never";
-const String rateStateShould = "should";
-const String rateStateDid = "did";
-
-const double defaultFontSize = 16;
-const double maxFontSize = 22;
 
 const String playStore = "market://details?id=sk.ab.herbs";
-const String appStore =
-    "https://itunes.apple.com/us/app/whats-that-flower/id1449982118?mt=8&action=write-review";
 const String appStoreListing = "https://apps.apple.com/app/id1449982118";
 
 const String languageLatin = "la";
@@ -103,7 +86,6 @@ const String languageHebrew = "he";
 const String languageArabic = "ar";
 const String languageIndonesian = "id";
 const String languageTurkish = "tr";
-const String heightUnitOfMeasure = "cm";
 
 const String webUrl = "https://whatsthatflower.com/";
 
@@ -159,7 +141,6 @@ const String storageObservations = "observations/";
 const String storagePrivate = "private/";
 const String defaultExtension = ".webp";
 const String defaultPhotoExtension = ".jpg";
-const String thumbnailsDir = "/.thumbnails";
 const double imageSizeScaleDown = 2048;
 
 const int firebaseCacheSize = 1024 * 1024 * 20;
@@ -206,8 +187,6 @@ const String firebaseUsersPhotoSearch = "users_photo_search";
 const String firebasePhotoQuota = "photo_quota";
 const String firebaseAttributeAnonymousFreeUsed = "anonymousFreeUsed";
 const String firebaseSearchPhoto = 'search_photo';
-const String firebaseSettingsGenericEntities = "settings/generic_entities";
-const String firebaseSettingsEngine = "settings/ai_engine";
 const String firebaseObservationsPublic = "observations/public";
 const String firebaseObservationsPrivate = "observations/by users";
 const String firebaseObservationsLogs = "observations/logs";
@@ -225,39 +204,24 @@ const String firebaseAttributeIOS = "ios";
 const String firebaseAttributeAndroid = "android";
 const String firebaseAttributeLastUpdate = "db_update";
 const String firebaseAttributeName = "name";
-const String firebaseAttributeFamily = "family";
 const String firebaseAttributeUrl = "url";
 const String firebaseAttributeLabel = "label";
 const String firebaseAttributeOrder = "order";
-const String firebaseAttributeStatus = "status";
-const String firebaseAttributeTime = "time";
 const String firebaseAttributeOldVersion = "old version";
 const String firebaseAttributeLifetimeSubscription = "lifetime subscription";
 const String firebaseAttributeToken = "token";
 const String firebaseAttributePurchases = "purchases";
 const String firebaseAttributeCredits = "credits";
-const String firebaseAttributeSearch = "search";
-const String firebaseAttributeSearchByPhoto = "search_by_photo";
-const String firebaseAttributeObservations = "observations";
-const String firebaseAttributeFrom = "from";
-const String firebaseAttributeTo = "to";
 const String firebaseAttributeFavorite = "favorites";
 const String firebaseAttributeEntity = "m";
 const String firebaseAttributeAnonymous = "anonymous";
 const String firebaseAttributeIsLabel = "is_label";
-const String firebaseAttributeMock = "refresh_mock";
-const String firebaseAttributeIPNI = "ipni";
 
 const String firebaseValuePrivate = "private";
 const String firebaseValueReview = "review";
 const String firebaseValuePublic = "public";
-const String firebaseValueSuccess = "success";
 const String firebaseValueRejection = "rejected";
-const String firebaseValueFailure = "failure";
 
-const String notificationAttributeNotification = "notification";
-const String notificationAttributeBody = "body";
-const String notificationAttributeData = "data";
 const String notificationAttributeAction = "action";
 const String notificationAttributeActionList = "list";
 const String notificationAttributeActionBrowse = "browse";
@@ -266,15 +230,8 @@ const String notificationAttributePath = "path";
 const String notificationAttributeUri = "uri";
 const String notificationAttributeName = "name";
 
-const String remoteAdsFrequency = "ads_frequency";
 const String remoteMinAndroidBuild = "min_android_build";
 const String remoteMinIosBuild = "min_ios_build";
-const String remoteConfigIPNIServer = "ipni_server";
-const String remoteConfigIPNIServerWithTaxon = "ipni_server_with_taxon";
-const String remoteConfigSearchByNameVideo = "search_by_name_video";
-const String remoteConfigSearchByPhotoVideo = "search_by_photo_video";
-const String remoteConfigObservationsVideo = "observations_video";
-const String remoteConfigCustomFilterVideo = "custom_filter_video";
 
 final DatabaseReference rootReference = FirebaseDatabase.instance.ref();
 final DatabaseReference countsReference = rootReference.child(firebaseCounts);
@@ -287,7 +244,6 @@ final DatabaseReference listsReference =
     rootReference.child(firebasePlantHeaders);
 final DatabaseReference listsCustomReference =
     rootReference.child(firebaseListsCustom);
-final DatabaseReference keysReference = rootReference.child(firebaseLists);
 final DatabaseReference translationsReference =
     rootReference.child(firebaseTranslations);
 final DatabaseReference translationsTaxonomyReference =
@@ -304,8 +260,6 @@ final DatabaseReference logsObservationsReference =
 final DatabaseReference logsCreditsReference =
     rootReference.child(firebaseCreditsLogs);
 final DatabaseReference usersReference = rootReference.child(firebaseUsers);
-final DatabaseReference synonymsReference =
-    rootReference.child(firebaseSynonyms);
 
 Map<String, String> translationCache = {};
 

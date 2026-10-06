@@ -92,33 +92,6 @@ class Prefs {
     return value;
   }
 
-  static double getDouble(String? key, [double? defValue]) {
-    if (key == null) {
-      return 0;
-    }
-    assert(_initCalled,
-        'Prefs.init() must be called first in an initState() preferably!');
-    assert(_prefsInstance != null,
-        'Maybe call Prefs.getDoubleF(key) instead. SharedPreferences not ready yet!');
-    return _prefsInstance?.getDouble(key) ?? defValue ?? 0.0;
-  }
-
-  static Future<double> getDoubleF(String? key, [double? defValue]) async {
-    double value;
-    if (key == null) {
-      return 0;
-    }
-    if (_prefsInstance == null) {
-      final prefs = await instance;
-      value = prefs.getDouble(key) ?? defValue ?? 0.0;
-    } else {
-      // SharedPreferences is available. Ignore init() function.
-      _initCalled = true;
-      value = getDouble(key, defValue);
-    }
-    return value;
-  }
-
   static String getString(String? key, [String? defValue]) {
     if (key == null) {
       return '';
@@ -181,15 +154,6 @@ class Prefs {
     }
     final prefs = await instance;
     return prefs.setBool(key, value);
-  }
-
-  /// Android doesn't support storing doubles, so it will be stored as a float.
-  static Future<bool> setDouble(String? key, double? value) async {
-    if (key == null || value == null) {
-      return false;
-    }
-    final prefs = await instance;
-    return prefs.setDouble(key, value);
   }
 
   static Future<bool> setInt(String? key, int? value) async {

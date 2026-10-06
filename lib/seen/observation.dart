@@ -1,4 +1,3 @@
-import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/seen/serializer.dart';
 
 const String observationId = "id";
@@ -35,7 +34,6 @@ class Observation {
   String note = "";
   List<dynamic> photoPaths = [];
   String status = observationStatusPrivate;
-  String uploadStatus = firebaseValuePrivate;
   int order = 0;
   bool indoors = false;
 
@@ -46,23 +44,6 @@ class Observation {
 
   Observation(String plantName) {
     this.plant = plantName;
-  }
-
-  Observation.from(Observation observation) {
-    this.key = observation.key;
-    this.id = observation.id;
-    this.plant = observation.plant;
-    this.date = observation.date;
-    this.longitude = observation.longitude;
-    this.latitude = observation.latitude;
-    this.note = observation.note;
-    this.photoPaths = List.from(observation.photoPaths);
-    this.status = observation.status;
-    this.order = observation.order;
-    this.indoors = observation.indoors;
-    this.confirmed = observation.confirmed;
-    this.source = observation.source;
-    this.candidates = List.from(observation.candidates);
   }
 
   Observation.fromJson(key, Map data) {

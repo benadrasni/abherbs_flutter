@@ -46,7 +46,6 @@ void _iapError() {
 }
 
 Future<void> initializeFlutterFire() async {
-  // Wait for Firebase to initialize
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -123,11 +122,9 @@ void main() {
       Locale locale = await initializeLocale();
       runApp(App(locale));
     }).catchError((error) {
-      print('FlutterFire: Caught error in FlutterFire initialization.');
       FirebaseCrashlytics.instance.recordError(error, null);
     });
   }, (error, stackTrace) {
-    print('runZonedGuarded: Caught error in my root zone.');
     if (isIgnorableNonFatalError(error)) {
       return;
     }
@@ -164,18 +161,14 @@ class _AppState extends State<App> {
   void _subscribeToLanguageTopic(String languageCode) {
     final topic = 'notifications-$languageCode';
     FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
-      print('Subscribed to $topic');
       _currentTopic = topic;
     }).catchError((error) {
-      print('Failed to subscribe to $topic: $error');
     });
   }
 
   void _unsubscribeFromTopic(String topic) {
     FirebaseMessaging.instance.unsubscribeFromTopic(topic).then((_) {
-      print('Unsubscribed from $topic');
     }).catchError((error) {
-      print('Failed to unsubscribe from $topic: $error');
     });
   }
 
@@ -316,7 +309,6 @@ class _AppState extends State<App> {
     );
 
     FirebaseMessaging.instance.getToken().then((token) {
-      print('token $token');
       _persistFcmToken(token);
     }).onError((error, stackTrace) => null);
     FirebaseMessaging.instance.onTokenRefresh.listen(_persistFcmToken);

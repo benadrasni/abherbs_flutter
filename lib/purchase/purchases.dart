@@ -41,10 +41,6 @@ class Purchases {
     return hasFieldGuide();
   }
 
-  static bool isPurchased(String productId) {
-    return purchases.containsKey(productId);
-  }
-
   static bool isNoAds() {
     return hasOldVersion ||
         purchases.containsKey(productNoAdsAndroid) ||
@@ -61,19 +57,11 @@ class Purchases {
     return hasOldVersion || purchases.containsKey(productSearch);
   }
 
-  static bool isCustomFilter() {
-    return hasOldVersion || purchases.containsKey(productCustomFilter);
-  }
-
   /// The offline product, the old paid app, and a lifetime purchase.
   static bool isOffline() {
     return hasOldVersion ||
         hasLifetimeSubscription ||
         purchases.containsKey(productOffline);
-  }
-
-  static bool isObservations() {
-    return hasOldVersion || purchases.containsKey(productObservations);
   }
 
   static bool isPhotoSearch() {

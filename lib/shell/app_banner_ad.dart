@@ -46,7 +46,6 @@ class _AppBannerAdState extends State<AppBannerAd> {
           }
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          print('Banner failed: ${error.code} ${error.message}');
           ad.dispose();
           if (_ad == ad) {
             _ad = null;

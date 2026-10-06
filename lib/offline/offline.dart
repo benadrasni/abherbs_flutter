@@ -235,33 +235,6 @@ class Offline {
     });
   }
 
-  static void download(
-      Function(int, int) onFamilyDownload,
-      Function(int, int) onPlantDownload,
-      Function() onDownloadFinish,
-      Function() onDownloadFail) {
-    for (var i = 1; i <= 4; i++) {
-      setKeepSynced(i, true);
-    }
-    Future.wait([
-      downloadFamilies(onFamilyDownload),
-      _downloadPlants(onPlantDownload)
-    ]).then((List<bool> results) {
-      if (downloadPaused) {
-        downloadFinished = false;
-      } else {
-        downloadFinished = results.reduce((x, y) => x && y);
-        if (downloadFinished) {
-          onDownloadFinish();
-        } else {
-          onDownloadFail();
-        }
-      }
-    }).catchError((error) {
-      onDownloadFail();
-    });
-  }
-
   static Future<bool> downloadFamilies(
       Function(int, int) onFamilyDownload) async {
     int position = int.parse(await Prefs.getStringF(keyOfflineFamily, '0'));
@@ -313,34 +286,6 @@ class Offline {
       }
     }
     return false;
-  }
-
-  static Future<bool> _downloadPlants(
-      Function(int, int) onPlantDownload) async {
-    int position = int.parse(await Prefs.getStringF(keyOfflinePlant, '0'));
-    int plantTotal = await FirebaseDatabase.instance
-        .ref()
-        .child(firebasePlantsToUpdate)
-        .child(firebaseAttributeCount)
-        .once()
-        .then((event) {
-      return event.snapshot.value as int;
-    });
-    while (position < plantTotal) {
-      if (await _downloadPlantPhotos(position)) {
-        position++;
-        Prefs.setString(keyOfflinePlant, position.toString());
-        onPlantDownload(position, plantTotal);
-        if (downloadPaused) {
-          break;
-        }
-      } else {
-        return false;
-      }
-    }
-
-    onPlantDownload(position, plantTotal);
-    return true;
   }
 
   static Future<bool> _downloadPlantIds(
