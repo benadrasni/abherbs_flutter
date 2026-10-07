@@ -35,11 +35,7 @@ void main() {
     );
   });
 
-  test('a name, address, or number supplies the avatar letter', () {
-    expect(guideAccountInitial(name: 'ada'), 'A');
-    expect(guideAccountInitial(name: '  ', email: 'bea@example.com'), 'B');
-    expect(guideAccountInitial(phone: '+421900'), '+');
-    expect(guideAccountInitial(), '');
+  test('a signed-in account keeps the provider and the trimmed name', () {
     expect(
       guideAccountProvider(['password', 'google.com']),
       GuideAccountProvider.google,

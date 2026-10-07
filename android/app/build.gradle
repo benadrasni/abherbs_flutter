@@ -59,10 +59,6 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
-    lintOptions {
-        disable 'InvalidPackage'
-    }
-
     defaultConfig {
         applicationId "sk.ab.herbs"
         minSdkVersion flutter.minSdkVersion

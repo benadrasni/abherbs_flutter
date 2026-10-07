@@ -34,13 +34,6 @@ String? guidePrivateObjectPath(String photoPath, String uid) {
   return '$storagePrivate$uid/$rest';
 }
 
-/// Same key the camera uses for `by plant`. Spaces stay. `. # $ [ ] /` do not.
-String guidePrivatePlantKey(String name) {
-  final cleaned = name.trim().replaceAll(RegExp(r'[.#$\[\]/]'), '_');
-  if (cleaned.isEmpty) return '_';
-  return cleaned;
-}
-
 String guidePrivateContentType(String path) {
   final dot = path.lastIndexOf('.');
   final ext = dot >= 0 ? path.substring(dot + 1).toLowerCase() : '';
@@ -322,7 +315,7 @@ Future<void> _markCloud(String uid, String id, String plant) async {
       .update(patch);
   final keys = <String>{
     if (plant.isNotEmpty) plant,
-    if (plant.isNotEmpty) guidePrivatePlantKey(plant),
+    if (plant.isNotEmpty) guideObservationPlantKey(plant),
   };
   for (final key in keys) {
     final ref = root

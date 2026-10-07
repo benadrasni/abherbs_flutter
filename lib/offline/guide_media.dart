@@ -179,8 +179,6 @@ class GuideCatalogChange {
     required this.kind,
     required this.stamp,
   });
-
-  bool get added => kind == 'added';
 }
 
 class GuideChangeLog {

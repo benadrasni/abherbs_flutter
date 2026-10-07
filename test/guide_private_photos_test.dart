@@ -1,5 +1,4 @@
 import 'package:abherbs_flutter/seen/observation.dart';
-import 'package:abherbs_flutter/camera/guide_camera.dart';
 import 'package:abherbs_flutter/seen/guide_private_photos.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -29,17 +28,6 @@ void main() {
       isNull,
     );
     expect(guidePrivateObjectPath('photos/user/bp_1.jpg', uid), isNull);
-  });
-
-  test('plant keys match the camera observation key', () {
-    for (final name in [
-      'Bellis perennis',
-      'Tanacetum corymbosum',
-      'A/B.C#D\$E[F]',
-      '   ',
-    ]) {
-      expect(guidePrivatePlantKey(name), guideObservationPlantKey(name));
-    }
   });
 
   test('content type follows the file', () {

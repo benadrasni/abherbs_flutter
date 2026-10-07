@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/camera/camera_page.dart';
 import 'package:abherbs_flutter/camera/guide_camera.dart';
+import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/camera/plant_id_search.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';

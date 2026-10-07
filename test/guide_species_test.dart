@@ -7,7 +7,6 @@ import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/species/species_page.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
