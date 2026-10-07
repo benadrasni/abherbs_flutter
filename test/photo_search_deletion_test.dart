@@ -73,7 +73,8 @@ void main() {
     expect(paths, contains('users_photo_search/tr-TR/user'));
     expect(paths, contains('users_photo_search/tr/user'));
     expect(paths, contains('users_photo_search/zh-TW/user'));
-    expect(paths.where((path) => path.contains('_')), isEmpty);
+    final tags = paths.map((path) => path.split('/')[1]);
+    expect(tags.where((tag) => tag.contains('_')), isEmpty);
     expect(paths.toSet().length, paths.length);
   });
 }
