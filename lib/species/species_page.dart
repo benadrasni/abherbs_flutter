@@ -1515,14 +1515,12 @@ class _Fact extends StatelessWidget {
   final String value;
   final Color? valueColor;
   final Key? valueKey;
-  final EdgeInsetsGeometry padding;
 
   const _Fact({
     required this.label,
     required this.value,
     this.valueColor,
     this.valueKey,
-    this.padding = const EdgeInsetsDirectional.fromSTEB(20, 11, 12, 11),
   });
 
   @override
@@ -1531,7 +1529,7 @@ class _Fact extends StatelessWidget {
     return ColoredBox(
       color: colors.paper,
       child: Padding(
-        padding: padding,
+        padding: const EdgeInsetsDirectional.fromSTEB(20, 11, 12, 11),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
