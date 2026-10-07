@@ -71,10 +71,25 @@ class PhotoIdentification {
 
 /// `language` for `identifyPlant`. The region stays on the tag so Traditional
 /// Chinese (`zh-TW`) and Portuguese can be mapped to Plant.id's codes.
+/// This is also the `users_photo_search` key [_saveLabels] writes.
 String plantIdLanguageTag(Locale locale) {
   final country = locale.countryCode;
   if (country == null || country.isEmpty) return locale.languageCode;
   return '${locale.languageCode}-$country';
+}
+
+/// `users_photo_search` keys for [locales].
+///
+/// [_saveLabels] stores [plantIdLanguageTag] (`en`, `en-GB`, `tr-TR`).
+/// The store build wrote [Locale.languageCode] at that same level.
+List<String> photoSearchLanguageKeys(Iterable<Locale> locales) {
+  final keys = <String>{
+    for (final locale in locales) ...[
+      plantIdLanguageTag(locale),
+      locale.languageCode,
+    ],
+  };
+  return keys.toList()..sort();
 }
 
 /// Catalog language for a Plant.id tag. `en-US` is `en`, and Bokmål is `no`.
