@@ -169,5 +169,5 @@ Database additions and changes are allowed when a new page needs a field or node
 | Offline | The whole book, or a floristic region. Each row shows the plants and the space the pictures take. The phone’s region is offered first |
 | Offline · downloading | Middle Europe, about halfway, in megabytes |
 | Offline · add a region | Middle Europe is already stored. Adding the Northeast shows only the plants that are not |
-| Person | Account, allowance, restore, language, theme. The version sits at the bottom; a tap copies it. Delete account asks first |
+| Person | Account and the name allowance. Field Guide is one perk line, and that row hides once subscribed. Language sits on the right. Ad privacy shows where consent can be changed. Dangerous zone is above Delete account. The version copies on tap. A guest does not see Delete account |
 | Person · delete account | The account, observations, photos, and profile go. Purchases stay and can be restored |

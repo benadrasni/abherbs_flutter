@@ -442,10 +442,25 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .bar{height:8px;border-radius:4px;background:var(--paper-2);overflow:hidden;display:flex;margin:10px 0 6px}
 .bar i{display:block;background:var(--moss-fill)}
 .bar i.x{background:var(--gold)}
+.card b{font-size:16px;font-weight:600;line-height:1.25}
+.meterhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.meterhead .k{flex:none}
+.card.tap{padding:0}
+.cardgo{display:block;width:100%;text-align:start;padding:14px}
+.signinrow{margin-top:10px}
+.card.tap .signinrow{margin:0;padding:0 14px 14px}
+.guestnote{margin-top:4px}
 .menu .srow{border-bottom:1px solid var(--rule)}
 .menu .srow svg{width:22px;height:22px;color:var(--moss)}
+.menu .srow .tx b{font-size:16px;line-height:1.2}
+.menu .srow .tx span{line-height:1.3}
+.menu .srow.lang{padding:14px 8px 14px 20px}
+.menu .srow.lang b{flex:1;min-width:0;font-size:16px;font-weight:600;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.menu .srow.lang .name{flex:1;min-width:0;text-align:end;font-size:16px;font-weight:500;color:var(--ink-2);line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.menu .srow.lang .chev{width:22px;height:22px;color:var(--ink-3);margin-left:2px}
+.menu .zone{padding:22px 20px 6px;font-size:13px;font-weight:600;color:var(--ink-3);line-height:1.2}
 .menu .srow.danger svg,.menu .srow.danger b{color:var(--madder)}
-.ver{display:block;width:100%;margin:8px 0 12px;padding:14px 20px 4px;border:0;background:none;font:inherit;font-size:12px;color:var(--ink-3);text-align:center}
+.ver{display:block;width:100%;margin:0;padding:18px 20px 8px;border:0;background:none;font:inherit;font-size:12px;font-weight:500;color:var(--ink-3);text-align:center}
 
 /* Offline */
 .pack{display:flex;align-items:flex-start;gap:12px;width:calc(100% - 40px);margin:0 20px 10px;padding:14px;border-radius:16px;background:var(--cream);border:1px solid var(--rule);text-align:left}
@@ -587,6 +602,8 @@ const I={
   globe:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>',
   cloud:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 9a4.5 4.5 0 0 1 0 9z"/></svg>',
   chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5M4 19h16"/><path d="M8 16v-4M12 16V8M16 16v-7"/></svg>',
+  shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 5 6v6c0 4.5 3 7 7 9 4-2 7-4.5 7-9V6z"/><path d="M12 8v4.5"/><circle cx="12" cy="16.2" r=".8" fill="currentColor" stroke="none"/></svg>',
+  chev:'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg>',
 };
 const HAB_G={
   1:'<svg viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 36h36"/><path d="M9 36c0-6 1-10 3-14M13 36c0-5-1-9-4-12M20 36c0-8 2-13 5-17M26 36c0-6-2-10-5-13M33 36c0-6 1-9 3-12M36 36c-1-5-3-7-6-9"/><circle cx="25" cy="17" r="2.5"/><circle cx="12" cy="20" r="2"/></svg>',
@@ -663,7 +680,7 @@ const SCREENS=[
   ['offlineDl','Offline · downloading','Middle Europe, about halfway. The bar is megabytes.'],
   ['offlineHave','Offline · add a region','Middle Europe is kept. The Northeast is ticked, and the bar is only the plants not already stored.'],
   ['signin','Sign in','Apple, Google, email or phone. The first find comes along.'],
-  ['me','Person','Account, allowance, restore, language, theme. The version sits at the bottom; a tap copies it. Delete account asks first. A guest does not see it.'],
+  ['me','Person','Account and the name allowance. Field Guide is one perk line, and that row hides once subscribed. Language sits on the right. Ad privacy shows where consent can be changed. Dangerous zone is above Delete account. The version copies on tap. A guest does not see Delete account.'],
   ['deleteAccount','Person · delete account','The account, observations, photos, and profile go. Purchases stay on this Apple ID and can be restored.'],
 ];
 
@@ -1077,27 +1094,42 @@ function signinScreen(){
     <div style="display:flex;gap:10px"><button class="prov plain" data-signstep="email">${I.mail}Email</button><button class="prov plain" data-signstep="phone">${I.phone}Phone</button></div>
     ${legal}</div></div>`;
 }
+const FG_PERKS='Unlimited • No Ads • Seen sync • Offline';
+function signBtn(){return `<button class="btn primary small" data-sign="1">Sign in</button>`}
+function allowanceCard(){
+  if(st.fg){
+    return `<div class="card tap"><button class="cardgo" data-go="fieldguide"><b>Field Guide</b><div class="k">${FG_PERKS}</div></button>${st.signed?'':`<div class="signinrow">${signBtn()}</div>`}</div>`;
+  }
+  if(st.signed){
+    const included=Math.min(Math.max(st.used,0),5);
+    const extra=Math.min(Math.max(st.ads,0),5);
+    const detail=extra?`${included} of 5 included used, ${extra} from ads. Up to 5 more from ads.`:`${included} of 5 included used. Up to 5 more from ads.`;
+    return `<div class="card"><div class="meterhead"><b>Names this month</b><span class="k">Resets Oct 1</span></div><div class="bar">${included?`<i style="width:${included*10}%"></i>`:''}${extra?`<i class="x" style="width:${extra*10}%"></i>`:''}</div><div class="k">${detail}</div></div>`;
+  }
+  if(st.used<1){
+    return `<div class="card"><b>Names left</b><div class="bar"><i style="width:100%"></i></div><div class="k">1 name left</div><div class="k guestnote">Sign in and your finds stay with your account.</div><div class="signinrow">${signBtn()}</div></div>`;
+  }
+  return `<div class="card"><b>Sign in to name a photo</b><div class="k guestnote">Sign in and your finds stay with your account.</div><div class="signinrow">${signBtn()}</div></div>`;
+}
 function meScreen(){
-  const used=Math.min(st.used,5), ex=Math.max(0,st.used-5);
-  const allowanceCard=st.fg?`<div class="card"><b>Field Guide</b><div class="k">Unlimited names · no ads · Seen synced</div></div>`:
-    st.signed?`<div class="card"><div style="display:flex;justify-content:space-between"><b>Names this month</b><span class="k">Resets 1 Oct</span></div><div class="bar"><i style="width:${used*10}%"></i><i class="x" style="width:${ex*10}%"></i></div><div class="k">${used} of 5 included used${ex?`, ${ex} from ads`:''}. Up to 5 more from ads.</div></div>`:
-    `<div class="card"><b>One free name before you sign in</b><div class="k" style="margin:4px 0 10px">Sign in for 5 names every month. Your first find and what you’ve used come with you. Reinstalling doesn’t reset it.</div><button class="btn primary small" data-sign="1">Sign in</button></div>`;
   return `<div class="back" data-goback="1">${I.back}Back</div>
   ${st.signed?(()=>{const w=st.signWith||'Google';const [title,sub]={Google:['Anna Novák','anna.novak@gmail.com · Google'],Apple:['Anna Novák','Email hidden by Apple'],Email:['anna.novak@example.com','Email and password'],Phone:['+421 905 123 456','Phone']}[w];
     return `<div class="acct"><div class="avatar">${w=='Phone'?I.phone:esc(title[0].toUpperCase())}</div><div style="min-width:0"><b style="font-size:17px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(title)}</b><div class="hint" style="margin:0">${esc(sub)}</div></div></div>`})():''}
-  ${allowanceCard}
+  ${allowanceCard()}
   <div class="menu">
-    ${st.fg?'':`<button class="srow" data-go="fieldguide">${I.leaf}<span class="tx"><b>Field Guide</b><span>7 days free</span></span></button>`}
-    <button class="srow" data-toast="Restoring from the store…">${I.restore}<span class="tx"><b>Restore purchases</b><span>Remove ads, Photo search, Offline, old paid app</span></span></button>
-    <button class="srow" data-toast="Language list">${I.globe}<span class="tx"><b>Language</b><span>English</span></span></button>
+    ${st.fg?'':`<button class="srow" data-go="fieldguide">${I.leaf}<span class="tx"><b>Field Guide</b><span>7 days free • ${FG_PERKS}</span></span></button>`}
+    <button class="srow" data-toast="Restoring purchases…">${I.restore}<span class="tx"><b>Restore purchases</b><span>Remove ads, Photo search, Offline</span></span></button>
+    <button class="srow lang" data-toast="Language list">${I.globe}<b>Language</b><span class="name">English</span>${I.chev}</button>
     <div class="srow">${I.theme}<span class="tx"><b>Theme</b><span>${st.theme=='system'?(st.phoneDark?'Dark, like the phone':'Light, like the phone'):st.theme=='dark'?'Always dark':'Always light'}</span></span>
       <div class="seg">${[['light','Light'],['dark','Dark'],['system','System']].map(([k,l])=>`<button class="${st.theme==k?'on':''}" data-theme="${k}">${l}</button>`).join('')}</div></div>
+    <button class="srow" data-toast="Opens ad privacy choices">${I.shield}<span class="tx"><b>Ad privacy choices</b><span>Manage or withdraw consent for ads</span></span></button>
     <button class="srow" data-go="offline">${I.cloud}<span class="tx"><b>Offline</b><span>${esc(offMenuLine())}</span></span></button>
     <button class="srow" data-go="stats" data-scope="private">${I.chart}<span class="tx"><b>Statistics</b><span>Your finds, and Sightings</span></span></button>
-    ${st.signed?`<button class="srow" data-sign="0">${I.person}<span class="tx"><b>Sign out</b><span>Seen stays on this phone</span></span></button>
+    ${st.signed?`<button class="srow" data-sign="0">${I.person}<span class="tx"><b>Sign out</b><span>Finds stay on your account</span></span></button>
+    <div class="zone">Dangerous zone</div>
     <button class="srow danger" data-askdelaccount="1">${I.trash}<span class="tx"><b>Delete account</b><span>Removes the account, finds, and photos</span></span></button>`:''}
   </div>
-  <button class="ver" data-toast="Copied">Version 9.0.0 (900)</button>`;
+  <button class="ver" data-toast="Version 9.0.0 (900)">Version 9.0.0 (900)</button>`;
 }
 
 /* ---------- offline ---------- */
