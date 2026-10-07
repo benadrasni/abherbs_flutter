@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:abherbs_flutter/camera/guide_camera.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/offline/offline.dart';

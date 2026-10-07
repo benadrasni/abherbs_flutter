@@ -21,8 +21,8 @@
        ▼                               ▼                          │
  Plant.id API                 GCS bucket                          │
  Google Translate             abherbs-resources                   │
- Google Maps Static           photos / families /                 │
- AdMob / IAP                  observations / misc                 │
+ AdMob / IAP                  photos / families /                 │
+                              observations / misc                 │
                                                               ┌───┴────────┐
                                                               │ abherbs-   │
                                                               │ auto       │
@@ -120,7 +120,6 @@ Paid. `lib/offline/offline.dart` keeps selected RTDB subtrees synced and downloa
 |---|---|---|
 | Plant.id v3 `https://plant.id/api/v3/identification` | `functions/src/index.ts` | Photo identification |
 | Google Translate v2 | plant detail | On-demand body text |
-| Google Maps Static | observations | Map thumbnails |
 | POWO / IPNI | Remote Config + taxonomy | Species page links |
 | AdMob (Facebook mediation on Android) | banners, interstitial, rewarded | Ads |
 

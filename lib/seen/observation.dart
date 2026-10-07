@@ -88,3 +88,11 @@ class Observation {
     return result;
   }
 }
+
+/// Firebase path key for a Latin name. Spaces stay; the forbidden characters
+/// do not.
+String guideObservationPlantKey(String name) {
+  final cleaned = name.trim().replaceAll(RegExp(r'[.#$\[\]/]'), '_');
+  if (cleaned.isEmpty) return '_';
+  return cleaned;
+}
