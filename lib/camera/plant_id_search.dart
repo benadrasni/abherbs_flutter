@@ -4,7 +4,6 @@ import 'dart:ui' show Locale;
 
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
-import 'package:abherbs_flutter/person/setting_utils.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -79,50 +78,18 @@ String plantIdLanguageTag(Locale locale) {
   return '${locale.languageCode}-$country';
 }
 
-/// Language keys under `users_photo_search` removed with an account.
+/// `users_photo_search` keys for [locales].
 ///
-/// [_saveLabels] stores [plantIdLanguageTag] of the UI locale. That locale is
-/// one of [supportedLocales]: `en` when there is no country, otherwise
-/// `en-GB` or `tr-TR`. [preferredLanguageTag] is the saved picker value
-/// (`en_GB`, or the old `en_UK`) converted to that same form.
-///
-/// Language-only keys (`de`, `tr`) stay in the set. The store build writes
-/// `Locale.languageCode`, not the full tag.
-List<String> photoSearchDeletionTags({
-  required Iterable<Locale> supportedLocales,
-  String preferredLanguageTag = '',
-}) {
-  final tags = <String>{};
-  for (final locale in supportedLocales) {
-    final written = plantIdLanguageTag(locale);
-    if (written.isNotEmpty) tags.add(written);
-    if (locale.languageCode.isNotEmpty) tags.add(locale.languageCode);
-  }
-  final saved = canonicalLanguageTag(preferredLanguageTag.trim());
-  if (saved.isNotEmpty) {
-    final parts = saved.split('_');
-    if (parts.first.isNotEmpty) tags.add(parts.first);
-    if (parts.length >= 2 && parts[1].isNotEmpty) {
-      tags.add(plantIdLanguageTag(Locale(parts[0], parts[1])));
-    }
-  }
-  final sorted = tags.toList()..sort();
-  return sorted;
-}
-
-/// `users_photo_search/{tag}/{uid}` for every [photoSearchDeletionTags] entry.
-List<String> photoSearchDeletionPaths(
-  String uid, {
-  required Iterable<Locale> supportedLocales,
-  String preferredLanguageTag = '',
-}) {
-  return [
-    for (final tag in photoSearchDeletionTags(
-      supportedLocales: supportedLocales,
-      preferredLanguageTag: preferredLanguageTag,
-    ))
-      '$firebaseUsersPhotoSearch/$tag/$uid',
-  ];
+/// [_saveLabels] stores [plantIdLanguageTag] (`en`, `en-GB`, `tr-TR`).
+/// The store build wrote [Locale.languageCode] at that same level.
+List<String> photoSearchLanguageKeys(Iterable<Locale> locales) {
+  final keys = <String>{
+    for (final locale in locales) ...[
+      plantIdLanguageTag(locale),
+      locale.languageCode,
+    ],
+  };
+  return keys.toList()..sort();
 }
 
 /// Catalog language for a Plant.id tag. `en-US` is `en`, and Bokmål is `no`.

@@ -8,7 +8,6 @@ import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/purchase/store_proof.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
-import 'package:abherbs_flutter/person/setting_utils.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -213,17 +212,14 @@ Future<void> _deleteUserData(String uid) async {
   await logsObservationsReference.child(uid).remove();
   await logsCreditsReference.child(uid).remove();
 
-  final preferred = await preferredLanguageTag();
-  for (final lang in photoSearchDeletionTags(
-    supportedLocales: S.delegate.supportedLocales,
-    preferredLanguageTag: preferred,
-  )) {
-    await rootReference
-        .child(firebaseUsersPhotoSearch)
-        .child(lang)
-        .child(uid)
-        .remove();
-  }
+  await Future.wait([
+    for (final lang in photoSearchLanguageKeys(S.delegate.supportedLocales))
+      rootReference
+          .child(firebaseUsersPhotoSearch)
+          .child(lang)
+          .child(uid)
+          .remove(),
+  ]);
 
   try {
     await _deleteStorageFolder(
