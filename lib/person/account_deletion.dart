@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:abherbs_flutter/camera/plant_id_search.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/purchase/store_proof.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
+import 'package:abherbs_flutter/person/setting_utils.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,43 +18,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-
-const _photoSearchLangs = [
-  'anonymous',
-  'ar',
-  'bg',
-  'cs',
-  'da',
-  'de',
-  'en',
-  'es',
-  'et',
-  'fa',
-  'fi',
-  'fr',
-  'he',
-  'hi',
-  'hr',
-  'hu',
-  'id',
-  'it',
-  'ja',
-  'ko',
-  'lt',
-  'lv',
-  'nb',
-  'nl',
-  'pl',
-  'pt',
-  'ro',
-  'ru',
-  'sk',
-  'sl',
-  'sr',
-  'sv',
-  'uk',
-  'zh',
-];
 
 enum DeleteAccountResult { success, canceled, failed }
 
@@ -248,7 +213,11 @@ Future<void> _deleteUserData(String uid) async {
   await logsObservationsReference.child(uid).remove();
   await logsCreditsReference.child(uid).remove();
 
-  for (final lang in _photoSearchLangs) {
+  final preferred = await preferredLanguageTag();
+  for (final lang in photoSearchDeletionTags(
+    supportedLocales: S.delegate.supportedLocales,
+    preferredLanguageTag: preferred,
+  )) {
     await rootReference
         .child(firebaseUsersPhotoSearch)
         .child(lang)
