@@ -3,7 +3,6 @@ import 'package:abherbs_flutter/camera/camera_page.dart';
 import 'package:abherbs_flutter/field_guide/field_guide_page.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/data/guide_location.dart';
-import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/key/habitat_page.dart';
 import 'package:abherbs_flutter/person/language_page.dart';

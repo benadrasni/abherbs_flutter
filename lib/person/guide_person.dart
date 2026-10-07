@@ -324,12 +324,6 @@ String? _filled(String? value) {
   return trimmed.isEmpty ? null : trimmed;
 }
 
-String guideAccountInitial({String? name, String? email, String? phone}) {
-  final source = _filled(name) ?? _filled(email) ?? _filled(phone) ?? '';
-  if (source.isEmpty) return '';
-  return String.fromCharCode(source.runes.first).toUpperCase();
-}
-
 /// Apple’s private relay, or no address at all. A real Apple email is shown.
 bool guideAppleHidesEmail(String? email) {
   final mail = email?.trim().toLowerCase() ?? '';

@@ -57,12 +57,6 @@ class PhotoIdentification {
   /// the first few each month.
   final bool charged;
 
-  /// Names charged this UTC month, when the server sent the meter.
-  final int? namesUsed;
-
-  /// Ad grants earned this UTC month.
-  final int? adGrants;
-
   /// The guest account spent its one free identification on this photo.
   final bool guestFreeUsed;
 
@@ -72,8 +66,6 @@ class PhotoIdentification {
     this.failed = false,
     this.charged = false,
     this.guestFreeUsed = false,
-    this.namesUsed,
-    this.adGrants,
   });
 }
 
@@ -130,8 +122,6 @@ Future<PhotoIdentification> identifyPlantPhoto({
       results,
       charged: data['charged'] == true,
       guestFreeUsed: data['anonymousFreeUsed'] == true,
-      namesUsed: _meterInt(data['namesUsed']),
-      adGrants: _meterInt(data['adGrants']),
     );
   } on FirebaseFunctionsException catch (error, stackTrace) {
     final details = error.details;

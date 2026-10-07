@@ -630,9 +630,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
         loadAllowed: () => Prefs.getBoolF(keyGuideLocationAllowed, false),
         regionName: (id) {
           if (!mounted) return '';
-          final name = getFilterDistributionValue(context, id);
-          if (name is! String) return '';
-          return name;
+          return getFilterDistributionValue(context, id);
         },
         noPlace: none,
       );

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:abherbs_flutter/camera/guide_camera.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
@@ -32,13 +33,6 @@ String? guidePrivateObjectPath(String photoPath, String uid) {
   final rest = photoPath.substring(prefix.length);
   if (rest.isEmpty || rest.startsWith('/') || rest.contains('..')) return null;
   return '$storagePrivate$uid/$rest';
-}
-
-/// Same key the camera uses for `by plant`. Spaces stay. `. # $ [ ] /` do not.
-String guidePrivatePlantKey(String name) {
-  final cleaned = name.trim().replaceAll(RegExp(r'[.#$\[\]/]'), '_');
-  if (cleaned.isEmpty) return '_';
-  return cleaned;
 }
 
 String guidePrivateContentType(String path) {
@@ -322,7 +316,7 @@ Future<void> _markCloud(String uid, String id, String plant) async {
       .update(patch);
   final keys = <String>{
     if (plant.isNotEmpty) plant,
-    if (plant.isNotEmpty) guidePrivatePlantKey(plant),
+    if (plant.isNotEmpty) guideObservationPlantKey(plant),
   };
   for (final key in keys) {
     final ref = root

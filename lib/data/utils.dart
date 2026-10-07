@@ -217,7 +217,6 @@ const String firebaseAttributeEntity = "m";
 const String firebaseAttributeAnonymous = "anonymous";
 const String firebaseAttributeIsLabel = "is_label";
 
-const String firebaseValuePrivate = "private";
 const String firebaseValueReview = "review";
 const String firebaseValuePublic = "public";
 const String firebaseValueRejection = "rejected";
