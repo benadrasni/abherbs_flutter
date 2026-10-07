@@ -173,6 +173,22 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
   int _ticket = 0;
 
   @override
+  void initState() {
+    super.initState();
+    Purchases.namesRevision.addListener(_onPlan);
+  }
+
+  @override
+  void dispose() {
+    Purchases.namesRevision.removeListener(_onPlan);
+    super.dispose();
+  }
+
+  void _onPlan() {
+    if (mounted) setState(() {});
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_started) return;

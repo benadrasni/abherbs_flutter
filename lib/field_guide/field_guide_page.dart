@@ -7,6 +7,8 @@ import 'package:abherbs_flutter/field_guide/guide_field_guide.dart';
 import 'package:abherbs_flutter/seen/guide_private_photos.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/purchase/store_account.dart';
+import 'package:abherbs_flutter/purchase/store_proof.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -21,8 +23,8 @@ const guideFieldGuideYearlyKey = Key('guideFieldGuideYearly');
 const guideFieldGuideMonthlyKey = Key('guideFieldGuideMonthly');
 
 /// Field Guide: yearly and monthly, with the store price on each row.
-/// An active photo-storage plan already counts, so this page does not sell
-/// a second subscription over it.
+/// A monthly plan bought on this phone can change to yearly. Any other
+/// active plan leaves the rows, the button, and Restore in place and off.
 class GuideFieldGuidePage extends StatefulWidget {
   final Future<GuideFieldGuideLoaded> Function()? load;
   final Future<bool> Function(GuideFieldGuidePlan plan)? buy;
@@ -57,6 +59,7 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
   @override
   void initState() {
     super.initState();
+    Purchases.namesRevision.addListener(_onPlan);
     if (widget.load == null) {
       _purchaseSub = InAppPurchase.instance.purchaseStream.listen(
         _onStore,
@@ -68,8 +71,16 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
 
   @override
   void dispose() {
+    Purchases.namesRevision.removeListener(_onPlan);
     _purchaseSub?.cancel();
     super.dispose();
+  }
+
+  /// A plan bought on the other phone arrives after this page has drawn.
+  void _onPlan() {
+    if (!mounted) return;
+    _applyOwned();
+    setState(() {});
   }
 
   Future<void> _load() async {
@@ -81,7 +92,7 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
         _loaded = loaded;
         _failed = false;
         _loading = false;
-        if (!_planChosen) _plan = loaded.catalog.initialPlan;
+        if (!_planChosen) _plan = _openingPlan(loaded.catalog);
       });
     } catch (error) {
       debugPrint('guide field guide: $error');
@@ -125,7 +136,7 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
     final loaded = _loaded;
     if (loaded == null) return;
     _loaded = GuideFieldGuideLoaded(
-      catalog: loaded.catalog.withOwnership(Purchases.purchases.keys.toSet()),
+      catalog: loaded.catalog.withOwnership(guideOwnedProductIds()),
       products: loaded.products,
     );
   }
@@ -146,7 +157,7 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
         continue;
       }
       if (purchase.status != PurchaseStatus.purchased) continue;
-      final valid = await verifyPurchase(purchase);
+      final valid = await verifyStorePurchase(purchase);
       if (valid) continue;
       Purchases.purchases.remove(purchase.productID);
       if (!mounted) return;
@@ -155,13 +166,28 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
     }
   }
 
+  GuideFieldGuideAccess _access(GuideFieldGuideCatalog catalog) {
+    return guideFieldGuideAccess(
+      catalog: catalog,
+      monthlyOnThisStore: Purchases.purchases.containsKey(fieldGuideMonthly),
+      fromAccountOnly: Purchases.fieldGuideFromAccountOnly,
+    );
+  }
+
+  GuideFieldGuidePlan _openingPlan(GuideFieldGuideCatalog catalog) {
+    if (_access(catalog).upgrade) return GuideFieldGuidePlan.yearly;
+    return catalog.initialPlan;
+  }
+
   Future<void> _start() async {
     final loaded = _loaded;
     if (loaded == null || _busy) return;
+    final access = _access(loaded.catalog);
     final offer = loaded.catalog.offer(_plan);
-    if (offer.owned ||
-        offer.price == null ||
-        loaded.catalog.coveredByOlderPlan) {
+    if (access.locked || offer.owned || offer.price == null) return;
+    if (!access.upgrade &&
+        (loaded.catalog.coveredByOlderPlan ||
+            Purchases.fieldGuideFromAccountOnly)) {
       return;
     }
     setState(() {
@@ -224,6 +250,16 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
       _planChosen = true;
       _error = null;
     });
+  }
+
+  String _planNote(
+    S strings, {
+    required bool locked,
+    required bool owned,
+    required String trial,
+  }) {
+    if (!locked) return trial;
+    return owned ? strings.product_subscribed : '';
   }
 
   @override
@@ -289,10 +325,14 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
     final bottom = 24 + MediaQuery.paddingOf(context).bottom;
     final selected = catalog.offer(_plan);
     final owned = selected.owned;
-    final canBuy = !catalog.coveredByOlderPlan &&
+    final access = _access(catalog);
+    final canBuy = !access.locked &&
         !owned &&
         selected.price != null &&
-        !_busy;
+        !_busy &&
+        (access.upgrade ||
+            (!catalog.coveredByOlderPlan &&
+                !Purchases.fieldGuideFromAccountOnly));
     return ListView(
       padding: EdgeInsets.only(bottom: bottom),
       children: [
@@ -372,72 +412,84 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
             ],
           ),
         ),
-        if (catalog.coveredByOlderPlan)
-          _Included(photoStorage: catalog.photoStorage)
-        else ...[
+        if (access.locked) _Included(photoStorage: catalog.photoStorage),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+          child: Column(
+            children: [
+              _Plan(
+                planKey: guideFieldGuideYearlyKey,
+                title: strings.guide_field_guide_yearly,
+                note: _planNote(
+                  strings,
+                  locked: access.locked,
+                  owned: catalog.yearly.owned,
+                  trial: strings.guide_field_guide_then_yearly,
+                ),
+                price: catalog.yearly.price ??
+                    strings.guide_field_guide_store_price,
+                selected: _plan == GuideFieldGuidePlan.yearly,
+                onPressed: access.locked
+                    ? null
+                    : () => _choose(GuideFieldGuidePlan.yearly),
+              ),
+              const SizedBox(height: 8),
+              _Plan(
+                planKey: guideFieldGuideMonthlyKey,
+                title: strings.guide_field_guide_monthly,
+                note: _planNote(
+                  strings,
+                  locked: access.locked,
+                  owned: catalog.monthly.owned,
+                  trial: strings.guide_field_guide_then_monthly,
+                ),
+                price: catalog.monthly.price ??
+                    strings.guide_field_guide_store_price,
+                selected: _plan == GuideFieldGuidePlan.monthly,
+                onPressed: access.locked
+                    ? null
+                    : () => _choose(GuideFieldGuidePlan.monthly),
+              ),
+            ],
+          ),
+        ),
+        if (!access.locked && selected.price == null)
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-            child: Column(
-              children: [
-                _Plan(
-                  planKey: guideFieldGuideYearlyKey,
-                  title: strings.guide_field_guide_yearly,
-                  note: strings.guide_field_guide_then_yearly,
-                  price: catalog.yearly.price ??
-                      strings.guide_field_guide_store_price,
-                  selected: _plan == GuideFieldGuidePlan.yearly,
-                  onPressed: () => _choose(GuideFieldGuidePlan.yearly),
-                ),
-                const SizedBox(height: 8),
-                _Plan(
-                  planKey: guideFieldGuideMonthlyKey,
-                  title: strings.guide_field_guide_monthly,
-                  note: strings.guide_field_guide_then_monthly,
-                  price: catalog.monthly.price ??
-                      strings.guide_field_guide_store_price,
-                  selected: _plan == GuideFieldGuidePlan.monthly,
-                  onPressed: () => _choose(GuideFieldGuidePlan.monthly),
-                ),
-              ],
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+            child: Text(
+              strings.guide_field_guide_unavailable,
+              style: TextStyle(color: colors.ink3, fontSize: 13, height: 1.4),
             ),
           ),
-          if (selected.price == null)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-              child: Text(
-                strings.guide_field_guide_unavailable,
-                style: TextStyle(color: colors.ink3, fontSize: 13, height: 1.4),
-              ),
-            ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+          child: _StartButton(
+            label: access.locked || owned
+                ? strings.product_subscribed
+                : (access.upgrade ||
+                        catalog.yearly.owned ||
+                        catalog.monthly.owned)
+                    ? strings.product_change
+                    : strings.guide_field_guide_start,
+            spinning: _busy,
+            onPressed: canBuy ? () => unawaited(_start()) : null,
+          ),
+        ),
+        if (_error != null)
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
-            child: _StartButton(
-              label: owned
-                  ? strings.product_subscribed
-                  : (catalog.yearly.owned || catalog.monthly.owned)
-                      ? strings.product_change
-                      : strings.guide_field_guide_start,
-              spinning: _busy,
-              onPressed: canBuy ? () => unawaited(_start()) : null,
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+            child: Text(
+              _error!,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: colors.madder, fontSize: 13, height: 1.4),
             ),
           ),
-          if (_error != null)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-              child: Text(
-                _error!,
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: colors.madder, fontSize: 13, height: 1.4),
-              ),
-            ),
-        ],
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 4, 20, 0),
           child: _TextButton(
             buttonKey: guideFieldGuideRestoreKey,
             label: strings.guide_person_restore,
-            onPressed: () => unawaited(_restore()),
+            onPressed: access.locked ? null : () => unawaited(_restore()),
           ),
         ),
         Padding(
@@ -477,9 +529,17 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
   }
 }
 
+/// This phone's store purchases plus a plan checked onto the account.
+Set<String> guideOwnedProductIds() {
+  return {
+    ...Purchases.purchases.keys,
+    ...Purchases.accountProducts,
+  };
+}
+
 Future<GuideFieldGuideLoaded> loadGuideFieldGuide() async {
   final store = InAppPurchase.instance;
-  final owned = Purchases.purchases.keys.toSet();
+  final owned = guideOwnedProductIds();
   final available = await store.isAvailable();
   if (!available) {
     return guideFieldGuideFromStore(
@@ -504,17 +564,22 @@ Future<bool> buyGuideFieldGuide({
   required ProductDetails product,
   PurchaseDetails? replaces,
 }) {
+  final account = storeApplicationUserName();
   final PurchaseParam param;
   if (Platform.isAndroid && replaces is GooglePlayPurchaseDetails) {
     param = GooglePlayPurchaseParam(
       productDetails: product,
+      applicationUserName: account,
       changeSubscriptionParam: ChangeSubscriptionParam(
         oldPurchaseDetails: replaces,
         replacementMode: ReplacementMode.withTimeProration,
       ),
     );
   } else {
-    param = PurchaseParam(productDetails: product);
+    param = PurchaseParam(
+      productDetails: product,
+      applicationUserName: account,
+    );
   }
   return InAppPurchase.instance.buyNonConsumable(purchaseParam: param);
 }
@@ -705,11 +770,12 @@ class _Plan extends StatelessWidget {
   final String note;
   final String price;
   final bool selected;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
+    final enabled = onPressed != null;
     return Material(
       key: planKey,
       color: colors.cream,
@@ -745,20 +811,21 @@ class _Plan extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyle(
-                        color: colors.ink,
+                        color: enabled ? colors.ink : colors.ink3,
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                         height: 1.2,
                       ),
                     ),
-                    Text(
-                      note,
-                      style: TextStyle(
-                        color: colors.ink3,
-                        fontSize: 13,
-                        height: 1.3,
+                    if (note.isNotEmpty)
+                      Text(
+                        note,
+                        style: TextStyle(
+                          color: colors.ink3,
+                          fontSize: 13,
+                          height: 1.3,
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),
@@ -766,7 +833,7 @@ class _Plan extends StatelessWidget {
               Text(
                 price,
                 style: TextStyle(
-                  color: colors.ink2,
+                  color: enabled ? colors.ink2 : colors.ink3,
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
                 ),
@@ -887,10 +954,11 @@ class _TextButton extends StatelessWidget {
 
   final Key buttonKey;
   final String label;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
     return Material(
       key: buttonKey,
       color: Colors.transparent,
@@ -904,7 +972,7 @@ class _TextButton extends StatelessWidget {
             child: Text(
               label,
               style: TextStyle(
-                color: GuideColors.of(context).moss,
+                color: onPressed == null ? colors.ink3 : colors.moss,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),

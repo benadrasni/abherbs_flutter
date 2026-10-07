@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:abherbs_flutter/purchase/account_entitlements.dart';
 import 'package:abherbs_flutter/purchase/owned_purchases.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/purchase/store_proof.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 
 class Auth {
@@ -16,6 +19,7 @@ class Auth {
   static int credits = 0;
   static int _accountGen = 0;
   static Future<void>? _loadingAccount;
+  static StreamSubscription<DatabaseEvent>? _entitlementsSub;
 
   static User? _signedIn(User? user) =>
       user == null || user.isAnonymous ? null : user;
@@ -126,9 +130,11 @@ class Auth {
     if (gen != _accountGen) return;
     appUser = user;
     if (user == null) {
+      _stopEntitlements();
       credits = 0;
       Purchases.hasOldVersion = false;
       Purchases.hasLifetimeSubscription = false;
+      Purchases.clearAccountProducts();
       if (gen == _accountGen) Purchases.finishNames();
       return;
     }
@@ -137,15 +143,42 @@ class Auth {
     try {
       final event = await usersReference.child(uid).once();
       if (gen != _accountGen) return;
-      final value = event.snapshot.value;
+      var value = event.snapshot.value;
+      try {
+        // once() can return the on-disk user from before this phone's plan
+        // was written. The entitlements child is read from the server.
+        final fresh =
+            await usersReference.child(uid).child('entitlements').get();
+        if (gen != _accountGen) return;
+        value = userWithFreshEntitlements(value, fresh.value);
+      } catch (error) {
+        debugPrint('entitlements: $error');
+      }
       if (value is Map) {
         final old = value[firebaseAttributeOldVersion];
         Purchases.hasOldVersion = old == true;
         final rawCredits = value[firebaseAttributeCredits];
         credits = rawCredits is int ? rawCredits : 0;
+        final entitlements = accountEntitlementsOf(value);
+        applyAccountEntitlements(entitlements);
+        final revoked = revokedEntitlementIds(entitlements).toSet();
+        unawaited(() async {
+          await forgetRevokedPurchases(revoked);
+          if (gen != _accountGen || appUser?.uid != uid) return;
+          final purchases = await Prefs.getStringListF(keyPurchases, []);
+          if (purchases.isEmpty) return;
+          await rememberStorePurchases(purchases);
+        }());
       } else {
         Purchases.hasOldVersion = false;
         credits = 0;
+        Purchases.clearAccountProducts();
+        unawaited(Prefs.getStringListF(keyPurchases, []).then((purchases) {
+          if (gen != _accountGen || purchases.isEmpty || appUser?.uid != uid) {
+            return Future<void>.value();
+          }
+          return rememberStorePurchases(purchases);
+        }));
       }
       if (Purchases.hasOldVersion) {
         unawaited(_logOldVersionEvent());
@@ -154,12 +187,6 @@ class Auth {
       unawaited(Prefs.getStringF(keyToken).then((token) {
         if (gen != _accountGen || token.isEmpty || appUser?.uid != uid) return;
         usersReference.child(uid).child(firebaseAttributeToken).set(token);
-      }));
-      unawaited(Prefs.getStringListF(keyPurchases, []).then((purchases) {
-        if (gen != _accountGen || purchases.isEmpty || appUser?.uid != uid) {
-          return Future<void>.value();
-        }
-        return rememberStorePurchases(purchases);
       }));
     } catch (error) {
       if (gen != _accountGen) return;
@@ -190,14 +217,51 @@ class Auth {
       if (gen != _accountGen) return;
       Purchases.hasLifetimeSubscription = false;
     }
-    if (gen == _accountGen) Purchases.finishNames();
+    if (gen == _accountGen) {
+      Purchases.finishNames();
+      _watchEntitlements(uid, gen);
+      unawaited(registerStoreAccount());
+      unawaited(flushPendingStoreProofs());
+    }
+  }
+
+  /// Later checks, expiries, and the other phone's purchase. The account
+  /// read above already applied the current row, so this does not upload
+  /// the local store list again.
+  static void _watchEntitlements(String uid, int gen) {
+    _stopEntitlements();
+    final watch = EntitlementWatch();
+    _entitlementsSub = usersReference
+        .child(uid)
+        .child('entitlements')
+        .onValue
+        .listen((event) {
+      if (gen != _accountGen || appUser?.uid != uid) return;
+      final raw = event.snapshot.value;
+      final snapshot = accountEntitlementsOf(
+        raw == null ? <String, Object?>{} : <String, Object?>{'entitlements': raw},
+      );
+      if (!watch.shouldApply(snapshot)) return;
+      applyAccountEntitlements(snapshot);
+      unawaited(forgetRevokedPurchases(revokedEntitlementIds(snapshot)));
+    }, onError: (Object error) {
+      debugPrint('entitlements: $error');
+    });
+  }
+
+  static void _stopEntitlements() {
+    final sub = _entitlementsSub;
+    _entitlementsSub = null;
+    if (sub != null) unawaited(sub.cancel());
   }
 
   static Future<void> signOut() async {
     _accountGen++;
     _loadingAccount = null;
+    _stopEntitlements();
     appUser = null;
     credits = 0;
+    Purchases.clearAccountProducts();
     return firebaseAuth.signOut();
   }
 

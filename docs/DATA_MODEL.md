@@ -10,13 +10,14 @@ Most catalog trees are world-readable (the website fetches them with unauthentic
 |---|---|---|
 | Catalog (`plants_v2`, `lists_4_v2`, `counts_4_v2`, `search_v3`, `search_photo`, `translations`, `translations_taxonomy`, `web`, …) | read | read |
 | Staging indexes (`*_new`) | read | read |
-| `users/{uid}` | denied | owner read. Client may write `token`, `favorites`, `purchases`, `credits` (0–10000). Owner may delete the whole node. Not `old version` or `lifetime subscription` except via that delete. |
+| `users/{uid}` | denied | owner read. Client may write `token`, `favorites`, `purchases`, `credits` (0–10000). Owner may delete the whole node. Not `old version`, `lifetime subscription`, or `entitlements` except via that delete. |
 | `users_photo_search/{lang}/{uid}` | denied | owner read/write |
 | `credits/{uid}` | denied | owner read/write (string log, 64 chars) |
 | `observations/by users/{uid}` | denied | owner read/write |
 | `observations/public` | read | create/update own id (`{uid}_…`) only while `status == review`. Owner may delete own id in any status. `stats` is Admin-only. |
 | `observations/logs/{uid}` | denied | owner read/write |
 | `photo_quota/{uid}` | denied | owner read (written by the photo Cloud Functions) |
+| `purchase_proofs`, `store_accounts` | denied | denied. Cloud Functions only |
 
 Admin SDK bypasses these rules (ingest, observation reviewer, Cloud Functions). The photo lock-down of `credits` and `purchases` is staged in `firebase/database.rules.photo.json`; see `PHOTO_NAMES.md`.
 
@@ -50,6 +51,8 @@ Signed-out photo-search logs under `anonymous` fail. The app does not write tran
 | `observations/logs` | Review / publish log |
 | `credits` | Credit spend/earn log |
 | `photo_quota/{uid}` | Photo-name allowance counters (`identifyPlant`) |
+| `purchase_proofs/{id}` | Checked receipt. Apple key `app_store_{originalTransactionId}`, Play key `play_` plus a hash of the token. No client access |
+| `store_accounts/{token}` | Firebase uid for a store account token. No client access |
 | `ad_rewards/{transactionId}` | Rewarded-ad callbacks already credited (`admobReward`) |
 | `anonymous_daily/{day}` | Plant.id calls by guest accounts that day |
 | `web/{lang}` | Legacy About/Help and old-site chrome. The current website does not read this; chrome lives in `web/src/locales.json`. |
@@ -238,7 +241,8 @@ Read by the app after sign-in (`lib/person/authentication.dart`). Client-writabl
 - `lifetime subscription` — same
 - `credits` — rewarded-ad balance (client can still set its own number)
 - `token` — FCM
-- `purchases` — product id list. The phone still gates features from the store. A purchase or restore merges the product id into this list. `identifyPlant` treats `search_by_photo`, `store_photos_monthly`, `store_photos_yearly`, `field_guide_monthly`, and `field_guide_yearly` as unlimited names. The receipt is not checked.
+- `purchases` — product id list the phone still writes from its own store. It does not unlock another phone, and `identifyPlant` does not read it.
+- `entitlements/products/{productId}` — `{ active, expiresAt, store, originalId, updatedAt }`. `store` is `app_store` or `play`. Cloud Functions write it after Apple or Google confirms the receipt. The owner can read it. Both phones unlock from `active`. `identifyPlant` treats an active `search_by_photo`, `store_photos_monthly`, `store_photos_yearly`, `field_guide_monthly`, or `field_guide_yearly` as unlimited names.
 - `favorites/{plantId}`
 
 ## Photo storage layout

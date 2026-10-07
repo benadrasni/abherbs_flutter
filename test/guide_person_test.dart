@@ -234,6 +234,13 @@ void main() {
       ),
       'Unlimited names · no ads · Seen synced',
     );
+    expect(
+      guidePersonFieldGuideOffer(
+        trial: '7 days free',
+        perks: 'Unlimited • No Ads • Seen sync • Offline',
+      ),
+      '7 days free • Unlimited • No Ads • Seen sync • Offline',
+    );
 
     final names = guideLiveAllowance(
       signedIn: true,
@@ -359,7 +366,10 @@ void main() {
     expect(find.text('Sign in to name a photo'), findsOneWidget);
     expect(find.text('1 name left'), findsNothing);
     expect(find.text('Your account'), findsNothing);
-    expect(find.text('7 days free'), findsOneWidget);
+    expect(
+      find.text('7 days free • Unlimited • No Ads • Seen sync • Offline'),
+      findsOneWidget,
+    );
     expect(find.text('Delete account'), findsNothing);
     await tester.tap(find.text('Sign in'));
     await tester.tap(find.text('Field Guide'));
@@ -447,24 +457,36 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('Field Guide hides the trial row and can sign out',
+  testWidgets('Field Guide stays on the list and can sign out',
       (tester) async {
-    await tester.binding.setSurfaceSize(const Size(390, 844));
+    await tester.binding.setSurfaceSize(const Size(390, 1200));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     var signedOut = 0;
     var deleted = 0;
+    var guide = 0;
     await tester.pumpWidget(_app(_page(
       view: _fieldGuide(),
       onSignOut: (_) async => signedOut++,
       onDeleteAccount: (_) async => deleted++,
+      onFieldGuide: (_) async => guide++,
     )));
 
     expect(find.text('Field Guide'), findsOneWidget);
     expect(
-      find.text('Unlimited names · no ads · Seen synced'),
+      find.text('Unlimited • No Ads • Seen sync • Offline'),
       findsOneWidget,
     );
-    expect(find.text('7 days free'), findsNothing);
+    expect(find.text('Dangerous zone'), findsOneWidget);
+    expect(
+      find.text('Subscribed · Unlimited sightings · no ads · Seen synced'),
+      findsNothing,
+    );
+    expect(
+      find.text('7 days free • Unlimited • No Ads • Seen sync • Offline'),
+      findsNothing,
+    );
+    await tester.tap(find.text('Field Guide'));
+    expect(guide, 1);
     expect(find.text('Finds stay on your account'), findsOneWidget);
     expect(find.text('Delete account'), findsOneWidget);
     expect(
@@ -578,7 +600,7 @@ GuidePersonView _fieldGuide() {
     ),
     languageName: 'English',
     appearance: GuideAppearance.system,
-    showFieldGuide: false,
+    showFieldGuide: true,
     showOffline: false,
     offlineOn: false,
   );

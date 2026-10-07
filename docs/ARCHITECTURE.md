@@ -93,6 +93,8 @@ One-time IAPs (`lib/purchase/purchases.dart`):
 
 Subscriptions (need Observations first): `store_photos_monthly`, `store_photos_yearly`. They unlock public observation sharing and cross-device photo storage.
 
+Field Guide plans are `field_guide_monthly` and `field_guide_yearly`. A purchase on either store is checked by Cloud Functions and stored at `users/{uid}/entitlements`. The same signed-in account unlocks on the other phone. Apple and Google still bill separately. The phone's `purchases` list is only its own store record.
+
 Legacy users of the old paid app (`sk.ab.herbsplus`) get `users/{uid}/old version = true`, which unlocks the one-time features.
 
 Photo search without the IAP spends a **credit**. Credits come from rewarded ads (`Auth.changeCredits`).
@@ -103,7 +105,7 @@ There used to be two Play apps (free + plus). Only `sk.ab.herbs` is the current 
 
 ### Auth
 
-Firebase Auth: email/password, Google, Apple, phone. Observations and photo search expect a signed-in user. Favorites, FCM token, purchase list, credits, and lifetime-subscription flag live under `users/{uid}`.
+Firebase Auth: email/password, Google, Apple, phone. Observations and photo search expect a signed-in user. Favorites, FCM token, the phone's purchase list, checked entitlements, credits, and the lifetime-subscription flag live under `users/{uid}`.
 
 ### Offline
 

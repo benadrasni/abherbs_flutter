@@ -25,6 +25,7 @@ class _AppBannerAdState extends State<AppBannerAd> {
   @override
   void initState() {
     super.initState();
+    Purchases.namesRevision.addListener(_onNames);
     if (!Purchases.showsAds()) return;
     _purchases = InAppPurchase.instance.purchaseStream.listen(
       (_) {
@@ -72,6 +73,11 @@ class _AppBannerAdState extends State<AppBannerAd> {
     if (!Purchases.showsAds()) _release();
   }
 
+  void _onNames() {
+    if (!mounted) return;
+    if (!Purchases.showsAds()) _release();
+  }
+
   void _release({bool notify = true}) {
     final ad = _ad;
     _ad = null;
@@ -82,6 +88,7 @@ class _AppBannerAdState extends State<AppBannerAd> {
 
   @override
   void dispose() {
+    Purchases.namesRevision.removeListener(_onNames);
     _purchases?.cancel();
     _ad?.dispose();
     super.dispose();

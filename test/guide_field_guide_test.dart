@@ -12,6 +12,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 void main() {
   tearDown(() {
     Purchases.purchases = {};
+    Purchases.clearAccountProducts();
     Purchases.hasLifetimeSubscription = false;
     Purchases.hasOldVersion = false;
   });
@@ -78,6 +79,61 @@ void main() {
       guideFieldGuideReplaces(GuideFieldGuidePlan.yearly, {subscriptionYearly}),
       isNull,
     );
+  });
+
+  test('monthly on this phone can change to yearly, and other plans cannot',
+      () {
+    GuideFieldGuideAccess access({
+      required Set<String> owned,
+      bool monthlyOnThisStore = false,
+      bool fromAccountOnly = false,
+      String? yearlyPrice = r'$19.99',
+    }) {
+      return guideFieldGuideAccess(
+        catalog: guideFieldGuideCatalog(
+          storeAvailable: true,
+          yearlyPrice: yearlyPrice,
+          monthlyPrice: r'$2.99',
+          owned: owned,
+        ),
+        monthlyOnThisStore: monthlyOnThisStore,
+        fromAccountOnly: fromAccountOnly,
+      );
+    }
+
+    final upgrade = access(
+      owned: {fieldGuideMonthly},
+      monthlyOnThisStore: true,
+    );
+    expect(upgrade.upgrade, isTrue);
+    expect(upgrade.locked, isFalse);
+
+    final yearly = access(owned: {fieldGuideYearly}, monthlyOnThisStore: true);
+    expect(yearly.upgrade, isFalse);
+    expect(yearly.locked, isTrue);
+
+    final photos = access(owned: {subscriptionMonthly});
+    expect(photos.upgrade, isFalse);
+    expect(photos.locked, isTrue);
+
+    final account = access(
+      owned: {fieldGuideMonthly},
+      fromAccountOnly: true,
+    );
+    expect(account.upgrade, isFalse);
+    expect(account.locked, isTrue);
+
+    final noPrice = access(
+      owned: {fieldGuideMonthly},
+      monthlyOnThisStore: true,
+      yearlyPrice: null,
+    );
+    expect(noPrice.upgrade, isFalse);
+    expect(noPrice.locked, isTrue);
+
+    final free = access(owned: const {});
+    expect(free.upgrade, isFalse);
+    expect(free.locked, isFalse);
   });
 
   test('the paid price stays on the row when a trial phase is present', () {
@@ -177,10 +233,11 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('an owned yearly plan is already subscribed', (tester) async {
+  testWidgets('an owned yearly plan is only a summary', (tester) async {
     await tester.binding.setSurfaceSize(const Size(400, 1600));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     var bought = 0;
+    var restored = 0;
     await tester.pumpWidget(_app(_page(
       catalog: guideFieldGuideCatalog(
         storeAvailable: true,
@@ -192,21 +249,59 @@ void main() {
         bought++;
         return true;
       },
+      onRestore: () async => restored++,
     )));
     await tester.pumpAndSettle();
 
-    expect(find.text('Subscribed'), findsOneWidget);
+    expect(find.text('You already have Field Guide.'), findsOneWidget);
+    expect(find.text('Subscribed'), findsWidgets);
     expect(find.text('Start 7 days free'), findsNothing);
+    expect(find.text('Change'), findsNothing);
+    expect(find.text('Yearly'), findsOneWidget);
+    expect(find.text('Monthly'), findsOneWidget);
+    await tester.tap(find.text('Monthly'));
+    await tester.pump();
+    expect(find.text('Change'), findsNothing);
     await tester.tap(find.byKey(guideFieldGuideStartKey));
+    await tester.tap(find.byKey(guideFieldGuideRestoreKey));
     await tester.pump();
     expect(bought, 0);
+    expect(restored, 0);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('monthly on this phone can change to yearly', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(400, 1600));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    Purchases.purchases[fieldGuideMonthly] = _purchase(fieldGuideMonthly);
+    GuideFieldGuidePlan? bought;
+    await tester.pumpWidget(_app(_page(
+      catalog: guideFieldGuideCatalog(
+        storeAvailable: true,
+        yearlyPrice: r'$19.99',
+        monthlyPrice: r'$2.99',
+        owned: {fieldGuideMonthly},
+      ),
+      onBuy: (plan) async {
+        bought = plan;
+        return true;
+      },
+    )));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Change'), findsOneWidget);
+    expect(find.text('Start 7 days free'), findsNothing);
+    expect(find.text('You already have Field Guide.'), findsNothing);
+    await tester.tap(find.byKey(guideFieldGuideStartKey));
+    await tester.pump();
+    expect(bought, GuideFieldGuidePlan.yearly);
 
     await tester.tap(find.text('Monthly'));
     await tester.pump();
-    expect(find.text('Change'), findsOneWidget);
+    expect(find.text('Subscribed'), findsOneWidget);
     await tester.tap(find.byKey(guideFieldGuideStartKey));
     await tester.pump();
-    expect(bought, 1);
+    expect(bought, GuideFieldGuidePlan.yearly);
     expect(tester.takeException(), isNull);
   });
 
@@ -228,8 +323,13 @@ void main() {
       find.text('Your photo-storage plan counts as Field Guide.'),
       findsOneWidget,
     );
-    expect(find.byKey(guideFieldGuideStartKey), findsNothing);
-    expect(find.text('Yearly'), findsNothing);
+    expect(find.text('Yearly'), findsOneWidget);
+    expect(find.text('Monthly'), findsOneWidget);
+    expect(find.text('Subscribed'), findsOneWidget);
+    expect(find.text('Start 7 days free'), findsNothing);
+    await tester.tap(find.byKey(guideFieldGuideStartKey));
+    await tester.tap(find.text('Yearly'));
+    await tester.pump();
     expect(tester.takeException(), isNull);
   });
 

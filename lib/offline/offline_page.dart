@@ -61,6 +61,7 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
   @override
   void initState() {
     super.initState();
+    if (widget.view == null) Purchases.namesRevision.addListener(_onPlan);
     _job = widget.job;
     final ready = widget.view;
     if (ready != null) {
@@ -70,6 +71,14 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
       unawaited(_load());
     }
   }
+
+  @override
+  void dispose() {
+    if (widget.view == null) Purchases.namesRevision.removeListener(_onPlan);
+    super.dispose();
+  }
+
+  void _onPlan() => _applyDownloadRight();
 
   @override
   void didUpdateWidget(GuideOfflinePage oldWidget) {

@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/shell/ad_consent.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
+import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +77,7 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
   @override
   void initState() {
     super.initState();
+    Purchases.namesRevision.addListener(_onPlan);
     unawaited(_loadAdPrivacy());
     _versionName = widget.versionName;
     _buildNumber = widget.buildNumber;
@@ -199,10 +201,17 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
 
   @override
   void dispose() {
+    Purchases.namesRevision.removeListener(_onPlan);
     _authSub?.cancel();
     _creditsSub?.cancel();
     _purchaseSub?.cancel();
     super.dispose();
+  }
+
+  /// The account plan can arrive after this page has drawn the free card.
+  void _onPlan() {
+    if (!mounted || widget.view != null) return;
+    unawaited(_reload());
   }
 
   Future<void> _reload() async {
@@ -400,13 +409,19 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
           onSignIn: account == null && widget.onSignIn != null
               ? () => _act(widget.onSignIn)
               : null,
+          onFieldGuide: view.allowance.fieldGuide && widget.onFieldGuide != null
+              ? () => _act(widget.onFieldGuide)
+              : null,
         ),
         const SizedBox(height: 4),
-        if (view.showFieldGuide)
+        if (view.showFieldGuide && !view.allowance.fieldGuide)
           _MenuRow(
             icon: Icons.eco_outlined,
             title: strings.guide_person_field_guide,
-            subtitle: strings.guide_person_trial,
+            subtitle: guidePersonFieldGuideOffer(
+              trial: strings.guide_person_trial,
+              perks: strings.guide_person_field_guide_perks,
+            ),
             onPressed: widget.onFieldGuide == null
                 ? null
                 : () => _act(widget.onFieldGuide),
@@ -463,6 +478,18 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
             subtitle: strings.guide_person_sign_out_note,
             onPressed:
                 widget.onSignOut == null ? null : () => _act(widget.onSignOut),
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(20, 22, 20, 6),
+            child: Text(
+              strings.guide_person_danger_zone,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: GuideColors.of(context).ink3,
+                height: 1.2,
+              ),
+            ),
           ),
           _MenuRow(
             icon: Icons.delete_outline,
@@ -551,8 +578,13 @@ class _AccountHeader extends StatelessWidget {
 class _AllowanceCard extends StatelessWidget {
   final GuideAllowance allowance;
   final VoidCallback? onSignIn;
+  final VoidCallback? onFieldGuide;
 
-  const _AllowanceCard({required this.allowance, required this.onSignIn});
+  const _AllowanceCard({
+    required this.allowance,
+    required this.onSignIn,
+    this.onFieldGuide,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -560,15 +592,19 @@ class _AllowanceCard extends StatelessWidget {
     final strings = S.of(context);
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 12),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: colors.cream,
+      child: Material(
+        color: colors.cream,
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: colors.rule),
+          side: BorderSide(color: colors.rule),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: _cardBody(context, strings, colors),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: allowance.fieldGuide ? onFieldGuide : null,
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: _cardBody(context, strings, colors),
+          ),
         ),
       ),
     );
@@ -677,14 +713,16 @@ class _AllowanceCard extends StatelessWidget {
   }
 
   Widget _unlimited(S strings, GuideColors colors) {
-    final detail = guideFieldGuideDetail(
-      unlimitedNames: allowance.fieldGuide && allowance.unlimitedNames,
-      noAds: allowance.noAds,
-      seenSynced: allowance.seenSynced,
-      unlimited: strings.guide_person_unlimited,
-      noAdsLabel: strings.guide_person_no_ads,
-      seenSyncedLabel: strings.guide_person_seen_synced,
-    );
+    final detail = allowance.fieldGuide
+        ? strings.guide_person_field_guide_perks
+        : guideFieldGuideDetail(
+            unlimitedNames: allowance.unlimitedNames,
+            noAds: allowance.noAds,
+            seenSynced: allowance.seenSynced,
+            unlimited: strings.guide_person_unlimited,
+            noAdsLabel: strings.guide_person_no_ads,
+            seenSyncedLabel: strings.guide_person_seen_synced,
+          );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

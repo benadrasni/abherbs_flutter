@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/purchase/store_proof.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:crypto/crypto.dart';
@@ -185,10 +186,12 @@ Future<void> deleteSignedInAccount() async {
   Auth.setUser();
   Purchases.hasOldVersion = false;
   Purchases.hasLifetimeSubscription = false;
+  Purchases.clearAccountProducts();
   Auth.credits = 0;
 }
 
 Future<void> _deleteUserData(String uid) async {
+  await releaseStorePurchases();
   final privateRoot = privateObservationsReference.child(uid);
   final listEvent = await privateRoot
       .child(firebaseObservationsByDate)

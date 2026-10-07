@@ -7,7 +7,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:exif/exif.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const String productNoAdsAndroid = "no_ads";
@@ -516,6 +515,4 @@ String webPlantUrl(String latinName, String languageCode) {
   return webPageUrl('plant/${Uri.encodeComponent(latinName)}', languageCode);
 }
 
-Future<bool> verifyPurchase(PurchaseDetails purchaseDetails) {
-  return Future<bool>.value(purchaseDetails.status == PurchaseStatus.purchased);
-}
+

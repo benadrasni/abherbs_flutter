@@ -133,6 +133,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
   @override
   void initState() {
     super.initState();
+    Purchases.namesRevision.addListener(_onPlan);
     _listTitle = widget.listTitle;
     final plants = widget.initialPlants;
     final prefs = widget.initialPrefs;
@@ -146,6 +147,16 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
       _load();
     }
     _refineTitle();
+  }
+
+  @override
+  void dispose() {
+    Purchases.namesRevision.removeListener(_onPlan);
+    super.dispose();
+  }
+
+  void _onPlan() {
+    if (mounted) setState(() {});
   }
 
   void _refineTitle() {

@@ -74,9 +74,10 @@ Future<void> loadRememberedPurchases() async {
 Future<void>? _pending;
 
 /// Remembers store product ids on this phone and, for the signed-in account,
-/// merges them into `users/{uid}/purchases`. `identifyPlant` reads that node
-/// for unlimited photo names. Existing ids stay. The account is read when the
-/// write runs, so a purchase that arrives during sign-in still attaches.
+/// merges them into `users/{uid}/purchases`. That list is this phone's own
+/// store record. Unlimited names come from checked entitlements. Existing ids
+/// stay. The account is read when the write runs, so a purchase that arrives
+/// during sign-in still attaches.
 Future<void> rememberStorePurchases(Iterable<String> productIds) {
   final ids = <String>[
     for (final id in productIds)

@@ -229,7 +229,11 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   }
 
   void _onNames() {
-    if (mounted) setState(() {});
+    if (!mounted) return;
+    setState(() {});
+    if (Purchases.namesReady && Purchases.syncsSeenPhotos()) {
+      unawaited(syncGuidePrivatePhotos());
+    }
   }
 
   /// Sign-in finishes after Find has drawn. The name meter follows the

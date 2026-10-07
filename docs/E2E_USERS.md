@@ -4,7 +4,7 @@ Field Guide build (`redesign/field-guide`, 9.0.0). Run the purchase scenarios on
 
 Use a fresh install or a sandbox account for each new-user scenario. Do not spend the production Pixel account (`PGS88GCOzOPJWAaGMyyk66iKXAI3`) on delete, sign-out, or purchase tests.
 
-`old version` and `lifetime subscription` are server flags under `users/{uid}`. The phone cannot buy them and cannot write them. Prepare those two accounts in the database before the pass. A purchase or Restore writes the store product id into `users/{uid}/purchases`. The server does not check the store receipt, so a cancelled plan stays unlocked. Record that in L1. It is the current behavior.
+`old version` and `lifetime subscription` are server flags under `users/{uid}`. The phone cannot buy them and cannot write them. Prepare those two accounts in the database before the pass. A purchase or Restore sends the store receipt to `submitPurchase`, which writes `users/{uid}/entitlements` when Apple or Google confirms it. The same account on the other phone unlocks from that record. A cancelled plan ends when the checked expiry passes. Record that in L1.
 
 Search, the three-step key, every species page, Book, and Add to Seen are free for every account. Add to Seen does not call Plant.id and does not spend a name. Run checklist F once on a guest, then do not repeat it on every account unless a step says the book itself failed.
 
@@ -128,7 +128,7 @@ Setup: a new signed-in account that has never taken the Play trial on `field_gui
 4. Find has no banner. The camera has no name dots. Take two photos. Both name, and `photo_quota` does not increment `namesUsed`.
 5. Offline offers the whole book and a region. On Wi-Fi, start a small region, pause it, and resume it. A download on cellular shows the Wi-Fi line and does not save the pack.
 6. Take a photo, then open the same account on a second phone that is also on this build. The photo arrives. `private/{uid}` has the object, and the private row gains `photoCloud` after the upload.
-7. `users/{uid}/purchases` contains `field_guide_yearly`.
+7. `users/{uid}/entitlements/products/field_guide_yearly` is `active: true`. `identifyPlant` treats that row as unlimited names. This phone may also list the id under `purchases`. That list does not unlock the other phone.
 
 A monthly trial is the same scene with `field_guide_monthly` and the monthly price, about $2.99. Play counts the monthly trial and the yearly trial separately. An account that already used the yearly trial can still be offered the monthly trial.
 
@@ -182,7 +182,7 @@ Setup: an account with an active `store_photos_monthly` or `store_photos_yearly`
 
 1. Person matches S2: Field Guide, “no ads · Seen synced”, no Field Guide row, no banner, unlimited camera, offline download, photos on a second phone.
 2. The Field Guide page, if opened, does not sell `field_guide_monthly` or `field_guide_yearly` on top of this plan.
-3. `users/{uid}/purchases` contains the photo-storage id. `identifyPlant` treats it as unlimited.
+3. `users/{uid}/entitlements/products` has the photo-storage id `active: true`. `identifyPlant` treats that row as unlimited names.
 
 Run monthly and yearly once each. They are the same Field Guide.
 
@@ -246,9 +246,9 @@ Setup: a sandbox account you can afford to lose, with one private find, one shar
 
 Setup: an Android sandbox Field Guide or photo-storage subscription. Cancel it and let the sandbox period end.
 
-1. After the store reports the plan expired, force-stop the app and open it.
-2. Record Person, the banner, the camera meter, and `users/{uid}/purchases`.
-3. Today the product id stays in `purchases`, and the app keeps Field Guide. That is the gap until a receipt check can remove a lapsed id. Do not file it as a failed purchase. Do file it if a brand-new account with no product id is treated as subscribed.
+1. After the store reports the plan expired, force-stop the app and open it while online.
+2. Record Person, the banner, the camera meter, and `users/{uid}/entitlements/products`.
+3. The checked row is `active: false`. This phone and the other phone, signed into the same account, lose Field Guide. A brand-new account with no checked row is not subscribed.
 
 ## L2 — iPhone
 

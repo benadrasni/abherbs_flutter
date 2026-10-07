@@ -143,14 +143,28 @@ test('isPlant uses the probability before the flag', () => {
   assert.equal(isPlant(null, 50), false);
 });
 
-test('hasUnlimitedNames reads server flags and the product list', () => {
+test('hasUnlimitedNames reads server flags and checked entitlements', () => {
+  const active = (id: string) => ({
+    entitlements: { products: { [id]: { active: true, store: 'app_store', originalId: 'app_store_1' } } },
+  });
   assert.equal(hasUnlimitedNames(null), false);
   assert.equal(hasUnlimitedNames({ credits: 4 }), false);
   assert.equal(hasUnlimitedNames({ 'old version': true }), true);
   assert.equal(hasUnlimitedNames({ 'lifetime subscription': true }), true);
-  assert.equal(hasUnlimitedNames({ purchases: ['no_ads', 'search_by_photo'] }), true);
-  assert.equal(hasUnlimitedNames({ purchases: { 0: 'store_photos_yearly' } }), true);
-  assert.equal(hasUnlimitedNames({ purchases: ['field_guide_monthly'] }), true);
-  assert.equal(hasUnlimitedNames({ purchases: { 0: 'field_guide_yearly' } }), true);
-  assert.equal(hasUnlimitedNames({ purchases: ['no_ads'] }), false);
+  assert.equal(hasUnlimitedNames(active('search_by_photo')), true);
+  assert.equal(hasUnlimitedNames(active('store_photos_yearly')), true);
+  assert.equal(hasUnlimitedNames(active('field_guide_monthly')), true);
+  assert.equal(hasUnlimitedNames(active('field_guide_yearly')), true);
+  assert.equal(hasUnlimitedNames(active('no_ads')), false);
+  assert.equal(
+    hasUnlimitedNames({
+      purchases: ['field_guide_yearly'],
+      entitlements: {
+        products: {
+          field_guide_yearly: { active: false, store: 'play', originalId: 'play_abc' },
+        },
+      },
+    }),
+    false,
+  );
 });

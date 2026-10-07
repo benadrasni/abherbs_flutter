@@ -100,6 +100,8 @@
     "ad_rewards": { ".read": false, ".write": false },
     "anonymous_daily": { ".read": false, ".write": false },
     "photo_name_tally": { ".read": false, ".write": false },
+    "purchase_proofs": { ".read": false, ".write": false },
+    "store_accounts": { ".read": false, ".write": false },
 
     "users": {
       "$uid": {
@@ -110,7 +112,8 @@
         },
         "favorites": {
           ".write": "auth != null && auth.uid == $uid"
-        }
+        },
+        "entitlements": { ".write": false }
       }
     },
 

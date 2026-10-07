@@ -113,6 +113,8 @@
     },
 
     "photo_name_tally": { ".read": false, ".write": false },
+    "purchase_proofs": { ".read": false, ".write": false },
+    "store_accounts": { ".read": false, ".write": false },
 
     "users": {
       "$uid": {
@@ -128,6 +130,7 @@
         "purchases": {
           ".write": "auth != null && auth.uid == $uid"
         },
+        "entitlements": { ".write": false },
         "credits": {
           ".write": "auth != null && auth.uid == $uid",
           ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10000"

@@ -208,27 +208,4 @@ export function isPlant(body: unknown, thresholdPercent: number): boolean {
   return true;
 }
 
-const unlimitedProducts = [
-  'search_by_photo',
-  'store_photos_monthly',
-  'store_photos_yearly',
-  'field_guide_monthly',
-  'field_guide_yearly',
-];
-
-/**
- * `old version` and `lifetime subscription` are server-set. `purchases` is a
- * product-ID list the app wrote itself, so it is trusted only until receipts
- * are verified on the server; the daily ceiling caps what a forged list gains.
- */
-export function hasUnlimitedNames(user: Record<string, unknown> | null): boolean {
-  if (!user) return false;
-  if (user['old version'] === true || user['lifetime subscription'] === true) return true;
-  const purchases = user.purchases;
-  const owned = Array.isArray(purchases)
-    ? purchases
-    : purchases && typeof purchases === 'object'
-      ? Object.values(purchases)
-      : [];
-  return owned.some((id) => typeof id === 'string' && unlimitedProducts.includes(id));
-}
+export { hasUnlimitedNames } from './entitlements';

@@ -115,6 +115,8 @@
     "ad_rewards": { ".read": false, ".write": false },
     "anonymous_daily": { ".read": false, ".write": false },
     "photo_name_tally": { ".read": false, ".write": false },
+    "purchase_proofs": { ".read": false, ".write": false },
+    "store_accounts": { ".read": false, ".write": false },
 
     "users": {
       "$uid": {
@@ -130,6 +132,7 @@
         "purchases": {
           ".write": "auth != null && auth.uid == $uid && !newData.exists()"
         },
+        "entitlements": { ".write": false },
         "credits": {
           ".write": "auth != null && auth.uid == $uid && (!newData.exists() || (data.isNumber() && newData.isNumber() && newData.val() == data.val() - 1 && newData.val() >= 0))"
         }

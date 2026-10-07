@@ -10,6 +10,7 @@ import 'package:abherbs_flutter/shell/guide_shell.dart';
 import 'package:abherbs_flutter/book/list_page.dart';
 import 'package:abherbs_flutter/species/species_page.dart';
 import 'package:abherbs_flutter/purchase/owned_purchases.dart';
+import 'package:abherbs_flutter/purchase/store_proof.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
 import 'package:abherbs_flutter/shell/ad_consent.dart';
@@ -209,6 +210,7 @@ class _AppState extends State<App> {
       if (owned) {
         Purchases.purchases[id] = purchase;
         remembered.add(id);
+        unawaited(submitStorePurchase(purchase));
         if (id == productNoAdsAndroid || id == productNoAdsIOS) {
           hideAds = true;
         }

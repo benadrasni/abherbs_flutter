@@ -150,6 +150,33 @@ GuideFieldGuideChoice? guideFieldGuideOfferChoice(
   );
 }
 
+/// Whether this phone may replace monthly with yearly, or the screen is only
+/// a summary. A plan that arrived from the account cannot be changed here.
+class GuideFieldGuideAccess {
+  final bool upgrade;
+  final bool locked;
+
+  const GuideFieldGuideAccess({required this.upgrade, required this.locked});
+}
+
+GuideFieldGuideAccess guideFieldGuideAccess({
+  required GuideFieldGuideCatalog catalog,
+  required bool monthlyOnThisStore,
+  required bool fromAccountOnly,
+}) {
+  final upgrade = monthlyOnThisStore &&
+      !fromAccountOnly &&
+      catalog.monthly.owned &&
+      !catalog.yearly.owned &&
+      !catalog.coveredByOlderPlan &&
+      catalog.yearly.price != null;
+  final hasPlan = catalog.monthly.owned ||
+      catalog.yearly.owned ||
+      catalog.coveredByOlderPlan ||
+      fromAccountOnly;
+  return GuideFieldGuideAccess(upgrade: upgrade, locked: hasPlan && !upgrade);
+}
+
 /// The other Field Guide product, when that product is already owned.
 /// Photo-storage plans are a separate subscription and are not replaced.
 String? guideFieldGuideReplaces(

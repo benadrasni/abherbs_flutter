@@ -319,6 +319,14 @@ String guideFieldGuideDetail({
   return parts.join(' · ');
 }
 
+/// The trial, then the same perk line a subscribed Field Guide card shows.
+String guidePersonFieldGuideOffer({
+  required String trial,
+  required String perks,
+}) {
+  return '$trial • $perks';
+}
+
 String? _filled(String? value) {
   final trimmed = value?.trim() ?? '';
   return trimmed.isEmpty ? null : trimmed;
@@ -553,7 +561,7 @@ Future<GuidePersonView> loadGuidePerson(Locale locale) async {
     ),
     languageName: guideLanguageName(languages, pref, locale),
     appearance: storedGuideAppearance(),
-    showFieldGuide: !fieldGuide,
+    showFieldGuide: true,
     showOffline: true,
     offlineOn: offlineOn,
     offlineHold: await loadGuideOfflineHold(),

@@ -7,6 +7,28 @@ class Purchases {
   static bool hasLifetimeSubscription = false;
   static Map<String, PurchaseDetails> purchases = {};
 
+  /// Product ids a checked receipt granted to the signed-in account.
+  /// Cleared on sign-out. Store purchases stay in [purchases].
+  static final Set<String> accountProducts = <String>{};
+
+  static bool owns(String productId) {
+    return purchases.containsKey(productId) || accountProducts.contains(productId);
+  }
+
+  static void replaceAccountProducts(Set<String> ids) {
+    if (accountProducts.length == ids.length && accountProducts.containsAll(ids)) {
+      return;
+    }
+    accountProducts
+      ..clear()
+      ..addAll(ids);
+    if (namesReady) namesRevision.value++;
+  }
+
+  static void clearAccountProducts() {
+    replaceAccountProducts(<String>{});
+  }
+
   /// Photo-name entitlements from the last account read. Device prefs can
   /// still say the old paid app or a lifetime purchase after a reinstall,
   /// and Find must not treat those as this account until [namesReady].
@@ -43,8 +65,8 @@ class Purchases {
 
   static bool isNoAds() {
     return hasOldVersion ||
-        purchases.containsKey(productNoAdsAndroid) ||
-        purchases.containsKey(productNoAdsIOS);
+        owns(productNoAdsAndroid) ||
+        owns(productNoAdsIOS);
   }
 
   /// Free accounts see banners. Remove ads, the old paid app, and a Field
@@ -54,26 +76,24 @@ class Purchases {
   }
 
   static bool isSearch() {
-    return hasOldVersion || purchases.containsKey(productSearch);
+    return hasOldVersion || owns(productSearch);
   }
 
   /// The offline product, the old paid app, and a lifetime purchase.
   static bool isOffline() {
-    return hasOldVersion ||
-        hasLifetimeSubscription ||
-        purchases.containsKey(productOffline);
+    return hasOldVersion || hasLifetimeSubscription || owns(productOffline);
   }
 
   static bool isPhotoSearch() {
-    return hasOldVersion || purchases.containsKey(productPhotoSearch);
+    return hasOldVersion || owns(productPhotoSearch);
   }
 
   static bool isSubscribedMonthly() {
-    return purchases.containsKey(subscriptionMonthly);
+    return owns(subscriptionMonthly);
   }
 
   static bool isSubscribedYearly() {
-    return purchases.containsKey(subscriptionYearly);
+    return owns(subscriptionYearly);
   }
 
   /// Photo storage and the Field Guide plans. The old paid app and a lifetime
@@ -81,8 +101,21 @@ class Purchases {
   static bool hasFieldGuide() {
     return isSubscribedMonthly() ||
         isSubscribedYearly() ||
+        owns(fieldGuideMonthly) ||
+        owns(fieldGuideYearly);
+  }
+
+  /// Field Guide bought from the store on this phone, so a plan change can
+  /// replace it. A plan that arrived from the account cannot.
+  static bool get fieldGuideOnThisStore {
+    return purchases.containsKey(subscriptionMonthly) ||
+        purchases.containsKey(subscriptionYearly) ||
         purchases.containsKey(fieldGuideMonthly) ||
         purchases.containsKey(fieldGuideYearly);
+  }
+
+  static bool get fieldGuideFromAccountOnly {
+    return hasFieldGuide() && !fieldGuideOnThisStore;
   }
 
   /// Copies Seen photos to the account. Field Guide, the old paid app, and a
