@@ -960,7 +960,6 @@ void main() {
   test('a reinstall does not keep the previous phone unlimited', () {
     Purchases.namesReady = false;
     Purchases.hasOldVersion = true;
-    Purchases.hasLifetimeSubscription = true;
     expect(Purchases.namesUnlimited, isFalse);
     expect(Purchases.namesFieldGuide, isFalse);
     Purchases.holdNamesFor('account');
@@ -970,7 +969,6 @@ void main() {
     Purchases.holdNamesFor('account');
     expect(Purchases.namesReady, isTrue);
     Purchases.hasOldVersion = false;
-    Purchases.hasLifetimeSubscription = false;
     Purchases.holdNamesFor(null);
     Purchases.namesReady = false;
   });

@@ -10,7 +10,7 @@ Since 2026-09-30 the app never calls Plant.id itself. The Cloud Function `identi
 |---|---|
 | Guest (anonymous account from first launch) | 1 free, then sign-in. At most 3 Plant.id calls per guest account, ever. |
 | Signed in, no plan | 5 names a month, plus up to 5 more from a rewarded ad |
-| Photo search bought, Field Guide plan, `old version`, `lifetime subscription` | Unlimited, with a silent ceiling of 30 calls a day |
+| Photo search bought, Field Guide plan, `old version` | Unlimited, with a silent ceiling of 30 calls a day |
 
 Rules that apply to every account:
 
@@ -38,7 +38,7 @@ TypeScript, Node 22, firebase-functions 7, us-central1. `npm --prefix functions 
 - `admobReward` (HTTPS): AdMob rewarded-ad server-side verification callback, `https://us-central1-abherbs-backend.cloudfunctions.net/admobReward`. Verifies the ECDSA signature against Google's verifier keys, ignores repeated `transaction_id`s, and adds one ad grant (`adGrants`, up to 5 a month). That grant is one more photo name. It also adds 1 credit, which the old feedback and photo-search screens still read. The guide meter waits on `adGrants`. The app sets `ServerSideVerificationOptions(userId: uid)` before showing the ad.
 - `src/quota.ts` is the pure allowance logic, tested in `src/quota.test.ts`; `src/admob.ts` is the signature check.
 - Secret `PLANT_ID_KEY` (Secret Manager). Limits in `functions/.env.abherbs-backend`: `IS_PLANT_THRESHOLD_PERCENT`, `FREE_NOT_PLANT_PER_MONTH`, `DAILY_CEILING_FREE`, `DAILY_CEILING_UNLIMITED`, `AD_GRANTS_PER_MONTH`, `ANONYMOUS_LIFETIME_CALLS`, `ANONYMOUS_DAILY_CEILING`. Change the file and redeploy.
-- Unlimited is read from `users/{uid}`: `old version`, `lifetime subscription`, or an active checked entitlement for `search_by_photo`, `store_photos_monthly`, `store_photos_yearly`, `field_guide_monthly`, or `field_guide_yearly`. The client-written `purchases` list is not an entitlement.
+- Unlimited is read from `users/{uid}`: `old version`, or an active checked entitlement for `search_by_photo`, `store_photos_monthly`, `store_photos_yearly`, `field_guide_monthly`, or `field_guide_yearly`. The client-written `purchases` list is not an entitlement. A stored `lifetime subscription` flag is ignored.
 
 ## Database
 

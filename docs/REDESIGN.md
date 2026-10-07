@@ -66,7 +66,7 @@ Confirmed finds show in the book too. A species page has a **Seen by you** line 
 
 A find can also be added without the camera: **Add to Seen** on a species page opens this phone’s photos and saves the picture you choose. The anonymous guest can do this; the find is stored on that guest account. Date and place come from that photo’s EXIF when it has them. This is free and does not touch the allowance, because it does not call Plant.id. A place is optional; the old observation form required one.
 
-Seen replaces Observations. Records live where observation records live today, in `observations/by users/{uid}`, for every signed-in account, so a new phone keeps the notebook. Photos stay on the phone. While Field Guide is active the app copies each local photo to `private/{uid}/…` in Storage, including a Latin name that is not in the book. That prefix is readable only by the account. The object key mirrors `observations/{uid}/…`. Shared Sightings stay on the public `observations/{uid}/…` path. A second phone saves the file into its documents directory, including after the plan lapses. Nothing already in Storage is deleted when a plan lapses; only new photos stop syncing. Deleting a find, or the account, deletes its private objects.
+Seen replaces Observations. Records live where observation records live today, in `observations/by users/{uid}`, for every signed-in account, so a new phone keeps the notebook. Photos stay on the phone. While Field Guide is active, or the account owns the Observations purchase, the app copies each local photo to `private/{uid}/…` in Storage, including a Latin name that is not in the book. That prefix is readable only by the account. The object key mirrors `observations/{uid}/…`. Shared Sightings stay on the public `observations/{uid}/…` path. A second phone saves the file into its documents directory, including after the plan lapses. Nothing already in Storage is deleted when a plan lapses; only new photos stop syncing. Deleting a find, or the account, deletes its private objects.
 
 A Seen record keeps every observation field (`plant`, `date`, `latitude`, `longitude`, `note`, `photoPaths`, `indoors`) and adds `confirmed`, `source` (`camera`, `manual`, `import`), and for camera finds the Plant.id candidates with their likelihood. After every photo of that find is in `private/{uid}/`, the private row also has `photoCloud: true`. Share does not copy that flag. A full save that rewrites the row omits it until the next upload. `plant` may be a Latin name that is not in the book; readers keyed on catalog names (the per-plant index, stats, the reviewer) skip those.
 
@@ -107,13 +107,12 @@ People who already paid keep what they paid for:
 | Remove ads (`no_ads`, `NoAds`) | no ads |
 | Search | nothing extra to grant — search is free for everyone |
 | Photo search (`search_by_photo`) | unlimited identification, on this phone |
-| Observations | their observations, imported into Seen — Seen is now free for everyone |
+| Observations | Seen photos on every phone. The notebook itself is free for everyone |
 | Offline | offline packs |
 | Custom filter order | nothing to configure — the three-step key and the region chip are the default for everyone |
 | Old paid app (`herbsplus`, `old version`) | no ads, unlimited identification, offline, Seen photos on every phone |
-| Lifetime purchase | no ads, unlimited identification, offline, Seen photos on every phone |
 
-The old paid app and a lifetime purchase are not Field Guide, and that row stays available to them. Seen photos and the offline book are already included. The old one-time products stay available to Restore and are no longer the way to buy.
+The old paid app is not Field Guide, and that row stays available. Seen photos and the offline book are already included. The old one-time products stay available to Restore and are no longer the way to buy.
 
 ## The website
 

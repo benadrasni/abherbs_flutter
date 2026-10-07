@@ -10,7 +10,7 @@ Most catalog trees are world-readable (the website fetches them with unauthentic
 |---|---|---|
 | Catalog (`plants_v2`, `lists_4_v2`, `counts_4_v2`, `search_v3`, `search_photo`, `translations`, `translations_taxonomy`, `web`, …) | read | read |
 | Staging indexes (`*_new`) | read | read |
-| `users/{uid}` | denied | owner read. Client may write `token`, `favorites`, `purchases`, `credits` (0–10000). Owner may delete the whole node. Not `old version`, `lifetime subscription`, or `entitlements` except via that delete. |
+| `users/{uid}` | denied | owner read. Client may write `token`, `favorites`, `purchases`, `credits` (0–10000). Owner may delete the whole node. Not `old version` or `entitlements` except via that delete. |
 | `users_photo_search/{lang}/{uid}` | denied | owner read/write |
 | `credits/{uid}` | denied | owner read/write (string log, 64 chars) |
 | `observations/by users/{uid}` | denied | owner read/write |
@@ -238,7 +238,7 @@ Public stats recounted 2026-09-28 from `observations/public/by date/list`: 1,778
 Read by the app after sign-in (`lib/person/authentication.dart`). Client-writable fields are only `token`, `favorites/{plantId}`, `purchases`, and `credits` (number 0–10000).
 
 - `old version` — former plus-app entitlement (Admin / existing value only)
-- `lifetime subscription` — same
+- `lifetime subscription` — leftover. The app and `identifyPlant` ignore it.
 - `credits` — rewarded-ad balance (client can still set its own number)
 - `token` — FCM
 - `purchases` — product id list the phone still writes from its own store. It does not unlock another phone, and `identifyPlant` does not read it.
@@ -260,7 +260,7 @@ gs://abherbs-resources/
   misc/                     terms, privacy
 ```
 
-Firebase Storage: `photos/`, `families/`, `offline/`, `misc/` are public-read, client-write denied. `observations/{uid}/**` is public-read and owner-write (image, 10 MB); shared Sightings use it. `private/{uid}/**` is owner-read and owner-write (image, 10 MB). Field Guide copies a Seen photo there, including a name outside the book. The object key mirrors the `observations/` path. The rule file `firebase/storage.abherbs-resources.rules` was released to `abherbs-resources` on 2026-10-03 (`firebase.storage/abherbs-resources`). A signed-in owner can read and write `private/`. The default bucket `abherbs-backend.appspot.com` is deny-all. `firebase.json` has no Storage target, so a database or functions deploy does not publish these rules. Public **listing** of the GCS bucket is IAM, not these rules.
+Firebase Storage: `photos/`, `families/`, `offline/`, `misc/` are public-read, client-write denied. `observations/{uid}/**` is public-read and owner-write (image, 10 MB); shared Sightings use it. `private/{uid}/**` is owner-read and owner-write (image, 10 MB). Field Guide and the Observations purchase copy a Seen photo there, including a name outside the book. The object key mirrors the `observations/` path. The rule file `firebase/storage.abherbs-resources.rules` was released to `abherbs-resources` on 2026-10-03 (`firebase.storage/abherbs-resources`). A signed-in owner can read and write `private/`. The default bucket `abherbs-backend.appspot.com` is deny-all. `firebase.json` has no Storage target, so a database or functions deploy does not publish these rules. Public **listing** of the GCS bucket is IAM, not these rules.
 
 Local staging on this machine (from `abherbs-auto/constants.py`):
 

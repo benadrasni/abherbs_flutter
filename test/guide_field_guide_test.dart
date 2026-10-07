@@ -13,8 +13,8 @@ void main() {
   tearDown(() {
     Purchases.purchases = {};
     Purchases.clearAccountProducts();
-    Purchases.hasLifetimeSubscription = false;
     Purchases.hasOldVersion = false;
+    Purchases.namesReady = false;
   });
 
   test('dismissing the store sheet is not a failed purchase', () {
@@ -152,15 +152,7 @@ void main() {
     expect(loaded.products[fieldGuideMonthly]?.rawPrice, 2.99);
   });
 
-  test('Field Guide plans hide ads and are not the lifetime purchase', () {
-    Purchases.hasLifetimeSubscription = true;
-    expect(Purchases.isSubscribed(), isTrue);
-    expect(Purchases.hasFieldGuide(), isFalse);
-    expect(Purchases.syncsSeenPhotos(), isTrue);
-    expect(Purchases.isOffline(), isTrue);
-    expect(Purchases.showsAds(), isFalse);
-
-    Purchases.hasLifetimeSubscription = false;
+  test('Field Guide plans hide ads, and the old paid app is not Field Guide', () {
     Purchases.hasOldVersion = true;
     expect(Purchases.hasFieldGuide(), isFalse);
     expect(Purchases.syncsSeenPhotos(), isTrue);
@@ -176,11 +168,18 @@ void main() {
     expect(Purchases.syncsSeenPhotos(), isFalse);
     expect(Purchases.isOffline(), isTrue);
 
+    Purchases.purchases = {productObservations: _purchase(productObservations)};
+    Purchases.finishNames();
+    expect(Purchases.syncsSeenPhotos(), isTrue);
+    expect(Purchases.hasFieldGuide(), isFalse);
+    expect(Purchases.isOffline(), isFalse);
+    expect(Purchases.showsAds(), isTrue);
+    expect(Purchases.namesUnlimited, isFalse);
+
     Purchases.purchases = {};
     expect(Purchases.syncsSeenPhotos(), isFalse);
     expect(Purchases.isOffline(), isFalse);
 
-    Purchases.hasLifetimeSubscription = false;
     Purchases.purchases = {fieldGuideMonthly: _purchase(fieldGuideMonthly)};
     expect(Purchases.hasFieldGuide(), isTrue);
     expect(Purchases.showsAds(), isFalse);

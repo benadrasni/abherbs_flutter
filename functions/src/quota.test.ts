@@ -150,7 +150,7 @@ test('hasUnlimitedNames reads server flags and checked entitlements', () => {
   assert.equal(hasUnlimitedNames(null), false);
   assert.equal(hasUnlimitedNames({ credits: 4 }), false);
   assert.equal(hasUnlimitedNames({ 'old version': true }), true);
-  assert.equal(hasUnlimitedNames({ 'lifetime subscription': true }), true);
+  assert.equal(hasUnlimitedNames({ 'lifetime subscription': true }), false);
   assert.equal(hasUnlimitedNames(active('search_by_photo')), true);
   assert.equal(hasUnlimitedNames(active('store_photos_yearly')), true);
   assert.equal(hasUnlimitedNames(active('field_guide_monthly')), true);

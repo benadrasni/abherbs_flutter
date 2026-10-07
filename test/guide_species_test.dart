@@ -341,11 +341,9 @@ void main() {
 
   testWidgets('the species page shows the oxeye daisy entry', (tester) async {
     Purchases.hasOldVersion = false;
-    Purchases.hasLifetimeSubscription = false;
     Purchases.purchases = {};
     addTearDown(() {
       Purchases.hasOldVersion = false;
-      Purchases.hasLifetimeSubscription = false;
       Purchases.purchases = {};
     });
     await _pump(

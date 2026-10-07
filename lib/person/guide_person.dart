@@ -48,7 +48,7 @@ class GuideAllowance {
   final int namesLeft;
   final DateTime? resetsOn;
 
-  /// A photo-storage plan or the lifetime purchase. The Field Guide row hides.
+  /// A photo-storage plan or Field Guide. The Field Guide row hides.
   final bool fieldGuide;
   final bool unlimitedNames;
   final bool noAds;
@@ -83,6 +83,7 @@ class GuideAllowance {
     required int used,
     required int fromAds,
     required DateTime now,
+    this.seenSynced = false,
   })  : kind = GuideAllowanceKind.month,
         includedUsed = _clampCount(used, 5),
         extraUsed = _clampCount(fromAds, 5),
@@ -90,8 +91,7 @@ class GuideAllowance {
         resetsOn = DateTime(now.year, now.month + 1, 1),
         fieldGuide = false,
         unlimitedNames = false,
-        noAds = false,
-        seenSynced = false;
+        noAds = false;
 
   GuideAllowance.credits(int credits)
       : kind = GuideAllowanceKind.credits,
@@ -299,6 +299,7 @@ GuideAllowance guideLiveAllowance({
     used: usedThisMonth,
     fromAds: extraFromAds,
     now: now,
+    seenSynced: seenSynced,
   );
 }
 

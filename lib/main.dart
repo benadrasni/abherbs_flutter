@@ -425,8 +425,6 @@ class _AppState extends State<App> {
     }
     if (mounted) setState(() {});
     Purchases.hasOldVersion = Prefs.getBool(keyOldVersion, false);
-    Purchases.hasLifetimeSubscription =
-        Prefs.getBool(keyLifetimeSubscription, false);
     Auth.setUser();
     Offline.initialize();
   }

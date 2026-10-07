@@ -4,7 +4,7 @@ Field Guide build (`redesign/field-guide`, 9.0.0). Run the purchase scenarios on
 
 Use a fresh install or a sandbox account for each new-user scenario. Do not spend the production Pixel account (`PGS88GCOzOPJWAaGMyyk66iKXAI3`) on delete, sign-out, or purchase tests.
 
-`old version` and `lifetime subscription` are server flags under `users/{uid}`. The phone cannot buy them and cannot write them. Prepare those two accounts in the database before the pass. A purchase or Restore sends the store receipt to `submitPurchase`, which writes `users/{uid}/entitlements` when Apple or Google confirms it. The same account on the other phone unlocks from that record. A cancelled plan ends when the checked expiry passes. Record that in L1.
+`old version` is a server flag under `users/{uid}`. The phone cannot buy it and cannot write it. Prepare that account in the database before the pass. A purchase or Restore sends the store receipt to `submitPurchase`, which writes `users/{uid}/entitlements` when Apple or Google confirms it. The same account on the other phone unlocks from that record. A cancelled plan ends when the checked expiry passes. Record that in L1.
 
 Search, the three-step key, every species page, Book, and Add to Seen are free for every account. Add to Seen does not call Plant.id and does not spend a name. Run checklist F once on a guest, then do not repeat it on every account unless a step says the book itself failed.
 
@@ -22,9 +22,8 @@ Person allowance, in the English copy:
 | Field Guide, then “no ads · Seen synced” | Field Guide or an active photo-storage plan |
 | Unlimited names | Photo search |
 | Unlimited names, then “no ads · Seen synced” | Old paid app |
-| Unlimited names, then “Seen synced” | Lifetime |
 
-The Field Guide card does not add the words “Unlimited names” unless that account also has photo search or the lifetime flag. The camera is still unlimited: no row of dots, and another photo still names. Offline is a row on Person for everyone. Download is offered only when the account may keep a pack. Otherwise the Offline screen offers Field Guide.
+The Field Guide card does not add the words “Unlimited names” unless that account also has photo search. The camera is still unlimited: no row of dots, and another photo still names. Offline is a row on Person for everyone. Download is offered only when the account may keep a pack. Otherwise the Offline screen offers Field Guide.
 
 ## Entitlement
 
@@ -36,13 +35,12 @@ The Field Guide card does not add the words “Unlimited names” unless that ac
 | E1 Remove ads | no | 5 per month, plus ads | yes | yes | notebook only | no | yes |
 | E2 Photo search | yes | unlimited, 30 a day | no | yes | notebook only | no | yes |
 | E3 Offline | yes | 5 per month, plus ads | yes | yes | notebook only | yes | yes |
-| E4 Observations, Search, or Custom filter | yes | 5 per month, plus ads | yes | yes | notebook only | no | yes |
+| E4 Observations, Search, or Custom filter | yes | 5 per month, plus ads | yes | yes | yes for Observations; notebook only for Search and Custom filter | no | yes |
 | E5 Photo storage, monthly or yearly | no | unlimited, 30 a day | no | yes | yes | yes | hidden |
 | E6 Old paid app | no | unlimited, 30 a day | no | yes | yes | yes | yes |
-| E7 Lifetime | no | unlimited, 30 a day | no | yes | yes | yes | yes |
 | E8 Stack of one-time products | no, if Remove ads is in the stack | unlimited if Photo search is in the stack, otherwise 5 | only when names are monthly | yes | notebook only | only if Offline is in the stack | yes |
 
-“Notebook only” means the find’s name, time, and place come down on a second phone. The photo stays on the phone that took it. Field Guide, photo storage, the old paid app, and a lifetime purchase copy new photos to `private/{uid}`. A lapsed Field Guide or photo-storage plan stops new copies and leaves the ones already stored. The old paid app and a lifetime purchase do not lapse.
+“Notebook only” means the find’s name, time, and place come down on a second phone. The photo stays on the phone that took it. Field Guide, photo storage, the Observations purchase, and the old paid app copy new photos to `private/{uid}`. A lapsed Field Guide or photo-storage plan stops new copies and leaves the ones already stored. The Observations purchase and the old paid app do not lapse.
 
 A guest is an anonymous Firebase account created once per install. The app treats that account as signed out. Signing out does not create another guest.
 
@@ -172,9 +170,9 @@ Setup: restore `offline` only.
 
 Setup: three accounts, or one pass each, restoring `observations`, `search`, or `custom_filter` and nothing else.
 
-1. Person says Names this month. Find shows a banner. Offline offers Field Guide. Field Guide is still a row.
-2. On the observations account, older private rows appear in Seen as confirmed finds. A missing `confirmed` field is already confirmed. A photo that was uploaded with a shared find loads from Storage. A photo that never left the old phone is missing on this phone, and the row remains.
-3. Search and custom filter add nothing the free book does not already do. Search, the key, and Seen are free.
+1. Person says Names this month. On the Observations account it also says Seen synced. Find shows a banner. Offline offers Field Guide. Field Guide is still a row.
+2. On the observations account, older private rows appear in Seen as confirmed finds. A missing `confirmed` field is already confirmed. A photo that was uploaded with a shared find loads from Storage. A photo still on this phone is copied to `private/{uid}`, including one taken before the purchase. A photo that never left the old phone is missing until that phone runs with the purchase.
+3. Search and custom filter add nothing the free book does not already do. Search, the key, and Seen are free. They do not copy photos.
 
 ## E5 — Photo storage, monthly or yearly
 
@@ -194,16 +192,6 @@ Setup: `users/{uid}/old version` is true. Sign in on a fresh install of this bui
 2. Find has no banner. The camera does not meter names.
 3. Offline can download the book or a region. It does not offer Field Guide first.
 4. Take a photo. The second phone shows the find and the photo. `private/{uid}` has the object.
-
-## E7 — Lifetime
-
-Setup: `users/{uid}/lifetime subscription` is true, and the account has no Field Guide product and no photo-storage product.
-
-1. Person says Unlimited names, then “Seen synced”. It does not say no ads. Find still has no banner. Field Guide is still a row. Seen says the photos are on this account’s devices.
-2. The camera does not meter names.
-3. Offline can download the book or a region.
-4. Take a photo. The second phone shows the find and the photo.
-5. Subscribing to Field Guide is optional. If they do, Person switches to the Field Guide card and the lifetime flag stays. Sync and offline remain if that plan is later removed, because the lifetime flag is still set.
 
 ## E8 — A stack of one-time products
 
@@ -225,7 +213,7 @@ Setup: a phone that has the store app (8.3.x) with a signed-in account, some obs
 
 Setup: S2 or E5 on phone A. Phone B is a fresh install.
 
-1. Sign in on B before restoring. The notebook arrives. Photos that were copied while sync was on download. Photos from before that, and photos from E2, do not. E6 and E7 copy a new photo without a separate Field Guide purchase.
+1. Sign in on B before restoring. The notebook arrives. Photos that were copied while sync was on download. Photos from before that, and photos from E2, do not. E6 copies a new photo without a separate Field Guide purchase.
 2. If B does not yet show the plan, Restore purchases. The plan returns, ads stay off, and a new photo on B uploads.
 3. Sign out on B. The account’s finds leave the screen. Sign in. They return.
 
@@ -290,7 +278,6 @@ The guest’s visible allowance is still one successful name. The extra calls ar
 | E5 monthly | | | | | |
 | E5 yearly | | | | | |
 | E6 | | | | | |
-| E7 | | | | | |
 | E8 | | | | | |
 | U1 | | | | | |
 | R1 | | | | | |

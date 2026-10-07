@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:abherbs_flutter/data/plant.dart';
 import 'package:abherbs_flutter/offline/guide_media.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
-import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -198,25 +197,26 @@ class Offline {
           }
           break;
         case 4:
-          if (Purchases.isSearch()) {
-            await reference.child(firebaseAPGIV).keepSynced(value);
+          // A pack removal releases the search index an earlier build pinned.
+          if (!value) {
+            await reference.child(firebaseAPGIV).keepSynced(false);
             await reference
                 .child(firebaseSearch)
                 .child(languageLatin)
-                .keepSynced(value);
-            var language =
-                await Prefs.getStringListF(keyLanguageAndCountry, ['en', 'US']);
+                .keepSynced(false);
+            var language = await Prefs.getStringListF(
+              keyLanguageAndCountry,
+              ['en', 'US'],
+            );
             await reference
                 .child(firebaseSearch)
                 .child(language[0])
-                .keepSynced(value);
+                .keepSynced(false);
           }
           break;
       }
       _keepSynced[section - 1] = value;
-      if (!Purchases.isSearch()) {
-        _keepSynced[3] = value;
-      }
+      _keepSynced[3] = value;
       finalizeDownloadDB();
     }
   }

@@ -4,7 +4,6 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 
 class Purchases {
   static bool hasOldVersion = false;
-  static bool hasLifetimeSubscription = false;
   static Map<String, PurchaseDetails> purchases = {};
 
   /// Product ids a checked receipt granted to the signed-in account.
@@ -30,8 +29,8 @@ class Purchases {
   }
 
   /// Photo-name entitlements from the last account read. Device prefs can
-  /// still say the old paid app or a lifetime purchase after a reinstall,
-  /// and Find must not treat those as this account until [namesReady].
+  /// still say the old paid app after a reinstall, and Find must not treat
+  /// that as this account until [namesReady].
   static bool namesReady = false;
   static String? _namesUid;
   static final ValueNotifier<int> namesRevision = ValueNotifier(0);
@@ -54,7 +53,7 @@ class Purchases {
   /// Unlimited photo names for the meter. False until [finishNames].
   static bool get namesUnlimited {
     if (!namesReady) return false;
-    return isPhotoSearch() || hasLifetimeSubscription;
+    return isPhotoSearch();
   }
 
   /// Field Guide for the meter. False until [finishNames].
@@ -75,13 +74,9 @@ class Purchases {
     return !isNoAds() && !isSubscribed();
   }
 
-  static bool isSearch() {
-    return hasOldVersion || owns(productSearch);
-  }
-
-  /// The offline product, the old paid app, and a lifetime purchase.
+  /// The offline product and the old paid app.
   static bool isOffline() {
-    return hasOldVersion || hasLifetimeSubscription || owns(productOffline);
+    return hasOldVersion || owns(productOffline);
   }
 
   static bool isPhotoSearch() {
@@ -96,8 +91,8 @@ class Purchases {
     return owns(subscriptionYearly);
   }
 
-  /// Photo storage and the Field Guide plans. The old paid app and a lifetime
-  /// purchase are not this plan, and the Field Guide row stays available.
+  /// Photo storage and the Field Guide plans. The old paid app is not this
+  /// plan, and the Field Guide row stays available.
   static bool hasFieldGuide() {
     return isSubscribedMonthly() ||
         isSubscribedYearly() ||
@@ -118,14 +113,14 @@ class Purchases {
     return hasFieldGuide() && !fieldGuideOnThisStore;
   }
 
-  /// Copies Seen photos to the account. Field Guide, the old paid app, and a
-  /// lifetime purchase.
+  /// Copies Seen photos to the account. Field Guide, the Observations
+  /// purchase, and the old paid app.
   static bool syncsSeenPhotos() {
-    return hasFieldGuide() || hasOldVersion || hasLifetimeSubscription;
+    return hasFieldGuide() || hasOldVersion || owns(productObservations);
   }
 
   static bool isSubscribed() {
-    return hasLifetimeSubscription || hasFieldGuide();
+    return hasFieldGuide();
   }
 }
 

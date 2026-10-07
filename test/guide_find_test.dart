@@ -292,7 +292,6 @@ void main() {
 
   test('Remove ads and Field Guide hide banners', () {
     Purchases.hasOldVersion = false;
-    Purchases.hasLifetimeSubscription = false;
     Purchases.purchases = {};
     expect(Purchases.showsAds(), isTrue);
 
@@ -304,14 +303,11 @@ void main() {
     expect(Purchases.showsAds(), isFalse);
 
     Purchases.hasOldVersion = false;
-    Purchases.hasLifetimeSubscription = true;
-    expect(Purchases.showsAds(), isFalse);
-    Purchases.hasLifetimeSubscription = false;
+    expect(Purchases.showsAds(), isTrue);
   });
 
   testWidgets('a no-ads purchase leaves Find without a banner', (tester) async {
     Purchases.hasOldVersion = false;
-    Purchases.hasLifetimeSubscription = false;
     Purchases.purchases = {_noAds().productID: _noAds()};
     await tester.pumpWidget(MaterialApp(
       locale: const Locale('en'),
@@ -333,7 +329,6 @@ void main() {
     ));
     expect(find.byType(AppBannerAd), findsNothing);
     expect(find.text('Find'), findsOneWidget);
-    Purchases.hasLifetimeSubscription = false;
   });
 
   testWidgets('shows the unconfirmed count on the Seen icon', (tester) async {

@@ -105,7 +105,7 @@ There used to be two Play apps (free + plus). Only `sk.ab.herbs` is the current 
 
 ### Auth
 
-Firebase Auth: email/password, Google, Apple, phone. Observations and photo search expect a signed-in user. Favorites, FCM token, the phone's purchase list, checked entitlements, credits, and the lifetime-subscription flag live under `users/{uid}`.
+Firebase Auth: email/password, Google, Apple, phone. Observations and photo search expect a signed-in user. Favorites, FCM token, the phone's purchase list, checked entitlements, and credits live under `users/{uid}`.
 
 ### Offline
 

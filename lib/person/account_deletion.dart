@@ -149,7 +149,6 @@ Future<void> deleteSignedInAccount() async {
   await user.delete();
   Auth.setUser();
   Purchases.hasOldVersion = false;
-  Purchases.hasLifetimeSubscription = false;
   Purchases.clearAccountProducts();
   Auth.credits = 0;
 }

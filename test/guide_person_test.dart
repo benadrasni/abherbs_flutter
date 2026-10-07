@@ -258,12 +258,15 @@ void main() {
       subscribed: false,
       unlimitedNames: false,
       noAds: false,
-      seenSynced: false,
+      seenSynced: true,
       now: DateTime(2026, 9, 30),
     );
     expect(left.kind, GuideAllowanceKind.month);
     expect(left.includedUsed, 0);
     expect(left.namesLeft, 5);
+    expect(left.seenSynced, isTrue);
+    expect(left.fieldGuide, isFalse);
+    expect(left.noAds, isFalse);
 
     final banked = guideLiveAllowance(
       signedIn: true,

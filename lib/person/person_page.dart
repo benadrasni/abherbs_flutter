@@ -692,6 +692,10 @@ class _AllowanceCard extends StatelessWidget {
         _AllowanceBar(allowance: allowance),
         const SizedBox(height: 6),
         Text(detail, style: _note(colors)),
+        if (allowance.seenSynced) ...[
+          const SizedBox(height: 4),
+          Text(strings.guide_person_seen_synced, style: _note(colors)),
+        ],
       ],
     );
   }

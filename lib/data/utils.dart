@@ -11,8 +11,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 const String productNoAdsAndroid = "no_ads";
 const String productNoAdsIOS = "NoAds";
-const String productSearch = "search";
 const String productOffline = "offline";
+const String productObservations = "observations";
 const String productPhotoSearch = "search_by_photo";
 const String subscriptionMonthly = "store_photos_monthly";
 const String subscriptionYearly = "store_photos_yearly";
@@ -43,7 +43,6 @@ const String keyOfflineDB = "offline_db";
 const String keyPurchases = "purchases";
 const String keyToken = "token";
 const String keyOldVersion = "old_version";
-const String keyLifetimeSubscription = "lifetime_subscription";
 const String keyGuestCreated = "guest_created";
 const String keyGuestFreeUsed = "guest_free_used";
 
@@ -207,7 +206,6 @@ const String firebaseAttributeUrl = "url";
 const String firebaseAttributeLabel = "label";
 const String firebaseAttributeOrder = "order";
 const String firebaseAttributeOldVersion = "old version";
-const String firebaseAttributeLifetimeSubscription = "lifetime subscription";
 const String firebaseAttributeToken = "token";
 const String firebaseAttributePurchases = "purchases";
 const String firebaseAttributeCredits = "credits";

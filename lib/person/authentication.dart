@@ -133,7 +133,6 @@ class Auth {
       _stopEntitlements();
       credits = 0;
       Purchases.hasOldVersion = false;
-      Purchases.hasLifetimeSubscription = false;
       Purchases.clearAccountProducts();
       if (gen == _accountGen) Purchases.finishNames();
       return;
@@ -201,22 +200,6 @@ class Auth {
           .keepSynced(true);
     }
 
-    try {
-      final event = await usersReference
-          .child(uid)
-          .child(firebaseAttributeLifetimeSubscription)
-          .once();
-      if (gen != _accountGen) return;
-      final value = event.snapshot.value;
-      Purchases.hasLifetimeSubscription = value == true;
-      unawaited(Prefs.setBool(
-        keyLifetimeSubscription,
-        Purchases.hasLifetimeSubscription,
-      ));
-    } catch (error) {
-      if (gen != _accountGen) return;
-      Purchases.hasLifetimeSubscription = false;
-    }
     if (gen == _accountGen) {
       Purchases.finishNames();
       _watchEntitlements(uid, gen);

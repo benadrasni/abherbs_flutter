@@ -254,12 +254,11 @@ export function activeEntitlementIds(user: Record<string, unknown> | null): stri
 }
 
 /**
- * Unlimited photo names. `old version` and `lifetime subscription` are
- * server-set. A checked entitlement grants the same. The client-written
- * `purchases` list is not an entitlement.
+ * Unlimited photo names. `old version` is server-set. A checked entitlement
+ * grants the same. The client-written `purchases` list is not an entitlement.
  */
 export function hasUnlimitedNames(user: Record<string, unknown> | null): boolean {
   if (!user) return false;
-  if (user['old version'] === true || user['lifetime subscription'] === true) return true;
+  if (user['old version'] === true) return true;
   return activeEntitlementIds(user).some((id) => unlimitedProducts.includes(id));
 }
