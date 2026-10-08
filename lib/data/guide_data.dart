@@ -1549,23 +1549,17 @@ class _LanguageLists {
   _LanguageLists(this.code, this.lists);
 }
 
+/// Lists for this language only. A missing node is an empty set.
+/// English lists are not a substitute.
 Future<_LanguageLists> _languageLists(String languageCode) async {
-  var code = getLanguageCode(languageCode);
+  final code = getLanguageCode(languageCode);
   // get() reads the server while online. once() can finish from the on-disk
   // copy, which hides a genera child published after the last open.
-  var snapshot =
+  final snapshot =
       await listsCustomReference.child('by language').child(code).get();
-  if (_isEmptyMap(snapshot.value) && code != 'en') {
-    code = 'en';
-    snapshot = await listsCustomReference.child('by language').child(code).get();
-  }
   final value = snapshot.value;
   if (value is Map) return _LanguageLists(code, value);
   return _LanguageLists(code, {});
-}
-
-bool _isEmptyMap(dynamic value) {
-  return value is! Map || value.isEmpty;
 }
 
 Future<Map<String, String>> _headerPhotos(Set<String> ids) async {
