@@ -1,8 +1,6 @@
 import { createHash } from 'node:crypto';
 import { storeAccountToken } from './store_account';
 
-export const bundleId = 'sk.ab.herbs';
-
 export const subscriptionProducts = new Set([
   'store_photos_monthly',
   'store_photos_yearly',

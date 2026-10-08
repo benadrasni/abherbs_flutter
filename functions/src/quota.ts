@@ -53,13 +53,6 @@ export function rollOver(state: QuotaState | null, now: number): QuotaState {
 /** Included photo names each UTC month. Ad grants add up to five more. */
 export const includedNamesPerMonth = 5;
 
-/** Names still available: five included, plus ad grants, minus names already used. */
-export function namesRemaining(state: QuotaState | null, now: number): number {
-  const next = rollOver(state, now);
-  const left = includedNamesPerMonth + (next.adGrants ?? 0) - (next.namesUsed ?? 0);
-  return left > 0 ? left : 0;
-}
-
 /**
  * Reserves one name before Plant.id. Released when the call fails or the
  * photo is one of the month's free not-a-plant answers.
