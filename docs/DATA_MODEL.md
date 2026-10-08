@@ -168,7 +168,7 @@ Empty / missing means show the Latin name. Later-language publishes (`publish_ne
 }
 ```
 
-`list` keys are `plants_headers` ids. Values are `1` (membership only) or a year `1900–2100` for campaigns such as Blume / Baum / Orchidee des Jahres. Optional `sourceUrl` is the campaign’s official page. Shipped app 8.2.1 reads only `list` and `icon`, so extra children stay compatible. Current app and website put language lists that have a `sourceUrl` first, then sort by name; year-lists sort newest first, show the year, and link `sourceUrl` on the list screen. A plant named in two years appears once, with the later year.
+`list` keys are `plants_headers` ids. Values are `1` (membership only), a year `1900–2100` for campaigns such as Blume / Baum / Orchidee des Jahres, or a state name for a state-flower list. One species that is the flower of more than one state stores a map whose keys are those state names. The list is ordered by state. Optional `sourceUrl` is the campaign’s official page. Optional `parameter` is a short classifier such as a country epithet or a US state name. Shipped app 8.2.1 reads only `list` and `icon`, so extra children stay compatible. New in the book is its own section and stays first. Language lists with a `sourceUrl` come next, then lists with a year value or a `parameter`. In that group a list with a `parameter` is ordered by the parameter, so two country lists follow it alphabetically, and the other lists in the group stay in title order. The remaining titles follow alphabetically. Year-lists sort newest first inside the list, show the year, and link `sourceUrl` on the list screen. A plant named in two years appears once, with the later year.
 
 ## Filter vocabulary
 

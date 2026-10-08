@@ -363,10 +363,15 @@ class _GuideYearPageState extends State<GuideYearPage> {
     final seenCount = entries == null
         ? 0
         : guideSeenInList(entries.map((entry) => entry.plant), _seen);
+    final marked = entries != null && entries.any((entry) => entry.mark != null);
     return _ListChrome(
       backLabel: widget.backLabel,
       title: widget.title,
-      meta: entries == null ? '' : strings.guide_years_newest(entries.length),
+      meta: entries == null
+          ? ''
+          : marked
+              ? strings.guide_plants(entries.length)
+              : strings.guide_years_newest(entries.length),
       sourceUrl: _sourceUrl,
       seenCount: seenCount,
       plates: _plates,
@@ -389,7 +394,7 @@ class _GuideYearPageState extends State<GuideYearPage> {
           entry: entry,
           plates: _plates,
           seen: _seen.contains(entry.plant.name),
-          thisYear: entry.year == year,
+          thisYear: entry.mark == null && entry.year == year,
           onTap: () => widget.onOpenPlant(context, entry.plant.name),
         ),
     ];
@@ -601,35 +606,37 @@ class _YearRow extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: Row(
             children: [
-              SizedBox(
-                width: 58,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${entry.year}',
-                      style: TextStyle(
-                        fontFamily: GuideType.serif,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                        height: 1.1,
-                        color: colors.madder,
-                      ),
-                    ),
-                    if (thisYear)
+              if (entry.mark == null) ...[
+                SizedBox(
+                  width: 58,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        strings.guide_this_year.toUpperCase(),
+                        '${entry.year}',
                         style: TextStyle(
-                          fontSize: 10,
-                          letterSpacing: 0.6,
-                          fontWeight: FontWeight.w600,
+                          fontFamily: GuideType.serif,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          height: 1.1,
                           color: colors.madder,
                         ),
                       ),
-                  ],
+                      if (thisYear)
+                        Text(
+                          strings.guide_this_year.toUpperCase(),
+                          style: TextStyle(
+                            fontSize: 10,
+                            letterSpacing: 0.6,
+                            fontWeight: FontWeight.w600,
+                            color: colors.madder,
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(width: 12),
+                const SizedBox(width: 12),
+              ],
               GuidePhoto(
                 path: path,
                 width: 64,
@@ -643,6 +650,19 @@ class _YearRow extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    if (entry.mark != null)
+                      Text(
+                        entry.mark!,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontFamily: GuideType.serif,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          height: 1.15,
+                          color: colors.madder,
+                        ),
+                      ),
                     Text(
                       vernacular ?? plant.name,
                       maxLines: 2,

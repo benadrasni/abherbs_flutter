@@ -117,14 +117,14 @@ class GuideWordmark extends StatelessWidget {
 
 class GuideSectionHeader extends StatelessWidget {
   final String title;
-  final String action;
-  final VoidCallback onAction;
+  final String? action;
+  final VoidCallback? onAction;
 
   const GuideSectionHeader({
     super.key,
     required this.title,
-    required this.action,
-    required this.onAction,
+    this.action,
+    this.onAction,
   });
 
   @override
@@ -135,18 +135,19 @@ class GuideSectionHeader extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: Text(title, style: GuideType.section(colors))),
-          TextButton(
-            onPressed: onAction,
-            style: TextButton.styleFrom(
-              foregroundColor: colors.moss,
-              textStyle: const TextStyle(
-                fontFamily: GuideType.sans,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
+          if (action != null && onAction != null)
+            TextButton(
+              onPressed: onAction,
+              style: TextButton.styleFrom(
+                foregroundColor: colors.moss,
+                textStyle: const TextStyle(
+                  fontFamily: GuideType.sans,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
+              child: Text(action!),
             ),
-            child: Text(action),
-          ),
         ],
       ),
     );

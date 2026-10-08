@@ -29,6 +29,8 @@ class FindPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final recent = (finds ?? const <GuideFind>[]).take(5).toList();
     final flowerLists = lists;
+    final sections =
+        flowerLists == null ? null : guideListSections(flowerLists);
     return ListView(
       padding: const EdgeInsets.only(bottom: 16),
       children: [
@@ -49,18 +51,22 @@ class FindPage extends StatelessWidget {
           ),
           _FindStrip(finds: recent, onOpenSeen: onOpenSeen),
         ],
+        if (sections?.fresh != null) ...[
+          GuideSectionHeader(title: S.of(context).guide_new_in_book),
+          _ListStrip(lists: [sections!.fresh!]),
+        ],
         GuideSectionHeader(
           title: S.of(context).custom_lists,
           action: S.of(context).guide_all_lists,
           onAction: onOpenBook,
         ),
-        if (flowerLists == null)
+        if (sections == null)
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 24),
             child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
           )
-        else if (flowerLists.isNotEmpty)
-          _ListStrip(lists: flowerLists),
+        else if (sections.custom.isNotEmpty)
+          _ListStrip(lists: sections.custom),
       ],
     );
   }

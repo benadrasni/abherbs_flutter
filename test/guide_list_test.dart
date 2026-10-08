@@ -171,6 +171,17 @@ void main() {
     expect(guideCustomLayout(fresh), GuideCustomLayout.fresh);
     expect(guideCustomLayout(years), GuideCustomLayout.years);
     expect(guideCustomLayout(spices), GuideCustomLayout.grid);
+    expect(
+      guideCustomLayout(GuideListCover(
+        title: 'State flowers',
+        photoPath: null,
+        path: FirebaseDatabase.instance.ref('lists/states'),
+        isNew: false,
+        count: 21,
+        labeled: true,
+      )),
+      GuideCustomLayout.years,
+    );
     expect(guideSourceHost('https://www.baum-des-jahres.de/'),
         'baum-des-jahres.de');
     expect(guideSourceHost('baum-des-jahres.de'), 'baum-des-jahres.de');

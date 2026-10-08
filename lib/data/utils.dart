@@ -171,6 +171,34 @@ int? customListYear(dynamic value) {
   return n;
 }
 
+/// A state name, not a year and not the membership value `1`.
+bool customListStateName(String value) {
+  final text = value.trim();
+  if (text.isEmpty) return false;
+  return RegExp(r'[A-Za-z]').hasMatch(text);
+}
+
+/// State names stored on one plant. One state is a string. Several states
+/// are a map whose keys are the state names.
+List<String> customListStates(dynamic value) {
+  if (value is String) {
+    final text = value.trim();
+    if (!customListStateName(text)) return const [];
+    return [text];
+  }
+  if (value is Map) {
+    final names = <String>[];
+    value.forEach((key, child) {
+      if (child == null || child == false) return;
+      final name = key.toString().trim();
+      if (customListStateName(name)) names.add(name);
+    });
+    names.sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
+    return names;
+  }
+  return const [];
+}
+
 const String firebasePlantHeaders = 'plants_headers';
 const String firebasePlantHeadersV3 = 'plants_headers_v3';
 const String firebaseTranslations = 'translations';

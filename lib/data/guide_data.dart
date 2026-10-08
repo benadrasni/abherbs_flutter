@@ -32,6 +32,15 @@ class GuideListCover {
   final int? yearFrom;
   final DateTime? latest;
 
+  /// True when the list has a campaign `sourceUrl`.
+  final bool hasSource;
+
+  /// Extra classifier, such as a country epithet. Year values count too.
+  final String parameter;
+
+  /// True when plant values are state names rather than years.
+  final bool labeled;
+
   GuideListCover({
     required this.title,
     required this.photoPath,
@@ -42,6 +51,9 @@ class GuideListCover {
     this.year,
     this.yearFrom,
     this.latest,
+    this.hasSource = false,
+    this.parameter = '',
+    this.labeled = false,
   });
 }
 
@@ -79,13 +91,14 @@ const guideCameraRouteName = 'GuideCamera';
 const guideOutsideRouteName = 'GuideOutside';
 const guideCustomRouteName = 'GuideCustom';
 
-/// How a custom list opens. Year values use the timeline. New in the book
-/// groups recent additions by date. Everything else uses the result grid.
+/// How a custom list opens. Year values use the timeline. State names use
+/// that same list, labeled and ordered by state. New in the book groups
+/// recent additions by date. Everything else uses the result grid.
 enum GuideCustomLayout { fresh, grid, years }
 
 GuideCustomLayout guideCustomLayout(GuideListCover cover) {
   if (cover.isNew) return GuideCustomLayout.fresh;
-  if (cover.year != null) return GuideCustomLayout.years;
+  if (cover.year != null || cover.labeled) return GuideCustomLayout.years;
   return GuideCustomLayout.grid;
 }
 
@@ -460,6 +473,9 @@ Future<List<GuideListCover>> loadGuideLists(String languageCode) async {
         count: body.count,
         year: body.year,
         yearFrom: body.yearFrom,
+        hasSource: _listHasSource(raw),
+        parameter: _listParameter(raw),
+        labeled: body.labeled,
       ),
     ));
   });
@@ -506,6 +522,9 @@ Future<List<GuideListCover>> loadGuideLists(String languageCode) async {
       year: cover.year,
       yearFrom: cover.yearFrom,
       latest: cover.latest,
+      hasSource: cover.hasSource,
+      parameter: cover.parameter,
+      labeled: cover.labeled,
     );
   }).toList();
 
@@ -747,17 +766,64 @@ Future<bool> _plantInBook(String name) async {
   }
 }
 
+bool _listHasSource(Map raw) {
+  final source = raw[firebaseAttributeSourceUrl];
+  return source is String && source.trim().isNotEmpty;
+}
+
+String _listParameter(Map raw) {
+  final value = raw['parameter'];
+  if (value is! String) return '';
+  return value.trim();
+}
+
+/// New in the book, then sourced lists, then lists with a year or another
+/// parameter, then the title. A parameter sorts ahead of the title inside
+/// its group, so two country lists follow the parameter.
 @visibleForTesting
 int guideListRank(GuideListCover cover) {
   if (cover.isNew) return 0;
-  if (cover.year != null) return 1;
-  return 2;
+  if (cover.hasSource) return 1;
+  if (cover.year != null || cover.parameter.isNotEmpty) return 2;
+  return 3;
+}
+
+String _guideListSortKey(GuideListCover cover) {
+  if (cover.parameter.isNotEmpty) return cover.parameter.toLowerCase();
+  return cover.title.toLowerCase();
+}
+
+/// Splits New in the book out of the language lists. [custom] keeps
+/// [compareGuideLists] order, without the new-plants cover.
+@visibleForTesting
+GuideListSections guideListSections(List<GuideListCover> lists) {
+  GuideListCover? fresh;
+  final custom = <GuideListCover>[];
+  for (final cover in lists) {
+    if (cover.isNew) {
+      fresh ??= cover;
+    } else {
+      custom.add(cover);
+    }
+  }
+  custom.sort(compareGuideLists);
+  return GuideListSections(fresh, custom);
+}
+
+@visibleForTesting
+class GuideListSections {
+  final GuideListCover? fresh;
+  final List<GuideListCover> custom;
+
+  const GuideListSections(this.fresh, this.custom);
 }
 
 @visibleForTesting
 int compareGuideLists(GuideListCover a, GuideListCover b) {
   final byRank = guideListRank(a).compareTo(guideListRank(b));
   if (byRank != 0) return byRank;
+  final byKey = _guideListSortKey(a).compareTo(_guideListSortKey(b));
+  if (byKey != 0) return byKey;
   return a.title.toLowerCase().compareTo(b.title.toLowerCase());
 }
 
@@ -768,6 +834,7 @@ class GuideListBody {
   final int? year;
   final int? yearFrom;
   final List<String> thumbIds;
+  final bool labeled;
 
   GuideListBody(
     this.count,
@@ -775,6 +842,7 @@ class GuideListBody {
     this.year, {
     this.yearFrom,
     this.thumbIds = const [],
+    this.labeled = false,
   });
 }
 
@@ -797,6 +865,36 @@ GuideListBody readGuideList(dynamic list) {
     return a.key.compareTo(b.key);
   });
 
+  final order = <String, int>{
+    for (var i = 0; i < entries.length; i++) entries[i].key: i,
+  };
+  final marks = <MapEntry<String, String>>[];
+  for (final entry in entries) {
+    for (final state in customListStates(entry.value)) {
+      marks.add(MapEntry(entry.key, state));
+    }
+  }
+  if (marks.isNotEmpty) {
+    marks.sort((a, b) {
+      final byState = a.value.toLowerCase().compareTo(b.value.toLowerCase());
+      if (byState != 0) return byState;
+      return order[a.key]!.compareTo(order[b.key]!);
+    });
+    final seen = <String>{};
+    final thumbs = <String>[];
+    for (final mark in marks) {
+      if (seen.add(mark.key)) thumbs.add(mark.key);
+      if (thumbs.length == 4) break;
+    }
+    return GuideListBody(
+      marks.length,
+      marks.first.key,
+      null,
+      thumbIds: thumbs,
+      labeled: true,
+    );
+  }
+
   String? coverId;
   int? latestYear;
   int? oldestYear;
@@ -812,9 +910,6 @@ GuideListBody readGuideList(dynamic list) {
     }
     if (oldestYear == null || year < oldestYear) oldestYear = year;
   }
-  final order = <String, int>{
-    for (var i = 0; i < entries.length; i++) entries[i].key: i,
-  };
   dated.sort((a, b) {
     final byYear = b.value.compareTo(a.value);
     if (byYear != 0) return byYear;
@@ -875,7 +970,10 @@ class GuideYearEntry {
   final int year;
   final GuideResultPlant plant;
 
-  const GuideYearEntry({required this.year, required this.plant});
+  /// Set when the list value is a state name. The row shows this instead of [year].
+  final String? mark;
+
+  const GuideYearEntry({required this.year, required this.plant, this.mark});
 }
 
 class GuideYearList {
@@ -890,6 +988,13 @@ class GuideYearId {
   final int year;
 
   const GuideYearId(this.id, this.year);
+}
+
+class GuideStateId {
+  final String id;
+  final String state;
+
+  const GuideStateId(this.id, this.state);
 }
 
 @visibleForTesting
@@ -968,6 +1073,40 @@ List<GuideYearId> readGuideYearIds(dynamic list) {
   return dated;
 }
 
+/// State names on a list, alphabetical. One species can name more than one state.
+@visibleForTesting
+List<GuideStateId> readGuideStateIds(dynamic list) {
+  final entries = <MapEntry<String, dynamic>>[];
+  if (list is List) {
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] != null) entries.add(MapEntry(i.toString(), list[i]));
+    }
+  } else if (list is Map) {
+    list.forEach((key, value) {
+      if (value != null) entries.add(MapEntry(key.toString(), value));
+    });
+  }
+  entries.sort((a, b) {
+    final na = int.tryParse(a.key);
+    final nb = int.tryParse(b.key);
+    if (na != null && nb != null) return na.compareTo(nb);
+    return a.key.compareTo(b.key);
+  });
+  final order = {for (var i = 0; i < entries.length; i++) entries[i].key: i};
+  final marked = <GuideStateId>[];
+  for (final entry in entries) {
+    for (final state in customListStates(entry.value)) {
+      marked.add(GuideStateId(entry.key, state));
+    }
+  }
+  marked.sort((a, b) {
+    final byState = a.state.toLowerCase().compareTo(b.state.toLowerCase());
+    if (byState != 0) return byState;
+    return order[a.id]!.compareTo(order[b.id]!);
+  });
+  return marked;
+}
+
 /// Host shown next to a year list, without the scheme.
 String guideSourceHost(String url) {
   final uri = Uri.tryParse(url.trim());
@@ -1029,6 +1168,7 @@ Future<GuideYearList> loadGuideYearList(
 ) async {
   final event = await path.once();
   final rows = readGuideYearIds(event.snapshot.value);
+  final states = rows.isEmpty ? readGuideStateIds(event.snapshot.value) : const <GuideStateId>[];
   String? sourceUrl;
   final parent = path.parent;
   if (parent != null) {
@@ -1040,7 +1180,7 @@ Future<GuideYearList> loadGuideYearList(
       debugPrint('guide year source: $error');
     }
   }
-  if (rows.isEmpty) {
+  if (rows.isEmpty && states.isEmpty) {
     return GuideYearList(entries: const [], sourceUrl: sourceUrl);
   }
   final lang = getLanguageCode(languageCode);
@@ -1050,8 +1190,20 @@ Future<GuideYearList> loadGuideYearList(
     if (plant == null) return null;
     return GuideYearEntry(year: row.year, plant: plant);
   }));
+  if (rows.isNotEmpty) {
+    return GuideYearList(
+      entries: entries.whereType<GuideYearEntry>().toList(),
+      sourceUrl: sourceUrl,
+    );
+  }
+  final marked = await Future.wait(states.map((row) async {
+    final plant = await _guideResultPlant(row.id, lang) ??
+        await _guideHeaderPlant(row.id, lang);
+    if (plant == null) return null;
+    return GuideYearEntry(year: 0, mark: row.state, plant: plant);
+  }));
   return GuideYearList(
-    entries: entries.whereType<GuideYearEntry>().toList(),
+    entries: marked.whereType<GuideYearEntry>().toList(),
     sourceUrl: sourceUrl,
   );
 }

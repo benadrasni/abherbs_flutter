@@ -204,8 +204,9 @@ void main() {
 
     await tester.tap(find.byKey(guideBookListsKey));
     await tester.pump();
-    expect(find.text('New in the book'), findsOneWidget);
-    final context = tester.element(find.text('New in the book'));
+    expect(find.text('New in the book'), findsNWidgets(2));
+    expect(find.text('Lists of flowers'), findsOneWidget);
+    final context = tester.element(find.text('New in the book').first);
     final date = MaterialLocalizations.of(context).formatMediumDate(latest);
     expect(find.text('2 plants · latest $date'), findsOneWidget);
     expect(find.text('6 years · 2019–2024'), findsOneWidget);
@@ -333,7 +334,7 @@ void main() {
       ),
     );
 
-    expect(find.text('New in the book'), findsOneWidget);
+    expect(find.text('New in the book'), findsNWidgets(2));
     expect(find.byType(GuidePhoto), findsNWidgets(4));
   });
 }

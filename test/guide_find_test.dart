@@ -80,6 +80,26 @@ void main() {
     expect(words.thumbIds, ['a']);
     expect(words.yearFrom, 2020);
 
+    final states = readGuideList({
+      '9': 'California',
+      '2': {'Connecticut': 1, 'Pennsylvania': 1},
+      '4': 'Alabama',
+      '8': '2024',
+    });
+    expect(states.labeled, isTrue);
+    expect(states.year, isNull);
+    expect(states.count, 4);
+    expect(states.coverId, '4');
+    expect(states.thumbIds, ['4', '9', '2']);
+    expect(
+      readGuideStateIds({
+        '9': 'California',
+        '2': {'Pennsylvania': 1, 'Connecticut': 1},
+        '4': 'Alabama',
+      }).map((row) => '${row.state}:${row.id}'),
+      ['Alabama:4', 'California:9', 'Connecticut:2', 'Pennsylvania:2'],
+    );
+
     final span = readGuideList({
       '1': 2018,
       '2': 2020,
@@ -94,21 +114,59 @@ void main() {
     expect(span.thumbIds, ['4', '5', '2', '3']);
   });
 
-  test('new lists come first, then year lists, then titles', () {
+  test('new lists come first, then sourced, then a parameter, then titles', () {
     final covers = [
       _cover(title: 'meadows', count: 3),
       _cover(title: 'Alpine', count: 6, year: 2024),
       _cover(title: 'zzzz', count: 2, isNew: true),
       _cover(title: 'beeches', count: 2, year: 2020),
+      _cover(title: 'Baum des Jahres', count: 4, hasSource: true, year: 2024),
+      _cover(title: 'California', count: 5, parameter: 'California'),
     ];
     covers.sort(compareGuideLists);
     expect(
       covers.map((cover) => cover.title),
-      ['zzzz', 'Alpine', 'beeches', 'meadows'],
+      [
+        'zzzz',
+        'Baum des Jahres',
+        'Alpine',
+        'beeches',
+        'California',
+        'meadows',
+      ],
     );
     expect(guideListRank(covers.first), 0);
     expect(guideListRank(covers[1]), 1);
-    expect(guideListRank(covers.last), 2);
+    expect(guideListRank(covers[2]), 2);
+    expect(guideListRank(covers.last), 3);
+  });
+
+  test('two parameter lists sort by the parameter, not the title', () {
+    final covers = [
+      _cover(title: 'Aaa Wyoming', count: 2, parameter: 'Wyoming'),
+      _cover(title: 'Zzz Alabama', count: 3, parameter: 'Alabama'),
+      _cover(title: 'Middle', count: 4, year: 2024),
+      _cover(title: 'Vegetables', count: 9),
+    ];
+    covers.sort(compareGuideLists);
+    expect(
+      covers.map((cover) => cover.title),
+      ['Zzz Alabama', 'Middle', 'Aaa Wyoming', 'Vegetables'],
+    );
+  });
+
+  test('New in the book is its own section ahead of the other lists', () {
+    final sections = guideListSections([
+      _cover(title: 'Vegetables', count: 9),
+      _cover(title: 'zzzz', count: 2, isNew: true),
+      _cover(title: 'Spices', count: 8),
+      _cover(title: 'Fleurs « canadensis »', count: 11, parameter: 'canadensis'),
+    ]);
+    expect(sections.fresh?.isNew, isTrue);
+    expect(
+      sections.custom.map((cover) => cover.title),
+      ['Fleurs « canadensis »', 'Spices', 'Vegetables'],
+    );
   });
 
   test('a find keeps its own time and first photo', () {
@@ -252,7 +310,7 @@ void main() {
     final context = tester.element(find.text('Seen lately'));
     expect(find.text(guideWhen(context, when)), findsNWidgets(5));
 
-    expect(find.text('New in the book'), findsOneWidget);
+    expect(find.text('New in the book'), findsNWidgets(2));
     final date = MaterialLocalizations.of(context).formatMediumDate(latest);
     expect(find.text('Latest $date'), findsOneWidget);
     expect(find.text('6 years · 2024'), findsOneWidget);
@@ -483,6 +541,8 @@ GuideListCover _cover({
   required String title,
   required int count,
   bool isNew = false,
+  bool hasSource = false,
+  String parameter = '',
   int? year,
   DateTime? latest,
 }) {
@@ -494,6 +554,8 @@ GuideListCover _cover({
     count: count,
     year: year,
     latest: latest,
+    hasSource: hasSource,
+    parameter: parameter,
   );
 }
 

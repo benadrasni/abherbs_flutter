@@ -227,31 +227,54 @@ class _BookPageState extends State<BookPage> {
       case GuideBookSegment.lists:
         final lists = widget.lists;
         if (lists == null) return _waiting();
+        final sections = guideListSections(lists);
+        final slivers = <Widget>[];
+        if (sections.fresh != null) {
+          slivers.add(SliverToBoxAdapter(
+            child: _ListHeading(S.of(context).guide_new_in_book),
+          ));
+          slivers.add(SliverToBoxAdapter(
+            child: _listCard(context, sections.fresh!),
+          ));
+        }
+        if (sections.custom.isNotEmpty) {
+          if (sections.fresh != null) {
+            slivers.add(SliverToBoxAdapter(
+              child: _ListHeading(S.of(context).custom_lists),
+            ));
+          }
+          slivers.add(SliverList.builder(
+            itemCount: sections.custom.length,
+            itemBuilder: (context, index) =>
+                _listCard(context, sections.custom[index]),
+          ));
+        }
+        if (slivers.isEmpty) {
+          return const SliverToBoxAdapter(child: SizedBox.shrink());
+        }
         return SliverPadding(
           padding: const EdgeInsets.only(top: 6),
-          sliver: SliverList.builder(
-            itemCount: lists.length,
-            itemBuilder: (context, index) {
-              final cover = lists[index];
-              return _ListCard(
-                cover: cover,
-                onTap: () {
-                  final open = widget.onOpenList;
-                  if (open != null) {
-                    open(context, cover);
-                    return;
-                  }
-                  openGuideList(
-                    context,
-                    cover,
-                    backLabel: S.of(context).guide_tab_book,
-                  );
-                },
-              );
-            },
-          ),
+          sliver: SliverMainAxisGroup(slivers: slivers),
         );
     }
+  }
+
+  Widget _listCard(BuildContext context, GuideListCover cover) {
+    return _ListCard(
+      cover: cover,
+      onTap: () {
+        final open = widget.onOpenList;
+        if (open != null) {
+          open(context, cover);
+          return;
+        }
+        openGuideList(
+          context,
+          cover,
+          backLabel: S.of(context).guide_tab_book,
+        );
+      },
+    );
   }
 
   Widget _waiting() {
@@ -495,6 +518,21 @@ class _Plate extends StatelessWidget {
         fit: BoxFit.contain,
         background: colors.cream,
       ),
+    );
+  }
+}
+
+class _ListHeading extends StatelessWidget {
+  final String title;
+
+  const _ListHeading(this.title);
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    return Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(20, 16, 20, 4),
+      child: Text(title, style: GuideType.section(colors)),
     );
   }
 }
