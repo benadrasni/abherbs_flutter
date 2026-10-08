@@ -105,14 +105,13 @@ People who already paid keep what they paid for:
 | Already purchased | Keeps |
 |---|---|
 | Remove ads (`no_ads`, `NoAds`) | no ads |
-| Search | nothing extra to grant — search is free for everyone |
-| Photo search (`search_by_photo`) | unlimited identification, on this phone |
-| Observations | Seen photos on every phone. The notebook itself is free for everyone |
+| Photo search (`search_by_photo`) | unlimited identification |
+| Observations | Seen photos on every phone, including photos already on the phone. The notebook itself is free for everyone |
 | Offline | offline packs |
-| Custom filter order | nothing to configure — the three-step key and the region chip are the default for everyone |
+| Photo storage (`store_photos_monthly`, `store_photos_yearly`), while the plan is active | Field Guide |
 | Old paid app (`herbsplus`, `old version`) | no ads, unlimited identification, offline, Seen photos on every phone |
 
-The old paid app is not Field Guide, and that row stays available. Seen photos and the offline book are already included. The old one-time products stay available to Restore and are no longer the way to buy.
+Search and custom filter order grant nothing. A stored lifetime subscription flag is ignored. The old paid app is not Field Guide, and that row stays available. Seen photos and the offline book are already included. The old one-time products stay available to Restore and are no longer the way to buy.
 
 ## The website
 
