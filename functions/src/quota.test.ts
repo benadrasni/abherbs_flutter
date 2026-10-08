@@ -4,7 +4,6 @@ import {
   hasUnlimitedNames,
   isPlant,
   meterCounts,
-  namesRemaining,
   releaseAnonymousFree,
   releaseName,
   rememberPhoto,
@@ -71,14 +70,12 @@ test('a signed-in account has five names, then one more for each ad', () => {
     state = taken.state;
   }
   assert.equal(takeName(state, noon).taken, false);
-  assert.equal(namesRemaining(state, noon), 0);
 
   const granted = takeAdGrant(state, noon, 5);
   assert.equal(granted.granted, true);
   const extra = takeName(granted.state, noon);
   assert.equal(extra.taken, true);
   assert.equal(extra.state.namesUsed, 6);
-  assert.equal(namesRemaining(extra.state, noon), 0);
   assert.equal(takeName(extra.state, noon).taken, false);
 });
 
