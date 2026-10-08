@@ -337,6 +337,11 @@ void openGuideList(
             loadList: () => loadGuideYearList(cover.path, language),
             loadSeen: loadGuideSeenNames,
             onOpenPlant: openGuidePlant,
+            onOpenGenus: (context, path, genus) => openGuideTaxon(
+              context,
+              path,
+              title: genus,
+            ),
           ),
         ),
       );

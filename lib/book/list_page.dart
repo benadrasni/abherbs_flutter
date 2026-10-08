@@ -290,6 +290,8 @@ class GuideYearPage extends StatefulWidget {
   final Future<GuideYearList> Function() loadList;
   final Future<Set<String>> Function() loadSeen;
   final void Function(BuildContext context, String name) onOpenPlant;
+  final void Function(BuildContext context, String path, String genus)?
+      onOpenGenus;
 
   const GuideYearPage({
     super.key,
@@ -298,6 +300,7 @@ class GuideYearPage extends StatefulWidget {
     required this.loadList,
     required this.loadSeen,
     required this.onOpenPlant,
+    this.onOpenGenus,
     this.sourceUrl,
     this.initialEntries,
     this.initialSeen,
@@ -362,7 +365,13 @@ class _GuideYearPageState extends State<GuideYearPage> {
     final entries = _entries;
     final seenCount = entries == null
         ? 0
-        : guideSeenInList(entries.map((entry) => entry.plant), _seen);
+        : guideSeenInList(
+            [
+              for (final entry in entries)
+                if (entry.plant != null) entry.plant!,
+            ],
+            _seen,
+          );
     final marked = entries != null && entries.any((entry) => entry.mark != null);
     return _ListChrome(
       backLabel: widget.backLabel,
@@ -393,11 +402,22 @@ class _GuideYearPageState extends State<GuideYearPage> {
         _YearRow(
           entry: entry,
           plates: _plates,
-          seen: _seen.contains(entry.plant.name),
+          seen: entry.plant != null && _seen.contains(entry.plant!.name),
           thisYear: entry.mark == null && entry.year == year,
-          onTap: () => widget.onOpenPlant(context, entry.plant.name),
+          onTap: _openEntry(context, entry),
         ),
     ];
+  }
+
+  VoidCallback? _openEntry(BuildContext context, GuideYearEntry entry) {
+    final plant = entry.plant;
+    if (plant != null) {
+      return () => widget.onOpenPlant(context, plant.name);
+    }
+    final path = entry.genusPath;
+    final open = widget.onOpenGenus;
+    if (path == null || path.isEmpty || open == null) return null;
+    return () => open(context, path, entry.genus ?? '');
   }
 }
 
@@ -578,7 +598,7 @@ class _YearRow extends StatelessWidget {
   final bool plates;
   final bool seen;
   final bool thisYear;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const _YearRow({
     required this.entry,
@@ -593,8 +613,22 @@ class _YearRow extends StatelessWidget {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final plant = entry.plant;
-    final vernacular = distinctVernacular(plant.label, plant.name);
-    final path = plates ? plant.platePath : plant.photoPath;
+    final genus = entry.genus;
+    if (plant == null && genus == null) return const SizedBox.shrink();
+    final vernacular = plant == null
+        ? null
+        : distinctVernacular(plant.label, plant.name);
+    final String? path;
+    final bool plate;
+    if (genus != null) {
+      path = plates
+          ? (entry.genusPlatePath ?? entry.genusPhotoPath)
+          : (entry.genusPhotoPath ?? entry.genusPlatePath);
+      plate = plates || entry.genusPhotoPath == null;
+    } else {
+      path = plates ? plant!.platePath : plant!.photoPath;
+      plate = plates;
+    }
     final side = plates ? 96.0 : 64.0;
     return InkWell(
       onTap: onTap,
@@ -606,7 +640,7 @@ class _YearRow extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: Row(
             children: [
-              if (entry.mark == null) ...[
+              if (entry.mark == null && entry.year != null) ...[
                 SizedBox(
                   width: 58,
                   child: Column(
@@ -642,8 +676,8 @@ class _YearRow extends StatelessWidget {
                 width: 64,
                 height: side,
                 radius: 10,
-                fit: plates ? BoxFit.contain : BoxFit.cover,
-                background: plates ? _plateGround : colors.paper2,
+                fit: plate ? BoxFit.contain : BoxFit.cover,
+                background: plate ? _plateGround : colors.paper2,
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -664,25 +698,36 @@ class _YearRow extends StatelessWidget {
                         ),
                       ),
                     Text(
-                      vernacular ?? plant.name,
+                      genus ?? vernacular ?? plant!.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: vernacular != null
-                          ? TextStyle(
+                      style: genus != null || vernacular == null
+                          ? GuideType.latin(colors).copyWith(
+                              fontSize: 17,
+                              height: 1.15,
+                            )
+                          : TextStyle(
                               fontFamily: GuideType.serif,
                               fontWeight: FontWeight.w500,
                               fontSize: 17,
                               height: 1.15,
                               color: colors.ink,
-                            )
-                          : GuideType.latin(colors).copyWith(
-                              fontSize: 17,
-                              height: 1.15,
                             ),
                     ),
-                    if (vernacular != null)
+                    if (genus != null)
                       Text(
-                        plant.name,
+                        strings.taxonomy_genus,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 13,
+                          height: 1.2,
+                          color: colors.ink3,
+                        ),
+                      )
+                    else if (vernacular != null)
+                      Text(
+                        plant!.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: GuideType.latin(colors).copyWith(

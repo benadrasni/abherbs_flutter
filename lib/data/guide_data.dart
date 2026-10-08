@@ -456,10 +456,14 @@ Future<List<GuideListCover>> loadGuideLists(String languageCode) async {
 
   chosen.lists.forEach((key, raw) {
     if (raw is! Map) return;
-    final body = readGuideList(raw[firebaseAttributeList]);
+    final body = readGuideList(
+      raw[firebaseAttributeList],
+      genera: raw[firebaseAttributeGenera],
+    );
     if (body.count == 0) return;
     pending.add(_PendingCover(
       coverId: body.coverId,
+      coverGenus: body.coverGenus,
       thumbIds: body.thumbIds,
       cover: GuideListCover(
         title: key.toString(),
@@ -505,9 +509,12 @@ Future<List<GuideListCover>> loadGuideLists(String languageCode) async {
       if (item.coverId != null) item.coverId!,
   };
   final photos = await _headerPhotos(photoIds);
+  final genusPhotos = await _genusCoverPhotos(pending, chosen.code);
   final covers = pending.map((item) {
     final cover = item.cover;
-    final photo = item.coverId == null ? null : photos[item.coverId];
+    final photo = item.coverId != null
+        ? photos[item.coverId]
+        : genusPhotos[item.coverGenus];
     final thumbs = [
       for (final id in item.thumbIds)
         if (photos[id] != null) photos[id]!,
@@ -534,6 +541,7 @@ Future<List<GuideListCover>> loadGuideLists(String languageCode) async {
 
 class _PendingCover {
   final String? coverId;
+  final String? coverGenus;
   final List<String> thumbIds;
   final GuideListCover cover;
 
@@ -541,7 +549,66 @@ class _PendingCover {
     required this.coverId,
     required this.thumbIds,
     required this.cover,
+    this.coverGenus,
   });
+}
+
+/// One catalog species stands for a genus on a list card or a genus row.
+///
+/// The picture is that species’ photo or plate. A genus with no catalog
+/// species, such as Yucca, has no picture.
+const Map<String, String> _genusSampleIds = {
+  'Crataegus': '145',
+  'Iris': '757',
+  'Lupinus': '643',
+  'Magnolia': '664',
+  'Malus': '339',
+  'Paeonia': '810',
+  'Rosa': '996',
+  'Viola': '1090',
+};
+
+@visibleForTesting
+String? guideGenusSampleId(String genus, List<String> plantIds) {
+  final wanted = _genusSampleIds[genus];
+  if (wanted != null && (plantIds.isEmpty || plantIds.contains(wanted))) {
+    return wanted;
+  }
+  if (plantIds.isNotEmpty) return plantIds.first;
+  return null;
+}
+
+/// Species photo for a genus cover. A genus the book does not list has none.
+Future<Map<String, String>> _genusCoverPhotos(
+  List<_PendingCover> pending,
+  String languageCode,
+) async {
+  final wanted = {
+    for (final item in pending)
+      if (item.coverGenus != null) item.coverGenus!,
+  };
+  if (wanted.isEmpty) return const {};
+  final idsByGenus = <String, List<String>>{};
+  try {
+    final book = await loadGuideBookTaxa(languageCode);
+    for (final taxon in book.genera) {
+      if (wanted.contains(taxon.latinName)) {
+        idsByGenus[taxon.latinName] = taxon.plantIds;
+      }
+    }
+  } catch (error) {
+    debugPrint('guide genus cover: $error');
+  }
+  final photos = <String, String>{};
+  await Future.wait(wanted.map((genus) async {
+    final id = guideGenusSampleId(genus, idsByGenus[genus] ?? const []);
+    if (id == null) return;
+    final plant = await _guideResultPlant(id, languageCode) ??
+        await _guideHeaderPlant(id, languageCode);
+    final path = plant?.photoPath ?? plant?.platePath;
+    if (path != null && path.isNotEmpty) photos[genus] = path;
+  }));
+  return photos;
 }
 
 /// The signed-in account, or the anonymous guest while that is the only
@@ -793,31 +860,6 @@ String _guideListSortKey(GuideListCover cover) {
   return cover.title.toLowerCase();
 }
 
-/// Splits New in the book out of the language lists. [custom] keeps
-/// [compareGuideLists] order, without the new-plants cover.
-@visibleForTesting
-GuideListSections guideListSections(List<GuideListCover> lists) {
-  GuideListCover? fresh;
-  final custom = <GuideListCover>[];
-  for (final cover in lists) {
-    if (cover.isNew) {
-      fresh ??= cover;
-    } else {
-      custom.add(cover);
-    }
-  }
-  custom.sort(compareGuideLists);
-  return GuideListSections(fresh, custom);
-}
-
-@visibleForTesting
-class GuideListSections {
-  final GuideListCover? fresh;
-  final List<GuideListCover> custom;
-
-  const GuideListSections(this.fresh, this.custom);
-}
-
 @visibleForTesting
 int compareGuideLists(GuideListCover a, GuideListCover b) {
   final byRank = guideListRank(a).compareTo(guideListRank(b));
@@ -836,6 +878,9 @@ class GuideListBody {
   final List<String> thumbIds;
   final bool labeled;
 
+  /// Set when the alphabetically first state, or the newest year, is a genus.
+  final String? coverGenus;
+
   GuideListBody(
     this.count,
     this.coverId,
@@ -843,11 +888,63 @@ class GuideListBody {
     this.yearFrom,
     this.thumbIds = const [],
     this.labeled = false,
+    this.coverGenus,
   });
 }
 
+/// One genus designation. [state] and [year] are both null for membership.
+class GuideGenusMark {
+  final String genus;
+  final String? state;
+  final int? year;
+
+  const GuideGenusMark(this.genus, {this.state, this.year});
+}
+
+/// A genus name. Numeric keys stay out so they can never be plant ids.
+bool guideGenusKey(String key) {
+  final text = key.trim();
+  if (text.isEmpty) return false;
+  if (int.tryParse(text) != null) return false;
+  return RegExp(r'[A-Za-z]').hasMatch(text);
+}
+
+/// Genus designations beside `list`. Same values as a plant: one state, a
+/// map of states, a year, or membership.
 @visibleForTesting
-GuideListBody readGuideList(dynamic list) {
+List<GuideGenusMark> readGuideGenusMarks(dynamic genera) {
+  if (genera is! Map) return const [];
+  final pending = <MapEntry<String, dynamic>>[];
+  genera.forEach((key, value) {
+    if (value == null || value == false) return;
+    if (value is String && value.trim().isEmpty) return;
+    if (value is Map && value.isEmpty) return;
+    final name = key.toString().trim();
+    if (!guideGenusKey(name)) return;
+    pending.add(MapEntry(name, value));
+  });
+  pending.sort((a, b) => a.key.toLowerCase().compareTo(b.key.toLowerCase()));
+  final marks = <GuideGenusMark>[];
+  for (final entry in pending) {
+    final states = customListStates(entry.value);
+    if (states.isNotEmpty) {
+      for (final state in states) {
+        marks.add(GuideGenusMark(entry.key, state: state));
+      }
+      continue;
+    }
+    final year = customListYear(entry.value);
+    if (year != null) {
+      marks.add(GuideGenusMark(entry.key, year: year));
+      continue;
+    }
+    marks.add(GuideGenusMark(entry.key));
+  }
+  return marks;
+}
+
+@visibleForTesting
+GuideListBody readGuideList(dynamic list, {dynamic genera}) {
   final entries = <MapEntry<String, dynamic>>[];
   if (list is List) {
     for (var i = 0; i < list.length; i++) {
@@ -874,28 +971,59 @@ GuideListBody readGuideList(dynamic list) {
       marks.add(MapEntry(entry.key, state));
     }
   }
-  if (marks.isNotEmpty) {
-    marks.sort((a, b) {
-      final byState = a.value.toLowerCase().compareTo(b.value.toLowerCase());
+  final genusMarks = readGuideGenusMarks(genera);
+  final genusStates = [
+    for (final mark in genusMarks)
+      if (mark.state != null) mark,
+  ];
+  // A membership list stays a grid. Genus states must not hide those plants.
+  final stateList = marks.isNotEmpty || (genusStates.isNotEmpty && entries.isEmpty);
+  if (stateList) {
+    final ranked = <_RankedState>[];
+    for (final mark in marks) {
+      ranked.add(_RankedState(
+        id: mark.key,
+        state: mark.value,
+        order: order[mark.key] ?? 0,
+      ));
+    }
+    for (var i = 0; i < genusStates.length; i++) {
+      final mark = genusStates[i];
+      ranked.add(_RankedState(
+        genus: mark.genus,
+        state: mark.state!,
+        order: marks.length + i,
+      ));
+    }
+    ranked.sort((a, b) {
+      final byState = a.state.toLowerCase().compareTo(b.state.toLowerCase());
       if (byState != 0) return byState;
-      return order[a.key]!.compareTo(order[b.key]!);
+      final aGenus = a.genus != null;
+      final bGenus = b.genus != null;
+      if (aGenus != bGenus) return aGenus ? 1 : -1;
+      return a.order.compareTo(b.order);
     });
     final seen = <String>{};
     final thumbs = <String>[];
-    for (final mark in marks) {
-      if (seen.add(mark.key)) thumbs.add(mark.key);
+    for (final mark in ranked) {
+      final id = mark.id;
+      if (id == null || !seen.add(id)) continue;
+      thumbs.add(id);
       if (thumbs.length == 4) break;
     }
+    final first = ranked.first;
     return GuideListBody(
-      marks.length,
-      marks.first.key,
+      marks.length + genusMarks.length,
+      first.id,
       null,
       thumbIds: thumbs,
       labeled: true,
+      coverGenus: first.genus,
     );
   }
 
   String? coverId;
+  String? coverGenus;
   int? latestYear;
   int? oldestYear;
   final dated = <MapEntry<String, int>>[];
@@ -907,6 +1035,17 @@ GuideListBody readGuideList(dynamic list) {
     if (latestYear == null || year > latestYear) {
       latestYear = year;
       coverId = entry.key;
+      coverGenus = null;
+    }
+    if (oldestYear == null || year < oldestYear) oldestYear = year;
+  }
+  for (final mark in genusMarks) {
+    final year = mark.year;
+    if (year == null) continue;
+    if (latestYear == null || year > latestYear) {
+      latestYear = year;
+      coverId = null;
+      coverGenus = mark.genus;
     }
     if (oldestYear == null || year < oldestYear) oldestYear = year;
   }
@@ -919,12 +1058,27 @@ GuideListBody readGuideList(dynamic list) {
       ? entries.map((entry) => entry.key)
       : dated.map((entry) => entry.key);
   return GuideListBody(
-    entries.length,
+    entries.length + genusMarks.length,
     coverId,
     latestYear,
     yearFrom: oldestYear,
     thumbIds: source.take(4).toList(),
+    coverGenus: coverGenus,
   );
+}
+
+class _RankedState {
+  final String? id;
+  final String? genus;
+  final String state;
+  final int order;
+
+  _RankedState({
+    required this.state,
+    required this.order,
+    this.id,
+    this.genus,
+  });
 }
 
 class _Newest {
@@ -966,14 +1120,33 @@ class GuideNewDay {
 }
 
 /// A year-list row. One plant keeps the later year when the list names it once.
+///
+/// A genus row leaves [plant] null. [genusPath] is empty when the book walk
+/// has no species in that genus, and the row does not open.
 class GuideYearEntry {
-  final int year;
-  final GuideResultPlant plant;
+  final int? year;
+  final GuideResultPlant? plant;
 
   /// Set when the list value is a state name. The row shows this instead of [year].
   final String? mark;
+  final String? genus;
+  final String? genusFamily;
+  final String? genusPath;
 
-  const GuideYearEntry({required this.year, required this.plant, this.mark});
+  /// Photo and plate of the one species that stands for this genus.
+  final String? genusPhotoPath;
+  final String? genusPlatePath;
+
+  const GuideYearEntry({
+    this.year,
+    this.plant,
+    this.mark,
+    this.genus,
+    this.genusFamily,
+    this.genusPath,
+    this.genusPhotoPath,
+    this.genusPlatePath,
+  });
 }
 
 class GuideYearList {
@@ -1073,6 +1246,132 @@ List<GuideYearId> readGuideYearIds(dynamic list) {
   return dated;
 }
 
+/// One timeline row before the plant or the genus plate is loaded.
+class GuideTimelineRow {
+  final String? id;
+  final String? genus;
+  final String? state;
+  final int? year;
+
+  const GuideTimelineRow({this.id, this.genus, this.state, this.year});
+}
+
+class _TimelineRank {
+  final GuideTimelineRow row;
+  final int index;
+  final bool genus;
+
+  const _TimelineRank(this.row, this.index, {this.genus = false});
+}
+
+/// State rows, then year rows, then membership genera. A year list keeps
+/// its species order and folds genus years into it. Membership species are
+/// not rows here: those stay on the result grid.
+@visibleForTesting
+List<GuideTimelineRow> readGuideTimeline(dynamic list, [dynamic genera]) {
+  final speciesYears = readGuideYearIds(list);
+  final speciesStates = speciesYears.isEmpty
+      ? readGuideStateIds(list)
+      : const <GuideStateId>[];
+  final genusMarks = readGuideGenusMarks(genera);
+  final stateMode = speciesStates.isNotEmpty ||
+      (speciesYears.isEmpty && genusMarks.any((mark) => mark.state != null));
+  if (stateMode) {
+    final ranked = <_TimelineRank>[];
+    for (var i = 0; i < speciesStates.length; i++) {
+      final row = speciesStates[i];
+      ranked.add(_TimelineRank(
+        GuideTimelineRow(id: row.id, state: row.state),
+        i,
+      ));
+    }
+    var genusIndex = speciesStates.length;
+    for (final mark in genusMarks) {
+      final state = mark.state;
+      if (state == null) continue;
+      ranked.add(_TimelineRank(
+        GuideTimelineRow(genus: mark.genus, state: state),
+        genusIndex++,
+      ));
+    }
+    ranked.sort((a, b) {
+      final byState = a.row.state!.toLowerCase().compareTo(b.row.state!.toLowerCase());
+      if (byState != 0) return byState;
+      return a.index.compareTo(b.index);
+    });
+    return [
+      for (final rank in ranked) rank.row,
+      ..._genusTimelineTail(genusMarks, includeYears: true),
+    ];
+  }
+  final ranked = <_TimelineRank>[];
+  for (var i = 0; i < speciesYears.length; i++) {
+    final row = speciesYears[i];
+    ranked.add(_TimelineRank(
+      GuideTimelineRow(id: row.id, year: row.year),
+      i,
+    ));
+  }
+  var genusIndex = speciesYears.length;
+  for (final mark in genusMarks) {
+    final year = mark.year;
+    if (year == null) continue;
+    ranked.add(_TimelineRank(
+      GuideTimelineRow(genus: mark.genus, year: year),
+      genusIndex++,
+      genus: true,
+    ));
+  }
+  ranked.sort((a, b) {
+    final byYear = b.row.year!.compareTo(a.row.year!);
+    if (byYear != 0) return byYear;
+    if (a.genus != b.genus) return a.genus ? 1 : -1;
+    return a.index.compareTo(b.index);
+  });
+  final states = [
+    for (final mark in genusMarks)
+      if (mark.state != null) mark,
+  ]..sort((a, b) {
+      final byState = a.state!.toLowerCase().compareTo(b.state!.toLowerCase());
+      if (byState != 0) return byState;
+      return a.genus.toLowerCase().compareTo(b.genus.toLowerCase());
+    });
+  return [
+    for (final rank in ranked) rank.row,
+    for (final mark in states)
+      GuideTimelineRow(genus: mark.genus, state: mark.state),
+    ..._genusTimelineTail(genusMarks, includeYears: false),
+  ];
+}
+
+List<GuideTimelineRow> _genusTimelineTail(
+  List<GuideGenusMark> marks, {
+  required bool includeYears,
+}) {
+  final tail = <GuideTimelineRow>[];
+  if (includeYears) {
+    final dated = [
+      for (final mark in marks)
+        if (mark.year != null) mark,
+    ]..sort((a, b) {
+        final byYear = b.year!.compareTo(a.year!);
+        if (byYear != 0) return byYear;
+        return a.genus.toLowerCase().compareTo(b.genus.toLowerCase());
+      });
+    for (final mark in dated) {
+      tail.add(GuideTimelineRow(genus: mark.genus, year: mark.year));
+    }
+  }
+  final plain = [
+    for (final mark in marks)
+      if (mark.state == null && mark.year == null) mark,
+  ]..sort((a, b) => a.genus.toLowerCase().compareTo(b.genus.toLowerCase()));
+  for (final mark in plain) {
+    tail.add(GuideTimelineRow(genus: mark.genus));
+  }
+  return tail;
+}
+
 /// State names on a list, alphabetical. One species can name more than one state.
 @visibleForTesting
 List<GuideStateId> readGuideStateIds(dynamic list) {
@@ -1167,9 +1466,8 @@ Future<GuideYearList> loadGuideYearList(
   String languageCode,
 ) async {
   final event = await path.once();
-  final rows = readGuideYearIds(event.snapshot.value);
-  final states = rows.isEmpty ? readGuideStateIds(event.snapshot.value) : const <GuideStateId>[];
   String? sourceUrl;
+  dynamic genera;
   final parent = path.parent;
   if (parent != null) {
     try {
@@ -1179,31 +1477,67 @@ Future<GuideYearList> loadGuideYearList(
     } catch (error) {
       debugPrint('guide year source: $error');
     }
+    try {
+      // get() reads the server. once() can stop at the on-disk copy, which
+      // hides a genera node published after the last open of this list.
+      final snapshot = await parent.child(firebaseAttributeGenera).get();
+      genera = snapshot.value;
+    } catch (error) {
+      debugPrint('guide genera: $error');
+    }
   }
-  if (rows.isEmpty && states.isEmpty) {
+  final rows = readGuideTimeline(event.snapshot.value, genera);
+  if (rows.isEmpty) {
     return GuideYearList(entries: const [], sourceUrl: sourceUrl);
   }
   final lang = getLanguageCode(languageCode);
-  final entries = await Future.wait(rows.map((row) async {
-    final plant = await _guideResultPlant(row.id, lang) ??
-        await _guideHeaderPlant(row.id, lang);
-    if (plant == null) return null;
-    return GuideYearEntry(year: row.year, plant: plant);
-  }));
-  if (rows.isNotEmpty) {
-    return GuideYearList(
-      entries: entries.whereType<GuideYearEntry>().toList(),
-      sourceUrl: sourceUrl,
-    );
+  final generaByName = <String, GuideSearchTaxon>{};
+  if (rows.any((row) => row.genus != null)) {
+    try {
+      final book = await loadGuideBookTaxa(lang);
+      for (final taxon in book.genera) {
+        generaByName[taxon.latinName] = taxon;
+      }
+    } catch (error) {
+      debugPrint('guide genus rows: $error');
+    }
   }
-  final marked = await Future.wait(states.map((row) async {
-    final plant = await _guideResultPlant(row.id, lang) ??
-        await _guideHeaderPlant(row.id, lang);
+  final sampleLoads = <String, Future<GuideResultPlant?>>{};
+  final entries = await Future.wait(rows.map((row) async {
+    final genus = row.genus;
+    if (genus != null) {
+      final taxon = generaByName[genus];
+      final sampleId = guideGenusSampleId(genus, taxon?.plantIds ?? const []);
+      GuideResultPlant? sample;
+      if (sampleId != null) {
+        sample = await sampleLoads.putIfAbsent(sampleId, () async {
+          return await _guideResultPlant(sampleId, lang) ??
+              await _guideHeaderPlant(sampleId, lang);
+        });
+      }
+      return GuideYearEntry(
+        year: row.year,
+        mark: row.state,
+        genus: genus,
+        genusFamily: taxon?.illustrationFamily ?? '',
+        genusPath: taxon?.listPath ?? '',
+        genusPhotoPath: sample?.photoPath,
+        genusPlatePath: sample?.platePath,
+      );
+    }
+    final id = row.id;
+    if (id == null) return null;
+    final plant = await _guideResultPlant(id, lang) ??
+        await _guideHeaderPlant(id, lang);
     if (plant == null) return null;
-    return GuideYearEntry(year: 0, mark: row.state, plant: plant);
+    return GuideYearEntry(
+      year: row.year ?? 0,
+      mark: row.state,
+      plant: plant,
+    );
   }));
   return GuideYearList(
-    entries: marked.whereType<GuideYearEntry>().toList(),
+    entries: entries.whereType<GuideYearEntry>().toList(),
     sourceUrl: sourceUrl,
   );
 }
@@ -1217,13 +1551,15 @@ class _LanguageLists {
 
 Future<_LanguageLists> _languageLists(String languageCode) async {
   var code = getLanguageCode(languageCode);
-  var event =
-      await listsCustomReference.child('by language').child(code).once();
-  if (_isEmptyMap(event.snapshot.value) && code != 'en') {
+  // get() reads the server while online. once() can finish from the on-disk
+  // copy, which hides a genera child published after the last open.
+  var snapshot =
+      await listsCustomReference.child('by language').child(code).get();
+  if (_isEmptyMap(snapshot.value) && code != 'en') {
     code = 'en';
-    event = await listsCustomReference.child('by language').child(code).once();
+    snapshot = await listsCustomReference.child('by language').child(code).get();
   }
-  final value = event.snapshot.value;
+  final value = snapshot.value;
   if (value is Map) return _LanguageLists(code, value);
   return _LanguageLists(code, {});
 }

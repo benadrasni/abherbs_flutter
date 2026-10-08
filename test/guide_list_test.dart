@@ -173,7 +173,7 @@ void main() {
     expect(guideCustomLayout(spices), GuideCustomLayout.grid);
     expect(
       guideCustomLayout(GuideListCover(
-        title: 'State flowers',
+        title: 'US State flowers',
         photoPath: null,
         path: FirebaseDatabase.instance.ref('lists/states'),
         isNew: false,
@@ -342,6 +342,72 @@ void main() {
     expect(opened, 'Acer campestre');
     expect(find.text('In flower now · 2'), findsNothing);
     expect(find.text('Any region'), findsNothing);
+  });
+
+  testWidgets('a state list shows a genus beside the species', (tester) async {
+    String? openedPlant;
+    String? openedGenus;
+    await _pump(
+      tester,
+      GuideYearPage(
+        title: 'US State flowers',
+        backLabel: 'Find',
+        initialEntries: [
+          GuideYearEntry(
+            year: 0,
+            mark: 'Alabama',
+            plant: _plant('1105', 'Camellia japonica', label: 'camellia'),
+          ),
+          GuideYearEntry(
+            year: 0,
+            mark: 'Illinois',
+            genus: 'Viola',
+            genusFamily: 'Violaceae',
+            genusPath: 'APG IV_v3/Violaceae/Viola/list',
+            genusPhotoPath: 'photos/1090.jpg',
+            genusPlatePath: 'plates/Viola_riviniana.webp',
+          ),
+        ],
+        initialSeen: const {'Camellia japonica'},
+        loadList: () async => const GuideYearList(entries: [], sourceUrl: null),
+        loadSeen: () async => const {},
+        onOpenPlant: (_, name) => openedPlant = name,
+        onOpenGenus: (_, path, genus) => openedGenus = '$genus:$path',
+      ),
+    );
+
+    expect(find.text('US State flowers'), findsOneWidget);
+    expect(
+      find.textContaining('2 plants', findRichText: true),
+      findsOneWidget,
+    );
+    expect(find.text('Alabama'), findsOneWidget);
+    expect(find.text('Illinois'), findsOneWidget);
+    expect(find.text('Viola'), findsOneWidget);
+    expect(find.text('Genus'), findsOneWidget);
+    expect(find.text('0'), findsNothing);
+    expect(
+      tester.getTopLeft(find.text('Alabama')).dy,
+      lessThan(tester.getTopLeft(find.text('Illinois')).dy),
+    );
+    final photos = tester.widgetList<GuidePhoto>(find.byType(GuidePhoto)).toList();
+    expect(photos[1].path, 'photos/1090.jpg');
+    expect(photos[1].fit, BoxFit.cover);
+    expect(photos[1].height, 64);
+
+    await tester.tap(find.text('Plates'));
+    await tester.pump();
+    final plates = tester.widgetList<GuidePhoto>(find.byType(GuidePhoto)).toList();
+    expect(plates[1].path, 'plates/Viola_riviniana.webp');
+    expect(plates[1].fit, BoxFit.contain);
+    expect(plates[1].height, 96);
+
+    await tester.tap(find.text('Viola'));
+    expect(openedGenus, 'Viola:APG IV_v3/Violaceae/Viola/list');
+    expect(openedPlant, isNull);
+
+    await tester.tap(find.text('camellia'));
+    expect(openedPlant, 'Camellia japonica');
   });
 }
 

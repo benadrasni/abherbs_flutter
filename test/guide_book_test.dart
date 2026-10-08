@@ -143,15 +143,6 @@ void main() {
     GuideListCover? openedList;
     final lists = [
       GuideListCover(
-        title: '',
-        photoPath: 'photos/new.webp',
-        thumbs: const ['photos/new.webp', 'photos/older.webp'],
-        path: FirebaseDatabase.instance.ref('lists/new'),
-        isNew: true,
-        count: 2,
-        latest: latest,
-      ),
-      GuideListCover(
         title: 'Alpine flowers',
         photoPath: 'photos/alpine.webp',
         thumbs: const [
@@ -165,6 +156,15 @@ void main() {
         count: 6,
         year: 2024,
         yearFrom: 2019,
+      ),
+      GuideListCover(
+        title: '',
+        photoPath: 'photos/new.webp',
+        thumbs: const ['photos/new.webp', 'photos/older.webp'],
+        path: FirebaseDatabase.instance.ref('lists/new'),
+        isNew: true,
+        count: 2,
+        latest: latest,
       ),
     ];
 
@@ -204,9 +204,13 @@ void main() {
 
     await tester.tap(find.byKey(guideBookListsKey));
     await tester.pump();
-    expect(find.text('New in the book'), findsNWidgets(2));
-    expect(find.text('Lists of flowers'), findsOneWidget);
-    final context = tester.element(find.text('New in the book').first);
+    expect(find.text('New in the book'), findsOneWidget);
+    expect(find.text('Lists of flowers'), findsNothing);
+    expect(
+      tester.getTopLeft(find.text('New in the book')).dy,
+      lessThan(tester.getTopLeft(find.text('Alpine flowers')).dy),
+    );
+    final context = tester.element(find.text('New in the book'));
     final date = MaterialLocalizations.of(context).formatMediumDate(latest);
     expect(find.text('2 plants · latest $date'), findsOneWidget);
     expect(find.text('6 years · 2019–2024'), findsOneWidget);
@@ -334,7 +338,7 @@ void main() {
       ),
     );
 
-    expect(find.text('New in the book'), findsNWidgets(2));
+    expect(find.text('New in the book'), findsOneWidget);
     expect(find.byType(GuidePhoto), findsNWidgets(4));
   });
 }

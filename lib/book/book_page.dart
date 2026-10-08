@@ -227,34 +227,17 @@ class _BookPageState extends State<BookPage> {
       case GuideBookSegment.lists:
         final lists = widget.lists;
         if (lists == null) return _waiting();
-        final sections = guideListSections(lists);
-        final slivers = <Widget>[];
-        if (sections.fresh != null) {
-          slivers.add(SliverToBoxAdapter(
-            child: _ListHeading(S.of(context).guide_new_in_book),
-          ));
-          slivers.add(SliverToBoxAdapter(
-            child: _listCard(context, sections.fresh!),
-          ));
-        }
-        if (sections.custom.isNotEmpty) {
-          if (sections.fresh != null) {
-            slivers.add(SliverToBoxAdapter(
-              child: _ListHeading(S.of(context).custom_lists),
-            ));
-          }
-          slivers.add(SliverList.builder(
-            itemCount: sections.custom.length,
-            itemBuilder: (context, index) =>
-                _listCard(context, sections.custom[index]),
-          ));
-        }
-        if (slivers.isEmpty) {
+        if (lists.isEmpty) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
         }
+        final ordered = lists.toList()..sort(compareGuideLists);
         return SliverPadding(
           padding: const EdgeInsets.only(top: 6),
-          sliver: SliverMainAxisGroup(slivers: slivers),
+          sliver: SliverList.builder(
+            itemCount: ordered.length,
+            itemBuilder: (context, index) =>
+                _listCard(context, ordered[index]),
+          ),
         );
     }
   }
@@ -518,21 +501,6 @@ class _Plate extends StatelessWidget {
         fit: BoxFit.contain,
         background: colors.cream,
       ),
-    );
-  }
-}
-
-class _ListHeading extends StatelessWidget {
-  final String title;
-
-  const _ListHeading(this.title);
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = GuideColors.of(context);
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(20, 16, 20, 4),
-      child: Text(title, style: GuideType.section(colors)),
     );
   }
 }

@@ -37,7 +37,7 @@ Signed-out photo-search logs under `anonymous` fail. The app does not write tran
 | `translations/{lang}/{latinName}` | Plant text in that language. Missing body falls back to English in the client. `label` and `names` are that language's vernaculars only. |
 | `translations_taxonomy/{lang}/{taxon}` | Localized taxon names |
 | `synonyms/{latinName}` | IPNI synonym list |
-| `lists_custom` | Editorial lists ("new", "by language", dated drops). Language lists: `list/{plantId}` is `1` (presence) or a designation year 1900–2100. Old app 8.2.1 reads only the keys. |
+| `lists_custom` | Editorial lists ("new", "by language", dated drops). Language lists: `list/{plantId}` is `1` (presence), a designation year 1900–2100, or a state name. A genus-only designation is the sibling `genera`. The store app reads only numeric `list` keys. |
 | `plants_to_update` | `{count, list[]}` of Latin names in the live catalog |
 | `catalog_changes` | Append-only offline update log. `{count, list/{n}}`. Each entry is `id`, `kind` (`added` or `pictures`), and `stamp` (photos, unsuffixed plate, range map: `u` path, `b` bytes, `h` md5). `plants_to_update` does not record a new plate on an older plant. |
 | `families_to_update` | Same idea for family illustration packs |
@@ -168,7 +168,21 @@ Empty / missing means show the Latin name. Later-language publishes (`publish_ne
 }
 ```
 
-`list` keys are `plants_headers` ids. Values are `1` (membership only), a year `1900–2100` for campaigns such as Blume / Baum / Orchidee des Jahres, or a state name for a state-flower list. One species that is the flower of more than one state stores a map whose keys are those state names. The list is ordered by state. Optional `sourceUrl` is the campaign’s official page. Optional `parameter` is a short classifier such as a country epithet or a US state name. Shipped app 8.2.1 reads only `list` and `icon`, so extra children stay compatible. New in the book is its own section and stays first. Language lists with a `sourceUrl` come next, then lists with a year value or a `parameter`. In that group a list with a `parameter` is ordered by the parameter, so two country lists follow it alphabetically, and the other lists in the group stay in title order. The remaining titles follow alphabetically. Year-lists sort newest first inside the list, show the year, and link `sourceUrl` on the list screen. A plant named in two years appears once, with the later year.
+`list` keys are `plants_headers` ids. Values are `1` (membership only), a year `1900–2100` for campaigns such as Blume / Baum / Orchidee des Jahres, or a state name for a state-flower list. One species that is the flower of more than one state stores a map whose keys are those state names. The list is ordered by state. Optional `sourceUrl` is the campaign’s official page. Optional `parameter` is a short classifier such as a country epithet or a US state name. Production reads every key of `list` with `int.parse`. A genus name in `list` throws, and that list never opens. A genus-only designation is the sibling `genera`, which those builds ignore:
+
+```json
+{
+  "icon": "Asteraceae",
+  "sourceUrl": "https://en.wikipedia.org/wiki/List_of_U.S._state_and_territory_flowers",
+  "list": { "1105": "Alabama" },
+  "genera": {
+    "Viola": { "Illinois": 1, "Rhode Island": 1 },
+    "Malus": "Arkansas"
+  }
+}
+```
+
+`genera` uses the same values as `list`: one state name, a map of state names to `1`, a year `1900–2100`, or membership `1`. The field guide and the website draw one row per designation, genus rows in the same order as the species. The row shows the state or the year and the genus in italic. The picture is one species from that genus: its plate on the website, and that species’ photo or plate in the app. A tap opens the genus. A genus the book does not list still shows its Latin name, with no picture and no tap. In the app, New in the book is the first item in the same list as the other custom lists. On the website, Recently added stays its own section above the language lists. Language lists with a `sourceUrl` come next, then lists with a year value or a `parameter`. In that group a list with a `parameter` is ordered by the parameter, so two country lists follow it alphabetically, and the other lists in the group stay in title order. The remaining titles follow alphabetically. Year-lists sort newest first inside the list, show the year, and link `sourceUrl` on the list screen. A plant named in two years appears once, with the later year.
 
 ## Filter vocabulary
 

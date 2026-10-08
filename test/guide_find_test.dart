@@ -100,6 +100,69 @@ void main() {
       ['Alabama:4', 'California:9', 'Connecticut:2', 'Pennsylvania:2'],
     );
 
+    final withGenera = readGuideList(
+      {
+        '4': 'Alabama',
+        '9': 'California',
+      },
+      genera: {
+        'Viola': 'Illinois',
+        'Rosa': {'New York': 1, 'Oklahoma': 1},
+        '12': 'Wisconsin',
+      },
+    );
+    expect(withGenera.labeled, isTrue);
+    expect(withGenera.count, 5);
+    expect(withGenera.coverId, '4');
+    expect(withGenera.coverGenus, isNull);
+
+    final genusFirst = readGuideList(
+      {'3': 'Wyoming'},
+      genera: {'Viola': 'Alabama'},
+    );
+    expect(genusFirst.labeled, isTrue);
+    expect(genusFirst.count, 2);
+    expect(genusFirst.coverId, isNull);
+    expect(genusFirst.coverGenus, 'Viola');
+
+    final membership = readGuideList(
+      {'1': 1, '2': 1},
+      genera: {'Rosa': 'New York'},
+    );
+    expect(membership.labeled, isFalse);
+    expect(membership.count, 3);
+    expect(membership.coverId, '1');
+    expect(membership.coverGenus, isNull);
+
+    final newerGenus = readGuideList(
+      {'1': 2020},
+      genera: {'Quercus': 2024},
+    );
+    expect(newerGenus.count, 2);
+    expect(newerGenus.year, 2024);
+    expect(newerGenus.coverId, isNull);
+    expect(newerGenus.coverGenus, 'Quercus');
+    expect(guideGenusSampleId('Viola', const ['635', '1090']), '1090');
+    expect(guideGenusSampleId('Yucca', const []), isNull);
+    expect(guideGenusSampleId('Quercus', const ['4', '8']), '4');
+
+    expect(
+      readGuideTimeline(
+        {'4': 'Alabama', '9': 'California'},
+        {
+          'Viola': 'Illinois',
+          'Rosa': {'Oklahoma': 1, 'New York': 1},
+        },
+      ).map((row) => '${row.state}:${row.id ?? row.genus}'),
+      [
+        'Alabama:4',
+        'California:9',
+        'Illinois:Viola',
+        'New York:Rosa',
+        'Oklahoma:Rosa',
+      ],
+    );
+
     final span = readGuideList({
       '1': 2018,
       '2': 2020,
@@ -155,17 +218,22 @@ void main() {
     );
   });
 
-  test('New in the book is its own section ahead of the other lists', () {
-    final sections = guideListSections([
+  test('New in the book stays first among the other lists', () {
+    final covers = [
       _cover(title: 'Vegetables', count: 9),
       _cover(title: 'zzzz', count: 2, isNew: true),
       _cover(title: 'Spices', count: 8),
-      _cover(title: 'Fleurs « canadensis »', count: 11, parameter: 'canadensis'),
-    ]);
-    expect(sections.fresh?.isNew, isTrue);
+      _cover(
+        title: 'Fleurs « canadensis »',
+        count: 11,
+        parameter: 'canadensis',
+      ),
+    ];
+    covers.sort(compareGuideLists);
+    expect(covers.first.isNew, isTrue);
     expect(
-      sections.custom.map((cover) => cover.title),
-      ['Fleurs « canadensis »', 'Spices', 'Vegetables'],
+      covers.map((cover) => cover.title),
+      ['zzzz', 'Fleurs « canadensis »', 'Spices', 'Vegetables'],
     );
   });
 
@@ -269,9 +337,9 @@ void main() {
           seenSynced: false,
         ),
         lists: [
-          _cover(title: '', count: 2, isNew: true, latest: latest),
           _cover(title: 'Alpine flowers', count: 6, year: 2024),
           _cover(title: 'Meadows', count: 11),
+          _cover(title: '', count: 2, isNew: true, latest: latest),
         ],
         onOpenSeen: () => seen++,
         onOpenBook: () => book++,
@@ -310,7 +378,11 @@ void main() {
     final context = tester.element(find.text('Seen lately'));
     expect(find.text(guideWhen(context, when)), findsNWidgets(5));
 
-    expect(find.text('New in the book'), findsNWidgets(2));
+    expect(find.text('New in the book'), findsOneWidget);
+    expect(
+      tester.getTopLeft(find.text('New in the book')).dx,
+      lessThan(tester.getTopLeft(find.text('Alpine flowers')).dx),
+    );
     final date = MaterialLocalizations.of(context).formatMediumDate(latest);
     expect(find.text('Latest $date'), findsOneWidget);
     expect(find.text('6 years · 2024'), findsOneWidget);

@@ -225,6 +225,10 @@ const String firebaseRootTaxon = 'Eukaryota';
 const String firebaseAPGType = "type";
 const String firebaseAttributeFreebase = "freebase";
 const String firebaseAttributeList = "list";
+
+/// Genus-only rows on a custom list. A sibling of [firebaseAttributeList].
+/// The store app never reads it. Keys inside `list` stay numeric plant ids.
+const String firebaseAttributeGenera = "genera";
 const String firebaseAttributeCount = "count";
 const String firebaseAttributeIOS = "ios";
 const String firebaseAttributeAndroid = "android";
