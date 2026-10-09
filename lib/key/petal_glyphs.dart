@@ -6,15 +6,16 @@ import 'package:flutter/material.dart';
 
 class GuidePetalGlyph extends StatelessWidget {
   final String id;
+  final double size;
 
-  const GuidePetalGlyph({super.key, required this.id});
+  const GuidePetalGlyph({super.key, required this.id, this.size = 72});
 
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
     return SizedBox(
-      width: 72,
-      height: 72,
+      width: size,
+      height: size,
       child: CustomPaint(
         painter: _PetalPainter(id, colors.moss, colors.cream),
       ),

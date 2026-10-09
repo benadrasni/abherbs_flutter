@@ -406,7 +406,7 @@ Future<Map<String, GuideGenusNote>> _noGenusNotes(
 }
 
 Future<void> _pump(WidgetTester tester, Widget page) async {
-  tester.view.physicalSize = const Size(800, 1400);
+  tester.view.physicalSize = const Size(390, 1400);
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
   addTearDown(tester.view.resetDevicePixelRatio);

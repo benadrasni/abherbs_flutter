@@ -43,14 +43,29 @@ a{color:var(--moss)}
 .notes h3{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:22px 0 8px}
 .toggles label{display:flex;gap:8px;align-items:center;margin:6px 0;font-size:14px}
 .notes .fine{font-size:12px;color:var(--ink-3);line-height:1.4;margin-top:18px}
+.devices{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+.devices button{height:32px;padding:0 12px;border-radius:16px;border:1px solid var(--rule);background:var(--cream);font-size:13px;font-weight:600}
+.devices button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 
-/* Phone */
-.phone{width:390px;height:844px;border-radius:52px;background:#111;padding:12px;box-shadow:0 30px 60px rgba(40,30,10,.25);position:sticky;top:24px}
-.glass{position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;background:var(--paper);display:flex;flex-direction:column}
+/* Device frame. iPad sizes are 11-inch points; JS scales the frame to the window. */
+.stage{position:sticky;top:24px;flex:none;width:390px;height:844px}
+.phone{--dw:390px;--dh:844px;--br:52px;--inset:12px;--gr:42px;--sc:1;width:var(--dw);height:var(--dh);border-radius:var(--br);background:#111;padding:var(--inset);box-shadow:0 30px 60px rgba(40,30,10,.25);position:absolute;left:0;top:0;transform:scale(var(--sc));transform-origin:top left}
+.phone.ipad{background:#0e0e0e;box-shadow:0 28px 70px rgba(40,30,10,.3)}
+.glass{position:relative;width:100%;height:100%;border-radius:var(--gr);overflow:hidden;background:var(--paper);display:flex;flex-direction:column;container-type:inline-size;container-name:device}
+.col{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column}
+.phone.ipad .island{display:none}
+.phone.ipad .status{height:32px;padding:0 24px;font-size:13px}
+.phone.ipad .tabs{height:66px;padding-bottom:10px}
+.phone.land .glass{flex-direction:row}
+.phone.land .tabs{order:-1;flex:none;flex-direction:column;width:104px;height:auto;align-self:stretch;border-top:0;border-right:1px solid var(--rule);padding:10px 0 14px;gap:2px}
+.phone.land .tabs button{flex:none;height:76px;width:100%;position:relative}
+.phone.land .badge{position:absolute;top:8px;right:22px;margin:0}
+.phone.land .tabs .sideperson{margin-top:auto;height:72px}
+.phone.land .toast{left:120px;bottom:28px}
 .status{height:44px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 28px;font-weight:600;font-size:14px}
 .status.dark{background:#0d0c0a;color:#fff}
 .island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:118px;height:32px;border-radius:20px;background:#000;z-index:50}
-.screen{flex:1;overflow-y:auto;overflow-x:hidden;position:relative;scrollbar-width:none}
+.screen{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;position:relative;scrollbar-width:none}
 .screen::-webkit-scrollbar{display:none}
 .tabs{flex:none;height:78px;display:flex;border-top:1px solid var(--rule);background:var(--cream);padding-bottom:18px}
 .adbar{flex:none;padding:8px 12px;border-top:1px solid var(--rule);background:var(--paper)}
@@ -516,7 +531,73 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .ifcell.on{border-color:#3e5344;box-shadow:0 0 0 1px #3e5344}
 .ifcell.pri{box-shadow:0 0 0 2px #3e5344}
 .ifcell.on .name{font-weight:600;color:#3e5344}
-@media (max-width:820px){.desk{grid-template-columns:1fr;justify-items:center}.phone{position:relative;top:0}}
+
+/* iPad. The phone frame stays under 700px, so these rules leave it alone. */
+@container device (min-width:700px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 14px}
+  .habs{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .petals{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .ifgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .ffig img{max-height:520px}
+  .lists{grid-template-columns:1fr 1fr}
+  .dir.cols2{display:grid;grid-template-columns:1fr 1fr;align-items:start}
+  .readable{max-width:720px;margin-inline:auto;width:100%}
+  .readable.wide{max-width:880px}
+  .find-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:4px 4px;align-items:start}
+  .find-top .search{width:auto;margin:0 8px 0 20px}
+  .find-top .cam{width:auto;margin:14px 8px 0 20px}
+  .find-top .keycard{margin:2px 20px 0 8px}
+  .strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));overflow:visible;gap:12px}
+  .find-card,.find-card .img,.lstrip .lc,.lstrip .lc .cover{width:100%}
+  .find-card .img{height:auto;aspect-ratio:1}
+  .lstrip{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .lstrip .lc .cover{height:auto;aspect-ratio:16/10}
+  .confirms{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 20px}
+  .confirms .tbc{margin:0}
+  .schema{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:start}
+  .schema .schema-top{grid-column:1 / -1}
+  .morphs{display:grid;grid-template-columns:1fr 1fr;column-gap:8px;align-items:start}
+  .tail{display:grid;grid-template-columns:1fr 1fr;column-gap:8px;align-items:start}
+  .gal{height:460px}
+  .jump{flex-wrap:wrap;overflow:visible;row-gap:6px}
+  .petal svg{width:96px;height:96px}
+  .petal{padding:22px 10px 16px}
+  .shot{height:420px}
+  .cands{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 20px}
+  .cands .cand{width:auto;margin:0}
+  .sightings{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .scrim{align-items:center;justify-content:center;padding:32px}
+  .sheet{width:min(520px,100%);border-radius:22px;max-height:min(680px,88%);padding-bottom:22px}
+  .grab{display:none}
+  .vf .frame{left:14%;right:14%;top:20%;height:46%}
+  .vf .tip{top:auto;bottom:148px}
+  .fghero{height:300px}
+}
+@container device (min-width:1000px){
+  .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .ifgrid{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .lists{grid-template-columns:1fr 1fr 1fr}
+  .dir.cols2{grid-template-columns:1fr 1fr 1fr}
+  .lstrip{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .find-lower{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start}
+  .find-lower .strip{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .species{display:grid;grid-template-columns:minmax(360px,42%) minmax(0,1fr);align-items:start}
+  .species .seenbar{grid-column:1 / -1}
+  .morphs,.tail{display:block}
+  .gal{height:440px}
+  .out{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:stretch;min-height:100%}
+  .out .shot{height:auto;min-height:100%}
+  .out .cands{display:block;padding:0}
+  .out .cand{width:calc(100% - 40px);margin:0 20px 10px}
+  .countries{columns:2;column-gap:8px}
+  .countries .crow{break-inside:avoid}
+  .top .iconbtn[aria-label="Account"]{display:none}
+  .vf .frame{left:10%;right:150px;top:12%;height:72%}
+  .vf .tip{left:0;right:150px;bottom:28px}
+  .vf .ctrl{left:auto;right:18px;top:0;bottom:0;width:112px;flex-direction:column;justify-content:center;gap:26px}
+  .askloc{right:146px;max-width:480px}
+}
+@media (max-width:860px){.desk{grid-template-columns:1fr;justify-items:center}.stage{position:relative;top:0}}
 </style>
 </head>
 <body>
@@ -524,6 +605,12 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
   <aside class="notes">
     <h1>Field guide</h1>
     <p class="lede">Mockups of <code>docs/REDESIGN.md</code>. Everything on screen is a tap target. Plant names, photos, plates, counts and text are from the live catalog.</p>
+    <h3>Device</h3>
+    <div class="devices">
+      <button type="button" data-device="phone" class="on">Phone</button>
+      <button type="button" data-device="ipad-p">iPad portrait</button>
+      <button type="button" data-device="ipad-l">iPad landscape</button>
+    </div>
     <ol id="index"></ol>
     <h3>Try states</h3>
     <div class="toggles">
@@ -533,20 +620,22 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
       <label><input type="checkbox" id="tTen"> All ten names used this month</label>
       <label><input type="checkbox" id="tFG"> Field Guide subscriber</label>
       <label><input type="checkbox" id="tDe"> Lists in German (year campaigns)</label>
-      <label><input type="checkbox" id="tDark"> Phone in dark mode</label>
+      <label><input type="checkbox" id="tDark"> Dark mode</label>
     </div>
     <p class="fine">The person's photo of <i>Tanacetum corymbosum</i> is a stand-in from <a href="https://commons.wikimedia.org/wiki/File:Tanacetum_corymbosum_(7334981392).jpg" target="_blank">Wikimedia Commons</a>; that species is not in the book. Other "your photo" thumbnails reuse catalog photos. Search in this prototype covers the 93 plants of the demo key plus all families and top genera.</p>
     <p class="fine">Offline sizes are the pictures only. Photos, the plate, and the range map average 0.66 MB a species, so 1,433 plants is about 950 MB. A plant in two regions is stored once: Middle Europe plus the Northeast is about 70 MB more, not another 570 MB. Antarctic is left out. No species lives only there. The regions are the floristic ones already on each plant.</p>
   </aside>
-  <div class="phone"><div class="glass">
+  <div class="stage" id="stage"><div class="phone" id="device"><div class="glass">
     <div class="island"></div>
-    <div class="status" id="status"><span>14:32</span><span>●●● ▮</span></div>
-    <div class="screen" id="screen"></div>
-    <div class="adbar" id="adbar"><div class="ad">Banner ad · free accounts only</div></div>
+    <div class="col">
+      <div class="status" id="status"><span>14:32</span><span>●●● ▮</span></div>
+      <div class="screen" id="screen"></div>
+      <div class="adbar" id="adbar"><div class="ad">Banner ad · free accounts only</div></div>
+    </div>
     <nav class="tabs" id="tabs"></nav>
     <div id="overlay"></div>
     <div class="toast" id="toast"></div>
-  </div></div>
+  </div></div></div>
 </div>
 
 <script>
@@ -753,23 +842,33 @@ function findScreen(){
   const recent=st.seen.slice(0,5).map(r=>`<button class="find-card" data-seen="${r.id}"><div class="img" style="background-image:url('${r.ph}')">${r.u?'<span class="u">To confirm</span>':''}</div><div class="nm">${r.l?esc(cap(r.l)):`<span class="latin">${esc(r.n)}</span>`}</div><div class="when">${esc(r.when)}</div></button>`).join('');
   return `
   <div class="top"><div class="wm">What’s that <i>flower</i></div><button class="iconbtn" data-go="me" aria-label="Account">${I.person}</button></div>
-  <button class="search" data-go="search">${I.search}<span>Search ${fmt(D.total)} plants, families, genera</span></button>
-  <button class="cam" data-go="camera">
-    <div><div class="t">Name it from a photo</div><div class="s">Any plant, wild or potted. Pages open when it’s in the book.</div>
-      <div class="meter">${meterDots()}<span>${esc(a.label)}</span></div></div>
-    <div class="lens">${I.cam}</div>
-  </button>
-  <section class="keycard">
-    <div class="keyhead"><span class="eyebrow">Key it out · 1 of 3</span><span class="eyebrow" style="color:var(--moss)">Always free</span></div>
-    <div class="stepper"><i class="on"></i><i></i><i></i></div>
-    <h2 class="q" style="margin-top:12px">What color is the flower?</h2>
-    <div class="swatches">${COLORS.map(([k,l,c])=>`<button class="sw" data-color="${k}"><span class="dot" style="background:${c}"></span><span class="l">${esc(cap(l))}</span><span class="n">${D.counts.color[k]}</span></button>`).join('')}</div>
-    <p class="hint">Then habitat, then petals.</p>
-  </section>
-  <div class="sechead"><h3>Seen lately</h3><button data-tab="seen">All finds</button></div>
-  <div class="strip">${recent}</div>
-  <div class="sechead"><h3>${st.listLang=='de'?'Blumenlisten':'Lists of flowers'}</h3><button data-booklists="1">All lists</button></div>
-  ${listStrip()}
+  <div class="find-top">
+    <div>
+      <button class="search" data-go="search">${I.search}<span>Search ${fmt(D.total)} plants, families, genera</span></button>
+      <button class="cam" data-go="camera">
+        <div><div class="t">Name it from a photo</div><div class="s">Any plant, wild or potted. Pages open when it’s in the book.</div>
+          <div class="meter">${meterDots()}<span>${esc(a.label)}</span></div></div>
+        <div class="lens">${I.cam}</div>
+      </button>
+    </div>
+    <section class="keycard">
+      <div class="keyhead"><span class="eyebrow">Key it out · 1 of 3</span><span class="eyebrow" style="color:var(--moss)">Always free</span></div>
+      <div class="stepper"><i class="on"></i><i></i><i></i></div>
+      <h2 class="q" style="margin-top:12px">What color is the flower?</h2>
+      <div class="swatches">${COLORS.map(([k,l,c])=>`<button class="sw" data-color="${k}"><span class="dot" style="background:${c}"></span><span class="l">${esc(cap(l))}</span><span class="n">${D.counts.color[k]}</span></button>`).join('')}</div>
+      <p class="hint">Then habitat, then petals.</p>
+    </section>
+  </div>
+  <div class="find-lower">
+    <div>
+      <div class="sechead"><h3>Seen lately</h3><button data-tab="seen">All finds</button></div>
+      <div class="strip">${recent}</div>
+    </div>
+    <div>
+      <div class="sechead"><h3>${st.listLang=='de'?'Blumenlisten':'Lists of flowers'}</h3><button data-booklists="1">All lists</button></div>
+      ${listStrip()}
+    </div>
+  </div>
   <div style="height:16px"></div>`;
 }
 function searchScreen(){
@@ -784,13 +883,13 @@ function searchScreen(){
   const frow=f=>`<button class="srow" data-toast="Family page: ${esc(f.f)}"><span class="th fam" style="background-image:url('${FAMI(f.f)}')"></span><span class="tx"><b>${esc(cap(f.v||f.f))}</b><span class="latin">${esc(f.f)}</span></span><span class="k">${f.k}</span></button>`;
   const grow=g=>`<button class="srow" data-toast="Genus page: ${esc(g.g)}"><span class="th fam" style="background-image:url('${FAMI(g.f)}')"></span><span class="tx"><b>${esc(cap(g.v||g.g))}</b><span class="latin">${esc(g.g)}</span></span><span class="k">${g.k}</span></button>`;
   const none=q&&!plants.length&&!fams.length&&!gens.length;
-  return `<div class="back" data-go="find">${I.back}Find</div>
+  return `<div class="readable"><div class="back" data-go="find">${I.back}Find</div>
   <label class="sfield">${I.search}<input id="q" value="${esc(st.q)}" placeholder="Name, Latin, family, genus" autocomplete="off"></label>
   ${plants.length?`<div class="slabel eyebrow">Plants</div>${plants.map(row).join('')}`:''}
   ${gens.length?`<div class="slabel eyebrow">Genera</div>${gens.map(grow).join('')}`:''}
   ${fams.length?`<div class="slabel eyebrow">Families</div>${fams.map(frow).join('')}`:''}
   ${none?`<div class="notbook">Nothing in the book by that name. <button style="color:var(--moss);font-weight:600" data-go="camera">Try a photo</button> or <button style="color:var(--moss);font-weight:600" data-go="find">key it out</button>.</div>`:''}
-  <div style="height:20px"></div>`;
+  <div style="height:20px"></div></div>`;
 }
 function trail(upto){
   const c=COLORS.find(x=>x[0]==st.color), h=HABS.find(x=>x[0]==st.habitat), p=PETS.find(x=>x[0]==st.petal);
@@ -834,7 +933,8 @@ function resultsScreen(){
     if(i==nowCount&&nowCount) cells.push(`<div class="gridad month" style="padding:8px 0 0">Other months · ${list.length-nowCount}</div>`);
     const img=st.view=='plate'?`<div class="img plate" style="background-image:url('${PLATE(p.pl)}')"></div>`:`<div class="img" style="background-image:url('${PH(p.ph)}')"></div>`;
     cells.push(`<button class="cell" data-sp="${esc(p.n)}">${img}<div class="nm">${esc(vName(p)||p.n)}</div><div class="la latin">${esc(p.n)}</div>${seenMark(p.n)}</button>`);
-    if(i==5&&!st.fg) cells.push('<div class="gridad"><div class="ad">Banner ad · free accounts only</div></div>');
+    const adAt=st.device==='ipad-l'?7:5;
+    if(i==adAt&&!st.fg) cells.push('<div class="gridad"><div class="ad">Banner ad · free accounts only</div></div>');
   });
   const seenIn=list.filter(p=>seen.has(p.n)).length;
   return `<div class="back" data-go="petal">${I.back}Petals</div>
@@ -849,7 +949,7 @@ function regionSheet(){
   const r=Object.entries(D.regions);
   return `<div class="scrim" data-close="1"><div class="sheet" data-stop="1"><div class="grab"></div>
   <h2>Where are you looking?</h2><p>Narrows ${plantPhrase(D.plants.length)} to those native or naturalized there.</p>
-  <button class="locbtn" data-loc="1">${I.pin}<div><b>Use this phone’s location</b><span>${st.loc===false?'Location was refused. Change it in Settings.':'Asked once, now. Only the region is kept.'}</span></div></button>
+  <button class="locbtn" data-loc="1">${I.pin}<div><b>Use this ${deviceWord()}’s location</b><span>${st.loc===false?'Location was refused. Change it in Settings.':'Asked once, now. Only the region is kept.'}</span></div></button>
   <button class="radio ${!st.region?'on':''}" data-region=""><span class="c"></span><span class="l">Any region</span><span class="n">${D.plants.length}</span></button>
   ${r.map(([k,[n,c]])=>`<button class="radio ${st.region==k?'on':''}" data-region="${k}"><span class="c"></span><span class="l">${esc(n)}</span><span class="n">${c}</span></button>`).join('')}
   <button class="radio" data-toast="Full list of WCVP level-2 regions"><span class="c" style="border-style:dashed"></span><span class="l" style="color:var(--moss)">All regions…</span></button>
@@ -873,10 +973,11 @@ function cameraScreen(){
 function outsideScreen(){
   const ox=D.sp['Leucanthemum vulgare'], fe=D.sp['Tanacetum parthenium'];
   const where=st.loc?'Middle Europe':'No place';
-  return `<div class="shot" style="background-image:url('${USERSHOT}')">
+  return `<div class="out"><div class="shot" style="background-image:url('${USERSHOT}')">
     <button class="iconbtn" style="position:absolute;top:10px;left:12px;background:var(--wash);border:0" data-go="find">${I.close}</button>
     <div class="meta"><span class="pill">Just now</span><span class="pill">${I.pin}${where}</span></div>
     <a class="credit" href="https://commons.wikimedia.org/wiki/File:Tanacetum_corymbosum_(7334981392).jpg" target="_blank">stand-in photo · Commons</a></div>
+  <div class="out-body">
   <div class="namebox">
     <span class="conf likely"><i><b></b><b></b><b></b></i>Likely</span>
     <h1 class="latin" style="font-size:30px;margin-top:6px">Tanacetum corymbosum</h1>
@@ -884,10 +985,13 @@ function outsideScreen(){
   </div>
   <div class="notbook">We can name this one, but its page isn’t written yet. It’s in your Seen notebook either way.</div>
   <div class="sechead"><h3>In the book, and close</h3></div>
+  <div class="cands">
   <button class="cand" data-sp="Leucanthemum vulgare" data-cam="1"><span class="th" style="background-image:url('${PH(ox.ph[0])}')"></span><span class="tx"><span class="conf possible"><i><b></b><b></b><b></b></i>Possible</span><b>Oxeye daisy</b><span class="latin">Leucanthemum vulgare</span></span><span class="go">Full page ›</span></button>
   <button class="cand" data-sp="Tanacetum parthenium" data-cam="1"><span class="th" style="background-image:url('${PH(fe.ph[0])}')"></span><span class="tx"><span class="conf uncertain"><i><b></b><b></b><b></b></i>Uncertain</span><b>Feverfew</b><span class="latin">Tanacetum parthenium</span></span><span class="go">Full page ›</span></button>
+  </div>
   <div class="saved"><b>Saved to Seen · unconfirmed</b><div class="hint" style="margin-top:4px">Photo, 14:31, ${where}.</div>
-    <div class="row"><button class="btn primary small" data-confirm="t1">Keep this name</button><button class="btn ghost small" data-sheet="other">It’s another one</button><button class="btn ghost small" style="color:var(--madder)" data-del="t1">Delete</button></div></div>`;
+    <div class="row"><button class="btn primary small" data-confirm="t1">Keep this name</button><button class="btn ghost small" data-sheet="other">It’s another one</button><button class="btn ghost small" style="color:var(--madder)" data-del="t1">Delete</button></div></div>
+  </div></div>`;
 }
 function speciesScreen(){
   const s=D.sp[st.sp]||D.sp['Leucanthemum vulgare'];
@@ -910,25 +1014,31 @@ function speciesScreen(){
   const cam=st.fromCamera, rec=st.seen.find(r=>r.n==s.n)||null;
   const bar=cam?(rec&&!rec.u?`<div class="seenbar ok"><span class="th" style="background-image:url('${USERSHOT}')"></span><span class="tx"><b>In Seen as ${esc(cap(s.l||s.n))}</b>Confirmed · today 14:31</span><button class="btn ghost small" style="background:none;color:#fff;border-color:#fff6" data-undo="1">Undo</button></div>`
      :`<div class="seenbar"><span class="th" style="background-image:url('${st.inBook?PH(s.ph[1]):USERSHOT}')"></span><span class="tx"><b>Your photo · unconfirmed</b>Today 14:31 · ${st.loc?'Middle Europe':'no place'}</span><button class="btn madder" data-confirmsp="1">It’s this</button><button class="btn" style="color:#fff;border:1px solid #fff5" data-sheet="other">Not it</button></div>`):'';
-  return `<div class="gal"><div class="track" id="track">${slides}</div>
+  const seenLine=(()=>{const rs=st.seen.filter(r=>!r.u&&r.n==s.n);if(cam)return '';return (rs.length?`<button class="seenby" data-tab="seen"><span class="th" style="background-image:url('${rs[0].ph}')"></span><span><b>Seen by you</b>${rs.length==1?'once':rs.length+' times'}, last ${esc(rs[0].when)}</span></button>`:'')+`<div class="addseen"><button class="btn ghost small" data-addseen="${esc(s.n)}">+ Add to Seen</button><span class="hint" style="margin-left:8px">From your photos. Free.</span></div>`})();
+  const sightings=(()=>{const sg=(D.sightings||{})[s.n];if(!sg)return `<div class="sec" id="s-sightings"><h3>Sightings</h3><p class="hint" style="margin:0">No public sightings yet. Share one from Seen.</p></div>`;
+    return `<div class="sec" id="s-sightings"><h3>Sightings <small>${sg.count} shared by app users</small></h3><div class="sightings">${sg.items.map(i=>{const d=new Date(i.t);return `<div style="background-image:url('${S+i.ph}')"><span>${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCFullYear()}</span></div>`}).join('')}</div><p class="hint">Country and month only. Photos under CC0, reviewed before they appear.</p></div>`})();
+  return `<div class="species">
+  <div class="species-hero"><div class="gal"><div class="track" id="track">${slides}</div>
     <div class="over"><button class="iconbtn" data-goback="1">${I.back}</button><button class="iconbtn" data-toast="Share: whatsthatflower.org page">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M7 8l5-5 5 5M5 14v6h14v-6"/></svg>'}</button></div>
     <div class="ctr"><button class="pill" data-slide="0">${s.ph.length===1?'1 photo':s.ph.length+' photos'}</button><button class="pill" data-slide="${s.ph.length}">Plate</button>${vids.length?`<button class="pill" data-slide="${s.ph.length+1}">Video</button>`:''}</div></div>
   <div class="namebox">${ranks.length?`<div class="ranks">${ranks.map(esc).join(' · ')}</div>`:''}<h1>${esc(cap(s.l||s.n))}</h1><div class="la latin">${esc(s.n)} <span class="au">${esc(s.a||'')}</span></div>
     ${s.names&&s.names.length?`<div class="aka">Also ${s.names.map(esc).join(', ')}</div>`:''}</div>
-  ${(()=>{const rs=st.seen.filter(r=>!r.u&&r.n==s.n);if(cam)return '';return (rs.length?`<button class="seenby" data-tab="seen"><span class="th" style="background-image:url('${rs[0].ph}')"></span><span><b>Seen by you</b>${rs.length==1?'once':rs.length+' times'}, last ${esc(rs[0].when)}</span></button>`:'')+`<div class="addseen"><button class="btn ghost small" data-addseen="${esc(s.n)}">+ Add to Seen</button><span class="hint" style="margin-left:8px">From your photos. Free.</span></div>`})()}
+  ${seenLine}
   <div class="facts"><div><div class="k">Height</div><div class="v">${s.h[0]}–${s.h[1]} cm</div></div><div><div class="k">Toxicity</div><div class="v${toxClass?' warn':''}">${toxLabel}</div></div>
-    <div class="wide"><div class="k">Flowers ${MONTH_NAMES[s.fl[0]-1]}–${MONTH_NAMES[s.fl[1]-1]}</div><div class="months">${months}</div></div></div>
+    <div class="wide"><div class="k">Flowers ${MONTH_NAMES[s.fl[0]-1]}–${MONTH_NAMES[s.fl[1]-1]}</div><div class="months">${months}</div></div></div></div>
+  <div class="species-rest">
   <div class="jump">${jumps.map(([k,l])=>`<button class="pill" data-jump="${k}">${l}</button>`).join('')}<button class="pill" data-jump="taxonomy">Taxonomy</button><button class="pill" data-jump="dist">Distribution</button><button class="pill" data-jump="sightings">Sightings</button></div>
   <p class="lead">${esc(T.description)}</p>
   ${notes}
-  ${morph.map(([k,l])=>`<div class="sec ${k=='toxicity'?'warn':''}" id="s-${k}"><h3>${secHead(k,l)}</h3><p>${esc(T[k])}</p></div>`).join('')}
+  <div class="morphs">${morph.map(([k,l])=>`<div class="sec ${k=='toxicity'?'warn':''}" id="s-${k}"><h3>${secHead(k,l)}</h3><p>${esc(T[k])}</p></div>`).join('')}</div>
   ${uses}
+  <div class="tail">
   <div class="sec" id="s-taxonomy"><h3>Taxonomy <small>APG IV</small></h3><div class="taxo">${apg}</div></div>
   <div class="sec" id="s-dist"><h3>Distribution <small>WCVP · native green, introduced brown</small></h3><img class="map" src="${MAP(s.pl)}" alt="Distribution map"></div>
-  ${(()=>{const sg=(D.sightings||{})[s.n];if(!sg)return `<div class="sec" id="s-sightings"><h3>Sightings</h3><p class="hint" style="margin:0">No public sightings yet. Share one from Seen.</p></div>`;
-    return `<div class="sec" id="s-sightings"><h3>Sightings <small>${sg.count} shared by app users</small></h3><div class="sightings">${sg.items.map(i=>{const d=new Date(i.t);return `<div style="background-image:url('${S+i.ph}')"><span>${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCFullYear()}</span></div>`}).join('')}</div><p class="hint">Country and month only. Photos under CC0, reviewed before they appear.</p></div>`})()}
+  </div>
+  ${sightings}
   <div class="sec"><h3>Sources</h3><div class="srcs">${(s.src||[]).slice(0,5).map(u=>`<a href="${esc(u)}" target="_blank">${esc(u.replace(/^https?:\/\/(www\.)?/,'').split('/')[0])}</a>`).join(' · ')}</div></div>
-  <div style="height:24px"></div>${bar}`;
+  <div style="height:24px"></div></div>${bar}</div>`;
 }
 function schemaBackName(){
   if(st.schemaBack!=='species') return 'Back';
@@ -946,9 +1056,9 @@ function flowerDark(){
 function flowerScreen(){
   const rows=FLOWER_PARTS.map((label,i)=>`<li><span class="n">${i+1}</span><span>${label}</span></li>`).join('');
   const src=flowerDark()?'Mature_flower_numbered_dark.svg':'Mature_flower_numbered.svg';
-  return `${schemaHead('Flower','Parts of a flower','A typical complete flower. The numbers match the list.','hint')}
+  return `<div class="schema">${schemaHead('Flower','Parts of a flower','A typical complete flower. The numbers match the list.','hint')}
   <figure class="ffig"><img src="${src}" alt=""></figure>
-  <ol class="flist">${rows}</ol>`;
+  <ol class="flist">${rows}</ol></div>`;
 }
 function inflorescenceScreen(){
   const s=st.schemaBack==='species'?(D.sp[st.sp]||null):null;
@@ -973,17 +1083,17 @@ function seenScreen(){
   const inBook=n=>D.plants.some(p=>p.n==n)||!!D.sp[n];
   const shareBit=r=>r.sh=='shared'?`<button class="shst ok" data-shsheet="${r.id}">Shared</button>`:r.sh=='review'?`<span class="shst rev">In review</span>`:r.sh=='rejected'?`<span class="shst no">Not accepted</span>`:inBook(r.n)?`<button class="pill" data-share="${r.id}">Share</button>`:`<span class="shst">Not in the book</span>`;
   const row=r=>`<div class="srow"><button class="th" style="background-image:url('${r.ph}')" data-sp="${esc(r.n)}"></button><button class="tx" data-sp="${esc(r.n)}"><b>${esc(r.l?cap(r.l):'')}${r.l?'':`<span class="latin" style="font-weight:420">${esc(r.n)}</span>`}</b><span>${esc(r.when)} · ${esc(r.where)}</span></button><span class="end">${shareBit(r)}<button class="del" data-askdel="${r.id}">Delete</button></span></div>`;
-  const where=st.signed?(st.fg?'photos on all your devices':'saved to your account'):'on this phone until you sign in';
+  const where=st.signed?(st.fg?'photos on all your devices':'saved to your account'):`on this ${deviceWord()} until you sign in`;
   const shown=u.length+c.length;
   const countLine=st.hideShared&&sharedN?`${shown} finds · ${sharedN} shared hidden · ${where}`:`${st.seen.length} finds · ${where}`;
   const filter=sharedN?`<div class="seenfilter"><button class="pill ${st.hideShared?'set':''}" data-hideshared="1">${st.hideShared?'Shared hidden':'Hide shared'} · ${sharedN}</button></div>`:'';
   const empty=!u.length&&!c.length?`<p class="hint pad">Nothing else in the notebook. Shared finds are still on the species pages.</p>`:'';
   return `<div class="top"><div><div class="wm">Seen</div><div class="hint" style="margin:2px 0 0">${countLine}</div></div><div style="display:flex;gap:8px"><button class="iconbtn" data-go="stats" data-scope="private" aria-label="Statistics">${I.chart}</button><button class="iconbtn" data-go="camera">${I.cam}</button></div></div>
-  ${u.length?`<div class="month" style="padding-top:4px;color:var(--madder)">To confirm · ${u.length}</div>${u.map(card).join('')}`:''}
+  ${u.length?`<div class="month" style="padding-top:4px;color:var(--madder)">To confirm · ${u.length}</div><div class="confirms">${u.map(card).join('')}</div>`:''}
   ${filter}
   ${months.map(m=>`<div class="month">${m}</div>${c.filter(r=>(r.m||'September 2026')==m).map(row).join('')}`).join('')}
   ${empty}
-  ${st.fg?'':`<div class="upsell"><b>Keep your photos on every phone</b><p>Your finds already follow your account. Field Guide adds the photos, including names outside the book.</p><button class="btn" data-go="fieldguide">See Field Guide</button></div>`}
+  ${st.fg?'':`<div class="upsell"><b>Keep your photos on every ${deviceWord()==='phone'?'phone':'device'}</b><p>Your finds already follow your account. Field Guide adds the photos, including names outside the book.</p><button class="btn" data-go="fieldguide">See Field Guide</button></div>`}
   <div style="height:10px"></div>`;
 }
 function bookScreen(){
@@ -994,7 +1104,7 @@ function bookScreen(){
   if(seg=='lists') body=`<div class="lists">${allLists().map(l=>`<button class="lcard ${l.isNew?'new':''}" data-list="${l.key}"><div class="thumbs">${l.items.slice(0,4).map(e=>`<i style="background-image:url('${PH(e.ph)}')"></i>`).join('')}</div><b>${esc(l.t)}</b><span>${l.isNew?`${plantPhrase(l.items.length)} · latest ${fmtDate(D.lists_new[0].d)}`:isYearList(l)?`${l.items.length} years · ${l.items[l.items.length-1].y}–${l.items[0].y}`:plantPhrase(l.items.length)}</span></button>`).join('')}</div>`;
   return `<div class="top"><div><div class="wm">Book</div><div class="hint" style="margin:2px 0 0">${fmt(D.total)} plants · ${D.fams.length} families</div></div><button class="iconbtn" data-go="search">${I.search}</button></div>
   <div class="segwide"><button class="${seg=='fam'?'on':''}" data-seg="fam">Families</button><button class="${seg=='gen'?'on':''}" data-seg="gen">Genera</button><button class="${seg=='lists'?'on':''}" data-seg="lists">Lists</button></div>
-  ${body}${st.fg?'':'<div class="ad">Banner ad · free accounts only</div>'}`;
+  <div class="dir${seg=='lists'?'':' cols2'}">${body}</div>${st.fg?'':'<div class="ad">Banner ad · free accounts only</div>'}`;
 }
 function limitSheet(){
   const ten=st.used>=10||st.ads>=5;
@@ -1054,45 +1164,45 @@ function otherSheet(){
     <button class="btn ghost" style="width:100%" data-go="search">Search the book instead</button></div></div>`;
 }
 function fgScreen(){
-  return `<div class="fg"><div class="fghero" style="background-image:url('${PLATE_L('Asterales/Asteraceae/Leucanthemum_vulgare/Leucanthemum_vulgare.webp')}')"><div class="over" style="position:absolute;top:10px;left:12px;z-index:2"><button class="iconbtn" data-goback="1">${I.back}</button></div></div>
+  return `<div class="readable wide"><div class="fg"><div class="fghero" style="background-image:url('${PLATE_L('Asterales/Asteraceae/Leucanthemum_vulgare/Leucanthemum_vulgare.webp')}')"><div class="over" style="position:absolute;top:10px;left:12px;z-index:2"><button class="iconbtn" data-goback="1">${I.back}</button></div></div>
   <h1>Field Guide</h1>
   <p class="sub">For people who carry the book outdoors. Everything that is free stays free.</p>
-  <div class="cols"><div><h4>Free</h4><ul><li>Search</li><li>The three-step key</li><li>Every species page</li><li>Seen on this phone</li><li>5 names a month, plus up to 5 from ads</li></ul></div>
+  <div class="cols"><div><h4>Free</h4><ul><li>Search</li><li>The three-step key</li><li>Every species page</li><li>Seen on this ${deviceWord()}</li><li>5 names a month, plus up to 5 from ads</li></ul></div>
   <div class="add"><h4>Field Guide adds</h4><ul><li>Unlimited names from photos</li><li>No ads</li><li>Seen on all your devices, with photos</li><li>The book offline, everything or a region</li></ul></div></div>
   <div class="plans"><button class="plan on" data-toast="Store sheet would open"><span class="radio on" style="border:0;padding:0;width:auto"><span class="c"></span></span><span class="l"><b>Yearly</b><span>7 days free, then yearly</span></span><span class="p">Store price</span></button>
     <button class="plan" data-toast="Store sheet would open"><span class="radio" style="border:0;padding:0;width:auto"><span class="c"></span></span><span class="l"><b>Monthly</b><span>7 days free, then monthly</span></span><span class="p">Store price</span></button>
     <button class="btn primary" style="width:100%;margin-top:6px" data-fg="1">Start 7 days free</button>
     <button class="btn" style="width:100%;color:var(--moss)" data-toast="Restoring from the store…">Restore purchases</button></div>
-  <p class="fine">Already bought Remove ads, Photo search, Offline or the old paid app? Restore keeps what you paid for. A photo-storage plan counts as Field Guide.</p></div>`;
+  <p class="fine">Already bought Remove ads, Photo search, Offline or the old paid app? Restore keeps what you paid for. A photo-storage plan counts as Field Guide.</p></div></div>`;
 }
 function signinScreen(){
   const legal=`<p class="legal">By continuing you agree to the <button data-toast="Opens the terms of use">Terms of use</button> and the <button data-toast="Opens the privacy policy">Privacy policy</button>.</p>`;
-  if(st.signStep=='email') return `<div class="back" data-signstep="">${I.back}Sign in</div>
+  if(st.signStep=='email') return `<div class="readable wide"><div class="back" data-signstep="">${I.back}Sign in</div>
   <div class="signin pad" style="margin-top:14px"><h2 class="q">Sign in with email</h2>
     <p class="sub" style="padding:0;margin:4px 0 16px">New here? The same form creates your account.</p>
     <input class="field" type="email" placeholder="Email" autocomplete="off">
     <input class="field" type="password" placeholder="Password">
     <button class="btn primary" style="width:100%;margin-top:6px" data-signwith="email">Continue</button>
     <button class="btn" style="width:100%;color:var(--moss)" data-toast="A reset link would be sent">Forgot password?</button>
-    ${legal}</div>`;
-  if(st.signStep=='phone') return `<div class="back" data-signstep="">${I.back}Sign in</div>
+    ${legal}</div></div>`;
+  if(st.signStep=='phone') return `<div class="readable wide"><div class="back" data-signstep="">${I.back}Sign in</div>
   <div class="signin pad" style="margin-top:14px"><h2 class="q">Sign in with phone</h2>
     <p class="sub" style="padding:0;margin:4px 0 16px">We send a six-digit code by SMS.</p>
     <div style="display:flex;gap:8px"><input class="field" style="width:84px;flex:none" value="+421"><input class="field" type="tel" placeholder="Phone number"></div>
     <button class="btn primary" style="width:100%;margin-top:6px" data-signwith="phone">Send code</button>
-    ${legal}</div>`;
-  return `<div class="signin"><div class="fghero" style="height:236px;background-position:center 40%;background-image:url('${PLATE_L('Asterales/Asteraceae/Bellis_perennis/Bellis_perennis.webp')}')"><div class="over" style="position:absolute;top:10px;right:12px;z-index:2"><button class="iconbtn" data-signclose="1" aria-label="Not now">${I.close}</button></div></div>
+    ${legal}</div></div>`;
+  return `<div class="readable wide"><div class="signin"><div class="fghero" style="height:236px;background-position:center 40%;background-image:url('${PLATE_L('Asterales/Asteraceae/Bellis_perennis/Bellis_perennis.webp')}')"><div class="over" style="position:absolute;top:10px;right:12px;z-index:2"><button class="iconbtn" data-signclose="1" aria-label="Not now">${I.close}</button></div></div>
   <h1>Sign in</h1>
   <p class="sub">The key and the book stay free without an account.</p>
   <ul class="perks"><li>${I.check}<span><b>5 names from photos every month</b>instead of one</span></li>
-    <li>${I.check}<span><b>Seen follows you</b>to a new phone, with your first find</span></li>
+    <li>${I.check}<span><b>Seen follows you</b>to a new ${deviceWord()}, with your first find</span></li>
     <li>${I.check}<span><b>Share finds</b>as Sightings on the species page</span></li></ul>
   <div class="pad">
     <button class="prov apple" data-signwith="Apple">${I.apple}Continue with Apple</button>
     <button class="prov google" data-signwith="Google">${I.google}Continue with Google</button>
     <div class="orrule"><span>or</span></div>
     <div style="display:flex;gap:10px"><button class="prov plain" data-signstep="email">${I.mail}Email</button><button class="prov plain" data-signstep="phone">${I.phone}Phone</button></div>
-    ${legal}</div></div>`;
+    ${legal}</div></div></div>`;
 }
 const FG_PERKS='Unlimited • No Ads • Seen sync • Offline';
 function signBtn(){return `<button class="btn primary small" data-sign="1">Sign in</button>`}
@@ -1112,7 +1222,7 @@ function allowanceCard(){
   return `<div class="card"><b>Sign in to name a photo</b><div class="k guestnote">Sign in and your finds stay with your account.</div><div class="signinrow">${signBtn()}</div></div>`;
 }
 function meScreen(){
-  return `<div class="back" data-goback="1">${I.back}Back</div>
+  return `<div class="readable"><div class="back" data-goback="1">${I.back}Back</div>
   ${st.signed?(()=>{const w=st.signWith||'Google';const [title,sub]={Google:['Anna Novák','anna.novak@gmail.com · Google'],Apple:['Anna Novák','Email hidden by Apple'],Email:['anna.novak@example.com','Email and password'],Phone:['+421 905 123 456','Phone']}[w];
     return `<div class="acct"><div class="avatar">${w=='Phone'?I.phone:esc(title[0].toUpperCase())}</div><div style="min-width:0"><b style="font-size:17px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(title)}</b><div class="hint" style="margin:0">${esc(sub)}</div></div></div>`})():''}
   ${allowanceCard()}
@@ -1120,7 +1230,7 @@ function meScreen(){
     ${st.fg?'':`<button class="srow" data-go="fieldguide">${I.leaf}<span class="tx"><b>Field Guide</b><span>7 days free • ${FG_PERKS}</span></span></button>`}
     <button class="srow" data-toast="Restoring purchases…">${I.restore}<span class="tx"><b>Restore purchases</b><span>Remove ads, Photo search, Offline</span></span></button>
     <button class="srow lang" data-toast="Language list">${I.globe}<b>Language</b><span class="name">English</span>${I.chev}</button>
-    <div class="srow">${I.theme}<span class="tx"><b>Theme</b><span>${st.theme=='system'?(st.phoneDark?'Dark, like the phone':'Light, like the phone'):st.theme=='dark'?'Always dark':'Always light'}</span></span>
+    <div class="srow">${I.theme}<span class="tx"><b>Theme</b><span>${st.theme=='system'?(st.phoneDark?`Dark, like the ${deviceWord()}`:`Light, like the ${deviceWord()}`):st.theme=='dark'?'Always dark':'Always light'}</span></span>
       <div class="seg">${[['light','Light'],['dark','Dark'],['system','System']].map(([k,l])=>`<button class="${st.theme==k?'on':''}" data-theme="${k}">${l}</button>`).join('')}</div></div>
     <button class="srow" data-toast="Opens ad privacy choices">${I.shield}<span class="tx"><b>Ad privacy choices</b><span>Manage or withdraw consent for ads</span></span></button>
     <button class="srow" data-go="offline">${I.cloud}<span class="tx"><b>Offline</b><span>${esc(offMenuLine())}</span></span></button>
@@ -1129,7 +1239,7 @@ function meScreen(){
     <div class="zone">Dangerous zone</div>
     <button class="srow danger" data-askdelaccount="1">${I.trash}<span class="tx"><b>Delete account</b><span>Removes the account, finds, and photos</span></span></button>`:''}
   </div>
-  <button class="ver" data-toast="Version 9.0.0 (900)">Version 9.0.0 (900)</button>`;
+  <button class="ver" data-toast="Version 9.0.0 (900)">Version 9.0.0 (900)</button></div>`;
 }
 
 /* ---------- offline ---------- */
@@ -1159,7 +1269,7 @@ function statPlant(kicker, label, latin, when, photo, name, inBook){
 }
 function countryRows(rows){
   const max=Math.max(...rows.map(r=>r[2]),1);
-  return rows.map(([cc,name,n])=>`<div class="crow"><img class="flag" alt="" src="https://flagcdn.com/w40/${cc}.png"><span class="nm">${esc(name)}</span><span class="n">${fmt(n)}</span><span class="track"><i style="width:${Math.max(4,n/max*100)}%"></i></span></div>`).join('');
+  return `<div class="countries">${rows.map(([cc,name,n])=>`<div class="crow"><img class="flag" alt="" src="https://flagcdn.com/w40/${cc}.png"><span class="nm">${esc(name)}</span><span class="n">${fmt(n)}</span><span class="track"><i style="width:${Math.max(4,n/max*100)}%"></i></span></div>`).join('')}</div>`;
 }
 function yearChart(years){
   const keys=Object.keys(years).sort();
@@ -1177,7 +1287,7 @@ function statsScreen(){
   const back=`<div class="back" data-go="${st.statsFrom||'seen'}">${I.back}${st.statsFrom==='me'?'Person':'Seen'}</div>`;
   if(pub){
     const s=PUBLIC_STATS;
-    return `${back}
+    return `<div class="readable">${back}
     <div class="pad"><span class="eyebrow">Statistics</span><h2 class="q">Sightings</h2>
     <p class="hint" style="margin-top:0">Accepted outdoor finds, shared by people using the app. Counted 4 Oct 2026. Indoor finds are left out. The place is the country, not a pin.</p></div>
     ${seg}
@@ -1190,11 +1300,11 @@ function statsScreen(){
     ${yearChart(s.years)}
     <div class="month">By country · ${s.countries.length}</div>
     ${countryRows(s.countries)}
-    <p class="hint pad" style="margin-bottom:24px">Your own place among these ${s.people} people is counted from the finds you have shared. This notebook has ${st.seen.filter(r=>r.sh==='shared').length} shared.</p>`;
+    <p class="hint pad" style="margin-bottom:24px">Your own place among these ${s.people} people is counted from the finds you have shared. This notebook has ${st.seen.filter(r=>r.sh==='shared').length} shared.</p></div>`;
   }
   const rows=st.seen.slice();
   if(!rows.length){
-    return `${back}<div class="pad"><span class="eyebrow">Statistics</span><h2 class="q">Your finds</h2><p class="hint" style="margin-top:0">Nothing in Seen yet.</p></div>${seg}`;
+    return `<div class="readable">${back}<div class="pad"><span class="eyebrow">Statistics</span><h2 class="q">Your finds</h2><p class="hint" style="margin-top:0">Nothing in Seen yet.</p></div>${seg}</div>`;
   }
   rows.sort((a,b)=>seenStamp(a)-seenStamp(b));
   const plants={};
@@ -1215,7 +1325,7 @@ function statsScreen(){
   const shared=rows.filter(r=>r.sh==='shared').length;
   const inBook=n=>D.plants.some(p=>p.n==n)||!!D.sp[n];
   const mostBlock=top>1?most.map(n=>{const r=rows.find(x=>x.n===n);return statPlant('Most seen',label(r),r.l?r.n:'',`${top} finds`,r.ph,n,inBook(n))}).join(''):`<p class="hint pad">Each plant once, so none is most seen.</p>`;
-  return `${back}
+  return `<div class="readable">${back}
   <div class="pad"><span class="eyebrow">Statistics</span><h2 class="q">Your finds</h2>
   <p class="hint" style="margin-top:0">This Seen notebook. Indoor finds are left out.${unconfirmed?` Includes ${unconfirmed} still to confirm.`:''}</p></div>
   ${seg}
@@ -1229,7 +1339,7 @@ function statsScreen(){
   <div class="month">By country · ${countryList.length}</div>
   ${countryRows(countryList)}
   ${noCountry?`<p class="hint pad">${noCountry===1?'One find has no place, so it isn’t in a country.':noCountry+' finds have no place, so they aren’t in a country.'}</p>`:''}
-  <div style="height:24px"></div>`;
+  <div style="height:24px"></div></div>`;
 }
 
 function offCodesOf(id){return OFF.regions.find(g=>g.id===id).l2.map(x=>x[0])}
@@ -1280,8 +1390,8 @@ function offlineScreen(){
   const phoneOn=st.offAll || st.offSel.includes(OFF.phone);
   const gate=st.fg?'':`<div class="upsell"><b>Field Guide keeps the book offline</b><p>Search, the key and every species page stay free while you have a signal.</p><button class="btn" data-go="fieldguide">See Field Guide</button></div>`;
   const job=st.offJob?`<div class="card job"><div class="row"><b>Downloading ${esc(st.offJob.title)}</b><button data-off="pause" style="color:var(--moss);font-weight:600">Pause</button></div><div class="k" style="margin-top:4px">${st.offJob.done} MB of about ${st.offJob.total} MB · ${fmt(st.offJob.plants)} plants</div><div class="prog"><i style="width:${Math.min(100, st.offJob.done/st.offJob.total*100)}%"></i></div><div class="k">Photos, plates and maps. You can leave this screen.</div></div>`:'';
-  const kept=haveN?`<div class="card"><div class="row" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px"><div><b>On this phone</b><div class="k" style="margin-top:4px">${esc(offTitle(have))} · ${fmt(haveN)} plants · ${offMbText(haveN)}</div></div><button data-off="remove" style="color:var(--madder);font-weight:600;flex:none">Remove</button></div></div>`:'';
-  const phoneCard=phoneKept?'':`<div class="pad" style="margin-top:6px"><span class="eyebrow">Where this phone is</span></div>
+  const kept=haveN?`<div class="card"><div class="row" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px"><div><b>On this ${deviceWord()}</b><div class="k" style="margin-top:4px">${esc(offTitle(have))} · ${fmt(haveN)} plants · ${offMbText(haveN)}</div></div><button data-off="remove" style="color:var(--madder);font-weight:600;flex:none">Remove</button></div></div>`:'';
+  const phoneCard=phoneKept?'':`<div class="pad" style="margin-top:6px"><span class="eyebrow">Where this ${deviceWord()} is</span></div>
     <button class="pack ${phoneOn?'on':''}" data-off="l2:${OFF.phone}">${offBox(phoneOn)}<span class="tx"><b>${I.pin} ${esc(phone.name)}</b><span class="meta">${esc(phone.hint)}</span><span class="meta">${fmt(offMatch(new Set([OFF.phone])))} plants</span></span><span class="sz">${offMbText(offMatch(new Set([OFF.phone])))}</span></button>
     <p class="hint pad">Most of the book grows here: ${offMbText(offMatch(new Set([OFF.phone])))} for this region, ${offMbText(OFF.total)} for everything.</p>`;
   const groups=OFF.regions.map(g=>{
@@ -1300,7 +1410,7 @@ function offlineScreen(){
         if(!best||one>best.n) best={name,n:one};
         const rowOn=st.offAll || st.offSel.includes(c);
         const stored=offMatch(offUnion(have, new Set([c])))===haveN && haveN>0;
-        return `<button class="l2" data-off="l2:${c}">${offBox(rowOn)}<span class="nm"><b>${esc(name)}</b><span class="sub">${esc(hint)}</span>${c===OFF.phone?'<span class="here">This phone</span>':''}${stored?'<span class="here">On this phone</span>':''}</span><span class="sz">${offMbText(one)}<small>${fmt(one)} plants</small></span></button>`;
+        return `<button class="l2" data-off="l2:${c}">${offBox(rowOn)}<span class="nm"><b>${esc(name)}</b><span class="sub">${esc(hint)}</span>${c===OFF.phone?`<span class="here">This ${deviceWord()}</span>`:''}${stored?`<span class="here">On this ${deviceWord()}</span>`:''}</span><span class="sz">${offMbText(one)}<small>${fmt(one)} plants</small></span></button>`;
       }).join('');
       if(best && best.n>n*0.6) kids+=`<p class="overlap">${esc(best.name)} alone is ${fmt(best.n)} of these ${fmt(n)} plants, ${offMbText(best.n)}.</p>`;
     }
@@ -1308,20 +1418,51 @@ function offlineScreen(){
   }).join('');
   const chosen=st.offAll || st.offSel.length;
   const footTitle=chosen?offTitle(sel):'Choose a pack';
-  const footMeta=chosen?(addN?`${fmt(addN)} ${addN===1?'plant':'plants'} · ${offMbText(addN)}${haveN?' · '+offMbText(haveN)+' already stored':''}${st.fg?'':' · Field Guide'}`:'Already on this phone'):'Everything, or any regions below. Shared plants count once.';
+  const footMeta=chosen?(addN?`${fmt(addN)} ${addN===1?'plant':'plants'} · ${offMbText(addN)}${haveN?' · '+offMbText(haveN)+' already stored':''}${st.fg?'':' · Field Guide'}`:`Already on this ${deviceWord()}`):'Everything, or any regions below. Shared plants count once.';
   const footBtn=st.offJob?'':`<button class="btn primary small" data-off="get" ${chosen&&addN?'':'style="opacity:.45"'}>${st.fg?'Download':'Field Guide'}</button>`;
-  return `<div class="back" data-go="me">${I.back}Person</div>
+  return `<div class="readable"><div class="back" data-go="me">${I.back}Person</div>
   <div class="pad"><span class="eyebrow">Field Guide</span><h2 class="q">Offline</h2>
-  <p class="hint" style="margin-top:0">Photos, plates and range maps, kept on this phone. The words come with them. A plant that grows in two regions is saved once, so two packs take less room than the sum. Downloads use Wi-Fi.</p></div>
+  <p class="hint" style="margin-top:0">Photos, plates and range maps, kept on this ${deviceWord()}. The words come with them. A plant that grows in two regions is saved once, so two packs take less room than the sum. Downloads use Wi-Fi.</p></div>
   ${gate}${job}${kept}
-  <button class="pack ${st.offAll?'on':''}" data-off="all">${offBox(st.offAll || have===null)}<span class="tx"><b>Everything</b><span class="meta">${fmt(OFF.total)} plants</span></span><span class="sz">${have===null?'On this phone':offMbText(OFF.total)}</span></button>
+  <button class="pack ${st.offAll?'on':''}" data-off="all">${offBox(st.offAll || have===null)}<span class="tx"><b>Everything</b><span class="meta">${fmt(OFF.total)} plants</span></span><span class="sz">${have===null?`On this ${deviceWord()}`:offMbText(OFF.total)}</span></button>
   ${phoneCard}
   <div class="pad" style="margin-top:8px"><span class="eyebrow">Or a part of the world</span></div>
   ${groups}
-  <div class="dlbar"><div class="tx"><b>${esc(footTitle)}</b>${esc(footMeta)}</div>${footBtn}</div>`;
+  <div class="dlbar"><div class="tx"><b>${esc(footTitle)}</b>${esc(footMeta)}</div>${footBtn}</div></div>`;
 }
 
 /* ---------- render ---------- */
+function deviceWord(){return st.device==='phone'?'phone':'iPad'}
+const DEVICES={
+  phone:{w:390,h:844,br:52,inset:12,gr:42},
+  'ipad-p':{w:834,h:1194,br:40,inset:16,gr:24},
+  'ipad-l':{w:1194,h:834,br:40,inset:16,gr:24},
+};
+function fit(){
+  const d=DEVICES[st.device]||DEVICES.phone;
+  const wide=window.innerWidth>860;
+  const notesW=wide?document.querySelector('.notes').offsetWidth:0;
+  const availW=Math.max(300, window.innerWidth-(wide?notesW+96:64));
+  const availH=Math.max(420, window.innerHeight-(wide?56:28));
+  const s=Math.min(1, availW/d.w, availH/d.h);
+  $('device').style.setProperty('--sc', s.toFixed(4));
+  const stage=$('stage');
+  stage.style.width=Math.round(d.w*s)+'px';
+  stage.style.height=Math.round(d.h*s)+'px';
+}
+function applyDevice(){
+  const d=DEVICES[st.device]||DEVICES.phone;
+  const el=$('device');
+  el.style.setProperty('--dw', d.w+'px');
+  el.style.setProperty('--dh', d.h+'px');
+  el.style.setProperty('--br', d.br+'px');
+  el.style.setProperty('--inset', d.inset+'px');
+  el.style.setProperty('--gr', d.gr+'px');
+  el.classList.toggle('ipad', st.device!=='phone');
+  el.classList.toggle('land', st.device==='ipad-l');
+  document.querySelectorAll('.devices button').forEach(b=>b.classList.toggle('on', b.dataset.device===st.device));
+  fit();
+}
 const TABS=[['find','Find',I.find],['book','Book',I.book],['seen','Seen',I.seen]];
 function render(){
   const scr=st.screen, sc=$('screen');
@@ -1330,11 +1471,16 @@ function render(){
   document.querySelector('.glass').classList.toggle('dk',st.theme=='dark'||(st.theme=='system'&&st.phoneDark));
   const dark=scr=='camera';
   $('status').className='status'+(dark?' dark':'');
-  const showTabs=!['camera','outside','species','fieldguide','search','signin','flower','inflorescence','offline','stats'].includes(scr);
+  const side=st.device==='ipad-l';
+  const phoneHide=['camera','outside','species','fieldguide','search','signin','flower','inflorescence','offline','stats'];
+  const showTabs=side?!['camera','signin'].includes(scr):!phoneHide.includes(scr);
   const u=st.seen.filter(r=>r.u).length;
   $('tabs').style.display=showTabs?'flex':'none';
   $('adbar').style.display=!st.fg&&['find','habitat','petal'].includes(scr)?'block':'none';
-  $('tabs').innerHTML=TABS.map(([k,l,ic])=>`<button class="${st.tab==k?'on':''}" data-tab="${k}">${ic}${k=='seen'&&u?`<span class="badge">${u}</span>`:''}<span>${l}</span></button>`).join('');
+  const personOn=['me','fieldguide','offline','signin'].includes(scr)||(scr==='stats'&&st.statsFrom==='me');
+  const sideBtn=side?`<button class="sideperson ${personOn?'on':''}" data-go="me">${I.person}<span>Person</span></button>`:'';
+  $('tabs').innerHTML=TABS.map(([k,l,ic])=>`<button class="${!personOn&&st.tab==k?'on':''}" data-tab="${k}">${ic}${k=='seen'&&u?`<span class="badge">${u}</span>`:''}<span>${l}</span></button>`).join('')+sideBtn;
+  document.querySelectorAll('.devices button').forEach(b=>b.classList.toggle('on', b.dataset.device===st.device));
   const ov=$('overlay');
   ov.innerHTML=st.sheet=='region'?regionSheet():st.sheet=='limit'?limitSheet():st.sheet=='other'?otherSheet():st.sheet=='notplant'?notPlantSheet():st.sheet=='share'?shareSheet():st.sheet=='withdraw'?withdrawSheet():st.sheet=='delete'?deleteSheet():st.sheet=='deleteAccount'?deleteAccountSheet():'';
   const idx=st.sheet=='region'?'regionSheet':st.sheet=='limit'?'limit':st.sheet=='notplant'?'notplant':st.sheet=='share'?'share':st.sheet=='delete'?'seenDelete':st.sheet=='deleteAccount'?'deleteAccount':(scr=='species'&&st.fromCamera)?'speciesCam':(scr=='seen'&&st.hideShared)?'seenHide':(scr=='stats'&&st.statsScope=='public')?'statsPublic':scr;
@@ -1413,10 +1559,21 @@ function demo(k){
 }
 
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-demo],[data-go],[data-tab],[data-color],[data-habitat],[data-petal],[data-sp],[data-sheet],[data-region],[data-wild],[data-hideshared],[data-view],[data-loc],[data-shoot],[data-confirm],[data-confirmsp],[data-del],[data-askdel],[data-askdelaccount],[data-delaccount],[data-pick],[data-undo],[data-seg],[data-ad],[data-fg],[data-sign],[data-slide],[data-jump],[data-goback],[data-schemaback],[data-schema],[data-seen],[data-share],[data-shsheet],[data-consent],[data-sendshare],[data-withdraw],[data-addseen],[data-list],[data-booklists],[data-toast],[data-close],[data-theme],[data-signstep],[data-signclose],[data-signwith],[data-off],[data-stats]');
+  const t=e.target.closest('[data-device],[data-demo],[data-go],[data-tab],[data-color],[data-habitat],[data-petal],[data-sp],[data-sheet],[data-region],[data-wild],[data-hideshared],[data-view],[data-loc],[data-shoot],[data-confirm],[data-confirmsp],[data-del],[data-askdel],[data-askdelaccount],[data-delaccount],[data-pick],[data-undo],[data-seg],[data-ad],[data-fg],[data-sign],[data-slide],[data-jump],[data-goback],[data-schemaback],[data-schema],[data-seen],[data-share],[data-shsheet],[data-consent],[data-sendshare],[data-withdraw],[data-addseen],[data-list],[data-booklists],[data-toast],[data-close],[data-theme],[data-signstep],[data-signclose],[data-signwith],[data-off],[data-stats]');
   if(!t) return;
   if(t.dataset.close&&e.target.closest('[data-stop]')) return;
   const d=t.dataset;
+  if(d.device){
+    st.device=d.device;
+    try{
+      const u=new URL(location.href);
+      if(st.device==='phone') u.searchParams.delete('device');
+      else u.searchParams.set('device', st.device);
+      history.replaceState(null,'',u);
+    }catch(err){}
+    applyDevice();
+    return render();
+  }
   if(d.demo) return demo(d.demo);
   if(d.close){st.sheet=null;render();return}
   if(d.theme){st.theme=d.theme;return render()}
@@ -1490,13 +1647,13 @@ document.addEventListener('click',e=>{
       if(!st.fg) return go('fieldguide');
       const have=offHave(), sel=offSel();
       const add=offMatch(offUnion(have, sel))-offMatch(have);
-      if(add<=0) return toast(st.offAll||st.offSel.length?'Already on this phone.':'Choose everything or a region.');
+      if(add<=0) return toast(st.offAll||st.offSel.length?`Already on this ${deviceWord()}.`:'Choose everything or a region.');
       const mb=Math.round(add*OFF.per/10)*10;
       st.offJob={title:offTitle(sel), plants:add, done:Math.max(10, Math.round(mb*0.52/10)*10), total:mb};
       return render();
     }
     if(k==='pause'){st.offJob=null;toast('Paused. Nothing new was stored.');return render()}
-    if(k==='remove'){st.offHave=[];st.offJob=null;toast('Removed from this phone.');return render()}
+    if(k==='remove'){st.offHave=[];st.offJob=null;toast(`Removed from this ${deviceWord()}.`);return render()}
   }
   if(d.toast) return toast(d.toast);
 });
@@ -1507,6 +1664,10 @@ $('tFG').onchange=e=>{st.fg=e.target.checked;render()};
 $('tNot').onchange=e=>{st.notPlant=e.target.checked};
 $('tDark').onchange=e=>{st.phoneDark=e.target.checked;render()};
 $('tDe').onchange=e=>{st.listLang=e.target.checked?'de':'en';if(st.screen=='list')st.list=(allLists().find(isYearList)||allLists()[0]).key;render()};
+const _dev=new URLSearchParams(location.search).get('device');
+st.device=['ipad-p','ipad-l'].includes(_dev)?_dev:'phone';
+applyDevice();
+window.addEventListener('resize',fit);
 render();
 </script>
 </body>

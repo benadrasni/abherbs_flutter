@@ -27,31 +27,29 @@ class FindPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final window = GuideWindow.of(context);
     final recent = (finds ?? const <GuideFind>[]).take(5).toList();
     final flowerLists = lists?.toList()?..sort(compareGuideLists);
-    return ListView(
-      padding: const EdgeInsets.only(bottom: 16),
+    final strings = S.of(context);
+    final seen = recent.isEmpty
+        ? null
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GuideSectionHeader(
+                title: strings.guide_seen_lately,
+                action: strings.guide_all_finds,
+                onAction: onOpenSeen,
+              ),
+              _FindStrip(finds: recent, onOpenSeen: onOpenSeen),
+            ],
+          );
+    final flowerListsView = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        GuideTitleBar(
-          title: const GuideWordmark(),
-          actionLabel: S.of(context).guide_account,
-          icon: Icons.person_outline,
-          onAction: () => openGuideAccount(context),
-        ),
-        const _SearchButton(),
-        _CameraCard(allowance: allowance),
-        _KeyCard(colorCounts: colorCounts),
-        if (recent.isNotEmpty) ...[
-          GuideSectionHeader(
-            title: S.of(context).guide_seen_lately,
-            action: S.of(context).guide_all_finds,
-            onAction: onOpenSeen,
-          ),
-          _FindStrip(finds: recent, onOpenSeen: onOpenSeen),
-        ],
         GuideSectionHeader(
-          title: S.of(context).custom_lists,
-          action: S.of(context).guide_all_lists,
+          title: strings.custom_lists,
+          action: strings.guide_all_lists,
           onAction: onOpenBook,
         ),
         if (flowerLists == null)
@@ -61,6 +59,50 @@ class FindPage extends StatelessWidget {
           )
         else if (flowerLists.isNotEmpty)
           _ListStrip(lists: flowerLists),
+      ],
+    );
+    return ListView(
+      padding: const EdgeInsets.only(bottom: 16),
+      children: [
+        GuideTitleBar(
+          title: const GuideWordmark(),
+          actionLabel: strings.guide_account,
+          icon: Icons.person_outline,
+          showAction: !window.wide,
+          onAction: () => openGuideAccount(context),
+        ),
+        if (window.tablet)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    const _SearchButton(),
+                    _CameraCard(allowance: allowance),
+                  ],
+                ),
+              ),
+              Expanded(child: _KeyCard(colorCounts: colorCounts)),
+            ],
+          )
+        else ...[
+          const _SearchButton(),
+          _CameraCard(allowance: allowance),
+          _KeyCard(colorCounts: colorCounts),
+        ],
+        if (window.wide && seen != null)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(flex: 85, child: seen),
+              Expanded(flex: 115, child: flowerListsView),
+            ],
+          )
+        else ...[
+          if (seen != null) seen,
+          flowerListsView,
+        ],
       ],
     );
   }
@@ -240,6 +282,82 @@ class _Dot extends StatelessWidget {
   }
 }
 
+/// The step label and "always free" sit at opposite ends. On a narrow
+/// phone the pair can be wider than the card, so the longer label
+/// ellipsizes instead of overflowing the row.
+class _KeyStepLine extends StatelessWidget {
+  final String step;
+  final String free;
+
+  const _KeyStepLine({required this.step, required this.free});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final stepStyle = GuideType.eyebrow(colors);
+    final freeStyle = stepStyle.copyWith(color: colors.moss);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxWidth = constraints.maxWidth;
+        final stepWidth = _oneLineWidth(context, step, stepStyle);
+        final freeWidth = _oneLineWidth(context, free, freeStyle);
+        if (!maxWidth.isFinite || stepWidth + freeWidth <= maxWidth) {
+          return Row(
+            children: [
+              Text(step, maxLines: 1, style: stepStyle),
+              const Spacer(),
+              Text(free, maxLines: 1, style: freeStyle),
+            ],
+          );
+        }
+        const gap = 8.0;
+        final room = (maxWidth - gap).clamp(0.0, maxWidth);
+        // Keep the shorter label whole and give the leftover to the longer one.
+        final stepSlot = stepWidth >= freeWidth
+            ? (room - freeWidth).clamp(0.0, room)
+            : stepWidth.clamp(0.0, room);
+        final freeSlot = (room - stepSlot).clamp(0.0, room);
+        return Row(
+          children: [
+            SizedBox(
+              width: stepSlot,
+              child: Text(
+                step,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: stepStyle,
+              ),
+            ),
+            const SizedBox(width: gap),
+            SizedBox(
+              width: freeSlot,
+              child: Text(
+                free,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.end,
+                style: freeStyle,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+double _oneLineWidth(BuildContext context, String text, TextStyle style) {
+  final painter = TextPainter(
+    text: TextSpan(text: text, style: style),
+    maxLines: 1,
+    textDirection: Directionality.of(context),
+    textScaler: MediaQuery.textScalerOf(context),
+  )..layout();
+  final width = painter.width;
+  painter.dispose();
+  return width;
+}
+
 class _KeyCard extends StatelessWidget {
   final Map<String, int>? colorCounts;
 
@@ -261,16 +379,9 @@ class _KeyCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Text(s.guide_key_step.toUpperCase(),
-                  style: GuideType.eyebrow(colors)),
-              const Spacer(),
-              Text(
-                s.guide_always_free.toUpperCase(),
-                style: GuideType.eyebrow(colors).copyWith(color: colors.moss),
-              ),
-            ],
+          _KeyStepLine(
+            step: s.guide_key_step.toUpperCase(),
+            free: s.guide_always_free.toUpperCase(),
           ),
           const SizedBox(height: 8),
           const GuideKeyStepper(filled: 1),
@@ -318,6 +429,9 @@ class _Swatch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
+    // White is nearly the paper color, so this disk is true white with a
+    // pencil ring instead of the faint hairline used on the other colors.
+    final white = id == '1';
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 3),
       child: Material(
@@ -336,9 +450,14 @@ class _Swatch extends StatelessWidget {
                       width: 46,
                       height: 46,
                       decoration: BoxDecoration(
-                        color: color,
+                        color: white ? const Color(0xFFFFFFFF) : color,
                         shape: BoxShape.circle,
-                        border: Border.all(color: const Color(0x1F000000)),
+                        border: Border.all(
+                          color: white
+                              ? colors.ink3.withValues(alpha: 0.55)
+                              : const Color(0x1F000000),
+                          width: white ? 1.5 : 1,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -381,59 +500,119 @@ class _FindStrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final window = GuideWindow.of(context);
+    if (!window.tablet) {
+      return SizedBox(
+        height: 180,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          itemCount: finds.length,
+          separatorBuilder: (_, __) => const SizedBox(width: 10),
+          itemBuilder: (context, index) =>
+              _card(context, finds[index], 118),
+        ),
+      );
+    }
+    final columns = window.wide ? 3 : 5;
+    return _GuideGrid(
+      columns: columns,
+      count: finds.length,
+      item: (index) => _card(context, finds[index], null),
+    );
+  }
+
+  Widget _card(BuildContext context, GuideFind find, double? edge) {
     final colors = GuideColors.of(context);
-    return SizedBox(
-      height: 180,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: finds.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 10),
-        itemBuilder: (context, index) {
-          final find = finds[index];
-          return SizedBox(
-            width: 118,
-            child: InkWell(
-              onTap: () {
-                // A name still waiting opens Seen, where it can be confirmed.
-                if (!find.confirmed) {
-                  onOpenSeen();
-                  return;
-                }
-                openGuidePlant(context, find.name);
+    final photo = edge == null
+        ? AspectRatio(
+            aspectRatio: 1,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return GuidePhoto(
+                  path: find.photoPath,
+                  width: constraints.maxWidth,
+                  height: constraints.maxHeight,
+                );
               },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Stack(
-                    children: [
-                      GuidePhoto(
-                        path: find.photoPath,
-                        width: 118,
-                        height: 118,
-                      ),
-                      if (!find.confirmed)
-                        const PositionedDirectional(
-                          start: 6,
-                          top: 6,
-                          child: _ToConfirmBadge(),
-                        ),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  GuideName(label: find.label, latinName: find.name),
-                  const SizedBox(height: 2),
-                  Text(
-                    guideWhen(context, find.when),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 11, color: colors.ink3),
+            ),
+          )
+        : GuidePhoto(path: find.photoPath, width: edge, height: edge);
+    final card = InkWell(
+      onTap: () {
+        // A name still waiting opens Seen, where it can be confirmed.
+        if (!find.confirmed) {
+          onOpenSeen();
+          return;
+        }
+        openGuidePlant(context, find.name);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              photo,
+              if (!find.confirmed)
+                const PositionedDirectional(
+                  start: 6,
+                  top: 6,
+                  child: _ToConfirmBadge(),
+                ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          GuideName(label: find.label, latinName: find.name),
+          const SizedBox(height: 2),
+          Text(
+            guideWhen(context, find.when),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 11, color: colors.ink3),
+          ),
+        ],
+      ),
+    );
+    if (edge == null) return card;
+    return SizedBox(width: edge, child: card);
+  }
+}
+
+class _GuideGrid extends StatelessWidget {
+  final int columns;
+  final int count;
+  final Widget Function(int index) item;
+
+  const _GuideGrid({
+    required this.columns,
+    required this.count,
+    required this.item,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final rows = (count / columns).ceil();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        children: [
+          for (var row = 0; row < rows; row++) ...[
+            if (row > 0) const SizedBox(height: 12),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (var column = 0; column < columns; column++) ...[
+                  if (column > 0) const SizedBox(width: 12),
+                  Expanded(
+                    child: row * columns + column < count
+                        ? item(row * columns + column)
+                        : const SizedBox.shrink(),
                   ),
                 ],
-              ),
+              ],
             ),
-          );
-        },
+          ],
+        ],
       ),
     );
   }
@@ -473,97 +652,125 @@ class _ListStrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final window = GuideWindow.of(context);
+    if (!window.tablet) {
+      return SizedBox(
+        height: 148,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          itemCount: lists.length,
+          separatorBuilder: (_, __) => const SizedBox(width: 10),
+          itemBuilder: (context, index) => _card(context, lists[index], 150),
+        ),
+      );
+    }
+    final columns = window.columns(phone: 1, tablet: 4, wide: 3);
+    return _GuideGrid(
+      columns: columns,
+      count: lists.length,
+      item: (index) => _card(context, lists[index], null),
+    );
+  }
+
+  Widget _card(BuildContext context, GuideListCover cover, double? edge) {
     final colors = GuideColors.of(context);
-    return SizedBox(
-      height: 148,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: lists.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 10),
-        itemBuilder: (context, index) {
-          final cover = lists[index];
-          final title = guideListTitle(context, cover);
-          return SizedBox(
-            width: 150,
-            child: InkWell(
-              onTap: () => openGuideList(
-                context,
-                cover,
-                backLabel: S.of(context).guide_tab_find,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: cover.isNew
-                          ? Border.all(color: colors.gold, width: 2)
-                          : null,
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: SizedBox(
-                        width: 150,
-                        height: 96,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            GuidePhoto(
-                              path: cover.photoPath,
-                              width: 150,
-                              height: 96,
-                              radius: 0,
-                            ),
-                            const DecoratedBox(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Color(0x00000000),
-                                    Color(0x99000000)
-                                  ],
-                                  stops: [0.45, 1],
-                                ),
-                              ),
-                            ),
-                            PositionedDirectional(
-                              start: 9,
-                              end: 9,
-                              bottom: 7,
-                              child: Text(
-                                title,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontFamily: GuideType.serif,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 15,
-                                  height: 1.1,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    guideListSubtitle(context, cover),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: 12, height: 1.25, color: colors.ink3),
-                  ),
-                ],
-              ),
+    final title = guideListTitle(context, cover);
+    final coverBox = edge == null
+        ? AspectRatio(
+            aspectRatio: 16 / 10,
+            child: _cover(context, cover, title, null),
+          )
+        : _cover(context, cover, title, edge);
+    final card = InkWell(
+      onTap: () => openGuideList(
+        context,
+        cover,
+        backLabel: S.of(context).guide_tab_find,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          coverBox,
+          const SizedBox(height: 5),
+          Text(
+            guideListSubtitle(context, cover),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style:
+                TextStyle(fontSize: 12, height: 1.25, color: colors.ink3),
+          ),
+        ],
+      ),
+    );
+    if (edge == null) return card;
+    return SizedBox(width: edge, child: card);
+  }
+
+  Widget _cover(
+    BuildContext context,
+    GuideListCover cover,
+    String title,
+    double? width,
+  ) {
+    final colors = GuideColors.of(context);
+    Widget photo(double w, double h) => GuidePhoto(
+          path: cover.photoPath,
+          width: w,
+          height: h,
+          radius: 0,
+        );
+    final art = width == null
+        ? LayoutBuilder(
+            builder: (context, constraints) => photo(
+              constraints.maxWidth,
+              constraints.maxHeight,
             ),
-          );
-        },
+          )
+        : photo(width, 96);
+    final frame = Stack(
+      fit: StackFit.expand,
+      children: [
+        art,
+        const DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0x00000000), Color(0x99000000)],
+              stops: [0.45, 1],
+            ),
+          ),
+        ),
+        PositionedDirectional(
+          start: 9,
+          end: 9,
+          bottom: 7,
+          child: Text(
+            title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontFamily: GuideType.serif,
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
+              height: 1.1,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
+    );
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: cover.isNew ? Border.all(color: colors.gold, width: 2) : null,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: width == null
+            ? frame
+            : SizedBox(width: width, height: 96, child: frame),
       ),
     );
   }

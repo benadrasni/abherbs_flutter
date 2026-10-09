@@ -366,15 +366,19 @@ class _SeenPageState extends State<SeenPage> {
     await showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.transparent,
+      isScrollControlled: GuideWindow.of(context).tablet,
       builder: (sheetContext) {
         return GuideTheme(
-          child: _DeleteSheet(
+          child: guideSheetAlign(
+            sheetContext,
+            _DeleteSheet(
             title: strings.guide_seen_delete_title,
             body: body,
             onDelete: () {
               Navigator.pop(sheetContext);
               unawaited(_delete(find));
             },
+          ),
           ),
         );
       },
@@ -478,11 +482,14 @@ class _SeenPageState extends State<SeenPage> {
       isScrollControlled: true,
       builder: (sheetContext) {
         return GuideTheme(
-          child: _ShareSheet(
+          child: guideSheetAlign(
+            sheetContext,
+            _ShareSheet(
             find: find,
             title: title,
             detail: _detailOf(context, find),
             onSend: () => _sendShare(sheetContext, find),
+          ),
           ),
         );
       },
@@ -515,16 +522,20 @@ class _SeenPageState extends State<SeenPage> {
     await showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.transparent,
+      isScrollControlled: GuideWindow.of(context).tablet,
       builder: (sheetContext) {
         return GuideTheme(
-          child: _WithdrawSheet(
-            title: review
-                ? S.of(context).guide_seen_withdraw_review_title
-                : S.of(context).guide_seen_is_sighting(title),
-            body: review
-                ? S.of(context).guide_seen_withdraw_review_body
-                : S.of(context).guide_seen_withdraw_body,
-            onWithdraw: () => _sendWithdraw(sheetContext, find),
+          child: guideSheetAlign(
+            sheetContext,
+            _WithdrawSheet(
+              title: review
+                  ? S.of(context).guide_seen_withdraw_review_title
+                  : S.of(context).guide_seen_is_sighting(title),
+              body: review
+                  ? S.of(context).guide_seen_withdraw_review_body
+                  : S.of(context).guide_seen_withdraw_body,
+              onWithdraw: () => _sendWithdraw(sheetContext, find),
+            ),
           ),
         );
       },
@@ -1110,10 +1121,13 @@ class _ShareSheetState extends State<_ShareSheet> {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final bottom = MediaQuery.paddingOf(context).bottom;
+    final tablet = GuideWindow.of(context).tablet;
     return DecoratedBox(
       decoration: BoxDecoration(
         color: colors.paper,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+        borderRadius: tablet
+            ? BorderRadius.circular(22)
+            : const BorderRadius.vertical(top: Radius.circular(18)),
       ),
       child: Padding(
         padding: EdgeInsets.fromLTRB(20, 10, 20, 16 + bottom),
@@ -1121,17 +1135,19 @@ class _ShareSheetState extends State<_ShareSheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Center(
-              child: Container(
-                width: 36,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: colors.rule,
-                  borderRadius: BorderRadius.circular(2),
+            if (!tablet) ...[
+              Center(
+                child: Container(
+                  width: 36,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: colors.rule,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 14),
+              const SizedBox(height: 14),
+            ],
             Row(
               children: [
                 GuidePhoto(
@@ -1277,10 +1293,13 @@ class _DeleteSheet extends StatelessWidget {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final bottom = MediaQuery.paddingOf(context).bottom;
+    final tablet = GuideWindow.of(context).tablet;
     return DecoratedBox(
       decoration: BoxDecoration(
         color: colors.paper,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+        borderRadius: tablet
+            ? BorderRadius.circular(22)
+            : const BorderRadius.vertical(top: Radius.circular(18)),
       ),
       child: Padding(
         padding: EdgeInsets.fromLTRB(20, 10, 20, 16 + bottom),
@@ -1288,17 +1307,19 @@ class _DeleteSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Center(
-              child: Container(
-                width: 36,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: colors.rule,
-                  borderRadius: BorderRadius.circular(2),
+            if (!tablet) ...[
+              Center(
+                child: Container(
+                  width: 36,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: colors.rule,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 14),
+              const SizedBox(height: 14),
+            ],
             Text(title, style: GuideType.question(colors)),
             const SizedBox(height: 8),
             Text(
@@ -1339,10 +1360,13 @@ class _WithdrawSheet extends StatelessWidget {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final bottom = MediaQuery.paddingOf(context).bottom;
+    final tablet = GuideWindow.of(context).tablet;
     return DecoratedBox(
       decoration: BoxDecoration(
         color: colors.paper,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+        borderRadius: tablet
+            ? BorderRadius.circular(22)
+            : const BorderRadius.vertical(top: Radius.circular(18)),
       ),
       child: Padding(
         padding: EdgeInsets.fromLTRB(20, 10, 20, 16 + bottom),
@@ -1350,17 +1374,19 @@ class _WithdrawSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Center(
-              child: Container(
-                width: 36,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: colors.rule,
-                  borderRadius: BorderRadius.circular(2),
+            if (!tablet) ...[
+              Center(
+                child: Container(
+                  width: 36,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: colors.rule,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 14),
+              const SizedBox(height: 14),
+            ],
             Text(title, style: GuideType.question(colors)),
             const SizedBox(height: 8),
             Text(

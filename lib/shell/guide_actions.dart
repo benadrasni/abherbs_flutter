@@ -85,7 +85,8 @@ void openGuideAccount(BuildContext context) {
         onLanguage: openGuideLanguage,
         onFieldGuide: openGuideFieldGuide,
         onOffline: openGuideOffline,
-        onStatistics: openGuideStatistics,
+        onStatistics: (context) =>
+            openGuideStatistics(context, fromPerson: true),
       ),
     ),
   );
@@ -167,6 +168,7 @@ Future<void> openGuideStatistics(
   List<GuideSeenFind>? finds,
   bool sightings = false,
   String? backLabel,
+  bool fromPerson = false,
 }) {
   return Navigator.push(
     context,
@@ -175,6 +177,7 @@ Future<void> openGuideStatistics(
       builder: (context) => GuideStatsPage(
         finds: finds,
         sightings: sightings,
+        fromPerson: fromPerson,
         backLabel: backLabel ?? S.of(context).guide_back,
       ),
     ),

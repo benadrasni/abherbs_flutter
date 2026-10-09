@@ -165,13 +165,18 @@ class _GuideSearchPageState extends State<GuideSearchPage> {
         : S.of(context).guide_tab_find;
     return GuideTheme(
       child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              _BackButton(label: backLabel),
-              _QueryField(controller: _controller),
-              Expanded(child: _body()),
-            ],
+        body: guideWithRail(
+          context,
+          child: SafeArea(
+            child: GuideReadable(
+              child: Column(
+                children: [
+                  _BackButton(label: backLabel),
+                  _QueryField(controller: _controller),
+                  Expanded(child: _body()),
+                ],
+              ),
+            ),
           ),
         ),
       ),

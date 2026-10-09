@@ -169,9 +169,11 @@ class _SchemaScaffold extends StatelessWidget {
                   color: colors.ink3,
                 );
           return Scaffold(
-            body: SafeArea(
-              bottom: false,
-              child: Column(
+            body: guideWithRail(
+              context,
+              child: SafeArea(
+                bottom: false,
+                child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   ColoredBox(
@@ -199,6 +201,7 @@ class _SchemaScaffold extends StatelessWidget {
                   Expanded(child: body),
                 ],
               ),
+            ),
             ),
           );
         },
@@ -235,34 +238,32 @@ class _FlowerBody extends StatelessWidget {
       strings.legend_flower_17,
     ];
     final bottom = MediaQuery.paddingOf(context).bottom;
-    return ListView(
-      padding: EdgeInsets.only(bottom: 28 + bottom),
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 2, 20, 0),
-          child: DecoratedBox(
-            key: guideFlowerWellKey,
-            decoration: BoxDecoration(
-              color: dark ? Colors.transparent : GuidePalette.paper,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 280),
-                child: Image.asset(
-                  dark ? guideFlowerSchemaDarkAsset : guideFlowerSchemaAsset,
-                  key: guideFlowerPlateKey,
-                  fit: BoxFit.contain,
-                  width: double.infinity,
-                ),
-              ),
+    final tablet = GuideWindow.of(context).tablet;
+    final figure = Padding(
+      padding: EdgeInsets.fromLTRB(tablet ? 12 : 20, 2, tablet ? 8 : 20, 0),
+      child: DecoratedBox(
+        key: guideFlowerWellKey,
+        decoration: BoxDecoration(
+          color: dark ? Colors.transparent : GuidePalette.paper,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: tablet ? 520 : 280),
+            child: Image.asset(
+              dark ? guideFlowerSchemaDarkAsset : guideFlowerSchemaAsset,
+              key: guideFlowerPlateKey,
+              fit: BoxFit.contain,
+              width: double.infinity,
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-          child: Column(
+      ),
+    );
+    final parts = Padding(
+      padding: EdgeInsets.fromLTRB(tablet ? 8 : 20, 8, tablet ? 12 : 20, 0),
+      child: Column(
             children: [
               for (var row = 0; row < 9; row++)
                 IntrinsicHeight(
@@ -286,6 +287,22 @@ class _FlowerBody extends StatelessWidget {
                 ),
             ],
           ),
+    );
+    if (!tablet) {
+      return ListView(
+        padding: EdgeInsets.only(bottom: 28 + bottom),
+        children: [figure, parts],
+      );
+    }
+    return ListView(
+      padding: EdgeInsets.only(bottom: 28 + bottom),
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(flex: 115, child: figure),
+            Expanded(flex: 85, child: parts),
+          ],
         ),
       ],
     );
@@ -356,15 +373,17 @@ class _InflorescenceBody extends StatelessWidget {
     final primary = types.isEmpty ? '' : types.first;
     final matched = types.toSet();
     final bottom = MediaQuery.paddingOf(context).bottom;
+    final columns =
+        GuideWindow.of(context).columns(phone: 3, tablet: 4, wide: 6);
     return ListView(
       padding: EdgeInsets.fromLTRB(16, 0, 16, 28 + bottom),
       children: [
-        for (var row = 0; row < guideInflorescenceKeys.length; row += 3) ...[
+        for (var row = 0; row < guideInflorescenceKeys.length; row += columns) ...[
           if (row > 0) const SizedBox(height: 8),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              for (var column = 0; column < 3; column++) ...[
+              for (var column = 0; column < columns; column++) ...[
                 if (column > 0) const SizedBox(width: 8),
                 Expanded(
                   child: row + column < guideInflorescenceKeys.length

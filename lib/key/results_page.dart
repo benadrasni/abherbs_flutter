@@ -171,7 +171,8 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
   }
 
   /// Family, genus, and editorial lists stay clear. The key's result list
-  /// keeps one banner after the sixth plant.
+  /// keeps one banner after the third row, or at the end when the list is
+  /// shorter than that.
   bool get _showAd => !_isList && (widget.showAd ?? Purchases.showsAds());
 
   int get _month => widget.month ?? DateTime.now().month;
@@ -542,14 +543,19 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
   }
 
   List<Widget> _grid(S strings, GuideResultList arranged) {
-    final slots = guideResultSlots(arranged, showAd: _showAd);
+    final columns =
+        GuideWindow.of(context).columns(phone: 2, tablet: 3, wide: 4);
+    final slots = guideResultSlots(
+      arranged,
+      showAd: _showAd,
+      columns: columns,
+    );
     final rows = <Widget>[];
-    GuideResultPlant? pending;
+    final pending = <GuideResultPlant>[];
     void flush() {
-      final left = pending;
-      if (left == null) return;
-      rows.add(_pair(left, null));
-      pending = null;
+      if (pending.isEmpty) return;
+      rows.add(_row(List<GuideResultPlant>.of(pending), columns));
+      pending.clear();
     }
 
     for (final slot in slots) {
@@ -563,12 +569,8 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
           child: widget.adBuilder?.call(context) ?? AppBannerAd(),
         ));
       } else if (slot is GuidePlantSlot) {
-        if (pending == null) {
-          pending = slot.plant;
-        } else {
-          rows.add(_pair(pending!, slot.plant));
-          pending = null;
-        }
+        pending.add(slot.plant);
+        if (pending.length == columns) flush();
       }
     }
     flush();
@@ -610,15 +612,18 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
     );
   }
 
-  Widget _pair(GuideResultPlant left, GuideResultPlant? right) {
+  Widget _row(List<GuideResultPlant> plants, int columns) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(child: _cell(left)),
-          const SizedBox(width: 12),
-          Expanded(child: right == null ? const SizedBox() : _cell(right)),
+          for (var i = 0; i < columns; i++) ...[
+            if (i > 0) const SizedBox(width: 12),
+            Expanded(
+              child: i < plants.length ? _cell(plants[i]) : const SizedBox(),
+            ),
+          ],
         ],
       ),
     );
@@ -1011,29 +1016,42 @@ class _RegionSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
-    final height = MediaQuery.sizeOf(context).height * 0.86;
+    final tablet = GuideWindow.of(context).tablet;
+    final screen = MediaQuery.sizeOf(context).height;
+    final height = tablet
+        ? (screen * 0.88 < 680 ? screen * 0.88 : 680.0)
+        : screen * 0.86;
     return Align(
-      alignment: Alignment.bottomCenter,
-      child: Material(
+      alignment: tablet ? Alignment.center : Alignment.bottomCenter,
+      child: Padding(
+        padding: tablet ? const EdgeInsets.all(32) : EdgeInsets.zero,
+        child: Material(
         color: colors.paper,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(22)),
+        borderRadius: tablet
+            ? BorderRadius.circular(22)
+            : const BorderRadius.vertical(top: Radius.circular(22)),
         clipBehavior: Clip.antiAlias,
         child: ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: height),
+          constraints: BoxConstraints(
+            maxWidth: tablet ? 520 : double.infinity,
+            maxHeight: height,
+          ),
           child: ListView(
             shrinkWrap: true,
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 34),
             children: [
-              Center(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: colors.rule,
-                    borderRadius: BorderRadius.all(Radius.circular(3)),
+              if (!tablet) ...[
+                Center(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: colors.rule,
+                      borderRadius: BorderRadius.all(Radius.circular(3)),
+                    ),
+                    child: SizedBox(width: 40, height: 5),
                   ),
-                  child: SizedBox(width: 40, height: 5),
                 ),
-              ),
-              const SizedBox(height: 14),
+                const SizedBox(height: 14),
+              ],
               Text(
                 title,
                 style: TextStyle(
@@ -1105,6 +1123,7 @@ class _RegionSheet extends StatelessWidget {
                 ],
             ],
           ),
+        ),
         ),
       ),
     );

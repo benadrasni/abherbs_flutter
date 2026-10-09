@@ -213,17 +213,7 @@ class _BookPageState extends State<BookPage> {
         final rows = widget.segment == GuideBookSegment.families
             ? taxa.families
             : taxa.genera;
-        return SliverList.builder(
-          itemCount: rows.length,
-          itemBuilder: (context, index) {
-            final taxon = rows[index];
-            return _TaxonRow(
-              taxon: taxon,
-              note: _genusNote(taxon),
-              onTap: () => _openTaxon(context, taxon),
-            );
-          },
-        );
+        return _taxonSliver(rows);
       case GuideBookSegment.lists:
         final lists = widget.lists;
         if (lists == null) return _waiting();
@@ -231,20 +221,101 @@ class _BookPageState extends State<BookPage> {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
         }
         final ordered = lists.toList()..sort(compareGuideLists);
+        final columns =
+            GuideWindow.of(context).columns(phone: 1, tablet: 2, wide: 3);
+        if (columns == 1) {
+          return SliverPadding(
+            padding: const EdgeInsets.only(top: 6),
+            sliver: SliverList.builder(
+              itemCount: ordered.length,
+              itemBuilder: (context, index) =>
+                  _listCard(context, ordered[index]),
+            ),
+          );
+        }
         return SliverPadding(
-          padding: const EdgeInsets.only(top: 6),
-          sliver: SliverList.builder(
-            itemCount: ordered.length,
-            itemBuilder: (context, index) =>
-                _listCard(context, ordered[index]),
+          padding: const EdgeInsets.fromLTRB(10, 6, 10, 0),
+          sliver: _chunkedSliver(
+            count: ordered.length,
+            columns: columns,
+            item: (context, index) => _listCard(
+              context,
+              ordered[index],
+              padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 12),
+            ),
           ),
         );
     }
   }
 
-  Widget _listCard(BuildContext context, GuideListCover cover) {
+  Widget _taxonSliver(List<GuideSearchTaxon> rows) {
+    final columns =
+        GuideWindow.of(context).columns(phone: 1, tablet: 2, wide: 3);
+    if (columns == 1) {
+      return SliverList.builder(
+        itemCount: rows.length,
+        itemBuilder: (context, index) {
+          final taxon = rows[index];
+          return _TaxonRow(
+            taxon: taxon,
+            note: _genusNote(taxon),
+            onTap: () => _openTaxon(context, taxon),
+          );
+        },
+      );
+    }
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      sliver: _chunkedSliver(
+        count: rows.length,
+        columns: columns,
+        item: (context, index) {
+          final taxon = rows[index];
+          return _TaxonRow(
+            taxon: taxon,
+            note: _genusNote(taxon),
+            onTap: () => _openTaxon(context, taxon),
+            padding: const EdgeInsetsDirectional.fromSTEB(10, 9, 10, 9),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _chunkedSliver({
+    required int count,
+    required int columns,
+    required Widget Function(BuildContext context, int index) item,
+  }) {
+    final rows = (count / columns).ceil();
+    return SliverList.builder(
+      itemCount: rows,
+      itemBuilder: (context, row) {
+        final start = row * columns;
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (var column = 0; column < columns; column++)
+              Expanded(
+                child: start + column < count
+                    ? item(context, start + column)
+                    : const SizedBox.shrink(),
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _listCard(
+    BuildContext context,
+    GuideListCover cover, {
+    EdgeInsetsGeometry padding =
+        const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 12),
+  }) {
     return _ListCard(
       cover: cover,
+      padding: padding,
       onTap: () {
         final open = widget.onOpenList;
         if (open != null) {
@@ -403,9 +474,14 @@ class _TaxonRow extends StatelessWidget {
   final GuideSearchTaxon taxon;
   final String? note;
   final VoidCallback onTap;
+  final EdgeInsetsGeometry padding;
 
-  const _TaxonRow(
-      {required this.taxon, required this.note, required this.onTap});
+  const _TaxonRow({
+    required this.taxon,
+    required this.note,
+    required this.onTap,
+    this.padding = const EdgeInsetsDirectional.fromSTEB(20, 9, 20, 9),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -415,7 +491,7 @@ class _TaxonRow extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(20, 9, 20, 9),
+        padding: padding,
         child: Row(
           children: [
             _Plate(
@@ -508,8 +584,13 @@ class _Plate extends StatelessWidget {
 class _ListCard extends StatelessWidget {
   final GuideListCover cover;
   final VoidCallback onTap;
+  final EdgeInsetsGeometry padding;
 
-  const _ListCard({required this.cover, required this.onTap});
+  const _ListCard({
+    required this.cover,
+    required this.onTap,
+    this.padding = const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 12),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -518,7 +599,7 @@ class _ListCard extends StatelessWidget {
         ? cover.thumbs.take(4).toList()
         : (cover.photoPath == null ? const <String>[] : [cover.photoPath!]);
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 12),
+      padding: padding,
       child: Material(
         color: colors.cream,
         clipBehavior: Clip.antiAlias,

@@ -207,8 +207,12 @@ class _GuideLanguagePageState extends State<GuideLanguagePage> {
     final phoneSelected = widget.selectedKey.isEmpty;
     return GuideTheme(
       child: Scaffold(
-        body: SafeArea(
-          child: Column(
+        body: guideWithRail(
+          context,
+          personOn: true,
+          child: SafeArea(
+            child: GuideReadable(
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GuideBackButton(label: strings.guide_back),
@@ -280,6 +284,8 @@ class _GuideLanguagePageState extends State<GuideLanguagePage> {
             ],
           ),
         ),
+      ),
+    ),
       ),
     );
   }

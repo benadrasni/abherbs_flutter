@@ -6,6 +6,7 @@ import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/field_guide/guide_field_guide.dart';
 import 'package:abherbs_flutter/seen/guide_private_photos.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
+import 'package:abherbs_flutter/shell/guide_widgets.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/purchase/store_account.dart';
 import 'package:abherbs_flutter/purchase/store_proof.dart';
@@ -272,9 +273,16 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
           final colors = GuideColors.of(context);
           return Scaffold(
             backgroundColor: colors.paper,
-            body: SafeArea(
-              bottom: false,
-              child: _body(context),
+            body: guideWithRail(
+              context,
+              personOn: true,
+              child: SafeArea(
+                bottom: false,
+                child: GuideReadable(
+                  maxWidth: 880,
+                  child: _body(context),
+                ),
+              ),
             ),
           );
         },

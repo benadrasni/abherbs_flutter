@@ -16,6 +16,7 @@ import 'package:intl/intl.dart' hide TextDirection;
 class GuideStatsPage extends StatefulWidget {
   final List<GuideSeenFind>? finds;
   final bool sightings;
+  final bool fromPerson;
   final String backLabel;
   final Future<List<GuideSeenFind>> Function(String languageCode) loadFinds;
   final Future<GuideSightingsLoad> Function() loadSightings;
@@ -27,6 +28,7 @@ class GuideStatsPage extends StatefulWidget {
     super.key,
     this.finds,
     this.sightings = false,
+    this.fromPerson = false,
     required this.backLabel,
     this.loadFinds = loadGuideSeen,
     this.loadSightings = loadGuideSightings,
@@ -199,8 +201,12 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
     return GuideTheme(
       navigationColor: (colors) => colors.cream,
       child: Scaffold(
-        body: SafeArea(
-          child: ListView(
+        body: guideWithRail(
+          context,
+          personOn: widget.fromPerson,
+          child: SafeArea(
+            child: GuideReadable(
+              child: ListView(
             padding: const EdgeInsets.only(bottom: 24),
             children: [
               GuideBackButton(label: widget.backLabel),
@@ -227,7 +233,9 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
           ),
         ),
       ),
-    );
+    ),
+  ),
+);
   }
 
   String _note(S strings, GuideNotebookStats? stats) {
@@ -813,10 +821,9 @@ class _Countries extends StatelessWidget {
     for (final row in rows) {
       if (row.count > maxCount) maxCount = row.count;
     }
-    return Column(
-      children: [
-        for (final row in rows)
-          Padding(
+    final tiles = [
+      for (final row in rows)
+        Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(20, 8, 20, 8),
             child: Row(
               children: [
@@ -851,6 +858,14 @@ class _Countries extends StatelessWidget {
               ],
             ),
           ),
+    ];
+    if (!GuideWindow.of(context).wide) return Column(children: tiles);
+    final mid = (tiles.length / 2).ceil();
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(child: Column(children: tiles.sublist(0, mid))),
+        Expanded(child: Column(children: tiles.sublist(mid))),
       ],
     );
   }

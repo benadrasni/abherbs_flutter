@@ -455,9 +455,12 @@ class _GuideSignInPageState extends State<GuideSignInPage> {
               backgroundColor: colors.paper,
               body: SafeArea(
                 bottom: false,
-                child: _step == _Step.providers
-                    ? _providers(context)
-                    : _form(context),
+                child: GuideReadable(
+                  maxWidth: 880,
+                  child: _step == _Step.providers
+                      ? _providers(context)
+                      : _form(context),
+                ),
               ),
             ),
           );

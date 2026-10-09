@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/seen/guide_private_photos.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
+import 'package:abherbs_flutter/shell/guide_actions.dart';
 import 'package:abherbs_flutter/shell/app_version.dart';
 import 'package:abherbs_flutter/shell/app_version_check.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
@@ -114,6 +115,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     GuideTabs.show = null;
     GuideTabs.showSeen = null;
     GuideTabs.refreshSeen = null;
+    GuideTabs.openPerson = null;
     GuideTabs.unconfirmed.value = 0;
     guideGuestFreeRemaining.removeListener(_onGuestFree);
     Purchases.namesRevision.removeListener(_onNames);
@@ -201,6 +203,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   }
 
   void _go(int index) {
+    GuideTabs.index = index;
     setState(() {
       _opened.add(index);
       _index = index;
@@ -213,6 +216,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
 
   /// Find’s All lists opens Book on the lists of flowers.
   void _openLists() {
+    GuideTabs.index = 1;
     setState(() {
       _bookSegment = GuideBookSegment.lists;
       _opened.add(1);
@@ -411,63 +415,75 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
       _loadFinds();
       _loadSeen();
     };
+    GuideTabs.openPerson = openGuideAccount;
+    GuideTabs.index = _index;
     final prompt = _versionPrompt;
+    final wide = GuideWindow.of(context).wide;
+    final showAd = (_index == 0 || _index == 1) && Purchases.showsAds();
+    final pages = Column(
+      children: [
+        if (prompt == VersionPrompt.banner)
+          VersionBanner(
+            onUpdate: () => openAppUpdate(requiredUpdate: false),
+            onDismiss: _dismissVersionBanner,
+          ),
+        Expanded(
+          child: IndexedStack(
+            index: _index,
+            sizing: StackFit.expand,
+            children: [
+              FindPage(
+                colorCounts: _colorCounts,
+                lists: _lists,
+                finds: _finds,
+                allowance: guideCameraLiveAllowance(
+                  guestFree: guideGuestFreeRemaining.value,
+                ),
+                onOpenBook: _openLists,
+                onOpenSeen: () => _go(2),
+              ),
+              _opened.contains(1)
+                  ? BookPage(
+                      lists: _lists,
+                      segment: _bookSegment,
+                      onSegment: (segment) {
+                        if (_bookSegment == segment) return;
+                        setState(() => _bookSegment = segment);
+                      },
+                      onOpenFind: () => _go(0),
+                    )
+                  : const SizedBox.shrink(),
+              _opened.contains(2)
+                  ? SeenPage(
+                      finds: _notebook,
+                      signedIn: Auth.appUser != null,
+                      fieldGuide: Purchases.syncsSeenPhotos(),
+                    )
+                  : const SizedBox.shrink(),
+            ],
+          ),
+        ),
+      ],
+    );
     return GuideTheme(
       navigationColor: (colors) => colors.cream,
       child: Scaffold(
         body: SafeArea(
           bottom: false,
-          child: Column(
-            children: [
-              if (prompt == VersionPrompt.banner)
-                VersionBanner(
-                  onUpdate: () => openAppUpdate(requiredUpdate: false),
-                  onDismiss: _dismissVersionBanner,
-                ),
-              Expanded(
-                child: IndexedStack(
-                  index: _index,
-                  sizing: StackFit.expand,
-                  children: [
-                    FindPage(
-                      colorCounts: _colorCounts,
-                      lists: _lists,
-                      finds: _finds,
-                      allowance: guideCameraLiveAllowance(
-                        guestFree: guideGuestFreeRemaining.value,
-                      ),
-                      onOpenBook: _openLists,
-                      onOpenSeen: () => _go(2),
-                    ),
-                    _opened.contains(1)
-                        ? BookPage(
-                            lists: _lists,
-                            segment: _bookSegment,
-                            onSegment: (segment) {
-                              if (_bookSegment == segment) return;
-                              setState(() => _bookSegment = segment);
-                            },
-                            onOpenFind: () => _go(0),
-                          )
-                        : const SizedBox.shrink(),
-                    _opened.contains(2)
-                        ? SeenPage(
-                            finds: _notebook,
-                            signedIn: Auth.appUser != null,
-                            fieldGuide: Purchases.syncsSeenPhotos(),
-                          )
-                        : const SizedBox.shrink(),
-                  ],
-                ),
-              ),
-            ],
+          child: guideWithRail(
+            context,
+            showAd: wide && showAd,
+            onSelect: _go,
+            child: pages,
           ),
         ),
-        bottomNavigationBar: GuideBottomBar(
-          index: _index,
-          showAd: (_index == 0 || _index == 1) && Purchases.showsAds(),
-          onSelect: _go,
-        ),
+        bottomNavigationBar: wide
+            ? null
+            : GuideBottomBar(
+                index: _index,
+                showAd: showAd,
+                onSelect: _go,
+              ),
       ),
     );
   }

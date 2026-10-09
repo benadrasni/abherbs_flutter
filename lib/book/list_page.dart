@@ -170,13 +170,14 @@ class _GuideNewPageState extends State<GuideNewPage> {
     if (days == null && _loading) return const [_Waiting()];
     if (days == null && _failed) return [_Retry(onRetry: _load)];
     if (days == null) return const [];
+    final columns =
+        GuideWindow.of(context).columns(phone: 2, tablet: 3, wide: 4);
     final rows = <Widget>[];
-    GuideResultPlant? pending;
+    final pending = <GuideResultPlant>[];
     void flush() {
-      final left = pending;
-      if (left == null) return;
-      rows.add(_pair(left, null));
-      pending = null;
+      if (pending.isEmpty) return;
+      rows.add(_plantRow(columns, [for (final plant in pending) _cell(plant)]));
+      pending.clear();
     }
 
     for (var i = 0; i < days.length; i++) {
@@ -185,30 +186,12 @@ class _GuideNewPageState extends State<GuideNewPage> {
       flush();
       rows.add(_DateHeader(day: day, first: rows.isEmpty));
       for (final plant in day.plants) {
-        if (pending == null) {
-          pending = plant;
-        } else {
-          rows.add(_pair(pending!, plant));
-          pending = null;
-        }
+        pending.add(plant);
+        if (pending.length == columns) flush();
       }
     }
     flush();
     return rows;
-  }
-
-  Widget _pair(GuideResultPlant left, GuideResultPlant? right) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 14),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(child: _cell(left)),
-          const SizedBox(width: 12),
-          Expanded(child: right == null ? const SizedBox() : _cell(right)),
-        ],
-      ),
-    );
   }
 
   Widget _cell(GuideResultPlant plant) {
@@ -373,6 +356,9 @@ class _GuideYearPageState extends State<GuideYearPage> {
             _seen,
           );
     final marked = entries != null && entries.any((entry) => entry.mark != null);
+    // State lists use the same plant grid as the other lists. A year
+    // campaign stays a timeline, and a phone keeps one state per row.
+    final grid = marked && GuideWindow.of(context).tablet;
     return _ListChrome(
       backLabel: widget.backLabel,
       title: widget.title,
@@ -387,12 +373,34 @@ class _GuideYearPageState extends State<GuideYearPage> {
       showSwitch: entries != null,
       onPhotos: () => setState(() => _plates = false),
       onPlates: () => setState(() => _plates = true),
-      padded: false,
-      body: _body(entries),
+      padded: grid,
+      body: grid ? _grid(entries) : _rows(entries),
     );
   }
 
-  List<Widget> _body(List<GuideYearEntry>? entries) {
+  List<Widget> _grid(List<GuideYearEntry> entries) {
+    final columns =
+        GuideWindow.of(context).columns(phone: 2, tablet: 3, wide: 4);
+    final rows = <Widget>[];
+    for (var i = 0; i < entries.length; i += columns) {
+      final end = i + columns > entries.length ? entries.length : i + columns;
+      final slice = entries.sublist(i, end);
+      rows.add(
+        _plantRow(columns, [
+          for (final entry in slice)
+            _StateCell(
+              entry: entry,
+              plates: _plates,
+              seen: entry.plant != null && _seen.contains(entry.plant!.name),
+              onTap: _openEntry(context, entry),
+            ),
+        ]),
+      );
+    }
+    return rows;
+  }
+
+  List<Widget> _rows(List<GuideYearEntry>? entries) {
     if (entries == null && _loading) return const [_Waiting()];
     if (entries == null && _failed) return [_Retry(onRetry: _load)];
     if (entries == null) return const [];
@@ -553,6 +561,141 @@ class _ListChrome extends StatelessWidget {
             ),
           ),
           const SliverPadding(padding: EdgeInsets.only(bottom: 16)),
+        ],
+      ),
+    );
+  }
+}
+
+Widget _plantRow(int columns, List<Widget> cells) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 14),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (var i = 0; i < columns; i++) ...[
+          if (i > 0) const SizedBox(width: 12),
+          Expanded(
+            child: i < cells.length ? cells[i] : const SizedBox.shrink(),
+          ),
+        ],
+      ],
+    ),
+  );
+}
+
+class _StateCell extends StatelessWidget {
+  final GuideYearEntry entry;
+  final bool plates;
+  final bool seen;
+  final VoidCallback? onTap;
+
+  const _StateCell({
+    required this.entry,
+    required this.plates,
+    required this.seen,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final strings = S.of(context);
+    final plant = entry.plant;
+    final genus = entry.genus;
+    if (plant == null && genus == null) return const SizedBox.shrink();
+    final vernacular =
+        plant == null ? null : distinctVernacular(plant.label, plant.name);
+    final String? path;
+    final bool plate;
+    if (genus != null) {
+      path = plates
+          ? (entry.genusPlatePath ?? entry.genusPhotoPath)
+          : (entry.genusPhotoPath ?? entry.genusPlatePath);
+      plate = plates || entry.genusPhotoPath == null;
+    } else {
+      path = plates ? plant!.platePath : plant!.photoPath;
+      plate = plates;
+    }
+    final title = genus ?? vernacular ?? plant!.name;
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AspectRatio(
+            aspectRatio: plate ? 2 / 3 : 1,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return GuidePhoto(
+                  path: path,
+                  width: constraints.maxWidth,
+                  height: constraints.maxHeight,
+                  radius: 10,
+                  fit: plate ? BoxFit.contain : BoxFit.cover,
+                  background: plate ? _plateGround : colors.paper2,
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 7),
+          if (entry.mark != null)
+            Text(
+              entry.mark!,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontFamily: GuideType.serif,
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+                height: 1.15,
+                color: colors.madder,
+              ),
+            ),
+          Text(
+            title,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: genus != null || vernacular == null
+                ? GuideType.latin(colors).copyWith(fontSize: 16, height: 1.15)
+                : TextStyle(
+                    fontFamily: GuideType.serif,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    height: 1.15,
+                    color: colors.ink,
+                  ),
+          ),
+          if (genus != null)
+            Text(
+              strings.taxonomy_genus,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 13, height: 1.2, color: colors.ink3),
+            )
+          else if (vernacular != null)
+            Text(
+              plant!.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: GuideType.latin(colors).copyWith(
+                fontSize: 13,
+                height: 1.2,
+                color: colors.ink3,
+              ),
+            ),
+          if (seen)
+            Padding(
+              padding: const EdgeInsets.only(top: 3),
+              child: Text(
+                strings.guide_seen_mark,
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color: colors.moss,
+                ),
+              ),
+            ),
         ],
       ),
     );

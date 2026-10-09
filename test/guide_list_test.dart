@@ -409,6 +409,124 @@ void main() {
     await tester.tap(find.text('camellia'));
     expect(openedPlant, 'Camellia japonica');
   });
+
+  testWidgets('new in the book stays two across on a phone', (tester) async {
+    final today = DateTime(2026, 10, 8);
+    await _pump(
+      tester,
+      _newPage(today, [
+        _plant('1', 'Bellis perennis', label: 'daisy'),
+        _plant('2', 'Galanthus nivalis', label: 'snowdrop'),
+        _plant('3', 'Acer campestre', label: 'maple'),
+      ]),
+    );
+
+    final row = tester.getTopLeft(find.text('daisy')).dy;
+    expect(tester.getTopLeft(find.text('snowdrop')).dy, row);
+    expect(tester.getTopLeft(find.text('maple')).dy, greaterThan(row));
+  });
+
+  testWidgets('a wide window shows four new plants across', (tester) async {
+    final today = DateTime(2026, 10, 8);
+    await _pump(
+      tester,
+      _newPage(today, [
+        _plant('1', 'Bellis perennis', label: 'daisy'),
+        _plant('2', 'Galanthus nivalis', label: 'snowdrop'),
+        _plant('3', 'Acer campestre', label: 'maple'),
+        _plant('4', 'Ilex aquifolium', label: 'holly'),
+        _plant('5', 'Viola riviniana', label: 'violet'),
+      ]),
+      size: const Size(1194, 834),
+    );
+
+    final row = tester.getTopLeft(find.text('daisy')).dy;
+    expect(tester.getTopLeft(find.text('snowdrop')).dy, row);
+    expect(tester.getTopLeft(find.text('maple')).dy, row);
+    expect(tester.getTopLeft(find.text('holly')).dy, row);
+    expect(tester.getTopLeft(find.text('violet')).dy, greaterThan(row));
+  });
+
+  testWidgets('a portrait tablet shows three new plants across', (tester) async {
+    final today = DateTime(2026, 10, 8);
+    await _pump(
+      tester,
+      _newPage(today, [
+        _plant('1', 'Bellis perennis', label: 'daisy'),
+        _plant('2', 'Galanthus nivalis', label: 'snowdrop'),
+        _plant('3', 'Acer campestre', label: 'maple'),
+        _plant('4', 'Ilex aquifolium', label: 'holly'),
+      ]),
+      size: const Size(834, 1194),
+    );
+
+    final row = tester.getTopLeft(find.text('daisy')).dy;
+    expect(tester.getTopLeft(find.text('snowdrop')).dy, row);
+    expect(tester.getTopLeft(find.text('maple')).dy, row);
+    expect(tester.getTopLeft(find.text('holly')).dy, greaterThan(row));
+  });
+
+  testWidgets('a wide state list shows four states across', (tester) async {
+    await _pump(
+      tester,
+      GuideYearPage(
+        title: 'US State flowers',
+        backLabel: 'Find',
+        initialEntries: [
+          for (final state in ['Alabama', 'Illinois', 'Texas', 'Ohio', 'Maine'])
+            GuideYearEntry(
+              year: 0,
+              mark: state,
+              plant: _plant(state, 'Camellia $state', label: state.toLowerCase()),
+            ),
+        ],
+        initialSeen: const {},
+        loadList: () async => const GuideYearList(entries: [], sourceUrl: null),
+        loadSeen: () async => const {},
+        onOpenPlant: (_, __) {},
+      ),
+      size: const Size(1194, 834),
+    );
+
+    final row = tester.getTopLeft(find.text('Alabama')).dy;
+    expect(tester.getTopLeft(find.text('Illinois')).dy, row);
+    expect(tester.getTopLeft(find.text('Texas')).dy, row);
+    expect(tester.getTopLeft(find.text('Ohio')).dy, row);
+    expect(tester.getTopLeft(find.text('Maine')).dy, greaterThan(row));
+    expect(find.text('0'), findsNothing);
+  });
+
+  testWidgets('a wide year list stays one plant per row', (tester) async {
+    await _pump(
+      tester,
+      GuideYearPage(
+        title: 'Baum des Jahres',
+        backLabel: 'Find',
+        now: () => DateTime(2026, 9, 30),
+        initialEntries: [
+          GuideYearEntry(
+            year: 2026,
+            plant: _plant('8', 'Acer campestre', label: 'field maple'),
+          ),
+          GuideYearEntry(
+            year: 2021,
+            plant: _plant('3', 'Ilex aquifolium', label: 'holly'),
+          ),
+        ],
+        initialSeen: const {},
+        loadList: () async => const GuideYearList(entries: [], sourceUrl: null),
+        loadSeen: () async => const {},
+        onOpenPlant: (_, __) {},
+      ),
+      size: const Size(1194, 834),
+    );
+
+    expect(
+      tester.getTopLeft(find.text('2026')).dy,
+      lessThan(tester.getTopLeft(find.text('2021')).dy),
+    );
+    expect(tester.getSize(find.byType(GuidePhoto).first).height, 64);
+  });
 }
 
 GuideNewDrop _drop(String date, int count, {int start = 0}) {
@@ -432,8 +550,25 @@ GuideResultPlant _plant(String id, String name, {String? label}) {
   );
 }
 
-Future<void> _pump(WidgetTester tester, Widget page) {
-  tester.view.physicalSize = const Size(400, 1600);
+GuideNewPage _newPage(DateTime today, List<GuideResultPlant> plants) {
+  return GuideNewPage(
+    backLabel: 'Book',
+    initialDays: [
+      GuideNewDay(dateKey: 'today', date: today, plants: plants),
+    ],
+    initialSeen: const {},
+    loadDays: () async => const [],
+    loadSeen: () async => const {},
+    onOpenPlant: (_, __) {},
+  );
+}
+
+Future<void> _pump(
+  WidgetTester tester,
+  Widget page, {
+  Size size = const Size(400, 1600),
+}) {
+  tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
   addTearDown(tester.view.resetDevicePixelRatio);

@@ -311,15 +311,23 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
       navigationColor: (colors) => colors.cream,
       child: Builder(
         builder: (context) {
+          final wide = GuideWindow.of(context).wide;
           return Scaffold(
-            body: SafeArea(
-              bottom: false,
-              child: _body(context),
-            ),
-            bottomNavigationBar: GuideBottomBar(
-              index: 0,
+            body: guideWithRail(
+              context,
+              personOn: true,
               onSelect: _selectTab,
+              child: SafeArea(
+                bottom: false,
+                child: GuideReadable(child: _body(context)),
+              ),
             ),
+            bottomNavigationBar: wide
+                ? null
+                : GuideBottomBar(
+                    index: 0,
+                    onSelect: _selectTab,
+                  ),
           );
         },
       ),

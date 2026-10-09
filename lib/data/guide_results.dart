@@ -97,9 +97,6 @@ class GuideAdSlot {
   const GuideAdSlot();
 }
 
-/// The sixth plant (index 5) is followed by the free-account banner.
-const guideResultAdIndex = 5;
-
 /// Europe first, then the three United States regions the mockup shows
 /// before the rest of the level-2 list.
 const guideFeaturedRegionIds = [
@@ -177,7 +174,16 @@ GuideResultList arrangeGuideResults(
   );
 }
 
-List<Object> guideResultSlots(GuideResultList list, {required bool showAd}) {
+/// One banner, after the third row of [columns] plants.
+///
+/// A short last row of the in-flower section counts as a row. A short last
+/// row of other months does not. When the list never reaches that third row,
+/// the banner goes after the last plant.
+List<Object> guideResultSlots(
+  GuideResultList list, {
+  required bool showAd,
+  int columns = 2,
+}) {
   if (list.plants.isEmpty) return const [];
   final slots = <Object>[
     GuideMonthSlot(
@@ -186,8 +192,26 @@ List<Object> guideResultSlots(GuideResultList list, {required bool showAd}) {
       controls: true,
     ),
   ];
+  var inRow = 0;
+  var rows = 0;
+  var placed = false;
+
+  void closeRow({required bool countShort}) {
+    if (inRow == 0) return;
+    if (inRow == columns || countShort) {
+      rows++;
+      if (showAd && !placed && rows == 3) {
+        slots.add(const GuideAdSlot());
+        placed = true;
+      }
+    }
+    inRow = 0;
+  }
+
   for (var i = 0; i < list.plants.length; i++) {
-    if (i == list.inFlowerCount && list.inFlowerCount > 0) {
+    final otherMonths = i == list.inFlowerCount && list.inFlowerCount > 0;
+    if (otherMonths) {
+      closeRow(countShort: true);
       slots.add(GuideMonthSlot(
         inFlower: false,
         count: list.plants.length - list.inFlowerCount,
@@ -195,8 +219,11 @@ List<Object> guideResultSlots(GuideResultList list, {required bool showAd}) {
       ));
     }
     slots.add(GuidePlantSlot(list.plants[i]));
-    if (showAd && i == guideResultAdIndex) slots.add(const GuideAdSlot());
+    inRow++;
+    if (inRow == columns) closeRow(countShort: false);
   }
+  closeRow(countShort: list.inFlowerCount == list.plants.length);
+  if (showAd && !placed) slots.add(const GuideAdSlot());
   return slots;
 }
 

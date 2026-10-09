@@ -1,6 +1,6 @@
 # Field guide redesign
 
-Agreed 2026-09-27. Clickable phone mockup: [redesign/index.html](redesign/index.html). Open that file in a browser. Catalog photos, plates, names, and counts are the live ones. The photo of *Tanacetum corymbosum* is a stand-in for a photo the person took, because that species is not in the book.
+Agreed 2026-09-27. Clickable mockup: [redesign/index.html](redesign/index.html), with a Device switch for the phone, iPad portrait, and iPad landscape. Open that file in a browser. Catalog photos, plates, names, and counts are the live ones. The photo of *Tanacetum corymbosum* is a stand-in for a photo the person took, because that species is not in the book.
 
 The website is already the public reading room: paper `#f3eee4`, ink `#1a1612`, moss `#3e5344`, madder `#8e3b2a`, gold `#85603c`, Fraunces for names, Source Sans for text. The app becomes the field guide for that same book.
 

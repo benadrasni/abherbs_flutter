@@ -179,25 +179,22 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
     final strings = S.of(context);
     final leading = _leading;
     final time = guidePhotoMoment(context, widget.when);
-    return Scaffold(
-      key: const Key('guide-outside-page'),
-      backgroundColor: colors.paper,
-      body: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          _Shot(
-            path: widget.photoPath,
-            place: widget.place,
-            whenLabel: guidePhotoDay(
-              context,
-              widget.when,
-              todayLabel: strings.guide_outside_just_now,
-            ),
-            onClose: () => Navigator.pop(
-              context,
-              const GuideOutsideResult.find(),
-            ),
-          ),
+    final window = GuideWindow.of(context);
+    final shot = _Shot(
+      path: widget.photoPath,
+      place: widget.place,
+      whenLabel: guidePhotoDay(
+        context,
+        widget.when,
+        todayLabel: strings.guide_outside_just_now,
+      ),
+      expand: window.wide,
+      onClose: () => Navigator.pop(
+        context,
+        const GuideOutsideResult.find(),
+      ),
+    );
+    final text = <Widget>[
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
             child: Column(
@@ -251,23 +248,7 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
               ),
             ),
           ),
-          if (widget.outcome.candidates.isNotEmpty) ...[
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20, 24, 20, 10),
-              child: Text(
-                strings.guide_camera_in_book,
-                style: GuideType.section(colors),
-              ),
-            ),
-            for (final hit in widget.outcome.candidates)
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
-                child: _Candidate(
-                  hit: hit,
-                  onOpen: widget.onOpenSpecies,
-                ),
-              ),
-          ],
+          ..._candidates(colors, strings),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(20, 16, 20, 24),
             child: DecoratedBox(
@@ -329,9 +310,80 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
               ),
             ),
           ),
-        ],
+    ];
+    return Scaffold(
+      key: const Key('guide-outside-page'),
+      backgroundColor: colors.paper,
+      body: guideWithRail(
+        context,
+        child: window.wide
+            ? Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(flex: 105, child: shot),
+                  Expanded(
+                    flex: 95,
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      children: text,
+                    ),
+                  ),
+                ],
+              )
+            : ListView(
+                padding: EdgeInsets.zero,
+                children: [shot, ...text],
+              ),
       ),
     );
+  }
+
+  List<Widget> _candidates(GuideColors colors, S strings) {
+    final hits = widget.outcome.candidates;
+    if (hits.isEmpty) return const [];
+    final header = Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(20, 24, 20, 10),
+      child: Text(
+        strings.guide_camera_in_book,
+        style: GuideType.section(colors),
+      ),
+    );
+    final portraitGrid =
+        GuideWindow.of(context).tablet && !GuideWindow.of(context).wide;
+    if (!portraitGrid) {
+      return [
+        header,
+        for (final hit in hits)
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
+            child: _Candidate(hit: hit, onOpen: widget.onOpenSpecies),
+          ),
+      ];
+    }
+    return [
+      header,
+      for (var i = 0; i < hits.length; i += 2)
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: _Candidate(hit: hits[i], onOpen: widget.onOpenSpecies),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: i + 1 < hits.length
+                    ? _Candidate(
+                        hit: hits[i + 1],
+                        onOpen: widget.onOpenSpecies,
+                      )
+                    : const SizedBox.shrink(),
+              ),
+            ],
+          ),
+        ),
+    ];
   }
 
   Widget? _family(GuideCameraHit? hit, GuideColors colors) {
@@ -358,18 +410,18 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
 
 /// A shutter path is an absolute file. A Seen photo is a path under the
 /// app documents directory, or a catalog storage path.
-Widget _shotPhoto(String? path, double width) {
+Widget _shotPhoto(String? path, double width, double height) {
   if (path == null || path.isEmpty) return const SizedBox.expand();
   final direct = File(path);
   if (direct.existsSync()) {
-    return Image.file(direct, fit: BoxFit.cover, width: width, height: 300);
+    return Image.file(direct, fit: BoxFit.cover, width: width, height: height);
   }
   if (path.startsWith('/')) return const SizedBox.expand();
   return getImage(
     path,
     const SizedBox.expand(),
     width: width,
-    height: 300,
+    height: height,
     fit: BoxFit.cover,
   );
 }
@@ -378,12 +430,14 @@ class _Shot extends StatelessWidget {
   final String? path;
   final String place;
   final String whenLabel;
+  final bool expand;
   final VoidCallback onClose;
 
   const _Shot({
     required this.path,
     required this.place,
     required this.whenLabel,
+    required this.expand,
     required this.onClose,
   });
 
@@ -392,16 +446,22 @@ class _Shot extends StatelessWidget {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final top = MediaQuery.paddingOf(context).top;
-    final width = MediaQuery.sizeOf(context).width;
-    return SizedBox(
-      height: 300,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          ColoredBox(
-            color: const Color(0xFF333333),
-            child: _shotPhoto(path, width),
-          ),
+    final height = expand
+        ? null
+        : (GuideWindow.of(context).tablet ? 420.0 : 300.0);
+    final stack = Stack(
+      fit: StackFit.expand,
+      children: [
+        const ColoredBox(color: Color(0xFF333333)),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            return _shotPhoto(
+              path,
+              constraints.maxWidth,
+              constraints.maxHeight,
+            );
+          },
+        ),
           PositionedDirectional(
             top: top + 10,
             start: 12,
@@ -431,9 +491,10 @@ class _Shot extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
+      ],
     );
+    if (expand) return stack;
+    return SizedBox(height: height, child: stack);
   }
 }
 
@@ -692,10 +753,14 @@ Future<GuideCameraHit?> showGuideOtherNames({
           builder: (context) {
             final colors = GuideColors.of(context);
             final strings = S.of(context);
-            return Material(
+            final tablet = GuideWindow.of(context).tablet;
+            return guideSheetAlign(
+              context,
+              Material(
               color: colors.paper,
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(22)),
+              borderRadius: tablet
+                  ? BorderRadius.circular(22)
+                  : const BorderRadius.vertical(top: Radius.circular(22)),
               clipBehavior: Clip.antiAlias,
               child: SafeArea(
                 top: false,
@@ -704,16 +769,17 @@ Future<GuideCameraHit?> showGuideOtherNames({
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Center(
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: colors.rule,
-                            borderRadius: BorderRadius.circular(2),
+                      if (!tablet)
+                        Center(
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: colors.rule,
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                            child: const SizedBox(width: 36, height: 4),
                           ),
-                          child: const SizedBox(width: 36, height: 4),
                         ),
-                      ),
-                      const SizedBox(height: 12),
+                      if (!tablet) const SizedBox(height: 12),
                       Text(
                         strings.guide_outside_which,
                         style: TextStyle(
@@ -767,6 +833,7 @@ Future<GuideCameraHit?> showGuideOtherNames({
                   ),
                 ),
               ),
+            ),
             );
           },
         ),

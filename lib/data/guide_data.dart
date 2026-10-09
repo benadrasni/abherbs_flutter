@@ -111,9 +111,14 @@ const guideNewPlantMax = 25;
 /// Tab actions for the field-guide shell. A pushed page cannot see the
 /// shell's inherited widgets, so it calls these.
 class GuideTabs {
+  /// The shell tab under any pushed page. The landscape rail reads it.
+  static int index = 0;
   static void Function(int index)? show;
   static VoidCallback? showSeen;
   static VoidCallback? refreshSeen;
+
+  /// Opens Person. The shell sets this; a rail on a pushed page calls it.
+  static void Function(BuildContext context)? openPerson;
 
   /// Unconfirmed finds waiting on Seen. The shell writes this. Every bottom
   /// bar reads it, including bars on pages pushed over the shell.
@@ -125,6 +130,24 @@ class GuideTabs {
 void leaveGuideKeyForTab(BuildContext context, int index) {
   GuideTabs.show?.call(index);
   popGuideKeyToFind(context);
+}
+
+/// Opens a shell tab and drops every page pushed over it.
+void guideRailSelect(BuildContext context, int index) {
+  GuideTabs.show?.call(index);
+  Navigator.of(context).popUntil((route) => route.isFirst);
+}
+
+/// Person in the landscape rail. A page already on Person stays there.
+void guideRailPerson(BuildContext context) {
+  final navigator = Navigator.of(context);
+  if (ModalRoute.of(context)?.settings.name == guidePersonRouteName) return;
+  var found = false;
+  navigator.popUntil((route) {
+    if (route.settings.name == guidePersonRouteName) found = true;
+    return route.isFirst || found;
+  });
+  if (!found) GuideTabs.openPerson?.call(navigator.context);
 }
 
 bool guideIsKeyRoute(String? name) {

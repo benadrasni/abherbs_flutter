@@ -168,21 +168,33 @@ class _GuidePetalPageState extends State<GuidePetalPage> {
                   ),
                 ),
                 const SizedBox(height: 14),
-                for (var i = 0; i < guidePetalIds.length; i += 2) ...[
-                  if (i > 0) const SizedBox(height: 10),
-                  _PetalRow(
-                    left: guidePetalIds[i],
-                    right: guidePetalIds[i + 1],
-                    counts: _counts,
-                    onPick: _pick,
-                  ),
-                ],
+                ..._petalTiles(),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  List<Widget> _petalTiles() {
+    final perRow =
+        GuideWindow.of(context).columns(phone: 2, tablet: 4, wide: 4);
+    final tiles = <Widget>[];
+    for (var i = 0; i < guidePetalIds.length; i += perRow) {
+      if (tiles.isNotEmpty) tiles.add(const SizedBox(height: 10));
+      final end = i + perRow > guidePetalIds.length
+          ? guidePetalIds.length
+          : i + perRow;
+      tiles.add(
+        _PetalRow(
+          ids: guidePetalIds.sublist(i, end),
+          counts: _counts,
+          onPick: _pick,
+        ),
+      );
+    }
+    return tiles;
   }
 }
 
@@ -206,14 +218,12 @@ class _ColorDot extends StatelessWidget {
 }
 
 class _PetalRow extends StatelessWidget {
-  final String left;
-  final String right;
+  final List<String> ids;
   final Map<String, int>? counts;
   final ValueChanged<String> onPick;
 
   const _PetalRow({
-    required this.left,
-    required this.right,
+    required this.ids,
     required this.counts,
     required this.onPick,
   });
@@ -224,9 +234,10 @@ class _PetalRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(child: _tile(context, left)),
-          const SizedBox(width: 10),
-          Expanded(child: _tile(context, right)),
+          for (var i = 0; i < ids.length; i++) ...[
+            if (i > 0) const SizedBox(width: 10),
+            Expanded(child: _tile(context, ids[i])),
+          ],
         ],
       ),
     );
@@ -253,7 +264,10 @@ class _PetalRow extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  GuidePetalGlyph(id: id),
+                  GuidePetalGlyph(
+                    id: id,
+                    size: GuideWindow.of(context).tablet ? 96 : 72,
+                  ),
                   const SizedBox(height: 6),
                   Text(
                     guideCap(guidePetalName(strings, id)),

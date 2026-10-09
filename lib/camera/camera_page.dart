@@ -12,6 +12,7 @@ import 'package:abherbs_flutter/data/guide_location.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/species/guide_species.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
+import 'package:abherbs_flutter/shell/guide_window.dart';
 import 'package:abherbs_flutter/camera/outside_page.dart';
 import 'package:abherbs_flutter/key/results_page.dart';
 import 'package:abherbs_flutter/search/search_page.dart';
@@ -993,15 +994,29 @@ class _GuideCameraPageState extends State<GuideCameraPage>
               SafeArea(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
-                    final frameTop =
-                        (constraints.maxHeight * 0.22).clamp(72.0, 230.0);
-                    final frameHeight =
-                        math.min(300.0, constraints.maxHeight * 0.36);
+                    final wide = GuideWindow.of(context).wide;
+                    final frameLeft = wide ? constraints.maxWidth * 0.10 : 44.0;
+                    final frameRight = wide ? 150.0 : 44.0;
+                    final frameTop = wide
+                        ? constraints.maxHeight * 0.12
+                        : (constraints.maxHeight * 0.22).clamp(72.0, 230.0);
+                    final frameHeight = wide
+                        ? constraints.maxHeight * 0.72
+                        : math.min(300.0, constraints.maxHeight * 0.36);
+                    final controls = _Controls(
+                      column: wide,
+                      shutterLabel: strings.guide_camera_shutter,
+                      rollLabel: strings.guide_camera_roll,
+                      keyLabel: strings.guide_camera_key,
+                      onShutter: () => _capture(GuideCameraSource.camera),
+                      onRoll: () => _capture(GuideCameraSource.gallery),
+                      onKey: _key,
+                    );
                     return Stack(
                       children: [
                         Positioned(
-                          left: 44,
-                          right: 44,
+                          left: frameLeft,
+                          right: frameRight,
                           top: frameTop,
                           height: frameHeight,
                           child: const IgnorePointer(
@@ -1012,9 +1027,10 @@ class _GuideCameraPageState extends State<GuideCameraPage>
                           ),
                         ),
                         Positioned(
-                          left: 24,
-                          right: 24,
-                          top: frameTop + frameHeight + 16,
+                          left: wide ? frameLeft : 24,
+                          right: wide ? frameRight : 24,
+                          top: wide ? null : frameTop + frameHeight + 16,
+                          bottom: wide ? 12 : null,
                           child: Text(
                             strings.guide_camera_tip,
                             textAlign: TextAlign.center,
@@ -1027,7 +1043,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
                         Positioned(
                           top: 8,
                           left: 16,
-                          right: 16,
+                          right: wide ? 130 : 16,
                           child: _TopBar(
                             label: _meterLabel(strings),
                             meter: guideCameraMeter(_allowance),
@@ -1039,25 +1055,27 @@ class _GuideCameraPageState extends State<GuideCameraPage>
                           Positioned(
                             top: 62,
                             left: 14,
-                            right: 14,
+                            right: wide ? 140 : 14,
                             child: _AskCard(
                               onAllow: _busy ? null : _allow,
                               onDecline: _busy ? null : _decline,
                             ),
                           ),
-                        Positioned(
-                          left: 28,
-                          right: 28,
-                          bottom: 18,
-                          child: _Controls(
-                            shutterLabel: strings.guide_camera_shutter,
-                            rollLabel: strings.guide_camera_roll,
-                            keyLabel: strings.guide_camera_key,
-                            onShutter: () => _capture(GuideCameraSource.camera),
-                            onRoll: () => _capture(GuideCameraSource.gallery),
-                            onKey: _key,
+                        if (wide)
+                          Positioned(
+                            top: 64,
+                            bottom: 18,
+                            right: 18,
+                            width: 112,
+                            child: controls,
+                          )
+                        else
+                          Positioned(
+                            left: 28,
+                            right: 28,
+                            bottom: 18,
+                            child: controls,
                           ),
-                        ),
                       ],
                     );
                   },
@@ -1340,6 +1358,7 @@ class _AskCard extends StatelessWidget {
 }
 
 class _Controls extends StatelessWidget {
+  final bool column;
   final String shutterLabel;
   final String rollLabel;
   final String keyLabel;
@@ -1348,6 +1367,7 @@ class _Controls extends StatelessWidget {
   final VoidCallback onKey;
 
   const _Controls({
+    this.column = false,
     required this.shutterLabel,
     required this.rollLabel,
     required this.keyLabel,
@@ -1358,52 +1378,62 @@ class _Controls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        _GlassButton(
-          key: const Key('guide-camera-roll'),
-          label: rollLabel,
-          onPressed: onRoll,
-          radius: 10,
-          child:
-              const Icon(Icons.photo_outlined, color: Colors.white, size: 22),
-        ),
-        Semantics(
-          button: true,
-          label: shutterLabel,
-          child: GestureDetector(
-            key: const Key('guide-camera-shutter'),
-            onTap: onShutter,
-            child: Container(
-              width: 76,
-              height: 76,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 4),
-              ),
-              child: Container(
-                width: 60,
-                height: 60,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
-              ),
+    final roll = _GlassButton(
+      key: const Key('guide-camera-roll'),
+      label: rollLabel,
+      onPressed: onRoll,
+      radius: 10,
+      child: const Icon(Icons.photo_outlined, color: Colors.white, size: 22),
+    );
+    final shutter = Semantics(
+      button: true,
+      label: shutterLabel,
+      child: GestureDetector(
+        key: const Key('guide-camera-shutter'),
+        onTap: onShutter,
+        child: Container(
+          width: 76,
+          height: 76,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.white, width: 4),
+          ),
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
             ),
           ),
         ),
-        _GlassButton(
-          key: const Key('guide-camera-key'),
-          label: keyLabel,
-          onPressed: onKey,
-          child: const CustomPaint(
-            size: Size(22, 22),
-            painter: _KeyPainter(),
-          ),
-        ),
-      ],
+      ),
+    );
+    final keyButton = _GlassButton(
+      key: const Key('guide-camera-key'),
+      label: keyLabel,
+      onPressed: onKey,
+      child: const CustomPaint(
+        size: Size(22, 22),
+        painter: _KeyPainter(),
+      ),
+    );
+    if (column) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          roll,
+          const SizedBox(height: 22),
+          shutter,
+          const SizedBox(height: 22),
+          keyButton,
+        ],
+      );
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [roll, shutter, keyButton],
     );
   }
 }
@@ -1488,6 +1518,11 @@ class _SheetLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
+    final tablet = GuideWindow.of(context).tablet;
+    final height = MediaQuery.sizeOf(context).height;
+    final maxHeight = tablet
+        ? (height * 0.88 < 680 ? height * 0.88 : 680.0)
+        : height * 0.86;
     return Positioned.fill(
       child: Stack(
         children: [
@@ -1496,19 +1531,24 @@ class _SheetLayer extends StatelessWidget {
             child: const ColoredBox(color: Color(0x6B1A1612)),
           ),
           Align(
-            alignment: Alignment.bottomCenter,
-            child: Material(
-              color: colors.paper,
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(22)),
-              clipBehavior: Clip.antiAlias,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: MediaQuery.sizeOf(context).height * 0.86,
-                ),
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 28),
-                  child: child,
+            alignment: tablet ? Alignment.center : Alignment.bottomCenter,
+            child: Padding(
+              padding: tablet ? const EdgeInsets.all(32) : EdgeInsets.zero,
+              child: Material(
+                color: colors.paper,
+                borderRadius: tablet
+                    ? BorderRadius.circular(22)
+                    : const BorderRadius.vertical(top: Radius.circular(22)),
+                clipBehavior: Clip.antiAlias,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: tablet ? 520 : double.infinity,
+                    maxHeight: maxHeight,
+                  ),
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 28),
+                    child: child,
+                  ),
                 ),
               ),
             ),
@@ -1773,6 +1813,7 @@ class _Grab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (GuideWindow.of(context).tablet) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Center(

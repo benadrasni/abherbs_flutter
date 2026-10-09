@@ -360,23 +360,22 @@ void main() {
     expect(find.text('12'), findsOneWidget);
     expect(find.text('0'), findsOneWidget);
     expect(find.text('7'), findsOneWidget);
-    expect(
-      tester.getTopLeft(find.text('12')).dy,
-      lessThan(tester.getTopLeft(find.text('White')).dy),
-    );
-    expect(
-      tester.getTopRight(find.text('12')).dx,
-      greaterThan(tester.getTopRight(find.text('White')).dx),
-    );
+    final count = tester.getRect(find.text('12'));
+    final label = tester.getRect(find.text('White'));
+    expect(count.top, lessThan(label.top));
+    expect(count.center.dx, greaterThan(label.center.dx));
     expect(find.text('null'), findsNothing);
 
     expect(find.text('oxeye'), findsOneWidget);
     expect(find.text('To confirm'), findsNothing);
     expect(find.text('Bellis perennis'), findsNothing);
-    expect(find.text('Find 5'), findsOneWidget);
-    expect(find.text('Find 6'), findsNothing);
+    expect(find.text('Find 5', skipOffstage: false), findsOneWidget);
+    expect(find.text('Find 6', skipOffstage: false), findsNothing);
     final context = tester.element(find.text('Seen lately'));
-    expect(find.text(guideWhen(context, when)), findsNWidgets(5));
+    expect(
+      find.text(guideWhen(context, when), skipOffstage: false),
+      findsNWidgets(5),
+    );
 
     expect(find.text('New in the book'), findsOneWidget);
     expect(
@@ -675,7 +674,7 @@ Widget _page({
 }
 
 Future<void> _pump(WidgetTester tester, Widget page) async {
-  tester.view.physicalSize = const Size(800, 2400);
+  tester.view.physicalSize = const Size(390, 2400);
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
   addTearDown(tester.view.resetDevicePixelRatio);

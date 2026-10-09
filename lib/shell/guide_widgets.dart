@@ -1,16 +1,20 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
+import 'package:abherbs_flutter/shell/guide_window.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+export 'package:abherbs_flutter/shell/guide_window.dart';
 
 class GuideTitleBar extends StatelessWidget {
   final Widget title;
   final String actionLabel;
   final IconData icon;
   final VoidCallback onAction;
+  final bool showAction;
   final String? leadingLabel;
   final IconData? leadingIcon;
   final VoidCallback? onLeading;
@@ -21,6 +25,7 @@ class GuideTitleBar extends StatelessWidget {
     required this.actionLabel,
     required this.icon,
     required this.onAction,
+    this.showAction = true,
     this.leadingLabel,
     this.leadingIcon,
     this.onLeading,
@@ -43,11 +48,12 @@ class GuideTitleBar extends StatelessWidget {
             ),
             const SizedBox(width: 8),
           ],
-          _TitleAction(
-            label: actionLabel,
-            icon: icon,
-            onPressed: onAction,
-          ),
+          if (showAction)
+            _TitleAction(
+              label: actionLabel,
+              icon: icon,
+              onPressed: onAction,
+            ),
         ],
       ),
     );
@@ -322,20 +328,79 @@ class GuideKeyScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final wide = GuideWindow.of(context).wide;
     return GuideTheme(
       navigationColor: (colors) => withTabs ? colors.cream : colors.paper,
       child: Scaffold(
-        body: SafeArea(bottom: !withTabs, child: child),
-        bottomNavigationBar: withTabs
-            ? GuideBottomBar(
+        body: guideWithRail(
+          context,
+          showAd: wide && withTabs,
+          onSelect: (index) => leaveGuideKeyForTab(context, index),
+          child: SafeArea(bottom: !withTabs && !wide, child: child),
+        ),
+        bottomNavigationBar: wide || !withTabs
+            ? null
+            : GuideBottomBar(
                 index: 0,
                 showAd: true,
                 onSelect: (index) => leaveGuideKeyForTab(context, index),
-              )
-            : null,
+              ),
       ),
     );
   }
+}
+
+/// Landscape sidebar plus the page. Phone and iPad portrait return [child].
+Widget guideWithRail(
+  BuildContext context, {
+  required Widget child,
+  bool personOn = false,
+  bool showAd = false,
+  ValueChanged<int>? onSelect,
+}) {
+  if (!GuideWindow.of(context).wide) return child;
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      GuideSideRail(
+        personOn: personOn,
+        onSelect: onSelect ?? (index) => guideRailSelect(context, index),
+        onPerson: () => guideRailPerson(context),
+      ),
+      Expanded(
+        child: Column(
+          children: [
+            Expanded(child: child),
+            if (showAd) const AppBannerAd(pinned: true),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+/// Centers a bottom sheet as a card on a tablet. The phone sheet is unchanged.
+Widget guideSheetAlign(BuildContext context, Widget sheet) {
+  if (!GuideWindow.of(context).tablet) return sheet;
+  return LayoutBuilder(
+    builder: (context, constraints) {
+      final spare = constraints.maxWidth - 64;
+      final card = spare < 520 ? spare : 520.0;
+      final limit = constraints.maxHeight * 0.88;
+      final maxHeight = !constraints.maxHeight.isFinite
+          ? 680.0
+          : (limit < 680 ? limit : 680.0);
+      return Center(
+        child: SizedBox(
+          width: card < 1 ? constraints.maxWidth : card,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: maxHeight),
+            child: sheet,
+          ),
+        ),
+      );
+    },
+  );
 }
 
 /// Find, Book, and Seen. [showAd] pins the free-account banner above the tabs.
@@ -490,6 +555,113 @@ class _UnconfirmedBadge extends StatelessWidget {
             fontWeight: FontWeight.w600,
             height: 1.6,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Find, Book, and Seen down the side, with Person at the bottom.
+class GuideSideRail extends StatelessWidget {
+  final bool personOn;
+  final ValueChanged<int> onSelect;
+  final VoidCallback onPerson;
+
+  const GuideSideRail({
+    super.key,
+    required this.personOn,
+    required this.onSelect,
+    required this.onPerson,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final strings = S.of(context);
+    final items = [
+      (0, strings.guide_tab_find, Icons.center_focus_weak),
+      (1, strings.guide_tab_book, Icons.menu_book_outlined),
+      (2, strings.guide_tab_seen, Icons.article_outlined),
+    ];
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: colors.cream,
+        border: BorderDirectional(end: BorderSide(color: colors.rule)),
+      ),
+      child: SafeArea(
+        child: SizedBox(
+          width: 104,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: ValueListenableBuilder<int>(
+              valueListenable: GuideTabs.unconfirmed,
+              builder: (context, unconfirmed, _) {
+                return Column(
+                  children: [
+                    for (final item in items)
+                      _RailButton(
+                        label: item.$2,
+                        icon: item.$3,
+                        selected: !personOn && GuideTabs.index == item.$1,
+                        unconfirmed: item.$1 == 2 ? unconfirmed : 0,
+                        onPressed: () => onSelect(item.$1),
+                      ),
+                    const Spacer(),
+                    _RailButton(
+                      label: strings.guide_offline_back,
+                      icon: Icons.person_outline,
+                      selected: personOn,
+                      onPressed: onPerson,
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _RailButton extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final bool selected;
+  final int unconfirmed;
+  final VoidCallback onPressed;
+
+  const _RailButton({
+    required this.label,
+    required this.icon,
+    required this.selected,
+    required this.onPressed,
+    this.unconfirmed = 0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final color = selected ? colors.moss : colors.ink3;
+    return InkWell(
+      onTap: onPressed,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
+        child: Column(
+          children: [
+            _TabIcon(icon: icon, color: color, unconfirmed: unconfirmed),
+            const SizedBox(height: 3),
+            Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+                color: color,
+              ),
+            ),
+          ],
         ),
       ),
     );

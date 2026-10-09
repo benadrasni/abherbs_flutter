@@ -455,7 +455,7 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
   Widget build(BuildContext context) {
     return GuideTheme(
       child: Scaffold(
-        body: _body(context),
+        body: guideWithRail(context, child: _body(context)),
       ),
     );
   }
@@ -546,42 +546,40 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
       species.floweringTo,
       (month) => DateFormat.MMMM(locale).format(DateTime(2000, month)),
     );
-    return CustomScrollView(
-      key: const Key('guide-species-scroll'),
-      slivers: [
-        SliverToBoxAdapter(
-          child: _Gallery(
-            species: species,
-            image: _image,
-            onBack: () => Navigator.maybePop(context),
-            onShare:
-                widget.pending == null || _kept ? () => _share(species) : null,
-            onOpen: _openPhoto,
-            videoBuilder: widget.videoBuilder,
-          ),
+    final window = GuideWindow.of(context);
+    final galleryHeight = window.wide ? 440.0 : (window.tablet ? 460.0 : 420.0);
+    final head = <Widget>[
+      _Gallery(
+        species: species,
+        image: _image,
+        height: galleryHeight,
+        onBack: () => Navigator.maybePop(context),
+        onShare:
+            widget.pending == null || _kept ? () => _share(species) : null,
+        onOpen: _openPhoto,
+        videoBuilder: widget.videoBuilder,
+      ),
+      _NameBlock(species: species),
+      if (widget.pending == null && _seen != null)
+        _SeenByYou(
+          seen: _seen!,
+          locale: locale,
+          onPressed: _showSeen,
+          image: _image,
         ),
-        SliverToBoxAdapter(child: _NameBlock(species: species)),
-        if (widget.pending == null && _seen != null)
-          SliverToBoxAdapter(
-            child: _SeenByYou(
-              seen: _seen!,
-              locale: locale,
-              onPressed: _showSeen,
-              image: _image,
-            ),
-          ),
-        if (widget.pending == null)
-          SliverToBoxAdapter(
-            child: _AddSeenButton(saving: _saving, onPressed: _addSeen),
-          ),
-        SliverToBoxAdapter(
-          child: _Facts(
-            species: species,
-            range: range,
-            month: _month,
-            locale: locale,
-          ),
-        ),
+      if (widget.pending == null)
+        _AddSeenButton(saving: _saving, onPressed: _addSeen),
+      _Facts(
+        species: species,
+        range: range,
+        month: _month,
+        locale: locale,
+      ),
+    ];
+    final text = <Widget>[
+      if (window.tablet)
+        SliverToBoxAdapter(child: _JumpWrap(chips: chips, onJump: _jump))
+      else
         SliverPersistentHeader(
           pinned: true,
           delegate: _JumpDelegate(chips: chips, onJump: _jump),
@@ -657,6 +655,33 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
         SliverToBoxAdapter(
           child: SizedBox(height: 24 + MediaQuery.paddingOf(context).bottom),
         ),
+    ];
+    if (window.wide) {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            flex: 42,
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: head,
+            ),
+          ),
+          Expanded(
+            flex: 58,
+            child: CustomScrollView(
+              key: const Key('guide-species-scroll'),
+              slivers: text,
+            ),
+          ),
+        ],
+      );
+    }
+    return CustomScrollView(
+      key: const Key('guide-species-scroll'),
+      slivers: [
+        for (final child in head) SliverToBoxAdapter(child: child),
+        ...text,
       ],
     );
   }
@@ -765,6 +790,7 @@ Future<GuideSeenPhoto?> pickGuideSeenPhoto(String plant) async {
 class _Gallery extends StatefulWidget {
   final GuideSpecies species;
   final GuideImageBuilder image;
+  final double height;
   final VoidCallback onBack;
   final VoidCallback? onShare;
   final ValueChanged<String> onOpen;
@@ -773,6 +799,7 @@ class _Gallery extends StatefulWidget {
   const _Gallery({
     required this.species,
     required this.image,
+    required this.height,
     required this.onBack,
     required this.onShare,
     required this.onOpen,
@@ -809,9 +836,8 @@ class _GalleryState extends State<_Gallery> {
         ? -1
         : species.photoPaths.length + (species.platePath == null ? 0 : 1);
     final top = MediaQuery.paddingOf(context).top + 10;
-    final width = MediaQuery.sizeOf(context).width;
     return SizedBox(
-      height: 420,
+      height: widget.height,
       child: Stack(
         children: [
           PageView(
@@ -828,11 +854,17 @@ class _GalleryState extends State<_Gallery> {
                               slide.plate ? colors.plateWell : colors.photoWell,
                           child: slide.path == null
                               ? const SizedBox.expand()
-                              : widget.image(
-                                  slide.path!,
-                                  slide.plate ? BoxFit.contain : BoxFit.cover,
-                                  width,
-                                  420,
+                              : LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    return widget.image(
+                                      slide.path!,
+                                      slide.plate
+                                          ? BoxFit.contain
+                                          : BoxFit.cover,
+                                      constraints.maxWidth,
+                                      widget.height,
+                                    );
+                                  },
                                 ),
                         ),
                       )
@@ -1601,6 +1633,41 @@ class _MonthCell extends StatelessWidget {
         style: TextStyle(
           fontSize: 10,
           color: on ? Colors.white : colors.ink3,
+        ),
+      ),
+    );
+  }
+}
+
+class _JumpWrap extends StatelessWidget {
+  final List<({String id, String label})> chips;
+  final ValueChanged<String> onJump;
+
+  const _JumpWrap({required this.chips, required this.onJump});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    return ColoredBox(
+      color: colors.paper,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: colors.rule)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+          child: Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            children: [
+              for (final chip in chips)
+                _Pill(
+                  label: chip.label,
+                  filled: true,
+                  onPressed: () => onJump(chip.id),
+                ),
+            ],
+          ),
         ),
       ),
     );

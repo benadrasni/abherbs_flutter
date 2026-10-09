@@ -250,7 +250,13 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
   Widget build(BuildContext context) {
     return GuideTheme(
       child: Scaffold(
-        body: SafeArea(child: _body(context)),
+        body: guideWithRail(
+          context,
+          personOn: true,
+          child: SafeArea(
+            child: GuideReadable(child: _body(context)),
+          ),
+        ),
       ),
     );
   }

@@ -96,6 +96,7 @@ void main() {
     expect(slots[0], isA<GuideMonthSlot>());
     expect(slots[7], isA<GuideAdSlot>());
     expect((slots[8] as GuidePlantSlot).plant.name, 'Plant 6');
+    expect(slots.whereType<GuideAdSlot>(), hasLength(1));
     expect(
       guideResultSlots(
         arrangeGuideResults(plants, month: 7, wildOnly: false),
@@ -103,6 +104,54 @@ void main() {
       ).whereType<GuideAdSlot>(),
       isEmpty,
     );
+  });
+
+  test('a four-column grid puts the banner after the third row', () {
+    final plants = [
+      for (var i = 0; i < 16; i++)
+        _plant('$i', 'Plant ${i.toString().padLeft(2, '0')}', from: 1, to: 12),
+    ];
+    final slots = guideResultSlots(
+      arrangeGuideResults(plants, month: 7, wildOnly: false),
+      showAd: true,
+      columns: 4,
+    );
+    expect(slots[0], isA<GuideMonthSlot>());
+    expect(slots[13], isA<GuideAdSlot>());
+    expect((slots[14] as GuidePlantSlot).plant.name, 'Plant 12');
+    expect(slots.whereType<GuideAdSlot>(), hasLength(1));
+  });
+
+  test('a short in-flower row counts toward the banner', () {
+    final plants = [
+      for (var i = 0; i < 6; i++) _plant('n$i', 'Now $i', from: 10, to: 10),
+      for (var i = 0; i < 8; i++) _plant('l$i', 'Later $i', from: 4, to: 5),
+    ];
+    final slots = guideResultSlots(
+      arrangeGuideResults(plants, month: 10, wildOnly: false),
+      showAd: true,
+      columns: 4,
+    );
+    expect(slots[7], isA<GuideMonthSlot>());
+    expect((slots[7] as GuideMonthSlot).inFlower, isFalse);
+    expect(slots[12], isA<GuideAdSlot>());
+    expect((slots[11] as GuidePlantSlot).plant.name, 'Later 3');
+    expect(slots.whereType<GuideAdSlot>(), hasLength(1));
+  });
+
+  test('a list shorter than three rows keeps the banner at the end', () {
+    final plants = [
+      for (var i = 0; i < 8; i++) _plant('n$i', 'Now $i', from: 10, to: 10),
+      for (var i = 0; i < 2; i++) _plant('l$i', 'Later $i', from: 4, to: 5),
+    ];
+    final slots = guideResultSlots(
+      arrangeGuideResults(plants, month: 10, wildOnly: false),
+      showAd: true,
+      columns: 4,
+    );
+    expect(slots.whereType<GuideAdSlot>(), hasLength(1));
+    expect(slots.last, isA<GuideAdSlot>());
+    expect((slots[slots.length - 2] as GuidePlantSlot).plant.name, 'Later 1');
   });
 
   test('an empty flowering month still carries the view switch', () {
@@ -114,7 +163,8 @@ void main() {
       ),
       showAd: true,
     );
-    expect(slots, hasLength(2));
+    expect(slots, hasLength(3));
+    expect(slots.last, isA<GuideAdSlot>());
     final month = slots.first as GuideMonthSlot;
     expect(month.inFlower, isTrue);
     expect(month.count, 0);
