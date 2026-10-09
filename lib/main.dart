@@ -115,7 +115,49 @@ Future<Locale> initializeLocale() async {
 void main() {
   runZonedGuarded(() {
     WidgetsFlutterBinding.ensureInitialized();
-    initializeFlutterFire().then((_) async {
+    runApp(const _Startup());
+  }, (error, stackTrace) {
+    if (isIgnorableNonFatalError(error)) {
+      return;
+    }
+    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+  });
+}
+
+/// The system launch screen already shows the plate. This keeps that plate
+/// on screen, then fades it away once the app is ready.
+class _Startup extends StatefulWidget {
+  const _Startup();
+
+  @override
+  State<_Startup> createState() => _StartupState();
+}
+
+class _StartupState extends State<_Startup>
+    with SingleTickerProviderStateMixin {
+  static const _cream = Color(0xFFDED6B8);
+  static const _plate = AssetImage('res/images/splash_plate.jpg');
+
+  late final AnimationController _cover;
+  late final CurvedAnimation _coverOpacity;
+  Locale? _locale;
+  var _coverOn = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _cover = AnimationController(
+      vsync: this,
+      value: 1,
+      duration: const Duration(milliseconds: 800),
+    );
+    _coverOpacity = CurvedAnimation(parent: _cover, curve: Curves.easeOut);
+    _open();
+  }
+
+  Future<void> _open() async {
+    try {
+      await initializeFlutterFire();
       WakelockPlus.enable();
       await Prefs.init();
       await applyRememberedVersionBlock();
@@ -125,17 +167,45 @@ void main() {
           await AppTrackingTransparency.requestTrackingAuthorization();
       await setMetaAdvertiserTracking(tracking == TrackingStatus.authorized);
       await MobileAds.instance.initialize();
-      Locale locale = await initializeLocale();
-      runApp(App(locale));
-    }).catchError((error) {
-      FirebaseCrashlytics.instance.recordError(error, null);
-    });
-  }, (error, stackTrace) {
-    if (isIgnorableNonFatalError(error)) {
-      return;
+      final locale = await initializeLocale();
+      if (!mounted) return;
+      setState(() => _locale = locale);
+      await _cover.reverse();
+      if (!mounted) return;
+      setState(() => _coverOn = false);
+    } catch (error, stackTrace) {
+      FirebaseCrashlytics.instance.recordError(error, stackTrace);
     }
-    FirebaseCrashlytics.instance.recordError(error, stackTrace);
-  });
+  }
+
+  @override
+  void dispose() {
+    _coverOpacity.dispose();
+    _cover.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Stack(
+        children: [
+          if (_locale != null) App(_locale!),
+          if (_coverOn)
+            Positioned.fill(
+              child: FadeTransition(
+                opacity: _coverOpacity,
+                child: const ColoredBox(
+                  color: _cream,
+                  child: Image(image: _plate, fit: BoxFit.contain),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
 }
 
 class App extends StatefulWidget {
