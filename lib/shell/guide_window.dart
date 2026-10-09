@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 
 /// Field-guide window. A phone stays under a 700-point shortest side, which
 /// is every iPhone and the default widget-test surface. An iPad in portrait
-/// is [tablet]. Landscape, and a portrait iPad wide enough for a sidebar, is
-/// [wide].
+/// is [tablet], including the 13-inch Pro at 1032 points. A landscape iPad
+/// at least [wideWidth] points across is [wide].
 class GuideWindow {
   static const double tabletShortestSide = 700;
   static const double wideWidth = 1000;
@@ -15,9 +15,10 @@ class GuideWindow {
 
   static GuideWindow fromSize(Size size) {
     final tablet = size.shortestSide >= tabletShortestSide;
+    final landscape = size.width > size.height;
     return GuideWindow(
       tablet: tablet,
-      wide: tablet && size.width >= wideWidth,
+      wide: tablet && landscape && size.width >= wideWidth,
     );
   }
 

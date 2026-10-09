@@ -34,8 +34,20 @@ void main() {
     final miniLandscape = GuideWindow.fromSize(const Size(1133, 744));
     expect(miniLandscape.wide, isTrue);
 
+    // 12.9-inch and 13-inch portrait are both past 1000 points, and still
+    // stay on the tablet layout so rotation can reach the sidebar.
     final proPortrait = GuideWindow.fromSize(const Size(1024, 1366));
     expect(proPortrait.tablet, isTrue);
-    expect(proPortrait.wide, isTrue);
+    expect(proPortrait.wide, isFalse);
+
+    final pro13Portrait = GuideWindow.fromSize(const Size(1032, 1376));
+    expect(pro13Portrait.tablet, isTrue);
+    expect(pro13Portrait.wide, isFalse);
+    expect(pro13Portrait.columns(phone: 2, tablet: 3, wide: 4), 3);
+
+    final pro13Landscape = GuideWindow.fromSize(const Size(1376, 1032));
+    expect(pro13Landscape.tablet, isTrue);
+    expect(pro13Landscape.wide, isTrue);
+    expect(pro13Landscape.columns(phone: 2, tablet: 3, wide: 4), 4);
   });
 }

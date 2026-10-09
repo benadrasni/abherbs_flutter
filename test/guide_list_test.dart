@@ -497,6 +497,46 @@ void main() {
     expect(tester.getTopLeft(find.text('holly')).dy, greaterThan(row));
   });
 
+  testWidgets('a 13-inch iPad portrait stays three across', (tester) async {
+    final today = DateTime(2026, 10, 8);
+    await _pump(
+      tester,
+      _newPage(today, [
+        _plant('1', 'Bellis perennis', label: 'daisy'),
+        _plant('2', 'Galanthus nivalis', label: 'snowdrop'),
+        _plant('3', 'Acer campestre', label: 'maple'),
+        _plant('4', 'Ilex aquifolium', label: 'holly'),
+      ]),
+      size: const Size(1032, 1376),
+    );
+
+    final row = tester.getTopLeft(find.text('daisy')).dy;
+    expect(tester.getTopLeft(find.text('snowdrop')).dy, row);
+    expect(tester.getTopLeft(find.text('maple')).dy, row);
+    expect(tester.getTopLeft(find.text('holly')).dy, greaterThan(row));
+  });
+
+  testWidgets('a 13-inch iPad landscape shows four across', (tester) async {
+    final today = DateTime(2026, 10, 8);
+    await _pump(
+      tester,
+      _newPage(today, [
+        _plant('1', 'Bellis perennis', label: 'daisy'),
+        _plant('2', 'Galanthus nivalis', label: 'snowdrop'),
+        _plant('3', 'Acer campestre', label: 'maple'),
+        _plant('4', 'Ilex aquifolium', label: 'holly'),
+        _plant('5', 'Viola riviniana', label: 'violet'),
+      ]),
+      size: const Size(1376, 1032),
+    );
+
+    final row = tester.getTopLeft(find.text('daisy')).dy;
+    expect(tester.getTopLeft(find.text('snowdrop')).dy, row);
+    expect(tester.getTopLeft(find.text('maple')).dy, row);
+    expect(tester.getTopLeft(find.text('holly')).dy, row);
+    expect(tester.getTopLeft(find.text('violet')).dy, greaterThan(row));
+  });
+
   testWidgets('a wide state list shows four states across', (tester) async {
     await _pump(
       tester,
