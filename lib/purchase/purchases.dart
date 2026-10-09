@@ -36,12 +36,22 @@ class Purchases {
   static final ValueNotifier<int> namesRevision = ValueNotifier(0);
 
   /// The signed-in account changed. Keep the monthly meter until its record
-  /// is read. The same account refreshing its token does not flash.
-  static void holdNamesFor(String? uid) {
-    if (_namesUid == uid) return;
+  /// is read, and drop the previous account's products. The same account
+  /// refreshing its token does not flash. Returns whether the account changed.
+  static bool holdNamesFor(String? uid) {
+    if (_namesUid == uid) return false;
     _namesUid = uid;
     namesReady = false;
+    clearAccountProducts();
     namesRevision.value++;
+    return true;
+  }
+
+  /// The account record could not be read. Drop the previous account
+  /// before [finishNames], so its products are not treated as ready.
+  static void failedAccountRead() {
+    hasOldVersion = false;
+    clearAccountProducts();
   }
 
   /// The account record has been applied. Find and Person both listen.

@@ -1,4 +1,6 @@
+import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/purchase/store_account.dart';
+import 'package:abherbs_flutter/purchase/store_proof.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -10,6 +12,53 @@ void main() {
     expect(
       storeAccountToken('user-1'),
       '557118bf-c78c-5e3b-8a47-01153acdb216',
+    );
+  });
+
+  test('a receipt grants only when the server marks that product active', () {
+    expect(
+      storeProofGrants(
+        StoreProofResult.accepted,
+        const {fieldGuideYearly: true},
+        fieldGuideYearly,
+      ),
+      isTrue,
+    );
+    expect(
+      storeProofGrants(
+        StoreProofResult.accepted,
+        const {fieldGuideYearly: false},
+        fieldGuideYearly,
+      ),
+      isFalse,
+    );
+    expect(
+      storeProofGrants(StoreProofResult.accepted, const {}, fieldGuideYearly),
+      isFalse,
+    );
+    expect(
+      storeProofGrants(
+        StoreProofResult.rejected,
+        const {fieldGuideYearly: true},
+        fieldGuideYearly,
+      ),
+      isFalse,
+    );
+    expect(
+      storeProofGrants(
+        StoreProofResult.deferred,
+        const {fieldGuideYearly: true},
+        fieldGuideYearly,
+      ),
+      isFalse,
+    );
+    expect(
+      storeProofGrants(
+        StoreProofResult.accepted,
+        const {fieldGuideYearly: true},
+        '',
+      ),
+      isFalse,
     );
   });
 }

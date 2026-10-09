@@ -3,6 +3,7 @@ import 'package:abherbs_flutter/field_guide/field_guide_page.dart';
 import 'package:abherbs_flutter/field_guide/guide_field_guide.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/purchase/store_proof.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -191,6 +192,41 @@ void main() {
 
     Purchases.purchases = {};
     expect(Purchases.showsAds(), isTrue);
+  });
+
+  test('Field Guide stays locked until the server marks the receipt active', () {
+    Purchases.purchases = {};
+    Purchases.clearAccountProducts();
+    final purchase = _purchase(fieldGuideYearly);
+    expect(
+      keepServerPurchase(purchase, StoreProofResult.deferred, const {}),
+      isFalse,
+    );
+    expect(
+      dropUnverifiedPurchase(fieldGuideYearly, alreadyKept: false),
+      isTrue,
+    );
+    expect(Purchases.hasFieldGuide(), isFalse);
+    expect(Purchases.showsAds(), isTrue);
+    expect(Purchases.syncsSeenPhotos(), isFalse);
+
+    Purchases.replaceAccountProducts({fieldGuideMonthly});
+    expect(
+      dropUnverifiedPurchase(fieldGuideMonthly, alreadyKept: false),
+      isFalse,
+    );
+    expect(Purchases.hasFieldGuide(), isTrue);
+
+    expect(
+      keepServerPurchase(
+        purchase,
+        StoreProofResult.accepted,
+        const {fieldGuideYearly: true, fieldGuideMonthly: false},
+      ),
+      isTrue,
+    );
+    expect(Purchases.purchases.containsKey(fieldGuideYearly), isTrue);
+    expect(Purchases.showsAds(), isFalse);
   });
 
   testWidgets('yearly is selected and the store price starts that plan',

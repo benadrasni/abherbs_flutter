@@ -153,8 +153,24 @@ Future<void> deleteSignedInAccount() async {
   Auth.credits = 0;
 }
 
-Future<void> _deleteUserData(String uid) async {
-  await releaseStorePurchases();
+/// Releases store receipts, then the rest of the account. A failed release
+/// skips the rest so the receipt stays bound and the person can retry.
+Future<void> runAccountDeletion({
+  required Future<void> Function() release,
+  required Future<void> Function() remove,
+}) async {
+  await release();
+  await remove();
+}
+
+Future<void> _deleteUserData(String uid) {
+  return runAccountDeletion(
+    release: releaseStorePurchases,
+    remove: () => _removeAccountData(uid),
+  );
+}
+
+Future<void> _removeAccountData(String uid) async {
   final privateRoot = privateObservationsReference.child(uid);
   final listEvent = await privateRoot
       .child(firebaseObservationsByDate)

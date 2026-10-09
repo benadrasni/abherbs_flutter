@@ -107,7 +107,6 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
 
   void _onStore(List<PurchaseDetails> purchases) {
     final finish = <PurchaseDetails>[];
-    var changed = false;
     for (final purchase in purchases) {
       final id = purchase.productID;
       final fieldGuide = id == fieldGuideMonthly || id == fieldGuideYearly;
@@ -115,21 +114,13 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
       if (id.isEmpty || (!fieldGuide && !photos)) continue;
       if (purchase.status == PurchaseStatus.purchased ||
           purchase.status == PurchaseStatus.restored) {
-        Purchases.purchases[id] = purchase;
-        changed = true;
-        if (fieldGuide && purchase.status == PurchaseStatus.purchased) {
-          finish.add(purchase);
-        }
+        finish.add(purchase);
       } else if (fieldGuide &&
           purchase.status == PurchaseStatus.error &&
           !storePurchaseCanceled(purchase)) {
         finish.add(purchase);
       }
     }
-    if (!changed && finish.isEmpty) return;
-    if (changed) unawaited(syncGuidePrivatePhotos());
-    _applyOwned();
-    if (mounted) setState(() {});
     if (finish.isNotEmpty) unawaited(_finish(finish));
   }
 
@@ -157,12 +148,28 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
         });
         continue;
       }
-      if (purchase.status != PurchaseStatus.purchased) continue;
+      if (purchase.status != PurchaseStatus.purchased &&
+          purchase.status != PurchaseStatus.restored) {
+        continue;
+      }
+      final had = Purchases.purchases.containsKey(purchase.productID);
       final valid = await verifyStorePurchase(purchase);
-      if (valid) continue;
-      Purchases.purchases.remove(purchase.productID);
       if (!mounted) return;
+      if (valid) {
+        unawaited(syncGuidePrivatePhotos());
+        _applyOwned();
+        setState(() {});
+        continue;
+      }
+      final dropped = dropUnverifiedPurchase(
+        purchase.productID,
+        alreadyKept: had,
+      );
       _applyOwned();
+      if (!dropped || purchase.status != PurchaseStatus.purchased) {
+        setState(() {});
+        continue;
+      }
       setState(() => _error = S.of(context).product_subscribe_failed);
     }
   }

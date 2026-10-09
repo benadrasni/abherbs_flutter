@@ -270,20 +270,13 @@ class _AppState extends State<App> {
   }
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
-    final remembered = <String>[];
-    var hideAds = false;
     for (final purchase in purchaseDetailsList) {
       final id = purchase.productID;
       if (id.isEmpty) continue;
       final owned = purchase.status == PurchaseStatus.purchased ||
           purchase.status == PurchaseStatus.restored;
       if (owned) {
-        Purchases.purchases[id] = purchase;
-        remembered.add(id);
-        unawaited(submitStorePurchase(purchase));
-        if (id == productNoAdsAndroid || id == productNoAdsIOS) {
-          hideAds = true;
-        }
+        unawaited(_confirmPurchase(purchase));
       }
       // Finish here, not on the sales page. A purchase that arrives after
       // that page has closed still has to be acknowledged.
@@ -291,10 +284,14 @@ class _AppState extends State<App> {
         unawaited(_completePurchase(purchase));
       }
     }
-    if (remembered.isNotEmpty) {
-      unawaited(rememberStorePurchases(remembered));
+  }
+
+  Future<void> _confirmPurchase(PurchaseDetails purchase) async {
+    final valid = await verifyStorePurchase(purchase);
+    if (valid) {
+      unawaited(rememberStorePurchases([purchase.productID]));
     }
-    if (hideAds && mounted) setState(() {});
+    if (mounted) setState(() {});
   }
 
   Future<void> _completePurchase(PurchaseDetails purchase) async {

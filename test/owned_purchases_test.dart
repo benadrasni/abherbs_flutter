@@ -38,8 +38,9 @@ void main() {
     );
   });
 
-  test('remembered ids fill the map and leave a store row in place', () {
+  test('remembered ids do not unlock, and a store row stays', () {
     Purchases.purchases.clear();
+    Purchases.clearAccountProducts();
     final store = PurchaseDetails(
       productID: productNoAdsAndroid,
       verificationData: PurchaseVerificationData(
@@ -57,12 +58,10 @@ void main() {
       '',
     ]);
     expect(Purchases.purchases[productNoAdsAndroid], same(store));
-    expect(Purchases.purchases.containsKey(fieldGuideYearly), isTrue);
-    expect(Purchases.purchases.containsKey(''), isFalse);
-    expect(
-      Purchases.purchases[fieldGuideYearly]?.status,
-      PurchaseStatus.restored,
-    );
+    expect(Purchases.purchases.containsKey(fieldGuideYearly), isFalse);
+    expect(Purchases.hasFieldGuide(), isFalse);
+    expect(Purchases.isNoAds(), isTrue);
     Purchases.purchases.clear();
+    Purchases.clearAccountProducts();
   });
 }
