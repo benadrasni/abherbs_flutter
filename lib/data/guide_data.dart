@@ -1195,7 +1195,7 @@ class GuideYearEntry {
   final int? year;
   final GuideResultPlant? plant;
 
-  /// Set when the list value is a state name. The row shows this instead of [year].
+  /// Set when the list value is a state name. The card shows this instead of [year].
   final String? mark;
   final String? genus;
   final String? genusFamily;

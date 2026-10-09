@@ -355,10 +355,11 @@ class _GuideYearPageState extends State<GuideYearPage> {
             ],
             _seen,
           );
-    final marked = entries != null && entries.any((entry) => entry.mark != null);
-    // State lists use the same plant grid as the other lists. A year
-    // campaign stays a timeline, and a phone keeps one state per row.
-    final grid = marked && GuideWindow.of(context).tablet;
+    final marked =
+        entries != null && entries.any((entry) => entry.mark != null);
+    // Year campaigns and state lists use the same plant grid as the other
+    // lists. The year or the state sits on the card.
+    final grid = entries != null;
     return _ListChrome(
       backLabel: widget.backLabel,
       title: widget.title,
@@ -374,13 +375,14 @@ class _GuideYearPageState extends State<GuideYearPage> {
       onPhotos: () => setState(() => _plates = false),
       onPlates: () => setState(() => _plates = true),
       padded: grid,
-      body: grid ? _grid(entries) : _rows(entries),
+      body: grid ? _grid(entries) : _status(),
     );
   }
 
   List<Widget> _grid(List<GuideYearEntry> entries) {
     final columns =
         GuideWindow.of(context).columns(phone: 2, tablet: 3, wide: 4);
+    final year = widget.now().year;
     final rows = <Widget>[];
     for (var i = 0; i < entries.length; i += columns) {
       final end = i + columns > entries.length ? entries.length : i + columns;
@@ -392,6 +394,7 @@ class _GuideYearPageState extends State<GuideYearPage> {
               entry: entry,
               plates: _plates,
               seen: entry.plant != null && _seen.contains(entry.plant!.name),
+              thisYear: entry.mark == null && entry.year == year,
               onTap: _openEntry(context, entry),
             ),
         ]),
@@ -400,21 +403,10 @@ class _GuideYearPageState extends State<GuideYearPage> {
     return rows;
   }
 
-  List<Widget> _rows(List<GuideYearEntry>? entries) {
-    if (entries == null && _loading) return const [_Waiting()];
-    if (entries == null && _failed) return [_Retry(onRetry: _load)];
-    if (entries == null) return const [];
-    final year = widget.now().year;
-    return [
-      for (final entry in entries)
-        _YearRow(
-          entry: entry,
-          plates: _plates,
-          seen: entry.plant != null && _seen.contains(entry.plant!.name),
-          thisYear: entry.mark == null && entry.year == year,
-          onTap: _openEntry(context, entry),
-        ),
-    ];
+  List<Widget> _status() {
+    if (_loading) return const [_Waiting()];
+    if (_failed) return [_Retry(onRetry: _load)];
+    return const [];
   }
 
   VoidCallback? _openEntry(BuildContext context, GuideYearEntry entry) {
@@ -588,12 +580,14 @@ class _StateCell extends StatelessWidget {
   final GuideYearEntry entry;
   final bool plates;
   final bool seen;
+  final bool thisYear;
   final VoidCallback? onTap;
 
   const _StateCell({
     required this.entry,
     required this.plates,
     required this.seen,
+    required this.thisYear,
     required this.onTap,
   });
 
@@ -619,7 +613,8 @@ class _StateCell extends StatelessWidget {
     }
     final genusSpoken = genus == null ? null : entry.genusVernacular;
     final title = genusSpoken ?? genus ?? vernacular ?? plant!.name;
-    final titleIsLatin = genus != null ? genusSpoken == null : vernacular == null;
+    final titleIsLatin =
+        genus != null ? genusSpoken == null : vernacular == null;
     return InkWell(
       onTap: onTap,
       child: Column(
@@ -651,6 +646,31 @@ class _StateCell extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
                 height: 1.15,
+                color: colors.madder,
+              ),
+            )
+          else if (entry.year != null && entry.year != 0)
+            Text(
+              '${entry.year}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontFamily: GuideType.serif,
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+                height: 1.15,
+                color: colors.madder,
+              ),
+            ),
+          if (thisYear)
+            Text(
+              strings.guide_this_year.toUpperCase(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 10,
+                letterSpacing: 0.6,
+                fontWeight: FontWeight.w600,
                 color: colors.madder,
               ),
             ),
@@ -743,182 +763,6 @@ class _DateHeader extends StatelessWidget {
           letterSpacing: 1,
           fontWeight: FontWeight.w600,
           color: colors.ink3,
-        ),
-      ),
-    );
-  }
-}
-
-class _YearRow extends StatelessWidget {
-  final GuideYearEntry entry;
-  final bool plates;
-  final bool seen;
-  final bool thisYear;
-  final VoidCallback? onTap;
-
-  const _YearRow({
-    required this.entry,
-    required this.plates,
-    required this.seen,
-    required this.thisYear,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = GuideColors.of(context);
-    final strings = S.of(context);
-    final plant = entry.plant;
-    final genus = entry.genus;
-    if (plant == null && genus == null) return const SizedBox.shrink();
-    final vernacular = plant == null
-        ? null
-        : distinctVernacular(plant.label, plant.name);
-    final genusSpoken = genus == null ? null : entry.genusVernacular;
-    final titleIsLatin = genus != null ? genusSpoken == null : vernacular == null;
-    final String? path;
-    final bool plate;
-    if (genus != null) {
-      path = plates
-          ? (entry.genusPlatePath ?? entry.genusPhotoPath)
-          : (entry.genusPhotoPath ?? entry.genusPlatePath);
-      plate = plates || entry.genusPhotoPath == null;
-    } else {
-      path = plates ? plant!.platePath : plant!.photoPath;
-      plate = plates;
-    }
-    final side = plates ? 96.0 : 64.0;
-    return InkWell(
-      onTap: onTap,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(color: colors.rule)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          child: Row(
-            children: [
-              if (entry.mark == null && entry.year != null) ...[
-                SizedBox(
-                  width: 58,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${entry.year}',
-                        style: TextStyle(
-                          fontFamily: GuideType.serif,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 20,
-                          height: 1.1,
-                          color: colors.madder,
-                        ),
-                      ),
-                      if (thisYear)
-                        Text(
-                          strings.guide_this_year.toUpperCase(),
-                          style: TextStyle(
-                            fontSize: 10,
-                            letterSpacing: 0.6,
-                            fontWeight: FontWeight.w600,
-                            color: colors.madder,
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 12),
-              ],
-              GuidePhoto(
-                path: path,
-                width: 64,
-                height: side,
-                radius: 10,
-                fit: plate ? BoxFit.contain : BoxFit.cover,
-                background: plate ? _plateGround : colors.paper2,
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (entry.mark != null)
-                      Text(
-                        entry.mark!,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontFamily: GuideType.serif,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          height: 1.15,
-                          color: colors.madder,
-                        ),
-                      ),
-                    Text(
-                      genusSpoken ?? genus ?? vernacular ?? plant!.name,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: titleIsLatin
-                          ? GuideType.latin(colors).copyWith(
-                              fontSize: 17,
-                              height: 1.15,
-                            )
-                          : TextStyle(
-                              fontFamily: GuideType.serif,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 17,
-                              height: 1.15,
-                              color: colors.ink,
-                            ),
-                    ),
-                    if (genusSpoken != null)
-                      Text(
-                        genus!,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: GuideType.latin(colors).copyWith(
-                          fontSize: 13,
-                          height: 1.2,
-                          color: colors.ink3,
-                        ),
-                      ),
-                    if (genus != null)
-                      Text(
-                        strings.taxonomy_genus,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 13,
-                          height: 1.2,
-                          color: colors.ink3,
-                        ),
-                      )
-                    else if (vernacular != null)
-                      Text(
-                        plant!.name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: GuideType.latin(colors).copyWith(
-                          fontSize: 13,
-                          height: 1.2,
-                          color: colors.ink3,
-                        ),
-                      ),
-                    if (seen)
-                      Text(
-                        strings.guide_seen_mark,
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: colors.moss,
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

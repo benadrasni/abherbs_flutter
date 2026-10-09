@@ -300,7 +300,7 @@ void main() {
     );
   });
 
-  testWidgets('a year list is a timeline, newest first', (tester) async {
+  testWidgets('a year list is a grid, newest first', (tester) async {
     String? opened;
     await _pump(
       tester,
@@ -340,13 +340,19 @@ void main() {
     expect(find.text('THIS YEAR'), findsOneWidget);
     expect(
       tester.getTopLeft(find.text('2026')).dy,
-      lessThan(tester.getTopLeft(find.text('2021')).dy),
+      tester.getTopLeft(find.text('2021')).dy,
     );
-    expect(tester.getSize(find.byType(GuidePhoto).first).height, 64);
+    expect(
+      tester.getTopLeft(find.text('2026')).dx,
+      lessThan(tester.getTopLeft(find.text('2021')).dx),
+    );
+    final photo = tester.getSize(find.byType(GuidePhoto).first);
+    expect(photo.height, closeTo(photo.width, 1));
 
     await tester.tap(find.text('Plates'));
     await tester.pump();
-    expect(tester.getSize(find.byType(GuidePhoto).first).height, 96);
+    final plate = tester.getSize(find.byType(GuidePhoto).first);
+    expect(plate.height, greaterThan(plate.width));
 
     await tester.tap(find.text('field maple'));
     expect(opened, 'Acer campestre');
@@ -398,13 +404,18 @@ void main() {
     expect(find.text('0'), findsNothing);
     expect(
       tester.getTopLeft(find.text('Alabama')).dy,
-      lessThan(tester.getTopLeft(find.text('Illinois')).dy),
+      tester.getTopLeft(find.text('Illinois')).dy,
+    );
+    expect(
+      tester.getTopLeft(find.text('Alabama')).dx,
+      lessThan(tester.getTopLeft(find.text('Illinois')).dx),
     );
     final photos =
         tester.widgetList<GuidePhoto>(find.byType(GuidePhoto)).toList();
     expect(photos[1].path, 'photos/1090.jpg');
     expect(photos[1].fit, BoxFit.cover);
-    expect(photos[1].height, 64);
+    final photo = tester.getSize(find.byType(GuidePhoto).at(1));
+    expect(photo.height, closeTo(photo.width, 1));
 
     await tester.tap(find.text('Plates'));
     await tester.pump();
@@ -412,7 +423,8 @@ void main() {
         tester.widgetList<GuidePhoto>(find.byType(GuidePhoto)).toList();
     expect(plates[1].path, 'plates/Viola_riviniana.webp');
     expect(plates[1].fit, BoxFit.contain);
-    expect(plates[1].height, 96);
+    final plate = tester.getSize(find.byType(GuidePhoto).at(1));
+    expect(plate.height, greaterThan(plate.width));
 
     await tester.tap(find.text('Viola'));
     expect(openedGenus, 'Viola:APG IV_v3/Violaceae/Viola/list');
@@ -582,7 +594,7 @@ void main() {
     expect(find.text('0'), findsNothing);
   });
 
-  testWidgets('a wide year list stays one plant per row', (tester) async {
+  testWidgets('a wide year list shows the plants across', (tester) async {
     await _pump(
       tester,
       GuideYearPage(
@@ -609,9 +621,12 @@ void main() {
 
     expect(
       tester.getTopLeft(find.text('2026')).dy,
-      lessThan(tester.getTopLeft(find.text('2021')).dy),
+      tester.getTopLeft(find.text('2021')).dy,
     );
-    expect(tester.getSize(find.byType(GuidePhoto).first).height, 64);
+    expect(
+      tester.getTopLeft(find.text('2026')).dx,
+      lessThan(tester.getTopLeft(find.text('2021')).dx),
+    );
   });
 
   testWidgets('Find, Book, and Seen leave a custom list', (tester) async {

@@ -186,6 +186,9 @@ h2.q{font-family:var(--serif);font-weight:520;font-size:25px;line-height:1.1;let
 .cell{display:flex;flex-direction:column;justify-content:flex-start}
 .cell .img{border-radius:10px;background:var(--ph) center/cover;aspect-ratio:1/1}
 .cell .img.plate{aspect-ratio:2/3;background-color:var(--plate);background-size:contain;background-repeat:no-repeat;box-shadow:var(--plate-shadow)}
+.cell .yr{font-family:var(--serif);font-weight:520;font-size:16px;line-height:1.15;color:var(--madder);margin-top:7px}
+.cell .yr .now{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--madder)}
+.cell .yr + .nm{margin-top:2px}
 .cell .nm{font-family:var(--serif);font-weight:520;font-size:16px;line-height:1.15;margin-top:7px}
 .cell .la{font-size:13px;color:var(--ink-3)}
 .cell .mo{font-size:11px;color:var(--gold);margin-top:2px}
@@ -769,7 +772,7 @@ const SCREENS=[
   ['stats','Statistics · your finds','Opened from Seen or Person. Counts, first and last, years, and countries with flags. Finds in Middle Europe are shown as Slovakia. Indoor finds are left out.'],
   ['statsPublic','Statistics · Sightings','The same page for accepted finds. 1,778 sightings, 630 plants, 56 people. Years from the public list, and every country with its flag. Country, not a pin.'],
   ['book','Book','Families, genera, lists of flowers. Favorite flowers leads Lists when any plant is marked.'],
-  ['list','List of flowers','A custom list. Year campaigns run newest first; “New in the book” by date.'],
+  ['list','List of flowers','A custom list. Year campaigns and state flowers use the plant grid, newest year first. “New in the book” is by date.'],
   ['favorites','List · Favorites','Favorite flowers. The list appears only when a plant is marked, and it hides when you sign out.'],
   ['limit','At the limit','Ad, Field Guide, or the key. The key never closes.'],
   ['fieldguide','Field Guide','Free vs. added, 7-day trial, restore.'],
@@ -834,10 +837,9 @@ function listScreen(){
   const l=findList(st.list)||allLists()[0];
   const year=isYearList(l), thisYear=2026;
   const nm=e=>e.l?esc(cap(e.l)):`<span class="latin">${esc(e.n)}</span>`;
-  const img=e=>st.view=='plate'?`<span class="th plate" style="background-image:url('${PLATE(e.pl)}')"></span>`:`<span class="th" style="background-image:url('${PH(e.ph)}')"></span>`;
   let body='';
   if(year){
-    body=l.items.map(e=>`<button class="yrow ${e.y==thisYear?'now':''}" data-sp="${esc(e.n)}"><span class="yr">${e.y}</span>${img(e)}<span>${`<b>${nm(e)}</b>`}<span class="latin">${esc(e.n)}</span><br>${seenMark(e.n)}</span></button>`).join('');
+    body=`<div class="grid">${l.items.map(cell).join('')}</div>`;
   } else if(l.isNew){
     const days=[...new Set(l.items.map(e=>e.d))];
     body=days.map(d=>`<div class="month">${fmtDate(d)}</div><div class="grid">${l.items.filter(e=>e.d==d).map(cell).join('')}</div>`).join('');
@@ -846,7 +848,8 @@ function listScreen(){
   } else body=`<div class="grid">${l.items.map(cell).join('')}</div>`;
   function cell(e){
     const im=st.view=='plate'?`<div class="img plate" style="background-image:url('${PLATE(e.pl)}')"></div>`:`<div class="img" style="background-image:url('${PH(e.ph)}')"></div>`;
-    return `<button class="cell" data-sp="${esc(e.n)}">${im}<div class="nm">${nm(e)}</div>${e.l?`<div class="la latin">${esc(e.n)}</div>`:''}${seenMark(e.n)}</button>`;
+    const yr=e.y?`<div class="yr">${e.y}${e.y==thisYear?'<span class="now">This year</span>':''}</div>`:'';
+    return `<button class="cell" data-sp="${esc(e.n)}">${im}${yr}<div class="nm">${nm(e)}</div>${e.l?`<div class="la latin">${esc(e.n)}</div>`:''}${seenMark(e.n)}</button>`;
   }
   const src=l.src?` · <a href="${esc(l.src)}" target="_blank">${esc(l.src.replace(/^https?:\/\/(www\.)?/,'').split('/')[0])} ↗</a>`:'';
   const seenN=l.items.filter(e=>seenNames().has(e.n)).length;
