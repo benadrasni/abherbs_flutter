@@ -52,6 +52,7 @@ export function playSubscription(body: unknown, now: number): PlayPurchase | nul
 }
 
 /// One-time product. purchaseState 0 is purchased, 1 is canceled.
+/// purchaseType 0 is a license test and does not grant. A normal purchase omits it.
 export function playOneTime(body: unknown, productId: string): PlayPurchase | null {
   if (!body || typeof body !== 'object') return null;
   if (!/^[A-Za-z0-9_]{1,64}$/.test(productId)) return null;
@@ -61,7 +62,7 @@ export function playOneTime(body: unknown, productId: string): PlayPurchase | nu
   return {
     productId,
     expiresAt: null,
-    revoked: state === 1,
+    revoked: state === 1 || record.purchaseType === 0,
     obfuscatedAccountId: obfuscatedAccount(record),
     subscription: false,
   };

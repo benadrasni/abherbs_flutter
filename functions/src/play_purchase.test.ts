@@ -42,8 +42,9 @@ test('a held or expired Play subscription does not grant', () => {
   );
 });
 
-test('a canceled one-time Play product is revoked', () => {
+test('a canceled or license-test one-time Play product does not grant', () => {
   assert.equal(playOneTime({ purchaseState: 0, obfuscatedExternalAccountId: 'abc' }, 'no_ads')?.revoked, false);
+  assert.equal(playOneTime({ purchaseState: 0, purchaseType: 0 }, 'no_ads')?.revoked, true);
   assert.equal(playOneTime({ purchaseState: 1 }, 'offline')?.revoked, true);
   assert.equal(playOneTime({ purchaseState: 2 }, 'offline'), null);
 });

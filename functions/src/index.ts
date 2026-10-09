@@ -302,6 +302,14 @@ function entitlementDb(): EntitlementDb {
     get: async (path) => (await db.ref(path).get()).val(),
     set: (path, value) => db.ref(path).set(value),
     remove: (path) => db.ref(path).remove(),
+    transaction: async (path, update) => {
+      const result = await db.ref(path).transaction((current: unknown) => {
+        const next = update(current);
+        if (next === undefined) return;
+        return next;
+      });
+      return result.committed;
+    },
     authExists: async (uid) => {
       try {
         await getAuth().getUser(uid);

@@ -243,11 +243,19 @@ export function proofRecordOf(value: unknown): ProofRecord | null {
   };
 }
 
+function rowStillActive(id: string, row: EntitlementRow, now: number): boolean {
+  if (!row.active) return false;
+  if (!subscriptionProducts.has(id) || row.expiresAt == null) return true;
+  return purchaseActive({ revoked: false, expiresAt: row.expiresAt }, now);
+}
+
 /// Product ids the server has checked and still considers active.
-export function activeEntitlementIds(user: Record<string, unknown> | null): string[] {
+/// A subscription with expiresAt counts only while that time is still ahead.
+/// A missing expiresAt stays on the active flag, same as purchaseActive.
+export function activeEntitlementIds(user: Record<string, unknown> | null, now = Date.now()): string[] {
   if (!user) return [];
   return Object.entries(entitlementRows(user.entitlements))
-    .filter(([, row]) => row.active)
+    .filter(([id, row]) => rowStillActive(id, row, now))
     .map(([id]) => id);
 }
 
@@ -255,8 +263,8 @@ export function activeEntitlementIds(user: Record<string, unknown> | null): stri
  * Unlimited photo names. `old version` is server-set. A checked entitlement
  * grants the same. The client-written `purchases` list is not an entitlement.
  */
-export function hasUnlimitedNames(user: Record<string, unknown> | null): boolean {
+export function hasUnlimitedNames(user: Record<string, unknown> | null, now = Date.now()): boolean {
   if (!user) return false;
   if (user['old version'] === true) return true;
-  return activeEntitlementIds(user).some((id) => unlimitedProducts.includes(id));
+  return activeEntitlementIds(user, now).some((id) => unlimitedProducts.includes(id));
 }

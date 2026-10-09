@@ -30,9 +30,95 @@ function certificateCurrent(certificate: X509Certificate, now: number): boolean 
   return from <= now && to >= now;
 }
 
+/// App Store receipt signing: leaf, then the WWDR intermediate.
+const appleReceiptLeafOid = '1.2.840.113635.100.6.11.1';
+const appleReceiptIntermediateOid = '1.2.840.113635.100.6.2.1';
+
+type DerSpan = { tag: number; start: number; end: number };
+
+function derSpan(raw: Buffer, offset: number): DerSpan | null {
+  if (offset < 0 || offset + 1 >= raw.length) return null;
+  const tag = raw[offset];
+  const lengthByte = raw[offset + 1];
+  let length = lengthByte;
+  let start = offset + 2;
+  if (lengthByte & 0x80) {
+    const count = lengthByte & 0x7f;
+    if (count === 0 || count > 4 || offset + 2 + count > raw.length) return null;
+    length = 0;
+    for (let i = 0; i < count; i++) length = length * 256 + raw[offset + 2 + i];
+    start = offset + 2 + count;
+  }
+  const end = start + length;
+  if (end > raw.length) return null;
+  return { tag, start, end };
+}
+
+function oidText(raw: Buffer, start: number, end: number): string | null {
+  if (end <= start) return null;
+  const parts = [Math.floor(raw[start] / 40), raw[start] % 40];
+  let value = 0;
+  let pending = false;
+  for (let i = start + 1; i < end; i++) {
+    value = value * 128 + (raw[i] & 0x7f);
+    pending = true;
+    if ((raw[i] & 0x80) === 0) {
+      parts.push(value);
+      value = 0;
+      pending = false;
+    }
+  }
+  if (pending) return null;
+  return parts.join('.');
+}
+
+/// X509Certificate does not list extension OIDs, so read them from the DER.
+function extensionOids(certificate: X509Certificate): Set<string> | null {
+  const raw = certificate.raw;
+  const certificateSpan = derSpan(raw, 0);
+  if (!certificateSpan || certificateSpan.tag !== 0x30) return null;
+  const body = derSpan(raw, certificateSpan.start);
+  if (!body || body.tag !== 0x30) return null;
+  const oids = new Set<string>();
+  let offset = body.start;
+  while (offset < body.end) {
+    const field = derSpan(raw, offset);
+    if (!field || field.end <= offset) return null;
+    if (field.tag === 0xa3) {
+      const extensions = derSpan(raw, field.start);
+      if (!extensions || extensions.tag !== 0x30) return null;
+      let extAt = extensions.start;
+      while (extAt < extensions.end) {
+        const extension = derSpan(raw, extAt);
+        if (!extension || extension.tag !== 0x30 || extension.end <= extAt) return null;
+        const oid = derSpan(raw, extension.start);
+        if (!oid || oid.tag !== 0x06) return null;
+        const text = oidText(raw, oid.start, oid.end);
+        if (!text) return null;
+        oids.add(text);
+        extAt = extension.end;
+      }
+    }
+    offset = field.end;
+  }
+  return oids;
+}
+
+function storeKitCertificates(certificates: X509Certificate[]): boolean {
+  const leaf = certificates[0];
+  const intermediate = certificates[1];
+  if (leaf.ca || !intermediate.ca) return false;
+  const leafOids = extensionOids(leaf);
+  const intermediateOids = extensionOids(intermediate);
+  if (!leafOids || !intermediateOids) return false;
+  return leafOids.has(appleReceiptLeafOid) && intermediateOids.has(appleReceiptIntermediateOid);
+}
+
 /**
  * Verifies a StoreKit 2 JWS against [rootPem] and returns the payload.
- * The leaf certificate's signature and the chain up to that root must hold.
+ * The leaf must carry Apple's receipt OID and must not be a CA. The next
+ * certificate must be a CA with the intermediate OID. The chain up to that
+ * root, and the leaf signature, must hold.
  */
 export function verifyAppleSignedPayload(
   jws: string,
@@ -69,6 +155,7 @@ export function verifyAppleSignedPayload(
   const top = certificates[certificates.length - 1];
   const topIsRoot = top.fingerprint256 === root.fingerprint256;
   if (!topIsRoot && !top.verify(root.publicKey)) return null;
+  if (!storeKitCertificates(certificates)) return null;
 
   const signatureOk = verify(
     'sha256',

@@ -21,6 +21,8 @@ export type EntitlementDb = {
   get(path: string): Promise<unknown>;
   set(path: string, value: unknown): Promise<void>;
   remove(path: string): Promise<void>;
+  /// Return undefined from update to leave the row unchanged.
+  transaction(path: string, update: (current: unknown) => unknown): Promise<boolean>;
   authExists(uid: string): Promise<boolean>;
 };
 
@@ -34,6 +36,14 @@ async function applyWrites(
   }
 }
 
+function sameStoredProof(current: unknown, expected: ProofRecord | null): boolean {
+  if (expected == null) return current == null;
+  const proof = proofRecordOf(current);
+  return proof != null && JSON.stringify(proof) === JSON.stringify(expected);
+}
+
+/// Claims the receipt inside a transaction, then writes the account rows.
+/// A receipt with no account token can still be taken by the first live account.
 export async function grantPurchase(
   db: EntitlementDb,
   uid: string,
@@ -42,14 +52,32 @@ export async function grantPurchase(
 ): Promise<{ error: 'invalid' | 'other-account' } | { products: Record<string, boolean> }> {
   const key = proofKey(purchase.store, purchase.token);
   if (!key) return { error: 'invalid' };
-  const existing = proofRecordOf(await db.get(`purchase_proofs/${key}`));
-  const previousOwnerExists =
-    existing != null && existing.uid !== uid ? await db.authExists(existing.uid) : false;
-  const products = entitlementRows(await db.get(`users/${uid}/entitlements`));
-  const plan = planGrant({ uid, now, purchase, existing, previousOwnerExists, products });
-  if ('error' in plan) return plan;
-  await applyWrites(db, plan.writes);
-  return { products: productsFromWrites(plan.writes) };
+  const proofPath = `purchase_proofs/${key}`;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const existing = proofRecordOf(await db.get(proofPath));
+    const previousOwnerExists =
+      existing != null && existing.uid !== uid ? await db.authExists(existing.uid) : false;
+    const products = entitlementRows(await db.get(`users/${uid}/entitlements`));
+    const plan = planGrant({ uid, now, purchase, existing, previousOwnerExists, products });
+    if ('error' in plan) return plan;
+    const proofWrite = plan.writes.find((write) => write.path === proofPath);
+    if (!proofWrite || proofWrite.value == null) return { error: 'invalid' };
+    const proofValue = proofWrite.value;
+    const committed = await db.transaction(proofPath, (current) => {
+      if (sameStoredProof(current, existing)) return proofValue;
+      // get() does not keep the row cached, so this often runs once with null
+      // and then again with the stored row. A different stored row aborts.
+      if (current == null) return proofValue;
+      return undefined;
+    });
+    if (!committed) continue;
+    await applyWrites(
+      db,
+      plan.writes.filter((write) => write.path !== proofPath),
+    );
+    return { products: productsFromWrites(plan.writes) };
+  }
+  return { error: 'other-account' };
 }
 
 export async function applyVerifiedNotification(

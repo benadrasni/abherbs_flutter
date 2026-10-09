@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import {
+  activeEntitlementIds,
+  hasUnlimitedNames,
   planGrant,
   productsFromWrites,
   purchaseActive,
@@ -184,7 +186,28 @@ function putPath(root: Record<string, unknown>, path: string, value: unknown): v
   cursor[parts[parts.length - 1]] = value;
 }
 
-function memoryDb(): EntitlementDb & { tree: Record<string, unknown> } {
+test('a subscription counts only while expiresAt is ahead', () => {
+  const row = (expiresAt?: number, active = true): EntitlementRow => ({
+    active,
+    ...(expiresAt == null ? {} : { expiresAt }),
+    store: 'app_store',
+    originalId: 'app_store_1000',
+    updatedAt: now,
+  });
+  const user = (id: string, value: EntitlementRow) => ({
+    entitlements: { products: { [id]: value } },
+  });
+  assert.deepEqual(activeEntitlementIds(user('field_guide_yearly', row(now + 1)), now), ['field_guide_yearly']);
+  assert.deepEqual(activeEntitlementIds(user('field_guide_yearly', row(now)), now), []);
+  assert.deepEqual(activeEntitlementIds(user('field_guide_yearly', row(now - 1)), now), []);
+  assert.deepEqual(activeEntitlementIds(user('field_guide_yearly', row()), now), ['field_guide_yearly']);
+  assert.deepEqual(activeEntitlementIds(user('field_guide_yearly', row(now + 1, false)), now), []);
+  assert.equal(hasUnlimitedNames(user('field_guide_yearly', row(now - 1)), now), false);
+  assert.equal(hasUnlimitedNames(user('field_guide_yearly', row(now + 1)), now), true);
+  assert.equal(hasUnlimitedNames(user('search_by_photo', row(now - 1)), now), true);
+});
+
+function memoryDb(live: (id: string) => boolean = (id) => id === uid): EntitlementDb & { tree: Record<string, unknown> } {
   const tree: Record<string, unknown> = {};
   const read = (path: string): unknown => {
     let cursor: unknown = tree;
@@ -213,8 +236,22 @@ function memoryDb(): EntitlementDb & { tree: Record<string, unknown> } {
         delete (cursor as Record<string, unknown>)[parts[parts.length - 1]];
       }
     },
+    async transaction(path, update) {
+      const stored = read(path);
+      // Same order as the Realtime Database client: a cache miss, then the stored row.
+      const guessed = update(null);
+      if (guessed === undefined) return false;
+      if (stored == null) {
+        putPath(tree, path, guessed);
+        return true;
+      }
+      const confirmed = update(stored);
+      if (confirmed === undefined) return false;
+      putPath(tree, path, confirmed);
+      return true;
+    },
     async authExists(id) {
-      return id === uid;
+      return live(id);
     },
   };
 }
@@ -231,4 +268,35 @@ test('granting then releasing removes the proof and the account record', async (
   assert.equal(account?.entitlements, undefined);
   const accounts = db.tree.store_accounts as Record<string, unknown> | undefined;
   assert.equal(accounts?.[token], undefined);
+});
+
+test('a receipt without an account token is claimed by the first live account', async () => {
+  const db = memoryDb(() => true);
+  const purchase = yearly({ accountToken: null });
+  const first = await grantPurchase(db, uid, purchase, now);
+  assert.equal('products' in first && first.products.field_guide_yearly, true);
+  const again = await grantPurchase(db, uid, purchase, now + 1);
+  assert.equal('products' in again && again.products.field_guide_yearly, true);
+  const second = await grantPurchase(db, 'user-2', purchase, now);
+  assert.deepEqual(second, { error: 'other-account' });
+});
+
+test('two concurrent claims of a token-less receipt cannot both win', async () => {
+  const db = memoryDb(() => true);
+  const purchase = yearly({ accountToken: null });
+  const [left, right] = await Promise.all([
+    grantPurchase(db, uid, purchase, now),
+    grantPurchase(db, 'user-2', purchase, now),
+  ]);
+  const won = [left, right].filter((result) => 'products' in result);
+  const lost = [left, right].filter((result) => 'error' in result);
+  assert.equal(won.length, 1);
+  assert.equal(lost.length, 1);
+  assert.equal('error' in lost[0] && lost[0].error, 'other-account');
+  const proofs = db.tree.purchase_proofs as Record<string, { uid: string }>;
+  const owner = proofs.app_store_1000.uid;
+  const users = db.tree.users as Record<string, { entitlements?: unknown }>;
+  assert.ok(users[owner]?.entitlements);
+  const other = owner === uid ? 'user-2' : uid;
+  assert.equal(users[other]?.entitlements, undefined);
 });
