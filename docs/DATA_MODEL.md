@@ -168,7 +168,7 @@ Empty / missing means show the Latin name. Later-language publishes (`publish_ne
 }
 ```
 
-`list` keys are `plants_headers` ids. Values are `1` (membership only), a year `1900–2100` for campaigns such as Blume / Baum / Orchidee des Jahres, or a state name for a state-flower list. One species that is the flower of more than one state stores a map whose keys are those state names. The list is ordered by state. Optional `sourceUrl` is the campaign’s official page. Optional `parameter` is a short classifier such as a country epithet or a US state name. Production reads every key of `list` with `int.parse`. A genus name in `list` throws, and that list never opens. A genus-only designation is the sibling `genera`, which those builds ignore:
+`list` keys are `plants_headers` ids. Values are `1` (membership only), a year `1900–2100` for campaigns such as Blume / Baum / Orchidee des Jahres, or a state name for a state-flower list. One species that is the flower of more than one state stores a map whose keys are those state names. When a state also designates a wildflower, that row is labeled `{State} (wildflower)`. The list is ordered by state. Optional `sourceUrl` is the campaign’s official page. Optional `parameter` is a short classifier such as a country epithet or a US state name. Production reads every key of `list` with `int.parse`. A genus name in `list` throws, and that list never opens. A genus-only designation is the sibling `genera`, which those builds ignore:
 
 ```json
 {
