@@ -120,7 +120,7 @@ The silent ceiling is 15 Plant.id calls on a UTC day for this account. You do no
 
 Setup: a new signed-in account that has never taken the Play trial on `field_guide_yearly`. Android only.
 
-1. Person, Field Guide. Yearly is selected. The row shows the store price, about $19.99 in the US. The button says Start 7 days free.
+1. Person, Field Guide. Yearly is selected. The row shows the store price, about $24.99 in the US. The button says Start 7 days free.
 2. Buy the yearly plan. Complete the Play trial sheet. Dismiss the store.
 3. Person now says Field Guide, with “no ads · Seen synced”. The Field Guide row is gone. Restore purchases remains.
 4. Find has no banner. The camera has no name dots. Take two photos. Both name, and `photo_quota` does not increment `namesUsed`.
