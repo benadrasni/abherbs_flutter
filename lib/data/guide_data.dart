@@ -125,11 +125,15 @@ class GuideTabs {
   static final ValueNotifier<int> unconfirmed = ValueNotifier(0);
 }
 
-/// Leaves the key and opens a shell tab. Find stays selected while the key
-/// is open; tapping Find, Book, or Seen returns to that tab.
+/// Leaves the key, or a custom list, and opens a shell tab. Find stays
+/// selected while the key is open; tapping Find, Book, or Seen returns to
+/// that tab.
 void leaveGuideKeyForTab(BuildContext context, int index) {
   GuideTabs.show?.call(index);
-  popGuideKeyToFind(context);
+  Navigator.popUntil(context, (route) {
+    final name = route.settings.name;
+    return name != guideCustomRouteName && !guideIsKeyRoute(name);
+  });
 }
 
 /// Opens a shell tab and drops every page pushed over it.

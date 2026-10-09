@@ -527,6 +527,45 @@ void main() {
     );
     expect(tester.getSize(find.byType(GuidePhoto).first).height, 64);
   });
+
+  testWidgets('Find, Book, and Seen leave a custom list', (tester) async {
+    final tabs = <int>[];
+    final previous = GuideTabs.show;
+    GuideTabs.show = tabs.add;
+    addTearDown(() => GuideTabs.show = previous);
+
+    for (final label in ['Find', 'Book', 'Seen']) {
+      await _pump(
+        tester,
+        Builder(
+          builder: (context) => TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  settings: const RouteSettings(name: guideCustomRouteName),
+                  builder: (context) => const GuideKeyScaffold(
+                    child: Text('US State flowers'),
+                  ),
+                ),
+              );
+            },
+            child: const Text('open'),
+          ),
+        ),
+        size: const Size(1194, 834),
+      );
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      expect(find.text('US State flowers'), findsOneWidget);
+
+      await tester.tap(find.text(label));
+      await tester.pumpAndSettle();
+      expect(find.text('US State flowers'), findsNothing);
+      expect(find.text('open'), findsOneWidget);
+    }
+    expect(tabs, [0, 1, 2]);
+  });
 }
 
 GuideNewDrop _drop(String date, int count, {int start = 0}) {
