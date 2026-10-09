@@ -481,6 +481,39 @@ void main() {
     expect(find.text('Six white tepals.'), findsOneWidget);
   });
 
+  testWidgets('tablet species pills wrap as compact chips', (tester) async {
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+      )),
+      size: const Size(1032, 1376),
+    );
+
+    final notes = tester.getRect(find.byKey(const Key('guide-jump-trivia')));
+    final flower = tester.getRect(find.byKey(const Key('guide-jump-flower')));
+    expect(notes.width, lessThan(160));
+    expect(flower.width, lessThan(160));
+    expect(notes.width, greaterThan(40));
+    expect((notes.top - flower.top).abs(), lessThan(4));
+    expect(flower.left, greaterThan(notes.right));
+    expect(
+      find.descendant(
+        of: find.byKey(const Key('guide-species-scroll')),
+        matching: find.byWidgetPredicate(
+          (widget) =>
+              widget is SingleChildScrollView &&
+              widget.scrollDirection == Axis.horizontal,
+        ),
+      ),
+      findsNothing,
+    );
+  });
+
   testWidgets('a taxonomy chip scrolls the entry', (tester) async {
     await _pump(
       tester,

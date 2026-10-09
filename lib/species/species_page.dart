@@ -1657,11 +1657,13 @@ class _JumpWrap extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
           child: Wrap(
+            key: const Key('guide-species-jumps'),
             spacing: 6,
             runSpacing: 6,
             children: [
               for (final chip in chips)
                 _Pill(
+                  key: Key('guide-jump-${chip.id}'),
                   label: chip.label,
                   filled: true,
                   onPressed: () => onJump(chip.id),
@@ -1750,20 +1752,30 @@ class _Pill extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onPressed,
-        child: Container(
-          height: _galleryPillHeight,
-          alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             border: filled ? Border.all(color: colors.rule) : null,
           ),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: colors.ink,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: SizedBox(
+              height: _galleryPillHeight,
+              // widthFactor keeps the chip as wide as its label. A plain
+              // center alignment expands to the wrap's max width, which
+              // stacks every tablet jump chip as a full-width bar.
+              child: Align(
+                alignment: Alignment.center,
+                widthFactor: 1,
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: colors.ink,
+                  ),
+                ),
+              ),
             ),
           ),
         ),
