@@ -4,14 +4,18 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 
 class Purchases {
   static bool hasOldVersion = false;
+
+  /// Receipts on this phone, so a plan change can replace one. Not a grant.
   static Map<String, PurchaseDetails> purchases = {};
 
   /// Product ids a checked receipt granted to the signed-in account.
-  /// Cleared on sign-out. Store purchases stay in [purchases].
+  /// Cleared on sign-out and when the account changes. The old paid app is
+  /// [hasOldVersion], on the feature methods, so it is not Field Guide.
   static final Set<String> accountProducts = <String>{};
 
+  /// A checked product on the signed-in account. [purchases] is not read.
   static bool owns(String productId) {
-    return purchases.containsKey(productId) || accountProducts.contains(productId);
+    return accountProducts.contains(productId);
   }
 
   static void replaceAccountProducts(Set<String> ids) {

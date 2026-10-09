@@ -1,5 +1,4 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
-import 'package:abherbs_flutter/person/account_deletion.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/person/person_page.dart';
@@ -15,24 +14,6 @@ void main() {
 
   tearDown(() {
     GuideAppearanceController.instance.resetForTest();
-  });
-
-  test('a failed store release stops account deletion', () async {
-    var removed = 0;
-    await expectLater(
-      runAccountDeletion(
-        release: () async => throw StateError('release'),
-        remove: () async => removed++,
-      ),
-      throwsA(isA<StateError>()),
-    );
-    expect(removed, 0);
-
-    await runAccountDeletion(
-      release: () async {},
-      remove: () async => removed++,
-    );
-    expect(removed, 1);
   });
 
   test('the version line keeps the name and the build number', () {

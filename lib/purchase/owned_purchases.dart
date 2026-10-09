@@ -40,18 +40,6 @@ bool samePurchaseIds(Iterable<String> a, Iterable<String> b) {
   return a.every(other.contains);
 }
 
-/// Saved product ids are not a grant. They have no receipt, so a launch
-/// without a store answer must not unlock them.
-void keepRememberedPurchases(Iterable<String> productIds) {
-  if (productIds.isEmpty) return;
-}
-
-Future<void> loadRememberedPurchases() async {
-  keepRememberedPurchases(
-    await Prefs.getStringListF(keyPurchases, const <String>[]),
-  );
-}
-
 Future<void>? _pending;
 
 /// Remembers store product ids on this phone and, for the signed-in account,

@@ -275,9 +275,7 @@ class _AppState extends State<App> {
       if (id.isEmpty) continue;
       final owned = purchase.status == PurchaseStatus.purchased ||
           purchase.status == PurchaseStatus.restored;
-      if (owned) {
-        unawaited(_confirmPurchase(purchase));
-      }
+      if (owned) unawaited(_confirmPurchase(purchase));
       // Finish here, not on the sales page. A purchase that arrives after
       // that page has closed still has to be acknowledged.
       if (purchase.pendingCompletePurchase) {
@@ -287,11 +285,24 @@ class _AppState extends State<App> {
   }
 
   Future<void> _confirmPurchase(PurchaseDetails purchase) async {
-    final valid = await verifyStorePurchase(purchase);
-    if (valid) {
-      unawaited(rememberStorePurchases([purchase.productID]));
+    final outcome = await submitStorePurchase(purchase);
+    final id = purchase.productID;
+    final confirmed = outcome.result == StoreProofResult.accepted &&
+        outcome.products[id] == true;
+    if (confirmed) {
+      Purchases.purchases[id] = purchase;
+      Purchases.namesRevision.value++;
+      unawaited(rememberStorePurchases([id]));
+      if (mounted) setState(() {});
+      return;
     }
-    if (mounted) setState(() {});
+    if (outcome.result != StoreProofResult.rejected || !mounted) return;
+    Fluttertoast.showToast(
+      msg: S.of(context).product_purchase_failed,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 5,
+    );
   }
 
   Future<void> _completePurchase(PurchaseDetails purchase) async {
@@ -481,7 +492,6 @@ class _AppState extends State<App> {
   }
 
   Future<void> initStoreInfo() async {
-    await loadRememberedPurchases();
     final bool isAvailable = await _inAppPurchase.isAvailable();
     if (!isAvailable) {
       _iapError();

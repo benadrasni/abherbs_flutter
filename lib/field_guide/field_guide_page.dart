@@ -4,12 +4,10 @@ import 'dart:io';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/field_guide/guide_field_guide.dart';
-import 'package:abherbs_flutter/seen/guide_private_photos.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/purchase/store_account.dart';
-import 'package:abherbs_flutter/purchase/store_proof.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -106,22 +104,17 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
   }
 
   void _onStore(List<PurchaseDetails> purchases) {
-    final finish = <PurchaseDetails>[];
     for (final purchase in purchases) {
       final id = purchase.productID;
       final fieldGuide = id == fieldGuideMonthly || id == fieldGuideYearly;
-      final photos = id == subscriptionMonthly || id == subscriptionYearly;
-      if (id.isEmpty || (!fieldGuide && !photos)) continue;
-      if (purchase.status == PurchaseStatus.purchased ||
-          purchase.status == PurchaseStatus.restored) {
-        finish.add(purchase);
-      } else if (fieldGuide &&
-          purchase.status == PurchaseStatus.error &&
-          !storePurchaseCanceled(purchase)) {
-        finish.add(purchase);
-      }
+      if (!fieldGuide || purchase.status != PurchaseStatus.error) continue;
+      if (storePurchaseCanceled(purchase)) continue;
+      if (!mounted) return;
+      setState(() {
+        _error = S.of(context).product_subscribe_failed;
+        _busy = false;
+      });
     }
-    if (finish.isNotEmpty) unawaited(_finish(finish));
   }
 
   void _applyOwned() {
@@ -131,47 +124,6 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
       catalog: loaded.catalog.withOwnership(guideOwnedProductIds()),
       products: loaded.products,
     );
-  }
-
-  Future<void> _finish(List<PurchaseDetails> purchases) async {
-    for (final purchase in purchases) {
-      if (purchase.productID.isEmpty ||
-          purchase.status == PurchaseStatus.pending ||
-          storePurchaseCanceled(purchase)) {
-        continue;
-      }
-      if (purchase.status == PurchaseStatus.error) {
-        if (!mounted) return;
-        setState(() {
-          _error = S.of(context).product_subscribe_failed;
-          _busy = false;
-        });
-        continue;
-      }
-      if (purchase.status != PurchaseStatus.purchased &&
-          purchase.status != PurchaseStatus.restored) {
-        continue;
-      }
-      final had = Purchases.purchases.containsKey(purchase.productID);
-      final valid = await verifyStorePurchase(purchase);
-      if (!mounted) return;
-      if (valid) {
-        unawaited(syncGuidePrivatePhotos());
-        _applyOwned();
-        setState(() {});
-        continue;
-      }
-      final dropped = dropUnverifiedPurchase(
-        purchase.productID,
-        alreadyKept: had,
-      );
-      _applyOwned();
-      if (!dropped || purchase.status != PurchaseStatus.purchased) {
-        setState(() {});
-        continue;
-      }
-      setState(() => _error = S.of(context).product_subscribe_failed);
-    }
   }
 
   GuideFieldGuideAccess _access(GuideFieldGuideCatalog catalog) {
@@ -544,12 +496,9 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
   }
 }
 
-/// This phone's store purchases plus a plan checked onto the account.
+/// Product ids the server has checked onto the signed-in account.
 Set<String> guideOwnedProductIds() {
-  return {
-    ...Purchases.purchases.keys,
-    ...Purchases.accountProducts,
-  };
+  return Set<String>.of(Purchases.accountProducts);
 }
 
 Future<GuideFieldGuideLoaded> loadGuideFieldGuide() async {

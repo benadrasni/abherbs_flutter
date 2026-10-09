@@ -1,8 +1,6 @@
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/purchase/account_entitlements.dart';
-import 'package:abherbs_flutter/purchase/owned_purchases.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
-import 'package:abherbs_flutter/purchase/store_proof.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -40,10 +38,21 @@ void main() {
   test('an inactive checked plan drops the copy this phone bought', () {
     Purchases.purchases.clear();
     Purchases.clearAccountProducts();
-    keepRememberedPurchases([fieldGuideYearly]);
+    Purchases.purchases[fieldGuideYearly] = _purchase(fieldGuideYearly);
     applyCheckedProducts({fieldGuideYearly: false, productNoAdsAndroid: true});
     expect(Purchases.purchases.containsKey(fieldGuideYearly), isFalse);
+    expect(Purchases.owns(fieldGuideYearly), isFalse);
     expect(Purchases.isNoAds(), isTrue);
+  });
+
+  test('a receipt on this phone is not a grant', () {
+    Purchases.purchases[fieldGuideYearly] = _purchase(fieldGuideYearly);
+    Purchases.purchases[productOffline] = _purchase(productOffline);
+    expect(Purchases.owns(fieldGuideYearly), isFalse);
+    expect(Purchases.hasFieldGuide(), isFalse);
+    expect(Purchases.isOffline(), isFalse);
+    expect(Purchases.showsAds(), isTrue);
+    expect(Purchases.syncsSeenPhotos(), isFalse);
   });
 
   test('a server entitlements row replaces a cache that has none', () {
@@ -96,56 +105,9 @@ void main() {
     expect(Purchases.accountProducts, isEmpty);
   });
 
-  test('a failed check does not grant and does not drop the account plan', () {
-    applyAccountEntitlements(accountEntitlementsOf({
-      'entitlements': {
-        'products': {
-          'field_guide_yearly': {'active': true, 'store': 'app_store'},
-        },
-      },
-    }));
-    final offline = _purchase(productOffline);
-    expect(
-      keepServerPurchase(offline, StoreProofResult.deferred, const {}),
-      isFalse,
-    );
-    expect(Purchases.isOffline(), isFalse);
-    expect(Purchases.hasFieldGuide(), isTrue);
-    expect(Purchases.syncsSeenPhotos(), isTrue);
-    expect(Purchases.purchases.containsKey(productOffline), isFalse);
-    expect(
-      dropUnverifiedPurchase(fieldGuideYearly, alreadyKept: false),
-      isFalse,
-    );
-
-    Purchases.purchases[productOffline] = offline;
-    expect(
-      keepServerPurchase(offline, StoreProofResult.deferred, const {}),
-      isFalse,
-    );
-    expect(Purchases.purchases.containsKey(productOffline), isTrue);
-    expect(dropUnverifiedPurchase(productOffline, alreadyKept: true), isFalse);
-    expect(Purchases.accountProducts.contains(fieldGuideYearly), isTrue);
-  });
-
-  test('an active server answer keeps the receipt on this phone', () {
-    final purchase = _purchase(fieldGuideYearly);
-    expect(
-      keepServerPurchase(
-        purchase,
-        StoreProofResult.accepted,
-        const {fieldGuideYearly: true},
-      ),
-      isTrue,
-    );
-    expect(Purchases.purchases.containsKey(fieldGuideYearly), isTrue);
-    expect(Purchases.hasFieldGuide(), isTrue);
-    expect(Purchases.showsAds(), isFalse);
-    expect(Purchases.syncsSeenPhotos(), isTrue);
-  });
-
   test('a failed account read drops products before names are ready', () {
     Purchases.replaceAccountProducts({fieldGuideYearly, productOffline});
+    Purchases.purchases[fieldGuideYearly] = _purchase(fieldGuideYearly);
     Purchases.hasOldVersion = true;
     Purchases.finishNames();
     expect(Purchases.namesReady, isTrue);
@@ -154,11 +116,31 @@ void main() {
     Purchases.failedAccountRead();
     expect(Purchases.accountProducts, isEmpty);
     expect(Purchases.hasOldVersion, isFalse);
+    expect(Purchases.owns(fieldGuideYearly), isFalse);
+    expect(Purchases.purchases.containsKey(fieldGuideYearly), isTrue);
     Purchases.finishNames();
     expect(Purchases.namesReady, isTrue);
     expect(Purchases.hasFieldGuide(), isFalse);
     expect(Purchases.isOffline(), isFalse);
     expect(Purchases.isNoAds(), isFalse);
+  });
+
+  test('switching accounts drops the grant and leaves the phone receipt', () {
+    Purchases.holdNamesFor(null);
+    Purchases.replaceAccountProducts({fieldGuideYearly});
+    Purchases.purchases[fieldGuideYearly] = _purchase(fieldGuideYearly);
+    Purchases.finishNames();
+    expect(Purchases.owns(fieldGuideYearly), isTrue);
+
+    expect(Purchases.holdNamesFor('other'), isTrue);
+    expect(Purchases.namesReady, isFalse);
+    expect(Purchases.accountProducts, isEmpty);
+    expect(Purchases.owns(fieldGuideYearly), isFalse);
+    expect(Purchases.hasFieldGuide(), isFalse);
+    expect(Purchases.purchases.containsKey(fieldGuideYearly), isTrue);
+
+    Purchases.holdNamesFor(null);
+    Purchases.namesReady = false;
   });
 }
 

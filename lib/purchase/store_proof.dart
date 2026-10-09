@@ -1,10 +1,8 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/purchase/account_entitlements.dart';
-import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -18,40 +16,6 @@ class StoreProofOutcome {
   final Map<String, bool> products;
 
   const StoreProofOutcome(this.result, [this.products = const {}]);
-}
-
-/// The server accepted this receipt and marked [productId] active.
-/// Rejected, deferred, and inactive answers do not grant.
-bool storeProofGrants(
-  StoreProofResult result,
-  Map<String, bool> products,
-  String productId,
-) {
-  if (productId.isEmpty) return false;
-  if (result != StoreProofResult.accepted) return false;
-  return products[productId] == true;
-}
-
-/// Keeps [purchase] on this phone when [storeProofGrants] is true.
-/// A failed or offline check does not add it.
-bool keepServerPurchase(
-  PurchaseDetails purchase,
-  StoreProofResult result,
-  Map<String, bool> products,
-) {
-  final id = purchase.productID;
-  if (!storeProofGrants(result, products, id)) return false;
-  Purchases.purchases[id] = purchase;
-  return true;
-}
-
-/// Drops a receipt this check did not confirm and this phone did not
-/// already keep. An entitlement the account holds stays.
-bool dropUnverifiedPurchase(String productId, {required bool alreadyKept}) {
-  if (productId.isEmpty || alreadyKept) return false;
-  if (Purchases.accountProducts.contains(productId)) return false;
-  Purchases.purchases.remove(productId);
-  return true;
 }
 
 class _PendingProof {
@@ -130,18 +94,6 @@ Future<StoreProofOutcome> submitStoreProof({
     debugPrint('store proof: $error');
     return const StoreProofOutcome(StoreProofResult.deferred);
   }
-}
-
-/// Submits the receipt. True only when the server marks this product active.
-/// A failed or offline check does not grant. An entitlement the account
-/// already holds is left in place, and a checked expiry still removes it.
-Future<bool> verifyStorePurchase(PurchaseDetails purchase) async {
-  if (purchase.status != PurchaseStatus.purchased &&
-      purchase.status != PurchaseStatus.restored) {
-    return false;
-  }
-  final outcome = await submitStorePurchase(purchase);
-  return keepServerPurchase(purchase, outcome.result, outcome.products);
 }
 
 Future<void> registerStoreAccount() async {
