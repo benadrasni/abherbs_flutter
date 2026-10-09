@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:abherbs_flutter/person/authentication.dart';
@@ -11,6 +10,13 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 const _pendingProofs = 'pending_store_proofs';
 
 enum StoreProofResult { accepted, rejected, deferred }
+
+class StoreProofOutcome {
+  final StoreProofResult result;
+  final Map<String, bool> products;
+
+  const StoreProofOutcome(this.result, [this.products = const {}]);
+}
 
 class _PendingProof {
   final String store;
@@ -28,11 +34,13 @@ class _PendingProof {
 
 /// Sends the store proof to `submitPurchase`. A signed-out phone keeps the
 /// proof and sends it after sign-in. An invalid proof is rejected. A network
-/// failure stays deferred so a purchase the store already charged is kept.
-Future<StoreProofResult> submitStorePurchase(PurchaseDetails purchase) {
+/// failure stays deferred and does not unlock the product.
+Future<StoreProofOutcome> submitStorePurchase(PurchaseDetails purchase) {
   final store = purchase.verificationData.source;
   if (store != 'app_store' && store != 'google_play') {
-    return Future<StoreProofResult>.value(StoreProofResult.deferred);
+    return Future<StoreProofOutcome>.value(
+      const StoreProofOutcome(StoreProofResult.deferred),
+    );
   }
   return submitStoreProof(
     store: store,
@@ -41,15 +49,17 @@ Future<StoreProofResult> submitStorePurchase(PurchaseDetails purchase) {
   );
 }
 
-Future<StoreProofResult> submitStoreProof({
+Future<StoreProofOutcome> submitStoreProof({
   required String store,
   required String productId,
   required String proof,
 }) async {
-  if (productId.isEmpty || proof.isEmpty) return StoreProofResult.deferred;
+  if (productId.isEmpty || proof.isEmpty) {
+    return const StoreProofOutcome(StoreProofResult.deferred);
+  }
   if (Auth.appUser == null) {
     await _rememberPending(store, productId, proof);
-    return StoreProofResult.deferred;
+    return const StoreProofOutcome(StoreProofResult.deferred);
   }
   try {
     final response = await FirebaseFunctions.instance
@@ -62,38 +72,28 @@ Future<StoreProofResult> submitStoreProof({
       'productId': productId,
       'proof': proof,
     });
-    applyCheckedProducts(checkedProductsOf(response.data));
+    final products = checkedProductsOf(response.data);
+    applyCheckedProducts(products);
     await _dropPending(store, productId);
-    return StoreProofResult.accepted;
+    return StoreProofOutcome(StoreProofResult.accepted, products);
   } on FirebaseFunctionsException catch (error) {
     if (error.code == 'invalid-argument') {
       await _dropPending(store, productId);
       debugPrint('store proof rejected');
-      return StoreProofResult.rejected;
+      return const StoreProofOutcome(StoreProofResult.rejected);
     }
     if (error.code == 'already-exists') {
       await _dropPending(store, productId);
-      return StoreProofResult.deferred;
+      return const StoreProofOutcome(StoreProofResult.deferred);
     }
     await _rememberPending(store, productId, proof);
     debugPrint('store proof: ${error.code}');
-    return StoreProofResult.deferred;
+    return const StoreProofOutcome(StoreProofResult.deferred);
   } catch (error) {
     await _rememberPending(store, productId, proof);
     debugPrint('store proof: $error');
-    return StoreProofResult.deferred;
+    return const StoreProofOutcome(StoreProofResult.deferred);
   }
-}
-
-/// Submits the receipt. A store purchase stays on this phone when the
-/// server cannot check it. A checked expiry still removes it.
-Future<bool> verifyStorePurchase(PurchaseDetails purchase) async {
-  if (purchase.status != PurchaseStatus.purchased &&
-      purchase.status != PurchaseStatus.restored) {
-    return false;
-  }
-  await submitStorePurchase(purchase);
-  return true;
 }
 
 Future<void> registerStoreAccount() async {
@@ -133,6 +133,7 @@ Future<void> releaseStorePurchases() async {
         .call();
   } catch (error) {
     debugPrint('release purchases: $error');
+    rethrow;
   }
 }
 

@@ -7,7 +7,6 @@ import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -526,22 +525,17 @@ void main() {
       (tester) async {
     await tester.binding.setSurfaceSize(const Size(390, 844));
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    addTearDown(() => Purchases.purchases.clear());
+    addTearDown(() {
+      Purchases.purchases.clear();
+      Purchases.clearAccountProducts();
+    });
     Purchases.purchases.clear();
+    Purchases.clearAccountProducts();
     GuideOfflineRequest? request;
     await tester.pumpWidget(_app(GuideOfflinePage(
       view: _view(canDownload: false),
       onFieldGuide: () async {
-        Purchases.purchases[fieldGuideYearly] = PurchaseDetails(
-          productID: fieldGuideYearly,
-          verificationData: PurchaseVerificationData(
-            localVerificationData: '',
-            serverVerificationData: '',
-            source: 'test',
-          ),
-          transactionDate: '0',
-          status: PurchaseStatus.purchased,
-        );
+        Purchases.replaceAccountProducts({fieldGuideYearly});
       },
       onDownload: (value) async => request = value,
     )));

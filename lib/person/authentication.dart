@@ -189,8 +189,8 @@ class Auth {
       }));
     } catch (error) {
       if (gen != _accountGen) return;
-      Purchases.hasOldVersion = false;
       credits = 0;
+      Purchases.failedAccountRead();
     }
 
     if (Purchases.isPhotoSearch()) {
@@ -254,8 +254,7 @@ class Auth {
     return firebaseAuth.userChanges().listen((user) {
       final signedIn = _signedIn(user);
       appUser = signedIn;
-      if (signedIn == null) credits = 0;
-      Purchases.holdNamesFor(signedIn?.uid);
+      if (Purchases.holdNamesFor(signedIn?.uid)) credits = 0;
       listener(signedIn);
     });
   }

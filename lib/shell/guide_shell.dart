@@ -21,7 +21,6 @@ import 'package:abherbs_flutter/data/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 
 class GuideShell extends StatefulWidget {
   const GuideShell({super.key});
@@ -49,7 +48,6 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   StreamSubscription<User?>? _authSub;
   StreamSubscription<DatabaseEvent>? _quotaSub;
   StreamSubscription<DatabaseEvent>? _seenRemote;
-  StreamSubscription<List<PurchaseDetails>>? _purchaseSub;
   String? _seenWatchUid;
   bool _seenLoadActive = false;
   bool _seenReloadQueued = false;
@@ -79,19 +77,6 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     _watchSeenRemote();
     _loadColors();
     unawaited(_checkVersion());
-    _purchaseSub = InAppPurchase.instance.purchaseStream.listen(
-      (purchases) {
-        final owned = purchases.any((purchase) {
-          return purchase.status == PurchaseStatus.restored ||
-              purchase.status == PurchaseStatus.purchased;
-        });
-        if (owned && mounted) {
-          setState(() {});
-          unawaited(syncGuidePrivatePhotos());
-        }
-      },
-      onError: (Object error) => debugPrint('guide purchases: $error'),
-    );
   }
 
   @override
@@ -123,7 +108,6 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     _authSub?.cancel();
     _quotaSub?.cancel();
     _seenRemote?.cancel();
-    _purchaseSub?.cancel();
     super.dispose();
   }
 
