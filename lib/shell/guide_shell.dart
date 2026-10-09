@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/book/book_page.dart';
 import 'package:abherbs_flutter/find/find_page.dart';
 import 'package:abherbs_flutter/camera/guide_camera.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
+import 'package:abherbs_flutter/data/guide_favorites.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/seen/guide_private_photos.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
@@ -34,6 +35,8 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   int _index = 0;
   String? _languageCode;
   int _listTicket = 0;
+  int _favoriteTicket = 0;
+  GuideListCover? _favorites;
   int _findTicket = 0;
   int _seenTicket = 0;
   int _unconfirmedTicket = 0;
@@ -73,6 +76,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
       unawaited(_onAccount(user));
     });
     guideMonthCount.addListener(_onMonth);
+    guideFavoriteIds.addListener(_onFavoriteIds);
     _watchQuota();
     _watchSeenRemote();
     _loadColors();
@@ -86,6 +90,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     if (_languageCode == code) return;
     _languageCode = code;
     _loadLists();
+    unawaited(_refreshFavoriteCover());
     _loadFinds();
     if (_opened.contains(2)) {
       _loadSeen();
@@ -105,6 +110,8 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     guideGuestFreeRemaining.removeListener(_onGuestFree);
     Purchases.namesRevision.removeListener(_onNames);
     guideMonthCount.removeListener(_onMonth);
+    guideFavoriteIds.removeListener(_onFavoriteIds);
+    watchGuideFavorites(null);
     _authSub?.cancel();
     _quotaSub?.cancel();
     _seenRemote?.cancel();
@@ -229,6 +236,8 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   Future<void> _onAccount(User? user) async {
     final ticket = ++_accountTicket;
     _watchQuota();
+    watchGuideFavorites(user);
+    unawaited(_refreshFavoriteCover());
     _watchSeenRemote();
     _resetSeenForUser();
     if (user == null) guideMonthCount.value = GuideMonthCount.empty;
@@ -284,6 +293,30 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
       setState(() => _colorCounts = counts);
     } catch (error) {
       debugPrint('guide colors: $error');
+    }
+  }
+
+  void _onFavoriteIds() {
+    unawaited(_refreshFavoriteCover());
+  }
+
+  Future<void> _refreshFavoriteCover() async {
+    final code = _languageCode;
+    if (code == null) return;
+    final ticket = ++_favoriteTicket;
+    if (Auth.appUser == null || guideFavoriteIds.value.isEmpty) {
+      if (!mounted || ticket != _favoriteTicket) return;
+      if (_favorites != null) setState(() => _favorites = null);
+      return;
+    }
+    try {
+      final cover = await loadGuideFavoriteCover(code);
+      if (!mounted || ticket != _favoriteTicket) return;
+      setState(() => _favorites = cover);
+    } catch (error) {
+      debugPrint('guide favorites: $error');
+      if (!mounted || ticket != _favoriteTicket) return;
+      if (_favorites != null) setState(() => _favorites = null);
     }
   }
 
@@ -419,6 +452,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
               FindPage(
                 colorCounts: _colorCounts,
                 lists: _lists,
+                favorites: _favorites,
                 finds: _finds,
                 allowance: guideCameraLiveAllowance(
                   guestFree: guideGuestFreeRemaining.value,
@@ -429,6 +463,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
               _opened.contains(1)
                   ? BookPage(
                       lists: _lists,
+                      favorites: _favorites,
                       segment: _bookSegment,
                       onSegment: (segment) {
                         if (_bookSegment == segment) return;

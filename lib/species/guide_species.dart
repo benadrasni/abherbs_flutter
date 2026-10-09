@@ -188,6 +188,10 @@ class GuideSpecies {
   final List<GuideSighting> sightings;
   final GuideSpeciesSeen? seen;
 
+  /// Catalog id. Favorites are stored under this key. Missing on a plant
+  /// that is not in the book.
+  final String? id;
+
   const GuideSpecies({
     required this.name,
     required this.author,
@@ -213,6 +217,7 @@ class GuideSpecies {
     required this.sources,
     required this.sightings,
     required this.seen,
+    this.id,
   });
 
   bool get hasVernacular => distinctVernacular(label, name) != null;
@@ -262,6 +267,7 @@ GuideSpecies? assembleGuideSpecies({
     sources: guideSourceLinks(_sourceUrls(translation, plant)),
     sightings: sightings,
     seen: seen,
+    id: _plantId(plant['id']),
   );
 }
 
@@ -695,6 +701,22 @@ String? _text(dynamic value) {
   final trimmed = value.trim();
   if (trimmed.isEmpty) return null;
   return trimmed;
+}
+
+/// Catalog id as stored on the plant, whether the snapshot holds an int or
+/// a string. Zero is a real id.
+String? _plantId(dynamic value) {
+  if (value is int) return '$value';
+  if (value is num) {
+    final whole = value.toInt();
+    if (whole == value) return '$whole';
+  }
+  if (value is String) {
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) return null;
+    return trimmed;
+  }
+  return null;
 }
 
 int _int(dynamic value) {

@@ -37,6 +37,7 @@ void main() {
       sightings: const [],
     );
     expect(species!.inflorescenceTypes, ['head']);
+    expect(species.id, '69');
   });
 
   testWidgets('flower parts run down the left column, then the right',

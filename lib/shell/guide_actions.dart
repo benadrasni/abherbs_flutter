@@ -22,6 +22,7 @@ import 'package:abherbs_flutter/person/setting_utils.dart';
 import 'package:abherbs_flutter/person/account_deletion.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/shell/dialogs.dart';
+import 'package:abherbs_flutter/shell/guide_widgets.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -132,9 +133,8 @@ Future<void> openGuideLanguage(BuildContext context) async {
     MaterialPageRoute<void>(
       settings: const RouteSettings(name: guideLanguageRouteName),
       builder: (context) => GuideLanguagePage(
-        selectedKey: saved.isEmpty
-            ? ''
-            : (languageListKey(languages, saved) ?? saved),
+        selectedKey:
+            saved.isEmpty ? '' : (languageListKey(languages, saved) ?? saved),
         // The phone's language, not the language currently on screen.
         phoneName: guideLanguageName(languages, '', getDeviceLocale()),
         options: guideLanguageOptions(languages),
@@ -357,7 +357,9 @@ void openGuideList(
             colorId: '',
             habitatId: null,
             petalId: '',
-            listTitle: cover.title,
+            listTitle: guideListTitle(context, cover),
+            listEmpty:
+                cover.isFavorite ? S.of(context).guide_favorite_empty : null,
             listBackLabel: back,
             loadResults: (_) => loadGuideListedPlants(cover.path, language),
             loadPrefs: () async => const GuideResultPrefs(),

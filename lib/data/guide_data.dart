@@ -4,6 +4,7 @@ import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/data/plant_translation.dart';
 import 'package:abherbs_flutter/key/filter_utils.dart';
 import 'package:abherbs_flutter/seen/guide_private_photos.dart';
+import 'package:abherbs_flutter/data/guide_favorites.dart';
 import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/search/guide_search.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
@@ -41,6 +42,9 @@ class GuideListCover {
   /// True when plant values are state names rather than years.
   final bool labeled;
 
+  /// The signed-in account's favorite flowers. Not an editorial list.
+  final bool isFavorite;
+
   GuideListCover({
     required this.title,
     required this.photoPath,
@@ -54,6 +58,7 @@ class GuideListCover {
     this.hasSource = false,
     this.parameter = '',
     this.labeled = false,
+    this.isFavorite = false,
   });
 }
 
@@ -291,6 +296,39 @@ Future<List<GuideResultPlant>> loadGuideListedPlants(
         await _guideHeaderPlant(id, lang);
   }));
   return plants.whereType<GuideResultPlant>().toList();
+}
+
+/// Book cover for the signed-in account's favorites. Null when signed out
+/// or when nothing is marked. Thumbs follow numeric plant id order.
+Future<GuideListCover?> loadGuideFavoriteCover(String languageCode) async {
+  final user = Auth.appUser;
+  if (user == null) return null;
+  final ids = guideFavoriteIds.value.toList()..sort(_compareFavoriteIds);
+  if (ids.isEmpty) return null;
+  final lang = getLanguageCode(languageCode);
+  final thumbs = <String>[];
+  for (final id in ids.take(4)) {
+    final plant =
+        await _guideResultPlant(id, lang) ?? await _guideHeaderPlant(id, lang);
+    final path = plant?.photoPath;
+    if (path != null && path.isNotEmpty) thumbs.add(path);
+  }
+  return GuideListCover(
+    title: '',
+    photoPath: thumbs.isEmpty ? null : thumbs.first,
+    thumbs: thumbs,
+    path: usersReference.child(user.uid).child(firebaseAttributeFavorite),
+    isNew: false,
+    count: ids.length,
+    isFavorite: true,
+  );
+}
+
+int _compareFavoriteIds(String a, String b) {
+  final left = int.tryParse(a);
+  final right = int.tryParse(b);
+  if (left != null && right != null) return left.compareTo(right);
+  return a.compareTo(b);
 }
 
 Future<String?> loadGuideTaxonTitle(String latin, String languageCode) async {
@@ -821,7 +859,8 @@ Future<String?> _catalogPhoto(String name) async {
 /// The stats node is the headline. When it is missing, the same outdoor rows
 /// supply the counts. Indoor rows are left out of the year chart either way.
 Future<GuideSightingsLoad> loadGuideSightings() async {
-  final stats = publicObservationsReference.child(firebaseObservationsStats).get();
+  final stats =
+      publicObservationsReference.child(firebaseObservationsStats).get();
   final list = publicObservationsReference
       .child(firebaseObservationsByDate)
       .child(firebaseAttributeList)
@@ -876,6 +915,7 @@ String _listParameter(Map raw) {
 /// its group, so two country lists follow the parameter.
 @visibleForTesting
 int guideListRank(GuideListCover cover) {
+  if (cover.isFavorite) return -1;
   if (cover.isNew) return 0;
   if (cover.hasSource) return 1;
   if (cover.year != null || cover.parameter.isNotEmpty) return 2;
@@ -1004,7 +1044,8 @@ GuideListBody readGuideList(dynamic list, {dynamic genera}) {
       if (mark.state != null) mark,
   ];
   // A membership list stays a grid. Genus states must not hide those plants.
-  final stateList = marks.isNotEmpty || (genusStates.isNotEmpty && entries.isEmpty);
+  final stateList =
+      marks.isNotEmpty || (genusStates.isNotEmpty && entries.isEmpty);
   if (stateList) {
     final ranked = <_RankedState>[];
     for (final mark in marks) {
@@ -1302,9 +1343,8 @@ class _TimelineRank {
 @visibleForTesting
 List<GuideTimelineRow> readGuideTimeline(dynamic list, [dynamic genera]) {
   final speciesYears = readGuideYearIds(list);
-  final speciesStates = speciesYears.isEmpty
-      ? readGuideStateIds(list)
-      : const <GuideStateId>[];
+  final speciesStates =
+      speciesYears.isEmpty ? readGuideStateIds(list) : const <GuideStateId>[];
   final genusMarks = readGuideGenusMarks(genera);
   final stateMode = speciesStates.isNotEmpty ||
       (speciesYears.isEmpty && genusMarks.any((mark) => mark.state != null));
@@ -1327,7 +1367,8 @@ List<GuideTimelineRow> readGuideTimeline(dynamic list, [dynamic genera]) {
       ));
     }
     ranked.sort((a, b) {
-      final byState = a.row.state!.toLowerCase().compareTo(b.row.state!.toLowerCase());
+      final byState =
+          a.row.state!.toLowerCase().compareTo(b.row.state!.toLowerCase());
       if (byState != 0) return byState;
       return a.index.compareTo(b.index);
     });
@@ -1560,8 +1601,8 @@ Future<GuideYearList> loadGuideYearList(
     }
     final id = row.id;
     if (id == null) return null;
-    final plant = await _guideResultPlant(id, lang) ??
-        await _guideHeaderPlant(id, lang);
+    final plant =
+        await _guideResultPlant(id, lang) ?? await _guideHeaderPlant(id, lang);
     if (plant == null) return null;
     return GuideYearEntry(
       year: row.year ?? 0,

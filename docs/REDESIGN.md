@@ -22,9 +22,9 @@ Location is asked when they take a photo, or when they tap the region chip. It i
 
 Once location is allowed, the phone keeps its floristic region, and the region chip starts on it the next time. The chip still shows the region by name, and **Any region** is one tap away. Only the region code is kept for the chip, not the coordinates.
 
-The other tabs are **Book** and **Seen**. Book is families, genera, and the lists of flowers (`lists_custom/by language/{lang}`), using the same vernaculars as `translations_taxonomy`.
+The other tabs are **Book** and **Seen**. Book is families, genera, and the lists of flowers (`lists_custom/by language/{lang}`), using the same vernaculars as `translations_taxonomy`. A heart on the species page marks that plant as a favorite. **Favorite flowers** is that person’s list. It leads the lists on Find and on Book only when at least one plant is marked, and it stays with the account, so signing out hides it.
 
-**Lists of flowers** also appear on Find as a row of cover cards under the recent finds. A list opens on its own page with the same Photos / Plates switch as the result list. Year campaigns (for example *Blume des Jahres*, ČBS *Rostlina roku*) run as a timeline, newest year first, with the source linked. Other lists, such as vegetables and spices, use the result grid: in flower this month first. The first card is **New in the book**: the last 15 to 25 plants from `lists_custom/new`, grouped by the date they were added. Book cards show four thumbnails from that list. A language without its own lists shows the English ones. The species page uses the same sections as the site: gallery and plate, names, flower, inflorescence, fruit, leaf, stem, habitat, toxicity, uses, trivia, taxonomy, distribution. The person icon holds the account, restore, language, theme, and Field Guide. Theme is Light, Dark, or System; System is the default and follows the phone.
+**Lists of flowers** also appear on Find as a row of cover cards under the recent finds. A list opens on its own page with the same Photos / Plates switch as the result list. Year campaigns (for example *Blume des Jahres*, ČBS *Rostlina roku*) run as a timeline, newest year first, with the source linked. Other lists, such as vegetables and spices, use the result grid: in flower this month first. When a plant is marked, **Favorite flowers** is the first card and **New in the book** is the second. Otherwise the first card is **New in the book**: the last 15 to 25 plants from `lists_custom/new`, grouped by the date they were added. Book cards show four thumbnails from that list. A language without its own lists shows the English ones. The species page uses the same sections as the site: gallery and plate, names, flower, inflorescence, fruit, leaf, stem, habitat, toxicity, uses, trivia, taxonomy, distribution. The person icon holds the account, restore, language, theme, and Field Guide. Theme is Light, Dark, or System; System is the default and follows the phone.
 
 ## The meter
 
@@ -143,7 +143,7 @@ Database additions and changes are allowed when a new page needs a field or node
 
 | Screen | What it shows |
 |---|---|
-| Find | Search, camera with its meter, and step 1 of the key already open |
+| Find | Search, camera with its meter, and step 1 of the key already open. Favorite flowers leads the list covers when any plant is marked |
 | Search | Plants, families, and genera in one list |
 | Key · habitat, Key · petals | Steps 2 and 3. Eight habitat tiles with examples and estimated counts. Petals uses the live four choices |
 | Results | White, meadow, more than 5 petals. 93 plants, or fewer once a region is set or Wild only is on. Photos or plates |
@@ -152,7 +152,7 @@ Database additions and changes are allowed when a new page needs a field or node
 | Not a plant | Probably not a plant. Nothing saved, and the name is not used |
 | Outside the book | *Tanacetum corymbosum*, with oxeye daisy and feverfew offered as full pages |
 | Species from camera | Oxeye daisy, with the unconfirmed Seen bar |
-| Species page | Same sections as the website. Flower and Inflorescence open the diagrams. No ads |
+| Species page | Same sections as the website. A heart marks the plant as a favorite. Flower and Inflorescence open the diagrams. No ads |
 | Flower schema | Numbered plate of a complete flower, and the seventeen part names |
 | Inflorescences | The seventeen types. Opened from a species page, that plant’s stored type is marked; the first is the primary |
 | Seen | To confirm first, then the notebook by month. Delete on a confirmed find asks first |
@@ -160,8 +160,9 @@ Database additions and changes are allowed when a new page needs a field or node
 | Seen · delete a Sighting | A public find leaves Seen and Sightings. In review or not accepted, the copy you sent goes too |
 | Statistics · your finds | Counts, first and last, years, and countries with flags. Finds in Middle Europe are shown as Slovakia. Indoor finds are left out |
 | Statistics · Sightings | The same page for accepted finds. 1,778 sightings, 630 plants, 56 people. Years, and every country with its flag. Country, not a pin |
-| Book | Families, genera, lists of flowers |
+| Book | Families, genera, lists of flowers. Favorite flowers leads the lists when any plant is marked |
 | List of flowers | New in the book by date (last 15 to 25). Year campaigns newest first. Other lists use the result grid |
+| List · Favorites | The plants marked with the heart. The card is absent until one is marked, and it hides when signed out |
 | At the limit | Ad, Field Guide, or the key |
 | Field Guide | What stays free, what the subscription adds, 7-day trial, restore |
 | Offline | The whole book, or a floristic region. Each row shows the plants and the space the pictures take. The phone’s region is offered first |

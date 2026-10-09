@@ -203,6 +203,7 @@ class GuidePhoto extends StatelessWidget {
 }
 
 String guideListTitle(BuildContext context, GuideListCover cover) {
+  if (cover.isFavorite) return S.of(context).guide_favorite_flowers;
   return cover.isNew ? S.of(context).guide_new_in_book : cover.title;
 }
 

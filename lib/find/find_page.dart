@@ -10,6 +10,10 @@ import 'package:flutter/material.dart';
 class FindPage extends StatelessWidget {
   final Map<String, int>? colorCounts;
   final List<GuideListCover>? lists;
+
+  /// Signed-in favorites. Shown first in the list strip only when
+  /// [GuideListCover.count] is at least one. New in the book stays second.
+  final GuideListCover? favorites;
   final List<GuideFind>? finds;
   final GuideAllowance allowance;
   final VoidCallback onOpenBook;
@@ -19,6 +23,7 @@ class FindPage extends StatelessWidget {
     super.key,
     required this.colorCounts,
     required this.lists,
+    this.favorites,
     required this.finds,
     this.allowance = const GuideAllowance.guest(),
     required this.onOpenBook,
@@ -29,7 +34,7 @@ class FindPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final window = GuideWindow.of(context);
     final recent = (finds ?? const <GuideFind>[]).take(5).toList();
-    final flowerLists = lists?.toList()?..sort(compareGuideLists);
+    final flowerLists = _findLists(lists, favorites);
     final strings = S.of(context);
     final seen = recent.isEmpty
         ? null
@@ -643,6 +648,23 @@ class _ToConfirmBadge extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Editorial lists, with favorites first when at least one plant is marked.
+List<GuideListCover>? _findLists(
+  List<GuideListCover>? lists,
+  GuideListCover? favorites,
+) {
+  if (lists == null) return null;
+  final leading =
+      favorites != null && favorites.isFavorite && favorites.count > 0
+          ? favorites
+          : null;
+  return [
+    for (final cover in lists)
+      if (!cover.isFavorite) cover,
+    if (leading != null) leading,
+  ]..sort(compareGuideLists);
 }
 
 class _ListStrip extends StatelessWidget {

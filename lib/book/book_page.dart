@@ -14,6 +14,10 @@ const guideBookListsKey = Key('guide-book-lists');
 
 class BookPage extends StatefulWidget {
   final List<GuideListCover>? lists;
+
+  /// Signed-in favorites. Shown on Lists only when [GuideListCover.count]
+  /// is at least one. Find does not receive this cover.
+  final GuideListCover? favorites;
   final GuideBookSegment segment;
   final ValueChanged<GuideBookSegment> onSegment;
   final VoidCallback onOpenFind;
@@ -27,6 +31,7 @@ class BookPage extends StatefulWidget {
   const BookPage({
     super.key,
     required this.lists,
+    this.favorites,
     required this.segment,
     required this.onSegment,
     required this.onOpenFind,
@@ -217,35 +222,57 @@ class _BookPageState extends State<BookPage> {
       case GuideBookSegment.lists:
         final lists = widget.lists;
         if (lists == null) return _waiting();
-        if (lists.isEmpty) {
+        final picked = widget.favorites;
+        final leading = picked != null && picked.isFavorite && picked.count > 0
+            ? picked
+            : null;
+        final ordered = [
+          for (final cover in lists)
+            if (!cover.isFavorite) cover,
+        ]..sort(compareGuideLists);
+        final slivers = <Widget>[
+          if (leading != null)
+            SliverPadding(
+              padding: const EdgeInsets.only(top: 6),
+              sliver: SliverToBoxAdapter(
+                child: _listCard(context, leading),
+              ),
+            ),
+          if (ordered.isNotEmpty)
+            _listSliver(ordered, top: leading != null ? 0 : 6),
+        ];
+        if (slivers.isEmpty) {
           return const SliverToBoxAdapter(child: SizedBox.shrink());
         }
-        final ordered = lists.toList()..sort(compareGuideLists);
-        final columns =
-            GuideWindow.of(context).columns(phone: 1, tablet: 2, wide: 3);
-        if (columns == 1) {
-          return SliverPadding(
-            padding: const EdgeInsets.only(top: 6),
-            sliver: SliverList.builder(
-              itemCount: ordered.length,
-              itemBuilder: (context, index) =>
-                  _listCard(context, ordered[index]),
-            ),
-          );
-        }
-        return SliverPadding(
-          padding: const EdgeInsets.fromLTRB(10, 6, 10, 0),
-          sliver: _chunkedSliver(
-            count: ordered.length,
-            columns: columns,
-            item: (context, index) => _listCard(
-              context,
-              ordered[index],
-              padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 12),
-            ),
-          ),
-        );
+        if (slivers.length == 1) return slivers.single;
+        return SliverMainAxisGroup(slivers: slivers);
     }
+  }
+
+  Widget _listSliver(List<GuideListCover> ordered, {required double top}) {
+    final columns =
+        GuideWindow.of(context).columns(phone: 1, tablet: 2, wide: 3);
+    if (columns == 1) {
+      return SliverPadding(
+        padding: EdgeInsets.only(top: top),
+        sliver: SliverList.builder(
+          itemCount: ordered.length,
+          itemBuilder: (context, index) => _listCard(context, ordered[index]),
+        ),
+      );
+    }
+    return SliverPadding(
+      padding: EdgeInsets.fromLTRB(10, top, 10, 0),
+      sliver: _chunkedSliver(
+        count: ordered.length,
+        columns: columns,
+        item: (context, index) => _listCard(
+          context,
+          ordered[index],
+          padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 12),
+        ),
+      ),
+    );
   }
 
   Widget _taxonSliver(List<GuideSearchTaxon> rows) {
@@ -595,6 +622,7 @@ class _ListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
+    final favorite = cover.isFavorite;
     final photos = cover.thumbs.isNotEmpty
         ? cover.thumbs.take(4).toList()
         : (cover.photoPath == null ? const <String>[] : [cover.photoPath!]);
@@ -618,13 +646,18 @@ class _ListCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (photos.isNotEmpty) ...[
-                  _Thumbs(photos: photos),
+                  _Thumbs(
+                    photos: photos,
+                    slots: favorite ? photos.length.clamp(1, 4) : 4,
+                  ),
                   const SizedBox(height: 10),
                 ],
                 Wrap(
                   crossAxisAlignment: WrapCrossAlignment.center,
                   spacing: 6,
                   children: [
+                    if (favorite)
+                      Icon(Icons.favorite, size: 16, color: colors.madder),
                     Text(
                       guideListTitle(context, cover),
                       style: const TextStyle(
@@ -651,14 +684,16 @@ class _ListCard extends StatelessWidget {
 
 class _Thumbs extends StatelessWidget {
   final List<String> photos;
+  final int slots;
 
-  const _Thumbs({required this.photos});
+  const _Thumbs({required this.photos, this.slots = 4});
 
   @override
   Widget build(BuildContext context) {
+    final count = slots < 1 ? 1 : slots;
     return Row(
       children: [
-        for (var i = 0; i < 4; i++) ...[
+        for (var i = 0; i < count; i++) ...[
           if (i > 0) const SizedBox(width: 4),
           Expanded(
             child: AspectRatio(

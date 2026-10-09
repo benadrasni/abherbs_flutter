@@ -14,7 +14,9 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
 void main() {
-  test('a lowercase genus vernacular is shown beside the capitalized Latin name', () {
+  test(
+      'a lowercase genus vernacular is shown beside the capitalized Latin name',
+      () {
     expect(guideTaxonVernacular(['duranta'], 'Duranta'), 'duranta');
     expect(guideTaxonVernacular('  duranta  ', 'Duranta'), 'duranta');
     expect(guideTaxonVernacular(['Duranta'], 'Duranta'), isNull);
@@ -801,6 +803,7 @@ void main() {
     expect(find.text('+ Add to Seen'), findsNothing);
     expect(find.textContaining('Seen by you'), findsNothing);
     expect(find.byTooltip('Share'), findsNothing);
+    expect(find.byTooltip('Mark as favorite'), findsOneWidget);
 
     await tester.tap(find.text('It’s this'));
     await tester.pump();
@@ -811,6 +814,7 @@ void main() {
     expect(find.text('Confirmed.'), findsOneWidget);
     expect(find.text('Your photo · unconfirmed'), findsNothing);
     expect(find.byTooltip('Share'), findsOneWidget);
+    expect(find.byTooltip('Mark as favorite'), findsOneWidget);
     ScaffoldMessenger.of(tester.element(find.byType(GuideSpeciesPage)))
         .removeCurrentSnackBar();
     await tester.pumpAndSettle();
@@ -883,6 +887,134 @@ void main() {
     final pillTop =
         tester.getTopLeft(find.byKey(const Key('guide-video-pill'))).dy;
     expect(pillTop - videoBottom, 8);
+  });
+
+  testWidgets('a signed-in heart marks the plant', (tester) async {
+    final marks = <String, bool>{};
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+        isSignedIn: () => true,
+        favoriteOf: (id) => marks[id] == true,
+        onFavorite: (id, on) async => marks[id] = on,
+      )),
+    );
+
+    expect(_daisy().id, '0');
+    expect(find.byTooltip('Mark as favorite'), findsOneWidget);
+    expect(find.byIcon(Icons.favorite), findsNothing);
+
+    await tester.tap(find.byTooltip('Mark as favorite'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(marks['0'], isTrue);
+    expect(find.byTooltip('Remove from favorites'), findsOneWidget);
+    expect(find.text('Added to Favorite flowers.'), findsOneWidget);
+    final icon = tester.widget<Icon>(find.byIcon(Icons.favorite));
+    expect(
+      icon.color,
+      GuideColors.of(tester.element(find.byType(GuideSpeciesPage))).madder,
+    );
+    ScaffoldMessenger.of(tester.element(find.byType(GuideSpeciesPage)))
+        .removeCurrentSnackBar();
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byTooltip('Remove from favorites'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(marks['0'], isFalse);
+    expect(find.byTooltip('Mark as favorite'), findsOneWidget);
+    expect(find.text('Removed from Favorite flowers.'), findsOneWidget);
+  });
+
+  testWidgets('a guest heart waits for an account, then marks the plant',
+      (tester) async {
+    var signedIn = false;
+    var allowSignIn = false;
+    var signIns = 0;
+    final marks = <String, bool>{};
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+        isSignedIn: () => signedIn,
+        onSignIn: (_) async {
+          signIns += 1;
+          if (allowSignIn) signedIn = true;
+        },
+        favoriteOf: (id) => marks[id] == true,
+        onFavorite: (id, on) async => marks[id] = on,
+      )),
+    );
+
+    await tester.tap(find.byTooltip('Mark as favorite'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(signIns, 1);
+    expect(marks, isEmpty);
+    expect(find.byTooltip('Mark as favorite'), findsOneWidget);
+    expect(
+      find.text('Favorite flowers stay with your account.'),
+      findsOneWidget,
+    );
+    ScaffoldMessenger.of(tester.element(find.byType(GuideSpeciesPage)))
+        .removeCurrentSnackBar();
+    await tester.pumpAndSettle();
+
+    allowSignIn = true;
+    await tester.tap(find.byTooltip('Mark as favorite'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+
+    expect(signIns, 2);
+    expect(marks['0'], isTrue);
+    expect(find.byTooltip('Remove from favorites'), findsOneWidget);
+    expect(
+      find.text('Favorite flowers stay with your account.'),
+      findsOneWidget,
+    );
+    ScaffoldMessenger.of(tester.element(find.byType(GuideSpeciesPage)))
+        .removeCurrentSnackBar();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('Added to Favorite flowers.'), findsOneWidget);
+  });
+
+  testWidgets('a plant without a catalog id has no heart', (tester) async {
+    final species = assembleGuideSpecies(
+      name: 'Tanacetum corymbosum',
+      plant: {'name': 'Tanacetum corymbosum'},
+      translation: PlantTranslation()..label = 'corymbose tansy',
+      vernaculars: const {},
+      sightings: const [],
+    )!;
+    expect(species.id, isNull);
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Tanacetum corymbosum',
+        initial: species,
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+        isSignedIn: () => true,
+        onFavorite: (_, __) async {},
+      )),
+    );
+
+    expect(find.byTooltip('Mark as favorite'), findsNothing);
+    expect(find.byTooltip('Share'), findsOneWidget);
   });
 }
 

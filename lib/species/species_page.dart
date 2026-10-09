@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/camera/guide_camera.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
+import 'package:abherbs_flutter/data/guide_favorites.dart';
 import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/species/guide_species.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
@@ -123,8 +124,15 @@ class GuideSpeciesPage extends StatefulWidget {
 
   /// Replaces the notebook check in tests. True is a signed-in account or
   /// the anonymous guest. False opens sign-in and does not create a guest.
+  /// Favorites use this hook when a test sets it, and [Auth.appUser] otherwise.
   final bool Function()? isSignedIn;
   final Future<void> Function(BuildContext context)? onSignIn;
+
+  /// Replaces the favorites read in tests. The id is the catalog plant id.
+  final bool Function(String plantId)? favoriteOf;
+
+  /// Replaces [setGuideFavorite] in tests.
+  final Future<void> Function(String plantId, bool on)? onFavorite;
   final VoidCallback? onShowSeen;
   final GuideImageBuilder? imageBuilder;
   final GuideVideoBuilder? videoBuilder;
@@ -144,6 +152,8 @@ class GuideSpeciesPage extends StatefulWidget {
     this.pickPhoto,
     this.isSignedIn,
     this.onSignIn,
+    this.favoriteOf,
+    this.onFavorite,
     this.onShowSeen,
     this.imageBuilder,
     this.videoBuilder,
@@ -170,18 +180,34 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
   bool _saving = false;
   bool _kept = false;
   bool _pendingBusy = false;
+  bool _favoriteBusy = false;
+  bool? _favoriteOn;
   int _ticket = 0;
 
   @override
   void initState() {
     super.initState();
     Purchases.namesRevision.addListener(_onPlan);
+    if (widget.favoriteOf == null) {
+      guideFavoriteIds.addListener(_onFavoriteIds);
+    }
   }
 
   @override
   void dispose() {
     Purchases.namesRevision.removeListener(_onPlan);
+    if (widget.favoriteOf == null) {
+      guideFavoriteIds.removeListener(_onFavoriteIds);
+    }
     super.dispose();
+  }
+
+  void _onFavoriteIds() {
+    if (!mounted) return;
+    final id = _species?.id;
+    setState(() {
+      _favoriteOn = id == null ? null : guideFavoriteIds.value.contains(id);
+    });
   }
 
   void _onPlan() {
@@ -405,6 +431,8 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
       final month = widget.month;
       final signedIn = widget.isSignedIn;
       final signIn = widget.onSignIn;
+      final favoriteOf = widget.favoriteOf;
+      final onFavorite = widget.onFavorite;
       final saveSeen = widget.saveSeen;
       final pickPhoto = widget.pickPhoto;
       Navigator.pushReplacement(
@@ -420,6 +448,8 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
             month: month,
             isSignedIn: signedIn,
             onSignIn: signIn,
+            favoriteOf: favoriteOf,
+            onFavorite: onFavorite,
             saveSeen: saveSeen,
             pickPhoto: pickPhoto,
           ),
@@ -427,6 +457,68 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
       );
     } finally {
       if (mounted) setState(() => _pendingBusy = false);
+    }
+  }
+
+  bool _canFavorite(GuideSpecies species) {
+    final id = species.id;
+    return id != null && id.isNotEmpty;
+  }
+
+  bool _favoriteMarked(String? id) {
+    if (id == null || id.isEmpty) return false;
+    final chosen = _favoriteOn;
+    if (chosen != null) return chosen;
+    final of = widget.favoriteOf;
+    if (of != null) return of(id);
+    return guideFavoriteIds.value.contains(id);
+  }
+
+  bool _accountSignedIn() {
+    final check = widget.isSignedIn;
+    if (check != null) return check();
+    return Auth.appUser != null;
+  }
+
+  Future<void> _toggleFavorite(GuideSpecies species) async {
+    final id = species.id;
+    if (id == null || id.isEmpty || _favoriteBusy) return;
+    if (!_accountSignedIn()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(S.of(context).guide_favorite_account)),
+      );
+      final open = widget.onSignIn ?? _openSignIn;
+      await open(context);
+      if (!mounted || !_accountSignedIn()) return;
+      await _writeFavorite(id, true);
+      return;
+    }
+    await _writeFavorite(id, !_favoriteMarked(id));
+  }
+
+  Future<void> _writeFavorite(String id, bool on) async {
+    setState(() {
+      _favoriteBusy = true;
+      _favoriteOn = on;
+    });
+    try {
+      final write = widget.onFavorite ?? setGuideFavorite;
+      await write(id, on);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            on
+                ? S.of(context).guide_favorite_added
+                : S.of(context).guide_favorite_removed,
+          ),
+        ),
+      );
+    } catch (error) {
+      debugPrint('guide favorite $id: $error');
+      if (mounted) setState(() => _favoriteOn = null);
+    } finally {
+      if (mounted) setState(() => _favoriteBusy = false);
     }
   }
 
@@ -554,8 +646,10 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
         image: _image,
         height: galleryHeight,
         onBack: () => Navigator.maybePop(context),
-        onShare:
-            widget.pending == null || _kept ? () => _share(species) : null,
+        onShare: widget.pending == null || _kept ? () => _share(species) : null,
+        favorite: _favoriteMarked(species.id),
+        onFavorite:
+            _canFavorite(species) ? () => _toggleFavorite(species) : null,
         onOpen: _openPhoto,
         videoBuilder: widget.videoBuilder,
       ),
@@ -584,77 +678,76 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
           pinned: true,
           delegate: _JumpDelegate(chips: chips, onJump: _jump),
         ),
-        if (species.description != null)
-          SliverToBoxAdapter(child: _Lead(text: species.description!)),
-        if (notes != null)
+      if (species.description != null)
+        SliverToBoxAdapter(child: _Lead(text: species.description!)),
+      if (notes != null)
+        SliverToBoxAdapter(
+          child: _Aside(
+            key: _sectionKeys['trivia'],
+            boxKey: const Key('guide-aside-trivia'),
+            title: strings.guide_notes,
+            text: notes.text,
+            accent: colors.gold,
+            top: 14,
+          ),
+        ),
+      for (final section in species.sections)
+        if (section.id != 'trivia' && section.id != 'herbalism')
           SliverToBoxAdapter(
-            child: _Aside(
-              key: _sectionKeys['trivia'],
-              boxKey: const Key('guide-aside-trivia'),
-              title: strings.guide_notes,
-              text: notes.text,
-              accent: colors.gold,
-              top: 14,
+            child: _Section(
+              key: _sectionKeys[section.id],
+              title: _sectionTitle(strings, section.id),
+              text: section.text,
+              warn: section.id == 'toxicity',
+              onOpen: section.id == 'flower' || section.id == 'inflorescence'
+                  ? () => _openSchema(context, species, section.id)
+                  : null,
+              linkKey: section.id == 'flower'
+                  ? guideSchemaFlowerKey
+                  : section.id == 'inflorescence'
+                      ? guideSchemaInflorescenceKey
+                      : null,
             ),
           ),
-        for (final section in species.sections)
-          if (section.id != 'trivia' && section.id != 'herbalism')
-            SliverToBoxAdapter(
-              child: _Section(
-                key: _sectionKeys[section.id],
-                title: _sectionTitle(strings, section.id),
-                text: section.text,
-                warn: section.id == 'toxicity',
-                onOpen: section.id == 'flower' || section.id == 'inflorescence'
-                    ? () => _openSchema(context, species, section.id)
-                    : null,
-                linkKey: section.id == 'flower'
-                    ? guideSchemaFlowerKey
-                    : section.id == 'inflorescence'
-                        ? guideSchemaInflorescenceKey
-                        : null,
-              ),
-            ),
-        if (uses != null)
-          SliverToBoxAdapter(
-            child: _Aside(
-              key: _sectionKeys['herbalism'],
-              boxKey: const Key('guide-aside-herbalism'),
-              title: strings.plant_herbalism,
-              text: uses.text,
-              disclaimer: strings.plant_herbalism_disclaimer,
-              accent: colors.moss,
-              top: 16,
-            ),
-          ),
-        if (Purchases.showsAds())
-          const SliverToBoxAdapter(child: AppBannerAd()),
+      if (uses != null)
         SliverToBoxAdapter(
-          child: _Taxonomy(
-            key: _sectionKeys['taxonomy'],
-            ranks: species.ranks,
+          child: _Aside(
+            key: _sectionKeys['herbalism'],
+            boxKey: const Key('guide-aside-herbalism'),
+            title: strings.plant_herbalism,
+            text: uses.text,
+            disclaimer: strings.plant_herbalism_disclaimer,
+            accent: colors.moss,
+            top: 16,
           ),
         ),
-        SliverToBoxAdapter(
-          child: _Distribution(
-            key: _sectionKeys['distribution'],
-            path: species.mapPath,
-          ),
+      if (Purchases.showsAds()) const SliverToBoxAdapter(child: AppBannerAd()),
+      SliverToBoxAdapter(
+        child: _Taxonomy(
+          key: _sectionKeys['taxonomy'],
+          ranks: species.ranks,
         ),
-        SliverToBoxAdapter(
-          child: _Sightings(
-            key: _sectionKeys['sightings'],
-            sightings: species.sightings,
-            locale: locale,
-            image: _image,
-            onOpen: _openPhoto,
-          ),
+      ),
+      SliverToBoxAdapter(
+        child: _Distribution(
+          key: _sectionKeys['distribution'],
+          path: species.mapPath,
         ),
-        if (species.sources.isNotEmpty)
-          SliverToBoxAdapter(child: _Sources(links: species.sources)),
-        SliverToBoxAdapter(
-          child: SizedBox(height: 24 + MediaQuery.paddingOf(context).bottom),
+      ),
+      SliverToBoxAdapter(
+        child: _Sightings(
+          key: _sectionKeys['sightings'],
+          sightings: species.sightings,
+          locale: locale,
+          image: _image,
+          onOpen: _openPhoto,
         ),
+      ),
+      if (species.sources.isNotEmpty)
+        SliverToBoxAdapter(child: _Sources(links: species.sources)),
+      SliverToBoxAdapter(
+        child: SizedBox(height: 24 + MediaQuery.paddingOf(context).bottom),
+      ),
     ];
     if (window.wide) {
       return Row(
@@ -793,6 +886,8 @@ class _Gallery extends StatefulWidget {
   final double height;
   final VoidCallback onBack;
   final VoidCallback? onShare;
+  final bool favorite;
+  final VoidCallback? onFavorite;
   final ValueChanged<String> onOpen;
   final GuideVideoBuilder? videoBuilder;
 
@@ -802,6 +897,8 @@ class _Gallery extends StatefulWidget {
     required this.height,
     required this.onBack,
     required this.onShare,
+    required this.favorite,
+    required this.onFavorite,
     required this.onOpen,
     required this.videoBuilder,
   });
@@ -902,12 +999,33 @@ class _GalleryState extends State<_Gallery> {
                   onPressed: widget.onBack,
                   icon: const BackButtonIcon(),
                 ),
-                if (widget.onShare != null)
-                  _OverlayButton(
-                    label: strings.guide_share,
-                    onPressed: widget.onShare!,
-                    icon: const Icon(Icons.ios_share, size: 20),
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (widget.onFavorite != null)
+                      _OverlayButton(
+                        label: widget.favorite
+                            ? strings.guide_favorite_remove
+                            : strings.guide_favorite_add,
+                        onPressed: widget.onFavorite!,
+                        icon: Icon(
+                          widget.favorite
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          size: 20,
+                          color: widget.favorite ? colors.madder : null,
+                        ),
+                      ),
+                    if (widget.onFavorite != null && widget.onShare != null)
+                      const SizedBox(width: 8),
+                    if (widget.onShare != null)
+                      _OverlayButton(
+                        label: strings.guide_share,
+                        onPressed: widget.onShare!,
+                        icon: const Icon(Icons.ios_share, size: 20),
+                      ),
+                  ],
+                ),
               ],
             ),
           ),

@@ -83,6 +83,7 @@ class GuideResultsPage extends StatefulWidget {
   final String? listTitle;
   final String? listBackLabel;
   final String? listLatin;
+  final String? listEmpty;
   final Future<String?> Function()? loadListTitle;
 
   const GuideResultsPage({
@@ -109,6 +110,7 @@ class GuideResultsPage extends StatefulWidget {
     this.listTitle,
     this.listBackLabel,
     this.listLatin,
+    this.listEmpty,
     this.loadListTitle,
   });
 
@@ -467,6 +469,20 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
                   )
                 else if (_plants == null && _failed)
                   _Retry(onRetry: _load)
+                else if (_plants != null &&
+                    _plants!.isEmpty &&
+                    widget.listEmpty != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 28),
+                    child: Text(
+                      widget.listEmpty!,
+                      style: TextStyle(
+                        fontSize: 15,
+                        height: 1.4,
+                        color: colors.ink2,
+                      ),
+                    ),
+                  )
                 else
                   ..._grid(strings, arranged),
                 if (_plants != null) _footer(strings),
@@ -1018,112 +1034,111 @@ class _RegionSheet extends StatelessWidget {
     final colors = GuideColors.of(context);
     final tablet = GuideWindow.of(context).tablet;
     final screen = MediaQuery.sizeOf(context).height;
-    final height = tablet
-        ? (screen * 0.88 < 680 ? screen * 0.88 : 680.0)
-        : screen * 0.86;
+    final height =
+        tablet ? (screen * 0.88 < 680 ? screen * 0.88 : 680.0) : screen * 0.86;
     return Align(
       alignment: tablet ? Alignment.center : Alignment.bottomCenter,
       child: Padding(
         padding: tablet ? const EdgeInsets.all(32) : EdgeInsets.zero,
         child: Material(
-        color: colors.paper,
-        borderRadius: tablet
-            ? BorderRadius.circular(22)
-            : const BorderRadius.vertical(top: Radius.circular(22)),
-        clipBehavior: Clip.antiAlias,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: tablet ? 520 : double.infinity,
-            maxHeight: height,
-          ),
-          child: ListView(
-            shrinkWrap: true,
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 34),
-            children: [
-              if (!tablet) ...[
-                Center(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: colors.rule,
-                      borderRadius: BorderRadius.all(Radius.circular(3)),
+          color: colors.paper,
+          borderRadius: tablet
+              ? BorderRadius.circular(22)
+              : const BorderRadius.vertical(top: Radius.circular(22)),
+          clipBehavior: Clip.antiAlias,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: tablet ? 520 : double.infinity,
+              maxHeight: height,
+            ),
+            child: ListView(
+              shrinkWrap: true,
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 34),
+              children: [
+                if (!tablet) ...[
+                  Center(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: colors.rule,
+                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                      ),
+                      child: SizedBox(width: 40, height: 5),
                     ),
-                    child: SizedBox(width: 40, height: 5),
+                  ),
+                  const SizedBox(height: 14),
+                ],
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontFamily: GuideType.serif,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 23,
+                    height: 1.12,
+                    letterSpacing: -0.2,
+                    color: colors.ink,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  body,
+                  style: TextStyle(
+                    color: colors.ink2,
+                    height: 1.4,
                   ),
                 ),
                 const SizedBox(height: 14),
-              ],
-              Text(
-                title,
-                style: TextStyle(
-                  fontFamily: GuideType.serif,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 23,
-                  height: 1.12,
-                  letterSpacing: -0.2,
-                  color: colors.ink,
+                _LocationButton(
+                  title: locationTitle,
+                  body: locationBody,
+                  onPressed: onLocation,
                 ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                body,
-                style: TextStyle(
-                  color: colors.ink2,
-                  height: 1.4,
+                _RadioRow(
+                  label: anyRegion,
+                  count: counts[''],
+                  selected: selectedId == null,
+                  onPressed: onAny,
                 ),
-              ),
-              const SizedBox(height: 14),
-              _LocationButton(
-                title: locationTitle,
-                body: locationBody,
-                onPressed: onLocation,
-              ),
-              _RadioRow(
-                label: anyRegion,
-                count: counts[''],
-                selected: selectedId == null,
-                onPressed: onAny,
-              ),
-              if (!showAll) ...[
-                for (final id in guideFeaturedRegionIds)
-                  _RadioRow(
-                    label: regionName(id),
-                    count: counts[id],
-                    selected: selectedId == id,
-                    onPressed: () => onRegion(id),
-                  ),
-                InkWell(
-                  onTap: onShowAll,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 11),
-                    child: Text(
-                      allRegions,
-                      style: TextStyle(
-                        color: colors.moss,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-              ] else
-                for (var i = 0; i < guideRegionGroups.length; i++) ...[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 14, bottom: 2),
-                    child: Text(
-                      groupName(i).toUpperCase(),
-                      style: GuideType.eyebrow(colors),
-                    ),
-                  ),
-                  for (final id in guideRegionGroups[i])
+                if (!showAll) ...[
+                  for (final id in guideFeaturedRegionIds)
                     _RadioRow(
                       label: regionName(id),
                       count: counts[id],
                       selected: selectedId == id,
                       onPressed: () => onRegion(id),
                     ),
-                ],
-            ],
+                  InkWell(
+                    onTap: onShowAll,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 11),
+                      child: Text(
+                        allRegions,
+                        style: TextStyle(
+                          color: colors.moss,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ] else
+                  for (var i = 0; i < guideRegionGroups.length; i++) ...[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 14, bottom: 2),
+                      child: Text(
+                        groupName(i).toUpperCase(),
+                        style: GuideType.eyebrow(colors),
+                      ),
+                    ),
+                    for (final id in guideRegionGroups[i])
+                      _RadioRow(
+                        label: regionName(id),
+                        count: counts[id],
+                        selected: selectedId == id,
+                        onPressed: () => onRegion(id),
+                      ),
+                  ],
+              ],
+            ),
           ),
-        ),
         ),
       ),
     );

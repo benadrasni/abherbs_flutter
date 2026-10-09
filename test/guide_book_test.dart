@@ -341,6 +341,110 @@ void main() {
     expect(find.text('New in the book'), findsOneWidget);
     expect(find.byType(GuidePhoto), findsNWidgets(4));
   });
+
+  testWidgets('Favorite flowers leads Lists only when a plant is marked',
+      (tester) async {
+    GuideListCover? opened;
+    final favorites = GuideListCover(
+      title: '',
+      photoPath: 'photos/daisy.webp',
+      thumbs: const ['photos/oxeye.webp', 'photos/daisy.webp'],
+      path: FirebaseDatabase.instance.ref('users/anna/favorites'),
+      isNew: false,
+      count: 2,
+      isFavorite: true,
+    );
+    final lists = [
+      GuideListCover(
+        title: 'Alpine flowers',
+        photoPath: 'photos/alpine.webp',
+        thumbs: const ['photos/a.webp'],
+        path: FirebaseDatabase.instance.ref('lists/alpine'),
+        isNew: false,
+        count: 6,
+        year: 2024,
+      ),
+      GuideListCover(
+        title: '',
+        photoPath: 'photos/new.webp',
+        thumbs: const ['photos/new.webp'],
+        path: FirebaseDatabase.instance.ref('lists/new'),
+        isNew: true,
+        count: 2,
+        latest: DateTime(2026, 9, 1),
+      ),
+    ];
+
+    await _pump(
+      tester,
+      _Host(
+        start: GuideBookSegment.lists,
+        loadTaxa: (_) async => guideBookTaxa(index.families, index.genera),
+        lists: lists,
+        favorites: favorites,
+        onOpenList: (_, cover) => opened = cover,
+      ),
+    );
+
+    expect(find.text('Favorite flowers'), findsOneWidget);
+    expect(find.text('2 plants'), findsOneWidget);
+    expect(find.byIcon(Icons.favorite), findsOneWidget);
+    final card = find
+        .ancestor(
+          of: find.byIcon(Icons.favorite),
+          matching: find.byType(Column),
+        )
+        .first;
+    expect(
+      find.descendant(of: card, matching: find.byType(AspectRatio)),
+      findsNWidgets(2),
+    );
+    expect(
+      tester.getBottomLeft(find.text('Favorite flowers')).dy,
+      lessThan(tester.getTopLeft(find.text('New in the book')).dy),
+    );
+    expect(
+      tester.getBottomLeft(find.text('Favorite flowers')).dy,
+      lessThan(tester.getTopLeft(find.text('Alpine flowers')).dy),
+    );
+    expect(find.byType(GuidePhoto), findsNWidgets(4));
+
+    await tester.tap(find.text('Favorite flowers'));
+    await tester.pump();
+    expect(opened?.isFavorite, isTrue);
+    expect(opened?.count, 2);
+  });
+
+  testWidgets('an empty favorites cover stays off Lists', (tester) async {
+    await _pump(
+      tester,
+      _Host(
+        start: GuideBookSegment.lists,
+        loadTaxa: (_) async => guideBookTaxa(index.families, index.genera),
+        lists: [
+          GuideListCover(
+            title: '',
+            photoPath: 'photos/new.webp',
+            path: FirebaseDatabase.instance.ref('lists/new'),
+            isNew: true,
+            count: 2,
+            latest: DateTime(2026, 9, 1),
+          ),
+        ],
+        favorites: GuideListCover(
+          title: 'Favorite flowers',
+          photoPath: null,
+          path: FirebaseDatabase.instance.ref('users/anna/favorites'),
+          isNew: false,
+          count: 0,
+          isFavorite: true,
+        ),
+      ),
+    );
+
+    expect(find.text('Favorite flowers'), findsNothing);
+    expect(find.text('New in the book'), findsOneWidget);
+  });
 }
 
 class _Host extends StatefulWidget {
@@ -349,6 +453,7 @@ class _Host extends StatefulWidget {
   final Future<Map<String, GuideGenusNote>> Function(
       List<GuideSearchTaxon> genera) loadGenusNotes;
   final List<GuideListCover>? lists;
+  final GuideListCover? favorites;
   final void Function(BuildContext context, String listPath)? onOpenTaxon;
   final void Function(BuildContext context, GuideListCover cover)? onOpenList;
 
@@ -357,6 +462,7 @@ class _Host extends StatefulWidget {
     required this.loadTaxa,
     this.loadGenusNotes = _noGenusNotes,
     required this.lists,
+    this.favorites,
     this.onOpenTaxon,
     this.onOpenList,
   });
@@ -384,6 +490,7 @@ class _HostState extends State<_Host> {
         child: Scaffold(
           body: BookPage(
             lists: widget.lists,
+            favorites: widget.favorites,
             segment: _segment,
             onSegment: (segment) => setState(() => _segment = segment),
             onOpenFind: () {},

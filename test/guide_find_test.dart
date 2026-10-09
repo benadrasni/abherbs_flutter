@@ -239,6 +239,20 @@ void main() {
     );
   });
 
+  test('Favorite flowers sorts ahead of New in the book', () {
+    final covers = [
+      _cover(title: 'Vegetables', count: 9),
+      _cover(title: '', count: 2, isFavorite: true),
+      _cover(title: 'zzzz', count: 2, isNew: true),
+      _cover(title: 'Spices', count: 8, hasSource: true),
+    ];
+    covers.sort(compareGuideLists);
+    expect(covers.first.isFavorite, isTrue);
+    expect(covers[1].isNew, isTrue);
+    expect(guideListRank(covers.first), -1);
+    expect(guideListRank(covers[1]), 0);
+  });
+
   test('a find keeps its own time and first photo', () {
     final when = guideFindWhen({
       observationDate: {observationTime: 1500.9},
@@ -388,24 +402,56 @@ void main() {
     expect(find.text('Latest $date'), findsOneWidget);
     expect(find.text('6 years · 2024'), findsOneWidget);
     expect(find.text('11 plants'), findsOneWidget);
-    expect(
-      find.byWidgetPredicate((widget) {
-        if (widget is! DecoratedBox) return false;
-        final decoration = widget.decoration;
-        if (decoration is! BoxDecoration) return false;
-        final border = decoration.border;
-        return border is Border &&
-            border.top.color == GuidePalette.gold &&
-            border.top.width == 2;
-      }),
-      findsOneWidget,
-    );
+    expect(_goldBorders, findsOneWidget);
 
     await tester.tap(find.text('All finds'));
     await tester.tap(find.text('All lists'));
     await tester.pump();
     expect(seen, 1);
     expect(book, 1);
+  });
+
+  testWidgets('Favorite flowers leads Find, and New in the book stays second',
+      (tester) async {
+    final favorites = _cover(title: '', count: 2, isFavorite: true);
+    final lists = [
+      _cover(title: 'Alpine flowers', count: 6, year: 2024),
+      _cover(title: 'Dropped', count: 3, isFavorite: true),
+      _cover(title: '', count: 2, isNew: true, latest: DateTime(2026, 9, 1)),
+    ];
+
+    await _pump(tester, _page(lists: lists, favorites: favorites));
+
+    expect(find.text('Favorite flowers'), findsOneWidget);
+    expect(find.text('2 plants'), findsOneWidget);
+    expect(find.text('Dropped'), findsNothing);
+    expect(
+      tester.getTopLeft(find.text('Favorite flowers')).dx,
+      lessThan(tester.getTopLeft(find.text('New in the book')).dx),
+    );
+    expect(
+      tester.getTopLeft(find.text('New in the book')).dx,
+      lessThan(tester.getTopLeft(find.text('Alpine flowers')).dx),
+    );
+    expect(_goldBorders, findsOneWidget);
+
+    await _pump(
+      tester,
+      _page(
+        lists: lists,
+        favorites: _cover(title: '', count: 0, isFavorite: true),
+      ),
+    );
+    expect(find.text('Favorite flowers'), findsNothing);
+    expect(find.text('Dropped'), findsNothing);
+    expect(
+      tester.getTopLeft(find.text('New in the book')).dx,
+      lessThan(tester.getTopLeft(find.text('Alpine flowers')).dx),
+    );
+
+    await _pump(tester, _page(lists: null, favorites: favorites));
+    expect(find.text('Favorite flowers'), findsNothing);
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 
   testWidgets('hides finds and covers that are not ready', (tester) async {
@@ -615,6 +661,7 @@ GuideListCover _cover({
   required int count,
   bool isNew = false,
   bool hasSource = false,
+  bool isFavorite = false,
   String parameter = '',
   int? year,
   DateTime? latest,
@@ -629,8 +676,19 @@ GuideListCover _cover({
     latest: latest,
     hasSource: hasSource,
     parameter: parameter,
+    isFavorite: isFavorite,
   );
 }
+
+final _goldBorders = find.byWidgetPredicate((widget) {
+  if (widget is! DecoratedBox) return false;
+  final decoration = widget.decoration;
+  if (decoration is! BoxDecoration) return false;
+  final border = decoration.border;
+  return border is Border &&
+      border.top.color == GuidePalette.gold &&
+      border.top.width == 2;
+});
 
 PurchaseDetails _noAds() {
   return PurchaseDetails(
@@ -649,6 +707,7 @@ Widget _page({
   Map<String, int>? colorCounts = const {},
   List<GuideFind>? finds = const [],
   List<GuideListCover>? lists = const [],
+  GuideListCover? favorites,
   GuideAllowance allowance = const GuideAllowance.guest(),
   VoidCallback? onOpenBook,
   VoidCallback? onOpenSeen,
@@ -666,6 +725,7 @@ Widget _page({
       body: FindPage(
         colorCounts: colorCounts,
         lists: lists,
+        favorites: favorites,
         finds: finds,
         allowance: allowance,
         onOpenBook: onOpenBook ?? () {},

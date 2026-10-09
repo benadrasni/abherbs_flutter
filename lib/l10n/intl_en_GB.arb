@@ -2,5 +2,12 @@
   "@@locale": "en_GB",
   "filter_color": "colour",
   "guide_color_question": "What colour is the flower?",
-  "guide_camera_key_note": "Colour, habitat, petals. Free, always."
+  "guide_camera_key_note": "Colour, habitat, petals. Free, always.",
+  "guide_favorite_flowers": "Favourite flowers",
+  "guide_favorite_add": "Mark as favourite",
+  "guide_favorite_remove": "Remove from favourites",
+  "guide_favorite_added": "Added to Favourite flowers.",
+  "guide_favorite_removed": "Removed from Favourite flowers.",
+  "guide_favorite_account": "Favourite flowers stay with your account.",
+  "guide_favorite_empty": "There are no favourite flowers yet."
 }

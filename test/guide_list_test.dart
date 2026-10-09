@@ -171,6 +171,16 @@ void main() {
     expect(guideCustomLayout(fresh), GuideCustomLayout.fresh);
     expect(guideCustomLayout(years), GuideCustomLayout.years);
     expect(guideCustomLayout(spices), GuideCustomLayout.grid);
+    final favorites = GuideListCover(
+      title: '',
+      photoPath: null,
+      path: FirebaseDatabase.instance.ref('users/a/favorites'),
+      isNew: false,
+      count: 2,
+      isFavorite: true,
+    );
+    expect(guideCustomLayout(favorites), GuideCustomLayout.grid);
+    expect(guideListRank(favorites), -1);
     expect(
       guideCustomLayout(GuideListCover(
         title: 'US State flowers',
@@ -390,14 +400,16 @@ void main() {
       tester.getTopLeft(find.text('Alabama')).dy,
       lessThan(tester.getTopLeft(find.text('Illinois')).dy),
     );
-    final photos = tester.widgetList<GuidePhoto>(find.byType(GuidePhoto)).toList();
+    final photos =
+        tester.widgetList<GuidePhoto>(find.byType(GuidePhoto)).toList();
     expect(photos[1].path, 'photos/1090.jpg');
     expect(photos[1].fit, BoxFit.cover);
     expect(photos[1].height, 64);
 
     await tester.tap(find.text('Plates'));
     await tester.pump();
-    final plates = tester.widgetList<GuidePhoto>(find.byType(GuidePhoto)).toList();
+    final plates =
+        tester.widgetList<GuidePhoto>(find.byType(GuidePhoto)).toList();
     expect(plates[1].path, 'plates/Viola_riviniana.webp');
     expect(plates[1].fit, BoxFit.contain);
     expect(plates[1].height, 96);
@@ -410,7 +422,8 @@ void main() {
     expect(openedPlant, 'Camellia japonica');
   });
 
-  testWidgets('a genus row shows its vernacular above the Latin name', (tester) async {
+  testWidgets('a genus row shows its vernacular above the Latin name',
+      (tester) async {
     await _pump(
       tester,
       GuideYearPage(
@@ -478,7 +491,8 @@ void main() {
     expect(tester.getTopLeft(find.text('violet')).dy, greaterThan(row));
   });
 
-  testWidgets('a portrait tablet shows three new plants across', (tester) async {
+  testWidgets('a portrait tablet shows three new plants across',
+      (tester) async {
     final today = DateTime(2026, 10, 8);
     await _pump(
       tester,
@@ -548,7 +562,8 @@ void main() {
             GuideYearEntry(
               year: 0,
               mark: state,
-              plant: _plant(state, 'Camellia $state', label: state.toLowerCase()),
+              plant:
+                  _plant(state, 'Camellia $state', label: state.toLowerCase()),
             ),
         ],
         initialSeen: const {},
