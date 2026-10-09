@@ -13,8 +13,6 @@ class GuideWindow {
 
   const GuideWindow({required this.tablet, required this.wide});
 
-  static const phone = GuideWindow(tablet: false, wide: false);
-
   static GuideWindow fromSize(Size size) {
     final tablet = size.shortestSide >= tabletShortestSide;
     return GuideWindow(
