@@ -410,6 +410,37 @@ void main() {
     expect(openedPlant, 'Camellia japonica');
   });
 
+  testWidgets('a genus row shows its vernacular above the Latin name', (tester) async {
+    await _pump(
+      tester,
+      GuideYearPage(
+        title: 'Štátne kvety',
+        backLabel: 'Find',
+        initialEntries: [
+          GuideYearEntry(
+            year: 0,
+            mark: 'Texas',
+            genus: 'Lupinus',
+            genusVernacular: 'lupina',
+            genusPath: 'APG IV_v3/Fabaceae/Lupinus/list',
+          ),
+        ],
+        initialSeen: const {},
+        loadList: () async => const GuideYearList(entries: [], sourceUrl: null),
+        loadSeen: () async => const {},
+        onOpenPlant: (_, __) {},
+      ),
+    );
+
+    expect(find.text('lupina'), findsOneWidget);
+    expect(find.text('Lupinus'), findsOneWidget);
+    expect(find.text('Genus'), findsOneWidget);
+    expect(
+      tester.getTopLeft(find.text('lupina')).dy,
+      lessThan(tester.getTopLeft(find.text('Lupinus')).dy),
+    );
+  });
+
   testWidgets('new in the book stays two across on a phone', (tester) async {
     final today = DateTime(2026, 10, 8);
     await _pump(
