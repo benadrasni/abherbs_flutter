@@ -160,15 +160,20 @@ void main() {
     expect(Purchases.showsAds(), isFalse);
 
     Purchases.hasOldVersion = false;
-    Purchases.purchases = {productPhotoSearch: _purchase(productPhotoSearch)};
+    Purchases.purchases = {productOffline: _purchase(productOffline)};
+    expect(Purchases.owns(productOffline), isFalse);
+    expect(Purchases.isOffline(), isFalse);
+
+    Purchases.purchases = {};
+    Purchases.replaceAccountProducts({productPhotoSearch});
     expect(Purchases.syncsSeenPhotos(), isFalse);
     expect(Purchases.isOffline(), isFalse);
 
-    Purchases.purchases = {productOffline: _purchase(productOffline)};
+    Purchases.replaceAccountProducts({productOffline});
     expect(Purchases.syncsSeenPhotos(), isFalse);
     expect(Purchases.isOffline(), isTrue);
 
-    Purchases.purchases = {productObservations: _purchase(productObservations)};
+    Purchases.replaceAccountProducts({productObservations});
     Purchases.finishNames();
     expect(Purchases.syncsSeenPhotos(), isTrue);
     expect(Purchases.hasFieldGuide(), isFalse);
@@ -176,20 +181,18 @@ void main() {
     expect(Purchases.showsAds(), isTrue);
     expect(Purchases.namesUnlimited, isFalse);
 
-    Purchases.purchases = {};
+    Purchases.clearAccountProducts();
     expect(Purchases.syncsSeenPhotos(), isFalse);
     expect(Purchases.isOffline(), isFalse);
 
-    Purchases.purchases = {fieldGuideMonthly: _purchase(fieldGuideMonthly)};
+    Purchases.replaceAccountProducts({fieldGuideMonthly});
     expect(Purchases.hasFieldGuide(), isTrue);
     expect(Purchases.showsAds(), isFalse);
 
-    Purchases.purchases = {
-      subscriptionMonthly: _purchase(subscriptionMonthly),
-    };
+    Purchases.replaceAccountProducts({subscriptionMonthly});
     expect(Purchases.hasFieldGuide(), isTrue);
 
-    Purchases.purchases = {};
+    Purchases.clearAccountProducts();
     expect(Purchases.showsAds(), isTrue);
   });
 

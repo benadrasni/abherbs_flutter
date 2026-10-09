@@ -425,9 +425,10 @@ String? guideTaxonVernacular(dynamic raw, String latin) {
       if (item is String && item.trim().isNotEmpty) names.add(item.trim());
     }
   }
-  final latinKey = latin.trim().toLowerCase();
+  // A lowercase vernacular is still a name when the Latin name is capitalized.
+  final exact = latin.trim();
   for (final name in names) {
-    if (name.isNotEmpty && name.toLowerCase() != latinKey) return name;
+    if (name.isNotEmpty && name != exact) return name;
   }
   return null;
 }

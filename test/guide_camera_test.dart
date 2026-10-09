@@ -10,6 +10,7 @@ import 'package:abherbs_flutter/camera/plant_id_search.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/camera/outside_page.dart';
 import 'package:abherbs_flutter/key/results_page.dart';
@@ -970,6 +971,32 @@ void main() {
     expect(Purchases.namesReady, isTrue);
     Purchases.hasOldVersion = false;
     Purchases.holdNamesFor(null);
+    Purchases.namesReady = false;
+  });
+
+  test('switching accounts drops the previous products before names are ready',
+      () {
+    Purchases.holdNamesFor(null);
+    Purchases.replaceAccountProducts({fieldGuideYearly});
+    Purchases.finishNames();
+    expect(Purchases.owns(fieldGuideYearly), isTrue);
+    expect(Purchases.namesFieldGuide, isTrue);
+
+    expect(Purchases.holdNamesFor('other-account'), isTrue);
+    expect(Purchases.namesReady, isFalse);
+    expect(Purchases.accountProducts, isEmpty);
+    expect(Purchases.owns(fieldGuideYearly), isFalse);
+    expect(Purchases.namesFieldGuide, isFalse);
+
+    Purchases.replaceAccountProducts({fieldGuideMonthly});
+    Purchases.finishNames();
+    expect(Purchases.namesFieldGuide, isTrue);
+    expect(Purchases.holdNamesFor('other-account'), isFalse);
+    expect(Purchases.namesReady, isTrue);
+    expect(Purchases.owns(fieldGuideMonthly), isTrue);
+
+    Purchases.holdNamesFor(null);
+    Purchases.clearAccountProducts();
     Purchases.namesReady = false;
   });
 

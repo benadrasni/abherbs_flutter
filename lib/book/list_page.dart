@@ -617,7 +617,9 @@ class _StateCell extends StatelessWidget {
       path = plates ? plant!.platePath : plant!.photoPath;
       plate = plates;
     }
-    final title = genus ?? vernacular ?? plant!.name;
+    final genusSpoken = genus == null ? null : entry.genusVernacular;
+    final title = genusSpoken ?? genus ?? vernacular ?? plant!.name;
+    final titleIsLatin = genus != null ? genusSpoken == null : vernacular == null;
     return InkWell(
       onTap: onTap,
       child: Column(
@@ -656,7 +658,7 @@ class _StateCell extends StatelessWidget {
             title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: genus != null || vernacular == null
+            style: titleIsLatin
                 ? GuideType.latin(colors).copyWith(fontSize: 16, height: 1.15)
                 : TextStyle(
                     fontFamily: GuideType.serif,
@@ -666,6 +668,17 @@ class _StateCell extends StatelessWidget {
                     color: colors.ink,
                   ),
           ),
+          if (genusSpoken != null)
+            Text(
+              genus!,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: GuideType.latin(colors).copyWith(
+                fontSize: 13,
+                height: 1.2,
+                color: colors.ink3,
+              ),
+            ),
           if (genus != null)
             Text(
               strings.taxonomy_genus,
@@ -761,6 +774,8 @@ class _YearRow extends StatelessWidget {
     final vernacular = plant == null
         ? null
         : distinctVernacular(plant.label, plant.name);
+    final genusSpoken = genus == null ? null : entry.genusVernacular;
+    final titleIsLatin = genus != null ? genusSpoken == null : vernacular == null;
     final String? path;
     final bool plate;
     if (genus != null) {
@@ -841,10 +856,10 @@ class _YearRow extends StatelessWidget {
                         ),
                       ),
                     Text(
-                      genus ?? vernacular ?? plant!.name,
+                      genusSpoken ?? genus ?? vernacular ?? plant!.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: genus != null || vernacular == null
+                      style: titleIsLatin
                           ? GuideType.latin(colors).copyWith(
                               fontSize: 17,
                               height: 1.15,
@@ -857,6 +872,17 @@ class _YearRow extends StatelessWidget {
                               color: colors.ink,
                             ),
                     ),
+                    if (genusSpoken != null)
+                      Text(
+                        genus!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GuideType.latin(colors).copyWith(
+                          fontSize: 13,
+                          height: 1.2,
+                          color: colors.ink3,
+                        ),
+                      ),
                     if (genus != null)
                       Text(
                         strings.taxonomy_genus,

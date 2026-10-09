@@ -28,12 +28,14 @@ void main() {
   setUp(() {
     Purchases.hasOldVersion = false;
     Purchases.purchases = {};
+    Purchases.clearAccountProducts();
     GuideTabs.unconfirmed.value = 0;
   });
 
   tearDown(() {
     Purchases.hasOldVersion = false;
     Purchases.purchases = {};
+    Purchases.clearAccountProducts();
   });
 
   test('the cover is the newest year in the list', () {
@@ -421,13 +423,13 @@ void main() {
 
   test('Remove ads and Field Guide hide banners', () {
     Purchases.hasOldVersion = false;
-    Purchases.purchases = {};
+    Purchases.clearAccountProducts();
     expect(Purchases.showsAds(), isTrue);
 
-    Purchases.purchases = {_noAds().productID: _noAds()};
+    Purchases.replaceAccountProducts({_noAds().productID});
     expect(Purchases.showsAds(), isFalse);
 
-    Purchases.purchases = {};
+    Purchases.clearAccountProducts();
     Purchases.hasOldVersion = true;
     expect(Purchases.showsAds(), isFalse);
 
@@ -437,7 +439,7 @@ void main() {
 
   testWidgets('a no-ads purchase leaves Find without a banner', (tester) async {
     Purchases.hasOldVersion = false;
-    Purchases.purchases = {_noAds().productID: _noAds()};
+    Purchases.replaceAccountProducts({_noAds().productID});
     await tester.pumpWidget(MaterialApp(
       locale: const Locale('en'),
       localizationsDelegates: const [
@@ -554,7 +556,7 @@ void main() {
   });
 
   testWidgets('asks a signed-out reader to sign in', (tester) async {
-    Purchases.purchases = {_noAds().productID: _noAds()};
+    Purchases.replaceAccountProducts({_noAds().productID});
     await _pump(tester, _page(finds: const [], lists: const []));
     expect(find.text('Sign in to name a photo'), findsOneWidget);
     expect(find.text('Unlimited'), findsNothing);

@@ -1164,6 +1164,10 @@ class GuideYearEntry {
   final String? genusPhotoPath;
   final String? genusPlatePath;
 
+  /// Vernacular of [genus] in the list language. Null when none is stored,
+  /// or when it repeats the Latin name in the same case.
+  final String? genusVernacular;
+
   const GuideYearEntry({
     this.year,
     this.plant,
@@ -1173,6 +1177,7 @@ class GuideYearEntry {
     this.genusPath,
     this.genusPhotoPath,
     this.genusPlatePath,
+    this.genusVernacular,
   });
 }
 
@@ -1550,6 +1555,7 @@ Future<GuideYearList> loadGuideYearList(
         genusPath: taxon?.listPath ?? '',
         genusPhotoPath: sample?.photoPath,
         genusPlatePath: sample?.platePath,
+        genusVernacular: guideTaxonVernacular(taxon?.vernaculars, genus),
       );
     }
     final id = row.id;

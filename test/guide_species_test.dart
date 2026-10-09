@@ -14,6 +14,12 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
 void main() {
+  test('a lowercase genus vernacular is shown beside the capitalized Latin name', () {
+    expect(guideTaxonVernacular(['duranta'], 'Duranta'), 'duranta');
+    expect(guideTaxonVernacular('  duranta  ', 'Duranta'), 'duranta');
+    expect(guideTaxonVernacular(['Duranta'], 'Duranta'), isNull);
+  });
+
   test('a youtube link on the plant becomes one video', () {
     final videos = guideYoutubeVideos([
       'https://youtu.be/0RiaQCqVKaU',
