@@ -296,7 +296,14 @@ class _AppState extends State<App> {
       if (mounted) setState(() {});
       return;
     }
-    if (outcome.result != StoreProofResult.rejected || !mounted) return;
+    // Deferred stays quiet, and so does a restore. Launch, Person, and
+    // Field Guide send receipts the server may already have refused.
+    // The toast is for a purchase just made.
+    if (purchase.status != PurchaseStatus.purchased ||
+        outcome.result == StoreProofResult.deferred ||
+        !mounted) {
+      return;
+    }
     Fluttertoast.showToast(
       msg: S.of(context).product_purchase_failed,
       toastLength: Toast.LENGTH_LONG,
