@@ -3,20 +3,14 @@ import 'dart:convert';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/purchase/account_entitlements.dart';
+import 'package:abherbs_flutter/purchase/purchase_reply.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
+export 'package:abherbs_flutter/purchase/purchase_reply.dart';
+
 const _pendingProofs = 'pending_store_proofs';
-
-enum StoreProofResult { accepted, rejected, deferred }
-
-class StoreProofOutcome {
-  final StoreProofResult result;
-  final Map<String, bool> products;
-
-  const StoreProofOutcome(this.result, [this.products = const {}]);
-}
 
 class _PendingProof {
   final String store;

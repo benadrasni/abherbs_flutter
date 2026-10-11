@@ -287,16 +287,15 @@ class _AppState extends State<App> {
   Future<void> _confirmPurchase(PurchaseDetails purchase) async {
     final outcome = await submitStorePurchase(purchase);
     final id = purchase.productID;
-    final confirmed = outcome.result == StoreProofResult.accepted &&
-        outcome.products[id] == true;
-    if (confirmed) {
+    final reply = storeProofReplyOf(outcome, id);
+    if (reply == StoreProofReply.unlock) {
       Purchases.purchases[id] = purchase;
       Purchases.namesRevision.value++;
       unawaited(rememberStorePurchases([id]));
       if (mounted) setState(() {});
       return;
     }
-    if (outcome.result != StoreProofResult.rejected || !mounted) return;
+    if (reply != StoreProofReply.message || !mounted) return;
     Fluttertoast.showToast(
       msg: S.of(context).product_purchase_failed,
       toastLength: Toast.LENGTH_LONG,
