@@ -250,6 +250,13 @@ void _publishGuestFree(bool free) {
   guideGuestFreeRemaining.value = free;
 }
 
+/// Ad names still available this month. The month allows five, minus grants
+/// already earned.
+int guideMonthAdsLeft(GuideAllowance allowance) {
+  final left = 5 - allowance.extraUsed;
+  return left < 0 ? 0 : left;
+}
+
 /// Shares of the allowance bar. A month is ten parts (five included, five
 /// from ads). Credits fill up to five parts with the names still left.
 ({int included, int extra, int rest}) guideAllowanceBarShares(

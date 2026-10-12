@@ -186,6 +186,7 @@ void main() {
     );
     expect(month.includedUsed, 5);
     expect(month.extraUsed, 1);
+    expect(guideMonthAdsLeft(month), 4);
     expect(month.resetsOn, DateTime(2026, 10, 1));
     expect(guideAllowanceBarShares(month), (included: 5, extra: 1, rest: 4));
 
@@ -195,9 +196,18 @@ void main() {
       now: DateTime(2026, 12, 15),
     );
     expect(december.resetsOn, DateTime(2027, 1, 1));
+    expect(guideMonthAdsLeft(december), 5);
     expect(
       guideAllowanceBarShares(december),
       (included: 2, extra: 0, rest: 8),
+    );
+    expect(
+      guideMonthAdsLeft(GuideAllowance.month(
+        used: 10,
+        fromAds: 5,
+        now: DateTime(2026, 9, 30),
+      )),
+      0,
     );
 
     final credits = GuideAllowance.credits(3);
@@ -429,7 +439,7 @@ void main() {
     expect(find.text('Names this month'), findsOneWidget);
     expect(find.text('Resets Oct 1'), findsOneWidget);
     expect(
-      find.text('2 of 5 included used, 1 from ads. Up to 5 more from ads.'),
+      find.text('2 of 5 included used, 1 from ads. Up to 4 more from ads.'),
       findsOneWidget,
     );
     expect(find.text('English'), findsOneWidget);
@@ -457,6 +467,43 @@ void main() {
       80,
     );
     expect(find.text('Version 9.0.0 (900)'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('ad names already used come off the five still offered',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(390, 844));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    GuidePersonView month({required int used, required int fromAds}) {
+      return GuidePersonView(
+        account: const GuidePersonAccount(
+          name: 'Anna Novák',
+          email: 'anna.novak@gmail.com',
+          provider: GuideAccountProvider.google,
+        ),
+        allowance: GuideAllowance.month(
+          used: used,
+          fromAds: fromAds,
+          now: DateTime(2026, 9, 30),
+        ),
+        languageName: 'English',
+        appearance: GuideAppearance.system,
+        showFieldGuide: false,
+        showOffline: false,
+        offlineOn: false,
+      );
+    }
+
+    await tester.pumpWidget(_app(_page(view: month(used: 6, fromAds: 1))));
+    expect(
+      find.text('5 of 5 included used, 1 from ads. Up to 4 more from ads.'),
+      findsOneWidget,
+    );
+
+    await tester.pumpWidget(_app(_page(view: month(used: 10, fromAds: 5))));
+    expect(find.text('5 of 5 included used, 5 from ads.'), findsOneWidget);
+    expect(find.textContaining('more from ads'), findsNothing);
     expect(tester.takeException(), isNull);
   });
 

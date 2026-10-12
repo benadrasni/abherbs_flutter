@@ -678,12 +678,22 @@ class _AllowanceCard extends StatelessWidget {
         ? ''
         : DateFormat.MMMd(Localizations.localeOf(context).toString())
             .format(resets);
-    final detail = allowance.extraUsed > 0
-        ? strings.guide_person_month_used_extra(
-            allowance.includedUsed,
-            allowance.extraUsed,
-          )
-        : strings.guide_person_month_used(allowance.includedUsed);
+    final more = guideMonthAdsLeft(allowance);
+    final String detail;
+    if (allowance.extraUsed <= 0) {
+      detail = strings.guide_person_month_used(allowance.includedUsed);
+    } else if (more <= 0) {
+      detail = strings.guide_person_month_used_extra_done(
+        allowance.includedUsed,
+        allowance.extraUsed,
+      );
+    } else {
+      detail = strings.guide_person_month_used_extra(
+        allowance.includedUsed,
+        allowance.extraUsed,
+        more,
+      );
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
