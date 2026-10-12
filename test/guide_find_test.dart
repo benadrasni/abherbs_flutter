@@ -363,7 +363,7 @@ void main() {
     );
 
     expect(find.byType(AppBannerAd), findsNothing);
-    expect(find.text('What’s that flower'), findsOneWidget);
+    expect(find.text('What’s that flower?'), findsOneWidget);
     expect(find.text('Search plants, families, genera'), findsOneWidget);
     expect(find.text('Name it from a photo'), findsOneWidget);
     expect(find.text('Unlimited'), findsOneWidget);
