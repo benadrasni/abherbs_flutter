@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- A large screen follows the user orientation so the guide can switch
+         between the portrait tablet layout and the landscape rail. -->
+    <bool name="guide_allow_rotation">true</bool>
+</resources>
