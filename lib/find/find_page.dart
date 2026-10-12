@@ -407,11 +407,6 @@ class _KeyCard extends StatelessWidget {
                 ),
             ],
           ),
-          const SizedBox(height: 10),
-          Text(
-            s.guide_key_hint,
-            style: TextStyle(fontSize: 13, height: 1.4, color: colors.ink3),
-          ),
         ],
       ),
     );
@@ -497,6 +492,91 @@ class _Swatch extends StatelessWidget {
 /// Madder pill on an unconfirmed photo in Seen lately. Mockup `.find-card .u`.
 const guideFindToConfirmKey = Key('guide-find-to-confirm');
 
+const _findNameGap = 6.0;
+const _findDateGap = 2.0;
+
+TextStyle _findDateStyle(GuideColors colors) {
+  return TextStyle(fontSize: 11, color: colors.ink3);
+}
+
+/// Tallest phone card: photo, a name of up to two lines, and the date.
+///
+/// [Text] applies bold text and the platform line-height override on top of
+/// the style. The painter has to do the same, or the strip is short on the
+/// phone that sets them.
+double _phoneFindStripHeight(
+  BuildContext context,
+  List<GuideFind> finds,
+  double width,
+) {
+  final colors = GuideColors.of(context);
+  var tallest = 0.0;
+  for (final find in finds) {
+    final named = guideNameIsVernacular(find.label);
+    final name = _textBlockHeight(
+      context,
+      text: named ? find.label! : find.name,
+      style: guideNameStyle(colors, named: named),
+      width: width,
+      maxLines: 2,
+    );
+    final date = _textBlockHeight(
+      context,
+      text: guideWhen(context, find.when),
+      style: _findDateStyle(colors),
+      width: width,
+      maxLines: 1,
+    );
+    // The photo is square, the same edge as the text width.
+    final height = width + _findNameGap + name + _findDateGap + date;
+    if (height > tallest) tallest = height;
+  }
+  // Each text line can round up to the next physical pixel inside the column.
+  final slack = 2 / MediaQuery.devicePixelRatioOf(context);
+  return tallest + slack;
+}
+
+double _textBlockHeight(
+  BuildContext context, {
+  required String text,
+  required TextStyle style,
+  required double width,
+  required int maxLines,
+}) {
+  final defaults = DefaultTextStyle.of(context);
+  var effective = style.inherit ? defaults.style.merge(style) : style;
+  if (MediaQuery.boldTextOf(context)) {
+    effective = effective.merge(const TextStyle(fontWeight: FontWeight.bold));
+  }
+  final lineHeight = MediaQuery.maybeLineHeightScaleFactorOverrideOf(context);
+  final letterSpacing = MediaQuery.maybeLetterSpacingOverrideOf(context);
+  final wordSpacing = MediaQuery.maybeWordSpacingOverrideOf(context);
+  if (lineHeight != null || letterSpacing != null || wordSpacing != null) {
+    effective = effective.merge(
+      TextStyle(
+        height: lineHeight,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+      ),
+    );
+  }
+  final painter = TextPainter(
+    text: TextSpan(text: text, style: effective),
+    textAlign: defaults.textAlign ?? TextAlign.start,
+    textDirection: Directionality.of(context),
+    textScaler: MediaQuery.textScalerOf(context),
+    maxLines: maxLines,
+    ellipsis: '\u2026',
+    locale: Localizations.maybeLocaleOf(context),
+    textWidthBasis: defaults.textWidthBasis,
+    textHeightBehavior: defaults.textHeightBehavior ??
+        DefaultTextHeightBehavior.maybeOf(context),
+  )..layout(maxWidth: width);
+  final height = painter.height;
+  painter.dispose();
+  return height;
+}
+
 class _FindStrip extends StatelessWidget {
   final List<GuideFind> finds;
   final VoidCallback onOpenSeen;
@@ -507,15 +587,19 @@ class _FindStrip extends StatelessWidget {
   Widget build(BuildContext context) {
     final window = GuideWindow.of(context);
     if (!window.tablet) {
+      // A horizontal list needs a finite height. A wrapped name is a couple
+      // of pixels taller on some densities than on others, so a constant
+      // clips the date (Pixel 10 Pro, 2px) while the same card fits on a
+      // Pixel 9a. Measure the cards instead.
+      const edge = 118.0;
       return SizedBox(
-        height: 180,
+        height: _phoneFindStripHeight(context, finds, edge),
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.symmetric(horizontal: 20),
           itemCount: finds.length,
           separatorBuilder: (_, __) => const SizedBox(width: 10),
-          itemBuilder: (context, index) =>
-              _card(context, finds[index], 118),
+          itemBuilder: (context, index) => _card(context, finds[index], edge),
         ),
       );
     }
@@ -573,7 +657,7 @@ class _FindStrip extends StatelessWidget {
             guideWhen(context, find.when),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 11, color: colors.ink3),
+            style: _findDateStyle(colors),
           ),
         ],
       ),
@@ -719,8 +803,7 @@ class _ListStrip extends StatelessWidget {
             guideListSubtitle(context, cover),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style:
-                TextStyle(fontSize: 12, height: 1.25, color: colors.ink3),
+            style: TextStyle(fontSize: 12, height: 1.25, color: colors.ink3),
           ),
         ],
       ),

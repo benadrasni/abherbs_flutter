@@ -279,6 +279,26 @@ String guidePhotoMoment(BuildContext context, DateTime when, {DateTime? now}) {
   return '${localizations.formatShortDate(when)}, $time';
 }
 
+/// A vernacular name, or the Latin name when [label] is missing.
+bool guideNameIsVernacular(String? label) => label != null && label.isNotEmpty;
+
+TextStyle guideNameStyle(
+  GuideColors colors, {
+  required bool named,
+  double size = 13,
+}) {
+  if (named) {
+    return TextStyle(
+      fontFamily: GuideType.sans,
+      fontWeight: FontWeight.w600,
+      fontSize: size,
+      height: 1.2,
+      color: colors.ink,
+    );
+  }
+  return GuideType.latin(colors).copyWith(fontSize: size, height: 1.2);
+}
+
 class GuideName extends StatelessWidget {
   final String? label;
   final String latinName;
@@ -295,21 +315,16 @@ class GuideName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = GuideColors.of(context);
-    final named = label != null && label!.isNotEmpty;
+    final named = guideNameIsVernacular(label);
     return Text(
       named ? label! : latinName,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
-      style: named
-          ? TextStyle(
-              fontFamily: GuideType.sans,
-              fontWeight: FontWeight.w600,
-              fontSize: size,
-              height: 1.2,
-              color: colors.ink,
-            )
-          : GuideType.latin(colors).copyWith(fontSize: size, height: 1.2),
+      style: guideNameStyle(
+        GuideColors.of(context),
+        named: named,
+        size: size,
+      ),
     );
   }
 }

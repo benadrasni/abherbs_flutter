@@ -541,6 +541,52 @@ void main() {
     expect(find.byIcon(Icons.article_outlined), findsOneWidget);
   });
 
+  testWidgets('a wrapped Latin name fits the Seen-lately strip',
+      (tester) async {
+    final when = DateTime(2026, 10, 7, 14, 15);
+    final finds = [
+      GuideFind(
+        name: 'Heterotheca subaxillaris',
+        label: null,
+        when: when,
+        photoPath: null,
+      ),
+      GuideFind(
+        name: 'Bidens aristosa',
+        label: null,
+        when: when,
+        photoPath: null,
+      ),
+    ];
+
+    Future<void> pump({double textScale = 1}) {
+      return _pumpPhone(
+        tester,
+        _page(
+          finds: finds,
+          lists: const [],
+          locale: const Locale('ja'),
+          textScale: textScale,
+        ),
+      );
+    }
+
+    await pump();
+    expect(tester.takeException(), isNull);
+    // Heterotheca subaxillaris wraps inside the 118-wide card. One line is
+    // about 16px; a wrapped name is the case that overflowed.
+    expect(
+      tester.getSize(find.text('Heterotheca subaxillaris')).height,
+      greaterThan(24),
+    );
+    _expectDateInsideStrip(tester, when);
+
+    await pump(textScale: 1.5);
+    expect(tester.takeException(), isNull);
+    _expectDateInsideStrip(tester, when);
+    expect(_findStripHeight(tester), greaterThan(180));
+  });
+
   testWidgets('an unconfirmed find wears To confirm and opens Seen',
       (tester) async {
     Purchases.hasOldVersion = true;
@@ -711,9 +757,21 @@ Widget _page({
   GuideAllowance allowance = const GuideAllowance.guest(),
   VoidCallback? onOpenBook,
   VoidCallback? onOpenSeen,
+  Locale locale = const Locale('en'),
+  double textScale = 1,
 }) {
   return MaterialApp(
-    locale: const Locale('en'),
+    locale: locale,
+    builder: textScale == 1
+        ? null
+        : (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(
+                textScaler: TextScaler.linear(textScale),
+              ),
+              child: child!,
+            );
+          },
     localizationsDelegates: const [
       S.delegate,
       GlobalMaterialLocalizations.delegate,
@@ -743,3 +801,29 @@ Future<void> _pump(WidgetTester tester, Widget page) async {
   await tester.pumpWidget(page);
   await tester.pump();
 }
+
+/// Pixel 10 Pro: 1080×2410 at 420 dpi. The Seen-lately strip overflowed here.
+Future<void> _pumpPhone(WidgetTester tester, Widget page) async {
+  tester.view.physicalSize = const Size(1080, 2410);
+  tester.view.devicePixelRatio = 420 / 160;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+  await tester.pumpWidget(page);
+  await tester.pump();
+}
+
+double _findStripHeight(WidgetTester tester) {
+  return tester.getSize(_findStrip).height;
+}
+
+void _expectDateInsideStrip(WidgetTester tester, DateTime when) {
+  final context = tester.element(find.text('Heterotheca subaxillaris'));
+  final date = tester.getRect(find.text(guideWhen(context, when)).first);
+  final strip = tester.getRect(_findStrip);
+  expect(date.top, greaterThanOrEqualTo(strip.top));
+  expect(date.bottom, lessThanOrEqualTo(strip.bottom + 0.1));
+}
+
+final _findStrip = find.byWidgetPredicate(
+  (widget) => widget is ListView && widget.scrollDirection == Axis.horizontal,
+);
