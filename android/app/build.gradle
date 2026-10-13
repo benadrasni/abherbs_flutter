@@ -31,10 +31,6 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
-// Pubspec must be x.y.z. The version name shown on the device is two components.
-if (flutterVersionName == '9.0.0') {
-    flutterVersionName = '9.0'
-}
 
 android {
     namespace = "sk.ab.herbs"
