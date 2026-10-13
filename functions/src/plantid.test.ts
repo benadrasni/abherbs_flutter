@@ -6,6 +6,7 @@ import {
   plantIdLanguage,
   plantIdSuggestions,
   plantIdUrl,
+  suggestionsForPlants,
 } from './plantid';
 
 test('the v3 request puts details and language on the query', () => {
@@ -74,6 +75,26 @@ test('a completed v3 reply becomes the suggestion shape the app reads', () => {
       },
     },
   ]);
+});
+
+test('a mushroom is not a plant, and a later fungus is dropped', () => {
+  const mushroom = {
+    plant_details: {
+      scientific_name: 'Amanita muscaria',
+      taxonomy: { kingdom: 'Fungi', phylum: 'Basidiomycota', genus: 'Amanita' },
+    },
+  };
+  const plant = {
+    plant_details: {
+      scientific_name: 'Bellis perennis',
+      taxonomy: { kingdom: 'Plantae', family: 'Asteraceae' },
+    },
+  };
+  const unnamed = { plant_details: { scientific_name: 'Rosa canina' } };
+  assert.deepEqual(suggestionsForPlants([mushroom, plant]), []);
+  assert.deepEqual(suggestionsForPlants([plant, mushroom, unnamed]), [plant, unnamed]);
+  assert.deepEqual(suggestionsForPlants([{ plant_details: { taxonomy: { kingdom: ' fungi ' } } }]), []);
+  assert.deepEqual(suggestionsForPlants([]), []);
 });
 
 test('an unfinished reply is not a result', () => {

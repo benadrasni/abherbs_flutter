@@ -94,3 +94,22 @@ export function plantIdSuggestions(body: unknown): Record<string, unknown>[] {
   }
   return out;
 }
+
+function kingdomOf(suggestion: Record<string, unknown> | undefined): string | undefined {
+  const details = asRecord(suggestion?.plant_details);
+  const taxonomy = asRecord(details?.taxonomy);
+  const kingdom = taxonomy?.kingdom;
+  if (typeof kingdom !== 'string') return undefined;
+  const name = kingdom.trim().toLowerCase();
+  return name === '' ? undefined : name;
+}
+
+/**
+ * Plant.id's `is_plant` score stays high for a mushroom. A leading kingdom of
+ * Fungi is that photo: drop every suggestion so the caller treats it as not a
+ * plant. A fungus later in the list is removed and the plant names stay.
+ */
+export function suggestionsForPlants(suggestions: Record<string, unknown>[]): Record<string, unknown>[] {
+  if (kingdomOf(suggestions[0]) === 'fungi') return [];
+  return suggestions.filter((item) => kingdomOf(item) !== 'fungi');
+}

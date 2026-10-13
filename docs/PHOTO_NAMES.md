@@ -14,7 +14,7 @@ Since 2026-09-30 the app never calls Plant.id itself. The Cloud Function `identi
 
 Rules that apply to every account:
 
-- A photo Plant.id finds is not a plant (`is_plant` probability below `IS_PLANT_THRESHOLD_PERCENT`, or no suggestions) drops every suggestion. It is free for the first 3 each month (`FREE_NOT_PLANT_PER_MONTH`); after that it uses one of the month's names and the sheet says it counted.
+- A photo Plant.id finds is not a plant (`is_plant` probability below `IS_PLANT_THRESHOLD_PERCENT`, no suggestions, or a leading kingdom of Fungi) drops every suggestion. Plant.id's plant score stays high for a mushroom, so the kingdom is what separates it. A fungus further down a plant list is removed and the plant names stay. It is free for the first 3 each month (`FREE_NOT_PLANT_PER_MONTH`); after that it uses one of the month's names and the sheet says it counted.
 - Every Plant.id call counts against the daily ceiling (15 free, 30 unlimited), whatever the answer.
 - 5 seconds between calls. The same photo (SHA-256 of the image) is refused for 24 hours.
 - A failed Plant.id call gives back the reserved name, or the guest's free name.

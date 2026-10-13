@@ -46,7 +46,14 @@ import {
   type QuotaState,
   type Refusal,
 } from './quota';
-import { plantIdBody, plantIdFinished, plantIdLanguage, plantIdSuggestions, plantIdUrl } from './plantid';
+import {
+  plantIdBody,
+  plantIdFinished,
+  plantIdLanguage,
+  plantIdSuggestions,
+  plantIdUrl,
+  suggestionsForPlants,
+} from './plantid';
 import {
   leadingScientificName,
   nameOutsideBook,
@@ -199,7 +206,9 @@ export const identifyPlant = onCall(
       rememberPhoto(current, Date.now(), hash),
     );
 
-    const suggestions = isPlant(body, isPlantThresholdPercent.value()) ? plantIdSuggestions(body) : [];
+    const suggestions = isPlant(body, isPlantThresholdPercent.value())
+      ? suggestionsForPlants(plantIdSuggestions(body))
+      : [];
 
     let charged = held;
     if (suggestions.length === 0 && held) {
