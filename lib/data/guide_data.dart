@@ -735,9 +735,10 @@ Future<List<GuideFind>> loadRecentFinds(String languageCode,
 
 /// Every private find for the Seen notebook, newest first.
 ///
-/// Reads with [Query.get] so disk persistence cannot keep a row on
-/// "In review" after the server status is `public`. [Query.once] completes
-/// from the on-disk copy and then stops listening.
+/// Statistics uses this one-shot read. The Seen page does not: its listener
+/// already has the snapshot, and [decorateGuideSeen] fills the rest after
+/// the rows are on screen. [Query.get] waits for the server so a stopped
+/// listener cannot keep a row on "In review" after the status is `public`.
 Future<List<GuideSeenFind>> loadGuideSeen(String languageCode) async {
   final user = guideNotebookUser();
   if (user == null) return [];
@@ -747,20 +748,28 @@ Future<List<GuideSeenFind>> loadGuideSeen(String languageCode) async {
       .child(firebaseAttributeList)
       .get();
   final value = snapshot.value;
-  if (value is! Map) return [];
-  final rows = <GuideSeenFind>[];
-  final clouds = <String, bool>{};
-  value.forEach((key, raw) {
-    final row = readGuideSeenRow(key, raw);
-    if (row == null) return;
-    rows.add(row);
-    clouds[row.id] = raw is Map && raw[observationPhotoCloud] == true;
-  });
+  return decorateGuideSeen(
+    guideSeenRows(value),
+    languageCode,
+    clouds: guideSeenCloudFlags(value),
+  );
+}
+
+/// Vernaculars, catalog photos, and whether each photo can be shared.
+/// Species lookups are remembered for the session. A `photoCloud` row does
+/// not check Storage.
+Future<List<GuideSeenFind>> decorateGuideSeen(
+  List<GuideSeenFind> rows,
+  String languageCode, {
+  required Map<String, bool> clouds,
+}) async {
+  if (rows.isEmpty) return [];
   final lang = getLanguageCode(languageCode);
   final faces = <String, _SeenFace>{};
   final attached = <String, bool>{};
+  final names = rows.map((row) => row.name).toSet();
   await Future.wait([
-    ...rows.map((row) => row.name).toSet().map((name) async {
+    ...names.map((name) async {
       final needsPhoto = rows.any((row) => row.name == name && !row.ownPhoto);
       faces[name] = await _seenFace(name, lang, needsPhoto: needsPhoto);
     }),
@@ -771,7 +780,7 @@ Future<List<GuideSeenFind>> loadGuideSeen(String languageCode) async {
       );
     }),
   ]);
-  final decorated = [
+  return [
     for (final row in rows)
       row.withCatalog(
         label: faces[row.name]?.label,
@@ -780,12 +789,6 @@ Future<List<GuideSeenFind>> loadGuideSeen(String languageCode) async {
         photoAttached: attached[row.id] ?? false,
       ),
   ];
-  decorated.sort((a, b) {
-    final byWhen = b.when.compareTo(a.when);
-    if (byWhen != 0) return byWhen;
-    return a.id.compareTo(b.id);
-  });
-  return decorated;
 }
 
 /// How many private finds are still unconfirmed. Used for the Seen tab badge
@@ -842,12 +845,17 @@ Future<String?> _seenLabel(String name, String languageCode) async {
   return null;
 }
 
+final Map<String, String?> _catalogPhotos = {};
+final Set<String> _catalogPhotoFetched = {};
+
 Future<String?> _catalogPhoto(String name) async {
+  if (_catalogPhotoFetched.contains(name)) return _catalogPhotos[name];
   try {
     final event = await plantsReference.child(name).child('photoUrls').once();
     final url = guideFirstText(event.snapshot.value);
-    if (url == null) return null;
-    return storagePhotos + url;
+    final path = url == null ? null : storagePhotos + url;
+    _catalogPhotoFetched.add(name);
+    return _catalogPhotos[name] = path;
   } catch (error) {
     debugPrint('guide seen photo $name: $error');
     return null;
@@ -888,11 +896,16 @@ Future<GuideStatFace> loadGuidePlantCard(
   );
 }
 
+final Map<String, bool> _plantInBookCache = {};
+
 Future<bool> _plantInBook(String name) async {
+  final known = _plantInBookCache[name];
+  if (known != null) return known;
   try {
     final event = await plantsReference.child(name).child('id').once();
     final value = event.snapshot.value;
-    return value != null && value.toString().isNotEmpty;
+    final inBook = value != null && value.toString().isNotEmpty;
+    return _plantInBookCache[name] = inBook;
   } catch (error) {
     debugPrint('guide seen plant $name: $error');
     return false;
@@ -1723,9 +1736,12 @@ Future<bool> _photoAttached(GuideSeenFind row, {required bool cloud}) async {
   if (!row.ownPhoto) return false;
   final path = row.photoPath;
   if (path == null || path.isEmpty) return false;
+  if (cloud) {
+    return guideSeenPhotoAttached(local: false, cloud: true, published: false);
+  }
   final local = await Offline.getLocalFile(path) != null;
-  if (local || cloud) {
-    return guideSeenPhotoAttached(local: local, cloud: cloud, published: false);
+  if (local) {
+    return guideSeenPhotoAttached(local: true, cloud: false, published: false);
   }
   return guideSeenPhotoAttached(
     local: false,

@@ -51,6 +51,11 @@ class GuideSeenFind {
   /// copied to Storage. Hand-built rows default to attached.
   final bool photoAttached;
 
+  /// Vernacular, catalog photo, and [inBook] have been read. A fresh
+  /// observation row is false, so the list can draw before those lookups.
+  /// Hand-built rows default to known.
+  final bool catalogKnown;
+
   const GuideSeenFind({
     required this.id,
     required this.name,
@@ -69,6 +74,7 @@ class GuideSeenFind {
     this.indoors = false,
     this.country,
     this.photoAttached = true,
+    this.catalogKnown = true,
   });
 
   GuideSeenFind withCatalog({
@@ -95,6 +101,7 @@ class GuideSeenFind {
       indoors: indoors,
       country: country,
       photoAttached: photoAttached ?? this.photoAttached,
+      catalogKnown: true,
     );
   }
 }
@@ -141,6 +148,7 @@ GuideSeenChip? guideSeenChip(GuideSeenFind find) {
     case GuideSeenShare.rejected:
       return GuideSeenChip.rejected;
     case GuideSeenShare.none:
+      if (!find.catalogKnown) return null;
       if (!find.inBook) return GuideSeenChip.outside;
       if (!find.ownPhoto || !find.photoAttached) return null;
       return GuideSeenChip.share;
@@ -288,7 +296,84 @@ GuideSeenFind? readGuideSeenRow(Object? key, dynamic raw) {
     longitude: _asDouble(raw[observationLongitude]),
     indoors: guideRowIndoors(raw[observationIndoors]),
     country: guideRowCountry(raw[observationCountry]),
+    catalogKnown: false,
   );
+}
+
+/// Every private row in a notebook snapshot, newest first. Skips a row
+/// with no plant name. This is the list the Seen page can draw immediately.
+List<GuideSeenFind> guideSeenRows(dynamic value) {
+  if (value is! Map) return [];
+  final rows = <GuideSeenFind>[];
+  value.forEach((key, raw) {
+    final row = readGuideSeenRow(key, raw);
+    if (row != null) rows.add(row);
+  });
+  rows.sort((a, b) {
+    final byWhen = b.when.compareTo(a.when);
+    if (byWhen != 0) return byWhen;
+    return a.id.compareTo(b.id);
+  });
+  return rows;
+}
+
+/// `photoCloud` on each row. True means the file is already in private Storage.
+Map<String, bool> guideSeenCloudFlags(dynamic value) {
+  if (value is! Map) return {};
+  final clouds = <String, bool>{};
+  value.forEach((key, raw) {
+    if (raw is! Map || raw[observationPhotoCloud] != true) return;
+    final row = readGuideSeenRow(key, raw);
+    if (row == null) return;
+    clouds[row.id] = true;
+  });
+  return clouds;
+}
+
+/// Keeps a vernacular and a Share answer across a fresh snapshot of the
+/// same find. A changed plant name or photo is looked up again. Status
+/// always comes from [raw].
+GuideSeenFind guideSeenCarryFace(
+  GuideSeenFind raw,
+  GuideSeenFind? previous,
+) {
+  if (previous == null || !previous.catalogKnown || previous.name != raw.name) {
+    return raw;
+  }
+  final samePhoto = raw.ownPhoto
+      ? previous.ownPhoto && previous.photoPath == raw.photoPath
+      : !previous.ownPhoto;
+  final catalogPhoto =
+      !raw.ownPhoto && !previous.ownPhoto ? previous.photoPath : null;
+  return raw.withCatalog(
+    label: previous.label,
+    catalogPhoto: catalogPhoto,
+    inBook: previous.inBook,
+    photoAttached: samePhoto && previous.photoAttached,
+  );
+}
+
+/// Identity of the lookups Seen has to repeat: plant, photo path, and
+/// whether the photo is already in private Storage. Status and date are
+/// already on the row, so a review update does not belong here.
+String guideSeenDecorateStamp(dynamic value) {
+  final rows = guideSeenRows(value);
+  final clouds = guideSeenCloudFlags(value);
+  final buffer = StringBuffer()
+    ..write(rows.length)
+    ..write('\n');
+  for (final row in rows) {
+    buffer
+      ..write(row.id)
+      ..write('\u0001')
+      ..write(row.name)
+      ..write('\u0001')
+      ..write(row.photoPath ?? '')
+      ..write('\u0001')
+      ..write(clouds[row.id] == true ? '1' : '0')
+      ..write('\n');
+  }
+  return buffer.toString();
 }
 
 /// Missing or unrecognised means outdoor. Matches the statistics recount.

@@ -61,6 +61,7 @@ void main() {
     expect(row.share, GuideSeenShare.shared);
     expect(row.ownPhoto, isTrue);
     expect(row.photoAttached, isFalse);
+    expect(row.catalogKnown, isFalse);
     expect(row.probability, 0.82);
     expect(row.others.map((hit) => hit.latin), ['Leucanthemum vulgare']);
     expect(row.latitude, 48.1);
@@ -215,6 +216,93 @@ void main() {
     expect(
         guideSeenDetail('Sep 27', 'Middle Europe'), 'Sep 27 · Middle Europe');
     expect(guideSeenDetail('Sep 27', '  '), 'Sep 27');
+    final unread = readGuideSeenRow('x', {
+      observationPlant: 'Bellis perennis',
+      observationPhotoPaths: ['observations/uid/bellis.jpg'],
+    })!;
+    expect(guideSeenChip(unread), isNull);
+    expect(
+      guideSeenChip(unread.withCatalog(
+        inBook: true,
+        photoAttached: true,
+      )),
+      GuideSeenChip.share,
+    );
+  });
+
+  test('a fresh snapshot keeps a known face and the new status', () {
+    final older = DateTime(2026, 8, 1).millisecondsSinceEpoch;
+    final newer = DateTime(2026, 9, 27).millisecondsSinceEpoch;
+    final value = {
+      'b': {
+        observationId: 'b',
+        observationPlant: 'Rosa canina',
+        observationDate: {observationTime: older},
+        observationStatus: 'public',
+      },
+      'a': {
+        observationId: 'a',
+        observationPlant: 'Bellis perennis',
+        observationDate: {observationTime: newer},
+        observationPhotoPaths: ['observations/uid/a.jpg'],
+        observationPhotoCloud: true,
+        observationStatus: 'private',
+      },
+      'skip': {'note': 'no plant'},
+    };
+    final rows = guideSeenRows(value);
+    expect(rows.map((row) => row.id), ['a', 'b']);
+    expect(rows.first.catalogKnown, isFalse);
+    expect(guideSeenCloudFlags(value), {'a': true});
+    expect(guideSeenRows(null), isEmpty);
+    expect(guideSeenCloudFlags('nope'), isEmpty);
+
+    final known = rows.first.withCatalog(
+      label: 'daisy',
+      inBook: true,
+      photoAttached: true,
+    );
+    final again = readGuideSeenRow('a', {
+      observationId: 'a',
+      observationPlant: 'Bellis perennis',
+      observationDate: {observationTime: newer},
+      observationPhotoPaths: ['observations/uid/a.jpg'],
+      observationStatus: 'review',
+    })!;
+    final carried = guideSeenCarryFace(again, known);
+    expect(carried.label, 'daisy');
+    expect(carried.inBook, isTrue);
+    expect(carried.photoAttached, isTrue);
+    expect(carried.catalogKnown, isTrue);
+    expect(carried.share, GuideSeenShare.review);
+
+    final renamed = readGuideSeenRow('a', {
+      observationId: 'a',
+      observationPlant: 'Leucanthemum vulgare',
+      observationPhotoPaths: ['observations/uid/a.jpg'],
+    })!;
+    expect(guideSeenCarryFace(renamed, known).catalogKnown, isFalse);
+    expect(guideSeenCarryFace(again, null).label, isNull);
+
+    final first = guideSeenDecorateStamp(value);
+    final reviewed = {
+      ...value,
+      'a': {
+        ...(value['a'] as Map),
+        observationStatus: 'review',
+      },
+    };
+    expect(guideSeenDecorateStamp(reviewed), first);
+    expect(
+      guideSeenDecorateStamp({
+        ...value,
+        'a': {
+          ...(value['a'] as Map),
+          observationPhotoCloud: false,
+        },
+      }),
+      isNot(first),
+    );
   });
 
   testWidgets('groups finds and offers share, review, and the upsell',
@@ -358,6 +446,21 @@ void main() {
     expect(find.text('See Field Guide'), findsOneWidget);
     expect(find.text('To confirm · 0'), findsNothing);
     expect(find.byKey(const Key('guide-seen-hide-shared')), findsNothing);
+  });
+
+  testWidgets('an unread catalog row does not say it is outside the book',
+      (tester) async {
+    final row = readGuideSeenRow('kept', {
+      observationPlant: 'Tanacetum corymbosum',
+      observationPhotoPaths: ['observations/uid/kept.jpg'],
+      observationDate: {
+        observationTime: DateTime(2026, 8, 1).millisecondsSinceEpoch,
+      },
+    })!;
+    await _pump(tester, _page(finds: [row]));
+    expect(find.text('Tanacetum corymbosum'), findsOneWidget);
+    expect(find.text('Not in the book'), findsNothing);
+    expect(find.text('Share'), findsNothing);
   });
 
   testWidgets('shows a spinner until the notebook arrives', (tester) async {

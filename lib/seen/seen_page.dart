@@ -89,90 +89,90 @@ class _SeenPageState extends State<SeenPage> {
         ? null
         : (hiding ? guideSeenHidingShared(finds).toList() : finds);
     final notebook = visible == null ? null : arrangeGuideSeen(visible);
-    return ListView(
+    final tiles = _seenTiles(strings, notebook, finds, hiding, visible);
+    return ListView.builder(
       padding: const EdgeInsets.only(bottom: 24),
-      children: [
-        GuideTitleBar(
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(strings.guide_tab_seen, style: GuideType.wordmark(colors)),
-              if (finds != null) ...[
-                const SizedBox(height: 2),
-                Text(
-                  _subtitle(
-                    strings,
-                    visible!.length,
-                    hiding ? sharedCount : 0,
+      itemCount: tiles.length + 1,
+      itemBuilder: (context, index) {
+        if (index == 0) {
+          return GuideTitleBar(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(strings.guide_tab_seen, style: GuideType.wordmark(colors)),
+                if (finds != null) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    _subtitle(
+                      strings,
+                      visible!.length,
+                      hiding ? sharedCount : 0,
+                    ),
+                    style: TextStyle(
+                      fontSize: 13,
+                      height: 1.3,
+                      color: colors.ink3,
+                    ),
                   ),
-                  style: TextStyle(
-                    fontSize: 13,
-                    height: 1.3,
-                    color: colors.ink3,
-                  ),
-                ),
+                ],
               ],
-            ],
-          ),
-          leadingLabel: strings.observation_stats,
-          leadingIcon: Icons.bar_chart_outlined,
-          onLeading: () {
-            openGuideStatistics(
-              context,
-              finds: finds,
-              backLabel: strings.guide_tab_seen,
-            );
-          },
-          actionLabel: strings.guide_camera_title,
-          icon: Icons.photo_camera_outlined,
-          onAction: () {
-            final open = widget.onCamera;
-            if (open != null) {
-              open(context);
-            } else {
-              openGuideCamera(context);
-            }
-          },
-        ),
-        if (notebook == null)
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 32),
-            child: Center(
-              child: SizedBox(
-                width: 18,
-                height: 18,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              ),
             ),
-          )
-        else ...[
-          if (finds != null && finds.isEmpty)
-            Padding(
+            leadingLabel: strings.observation_stats,
+            leadingIcon: Icons.bar_chart_outlined,
+            onLeading: () {
+              openGuideStatistics(
+                context,
+                finds: finds,
+                backLabel: strings.guide_tab_seen,
+              );
+            },
+            actionLabel: strings.guide_camera_title,
+            icon: Icons.photo_camera_outlined,
+            onAction: () {
+              final open = widget.onCamera;
+              if (open != null) {
+                open(context);
+              } else {
+                openGuideCamera(context);
+              }
+            },
+          );
+        }
+        final tile = tiles[index - 1];
+        switch (tile.kind) {
+          case _SeenTileKind.spinner:
+            return const Padding(
+              padding: EdgeInsets.symmetric(vertical: 32),
+              child: Center(
+                child: SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+              ),
+            );
+          case _SeenTileKind.empty:
+            return Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
               child: Text(
                 strings.guide_seen_empty,
                 style: TextStyle(fontSize: 13, color: colors.ink3),
               ),
-            ),
-          if (notebook.unconfirmed.isNotEmpty) ...[
-            _MonthLabel(
-              text: strings
-                  .guide_seen_to_confirm(notebook.unconfirmed.length)
-                  .toUpperCase(),
-              color: colors.madder,
-            ),
-            for (final find in notebook.unconfirmed)
-              _ConfirmCard(
-                find: find,
-                busy: _busy.contains(find.id),
-                onOpen: () => _open(find),
-                onConfirm: () => _confirm(find),
-                onAnother: () => _another(find),
-                onDelete: () => _delete(find),
-              ),
-          ],
-          if (sharedCount > 0)
-            Padding(
+            );
+          case _SeenTileKind.confirmHead:
+            return _MonthLabel(text: tile.text!, color: colors.madder);
+          case _SeenTileKind.confirm:
+            final find = tile.find!;
+            return _ConfirmCard(
+              find: find,
+              busy: _busy.contains(find.id),
+              onOpen: () => _open(find),
+              onConfirm: () => _confirm(find),
+              onAnother: () => _another(find),
+              onDelete: () => _delete(find),
+            );
+          case _SeenTileKind.hide:
+            return Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(20, 6, 20, 0),
               child: Align(
                 alignment: AlignmentDirectional.centerEnd,
@@ -187,33 +187,29 @@ class _SeenPageState extends State<SeenPage> {
                   border: hiding ? null : colors.rule,
                 ),
               ),
-            ),
-          if (hiding && visible!.isEmpty)
-            Padding(
+            );
+          case _SeenTileKind.onlyShared:
+            return Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(20, 8, 20, 8),
               child: Text(
                 strings.guide_seen_only_shared,
                 style: TextStyle(fontSize: 13, color: colors.ink3),
               ),
-            ),
-          for (final month in notebook.months) ...[
-            _MonthLabel(
-              text: DateFormat.yMMMM(
-                Localizations.localeOf(context).toString(),
-              ).format(month.month).toUpperCase(),
-            ),
-            for (final find in month.finds)
-              _FindRow(
-                find: find,
-                busy: _busy.contains(find.id),
-                onOpen: () => _open(find),
-                onShare: () => _share(find),
-                onWithdraw: () => _withdraw(find),
-                onDelete: () => _askDelete(find),
-              ),
-          ],
-          if (!widget.fieldGuide)
-            _Upsell(
+            );
+          case _SeenTileKind.month:
+            return _MonthLabel(text: tile.text!);
+          case _SeenTileKind.find:
+            final find = tile.find!;
+            return _FindRow(
+              find: find,
+              busy: _busy.contains(find.id),
+              onOpen: () => _open(find),
+              onShare: () => _share(find),
+              onWithdraw: () => _withdraw(find),
+              onDelete: () => _askDelete(find),
+            );
+          case _SeenTileKind.upsell:
+            return _Upsell(
               onPressed: () {
                 final open = widget.onFieldGuide;
                 if (open != null) {
@@ -222,10 +218,59 @@ class _SeenPageState extends State<SeenPage> {
                   openGuideFieldGuide(context);
                 }
               },
-            ),
-        ],
-      ],
+            );
+        }
+      },
     );
+  }
+
+  /// Rows under the title. Only the ones on screen are built, so a long
+  /// notebook does not start a photo download for every find at once.
+  List<_SeenTile> _seenTiles(
+    S strings,
+    GuideSeenNotebook? notebook,
+    List<GuideSeenFind>? finds,
+    bool hiding,
+    List<GuideSeenFind>? visible,
+  ) {
+    if (notebook == null) {
+      return const [_SeenTile(_SeenTileKind.spinner)];
+    }
+    final tiles = <_SeenTile>[];
+    if (finds != null && finds.isEmpty) {
+      tiles.add(const _SeenTile(_SeenTileKind.empty));
+    }
+    if (notebook.unconfirmed.isNotEmpty) {
+      tiles.add(_SeenTile(
+        _SeenTileKind.confirmHead,
+        text: strings
+            .guide_seen_to_confirm(notebook.unconfirmed.length)
+            .toUpperCase(),
+      ));
+      for (final find in notebook.unconfirmed) {
+        tiles.add(_SeenTile(_SeenTileKind.confirm, find: find));
+      }
+    }
+    if (guideSeenSharedCount(finds ?? const []) > 0) {
+      tiles.add(const _SeenTile(_SeenTileKind.hide));
+    }
+    if (hiding && visible != null && visible.isEmpty) {
+      tiles.add(const _SeenTile(_SeenTileKind.onlyShared));
+    }
+    final locale = Localizations.localeOf(context).toString();
+    for (final month in notebook.months) {
+      tiles.add(_SeenTile(
+        _SeenTileKind.month,
+        text: DateFormat.yMMMM(locale).format(month.month).toUpperCase(),
+      ));
+      for (final find in month.finds) {
+        tiles.add(_SeenTile(_SeenTileKind.find, find: find));
+      }
+    }
+    if (!widget.fieldGuide) {
+      tiles.add(const _SeenTile(_SeenTileKind.upsell));
+    }
+    return tiles;
   }
 
   String _subtitle(S strings, int count, int hidden) {
@@ -372,13 +417,13 @@ class _SeenPageState extends State<SeenPage> {
           child: guideSheetAlign(
             sheetContext,
             _DeleteSheet(
-            title: strings.guide_seen_delete_title,
-            body: body,
-            onDelete: () {
-              Navigator.pop(sheetContext);
-              unawaited(_delete(find));
-            },
-          ),
+              title: strings.guide_seen_delete_title,
+              body: body,
+              onDelete: () {
+                Navigator.pop(sheetContext);
+                unawaited(_delete(find));
+              },
+            ),
           ),
         );
       },
@@ -485,11 +530,11 @@ class _SeenPageState extends State<SeenPage> {
           child: guideSheetAlign(
             sheetContext,
             _ShareSheet(
-            find: find,
-            title: title,
-            detail: _detailOf(context, find),
-            onSend: () => _sendShare(sheetContext, find),
-          ),
+              find: find,
+              title: title,
+              detail: _detailOf(context, find),
+              onSend: () => _sendShare(sheetContext, find),
+            ),
           ),
         );
       },
@@ -563,6 +608,26 @@ class _SeenPageState extends State<SeenPage> {
       ),
     );
   }
+}
+
+enum _SeenTileKind {
+  spinner,
+  empty,
+  confirmHead,
+  confirm,
+  hide,
+  onlyShared,
+  month,
+  find,
+  upsell,
+}
+
+class _SeenTile {
+  final _SeenTileKind kind;
+  final GuideSeenFind? find;
+  final String? text;
+
+  const _SeenTile(this.kind, {this.find, this.text});
 }
 
 class _MonthLabel extends StatelessWidget {

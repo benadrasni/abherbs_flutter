@@ -38,10 +38,16 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   int _favoriteTicket = 0;
   GuideListCover? _favorites;
   int _findTicket = 0;
-  int _seenTicket = 0;
   int _unconfirmedTicket = 0;
   String? _seenUid;
   bool _unconfirmedLoaded = false;
+  Object? _seenValue;
+  bool _seenReady = false;
+  final Map<String, GuideSeenFind> _seenFaces = {};
+  String? _decoratedStamp;
+  int _decorateGen = 0;
+  bool _decorateActive = false;
+  bool _decorateQueued = false;
   Map<String, int>? _colorCounts;
   List<GuideListCover>? _lists;
   GuideBookSegment _bookSegment = GuideBookSegment.families;
@@ -52,8 +58,6 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   StreamSubscription<DatabaseEvent>? _quotaSub;
   StreamSubscription<DatabaseEvent>? _seenRemote;
   String? _seenWatchUid;
-  bool _seenLoadActive = false;
-  bool _seenReloadQueued = false;
   VersionPrompt _versionPrompt = VersionPrompt.none;
   int? _storeBuild;
   int _dismissedStore = 0;
@@ -93,7 +97,8 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     unawaited(_refreshFavoriteCover());
     _loadFinds();
     if (_opened.contains(2)) {
-      _loadSeen();
+      _clearSeenLabels();
+      _showSeen(forceDecorate: true);
     } else {
       _loadUnconfirmed();
     }
@@ -123,7 +128,6 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     if (state != AppLifecycleState.resumed) return;
     unawaited(syncGuidePrivatePhotos());
     unawaited(_checkVersion());
-    if (_opened.contains(2)) unawaited(_loadSeen());
   }
 
   /// A failed fetch keeps a remembered floor closed. The shell only shows
@@ -171,8 +175,9 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     setState(() => _versionPrompt = VersionPrompt.none);
   }
 
-  /// Keeps the signed-in notebook synced. An active listener is what writes
-  /// a review's new status into the on-disk copy.
+  /// Keeps the signed-in notebook synced. The snapshot is already the
+  /// server copy, so Seen paints from it instead of downloading the list
+  /// again. Vernaculars and Share are filled in after that.
   void _watchSeenRemote() {
     final uid = guideNotebookUser()?.uid;
     if (uid == _seenWatchUid && _seenRemote != null) return;
@@ -185,24 +190,51 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
         .child(firebaseObservationsByDate)
         .child(firebaseAttributeList)
         .onValue
-        .listen((_) {
-      guidePrivatePhotosChanged();
-      if (_opened.contains(2)) unawaited(_loadSeen());
-    }, onError: (Object error) {
+        .listen(_onSeenRemote, onError: (Object error) {
       debugPrint('guide seen: $error');
+      if (!mounted || _seenReady || !_opened.contains(2)) return;
+      setState(() => _notebook = []);
+      GuideTabs.unconfirmed.value = 0;
     });
+  }
+
+  void _onSeenRemote(DatabaseEvent event) {
+    guidePrivatePhotosChanged();
+    _seenValue = event.snapshot.value;
+    _seenReady = true;
+    _seenUid = guideNotebookUser()?.uid;
+    _unconfirmedLoaded = true;
+    if (!_opened.contains(2)) {
+      GuideTabs.unconfirmed.value =
+          guideUnconfirmedTotal(guideSeenRows(_seenValue));
+      return;
+    }
+    _showSeen();
   }
 
   void _go(int index) {
     GuideTabs.index = index;
+    List<GuideSeenFind>? primed;
+    if (index == 2) {
+      _loadFinds();
+      final uid = guideNotebookUser()?.uid;
+      if (uid == null) {
+        primed = [];
+      } else if (_seenReady) {
+        final rows = guideSeenRows(_seenValue);
+        primed = [
+          for (final row in rows) guideSeenCarryFace(row, _seenFaces[row.id]),
+        ];
+        _rememberSeenFaces(primed);
+        GuideTabs.unconfirmed.value = guideUnconfirmedTotal(rows);
+      }
+    }
     setState(() {
       _opened.add(index);
       _index = index;
+      if (primed != null) _notebook = primed;
     });
-    if (index == 2) {
-      _loadFinds();
-      _loadSeen();
-    }
+    if (index == 2 && _seenReady) _scheduleDecorate(force: true);
   }
 
   /// Find’s All lists opens Book on the lists of flowers.
@@ -232,7 +264,8 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   }
 
   /// Sign-in finishes after Find has drawn. The name meter follows the
-  /// account record at once. The find list and the notebook load after that.
+  /// account record at once. The find list reloads after that. Seen paints
+  /// from the notebook listener.
   Future<void> _onAccount(User? user) async {
     final ticket = ++_accountTicket;
     _watchQuota();
@@ -241,9 +274,13 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     _watchSeenRemote();
     _resetSeenForUser();
     if (user == null) guideMonthCount.value = GuideMonthCount.empty;
+    if (_opened.contains(2)) {
+      _showSeen();
+    } else {
+      unawaited(_loadUnconfirmed());
+    }
     if (mounted) setState(() {});
     final finds = _loadFinds();
-    final seen = _opened.contains(2) ? _loadSeen() : _loadUnconfirmed();
     if (user != null) {
       try {
         await Auth.setUser();
@@ -254,7 +291,6 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     if (!mounted || ticket != _accountTicket) return;
     setState(() {});
     await finds;
-    await seen;
     if (!mounted || ticket != _accountTicket) return;
     await guideGuestHasFreeName();
     if (!mounted || ticket != _accountTicket) return;
@@ -355,6 +391,12 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     if (uid == _seenUid) return;
     _seenUid = uid;
     _unconfirmedLoaded = false;
+    _seenReady = false;
+    _seenValue = null;
+    _seenFaces.clear();
+    _decoratedStamp = null;
+    _decorateQueued = false;
+    ++_decorateGen;
     ++_unconfirmedTicket;
     GuideTabs.unconfirmed.value = 0;
     if (_notebook == null) return;
@@ -363,7 +405,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   }
 
   Future<void> _loadUnconfirmed() async {
-    if (_notebook != null || _unconfirmedLoaded) return;
+    if (_notebook != null || _unconfirmedLoaded || _seenReady) return;
     final uid = guideNotebookUser()?.uid;
     _seenUid = uid;
     final ticket = ++_unconfirmedTicket;
@@ -372,7 +414,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
       if (!mounted || ticket != _unconfirmedTicket || _notebook != null) {
         return;
       }
-      if (guideNotebookUser()?.uid != uid) return;
+      if (_seenReady || guideNotebookUser()?.uid != uid) return;
       _unconfirmedLoaded = true;
       GuideTabs.unconfirmed.value = count;
     } catch (error) {
@@ -380,41 +422,133 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     }
   }
 
-  Future<void> _loadSeen() async {
-    if (_seenLoadActive) {
-      _seenReloadQueued = true;
+  void _clearSeenLabels() {
+    final next = <String, GuideSeenFind>{};
+    _seenFaces.forEach((id, face) {
+      next[id] = face.catalogKnown
+          ? face.withCatalog(
+              label: null,
+              inBook: face.inBook,
+              photoAttached: face.photoAttached,
+            )
+          : face;
+    });
+    _seenFaces
+      ..clear()
+      ..addAll(next);
+    _decoratedStamp = null;
+  }
+
+  void _rememberSeenFaces(List<GuideSeenFind> rows) {
+    final ids = <String>{};
+    for (final row in rows) {
+      ids.add(row.id);
+      final previous = _seenFaces[row.id];
+      if (previous != null && previous.catalogKnown && !row.catalogKnown) {
+        continue;
+      }
+      _seenFaces[row.id] = row;
+    }
+    _seenFaces.removeWhere((id, _) => !ids.contains(id));
+  }
+
+  void _publishSeen(List<GuideSeenFind> rows) {
+    final shown = [
+      for (final row in rows) guideSeenCarryFace(row, _seenFaces[row.id]),
+    ];
+    _rememberSeenFaces(shown);
+    GuideTabs.unconfirmed.value = guideUnconfirmedTotal(rows);
+    if (!mounted) {
+      _notebook = shown;
       return;
     }
-    _seenLoadActive = true;
+    setState(() => _notebook = shown);
+  }
+
+  /// Draws the notebook already in hand. [forceDecorate] checks photo files
+  /// again, which a tab open needs and a repeat listener event does not.
+  void _showSeen({bool forceDecorate = false}) {
+    final uid = guideNotebookUser()?.uid;
+    if (uid == null) {
+      _seenReady = false;
+      _seenValue = null;
+      _seenFaces.clear();
+      _decoratedStamp = null;
+      GuideTabs.unconfirmed.value = 0;
+      if (!mounted) {
+        _notebook = [];
+        return;
+      }
+      setState(() => _notebook = []);
+      return;
+    }
+    if (!_seenReady) return;
+    _publishSeen(guideSeenRows(_seenValue));
+    _scheduleDecorate(force: forceDecorate);
+  }
+
+  void _scheduleDecorate({bool force = false}) {
+    final code = _languageCode;
+    if (code == null || !_seenReady || !_opened.contains(2)) return;
+    final stamp = '$code\u0000${guideSeenDecorateStamp(_seenValue)}';
+    if (!force && stamp == _decoratedStamp) return;
+    if (_decorateActive) {
+      _decorateQueued = true;
+      return;
+    }
+    unawaited(_runDecorate());
+  }
+
+  Future<void> _runDecorate() async {
+    _decorateActive = true;
     try {
       var spins = 0;
       do {
-        _seenReloadQueued = false;
-        await _loadSeenBody();
+        _decorateQueued = false;
+        final code = _languageCode;
+        final uid = _seenUid;
+        final value = _seenValue;
+        if (code == null || !_seenReady) break;
+        final stamp = '$code\u0000${guideSeenDecorateStamp(value)}';
+        final gen = ++_decorateGen;
+        try {
+          final decorated = await decorateGuideSeen(
+            guideSeenRows(value),
+            code,
+            clouds: guideSeenCloudFlags(value),
+          );
+          if (!mounted || gen != _decorateGen) continue;
+          if (guideNotebookUser()?.uid != uid) continue;
+          final latest = guideSeenRows(_seenValue);
+          final byId = {for (final row in decorated) row.id: row};
+          final merged = [
+            for (final row in latest)
+              guideSeenCarryFace(row, byId[row.id] ?? _seenFaces[row.id]),
+          ];
+          _rememberSeenFaces(merged);
+          final doneStamp = '$code\u0000${guideSeenDecorateStamp(_seenValue)}';
+          if (doneStamp == stamp) _decoratedStamp = doneStamp;
+          if (!mounted) {
+            _notebook = merged;
+          } else {
+            setState(() => _notebook = merged);
+          }
+          GuideTabs.unconfirmed.value = guideUnconfirmedTotal(latest);
+        } catch (error) {
+          debugPrint('guide seen: $error');
+          if (!mounted || gen != _decorateGen) continue;
+          if (_notebook == null) {
+            setState(() => _notebook = []);
+            GuideTabs.unconfirmed.value = 0;
+          }
+        }
         spins++;
-      } while (_seenReloadQueued && spins < 3);
+      } while (_decorateQueued && spins < 3);
     } finally {
-      _seenLoadActive = false;
-    }
-  }
-
-  Future<void> _loadSeenBody() async {
-    final code = _languageCode;
-    if (code == null) return;
-    _seenUid = guideNotebookUser()?.uid;
-    final ticket = ++_seenTicket;
-    ++_unconfirmedTicket;
-    try {
-      final finds = await loadGuideSeen(code);
-      if (!mounted || ticket != _seenTicket) return;
-      setState(() => _notebook = finds);
-      GuideTabs.unconfirmed.value = guideUnconfirmedTotal(finds);
-    } catch (error) {
-      debugPrint('guide seen: $error');
-      if (!mounted || ticket != _seenTicket) return;
-      if (_notebook == null) {
-        setState(() => _notebook = []);
-        GuideTabs.unconfirmed.value = 0;
+      _decorateActive = false;
+      if (_decorateQueued && mounted && _opened.contains(2)) {
+        _decorateQueued = false;
+        unawaited(_runDecorate());
       }
     }
   }
@@ -430,7 +564,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     GuideTabs.refreshSeen = () {
       if (!mounted) return;
       _loadFinds();
-      _loadSeen();
+      if (_opened.contains(2)) _showSeen();
     };
     GuideTabs.openPerson = openGuideAccount;
     GuideTabs.index = _index;
