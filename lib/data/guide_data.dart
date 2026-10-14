@@ -785,9 +785,9 @@ Future<List<GuideSeenFind>> decorateGuideSeen(
     for (final row in rows)
       guideSeenApplyCatalog(
         row,
-        label: faces[row.name]?.label.text,
+        label: faces[row.name]?.label.value,
         labelKnown: faces[row.name]?.label.known ?? false,
-        catalogPhoto: faces[row.name]?.photo.path,
+        catalogPhoto: faces[row.name]?.photo.value,
         photoKnown: faces[row.name]?.photo.known ?? false,
         inBook: faces[row.name]?.inBook,
         photoAttached: attached[row.id],
@@ -810,29 +810,19 @@ Future<int> loadGuideUnconfirmedCount() async {
   return countGuideUnconfirmedRows(value);
 }
 
-class _LabelRead {
-  final String? text;
+class _SeenRead {
+  final String? value;
   final bool known;
 
-  const _LabelRead.known(this.text) : known = true;
-  const _LabelRead.unknown()
-      : text = null,
-        known = false;
-}
-
-class _PhotoRead {
-  final String? path;
-  final bool known;
-
-  const _PhotoRead.known(this.path) : known = true;
-  const _PhotoRead.unknown()
-      : path = null,
+  const _SeenRead.known(this.value) : known = true;
+  const _SeenRead.unknown()
+      : value = null,
         known = false;
 }
 
 class _SeenFace {
-  final _LabelRead label;
-  final _PhotoRead photo;
+  final _SeenRead label;
+  final _SeenRead photo;
 
   /// Null when the id read failed.
   final bool? inBook;
@@ -847,14 +837,14 @@ Future<_SeenFace> _seenFace(
 }) async {
   final label = await _seenLabel(name, languageCode);
   final photo =
-      needsPhoto ? await _catalogPhoto(name) : const _PhotoRead.known(null);
+      needsPhoto ? await _catalogPhoto(name) : const _SeenRead.known(null);
   final inBook = await _plantInBook(name);
   return _SeenFace(label, photo, inBook);
 }
 
-Future<_LabelRead> _seenLabel(String name, String languageCode) async {
+Future<_SeenRead> _seenLabel(String name, String languageCode) async {
   final cached = translationCache[name];
-  if (cached != null && cached.isNotEmpty) return _LabelRead.known(cached);
+  if (cached != null && cached.isNotEmpty) return _SeenRead.known(cached);
   try {
     final event = await translationsReference
         .child(languageCode)
@@ -864,21 +854,21 @@ Future<_LabelRead> _seenLabel(String name, String languageCode) async {
     final value = event.snapshot.value;
     if (value is String && value.isNotEmpty) {
       translationCache[name] = value;
-      return _LabelRead.known(value);
+      return _SeenRead.known(value);
     }
-    return const _LabelRead.known(null);
+    return const _SeenRead.known(null);
   } catch (error) {
     debugPrint('guide seen label $name: $error');
-    return const _LabelRead.unknown();
+    return const _SeenRead.unknown();
   }
 }
 
 final Map<String, String?> _catalogPhotos = {};
 final Set<String> _catalogPhotoFetched = {};
 
-Future<_PhotoRead> _catalogPhoto(String name) async {
+Future<_SeenRead> _catalogPhoto(String name) async {
   if (_catalogPhotoFetched.contains(name)) {
-    return _PhotoRead.known(_catalogPhotos[name]);
+    return _SeenRead.known(_catalogPhotos[name]);
   }
   try {
     final event = await plantsReference.child(name).child('photoUrls').once();
@@ -886,10 +876,10 @@ Future<_PhotoRead> _catalogPhoto(String name) async {
     final path = url == null ? null : storagePhotos + url;
     _catalogPhotoFetched.add(name);
     _catalogPhotos[name] = path;
-    return _PhotoRead.known(path);
+    return _SeenRead.known(path);
   } catch (error) {
     debugPrint('guide seen photo $name: $error');
-    return const _PhotoRead.unknown();
+    return const _SeenRead.unknown();
   }
 }
 
@@ -921,21 +911,13 @@ Future<GuideStatFace> loadGuidePlantCard(
   final lang = getLanguageCode(languageCode);
   final face = await _seenFace(name, lang, needsPhoto: true);
   return GuideStatFace(
-    label: face.label.text,
-    photoPath: face.photo.path,
+    label: face.label.value,
+    photoPath: face.photo.value,
     inBook: face.inBook ?? false,
   );
 }
 
 final Map<String, bool> _plantInBookCache = {};
-
-/// Drops session catalog answers.
-@visibleForTesting
-void resetGuideSeenCatalogCache() {
-  _catalogPhotos.clear();
-  _catalogPhotoFetched.clear();
-  _plantInBookCache.clear();
-}
 
 /// Null when the read failed. That miss is left out of the cache.
 Future<bool?> _plantInBook(String name) async {
