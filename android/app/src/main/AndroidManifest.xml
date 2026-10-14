@@ -37,12 +37,12 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
-        <!-- screenOrientation is the phone default. MainActivity lifts it when
-             guide_allow_rotation is true (values-sw600dp). -->
+        <!-- No screenOrientation, resizeableActivity, or aspect-ratio lock.
+             Android 16 ignores those on large screens (sw >= 600dp). Phones
+             stay portrait in MainActivity; a large screen rotates and resizes. -->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
             android:hardwareAccelerated="true"

@@ -16,9 +16,10 @@ class MainActivity : FlutterActivity() {
         applyGuideOrientation()
     }
 
-    // The manifest keeps a phone in portrait. A large screen (guide_allow_rotation)
-    // follows the user, including upside down, so the window size changes and the
-    // guide can leave the portrait tablet layout for the landscape rail.
+    // Phones stay portrait. Android 16 still honors that below sw600dp.
+    // A large screen (guide_allow_rotation) is left on FULL_USER, which is not
+    // one of the portrait or landscape locks Android 16 ignores, so the window
+    // can rotate, including upside down, and resize with the display.
     private fun applyGuideOrientation() {
         val target = if (resources.getBoolean(R.bool.guide_allow_rotation)) {
             ActivityInfo.SCREEN_ORIENTATION_FULL_USER
