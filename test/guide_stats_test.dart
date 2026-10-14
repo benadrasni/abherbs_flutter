@@ -1,9 +1,10 @@
-import 'dart:ui';
-
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
 import 'package:abherbs_flutter/seen/guide_stats.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
+import 'package:abherbs_flutter/seen/stats_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -222,6 +223,73 @@ void main() {
     );
   });
 
+  test('a pending lookup leaves inBook unknown', () {
+    final stats = guideNotebookStats([
+      _find(
+        'a',
+        'Bellis perennis',
+        DateTime(2026, 5, 1),
+        catalogKnown: false,
+      ),
+      _find('b', 'Rosa canina', DateTime(2026, 6, 1)),
+    ]);
+    expect(stats.finds, 2);
+    expect(stats.first!.name, 'Bellis perennis');
+    expect(stats.first!.inBook, isNull);
+    expect(stats.last!.inBook, isFalse);
+  });
+
+  testWidgets('a pending statistics plant looks up the card and does not reload',
+      (tester) async {
+    final opened = <String>[];
+    final cards = <String>[];
+    var loads = 0;
+    await _pumpStats(
+      tester,
+      GuideStatsPage(
+        finds: [
+          _find(
+            'a',
+            'Bellis perennis',
+            DateTime(2026, 5, 1),
+            catalogKnown: false,
+          ),
+          _find('b', 'Rosa canina', DateTime(2026, 6, 1)),
+        ],
+        backLabel: 'Seen',
+        loadFinds: (code) async {
+          loads++;
+          return const [];
+        },
+        loadSightings: () async =>
+            const GuideSightingsLoad(headline: null, years: []),
+        loadCard: (name, code) async {
+          cards.add(name);
+          return const GuideStatFace(inBook: true);
+        },
+        onOpenPlant: (_, name) => opened.add(name),
+      ),
+    );
+    await tester.pump();
+
+    expect(loads, 0);
+    expect(find.text('Bellis perennis'), findsOneWidget);
+    expect(find.text('Rosa canina'), findsOneWidget);
+
+    await tester.tap(find.text('Bellis perennis'));
+    await tester.pump();
+    await tester.pump();
+    expect(loads, 0);
+    expect(cards, ['Bellis perennis']);
+    expect(opened, ['Bellis perennis']);
+    expect(find.text('Not in the book.'), findsNothing);
+
+    await tester.tap(find.text('Rosa canina'));
+    await tester.pump();
+    expect(cards, ['Bellis perennis']);
+    expect(find.text('Not in the book.'), findsOneWidget);
+  });
+
   test('czech and english statistics strings and plurals match expected forms', () async {
     final cs = await S.load(const Locale('cs', 'CZ'));
     expect(cs.guide_stats_finds(1), 'Nález');
@@ -254,6 +322,7 @@ GuideSeenFind _find(
   GuideSeenShare share = GuideSeenShare.none,
   bool inBook = false,
   String? label,
+  bool catalogKnown = true,
 }) {
   return GuideSeenFind(
     id: id,
@@ -265,5 +334,27 @@ GuideSeenFind _find(
     share: share,
     inBook: inBook,
     label: label,
+    catalogKnown: catalogKnown,
   );
+}
+
+Future<void> _pumpStats(WidgetTester tester, Widget page) async {
+  tester.view.physicalSize = const Size(800, 1200);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+  await tester.pumpWidget(
+    MaterialApp(
+      locale: const Locale('en'),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      home: page,
+    ),
+  );
+  await tester.pump();
 }
