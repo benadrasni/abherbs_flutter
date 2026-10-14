@@ -57,10 +57,8 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
   void initState() {
     super.initState();
     _public = widget.sightings;
-    final given = widget.finds;
-    final ready = given != null && _catalogReady(given);
-    _finds = ready ? given : null;
-    _findsLoading = !ready;
+    _finds = widget.finds;
+    _findsLoading = widget.finds == null;
     unawaited(_loadSightings());
   }
 
@@ -70,7 +68,7 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
     final code = Localizations.localeOf(context).languageCode;
     final changed = _language != null && _language != code;
     _language = code;
-    if (!_findsStarted && _finds == null) {
+    if (!_findsStarted && widget.finds == null) {
       _findsStarted = true;
       unawaited(_loadFinds());
     }
@@ -382,15 +380,6 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
   String _day(DateTime when) {
     return DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(when);
   }
-}
-
-/// A row still waiting on the catalog lookup reports [GuideSeenFind.inBook]
-/// as false. That is not a result, so statistics reads the notebook again.
-bool _catalogReady(List<GuideSeenFind> finds) {
-  for (final find in finds) {
-    if (!find.catalogKnown) return false;
-  }
-  return true;
 }
 
 NumberFormat _format(BuildContext context) {

@@ -223,9 +223,26 @@ void main() {
     );
   });
 
-  testWidgets('statistics reload a notebook that is still looking up the book',
+  test('a pending lookup leaves inBook unknown', () {
+    final stats = guideNotebookStats([
+      _find(
+        'a',
+        'Bellis perennis',
+        DateTime(2026, 5, 1),
+        catalogKnown: false,
+      ),
+      _find('b', 'Rosa canina', DateTime(2026, 6, 1)),
+    ]);
+    expect(stats.finds, 2);
+    expect(stats.first!.name, 'Bellis perennis');
+    expect(stats.first!.inBook, isNull);
+    expect(stats.last!.inBook, isFalse);
+  });
+
+  testWidgets('a pending statistics plant looks up the card and does not reload',
       (tester) async {
     final opened = <String>[];
+    final cards = <String>[];
     var loads = 0;
     await _pumpStats(
       tester,
@@ -237,50 +254,7 @@ void main() {
             DateTime(2026, 5, 1),
             catalogKnown: false,
           ),
-        ],
-        backLabel: 'Seen',
-        loadFinds: (code) async {
-          loads++;
-          return [
-            _find(
-              'a',
-              'Bellis perennis',
-              DateTime(2026, 5, 1),
-              label: 'daisy',
-              inBook: true,
-            ),
-          ];
-        },
-        loadSightings: () async =>
-            const GuideSightingsLoad(headline: null, years: []),
-        loadCard: (name, code) async => const GuideStatFace(inBook: true),
-        onOpenPlant: (_, name) => opened.add(name),
-      ),
-    );
-    await tester.pump();
-
-    expect(loads, 1);
-    expect(find.text('daisy'), findsNWidgets(2));
-    await tester.tap(find.text('daisy').first);
-    await tester.pump();
-    expect(opened, ['Bellis perennis']);
-    expect(find.text('Not in the book.'), findsNothing);
-  });
-
-  testWidgets('statistics keep a notebook whose lookup has finished',
-      (tester) async {
-    var loads = 0;
-    await _pumpStats(
-      tester,
-      GuideStatsPage(
-        finds: [
-          _find(
-            'a',
-            'Bellis perennis',
-            DateTime(2026, 5, 1),
-            label: 'daisy',
-            inBook: true,
-          ),
+          _find('b', 'Rosa canina', DateTime(2026, 6, 1)),
         ],
         backLabel: 'Seen',
         loadFinds: (code) async {
@@ -289,12 +263,31 @@ void main() {
         },
         loadSightings: () async =>
             const GuideSightingsLoad(headline: null, years: []),
+        loadCard: (name, code) async {
+          cards.add(name);
+          return const GuideStatFace(inBook: true);
+        },
+        onOpenPlant: (_, name) => opened.add(name),
       ),
     );
     await tester.pump();
 
     expect(loads, 0);
-    expect(find.text('daisy'), findsNWidgets(2));
+    expect(find.text('Bellis perennis'), findsOneWidget);
+    expect(find.text('Rosa canina'), findsOneWidget);
+
+    await tester.tap(find.text('Bellis perennis'));
+    await tester.pump();
+    await tester.pump();
+    expect(loads, 0);
+    expect(cards, ['Bellis perennis']);
+    expect(opened, ['Bellis perennis']);
+    expect(find.text('Not in the book.'), findsNothing);
+
+    await tester.tap(find.text('Rosa canina'));
+    await tester.pump();
+    expect(cards, ['Bellis perennis']);
+    expect(find.text('Not in the book.'), findsOneWidget);
   });
 
   test('czech and english statistics strings and plurals match expected forms', () async {

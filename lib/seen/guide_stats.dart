@@ -6,7 +6,7 @@ class GuideStatPlant {
   final String name;
   final String? label;
   final String? photoPath;
-  final bool inBook;
+  final bool? inBook;
   final DateTime when;
   final int count;
 
@@ -15,7 +15,7 @@ class GuideStatPlant {
     required this.when,
     this.label,
     this.photoPath,
-    this.inBook = false,
+    this.inBook,
     this.count = 1,
   });
 }
@@ -165,7 +165,7 @@ GuideStatPlant _plant(GuideSeenFind find, {int count = 1}) {
     name: find.name,
     label: find.label,
     photoPath: find.photoPath,
-    inBook: find.inBook,
+    inBook: find.catalogKnown ? find.inBook : null,
     when: find.when,
     count: count,
   );
