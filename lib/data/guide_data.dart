@@ -756,7 +756,8 @@ Future<List<GuideSeenFind>> loadGuideSeen(String languageCode) async {
 }
 
 /// Vernaculars, catalog photos, and whether each photo can be shared.
-/// Species lookups are remembered for the session. A `photoCloud` row does
+/// Species lookups are remembered for the session. A failed lookup leaves
+/// the row unknown so the next pass can try again. A `photoCloud` row does
 /// not check Storage.
 Future<List<GuideSeenFind>> decorateGuideSeen(
   List<GuideSeenFind> rows,
@@ -782,11 +783,14 @@ Future<List<GuideSeenFind>> decorateGuideSeen(
   ]);
   return [
     for (final row in rows)
-      row.withCatalog(
-        label: faces[row.name]?.label,
-        catalogPhoto: faces[row.name]?.photo,
-        inBook: faces[row.name]?.inBook ?? false,
-        photoAttached: attached[row.id] ?? false,
+      guideSeenApplyCatalog(
+        row,
+        label: faces[row.name]?.label.value,
+        labelKnown: faces[row.name]?.label.known ?? false,
+        catalogPhoto: faces[row.name]?.photo.value,
+        photoKnown: faces[row.name]?.photo.known ?? false,
+        inBook: faces[row.name]?.inBook,
+        photoAttached: attached[row.id],
       ),
   ];
 }
@@ -806,12 +810,24 @@ Future<int> loadGuideUnconfirmedCount() async {
   return countGuideUnconfirmedRows(value);
 }
 
-class _SeenFace {
-  final String? label;
-  final String? photo;
-  final bool inBook;
+class _SeenRead {
+  final String? value;
+  final bool known;
 
-  _SeenFace(this.label, this.photo, this.inBook);
+  const _SeenRead.known(this.value) : known = true;
+  const _SeenRead.unknown()
+      : value = null,
+        known = false;
+}
+
+class _SeenFace {
+  final _SeenRead label;
+  final _SeenRead photo;
+
+  /// Null when the id read failed.
+  final bool? inBook;
+
+  const _SeenFace(this.label, this.photo, this.inBook);
 }
 
 Future<_SeenFace> _seenFace(
@@ -820,14 +836,15 @@ Future<_SeenFace> _seenFace(
   required bool needsPhoto,
 }) async {
   final label = await _seenLabel(name, languageCode);
-  final photo = needsPhoto ? await _catalogPhoto(name) : null;
+  final photo =
+      needsPhoto ? await _catalogPhoto(name) : const _SeenRead.known(null);
   final inBook = await _plantInBook(name);
   return _SeenFace(label, photo, inBook);
 }
 
-Future<String?> _seenLabel(String name, String languageCode) async {
+Future<_SeenRead> _seenLabel(String name, String languageCode) async {
   final cached = translationCache[name];
-  if (cached != null && cached.isNotEmpty) return cached;
+  if (cached != null && cached.isNotEmpty) return _SeenRead.known(cached);
   try {
     final event = await translationsReference
         .child(languageCode)
@@ -837,28 +854,32 @@ Future<String?> _seenLabel(String name, String languageCode) async {
     final value = event.snapshot.value;
     if (value is String && value.isNotEmpty) {
       translationCache[name] = value;
-      return value;
+      return _SeenRead.known(value);
     }
+    return const _SeenRead.known(null);
   } catch (error) {
     debugPrint('guide seen label $name: $error');
+    return const _SeenRead.unknown();
   }
-  return null;
 }
 
 final Map<String, String?> _catalogPhotos = {};
 final Set<String> _catalogPhotoFetched = {};
 
-Future<String?> _catalogPhoto(String name) async {
-  if (_catalogPhotoFetched.contains(name)) return _catalogPhotos[name];
+Future<_SeenRead> _catalogPhoto(String name) async {
+  if (_catalogPhotoFetched.contains(name)) {
+    return _SeenRead.known(_catalogPhotos[name]);
+  }
   try {
     final event = await plantsReference.child(name).child('photoUrls').once();
     final url = guideFirstText(event.snapshot.value);
     final path = url == null ? null : storagePhotos + url;
     _catalogPhotoFetched.add(name);
-    return _catalogPhotos[name] = path;
+    _catalogPhotos[name] = path;
+    return _SeenRead.known(path);
   } catch (error) {
     debugPrint('guide seen photo $name: $error');
-    return null;
+    return const _SeenRead.unknown();
   }
 }
 
@@ -890,15 +911,16 @@ Future<GuideStatFace> loadGuidePlantCard(
   final lang = getLanguageCode(languageCode);
   final face = await _seenFace(name, lang, needsPhoto: true);
   return GuideStatFace(
-    label: face.label,
-    photoPath: face.photo,
-    inBook: face.inBook,
+    label: face.label.value,
+    photoPath: face.photo.value,
+    inBook: face.inBook ?? false,
   );
 }
 
 final Map<String, bool> _plantInBookCache = {};
 
-Future<bool> _plantInBook(String name) async {
+/// Null when the read failed. That miss is left out of the cache.
+Future<bool?> _plantInBook(String name) async {
   final known = _plantInBookCache[name];
   if (known != null) return known;
   try {
@@ -908,7 +930,7 @@ Future<bool> _plantInBook(String name) async {
     return _plantInBookCache[name] = inBook;
   } catch (error) {
     debugPrint('guide seen plant $name: $error');
-    return false;
+    return null;
   }
 }
 

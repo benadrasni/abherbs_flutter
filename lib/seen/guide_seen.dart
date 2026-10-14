@@ -53,6 +53,7 @@ class GuideSeenFind {
 
   /// Vernacular, catalog photo, and [inBook] have been read. A fresh
   /// observation row is false, so the list can draw before those lookups.
+  /// A failed lookup stays false so a later decorate pass can retry.
   /// Hand-built rows default to known.
   final bool catalogKnown;
 
@@ -104,6 +105,28 @@ class GuideSeenFind {
       catalogKnown: true,
     );
   }
+}
+
+/// Applies catalog reads when every required one is known. A failed read
+/// leaves [row] unknown. A find with its own photo does not need the catalog
+/// photo. [inBook] is null when that read failed.
+GuideSeenFind guideSeenApplyCatalog(
+  GuideSeenFind row, {
+  required String? label,
+  required bool labelKnown,
+  required String? catalogPhoto,
+  required bool photoKnown,
+  required bool? inBook,
+  bool? photoAttached,
+}) {
+  if (!labelKnown || inBook == null) return row;
+  if (!row.ownPhoto && !photoKnown) return row;
+  return row.withCatalog(
+    label: label,
+    catalogPhoto: catalogPhoto,
+    inBook: inBook,
+    photoAttached: photoAttached,
+  );
 }
 
 class GuideSeenMonth {
@@ -351,6 +374,48 @@ GuideSeenFind guideSeenCarryFace(
     inBook: previous.inBook,
     photoAttached: samePhoto && previous.photoAttached,
   );
+}
+
+/// A known new read, otherwise a remembered known face, otherwise [raw].
+/// An unknown read is not remembered over a face already known.
+GuideSeenFind guideSeenChooseFace(
+  GuideSeenFind raw,
+  GuideSeenFind? read,
+  GuideSeenFind? remembered,
+) {
+  final fresh = guideSeenCarryFace(raw, read);
+  if (fresh.catalogKnown) return fresh;
+  return guideSeenCarryFace(raw, remembered);
+}
+
+/// The list Seen paints and stores after one decorate pass, plus the stamp
+/// to keep. [stamp] is null when a read failed or the snapshot moved, so
+/// the next pass runs.
+class GuideSeenPass {
+  final List<GuideSeenFind> rows;
+  final String? stamp;
+
+  const GuideSeenPass(this.rows, this.stamp);
+}
+
+GuideSeenPass guideSeenPass({
+  required List<GuideSeenFind> latest,
+  required List<GuideSeenFind> read,
+  required Map<String, GuideSeenFind> remembered,
+  required String stamp,
+  required String doneStamp,
+}) {
+  final byId = {for (final row in read) row.id: row};
+  final rows = [
+    for (final row in latest)
+      guideSeenChooseFace(row, byId[row.id], remembered[row.id]),
+  ];
+  final settled = doneStamp == stamp &&
+      latest.every((row) {
+        final next = byId[row.id];
+        return next != null && next.catalogKnown && next.name == row.name;
+      });
+  return GuideSeenPass(rows, settled ? doneStamp : null);
 }
 
 /// Identity of the lookups Seen has to repeat: plant, photo path, and
