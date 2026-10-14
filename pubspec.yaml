@@ -1,7 +1,7 @@
 name: abherbs_flutter
 description: Flutter version of abherbs
 
-version: 9.0.6+906
+version: 9.0.7+907
 
 environment:
   sdk: ">=3.6.0 <4.0.0"
@@ -51,7 +51,7 @@ dependencies:
   country_picker: 2.0.28
   country_icons: 3.0.0
   wakelock_plus: 1.8.0
-  intl_utils: 2.8.16
+  intl_utils: 2.8.17
 
 dev_dependencies:
   flutter_test:

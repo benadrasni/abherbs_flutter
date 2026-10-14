@@ -476,6 +476,11 @@ class GuideTheme extends StatelessWidget {
               statusBarColor: Colors.transparent,
               systemNavigationBarColor:
                   navigationColor?.call(colors) ?? colors.paper,
+              // The bars are transparent on Android 15+. Dark icons sit on
+              // the light paper; light icons sit on the dark paper.
+              systemNavigationBarIconBrightness: brightness == Brightness.dark
+                  ? Brightness.light
+                  : Brightness.dark,
             ),
             child: child!,
           ),

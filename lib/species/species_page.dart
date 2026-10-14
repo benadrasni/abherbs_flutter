@@ -756,7 +756,9 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
           Expanded(
             flex: 42,
             child: ListView(
-              padding: EdgeInsets.zero,
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.paddingOf(context).bottom,
+              ),
               children: head,
             ),
           ),

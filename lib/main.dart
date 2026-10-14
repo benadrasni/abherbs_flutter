@@ -33,6 +33,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -115,6 +116,11 @@ Future<Locale> initializeLocale() async {
 void main() {
   runZonedGuarded(() {
     WidgetsFlutterBinding.ensureInitialized();
+    if (Platform.isAndroid) {
+      // Keeps Flutter's system-ui plugin in edge-to-edge so a later overlay
+      // update does not clear the window insets on Android 10–14.
+      unawaited(SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge));
+    }
     runApp(const _Startup());
   }, (error, stackTrace) {
     if (isIgnorableNonFatalError(error)) {

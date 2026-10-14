@@ -180,6 +180,7 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
     final leading = _leading;
     final time = guidePhotoMoment(context, widget.when);
     final window = GuideWindow.of(context);
+    final bottomInset = MediaQuery.paddingOf(context).bottom;
     final shot = _Shot(
       path: widget.photoPath,
       place: widget.place,
@@ -324,14 +325,14 @@ class _GuideOutsidePageState extends State<GuideOutsidePage> {
                   Expanded(
                     flex: 95,
                     child: ListView(
-                      padding: EdgeInsets.zero,
+                      padding: EdgeInsets.only(bottom: bottomInset),
                       children: text,
                     ),
                   ),
                 ],
               )
             : ListView(
-                padding: EdgeInsets.zero,
+                padding: EdgeInsets.only(bottom: bottomInset),
                 children: [shot, ...text],
               ),
       ),

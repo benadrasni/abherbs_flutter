@@ -10,3 +10,12 @@
 -keep class androidx.work.** { *; }
 -keep class * extends androidx.room.RoomDatabase
 -dontwarn androidx.work.**
+
+# Play scans the release dex for these Android 15 window calls. They are
+# no-ops on API 35+, and the activity theme paints transparent bars on older
+# releases, so the Flutter embedding's invokes can be dropped.
+-assumenosideeffects class android.view.Window {
+    void setStatusBarColor(int);
+    void setNavigationBarColor(int);
+    void setNavigationBarDividerColor(int);
+}

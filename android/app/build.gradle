@@ -111,6 +111,8 @@ configurations.configureEach {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:2.4.0"
+    // WindowCompat.setDecorFitsSystemWindows. The app already resolves core 1.18.
+    implementation "androidx.core:core-ktx:1.18.0"
     // AdMob still asks for WorkManager 2.7 (Room 2.2 / sqlite 2.1 crash on 16 KB
     // devices). 2.10+ calls JobScheduler.forNamespace() from InitializationProvider
     // whenever SDK_INT >= 34. That method is missing on some OEM Android 14

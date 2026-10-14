@@ -318,7 +318,7 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
               personOn: true,
               onSelect: _selectTab,
               child: SafeArea(
-                bottom: false,
+                bottom: wide,
                 child: GuideReadable(child: _body(context)),
               ),
             ),

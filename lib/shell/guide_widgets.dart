@@ -348,11 +348,16 @@ class GuideKeyScaffold extends StatelessWidget {
     return GuideTheme(
       navigationColor: (colors) => withTabs ? colors.cream : colors.paper,
       child: Scaffold(
-        body: guideWithRail(
-          context,
-          showAd: wide && withTabs,
-          onSelect: (index) => leaveGuideKeyForTab(context, index),
-          child: SafeArea(bottom: !withTabs && !wide, child: child),
+        body: SafeArea(
+          // Phone tabs pad the navigation-bar inset. A wide screen, and a
+          // page without tabs, pads it here so the banner stays above the bar.
+          bottom: wide || !withTabs,
+          child: guideWithRail(
+            context,
+            showAd: wide && withTabs,
+            onSelect: (index) => leaveGuideKeyForTab(context, index),
+            child: child,
+          ),
         ),
         bottomNavigationBar: wide || !withTabs
             ? null

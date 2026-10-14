@@ -617,7 +617,9 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
       navigationColor: (colors) => colors.cream,
       child: Scaffold(
         body: SafeArea(
-          bottom: false,
+          // The phone tab bar pads the navigation-bar inset. A wide layout
+          // has no tab bar, so the page and the banner clear it here.
+          bottom: wide,
           child: guideWithRail(
             context,
             showAd: wide && showAd,

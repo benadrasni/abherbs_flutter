@@ -1,5 +1,6 @@
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -80,6 +81,33 @@ void main() {
           .color,
       GuideColors.dark.paper,
     );
+  });
+
+  testWidgets('navigation icons follow the paper behind a transparent bar', (
+    tester,
+  ) async {
+    tester.platformDispatcher.platformBrightnessTestValue = Brightness.light;
+    addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
+
+    SystemUiOverlayStyle styleOf() {
+      return tester
+          .widget<AnnotatedRegion<SystemUiOverlayStyle>>(
+            find.byType(AnnotatedRegion<SystemUiOverlayStyle>),
+          )
+          .value;
+    }
+
+    await tester.pumpWidget(
+      const MaterialApp(home: GuideTheme(child: SizedBox.shrink())),
+    );
+    expect(styleOf().statusBarColor, Colors.transparent);
+    expect(styleOf().systemNavigationBarIconBrightness, Brightness.dark);
+
+    tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
+    await tester.pumpWidget(
+      const MaterialApp(home: GuideTheme(child: SizedBox.shrink())),
+    );
+    expect(styleOf().systemNavigationBarIconBrightness, Brightness.light);
   });
 }
 
