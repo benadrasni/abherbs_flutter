@@ -443,10 +443,6 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     final ids = <String>{};
     for (final row in rows) {
       ids.add(row.id);
-      final previous = _seenFaces[row.id];
-      if (previous != null && previous.catalogKnown && !row.catalogKnown) {
-        continue;
-      }
       _seenFaces[row.id] = row;
     }
     _seenFaces.removeWhere((id, _) => !ids.contains(id));
@@ -520,21 +516,22 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
           if (!mounted || gen != _decorateGen) continue;
           if (guideNotebookUser()?.uid != uid) continue;
           final latest = guideSeenRows(_seenValue);
-          final byId = {for (final row in decorated) row.id: row};
-          final merged = [
-            for (final row in latest)
-              guideSeenCarryFace(row, byId[row.id] ?? _seenFaces[row.id]),
-          ];
-          _rememberSeenFaces(merged);
           final doneStamp = '$code\u0000${guideSeenDecorateStamp(_seenValue)}';
-          if (doneStamp == stamp && guideSeenDecorateSettled(decorated)) {
-            _decoratedStamp = doneStamp;
-          }
-          setState(() => _notebook = merged);
+          final pass = guideSeenPass(
+            latest: latest,
+            read: decorated,
+            remembered: _seenFaces,
+            stamp: stamp,
+            doneStamp: doneStamp,
+          );
+          _rememberSeenFaces(pass.rows);
+          _decoratedStamp = pass.stamp;
+          setState(() => _notebook = pass.rows);
           GuideTabs.unconfirmed.value = guideUnconfirmedTotal(latest);
         } catch (error) {
           debugPrint('guide seen: $error');
           if (!mounted || gen != _decorateGen) continue;
+          _decoratedStamp = null;
           if (_notebook == null) {
             setState(() => _notebook = []);
             GuideTabs.unconfirmed.value = 0;

@@ -783,28 +783,16 @@ Future<List<GuideSeenFind>> decorateGuideSeen(
   ]);
   return [
     for (final row in rows)
-      _withSeenCatalog(
+      guideSeenApplyCatalog(
         row,
-        faces[row.name],
+        label: faces[row.name]?.label.text,
+        labelKnown: faces[row.name]?.label.known ?? false,
+        catalogPhoto: faces[row.name]?.photo.path,
+        photoKnown: faces[row.name]?.photo.known ?? false,
+        inBook: faces[row.name]?.inBook,
         photoAttached: attached[row.id],
       ),
   ];
-}
-
-/// Applies a finished catalog read. A failed read returns [row] unchanged
-/// and still unknown, so the next pass can try again.
-GuideSeenFind _withSeenCatalog(
-  GuideSeenFind row,
-  _SeenFace? face, {
-  bool? photoAttached,
-}) {
-  if (face == null || !face.knownFor(row.ownPhoto)) return row;
-  return row.withCatalog(
-    label: face.label,
-    catalogPhoto: face.photo,
-    inBook: face.inBook,
-    photoAttached: photoAttached,
-  );
 }
 
 /// How many private finds are still unconfirmed. Used for the Seen tab badge
@@ -822,23 +810,14 @@ Future<int> loadGuideUnconfirmedCount() async {
   return countGuideUnconfirmedRows(value);
 }
 
-class _SeenFace {
-  final String? label;
-  final String? photo;
-  final bool inBook;
-  final bool photoKnown;
-  final bool inBookKnown;
+class _LabelRead {
+  final String? text;
+  final bool known;
 
-  const _SeenFace(
-    this.label,
-    this.photo,
-    this.inBook, {
-    required this.photoKnown,
-    required this.inBookKnown,
-  });
-
-  /// A catalog photo is required only when the find has none of its own.
-  bool knownFor(bool ownPhoto) => inBookKnown && (ownPhoto || photoKnown);
+  const _LabelRead.known(this.text) : known = true;
+  const _LabelRead.unknown()
+      : text = null,
+        known = false;
 }
 
 class _PhotoRead {
@@ -851,6 +830,16 @@ class _PhotoRead {
         known = false;
 }
 
+class _SeenFace {
+  final _LabelRead label;
+  final _PhotoRead photo;
+
+  /// Null when the id read failed.
+  final bool? inBook;
+
+  const _SeenFace(this.label, this.photo, this.inBook);
+}
+
 Future<_SeenFace> _seenFace(
   String name,
   String languageCode, {
@@ -860,20 +849,12 @@ Future<_SeenFace> _seenFace(
   final photo =
       needsPhoto ? await _catalogPhoto(name) : const _PhotoRead.known(null);
   final inBook = await _plantInBook(name);
-  return _SeenFace(
-    label,
-    photo.path,
-    inBook ?? false,
-    photoKnown: photo.known,
-    inBookKnown: inBook != null,
-  );
+  return _SeenFace(label, photo, inBook);
 }
 
-Future<String?> _seenLabel(String name, String languageCode) async {
-  final read = guideSeenLabelRead;
-  if (read != null) return read(name, languageCode);
+Future<_LabelRead> _seenLabel(String name, String languageCode) async {
   final cached = translationCache[name];
-  if (cached != null && cached.isNotEmpty) return cached;
+  if (cached != null && cached.isNotEmpty) return _LabelRead.known(cached);
   try {
     final event = await translationsReference
         .child(languageCode)
@@ -883,34 +864,25 @@ Future<String?> _seenLabel(String name, String languageCode) async {
     final value = event.snapshot.value;
     if (value is String && value.isNotEmpty) {
       translationCache[name] = value;
-      return value;
+      return _LabelRead.known(value);
     }
+    return const _LabelRead.known(null);
   } catch (error) {
     debugPrint('guide seen label $name: $error');
+    return const _LabelRead.unknown();
   }
-  return null;
 }
 
 final Map<String, String?> _catalogPhotos = {};
 final Set<String> _catalogPhotoFetched = {};
-
-/// Replaces the catalog photo read in tests. Production leaves this null.
-@visibleForTesting
-Future<String?> Function(String name)? guideSeenPhotoRead;
 
 Future<_PhotoRead> _catalogPhoto(String name) async {
   if (_catalogPhotoFetched.contains(name)) {
     return _PhotoRead.known(_catalogPhotos[name]);
   }
   try {
-    final read = guideSeenPhotoRead;
-    final String? url;
-    if (read != null) {
-      url = await read(name);
-    } else {
-      final event = await plantsReference.child(name).child('photoUrls').once();
-      url = guideFirstText(event.snapshot.value);
-    }
+    final event = await plantsReference.child(name).child('photoUrls').once();
+    final url = guideFirstText(event.snapshot.value);
     final path = url == null ? null : storagePhotos + url;
     _catalogPhotoFetched.add(name);
     _catalogPhotos[name] = path;
@@ -949,28 +921,17 @@ Future<GuideStatFace> loadGuidePlantCard(
   final lang = getLanguageCode(languageCode);
   final face = await _seenFace(name, lang, needsPhoto: true);
   return GuideStatFace(
-    label: face.label,
-    photoPath: face.photo,
-    inBook: face.inBook,
+    label: face.label.text,
+    photoPath: face.photo.path,
+    inBook: face.inBook ?? false,
   );
 }
 
 final Map<String, bool> _plantInBookCache = {};
 
-/// Replaces the vernacular read in tests. Production leaves this null.
-@visibleForTesting
-Future<String?> Function(String name, String languageCode)? guideSeenLabelRead;
-
-/// Replaces the in-book read in tests. Production leaves this null.
-@visibleForTesting
-Future<bool> Function(String name)? guideSeenInBookRead;
-
-/// Drops session catalog answers and any test reads.
+/// Drops session catalog answers.
 @visibleForTesting
 void resetGuideSeenCatalogCache() {
-  guideSeenLabelRead = null;
-  guideSeenPhotoRead = null;
-  guideSeenInBookRead = null;
   _catalogPhotos.clear();
   _catalogPhotoFetched.clear();
   _plantInBookCache.clear();
@@ -981,15 +942,9 @@ Future<bool?> _plantInBook(String name) async {
   final known = _plantInBookCache[name];
   if (known != null) return known;
   try {
-    final read = guideSeenInBookRead;
-    final bool inBook;
-    if (read != null) {
-      inBook = await read(name);
-    } else {
-      final event = await plantsReference.child(name).child('id').once();
-      final value = event.snapshot.value;
-      inBook = value != null && value.toString().isNotEmpty;
-    }
+    final event = await plantsReference.child(name).child('id').once();
+    final value = event.snapshot.value;
+    final inBook = value != null && value.toString().isNotEmpty;
     return _plantInBookCache[name] = inBook;
   } catch (error) {
     debugPrint('guide seen plant $name: $error');
