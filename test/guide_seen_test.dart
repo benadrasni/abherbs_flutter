@@ -914,6 +914,42 @@ void main() {
     expect(opened, isEmpty);
   });
 
+  testWidgets('a row waits to open until the in-book lookup finishes',
+      (tester) async {
+    final opened = <String>[];
+    await _pump(
+      tester,
+      _page(
+        finds: [
+          _find(
+            id: 'wait',
+            name: 'Bellis perennis',
+            label: 'daisy',
+            confirmed: false,
+            catalogKnown: false,
+          ),
+          _find(
+            id: 'kept',
+            name: 'Tanacetum corymbosum',
+            catalogKnown: false,
+          ),
+        ],
+        onOpen: (_, find) => opened.add(find.id),
+      ),
+    );
+
+    await tester.tap(find.text('daisy'));
+    await tester.pump();
+    await tester.tap(find.text('Tanacetum corymbosum'));
+    await tester.pumpAndSettle();
+
+    expect(opened, isEmpty);
+    expect(find.byKey(const Key('guide-seen-outside')), findsNothing);
+    expect(find.byKey(const Key('guide-outside-page')), findsNothing);
+    expect(find.text('It’s another one'), findsNothing);
+    expect(find.text('Delete'), findsWidgets);
+  });
+
   testWidgets('hide shared is remembered on the phone', (tester) async {
     SharedPreferences.setMockInitialValues({});
     await Prefs.init();
@@ -946,6 +982,7 @@ GuideSeenFind _find({
   bool ownPhoto = false,
   bool inBook = false,
   bool photoAttached = true,
+  bool catalogKnown = true,
   GuideSeenShare share = GuideSeenShare.none,
   double? probability,
   String? place,
@@ -962,6 +999,7 @@ GuideSeenFind _find({
     confirmed: confirmed,
     share: share,
     inBook: inBook,
+    catalogKnown: catalogKnown,
     probability: probability,
     place: place,
     others: others,

@@ -287,6 +287,8 @@ class _SeenPageState extends State<SeenPage> {
   }
 
   void _open(GuideSeenFind find) {
+    // A fresh row reports inBook as false until the catalog lookup finishes.
+    if (!find.catalogKnown) return;
     if (!find.inBook) {
       final outside = widget.onOpenOutside;
       if (outside != null) {
@@ -689,7 +691,7 @@ class _ConfirmCard extends StatelessWidget {
           child: Column(
             children: [
               InkWell(
-                onTap: busy ? null : onOpen,
+                onTap: busy || !find.catalogKnown ? null : onOpen,
                 child: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Row(
@@ -868,6 +870,7 @@ class _FindRow extends StatelessWidget {
     final strings = S.of(context);
     final named = find.label != null && find.label!.trim().isNotEmpty;
     final chip = guideSeenChip(find);
+    final open = find.catalogKnown ? onOpen : null;
     final trailing = Directionality.of(context) == TextDirection.rtl
         ? CrossAxisAlignment.start
         : CrossAxisAlignment.end;
@@ -876,7 +879,7 @@ class _FindRow extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap: onOpen,
+            onTap: open,
             customBorder: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -890,7 +893,7 @@ class _FindRow extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: InkWell(
-              onTap: onOpen,
+              onTap: open,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

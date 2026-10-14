@@ -1,9 +1,10 @@
-import 'dart:ui';
-
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
 import 'package:abherbs_flutter/seen/guide_stats.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
+import 'package:abherbs_flutter/seen/stats_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -222,6 +223,80 @@ void main() {
     );
   });
 
+  testWidgets('statistics reload a notebook that is still looking up the book',
+      (tester) async {
+    final opened = <String>[];
+    var loads = 0;
+    await _pumpStats(
+      tester,
+      GuideStatsPage(
+        finds: [
+          _find(
+            'a',
+            'Bellis perennis',
+            DateTime(2026, 5, 1),
+            catalogKnown: false,
+          ),
+        ],
+        backLabel: 'Seen',
+        loadFinds: (code) async {
+          loads++;
+          return [
+            _find(
+              'a',
+              'Bellis perennis',
+              DateTime(2026, 5, 1),
+              label: 'daisy',
+              inBook: true,
+            ),
+          ];
+        },
+        loadSightings: () async =>
+            const GuideSightingsLoad(headline: null, years: []),
+        loadCard: (name, code) async => const GuideStatFace(inBook: true),
+        onOpenPlant: (_, name) => opened.add(name),
+      ),
+    );
+    await tester.pump();
+
+    expect(loads, 1);
+    expect(find.text('daisy'), findsNWidgets(2));
+    await tester.tap(find.text('daisy').first);
+    await tester.pump();
+    expect(opened, ['Bellis perennis']);
+    expect(find.text('Not in the book.'), findsNothing);
+  });
+
+  testWidgets('statistics keep a notebook whose lookup has finished',
+      (tester) async {
+    var loads = 0;
+    await _pumpStats(
+      tester,
+      GuideStatsPage(
+        finds: [
+          _find(
+            'a',
+            'Bellis perennis',
+            DateTime(2026, 5, 1),
+            label: 'daisy',
+            inBook: true,
+          ),
+        ],
+        backLabel: 'Seen',
+        loadFinds: (code) async {
+          loads++;
+          return const [];
+        },
+        loadSightings: () async =>
+            const GuideSightingsLoad(headline: null, years: []),
+      ),
+    );
+    await tester.pump();
+
+    expect(loads, 0);
+    expect(find.text('daisy'), findsNWidgets(2));
+  });
+
   test('czech and english statistics strings and plurals match expected forms', () async {
     final cs = await S.load(const Locale('cs', 'CZ'));
     expect(cs.guide_stats_finds(1), 'Nález');
@@ -254,6 +329,7 @@ GuideSeenFind _find(
   GuideSeenShare share = GuideSeenShare.none,
   bool inBook = false,
   String? label,
+  bool catalogKnown = true,
 }) {
   return GuideSeenFind(
     id: id,
@@ -265,5 +341,27 @@ GuideSeenFind _find(
     share: share,
     inBook: inBook,
     label: label,
+    catalogKnown: catalogKnown,
   );
+}
+
+Future<void> _pumpStats(WidgetTester tester, Widget page) async {
+  tester.view.physicalSize = const Size(800, 1200);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+  await tester.pumpWidget(
+    MaterialApp(
+      locale: const Locale('en'),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      home: page,
+    ),
+  );
+  await tester.pump();
 }
