@@ -527,7 +527,9 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
           ];
           _rememberSeenFaces(merged);
           final doneStamp = '$code\u0000${guideSeenDecorateStamp(_seenValue)}';
-          if (doneStamp == stamp) _decoratedStamp = doneStamp;
+          if (doneStamp == stamp && guideSeenDecorateSettled(decorated)) {
+            _decoratedStamp = doneStamp;
+          }
           setState(() => _notebook = merged);
           GuideTabs.unconfirmed.value = guideUnconfirmedTotal(latest);
         } catch (error) {

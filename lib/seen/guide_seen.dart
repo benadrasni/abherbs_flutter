@@ -53,6 +53,7 @@ class GuideSeenFind {
 
   /// Vernacular, catalog photo, and [inBook] have been read. A fresh
   /// observation row is false, so the list can draw before those lookups.
+  /// A failed lookup stays false so a later decorate pass can retry.
   /// Hand-built rows default to known.
   final bool catalogKnown;
 
@@ -374,6 +375,16 @@ String guideSeenDecorateStamp(dynamic value) {
       ..write('\n');
   }
   return buffer.toString();
+}
+
+/// True when every row has a catalog answer. A failed lookup leaves the row
+/// unknown, and the shell leaves the decorate stamp unset so the next pass
+/// tries again.
+bool guideSeenDecorateSettled(Iterable<GuideSeenFind> rows) {
+  for (final row in rows) {
+    if (!row.catalogKnown) return false;
+  }
+  return true;
 }
 
 /// Missing or unrecognised means outdoor. Matches the statistics recount.
