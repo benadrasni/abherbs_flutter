@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
 import 'package:abherbs_flutter/seen/guide_stats.dart';
@@ -416,6 +418,67 @@ void main() {
     expect(find.text('Not in the book.'), findsOneWidget);
   });
 
+  testWidgets('a warm retries a sighting card whose in-book read failed',
+      (tester) async {
+    final loads = <String>[];
+    final codes = <String>[];
+    final retry = Completer<GuideStatFace>();
+    final pageKey = GlobalKey();
+    Future<GuideStatFace> loadCard(String name, String code) async {
+      loads.add(name);
+      codes.add(code);
+      if (loads.length == 1) {
+        return const GuideStatFace(label: 'daisy', inBook: null);
+      }
+      return retry.future;
+    }
+
+    Widget page() {
+      return GuideStatsPage(
+        key: pageKey,
+        sightings: true,
+        finds: const [],
+        backLabel: 'Seen',
+        loadSightings: () async => const GuideSightingsLoad(
+          headline: GuideSightingHeadline(
+            count: 1,
+            plants: 1,
+            people: 1,
+            firstName: 'Bellis perennis',
+            firstWhen: null,
+            lastName: '',
+            lastWhen: null,
+            mostName: '',
+            mostCount: 0,
+            countries: [],
+          ),
+          years: [],
+        ),
+        loadCard: loadCard,
+      );
+    }
+
+    await _pumpStats(tester, page());
+    await tester.pump();
+    expect(find.text('daisy'), findsOneWidget);
+    expect(loads, ['Bellis perennis']);
+    expect(codes, ['en']);
+
+    await _pumpStats(tester, page(), locale: const Locale('cs', 'CZ'));
+    await tester.pump();
+    expect(find.text('daisy'), findsOneWidget);
+    expect(loads, ['Bellis perennis', 'Bellis perennis']);
+    expect(codes, ['en', 'cs']);
+    expect(find.text('Not in the book.'), findsNothing);
+
+    retry.complete(const GuideStatFace(label: 'sedmikráska', inBook: null));
+    await tester.pump();
+    await tester.pump();
+    expect(find.text('daisy'), findsNothing);
+    expect(find.text('sedmikráska'), findsOneWidget);
+    expect(find.text('Not in the book.'), findsNothing);
+  });
+
   test('czech and english statistics strings and plurals match expected forms', () async {
     final cs = await S.load(const Locale('cs', 'CZ'));
     expect(cs.guide_stats_finds(1), 'Nález');
@@ -464,14 +527,18 @@ GuideSeenFind _find(
   );
 }
 
-Future<void> _pumpStats(WidgetTester tester, Widget page) async {
+Future<void> _pumpStats(
+  WidgetTester tester,
+  Widget page, {
+  Locale locale = const Locale('en'),
+}) async {
   tester.view.physicalSize = const Size(800, 1200);
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
   addTearDown(tester.view.resetDevicePixelRatio);
   await tester.pumpWidget(
     MaterialApp(
-      locale: const Locale('en'),
+      locale: locale,
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
