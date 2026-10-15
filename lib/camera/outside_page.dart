@@ -447,6 +447,9 @@ class _Shot extends StatelessWidget {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final top = MediaQuery.paddingOf(context).top;
+    // Wide photo fills the scaffold. Phone photo is a band at the top.
+    final pillBottom =
+        10 + (expand ? MediaQuery.paddingOf(context).bottom : 0.0);
     final height = expand
         ? null
         : (GuideWindow.of(context).tablet ? 420.0 : 300.0);
@@ -480,7 +483,7 @@ class _Shot extends StatelessWidget {
           ),
           PositionedDirectional(
             start: 12,
-            bottom: 10,
+            bottom: pillBottom,
             child: Row(
               children: [
                 _MetaPill(label: whenLabel),
