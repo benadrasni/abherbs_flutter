@@ -904,6 +904,7 @@ Future<GuideSightingsLoad> loadGuideSightings() async {
 }
 
 /// Vernacular, catalog photo, and whether the species is in the book.
+/// [GuideStatFace.inBook] is null when that read failed.
 Future<GuideStatFace> loadGuidePlantCard(
   String name,
   String languageCode,
@@ -913,7 +914,7 @@ Future<GuideStatFace> loadGuidePlantCard(
   return GuideStatFace(
     label: face.label.value,
     photoPath: face.photo.value,
-    inBook: face.inBook ?? false,
+    inBook: face.inBook,
   );
 }
 

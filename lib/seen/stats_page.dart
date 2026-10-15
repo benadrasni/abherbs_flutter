@@ -73,8 +73,8 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
       unawaited(_loadFinds());
     }
     if (changed) {
-      _cards.clear();
       _pending.clear();
+      _cards.removeWhere((name, _) => _bookKnown(name));
       _warm();
     }
   }
@@ -144,8 +144,10 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
     }
   }
 
+  bool _bookKnown(String name) => _cards[name]?.inBook != null;
+
   void _want(String name) {
-    if (name.isEmpty || _cards.containsKey(name) || _pending.contains(name)) {
+    if (name.isEmpty || _bookKnown(name) || _pending.contains(name)) {
       return;
     }
     final code = _language;
@@ -169,10 +171,13 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
     var known = inBook;
     if (known == null) {
       try {
-        final ready = _cards[name];
-        final card = ready ?? await widget.loadCard(name, _language ?? 'en');
+        final card = _bookKnown(name)
+            ? _cards[name]!
+            : await widget.loadCard(name, _language ?? 'en');
         if (!mounted) return;
         setState(() => _cards[name] = card);
+        // A failed read stays null, so the next tap tries again.
+        if (card.inBook == null) return;
         known = card.inBook;
       } catch (error) {
         debugPrint('guide stats open $name: $error');
@@ -369,7 +374,7 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
         name: name,
         label: label,
         photoPath: card?.photoPath,
-        inBook: card?.inBook ?? false,
+        inBook: card?.inBook,
         when: DateTime.fromMillisecondsSinceEpoch(0),
       ),
       detail: detail,
