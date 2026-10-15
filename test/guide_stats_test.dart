@@ -290,6 +290,132 @@ void main() {
     expect(find.text('Not in the book.'), findsOneWidget);
   });
 
+  testWidgets('a failed in-book read is tried again and a real absence is kept',
+      (tester) async {
+    final opened = <String>[];
+    final loads = <String>[];
+    await _pumpStats(
+      tester,
+      GuideStatsPage(
+        finds: [
+          _find(
+            'a',
+            'Bellis perennis',
+            DateTime(2026, 5, 1),
+            catalogKnown: false,
+          ),
+          _find(
+            'b',
+            'Rosa canina',
+            DateTime(2026, 6, 1),
+            catalogKnown: false,
+          ),
+        ],
+        backLabel: 'Seen',
+        loadSightings: () async =>
+            const GuideSightingsLoad(headline: null, years: []),
+        loadCard: (name, code) async {
+          loads.add(name);
+          if (name == 'Rosa canina') {
+            return const GuideStatFace(inBook: false);
+          }
+          if (loads.where((item) => item == 'Bellis perennis').length == 1) {
+            return const GuideStatFace(inBook: null);
+          }
+          return const GuideStatFace(inBook: true);
+        },
+        onOpenPlant: (_, name) => opened.add(name),
+      ),
+    );
+    await tester.pump();
+
+    await tester.tap(find.text('Bellis perennis'));
+    await tester.pump();
+    await tester.pump();
+    expect(opened, isEmpty);
+    expect(find.text('Not in the book.'), findsNothing);
+    expect(loads, ['Bellis perennis']);
+
+    await tester.tap(find.text('Bellis perennis'));
+    await tester.pump();
+    await tester.pump();
+    expect(loads, ['Bellis perennis', 'Bellis perennis']);
+    expect(opened, ['Bellis perennis']);
+    expect(find.text('Not in the book.'), findsNothing);
+
+    await tester.tap(find.text('Rosa canina'));
+    await tester.pump();
+    expect(find.text('Not in the book.'), findsOneWidget);
+    expect(loads, ['Bellis perennis', 'Bellis perennis', 'Rosa canina']);
+
+    await tester.tap(find.text('Rosa canina'));
+    await tester.pump();
+    expect(loads.where((name) => name == 'Rosa canina'), ['Rosa canina']);
+    expect(find.text('Not in the book.'), findsOneWidget);
+  });
+
+  testWidgets('a failed sighting card is tried again and a real absence is kept',
+      (tester) async {
+    final opened = <String>[];
+    final loads = <String>[];
+    await _pumpStats(
+      tester,
+      GuideStatsPage(
+        sightings: true,
+        finds: const [],
+        backLabel: 'Seen',
+        loadSightings: () async => GuideSightingsLoad(
+          headline: GuideSightingHeadline(
+            count: 2,
+            plants: 2,
+            people: 1,
+            firstName: 'Bellis perennis',
+            firstWhen: DateTime(2020, 6, 1),
+            lastName: 'Rosa canina',
+            lastWhen: DateTime(2021, 6, 1),
+            mostName: '',
+            mostCount: 0,
+            countries: const [],
+          ),
+          years: const [],
+        ),
+        loadCard: (name, code) async {
+          loads.add(name);
+          if (name == 'Rosa canina') {
+            return const GuideStatFace(inBook: false);
+          }
+          if (loads.where((item) => item == 'Bellis perennis').length == 1) {
+            return const GuideStatFace(label: 'daisy', inBook: null);
+          }
+          return const GuideStatFace(label: 'daisy', inBook: true);
+        },
+        onOpenPlant: (_, name) => opened.add(name),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('daisy'), findsOneWidget);
+    expect(find.text('Not in the book.'), findsNothing);
+    expect(loads, ['Bellis perennis', 'Rosa canina']);
+
+    await tester.tap(find.text('daisy'));
+    await tester.pump();
+    await tester.pump();
+    expect(opened, ['Bellis perennis']);
+    expect(loads.where((name) => name == 'Bellis perennis').length, 2);
+    expect(find.text('Not in the book.'), findsNothing);
+
+    await tester.tap(find.text('Rosa canina'));
+    await tester.pump();
+    expect(find.text('Not in the book.'), findsOneWidget);
+    expect(loads.where((name) => name == 'Rosa canina'), ['Rosa canina']);
+
+    await tester.tap(find.text('Rosa canina'));
+    await tester.pump();
+    expect(loads.where((name) => name == 'Rosa canina'), ['Rosa canina']);
+    expect(find.text('Not in the book.'), findsOneWidget);
+  });
+
   test('czech and english statistics strings and plurals match expected forms', () async {
     final cs = await S.load(const Locale('cs', 'CZ'));
     expect(cs.guide_stats_finds(1), 'Nález');

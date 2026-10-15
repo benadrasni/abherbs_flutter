@@ -170,9 +170,13 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
     if (known == null) {
       try {
         final ready = _cards[name];
-        final card = ready ?? await widget.loadCard(name, _language ?? 'en');
+        final card = ready != null && ready.inBook != null
+            ? ready
+            : await widget.loadCard(name, _language ?? 'en');
         if (!mounted) return;
         setState(() => _cards[name] = card);
+        // A failed read stays null, so the next tap tries again.
+        if (card.inBook == null) return;
         known = card.inBook;
       } catch (error) {
         debugPrint('guide stats open $name: $error');
@@ -369,7 +373,7 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
         name: name,
         label: label,
         photoPath: card?.photoPath,
-        inBook: card?.inBook ?? false,
+        inBook: card?.inBook,
         when: DateTime.fromMillisecondsSinceEpoch(0),
       ),
       detail: detail,

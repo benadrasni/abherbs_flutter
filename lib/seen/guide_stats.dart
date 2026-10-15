@@ -100,7 +100,9 @@ class GuideSightingsLoad {
 class GuideStatFace {
   final String? label;
   final String? photoPath;
-  final bool inBook;
+
+  /// Null when the in-book read failed.
+  final bool? inBook;
 
   const GuideStatFace({
     this.label,
