@@ -6,7 +6,7 @@ import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/purchase/store_proof.dart';
 import 'package:abherbs_flutter/data/utils.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
@@ -30,8 +30,37 @@ class Auth {
     return user != null && user.isAnonymous ? user : null;
   }
 
-  static Future<void> _logOldVersionEvent() async {
-    await FirebaseAnalytics.instance.logEvent(name: 'offline_download');
+  static void _syncAnalytics() {
+    final user = firebaseAuth.currentUser;
+    if (user == null) {
+      unawaited(GuideAnalytics.syncAccount());
+      return;
+    }
+    final signedIn = !user.isAnonymous;
+    final plan = !signedIn
+        ? 'free'
+        : Purchases.hasFieldGuide()
+            ? 'field_guide'
+            : Purchases.hasOldVersion
+                ? 'legacy'
+                : 'free';
+    unawaited(GuideAnalytics.syncAccount(
+      userId: user.uid,
+      account: signedIn ? 'signed_in' : 'guest',
+      plan: plan,
+      ads: signedIn && !Purchases.showsAds() ? 'hidden' : 'shown',
+      legacyPaid: signedIn && Purchases.hasOldVersion,
+    ));
+  }
+
+  static void _logAuth(UserCredential result, String providerId, bool signUp) {
+    final method = guideAnalyticsAuthMethod(providerId);
+    final uid = result.user?.uid;
+    if (signUp) {
+      unawaited(GuideAnalytics.signUp(method, userId: uid));
+    } else {
+      unawaited(GuideAnalytics.login(method, userId: uid));
+    }
   }
 
   /// Creates the guest account once per install. Signing out does not create
@@ -42,6 +71,7 @@ class Auth {
     try {
       await firebaseAuth.signInAnonymously();
       await Prefs.setBool(keyGuestCreated, true);
+      _syncAnalytics();
     } catch (error) {
       debugPrint('guest account: $error');
     }
@@ -53,17 +83,23 @@ class Auth {
     final guest = guestUser;
     if (guest != null) {
       try {
-        return await guest.linkWithCredential(credential);
+        final linked = await guest.linkWithCredential(credential);
+        _logAuth(linked, credential.providerId, true);
+        return linked;
       } on FirebaseAuthException catch (error) {
         if (error.code != 'credential-already-in-use' &&
             error.code != 'email-already-in-use') {
           rethrow;
         }
-        return firebaseAuth
+        final signed = await firebaseAuth
             .signInWithCredential(error.credential ?? credential);
+        _logAuth(signed, credential.providerId, false);
+        return signed;
       }
     }
-    return firebaseAuth.signInWithCredential(credential);
+    final signed = await firebaseAuth.signInWithCredential(credential);
+    _logAuth(signed, credential.providerId, false);
+    return signed;
   }
 
   static Future<void> signInWithCredential(AuthCredential credential) async {
@@ -74,6 +110,7 @@ class Auth {
   static Future<User?> signInWithEmail(String email, String password) async {
     UserCredential result = await firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
+    _logAuth(result, 'password', false);
     setUser();
     return result.user;
   }
@@ -85,6 +122,7 @@ class Auth {
             EmailAuthProvider.credential(email: email, password: password))
         : await firebaseAuth.createUserWithEmailAndPassword(
             email: email, password: password);
+    _logAuth(result, 'password', true);
     setUser();
     return result.user;
   }
@@ -134,7 +172,10 @@ class Auth {
       credits = 0;
       Purchases.hasOldVersion = false;
       Purchases.clearAccountProducts();
-      if (gen == _accountGen) Purchases.finishNames();
+      if (gen == _accountGen) {
+        Purchases.finishNames();
+        _syncAnalytics();
+      }
       return;
     }
     final uid = user.uid;
@@ -179,9 +220,6 @@ class Auth {
           return rememberStorePurchases(purchases);
         }));
       }
-      if (Purchases.hasOldVersion) {
-        unawaited(_logOldVersionEvent());
-      }
       unawaited(Prefs.setBool(keyOldVersion, Purchases.hasOldVersion));
       unawaited(Prefs.getStringF(keyToken).then((token) {
         if (gen != _accountGen || token.isEmpty || appUser?.uid != uid) return;
@@ -191,6 +229,7 @@ class Auth {
       if (gen != _accountGen) return;
       credits = 0;
       Purchases.failedAccountRead();
+      if (gen == _accountGen) _syncAnalytics();
     }
 
     if (Purchases.isPhotoSearch()) {
@@ -202,6 +241,7 @@ class Auth {
 
     if (gen == _accountGen) {
       Purchases.finishNames();
+      _syncAnalytics();
       _watchEntitlements(uid, gen);
       unawaited(registerStoreAccount());
       unawaited(flushPendingStoreProofs());
@@ -214,18 +254,18 @@ class Auth {
   static void _watchEntitlements(String uid, int gen) {
     _stopEntitlements();
     final watch = EntitlementWatch();
-    _entitlementsSub = usersReference
-        .child(uid)
-        .child('entitlements')
-        .onValue
-        .listen((event) {
+    _entitlementsSub =
+        usersReference.child(uid).child('entitlements').onValue.listen((event) {
       if (gen != _accountGen || appUser?.uid != uid) return;
       final raw = event.snapshot.value;
       final snapshot = accountEntitlementsOf(
-        raw == null ? <String, Object?>{} : <String, Object?>{'entitlements': raw},
+        raw == null
+            ? <String, Object?>{}
+            : <String, Object?>{'entitlements': raw},
       );
       if (!watch.shouldApply(snapshot)) return;
       applyAccountEntitlements(snapshot);
+      _syncAnalytics();
       unawaited(forgetRevokedPurchases(revokedEntitlementIds(snapshot)));
     }, onError: (Object error) {
       debugPrint('entitlements: $error');
@@ -245,7 +285,8 @@ class Auth {
     appUser = null;
     credits = 0;
     Purchases.clearAccountProducts();
-    return firebaseAuth.signOut();
+    await firebaseAuth.signOut();
+    _syncAnalytics();
   }
 
   /// Linking the guest account keeps the same user, so `authStateChanges`

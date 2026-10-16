@@ -12,6 +12,7 @@ import 'package:abherbs_flutter/camera/outside_page.dart';
 import 'package:abherbs_flutter/person/sign_in_page.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/data/utils.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
@@ -302,7 +303,11 @@ class _SeenPageState extends State<SeenPage> {
     if (open != null) {
       open(context, find);
     } else {
-      openGuidePlant(context, find.name);
+      openGuidePlant(
+        context,
+        find.name,
+        source: GuidePlantSource.seen,
+      );
     }
   }
 
@@ -345,7 +350,11 @@ class _SeenPageState extends State<SeenPage> {
             from: from,
             to: to,
           ),
-          onOpenSpecies: (name) => openGuidePlant(context, name),
+          onOpenSpecies: (name) => openGuidePlant(
+            context,
+            name,
+            source: GuidePlantSource.outside,
+          ),
           onSearch: () {
             final search = widget.onSearch;
             if (search != null) {
@@ -367,7 +376,11 @@ class _SeenPageState extends State<SeenPage> {
     GuideTabs.refreshSeen?.call();
     final species = result.openSpecies;
     if (species == null) return;
-    await openGuidePlant(context, species);
+    await openGuidePlant(
+      context,
+      species,
+      source: GuidePlantSource.outside,
+    );
   }
 
   Future<void> _confirm(GuideSeenFind find) async {
@@ -548,6 +561,9 @@ class _SeenPageState extends State<SeenPage> {
     final action = widget.onShare;
     final ok =
         action != null ? await action(find) : await shareGuideFind(find.id);
+    if (ok) {
+      unawaited(GuideAnalytics.seenSave(source: 'photo', shared: true));
+    }
     if (!mounted) return;
     if (ok) GuideTabs.refreshSeen?.call();
     ScaffoldMessenger.of(context).showSnackBar(

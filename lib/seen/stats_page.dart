@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/seen/guide_seen.dart';
 import 'package:abherbs_flutter/seen/guide_stats.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:abherbs_flutter/species/species_page.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
@@ -139,7 +140,11 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
   void _warm() {
     final headline = _sightings?.headline;
     if (headline == null || _language == null) return;
-    for (final name in [headline.firstName, headline.lastName, headline.mostName]) {
+    for (final name in [
+      headline.firstName,
+      headline.lastName,
+      headline.mostName
+    ]) {
       _want(name);
     }
   }
@@ -196,7 +201,11 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
       custom(context, name);
       return;
     }
-    await openGuidePlant(context, name);
+    await openGuidePlant(
+      context,
+      name,
+      source: GuidePlantSource.seen,
+    );
   }
 
   @override
@@ -212,35 +221,37 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
           child: SafeArea(
             child: GuideReadable(
               child: ListView(
-            padding: const EdgeInsets.only(bottom: 24),
-            children: [
-              GuideBackButton(label: widget.backLabel),
-              _Intro(
-                title: _public ? strings.guide_sightings : strings.guide_stats_yours,
-                note: _note(strings, stats),
+                padding: const EdgeInsets.only(bottom: 24),
+                children: [
+                  GuideBackButton(label: widget.backLabel),
+                  _Intro(
+                    title: _public
+                        ? strings.guide_sightings
+                        : strings.guide_stats_yours,
+                    note: _note(strings, stats),
+                  ),
+                  _Segments(
+                    sightings: _public,
+                    onYours: () {
+                      if (!_public) return;
+                      setState(() => _public = false);
+                    },
+                    onSightings: () {
+                      if (_public) return;
+                      setState(() => _public = true);
+                    },
+                  ),
+                  if (_public)
+                    _sightingsBody(strings)
+                  else
+                    _findsBody(strings, stats),
+                ],
               ),
-              _Segments(
-                sightings: _public,
-                onYours: () {
-                  if (!_public) return;
-                  setState(() => _public = false);
-                },
-                onSightings: () {
-                  if (_public) return;
-                  setState(() => _public = true);
-                },
-              ),
-              if (_public)
-                _sightingsBody(strings)
-              else
-                _findsBody(strings, stats),
-            ],
+            ),
           ),
         ),
       ),
-    ),
-  ),
-);
+    );
   }
 
   String _note(S strings, GuideNotebookStats? stats) {
@@ -265,9 +276,18 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
       children: [
         _Numbers(
           counts: [
-            (format.format(stats.finds), strings.guide_stats_finds(stats.finds)),
-            (format.format(stats.plants), strings.guide_stats_plants(stats.plants)),
-            (format.format(stats.shared), strings.guide_stats_shared(stats.shared)),
+            (
+              format.format(stats.finds),
+              strings.guide_stats_finds(stats.finds)
+            ),
+            (
+              format.format(stats.plants),
+              strings.guide_stats_plants(stats.plants)
+            ),
+            (
+              format.format(stats.shared),
+              strings.guide_stats_shared(stats.shared)
+            ),
           ],
         ),
         _Section(strings.guide_stats_span),
@@ -299,9 +319,11 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
           _Section(strings.guide_stats_by_year),
           _YearBars(years: stats.years),
         ],
-        _Section(strings.guide_stats_by_country(format.format(stats.countries.length))),
+        _Section(strings
+            .guide_stats_by_country(format.format(stats.countries.length))),
         _Countries(countries: stats.countries),
-        if (stats.unplaced > 0) _Hint(strings.guide_stats_no_place(stats.unplaced)),
+        if (stats.unplaced > 0)
+          _Hint(strings.guide_stats_no_place(stats.unplaced)),
       ],
     );
   }
@@ -322,7 +344,10 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
         _Numbers(
           counts: [
             (format.format(headline.count), strings.guide_sightings),
-            (format.format(headline.plants), strings.guide_stats_plants(headline.plants)),
+            (
+              format.format(headline.plants),
+              strings.guide_stats_plants(headline.plants)
+            ),
             (format.format(headline.people), strings.guide_stats_people),
           ],
         ),
@@ -351,7 +376,8 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
         ],
         if (headline.countries.isNotEmpty)
           _Section(
-            strings.guide_stats_by_country(format.format(headline.countries.length)),
+            strings.guide_stats_by_country(
+                format.format(headline.countries.length)),
           ),
         _Countries(countries: headline.countries),
         if (finds != null)
@@ -383,12 +409,14 @@ class _GuideStatsPageState extends State<GuideStatsPage> {
   }
 
   String _day(DateTime when) {
-    return DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(when);
+    return DateFormat.yMMMd(Localizations.localeOf(context).toString())
+        .format(when);
   }
 }
 
 NumberFormat _format(BuildContext context) {
-  return NumberFormat.decimalPattern(Localizations.localeOf(context).toString());
+  return NumberFormat.decimalPattern(
+      Localizations.localeOf(context).toString());
 }
 
 class _Intro extends StatelessWidget {
@@ -690,7 +718,8 @@ class _PlantRow extends StatelessWidget {
                             fontSize: 16,
                             height: 1.2,
                           )
-                        : GuideType.latin(colors).copyWith(fontSize: 16, height: 1.2),
+                        : GuideType.latin(colors)
+                            .copyWith(fontSize: 16, height: 1.2),
                   ),
                   if (named)
                     Text(
@@ -706,7 +735,8 @@ class _PlantRow extends StatelessWidget {
                   if (detail != null)
                     Text(
                       detail!,
-                      style: TextStyle(fontSize: 13, height: 1.2, color: colors.ink3),
+                      style: TextStyle(
+                          fontSize: 13, height: 1.2, color: colors.ink3),
                     ),
                 ],
               ),
@@ -773,7 +803,8 @@ class _YearBarsState extends State<_YearBars> {
         separatorBuilder: (context, index) => const SizedBox(width: 8),
         itemBuilder: (context, index) {
           final year = widget.years[index];
-          final bar = maxCount == 0 ? 4.0 : math.max(4.0, year.count / maxCount * 72);
+          final bar =
+              maxCount == 0 ? 4.0 : math.max(4.0, year.count / maxCount * 72);
           return SizedBox(
             width: 36,
             child: Column(
@@ -820,7 +851,8 @@ class _Countries extends StatelessWidget {
     rows.sort((a, b) {
       final byCount = b.count.compareTo(a.count);
       if (byCount != 0) return byCount;
-      return _countryName(context, a.code).compareTo(_countryName(context, b.code));
+      return _countryName(context, a.code)
+          .compareTo(_countryName(context, b.code));
     });
     var maxCount = 0;
     for (final row in rows) {
@@ -829,40 +861,42 @@ class _Countries extends StatelessWidget {
     final tiles = [
       for (final row in rows)
         Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(20, 8, 20, 8),
-            child: Row(
-              children: [
-                _Flag(code: row.code),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        _countryName(context, row.code),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          height: 1.2,
-                        ),
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 8, 20, 8),
+          child: Row(
+            children: [
+              _Flag(code: row.code),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _countryName(context, row.code),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        height: 1.2,
                       ),
-                      const SizedBox(height: 4),
-                      _Bar(
-                        factor: maxCount == 0 ? 0.04 : math.max(0.04, row.count / maxCount),
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 4),
+                    _Bar(
+                      factor: maxCount == 0
+                          ? 0.04
+                          : math.max(0.04, row.count / maxCount),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 12),
-                Text(
-                  format.format(row.count),
-                  style: TextStyle(fontSize: 13, color: colors.ink3),
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 12),
+              Text(
+                format.format(row.count),
+                style: TextStyle(fontSize: 13, color: colors.ink3),
+              ),
+            ],
           ),
+        ),
     ];
     if (!GuideWindow.of(context).wide) return Column(children: tiles);
     final mid = (tiles.length / 2).ceil();

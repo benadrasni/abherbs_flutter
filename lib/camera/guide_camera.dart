@@ -10,6 +10,7 @@ import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/data/utils.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:exif/exif.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
@@ -323,6 +324,30 @@ Future<String> guideCameraPlaceName({
   return name;
 }
 
+/// Analytics outcome for a finished photo name. `paused` is the daily ceiling.
+String guideCameraAnalyticsOutcome(GuideCameraOutcomeKind kind) {
+  switch (kind) {
+    case GuideCameraOutcomeKind.species:
+      return 'species';
+    case GuideCameraOutcomeKind.list:
+      return 'list';
+    case GuideCameraOutcomeKind.outside:
+      return 'outside';
+    case GuideCameraOutcomeKind.notPlant:
+      return 'not_plant';
+    case GuideCameraOutcomeKind.signIn:
+      return 'sign_in';
+    case GuideCameraOutcomeKind.limit:
+      return 'limit';
+    case GuideCameraOutcomeKind.tooSoon:
+      return 'too_soon';
+    case GuideCameraOutcomeKind.samePhoto:
+      return 'same_photo';
+    case GuideCameraOutcomeKind.pausedToday:
+      return 'paused';
+  }
+}
+
 /// The last four are the server declining to call Plant.id: sign in, no names
 /// left, a second photo too soon or the same photo again, and the silent daily
 /// ceiling.
@@ -560,6 +585,7 @@ Future<String?> saveGuideCameraFind(GuideCameraDraft draft) async {
         .child(observation.id)
         .set(json);
     unawaited(syncGuidePrivatePhotos(onlyId: observation.id));
+    unawaited(GuideAnalytics.seenSave(source: 'photo', shared: false));
     return observation.id;
   } catch (error) {
     debugPrint('guide camera save: $error');

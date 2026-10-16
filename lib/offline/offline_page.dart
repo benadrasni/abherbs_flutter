@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
@@ -135,6 +136,7 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
       },
       onFinished: () {
         finished = true;
+        _logPack(request, 'ok');
         if (!mounted) return;
         setState(() {
           _job = null;
@@ -152,6 +154,7 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
         });
       },
       onFailed: () {
+        _logPack(request, 'fail');
         if (!mounted) return;
         setState(() => _job = null);
         ScaffoldMessenger.of(context).showSnackBar(
@@ -161,6 +164,7 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
     );
     if (!mounted || finished) return;
     if (started == GuideOfflineStart.needsWifi) {
+      _logPack(request, 'wifi');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).guide_offline_wifi)),
       );
@@ -176,6 +180,16 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
         );
       });
     }
+  }
+
+  void _logPack(GuideOfflineRequest request, String result) {
+    unawaited(GuideAnalytics.offlinePack(
+      scope: guideAnalyticsOfflineScope(
+        everything: request.everything,
+        regions: request.regions.length,
+      ),
+      result: result,
+    ));
   }
 
   Future<void> _pause() async {
@@ -541,11 +555,27 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
       },
       onFinished: () {
         finished = true;
+        unawaited(GuideAnalytics.offlinePack(
+          scope: guideAnalyticsOfflineScope(
+            everything: false,
+            regions: 0,
+            update: true,
+          ),
+          result: 'ok',
+        ));
         if (!mounted) return;
         setState(() => _job = null);
         _load();
       },
       onFailed: () {
+        unawaited(GuideAnalytics.offlinePack(
+          scope: guideAnalyticsOfflineScope(
+            everything: false,
+            regions: 0,
+            update: true,
+          ),
+          result: 'fail',
+        ));
         if (!mounted) return;
         setState(() => _job = null);
         ScaffoldMessenger.of(context).showSnackBar(
@@ -555,6 +585,14 @@ class _GuideOfflinePageState extends State<GuideOfflinePage> {
     );
     if (!mounted || finished) return;
     if (started == GuideOfflineStart.needsWifi) {
+      unawaited(GuideAnalytics.offlinePack(
+        scope: guideAnalyticsOfflineScope(
+          everything: false,
+          regions: 0,
+          update: true,
+        ),
+        result: 'wifi',
+      ));
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).guide_offline_wifi)),
       );

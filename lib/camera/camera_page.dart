@@ -25,7 +25,7 @@ import 'package:abherbs_flutter/purchase/rewarded_ad.dart';
 import 'package:abherbs_flutter/camera/plant_id_search.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/data/utils.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -341,10 +341,12 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     }
     final done = Completer<void>();
     var earned = false;
+    var dismissed = false;
     final before = guideMonthCount.value.adGrants;
     ad.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (ad) {
         ad.dispose();
+        dismissed = true;
         if (_rewardedAd == ad) _rewardedAd = null;
         _loadAd();
         if (!done.isCompleted) done.complete();
@@ -364,6 +366,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       },
     );
     await done.future;
+    if (dismissed) unawaited(GuideAnalytics.adReward(earned: earned));
     if (earned) await waitForNameGrant(before);
   }
 
@@ -466,10 +469,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     final maxWidth = MediaQuery.sizeOf(context).width;
     if (source == GuideCameraSource.camera) {
       final shot = await _takePreviewPicture();
-      if (shot != null) {
-        unawaited(FirebaseAnalytics.instance.logEvent(name: 'search_photo'));
-        return shot;
-      }
+      if (shot != null) return shot;
     }
     if (source == GuideCameraSource.gallery) {
       final access = await Permission.accessMediaLocation.status;
@@ -484,7 +484,6 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       maxWidth: maxWidth,
     );
     if (image == null) return null;
-    unawaited(FirebaseAnalytics.instance.logEvent(name: 'search_photo'));
     return image.path;
   }
 
@@ -616,7 +615,11 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       action(name);
       return;
     }
-    unawaited(openGuidePlant(context, name));
+    unawaited(openGuidePlant(
+      context,
+      name,
+      source: GuidePlantSource.outside,
+    ));
   }
 
   Future<String> _placeLabel() async {
@@ -711,7 +714,11 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       open(species);
       return;
     }
-    await openGuidePlant(context, species);
+    await openGuidePlant(
+      context,
+      species,
+      source: GuidePlantSource.outside,
+    );
   }
 
   Future<void> _pushSpecies(
@@ -742,6 +749,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     await openGuidePlant(
       context,
       name,
+      source: GuidePlantSource.photo,
       pending: GuideCameraPending(
         plant: name,
         when: when,
@@ -777,13 +785,21 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       MaterialPageRoute(
         settings: const RouteSettings(name: guideSearchRouteName),
         builder: (context) => GuideSearchPage(
-          onOpenPlant: openGuidePlant,
+          onOpenPlant: (context, name) => openGuidePlant(
+            context,
+            name,
+            source: GuidePlantSource.search,
+          ),
           onOpenTaxon: (context, path) {
             openGuideTaxonList(
               context,
               listPath: path,
               backLabel: S.of(context).guide_back_search,
-              onOpenPlant: openGuidePlant,
+              onOpenPlant: (context, name) => openGuidePlant(
+                context,
+                name,
+                source: GuidePlantSource.list,
+              ),
               onTryPhoto: (context) async {
                 Navigator.of(context).popUntil(
                   (route) =>
@@ -811,7 +827,11 @@ class _GuideCameraPageState extends State<GuideCameraPage>
         context,
         listPath: path,
         backLabel: S.of(context).guide_back,
-        onOpenPlant: openGuidePlant,
+        onOpenPlant: (context, name) => openGuidePlant(
+          context,
+          name,
+          source: GuidePlantSource.photo,
+        ),
         onTryPhoto: (listContext) async {
           Navigator.of(listContext).popUntil(
             (route) =>
@@ -858,9 +878,11 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       return;
     }
     setState(() => _busy = true);
+    String? path;
+    var named = false;
     try {
       final pick = widget.pickPhoto ?? _pickDefault;
-      final path = await pick(source);
+      path = await pick(source);
       if (!mounted || path == null) return;
       setState(() {
         _naming = true;
@@ -883,6 +905,13 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       if (!mounted) return;
       final identify = widget.identify ?? _identifyDefault;
       final outcome = await identify(path);
+      named = true;
+      unawaited(GuideAnalytics.searchPhoto(
+        source: source == GuideCameraSource.camera ? 'camera' : 'gallery',
+        outcome: guideCameraAnalyticsOutcome(outcome.kind),
+        counted:
+            outcome.kind == GuideCameraOutcomeKind.notPlant && outcome.counted,
+      ));
       if (!mounted) return;
       if (_shotPosition == null && phone != null) {
         _shotPosition = await phone;
@@ -942,6 +971,12 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       }
     } catch (error) {
       debugPrint('guide camera: $error');
+      if (!named && path != null) {
+        unawaited(GuideAnalytics.searchPhoto(
+          source: source == GuideCameraSource.camera ? 'camera' : 'gallery',
+          outcome: 'error',
+        ));
+      }
       if (!mounted) return;
       setState(() => _naming = false);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -1520,9 +1555,8 @@ class _SheetLayer extends StatelessWidget {
     final colors = GuideColors.of(context);
     final tablet = GuideWindow.of(context).tablet;
     final height = MediaQuery.sizeOf(context).height;
-    final maxHeight = tablet
-        ? (height * 0.88 < 680 ? height * 0.88 : 680.0)
-        : height * 0.86;
+    final maxHeight =
+        tablet ? (height * 0.88 < 680 ? height * 0.88 : 680.0) : height * 0.86;
     return Positioned.fill(
       child: Stack(
         children: [

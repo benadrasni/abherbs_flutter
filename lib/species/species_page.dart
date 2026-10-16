@@ -18,9 +18,9 @@ import 'package:abherbs_flutter/species/fullscreen.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/shell/app_banner_ad.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:exif/exif.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -91,17 +91,14 @@ MaterialPageRoute<void>? guideNotificationPlantRoute(String? name) {
 Future<void> openGuidePlant(
   BuildContext context,
   String name, {
+  String source = '',
   GuideCameraPending? pending,
   Future<void> Function()? onConfirmPending,
   Future<void> Function()? onUndoPending,
   Future<void> Function(String name)? onRetargetPending,
   VoidCallback? onSearchBook,
 }) {
-  unawaited(
-    FirebaseAnalytics.instance
-        .logSelectContent(contentType: 'plant', itemId: name)
-        .catchError((Object error) => debugPrint('guide species: $error')),
-  );
+  unawaited(GuideAnalytics.plant(name, source: source));
   return Navigator.push(
     context,
     guideSpeciesRoute(
@@ -341,6 +338,10 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
     try {
       final save = widget.saveSeen ?? saveGuideSeen;
       await save(draft);
+      unawaited(GuideAnalytics.seenSave(
+        source: draft.fromPhoto ? 'photo' : 'manual',
+        shared: false,
+      ));
       if (!mounted) return;
       setState(() => _seen = guideSeenAfterAdd(_seen, draft));
       GuideTabs.refreshSeen?.call();
@@ -417,11 +418,10 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
     try {
       await widget.onRetargetPending?.call(name);
       if (!mounted) return;
-      unawaited(
-        FirebaseAnalytics.instance
-            .logSelectContent(contentType: 'plant', itemId: name)
-            .catchError((Object error) => debugPrint('guide species: $error')),
-      );
+      unawaited(GuideAnalytics.plant(
+        name,
+        source: GuidePlantSource.photo,
+      ));
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).guide_outside_changed)),
       );
@@ -504,6 +504,7 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
     try {
       final write = widget.onFavorite ?? setGuideFavorite;
       await write(id, on);
+      unawaited(GuideAnalytics.favorite(on: on));
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

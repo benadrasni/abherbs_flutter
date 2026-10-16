@@ -1,5 +1,6 @@
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/shell/guide_actions.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:abherbs_flutter/camera/guide_camera.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
@@ -634,7 +635,11 @@ class _FindStrip extends StatelessWidget {
           onOpenSeen();
           return;
         }
-        openGuidePlant(context, find.name);
+        openGuidePlant(
+          context,
+          find.name,
+          source: GuidePlantSource.seen,
+        );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

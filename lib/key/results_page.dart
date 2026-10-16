@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/key/filter_utils.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/data/guide_results.dart';
@@ -232,6 +235,19 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
         _plants = plants;
         _loading = false;
       });
+      if (!_isList) {
+        final shown = arrangeGuideResults(
+          plants,
+          month: _month,
+          wildOnly: _prefs.wildOnly,
+        );
+        unawaited(GuideAnalytics.filterResult(
+          color: widget.colorId,
+          habitat: widget.habitatId ?? '',
+          petal: widget.petalId,
+          count: shown.plants.length,
+        ));
+      }
     } catch (error) {
       debugPrint('guide results list: $error');
       if (!mounted || ticket != _ticket) return;

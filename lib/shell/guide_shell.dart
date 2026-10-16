@@ -10,6 +10,7 @@ import 'package:abherbs_flutter/seen/guide_private_photos.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/shell/guide_actions.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:abherbs_flutter/shell/app_version.dart';
 import 'package:abherbs_flutter/shell/app_version_check.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
@@ -76,6 +77,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     guideGuestFreeRemaining.addListener(_onGuestFree);
     Purchases.namesRevision.addListener(_onNames);
     unawaited(guideGuestHasFreeName());
+    unawaited(GuideAnalytics.screen(guideAnalyticsTabFind));
     _authSub = Auth.subscribe((user) {
       unawaited(_onAccount(user));
     });
@@ -93,6 +95,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     final code = Localizations.localeOf(context).languageCode;
     if (_languageCode == code) return;
     _languageCode = code;
+    unawaited(GuideAnalytics.setLanguage(code));
     _loadLists();
     unawaited(_refreshFavoriteCover());
     _loadFinds();
@@ -213,6 +216,9 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   }
 
   void _go(int index) {
+    if (_index != index) {
+      unawaited(GuideAnalytics.screen(guideAnalyticsTab(index)));
+    }
     GuideTabs.index = index;
     List<GuideSeenFind>? primed;
     if (index == 2) {
@@ -239,6 +245,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
 
   /// Find’s All lists opens Book on the lists of flowers.
   void _openLists() {
+    if (_index != 1) unawaited(GuideAnalytics.screen(guideAnalyticsTabBook));
     GuideTabs.index = 1;
     setState(() {
       _bookSegment = GuideBookSegment.lists;

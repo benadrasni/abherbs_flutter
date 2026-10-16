@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:ui' show PlatformDispatcher;
 
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/l10n/app_locale.dart';
 import 'package:abherbs_flutter/person/setting_utils.dart';
 import 'package:abherbs_flutter/shell/guide_actions.dart';
@@ -14,6 +15,7 @@ import 'package:abherbs_flutter/purchase/store_proof.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
 import 'package:abherbs_flutter/shell/ad_consent.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:abherbs_flutter/shell/meta_ads.dart';
 import 'package:abherbs_flutter/shell/app_version.dart';
 import 'package:abherbs_flutter/shell/app_version_check.dart';
@@ -164,14 +166,20 @@ class _StartupState extends State<_Startup>
   Future<void> _open() async {
     try {
       await initializeFlutterFire();
+      await GuideAnalytics.start();
       WakelockPlus.enable();
       await Prefs.init();
       await applyRememberedVersionBlock();
       unawaited(Auth.startGuest());
-      await gatherAdConsent();
+      final umpFailed = await gatherAdConsent();
       final tracking =
           await AppTrackingTransparency.requestTrackingAuthorization();
       await setMetaAdvertiserTracking(tracking == TrackingStatus.authorized);
+      await applyAnalyticsConsent(
+        umpFailed: umpFailed,
+        trackingAuthorized:
+            !Platform.isIOS || tracking == TrackingStatus.authorized,
+      );
       await MobileAds.instance.initialize();
       final locale = await initializeLocale();
       if (!mounted) return;
@@ -236,10 +244,6 @@ class _AppState extends State<App> {
   late Locale _locale;
   String? _currentTopic;
 
-  Future<void> _logFailedPurchaseEvent() async {
-    await _firebaseAnalytics.logEvent(name: 'purchase_failed');
-  }
-
   void _subscribeToLanguageTopic(String languageCode) {
     final topic = 'notifications-$languageCode';
     FirebaseMessaging.instance.subscribeToTopic(topic).then((_) {
@@ -281,6 +285,13 @@ class _AppState extends State<App> {
       if (id.isEmpty) continue;
       final owned = purchase.status == PurchaseStatus.purchased ||
           purchase.status == PurchaseStatus.restored;
+      if (purchase.status == PurchaseStatus.error &&
+          !storePurchaseCanceled(purchase)) {
+        unawaited(GuideAnalytics.purchaseFailed(
+          productId: id,
+          reason: 'store',
+        ));
+      }
       if (owned) unawaited(_confirmPurchase(purchase));
       // Finish here, not on the sales page. A purchase that arrives after
       // that page has closed still has to be acknowledged.
@@ -299,6 +310,9 @@ class _AppState extends State<App> {
       Purchases.purchases[id] = purchase;
       Purchases.namesRevision.value++;
       unawaited(rememberStorePurchases([id]));
+      if (purchase.status == PurchaseStatus.purchased) {
+        unawaited(GuideAnalytics.purchase(id));
+      }
       if (mounted) setState(() {});
       return;
     }
@@ -310,6 +324,10 @@ class _AppState extends State<App> {
         !mounted) {
       return;
     }
+    unawaited(GuideAnalytics.purchaseFailed(
+      productId: id,
+      reason: 'rejected',
+    ));
     Fluttertoast.showToast(
       msg: S.of(context).product_purchase_failed,
       toastLength: Toast.LENGTH_LONG,
@@ -343,6 +361,7 @@ class _AppState extends State<App> {
               notificationTitle(message),
               notificationBody(message),
             ).then((open) {
+              _logNotification(notificationAttributeActionList, open);
               final context = _navigatorKey.currentContext;
               if (open && context != null) {
                 Navigator.push(
@@ -362,10 +381,14 @@ class _AppState extends State<App> {
               notificationTitle(message),
               notificationBody(message),
             ).then((open) {
-              final context = _navigatorKey.currentContext;
-              final route = guideNotificationPlantRoute(
-                message.data[notificationAttributeName],
+              final name = message.data[notificationAttributeName]?.toString();
+              _logNotification(
+                notificationAttributeActionPlant,
+                open,
+                plant: name,
               );
+              final context = _navigatorKey.currentContext;
+              final route = guideNotificationPlantRoute(name);
               if (open && context != null && route != null) {
                 Navigator.push(context, route);
               }
@@ -377,6 +400,7 @@ class _AppState extends State<App> {
               notificationTitle(message),
               notificationBody(message),
             ).then((open) {
+              _logNotification(notificationAttributeActionBrowse, open);
               if (open && uri.isNotEmpty) {
                 launchURL(uri);
               }
@@ -437,9 +461,32 @@ class _AppState extends State<App> {
     });
   }
 
+  void _logNotification(String action, bool accepted, {String? plant}) {
+    unawaited(GuideAnalytics.notificationOpen(
+      action: action,
+      accepted: accepted,
+    ));
+    if (!accepted || action != notificationAttributeActionPlant) return;
+    final name = plant?.trim() ?? '';
+    if (name.isEmpty) return;
+    unawaited(GuideAnalytics.plant(
+      name,
+      source: GuidePlantSource.notification,
+    ));
+  }
+
   Future<void> _openFromNotification(RemoteMessage message) async {
     if (message.data.isEmpty || _navigatorKey.currentContext == null) {
       return;
+    }
+    final raw = message.data[notificationAttributeAction];
+    final action = raw is String ? raw : '';
+    if (action.isNotEmpty) {
+      _logNotification(
+        action,
+        true,
+        plant: message.data[notificationAttributeName]?.toString(),
+      );
     }
     MaterialPageRoute<dynamic>? redirect = await findRedirectF(message.data);
     if (redirect != null && _navigatorKey.currentContext != null) {
@@ -531,7 +578,7 @@ class _AppState extends State<App> {
     }, onDone: () {
       _subscription.cancel();
     }, onError: (error) {
-      _logFailedPurchaseEvent();
+      unawaited(GuideAnalytics.purchaseFailed(reason: 'stream'));
       if (mounted) {
         Fluttertoast.showToast(
             msg: S.of(context).product_purchase_failed,
@@ -602,7 +649,14 @@ class _AppState extends State<App> {
       supportedLocales: S.delegate.supportedLocales,
       initialRoute: '/guide',
       navigatorObservers: [
-        FirebaseAnalyticsObserver(analytics: _firebaseAnalytics),
+        FirebaseAnalyticsObserver(
+          analytics: _firebaseAnalytics,
+          nameExtractor: (RouteSettings settings) => guideAnalyticsScreenName(
+            settings.name,
+            settings.arguments,
+            customName: guideCustomRouteName,
+          ),
+        ),
       ],
       routes: {
         '/guide': (context) => const GuideShell(),

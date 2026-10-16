@@ -10,6 +10,7 @@ import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/purchase/store_account.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
 import 'package:abherbs_flutter/data/utils.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -93,6 +94,10 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
         _loading = false;
         if (!_planChosen) _plan = _openingPlan(loaded.catalog);
       });
+      unawaited(GuideAnalytics.viewItem([
+        loaded.catalog.yearly.productId,
+        loaded.catalog.monthly.productId,
+      ]));
     } catch (error) {
       debugPrint('guide field guide: $error');
       if (!mounted || ticket != _ticket) return;

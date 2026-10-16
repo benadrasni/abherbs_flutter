@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/camera/camera_page.dart';
 import 'package:abherbs_flutter/field_guide/field_guide_page.dart';
@@ -25,8 +27,8 @@ import 'package:abherbs_flutter/shell/dialogs.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/data/utils.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 export 'package:abherbs_flutter/field_guide/field_guide_page.dart'
@@ -44,7 +46,11 @@ void openGuideSearch(
       builder: (context) => GuideSearchPage(
         fromBook: fromBook,
         onShowFind: onShowFind,
-        onOpenPlant: openGuidePlant,
+        onOpenPlant: (context, name) => openGuidePlant(
+          context,
+          name,
+          source: GuidePlantSource.search,
+        ),
         onOpenTaxon: (context, path) => openGuideTaxon(
           context,
           path,
@@ -68,9 +74,25 @@ void openGuideTaxon(
     listPath: listPath,
     title: title,
     backLabel: backLabel ?? S.of(context).guide_back,
-    onOpenPlant: openGuidePlant,
+    onOpenPlant: (context, name) => openGuidePlant(
+      context,
+      name,
+      source: GuidePlantSource.list,
+    ),
     onTryPhoto: openGuideCamera,
   );
+}
+
+RouteSettings _customListSettings(String listId) {
+  final id = guideAnalyticsListId(listId);
+  return RouteSettings(
+    name: guideCustomRouteName,
+    arguments: id.isEmpty ? null : id,
+  );
+}
+
+void _openListedPlant(BuildContext context, String name, String source) {
+  openGuidePlant(context, name, source: source);
 }
 
 void openGuideAccount(BuildContext context) {
@@ -146,13 +168,8 @@ Future<void> openGuideLanguage(BuildContext context) async {
   final language = await preferredLanguageTag();
   if (!context.mounted) return;
   App.setLocale(context, language);
-  await FirebaseAnalytics.instance.logEvent(
-    name: 'setting',
-    parameters: {
-      'type': 'preferred_language',
-      'language': language.isEmpty ? 'default' : language,
-    },
-  );
+  if (language == saved) return;
+  unawaited(GuideAnalytics.language(language));
 }
 
 Future<void> _storeGuideLanguage(String key) async {
@@ -267,7 +284,11 @@ void openGuideResults(
           petalId: petalId,
         ),
         locate: locateGuideRegion,
-        onOpenPlant: openGuidePlant,
+        onOpenPlant: (context, name) => _openListedPlant(
+          context,
+          name,
+          GuidePlantSource.key,
+        ),
         onTryPhoto: openGuideCamera,
       ),
     ),
@@ -285,7 +306,7 @@ MaterialPageRoute<dynamic> guideNotificationListRoute(
   final parts = value.split('/').where((part) => part.isNotEmpty).toList();
   final fallback = parts.isEmpty ? '' : parts.last;
   return MaterialPageRoute<dynamic>(
-    settings: const RouteSettings(name: guideCustomRouteName),
+    settings: _customListSettings(value),
     builder: (context) {
       final language = Localizations.localeOf(context).languageCode;
       return GuideResultsPage(
@@ -301,7 +322,11 @@ MaterialPageRoute<dynamic> guideNotificationListRoute(
         loadSeen: loadGuideSeenNames,
         loadRegionCounts: () async => const {},
         locate: () async => null,
-        onOpenPlant: openGuidePlant,
+        onOpenPlant: (context, name) => _openListedPlant(
+          context,
+          name,
+          GuidePlantSource.notification,
+        ),
         onTryPhoto: openGuideCamera,
       );
     },
@@ -315,17 +340,25 @@ void openGuideList(
 }) {
   final back = backLabel ?? S.of(context).guide_back;
   final language = Localizations.localeOf(context).languageCode;
+  final source =
+      cover.isFavorite ? GuidePlantSource.favorite : GuidePlantSource.list;
+  final listId = cover.isFavorite
+      ? 'favorites'
+      : cover.isNew
+          ? 'new'
+          : cover.path.path;
   switch (guideCustomLayout(cover)) {
     case GuideCustomLayout.fresh:
       Navigator.push(
         context,
         MaterialPageRoute<void>(
-          settings: const RouteSettings(name: guideCustomRouteName),
+          settings: _customListSettings(listId),
           builder: (context) => GuideNewPage(
             backLabel: back,
             loadDays: () => loadGuideNewDays(language),
             loadSeen: loadGuideSeenNames,
-            onOpenPlant: openGuidePlant,
+            onOpenPlant: (context, name) =>
+                _openListedPlant(context, name, source),
           ),
         ),
       );
@@ -333,13 +366,14 @@ void openGuideList(
       Navigator.push(
         context,
         MaterialPageRoute<void>(
-          settings: const RouteSettings(name: guideCustomRouteName),
+          settings: _customListSettings(listId),
           builder: (context) => GuideYearPage(
             title: cover.title,
             backLabel: back,
             loadList: () => loadGuideYearList(cover.path, language),
             loadSeen: loadGuideSeenNames,
-            onOpenPlant: openGuidePlant,
+            onOpenPlant: (context, name) =>
+                _openListedPlant(context, name, source),
             onOpenGenus: (context, path, genus) => openGuideTaxon(
               context,
               path,
@@ -352,7 +386,7 @@ void openGuideList(
       Navigator.push(
         context,
         MaterialPageRoute<void>(
-          settings: const RouteSettings(name: guideCustomRouteName),
+          settings: _customListSettings(listId),
           builder: (context) => GuideResultsPage(
             colorId: '',
             habitatId: null,
@@ -367,7 +401,8 @@ void openGuideList(
             loadSeen: loadGuideSeenNames,
             loadRegionCounts: () async => const {},
             locate: () async => null,
-            onOpenPlant: openGuidePlant,
+            onOpenPlant: (context, name) =>
+                _openListedPlant(context, name, source),
             onTryPhoto: openGuideCamera,
           ),
         ),

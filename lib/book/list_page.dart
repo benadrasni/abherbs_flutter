@@ -3,6 +3,7 @@ import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:abherbs_flutter/species/species_page.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:flutter/material.dart';
@@ -50,14 +51,18 @@ bool notificationPathOpensNewInBook(String path) {
 /// The Book list a new-plants notification opens.
 MaterialPageRoute<dynamic> guideNewInBookRoute() {
   return MaterialPageRoute<dynamic>(
-    settings: const RouteSettings(name: guideCustomRouteName),
+    settings: const RouteSettings(name: guideCustomRouteName, arguments: 'new'),
     builder: (context) {
       final language = Localizations.localeOf(context).languageCode;
       return GuideNewPage(
         backLabel: S.of(context).guide_back,
         loadDays: () => loadGuideNewDays(language),
         loadSeen: loadGuideSeenNames,
-        onOpenPlant: openGuidePlant,
+        onOpenPlant: (context, name) => openGuidePlant(
+          context,
+          name,
+          source: GuidePlantSource.notification,
+        ),
       );
     },
   );

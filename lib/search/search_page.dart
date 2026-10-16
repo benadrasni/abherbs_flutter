@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/generated/l10n.dart';
+import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:abherbs_flutter/search/guide_search.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
@@ -126,6 +129,18 @@ class _GuideSearchPageState extends State<GuideSearchPage> {
     return key;
   }
 
+  void _logOpenedSearch() {
+    final index = _index;
+    if (index == null) return;
+    final results = queryGuideSearch(index, _query);
+    unawaited(GuideAnalytics.search(
+      term: _query,
+      resultCount: results.plants.length +
+          results.genera.length +
+          results.families.length,
+    ));
+  }
+
   String _latin(GuideSearchPlant plant) {
     final name = _cardFor(plant)?.latinName;
     if (name != null && name.isNotEmpty) return name;
@@ -145,6 +160,7 @@ class _GuideSearchPageState extends State<GuideSearchPage> {
       }
     }
     if (!mounted) return;
+    _logOpenedSearch();
     final name = card?.latinName;
     widget.onOpenPlant(
       context,
@@ -241,7 +257,10 @@ class _GuideSearchPageState extends State<GuideSearchPage> {
           : storageFamilies + taxon.illustrationFamily + defaultExtension,
       plate: true,
       count: taxon.count,
-      onTap: () => widget.onOpenTaxon(context, taxon.listPath),
+      onTap: () {
+        _logOpenedSearch();
+        widget.onOpenTaxon(context, taxon.listPath);
+      },
     );
   }
 }
