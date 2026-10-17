@@ -344,9 +344,13 @@ bool isIgnorableFlutterError(FlutterErrorDetails details) {
 }
 
 void launchURL(String path) async {
-  Uri url = Uri.parse(path);
-  if (!await launchUrl(url)) {
-    throw 'Could not launch $url';
+  try {
+    final url = Uri.parse(path);
+    if (!await launchUrl(url)) {
+      debugPrint('Could not launch $url');
+    }
+  } catch (error) {
+    debugPrint('Could not launch $path: $error');
   }
 }
 

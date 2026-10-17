@@ -943,7 +943,7 @@ class _GalleryState extends State<_Gallery> {
           PageView(
             controller: _page,
             children: [
-              for (final slide in slides)
+              for (final (index, slide) in slides.indexed)
                 slide.video == null
                     ? GestureDetector(
                         onTap: slide.path == null
@@ -964,7 +964,12 @@ class _GalleryState extends State<_Gallery> {
                                       image: true,
                                       label: slide.plate
                                           ? strings.guide_plate
-                                          : title,
+                                          : _indexedName(
+                                              context,
+                                              title,
+                                              index,
+                                              species.photoPaths.length,
+                                            ),
                                       child: ExcludeSemantics(
                                         child: widget.image(
                                           slide.path!,
@@ -1077,6 +1082,7 @@ class _GalleryState extends State<_Gallery> {
 
 const double _galleryPillInset = 12;
 const double _galleryPillHeight = 48;
+const double _galleryButtonExtent = 48;
 const double _galleryVideoGap = 8;
 
 class _Slide {
@@ -1161,8 +1167,8 @@ class _OverlayButton extends StatelessWidget {
           onTap: onPressed,
           customBorder: const CircleBorder(),
           child: SizedBox(
-            width: 38,
-            height: 38,
+            width: _galleryButtonExtent,
+            height: _galleryButtonExtent,
             child: IconTheme(
               data: IconThemeData(color: colors.ink, size: 20),
               child: icon,
@@ -1773,8 +1779,8 @@ class _MonthCell extends StatelessWidget {
 }
 
 /// The painted [label] stays. Screen readers also hear the place, so a jump
-/// chip is not the same name as its heading and two photos from one month
-/// are not the same name.
+/// chip is not the same name as its heading, gallery photos are not the same
+/// name, and two photos from one month are not the same name.
 String _indexedName(
   BuildContext context,
   String label,

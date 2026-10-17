@@ -1227,6 +1227,80 @@ void main() {
     expect(find.bySemanticsLabel('$may, Tab 3 of 3'), findsOneWidget);
     handle.dispose();
   });
+
+  testWidgets('gallery photos are named apart', (tester) async {
+    final handle = tester.ensureSemantics();
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+      )),
+      size: const Size(390, 800),
+    );
+
+    expect(find.text('oxeye daisy'), findsOneWidget);
+    expect(find.bySemanticsLabel('oxeye daisy'), findsOneWidget);
+    expect(find.bySemanticsLabel('oxeye daisy, Tab 1 of 3'), findsOneWidget);
+
+    await tester.fling(find.byType(PageView), const Offset(-400, 0), 800);
+    await tester.pumpAndSettle();
+    expect(find.bySemanticsLabel('oxeye daisy, Tab 2 of 3'), findsOneWidget);
+
+    await tester.fling(find.byType(PageView), const Offset(-400, 0), 800);
+    await tester.pumpAndSettle();
+    expect(find.bySemanticsLabel('oxeye daisy, Tab 3 of 3'), findsOneWidget);
+    expect(find.bySemanticsLabel('oxeye daisy'), findsOneWidget);
+    handle.dispose();
+  });
+
+  testWidgets('gallery back, favorite, and share are 48 points',
+      (tester) async {
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+      )),
+      size: const Size(390, 800),
+    );
+
+    expect(tester.getSize(find.byTooltip('Back')), const Size(48, 48));
+    expect(
+      tester.getSize(find.byTooltip('Mark as favorite')),
+      const Size(48, 48),
+    );
+    expect(tester.getSize(find.byTooltip('Share')), const Size(48, 48));
+  });
+
+  testWidgets('a source icon that cannot open does not throw', (tester) async {
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+      )),
+      size: const Size(390, 2400),
+    );
+
+    final link = find.byKey(
+      const ValueKey('https://en.wikipedia.org/wiki/Leucanthemum_vulgare'),
+    );
+    await tester.ensureVisible(link);
+    await tester.tap(link);
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(tester.takeException(), isNull);
+  });
 }
 
 GuideSpecies _daisy() {
