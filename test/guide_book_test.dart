@@ -12,6 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_platform_interface/test.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -204,16 +205,18 @@ void main() {
 
     await tester.tap(find.byKey(guideBookListsKey));
     await tester.pump();
-    expect(find.text('New in the book'), findsOneWidget);
+    expect(find.textContaining('New in the book'), findsOneWidget);
     expect(find.text('Lists of flowers'), findsNothing);
     expect(
-      tester.getTopLeft(find.text('New in the book')).dy,
-      lessThan(tester.getTopLeft(find.text('Alpine flowers')).dy),
+      tester.getTopLeft(find.textContaining('New in the book')).dy,
+      lessThan(tester.getTopLeft(find.textContaining('Alpine flowers')).dy),
     );
-    final context = tester.element(find.text('New in the book'));
+    final context = tester.element(find.textContaining('New in the book'));
     final date = MaterialLocalizations.of(context).formatMediumDate(latest);
-    expect(find.text('2 plants · latest $date'), findsOneWidget);
-    expect(find.text('6 years · 2019–2024'), findsOneWidget);
+    expect(find.textContaining('2 plants · latest $date'), findsOneWidget);
+    expect(find.textContaining('6 years · 2019–2024'), findsOneWidget);
+    _expectSameLine(tester, 'New in the book', '2 plants · latest $date');
+    _expectSameLine(tester, 'Alpine flowers', '6 years · 2019–2024');
     expect(
       find.byWidgetPredicate((widget) {
         if (widget is! Material) return false;
@@ -225,7 +228,7 @@ void main() {
     );
     expect(find.byType(GuidePhoto), findsNWidgets(6));
 
-    await tester.tap(find.text('Alpine flowers'));
+    await tester.tap(find.textContaining('Alpine flowers'));
     await tester.pump();
     expect(openedList?.title, 'Alpine flowers');
   });
@@ -306,8 +309,8 @@ void main() {
       ),
     );
 
-    expect(find.text('Meadows'), findsOneWidget);
-    expect(find.text('11 plants'), findsOneWidget);
+    expect(find.textContaining('Meadows'), findsOneWidget);
+    expect(find.textContaining('11 plants'), findsOneWidget);
     expect(find.text('daisy family'), findsNothing);
     final lists = tester.widget<Material>(find.byKey(guideBookListsKey));
     expect(lists.color, GuideColors.light.ink);
@@ -338,7 +341,7 @@ void main() {
       ),
     );
 
-    expect(find.text('New in the book'), findsOneWidget);
+    expect(find.textContaining('New in the book'), findsOneWidget);
     expect(find.byType(GuidePhoto), findsNWidgets(4));
   });
 
@@ -386,8 +389,9 @@ void main() {
       ),
     );
 
-    expect(find.text('Favorite flowers'), findsOneWidget);
-    expect(find.text('2 plants'), findsOneWidget);
+    expect(find.textContaining('Favorite flowers'), findsOneWidget);
+    expect(_cardPlain(tester, 'Favorite flowers'), contains('2 plants'));
+    expect(_cardPlain(tester, 'Favorite flowers'), isNot(contains('·')));
     expect(find.byIcon(Icons.favorite), findsOneWidget);
     final card = find
         .ancestor(
@@ -400,16 +404,16 @@ void main() {
       findsNWidgets(2),
     );
     expect(
-      tester.getBottomLeft(find.text('Favorite flowers')).dy,
-      lessThan(tester.getTopLeft(find.text('New in the book')).dy),
+      tester.getBottomLeft(find.textContaining('Favorite flowers')).dy,
+      lessThan(tester.getTopLeft(find.textContaining('New in the book')).dy),
     );
     expect(
-      tester.getBottomLeft(find.text('Favorite flowers')).dy,
-      lessThan(tester.getTopLeft(find.text('Alpine flowers')).dy),
+      tester.getBottomLeft(find.textContaining('Favorite flowers')).dy,
+      lessThan(tester.getTopLeft(find.textContaining('Alpine flowers')).dy),
     );
     expect(find.byType(GuidePhoto), findsNWidgets(4));
 
-    await tester.tap(find.text('Favorite flowers'));
+    await tester.tap(find.textContaining('Favorite flowers'));
     await tester.pump();
     expect(opened?.isFavorite, isTrue);
     expect(opened?.count, 2);
@@ -442,9 +446,39 @@ void main() {
       ),
     );
 
-    expect(find.text('Favorite flowers'), findsNothing);
-    expect(find.text('New in the book'), findsOneWidget);
+    expect(find.textContaining('Favorite flowers'), findsNothing);
+    expect(find.textContaining('New in the book'), findsOneWidget);
   });
+}
+
+void _expectSameLine(WidgetTester tester, String a, String b) {
+  final paragraph = tester.renderObject<RenderParagraph>(
+    find.textContaining(a),
+  );
+  expect(
+    tester.renderObject(find.textContaining(b)),
+    same(paragraph),
+  );
+  final boxA = _fragmentBox(paragraph, a);
+  final boxB = _fragmentBox(paragraph, b);
+  expect(boxA.top, lessThan(boxB.bottom));
+  expect(boxB.top, lessThan(boxA.bottom));
+}
+
+TextBox _fragmentBox(RenderParagraph paragraph, String fragment) {
+  final plain = paragraph.text.toPlainText();
+  final start = plain.indexOf(fragment);
+  expect(start, isNonNegative);
+  final boxes = paragraph.getBoxesForSelection(
+    TextSelection(baseOffset: start, extentOffset: start + fragment.length),
+  );
+  expect(boxes, isNotEmpty);
+  return boxes.first;
+}
+
+String _cardPlain(WidgetTester tester, String fragment) {
+  final text = tester.widget<Text>(find.textContaining(fragment));
+  return text.data ?? text.textSpan!.toPlainText();
 }
 
 class _Host extends StatefulWidget {

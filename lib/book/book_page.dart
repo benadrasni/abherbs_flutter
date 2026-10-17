@@ -652,26 +652,44 @@ class _ListCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                 ],
-                Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  spacing: 6,
-                  children: [
-                    if (favorite)
-                      Icon(Icons.favorite, size: 16, color: colors.madder),
-                    Text(
-                      guideListTitle(context, cover),
-                      style: const TextStyle(
-                        fontFamily: GuideType.serif,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18,
-                        height: 1.15,
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      if (favorite)
+                        WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.only(end: 6),
+                            child: Icon(
+                              Icons.favorite,
+                              size: 16,
+                              color: colors.madder,
+                            ),
+                          ),
+                        ),
+                      TextSpan(
+                        text: guideListTitle(context, cover),
+                        style: const TextStyle(
+                          fontFamily: GuideType.serif,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                          height: 1.15,
+                        ),
                       ),
-                    ),
-                    Text(
-                      guideBookListSubtitle(context, cover),
-                      style: TextStyle(fontSize: 13, color: colors.ink3),
-                    ),
-                  ],
+                      const WidgetSpan(
+                        alignment: PlaceholderAlignment.bottom,
+                        child: SizedBox(width: 6),
+                      ),
+                      TextSpan(
+                        text: guideBookListSubtitle(context, cover),
+                        style: TextStyle(
+                          fontSize: 13,
+                          height: 1.15,
+                          color: colors.ink3,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
