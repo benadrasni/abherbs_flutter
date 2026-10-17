@@ -749,15 +749,16 @@ List<String> _sourceUrls(PlantTranslation translation, Map plant) {
   final urls = <String>[];
   void add(dynamic raw) {
     if (raw is String && raw.trim().isNotEmpty) urls.add(raw.trim());
-    if (raw is List) {
-      for (final item in raw) {
+    if (raw is List || raw is Map) {
+      for (final item in raw is Map ? raw.values : raw as List) {
         add(item);
       }
     }
   }
 
-  add(translation.sourceUrls);
   add(translation.wikipedia);
+  add(plant['wikilinks']);
+  add(translation.sourceUrls);
   add(plant['sourceUrls']);
   return urls;
 }

@@ -151,7 +151,6 @@
   "subantarctic_islands": "איי סובאנטארקטי",
   "antarctic_continent": "יבשת אנטארקטיקה",
   "plant_sources": "מקורות",
-  "guide_sources_more": "{count, plural, one{מקור אחד נוסף} two{שני מקורות נוספים} many{עוד {count} מקורות} other{עוד {count} מקורות}}",
   "plant_flower": "פרח",
   "plant_inflorescence": "תפרחת",
   "plant_fruit": "פרי",

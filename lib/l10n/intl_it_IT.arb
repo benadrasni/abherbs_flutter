@@ -151,7 +151,6 @@
   "subantarctic_islands": "Isole subantartiche",
   "antarctic_continent": "Continente antartico",
   "plant_sources": "Bibliografia",
-  "guide_sources_more": "{count, plural, =1{1 fonte in più} other{{count} fonti in più}}",
   "plant_flower": "Fiore",
   "plant_inflorescence": "Infiorescenza",
   "plant_fruit": "Frutto",

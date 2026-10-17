@@ -151,7 +151,6 @@
   "subantarctic_islands": "Insulele subantarctice",
   "antarctic_continent": "Continentul Antarctic",
   "plant_sources": "Surse",
-  "guide_sources_more": "{count, plural, =1{încă o sursă} few{încă {count} surse} other{încă {count} de surse}}",
   "plant_flower": "Floare",
   "plant_inflorescence": "Inflorescență",
   "plant_fruit": "Fruct",

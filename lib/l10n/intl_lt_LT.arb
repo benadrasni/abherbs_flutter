@@ -151,7 +151,6 @@
   "subantarctic_islands": "Subantarktinės salos",
   "antarctic_continent": "Antarkties žemynas",
   "plant_sources": "Šaltiniai",
-  "guide_sources_more": "{count, plural, one{dar {count} šaltinis} few{dar {count} šaltiniai} many{dar {count} šaltinio} other{dar {count} šaltinių}}",
   "plant_flower": "Žiedas",
   "plant_inflorescence": "Žiedynas",
   "plant_fruit": "Vaisius",

@@ -151,7 +151,6 @@
   "subantarctic_islands": "Subantarktiskās salas",
   "antarctic_continent": "Antarktikas kontinents",
   "plant_sources": "Avoti",
-  "guide_sources_more": "{count, plural, zero{vēl {count} avotu} one{vēl {count} avots} other{vēl {count} avoti}}",
   "plant_flower": "Zieds",
   "plant_inflorescence": "Ziedkopa",
   "plant_fruit": "Auglis",

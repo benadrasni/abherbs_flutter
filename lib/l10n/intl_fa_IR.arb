@@ -151,7 +151,6 @@
   "subantarctic_islands": "جزایر سابانتارکتیک",
   "antarctic_continent": "قاره قطب جنوب",
   "plant_sources": "منابع",
-  "guide_sources_more": "{count, plural, one{1 منبع دیگر} other{{count} منبع دیگر}}",
   "plant_flower": "گل",
   "plant_inflorescence": "گل آذین",
   "plant_fruit": "میوه",

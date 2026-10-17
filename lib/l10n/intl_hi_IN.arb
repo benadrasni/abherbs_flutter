@@ -151,7 +151,6 @@
   "subantarctic_islands": "Subantarctic द्वीप समूह",
   "antarctic_continent": "अंटार्कटिक महाद्वीप",
   "plant_sources": "स्रोत",
-  "guide_sources_more": "{count, plural, one{और 1 स्रोत} other{और {count} स्रोत}}",
   "plant_flower": "पुष्प",
   "plant_inflorescence": "पुष्पक्रम",
   "plant_fruit": "फल",

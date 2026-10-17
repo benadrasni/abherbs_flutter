@@ -419,21 +419,31 @@ void main() {
       findsOneWidget,
     );
     expect(find.textContaining('1 shared by app users'), findsOneWidget);
-    expect(find.text('wikipedia.org'), findsOneWidget);
-    expect(find.text('en.wikipedia.org'), findsOneWidget);
+    expect(find.text('wikipedia'), findsNWidgets(2));
     expect(find.byKey(const Key('guide-sources-more')), findsNothing);
-    for (final host in ['wikipedia.org', 'en.wikipedia.org']) {
-      final label = tester.getRect(find.text(host));
-      final link = tester.getRect(find.ancestor(
-        of: find.text(host),
-        matching: find.byType(GestureDetector),
+    for (final url in [
+      'https://www.wikipedia.org/wiki/Leucanthemum_vulgare',
+      'https://en.wikipedia.org/wiki/Leucanthemum_vulgare',
+    ]) {
+      final button = find.byKey(ValueKey(url));
+      final link = tester.getRect(button);
+      final label = tester.getRect(find.descendant(
+        of: button,
+        matching: find.text('wikipedia'),
       ));
-      expect(link.height, 48);
       expect(link.width, greaterThanOrEqualTo(48));
-      expect(label.left, closeTo(link.left, 1));
-      expect(label.center.dy, closeTo(link.center.dy, 1));
-      expect(tester.widget<Text>(find.text(host)).style!.fontSize, 13);
+      expect(link.height, greaterThanOrEqualTo(48));
+      expect(label.center.dx, closeTo(link.center.dx, 1));
+      final image = tester.widget<Image>(find.descendant(
+        of: button,
+        matching: find.byType(Image),
+      ));
+      expect((image.image as AssetImage).assetName, 'res/images/wikipedia.png');
     }
+    expect(
+      tester.widget<Text>(find.text('wikipedia').first).style!.fontSize,
+      11,
+    );
     expect(Purchases.showsAds(), isTrue);
     final order = tester.allWidgets
         .map((widget) => widget.runtimeType.toString())
@@ -1060,7 +1070,33 @@ void main() {
     handle.dispose();
   });
 
-  testWidgets('sources show three links until the rest expand', (tester) async {
+  test('species sources keep the wikipedia page, wikilinks, and text pages', () {
+    final species = assembleGuideSpecies(
+      name: 'Bellis perennis',
+      plant: {
+        'name': 'Bellis perennis',
+        'wikilinks': {
+          'data': 'https://www.wikidata.org/wiki/Q1',
+          'commons': 'https://commons.wikimedia.org/wiki/Bellis',
+        },
+        'sourceUrls': ['https://luontoportti.com/en/bellis'],
+      },
+      translation: PlantTranslation()
+        ..wikipedia = 'https://en.wikipedia.org/wiki/Bellis'
+        ..sourceUrls = ['https://pfaf.org/x', 'https://en.wikipedia.org/wiki/Bellis'],
+      vernaculars: const {},
+      sightings: const [],
+    )!;
+    expect(species.sources.map((link) => link.url), [
+      'https://en.wikipedia.org/wiki/Bellis',
+      'https://www.wikidata.org/wiki/Q1',
+      'https://commons.wikimedia.org/wiki/Bellis',
+      'https://pfaf.org/x',
+      'https://luontoportti.com/en/bellis',
+    ]);
+  });
+
+  testWidgets('sources show four icons until the rest expand', (tester) async {
     final species = assembleGuideSpecies(
       name: 'Bellis perennis',
       plant: {
@@ -1073,6 +1109,8 @@ void main() {
           'https://pfaf.org/user/Plant.aspx?LatinName=Bellis+perennis',
           'https://www.gbif.org/species/3117424',
           'https://luontoportti.com/en/bellis',
+          'https://www.wikidata.org/wiki/Q1',
+          'https://commons.wikimedia.org/wiki/Bellis_perennis',
         ],
       },
       translation: PlantTranslation()..label = 'daisy',
@@ -1088,52 +1126,55 @@ void main() {
         imageBuilder: _swatch,
         month: 6,
       )),
-      size: const Size(390, 2400),
+      size: const Size(390, 4200),
     );
 
     expect(find.text('t.co'), findsOneWidget);
-    expect(find.text('en.wikipedia.org'), findsOneWidget);
+    expect(find.text('wikipedia'), findsOneWidget);
     expect(find.text('rhs.org.uk'), findsOneWidget);
-    expect(find.text('pfaf.org'), findsNothing);
+    expect(find.text('pfaf.org'), findsOneWidget);
     expect(find.text('gbif.org'), findsNothing);
     expect(find.text('luontoportti.com'), findsNothing);
-    expect(find.text('3 more sources'), findsOneWidget);
+    expect(find.text('wikidata'), findsNothing);
+    expect(find.text('commons'), findsNothing);
+    expect(find.text('+4'), findsOneWidget);
+    expect(find.byIcon(Icons.expand_more), findsOneWidget);
 
-    final shortLabel = tester.getRect(find.text('t.co'));
-    final shortLink = tester.getRect(find.ancestor(
-      of: find.text('t.co'),
-      matching: find.byType(GestureDetector),
+    final title = tester.getRect(find.text('Sources'));
+    final short = tester.getRect(find.byKey(const ValueKey('https://t.co/daisy')));
+    final last = tester.getRect(find.byKey(
+      const ValueKey('https://pfaf.org/user/Plant.aspx?LatinName=Bellis+perennis'),
     ));
-    expect(shortLink.width, greaterThanOrEqualTo(48));
-    expect(shortLink.height, 48);
-    expect(shortLabel.center.dy, closeTo(shortLink.center.dy, 1));
-
+    expect(short.top - title.bottom, closeTo(8, 1));
+    expect(last.top, closeTo(short.top, 1));
+    expect(short.width, greaterThanOrEqualTo(48));
+    expect(short.height, greaterThanOrEqualTo(48));
     final more = tester.getRect(find.byKey(const Key('guide-sources-more')));
+    expect(more.top - last.bottom, closeTo(8, 1));
     expect(more.width, greaterThanOrEqualTo(48));
-    expect(more.height, 48);
+    expect(more.height, greaterThanOrEqualTo(48));
+
+    await tester.ensureVisible(find.byKey(const Key('guide-sources-more')));
+    await tester.tap(find.byKey(const Key('guide-sources-more')));
+    await tester.pump();
+
+    expect(find.text('gbif.org'), findsOneWidget);
+    expect(find.text('luontoportti.com'), findsOneWidget);
+    expect(find.text('wikidata'), findsOneWidget);
+    expect(find.text('commons'), findsOneWidget);
+    expect(find.text('+4'), findsNothing);
+    expect(find.byIcon(Icons.expand_less), findsOneWidget);
+    final plate = tester.widget<Image>(find.descendant(
+      of: find.byKey(const ValueKey('https://luontoportti.com/en/bellis')),
+      matching: find.byType(Image),
+    ));
+    expect((plate.image as AssetImage).assetName, 'res/images/luontoportti.png');
 
     await tester.tap(find.byKey(const Key('guide-sources-more')));
     await tester.pump();
 
-    expect(find.text('pfaf.org'), findsOneWidget);
-    expect(find.text('gbif.org'), findsOneWidget);
-    expect(find.text('luontoportti.com'), findsOneWidget);
-    expect(find.byKey(const Key('guide-sources-more')), findsNothing);
-    for (final host in [
-      't.co',
-      'en.wikipedia.org',
-      'rhs.org.uk',
-      'pfaf.org',
-      'gbif.org',
-      'luontoportti.com',
-    ]) {
-      final link = tester.getRect(find.ancestor(
-        of: find.text(host),
-        matching: find.byType(GestureDetector),
-      ));
-      expect(link.width, greaterThanOrEqualTo(48));
-      expect(link.height, 48);
-    }
+    expect(find.text('wikidata'), findsNothing);
+    expect(find.text('+4'), findsOneWidget);
   });
 
   testWidgets('sightings from one month are named apart', (tester) async {

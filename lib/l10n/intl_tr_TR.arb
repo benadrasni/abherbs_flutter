@@ -151,7 +151,6 @@
   "subantarctic_islands": "Subantarktik Adalar",
   "antarctic_continent": "Antarktika",
   "plant_sources": "Kaynaklar",
-  "guide_sources_more": "{count, plural, one{1 kaynak daha} other{{count} kaynak daha}}",
   "plant_flower": "Çiçek",
   "plant_inflorescence": "Çiçekdurumu",
   "plant_fruit": "Meyve",

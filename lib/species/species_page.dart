@@ -2422,8 +2422,81 @@ class _Sightings extends StatelessWidget {
   }
 }
 
-const int _visibleSourceCount = 3;
+const int _collapsedSourceCount = 4;
+const int _sourceColumns = 4;
+const double _sourceGap = 8;
 const double _sourceTapExtent = 48;
+
+class _SourceLook {
+  final String image;
+  final String label;
+  final bool plain;
+
+  const _SourceLook(this.image, this.label, {this.plain = false});
+}
+
+_SourceLook _sourceLook(String url) {
+  const plain = 'res/images/internet.png';
+  var image = plain;
+  var label = guideSourceHost(url);
+  if (url.contains('wikipedia')) {
+    image = 'res/images/wikipedia.png';
+    label = 'wikipedia';
+  } else if (url.contains('commons.wikimedia.org')) {
+    image = 'res/images/commons.png';
+    label = 'commons';
+  } else if (url.contains('wikidata.org')) {
+    image = 'res/images/wikidata.png';
+    label = 'wikidata';
+  } else if (url.contains('species.wikimedia.org')) {
+    image = 'res/images/species.png';
+    label = 'species';
+  } else if (url.contains('luontoportti.com')) {
+    image = 'res/images/luontoportti.png';
+    label = 'luontoportti.com';
+  } else if (url.contains('botany.cz')) {
+    image = 'res/images/botany.png';
+    label = 'botany.cz';
+  } else if (url.contains('floranordica.org')) {
+    image = 'res/images/floranordica.png';
+    label = 'floranordica.org';
+  } else if (url.contains('efloras.org')) {
+    image = 'res/images/eflora.png';
+    label = 'efloras.org';
+  } else if (url.contains('berkeley.edu')) {
+    image = 'res/images/berkeley.png';
+    label = 'berkeley.edu';
+  } else if (url.contains('hortipedia.com')) {
+    image = 'res/images/hortipedia.png';
+    label = 'hortipedia.com';
+  } else if (url.contains('plants.usda.gov')) {
+    image = 'res/images/usda.png';
+    label = 'plants.usda.gov';
+  } else if (url.contains('forestryimages.org')) {
+    image = 'res/images/usfs.png';
+    label = 'forestryimages.org';
+  } else if (url.contains('tela-botanica.org')) {
+    image = 'res/images/tela_botanica.png';
+    label = 'tela-botanica.org';
+  } else if (url.contains('infoflora.ch')) {
+    image = 'res/images/infoflora.png';
+    label = 'infoflora.ch';
+  } else if (url.contains('pladias.cz')) {
+    image = 'res/images/pladias.png';
+    label = 'pladias.cz';
+  } else if (url.contains('nativeplanttrust.org')) {
+    image = 'res/images/gobotany.png';
+    label = 'gobotany';
+  } else if (url.contains('bsbi.org')) {
+    image = 'res/images/bsbi.png';
+    label = 'bsbi.org';
+  } else if (url.contains('burkeherbarium.org') ||
+      url.contains('burke.washington.edu')) {
+    image = 'res/images/burke.png';
+    label = 'burke';
+  }
+  return _SourceLook(image, label, plain: image == plain);
+}
 
 class _Sources extends StatefulWidget {
   final List<GuideSourceLink> links;
@@ -2440,97 +2513,167 @@ class _SourcesState extends State<_Sources> {
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
-    final strings = S.of(context);
     final links = widget.links;
-    final shown = _expanded ? links : links.take(_visibleSourceCount).toList();
-    final hidden = links.length - shown.length;
+    final hidden = links.length - _collapsedSourceCount;
+    final shown = _expanded || hidden <= 0
+        ? links
+        : links.take(_collapsedSourceCount).toList();
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(20, 16, 20, 4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            strings.plant_sources,
+            S.of(context).plant_sources,
             style: TextStyle(
               fontFamily: GuideType.serif,
               fontWeight: FontWeight.w500,
               fontSize: 19,
+              height: 1,
               color: colors.ink,
             ),
           ),
-          const SizedBox(height: 6),
-          for (final link in shown)
-            _SourceTap(
-              key: ValueKey(link.url),
-              label: link.label,
-              color: colors.moss,
-              link: true,
-              onTap: () => launchURL(link.url),
+          const SizedBox(height: _sourceGap),
+          _SourceGrid(links: shown),
+          if (hidden > 0) ...[
+            const SizedBox(height: _sourceGap),
+            Align(
+              alignment: Alignment.center,
+              child: _SourceMore(
+                expanded: _expanded,
+                hidden: hidden,
+                onTap: () => setState(() => _expanded = !_expanded),
+              ),
             ),
-          if (hidden > 0)
-            _SourceTap(
-              key: const Key('guide-sources-more'),
-              label: strings.guide_sources_more(hidden),
-              color: colors.moss,
-              emphasized: true,
-              icon: Icons.expand_more,
-              onTap: () => setState(() => _expanded = true),
-            ),
+          ],
         ],
       ),
     );
   }
 }
 
-class _SourceTap extends StatelessWidget {
-  final String label;
-  final Color color;
-  final VoidCallback onTap;
-  final bool link;
-  final bool emphasized;
-  final IconData? icon;
+class _SourceGrid extends StatelessWidget {
+  final List<GuideSourceLink> links;
 
-  const _SourceTap({
-    super.key,
-    required this.label,
-    required this.color,
+  const _SourceGrid({required this.links});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth / _sourceColumns;
+        final rows = <Widget>[];
+        for (var i = 0; i < links.length; i += _sourceColumns) {
+          if (rows.isNotEmpty) rows.add(const SizedBox(height: _sourceGap));
+          final slice = links.skip(i).take(_sourceColumns).toList();
+          rows.add(Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final link in slice)
+                SizedBox(width: width, child: _SourceButton(link: link)),
+              for (var pad = slice.length; pad < _sourceColumns; pad++)
+                SizedBox(width: width),
+            ],
+          ));
+        }
+        return Column(children: rows);
+      },
+    );
+  }
+}
+
+class _SourceButton extends StatelessWidget {
+  final GuideSourceLink link;
+
+  const _SourceButton({required this.link});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final look = _sourceLook(link.url);
+    return Semantics(
+      button: true,
+      link: true,
+      label: look.label,
+      child: InkWell(
+        key: ValueKey(link.url),
+        onTap: () => launchURL(link.url),
+        child: ExcludeSemantics(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                look.image,
+                width: 50,
+                height: 50,
+                color: look.plain ? colors.ink : null,
+                colorBlendMode: look.plain ? BlendMode.srcIn : null,
+              ),
+              Text(
+                look.label,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 11,
+                  height: 1.15,
+                  color: colors.ink,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SourceMore extends StatelessWidget {
+  final bool expanded;
+  final int hidden;
+  final VoidCallback onTap;
+
+  const _SourceMore({
+    required this.expanded,
+    required this.hidden,
     required this.onTap,
-    this.link = false,
-    this.emphasized = false,
-    this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      button: true,
-      link: link,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: SizedBox(
-          height: _sourceTapExtent,
-          child: Row(
-            children: [
-              Flexible(
-                child: Text(
-                  label,
-                  maxLines: 1,
-                  softWrap: false,
-                  overflow: TextOverflow.ellipsis,
+    final colors = GuideColors.of(context);
+    return InkWell(
+      key: const Key('guide-sources-more'),
+      onTap: onTap,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          minWidth: _sourceTapExtent,
+          minHeight: _sourceTapExtent,
+        ),
+        child: Align(
+          alignment: Alignment.topCenter,
+          widthFactor: 1,
+          heightFactor: 1,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+              Icon(
+                expanded ? Icons.expand_less : Icons.expand_more,
+                color: colors.moss,
+              ),
+              if (!expanded)
+                Text(
+                  '+$hidden',
                   style: TextStyle(
-                    fontSize: 13,
-                    height: 1.6,
-                    fontWeight: emphasized ? FontWeight.w600 : FontWeight.w400,
-                    color: color,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: colors.moss,
                   ),
                 ),
-              ),
-              if (icon != null) ...[
-                const SizedBox(width: 2),
-                Icon(icon, size: 20, color: color),
               ],
-            ],
+            ),
           ),
         ),
       ),

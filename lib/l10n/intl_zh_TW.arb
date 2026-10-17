@@ -151,7 +151,6 @@
   "subantarctic_islands": "亞南極群島",
   "antarctic_continent": "南极洲",
   "plant_sources": "資料來源",
-  "guide_sources_more": "{count, plural, other{另 {count} 個來源}}",
   "plant_flower": "花",
   "plant_inflorescence": "花序",
   "plant_fruit": "果實",
