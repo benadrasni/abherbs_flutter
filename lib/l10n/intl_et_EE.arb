@@ -151,6 +151,7 @@
   "subantarctic_islands": "Subantarktilised saared",
   "antarctic_continent": "Antarktika manner",
   "plant_sources": "Allikad",
+  "guide_sources_more": "{count, plural, one{veel 1 allikas} other{veel {count} allikat}}",
   "plant_flower": "Õis",
   "plant_inflorescence": "Õisik",
   "plant_fruit": "Vili",

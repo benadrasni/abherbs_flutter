@@ -151,6 +151,7 @@
   "subantarctic_islands": "Szubantarktikus szigetek",
   "antarctic_continent": "Antarktisz",
   "plant_sources": "Források",
+  "guide_sources_more": "{count, plural, one{még 1 forrás} other{még {count} forrás}}",
   "plant_flower": "Virág",
   "plant_inflorescence": "Virágzat",
   "plant_fruit": "Termés",

@@ -151,6 +151,7 @@
   "subantarctic_islands": "Wyspy subantarktyczne",
   "antarctic_continent": "Antarktyka",
   "plant_sources": "Źródła",
+  "guide_sources_more": "{count, plural, one{jeszcze 1 źródło} few{jeszcze {count} źródła} many{jeszcze {count} źródeł} other{jeszcze {count} źródła}}",
   "plant_flower": "Kwiaty",
   "plant_inflorescence": "Kwiatostany",
   "plant_fruit": "Owoce",

@@ -1323,7 +1323,7 @@ class _TopBar extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 46),
+        const SizedBox(width: 48),
       ],
     );
   }
@@ -1498,7 +1498,7 @@ class _GlassButton extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: onPressed,
-          child: SizedBox(width: 46, height: 46, child: Center(child: child)),
+          child: SizedBox(width: 48, height: 48, child: Center(child: child)),
         ),
       ),
     );

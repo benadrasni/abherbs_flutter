@@ -151,6 +151,7 @@
   "subantarctic_islands": "Subantarktiske øyer",
   "antarctic_continent": "Det antarktiske kontinent",
   "plant_sources": "Kilder",
+  "guide_sources_more": "{count, plural, =1{1 kilde til} other{{count} kilder til}}",
   "plant_flower": "Blomst",
   "plant_inflorescence": "Blomsterstand",
   "plant_fruit": "Frukt",

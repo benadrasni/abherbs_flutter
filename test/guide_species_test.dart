@@ -420,6 +420,20 @@ void main() {
     );
     expect(find.textContaining('1 shared by app users'), findsOneWidget);
     expect(find.text('wikipedia.org'), findsOneWidget);
+    expect(find.text('en.wikipedia.org'), findsOneWidget);
+    expect(find.byKey(const Key('guide-sources-more')), findsNothing);
+    for (final host in ['wikipedia.org', 'en.wikipedia.org']) {
+      final label = tester.getRect(find.text(host));
+      final link = tester.getRect(find.ancestor(
+        of: find.text(host),
+        matching: find.byType(GestureDetector),
+      ));
+      expect(link.height, 48);
+      expect(link.width, greaterThanOrEqualTo(48));
+      expect(label.left, closeTo(link.left, 1));
+      expect(label.center.dy, closeTo(link.center.dy, 1));
+      expect(tester.widget<Text>(find.text(host)).style!.fontSize, 13);
+    }
     expect(Purchases.showsAds(), isTrue);
     final order = tester.allWidgets
         .map((widget) => widget.runtimeType.toString())
@@ -501,6 +515,8 @@ void main() {
     expect(notes.width, lessThan(160));
     expect(flower.width, lessThan(160));
     expect(notes.width, greaterThan(40));
+    expect(notes.height, 48);
+    expect(flower.height, 48);
     expect((notes.top - flower.top).abs(), lessThan(4));
     expect(flower.left, greaterThan(notes.right));
     expect(
@@ -1015,6 +1031,160 @@ void main() {
 
     expect(find.byTooltip('Mark as favorite'), findsNothing);
     expect(find.byTooltip('Share'), findsOneWidget);
+  });
+
+  testWidgets('a jump chip name includes its place', (tester) async {
+    final handle = tester.ensureSemantics();
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+      )),
+    );
+
+    expect(find.text('Flower'), findsNWidgets(2));
+    expect(find.text('Inflorescence'), findsNWidgets(2));
+    expect(find.bySemanticsLabel('Flower'), findsOneWidget);
+    expect(find.bySemanticsLabel('Inflorescence'), findsOneWidget);
+    expect(find.bySemanticsLabel('Flower, Tab 2 of 11'), findsOneWidget);
+    expect(
+      find.bySemanticsLabel('Inflorescence, Tab 3 of 11'),
+      findsOneWidget,
+    );
+    expect(find.bySemanticsLabel('Notes, Tab 1 of 11'), findsOneWidget);
+    expect(find.bySemanticsLabel('Sightings, Tab 11 of 11'), findsOneWidget);
+    handle.dispose();
+  });
+
+  testWidgets('sources show three links until the rest expand', (tester) async {
+    final species = assembleGuideSpecies(
+      name: 'Bellis perennis',
+      plant: {
+        'id': 2,
+        'name': 'Bellis perennis',
+        'sourceUrls': [
+          'https://t.co/daisy',
+          'https://en.wikipedia.org/wiki/Bellis_perennis',
+          'https://www.rhs.org.uk/plants/bellis',
+          'https://pfaf.org/user/Plant.aspx?LatinName=Bellis+perennis',
+          'https://www.gbif.org/species/3117424',
+          'https://luontoportti.com/en/bellis',
+        ],
+      },
+      translation: PlantTranslation()..label = 'daisy',
+      vernaculars: const {},
+      sightings: const [],
+    )!;
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Bellis perennis',
+        initial: species,
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 6,
+      )),
+      size: const Size(390, 2400),
+    );
+
+    expect(find.text('t.co'), findsOneWidget);
+    expect(find.text('en.wikipedia.org'), findsOneWidget);
+    expect(find.text('rhs.org.uk'), findsOneWidget);
+    expect(find.text('pfaf.org'), findsNothing);
+    expect(find.text('gbif.org'), findsNothing);
+    expect(find.text('luontoportti.com'), findsNothing);
+    expect(find.text('3 more sources'), findsOneWidget);
+
+    final shortLabel = tester.getRect(find.text('t.co'));
+    final shortLink = tester.getRect(find.ancestor(
+      of: find.text('t.co'),
+      matching: find.byType(GestureDetector),
+    ));
+    expect(shortLink.width, greaterThanOrEqualTo(48));
+    expect(shortLink.height, 48);
+    expect(shortLabel.center.dy, closeTo(shortLink.center.dy, 1));
+
+    final more = tester.getRect(find.byKey(const Key('guide-sources-more')));
+    expect(more.width, greaterThanOrEqualTo(48));
+    expect(more.height, 48);
+
+    await tester.tap(find.byKey(const Key('guide-sources-more')));
+    await tester.pump();
+
+    expect(find.text('pfaf.org'), findsOneWidget);
+    expect(find.text('gbif.org'), findsOneWidget);
+    expect(find.text('luontoportti.com'), findsOneWidget);
+    expect(find.byKey(const Key('guide-sources-more')), findsNothing);
+    for (final host in [
+      't.co',
+      'en.wikipedia.org',
+      'rhs.org.uk',
+      'pfaf.org',
+      'gbif.org',
+      'luontoportti.com',
+    ]) {
+      final link = tester.getRect(find.ancestor(
+        of: find.text(host),
+        matching: find.byType(GestureDetector),
+      ));
+      expect(link.width, greaterThanOrEqualTo(48));
+      expect(link.height, 48);
+    }
+  });
+
+  testWidgets('sightings from one month are named apart', (tester) async {
+    final handle = tester.ensureSemantics();
+    final species = assembleGuideSpecies(
+      name: 'Malus domestica',
+      plant: {
+        'id': 1,
+        'name': 'Malus domestica',
+      },
+      translation: PlantTranslation()..label = 'apple tree',
+      vernaculars: const {},
+      sightings: [
+        GuideSighting(
+          id: 'a',
+          photoPath: 'photos/a.jpg',
+          when: DateTime(2021, 4, 3),
+        ),
+        GuideSighting(
+          id: 'b',
+          photoPath: 'photos/b.jpg',
+          when: DateTime(2021, 5, 8),
+        ),
+        GuideSighting(
+          id: 'c',
+          photoPath: 'photos/c.jpg',
+          when: DateTime(2021, 5, 20),
+        ),
+      ],
+    )!;
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Malus domestica',
+        initial: species,
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 5,
+      )),
+      size: const Size(390, 3200),
+    );
+
+    final may = DateFormat.yMMMM('en').format(DateTime(2021, 5, 1));
+    final april = DateFormat.yMMMM('en').format(DateTime(2021, 4, 1));
+    expect(find.text(may), findsNWidgets(2));
+    expect(find.text(april), findsOneWidget);
+    expect(find.bySemanticsLabel(may), findsNothing);
+    expect(find.bySemanticsLabel('$april, Tab 1 of 3'), findsOneWidget);
+    expect(find.bySemanticsLabel('$may, Tab 2 of 3'), findsOneWidget);
+    expect(find.bySemanticsLabel('$may, Tab 3 of 3'), findsOneWidget);
+    handle.dispose();
   });
 }
 

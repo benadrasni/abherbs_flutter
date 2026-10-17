@@ -151,6 +151,7 @@
   "subantarctic_islands": "아칸소 제도",
   "antarctic_continent": "남극",
   "plant_sources": "출처",
+  "guide_sources_more": "{count, plural, other{출처 {count}개 더}}",
   "plant_flower": "꽃",
   "plant_inflorescence": "꽃차례",
   "plant_fruit": "열매",

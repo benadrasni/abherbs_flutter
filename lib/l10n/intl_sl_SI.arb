@@ -151,6 +151,7 @@
   "subantarctic_islands": "Podantarktični otoki",
   "antarctic_continent": "Antarktika",
   "plant_sources": "Viri",
+  "guide_sources_more": "{count, plural, one{še 1 vir} two{še {count} vira} few{še {count} viri} other{še {count} virov}}",
   "plant_flower": "Cvet",
   "plant_inflorescence": "Socvetje",
   "plant_fruit": "Plod",

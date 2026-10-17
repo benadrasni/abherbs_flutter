@@ -256,6 +256,7 @@ class _FlowerBody extends StatelessWidget {
               key: guideFlowerPlateKey,
               fit: BoxFit.contain,
               width: double.infinity,
+              semanticLabel: strings.guide_flower_parts,
             ),
           ),
         ),
@@ -450,6 +451,7 @@ class _InflorescenceCell extends StatelessWidget {
               child: Image.asset(
                 'res/images/inflorescence_$type.webp',
                 fit: BoxFit.contain,
+                semanticLabel: label,
               ),
             ),
             const SizedBox(height: 6),

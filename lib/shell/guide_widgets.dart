@@ -424,6 +424,52 @@ Widget guideSheetAlign(BuildContext context, Widget sheet) {
   );
 }
 
+/// The visible word stays [label]. Screen readers also hear which tab this
+/// is, so Book is not the same description as the Book heading.
+String _tabSpoken(
+  BuildContext context,
+  String label,
+  int index,
+  int count, {
+  int unconfirmed = 0,
+}) {
+  final place = MaterialLocalizations.of(context).tabLabel(
+    tabIndex: index + 1,
+    tabCount: count,
+  );
+  if (unconfirmed <= 0) return '$label, $place';
+  final badge = unconfirmed > 99 ? '99+' : '$unconfirmed';
+  return '$label, $place, $badge';
+}
+
+/// One tab in the semantics tree. The painted label stays the short word.
+class _TabSemantics extends StatelessWidget {
+  final String spoken;
+  final bool selected;
+  final VoidCallback onPressed;
+  final Widget child;
+
+  const _TabSemantics({
+    required this.spoken,
+    required this.selected,
+    required this.onPressed,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      container: true,
+      button: true,
+      selected: selected,
+      label: spoken,
+      excludeSemantics: true,
+      onTap: onPressed,
+      child: child,
+    );
+  }
+}
+
 /// Find, Book, and Seen. [showAd] pins the free-account banner above the tabs.
 class GuideBottomBar extends StatelessWidget {
   final int index;
@@ -482,28 +528,40 @@ class GuideTabBar extends StatelessWidget {
                 children: [
                   for (var i = 0; i < items.length; i++)
                     Expanded(
-                      child: InkWell(
-                        onTap: () => onSelect(i),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _TabIcon(
-                              icon: items[i].$2,
-                              color: i == index ? colors.moss : colors.ink3,
-                              unconfirmed: i == 2 ? unconfirmed : 0,
-                            ),
-                            const SizedBox(height: 3),
-                            Text(
-                              items[i].$1,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: i == index
-                                    ? FontWeight.w600
-                                    : FontWeight.w400,
+                      child: _TabSemantics(
+                        spoken: _tabSpoken(
+                          context,
+                          items[i].$1,
+                          i,
+                          items.length,
+                          unconfirmed: i == 2 ? unconfirmed : 0,
+                        ),
+                        selected: i == index,
+                        onPressed: () => onSelect(i),
+                        child: InkWell(
+                          onTap: () => onSelect(i),
+                          excludeFromSemantics: true,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _TabIcon(
+                                icon: items[i].$2,
                                 color: i == index ? colors.moss : colors.ink3,
+                                unconfirmed: i == 2 ? unconfirmed : 0,
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 3),
+                              Text(
+                                items[i].$1,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: i == index
+                                      ? FontWeight.w600
+                                      : FontWeight.w400,
+                                  color: i == index ? colors.moss : colors.ink3,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -625,6 +683,8 @@ class GuideSideRail extends StatelessWidget {
                         icon: item.$3,
                         selected: !personOn && GuideTabs.index == item.$1,
                         unconfirmed: item.$1 == 2 ? unconfirmed : 0,
+                        tabIndex: item.$1,
+                        tabCount: items.length,
                         onPressed: () => onSelect(item.$1),
                       ),
                     const Spacer(),
@@ -650,6 +710,8 @@ class _RailButton extends StatelessWidget {
   final IconData icon;
   final bool selected;
   final int unconfirmed;
+  final int? tabIndex;
+  final int tabCount;
   final VoidCallback onPressed;
 
   const _RailButton({
@@ -658,14 +720,17 @@ class _RailButton extends StatelessWidget {
     required this.selected,
     required this.onPressed,
     this.unconfirmed = 0,
+    this.tabIndex,
+    this.tabCount = 3,
   });
 
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
     final color = selected ? colors.moss : colors.ink3;
-    return InkWell(
+    final button = InkWell(
       onTap: onPressed,
+      excludeFromSemantics: tabIndex != null,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
         child: Column(
@@ -686,6 +751,20 @@ class _RailButton extends StatelessWidget {
         ),
       ),
     );
+    final index = tabIndex;
+    if (index == null) return button;
+    return _TabSemantics(
+      spoken: _tabSpoken(
+        context,
+        label,
+        index,
+        tabCount,
+        unconfirmed: unconfirmed,
+      ),
+      selected: selected,
+      onPressed: onPressed,
+      child: button,
+    );
   }
 }
 
@@ -703,25 +782,28 @@ class GuideBackButton extends StatelessWidget {
       child: InkWell(
         onTap: onPressed ?? () => Navigator.maybePop(context),
         borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 16, 8),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconTheme(
-                data: IconThemeData(color: colors.moss, size: 20),
-                child: BackButtonIcon(),
-              ),
-              const SizedBox(width: 8),
-              Text(
-                label,
-                style: TextStyle(
-                  color: colors.moss,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
+        child: SizedBox(
+          height: 48,
+          child: Padding(
+            padding: const EdgeInsetsDirectional.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconTheme(
+                  data: IconThemeData(color: colors.moss, size: 20),
+                  child: BackButtonIcon(),
                 ),
-              ),
-            ],
+                const SizedBox(width: 8),
+                Text(
+                  label,
+                  style: TextStyle(
+                    color: colors.moss,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

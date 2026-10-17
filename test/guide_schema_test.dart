@@ -198,6 +198,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Parts of a flower'), findsOneWidget);
     expect(find.widgetWithText(GuideBackButton, 'oxeye daisy'), findsOneWidget);
+    expect(tester.getSize(find.byType(GuideBackButton)).height, 48);
 
     await tester.tap(find.descendant(
       of: find.byType(GuideBackButton),

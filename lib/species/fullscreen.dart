@@ -1,4 +1,5 @@
 import 'package:abherbs_flutter/data/utils.dart';
+import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -33,6 +34,7 @@ class FullScreenPage extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.fill,
           child: FloatingActionButton(
+            tooltip: S.of(context).close,
             onPressed: () {
               Navigator.of(context).pop();
             },

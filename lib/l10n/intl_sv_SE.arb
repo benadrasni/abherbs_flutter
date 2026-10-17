@@ -151,6 +151,7 @@
   "subantarctic_islands": "Subantarktiska öarna",
   "antarctic_continent": "Antarktiska kontinenten",
   "plant_sources": "Källor",
+  "guide_sources_more": "{count, plural, =1{1 källa till} other{{count} källor till}}",
   "plant_flower": "Blomma",
   "plant_inflorescence": "Blomställning",
   "plant_fruit": "Frukt",

@@ -956,13 +956,25 @@ class _GalleryState extends State<_Gallery> {
                               ? const SizedBox.expand()
                               : LayoutBuilder(
                                   builder: (context, constraints) {
-                                    return widget.image(
-                                      slide.path!,
-                                      slide.plate
-                                          ? BoxFit.contain
-                                          : BoxFit.cover,
-                                      constraints.maxWidth,
-                                      widget.height,
+                                    final title = species.hasVernacular
+                                        ? species.label!.trim()
+                                        : species.name;
+                                    return Semantics(
+                                      container: true,
+                                      image: true,
+                                      label: slide.plate
+                                          ? strings.guide_plate
+                                          : title,
+                                      child: ExcludeSemantics(
+                                        child: widget.image(
+                                          slide.path!,
+                                          slide.plate
+                                              ? BoxFit.contain
+                                              : BoxFit.cover,
+                                          constraints.maxWidth,
+                                          widget.height,
+                                        ),
+                                      ),
                                     );
                                   },
                                 ),
@@ -1064,7 +1076,7 @@ class _GalleryState extends State<_Gallery> {
 }
 
 const double _galleryPillInset = 12;
-const double _galleryPillHeight = 30;
+const double _galleryPillHeight = 48;
 const double _galleryVideoGap = 8;
 
 class _Slide {
@@ -1760,6 +1772,23 @@ class _MonthCell extends StatelessWidget {
   }
 }
 
+/// The painted [label] stays. Screen readers also hear the place, so a jump
+/// chip is not the same name as its heading and two photos from one month
+/// are not the same name.
+String _indexedName(
+  BuildContext context,
+  String label,
+  int index,
+  int count,
+) {
+  final place = MaterialLocalizations.of(context).tabLabel(
+    tabIndex: index + 1,
+    tabCount: count,
+  );
+  if (label.isEmpty) return place;
+  return '$label, $place';
+}
+
 class _JumpWrap extends StatelessWidget {
   final List<({String id, String label})> chips;
   final ValueChanged<String> onJump;
@@ -1782,12 +1811,18 @@ class _JumpWrap extends StatelessWidget {
             spacing: 6,
             runSpacing: 6,
             children: [
-              for (final chip in chips)
+              for (var i = 0; i < chips.length; i++)
                 _Pill(
-                  key: Key('guide-jump-${chip.id}'),
-                  label: chip.label,
+                  key: Key('guide-jump-${chips[i].id}'),
+                  label: chips[i].label,
+                  spoken: _indexedName(
+                    context,
+                    chips[i].label,
+                    i,
+                    chips.length,
+                  ),
                   filled: true,
-                  onPressed: () => onJump(chip.id),
+                  onPressed: () => onJump(chips[i].id),
                 ),
             ],
           ),
@@ -1804,10 +1839,10 @@ class _JumpDelegate extends SliverPersistentHeaderDelegate {
   _JumpDelegate({required this.chips, required this.onJump});
 
   @override
-  double get minExtent => 54;
+  double get minExtent => _galleryPillHeight + 24;
 
   @override
-  double get maxExtent => 54;
+  double get maxExtent => _galleryPillHeight + 24;
 
   @override
   Widget build(
@@ -1831,6 +1866,12 @@ class _JumpDelegate extends SliverPersistentHeaderDelegate {
                 if (i > 0) const SizedBox(width: 6),
                 _Pill(
                   label: chips[i].label,
+                  spoken: _indexedName(
+                    context,
+                    chips[i].label,
+                    i,
+                    chips.length,
+                  ),
                   filled: true,
                   onPressed: () => onJump(chips[i].id),
                 ),
@@ -1854,12 +1895,14 @@ class _JumpDelegate extends SliverPersistentHeaderDelegate {
 
 class _Pill extends StatelessWidget {
   final String label;
+  final String? spoken;
   final bool filled;
   final VoidCallback onPressed;
 
   const _Pill({
     super.key,
     required this.label,
+    this.spoken,
     required this.filled,
     required this.onPressed,
   });
@@ -1867,15 +1910,17 @@ class _Pill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
-    return Material(
+    final radius = BorderRadius.circular(_galleryPillHeight / 2);
+    final chip = Material(
       color: filled ? colors.cream : colors.wash,
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: radius,
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onPressed,
+        excludeFromSemantics: spoken != null,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: radius,
             border: filled ? Border.all(color: colors.rule) : null,
           ),
           child: Padding(
@@ -1901,6 +1946,16 @@ class _Pill extends StatelessWidget {
           ),
         ),
       ),
+    );
+    final name = spoken;
+    if (name == null) return chip;
+    return Semantics(
+      container: true,
+      button: true,
+      label: name,
+      excludeSemantics: true,
+      onTap: onPressed,
+      child: chip,
     );
   }
 }
@@ -2180,6 +2235,15 @@ class _MapImage extends StatefulWidget {
 class _MapImageState extends State<_MapImage> {
   bool _failed = false;
 
+  Widget _labeledMap(Widget image) {
+    return Semantics(
+      container: true,
+      image: true,
+      label: S.of(context).guide_distribution,
+      child: ExcludeSemantics(child: image),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
@@ -2198,20 +2262,24 @@ class _MapImageState extends State<_MapImage> {
             builder: (context, snapshot) {
               final file = snapshot.data;
               if (file != null) {
-                return Image.file(
-                  file,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => _fail(),
+                return _labeledMap(
+                  Image.file(
+                    file,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => _fail(),
+                  ),
                 );
               }
               if (snapshot.connectionState != ConnectionState.done) {
                 return const ColoredBox(color: Colors.white);
               }
-              return CachedNetworkImage(
-                imageUrl: storageEndpoint + widget.path,
-                fit: BoxFit.cover,
-                placeholder: (_, __) => const ColoredBox(color: Colors.white),
-                errorWidget: (_, __, ___) => _fail(),
+              return _labeledMap(
+                CachedNetworkImage(
+                  imageUrl: storageEndpoint + widget.path,
+                  fit: BoxFit.cover,
+                  placeholder: (_, __) => const ColoredBox(color: Colors.white),
+                  errorWidget: (_, __, ___) => _fail(),
+                ),
               );
             },
           ),
@@ -2280,45 +2348,59 @@ class _Sightings extends StatelessWidget {
                 final when = sighting.when;
                 final caption =
                     when == null ? null : DateFormat.yMMMM(locale).format(when);
-                return GestureDetector(
+                return Semantics(
+                  container: true,
+                  button: true,
+                  image: true,
+                  label: _indexedName(
+                    context,
+                    caption ?? '',
+                    index,
+                    shown.length,
+                  ),
+                  excludeSemantics: true,
                   onTap: () => onOpen(sighting.photoPath),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        image(sighting.photoPath, BoxFit.cover, 120, 120),
-                        if (caption != null)
-                          PositionedDirectional(
-                            start: 4,
-                            bottom: 4,
-                            end: 4,
-                            child: Align(
-                              alignment: AlignmentDirectional.bottomStart,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  color: colors.wash,
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 5,
-                                    vertical: 1,
+                  child: GestureDetector(
+                    onTap: () => onOpen(sighting.photoPath),
+                    excludeFromSemantics: true,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          image(sighting.photoPath, BoxFit.cover, 120, 120),
+                          if (caption != null)
+                            PositionedDirectional(
+                              start: 4,
+                              bottom: 4,
+                              end: 4,
+                              child: Align(
+                                alignment: AlignmentDirectional.bottomStart,
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    color: colors.wash,
+                                    borderRadius: BorderRadius.circular(6),
                                   ),
-                                  child: Text(
-                                    caption,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w600,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 5,
+                                      vertical: 1,
+                                    ),
+                                    child: Text(
+                                      caption,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -2340,21 +2422,35 @@ class _Sightings extends StatelessWidget {
   }
 }
 
-class _Sources extends StatelessWidget {
+const int _visibleSourceCount = 3;
+const double _sourceTapExtent = 48;
+
+class _Sources extends StatefulWidget {
   final List<GuideSourceLink> links;
 
   const _Sources({required this.links});
 
   @override
+  State<_Sources> createState() => _SourcesState();
+}
+
+class _SourcesState extends State<_Sources> {
+  var _expanded = false;
+
+  @override
   Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
+    final strings = S.of(context);
+    final links = widget.links;
+    final shown = _expanded ? links : links.take(_visibleSourceCount).toList();
+    final hidden = links.length - shown.length;
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(20, 16, 20, 4),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            S.of(context).plant_sources,
+            strings.plant_sources,
             style: TextStyle(
               fontFamily: GuideType.serif,
               fontWeight: FontWeight.w500,
@@ -2363,30 +2459,80 @@ class _Sources extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 6),
-          Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
+          for (final link in shown)
+            _SourceTap(
+              key: ValueKey(link.url),
+              label: link.label,
+              color: colors.moss,
+              link: true,
+              onTap: () => launchURL(link.url),
+            ),
+          if (hidden > 0)
+            _SourceTap(
+              key: const Key('guide-sources-more'),
+              label: strings.guide_sources_more(hidden),
+              color: colors.moss,
+              emphasized: true,
+              icon: Icons.expand_more,
+              onTap: () => setState(() => _expanded = true),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SourceTap extends StatelessWidget {
+  final String label;
+  final Color color;
+  final VoidCallback onTap;
+  final bool link;
+  final bool emphasized;
+  final IconData? icon;
+
+  const _SourceTap({
+    super.key,
+    required this.label,
+    required this.color,
+    required this.onTap,
+    this.link = false,
+    this.emphasized = false,
+    this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      link: link,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: SizedBox(
+          height: _sourceTapExtent,
+          child: Row(
             children: [
-              for (var i = 0; i < links.length; i++) ...[
-                if (i > 0)
-                  Text(
-                    ' · ',
-                    style: TextStyle(fontSize: 13, color: colors.ink3),
-                  ),
-                GestureDetector(
-                  onTap: () => launchURL(links[i].url),
-                  child: Text(
-                    links[i].label,
-                    style: TextStyle(
-                      fontSize: 13,
-                      height: 1.6,
-                      color: colors.moss,
-                    ),
+              Flexible(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  softWrap: false,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 13,
+                    height: 1.6,
+                    fontWeight: emphasized ? FontWeight.w600 : FontWeight.w400,
+                    color: color,
                   ),
                 ),
+              ),
+              if (icon != null) ...[
+                const SizedBox(width: 2),
+                Icon(icon, size: 20, color: color),
               ],
             ],
           ),
-        ],
+        ),
       ),
     );
   }

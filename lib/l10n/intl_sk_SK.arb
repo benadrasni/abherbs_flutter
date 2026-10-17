@@ -151,6 +151,7 @@
   "subantarctic_islands": "Subantarktické ostrovy",
   "antarctic_continent": "Antarktický kontinent",
   "plant_sources": "Zdroje",
+  "guide_sources_more": "{count, plural, one{ešte 1 zdroj} few{ešte {count} zdroje} other{ešte {count} zdrojov}}",
   "plant_flower": "Kvety",
   "plant_inflorescence": "Súkvetie",
   "plant_fruit": "Plody",

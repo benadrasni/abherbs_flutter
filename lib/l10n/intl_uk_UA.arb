@@ -151,6 +151,7 @@
   "subantarctic_islands": "Субантарктичні острови",
   "antarctic_continent": "Антарктичний континент",
   "plant_sources": "Джерела",
+  "guide_sources_more": "{count, plural, one{ще 1 джерело} few{ще {count} джерела} many{ще {count} джерел} other{ще {count} джерела}}",
   "plant_flower": "Квіти",
   "plant_inflorescence": "Суцвіття",
   "plant_fruit": "Плід",

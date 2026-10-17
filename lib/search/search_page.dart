@@ -187,7 +187,7 @@ class _GuideSearchPageState extends State<GuideSearchPage> {
             child: GuideReadable(
               child: Column(
                 children: [
-                  _BackButton(label: backLabel),
+                  GuideBackButton(label: backLabel),
                   _QueryField(controller: _controller),
                   Expanded(child: _body()),
                 ],
@@ -261,45 +261,6 @@ class _GuideSearchPageState extends State<GuideSearchPage> {
         _logOpenedSearch();
         widget.onOpenTaxon(context, taxon.listPath);
       },
-    );
-  }
-}
-
-class _BackButton extends StatelessWidget {
-  final String label;
-
-  const _BackButton({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = GuideColors.of(context);
-    return Align(
-      alignment: AlignmentDirectional.centerStart,
-      child: InkWell(
-        onTap: () => Navigator.maybePop(context),
-        borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 16, 8),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconTheme(
-                data: IconThemeData(color: colors.moss, size: 20),
-                child: BackButtonIcon(),
-              ),
-              const SizedBox(width: 8),
-              Text(
-                label,
-                style: TextStyle(
-                  color: colors.moss,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

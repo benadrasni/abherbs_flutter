@@ -368,6 +368,18 @@ void main() {
     final shutter =
         tester.getSize(find.byKey(const Key('guide-camera-shutter')));
     expect(shutter, const Size(76, 76));
+    expect(
+      tester.getSize(find.byKey(const Key('guide-camera-close'))),
+      const Size(48, 48),
+    );
+    expect(
+      tester.getSize(find.byKey(const Key('guide-camera-roll'))),
+      const Size(48, 48),
+    );
+    expect(
+      tester.getSize(find.byKey(const Key('guide-camera-key'))),
+      const Size(48, 48),
+    );
   });
 
   testWidgets('credits show five dots and the names still left',

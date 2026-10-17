@@ -151,6 +151,7 @@
   "subantarctic_islands": "Subantarctische eilanden",
   "antarctic_continent": "Antarctisch continent",
   "plant_sources": "Bronnen",
+  "guide_sources_more": "{count, plural, =1{nog 1 bron} other{nog {count} bronnen}}",
   "plant_flower": "Bloem",
   "plant_inflorescence": "Bloeiwijze",
   "plant_fruit": "Vrucht",

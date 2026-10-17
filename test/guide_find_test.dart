@@ -541,6 +541,64 @@ void main() {
     expect(find.byIcon(Icons.article_outlined), findsOneWidget);
   });
 
+  testWidgets('a tab name includes its place for screen readers',
+      (tester) async {
+    final handle = tester.ensureSemantics();
+    await tester.pumpWidget(_tabs());
+
+    expect(find.text('Find'), findsOneWidget);
+    expect(find.text('Book'), findsOneWidget);
+    expect(find.text('Seen'), findsOneWidget);
+    expect(find.bySemanticsLabel('Find, Tab 1 of 3'), findsOneWidget);
+    expect(find.bySemanticsLabel('Book, Tab 2 of 3'), findsOneWidget);
+    expect(find.bySemanticsLabel('Seen, Tab 3 of 3'), findsOneWidget);
+    expect(find.bySemanticsLabel('Book'), findsNothing);
+    expect(find.bySemanticsLabel('Seen'), findsNothing);
+
+    GuideTabs.unconfirmed.value = 3;
+    await tester.pump();
+    expect(find.text('3'), findsOneWidget);
+    expect(find.bySemanticsLabel('Seen, Tab 3 of 3, 3'), findsOneWidget);
+    expect(find.bySemanticsLabel('Seen, Tab 3 of 3'), findsNothing);
+
+    GuideTabs.unconfirmed.value = 120;
+    await tester.pump();
+    expect(find.text('99+'), findsOneWidget);
+    expect(find.bySemanticsLabel('Seen, Tab 3 of 3, 99+'), findsOneWidget);
+    handle.dispose();
+  });
+
+  testWidgets('the side rail names tabs the same way', (tester) async {
+    final handle = tester.ensureSemantics();
+    GuideTabs.unconfirmed.value = 4;
+    await tester.pumpWidget(MaterialApp(
+      locale: const Locale('en'),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      home: Scaffold(
+        body: GuideSideRail(
+          personOn: false,
+          onSelect: (_) {},
+          onPerson: () {},
+        ),
+      ),
+    ));
+
+    expect(find.text('Book'), findsOneWidget);
+    expect(find.text('Person'), findsOneWidget);
+    expect(find.bySemanticsLabel('Find, Tab 1 of 3'), findsOneWidget);
+    expect(find.bySemanticsLabel('Book, Tab 2 of 3'), findsOneWidget);
+    expect(find.bySemanticsLabel('Seen, Tab 3 of 3, 4'), findsOneWidget);
+    expect(find.bySemanticsLabel('Person'), findsOneWidget);
+    expect(find.bySemanticsLabel('Book'), findsNothing);
+    handle.dispose();
+  });
+
   testWidgets('a wrapped Latin name fits the Seen-lately strip',
       (tester) async {
     final when = DateTime(2026, 10, 7, 14, 15);

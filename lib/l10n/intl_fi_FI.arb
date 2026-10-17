@@ -151,6 +151,7 @@
   "subantarctic_islands": "Subantarktiset saaret",
   "antarctic_continent": "Etelämanner",
   "plant_sources": "Lähteet",
+  "guide_sources_more": "{count, plural, one{vielä 1 lähde} other{vielä {count} lähdettä}}",
   "plant_flower": "Kukka",
   "plant_inflorescence": "Kukinto",
   "plant_fruit": "Hedelmä",

@@ -151,6 +151,7 @@
   "subantarctic_islands": "جزر سوبنتاركتيك",
   "antarctic_continent": "القارة القطبية الجنوبية",
   "plant_sources": "مصادر",
+  "guide_sources_more": "{count, plural, zero{لا مصادر أخرى} one{مصدر آخر} two{مصدران آخران} few{{count} مصادر أخرى} many{{count} مصدرًا آخر} other{{count} مصدر آخر}}",
   "plant_flower": "زهرة",
   "plant_inflorescence": "إزهار",
   "plant_fruit": "ثمرة",
