@@ -592,6 +592,84 @@ void main() {
     expect(position.pixels, greaterThan(before));
   });
 
+  testWidgets('pinned jump pills sit below the status bar', (tester) async {
+    tester.view.padding = const FakeViewPadding(top: 48);
+    tester.view.viewPadding = const FakeViewPadding(top: 48);
+    addTearDown(tester.view.resetPadding);
+    addTearDown(tester.view.resetViewPadding);
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+      )),
+      size: const Size(390, 800),
+    );
+
+    expect(find.byKey(const Key('guide-species-jump-cover')), findsNothing);
+    expect(
+      tester.getTopLeft(find.byTooltip('Back')).dy,
+      58,
+    );
+    expect(
+      tester
+          .getTopLeft(
+            find
+                .byWidgetPredicate(
+                  (widget) =>
+                      widget is ColoredBox &&
+                      widget.color == const Color(0xFF88AA77),
+                )
+                .first,
+          )
+          .dy,
+      0,
+    );
+
+    final position = tester
+        .state<ScrollableState>(find
+            .descendant(
+              of: find.byKey(const Key('guide-species-scroll')),
+              matching: find.byWidgetPredicate(
+                (widget) =>
+                    widget is Scrollable &&
+                    widget.axisDirection == AxisDirection.down,
+              ),
+            )
+            .first)
+        .position;
+    position.jumpTo(position.maxScrollExtent);
+    await tester.pump();
+    await tester.pump();
+
+    final cover = find.byKey(const Key('guide-species-jump-cover'));
+    expect(cover, findsOneWidget);
+    expect(tester.getTopLeft(cover).dy, 0);
+    final pills = find.descendant(
+      of: cover,
+      matching: find.byWidgetPredicate(
+        (widget) =>
+            widget is SingleChildScrollView &&
+            widget.scrollDirection == Axis.horizontal,
+      ),
+    );
+    expect(tester.getTopLeft(pills).dy, 48);
+    expect(
+        tester
+            .getTopLeft(
+                find.descendant(of: cover, matching: find.text('Notes')))
+            .dy,
+        greaterThanOrEqualTo(48));
+
+    position.jumpTo(0);
+    await tester.pump();
+    await tester.pump();
+    expect(find.byKey(const Key('guide-species-jump-cover')), findsNothing);
+  });
+
   testWidgets('cancelling the photo picker saves nothing', (tester) async {
     final saved = <GuideSeenDraft>[];
     var refreshed = 0;
@@ -1070,7 +1148,8 @@ void main() {
     handle.dispose();
   });
 
-  test('species sources keep the wikipedia page, wikilinks, and text pages', () {
+  test('species sources keep the wikipedia page, wikilinks, and text pages',
+      () {
     final species = assembleGuideSpecies(
       name: 'Bellis perennis',
       plant: {
@@ -1083,7 +1162,10 @@ void main() {
       },
       translation: PlantTranslation()
         ..wikipedia = 'https://en.wikipedia.org/wiki/Bellis'
-        ..sourceUrls = ['https://pfaf.org/x', 'https://en.wikipedia.org/wiki/Bellis'],
+        ..sourceUrls = [
+          'https://pfaf.org/x',
+          'https://en.wikipedia.org/wiki/Bellis'
+        ],
       vernaculars: const {},
       sightings: const [],
     )!;
@@ -1141,9 +1223,11 @@ void main() {
     expect(find.byIcon(Icons.expand_more), findsOneWidget);
 
     final title = tester.getRect(find.text('Sources'));
-    final short = tester.getRect(find.byKey(const ValueKey('https://t.co/daisy')));
+    final short =
+        tester.getRect(find.byKey(const ValueKey('https://t.co/daisy')));
     final last = tester.getRect(find.byKey(
-      const ValueKey('https://pfaf.org/user/Plant.aspx?LatinName=Bellis+perennis'),
+      const ValueKey(
+          'https://pfaf.org/user/Plant.aspx?LatinName=Bellis+perennis'),
     ));
     expect(short.top - title.bottom, closeTo(8, 1));
     expect(last.top, closeTo(short.top, 1));
@@ -1168,7 +1252,8 @@ void main() {
       of: find.byKey(const ValueKey('https://luontoportti.com/en/bellis')),
       matching: find.byType(Image),
     ));
-    expect((plate.image as AssetImage).assetName, 'res/images/luontoportti.png');
+    expect(
+        (plate.image as AssetImage).assetName, 'res/images/luontoportti.png');
 
     await tester.tap(find.byKey(const Key('guide-sources-more')));
     await tester.pump();

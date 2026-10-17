@@ -277,11 +277,20 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
   void _jump(String id) {
     final target = _sectionKeys[id]?.currentContext;
     if (target == null) return;
+    final position = Scrollable.of(target).position;
+    // Phone pills pin below the status bar. Land the section under that cover.
+    // Tablet pills scroll away, so keep a little air at the top.
+    final cover = GuideWindow.of(context).tablet
+        ? 0.0
+        : MediaQuery.paddingOf(context).top + _galleryPillHeight + 24;
+    final alignment = cover == 0
+        ? 0.16
+        : ((cover + 16) / position.viewportDimension).clamp(0.0, 0.5);
     Scrollable.ensureVisible(
       target,
       duration: const Duration(milliseconds: 280),
       curve: Curves.easeOut,
-      alignment: 0.16,
+      alignment: alignment,
     );
   }
 
@@ -671,14 +680,7 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
         locale: locale,
       ),
     ];
-    final text = <Widget>[
-      if (window.tablet)
-        SliverToBoxAdapter(child: _JumpWrap(chips: chips, onJump: _jump))
-      else
-        SliverPersistentHeader(
-          pinned: true,
-          delegate: _JumpDelegate(chips: chips, onJump: _jump),
-        ),
+    final sections = <Widget>[
       if (species.description != null)
         SliverToBoxAdapter(child: _Lead(text: species.description!)),
       if (notes != null)
@@ -750,6 +752,9 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
         child: SizedBox(height: 24 + MediaQuery.paddingOf(context).bottom),
       ),
     ];
+    final jumps = SliverToBoxAdapter(
+      child: _JumpWrap(chips: chips, onJump: _jump),
+    );
     if (window.wide) {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -767,18 +772,29 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
             flex: 58,
             child: CustomScrollView(
               key: const Key('guide-species-scroll'),
-              slivers: text,
+              slivers: [jumps, ...sections],
             ),
           ),
         ],
       );
     }
-    return CustomScrollView(
-      key: const Key('guide-species-scroll'),
-      slivers: [
-        for (final child in head) SliverToBoxAdapter(child: child),
-        ...text,
-      ],
+    if (window.tablet) {
+      return CustomScrollView(
+        key: const Key('guide-species-scroll'),
+        slivers: [
+          for (final child in head) SliverToBoxAdapter(child: child),
+          jumps,
+          ...sections,
+        ],
+      );
+    }
+    // The photo still runs under the status bar. A pinned sliver would stick
+    // at y = 0, which is underneath the clock.
+    return _StatusBarJumpScroll(
+      chips: chips,
+      onJump: _jump,
+      leading: head,
+      trailing: sections,
     );
   }
 
@@ -1838,24 +1854,20 @@ class _JumpWrap extends StatelessWidget {
   }
 }
 
-class _JumpDelegate extends SliverPersistentHeaderDelegate {
+class _JumpBar extends StatelessWidget {
   final List<({String id, String label})> chips;
   final ValueChanged<String> onJump;
+  final ScrollController controller;
 
-  _JumpDelegate({required this.chips, required this.onJump});
+  const _JumpBar({
+    super.key,
+    required this.chips,
+    required this.onJump,
+    required this.controller,
+  });
 
   @override
-  double get minExtent => _galleryPillHeight + 24;
-
-  @override
-  double get maxExtent => _galleryPillHeight + 24;
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
+  Widget build(BuildContext context) {
     final colors = GuideColors.of(context);
     return ColoredBox(
       color: colors.paper,
@@ -1864,6 +1876,7 @@ class _JumpDelegate extends SliverPersistentHeaderDelegate {
           border: Border(bottom: BorderSide(color: colors.rule)),
         ),
         child: SingleChildScrollView(
+          controller: controller,
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           child: Row(
@@ -1888,14 +1901,164 @@ class _JumpDelegate extends SliverPersistentHeaderDelegate {
       ),
     );
   }
+}
+
+/// Phone jump pills. They scroll with the page until they meet the status
+/// bar, then a paper cover holds them just below the clock.
+class _StatusBarJumpScroll extends StatefulWidget {
+  final List<({String id, String label})> chips;
+  final ValueChanged<String> onJump;
+  final List<Widget> leading;
+  final List<Widget> trailing;
+
+  const _StatusBarJumpScroll({
+    required this.chips,
+    required this.onJump,
+    required this.leading,
+    required this.trailing,
+  });
 
   @override
-  bool shouldRebuild(_JumpDelegate oldDelegate) {
-    if (oldDelegate.chips.length != chips.length) return true;
-    for (var i = 0; i < chips.length; i++) {
-      if (oldDelegate.chips[i] != chips[i]) return true;
+  State<_StatusBarJumpScroll> createState() => _StatusBarJumpScrollState();
+}
+
+class _StatusBarJumpScrollState extends State<_StatusBarJumpScroll> {
+  final GlobalKey _jumpKey = GlobalKey();
+  final ScrollController _page = ScrollController();
+  final ScrollController _flowChips = ScrollController();
+  final ScrollController _pinnedChips = ScrollController();
+  bool _cover = false;
+  bool _syncScheduled = false;
+  double _chipPixels = 0;
+  double? _pinAt;
+  double _measuredInset = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _page.addListener(_scheduleSync);
+    _flowChips.addListener(_rememberFlow);
+    _pinnedChips.addListener(_rememberPinned);
+    _scheduleSync();
+  }
+
+  @override
+  void didUpdateWidget(covariant _StatusBarJumpScroll oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _scheduleSync();
+  }
+
+  @override
+  void dispose() {
+    _page.removeListener(_scheduleSync);
+    _flowChips.removeListener(_rememberFlow);
+    _pinnedChips.removeListener(_rememberPinned);
+    _page.dispose();
+    _flowChips.dispose();
+    _pinnedChips.dispose();
+    super.dispose();
+  }
+
+  void _rememberFlow() {
+    if (!_cover && _flowChips.hasClients) _chipPixels = _flowChips.offset;
+  }
+
+  void _rememberPinned() {
+    if (_cover && _pinnedChips.hasClients) _chipPixels = _pinnedChips.offset;
+  }
+
+  // Measure after layout. A scroll listener runs before the pills move, so
+  // reading them there mixes the new offset with the old position.
+  void _scheduleSync() {
+    if (_syncScheduled) return;
+    _syncScheduled = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _syncScheduled = false;
+      if (mounted) _syncCover();
+    });
+  }
+
+  void _syncCover() {
+    if (!mounted || !_page.hasClients) return;
+    final topInset = MediaQuery.paddingOf(context).top;
+    if (_pinAt != null && _measuredInset != topInset) {
+      _pinAt = _pinAt! + _measuredInset - topInset;
     }
-    return false;
+    _measuredInset = topInset;
+    final box = _jumpKey.currentContext?.findRenderObject() as RenderBox?;
+    if (box != null && box.attached && box.hasSize) {
+      final top = box.localToGlobal(Offset.zero).dy;
+      _pinAt = _page.offset + top - topInset;
+    }
+    final pinAt = _pinAt;
+    if (pinAt == null) return;
+    final cover = _page.offset >= pinAt - 0.5;
+    if (cover == _cover) return;
+    setState(() => _cover = cover);
+    _restore(cover ? _pinnedChips : _flowChips);
+  }
+
+  void _restore(ScrollController controller, {int tries = 0}) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || !controller.hasClients) return;
+      final max = controller.position.maxScrollExtent;
+      if (max <= 0 && _chipPixels > 0 && tries < 2) {
+        _restore(controller, tries: tries + 1);
+        return;
+      }
+      final target = _chipPixels.clamp(0.0, max);
+      if ((controller.offset - target).abs() >= 0.5) {
+        controller.jumpTo(target);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final topInset = MediaQuery.paddingOf(context).top;
+    final colors = GuideColors.of(context);
+    return Stack(
+      children: [
+        CustomScrollView(
+          key: const Key('guide-species-scroll'),
+          controller: _page,
+          slivers: [
+            for (final child in widget.leading)
+              SliverToBoxAdapter(child: child),
+            SliverToBoxAdapter(
+              child: ExcludeSemantics(
+                excluding: _cover,
+                child: _JumpBar(
+                  key: _jumpKey,
+                  chips: widget.chips,
+                  onJump: widget.onJump,
+                  controller: _flowChips,
+                ),
+              ),
+            ),
+            ...widget.trailing,
+          ],
+        ),
+        if (_cover)
+          PositionedDirectional(
+            top: 0,
+            start: 0,
+            end: 0,
+            child: ColoredBox(
+              key: const Key('guide-species-jump-cover'),
+              color: colors.paper,
+              child: Padding(
+                padding: EdgeInsets.only(top: topInset),
+                child: _JumpBar(
+                  chips: widget.chips,
+                  onJump: widget.onJump,
+                  controller: _pinnedChips,
+                ),
+              ),
+            ),
+          ),
+      ],
+    );
   }
 }
 
@@ -2665,19 +2828,19 @@ class _SourceMore extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-              Icon(
-                expanded ? Icons.expand_less : Icons.expand_more,
-                color: colors.moss,
-              ),
-              if (!expanded)
-                Text(
-                  '+$hidden',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: colors.moss,
-                  ),
+                Icon(
+                  expanded ? Icons.expand_less : Icons.expand_more,
+                  color: colors.moss,
                 ),
+                if (!expanded)
+                  Text(
+                    '+$hidden',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: colors.moss,
+                    ),
+                  ),
               ],
             ),
           ),
