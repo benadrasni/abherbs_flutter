@@ -149,22 +149,30 @@ class _GuidePetalPageState extends State<GuidePetalPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  strings.guide_key_step_petal.toUpperCase(),
-                  style: GuideType.eyebrow(colors),
-                ),
-                const SizedBox(height: 8),
-                const GuideKeyStepper(filled: 3),
-                const SizedBox(height: 12),
-                Text(strings.guide_petal_question,
-                    style: GuideType.question(colors)),
-                const SizedBox(height: 6),
-                Text(
-                  strings.guide_petal_hint,
-                  style: TextStyle(
-                    fontSize: 13,
-                    height: 1.4,
-                    color: colors.ink3,
+                GuideFoldLeading(
+                  originX: 20,
+                  child: (context) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        strings.guide_key_step_petal.toUpperCase(),
+                        style: GuideType.eyebrow(colors),
+                      ),
+                      const SizedBox(height: 8),
+                      const GuideKeyStepper(filled: 3),
+                      const SizedBox(height: 12),
+                      Text(strings.guide_petal_question,
+                          style: GuideType.question(colors)),
+                      const SizedBox(height: 6),
+                      Text(
+                        strings.guide_petal_hint,
+                        style: TextStyle(
+                          fontSize: 13,
+                          height: 1.4,
+                          color: colors.ink3,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 14),
@@ -178,8 +186,10 @@ class _GuidePetalPageState extends State<GuidePetalPage> {
   }
 
   List<Widget> _petalTiles() {
-    final perRow =
-        GuideWindow.of(context).columns(phone: 2, tablet: 4, wide: 4);
+    final perRow = GuideFold.across(
+      context,
+      GuideWindow.of(context).columns(phone: 2, tablet: 4, wide: 4),
+    );
     final tiles = <Widget>[];
     for (var i = 0; i < guidePetalIds.length; i += perRow) {
       if (tiles.isNotEmpty) tiles.add(const SizedBox(height: 10));
@@ -189,6 +199,7 @@ class _GuidePetalPageState extends State<GuidePetalPage> {
       tiles.add(
         _PetalRow(
           ids: guidePetalIds.sublist(i, end),
+          columns: perRow,
           counts: _counts,
           onPick: _pick,
         ),
@@ -219,27 +230,26 @@ class _ColorDot extends StatelessWidget {
 
 class _PetalRow extends StatelessWidget {
   final List<String> ids;
+  final int columns;
   final Map<String, int>? counts;
   final ValueChanged<String> onPick;
 
   const _PetalRow({
     required this.ids,
+    required this.columns,
     required this.counts,
     required this.onPick,
   });
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          for (var i = 0; i < ids.length; i++) ...[
-            if (i > 0) const SizedBox(width: 10),
-            Expanded(child: _tile(context, ids[i])),
-          ],
-        ],
-      ),
+    // The page pads this row by 20, so the crease is measured from there.
+    return GuideFoldRow(
+      columns: columns,
+      gap: 10,
+      originX: 20,
+      stretch: true,
+      children: [for (final id in ids) _tile(context, id)],
     );
   }
 

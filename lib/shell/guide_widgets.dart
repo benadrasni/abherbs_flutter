@@ -1,12 +1,16 @@
+import 'dart:math' as math;
+
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
+import 'package:abherbs_flutter/shell/guide_fold.dart';
 import 'package:abherbs_flutter/shell/guide_window.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 
+export 'package:abherbs_flutter/shell/guide_fold.dart';
 export 'package:abherbs_flutter/shell/guide_window.dart';
 
 class GuideTitleBar extends StatelessWidget {
@@ -344,28 +348,15 @@ class GuideKeyScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wide = GuideWindow.of(context).wide;
     return GuideTheme(
       navigationColor: (colors) => withTabs ? colors.cream : colors.paper,
-      child: Scaffold(
-        body: SafeArea(
-          // Phone tabs pad the navigation-bar inset. A wide screen, and a
-          // page without tabs, pads it here so the banner stays above the bar.
-          bottom: wide || !withTabs,
-          child: guideWithRail(
-            context,
-            showAd: wide && withTabs,
-            onSelect: (index) => leaveGuideKeyForTab(context, index),
-            child: child,
-          ),
-        ),
-        bottomNavigationBar: wide || !withTabs
-            ? null
-            : GuideBottomBar(
-                index: 0,
-                showAd: true,
-                onSelect: (index) => leaveGuideKeyForTab(context, index),
-              ),
+      child: guideChromeFrame(
+        context,
+        index: 0,
+        tabs: withTabs,
+        showAd: withTabs,
+        onSelect: (index) => leaveGuideKeyForTab(context, index),
+        child: child,
       ),
     );
   }
@@ -397,6 +388,108 @@ Widget guideWithRail(
         ),
       ),
     ],
+  );
+}
+
+/// Phone tabs stay on the bottom. A wide window uses the leading rail.
+///
+/// iPhone Duo draws the status bar down one side, and Find, Book, and Seen
+/// sit in that column, under the clock. The content column drops that side's
+/// inset so a nested [SafeArea] does not pad it a second time. There is no
+/// leading rail on that path: the side column is the only tab control.
+Widget guideChromeFrame(
+  BuildContext context, {
+  required Widget child,
+  required int index,
+  required ValueChanged<int> onSelect,
+  bool tabs = true,
+  bool showAd = false,
+  bool personOn = false,
+}) {
+  final wide = GuideWindow.of(context).wide;
+  final chrome = GuideChrome.of(context);
+  final crease = GuideFold.verticalCrease(context);
+  if (crease != null && tabs && !wide) {
+    // The hinge crosses the middle of a full-width bar, so Find and Book
+    // stay on the left page and Seen stays on the right.
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: SafeArea(
+              bottom: false,
+              child: guideWithRail(
+                context,
+                personOn: personOn,
+                showAd: false,
+                onSelect: onSelect,
+                child: child,
+              ),
+            ),
+          ),
+          if (showAd) const AppBannerAd(pinned: true),
+          _GuideFoldTabs(index: index, onSelect: onSelect),
+        ],
+      ),
+    );
+  }
+  if (chrome.vertical) {
+    if (!tabs) {
+      return Scaffold(body: SafeArea(child: child));
+    }
+    final media = MediaQuery.of(context);
+    final padding = chrome.onRight
+        ? media.padding.copyWith(right: 0)
+        : media.padding.copyWith(left: 0);
+    final viewPadding = chrome.onRight
+        ? media.viewPadding.copyWith(right: 0)
+        : media.viewPadding.copyWith(left: 0);
+    final content = MediaQuery(
+      data: media.copyWith(padding: padding, viewPadding: viewPadding),
+      child: SafeArea(
+        child: Column(
+          children: [
+            Expanded(child: child),
+            if (showAd) const AppBannerAd(pinned: true),
+          ],
+        ),
+      ),
+    );
+    final column = _GuideSideTabs(
+      index: index,
+      side: chrome.side,
+      onRight: chrome.onRight,
+      onSelect: onSelect,
+    );
+    return Scaffold(
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: chrome.onRight
+            ? [Expanded(child: content), column]
+            : [column, Expanded(child: content)],
+      ),
+    );
+  }
+  return Scaffold(
+    body: SafeArea(
+      // Phone tabs pad the navigation-bar inset. A wide screen, and a page
+      // without tabs, pads it here so the banner stays above the bar.
+      bottom: wide || !tabs,
+      child: guideWithRail(
+        context,
+        personOn: personOn,
+        showAd: wide && showAd,
+        onSelect: onSelect,
+        child: child,
+      ),
+    ),
+    bottomNavigationBar: wide || !tabs
+        ? null
+        : GuideBottomBar(
+            index: index,
+            showAd: showAd,
+            onSelect: onSelect,
+          ),
   );
 }
 
@@ -497,11 +590,208 @@ class GuideBottomBar extends StatelessWidget {
 
 const guideUnconfirmedBadgeKey = Key('guide-seen-unconfirmed');
 
-class GuideTabBar extends StatelessWidget {
+/// Find, Book, and Seen in equal thirds. Book is the center of the bar.
+class _GuideFoldTabs extends StatelessWidget {
   final int index;
   final ValueChanged<int> onSelect;
 
-  const GuideTabBar({super.key, required this.index, required this.onSelect});
+  const _GuideFoldTabs({required this.index, required this.onSelect});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    final bottom = MediaQuery.paddingOf(context).bottom;
+    final rule = BorderSide(color: colors.rule);
+    return ColoredBox(
+      color: colors.cream,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: bottom),
+        child: SizedBox(
+          height: 60,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final width = constraints.maxWidth;
+              final fold = GuideFold.verticalCrease(context, minPage: 80);
+              final placed =
+                  fold == null ? null : GuideFold.tabCenters(width: width);
+              if (fold == null || placed == null || !width.isFinite) {
+                return DecoratedBox(
+                  decoration: BoxDecoration(border: Border(top: rule)),
+                  child: GuideTabBar(
+                    index: index,
+                    onSelect: onSelect,
+                    framed: false,
+                  ),
+                );
+              }
+              final mirror =
+                  Directionality.of(context) != TextDirection.ltr;
+              final List<double> centers;
+              final List<int> indexes;
+              if (mirror) {
+                centers = [for (final center in placed) width - center]
+                  ..sort();
+                indexes = const [2, 1, 0];
+              } else {
+                centers = placed;
+                indexes = const [0, 1, 2];
+              }
+              final creaseLeft = fold.leading;
+              final creaseRight = fold.leading + fold.span;
+              return Stack(
+                children: [
+                  Positioned(
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: creaseLeft,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(border: Border(top: rule)),
+                    ),
+                  ),
+                  Positioned(
+                    left: creaseRight,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(border: Border(top: rule)),
+                    ),
+                  ),
+                  for (var slot = 0; slot < 3; slot++)
+                    _foldTabSlot(
+                      context,
+                      width: width,
+                      centers: centers,
+                      indexes: indexes,
+                      slot: slot,
+                      creaseLeft: creaseLeft,
+                      creaseRight: creaseRight,
+                      selected: index,
+                      onSelect: onSelect,
+                      colors: colors,
+                    ),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// One tab. The glyph stays on [centers]. A tab that is off the crease
+/// stops at the hinge. The middle tab is the center, so its target crosses it.
+Widget _foldTabSlot(
+  BuildContext context, {
+  required double width,
+  required List<double> centers,
+  required List<int> indexes,
+  required int slot,
+  required double creaseLeft,
+  required double creaseRight,
+  required int selected,
+  required ValueChanged<int> onSelect,
+  required GuideColors colors,
+}) {
+  final center = centers[slot];
+  var left = slot == 0 ? 0.0 : (centers[slot - 1] + center) / 2;
+  var right = slot == 2 ? width : (center + centers[slot + 1]) / 2;
+  if (center <= creaseLeft) {
+    if (right > creaseLeft) right = creaseLeft;
+  } else if (center >= creaseRight && left < creaseRight) {
+    left = creaseRight;
+  }
+  final span = right - left;
+  if (span <= 0) return const SizedBox.shrink();
+  final room = math.min(center - left, right - center);
+  final visual = room <= 0 ? span : math.min(span, room * 2);
+  // Alignment moves the child by a fraction of the spare space, not of the
+  // slot. Dividing by the slot width leaves the glyph short of [center].
+  final spare = (span - visual) / 2;
+  final align = Alignment(
+    spare <= 0 ? 0 : ((center - (left + span / 2)) / spare).clamp(-1.0, 1.0),
+    0,
+  );
+  final tab = indexes[slot];
+  final strings = S.of(context);
+  final items = [
+    (strings.guide_tab_find, Icons.center_focus_weak),
+    (strings.guide_tab_book, Icons.menu_book_outlined),
+    (strings.guide_tab_seen, Icons.article_outlined),
+  ];
+  return Positioned(
+    left: left,
+    width: span,
+    top: 0,
+    bottom: 0,
+    child: ValueListenableBuilder<int>(
+      valueListenable: GuideTabs.unconfirmed,
+      builder: (context, unconfirmed, _) {
+        final on = tab == selected;
+        final ink = on ? colors.moss : colors.ink3;
+        return _TabSemantics(
+          spoken: _tabSpoken(
+            context,
+            items[tab].$1,
+            tab,
+            items.length,
+            unconfirmed: tab == 2 ? unconfirmed : 0,
+          ),
+          selected: on,
+          onPressed: () => onSelect(tab),
+          child: InkWell(
+            onTap: () => onSelect(tab),
+            excludeFromSemantics: true,
+            child: Align(
+              alignment: align,
+              child: SizedBox(
+                width: visual,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _TabIcon(
+                      icon: items[tab].$2,
+                      color: ink,
+                      unconfirmed: tab == 2 ? unconfirmed : 0,
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      items[tab].$1,
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: on ? FontWeight.w600 : FontWeight.w400,
+                        color: ink,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    ),
+  );
+}
+
+class GuideTabBar extends StatelessWidget {
+  final int index;
+  final ValueChanged<int> onSelect;
+  final List<int> indexes;
+  final bool framed;
+
+  const GuideTabBar({
+    super.key,
+    required this.index,
+    required this.onSelect,
+    this.indexes = const [0, 1, 2],
+    this.framed = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -515,6 +805,53 @@ class GuideTabBar extends StatelessWidget {
           (S.of(context).guide_tab_book, Icons.menu_book_outlined),
           (S.of(context).guide_tab_seen, Icons.article_outlined),
         ];
+        final row = SizedBox(
+          height: 60,
+          child: Row(
+            children: [
+              for (final i in indexes)
+                Expanded(
+                  child: _TabSemantics(
+                    spoken: _tabSpoken(
+                      context,
+                      items[i].$1,
+                      i,
+                      items.length,
+                      unconfirmed: i == 2 ? unconfirmed : 0,
+                    ),
+                    selected: i == index,
+                    onPressed: () => onSelect(i),
+                    child: InkWell(
+                      onTap: () => onSelect(i),
+                      excludeFromSemantics: true,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _TabIcon(
+                            icon: items[i].$2,
+                            color: i == index ? colors.moss : colors.ink3,
+                            unconfirmed: i == 2 ? unconfirmed : 0,
+                          ),
+                          const SizedBox(height: 3),
+                          Text(
+                            items[i].$1,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: i == index
+                                  ? FontWeight.w600
+                                  : FontWeight.w400,
+                              color: i == index ? colors.moss : colors.ink3,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        );
+        if (!framed) return row;
         return DecoratedBox(
           decoration: BoxDecoration(
             color: colors.cream,
@@ -522,13 +859,62 @@ class GuideTabBar extends StatelessWidget {
           ),
           child: Padding(
             padding: EdgeInsets.only(bottom: bottom),
-            child: SizedBox(
-              height: 60,
-              child: Row(
-                children: [
-                  for (var i = 0; i < items.length; i++)
-                    Expanded(
-                      child: _TabSemantics(
+            child: row,
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// Find, Book, and Seen in the Duo status column. Bottom-aligned so the
+/// clock and the Dynamic Island keep the top of that column.
+class _GuideSideTabs extends StatelessWidget {
+  final int index;
+  final double side;
+  final bool onRight;
+  final ValueChanged<int> onSelect;
+
+  const _GuideSideTabs({
+    required this.index,
+    required this.side,
+    required this.onRight,
+    required this.onSelect,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<int>(
+      valueListenable: GuideTabs.unconfirmed,
+      builder: (context, unconfirmed, _) {
+        final colors = GuideColors.of(context);
+        final bottom = MediaQuery.paddingOf(context).bottom;
+        final items = [
+          (S.of(context).guide_tab_find, Icons.center_focus_weak),
+          (S.of(context).guide_tab_book, Icons.menu_book_outlined),
+          (S.of(context).guide_tab_seen, Icons.article_outlined),
+        ];
+        final rule = BorderSide(color: colors.rule);
+        return DecoratedBox(
+          key: const Key('guide-side-tabs'),
+          decoration: BoxDecoration(
+            color: colors.cream,
+            border: Border(
+              left: onRight ? rule : BorderSide.none,
+              right: onRight ? BorderSide.none : rule,
+            ),
+          ),
+          child: SizedBox(
+            width: side,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: bottom),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (var i = 0; i < items.length; i++)
+                      _TabSemantics(
                         spoken: _tabSpoken(
                           context,
                           items[i].$1,
@@ -541,31 +927,46 @@ class GuideTabBar extends StatelessWidget {
                         child: InkWell(
                           onTap: () => onSelect(i),
                           excludeFromSemantics: true,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              _TabIcon(
-                                icon: items[i].$2,
-                                color: i == index ? colors.moss : colors.ink3,
-                                unconfirmed: i == 2 ? unconfirmed : 0,
+                          child: SizedBox(
+                            height: 72,
+                            width: double.infinity,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  _TabIcon(
+                                    icon: items[i].$2,
+                                    color:
+                                        i == index ? colors.moss : colors.ink3,
+                                    unconfirmed: i == 2 ? unconfirmed : 0,
+                                  ),
+                                  const SizedBox(height: 3),
+                                  Text(
+                                    items[i].$1,
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      height: 1.15,
+                                      fontWeight: i == index
+                                          ? FontWeight.w600
+                                          : FontWeight.w400,
+                                      color: i == index
+                                          ? colors.moss
+                                          : colors.ink3,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(height: 3),
-                              Text(
-                                items[i].$1,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: i == index
-                                      ? FontWeight.w600
-                                      : FontWeight.w400,
-                                  color: i == index ? colors.moss : colors.ink3,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

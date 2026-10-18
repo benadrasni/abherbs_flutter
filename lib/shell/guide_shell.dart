@@ -571,7 +571,6 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     GuideTabs.openPerson = openGuideAccount;
     GuideTabs.index = _index;
     final prompt = _versionPrompt;
-    final wide = GuideWindow.of(context).wide;
     final showAd = (_index == 0 || _index == 1) && Purchases.showsAds();
     final pages = Column(
       children: [
@@ -622,25 +621,12 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     );
     return GuideTheme(
       navigationColor: (colors) => colors.cream,
-      child: Scaffold(
-        body: SafeArea(
-          // The phone tab bar pads the navigation-bar inset. A wide layout
-          // has no tab bar, so the page and the banner clear it here.
-          bottom: wide,
-          child: guideWithRail(
-            context,
-            showAd: wide && showAd,
-            onSelect: _go,
-            child: pages,
-          ),
-        ),
-        bottomNavigationBar: wide
-            ? null
-            : GuideBottomBar(
-                index: _index,
-                showAd: showAd,
-                onSelect: _go,
-              ),
+      child: guideChromeFrame(
+        context,
+        index: _index,
+        showAd: showAd,
+        onSelect: _go,
+        child: pages,
       ),
     );
   }

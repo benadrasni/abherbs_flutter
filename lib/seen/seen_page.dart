@@ -91,9 +91,10 @@ class _SeenPageState extends State<SeenPage> {
         : (hiding ? guideSeenHidingShared(finds).toList() : finds);
     final notebook = visible == null ? null : arrangeGuideSeen(visible);
     final tiles = _seenTiles(strings, notebook, finds, hiding, visible);
+    final lines = _seenLines(context, tiles);
     return ListView.builder(
       padding: const EdgeInsets.only(bottom: 24),
-      itemCount: tiles.length + 1,
+      itemCount: lines.length + 1,
       itemBuilder: (context, index) {
         if (index == 0) {
           return GuideTitleBar(
@@ -139,7 +140,48 @@ class _SeenPageState extends State<SeenPage> {
             },
           );
         }
-        final tile = tiles[index - 1];
+        final line = lines[index - 1];
+        final kind = line.first.kind;
+        final paired = kind == _SeenTileKind.find || kind == _SeenTileKind.confirm;
+        if (paired && GuideFold.verticalCrease(context) != null) {
+          // One find on each page, so the name does not run through the hinge.
+          return GuideFoldRow(
+            columns: 2,
+            gap: 0,
+            gutter: 0,
+            children: [
+              for (final tile in line)
+                _seenTile(
+                  context,
+                  tile,
+                  strings,
+                  colors,
+                  hiding: hiding,
+                  sharedCount: sharedCount,
+                ),
+            ],
+          );
+        }
+        return _seenTile(
+          context,
+          line.single,
+          strings,
+          colors,
+          hiding: hiding,
+          sharedCount: sharedCount,
+        );
+      },
+    );
+  }
+
+  Widget _seenTile(
+    BuildContext context,
+    _SeenTile tile,
+    S strings,
+    GuideColors colors, {
+    required bool hiding,
+    required int sharedCount,
+  }) {
         switch (tile.kind) {
           case _SeenTileKind.spinner:
             return const Padding(
@@ -221,8 +263,38 @@ class _SeenPageState extends State<SeenPage> {
               },
             );
         }
-      },
-    );
+  }
+
+  /// Find and confirm cards share a page when the hinge is open. Everything
+  /// else stays a full-width line. A flat or closed window keeps one tile
+  /// per line, which is the list the builder already painted.
+  List<List<_SeenTile>> _seenLines(BuildContext context, List<_SeenTile> tiles) {
+    if (GuideFold.verticalCrease(context) == null) {
+      return [for (final tile in tiles) [tile]];
+    }
+    final lines = <List<_SeenTile>>[];
+    final pending = <_SeenTile>[];
+    void flush() {
+      if (pending.isEmpty) return;
+      lines.add(List.of(pending));
+      pending.clear();
+    }
+
+    for (final tile in tiles) {
+      final pair = tile.kind == _SeenTileKind.find ||
+          tile.kind == _SeenTileKind.confirm;
+      if (!pair || (pending.isNotEmpty && pending.first.kind != tile.kind)) {
+        flush();
+      }
+      if (!pair) {
+        lines.add([tile]);
+        continue;
+      }
+      pending.add(tile);
+      if (pending.length == 2) flush();
+    }
+    flush();
+    return lines;
   }
 
   /// Rows under the title. Only the ones on screen are built, so a long

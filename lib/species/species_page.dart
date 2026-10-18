@@ -557,7 +557,16 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
   Widget build(BuildContext context) {
     return GuideTheme(
       child: Scaffold(
-        body: guideWithRail(context, child: _body(context)),
+        body: guideWithRail(
+          context,
+          // The photo still runs under a top status bar. A side column, as on
+          // iPhone Duo, keeps the plate and the text off the clock.
+          child: SafeArea(
+            top: false,
+            bottom: false,
+            child: _body(context),
+          ),
+        ),
       ),
     );
   }
@@ -755,6 +764,33 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
     final jumps = SliverToBoxAdapter(
       child: _JumpWrap(chips: chips, onJump: _jump),
     );
+    final crease = GuideFold.verticalCrease(context);
+    if (crease != null) {
+      // The crease is the gutter. The name stays on the photo's page, and
+      // the article starts on the other page.
+      return GuideFoldSplit(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        unsplit: const SizedBox.shrink(),
+        leading: ListView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.paddingOf(context).bottom,
+          ),
+          children: head,
+        ),
+        trailing: CustomScrollView(
+          key: const Key('guide-species-scroll'),
+          slivers: [
+            SliverPadding(
+              padding: EdgeInsets.only(
+                top: MediaQuery.paddingOf(context).top,
+              ),
+              sliver: jumps,
+            ),
+            ...sections,
+          ],
+        ),
+      );
+    }
     if (window.wide) {
       // The photo column still runs under the status bar. The right column
       // opens with the jump pills, so they take the same top inset the phone

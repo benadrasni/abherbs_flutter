@@ -523,21 +523,22 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
         GuideBackButton(
           label: widget.listBackLabel ?? strings.guide_back,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontFamily: GuideType.serif,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 28,
-                  height: 1.1,
-                  color: colors.ink,
+        GuideFoldLeading(
+          child: (context) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontFamily: GuideType.serif,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 28,
+                    height: 1.1,
+                    color: colors.ink,
+                  ),
                 ),
-              ),
               if (showLatin)
                 Text(
                   latin,
@@ -557,6 +558,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
             ],
           ),
         ),
+        ),
       ],
     );
   }
@@ -575,8 +577,10 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
   }
 
   List<Widget> _grid(S strings, GuideResultList arranged) {
-    final columns =
-        GuideWindow.of(context).columns(phone: 2, tablet: 3, wide: 4);
+    final columns = GuideFold.across(
+      context,
+      GuideWindow.of(context).columns(phone: 2, tablet: 3, wide: 4),
+    );
     final slots = guideResultSlots(
       arranged,
       showAd: _showAd,
@@ -616,48 +620,59 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
         : slot.count > 0
             ? strings.guide_in_flower_now(slot.count)
             : '';
+    Widget heading() {
+      return Text(
+        label.toUpperCase(),
+        style: TextStyle(
+          fontSize: 12,
+          letterSpacing: 1,
+          fontWeight: FontWeight.w600,
+          color: colors.ink3,
+        ),
+      );
+    }
+
+    Widget switcher() {
+      return GuideViewSwitch(
+        photos: strings.guide_photos,
+        plates: strings.guide_plates,
+        platesOn: _plates,
+        onPhotos: () => setState(() => _plates = false),
+        onPlates: () => setState(() => _plates = true),
+      );
+    }
+
+    // The sliver insets this row by 20. The label stays on the left page
+    // and the photo switch stays on the right.
     return Padding(
       padding: EdgeInsets.only(top: slot.inFlower ? 0 : 8, bottom: 6),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              label.toUpperCase(),
-              style: TextStyle(
-                fontSize: 12,
-                letterSpacing: 1,
-                fontWeight: FontWeight.w600,
-                color: colors.ink3,
-              ),
-            ),
-          ),
-          if (slot.controls)
-            GuideViewSwitch(
-              photos: strings.guide_photos,
-              plates: strings.guide_plates,
-              platesOn: _plates,
-              onPhotos: () => setState(() => _plates = false),
-              onPlates: () => setState(() => _plates = true),
-            ),
-        ],
+      child: GuideFoldSplit(
+        originX: 20,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        unsplit: Row(
+          children: [
+            Expanded(child: heading()),
+            if (slot.controls) switcher(),
+          ],
+        ),
+        leading: heading(),
+        trailing: slot.controls
+            ? Align(
+                alignment: AlignmentDirectional.centerEnd,
+                child: switcher(),
+              )
+            : const SizedBox.shrink(),
       ),
     );
   }
 
   Widget _row(List<GuideResultPlant> plants, int columns) {
-    return Padding(
+    // The sliver already insets the row by 20.
+    return GuideFoldRow(
+      columns: columns,
+      originX: 20,
       padding: const EdgeInsets.only(bottom: 14),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (var i = 0; i < columns; i++) ...[
-            if (i > 0) const SizedBox(width: 12),
-            Expanded(
-              child: i < plants.length ? _cell(plants[i]) : const SizedBox(),
-            ),
-          ],
-        ],
-      ),
+      children: [for (final plant in plants) _cell(plant)],
     );
   }
 

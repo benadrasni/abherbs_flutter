@@ -34,6 +34,7 @@ class FindPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final window = GuideWindow.of(context);
+    final crease = GuideFold.verticalCrease(context);
     final recent = (finds ?? const <GuideFind>[]).take(5).toList();
     final flowerLists = _findLists(lists, favorites);
     final strings = S.of(context);
@@ -77,7 +78,19 @@ class FindPage extends StatelessWidget {
           showAction: !window.wide,
           onAction: () => openGuideAccount(context),
         ),
-        if (window.tablet)
+        if (crease != null)
+          GuideFoldSplit(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            unsplit: const SizedBox.shrink(),
+            leading: Column(
+              children: [
+                const _SearchButton(),
+                _CameraCard(allowance: allowance),
+              ],
+            ),
+            trailing: _KeyCard(colorCounts: colorCounts),
+          )
+        else if (window.tablet)
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -685,31 +698,81 @@ class _GuideGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rows = (count / columns).ceil();
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: [
-          for (var row = 0; row < rows; row++) ...[
-            if (row > 0) const SizedBox(height: 12),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (var column = 0; column < columns; column++) ...[
-                  if (column > 0) const SizedBox(width: 12),
-                  Expanded(
-                    child: row * columns + column < count
-                        ? item(row * columns + column)
-                        : const SizedBox.shrink(),
-                  ),
-                ],
-              ],
-            ),
-          ],
-        ],
+    final fold = GuideFold.verticalCrease(context);
+    var across = columns;
+    if (fold != null && across.isOdd && across > 1) across -= 1;
+    if (fold == null || across < 2) {
+      return _rows(
+        across,
+        count,
+        item,
+        const EdgeInsets.symmetric(horizontal: 20),
+      );
+    }
+    final half = across ~/ 2;
+    List<int> side(bool leading) => [
+          for (var i = 0; i < count; i++)
+            if (leading ? i % across < half : i % across >= half) i,
+        ];
+    Widget page(List<int> indexes, EdgeInsetsGeometry padding) {
+      return _rows(
+        half,
+        indexes.length,
+        (local) => item(indexes[local]),
+        padding,
+      );
+    }
+
+    return GuideFoldSplit(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      unsplit: _rows(
+        across,
+        count,
+        item,
+        const EdgeInsets.symmetric(horizontal: 20),
+      ),
+      leading: page(
+        side(true),
+        const EdgeInsetsDirectional.only(start: 20, end: 6),
+      ),
+      trailing: page(
+        side(false),
+        const EdgeInsetsDirectional.only(start: 6, end: 20),
       ),
     );
   }
+}
+
+Widget _rows(
+  int columns,
+  int count,
+  Widget Function(int index) item,
+  EdgeInsetsGeometry padding,
+) {
+  final rows = count == 0 ? 0 : (count / columns).ceil();
+  return Padding(
+    padding: padding,
+    child: Column(
+      children: [
+        for (var row = 0; row < rows; row++) ...[
+          if (row > 0) const SizedBox(height: 12),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (var column = 0; column < columns; column++) ...[
+                if (column > 0) const SizedBox(width: 12),
+                Expanded(
+                  child: row * columns + column < count
+                      ? item(row * columns + column)
+                      : const SizedBox.shrink(),
+                ),
+              ],
+            ],
+          ),
+        ],
+      ],
+    ),
+  );
 }
 
 class _ToConfirmBadge extends StatelessWidget {

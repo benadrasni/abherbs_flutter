@@ -374,35 +374,33 @@ class _InflorescenceBody extends StatelessWidget {
     final primary = types.isEmpty ? '' : types.first;
     final matched = types.toSet();
     final bottom = MediaQuery.paddingOf(context).bottom;
-    final columns =
-        GuideWindow.of(context).columns(phone: 3, tablet: 4, wide: 6);
+    final columns = GuideFold.across(
+      context,
+      GuideWindow.of(context).columns(phone: 3, tablet: 4, wide: 6),
+    );
     return ListView(
       padding: EdgeInsets.fromLTRB(16, 0, 16, 28 + bottom),
       children: [
         for (var row = 0; row < guideInflorescenceKeys.length; row += columns) ...[
           if (row > 0) const SizedBox(height: 8),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          GuideFoldRow(
+            columns: columns,
+            gap: 8,
+            originX: 16,
             children: [
-              for (var column = 0; column < columns; column++) ...[
-                if (column > 0) const SizedBox(width: 8),
-                Expanded(
-                  child: row + column < guideInflorescenceKeys.length
-                      ? _InflorescenceCell(
-                          type: guideInflorescenceKeys[row + column],
-                          label: _inflorescenceLabel(
-                            strings,
-                            guideInflorescenceKeys[row + column],
-                          ),
-                          matched: matched.contains(
-                            guideInflorescenceKeys[row + column],
-                          ),
-                          primary:
-                              guideInflorescenceKeys[row + column] == primary,
-                        )
-                      : const SizedBox.shrink(),
-                ),
-              ],
+              for (var column = 0; column < columns; column++)
+                if (row + column < guideInflorescenceKeys.length)
+                  _InflorescenceCell(
+                    type: guideInflorescenceKeys[row + column],
+                    label: _inflorescenceLabel(
+                      strings,
+                      guideInflorescenceKeys[row + column],
+                    ),
+                    matched: matched.contains(
+                      guideInflorescenceKeys[row + column],
+                    ),
+                    primary: guideInflorescenceKeys[row + column] == primary,
+                  ),
             ],
           ),
         ],

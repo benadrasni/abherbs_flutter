@@ -319,16 +319,27 @@ class _BookPageState extends State<BookPage> {
       itemCount: rows,
       itemBuilder: (context, row) {
         final start = row * columns;
-        return Row(
+        Widget cell(int column) {
+          final index = start + column;
+          if (index >= count) return const SizedBox.shrink();
+          return item(context, index);
+        }
+
+        final equal = Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             for (var column = 0; column < columns; column++)
-              Expanded(
-                child: start + column < count
-                    ? item(context, start + column)
-                    : const SizedBox.shrink(),
-              ),
+              Expanded(child: cell(column)),
           ],
+        );
+        // The sliver is inset by 10, so the crease is measured from there.
+        if (columns != 2) return equal;
+        return GuideFoldSplit(
+          originX: 10,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          unsplit: equal,
+          leading: cell(0),
+          trailing: cell(1),
         );
       },
     );
@@ -410,9 +421,8 @@ class _Segments extends StatelessWidget {
         guideBookListsKey,
       ),
     ];
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
-      child: DecoratedBox(
+    Widget bar(List<int> slots) {
+      return DecoratedBox(
         decoration: BoxDecoration(
           color: colors.cream,
           borderRadius: BorderRadius.circular(12),
@@ -422,17 +432,36 @@ class _Segments extends StatelessWidget {
           borderRadius: BorderRadius.circular(11),
           child: Row(
             children: [
-              for (final item in items)
+              for (final slot in slots)
                 Expanded(
                   child: _Segment(
-                    label: item.$2,
-                    selected: segment == item.$1,
-                    buttonKey: item.$3,
-                    onTap: () => onChanged(item.$1),
+                    label: items[slot].$2,
+                    selected: segment == items[slot].$1,
+                    buttonKey: items[slot].$3,
+                    onTap: () => onChanged(items[slot].$1),
                   ),
                 ),
             ],
           ),
+        ),
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: GuideFoldSplit(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        unsplit: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: bar(const [0, 1, 2]),
+        ),
+        leading: Padding(
+          padding: const EdgeInsetsDirectional.only(start: 20, end: 6),
+          child: bar(const [0, 1]),
+        ),
+        trailing: Padding(
+          padding: const EdgeInsetsDirectional.only(start: 6, end: 20),
+          child: bar(const [2]),
         ),
       ),
     );

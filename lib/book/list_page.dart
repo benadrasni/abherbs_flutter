@@ -175,8 +175,10 @@ class _GuideNewPageState extends State<GuideNewPage> {
     if (days == null && _loading) return const [_Waiting()];
     if (days == null && _failed) return [_Retry(onRetry: _load)];
     if (days == null) return const [];
-    final columns =
-        GuideWindow.of(context).columns(phone: 2, tablet: 3, wide: 4);
+    final columns = GuideFold.across(
+      context,
+      GuideWindow.of(context).columns(phone: 2, tablet: 3, wide: 4),
+    );
     final rows = <Widget>[];
     final pending = <GuideResultPlant>[];
     void flush() {
@@ -385,8 +387,10 @@ class _GuideYearPageState extends State<GuideYearPage> {
   }
 
   List<Widget> _grid(List<GuideYearEntry> entries) {
-    final columns =
-        GuideWindow.of(context).columns(phone: 2, tablet: 3, wide: 4);
+    final columns = GuideFold.across(
+      context,
+      GuideWindow.of(context).columns(phone: 2, tablet: 3, wide: 4),
+    );
     final year = widget.now().year;
     final rows = <Widget>[];
     for (var i = 0; i < entries.length; i += columns) {
@@ -468,15 +472,16 @@ class _ListChrome extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GuideBackButton(label: backLabel),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        strings.custom_lists.toUpperCase(),
-                        style: GuideType.eyebrow(colors),
-                      ),
+                GuideFoldLeading(
+                  child: (context) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          strings.custom_lists.toUpperCase(),
+                          style: GuideType.eyebrow(colors),
+                        ),
                       const SizedBox(height: 4),
                       Text(
                         title,
@@ -531,6 +536,7 @@ class _ListChrome extends StatelessWidget {
                     ],
                   ),
                 ),
+                ),
               ],
             ),
           ),
@@ -565,19 +571,13 @@ class _ListChrome extends StatelessWidget {
 }
 
 Widget _plantRow(int columns, List<Widget> cells) {
-  return Padding(
+  // The sliver already insets the row by 20, so the crease is measured
+  // from there.
+  return GuideFoldRow(
+    columns: columns,
+    originX: 20,
     padding: const EdgeInsets.only(bottom: 14),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        for (var i = 0; i < columns; i++) ...[
-          if (i > 0) const SizedBox(width: 12),
-          Expanded(
-            child: i < cells.length ? cells[i] : const SizedBox.shrink(),
-          ),
-        ],
-      ],
-    ),
+    children: cells,
   );
 }
 
@@ -759,15 +759,18 @@ class _DateHeader extends StatelessWidget {
             todayLabel: strings.guide_new_today,
             yesterdayLabel: strings.guide_new_yesterday,
           );
-    return Padding(
-      padding: EdgeInsets.only(top: first ? 4 : 10, bottom: 8),
-      child: Text(
-        label.toUpperCase(),
-        style: TextStyle(
-          fontSize: 12,
-          letterSpacing: 1,
-          fontWeight: FontWeight.w600,
-          color: colors.ink3,
+    return GuideFoldLeading(
+      originX: 20,
+      child: (context) => Padding(
+        padding: EdgeInsets.only(top: first ? 4 : 10, bottom: 8),
+        child: Text(
+          label.toUpperCase(),
+          style: TextStyle(
+            fontSize: 12,
+            letterSpacing: 1,
+            fontWeight: FontWeight.w600,
+            color: colors.ink3,
+          ),
         ),
       ),
     );

@@ -165,23 +165,33 @@ class _GuideHabitatPageState extends State<GuideHabitatPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  strings.guide_key_step_habitat.toUpperCase(),
-                  style: GuideType.eyebrow(colors),
-                ),
-                const SizedBox(height: 8),
-                const GuideKeyStepper(filled: 2),
-                const SizedBox(height: 12),
-                Text(
-                  strings.guide_habitat_question,
-                  style: GuideType.question(colors),
+                GuideFoldLeading(
+                  originX: 20,
+                  child: (context) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        strings.guide_key_step_habitat.toUpperCase(),
+                        style: GuideType.eyebrow(colors),
+                      ),
+                      const SizedBox(height: 8),
+                      const GuideKeyStepper(filled: 2),
+                      const SizedBox(height: 12),
+                      Text(
+                        strings.guide_habitat_question,
+                        style: GuideType.question(colors),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 14),
                 ..._habitatTiles(),
                 const SizedBox(height: 14),
-                SizedBox(
-                  width: double.infinity,
-                  child: TextButton(
+                GuideFoldLeading(
+                  originX: 20,
+                  child: (context) => SizedBox(
+                    width: double.infinity,
+                    child: TextButton(
                     onPressed: _skip,
                     style: TextButton.styleFrom(
                       foregroundColor: colors.moss,
@@ -196,6 +206,7 @@ class _GuideHabitatPageState extends State<GuideHabitatPage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
+                  ),
                 ),
               ],
             ),
@@ -206,8 +217,10 @@ class _GuideHabitatPageState extends State<GuideHabitatPage> {
   }
 
   List<Widget> _habitatTiles() {
-    final perRow =
-        GuideWindow.of(context).columns(phone: 2, tablet: 4, wide: 4);
+    final perRow = GuideFold.across(
+      context,
+      GuideWindow.of(context).columns(phone: 2, tablet: 4, wide: 4),
+    );
     final tiles = <Widget>[];
     for (var i = 0; i < guideHabitatIds.length; i += perRow) {
       if (tiles.isNotEmpty) tiles.add(const SizedBox(height: 8));
@@ -217,6 +230,7 @@ class _GuideHabitatPageState extends State<GuideHabitatPage> {
       tiles.add(
         _HabitatRow(
           ids: guideHabitatIds.sublist(i, end),
+          columns: perRow,
           counts: _counts,
           onPick: _pick,
         ),
@@ -253,27 +267,25 @@ class _ColorDot extends StatelessWidget {
 
 class _HabitatRow extends StatelessWidget {
   final List<String> ids;
+  final int columns;
   final GuideHabitatCounts? counts;
   final ValueChanged<String> onPick;
 
   const _HabitatRow({
     required this.ids,
+    required this.columns,
     required this.counts,
     required this.onPick,
   });
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          for (var i = 0; i < ids.length; i++) ...[
-            if (i > 0) const SizedBox(width: 8),
-            Expanded(child: _tile(context, ids[i])),
-          ],
-        ],
-      ),
+    return GuideFoldRow(
+      columns: columns,
+      gap: 8,
+      originX: 20,
+      stretch: true,
+      children: [for (final id in ids) _tile(context, id)],
     );
   }
 

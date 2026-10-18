@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/l10n/app_locale.dart';
 import 'package:abherbs_flutter/person/setting_utils.dart';
 import 'package:abherbs_flutter/shell/guide_actions.dart';
+import 'package:abherbs_flutter/shell/guide_fold.dart';
 import 'package:abherbs_flutter/shell/guide_shell.dart';
 import 'package:abherbs_flutter/book/list_page.dart';
 import 'package:abherbs_flutter/species/species_page.dart';
@@ -607,35 +608,37 @@ class _AppState extends State<App> {
       locale: localeResolution(_locale, S.delegate.supportedLocales),
       debugShowCheckedModeBanner: false,
       builder: (BuildContext context, Widget? child) {
-        return FocusTraversalGroup(
-          policy: safeReadingOrderTraversalPolicy,
-          child: ListenableBuilder(
-            listenable: VersionGateController.instance,
-            builder: (context, navigator) {
-              final blocked =
-                  VersionGateController.instance.prompt == VersionPrompt.block;
-              return Stack(
-                children: [
-                  IgnorePointer(
-                    ignoring: blocked,
-                    child: ExcludeFocus(
-                      excluding: blocked,
-                      child: ExcludeSemantics(
+        return GuideFoldHost(
+          child: FocusTraversalGroup(
+            policy: safeReadingOrderTraversalPolicy,
+            child: ListenableBuilder(
+              listenable: VersionGateController.instance,
+              builder: (context, navigator) {
+                final blocked = VersionGateController.instance.prompt ==
+                    VersionPrompt.block;
+                return Stack(
+                  children: [
+                    IgnorePointer(
+                      ignoring: blocked,
+                      child: ExcludeFocus(
                         excluding: blocked,
-                        child: navigator ?? const SizedBox.shrink(),
+                        child: ExcludeSemantics(
+                          excluding: blocked,
+                          child: navigator ?? const SizedBox.shrink(),
+                        ),
                       ),
                     ),
-                  ),
-                  if (blocked)
-                    Positioned.fill(
-                      child: VersionRequiredPage(
-                        onUpdate: () => openAppUpdate(requiredUpdate: true),
+                    if (blocked)
+                      Positioned.fill(
+                        child: VersionRequiredPage(
+                          onUpdate: () => openAppUpdate(requiredUpdate: true),
+                        ),
                       ),
-                    ),
-                ],
-              );
-            },
-            child: child,
+                  ],
+                );
+              },
+              child: child,
+            ),
           ),
         );
       },
