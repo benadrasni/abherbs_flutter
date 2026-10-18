@@ -670,6 +670,43 @@ void main() {
     expect(find.byKey(const Key('guide-species-jump-cover')), findsNothing);
   });
 
+  testWidgets('wide jump pills sit below the status bar', (tester) async {
+    tester.view.padding = const FakeViewPadding(top: 24);
+    tester.view.viewPadding = const FakeViewPadding(top: 24);
+    addTearDown(tester.view.resetPadding);
+    addTearDown(tester.view.resetViewPadding);
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+      )),
+      size: const Size(1194, 834),
+    );
+
+    expect(
+      tester.getTopLeft(find.byKey(const Key('guide-species-jumps'))).dy,
+      greaterThanOrEqualTo(24 + 12),
+    );
+    expect(
+      tester
+          .getTopLeft(
+            find
+                .byWidgetPredicate(
+                  (widget) =>
+                      widget is ColoredBox &&
+                      widget.color == const Color(0xFF88AA77),
+                )
+                .first,
+          )
+          .dy,
+      0,
+    );
+  });
+
   testWidgets('cancelling the photo picker saves nothing', (tester) async {
     final saved = <GuideSeenDraft>[];
     var refreshed = 0;
@@ -1339,6 +1376,30 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.bySemanticsLabel('oxeye daisy, Tab 3 of 3'), findsOneWidget);
     expect(find.bySemanticsLabel('oxeye daisy'), findsOneWidget);
+    handle.dispose();
+  });
+
+  testWidgets('the plate slide is named apart from the plate pill',
+      (tester) async {
+    final handle = tester.ensureSemantics();
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+      )),
+      size: const Size(390, 800),
+    );
+
+    await tester.tap(find.text('Plate'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Plate'), findsOneWidget);
+    expect(find.bySemanticsLabel('Plate'), findsOneWidget);
+    expect(find.bySemanticsLabel('oxeye daisy, Plate'), findsOneWidget);
     handle.dispose();
   });
 
