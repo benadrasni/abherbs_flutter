@@ -756,6 +756,9 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
       child: _JumpWrap(chips: chips, onJump: _jump),
     );
     if (window.wide) {
+      // The photo column still runs under the status bar. The right column
+      // opens with the jump pills, so they take the same top inset the phone
+      // cover uses, above the 12-point pad inside _JumpWrap.
       return Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -772,7 +775,15 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
             flex: 58,
             child: CustomScrollView(
               key: const Key('guide-species-scroll'),
-              slivers: [jumps, ...sections],
+              slivers: [
+                SliverPadding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.paddingOf(context).top,
+                  ),
+                  sliver: jumps,
+                ),
+                ...sections,
+              ],
             ),
           ),
         ],
@@ -978,8 +989,13 @@ class _GalleryState extends State<_Gallery> {
                                     return Semantics(
                                       container: true,
                                       image: true,
+                                      // Photos are "<title>, Tab n of m" and
+                                      // are counted only among photographs.
+                                      // The plate is not one of those, so the
+                                      // slide is "<title>, Plate". The pill
+                                      // stays "Plate".
                                       label: slide.plate
-                                          ? strings.guide_plate
+                                          ? '$title, ${strings.guide_plate}'
                                           : _indexedName(
                                               context,
                                               title,
