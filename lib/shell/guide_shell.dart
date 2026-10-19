@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/data/guide_favorites.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/seen/guide_private_photos.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
+import 'package:abherbs_flutter/seen/guide_seen_store.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/shell/guide_actions.dart';
 import 'package:abherbs_flutter/shell/guide_analytics.dart';
@@ -206,6 +207,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     _seenValue = event.snapshot.value;
     _seenReady = true;
     _seenUid = guideNotebookUser()?.uid;
+    unawaited(fillGuideSeenCountries(_seenValue));
     _unconfirmedLoaded = true;
     if (!_opened.contains(2)) {
       GuideTabs.unconfirmed.value =

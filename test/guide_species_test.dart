@@ -256,9 +256,20 @@ void main() {
         'id': 'new',
         'photoPaths': ['new.jpg'],
         'date': {'time': 5000},
+        'country': 'SK',
+      },
+      'named': {
+        'status': 'public',
+        'id': 'named',
+        'photoPaths': ['named.jpg'],
+        'date': {'time': 4000},
+        'country': 'Middle Europe',
       },
     });
-    expect(sightings.map((sighting) => sighting.id), ['new', 'old', 'epoch']);
+    expect(sightings.map((sighting) => sighting.id),
+        ['new', 'named', 'old', 'epoch']);
+    expect(sightings.first.country, 'sk');
+    expect(sightings[1].country, isNull);
     expect(sightings.last.when, isNull);
     expect(sightings.first.photoPath, '${storagePhotos}new.jpg');
   });
@@ -1376,11 +1387,13 @@ void main() {
           id: 'a',
           photoPath: 'photos/a.jpg',
           when: DateTime(2021, 4, 3),
+          country: 'de',
         ),
         GuideSighting(
           id: 'b',
           photoPath: 'photos/b.jpg',
           when: DateTime(2021, 5, 8),
+          country: 'sk',
         ),
         GuideSighting(
           id: 'c',
@@ -1405,9 +1418,17 @@ void main() {
     final april = DateFormat.yMMMM('en').format(DateTime(2021, 4, 1));
     expect(find.text(may), findsNWidgets(2));
     expect(find.text(april), findsOneWidget);
+    expect(find.text('Germany'), findsOneWidget);
+    expect(find.text('Slovakia'), findsOneWidget);
+    final germany = tester.getRect(find.text('Germany'));
+    final aprilRect = tester.getRect(find.text(april));
+    expect(germany.top, lessThan(aprilRect.top));
+    expect(germany.left, greaterThan(aprilRect.left));
     expect(find.bySemanticsLabel(may), findsNothing);
-    expect(find.bySemanticsLabel('$april, Tab 1 of 3'), findsOneWidget);
-    expect(find.bySemanticsLabel('$may, Tab 2 of 3'), findsOneWidget);
+    expect(
+        find.bySemanticsLabel('$april · Germany, Tab 1 of 3'), findsOneWidget);
+    expect(
+        find.bySemanticsLabel('$may · Slovakia, Tab 2 of 3'), findsOneWidget);
     expect(find.bySemanticsLabel('$may, Tab 3 of 3'), findsOneWidget);
     handle.dispose();
   });

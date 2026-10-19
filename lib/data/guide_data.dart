@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:abherbs_flutter/data/guide_location.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/data/plant_translation.dart';
 import 'package:abherbs_flutter/key/filter_utils.dart';
@@ -1875,6 +1876,8 @@ Future<void> saveGuideSeen(GuideSeenDraft draft) async {
   observation.order = -draft.when.millisecondsSinceEpoch;
   observation.confirmed = true;
   observation.source = observationSourceManual;
+  observation.country =
+      await guideCountryCode(draft.latitude, draft.longitude) ?? '';
   final json = observation.toJson();
   final root = privateObservationsReference.child(user.uid);
   await root

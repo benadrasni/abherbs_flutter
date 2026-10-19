@@ -13,6 +13,7 @@ import 'package:abherbs_flutter/person/sign_in_page.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/shell/guide_analytics.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
@@ -898,7 +899,20 @@ String _detailOf(BuildContext context, GuideSeenFind find) {
   final when = DateFormat.MMMd(
     Localizations.localeOf(context).toString(),
   ).format(find.when);
-  return guideSeenDetail(when, find.place);
+  final country = _seenCountryName(context, find.country);
+  final dated = country == null ? when : '$when · $country';
+  return guideSeenDetail(dated, find.place);
+}
+
+String? _seenCountryName(BuildContext context, String? code) {
+  if (code == null || code.isEmpty) return null;
+  final country = Country.tryParse(code.toUpperCase());
+  if (country == null) return code.toUpperCase();
+  final translated = country.getTranslatedName(context)?.trim();
+  if (translated != null && translated.isNotEmpty) return translated;
+  final name = country.name.trim();
+  if (name.isNotEmpty) return name;
+  return code.toUpperCase();
 }
 
 class _CardAction extends StatelessWidget {
@@ -972,9 +986,6 @@ class _FindRow extends StatelessWidget {
     final named = find.label != null && find.label!.trim().isNotEmpty;
     final chip = guideSeenChip(find);
     final open = find.catalogKnown ? onOpen : null;
-    final trailing = Directionality.of(context) == TextDirection.rtl
-        ? CrossAxisAlignment.start
-        : CrossAxisAlignment.end;
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(20, 9, 20, 9),
       child: Row(
@@ -1022,34 +1033,42 @@ class _FindRow extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: trailing,
-            children: [
-              if (chip != null)
-                _ShareChip(
-                  chip: chip,
-                  onShare: onShare,
-                  onWithdraw: onWithdraw,
-                  onOutside: onOpen,
-                ),
-              TextButton(
-                key: Key('guide-seen-row-delete-${find.id}'),
-                onPressed: busy ? null : onDelete,
-                style: TextButton.styleFrom(
-                  foregroundColor: colors.madder,
-                  minimumSize: Size.zero,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  textStyle: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
+          // The status can ellipsize. Delete and the 20pt gap stay intact,
+          // so the pair still fits one row on a narrow phone.
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 240),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (chip != null) ...[
+                  Flexible(
+                    child: _ShareChip(
+                      chip: chip,
+                      onShare: onShare,
+                      onWithdraw: onWithdraw,
+                      onOutside: onOpen,
+                    ),
                   ),
+                  const SizedBox(width: 20),
+                ],
+                TextButton(
+                  key: Key('guide-seen-row-delete-${find.id}'),
+                  onPressed: busy ? null : onDelete,
+                  style: TextButton.styleFrom(
+                    foregroundColor: colors.madder,
+                    minimumSize: Size.zero,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    textStyle: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  child: Text(strings.guide_outside_delete),
                 ),
-                child: Text(strings.guide_outside_delete),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -1162,7 +1181,11 @@ class _Pill extends StatelessWidget {
         ),
         textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
       ),
-      child: Text(label),
+      child: Text(
+        label,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 }
@@ -1189,6 +1212,8 @@ class _Status extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
         child: Text(
           label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,

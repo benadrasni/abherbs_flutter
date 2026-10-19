@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/key/filter_utils.dart';
 import 'package:abherbs_flutter/field_guide/field_guide_page.dart';
 import 'package:abherbs_flutter/camera/guide_camera.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
+import 'package:abherbs_flutter/data/guide_photo_pick.dart';
 import 'package:abherbs_flutter/data/guide_location.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/species/guide_species.dart';
@@ -477,10 +478,11 @@ class _GuideCameraPageState extends State<GuideCameraPage>
         await Permission.accessMediaLocation.request();
       }
     }
+    if (source == GuideCameraSource.gallery) {
+      return pickGuideDevicePhoto(maxWidth: maxWidth);
+    }
     final image = await ImagePicker().pickImage(
-      source: source == GuideCameraSource.camera
-          ? ImageSource.camera
-          : ImageSource.gallery,
+      source: ImageSource.camera,
       maxWidth: maxWidth,
     );
     if (image == null) return null;

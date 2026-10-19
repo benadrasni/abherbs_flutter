@@ -42,6 +42,9 @@ class Observation {
   String source = "";
   List<dynamic> candidates = [];
 
+  /// Lowercase ISO country of the coordinates. Empty until a lookup fills it.
+  String country = "";
+
   Observation(String plantName) {
     this.plant = plantName;
   }
@@ -66,6 +69,7 @@ class Observation {
     final candidateValue = data[observationCandidates];
     this.candidates =
         candidateValue is List ? List<dynamic>.from(candidateValue) : [];
+    this.country = guideRowCountry(data[observationCountry]) ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -85,8 +89,21 @@ class Observation {
     if (this.candidates.isNotEmpty) {
       result[observationCandidates] = this.candidates;
     }
+    final country = guideRowCountry(this.country);
+    if (country != null) result[observationCountry] = country;
     return result;
   }
+}
+
+/// A two-letter ISO code, lowercased. Anything else is no country.
+String? guideRowCountry(dynamic value) {
+  if (value is! String) return null;
+  final code = value.trim().toLowerCase();
+  if (code.length != 2) return null;
+  for (final unit in code.codeUnits) {
+    if (unit < 0x61 || unit > 0x7a) return null;
+  }
+  return code;
 }
 
 /// Firebase path key for a Latin name. Spaces stay; the forbidden characters

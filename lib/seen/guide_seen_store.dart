@@ -1,3 +1,5 @@
+import 'package:abherbs_flutter/data/guide_data.dart';
+import 'package:abherbs_flutter/data/guide_location.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/camera/guide_camera.dart';
 import 'package:abherbs_flutter/seen/guide_private_photos.dart';
@@ -8,6 +10,55 @@ import 'package:abherbs_flutter/data/utils.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/foundation.dart';
+
+final Set<String> _countryFillIds = {};
+
+/// Writes a country onto private rows that have coordinates and none yet.
+/// The Seen date line reads that field. A lookup that finds nothing is not
+/// retried until the next launch.
+Future<void> fillGuideSeenCountries(Object? value) async {
+  final uid = guideNotebookUser()?.uid;
+  if (uid == null) return;
+  final gaps = [
+    for (final gap in guideSeenCountryGaps(value))
+      if (_countryFillIds.add(gap.id)) gap,
+  ];
+  if (gaps.isEmpty) return;
+  try {
+    var next = 0;
+    Future<void> worker() async {
+      while (next < gaps.length) {
+        final gap = gaps[next];
+        next++;
+        await _storeCountry(uid, gap);
+      }
+    }
+
+    final width = gaps.length < 3 ? gaps.length : 3;
+    await Future.wait([for (var i = 0; i < width; i++) worker()]);
+  } finally {
+    for (final gap in gaps) {
+      _countryFillIds.remove(gap.id);
+    }
+  }
+}
+
+Future<void> _storeCountry(String uid, GuideSeenCountryGap gap) async {
+  try {
+    final code = await guideCountryCode(gap.latitude, gap.longitude);
+    if (code == null) return;
+    final root = privateObservationsReference.child(uid);
+    final patch = {observationCountry: code};
+    await root
+        .child(firebaseObservationsByDate)
+        .child(firebaseAttributeList)
+        .child(gap.id)
+        .update(patch);
+    await _patchPrivatePlant(root, gap.plant, gap.id, patch);
+  } catch (error) {
+    debugPrint('guide seen country ${gap.id}: $error');
+  }
+}
 
 /// Publishes one confirmed find for review. The note stays on the private
 /// row. Returns false when there is no account, no photo, or the write fails.
@@ -34,6 +85,19 @@ Future<bool> shareGuideFind(String id) async {
     observation.note = '';
     observation.candidates = [];
     observation.status = firebaseValueReview;
+    if (guideRowCountry(observation.country) == null) {
+      final code = await guideCountryCode(
+        observation.latitude,
+        observation.longitude,
+      );
+      if (code != null) {
+        observation.country = code;
+        final patch = {observationCountry: code};
+        await dateRef.update(patch);
+        await _patchPrivatePlant(
+            root, observation.plant, observation.id, patch);
+      }
+    }
     final json = observation.toJson();
     final plant = observation.plant;
     await publicObservationsReference

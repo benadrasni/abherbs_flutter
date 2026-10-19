@@ -1,6 +1,7 @@
 import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/data/plant_translation.dart';
 import 'package:abherbs_flutter/data/utils.dart';
+import 'package:abherbs_flutter/seen/observation.dart';
 
 const guideSpeciesRankLimit = 7;
 
@@ -47,10 +48,14 @@ class GuideSighting {
   final String photoPath;
   final DateTime? when;
 
+  /// Lowercase ISO country code, when the row has one.
+  final String? country;
+
   const GuideSighting({
     required this.id,
     required this.photoPath,
     required this.when,
+    this.country,
   });
 }
 
@@ -489,6 +494,7 @@ List<GuideSighting> guideSightings(dynamic raw) {
       id: id,
       photoPath: photo,
       when: guideObservationWhen(row),
+      country: guideRowCountry(row[observationCountry]),
     ));
   }
   sightings.sort((a, b) {

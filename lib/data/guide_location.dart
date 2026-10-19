@@ -1,7 +1,10 @@
 import 'package:abherbs_flutter/data/guide_results.dart';
+import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+
+final Map<String, Future<String?>> _countryLookups = {};
 
 /// This phone's position, for a photo taken now. Never asks for permission.
 /// Null when location is not granted, switched off, or has no fix in time.
@@ -62,4 +65,35 @@ Future<String?> locateGuideRegion() async {
     latitude: position.latitude,
     longitude: position.longitude,
   );
+}
+
+/// ISO country of a find. 0, 0 is no place and does not ask. One lookup is
+/// shared by every photo at the same thousandth of a degree.
+Future<String?> guideCountryCode(double latitude, double longitude) {
+  if (!_onGlobe(latitude, longitude)) return Future<String?>.value(null);
+  final key = '${latitude.toStringAsFixed(3)},${longitude.toStringAsFixed(3)}';
+  return _countryLookups.putIfAbsent(
+    key,
+    () => _readCountry(latitude, longitude),
+  );
+}
+
+bool _onGlobe(double latitude, double longitude) {
+  if (!latitude.isFinite || !longitude.isFinite) return false;
+  if (latitude == 0 && longitude == 0) return false;
+  if (latitude.abs() > 90 || longitude.abs() > 180) return false;
+  return true;
+}
+
+Future<String?> _readCountry(double latitude, double longitude) async {
+  try {
+    final marks = await Geocoding()
+        .placemarkFromCoordinates(latitude, longitude)
+        .timeout(const Duration(seconds: 10));
+    if (marks.isEmpty) return null;
+    return guideRowCountry(marks.first.isoCountryCode);
+  } catch (error) {
+    debugPrint('guide country: $error');
+    return null;
+  }
 }

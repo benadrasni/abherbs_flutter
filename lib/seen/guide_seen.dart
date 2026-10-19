@@ -456,15 +456,54 @@ bool guideRowIndoors(dynamic value) {
   return false;
 }
 
-/// A two-letter ISO code, lowercased. Anything else is no country.
-String? guideRowCountry(dynamic value) {
-  if (value is! String) return null;
-  final code = value.trim().toLowerCase();
-  if (code.length != 2) return null;
-  for (final unit in code.codeUnits) {
-    if (unit < 0x61 || unit > 0x7a) return null;
-  }
-  return code;
+/// A private row that has a place and no country yet.
+class GuideSeenCountryGap {
+  final String id;
+  final String plant;
+  final double latitude;
+  final double longitude;
+
+  const GuideSeenCountryGap({
+    required this.id,
+    required this.plant,
+    required this.latitude,
+    required this.longitude,
+  });
+}
+
+/// Rows the notebook can give a country. A stored code, or 0, 0, is skipped.
+List<GuideSeenCountryGap> guideSeenCountryGaps(dynamic value) {
+  if (value is! Map) return const [];
+  final gaps = <GuideSeenCountryGap>[];
+  value.forEach((key, raw) {
+    if (raw is! Map) return;
+    if (guideRowCountry(raw[observationCountry]) != null) return;
+    final nameValue = raw[observationPlant];
+    if (nameValue is! String || nameValue.trim().isEmpty) return;
+    final latitude = _asDouble(raw[observationLatitude]);
+    final longitude = _asDouble(raw[observationLongitude]);
+    if (!_hasPlace(latitude, longitude)) return;
+    final idValue = raw[observationId];
+    final id = idValue is String && idValue.isNotEmpty
+        ? idValue
+        : (key?.toString() ?? '');
+    if (id.isEmpty) return;
+    gaps.add(GuideSeenCountryGap(
+      id: id,
+      plant: nameValue.trim(),
+      latitude: latitude,
+      longitude: longitude,
+    ));
+  });
+  return gaps;
+}
+
+/// 0, 0 is no place. Same bound as a photo position.
+bool _hasPlace(double latitude, double longitude) {
+  if (!latitude.isFinite || !longitude.isFinite) return false;
+  if (latitude == 0 && longitude == 0) return false;
+  if (latitude.abs() > 90 || longitude.abs() > 180) return false;
+  return true;
 }
 
 List<GuideSeenCandidate> _candidates(dynamic raw) {

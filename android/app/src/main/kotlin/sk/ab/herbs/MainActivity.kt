@@ -1,14 +1,106 @@
 package sk.ab.herbs
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.WindowManager
 import androidx.core.view.WindowCompat
 import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
+    private var pickerResult: MethodChannel.Result? = null
+    private var pickerMaxWidth = 0
+
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        super.configureFlutterEngine(flutterEngine)
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "sk.ab.herbs/photo")
+            .setMethodCallHandler { call, result ->
+                if (call.method != "pick") {
+                    result.notImplemented()
+                    return@setMethodCallHandler
+                }
+                if (pickerResult != null) {
+                    result.error("busy", "photo picker already open", null)
+                    return@setMethodCallHandler
+                }
+                val width = call.argument<Number>("maxWidth")?.toInt() ?: 0
+                val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
+                    .setType("image/*")
+                    .putExtra(MediaStore.EXTRA_PICK_IMAGES_MAX, 1)
+                // API 37.1 name. This compile SDK has no constant for it yet.
+                // The photo picker reads the string and asks whether to keep
+                // location. The person's choice is final.
+                intent.putExtra(
+                    "android.provider.extra.REQUEST_LOCATION_METADATA_ACCESS",
+                    true,
+                )
+                pickerResult = result
+                pickerMaxWidth = width
+                try {
+                    // FlutterActivity is not a ComponentActivity, so the
+                    // activity-result registry is not available.
+                    @Suppress("DEPRECATION")
+                    startActivityForResult(intent, requestPick)
+                } catch (_: ActivityNotFoundException) {
+                    // resolveActivity is the wrong probe: from API 30 the
+                    // photo picker is hidden from package queries, so it
+                    // looks missing on phones that have it.
+                    pickerResult = null
+                    result.error("unavailable", "photo picker missing", null)
+                }
+            }
+    }
+
+    private fun pickedUri(data: Intent?): Uri? {
+        data?.data?.let { return it }
+        val clip = data?.clipData ?: return null
+        if (clip.itemCount == 0) return null
+        return clip.getItemAt(0).uri
+    }
+
+    @Deprecated("FlutterActivity is not a ComponentActivity")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == requestPick) {
+            finishPick(resultCode, pickedUri(data))
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun finishPick(resultCode: Int, uri: Uri?) {
+        val pending = pickerResult ?: return
+        pickerResult = null
+        if (resultCode != Activity.RESULT_OK || uri == null) {
+            pending.success(null)
+            return
+        }
+        val maxWidth = pickerMaxWidth
+        val app = applicationContext
+        Thread {
+            val path = try {
+                GuideGalleryPick.save(app, uri, maxWidth)
+            } catch (error: Exception) {
+                Log.e("GuideGalleryPick", "save failed", error)
+                null
+            }
+            runOnUiThread {
+                try {
+                    if (!isDestroyed) pending.success(path) else pending.success(null)
+                } catch (error: Exception) {
+                    Log.e("GuideGalleryPick", "result failed", error)
+                }
+            }
+        }.start()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Before the Flutter view is attached. Android 15+ already forces
         // edge-to-edge; this makes Android 14 and earlier match without the
@@ -58,5 +150,9 @@ class MainActivity : FlutterActivity() {
         if (requestedOrientation != target) {
             requestedOrientation = target
         }
+    }
+
+    companion object {
+        private const val requestPick = 48121
     }
 }

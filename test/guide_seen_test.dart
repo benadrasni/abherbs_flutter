@@ -1,3 +1,4 @@
+import 'package:abherbs_flutter/data/guide_location.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/camera/guide_camera.dart';
@@ -331,6 +332,7 @@ void main() {
             when: DateTime(2026, 9, 2),
             ownPhoto: true,
             inBook: true,
+            country: 'sk',
           ),
           _find(
             id: 'wait',
@@ -373,7 +375,13 @@ void main() {
     expect(another.width, closeTo(delete.width, 0.5));
     expect(find.text('SEPTEMBER 2026'), findsOneWidget);
     expect(find.text('dog rose'), findsOneWidget);
+    expect(find.text('Sep 2 · Slovakia'), findsOneWidget);
     expect(find.text('Share'), findsOneWidget);
+    final share = tester.getRect(find.byKey(const Key('guide-seen-share')));
+    final rowDelete =
+        tester.getRect(find.byKey(const Key('guide-seen-row-delete-kept')));
+    expect((share.center.dy - rowDelete.center.dy).abs(), lessThan(1));
+    expect(rowDelete.left - share.right, closeTo(20, 1));
     expect(find.text('AUGUST 2026'), findsOneWidget);
     expect(find.text('Achillea millefolium'), findsOneWidget);
     expect(find.text('In review'), findsOneWidget);
@@ -1046,6 +1054,60 @@ void main() {
     expect(find.text('Shared hidden · 1'), findsOneWidget);
     expect(find.text('snowdrop'), findsNothing);
   });
+
+  test('a private find stores a country code and nothing else', () {
+    final observation = Observation('Rosa canina');
+    observation.id = 'user_1';
+    observation.country = 'SK';
+    expect(observation.toJson()[observationCountry], 'sk');
+    observation.country = 'Middle Europe';
+    expect(observation.toJson().containsKey(observationCountry), isFalse);
+
+    final read = Observation.fromJson('user_1', {
+      observationId: 'user_1',
+      observationPlant: 'Rosa canina',
+      observationDate: {observationTime: 0},
+      observationLatitude: 48.1,
+      observationLongitude: 17.1,
+      observationStatus: observationStatusPrivate,
+      observationOrder: 0,
+      observationCountry: ' SK ',
+    });
+    expect(read.country, 'sk');
+    expect(read.toJson()[observationCountry], 'sk');
+  });
+
+  test('only a placed private row with no country is looked up', () {
+    final gaps = guideSeenCountryGaps({
+      'a': {
+        observationId: 'a',
+        observationPlant: 'Rosa canina',
+        observationLatitude: 48.15,
+        observationLongitude: 17.11,
+      },
+      'b': {
+        observationId: 'b',
+        observationPlant: 'Bellis perennis',
+        observationLatitude: 48.2,
+        observationLongitude: 17.2,
+        observationCountry: 'sk',
+      },
+      'c': {
+        observationId: 'c',
+        observationPlant: 'Galanthus nivalis',
+        observationLatitude: 0,
+        observationLongitude: 0,
+      },
+    });
+    expect(gaps.map((gap) => gap.id), ['a']);
+    expect(gaps.single.plant, 'Rosa canina');
+    expect(gaps.single.latitude, 48.15);
+  });
+
+  test('coordinates with no place do not ask for a country', () async {
+    expect(await guideCountryCode(0, 0), isNull);
+    expect(await guideCountryCode(double.nan, 17), isNull);
+  });
 }
 
 GuideSeenFind _find({
@@ -1061,6 +1123,7 @@ GuideSeenFind _find({
   GuideSeenShare share = GuideSeenShare.none,
   double? probability,
   String? place,
+  String? country,
   List<GuideSeenCandidate> others = const [],
 }) {
   return GuideSeenFind(
@@ -1077,6 +1140,7 @@ GuideSeenFind _find({
     catalogKnown: catalogKnown,
     probability: probability,
     place: place,
+    country: country,
     others: others,
   );
 }

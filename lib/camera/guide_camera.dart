@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:abherbs_flutter/data/guide_location.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
@@ -570,6 +571,8 @@ Future<String?> saveGuideCameraFind(GuideCameraDraft draft) async {
     observation.confirmed = false;
     observation.source = observationSourceCamera;
     observation.candidates = draft.candidates;
+    observation.country =
+        await guideCountryCode(draft.latitude, draft.longitude) ?? '';
     final json = observation.toJson();
     final root = privateObservationsReference.child(user.uid);
     final plantKey = guideObservationPlantKey(draft.plant);

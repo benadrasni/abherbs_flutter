@@ -15,16 +15,17 @@ import 'package:abherbs_flutter/person/sign_in_page.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/species/fullscreen.dart';
+import 'package:abherbs_flutter/data/guide_photo_pick.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:abherbs_flutter/shell/guide_analytics.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:exif/exif.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -912,12 +913,9 @@ Future<GuideSeenPhoto?> pickGuideSeenPhoto(String plant) async {
   if (!access.isGranted) {
     await Permission.accessMediaLocation.request();
   }
-  final image = await ImagePicker().pickImage(
-    source: ImageSource.gallery,
-    maxWidth: imageSizeScaleDown,
-  );
-  if (image == null) return null;
-  final bytes = await image.readAsBytes();
+  final path = await pickGuideDevicePhoto(maxWidth: imageSizeScaleDown);
+  if (path == null) return null;
+  final bytes = await File(path).readAsBytes();
   final exifData = await readExifFromBytes(bytes);
   final dateTag =
       exifData['EXIF DateTimeOriginal'] ?? exifData['Image DateTime'];
@@ -934,15 +932,14 @@ Future<GuideSeenPhoto?> pickGuideSeenPhoto(String plant) async {
   if (names.length > 1 && names[0].isNotEmpty && names[1].isNotEmpty) {
     prefix = '${names[0][0]}${names[1][0]}_';
   }
-  final dot = image.path.lastIndexOf('.');
-  final slash = image.path.lastIndexOf('/');
-  final suffix =
-      dot > slash ? image.path.substring(dot) : defaultPhotoExtension;
+  final dot = path.lastIndexOf('.');
+  final slash = path.lastIndexOf('/');
+  final suffix = dot > slash ? path.substring(dot) : defaultPhotoExtension;
   final filename = '$prefix${DateTime.now().millisecondsSinceEpoch}$suffix';
   final dir = '$storageObservations${user.uid}/${plant.replaceAll(' ', '_')}';
   final root = (await getApplicationDocumentsDirectory()).path;
   await Directory('$root/$dir').create(recursive: true);
-  await File(image.path).copy('$root/$dir/$filename');
+  await File(path).copy('$root/$dir/$filename');
   return GuideSeenPhoto(
     relativePath: '$dir/$filename',
     when: getDateTimeFromExif(dateTag),
@@ -2575,13 +2572,14 @@ class _Sightings extends StatelessWidget {
                 final when = sighting.when;
                 final caption =
                     when == null ? null : DateFormat.yMMMM(locale).format(when);
+                final country = _sightingCountryName(context, sighting.country);
                 return Semantics(
                   container: true,
                   button: true,
                   image: true,
                   label: _indexedName(
                     context,
-                    caption ?? '',
+                    _sightingSpoken(caption, country),
                     index,
                     shown.length,
                   ),
@@ -2596,6 +2594,16 @@ class _Sightings extends StatelessWidget {
                         fit: StackFit.expand,
                         children: [
                           image(sighting.photoPath, BoxFit.cover, 120, 120),
+                          if (country != null)
+                            PositionedDirectional(
+                              top: 4,
+                              start: 4,
+                              end: 4,
+                              child: Align(
+                                alignment: AlignmentDirectional.topEnd,
+                                child: _SightingChip(country),
+                              ),
+                            ),
                           if (caption != null)
                             PositionedDirectional(
                               start: 4,
@@ -2603,27 +2611,7 @@ class _Sightings extends StatelessWidget {
                               end: 4,
                               child: Align(
                                 alignment: AlignmentDirectional.bottomStart,
-                                child: DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    color: colors.wash,
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 5,
-                                      vertical: 1,
-                                    ),
-                                    child: Text(
-                                      caption,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                child: _SightingChip(caption),
                               ),
                             ),
                         ],
@@ -2644,6 +2632,56 @@ class _Sightings extends StatelessWidget {
             ),
           ],
         ],
+      ),
+    );
+  }
+}
+
+/// Date stays on the bottom badge. Country is named with it for the
+/// screen reader, since that badge sits in the opposite corner.
+String _sightingSpoken(String? when, String? where) {
+  final parts = <String>[
+    if (when != null && when.isNotEmpty) when,
+    if (where != null && where.isNotEmpty) where,
+  ];
+  if (parts.isEmpty) return '';
+  return parts.join(' · ');
+}
+
+String? _sightingCountryName(BuildContext context, String? code) {
+  if (code == null || code.isEmpty) return null;
+  final country = Country.tryParse(code.toUpperCase());
+  if (country == null) return code.toUpperCase();
+  final translated = country.getTranslatedName(context)?.trim();
+  if (translated != null && translated.isNotEmpty) return translated;
+  final name = country.name.trim();
+  if (name.isNotEmpty) return name;
+  return code.toUpperCase();
+}
+
+class _SightingChip extends StatelessWidget {
+  final String text;
+
+  const _SightingChip(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: GuideColors.of(context).wash,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+        child: Text(
+          text,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
     );
   }
