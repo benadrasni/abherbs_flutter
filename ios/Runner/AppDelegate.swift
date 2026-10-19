@@ -120,24 +120,16 @@ private func guideFoldSnapshot() -> GuideFoldSnapshot {
     // hinge is partly open and that rect is missing.
     let bounds = window.bounds
     let span = 40.0
-    let entry: [String: Double]
     if bounds.height >= bounds.width {
-      entry = [
+      let entry: [String: Double] = [
         "x": Double((bounds.width - span) / 2),
         "y": 0,
         "w": span,
         "h": Double(bounds.height),
       ]
-    } else {
-      entry = [
-        "x": 0,
-        "y": Double((bounds.height - span) / 2),
-        "w": Double(bounds.width),
-        "h": span,
-      ]
+      snapshot.regions = [entry]
+      notes.append("fallback")
     }
-    snapshot.regions = [entry]
-    notes.append("fallback")
   }
   snapshot.note = notes.joined(separator: " ")
   return snapshot
