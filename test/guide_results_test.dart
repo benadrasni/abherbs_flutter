@@ -423,6 +423,30 @@ void main() {
     expect(guideListLatin(''), '');
   });
 
+  testWidgets('landscape tablet puts four results on a row', (tester) async {
+    final plants = [
+      for (var i = 0; i < 4; i++)
+        _plant('$i', 'Species $i', label: 'Flower $i', from: 6, to: 8),
+    ];
+
+    Future<void> expectColumns(Size size, int across) async {
+      await _pump(tester, _page(plants: plants), size: size);
+      final first = tester.getTopLeft(find.text('Flower 0'));
+      final lastInRow = tester.getTopLeft(find.text('Flower ${across - 1}'));
+      expect((first.dy - lastInRow.dy).abs(), lessThan(2));
+      expect(lastInRow.dx, greaterThan(first.dx + 80));
+      if (across >= 4) return;
+      final wrapped = tester.getTopLeft(find.text('Flower $across'));
+      expect(wrapped.dy, greaterThan(first.dy + 40));
+      expect((wrapped.dx - first.dx).abs(), lessThan(2));
+    }
+
+    await expectColumns(const Size(951, 669), 4);
+    await expectColumns(const Size(1194, 834), 4);
+    await expectColumns(const Size(669, 951), 3);
+    await expectColumns(const Size(390, 1600), 2);
+  });
+
   testWidgets('a family list uses the result grid without the key chips',
       (tester) async {
     await _pump(
@@ -881,8 +905,12 @@ Widget _app(Widget home) {
   );
 }
 
-Future<void> _pump(WidgetTester tester, Widget page) async {
-  tester.view.physicalSize = const Size(390, 1600);
+Future<void> _pump(
+  WidgetTester tester,
+  Widget page, {
+  Size size = const Size(390, 1600),
+}) async {
+  tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
   addTearDown(tester.view.resetDevicePixelRatio);

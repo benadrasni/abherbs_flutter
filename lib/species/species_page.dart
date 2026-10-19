@@ -658,7 +658,13 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
       (month) => DateFormat.MMMM(locale).format(DateTime(2000, month)),
     );
     final window = GuideWindow.of(context);
-    final galleryHeight = window.wide ? 440.0 : (window.tablet ? 460.0 : 420.0);
+    final size = MediaQuery.sizeOf(context);
+    // Open iPhone Duo landscape is a tablet at about 951 points, short of
+    // the 1000-point wide bar. The photo and the article still sit side by
+    // side, the same split a wide iPad uses.
+    final sideBySide =
+        window.wide || (window.tablet && size.width > size.height);
+    final galleryHeight = sideBySide ? 440.0 : (window.tablet ? 460.0 : 420.0);
     final head = <Widget>[
       _Gallery(
         species: species,
@@ -791,7 +797,7 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
         ),
       );
     }
-    if (window.wide) {
+    if (sideBySide) {
       // The photo column still runs under the status bar. The right column
       // opens with the jump pills, so they take the same top inset the phone
       // cover uses, above the 12-point pad inside _JumpWrap.

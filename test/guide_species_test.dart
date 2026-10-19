@@ -692,6 +692,10 @@ void main() {
       greaterThanOrEqualTo(24 + 12),
     );
     expect(
+      tester.getTopLeft(find.byKey(const Key('guide-species-jumps'))).dx,
+      greaterThan(400),
+    );
+    expect(
       tester
           .getTopLeft(
             find
@@ -705,6 +709,64 @@ void main() {
           .dy,
       0,
     );
+  });
+
+  testWidgets('open Duo landscape puts the article beside the photo',
+      (tester) async {
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+      )),
+      size: const Size(951, 669),
+    );
+
+    final photo = tester.getTopLeft(
+      find
+          .byWidgetPredicate(
+            (widget) =>
+                widget is ColoredBox && widget.color == const Color(0xFF88AA77),
+          )
+          .first,
+    );
+    final jumps =
+        tester.getTopLeft(find.byKey(const Key('guide-species-jumps')));
+    expect(photo.dy, 0);
+    expect(jumps.dx, greaterThan(photo.dx + 300));
+    expect(jumps.dy, lessThan(80));
+  });
+
+  testWidgets('open Duo portrait keeps the species page in one column',
+      (tester) async {
+    await _pump(
+      tester,
+      _app(GuideSpeciesPage(
+        name: 'Leucanthemum vulgare',
+        initial: _daisy(),
+        load: (_) async => null,
+        imageBuilder: _swatch,
+        month: 7,
+      )),
+      size: const Size(669, 951),
+    );
+
+    final photo = tester.getTopLeft(
+      find
+          .byWidgetPredicate(
+            (widget) =>
+                widget is ColoredBox && widget.color == const Color(0xFF88AA77),
+          )
+          .first,
+    );
+    final jumps =
+        tester.getTopLeft(find.byKey(const Key('guide-species-jumps')));
+    expect(photo.dy, 0);
+    expect(jumps.dx, lessThan(40));
+    expect(jumps.dy, greaterThan(photo.dy + 200));
   });
 
   testWidgets('cancelling the photo picker saves nothing', (tester) async {

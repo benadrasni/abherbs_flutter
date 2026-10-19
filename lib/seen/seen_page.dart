@@ -142,9 +142,11 @@ class _SeenPageState extends State<SeenPage> {
         }
         final line = lines[index - 1];
         final kind = line.first.kind;
-        final paired = kind == _SeenTileKind.find || kind == _SeenTileKind.confirm;
-        if (paired && GuideFold.verticalCrease(context) != null) {
-          // One find on each page, so the name does not run through the hinge.
+        final paired =
+            kind == _SeenTileKind.find || kind == _SeenTileKind.confirm;
+        if (paired && _seenPairs(context)) {
+          // One find in each column. A hinge still splits the two pages.
+          // A short last line keeps the empty column so the card stays half width.
           return GuideFoldRow(
             columns: 2,
             gap: 0,
@@ -182,95 +184,99 @@ class _SeenPageState extends State<SeenPage> {
     required bool hiding,
     required int sharedCount,
   }) {
-        switch (tile.kind) {
-          case _SeenTileKind.spinner:
-            return const Padding(
-              padding: EdgeInsets.symmetric(vertical: 32),
-              child: Center(
-                child: SizedBox(
-                  width: 18,
-                  height: 18,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                ),
-              ),
-            );
-          case _SeenTileKind.empty:
-            return Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
-              child: Text(
-                strings.guide_seen_empty,
-                style: TextStyle(fontSize: 13, color: colors.ink3),
-              ),
-            );
-          case _SeenTileKind.confirmHead:
-            return _MonthLabel(text: tile.text!, color: colors.madder);
-          case _SeenTileKind.confirm:
-            final find = tile.find!;
-            return _ConfirmCard(
-              find: find,
-              busy: _busy.contains(find.id),
-              onOpen: () => _open(find),
-              onConfirm: () => _confirm(find),
-              onAnother: () => _another(find),
-              onDelete: () => _delete(find),
-            );
-          case _SeenTileKind.hide:
-            return Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20, 6, 20, 0),
-              child: Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: _Pill(
-                  key: const Key('guide-seen-hide-shared'),
-                  label: hiding
-                      ? strings.guide_seen_shared_hidden(sharedCount)
-                      : strings.guide_seen_hide_shared(sharedCount),
-                  onPressed: _toggleHideShared,
-                  foreground: hiding ? Colors.white : colors.ink,
-                  background: hiding ? colors.mossFill : colors.cream,
-                  border: hiding ? null : colors.rule,
-                ),
-              ),
-            );
-          case _SeenTileKind.onlyShared:
-            return Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(20, 8, 20, 8),
-              child: Text(
-                strings.guide_seen_only_shared,
-                style: TextStyle(fontSize: 13, color: colors.ink3),
-              ),
-            );
-          case _SeenTileKind.month:
-            return _MonthLabel(text: tile.text!);
-          case _SeenTileKind.find:
-            final find = tile.find!;
-            return _FindRow(
-              find: find,
-              busy: _busy.contains(find.id),
-              onOpen: () => _open(find),
-              onShare: () => _share(find),
-              onWithdraw: () => _withdraw(find),
-              onDelete: () => _askDelete(find),
-            );
-          case _SeenTileKind.upsell:
-            return _Upsell(
-              onPressed: () {
-                final open = widget.onFieldGuide;
-                if (open != null) {
-                  open(context);
-                } else {
-                  openGuideFieldGuide(context);
-                }
-              },
-            );
-        }
+    switch (tile.kind) {
+      case _SeenTileKind.spinner:
+        return const Padding(
+          padding: EdgeInsets.symmetric(vertical: 32),
+          child: Center(
+            child: SizedBox(
+              width: 18,
+              height: 18,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          ),
+        );
+      case _SeenTileKind.empty:
+        return Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
+          child: Text(
+            strings.guide_seen_empty,
+            style: TextStyle(fontSize: 13, color: colors.ink3),
+          ),
+        );
+      case _SeenTileKind.confirmHead:
+        return _MonthLabel(text: tile.text!, color: colors.madder);
+      case _SeenTileKind.confirm:
+        final find = tile.find!;
+        return _ConfirmCard(
+          find: find,
+          busy: _busy.contains(find.id),
+          onOpen: () => _open(find),
+          onConfirm: () => _confirm(find),
+          onAnother: () => _another(find),
+          onDelete: () => _delete(find),
+        );
+      case _SeenTileKind.hide:
+        return Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 6, 20, 0),
+          child: Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: _Pill(
+              key: const Key('guide-seen-hide-shared'),
+              label: hiding
+                  ? strings.guide_seen_shared_hidden(sharedCount)
+                  : strings.guide_seen_hide_shared(sharedCount),
+              onPressed: _toggleHideShared,
+              foreground: hiding ? Colors.white : colors.ink,
+              background: hiding ? colors.mossFill : colors.cream,
+              border: hiding ? null : colors.rule,
+            ),
+          ),
+        );
+      case _SeenTileKind.onlyShared:
+        return Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 8, 20, 8),
+          child: Text(
+            strings.guide_seen_only_shared,
+            style: TextStyle(fontSize: 13, color: colors.ink3),
+          ),
+        );
+      case _SeenTileKind.month:
+        return _MonthLabel(text: tile.text!);
+      case _SeenTileKind.find:
+        final find = tile.find!;
+        return _FindRow(
+          find: find,
+          busy: _busy.contains(find.id),
+          onOpen: () => _open(find),
+          onShare: () => _share(find),
+          onWithdraw: () => _withdraw(find),
+          onDelete: () => _askDelete(find),
+        );
+      case _SeenTileKind.upsell:
+        return _Upsell(
+          onPressed: () {
+            final open = widget.onFieldGuide;
+            if (open != null) {
+              open(context);
+            } else {
+              openGuideFieldGuide(context);
+            }
+          },
+        );
+    }
   }
 
-  /// Find and confirm cards share a page when the hinge is open. Everything
-  /// else stays a full-width line. A flat or closed window keeps one tile
-  /// per line, which is the list the builder already painted.
-  List<List<_SeenTile>> _seenLines(BuildContext context, List<_SeenTile> tiles) {
-    if (GuideFold.verticalCrease(context) == null) {
-      return [for (final tile in tiles) [tile]];
+  /// Find and confirm cards sit two across when the hinge is open, and in
+  /// landscape on a tablet. That is the open iPhone Duo and an iPad turned
+  /// sideways. Portrait, the closed cover, and a phone stay one column.
+  /// Month labels and the other full-width lines are never paired.
+  List<List<_SeenTile>> _seenLines(
+      BuildContext context, List<_SeenTile> tiles) {
+    if (!_seenPairs(context)) {
+      return [
+        for (final tile in tiles) [tile]
+      ];
     }
     final lines = <List<_SeenTile>>[];
     final pending = <_SeenTile>[];
@@ -281,8 +287,8 @@ class _SeenPageState extends State<SeenPage> {
     }
 
     for (final tile in tiles) {
-      final pair = tile.kind == _SeenTileKind.find ||
-          tile.kind == _SeenTileKind.confirm;
+      final pair =
+          tile.kind == _SeenTileKind.find || tile.kind == _SeenTileKind.confirm;
       if (!pair || (pending.isNotEmpty && pending.first.kind != tile.kind)) {
         flush();
       }
@@ -295,6 +301,13 @@ class _SeenPageState extends State<SeenPage> {
     }
     flush();
     return lines;
+  }
+
+  /// Two finds share a line on a landscape tablet, and across an open hinge.
+  bool _seenPairs(BuildContext context) {
+    if (GuideFold.verticalCrease(context) != null) return true;
+    final size = MediaQuery.sizeOf(context);
+    return GuideWindow.of(context).tablet && size.width > size.height;
   }
 
   /// Rows under the title. Only the ones on screen are built, so a long

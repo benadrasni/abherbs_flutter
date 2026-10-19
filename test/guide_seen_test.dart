@@ -436,6 +436,81 @@ void main() {
     expect(find.text('Finds you save will show up here.'), findsNothing);
   });
 
+  testWidgets('landscape tablet puts two finds on one line', (tester) async {
+    Future<void> expectSideBySide(Size size) async {
+      await _pump(
+        tester,
+        _page(
+          finds: [
+            _find(
+              id: 'rose',
+              name: 'Rosa canina',
+              label: 'dog rose',
+              when: DateTime(2026, 9, 2),
+              inBook: true,
+            ),
+            _find(
+              id: 'daisy',
+              name: 'Bellis perennis',
+              label: 'daisy',
+              when: DateTime(2026, 9, 3),
+              inBook: true,
+            ),
+          ],
+          fieldGuide: true,
+        ),
+        size: size,
+      );
+      final rose = tester.getTopLeft(find.text('dog rose'));
+      final daisy = tester.getTopLeft(find.text('daisy'));
+      expect((rose.dy - daisy.dy).abs(), lessThan(2));
+      expect((rose.dx - daisy.dx).abs(), greaterThan(200));
+      expect(
+        tester.getTopLeft(find.text('SEPTEMBER 2026')).dx,
+        lessThan(40),
+      );
+    }
+
+    await expectSideBySide(const Size(951, 669));
+    await expectSideBySide(const Size(1194, 834));
+  });
+
+  testWidgets('portrait keeps seen finds in one column', (tester) async {
+    Future<void> expectStacked(Size size) async {
+      await _pump(
+        tester,
+        _page(
+          finds: [
+            _find(
+              id: 'rose',
+              name: 'Rosa canina',
+              label: 'dog rose',
+              when: DateTime(2026, 9, 2),
+              inBook: true,
+            ),
+            _find(
+              id: 'daisy',
+              name: 'Bellis perennis',
+              label: 'daisy',
+              when: DateTime(2026, 9, 3),
+              inBook: true,
+            ),
+          ],
+          fieldGuide: true,
+        ),
+        size: size,
+      );
+      final rose = tester.getTopLeft(find.text('dog rose'));
+      final daisy = tester.getTopLeft(find.text('daisy'));
+      expect((rose.dx - daisy.dx).abs(), lessThan(2));
+      expect((rose.dy - daisy.dy).abs(), greaterThan(40));
+    }
+
+    await expectStacked(const Size(669, 951));
+    await expectStacked(const Size(1032, 1376));
+    await expectStacked(const Size(390, 844));
+  });
+
   testWidgets('an empty notebook says so and still offers Field Guide',
       (tester) async {
     await _pump(tester, _page(finds: const []));

@@ -539,25 +539,25 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
                     color: colors.ink,
                   ),
                 ),
-              if (showLatin)
-                Text(
-                  latin,
-                  style: GuideType.latin(colors).copyWith(
-                    fontSize: 15,
-                    height: 1.3,
-                    color: colors.ink3,
+                if (showLatin)
+                  Text(
+                    latin,
+                    style: GuideType.latin(colors).copyWith(
+                      fontSize: 15,
+                      height: 1.3,
+                      color: colors.ink3,
+                    ),
                   ),
-                ),
-              if (_prefsReady) ...[
-                const SizedBox(height: 10),
-                _CountLine(
-                  count: count,
-                  caption: _caption(strings, count, null, seenCount),
-                ),
+                if (_prefsReady) ...[
+                  const SizedBox(height: 10),
+                  _CountLine(
+                    count: count,
+                    caption: _caption(strings, count, null, seenCount),
+                  ),
+                ],
               ],
-            ],
+            ),
           ),
-        ),
         ),
       ],
     );
@@ -577,9 +577,15 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
   }
 
   List<Widget> _grid(S strings, GuideResultList arranged) {
+    final window = GuideWindow.of(context);
+    final size = MediaQuery.sizeOf(context);
+    // Open iPhone Duo landscape is a tablet at about 951 points, short of
+    // the 1000-point wide bar. The grid still uses four columns, the same
+    // count a wide iPad uses. Portrait stays at three.
+    final landscapeTablet = window.tablet && size.width > size.height;
     final columns = GuideFold.across(
       context,
-      GuideWindow.of(context).columns(phone: 2, tablet: 3, wide: 4),
+      window.columns(phone: 2, tablet: landscapeTablet ? 4 : 3, wide: 4),
     );
     final slots = guideResultSlots(
       arranged,
