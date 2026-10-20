@@ -132,6 +132,9 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     if (state != AppLifecycleState.resumed) return;
     unawaited(syncGuidePrivatePhotos());
     unawaited(_checkVersion());
+    // A long suspend keeps the strip that was on screen. Ask again so a
+    // find deleted on another device does not stay under Seen lately.
+    _loadFinds();
   }
 
   /// A failed fetch keeps a remembered floor closed. The shell only shows
@@ -181,7 +184,8 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
 
   /// Keeps the signed-in notebook synced. The snapshot is already the
   /// server copy, so Seen paints from it instead of downloading the list
-  /// again. Vernaculars and Share are filled in after that.
+  /// again. Each event also reloads Seen lately. Vernaculars and Share
+  /// are filled in after that.
   void _watchSeenRemote() {
     final uid = guideNotebookUser()?.uid;
     if (uid == _seenWatchUid && _seenRemote != null) return;
@@ -209,6 +213,9 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     _seenUid = guideNotebookUser()?.uid;
     unawaited(fillGuideSeenCountries(_seenValue, uid));
     _unconfirmedLoaded = true;
+    // The first event can be the on-disk copy. [loadRecentFinds] waits
+    // for the server, so the strip does not keep a deleted find.
+    _loadFinds();
     if (!_opened.contains(2)) {
       GuideTabs.unconfirmed.value =
           guideUnconfirmedTotal(guideSeenRows(_seenValue));

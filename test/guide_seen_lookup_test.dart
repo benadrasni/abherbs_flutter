@@ -1,3 +1,4 @@
+import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -157,6 +158,36 @@ void main() {
     );
     expect(moved.stamp, isNull);
     expect(_nonForceRuns('en\u0000changed', moved.stamp), isTrue);
+  });
+
+  test('a species that joins the book is looked up again', () {
+    final cache = <String, bool>{};
+
+    expect(
+      guideRememberPlantInBook(cache, 'Dicliptera brachiata', false),
+      isFalse,
+    );
+    expect(cache, isEmpty);
+
+    expect(
+      guideRememberPlantInBook(cache, 'Dicliptera brachiata', null),
+      isNull,
+    );
+    expect(cache, isEmpty);
+
+    expect(
+      guideRememberPlantInBook(cache, 'Dicliptera brachiata', true),
+      isTrue,
+    );
+    expect(cache['Dicliptera brachiata'], isTrue);
+    expect(
+      guideRememberPlantInBook(cache, 'Dicliptera brachiata', false),
+      isTrue,
+    );
+    expect(
+      guideRememberPlantInBook(cache, 'Dicliptera brachiata', null),
+      isTrue,
+    );
   });
 }
 

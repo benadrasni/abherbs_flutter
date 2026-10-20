@@ -701,18 +701,22 @@ Future<User?> guideNotebookUserReady() async {
 ///
 /// `order` is a negative timestamp, so an ascending `orderByChild` lists
 /// newest first. [limit] has to read the start of that index.
+///
+/// [Query.get] reads the server while online. [Query.once] finishes from
+/// the on-disk copy and then stops, so a find deleted on another device
+/// stays in this strip until Seen is opened. Disk persistence is on in `main`.
 Future<List<GuideFind>> loadRecentFinds(String languageCode,
     {int limit = 5}) async {
   final user = guideNotebookUser();
   if (user == null) return [];
-  final event = await privateObservationsReference
+  final snapshot = await privateObservationsReference
       .child(user.uid)
       .child(firebaseObservationsByDate)
       .child(firebaseAttributeList)
       .orderByChild(firebaseAttributeOrder)
       .limitToFirst(limit)
-      .once();
-  final value = event.snapshot.value;
+      .get();
+  final value = snapshot.value;
   if (value is! Map) return [];
 
   final rawFinds = <_RawFind>[];
@@ -756,9 +760,10 @@ Future<List<GuideSeenFind>> loadGuideSeen(String languageCode) async {
 }
 
 /// Vernaculars, catalog photos, and whether each photo can be shared.
-/// Species lookups are remembered for the session. A failed lookup leaves
-/// the row unknown so the next pass can try again. A `photoCloud` row does
-/// not check Storage.
+/// A species that is in the book is remembered for the session. A miss is
+/// not: the name can be published later. A failed lookup leaves the row
+/// unknown so the next pass can try again. A `photoCloud` row does not
+/// check Storage.
 Future<List<GuideSeenFind>> decorateGuideSeen(
   List<GuideSeenFind> rows,
   String languageCode, {
@@ -920,15 +925,35 @@ Future<GuideStatFace> loadGuidePlantCard(
 
 final Map<String, bool> _plantInBookCache = {};
 
-/// Null when the read failed. That miss is left out of the cache.
+/// Session memory for a `plants_v2` id.
+///
+/// Presence stays. A miss does not: Seen would keep "Not in the book"
+/// after the species is published. A failed read is null and is not stored.
+/// When [cache] already holds this name, [read] is ignored.
+@visibleForTesting
+bool? guideRememberPlantInBook(
+  Map<String, bool> cache,
+  String name,
+  bool? read,
+) {
+  if (cache[name] == true) return true;
+  if (read == null) return null;
+  if (read) cache[name] = true;
+  return read;
+}
+
+/// Null when the read failed. That failure is left out of the cache.
+///
+/// [Query.get] reads the server while online. [Query.once] would finish
+/// from the on-disk copy, so a name looked up before it was published
+/// stays missing. Disk persistence is on in `main`.
 Future<bool?> _plantInBook(String name) async {
-  final known = _plantInBookCache[name];
-  if (known != null) return known;
+  if (_plantInBookCache[name] == true) return true;
   try {
-    final event = await plantsReference.child(name).child('id').once();
-    final value = event.snapshot.value;
+    final snapshot = await plantsReference.child(name).child('id').get();
+    final value = snapshot.value;
     final inBook = value != null && value.toString().isNotEmpty;
-    return _plantInBookCache[name] = inBook;
+    return guideRememberPlantInBook(_plantInBookCache, name, inBook);
   } catch (error) {
     debugPrint('guide seen plant $name: $error');
     return null;
