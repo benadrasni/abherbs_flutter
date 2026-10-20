@@ -194,7 +194,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
         .child(firebaseObservationsByDate)
         .child(firebaseAttributeList)
         .onValue
-        .listen(_onSeenRemote, onError: (Object error) {
+        .listen((event) => _onSeenRemote(event, uid), onError: (Object error) {
       debugPrint('guide seen: $error');
       if (!mounted || _seenReady || !_opened.contains(2)) return;
       setState(() => _notebook = []);
@@ -202,12 +202,12 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     });
   }
 
-  void _onSeenRemote(DatabaseEvent event) {
+  void _onSeenRemote(DatabaseEvent event, String uid) {
     guidePrivatePhotosChanged();
     _seenValue = event.snapshot.value;
     _seenReady = true;
     _seenUid = guideNotebookUser()?.uid;
-    unawaited(fillGuideSeenCountries(_seenValue));
+    unawaited(fillGuideSeenCountries(_seenValue, uid));
     _unconfirmedLoaded = true;
     if (!_opened.contains(2)) {
       GuideTabs.unconfirmed.value =

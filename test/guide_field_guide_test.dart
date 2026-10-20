@@ -133,6 +133,33 @@ void main() {
     expect(noPrice.upgrade, isFalse);
     expect(noPrice.locked, isTrue);
 
+    final waiting = guideFieldGuideAccess(
+      catalog: guideFieldGuideCatalog(
+        storeAvailable: false,
+        yearlyPrice: null,
+        monthlyPrice: null,
+        owned: {fieldGuideMonthly},
+      ),
+      monthlyOnThisStore: true,
+      fromAccountOnly: false,
+      awaitingStore: true,
+    );
+    expect(waiting.upgrade, isTrue);
+    expect(waiting.locked, isFalse);
+
+    final deadStore = guideFieldGuideAccess(
+      catalog: guideFieldGuideCatalog(
+        storeAvailable: false,
+        yearlyPrice: null,
+        monthlyPrice: null,
+        owned: {fieldGuideMonthly},
+      ),
+      monthlyOnThisStore: true,
+      fromAccountOnly: false,
+    );
+    expect(deadStore.upgrade, isFalse);
+    expect(deadStore.locked, isTrue);
+
     final free = access(owned: const {});
     expect(free.upgrade, isFalse);
     expect(free.locked, isFalse);
@@ -400,6 +427,94 @@ void main() {
     expect(find.text(r'$19.99'), findsOneWidget);
     expect(find.text(r'$2.99'), findsOneWidget);
     expect(find.byType(CircularProgressIndicator), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a monthly plan stays open while the yearly price is still coming',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(400, 1600));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    Purchases.purchases[fieldGuideMonthly] = _purchase(fieldGuideMonthly);
+    Purchases.replaceAccountProducts({fieldGuideMonthly});
+    final gate = Completer<GuideFieldGuideLoaded>();
+    addTearDown(() {
+      if (!gate.isCompleted) {
+        gate.complete(GuideFieldGuideLoaded(
+          catalog: guideFieldGuideCatalog(
+            storeAvailable: true,
+            yearlyPrice: r'$19.99',
+            monthlyPrice: r'$2.99',
+            owned: {fieldGuideMonthly},
+          ),
+        ));
+      }
+    });
+    await tester.pumpWidget(_app(GuideFieldGuidePage(
+      load: () => gate.future,
+      storeTimeout: const Duration(seconds: 30),
+      plate: (_) => const ColoredBox(color: Color(0xFFEFE6D3)),
+    )));
+    await tester.pump();
+
+    expect(find.text('You already have Field Guide.'), findsNothing);
+    expect(find.text('Change'), findsOneWidget);
+    expect(find.text('Yearly'), findsOneWidget);
+    expect(find.text('Monthly'), findsOneWidget);
+    expect(
+      find.text('The store doesn’t have these plans yet.'),
+      findsNothing,
+    );
+
+    gate.complete(GuideFieldGuideLoaded(
+      catalog: guideFieldGuideCatalog(
+        storeAvailable: true,
+        yearlyPrice: r'$19.99',
+        monthlyPrice: r'$2.99',
+        owned: {fieldGuideMonthly},
+      ),
+    ));
+    await tester.pump();
+    expect(find.text(r'$19.99'), findsOneWidget);
+    expect(find.text('Change'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a store that fails after the wait can be tried again',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(400, 1600));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    var calls = 0;
+    final gates = <Completer<GuideFieldGuideLoaded>>[];
+    await tester.pumpWidget(_app(GuideFieldGuidePage(
+      load: () {
+        calls++;
+        final gate = Completer<GuideFieldGuideLoaded>();
+        gates.add(gate);
+        return gate.future;
+      },
+      storeTimeout: const Duration(milliseconds: 20),
+      plate: (_) => const ColoredBox(color: Color(0xFFEFE6D3)),
+    )));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 20));
+    expect(find.text('Field Guide'), findsOneWidget);
+
+    gates.single.completeError(StateError('store'));
+    await tester.pump();
+    expect(find.text('Couldn’t load your account'), findsOneWidget);
+    expect(find.text('Try again'), findsOneWidget);
+    expect(
+      find.text('The store doesn’t have these plans yet.'),
+      findsNothing,
+    );
+
+    await tester.tap(find.text('Try again'));
+    await tester.pump();
+    expect(calls, 2);
+    gates.last.complete(GuideFieldGuideLoaded(catalog: _priced()));
+    await tester.pump();
+    expect(find.text(r'$19.99'), findsOneWidget);
+    expect(find.text('Try again'), findsNothing);
     expect(tester.takeException(), isNull);
   });
 

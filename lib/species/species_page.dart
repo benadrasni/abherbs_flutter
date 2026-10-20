@@ -16,6 +16,7 @@ import 'package:abherbs_flutter/offline/offline.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
 import 'package:abherbs_flutter/species/fullscreen.dart';
 import 'package:abherbs_flutter/data/guide_photo_pick.dart';
+import 'package:abherbs_flutter/data/guide_photo_file.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/shell/app_banner_ad.dart';
@@ -939,7 +940,7 @@ Future<GuideSeenPhoto?> pickGuideSeenPhoto(String plant) async {
   final dir = '$storageObservations${user.uid}/${plant.replaceAll(' ', '_')}';
   final root = (await getApplicationDocumentsDirectory()).path;
   await Directory('$root/$dir').create(recursive: true);
-  await File(path).copy('$root/$dir/$filename');
+  await copyGuidePhotoWithoutGps(path, '$root/$dir/$filename');
   return GuideSeenPhoto(
     relativePath: '$dir/$filename',
     when: getDateTimeFromExif(dateTag),

@@ -163,13 +163,19 @@ GuideFieldGuideAccess guideFieldGuideAccess({
   required GuideFieldGuideCatalog catalog,
   required bool monthlyOnThisStore,
   required bool fromAccountOnly,
+
+  /// The catalog drawn before the store answers. A catalog the store has
+  /// returned, including a dead store, is not this.
+  bool awaitingStore = false,
 }) {
-  final upgrade = monthlyOnThisStore &&
+  final monthlyHere = monthlyOnThisStore &&
       !fromAccountOnly &&
       catalog.monthly.owned &&
       !catalog.yearly.owned &&
-      !catalog.coveredByOlderPlan &&
-      catalog.yearly.price != null;
+      !catalog.coveredByOlderPlan;
+  final upgrade = monthlyHere &&
+      (catalog.yearly.price != null ||
+          (awaitingStore && !catalog.storeAvailable));
   final hasPlan = catalog.monthly.owned ||
       catalog.yearly.owned ||
       catalog.coveredByOlderPlan ||

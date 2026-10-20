@@ -50,12 +50,17 @@ class MainActivity : FlutterActivity() {
                     // activity-result registry is not available.
                     @Suppress("DEPRECATION")
                     startActivityForResult(intent, requestPick)
-                } catch (_: ActivityNotFoundException) {
+                } catch (error: Exception) {
                     // resolveActivity is the wrong probe: from API 30 the
                     // photo picker is hidden from package queries, so it
                     // looks missing on phones that have it.
                     pickerResult = null
-                    result.error("unavailable", "photo picker missing", null)
+                    if (error is ActivityNotFoundException) {
+                        result.error("unavailable", "photo picker missing", null)
+                    } else {
+                        Log.e("GuideGalleryPick", "launch failed", error)
+                        result.error("failed", error.message, null)
+                    }
                 }
             }
     }
@@ -99,6 +104,20 @@ class MainActivity : FlutterActivity() {
                 }
             }
         }.start()
+    }
+
+    override fun onDestroy() {
+        if (isFinishing) {
+            // The person left. Answer the waiting call so the next pick can open.
+            val pending = pickerResult
+            pickerResult = null
+            try {
+                pending?.success(null)
+            } catch (error: Exception) {
+                Log.e("GuideGalleryPick", "result failed", error)
+            }
+        }
+        super.onDestroy()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
