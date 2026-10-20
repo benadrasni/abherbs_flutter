@@ -588,13 +588,6 @@ Future<String?> saveGuideCameraFind(GuideCameraDraft draft) async {
         .set(json);
     unawaited(syncGuidePrivatePhotos(onlyId: observation.id));
     unawaited(GuideAnalytics.seenSave(source: 'photo', shared: false));
-    unawaited(fillGuideFindCountry(
-      uid: user.uid,
-      id: observation.id,
-      plant: draft.plant,
-      latitude: draft.latitude,
-      longitude: draft.longitude,
-    ));
     return observation.id;
   } catch (error) {
     debugPrint('guide camera save: $error');

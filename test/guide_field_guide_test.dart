@@ -130,8 +130,35 @@ void main() {
       monthlyOnThisStore: true,
       yearlyPrice: null,
     );
-    expect(noPrice.upgrade, isTrue);
-    expect(noPrice.locked, isFalse);
+    expect(noPrice.upgrade, isFalse);
+    expect(noPrice.locked, isTrue);
+
+    final waiting = guideFieldGuideAccess(
+      catalog: guideFieldGuideCatalog(
+        storeAvailable: false,
+        yearlyPrice: null,
+        monthlyPrice: null,
+        owned: {fieldGuideMonthly},
+      ),
+      monthlyOnThisStore: true,
+      fromAccountOnly: false,
+      awaitingStore: true,
+    );
+    expect(waiting.upgrade, isTrue);
+    expect(waiting.locked, isFalse);
+
+    final deadStore = guideFieldGuideAccess(
+      catalog: guideFieldGuideCatalog(
+        storeAvailable: false,
+        yearlyPrice: null,
+        monthlyPrice: null,
+        owned: {fieldGuideMonthly},
+      ),
+      monthlyOnThisStore: true,
+      fromAccountOnly: false,
+    );
+    expect(deadStore.upgrade, isFalse);
+    expect(deadStore.locked, isTrue);
 
     final free = access(owned: const {});
     expect(free.upgrade, isFalse);

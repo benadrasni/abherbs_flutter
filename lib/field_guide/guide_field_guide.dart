@@ -163,14 +163,19 @@ GuideFieldGuideAccess guideFieldGuideAccess({
   required GuideFieldGuideCatalog catalog,
   required bool monthlyOnThisStore,
   required bool fromAccountOnly,
+
+  /// The catalog drawn before the store answers. A catalog the store has
+  /// returned, including a dead store, is not this.
+  bool awaitingStore = false,
 }) {
-  // The yearly price can still be on its way. Until it arrives the change
-  // cannot be bought, but the screen is not a locked summary.
-  final upgrade = monthlyOnThisStore &&
+  final monthlyHere = monthlyOnThisStore &&
       !fromAccountOnly &&
       catalog.monthly.owned &&
       !catalog.yearly.owned &&
       !catalog.coveredByOlderPlan;
+  final upgrade = monthlyHere &&
+      (catalog.yearly.price != null ||
+          (awaitingStore && !catalog.storeAvailable));
   final hasPlan = catalog.monthly.owned ||
       catalog.yearly.owned ||
       catalog.coveredByOlderPlan ||

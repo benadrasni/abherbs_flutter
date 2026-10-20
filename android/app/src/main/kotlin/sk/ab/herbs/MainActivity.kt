@@ -2,7 +2,6 @@ package sk.ab.herbs
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -15,34 +14,15 @@ import android.view.WindowManager
 import androidx.core.view.WindowCompat
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
-import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
-    override fun provideFlutterEngine(context: Context): FlutterEngine? {
-        val kept = retainedEngine ?: return null
-        retainedEngine = null
-        return kept
-    }
-
-    override fun shouldDestroyEngineWithHost(): Boolean {
-        // A configuration change builds a new activity. The open pick still
-        // has a listener on this engine, so the engine has to move with it.
-        if (isChangingConfigurations && pickInFlight) return false
-        return super.shouldDestroyEngineWithHost()
-    }
+    private var pickerResult: MethodChannel.Result? = null
+    private var pickerMaxWidth = 0
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-        val messenger = flutterEngine.dartExecutor.binaryMessenger
-        // A new engine cannot answer the previous pick. Drop that reply so
-        // the next pick is not stuck reporting busy.
-        if (pickerMessenger != null && pickerMessenger !== messenger) {
-            pickerResult = null
-            pickerMessenger = null
-            pickInFlight = false
-        }
-        MethodChannel(messenger, "sk.ab.herbs/photo")
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "sk.ab.herbs/photo")
             .setMethodCallHandler { call, result ->
                 if (call.method != "pick") {
                     result.notImplemented()
@@ -65,8 +45,6 @@ class MainActivity : FlutterActivity() {
                 )
                 pickerResult = result
                 pickerMaxWidth = width
-                pickerMessenger = messenger
-                pickInFlight = true
                 try {
                     // FlutterActivity is not a ComponentActivity, so the
                     // activity-result registry is not available.
@@ -77,8 +55,6 @@ class MainActivity : FlutterActivity() {
                     // photo picker is hidden from package queries, so it
                     // looks missing on phones that have it.
                     pickerResult = null
-                    pickerMessenger = null
-                    pickInFlight = false
                     if (error is ActivityNotFoundException) {
                         result.error("unavailable", "photo picker missing", null)
                     } else {
@@ -107,9 +83,7 @@ class MainActivity : FlutterActivity() {
     private fun finishPick(resultCode: Int, uri: Uri?) {
         val pending = pickerResult ?: return
         pickerResult = null
-        pickerMessenger = null
         if (resultCode != Activity.RESULT_OK || uri == null) {
-            pickInFlight = false
             pending.success(null)
             return
         }
@@ -123,11 +97,8 @@ class MainActivity : FlutterActivity() {
                 null
             }
             runOnUiThread {
-                pickInFlight = false
                 try {
-                    // The activity may already have been recreated. The reply
-                    // belongs to the engine, which was kept for that change.
-                    pending.success(path)
+                    if (!isDestroyed) pending.success(path) else pending.success(null)
                 } catch (error: Exception) {
                     Log.e("GuideGalleryPick", "result failed", error)
                 }
@@ -136,14 +107,10 @@ class MainActivity : FlutterActivity() {
     }
 
     override fun onDestroy() {
-        if (isChangingConfigurations && pickInFlight) {
-            retainedEngine = flutterEngine
-        } else if (isFinishing) {
+        if (isFinishing) {
             // The person left. Answer the waiting call so the next pick can open.
             val pending = pickerResult
             pickerResult = null
-            pickerMessenger = null
-            pickInFlight = false
             try {
                 pending?.success(null)
             } catch (error: Exception) {
@@ -206,14 +173,5 @@ class MainActivity : FlutterActivity() {
 
     companion object {
         private const val requestPick = 48121
-
-        // The result is delivered to whichever instance is resumed. A
-        // configuration change builds a new activity; the reply and the
-        // engine move with the process, not with the instance.
-        private var pickerResult: MethodChannel.Result? = null
-        private var pickerMaxWidth = 0
-        private var pickerMessenger: BinaryMessenger? = null
-        private var pickInFlight = false
-        private var retainedEngine: FlutterEngine? = null
     }
 }

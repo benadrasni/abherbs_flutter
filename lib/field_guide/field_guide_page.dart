@@ -172,6 +172,7 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
       catalog: catalog,
       monthlyOnThisStore: Purchases.purchases.containsKey(fieldGuideMonthly),
       fromAccountOnly: Purchases.fieldGuideFromAccountOnly,
+      awaitingStore: _loaded == null,
     );
   }
 

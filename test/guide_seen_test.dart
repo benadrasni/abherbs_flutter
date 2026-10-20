@@ -1,4 +1,3 @@
-import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/data/guide_location.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/generated/l10n.dart';
@@ -1108,49 +1107,6 @@ void main() {
   test('coordinates with no place do not ask for a country', () async {
     expect(await guideCountryCode(0, 0), isNull);
     expect(await guideCountryCode(double.nan, 17), isNull);
-  });
-
-  test('a country is written only while that find and account remain', () {
-    expect(
-      guideCountryWriteApplies(
-        rowExists: true,
-        snapshotUid: 'user-a',
-        currentUid: 'user-a',
-      ),
-      isTrue,
-    );
-    expect(
-      guideCountryWriteApplies(
-        rowExists: false,
-        snapshotUid: 'user-a',
-        currentUid: 'user-a',
-      ),
-      isFalse,
-    );
-    expect(
-      guideCountryWriteApplies(
-        rowExists: true,
-        snapshotUid: 'user-a',
-        currentUid: 'user-b',
-      ),
-      isFalse,
-    );
-    expect(
-      guideCountryWriteApplies(
-        rowExists: true,
-        snapshotUid: 'user-a',
-        currentUid: null,
-      ),
-      isFalse,
-    );
-    expect(
-      guideCountryWriteApplies(
-        rowExists: true,
-        snapshotUid: '',
-        currentUid: '',
-      ),
-      isFalse,
-    );
   });
 }
 

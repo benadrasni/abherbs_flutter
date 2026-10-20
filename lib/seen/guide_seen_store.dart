@@ -44,14 +44,37 @@ Future<void> fillGuideSeenCountries(Object? value, String uid) async {
   }
 }
 
-Future<void> _storeCountry(String uid, GuideSeenCountryGap gap) {
-  return fillGuideFindCountry(
-    uid: uid,
-    id: gap.id,
-    plant: gap.plant,
-    latitude: gap.latitude,
-    longitude: gap.longitude,
-  );
+/// The country written onto the date row, or null when the account changed
+/// or the find was already gone. A missing date node aborts, so the lookup
+/// cannot recreate a country-only row.
+Future<String?> _storeCountry(String uid, GuideSeenCountryGap gap) async {
+  if (guideNotebookUser()?.uid != uid) return null;
+  try {
+    final code = await guideCountryCode(gap.latitude, gap.longitude);
+    if (code == null || guideNotebookUser()?.uid != uid) return null;
+    final root = privateObservationsReference.child(uid);
+    final dateRef = root
+        .child(firebaseObservationsByDate)
+        .child(firebaseAttributeList)
+        .child(gap.id);
+    final result = await dateRef.runTransaction((value) {
+      if (value is! Map) return Transaction.abort();
+      final next = Map<Object?, Object?>.from(value);
+      next[observationCountry] = code;
+      return Transaction.success(next);
+    });
+    if (!result.committed || guideNotebookUser()?.uid != uid) return null;
+    await _patchPrivatePlant(
+      root,
+      gap.plant,
+      gap.id,
+      {observationCountry: code},
+    );
+    return code;
+  } catch (error) {
+    debugPrint('guide seen country ${gap.id}: $error');
+    return null;
+  }
 }
 
 /// Publishes one confirmed find for review. The note stays on the private
@@ -80,17 +103,16 @@ Future<bool> shareGuideFind(String id) async {
     observation.candidates = [];
     observation.status = firebaseValueReview;
     if (guideRowCountry(observation.country) == null) {
-      final code = await guideCountryCode(
-        observation.latitude,
-        observation.longitude,
+      final code = await _storeCountry(
+        user.uid,
+        GuideSeenCountryGap(
+          id: observation.id,
+          plant: observation.plant,
+          latitude: observation.latitude,
+          longitude: observation.longitude,
+        ),
       );
-      if (code != null) {
-        observation.country = code;
-        final patch = {observationCountry: code};
-        await dateRef.update(patch);
-        await _patchPrivatePlant(
-            root, observation.plant, observation.id, patch);
-      }
+      if (code != null) observation.country = code;
     }
     final json = observation.toJson();
     final plant = observation.plant;
