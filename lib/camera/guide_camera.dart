@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:abherbs_flutter/data/guide_location.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
+import 'package:abherbs_flutter/data/guide_photo_file.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/seen/guide_private_photos.dart';
@@ -571,8 +571,7 @@ Future<String?> saveGuideCameraFind(GuideCameraDraft draft) async {
     observation.confirmed = false;
     observation.source = observationSourceCamera;
     observation.candidates = draft.candidates;
-    observation.country =
-        await guideCountryCode(draft.latitude, draft.longitude) ?? '';
+    observation.country = '';
     final json = observation.toJson();
     final root = privateObservationsReference.child(user.uid);
     final plantKey = guideObservationPlantKey(draft.plant);
@@ -589,6 +588,13 @@ Future<String?> saveGuideCameraFind(GuideCameraDraft draft) async {
         .set(json);
     unawaited(syncGuidePrivatePhotos(onlyId: observation.id));
     unawaited(GuideAnalytics.seenSave(source: 'photo', shared: false));
+    unawaited(fillGuideFindCountry(
+      uid: user.uid,
+      id: observation.id,
+      plant: draft.plant,
+      latitude: draft.latitude,
+      longitude: draft.longitude,
+    ));
     return observation.id;
   } catch (error) {
     debugPrint('guide camera save: $error');
@@ -708,7 +714,7 @@ Future<String?> _storeCameraShot(
   final dir = '$storageObservations$uid/${plant.replaceAll(' ', '_')}';
   final root = (await getApplicationDocumentsDirectory()).path;
   await Directory('$root/$dir').create(recursive: true);
-  await source.copy('$root/$dir/$filename');
+  await copyGuidePhotoWithoutGps(shotPath, '$root/$dir/$filename');
   return '$dir/$filename';
 }
 

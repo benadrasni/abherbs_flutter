@@ -1,5 +1,6 @@
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/data/guide_location.dart';
+import 'package:abherbs_flutter/data/guide_photo_file.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/camera/guide_camera.dart';
 import 'package:abherbs_flutter/seen/guide_private_photos.dart';
@@ -14,11 +15,11 @@ import 'package:flutter/foundation.dart';
 final Set<String> _countryFillIds = {};
 
 /// Writes a country onto private rows that have coordinates and none yet.
-/// The Seen date line reads that field. A lookup that finds nothing is not
-/// retried until the next launch.
-Future<void> fillGuideSeenCountries(Object? value) async {
-  final uid = guideNotebookUser()?.uid;
-  if (uid == null) return;
+/// [uid] is the account the snapshot was read for. A later account is left
+/// alone. The Seen date line reads that field. A lookup that finds nothing
+/// is not retried until the next launch.
+Future<void> fillGuideSeenCountries(Object? value, String uid) async {
+  if (uid.isEmpty || guideNotebookUser()?.uid != uid) return;
   final gaps = [
     for (final gap in guideSeenCountryGaps(value))
       if (_countryFillIds.add(gap.id)) gap,
@@ -43,21 +44,14 @@ Future<void> fillGuideSeenCountries(Object? value) async {
   }
 }
 
-Future<void> _storeCountry(String uid, GuideSeenCountryGap gap) async {
-  try {
-    final code = await guideCountryCode(gap.latitude, gap.longitude);
-    if (code == null) return;
-    final root = privateObservationsReference.child(uid);
-    final patch = {observationCountry: code};
-    await root
-        .child(firebaseObservationsByDate)
-        .child(firebaseAttributeList)
-        .child(gap.id)
-        .update(patch);
-    await _patchPrivatePlant(root, gap.plant, gap.id, patch);
-  } catch (error) {
-    debugPrint('guide seen country ${gap.id}: $error');
-  }
+Future<void> _storeCountry(String uid, GuideSeenCountryGap gap) {
+  return fillGuideFindCountry(
+    uid: uid,
+    id: gap.id,
+    plant: gap.plant,
+    latitude: gap.latitude,
+    longitude: gap.longitude,
+  );
 }
 
 /// Publishes one confirmed find for review. The note stays on the private
@@ -271,7 +265,13 @@ Future<bool> _uploadPhoto(String path) async {
         firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket)
             .ref()
             .child(path);
-    await ref.putFile(file);
+    final bytes = jpegWithoutGps(await file.readAsBytes());
+    await ref.putData(
+      bytes,
+      firebase_storage.SettableMetadata(
+        contentType: guidePrivateContentType(path),
+      ),
+    );
     return true;
   } catch (error) {
     debugPrint('guide seen photo $path: $error');

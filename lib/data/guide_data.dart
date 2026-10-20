@@ -1876,8 +1876,7 @@ Future<void> saveGuideSeen(GuideSeenDraft draft) async {
   observation.order = -draft.when.millisecondsSinceEpoch;
   observation.confirmed = true;
   observation.source = observationSourceManual;
-  observation.country =
-      await guideCountryCode(draft.latitude, draft.longitude) ?? '';
+  observation.country = '';
   final json = observation.toJson();
   final root = privateObservationsReference.child(user.uid);
   await root
@@ -1892,6 +1891,80 @@ Future<void> saveGuideSeen(GuideSeenDraft draft) async {
       .child(observation.id)
       .set(json);
   unawaited(syncGuidePrivatePhotos(onlyId: observation.id));
+  unawaited(fillGuideFindCountry(
+    uid: user.uid,
+    id: observation.id,
+    plant: draft.plant,
+    latitude: draft.latitude,
+    longitude: draft.longitude,
+  ));
+}
+
+/// A late country write still belongs on this row.
+///
+/// The lookup can outlive the find, and the account can change while it
+/// runs. An update on a missing date row would create a country-only record.
+@visibleForTesting
+bool guideCountryWriteApplies({
+  required bool rowExists,
+  required String snapshotUid,
+  required String? currentUid,
+}) {
+  return rowExists &&
+      snapshotUid.isNotEmpty &&
+      currentUid != null &&
+      currentUid == snapshotUid;
+}
+
+/// Looks up the country after the find is saved. The save itself does not
+/// wait on the geocoder. The row is updated only while it and the account
+/// are still the ones this lookup started for.
+Future<void> fillGuideFindCountry({
+  required String uid,
+  required String id,
+  required String plant,
+  required double latitude,
+  required double longitude,
+}) async {
+  if (guideNotebookUser()?.uid != uid || id.isEmpty) return;
+  try {
+    final code = await guideCountryCode(latitude, longitude);
+    if (code == null) return;
+    final root = privateObservationsReference.child(uid);
+    final dateRef = root
+        .child(firebaseObservationsByDate)
+        .child(firebaseAttributeList)
+        .child(id);
+    final event = await dateRef.once();
+    if (!guideCountryWriteApplies(
+      rowExists: event.snapshot.exists,
+      snapshotUid: uid,
+      currentUid: guideNotebookUser()?.uid,
+    )) {
+      return;
+    }
+    final patch = {observationCountry: code};
+    await dateRef.update(patch);
+    final keys = <String>{
+      if (plant.isNotEmpty) plant,
+      if (guideObservationPlantKey(plant).isNotEmpty)
+        guideObservationPlantKey(plant),
+    };
+    for (final key in keys) {
+      if (guideNotebookUser()?.uid != uid) return;
+      final ref = root
+          .child(firebaseObservationsByPlant)
+          .child(key)
+          .child(firebaseAttributeList)
+          .child(id);
+      final row = await ref.once();
+      if (!row.snapshot.exists) continue;
+      if (guideNotebookUser()?.uid != uid) return;
+      await ref.update(patch);
+    }
+  } catch (error) {
+    debugPrint('guide find country $id: $error');
+  }
 }
 
 Future<PlantTranslation> _guideTranslation(String lang, String name) async {

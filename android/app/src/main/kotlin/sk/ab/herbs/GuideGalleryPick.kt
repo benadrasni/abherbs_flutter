@@ -3,6 +3,7 @@ package sk.ab.herbs
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.net.Uri
 import android.webkit.MimeTypeMap
 import androidx.exifinterface.media.ExifInterface
@@ -12,9 +13,12 @@ import java.util.UUID
 import kotlin.math.max
 import kotlin.math.roundToInt
 
-/// Copies a photo-picker item into the cache. A JPEG that already fits is
-/// kept byte for byte, so its GPS stays. Anything scaled or transcoded gets
-/// the place and date tags written back onto the JPEG.
+/// Copies a photo-picker item into the cache and bakes its orientation into
+/// the pixels. Flutter draws a file as stored, so a sensor orientation tag
+/// would show the photo sideways and send those sideways bytes on.
+/// A JPEG that already fits and is already upright is kept byte for byte,
+/// so its GPS stays until the observation has read it. A rewritten JPEG
+/// keeps the place and date, and the orientation tag is set back to normal.
 object GuideGalleryPick {
     private val placeTags = arrayOf(
         ExifInterface.TAG_GPS_LATITUDE,
@@ -25,7 +29,6 @@ object GuideGalleryPick {
         ExifInterface.TAG_GPS_ALTITUDE_REF,
         ExifInterface.TAG_DATETIME,
         ExifInterface.TAG_DATETIME_ORIGINAL,
-        ExifInterface.TAG_ORIENTATION,
     )
 
     fun save(context: Context, uri: Uri, maxWidth: Int): String? {
@@ -39,11 +42,14 @@ object GuideGalleryPick {
             original.delete()
             return null
         }
-        // Magic bytes, not the mime extension. A JPEG that already fits is
-        // returned unchanged so its GPS rationals stay exact.
-        val tooWide = maxWidth > 0 && widthOf(original) > maxWidth
-        if (isJpeg(original) && !tooWide) return original.absolutePath
-        val scaled = transcode(original, maxWidth) ?: return original.absolutePath
+        val orientation = readOrientation(original)
+        val bounds = boundsOf(original)
+        val uprightWidth = displayedWidth(bounds.outWidth, bounds.outHeight, orientation)
+        val tooWide = maxWidth > 0 && uprightWidth > maxWidth
+        if (isJpeg(original) && !tooWide && !needsTurn(orientation)) {
+            return original.absolutePath
+        }
+        val scaled = transcode(original, maxWidth, orientation) ?: return original.absolutePath
         copyPlace(original, scaled)
         original.delete()
         return scaled.absolutePath
@@ -65,24 +71,60 @@ object GuideGalleryPick {
         }
     }
 
-    private fun widthOf(file: File): Int {
+    private fun boundsOf(file: File): BitmapFactory.Options {
         val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
         BitmapFactory.decodeFile(file.absolutePath, bounds)
-        return bounds.outWidth
+        return bounds
     }
 
-    private fun transcode(original: File, maxWidth: Int): File? {
-        val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-        BitmapFactory.decodeFile(original.absolutePath, bounds)
+    private fun readOrientation(file: File): Int {
+        return try {
+            ExifInterface(file.absolutePath).getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL,
+            )
+        } catch (_: Exception) {
+            ExifInterface.ORIENTATION_NORMAL
+        }
+    }
+
+    private fun needsTurn(orientation: Int): Boolean {
+        return when (orientation) {
+            ExifInterface.ORIENTATION_UNDEFINED,
+            ExifInterface.ORIENTATION_NORMAL,
+            -> false
+            else -> true
+        }
+    }
+
+    private fun swapsAxes(orientation: Int): Boolean {
+        return when (orientation) {
+            ExifInterface.ORIENTATION_ROTATE_90,
+            ExifInterface.ORIENTATION_ROTATE_270,
+            ExifInterface.ORIENTATION_TRANSPOSE,
+            ExifInterface.ORIENTATION_TRANSVERSE,
+            -> true
+            else -> false
+        }
+    }
+
+    private fun displayedWidth(width: Int, height: Int, orientation: Int): Int {
+        if (width <= 0 || height <= 0) return 0
+        return if (swapsAxes(orientation)) height else width
+    }
+
+    private fun transcode(original: File, maxWidth: Int, orientation: Int): File? {
+        val bounds = boundsOf(original)
         val width = bounds.outWidth
         val height = bounds.outHeight
         if (width <= 0 || height <= 0) return null
-        val sample = sampleSize(width, maxWidth)
+        val sample = sampleSize(displayedWidth(width, height, orientation), maxWidth)
         val decoded = BitmapFactory.decodeFile(
             original.absolutePath,
             BitmapFactory.Options().apply { inSampleSize = sample },
         ) ?: return null
-        val target = scaleToWidth(decoded, maxWidth)
+        val upright = applyOrientation(decoded, orientation)
+        val target = scaleToWidth(upright, maxWidth)
         val out = File(original.parentFile, "${UUID.randomUUID()}.jpg")
         try {
             FileOutputStream(out).use { stream ->
@@ -92,10 +134,36 @@ object GuideGalleryPick {
                 }
             }
         } finally {
-            if (target != decoded) target.recycle()
+            if (target !== upright) target.recycle()
+            if (upright !== decoded) upright.recycle()
             decoded.recycle()
         }
         return out
+    }
+
+    /// EXIF orientation, applied in the order the tag describes.
+    private fun applyOrientation(bitmap: Bitmap, orientation: Int): Bitmap {
+        val matrix = Matrix()
+        when (orientation) {
+            ExifInterface.ORIENTATION_FLIP_HORIZONTAL -> matrix.setScale(-1f, 1f)
+            ExifInterface.ORIENTATION_ROTATE_180 -> matrix.setRotate(180f)
+            ExifInterface.ORIENTATION_FLIP_VERTICAL -> {
+                matrix.setRotate(180f)
+                matrix.postScale(-1f, 1f)
+            }
+            ExifInterface.ORIENTATION_TRANSPOSE -> {
+                matrix.setRotate(90f)
+                matrix.postScale(-1f, 1f)
+            }
+            ExifInterface.ORIENTATION_ROTATE_90 -> matrix.setRotate(90f)
+            ExifInterface.ORIENTATION_TRANSVERSE -> {
+                matrix.setRotate(-90f)
+                matrix.postScale(-1f, 1f)
+            }
+            ExifInterface.ORIENTATION_ROTATE_270 -> matrix.setRotate(-90f)
+            else -> return bitmap
+        }
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
 
     private fun sampleSize(width: Int, maxWidth: Int): Int {
@@ -119,6 +187,10 @@ object GuideGalleryPick {
                 val value = source.getAttribute(tag) ?: continue
                 dest.setAttribute(tag, value)
             }
+            dest.setAttribute(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL.toString(),
+            )
             dest.saveAttributes()
         } catch (_: Exception) {
         }

@@ -120,6 +120,11 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
       _show(ticket, await future);
     } catch (error) {
       debugPrint('guide field guide: $error');
+      if (!mounted || ticket != _ticket) return;
+      setState(() {
+        _failed = true;
+        _awaitingPrices = false;
+      });
     }
   }
 

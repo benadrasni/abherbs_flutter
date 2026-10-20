@@ -4,6 +4,7 @@ import 'dart:ui' show Locale;
 
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
+import 'package:abherbs_flutter/data/guide_photo_file.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -111,7 +112,7 @@ Future<PhotoIdentification> identifyPlantPhoto({
     return const PhotoIdentification([], refusal: PhotoRefusal.signIn);
   }
   try {
-    final bytes = await image.readAsBytes();
+    final bytes = jpegWithoutGps(await image.readAsBytes());
     final response = await FirebaseFunctions.instance
         .httpsCallable(
       'identifyPlant',

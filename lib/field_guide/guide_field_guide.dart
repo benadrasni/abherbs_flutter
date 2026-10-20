@@ -164,12 +164,13 @@ GuideFieldGuideAccess guideFieldGuideAccess({
   required bool monthlyOnThisStore,
   required bool fromAccountOnly,
 }) {
+  // The yearly price can still be on its way. Until it arrives the change
+  // cannot be bought, but the screen is not a locked summary.
   final upgrade = monthlyOnThisStore &&
       !fromAccountOnly &&
       catalog.monthly.owned &&
       !catalog.yearly.owned &&
-      !catalog.coveredByOlderPlan &&
-      catalog.yearly.price != null;
+      !catalog.coveredByOlderPlan;
   final hasPlan = catalog.monthly.owned ||
       catalog.yearly.owned ||
       catalog.coveredByOlderPlan ||
