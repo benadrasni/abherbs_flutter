@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:abherbs_flutter/generated/l10n.dart';
 import 'package:abherbs_flutter/field_guide/field_guide_page.dart';
 import 'package:abherbs_flutter/field_guide/guide_field_guide.dart';
@@ -152,7 +154,8 @@ void main() {
     expect(loaded.products[fieldGuideMonthly]?.rawPrice, 2.99);
   });
 
-  test('Field Guide plans hide ads, and the old paid app is not Field Guide', () {
+  test('Field Guide plans hide ads, and the old paid app is not Field Guide',
+      () {
     Purchases.hasOldVersion = true;
     expect(Purchases.hasFieldGuide(), isFalse);
     expect(Purchases.syncsSeenPhotos(), isTrue);
@@ -362,6 +365,67 @@ void main() {
     await tester.tap(find.byKey(guideFieldGuideStartKey));
     await tester.pump();
     expect(bought, 0);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('the page opens while the store is still answering',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(400, 1600));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final gate = Completer<GuideFieldGuideLoaded>();
+    addTearDown(() {
+      if (!gate.isCompleted) {
+        gate.complete(GuideFieldGuideLoaded(catalog: _priced()));
+      }
+    });
+    await tester.pumpWidget(_app(GuideFieldGuidePage(
+      load: () => gate.future,
+      storeTimeout: const Duration(seconds: 30),
+      plate: (_) => const ColoredBox(color: Color(0xFFEFE6D3)),
+    )));
+    await tester.pump();
+
+    expect(find.text('Field Guide'), findsOneWidget);
+    expect(find.text('Start 7 days free'), findsOneWidget);
+    expect(find.text('Yearly'), findsOneWidget);
+    expect(find.text('Monthly'), findsOneWidget);
+    expect(
+      find.text('The store doesn’t have these plans yet.'),
+      findsNothing,
+    );
+    expect(find.byType(CircularProgressIndicator), findsNWidgets(2));
+
+    gate.complete(GuideFieldGuideLoaded(catalog: _priced()));
+    await tester.pump();
+    expect(find.text(r'$19.99'), findsOneWidget);
+    expect(find.text(r'$2.99'), findsOneWidget);
+    expect(find.byType(CircularProgressIndicator), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a store that never answers leaves the plans without a price',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(400, 1600));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(_app(GuideFieldGuidePage(
+      load: () => Completer<GuideFieldGuideLoaded>().future,
+      storeTimeout: const Duration(milliseconds: 20),
+      plate: (_) => const ColoredBox(color: Color(0xFFEFE6D3)),
+    )));
+    await tester.pump();
+    expect(find.text('Field Guide'), findsOneWidget);
+    expect(
+      find.text('The store doesn’t have these plans yet.'),
+      findsNothing,
+    );
+
+    await tester.pump(const Duration(milliseconds: 20));
+    expect(find.text('Field Guide'), findsOneWidget);
+    expect(find.text('Store price'), findsNWidgets(2));
+    expect(
+      find.text('The store doesn’t have these plans yet.'),
+      findsOneWidget,
+    );
     expect(tester.takeException(), isNull);
   });
 

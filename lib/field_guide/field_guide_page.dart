@@ -22,6 +22,10 @@ const guideFieldGuideRestoreKey = Key('guideFieldGuideRestore');
 const guideFieldGuideYearlyKey = Key('guideFieldGuideYearly');
 const guideFieldGuideMonthlyKey = Key('guideFieldGuideMonthly');
 
+/// How long the plans wait for Play or the App Store before they open
+/// without a price. A later answer still fills the rows in.
+const guideFieldGuideStoreTimeout = Duration(seconds: 12);
+
 /// Field Guide: yearly and monthly, with the store price on each row.
 /// A monthly plan bought on this phone can change to yearly. Any other
 /// active plan leaves the rows, the button, and Restore in place and off.
@@ -31,6 +35,7 @@ class GuideFieldGuidePage extends StatefulWidget {
   final Future<void> Function()? restore;
   final WidgetBuilder? plate;
   final GuideAppearance? appearance;
+  final Duration storeTimeout;
 
   const GuideFieldGuidePage({
     super.key,
@@ -39,6 +44,7 @@ class GuideFieldGuidePage extends StatefulWidget {
     this.restore,
     this.plate,
     this.appearance,
+    this.storeTimeout = guideFieldGuideStoreTimeout,
   });
 
   @override
@@ -49,9 +55,10 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
   GuideFieldGuideLoaded? _loaded;
   GuideFieldGuidePlan _plan = GuideFieldGuidePlan.yearly;
   bool _planChosen = false;
-  bool _loading = true;
+  bool _awaitingPrices = true;
   bool _failed = false;
   bool _busy = false;
+  bool _viewed = false;
   String? _error;
   int _ticket = 0;
   StreamSubscription<List<PurchaseDetails>>? _purchaseSub;
@@ -85,27 +92,51 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
 
   Future<void> _load() async {
     final ticket = ++_ticket;
+    final future = (widget.load ?? loadGuideFieldGuide)();
     try {
-      final loaded = await (widget.load ?? loadGuideFieldGuide)();
+      final loaded = await future.timeout(widget.storeTimeout);
+      _show(ticket, loaded);
+    } on TimeoutException {
+      debugPrint('guide field guide: store timed out');
       if (!mounted || ticket != _ticket) return;
-      setState(() {
-        _loaded = loaded;
-        _failed = false;
-        _loading = false;
-        if (!_planChosen) _plan = _openingPlan(loaded.catalog);
-      });
-      unawaited(GuideAnalytics.viewItem([
-        loaded.catalog.yearly.productId,
-        loaded.catalog.monthly.productId,
-      ]));
+      setState(() => _awaitingPrices = false);
+      unawaited(_showWhenReady(ticket, future));
     } catch (error) {
       debugPrint('guide field guide: $error');
       if (!mounted || ticket != _ticket) return;
       setState(() {
         _failed = true;
-        _loading = false;
+        _awaitingPrices = false;
       });
     }
+  }
+
+  /// Play can answer after the plans have already opened.
+  Future<void> _showWhenReady(
+    int ticket,
+    Future<GuideFieldGuideLoaded> future,
+  ) async {
+    try {
+      _show(ticket, await future);
+    } catch (error) {
+      debugPrint('guide field guide: $error');
+    }
+  }
+
+  void _show(int ticket, GuideFieldGuideLoaded loaded) {
+    if (!mounted || ticket != _ticket) return;
+    setState(() {
+      _loaded = loaded;
+      _failed = false;
+      _awaitingPrices = false;
+      if (!_planChosen) _plan = _openingPlan(loaded.catalog);
+    });
+    if (_viewed) return;
+    _viewed = true;
+    unawaited(GuideAnalytics.viewItem([
+      loaded.catalog.yearly.productId,
+      loaded.catalog.monthly.productId,
+    ]));
   }
 
   void _onStore(List<PurchaseDetails> purchases) {
@@ -254,19 +285,20 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
     );
   }
 
+  GuideFieldGuideCatalog _catalog() {
+    return _loaded?.catalog ??
+        guideFieldGuideCatalog(
+          storeAvailable: false,
+          yearlyPrice: null,
+          monthlyPrice: null,
+          owned: guideOwnedProductIds(),
+        );
+  }
+
   Widget _body(BuildContext context) {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
-    if (_loading) {
-      return Center(
-        child: SizedBox(
-          width: 28,
-          height: 28,
-          child: CircularProgressIndicator(strokeWidth: 2, color: colors.moss),
-        ),
-      );
-    }
-    if (_failed || _loaded == null) {
+    if (_failed && _loaded == null) {
       return Column(
         children: [
           const Spacer(),
@@ -277,8 +309,8 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
           TextButton(
             onPressed: () {
               setState(() {
-                _loading = true;
                 _failed = false;
+                _awaitingPrices = true;
               });
               unawaited(_load());
             },
@@ -288,10 +320,18 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
         ],
       );
     }
-    return _content(context, _loaded!.catalog);
+    return _content(
+      context,
+      _catalog(),
+      pricesPending: _awaitingPrices && _loaded == null,
+    );
   }
 
-  Widget _content(BuildContext context, GuideFieldGuideCatalog catalog) {
+  Widget _content(
+    BuildContext context,
+    GuideFieldGuideCatalog catalog, {
+    required bool pricesPending,
+  }) {
     final colors = GuideColors.of(context);
     final strings = S.of(context);
     final bottom = 24 + MediaQuery.paddingOf(context).bottom;
@@ -400,6 +440,7 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
                 ),
                 price: catalog.yearly.price ??
                     strings.guide_field_guide_store_price,
+                pricePending: pricesPending && catalog.yearly.price == null,
                 selected: _plan == GuideFieldGuidePlan.yearly,
                 onPressed: access.locked
                     ? null
@@ -417,6 +458,7 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
                 ),
                 price: catalog.monthly.price ??
                     strings.guide_field_guide_store_price,
+                pricePending: pricesPending && catalog.monthly.price == null,
                 selected: _plan == GuideFieldGuidePlan.monthly,
                 onPressed: access.locked
                     ? null
@@ -425,11 +467,12 @@ class _GuideFieldGuidePageState extends State<GuideFieldGuidePage> {
             ],
           ),
         ),
-        if (!access.locked && selected.price == null)
+        if (!access.locked && selected.price == null && !pricesPending)
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
             child: Text(
               strings.guide_field_guide_unavailable,
+              textAlign: TextAlign.center,
               style: TextStyle(color: colors.ink3, fontSize: 13, height: 1.4),
             ),
           ),
@@ -730,6 +773,7 @@ class _Plan extends StatelessWidget {
     required this.title,
     required this.note,
     required this.price,
+    this.pricePending = false,
     required this.selected,
     required this.onPressed,
   });
@@ -738,6 +782,7 @@ class _Plan extends StatelessWidget {
   final String title;
   final String note;
   final String price;
+  final bool pricePending;
   final bool selected;
   final VoidCallback? onPressed;
 
@@ -799,14 +844,23 @@ class _Plan extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              Text(
-                price,
-                style: TextStyle(
-                  color: enabled ? colors.ink2 : colors.ink3,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                ),
-              ),
+              pricePending
+                  ? SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: colors.moss,
+                      ),
+                    )
+                  : Text(
+                      price,
+                      style: TextStyle(
+                        color: enabled ? colors.ink2 : colors.ink3,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                      ),
+                    ),
             ],
           ),
         ),
