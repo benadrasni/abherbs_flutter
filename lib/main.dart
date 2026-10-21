@@ -7,6 +7,7 @@ import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/l10n/app_locale.dart';
 import 'package:abherbs_flutter/person/setting_utils.dart';
 import 'package:abherbs_flutter/shell/guide_actions.dart';
+import 'package:abherbs_flutter/shell/guide_links.dart';
 import 'package:abherbs_flutter/shell/guide_fold.dart';
 import 'package:abherbs_flutter/shell/guide_shell.dart';
 import 'package:abherbs_flutter/book/list_page.dart';
@@ -27,6 +28,7 @@ import 'package:abherbs_flutter/shell/dialogs.dart';
 import 'package:abherbs_flutter/data/prefs.dart';
 import 'package:abherbs_flutter/shell/safe_focus_traversal.dart';
 import 'package:abherbs_flutter/data/utils.dart';
+import 'package:app_links/app_links.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -242,6 +244,11 @@ class _AppState extends State<App> {
   final FirebaseAnalytics _firebaseAnalytics = FirebaseAnalytics.instance;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
+  StreamSubscription<Uri>? _sharedLinks;
+  String? _pendingSharedPlant;
+  String? _openedSharedLink;
+  DateTime? _openedSharedAt;
+  int _sharedLinkFrames = 0;
   late Locale _locale;
   String? _currentTopic;
 
@@ -592,12 +599,69 @@ class _AppState extends State<App> {
 
     _locale = widget.locale;
     _subscribeToLanguageTopic(_locale.languageCode);
+    _listenForSharedLinks();
+  }
+
+  /// A shared encyclopedia URL opens that species. The same URL twice in a
+  /// moment is one open: the link stream can repeat the launch URL.
+  void _listenForSharedLinks() {
+    _sharedLinks =
+        AppLinks().uriLinkStream.listen(_onSharedLink, onError: (Object error) {
+      debugPrint('guide link: $error');
+    });
+  }
+
+  void _onSharedLink(Uri uri) {
+    final name = plantNameFromSharedUrl(uri);
+    if (name == null) return;
+    final key = uri.toString();
+    final now = DateTime.now();
+    if (_openedSharedLink == key &&
+        _openedSharedAt != null &&
+        now.difference(_openedSharedAt!) < const Duration(seconds: 2)) {
+      return;
+    }
+    _openedSharedLink = key;
+    _openedSharedAt = now;
+    final context = _navigatorKey.currentContext;
+    if (!mounted || context == null) {
+      _pendingSharedPlant = name;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        _openPendingSharedPlant();
+      });
+      return;
+    }
+    _openSharedPlant(context, name);
+  }
+
+  void _openPendingSharedPlant() {
+    final name = _pendingSharedPlant;
+    final context = _navigatorKey.currentContext;
+    if (name == null) return;
+    if (context == null) {
+      if (_sharedLinkFrames >= 8) return;
+      _sharedLinkFrames++;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        _openPendingSharedPlant();
+      });
+      return;
+    }
+    _pendingSharedPlant = null;
+    _sharedLinkFrames = 0;
+    _openSharedPlant(context, name);
+  }
+
+  void _openSharedPlant(BuildContext context, String name) {
+    unawaited(openGuidePlant(context, name, source: GuidePlantSource.link));
   }
 
   @override
   void dispose() {
     Prefs.dispose();
     _subscription.cancel();
+    _sharedLinks?.cancel();
     super.dispose();
   }
 

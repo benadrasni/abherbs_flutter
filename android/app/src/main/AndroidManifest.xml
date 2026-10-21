@@ -37,6 +37,10 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
+        <meta-data
+            android:name="asset_statements"
+            android:resource="@string/asset_statements" />
+
         <!-- No screenOrientation, resizeableActivity, or aspect-ratio lock.
              Android 16 ignores those on large screens (sw >= 600dp). Phones
              stay portrait in MainActivity; a large screen rotates and resizes. -->
@@ -61,6 +65,51 @@
             <intent-filter>
                 <action android:name="FLUTTER_NOTIFICATION_CLICK" />
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <!-- Species pages only. Each host pairs with each prefix. -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="whatsthatflower.com" />
+                <data android:host="abherbs-backend.web.app" />
+                <data android:pathPrefix="/plant/" />
+                <data android:pathPrefix="/sk/plant/" />
+                <data android:pathPrefix="/de/plant/" />
+                <data android:pathPrefix="/fr/plant/" />
+                <data android:pathPrefix="/cs/plant/" />
+                <data android:pathPrefix="/pl/plant/" />
+                <data android:pathPrefix="/ru/plant/" />
+                <data android:pathPrefix="/es/plant/" />
+                <data android:pathPrefix="/pt/plant/" />
+                <data android:pathPrefix="/ja/plant/" />
+                <data android:pathPrefix="/it/plant/" />
+                <data android:pathPrefix="/nl/plant/" />
+                <data android:pathPrefix="/uk/plant/" />
+                <data android:pathPrefix="/hu/plant/" />
+                <data android:pathPrefix="/da/plant/" />
+                <data android:pathPrefix="/sv/plant/" />
+                <data android:pathPrefix="/no/plant/" />
+                <data android:pathPrefix="/fi/plant/" />
+                <data android:pathPrefix="/et/plant/" />
+                <data android:pathPrefix="/lv/plant/" />
+                <data android:pathPrefix="/lt/plant/" />
+                <data android:pathPrefix="/hr/plant/" />
+                <data android:pathPrefix="/sl/plant/" />
+                <data android:pathPrefix="/sr/plant/" />
+                <data android:pathPrefix="/bg/plant/" />
+                <data android:pathPrefix="/ro/plant/" />
+                <data android:pathPrefix="/hi/plant/" />
+                <data android:pathPrefix="/ko/plant/" />
+                <data android:pathPrefix="/zh/plant/" />
+                <data android:pathPrefix="/fa/plant/" />
+                <data android:pathPrefix="/he/plant/" />
+                <data android:pathPrefix="/ar/plant/" />
+                <data android:pathPrefix="/id/plant/" />
+                <data android:pathPrefix="/tr/plant/" />
+                <data android:pathPrefix="/en/plant/" />
             </intent-filter>
         </activity>
     </application>

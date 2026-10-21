@@ -10,6 +10,7 @@ class GuidePlantSource {
   static const list = 'list';
   static const photo = 'photo';
   static const notification = 'notification';
+  static const link = 'link';
   static const favorite = 'favorite';
   static const seen = 'seen';
   static const outside = 'outside';
