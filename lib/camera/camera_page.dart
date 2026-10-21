@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/key/filter_utils.dart';
 import 'package:abherbs_flutter/field_guide/field_guide_page.dart';
 import 'package:abherbs_flutter/camera/guide_camera.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
+import 'package:abherbs_flutter/data/guide_photo_file.dart';
 import 'package:abherbs_flutter/data/guide_photo_pick.dart';
 import 'package:abherbs_flutter/data/guide_location.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
@@ -146,6 +147,9 @@ class _GuideCameraPageState extends State<GuideCameraPage>
 
   @override
   void dispose() {
+    // A review left on screen when the route goes away. A capture still in
+    // flight deletes the file itself once it notices.
+    if (!_busy && !_naming) _releaseShot();
     guideMonthCount.removeListener(_onMonth);
     Purchases.namesRevision.removeListener(_onNames);
     WidgetsBinding.instance.removeObserver(this);
@@ -238,7 +242,15 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     }
   }
 
+  void _releaseShot() {
+    final path = _shotPath;
+    if (path == null) return;
+    _shotPath = null;
+    unawaited(deleteDiscardedShot(path));
+  }
+
   void _clearShot() {
+    _releaseShot();
     setState(() {
       _naming = false;
       _sheet = null;
@@ -372,6 +384,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   }
 
   void _close() {
+    _releaseShot();
     final action = widget.onClose;
     if (action != null) {
       action();
@@ -381,6 +394,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   }
 
   void _key() {
+    _releaseShot();
     final action = widget.onKey;
     if (action != null) {
       action();
@@ -859,13 +873,20 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   Future<void> _openThenPreview(Future<void> Function() push) async {
     await _stopPreview();
     await push();
-    if (!mounted) return;
+    // The find, when there is one, already has its own copy. The cache file
+    // still has the original GPS.
+    final shot = _shotPath;
+    _shotPath = null;
+    if (!mounted) {
+      if (shot != null) unawaited(deleteDiscardedShot(shot));
+      return;
+    }
     setState(() {
       _naming = false;
-      _shotPath = null;
       _shotWhen = null;
       _shotPosition = null;
     });
+    if (shot != null) unawaited(deleteDiscardedShot(shot));
     await _startPreview();
   }
 
@@ -886,6 +907,10 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       final pick = widget.pickPhoto ?? _pickDefault;
       path = await pick(source);
       if (!mounted || path == null) return;
+      final previous = _shotPath;
+      if (previous != null && previous != path) {
+        unawaited(deleteDiscardedShot(previous));
+      }
       setState(() {
         _naming = true;
         _shotPath = path;
@@ -985,6 +1010,10 @@ class _GuideCameraPageState extends State<GuideCameraPage>
         SnackBar(content: Text(S.of(context).guide_camera_failed)),
       );
     } finally {
+      if (!mounted && path != null) {
+        if (_shotPath == path) _shotPath = null;
+        unawaited(deleteDiscardedShot(path));
+      }
       if (mounted) setState(() => _busy = false);
     }
   }

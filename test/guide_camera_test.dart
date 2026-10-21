@@ -611,10 +611,10 @@ void main() {
   });
 
   test('a photo position is its EXIF GPS, or nothing', () async {
-    expect(guidePhotoPosition(48.15, 17.11),
-        (latitude: 48.15, longitude: 17.11));
-    expect(guidePhotoPosition(-33.9, -70.6),
-        (latitude: -33.9, longitude: -70.6));
+    expect(
+        guidePhotoPosition(48.15, 17.11), (latitude: 48.15, longitude: 17.11));
+    expect(
+        guidePhotoPosition(-33.9, -70.6), (latitude: -33.9, longitude: -70.6));
     expect(guidePhotoPosition(0, 0), isNull);
     expect(guidePhotoPosition(double.nan, 17.11), isNull);
     expect(guidePhotoPosition(91, 17.11), isNull);
@@ -923,6 +923,41 @@ void main() {
     expect(find.text('Couldn’t name this photo. Try again.'), findsOneWidget);
     expect(find.text('Naming…'), findsNothing);
     expect(find.text('Flower and a leaf, in focus'), findsOneWidget);
+  });
+
+  testWidgets('a discarded shot deletes the cache file that still has gps',
+      (tester) async {
+    final root = (await tester.runAsync(
+      () => Directory.systemTemp.createTemp('guide-discard-shot'),
+    ))!;
+    addTearDown(() => root.deleteSync(recursive: true));
+    final cache = Directory('${root.path}/guide-pick')..createSync();
+    final shot = File('${cache.path}/shot.jpg');
+    final kept = File('${root.path}/kept.jpg')..writeAsBytesSync([5, 6]);
+
+    await _show(
+      tester,
+      _page(
+        allowance: GuideAllowance.credits(3),
+        pickPhoto: (_) async => shot.path,
+        identify: (_) async => const GuideCameraOutcome.notPlant(),
+      ),
+    );
+
+    await tester.tap(find.byKey(const Key('guide-camera-shutter')));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
+    expect(find.text('That doesn’t look like a plant'), findsOneWidget);
+
+    // Written after the sheet is up. Building a frame of this file would
+    // decode it and stall the test; discard unlinks it before the next frame.
+    shot.writeAsBytesSync([1, 2, 3, 4]);
+    expect(shot.existsSync(), isTrue);
+
+    await tester.tap(find.text('Try again'));
+    expect(shot.existsSync(), isFalse);
+    expect(kept.existsSync(), isTrue);
+    await tester.pump();
   });
 
   testWidgets('a cancelled photo does not start naming', (tester) async {

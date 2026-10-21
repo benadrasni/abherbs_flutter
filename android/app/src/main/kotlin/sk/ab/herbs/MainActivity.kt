@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.WindowManager
+import java.io.File
 import androidx.core.view.WindowCompat
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -92,14 +93,20 @@ class MainActivity : FlutterActivity() {
         Thread {
             val path = try {
                 GuideGalleryPick.save(app, uri, maxWidth)
-            } catch (error: Exception) {
+            } catch (error: Throwable) {
                 Log.e("GuideGalleryPick", "save failed", error)
                 null
             }
             runOnUiThread {
+                val delivered = if (isDestroyed) {
+                    if (path != null) File(path).delete()
+                    null
+                } else {
+                    path
+                }
                 try {
-                    if (!isDestroyed) pending.success(path) else pending.success(null)
-                } catch (error: Exception) {
+                    pending.success(delivered)
+                } catch (error: Throwable) {
                     Log.e("GuideGalleryPick", "result failed", error)
                 }
             }
@@ -113,7 +120,7 @@ class MainActivity : FlutterActivity() {
             pickerResult = null
             try {
                 pending?.success(null)
-            } catch (error: Exception) {
+            } catch (error: Throwable) {
                 Log.e("GuideGalleryPick", "result failed", error)
             }
         }

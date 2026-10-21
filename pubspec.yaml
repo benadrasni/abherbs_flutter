@@ -52,6 +52,7 @@ dependencies:
   country_icons: 3.0.0
   wakelock_plus: 1.8.0
   intl_utils: 2.8.17
+  image: 4.12.0
 
 dev_dependencies:
   flutter_test:

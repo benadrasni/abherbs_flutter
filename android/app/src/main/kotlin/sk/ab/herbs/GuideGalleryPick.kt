@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
+import android.util.Log
 import android.webkit.MimeTypeMap
 import androidx.exifinterface.media.ExifInterface
 import java.io.File
@@ -19,7 +20,10 @@ import kotlin.math.roundToInt
 /// A JPEG that already fits and is already upright is kept byte for byte,
 /// so its GPS stays until the observation has read it. A rewritten JPEG
 /// keeps the place and date, and the orientation tag is set back to normal.
+/// A photo that cannot be re-encoded is kept for that same read. Nothing
+/// uploads those bytes unless the location metadata comes off.
 object GuideGalleryPick {
+    private const val maxDecodedPixels = 8_000_000L
     private val placeTags = arrayOf(
         ExifInterface.TAG_GPS_LATITUDE,
         ExifInterface.TAG_GPS_LATITUDE_REF,
@@ -35,24 +39,40 @@ object GuideGalleryPick {
         val dir = File(context.cacheDir, "guide-pick").apply { mkdirs() }
         val extension = extensionOf(context, uri)
         val original = File(dir, "${UUID.randomUUID()}.$extension")
-        context.contentResolver.openInputStream(uri)?.use { input ->
-            FileOutputStream(original).use { output -> input.copyTo(output) }
-        } ?: return null
-        if (!original.exists() || original.length() == 0L) {
+        var scaled: File? = null
+        try {
+            context.contentResolver.openInputStream(uri)?.use { input ->
+                FileOutputStream(original).use { output -> input.copyTo(output) }
+            } ?: return abandon(original, null)
+            if (!original.exists() || original.length() == 0L) {
+                return abandon(original, null)
+            }
+            val orientation = readOrientation(original)
+            val bounds = boundsOf(original)
+            val uprightWidth =
+                displayedWidth(bounds.outWidth, bounds.outHeight, orientation)
+            val tooWide = maxWidth > 0 && uprightWidth > maxWidth
+            if (isJpeg(original) && !tooWide && !needsTurn(orientation)) {
+                return original.absolutePath
+            }
+            val written = transcode(original, maxWidth, orientation)
+            if (written == null) return original.absolutePath
+            scaled = written
+            copyPlace(original, written)
             original.delete()
+            return written.absolutePath
+        } catch (error: Throwable) {
+            Log.e("GuideGalleryPick", "save failed", error)
+            original.delete()
+            scaled?.delete()
             return null
         }
-        val orientation = readOrientation(original)
-        val bounds = boundsOf(original)
-        val uprightWidth = displayedWidth(bounds.outWidth, bounds.outHeight, orientation)
-        val tooWide = maxWidth > 0 && uprightWidth > maxWidth
-        if (isJpeg(original) && !tooWide && !needsTurn(orientation)) {
-            return original.absolutePath
-        }
-        val scaled = transcode(original, maxWidth, orientation) ?: return original.absolutePath
-        copyPlace(original, scaled)
+    }
+
+    private fun abandon(original: File, scaled: File?): String? {
         original.delete()
-        return scaled.absolutePath
+        scaled?.delete()
+        return null
     }
 
     private fun extensionOf(context: Context, uri: Uri): String {
@@ -83,7 +103,7 @@ object GuideGalleryPick {
                 ExifInterface.TAG_ORIENTATION,
                 ExifInterface.ORIENTATION_NORMAL,
             )
-        } catch (_: Exception) {
+        } catch (_: Throwable) {
             ExifInterface.ORIENTATION_NORMAL
         }
     }
@@ -118,7 +138,12 @@ object GuideGalleryPick {
         val width = bounds.outWidth
         val height = bounds.outHeight
         if (width <= 0 || height <= 0) return null
-        val sample = sampleSize(displayedWidth(width, height, orientation), maxWidth)
+        val sample = sampleSize(
+            width,
+            height,
+            displayedWidth(width, height, orientation),
+            maxWidth,
+        )
         val decoded = BitmapFactory.decodeFile(
             original.absolutePath,
             BitmapFactory.Options().apply { inSampleSize = sample },
@@ -133,12 +158,15 @@ object GuideGalleryPick {
                     return null
                 }
             }
+            return out
+        } catch (error: Throwable) {
+            out.delete()
+            throw error
         } finally {
             if (target !== upright) target.recycle()
             if (upright !== decoded) upright.recycle()
             decoded.recycle()
         }
-        return out
     }
 
     /// EXIF orientation, applied in the order the tag describes.
@@ -166,10 +194,22 @@ object GuideGalleryPick {
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
 
-    private fun sampleSize(width: Int, maxWidth: Int): Int {
-        if (maxWidth <= 0 || width <= maxWidth) return 1
+    /// Power-of-two [BitmapFactory.Options.inSampleSize]. The decoded bitmap
+    /// stays near [maxWidth] and under [maxDecodedPixels], so a large photo
+    /// does not throw [OutOfMemoryError] on the way to the picker result.
+    private fun sampleSize(width: Int, height: Int, displayed: Int, maxWidth: Int): Int {
+        if (width <= 0 || height <= 0) return 1
         var sample = 1
-        while (width / (sample * 2) > maxWidth) sample *= 2
+        val target = if (maxWidth > 0) maxWidth else 2048
+        val along = if (maxWidth > 0) displayed else max(width, height)
+        if (along > target) {
+            while (sample < 128 && along / (sample * 2) > target) sample *= 2
+        }
+        while (sample < 128 &&
+            (width.toLong() / sample) * (height.toLong() / sample) > maxDecodedPixels
+        ) {
+            sample *= 2
+        }
         return sample
     }
 
@@ -192,7 +232,7 @@ object GuideGalleryPick {
                 ExifInterface.ORIENTATION_NORMAL.toString(),
             )
             dest.saveAttributes()
-        } catch (_: Exception) {
+        } catch (_: Throwable) {
         }
     }
 }
