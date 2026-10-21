@@ -112,7 +112,7 @@ Future<PhotoIdentification> identifyPlantPhoto({
     return const PhotoIdentification([], refusal: PhotoRefusal.signIn);
   }
   try {
-    final bytes = photoWithoutLocation(await image.readAsBytes());
+    final bytes = await photoWithoutLocation(await image.readAsBytes());
     if (bytes == null) {
       throw StateError('photo location could not be removed');
     }

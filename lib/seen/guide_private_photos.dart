@@ -293,7 +293,7 @@ Future<bool> _put(String path, String uid) async {
   final file = await Offline.getLocalFile(path);
   if (file == null) return false;
   try {
-    final bytes = photoWithoutLocation(await file.readAsBytes());
+    final bytes = await photoWithoutLocation(await file.readAsBytes());
     if (bytes == null) {
       debugPrint(
         'guide private photo $path: location metadata could not be removed',
@@ -302,7 +302,7 @@ Future<bool> _put(String path, String uid) async {
     }
     await _bucket().ref().child(object).putData(
           bytes,
-          SettableMetadata(contentType: guidePrivateContentType(path)),
+          SettableMetadata(contentType: 'image/jpeg'),
         );
     _absent.remove(path);
     _putDone.add(path);

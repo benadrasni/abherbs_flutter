@@ -906,10 +906,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     try {
       final pick = widget.pickPhoto ?? _pickDefault;
       path = await pick(source);
-      if (!mounted || path == null) {
-        if (path != null) unawaited(deleteDiscardedShot(path));
-        return;
-      }
+      if (!mounted || path == null) return;
       final previous = _shotPath;
       if (previous != null && previous != path) {
         unawaited(deleteDiscardedShot(previous));
@@ -928,17 +925,11 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       if (source == GuideCameraSource.gallery) {
         final read = widget.photoTakenAt ?? guideCameraPhotoTakenAt;
         _shotWhen = await read(path);
-        if (!mounted) {
-          unawaited(deleteDiscardedShot(path));
-          return;
-        }
+        if (!mounted) return;
       }
       final locate = widget.photoPosition ?? guideCameraPhotoPosition;
       _shotPosition = await locate(path);
-      if (!mounted) {
-        unawaited(deleteDiscardedShot(path));
-        return;
-      }
+      if (!mounted) return;
       final identify = widget.identify ?? _identifyDefault;
       final outcome = await identify(path);
       named = true;
@@ -948,16 +939,10 @@ class _GuideCameraPageState extends State<GuideCameraPage>
         counted:
             outcome.kind == GuideCameraOutcomeKind.notPlant && outcome.counted,
       ));
-      if (!mounted) {
-        unawaited(deleteDiscardedShot(path));
-        return;
-      }
+      if (!mounted) return;
       if (_shotPosition == null && phone != null) {
         _shotPosition = await phone;
-        if (!mounted) {
-          unawaited(deleteDiscardedShot(path));
-          return;
-        }
+        if (!mounted) return;
       }
       // The naming cover stays up until the find is saved and the next page
       // is open, so Close cannot drop a name that was already spent.
@@ -1019,15 +1004,16 @@ class _GuideCameraPageState extends State<GuideCameraPage>
           outcome: 'error',
         ));
       }
-      if (!mounted) {
-        if (path != null) unawaited(deleteDiscardedShot(path));
-        return;
-      }
+      if (!mounted) return;
       setState(() => _naming = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).guide_camera_failed)),
       );
     } finally {
+      if (!mounted && path != null) {
+        if (_shotPath == path) _shotPath = null;
+        unawaited(deleteDiscardedShot(path));
+      }
       if (mounted) setState(() => _busy = false);
     }
   }
