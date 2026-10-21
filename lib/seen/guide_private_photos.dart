@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:abherbs_flutter/data/guide_photo_file.dart';
 import 'package:abherbs_flutter/seen/observation.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/offline/offline.dart';
@@ -292,8 +293,15 @@ Future<bool> _put(String path, String uid) async {
   final file = await Offline.getLocalFile(path);
   if (file == null) return false;
   try {
-    await _bucket().ref().child(object).putFile(
-          file,
+    final bytes = photoWithoutLocation(await file.readAsBytes());
+    if (bytes == null) {
+      debugPrint(
+        'guide private photo $path: location metadata could not be removed',
+      );
+      return false;
+    }
+    await _bucket().ref().child(object).putData(
+          bytes,
           SettableMetadata(contentType: guidePrivateContentType(path)),
         );
     _absent.remove(path);

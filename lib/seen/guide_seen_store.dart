@@ -287,7 +287,12 @@ Future<bool> _uploadPhoto(String path) async {
         firebase_storage.FirebaseStorage.instanceFor(bucket: storageBucket)
             .ref()
             .child(path);
-    final bytes = jpegWithoutGps(await file.readAsBytes());
+    final bytes = photoWithoutLocation(await file.readAsBytes());
+    if (bytes == null) {
+      debugPrint(
+          'guide seen photo $path: location metadata could not be removed');
+      return false;
+    }
     await ref.putData(
       bytes,
       firebase_storage.SettableMetadata(

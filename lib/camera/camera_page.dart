@@ -8,6 +8,7 @@ import 'package:abherbs_flutter/key/filter_utils.dart';
 import 'package:abherbs_flutter/field_guide/field_guide_page.dart';
 import 'package:abherbs_flutter/camera/guide_camera.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
+import 'package:abherbs_flutter/data/guide_photo_file.dart';
 import 'package:abherbs_flutter/data/guide_photo_pick.dart';
 import 'package:abherbs_flutter/data/guide_location.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
@@ -146,6 +147,9 @@ class _GuideCameraPageState extends State<GuideCameraPage>
 
   @override
   void dispose() {
+    // A review left on screen when the route goes away. A capture still in
+    // flight deletes the file itself once it notices.
+    if (!_busy && !_naming) _releaseShot();
     guideMonthCount.removeListener(_onMonth);
     Purchases.namesRevision.removeListener(_onNames);
     WidgetsBinding.instance.removeObserver(this);
@@ -238,7 +242,15 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     }
   }
 
+  void _releaseShot() {
+    final path = _shotPath;
+    if (path == null) return;
+    _shotPath = null;
+    unawaited(deleteDiscardedShot(path));
+  }
+
   void _clearShot() {
+    _releaseShot();
     setState(() {
       _naming = false;
       _sheet = null;
@@ -372,6 +384,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   }
 
   void _close() {
+    _releaseShot();
     final action = widget.onClose;
     if (action != null) {
       action();
@@ -381,6 +394,7 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   }
 
   void _key() {
+    _releaseShot();
     final action = widget.onKey;
     if (action != null) {
       action();
@@ -859,13 +873,20 @@ class _GuideCameraPageState extends State<GuideCameraPage>
   Future<void> _openThenPreview(Future<void> Function() push) async {
     await _stopPreview();
     await push();
-    if (!mounted) return;
+    // The find, when there is one, already has its own copy. The cache file
+    // still has the original GPS.
+    final shot = _shotPath;
+    _shotPath = null;
+    if (!mounted) {
+      if (shot != null) unawaited(deleteDiscardedShot(shot));
+      return;
+    }
     setState(() {
       _naming = false;
-      _shotPath = null;
       _shotWhen = null;
       _shotPosition = null;
     });
+    if (shot != null) unawaited(deleteDiscardedShot(shot));
     await _startPreview();
   }
 
@@ -885,7 +906,14 @@ class _GuideCameraPageState extends State<GuideCameraPage>
     try {
       final pick = widget.pickPhoto ?? _pickDefault;
       path = await pick(source);
-      if (!mounted || path == null) return;
+      if (!mounted || path == null) {
+        if (path != null) unawaited(deleteDiscardedShot(path));
+        return;
+      }
+      final previous = _shotPath;
+      if (previous != null && previous != path) {
+        unawaited(deleteDiscardedShot(previous));
+      }
       setState(() {
         _naming = true;
         _shotPath = path;
@@ -900,11 +928,17 @@ class _GuideCameraPageState extends State<GuideCameraPage>
       if (source == GuideCameraSource.gallery) {
         final read = widget.photoTakenAt ?? guideCameraPhotoTakenAt;
         _shotWhen = await read(path);
-        if (!mounted) return;
+        if (!mounted) {
+          unawaited(deleteDiscardedShot(path));
+          return;
+        }
       }
       final locate = widget.photoPosition ?? guideCameraPhotoPosition;
       _shotPosition = await locate(path);
-      if (!mounted) return;
+      if (!mounted) {
+        unawaited(deleteDiscardedShot(path));
+        return;
+      }
       final identify = widget.identify ?? _identifyDefault;
       final outcome = await identify(path);
       named = true;
@@ -914,10 +948,16 @@ class _GuideCameraPageState extends State<GuideCameraPage>
         counted:
             outcome.kind == GuideCameraOutcomeKind.notPlant && outcome.counted,
       ));
-      if (!mounted) return;
+      if (!mounted) {
+        unawaited(deleteDiscardedShot(path));
+        return;
+      }
       if (_shotPosition == null && phone != null) {
         _shotPosition = await phone;
-        if (!mounted) return;
+        if (!mounted) {
+          unawaited(deleteDiscardedShot(path));
+          return;
+        }
       }
       // The naming cover stays up until the find is saved and the next page
       // is open, so Close cannot drop a name that was already spent.
@@ -979,7 +1019,10 @@ class _GuideCameraPageState extends State<GuideCameraPage>
           outcome: 'error',
         ));
       }
-      if (!mounted) return;
+      if (!mounted) {
+        if (path != null) unawaited(deleteDiscardedShot(path));
+        return;
+      }
       setState(() => _naming = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).guide_camera_failed)),

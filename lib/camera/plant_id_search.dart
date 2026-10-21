@@ -112,7 +112,10 @@ Future<PhotoIdentification> identifyPlantPhoto({
     return const PhotoIdentification([], refusal: PhotoRefusal.signIn);
   }
   try {
-    final bytes = jpegWithoutGps(await image.readAsBytes());
+    final bytes = photoWithoutLocation(await image.readAsBytes());
+    if (bytes == null) {
+      throw StateError('photo location could not be removed');
+    }
     final response = await FirebaseFunctions.instance
         .httpsCallable(
       'identifyPlant',
