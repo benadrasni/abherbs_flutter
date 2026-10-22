@@ -45,6 +45,7 @@ const String keyToken = "token";
 const String keyOldVersion = "old_version";
 const String keyGuestCreated = "guest_created";
 const String keyGuestFreeUsed = "guest_free_used";
+const String keyGuideMonthCount = "guide_month_count";
 
 const String playStore = "market://details?id=sk.ab.herbs";
 const String appStoreListing = "https://apps.apple.com/app/id1449982118";

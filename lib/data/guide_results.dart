@@ -6,6 +6,20 @@ class GuideLocationRefused implements Exception {
   const GuideLocationRefused();
 }
 
+/// The language's stored vernacular, then a label already read this session.
+/// An empty store leaves the Latin name on the card.
+String? guideResultLabel(
+  String name, {
+  required Map<String, String> stored,
+  String? cached,
+}) {
+  final fromStore = stored[name]?.trim();
+  if (fromStore != null && fromStore.isNotEmpty) return fromStore;
+  final memory = cached?.trim();
+  if (memory != null && memory.isNotEmpty) return memory;
+  return null;
+}
+
 /// A vernacular title, or null when [label] is missing or is the Latin name.
 String? distinctVernacular(String? label, String latin) {
   final value = label?.trim();

@@ -330,7 +330,17 @@ Future<List<GuideResultPlant>> loadGuideResults({
     petalId: petalId,
     regionId: regionId,
   );
-  return [for (final plant in matched) plant.toResult()];
+  final labels = await _phoneLabelsFor(lang);
+  return [
+    for (final plant in matched)
+      plant.toResult(
+        label: guideResultLabel(
+          plant.name,
+          stored: labels,
+          cached: translationCache[plant.name],
+        ),
+      ),
+  ];
 }
 
 /// Plants on a family or genus list. Same headers as the key's result list.
@@ -762,9 +772,11 @@ Future<GuideResultPlant?> _catalogPlant(
   final plant = plants[id];
   if (plant == null) return null;
   final labels = await _phoneLabelsFor(language);
-  final cached = translationCache[plant.name];
-  final label = labels[plant.name] ??
-      (cached != null && cached.isNotEmpty ? cached : null);
+  final label = guideResultLabel(
+    plant.name,
+    stored: labels,
+    cached: translationCache[plant.name],
+  );
   return plant.toResult(label: label);
 }
 

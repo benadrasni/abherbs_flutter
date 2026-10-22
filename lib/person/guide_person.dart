@@ -160,6 +160,45 @@ GuideMonthCount guideMonthCountFrom(Object? raw, DateTime now) {
   );
 }
 
+/// A quota event that did not arrive. Null keeps the count already applied.
+/// A map is a finished read, including a month with nothing used.
+GuideMonthCount? guideMonthCountArrived(Object? raw, DateTime now) {
+  if (raw is! Map) return null;
+  return guideMonthCountFrom(raw, now);
+}
+
+/// `uid:yyyy-mm:used:grants` for the signed-in account's last finished read.
+String guideMonthCountLine(String uid, GuideMonthCount count, DateTime now) {
+  return '$uid:${guideQuotaMonth(now)}:${count.namesUsed}:${count.adGrants}';
+}
+
+/// The last finished read for this account and month. Another account, an
+/// older month, or a broken line is left unread.
+GuideMonthCount? guideRecallMonthCount(
+  String raw, {
+  required String uid,
+  required DateTime now,
+}) {
+  final parts = raw.split(':');
+  if (parts.length != 4 || parts[0] != uid) return null;
+  if (parts[1] != guideQuotaMonth(now)) return null;
+  final used = int.tryParse(parts[2]);
+  final grants = int.tryParse(parts[3]);
+  if (used == null || grants == null || used < 0 || grants < 0) return null;
+  return GuideMonthCount(namesUsed: used, adGrants: grants);
+}
+
+Future<void> guideRememberMonthCount(String uid, GuideMonthCount count) async {
+  try {
+    await Prefs.setString(
+      keyGuideMonthCount,
+      guideMonthCountLine(uid, count, DateTime.now()),
+    );
+  } catch (error) {
+    debugPrint('guide month: $error');
+  }
+}
+
 int _quotaCount(Object? value) {
   if (value is int) return value < 0 ? 0 : value;
   if (value is num) return value < 0 ? 0 : value.toInt();
@@ -178,7 +217,10 @@ Future<GuideMonthCount> loadGuideMonthCount() async {
         .child(user.uid)
         .get()
         .timeout(_guidePersonWait);
-    return guideMonthCountFrom(event.value, DateTime.now());
+    final arrived = guideMonthCountArrived(event.value, DateTime.now());
+    if (arrived == null) return guideMonthCount.value;
+    unawaited(guideRememberMonthCount(user.uid, arrived));
+    return arrived;
   } catch (error) {
     debugPrint('guide month: $error');
     return guideMonthCount.value;

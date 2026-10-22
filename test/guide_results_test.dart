@@ -8,6 +8,42 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  test('a stored vernacular replaces the Latin name on a key result', () {
+    final plant = GuideKeyPlant(
+      id: '9',
+      name: 'Cuscuta gronovii',
+      colors: const {'1'},
+      habitats: const {'1'},
+      petals: const {'2'},
+      regions: const {'77'},
+      photoPath: 'photos/Cuscuta_gronovii/a.webp',
+      floweringFrom: 6,
+      floweringTo: 9,
+      cultivated: false,
+    );
+    final labeled = plant.toResult(
+      label: guideResultLabel(
+        plant.name,
+        stored: const {'Cuscuta gronovii': 'common dodder'},
+      ),
+    );
+    expect(labeled.shownName, 'common dodder');
+
+    final cached = plant.toResult(
+      label: guideResultLabel(
+        plant.name,
+        stored: const {},
+        cached: 'common dodder',
+      ),
+    );
+    expect(cached.shownName, 'common dodder');
+
+    final latin = plant.toResult(
+      label: guideResultLabel(plant.name, stored: const {}),
+    );
+    expect(latin.shownName, 'Cuscuta gronovii');
+  });
+
   test('orders plants in flower first, then by name', () {
     final list = arrangeGuideResults(
       [

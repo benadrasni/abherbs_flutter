@@ -88,6 +88,7 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     });
     guideMonthCount.addListener(_onMonth);
     guideFavoriteIds.addListener(_onFavoriteIds);
+    _recallMonthCount();
     _watchQuota();
     _watchSeenRemote();
     _loadColors();
@@ -350,6 +351,20 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     setState(() {});
   }
 
+  /// The last finished quota read, so a cold start offline does not paint
+  /// five names left before the copy on the phone is applied.
+  void _recallMonthCount() {
+    final uid = Auth.appUser?.uid;
+    if (uid == null || !Prefs.ready()) return;
+    final next = guideRecallMonthCount(
+      Prefs.getString(keyGuideMonthCount, ''),
+      uid: uid,
+      now: DateTime.now(),
+    );
+    if (next == null || guideMonthCount.value == next) return;
+    guideMonthCount.value = next;
+  }
+
   void _watchQuota() {
     _quotaSub?.cancel();
     _quotaSub = null;
@@ -361,9 +376,13 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     _quotaSub =
         rootReference.child(firebasePhotoQuota).child(uid).onValue.listen(
       (event) {
-        final next = guideMonthCountFrom(event.snapshot.value, DateTime.now());
-        if (guideMonthCount.value == next) return;
+        final next =
+            guideMonthCountArrived(event.snapshot.value, DateTime.now());
+        if (next == null || guideMonthCount.value == next) return;
         guideMonthCount.value = next;
+        final current = Auth.appUser?.uid;
+        if (current == null) return;
+        unawaited(guideRememberMonthCount(current, next));
       },
       onError: (Object error) => debugPrint('guide month: $error'),
     );

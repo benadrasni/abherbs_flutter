@@ -222,7 +222,8 @@ void main() {
     );
   });
 
-  test('a photo-storage plan is Field Guide and a free account has five names', () {
+  test('a photo-storage plan is Field Guide and a free account has five names',
+      () {
     final subscribed = guideLiveAllowance(
       signedIn: true,
       subscribed: true,
@@ -326,6 +327,51 @@ void main() {
     expect(counted.includedUsed, 2);
     expect(counted.extraUsed, 1);
     expect(counted.namesLeft, 4);
+  });
+
+  test('a missed quota read keeps the last count, including an ad name', () {
+    expect(guideMonthCountArrived(null, DateTime.utc(2026, 10, 21)), isNull);
+
+    final line = guideMonthCountLine(
+      'account',
+      const GuideMonthCount(namesUsed: 5, adGrants: 1),
+      DateTime.utc(2026, 10, 21),
+    );
+    final recalled = guideRecallMonthCount(
+      line,
+      uid: 'account',
+      now: DateTime.utc(2026, 10, 21, 18),
+    );
+    expect(recalled, const GuideMonthCount(namesUsed: 5, adGrants: 1));
+    final allowance = guideLiveAllowance(
+      signedIn: true,
+      subscribed: false,
+      unlimitedNames: false,
+      noAds: false,
+      seenSynced: false,
+      usedThisMonth: recalled!.namesUsed,
+      extraFromAds: recalled.adGrants,
+      now: DateTime.utc(2026, 10, 21),
+    );
+    expect(allowance.namesLeft, 1);
+    expect(allowance.extraUsed, 1);
+
+    expect(
+      guideRecallMonthCount(
+        line,
+        uid: 'other',
+        now: DateTime.utc(2026, 10, 21),
+      ),
+      isNull,
+    );
+    expect(
+      guideRecallMonthCount(
+        line,
+        uid: 'account',
+        now: DateTime.utc(2026, 11, 1),
+      ),
+      isNull,
+    );
   });
 
   test('a stored month that is not this month counts as unused', () {
@@ -507,8 +553,7 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('Field Guide stays on the list and can sign out',
-      (tester) async {
+  testWidgets('Field Guide stays on the list and can sign out', (tester) async {
     await tester.binding.setSurfaceSize(const Size(390, 1200));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     var signedOut = 0;
