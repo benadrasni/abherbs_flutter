@@ -92,7 +92,6 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     });
     guideMonthCount.addListener(_onMonth);
     guideFavoriteIds.addListener(_onFavoriteIds);
-    _recallMonthCount();
     _watchQuota();
     _watchSeenRemote();
     _loadColors();
@@ -358,18 +357,21 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     setState(() {});
   }
 
-  /// The last finished quota read, so a cold start offline does not paint
-  /// five names left before the copy on the phone is applied.
+  /// The last finished quota read for the signed-in account. Another
+  /// account, or no stored line, clears the meter so the previous account
+  /// does not stay on screen.
   void _recallMonthCount() {
     final uid = Auth.appUser?.uid;
-    if (uid == null || !Prefs.ready()) return;
-    final next = guideRecallMonthCount(
-      Prefs.getString(keyGuideMonthCount, ''),
+    if (uid == null || !Prefs.ready()) {
+      guideMonthCount.value = GuideMonthCount.empty;
+      return;
+    }
+    final next = guideMonthCountForAccount(
       uid: uid,
+      stored: Prefs.getString(keyGuideMonthCount, ''),
       now: DateTime.now(),
     );
-    if (next == null || guideMonthCount.value == next) return;
-    guideMonthCount.value = next;
+    if (guideMonthCount.value != next) guideMonthCount.value = next;
   }
 
   void _watchQuota() {
@@ -380,16 +382,18 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
       guideMonthCount.value = GuideMonthCount.empty;
       return;
     }
+    _recallMonthCount();
     _quotaSub =
         rootReference.child(firebasePhotoQuota).child(uid).onValue.listen(
       (event) {
-        final next =
-            guideMonthCountArrived(event.snapshot.value, DateTime.now());
+        if (Auth.appUser?.uid != uid) return;
+        final raw = event.snapshot.value;
+        final next = guideMonthCountArrived(raw, DateTime.now());
+        // Null, or anything that is not a map, did not arrive. The stored
+        // line recalled for this account stays.
         if (next == null || guideMonthCount.value == next) return;
         guideMonthCount.value = next;
-        final current = Auth.appUser?.uid;
-        if (current == null) return;
-        unawaited(guideRememberMonthCount(current, next));
+        unawaited(guideRememberMonthCount(uid, next));
       },
       onError: (Object error) => debugPrint('guide month: $error'),
     );

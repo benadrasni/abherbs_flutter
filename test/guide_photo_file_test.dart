@@ -173,6 +173,25 @@ void main() {
     expect(guidePickCachePath('${root.path}/guide-pick'), isFalse);
   });
 
+  test('app13 and a maker note lose their place', () async {
+    const place = 'GPSLatitude>48.1600N';
+    final app13 = _withSegment(
+      _jpeg(little: true, gps: false),
+      _app13(place),
+    );
+    final fromApp13 = (await photoWithoutLocation(app13))!;
+    expect(_contains(fromApp13, place.codeUnits), isFalse);
+    expect(_contains(fromApp13, '2024:01:02 03:04:05'.codeUnits), isTrue);
+
+    final noted = _jpegWithMakerNote(place);
+    expect(_contains(noted, place.codeUnits), isTrue);
+    final fromNote = (await photoWithoutLocation(noted))!;
+    expect(_contains(fromNote, place.codeUnits), isFalse);
+    expect(_contains(fromNote, '2024:01:02 03:04:05'.codeUnits), isTrue);
+    final tags = await readExifFromBytes(fromNote);
+    expect(tags['Image DateTime'].toString(), '2024:01:02 03:04:05');
+  });
+
   test('xmp and a nested thumbnail lose their place', () async {
     const place = 'GPSLatitude>48,9.6000N';
     final xmp = _withSegment(
@@ -404,6 +423,74 @@ const _latitude = [
   0,
   0,
 ];
+
+Uint8List _app13(String body) {
+  final payload = body.codeUnits;
+  final length = payload.length + 2;
+  return Uint8List.fromList([
+    0xFF,
+    0xED,
+    (length >> 8) & 0xFF,
+    length & 0xFF,
+    ...payload,
+  ]);
+}
+
+/// EXIF whose MakerNote, inside the Exif IFD, carries [place].
+Uint8List _jpegWithMakerNote(String place) {
+  final note = place.codeUnits;
+  final bytes = BytesBuilder();
+  void u16(int value) {
+    bytes.addByte(value & 0xFF);
+    bytes.addByte((value >> 8) & 0xFF);
+  }
+
+  void u32(int value) {
+    bytes.addByte(value & 0xFF);
+    bytes.addByte((value >> 8) & 0xFF);
+    bytes.addByte((value >> 16) & 0xFF);
+    bytes.addByte((value >> 24) & 0xFF);
+  }
+
+  bytes.addByte(0x49);
+  bytes.addByte(0x49);
+  u16(42);
+  u32(8);
+  u16(2);
+  u16(0x0132);
+  u16(2);
+  u32(20);
+  u32(38);
+  u16(0x8769);
+  u16(4);
+  u32(1);
+  u32(58);
+  u32(0);
+  bytes.add('2024:01:02 03:04:05'.codeUnits);
+  bytes.addByte(0);
+  expect(bytes.length, 58);
+  u16(1);
+  u16(0x927C);
+  u16(7);
+  u32(note.length);
+  u32(76);
+  u32(0);
+  expect(bytes.length, 76);
+  bytes.add(note);
+  final payload = [0x45, 0x78, 0x69, 0x66, 0x00, 0x00, ...bytes.toBytes()];
+  final length = payload.length + 2;
+  return Uint8List.fromList([
+    0xFF,
+    0xD8,
+    0xFF,
+    0xE1,
+    (length >> 8) & 0xFF,
+    length & 0xFF,
+    ...payload,
+    0xFF,
+    0xD9,
+  ]);
+}
 
 Uint8List _xmp(String body) {
   final payload = [

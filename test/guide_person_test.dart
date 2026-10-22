@@ -329,9 +329,28 @@ void main() {
     expect(counted.namesLeft, 4);
   });
 
-  test('a missed quota read keeps the last count, including an ad name', () {
-    expect(guideMonthCountArrived(null, DateTime.utc(2026, 10, 21)), isNull);
+  test('a null quota event does not apply', () {
+    final now = DateTime.utc(2026, 10, 22);
+    expect(guideMonthCountArrived(null, now), isNull);
+    expect(guideMonthCountArrived('late', now), isNull);
 
+    const previous = GuideMonthCount(namesUsed: 5, adGrants: 1);
+    final line = guideMonthCountLine('account', previous, now);
+    expect(
+      guideMonthCountForAccount(uid: 'account', stored: line, now: now),
+      previous,
+    );
+    expect(
+      guideMonthCountForAccount(uid: 'other', stored: line, now: now),
+      GuideMonthCount.empty,
+    );
+    expect(
+      guideMonthCountForAccount(uid: null, stored: line, now: now),
+      GuideMonthCount.empty,
+    );
+  });
+
+  test('a missed quota read keeps the last count, including an ad name', () {
     final line = guideMonthCountLine(
       'account',
       const GuideMonthCount(namesUsed: 5, adGrants: 1),

@@ -7,10 +7,11 @@ import 'package:image/image.dart' as img;
 /// Bytes with location metadata removed, or null when this file cannot prove
 /// they are clean.
 ///
-/// A JPEG keeps its bytes: EXIF GPS, XMP, and the embedded thumbnail are
-/// removed in place. Anything else is decoded with the platform codec and
-/// written as a new JPEG, or refused. Callers must not send the original
-/// bytes on null. The place and the date are read from the original first.
+/// A JPEG keeps its bytes: EXIF GPS, MakerNote, XMP, APP13, and the embedded
+/// thumbnail are removed in place. Anything else is decoded with the
+/// platform codec and written as a new JPEG, or refused. Callers must not
+/// send the original bytes on null. The place and the date are read from
+/// the original first.
 Future<Uint8List?> photoWithoutLocation(Uint8List bytes) async {
   try {
     if (_isJpeg(bytes)) return _jpegWithoutLocation(bytes);
@@ -123,6 +124,8 @@ bool _scrubJpeg(
       if (!_scrubTiff(bytes, payload + 6, segEnd, depth, scrub)) return false;
     } else if (marker == 0xE1 && _isXmpHeader(bytes, payload, segEnd)) {
       _blankXmp(bytes, payload, segEnd, scrub);
+    } else if (marker == 0xED) {
+      _blank(bytes, payload, segEnd, scrub);
     }
     i = segEnd;
   }
@@ -252,11 +255,18 @@ bool _scrubTiff(
           bytes[entry + b] = 0;
         }
         scrub.changed = true;
-      } else if (tag == 0x02BC) {
+      } else if (tag == 0x02BC || tag == 0x927C) {
         final zeroed = _zeroValue(bytes, tiff, entry, limit, u16, u32);
         if (zeroed == null) return false;
-        if (zeroed) scrub.changed = true;
-      } else if (tag == 0x014A) {
+        var changed = zeroed;
+        for (var b = 0; b < 12; b++) {
+          if (bytes[entry + b] != 0) {
+            bytes[entry + b] = 0;
+            changed = true;
+          }
+        }
+        if (changed) scrub.changed = true;
+      } else if (tag == 0x014A || tag == 0x8769) {
         final offsets = _entryLongs(bytes, tiff, entry, limit, u16, u32);
         if (offsets == null) return false;
         subs.addAll(offsets);

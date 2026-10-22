@@ -160,11 +160,22 @@ GuideMonthCount guideMonthCountFrom(Object? raw, DateTime now) {
   );
 }
 
-/// A quota event that did not arrive. Null keeps the count already applied.
-/// A map is a finished read, including a month with nothing used.
+/// A quota event that arrived as a map. Null, and anything else that is not
+/// a map, did not arrive: the count already applied stays.
 GuideMonthCount? guideMonthCountArrived(Object? raw, DateTime now) {
   if (raw is! Map) return null;
   return guideMonthCountFrom(raw, now);
+}
+
+/// The meter for [uid]. Another account's stored line, or no line, is empty.
+GuideMonthCount guideMonthCountForAccount({
+  required String? uid,
+  required String stored,
+  required DateTime now,
+}) {
+  if (uid == null) return GuideMonthCount.empty;
+  return guideRecallMonthCount(stored, uid: uid, now: now) ??
+      GuideMonthCount.empty;
 }
 
 /// `uid:yyyy-mm:used:grants` for the signed-in account's last finished read.
@@ -217,7 +228,10 @@ Future<GuideMonthCount> loadGuideMonthCount() async {
         .child(user.uid)
         .get()
         .timeout(_guidePersonWait);
-    final arrived = guideMonthCountArrived(event.value, DateTime.now());
+    final raw = event.value;
+    final arrived = guideMonthCountArrived(raw, DateTime.now());
+    // Null did not arrive. The stored line already applied stays, including
+    // a month that still has names left.
     if (arrived == null) return guideMonthCount.value;
     unawaited(guideRememberMonthCount(user.uid, arrived));
     return arrived;
