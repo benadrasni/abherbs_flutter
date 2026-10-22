@@ -484,7 +484,24 @@ Future<String?> _resultPlate(String name) async {
   return null;
 }
 
-Map<String, GuideHeaderBloom>? _headerBlooms;
+/// Flowering months. A failed read is not stored, so the next call tries again.
+@visibleForTesting
+class GuideBloomCache {
+  Map<String, GuideHeaderBloom>? stored;
+
+  Future<Map<String, GuideHeaderBloom>> read(
+    Future<Map<String, GuideHeaderBloom>> Function() load,
+  ) {
+    final ready = stored;
+    if (ready != null) return Future.value(ready);
+    return load().then((map) {
+      stored = map;
+      return map;
+    });
+  }
+}
+
+final _bloomCache = GuideBloomCache();
 
 /// In flower this month, and seen, for each genus. Flowering months are cached.
 /// Seen is read again on every call.
@@ -493,7 +510,7 @@ Future<Map<String, GuideGenusNote>> loadGuideGenusNotes(
   int? month,
 }) async {
   if (genera.isEmpty) return {};
-  final blooms = _headerBlooms ?? await _loadHeaderBlooms();
+  final blooms = await _loadHeaderBlooms();
   final seen = await loadGuideSeenNames();
   final now = month ?? DateTime.now().month;
   return {
@@ -508,32 +525,27 @@ Future<Map<String, GuideGenusNote>> loadGuideGenusNotes(
 }
 
 Future<Map<String, GuideHeaderBloom>> _bloomsFromKeyPlants() async {
-  try {
-    final plants = await _keyPlantsById();
-    return {
-      for (final plant in plants.values)
-        plant.id: GuideHeaderBloom(
-          plant.name,
-          plant.floweringFrom,
-          plant.floweringTo,
-        ),
-    };
-  } catch (error) {
-    debugPrint('guide blooms: $error');
-    return const {};
-  }
+  final plants = await _keyPlantsById();
+  return {
+    for (final plant in plants.values)
+      plant.id: GuideHeaderBloom(
+        plant.name,
+        plant.floweringFrom,
+        plant.floweringTo,
+      ),
+  };
 }
 
-Future<Map<String, GuideHeaderBloom>> _loadHeaderBlooms() async {
-  final read = await guideReadOrPack(
-    () async => readGuideHeaderBlooms(
-      (await headersV3Reference.once()).snapshot.value,
-    ),
-    _bloomsFromKeyPlants,
-    label: 'guide blooms',
-  );
-  _headerBlooms = read.value;
-  return read.value;
+Future<Map<String, GuideHeaderBloom>> _loadHeaderBlooms() {
+  return _bloomCache.read(() {
+    return guideReadOrPack(
+      () async => readGuideHeaderBlooms(
+        (await headersV3Reference.once()).snapshot.value,
+      ),
+      _bloomsFromKeyPlants,
+      label: 'guide blooms',
+    ).then((read) => read.value);
+  });
 }
 
 Future<Set<String>> loadGuideSeenNames() async {
@@ -543,12 +555,10 @@ Future<Set<String>> loadGuideSeenNames() async {
     final ref = privateObservationsReference
         .child(user.uid)
         .child(firebaseObservationsByPlant);
-    final read = await guideReadOrPack<dynamic>(
-      () async => (await ref.once()).snapshot.value,
-      () => _diskValueOrEmpty(ref),
-      label: 'guide seen names',
+    final value = await _guideChildValue(
+      ref,
+      phoneOnly: await _guideOnPhoneOnly(),
     );
-    final value = read.value;
     if (value is! Map) return {};
     return value.keys.map((key) => key.toString()).toSet();
   } catch (error) {
@@ -657,13 +667,6 @@ Future<({T value, bool fromPhone})> guideReadOrPack<T>(
     }
   }
   return (value: await pack(), fromPhone: true);
-}
-
-/// On-disk value when the phone reports no network. Otherwise null.
-Future<dynamic> _diskValueOrEmpty(Query query) async {
-  if (!await _guideOnPhoneOnly()) return null;
-  final snapshot = await query.get().timeout(_guideIndexWait);
-  return snapshot.value;
 }
 
 /// Local copy when [phoneOnly]. Otherwise one `.once()`, then the caller's pack.
@@ -801,13 +804,9 @@ Future<Map<String, String>> _phoneLabelsFor(String language) {
   );
 }
 
-Future<Map<String, String>> _loadPhoneLabels(String language) async {
-  final snapshot = await translationsReference
-      .child(language)
-      .get()
-      .timeout(_guideIndexWait);
-  final value = snapshot.value;
-  if (value is! Map) return const {};
+@visibleForTesting
+Map<String, String> guideLabelsFromSnapshot(dynamic value) {
+  if (value is! Map) throw StateError('guide labels');
   final map = <String, String>{};
   value.forEach((key, raw) {
     if (raw is! Map) return;
@@ -815,6 +814,14 @@ Future<Map<String, String>> _loadPhoneLabels(String language) async {
     if (label is String && label.isNotEmpty) map[key.toString()] = label;
   });
   return map;
+}
+
+Future<Map<String, String>> _loadPhoneLabels(String language) async {
+  final snapshot = await translationsReference
+      .child(language)
+      .get()
+      .timeout(_guideIndexWait);
+  return guideLabelsFromSnapshot(snapshot.value);
 }
 
 Future<GuideResultPlant?> _catalogPlant(
@@ -2025,19 +2032,16 @@ Future<_Newest?> _newestAddition() async {
 
 /// Newest days of `lists_custom/new` inside the 15 to 25 plant window.
 ///
-/// No network reads the on-disk copy. A server read stops after
-/// [_guideIndexWait]. There is no other copy, so a dead network leaves the row off.
+/// No network reads the on-disk copy. The server read stops after
+/// [_guideIndexWait] and throws when it does not finish. There is no other copy.
 Future<List<GuideNewDrop>> _selectedNewDrops() async {
-  final query = listsCustomReference
+  final snapshot = await listsCustomReference
       .child('new')
       .orderByKey()
-      .limitToLast(guideNewPlantMax);
-  final read = await guideReadOrPack(
-    () async => (await query.get()).value,
-    () => _diskValueOrEmpty(query),
-    label: 'guide new drops',
-  );
-  return selectGuideNewDrops(readGuideNewDrops(read.value));
+      .limitToLast(guideNewPlantMax)
+      .get()
+      .timeout(_guideIndexWait);
+  return selectGuideNewDrops(readGuideNewDrops(snapshot.value));
 }
 
 Future<List<GuideNewDay>> loadGuideNewDays(String languageCode) async {
@@ -2121,7 +2125,7 @@ Future<_YearBody> _yearOnPhone(DatabaseReference path) async {
       );
     }
   }
-  if (!onPhone) return (list: null, sourceUrl: null, genera: null);
+  if (!onPhone) throw StateError('no pack');
   return _yearSides(
     await _guideChildValue(path, phoneOnly: true),
     path,
@@ -2207,7 +2211,8 @@ class _LanguageLists {
 Future<dynamic> _languageListPack(String code, DatabaseReference ref) async {
   final stored = _listsByLanguage[code];
   if (stored != null) return stored;
-  return _diskValueOrEmpty(ref);
+  if (await _guideOnPhoneOnly()) return _guideChildValue(ref, phoneOnly: true);
+  throw StateError('no pack');
 }
 
 /// Lists for this language only. A missing node is an empty set.

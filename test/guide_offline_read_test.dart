@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:abherbs_flutter/data/guide_data.dart';
+import 'package:abherbs_flutter/data/guide_results.dart';
+import 'package:abherbs_flutter/data/utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -41,17 +43,61 @@ void main() {
     );
     expect(offline.value, 'phone');
     expect(offline.fromPhone, isTrue);
+  });
 
+  test('a missing pack throws instead of an empty read', () async {
     await expectLater(
-      guideReadOrPack<String>(
+      guideReadOrPack<Object?>(
         () async => throw StateError('down'),
         () async => throw StateError('no pack'),
         phoneOnly: false,
         wait: const Duration(milliseconds: 20),
         label: 'guide test',
       ),
-      throwsA(isA<StateError>()),
+      throwsA(
+        isA<StateError>()
+            .having((error) => error.message, 'message', 'no pack'),
+      ),
     );
+  });
+
+  test('a failed bloom read is not cached', () async {
+    final cache = GuideBloomCache();
+    var reads = 0;
+    Future<Map<String, GuideHeaderBloom>> load() async {
+      reads++;
+      if (reads == 1) throw StateError('down');
+      return {'1': const GuideHeaderBloom('Bellis perennis', 5, 9)};
+    }
+
+    await expectLater(cache.read(load), throwsA(isA<StateError>()));
+    expect(cache.stored, isNull);
+    final blooms = await cache.read(load);
+    expect(blooms['1']!.name, 'Bellis perennis');
+    expect(await cache.read(load), blooms);
+    expect(reads, 2);
+  });
+
+  test('a non-map label snapshot is not cached', () async {
+    expect(() => guideLabelsFromSnapshot(null), throwsStateError);
+    expect(() => guideLabelsFromSnapshot('late'), throwsStateError);
+
+    final cache = GuideLabelCache();
+    var reads = 0;
+    Future<Map<String, String>> read(String language) async {
+      reads++;
+      if (reads == 1) return guideLabelsFromSnapshot(null);
+      return guideLabelsFromSnapshot({
+        'Bellis perennis': {firebaseAttributeLabel: 'de-name'},
+      });
+    }
+
+    await expectLater(cache.labels('de', read), throwsA(isA<StateError>()));
+    expect(
+      await cache.labels('de', read),
+      {'Bellis perennis': 'de-name'},
+    );
+    expect(reads, 2);
   });
 
   test('a call site cannot pass get() as its pack', () {
