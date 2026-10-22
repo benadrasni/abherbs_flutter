@@ -389,11 +389,10 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
         if (Auth.appUser?.uid != uid) return;
         final raw = event.snapshot.value;
         final next = guideMonthCountArrived(raw, DateTime.now());
+        // Null, or anything that is not a map, did not arrive. The stored
+        // line recalled for this account stays.
         if (next == null || guideMonthCount.value == next) return;
         guideMonthCount.value = next;
-        // A missing record clears the meter and is not stored, so it does
-        // not replace another account's last finished read.
-        if (raw is! Map) return;
         unawaited(guideRememberMonthCount(uid, next));
       },
       onError: (Object error) => debugPrint('guide month: $error'),

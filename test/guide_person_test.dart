@@ -329,9 +329,9 @@ void main() {
     expect(counted.namesLeft, 4);
   });
 
-  test('a null quota event is an empty month', () {
+  test('a null quota event does not apply', () {
     final now = DateTime.utc(2026, 10, 22);
-    expect(guideMonthCountArrived(null, now), GuideMonthCount.empty);
+    expect(guideMonthCountArrived(null, now), isNull);
     expect(guideMonthCountArrived('late', now), isNull);
 
     const previous = GuideMonthCount(namesUsed: 5, adGrants: 1);

@@ -392,24 +392,6 @@ Future<GuideBookTaxa> loadGuideBookTaxa(String languageCode) {
 /// `.once()` waits for the server and does not finish in flight mode.
 const _guideBookWait = Duration(seconds: 4);
 
-/// A server read that stops, then the copy already on the phone.
-///
-/// Dead wi-fi still reports an interface, so [online] cannot wait forever.
-/// [pack] has the same limit. A pack that also fails is the error state.
-Future<T> guideReadOrPack<T>(
-  Future<T> Function() online,
-  Future<T> Function() pack, {
-  Duration wait = const Duration(seconds: 4),
-  String label = 'guide read',
-}) async {
-  try {
-    return await online().timeout(wait);
-  } catch (error) {
-    debugPrint('$label: $error');
-  }
-  return pack().timeout(wait);
-}
-
 Future<bool> _bookOnPhoneOnly() async {
   try {
     final result = await Connectivity().checkConnectivity();
@@ -444,31 +426,16 @@ Future<GuideBookTaxa> _fetchGuideBookTaxa(String lang) async {
   } catch (error) {
     debugPrint('guide book sync: $error');
   }
-  return guideReadOrPack(
-    () async {
-      final events = await Future.wait([
-        apgIVReference.once(),
-        taxonomyRef.once(),
-      ]);
-      return _bookTaxaFrom(
-        events[0].snapshot.value,
-        events[1].snapshot.value,
-        requireBody: false,
-      );
-    },
-    () async {
-      final snaps = await Future.wait([
-        apgIVReference.get(),
-        taxonomyRef.get(),
-      ]);
-      return _bookTaxaFrom(
-        snaps[0].value,
-        snaps[1].value,
-        requireBody: true,
-      );
-    },
-    wait: _guideBookWait,
-    label: 'guide book',
+  // No second get. A dead network that still reports an interface does not
+  // answer from disk, so the book page shows its error state.
+  final events = await Future.wait([
+    apgIVReference.once(),
+    taxonomyRef.once(),
+  ]).timeout(_guideBookWait);
+  return _bookTaxaFrom(
+    events[0].snapshot.value,
+    events[1].snapshot.value,
+    requireBody: false,
   );
 }
 

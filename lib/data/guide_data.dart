@@ -348,25 +348,16 @@ Future<List<GuideResultPlant>> loadGuideListedPlants(
   DatabaseReference path,
   String languageCode,
 ) async {
-  var phoneOnly = await _guideOnPhoneOnly();
-  dynamic value;
-  if (phoneOnly) {
-    value = await _phoneListBody(path);
-  } else {
-    try {
-      final event = await path.once().timeout(_guideIndexWait);
-      value = event.snapshot.value;
-    } catch (error) {
-      debugPrint('guide list ${path.path}: $error');
-      phoneOnly = true;
-      value = await _phoneListBody(path);
-    }
-  }
-  final ids = guideResultIds(value);
+  final read = await guideReadOrPack(
+    () async => (await path.once()).snapshot.value,
+    () => _phoneListBody(path),
+    label: 'guide list ${path.path}',
+  );
+  final ids = guideResultIds(read.value);
   if (ids.isEmpty) return const [];
   final lang = getLanguageCode(languageCode);
-  final plants = await Future.wait(ids.map((id) async {
-    return _catalogPlant(id, lang, phoneOnly: phoneOnly);
+  final plants = await Future.wait(ids.map((id) {
+    return _catalogPlant(id, lang, phoneOnly: read.fromPhone);
   }));
   return plants.whereType<GuideResultPlant>().toList();
 }
@@ -430,6 +421,8 @@ Future<GuideResultPlant?> _guideResultPlant(String id, String language) async {
     final label = await _resultLabel(language, name);
     final plate = await _resultPlate(name);
     return readGuideResultHeader(id, value, label: label, platePath: plate);
+  } on TimeoutException {
+    rethrow;
   } catch (error) {
     debugPrint('guide result $id: $error');
     return null;
@@ -447,6 +440,8 @@ Future<GuideResultPlant?> _guideHeaderPlant(String id, String language) async {
     final label = await _resultLabel(language, name);
     final plate = await _resultPlate(name);
     return readGuideResultHeader(id, value, label: label, platePath: plate);
+  } on TimeoutException {
+    rethrow;
   } catch (error) {
     debugPrint('guide list header $id: $error');
     return null;
@@ -512,21 +507,33 @@ Future<Map<String, GuideGenusNote>> loadGuideGenusNotes(
   };
 }
 
-Future<Map<String, GuideHeaderBloom>> _loadHeaderBlooms() async {
-  final dynamic value;
-  if (await _guideOnPhoneOnly()) {
-    value = await _guideChildValue(headersV3Reference, phoneOnly: true);
-  } else {
-    value = await guideReadOrPack(
-      () async => (await headersV3Reference.once()).snapshot.value,
-      () => _guideChildValue(headersV3Reference, phoneOnly: true),
-      wait: _guideIndexWait,
-      label: 'guide blooms',
-    );
+Future<Map<String, GuideHeaderBloom>> _bloomsFromKeyPlants() async {
+  try {
+    final plants = await _keyPlantsById();
+    return {
+      for (final plant in plants.values)
+        plant.id: GuideHeaderBloom(
+          plant.name,
+          plant.floweringFrom,
+          plant.floweringTo,
+        ),
+    };
+  } catch (error) {
+    debugPrint('guide blooms: $error');
+    return const {};
   }
-  final blooms = readGuideHeaderBlooms(value);
-  _headerBlooms = blooms;
-  return blooms;
+}
+
+Future<Map<String, GuideHeaderBloom>> _loadHeaderBlooms() async {
+  final read = await guideReadOrPack(
+    () async => readGuideHeaderBlooms(
+      (await headersV3Reference.once()).snapshot.value,
+    ),
+    _bloomsFromKeyPlants,
+    label: 'guide blooms',
+  );
+  _headerBlooms = read.value;
+  return read.value;
 }
 
 Future<Set<String>> loadGuideSeenNames() async {
@@ -536,17 +543,12 @@ Future<Set<String>> loadGuideSeenNames() async {
     final ref = privateObservationsReference
         .child(user.uid)
         .child(firebaseObservationsByPlant);
-    final dynamic value;
-    if (await _guideOnPhoneOnly()) {
-      value = await _guideChildValue(ref, phoneOnly: true);
-    } else {
-      value = await guideReadOrPack(
-        () async => (await ref.once()).snapshot.value,
-        () => _guideChildValue(ref, phoneOnly: true),
-        wait: _guideIndexWait,
-        label: 'guide seen names',
-      );
-    }
+    final read = await guideReadOrPack<dynamic>(
+      () async => (await ref.once()).snapshot.value,
+      () => _diskValueOrEmpty(ref),
+      label: 'guide seen names',
+    );
+    final value = read.value;
     if (value is! Map) return {};
     return value.keys.map((key) => key.toString()).toSet();
   } catch (error) {
@@ -624,8 +626,7 @@ Future<void> saveGuideResultPrefs(GuideResultPrefs prefs) async {
 const _guideIndexWait = Duration(seconds: 4);
 
 /// True when the phone reports no network. A check that throws counts as
-/// online, so a working connection still reads the indexes. A dead network
-/// that still reports an interface is handled by [guideReadOrPack].
+/// online, so a working connection still reads the indexes.
 Future<bool> _guideOnPhoneOnly() async {
   try {
     final result = await Connectivity().checkConnectivity();
@@ -636,10 +637,36 @@ Future<bool> _guideOnPhoneOnly() async {
   }
 }
 
-/// One child. `.once()` waits for the server and does not finish in flight
-/// mode, so a phone with no network reads the local copy and stops after
-/// [_guideIndexWait]. A dead network that still reports an interface gets
-/// the same limit, then the copy on the phone.
+/// A server read, or the pack already on the phone.
+///
+/// [fromPhone] is set when that pack was used. The pack is a stored list, a
+/// language entry, or key-plant headers, not another get of the node that waited.
+@visibleForTesting
+Future<({T value, bool fromPhone})> guideReadOrPack<T>(
+  Future<T> Function() online,
+  Future<T> Function() pack, {
+  bool? phoneOnly,
+  Duration wait = _guideIndexWait,
+  String label = 'guide read',
+}) async {
+  if (!(phoneOnly ?? await _guideOnPhoneOnly())) {
+    try {
+      return (value: await online().timeout(wait), fromPhone: false);
+    } catch (error) {
+      debugPrint('$label: $error');
+    }
+  }
+  return (value: await pack(), fromPhone: true);
+}
+
+/// On-disk value when the phone reports no network. Otherwise null.
+Future<dynamic> _diskValueOrEmpty(Query query) async {
+  if (!await _guideOnPhoneOnly()) return null;
+  final snapshot = await query.get().timeout(_guideIndexWait);
+  return snapshot.value;
+}
+
+/// Local copy when [phoneOnly]. Otherwise one `.once()`, then the caller's pack.
 Future<dynamic> _guideChildValue(
   DatabaseReference ref, {
   required bool phoneOnly,
@@ -648,12 +675,8 @@ Future<dynamic> _guideChildValue(
     final snapshot = await ref.get().timeout(_guideIndexWait);
     return snapshot.value;
   }
-  return guideReadOrPack(
-    () async => (await ref.once()).snapshot.value,
-    () async => (await ref.get()).value,
-    wait: _guideIndexWait,
-    label: 'guide child ${ref.path}',
-  );
+  final event = await ref.once().timeout(_guideIndexWait);
+  return event.snapshot.value;
 }
 
 /// `lists_custom/by language/{code}/{title}/list`.
@@ -740,84 +763,58 @@ Future<Map<String, GuideKeyPlant>> _loadKeyPlantsById() async {
   return map;
 }
 
-Map<String, String>? _phoneLabels;
-String? _phoneLabelCode;
-Future<Map<String, String>>? _phoneLabelLoad;
-String? _phoneLabelLoadCode;
-
-/// A stand-in for the translations read. Tests set this.
+/// Per-language labels. A second request joins the load. A failure is not stored.
 @visibleForTesting
-Future<Map<String, String>> Function(String language)? debugReadPhoneLabels;
+class GuideLabelCache {
+  final Map<String, Map<String, String>> _cached = {};
+  final Map<String, Future<Map<String, String>>> _loading = {};
 
-@visibleForTesting
-Future<Map<String, String>> debugPhoneLabelsFor(String language) {
-  return _phoneLabelsFor(language);
+  Future<Map<String, String>> labels(
+    String language,
+    Future<Map<String, String>> Function(String language) read,
+  ) {
+    final cached = _cached[language];
+    if (cached != null) return Future.value(cached);
+    final pending = _loading[language];
+    if (pending != null) return pending;
+    final load = read(language).then((map) {
+      _cached[language] = map;
+      return map;
+    });
+    _loading[language] = load;
+    load.whenComplete(() {
+      if (identical(_loading[language], load)) _loading.remove(language);
+    }).ignore();
+    return load;
+  }
 }
 
-@visibleForTesting
-void debugResetPhoneLabels() {
-  _phoneLabels = null;
-  _phoneLabelCode = null;
-  _phoneLabelLoad = null;
-  _phoneLabelLoadCode = null;
-  debugReadPhoneLabels = null;
-}
+final _phoneLabelCache = GuideLabelCache();
 
-/// The cached map for [language], or the in-flight load when that load is
-/// for [language]. A load for another language is not returned.
 Future<Map<String, String>> _phoneLabelsFor(String language) {
-  if (_phoneLabelCode == language && _phoneLabels != null) {
-    return Future.value(_phoneLabels);
-  }
-  if (_phoneLabelLoad != null && _phoneLabelLoadCode == language) {
-    return _phoneLabelLoad!;
-  }
-  _phoneLabelLoadCode = language;
-  late final Future<Map<String, String>> tracked;
-  tracked = _loadPhoneLabels(language).whenComplete(() {
-    if (identical(_phoneLabelLoad, tracked)) {
-      _phoneLabelLoad = null;
-      _phoneLabelLoadCode = null;
-    }
-  });
-  _phoneLabelLoad = tracked;
-  return tracked;
-}
-
-void _publishPhoneLabels(String language, Map<String, String> map) {
-  if (_phoneLabelLoadCode != language) return;
-  _phoneLabels = map;
-  _phoneLabelCode = language;
+  return _phoneLabelCache.labels(language, _loadPhoneLabels).then(
+    (map) => map,
+    onError: (Object error, StackTrace _) {
+      debugPrint('guide labels: $error');
+      return const <String, String>{};
+    },
+  );
 }
 
 Future<Map<String, String>> _loadPhoneLabels(String language) async {
-  final injected = debugReadPhoneLabels;
-  if (injected != null) {
-    final map = await injected(language);
-    _publishPhoneLabels(language, map);
-    return map;
-  }
-  try {
-    final snapshot = await translationsReference
-        .child(language)
-        .get()
-        .timeout(_guideIndexWait);
-    final value = snapshot.value;
-    if (value is! Map) return const {};
-    final map = <String, String>{};
-    value.forEach((key, raw) {
-      if (raw is! Map) return;
-      final label = raw[firebaseAttributeLabel];
-      if (label is String && label.isNotEmpty) {
-        map[key.toString()] = label;
-      }
-    });
-    _publishPhoneLabels(language, map);
-    return map;
-  } catch (error) {
-    debugPrint('guide labels: $error');
-    return const {};
-  }
+  final snapshot = await translationsReference
+      .child(language)
+      .get()
+      .timeout(_guideIndexWait);
+  final value = snapshot.value;
+  if (value is! Map) return const {};
+  final map = <String, String>{};
+  value.forEach((key, raw) {
+    if (raw is! Map) return;
+    final label = raw[firebaseAttributeLabel];
+    if (label is String && label.isNotEmpty) map[key.toString()] = label;
+  });
+  return map;
 }
 
 Future<GuideResultPlant?> _catalogPlant(
@@ -826,8 +823,12 @@ Future<GuideResultPlant?> _catalogPlant(
   required bool phoneOnly,
 }) async {
   if (!phoneOnly) {
-    return await _guideResultPlant(id, language) ??
-        await _guideHeaderPlant(id, language);
+    try {
+      return await _guideResultPlant(id, language) ??
+          await _guideHeaderPlant(id, language);
+    } on TimeoutException {
+      debugPrint('guide catalog $id: timed out');
+    }
   }
   final plants = await _keyPlantsById();
   final plant = plants[id];
@@ -2024,17 +2025,19 @@ Future<_Newest?> _newestAddition() async {
 
 /// Newest days of `lists_custom/new` inside the 15 to 25 plant window.
 ///
-/// [Query.get] reads the server while online and stops after
-/// [_guideIndexWait]. [Query.once] finishes from the on-disk copy and then
-/// stops, so a plant published after the last open of this list never
-/// appears. Disk persistence is on in `main`.
+/// No network reads the on-disk copy. A server read stops after
+/// [_guideIndexWait]. There is no other copy, so a dead network leaves the row off.
 Future<List<GuideNewDrop>> _selectedNewDrops() async {
   final query = listsCustomReference
       .child('new')
       .orderByKey()
       .limitToLast(guideNewPlantMax);
-  final snapshot = await query.get().timeout(_guideIndexWait);
-  return selectGuideNewDrops(readGuideNewDrops(snapshot.value));
+  final read = await guideReadOrPack(
+    () async => (await query.get()).value,
+    () => _diskValueOrEmpty(query),
+    label: 'guide new drops',
+  );
+  return selectGuideNewDrops(readGuideNewDrops(read.value));
 }
 
 Future<List<GuideNewDay>> loadGuideNewDays(String languageCode) async {
@@ -2056,82 +2059,91 @@ Future<List<GuideNewDay>> loadGuideNewDays(String languageCode) async {
   return days;
 }
 
+typedef _YearBody = ({dynamic list, String? sourceUrl, dynamic genera});
+
+/// Genera uses get() so a node published after the last open is not hidden
+/// by an old disk copy. The source stays on once(). No network uses the disk copy.
+Future<dynamic> _yearChild(
+  DatabaseReference ref, {
+  required bool phone,
+  required bool genera,
+}) async {
+  if (phone) return _guideChildValue(ref, phoneOnly: true);
+  if (genera) return (await ref.get().timeout(_guideIndexWait)).value;
+  return (await ref.once().timeout(_guideIndexWait)).snapshot.value;
+}
+
+Future<_YearBody> _yearSides(
+  dynamic list,
+  DatabaseReference path, {
+  required bool phone,
+}) async {
+  String? sourceUrl;
+  dynamic genera;
+  final parent = path.parent;
+  if (parent != null) {
+    try {
+      final value = await _yearChild(
+        parent.child(firebaseAttributeSourceUrl),
+        phone: phone,
+        genera: false,
+      );
+      if (value is String && value.isNotEmpty) sourceUrl = value;
+    } catch (error) {
+      debugPrint('guide year source: $error');
+    }
+    try {
+      genera = await _yearChild(
+        parent.child(firebaseAttributeGenera),
+        phone: phone,
+        genera: true,
+      );
+    } catch (error) {
+      debugPrint('guide genera: $error');
+    }
+  }
+  return (list: list, sourceUrl: sourceUrl, genera: genera);
+}
+
+/// Stored language entry, or the on-disk children when the phone has no network.
+Future<_YearBody> _yearOnPhone(DatabaseReference path) async {
+  final address = guideCustomListAddress(path.path);
+  final onPhone = await _guideOnPhoneOnly();
+  if (address != null &&
+      (_listsByLanguage.containsKey(address.code) || onPhone)) {
+    final stored = await _customListEntry(address.code, address.title);
+    if (stored != null) {
+      final source = stored[firebaseAttributeSourceUrl];
+      return (
+        list: stored[firebaseAttributeList],
+        sourceUrl: source is String && source.isNotEmpty ? source : null,
+        genera: stored[firebaseAttributeGenera],
+      );
+    }
+  }
+  if (!onPhone) return (list: null, sourceUrl: null, genera: null);
+  return _yearSides(
+    await _guideChildValue(path, phoneOnly: true),
+    path,
+    phone: true,
+  );
+}
+
 Future<GuideYearList> loadGuideYearList(
   DatabaseReference path,
   String languageCode,
 ) async {
-  final phoneOnly = await _guideOnPhoneOnly();
-  dynamic listValue;
-  String? sourceUrl;
-  dynamic genera;
-  final address = phoneOnly ? guideCustomListAddress(path.path) : null;
-  final stored = address == null
-      ? null
-      : await _customListEntry(address.code, address.title);
-  if (stored != null) {
-    // The language node already holds the list, its source, and its genera.
-    listValue = stored[firebaseAttributeList];
-    final source = stored[firebaseAttributeSourceUrl];
-    if (source is String && source.isNotEmpty) sourceUrl = source;
-    genera = stored[firebaseAttributeGenera];
-  } else if (phoneOnly) {
-    listValue = await _guideChildValue(path, phoneOnly: true);
-    final parent = path.parent;
-    if (parent != null) {
-      try {
-        final value = await _guideChildValue(
-          parent.child(firebaseAttributeSourceUrl),
-          phoneOnly: true,
-        );
-        if (value is String && value.isNotEmpty) sourceUrl = value;
-      } catch (error) {
-        debugPrint('guide year source: $error');
-      }
-      try {
-        genera = await _guideChildValue(
-          parent.child(firebaseAttributeGenera),
-          phoneOnly: true,
-        );
-      } catch (error) {
-        debugPrint('guide genera: $error');
-      }
-    }
-  } else {
-    try {
-      final event = await path.once().timeout(_guideIndexWait);
-      listValue = event.snapshot.value;
-    } catch (error) {
-      debugPrint('guide year list: $error');
-      listValue = await _phoneListBody(path);
-    }
-    final parent = path.parent;
-    if (parent != null) {
-      try {
-        final source = await parent
-            .child(firebaseAttributeSourceUrl)
-            .once()
-            .timeout(_guideIndexWait);
-        final value = source.snapshot.value;
-        if (value is String && value.isNotEmpty) sourceUrl = value;
-      } catch (error) {
-        debugPrint('guide year source: $error');
-      }
-      try {
-        // get() reads the server. once() can stop at the on-disk copy, which
-        // hides a genera node published after the last open of this list.
-        final snapshot = await parent
-            .child(firebaseAttributeGenera)
-            .get()
-            .timeout(_guideIndexWait);
-        genera = snapshot.value;
-      } catch (error) {
-        debugPrint('guide genera: $error');
-      }
-    }
-  }
-  final rows = readGuideTimeline(listValue, genera);
+  final read = await guideReadOrPack<Object?>(
+    () async => (await path.once()).snapshot.value,
+    () => _yearOnPhone(path),
+    label: 'guide year list',
+  );
+  final body = read.fromPhone
+      ? read.value as _YearBody
+      : await _yearSides(read.value, path, phone: false);
+  final rows = readGuideTimeline(body.list, body.genera);
   if (rows.isEmpty) {
-    return GuideYearList(entries: const [], sourceUrl: sourceUrl);
+    return GuideYearList(entries: const [], sourceUrl: body.sourceUrl);
   }
   final lang = getLanguageCode(languageCode);
   final generaByName = <String, GuideSearchTaxon>{};
@@ -2154,7 +2166,7 @@ Future<GuideYearList> loadGuideYearList(
       GuideResultPlant? sample;
       if (sampleId != null) {
         sample = await sampleLoads.putIfAbsent(sampleId, () async {
-          return _catalogPlant(sampleId, lang, phoneOnly: phoneOnly);
+          return _catalogPlant(sampleId, lang, phoneOnly: read.fromPhone);
         });
       }
       return GuideYearEntry(
@@ -2170,7 +2182,7 @@ Future<GuideYearList> loadGuideYearList(
     }
     final id = row.id;
     if (id == null) return null;
-    final plant = await _catalogPlant(id, lang, phoneOnly: phoneOnly);
+    final plant = await _catalogPlant(id, lang, phoneOnly: read.fromPhone);
     if (plant == null) return null;
     return GuideYearEntry(
       year: row.year ?? 0,
@@ -2180,7 +2192,7 @@ Future<GuideYearList> loadGuideYearList(
   }));
   return GuideYearList(
     entries: entries.whereType<GuideYearEntry>().toList(),
-    sourceUrl: sourceUrl,
+    sourceUrl: body.sourceUrl,
   );
 }
 
@@ -2191,24 +2203,25 @@ class _LanguageLists {
   _LanguageLists(this.code, this.lists);
 }
 
+/// Language node already in memory, or on disk when the phone has no network.
+Future<dynamic> _languageListPack(String code, DatabaseReference ref) async {
+  final stored = _listsByLanguage[code];
+  if (stored != null) return stored;
+  return _diskValueOrEmpty(ref);
+}
+
 /// Lists for this language only. A missing node is an empty set.
-/// English lists are not a substitute.
+/// English lists are not a substitute. `get()` reads the server, so a genera
+/// child published after the last open is not hidden by an old disk copy.
 Future<_LanguageLists> _languageLists(String languageCode) async {
   final code = getLanguageCode(languageCode);
-  // get() reads the server while online. once() can finish from the on-disk
-  // copy, which hides a genera child published after the last open.
   final ref = listsCustomReference.child('by language').child(code);
-  final dynamic value;
-  if (await _guideOnPhoneOnly()) {
-    value = await _guideChildValue(ref, phoneOnly: true);
-  } else {
-    value = await guideReadOrPack(
-      () async => (await ref.get()).value,
-      () => _guideChildValue(ref, phoneOnly: true),
-      wait: _guideIndexWait,
-      label: 'guide language lists',
-    );
-  }
+  final read = await guideReadOrPack(
+    () async => (await ref.get()).value,
+    () => _languageListPack(code, ref),
+    label: 'guide language lists',
+  );
+  final value = read.value;
   if (value is Map) {
     _listsByLanguage[code] = value;
     return _LanguageLists(code, value);

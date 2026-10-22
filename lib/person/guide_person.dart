@@ -160,11 +160,9 @@ GuideMonthCount guideMonthCountFrom(Object? raw, DateTime now) {
   );
 }
 
-/// A finished quota read. Null is an empty month: the server has no record,
-/// so the previous account's meter is not kept. Anything else that is not a
-/// map did not arrive, and the count already applied stays.
+/// A quota event that arrived as a map. Null, and anything else that is not
+/// a map, did not arrive: the count already applied stays.
 GuideMonthCount? guideMonthCountArrived(Object? raw, DateTime now) {
-  if (raw == null) return GuideMonthCount.empty;
   if (raw is! Map) return null;
   return guideMonthCountFrom(raw, now);
 }
@@ -232,8 +230,10 @@ Future<GuideMonthCount> loadGuideMonthCount() async {
         .timeout(_guidePersonWait);
     final raw = event.value;
     final arrived = guideMonthCountArrived(raw, DateTime.now());
+    // Null did not arrive. The stored line already applied stays, including
+    // a month that still has names left.
     if (arrived == null) return guideMonthCount.value;
-    if (raw is Map) unawaited(guideRememberMonthCount(user.uid, arrived));
+    unawaited(guideRememberMonthCount(user.uid, arrived));
     return arrived;
   } catch (error) {
     debugPrint('guide month: $error');
