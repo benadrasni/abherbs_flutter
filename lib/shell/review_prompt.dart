@@ -53,7 +53,6 @@ class ReviewPromptPlan {
 ReviewPromptPlan planReviewPrompt({
   required ReviewLedger ledger,
   required String version,
-  required bool busy,
   required DateTime now,
   int goal = reviewSuccessGoal,
   Duration gap = reviewPromptGap,
@@ -65,8 +64,7 @@ ReviewPromptPlan planReviewPrompt({
       : Duration(
           milliseconds: now.millisecondsSinceEpoch - ledger.promptedAtMillis,
         );
-  final ask = !busy &&
-      current.isNotEmpty &&
+  final ask = current.isNotEmpty &&
       count >= goal &&
       ledger.promptedVersion != current &&
       elapsed >= gap;
@@ -119,7 +117,6 @@ class ReviewPromptGate {
     final plan = planReviewPrompt(
       ledger: ledger,
       version: current,
-      busy: false,
       now: now(),
       goal: goal,
       gap: gap,
