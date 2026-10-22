@@ -319,6 +319,40 @@ void main() {
     expect(find.text('daisy family'), findsOneWidget);
   });
 
+  testWidgets('a failed list load can be tried again', (tester) async {
+    await _pump(
+      tester,
+      _FailedLists(
+        loadTaxa: (_) async => guideBookTaxa(index.families, index.genera),
+      ),
+    );
+
+    expect(find.text('daisy family'), findsOneWidget);
+    expect(
+      find.text("This feature doesn't work without Internet connection."),
+      findsNothing,
+    );
+
+    await tester.tap(find.byKey(guideBookListsKey));
+    await tester.pump();
+    expect(
+      find.text("This feature doesn't work without Internet connection."),
+      findsOneWidget,
+    );
+    expect(find.byType(CircularProgressIndicator), findsNothing);
+
+    await tester.tap(
+      find.text("This feature doesn't work without Internet connection."),
+    );
+    await tester.pump();
+    expect(find.textContaining('Meadows'), findsOneWidget);
+    expect(find.textContaining('11 plants'), findsOneWidget);
+    expect(
+      find.text("This feature doesn't work without Internet connection."),
+      findsNothing,
+    );
+  });
+
   testWidgets('All lists opens on the lists segment', (tester) async {
     await _pump(
       tester,
@@ -560,6 +594,63 @@ TextBox _fragmentBox(RenderParagraph paragraph, String fragment) {
 String _cardPlain(WidgetTester tester, String fragment) {
   final text = tester.widget<Text>(find.textContaining(fragment));
   return text.data ?? text.textSpan!.toPlainText();
+}
+
+class _FailedLists extends StatefulWidget {
+  final Future<GuideBookTaxa> Function(String languageCode) loadTaxa;
+
+  const _FailedLists({required this.loadTaxa});
+
+  @override
+  State<_FailedLists> createState() => _FailedListsState();
+}
+
+class _FailedListsState extends State<_FailedLists> {
+  GuideBookSegment _segment = GuideBookSegment.families;
+  List<GuideListCover>? _lists;
+  var _failed = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      locale: const Locale('en'),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      home: GuideTheme(
+        appearance: GuideAppearance.light,
+        child: Scaffold(
+          body: BookPage(
+            lists: _lists,
+            listsFailed: _failed && _lists == null,
+            onRetryLists: () {
+              setState(() {
+                _failed = false;
+                _lists = [
+                  GuideListCover(
+                    title: 'Meadows',
+                    photoPath: null,
+                    path: FirebaseDatabase.instance.ref('lists/meadows'),
+                    isNew: false,
+                    count: 11,
+                  ),
+                ];
+              });
+            },
+            segment: _segment,
+            onSegment: (segment) => setState(() => _segment = segment),
+            onOpenFind: () {},
+            loadTaxa: widget.loadTaxa,
+            onSearch: () {},
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _Host extends StatefulWidget {

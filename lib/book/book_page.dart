@@ -15,6 +15,10 @@ const guideBookListsKey = Key('guide-book-lists');
 class BookPage extends StatefulWidget {
   final List<GuideListCover>? lists;
 
+  /// The list read threw. [lists] stays null; an empty list is a real answer.
+  final bool listsFailed;
+  final VoidCallback? onRetryLists;
+
   /// Signed-in favorites. Shown on Lists only when [GuideListCover.count]
   /// is at least one. Find does not receive this cover.
   final GuideListCover? favorites;
@@ -31,6 +35,8 @@ class BookPage extends StatefulWidget {
   const BookPage({
     super.key,
     required this.lists,
+    this.listsFailed = false,
+    this.onRetryLists,
     this.favorites,
     required this.segment,
     required this.onSegment,
@@ -221,7 +227,12 @@ class _BookPageState extends State<BookPage> {
         return _taxonSliver(rows);
       case GuideBookSegment.lists:
         final lists = widget.lists;
-        if (lists == null) return _waiting();
+        if (lists == null) {
+          if (widget.listsFailed) {
+            return _message(widget.onRetryLists ?? () {});
+          }
+          return _waiting();
+        }
         final picked = widget.favorites;
         final leading = picked != null && picked.isFavorite && picked.count > 0
             ? picked

@@ -53,6 +53,10 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   Map<String, int>? _colorCounts;
   List<GuideListCover>? _lists;
 
+  /// The list read threw. Distinct from an empty catalog, which is [_lists]
+  /// set to an empty list.
+  bool _listsFailed = false;
+
   /// Bumped when the person picks another tab while a connection check for
   /// Book is still running, so that check cannot open Book afterwards.
   int _tabTicket = 0;
@@ -140,6 +144,9 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     // A long suspend keeps the strip that was on screen. Ask again so a
     // find deleted on another device does not stay under Seen lately.
     _loadFinds();
+    // A timed-out read leaves _lists null. Ask again; that is not an empty
+    // catalog, and the first attempt often loses the startup connection.
+    if (_lists == null) _loadLists();
   }
 
   /// A failed fetch keeps a remembered floor closed. The shell only shows
@@ -426,14 +433,23 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
     final code = _languageCode;
     if (code == null) return;
     final ticket = ++_listTicket;
+    if (_listsFailed) {
+      setState(() => _listsFailed = false);
+    }
     try {
       final lists = await loadGuideLists(code);
       if (!mounted || ticket != _listTicket) return;
-      setState(() => _lists = lists);
+      setState(() {
+        _lists = lists;
+        _listsFailed = false;
+      });
     } catch (error) {
       debugPrint('guide lists: $error');
       if (!mounted || ticket != _listTicket) return;
-      setState(() => _lists = []);
+      // Keep a list already on screen. Only a finished read may be empty.
+      setState(() {
+        if (_lists == null) _listsFailed = true;
+      });
     }
   }
 
@@ -646,6 +662,8 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
               FindPage(
                 colorCounts: _colorCounts,
                 lists: _lists,
+                listsFailed: _listsFailed,
+                onRetryLists: _loadLists,
                 favorites: _favorites,
                 finds: _finds,
                 allowance: guideCameraLiveAllowance(
@@ -657,6 +675,8 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
               _opened.contains(1)
                   ? BookPage(
                       lists: _lists,
+                      listsFailed: _listsFailed,
+                      onRetryLists: _loadLists,
                       favorites: _favorites,
                       segment: _bookSegment,
                       onSegment: (segment) {

@@ -454,6 +454,30 @@ void main() {
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 
+  testWidgets('a failed list load can be tried again', (tester) async {
+    var tries = 0;
+    await _pump(
+      tester,
+      _page(
+        lists: null,
+        listsFailed: true,
+        onRetryLists: () => tries++,
+      ),
+    );
+
+    expect(
+      find.text("This feature doesn't work without Internet connection."),
+      findsOneWidget,
+    );
+    expect(find.text('Lists of flowers'), findsOneWidget);
+    expect(find.byType(CircularProgressIndicator), findsNothing);
+
+    await tester.tap(
+      find.text("This feature doesn't work without Internet connection."),
+    );
+    expect(tries, 1);
+  });
+
   testWidgets('hides finds and covers that are not ready', (tester) async {
     Purchases.hasOldVersion = true;
     await _pump(tester, _page(finds: null, lists: null));
@@ -811,6 +835,8 @@ Widget _page({
   Map<String, int>? colorCounts = const {},
   List<GuideFind>? finds = const [],
   List<GuideListCover>? lists = const [],
+  bool listsFailed = false,
+  VoidCallback? onRetryLists,
   GuideListCover? favorites,
   GuideAllowance allowance = const GuideAllowance.guest(),
   VoidCallback? onOpenBook,
@@ -841,6 +867,8 @@ Widget _page({
       body: FindPage(
         colorCounts: colorCounts,
         lists: lists,
+        listsFailed: listsFailed,
+        onRetryLists: onRetryLists,
         favorites: favorites,
         finds: finds,
         allowance: allowance,

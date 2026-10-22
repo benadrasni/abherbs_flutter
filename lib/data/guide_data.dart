@@ -857,7 +857,13 @@ Future<List<GuideListCover>> loadGuideLists(String languageCode) async {
     ));
   });
 
-  final newest = await _newestAddition();
+  // A slow "new" query must not throw away the language lists already read.
+  _Newest? newest;
+  try {
+    newest = await _newestAddition();
+  } catch (error) {
+    debugPrint('guide lists new: $error');
+  }
   if (newest != null) {
     pending.add(_PendingCover(
       coverId: newest.coverId,
@@ -975,11 +981,16 @@ Future<Map<String, String>> _genusCoverPhotos(
   final photos = <String, String>{};
   final phoneOnly = await _guideOnPhoneOnly();
   await Future.wait(wanted.map((genus) async {
-    final id = guideGenusSampleId(genus, idsByGenus[genus] ?? const []);
-    if (id == null) return;
-    final plant = await _catalogPlant(id, languageCode, phoneOnly: phoneOnly);
-    final path = plant?.photoPath ?? plant?.platePath;
-    if (path != null && path.isNotEmpty) photos[genus] = path;
+    try {
+      final id = guideGenusSampleId(genus, idsByGenus[genus] ?? const []);
+      if (id == null) return;
+      final plant =
+          await _catalogPlant(id, languageCode, phoneOnly: phoneOnly);
+      final path = plant?.photoPath ?? plant?.platePath;
+      if (path != null && path.isNotEmpty) photos[genus] = path;
+    } catch (error) {
+      debugPrint('guide genus cover $genus: $error');
+    }
   }));
   return photos;
 }

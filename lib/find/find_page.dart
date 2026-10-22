@@ -12,6 +12,10 @@ class FindPage extends StatelessWidget {
   final Map<String, int>? colorCounts;
   final List<GuideListCover>? lists;
 
+  /// The list read threw. [lists] stays null; an empty list is a real answer.
+  final bool listsFailed;
+  final VoidCallback? onRetryLists;
+
   /// Signed-in favorites. Shown first in the list strip only when
   /// [GuideListCover.count] is at least one. New in the book stays second.
   final GuideListCover? favorites;
@@ -24,6 +28,8 @@ class FindPage extends StatelessWidget {
     super.key,
     required this.colorCounts,
     required this.lists,
+    this.listsFailed = false,
+    this.onRetryLists,
     this.favorites,
     required this.finds,
     this.allowance = const GuideAllowance.guest(),
@@ -59,7 +65,9 @@ class FindPage extends StatelessWidget {
           action: strings.guide_all_lists,
           onAction: onOpenBook,
         ),
-        if (flowerLists == null)
+        if (flowerLists == null && listsFailed)
+          _ListRetry(onPressed: onRetryLists)
+        else if (flowerLists == null)
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 24),
             child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
@@ -123,6 +131,29 @@ class FindPage extends StatelessWidget {
           flowerListsView,
         ],
       ],
+    );
+  }
+}
+
+class _ListRetry extends StatelessWidget {
+  final VoidCallback? onPressed;
+
+  const _ListRetry({required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = GuideColors.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+      child: TextButton(
+        onPressed: onPressed,
+        style: TextButton.styleFrom(foregroundColor: colors.ink2),
+        child: Text(
+          S.of(context).no_connection_content,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 14, height: 1.4),
+        ),
+      ),
     );
   }
 }
