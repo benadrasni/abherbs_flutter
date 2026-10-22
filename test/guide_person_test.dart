@@ -601,6 +601,23 @@ void main() {
     expect(copied, 'Version 9.0.0 (900)');
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('rate opens the store page from the row', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(390, 1400));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    var rated = 0;
+    await tester.pumpWidget(_app(_page(
+      view: _guest(),
+      onRate: () async => rated++,
+    )));
+
+    await tester.ensureVisible(find.byKey(const Key('guide-rate')));
+    expect(find.text('Rate this app'), findsOneWidget);
+    expect(find.text('Opens the store page'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('guide-rate')));
+    expect(rated, 1);
+    expect(tester.takeException(), isNull);
+  });
 }
 
 GuidePersonView _guest() {
@@ -667,6 +684,7 @@ Widget _page({
   ValueChanged<GuideAppearance>? onAppearance,
   ValueChanged<int>? onSelectTab,
   Future<void> Function(String line)? onCopyVersion,
+  Future<void> Function()? onRate,
 }) {
   return GuidePersonPage(
     view: view,
@@ -679,6 +697,7 @@ Widget _page({
     onAppearance: onAppearance,
     onSelectTab: onSelectTab,
     onCopyVersion: onCopyVersion,
+    onRate: onRate,
     versionName: '9.0.0',
     buildNumber: '900',
   );

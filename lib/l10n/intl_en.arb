@@ -336,6 +336,8 @@
   "guide_person_trial": "7 days free",
   "guide_person_restore": "Restore purchases",
   "guide_person_restore_note": "Remove ads, Photo search, Offline",
+  "guide_person_rate": "Rate this app",
+  "guide_person_rate_note": "Opens the store page",
   "guide_person_restoring": "Restoring purchases…",
   "guide_person_language": "Language",
   "guide_person_language_note": "The app follows this language.",

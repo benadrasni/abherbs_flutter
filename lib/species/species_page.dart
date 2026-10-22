@@ -21,6 +21,7 @@ import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:abherbs_flutter/shell/guide_analytics.dart';
+import 'package:abherbs_flutter/shell/review_prompt.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:exif/exif.dart';
@@ -63,6 +64,7 @@ Widget guideSpeciesImage(
 MaterialPageRoute<void> guideSpeciesRoute(
   String name, {
   GuideCameraPending? pending,
+  bool named = false,
   Future<void> Function()? onConfirmPending,
   Future<void> Function()? onUndoPending,
   Future<void> Function(String name)? onRetargetPending,
@@ -73,6 +75,7 @@ MaterialPageRoute<void> guideSpeciesRoute(
     builder: (context) => GuideSpeciesPage(
       name: name,
       pending: pending,
+      named: named,
       load: (languageCode) => loadGuideSpecies(name, languageCode),
       onShowSeen: GuideTabs.showSeen,
       onConfirmPending: onConfirmPending,
@@ -106,6 +109,8 @@ Future<void> openGuidePlant(
     guideSpeciesRoute(
       name,
       pending: pending,
+      named: source == GuidePlantSource.photo ||
+          source == GuidePlantSource.outside,
       onConfirmPending: onConfirmPending,
       onUndoPending: onUndoPending,
       onRetargetPending: onRetargetPending,
@@ -137,6 +142,9 @@ class GuideSpeciesPage extends StatefulWidget {
   final GuideVideoBuilder? videoBuilder;
   final int? month;
   final GuideCameraPending? pending;
+
+  /// A photo or an outside-the-book name just opened this page.
+  final bool named;
   final Future<void> Function()? onConfirmPending;
   final Future<void> Function()? onUndoPending;
   final Future<void> Function(String name)? onRetargetPending;
@@ -158,6 +166,7 @@ class GuideSpeciesPage extends StatefulWidget {
     this.videoBuilder,
     this.month,
     this.pending,
+    this.named = false,
     this.onConfirmPending,
     this.onUndoPending,
     this.onRetargetPending,
@@ -181,6 +190,7 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
   bool _pendingBusy = false;
   bool _favoriteBusy = false;
   bool? _favoriteOn;
+  bool _namedNoted = false;
   int _ticket = 0;
 
   @override
@@ -224,12 +234,30 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
       _seen = initial.seen;
       _loading = false;
       _bindKeys(initial);
+      _noteNamed();
       return;
     }
     _load();
   }
 
   int get _month => widget.month ?? DateTime.now().month;
+
+  /// The page is still the one on screen. A plant pushed on top, or a page
+  /// the person already left, is not a place for the sheet.
+  bool _reviewStillHere() {
+    if (!mounted) return false;
+    final route = ModalRoute.of(context);
+    return route?.isCurrent ?? false;
+  }
+
+  /// A named photo stays on this page. The sheet waits out the pause, and
+  /// only if the page is still the one on screen.
+  void _noteNamed() {
+    if (_namedNoted || _species == null) return;
+    if (!widget.named && widget.pending == null) return;
+    _namedNoted = true;
+    unawaited(ReviewPrompt.note(stillHere: _reviewStillHere));
+  }
 
   Future<void> _load() async {
     final ticket = ++_ticket;
@@ -245,6 +273,7 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
         _loading = false;
         if (species != null) _bindKeys(species);
       });
+      _noteNamed();
     } catch (error) {
       debugPrint('guide species ${widget.name}: $error');
       if (!mounted || ticket != _ticket) return;
@@ -363,6 +392,7 @@ class _GuideSpeciesPageState extends State<GuideSpeciesPage> {
               : S.of(context).guide_added_seen,
         ),
       ));
+      unawaited(ReviewPrompt.note(stillHere: _reviewStillHere));
     } catch (error) {
       debugPrint('guide save seen ${widget.name}: $error');
       _showFailure();

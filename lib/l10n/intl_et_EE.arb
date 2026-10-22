@@ -336,6 +336,8 @@
   "guide_person_trial": "7 päeva tasuta",
   "guide_person_restore": "Taasta ostud",
   "guide_person_restore_note": "Reklaamideta, otsing foto järgi, võrguühenduseta režiim",
+  "guide_person_rate": "Hinda rakendust",
+  "guide_person_rate_note": "Avab poe lehe",
   "guide_person_restoring": "Taastame oste…",
   "guide_person_language": "Keel",
   "guide_person_language_note": "Rakendus järgib seda keelt.",

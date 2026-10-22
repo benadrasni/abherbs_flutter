@@ -12,6 +12,7 @@ import 'package:abherbs_flutter/key/petal_page.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
 import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/shell/app_banner_ad.dart';
+import 'package:abherbs_flutter/shell/review_prompt.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -130,6 +131,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
   bool _loading = false;
   bool _failed = false;
   bool _prefsReady = false;
+  bool _reviewNoted = false;
   int _ticket = 0;
   String? _listTitle;
 
@@ -148,6 +150,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
       _seen = widget.initialSeen ?? {};
       _regionCounts = widget.initialRegionCounts ?? {};
       _prefsReady = true;
+      _noteKeySuccess(plants);
     } else {
       _load();
     }
@@ -181,6 +184,25 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
   bool get _showAd => !_isList && (widget.showAd ?? Purchases.showsAds());
 
   int get _month => widget.month ?? DateTime.now().month;
+
+  bool _reviewStillHere() {
+    if (!mounted) return false;
+    final route = ModalRoute.of(context);
+    return route?.isCurrent ?? false;
+  }
+
+  /// The key's list is on screen. A family or genus list is not a finished key.
+  void _noteKeySuccess(List<GuideResultPlant> plants, {bool? wildOnly}) {
+    if (_reviewNoted || _isList) return;
+    final shown = arrangeGuideResults(
+      plants,
+      month: _month,
+      wildOnly: wildOnly ?? _prefs.wildOnly,
+    );
+    if (shown.plants.isEmpty) return;
+    _reviewNoted = true;
+    unawaited(ReviewPrompt.note(stillHere: _reviewStillHere));
+  }
 
   GuideResultList get _arranged {
     return arrangeGuideResults(
@@ -235,6 +257,7 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
         _plants = plants;
         _loading = false;
       });
+      _noteKeySuccess(plants);
       if (!_isList) {
         final shown = arrangeGuideResults(
           plants,
@@ -464,9 +487,14 @@ class _GuideResultsPageState extends State<GuideResultsPage> {
                       ? strings.guide_wild_only
                       : strings.guide_wild_and_garden,
                   onRegion: _openRegions,
-                  onWild: () => _remember(
-                    _prefs.copyWith(wildOnly: !_prefs.wildOnly),
-                  ),
+                  onWild: () {
+                    final next = _prefs.copyWith(wildOnly: !_prefs.wildOnly);
+                    _remember(next);
+                    final plants = _plants;
+                    if (plants != null) {
+                      _noteKeySuccess(plants, wildOnly: next.wildOnly);
+                    }
+                  },
                 ),
               ),
             ),

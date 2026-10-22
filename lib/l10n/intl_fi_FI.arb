@@ -336,6 +336,8 @@
   "guide_person_trial": "7 päivää ilmaiseksi",
   "guide_person_restore": "Palauta ostot",
   "guide_person_restore_note": "Ei mainoksia, haku kuvasta, offline-tila",
+  "guide_person_rate": "Arvostele sovellus",
+  "guide_person_rate_note": "Avaa kaupan sivun",
   "guide_person_restoring": "Palautetaan ostoksia…",
   "guide_person_language": "Kieli",
   "guide_person_language_note": "Sovellus käyttää tätä kieltä.",

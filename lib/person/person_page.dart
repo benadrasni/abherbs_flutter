@@ -5,6 +5,7 @@ import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/person/guide_person.dart';
 import 'package:abherbs_flutter/offline/offline_page.dart';
 import 'package:abherbs_flutter/shell/ad_consent.dart';
+import 'package:abherbs_flutter/shell/review_prompt.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
 import 'package:abherbs_flutter/person/authentication.dart';
@@ -29,6 +30,7 @@ class GuidePersonPage extends StatefulWidget {
   final Future<void> Function(BuildContext context)? onFieldGuide;
   final Future<void> Function(BuildContext context)? onOffline;
   final Future<void> Function(BuildContext context)? onStatistics;
+  final Future<void> Function()? onRate;
   final ValueChanged<int>? onSelectTab;
 
   /// When set, the page shows this build instead of reading the package.
@@ -49,6 +51,7 @@ class GuidePersonPage extends StatefulWidget {
     this.onFieldGuide,
     this.onOffline,
     this.onStatistics,
+    this.onRate,
     this.onSelectTab,
     this.versionName,
     this.buildNumber,
@@ -155,6 +158,15 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
     } catch (error) {
       debugPrint('guide version: $error');
     }
+  }
+
+  Future<void> _rate() async {
+    final rate = widget.onRate;
+    if (rate != null) {
+      await rate();
+      return;
+    }
+    await openWriteReview();
   }
 
   Future<void> _copyVersion(String line) async {
@@ -470,6 +482,13 @@ class _GuidePersonPageState extends State<GuidePersonPage> {
           onPressed: widget.onStatistics == null
               ? null
               : () => _act(widget.onStatistics),
+        ),
+        _MenuRow(
+          rowKey: const Key('guide-rate'),
+          icon: Icons.star_outline,
+          title: strings.guide_person_rate,
+          subtitle: strings.guide_person_rate_note,
+          onPressed: () => unawaited(_rate()),
         ),
         if (account != null) ...[
           _MenuRow(
@@ -844,6 +863,7 @@ class _AllowanceBar extends StatelessWidget {
 }
 
 class _MenuRow extends StatelessWidget {
+  final Key? rowKey;
   final IconData icon;
   final String title;
   final String subtitle;
@@ -851,6 +871,7 @@ class _MenuRow extends StatelessWidget {
   final bool danger;
 
   const _MenuRow({
+    this.rowKey,
     required this.icon,
     required this.title,
     required this.subtitle,
@@ -868,6 +889,7 @@ class _MenuRow extends StatelessWidget {
         border: Border(bottom: BorderSide(color: colors.rule)),
       ),
       child: InkWell(
+        key: rowKey,
         onTap: onPressed,
         child: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
