@@ -53,7 +53,6 @@ class ReviewPromptPlan {
 ReviewPromptPlan planReviewPrompt({
   required ReviewLedger ledger,
   required String version,
-  required bool busy,
   required DateTime now,
   int goal = reviewSuccessGoal,
   Duration gap = reviewPromptGap,
@@ -65,8 +64,7 @@ ReviewPromptPlan planReviewPrompt({
       : Duration(
           milliseconds: now.millisecondsSinceEpoch - ledger.promptedAtMillis,
         );
-  final ask = !busy &&
-      current.isNotEmpty &&
+  final ask = current.isNotEmpty &&
       count >= goal &&
       ledger.promptedVersion != current &&
       elapsed >= gap;
@@ -105,8 +103,6 @@ class ReviewPromptGate {
     this.gap = reviewPromptGap,
   });
 
-  bool _busy = false;
-  int _ticket = 0;
   Future<void> _tail = Future<void>.value();
 
   Future<void> note({required bool Function() stillHere}) {
@@ -121,28 +117,21 @@ class ReviewPromptGate {
     final plan = planReviewPrompt(
       ledger: ledger,
       version: current,
-      busy: _busy,
       now: now(),
       goal: goal,
       gap: gap,
     );
     await write(plan.ledger);
     if (!plan.ask) return;
-    _busy = true;
-    final ticket = ++_ticket;
-    try {
-      await delay(pause);
-      if (ticket != _ticket || !stillHere()) return;
-      if (!await isAvailable()) return;
-      await write(ReviewLedger(
-        count: plan.ledger.count,
-        promptedVersion: current,
-        promptedAtMillis: now().millisecondsSinceEpoch,
-      ));
-      await requestReview();
-    } finally {
-      if (ticket == _ticket) _busy = false;
-    }
+    await delay(pause);
+    if (!stillHere()) return;
+    if (!await isAvailable()) return;
+    await write(ReviewLedger(
+      count: plan.ledger.count,
+      promptedVersion: current,
+      promptedAtMillis: now().millisecondsSinceEpoch,
+    ));
+    await requestReview();
   }
 }
 

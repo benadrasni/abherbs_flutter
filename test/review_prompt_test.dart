@@ -11,7 +11,6 @@ void main() {
       final plan = planReviewPrompt(
         ledger: ledger,
         version: '9.1.0',
-        busy: false,
         now: now,
       );
       expect(plan.ask, isFalse);
@@ -25,7 +24,6 @@ void main() {
     final plan = planReviewPrompt(
       ledger: const ReviewLedger(count: 3),
       version: '9.1.0',
-      busy: false,
       now: DateTime(2026, 10, 1),
     );
     expect(plan.ask, isTrue);
@@ -41,7 +39,6 @@ void main() {
         promptedAtMillis: 0,
       ),
       version: ' 9.1.0 ',
-      busy: false,
       now: DateTime(2026, 10, 20),
     );
     expect(plan.ask, isFalse);
@@ -58,7 +55,6 @@ void main() {
       planReviewPrompt(
         ledger: ledger,
         version: '9.2.0',
-        busy: false,
         now: asked.add(const Duration(days: 13)),
       ).ask,
       isFalse,
@@ -67,27 +63,17 @@ void main() {
       planReviewPrompt(
         ledger: ledger,
         version: '9.2.0',
-        busy: false,
         now: asked.add(reviewPromptGap),
       ).ask,
       isTrue,
     );
   });
 
-  test('an empty version and a busy prompt do not ask', () {
+  test('an empty version does not ask', () {
     const ledger = ReviewLedger(count: 8);
     final now = DateTime(2026, 10, 1);
     expect(
-      planReviewPrompt(ledger: ledger, version: ' ', busy: false, now: now).ask,
-      isFalse,
-    );
-    expect(
-      planReviewPrompt(
-        ledger: ledger,
-        version: '9.1.0',
-        busy: true,
-        now: now,
-      ).ask,
+      planReviewPrompt(ledger: ledger, version: ' ', now: now).ask,
       isFalse,
     );
   });
