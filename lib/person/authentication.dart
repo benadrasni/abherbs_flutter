@@ -202,16 +202,18 @@ class Auth {
       var value = event.snapshot.value;
       try {
         // once() can return the on-disk user from before this phone's plan
-        // was written. The entitlements child is read from the server. When
-        // that read does not finish, a plan already applied stays.
+        // was written. A child that comes back replaces that copy. A null
+        // child is not the server removing the plan, so the stored row stays.
         final fresh = await usersReference
             .child(uid)
             .child('entitlements')
             .get()
             .timeout(_accountReadWait);
         if (gen != _accountGen) return;
-        entitlementsRead = true;
-        value = userWithFreshEntitlements(value, fresh.value);
+        if (fresh.value != null) {
+          entitlementsRead = true;
+          value = userWithFreshEntitlements(value, fresh.value);
+        }
       } catch (error) {
         debugPrint('entitlements: $error');
       }

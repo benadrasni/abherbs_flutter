@@ -19,19 +19,15 @@ bool shouldApplyAccountEntitlements({
   return entitlementsRead || !planHeld;
 }
 
-/// Replaces a cached `entitlements` child with the server row.
-/// A null row removes a plan the cache still has.
+/// Replaces a cached `entitlements` child with a row that was actually read.
+/// A null row is not an answer, so the plan already stored on the user stays.
 Object? userWithFreshEntitlements(Object? userValue, Object? entitlements) {
+  if (entitlements == null) return userValue;
   if (userValue is! Map) {
-    if (entitlements == null) return userValue;
     return <String, Object?>{'entitlements': entitlements};
   }
   final merged = Map<Object?, Object?>.from(userValue);
-  if (entitlements == null) {
-    merged.remove('entitlements');
-  } else {
-    merged['entitlements'] = entitlements;
-  }
+  merged['entitlements'] = entitlements;
   return merged;
 }
 

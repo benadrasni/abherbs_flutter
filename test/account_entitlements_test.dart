@@ -75,14 +75,31 @@ void main() {
     expect(Purchases.owns(fieldGuideMonthly), isTrue);
   });
 
-  test('a finished server read with no entitlements clears the plan', () {
-    applyAccountEntitlements(accountEntitlementsOf({
+  test('a null entitlements read keeps the plan stored on the user', () {
+    final stored = {
+      'credits': 1,
       'entitlements': {
         'products': {
           'field_guide_monthly': {'active': true},
         },
       },
-    }));
+    };
+    final kept = userWithFreshEntitlements(stored, null);
+    final snapshot = accountEntitlementsOf(kept);
+    expect(snapshot.present, isTrue);
+    expect(
+      shouldApplyAccountEntitlements(
+        entitlementsRead: false,
+        planHeld: false,
+      ),
+      isTrue,
+    );
+    applyAccountEntitlements(snapshot);
+    expect(Purchases.hasFieldGuide(), isTrue);
+    expect(Purchases.owns(fieldGuideMonthly), isTrue);
+  });
+
+  test('a server row that marks the plan inactive clears it', () {
     final disk = userWithFreshEntitlements(
       {
         'credits': 1,
@@ -92,9 +109,14 @@ void main() {
           },
         },
       },
-      null,
+      {
+        'products': {
+          'field_guide_monthly': {'active': false},
+        },
+      },
     );
-    final snapshot = accountEntitlementsOf(disk);
+    applyAccountEntitlements(accountEntitlementsOf(disk));
+    expect(Purchases.hasFieldGuide(), isFalse);
     expect(
       shouldApplyAccountEntitlements(
         entitlementsRead: true,
@@ -102,8 +124,6 @@ void main() {
       ),
       isTrue,
     );
-    applyAccountEntitlements(snapshot);
-    expect(Purchases.hasFieldGuide(), isFalse);
   });
 
   test('the first read applies a disk row when no plan is held yet', () {
