@@ -167,13 +167,17 @@ class Offline {
       var reference = FirebaseDatabase.instance.ref();
       switch (section) {
         case 1:
-          await reference.child(firebaseCounts).keepSynced(value);
+          await reference.child(firebaseCountsV3).keepSynced(value);
           await reference.child(firebaseFamiliesToUpdate).keepSynced(value);
           await reference.child(firebasePlantsToUpdate).keepSynced(value);
           break;
         case 2:
-          await reference.child(firebaseLists).keepSynced(value);
-          await reference.child(firebasePlantHeaders).keepSynced(value);
+          await reference.child(firebaseListsV3).keepSynced(value);
+          await reference.child(firebasePlantHeadersV3).keepSynced(value);
+          // Families, genera, and the flower lists. The pictures stay with
+          // the plants; these indexes are what Book opens.
+          await reference.child(firebaseAPGIV).keepSynced(value);
+          await reference.child(firebaseListsCustom).keepSynced(value);
           break;
         case 3:
           await reference.child(firebasePlants).keepSynced(value);
@@ -200,6 +204,7 @@ class Offline {
           // A pack removal releases the search index an earlier build pinned.
           if (!value) {
             await reference.child(firebaseAPGIV).keepSynced(false);
+            await reference.child(firebaseListsCustom).keepSynced(false);
             await reference
                 .child(firebaseSearch)
                 .child(languageLatin)

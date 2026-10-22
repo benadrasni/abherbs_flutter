@@ -166,6 +166,9 @@ class GuideSectionHeader extends StatelessWidget {
 
 class GuidePhoto extends StatelessWidget {
   final String? path;
+
+  /// Book photo used when [path] is not a file on this phone.
+  final String? cover;
   final double width;
   final double height;
   final double radius;
@@ -175,6 +178,7 @@ class GuidePhoto extends StatelessWidget {
   const GuidePhoto({
     super.key,
     required this.path,
+    this.cover,
     required this.width,
     required this.height,
     this.radius = 12,
@@ -192,11 +196,12 @@ class GuidePhoto extends StatelessWidget {
       child: SizedBox(
         width: width,
         height: height,
-        child: path == null
+        child: path == null && (cover == null || cover!.isEmpty)
             ? placeholder
             : getImage(
-                path!,
+                path ?? cover!,
                 placeholder,
+                cover: path == null ? null : cover,
                 width: width,
                 height: height,
                 fit: fit,
@@ -624,13 +629,11 @@ class _GuideFoldTabs extends StatelessWidget {
                   ),
                 );
               }
-              final mirror =
-                  Directionality.of(context) != TextDirection.ltr;
+              final mirror = Directionality.of(context) != TextDirection.ltr;
               final List<double> centers;
               final List<int> indexes;
               if (mirror) {
-                centers = [for (final center in placed) width - center]
-                  ..sort();
+                centers = [for (final center in placed) width - center]..sort();
                 indexes = const [2, 1, 0];
               } else {
                 centers = placed;

@@ -102,6 +102,55 @@ void main() {
     expect(rows[1].ownPhoto, isTrue);
     expect(rows[1].photoPath, 'observations/uid/rosa.jpg');
     expect(rows[1].photoAttached, isTrue);
+
+    final covered = guideSeenApplyCatalog(
+      own,
+      label: 'dog rose',
+      labelKnown: true,
+      catalogPhoto: 'photos/rosa.webp',
+      photoKnown: true,
+      inBook: true,
+      photoAttached: false,
+    );
+    expect(covered.photoPath, 'observations/uid/rosa.jpg');
+    expect(covered.coverPath, 'photos/rosa.webp');
+    expect(covered.ownPhoto, isTrue);
+  });
+
+  test('a book cover shows while the vernacular is still unknown', () {
+    final own = readGuideSeenRow('own', {
+      observationId: 'own',
+      observationPlant: 'Calyptocarpus vialis',
+      observationPhotoPaths: ['observations/uid/calyptocarpus.jpg'],
+    })!;
+    final pending = guideSeenApplyCatalog(
+      own,
+      label: null,
+      labelKnown: false,
+      catalogPhoto: 'photos/Asterales/Asteraceae/Calyptocarpus_vialis/'
+          'Calyptocarpus_vialis.webp',
+      photoKnown: true,
+      inBook: null,
+    );
+    expect(pending.catalogKnown, isFalse);
+    expect(pending.label, isNull);
+    expect(pending.photoPath, 'observations/uid/calyptocarpus.jpg');
+    expect(pending.ownPhoto, isTrue);
+    expect(
+      pending.coverPath,
+      'photos/Asterales/Asteraceae/Calyptocarpus_vialis/'
+      'Calyptocarpus_vialis.webp',
+    );
+
+    final fresh = readGuideSeenRow('own', {
+      observationId: 'own',
+      observationPlant: 'Calyptocarpus vialis',
+      observationPhotoPaths: ['observations/uid/calyptocarpus.jpg'],
+    })!;
+    final shown = guideSeenChooseFace(fresh, pending, null);
+    expect(shown.catalogKnown, isFalse);
+    expect(shown.coverPath, pending.coverPath);
+    expect(shown.photoPath, 'observations/uid/calyptocarpus.jpg');
   });
 
   test('an unknown read keeps the remembered known face', () {

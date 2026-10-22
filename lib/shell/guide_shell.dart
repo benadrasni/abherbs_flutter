@@ -52,6 +52,10 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   bool _decorateQueued = false;
   Map<String, int>? _colorCounts;
   List<GuideListCover>? _lists;
+
+  /// Bumped when the person picks another tab while a connection check for
+  /// Book is still running, so that check cannot open Book afterwards.
+  int _tabTicket = 0;
   GuideBookSegment _bookSegment = GuideBookSegment.families;
   List<GuideFind>? _finds;
   List<GuideSeenFind>? _notebook;
@@ -225,6 +229,25 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
   }
 
   void _go(int index) {
+    if (index == 1 && _index != 1) {
+      final ticket = ++_tabTicket;
+      unawaited(_openBook(ticket));
+      return;
+    }
+    _tabTicket++;
+    _enter(index);
+  }
+
+  /// Book and its lists open from a pack already on the phone. With no pack
+  /// and no connection, the same dialog as Name it from a photo stays here.
+  Future<void> _openBook(int ticket) async {
+    if (!mounted) return;
+    if (!await guideBookAvailable(context)) return;
+    if (!mounted || ticket != _tabTicket) return;
+    _enter(1);
+  }
+
+  void _enter(int index) {
     if (_index != index) {
       unawaited(GuideAnalytics.screen(guideAnalyticsTab(index)));
     }
@@ -254,6 +277,14 @@ class _GuideShellState extends State<GuideShell> with WidgetsBindingObserver {
 
   /// Find’s All lists opens Book on the lists of flowers.
   void _openLists() {
+    final ticket = ++_tabTicket;
+    unawaited(_openListsWhenOnline(ticket));
+  }
+
+  Future<void> _openListsWhenOnline(int ticket) async {
+    if (!mounted) return;
+    if (!await guideBookAvailable(context)) return;
+    if (!mounted || ticket != _tabTicket) return;
     if (_index != 1) unawaited(GuideAnalytics.screen(guideAnalyticsTabBook));
     GuideTabs.index = 1;
     setState(() {

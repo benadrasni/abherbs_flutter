@@ -312,6 +312,17 @@ class GuideOfflineStored {
   bool covers(String code) => everything || regions.contains(code);
 }
 
+/// True when this phone already keeps a pack. Book and its lists then open
+/// from that copy, whether or not the phone has a connection.
+bool guidePackOnPhone({
+  required String packs,
+  required bool classic,
+  required String done,
+}) {
+  if (!guideOfflineStoredFrom(packs, classic: classic).isEmpty) return true;
+  return offlineDoneParse(done).isNotEmpty;
+}
+
 GuideOfflineStored guideOfflineStoredFrom(
   String packs, {
   required bool classic,
@@ -537,8 +548,7 @@ GuideOfflineUpdate guideOfflineUpdate({
       continue;
     }
     final inPack = storedCodes == null ||
-        (regions != null &&
-            regions.any((code) => storedCodes.contains(code)));
+        (regions != null && regions.any((code) => storedCodes.contains(code)));
     if (!inPack) continue;
     final diff = guideMediaDiff(stamps[change.plantId], change.stamp);
     if (diff.isEmpty) continue;
@@ -576,8 +586,12 @@ class GuideOfflineView {
   });
 }
 
+/// A catalog read may take this long before the copy already on the phone
+/// is used. `.get()` on a node that was never stored does not finish offline.
+const _guideOfflineWait = Duration(seconds: 4);
+
 Future<GuideOfflineView> loadGuideOffline() async {
-  final snapshot = await headersV3Reference.get();
+  final snapshot = await headersV3Reference.get().timeout(_guideOfflineWait);
   final catalog = readGuideOfflineCatalog(snapshot.value);
   final packs = await Prefs.getStringF(keyGuideOfflinePacks, '');
   final classic = await Prefs.getBoolF(keyOffline, false);
@@ -605,8 +619,22 @@ Future<GuideOfflineView> loadGuideOffline() async {
   );
 }
 
+/// True when the phone reports no network. A check that throws counts as
+/// online, so a working connection still reads the catalog.
+Future<bool> _offlinePhoneOnly() async {
+  try {
+    final result = await Connectivity().checkConnectivity();
+    return result.every((item) => item == ConnectivityResult.none);
+  } catch (error) {
+    debugPrint('guide connectivity: $error');
+    return false;
+  }
+}
+
 /// Change-list entries after the phone's mark, for the packs already stored.
 /// A denied or missing node leaves the line empty so Offline still opens.
+/// With no network the change list is left unread: that `.get()` does not
+/// finish, and Account would stay on its spinner.
 Future<GuideOfflineUpdate> loadGuideOfflineUpdate(
   GuideOfflineCatalog catalog,
   GuideOfflineStored stored,
@@ -614,7 +642,12 @@ Future<GuideOfflineUpdate> loadGuideOfflineUpdate(
   if (stored.isEmpty) return GuideOfflineUpdate.empty;
   dynamic raw;
   try {
-    raw = (await rootReference.child(firebaseCatalogChanges).get()).value;
+    if (await _offlinePhoneOnly()) return GuideOfflineUpdate.empty;
+    raw = (await rootReference
+            .child(firebaseCatalogChanges)
+            .get()
+            .timeout(_guideOfflineWait))
+        .value;
   } catch (error) {
     debugPrint('catalog changes: $error');
     return GuideOfflineUpdate.empty;
@@ -670,7 +703,8 @@ Future<GuideOfflineHold> loadGuideOfflineHold() async {
   var updatePlants = 0;
   if (!stored.isEmpty) {
     try {
-      final snapshot = await headersV3Reference.get();
+      final snapshot =
+          await headersV3Reference.get().timeout(_guideOfflineWait);
       final catalog = readGuideOfflineCatalog(snapshot.value);
       final update = await loadGuideOfflineUpdate(catalog, stored);
       updateBytes = update.bytes;

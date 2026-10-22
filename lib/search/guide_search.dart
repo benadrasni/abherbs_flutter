@@ -1,5 +1,6 @@
 import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/data/utils.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/foundation.dart';
 
@@ -388,27 +389,125 @@ Future<GuideBookTaxa> loadGuideBookTaxa(String languageCode) {
   });
 }
 
+/// `.once()` waits for the server and does not finish in flight mode.
+const _guideBookWait = Duration(seconds: 4);
+
+Future<bool> _bookOnPhoneOnly() async {
+  try {
+    final result = await Connectivity().checkConnectivity();
+    return result.every((item) => item == ConnectivityResult.none);
+  } catch (error) {
+    debugPrint('guide book connectivity: $error');
+    return false;
+  }
+}
+
 Future<GuideBookTaxa> _fetchGuideBookTaxa(String lang) async {
   final cached = peekGuideSearchIndex(lang);
   if (cached != null) return guideBookTaxa(cached.families, cached.genera);
   final taxonomyRef = translationsTaxonomyReference.child(lang);
-  await Future.wait([
-    apgIVReference.keepSynced(true),
-    taxonomyRef.keepSynced(true),
-  ]);
-  final events = await Future.wait([
-    apgIVReference.once(),
-    taxonomyRef.once(),
-  ]);
+  final phoneOnly = await _bookOnPhoneOnly();
+  if (!phoneOnly) {
+    await Future.wait([
+      apgIVReference.keepSynced(true),
+      taxonomyRef.keepSynced(true),
+    ]);
+  }
+  final dynamic apg;
+  final dynamic names;
+  if (phoneOnly) {
+    final snaps = await Future.wait([
+      apgIVReference.get().timeout(_guideBookWait),
+      taxonomyRef.get().timeout(_guideBookWait),
+    ]);
+    apg = snaps[0].value;
+    names = snaps[1].value;
+  } else {
+    final events = await Future.wait([
+      apgIVReference.once(),
+      taxonomyRef.once(),
+    ]);
+    apg = events[0].snapshot.value;
+    names = events[1].snapshot.value;
+  }
   final families = <GuideSearchTaxon>[];
   final genera = <GuideSearchTaxon>[];
-  _readTaxa(
-    events[0].snapshot.value,
-    events[1].snapshot.value,
-    families,
-    genera,
-  );
+  _readTaxa(apg, names, families, genera);
+  _rememberApgLists(apg);
+  if (phoneOnly && families.isEmpty && genera.isEmpty) {
+    throw StateError('book is empty');
+  }
   return guideBookTaxa(families, genera);
+}
+
+final Map<String, dynamic> _apgListNodes = {};
+bool _apgListsReady = false;
+Future<void>? _apgListLoad;
+
+/// Plant-id node for an APG `…/list` path already read with the book.
+/// Null when that tree is not on the phone yet, or the path is not a list.
+dynamic guideApgListNode(String path) {
+  var key = path;
+  if (key.startsWith('/')) key = key.substring(1);
+  return _apgListNodes[key];
+}
+
+/// Reads the family and genus lists from the copy of APG already on the phone.
+/// A child `…/list` get waits on the network even when the tree is stored.
+Future<void> ensureGuideApgLists() {
+  if (_apgListsReady) return Future.value();
+  final pending = _apgListLoad;
+  if (pending != null) return pending;
+  final load = _loadApgLists();
+  _apgListLoad = load;
+  return load.whenComplete(() {
+    if (identical(_apgListLoad, load)) _apgListLoad = null;
+  });
+}
+
+Future<void> _loadApgLists() async {
+  final phoneOnly = await _bookOnPhoneOnly();
+  if (!phoneOnly) return;
+  final snapshot = await apgIVReference.get().timeout(_guideBookWait);
+  _rememberApgLists(snapshot.value);
+}
+
+void _rememberApgLists(dynamic apg) {
+  _apgListNodes.clear();
+  _apgListsReady = true;
+  if (apg is! Map) return;
+  void walk(dynamic node, String path) {
+    if (node is! Map) return;
+    if (node.containsKey(firebaseAttributeList)) {
+      _apgListNodes['$path$firebaseAttributeList'] =
+          node[firebaseAttributeList];
+    }
+    node.forEach((key, value) {
+      final child = key.toString();
+      if (child == firebaseAPGType ||
+          child == firebaseAttributeList ||
+          child == firebaseAttributeCount ||
+          child == firebaseAttributeFreebase) {
+        return;
+      }
+      if (value is Map) walk(value, '$path$child/');
+    });
+  }
+
+  final root = apg[firebaseRootTaxon];
+  if (root is Map) walk(root, '$firebaseAPGIV/$firebaseRootTaxon/');
+}
+
+@visibleForTesting
+void debugRememberGuideApg(dynamic apg) {
+  _rememberApgLists(apg);
+}
+
+@visibleForTesting
+void debugResetGuideApgLists() {
+  _apgListNodes.clear();
+  _apgListsReady = false;
+  _apgListLoad = null;
 }
 
 List<String> _vernaculars(dynamic dictionary, String taxon) {

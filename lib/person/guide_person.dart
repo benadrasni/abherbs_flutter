@@ -166,6 +166,9 @@ int _quotaCount(Object? value) {
   return 0;
 }
 
+/// The quota read does not finish or throw while the phone is offline.
+const _guidePersonWait = Duration(seconds: 4);
+
 Future<GuideMonthCount> loadGuideMonthCount() async {
   final user = Auth.appUser;
   if (user == null) return GuideMonthCount.empty;
@@ -173,7 +176,8 @@ Future<GuideMonthCount> loadGuideMonthCount() async {
     final event = await rootReference
         .child(firebasePhotoQuota)
         .child(user.uid)
-        .get();
+        .get()
+        .timeout(_guidePersonWait);
     return guideMonthCountFrom(event.value, DateTime.now());
   } catch (error) {
     debugPrint('guide month: $error');

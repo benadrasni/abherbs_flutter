@@ -800,6 +800,7 @@ class _ConfirmCard extends StatelessWidget {
                     children: [
                       GuidePhoto(
                         path: find.photoPath,
+                        cover: find.coverPath,
                         width: 74,
                         height: 74,
                         radius: 10,
@@ -997,6 +998,7 @@ class _FindRow extends StatelessWidget {
             ),
             child: GuidePhoto(
               path: find.photoPath,
+              cover: find.coverPath,
               width: 44,
               height: 44,
               radius: 8,
@@ -1346,6 +1348,7 @@ class _ShareSheetState extends State<_ShareSheet> {
               children: [
                 GuidePhoto(
                   path: widget.find.photoPath,
+                  cover: widget.find.coverPath,
                   width: 64,
                   height: 64,
                   radius: 10,

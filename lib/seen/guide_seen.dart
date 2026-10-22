@@ -30,6 +30,9 @@ class GuideSeenFind {
   final String? label;
   final DateTime when;
   final String? photoPath;
+
+  /// Book photo. The row shows it when [photoPath] is not on this phone.
+  final String? coverPath;
   final bool ownPhoto;
   final bool confirmed;
   final GuideSeenShare share;
@@ -63,6 +66,7 @@ class GuideSeenFind {
     required this.when,
     this.label,
     this.photoPath,
+    this.coverPath,
     this.ownPhoto = false,
     this.confirmed = true,
     this.share = GuideSeenShare.none,
@@ -90,6 +94,7 @@ class GuideSeenFind {
       label: label,
       when: when,
       photoPath: photoPath ?? catalogPhoto,
+      coverPath: catalogPhoto ?? coverPath,
       ownPhoto: ownPhoto,
       confirmed: confirmed,
       share: share,
@@ -105,11 +110,39 @@ class GuideSeenFind {
       catalogKnown: true,
     );
   }
+
+  /// Same find, with a book photo for the thumbnail. Lookups stay as they are,
+  /// so a vernacular that has not loaded yet is tried again.
+  GuideSeenFind withCover(String coverPath) {
+    return GuideSeenFind(
+      id: id,
+      name: name,
+      label: label,
+      when: when,
+      photoPath: photoPath,
+      coverPath: coverPath,
+      ownPhoto: ownPhoto,
+      confirmed: confirmed,
+      share: share,
+      inBook: inBook,
+      probability: probability,
+      others: others,
+      place: place,
+      latitude: latitude,
+      longitude: longitude,
+      indoors: indoors,
+      country: country,
+      photoAttached: photoAttached,
+      catalogKnown: catalogKnown,
+    );
+  }
 }
 
 /// Applies catalog reads when every required one is known. A failed read
-/// leaves [row] unknown. A find with its own photo does not need the catalog
-/// photo. [inBook] is null when that read failed.
+/// leaves [row] unknown. A find with its own photo does not wait on the
+/// catalog photo. A book photo that did load is kept for the thumbnail
+/// even while the vernacular or the in-book read is still unknown.
+/// [inBook] is null when that read failed.
 GuideSeenFind guideSeenApplyCatalog(
   GuideSeenFind row, {
   required String? label,
@@ -119,14 +152,27 @@ GuideSeenFind guideSeenApplyCatalog(
   required bool? inBook,
   bool? photoAttached,
 }) {
-  if (!labelKnown || inBook == null) return row;
-  if (!row.ownPhoto && !photoKnown) return row;
-  return row.withCatalog(
+  final held = _holdBookCover(row, catalogPhoto, photoKnown);
+  if (!labelKnown || inBook == null) return held;
+  if (!row.ownPhoto && !photoKnown) return held;
+  return held.withCatalog(
     label: label,
     catalogPhoto: catalogPhoto,
     inBook: inBook,
     photoAttached: photoAttached,
   );
+}
+
+/// The observation path stays. The book photo is only a stand-in thumbnail.
+GuideSeenFind _holdBookCover(
+  GuideSeenFind row,
+  String? catalogPhoto,
+  bool photoKnown,
+) {
+  if (!row.ownPhoto || !photoKnown) return row;
+  if (catalogPhoto == null || catalogPhoto.isEmpty) return row;
+  if (row.coverPath == catalogPhoto) return row;
+  return row.withCover(catalogPhoto);
 }
 
 class GuideSeenMonth {
@@ -360,14 +406,17 @@ GuideSeenFind guideSeenCarryFace(
   GuideSeenFind raw,
   GuideSeenFind? previous,
 ) {
-  if (previous == null || !previous.catalogKnown || previous.name != raw.name) {
-    return raw;
+  if (previous == null || previous.name != raw.name) return raw;
+  if (!previous.catalogKnown) {
+    final cover = previous.coverPath;
+    if (cover == null || cover.isEmpty) return raw;
+    return raw.withCover(cover);
   }
   final samePhoto = raw.ownPhoto
       ? previous.ownPhoto && previous.photoPath == raw.photoPath
       : !previous.ownPhoto;
-  final catalogPhoto =
-      !raw.ownPhoto && !previous.ownPhoto ? previous.photoPath : null;
+  final catalogPhoto = previous.coverPath ??
+      (!raw.ownPhoto && !previous.ownPhoto ? previous.photoPath : null);
   return raw.withCatalog(
     label: previous.label,
     catalogPhoto: catalogPhoto,
@@ -385,7 +434,13 @@ GuideSeenFind guideSeenChooseFace(
 ) {
   final fresh = guideSeenCarryFace(raw, read);
   if (fresh.catalogKnown) return fresh;
-  return guideSeenCarryFace(raw, remembered);
+  final kept = guideSeenCarryFace(raw, remembered);
+  if (kept.catalogKnown) return kept;
+  final freshCover = fresh.coverPath;
+  if (freshCover != null && freshCover.isNotEmpty) return fresh;
+  final keptCover = kept.coverPath;
+  if (keptCover != null && keptCover.isNotEmpty) return kept;
+  return raw;
 }
 
 /// The list Seen paints and stores after one decorate pass, plus the stamp

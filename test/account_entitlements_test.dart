@@ -12,7 +12,8 @@ void main() {
     Purchases.namesReady = false;
   });
 
-  test('a checked Field Guide plan unlocks this phone and sign-out clears it', () {
+  test('a checked Field Guide plan unlocks this phone and sign-out clears it',
+      () {
     Purchases.purchases.clear();
     Purchases.clearAccountProducts();
     final snapshot = accountEntitlementsOf({
@@ -53,6 +54,77 @@ void main() {
     expect(Purchases.isOffline(), isFalse);
     expect(Purchases.showsAds(), isTrue);
     expect(Purchases.syncsSeenPhotos(), isFalse);
+  });
+
+  test('a missed entitlements read keeps a plan already on the phone', () {
+    applyAccountEntitlements(accountEntitlementsOf({
+      'entitlements': {
+        'products': {
+          'field_guide_monthly': {'active': true},
+        },
+      },
+    }));
+    expect(
+      shouldApplyAccountEntitlements(
+        entitlementsRead: false,
+        planHeld: true,
+      ),
+      isFalse,
+    );
+    expect(Purchases.hasFieldGuide(), isTrue);
+    expect(Purchases.owns(fieldGuideMonthly), isTrue);
+  });
+
+  test('a finished server read with no entitlements clears the plan', () {
+    applyAccountEntitlements(accountEntitlementsOf({
+      'entitlements': {
+        'products': {
+          'field_guide_monthly': {'active': true},
+        },
+      },
+    }));
+    final disk = userWithFreshEntitlements(
+      {
+        'credits': 1,
+        'entitlements': {
+          'products': {
+            'field_guide_monthly': {'active': true},
+          },
+        },
+      },
+      null,
+    );
+    final snapshot = accountEntitlementsOf(disk);
+    expect(
+      shouldApplyAccountEntitlements(
+        entitlementsRead: true,
+        planHeld: true,
+      ),
+      isTrue,
+    );
+    applyAccountEntitlements(snapshot);
+    expect(Purchases.hasFieldGuide(), isFalse);
+  });
+
+  test('the first read applies a disk row when no plan is held yet', () {
+    final disk = {
+      'credits': 1,
+      'entitlements': {
+        'products': {
+          'field_guide_monthly': {'active': true},
+        },
+      },
+    };
+    final snapshot = accountEntitlementsOf(disk);
+    expect(
+      shouldApplyAccountEntitlements(
+        entitlementsRead: false,
+        planHeld: false,
+      ),
+      isTrue,
+    );
+    applyAccountEntitlements(snapshot);
+    expect(Purchases.hasFieldGuide(), isTrue);
   });
 
   test('a server entitlements row replaces a cache that has none', () {
@@ -96,7 +168,8 @@ void main() {
     expect(Purchases.hasFieldGuide(), isFalse);
   });
 
-  test('an account with no entitlement record leaves store purchases alone', () {
+  test('an account with no entitlement record leaves store purchases alone',
+      () {
     Purchases.purchases.clear();
     Purchases.clearAccountProducts();
     final snapshot = accountEntitlementsOf({'credits': 1});

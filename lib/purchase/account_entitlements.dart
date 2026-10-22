@@ -10,6 +10,15 @@ class AccountEntitlements {
   const AccountEntitlements({required this.present, required this.products});
 }
 
+/// A missed entitlements read must not replace a plan already on the phone.
+/// The first read still applies the row it has.
+bool shouldApplyAccountEntitlements({
+  required bool entitlementsRead,
+  required bool planHeld,
+}) {
+  return entitlementsRead || !planHeld;
+}
+
 /// Replaces a cached `entitlements` child with the server row.
 /// A null row removes a plan the cache still has.
 Object? userWithFreshEntitlements(Object? userValue, Object? entitlements) {

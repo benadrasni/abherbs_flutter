@@ -3,6 +3,7 @@ import 'package:abherbs_flutter/book/book_page.dart';
 import 'package:abherbs_flutter/data/guide_data.dart';
 import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/search/guide_search.dart';
+import 'package:abherbs_flutter/shell/guide_actions.dart';
 import 'package:abherbs_flutter/shell/guide_theme.dart';
 import 'package:abherbs_flutter/shell/guide_widgets.dart';
 import 'package:abherbs_flutter/purchase/purchases.dart';
@@ -10,6 +11,7 @@ import 'package:abherbs_flutter/data/utils.dart';
 import 'package:abherbs_flutter/shell/app_banner_ad.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_platform_interface/test.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -30,8 +32,34 @@ void main() {
   });
 
   tearDown(() {
+    debugGuideConnectivity = null;
+    debugGuidePackOnPhone = null;
+    debugResetGuideApgLists();
     Purchases.hasOldVersion = false;
     Purchases.purchases = {};
+  });
+
+  test('a stored book keeps a family list without a child read', () {
+    debugRememberGuideApg({
+      firebaseRootTaxon: {
+        'Lamiales': {
+          'Acanthaceae': {
+            firebaseAttributeList: {'9': 1, '4': 1},
+          },
+        },
+      },
+    });
+    final node = guideApgListNode(
+      '$firebaseAPGIV/$firebaseRootTaxon/Lamiales/Acanthaceae/$firebaseAttributeList',
+    );
+    expect(guideResultIds(node), ['4', '9']);
+    expect(
+      guideCustomListAddress(
+        '/lists_custom/by language/en/US State flowers/list',
+      ),
+      (code: 'en', title: 'US State flowers'),
+    );
+    expect(guideCustomListAddress('users/abc/favorite'), isNull);
   });
 
   final index = GuideSearchIndex.parse(
@@ -449,6 +477,59 @@ void main() {
     expect(find.textContaining('Favorite flowers'), findsNothing);
     expect(find.textContaining('New in the book'), findsOneWidget);
   });
+
+  testWidgets('a list stays closed without a connection', (tester) async {
+    debugGuideConnectivity = () async => [ConnectivityResult.none];
+    debugGuidePackOnPhone = () async => false;
+    await tester.pumpWidget(_gate((context) {
+      openGuideList(
+        context,
+        GuideListCover(
+          title: 'Meadows',
+          photoPath: null,
+          path: FirebaseDatabase.instance.ref('lists/meadows'),
+          isNew: false,
+          count: 11,
+        ),
+      );
+    }));
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Connection'), findsOneWidget);
+    expect(
+      find.text("This feature doesn't work without Internet connection."),
+      findsOneWidget,
+    );
+    expect(find.text('Meadows'), findsNothing);
+  });
+
+  testWidgets('a stored pack opens Book without a connection', (tester) async {
+    debugGuideConnectivity = () async => [ConnectivityResult.none];
+    debugGuidePackOnPhone = () async => true;
+    var opened = false;
+    await tester.pumpWidget(_gate((context) async {
+      opened = await guideBookAvailable(context);
+    }));
+    await tester.tap(find.text('open'));
+    await tester.pump();
+
+    expect(opened, isTrue);
+    expect(find.text('Connection'), findsNothing);
+  });
+
+  testWidgets('a connection leaves the dialog closed', (tester) async {
+    debugGuideConnectivity = () async => [ConnectivityResult.wifi];
+    var allowed = false;
+    await tester.pumpWidget(_gate((context) async {
+      allowed = await guideReachable(context);
+    }));
+    await tester.tap(find.text('open'));
+    await tester.pump();
+
+    expect(allowed, isTrue);
+    expect(find.text('Connection'), findsNothing);
+  });
 }
 
 void _expectSameLine(WidgetTester tester, String a, String b) {
@@ -544,6 +625,25 @@ Future<Map<String, GuideGenusNote>> _noGenusNotes(
   List<GuideSearchTaxon> genera,
 ) async {
   return {};
+}
+
+Widget _gate(void Function(BuildContext context) onOpen) {
+  return MaterialApp(
+    locale: const Locale('en'),
+    localizationsDelegates: const [
+      S.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
+    supportedLocales: S.delegate.supportedLocales,
+    home: Builder(
+      builder: (context) => TextButton(
+        onPressed: () => onOpen(context),
+        child: const Text('open'),
+      ),
+    ),
+  );
 }
 
 Future<void> _pump(WidgetTester tester, Widget page) async {

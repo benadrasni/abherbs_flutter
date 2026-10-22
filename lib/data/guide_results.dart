@@ -337,6 +337,171 @@ Map<String, GuideHeaderBloom> readGuideHeaderBlooms(dynamic raw) {
   return blooms;
 }
 
+/// One `plants_headers_v3` row, enough to answer the key without the
+/// generated count and list indexes.
+class GuideKeyPlant {
+  final String id;
+  final String name;
+  final Set<String> colors;
+  final Set<String> habitats;
+  final Set<String> petals;
+  final Set<String> regions;
+  final String? photoPath;
+  final int floweringFrom;
+  final int floweringTo;
+  final bool cultivated;
+
+  const GuideKeyPlant({
+    required this.id,
+    required this.name,
+    required this.colors,
+    required this.habitats,
+    required this.petals,
+    required this.regions,
+    required this.photoPath,
+    required this.floweringFrom,
+    required this.floweringTo,
+    required this.cultivated,
+  });
+
+  GuideResultPlant toResult({String? label, String? platePath}) {
+    final vernacular = label?.trim();
+    return GuideResultPlant(
+      id: id,
+      name: name,
+      label: vernacular != null && vernacular.isNotEmpty ? vernacular : null,
+      photoPath: photoPath,
+      platePath: guideStoragePath(platePath),
+      floweringFrom: floweringFrom,
+      floweringTo: floweringTo,
+      cultivated: cultivated,
+    );
+  }
+}
+
+/// Codes stored as a list, or as the map Realtime Database uses for an array.
+Set<String> guideFilterCodes(dynamic raw) {
+  final codes = <String>{};
+  void add(dynamic value) {
+    if (value is int) {
+      codes.add('$value');
+    } else if (value is num && value == value.roundToDouble()) {
+      codes.add('${value.toInt()}');
+    } else if (value is String && value.isNotEmpty) {
+      codes.add(value);
+    }
+  }
+
+  if (raw is List) {
+    for (final value in raw) {
+      add(value);
+    }
+  } else if (raw is Map) {
+    raw.forEach((_, value) => add(value));
+  }
+  return codes;
+}
+
+/// `plants_headers_v3` as a list or a map, keyed by catalog id.
+List<GuideKeyPlant> readGuideKeyPlants(dynamic raw) {
+  final plants = <GuideKeyPlant>[];
+  void add(String id, dynamic value) {
+    if (value is! Map) return;
+    final name = value[firebaseAttributeName];
+    if (name is! String || name.isEmpty) return;
+    plants.add(GuideKeyPlant(
+      id: id,
+      name: name,
+      colors: guideFilterCodes(value['filterColor']),
+      habitats: guideFilterCodes(value['filterHabitat']),
+      petals: guideFilterCodes(value['filterPetal']),
+      regions: guideFilterCodes(value['filterDistribution']),
+      photoPath: guideStoragePath(value[firebaseAttributeUrl]),
+      floweringFrom: guideResultInt(value['floweringFrom']),
+      floweringTo: guideResultInt(value['floweringTo']),
+      cultivated: value['cultivated'] == true,
+    ));
+  }
+
+  if (raw is List) {
+    for (var i = 0; i < raw.length; i++) {
+      add('$i', raw[i]);
+    }
+  } else if (raw is Map) {
+    raw.forEach((key, value) => add(key.toString(), value));
+  }
+  return plants;
+}
+
+bool guideKeySelected(Set<String> values, String? id) {
+  if (id == null || id.isEmpty) return true;
+  return values.contains(id);
+}
+
+bool guideKeyPlantMatches(
+  GuideKeyPlant plant, {
+  String? colorId,
+  String? habitatId,
+  String? petalId,
+  String? regionId,
+}) {
+  return guideKeySelected(plant.colors, colorId) &&
+      guideKeySelected(plant.habitats, habitatId) &&
+      guideKeySelected(plant.petals, petalId) &&
+      guideKeySelected(plant.regions, regionId);
+}
+
+int guideKeyCount(
+  Iterable<GuideKeyPlant> plants, {
+  String? colorId,
+  String? habitatId,
+  String? petalId,
+  String? regionId,
+}) {
+  var count = 0;
+  for (final plant in plants) {
+    if (guideKeyPlantMatches(
+      plant,
+      colorId: colorId,
+      habitatId: habitatId,
+      petalId: petalId,
+      regionId: regionId,
+    )) {
+      count++;
+    }
+  }
+  return count;
+}
+
+/// Plants that pass the key, in catalog-id order. The same order as
+/// `lists_4_v3`.
+List<GuideKeyPlant> guideKeyMatches(
+  Iterable<GuideKeyPlant> plants, {
+  String? colorId,
+  String? habitatId,
+  String? petalId,
+  String? regionId,
+}) {
+  final matched = [
+    for (final plant in plants)
+      if (guideKeyPlantMatches(
+        plant,
+        colorId: colorId,
+        habitatId: habitatId,
+        petalId: petalId,
+        regionId: regionId,
+      ))
+        plant,
+  ];
+  matched.sort((a, b) {
+    final left = int.tryParse(a.id);
+    final right = int.tryParse(b.id);
+    if (left != null && right != null) return left.compareTo(right);
+    return a.id.compareTo(b.id);
+  });
+  return matched;
+}
+
 GuideGenusNote countGuideGenusNote({
   required Iterable<String> plantIds,
   required Map<String, GuideHeaderBloom> blooms,

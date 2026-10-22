@@ -22,6 +22,25 @@ void main() {
     ]);
   }
 
+  test('a stored pack keeps Book available offline', () {
+    expect(
+      guidePackOnPhone(packs: '', classic: false, done: ''),
+      isFalse,
+    );
+    expect(
+      guidePackOnPhone(packs: '77', classic: false, done: ''),
+      isTrue,
+    );
+    expect(
+      guidePackOnPhone(packs: '', classic: true, done: ''),
+      isTrue,
+    );
+    expect(
+      guidePackOnPhone(packs: '', classic: false, done: '3,6'),
+      isTrue,
+    );
+  });
+
   test('a plant counts once, and Antarctic is not a pack', () {
     final plants = catalog();
     expect(plants.total, 4);
@@ -164,7 +183,8 @@ void main() {
 
   test('a change list keeps the latest stamp for plants in the pack', () {
     const plate = GuideMediaFile(url: 'a/plate.webp', bytes: 100, hash: 'p0');
-    const plateNext = GuideMediaFile(url: 'a/plate.webp', bytes: 180, hash: 'p1');
+    const plateNext =
+        GuideMediaFile(url: 'a/plate.webp', bytes: 180, hash: 'p1');
     const photo = GuideMediaFile(url: 'a/ac1.webp', bytes: 50, hash: 'a');
     const addedPhoto = GuideMediaFile(url: 'a/ac2.webp', bytes: 70, hash: 'b');
     const gone = GuideMediaFile(url: 'a/old.webp', bytes: 10, hash: 'z');
@@ -269,7 +289,8 @@ void main() {
             plantId: 0,
             kind: 'pictures',
             stamp: const GuideMediaStamp(
-              plate: GuideMediaFile(url: 'a/plate.webp', bytes: 100, hash: 'new'),
+              plate:
+                  GuideMediaFile(url: 'a/plate.webp', bytes: 100, hash: 'new'),
             ),
           ),
         ],
@@ -610,7 +631,8 @@ void main() {
     await tester.binding.setSurfaceSize(const Size(390, 844));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     var updates = 0;
-    const plate = GuideMediaFile(url: 'a/plate.webp', bytes: 2000000, hash: 'p');
+    const plate =
+        GuideMediaFile(url: 'a/plate.webp', bytes: 2000000, hash: 'p');
     await tester.pumpWidget(_app(GuideOfflinePage(
       view: _view(
         stored: const GuideOfflineStored(regions: {'11'}),
@@ -644,7 +666,8 @@ void main() {
     addTearDown(() => tester.binding.setSurfaceSize(null));
     var opened = 0;
     var updates = 0;
-    const plate = GuideMediaFile(url: 'a/plate.webp', bytes: 2000000, hash: 'p');
+    const plate =
+        GuideMediaFile(url: 'a/plate.webp', bytes: 2000000, hash: 'p');
     await tester.pumpWidget(_app(GuideOfflinePage(
       view: _view(
         canDownload: false,

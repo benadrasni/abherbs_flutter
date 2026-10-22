@@ -634,13 +634,19 @@ class _FindStrip extends StatelessWidget {
               builder: (context, constraints) {
                 return GuidePhoto(
                   path: find.photoPath,
+                  cover: find.coverPath,
                   width: constraints.maxWidth,
                   height: constraints.maxHeight,
                 );
               },
             ),
           )
-        : GuidePhoto(path: find.photoPath, width: edge, height: edge);
+        : GuidePhoto(
+            path: find.photoPath,
+            cover: find.coverPath,
+            width: edge,
+            height: edge,
+          );
     final card = InkWell(
       onTap: () {
         // A name still waiting opens Seen, where it can be confirmed.

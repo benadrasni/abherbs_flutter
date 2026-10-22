@@ -149,6 +149,19 @@ class Auth {
     );
   }
 
+  /// How long the account row may take before the copy already on the phone
+  /// is used. These reads do not finish or throw while the phone is offline.
+  static const _accountReadWait = Duration(seconds: 4);
+
+  /// A previous read already applied this account. A later read that does not
+  /// finish must not drop that plan or the name count.
+  static bool _accountHeld() {
+    return Purchases.namesReady ||
+        Purchases.accountProducts.isNotEmpty ||
+        Purchases.hasOldVersion ||
+        credits != 0;
+  }
+
   /// Reads the signed-in account. Callers share one read until it finishes,
   /// so Find can wait for credits and purchased features before it redraws.
   static Future<void> setUser() {
@@ -180,16 +193,24 @@ class Auth {
     }
     final uid = user.uid;
     usersReference.child(uid).keepSynced(true);
+    final held = _accountHeld();
+    var entitlementsRead = false;
     try {
-      final event = await usersReference.child(uid).once();
+      final event =
+          await usersReference.child(uid).once().timeout(_accountReadWait);
       if (gen != _accountGen) return;
       var value = event.snapshot.value;
       try {
         // once() can return the on-disk user from before this phone's plan
-        // was written. The entitlements child is read from the server.
-        final fresh =
-            await usersReference.child(uid).child('entitlements').get();
+        // was written. The entitlements child is read from the server. When
+        // that read does not finish, a plan already applied stays.
+        final fresh = await usersReference
+            .child(uid)
+            .child('entitlements')
+            .get()
+            .timeout(_accountReadWait);
         if (gen != _accountGen) return;
+        entitlementsRead = true;
         value = userWithFreshEntitlements(value, fresh.value);
       } catch (error) {
         debugPrint('entitlements: $error');
@@ -200,15 +221,20 @@ class Auth {
         final rawCredits = value[firebaseAttributeCredits];
         credits = rawCredits is int ? rawCredits : 0;
         final entitlements = accountEntitlementsOf(value);
-        applyAccountEntitlements(entitlements);
-        final revoked = revokedEntitlementIds(entitlements).toSet();
-        unawaited(() async {
-          await forgetRevokedPurchases(revoked);
-          if (gen != _accountGen || appUser?.uid != uid) return;
-          final purchases = await Prefs.getStringListF(keyPurchases, []);
-          if (purchases.isEmpty) return;
-          await rememberStorePurchases(purchases);
-        }());
+        if (shouldApplyAccountEntitlements(
+          entitlementsRead: entitlementsRead,
+          planHeld: held,
+        )) {
+          applyAccountEntitlements(entitlements);
+          final revoked = revokedEntitlementIds(entitlements).toSet();
+          unawaited(() async {
+            await forgetRevokedPurchases(revoked);
+            if (gen != _accountGen || appUser?.uid != uid) return;
+            final purchases = await Prefs.getStringListF(keyPurchases, []);
+            if (purchases.isEmpty) return;
+            await rememberStorePurchases(purchases);
+          }());
+        }
       } else {
         Purchases.hasOldVersion = false;
         credits = 0;
@@ -227,8 +253,11 @@ class Auth {
       }));
     } catch (error) {
       if (gen != _accountGen) return;
-      credits = 0;
-      Purchases.failedAccountRead();
+      debugPrint('account: $error');
+      if (!held) {
+        credits = 0;
+        Purchases.failedAccountRead();
+      }
       if (gen == _accountGen) _syncAnalytics();
     }
 

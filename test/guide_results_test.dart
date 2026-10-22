@@ -65,6 +65,74 @@ void main() {
     expect(quiet.isEmpty, isTrue);
   });
 
+  test('headers answer the key when the count index is missing', () {
+    final plants = readGuideKeyPlants({
+      '2': {
+        'name': 'Rudbeckia hirta',
+        'url': 'Asterales/Asteraceae/Rudbeckia_hirta/rh1.webp',
+        'filterColor': [2],
+        'filterHabitat': {'0': 1, '1': 8},
+        'filterPetal': [3],
+        'filterDistribution': [75, 84],
+        'floweringFrom': 5,
+        'floweringTo': 9,
+      },
+      '10': {
+        'name': 'Lupinus texensis',
+        'filterColor': [4, 2],
+        'filterHabitat': [1],
+        'filterPetal': [2],
+        'filterDistribution': [84],
+        'floweringFrom': 3,
+        'floweringTo': 5,
+      },
+      '11': {
+        'name': 'Tulipa gesneriana',
+        'filterColor': [3],
+        'filterPetal': [1],
+        'cultivated': true,
+        'floweringFrom': 4,
+        'floweringTo': 5,
+      },
+      '12': 'skip',
+    });
+
+    expect(plants.map((plant) => plant.name), [
+      'Rudbeckia hirta',
+      'Lupinus texensis',
+      'Tulipa gesneriana',
+    ]);
+    expect(
+      plants.first.photoPath,
+      'photos/Asterales/Asteraceae/Rudbeckia_hirta/rh1.webp',
+    );
+    expect(guideKeyCount(plants, colorId: '2'), 2);
+    expect(guideKeyCount(plants, colorId: '2', habitatId: '1'), 2);
+    expect(guideKeyCount(plants, colorId: '2', habitatId: '8'), 1);
+    expect(guideKeyCount(plants, colorId: '2', habitatId: '4'), 0);
+    expect(guideKeyCount(plants, colorId: '3'), 1);
+    expect(guideKeyCount(plants, colorId: '3', habitatId: '1'), 0);
+    expect(
+      guideKeyCount(plants, colorId: '2', habitatId: '1', petalId: '2'),
+      1,
+    );
+    expect(
+      guideKeyMatches(
+        plants,
+        colorId: '2',
+        habitatId: '1',
+        petalId: '3',
+        regionId: '84',
+      ).map((plant) => plant.id),
+      ['2'],
+    );
+    expect(
+      guideKeyMatches(plants, colorId: '4', regionId: '84')
+          .map((plant) => plant.name),
+      ['Lupinus texensis'],
+    );
+  });
+
   test('wild only hides cultivated plants', () {
     final list = arrangeGuideResults(
       [

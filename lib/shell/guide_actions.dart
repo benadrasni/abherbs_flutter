@@ -10,6 +10,7 @@ import 'package:abherbs_flutter/data/guide_results.dart';
 import 'package:abherbs_flutter/key/habitat_page.dart';
 import 'package:abherbs_flutter/person/language_page.dart';
 import 'package:abherbs_flutter/book/list_page.dart';
+import 'package:abherbs_flutter/offline/guide_offline.dart';
 import 'package:abherbs_flutter/offline/offline_page.dart';
 import 'package:abherbs_flutter/person/person_page.dart';
 import 'package:abherbs_flutter/seen/guide_seen.dart';
@@ -333,11 +334,60 @@ MaterialPageRoute<dynamic> guideNotificationListRoute(
   );
 }
 
-void openGuideList(
+/// The connectivity read. Tests set this so a tap does not ask the device.
+@visibleForTesting
+Future<List<ConnectivityResult>> Function()? debugGuideConnectivity;
+
+/// A stored pack. Tests set this so a tap does not read the phone's prefs.
+@visibleForTesting
+Future<bool> Function()? debugGuidePackOnPhone;
+
+/// True when the phone has a connection. With none, shows the same dialog
+/// as Name it from a photo and returns false.
+Future<bool> guideReachable(BuildContext context) async {
+  final read = debugGuideConnectivity ?? Connectivity().checkConnectivity;
+  final result = await read();
+  if (!context.mounted) return false;
+  if (result.contains(ConnectivityResult.none)) {
+    infoDialog(
+      context,
+      S.of(context).no_connection_title,
+      S.of(context).no_connection_content,
+    );
+    return false;
+  }
+  return true;
+}
+
+Future<bool> _packOnPhone() async {
+  final read = debugGuidePackOnPhone;
+  if (read != null) return read();
+  try {
+    return guidePackOnPhone(
+      packs: await Prefs.getStringF(keyGuideOfflinePacks, ''),
+      classic: await Prefs.getBoolF(keyOffline, false),
+      done: await Prefs.getStringF(keyGuideOfflineDone, ''),
+    );
+  } catch (error) {
+    debugPrint('guide pack: $error');
+    return false;
+  }
+}
+
+/// Book and its lists. A pack already on the phone opens with no connection.
+/// Otherwise the same dialog as Name it from a photo.
+Future<bool> guideBookAvailable(BuildContext context) async {
+  if (await _packOnPhone()) return true;
+  return guideReachable(context);
+}
+
+Future<void> openGuideList(
   BuildContext context,
   GuideListCover cover, {
   String? backLabel,
-}) {
+}) async {
+  if (!await guideBookAvailable(context)) return;
+  if (!context.mounted) return;
   final back = backLabel ?? S.of(context).guide_back;
   final language = Localizations.localeOf(context).languageCode;
   final source =
@@ -411,16 +461,8 @@ void openGuideList(
 }
 
 Future<void> openGuideCamera(BuildContext context) async {
-  final result = await Connectivity().checkConnectivity();
+  if (!await guideReachable(context)) return;
   if (!context.mounted) return;
-  if (result.contains(ConnectivityResult.none)) {
-    infoDialog(
-      context,
-      S.of(context).no_connection_title,
-      S.of(context).no_connection_content,
-    );
-    return;
-  }
   _pushCamera(context);
 }
 

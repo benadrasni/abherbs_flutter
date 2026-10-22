@@ -142,8 +142,6 @@ const String defaultPhotoExtension = ".jpg";
 const double imageSizeScaleDown = 2048;
 
 const int firebaseCacheSize = 1024 * 1024 * 20;
-const String firebaseCounts = 'counts_4_v2';
-const String firebaseLists = 'lists_4_v2';
 const String firebaseCountsV3 = 'counts_4_v3';
 const String firebaseListsV3 = 'lists_4_v3';
 const String firebasePlants = 'plants_v2';
@@ -262,7 +260,6 @@ const String remoteMinAndroidBuild = "min_android_build";
 const String remoteMinIosBuild = "min_ios_build";
 
 final DatabaseReference rootReference = FirebaseDatabase.instance.ref();
-final DatabaseReference countsReference = rootReference.child(firebaseCounts);
 final DatabaseReference countsV3Reference =
     rootReference.child(firebaseCountsV3);
 final DatabaseReference listsV3Reference = rootReference.child(firebaseListsV3);
@@ -435,10 +432,25 @@ Future<File?> _localImage(String url) async {
   }
 }
 
+/// The file for a thumbnail. A photo already on the phone wins. When that
+/// file is missing, [cover] is the book photo from an offline pack.
+Future<File?> _thumbFile(String url, String? cover) async {
+  final own = await Offline.getLocalFile(url);
+  if (own != null) return own;
+  if (cover != null && cover.isNotEmpty && cover != url) {
+    final book = await Offline.getLocalFile(cover);
+    if (book != null) return book;
+  }
+  return _localImage(url);
+}
+
 Widget getImage(String url, Widget placeholder,
-    {double width = 50.0, double height = 50.0, BoxFit fit = BoxFit.contain}) {
+    {String? cover,
+    double width = 50.0,
+    double height = 50.0,
+    BoxFit fit = BoxFit.contain}) {
   return FutureBuilder<File?>(
-      future: _localImage(url),
+      future: _thumbFile(url, cover),
       builder: (BuildContext context, AsyncSnapshot<File?> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data != null) {
@@ -548,5 +560,3 @@ String webPageUrl(String path, String languageCode) {
 String webPlantUrl(String latinName, String languageCode) {
   return webPageUrl('plant/${Uri.encodeComponent(latinName)}', languageCode);
 }
-
-
