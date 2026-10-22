@@ -602,13 +602,27 @@ class _AppState extends State<App> {
     _listenForSharedLinks();
   }
 
-  /// A shared encyclopedia URL opens that species. The same URL twice in a
-  /// moment is one open: the link stream can repeat the launch URL.
+  /// A shared encyclopedia URL opens that species. Cold start is the initial
+  /// link. A link opened while the guide is already running arrives on the
+  /// stream. The same URL twice in a moment is one open.
   void _listenForSharedLinks() {
-    _sharedLinks =
-        AppLinks().uriLinkStream.listen(_onSharedLink, onError: (Object error) {
+    final links = AppLinks();
+    _sharedLinks = links.uriLinkStream.listen(
+      _onSharedLink,
+      onError: (Object error) {
+        debugPrint('guide link: $error');
+      },
+    );
+    unawaited(_openInitialSharedLink(links));
+  }
+
+  Future<void> _openInitialSharedLink(AppLinks links) async {
+    try {
+      final uri = await links.getInitialLink();
+      if (uri != null) _onSharedLink(uri);
+    } catch (error) {
       debugPrint('guide link: $error');
-    });
+    }
   }
 
   void _onSharedLink(Uri uri) {

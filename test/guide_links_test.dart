@@ -78,6 +78,19 @@ void main() {
         File('android/app/src/main/AndroidManifest.xml').readAsStringSync();
     expect(manifest.contains('android:pathPrefix="/plant/"'), isTrue);
     expect(manifest.contains('android:pathPrefix="/en/plant/"'), isTrue);
+    expect(
+      RegExp(
+        'android:name="flutter_deeplinking_enabled"'
+        '\\s+android:value="false"',
+      ).hasMatch(manifest),
+      isTrue,
+    );
+    final plist = File('ios/Runner/Info.plist').readAsStringSync();
+    expect(plist.contains('<key>FlutterDeepLinkingEnabled</key>'), isTrue);
+    expect(
+      plist.contains('<key>FlutterDeepLinkingEnabled</key>\n\t<false/>'),
+      isTrue,
+    );
     for (final lang in webPathLanguages) {
       expect(
         manifest.contains('android:pathPrefix="/$lang/plant/"'),
