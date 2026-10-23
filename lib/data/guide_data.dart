@@ -536,10 +536,17 @@ Future<Map<String, GuideHeaderBloom>> _bloomsFromKeyPlants() async {
   };
 }
 
+@visibleForTesting
+Map<String, GuideHeaderBloom> guideBloomsFromSnapshot(dynamic raw) {
+  final blooms = readGuideHeaderBlooms(raw);
+  if (blooms.isEmpty) throw StateError('plants_headers_v3 is empty');
+  return blooms;
+}
+
 Future<Map<String, GuideHeaderBloom>> _loadHeaderBlooms() {
   return _bloomCache.read(() {
     return guideReadOrPack(
-      () async => readGuideHeaderBlooms(
+      () async => guideBloomsFromSnapshot(
         (await headersV3Reference.once()).snapshot.value,
       ),
       _bloomsFromKeyPlants,

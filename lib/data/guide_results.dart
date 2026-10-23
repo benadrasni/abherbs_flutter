@@ -328,11 +328,7 @@ class GuideGenusNote {
 }
 
 /// `plants_headers_v3` as a list or a map, keyed by catalog id.
-///
-/// A null snapshot throws. An empty map would be cached for the session,
-/// and the copy already on the phone would not be used.
 Map<String, GuideHeaderBloom> readGuideHeaderBlooms(dynamic raw) {
-  if (raw == null) throw StateError('guide blooms');
   final blooms = <String, GuideHeaderBloom>{};
   void add(String id, dynamic value) {
     if (value is! Map) return;

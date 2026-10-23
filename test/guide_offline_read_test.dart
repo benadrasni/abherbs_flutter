@@ -78,56 +78,26 @@ void main() {
     expect(reads, 2);
   });
 
-  test('a null header snapshot falls back and is not cached', () async {
-    expect(() => readGuideHeaderBlooms(null), throwsStateError);
+  test('an empty header snapshot is a failed bloom read', () {
+    final empty = throwsA(
+      isA<StateError>().having(
+        (error) => error.message,
+        'message',
+        'plants_headers_v3 is empty',
+      ),
+    );
+    expect(() => guideBloomsFromSnapshot(null), empty);
+    expect(() => guideBloomsFromSnapshot('late'), empty);
+    expect(() => guideBloomsFromSnapshot(<String, dynamic>{}), empty);
 
-    final fellBack = await guideReadOrPack(
-      () async => readGuideHeaderBlooms(null),
-      () async => {
-        '1': const GuideHeaderBloom('Bellis perennis', 5, 9),
+    final blooms = guideBloomsFromSnapshot({
+      '1': {
+        'name': 'Bellis perennis',
+        'floweringFrom': 5,
+        'floweringTo': 9,
       },
-      phoneOnly: false,
-      label: 'guide test',
-    );
-    expect(fellBack.value['1']!.name, 'Bellis perennis');
-    expect(fellBack.fromPhone, isTrue);
-
-    await expectLater(
-      guideReadOrPack<Map<String, GuideHeaderBloom>>(
-        () async => readGuideHeaderBlooms(null),
-        () async => throw StateError('no pack'),
-        phoneOnly: false,
-        wait: const Duration(milliseconds: 20),
-        label: 'guide test',
-      ),
-      throwsA(
-        isA<StateError>()
-            .having((error) => error.message, 'message', 'no pack'),
-      ),
-    );
-
-    final cache = GuideBloomCache();
-    var reads = 0;
-    Future<Map<String, GuideHeaderBloom>> load() {
-      reads++;
-      return guideReadOrPack(
-        () async => readGuideHeaderBlooms(null),
-        () async {
-          if (reads == 1) throw StateError('no pack');
-          return {'1': const GuideHeaderBloom('Bellis perennis', 5, 9)};
-        },
-        phoneOnly: false,
-        label: 'guide test',
-      ).then((read) => read.value);
-    }
-
-    await expectLater(cache.read(load), throwsA(isA<StateError>()));
-    expect(cache.stored, isNull);
-    final blooms = await cache.read(load);
+    });
     expect(blooms['1']!.name, 'Bellis perennis');
-    expect(cache.stored, blooms);
-    expect(await cache.read(load), blooms);
-    expect(reads, 2);
   });
 
   test('a non-map label snapshot is not cached', () async {
