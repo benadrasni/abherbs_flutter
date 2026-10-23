@@ -78,6 +78,28 @@ void main() {
     expect(reads, 2);
   });
 
+  test('an empty header snapshot is a failed bloom read', () {
+    final empty = throwsA(
+      isA<StateError>().having(
+        (error) => error.message,
+        'message',
+        'plants_headers_v3 is empty',
+      ),
+    );
+    expect(() => guideBloomsFromSnapshot(null), empty);
+    expect(() => guideBloomsFromSnapshot('late'), empty);
+    expect(() => guideBloomsFromSnapshot(<String, dynamic>{}), empty);
+
+    final blooms = guideBloomsFromSnapshot({
+      '1': {
+        'name': 'Bellis perennis',
+        'floweringFrom': 5,
+        'floweringTo': 9,
+      },
+    });
+    expect(blooms['1']!.name, 'Bellis perennis');
+  });
+
   test('a non-map label snapshot is not cached', () async {
     expect(() => guideLabelsFromSnapshot(null), throwsStateError);
     expect(() => guideLabelsFromSnapshot('late'), throwsStateError);
