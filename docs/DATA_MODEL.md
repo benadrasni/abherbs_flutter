@@ -265,7 +265,6 @@ Read by the app after sign-in (`lib/person/authentication.dart`). Client-writabl
 gs://abherbs-resources/
   photos/{Order}/{Family}/{Genus_species}/
     ac1.webp                square 512
-    .thumbnails/ac1.webp    128
     Acer_campestre@1600.webp  illustration 1600×2400 (legacy: Acer_campestre.webp)
     Acer_campestre@400.webp   illustration 400×600
   families/
